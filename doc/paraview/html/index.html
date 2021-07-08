@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Visualising oomph-lib&#39;s output files with Paraview</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Visualising oomph-lib's output files with Paraview </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>All of <code>oomph-lib's</code> existing elements implement the <code>GeneralisedElement::output(...)</code> functions, allowing the computed solution to be documented via a simple call to the <code>Mesh::output(...)</code> function, e.g.</p>
+<div class="fragment"><div class="line"><span class="comment">// Open output file</span></div>
+<div class="line">ofstream output_file(<span class="stringliteral">&quot;output.dat&quot;</span>)</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Call the mesh&#39;s output function which loops over the </span></div>
+<div class="line"><span class="comment">// element and calls theirs...</span></div>
+<div class="line">Problem::mesh_pt()-&gt;output(output_file);</div>
+</div><!-- fragment --><p>By default, the output is written in a format that is suitable for displaying the data with <a href="http://www.tecplot.com">tecplot,</a> a powerful and easy-to-use commercial plotting package &ndash; possibly a somewhat odd choice for a an open-source library.</p>
+<p>We also provide the capability to output data in a format that is suitable for display with <a href="http://www.paraview.org">paraview</a>, an open-source 3D plotting package. For elements for which the relevant output functions are implemented (they are defined as broken virtual functions in the <code>FiniteElement</code> base class) output files for all the elements in a certain mesh (here the one pointed t by <code>Bulk_mesh_pt</code>) can be written as</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Output solution to file in paraview format</span></div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output_paraview(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+</div><!-- fragment --><p>where the unsigned integer <code>npts</code> controls the number of plot points per element (just as in the tecplot-based output functions). If <code>npts</code> is set to 2, the solution is output at the elements' vertices. For larger values of <code>npts</code> the solution is sampled at greater number of (equally spaced) plot points within the element &ndash; this makes sense for higher-order elements, i.e. elements in which the finite-element solution is not interpolated linearly between the vertex nodes. It is important to note that when displaying such a solution in paraview's "Surface with Edges" mode, the "mesh" that is displayed does not represent the actual finite element mesh but is a finer auxiliary mesh that is created merely to establish the connectivity between the plot points.</p>
+<p>Paraview makes it possible to animate sequences of plots from time-dependent simulations. To correctly animate results from temporally adaptive simulations (where the timestep varies) paraview can operate on pvd files which provide a list of filenames and the associated time. These can be written automatically from within <code>oomph-lib</code>, using the functions in the <code>ParaviewHelper</code> namespace:</p>
+ <div class="fragment"><div class="line"><span class="comment">//=================paraview_helper=================================</span></div>
+<div class="line"><span class="comment">/// Namespace for paraview-style output helper functions </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span>ParaviewHelper</div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Write the pvd file header</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">extern</span> <span class="keywordtype">void</span> write_pvd_header(std::ofstream &amp;pvd_file);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Add name of output file and associated continuous time</span></div>
+<div class="line"><span class="comment"> /// to pvd file.</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">extern</span> <span class="keywordtype">void</span> write_pvd_information(std::ofstream &amp;pvd_file,</div>
+<div class="line">                                   <span class="keyword">const</span> std::string&amp; output_filename,</div>
+<div class="line">                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Write the pvd file footer</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">extern</span> <span class="keywordtype">void</span> write_pvd_footer(std::ofstream &amp;pvd_file);</div>
+<div class="line"> </div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Once the pvd file is opened, call <code>ParaviewHelper::write_pvd_header(...)</code> to write the header information required by paraview; then add the name of each output file and the value of the associated value of the continuous time, using <code>ParaviewHelper::write_pvd_information(...)</code>. When the simulation is complete write the footer information using <code>ParaviewHelper::write_pvd_footer(...)</code>, then close to the pvd file.</p>
+<p>Currently, the paraview output functions are only implemented for a relatively small number of elements but it is straightforward to implement them for others.</p>
+<p>The <a href="../../FAQ/html/index.html">FAQ</a> contain an entry that discusses how to display <code>oomph-lib's</code> output with <a href="http://www.gnuplot.info">gnuplot</a> and <a href="../../FAQ/html/index.html#tecplot">how to adjust <code>oomph-lib's</code> output functions to different formats.</a></p>
+<p>Angelo Simone has written a python script that converts <code>oomph-lib's</code> output to the vtu format that can be read by <a href="http://www.paraview.org">paraview</a>. This has since been improved and extended significantly with input from Alexandre Raczynski and Jeremy van Chu. The conversion script can currently deal with output from meshes that are composed of 2D triangles and quad and 3D brick and tet elements.</p>
+<p>The <code>oomph-lib</code> distribution contains three scripts:</p>
+<ul>
+<li><a href="../../../bin/oomph-convert.py"><code>bin/oomph-convert.py </code>:</a> The python conversion script itself. <br  />
+<br  />
+</li>
+<li><a href="../../../bin/oomph-convert"><code>bin/oomph-convert </code>:</a> A shell script wrapper that allows the processing of multiple files. <br  />
+<br  />
+</li>
+<li><a href="../../../bin/makePvd"><code>bin/makePvd</code>:</a> A shell script the creates the <code>*</code> <code></code>.pvd files required by paraview to produce animations.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="py"></a>
+The oomph-convert.py script for single files</h1>
+<h2><a class="anchor" id="py_sample"></a>
+An example session</h2>
+<ol type="1">
+<li>Add <code>oomph-lib's</code> bin directory to your path (in the example shown here, <code>oomph-lib</code> is installed in the directory <code>/home/mheil/version185/oomph</code>): <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 10:31:50$ PATH=$PATH:/home/mheil/version185/oomph/bin</div>
+</div><!-- fragment --> <br  />
+</li>
+<li>Here is what's in the current directory at the moment: <code>curved_pipe.dat</code> is the <code>oomph-lib</code> output produced from <a href="../../navier_stokes/curved_pipe/html/index.html">a simulation of steady flow through a curved pipe.</a> <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 11:05:10$ ll</div>
+<div class="line">total 824</div>
+<div class="line">-rw-r--r--    1 mheil    users        2292 May 21 09:19 curved_pipe.dat</div>
+</div><!-- fragment --> <br  />
+</li>
+<li>Run <code>oomph-convert.py</code> <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 11:16:18$  oomph-convert curved_pipe.dat</div>
+<div class="line"> </div>
+<div class="line">-- Processing curved_pipe.dat</div>
+<div class="line">  oomph-convert.py, ver. 20110531</div>
+<div class="line">Convert from oomph-lib Tecplot format to VTK XML format.</div>
+<div class="line">Dimension of the problem: 3</div>
+<div class="line">Plot cells defined</div>
+<div class="line">Field variables =  4</div>
+<div class="line">Conversion started</div>
+<div class="line">Coordinate defined</div>
+<div class="line">Connectivities defined</div>
+<div class="line">Offset defined</div>
+<div class="line">Element types defined</div>
+<div class="line">Field data defined</div>
+<div class="line">Conversion done</div>
+<div class="line">  Output file name: curved_pipe.vtu</div>
+</div><!-- fragment --> <br  />
+</li>
+<li>We now have the corresponding <code>*</code> <code></code>.vtu file <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 11:32:08$ ll</div>
+<div class="line">total 1024</div>
+<div class="line">-rw-r--r--    1 mheil    users      329874 Jun 21 09:19 curved_pipe.dat</div>
+<div class="line">-rw-r--r--    1 mheil    users      705294 Jun 21 11:16 curved_pipe.vtu</div>
+</div><!-- fragment --> <br  />
+</li>
+<li>...which we can visualise with paraview: <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 11:34:08$ paraview --data=curved_pipe.vtu</div>
+</div><!-- fragment --></li>
+</ol>
+<hr  />
+ <hr  />
+<p>If your output file is invalid or contains elements that cannot currently be converted, you can use the <code>-p</code> option (followed by 2 or 3 to indicate the spatial dimension of the problem) to extract points only:</p>
+<div class="fragment"><div class="line">biowulf: 11:16:13$ oomph-convert.py -p2 soln0.dat</div>
+</div><!-- fragment --><p> <br  />
+ The output is now a .vtp data file (Visualization Toolkit Polygonal) which is also supported by Paraview. To display your .vtp data, use the </p><div class="image">
+<img src="glyph_button.gif" alt=""/>
+</div>
+<p>  <code>Glyph</code> filter (displaying the points as crosses, say). Here is a representative plot in which <a href="../../poisson/fish_poisson/html/index.html">the adaptive solution of a 2D Poisson equation in a fish-shaped domain</a> is displayed with points.</p>
+<div class="image">
+<img src="paraview00.gif" alt=""/>
+</div>
+ <h2><a class="anchor" id="display"></a>
+Display your data</h2>
+<p>Here are a few screenshots from a paraview session to get you started. When paraview starts up, you have to select the arrays of values you want to load and click on </p><div class="image">
+<img src="apply_button.gif" alt=""/>
+</div>
+<p>  <code>Apply:</code> </p>
+<div class="image">
+<img src="paraview01.gif" alt=""/>
+</div>
+ <p>Select the array of values you want to display in the active window (V1, V2, V3...). You can only display one at a time. It is applied on the data set selected in the pipeline:</p>
+<div class="image">
+<img src="paraview02.gif" alt=""/>
+</div>
+ <p>Now choose the plot style of your data. <code>Outline</code> display a box containing the data but not the data itself (it's not entirely clear to us why you would want to do this, but...). <code>Points</code> and <code>Wireframe</code> best suited for 3D computations because they allow you to "see 
+through" the data set. <code>Surface</code> and <code>Surface</code> <code>With</code> <code>Edges</code> is best suited for 2D computations because only the surface is displayed. Here is a view of the data in <code>Wireframe</code> mode:</p>
+<div class="image">
+<img src="paraview03.gif" alt=""/>
+</div>
+ <p>You can move the figure with buttons </p><div class="image">
+<img src="move_button.gif" alt=""/>
+</div>
+<p>  in the toolbar or simply with the mouse: "Left click + Move" to rotate, "Middle click + Move" to move, zoom in with scroll up or "Right click + Move up" and zoom out with scroll down or "Right click + Move down".</p>
+<div class="image">
+<img src="paraview04.gif" alt=""/>
+</div>
+ <p>You can also display the colour legend by clicking on </p><div class="image">
+<img src="legend_button.gif" alt=""/>
+</div>
+<p>  , change the display colours (HSV, RGB, Diverging...) by clicking on </p><div class="image">
+<img src="color_button.gif" alt=""/>
+</div>
+<p>  , and rescale the colour scale to data by clicking on </p><div class="image">
+<img src="scale_button.gif" alt=""/>
+</div>
+<p>  . Modifying the colour scale is easy: add points by clicking on the colour bar to change the distribution of colours or use a logarithmic scale.</p>
+<div class="image">
+<img src="paraview05.gif" alt=""/>
+</div>
+ <p>You can split a window by clicking on </p><div class="image">
+<img src="split_button.gif" alt=""/>
+</div>
+<p>  . Clicking on the plot window will make it active. You can switch on/off the display of a pipeline member by clicking on the eye </p><div class="image">
+<img src="eye_button.gif" alt=""/>
+</div>
+<p>  on the left. You can display different values and states in different windows:</p>
+<div class="image">
+<img src="paraview051.gif" alt=""/>
+</div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="py_mult"></a>
+The oomph-convert and makePvd scripts for multiple files and animations</h1>
+<h2><a class="anchor" id="py_sample_mult"></a>
+An example session for data from a serial computation</h2>
+<p>Here is a quick demonstration of <code>oomph-convert</code> and <code>makePvd</code> scripts in action</p>
+<ol type="1">
+<li>Add <code>oomph-lib's</code> bin directory to your path (in the example shown here, <code>oomph-lib</code> is installed in the directory <code>/home/mheil/version185/oomph</code>): <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 10:31:50$ PATH=$PATH:/home/mheil/version185/oomph/bin</div>
+</div><!-- fragment --> <br  />
+</li>
+<li>Here is what's in the current directory at the moment: <code>soln</code>?. <code>dat</code> are the <code>oomph-lib</code> output files that illustrate the progress of the mesh adaptation during <a href="../../poisson/fish_poisson/html/index.html">the adaptive solution of a Poisson equation in a fish-shaped domain.</a> <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 11:05:10$ ll</div>
+<div class="line">total 824</div>
+<div class="line">-rw-r--r--    1 mheil    users        2292 May 21 09:19 soln0.dat</div>
+<div class="line">-rw-r--r--    1 mheil    users      176776 May 21 09:19 soln1.dat</div>
+<div class="line">-rw-r--r--    1 mheil    users      278117 May 21 09:19 soln2.dat</div>
+<div class="line">-rw-r--r--    1 mheil    users      367408 May 21 09:19 soln3.dat</div>
+</div><!-- fragment --> <br  />
+</li>
+<li>Run <code>oomph-convert</code> on all files (the -z option adds zeroes to the numbers &ndash; this is only required if the files are to combined into an animation by paraview) <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 11:16:13$ oomph-convert -z soln*.dat</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">-- Processing soln0.dat</div>
+<div class="line">  oomph-convert.py, ver. 20110615</div>
+<div class="line">Parse input file <span class="keywordflow">for</span> Tecplot zones........done</div>
+<div class="line">  0 lines ignored    </div>
+<div class="line">Write nodal coordinates...................done</div>
+<div class="line">Write cell connectivity..................done</div>
+<div class="line">Write cell offsets.......................done</div>
+<div class="line">Write cell types.........................done</div>
+<div class="line">Write field 01/01.........................done</div>
+<div class="line">  Conversion done in 0 seconds</div>
+<div class="line">  Output file name: soln00000.vtu </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">-- Processing soln1.dat</div>
+<div class="line">  oomph-convert.py, ver. 20110615</div>
+<div class="line">Parse input file <span class="keywordflow">for</span> Tecplot zones........done</div>
+<div class="line">  0 lines ignored    </div>
+<div class="line">Write nodal coordinates...................done</div>
+<div class="line">Write cell connectivity..................done</div>
+<div class="line">Write cell offsets.......................done</div>
+<div class="line">Write cell types.........................done</div>
+<div class="line">Write field 01/01.........................done</div>
+<div class="line">  Conversion done in 0 seconds</div>
+<div class="line">  Output file name: soln00001.vtu </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">[further output suppressed]</div>
+</div><!-- fragment --> <br  />
+</li>
+<li>We now have the corresponding <code>*</code> <code></code>.vtu files <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 12:37:05$ ll</div>
+<div class="line">total 2568</div>
+<div class="line">-rw-r--r--    1 mheil    users        5979 Jun 21 12:37 soln00000.vtu</div>
+<div class="line">-rw-r--r--    1 mheil    users      377490 Jun 21 12:37 soln00001.vtu</div>
+<div class="line">-rw-r--r--    1 mheil    users      592990 Jun 21 12:37 soln00002.vtu</div>
+<div class="line">-rw-r--r--    1 mheil    users      789325 Jun 21 12:37 soln00003.vtu</div>
+<div class="line">-rw-r--r--    1 mheil    users        2292 Jun 21 09:19 soln0.dat</div>
+<div class="line">-rw-r--r--    1 mheil    users      176776 Jun 21 09:19 soln1.dat</div>
+<div class="line">-rw-r--r--    1 mheil    users      278117 Jun 21 09:19 soln2.dat</div>
+<div class="line">-rw-r--r--    1 mheil    users      367408 Jun 21 09:19 soln3.dat</div>
+</div><!-- fragment --> <br  />
+ These <code>*</code> <code></code>.vtu files can be displayed individually as discussed above. <br  />
+<br  />
+</li>
+<li>To produce an animation of the results with paraview, create a <code>*</code> <code></code>.pvd file using <code>makePvd</code> <br  />
+<br  />
+ <br  />
+ <div class="fragment"><div class="line">biowulf: 12:40:56$ makePvd soln mysoln.pvd</div>
+<div class="line">--&gt; File mysoln.pvd created</div>
+</div><!-- fragment --> <br  />
+<br  />
+</li>
+<li>...and visualise it: <br  />
+<br  />
+<div class="fragment"><div class="line">biowulf: 12:42:08$ paraview --data=mysoln.pvd  </div>
+</div><!-- fragment --></li>
+</ol>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="screenshots_mult"></a>
+Screenshots from the paraview session</h2>
+<p>Here's a screenshot from the paraview session: once the <code>*</code> <code></code>.pvd file is loaded you can customise the plot style as discussed in the previous example, and then use the </p><div class="image">
+<img src="play_buttons.gif" alt=""/>
+</div>
+<p>  <code>Play/Stop/</code>... buttons to animate the progress of the mesh adaptation.</p>
+<div class="image">
+<img src="paraview_animation_select.gif" alt=""/>
+</div>
+ <hr  />
+ <hr  />
+<h2><a class="anchor" id="py_sample_mult_par"></a>
+An example session for data from a parallel computation</h2>
+<p><code>oomph-lib</code> typically outputs results from parallel (distributed) computations on a processor-by-processor basis, resulting in filenames of the form </p><div class="fragment"><div class="line">soln_proc0_0.dat                \ 
+soln_proc1_0.dat                | </div>
+<div class="line">        :                       | Data <span class="keywordflow">for</span> timestep 0 </div>
+<div class="line">soln_proc[NPROC-1]_0.dat        / </div>
+<div class="line">        </div>
+<div class="line"> </div>
+<div class="line">soln_proc0_1.dat                \ 
+soln_proc1_1.dat                | </div>
+<div class="line">        :                       | Data <span class="keywordflow">for</span> timestep 1 </div>
+<div class="line">soln_proc[NPROC-1]_1.dat,       /</div>
+<div class="line"> </div>
+<div class="line">        :</div>
+</div><!-- fragment --><p> where NPROC is the number of processors. An animation of such data obviously requires the output from different processors (but for the the same timestep) to be combined. Provided, the filenames have the pattern </p><div class="fragment"><div class="line">[stem]proc[processor_number]_[timestep_number].dat</div>
+</div><!-- fragment --><p> (note the "proc" and "_", both of which are required), the pvd file can be generated by first processing the files with <code>oomph-convert</code>, </p><div class="fragment"><div class="line">oomph-convert -z [stem]proc* </div>
+</div><!-- fragment --><p> followed by </p><div class="fragment"><div class="line">makePvd [NPROC] [stem] myplot.pvd </div>
+</div><!-- fragment --><p> So, for the files listed above, to produce a pvd file that contains data from a computation with four processors the commands </p><div class="fragment"><div class="line">biowulf: 12:40:56$ oomph-convert soln_proc*</div>
+</div><!-- fragment --><p> followed by </p><div class="fragment"><div class="line">biowulf: 12:40:59$ makePvd 4 soln_ soln.pvd </div>
+</div><!-- fragment --><p> would create the file soln.pvd from which paraview can create an animation of the solution.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="filters"></a>
+Data analysis with filters</h1>
+<p>In order to analyse the data, we can apply filters. Some filters are accessible directly via the navigation bar; a full list is available in the <code>Filters</code> menu:</p>
+<div class="image">
+<img src="paraview06.gif" alt=""/>
+</div>
+ <p>Here are few examples of filters available:</p>
+<ol type="1">
+<li><code>Calculator:</code> Evaluates a user-defined expression e.g <img class="formulaInl" alt="$ \frac{1}{2} V1^2 $" src="form_0.png"/> and creates a new data array, called here "Energy", containing the result of this expression: <br  />
+<div class="image">
+<img src="paraview07.gif" alt=""/>
+</div>
+  <br  />
+</li>
+<li><code>Contour:</code> Extracts the points, curves or surfaces where a scalar field is equal to a user-defined value e.g <img class="formulaInl" alt="$ V1 = -0.5 $" src="form_1.png"/>: <br  />
+<div class="image">
+<img src="paraview08.gif" alt=""/>
+</div>
+  <br  />
+</li>
+<li><code>Clip:</code> Intersects the geometry with a half space. (Warning: with some versions of Paraview, zooming on the clipped surface can cause the X server to crash.) <br  />
+<div class="image">
+<img src="paraview09.gif" alt=""/>
+</div>
+  <div class="image">
+<img src="paraview091.gif" alt=""/>
+</div>
+  <br  />
+</li>
+<li><code>Slice:</code> Intersects the geometry with a plane. (Warning: with some versions of Paraview, zooming on the clipped surface can cause the X server to crash.) <br  />
+<div class="image">
+<img src="paraview10.gif" alt=""/>
+</div>
+  <div class="image">
+<img src="paraview11.gif" alt=""/>
+</div>
+  <br  />
+</li>
+<li><code>Threshold:</code> Extracts cells that lie within a specified range of values <br  />
+<div class="image">
+<img src="paraview12.gif" alt=""/>
+</div>
+ </li>
+</ol>
+<h1><a class="anchor" id="howto"></a>
+How to ...</h1>
+<h2><a class="anchor" id="outlines"></a>
+Select and extract elements</h2>
+<p>Click on the button: <br  />
+</p><div class="image">
+<img src="selec_button.gif" alt=""/>
+</div>
+<p>  <code>Select</code> <code>Cells</code> <code>On</code> to select elements on the surface (2D selection) <br  />
+</p><div class="image">
+<img src="selec2_button.gif" alt=""/>
+</div>
+<p>  <code>Select</code> <code>Points</code> <code>On</code> to select points on the surface (2D selection) <br  />
+</p><div class="image">
+<img src="selec3_button.gif" alt=""/>
+</div>
+<p>  <code>Select</code> <code>Cells</code> <code>Through</code> to select elements through the region selected (3D selection) <br  />
+</p><div class="image">
+<img src="selec4_button.gif" alt=""/>
+</div>
+<p>  <code>Select</code> <code>Points</code> <code>Through</code> to select points through the region selected (3D selection) <br  />
+When your selection is highlighted, go to <code>Filters-&gt;Data</code> <code>Analysis-&gt;Extract</code> <code>Selection</code> and </p><div class="image">
+<img src="apply_button.gif" alt=""/>
+</div>
+<p>  <code>Apply</code> the filter to extract the selected elements. You can now modify or apply filters on the extracted data only.</p>
+<p>Here is an example of extraction of the surface elements of the curved pipe data:</p>
+<div class="image">
+<img src="how_to_01.gif" alt=""/>
+</div>
+ <hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:24:17
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

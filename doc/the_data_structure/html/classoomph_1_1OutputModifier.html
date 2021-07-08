@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::OutputModifier Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1OutputModifier.html">OutputModifier</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1OutputModifier-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::OutputModifier Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::OutputModifier:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1OutputModifier.png" usemap="#oomph::OutputModifier_map" alt=""/>
+  <map id="oomph::OutputModifier_map" name="oomph::OutputModifier_map">
+<area href="classoomph_1_1MPIOutputModifier.html" alt="oomph::MPIOutputModifier" shape="rect" coords="0,56,161,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab7e4b4d9e455cc93204160e70e2d50f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OutputModifier.html#ab7e4b4d9e455cc93204160e70e2d50f6">OutputModifier</a> ()</td></tr>
+<tr class="memdesc:ab7e4b4d9e455cc93204160e70e2d50f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="classoomph_1_1OutputModifier.html#ab7e4b4d9e455cc93204160e70e2d50f6">More...</a><br /></td></tr>
+<tr class="separator:ab7e4b4d9e455cc93204160e70e2d50f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a586ce54aeae7d1d0d5a075dd5b172"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OutputModifier.html#aa8a586ce54aeae7d1d0d5a075dd5b172">~OutputModifier</a> ()</td></tr>
+<tr class="memdesc:aa8a586ce54aeae7d1d0d5a075dd5b172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1OutputModifier.html#aa8a586ce54aeae7d1d0d5a075dd5b172">More...</a><br /></td></tr>
+<tr class="separator:aa8a586ce54aeae7d1d0d5a075dd5b172"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2d5a2d19865858377b5113ca84aa423"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OutputModifier.html#ae2d5a2d19865858377b5113ca84aa423">operator()</a> (std::ostream &amp;stream)</td></tr>
+<tr class="memdesc:ae2d5a2d19865858377b5113ca84aa423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that will be called before output from an OomphOutput object. It returns a bool (true in this default implementation) to indicate that output should be continued.  <a href="classoomph_1_1OutputModifier.html#ae2d5a2d19865858377b5113ca84aa423">More...</a><br /></td></tr>
+<tr class="separator:ae2d5a2d19865858377b5113ca84aa423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A base class that contains a single virtual member function: The () operator that may be used to modify the output in </p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+OomphOutput objects. The default implementation</h1>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8h_source.html#l00332">332</a> of file <a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab7e4b4d9e455cc93204160e70e2d50f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7e4b4d9e455cc93204160e70e2d50f6">&#9670;&nbsp;</a></span>OutputModifier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::OutputModifier::OutputModifier </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8h_source.html#l00338">338</a> of file <a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="aa8a586ce54aeae7d1d0d5a075dd5b172"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8a586ce54aeae7d1d0d5a075dd5b172">&#9670;&nbsp;</a></span>~OutputModifier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::OutputModifier::~OutputModifier </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8h_source.html#l00341">341</a> of file <a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae2d5a2d19865858377b5113ca84aa423"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2d5a2d19865858377b5113ca84aa423">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool oomph::OutputModifier::operator() </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that will be called before output from an OomphOutput object. It returns a bool (true in this default implementation) to indicate that output should be continued. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1MPIOutputModifier.html#a982af85269a497f384cdff7baf9487a1">oomph::MPIOutputModifier</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8h_source.html#l00346">346</a> of file <a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

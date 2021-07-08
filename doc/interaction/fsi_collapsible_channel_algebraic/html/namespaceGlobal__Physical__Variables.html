@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Global_Physical_Variables Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Global_Physical_Variables Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace for phyical parameters.  
+<a href="namespaceGlobal__Physical__Variables.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a0de42ee6d39e85c77c16a04c3a05f7a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a0de42ee6d39e85c77c16a04c3a05f7a2">prescribed_traction</a> (const double &amp;t, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction)</td></tr>
+<tr class="memdesc:a0de42ee6d39e85c77c16a04c3a05f7a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traction applied on the fluid at the left (inflow) boundary.  <a href="namespaceGlobal__Physical__Variables.html#a0de42ee6d39e85c77c16a04c3a05f7a2">More...</a><br /></td></tr>
+<tr class="separator:a0de42ee6d39e85c77c16a04c3a05f7a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a321267e1efb30b5d586302509354fb07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a321267e1efb30b5d586302509354fb07">load</a> (const Vector&lt; double &gt; &amp;<a class="el" href="fsi__chan__alg_8txt.html#a0728ecef1ef280a6dcb336cd142dc907">xi</a>, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;N, Vector&lt; double &gt; &amp;load)</td></tr>
+<tr class="memdesc:a321267e1efb30b5d586302509354fb07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load function: Apply a constant external pressure to the wall. Note: This is the load without the fluid contribution! Fluid load gets added on by FSIWallElement.  <a href="namespaceGlobal__Physical__Variables.html#a321267e1efb30b5d586302509354fb07">More...</a><br /></td></tr>
+<tr class="separator:a321267e1efb30b5d586302509354fb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab814e627d2eb5bc50318879d19ab16b9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a> =50.0</td></tr>
+<tr class="memdesc:ab814e627d2eb5bc50318879d19ab16b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reynolds number.  <a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">More...</a><br /></td></tr>
+<tr class="separator:ab814e627d2eb5bc50318879d19ab16b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a085ee4bf968ffdd01a41b8c41864f907"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">ReSt</a> =50.0</td></tr>
+<tr class="memdesc:a085ee4bf968ffdd01a41b8c41864f907"><td class="mdescLeft">&#160;</td><td class="mdescRight">Womersley = Reynolds times Strouhal.  <a href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">More...</a><br /></td></tr>
+<tr class="separator:a085ee4bf968ffdd01a41b8c41864f907"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1a493695b7f4619af32f405b0b28861"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#ae1a493695b7f4619af32f405b0b28861">P_up</a> =0.0</td></tr>
+<tr class="memdesc:ae1a493695b7f4619af32f405b0b28861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default pressure on the left boundary.  <a href="namespaceGlobal__Physical__Variables.html#ae1a493695b7f4619af32f405b0b28861">More...</a><br /></td></tr>
+<tr class="separator:ae1a493695b7f4619af32f405b0b28861"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6e07423e22c0991084d9a2f43727805"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">H</a> =1.0e-2</td></tr>
+<tr class="memdesc:af6e07423e22c0991084d9a2f43727805"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-dimensional wall thickness. As in Jensen &amp; Heil (2003) paper.  <a href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">More...</a><br /></td></tr>
+<tr class="separator:af6e07423e22c0991084d9a2f43727805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a417dc688a70c4f06ef0faed047068ba2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a417dc688a70c4f06ef0faed047068ba2">Sigma0</a> =1.0e3</td></tr>
+<tr class="memdesc:a417dc688a70c4f06ef0faed047068ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">2nd Piola Kirchhoff pre-stress. As in Jensen &amp; Heil (2003) paper.  <a href="namespaceGlobal__Physical__Variables.html#a417dc688a70c4f06ef0faed047068ba2">More...</a><br /></td></tr>
+<tr class="separator:a417dc688a70c4f06ef0faed047068ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0406c0cbd463d1df2458fe5de98a00eb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a0406c0cbd463d1df2458fe5de98a00eb">P_ext</a> =0.0</td></tr>
+<tr class="memdesc:a0406c0cbd463d1df2458fe5de98a00eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">External pressure.  <a href="namespaceGlobal__Physical__Variables.html#a0406c0cbd463d1df2458fe5de98a00eb">More...</a><br /></td></tr>
+<tr class="separator:a0406c0cbd463d1df2458fe5de98a00eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66cb7ecda9ba0cd72367dd697f154545"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a66cb7ecda9ba0cd72367dd697f154545">Q</a> =1.0e-5</td></tr>
+<tr class="memdesc:a66cb7ecda9ba0cd72367dd697f154545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fluid structure interaction parameter: Ratio of stresses used for non-dimensionalisation of fluid to solid stresses. <br  />
+  <a href="namespaceGlobal__Physical__Variables.html#a66cb7ecda9ba0cd72367dd697f154545">More...</a><br /></td></tr>
+<tr class="separator:a66cb7ecda9ba0cd72367dd697f154545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe17557ceb32dd353827fba60408363"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a6fe17557ceb32dd353827fba60408363">Lambda_sq</a> =0.0</td></tr>
+<tr class="memdesc:a6fe17557ceb32dd353827fba60408363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pseudo-solid mass density.  <a href="namespaceGlobal__Physical__Variables.html#a6fe17557ceb32dd353827fba60408363">More...</a><br /></td></tr>
+<tr class="separator:a6fe17557ceb32dd353827fba60408363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3962c36313826b19f216f6bbbdd6a477"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a> =0.1</td></tr>
+<tr class="memdesc:a3962c36313826b19f216f6bbbdd6a477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pseudo-solid Poisson ratio.  <a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">More...</a><br /></td></tr>
+<tr class="separator:a3962c36313826b19f216f6bbbdd6a477"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace for phyical parameters. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a321267e1efb30b5d586302509354fb07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a321267e1efb30b5d586302509354fb07">&#9670;&nbsp;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Global_Physical_Variables::load </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>load</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load function: Apply a constant external pressure to the wall. Note: This is the load without the fluid contribution! Fluid load gets added on by FSIWallElement. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00209">209</a> of file <a class="el" href="fsi__collapsible__channel_8cc_source.html">fsi_collapsible_channel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00204">P_ext</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00378">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::FSICollapsibleChannelProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a0de42ee6d39e85c77c16a04c3a05f7a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0de42ee6d39e85c77c16a04c3a05f7a2">&#9670;&nbsp;</a></span>prescribed_traction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Global_Physical_Variables::prescribed_traction </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>traction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traction applied on the fluid at the left (inflow) boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00186">186</a> of file <a class="el" href="fsi__collapsible__channel_8cc_source.html">fsi_collapsible_channel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00183">P_up</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__collapsible__channel__adapt_8cc_source.html#l00897">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::actions_after_adapt()</a>, and <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00378">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::FSICollapsibleChannelProblem()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="af6e07423e22c0991084d9a2f43727805"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6e07423e22c0991084d9a2f43727805">&#9670;&nbsp;</a></span>H</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::H =1.0e-2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Non-dimensional wall thickness. As in Jensen &amp; Heil (2003) paper. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00198">198</a> of file <a class="el" href="fsi__collapsible__channel_8cc_source.html">fsi_collapsible_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8h_source.html#l02115">oomph::TriangleMesh&lt; ELEMENT &gt;::convex_hull()</a>, <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00136">UndeformedWall::d2position()</a>, <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00378">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::FSICollapsibleChannelProblem()</a>, <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00111">UndeformedWall::position()</a>, <a class="el" href="horizontal__single__layer__spine__mesh_8template_8h_source.html#l00066">oomph::HorizontalSingleLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="single__layer__cubic__spine__mesh_8template_8h_source.html#l00069">oomph::SingleLayerCubicSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="single__layer__spine__mesh_8template_8h_source.html#l00079">oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00222">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_lower()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00234">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_upper()</a>, and <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00103">UndeformedWall::UndeformedWall()</a>.</p>
+
+</div>
+</div>
+<a id="a6fe17557ceb32dd353827fba60408363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fe17557ceb32dd353827fba60408363">&#9670;&nbsp;</a></span>Lambda_sq</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::Lambda_sq =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pseudo-solid mass density. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__pseudo__solid__collapsible__channel_8cc_source.html#l00225">225</a> of file <a class="el" href="fsi__pseudo__solid__collapsible__channel_8cc_source.html">fsi_pseudo_solid_collapsible_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3962c36313826b19f216f6bbbdd6a477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3962c36313826b19f216f6bbbdd6a477">&#9670;&nbsp;</a></span>Nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::Nu =0.1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pseudo-solid Poisson ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__pseudo__solid__collapsible__channel_8cc_source.html#l00228">228</a> of file <a class="el" href="fsi__pseudo__solid__collapsible__channel_8cc_source.html">fsi_pseudo_solid_collapsible_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0406c0cbd463d1df2458fe5de98a00eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0406c0cbd463d1df2458fe5de98a00eb">&#9670;&nbsp;</a></span>P_ext</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::P_ext =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>External pressure. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00204">204</a> of file <a class="el" href="fsi__collapsible__channel_8cc_source.html">fsi_collapsible_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00668">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::doc_solution()</a>, <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00209">load()</a>, and <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00811">main()</a>.</p>
+
+</div>
+</div>
+<a id="ae1a493695b7f4619af32f405b0b28861"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1a493695b7f4619af32f405b0b28861">&#9670;&nbsp;</a></span>P_up</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::P_up =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Default pressure on the left boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00183">183</a> of file <a class="el" href="fsi__collapsible__channel_8cc_source.html">fsi_collapsible_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00811">main()</a>, and <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00186">prescribed_traction()</a>.</p>
+
+</div>
+</div>
+<a id="a66cb7ecda9ba0cd72367dd697f154545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66cb7ecda9ba0cd72367dd697f154545">&#9670;&nbsp;</a></span>Q</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::Q =1.0e-5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fluid structure interaction parameter: Ratio of stresses used for non-dimensionalisation of fluid to solid stresses. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00221">221</a> of file <a class="el" href="fsi__collapsible__channel_8cc_source.html">fsi_collapsible_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00378">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::FSICollapsibleChannelProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ab814e627d2eb5bc50318879d19ab16b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab814e627d2eb5bc50318879d19ab16b9">&#9670;&nbsp;</a></span>Re</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::Re =50.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reynolds number. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00177">177</a> of file <a class="el" href="fsi__collapsible__channel_8cc_source.html">fsi_collapsible_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00378">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::FSICollapsibleChannelProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a085ee4bf968ffdd01a41b8c41864f907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a085ee4bf968ffdd01a41b8c41864f907">&#9670;&nbsp;</a></span>ReSt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::ReSt =50.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Womersley = Reynolds times Strouhal. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00180">180</a> of file <a class="el" href="fsi__collapsible__channel_8cc_source.html">fsi_collapsible_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00378">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::FSICollapsibleChannelProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a417dc688a70c4f06ef0faed047068ba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a417dc688a70c4f06ef0faed047068ba2">&#9670;&nbsp;</a></span>Sigma0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::Sigma0 =1.0e3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>2nd Piola Kirchhoff pre-stress. As in Jensen &amp; Heil (2003) paper. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00201">201</a> of file <a class="el" href="fsi__collapsible__channel_8cc_source.html">fsi_collapsible_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00378">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::FSICollapsibleChannelProblem()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:18:54
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

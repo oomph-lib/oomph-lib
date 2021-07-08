@@ -1,0 +1,151 @@
+\hypertarget{classoomph_1_1IMR}{}\doxysection{oomph\+::I\+MR Class Reference}
+\label{classoomph_1_1IMR}\index{oomph::IMR@{oomph::IMR}}
+
+
+{\ttfamily \#include $<$implicit\+\_\+midpoint\+\_\+rule.\+h$>$}
+
+Inheritance diagram for oomph\+::I\+MR\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1IMR}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IMR_aa28c3f9d2eea177280f0868e16127285}{I\+MR}} (const bool \&adaptive=false)
+\begin{DoxyCompactList}\small\item\em Constructor with initialisation. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1IMR_a5686334353658c65a1d5e17500f3dc34}{$\sim$\+I\+MR}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, predictor\+\_\+pt handled by base. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1IMR_aecea8cd9ec75a6e3efde89e451d714c4}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Setup weights for time derivative calculations. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1IMR_a7cfe8ba542880aa524bcb837c1bc86e4}{nprev\+\_\+values\+\_\+for\+\_\+value\+\_\+at\+\_\+evaluation\+\_\+time}} () const
+\begin{DoxyCompactList}\small\item\em Number of history values to interpolate over to get the \char`\"{}current\char`\"{} value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IMR_a1c55b18131b75531e320a50aeecdf00c}{I\+MR}} (const \mbox{\hyperlink{classoomph_1_1IMR}{I\+MR}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Inaccessible copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1IMR_a694b371e73e3ee940e3473d9a9add90f}{operator=}} (const \mbox{\hyperlink{classoomph_1_1IMR}{I\+MR}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Inaccessible assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+The \char`\"{}real\char`\"{} implementation of the implicit midpoint rule. Implemented by calculation of residuals etc. at half step. This requires non-\/trivial modifications to the element\textquotesingle{}s residual and Jacobian calculation functions to interpolate values to the midpoint. As such \mbox{\hyperlink{classoomph_1_1IMRByBDF}{I\+M\+R\+By\+B\+DF}} should be preferred.
+
+However this class must be used when multiple different time steppers are being used simultaneously for different parts of the problem. 
+
+Definition at line 159 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1IMR_aa28c3f9d2eea177280f0868e16127285}\label{classoomph_1_1IMR_aa28c3f9d2eea177280f0868e16127285}} 
+\index{oomph::IMR@{oomph::IMR}!IMR@{IMR}}
+\index{IMR@{IMR}!oomph::IMR@{oomph::IMR}}
+\doxysubsubsection{\texorpdfstring{IMR()}{IMR()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+I\+M\+R\+::\+I\+MR (\begin{DoxyParamCaption}\item[{const bool \&}]{adaptive = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with initialisation. 
+
+Common mistakes when using this implementation of midpoint\+:
+\begin{DoxyItemize}
+\item Didn\textquotesingle{}t include the d\+\_\+u\+\_\+evaltime\+\_\+by\+\_\+du\+\_\+np1 term in the Jacobian.
+\item Didn\textquotesingle{}t properly interpolate time/values/x/derivatives in jacobian/residual (all of these M\+U\+ST be evaluated at the midpoint). 
+\end{DoxyItemize}
+
+Definition at line 169 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1IMR_a5686334353658c65a1d5e17500f3dc34}\label{classoomph_1_1IMR_a5686334353658c65a1d5e17500f3dc34}} 
+\index{oomph::IMR@{oomph::IMR}!````~IMR@{$\sim$IMR}}
+\index{````~IMR@{$\sim$IMR}!oomph::IMR@{oomph::IMR}}
+\doxysubsubsection{\texorpdfstring{$\sim$IMR()}{~IMR()}}
+{\footnotesize\ttfamily virtual oomph\+::\+I\+M\+R\+::$\sim$\+I\+MR (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor, predictor\+\_\+pt handled by base. 
+
+
+
+Definition at line 172 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1IMR_a1c55b18131b75531e320a50aeecdf00c}\label{classoomph_1_1IMR_a1c55b18131b75531e320a50aeecdf00c}} 
+\index{oomph::IMR@{oomph::IMR}!IMR@{IMR}}
+\index{IMR@{IMR}!oomph::IMR@{oomph::IMR}}
+\doxysubsubsection{\texorpdfstring{IMR()}{IMR()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+I\+M\+R\+::\+I\+MR (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1IMR}{I\+MR}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Inaccessible copy constructor. 
+
+
+
+Definition at line 196 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1IMR_a7cfe8ba542880aa524bcb837c1bc86e4}\label{classoomph_1_1IMR_a7cfe8ba542880aa524bcb837c1bc86e4}} 
+\index{oomph::IMR@{oomph::IMR}!nprev\_values\_for\_value\_at\_evaluation\_time@{nprev\_values\_for\_value\_at\_evaluation\_time}}
+\index{nprev\_values\_for\_value\_at\_evaluation\_time@{nprev\_values\_for\_value\_at\_evaluation\_time}!oomph::IMR@{oomph::IMR}}
+\doxysubsubsection{\texorpdfstring{nprev\_values\_for\_value\_at\_evaluation\_time()}{nprev\_values\_for\_value\_at\_evaluation\_time()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+I\+M\+R\+::nprev\+\_\+values\+\_\+for\+\_\+value\+\_\+at\+\_\+evaluation\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of history values to interpolate over to get the \char`\"{}current\char`\"{} value. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1IMRBase_a93df756c834f8ba27956b8efb2af3636}{oomph\+::\+I\+M\+R\+Base}}.
+
+
+
+Definition at line 191 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1IMR_a694b371e73e3ee940e3473d9a9add90f}\label{classoomph_1_1IMR_a694b371e73e3ee940e3473d9a9add90f}} 
+\index{oomph::IMR@{oomph::IMR}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::IMR@{oomph::IMR}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+I\+M\+R\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1IMR}{I\+MR}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Inaccessible assignment operator. 
+
+
+
+Definition at line 199 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1IMR_aecea8cd9ec75a6e3efde89e451d714c4}\label{classoomph_1_1IMR_aecea8cd9ec75a6e3efde89e451d714c4}} 
+\index{oomph::IMR@{oomph::IMR}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::IMR@{oomph::IMR}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}}
+{\footnotesize\ttfamily void oomph\+::\+I\+M\+R\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Setup weights for time derivative calculations. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1IMRBase_a36b8a37b4c0bb9e8cca821bfb74fd373}{oomph\+::\+I\+M\+R\+Base}}.
+
+
+
+Definition at line 175 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+
+
+
+References oomph\+::\+Time\+::dt(), oomph\+::\+Time\+Stepper\+::\+Time\+\_\+pt, and oomph\+::\+Time\+Stepper\+::\+Weight.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{implicit__midpoint__rule_8h}{implicit\+\_\+midpoint\+\_\+rule.\+h}}\end{DoxyCompactItemize}

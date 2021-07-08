@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: The axisymmetric equations of linear elasticity</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">The axisymmetric equations of linear elasticity </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>The aim of this tutorial is to demonstrate the solution of the axisymmetric equations of linear elasticity in cylindrical polar coordinates.</p>
+<center> <table border="1," width="500px">
+<tr>
+<td bgcolor="cornsilk"><center> <b>Acknowledgement:</b> <br  />
+<br  />
+This implementation of the equations and the documentation were developed jointly with Matthew Russell with financial support to Chris Bertram from the Chiari and Syringomyelia Foundation. </center>   </td></tr>
+</table>
+</center><hr  />
+ <hr  />
+<h1><a class="anchor" id="theory"></a>
+Theory</h1>
+<p>Consider a three-dimensional, axisymmetric body (of density <img class="formulaInl" alt="$ \rho $" src="form_0.png"/>, Young's modulus <img class="formulaInl" alt="$ E $" src="form_1.png"/>, and Poisson's ratio <img class="formulaInl" alt="$ \nu $" src="form_2.png"/>), occupying the region <img class="formulaInl" alt="$ D $" src="form_3.png"/> whose boundary is <img class="formulaInl" alt="$ \partial D $" src="form_4.png"/>. Using cylindrical coordinates <img class="formulaInl" alt="$ (r^*,\theta,z^*) $" src="form_5.png"/>, the equations of linear elasticity can be written as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \nabla^* \cdot \bm{\tau}^* + \rho \mathbf{F}^* = \rho\frac{\partial^2\mathbf{u}^*} {\partial {t^*}^2}, \]" src="form_6.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$\nabla^* = \left(\frac{\partial}{\partial r^*}, \frac{1}{r^*}\frac{\partial} {\partial \theta},\frac{\partial}{\partial z^*}\right)$" src="form_7.png"/>, <img class="formulaInl" alt="$ \bm{\tau}^*(r^*,z^*,t^*) $" src="form_8.png"/> is the stress tensor, <img class="formulaInl" alt="$\mathbf{F}^*(r^*,z^*,t^*)$" src="form_9.png"/> is the body force and <img class="formulaInl" alt="$ \mathbf{u^*}(r^*,z^*,t^*) $" src="form_10.png"/> is the displacement field.</p>
+<p>Note that, despite the fact that none of the above physical quantities depend on the azimuthal angle <img class="formulaInl" alt="$ \theta $" src="form_11.png"/>, each can have a non-zero <img class="formulaInl" alt="$ \theta $" src="form_11.png"/> component. Also note that variables written with a superscript asterisk are dimensional, and their non-dimensional counterparts will be written without an asterisk. (The coordinate <img class="formulaInl" alt="$ \theta $" src="form_11.png"/> is, by definition, non-dimensional, so it will always be written without an asterisk.)</p>
+<p>A boundary traction <img class="formulaInl" alt="$ \hat{\bm{\tau}}^* $" src="form_12.png"/> and boundary displacement <img class="formulaInl" alt="$ \hat{\mathbf{u}}^* $" src="form_13.png"/> are imposed along the boundaries <img class="formulaInl" alt="$ \partial D_\mathrm{n} $" src="form_14.png"/> and <img class="formulaInl" alt="$ \partial D_\mathrm{d} $" src="form_15.png"/> respectively, where <img class="formulaInl" alt="$ \partial D = \partial D_\mathrm{d} \cup \partial D_\mathrm{n} $" src="form_16.png"/> so that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathbf{u}^* = \hat{\mathbf{u}}^*\text{ on }\partial D_\mathrm{d}, \qquad \bm{\tau}^*\cdot\mathbf{n} = \hat{\bm{\tau}}^*\text{ on }\partial D_\mathrm{n}, \]" src="form_17.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \mathbf{n} $" src="form_18.png"/> is the outer unit normal vector.</p>
+<p>The constitutive equations relating the stresses to the displacements are </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \bm{\tau}^* = \frac{E}{1+\nu}\left(\frac{\nu}{1-2\nu}\left(\nabla^*\cdot\mathbf{u}^*\right) \mathbf{I} + \frac{1}{2}\left(\nabla^*\mathbf{u}^* + \left(\nabla^*\mathbf{u}^*\right)^\mathrm{T}\right)\right), \]" src="form_19.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \mathbf{I} $" src="form_20.png"/> is the identity tensor and superscript <img class="formulaInl" alt="$ \mathrm{T} $" src="form_21.png"/> denotes the transpose. In cylindrical coordinates, the matrix representation of the tensor <img class="formulaInl" alt="$ \nabla^*\mathbf{u}^* $" src="form_22.png"/> is </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \nabla^*\mathbf{u}^* = \begin{pmatrix} \dfrac{\strut \partial u_r^*}{\strut \partial r^*} &amp; -\dfrac{\strut u_\theta^*}{\strut r^*} &amp; \dfrac{\strut \partial u_r^*}{\strut \partial z^*}\\ \dfrac{\strut \partial u_\theta^*}{\strut \partial r^*} &amp; \dfrac{\strut u_r^*}{\strut r^*} &amp; \dfrac{\strut \partial u_\theta^*}{\strut \partial z^*}\\ \dfrac{\strut \partial u_z^*}{\strut \partial r^*} &amp; 0 &amp; \dfrac{\strut \partial u_z^*}{\strut \partial z^*} \end{pmatrix} \]" src="form_23.png"/>
+</p>
+<p> and <img class="formulaInl" alt="$ \nabla^*\cdot \mathbf{u}^* $" src="form_24.png"/> is equal to the trace of this matrix.</p>
+<p>We non-dimensionalise the equations, using a problem specific reference length, <img class="formulaInl" alt="$ \mathcal{L} $" src="form_25.png"/>, and a timescale <img class="formulaInl" alt="$ \mathcal{T} $" src="form_26.png"/>, and use Young's modulus to non-dimensionalise the body force and the stress tensor: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \bm{\tau}^* = E \bm{\tau}, \qquad r^* = \mathcal{L}r, \qquad z^* = \mathcal{L}z \]" src="form_27.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathbf{u}^* = \mathcal{L} \mathbf{u} \qquad \mathbf{F}^* = \frac{E}{\rho \mathcal{L}}\mathbf{F}, \qquad t^* = \mathcal{T}t. \]" src="form_28.png"/>
+</p>
+<p>The non-dimensional form of the axisymmetric linear elasticity equations is then given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \nabla\cdot \bm{\tau} + \mathbf{F} = \Lambda^2\frac{\partial^2\mathbf{u}} {\partial t^2},\qquad\qquad (1) \]" src="form_29.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \nabla = \left(\frac{\partial}{\partial r}, \frac{1}{r}\frac{\partial} {\partial \theta},\frac{\partial}{\partial z}\right) $" src="form_30.png"/>, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \bm{\tau} = \frac{1}{1+\nu}\left(\frac{\nu}{1-2\nu}\left(\nabla\cdot\mathbf{u}\right) \mathbf{I} + \frac{1}{2}\left(\nabla\mathbf{u} + \left(\nabla\mathbf{u}\right)^\mathrm{T}\right)\right),\qquad\qquad (2) \]" src="form_31.png"/>
+</p>
+<p> and the non-dimensional parameter </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \Lambda = \frac{\mathcal{L}}{\mathcal{T}}\sqrt{\frac{\rho}{E}} \]" src="form_32.png"/>
+</p>
+<p> is the ratio of the elastic body's intrinsic timescale, <img class="formulaInl" alt="$ \mathcal{L} \sqrt{\frac{\rho}{E}} $" src="form_33.png"/>, to the problem-specific timescale, <img class="formulaInl" alt="$ \mathcal{T} $" src="form_26.png"/>, that we use for time-dependent problems. The boundary conditions are </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathbf{u} = \hat{\mathbf{u}}\text{ on } \partial D_\mathrm{d}\qquad \bm{\tau}\cdot\mathbf{n} = \hat{\bm{\tau}}\text{ on } \partial D_\mathrm{n}. \]" src="form_34.png"/>
+</p>
+<p> We must also specify initial conditions: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left.\mathbf{u}\right|_{t=t_0} = \mathbf{u}^0,\qquad \left.\frac{\partial\mathbf{u}}{\partial t}\right|_{t=t_0} = \mathbf{v}^0.\qquad\qquad (3) \]" src="form_35.png"/>
+</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="element_types"></a>
+Implementation</h1>
+<p>Within <code>oomph-lib</code>, the non-dimensional version of the axisymmetric linear elasticity equations (1) combined with the constitutive equations (2) are implemented in the <code>AxisymmetricLinearElasticityEquations</code> class. This class implements the equations in a way which is general with respect to the specific element geometry. To obtain a fully functioning element class, we must combine the equations class with a specific geometric element class, as discussed in the <a href="../../../quick_guide/html/index.html">(Not-So-)Quick Guide</a>. For example, we will combine the <code>AxisymmetricLinearElasticityEquations</code> class with <code>QElement&lt;2,3&gt;</code> elements, which are 9-node quadrilateral elements, in our example problem. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_i = \sum_{j=1}^{N^{(E)}} X_{ij}^{(E)}\psi_j,\qquad i = 1,2, \]" src="form_36.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ x_1 = r, x_2 = z $" src="form_37.png"/>; <img class="formulaInl" alt="$ N^{(E)} $" src="form_38.png"/> is the number of nodes in the element. <img class="formulaInl" alt="$ X_{ij}^{(E)} $" src="form_39.png"/> is the <img class="formulaInl" alt="$ i $" src="form_40.png"/>-th global (Eulerian) coordinate of the <img class="formulaInl" alt="$ j $" src="form_41.png"/>-th node in the element and the <img class="formulaInl" alt="$ \psi_j $" src="form_42.png"/> are the element's shape functions, which are specific to each type of geometric element.</p>
+<p>We store the three components of the displacement vector as nodal data in the order <img class="formulaInl" alt="$ u_r, u_z, u_\theta $" src="form_43.png"/> and use the shape functions to interpolate the displacements as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_i = \sum_{j=1}^{N^{(E)}}U_{ij}^{(E)}\psi_{ij},\qquad i = 1,\dotsc,3, \]" src="form_44.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ U_{ij} $" src="form_45.png"/> is the <img class="formulaInl" alt="$ i $" src="form_40.png"/>-th displacement component at the <img class="formulaInl" alt="$ j $" src="form_41.png"/>-th node in the element, i.e., <img class="formulaInl" alt="$ u_1=u_r, u_2=u_z,u_3=u_\theta $" src="form_46.png"/>.</p>
+<p>The solution of time dependent problems requires the specification of a <code>TimeStepper</code> that is capable of approximating second time derivatives. In the example problem below we use the Newmark timestepper.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="test"></a>
+The test problem</h1>
+<p>As a test problem we consider forced oscillations of the circular cylinder shown in the sketch below: </p><div class="image">
+<img src="geom.gif" alt=""/>
+<div class="caption">
+Azimuthal cross-section of the geometry. </div></div>
+ <p>It is difficult to find non-trivial exact solutions of the governing equations (1), (2), so we manufacture a time-harmonic solution:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathbf{u} = \begin{pmatrix} u_r\\ u_\theta\\ u_z \end{pmatrix} = \cos(t) \begin{pmatrix} r^3\cos(z)\\ r^3z^3\\ r^3\sin(z) \end{pmatrix}.\qquad\qquad (4) \]" src="form_47.png"/>
+</p>
+<p> This is an exact solution if we set the body force to </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathbf{F} = \cos(t) \begin{pmatrix} -r\cos(z)\left\{\left(8+3r\right)\lambda + \left(16 - r\left(r-3\right)\right)\mu + r^2\Lambda^2\right\}\\ -r\left\{8z^3\mu + r^2\left(z^3\Lambda^2 + 6\mu z\right)\right\}\\ r\sin(z)\left\{- 9\mu + 4r\left(\lambda + \mu\right) + r^2\left(\lambda + 2\mu - \Lambda^2\right)\right\} \end{pmatrix},\qquad\qquad (5) \]" src="form_48.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \lambda = \nu/((1+\nu)(1-2\nu)) $" src="form_49.png"/> and <img class="formulaInl" alt="$ \mu = 1/(2(1+\nu)) $" src="form_50.png"/> are the nondimensional Lam&eacute; parameters. We impose the displacement along the boundaries <img class="formulaInl" alt="$ r=r_\mathrm{max}, z=z_\mathrm{min}, z=z_\mathrm{max} $" src="form_51.png"/> according to (4), and impose the traction </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \hat{\bm{\tau}}_3 = \bm{\tau}(r_\mathrm{min},z,t) = \cos(\omega t) \begin{pmatrix} -\cos(z)r_\mathrm{min}^2\left(6\mu + \lambda\left(4+r_\mathrm{min}\right)\right)\\ -2\mu r_\mathrm{min}^2z^3\\ -\mu r_\mathrm{min}^2\sin(z)\left(3-r_\mathrm{min}\right) \end{pmatrix},\qquad\qquad (6) \]" src="form_52.png"/>
+</p>
+<p> along the boundary <img class="formulaInl" alt="$ r = r_\mathrm{min} $" src="form_53.png"/>.</p>
+<p>The problem we are solving then consists of equations (1), (2) along with the body force, (5) and boundary traction (6). The initial conditions for the problem are the exact displacement, velocity (and acceleration; see below) according to the solution (4).</p>
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The animation below shows the time dependent deformation of the cylinder in the <img class="formulaInl" alt="$ r $" src="form_54.png"/>- <img class="formulaInl" alt="$ z $" src="form_55.png"/> plane, while the colour contours indicate the azimuthal displacement component. The animation is for <img class="formulaInl" alt="$ t \in [0,2\pi] $" src="form_56.png"/>, since the time scale is nondimensionalised on the reciprocal of the angular frequency of the oscillations.</p>
+<div class="image">
+<img src="a.gif" alt=""/>
+<div class="caption">
+Animation (HTML only) of the resulting displacement field. </div></div>
+<p>  The next three figures show plots of the radial, axial and azimuthal displacements as functions of <img class="formulaInl" alt="$ (r,z) $" src="form_57.png"/> at <img class="formulaInl" alt="$ t = 2.64 $" src="form_58.png"/>. Note the excellent agreement between the numerical and exact solutions. </p><div class="image">
+<img src="u_r.gif" alt=""/>
+<div class="caption">
+Comparison between exact and FE solutions for the r-component of displacement at t = 2.64 </div></div>
+  <div class="image">
+<img src="u_z.gif" alt=""/>
+<div class="caption">
+Comparison between exact and FE solutions for the z-component of displacement at t = 2.64 </div></div>
+  <div class="image">
+<img src="u_theta.gif" alt=""/>
+<div class="caption">
+Comparison between exact and FE solutions for the theta-component of displacement at t = 2.64 </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="global_namespace"></a>
+Global parameters and functions</h1>
+<p>As usual, we define all non-dimensional parameters in a namespace. In this namespace, we also define the body force, the traction to be applied on the boundary <img class="formulaInl" alt="$ r=r_\mathrm{min} $" src="form_59.png"/>, and the exact solution. Note that, consistent with the enumeration of the unknowns, discussed above, the order of the components in the functions that specify the body force and the surface traction is <img class="formulaInl" alt="$ (r,z,\theta) $" src="form_60.png"/>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_Global_Parameters_namespace===============================</span></div>
+<div class="line"><span class="comment">/// Namespace for global parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Parameters.html">Global_Parameters</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Define Poisson&#39;s ratio Nu</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a> = 0.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Define the non-dimensional Young&#39;s modulus</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">E</a> = 1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Lame parameters</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#ae2f84a82174136947cce7a0d137097ae">Lambda</a> = <a class="code" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">E</a>*<a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>/(1.0+<a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>)/(1.0-2.0*<a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>);</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a> = <a class="code" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">E</a>/2.0/(1.0+<a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Square of the frequency of the time dependence</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a> = 0.5;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Number of elements in r-direction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="namespaceGlobal__Parameters.html#aeebb1e39d849d32cebdc9be13026606e">Nr</a> = 5;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Number of elements in z-direction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="namespaceGlobal__Parameters.html#a1f35a0690c7745167a7178fb71f92e6e">Nz</a> = 10;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of domain in r direction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a444f5c911c8805ad2ba45ed8b1b8904e">Lr</a> = 1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of domain in z-direction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a2bcf0bd846d839f1e3bb04a6c0a612c1">Lz</a> = 2.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set up min r coordinate</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#ab0e73c8b2e1105b14203856b81efa8cf">Rmin</a> = 0.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set up min z coordinate</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a1813b913bc85d4ce15ea68226ba6c63f">Zmin</a> = 0.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set up max r coordinate</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a06f5ea713550f61da323eafb91fceedd">Rmax</a> = <a class="code" href="namespaceGlobal__Parameters.html#ab0e73c8b2e1105b14203856b81efa8cf">Rmin</a>+<a class="code" href="namespaceGlobal__Parameters.html#a444f5c911c8805ad2ba45ed8b1b8904e">Lr</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set up max z coordinate</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a36b7b169826f906d1d8d1a3aa4347d80">Zmax</a> = <a class="code" href="namespaceGlobal__Parameters.html#a1813b913bc85d4ce15ea68226ba6c63f">Zmin</a>+<a class="code" href="namespaceGlobal__Parameters.html#a2bcf0bd846d839f1e3bb04a6c0a612c1">Lz</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// The traction function at r=Rmin: (t_r, t_z, t_theta)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Parameters.html#a61ef31c4db13380658f6d5ea47c3369d">boundary_traction</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;time,</div>
+<div class="line">                        <span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                        <span class="keyword">const</span> Vector&lt;double&gt; &amp;n,</div>
+<div class="line">                        Vector&lt;double&gt; &amp;result)</div>
+<div class="line"> {</div>
+<div class="line">  result[0] = cos(time)*(-6.0*pow(x[0],2)*<a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a>*cos(x[1])-</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#ae2f84a82174136947cce7a0d137097ae">Lambda</a>*(4.0*pow(x[0],2)+pow(x[0],3))*cos(x[1]));</div>
+<div class="line">  result[1] = cos(time)*(-<a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a>*(3.0*pow(x[0],2)-pow(x[0],3))*sin(x[1]));</div>
+<div class="line">  result[2] = cos(time)*(-<a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a>*pow(x[0],2)*(2*pow(x[1],3)));</div>
+<div class="line"> }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short The body force function; returns vector of doubles</span></div>
+<div class="line"><span class="comment"> /// in the order (b_r, b_z, b_theta)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Parameters.html#a6459755c5d38e277ceddbf317c4ed179">body_force</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;time,</div>
+<div class="line">                 <span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                 Vector&lt;double&gt; &amp;result)</div>
+<div class="line"> {</div>
+<div class="line">  result[0] = cos(time)*(</div>
+<div class="line">   x[0]*(-cos(x[1])*</div>
+<div class="line">         (<a class="code" href="namespaceGlobal__Parameters.html#ae2f84a82174136947cce7a0d137097ae">Lambda</a>*(8.0+3.0*x[0])-</div>
+<div class="line">          <a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a>*(-16.0+x[0]*(x[0]-3.0))+pow(x[0],2)*<a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a>)));</div>
+<div class="line">  result[1] = cos(time)*(</div>
+<div class="line">   x[0]*sin(x[1])*(<a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a>*(-9.0)+</div>
+<div class="line">                   4.0*x[0]*(<a class="code" href="namespaceGlobal__Parameters.html#ae2f84a82174136947cce7a0d137097ae">Lambda</a>+<a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a>)+pow(x[0],2)*</div>
+<div class="line">                   (<a class="code" href="namespaceGlobal__Parameters.html#ae2f84a82174136947cce7a0d137097ae">Lambda</a>+2.0*<a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a>-<a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a>)));</div>
+<div class="line">  result[2] = cos(time)*(</div>
+<div class="line">   -x[0]*(8.0*<a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a>*pow(x[1],3)+pow(x[0],2)*(pow(x[1],3)*<a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a>+6.0*<a class="code" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Mu</a>*x[1])));</div>
+<div class="line"> } <span class="comment">// end of body force</span></div>
+</div><!-- fragment --><p>In addition, the namespace includes the necessary machinery for providing the time dependent equations with their initial data from the exact solution. There are 9 functions, one for each of the components of displacement, velocity and acceleration, and a helper function. For brevity, we list only one of these functions; the others are similar.</p>
+<div class="fragment"><div class="line"> <span class="comment">/// Calculate the time dependent form of the r-component of displacement</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="cylinder_8txt.html#ac494e755f23b33df5d197ecb39ad1ca3">u_r</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;time, <span class="keyword">const</span> Vector&lt;double&gt; &amp;x)</div>
+<div class="line">  {</div>
+<div class="line">   Vector&lt;double&gt; displ(3);</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#a42f4ce30b09a582bb2d85ddb6f087f80">exact_solution_th</a>(x,displ);</div>
+<div class="line">   <span class="keywordflow">return</span> cos(time)*displ[0];</div>
+<div class="line">  } <span class="comment">// end_of_u_r</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>We start by creating a <code>DocInfo</code> object that will be used to output the solution, and then build the problem.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_main======================================================</span></div>
+<div class="line"><span class="comment">/// Driver code </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="cylinder_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define possible command line arguments and parse the ones that</span></div>
+<div class="line"> <span class="comment">// were actually specified</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Validation?</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--validation&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parse command line</span></div>
+<div class="line"> CommandLineArgs::parse_and_assign(); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc what has actually been specified on the command line</span></div>
+<div class="line"> CommandLineArgs::doc_specified_flags();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up doc info</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Time dependent problem instance</span></div>
+<div class="line"> <a class="code" href="classAxisymmetricLinearElasticityProblem.html">AxisymmetricLinearElasticityProblem</a></div>
+<div class="line">  &lt;QAxisymmetricLinearElasticityElement&lt;3&gt;, Newmark&lt;1&gt; &gt; <a class="code" href="cylinder_8txt.html#a19579a1133e22b1527426f9dbfdf7d3e">problem</a>;</div>
+</div><!-- fragment --><p>Next we set up a timestepper and assign the initial conditions.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set the initial time to t=0</span></div>
+<div class="line"> <a class="code" href="cylinder_8txt.html#a19579a1133e22b1527426f9dbfdf7d3e">problem</a>.time_pt()-&gt;time()=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set and initialise timestep</span></div>
+<div class="line"> <span class="keywordtype">double</span> dt=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// If we&#39;re validating, use a larger timestep so that we can do fewer steps</span></div>
+<div class="line"> <span class="comment">// before reaching interesting behaviour</span></div>
+<div class="line"> <span class="keywordflow">if</span>(CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--validation&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   dt=0.1;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> <span class="comment">// Otherwise use a small timestep</span></div>
+<div class="line">  {</div>
+<div class="line">   dt=0.01;</div>
+<div class="line">  }</div>
+<div class="line"> <a class="code" href="cylinder_8txt.html#a19579a1133e22b1527426f9dbfdf7d3e">problem</a>.time_pt()-&gt;initialise_dt(dt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the initial conditions</span></div>
+<div class="line"> <a class="code" href="cylinder_8txt.html#a19579a1133e22b1527426f9dbfdf7d3e">problem</a>.set_initial_conditions();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc the initial conditions and increment the doc_info number</span></div>
+<div class="line"> <a class="code" href="cylinder_8txt.html#a19579a1133e22b1527426f9dbfdf7d3e">problem</a>.doc_solution(doc_info);</div>
+<div class="line"> doc_info.number()++;</div>
+</div><!-- fragment --><p>We calculate the number of timesteps to perform - if we are validating, just do small number of timesteps; otherwise do a full period the time-harmonic oscillation.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Find the number of timesteps to perform</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// If we&#39;re validating, only do a few timesteps; otherwise do a whole period</span></div>
+<div class="line"> <span class="keywordflow">if</span>(CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--validation&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   nstep=5;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> <span class="comment">// Otherwise calculate based on timestep</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Solve for one full period</span></div>
+<div class="line">   <span class="keywordtype">double</span> t_max=2*MathematicalConstants::Pi;</div>
+<div class="line"> </div>
+<div class="line">   nstep=unsigned(t_max/dt);</div>
+<div class="line">  } <span class="comment">//end_of_calculate_number_of_timesteps</span></div>
+</div><!-- fragment --><p>Finally we perform a time dependent simulation.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Do the timestepping</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Solve for this timestep</span></div>
+<div class="line">   <a class="code" href="cylinder_8txt.html#a19579a1133e22b1527426f9dbfdf7d3e">problem</a>.unsteady_newton_solve(dt);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc the solution and increment doc_info number</span></div>
+<div class="line">   <a class="code" href="cylinder_8txt.html#a19579a1133e22b1527426f9dbfdf7d3e">problem</a>.doc_solution(doc_info);</div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// end_of_main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class is very simple, and similarly to other problems with Neumann conditions, there are separate meshes for the "bulk" elements and the "face" elements that apply the traction boundary conditions. The function <code><a class="el" href="cylinder_8txt.html#a3f5b5e378483c5899ee892c73f08787e">assign_traction_elements()</a></code> attaches the traction elements to the appropriate bulk elements.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_problem_class=============================================</span></div>
+<div class="line"><span class="comment">/// Class to validate time harmonic linear elasticity (Fourier </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// decomposed)</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classAxisymmetricLinearElasticityProblem.html">AxisymmetricLinearElasticityProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor: Pass number of elements in r and z directions,</span></div>
+<div class="line"><span class="comment"> /// boundary locations and whether we are doing an impulsive start or not</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#aaa4da18227b8b20dfba1f67bad4907ed">AxisymmetricLinearElasticityProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update before solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#a25da062bc76af5ef30619a3f3ff3718f">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update after solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#af9b01e082da514668a89df9213afbbd5">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before implicit timestep</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#a6ea18ecd60fd5878522ae6024cb57dee">actions_before_implicit_timestep</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Just need to update the boundary conditions</span></div>
+<div class="line">   <a class="code" href="classAxisymmetricLinearElasticityProblem.html#ad6419d0572a6e869a5b9ba3c5aac3144">set_boundary_conditions</a>();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Set the initial conditions, either for an impulsive start or</span></div>
+<div class="line"><span class="comment"> /// with history values for the time stepper</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#a6b0263b6f783652a1d8151948f4b9430">set_initial_conditions</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set the boundary conditions</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#ad6419d0572a6e869a5b9ba3c5aac3144">set_boundary_conditions</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#a370b76b9e2902242de018339d3aedd04">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Allocate traction elements on the bottom surface</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#ab0cfde2632d6711b75744bcc2644ae04">assign_traction_elements</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to the bulk mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code" href="classAxisymmetricLinearElasticityProblem.html#a49f2e786217cf28ebed1d828a4b06147">Bulk_mesh_pt</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code" href="classAxisymmetricLinearElasticityProblem.html#a62a8248651ee5b17b5168fe9158039dc">Surface_mesh_pt</a>;</div>
+<div class="line">}; <span class="comment">// end_of_problem_class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>The problem constructor creates the mesh objects (which in turn create the elements), pins the appropriate boundary nodes and assigns the boundary conditions according to the functions defined in the <code><a class="el" href="namespaceGlobal__Parameters.html" title="Namespace for global parameters.">Global_Parameters</a></code> namespace.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_constructor=============================================</span></div>
+<div class="line"><span class="comment">/// Problem constructor: Pass number of elements in coordinate</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// directions and size of domain.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a class="code" href="classAxisymmetricLinearElasticityProblem.html#aaa4da18227b8b20dfba1f67bad4907ed">AxisymmetricLinearElasticityProblem&lt;ELEMENT, TIMESTEPPER&gt;::</a></div>
+<div class="line"><a class="code" href="classAxisymmetricLinearElasticityProblem.html#aaa4da18227b8b20dfba1f67bad4907ed">AxisymmetricLinearElasticityProblem</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Allocate the timestepper</span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> TIMESTEPPER());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the mesh</span></div>
+<div class="line"> Bulk_mesh_pt = <span class="keyword">new</span> RectangularQuadMesh&lt;ELEMENT&gt;(</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#aeebb1e39d849d32cebdc9be13026606e">Global_Parameters::Nr</a>,</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#a1f35a0690c7745167a7178fb71f92e6e">Global_Parameters::Nz</a>,</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#ab0e73c8b2e1105b14203856b81efa8cf">Global_Parameters::Rmin</a>,</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#a06f5ea713550f61da323eafb91fceedd">Global_Parameters::Rmax</a>,</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#a1813b913bc85d4ce15ea68226ba6c63f">Global_Parameters::Zmin</a>,</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#a36b7b169826f906d1d8d1a3aa4347d80">Global_Parameters::Zmax</a>,</div>
+<div class="line">   time_stepper_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Create the surface mesh of traction elements</span></div>
+<div class="line"> Surface_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> <a class="code" href="cylinder_8txt.html#a3f5b5e378483c5899ee892c73f08787e">assign_traction_elements</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set the boundary conditions</span></div>
+<div class="line"> <a class="code" href="cylinder_8txt.html#aba95f1accf0d9942d7c7f0c304db53de">set_boundary_conditions</a>();</div>
+</div><!-- fragment --><p>Then the physical parameters are set for each element in the bulk mesh.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the problem setup to make the elements fully functional</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_el = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cylinder_8txt.html#a74dc2d1356729ecae4265c7721c19ba9">e</a>=0;<a class="code" href="cylinder_8txt.html#a74dc2d1356729ecae4265c7721c19ba9">e</a>&lt;n_el;<a class="code" href="cylinder_8txt.html#a74dc2d1356729ecae4265c7721c19ba9">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Cast to a bulk element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(<a class="code" href="cylinder_8txt.html#a74dc2d1356729ecae4265c7721c19ba9">e</a>));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the body force</span></div>
+<div class="line">   el_pt-&gt;body_force_fct_pt() = &amp;<a class="code" href="namespaceGlobal__Parameters.html#a6459755c5d38e277ceddbf317c4ed179">Global_Parameters::body_force</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to Poisson&#39;s ratio</span></div>
+<div class="line">   el_pt-&gt;nu_pt() = &amp;<a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Global_Parameters::Nu</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to non-dim Young&#39;s modulus</span></div>
+<div class="line">   el_pt-&gt;youngs_modulus_pt() = &amp;<a class="code" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">Global_Parameters::E</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to the Lambda parameter</span></div>
+<div class="line">   el_pt-&gt;lambda_sq_pt() = &amp;<a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a>;</div>
+<div class="line"> </div>
+<div class="line">  }<span class="comment">// end_loop_over_elements</span></div>
+</div><!-- fragment --><p>We then loop over the traction elements and set the applied traction.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the traction elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_traction =  Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cylinder_8txt.html#a74dc2d1356729ecae4265c7721c19ba9">e</a>=0;<a class="code" href="cylinder_8txt.html#a74dc2d1356729ecae4265c7721c19ba9">e</a>&lt;n_traction;<a class="code" href="cylinder_8txt.html#a74dc2d1356729ecae4265c7721c19ba9">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Cast to a surface element</span></div>
+<div class="line">   AxisymmetricLinearElasticityTractionElement&lt;ELEMENT&gt;*</div>
+<div class="line">    el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>AxisymmetricLinearElasticityTractionElement</div>
+<div class="line">    &lt;ELEMENT<span class="keyword">&gt;</span>* &gt;(Surface_mesh_pt-&gt;element_pt(<a class="code" href="cylinder_8txt.html#a74dc2d1356729ecae4265c7721c19ba9">e</a>));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the applied traction</span></div>
+<div class="line">   el_pt-&gt;traction_fct_pt() = &amp;<a class="code" href="namespaceGlobal__Parameters.html#a61ef31c4db13380658f6d5ea47c3369d">Global_Parameters::boundary_traction</a>;</div>
+<div class="line">   </div>
+<div class="line">  }<span class="comment">// end_loop_over_traction_elements</span></div>
+</div><!-- fragment --><p>Finally, we add the two meshes as sub-meshes, build a global mesh from these and assign the equation numbers.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Add the submeshes to the problem</span></div>
+<div class="line"> add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now build the global mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Assign equation numbers</span></div>
+<div class="line"> cout &lt;&lt; <a class="code" href="cylinder_8txt.html#a5697c5be964ff44aa97eedcdfbe3b8bc">assign_eqn_numbers</a>() &lt;&lt; <span class="stringliteral">&quot; equations assigned&quot;</span> &lt;&lt; std::endl; </div>
+<div class="line">} <span class="comment">// end_of_constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="traction_elements"></a>
+The traction elements</h1>
+<p>We create the face elements that apply the traction to the boundary <img class="formulaInl" alt="$ r=r_\mathrm{min} $" src="form_59.png"/>.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_traction===============================================</span></div>
+<div class="line"><span class="comment">/// Make traction elements along the boundary r=Rmin</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#ab0cfde2632d6711b75744bcc2644ae04">AxisymmetricLinearElasticityProblem&lt;ELEMENT, TIMESTEPPER&gt;::</a></div>
+<div class="line"><a class="code" href="classAxisymmetricLinearElasticityProblem.html#ab0cfde2632d6711b75744bcc2644ae04">assign_traction_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="keywordtype">unsigned</span> bound, n_neigh;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// How many bulk elements are next to boundary 3</span></div>
+<div class="line"> bound=3;</div>
+<div class="line"> n_neigh = Bulk_mesh_pt-&gt;nboundary_element(bound); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now loop over bulk elements and create the face elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_neigh;n++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Create the face element</span></div>
+<div class="line">   FiniteElement *traction_element_pt </div>
+<div class="line">    = <span class="keyword">new</span> AxisymmetricLinearElasticityTractionElement&lt;ELEMENT&gt;</div>
+<div class="line">    (Bulk_mesh_pt-&gt;boundary_element_pt(bound,n),</div>
+<div class="line">     Bulk_mesh_pt-&gt;face_index_at_boundary(bound,n));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Add to mesh</span></div>
+<div class="line">   Surface_mesh_pt-&gt;add_element_pt(traction_element_pt);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of assign_traction_elements</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="initial_data"></a>
+Initial data</h1>
+<p>The time integration in this problem is performed using the Newmark scheme which, in addition to the standard initial conditions (3), requires an initial value for the acceleration. Since we will be solving a test case in which the exact solution is known, we can use the exact solution to provide the complete set of initial data required. For the details of the Newmark scheme, see the tutorial on the <a href="../../../linear_wave/two_d_linear_wave/html/index.html">linear wave equation</a>.</p>
+<p>If we're doing an impulsive start, set the displacement, velocity and acceleration to zero, and fill in the time history to be consistent with this.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_set_initial_conditions=================================</span></div>
+<div class="line"><span class="comment">/// Set the initial conditions (history values)</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#a6b0263b6f783652a1d8151948f4b9430">AxisymmetricLinearElasticityProblem&lt;ELEMENT, TIMESTEPPER&gt;::</a></div>
+<div class="line"><a class="code" href="classAxisymmetricLinearElasticityProblem.html#a6b0263b6f783652a1d8151948f4b9430">set_initial_conditions</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Upcast the timestepper to the specific type we have</span></div>
+<div class="line"> TIMESTEPPER* timestepper_pt =</div>
+<div class="line">  <span class="keyword">dynamic_cast&lt;</span>TIMESTEPPER*<span class="keyword">&gt;</span>(time_stepper_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// By default do a non-impulsive start and provide initial conditions</span></div>
+<div class="line"> <span class="keywordtype">bool</span> impulsive_start=<span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">if</span>(impulsive_start)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Number of nodes in the bulk mesh</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over all nodes in the bulk mesh</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> inod=0;inod&lt;n_node;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Pointer to node</span></div>
+<div class="line">     Node* nod_pt = Bulk_mesh_pt-&gt;node_pt(inod);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Get nodal coordinates</span></div>
+<div class="line">     Vector&lt;double&gt; x(2);</div>
+<div class="line">     x[0] = nod_pt-&gt;x(0);</div>
+<div class="line">     x[1] = nod_pt-&gt;x(1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Assign zero solution at t=0</span></div>
+<div class="line">     nod_pt-&gt;set_value(0,0);</div>
+<div class="line">     nod_pt-&gt;set_value(1,0);</div>
+<div class="line">     nod_pt-&gt;set_value(2,0);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Set the impulsive initial values in the timestepper</span></div>
+<div class="line">     timestepper_pt-&gt;assign_initial_values_impulsive(nod_pt);</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end_of_impulsive_start</span></div>
+</div><!-- fragment --><p>If we are not doing an impulsive start, we must provide the timestepper with time history values for the displacement, velocity and acceleration. Each component of the these vectors is represented by a function pointer, and in this case, the function pointers return values based on the exact solution.</p>
+<div class="fragment"><div class="line"> <span class="keywordflow">else</span> <span class="comment">// Smooth start</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Storage for pointers to the functions defining the displacement,</span></div>
+<div class="line">   <span class="comment">// velocity and acceleration components</span></div>
+<div class="line">   Vector&lt;typename TIMESTEPPER::NodeInitialConditionFctPt&gt;</div>
+<div class="line">    initial_value_fct(3);</div>
+<div class="line">   Vector&lt;typename TIMESTEPPER::NodeInitialConditionFctPt&gt;</div>
+<div class="line">    initial_veloc_fct(3);</div>
+<div class="line">   Vector&lt;typename TIMESTEPPER::NodeInitialConditionFctPt&gt;</div>
+<div class="line">    initial_accel_fct(3);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the displacement function pointers</span></div>
+<div class="line">   initial_value_fct[0]=&amp;<a class="code" href="namespaceGlobal__Parameters.html#ae600c7d1b0928a5cb532fa3a93bab338">Global_Parameters::u_r</a>;</div>
+<div class="line">   initial_value_fct[1]=&amp;<a class="code" href="namespaceGlobal__Parameters.html#adc24d54054d6868dfb4bf3eedb2b062d">Global_Parameters::u_z</a>;</div>
+<div class="line">   initial_value_fct[2]=&amp;<a class="code" href="namespaceGlobal__Parameters.html#aed85254e9565e5e25dbe336a799bf6b5">Global_Parameters::u_theta</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the velocity function pointers</span></div>
+<div class="line">   initial_veloc_fct[0]=&amp;<a class="code" href="namespaceGlobal__Parameters.html#aa587494218fe51b7d23a58009bf370f6">Global_Parameters::d_u_r_dt</a>;</div>
+<div class="line">   initial_veloc_fct[1]=&amp;<a class="code" href="namespaceGlobal__Parameters.html#adc07c67f4203664ac0c23c4ff9d4dac1">Global_Parameters::d_u_z_dt</a>;</div>
+<div class="line">   initial_veloc_fct[2]=&amp;<a class="code" href="namespaceGlobal__Parameters.html#a87fd49f1b07cd74a364cf1373890864e">Global_Parameters::d_u_theta_dt</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the acceleration function pointers</span></div>
+<div class="line">   initial_accel_fct[0]=&amp;<a class="code" href="namespaceGlobal__Parameters.html#a37715fdf266bd7d91b44ad779e20a11a">Global_Parameters::d2_u_r_dt2</a>;</div>
+<div class="line">   initial_accel_fct[1]=&amp;<a class="code" href="namespaceGlobal__Parameters.html#a2167fee22e8f4d63a51a39ace1e3a743">Global_Parameters::d2_u_z_dt2</a>;</div>
+<div class="line">   initial_accel_fct[2]=&amp;<a class="code" href="namespaceGlobal__Parameters.html#a902b0bba2b1393518a914330f30ee4c9">Global_Parameters::d2_u_theta_dt2</a>;</div>
+</div><!-- fragment --><p>Then we loop over all nodes in the bulk mesh and set the initial data values from the exact solution.</p>
+<div class="fragment"><div class="line">   <span class="comment">// Number of nodes in the bulk mesh</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over all nodes in bulk mesh</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> inod=0;inod&lt;n_node;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Pointer to node</span></div>
+<div class="line">     Node* nod_pt = Bulk_mesh_pt-&gt;node_pt(inod);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Assign the history values</span></div>
+<div class="line">     timestepper_pt-&gt;assign_initial_data_values(nod_pt,</div>
+<div class="line">                                                initial_value_fct,</div>
+<div class="line">                                                initial_veloc_fct,</div>
+<div class="line">                                                initial_accel_fct);</div>
+<div class="line">    } <span class="comment">// end_of_loop_over_nodes</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>This member function documents the computed solution to file and calculates the error between the computed solution and the exact solution.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_doc_solution=================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classAxisymmetricLinearElasticityProblem.html#a370b76b9e2902242de018339d3aedd04">AxisymmetricLinearElasticityProblem&lt;ELEMENT, TIMESTEPPER&gt;::</a></div>
+<div class="line"><a class="code" href="classAxisymmetricLinearElasticityProblem.html#a370b76b9e2902242de018339d3aedd04">doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=10; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">   doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">   doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output_fct(some_file,npts,time_pt()-&gt;time(),</div>
+<div class="line">                          <a class="code" href="namespaceGlobal__Parameters.html#a7da914d64b7a62d35793172f6a0fd712">Global_Parameters::exact_solution</a>);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error</span></div>
+<div class="line"> <span class="keywordtype">double</span> error=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> norm=0.0;</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/error%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">   doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;compute_error(some_file,</div>
+<div class="line">                             <a class="code" href="namespaceGlobal__Parameters.html#a7da914d64b7a62d35793172f6a0fd712">Global_Parameters::exact_solution</a>, </div>
+<div class="line">                             time_pt()-&gt;time(),</div>
+<div class="line">                             error,norm);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error norm:</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\nNorm of error:    &quot;</span> &lt;&lt; sqrt(error) &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Norm of solution: &quot;</span> &lt;&lt; sqrt(norm) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; std::endl;</div>
+<div class="line">} <span class="comment">// end_of_doc_solution   </span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments</h1>
+<ul>
+<li>Given that we non-dimensionalised all stresses on Young's modulus it seems odd that we provide the option to specify a non-dimensional Young's modulus via the member function <code>AxisymmetricLinearElasticity::youngs_modulus_pt()</code>. The explanation for this is that this function specifies the ratio of the material's actual Young's modulus to the Young's modulus used in the non-dimensionalisation of the equations. The capability to specify such ratios is important in problems where the elastic body is made of multiple materials with different constitutive properties. If the body is made of a single, homogeneous material, the specification of the non-dimensional Young's modulus is not required &ndash; it defaults to 1.0.</li>
+</ul>
+<h1><a class="anchor" id="exercises"></a>
+Exercises</h1>
+<ul>
+<li>Try setting the boolean flag <code>impulsive_start</code> to <code>true</code> in the <code><a class="el" href="classAxisymmetricLinearElasticityProblem.html#a6b0263b6f783652a1d8151948f4b9430" title="Set the initial conditions, either for an impulsive start or with history values for the time stepper...">AxisymmetricLinearElasticityProblem::set_initial_conditions</a></code> function and compare the system's evolution to that obtained when a "smooth" start from the exact solution is performed.</li>
+<li>Omit the specification of the Young's modulus and verify that the default value gives the same solution.</li>
+<li>Confirm that the assignment of the history values for the Newmark timestepper in <code><a class="el" href="classAxisymmetricLinearElasticityProblem.html#a6b0263b6f783652a1d8151948f4b9430" title="Set the initial conditions, either for an impulsive start or with history values for the time stepper...">AxisymmetricLinearElasticityProblem::set_initial_conditions</a></code> sets the correct initial values for the displacement, velocity and acceleration. (Hint: the relevant code is already contained in the driver code, but was omitted in the code listings shown above.)</li>
+</ul>
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/axisym_linear_elasticity/cylinder/">demo_drivers/axisym_linear_elasticity/cylinder/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/axisym_linear_elasticity/cylinder/cylinder.cc">demo_drivers/axisym_linear_elasticity/cylinder/cylinder.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_a49f2e786217cf28ebed1d828a4b06147"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#a49f2e786217cf28ebed1d828a4b06147">AxisymmetricLinearElasticityProblem::Bulk_mesh_pt</a></div><div class="ttdeci">Mesh * Bulk_mesh_pt</div><div class="ttdoc">Pointer to the bulk mesh.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00264">cylinder.cc:264</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ae600c7d1b0928a5cb532fa3a93bab338"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ae600c7d1b0928a5cb532fa3a93bab338">Global_Parameters::u_r</a></div><div class="ttdeci">double u_r(const double &amp;time, const Vector&lt; double &gt; &amp;x)</div><div class="ttdoc">Calculate the time dependent form of the r-component of displacement.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00130">cylinder.cc:130</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aeebb1e39d849d32cebdc9be13026606e"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aeebb1e39d849d32cebdc9be13026606e">Global_Parameters::Nr</a></div><div class="ttdeci">unsigned Nr</div><div class="ttdoc">Number of elements in r-direction.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00059">cylinder.cc:59</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a42f4ce30b09a582bb2d85ddb6f087f80"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a42f4ce30b09a582bb2d85ddb6f087f80">Global_Parameters::exact_solution_th</a></div><div class="ttdeci">void exact_solution_th(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Helper function - spatial components of the exact solution in a vector. This is necessary because we ...</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00116">cylinder.cc:116</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a87fd49f1b07cd74a364cf1373890864e"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a87fd49f1b07cd74a364cf1373890864e">Global_Parameters::d_u_theta_dt</a></div><div class="ttdeci">double d_u_theta_dt(const double &amp;time, const Vector&lt; double &gt; &amp;x)</div><div class="ttdoc">Calculate the time dependent form of the theta-component of velocity.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00170">cylinder.cc:170</a></div></div>
+<div class="ttc" id="acylinder_8txt_html_aba95f1accf0d9942d7c7f0c304db53de"><div class="ttname"><a href="cylinder_8txt.html#aba95f1accf0d9942d7c7f0c304db53de">set_boundary_conditions</a></div><div class="ttdeci">namespace skipline start_of_constructor until set_boundary_conditions() Then the physical parameters are set for each element in the bulk mesh. \until end_loop_over_elements We then loop over the traction elements and set the applied traction. \until end_loop_over_traction_elements Finally</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a2167fee22e8f4d63a51a39ace1e3a743"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a2167fee22e8f4d63a51a39ace1e3a743">Global_Parameters::d2_u_z_dt2</a></div><div class="ttdeci">double d2_u_z_dt2(const double &amp;time, const Vector&lt; double &gt; &amp;x)</div><div class="ttdoc">Calculate the time dependent form of the z-component of acceleration.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00186">cylinder.cc:186</a></div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_aaa4da18227b8b20dfba1f67bad4907ed"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#aaa4da18227b8b20dfba1f67bad4907ed">AxisymmetricLinearElasticityProblem::AxisymmetricLinearElasticityProblem</a></div><div class="ttdeci">AxisymmetricLinearElasticityProblem()</div><div class="ttdoc">Constructor: Pass number of elements in r and z directions, boundary locations and whether we are doi...</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00277">cylinder.cc:277</a></div></div>
+<div class="ttc" id="acylinder_8txt_html_a19579a1133e22b1527426f9dbfdf7d3e"><div class="ttname"><a href="cylinder_8txt.html#a19579a1133e22b1527426f9dbfdf7d3e">problem</a></div><div class="ttdeci">parameters We impose the displacement along the boundaries f and impose the traction f[\hat{\bm{\tau}}_3=\bm{\tau}(r_\mathrm{min}, z, t)=\cos(\omega t)\begin{pmatrix}-\cos(z) r_\mathrm{min}^2\left(6\mu+\lambda\left(4+r_\mathrm{min}\right)\right)\-2\mu r_\mathrm{min}^2z^3\-\mu r_\mathrm{min}^2\sin(z)\left(3-r_\mathrm{min}\right)\end{pmatrix},\qquad\qquad @E[eqn:boundary_traction_exact]@\f] along the boundary f R[eqn:nondim_constitutive] along with the body R[eqn:body_force_exact] and boundary velocity(and acceleration;see below) according to the solution( @R[eqn the others are similar skipline Calculate the time dependent until end_of_u_r&lt; HR &gt;&lt; HR &gt; section main The driver code We start by creating a c DocInfo object that will be used to output the and then build the problem dontinclude cylinder cc skipline start_of_main until problem</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8txt_source.html#l00293">cylinder.txt:293</a></div></div>
+<div class="ttc" id="acylinder_8txt_html_a5697c5be964ff44aa97eedcdfbe3b8bc"><div class="ttname"><a href="cylinder_8txt.html#a5697c5be964ff44aa97eedcdfbe3b8bc">assign_eqn_numbers</a></div><div class="ttdeci">namespace skipline start_of_constructor until we add the two meshes as sub build a global mesh from these and assign the equation numbers skipline Add until assign_eqn_numbers() \skip end_of_constructor \until end_of_constructor&lt; HR &gt;&lt; HR &gt; \section traction_elements The traction elements We create the face elements that apply the traction to the boundary \f$ r</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_adc24d54054d6868dfb4bf3eedb2b062d"><div class="ttname"><a href="namespaceGlobal__Parameters.html#adc24d54054d6868dfb4bf3eedb2b062d">Global_Parameters::u_z</a></div><div class="ttdeci">double u_z(const double &amp;time, const Vector&lt; double &gt; &amp;x)</div><div class="ttdoc">Calculate the time dependent form of the z-component of displacement.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00138">cylinder.cc:138</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aa3dfbdb1b2fd80d516850f66c96b6fd0"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">Global_Parameters::E</a></div><div class="ttdeci">double E</div><div class="ttdoc">Define the non-dimensional Young's modulus.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00049">cylinder.cc:49</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html"><div class="ttname"><a href="namespaceGlobal__Parameters.html">Global_Parameters</a></div><div class="ttdoc">Namespace for global parameters.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00043">cylinder.cc:43</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a6459755c5d38e277ceddbf317c4ed179"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a6459755c5d38e277ceddbf317c4ed179">Global_Parameters::body_force</a></div><div class="ttdeci">void body_force(const double &amp;time, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;result)</div><div class="ttdoc">The body force function; returns vector of doubles in the order (b_r, b_z, b_theta)</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00096">cylinder.cc:96</a></div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_ab0cfde2632d6711b75744bcc2644ae04"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#ab0cfde2632d6711b75744bcc2644ae04">AxisymmetricLinearElasticityProblem::assign_traction_elements</a></div><div class="ttdeci">void assign_traction_elements()</div><div class="ttdoc">Allocate traction elements on the bottom surface.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00388">cylinder.cc:388</a></div></div>
+<div class="ttc" id="acylinder_8txt_html_a74dc2d1356729ecae4265c7721c19ba9"><div class="ttname"><a href="cylinder_8txt.html#a74dc2d1356729ecae4265c7721c19ba9">e</a></div><div class="ttdeci">f which are specific to each type of geometric element We store the three components of the displacement vector as nodal data in the order f u_ theta f and use the shape functions to interpolate the displacements as f[u_i=\sum_{j=1}^{N^{(E)}}U_{ij}^{(E)}\psi_{ij},\qquad i=1,\dotsc, 3,\f] where f i e</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8txt_source.html#l00172">cylinder.txt:172</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a1f35a0690c7745167a7178fb71f92e6e"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a1f35a0690c7745167a7178fb71f92e6e">Global_Parameters::Nz</a></div><div class="ttdeci">unsigned Nz</div><div class="ttdoc">Number of elements in z-direction.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00062">cylinder.cc:62</a></div></div>
+<div class="ttc" id="acylinder_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="cylinder_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00714">cylinder.cc:714</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a1813b913bc85d4ce15ea68226ba6c63f"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a1813b913bc85d4ce15ea68226ba6c63f">Global_Parameters::Zmin</a></div><div class="ttdeci">double Zmin</div><div class="ttdoc">Set up min z coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00074">cylinder.cc:74</a></div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_a62a8248651ee5b17b5168fe9158039dc"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#a62a8248651ee5b17b5168fe9158039dc">AxisymmetricLinearElasticityProblem::Surface_mesh_pt</a></div><div class="ttdeci">Mesh * Surface_mesh_pt</div><div class="ttdoc">Pointer to the mesh of traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00267">cylinder.cc:267</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a2bcf0bd846d839f1e3bb04a6c0a612c1"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a2bcf0bd846d839f1e3bb04a6c0a612c1">Global_Parameters::Lz</a></div><div class="ttdeci">double Lz</div><div class="ttdoc">Length of domain in z-direction.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00068">cylinder.cc:68</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ab0e73c8b2e1105b14203856b81efa8cf"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ab0e73c8b2e1105b14203856b81efa8cf">Global_Parameters::Rmin</a></div><div class="ttdeci">double Rmin</div><div class="ttdoc">Set up min r coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00071">cylinder.cc:71</a></div></div>
+<div class="ttc" id="acylinder_8txt_html_a3f5b5e378483c5899ee892c73f08787e"><div class="ttname"><a href="cylinder_8txt.html#a3f5b5e378483c5899ee892c73f08787e">assign_traction_elements</a></div><div class="ttdeci">otherwise do a full period the time harmonic oscillation skipline Find the number of timesteps to perform until end_of_calculate_number_of_timesteps Finally we perform a time dependent simulation skipline Do the timestepping until end_of_main&lt; HR &gt;&lt; HR &gt; section problem The problem class The problem class is very simple and similarly to other problems with Neumann conditions there are separate meshes for the bulk elements and the face elements that apply the traction boundary conditions The function c assign_traction_elements() attaches the traction elements to the appropriate bulk elements. \dontinclude cylinder.cc \skipline start_of_problem_class \until end_of_problem_class&lt; HR &gt;&lt; HR &gt; \section const ructor The problem const ructor The problem const ructor creates the mesh objects(which in turn create the elements)</div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_a6ea18ecd60fd5878522ae6024cb57dee"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#a6ea18ecd60fd5878522ae6024cb57dee">AxisymmetricLinearElasticityProblem::actions_before_implicit_timestep</a></div><div class="ttdeci">void actions_before_implicit_timestep()</div><div class="ttdoc">Actions before implicit timestep.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00242">cylinder.cc:242</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_adc07c67f4203664ac0c23c4ff9d4dac1"><div class="ttname"><a href="namespaceGlobal__Parameters.html#adc07c67f4203664ac0c23c4ff9d4dac1">Global_Parameters::d_u_z_dt</a></div><div class="ttdeci">double d_u_z_dt(const double &amp;time, const Vector&lt; double &gt; &amp;x)</div><div class="ttdoc">Calculate the time dependent form of the z-component of velocity.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00162">cylinder.cc:162</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a902b0bba2b1393518a914330f30ee4c9"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a902b0bba2b1393518a914330f30ee4c9">Global_Parameters::d2_u_theta_dt2</a></div><div class="ttdeci">double d2_u_theta_dt2(const double &amp;time, const Vector&lt; double &gt; &amp;x)</div><div class="ttdoc">Calculate the time dependent form of the theta-component of acceleration.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00194">cylinder.cc:194</a></div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_a25da062bc76af5ef30619a3f3ff3718f"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#a25da062bc76af5ef30619a3f3ff3718f">AxisymmetricLinearElasticityProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update before solve is empty.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00236">cylinder.cc:236</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_af9e1e178dfb7f5e35b452599bd4c4324"><div class="ttname"><a href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a></div><div class="ttdeci">double Omega_sq</div><div class="ttdoc">Square of the frequency of the time dependence.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00056">cylinder.cc:56</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a06f5ea713550f61da323eafb91fceedd"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a06f5ea713550f61da323eafb91fceedd">Global_Parameters::Rmax</a></div><div class="ttdeci">double Rmax</div><div class="ttdoc">Set up max r coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00077">cylinder.cc:77</a></div></div>
+<div class="ttc" id="acylinder_8txt_html_ac494e755f23b33df5d197ecb39ad1ca3"><div class="ttname"><a href="cylinder_8txt.html#ac494e755f23b33df5d197ecb39ad1ca3">u_r</a></div><div class="ttdeci">f which are specific to each type of geometric element We store the three components of the displacement vector as nodal data in the order f u_r</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8txt_source.html#l00166">cylinder.txt:166</a></div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_a370b76b9e2902242de018339d3aedd04"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#a370b76b9e2902242de018339d3aedd04">AxisymmetricLinearElasticityProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00664">cylinder.cc:664</a></div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_a6b0263b6f783652a1d8151948f4b9430"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#a6b0263b6f783652a1d8151948f4b9430">AxisymmetricLinearElasticityProblem::set_initial_conditions</a></div><div class="ttdeci">void set_initial_conditions()</div><div class="ttdoc">Set the initial conditions, either for an impulsive start or with history values for the time stepper...</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00416">cylinder.cc:416</a></div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_af9b01e082da514668a89df9213afbbd5"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#af9b01e082da514668a89df9213afbbd5">AxisymmetricLinearElasticityProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update after solve is empty.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00239">cylinder.cc:239</a></div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html_ad6419d0572a6e869a5b9ba3c5aac3144"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html#ad6419d0572a6e869a5b9ba3c5aac3144">AxisymmetricLinearElasticityProblem::set_boundary_conditions</a></div><div class="ttdeci">void set_boundary_conditions()</div><div class="ttdoc">Set the boundary conditions.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00574">cylinder.cc:574</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a36b7b169826f906d1d8d1a3aa4347d80"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a36b7b169826f906d1d8d1a3aa4347d80">Global_Parameters::Zmax</a></div><div class="ttdeci">double Zmax</div><div class="ttdoc">Set up max z coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00080">cylinder.cc:80</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aa587494218fe51b7d23a58009bf370f6"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aa587494218fe51b7d23a58009bf370f6">Global_Parameters::d_u_r_dt</a></div><div class="ttdeci">double d_u_r_dt(const double &amp;time, const Vector&lt; double &gt; &amp;x)</div><div class="ttdoc">Calculate the time dependent form of the r-component of velocity.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00154">cylinder.cc:154</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a20fccdcfa2c15ad8b951b9ada3bb1661"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Global_Parameters::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Define Poisson's ratio Nu.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00046">cylinder.cc:46</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a490d7680a7de63058a9c921e2705a103"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Global_Parameters::Mu</a></div><div class="ttdeci">double Mu</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00053">cylinder.cc:53</a></div></div>
+<div class="ttc" id="aclassAxisymmetricLinearElasticityProblem_html"><div class="ttname"><a href="classAxisymmetricLinearElasticityProblem.html">AxisymmetricLinearElasticityProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00227">cylinder.cc:227</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a7da914d64b7a62d35793172f6a0fd712"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a7da914d64b7a62d35793172f6a0fd712">Global_Parameters::exact_solution</a></div><div class="ttdeci">void exact_solution(const double &amp;time, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00203">cylinder.cc:203</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a444f5c911c8805ad2ba45ed8b1b8904e"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a444f5c911c8805ad2ba45ed8b1b8904e">Global_Parameters::Lr</a></div><div class="ttdeci">double Lr</div><div class="ttdoc">Length of domain in r direction.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00065">cylinder.cc:65</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aed85254e9565e5e25dbe336a799bf6b5"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aed85254e9565e5e25dbe336a799bf6b5">Global_Parameters::u_theta</a></div><div class="ttdeci">double u_theta(const double &amp;time, const Vector&lt; double &gt; &amp;x)</div><div class="ttdoc">Calculate the time dependent form of the theta-component of displacement.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00146">cylinder.cc:146</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a61ef31c4db13380658f6d5ea47c3369d"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a61ef31c4db13380658f6d5ea47c3369d">Global_Parameters::boundary_traction</a></div><div class="ttdeci">void boundary_traction(const double &amp;time, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;result)</div><div class="ttdoc">The traction function at r=Rmin: (t_r, t_z, t_theta)</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00083">cylinder.cc:83</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a37715fdf266bd7d91b44ad779e20a11a"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a37715fdf266bd7d91b44ad779e20a11a">Global_Parameters::d2_u_r_dt2</a></div><div class="ttdeci">double d2_u_r_dt2(const double &amp;time, const Vector&lt; double &gt; &amp;x)</div><div class="ttdoc">Calculate the time dependent form of the r-component of acceleration.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00178">cylinder.cc:178</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ae2f84a82174136947cce7a0d137097ae"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ae2f84a82174136947cce7a0d137097ae">Global_Parameters::Lambda</a></div><div class="ttdeci">double Lambda</div><div class="ttdoc">Lame parameters.</div><div class="ttdef"><b>Definition:</b> <a href="cylinder_8cc_source.html#l00052">cylinder.cc:52</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:31:38
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

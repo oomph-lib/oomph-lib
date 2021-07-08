@@ -1,0 +1,130 @@
+\hypertarget{namespaceGlobal__Physical__Variables}{}\doxysection{Global\+\_\+\+Physical\+\_\+\+Variables Namespace Reference}
+\label{namespaceGlobal__Physical__Variables}\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+
+
+Global variables that represent physical properties.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{external\+\_\+pressure}} ()
+\begin{DoxyCompactList}\small\item\em Return a reference to the external pressure load on the elastic tube. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{press\+\_\+load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&\mbox{\hyperlink{clamped__shell__buckling_8txt_a018f990526757b6bf7c8020a8ca96f1b}{load}})
+\begin{DoxyCompactList}\small\item\em Load function, normal pressure loading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Prescribed\+\_\+y}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Prescribed position of control point. \end{DoxyCompactList}\item 
+Data $\ast$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}{Pext\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to pressure load (stored in Data so it can become an unknown in the problem when displacement control is used. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Perturbation pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global variables that represent physical properties. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}\label{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!external\_pressure@{external\_pressure}}
+\index{external\_pressure@{external\_pressure}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{external\_pressure()}{external\_pressure()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::external\+\_\+pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Return a reference to the external pressure load on the elastic tube. 
+
+
+
+Definition at line 66 of file clamped\+\_\+shell.\+cc.
+
+
+
+References Pext\+\_\+data\+\_\+pt.
+
+
+
+Referenced by press\+\_\+load(), and Shell\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::solve().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}\label{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!press\_load@{press\_load}}
+\index{press\_load@{press\_load}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{press\_load()}{press\_load()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Physical\+\_\+\+Variables\+::press\+\_\+load (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{const Vector$<$ double $>$ \&}]{N,  }\item[{Vector$<$ double $>$ \&}]{load }\end{DoxyParamCaption})}
+
+
+
+Load function, normal pressure loading. 
+
+
+
+Definition at line 71 of file clamped\+\_\+shell.\+cc.
+
+
+
+References external\+\_\+pressure(), load, and Pcos.
+
+
+
+Referenced by Shell\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shell\+Problem().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}\label{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Pcos@{Pcos}}
+\index{Pcos@{Pcos}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Pcos}{Pcos}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pcos =1.\+0}
+
+
+
+Perturbation pressure. 
+
+
+
+Definition at line 61 of file clamped\+\_\+shell.\+cc.
+
+
+
+Referenced by press\+\_\+load(), and Shell\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::solve().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}\label{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Pext\_data\_pt@{Pext\_data\_pt}}
+\index{Pext\_data\_pt@{Pext\_data\_pt}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Pext\_data\_pt}{Pext\_data\_pt}}
+{\footnotesize\ttfamily Data $\ast$ Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pext\+\_\+data\+\_\+pt}
+
+
+
+Pointer to pressure load (stored in Data so it can become an unknown in the problem when displacement control is used. 
+
+
+
+Definition at line 58 of file clamped\+\_\+shell.\+cc.
+
+
+
+Referenced by external\+\_\+pressure(), and Shell\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shell\+Problem().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}\label{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Prescribed\_y@{Prescribed\_y}}
+\index{Prescribed\_y@{Prescribed\_y}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Prescribed\_y}{Prescribed\_y}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Prescribed\+\_\+y = 1.\+0}
+
+
+
+Prescribed position of control point. 
+
+
+
+Definition at line 54 of file clamped\+\_\+shell.\+cc.
+
+
+
+Referenced by Shell\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Shell\+Problem(), and Shell\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::solve().
+

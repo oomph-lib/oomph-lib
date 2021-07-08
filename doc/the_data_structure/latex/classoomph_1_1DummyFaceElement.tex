@@ -1,0 +1,200 @@
+\hypertarget{classoomph_1_1DummyFaceElement}{}\doxysection{oomph\+::Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1DummyFaceElement}\index{oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.882883cm]{classoomph_1_1DummyFaceElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DummyFaceElement_adb775a8739801cf66da2e12b1a04d4d2}{Dummy\+Face\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the face index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DummyFaceElement_a176777e1996a968a9895e07dda2fb968}{Dummy\+Face\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1DummyFaceElement_a2ee49bd3158d30c0c84c63dbd25e7196}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DummyFaceElement_a18c02152a69fd63b391a51aaae0279f2}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output nodal coordinates. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DummyFaceElement_a65af668caa98997d5ef1227e4f2bf733}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output at n\+\_\+plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DummyFaceElement_ae25eed69d7402d8c88b7bf9f264093a7}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DummyFaceElement_a47f9db38874cb184f29e19839d0b7e81}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C\+\_\+style output at n\+\_\+plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Dummy \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} for use with purely geometric operations such as mesh generation. 
+
+Definition at line 4854 of file elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1DummyFaceElement_adb775a8739801cf66da2e12b1a04d4d2}\label{classoomph_1_1DummyFaceElement_adb775a8739801cf66da2e12b1a04d4d2}} 
+\index{oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}!DummyFaceElement@{DummyFaceElement}}
+\index{DummyFaceElement@{DummyFaceElement}!oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{DummyFaceElement()}{DummyFaceElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1DummyFaceElement}{Dummy\+Face\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, which takes a \char`\"{}bulk\char`\"{} element and the face index. 
+
+
+
+Definition at line 4862 of file elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Face\+Element\+::face\+\_\+index().
+
+\mbox{\Hypertarget{classoomph_1_1DummyFaceElement_a176777e1996a968a9895e07dda2fb968}\label{classoomph_1_1DummyFaceElement_a176777e1996a968a9895e07dda2fb968}} 
+\index{oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}!DummyFaceElement@{DummyFaceElement}}
+\index{DummyFaceElement@{DummyFaceElement}!oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{DummyFaceElement()}{DummyFaceElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1DummyFaceElement}{Dummy\+Face\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 4873 of file elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1DummyFaceElement_ae25eed69d7402d8c88b7bf9f264093a7}\label{classoomph_1_1DummyFaceElement_ae25eed69d7402d8c88b7bf9f264093a7}} 
+\index{oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 4908 of file elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1DummyFaceElement_a47f9db38874cb184f29e19839d0b7e81}\label{classoomph_1_1DummyFaceElement_a47f9db38874cb184f29e19839d0b7e81}} 
+\index{oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C\+\_\+style output at n\+\_\+plot points. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 4912 of file elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1DummyFaceElement_a18c02152a69fd63b391a51aaae0279f2}\label{classoomph_1_1DummyFaceElement_a18c02152a69fd63b391a51aaae0279f2}} 
+\index{oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output nodal coordinates. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 4887 of file elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Node\+::x().
+
+\mbox{\Hypertarget{classoomph_1_1DummyFaceElement_a65af668caa98997d5ef1227e4f2bf733}\label{classoomph_1_1DummyFaceElement_a65af668caa98997d5ef1227e4f2bf733}} 
+\index{oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output at n\+\_\+plot points. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 4904 of file elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1DummyFaceElement_a2ee49bd3158d30c0c84c63dbd25e7196}\label{classoomph_1_1DummyFaceElement_a2ee49bd3158d30c0c84c63dbd25e7196}} 
+\index{oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::DummyFaceElement$<$ ELEMENT $>$@{oomph::DummyFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f76c8487d152e68a6}{oomph\+::\+Face\+Element}}.
+
+
+
+Definition at line 4882 of file elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elements_8h}{elements.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,707 @@
+\mainpage Demo problem: Flow in a 2D channel with an oscillating wall
+
+The moving-boundary Navier-Stokes problem discussed in this document
+is a "warm-up" problem for the classical fluid-structure interaction
+problem of flow in a 2D collapsible channel. Here we compute the flow
+through a 2D channel in which part of one wall is replaced by a moving
+"membrane" whose motion is prescribed. In
+<A HREF="../../../interaction/fsi_collapsible_channel/html/index.html">
+another example</A>, we will 
+demonstrate how easy it is to extend the driver code for the current 
+problem to a fluid-structure interaction problem in which the "membrane" is 
+represented by an elastic beam that deforms in response to the
+fluid traction.
+
+
+We note that the (FSI version of the) problem considered here 
+was analysed in much more detail in
+ 
+<UL>
+<LI> Jensen, O.E. & Heil, M. (2003) High-frequency self-excited
+oscillations in a collapsible-channel flow.
+<EM>Journal of Fluid Mechanics</EM> <STRONG>481</STRONG>
+235-268. 
+<A HREF="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">(pdf
+ preprint)</A> 
+<A HREF="http://www.maths.man.ac.uk/~mheil/MATTHIAS/ABSTRACTS/JensenHeil02.html">(abstract)</A>
+</UL>
+where a detailed discussion (and an asymptotic analysis) of the 
+flow-structures described below may be found. 
+ 
+<HR> 
+<HR>
+
+\section problem The problem 
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>Finite-Reynolds-number flow in a 2D channel with an oscillating wall .</B>
+</CENTER> 
+
+The figure below shows a sketch of the problem: Flow is driven by a 
+prescribed pressure drop through a 2D channel of width 
+\f$ H^* \f$ and total length
+\f$ L^*_{total} = L^*_{up} + L^*_{collapsible} + L^*_{down}. \f$
+The upstream and downstream lengths of the channel are rigid, whereas
+the upper wall in the central section performs a prescribed
+oscillation. The shape of the moving segment is parametrised by a Lagrangian
+coordinate, \f$ \zeta^* \f$ , so that the position vector to 
+the moving wall is given by \f$ {\bf R}_w^*(\zeta^*,t^*)\f$ .
+
+
+@I w 0.75\textwidth collapsible_channel_sketch "Sketch of the problem. "
+
+We scale all lengths on the channel width, \f$ H^* \f$ , use the
+average velocity through the undeformed channel, 
+\f$ U =P^*_{up} H^{*2}/(12 \mu L^*_{total}) \f$ , 
+to scale the velocities, and use \f$ H^{*}/U \f$ to non-dimensionalise
+time. (As usual, we employ asterisks distinguish dimensional parameters from 
+their non-dimensional equivalents.)
+
+The flow is then governed by the unsteady Navier-Stokes equations
+\f[ 
+Re\left(St\frac{\partial u_i}{\partial t} +  
+u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right)
+ \ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes]@
+\f]
+and the continuity equation
+\f[
+\frac{\partial u_i}{\partial x_i} = 0
+ \ \ \ \ \ \ \ \ \ \ @E[Continuity]@
+\f]
+with \f$ St=1 \f$ , subject to the following boundary and initial
+conditions:
+- Initial condition: Poiseuille flow, i.e. 
+  \f[
+  {\bf u}(x_1,x_2,t=0) = {\bf u}_{Poiseuille}(x_1,x_2) =   
+  6 \ x_2 \  (1-x_2) \ {\bf e}_1.
+  \ \ \ \ \ \ \ \ \ \ @E[Poiseuille]@
+  \f]
+
+- Parallel inflow, \f$ {\bf u} \cdot {\bf e}_2 = {\bf 0}, \f$
+  and an applied axial traction of \f$ {\bf t} \cdot {\bf e}_1 = 
+  p_{up} = 12 \ L_{total} \f$ at the upstream end, \f$ x_1=0 \f$ .
+
+- Parallel, axially traction-free outflow at the downstream end, i.e.
+  \f$ {\bf u} \cdot {\bf e}_2 = {\bf 0} \f$ and  
+  \f$ {\bf t} \cdot {\bf e}_1 = p_{down} = 0  \f$ at  \f$
+  x_1=L_{total} \f$ . 
+
+- No slip on all channel walls, i.e.  \f$ {\bf u} = {\bf 0} \f$ on 
+  the rigid walls and 
+  \f[
+  {\bf u} = \frac{\partial {\bf R}_w}{\partial t}
+  \mbox{\ \ \ \ on the moving wall.}
+  \ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes_BC1]@
+  \f]
+
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+ 
+We consider a wall motion that deforms the initially "flush" wall into 
+a parabolic shape. We denote the non-dimensional  
+amplitude of the oscillation by \f$ A \f$ and its period by \f$ T \f$ ,
+and parametrise the position vector to a point on the wall by
+the Lagrangian coordinate \f$ \zeta \in [0,L_{collapsible}] \f$ as
+\f[ {\bf R}_w(\zeta,t) =
+\left(
+\begin{array}{l}
+L_{up} + \zeta  \\
+1 + A \left(\frac{2}{L_{collapsible}}\right)^2 \zeta \ (L-\zeta)
+   \ \sin(2\pi t / T)
+    \ {\cal R}(t)
+\end{array}
+\right),
+ \ \ \ \ \ \ \ \ \ \ @E[wall_shape]@
+\f]
+where the "ramp" function 
+\f[
+{\cal R}(t) =  \left\{
+\begin{array}{ll}
+\frac{1}{2}(1-\cos(\pi t/T)) & \mbox{for $t<T$} \\
+1  & \mbox{for $t \ge T$}
+\end{array}
+\right.
+\f]
+ is used 
+to facilitate the start-up of the simulation from
+the initial condition of steady Poiseuille flow. \f$ {\cal R}(t) \f$
+provides a "smooth" startup of the wall motion during the first period 
+of the oscillation.
+
+<HR>
+<HR>
+
+\section reslt The results
+
+The figure below shows a snapshot, taken from 
+<A HREF="../figures/flow.avi">the animation of the
+computational results</A>. The first four figures show (from top left to bottom
+right) "carpet plots" of the axial and transverse velocities,
+the axial component of the perturbation velocity 
+\f$ {\bf u} - {\bf u}_{Poiseuille} \f$ , and the pressure
+distribution. The 2D contour plot at the bottom
+of the figure shows a contour plot of the pressure and a few
+instantaneous streamlines.
+
+
+@I w 0.20\textwidth flow  "Snapshot from the animation of the flow field for Re = Re St = 50, T=0.45, A=0.01. " 
+
+The figures illustrate the flow structures identified in
+<A HREF="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">Jensen \& Heil's (2003)</A> asymptotic analysis of 2D channel flows 
+that are driven by high-frequency, small-amplitude oscillations of 
+a finite section of one of their walls: The flow consists of oscillatory
+axial "sloshing flows", superimposed on the mean Poiseuille
+flow that is driven by the applied pressure drop. During phases when
+the wall moves inwards (outwards) the flow generated by the moving
+wall decelerates (accelerates) the flow in the upstream region as the wall
+"injects" fluid into ("sucks" fluid out of)  the domain. Conversely, 
+in the downstream region the flow generated by the wall
+adds to the pressure-driven mean flow during phases when the wall
+moves inwards. This is shown most clearly in the plot of the
+axial velocity perturbation. In the plots shown above, the wall
+moves outwards and the axial perturbation velocity is positive
+(i.e. in the direction of the pressure-driven mean flow) 
+in the upstream region, and negative in the downstream region. 
+This is also shown in the time-traces of the velocities
+at two control points in the in- and outflow cross-sections, 
+shown in the figure below:
+
+
+@I w 0.20\textwidth trace "Time-trace of the axial velocities at two control points in the  upstream and downstream cross-sections, and the vertical position of a control point on the wall. (Re = Re St = 50, T=0.45, A=0.01.) "
+
+
+Finally, we comment that the plot of the perturbation velocities 
+confirms the two-layer structure of the sloshing flows predicted 
+in the asymptotic analysis.
+The sloshing flow comprises a blunt core flow region in which the flow is
+dominated by inertial effects while thin Stokes layers develop near the wall.
+Within these layers, the fluid viscosity reduces the axial velocity to zero. 
+The carpet plot of the pressure shows that the pressure 
+distribution is dominated by the variations induced by the oscillatory 
+sloshing  flows. For a detailed discussion of the flow structure we refer
+to <A HREF="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">
+Jensen \& Heil (2003).</A>
+
+
+
+<HR>
+<HR>
+
+\section overview Overview of the driver code
+Overall, the driver code is very similar to codes developed 
+for other moving-boundary Navier-Stokes problems, such as the
+driver code used to simulate the <A HREF="../../osc_ellipse/html/index.html">
+flow inside an oscillating ellipse.</A> The present code is slightly
+lengthier because of the traction boundary conditions
+which we impose by attaching traction elements to the upstream end of
+the mesh. (Refer to the 
+<A HREF="../../../navier_stokes/rayleigh_traction_channel/html/index.html">
+traction-driven Rayleigh problem</A> for a more detailed
+discussion of this technique.) Also, as discussed in 
+<A HREF="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">
+another example</A>, the traction elements must be removed/re-attached 
+before/after every mesh adaptation.
+
+
+The domain is discretised by the  
+<A HREF="../../../meshes/mesh_list/html/index.html#collapsible_channel">
+<CODE>CollapsibleChannelMesh</CODE></A>
+which employs the <CODE>CollapsibleChannelDomain</CODE>
+to provide a \c MacroElement - based representation of the 
+deforming domain in terms of the \c GeomObject that describes the motion 
+of the "collapsible" section of the wall (boundary 3). The sketch 
+below illustrates
+the topology and the mesh deformation: As the wall deforms, the  
+boundaries of the \c MacroElements in the "collapsible" part 
+of the \c Domain follow the wall motion.
+
+
+@I w 0.20\textwidth mesh "Sketch of the CollapsibleChannelDomain/Mesh. "
+
+The no-slip boundary conditions on the moving wall are applied
+as in the <A HREF="../../osc_ellipse/html/index.html">
+oscillating ellipse problem,</A> by executing the function
+\c FSI_functions::apply_no_slip_on_moving_wall(...)
+in \c Problem::actions_before_implicit_timestep() for all
+nodes that are located on boundary 3. 
+
+The following sections provide a complete annotated listing of the
+driver code. Most functions should already be familiar from 
+previous examples and you may want to skip straight to the
+\ref comments. 
+
+<HR>
+<HR>
+
+\section wall The moving wall 
+As usual, we represent the moving wall as a \c GeomObject and define
+its shape by implementing the pure virtual function 
+\c GeomObject::position(...). The arguments to the constructor
+specify the Eulerian coordinates of wall's left end, its
+undeformed length, the amplitude of the oscillations, 
+\f$ A \f$ , and the period of the oscillations \f$ T \f$ . We 
+also pass the pointer to a \c Time object to the constructor and 
+store it in a private data member, to 
+allow the \c position(...) functions to access the current 
+value of the continuous time. 
+The amplitude of the wall motion, and the period of its oscillations
+are stored as private data members, accessible via suitable
+member functions.
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_oscillating_wall
+\until {return T;}
+
+Since the \c GeomObject represents a moving (i.e. time-dependent)
+boundary, we implement both versions of the \c
+GeomObject::position(...) function: The "unsteady" version 
+computes the position vector at the \c t -th previous timestep.
+
+\until end of "unsteady"
+
+The version without additional argument computes the position vector
+at the present time:
+
+\until }
+
+Finally, here are the various private data members:
+
+\until end of oscillating wall
+
+[\b Note: We note that the \c OscillatingWall class
+allows the wall shape to be slightly more complicated than 
+required by (@R[wall_shape]@). If the parameter
+\c B is set to a non-zero value, the material points 
+on the wall also undergo some horizontal displacement. 
+We will use this capability in one of the exercises in 
+section \ref comments.]
+
+
+<HR>
+<HR>
+\section variables  Namespace for the "global" physical variables
+As usual, we define the problem parameters in a namespace and
+assign default values that can be overwritten if required.
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_Global_Physical_Variables
+\until  double P_up=0.0
+
+We also implement the function that defines the prescribed (axial) 
+traction at the inflow boundary.
+
+\until end of Global_Physical_Variables
+
+
+
+<HR>
+<HR>
+
+
+\section main The driver code
+\dontinclude collapsible_channel.cc
+As with most previous time-dependent codes, we use command line
+arguments to indicate if the code is run during \c oomph-lib's
+self-test. If any command line arguments are specified, we
+use a coarser discretisation and perform fewer timesteps. 
+
+After storing the command line arguments, we choose the
+number of elements in the mesh, set the lengths of the
+domain and choose the amplitude and period of the oscillation. 
+The parameter values are chosen such that the wall motion
+resembles that in the FSI simulations shown in Fig. 5 of 
+ <A HREF="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">
+Jensen \& Heil (2003).</A>
+
+\skipline start_of_driver_code
+\until  double period=0.45;
+
+We set the (non-dimensional) upstream pressure to 
+\f$ p_{up} = 12 L_{total }\f$ , 
+so that in the absence of any wall oscillation, the steady flow through the
+channel is Poiseuille flow, \f$ {\bf u} = {\bf u}_{Poiseuille} = 
+6 \ x_2 \ (1-x_2) \ {\bf e}_1 \f$ ; see \ref comments.
+\until  Global_Physical_Variables::P_up=12.0*(lup+lcollapsible+ldown);
+
+Next, we specify the output directory and build the problem with 
+refineable 2D Crouzeix Raviart Elements.
+
+\until amplitude,period);
+
+Next we set up the time-stepping parameters for a simulation 
+of three periods of the oscillation, performed with 40 timesteps
+per period. Fewer timesteps are performed 
+if the code is run in self-test mode. 
+
+\until double t_min
+
+We initialise the timestepper and set the initial conditions before
+documenting the initial condition. 
+
+\until doc_info.number()++;
+
+
+Next we set the error targets for the adaptive mesh refinement; a
+smaller target error is used when the code is run in self-test mode to ensure
+that some mesh refinement is performed during the first few timesteps.
+
+\until  }
+
+
+The timestepping loop itself is identical to that used in 
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">
+other time-dependent driver codes with adaptive mesh refinement</A>.
+During the first timestep, an arbitrary number of spatial adaptations
+may be performed, as the initial condition can be re-assigned
+on the refined mesh. (This is indicated by setting the boolean flag
+\c first to \c true when calling the spatially adaptive, 
+unsteady Newton solver.) During subsequent timesteps the need to interpolate
+the history values onto the refined mesh limits the benefits of 
+repeated mesh adaptations and we limit the number of spatial 
+adaptations per timestep to 1. 
+
+\until end of driver code
+
+<HR>
+<HR>
+
+\section problemclass The problem class 
+As usual, we template the problem class by the element type and 
+provide an access functions to the "bulk" Navier-Stokes mesh.
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_problem_class
+\until end of access to bulk mesh
+
+No action is needed before or after solving, so 
+the pure virtual functions  \c Problem::actions_before_newton_solve() and
+\c Problem::actions_after_newton_solve() can remain empty.
+
+\until actions_after_newton_solve()
+
+We will use the function \c Problem::actions_before_implicit_timestep()
+to update the no-slip boundary conditions on the moving  wall before
+each timestep and employ \c
+Problem::actions_before_adapt() and  \c Problem::actions_after_adapt()
+to wipe and rebuild the mesh of prescribed traction elements each time
+a mesh adaptation is performed. The functions
+\c Problem::doc_solution(...) and 
+\c Problem::set_initial_condition() will do what they say...
+
+\until  void doc_solution
+
+The private helper functions \c create_traction_elements(...) and \c
+delete_traction_elements() attach and remove the traction elements
+from the upstream boundary of the "bulk" Navier-Stokes mesh.
+\until void delete_traction_elements(Mesh* const &surface_mesh_pt);
+
+The private member data contains the geometric parameters
+as well as the pointer to the \c GeomObject that describes the moving
+wall.
+
+\until  Wall_pt
+
+Further private member data includes pointers to the "bulk" mesh and the
+surface mesh that contains the traction elements, and pointers to control
+nodes in the in- and outflow cross-sections.
+
+\until end of problem class
+
+
+<HR>
+<HR>
+
+\section problemcontr The problem constructor
+
+The arguments passed to the problem constructor specify the 
+number of elements and lengths of the various parts of the channel, 
+as well as the amplitude and period of the wall oscillations. 
+
+We store the parameters in the problem's private member data
+and increase the maximum permitted residual for the Newton iteration.
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_constructor
+\until  Max_residuals
+
+
+We continue by building the \c BDF<2> timestepper and pass a pointer 
+to it to  the \c Problem
+
+\until  add_time_stepper_pt(new BDF<2>);
+
+Next, we create the \c GeomObject that represents the oscillating wall, 
+and pass a pointer to it to the constructor of the 
+<A HREF="../../../meshes/mesh_list/html/index.html#collapsible_channel">
+<CODE>CollapsibleChannelMesh</CODE></A>
+
+
+
+\skipline Create
+\until time_stepper_pt()
+
+We create a second mesh to store the applied traction elements
+and attach them to the inflow boundary (boundary 5) of the "bulk" fluid 
+mesh, using the function \c create_traction_elements(...). 
+Both submeshes are then combined into a global mesh. 
+
+\skipline Create
+\until build_global_mesh();
+
+We create the spatial error estimator for the fluid mesh and loop
+over the various elements to set the pointers to the relevant physical
+parameters, first for the Navier-Stokes elements in the bulk mesh,
+
+\until end loop over bulk elements
+
+and then for the applied traction elements in the surface mesh:
+
+\until end loop over applied traction elements 
+
+We apply the boundary conditions and pin the velocity on the
+relevant mesh boundaries:
+- both axial and transverse velocities are pinned along the bottom
+  and the top boundaries (boundaries 0, 2, 3 and 4).
+- the transverse velocities are pinned along the in- and outflow boundaries
+  (boundaries 1 and 5).
+.
+
+\until pin_velocity
+
+We select two control nodes on the inflow and outflow
+boundaries to document the velocities.
+
+\until  Right_node_pt= bulk_mesh_pt()->boundary_node_pt(ibound, control_nod);
+
+Finally, we set up the equation numbering scheme.
+
+\until end of constructor
+
+
+<HR>
+<HR>  
+
+\section doc Post processing
+The function \c doc_solution(...) documents the
+results, and records the time-trace of the axial velocities
+at the two control nodes and the position of the midpoint 
+on the oscillating wall.
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_doc_solution
+\until end_of_doc_solution
+
+<HR>
+<HR>
+
+ \section tractioncre Creation of the traction elements
+The creation of the applied traction elements follows the usual 
+pattern, explained in detail 
+<A HREF="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">
+elsewhere</A>: We loop over the elements in the fluid mesh that are 
+adjacent to the specified mesh boundary, and build the corresponding 
+traction elements, which are added to the surface mesh.
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_create_traction_elements
+\until end of create_traction_elements
+
+<HR>
+<HR>
+ 
+ \section tractiondel Delete the traction elements
+Since the "bulk" elements that the applied traction elements are
+attached to may disappear during mesh adaptation, 
+we delete all traction elements before the adaptation
+and re-attach them afterwards. The deletion is performed
+by the following member function. Note that the surface mesh
+that contains the traction elements is \e not deleted, as this would 
+also delete the associated nodes which are shared with the 
+corresponding bulk elements. 
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_delete_traction_elements
+\until end of delete_traction_elements
+
+<HR>
+<HR>
+
+ \section IC Apply the initial conditions
+Initial conditions are applied as usual. We start by confirming
+that the timestepper is a member of the \c BDF family 
+and therefore operates on history values that represent 
+the solution at previous timesteps. We assign the previous
+nodal positions and velocities at all nodes, assuming that
+for \f$ t< 0 \f$ the wall is at rest and the flow field is 
+given by steady Poiseuille flow.
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_apply_initial_conditions
+\until end of set_initial_condition
+
+<HR>
+<HR>
+
+ \section beforestep Actions before the timestep
+Before each timestep, we update the nodal positions in the fluid mesh, and
+apply the no-slip condition to each node on mesh boundary 3. 
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_actions_before_implicit_timestep
+\until end of actions_before_implicit_timestep
+
+<HR>
+<HR>
+
+\section beforeadapt Actions before the mesh adaptation
+As discussed above, we delete the applied traction elements
+before performing any mesh adaptation and then
+rebuild the global mesh.
+
+\dontinclude collapsible_channel.cc
+\skipline start_of_actions_before_adapt
+\until end of actions_before_adapt
+
+<HR>
+<HR>
+
+\section beforeadapt Actions after the mesh adaptation
+Once the mesh has been adapted, we (re-)create the prescribed 
+traction elements and rebuild the global mesh. 
+We also have to pass the pointers to prescribed traction function
+to the newly created traction elements. 
+
+\skipline start_of_actions_after_adapt
+\until end of actions_after_adapt
+
+<HR>
+<HR>
+
+
+\section comments Comments and Exercises
+-# Check the non-dimensionalisation of the governing
+   equations and confirm that a (non-dimensional) upstream pressure
+   \f$ p_{up} = 12 \ L_{total} \f$ is required to drive the steady
+   Poiseuille flow specified by (@R[Poiseuille]@) through the 
+   static, undeformed channel. Use this to "validate" (well, 
+   "plausibility-check", anyway...) the code by setting the 
+   amplitude of the wall oscillation to zero.
+-# Double the upstream pressure while keeping the amplitude
+   of the wall oscillation at zero and confirm that the flow 
+   accelerates until it (asymptotically) approaches Poiseuille
+   flow with twice the initial flowrate as \f$ t \to \infty. \f$
+-# The flow field has the largest velocity gradients in the thin
+   Stokes layers near the wall, causing the automatic mesh adaptation
+   procedure to refine the mesh pre-dominantly in these regions.
+   To facilitate the resolution of such layers the
+   \c CollapsibleChannelDomain and \c CollapsibleChannelMesh 
+   allow the specification of a mapping [0,1] -> [0,1] that 
+   redistributes the nodal points in the vertical direction 
+   so that the elements near the wall become more squashed. 
+   By default the "boundary-layer squash function" is the identity
+   but it may be overloaded by specifying a function pointer to an
+   alternative function. The driver code already includes a demonstration of 
+   this capability which may be activated by compiling the driver
+   code with \c -DUSE_BL_SQUASH_FCT. This activates the code
+   segment
+   \dontinclude collapsible_channel.cc
+   \skipline ifdef USE
+   \until endif
+   in the Problem constructor. The "squash function" used for this 
+   example is defined in the following namespace:
+   \dontinclude collapsible_channel.cc
+   \skipline start_of_BL_Squash
+   \until end of BL_Squash
+   With this function 50% of the nodal points in the vertical
+   direction are located within two boundary-layer regions which
+   occupy 2 x 10% of the channel's width. The figure below
+   shows the element shapes for a (coarse) initial mesh 
+   that is used in the validation run, with and
+   without the boundary-layer squashing function:
+@I w 0.75\textwidth bl_squashing "Coarse initial meshes with and without the boundary-layer squash function. "
+   Confirm that if this "squashing function" is applied to the
+   mesh that is used during the non-self-test runs (this mesh has 16 x
+   larger number of elements than the meshes shown above), the quality of the 
+   computed solution improves so much that no subsequent
+   mesh adaptation is required.
+-# The flow structures observed during the small-amplitude
+   oscillations (shown in the animation at the beginning of this
+   document) are in perfect agreement with the structures predicted
+   by 
+   <A HREF="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">
+   Jensen \& Heil's (2003)</A> asymptotic analysis. As an exercise,
+   increase the amplitude of the wall oscillation (to \f$ A=0.5\f$ ,
+   say) to confirm that
+   the flow-structure predicted by the theory (which is strictly
+   applicable only for small-amplitude     
+   oscillations) also provides an excellent description of of the
+   system's behaviour during large-amplitude oscillations with
+   more complicated wall motions.
+   \n \n
+   For instance, the figure below shows a snapshot of the
+   <A HREF="../figures/large_amplitude_flow.avi">the animation of 
+   the computational 
+   results</A>
+   for an oscillation in which the wall undergoes a more complicated
+   motion, described by
+   \f[ {\bf R}_w(\zeta,t) =
+   \left(
+   \begin{array}{c}
+   L_{up} + \zeta  \\
+   1 
+   \end{array}
+   \right)
+   + A
+   \left(
+   \begin{array}{l}
+   - B \sin\left(\frac{2\pi}{L_{collapsible}}\zeta\right) \\
+   \left(\frac{2}{L_{collapsible}}\right)^2 \zeta \ (L-\zeta)
+   \end{array}
+   \right)   
+   \ \sin\left(\frac{2\pi t}{T}\right)
+   \ {\cal R}(t)
+   \ \ \ \ \ \ \ \ \ \ @E[wall_shape2]@
+   \f]
+   for \f$ A= B = 0.5 \f$ . For these parameter values, the wall performs
+   a large-amplitude oscillation in the course of which material particles
+   are not only displaced vertically but also in the horizontal
+   direction. Nevertheless, the flow generated by the moving wall
+   may be described as arising from the superposition of Poiseuille flow 
+   and an axial sloshing motion, the latter obviously having a 
+   much larger amplitude than in the previous case. The  
+   <A HREF="../figures/large_amplitude_flow.avi">animation of
+   the flow field</A> shows that more complex local flow features 
+   develop briefly whenever the flow separates from the wall. However,
+   the  appearance of these features does not change the macroscopic 
+   behaviour of the flow.
+@I w 0.75\textwidth large_amplitude_flow "Flow field for a large-amplitude wall motion. Re=ReSt=50; A=B=0.5; T=0.45. "
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/collapsible_channel/">
+demo_drivers/navier_stokes/collapsible_channel/
+</A>
+</CENTER>
+- The driver code is:
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/collapsible_channel/collapsible_channel.cc">
+demo_drivers/navier_stokes/collapsible_channel/collapsible_channel.cc
+</A>
+</CENTER>
+.

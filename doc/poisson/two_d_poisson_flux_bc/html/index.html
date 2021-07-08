@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: A two-dimensional Poisson problem with flux boundary conditions</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: A two-dimensional Poisson problem with flux boundary conditions </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document, we demonstrate how to solve a 2D Poisson problem with Neumann boundary conditions, using existing objects from the <code>oomph-lib</code> library: </p><center> <table class="doxtable">
+<tr>
+<td><center> <b>Two-dimensional model Poisson problem with Neumann boundary conditions</b> </center> Solve <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_0.png"/>
+</p>
+ in the rectangular domain <img class="formulaInl" alt="$ D = \left\{ (x_1,x_2) \in [0,1] \times [0,2]\right\} $" src="form_1.png"/>. The domain boundary <img class="formulaInl" alt="$ \partial D = \partial D_{Neumann} \cup \partial D_{Dirichlet} $" src="form_2.png"/>, where <img class="formulaInl" alt="$ \partial D_{Neumann} = \left\{ (x_1,x_2) | x_1=1, \ x_2\in [0,2] \right\} $" src="form_3.png"/>. On <img class="formulaInl" alt="$ \partial D_{Dirichlet} $" src="form_4.png"/> we apply the Dirichlet boundary conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. u\right|_{\partial D_{Dirichlet}}=u_0, \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_5.png"/>
+</p>
+ where the function <img class="formulaInl" alt="$ u_0 $" src="form_6.png"/> is given. On <img class="formulaInl" alt="$ \partial D_{Neumann} $" src="form_7.png"/> we apply the Neumann conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}} = \left. \frac{\partial u}{\partial x_1}\right|_{\partial D_{Neumann}} =g_0, \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_8.png"/>
+</p>
+ where the function <img class="formulaInl" alt="$ g_0 $" src="form_9.png"/> is given.   </td></tr>
+</table>
+<br  />
+ </center><p> <br  />
+</p>
+<p>We provide a detailed discussion of the driver code <a href="../../../../demo_drivers/poisson/two_d_poisson_flux_bc/two_d_poisson_flux_bc.cc">two_d_poisson_flux_bc.cc</a> which solves the problem for </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)), \ \ \ \ \ \ \ \ \ (4) \]" src="form_10.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ f(x_1,x_2) = \sum_{i=1}^2 \frac{\partial^2 u_0}{\partial x_i^2}, \ \ \ \ \ \ \ \ \ (5) \]" src="form_11.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ g_0 = \left. \frac{\partial u_0}{\partial n} \right|_{x_1=1} = \left. \frac{\partial u_0}{\partial x_1} \right|_{x_1=1}, \ \ \ \ \ \ \ \ \ (6) \]" src="form_12.png"/>
+</p>
+<p> so that <img class="formulaInl" alt="$ u_0(x_1,x_2) $" src="form_13.png"/> is the exact solution of the problem. For large values of <img class="formulaInl" alt="$ \alpha $" src="form_14.png"/> the solution approaches a step function </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_{step}(x_1,x_2) = \left\{ \begin{array}{rl} -1 &amp; \mbox {for $x_2 &lt; x_1 \ \tan\Phi$} \\ 1 &amp; \mbox {for $x_2 &gt; x_1 \ \tan\Phi$} \end{array} \right. \]" src="form_15.png"/>
+</p>
+<p> and presents a serious challenge for any numerical method. The figure below compares the numerical and exact solutions for <img class="formulaInl" alt="$ \alpha = 1 $" src="form_16.png"/> and <img class="formulaInl" alt="$ \Phi = 45^o $" src="form_17.png"/>.</p>
+<div class="image">
+<img src="soln.gif" alt=""/>
+<div class="caption">
+Plot of the solution </div></div>
+ <p>Most of the driver code is identical to the code that solves the <a href="../../../poisson/two_d_poisson/html/index.html">equivalent problem without Neumann boundary conditions</a>. Therefore we only provide a detailed discussion of those functions that needed to be changed to accommodate the Neumann boundary conditions.</p>
+<hr  />
+<p> <br  />
+ </p><hr  />
+<h1><a class="anchor" id="global"></a>
+Global parameters and functions</h1>
+<p>As in the Dirichlet problem, we define the source function (5) and the exact solution (4), together with the problem parameters <img class="formulaInl" alt="$ \tan \Phi $" src="form_18.png"/> and <img class="formulaInl" alt="$ \alpha $" src="form_14.png"/>, in a namespace <code><a class="el" href="namespaceTanhSolnForPoisson.html" title="Namespace for exact solution for Poisson equation with &quot;sharp step&quot;.">TanhSolnForPoisson</a></code>. We add the function <code>TanhSolnForPoisson::prescribed_flux_on_fixed_x_boundary(...)</code> which computes the prescribed flux <img class="formulaInl" alt="$ g_0 $" src="form_9.png"/> required in the Neumann boundary condition (3). The function evaluates <img class="formulaInl" alt="$ \partial u_0 /\partial n = {\bf N} \cdot \nabla u_0 $" src="form_19.png"/> for the normal direction specified by the vector <img class="formulaInl" alt="$ {\bf N} = (1,0)^T. $" src="form_20.png"/></p>
+ <div class="fragment"><div class="line"><span class="comment">//===== start_of_namespace=============================================</span></div>
+<div class="line"><span class="comment">/// Namespace for exact solution for Poisson equation with &quot;sharp step&quot; </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceTanhSolnForPoisson.html">TanhSolnForPoisson</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Parameter for steepness of &quot;step&quot;</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>=1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Parameter for angle Phi of &quot;step&quot;</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exact solution as a Vector</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">get_exact_u</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  u[0]=tanh(1.0-<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*(<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>*x[0]-x[1]));</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Source function required to make the solution above an exact solution </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForPoisson.html#a967bc28320e02534beb714846b63e251">source_function</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; source)</div>
+<div class="line"> {</div>
+<div class="line">  source = 2.0*tanh(-1.0+<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*(<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>*x[0]-x[1]))*</div>
+<div class="line">   (1.0-pow(tanh(-1.0+<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*(<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>*x[0]-x[1])),2.0))*</div>
+<div class="line">   <a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>+2.0*tanh(-1.0+<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*(<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>*x[0]-x[1]))*</div>
+<div class="line">   (1.0-pow(tanh(-1.0+<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*(<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>*x[0]-x[1])),2.0))*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>;</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Flux required by the exact solution on a boundary on which x is fixed</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForPoisson.html#a0e99ccf27df36f28f091de6d57484172">prescribed_flux_on_fixed_x_boundary</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, </div>
+<div class="line">                                          <span class="keywordtype">double</span>&amp; flux)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//The outer unit normal to the boundary is (1,0)</span></div>
+<div class="line">  <span class="keywordtype">double</span> N[2] = {1.0, 0.0};</div>
+<div class="line">  <span class="comment">//The flux in terms of the normal is</span></div>
+<div class="line">  flux = </div>
+<div class="line">   -(1.0-pow(tanh(-1.0+<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*(<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>*x[0]-x[1])),2.0))*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>*N[0]+(</div>
+<div class="line">   1.0-pow(tanh(-1.0+<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*(<a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanPhi</a>*x[0]-x[1])),2.0))*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*N[1];</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The driver code is very similar to that for the <a href="../../../poisson/two_d_poisson/html/index.html">pure Dirichlet problem:</a> We set up the problem, check its integrity and define the problem parameters. Following this, we solve the problem for a number of <img class="formulaInl" alt="$ \alpha $" src="form_14.png"/> values and document the solution.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==========start_of_main=================================================</span></div>
+<div class="line"><span class="comment">/// Demonstrate how to solve 2D Poisson problem with flux boundary </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// conditions</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="two__d__poisson__flux__bc_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> <span class="comment">//------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem with 2D nine-node elements from the</span></div>
+<div class="line"> <span class="comment">//QPoissonElement family. Pass pointer to source function. </span></div>
+<div class="line"> <a class="code" href="classFluxPoissonProblem.html">FluxPoissonProblem&lt;QPoissonElement&lt;2,3&gt;</a> &gt; </div>
+<div class="line">  <a class="code" href="two__d__poisson__flux__bc_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>(&amp;<a class="code" href="namespaceTanhSolnForPoisson.html#a967bc28320e02534beb714846b63e251">TanhSolnForPoisson::source_function</a>);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create label for output</span></div>
+<div class="line"> <span class="comment">//------------------------</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Step number</span></div>
+<div class="line"> doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check that we&#39;re ready to go:</span></div>
+<div class="line"> <span class="comment">//----------------------------</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\n\n\nProblem self-test &quot;</span>;</div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code" href="two__d__poisson__flux__bc_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.self_test()==0) </div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;passed: Problem can be solved.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(<span class="stringliteral">&quot;Self test failed&quot;</span>,</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the orientation of the &quot;step&quot; to 45 degrees</span></div>
+<div class="line"> <a class="code" href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanhSolnForPoisson::TanPhi</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial value for the steepness of the &quot;step&quot;</span></div>
+<div class="line"> <a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">TanhSolnForPoisson::Alpha</a>=1.0; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do a couple of solutions for different forcing functions</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------------------</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=4;</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Increase the steepness of the step:</span></div>
+<div class="line">   <a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">TanhSolnForPoisson::Alpha</a>+=2.0;</div>
+<div class="line"> </div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;\n\nSolving for TanhSolnForPoisson::Alpha=&quot;</span></div>
+<div class="line">        &lt;&lt; <a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">TanhSolnForPoisson::Alpha</a> &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Solve the problem</span></div>
+<div class="line">   <a class="code" href="two__d__poisson__flux__bc_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.newton_solve();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Output solution</span></div>
+<div class="line">   <a class="code" href="two__d__poisson__flux__bc_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Increment counter for solutions </span></div>
+<div class="line">   doc_info.number()++; </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class is virtually identical to that used for the <a href="../../../poisson/two_d_poisson/html/index.html">pure Dirichlet problem</a>: The only difference is that the class now contains an additional private data member, <code><a class="el" href="classFluxPoissonProblem.html#a1ee0cfcbc307252430a3a5ba7ab7fd6e" title="Number of Poisson &quot;bulk&quot; elements (We&#39;re attaching the flux elements to the bulk mesh --&gt; only the fi...">FluxPoissonProblem::Npoisson_elements</a></code>, which stores the number of 2D "bulk" elements in the mesh, and an additional private member function <code>FluxPoissonProblem::create_flux_elements(...)</code>. pwd</p>
+ <div class="fragment"><div class="line"><span class="comment">//========= start_of_problem_class=====================================</span></div>
+<div class="line"><span class="comment">/// 2D Poisson problem on rectangular domain, discretised with</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// 2D QPoisson elements. Flux boundary conditions are applied</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// along boundary 1 (the boundary where x=L). The specific type of </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// element is specified via the template parameter.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classFluxPoissonProblem.html">FluxPoissonProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass pointer to source function</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classFluxPoissonProblem.html#a1b57e0c67634586cb69fbeeec7874e36">FluxPoissonProblem</a>(PoissonEquations&lt;2&gt;::PoissonSourceFctPt source_fct_pt);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classFluxPoissonProblem.html#afe4848aa1478883fa4dd59abbd7c7547">~FluxPoissonProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution. DocInfo object stores flags/labels for where the</span></div>
+<div class="line"><span class="comment"> /// output gets written to</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classFluxPoissonProblem.html#ae410950b9dc1f2bd4991480df15a1586">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve: Reset boundary conditions</span></div>
+<div class="line"><span class="comment"> /// to the values from the exact solution.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classFluxPoissonProblem.html#aaea8f7f6f7a2e1aedfd2854e1ae12338">actions_before_newton_solve</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classFluxPoissonProblem.html#aa52ae9abbe805520a697929ab115f114">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Create Poisson flux elements on the b-th boundary of the </span></div>
+<div class="line"><span class="comment"> /// problem&#39;s mesh</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classFluxPoissonProblem.html#a542ce9cc1c4e17eae68d51d2e13ac0c3">create_flux_elements</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;b);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Number of Poisson &quot;bulk&quot; elements (We&#39;re attaching the flux </span></div>
+<div class="line"><span class="comment"> /// elements to the bulk mesh --&gt; only the first Npoisson_elements elements</span></div>
+<div class="line"><span class="comment"> /// in the mesh are bulk elements!)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classFluxPoissonProblem.html#a1ee0cfcbc307252430a3a5ba7ab7fd6e">Npoisson_elements</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to source function</span></div>
+<div class="line"><span class="comment"></span> PoissonEquations&lt;2&gt;::PoissonSourceFctPt <a class="code" href="classFluxPoissonProblem.html#ad003b34801b1c58b762bec0fe00b86aa">Source_fct_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+</div><!-- fragment --><p>[See the discussion of the <a href="../../../poisson/one_d_poisson/html/index.html">1D Poisson problem</a> for a more detailed discussion of the function type PoissonEquations&lt;2&gt;::PoissonSourceFctPt.]</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>The first part of the <code>Problem</code> constructor is identical to that used for the <a href="../../../poisson/two_d_poisson/html/index.html">pure Dirichlet problem</a>: We create a 2D Mesh consisting of 4x4 quadrilateral Poisson elements:</p>
+<div class="fragment"><div class="line"><span class="comment">//=======start_of_constructor=============================================</span></div>
+</div><!-- fragment --><p> <br  />
+ </p><div class="fragment"><div class="line"><span class="comment">/// Constructor for Poisson problem: Pass pointer to source function.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classFluxPoissonProblem.html#a1b57e0c67634586cb69fbeeec7874e36">FluxPoissonProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classFluxPoissonProblem.html#a1b57e0c67634586cb69fbeeec7874e36">      FluxPoissonProblem</a>(PoissonEquations&lt;2&gt;::PoissonSourceFctPt source_fct_pt)</div>
+<div class="line">       :  Source_fct_pt(source_fct_pt)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_x=4;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_y=4;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in x-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_x=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_y=2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build and assign mesh</span></div>
+<div class="line"> <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">Problem::mesh_pt</a>()=<span class="keyword">new</span> SimpleRectangularQuadMesh&lt;ELEMENT&gt;(n_x,n_y,l_x,l_y);</div>
+</div><!-- fragment --><p>Before continuing, we store the number of 2D "bulk" Poisson elements in the variable <code>FluxPoissonProblem::Npoisson_element:</code> </p>
+<div class="fragment"><div class="line"> <span class="comment">// Store number of Poisson bulk elements (= number of elements so far).</span></div>
+<div class="line"> Npoisson_elements=<a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;nelement();</div>
+</div><!-- fragment --><p>Now, we need to apply the prescribed-flux boundary condition along the Neumann boundary <img class="formulaInl" alt="$ \partial D_{Neumann} $" src="form_7.png"/>. The documentation for the <code>SimpleRectangularQuadMesh</code> shows that this boundary is mesh boundary 1. The necessary steps are performed by the function <code>create_flux_elements</code>(..), described in the section <a class="el" href="index.html#create_flux">Creating the flux elements</a> below.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Create prescribed-flux elements from all elements that are </span></div>
+<div class="line"> <span class="comment">// adjacent to boundary 1 and add them to the (single) global mesh</span></div>
+<div class="line"> create_flux_elements(1);</div>
+</div><!-- fragment --><p>The rest of the constructor is very similar to its counterpart in the <a href="../../../poisson/two_d_poisson/html/index.html">pure Dirichlet problem</a>. First we apply Dirichlet conditions on the remaining boundaries by pinning the nodal values. Next, we finish the problem setup by looping over all "bulk" Poisson elements and set the pointer to the source function. Since we have added the <code>PoissonFluxElements</code> to the <code>Mesh</code>, only the first <code>Npoisson_element</code> elements are "bulk" elements and the loop is restricted to these. We then perform a second loop over the <code>PoissonFluxElements</code> which need to be passed the pointer to the prescribed-flux function <code>TanhSolnForPoisson::prescribed_flux_on_fixed_x_boundary(...)</code>. Finally, we generate the equation numbering scheme.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here. </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_bound = <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;n_bound;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Leave nodes on boundary 1 free</span></div>
+<div class="line">   <span class="keywordflow">if</span>(b!=1)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">unsigned</span> n_node= <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;nboundary_node(b);</div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">      {</div>
+<div class="line">       <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;boundary_node_pt(b,n)-&gt;pin(0); </div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the Poisson bulk elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor: Pass pointer to source</span></div>
+<div class="line"> <span class="comment">// function</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;Npoisson_elements;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to Poisson bulk element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(<a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   el_pt-&gt;source_fct_pt() = Source_fct_pt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Total number of elements:</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element=<a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the flux elements (located at the &quot;end&quot; of the</span></div>
+<div class="line"> <span class="comment">// mesh) to pass function pointer to prescribed-flux function.</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=Npoisson_elements;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to Poisson flux element</span></div>
+<div class="line">   PoissonFluxElement&lt;ELEMENT&gt; *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>PoissonFluxElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(<a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to the prescribed flux function</span></div>
+<div class="line">   el_pt-&gt;flux_fct_pt() = </div>
+<div class="line">    &amp;<a class="code" href="namespaceTanhSolnForPoisson.html#a0e99ccf27df36f28f091de6d57484172">TanhSolnForPoisson::prescribed_flux_on_fixed_x_boundary</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="create_flux"></a>
+Creating the flux elements</h1>
+<p><code>oomph-lib</code> provides an element type <code>PoissonFluxElement</code>, which allows the application of Neumann (flux) boundary conditions along the "faces" of higher-dimensional "bulk" Poisson elements. <code>PoissonFluxElements</code> are templated by the type of the corresponding higher-dimensional "bulk" element, so that a <code>PoissonFluxElement&lt;QPoissonElement&lt;2,3&gt;</code> &gt; is a one-dimensional three-node element that applies Neumann boundary conditions along the one-dimensional edge of a nine-node quadrilateral Poisson element. Similarly, a <code>PoissonFluxElement&lt;QPoissonElement&lt;3,2&gt;</code> &gt; is a two-dimensional quadrilateral four-node element that applies Neumann boundary conditions along the two-dimensional face of a eight-node brick-shaped Poisson element; etc.</p>
+<p>The constructor of the <code>PoissonFluxElement</code> takes two arguments:</p><ul>
+<li>a pointer to the corresponding bulk element</li>
+<li>the index <code>face_index</code> of the face that is to be constructed. The convention for two-dimensional Q-type elements is that the face_index is <img class="formulaInl" alt="$ -(i+1) $" src="form_21.png"/> when the coordinate <img class="formulaInl" alt="$ s_i $" src="form_22.png"/> is fixed at its minimum value over the face and <img class="formulaInl" alt="$ +(i+1) $" src="form_23.png"/> when <img class="formulaInl" alt="$ s_i $" src="form_22.png"/> is fixed at its maximum value over the face</li>
+</ul>
+<p>The layout of the elements in the <code>SimpleRectangularQuadMesh</code> is sufficiently simple to allow the direct determination of the face index: Elements 3, 7, 11 and 15 are located next to mesh boundary 1 and along this boundary the element's local coordinate <img class="formulaInl" alt="$ s_0 $" src="form_24.png"/> has a constant (maximum) value of +1.0. Hence we need to set <code>face_index=1</code> </p>
+<p>In more complicated meshes, the determination of the face index can be more difficult (or at least very tedious), especially if a <code>Mesh</code> has been refined non-uniformly. The generic <code>Mesh</code> class therefore provides helper functions to determine the required face index for all elements adjacent to a specified <code>Mesh</code> boundary. This allows the creation of the flux elements by the following, completely generic procedure: We use the function <code>Mesh::boundary_element_pt(...)</code> to determine the "bulk" elements that are adjacent to the Neumann boundary, and obtain <code>face_index</code> from the function <code>Mesh::face_index_at_boundary(...)</code>. We pass the parameters to the constructor of the <code>PoissonFluxElement</code> and add the (pointer to) the newly created element to the <code>Problem's</code> mesh.</p>
+<div class="fragment"><div class="line"><span class="comment">//============start_of_create_flux_elements==============================</span></div>
+<div class="line"><span class="comment">/// Create Poisson Flux Elements on the b-th boundary of the Mesh</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classFluxPoissonProblem.html#a542ce9cc1c4e17eae68d51d2e13ac0c3">FluxPoissonProblem&lt;ELEMENT&gt;::create_flux_elements</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;b)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many bulk elements are adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;nboundary_element(b);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the bulk elements adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;boundary_element_pt(b,e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// What is the index of the face of the bulk element at the boundary</span></div>
+<div class="line">   <span class="keywordtype">int</span> face_index = <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;face_index_at_boundary(b,e);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Build the corresponding prescribed-flux element</span></div>
+<div class="line">   PoissonFluxElement&lt;ELEMENT&gt;* flux_element_pt = <span class="keyword">new</span> </div>
+<div class="line">   PoissonFluxElement&lt;ELEMENT&gt;(bulk_elem_pt,face_index);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Add the prescribed-flux element to the mesh</span></div>
+<div class="line">   <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;add_element_pt(flux_element_pt);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">//end of loop over bulk elements adjacent to boundary b</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of create_flux_elements</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="actions_before"></a>
+"Actions before solve"</h1>
+<p>The function <code>Problem::actions_before_newton_solve()</code> is identical to that in the <br  />
+ <a href="../../../poisson/two_d_poisson/html/index.html">pure Dirichlet problem</a> and is only listed here for the sake of completeness:</p>
+<div class="fragment"><div class="line"><span class="comment">//====================start_of_actions_before_newton_solve================</span></div>
+<div class="line"><span class="comment">/// Update the problem specs before solve: Reset boundary conditions</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// to the values from the exact solution.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classFluxPoissonProblem.html#aaea8f7f6f7a2e1aedfd2854e1ae12338">FluxPoissonProblem&lt;ELEMENT&gt;::actions_before_newton_solve</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many boundaries are there?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_bound = <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;nboundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the boundaries</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="two__d__poisson__flux__bc_8txt.html#a0212ca86d5969b023039861ae8e472f8">i</a>=0;<a class="code" href="two__d__poisson__flux__bc_8txt.html#a0212ca86d5969b023039861ae8e472f8">i</a>&lt;n_bound;<a class="code" href="two__d__poisson__flux__bc_8txt.html#a0212ca86d5969b023039861ae8e472f8">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Only update Dirichlet nodes</span></div>
+<div class="line">   <span class="keywordflow">if</span> (<a class="code" href="two__d__poisson__flux__bc_8txt.html#a0212ca86d5969b023039861ae8e472f8">i</a>!=1)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// How many nodes are there on this boundary?</span></div>
+<div class="line">     <span class="keywordtype">unsigned</span> n_node = <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;nboundary_node(<a class="code" href="two__d__poisson__flux__bc_8txt.html#a0212ca86d5969b023039861ae8e472f8">i</a>);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Loop over the nodes on boundary</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// Get pointer to node</span></div>
+<div class="line">       Node* nod_pt = <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;boundary_node_pt(<a class="code" href="two__d__poisson__flux__bc_8txt.html#a0212ca86d5969b023039861ae8e472f8">i</a>,n);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Extract nodal coordinates from node:</span></div>
+<div class="line">       Vector&lt;double&gt; x(2);</div>
+<div class="line">       x[0]=nod_pt-&gt;x(0);</div>
+<div class="line">       x[1]=nod_pt-&gt;x(1);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Compute the value of the exact solution at the nodal point</span></div>
+<div class="line">       Vector&lt;double&gt; u(1);</div>
+<div class="line">       <a class="code" href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">TanhSolnForPoisson::get_exact_u</a>(x,u);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Assign the value to the one (and only) nodal value at this node</span></div>
+<div class="line">       nod_pt-&gt;set_value(0,u[0]);</div>
+<div class="line">      }</div>
+<div class="line">    } </div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// end of actions before solve</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The post-processing, implemented in <code>doc_solution(...)</code> is similar to that in <a href="../../../poisson/two_d_poisson/html/index.html">pure Dirichlet problem</a>. However, since the <code>PoissonFluxElements</code> are auxiliary elements which are only used to apply Neumann boundary conditions on adjacent "bulk" elements, their error checking function is not implemented. We cannot use the generic <code>Mesh</code> member function <code>Mesh::compute_error()</code> to compute an overall error since this function would try to execute the "broken virtual" function <code>GeneralisedElement::compute_error(...)</code>; see the section <a class="el" href="index.html#exercises">Exercises and Comments</a> for a more detailed discussion of "broken virtual" functions. Error checking would therefore have to be implemented "by hand" (excluding the <code>PoissonFluxElements</code>), or a suitable error measure would have to be defined in the <code>PoissonFluxElements</code>.</p>
+<p>We do not pursue either approach here because the difficulty is a direct consequence of our (questionable) decision to include elements of different types in the same <code>Mesh</code> object. While this is perfectly "legal" and often convenient, the practice introduces additional difficulties in refineable problems and we shall demonstrate <a href="../../../poisson/two_d_poisson_flux_bc2/html/index.html">an alternative approach in another example</a>.</p>
+<div class="fragment"><div class="line"><span class="comment">//=====================start_of_doc=======================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution: doc_info contains labels/output directory etc.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classFluxPoissonProblem.html#ae410950b9dc1f2bd4991480df15a1586">FluxPoissonProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> <a class="code" href="two__d__poisson__flux__bc_8txt.html#a844fc4763d586f380d443a31d47359d9">sprintf</a>(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> <a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> <a class="code" href="two__d__poisson__flux__bc_8txt.html#a844fc4763d586f380d443a31d47359d9">sprintf</a>(filename,<span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;Npoisson_elements;e++)</div>
+<div class="line">  {</div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(<a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;element_pt(e));</div>
+<div class="line">   el_pt-&gt;output_fct(some_file,npts,<a class="code" href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">TanhSolnForPoisson::get_exact_u</a>); </div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Can&#39;t use black-box error computatation routines because</span></div>
+<div class="line"> <span class="comment">// the mesh contains two different types of elements. </span></div>
+<div class="line"> <span class="comment">// error function hasn&#39;t been implemented for the prescribed</span></div>
+<div class="line"> <span class="comment">// flux elements...</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="exercises"></a>
+Exercises and Comments</h1>
+<ol type="1">
+<li>What happens if you do not create the <code>PoissonFluxElements</code> but leave the nodes on the Neumann boundary un-pinned? Compare the computational result to those obtained when you set the prescribed flux to zero, <img class="formulaInl" alt="$ g_0 = 0 $" src="form_25.png"/>. Does this make sense? [Hint: Remember the "natural" boundary conditions for Poisson's equation].</li>
+<li>Try to compute the error of the computed solution by re-instating the global error checking procedure <div class="fragment"><div class="line"><span class="comment">// Doc error and return of the square of the L2 error</span></div>
+<div class="line"><span class="comment">//---------------------------------------------------</span></div>
+<div class="line"><span class="keywordtype">double</span> <a class="code" href="two__d__poisson__flux__bc_8txt.html#a6c0114d61baf5bb53ca063e763b7517a">error</a>,<a class="code" href="two__d__poisson__flux__bc_8txt.html#a3bb09fda90c0006dbfa90d31248da3db">norm</a>;</div>
+<div class="line"><a class="code" href="two__d__poisson__flux__bc_8txt.html#a844fc4763d586f380d443a31d47359d9">sprintf</a>(filename,<span class="stringliteral">&quot;%s/error%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">        doc_info.number());</div>
+<div class="line">some_file.open(filename);</div>
+<div class="line"><a class="code" href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a>()-&gt;compute_error(some_file,<a class="code" href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">TanhSolnForPoisson::get_exact_u</a>,</div>
+<div class="line">                         <a class="code" href="two__d__poisson__flux__bc_8txt.html#a6c0114d61baf5bb53ca063e763b7517a">error</a>,<a class="code" href="two__d__poisson__flux__bc_8txt.html#a3bb09fda90c0006dbfa90d31248da3db">norm</a>); </div>
+<div class="line">some_file.close();</div>
+</div><!-- fragment --> in <code>doc_solution(...)</code>. What happens when you run the code? The code's behaviour illustrates a general convention in <code>oomph-lib</code>: <table class="doxtable">
+<tr>
+<td bgcolor="cornsilk"><center><b><a class="anchor" id="broken_virtual"></a>A general convention</b></center> Some <code>oomph-lib</code> functions, such as <code>GeneralisedElement::compute_error(...)</code>, are defined as virtual functions in a base class to allow the implementation of generic procedures such as <code>Mesh::compute_error(...)</code>, which loops over all of the <code>Mesh's</code> constituent elements and executes their specific <code>compute_error(...)</code> member functions. In some rare cases (such as the one encountered here), the implementation of a particular virtual function might not be sensible for a specific element. Therefore, rather than forcing the "element-writer" to implement a dummy version of this function in his/her derived class (by declaring it as a pure virtual function in the base class), we provide a <b> "broken virtual" </b> implementation in <code>GeneralisedElement</code>. If the function is (re-)implemented in a derived element, the broken version is ignored; if the function is not overloaded, the broken virtual function throws an error, allowing a traceback in a debugger to find out where the broken function was called from. We note that this practice is not universally approved of in the C++ community but we believe it to have its place in situations such as the one described here. <br  />
+ <br  />
+ <br  />
+ Incidentally, the code discussed above contains another (possibly more convincing) example of why "broken virtual" functions can be useful. Recall that the creation of the <code>PoissonFluxElements</code> on the Neumann boundary was greatly facilitated by the availability of the helper functions <code>Mesh::boundary_element_pt(...)</code> and <br  />
+ <code>Mesh::face_index_at_boundary(...)</code>. These functions are implemented in the generic <code>Mesh</code> base class and determine the relevant parameters via lookup schemes that are stored in that class. Obviously, the lookup schemes need to be set up when a specific <code>Mesh</code> is built and this task can involve a considerable amount of work (see also <a class="el" href="index.html#footnote">Setting up the boundary lookup schemes</a>). Since the lookup schemes are useful but by no means essential, the three helper functions are again implemented as broken virtual functions. If the functions are called before the required lookup schemes have been set up, code execution stops with a suitable warning message.   </td></tr>
+</table>
+</li>
+<li>Implement the error computation by hand to familiarise yourself with the way in which the <code>Mesh::compute_error(...)</code> function works.</li>
+</ol>
+<hr  />
+ <h2><a class="anchor" id="footnote"></a>
+Setting up the boundary lookup schemes</h2>
+<p><code>oomph-lib</code> provides a range of helper functions that set up the boundary lookup schemes for specific <code>Mesh</code> classes. For instance, the <code>QuadMeshBase</code> class forms a base class for all <code>Meshes</code> that consist of two-dimensional quadrilateral elements and has a member function <code>QuadMeshBase::setup_boundary_element_info()</code> which can be called from the constructor of any derived <code>Mesh</code> class to set up the lookup schemes required by <code>Mesh::boundary_element_pt(...)</code> and <code>Mesh::face_index_at_boundary(...)</code>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/poisson/two_d_poisson_flux_bc/">demo_drivers/poisson/two_d_poisson_flux_bc/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/poisson/two_d_poisson_flux_bc/two_d_poisson_flux_bc.cc">demo_drivers/poisson/two_d_poisson_flux_bc/two_d_poisson_flux_bc.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_a967bc28320e02534beb714846b63e251"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#a967bc28320e02534beb714846b63e251">TanhSolnForPoisson::source_function</a></div><div class="ttdeci">void source_function(const Vector&lt; double &gt; &amp;x, double &amp;source)</div><div class="ttdoc">Source function required to make the solution above an exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00060">two_d_poisson_flux_bc.cc:60</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_a785ccd00a727125a5138fbbcac173294"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#a785ccd00a727125a5138fbbcac173294">TanhSolnForPoisson::TanPhi</a></div><div class="ttdeci">double TanPhi</div><div class="ttdoc">Parameter for angle Phi of &quot;step&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00051">two_d_poisson_flux_bc.cc:51</a></div></div>
+<div class="ttc" id="aclassFluxPoissonProblem_html_ad003b34801b1c58b762bec0fe00b86aa"><div class="ttname"><a href="classFluxPoissonProblem.html#ad003b34801b1c58b762bec0fe00b86aa">FluxPoissonProblem::Source_fct_pt</a></div><div class="ttdeci">PoissonEquations&lt; 2 &gt;::PoissonSourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00127">two_d_poisson_flux_bc.cc:127</a></div></div>
+<div class="ttc" id="aclassFluxPoissonProblem_html_a542ce9cc1c4e17eae68d51d2e13ac0c3"><div class="ttname"><a href="classFluxPoissonProblem.html#a542ce9cc1c4e17eae68d51d2e13ac0c3">FluxPoissonProblem::create_flux_elements</a></div><div class="ttdeci">void create_flux_elements(const unsigned &amp;b)</div><div class="ttdoc">Create Poisson flux elements on the b-th boundary of the problem's mesh.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00221">two_d_poisson_flux_bc.cc:221</a></div></div>
+<div class="ttc" id="aclassFluxPoissonProblem_html"><div class="ttname"><a href="classFluxPoissonProblem.html">FluxPoissonProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00093">two_d_poisson_flux_bc.cc:93</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_a0e99ccf27df36f28f091de6d57484172"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#a0e99ccf27df36f28f091de6d57484172">TanhSolnForPoisson::prescribed_flux_on_fixed_x_boundary</a></div><div class="ttdeci">void prescribed_flux_on_fixed_x_boundary(const Vector&lt; double &gt; &amp;x, double &amp;flux)</div><div class="ttdoc">Flux required by the exact solution on a boundary on which x is fixed.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00069">two_d_poisson_flux_bc.cc:69</a></div></div>
+<div class="ttc" id="aclassFluxPoissonProblem_html_aa52ae9abbe805520a697929ab115f114"><div class="ttname"><a href="classFluxPoissonProblem.html#aa52ae9abbe805520a697929ab115f114">FluxPoissonProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00115">two_d_poisson_flux_bc.cc:115</a></div></div>
+<div class="ttc" id="atwo__d__poisson__flux__bc_8txt_html_a0212ca86d5969b023039861ae8e472f8"><div class="ttname"><a href="two__d__poisson__flux__bc_8txt.html#a0212ca86d5969b023039861ae8e472f8">i</a></div><div class="ttdeci">1}^2 \frac{\partial^2u}{\partial x_i^2}=f(x_1, x_2), \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@ \f] in the rectangular domain \f$ D=\left\{(x_1, x_2) \in[0, 1] \times[0, 2]\right\} \f$. The domain boundary \f$ \partial D=\partial D_{Neumann} \cup \partial D_{Dirichlet} \f$, where \f$ \partial D_{Neumann}=\left\{(x_1, x_2)|x_1=1, \ x_2\in[0, 2] \right\} \f$. On \f$ \partial D_{Dirichlet} \f$ we apply the Dirichlet boundary conditions \f[\left. u\right|_{\partial D_{Dirichlet}}=u_0, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@ \f] where the function \f$ u_0 \f$ is given. On \f$ \partial D_{Neumann} \f$ we apply the Neumann conditions \f[\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}=\left. \frac{\partial u}{\partial x_1}\right|_{\partial D_{Neumann}}=g_0, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson_fluxBC]@ \f] where the function \f$ g_0 \f$ is given.&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; We provide a detailed discussion of the driver code&lt; A HREF=&quot;../../../../demo_drivers/poisson/two_d_poisson_flux_bc/two_d_poisson_flux_bc.cc&quot;&gt; two_d_poisson_flux_bc.cc&lt;/A &gt; which solves the problem for \f[u_0(x_1, x_2)=\tanh(1-\alpha(x_1 \tan\Phi - x_2)), \ \ \ \ \ \ \ \ \ @E[ExactSoln]@ \f] \f[f(x_1, x_2)=\sum_{i=1}^2 \frac{\partial^2 u_0}{\partial x_i^2}, \ \ \ \ \ \ \ \ \ @E[SourceFct]@ \f] and \f[g_0=\left. \frac{\partial u_0}{\partial n} \right|_{x_1=1}=\left. \frac{\partial u_0}{\partial x_1} \right|_{x_1=1}, \ \ \ \ \ \ \ \ \ @E[FluxFct]@ \f] so that \f$ u_0(x_1, x_2) \f$ is the exact solution of the problem. For large values of \f$ \alpha \f$ the solution approaches a step function \f[u_{step}(x_1, x_2)=\left\{ \begin{array}{rl} -1 &amp;\mbox {for $x_2&lt; x_1 \ \tan\Phi$} \\ 1 &amp;\mbox {for $x_2 &gt; x_1 \ \tan\Phi$} \end{array} \right. \f] and presents a serious challenge for any numerical method. The figure below compares the numerical and exact solutions for \f$ \alpha=1 \f$ and \f$ \Phi=45^o \f$. @I w 0.75\textwidth soln &quot;Plot of the solution &quot; Most of the driver code is identical to the code that solves the&lt; A HREF=&quot;../../../poisson/two_d_poisson/html/index.html&quot;&gt; equivalent problem without Neumann boundary conditions&lt;/A &gt;. Therefore we only provide a detailed discussion of those functions that needed to be changed to accommodate the Neumann boundary conditions.&lt; HR &gt;&lt; HR &gt; \section global Global parameters and functions As in the Dirichlet problem, we define the source function( @R[SourceFct]@) and the exact solution( @R[ExactSoln]@), together with the problem parameters \f$ \tan \Phi \f$ and \f$ \alpha \f$, in a namespace \c TanhSolnForPoisson. We add the function \c TanhSolnForPoisson::prescribed_flux_on_fixed_x_boundary(...) which computes the prescribed flux \f$ g_0 \f$ required in the Neumann boundary condition( @R[2DPoisson_fluxBC]@). The function evaluates \f$ \partial u_0/\partial n={\bf N} \cdot \nabla u_0 \f$ for the normal direction specified by the vector \f$ {\bf N}=(1, 0)^T. \f$ \dontinclude two_d_poisson_flux_bc.cc \skipline start_of_namespace \until end of namespace&lt; HR &gt;&lt; HR &gt; \section main The driver code The driver code is very similar to that for the&lt; A HREF=&quot;../../../poisson/two_d_poisson/html/index.html&quot;&gt;pure Dirichlet problem:&lt;/A &gt; We set up the problem, check its integrity and define the problem parameters. Following this, we solve the problem for a number of \f$ \alpha \f$ values and document the solution. \dontinclude two_d_poisson_flux_bc.cc \skipline start_of_main \until end of main&lt; HR &gt;&lt; HR &gt; \section problem The problem class The problem class is virtually identical to that used for the&lt; A HREF=&quot;../../../poisson/two_d_poisson/html/index.html&quot;&gt;pure Dirichlet problem&lt;/A &gt;:The only difference is that the class now contains an additional private data member, \c FluxPoissonProblem::Npoisson_elements, which stores the number of 2D &quot;bulk&quot; elements in the mesh, and an additional private member function \c FluxPoissonProblem::create_flux_elements(...). pwd \dontinclude two_d_poisson_flux_bc.cc \skipline start_of_problem_class \until end of problem class[See the discussion of the&lt; A HREF=&quot;../../../poisson/one_d_poisson/html/index.html&quot;&gt; 1D Poisson problem&lt;/A &gt; for a more detailed discussion of the function type PoissonEquations&lt; 2 &gt;::PoissonSourceFctPt.]&lt; HR &gt;&lt; HR &gt; \section constructor The Problem constructor The first part of the \c Problem constructor is identical to that used for the&lt; A HREF=&quot;../../../poisson/two_d_poisson/html/index.html&quot;&gt;pure Dirichlet problem&lt;/A &gt;:We create a 2D Mesh consisting of 4x4 quadrilateral Poisson elements:\skipline start_of_constructor \until mesh_pt Before continuing, we store the number of 2D &quot;bulk&quot; Poisson elements in the variable \c FluxPoissonProblem::Npoisson_element:\skipline Store \until Npoisson Now, we need to apply the prescribed-flux boundary condition along the Neumann boundary \f$ \partial D_{Neumann} \f$. The documentation for the \c SimpleRectangularQuadMesh shows that this boundary is mesh boundary 1. The necessary steps are performed by the function \c create_flux_elements(..), described in the section \ref create_flux below. \skipline Create prescribed \until create_flux The rest of the constructor is very similar to its counterpart in the&lt; A HREF=&quot;../../../poisson/two_d_poisson/html/index.html&quot;&gt;pure Dirichlet problem&lt;/A &gt;. First we apply Dirichlet conditions on the remaining boundaries by pinning the nodal values. Next, we finish the problem setup by looping over all &quot;bulk&quot; Poisson elements and set the pointer to the source function. Since we have added the \c PoissonFluxElements to the \c Mesh, only the first \c Npoisson_element elements are &quot;bulk&quot; elements and the loop is restricted to these. We then perform a second loop over the \c PoissonFluxElements which need to be passed the pointer to the prescribed-flux function \c TanhSolnForPoisson::prescribed_flux_on_fixed_x_boundary(...). Finally, we generate the equation numbering scheme. \skipline Set the boundary \until end of constructor&lt; HR &gt;&lt; HR &gt; \section create_flux Creating the flux elements \c oomph-lib provides an element type \c PoissonFluxElement, which allows the application of Neumann(flux) boundary conditions along the &quot;faces&quot; of higher-dimensional &quot;bulk&quot; Poisson elements. \c PoissonFluxElements are templated by the type of the corresponding higher-dimensional &quot;bulk&quot; element, so that a \c PoissonFluxElement&lt; QPoissonElement&lt; 2, 3 &gt; &gt; is a one-dimensional three-node element that applies Neumann boundary conditions along the one-dimensional edge of a nine-node quadrilateral Poisson element. Similarly, a \c PoissonFluxElement&lt; QPoissonElement&lt; 3, 2 &gt; &gt; is a two-dimensional quadrilateral four-node element that applies Neumann boundary conditions along the two-dimensional face of a eight-node brick-shaped Poisson element i</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8txt_source.html#l00210">two_d_poisson_flux_bc.txt:210</a></div></div>
+<div class="ttc" id="atwo__d__poisson__flux__bc_8txt_html_a3bb09fda90c0006dbfa90d31248da3db"><div class="ttname"><a href="two__d__poisson__flux__bc_8txt.html#a3bb09fda90c0006dbfa90d31248da3db">norm</a></div><div class="ttdeci">see the section ref exercises for a more detailed discussion of broken virtual functions Error checking would therefore have to be implemented by or a suitable error measure would have to be defined in the c PoissonFluxElements We do not pursue either approach here because the difficulty is a direct consequence of the practice introduces additional difficulties in refineable problems and we shall demonstrate&lt; A HREF=&quot;../../../poisson/two_d_poisson_flux_bc2/html/index.html&quot;&gt; an alternative approach in another example&lt;/A &gt; skipline start_of_doc until end of doc&lt; HR &gt;&lt; HR &gt; section exercises Exercises and Comments but leave the nodes on the Neumann boundary un pinned Compare the computational result to those obtained when you set the prescribed flux to f norm</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8txt_source.html#l00306">two_d_poisson_flux_bc.txt:306</a></div></div>
+<div class="ttc" id="aclassFluxPoissonProblem_html_aaea8f7f6f7a2e1aedfd2854e1ae12338"><div class="ttname"><a href="classFluxPoissonProblem.html#aaea8f7f6f7a2e1aedfd2854e1ae12338">FluxPoissonProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve: Reset boundary conditions to the values from the exact solutio...</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00254">two_d_poisson_flux_bc.cc:254</a></div></div>
+<div class="ttc" id="atwo__d__poisson__flux__bc_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="two__d__poisson__flux__bc_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00339">two_d_poisson_flux_bc.cc:339</a></div></div>
+<div class="ttc" id="atwo__d__poisson__flux__bc_8txt_html_a844fc4763d586f380d443a31d47359d9"><div class="ttname"><a href="two__d__poisson__flux__bc_8txt.html#a844fc4763d586f380d443a31d47359d9">sprintf</a></div><div class="ttdeci">sprintf(filename,&quot;%s/error%i.dat&quot;, doc_info.directory().c_str(), doc_info.number())</div></div>
+<div class="ttc" id="aclassFluxPoissonProblem_html_a1ee0cfcbc307252430a3a5ba7ab7fd6e"><div class="ttname"><a href="classFluxPoissonProblem.html#a1ee0cfcbc307252430a3a5ba7ab7fd6e">FluxPoissonProblem::Npoisson_elements</a></div><div class="ttdeci">unsigned Npoisson_elements</div><div class="ttdoc">Number of Poisson &quot;bulk&quot; elements (We're attaching the flux elements to the bulk mesh --&gt; only the fi...</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00124">two_d_poisson_flux_bc.cc:124</a></div></div>
+<div class="ttc" id="atwo__d__poisson__flux__bc_8txt_html_a7c73c0d381a5a4a7df3d1c1e0e1e7d0c"><div class="ttname"><a href="two__d__poisson__flux__bc_8txt.html#a7c73c0d381a5a4a7df3d1c1e0e1e7d0c">mesh_pt</a></div><div class="ttdeci">mesh_pt() -&gt; compute_error(some_file, TanhSolnForPoisson::get_exact_u, error, norm)</div></div>
+<div class="ttc" id="atwo__d__poisson__flux__bc_8txt_html_a6c0114d61baf5bb53ca063e763b7517a"><div class="ttname"><a href="two__d__poisson__flux__bc_8txt.html#a6c0114d61baf5bb53ca063e763b7517a">error</a></div><div class="ttdeci">endcode in c doc_solution(...). What happens when you run the code? The code 's behaviour illustrates a general convention in \c oomph-lib if the function is not the virtual broken function throws an error</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8txt_source.html#l00338">two_d_poisson_flux_bc.txt:338</a></div></div>
+<div class="ttc" id="atwo__d__poisson__flux__bc_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="two__d__poisson__flux__bc_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8txt_source.html#l00003">two_d_poisson_flux_bc.txt:3</a></div></div>
+<div class="ttc" id="aclassFluxPoissonProblem_html_afe4848aa1478883fa4dd59abbd7c7547"><div class="ttname"><a href="classFluxPoissonProblem.html#afe4848aa1478883fa4dd59abbd7c7547">FluxPoissonProblem::~FluxPoissonProblem</a></div><div class="ttdeci">~FluxPoissonProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00102">two_d_poisson_flux_bc.cc:102</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_ae676ccd186d5df119cce811596d949c1"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">TanhSolnForPoisson::Alpha</a></div><div class="ttdeci">double Alpha</div><div class="ttdoc">Parameter for steepness of &quot;step&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00048">two_d_poisson_flux_bc.cc:48</a></div></div>
+<div class="ttc" id="aclassFluxPoissonProblem_html_ae410950b9dc1f2bd4991480df15a1586"><div class="ttname"><a href="classFluxPoissonProblem.html#ae410950b9dc1f2bd4991480df15a1586">FluxPoissonProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution: doc_info contains labels/output directory etc.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00296">two_d_poisson_flux_bc.cc:296</a></div></div>
+<div class="ttc" id="aclassFluxPoissonProblem_html_a1b57e0c67634586cb69fbeeec7874e36"><div class="ttname"><a href="classFluxPoissonProblem.html#a1b57e0c67634586cb69fbeeec7874e36">FluxPoissonProblem::FluxPoissonProblem</a></div><div class="ttdeci">FluxPoissonProblem(PoissonEquations&lt; 2 &gt;::PoissonSourceFctPt source_fct_pt)</div><div class="ttdoc">Constructor: Pass pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00138">two_d_poisson_flux_bc.cc:138</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html">TanhSolnForPoisson</a></div><div class="ttdoc">Namespace for exact solution for Poisson equation with &quot;sharp step&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00044">two_d_poisson_flux_bc.cc:44</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_af7896e9c18ce6438c73ae2a875e8b7de"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">TanhSolnForPoisson::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__poisson__flux__bc_8cc_source.html#l00054">two_d_poisson_flux_bc.cc:54</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:04:14
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

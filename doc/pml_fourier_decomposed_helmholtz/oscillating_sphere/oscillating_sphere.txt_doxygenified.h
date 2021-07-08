@@ -1,0 +1,743 @@
+/**
+
+\mainpage Example problem: The azimuthally Fourier-decomposed 3D Helmholtz equation and the use of perfectly matched layers
+
+In this document we discuss the finite-element-based solution of the
+the Helmholtz equation in cylindrical polar coordinates, using
+a Fourier-decomposition of the solution in the azimuthal
+direction and with perfectly matched layers.
+
+Compared to the Fourier-decomposed Helmholtz equation discussed in
+<a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">
+another tutorial, </a> the formulation used here allows the
+imposition of the Sommerfeld radiation condition by means of 
+so-called  "perfectly matched layers" (PMLs) as an alternative 
+to classical absorbing/approximate boundary conditions or DtN maps.
+
+We start by reviewing the relevant theory and then present the
+solution of a simple model problem - the outward propagation of waves
+from the surface of a unit sphere.
+
+
+<TABLE border=0>
+<TR>
+<TD>
+<CENTER class="panel panel-success">
+<div class="panel-heading"><B>Acknowledgements</B></div><div class="panel-body">This tutorial and the associated driver codes were developed jointly
+with Matthew Walker (The University of Manchester), with financial
+support from Thales Underwater Ltd.
+</div></CENTER>
+
+</TD>
+</TR>
+</TABLE>
+
+<HR>
+
+\section theory Theory: The azimuthally Fourier-decomposed Helmholtz equation
+
+The Helmholtz equation governs time-harmonic solutions of problems
+governed by the linear wave equation
+\f[
+\nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2},
+ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\f]
+where \f$ c \f$ is the wavespeed. Assuming that \f$ U(x,y,z,t) \f$
+is time-harmonic, with frequency \f$ \omega \f$, we write the real
+function \f$ U(x,y,z,t) \f$ as
+\f[
+U(x,y,z,t) = Re (u(x,y,z) \ e^{-i \omega t})
+ \ \ \ \ \ \ \ \ \ \ \ \ (2)
+\f]
+where \f$ u(x,y,z) \f$ is complex-valued. This transforms 
+(1) into the Helmholtz equation
+\f[
+\nabla^2 u(x,y,z) + k^2 u(x,y,z) = 0 \ ,
+ \ \ \ \ \ \ \ \ \ \ \ \ (3)
+\f]
+where \f$ k = \omega/c \f$ is the wavenumber. Like other elliptic PDEs the Helmholtz equation
+admits Dirichlet, Neumann (flux) and Robin boundary conditions.
+
+If the equation is solved in an unbounded spatial domain (e.g. in scattering
+problems) the solution must also satisfy the so-called
+<a href="http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition">
+Sommerfeld radiation condition</a>, which in 3D has the form
+\f[
+\lim_{r\to \infty} r \left(\frac{\partial u}{\partial r} - iku
+\right) =0. 
+\f]
+Mathematically, this condition is required to ensure the uniqueness
+of the solution (and hence the well-posedness of the problem).
+In a physical context, such as a scattering problem, the condition 
+ensures that scattering of an incoming wave only produces outgoing not 
+incoming waves from infinity.
+
+  These equations can be solved using \c oomph-lib's cartesian
+Helmholtz elements, described in  
+<a href="../../../helmholtz/scattering/html/index.html">another
+tutorial.</a> Here we consider an alternative approach in which we
+solve the equations in cylindrical polar coordinates \f$ (r,\varphi,z)
+\f$, related to the cartesian coordinates \f$ (x,y,z) \f$ via
+\f[
+x =  r \cos(\varphi),
+\f]
+\f[
+y =  r \sin(\varphi),
+\f]
+\f[
+z = z.
+\f]
+We then decompose the solution into its Fourier components by writing
+\f[
+u(r,\varphi,z) = \sum_{N=-\infty}^{\infty} u_N(r,z) \exp({\rm i}
+N \varphi).
+\f]
+Since the governing equations are linear we can compute each Fourier
+component \f$ u_N(r,z) \f$ individually by solving
+\f[
+\nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ (4)
+\f]
+while specifying the Fourier wavenumber \f$ N \f$ as a parameter.
+
+<HR>
+
+\section discr Discretisation by finite elements
+The discretisation of the Fourier-decomposed Helmholtz equation itself 
+only requires a trivial modification of its 
+<a href="../../../helmholtz/scattering/html/index.html">cartesian
+counterpart</a>. Since most practical 
+applications of the Helmholtz equation involve complex-valued
+solutions, we provide separate storage for the real and imaginary
+parts of the solution -- each \c Node therefore stores two unknowns 
+values. By default,the real and imaginary parts are stored as values 
+0 and 1, respectively;
+
+The application of Dirichlet and Neumann boundary conditions is 
+straightforward and follows the pattern employed for the solution
+of the Poisson equation: 
+- Dirichlet conditions are imposed by pinning the relevant nodal
+  values and setting them to the appropriate prescribed values. 
+  
+- Neumann (flux) boundary conditions are imposed via 
+  \c FaceElements (here the \c PMLFourierDecomposedHelmholtzFluxElements). 
+   <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
+  As usual</a> we attach these to the faces of the "bulk" elements
+  that are subject to the Neumann boundary conditions.
+.
+
+The imposition of the Sommerfeld radiation condition for problems in
+infinite domains is slightly more complicated.  In the next section we
+will discuss a method of representing the Sommerfeld radiation
+condition numerically by means of perfectly matched layers.
+
+<HR>
+
+\section pml Perfectly matched layers
+
+The idea behind perfectly matched layers is illustrated in the
+figure below. The actual physical/mathematical problem 
+has to be solved in the infinite domain \f$ D \f$ (shown on the left), 
+with the Sommerfeld radiation condition ensuring the suitable decay 
+of the solution at large distances from the region of interest 
+(the vicinity of the scatterer, say).
+
+If computations are performed in a finite computational domain, \f$
+D_c \f$ , (shown in the middle), spurious wave reflections are likely to  
+be generated at the artificial boundary \f$
+\partial D_c \f$ of the computational domain.
+
+The idea behind PML methods is to surround the actual computational
+domain \f$ D_c \f$ with a layer of "absorbing" material whose
+properties are chosen such that the outgoing waves are absorbed 
+within it, without creating any artificial reflected waves at the interface
+between the PML layer and the computational domain.
+
+Our implementation of the perfectly matched layers follows the
+development in 
+<a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">
+A. Bermudez, L. Hervella-Nieto, A. Prieto, and 
+R. Rodriguez "An optimal perfectly matched layer with unbounded 
+absorbing function for time-harmonic acoustic scattering problems"
+Journal of Computational Physics <b>223</b> 469-488 (2007)</a>
+and we assume the boundaries of the computational domain to be aligned
+with the coordinate axes, as shown in the sketch below.
+
+The method requires a slight further generalisation of the equations, 
+achieved by introducing the complex coordinate mapping  
+\f[
+\frac{\partial}{\partial x_j} \to \frac{1}{s_j(x_j)} \frac{\partial}{\partial x_j} 
+ \ \ \ \ \mbox{where $j ="r","z"$} \ \ \ \ \ \ \ \ (5)
+\f]
+within the perfectly matched layers. The choice of 
+\f$ s_r(r) \f$  and \f$ s_z(z) \f$ depends on the orientation of the 
+PML layer. Since we are restricting ourselves to axis-aligned
+mesh boundaries we distinguish three different cases
+
+- For layers that are aligned with the r axis (such as the top
+  and bottom PML layers) we set 
+  \f[
+  s_z(z)  = 
+  1 +\frac{i}{k}\ \sigma_{z}(z) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{z}(z)  =  \frac{1}{|Z_{PML}-z|}, \ \ \ \ \ 
+  (6)
+  \f] 
+  where \f$ Z_{PML} \f$ is the z-coordinate of the outer boundary
+  of the PML layer, and
+  \f[
+   s_r(r) = 1.
+  \f] 
+  
+- For the right layer that is aligned with the z axis we set 
+  \f[ 
+  s_z(z) = 1,
+  \f] 
+  and
+  \f[
+  s_r(r) = 
+  1+\frac{i}{k} \ \sigma_{r}(r) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{r}(r)  =  \frac{1}{|R_{PML}-r|}, \ \ \ \ \ 
+  (7)
+  \f]
+  where \f$ R_{PML} \f$ is the r-coordinate of the outer boundary
+  of the PML layer.
+  
+- In corner regions that are bounded by two axis-aligned PML layers
+  (with outer coordinates \f$ R_{PML} \f$ and  
+  \f$ Z_{PML} \f$) we set
+  \f[
+  s_r(r)  = 
+  1 +\frac{i}{k}\ \sigma_{r}(r) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{r}(r)  =  \frac{1}{|R_{PML}-r|} \ \ \ \ \ 
+  (8)
+  \f]
+  and
+  \f[
+  s_z(z) = 
+  1+\frac{i}{k} \ \sigma_{z}(z) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{z}(z)  =  \frac{1}{|Z_{PML}-z|}. \ \ \ \ \ 
+  (9)
+  \f]
+  
+- Finally, in the actual computational domain (outside
+  the PML layers) we set
+  \f[
+  s_r(r) =   s_z(z) = 1.
+  \f]
+.
+
+
+<HR>
+
+\section impl Implementation within oomph-lib
+
+The finite-element-discretised equations (modified by the PML terms 
+discussed above) are implemented in the 
+\c PMLFourierDecomposedHelmholtzEquations class. 
+As usual, we provide 
+fully functional elements by combining these with geometric
+finite elements (from the Q and T families -- corresponding (in 2D)
+to triangles and quad elements). By default, the PML modifications
+are disabled, i.e.  \f$ s_{r}(r) \f$ and \f$ s_{z}(z) \f$ are both
+set to 1.
+
+  The generation of suitable 2D PML meshes along the axis-aligned
+boundaries of a given bulk mesh is facilitated by helper
+functions which automatically erect layers of (quadrilateral)
+PML elements. The layers are built from 
+\c QPMLFourierDecomposedHelmholtzElement<NNODE_1D> elements and
+the parameter \c NNODE_1D is automatically chosen to match that of
+the elements in the bulk mesh. The bulk mesh can contain quads or triangles
+(as shown in the specific example presented below).
+
+<HR>
+
+\section osc_sph A specific example: Outward propagation of waves from the surface of an oscillating sphere
+
+We will now demonstrate the methodology for a specific example:
+the propagation of waves from the surface of a unit sphere.
+
+The specific domain used in this case can be seen in the figure below.
+We create an unstructured mesh of six-noded 
+\c TPMLFourierDecomposedHelmholtzElements
+to create the finite computational domain surrounding a sphere.
+This is surrounded by three axis-aligned PML layers and two
+corner meshes (each made of nine-noded \c QPMLFourierDecomposedHelmholtzElements).
+
+\image html comp_domain.gif "The computational domain used in the example problem. " 
+\image latex comp_domain.eps "The computational domain used in the example problem. " width=0.5\textwidth
+
+We construct an exact solution to the problem by applying
+Neumann/flux boundary condition on the inner
+spherical boundary such that the imposed flux \f$ \partial u/\partial
+n \f$ is consistent with the exact solution
+\f$ u(\rho,\varphi,\theta) \f$ in spherical polar coordinates \f$
+(\rho,\theta,\varphi) \f$, given by
+\f[
+u(\rho,\theta,\varphi)=
+\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}
+\left(
+a_{ln} \ h_{l}^{(1)}(k\rho)+
+b_{ln} \ h_{l}^{(2)}(k\rho)
+\right)P_{l}^{n}
+(\cos\theta)\exp({\rm i} n \varphi).
+ \ \ \ \ \ \ \ (10)
+\f]
+where the \f$a_{ln}, b_{ln} \f$ are arbitrary coefficients and the functions
+\f[
+h_{l}^{(1)}(x)=j_{l}(x)+{\rm i} y_{l}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+h_{l}^{(2)}(x)=j_{l}(x)-{\rm i} y_{l}(x) 
+\f]
+are the spherical Hankel functions of first and second kind,
+respectively, expressed in terms the spherical Bessel functions
+\f[
+j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).
+\f]
+The functions
+\f[
+P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)
+\f]
+are the associated Legendre functions, expressed in terms of the
+Legendre polynomials
+\f[
+P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].
+\f]
+This definition shows that \f$ P_{l}^{m}(x)=0 \f$ for \f$ m>l \f$
+which explains the limited range of summation indices in the second
+sum in (10).
+
+The relation between the cylindrical polar coordinates \f$
+(r,\varphi,z)\f$ and spherical polar coordinates \f$
+(\rho,\theta,\varphi) \f$
+is given by 
+\f[
+\rho = \sqrt{r^2 + z^2},
+\f]
+\f[
+\theta = \arctan(r/z),
+\f]
+\f[
+\varphi = \varphi,
+\f]
+so \f$\varphi \in [0,2\pi] \f$ remains unchanged, and   
+\f$\theta \in [0,\pi] \f$ sweeps from the north pole 
+(\f$ \theta = 0 \f$), via the equator (\f$ \theta = \pi/2 \f$ )
+to the south pole (\f$ \theta = \pi \f$).
+
+
+
+
+<HR>
+
+
+\section results Results
+
+The two figures below show a comparison between the computed and exact
+solutions for a Fourier wavenumber of \f$ N = 3
+\f$, wavenumber squared \f$ k^2 = 10 \f$.
+
+\image html soln3_real.gif "Plot of the computed (red) and exact (green) real parts of the solution of the Fourier-decomposed Helmholtz equation. " 
+\image latex soln3_real.eps "Plot of the computed (red) and exact (green) real parts of the solution of the Fourier-decomposed Helmholtz equation. " width=0.75\textwidth
+ 
+\image html soln3_imag.gif "Plot of the computed (red) and exact (green) imaginary parts of the solution of the Fourier-decomposed Helmholtz equation. " 
+\image latex soln3_imag.eps "Plot of the computed (red) and exact (green) imaginary parts of the solution of the Fourier-decomposed Helmholtz equation. " width=0.75\textwidth
+
+
+<HR>
+
+\section num_soln The numerical solution
+
+\subsection glb_name The global namespace
+
+As usual, we define the problem parameters in a global namespace.
+The main parameters are the wavenumber squared \f$ k^2 \f$, the PML 
+thickness, the number of elements within the PML layer, 
+and the Fourier wavenumber \f$ N \f$.
+
+\dontinclude oscillating_sphere.cc
+\skipline start_of_namespace
+\until int N_fourier=0;
+
+Next we define the coefficients
+
+\dontinclude oscillating_sphere.cc
+\skipline /// Number of terms in the exact solution
+\until Vector<double> Coeff(N_terms,1.0);
+
+required for the specification of the exact solution
+
+\dontinclude oscillating_sphere.cc
+\skipline /// Exact solution as a Vector of size 2, containing real and imag parts
+\until void get_exact_u(const Vector<double>& x, Vector<double>& u)
+
+and its derivative 
+
+\dontinclude oscillating_sphere.cc
+\skipline (spherical r)
+\until exact_minus_dudr
+
+whose listings we omit here.
+
+<HR>
+
+\subsection drv_cde The driver code
+
+The driver code is very straightforward.  We create the problem
+object, 
+
+\dontinclude oscillating_sphere.cc
+\skipline start_of_main
+\until {
+\skipline Create the problem with 2D six-node
+\until problem;
+
+and define the output directory.
+
+\dontinclude oscillating_sphere.cc
+\skipline // Create label for output
+\until doc_info.set_directory(ProblemParameters::Directory);
+
+
+Finally, we solve the problem and document the results.
+
+\dontinclude oscillating_sphere.cc
+\skipline Solve the problem with Newton's method
+\until problem.newton_solve();
+
+\skipline Output the solution
+\until end of main
+
+<HR>
+
+\subsection prb_clss The problem class
+
+The problem class is very similar to that employed for 
+the <a href="../../../helmholtz/scattering/html/index.html">
+solution of the 2D Helmholtz equation with flux boundary
+conditions.</a> We provide helper functions to create the
+PML meshes and to apply the boundary conditions (mainly
+because these tasks have to be performed repeatedly in 
+the spatially adaptive version of this code which is not discussed
+explicitly here; but see the exercise on \ref adaptivity).
+
+\dontinclude oscillating_sphere.cc
+\skipline start_of_problem_class
+\until create_power_monitor_mesh();
+
+The private member data includes pointers to the bulk mesh,
+
+\dontinclude oscillating_sphere.cc
+\skipline Pointer to the "bulk" mesh
+\until Bulk_mesh_pt
+
+a pointer to the mesh of FaceElements that apply the flux boundary
+condition on the surface of the sphere,
+
+\dontinclude oscillating_sphere.cc
+\skipline Mesh of FaceElements that
+\until Helmholtz_inner_boundary_mesh_pt
+
+and the various PML sub-meshes:
+
+\dontinclude oscillating_sphere.cc
+\skipline Pointer to the right PML mesh
+\until }; // end of problem class
+
+<HR>
+
+\subsection prb_con The problem constructor
+
+We open a trace file in which we record the radiated power and
+create the \c Circle object that defines the curvilinear inner
+boundary of the domain.
+
+\dontinclude oscillating_sphere.cc
+\skipline start_of_constructor
+\until r_min
+
+\skipline Circle* inner_circle_pt
+
+Next we specify the the outer radius of computational domain
+\dontinclude oscillating_sphere.cc
+\skipline double r_max=3.0;
+
+and define its polygonal outer boundary:
+
+\dontinclude oscillating_sphere.cc
+\skipline Edges/boundary segments
+\until new TriangleMeshPolyLine(boundary_vertices,boundary_id);
+
+Next we define the curvilinear inner boundary in terms of a
+\c TriangleMeshCurviLine which defines the surface of the sphere,
+
+\dontinclude oscillating_sphere.cc
+\skipline Inner circular boundary:
+\until boundary_id);
+
+and combine the various pieces of the boundary to the closed outer boundary:
+
+\dontinclude oscillating_sphere.cc
+\skipline Create closed curve that defines outer boundary
+\until new TriangleMeshClosedCurve(outer_boundary_line_pt);
+
+Finally, we specify the mesh parameters,
+
+\dontinclude oscillating_sphere.cc
+\skipline Use the TriangleMeshParameter
+\until element_area;
+
+build the bulk mesh, and add it to the problem:
+
+\dontinclude oscillating_sphere.cc
+\skipline Create the bulk mesh
+\until add_sub_mesh(Bulk_mesh_pt); 
+
+Next, we create the FaceElements that apply the flux boundary condition
+on the boundary of the sphere and add the corresponding mesh to the
+problem too:
+
+\skipline Create flux elements on inner boundary
+\until add_sub_mesh(Helmholtz_inner_boundary_mesh_pt); 
+
+We create another set of FaceElements that allow the computation
+of the radiated flux over the outer boundaries of the domain:
+ 
+\skipline Attach the power monitor elements
+\until create_power_monitor_mesh();
+ 
+(This mesh does not need to be added to the problem since its elements
+merely act as post-processing tools and do not provide any
+contributions to the problem's residual vector.
+ 
+We build the PML meshes and combine the various sub-meshes
+to the problem's global mesh:
+
+\dontinclude oscillating_sphere.cc
+\skipline Create the pml meshes
+\until build_global_mesh();
+
+We complete the problem setup by passing the problem parameters to the
+elements, using the helper function \c complete_problem_setup() (Remember that
+even the elements in the PML layers need to be told about these parameters
+since they adjust the \f$ s_r(r) \f$ and \f$ s_z(z) \f$
+functions in terms of these parameters).
+
+\dontinclude oscillating_sphere.cc
+\skipline // Complete the build of all elements 
+\until complete_problem_setup();
+
+Finally we assign the equation numbers,
+
+\dontinclude oscillating_sphere.cc
+\skipline Setup equation numbering scheme
+\until assign_eqn_numbers()
+
+The problem can now be solved.
+
+<HR>
+
+\subsection inner_flx Impose flux on inner boundary
+
+The function \c create_flux_elements() creates the FaceElements
+required to apply the flux/Neumann boundary conditions on the boundary
+of the sphere.
+
+\dontinclude oscillating_sphere.cc
+\skipline start_of_create_flux_element
+\until end of create flux elements on inner boundary
+
+<HR>
+
+\subsection p_monitor Create power monitor mesh
+The function \c create_power_monitor_mesh creates the FaceElements
+that allow the computation of the radiated power over the outer
+boundary of the computational domain.
+
+\dontinclude oscillating_sphere.cc
+\skipline start_of_create_power_monitor_mesh
+\until end of create_power_monitor_mesh
+
+<HR>
+
+\subsection c_prob_setup Complete problem setup
+
+The helper function \c complete_problem_setup() completes the
+setup of the elements by passing pointers to the relevant 
+problem parameters to them. We
+apply zero Dirichlet boundary conditions on the centreline 
+if the Fourier wavenumber is odd.
+
+\dontinclude oscillating_sphere.cc
+\skipline start_of_complete_problem_setup
+\until // end of complete_problem_setup
+
+<HR>
+
+\subsection app_z_bc Apply zero Dirichlet boundary conditions
+This final helper function pins both nodal values 
+(representing the real and imaginary part of the solution) on the 
+centreline and sets their values to zero.
+
+\dontinclude oscillating_sphere.cc
+\skipline start_of_apply_zero_dirichlet_boundary_conditions
+\until // end of apply_zero_dirichlet_boundary_conditions
+
+<HR>
+
+\subsection p_process Post-processing
+
+The post-processing function \c doc_solution(...) outputs the
+solution within the bulk, the solution within the PMLs, the exact
+solution and the radiated power
+
+\dontinclude oscillating_sphere.cc
+\skipline start_of_doc
+\until unsigned npts=5;
+
+\skipline Output solution within the bulk mesh
+\until some_file.close();
+
+\skipline Output solution within pml domains 
+\until some_file.close();
+
+\skipline Output exact solution
+\until some_file.close();
+
+\dontinclude oscillating_sphere.cc
+\skipline Total radiated power
+\until power << std::endl
+
+
+<HR>
+
+\section comments Comments and Exercises
+
+\subsection unkns The enumeration of the unknowns
+
+As discussed in the introduction, most practically relevant
+solutions of the Helmholtz equation are complex valued. Since \c oomph-lib's 
+solvers only deal with real (double precision) unknowns, the equations
+are separated into their real and imaginary parts.
+In the implementation of the Helmholtz elements, we store the real
+and imaginary parts of the solution as two separate values at each 
+node. By default, the real and imaginary parts are accessible via 
+\c Node::value(0) and \c Node::value(1). However, 
+to facilitate the use of the elements
+in multi-physics problems we avoid accessing the unknowns
+directly in this manner but provide the virtual function
+\code
+std::complex<unsigned> PMLFourierDecomposedHelmholtzEquations::u_index_pml_fourier_decomposed_helmholtz()
+\endcode
+which returns a complex number made of the two unsigneds that indicate
+which nodal value represents the real and imaginary parts of the solution.
+This function may be overloaded in combined multi-physics elements
+in which a Helmholtz element is combined (by multiple inheritance) 
+with another element, using the strategy described in 
+<a href="../../../multi_physics/b_convection/html/index.html">
+the Boussinesq convection tutorial</a>.
+
+
+\subsection dmp_fcts PML damping functions
+
+The choice for the absorbing functions in our implementation of
+the PMLs is not unique. There are alternatives varying in both order and
+continuity properties. The current form is the result of several
+feasibility studies and comparisons found in both
+<a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">
+Bermudez et al.</a>
+These damping functions produce an 
+acceptable result in most practical situations without further 
+modifications. For very specific applications, alternatives may 
+need to be used and can easily be implemented by constructing a PML Mapping 
+class and passing a pointer to the elements.  
+
+<HR>
+
+\subsection exer Exercises 
+
+\subsubsection Fwave Changing the Fourier wavenumber
+The generalised Fourier-decomposed Helmholtz equation allows for
+various Fourier wavenumbers \f$ N \f$.  Confirm that a zero Dirichlet 
+boundary condition is applied to odd Fourier wavenumbers.
+
+\subsubsection dtn Comparison of results 
+Compare the results computed by the current driver code
+against those obtained when the Sommerfeld radiation 
+condition is imposed by a DtN mapping, as discussed in
+<a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">
+another tutorial.</a>
+
+\subsubsection pmlsize Changing perfectly matched layer parameters
+Confirm that only a very small number of PML elements (across the thickness
+of the PML layer) is required to effectively damp the outgoing waves.
+Explore the effects of altering the number of elements layer while
+keeping the PML thickness constant.
+
+A second parameter
+that can be adjusted is the geometrical thickness of the perfectly matched
+layers. Explore the effects of altering the thickness while
+maintaining the number of elements within the PML layer.
+
+
+\subsubsection large_k Large wavenumbers
+For Helmholtz problems in general, ill-conditioning appears as the 
+wavenumber becomes very large. By altering \f$ k^2 \f$, 
+explore the limitations of both the mesh and the solver in terms 
+of this parameter. Try adjusting the target element size in order to alleviate
+resolution-related effects. Assess the effectiveness of the perfectly matched
+layers in high wavenumber problems.
+
+\subsubsection adaptivity Spatial adaptivity
+The driver code discussed above already contains the straightforward
+modifications required to enable spatial adaptivity. Explore this 
+(by recompiling the code with -DADAPTIVE). You will note that
+the driver code for this case is modified slightly -- the system
+is no longer driven by flux boundary conditions on the boundary
+of the sphere, but by a point source inside the domain. This was done
+to demonstrate the advantage of spatial adaptivity for such problems. 
+The benefits of spatial adaptation in problems without any
+singularities tends to be limited since Helmholtz (and most other
+wave-type problems) require fairly uniform meshes throughout the domain.
+
+\subsubsection default Default values for problem parameters
+Following our usual convention, we provide default values
+for problem parameters where this is sensible. For instance,
+if the pointer to the PML damping class is not set, it will default to the best
+known PML mapping function proposed by Bermudez et al.
+Some parameters, such as the wavenumber squared \f$ k^2 \f$, do need to be set 
+since there are no obvious defaults. If \c oomph-lib is compiled in \c PARANOID 
+mode, an error is thrown if the relevant pointers haven't been set. 
+Without paranoia, you get a segmentation fault...
+
+Confirm that this is the case by commenting out the relevant
+assignments.
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+  <CENTER>
+  <A HREF="../../../../demo_drivers/pml_fourier_decomposed_helmholtz/oscillating_sphere">
+  demo_drivers/pml_fourier_decomposed_helmholtz/oscillating_sphere/
+  </A>
+  </CENTER>
+- The driver code is: 
+  <CENTER>
+  <A HREF="../../../../demo_drivers/pml_fourier_decomposed_helmholtz/oscillating_sphere/oscillating_sphere.cc">
+  demo_drivers/pml_fourier_decomposed_helmholtz/oscillating_sphere/oscillating_sphere.cc
+  </A>
+  </CENTER>
+.
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

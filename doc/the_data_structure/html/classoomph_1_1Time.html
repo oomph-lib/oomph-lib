@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::Time Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1Time.html">Time</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1Time-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::Time Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class to keep track of discrete/continous time. It is essential to have a single <a class="el" href="classoomph_1_1Time.html" title="Class to keep track of discrete/continous time. It is essential to have a single Time object when usi...">Time</a> object when using multiple time-stepping schemes; e.g., in fluid-structure interaction problems, it is common to use different schemes for the fluid and solid domains. Storage is allocated for the current value of the (continuous) time and a limited history of previous timesteps. The number of previous timesteps must be equal to the number required by the "highest order" scheme.  
+ <a href="classoomph_1_1Time.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aed3c6b92973210d2347fc5be372e41a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#aed3c6b92973210d2347fc5be372e41a8">Time</a> ()</td></tr>
+<tr class="memdesc:aed3c6b92973210d2347fc5be372e41a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Do not allocate any storage for previous timesteps, but set the initial value of the time to zero.  <a href="classoomph_1_1Time.html#aed3c6b92973210d2347fc5be372e41a8">More...</a><br /></td></tr>
+<tr class="separator:aed3c6b92973210d2347fc5be372e41a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af933eb465690f9630983aa0fe24782a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#af933eb465690f9630983aa0fe24782a3">Time</a> (const unsigned &amp;<a class="el" href="classoomph_1_1Time.html#ad40953c471eb3ce59921e6870ed755f3">ndt</a>)</td></tr>
+<tr class="memdesc:af933eb465690f9630983aa0fe24782a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass the number of timesteps to be stored and set the initial value of time to zero.  <a href="classoomph_1_1Time.html#af933eb465690f9630983aa0fe24782a3">More...</a><br /></td></tr>
+<tr class="separator:af933eb465690f9630983aa0fe24782a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fbf9712b8ac81929a4be2ed4c1bcdbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a8fbf9712b8ac81929a4be2ed4c1bcdbd">Time</a> (const <a class="el" href="classoomph_1_1Time.html">Time</a> &amp;)</td></tr>
+<tr class="memdesc:a8fbf9712b8ac81929a4be2ed4c1bcdbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1Time.html#a8fbf9712b8ac81929a4be2ed4c1bcdbd">More...</a><br /></td></tr>
+<tr class="separator:a8fbf9712b8ac81929a4be2ed4c1bcdbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97eff1a8bf218d7d54ea2728b6599a8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a97eff1a8bf218d7d54ea2728b6599a8b">operator=</a> (const <a class="el" href="classoomph_1_1Time.html">Time</a> &amp;)</td></tr>
+<tr class="memdesc:a97eff1a8bf218d7d54ea2728b6599a8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1Time.html#a97eff1a8bf218d7d54ea2728b6599a8b">More...</a><br /></td></tr>
+<tr class="separator:a97eff1a8bf218d7d54ea2728b6599a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab1acb1e182797c4194af84c0583c3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#aeab1acb1e182797c4194af84c0583c3f">resize</a> (const unsigned &amp;n_dt)</td></tr>
+<tr class="memdesc:aeab1acb1e182797c4194af84c0583c3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the vector holding the number of previous timesteps and initialise the new values to zero.  <a href="classoomph_1_1Time.html#aeab1acb1e182797c4194af84c0583c3f">More...</a><br /></td></tr>
+<tr class="separator:aeab1acb1e182797c4194af84c0583c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc1e02cc2988b603bd5e1f6747381546"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#abc1e02cc2988b603bd5e1f6747381546">initialise_dt</a> (const double &amp;dt_)</td></tr>
+<tr class="memdesc:abc1e02cc2988b603bd5e1f6747381546"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set all timesteps to the same value, dt.  <a href="classoomph_1_1Time.html#abc1e02cc2988b603bd5e1f6747381546">More...</a><br /></td></tr>
+<tr class="separator:abc1e02cc2988b603bd5e1f6747381546"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c0e382ecec0abb600c36bc5a0820a43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a7c0e382ecec0abb600c36bc5a0820a43">initialise_dt</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dt_)</td></tr>
+<tr class="memdesc:a7c0e382ecec0abb600c36bc5a0820a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of the timesteps to be equal to the values passed in a vector <br  />
+  <a href="classoomph_1_1Time.html#a7c0e382ecec0abb600c36bc5a0820a43">More...</a><br /></td></tr>
+<tr class="separator:a7c0e382ecec0abb600c36bc5a0820a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed85387263214e97be21e075a06371c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#aeed85387263214e97be21e075a06371c">~Time</a> ()</td></tr>
+<tr class="memdesc:aeed85387263214e97be21e075a06371c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: empty.  <a href="classoomph_1_1Time.html#aeed85387263214e97be21e075a06371c">More...</a><br /></td></tr>
+<tr class="separator:aeed85387263214e97be21e075a06371c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e28ea7a6664a2f5f5e1be871304a2c7"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a6e28ea7a6664a2f5f5e1be871304a2c7">time</a> ()</td></tr>
+<tr class="memdesc:a6e28ea7a6664a2f5f5e1be871304a2c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current value of the continuous time.  <a href="classoomph_1_1Time.html#a6e28ea7a6664a2f5f5e1be871304a2c7">More...</a><br /></td></tr>
+<tr class="separator:a6e28ea7a6664a2f5f5e1be871304a2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad40953c471eb3ce59921e6870ed755f3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#ad40953c471eb3ce59921e6870ed755f3">ndt</a> () const</td></tr>
+<tr class="memdesc:ad40953c471eb3ce59921e6870ed755f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of timesteps stored.  <a href="classoomph_1_1Time.html#ad40953c471eb3ce59921e6870ed755f3">More...</a><br /></td></tr>
+<tr class="separator:ad40953c471eb3ce59921e6870ed755f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c684e0a69db7adde90f1f052e424a6b"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a2c684e0a69db7adde90f1f052e424a6b">dt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>=0)</td></tr>
+<tr class="separator:a2c684e0a69db7adde90f1f052e424a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e956b0a5d0ef62ec7be904e66b33133"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a4e956b0a5d0ef62ec7be904e66b33133">dt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>=0) const</td></tr>
+<tr class="separator:a4e956b0a5d0ef62ec7be904e66b33133"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4af91dd6c41ca7defd431bf53c518ba5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a4af91dd6c41ca7defd431bf53c518ba5">time</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>=0) const</td></tr>
+<tr class="memdesc:a4af91dd6c41ca7defd431bf53c518ba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the continuous time at the t-th previous time level (t=0: current; t&gt;0 previous).  <a href="classoomph_1_1Time.html#a4af91dd6c41ca7defd431bf53c518ba5">More...</a><br /></td></tr>
+<tr class="separator:a4af91dd6c41ca7defd431bf53c518ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92ca0ca34a1491744a3315d61d7cee5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a92ca0ca34a1491744a3315d61d7cee5f">shift_dt</a> ()</td></tr>
+<tr class="memdesc:a92ca0ca34a1491744a3315d61d7cee5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update all stored values of dt by shifting each value along the array. This function must be called before starting to solve at a new time level.  <a href="classoomph_1_1Time.html#a92ca0ca34a1491744a3315d61d7cee5f">More...</a><br /></td></tr>
+<tr class="separator:a92ca0ca34a1491744a3315d61d7cee5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a0d304d449babd0531b76668c6548ad4b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a0d304d449babd0531b76668c6548ad4b">Continuous_time</a></td></tr>
+<tr class="memdesc:a0d304d449babd0531b76668c6548ad4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the value of the continuous time.  <a href="classoomph_1_1Time.html#a0d304d449babd0531b76668c6548ad4b">More...</a><br /></td></tr>
+<tr class="separator:a0d304d449babd0531b76668c6548ad4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fbca07ec14a12aaffc2fbfc8503def2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Time.html#a3fbca07ec14a12aaffc2fbfc8503def2">Dt</a></td></tr>
+<tr class="memdesc:a3fbca07ec14a12aaffc2fbfc8503def2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> that stores the values of the current and previous timesteps.  <a href="classoomph_1_1Time.html#a3fbca07ec14a12aaffc2fbfc8503def2">More...</a><br /></td></tr>
+<tr class="separator:a3fbca07ec14a12aaffc2fbfc8503def2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class to keep track of discrete/continous time. It is essential to have a single <a class="el" href="classoomph_1_1Time.html" title="Class to keep track of discrete/continous time. It is essential to have a single Time object when usi...">Time</a> object when using multiple time-stepping schemes; e.g., in fluid-structure interaction problems, it is common to use different schemes for the fluid and solid domains. Storage is allocated for the current value of the (continuous) time and a limited history of previous timesteps. The number of previous timesteps must be equal to the number required by the "highest order" scheme. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00063">63</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aed3c6b92973210d2347fc5be372e41a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed3c6b92973210d2347fc5be372e41a8">&#9670;&nbsp;</a></span>Time() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Time::Time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Do not allocate any storage for previous timesteps, but set the initial value of the time to zero. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00077">77</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+</div>
+</div>
+<a id="af933eb465690f9630983aa0fe24782a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af933eb465690f9630983aa0fe24782a3">&#9670;&nbsp;</a></span>Time() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Time::Time </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ndt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass the number of timesteps to be stored and set the initial value of time to zero. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00081">81</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00071">Dt</a>, and <a class="el" href="timesteppers_8h_source.html#l00129">ndt()</a>.</p>
+
+</div>
+</div>
+<a id="a8fbf9712b8ac81929a4be2ed4c1bcdbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fbf9712b8ac81929a4be2ed4c1bcdbd">&#9670;&nbsp;</a></span>Time() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Time::Time </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Time.html">Time</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00089">89</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="aeed85387263214e97be21e075a06371c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeed85387263214e97be21e075a06371c">&#9670;&nbsp;</a></span>~Time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Time::~Time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00123">123</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2c684e0a69db7adde90f1f052e424a6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c684e0a69db7adde90f1f052e424a6b">&#9670;&nbsp;</a></span>dt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::Time::dt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Return the value of the t-th stored timestep (t=0: present; t&gt;0: previous). </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00133">133</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00071">Dt</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00204">oomph::IMRByBDF::actions_after_timestep()</a>, <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00140">oomph::IMRByBDF::actions_before_timestep()</a>, <a class="el" href="problem_8cc_source.html#l10965">oomph::Problem::adaptive_unsteady_newton_solve()</a>, <a class="el" href="problem_8cc_source.html#l11532">oomph::Problem::calculate_predictions()</a>, <a class="el" href="problem_8cc_source.html#l11742">oomph::Problem::copy()</a>, <a class="el" href="problem_8cc_source.html#l11912">oomph::Problem::dump()</a>, <a class="el" href="problem_8cc_source.html#l10817">oomph::Problem::explicit_timestep()</a>, <a class="el" href="generalised__newtonian__navier__stokes__elements_8cc_source.html#l01218">oomph::GeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::extrapolated_strain_rate()</a>, <a class="el" href="generalised__newtonian__axisym__navier__stokes__elements_8cc_source.html#l00962">oomph::GeneralisedNewtonianAxisymmetricNavierStokesEquations::extrapolated_strain_rate()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00439">oomph::PseudoBucklingRing::position()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00095">oomph::TR::set_error_weights()</a>, <a class="el" href="timesteppers_8h_source.html#l01093">oomph::NewmarkBDF&lt; NSTEPS &gt;::set_newmark_veloc_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00103">oomph::TR::set_predictor_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00087">oomph::TR::set_weights()</a>, <a class="el" href="implicit__midpoint__rule_8h_source.html#l00175">oomph::IMR::set_weights()</a>, <a class="el" href="implicit__midpoint__rule_8h_source.html#l00223">oomph::IMRByBDF::set_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00196">oomph::TR::shift_time_values()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00442">oomph::EBDF3::timestep()</a>, <a class="el" href="problem_8cc_source.html#l10859">oomph::Problem::unsteady_newton_solve()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01082">oomph::SegregatableFSIProblem::unsteady_segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a4e956b0a5d0ef62ec7be904e66b33133"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e956b0a5d0ef62ec7be904e66b33133">&#9670;&nbsp;</a></span>dt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::Time::dt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Return the value of the t-th stored timestep (t=0: present; t&gt;0: previous), const version. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00137">137</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00071">Dt</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+</div>
+</div>
+<a id="abc1e02cc2988b603bd5e1f6747381546"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc1e02cc2988b603bd5e1f6747381546">&#9670;&nbsp;</a></span>initialise_dt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Time::initialise_dt </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt_</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set all timesteps to the same value, dt. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00105">105</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00071">Dt</a>, and <a class="el" href="timesteppers_8h_source.html#l00129">ndt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="problem_8cc_source.html#l13096">oomph::Problem::initialise_dt()</a>.</p>
+
+</div>
+</div>
+<a id="a7c0e382ecec0abb600c36bc5a0820a43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c0e382ecec0abb600c36bc5a0820a43">&#9670;&nbsp;</a></span>initialise_dt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Time::initialise_dt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dt_</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the value of the timesteps to be equal to the values passed in a vector <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00113">113</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00071">Dt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="ad40953c471eb3ce59921e6870ed755f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad40953c471eb3ce59921e6870ed755f3">&#9670;&nbsp;</a></span>ndt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::Time::ndt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of timesteps stored. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00129">129</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00071">Dt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="problem_8cc_source.html#l01531">oomph::Problem::add_time_stepper_pt()</a>, <a class="el" href="problem_8cc_source.html#l11742">oomph::Problem::copy()</a>, <a class="el" href="problem_8cc_source.html#l11912">oomph::Problem::dump()</a>, <a class="el" href="timesteppers_8h_source.html#l00105">initialise_dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00081">Time()</a>, and <a class="el" href="timesteppers_8h_source.html#l00141">time()</a>.</p>
+
+</div>
+</div>
+<a id="a97eff1a8bf218d7d54ea2728b6599a8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97eff1a8bf218d7d54ea2728b6599a8b">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Time::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Time.html">Time</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00095">95</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="aeab1acb1e182797c4194af84c0583c3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeab1acb1e182797c4194af84c0583c3f">&#9670;&nbsp;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Time::resize </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_dt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize the vector holding the number of previous timesteps and initialise the new values to zero. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00102">102</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00071">Dt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="problem_8cc_source.html#l01531">oomph::Problem::add_time_stepper_pt()</a>, <a class="el" href="problem_8cc_source.html#l11742">oomph::Problem::copy()</a>, and <a class="el" href="problem_8cc_source.html#l12136">oomph::Problem::read()</a>.</p>
+
+</div>
+</div>
+<a id="a92ca0ca34a1491744a3315d61d7cee5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92ca0ca34a1491744a3315d61d7cee5f">&#9670;&nbsp;</a></span>shift_dt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Time::shift_dt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update all stored values of dt by shifting each value along the array. This function must be called before starting to solve at a new time level. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00162">162</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00071">Dt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="problem_8cc_source.html#l11509">oomph::Problem::shift_time_values()</a>.</p>
+
+</div>
+</div>
+<a id="a6e28ea7a6664a2f5f5e1be871304a2c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e28ea7a6664a2f5f5e1be871304a2c7">&#9670;&nbsp;</a></span>time() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::Time::time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the current value of the continuous time. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00126">126</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00068">Continuous_time</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00405">oomph::PseudoBucklingRing::accel()</a>, <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00204">oomph::IMRByBDF::actions_after_timestep()</a>, <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00140">oomph::IMRByBDF::actions_before_timestep()</a>, <a class="el" href="problem_8cc_source.html#l10965">oomph::Problem::adaptive_unsteady_newton_solve()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00114">oomph::PeriodicOrbitTimeDiscretisation::assign_initial_data_values()</a>, <a class="el" href="time__harmonic__linear__elasticity__elements_8h_source.html#l00196">oomph::TimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::body_force()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00239">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::body_force()</a>, <a class="el" href="solid__elements_8h_source.html#l00245">oomph::PVDEquationsBase&lt; DIM &gt;::body_force()</a>, <a class="el" href="timesteppers_8h_source.html#l00402">oomph::TimeStepper::check_predicted_values_up_to_date()</a>, <a class="el" href="problem_8cc_source.html#l11742">oomph::Problem::copy()</a>, <a class="el" href="problem_8cc_source.html#l11912">oomph::Problem::dump()</a>, <a class="el" href="axisym__linear__elasticity__elements_8cc_source.html#l00166">oomph::AxisymmetricLinearElasticityEquations::fill_in_generic_contribution_to_residuals_axisymmetric_linear_elasticity()</a>, <a class="el" href="axisym__poroelasticity__elements_8cc_source.html#l00529">oomph::AxisymmetricPoroelasticityEquations::fill_in_generic_residual_contribution()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="axisym__navier__stokes__elements_8cc_source.html#l00906">oomph::AxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="generalised__newtonian__axisym__navier__stokes__elements_8cc_source.html#l01157">oomph::GeneralisedNewtonianAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="periodic__orbit__handler_8cc_source.html#l00078">oomph::PeriodicOrbitEquations::fill_in_generic_residual_contribution_orbit()</a>, <a class="el" href="spherical__navier__stokes__elements_8cc_source.html#l01568">oomph::SphericalNavierStokesEquations::fill_in_generic_residual_contribution_spherical_nst()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableSphericalNavierStokesEquations::fill_in_generic_residual_contribution_spherical_nst()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00937">oomph::RefineableAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l01475">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="axisym__navier__stokes__elements_8cc_source.html#l01528">oomph::AxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__axisym__navier__stokes__elements_8cc_source.html#l02360">oomph::GeneralisedNewtonianAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="advection__diffusion__reaction__elements_8h_source.html#l00334">oomph::AdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;::get_wind_adv_diff_react()</a>, <a class="el" href="periodic__orbit__handler_8cc_source.html#l00031">oomph::PeriodicOrbitEquations::orbit_output()</a>, <a class="el" href="axisym__linear__elasticity__traction__elements_8h_source.html#l00199">oomph::AxisymmetricLinearElasticityTractionElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="axisym__poroelasticity__face__elements_8h_source.html#l00255">oomph::AxisymmetricPoroelasticityTractionElement&lt; POROELASTICITY_BULK_ELEMENT &gt;::output()</a>, <a class="el" href="axisym__fluid__traction__elements_8h_source.html#l00316">oomph::AxisymmetricNavierStokesTractionElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="axisym__poroelasticity__face__elements_8h_source.html#l01067">oomph::FSILinearisedAxisymPoroelasticTractionElement&lt; POROELASTICITY_BULK_ELEMENT, NAVIER_STOKES_BULK_ELEMENT &gt;::output()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00335">oomph::PseudoBucklingRing::position()</a>, <a class="el" href="problem_8cc_source.html#l12136">oomph::Problem::read()</a>, <a class="el" href="axisym__fluid__traction__elements_8h_source.html#l00201">oomph::AxisymmetricNavierStokesTractionElement&lt; ELEMENT &gt;::scalar_value_paraview()</a>, <a class="el" href="elastic__problems_8h_source.html#l00370">oomph::SolidICProblem::set_newmark_initial_condition_consistently()</a>, <a class="el" href="elastic__problems_8h_source.html#l00226">oomph::SolidICProblem::set_newmark_initial_condition_directly()</a>, <a class="el" href="elastic__problems_8cc_source.html#l00538">oomph::SolidICProblem::set_static_initial_condition()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00225">oomph::PeriodicOrbitEquations::time()</a>, <a class="el" href="timesteppers_8h_source.html#l00320">oomph::TimeStepper::time()</a>, <a class="el" href="problem_8cc_source.html#l11413">oomph::Problem::time()</a>, <a class="el" href="problem_8cc_source.html#l10859">oomph::Problem::unsteady_newton_solve()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01082">oomph::SegregatableFSIProblem::unsteady_segregated_solve()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00371">oomph::PseudoBucklingRing::veloc()</a>.</p>
+
+</div>
+</div>
+<a id="a4af91dd6c41ca7defd431bf53c518ba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af91dd6c41ca7defd431bf53c518ba5">&#9670;&nbsp;</a></span>time() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::Time::time </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the value of the continuous time at the t-th previous time level (t=0: current; t&gt;0 previous). </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00141">141</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00068">Continuous_time</a>, <a class="el" href="timesteppers_8h_source.html#l00071">Dt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="timesteppers_8h_source.html#l00129">ndt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="oomph__utilities_8h_source.html#l00192">oomph::StringConversion::to_string()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0d304d449babd0531b76668c6548ad4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d304d449babd0531b76668c6548ad4b">&#9670;&nbsp;</a></span>Continuous_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::Time::Continuous_time</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the value of the continuous time. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00068">68</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="timesteppers_8h_source.html#l00126">time()</a>.</p>
+
+</div>
+</div>
+<a id="a3fbca07ec14a12aaffc2fbfc8503def2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fbca07ec14a12aaffc2fbfc8503def2">&#9670;&nbsp;</a></span>Dt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;double&gt; oomph::Time::Dt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Vector.html">Vector</a> that stores the values of the current and previous timesteps. </p>
+
+<p class="definition">Definition at line <a class="el" href="timesteppers_8h_source.html#l00071">71</a> of file <a class="el" href="timesteppers_8h_source.html">timesteppers.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="timesteppers_8h_source.html#l00133">dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00105">initialise_dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00129">ndt()</a>, <a class="el" href="timesteppers_8h_source.html#l00102">resize()</a>, <a class="el" href="timesteppers_8h_source.html#l00162">shift_dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00081">Time()</a>, and <a class="el" href="timesteppers_8h_source.html#l00141">time()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="timesteppers_8h_source.html">timesteppers.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:33
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

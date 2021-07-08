@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: refineable_poisson_elements.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_614ba41f702efc7b5daea1caf41387c1.html">poisson</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">refineable_poisson_elements.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="refineable__poisson__elements_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//Header file for refineable QPoissonElement elements</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#ifndef OOMPH_REFINEABLE_POISSON_ELEMENTS_HEADER</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define OOMPH_REFINEABLE_POISSON_ELEMENTS_HEADER</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// Config header generated by autoconfig</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">  #include &lt;oomph-lib-config.h&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//oomph-lib headers</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;../generic/refineable_quad_element.h&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;../generic/refineable_brick_element.h&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;../generic/hp_refineable_elements.h&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;../generic/error_estimator.h&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="poisson__elements_8h.html">poisson_elements.h</a>&quot;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/// Refineable version of Poisson equations</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">///</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">///</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineablePoissonEquations.html">   58</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1RefineablePoissonEquations.html">RefineablePoissonEquations</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1PoissonEquations.html">PoissonEquations</a>&lt;DIM&gt;,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                   <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1RefineableElement.html">RefineableElement</a>,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                   <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> /// \short Constructor, simply call other constructors</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineablePoissonEquations.html#acf636e8df990dace7887f67b04142391">   65</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#acf636e8df990dace7887f67b04142391">RefineablePoissonEquations</a>() : <a class="code" href="classoomph_1_1PoissonEquations.html">PoissonEquations</a>&lt;DIM&gt;(),</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="classoomph_1_1RefineableElement.html">RefineableElement</a>(), <a class="code" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a>() </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  { } </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> /// Broken copy constructor</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineablePoissonEquations.html#aa21dedcb00b52e0b564e275748baf7ed">   70</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#aa21dedcb00b52e0b564e275748baf7ed">RefineablePoissonEquations</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html">RefineablePoissonEquations&lt;DIM&gt;</a>&amp; dummy) </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  { </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;RefineablePoissonEquations&quot;</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  } </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> /// Broken assignment operator</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineablePoissonEquations.html#abacc091fa206b7a94fea160835ea3a62">   76</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#abacc091fa206b7a94fea160835ea3a62">operator=</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html">RefineablePoissonEquations&lt;DIM&gt;</a>&amp;) </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">BrokenCopy::broken_assign</a>(<span class="stringliteral">&quot;RefineablePoissonEquations&quot;</span>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> /// Number of &#39;flux&#39; terms for Z2 error estimation </span></div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineablePoissonEquations.html#ab778ee621a1e0fc89f10533134a6f825">   82</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#ab778ee621a1e0fc89f10533134a6f825">num_Z2_flux_terms</a>() {<span class="keywordflow">return</span> DIM;}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> /// Get &#39;flux&#39; for Z2 error recovery:  Standard flux.from Poisson equations</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineablePoissonEquations.html#a8050a73d9e6450e2b861b3d840f5f6ec">   85</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#a8050a73d9e6450e2b861b3d840f5f6ec">get_Z2_flux</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; flux)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  {this-&gt;<a class="code" href="classoomph_1_1PoissonEquations.html#aa11374daca090943d5abc70fa73cc763">get_flux</a>(s,flux);}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> /// Get error against and norm of exact flux</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#aa1330f79f5a9d44aef1a6984671fe160">compute_exact_Z2_error</a>(</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  std::ostream &amp;outfile,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> exact_flux_pt,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordtype">double</span>&amp; error, <span class="keywordtype">double</span>&amp; norm);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">/// \short Get the function value u in Vector.</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">/// Note: Given the generality of the interface (this function</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">/// is usually called from black-box documentation or interpolation routines),</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/// the values Vector sets its own size in here.</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineablePoissonEquations.html#a5e0651853bb43a4636168562a9ce854c">   98</a></span>&#160;<span class="comment"></span><span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#a5e0651853bb43a4636168562a9ce854c">get_interpolated_values</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp;<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="the__data__structure_8txt.html#a70eaf7a61463de09f737da1f4bb551c3">values</a>)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="comment">// Set size of Vector: u</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="the__data__structure_8txt.html#a70eaf7a61463de09f737da1f4bb551c3">values</a>.resize(1);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">//Find number of nodes</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordtype">unsigned</span> n_node = <a class="code" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a>();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="comment">//Local shape function</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <a class="code" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="comment">//Find values of shape function</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <a class="code" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">shape</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,psi);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="comment">//Initialise value of u</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <a class="code" href="the__data__structure_8txt.html#a70eaf7a61463de09f737da1f4bb551c3">values</a>[0] = 0.0;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="comment">//Find the index at which the poisson unknown is stored</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keywordtype">unsigned</span> u_nodal_index = this-&gt;<a class="code" href="classoomph_1_1PoissonEquations.html#ae2e4e133bde4c4cbddf00de6c4feb72c">u_index_poisson</a>();</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="comment">//Loop over the local nodes and sum up the values</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l=0;l&lt;n_node;l++)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;   {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="the__data__structure_8txt.html#a70eaf7a61463de09f737da1f4bb551c3">values</a>[0] += this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a28fd5c2d4aeba5ef65bee0e0d72569f5">nodal_value</a>(l,u_nodal_index)*psi[l];</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;   }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"> /// \short Get the function value u in Vector.</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"> /// Note: Given the generality of the interface (this function</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment"> /// is usually called from black-box documentation or interpolation routines),</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"> /// the values Vector sets its own size in here.</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineablePoissonEquations.html#affb65cdad97b93f4eff2e2f804efac02">  130</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#affb65cdad97b93f4eff2e2f804efac02">get_interpolated_values</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp;<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                              <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="the__data__structure_8txt.html#a70eaf7a61463de09f737da1f4bb551c3">values</a>)</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;   <span class="keywordflow">if</span> (<a class="code" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>!=0)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;     <a class="code" href="namespaceoomph_1_1Global__string__for__annotation.html#ac5379de2fa7fe44f2cb31785fc208135">std::string</a> error_message =</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;      <span class="stringliteral">&quot;Time-dependent version of get_interpolated_values() &quot;</span>;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;     error_message += <span class="stringliteral">&quot;not implemented for this element \n&quot;</span>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;     <span class="keywordflow">throw</span> </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_message,</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                    <span class="stringliteral">&quot;RefineablePoissonEquations::get_interpolated_values()&quot;</span>,</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                    OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    }</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;   <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;     <span class="comment">//Make sure that we call this particular object&#39;s steady </span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;     <span class="comment">//get_interpolated_values (it could get overloaded lower down)</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;     <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#a5e0651853bb43a4636168562a9ce854c">RefineablePoissonEquations&lt;DIM&gt;::get_interpolated_values</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,<a class="code" href="the__data__structure_8txt.html#a70eaf7a61463de09f737da1f4bb551c3">values</a>);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  }</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"> ///  Further build: Copy source function pointer from father element</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineablePoissonEquations.html#adb5a117ca7556e66af8f3eeaf0bbee7a">  153</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#adb5a117ca7556e66af8f3eeaf0bbee7a">further_build</a>()</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;   this-&gt;<a class="code" href="classoomph_1_1PoissonEquations.html#a4e177939f01ea418aa8a965811877b13">Source_fct_pt</a>=<span class="keyword">dynamic_cast&lt;</span><a class="code" href="classoomph_1_1RefineablePoissonEquations.html">RefineablePoissonEquations&lt;DIM&gt;</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    this-&gt;<a class="code" href="classoomph_1_1RefineableElement.html#aa15517a39ebe72b751b514081f6eba60">father_element_pt</a>())-&gt;<a class="code" href="classoomph_1_1PoissonEquations.html#aeeffc9c64ab0be478d2fe1d6e9d0f959">source_fct_pt</a>();</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">/// \short Add element&#39;s contribution to elemental residual vector and/or </span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">/// Jacobian matrix </span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">/// flag=1: compute both</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">/// flag=0: compute only residual vector</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#a1cea3422561cd3016aa4cc04c0e5be56">fill_in_generic_residual_contribution_poisson</a>(</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;<a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="code" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a> &amp;jacobian, </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; flag); </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment"> /// \short Compute derivatives of elemental residual vector with respect</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment"> /// to nodal coordinates. Overwrites default implementation in </span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment"> /// FiniteElement base class.</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment"> /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html#a1cb1cf52a2332954f69199c7e0c219b4">get_dresidual_dnodal_coordinates</a>(<a class="code" href="classoomph_1_1RankThreeTensor.html">RankThreeTensor&lt;double&gt;</a>&amp;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                                               dresidual_dnodal_coordinates);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;};</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">/// Refineable version of 2D QPoissonElement elements</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">///</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">///</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">unsigned</span> DIM, <span class="keywordtype">unsigned</span> NNODE_1D&gt;</div>
+<div class="line"><a name="l00187"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html">  187</a></span>&#160; <span class="keyword">class </span><a class="code" href="classoomph_1_1RefineableQPoissonElement.html">RefineableQPoissonElement</a> : </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; <span class="keyword">public</span> <a class="code" href="classoomph_1_1QPoissonElement.html">QPoissonElement</a>&lt;DIM,NNODE_1D&gt;,</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html">RefineablePoissonEquations</a>&lt;DIM&gt;,</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1RefineableQElement.html">RefineableQElement</a>&lt;DIM&gt;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;{</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment"> /// \short Constructor, simply call the other constructors </span></div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html#a8a58299ad4e7accd4d35defd255ff17d">  195</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html#a8a58299ad4e7accd4d35defd255ff17d">RefineableQPoissonElement</a>() : </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <a class="code" href="classoomph_1_1RefineableElement.html">RefineableElement</a>(),</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <a class="code" href="classoomph_1_1RefineablePoissonEquations.html">RefineablePoissonEquations</a>&lt;DIM&gt;(),</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <a class="code" href="classoomph_1_1RefineableQElement.html">RefineableQElement</a>&lt;DIM&gt;(),</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <a class="code" href="classoomph_1_1QPoissonElement.html">QPoissonElement</a>&lt;DIM,NNODE_1D&gt;()</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;   {} </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"> /// Broken copy constructor</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html#aa2d538a46ca8aeb5eba0cb190ff6bbdf">  204</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html#aa2d538a46ca8aeb5eba0cb190ff6bbdf">RefineableQPoissonElement</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html">RefineableQPoissonElement&lt;DIM,NNODE_1D&gt;</a>&amp; </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                           dummy) </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  { </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;RefineableQuadPoissonElement&quot;</span>);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  } </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment"> /// Broken assignment operator</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html#a34c50854e8a2f3b198c399375d410f80">  211</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html#a34c50854e8a2f3b198c399375d410f80">operator=</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html">RefineableQPoissonElement&lt;DIM,NNODE_1D&gt;</a>&amp;) </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">BrokenCopy::broken_assign</a>(<span class="stringliteral">&quot;RefineableQuadPoissonElement&quot;</span>);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  }</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment"> /// Number of continuously interpolated values: 1</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html#a71e7df11399a174eab51b156da4948b9">  217</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html#a71e7df11399a174eab51b156da4948b9">ncont_interpolated_values</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> 1;}</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment"> /// \short Number of vertex nodes in the element</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html#aa0459e0394b99cdba6b70780dc33688e">  220</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html#aa0459e0394b99cdba6b70780dc33688e">nvertex_node</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keyword">  </span>{<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1FiniteElement.html#a45631a7aa50efc3123a921d114f84cba">QPoissonElement&lt;DIM,NNODE_1D&gt;::nvertex_node</a>();}</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment"> /// \short Pointer to the j-th vertex node in the element</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html#a59c7b6a6abd015316b87672dae4ec85f">  224</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1Node.html">Node</a>* <a class="code" href="classoomph_1_1RefineableQPoissonElement.html#a59c7b6a6abd015316b87672dae4ec85f">vertex_node_pt</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; j)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">  </span>{<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1FiniteElement.html#a863c4382c879a77ad5607c6f9781c761">QPoissonElement&lt;DIM,NNODE_1D&gt;::vertex_node_pt</a>(j);}</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"> /// Rebuild from sons: empty</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html#abb65373718eab9b04a0eb5786ae6559c">  228</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html#abb65373718eab9b04a0eb5786ae6559c">rebuild_from_sons</a>(<a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* &amp;mesh_pt) {}</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment"> /// \short Order of recovery shape functions for Z2 error estimation:</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"> /// Same order as shape functions.</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html#a0f8a91fd025517b21f69c0e544daec7a">  232</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html#a0f8a91fd025517b21f69c0e544daec7a">nrecovery_order</a>() {<span class="keywordflow">return</span> (NNODE_1D-1);}</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"> ///  \short Perform additional hanging node procedures for variables</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment"> /// that are not interpolated by all nodes. Empty.</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableQPoissonElement.html#afe7fd0310ac9f03550ea83239cd57d40">  236</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineableQPoissonElement.html#afe7fd0310ac9f03550ea83239cd57d40">further_setup_hanging_nodes</a>(){}</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;};</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">/// p-refineable version of 2D QPoissonElement elements</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
+<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="classoomph_1_1PRefineableQPoissonElement.html">  245</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1PRefineableQPoissonElement.html">PRefineableQPoissonElement</a> : <span class="keyword">public</span> <a class="code" href="classoomph_1_1QPoissonElement.html">QPoissonElement</a>&lt;DIM,2&gt;,</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1RefineablePoissonEquations.html">RefineablePoissonEquations</a>&lt;DIM&gt;,</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1PRefineableQElement.html">PRefineableQElement</a>&lt;DIM&gt;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;{</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment"> /// \short Constructor, simply call the other constructors </span></div>
+<div class="line"><a name="l00252"></a><span class="lineno"><a class="line" href="classoomph_1_1PRefineableQPoissonElement.html#abb4dd3cc7654c360b87a968da6733f00">  252</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#abb4dd3cc7654c360b87a968da6733f00">PRefineableQPoissonElement</a>() : <a class="code" href="classoomph_1_1RefineableElement.html">RefineableElement</a>(),</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  <a class="code" href="classoomph_1_1RefineablePoissonEquations.html">RefineablePoissonEquations</a>&lt;DIM&gt;(),</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  <a class="code" href="classoomph_1_1PRefineableQElement.html">PRefineableQElement</a>&lt;DIM&gt;(),</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  <a class="code" href="classoomph_1_1QPoissonElement.html">QPoissonElement</a>&lt;DIM,2&gt;()</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;   {</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="comment">// Set integration scheme</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="comment">// (To avoid memory leaks in pre-build and p-refine where new</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="comment">// integration schemes are created)</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ac80983f27f5bcbc08e2eeb6e4d03698b">set_integration_scheme</a>(<span class="keyword">new</span> <a class="code" href="classoomph_1_1GaussLobattoLegendre.html">GaussLobattoLegendre&lt;DIM,2&gt;</a>);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;   }</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment"> /// Destructor (to avoid memory leaks)</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno"><a class="line" href="classoomph_1_1PRefineableQPoissonElement.html#a9ba8ab37c3a1e129050b9e2f45d82ce4">  264</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#a9ba8ab37c3a1e129050b9e2f45d82ce4">~PRefineableQPoissonElement</a>()</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;   <span class="keyword">delete</span> this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">integral_pt</a>();</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment"> /// Broken copy constructor</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="classoomph_1_1PRefineableQPoissonElement.html#aa57cb66f7febfc2e02ed16799d3d2689">  271</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#aa57cb66f7febfc2e02ed16799d3d2689">PRefineableQPoissonElement</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html">PRefineableQPoissonElement&lt;DIM&gt;</a>&amp; dummy) </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  { </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;PRefineableQPoissonElement&quot;</span>);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  } </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment"> /// Broken assignment operator</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="classoomph_1_1PRefineableQPoissonElement.html#a4576bfc2714913a2aa58c85308b99097">  277</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#a4576bfc2714913a2aa58c85308b99097">operator=</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html">PRefineableQPoissonElement&lt;DIM&gt;</a>&amp;) </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  {</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">BrokenCopy::broken_assign</a>(<span class="stringliteral">&quot;PRefineableQPoissonElement&quot;</span>);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  }</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#a953633adeb9bc3875113d3672c7d525f">further_build</a>();</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment"> /// Number of continuously interpolated values: 1</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="classoomph_1_1PRefineableQPoissonElement.html#a1841e8c6ebcea0efc212a871e03dec24">  285</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#a1841e8c6ebcea0efc212a871e03dec24">ncont_interpolated_values</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> 1;}</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment"> /// \short Number of vertex nodes in the element</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="classoomph_1_1PRefineableQPoissonElement.html#a9640f654f06259a532a62a23ed5f3ac7">  288</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#a9640f654f06259a532a62a23ed5f3ac7">nvertex_node</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keyword">  </span>{<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1FiniteElement.html#a45631a7aa50efc3123a921d114f84cba">QPoissonElement&lt;DIM,2&gt;::nvertex_node</a>();}</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment"> /// \short Pointer to the j-th vertex node in the element</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="classoomph_1_1PRefineableQPoissonElement.html#a37421434b215d1f0ee298c09839ed2ea">  292</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1Node.html">Node</a>* <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#a37421434b215d1f0ee298c09839ed2ea">vertex_node_pt</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; j)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="keyword">  </span>{<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1FiniteElement.html#a863c4382c879a77ad5607c6f9781c761">QPoissonElement&lt;DIM,2&gt;::vertex_node_pt</a>(j);}</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment"> /// \short Order of recovery shape functions for Z2 error estimation:</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment"> /// - Same order as shape functions.</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment"></span> <span class="comment">//unsigned nrecovery_order()</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; <span class="comment">// {</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; <span class="comment">//  if(this-&gt;nnode_1d() &lt; 4) {return (this-&gt;nnode_1d()-1);}</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; <span class="comment">//  else {return 3;}</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; <span class="comment">// }</span><span class="comment"></span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment"> /// - Constant recovery order, since recovery order of the first element</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment"> ///   is used for the whole mesh.</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno"><a class="line" href="classoomph_1_1PRefineableQPoissonElement.html#a19ed70ed56d1e15f8af6eb6ad4a2d892">  304</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#a19ed70ed56d1e15f8af6eb6ad4a2d892">nrecovery_order</a>() {<span class="keywordflow">return</span> 3;}</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PRefineableQPoissonElement.html#a9e4b30c3983caf8b74707743d296626f">compute_energy_error</a>(std::ostream &amp;outfile, </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  <a class="code" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> exact_grad_pt,</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;  <span class="keywordtype">double</span>&amp; error, <span class="keywordtype">double</span>&amp; norm);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;};</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">//=======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">/// Face geometry for the RefineableQuadPoissonElement elements: The spatial </span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">/// dimension of the face elements is one lower than that of the</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">/// bulk element but they have the same number of points</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">/// along their 1D edges.</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM, <span class="keywordtype">unsigned</span> NNODE_1D&gt;</div>
+<div class="line"><a name="l00326"></a><span class="lineno"><a class="line" href="classoomph_1_1FaceGeometry_3_01RefineableQPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4.html">  326</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1FaceGeometry.html">FaceGeometry</a>&lt;<a class="code" href="classoomph_1_1RefineableQPoissonElement.html">RefineableQPoissonElement</a>&lt;DIM,NNODE_1D&gt; &gt;: </div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1QElement.html">QElement</a>&lt;DIM-1,NNODE_1D&gt;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;{</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment"> /// \short Constructor: Call the constructor for the</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment"> /// appropriate lower-dimensional QElement</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="classoomph_1_1FaceGeometry_3_01RefineableQPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4.html#a71746f39c2e5383bcaaab8c3831dd957">  334</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1FaceGeometry_3_01RefineableQPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4.html#a71746f39c2e5383bcaaab8c3831dd957">FaceGeometry</a>() : <a class="code" href="classoomph_1_1QElement.html">QElement</a>&lt;DIM-1,NNODE_1D&gt;() {}</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;};</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;}</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1PoissonEquations_html_ae2e4e133bde4c4cbddf00de6c4feb72c"><div class="ttname"><a href="classoomph_1_1PoissonEquations.html#ae2e4e133bde4c4cbddf00de6c4feb72c">oomph::PoissonEquations::u_index_poisson</a></div><div class="ttdeci">virtual unsigned u_index_poisson() const</div><div class="ttdoc">Return the index at which the unknown value is stored. The default value, 0, is appropriate for singl...</div><div class="ttdef"><b>Definition:</b> <a href="poisson__elements_8h_source.html#l00098">poisson_elements.h:98</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoissonEquations_html"><div class="ttname"><a href="classoomph_1_1PoissonEquations.html">oomph::PoissonEquations</a></div><div class="ttdef"><b>Definition:</b> <a href="poisson__elements_8h_source.html#l00059">poisson_elements.h:59</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_abb4dd3cc7654c360b87a968da6733f00"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#abb4dd3cc7654c360b87a968da6733f00">oomph::PRefineableQPoissonElement::PRefineableQPoissonElement</a></div><div class="ttdeci">PRefineableQPoissonElement()</div><div class="ttdoc">Constructor, simply call the other constructors.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00252">refineable_poisson_elements.h:252</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html_abb65373718eab9b04a0eb5786ae6559c"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html#abb65373718eab9b04a0eb5786ae6559c">oomph::RefineableQPoissonElement::rebuild_from_sons</a></div><div class="ttdeci">void rebuild_from_sons(Mesh *&amp;mesh_pt)</div><div class="ttdoc">Rebuild from sons: empty.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00228">refineable_poisson_elements.h:228</a></div></div>
+<div class="ttc" id="athe__data__structure_8txt_html_a1400a973def57b85051cfe1070be1810"><div class="ttname"><a href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a></div><div class="ttdeci">endcode The default implementation of c the simplest possible implementation of a new element requires only the specification of c we need to know which c Data affects the residuals(and hence the Jacobian matrix). For a \c GeneralisedElement such \c Data exists in two forms</div></div>
+<div class="ttc" id="aclassoomph_1_1QElement_html"><div class="ttname"><a href="classoomph_1_1QElement.html">oomph::QElement</a></div><div class="ttdef"><b>Definition:</b> <a href="Qelements_8h_source.html#l00481">Qelements.h:481</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html">oomph::RefineableQPoissonElement</a></div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00187">refineable_poisson_elements.h:187</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoissonEquations_html_a4e177939f01ea418aa8a965811877b13"><div class="ttname"><a href="classoomph_1_1PoissonEquations.html#a4e177939f01ea418aa8a965811877b13">oomph::PoissonEquations::Source_fct_pt</a></div><div class="ttdeci">PoissonSourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function:</div><div class="ttdef"><b>Definition:</b> <a href="poisson__elements_8h_source.html#l00527">poisson_elements.h:527</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_a1cea3422561cd3016aa4cc04c0e5be56"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#a1cea3422561cd3016aa4cc04c0e5be56">oomph::RefineablePoissonEquations::fill_in_generic_residual_contribution_poisson</a></div><div class="ttdeci">void fill_in_generic_residual_contribution_poisson(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, const unsigned &amp;flag)</div><div class="ttdoc">Add element's contribution to elemental residual vector and/or Jacobian matrix flag=1: compute both f...</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8cc_source.html#l00143">refineable_poisson_elements.cc:143</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_a19ed70ed56d1e15f8af6eb6ad4a2d892"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#a19ed70ed56d1e15f8af6eb6ad4a2d892">oomph::PRefineableQPoissonElement::nrecovery_order</a></div><div class="ttdeci">unsigned nrecovery_order()</div><div class="ttdoc">Order of recovery shape functions for Z2 error estimation:</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00304">refineable_poisson_elements.h:304</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_abacc091fa206b7a94fea160835ea3a62"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#abacc091fa206b7a94fea160835ea3a62">oomph::RefineablePoissonEquations::operator=</a></div><div class="ttdeci">void operator=(const RefineablePoissonEquations&lt; DIM &gt; &amp;)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00076">refineable_poisson_elements.h:76</a></div></div>
+<div class="ttc" id="apoisson__elements_8h_html"><div class="ttname"><a href="poisson__elements_8h.html">poisson_elements.h</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_a5e0651853bb43a4636168562a9ce854c"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#a5e0651853bb43a4636168562a9ce854c">oomph::RefineablePoissonEquations::get_interpolated_values</a></div><div class="ttdeci">void get_interpolated_values(const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;values)</div><div class="ttdoc">Get the function value u in Vector. Note: Given the generality of the interface (this function is usu...</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00098">refineable_poisson_elements.h:98</a></div></div>
+<div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00225">oomph_definitions.h:225</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a863c4382c879a77ad5607c6f9781c761"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a863c4382c879a77ad5607c6f9781c761">oomph::FiniteElement::vertex_node_pt</a></div><div class="ttdeci">virtual Node * vertex_node_pt(const unsigned &amp;j) const</div><div class="ttdoc">Pointer to the j-th vertex node in the element. Broken virtual function in &quot;pure&quot; finite elements.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02396">elements.h:2396</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableElement_html_aa15517a39ebe72b751b514081f6eba60"><div class="ttname"><a href="classoomph_1_1RefineableElement.html#aa15517a39ebe72b751b514081f6eba60">oomph::RefineableElement::father_element_pt</a></div><div class="ttdeci">virtual RefineableElement * father_element_pt() const</div><div class="ttdoc">Return a pointer to the father element.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__elements_8h_source.html#l00468">refineable_elements.h:468</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html_a0f8a91fd025517b21f69c0e544daec7a"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html#a0f8a91fd025517b21f69c0e544daec7a">oomph::RefineableQPoissonElement::nrecovery_order</a></div><div class="ttdeci">unsigned nrecovery_order()</div><div class="ttdoc">Order of recovery shape functions for Z2 error estimation: Same order as shape functions.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00232">refineable_poisson_elements.h:232</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoissonEquations_html_aeeffc9c64ab0be478d2fe1d6e9d0f959"><div class="ttname"><a href="classoomph_1_1PoissonEquations.html#aeeffc9c64ab0be478d2fe1d6e9d0f959">oomph::PoissonEquations::source_fct_pt</a></div><div class="ttdeci">PoissonSourceFctPt &amp; source_fct_pt()</div><div class="ttdoc">Access function: Pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="poisson__elements_8h_source.html#l00296">poisson_elements.h:296</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a690fd33af26cc3e84f39bba6d5a85202"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">oomph::FiniteElement::SteadyExactSolutionFctPt</a></div><div class="ttdeci">void(* SteadyExactSolutionFctPt)(const Vector&lt; double &gt; &amp;, Vector&lt; double &gt; &amp;)</div><div class="ttdoc">Function pointer for function that computes vector-valued steady &quot;exact solution&quot;  as .</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01736">elements.h:1736</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html_a8a58299ad4e7accd4d35defd255ff17d"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html#a8a58299ad4e7accd4d35defd255ff17d">oomph::RefineableQPoissonElement::RefineableQPoissonElement</a></div><div class="ttdeci">RefineableQPoissonElement()</div><div class="ttdoc">Constructor, simply call the other constructors.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00195">refineable_poisson_elements.h:195</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a45631a7aa50efc3123a921d114f84cba"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a45631a7aa50efc3123a921d114f84cba">oomph::FiniteElement::nvertex_node</a></div><div class="ttdeci">virtual unsigned nvertex_node() const</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02387">elements.h:2387</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_a9640f654f06259a532a62a23ed5f3ac7"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#a9640f654f06259a532a62a23ed5f3ac7">oomph::PRefineableQPoissonElement::nvertex_node</a></div><div class="ttdeci">unsigned nvertex_node() const</div><div class="ttdoc">Number of vertex nodes in the element.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00288">refineable_poisson_elements.h:288</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html_afe7fd0310ac9f03550ea83239cd57d40"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html#afe7fd0310ac9f03550ea83239cd57d40">oomph::RefineableQPoissonElement::further_setup_hanging_nodes</a></div><div class="ttdeci">void further_setup_hanging_nodes()</div><div class="ttdoc">Perform additional hanging node procedures for variables that are not interpolated by all nodes....</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00236">refineable_poisson_elements.h:236</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_a4576bfc2714913a2aa58c85308b99097"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#a4576bfc2714913a2aa58c85308b99097">oomph::PRefineableQPoissonElement::operator=</a></div><div class="ttdeci">void operator=(const PRefineableQPoissonElement&lt; DIM &gt; &amp;)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00277">refineable_poisson_elements.h:277</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_ab778ee621a1e0fc89f10533134a6f825"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#ab778ee621a1e0fc89f10533134a6f825">oomph::RefineablePoissonEquations::num_Z2_flux_terms</a></div><div class="ttdeci">unsigned num_Z2_flux_terms()</div><div class="ttdoc">Number of 'flux' terms for Z2 error estimation.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00082">refineable_poisson_elements.h:82</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_a8050a73d9e6450e2b861b3d840f5f6ec"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#a8050a73d9e6450e2b861b3d840f5f6ec">oomph::RefineablePoissonEquations::get_Z2_flux</a></div><div class="ttdeci">void get_Z2_flux(const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;flux)</div><div class="ttdoc">Get 'flux' for Z2 error recovery: Standard flux.from Poisson equations.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00085">refineable_poisson_elements.h:85</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html">oomph::PRefineableQPoissonElement</a></div><div class="ttdoc">p-refineable version of 2D QPoissonElement elements</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00245">refineable_poisson_elements.h:245</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RankThreeTensor_html"><div class="ttname"><a href="classoomph_1_1RankThreeTensor.html">oomph::RankThreeTensor</a></div><div class="ttdoc">A Rank 3 Tensor class.</div><div class="ttdef"><b>Definition:</b> <a href="matrices_8h_source.html#l01333">matrices.h:1333</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQElement_html"><div class="ttname"><a href="classoomph_1_1PRefineableQElement.html">oomph::PRefineableQElement</a></div><div class="ttdef"><b>Definition:</b> <a href="Qelements_8h_source.html#l02139">Qelements.h:2139</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_a1cb1cf52a2332954f69199c7e0c219b4"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#a1cb1cf52a2332954f69199c7e0c219b4">oomph::RefineablePoissonEquations::get_dresidual_dnodal_coordinates</a></div><div class="ttdeci">virtual void get_dresidual_dnodal_coordinates(RankThreeTensor&lt; double &gt; &amp;dresidual_dnodal_coordinates)</div><div class="ttdoc">Compute derivatives of elemental residual vector with respect to nodal coordinates....</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8cc_source.html#l00349">refineable_poisson_elements.cc:349</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Mesh_html"><div class="ttname"><a href="classoomph_1_1Mesh.html">oomph::Mesh</a></div><div class="ttdoc">A general mesh class.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8h_source.html#l00070">mesh.h:70</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DenseMatrix_html"><div class="ttname"><a href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; double &gt;</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableElement_html"><div class="ttname"><a href="classoomph_1_1RefineableElement.html">oomph::RefineableElement</a></div><div class="ttdef"><b>Definition:</b> <a href="refineable__elements_8h_source.html#l00097">refineable_elements.h:97</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_a953633adeb9bc3875113d3672c7d525f"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#a953633adeb9bc3875113d3672c7d525f">oomph::PRefineableQPoissonElement::further_build</a></div><div class="ttdeci">void further_build()</div><div class="ttdoc">Further build: Copy source function pointer from father element.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8cc_source.html#l00614">refineable_poisson_elements.cc:614</a></div></div>
+<div class="ttc" id="athe__data__structure_8txt_html_a70eaf7a61463de09f737da1f4bb551c3"><div class="ttname"><a href="the__data__structure_8txt.html#a70eaf7a61463de09f737da1f4bb551c3">values</a></div><div class="ttdeci">endcode We introduce wrapper functions to access function values</div><div class="ttdef"><b>Definition:</b> <a href="the__data__structure_8txt_source.html#l00580">the_data_structure.txt:580</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_a9e4b30c3983caf8b74707743d296626f"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#a9e4b30c3983caf8b74707743d296626f">oomph::PRefineableQPoissonElement::compute_energy_error</a></div><div class="ttdeci">void compute_energy_error(std::ostream &amp;outfile, FiniteElement::SteadyExactSolutionFctPt exact_grad_pt, double &amp;error, double &amp;norm)</div><div class="ttdoc">Get error against and norm of exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8cc_source.html#l00530">refineable_poisson_elements.cc:530</a></div></div>
+<div class="ttc" id="acfortran_8h_html_af6f0bd3dc13317f895c91323c25c2b8f"><div class="ttname"><a href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a></div><div class="ttdeci">char t</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html">oomph::RefineablePoissonEquations</a></div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00058">refineable_poisson_elements.h:58</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_aa1330f79f5a9d44aef1a6984671fe160"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#aa1330f79f5a9d44aef1a6984671fe160">oomph::RefineablePoissonEquations::compute_exact_Z2_error</a></div><div class="ttdeci">void compute_exact_Z2_error(std::ostream &amp;outfile, FiniteElement::SteadyExactSolutionFctPt exact_flux_pt, double &amp;error, double &amp;norm)</div><div class="ttdoc">Get error against and norm of exact flux.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8cc_source.html#l00039">refineable_poisson_elements.cc:39</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1BrokenCopy_html_a7e5cd7fda8b8c790003151bee77a84ac"><div class="ttname"><a href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">oomph::BrokenCopy::broken_copy</a></div><div class="ttdeci">void broken_copy(const std::string &amp;class_name)</div><div class="ttdoc">Issue error message and terminate execution.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l00214">oomph_utilities.cc:214</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_ac80983f27f5bcbc08e2eeb6e4d03698b"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#ac80983f27f5bcbc08e2eeb6e4d03698b">oomph::FiniteElement::set_integration_scheme</a></div><div class="ttdeci">virtual void set_integration_scheme(Integral *const &amp;integral_pt)</div><div class="ttdoc">Set the spatial integration scheme.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8cc_source.html#l03146">elements.cc:3146</a></div></div>
+<div class="ttc" id="aclassoomph_1_1QPoissonElement_html"><div class="ttname"><a href="classoomph_1_1QPoissonElement.html">oomph::QPoissonElement</a></div><div class="ttdef"><b>Definition:</b> <a href="poisson__elements_8h_source.html#l00550">poisson_elements.h:550</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html_aa2d538a46ca8aeb5eba0cb190ff6bbdf"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html#aa2d538a46ca8aeb5eba0cb190ff6bbdf">oomph::RefineableQPoissonElement::RefineableQPoissonElement</a></div><div class="ttdeci">RefineableQPoissonElement(const RefineableQPoissonElement&lt; DIM, NNODE_1D &gt; &amp;dummy)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00204">refineable_poisson_elements.h:204</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_acf636e8df990dace7887f67b04142391"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#acf636e8df990dace7887f67b04142391">oomph::RefineablePoissonEquations::RefineablePoissonEquations</a></div><div class="ttdeci">RefineablePoissonEquations()</div><div class="ttdoc">Constructor, simply call other constructors.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00065">refineable_poisson_elements.h:65</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_a1841e8c6ebcea0efc212a871e03dec24"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#a1841e8c6ebcea0efc212a871e03dec24">oomph::PRefineableQPoissonElement::ncont_interpolated_values</a></div><div class="ttdeci">unsigned ncont_interpolated_values() const</div><div class="ttdoc">Number of continuously interpolated values: 1.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00285">refineable_poisson_elements.h:285</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a79f1710873332823c47023d370f0596b"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a79f1710873332823c47023d370f0596b">oomph::FiniteElement::integral_pt</a></div><div class="ttdeci">Integral *const &amp; integral_pt() const</div><div class="ttdoc">Return the pointer to the integration scheme (const version)</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01921">elements.h:1921</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_a9ba8ab37c3a1e129050b9e2f45d82ce4"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#a9ba8ab37c3a1e129050b9e2f45d82ce4">oomph::PRefineableQPoissonElement::~PRefineableQPoissonElement</a></div><div class="ttdeci">~PRefineableQPoissonElement()</div><div class="ttdoc">Destructor (to avoid memory leaks)</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00264">refineable_poisson_elements.h:264</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a6219ed269a6d89b5aa14659cce48905a"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">oomph::FiniteElement::nnode</a></div><div class="ttdeci">unsigned nnode() const</div><div class="ttdoc">Return the number of nodes.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02159">elements.h:2159</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html"><div class="ttname"><a href="classoomph_1_1Node.html">oomph::Node</a></div><div class="ttdoc">Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00847">nodes.h:847</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html_a59c7b6a6abd015316b87672dae4ec85f"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html#a59c7b6a6abd015316b87672dae4ec85f">oomph::RefineableQPoissonElement::vertex_node_pt</a></div><div class="ttdeci">Node * vertex_node_pt(const unsigned &amp;j) const</div><div class="ttdoc">Pointer to the j-th vertex node in the element.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00224">refineable_poisson_elements.h:224</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a58a25b6859ddd43b7bfe64a19fee5023"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape</a></div><div class="ttdeci">virtual void shape(const Vector&lt; double &gt; &amp;s, Shape &amp;psi) const =0</div><div class="ttdoc">Calculate the geometric shape functions at local coordinate s. This function must be overloaded for e...</div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html_aa0459e0394b99cdba6b70780dc33688e"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html#aa0459e0394b99cdba6b70780dc33688e">oomph::RefineableQPoissonElement::nvertex_node</a></div><div class="ttdeci">unsigned nvertex_node() const</div><div class="ttdoc">Number of vertex nodes in the element.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00220">refineable_poisson_elements.h:220</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoissonEquations_html_aa11374daca090943d5abc70fa73cc763"><div class="ttname"><a href="classoomph_1_1PoissonEquations.html#aa11374daca090943d5abc70fa73cc763">oomph::PoissonEquations::get_flux</a></div><div class="ttdeci">void get_flux(const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;flux) const</div><div class="ttdoc">Get flux: flux[i] = du/dx_i.</div><div class="ttdef"><b>Definition:</b> <a href="poisson__elements_8h_source.html#l00368">poisson_elements.h:368</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html_a34c50854e8a2f3b198c399375d410f80"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html#a34c50854e8a2f3b198c399375d410f80">oomph::RefineableQPoissonElement::operator=</a></div><div class="ttdeci">void operator=(const RefineableQPoissonElement&lt; DIM, NNODE_1D &gt; &amp;)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00211">refineable_poisson_elements.h:211</a></div></div>
+<div class="ttc" id="aclassoomph_1_1ElementWithZ2ErrorEstimator_html"><div class="ttname"><a href="classoomph_1_1ElementWithZ2ErrorEstimator.html">oomph::ElementWithZ2ErrorEstimator</a></div><div class="ttdoc">Base class for finite elements that can compute the quantities that are required for the Z2 error est...</div><div class="ttdef"><b>Definition:</b> <a href="error__estimator_8h_source.html#l00091">error_estimator.h:91</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_aa57cb66f7febfc2e02ed16799d3d2689"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#aa57cb66f7febfc2e02ed16799d3d2689">oomph::PRefineableQPoissonElement::PRefineableQPoissonElement</a></div><div class="ttdeci">PRefineableQPoissonElement(const PRefineableQPoissonElement&lt; DIM &gt; &amp;dummy)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00271">refineable_poisson_elements.h:271</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_aa21dedcb00b52e0b564e275748baf7ed"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#aa21dedcb00b52e0b564e275748baf7ed">oomph::RefineablePoissonEquations::RefineablePoissonEquations</a></div><div class="ttdeci">RefineablePoissonEquations(const RefineablePoissonEquations&lt; DIM &gt; &amp;dummy)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00070">refineable_poisson_elements.h:70</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FaceGeometry_3_01RefineableQPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4_html_a71746f39c2e5383bcaaab8c3831dd957"><div class="ttname"><a href="classoomph_1_1FaceGeometry_3_01RefineableQPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4.html#a71746f39c2e5383bcaaab8c3831dd957">oomph::FaceGeometry&lt; RefineableQPoissonElement&lt; DIM, NNODE_1D &gt; &gt;::FaceGeometry</a></div><div class="ttdeci">FaceGeometry()</div><div class="ttdoc">Constructor: Call the constructor for the appropriate lower-dimensional QElement.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00334">refineable_poisson_elements.h:334</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQElement_html"><div class="ttname"><a href="classoomph_1_1RefineableQElement.html">oomph::RefineableQElement</a></div><div class="ttdef"><b>Definition:</b> <a href="Qelements_8h_source.html#l02123">Qelements.h:2123</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_adb5a117ca7556e66af8f3eeaf0bbee7a"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#adb5a117ca7556e66af8f3eeaf0bbee7a">oomph::RefineablePoissonEquations::further_build</a></div><div class="ttdeci">void further_build()</div><div class="ttdoc">Further build: Copy source function pointer from father element.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00153">refineable_poisson_elements.h:153</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineablePoissonEquations_html_affb65cdad97b93f4eff2e2f804efac02"><div class="ttname"><a href="classoomph_1_1RefineablePoissonEquations.html#affb65cdad97b93f4eff2e2f804efac02">oomph::RefineablePoissonEquations::get_interpolated_values</a></div><div class="ttdeci">void get_interpolated_values(const unsigned &amp;t, const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;values)</div><div class="ttdoc">Get the function value u in Vector. Note: Given the generality of the interface (this function is usu...</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00130">refineable_poisson_elements.h:130</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableQPoissonElement_html_a71e7df11399a174eab51b156da4948b9"><div class="ttname"><a href="classoomph_1_1RefineableQPoissonElement.html#a71e7df11399a174eab51b156da4948b9">oomph::RefineableQPoissonElement::ncont_interpolated_values</a></div><div class="ttdeci">unsigned ncont_interpolated_values() const</div><div class="ttdoc">Number of continuously interpolated values: 1.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00217">refineable_poisson_elements.h:217</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a28fd5c2d4aeba5ef65bee0e0d72569f5"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a28fd5c2d4aeba5ef65bee0e0d72569f5">oomph::FiniteElement::nodal_value</a></div><div class="ttdeci">double nodal_value(const unsigned &amp;n, const unsigned &amp;i) const</div><div class="ttdoc">Return the i-th value stored at local node n. Produces suitably interpolated values for hanging nodes...</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02483">elements.h:2483</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PRefineableQPoissonElement_html_a37421434b215d1f0ee298c09839ed2ea"><div class="ttname"><a href="classoomph_1_1PRefineableQPoissonElement.html#a37421434b215d1f0ee298c09839ed2ea">oomph::PRefineableQPoissonElement::vertex_node_pt</a></div><div class="ttdeci">Node * vertex_node_pt(const unsigned &amp;j) const</div><div class="ttdoc">Pointer to the j-th vertex node in the element.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__poisson__elements_8h_source.html#l00292">refineable_poisson_elements.h:292</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GaussLobattoLegendre_html"><div class="ttname"><a href="classoomph_1_1GaussLobattoLegendre.html">oomph::GaussLobattoLegendre</a></div><div class="ttdef"><b>Definition:</b> <a href="integral_8h_source.html#l01337">integral.h:1337</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00077">shape.h:77</a></div></div>
+<div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FaceGeometry_html"><div class="ttname"><a href="classoomph_1_1FaceGeometry.html">oomph::FaceGeometry</a></div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l04837">elements.h:4837</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1BrokenCopy_html_a32dc384e671e786bac0c67cbff701f45"><div class="ttname"><a href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">oomph::BrokenCopy::broken_assign</a></div><div class="ttdeci">void broken_assign(const std::string &amp;class_name)</div><div class="ttdoc">Issue error message and terminate execution.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l00197">oomph_utilities.cc:197</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1Global__string__for__annotation_html_ac5379de2fa7fe44f2cb31785fc208135"><div class="ttname"><a href="namespaceoomph_1_1Global__string__for__annotation.html#ac5379de2fa7fe44f2cb31785fc208135">oomph::Global_string_for_annotation::string</a></div><div class="ttdeci">std::string string(const unsigned &amp;i)</div><div class="ttdoc">Return the i-th string or &quot;&quot; if the relevant string hasn't been defined.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8cc_source.html#l00289">oomph_definitions.cc:289</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:57:57
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::PreconditionerArray Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1PreconditionerArray.html">PreconditionerArray</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1PreconditionerArray-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::PreconditionerArray Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classoomph_1_1PreconditionerArray.html" title="PreconditionerArray - NOTE - first implementation, a number of assumptions / simplifications were mad...">PreconditionerArray</a> - NOTE - first implementation, a number of assumptions / simplifications were made:  
+ <a href="classoomph_1_1PreconditionerArray.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a70e99bbb30ed4056760430420bc5cf95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a70e99bbb30ed4056760430420bc5cf95">setup_preconditioners</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; matrix_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> * &gt; prec_pt, const <a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *comm_pt)</td></tr>
+<tr class="separator:a70e99bbb30ed4056760430420bc5cf95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11a8bc01a8addffd5212369a2dc72ef7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a11a8bc01a8addffd5212369a2dc72ef7">solve_preconditioners</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;r, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;z)</td></tr>
+<tr class="memdesc:a11a8bc01a8addffd5212369a2dc72ef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies each preconditioner to the corresponding vector in r and z.  <a href="classoomph_1_1PreconditionerArray.html#a11a8bc01a8addffd5212369a2dc72ef7">More...</a><br /></td></tr>
+<tr class="separator:a11a8bc01a8addffd5212369a2dc72ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af982432ce1975ed8ba55948fdccb38ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#af982432ce1975ed8ba55948fdccb38ba">PreconditionerArray</a> ()</td></tr>
+<tr class="memdesc:af982432ce1975ed8ba55948fdccb38ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor (empty)  <a href="classoomph_1_1PreconditionerArray.html#af982432ce1975ed8ba55948fdccb38ba">More...</a><br /></td></tr>
+<tr class="separator:af982432ce1975ed8ba55948fdccb38ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39b7ea03b0a0bdee36546f759f1632b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a39b7ea03b0a0bdee36546f759f1632b9">PreconditionerArray</a> (const <a class="el" href="classoomph_1_1PreconditionerArray.html">PreconditionerArray</a> &amp;)</td></tr>
+<tr class="memdesc:a39b7ea03b0a0bdee36546f759f1632b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1PreconditionerArray.html#a39b7ea03b0a0bdee36546f759f1632b9">More...</a><br /></td></tr>
+<tr class="separator:a39b7ea03b0a0bdee36546f759f1632b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29577eaaaf9055e40e54538ec607dba4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a29577eaaaf9055e40e54538ec607dba4">operator=</a> (const <a class="el" href="classoomph_1_1PreconditionerArray.html">PreconditionerArray</a> &amp;)</td></tr>
+<tr class="memdesc:a29577eaaaf9055e40e54538ec607dba4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1PreconditionerArray.html#a29577eaaaf9055e40e54538ec607dba4">More...</a><br /></td></tr>
+<tr class="separator:a29577eaaaf9055e40e54538ec607dba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb6326ed44c67eff34760bd5944d0cf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#abb6326ed44c67eff34760bd5944d0cf3">~PreconditionerArray</a> ()</td></tr>
+<tr class="memdesc:abb6326ed44c67eff34760bd5944d0cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classoomph_1_1PreconditionerArray.html#abb6326ed44c67eff34760bd5944d0cf3">More...</a><br /></td></tr>
+<tr class="separator:abb6326ed44c67eff34760bd5944d0cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70e99bbb30ed4056760430420bc5cf95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a70e99bbb30ed4056760430420bc5cf95">setup_preconditioners</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt; matrix_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> * &gt; prec_pt, const <a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *comm_pt)</td></tr>
+<tr class="memdesc:a70e99bbb30ed4056760430420bc5cf95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the preconditioners. Sets up each preconditioner in the array for the corresponding matrix in the vector matrix_pt. The number of preconditioners in the array is taken to be the length of prec_pt The preconditioners that are not used on this processor are deleted.  <a href="classoomph_1_1PreconditionerArray.html#a70e99bbb30ed4056760430420bc5cf95">More...</a><br /></td></tr>
+<tr class="separator:a70e99bbb30ed4056760430420bc5cf95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11a8bc01a8addffd5212369a2dc72ef7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a11a8bc01a8addffd5212369a2dc72ef7">solve_preconditioners</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;r, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;z)</td></tr>
+<tr class="memdesc:a11a8bc01a8addffd5212369a2dc72ef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies each preconditioner to the corresponding vector in r and z.  <a href="classoomph_1_1PreconditionerArray.html#a11a8bc01a8addffd5212369a2dc72ef7">More...</a><br /></td></tr>
+<tr class="separator:a11a8bc01a8addffd5212369a2dc72ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa215f08a32f670700a08035bcc75dc63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#aa215f08a32f670700a08035bcc75dc63">clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:aa215f08a32f670700a08035bcc75dc63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up memory.  <a href="classoomph_1_1PreconditionerArray.html#aa215f08a32f670700a08035bcc75dc63">More...</a><br /></td></tr>
+<tr class="separator:aa215f08a32f670700a08035bcc75dc63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73db1b394930346aa2d8d2902cca12e6"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a73db1b394930346aa2d8d2902cca12e6">method</a> ()</td></tr>
+<tr class="separator:a73db1b394930346aa2d8d2902cca12e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a6a265f95d2cbb2fe10b9d08595fe7faf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a6a265f95d2cbb2fe10b9d08595fe7faf">compute_tag</a> (const int &amp;nproc, const int &amp;source, const int &amp;dest, const int &amp;type)</td></tr>
+<tr class="memdesc:a6a265f95d2cbb2fe10b9d08595fe7faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper method for computing the MPI_Isend and MPI_Irecv tags  <a href="classoomph_1_1PreconditionerArray.html#a6a265f95d2cbb2fe10b9d08595fe7faf">More...</a><br /></td></tr>
+<tr class="separator:a6a265f95d2cbb2fe10b9d08595fe7faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ab4f9ea783d3db44cf8401a0e0acc46dd"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#ab4f9ea783d3db44cf8401a0e0acc46dd">Nprec</a></td></tr>
+<tr class="memdesc:ab4f9ea783d3db44cf8401a0e0acc46dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">the number of preconditioner in the array  <a href="classoomph_1_1PreconditionerArray.html#ab4f9ea783d3db44cf8401a0e0acc46dd">More...</a><br /></td></tr>
+<tr class="separator:ab4f9ea783d3db44cf8401a0e0acc46dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a963dad278f4abf1195666a4a050a0390"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a963dad278f4abf1195666a4a050a0390">Preconditioner_pt</a></td></tr>
+<tr class="memdesc:a963dad278f4abf1195666a4a050a0390"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pointer to the local preconditioner on this processor.  <a href="classoomph_1_1PreconditionerArray.html#a963dad278f4abf1195666a4a050a0390">More...</a><br /></td></tr>
+<tr class="separator:a963dad278f4abf1195666a4a050a0390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44c35e1fafae4b68e28d95b7d76e73b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a44c35e1fafae4b68e28d95b7d76e73b5">First_proc_for_prec</a></td></tr>
+<tr class="memdesc:a44c35e1fafae4b68e28d95b7d76e73b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The first_row component of the distribution of the processors over the preconditioners.  <a href="classoomph_1_1PreconditionerArray.html#a44c35e1fafae4b68e28d95b7d76e73b5">More...</a><br /></td></tr>
+<tr class="separator:a44c35e1fafae4b68e28d95b7d76e73b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accd34d22e7859ca172624b3882127e30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#accd34d22e7859ca172624b3882127e30">Nproc_for_prec</a></td></tr>
+<tr class="memdesc:accd34d22e7859ca172624b3882127e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">The nrow_local component of the distribution of the processors over the preconditioners.  <a href="classoomph_1_1PreconditionerArray.html#accd34d22e7859ca172624b3882127e30">More...</a><br /></td></tr>
+<tr class="separator:accd34d22e7859ca172624b3882127e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64fe716df64c78b9d4c74212f5da314a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a64fe716df64c78b9d4c74212f5da314a">First_row_for_proc</a></td></tr>
+<tr class="memdesc:a64fe716df64c78b9d4c74212f5da314a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage (indexed [i][j]) for the first row that will be sent from this processor to processor j for preconditioner i.  <a href="classoomph_1_1PreconditionerArray.html#a64fe716df64c78b9d4c74212f5da314a">More...</a><br /></td></tr>
+<tr class="separator:a64fe716df64c78b9d4c74212f5da314a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a513f1f2a2ded6e0b377f58c34bf47647"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a513f1f2a2ded6e0b377f58c34bf47647">Nrow_local_for_proc</a></td></tr>
+<tr class="memdesc:a513f1f2a2ded6e0b377f58c34bf47647"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage (indexed [i][j]) for the nrow_local that will be sent from this processor to processor j for preconditioner i.  <a href="classoomph_1_1PreconditionerArray.html#a513f1f2a2ded6e0b377f58c34bf47647">More...</a><br /></td></tr>
+<tr class="separator:a513f1f2a2ded6e0b377f58c34bf47647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff927480c2621ca698ac892ccc28b86c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#aff927480c2621ca698ac892ccc28b86c">First_row_from_proc</a></td></tr>
+<tr class="memdesc:aff927480c2621ca698ac892ccc28b86c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage (indexed [i][j]) for the first row that will be received by this processor from processor j for preconditioner i.  <a href="classoomph_1_1PreconditionerArray.html#aff927480c2621ca698ac892ccc28b86c">More...</a><br /></td></tr>
+<tr class="separator:aff927480c2621ca698ac892ccc28b86c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa48322538496f9f1b6d2d89666972ac4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#aa48322538496f9f1b6d2d89666972ac4">Nrow_local_from_proc</a></td></tr>
+<tr class="memdesc:aa48322538496f9f1b6d2d89666972ac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage (indexed [i][j]) for the nrow_local that will be received by this processor from processor j for preconditioner i.  <a href="classoomph_1_1PreconditionerArray.html#aa48322538496f9f1b6d2d89666972ac4">More...</a><br /></td></tr>
+<tr class="separator:aa48322538496f9f1b6d2d89666972ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5012c60980bdbffb480209a111e771a7"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a5012c60980bdbffb480209a111e771a7">Color</a></td></tr>
+<tr class="memdesc:a5012c60980bdbffb480209a111e771a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">the Color of this processor (or the preconditioner number)  <a href="classoomph_1_1PreconditionerArray.html#a5012c60980bdbffb480209a111e771a7">More...</a><br /></td></tr>
+<tr class="separator:a5012c60980bdbffb480209a111e771a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d5b7cce152e193ffeb4d30c593c6ae3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a6d5b7cce152e193ffeb4d30c593c6ae3">Global_communicator_pt</a></td></tr>
+<tr class="memdesc:a6d5b7cce152e193ffeb4d30c593c6ae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to the global communicator for this preconditioner array  <a href="classoomph_1_1PreconditionerArray.html#a6d5b7cce152e193ffeb4d30c593c6ae3">More...</a><br /></td></tr>
+<tr class="separator:a6d5b7cce152e193ffeb4d30c593c6ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a0fee7aa5e23878e57186dcef8c719d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a8a0fee7aa5e23878e57186dcef8c719d">Local_communicator_pt</a></td></tr>
+<tr class="memdesc:a8a0fee7aa5e23878e57186dcef8c719d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of communicators for the preconditioners.  <a href="classoomph_1_1PreconditionerArray.html#a8a0fee7aa5e23878e57186dcef8c719d">More...</a><br /></td></tr>
+<tr class="separator:a8a0fee7aa5e23878e57186dcef8c719d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac233896152000f13b3527d9ff087c113"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#ac233896152000f13b3527d9ff087c113">Distribution_pt</a></td></tr>
+<tr class="separator:ac233896152000f13b3527d9ff087c113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28dd7675a57d1402e4b06c368ffa1e3b"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PreconditionerArray.html#a28dd7675a57d1402e4b06c368ffa1e3b">Method</a></td></tr>
+<tr class="memdesc:a28dd7675a57d1402e4b06c368ffa1e3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">the communication method in the setup_preconditioners(...) method  <a href="classoomph_1_1PreconditionerArray.html#a28dd7675a57d1402e4b06c368ffa1e3b">More...</a><br /></td></tr>
+<tr class="separator:a28dd7675a57d1402e4b06c368ffa1e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classoomph_1_1PreconditionerArray.html" title="PreconditionerArray - NOTE - first implementation, a number of assumptions / simplifications were mad...">PreconditionerArray</a> - NOTE - first implementation, a number of assumptions / simplifications were made: </p>
+<ol type="1">
+<li>Only works with CRDoubleMatrices</li>
+<li>The number of processors must be greater than the number of preconditioners</li>
+<li>Currently only very crude load balancing - each preconditioner will be setup and applied with the same number of processors (or as near to as possible to the same number of processors)</li>
+<li>This class will, at the appropriate time, delete the all the Preconditioners passed setup_preconditioners(...)</li>
+<li>(but) Deletion of matrices passed to setup_preconditioners(...) is NOT performed by this class</li>
+<li>It is assumed that preconditioners do not require access to matrix once setup(...) is called</li>
+<li>The matrix on the subset of processors will be the same type (distributed or global) as the matrix passed to setup_preconditioners(...)</li>
+<li>If the matrix is a distributed matrix - it will be assembled with a uniform distribution on the subset of processors. </li>
+</ol>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00049">49</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af982432ce1975ed8ba55948fdccb38ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af982432ce1975ed8ba55948fdccb38ba">&#9670;&nbsp;</a></span>PreconditionerArray() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PreconditionerArray::PreconditionerArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00106">106</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">References <a class="el" href="preconditioner__array_8h_source.html#l00238">Method</a>, and <a class="el" href="preconditioner__array_8h_source.html#l00192">Nprec</a>.</p>
+
+</div>
+</div>
+<a id="a39b7ea03b0a0bdee36546f759f1632b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39b7ea03b0a0bdee36546f759f1632b9">&#9670;&nbsp;</a></span>PreconditionerArray() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PreconditionerArray::PreconditionerArray </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1PreconditionerArray.html">PreconditionerArray</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00114">114</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="abb6326ed44c67eff34760bd5944d0cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb6326ed44c67eff34760bd5944d0cf3">&#9670;&nbsp;</a></span>~PreconditionerArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PreconditionerArray::~PreconditionerArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00126">126</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">References <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa215f08a32f670700a08035bcc75dc63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa215f08a32f670700a08035bcc75dc63">&#9670;&nbsp;</a></span>clean_up_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PreconditionerArray::clean_up_memory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clean up memory. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00146">146</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">References <a class="el" href="preconditioner__array_8h_source.html#l00222">Color</a>, <a class="el" href="preconditioner__array_8h_source.html#l00232">Distribution_pt</a>, <a class="el" href="preconditioner__array_8h_source.html#l00199">First_proc_for_prec</a>, <a class="el" href="preconditioner__array_8h_source.html#l00207">First_row_for_proc</a>, <a class="el" href="preconditioner__array_8h_source.html#l00215">First_row_from_proc</a>, <a class="el" href="preconditioner__array_8h_source.html#l00225">Global_communicator_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="preconditioner__array_8h_source.html#l00228">Local_communicator_pt</a>, <a class="el" href="preconditioner__array_8h_source.html#l00192">Nprec</a>, <a class="el" href="preconditioner__array_8h_source.html#l00203">Nproc_for_prec</a>, <a class="el" href="preconditioner__array_8h_source.html#l00211">Nrow_local_for_proc</a>, <a class="el" href="preconditioner__array_8h_source.html#l00219">Nrow_local_from_proc</a>, and <a class="el" href="preconditioner__array_8h_source.html#l00195">Preconditioner_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00126">~PreconditionerArray()</a>.</p>
+
+</div>
+</div>
+<a id="a6a265f95d2cbb2fe10b9d08595fe7faf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a265f95d2cbb2fe10b9d08595fe7faf">&#9670;&nbsp;</a></span>compute_tag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::PreconditionerArray::compute_tag </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>nproc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>helper method for computing the MPI_Isend and MPI_Irecv tags </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00185">185</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+</div>
+</div>
+<a id="a73db1b394930346aa2d8d2902cca12e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73db1b394930346aa2d8d2902cca12e6">&#9670;&nbsp;</a></span>method()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::PreconditionerArray::method </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00180">180</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">References <a class="el" href="preconditioner__array_8h_source.html#l00238">Method</a>.</p>
+
+</div>
+</div>
+<a id="a29577eaaaf9055e40e54538ec607dba4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29577eaaaf9055e40e54538ec607dba4">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PreconditionerArray::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1PreconditionerArray.html">PreconditionerArray</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00120">120</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a70e99bbb30ed4056760430420bc5cf95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70e99bbb30ed4056760430420bc5cf95">&#9670;&nbsp;</a></span>setup_preconditioners() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PreconditionerArray::setup_preconditioners </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td>
+          <td class="paramname"><em>matrix_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> * &gt;&#160;</td>
+          <td class="paramname"><em>prec_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&#160;</td>
+          <td class="paramname"><em>comm_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Setup the preconditioners. Sets up each preconditioner in the array for the corresponding matrix in the vector matrix_pt. The number of preconditioners in the array is taken to be the length of prec_pt. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00052">52</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+</div>
+</div>
+<a id="a70e99bbb30ed4056760430420bc5cf95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70e99bbb30ed4056760430420bc5cf95">&#9670;&nbsp;</a></span>setup_preconditioners() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PreconditionerArray::setup_preconditioners </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * &gt;&#160;</td>
+          <td class="paramname"><em>matrix_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> * &gt;&#160;</td>
+          <td class="paramname"><em>prec_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&#160;</td>
+          <td class="paramname"><em>comm_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Setup the preconditioners. Sets up each preconditioner in the array for the corresponding matrix in the vector matrix_pt. The number of preconditioners in the array is taken to be the length of prec_pt The preconditioners that are not used on this processor are deleted. </p>
+
+</div>
+</div>
+<a id="a11a8bc01a8addffd5212369a2dc72ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11a8bc01a8addffd5212369a2dc72ef7">&#9670;&nbsp;</a></span>solve_preconditioners() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PreconditionerArray::solve_preconditioners </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Applies each preconditioner to the corresponding vector in r and z. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00060">60</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+</div>
+</div>
+<a id="a11a8bc01a8addffd5212369a2dc72ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11a8bc01a8addffd5212369a2dc72ef7">&#9670;&nbsp;</a></span>solve_preconditioners() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PreconditionerArray::solve_preconditioners </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies each preconditioner to the corresponding vector in r and z. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5012c60980bdbffb480209a111e771a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5012c60980bdbffb480209a111e771a7">&#9670;&nbsp;</a></span>Color</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::PreconditionerArray::Color</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the Color of this processor (or the preconditioner number) </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00222">222</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="ac233896152000f13b3527d9ff087c113"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac233896152000f13b3527d9ff087c113">&#9670;&nbsp;</a></span>Distribution_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a>*&gt; oomph::PreconditionerArray::Distribution_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00232">232</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a44c35e1fafae4b68e28d95b7d76e73b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44c35e1fafae4b68e28d95b7d76e73b5">&#9670;&nbsp;</a></span>First_proc_for_prec</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;unsigned&gt; oomph::PreconditionerArray::First_proc_for_prec</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The first_row component of the distribution of the processors over the preconditioners. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00199">199</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a64fe716df64c78b9d4c74212f5da314a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64fe716df64c78b9d4c74212f5da314a">&#9670;&nbsp;</a></span>First_row_for_proc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;unsigned&gt; &gt; oomph::PreconditionerArray::First_row_for_proc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage (indexed [i][j]) for the first row that will be sent from this processor to processor j for preconditioner i. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00207">207</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="aff927480c2621ca698ac892ccc28b86c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff927480c2621ca698ac892ccc28b86c">&#9670;&nbsp;</a></span>First_row_from_proc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;unsigned&gt; &gt; oomph::PreconditionerArray::First_row_from_proc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage (indexed [i][j]) for the first row that will be received by this processor from processor j for preconditioner i. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00215">215</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a6d5b7cce152e193ffeb4d30c593c6ae3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d5b7cce152e193ffeb4d30c593c6ae3">&#9670;&nbsp;</a></span>Global_communicator_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a>* oomph::PreconditionerArray::Global_communicator_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>pointer to the global communicator for this preconditioner array </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00225">225</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a8a0fee7aa5e23878e57186dcef8c719d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a0fee7aa5e23878e57186dcef8c719d">&#9670;&nbsp;</a></span>Local_communicator_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a>* oomph::PreconditionerArray::Local_communicator_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Vector.html">Vector</a> of communicators for the preconditioners. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00228">228</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a28dd7675a57d1402e4b06c368ffa1e3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28dd7675a57d1402e4b06c368ffa1e3b">&#9670;&nbsp;</a></span>Method</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::PreconditionerArray::Method</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the communication method in the setup_preconditioners(...) method </p>
+<ol type="1">
+<li>Non-blocking Send with Blocking Recv</li>
+<li>MPI_Datatypes with Non-blocking sends and receives </li>
+</ol>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00238">238</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00180">method()</a>, and <a class="el" href="preconditioner__array_8h_source.html#l00106">PreconditionerArray()</a>.</p>
+
+</div>
+</div>
+<a id="ab4f9ea783d3db44cf8401a0e0acc46dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4f9ea783d3db44cf8401a0e0acc46dd">&#9670;&nbsp;</a></span>Nprec</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::PreconditionerArray::Nprec</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the number of preconditioner in the array </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00192">192</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>, and <a class="el" href="preconditioner__array_8h_source.html#l00106">PreconditionerArray()</a>.</p>
+
+</div>
+</div>
+<a id="accd34d22e7859ca172624b3882127e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accd34d22e7859ca172624b3882127e30">&#9670;&nbsp;</a></span>Nproc_for_prec</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;unsigned&gt; oomph::PreconditionerArray::Nproc_for_prec</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The nrow_local component of the distribution of the processors over the preconditioners. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00203">203</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a513f1f2a2ded6e0b377f58c34bf47647"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a513f1f2a2ded6e0b377f58c34bf47647">&#9670;&nbsp;</a></span>Nrow_local_for_proc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;unsigned&gt; &gt; oomph::PreconditionerArray::Nrow_local_for_proc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage (indexed [i][j]) for the nrow_local that will be sent from this processor to processor j for preconditioner i. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00211">211</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="aa48322538496f9f1b6d2d89666972ac4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa48322538496f9f1b6d2d89666972ac4">&#9670;&nbsp;</a></span>Nrow_local_from_proc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;unsigned&gt; &gt; oomph::PreconditionerArray::Nrow_local_from_proc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage (indexed [i][j]) for the nrow_local that will be received by this processor from processor j for preconditioner i. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00219">219</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a963dad278f4abf1195666a4a050a0390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a963dad278f4abf1195666a4a050a0390">&#9670;&nbsp;</a></span>Preconditioner_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a>* oomph::PreconditionerArray::Preconditioner_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The pointer to the local preconditioner on this processor. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner__array_8h_source.html#l00195">195</a> of file <a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="preconditioner__array_8h_source.html#l00146">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="preconditioner__array_8h_source.html">preconditioner_array.h</a></li>
+<li><a class="el" href="preconditioner__array_8cc_source.html">preconditioner_array.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:15
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

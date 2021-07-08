@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html">BrethertonSpineMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1BrethertonSpineMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1BrethertonSpineMesh.png" usemap="#oomph::BrethertonSpineMesh_3C_20ELEMENT_2C_20INTERFACE_5FELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::BrethertonSpineMesh_3C_20ELEMENT_2C_20INTERFACE_5FELEMENT_20_3E_map" name="oomph::BrethertonSpineMesh_3C_20ELEMENT_2C_20INTERFACE_5FELEMENT_20_3E_map">
+<area href="classoomph_1_1SingleLayerSpineMesh.html" alt="oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;" shape="rect" coords="206,112,608,136"/>
+<area href="classoomph_1_1RectangularQuadMesh.html" alt="oomph::RectangularQuadMesh&lt; ELEMENT &gt;" shape="rect" coords="0,56,402,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0e9c404141ee65b000ab4d1fdc4f11da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a0e9c404141ee65b000ab4d1fdc4f11da">BrethertonSpineMesh</a> (const unsigned &amp;nx1, const unsigned &amp;nx2, const unsigned &amp;nx3, const unsigned &amp;nh, const unsigned &amp;nhalf, const double &amp;h, GeomObject *lower_wall_pt, GeomObject *upper_wall_pt, const double &amp;zeta_start, const double &amp;zeta_transition_start, const double &amp;zeta_transition_end, const double &amp;zeta_end, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a0e9c404141ee65b000ab4d1fdc4f11da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Arguments: <br  />
+  <a href="classoomph_1_1BrethertonSpineMesh.html#a0e9c404141ee65b000ab4d1fdc4f11da">More...</a><br /></td></tr>
+<tr class="separator:a0e9c404141ee65b000ab4d1fdc4f11da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d14f3985d718867099747e5b3750fec"><td class="memItemLeft" align="right" valign="top">FiniteElement *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a3d14f3985d718867099747e5b3750fec">interface_element_pt</a> (const unsigned long &amp;i)</td></tr>
+<tr class="memdesc:a3d14f3985d718867099747e5b3750fec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access functions for pointers to interface elements.  <a href="classoomph_1_1BrethertonSpineMesh.html#a3d14f3985d718867099747e5b3750fec">More...</a><br /></td></tr>
+<tr class="separator:a3d14f3985d718867099747e5b3750fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ecd7c00fe1032e1ee16d7a98156d5c"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#ae1ecd7c00fe1032e1ee16d7a98156d5c">ninterface_element</a> () const</td></tr>
+<tr class="memdesc:ae1ecd7c00fe1032e1ee16d7a98156d5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements on interface.  <a href="classoomph_1_1BrethertonSpineMesh.html#ae1ecd7c00fe1032e1ee16d7a98156d5c">More...</a><br /></td></tr>
+<tr class="separator:ae1ecd7c00fe1032e1ee16d7a98156d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fc2b4be08ff93fa313281f82e19d92e"><td class="memItemLeft" align="right" valign="top">FiniteElement *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a2fc2b4be08ff93fa313281f82e19d92e">bulk_element_pt</a> (const unsigned long &amp;i)</td></tr>
+<tr class="memdesc:a2fc2b4be08ff93fa313281f82e19d92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access functions for pointers to elements in bulk.  <a href="classoomph_1_1BrethertonSpineMesh.html#a2fc2b4be08ff93fa313281f82e19d92e">More...</a><br /></td></tr>
+<tr class="separator:a2fc2b4be08ff93fa313281f82e19d92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47184866746a1fce6dd0ca27ab7e17ce"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a47184866746a1fce6dd0ca27ab7e17ce">nbulk</a> () const</td></tr>
+<tr class="memdesc:a47184866746a1fce6dd0ca27ab7e17ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in bulk.  <a href="classoomph_1_1BrethertonSpineMesh.html#a47184866746a1fce6dd0ca27ab7e17ce">More...</a><br /></td></tr>
+<tr class="separator:a47184866746a1fce6dd0ca27ab7e17ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade4d0f2933beddda517b949d80928a18"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#ade4d0f2933beddda517b949d80928a18">nfree_surface_spines</a> ()</td></tr>
+<tr class="separator:ade4d0f2933beddda517b949d80928a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac80488ae4db2da00e1b38f6f07e0ff9d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#ac80488ae4db2da00e1b38f6f07e0ff9d">find_distance_to_free_surface</a> (GeomObject *const &amp;fs_geom_object_pt, Vector&lt; double &gt; &amp;initial_zeta, const Vector&lt; double &gt; &amp;spine_base, const Vector&lt; double &gt; &amp;spine_end)</td></tr>
+<tr class="memdesc:ac80488ae4db2da00e1b38f6f07e0ff9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recalculate the spine lengths after repositioning.  <a href="classoomph_1_1BrethertonSpineMesh.html#ac80488ae4db2da00e1b38f6f07e0ff9d">More...</a><br /></td></tr>
+<tr class="separator:ac80488ae4db2da00e1b38f6f07e0ff9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dfeac5bc9a4fa4bfdcd443def30dcdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a0dfeac5bc9a4fa4bfdcd443def30dcdb">reposition_spines</a> (const double &amp;zeta_lo_transition_start, const double &amp;zeta_lo_transition_end, const double &amp;zeta_up_transition_start, const double &amp;zeta_up_transition_end)</td></tr>
+<tr class="memdesc:a0dfeac5bc9a4fa4bfdcd443def30dcdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reposition the spines in response to changes in geometry.  <a href="classoomph_1_1BrethertonSpineMesh.html#a0dfeac5bc9a4fa4bfdcd443def30dcdb">More...</a><br /></td></tr>
+<tr class="separator:a0dfeac5bc9a4fa4bfdcd443def30dcdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a507ea97977b837f2f0d9647407d770cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a507ea97977b837f2f0d9647407d770cd">pin_all_spines</a> ()</td></tr>
+<tr class="separator:a507ea97977b837f2f0d9647407d770cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a981301706d4940cfb24d3d769a7a523b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a981301706d4940cfb24d3d769a7a523b">spine_node_update</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:a981301706d4940cfb24d3d769a7a523b"><td class="mdescLeft">&#160;</td><td class="mdescRight">General node update function implements pure virtual function defined in SpineMesh base class and performs specific update actions, depending on the node update fct id stored for each node.  <a href="classoomph_1_1BrethertonSpineMesh.html#a981301706d4940cfb24d3d769a7a523b">More...</a><br /></td></tr>
+<tr class="separator:a981301706d4940cfb24d3d769a7a523b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b02893724c76098f75d9285e9985f4b"><td class="memItemLeft" align="right" valign="top">ELEMENT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a9b02893724c76098f75d9285e9985f4b">control_element_pt</a> ()</td></tr>
+<tr class="memdesc:a9b02893724c76098f75d9285e9985f4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to control element (just under the symmetry line near the bubble tip, so the bubble tip is located at s=[1.0,1.0] in this element.  <a href="classoomph_1_1BrethertonSpineMesh.html#a9b02893724c76098f75d9285e9985f4b">More...</a><br /></td></tr>
+<tr class="separator:a9b02893724c76098f75d9285e9985f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67f784e7b3a898af6c60515042c3ea73"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a67f784e7b3a898af6c60515042c3ea73">spine_centre_fraction</a> () const</td></tr>
+<tr class="memdesc:a67f784e7b3a898af6c60515042c3ea73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the value of the spine centre's vertical fraction.  <a href="classoomph_1_1BrethertonSpineMesh.html#a67f784e7b3a898af6c60515042c3ea73">More...</a><br /></td></tr>
+<tr class="separator:a67f784e7b3a898af6c60515042c3ea73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c3ed5af92e7b22a22615f42c34c387"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a33c3ed5af92e7b22a22615f42c34c387">set_spine_centre_fraction_pt</a> (double *const &amp;fraction_pt)</td></tr>
+<tr class="memdesc:a33c3ed5af92e7b22a22615f42c34c387"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pointer to the spine centre's vertial fraction.  <a href="classoomph_1_1BrethertonSpineMesh.html#a33c3ed5af92e7b22a22615f42c34c387">More...</a><br /></td></tr>
+<tr class="separator:a33c3ed5af92e7b22a22615f42c34c387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1SingleLayerSpineMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1SingleLayerSpineMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1SingleLayerSpineMesh.html">oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a2cdbf36114a4da773fb7d659218d09cb inherit pub_methods_classoomph_1_1SingleLayerSpineMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SingleLayerSpineMesh.html#a2cdbf36114a4da773fb7d659218d09cb">SingleLayerSpineMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;h, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a2cdbf36114a4da773fb7d659218d09cb inherit pub_methods_classoomph_1_1SingleLayerSpineMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in x-direction, number of elements in y-direction, axial length, height of layer, and pointer to timestepper (defaults to Steady timestepper)  <a href="classoomph_1_1SingleLayerSpineMesh.html#a2cdbf36114a4da773fb7d659218d09cb">More...</a><br /></td></tr>
+<tr class="separator:a2cdbf36114a4da773fb7d659218d09cb inherit pub_methods_classoomph_1_1SingleLayerSpineMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb908e31d988eaa930e949a54eeea37f inherit pub_methods_classoomph_1_1SingleLayerSpineMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SingleLayerSpineMesh.html#afb908e31d988eaa930e949a54eeea37f">SingleLayerSpineMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;h, const bool &amp;periodic_in_x, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:afb908e31d988eaa930e949a54eeea37f inherit pub_methods_classoomph_1_1SingleLayerSpineMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in x-direction, number of elements in y-direction, axial length, height of layer, a boolean flag to make the mesh periodic in the x-direction, and a pointer to timestepper (defaults to Steady timestepper) <br  />
+  <a href="classoomph_1_1SingleLayerSpineMesh.html#afb908e31d988eaa930e949a54eeea37f">More...</a><br /></td></tr>
+<tr class="separator:afb908e31d988eaa930e949a54eeea37f inherit pub_methods_classoomph_1_1SingleLayerSpineMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1f906bca42da3d44765382013667e40d">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to Steady)  <a href="classoomph_1_1RectangularQuadMesh.html#a1f906bca42da3d44765382013667e40d">More...</a><br /></td></tr>
+<tr class="separator:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aea506679674e4fc5c43b62a53798d0be">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates.  <a href="classoomph_1_1RectangularQuadMesh.html#aea506679674e4fc5c43b62a53798d0be">More...</a><br /></td></tr>
+<tr class="separator:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a40f120e00d682026e54593ca0f823535">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, const bool &amp;periodic_in_x, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-direction. Also pass pointer to timestepper (defaults to Steady)  <a href="classoomph_1_1RectangularQuadMesh.html#a40f120e00d682026e54593ca0f823535">More...</a><br /></td></tr>
+<tr class="separator:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ac36869a7d72ec7524b18272657cb6167">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, const bool &amp;periodic_in_x, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#ac36869a7d72ec7524b18272657cb6167">More...</a><br /></td></tr>
+<tr class="separator:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfef93d6322886cdce14a437186e4821 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a> () const</td></tr>
+<tr class="memdesc:abfef93d6322886cdce14a437186e4821 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of elements in x direction.  <a href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">More...</a><br /></td></tr>
+<tr class="separator:abfef93d6322886cdce14a437186e4821 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86d76a55eb7c4e8bca9b74d23c8b0412 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a> () const</td></tr>
+<tr class="memdesc:a86d76a55eb7c4e8bca9b74d23c8b0412 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of elements in y direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">More...</a><br /></td></tr>
+<tr class="separator:a86d76a55eb7c4e8bca9b74d23c8b0412 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab311c3bec7f9f721bae1f93e0798ab2c">x_min</a> () const</td></tr>
+<tr class="memdesc:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ab311c3bec7f9f721bae1f93e0798ab2c">More...</a><br /></td></tr>
+<tr class="separator:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a3449b36a5e4fc4728e517bd38d7b0cc6">x_max</a> () const</td></tr>
+<tr class="memdesc:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#a3449b36a5e4fc4728e517bd38d7b0cc6">More...</a><br /></td></tr>
+<tr class="separator:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1c493af1dae35746bed7a31e61b46c5b">y_min</a> () const</td></tr>
+<tr class="memdesc:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#a1c493af1dae35746bed7a31e61b46c5b">More...</a><br /></td></tr>
+<tr class="separator:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a7d4a00a545efc20451b00a9b8ad1e17d">y_max</a> () const</td></tr>
+<tr class="memdesc:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#a7d4a00a545efc20451b00a9b8ad1e17d">More...</a><br /></td></tr>
+<tr class="separator:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae1e1d67808d4efb6e16a3835162a4504">element_reorder</a> ()</td></tr>
+<tr class="memdesc:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder the elements: By default they are ordered in "horizontal" layers (increasing in x, then in y). This function changes this to an ordering in the vertical direction (y first, then x). This is more efficient if a frontal solver is used and the mesh has more elements in the x than the y direction. Can be overloaded in specific derived meshes.  <a href="classoomph_1_1RectangularQuadMesh.html#ae1e1d67808d4efb6e16a3835162a4504">More...</a><br /></td></tr>
+<tr class="separator:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4c2f349cf201cb3107f0a4e5447c16f inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ad4c2f349cf201cb3107f0a4e5447c16f">x_spacing_function</a> (unsigned xelement, unsigned xnode, unsigned yelement, unsigned ynode)</td></tr>
+<tr class="memdesc:ad4c2f349cf201cb3107f0a4e5447c16f inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the x-coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "psudeo" two-dimensional coordinate system, so the range of xelement is [0,Nx-1], yelement is [0,Ny-1], and that of xnode and ynode is [0,Np-1]. The default is to return nodes that are equally spaced in the x coodinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ad4c2f349cf201cb3107f0a4e5447c16f">More...</a><br /></td></tr>
+<tr class="separator:ad4c2f349cf201cb3107f0a4e5447c16f inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae78204de1f176cdf2e819673bd34e78a inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae78204de1f176cdf2e819673bd34e78a">y_spacing_function</a> (unsigned xelement, unsigned xnode, unsigned yelement, unsigned ynode)</td></tr>
+<tr class="memdesc:ae78204de1f176cdf2e819673bd34e78a inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the y-coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "psudeo" two-dimensional coordinate system, so the range of xelement is [0,Nx-1], yelement is [0,Ny-1], and that of xnode and ynode is [0,Np-1]. The default it to return nodes that are equally spaced in the y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ae78204de1f176cdf2e819673bd34e78a">More...</a><br /></td></tr>
+<tr class="separator:ae78204de1f176cdf2e819673bd34e78a inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0446cb0efaa31739f51ae0534a73d116"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a0446cb0efaa31739f51ae0534a73d116">spine_node_update_film_lower</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:a0446cb0efaa31739f51ae0534a73d116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for the deposited film region in the lower part of the domain: Vertical spines.  <a href="classoomph_1_1BrethertonSpineMesh.html#a0446cb0efaa31739f51ae0534a73d116">More...</a><br /></td></tr>
+<tr class="separator:a0446cb0efaa31739f51ae0534a73d116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc35290fc96a075d864e79528e5fec8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a0dc35290fc96a075d864e79528e5fec8">spine_node_update_horizontal_transition_lower</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:a0dc35290fc96a075d864e79528e5fec8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for the horizontal transitition region in the lower part of the domain: Spine points from wall to origin.  <a href="classoomph_1_1BrethertonSpineMesh.html#a0dc35290fc96a075d864e79528e5fec8">More...</a><br /></td></tr>
+<tr class="separator:a0dc35290fc96a075d864e79528e5fec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ec578183760e386ed5229ba193e1fdf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a9ec578183760e386ed5229ba193e1fdf">spine_node_update_vertical_transition_lower</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:a9ec578183760e386ed5229ba193e1fdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for the vertical transitition region in the lower part of the domain: Spine points to origin.  <a href="classoomph_1_1BrethertonSpineMesh.html#a9ec578183760e386ed5229ba193e1fdf">More...</a><br /></td></tr>
+<tr class="separator:a9ec578183760e386ed5229ba193e1fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ddc62166abfd621219551957c9b1103"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a6ddc62166abfd621219551957c9b1103">spine_node_update_vertical_transition_upper</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:a6ddc62166abfd621219551957c9b1103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for the vertical transitition region in the upper part of the domain: Spine points to origin.  <a href="classoomph_1_1BrethertonSpineMesh.html#a6ddc62166abfd621219551957c9b1103">More...</a><br /></td></tr>
+<tr class="separator:a6ddc62166abfd621219551957c9b1103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9fa4941d8fb02a388e933a7dd1c76a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#aa9fa4941d8fb02a388e933a7dd1c76a2">spine_node_update_horizontal_transition_upper</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:aa9fa4941d8fb02a388e933a7dd1c76a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for the horizontal transitition region in the upper part of the domain: Spine points towards origin.  <a href="classoomph_1_1BrethertonSpineMesh.html#aa9fa4941d8fb02a388e933a7dd1c76a2">More...</a><br /></td></tr>
+<tr class="separator:aa9fa4941d8fb02a388e933a7dd1c76a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3919bd086252db283ee5242b4688f8d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a3919bd086252db283ee5242b4688f8d1">spine_node_update_film_upper</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:a3919bd086252db283ee5242b4688f8d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for the deposited film region in the upper part of the domain: Vertical spines.  <a href="classoomph_1_1BrethertonSpineMesh.html#a3919bd086252db283ee5242b4688f8d1">More...</a><br /></td></tr>
+<tr class="separator:a3919bd086252db283ee5242b4688f8d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a09b6d2f5e7ffd12a0ae882754ad818"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a5a09b6d2f5e7ffd12a0ae882754ad818">spine_node_update_channel</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:a5a09b6d2f5e7ffd12a0ae882754ad818"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for the nodes in the channel region ahead of the finger tip: Nodes are evenly distributed along vertical lines between the top and bottom walls.  <a href="classoomph_1_1BrethertonSpineMesh.html#a5a09b6d2f5e7ffd12a0ae882754ad818">More...</a><br /></td></tr>
+<tr class="separator:a5a09b6d2f5e7ffd12a0ae882754ad818"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52ffe1a705cb720d09c831b9cf5397f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a52ffe1a705cb720d09c831b9cf5397f6">initial_element_reorder</a> ()</td></tr>
+<tr class="memdesc:a52ffe1a705cb720d09c831b9cf5397f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial reordering elements of the elements &ndash; before the channel mesh is added. Vertical stacks of elements, each topped by their interface element &ndash; this is (currently) identical to the version in the <a class="el" href="classoomph_1_1SingleLayerSpineMesh.html">SingleLayerSpineMesh</a> but it's important that the element reordering is maintained in exactly this form for the rest of the mesh generation process to work properly. Therefore we keep a copy of the function in here.  <a href="classoomph_1_1BrethertonSpineMesh.html#a52ffe1a705cb720d09c831b9cf5397f6">More...</a><br /></td></tr>
+<tr class="separator:a52ffe1a705cb720d09c831b9cf5397f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1SingleLayerSpineMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1SingleLayerSpineMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1SingleLayerSpineMesh.html">oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a6829fa8216137c0e2f5eb40b389dda35 inherit pro_methods_classoomph_1_1SingleLayerSpineMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SingleLayerSpineMesh.html#a6829fa8216137c0e2f5eb40b389dda35">build_single_layer_mesh</a> (TimeStepper *time_stepper_pt)</td></tr>
+<tr class="memdesc:a6829fa8216137c0e2f5eb40b389dda35 inherit pro_methods_classoomph_1_1SingleLayerSpineMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to actually build the single-layer spine mesh (called from various constructors)  <a href="classoomph_1_1SingleLayerSpineMesh.html#a6829fa8216137c0e2f5eb40b389dda35">More...</a><br /></td></tr>
+<tr class="separator:a6829fa8216137c0e2f5eb40b389dda35 inherit pro_methods_classoomph_1_1SingleLayerSpineMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#afa579b413a2d8120e8228d840cb3582c">build_mesh</a> (TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic mesh construction function: contains all the hard work.  <a href="classoomph_1_1RectangularQuadMesh.html#afa579b413a2d8120e8228d840cb3582c">More...</a><br /></td></tr>
+<tr class="separator:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aeda49fb3896e9e3aec328391b196a6bf">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, const bool &amp;periodic_in_x, const bool &amp;build, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!!  <a href="classoomph_1_1RectangularQuadMesh.html#aeda49fb3896e9e3aec328391b196a6bf">More...</a><br /></td></tr>
+<tr class="separator:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:af6ef10fb80559c3ad27a50116da60dcc"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#af6ef10fb80559c3ad27a50116da60dcc">Nx1</a></td></tr>
+<tr class="memdesc:af6ef10fb80559c3ad27a50116da60dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements along wall in deposited film region.  <a href="classoomph_1_1BrethertonSpineMesh.html#af6ef10fb80559c3ad27a50116da60dcc">More...</a><br /></td></tr>
+<tr class="separator:af6ef10fb80559c3ad27a50116da60dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a237b4f516eb3f74e42e190f2a23f93c3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a237b4f516eb3f74e42e190f2a23f93c3">Nx2</a></td></tr>
+<tr class="memdesc:a237b4f516eb3f74e42e190f2a23f93c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements along wall in horizontal transition region.  <a href="classoomph_1_1BrethertonSpineMesh.html#a237b4f516eb3f74e42e190f2a23f93c3">More...</a><br /></td></tr>
+<tr class="separator:a237b4f516eb3f74e42e190f2a23f93c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26c57f832b7cdc495087cef7b54c98fd"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a26c57f832b7cdc495087cef7b54c98fd">Nx3</a></td></tr>
+<tr class="memdesc:a26c57f832b7cdc495087cef7b54c98fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements along wall in channel region.  <a href="classoomph_1_1BrethertonSpineMesh.html#a26c57f832b7cdc495087cef7b54c98fd">More...</a><br /></td></tr>
+<tr class="separator:a26c57f832b7cdc495087cef7b54c98fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e58d18dd2231c785008efa07260e8da"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a1e58d18dd2231c785008efa07260e8da">Nhalf</a></td></tr>
+<tr class="memdesc:a1e58d18dd2231c785008efa07260e8da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in vertical transition region (there are twice as many elements across the channel)  <a href="classoomph_1_1BrethertonSpineMesh.html#a1e58d18dd2231c785008efa07260e8da">More...</a><br /></td></tr>
+<tr class="separator:a1e58d18dd2231c785008efa07260e8da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba20dfa61b6c342f2defbc0cdb47851"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a4ba20dfa61b6c342f2defbc0cdb47851">Nh</a></td></tr>
+<tr class="memdesc:a4ba20dfa61b6c342f2defbc0cdb47851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements across the deposited film.  <a href="classoomph_1_1BrethertonSpineMesh.html#a4ba20dfa61b6c342f2defbc0cdb47851">More...</a><br /></td></tr>
+<tr class="separator:a4ba20dfa61b6c342f2defbc0cdb47851"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d711e1bc9d751ab14662f6839a900e3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a3d711e1bc9d751ab14662f6839a900e3">H</a></td></tr>
+<tr class="memdesc:a3d711e1bc9d751ab14662f6839a900e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thickness of deposited film.  <a href="classoomph_1_1BrethertonSpineMesh.html#a3d711e1bc9d751ab14662f6839a900e3">More...</a><br /></td></tr>
+<tr class="separator:a3d711e1bc9d751ab14662f6839a900e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f97e78a12000afcc1bd754102b5b51a"><td class="memItemLeft" align="right" valign="top">GeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a1f97e78a12000afcc1bd754102b5b51a">Upper_wall_pt</a></td></tr>
+<tr class="memdesc:a1f97e78a12000afcc1bd754102b5b51a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to geometric object that represents the upper wall.  <a href="classoomph_1_1BrethertonSpineMesh.html#a1f97e78a12000afcc1bd754102b5b51a">More...</a><br /></td></tr>
+<tr class="separator:a1f97e78a12000afcc1bd754102b5b51a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04c0136de66c06a34347b89f453730e1"><td class="memItemLeft" align="right" valign="top">GeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a04c0136de66c06a34347b89f453730e1">Lower_wall_pt</a></td></tr>
+<tr class="memdesc:a04c0136de66c06a34347b89f453730e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to geometric object that represents the lower wall.  <a href="classoomph_1_1BrethertonSpineMesh.html#a04c0136de66c06a34347b89f453730e1">More...</a><br /></td></tr>
+<tr class="separator:a04c0136de66c06a34347b89f453730e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f41083aa9a97fca03d498bd6ec21eb2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a0f41083aa9a97fca03d498bd6ec21eb2">Zeta_start</a></td></tr>
+<tr class="memdesc:a0f41083aa9a97fca03d498bd6ec21eb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start coordinate on wall.  <a href="classoomph_1_1BrethertonSpineMesh.html#a0f41083aa9a97fca03d498bd6ec21eb2">More...</a><br /></td></tr>
+<tr class="separator:a0f41083aa9a97fca03d498bd6ec21eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b5e005bfb5db65f54ca599942126ea"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#ac1b5e005bfb5db65f54ca599942126ea">Zeta_end</a></td></tr>
+<tr class="memdesc:ac1b5e005bfb5db65f54ca599942126ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wall coordinate of end of liquid filled region (inflow)  <a href="classoomph_1_1BrethertonSpineMesh.html#ac1b5e005bfb5db65f54ca599942126ea">More...</a><br /></td></tr>
+<tr class="separator:ac1b5e005bfb5db65f54ca599942126ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af701937d59d7804f40cb1b4c7a262391"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#af701937d59d7804f40cb1b4c7a262391">Zeta_transition_start</a></td></tr>
+<tr class="memdesc:af701937d59d7804f40cb1b4c7a262391"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wall coordinate of start of the transition region.  <a href="classoomph_1_1BrethertonSpineMesh.html#af701937d59d7804f40cb1b4c7a262391">More...</a><br /></td></tr>
+<tr class="separator:af701937d59d7804f40cb1b4c7a262391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d05bb741eba54ab7498ab4f3c55f1b7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a1d05bb741eba54ab7498ab4f3c55f1b7">Zeta_transition_end</a></td></tr>
+<tr class="memdesc:a1d05bb741eba54ab7498ab4f3c55f1b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wall coordinate of end of transition region.  <a href="classoomph_1_1BrethertonSpineMesh.html#a1d05bb741eba54ab7498ab4f3c55f1b7">More...</a><br /></td></tr>
+<tr class="separator:a1d05bb741eba54ab7498ab4f3c55f1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5e7951a89bc13d73f2b137947cda8a3"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#af5e7951a89bc13d73f2b137947cda8a3">Spine_centre_fraction_pt</a></td></tr>
+<tr class="memdesc:af5e7951a89bc13d73f2b137947cda8a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to vertical fraction of the spine centre.  <a href="classoomph_1_1BrethertonSpineMesh.html#af5e7951a89bc13d73f2b137947cda8a3">More...</a><br /></td></tr>
+<tr class="separator:af5e7951a89bc13d73f2b137947cda8a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a306cf8ae8f91a81054904de64195bb16"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a306cf8ae8f91a81054904de64195bb16">Default_spine_centre_fraction</a></td></tr>
+<tr class="memdesc:a306cf8ae8f91a81054904de64195bb16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default spine fraction.  <a href="classoomph_1_1BrethertonSpineMesh.html#a306cf8ae8f91a81054904de64195bb16">More...</a><br /></td></tr>
+<tr class="separator:a306cf8ae8f91a81054904de64195bb16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ee86c0c747947dab52073c221d53c1"><td class="memItemLeft" align="right" valign="top">ELEMENT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a81ee86c0c747947dab52073c221d53c1">Control_element_pt</a></td></tr>
+<tr class="memdesc:a81ee86c0c747947dab52073c221d53c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to control element (just under the symmetry line near the bubble tip; the bubble tip is located at s=[1.0,1.0] in this element.  <a href="classoomph_1_1BrethertonSpineMesh.html#a81ee86c0c747947dab52073c221d53c1">More...</a><br /></td></tr>
+<tr class="separator:a81ee86c0c747947dab52073c221d53c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb4fa323886ed601b1497777f8e686bc"><td class="memItemLeft" align="right" valign="top">Vector&lt; FiniteElement * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#aeb4fa323886ed601b1497777f8e686bc">Bulk_element_pt</a></td></tr>
+<tr class="memdesc:aeb4fa323886ed601b1497777f8e686bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to element in the fluid layer.  <a href="classoomph_1_1BrethertonSpineMesh.html#aeb4fa323886ed601b1497777f8e686bc">More...</a><br /></td></tr>
+<tr class="separator:aeb4fa323886ed601b1497777f8e686bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a204c551bf8ac1a3a4ca4cd31c0db9c56"><td class="memItemLeft" align="right" valign="top">Vector&lt; FiniteElement * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a204c551bf8ac1a3a4ca4cd31c0db9c56">Interface_element_pt</a></td></tr>
+<tr class="memdesc:a204c551bf8ac1a3a4ca4cd31c0db9c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to interface elements.  <a href="classoomph_1_1BrethertonSpineMesh.html#a204c551bf8ac1a3a4ca4cd31c0db9c56">More...</a><br /></td></tr>
+<tr class="separator:a204c551bf8ac1a3a4ca4cd31c0db9c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1b2c0a2d1f8399713033953c72d399ee">Nx</a></td></tr>
+<tr class="memdesc:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nx: number of elements in x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a1b2c0a2d1f8399713033953c72d399ee">More...</a><br /></td></tr>
+<tr class="separator:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">Ny</a></td></tr>
+<tr class="memdesc:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ny: number of elements in y-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">More...</a><br /></td></tr>
+<tr class="separator:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a92502c7536a6644ebffd806841cd4d98">Np</a></td></tr>
+<tr class="memdesc:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Np: number of (linear) points in the element.  <a href="classoomph_1_1RectangularQuadMesh.html#a92502c7536a6644ebffd806841cd4d98">More...</a><br /></td></tr>
+<tr class="separator:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#af3aab508d077460545031e758396514a">Xmin</a></td></tr>
+<tr class="memdesc:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#af3aab508d077460545031e758396514a">More...</a><br /></td></tr>
+<tr class="separator:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab8e4ddba0ce8315cf480cdd1f3447684">Xmax</a></td></tr>
+<tr class="memdesc:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ab8e4ddba0ce8315cf480cdd1f3447684">More...</a><br /></td></tr>
+<tr class="separator:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ade53fec7446044418ccba9f55d692adb">Ymin</a></td></tr>
+<tr class="memdesc:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ade53fec7446044418ccba9f55d692adb">More...</a><br /></td></tr>
+<tr class="separator:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">Ymax</a></td></tr>
+<tr class="memdesc:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">More...</a><br /></td></tr>
+<tr class="separator:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">Xperiodic</a></td></tr>
+<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction <br  />
+  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
+<tr class="separator:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT, class INTERFACE_ELEMENT&gt;<br />
+class oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;</h3>
+
+<p>Mesh for 2D Bretherton problem &ndash; based on single layer mesh. Templated by spine-ified Navier-Stokes element type (e.g. SpineElement&lt;QCrouzeixRaviartElement&lt;2&gt; &gt; and the corresponding interface element (e.g. SpineLineFluidInterfaceElement&lt;SpineElement&lt;QCrouzeixRaviartElement&lt;2&gt; &gt; &gt; </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00046">46</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0e9c404141ee65b000ab4d1fdc4f11da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e9c404141ee65b000ab4d1fdc4f11da">&#9670;&nbsp;</a></span>BrethertonSpineMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::<a class="el" href="classoomph_1_1BrethertonSpineMesh.html">BrethertonSpineMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nhalf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GeomObject *&#160;</td>
+          <td class="paramname"><em>lower_wall_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GeomObject *&#160;</td>
+          <td class="paramname"><em>upper_wall_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_transition_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_transition_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. Arguments: <br  />
+ </p>
+<ul>
+<li>nx1: Number of elements along wall in deposited film region</li>
+<li>nx2: Number of elements along wall in horizontal transition region</li>
+<li>nx3: Number of elements along wall in channel region</li>
+<li>nhalf: Number of elements in vertical transition region (there are twice as many elements across the channel)</li>
+<li>nh: Number of elements across the deposited film</li>
+<li>h: Thickness of deposited film</li>
+<li>zeta0: Start coordinate on wall</li>
+<li>zeta1: Wall coordinate of start of transition region</li>
+<li>zeta2: Wall coordinate of end of liquid filled region (inflow)</li>
+<li>lower_wall_pt: Pointer to geometric object that represents the lower wall</li>
+<li>upper_wall_pt: Pointer to geometric object that represents the upper wall</li>
+<li>time_stepper_pt: Pointer to timestepper; defaults to Steady</li>
+</ul>
+<p>Constructor. Arguments:</p><ul>
+<li>nx1: Number of elements along wall in deposited film region</li>
+<li>nx2: Number of elements along wall in horizontal transition region</li>
+<li>nx3: Number of elements along wall in channel region</li>
+<li>nhalf: Number of elements in vertical transition region (there are twice as many elements across the channel)</li>
+<li>nh: Number of elements across the deposited film</li>
+<li>h: Thickness of deposited film</li>
+<li>zeta0: Start coordinate on wall</li>
+<li>zeta1: Wall coordinate of start of transition region</li>
+<li>zeta2: Wall coordinate of end of liquid filled region (inflow)</li>
+<li>lower_wall_pt: Pointer to geometric object that represents the lower wall</li>
+<li>upper_wall_pt: Pointer to geometric object that represents the upper wall</li>
+<li>time_stepper_pt: Pointer to timestepper; defaults to Static </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">58</a> of file <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html">bretherton_spine_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00530">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Bulk_element_pt</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00527">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Control_element_pt</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00498">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::H</a>, <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01012">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::initial_element_reorder()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00533">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Interface_element_pt</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00504">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Lower_wall_pt</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00488">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Nx3</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00184">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_centre_fraction()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00501">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Upper_wall_pt</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00510">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Zeta_end</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00507">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Zeta_start</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00516">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Zeta_transition_end</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00513">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Zeta_transition_start</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2fc2b4be08ff93fa313281f82e19d92e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fc2b4be08ff93fa313281f82e19d92e">&#9670;&nbsp;</a></span>bulk_element_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FiniteElement* &amp; <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::bulk_element_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access functions for pointers to elements in bulk. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00090">90</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00530">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Bulk_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="a9b02893724c76098f75d9285e9985f4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b02893724c76098f75d9285e9985f4b">&#9670;&nbsp;</a></span>control_element_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ELEMENT* <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::control_element_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to control element (just under the symmetry line near the bubble tip, so the bubble tip is located at s=[1.0,1.0] in this element. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00180">180</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00527">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Control_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="ac80488ae4db2da00e1b38f6f07e0ff9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac80488ae4db2da00e1b38f6f07e0ff9d">&#9670;&nbsp;</a></span>find_distance_to_free_surface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::find_distance_to_free_surface </td>
+          <td>(</td>
+          <td class="paramtype">GeomObject *const &amp;&#160;</td>
+          <td class="paramname"><em>fs_geom_object_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>initial_zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>spine_base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>spine_end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recalculate the spine lengths after repositioning. </p>
+<p>Calculate the distance from the spine base to the free surface, i.e. the spine height. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01051">1051</a> of file <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html">bretherton_spine_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<a id="a52ffe1a705cb720d09c831b9cf5397f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52ffe1a705cb720d09c831b9cf5397f6">&#9670;&nbsp;</a></span>initial_element_reorder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::initial_element_reorder</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initial reordering elements of the elements &ndash; before the channel mesh is added. Vertical stacks of elements, each topped by their interface element &ndash; this is (currently) identical to the version in the <a class="el" href="classoomph_1_1SingleLayerSpineMesh.html">SingleLayerSpineMesh</a> but it's important that the element reordering is maintained in exactly this form for the rest of the mesh generation process to work properly. Therefore we keep a copy of the function in here. </p>
+<p>Reorder elements: Vertical stacks of elements, each topped by their interface element &ndash; this is (currently) identical to the version in the <a class="el" href="classoomph_1_1SingleLayerSpineMesh.html">SingleLayerSpineMesh</a> but it's important that element reordering is maintained in exactly this form so to be on the safe side, we move the function in here. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01012">1012</a> of file <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html">bretherton_spine_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a3d14f3985d718867099747e5b3750fec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d14f3985d718867099747e5b3750fec">&#9670;&nbsp;</a></span>interface_element_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FiniteElement* &amp; <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::interface_element_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access functions for pointers to interface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00083">83</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00533">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Interface_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="a47184866746a1fce6dd0ca27ab7e17ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47184866746a1fce6dd0ca27ab7e17ce">&#9670;&nbsp;</a></span>nbulk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::nbulk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in bulk. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00094">94</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00530">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Bulk_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="ade4d0f2933beddda517b949d80928a18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade4d0f2933beddda517b949d80928a18">&#9670;&nbsp;</a></span>nfree_surface_spines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::nfree_surface_spines </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Number of free-surface spines (i.e. excluding the dummy spines in the channel region) </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00099">99</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00492">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Nhalf</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00482">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Nx1</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00485">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Nx2</a>.</p>
+
+</div>
+</div>
+<a id="ae1ecd7c00fe1032e1ee16d7a98156d5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ecd7c00fe1032e1ee16d7a98156d5c">&#9670;&nbsp;</a></span>ninterface_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::ninterface_element </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements on interface. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00087">87</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00533">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Interface_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="a507ea97977b837f2f0d9647407d770cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a507ea97977b837f2f0d9647407d770cd">&#9670;&nbsp;</a></span>pin_all_spines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::pin_all_spines </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Pin all spines so the mesh can be used for computation without free surfaces </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00120">120</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a0dfeac5bc9a4fa4bfdcd443def30dcdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dfeac5bc9a4fa4bfdcd443def30dcdb">&#9670;&nbsp;</a></span>reposition_spines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::reposition_spines </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_lo_transition_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_lo_transition_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_up_transition_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_up_transition_end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reposition the spines in response to changes in geometry. </p>
+<p>Reposition the spines that emenate from the lower wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l01131">1131</a> of file <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html">bretherton_spine_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<a id="a33c3ed5af92e7b22a22615f42c34c387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33c3ed5af92e7b22a22615f42c34c387">&#9670;&nbsp;</a></span>set_spine_centre_fraction_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::set_spine_centre_fraction_pt </td>
+          <td>(</td>
+          <td class="paramtype">double *const &amp;&#160;</td>
+          <td class="paramname"><em>fraction_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the pointer to the spine centre's vertial fraction. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00188">188</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00519">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Spine_centre_fraction_pt</a>.</p>
+
+</div>
+</div>
+<a id="a67f784e7b3a898af6c60515042c3ea73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67f784e7b3a898af6c60515042c3ea73">&#9670;&nbsp;</a></span>spine_centre_fraction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_centre_fraction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the value of the spine centre's vertical fraction. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00184">184</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00519">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Spine_centre_fraction_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00218">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00379">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00264">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_lower()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00321">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_upper()</a>.</p>
+
+</div>
+</div>
+<a id="a981301706d4940cfb24d3d769a7a523b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a981301706d4940cfb24d3d769a7a523b">&#9670;&nbsp;</a></span>spine_node_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>General node update function implements pure virtual function defined in SpineMesh base class and performs specific update actions, depending on the node update fct id stored for each node. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1SingleLayerSpineMesh.html#a364648c15ab29c0c8d1cf7c2bc4cb792">oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00132">132</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00450">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_channel()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00195">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00426">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00218">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_lower()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00379">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_upper()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00264">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_lower()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00321">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_upper()</a>.</p>
+
+</div>
+</div>
+<a id="a5a09b6d2f5e7ffd12a0ae882754ad818"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a09b6d2f5e7ffd12a0ae882754ad818">&#9670;&nbsp;</a></span>spine_node_update_channel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_channel </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function for the nodes in the channel region ahead of the finger tip: Nodes are evenly distributed along vertical lines between the top and bottom walls. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00450">450</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00132">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a0446cb0efaa31739f51ae0534a73d116"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0446cb0efaa31739f51ae0534a73d116">&#9670;&nbsp;</a></span>spine_node_update_film_lower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_lower </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function for the deposited film region in the lower part of the domain: Vertical spines. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00195">195</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00132">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a3919bd086252db283ee5242b4688f8d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3919bd086252db283ee5242b4688f8d1">&#9670;&nbsp;</a></span>spine_node_update_film_upper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_film_upper </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function for the deposited film region in the upper part of the domain: Vertical spines. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00426">426</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00132">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a0dc35290fc96a075d864e79528e5fec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dc35290fc96a075d864e79528e5fec8">&#9670;&nbsp;</a></span>spine_node_update_horizontal_transition_lower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_lower </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function for the horizontal transitition region in the lower part of the domain: Spine points from wall to origin. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00218">218</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00184">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_centre_fraction()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00132">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="aa9fa4941d8fb02a388e933a7dd1c76a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9fa4941d8fb02a388e933a7dd1c76a2">&#9670;&nbsp;</a></span>spine_node_update_horizontal_transition_upper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_horizontal_transition_upper </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function for the horizontal transitition region in the upper part of the domain: Spine points towards origin. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00379">379</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00184">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_centre_fraction()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00132">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a9ec578183760e386ed5229ba193e1fdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ec578183760e386ed5229ba193e1fdf">&#9670;&nbsp;</a></span>spine_node_update_vertical_transition_lower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_lower </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function for the vertical transitition region in the lower part of the domain: Spine points to origin. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00264">264</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00184">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_centre_fraction()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00132">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a6ddc62166abfd621219551957c9b1103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ddc62166abfd621219551957c9b1103">&#9670;&nbsp;</a></span>spine_node_update_vertical_transition_upper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update_vertical_transition_upper </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function for the vertical transitition region in the upper part of the domain: Spine points to origin. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00321">321</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00184">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_centre_fraction()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00132">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_node_update()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aeb4fa323886ed601b1497777f8e686bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb4fa323886ed601b1497777f8e686bc">&#9670;&nbsp;</a></span>Bulk_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;FiniteElement *&gt; <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Bulk_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of pointers to element in the fluid layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00530">530</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00090">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::bulk_element_pt()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00094">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::nbulk()</a>.</p>
+
+</div>
+</div>
+<a id="a81ee86c0c747947dab52073c221d53c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81ee86c0c747947dab52073c221d53c1">&#9670;&nbsp;</a></span>Control_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ELEMENT* <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Control_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to control element (just under the symmetry line near the bubble tip; the bubble tip is located at s=[1.0,1.0] in this element. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00527">527</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00180">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::control_element_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a306cf8ae8f91a81054904de64195bb16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a306cf8ae8f91a81054904de64195bb16">&#9670;&nbsp;</a></span>Default_spine_centre_fraction</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Default_spine_centre_fraction</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default spine fraction. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00522">522</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a3d711e1bc9d751ab14662f6839a900e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d711e1bc9d751ab14662f6839a900e3">&#9670;&nbsp;</a></span>H</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::H</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Thickness of deposited film. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00498">498</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a204c551bf8ac1a3a4ca4cd31c0db9c56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a204c551bf8ac1a3a4ca4cd31c0db9c56">&#9670;&nbsp;</a></span>Interface_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;FiniteElement *&gt; <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Interface_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of pointers to interface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00533">533</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00083">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::interface_element_pt()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00087">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::ninterface_element()</a>.</p>
+
+</div>
+</div>
+<a id="a04c0136de66c06a34347b89f453730e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04c0136de66c06a34347b89f453730e1">&#9670;&nbsp;</a></span>Lower_wall_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObject* <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Lower_wall_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to geometric object that represents the lower wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00504">504</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a4ba20dfa61b6c342f2defbc0cdb47851"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba20dfa61b6c342f2defbc0cdb47851">&#9670;&nbsp;</a></span>Nh</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Nh</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements across the deposited film. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00495">495</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a1e58d18dd2231c785008efa07260e8da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e58d18dd2231c785008efa07260e8da">&#9670;&nbsp;</a></span>Nhalf</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Nhalf</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in vertical transition region (there are twice as many elements across the channel) </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00492">492</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00099">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::nfree_surface_spines()</a>.</p>
+
+</div>
+</div>
+<a id="af6ef10fb80559c3ad27a50116da60dcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6ef10fb80559c3ad27a50116da60dcc">&#9670;&nbsp;</a></span>Nx1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Nx1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements along wall in deposited film region. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00482">482</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00099">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::nfree_surface_spines()</a>.</p>
+
+</div>
+</div>
+<a id="a237b4f516eb3f74e42e190f2a23f93c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a237b4f516eb3f74e42e190f2a23f93c3">&#9670;&nbsp;</a></span>Nx2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Nx2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements along wall in horizontal transition region. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00485">485</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00099">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::nfree_surface_spines()</a>.</p>
+
+</div>
+</div>
+<a id="a26c57f832b7cdc495087cef7b54c98fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26c57f832b7cdc495087cef7b54c98fd">&#9670;&nbsp;</a></span>Nx3</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Nx3</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements along wall in channel region. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00488">488</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="af5e7951a89bc13d73f2b137947cda8a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5e7951a89bc13d73f2b137947cda8a3">&#9670;&nbsp;</a></span>Spine_centre_fraction_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Spine_centre_fraction_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to vertical fraction of the spine centre. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00519">519</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00188">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::set_spine_centre_fraction_pt()</a>, and <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00184">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::spine_centre_fraction()</a>.</p>
+
+</div>
+</div>
+<a id="a1f97e78a12000afcc1bd754102b5b51a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f97e78a12000afcc1bd754102b5b51a">&#9670;&nbsp;</a></span>Upper_wall_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObject* <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Upper_wall_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to geometric object that represents the upper wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00501">501</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="ac1b5e005bfb5db65f54ca599942126ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1b5e005bfb5db65f54ca599942126ea">&#9670;&nbsp;</a></span>Zeta_end</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Zeta_end</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wall coordinate of end of liquid filled region (inflow) </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00510">510</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a0f41083aa9a97fca03d498bd6ec21eb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f41083aa9a97fca03d498bd6ec21eb2">&#9670;&nbsp;</a></span>Zeta_start</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Zeta_start</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Start coordinate on wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00507">507</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a1d05bb741eba54ab7498ab4f3c55f1b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d05bb741eba54ab7498ab4f3c55f1b7">&#9670;&nbsp;</a></span>Zeta_transition_end</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Zeta_transition_end</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wall coordinate of end of transition region. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00516">516</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="af701937d59d7804f40cb1b4c7a262391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af701937d59d7804f40cb1b4c7a262391">&#9670;&nbsp;</a></span>Zeta_transition_start</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class INTERFACE_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1BrethertonSpineMesh.html">oomph::BrethertonSpineMesh</a>&lt; ELEMENT, INTERFACE_ELEMENT &gt;::Zeta_transition_start</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wall coordinate of start of the transition region. </p>
+
+<p class="definition">Definition at line <a class="el" href="bretherton__spine__mesh_8template_8h_source.html#l00513">513</a> of file <a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00058">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="bretherton__spine__mesh_8template_8h_source.html">bretherton_spine_mesh.template.h</a></li>
+<li><a class="el" href="bretherton__spine__mesh_8template_8cc_source.html">bretherton_spine_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:54:27
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

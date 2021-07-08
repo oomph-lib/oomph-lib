@@ -1,0 +1,40 @@
+#To create the documentation, we need to create the html directory with its
+# index file
+noinst_SCRIPTS = html/index.html
+
+# html directory depends on the doxygenified version of doc.txt
+# which needs to be doxygen-ed, using the local Doxyfile
+# If we have latex and dvipdf then create pdf-based documentation
+html/index.html: $(docfile).txt_doxygenified.h oomph-lib_header.html
+        # Make, then kill symbolic link, but don't delete the directory itself!
+	if [ -L extra_latex_style_files ]; then rm -f extra_latex_style_files; fi
+	if [ ! -d extra_latex_style_files ]; then ln -s $(top_srcdir)/doc/extra_latex_style_files; fi
+	cp $(docfile).txt_doxygenified.h $(docfile).txt_doxygenified.h.junk
+	if [ "${suppress_latex_in_this_directory}" != "1" ]; then sed "s/\*\*\//\n<hr>\n<hr>\n\\\section pdf PDF file\nA <a href=\"..\/latex\/refman.pdf\">pdf version<\/a> of this document is available.\n\*\*\//g" $(docfile).txt_doxygenified.h.junk > $(docfile).txt_doxygenified.h; fi
+	rm $(docfile).txt_doxygenified.h.junk
+	doxygen
+if HAVE_PDF_LATEX
+	if [ "${suppress_latex_in_this_directory}" != "1" ]; then (cd latex; rm -f refman.pdf; echo "\end{document}" >> index.tex; mv refman.tex refman.tex.back; $(top_builddir)/../bin/customise_latex.bash refman.tex.back > refman.tex; $(top_builddir)/../bin/tweak_doxygen_latex_style_file.bash;  make; mv refman.pdf ../$(docfile).pdf; ln -s ../$(docfile).pdf refman.pdf); fi
+
+endif
+
+EXTRA_DIST = Doxyfile $(docfile).txt figures 
+
+
+# Doxygenified version of .txt file is created by
+# bin/txt2h.bash
+SUFFIXES= .txt_doxygenified.h .txt 
+.txt.txt_doxygenified.h:
+	$(top_builddir)/bin/txt2h.sh $<
+
+oomph-lib_header.html:
+	$(top_builddir)/bin/build_oomph_html_header.sh $(top_builddir)
+
+#Cleanup
+clean-local:
+	rm -rf latex html $(docfile).txt_doxygenified.h $(docfile).pdf *~ .tmp
+	rm -f oomph-lib_header.html
+	rm -f oomph-lib_footer.html
+	if [ -L extra_latex_style_files ]; then rm -f extra_latex_style_files; fi
+
+

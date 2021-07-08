@@ -1,0 +1,437 @@
+\hypertarget{classoomph_1_1SpineMesh}{}\doxysection{oomph\+::Spine\+Mesh Class Reference}
+\label{classoomph_1_1SpineMesh}\index{oomph::SpineMesh@{oomph::SpineMesh}}
+
+
+{\ttfamily \#include $<$spines.\+h$>$}
+
+Inheritance diagram for oomph\+::Spine\+Mesh\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.092683cm]{classoomph_1_1SpineMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classoomph_1_1SpineMesh_ad60286797fb2e8fc4d72efd2719b5623}{$\sim$\+Spine\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to clean up the memory allocated to the spines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineMesh_aa8a4afbc37ff7f4c19e44c28c1d7552a}{spine\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the i-\/th spine in the mesh. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineMesh_a13ad12ffbc4d5880aebdfbabc01755e1}{spine\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return the i-\/th spine in the mesh (const version) \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1SpineMesh_a8aa10bf71f0d0126e2cdb98a4a4ae264}{nspine}} () const
+\begin{DoxyCompactList}\small\item\em Return the number of spines in the mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SpineMesh_a4bd8248041f7ed8337d65ce763afa8ee}{add\+\_\+spine\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1SpineMesh_aa8a4afbc37ff7f4c19e44c28c1d7552a}{spine\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Add a spine to the mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineMesh_a55bfdb79c8cf307c1b36e4948e5dc298}{node\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\begin{DoxyCompactList}\small\item\em Return a pointer to the n-\/th global \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineMesh_aea36e8d0454965f9f96a3adc4a5a9371}{element\+\_\+node\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\begin{DoxyCompactList}\small\item\em Return the n-\/th local \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} in element e. This is required to cast the nodes in a spine mesh to be Spine\+Nodes and therefore allow access to the extra \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} data. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1SpineMesh_ad969000be2d963bb4427bbde89ac47c2}{assign\+\_\+global\+\_\+spine\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&Dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Assign spines to Spine\+\_\+pt vector of element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SpineMesh_a94766043ec96db8388476b62556bad16}{describe\+\_\+spine\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
+\begin{DoxyCompactList}\small\item\em Function to describe the dofs of the \mbox{\hyperlink{classoomph_1_1Spine}{Spine}}. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SpineMesh_ad858479b2509532604bc48a184ad55a9}{set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&time\+\_\+stepper\+\_\+pt, const bool \&preserve\+\_\+existing\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Overload the mesh\+\_\+level timestepper function to set the timestepper data for the spines. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SpineMesh_a96c6e27c4029aa2424d00e138c30de2c}{set\+\_\+spine\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&time\+\_\+stepper\+\_\+pt, const bool \&preserve\+\_\+existing\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Set the time stepper forthe spine data that is stored in the mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SpineMesh_a0ec20ffa3e78435f8daa087147900d9a}{set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation}} (\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme}{Continuation\+Storage\+Scheme}} $\ast$const \&continuation\+\_\+stepper\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Set any pinned spine \char`\"{}history\char`\"{} values to be consistent for continuation problems. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1SpineMesh_a85444e7f6883f0540c75fd5f4cd9abe4}{does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data}} (double $\ast$const \&parameter\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Check whether the pointer parameter\+\_\+pt addresses data stored in the spines. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SpineMesh_ac04a655397d61da66c155f146c698d33}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
+\begin{DoxyCompactList}\small\item\em Update function to update all nodes of mesh \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1SpineMesh_aa7843aadce3c540f34442671f59eb75b}{spine\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$spine\+\_\+node\+\_\+pt)=0
+\begin{DoxyCompactList}\small\item\em Update function for given spine node -- this must be implemented by all specific Spine\+Meshes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SpineMesh_a4181640b3ddff5d710397c8f3a51a494}{dump}} (std\+::ofstream \&dump\+\_\+file) const
+\begin{DoxyCompactList}\small\item\em Overload the dump function so that the spine data is dumped. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SpineMesh_a281b1de21b0957de28fe78a93c80a215}{read}} (std\+::ifstream \&restart\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Overload the read function so that the spine data is read from the restart file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1SpineMesh_a4f3e5e603b61921f52a4311d347d1158}{Spine\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} mesh contains a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to spines. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+General \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}} class.
+
+Derived from \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} with virtual so that spine meshes can be derived from general meshes, without multiple copies of \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} objects. 
+
+Definition at line 561 of file spines.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_ad60286797fb2e8fc4d72efd2719b5623}\label{classoomph_1_1SpineMesh_ad60286797fb2e8fc4d72efd2719b5623}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!````~SpineMesh@{$\sim$SpineMesh}}
+\index{````~SpineMesh@{$\sim$SpineMesh}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{$\sim$SpineMesh()}{~SpineMesh()}}
+{\footnotesize\ttfamily oomph\+::\+Spine\+Mesh\+::$\sim$\+Spine\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor to clean up the memory allocated to the spines. 
+
+
+
+Definition at line 71 of file spines.\+cc.
+
+
+
+References i, and Spine\+\_\+pt.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a4bd8248041f7ed8337d65ce763afa8ee}\label{classoomph_1_1SpineMesh_a4bd8248041f7ed8337d65ce763afa8ee}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!add\_spine\_pt@{add\_spine\_pt}}
+\index{add\_spine\_pt@{add\_spine\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{add\_spine\_pt()}{add\_spine\_pt()}}
+{\footnotesize\ttfamily void oomph\+::\+Spine\+Mesh\+::add\+\_\+spine\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$const \&}]{spine\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add a spine to the mesh. 
+
+
+
+Definition at line 583 of file spines.\+h.
+
+
+
+References Spine\+\_\+pt, and spine\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_ad969000be2d963bb4427bbde89ac47c2}\label{classoomph_1_1SpineMesh_ad969000be2d963bb4427bbde89ac47c2}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!assign\_global\_spine\_eqn\_numbers@{assign\_global\_spine\_eqn\_numbers}}
+\index{assign\_global\_spine\_eqn\_numbers@{assign\_global\_spine\_eqn\_numbers}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{assign\_global\_spine\_eqn\_numbers()}{assign\_global\_spine\_eqn\_numbers()}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+Spine\+Mesh\+::assign\+\_\+global\+\_\+spine\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&}]{Dof\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Assign spines to Spine\+\_\+pt vector of element. 
+
+Assign (global) equation numbers to spines, nodes and elements.
+
+Assign equation numbers for spines 
+
+Definition at line 131 of file spines.\+cc.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a94766043ec96db8388476b62556bad16}\label{classoomph_1_1SpineMesh_a94766043ec96db8388476b62556bad16}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!describe\_spine\_dofs@{describe\_spine\_dofs}}
+\index{describe\_spine\_dofs@{describe\_spine\_dofs}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{describe\_spine\_dofs()}{describe\_spine\_dofs()}}
+{\footnotesize\ttfamily void oomph\+::\+Spine\+Mesh\+::describe\+\_\+spine\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const}
+
+
+
+Function to describe the dofs of the \mbox{\hyperlink{classoomph_1_1Spine}{Spine}}. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) 
+
+
+
+Definition at line 159 of file spines.\+cc.
+
+
+
+References i, Spine\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a85444e7f6883f0540c75fd5f4cd9abe4}\label{classoomph_1_1SpineMesh_a85444e7f6883f0540c75fd5f4cd9abe4}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!does\_pointer\_correspond\_to\_spine\_data@{does\_pointer\_correspond\_to\_spine\_data}}
+\index{does\_pointer\_correspond\_to\_spine\_data@{does\_pointer\_correspond\_to\_spine\_data}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{does\_pointer\_correspond\_to\_spine\_data()}{does\_pointer\_correspond\_to\_spine\_data()}}
+{\footnotesize\ttfamily bool oomph\+::\+Spine\+Mesh\+::does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data (\begin{DoxyParamCaption}\item[{double $\ast$const \&}]{parameter\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Check whether the pointer parameter\+\_\+pt addresses data stored in the spines. 
+
+Return true if the pointer addresses data stored within the spines, false if not. 
+
+Definition at line 212 of file spines.\+cc.
+
+
+
+References i, nspine(), and Spine\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a4181640b3ddff5d710397c8f3a51a494}\label{classoomph_1_1SpineMesh_a4181640b3ddff5d710397c8f3a51a494}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!dump@{dump}}
+\index{dump@{dump}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{dump()}{dump()}}
+{\footnotesize\ttfamily void oomph\+::\+Spine\+Mesh\+::dump (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{dump\+\_\+file }\end{DoxyParamCaption}) const}
+
+
+
+Overload the dump function so that the spine data is dumped. 
+
+Overload the dump function so that the spine data is also dumped. 
+
+Definition at line 231 of file spines.\+cc.
+
+
+
+References oomph\+::\+Data\+::dump(), oomph\+::\+Mesh\+::dump(), nspine(), s, oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt(), and spine\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_aea36e8d0454965f9f96a3adc4a5a9371}\label{classoomph_1_1SpineMesh_aea36e8d0454965f9f96a3adc4a5a9371}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!element\_node\_pt@{element\_node\_pt}}
+\index{element\_node\_pt@{element\_node\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{element\_node\_pt()}{element\_node\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}}$\ast$ oomph\+::\+Spine\+Mesh\+::element\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{e,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the n-\/th local \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} in element e. This is required to cast the nodes in a spine mesh to be Spine\+Nodes and therefore allow access to the extra \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} data. 
+
+
+
+Definition at line 610 of file spines.\+h.
+
+
+
+References e, oomph\+::\+Mesh\+::\+Element\+\_\+pt, n, node\+\_\+pt(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+
+
+Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a55bfdb79c8cf307c1b36e4948e5dc298}\label{classoomph_1_1SpineMesh_a55bfdb79c8cf307c1b36e4948e5dc298}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!node\_pt@{node\_pt}}
+\index{node\_pt@{node\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{node\_pt()}{node\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}}$\ast$ oomph\+::\+Spine\+Mesh\+::node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the n-\/th global \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}}. 
+
+
+
+Definition at line 588 of file spines.\+h.
+
+
+
+References n, and oomph\+::\+Mesh\+::\+Node\+\_\+pt.
+
+
+
+Referenced by element\+\_\+node\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_ac04a655397d61da66c155f146c698d33}\label{classoomph_1_1SpineMesh_ac04a655397d61da66c155f146c698d33}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily void oomph\+::\+Spine\+Mesh\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Update function to update all nodes of mesh \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. 
+
+Update function to update all nodes of mesh. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes (which defaults to false) is set to true.\mbox{]} 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a95bf112e5e1b3892e70a41f91b3cc523}{oomph\+::\+Mesh}}.
+
+
+
+Definition at line 88 of file spines.\+cc.
+
+
+
+References oomph\+::\+Mesh\+::\+Node\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a8aa10bf71f0d0126e2cdb98a4a4ae264}\label{classoomph_1_1SpineMesh_a8aa10bf71f0d0126e2cdb98a4a4ae264}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!nspine@{nspine}}
+\index{nspine@{nspine}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{nspine()}{nspine()}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+Spine\+Mesh\+::nspine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of spines in the mesh. 
+
+
+
+Definition at line 580 of file spines.\+h.
+
+
+
+References Spine\+\_\+pt.
+
+
+
+Referenced by does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data(), dump(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+spines(), read(), set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation(), and set\+\_\+spine\+\_\+time\+\_\+stepper().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a281b1de21b0957de28fe78a93c80a215}\label{classoomph_1_1SpineMesh_a281b1de21b0957de28fe78a93c80a215}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!read@{read}}
+\index{read@{read}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void oomph\+::\+Spine\+Mesh\+::read (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{restart\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Overload the read function so that the spine data is read from the restart file. 
+
+Overload the read function so that the spine data is also read. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_ac192b41d1a24297ff38854548defd92b}{oomph\+::\+Mesh}}.
+
+
+
+Definition at line 255 of file spines.\+cc.
+
+
+
+References nspine(), oomph\+::\+Data\+::read(), oomph\+::\+Mesh\+::read(), s, oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt(), spine\+\_\+pt(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a0ec20ffa3e78435f8daa087147900d9a}\label{classoomph_1_1SpineMesh_a0ec20ffa3e78435f8daa087147900d9a}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!set\_consistent\_pinned\_spine\_values\_for\_continuation@{set\_consistent\_pinned\_spine\_values\_for\_continuation}}
+\index{set\_consistent\_pinned\_spine\_values\_for\_continuation@{set\_consistent\_pinned\_spine\_values\_for\_continuation}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{set\_consistent\_pinned\_spine\_values\_for\_continuation()}{set\_consistent\_pinned\_spine\_values\_for\_continuation()}}
+{\footnotesize\ttfamily void oomph\+::\+Spine\+Mesh\+::set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme}{Continuation\+Storage\+Scheme}} $\ast$const \&}]{continuation\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Set any pinned spine \char`\"{}history\char`\"{} values to be consistent for continuation problems. 
+
+Set the data associated with pinned spine values to be consistent for continuation when using the continuation storage scheme 
+
+Definition at line 194 of file spines.\+cc.
+
+
+
+References i, nspine(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), and Spine\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_ad858479b2509532604bc48a184ad55a9}\label{classoomph_1_1SpineMesh_ad858479b2509532604bc48a184ad55a9}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!set\_mesh\_level\_time\_stepper@{set\_mesh\_level\_time\_stepper}}
+\index{set\_mesh\_level\_time\_stepper@{set\_mesh\_level\_time\_stepper}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{set\_mesh\_level\_time\_stepper()}{set\_mesh\_level\_time\_stepper()}}
+{\footnotesize\ttfamily void oomph\+::\+Spine\+Mesh\+::set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt,  }\item[{const bool \&}]{preserve\+\_\+existing\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the mesh\+\_\+level timestepper function to set the timestepper data for the spines. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a52c30b4ebc67038e137a5de1c5d422e5}{oomph\+::\+Mesh}}.
+
+
+
+Definition at line 662 of file spines.\+h.
+
+
+
+References set\+\_\+spine\+\_\+time\+\_\+stepper().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a96c6e27c4029aa2424d00e138c30de2c}\label{classoomph_1_1SpineMesh_a96c6e27c4029aa2424d00e138c30de2c}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!set\_spine\_time\_stepper@{set\_spine\_time\_stepper}}
+\index{set\_spine\_time\_stepper@{set\_spine\_time\_stepper}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{set\_spine\_time\_stepper()}{set\_spine\_time\_stepper()}}
+{\footnotesize\ttfamily void oomph\+::\+Spine\+Mesh\+::set\+\_\+spine\+\_\+time\+\_\+stepper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt,  }\item[{const bool \&}]{preserve\+\_\+existing\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Set the time stepper forthe spine data that is stored in the mesh. 
+
+Assign time stepper to spines data. 
+
+Definition at line 176 of file spines.\+cc.
+
+
+
+References i, nspine(), and Spine\+\_\+pt.
+
+
+
+Referenced by set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_aa7843aadce3c540f34442671f59eb75b}\label{classoomph_1_1SpineMesh_aa7843aadce3c540f34442671f59eb75b}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!spine\_node\_update@{spine\_node\_update}}
+\index{spine\_node\_update@{spine\_node\_update}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update()}{spine\_node\_update()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Spine\+Mesh\+::spine\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Update function for given spine node -- this must be implemented by all specific Spine\+Meshes. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_ad9b80ae7e34be72ca03f6d1bc6062de4}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a981301706d4940cfb24d3d769a7a523b}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aefa38017e44e64ad0cd86d87d397bf8d}{oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a364648c15ab29c0c8d1cf7c2bc4cb792}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SingleLayerCubicSpineMesh_a4851fbaed5be21441ad4f7b7f2a660e0}{oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1HorizontalSingleLayerSpineMesh_a4b9b833a281aa64a809b4e47159282e6}{oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+
+
+
+Referenced by oomph\+::\+Spine\+Node\+::node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_aa8a4afbc37ff7f4c19e44c28c1d7552a}\label{classoomph_1_1SpineMesh_aa8a4afbc37ff7f4c19e44c28c1d7552a}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!spine\_pt@{spine\_pt}}
+\index{spine\_pt@{spine\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{spine\_pt()}{spine\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Spine}{Spine}}$\ast$\& oomph\+::\+Spine\+Mesh\+::spine\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the i-\/th spine in the mesh. 
+
+
+
+Definition at line 574 of file spines.\+h.
+
+
+
+References i, and Spine\+\_\+pt.
+
+
+
+Referenced by add\+\_\+spine\+\_\+pt(), dump(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+spines(), and read().
+
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a13ad12ffbc4d5880aebdfbabc01755e1}\label{classoomph_1_1SpineMesh_a13ad12ffbc4d5880aebdfbabc01755e1}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!spine\_pt@{spine\_pt}}
+\index{spine\_pt@{spine\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{spine\_pt()}{spine\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Spine}{Spine}}$\ast$ oomph\+::\+Spine\+Mesh\+::spine\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the i-\/th spine in the mesh (const version) 
+
+
+
+Definition at line 577 of file spines.\+h.
+
+
+
+References i, and Spine\+\_\+pt.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a4f3e5e603b61921f52a4311d347d1158}\label{classoomph_1_1SpineMesh_a4f3e5e603b61921f52a4311d347d1158}} 
+\index{oomph::SpineMesh@{oomph::SpineMesh}!Spine\_pt@{Spine\_pt}}
+\index{Spine\_pt@{Spine\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
+\doxysubsubsection{\texorpdfstring{Spine\_pt}{Spine\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Spine}{Spine}}$\ast$$>$ oomph\+::\+Spine\+Mesh\+::\+Spine\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+A \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} mesh contains a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to spines. 
+
+
+
+Definition at line 566 of file spines.\+h.
+
+
+
+Referenced by add\+\_\+spine\+\_\+pt(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::centre\+\_\+spine\+\_\+pt(), describe\+\_\+spine\+\_\+dofs(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::left\+\_\+spine\+\_\+pt(), nspine(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::right\+\_\+spine\+\_\+pt(), set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation(), set\+\_\+spine\+\_\+time\+\_\+stepper(), spine\+\_\+pt(), and $\sim$\+Spine\+Mesh().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{spines_8h}{spines.\+h}}\item 
+\mbox{\hyperlink{spines_8cc}{spines.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: SpikedLine Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classSpikedLine-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">SpikedLine Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for SpikedLine:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classSpikedLine.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a01d0867c2a0eefe3443456b2557ebc52"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#a01d0867c2a0eefe3443456b2557ebc52">SpikedLine</a> (const Vector&lt; Data * &gt; &amp;<a class="el" href="classSpikedLine.html#abf25117b43790ca3a9afb826188bc5fc">geom_data_pt</a>)</td></tr>
+<tr class="memdesc:a01d0867c2a0eefe3443456b2557ebc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Four item of geometric data:  <a href="classSpikedLine.html#a01d0867c2a0eefe3443456b2557ebc52">More...</a><br /></td></tr>
+<tr class="separator:a01d0867c2a0eefe3443456b2557ebc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad007f4c54d091b1c4ddb4b63cef0e7b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#ad007f4c54d091b1c4ddb4b63cef0e7b6">SpikedLine</a> (const double &amp;<a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a>, const double &amp;amplitude, const double &amp;zeta_min, const double &amp;zeta_max)</td></tr>
+<tr class="memdesc:ad007f4c54d091b1c4ddb4b63cef0e7b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass height, amplitude, zeta min and zeta max (all are pinned by default)  <a href="classSpikedLine.html#ad007f4c54d091b1c4ddb4b63cef0e7b6">More...</a><br /></td></tr>
+<tr class="separator:ad007f4c54d091b1c4ddb4b63cef0e7b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54f1b8a7951ad8205741e78fc75afaa3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#a54f1b8a7951ad8205741e78fc75afaa3">~SpikedLine</a> ()</td></tr>
+<tr class="memdesc:a54f1b8a7951ad8205741e78fc75afaa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Clean up if necessary.  <a href="classSpikedLine.html#a54f1b8a7951ad8205741e78fc75afaa3">More...</a><br /></td></tr>
+<tr class="separator:a54f1b8a7951ad8205741e78fc75afaa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11a6078a409096caaf21dd56b97e1528"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#a11a6078a409096caaf21dd56b97e1528">position</a> (const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:a11a6078a409096caaf21dd56b97e1528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position Vector at Lagrangian coordinate zeta.  <a href="classSpikedLine.html#a11a6078a409096caaf21dd56b97e1528">More...</a><br /></td></tr>
+<tr class="separator:a11a6078a409096caaf21dd56b97e1528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6356a30cad06346e46a494e226d5219"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#ac6356a30cad06346e46a494e226d5219">position</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:ac6356a30cad06346e46a494e226d5219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. <br  />
+  <a href="classSpikedLine.html#ac6356a30cad06346e46a494e226d5219">More...</a><br /></td></tr>
+<tr class="separator:ac6356a30cad06346e46a494e226d5219"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c7c95b0c572a33ca9206b01d10c99c5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#a8c7c95b0c572a33ca9206b01d10c99c5">dposition</a> (const Vector&lt; double &gt; &amp;zeta, DenseMatrix&lt; double &gt; &amp;drdzeta) const</td></tr>
+<tr class="memdesc:a8c7c95b0c572a33ca9206b01d10c99c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivative of position Vector w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_32.png"/> = drdzeta(alpha,i). Evaluated at current time.  <a href="classSpikedLine.html#a8c7c95b0c572a33ca9206b01d10c99c5">More...</a><br /></td></tr>
+<tr class="separator:a8c7c95b0c572a33ca9206b01d10c99c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5feeb76bcde12139b4fc5b8797ae033b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#a5feeb76bcde12139b4fc5b8797ae033b">d2position</a> (const Vector&lt; double &gt; &amp;zeta, RankThreeTensor&lt; double &gt; &amp;ddrdzeta) const</td></tr>
+<tr class="memdesc:a5feeb76bcde12139b4fc5b8797ae033b"><td class="mdescLeft">&#160;</td><td class="mdescRight">2nd derivative of position Vector w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_33.png"/> = ddrdzeta(alpha,beta,i). Evaluated at current time.  <a href="classSpikedLine.html#a5feeb76bcde12139b4fc5b8797ae033b">More...</a><br /></td></tr>
+<tr class="separator:a5feeb76bcde12139b4fc5b8797ae033b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f670bc6cc3aae65d209ecffb7a63ec2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#a1f670bc6cc3aae65d209ecffb7a63ec2">d2position</a> (const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, DenseMatrix&lt; double &gt; &amp;drdzeta, RankThreeTensor&lt; double &gt; &amp;ddrdzeta) const</td></tr>
+<tr class="memdesc:a1f670bc6cc3aae65d209ecffb7a63ec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Posn Vector and its 1st &amp; 2nd derivatives w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_32.png"/> = drdzeta(alpha,i). <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_33.png"/> = ddrdzeta(alpha,beta,i). Evaluated at current time.  <a href="classSpikedLine.html#a1f670bc6cc3aae65d209ecffb7a63ec2">More...</a><br /></td></tr>
+<tr class="separator:a1f670bc6cc3aae65d209ecffb7a63ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13ef991b5c044d5f6ce154122c10aeca"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#a13ef991b5c044d5f6ce154122c10aeca">ngeom_data</a> () const</td></tr>
+<tr class="memdesc:a13ef991b5c044d5f6ce154122c10aeca"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many items of Data does the shape of the object depend on?  <a href="classSpikedLine.html#a13ef991b5c044d5f6ce154122c10aeca">More...</a><br /></td></tr>
+<tr class="separator:a13ef991b5c044d5f6ce154122c10aeca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf25117b43790ca3a9afb826188bc5fc"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#abf25117b43790ca3a9afb826188bc5fc">geom_data_pt</a> (const unsigned &amp;j)</td></tr>
+<tr class="memdesc:abf25117b43790ca3a9afb826188bc5fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to the j-th Data item that the object's shape depends on <br  />
+  <a href="classSpikedLine.html#abf25117b43790ca3a9afb826188bc5fc">More...</a><br /></td></tr>
+<tr class="separator:abf25117b43790ca3a9afb826188bc5fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a62f6dbf18fd631df474089e41ae7afeb"><td class="memItemLeft" align="right" valign="top">Vector&lt; Data * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#a62f6dbf18fd631df474089e41ae7afeb">Geom_data_pt</a></td></tr>
+<tr class="memdesc:a62f6dbf18fd631df474089e41ae7afeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to Data items that affects the object's shape.  <a href="classSpikedLine.html#a62f6dbf18fd631df474089e41ae7afeb">More...</a><br /></td></tr>
+<tr class="separator:a62f6dbf18fd631df474089e41ae7afeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ac7004ff4f8417640ad07ad32b9c9e0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpikedLine.html#a4ac7004ff4f8417640ad07ad32b9c9e0">Must_clean_up</a></td></tr>
+<tr class="memdesc:a4ac7004ff4f8417640ad07ad32b9c9e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do I need to clean up?  <a href="classSpikedLine.html#a4ac7004ff4f8417640ad07ad32b9c9e0">More...</a><br /></td></tr>
+<tr class="separator:a4ac7004ff4f8417640ad07ad32b9c9e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Steady, spiked 1D line in 2D space </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x = \zeta \]" src="form_29.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ y = \left\{ \begin{array}{cl} H + 2A\left(\frac{\zeta - \zeta_{\mbox{min}}} {\zeta_{\mbox{max}} - \zeta_{\mbox{min}}}\right) &amp; \mbox{for } \zeta \leq \frac{1}{2} \left(\zeta_{\mbox{max}} + \zeta_{\mbox{min}}\right)\\H + 2A\left(\frac{\zeta - \zeta_{\mbox{max}}} {\zeta_{\mbox{min}} - \zeta_{\mbox{max}}}\right) &amp; \mbox{for } \zeta &gt; \frac{1}{2} \left(\zeta_{\mbox{max}} + \zeta_{\mbox{min}}\right)\\ \end{array} \right.\]" src="form_34.png"/>
+</p>
+ 
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00076">76</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a01d0867c2a0eefe3443456b2557ebc52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01d0867c2a0eefe3443456b2557ebc52">&#9670;&nbsp;</a></span>SpikedLine() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpikedLine::SpikedLine </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; Data * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>geom_data_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Four item of geometric data: </p>
+<div class="fragment"><div class="line"><a class="code" href="classSpikedLine.html#a62f6dbf18fd631df474089e41ae7afeb">Geom_data_pt</a>[0]-&gt;value(0) = <a class="code" href="spine__channel_8txt.html#a06f5769f33c8965172112c7d78aa981a">height</a></div>
+<div class="line"><a class="code" href="classSpikedLine.html#a62f6dbf18fd631df474089e41ae7afeb">Geom_data_pt</a>[0]-&gt;value(1) = amplitude</div>
+<div class="line"><a class="code" href="classSpikedLine.html#a62f6dbf18fd631df474089e41ae7afeb">Geom_data_pt</a>[0]-&gt;value(2) = zeta_min</div>
+<div class="line"><a class="code" href="classSpikedLine.html#a62f6dbf18fd631df474089e41ae7afeb">Geom_data_pt</a>[0]-&gt;value(3) = zeta_max</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00088">88</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+</div>
+</div>
+<a id="ad007f4c54d091b1c4ddb4b63cef0e7b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad007f4c54d091b1c4ddb4b63cef0e7b6">&#9670;&nbsp;</a></span>SpikedLine() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpikedLine::SpikedLine </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>amplitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>zeta_max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass height, amplitude, zeta min and zeta max (all are pinned by default) </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00117">117</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="spine__channel_8txt_source.html#l00322">height</a>.</p>
+
+</div>
+</div>
+<a id="a54f1b8a7951ad8205741e78fc75afaa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54f1b8a7951ad8205741e78fc75afaa3">&#9670;&nbsp;</a></span>~SpikedLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpikedLine::~SpikedLine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Clean up if necessary. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00142">142</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5feeb76bcde12139b4fc5b8797ae033b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5feeb76bcde12139b4fc5b8797ae033b">&#9670;&nbsp;</a></span>d2position() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void SpikedLine::d2position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RankThreeTensor&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ddrdzeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>2nd derivative of position Vector w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_33.png"/> = ddrdzeta(alpha,beta,i). Evaluated at current time. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00252">252</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+</div>
+</div>
+<a id="a1f670bc6cc3aae65d209ecffb7a63ec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f670bc6cc3aae65d209ecffb7a63ec2">&#9670;&nbsp;</a></span>d2position() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void SpikedLine::d2position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>drdzeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RankThreeTensor&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ddrdzeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Posn Vector and its 1st &amp; 2nd derivatives w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_32.png"/> = drdzeta(alpha,i). <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_33.png"/> = ddrdzeta(alpha,beta,i). Evaluated at current time. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00266">266</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="spine__channel_8txt_source.html#l00215">A</a>, and <a class="el" href="spine__channel_8txt_source.html#l00214">H</a>.</p>
+
+</div>
+</div>
+<a id="a8c7c95b0c572a33ca9206b01d10c99c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c7c95b0c572a33ca9206b01d10c99c5">&#9670;&nbsp;</a></span>dposition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void SpikedLine::dposition </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>drdzeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Derivative of position Vector w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_32.png"/> = drdzeta(alpha,i). Evaluated at current time. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00227">227</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="spine__channel_8txt_source.html#l00215">A</a>.</p>
+
+</div>
+</div>
+<a id="abf25117b43790ca3a9afb826188bc5fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf25117b43790ca3a9afb826188bc5fc">&#9670;&nbsp;</a></span>geom_data_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* SpikedLine::geom_data_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to the j-th Data item that the object's shape depends on <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00309">309</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+</div>
+</div>
+<a id="a13ef991b5c044d5f6ce154122c10aeca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13ef991b5c044d5f6ce154122c10aeca">&#9670;&nbsp;</a></span>ngeom_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned SpikedLine::ngeom_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>How many items of Data does the shape of the object depend on? </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00305">305</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac6356a30cad06346e46a494e226d5219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6356a30cad06346e46a494e226d5219">&#9670;&nbsp;</a></span>position() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpikedLine::position </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00187">187</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="spine__channel_8txt_source.html#l00215">A</a>, and <a class="el" href="spine__channel_8txt_source.html#l00214">H</a>.</p>
+
+</div>
+</div>
+<a id="a11a6078a409096caaf21dd56b97e1528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11a6078a409096caaf21dd56b97e1528">&#9670;&nbsp;</a></span>position() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpikedLine::position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Position Vector at Lagrangian coordinate zeta. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00154">154</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="spine__channel_8txt_source.html#l00215">A</a>, and <a class="el" href="spine__channel_8txt_source.html#l00214">H</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a62f6dbf18fd631df474089e41ae7afeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62f6dbf18fd631df474089e41ae7afeb">&#9670;&nbsp;</a></span>Geom_data_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;Data*&gt; SpikedLine::Geom_data_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of pointers to Data items that affects the object's shape. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00315">315</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4ac7004ff4f8417640ad07ad32b9c9e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ac7004ff4f8417640ad07ad32b9c9e0">&#9670;&nbsp;</a></span>Must_clean_up</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SpikedLine::Must_clean_up</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do I need to clean up? </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__channel2_8cc_source.html#l00318">318</a> of file <a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="spine__channel2_8cc_source.html">spine_channel2.cc</a></li>
+</ul>
+</div><!-- contents -->
+<div class="ttc" id="aclassSpikedLine_html_a62f6dbf18fd631df474089e41ae7afeb"><div class="ttname"><a href="classSpikedLine.html#a62f6dbf18fd631df474089e41ae7afeb">SpikedLine::Geom_data_pt</a></div><div class="ttdeci">Vector&lt; Data * &gt; Geom_data_pt</div><div class="ttdoc">Vector of pointers to Data items that affects the object's shape.</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel2_8cc_source.html#l00315">spine_channel2.cc:315</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a06f5769f33c8965172112c7d78aa981a"><div class="ttname"><a href="spine__channel_8txt.html#a06f5769f33c8965172112c7d78aa981a">height</a></div><div class="ttdeci">Applied Science we have made a specific Mesh for the and use a geometric object to define its curved going through the process of updating its central where the heights have been changed To generalise this approach c oomph lib makes use of spines A c Spine is most easily visualised a line of a certain height</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00322">spine_channel.txt:322</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:10:07
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

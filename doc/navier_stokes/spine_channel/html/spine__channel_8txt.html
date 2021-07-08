@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: spine_channel.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">spine_channel.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ac2308c2feca8c5de7195c2ecf7eb28b9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#ac2308c2feca8c5de7195c2ecf7eb28b9">HREF</a> = &quot;../../../the_data_structure/html/classoomph_1_1StraightLine.html&quot;&gt; straight line&lt;/<a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a> &gt; and a deflected line respectively. We will discuss the necessary steps taken to create this <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a>(the complete documentation for this specific <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> can be found&lt; <a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a> <a class="el" href="spine__channel_8txt.html#ac2308c2feca8c5de7195c2ecf7eb28b9">HREF</a>=&quot;../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html&quot;&gt; here&lt;/<a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a> &gt;). To begin, we create a new class templated by a <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and inheriting from \c RectangularQuadMesh&lt; ELEMENT &gt; and \c SpineMesh. The latter adds the functionality needed for using Spines. \dontinclude channel_spine_mesh.template.h \skipline template&lt; \until public SpineMesh All SpineMeshs must include a function \c spine_node_update(SpineNode *spine_node_pt), this will describe the operations performed when updating every SpineNode in the mesh. First we find the SpineNodes <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> along the spine. \skipline virtual void spine_node_update \until <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a>() We then get the local coordinate on the geometric object that defines the upper wall. \until geom_parameter(0) Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node. \until } We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the uniform <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a>, as well as pointers to the two geometric objects. \skipline Number of elements in the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region \until Straight_wall_pt</td></tr>
+<tr class="separator:ac2308c2feca8c5de7195c2ecf7eb28b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a71ec26d85d9fff1cc90b52a659cb01df"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a71ec26d85d9fff1cc90b52a659cb01df">sparse</a> (and therefore more efficient) node-update strategies available in \c oomph-lib.&lt; HR &gt; \section why_sparse Why we need sparse node updates The sketch below shows a <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a>-surface fluids <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> in which the &quot;height&quot; of the fluid <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a>(parametrised by the scalar function \f$ x_2</td></tr>
+<tr class="separator:a71ec26d85d9fff1cc90b52a659cb01df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0baef6bc9fcce75c46bd5becc5c778e5"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>+<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0, 0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right), 0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f[\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figures below show the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a0baef6bc9fcce75c46bd5becc5c778e5">results</a> (carpet plots of the two velocity components and the pressure, and a contour plot of the pressure distribution with superimposed streamlines)</td></tr>
+<tr class="separator:a0baef6bc9fcce75c46bd5becc5c778e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e4f1f822bcd78487c7ad3fa51e3b6db"><td class="memItemLeft" align="right" valign="top">We then pin the velocities on the top and bottom&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> (3, 2 and 0). \until end loop over boundaries Finally</td></tr>
+<tr class="separator:a2e4f1f822bcd78487c7ad3fa51e3b6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85d7531f01be7b54c281b34c75b33cc1"><td class="memItemLeft" align="right" valign="top">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt; HR &gt;&lt; HR &gt; section part2 S F <a class="el" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a> E Coating Flows J R <a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a> S&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a85d7531f01be7b54c281b34c75b33cc1">M</a> (eds.)</td></tr>
+<tr class="separator:a85d7531f01be7b54c281b34c75b33cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78d745d26b2eccab99fd339bffc6fc25"><td class="memItemLeft" align="right" valign="top">Applied Science&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a78d745d26b2eccab99fd339bffc6fc25">London</a> (1983).&lt;/center &gt; \c oomph-lib 's SpineMeshes provide a generalisation of their node-update techniques. <a class="el" href="spine__channel_8txt.html#aead112d29fec022ef7d0ce50d8d19706">In</a> the past when solving a <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> in a <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> with curved <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a></td></tr>
+<tr class="separator:a78d745d26b2eccab99fd339bffc6fc25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6c081592e5a43c3ddd306db5c520563"><td class="memItemLeft" align="right" valign="top">Applied Science we have made a specific Mesh for the and use a geometric object to define its curved&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> (s). @I w 0.75\textwidth <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> &quot;Diagram of a ChannelSpineMesh</td></tr>
+<tr class="separator:ab6c081592e5a43c3ddd306db5c520563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6dd20913b6f4c7abd5a0823c3ad7134"><td class="memItemLeft" align="right" valign="top">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c copies these values to their storage in the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> and call the function c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#af6dd20913b6f4c7abd5a0823c3ad7134">build_channel_spine_mesh</a> (...) \until } When we call the function \c build_channel_spine_mesh(...)</td></tr>
+<tr class="separator:af6dd20913b6f4c7abd5a0823c3ad7134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea183202dd05df575471ea7cd5a2ff6c"><td class="memItemLeft" align="right" valign="top">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c copies these values to their storage in the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> and call the function c it calls its counterpart in the c then store the numbers of elements in each direction in each region(and all at once). \dontinclude channel_spine_mesh.template.cc \skipline Now we create the first <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> with unit pin the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> (since it is not a degree of freedom in this <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a>) and push the <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> back onto the \c Spine_pt. \until push_back(new_spine_pt) We then set the \c spine_pt() of the first node to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> we just created</td></tr>
+<tr class="separator:aea183202dd05df575471ea7cd5a2ff6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa65a3698923f42762308375c13258dd9"><td class="memItemLeft" align="right" valign="top">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c copies these values to their storage in the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> and call the function c it calls its counterpart in the c then store the numbers of elements in each direction in each region(and all at once). \dontinclude channel_spine_mesh.template.cc \skipline Now we create the first <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> with unit pin the assign the <a class="el" href="spine__channel_8txt.html#ab80d25533169892e647daf0111a089cc">nodes</a> c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> () to zero and define the node as part of this mesh. \until nod_pt -&gt; spine_mesh_pt()=this</td></tr>
+<tr class="separator:aa65a3698923f42762308375c13258dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d3a125459ff8b4fbf997eee4612828f"><td class="memItemLeft" align="right" valign="top">We then mark the node as part of the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> (0) region. \until node_update_fct_id()=0</td></tr>
+<tr class="separator:a0d3a125459ff8b4fbf997eee4612828f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73991fc9d78a5711ebe0c73bd20df186"><td class="memItemLeft" align="right" valign="top">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> to each and assigning the <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> for each node on this define each node as part of this and mark it as part of the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region until end loop over elements We then loop over the remaining spines in the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region repeating this except that the first <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> in each&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> (except the first) is copied from the last <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> in the previous element. We then repeat this <a class="el" href="spine__channel_8txt.html#a1690af29534a7ce8bc01ccb42785c809">process</a> for the centre and right regions</td></tr>
+<tr class="separator:a73991fc9d78a5711ebe0c73bd20df186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a8d895bb93cd829890aa4c1a2d5682792"><td class="memItemLeft" align="right" valign="top">mainpage Example&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></td></tr>
+<tr class="separator:a8d895bb93cd829890aa4c1a2d5682792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee463bb90f411cf1583585d1ddfcbf39"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#aee463bb90f411cf1583585d1ddfcbf39">features</a></td></tr>
+<tr class="separator:aee463bb90f411cf1583585d1ddfcbf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96542ded56c20e8b68d7c5d065c16dbb"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a96542ded56c20e8b68d7c5d065c16dbb">arises</a></td></tr>
+<tr class="separator:a96542ded56c20e8b68d7c5d065c16dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b5b6ab114eefb59ac7e3c2dc6542d76"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a1b5b6ab114eefb59ac7e3c2dc6542d76">g</a></td></tr>
+<tr class="separator:a1b5b6ab114eefb59ac7e3c2dc6542d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49921d8dda4e707966772a12d3baf1ac"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a49921d8dda4e707966772a12d3baf1ac">H_</a> {s_j} \</td></tr>
+<tr class="separator:a49921d8dda4e707966772a12d3baf1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ef05fdddfba8360dccba11956b40d79"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a3ef05fdddfba8360dccba11956b40d79">D</a></td></tr>
+<tr class="separator:a3ef05fdddfba8360dccba11956b40d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7936dbdefd2819f8f80dee7bb3cd5ac"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>+<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0, 0),\f]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a></td></tr>
+<tr class="separator:ab7936dbdefd2819f8f80dee7bb3cd5ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22904b46a6976c37a810223b89a2f79b"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> boundary is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>+<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet boundary conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0, 0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a></td></tr>
+<tr class="separator:a22904b46a6976c37a810223b89a2f79b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaccdb3cc79db22448a639c636e45fa5"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>+<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial D_{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0, 0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a> {inflow} = \{ (x_1,x_2) \ | \ x_1=0 \}\f$</td></tr>
+<tr class="separator:adaccdb3cc79db22448a639c636e45fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad99851325287fd3b9ba0fecb212475f1"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in free surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>+<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0, 0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right), 0\right),\f] and axially traction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a></td></tr>
+<tr class="separator:ad99851325287fd3b9ba0fecb212475f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96c0ab3a0b092769001018d4f44e37ff"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>+<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0, 0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right), 0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f[\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section <a class="el" href="spine__channel_8txt.html#a0baef6bc9fcce75c46bd5becc5c778e5">results</a> Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of <a class="el" href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a> f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a> = 2.7\f$</td></tr>
+<tr class="separator:a96c0ab3a0b092769001018d4f44e37ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99351e8f5e62e2975171cb6610e95f98"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}H &amp;0 \leq x_1 \leq L_1 \\H+<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\H &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0, 0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(H-x_2\right), 0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f[\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section <a class="el" href="spine__channel_8txt.html#a0baef6bc9fcce75c46bd5becc5c778e5">results</a> Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of <a class="el" href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a> f <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> =1.0 \f$</td></tr>
+<tr class="separator:a99351e8f5e62e2975171cb6610e95f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6278222265b62552409f8aac35d11539"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>+<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0, 0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right), 0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f[\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section <a class="el" href="spine__channel_8txt.html#a0baef6bc9fcce75c46bd5becc5c778e5">results</a> Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of <a class="el" href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a> f <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> f with deflection amplitude f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a> = 0.4 \f$</td></tr>
+<tr class="separator:a6278222265b62552409f8aac35d11539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3eeb8be8a3c759179265ebd6d254526b"><td class="memItemLeft" align="right" valign="top">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>+<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0, 0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f[\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right), 0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f[\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section <a class="el" href="spine__channel_8txt.html#a0baef6bc9fcce75c46bd5becc5c778e5">results</a> Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of <a class="el" href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a> f <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> f with deflection amplitude f and a Reynolds number of f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a3eeb8be8a3c759179265ebd6d254526b">Re</a></td></tr>
+<tr class="separator:a3eeb8be8a3c759179265ebd6d254526b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97ce5b34818c1076205a77cb8a4c6cf2"><td class="memItemLeft" align="right" valign="top">We then pin the velocities on the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a97ce5b34818c1076205a77cb8a4c6cf2">left</a></td></tr>
+<tr class="separator:a97ce5b34818c1076205a77cb8a4c6cf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c6186c3a560b58f497fc7584e190b8"><td class="memItemLeft" align="right" valign="top">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt; HR &gt;&lt; HR &gt; section part2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a51c6186c3a560b58f497fc7584e190b8">Part</a></td></tr>
+<tr class="separator:a51c6186c3a560b58f497fc7584e190b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf72d0f92dd50beb14454e43a1534d3c"><td class="memItemLeft" align="right" valign="top">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt; HR &gt;&lt; HR &gt; section part2 S F &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#abf72d0f92dd50beb14454e43a1534d3c">Scriven</a></td></tr>
+<tr class="separator:abf72d0f92dd50beb14454e43a1534d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aead112d29fec022ef7d0ce50d8d19706"><td class="memItemLeft" align="right" valign="top">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt; HR &gt;&lt; HR &gt; section part2 S F <a class="el" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a> E Coating Flows&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#aead112d29fec022ef7d0ce50d8d19706">In</a></td></tr>
+<tr class="separator:aead112d29fec022ef7d0ce50d8d19706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89d4b491e6b21410de89c1e8ca17051b"><td class="memItemLeft" align="right" valign="top">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt; HR &gt;&lt; HR &gt; section part2 S F <a class="el" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a> E Coating Flows&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a89d4b491e6b21410de89c1e8ca17051b">Pearson</a></td></tr>
+<tr class="separator:a89d4b491e6b21410de89c1e8ca17051b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc823d7d5cdc118edf856854c72e887c"><td class="memItemLeft" align="right" valign="top">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt; HR &gt;&lt; HR &gt; section part2 S F <a class="el" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a> E Coating Flows J R <a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#abc823d7d5cdc118edf856854c72e887c">Richardson</a></td></tr>
+<tr class="separator:abc823d7d5cdc118edf856854c72e887c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3531a9cb2a84091184d78cdadf9cef7b"><td class="memItemLeft" align="right" valign="top">Applied Science&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a3531a9cb2a84091184d78cdadf9cef7b">Publishers</a></td></tr>
+<tr class="separator:a3531a9cb2a84091184d78cdadf9cef7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf7daf64e28672c5d683cb3854397ad"><td class="memItemLeft" align="right" valign="top">Applied Science we have made a specific Mesh for the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a></td></tr>
+<tr class="separator:acdf7daf64e28672c5d683cb3854397ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab80d25533169892e647daf0111a089cc"><td class="memItemLeft" align="right" valign="top">Applied Science we have made a specific Mesh for the and use a geometric object to define its curved going through the <a class="el" href="spine__channel_8txt.html#a1690af29534a7ce8bc01ccb42785c809">process</a> of updating its central&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#ab80d25533169892e647daf0111a089cc">nodes</a></td></tr>
+<tr class="separator:ab80d25533169892e647daf0111a089cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06f5769f33c8965172112c7d78aa981a"><td class="memItemLeft" align="right" valign="top">Applied Science we have made a specific Mesh for the and use a geometric object to define its curved going through the <a class="el" href="spine__channel_8txt.html#a1690af29534a7ce8bc01ccb42785c809">process</a> of updating its central where the heights have been changed To generalise this approach c oomph lib makes use of spines <a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a> c <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> is most easily visualised a line of a certain&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a06f5769f33c8965172112c7d78aa981a">height</a></td></tr>
+<tr class="separator:a06f5769f33c8965172112c7d78aa981a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaa50e6ec6292e982f24e14f22450448"><td class="memItemLeft" align="right" valign="top">All these details are passed to the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a></td></tr>
+<tr class="separator:acaa50e6ec6292e982f24e14f22450448"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7273b1a3a289023d93a6c89f8f13a2d5"><td class="memItemLeft" align="right" valign="top">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a7273b1a3a289023d93a6c89f8f13a2d5">RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="separator:a7273b1a3a289023d93a6c89f8f13a2d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb5370399480f2ac0266d7183b126dc0"><td class="memItemLeft" align="right" valign="top">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c copies these values to their storage in the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> and call the function c it calls its counterpart in the c then store the numbers of elements in each direction in each region(and all at once). \dontinclude channel_spine_mesh.template.cc \skipline Now we create the first <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> with unit&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a></td></tr>
+<tr class="separator:afb5370399480f2ac0266d7183b126dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a914410aeeaf61a0d6c75c43ec26ecbaa"><td class="memItemLeft" align="right" valign="top">When we built the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a></td></tr>
+<tr class="separator:a914410aeeaf61a0d6c75c43ec26ecbaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc0c723055298f44890e720b0ca907a"><td class="memItemLeft" align="right" valign="top">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> to each&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#abbc0c723055298f44890e720b0ca907a">element</a></td></tr>
+<tr class="separator:abbc0c723055298f44890e720b0ca907a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76a2ded169eb3947a11ec8e4f871575c"><td class="memItemLeft" align="right" valign="top">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the spine to each and assigning the <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> for each node on this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a></td></tr>
+<tr class="separator:a76a2ded169eb3947a11ec8e4f871575c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86801174b4287733386905e7543911a0"><td class="memItemLeft" align="right" valign="top">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the mesh to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> to each and assigning the <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> for each node on this define each node as part of this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a></td></tr>
+<tr class="separator:a86801174b4287733386905e7543911a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1690af29534a7ce8bc01ccb42785c809"><td class="memItemLeft" align="right" valign="top">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> to each and assigning the <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> for each node on this define each node as part of this and mark it as part of the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region until end loop over elements We then loop over the remaining spines in the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region repeating this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spine__channel_8txt.html#a1690af29534a7ce8bc01ccb42785c809">process</a></td></tr>
+<tr class="separator:a1690af29534a7ce8bc01ccb42785c809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ac2308c2feca8c5de7195c2ecf7eb28b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2308c2feca8c5de7195c2ecf7eb28b9">&#9670;&nbsp;</a></span>HREF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="spine__channel_8txt.html#ac2308c2feca8c5de7195c2ecf7eb28b9">HREF</a> =  &quot;../../../the_data_structure/html/classoomph_1_1StraightLine.html&quot;&gt; straight line &lt;/<a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a>&gt; and a deflected line respectively. We will discuss the necessary steps taken to create this <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> (the complete documentation for this specific <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> can be found &lt;<a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a> <a class="el" href="spine__channel_8txt.html#ac2308c2feca8c5de7195c2ecf7eb28b9">HREF</a>=&quot;../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html&quot;&gt; here &lt;/<a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a>&gt;). To begin, we create a new class templated by a <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and inheriting from \c RectangularQuadMesh&lt;ELEMENT&gt; and \c SpineMesh. The latter adds the functionality needed for using Spines. \dontinclude channel_spine_mesh.template.h \skipline template &lt; \until public SpineMesh All SpineMeshs must include a function \c spine_node_update(SpineNode* spine_node_pt), this will describe the operations performed when updating every SpineNode in the mesh. First we find the SpineNodes <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> along the spine. \skipline virtual void spine_node_update \until <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a>() We then get the local coordinate on the geometric object that defines the upper wall. \until geom_parameter(0) Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node. \until } We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the uniform <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a>, as well as pointers to the two geometric objects. \skipline Number of elements in the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region \until Straight_wall_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00384">384</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a2e4f1f822bcd78487c7ad3fa51e3b6db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e4f1f822bcd78487c7ad3fa51e3b6db">&#9670;&nbsp;</a></span>boundaries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then pin the velocities on the top and bottom boundaries </td>
+          <td>(</td>
+          <td class="paramtype">3&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">2 and&#160;</td>
+          <td class="paramname"><em>0</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6dd20913b6f4c7abd5a0823c3ad7134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6dd20913b6f4c7abd5a0823c3ad7134">&#9670;&nbsp;</a></span>build_channel_spine_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c copies these values to their storage in the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> and call the function c build_channel_spine_mesh </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73991fc9d78a5711ebe0c73bd20df186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73991fc9d78a5711ebe0c73bd20df186">&#9670;&nbsp;</a></span>element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> to each and assigning the <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> for each node on this define each node as part of this and mark it as part of the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region until end loop over elements We then loop over the remaining spines in the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region repeating this except that the first <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> in each element </td>
+          <td>(</td>
+          <td class="paramtype">except the&#160;</td>
+          <td class="paramname"><em>first</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa65a3698923f42762308375c13258dd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa65a3698923f42762308375c13258dd9">&#9670;&nbsp;</a></span>fraction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c copies these values to their storage in the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> and call the function c it calls its counterpart in the c then store the numbers of elements in each direction in each region (and all at once). \dontinclude channel_spine_mesh.template.cc \skipline Now we create the first <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> with unit pin the assign the <a class="el" href="spine__channel_8txt.html#ab80d25533169892e647daf0111a089cc">nodes</a> c fraction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  spine_mesh_pt()=this</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea183202dd05df575471ea7cd5a2ff6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea183202dd05df575471ea7cd5a2ff6c">&#9670;&nbsp;</a></span>height()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c copies these values to their storage in the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> and call the function c it calls its counterpart in the c then store the numbers of elements in each direction in each region (and all at once). \dontinclude channel_spine_mesh.template.cc \skipline Now we create the first <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> with unit pin the height </td>
+          <td>(</td>
+          <td class="paramtype">since it is not a degree of freedom in this&#160;</td>
+          <td class="paramname"><em>mesh</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d3a125459ff8b4fbf997eee4612828f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d3a125459ff8b4fbf997eee4612828f">&#9670;&nbsp;</a></span>left()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then mark the node as part of the left </td>
+          <td>(</td>
+          <td class="paramtype">0&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78d745d26b2eccab99fd339bffc6fc25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d745d26b2eccab99fd339bffc6fc25">&#9670;&nbsp;</a></span>London()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Applied Science London </td>
+          <td>(</td>
+          <td class="paramtype">1983&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a85d7531f01be7b54c281b34c75b33cc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85d7531f01be7b54c281b34c75b33cc1">&#9670;&nbsp;</a></span>M()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt;HR&gt;&lt;HR&gt; section part2 S F <a class="el" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a> E Coating Flows J R <a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a> S M </td>
+          <td>(</td>
+          <td class="paramtype">eds.&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0baef6bc9fcce75c46bd5becc5c778e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0baef6bc9fcce75c46bd5becc5c778e5">&#9670;&nbsp;</a></span>results()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f where f [h(x_1) = \left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; 0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> + <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0,0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right),0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f [\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section results Results The figures below show the results </td>
+          <td>(</td>
+          <td class="paramtype">carpet plots of the two velocity components and the&#160;</td>
+          <td class="paramname"><em>pressure</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">and a contour plot of the pressure distribution with superimposed&#160;</td>
+          <td class="paramname"><em>streamlines</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a71ec26d85d9fff1cc90b52a659cb01df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71ec26d85d9fff1cc90b52a659cb01df">&#9670;&nbsp;</a></span>sparse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of sparse </td>
+          <td>(</td>
+          <td class="paramtype">and therefore more&#160;</td>
+          <td class="paramname"><em>efficient</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6c081592e5a43c3ddd306db5c520563"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6c081592e5a43c3ddd306db5c520563">&#9670;&nbsp;</a></span>wall()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Applied Science we have made a specific Mesh for the and use a geometric object to define its curved wall </td>
+          <td>(</td>
+          <td class="paramtype">s&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a6278222265b62552409f8aac35d11539"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6278222265b62552409f8aac35d11539">&#9670;&nbsp;</a></span>A</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f where f [h(x_1) = \left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; 0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> + <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0,0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right),0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f [\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section <a class="el" href="spine__channel_8txt.html#a0baef6bc9fcce75c46bd5becc5c778e5">results</a> Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of <a class="el" href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a> f <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> f with deflection amplitude f A = 0.4 \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00215">215</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="spine__channel_8cc_source.html#l00237">SinusoidalWall::d2position()</a>, <a class="el" href="spine__channel2_8cc_source.html#l00266">SpikedLine::d2position()</a>, <a class="el" href="spine__channel_8cc_source.html#l00218">SinusoidalWall::dposition()</a>, <a class="el" href="spine__channel2_8cc_source.html#l00227">SpikedLine::dposition()</a>, <a class="el" href="simple__spine__channel_8cc_source.html#l00062">WavyWall::position()</a>, <a class="el" href="spine__channel2_8cc_source.html#l00154">SpikedLine::position()</a>, and <a class="el" href="spine__channel_8cc_source.html#l00158">SinusoidalWall::position()</a>.</p>
+
+</div>
+</div>
+<a id="a96542ded56c20e8b68d7c5d065c16dbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96542ded56c20e8b68d7c5d065c16dbb">&#9670;&nbsp;</a></span>arises</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation arises</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00025">25</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a22904b46a6976c37a810223b89a2f79b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22904b46a6976c37a810223b89a2f79b">&#9670;&nbsp;</a></span>boundary</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> boundary is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f where f [h(x_1) = \left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; 0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> + <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet boundary conditions on the top and bottom rigid walls f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0,0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right),0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow boundary</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00188">188</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="acaa50e6ec6292e982f24e14f22450448"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaa50e6ec6292e982f24e14f22450448">&#9670;&nbsp;</a></span>constructor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">All these details are passed to the constructor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00386">386</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3ef05fdddfba8360dccba11956b40d79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ef05fdddfba8360dccba11956b40d79">&#9670;&nbsp;</a></span>D</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f D</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <a class="code" href="spine__channel_8txt.html#a97ce5b34818c1076205a77cb8a4c6cf2">\left</a>\{(x_1,x_2) \ \bigg| \ x_1 \in [0,<a class="code" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a>], </div>
+<div class="line">x_2 \in [0,h(x_1)] \right\} \f$</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00170">170</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="adaccdb3cc79db22448a639c636e45fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaccdb3cc79db22448a639c636e45fa5">&#9670;&nbsp;</a></span>D_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f where f [h(x_1) = \left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; 0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> + <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f [\left. \mathbf{u}\right|_{\partial D_{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0,0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f [\left. \mathbf{u}\right|_{\partial D_{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right),0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial D_ {inflow} = \{ (x_1,x_2) \ | \ x_1=0 \}\f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00189">189</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="acdf7daf64e28672c5d683cb3854397ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdf7daf64e28672c5d683cb3854397ad">&#9670;&nbsp;</a></span>domain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Applied Science we have made a specific Mesh for the domain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00316">316</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="abbc0c723055298f44890e720b0ca907a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc0c723055298f44890e720b0ca907a">&#9670;&nbsp;</a></span>element</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> to each element</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00456">456</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="aee463bb90f411cf1583585d1ddfcbf39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee463bb90f411cf1583585d1ddfcbf39">&#9670;&nbsp;</a></span>features</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common features</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00019">19</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad99851325287fd3b9ba0fecb212475f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad99851325287fd3b9ba0fecb212475f1">&#9670;&nbsp;</a></span>free</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in free surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f where f [h(x_1) = \left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; 0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> + <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0,0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right),0\right),\f] and axially traction free</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00194">194</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1b5b6ab114eefb59ac7e3c2dc6542d76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b5b6ab114eefb59ac7e3c2dc6542d76">&#9670;&nbsp;</a></span>g</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e g</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00025">25</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a99351e8f5e62e2975171cb6610e95f98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99351e8f5e62e2975171cb6610e95f98">&#9670;&nbsp;</a></span>H</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f where f [h(x_1) = \left\{\begin{array}{cl}H &amp; 0 \leq x_1 \leq L_1 \\H + <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\H &amp; L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0,0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(H-x_2\right),0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f [\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section <a class="el" href="spine__channel_8txt.html#a0baef6bc9fcce75c46bd5becc5c778e5">results</a> Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of <a class="el" href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a> f <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> f H =1.0 \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00214">214</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="spine__channel_8cc_source.html#l00258">SinusoidalWall::d2position()</a>, <a class="el" href="spine__channel2_8cc_source.html#l00266">SpikedLine::d2position()</a>, <a class="el" href="spine__channel2_8cc_source.html#l00154">SpikedLine::position()</a>, and <a class="el" href="spine__channel_8cc_source.html#l00158">SinusoidalWall::position()</a>.</p>
+
+</div>
+</div>
+<a id="a49921d8dda4e707966772a12d3baf1ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49921d8dda4e707966772a12d3baf1ac">&#9670;&nbsp;</a></span>H_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of H_ {s_j} \</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00121">121</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a06f5769f33c8965172112c7d78aa981a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06f5769f33c8965172112c7d78aa981a">&#9670;&nbsp;</a></span>height</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">When we built the we set its height to We now need to assign its height from the c Straight_wall_pt and assign all the information needed to update the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the height of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until height</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00322">322</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="spine__channel_8cc_source.html#l00079">SinusoidalWall::SinusoidalWall()</a>, and <a class="el" href="spine__channel2_8cc_source.html#l00117">SpikedLine::SpikedLine()</a>.</p>
+
+</div>
+</div>
+<a id="aead112d29fec022ef7d0ce50d8d19706"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aead112d29fec022ef7d0ce50d8d19706">&#9670;&nbsp;</a></span>In</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt;HR&gt;&lt;HR&gt; section part2 S F <a class="el" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a> E Coating Flows In</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00307">307</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a96c0ab3a0b092769001018d4f44e37ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96c0ab3a0b092769001018d4f44e37ff">&#9670;&nbsp;</a></span>L</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f where f [h(x_1) = \left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; 0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> + <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0,0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right),0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f [\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section <a class="el" href="spine__channel_8txt.html#a0baef6bc9fcce75c46bd5becc5c778e5">results</a> Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of <a class="el" href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a> f L = 2.7\f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00214">214</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="simple__spine__channel_8cc_source.html#l00062">WavyWall::position()</a>.</p>
+
+</div>
+</div>
+<a id="a97ce5b34818c1076205a77cb8a4c6cf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97ce5b34818c1076205a77cb8a4c6cf2">&#9670;&nbsp;</a></span>left</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then pin the velocities on the left</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00227">227</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="afb5370399480f2ac0266d7183b126dc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb5370399480f2ac0266d7183b126dc0">&#9670;&nbsp;</a></span>length</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c copies these values to their storage in the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> and call the function c it calls its counterpart in the c then store the numbers of elements in each direction in each region (and all at once). \dontinclude channel_spine_mesh.template.cc \skipline Now we create the first <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> with unit length</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00403">403</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a86801174b4287733386905e7543911a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86801174b4287733386905e7543911a0">&#9670;&nbsp;</a></span>mesh</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the mesh to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> to each and assigning the <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> for each node on this define each node as part of this mesh</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00457">457</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab80d25533169892e647daf0111a089cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab80d25533169892e647daf0111a089cc">&#9670;&nbsp;</a></span>nodes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Applied Science we have made a specific Mesh for the and use a geometric object to define its curved going through the <a class="el" href="spine__channel_8txt.html#a1690af29534a7ce8bc01ccb42785c809">process</a> of updating its central nodes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00319">319</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab7936dbdefd2819f8f80dee7bb3cd5ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7936dbdefd2819f8f80dee7bb3cd5ac">&#9670;&nbsp;</a></span>parallel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f where f [h(x_1) = \left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; 0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> + <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0,0),\f] parallel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00188">188</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a51c6186c3a560b58f497fc7584e190b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51c6186c3a560b58f497fc7584e190b8">&#9670;&nbsp;</a></span>Part</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt;HR&gt;&lt;HR&gt; section part2 Part</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00306">306</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a89d4b491e6b21410de89c1e8ca17051b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89d4b491e6b21410de89c1e8ca17051b">&#9670;&nbsp;</a></span>Pearson</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt;HR&gt;&lt;HR&gt; section part2 S F <a class="el" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a> E Coating Flows Pearson</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00307">307</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8d895bb93cd829890aa4c1a2d5682792"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d895bb93cd829890aa4c1a2d5682792">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00006">6</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="simple__spine__channel_8cc_source.html#l00654">main()</a>.</p>
+
+</div>
+</div>
+<a id="a1690af29534a7ce8bc01ccb42785c809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1690af29534a7ce8bc01ccb42785c809">&#9670;&nbsp;</a></span>process</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the <a class="el" href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a> to each and assigning the <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> for each node on this define each node as part of this and mark it as part of the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region until end loop over elements We then loop over the remaining spines in the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> region repeating this process</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00463">463</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3531a9cb2a84091184d78cdadf9cef7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3531a9cb2a84091184d78cdadf9cef7b">&#9670;&nbsp;</a></span>Publishers</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Applied Science Publishers</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00308">308</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3eeb8be8a3c759179265ebd6d254526b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3eeb8be8a3c759179265ebd6d254526b">&#9670;&nbsp;</a></span>Re</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example curvilinear <a class="el" href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a> These examples had the following common in which the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the <a class="el" href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a> <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> is unknown and has to be determined as part of the overall solution This situation e in <a class="el" href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a> surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f [\frac{\partial u_i}{\partial x_i} = 0,\f] in the region f where f [h(x_1) = \left\{\begin{array}{cl}<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; 0 \leq x_1 \leq L_1 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> + <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">A\sin\left</a>(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a> &amp; L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the <a class="el" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> subject to the no slip Dirichlet <a class="el" href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a> conditions on the top and bottom rigid walls f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{<a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a>}}=(0,0),\f] parabolic inflow on the <a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a> inflow f partial f [\left. \mathbf{u}\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{inflow}}=\<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">left</a>(<a class="el" href="spine__channel_8txt.html#a0d3a125459ff8b4fbf997eee4612828f">x_2\left</a>(<a class="el" href="spine__channel_8txt.html#a99351e8f5e62e2975171cb6610e95f98">H</a>-x_2\right),0\right),\f] and axially traction <a class="el" href="spine__channel_8txt.html#ab7936dbdefd2819f8f80dee7bb3cd5ac">parallel</a> outflow on the outflow f partial f [\left. u_2\right|_{\partial <a class="el" href="spine__channel_8txt.html#adaccdb3cc79db22448a639c636e45fa5">D_</a>{outflow}}=0.\f]&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section <a class="el" href="spine__channel_8txt.html#a0baef6bc9fcce75c46bd5becc5c778e5">results</a> Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of <a class="el" href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a> f <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> f with deflection amplitude f and a Reynolds number of f Re</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=100\f$.</div>
+<div class="line"> </div>
+<div class="line">@I w 0.75\textwidth TH <span class="stringliteral">&quot;Plot of results computed with 2D Taylor-Hood elements. &quot;</span></div>
+<div class="line">@I w 0.75\textwidth CR <span class="stringliteral">&quot;Plot of results computed with 2D Crouzeix-Raviart elements. &quot;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">&lt;HR&gt;</div>
+<div class="line">&lt;HR&gt;</div>
+<div class="line"> </div>
+<div class="line">\section <span class="keyword">namespace </span>Global parameters</div>
+<div class="line">The Reynolds number is the only parameter in </div>
+<div class="line">this <a class="code" href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>. As usual</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00216">216</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7273b1a3a289023d93a6c89f8f13a2d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7273b1a3a289023d93a6c89f8f13a2d5">&#9670;&nbsp;</a></span>RectangularQuadMesh&lt; ELEMENT &gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">All these details are passed to the except for the pointer to the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> The <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> calls the empty <a class="el" href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a> for c copies these values to their storage in the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform <a class="el" href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a> and call the function c it calls its counterpart in the c RectangularQuadMesh&lt; ELEMENT &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00388">388</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="abc823d7d5cdc118edf856854c72e887c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc823d7d5cdc118edf856854c72e887c">&#9670;&nbsp;</a></span>Richardson</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt;HR&gt;&lt;HR&gt; section part2 S F <a class="el" href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a> E Coating Flows J R <a class="el" href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a>&amp; Richardson</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00308">308</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="abf72d0f92dd50beb14454e43a1534d3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf72d0f92dd50beb14454e43a1534d3c">&#9670;&nbsp;</a></span>Scriven</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each <a class="el" href="spine__channel_8txt.html#a73991fc9d78a5711ebe0c73bd20df186">element</a> and assign the equation numbers until end_of_constructor&lt;HR&gt;&lt;HR&gt; section part2 S F&amp; Scriven</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00306">306</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+<a id="a914410aeeaf61a0d6c75c43ec26ecbaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a914410aeeaf61a0d6c75c43ec26ecbaa">&#9670;&nbsp;</a></span>Spine</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">When we built the Spine</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00434">434</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="simple__spine__channel_8cc_source.html#l00206">SimpleSpineMesh&lt; ELEMENT &gt;::SimpleSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a76a2ded169eb3947a11ec8e4f871575c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a2ded169eb3947a11ec8e4f871575c">&#9670;&nbsp;</a></span>spine</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">When we built the we set its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> to We now need to assign its <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> from the c Straight_wall_pt and assign all the information needed to update the <a class="el" href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a> to the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> until nod_pt We then set the <a class="el" href="spine__channel_8txt.html#aea183202dd05df575471ea7cd5a2ff6c">height</a> of the <a class="el" href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a> according to the geometric object until adding a pointer to the spine to each and assigning the <a class="el" href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a> for each node on this spine</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="spine__channel_8txt_source.html#l00457">457</a> of file <a class="el" href="spine__channel_8txt_source.html">spine_channel.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aspine__channel_8txt_html_a96c0ab3a0b092769001018d4f44e37ff"><div class="ttname"><a href="spine__channel_8txt.html#a96c0ab3a0b092769001018d4f44e37ff">L</a></div><div class="ttdeci">mainpage Example curvilinear boundaries These examples had the following common in which the mesh velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the domain boundary is unknown and has to be determined as part of the overall solution This situation e in free surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}H &amp;0 \leq x_1 \leq L_1 \\H+A\sin\left(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\H &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the problem subject to the no slip Dirichlet boundary conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial D_{wall}}=(0, 0),\f] parabolic inflow on the left inflow f partial f[\left. \mathbf{u}\right|_{\partial D_{inflow}}=\left(x_2\left(H-x_2\right), 0\right),\f] and axially traction parallel outflow on the outflow f partial f[\left. u_2\right|_{\partial D_{outflow}}=0.\f]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of length f L</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00214">spine_channel.txt:214</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00006">spine_channel.txt:6</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a97ce5b34818c1076205a77cb8a4c6cf2"><div class="ttname"><a href="spine__channel_8txt.html#a97ce5b34818c1076205a77cb8a4c6cf2">left</a></div><div class="ttdeci">We then pin the velocities on the left</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00227">spine_channel.txt:227</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:10:07
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

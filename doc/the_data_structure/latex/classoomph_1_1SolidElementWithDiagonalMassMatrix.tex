@@ -1,0 +1,125 @@
+\hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix}{}\doxysection{oomph\+::Solid\+Element\+With\+Diagonal\+Mass\+Matrix Class Reference}
+\label{classoomph_1_1SolidElementWithDiagonalMassMatrix}\index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}}
+
+
+{\ttfamily \#include $<$elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.154639cm]{classoomph_1_1SolidElementWithDiagonalMassMatrix}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_a2ae82e9b929bb41842955ab13f255104}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_aea964b70c55588fabf8cbc7fffe9be4a}{$\sim$\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_af26b74b9e29bc074bf2845556ff1bbae}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_af7f7f5c4068cbfa7237be672d5b0fa58}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_ad2335852a20987f6a6c8e0d6ce5bc3af}{get\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&mass\+\_\+diag)=0
+\begin{DoxyCompactList}\small\item\em Get the diagonal of whatever represents the mass matrix in the specific preconditionable element. For Navier-\/\+Stokes elements this is the velocity mass matrix; for incompressible solids it\textquotesingle{}s the mass matrix; ... \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Pure virtual base class for elements that can be used with \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner}{Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner}}. 
+
+Definition at line 5039 of file elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_a2ae82e9b929bb41842955ab13f255104}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_a2ae82e9b929bb41842955ab13f255104}} 
+\index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}!SolidElementWithDiagonalMassMatrix@{SolidElementWithDiagonalMassMatrix}}
+\index{SolidElementWithDiagonalMassMatrix@{SolidElementWithDiagonalMassMatrix}!oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}}
+\doxysubsubsection{\texorpdfstring{SolidElementWithDiagonalMassMatrix()}{SolidElementWithDiagonalMassMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line 5045 of file elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_aea964b70c55588fabf8cbc7fffe9be4a}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_aea964b70c55588fabf8cbc7fffe9be4a}} 
+\index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}!````~SolidElementWithDiagonalMassMatrix@{$\sim$SolidElementWithDiagonalMassMatrix}}
+\index{````~SolidElementWithDiagonalMassMatrix@{$\sim$SolidElementWithDiagonalMassMatrix}!oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}}
+\doxysubsubsection{\texorpdfstring{$\sim$SolidElementWithDiagonalMassMatrix()}{~SolidElementWithDiagonalMassMatrix()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::$\sim$\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+Definition at line 5048 of file elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_af26b74b9e29bc074bf2845556ff1bbae}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_af26b74b9e29bc074bf2845556ff1bbae}} 
+\index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}!SolidElementWithDiagonalMassMatrix@{SolidElementWithDiagonalMassMatrix}}
+\index{SolidElementWithDiagonalMassMatrix@{SolidElementWithDiagonalMassMatrix}!oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}}
+\doxysubsubsection{\texorpdfstring{SolidElementWithDiagonalMassMatrix()}{SolidElementWithDiagonalMassMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 5051 of file elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_ad2335852a20987f6a6c8e0d6ce5bc3af}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_ad2335852a20987f6a6c8e0d6ce5bc3af}} 
+\index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}!get\_mass\_matrix\_diagonal@{get\_mass\_matrix\_diagonal}}
+\index{get\_mass\_matrix\_diagonal@{get\_mass\_matrix\_diagonal}!oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}}
+\doxysubsubsection{\texorpdfstring{get\_mass\_matrix\_diagonal()}{get\_mass\_matrix\_diagonal()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::get\+\_\+mass\+\_\+matrix\+\_\+diagonal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{mass\+\_\+diag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the diagonal of whatever represents the mass matrix in the specific preconditionable element. For Navier-\/\+Stokes elements this is the velocity mass matrix; for incompressible solids it\textquotesingle{}s the mass matrix; ... 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ad216a201134e2b239e3d5bcaedd56973}{oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPressure_ab15495baf81c012c6569f37b5c2b1e0f}{oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$}}.
+
+
+
+Referenced by oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal().
+
+\mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_af7f7f5c4068cbfa7237be672d5b0fa58}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_af7f7f5c4068cbfa7237be672d5b0fa58}} 
+\index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 5059 of file elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elements_8h}{elements.\+h}}\end{DoxyCompactItemize}

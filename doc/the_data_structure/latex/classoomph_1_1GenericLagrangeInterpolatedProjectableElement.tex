@@ -1,0 +1,369 @@
+\hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{}\doxysection{oomph\+::Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+
+
+Class that makes the finite element specified as template argument projectable -- on the assumption that all fields are interpolated by isoparametric Lagrange interpolation between the nodes.  
+
+
+
+
+{\ttfamily \#include $<$face\+\_\+mesh\+\_\+project.\+h$>$}
+
+Inheritance diagram for oomph\+::Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.674641cm]{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_aae33ce61dab0f7b8ae9f1f2281650932}{Generic\+Lagrange\+Interpolated\+Projectable\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a8168307c01e7d086dae283aa1c543226}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Nodal value of boundary coordinate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abf8497b3e3327ec6c0766c8dca09b4c9}{set\+\_\+boundary\+\_\+id}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a54b4d5fe8b28df0937ffb61eb731108e}{boundary\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Boundary id. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a54b4d5fe8b28df0937ffb61eb731108e}{boundary\+\_\+id}} () const
+\begin{DoxyCompactList}\small\item\em Boundary id. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abbf541f3b88a4b0acc89f4b6f252de3b}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abc3c4f65ddb05984629ad9e35daa209a}{nfields\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of fields to be projected. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a9343241dc18e1331a5b220fd3fbe07a7}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field (includes current value!). Extract from first node but assume it\textquotesingle{}s the same for all. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a43bb151ce94f5f171b5f0577e1f46909}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of positional history values (Note\+: count includes current value!). Extract from first node but assume it\textquotesingle{}s the same for all. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ac9e67d23b865eb118acbca2eea74c8a3}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+\begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. ~\newline
+ \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a788234ec49e0702b4af030d03a454adc}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ab2dddff594eedd24a1db29b17ab8868b}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ab1d0d99536b2d4f1c935d39d01a943fa}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. Assumed to be the local nodal equation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a06c826acbeab80472cfcccbf72df2b19}{Boundary\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Boundary id. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Class that makes the finite element specified as template argument projectable -- on the assumption that all fields are interpolated by isoparametric Lagrange interpolation between the nodes. 
+
+Definition at line 46 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_aae33ce61dab0f7b8ae9f1f2281650932}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_aae33ce61dab0f7b8ae9f1f2281650932}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!GenericLagrangeInterpolatedProjectableElement@{GenericLagrangeInterpolatedProjectableElement}}
+\index{GenericLagrangeInterpolatedProjectableElement@{GenericLagrangeInterpolatedProjectableElement}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{GenericLagrangeInterpolatedProjectableElement()}{GenericLagrangeInterpolatedProjectableElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{Generic\+Lagrange\+Interpolated\+Projectable\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 53 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+id.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a54b4d5fe8b28df0937ffb61eb731108e}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a54b4d5fe8b28df0937ffb61eb731108e}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!boundary\_id@{boundary\_id}}
+\index{boundary\_id@{boundary\_id}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{boundary\_id()}{boundary\_id()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::boundary\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Boundary id. 
+
+
+
+Definition at line 93 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+id.
+
+
+
+Referenced by oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+id().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abbf541f3b88a4b0acc89f4b6f252de3b}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abbf541f3b88a4b0acc89f4b6f252de3b}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
+\index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. ~\newline
+ 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 113 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a788234ec49e0702b4af030d03a454adc}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a788234ec49e0702b4af030d03a454adc}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!get\_field@{get\_field}}
+\index{get\_field@{get\_field}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 167 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+Finite\+Element\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ac9e67d23b865eb118acbca2eea74c8a3}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ac9e67d23b865eb118acbca2eea74c8a3}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
+\index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return Jacobian of mapping and shape functions of field fld at local coordinate s. ~\newline
+ 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 155 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), and oomph\+::\+Finite\+Element\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ab1d0d99536b2d4f1c935d39d01a943fa}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ab1d0d99536b2d4f1c935d39d01a943fa}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!local\_equation@{local\_equation}}
+\index{local\_equation@{local\_equation}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return local equation number of value j in field fld. Assumed to be the local nodal equation. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 198 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abc3c4f65ddb05984629ad9e35daa209a}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abc3c4f65ddb05984629ad9e35daa209a}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
+\index{nfields\_for\_projection@{nfields\_for\_projection}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfields\_for\_projection()}{nfields\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nfields\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of fields to be projected. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 131 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::nvalue().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a43bb151ce94f5f171b5f0577e1f46909}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a43bb151ce94f5f171b5f0577e1f46909}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
+\index{nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_coordinate\_projection()}{nhistory\_values\_for\_coordinate\_projection()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of positional history values (Note\+: count includes current value!). Extract from first node but assume it\textquotesingle{}s the same for all. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a3ed675dc7198203c1f}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 147 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a9343241dc18e1331a5b220fd3fbe07a7}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a9343241dc18e1331a5b220fd3fbe07a7}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
+\index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of history values to be stored for fld-\/th field (includes current value!). Extract from first node but assume it\textquotesingle{}s the same for all. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b964663281f8740f43a5}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 139 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ab2dddff594eedd24a1db29b17ab8868b}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_ab2dddff594eedd24a1db29b17ab8868b}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
+\index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return number of values in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 190 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nnode().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abf8497b3e3327ec6c0766c8dca09b4c9}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_abf8497b3e3327ec6c0766c8dca09b4c9}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!set\_boundary\_id@{set\_boundary\_id}}
+\index{set\_boundary\_id@{set\_boundary\_id}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_boundary\_id()}{set\_boundary\_id()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}\item[{const unsigned \&}]{boundary\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Boundary id. 
+
+
+
+Definition at line 87 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::boundary\+\_\+id(), and oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+id.
+
+
+
+Referenced by oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection().
+
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a8168307c01e7d086dae283aa1c543226}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a8168307c01e7d086dae283aa1c543226}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Nodal value of boundary coordinate. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07dc49d2dc6cca68559}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 59 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+References oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+id, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary(), i, and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a06c826acbeab80472cfcccbf72df2b19}\label{classoomph_1_1GenericLagrangeInterpolatedProjectableElement_a06c826acbeab80472cfcccbf72df2b19}} 
+\index{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}!Boundary\_id@{Boundary\_id}}
+\index{Boundary\_id@{Boundary\_id}!oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$@{oomph::GenericLagrangeInterpolatedProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Boundary\_id}{Boundary\_id}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GenericLagrangeInterpolatedProjectableElement}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary id. 
+
+
+
+Definition at line 208 of file face\+\_\+mesh\+\_\+project.\+h.
+
+
+
+Referenced by oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::boundary\+\_\+id(), oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element(), oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+id(), and oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{face__mesh__project_8h}{face\+\_\+mesh\+\_\+project.\+h}}\end{DoxyCompactItemize}

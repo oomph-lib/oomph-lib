@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Deformation of a solid by a prescribed boundary motion</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Deformation of a solid by a prescribed boundary motion </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>The purpose of this tutorial is to demonstrate how to impose the deformation of domain boundaries using Lagrange multipliers. This functionality is required, e.g. when using (pseudo-)solid mechanics to update the shape of the fluid mesh in fluid-structure interaction problems, say. (See <a class="el" href="index.html#comm_and_ex">Comments and Exercises</a> for a discussion of an alternative, somewhat easier method for imposing boundary displacements in single-physics solid mechanics problems).</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="model"></a>
+The model problem</h1>
+<p>Here is a sketch of the model problem. A unit square is parametrised by two Lagrangian coordinates <img class="formulaInl" alt="$ (\xi^1,\xi^2) $" src="form_0.png"/>. Three of the four boundaries are held in a fixed position while the square's upper boundary <img class="formulaInl" alt="$ \partial D_{prescr}$" src="form_1.png"/> (which is parametrised by the boundary coordinate <img class="formulaInl" alt="$ \zeta$" src="form_2.png"/>) is displaced to a new position given by <img class="formulaInl" alt="$ {\bf R}_{prescr}(\zeta) $" src="form_3.png"/>:</p>
+<div class="image">
+<img src="sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the problem. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="theory"></a>
+Theory and implementation</h1>
+<p>We identify the upper boundary by writing the Lagrangian coordinates of points on <img class="formulaInl" alt="$ \partial D_{prescr} $" src="form_4.png"/> as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. \big( \xi^1, \xi^2\big)\right|_{\partial D_{prescr}} = \big( \xi^1_{\partial D_{prescr}}(\zeta), \xi^2_{\partial D_{prescr}}(\zeta) \big) \]" src="form_5.png"/>
+</p>
+<p> which allows us to write the displacement constraint as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf R}(\xi^1_{\partial D_{prescr}}(\zeta),\xi^2_{\partial D_{prescr}}(\zeta)) = {\bf R}_{prescr}(\zeta). \]" src="form_6.png"/>
+</p>
+<p> We enforce this constraint by augmenting the principle of virtual displacements, discussed in <a href="../../solid_theory/html/index.html#equilibrium">the solid mechanics theory tutorial</a>, by a Lagrange multiplier term so that it becomes </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left( {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}}{\partial t^2} \right) \cdot \delta {\bf R} \right\} \ dv - \oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA \ + \ \delta \Pi_{constraint} = 0 \ \ \ \ \ \ \ \ (1) \]" src="form_7.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \Pi_{constraint} = \int_{\partial D} \bigg( {\bf R}(\xi^1(\zeta),\xi^2(\zeta)) - {\bf R}_{prescr}(\zeta) \bigg) \cdot {\bf \Lambda} \ dS. \]" src="form_8.png"/>
+</p>
+<p> Here </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ dS = \left| \frac{d {\bf R}(\xi^1(\zeta),\xi^2(\zeta))}{d \zeta} \right| d\zeta \]" src="form_9.png"/>
+</p>
+<p> is the differential of the arclength along the domain boundary and the vector <img class="formulaInl" alt="$ {\bf \Lambda} $" src="form_10.png"/> (not to be confused with the scalar <img class="formulaInl" alt="$ \Lambda^2 $" src="form_11.png"/> which represents the non-dimensional density in (1)!) is the Lagrange multiplier &ndash; the surface traction to be applied to <img class="formulaInl" alt="$ \partial D_{prescr} $" src="form_4.png"/> to deform the boundary into the required shape.</p>
+<p>We discretise this constraint by attaching <code>FaceElements</code> to the boundaries of the "bulk" solid elements that are adjacent to <img class="formulaInl" alt="$ \partial D_{prescr} $" src="form_4.png"/>. We denote the number of nodes in these <code>FaceElements</code> by <img class="formulaInl" alt="$ N $" src="form_12.png"/> and write the <img class="formulaInl" alt="$ i $" src="form_13.png"/>-th component of the discrete Lagrange multiplier stored at node <img class="formulaInl" alt="$ j $" src="form_14.png"/> as <img class="formulaInl" alt="$ L_{ij} $" src="form_15.png"/>. Thus the <img class="formulaInl" alt="$ i $" src="form_13.png"/> -th component of the Lagrange multiplier at local coordinate <img class="formulaInl" alt="$ s $" src="form_16.png"/> in the element is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \Lambda_i = \sum_{j=1}^{N} L_{ij} \psi_j(s) \]" src="form_17.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \psi_j(s) $" src="form_18.png"/> is the shape function associated with node <img class="formulaInl" alt="$ j $" src="form_14.png"/>.</p>
+<p>Upon taking the variations of the discretised constraint with respect to the unknown nodal positions and the discrete Lagrange multipliers we obtain <b>(i)</b> additional contributions to the residuals of the "bulk" solid mechanics equations (these may be interpreted as the virtual work done by the boundary tractions required to impose the prescribed boundary displacement) and <b>(ii)</b> the equations that impose the displacement constraints in weak form.</p>
+<p>The actual implementation of this approach in <code>oomph-lib</code> is best thought of as a generalisation of the <code>SolidTractionElements</code> that are used to impose a prescribed traction to the boundary of a solid domain. The main difference is that in the <code>ImposeDisplacementByLagrangeMultiplierElement</code>, the imposed traction is one of the unknowns in the problem and must be determined via the displacement constraint, using the approach described above. The element introduces additional unknowns (the nodal values of the Lagrange multiplier) into the problem, therefore the <code>ImposeDisplacementByLagrangeMultiplierElement</code> resizes (increases) the number of values stored at the node from the value that was originally assigned by the "bulk" solid element it is attached to. (If the elements are used in a single-physics solid mechanics problem the discrete Lagrange multipliers are the only nodal values in the problem since the unknown nodal positions are stored in a separate <code>Data</code> item; cf. <a href="../../solid_theory/html/index.html#solid_node">"Solid mechanics: Theory and implementation"</a> for more details). The prescribed boundary shape <img class="formulaInl" alt="$ {\bf R}_{prescr}(\zeta) $" src="form_3.png"/> is provided by a <code>GeomObject</code>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The animation below shows the domain deformation in response to a prescribed boundary displacement given by</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf R}_{prescr}(\zeta)= \left( \begin{array}{c} \zeta \\ 1 \end{array} \right) + A \left( \begin{array}{c} 5 \zeta\ (\zeta-1) \ (\zeta-0.7) \\ \frac{1}{2}\left(1-\cos\left(2\pi\zeta\right)\right) \end{array} \right) \]" src="form_19.png"/>
+</p>
+<p>With this choice the upper boundary remains flat (i.e. at <img class="formulaInl" alt="$ x_2=1 $" src="form_20.png"/>) when <img class="formulaInl" alt="$ A=0 $" src="form_21.png"/>. As <img class="formulaInl" alt="$ A $" src="form_22.png"/> increases, the boundary is pulled upwards into a sinusoidal shape while simultaneously being pushed to the right. The vectors in the animation represent the Lagrange multipliers (i.e. the physical surface tractions) required to deform the domain into the required shape. Note how the automatic mesh adaptation refines the mesh in regions where the solid is strongly deformed.</p>
+<div class="image">
+<img src="lagr_distort.gif" alt=""/>
+<div class="caption">
+Domain deformation in response to the prescribed boundary displacement. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="prescribed_boundary"></a>
+Describing the prescribed boundary motion with a GeomObject</h1>
+<p>Here is the implementation of the prescribed boundary shape as the <code><a class="el" href="classWarpedLine.html" title="Warped line in 2D space.">WarpedLine</a></code>, a two-dimensional <code>GeomObject</code> whose shape is parametrised by a single intrinsic coordinate.</p>
+ <div class="fragment"><div class="line"><span class="comment">//======Start_of_warped_line===============================================</span></div>
+<div class="line"><span class="comment">/// Warped line in 2D space</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classWarpedLine.html">WarpedLine</a> : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Specify amplitude of deflection from straight horizontal line</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classWarpedLine.html#a9d80dca2c907b426f7130579c94f3310">WarpedLine</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="classWarpedLine.html#ae43c2f997b9c0de62783375341ac5794">ampl</a>) : GeomObject(1,2)</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code" href="classWarpedLine.html#ac44286e84ff213e67e0f247d00ad50af">Ampl</a>=<a class="code" href="classWarpedLine.html#ae43c2f997b9c0de62783375341ac5794">ampl</a>;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Broken copy constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classWarpedLine.html#a9d80dca2c907b426f7130579c94f3310">WarpedLine</a>(<span class="keyword">const</span> <a class="code" href="classWarpedLine.html">WarpedLine</a>&amp; dummy) </div>
+<div class="line">  { </div>
+<div class="line">   BrokenCopy::broken_copy(<span class="stringliteral">&quot;WarpedLine&quot;</span>);</div>
+<div class="line">  } </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Broken assignment operator</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classWarpedLine.html#ae2ee796906c0caa7e94f277f6fc499e1">operator=</a>(<span class="keyword">const</span> <a class="code" href="classWarpedLine.html">WarpedLine</a>&amp;) </div>
+<div class="line">  {</div>
+<div class="line">   BrokenCopy::broken_assign(<span class="stringliteral">&quot;WarpedLine&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Empty Destructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classWarpedLine.html#a4cb07fb7f06d42e2008afe65d8750cad">~WarpedLine</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Position vector at Lagrangian coordinate zeta </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classWarpedLine.html#aaeef89818148ee3a305c561e91c8851d">position</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Position vector</span></div>
+<div class="line">   r[0] = zeta[0]+5.0*<a class="code" href="classWarpedLine.html#ac44286e84ff213e67e0f247d00ad50af">Ampl</a>*zeta[0]*(zeta[0]-1.0)*(zeta[0]-0.7);</div>
+<div class="line">   r[1] = 1.0+<a class="code" href="classWarpedLine.html#ac44286e84ff213e67e0f247d00ad50af">Ampl</a>*0.5*(1.0-cos(2.0*MathematicalConstants::Pi*zeta[0]));</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Parametrised position on object: r(zeta). Evaluated at</span></div>
+<div class="line"><span class="comment"> /// previous timestep. t=0: current time; t&gt;0: previous</span></div>
+<div class="line"><span class="comment"> /// timestep. Forward to steady version</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classWarpedLine.html#aaeef89818148ee3a305c561e91c8851d">position</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                       Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <a class="code" href="classWarpedLine.html#aaeef89818148ee3a305c561e91c8851d">position</a>(zeta,r);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access to amplitude</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span>&amp; <a class="code" href="classWarpedLine.html#ae43c2f997b9c0de62783375341ac5794">ampl</a>() {<span class="keywordflow">return</span> <a class="code" href="classWarpedLine.html#ac44286e84ff213e67e0f247d00ad50af">Ampl</a>;}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short How many items of Data does the shape of the object depend on?</span></div>
+<div class="line"><span class="comment"> /// None.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classWarpedLine.html#aa4157cd4ff2e80f33b106b7ed4e4d804">ngeom_data</a>()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="keywordflow">return</span> 0;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Amplitude of perturbation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classWarpedLine.html#ac44286e84ff213e67e0f247d00ad50af">Ampl</a>;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters</h1>
+<p>As usual we define the problem parameters in a global namespace. We provide an instantiation of the <code>GeomObject</code> that defines the deformed boundary shape (setting its initial displacement amplitude to zero), and create an instance of <code>oomph-lib's</code> generalised Hookean constitutive equation with a Poisson ratio of 0.3 (recall that the use of the single-argument constructor for this constitutive equation implies that all stresses are non-dimensionalised on Young's modulus <img class="formulaInl" alt="$ E $" src="form_23.png"/>; see <a href="../../solid_theory/html/index.html#non-dim_solid">the solid mechanics theory tutorial</a> for details).</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// GeomObject specifying the shape of the boundary: Initially it&#39;s flat.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classWarpedLine.html">WarpedLine</a> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab0a184463cbaaa353f2235411adef3c4">Boundary_geom_object</a>(0.0);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a9e06f4ada334a9a911aa8cdcfb3ff30b">Nu</a>=0.3;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Generalised Hookean constitutive equations</span></div>
+<div class="line"> GeneralisedHookean Constitutive_law(&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a9e06f4ada334a9a911aa8cdcfb3ff30b">Global_Physical_Variables::Nu</a>);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="driver"></a>
+The driver code</h1>
+<p>We build an instantiation of the <code>Problem</code> class (described below), using nine-noded, two-dimensional <code>RefineableQPVDElements</code> to discretise the domain, and document the initial domain shape.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_main==================================================</span></div>
+<div class="line"><span class="comment">/// Driver code</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="prescribed__displ__lagr__mult_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html">PrescribedBoundaryDisplacementProblem&lt;RefineableQPVDElement&lt;2,3&gt;</a> &gt; <a class="code" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc initial domain shape</span></div>
+<div class="line"> <a class="code" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution();</div>
+</div><!-- fragment --><p>We perform a parameter study, increasing the amplitude of the prescribed boundary deflection in small increments, while allowing one mesh adaptation per solution. <br  />
+</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Max. number of adaptations per solve</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_adapt=1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Parameter incrementation</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=2; </div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Increment imposed boundary displacement</span></div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#ab0a184463cbaaa353f2235411adef3c4">Global_Physical_Variables::Boundary_geom_object</a>.<a class="code" href="classWarpedLine.html#ae43c2f997b9c0de62783375341ac5794">ampl</a>()+=0.1;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Solve the problem with Newton&#39;s method, allowing</span></div>
+<div class="line">   <span class="comment">// up to max_adapt mesh adaptations after every solve.</span></div>
+<div class="line">   <a class="code" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.newton_solve(max_adapt);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   <a class="code" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution();</div>
+</div><!-- fragment --><p>Since the main use of the methodology demonstrated here is in free-boundary problems where the solution of the solid problem merely serves to update the nodal positions in response to the prescribed boundary motion, we re-set the nodes' Lagrangian coordinates to their Eulerian positions after every solve. This makes the deformed configuration stress-free and tends to stabilise the computation, allowing larger domain deformations to be computed. We stress, however, that this renders the computed solutions physically meaningless in the sense that the domain shapes no longer represent the solution of the original elasticity problem for which the stress-free, undeformed configuration remains unchanged throughout the body's deformation.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">   <span class="comment">// For maximum stability: Reset the current nodal positions to be</span></div>
+<div class="line">   <span class="comment">// the &quot;stress-free&quot; ones -- this assignment means that the</span></div>
+<div class="line">   <span class="comment">// parameter study no longer corresponds to a physical experiment</span></div>
+<div class="line">   <span class="comment">// but is what we&#39;d do if we wanted to use the solid solve</span></div>
+<div class="line">   <span class="comment">// to update a fluid mesh in an FSI problem, say.</span></div>
+<div class="line">   <a class="code" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.solid_mesh_pt()-&gt;set_lagrangian_nodal_coordinates();</div>
+<div class="line">   </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The Problem class</h1>
+<p>The definition of the <code>Problem</code> class follows the usual pattern. We provide an access functions to the bulk mesh, as well as a few private helper functions that attach and detach the <code>ImposeDisplacementByLagrangeMultiplierElements</code> from the bulk mesh before and after the mesh adaptation.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=============begin_problem============================================ </span></div>
+<div class="line"><span class="comment">/// Problem class for deformation of elastic block by prescribed</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// boundary motion.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classPrescribedBoundaryDisplacementProblem.html">PrescribedBoundaryDisplacementProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#ac0c8b47eeb75ba2c618757e6b56e62dc">PrescribedBoundaryDisplacementProblem</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#a53e7d18d9d748388160d6c4106f1d493">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#ad2184bb8d7391da21bec62d4aacf5c20">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access function for the solid mesh</span></div>
+<div class="line"><span class="comment"></span> ElasticRefineableRectangularQuadMesh&lt;ELEMENT&gt;*&amp; <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#ac0fc3028f61cec5ac4b01670d7728934">solid_mesh_pt</a>() </div>
+<div class="line">  {<span class="keywordflow">return</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#a6d2cdbd9ae1077c80831d938bdb72a61">Solid_mesh_pt</a>;} </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before adapt: Wipe the mesh of Lagrange multiplier elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#a2e9f335e8680b0f2338b579e37e9d38a">actions_before_adapt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adapt: Rebuild the mesh of Lagrange multiplier elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#aae7225db18ad5c8429c0eb96fa37b585">actions_after_adapt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#abc58821d6b49cd9773dcd90b240aab6e">doc_solution</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Create elements that enforce prescribed boundary motion</span></div>
+<div class="line"><span class="comment"> /// by Lagrange multiplilers</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#adf4798f13809f5b2f2be6e3d63421edc">create_lagrange_multiplier_elements</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Delete elements that enforce prescribed boundary motion</span></div>
+<div class="line"><span class="comment"> /// by Lagrange multiplilers</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#a0204ae947ffd18ed3d7690395901a1e8">delete_lagrange_multiplier_elements</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to solid mesh</span></div>
+<div class="line"><span class="comment"></span> ElasticRefineableRectangularQuadMesh&lt;ELEMENT&gt;* <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#a6d2cdbd9ae1077c80831d938bdb72a61">Solid_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointers to meshes of Lagrange multiplier elements</span></div>
+<div class="line"><span class="comment"></span> SolidMesh* <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#abb87cb0933297f449af7ceac7fe2bd77">Lagrange_multiplier_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// DocInfo object for output</span></div>
+<div class="line"><span class="comment"></span> DocInfo <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#aef72ea29567df89d82fe93235f1907f8">Doc_info</a>;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>We start by creating the "bulk" mesh, discretising the domain with 5x5 elements of the type specified by the class's template argument.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===========start_of_constructor======================================= </span></div>
+<div class="line"><span class="comment">/// Constructor: </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classPrescribedBoundaryDisplacementProblem.html#ac0c8b47eeb75ba2c618757e6b56e62dc">PrescribedBoundaryDisplacementProblem&lt;ELEMENT&gt;::PrescribedBoundaryDisplacementProblem</a>() </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create the mesh</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_x=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_y=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in x-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="prescribed__displ__lagr__mult_8txt.html#a4594cc67d151c2f09d749a2d054e7f71">l_x</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="prescribed__displ__lagr__mult_8txt.html#a70e156ba08d56ab9ab1360ed22c1e003">l_y</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the mesh </span></div>
+<div class="line"> <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>() = <span class="keyword">new</span> ElasticRefineableRectangularQuadMesh&lt;ELEMENT&gt;(</div>
+<div class="line">  n_x,n_y,<a class="code" href="prescribed__displ__lagr__mult_8txt.html#a4594cc67d151c2f09d749a2d054e7f71">l_x</a>,<a class="code" href="prescribed__displ__lagr__mult_8txt.html#a70e156ba08d56ab9ab1360ed22c1e003">l_y</a>);</div>
+</div><!-- fragment --><p>Next we specify the error estimator, pass the pointer to the constitutive equation to the elements and perform one uniform mesh refinement:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator</span></div>
+<div class="line"> <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Assign the physical properties to the elements before any refinement</span></div>
+<div class="line"> <span class="comment">//Loop over the elements in the main mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element =<a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(<a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   el_pt-&gt;constitutive_law_pt()=&amp;Global_Physical_Variables::Constitutive_law;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Refine the mesh uniformly</span></div>
+<div class="line"> <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;refine_uniformly();</div>
+</div><!-- fragment --><p>We now create a new <code>SolidMesh</code> in which we store the elements that apply the displacement constraint. These elements are built (and added to the newly created <code>SolidMesh</code>) in the helper function <code>create_lagrange_multiplier_elements()</code>. Both meshes are then combined to the <code>Problem's</code> global mesh.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Construct the mesh of elements that enforce prescribed boundary motion</span></div>
+<div class="line"> <span class="comment">// by Lagrange multipliers</span></div>
+<div class="line"> Lagrange_multiplier_mesh_pt=<span class="keyword">new</span> SolidMesh;</div>
+<div class="line"> create_lagrange_multiplier_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solid mesh is first sub-mesh</span></div>
+<div class="line"> add_sub_mesh(<a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add Lagrange multiplier sub-mesh</span></div>
+<div class="line"> add_sub_mesh(Lagrange_multiplier_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build combined &quot;global&quot; mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p>We pin the position of the nodes on all domain boundaries apart from the top boundary (boundary 2) and pin any redundant pressure degrees of freedom. (This is not strictly necessary in the present driver code since the displacement-based <code>RefineableQPVDElements</code> do not have any pressure degrees of freedom. However, it is good practice to do this anyway to guard against unpleasant surprises when the element type is changed at some point).</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Pin nodal positions on all boundaries apart from the top one (2) </span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> b=0;b&lt;4;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">if</span> (b!=2)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">unsigned</span> n_side = <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;nboundary_node(b);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Loop over the nodes</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_side;i++)</div>
+<div class="line">      {</div>
+<div class="line">       <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;boundary_node_pt(b,i)-&gt;pin_position(0);</div>
+<div class="line">       <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;boundary_node_pt(b,i)-&gt;pin_position(1);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line"> PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures(</div>
+<div class="line">  <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;element_pt());</div>
+</div><!-- fragment --><p>Finally, we assign the equation numbers and specify the output directory.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Number of dofs: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> Doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="actions_before_adapt"></a>
+Actions before mesh adaptation</h1>
+<p>As usual, we remove the <code>FaceElements</code> that apply the displacement constraints before the bulk mesh is adapted.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====================start_of_actions_before_adapt======================</span></div>
+<div class="line"><span class="comment">/// Actions before adapt: Wipe the mesh of elements that impose</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// the prescribed boundary displacements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#a2e9f335e8680b0f2338b579e37e9d38a">PrescribedBoundaryDisplacementProblem&lt;ELEMENT&gt;::actions_before_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Kill the  elements and wipe surface mesh</span></div>
+<div class="line"> delete_lagrange_multiplier_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> rebuild_global_mesh();</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end of actions_before_adapt</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="actions_after_adapt"></a>
+Actions after mesh adaptation</h1>
+<p>We re-attach the <code>FaceElements</code> that apply the displacement constraints once the bulk mesh has been adapted. Since the hanging status of nodes in the bulk mesh can change during the mesh adaptation it is again good practice to pin any nodal solid pressure values that may have become redundant.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====================start_of_actions_after_adapt=======================</span></div>
+<div class="line"><span class="comment">///  Actions after adapt: Rebuild the mesh of elements that impose</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// the prescribed boundary displacements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#aae7225db18ad5c8429c0eb96fa37b585">PrescribedBoundaryDisplacementProblem&lt;ELEMENT&gt;::actions_after_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Create the elements that impose the displacement constraint </span></div>
+<div class="line"> <span class="comment">// and attach them to the bulk elements that are</span></div>
+<div class="line"> <span class="comment">// adjacent to boundary 2 </span></div>
+<div class="line"> create_lagrange_multiplier_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> rebuild_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line"> PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures(</div>
+<div class="line">  <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end of actions_after_adapt</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="lagr_elements"></a>
+Creating the Lagrange multiplier elements that impose the displacement constraint</h1>
+<p>The creation of the Lagrange multiplier elements that impose the displacement constraint follows the usual pattern. We loop over the "bulk" solid elements that are adjacent to mesh boundary 2 and attach <code>ImposeDisplacementByLagrangeMultiplierElements</code> to the appropriate faces.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_create_lagrange_multiplier_elements===============</span></div>
+<div class="line"><span class="comment">/// Create elements that impose the prescribed boundary displacement</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#adf4798f13809f5b2f2be6e3d63421edc">PrescribedBoundaryDisplacementProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classPrescribedBoundaryDisplacementProblem.html#adf4798f13809f5b2f2be6e3d63421edc">create_lagrange_multiplier_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Lagrange multiplier elements are located on boundary 2:</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> b=2;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// How many bulk elements are adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;nboundary_element(b);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the bulk elements adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;boundary_element_pt(b,e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Find the index of the face of element e along boundary b</span></div>
+<div class="line">   <span class="keywordtype">int</span> face_index = <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">      </div>
+<div class="line">   <span class="comment">// Create new element and add to mesh</span></div>
+<div class="line">   Lagrange_multiplier_mesh_pt-&gt;add_element_pt(</div>
+<div class="line">    <span class="keyword">new</span> ImposeDisplacementByLagrangeMultiplierElement&lt;ELEMENT&gt;(</div>
+<div class="line">     bulk_elem_pt,face_index));   </div>
+<div class="line">  }  </div>
+</div><!-- fragment --><p>Next we loop over the newly-created <br  />
+ <code>ImposeDisplacementByLagrangeMultiplierElements</code> and specify the <code>GeomObject</code> that defines the imposed boundary displacements. We also specify which boundary of the bulk mesh the <code>ImposeDisplacementByLagrangeMultiplierElements</code> are located on. This is required to enable the <code>ImposeDisplacementByLagrangeMultiplierElements</code> to extract the appropriate boundary coordinate from its constituent nodes. (We discussed <a href="../../../poisson/fish_poisson2/html/index.html#boundary_coords">elsewhere</a> that boundary coordinates are usually defined (and passed to the nodes) when the nodes are first created, typically during the construction of the bulk mesh. Since nodes can be located on multiple domain boundaries, each boundary coordinate is associated with a particular boundary number. Passing this number to the <code>ImposeDisplacementByLagrangeMultiplierElements</code> allows them to obtain the correct boundary coordinate from the node.)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements in the Lagrange multiplier element mesh</span></div>
+<div class="line"> <span class="comment">// for elements on the top boundary (boundary 2)</span></div>
+<div class="line"> n_element=Lagrange_multiplier_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a Lagrange multiplier element</span></div>
+<div class="line">   ImposeDisplacementByLagrangeMultiplierElement&lt;ELEMENT&gt; *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>ImposeDisplacementByLagrangeMultiplierElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line">    (Lagrange_multiplier_mesh_pt-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the GeomObject that defines the boundary shape and</span></div>
+<div class="line">   <span class="comment">// specify which bulk boundary we are attached to (needed to extract</span></div>
+<div class="line">   <span class="comment">// the boundary coordinate from the bulk nodes)</span></div>
+<div class="line">   el_pt-&gt;set_boundary_shape_geom_object_pt( </div>
+<div class="line">    &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ab0a184463cbaaa353f2235411adef3c4">Global_Physical_Variables::Boundary_geom_object</a>,b);</div>
+</div><!-- fragment --><p>Finally, we impose boundary conditions for the Lagrange multipliers. Their values must be pinned (and set to zero) at the left and right ends of the upper mesh boundary (boundary 2), since the displacement of the nodes at these points is already enforced by the boundary conditions imposed at the left and right vertical boundaries (boundaries 1 and 3).</p>
+<p><a class="anchor" id="bcs_for_lagrange_multipliers"></a> We discussed above that the discrete Lagrange multipliers are added to any already existing nodal degrees of freedom when the <code>ImposeDisplacementByLagrangeMultiplierElements</code> are attached to the faces of the "bulk" solid elements. The number of nodal values that were stored at an element's <code>j</code> -th node before the additional nodal values were added, can be obtained from the function <code>nbulk_value(j)</code>, defined in the <code>FaceElement</code> base class. We pin the Lagrange multipliers at the "corner nodes" by looping over all nodes in the <code>ImposeDisplacementByLagrangeMultiplierElements</code> and pinning the additional nodal values of any nodes that are located on mesh boundaries 1 or 3.</p>
+<div class="fragment"><div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the nodes </span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> nnod=el_pt-&gt;nnode();</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;nnod;j++)</div>
+<div class="line">    {</div>
+<div class="line">     Node* nod_pt = el_pt-&gt;node_pt(j);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Is the node also on boundary 1 or 3?</span></div>
+<div class="line">     <span class="keywordflow">if</span> ((nod_pt-&gt;is_on_boundary(1))||(nod_pt-&gt;is_on_boundary(3)))</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// How many nodal values were used by the &quot;bulk&quot; element</span></div>
+<div class="line">       <span class="comment">// that originally created this node?</span></div>
+<div class="line">       <span class="keywordtype">unsigned</span> n_bulk_value=el_pt-&gt;nbulk_value(j);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// The remaining ones are Lagrange multipliers and we pin them.</span></div>
+<div class="line">       <span class="keywordtype">unsigned</span> nval=nod_pt-&gt;nvalue();</div>
+<div class="line">       <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=n_bulk_value;j&lt;nval;j++)</div>
+<div class="line">        {</div>
+<div class="line">         nod_pt-&gt;pin(j);</div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">} <span class="comment">// end of create_lagrange_multiplier_elements</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="kill_lagr_elements"></a>
+Deleting the Lagrange multiplier elements that impose the displacement constraint</h1>
+<p>The function <code>delete_lagrange_multiplier_elements()</code> deletes the Lagrange multiplier elements that impose the displacement constraint and flushes the associated mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//====start_of_delete_lagrange_multiplier_elements=======================</span></div>
+<div class="line"><span class="comment">/// Delete elements that impose the prescribed boundary displacement</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// and wipe the associated mesh</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#a0204ae947ffd18ed3d7690395901a1e8">PrescribedBoundaryDisplacementProblem&lt;ELEMENT&gt;::delete_lagrange_multiplier_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many surface elements are in the surface mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Lagrange_multiplier_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the surface elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Kill surface element</span></div>
+<div class="line">   <span class="keyword">delete</span> Lagrange_multiplier_mesh_pt-&gt;element_pt(e);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Wipe the mesh</span></div>
+<div class="line"> Lagrange_multiplier_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of delete_lagrange_multiplier_elements</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The function <code>doc_solution()</code> outputs the shape of the deformed body and the Lagrange multiplier along the upper boundary.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==============start_doc===========================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPrescribedBoundaryDisplacementProblem.html#abc58821d6b49cd9773dcd90b240aab6e">PrescribedBoundaryDisplacementProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_plot = 5; </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output shape of deformed body</span></div>
+<div class="line"> <span class="comment">//------------------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output Lagrange multipliers</span></div>
+<div class="line"> <span class="comment">//----------------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/lagr%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// This makes sure the elements are ordered in same way every time</span></div>
+<div class="line"> <span class="comment">// the code is run -- necessary for validation tests.</span></div>
+<div class="line"> std::vector&lt;FiniteElement*&gt; el_pt;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nelem=Lagrange_multiplier_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nelem;e++)</div>
+<div class="line">  {</div>
+<div class="line">   el_pt.push_back(Lagrange_multiplier_mesh_pt-&gt;finite_element_pt(e));</div>
+<div class="line">  }</div>
+<div class="line"> std::sort(el_pt.begin(),el_pt.end(),<a class="code" href="classFiniteElementComp.html">FiniteElementComp</a>());</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nelem;e++)</div>
+<div class="line">  {</div>
+<div class="line">   el_pt[e]-&gt;output(some_file);</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increment label for output files</span></div>
+<div class="line"> Doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_and_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="comm"></a>
+Comments</h2>
+<p>As mentioned in the introduction, there is an alternative, much simpler way of imposing prescribed boundary motions which does not require Lagrange multipliers: Pin the nodal positions of all nodes on <img class="formulaInl" alt="$ \partial D_{prescr} $" src="form_4.png"/> and update their positions manually before calling the Newton solver, e.g. by changing the <code>actions_before_newton_solve()</code> function to</p>
+ <div class="fragment"><div class="line"> <span class="comment">/// Update boundary position directly</span></div>
+<div class="line"> <span class="keywordtype">void</span> actions_before_newton_solve()</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over all nodes on top boundary (boundary 2)</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> b=2;</div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_nod = <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;nboundary_node(b);</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_nod;i++)</div>
+<div class="line">    {</div>
+<div class="line">     Node* nod_pt= <a class="code" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a>()-&gt;boundary_node_pt(b,i);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Get boundary coordinate associated with boundary 2</span></div>
+<div class="line">     Vector&lt;double&gt; zeta(1);</div>
+<div class="line">     nod_pt-&gt;get_coordinates_on_boundary(b,zeta);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Get prescribed position from GeomObject</span></div>
+<div class="line">     Vector&lt;double&gt; r(2);</div>
+<div class="line">     <a class="code" href="namespaceGlobal__Physical__Variables.html#ab0a184463cbaaa353f2235411adef3c4">Global_Physical_Variables::Boundary_geom_object</a>.<a class="code" href="classWarpedLine.html#aaeef89818148ee3a305c561e91c8851d">position</a>(zeta,r);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Update position</span></div>
+<div class="line">     nod_pt-&gt;x(0)=r[0];</div>
+<div class="line">     nod_pt-&gt;x(1)=r[1];</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end actions_before_newton_solve</span></div>
+</div><!-- fragment --><p>This approach is implemented in the alternative driver code <a href="../../../../demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult2.cc">prescribed_displ_lagr_mult2.cc</a>. <br  />
+</p>
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>In order to familiarise yourself with the details of how <code>FaceElements</code> add additional nodal values to the nodes they are attached to, output the values of <code>n_bulk_value</code> and <code>nval</code> in the loop that pins the Lagrange multipliers in <code>create_lagrange_multiplier_elements()</code>. Explain why, for the <code>RefineableQPVDElement&lt;2,3&gt;</code> used here, we have <code>n_bulk_value</code> = 0. What happens if you use elements of type <code>RefineableQPVDElementWithContinousPressure&lt;2&gt;</code> instead? <br  />
+<br  />
+</li>
+<li>Comment out the call to <code>set_lagrangian_nodal_coordinates()</code> after the solve and compare the robustness of the computation and the resulting domain shapes. [Hint: You will have to reduce the increment for the amplitude of the prescribed boundary deflection to 0.025 or less, otherwise the Newton iteration will diverge very rapidly.] <br  />
+<br  />
+</li>
+<li>Explore the performance of the alternative driver code (without the use of Lagrange multipliers) <a href="../../../../demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult2.cc">prescribed_displ_lagr_mult2.cc</a> and explain why it is less robust than the version with Lagrange multipliers (in the sense that the increment in the amplitude of the prescribed boundary displacement has to be reduced significantly to keep the Newton method from diverging). Hint: Compare the domain shapes before the call to the Newton solver. <br  />
+<br  />
+</li>
+<li>Omit the specification of the boundary number in the bulk mesh by commenting out the call to <code>set_boundary_number_in_bulk_mesh(...)</code> in the function <code>create_lagrange_multiplier_elements()</code>. Check what happens when the code is compiled with and without the <code>PARANOID</code> flag.</li>
+</ol>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassWarpedLine_html_ae43c2f997b9c0de62783375341ac5794"><div class="ttname"><a href="classWarpedLine.html#ae43c2f997b9c0de62783375341ac5794">WarpedLine::ampl</a></div><div class="ttdeci">double &amp; ampl()</div><div class="ttdoc">Access to amplitude.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00111">prescribed_displ_lagr_mult.cc:111</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_abc58821d6b49cd9773dcd90b240aab6e"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#abc58821d6b49cd9773dcd90b240aab6e">PrescribedBoundaryDisplacementProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00435">prescribed_displ_lagr_mult.cc:435</a></div></div>
+<div class="ttc" id="aclassFiniteElementComp_html"><div class="ttname"><a href="classFiniteElementComp.html">FiniteElementComp</a></div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00047">prescribed_displ_lagr_mult.cc:47</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_ac0fc3028f61cec5ac4b01670d7728934"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#ac0fc3028f61cec5ac4b01670d7728934">PrescribedBoundaryDisplacementProblem::solid_mesh_pt</a></div><div class="ttdeci">ElasticRefineableRectangularQuadMesh&lt; ELEMENT &gt; *&amp; solid_mesh_pt()</div><div class="ttdoc">Access function for the solid mesh.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00173">prescribed_displ_lagr_mult.cc:173</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_a6d2cdbd9ae1077c80831d938bdb72a61"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#a6d2cdbd9ae1077c80831d938bdb72a61">PrescribedBoundaryDisplacementProblem::Solid_mesh_pt</a></div><div class="ttdeci">ElasticRefineableRectangularQuadMesh&lt; ELEMENT &gt; * Solid_mesh_pt</div><div class="ttdoc">Pointer to solid mesh.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00196">prescribed_displ_lagr_mult.cc:196</a></div></div>
+<div class="ttc" id="aclassWarpedLine_html_a4cb07fb7f06d42e2008afe65d8750cad"><div class="ttname"><a href="classWarpedLine.html#a4cb07fb7f06d42e2008afe65d8750cad">WarpedLine::~WarpedLine</a></div><div class="ttdeci">~WarpedLine()</div><div class="ttdoc">Empty Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00091">prescribed_displ_lagr_mult.cc:91</a></div></div>
+<div class="ttc" id="aprescribed__displ__lagr__mult_8txt_html_a4594cc67d151c2f09d749a2d054e7f71"><div class="ttname"><a href="prescribed__displ__lagr__mult_8txt.html#a4594cc67d151c2f09d749a2d054e7f71">l_x</a></div><div class="ttdeci">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We start by creating the bulk discretising the domain with elements of the type specified by the class s template argument dontinclude prescribed_displ_lagr_mult cc skipline start_of_constructor until l_x</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8txt_source.html#l00259">prescribed_displ_lagr_mult.txt:259</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a9e06f4ada334a9a911aa8cdcfb3ff30b"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a9e06f4ada334a9a911aa8cdcfb3ff30b">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson's ratio.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00144">prescribed_displ_lagr_mult.cc:144</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_a53e7d18d9d748388160d6c4106f1d493"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#a53e7d18d9d748388160d6c4106f1d493">PrescribedBoundaryDisplacementProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00167">prescribed_displ_lagr_mult.cc:167</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html">PrescribedBoundaryDisplacementProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00158">prescribed_displ_lagr_mult.cc:158</a></div></div>
+<div class="ttc" id="aclassWarpedLine_html_ac44286e84ff213e67e0f247d00ad50af"><div class="ttname"><a href="classWarpedLine.html#ac44286e84ff213e67e0f247d00ad50af">WarpedLine::Ampl</a></div><div class="ttdeci">double Ampl</div><div class="ttdoc">Amplitude of perturbation.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00123">prescribed_displ_lagr_mult.cc:123</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_a0204ae947ffd18ed3d7690395901a1e8"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#a0204ae947ffd18ed3d7690395901a1e8">PrescribedBoundaryDisplacementProblem::delete_lagrange_multiplier_elements</a></div><div class="ttdeci">void delete_lagrange_multiplier_elements()</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00412">prescribed_displ_lagr_mult.cc:412</a></div></div>
+<div class="ttc" id="aprescribed__displ__lagr__mult_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8txt_source.html#l00005">prescribed_displ_lagr_mult.txt:5</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_a2e9f335e8680b0f2338b579e37e9d38a"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#a2e9f335e8680b0f2338b579e37e9d38a">PrescribedBoundaryDisplacementProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt: Wipe the mesh of Lagrange multiplier elements.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00298">prescribed_displ_lagr_mult.cc:298</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab0a184463cbaaa353f2235411adef3c4"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab0a184463cbaaa353f2235411adef3c4">Global_Physical_Variables::Boundary_geom_object</a></div><div class="ttdeci">WarpedLine Boundary_geom_object(0.0)</div><div class="ttdoc">GeomObject specifying the shape of the boundary: Initially it's flat.</div></div>
+<div class="ttc" id="aclassWarpedLine_html_aaeef89818148ee3a305c561e91c8851d"><div class="ttname"><a href="classWarpedLine.html#aaeef89818148ee3a305c561e91c8851d">WarpedLine::position</a></div><div class="ttdeci">void position(const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</div><div class="ttdoc">Position vector at Lagrangian coordinate zeta.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00094">prescribed_displ_lagr_mult.cc:94</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_aae7225db18ad5c8429c0eb96fa37b585"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#aae7225db18ad5c8429c0eb96fa37b585">PrescribedBoundaryDisplacementProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adapt: Rebuild the mesh of Lagrange multiplier elements.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00315">prescribed_displ_lagr_mult.cc:315</a></div></div>
+<div class="ttc" id="aprescribed__displ__lagr__mult_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="prescribed__displ__lagr__mult_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver code.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00484">prescribed_displ_lagr_mult.cc:484</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_abb87cb0933297f449af7ceac7fe2bd77"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#abb87cb0933297f449af7ceac7fe2bd77">PrescribedBoundaryDisplacementProblem::Lagrange_multiplier_mesh_pt</a></div><div class="ttdeci">SolidMesh * Lagrange_multiplier_mesh_pt</div><div class="ttdoc">Pointers to meshes of Lagrange multiplier elements.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00199">prescribed_displ_lagr_mult.cc:199</a></div></div>
+<div class="ttc" id="aclassWarpedLine_html_aa4157cd4ff2e80f33b106b7ed4e4d804"><div class="ttname"><a href="classWarpedLine.html#aa4157cd4ff2e80f33b106b7ed4e4d804">WarpedLine::ngeom_data</a></div><div class="ttdeci">unsigned ngeom_data() const</div><div class="ttdoc">How many items of Data does the shape of the object depend on? None.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00115">prescribed_displ_lagr_mult.cc:115</a></div></div>
+<div class="ttc" id="aclassWarpedLine_html_ae2ee796906c0caa7e94f277f6fc499e1"><div class="ttname"><a href="classWarpedLine.html#ae2ee796906c0caa7e94f277f6fc499e1">WarpedLine::operator=</a></div><div class="ttdeci">void operator=(const WarpedLine &amp;)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00084">prescribed_displ_lagr_mult.cc:84</a></div></div>
+<div class="ttc" id="aclassWarpedLine_html"><div class="ttname"><a href="classWarpedLine.html">WarpedLine</a></div><div class="ttdoc">Warped line in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00066">prescribed_displ_lagr_mult.cc:66</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_aef72ea29567df89d82fe93235f1907f8"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#aef72ea29567df89d82fe93235f1907f8">PrescribedBoundaryDisplacementProblem::Doc_info</a></div><div class="ttdeci">DocInfo Doc_info</div><div class="ttdoc">DocInfo object for output.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00202">prescribed_displ_lagr_mult.cc:202</a></div></div>
+<div class="ttc" id="aprescribed__displ__lagr__mult_8txt_html_ae8b0810a7b3e714302e99c81eb12136d"><div class="ttname"><a href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a></div><div class="ttdeci">We pin the position of the nodes on all domain boundaries apart from the top it is good practice to do this anyway to guard against unpleasant surprises when the element type is changed at some point until solid_mesh_pt() -&gt; element_pt())</div></div>
+<div class="ttc" id="aclassWarpedLine_html_a9d80dca2c907b426f7130579c94f3310"><div class="ttname"><a href="classWarpedLine.html#a9d80dca2c907b426f7130579c94f3310">WarpedLine::WarpedLine</a></div><div class="ttdeci">WarpedLine(const double &amp;ampl)</div><div class="ttdoc">Constructor: Specify amplitude of deflection from straight horizontal line.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00072">prescribed_displ_lagr_mult.cc:72</a></div></div>
+<div class="ttc" id="aprescribed__displ__lagr__mult_8txt_html_a70e156ba08d56ab9ab1360ed22c1e003"><div class="ttname"><a href="prescribed__displ__lagr__mult_8txt.html#a70e156ba08d56ab9ab1360ed22c1e003">l_y</a></div><div class="ttdeci">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We start by creating the bulk discretising the domain with elements of the type specified by the class s template argument dontinclude prescribed_displ_lagr_mult cc skipline start_of_constructor until l_y</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8txt_source.html#l00259">prescribed_displ_lagr_mult.txt:259</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_ac0c8b47eeb75ba2c618757e6b56e62dc"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#ac0c8b47eeb75ba2c618757e6b56e62dc">PrescribedBoundaryDisplacementProblem::PrescribedBoundaryDisplacementProblem</a></div><div class="ttdeci">PrescribedBoundaryDisplacementProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00211">prescribed_displ_lagr_mult.cc:211</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Global parameters.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00137">prescribed_displ_lagr_mult.cc:137</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_ad2184bb8d7391da21bec62d4aacf5c20"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#ad2184bb8d7391da21bec62d4aacf5c20">PrescribedBoundaryDisplacementProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00170">prescribed_displ_lagr_mult.cc:170</a></div></div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html_adf4798f13809f5b2f2be6e3d63421edc"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html#adf4798f13809f5b2f2be6e3d63421edc">PrescribedBoundaryDisplacementProblem::create_lagrange_multiplier_elements</a></div><div class="ttdeci">void create_lagrange_multiplier_elements()</div><div class="ttdoc">Create elements that enforce prescribed boundary motion by Lagrange multiplilers.</div><div class="ttdef"><b>Definition:</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00338">prescribed_displ_lagr_mult.cc:338</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:16:55
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

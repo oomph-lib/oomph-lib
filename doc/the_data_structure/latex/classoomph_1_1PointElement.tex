@@ -1,0 +1,149 @@
+\hypertarget{classoomph_1_1PointElement}{}\doxysection{oomph\+::Point\+Element Class Reference}
+\label{classoomph_1_1PointElement}\index{oomph::PointElement@{oomph::PointElement}}
+
+
+{\ttfamily \#include $<$elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Point\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{classoomph_1_1PointElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PointElement_a08937a79fd45c5efd205a0e7535ef1cf}{Point\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PointElement_a46f7527a4cc666d050f72cefa4a340d1}{Point\+Element}} (const \mbox{\hyperlink{classoomph_1_1PointElement}{Point\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PointElement_a27f0b22c4f5aae72b0223748b5cb1185}{shape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PointElement_ac25e0eb9aa65e8b90ef4907942e2c87f}{local\+\_\+coordinate\+\_\+of\+\_\+node}} (const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
+\begin{DoxyCompactList}\small\item\em Get local coordinates of node j in the element; vector sets its own size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classoomph_1_1PointIntegral}{Point\+Integral}} \mbox{\hyperlink{classoomph_1_1PointElement_a812180fd4abef76f519f07fa5ca01401}{Default\+\_\+integration\+\_\+scheme}}
+\begin{DoxyCompactList}\small\item\em Return spatial dimension of element (=number of local coordinates needed to parametrise the element) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Point element has just a single node and a single shape function which is identically equal to one. 
+
+Definition at line 3301 of file elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PointElement_a08937a79fd45c5efd205a0e7535ef1cf}\label{classoomph_1_1PointElement_a08937a79fd45c5efd205a0e7535ef1cf}} 
+\index{oomph::PointElement@{oomph::PointElement}!PointElement@{PointElement}}
+\index{PointElement@{PointElement}!oomph::PointElement@{oomph::PointElement}}
+\doxysubsubsection{\texorpdfstring{PointElement()}{PointElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Point\+Element\+::\+Point\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+Allocate storage for the pointers to the nodes, There is only one nodes
+
+Definition at line 3307 of file elements.\+h.
+
+
+
+References Default\+\_\+integration\+\_\+scheme, oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme(), and oomph\+::\+Finite\+Element\+::set\+\_\+n\+\_\+node().
+
+\mbox{\Hypertarget{classoomph_1_1PointElement_a46f7527a4cc666d050f72cefa4a340d1}\label{classoomph_1_1PointElement_a46f7527a4cc666d050f72cefa4a340d1}} 
+\index{oomph::PointElement@{oomph::PointElement}!PointElement@{PointElement}}
+\index{PointElement@{PointElement}!oomph::PointElement@{oomph::PointElement}}
+\doxysubsubsection{\texorpdfstring{PointElement()}{PointElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Point\+Element\+::\+Point\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PointElement}{Point\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 3318 of file elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PointElement_ac25e0eb9aa65e8b90ef4907942e2c87f}\label{classoomph_1_1PointElement_ac25e0eb9aa65e8b90ef4907942e2c87f}} 
+\index{oomph::PointElement@{oomph::PointElement}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
+\index{local\_coordinate\_of\_node@{local\_coordinate\_of\_node}!oomph::PointElement@{oomph::PointElement}}
+\doxysubsubsection{\texorpdfstring{local\_coordinate\_of\_node()}{local\_coordinate\_of\_node()}}
+{\footnotesize\ttfamily void oomph\+::\+Point\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get local coordinates of node j in the element; vector sets its own size. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22bc4ee35e4f948d8d7fba18c7b4f4c4}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 3333 of file elements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1PointElement_a27f0b22c4f5aae72b0223748b5cb1185}\label{classoomph_1_1PointElement_a27f0b22c4f5aae72b0223748b5cb1185}} 
+\index{oomph::PointElement@{oomph::PointElement}!shape@{shape}}
+\index{shape@{shape}!oomph::PointElement@{oomph::PointElement}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily void oomph\+::\+Point\+Element\+::shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Return the geometric shape function at the local coordinate s.
+
+Calculate the geometric shape functions at local coordinate s 
+
+Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 7389 of file elements.\+cc.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1PointElement_a812180fd4abef76f519f07fa5ca01401}\label{classoomph_1_1PointElement_a812180fd4abef76f519f07fa5ca01401}} 
+\index{oomph::PointElement@{oomph::PointElement}!Default\_integration\_scheme@{Default\_integration\_scheme}}
+\index{Default\_integration\_scheme@{Default\_integration\_scheme}!oomph::PointElement@{oomph::PointElement}}
+\doxysubsubsection{\texorpdfstring{Default\_integration\_scheme}{Default\_integration\_scheme}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PointIntegral}{Point\+Integral}} oomph\+::\+Point\+Element\+::\+Default\+\_\+integration\+\_\+scheme\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Return spatial dimension of element (=number of local coordinates needed to parametrise the element) 
+
+Assign the static Default\+\_\+integration\+\_\+scheme.
+
+Default integration scheme 
+
+Definition at line 3345 of file elements.\+h.
+
+
+
+Referenced by Point\+Element().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elements_8h}{elements.\+h}}\item 
+\mbox{\hyperlink{elements_8cc}{elements.\+cc}}\end{DoxyCompactItemize}

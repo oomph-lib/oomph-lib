@@ -1,0 +1,106 @@
+\hypertarget{namespaceGlobal__Physical__Variables}{}\doxysection{Global\+\_\+\+Physical\+\_\+\+Variables Namespace Reference}
+\label{namespaceGlobal__Physical__Variables}\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+
+
+Global variables.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a01099bce3441c7fe79ac6926800097a8}{multiplier}} (const Vector$<$ double $>$ \&xi)
+\begin{DoxyCompactList}\small\item\em Multiplier for inertia terms (needed for consistent assignment of initial conditions in Newmark scheme) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Lambda\+\_\+sq}} =(1.\+0-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}})/((1.\+0+\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}})$\ast$(1.\+0-\/2.\+0$\ast$\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}))
+\begin{DoxyCompactList}\small\item\em Timescale ratio. \end{DoxyCompactList}\item 
+Constitutive\+Law $\ast$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\+\_\+law\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global variables. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a01099bce3441c7fe79ac6926800097a8}\label{namespaceGlobal__Physical__Variables_a01099bce3441c7fe79ac6926800097a8}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!multiplier@{multiplier}}
+\index{multiplier@{multiplier}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{multiplier()}{multiplier()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::multiplier (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{xi }\end{DoxyParamCaption})}
+
+
+
+Multiplier for inertia terms (needed for consistent assignment of initial conditions in Newmark scheme) 
+
+
+
+Definition at line 63 of file disk\+\_\+oscillation.\+cc.
+
+
+
+References Lambda\+\_\+sq.
+
+
+
+Referenced by Disk\+Oscillation\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::run().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}\label{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily Constitutive\+Law$\ast$ Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt =0}
+
+
+
+Pointer to constitutive law. 
+
+
+
+Definition at line 59 of file disk\+\_\+oscillation.\+cc.
+
+
+
+Referenced by Disk\+Oscillation\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Disk\+Oscillation\+Problem(), and main().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}\label{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Lambda\_sq@{Lambda\_sq}}
+\index{Lambda\_sq@{Lambda\_sq}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Lambda\_sq}{Lambda\_sq}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq =(1.\+0-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}})/((1.\+0+\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}})$\ast$(1.\+0-\/2.\+0$\ast$\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}))}
+
+
+
+Timescale ratio. 
+
+
+
+Definition at line 56 of file disk\+\_\+oscillation.\+cc.
+
+
+
+Referenced by Disk\+Oscillation\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Disk\+Oscillation\+Problem(), and multiplier().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}\label{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Nu@{Nu}}
+\index{Nu@{Nu}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu =0.\+3}
+
+
+
+Poisson\textquotesingle{}s ratio. 
+
+
+
+Definition at line 53 of file disk\+\_\+oscillation.\+cc.
+
+
+
+Referenced by main(), and Disk\+Oscillation\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::run().
+

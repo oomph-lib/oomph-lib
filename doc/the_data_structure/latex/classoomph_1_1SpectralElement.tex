@@ -1,0 +1,208 @@
+\hypertarget{classoomph_1_1SpectralElement}{}\doxysection{oomph\+::Spectral\+Element Class Reference}
+\label{classoomph_1_1SpectralElement}\index{oomph::SpectralElement@{oomph::SpectralElement}}
+
+
+{\ttfamily \#include $<$Qspectral\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Spectral\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.455302cm]{classoomph_1_1SpectralElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SpectralElement_ad593a485187297e53b82cf9c22be8a11}{Spectral\+Element}} ()
+\item 
+virtual \mbox{\hyperlink{classoomph_1_1SpectralElement_a98d3738ce6703db8c52ccd19d82a3451}{$\sim$\+Spectral\+Element}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpectralElement_aa23ecaa19fb8eb9a64243b3053f5322c}{spectral\+\_\+data\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return the i-\/th data object associated with the polynomials of order p. Note that i $<$= p. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1SpectralElement_a8482a26d6c6b1e278a5b98cdbb705d67}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
+\begin{DoxyCompactList}\small\item\em Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1SpectralElement_a36eeaa010b3a66ac9ee1556ee7dcc23d}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (const bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Assign the local equation numbers. If the boolean argument is true then store degrees of freedom at Dof\+\_\+pt. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1SpectralElement_a930a352d4345327c8751165fa1e49a7b}{nspectral}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1SpectralElement_a14f6bf98b6c49bd939d3ca9d25373b9c}{Spectral\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Additional Storage for shared spectral data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1SpectralElement_ae9c3930a2471ee0298dcd088380c8d03}{Spectral\+\_\+order}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} that represents the spectral order in each dimension. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1SpectralElement_ad4be04e6b166472ca5f18d4678884994}{Nodal\+\_\+spectral\+\_\+order}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} that represents the nodal spectral order. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1SpectralElement_a24c7cd3b63fa81f059c959baa5e66f79}{Spectral\+\_\+local\+\_\+eqn}}
+\begin{DoxyCompactList}\small\item\em Local equation numbers for the spectral degrees of freedom. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 152 of file Qspectral\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_ad593a485187297e53b82cf9c22be8a11}\label{classoomph_1_1SpectralElement_ad593a485187297e53b82cf9c22be8a11}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!SpectralElement@{SpectralElement}}
+\index{SpectralElement@{SpectralElement}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{SpectralElement()}{SpectralElement()}}
+{\footnotesize\ttfamily oomph\+::\+Spectral\+Element\+::\+Spectral\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 170 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_a98d3738ce6703db8c52ccd19d82a3451}\label{classoomph_1_1SpectralElement_a98d3738ce6703db8c52ccd19d82a3451}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!````~SpectralElement@{$\sim$SpectralElement}}
+\index{````~SpectralElement@{$\sim$SpectralElement}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{$\sim$SpectralElement()}{~SpectralElement()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Spectral\+Element\+::$\sim$\+Spectral\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 172 of file Qspectral\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_a36eeaa010b3a66ac9ee1556ee7dcc23d}\label{classoomph_1_1SpectralElement_a36eeaa010b3a66ac9ee1556ee7dcc23d}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}}
+\index{assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{assign\_all\_generic\_local\_eqn\_numbers()}{assign\_all\_generic\_local\_eqn\_numbers()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{const bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Assign the local equation numbers. If the boolean argument is true then store degrees of freedom at Dof\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a564ba080f68132762510b1ec9465b05d}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 229 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::\+Dof\+\_\+pt\+\_\+deque, oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Data\+::\+Is\+\_\+pinned, oomph\+::\+Data\+::\+Is\+\_\+unclassified, n, oomph\+::\+Data\+::nvalue(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize(), and oomph\+::\+Data\+::value\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_a8482a26d6c6b1e278a5b98cdbb705d67}\label{classoomph_1_1SpectralElement_a8482a26d6c6b1e278a5b98cdbb705d67}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!describe\_local\_dofs@{describe\_local\_dofs}}
+\index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Spectral\+Element\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aad9f9ebb2996fd9c44caf34da8bc7941}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 195 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Data\+::describe\+\_\+dofs(), oomph\+::\+Finite\+Element\+::describe\+\_\+local\+\_\+dofs(), n, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_a930a352d4345327c8751165fa1e49a7b}\label{classoomph_1_1SpectralElement_a930a352d4345327c8751165fa1e49a7b}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!nspectral@{nspectral}}
+\index{nspectral@{nspectral}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{nspectral()}{nspectral()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Spectral\+Element\+::nspectral (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 332 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_aa23ecaa19fb8eb9a64243b3053f5322c}\label{classoomph_1_1SpectralElement_aa23ecaa19fb8eb9a64243b3053f5322c}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!spectral\_data\_pt@{spectral\_data\_pt}}
+\index{spectral\_data\_pt@{spectral\_data\_pt}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{spectral\_data\_pt()}{spectral\_data\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ oomph\+::\+Spectral\+Element\+::spectral\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the i-\/th data object associated with the polynomials of order p. Note that i $<$= p. 
+
+
+
+Definition at line 184 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References i.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_ad4be04e6b166472ca5f18d4678884994}\label{classoomph_1_1SpectralElement_ad4be04e6b166472ca5f18d4678884994}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!Nodal\_spectral\_order@{Nodal\_spectral\_order}}
+\index{Nodal\_spectral\_order@{Nodal\_spectral\_order}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{Nodal\_spectral\_order}{Nodal\_spectral\_order}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Spectral\+Element\+::\+Nodal\+\_\+spectral\+\_\+order\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} that represents the nodal spectral order. 
+
+
+
+Definition at line 163 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_a14f6bf98b6c49bd939d3ca9d25373b9c}\label{classoomph_1_1SpectralElement_a14f6bf98b6c49bd939d3ca9d25373b9c}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!Spectral\_data\_pt@{Spectral\_data\_pt}}
+\index{Spectral\_data\_pt@{Spectral\_data\_pt}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{Spectral\_data\_pt}{Spectral\_data\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$$>$$\ast$ oomph\+::\+Spectral\+Element\+::\+Spectral\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Additional Storage for shared spectral data. 
+
+
+
+Definition at line 157 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_a24c7cd3b63fa81f059c959baa5e66f79}\label{classoomph_1_1SpectralElement_a24c7cd3b63fa81f059c959baa5e66f79}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!Spectral\_local\_eqn@{Spectral\_local\_eqn}}
+\index{Spectral\_local\_eqn@{Spectral\_local\_eqn}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{Spectral\_local\_eqn}{Spectral\_local\_eqn}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$int$>$ oomph\+::\+Spectral\+Element\+::\+Spectral\+\_\+local\+\_\+eqn\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Local equation numbers for the spectral degrees of freedom. 
+
+
+
+Definition at line 166 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SpectralElement_ae9c3930a2471ee0298dcd088380c8d03}\label{classoomph_1_1SpectralElement_ae9c3930a2471ee0298dcd088380c8d03}} 
+\index{oomph::SpectralElement@{oomph::SpectralElement}!Spectral\_order@{Spectral\_order}}
+\index{Spectral\_order@{Spectral\_order}!oomph::SpectralElement@{oomph::SpectralElement}}
+\doxysubsubsection{\texorpdfstring{Spectral\_order}{Spectral\_order}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Spectral\+Element\+::\+Spectral\+\_\+order\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} that represents the spectral order in each dimension. 
+
+
+
+Definition at line 160 of file Qspectral\+\_\+elements.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Qspectral__elements_8h}{Qspectral\+\_\+elements.\+h}}\end{DoxyCompactItemize}

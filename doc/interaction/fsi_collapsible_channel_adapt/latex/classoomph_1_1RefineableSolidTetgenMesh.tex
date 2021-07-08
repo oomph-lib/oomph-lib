@@ -1,0 +1,85 @@
+\hypertarget{classoomph_1_1RefineableSolidTetgenMesh}{}\doxysection{oomph\+::Refineable\+Solid\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1RefineableSolidTetgenMesh}\index{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Solid\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.472406cm]{classoomph_1_1RefineableSolidTetgenMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableSolidTetgenMesh_a41ce4d45bdd2bacc45218f51cdd8f651}{Refineable\+Solid\+Tetgen\+Mesh}} (Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&outer\+\_\+boundary\+\_\+pt, Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&internal\+\_\+closed\+\_\+surface\+\_\+pt, const double \&element\+\_\+volume, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false, const bool \&split\+\_\+corner\+\_\+elements=false)
+\begin{DoxyCompactList}\small\item\em Build mesh, based on closed curve that specifies the outer boundary of the domain and any number of internal closed curves. Specify target area for uniform element size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableSolidTetgenMesh_a316eeacca5760fb6517732ff93072a3f}{Refineable\+Solid\+Tetgen\+Mesh}} (const Vector$<$ double $>$ \&target\+\_\+volume, tetgenio $\ast$const \&tetgen\+\_\+io\+\_\+pt, Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&outer\+\_\+boundary\+\_\+pt, Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&internal\+\_\+surface\+\_\+pt, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false)
+\begin{DoxyCompactList}\small\item\em Build mesh from specified triangulation and associated target areas for elements in it. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1RefineableSolidTetgenMesh_a8386e0befb5c197208918f7f43265974}{$\sim$\+Refineable\+Solid\+Tetgen\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Refineable\+Solid\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+
+
+Definition at line 280 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidTetgenMesh_a41ce4d45bdd2bacc45218f51cdd8f651}\label{classoomph_1_1RefineableSolidTetgenMesh_a41ce4d45bdd2bacc45218f51cdd8f651}} 
+\index{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$}!RefineableSolidTetgenMesh@{RefineableSolidTetgenMesh}}
+\index{RefineableSolidTetgenMesh@{RefineableSolidTetgenMesh}!oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableSolidTetgenMesh()}{RefineableSolidTetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableSolidTetgenMesh}{oomph\+::\+Refineable\+Solid\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidTetgenMesh}{Refineable\+Solid\+Tetgen\+Mesh}} (\begin{DoxyParamCaption}\item[{Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&}]{internal\+\_\+closed\+\_\+surface\+\_\+pt,  }\item[{const double \&}]{element\+\_\+volume,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{const bool \&}]{use\+\_\+attributes = {\ttfamily false},  }\item[{const bool \&}]{split\+\_\+corner\+\_\+elements = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Build mesh, based on closed curve that specifies the outer boundary of the domain and any number of internal closed curves. Specify target area for uniform element size. 
+
+
+
+Definition at line 290 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidTetgenMesh_a316eeacca5760fb6517732ff93072a3f}\label{classoomph_1_1RefineableSolidTetgenMesh_a316eeacca5760fb6517732ff93072a3f}} 
+\index{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$}!RefineableSolidTetgenMesh@{RefineableSolidTetgenMesh}}
+\index{RefineableSolidTetgenMesh@{RefineableSolidTetgenMesh}!oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableSolidTetgenMesh()}{RefineableSolidTetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableSolidTetgenMesh}{oomph\+::\+Refineable\+Solid\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidTetgenMesh}{Refineable\+Solid\+Tetgen\+Mesh}} (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{target\+\_\+volume,  }\item[{tetgenio $\ast$const \&}]{tetgen\+\_\+io\+\_\+pt,  }\item[{Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&}]{internal\+\_\+surface\+\_\+pt,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{const bool \&}]{use\+\_\+attributes = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Build mesh from specified triangulation and associated target areas for elements in it. 
+
+
+
+Definition at line 312 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidTetgenMesh_a8386e0befb5c197208918f7f43265974}\label{classoomph_1_1RefineableSolidTetgenMesh_a8386e0befb5c197208918f7f43265974}} 
+\index{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$}!````~RefineableSolidTetgenMesh@{$\sim$RefineableSolidTetgenMesh}}
+\index{````~RefineableSolidTetgenMesh@{$\sim$RefineableSolidTetgenMesh}!oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableSolidTetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$RefineableSolidTetgenMesh()}{~RefineableSolidTetgenMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1RefineableSolidTetgenMesh}{oomph\+::\+Refineable\+Solid\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableSolidTetgenMesh}{Refineable\+Solid\+Tetgen\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty Destructor. 
+
+
+
+Definition at line 330 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__tetgen__mesh_8template_8h}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}\end{DoxyCompactItemize}

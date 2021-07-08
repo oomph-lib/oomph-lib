@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: jeffery_orbit.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">jeffery_orbit.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:abb6a9a47452ed20f9d94422d52f8cb5f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#abb6a9a47452ed20f9d94422d52f8cb5f">href</a> = &quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; inline unstructured <a class="el" href="jeffery__orbit_8txt.html#a786a2ed6db956cea0a65a02a8cbe569b">mesh</a> generation&lt;/a &gt; procedures to modify the fluid <a class="el" href="jeffery__orbit_8txt.html#a786a2ed6db956cea0a65a02a8cbe569b">mesh</a> in response to changes in orientation of the ellipse. \section overview Overview of the problem @I w 0.75\textwidth jeff_sketch &quot;A rigid ellipse immersed in a shear <a class="el" href="jeffery__orbit_8txt.html#a2222e3ad05020c29dd2d2e05a964f767">flow</a> &quot; We consider an ellipse with centre of mass fixed at the origin of a Cartesian coordinate system \f$(x_{1}^{ *}, x_{2}^{ *}) \f$, but immersed in a viscous fluid undergoing a linear shear <a class="el" href="jeffery__orbit_8txt.html#a2222e3ad05020c29dd2d2e05a964f767">flow</a> with shear rate \f$ G \f$. In the absence of the ellipse the fluid velocity field would be \f$ u^{ *}_{1}=Gx^{ *}_{2} \f$, \f$ u^{ *}_{2}=0 \f$, where \f$ u^{ *}_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>} \f$ is the dimensional velocity component in the \f$ x^{ *}_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>} \f$ coordinate direction. The configuration of a rigid body in two dimensions is determined entirely by the position of its centre of mass, \f$(X^{ *}_{1}, X^{ *}_{2})\f$ <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> an angle, \f$\chi\f$ that specifies its orientation to a fixed axis. The equations governing the motion of the particle are then simply conservation of linear <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> angular momentum:&lt; center &gt; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[M \frac{\mbox{d}^{2} X^{ *}_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}}{\mbox{d} t^{ *2}}=F^{ *}_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>} \quad \mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>} \quad I \frac{\mbox{d}^{2} \chi}{\mbox{d} t^{ *2}}=T^{ *}, \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>]&lt;/center &gt; where \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> $M\f$ is the mass of the body, \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> $I\f$ is its moment of inertia about the centre of mass, \f$(F^{ *}_{1}, F^{ *}_{2})\f$ is the resultant force on the body <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> $T^{ *}\f$ is the resultant torque about the centre of mass. In the present context, the force <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> torque on the body are entirely due to the viscous fluid loading on its surface in which case&lt; center &gt; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[F^{ *}_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}=\int \tau^{ *}_{ij}\, n_{j}\, \mbox{d} s \quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad T^{ *}=\oint(x^{ *}_{1} - X^{ *}_{1}) \tau^{ *}_{2j}\, n_{j} -(x^{ *}_{2} - X^{ *}_{2}) \tau^{ *}_{1j}\, n_{j}\, \mbox{d} s, \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>]&lt;/center &gt; where the integral is around the perimeter of the ellipse, \f$\tau^{ *}_{ij}\f$ is the fluid stress tensor <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \f$(n_{1}, n_{2})\f$ is the unit normal to the ellipse surface, directed away from the solid body. We non-dimensionalise the rigid-body equations, using the same problem-specific reference quantities as used in the non-dimensionalisation of the Navier--Stokes equations, described&lt; a <a class="el" href="jeffery__orbit_8txt.html#abb6a9a47452ed20f9d94422d52f8cb5f">href</a>=&quot;../../../../doc/navier_stokes/driven_cavity/html/index.html&quot;&gt; in another tutorial.&lt;/a &gt; <a class="el" href="jeffery__orbit_8txt.html#aab366d0f2ece1186e184ee541941e92d">Thus</a>, \f$ {\cal U}\f$ is a typical fluid velocity, \f$ {\cal L} \f$ is the length scale, \f${\cal T}\f$ is the time scale <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> the fluid pressure is non-dimensionalised on the viscous scale, \f$ \mu_{ref} {\cal U}/{\cal L} \f$, where \f$ \mu_{ref} \f$ is the reference fluid viscosity. Hence,&lt; center &gt; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\tau^{ *}_{ij}=\frac{\mu_{ref} {\cal U}}{{\cal L}} \, \tau_{ij}, \qquad x_i^{ *}={\cal L}\, x_i, \qquad X_i^ *={\cal L}\, X_i, \qquad t^ *={\cal T}\, t. \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>]&lt;/center &gt; The external forces <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> torques are non-dimensionalised on the viscous scales per unit length, \f$ F^{ *}_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}=\mu_{ref} {\cal U} F_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>} \f$ <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \f$ T^{ *}=\mu_{ref} {\cal U} {\cal L} T \f$. The dimensionless rigid-body equations are then&lt; center &gt; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[<a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> St^{2} \frac{\rho_{s}}{\rho_{<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>}}\, \bar{M}\, \frac{\mbox{d}^{2} X_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}}{\mbox{d} t^{2}}=F_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>} \quad \mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>} \quad <a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> St^{2} \frac{\rho_{s}}{\rho_{<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>}}\, \bar{I}\, \frac{\mbox{d}^{2} \chi}{\mbox{d} t^{2}}=T, \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>]&lt;/center &gt; where the dimensionless parameters&lt; center &gt; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[<a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a>=\frac{\rho_{<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>} {\cal U}{\cal L}}{\mu_{ref}}, \quad St=\frac{\cal L}{{\cal U}{\cal T}},\quad \frac{\rho_{s}}{\rho_{<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>}}, \quad \bar{M}=\frac{M}{\rho_{s} {\cal L}^{2}}, \quad \bar{I}=\frac{I}{\rho_{s} {\cal L}^{4}}, \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>]&lt;/center &gt; are the Reynolds number, the Strouhal number, the density ratio, <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> the dimensionless mass <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> moment of inertia, respectively. In the above \f$ \rho_{<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>} \f$ is the fluid density <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \f$ \rho_{s} \f$ is the solid density. In the specific problem considered here, the centre of mass is fixed, <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> the only possible motion of the particle is free rotation. The particle motion is therefore reduced to the solution of a single equation for the unknown angle. We choose \f$ {\cal L}=2b \f$, the major axis of the ellipse, \f$ {\cal U}=2Gb \f$ <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \f$ {\cal T}=G^{-1} \f$, so that \f$ St=1 \f$ <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> the governing equations for the fluid <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> solid become&lt; center &gt; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[<a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> \left(\frac{\partial u_i}{\partial t}+u_j \frac{\partial u_i}{\partial x_j} \right)=- \frac{\partial p}{\partial x_i}+\frac{\partial }{\partial x_j} \left[\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right] \quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \frac{\partial u_i}{\partial x_i}=0. \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>]&lt;/center &gt; <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>&lt; center &gt; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[<a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> \left(\frac{\rho_{s}}{\rho_{<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>}}\right) \bar{I}=\oint \left[x_{1}\tau_{2j}\, n_{j} - x_{2} \tau_{1j}\, n_{j}\, \right] \mbox{d} s, \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>].&lt;/center &gt; We perform the computations in the domain \f$ x_{1} \in[-L, L]\f$ <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \f$ x_{2} \in[-H, H] \f$, <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> apply the boundary <a class="el" href="jeffery__orbit_8txt.html#a04c89d4d96f3afa9b67358f8d76e190a">conditions</a>&lt; center &gt; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[u_{1}=H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2}=0, \quad\mbox{on}\quad x_{2}=-H</td></tr>
+<tr class="separator:abb6a9a47452ed20f9d94422d52f8cb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae2ffd3b558049dc27a164ca7b150509"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a> = R_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}\f$, where \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> $R_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}\f$ is the corresponding boundary of the ellipse. In the full problem the displacement boundary condition is enforced weakly via Lagrange multipliers \f$ \oint \left\{x_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>} - R_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}\right\}\psi \mbox{d} s=0\f$. In order to ensure consistency, we initially solve the problem in which the rigid body is pinned so that the boundary nodes are adjusted to be consistent with the weak form of the boundary condition. We note that for sufficiently fine initial meshes the difference is minimal. \until solve_for_consistent Now that we have a consistent initial condition, we initialise the timestepper <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> set <a class="el" href="jeffery__orbit_8txt.html#a04c89d4d96f3afa9b67358f8d76e190a">conditions</a> consistent with a impulsive start from rest. \until doc_solution()</td></tr>
+<tr class="separator:aae2ffd3b558049dc27a164ca7b150509"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a0c27d0cb5e1ebe039fb312b2872c2ce4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[u_{1}=-H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2}=0, \quad\mbox{on}\quad x_{2}=H;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\tau_{11}=0, u_{2}=0, \quad\mbox{on}\quad x_{1}=-L, L;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#a0c27d0cb5e1ebe039fb312b2872c2ce4">$f</a> (t)\f$ is a smooth ramp function such that \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> $<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(0)</td></tr>
+<tr class="separator:a0c27d0cb5e1ebe039fb312b2872c2ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9001d2071e1dbd52cc19d22af55204"><td class="memItemLeft" align="right" valign="top">We then take a fixed number of timesteps on the initial documenting the solution after each solve until we loop over a number of cycles in which we adapt the problem <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> then solve for a fixed number of time steps on the each <a class="el" href="jeffery__orbit_8txt.html#a786a2ed6db956cea0a65a02a8cbe569b">mesh</a> skipline for until&lt; HR &gt;&lt; HR &gt; section problem The Problem class The Problem class follows the usual pattern The time dependent boundary <a class="el" href="jeffery__orbit_8txt.html#a04c89d4d96f3afa9b67358f8d76e190a">conditions</a> are applied using the c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#acd9001d2071e1dbd52cc19d22af55204">actions_before_implicit_timestep</a> () function <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> the no-slip boundary condition is applied in \c actions_before_newton_convergence_check() via an auxiliary node update function.&lt; a <a class="el" href="jeffery__orbit_8txt.html#abb6a9a47452ed20f9d94422d52f8cb5f">href</a></td></tr>
+<tr class="separator:acd9001d2071e1dbd52cc19d22af55204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e766b209b7fbcc1bf8cd431947fa412"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> to construct <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> delete the surface elements that impose the Lagrange multiplier constraints <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> compute the load on the rigid body[\c create_lagrange_multiplier_elements(), \c delete_lagrange_multiplier_elements(), \c create_drag_elements(), \c delete_drag_elements()] The class also provides storage for the meshes the rigid body <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> file handles for documentation dontinclude jeffery_orbit cc skipline start_of_problem_class until end_of_problem_class&lt; HR &gt;&lt; HR &gt; section constructor The Problem Constructor We begin by opening the output files <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> allocating two time steppers one for the fluid problem <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> one for the rigid body problem skipline start_constructor until Newmark We then define the geometry that defines the outer boundary of the unstructured <a class="el" href="jeffery__orbit_8txt.html#a786a2ed6db956cea0a65a02a8cbe569b">mesh</a> by constructing a c TriangleMeshPolygon that consists of four straight line boundaries until new TriangleMeshPolygon Next we build the single c ImmersedRigidBodyElement from an instantiation of a c <a class="el" href="classGeneralEllipse.html">GeneralEllipse</a> geometric object until this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#a4e766b209b7fbcc1bf8cd431947fa412">time_stepper_pt</a> (1) The \c ImmersedRigidBodyElement is used to define a \c TriangleMeshCurvilinearClosedCurve in exactly the same way as if it were simply a(passive) \c GeomObject</td></tr>
+<tr class="separator:a4e766b209b7fbcc1bf8cd431947fa412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a2222e3ad05020c29dd2d2e05a964f767"><td class="memItemLeft" align="right" valign="top">mainpage Motion of an elliptical particle in shear&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#a2222e3ad05020c29dd2d2e05a964f767">flow</a></td></tr>
+<tr class="separator:a2222e3ad05020c29dd2d2e05a964f767"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab366d0f2ece1186e184ee541941e92d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[u_{1}=-H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2}=0, \quad\mbox{on}\quad x_{2}=H;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\tau_{11}=0, u_{2}=0, \quad\mbox{on}\quad x_{1}=-L, L;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\chi=\tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2}+b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi}=\frac{G}{a^{2}+b^{2}}\left(b^{2}\cos^{2}\chi+a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#aab366d0f2ece1186e184ee541941e92d">Thus</a> )</td></tr>
+<tr class="separator:aab366d0f2ece1186e184ee541941e92d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af60712ba20abf3f868ad48cd09c5e457"><td class="memItemLeft" align="right" valign="top">f f[u_{1}=-H f(t), u_{2}=0, \quad\mbox{on}\quad x_{2}=H;\f] f[\tau_{11}=0, u_{2}=0, \quad\mbox{on}\quad x_{1}=-L, L;\f] where f the exact solution for the angle as a function of time is f[\chi=\tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2}+b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi}=\frac{G}{a^{2}+b^{2}}\left(b^{2}\cos^{2}\chi+a^{2}\sin^{2}\chi\right). \f] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small f R&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> )</td></tr>
+<tr class="separator:af60712ba20abf3f868ad48cd09c5e457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5852348c62b4ee0e01ecd677c087af92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[u_{1}=-H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2}=0, \quad\mbox{on}\quad x_{2}=H;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\tau_{11}=0, u_{2}=0, \quad\mbox{on}\quad x_{1}=-L, L;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\chi=\tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2}+b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi}=\frac{G}{a^{2}+b^{2}}\left(b^{2}\cos^{2}\chi+a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> Ding&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#a5852348c62b4ee0e01ecd677c087af92">Aidun</a> )(2000)[The dynamics <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> scaling law for particles suspended in shear <a class="el" href="jeffery__orbit_8txt.html#a2222e3ad05020c29dd2d2e05a964f767">flow</a> with inertia</td></tr>
+<tr class="separator:a5852348c62b4ee0e01ecd677c087af92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ac9806abe849b0a6804dedb5a08f938"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[u_{1}=-H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2}=0, \quad\mbox{on}\quad x_{2}=H;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\tau_{11}=0, u_{2}=0, \quad\mbox{on}\quad x_{1}=-L, L;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\chi=\tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2}+b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi}=\frac{G}{a^{2}+b^{2}}\left(b^{2}\cos^{2}\chi+a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> Re Ding&lt; I &gt; J Fluid Mech&lt;/I &gt;&lt; B &gt;&lt;/B &gt; showed that the system approximates the Jeffery orbits but with an increased period Typical solutions for&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> )</td></tr>
+<tr class="separator:a6ac9806abe849b0a6804dedb5a08f938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bb46e763f1ab167c5a1eb782f9438fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[u_{1}=-H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2}=0, \quad\mbox{on}\quad x_{2}=H;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\tau_{11}=0, u_{2}=0, \quad\mbox{on}\quad x_{1}=-L, L;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\chi=\tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2}+b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi}=\frac{G}{a^{2}+b^{2}}\left(b^{2}\cos^{2}\chi+a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> Ding&lt; I &gt; J Fluid Mech&lt;/I &gt;&lt; B &gt;&lt;/B &gt; showed that the system approximates the Jeffery orbits but with an increased period Typical solutions for <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> depending only on a single degree of freedo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#a3bb46e763f1ab167c5a1eb782f9438fc">Nonetheless</a> )</td></tr>
+<tr class="separator:a3bb46e763f1ab167c5a1eb782f9438fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af89f8eacfa5d5b81fbe165a3255f920e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[u_{1}=-H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2}=0, \quad\mbox{on}\quad x_{2}=H;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\tau_{11}=0, u_{2}=0, \quad\mbox{on}\quad x_{1}=-L, L;\<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>[\chi=\tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2}+b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi}=\frac{G}{a^{2}+b^{2}}\left(b^{2}\cos^{2}\chi+a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> Ding&lt; I &gt; J Fluid Mech&lt;/I &gt;&lt; B &gt;&lt;/B &gt; showed that the system approximates the Jeffery orbits but with an increased period Typical solutions for <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> depending only on a single degree of <a class="el" href="jeffery__orbit_8txt.html#ad5c39e140ede573b947ed97510fb14b9">freedom</a> the two types of physical coupling between the fluid <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> the soli&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#af89f8eacfa5d5b81fbe165a3255f920e">remain</a> )</td></tr>
+<tr class="separator:af89f8eacfa5d5b81fbe165a3255f920e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a786a2ed6db956cea0a65a02a8cbe569b"><td class="memItemLeft" align="right" valign="top">We then take a fixed number of timesteps on the initial&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#a786a2ed6db956cea0a65a02a8cbe569b">mesh</a></td></tr>
+<tr class="separator:a786a2ed6db956cea0a65a02a8cbe569b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5c699bfa88abdb33cb2cce9a7b21375"><td class="memItemLeft" align="right" valign="top">We then take a fixed number of timesteps on the initial documenting the solution after each solve until&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#ab5c699bfa88abdb33cb2cce9a7b21375">Finally</a></td></tr>
+<tr class="separator:ab5c699bfa88abdb33cb2cce9a7b21375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04c89d4d96f3afa9b67358f8d76e190a"><td class="memItemLeft" align="right" valign="top">to apply the boundary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#a04c89d4d96f3afa9b67358f8d76e190a">conditions</a> [\c set_boundary_velocity()]</td></tr>
+<tr class="separator:a04c89d4d96f3afa9b67358f8d76e190a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d6e6df60651c2243cb9034d2d6297fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> to construct <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> delete the surface elements that impose the Lagrange multiplier constraints <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> compute the load on the rigid body[\c create_lagrange_multiplier_elements(), \c delete_lagrange_multiplier_elements(), \c create_drag_elements(), \c delete_drag_elements()] The class also provides storage for the meshes the rigid body <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> file handles for documentation dontinclude jeffery_orbit cc skipline start_of_problem_class until end_of_problem_class&lt; HR &gt;&lt; HR &gt; section constructor The Problem Constructor We begin by opening the output files <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> allocating two time steppers one for the fluid problem <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> one for the rigid body problem skipline start_constructor until Newmark We then define the geometry that defines the outer boundary of the unstructured <a class="el" href="jeffery__orbit_8txt.html#a786a2ed6db956cea0a65a02a8cbe569b">mesh</a> by constructing a c TriangleMeshPolygon that consists of four straight line boundaries until new TriangleMeshPolygon Next we build the single c ImmersedRigidBodyElement from an instantiation of a c <a class="el" href="classGeneralEllipse.html">GeneralEllipse</a> geometric object until this as discussed in&lt; a <a class="el" href="jeffery__orbit_8txt.html#abb6a9a47452ed20f9d94422d52f8cb5f">href</a>=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; until&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#a1d6e6df60651c2243cb9034d2d6297fd">linear_boundary_pt</a></td></tr>
+<tr class="separator:a1d6e6df60651c2243cb9034d2d6297fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab56a0e8dabe1e9e6a7fd6913e6448220"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a></td></tr>
+<tr class="separator:ab56a0e8dabe1e9e6a7fd6913e6448220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5a7425f17f717551ce060213d7a684e"><td class="memItemLeft" align="right" valign="top">for&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#af5a7425f17f717551ce060213d7a684e">simplicity</a></td></tr>
+<tr class="separator:af5a7425f17f717551ce060213d7a684e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c39e140ede573b947ed97510fb14b9"><td class="memItemLeft" align="right" valign="top">for the history values are always reset&lt; HR &gt;&lt; HR &gt; section initial Solving for consistent initial nodal positions The initial nodal positions are made consistent with the weakly imposed displacement boundary condition by pinning the rigid body degrees of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeffery__orbit_8txt.html#ad5c39e140ede573b947ed97510fb14b9">freedom</a></td></tr>
+<tr class="separator:ad5c39e140ede573b947ed97510fb14b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="abb6a9a47452ed20f9d94422d52f8cb5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb6a9a47452ed20f9d94422d52f8cb5f">&#9670;&nbsp;</a></span>href</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="jeffery__orbit_8txt.html#abb6a9a47452ed20f9d94422d52f8cb5f">href</a> =  &quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; in another tutorial, &lt;/a&gt; so is not described in detail here. The functions \c create_lagrange_multiplier_elements() <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \c create_drag_elements() construct surface \c ImposeDisplacementByLagrangeMulitiplierElements <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \c NavierStokesSurfaceDragTorqueElements, respectively, around the boundary of the rigid body, setting any required member data. For example, the \c NavierStokesSurfaceDragTorqueElements require the location of the centre of mass in order to compute the torque. The elements are added to the internal storage containers \c Lagrange_multiplier_mesh_pt <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \c Drag_mesh_pt. The corresponding functions \c delete_lagrange_multiplier_elements() <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> \c delete_drag_elements() are used to delete <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> remove the elements before adaptation. &lt;HR&gt; &lt;HR&gt; \section bc Setting the boundary velocity The function \c set_boundary_velocity() is used to apply the time-dependent boundary <a class="el" href="jeffery__orbit_8txt.html#a04c89d4d96f3afa9b67358f8d76e190a">conditions</a> to the external boundaries of the fluid domain. The only subtlety is that after a remesh the history values for the boundary nodes must also be (re-)applied</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00121">121</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="aae2ffd3b558049dc27a164ca7b150509"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae2ffd3b558049dc27a164ca7b150509">&#9670;&nbsp;</a></span>i</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a> =  R_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}\f$, where \f$R_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}\f$ is the corresponding boundary of the ellipse. In the full problem the displacement boundary condition is enforced weakly via Lagrange multipliers \f$ \oint \left\{x_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>} - R_{<a class="el" href="jeffery__orbit_8txt.html#aae2ffd3b558049dc27a164ca7b150509">i</a>}\right\}\psi \mbox{d} s = 0\f$. In order to ensure consistency, we initially solve the problem in which the rigid body is pinned so that the boundary nodes are adjusted to be consistent with the weak form of the boundary condition. We note that for sufficiently fine initial meshes the difference is minimal. \until solve_for_consistent Now that we have a consistent initial condition, we initialise the timestepper <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> set <a class="el" href="jeffery__orbit_8txt.html#a04c89d4d96f3afa9b67358f8d76e190a">conditions</a> consistent with a impulsive start from rest. \until doc_solution()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00234">234</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a0c27d0cb5e1ebe039fb312b2872c2ce4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c27d0cb5e1ebe039fb312b2872c2ce4">&#9670;&nbsp;</a></span>$f()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ u_{1} = -H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2} = 0, \quad\mbox{on}\quad x_{2} = H; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \tau_{11} = 0, u_{2} = 0, \quad\mbox{on}\quad x_{1} = -L, L; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> $<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> </td>
+          <td>(</td>
+          <td class="paramtype">t&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd9001d2071e1dbd52cc19d22af55204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd9001d2071e1dbd52cc19d22af55204">&#9670;&nbsp;</a></span>actions_before_implicit_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then take a fixed number of timesteps on the initial documenting the solution after each solve until we loop over a number of cycles in which we adapt the problem <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> then solve for a fixed number of time steps on the each <a class="el" href="jeffery__orbit_8txt.html#a786a2ed6db956cea0a65a02a8cbe569b">mesh</a> skipline for until&lt;HR&gt;&lt;HR&gt; section problem The Problem class The Problem class follows the usual pattern The time dependent boundary <a class="el" href="jeffery__orbit_8txt.html#a04c89d4d96f3afa9b67358f8d76e190a">conditions</a> are applied using the c actions_before_implicit_timestep </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e766b209b7fbcc1bf8cd431947fa412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e766b209b7fbcc1bf8cd431947fa412">&#9670;&nbsp;</a></span>time_stepper_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> to construct <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> delete the surface elements that impose the Lagrange multiplier constraints <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> compute the load on the rigid body [\c create_lagrange_multiplier_elements(), \c delete_lagrange_multiplier_elements(), \c create_drag_elements(), \c delete_drag_elements()] The class also provides storage for the meshes the rigid body <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> file handles for documentation dontinclude jeffery_orbit cc skipline start_of_problem_class until end_of_problem_class&lt;HR&gt;&lt;HR&gt; section constructor The Problem Constructor We begin by opening the output files <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> allocating two time steppers one for the fluid problem <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> one for the rigid body problem skipline start_constructor until Newmark We then define the geometry that defines the outer boundary of the unstructured <a class="el" href="jeffery__orbit_8txt.html#a786a2ed6db956cea0a65a02a8cbe569b">mesh</a> by constructing a c TriangleMeshPolygon that consists of four straight line boundaries until new TriangleMeshPolygon Next we build the single c ImmersedRigidBodyElement from an instantiation of a c <a class="el" href="classGeneralEllipse.html">GeneralEllipse</a> geometric object until this time_stepper_pt </td>
+          <td>(</td>
+          <td class="paramtype">1&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="jeffery__orbit_8cc_source.html#l00306">UnstructuredImmersedEllipseProblem&lt; ELEMENT &gt;::UnstructuredImmersedEllipseProblem()</a>, and <a class="el" href="jeffery__orbit_8cc_source.html#l00553">UnstructuredImmersedEllipseProblem&lt; ELEMENT &gt;::~UnstructuredImmersedEllipseProblem()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a5852348c62b4ee0e01ecd677c087af92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5852348c62b4ee0e01ecd677c087af92">&#9670;&nbsp;</a></span>Aidun</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ u_{1} = -H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2} = 0, \quad\mbox{on}\quad x_{2} = H; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \tau_{11} = 0, u_{2} = 0, \quad\mbox{on}\quad x_{1} = -L, L; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \chi = \tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2} + b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi} = \frac{G}{a^{2} + b^{2}}\left(b^{2}\cos^{2}\chi + a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> Ding Aidun) (2000)[The dynamics <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> scaling law for particles suspended in shear <a class="el" href="jeffery__orbit_8txt.html#a2222e3ad05020c29dd2d2e05a964f767">flow</a> with inertia</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab56a0e8dabe1e9e6a7fd6913e6448220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab56a0e8dabe1e9e6a7fd6913e6448220">&#9670;&nbsp;</a></span>and</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00420">420</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="a04c89d4d96f3afa9b67358f8d76e190a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04c89d4d96f3afa9b67358f8d76e190a">&#9670;&nbsp;</a></span>conditions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">to apply the boundary conditions[\c set_boundary_velocity()]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00265">265</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="af60712ba20abf3f868ad48cd09c5e457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af60712ba20abf3f868ad48cd09c5e457">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">f f [ u_{1} = -H f(t), u_{2} = 0, \quad\mbox{on}\quad x_{2} = H; \f] f [ \tau_{11} = 0, u_{2} = 0, \quad\mbox{on}\quad x_{1} = -L, L; \f] where f the exact solution for the angle as a function of time is f [ \chi = \tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2} + b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi} = \frac{G}{a^{2} + b^{2}}\left(b^{2}\cos^{2}\chi + a^{2}\sin^{2}\chi\right). \f] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small f R f) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00137">137</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab5c699bfa88abdb33cb2cce9a7b21375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5c699bfa88abdb33cb2cce9a7b21375">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then take a fixed number of timesteps on the initial documenting the solution after each solve until Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00241">241</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2222e3ad05020c29dd2d2e05a964f767"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2222e3ad05020c29dd2d2e05a964f767">&#9670;&nbsp;</a></span>flow</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Motion of an elliptical particle in shear flow</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00005">5</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad5c39e140ede573b947ed97510fb14b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5c39e140ede573b947ed97510fb14b9">&#9670;&nbsp;</a></span>freedom</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">for the history values are always reset&lt;HR&gt;&lt;HR&gt; section initial Solving for consistent initial nodal positions The initial nodal positions are made consistent with the weakly imposed displacement boundary condition by pinning the rigid body degrees of freedom</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00430">430</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1d6e6df60651c2243cb9034d2d6297fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d6e6df60651c2243cb9034d2d6297fd">&#9670;&nbsp;</a></span>linear_boundary_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> to construct <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> delete the surface elements that impose the Lagrange multiplier constraints <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> compute the load on the rigid body [\c create_lagrange_multiplier_elements(), \c delete_lagrange_multiplier_elements(), \c create_drag_elements(), \c delete_drag_elements()] The class also provides storage for the meshes the rigid body <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> file handles for documentation dontinclude jeffery_orbit cc skipline start_of_problem_class until end_of_problem_class&lt;HR&gt;&lt;HR&gt; section constructor The Problem Constructor We begin by opening the output files <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> allocating two time steppers one for the fluid problem <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> one for the rigid body problem skipline start_constructor until Newmark We then define the geometry that defines the outer boundary of the unstructured <a class="el" href="jeffery__orbit_8txt.html#a786a2ed6db956cea0a65a02a8cbe569b">mesh</a> by constructing a c TriangleMeshPolygon that consists of four straight line boundaries until new TriangleMeshPolygon Next we build the single c ImmersedRigidBodyElement from an instantiation of a c <a class="el" href="classGeneralEllipse.html">GeneralEllipse</a> geometric object until this as discussed in&lt;a <a class="el" href="jeffery__orbit_8txt.html#abb6a9a47452ed20f9d94422d52f8cb5f">href</a>=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; until linear_boundary_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00308">308</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="a786a2ed6db956cea0a65a02a8cbe569b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a786a2ed6db956cea0a65a02a8cbe569b">&#9670;&nbsp;</a></span>mesh</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then take a fixed number of timesteps on the initial mesh</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00236">236</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3bb46e763f1ab167c5a1eb782f9438fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bb46e763f1ab167c5a1eb782f9438fc">&#9670;&nbsp;</a></span>Nonetheless</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ u_{1} = -H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2} = 0, \quad\mbox{on}\quad x_{2} = H; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \tau_{11} = 0, u_{2} = 0, \quad\mbox{on}\quad x_{1} = -L, L; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \chi = \tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2} + b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi} = \frac{G}{a^{2} + b^{2}}\left(b^{2}\cos^{2}\chi + a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> Ding&lt;I&gt; J Fluid Mech&lt;/I&gt;&lt;B&gt;&lt;/B&gt; showed that the system approximates the Jeffery orbits but with an increased period Typical solutions for <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> depending only on a single degree of freedo Nonetheless) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00154">154</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6ac9806abe849b0a6804dedb5a08f938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ac9806abe849b0a6804dedb5a08f938">&#9670;&nbsp;</a></span>Re</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ u_{1} = -H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2} = 0, \quad\mbox{on}\quad x_{2} = H; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \tau_{11} = 0, u_{2} = 0, \quad\mbox{on}\quad x_{1} = -L, L; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \chi = \tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2} + b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi} = \frac{G}{a^{2} + b^{2}}\left(b^{2}\cos^{2}\chi + a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> Re Ding&lt;I&gt; J Fluid Mech&lt;/I&gt;&lt;B&gt;&lt;/B&gt; showed that the system approximates the Jeffery orbits but with an increased period Typical solutions for Re) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= 1<a class="code" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">\f</a>$ are shown</div>
+<div class="line"> below.</div>
+<div class="line"> </div>
+<div class="line">@I w 0.75\textwidth orbit_mesh <span class="stringliteral">&quot;An ellipse performing approximate Jeffery orbits at  Re = 1 &quot;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">@I w 0.75\textwidth jeff_graph <span class="stringliteral">&quot;Angle and angular velocity as functions of time for Re = 1 &quot;</span></div>
+<div class="line"> </div>
+<div class="line">\section fsi Implementation as a fluid-structure interaction problem</div>
+<div class="line"> </div>
+<div class="line"> The problem is a fluid-structure interaction problem in</div>
+<div class="line">which the structural dynamics are particularly simple</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00141">141</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="af89f8eacfa5d5b81fbe165a3255f920e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af89f8eacfa5d5b81fbe165a3255f920e">&#9670;&nbsp;</a></span>remain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ u_{1} = -H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2} = 0, \quad\mbox{on}\quad x_{2} = H; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \tau_{11} = 0, u_{2} = 0, \quad\mbox{on}\quad x_{1} = -L, L; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \chi = \tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2} + b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi} = \frac{G}{a^{2} + b^{2}}\left(b^{2}\cos^{2}\chi + a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#a6ac9806abe849b0a6804dedb5a08f938">Re</a> Ding&lt;I&gt; J Fluid Mech&lt;/I&gt;&lt;B&gt;&lt;/B&gt; showed that the system approximates the Jeffery orbits but with an increased period Typical solutions for <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> depending only on a single degree of <a class="el" href="jeffery__orbit_8txt.html#ad5c39e140ede573b947ed97510fb14b9">freedom</a> the two types of physical coupling between the fluid <a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a> the soli remain) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00163">163</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="af5a7425f17f717551ce060213d7a684e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5a7425f17f717551ce060213d7a684e">&#9670;&nbsp;</a></span>simplicity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">for simplicity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00421">421</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+<a id="aab366d0f2ece1186e184ee541941e92d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab366d0f2ece1186e184ee541941e92d">&#9670;&nbsp;</a></span>Thus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ u_{1} = -H <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>(t), u_{2} = 0, \quad\mbox{on}\quad x_{2} = H; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \tau_{11} = 0, u_{2} = 0, \quad\mbox{on}\quad x_{1} = -L, L; \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a>] where <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> the exact solution for the angle as a function of time is <a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> [ \chi = \tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2} + b^{2}}\right),\quad\mbox{<a class="el" href="jeffery__orbit_8txt.html#ab56a0e8dabe1e9e6a7fd6913e6448220">and</a>}\quad \dot{\chi} = \frac{G}{a^{2} + b^{2}}\left(b^{2}\cos^{2}\chi + a^{2}\sin^{2}\chi\right). \<a class="el" href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a> Thus) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8txt_source.html#l00136">136</a> of file <a class="el" href="jeffery__orbit_8txt_source.html">jeffery_orbit.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="ajeffery__orbit_8txt_html_af60712ba20abf3f868ad48cd09c5e457"><div class="ttname"><a href="jeffery__orbit_8txt.html#af60712ba20abf3f868ad48cd09c5e457">f</a></div><div class="ttdeci">f f[u_{1}=-H f(t), u_{2}=0, \quad\mbox{on}\quad x_{2}=H;\f] f[\tau_{11}=0, u_{2}=0, \quad\mbox{on}\quad x_{1}=-L, L;\f] where f the exact solution for the angle as a function of time is f[\chi=\tan^{-1}\left(\frac{b}{a}\tan \frac{abGt}{a^{2}+b^{2}}\right),\quad\mbox{and}\quad \dot{\chi}=\frac{G}{a^{2}+b^{2}}\left(b^{2}\cos^{2}\chi+a^{2}\sin^{2}\chi\right). \f] the ellipse performs periodic orbits but with a non uniform velocity For sufficiently small f R f)</div><div class="ttdef"><b>Definition:</b> <a href="jeffery__orbit_8txt_source.html#l00137">jeffery_orbit.txt:137</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:11:56
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

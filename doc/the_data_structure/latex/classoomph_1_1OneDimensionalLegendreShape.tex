@@ -1,0 +1,155 @@
+\hypertarget{classoomph_1_1OneDimensionalLegendreShape}{}\doxysection{oomph\+::One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\label{classoomph_1_1OneDimensionalLegendreShape}\index{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}}
+
+
+Class that returns the shape functions associated with legendre.  
+
+
+
+
+{\ttfamily \#include $<$shape.\+h$>$}
+
+Inheritance diagram for oomph\+::One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1OneDimensionalLegendreShape}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape_a33933deb41c936585bee8f844bf820e4}{One\+Dimensional\+Legendre\+Shape}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape_ae33d86bf57e03bdb3dffcd248ed881cd}{calculate\+\_\+nodal\+\_\+positions}} ()
+\begin{DoxyCompactList}\small\item\em Static function used to populate the stored positions. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape_a5e68d68ec3373a97a96d8843b6631dba}{nodal\+\_\+position}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape_ab2d2b8418ac85a8ebf643d365fd52678}{z}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape_ac10397bf5b832aa567e4114d8e9a5795}{Nodes\+\_\+calculated}} =false
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
+class oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}
+
+Class that returns the shape functions associated with legendre. 
+
+Definition at line 1223 of file shape.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1OneDimensionalLegendreShape_a33933deb41c936585bee8f844bf820e4}\label{classoomph_1_1OneDimensionalLegendreShape_a33933deb41c936585bee8f844bf820e4}} 
+\index{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}!OneDimensionalLegendreShape@{OneDimensionalLegendreShape}}
+\index{OneDimensionalLegendreShape@{OneDimensionalLegendreShape}!oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{OneDimensionalLegendreShape()}{OneDimensionalLegendreShape()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape}{oomph\+::\+One\+Dimensional\+Legendre\+Shape}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape}{One\+Dimensional\+Legendre\+Shape}} (\begin{DoxyParamCaption}\item[{const double \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 1244 of file shape.\+h.
+
+
+
+References oomph\+::\+Orthpoly\+::dlegendre(), oomph\+::\+Orthpoly\+::eps, i, oomph\+::\+Orthpoly\+::legendre(), s, and oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::z.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1OneDimensionalLegendreShape_ae33d86bf57e03bdb3dffcd248ed881cd}\label{classoomph_1_1OneDimensionalLegendreShape_ae33d86bf57e03bdb3dffcd248ed881cd}} 
+\index{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}!calculate\_nodal\_positions@{calculate\_nodal\_positions}}
+\index{calculate\_nodal\_positions@{calculate\_nodal\_positions}!oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_nodal\_positions()}{calculate\_nodal\_positions()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+static void \mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape}{oomph\+::\+One\+Dimensional\+Legendre\+Shape}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::calculate\+\_\+nodal\+\_\+positions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Static function used to populate the stored positions. 
+
+
+
+Definition at line 1231 of file shape.\+h.
+
+
+
+References oomph\+::\+Orthpoly\+::gll\+\_\+nodes(), oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Nodes\+\_\+calculated, and oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::z.
+
+
+
+Referenced by oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::dshape\+\_\+local(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::dshape\+\_\+local(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::dshape\+\_\+local(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Q\+Spectral\+Element(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Q\+Spectral\+Element(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Q\+Spectral\+Element(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::shape(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::shape(), and oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1OneDimensionalLegendreShape_a5e68d68ec3373a97a96d8843b6631dba}\label{classoomph_1_1OneDimensionalLegendreShape_a5e68d68ec3373a97a96d8843b6631dba}} 
+\index{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}!nodal\_position@{nodal\_position}}
+\index{nodal\_position@{nodal\_position}!oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nodal\_position()}{nodal\_position()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+static double \mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape}{oomph\+::\+One\+Dimensional\+Legendre\+Shape}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::nodal\+\_\+position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 1240 of file shape.\+h.
+
+
+
+References n, and oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::z.
+
+
+
+Referenced by oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node(), oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node(), oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node(), and oomph\+::\+Q\+Spectral\+Element$<$ 3, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1OneDimensionalLegendreShape_ac10397bf5b832aa567e4114d8e9a5795}\label{classoomph_1_1OneDimensionalLegendreShape_ac10397bf5b832aa567e4114d8e9a5795}} 
+\index{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}!Nodes\_calculated@{Nodes\_calculated}}
+\index{Nodes\_calculated@{Nodes\_calculated}!oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Nodes\_calculated}{Nodes\_calculated}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+bool \mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape}{oomph\+::\+One\+Dimensional\+Legendre\+Shape}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Nodes\+\_\+calculated =false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 1225 of file shape.\+h.
+
+
+
+Referenced by oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+nodal\+\_\+positions().
+
+\mbox{\Hypertarget{classoomph_1_1OneDimensionalLegendreShape_ab2d2b8418ac85a8ebf643d365fd52678}\label{classoomph_1_1OneDimensionalLegendreShape_ab2d2b8418ac85a8ebf643d365fd52678}} 
+\index{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}!z@{z}}
+\index{z@{z}!oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape}{oomph\+::\+One\+Dimensional\+Legendre\+Shape}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::z\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 1228 of file shape.\+h.
+
+
+
+Referenced by oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+nodal\+\_\+positions(), oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::nodal\+\_\+position(), oomph\+::\+One\+Dimensional\+Legendre\+D\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+One\+Dimensional\+Legendre\+D\+Shape(), and oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+One\+Dimensional\+Legendre\+Shape().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{shape_8h}{shape.\+h}}\end{DoxyCompactItemize}

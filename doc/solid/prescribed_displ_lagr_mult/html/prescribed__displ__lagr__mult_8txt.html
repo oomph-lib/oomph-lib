@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: prescribed_displ_lagr_mult.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">prescribed_displ_lagr_mult.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a669de053ef4d94b8e5d5477fcfa04199"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a> = \big(\xi^1_{\partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}}(\zeta), \xi^2_{\partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}}(\zeta) \big) \f] which allows us to write the displacement constraint as \f[{\bf R}(\xi^1_{\partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}}(\zeta),\xi^2_{\partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}}(\zeta))={\bf R}_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}(\zeta). \f] We enforce this constraint by augmenting the principle <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> virtual displacements, discussed in&lt; a href=&quot;../../solid_theory/html/index.html#equilibrium&quot;&gt; the solid <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a227e86b4229bfca68af5803a97546bc8">mechanics</a> theory tutorial&lt;/a &gt;, by a Lagrange multiplier term so that it becomes \f[\int \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left({\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}}{\partial t^2} \right) \cdot \delta {\bf R} \right\} \ dv - \oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA \+\ \delta \Pi_{constraint}=0 \ \ \ \ \ \ \ \ @E[continuous_pdv]@ \f] where \f[\Pi_{constraint}=\int_{\partial D} \bigg({\bf R}(\xi^1(\zeta),\xi^2(\zeta)) - {\bf R}_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}(\zeta) \bigg) \cdot {\bf \Lambda} \ dS. \f] Here \f[dS=\left|\frac{d {\bf R}(\xi^1(\zeta),\xi^2(\zeta))}{d \zeta} \right|d\zeta \f] is the differential <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the arclength along the domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and the vector \f$ {\bf \Lambda} \f$(not to be confused with the scalar \f$ \Lambda^2 \f$ which represents the non-dimensional density in( @R[continuous_pdv]@)!) is the Lagrange multiplier -- the surface traction to be applied to \f$ \partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>} \f$ to deform the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> into the required shape. We discretise this constraint by attaching \c FaceElements to the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the &quot;bulk&quot; solid elements that are adjacent to \f$ \partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>} \f$. We denote the number <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> nodes in these \c FaceElements by \f$ N \f$ and write the \f$ i \f$-th component <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the discrete Lagrange multiplier stored at node \f$ j \f$ as \f$ L_{ij} \f$. Thus the \f$ i \f$ -th component <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier at local coordinate \f$ s \f$ in the element is given by \f[\Lambda_i=\sum_{j=1}^{N} L_{ij} \psi_j(s) \f] where \f$ \psi_j(s) \f$ is the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> function associated with node \f$ j \f$. Upon taking the variations <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the discretised constraint with respect to the unknown nodal positions and the discrete Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> we obtain&lt; b &gt;(i)&lt;/b &gt; additional contributions to the residuals <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the &quot;bulk&quot; solid <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a227e86b4229bfca68af5803a97546bc8">mechanics</a> equations(these may be interpreted as the virtual work done by the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> tractions required to impose the prescribed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacement) and&lt; b &gt;(ii)&lt;/b &gt; the equations that impose the displacement constraints in weak form. The actual implementation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> this approach in \c oomph-lib is best thought <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> as a generalisation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the \c SolidTractionElements that are used to impose a prescribed traction to the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> a solid domain. The <a class="el" href="prescribed__displ__lagr__mult__precond_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> difference is that in the \c ImposeDisplacementByLagrangeMultiplierElement, the imposed traction is one <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the unknowns in the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> and must be determined via the displacement constraint, using the approach described above. The element introduces additional unknowns(the nodal values <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier) into the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>, therefore the \c ImposeDisplacementByLagrangeMultiplierElement resizes(increases) the number <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> values stored at the node from the value that was originally assigned by the &quot;bulk&quot; solid element it is attached to.(If the elements are used in a single-physics solid <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a227e86b4229bfca68af5803a97546bc8">mechanics</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> the discrete Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> are the only nodal values in the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> since the unknown nodal positions are stored in a separate \c Data item</td></tr>
+<tr class="separator:a669de053ef4d94b8e5d5477fcfa04199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ab9bf07933bb0e16b652de3a6658c154c"><td class="memItemLeft" align="right" valign="top">cf&lt; A HREF=&quot;../../solid_theory/html/index.html#solid_node&quot;&gt; Solid the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> is pulled upwards into a sinusoidal <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> while simultaneously being pushed to the right The vectors in the animation represent the Lagrange&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> (i.e. the physical surface tractions) required to deform the domain into the required shape. Note how the automatic <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation refines the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> in regions where the solid is strongly deformed. @I w 0.75\textwidth lagr_distort &quot;Domain deformation in response to the prescribed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacement. &quot;&lt; HR &gt;&lt; HR &gt; \section prescribed_boundary Describing the prescribed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> motion with a GeomObject Here is the implementation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the prescribed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> as the \c <a class="el" href="classWarpedLine.html">WarpedLine</a></td></tr>
+<tr class="separator:ab9bf07933bb0e16b652de3a6658c154c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e949986140abf44b3ee7478368a3fd0"><td class="memItemLeft" align="right" valign="top">namespace Global parameters As <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> we define the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> parameters in a global namespace We provide an instantiation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the c GeomObject that defines the deformed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> (setting its initial displacement amplitude to zero)</td></tr>
+<tr class="separator:a4e949986140abf44b3ee7478368a3fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68e55ef45cd7ea9b0c7931ec49e3e533"><td class="memItemLeft" align="right" valign="top">namespace Global parameters As <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> we define the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> parameters in a global namespace We provide an instantiation of the c GeomObject that defines the deformed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and create an instance of c oomph lib s generalised Hookean constitutive equation with a Poisson ratio&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> (recall that the use of the single-argument constructor for this constitutive equation implies that all stresses are non-dimensionalised on Young 's modulus \f$ E \f$;see&lt; a href=&quot;../../solid_theory/html/index.html#non-dim_solid&quot;&gt; the solid <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a227e86b4229bfca68af5803a97546bc8">mechanics</a> theory tutorial&lt;/a &gt; for details). \dontinclude prescribed_displ_lagr_mult.cc \skipline start_namespace \<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end namespace&lt; HR &gt;&lt; HR &gt; \section driver The driver code We build an instantiation of the \c Problem class(described below)</td></tr>
+<tr class="separator:a68e55ef45cd7ea9b0c7931ec49e3e533"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b1bd7c99a3ffd67dac7b495b8b2ac71"><td class="memItemLeft" align="right" valign="top">We now create a new c SolidMesh in which we store the elements that apply the displacement constraint These elements are&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a0b1bd7c99a3ffd67dac7b495b8b2ac71">built</a> (and added to the newly created \c SolidMesh) in the helper function \c create_lagrange_multiplier_elements(). Both meshes are then combined to the \c Problem 's global mesh. \<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> build_global_mesh()</td></tr>
+<tr class="separator:a0b1bd7c99a3ffd67dac7b495b8b2ac71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9a34d9d2e1f547b1745b8639371a2c4"><td class="memItemLeft" align="right" valign="top">We pin the position <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the nodes on all domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a> apart from the top&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> (boundary 2) and pin any redundant pressure degrees <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> freedom.(This is not strictly necessary in the present driver code since the displacement-based \c RefineableQPVDElements do not have any pressure degrees <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> freedom. However</td></tr>
+<tr class="separator:ac9a34d9d2e1f547b1745b8639371a2c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8b0810a7b3e714302e99c81eb12136d"><td class="memItemLeft" align="right" valign="top">We pin the position <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the nodes on all domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a> apart from the top it is good practice to do this anyway to guard against unpleasant surprises when the element type is changed at some point <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#ae8b0810a7b3e714302e99c81eb12136d">solid_mesh_pt</a> () -&gt; element_pt())</td></tr>
+<tr class="separator:ae8b0810a7b3e714302e99c81eb12136d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13d83599c3b1580ee19d08ab2d49f4a8"><td class="memItemLeft" align="right" valign="top">we assign the equation numbers and specify the output directory <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> constructor&lt; HR &gt;&lt; HR &gt; section actions_before_adapt Actions before <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation As we remove the c FaceElements that apply the displacement constraints before the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> is adapted dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_before_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_before_adapt&lt; HR &gt;&lt; HR &gt; section actions_after_adapt Actions after <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation We re attach the c FaceElements that apply the displacement constraints once the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> has been adapted Since the hanging status <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> nodes in the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> can change during the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation it is again good practice to pin any nodal solid pressure values that may have become redundant dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_after_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_after_adapt&lt; HR &gt;&lt; HR &gt; section lagr_elements Creating the Lagrange multiplier elements that impose the displacement constraint The creation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier elements that impose the displacement constraint follows the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> pattern We loop over the bulk solid elements that are adjacent to <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and attach c ImposeDisplacementByLagrangeMultiplierElements to the appropriate faces dontinclude prescribed_displ_lagr_mult cc skipline start_of_create_lagrange_multiplier_elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> Next we loop over the newly created c ImposeDisplacementByLagrangeMultiplierElements and specify the c GeomObject that defines the imposed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacements We also specify which <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> the c ImposeDisplacementByLagrangeMultiplierElements are located on This is required to enable the c ImposeDisplacementByLagrangeMultiplierElements to extract the appropriate <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from its constituent nodes(We discussed&lt; a href=&quot;../../../poisson/fish_poisson2/html/index.html#boundary_coords&quot;&gt; elsewhere&lt;/a &gt; that <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinates are usually defined(and passed to the nodes) when the nodes are first created, typically during the construction <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk mesh. Since nodes can be located on multiple domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a>, each <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate is associated with a particular <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> number. Passing this number to the \c ImposeDisplacementByLagrangeMultiplierElements allows them to obtain the correct <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from the node.) \<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> &amp;Global_Physical_Variables we impose <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions for the Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> Their values must be&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a13d83599c3b1580ee19d08ab2d49f4a8">pinned</a> (and set to zero) at the left and right ends <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the upper <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a>(<a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> 2)</td></tr>
+<tr class="separator:a13d83599c3b1580ee19d08ab2d49f4a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac504b023dd205b8c47901261e968e30e"><td class="memItemLeft" align="right" valign="top">we assign the equation numbers and specify the output directory <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> constructor&lt; HR &gt;&lt; HR &gt; section actions_before_adapt Actions before <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation As we remove the c FaceElements that apply the displacement constraints before the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> is adapted dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_before_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_before_adapt&lt; HR &gt;&lt; HR &gt; section actions_after_adapt Actions after <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation We re attach the c FaceElements that apply the displacement constraints once the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> has been adapted Since the hanging status <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> nodes in the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> can change during the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation it is again good practice to pin any nodal solid pressure values that may have become redundant dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_after_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_after_adapt&lt; HR &gt;&lt; HR &gt; section lagr_elements Creating the Lagrange multiplier elements that impose the displacement constraint The creation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier elements that impose the displacement constraint follows the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> pattern We loop over the bulk solid elements that are adjacent to <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and attach c ImposeDisplacementByLagrangeMultiplierElements to the appropriate faces dontinclude prescribed_displ_lagr_mult cc skipline start_of_create_lagrange_multiplier_elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> Next we loop over the newly created c ImposeDisplacementByLagrangeMultiplierElements and specify the c GeomObject that defines the imposed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacements We also specify which <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> the c ImposeDisplacementByLagrangeMultiplierElements are located on This is required to enable the c ImposeDisplacementByLagrangeMultiplierElements to extract the appropriate <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from its constituent nodes(We discussed&lt; a href=&quot;../../../poisson/fish_poisson2/html/index.html#boundary_coords&quot;&gt; elsewhere&lt;/a &gt; that <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinates are usually defined(and passed to the nodes) when the nodes are first created, typically during the construction <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk mesh. Since nodes can be located on multiple domain boundaries, each <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate is associated with a particular <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> number. Passing this number to the \c ImposeDisplacementByLagrangeMultiplierElements allows them to obtain the correct <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from the node.) \<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> &amp;Global_Physical_Variables we impose <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions for the Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> Their values must be since the displacement <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the nodes at these points is already enforced by the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions imposed at the left and right vertical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a> (boundaries 1 and 3).&lt; a name</td></tr>
+<tr class="separator:ac504b023dd205b8c47901261e968e30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a227e86b4229bfca68af5803a97546bc8"><td class="memItemLeft" align="right" valign="top">cf&lt; A HREF=&quot;../../solid_theory/html/index.html#solid_node&quot;&gt; Solid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a227e86b4229bfca68af5803a97546bc8">mechanics</a></td></tr>
+<tr class="separator:a227e86b4229bfca68af5803a97546bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a050053d5163a04cba4b7a840490a0302"><td class="memItemLeft" align="right" valign="top">cf&lt; A HREF=&quot;../../solid_theory/html/index.html#solid_node&quot;&gt; Solid the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> is pulled upwards into a sinusoidal <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> while simultaneously being pushed to the right The vectors in the animation represent the Lagrange a two dimensional c GeomObject whose <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> is parametrised by a single intrinsic coordinate dontinclude prescribed_displ_lagr_mult cc skipline Start_of_warped_line&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a></td></tr>
+<tr class="separator:a050053d5163a04cba4b7a840490a0302"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6579a9afc252024055f89c417d4f29"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We start by creating the bulk&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a></td></tr>
+<tr class="separator:abe6579a9afc252024055f89c417d4f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4594cc67d151c2f09d749a2d054e7f71"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We start by creating the bulk discretising the domain with elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the type specified by the class s template argument dontinclude prescribed_displ_lagr_mult cc skipline start_of_constructor <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4594cc67d151c2f09d749a2d054e7f71">l_x</a></td></tr>
+<tr class="separator:a4594cc67d151c2f09d749a2d054e7f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70e156ba08d56ab9ab1360ed22c1e003"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We start by creating the bulk discretising the domain with elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the type specified by the class s template argument dontinclude prescribed_displ_lagr_mult cc skipline start_of_constructor <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a70e156ba08d56ab9ab1360ed22c1e003">l_y</a></td></tr>
+<tr class="separator:a70e156ba08d56ab9ab1360ed22c1e003"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefdd2e0c6df754997c79c7206b37460b"><td class="memItemLeft" align="right" valign="top">Next we specify the error&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#aefdd2e0c6df754997c79c7206b37460b">estimator</a></td></tr>
+<tr class="separator:aefdd2e0c6df754997c79c7206b37460b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a924128d27e91eca2e0b593d2ef3b07f6"><td class="memItemLeft" align="right" valign="top">Next we specify the error pass the pointer to the constitutive equation to the elements and perform one uniform <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a924128d27e91eca2e0b593d2ef3b07f6">refinement</a></td></tr>
+<tr class="separator:a924128d27e91eca2e0b593d2ef3b07f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a530f5ff6809b6206fcda52071a14d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a2a530f5ff6809b6206fcda52071a14d6">Finally</a></td></tr>
+<tr class="separator:a2a530f5ff6809b6206fcda52071a14d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a31c00045936aaf104b744cf957b7ff"><td class="memItemLeft" align="right" valign="top">we assign the equation numbers and specify the output directory <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> constructor&lt; HR &gt;&lt; HR &gt; section actions_before_adapt Actions before <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation As&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a></td></tr>
+<tr class="separator:a3a31c00045936aaf104b744cf957b7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca414f8d3c45e7e959038f8b1b53e2d"><td class="memItemLeft" align="right" valign="top">we assign the equation numbers and specify the output directory <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> constructor&lt; HR &gt;&lt; HR &gt; section actions_before_adapt Actions before <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation As we remove the c FaceElements that apply the displacement constraints before the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> is adapted dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_before_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_before_adapt&lt; HR &gt;&lt; HR &gt; section actions_after_adapt Actions after <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation We re attach the c FaceElements that apply the displacement constraints once the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> has been adapted Since the hanging status <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> nodes in the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> can change during the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation it is again good practice to pin any nodal solid pressure values that may have become redundant dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_after_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_after_adapt&lt; HR &gt;&lt; HR &gt; section lagr_elements Creating the Lagrange multiplier elements that impose the displacement constraint The creation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier elements that impose the displacement constraint follows the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> pattern We loop over the bulk solid elements that are adjacent to <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and attach c ImposeDisplacementByLagrangeMultiplierElements to the appropriate faces dontinclude prescribed_displ_lagr_mult cc skipline start_of_create_lagrange_multiplier_elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> Next we loop over the newly created c ImposeDisplacementByLagrangeMultiplierElements and specify the c GeomObject that defines the imposed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacements We also specify which <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> the c ImposeDisplacementByLagrangeMultiplierElements are located on This is required to enable the c ImposeDisplacementByLagrangeMultiplierElements to extract the appropriate <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from its constituent nodes(We discussed&lt; a href=&quot;../../../poisson/fish_poisson2/html/index.html#boundary_coords&quot;&gt; elsewhere&lt;/a &gt; that <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinates are usually defined(and passed to the nodes) when the nodes are first created, typically during the construction <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk mesh. Since nodes can be located on multiple domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a>, each <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate is associated with a particular <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> number. Passing this number to the \c ImposeDisplacementByLagrangeMultiplierElements allows them to obtain the correct <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from the node.) \<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> &amp;Global_Physical_Variables we impose <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions for the Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> Their values must be since the displacement <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the nodes at these points is already enforced by the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions imposed at the left and right vertical used&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prescribed__displ__lagr__mult_8txt.html#a0ca414f8d3c45e7e959038f8b1b53e2d">here</a></td></tr>
+<tr class="separator:a0ca414f8d3c45e7e959038f8b1b53e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a669de053ef4d94b8e5d5477fcfa04199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a669de053ef4d94b8e5d5477fcfa04199">&#9670;&nbsp;</a></span>prescr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a> =  \big( \xi^1_{\partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}}(\zeta), \xi^2_{\partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}}(\zeta) \big) \f] which allows us to write the displacement constraint as \f[ {\bf R}(\xi^1_{\partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}}(\zeta),\xi^2_{\partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}}(\zeta)) = {\bf R}_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}(\zeta). \f] We enforce this constraint by augmenting the principle <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> virtual displacements, discussed in &lt;a href=&quot;../../solid_theory/html/index.html#equilibrium&quot;&gt; the solid <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a227e86b4229bfca68af5803a97546bc8">mechanics</a> theory tutorial&lt;/a&gt;, by a Lagrange multiplier term so that it becomes \f[ \int \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left( {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}}{\partial t^2} \right) \cdot \delta {\bf R} \right\} \ dv - \oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA \ + \ \delta \Pi_{constraint} = 0 \ \ \ \ \ \ \ \ @E[continuous_pdv]@ \f] where \f[ \Pi_{constraint} = \int_{\partial D} \bigg( {\bf R}(\xi^1(\zeta),\xi^2(\zeta)) - {\bf R}_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>}(\zeta) \bigg) \cdot {\bf \Lambda} \ dS. \f] Here \f[ dS = \left| \frac{d {\bf R}(\xi^1(\zeta),\xi^2(\zeta))}{d \zeta} \right| d\zeta \f] is the differential <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the arclength along the domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and the vector \f$ {\bf \Lambda} \f$ (not to be confused with the scalar \f$ \Lambda^2 \f$ which represents the non-dimensional density in (@R[continuous_pdv]@)!) is the Lagrange multiplier -- the surface traction to be applied to \f$ \partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>} \f$ to deform the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> into the required shape. We discretise this constraint by attaching \c FaceElements to the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the &quot;bulk&quot; solid elements that are adjacent to \f$ \partial D_{<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a669de053ef4d94b8e5d5477fcfa04199">prescr</a>} \f$. We denote the number <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> nodes in these \c FaceElements by \f$ N \f$ and write the \f$ i \f$-th component <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the discrete Lagrange multiplier stored at node \f$ j \f$ as \f$ L_{ij} \f$. Thus the \f$ i \f$ -th component <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier at local coordinate \f$ s \f$ in the element is given by \f[ \Lambda_i = \sum_{j=1}^{N} L_{ij} \psi_j(s) \f] where \f$ \psi_j(s) \f$ is the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> function associated with node \f$ j \f$. Upon taking the variations <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the discretised constraint with respect to the unknown nodal positions and the discrete Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> we obtain &lt;b&gt;(i)&lt;/b&gt; additional contributions to the residuals <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the &quot;bulk&quot; solid <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a227e86b4229bfca68af5803a97546bc8">mechanics</a> equations (these may be interpreted as the virtual work done by the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> tractions required to impose the prescribed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacement) and &lt;b&gt;(ii)&lt;/b&gt; the equations that impose the displacement constraints in weak form. The actual implementation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> this approach in \c oomph-lib is best thought <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> as a generalisation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the \c SolidTractionElements that are used to impose a prescribed traction to the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> a solid domain. The <a class="el" href="prescribed__displ__lagr__mult__precond_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> difference is that in the \c ImposeDisplacementByLagrangeMultiplierElement, the imposed traction is one <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the unknowns in the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> and must be determined via the displacement constraint, using the approach described above. The element introduces additional unknowns (the nodal values <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier) into the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>, therefore the \c ImposeDisplacementByLagrangeMultiplierElement resizes (increases) the number <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> values stored at the node from the value that was originally assigned by the &quot;bulk&quot; solid element it is attached to. (If the elements are used in a single-physics solid <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a227e86b4229bfca68af5803a97546bc8">mechanics</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> the discrete Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> are the only nodal values in the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> since the unknown nodal positions are stored in a separate \c Data item</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00111">111</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ac504b023dd205b8c47901261e968e30e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac504b023dd205b8c47901261e968e30e">&#9670;&nbsp;</a></span>boundaries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we assign the equation numbers and specify the output directory <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> constructor&lt;HR&gt;&lt;HR&gt; section actions_before_adapt Actions before <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation As we remove the c FaceElements that apply the displacement constraints before the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> is adapted dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_before_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_before_adapt&lt;HR&gt;&lt;HR&gt; section actions_after_adapt Actions after <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation We re attach the c FaceElements that apply the displacement constraints once the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> has been adapted Since the hanging status <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> nodes in the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> can change during the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation it is again good practice to pin any nodal solid pressure values that may have become redundant dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_after_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_after_adapt&lt;HR&gt;&lt;HR&gt; section lagr_elements Creating the Lagrange multiplier elements that impose the displacement constraint The creation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier elements that impose the displacement constraint follows the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> pattern We loop over the bulk solid elements that are adjacent to <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and attach c ImposeDisplacementByLagrangeMultiplierElements to the appropriate faces dontinclude prescribed_displ_lagr_mult cc skipline start_of_create_lagrange_multiplier_elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> Next we loop over the newly created c ImposeDisplacementByLagrangeMultiplierElements and specify the c GeomObject that defines the imposed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacements We also specify which <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> the c ImposeDisplacementByLagrangeMultiplierElements are located on This is required to enable the c ImposeDisplacementByLagrangeMultiplierElements to extract the appropriate <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from its constituent nodes (We discussed &lt;a href=&quot;../../../poisson/fish_poisson2/html/index.html#boundary_coords&quot;&gt; elsewhere&lt;/a&gt; that <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinates are usually defined (and passed to the nodes) when the nodes are first created, typically during the construction <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk mesh. Since nodes can be located on multiple domain boundaries, each <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate is associated with a particular <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> number. Passing this number to the \c ImposeDisplacementByLagrangeMultiplierElements allows them to obtain the correct <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from the node.) \<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> &amp;Global_Physical_Variables we impose <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions for the Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> Their values must be since the displacement <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the nodes at these points is already enforced by the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions imposed at the left and right vertical boundaries </td>
+          <td>(</td>
+          <td class="paramtype">boundaries 1 and&#160;</td>
+          <td class="paramname"><em>3</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac9a34d9d2e1f547b1745b8639371a2c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9a34d9d2e1f547b1745b8639371a2c4">&#9670;&nbsp;</a></span>boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We pin the position <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the nodes on all domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a> apart from the top boundary </td>
+          <td>(</td>
+          <td class="paramtype">boundary&#160;</td>
+          <td class="paramname"><em>2</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0b1bd7c99a3ffd67dac7b495b8b2ac71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b1bd7c99a3ffd67dac7b495b8b2ac71">&#9670;&nbsp;</a></span>built()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We now create a new c SolidMesh in which we store the elements that apply the displacement constraint These elements are built </td>
+          <td>(</td>
+          <td class="paramtype">and added to the newly created \c&#160;</td>
+          <td class="paramname"><em>SolidMesh</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab9bf07933bb0e16b652de3a6658c154c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9bf07933bb0e16b652de3a6658c154c">&#9670;&nbsp;</a></span>multipliers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cf&lt;A HREF=&quot;../../solid_theory/html/index.html#solid_node&quot;&gt; Solid the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> is pulled upwards into a sinusoidal <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> while simultaneously being pushed to the right The vectors in the animation represent the Lagrange multipliers </td>
+          <td>(</td>
+          <td class="paramtype">i.e. the physical surface&#160;</td>
+          <td class="paramname"><em>tractions</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a68e55ef45cd7ea9b0c7931ec49e3e533"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68e55ef45cd7ea9b0c7931ec49e3e533">&#9670;&nbsp;</a></span>of()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace Global parameters As <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> we define the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> parameters in a global namespace We provide an instantiation of the c GeomObject that defines the deformed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and create an instance of c oomph lib s generalised Hookean constitutive equation with a Poisson ratio of </td>
+          <td>(</td>
+          <td class="paramtype">recall that the use of the single-argument constructor for this constitutive equation implies that all stresses are non-dimensionalised on Young 's modulus \f$ E \f$;see&lt; a href=&quot;../../solid_theory/html/index.html#non-dim_solid&quot;&gt; the solid <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a227e86b4229bfca68af5803a97546bc8">mechanics</a> theory tutorial&lt;/a &gt; for&#160;</td>
+          <td class="paramname"><em>details</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a13d83599c3b1580ee19d08ab2d49f4a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13d83599c3b1580ee19d08ab2d49f4a8">&#9670;&nbsp;</a></span>pinned()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we assign the equation numbers and specify the output directory <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> constructor&lt;HR&gt;&lt;HR&gt; section actions_before_adapt Actions before <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation As we remove the c FaceElements that apply the displacement constraints before the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> is adapted dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_before_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_before_adapt&lt;HR&gt;&lt;HR&gt; section actions_after_adapt Actions after <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation We re attach the c FaceElements that apply the displacement constraints once the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> has been adapted Since the hanging status <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> nodes in the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> can change during the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation it is again good practice to pin any nodal solid pressure values that may have become redundant dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_after_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_after_adapt&lt;HR&gt;&lt;HR&gt; section lagr_elements Creating the Lagrange multiplier elements that impose the displacement constraint The creation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier elements that impose the displacement constraint follows the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> pattern We loop over the bulk solid elements that are adjacent to <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and attach c ImposeDisplacementByLagrangeMultiplierElements to the appropriate faces dontinclude prescribed_displ_lagr_mult cc skipline start_of_create_lagrange_multiplier_elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> Next we loop over the newly created c ImposeDisplacementByLagrangeMultiplierElements and specify the c GeomObject that defines the imposed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacements We also specify which <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> the c ImposeDisplacementByLagrangeMultiplierElements are located on This is required to enable the c ImposeDisplacementByLagrangeMultiplierElements to extract the appropriate <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from its constituent nodes (We discussed &lt;a href=&quot;../../../poisson/fish_poisson2/html/index.html#boundary_coords&quot;&gt; elsewhere&lt;/a&gt; that <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinates are usually defined (and passed to the nodes) when the nodes are first created, typically during the construction <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk mesh. Since nodes can be located on multiple domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a>, each <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate is associated with a particular <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> number. Passing this number to the \c ImposeDisplacementByLagrangeMultiplierElements allows them to obtain the correct <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from the node.) \<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> &amp;Global_Physical_Variables we impose <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions for the Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> Their values must be pinned </td>
+          <td>(</td>
+          <td class="paramtype">and set to&#160;</td>
+          <td class="paramname"><em>zero</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e949986140abf44b3ee7478368a3fd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e949986140abf44b3ee7478368a3fd0">&#9670;&nbsp;</a></span>shape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace Global parameters As <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> we define the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> parameters in a global namespace We provide an instantiation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the c GeomObject that defines the deformed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> shape </td>
+          <td>(</td>
+          <td class="paramtype">setting its initial displacement amplitude to&#160;</td>
+          <td class="paramname"><em>zero</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae8b0810a7b3e714302e99c81eb12136d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8b0810a7b3e714302e99c81eb12136d">&#9670;&nbsp;</a></span>solid_mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We pin the position <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the nodes on all domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a> apart from the top it is good practice to do this anyway to guard against unpleasant surprises when the element type is changed at some point <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> solid_mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  element_pt())</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00315">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;::actions_after_adapt()</a>, <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html#l00143">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;::actions_before_newton_solve()</a>, <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00338">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;::create_lagrange_multiplier_elements()</a>, <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00435">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;::doc_solution()</a>, and <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00211">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;::PrescribedBoundaryDisplacementProblem()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aefdd2e0c6df754997c79c7206b37460b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefdd2e0c6df754997c79c7206b37460b">&#9670;&nbsp;</a></span>estimator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we specify the error estimator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00261">261</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2a530f5ff6809b6206fcda52071a14d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a530f5ff6809b6206fcda52071a14d6">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we assign the equation numbers and specify the output directory <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> constructor&lt;HR&gt;&lt;HR&gt; section actions_before_adapt Actions before <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation As we remove the c FaceElements that apply the displacement constraints before the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> is adapted dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_before_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_before_adapt&lt;HR&gt;&lt;HR&gt; section actions_after_adapt Actions after <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation We re attach the c FaceElements that apply the displacement constraints once the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> has been adapted Since the hanging status <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> nodes in the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> can change during the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation it is again good practice to pin any nodal solid pressure values that may have become redundant dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_after_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_after_adapt&lt;HR&gt;&lt;HR&gt; section lagr_elements Creating the Lagrange multiplier elements that impose the displacement constraint The creation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier elements that impose the displacement constraint follows the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> pattern We loop over the bulk solid elements that are adjacent to <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and attach c ImposeDisplacementByLagrangeMultiplierElements to the appropriate faces dontinclude prescribed_displ_lagr_mult cc skipline start_of_create_lagrange_multiplier_elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> Next we loop over the newly created c ImposeDisplacementByLagrangeMultiplierElements and specify the c GeomObject that defines the imposed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacements We also specify which <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> the c ImposeDisplacementByLagrangeMultiplierElements are located on This is required to enable the c ImposeDisplacementByLagrangeMultiplierElements to extract the appropriate <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from its constituent nodes (We discussed &lt;a href=&quot;../../../poisson/fish_poisson2/html/index.html#boundary_coords&quot;&gt; elsewhere&lt;/a&gt; that <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinates are usually defined (and passed to the nodes) when the nodes are first created, typically during the construction <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk mesh. Since nodes can be located on multiple domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a>, each <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate is associated with a particular <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> number. Passing this number to the \c ImposeDisplacementByLagrangeMultiplierElements allows them to obtain the correct <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from the node.) \<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> &amp;Global_Physical_Variables Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00284">284</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0ca414f8d3c45e7e959038f8b1b53e2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ca414f8d3c45e7e959038f8b1b53e2d">&#9670;&nbsp;</a></span>here</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we assign the equation numbers and specify the output directory <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> constructor&lt;HR&gt;&lt;HR&gt; section actions_before_adapt Actions before <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation As we remove the c FaceElements that apply the displacement constraints before the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> is adapted dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_before_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_before_adapt&lt;HR&gt;&lt;HR&gt; section actions_after_adapt Actions after <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation We re attach the c FaceElements that apply the displacement constraints once the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> has been adapted Since the hanging status <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> nodes in the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> can change during the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation it is again good practice to pin any nodal solid pressure values that may have become redundant dontinclude prescribed_displ_lagr_mult cc skipline start_of_actions_after_adapt <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> actions_after_adapt&lt;HR&gt;&lt;HR&gt; section lagr_elements Creating the Lagrange multiplier elements that impose the displacement constraint The creation <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the Lagrange multiplier elements that impose the displacement constraint follows the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a3a31c00045936aaf104b744cf957b7ff">usual</a> pattern We loop over the bulk solid elements that are adjacent to <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> and attach c ImposeDisplacementByLagrangeMultiplierElements to the appropriate faces dontinclude prescribed_displ_lagr_mult cc skipline start_of_create_lagrange_multiplier_elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> Next we loop over the newly created c ImposeDisplacementByLagrangeMultiplierElements and specify the c GeomObject that defines the imposed <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> displacements We also specify which <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> the c ImposeDisplacementByLagrangeMultiplierElements are located on This is required to enable the c ImposeDisplacementByLagrangeMultiplierElements to extract the appropriate <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from its constituent nodes (We discussed &lt;a href=&quot;../../../poisson/fish_poisson2/html/index.html#boundary_coords&quot;&gt; elsewhere&lt;/a&gt; that <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinates are usually defined (and passed to the nodes) when the nodes are first created, typically during the construction <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the bulk mesh. Since nodes can be located on multiple domain <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac504b023dd205b8c47901261e968e30e">boundaries</a>, each <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate is associated with a particular <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> number. Passing this number to the \c ImposeDisplacementByLagrangeMultiplierElements allows them to obtain the correct <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> coordinate from the node.) \<a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> &amp;Global_Physical_Variables we impose <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions for the Lagrange <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ab9bf07933bb0e16b652de3a6658c154c">multipliers</a> Their values must be since the displacement <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the nodes at these points is already enforced by the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> conditions imposed at the left and right vertical used here</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00432">432</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4594cc67d151c2f09d749a2d054e7f71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4594cc67d151c2f09d749a2d054e7f71">&#9670;&nbsp;</a></span>l_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We start by creating the bulk discretising the domain with elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the type specified by the class s template argument dontinclude prescribed_displ_lagr_mult cc skipline start_of_constructor <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> l_x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00259">259</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00211">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;::PrescribedBoundaryDisplacementProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a70e156ba08d56ab9ab1360ed22c1e003"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70e156ba08d56ab9ab1360ed22c1e003">&#9670;&nbsp;</a></span>l_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We start by creating the bulk discretising the domain with elements <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> the type specified by the class s template argument dontinclude prescribed_displ_lagr_mult cc skipline start_of_constructor <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> l_y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00259">259</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00211">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;::PrescribedBoundaryDisplacementProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a227e86b4229bfca68af5803a97546bc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a227e86b4229bfca68af5803a97546bc8">&#9670;&nbsp;</a></span>mechanics</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cf&lt;A HREF=&quot;../../solid_theory/html/index.html#solid_node&quot;&gt; Solid mechanics</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00144">144</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+</div>
+</div>
+<a id="abe6579a9afc252024055f89c417d4f29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6579a9afc252024055f89c417d4f29">&#9670;&nbsp;</a></span>mesh</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We start by creating the bulk mesh</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00254">254</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00005">5</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00484">main()</a>.</p>
+
+</div>
+</div>
+<a id="a924128d27e91eca2e0b593d2ef3b07f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a924128d27e91eca2e0b593d2ef3b07f6">&#9670;&nbsp;</a></span>refinement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we specify the error pass the pointer to the constitutive equation to the elements and perform one uniform <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> refinement</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00264">264</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+</div>
+</div>
+<a id="a050053d5163a04cba4b7a840490a0302"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a050053d5163a04cba4b7a840490a0302">&#9670;&nbsp;</a></span>until</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cf&lt;A HREF=&quot;../../solid_theory/html/index.html#solid_node&quot;&gt; Solid the <a class="el" href="prescribed__displ__lagr__mult_8txt.html#ac9a34d9d2e1f547b1745b8639371a2c4">boundary</a> is pulled upwards into a sinusoidal <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> while simultaneously being pushed to the right The vectors in the animation represent the Lagrange a two dimensional c GeomObject whose <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a4e949986140abf44b3ee7478368a3fd0">shape</a> is parametrised by a single intrinsic coordinate dontinclude prescribed_displ_lagr_mult cc skipline Start_of_warped_line until</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00168">168</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3a31c00045936aaf104b744cf957b7ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a31c00045936aaf104b744cf957b7ff">&#9670;&nbsp;</a></span>usual</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we assign the equation numbers and specify the output directory <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a050053d5163a04cba4b7a840490a0302">until</a> end <a class="el" href="prescribed__displ__lagr__mult_8txt.html#a68e55ef45cd7ea9b0c7931ec49e3e533">of</a> constructor&lt;HR&gt;&lt;HR&gt; section actions_before_adapt Actions before <a class="el" href="prescribed__displ__lagr__mult_8txt.html#abe6579a9afc252024055f89c417d4f29">mesh</a> adaptation As usual</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html#l00295">295</a> of file <a class="el" href="prescribed__displ__lagr__mult_8txt_source.html">prescribed_displ_lagr_mult.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:16:49
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

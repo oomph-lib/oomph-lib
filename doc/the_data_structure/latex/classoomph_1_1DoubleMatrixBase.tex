@@ -1,0 +1,413 @@
+\hypertarget{classoomph_1_1DoubleMatrixBase}{}\doxysection{oomph\+::Double\+Matrix\+Base Class Reference}
+\label{classoomph_1_1DoubleMatrixBase}\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+
+
+Abstract base class for matrices of doubles -- adds abstract interfaces for solving, LU decomposition and multiplication by vectors.  
+
+
+
+
+{\ttfamily \#include $<$matrices.\+h$>$}
+
+Inheritance diagram for oomph\+::Double\+Matrix\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.609195cm]{classoomph_1_1DoubleMatrixBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a9ab2dcaf990403cd43d4b952f7dbaa1c}{Double\+Matrix\+Base}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a9ac04a27de856720ef6478df71b1505a}{Double\+Matrix\+Base}} (const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&matrix)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a107b48a28db1ab8696e794e3d398a02e}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual unsigned long \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{nrow}} () const =0
+\begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
+virtual unsigned long \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{ncol}} () const =0
+\begin{DoxyCompactList}\small\item\em Return the number of columns of the matrix. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a82ece2e3cfc355bb68ba78a2ed9dae9f}{$\sim$\+Double\+Matrix\+Base}} ()
+\begin{DoxyCompactList}\small\item\em virtual (empty) destructor \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f0846fede2d77}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const =0
+\begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re not providing a general interface for component-\/wise write access since not all matrix formats allow efficient direct access!) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$\& \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a0469ef03089f7f216931940305c38194}{linear\+\_\+solver\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a52387f4765c958b9b37dbb8991b5f048}{linear\+\_\+solver\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object (const version) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a4d445c4a1204da569f40ec1bdace9ef3}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs)
+\begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_ac35083cf8225822363c25b921b4ca1ce}{solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln)
+\begin{DoxyCompactList}\small\item\em Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_ae9098f3e129833a6b1cb5fe6ebdd9835}{solve}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs)
+\begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a8d9fb5fddec05a0b6e35cff23c79255c}{solve}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&soln)
+\begin{DoxyCompactList}\small\item\em Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&residual\+\_\+)
+\begin{DoxyCompactList}\small\item\em Find the residual, i.\+e. r=b-\/\+Ax the residual. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}{max\+\_\+residual}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs)
+\begin{DoxyCompactList}\small\item\em Find the maximum residual r=b-\/\+Ax -- generic version, can be overloaded for specific derived classes where the max. can be determined \char`\"{}on the fly\char`\"{}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const =0
+\begin{DoxyCompactList}\small\item\em Multiply the matrix by the vector x\+: soln=Ax. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const =0
+\begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a86f0315e581cd5b41b75867383aa3760}{Linear\+\_\+solver\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a6ef2e36e4e5907af2738934f131e8dcf}{Default\+\_\+linear\+\_\+solver\+\_\+pt}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for matrices of doubles -- adds abstract interfaces for solving, LU decomposition and multiplication by vectors. 
+
+Definition at line 271 of file matrices.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a9ab2dcaf990403cd43d4b952f7dbaa1c}\label{classoomph_1_1DoubleMatrixBase_a9ab2dcaf990403cd43d4b952f7dbaa1c}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!DoubleMatrixBase@{DoubleMatrixBase}}
+\index{DoubleMatrixBase@{DoubleMatrixBase}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{DoubleMatrixBase()}{DoubleMatrixBase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Matrix\+Base\+::\+Double\+Matrix\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Empty) constructor. 
+
+
+
+Definition at line 284 of file matrices.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a9ac04a27de856720ef6478df71b1505a}\label{classoomph_1_1DoubleMatrixBase_a9ac04a27de856720ef6478df71b1505a}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!DoubleMatrixBase@{DoubleMatrixBase}}
+\index{DoubleMatrixBase@{DoubleMatrixBase}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{DoubleMatrixBase()}{DoubleMatrixBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Matrix\+Base\+::\+Double\+Matrix\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 287 of file matrices.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a82ece2e3cfc355bb68ba78a2ed9dae9f}\label{classoomph_1_1DoubleMatrixBase_a82ece2e3cfc355bb68ba78a2ed9dae9f}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!````~DoubleMatrixBase@{$\sim$DoubleMatrixBase}}
+\index{````~DoubleMatrixBase@{$\sim$DoubleMatrixBase}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{$\sim$DoubleMatrixBase()}{~DoubleMatrixBase()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Double\+Matrix\+Base\+::$\sim$\+Double\+Matrix\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+virtual (empty) destructor 
+
+
+
+Definition at line 305 of file matrices.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a0469ef03089f7f216931940305c38194}\label{classoomph_1_1DoubleMatrixBase_a0469ef03089f7f216931940305c38194}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!linear\_solver\_pt@{linear\_solver\_pt}}
+\index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ \& oomph\+::\+Double\+Matrix\+Base\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the linear solver object. 
+
+
+
+Definition at line 315 of file matrices.\+h.
+
+
+
+References Linear\+\_\+solver\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a52387f4765c958b9b37dbb8991b5f048}\label{classoomph_1_1DoubleMatrixBase_a52387f4765c958b9b37dbb8991b5f048}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!linear\_solver\_pt@{linear\_solver\_pt}}
+\index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ const \& oomph\+::\+Double\+Matrix\+Base\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the linear solver object (const version) 
+
+
+
+Definition at line 318 of file matrices.\+h.
+
+
+
+References Linear\+\_\+solver\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}\label{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!max\_residual@{max\_residual}}
+\index{max\_residual@{max\_residual}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{max\_residual()}{max\_residual()}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Double\+Matrix\+Base\+::max\+\_\+residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Find the maximum residual r=b-\/\+Ax -- generic version, can be overloaded for specific derived classes where the max. can be determined \char`\"{}on the fly\char`\"{}. 
+
+
+
+Definition at line 360 of file matrices.\+h.
+
+
+
+References oomph\+::\+Double\+Vector\+::max(), and residual().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}\label{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!multiply@{multiply}}
+\index{multiply@{multiply}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Double\+Matrix\+Base\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{soln }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Multiply the matrix by the vector x\+: soln=Ax. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5575a4a0}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{oomph\+::\+Sum\+Of\+Matrices}}.
+
+
+
+Referenced by oomph\+::\+Sum\+Of\+Matrices\+::multiply(), residual(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}\label{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!multiply\_transpose@{multiply\_transpose}}
+\index{multiply\_transpose@{multiply\_transpose}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{multiply\_transpose()}{multiply\_transpose()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Double\+Matrix\+Base\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{soln }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}{oomph\+::\+Sum\+Of\+Matrices}}.
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}\label{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!ncol@{ncol}}
+\index{ncol@{ncol}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
+{\footnotesize\ttfamily virtual unsigned long oomph\+::\+Double\+Matrix\+Base\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Return the number of columns of the matrix. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_aa38cc544ab30f9318161763e13c20957}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_aec36d12984999f29f5fc21feea55df1d}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ad18b4591850b5e89ee6695407aaeec54}{oomph\+::\+Sum\+Of\+Matrices}}.
+
+
+
+Referenced by oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+serial(), oomph\+::\+Sum\+Of\+Matrices\+::ncol(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}\label{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily virtual unsigned long oomph\+::\+Double\+Matrix\+Base\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Return the number of rows of the matrix. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ab541153fa5ab2c1bc18e5339bacadfb9}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab67993d1a41ca5ddf05c8210673723f0}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a5d3b790f7e4f1bce927ecfb61844a52a}{oomph\+::\+Sum\+Of\+Matrices}}.
+
+
+
+Referenced by oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Dense\+L\+U\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+serial(), oomph\+::\+Sum\+Of\+Matrices\+::nrow(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup(), oomph\+::\+Identity\+Preconditioner\+::setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f0846fede2d77}\label{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f0846fede2d77}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Double\+Matrix\+Base\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re not providing a general interface for component-\/wise write access since not all matrix formats allow efficient direct access!) 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a2fd1f3dfa66ed45be1ced60d2835634c}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ae41c14d2d7e4b5b568a9b371e7e53fbd}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af5b1d934bae618c92aa1089671b6130e}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a934664ec676d36115ef27a9758827f7c}{oomph\+::\+Sum\+Of\+Matrices}}.
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a107b48a28db1ab8696e794e3d398a02e}\label{classoomph_1_1DoubleMatrixBase_a107b48a28db1ab8696e794e3d398a02e}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Double\+Matrix\+Base\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 293 of file matrices.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}\label{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!residual@{residual}}
+\index{residual@{residual}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{residual()}{residual()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Double\+Matrix\+Base\+::residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{residual\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Find the residual, i.\+e. r=b-\/\+Ax the residual. 
+
+
+
+Definition at line 339 of file matrices.\+h.
+
+
+
+References i, multiply(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+
+
+
+Referenced by max\+\_\+residual(), oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve\+\_\+helper(), and oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_ac35083cf8225822363c25b921b4ca1ce}\label{classoomph_1_1DoubleMatrixBase_ac35083cf8225822363c25b921b4ca1ce}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!solve@{solve}}
+\index{solve@{solve}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Double\+Matrix\+Base\+::solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{soln }\end{DoxyParamCaption})}
+
+
+
+Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. 
+
+Complete LU solve (Nothing gets overwritten!). This generic version should never need to be overwritten 
+
+Definition at line 75 of file matrices.\+cc.
+
+
+
+References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a8d9fb5fddec05a0b6e35cff23c79255c}\label{classoomph_1_1DoubleMatrixBase_a8d9fb5fddec05a0b6e35cff23c79255c}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!solve@{solve}}
+\index{solve@{solve}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Double\+Matrix\+Base\+::solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{soln }\end{DoxyParamCaption})}
+
+
+
+Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. 
+
+Complete LU solve (Nothing gets overwritten!). This generic version should never need to be overwritten 
+
+Definition at line 118 of file matrices.\+cc.
+
+
+
+References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a4d445c4a1204da569f40ec1bdace9ef3}\label{classoomph_1_1DoubleMatrixBase_a4d445c4a1204da569f40ec1bdace9ef3}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!solve@{solve}}
+\index{solve@{solve}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Double\+Matrix\+Base\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS with solution). The default should not need to be over-\/written. 
+
+Complete LU solve (overwrites R\+HS with solution). This is the generic version which should not need to be over-\/written. 
+
+Definition at line 51 of file matrices.\+cc.
+
+
+
+References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
+
+
+
+Referenced by oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(), oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve(), oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::compute\+\_\+volume\+\_\+target(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::direct\+\_\+solve(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::get\+\_\+principal\+\_\+stress(), and oomph\+::\+Finite\+Element\+::locate\+\_\+zeta().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_ae9098f3e129833a6b1cb5fe6ebdd9835}\label{classoomph_1_1DoubleMatrixBase_ae9098f3e129833a6b1cb5fe6ebdd9835}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!solve@{solve}}
+\index{solve@{solve}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Double\+Matrix\+Base\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS with solution). The default should not need to be over-\/written. 
+
+Complete LU solve (overwrites R\+HS with solution). This is the generic version which should not need to be over-\/written. 
+
+Definition at line 94 of file matrices.\+cc.
+
+
+
+References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a6ef2e36e4e5907af2738934f131e8dcf}\label{classoomph_1_1DoubleMatrixBase_a6ef2e36e4e5907af2738934f131e8dcf}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!Default\_linear\_solver\_pt@{Default\_linear\_solver\_pt}}
+\index{Default\_linear\_solver\_pt@{Default\_linear\_solver\_pt}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{Default\_linear\_solver\_pt}{Default\_linear\_solver\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 279 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+C\+R\+Double\+Matrix\+::build(), oomph\+::\+C\+C\+Double\+Matrix\+::\+C\+C\+Double\+Matrix(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Dense\+Double\+Matrix\+::\+Dense\+Double\+Matrix(), oomph\+::\+C\+R\+Double\+Matrix\+::lubksub(), oomph\+::\+Dense\+Double\+Matrix\+::lubksub(), oomph\+::\+C\+C\+Double\+Matrix\+::lubksub(), oomph\+::\+C\+R\+Double\+Matrix\+::ludecompose(), oomph\+::\+Dense\+Double\+Matrix\+::ludecompose(), oomph\+::\+C\+C\+Double\+Matrix\+::ludecompose(), oomph\+::\+C\+C\+Double\+Matrix\+::$\sim$\+C\+C\+Double\+Matrix(), oomph\+::\+C\+R\+Double\+Matrix\+::$\sim$\+C\+R\+Double\+Matrix(), and oomph\+::\+Dense\+Double\+Matrix\+::$\sim$\+Dense\+Double\+Matrix().
+
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a86f0315e581cd5b41b75867383aa3760}\label{classoomph_1_1DoubleMatrixBase_a86f0315e581cd5b41b75867383aa3760}} 
+\index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!Linear\_solver\_pt@{Linear\_solver\_pt}}
+\index{Linear\_solver\_pt@{Linear\_solver\_pt}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
+\doxysubsubsection{\texorpdfstring{Linear\_solver\_pt}{Linear\_solver\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 276 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+C\+C\+Double\+Matrix\+::\+C\+C\+Double\+Matrix(), oomph\+::\+C\+R\+Double\+Matrix\+::clear(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Dense\+Double\+Matrix\+::\+Dense\+Double\+Matrix(), linear\+\_\+solver\+\_\+pt(), and solve().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{matrices_8h}{matrices.\+h}}\item 
+\mbox{\hyperlink{matrices_8cc}{matrices.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::GeneralElasticityTensor Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1GeneralElasticityTensor.html">GeneralElasticityTensor</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1GeneralElasticityTensor-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::GeneralElasticityTensor Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html">elasticity_tensor.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::GeneralElasticityTensor:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1GeneralElasticityTensor.png" usemap="#oomph::GeneralElasticityTensor_map" alt=""/>
+  <map id="oomph::GeneralElasticityTensor_map" name="oomph::GeneralElasticityTensor_map">
+<area href="classoomph_1_1ElasticityTensor.html" alt="oomph::ElasticityTensor" shape="rect" coords="0,0,189,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6b22a3888a575e622693268bc80ab504"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralElasticityTensor.html#a6b22a3888a575e622693268bc80ab504">GeneralElasticityTensor</a> ()</td></tr>
+<tr class="memdesc:a6b22a3888a575e622693268bc80ab504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empy Constructor.  <a href="classoomph_1_1GeneralElasticityTensor.html#a6b22a3888a575e622693268bc80ab504">More...</a><br /></td></tr>
+<tr class="separator:a6b22a3888a575e622693268bc80ab504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01443522709af3e2f1af63411be4f0e6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralElasticityTensor.html#a01443522709af3e2f1af63411be4f0e6">independent_component</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a01443522709af3e2f1af63411be4f0e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the independent coefficient function.  <a href="classoomph_1_1GeneralElasticityTensor.html#a01443522709af3e2f1af63411be4f0e6">More...</a><br /></td></tr>
+<tr class="separator:a01443522709af3e2f1af63411be4f0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8dee57c5a1315f790401628ece5ec26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralElasticityTensor.html#aa8dee57c5a1315f790401628ece5ec26">set_value</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l, const double &amp;<a class="el" href="the__data__structure_8txt.html#a3b0d20781021ec2f0e788713f8b0fec8">value</a>)</td></tr>
+<tr class="memdesc:aa8dee57c5a1315f790401628ece5ec26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allow the values to be set.  <a href="classoomph_1_1GeneralElasticityTensor.html#aa8dee57c5a1315f790401628ece5ec26">More...</a><br /></td></tr>
+<tr class="separator:aa8dee57c5a1315f790401628ece5ec26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1ElasticityTensor"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1ElasticityTensor')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1ElasticityTensor.html">oomph::ElasticityTensor</a></td></tr>
+<tr class="memitem:a33d3d0462cfe9c230444ceb27db744d8 inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticityTensor.html#a33d3d0462cfe9c230444ceb27db744d8">~ElasticityTensor</a> ()</td></tr>
+<tr class="memdesc:a33d3d0462cfe9c230444ceb27db744d8 inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual Destructor.  <a href="classoomph_1_1ElasticityTensor.html#a33d3d0462cfe9c230444ceb27db744d8">More...</a><br /></td></tr>
+<tr class="separator:a33d3d0462cfe9c230444ceb27db744d8 inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60e0ebb9f03c21d11aa874dfdf5437ae inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticityTensor.html#a60e0ebb9f03c21d11aa874dfdf5437ae">operator()</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</td></tr>
+<tr class="memdesc:a60e0ebb9f03c21d11aa874dfdf5437ae inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the appropriate independent component via the index translation scheme (const version).  <a href="classoomph_1_1ElasticityTensor.html#a60e0ebb9f03c21d11aa874dfdf5437ae">More...</a><br /></td></tr>
+<tr class="separator:a60e0ebb9f03c21d11aa874dfdf5437ae inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33d3d0462cfe9c230444ceb27db744d8 inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticityTensor.html#a33d3d0462cfe9c230444ceb27db744d8">~ElasticityTensor</a> ()</td></tr>
+<tr class="memdesc:a33d3d0462cfe9c230444ceb27db744d8 inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual Destructor.  <a href="classoomph_1_1ElasticityTensor.html#a33d3d0462cfe9c230444ceb27db744d8">More...</a><br /></td></tr>
+<tr class="separator:a33d3d0462cfe9c230444ceb27db744d8 inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60e0ebb9f03c21d11aa874dfdf5437ae inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticityTensor.html#a60e0ebb9f03c21d11aa874dfdf5437ae">operator()</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</td></tr>
+<tr class="memdesc:a60e0ebb9f03c21d11aa874dfdf5437ae inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the appropriate independent component via the index translation scheme (const version).  <a href="classoomph_1_1ElasticityTensor.html#a60e0ebb9f03c21d11aa874dfdf5437ae">More...</a><br /></td></tr>
+<tr class="separator:a60e0ebb9f03c21d11aa874dfdf5437ae inherit pub_methods_classoomph_1_1ElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:afc3c4afaaa1eef1c57913e1e20c0d483"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralElasticityTensor.html#afc3c4afaaa1eef1c57913e1e20c0d483">C</a> [21]</td></tr>
+<tr class="separator:afc3c4afaaa1eef1c57913e1e20c0d483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1ElasticityTensor"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1ElasticityTensor')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1ElasticityTensor.html">oomph::ElasticityTensor</a></td></tr>
+<tr class="memitem:ace883403848c5a394cf9cb07861361d1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticityTensor.html#ace883403848c5a394cf9cb07861361d1">range_check</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</td></tr>
+<tr class="memdesc:ace883403848c5a394cf9cb07861361d1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper range checking function (Note that this only captures over-runs in 3D but errors are likely to be caught in evaluation of the stress and strain tensors anyway...)  <a href="classoomph_1_1ElasticityTensor.html#ace883403848c5a394cf9cb07861361d1">More...</a><br /></td></tr>
+<tr class="separator:ace883403848c5a394cf9cb07861361d1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94feb893f8c4180307e18aa341c046b1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticityTensor.html#a94feb893f8c4180307e18aa341c046b1">ElasticityTensor</a> ()</td></tr>
+<tr class="memdesc:a94feb893f8c4180307e18aa341c046b1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Constructor.  <a href="classoomph_1_1ElasticityTensor.html#a94feb893f8c4180307e18aa341c046b1">More...</a><br /></td></tr>
+<tr class="separator:a94feb893f8c4180307e18aa341c046b1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace883403848c5a394cf9cb07861361d1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticityTensor.html#ace883403848c5a394cf9cb07861361d1">range_check</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</td></tr>
+<tr class="memdesc:ace883403848c5a394cf9cb07861361d1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper range checking function (Note that this only captures over-runs in 3D but errors are likely to be caught in evaluation of the stress and strain tensors anyway...)  <a href="classoomph_1_1ElasticityTensor.html#ace883403848c5a394cf9cb07861361d1">More...</a><br /></td></tr>
+<tr class="separator:ace883403848c5a394cf9cb07861361d1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94feb893f8c4180307e18aa341c046b1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticityTensor.html#a94feb893f8c4180307e18aa341c046b1">ElasticityTensor</a> ()</td></tr>
+<tr class="memdesc:a94feb893f8c4180307e18aa341c046b1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Constructor.  <a href="classoomph_1_1ElasticityTensor.html#a94feb893f8c4180307e18aa341c046b1">More...</a><br /></td></tr>
+<tr class="separator:a94feb893f8c4180307e18aa341c046b1 inherit pro_methods_classoomph_1_1ElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_attribs_classoomph_1_1ElasticityTensor"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1ElasticityTensor')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1ElasticityTensor.html">oomph::ElasticityTensor</a></td></tr>
+<tr class="memitem:a6be831fdf71155ccbab14287d30587f1 inherit pro_static_attribs_classoomph_1_1ElasticityTensor"><td class="memItemLeft" align="right" valign="top">static const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticityTensor.html#a6be831fdf71155ccbab14287d30587f1">Index</a> [3][3][3][3]</td></tr>
+<tr class="memdesc:a6be831fdf71155ccbab14287d30587f1 inherit pro_static_attribs_classoomph_1_1ElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translation table from the four indices to the corresponding independent component.  <a href="classoomph_1_1ElasticityTensor.html#a6be831fdf71155ccbab14287d30587f1">More...</a><br /></td></tr>
+<tr class="separator:a6be831fdf71155ccbab14287d30587f1 inherit pro_static_attribs_classoomph_1_1ElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A general elasticity tensor that provides storage for all 21 independent components </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00246">246</a> of file <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html">linear_elasticity/elasticity_tensor.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6b22a3888a575e622693268bc80ab504"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b22a3888a575e622693268bc80ab504">&#9670;&nbsp;</a></span>GeneralElasticityTensor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeneralElasticityTensor::GeneralElasticityTensor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empy Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00254">254</a> of file <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html">linear_elasticity/elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00249">C</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a01443522709af3e2f1af63411be4f0e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01443522709af3e2f1af63411be4f0e6">&#9670;&nbsp;</a></span>independent_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::GeneralElasticityTensor::independent_component </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the independent coefficient function. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1ElasticityTensor.html#a84b2a9b7a447cf88b2d6b98b5e6e7bd5">oomph::ElasticityTensor</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00261">261</a> of file <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html">linear_elasticity/elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00249">C</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="aa8dee57c5a1315f790401628ece5ec26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8dee57c5a1315f790401628ece5ec26">&#9670;&nbsp;</a></span>set_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::GeneralElasticityTensor::set_value </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allow the values to be set. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1ElasticityTensor.html#ab68e4386f02f9e39095d879e4ec96df5">oomph::ElasticityTensor</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00265">265</a> of file <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html">linear_elasticity/elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00249">C</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00061">oomph::ElasticityTensor::Index</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="afc3c4afaaa1eef1c57913e1e20c0d483"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc3c4afaaa1eef1c57913e1e20c0d483">&#9670;&nbsp;</a></span>C</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::GeneralElasticityTensor::C[21]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00249">249</a> of file <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html">linear_elasticity/elasticity_tensor.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00254">GeneralElasticityTensor()</a>, <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00261">independent_component()</a>, and <a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html#l00265">set_value()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="linear__elasticity_2elasticity__tensor_8h_source.html">linear_elasticity/elasticity_tensor.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:37
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

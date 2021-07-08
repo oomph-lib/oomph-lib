@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TrilinosEpetraHelpers Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html">TrilinosEpetraHelpers</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::TrilinosEpetraHelpers Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Helper namespace for use with the Trilinos Epetra package. Contains functions to generate two Epetra containers (Epetra_Vector and Epetra_CrsMatrix) and provides access to the trilinos matrix-matrix and matrix-vector product routines.  
+<a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a914dd010ddb4896a7af801945a2db912"><td class="memItemLeft" align="right" valign="top">Epetra_Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a914dd010ddb4896a7af801945a2db912">create_distributed_epetra_vector</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;oomph_vec)</td></tr>
+<tr class="memdesc:a914dd010ddb4896a7af801945a2db912"><td class="mdescLeft">&#160;</td><td class="mdescRight">create an Epetra_Vector from an oomph-lib <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>. If oomph_vec is NOT distributed (i.e. locally replicated) and on more than one processor, then the returned Epetra_Vector will be uniformly distributed. If the oomph_vec is distributed then the Epetra_Vector returned will have the same distribution as oomp_vec.  <a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a914dd010ddb4896a7af801945a2db912">More...</a><br /></td></tr>
+<tr class="separator:a914dd010ddb4896a7af801945a2db912"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdba45d59fca1a4509df5a1c6b44d0bc"><td class="memItemLeft" align="right" valign="top">Epetra_Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html#abdba45d59fca1a4509df5a1c6b44d0bc">create_distributed_epetra_vector</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *dist_pt)</td></tr>
+<tr class="memdesc:abdba45d59fca1a4509df5a1c6b44d0bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">create an Epetra_Vector based on the argument oomph-lib <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> If dist is NOT distributed and on more than one processor, then the returned Epetra_Vector will be uniformly distributed. If dist is distributed then the Epetra_Vector returned will have the same distribution as dist. The coefficient values are not set.  <a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#abdba45d59fca1a4509df5a1c6b44d0bc">More...</a><br /></td></tr>
+<tr class="separator:abdba45d59fca1a4509df5a1c6b44d0bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc7e0619f591ab3b4dc04802444dc92b"><td class="memItemLeft" align="right" valign="top">Epetra_Vector *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html#acc7e0619f591ab3b4dc04802444dc92b">create_epetra_vector_view_data</a> (<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;oomph_vec)</td></tr>
+<tr class="memdesc:acc7e0619f591ab3b4dc04802444dc92b"><td class="mdescLeft">&#160;</td><td class="mdescRight">create an Epetra_Vector equivalent of <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> The argument <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> must be built. The Epetra_Vector will point to, and NOT COPY the underlying data in the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>. The oomph-lib <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> and the returned Epetra_Vector will have the the same distribution.  <a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#acc7e0619f591ab3b4dc04802444dc92b">More...</a><br /></td></tr>
+<tr class="separator:acc7e0619f591ab3b4dc04802444dc92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a302ed5d22db12175522a3fcf304856c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a302ed5d22db12175522a3fcf304856c9">copy_to_oomphlib_vector</a> (const Epetra_Vector *epetra_vec_pt, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;oomph_vec)</td></tr>
+<tr class="memdesc:a302ed5d22db12175522a3fcf304856c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to copy the contents of a Trilinos vector to an oomph-lib distributed vector. The distribution of the two vectors must be identical <br  />
+  <a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a302ed5d22db12175522a3fcf304856c9">More...</a><br /></td></tr>
+<tr class="separator:a302ed5d22db12175522a3fcf304856c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a8d24c6cf06d8c71bb414c153a276cf"><td class="memItemLeft" align="right" valign="top">Epetra_CrsMatrix *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a0a8d24c6cf06d8c71bb414c153a276cf">create_distributed_epetra_matrix</a> (const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *oomph_matrix_pt, const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *dist_pt)</td></tr>
+<tr class="memdesc:a0a8d24c6cf06d8c71bb414c153a276cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">create an Epetra_CrsMatrix from an oomph-lib <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a>. If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and on more than one processor, then the returned Epetra_Vector will be uniformly distributed. If the oomph_matrix_pt is distributed then the Epetra_CrsMatrix returned will have the same distribution as oomph_matrix_pt. The <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> argument dist_pt should specify the distribution of the object this matrix will operate on.  <a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a0a8d24c6cf06d8c71bb414c153a276cf">More...</a><br /></td></tr>
+<tr class="separator:a0a8d24c6cf06d8c71bb414c153a276cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b96bb02b661a770a7b5830af771a249"><td class="memItemLeft" align="right" valign="top">Epetra_CrsMatrix *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a1b96bb02b661a770a7b5830af771a249">create_distributed_epetra_matrix_for_aztecoo</a> (<a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *oomph_matrix_pt)</td></tr>
+<tr class="memdesc:a1b96bb02b661a770a7b5830af771a249"><td class="mdescLeft">&#160;</td><td class="mdescRight">create and Epetra_CrsMatrix from an oomph-lib <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a>. Specialisation for Trilinos AztecOO. If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and on more than one processor, then the returned Epetra_Vector will be uniformly distributed. If the oomph_matrix_pt is distributed then the Epetra_CrsMatrix returned will have the same distribution as oomph_matrix_pt. For AztecOO, the column map is ordered such that the local rows are first.  <a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a1b96bb02b661a770a7b5830af771a249">More...</a><br /></td></tr>
+<tr class="separator:a1b96bb02b661a770a7b5830af771a249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a595c337ff02ad53b3dcac04ed142f8db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a595c337ff02ad53b3dcac04ed142f8db">multiply</a> (const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *matrix, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;soln)</td></tr>
+<tr class="memdesc:a595c337ff02ad53b3dcac04ed142f8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to perform a matrix-vector multiplication on a oomph-lib matrix and vector using Trilinos functionality. NOTE 1. the matrix and the vectors must have the same communicator. NOTE 2. The vector will be returned with the same distribution as the matrix, unless a distribution is predefined in the solution vector in which case the vector will be returned with that distribution.  <a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a595c337ff02ad53b3dcac04ed142f8db">More...</a><br /></td></tr>
+<tr class="separator:a595c337ff02ad53b3dcac04ed142f8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d96936ed1e5f3266ef06564ae300103"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a0d96936ed1e5f3266ef06564ae300103">multiply</a> (const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;matrix_1, const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;matrix_2, <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;matrix_soln, const bool &amp;use_ml=false)</td></tr>
+<tr class="memdesc:a0d96936ed1e5f3266ef06564ae300103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to perform a matrix-matrix multiplication on oomph-lib matrices by using Trilinos functionality. <b>NOTE</b> 1. There are two Trilinos matrix-matrix multiplication methods available, using either the EpetraExt::MatrixMatrix class (if use_ml == false) or using ML (Epetra_MatrixMult method) <b>NOTE</b> 2. the solution matrix (matrix_soln) will be returned with the same distribution as matrix1 <b>NOTE</b> 3. All matrices must share the same communicator. <br  />
+  <a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a0d96936ed1e5f3266ef06564ae300103">More...</a><br /></td></tr>
+<tr class="separator:a0d96936ed1e5f3266ef06564ae300103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ccd0dec0ba044834119416b0ed06a2f"><td class="memItemLeft" align="right" valign="top">Epetra_Map *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a5ccd0dec0ba044834119416b0ed06a2f">create_epetra_map</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const dist)</td></tr>
+<tr class="memdesc:a5ccd0dec0ba044834119416b0ed06a2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">create an Epetra_Map corresponding to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a>  <a href="namespaceoomph_1_1TrilinosEpetraHelpers.html#a5ccd0dec0ba044834119416b0ed06a2f">More...</a><br /></td></tr>
+<tr class="separator:a5ccd0dec0ba044834119416b0ed06a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Helper namespace for use with the Trilinos Epetra package. Contains functions to generate two Epetra containers (Epetra_Vector and Epetra_CrsMatrix) and provides access to the trilinos matrix-matrix and matrix-vector product routines. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a302ed5d22db12175522a3fcf304856c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a302ed5d22db12175522a3fcf304856c9">&#9670;&nbsp;</a></span>copy_to_oomphlib_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TrilinosEpetraHelpers::copy_to_oomphlib_vector </td>
+          <td>(</td>
+          <td class="paramtype">const Epetra_Vector *&#160;</td>
+          <td class="paramname"><em>epetra_vec_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>oomph_vec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to copy the contents of a Trilinos vector to an oomph-lib distributed vector. The distribution of the two vectors must be identical <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__helpers_8cc_source.html#l00188">188</a> of file <a class="el" href="trilinos__helpers_8cc_source.html">trilinos_helpers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00482">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, and <a class="el" href="double__vector_8h_source.html#l00255">oomph::DoubleVector::values_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__helpers_8cc_source.html#l00675">multiply()</a>, <a class="el" href="trilinos__preconditioners_8cc_source.html#l00131">oomph::TrilinosPreconditionerBase::preconditioner_solve()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00501">oomph::TrilinosAztecOOSolver::resolve()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00141">oomph::TrilinosAztecOOSolver::solve()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00244">oomph::MatrixVectorProduct::trilinos_multiply_helper()</a>, and <a class="el" href="matrix__vector__product_8cc_source.html#l00292">oomph::MatrixVectorProduct::trilinos_multiply_transpose_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a0a8d24c6cf06d8c71bb414c153a276cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a8d24c6cf06d8c71bb414c153a276cf">&#9670;&nbsp;</a></span>create_distributed_epetra_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_CrsMatrix * oomph::TrilinosEpetraHelpers::create_distributed_epetra_matrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *&#160;</td>
+          <td class="paramname"><em>oomph_matrix_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td>
+          <td class="paramname"><em>dist_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>create an Epetra_CrsMatrix from an oomph-lib <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a>. If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and on more than one processor, then the returned Epetra_Vector will be uniformly distributed. If the oomph_matrix_pt is distributed then the Epetra_CrsMatrix returned will have the same distribution as oomph_matrix_pt. The <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> argument dist_pt should specify the distribution of the object this matrix will operate on. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__helpers_8cc_source.html#l00280">280</a> of file <a class="el" href="trilinos__helpers_8cc_source.html">trilinos_helpers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l01173">oomph::CRDoubleMatrix::built()</a>, <a class="el" href="matrices_8h_source.html#l01052">oomph::CRDoubleMatrix::column_index()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l01021">create_epetra_map()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00333">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00264">oomph::LinearAlgebraDistribution::first_row()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00189">oomph::LinearAlgebraDistribution::nrow()</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00196">oomph::LinearAlgebraDistribution::nrow_local()</a>, <a class="el" href="matrices_8h_source.html#l01046">oomph::CRDoubleMatrix::row_start()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>, and <a class="el" href="matrices_8h_source.html#l01058">oomph::CRDoubleMatrix::value()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__helpers_8cc_source.html#l00675">multiply()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00043">oomph::MatrixVectorProduct::setup()</a>, <a class="el" href="trilinos__preconditioners_8cc_source.html#l00055">oomph::TrilinosPreconditionerBase::setup()</a>, and <a class="el" href="trilinos__solver_8cc_source.html#l00292">oomph::TrilinosAztecOOSolver::solver_setup()</a>.</p>
+
+</div>
+</div>
+<a id="a1b96bb02b661a770a7b5830af771a249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b96bb02b661a770a7b5830af771a249">&#9670;&nbsp;</a></span>create_distributed_epetra_matrix_for_aztecoo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_CrsMatrix * oomph::TrilinosEpetraHelpers::create_distributed_epetra_matrix_for_aztecoo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *&#160;</td>
+          <td class="paramname"><em>oomph_matrix_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>create and Epetra_CrsMatrix from an oomph-lib <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a>. Specialisation for Trilinos AztecOO. If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and on more than one processor, then the returned Epetra_Vector will be uniformly distributed. If the oomph_matrix_pt is distributed then the Epetra_CrsMatrix returned will have the same distribution as oomph_matrix_pt. For AztecOO, the column map is ordered such that the local rows are first. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__helpers_8cc_source.html#l00482">482</a> of file <a class="el" href="trilinos__helpers_8cc_source.html">trilinos_helpers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l01173">oomph::CRDoubleMatrix::built()</a>, <a class="el" href="matrices_8h_source.html#l01052">oomph::CRDoubleMatrix::column_index()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l01021">create_epetra_map()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00264">oomph::LinearAlgebraDistribution::first_row()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00494">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="matrices_8h_source.html#l00994">oomph::CRDoubleMatrix::ncol()</a>, <a class="el" href="matrices_8h_source.html#l01064">oomph::CRDoubleMatrix::nnz()</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00196">oomph::LinearAlgebraDistribution::nrow_local()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00482">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="matrices_8h_source.html#l01046">oomph::CRDoubleMatrix::row_start()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>, and <a class="el" href="matrices_8h_source.html#l01058">oomph::CRDoubleMatrix::value()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__solver_8cc_source.html#l00292">oomph::TrilinosAztecOOSolver::solver_setup()</a>.</p>
+
+</div>
+</div>
+<a id="a914dd010ddb4896a7af801945a2db912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a914dd010ddb4896a7af801945a2db912">&#9670;&nbsp;</a></span>create_distributed_epetra_vector() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_Vector * oomph::TrilinosEpetraHelpers::create_distributed_epetra_vector </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>oomph_vec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>create an Epetra_Vector from an oomph-lib <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>. If oomph_vec is NOT distributed (i.e. locally replicated) and on more than one processor, then the returned Epetra_Vector will be uniformly distributed. If the oomph_vec is distributed then the Epetra_Vector returned will have the same distribution as oomp_vec. </p>
+<p>create an Epetra_Vector from an oomph-lib <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>. If oomph_vec is NOT distributed (i.e. locally replicated) and on more than one processor, then the returned Epetra_Vector will be uniformly distributed. If the oomph_vec is distributed then the Epetra_Vector returned will have the same distribution as oomph_vec. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__helpers_8cc_source.html#l00043">43</a> of file <a class="el" href="trilinos__helpers_8cc_source.html">trilinos_helpers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l01021">create_epetra_map()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00264">oomph::LinearAlgebraDistribution::first_row()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, and <a class="el" href="double__vector_8h_source.html#l00255">oomph::DoubleVector::values_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__helpers_8cc_source.html#l00675">multiply()</a>, <a class="el" href="trilinos__preconditioners_8cc_source.html#l00131">oomph::TrilinosPreconditionerBase::preconditioner_solve()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00501">oomph::TrilinosAztecOOSolver::resolve()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00141">oomph::TrilinosAztecOOSolver::solve()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00244">oomph::MatrixVectorProduct::trilinos_multiply_helper()</a>, and <a class="el" href="matrix__vector__product_8cc_source.html#l00292">oomph::MatrixVectorProduct::trilinos_multiply_transpose_helper()</a>.</p>
+
+</div>
+</div>
+<a id="abdba45d59fca1a4509df5a1c6b44d0bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdba45d59fca1a4509df5a1c6b44d0bc">&#9670;&nbsp;</a></span>create_distributed_epetra_vector() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_Vector * oomph::TrilinosEpetraHelpers::create_distributed_epetra_vector </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td>
+          <td class="paramname"><em>dist_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>create an Epetra_Vector based on the argument oomph-lib <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> If dist is NOT distributed and on more than one processor, then the returned Epetra_Vector will be uniformly distributed. If dist is distributed then the Epetra_Vector returned will have the same distribution as dist. The coefficient values are not set. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__helpers_8cc_source.html#l00104">104</a> of file <a class="el" href="trilinos__helpers_8cc_source.html">trilinos_helpers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00346">oomph::LinearAlgebraDistribution::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l01021">create_epetra_map()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00333">oomph::LinearAlgebraDistribution::distributed()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00189">oomph::LinearAlgebraDistribution::nrow()</a>.</p>
+
+</div>
+</div>
+<a id="a5ccd0dec0ba044834119416b0ed06a2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ccd0dec0ba044834119416b0ed06a2f">&#9670;&nbsp;</a></span>create_epetra_map()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_Map * oomph::TrilinosEpetraHelpers::create_epetra_map </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const&#160;</td>
+          <td class="paramname"><em>dist</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>create an Epetra_Map corresponding to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__helpers_8cc_source.html#l01021">1021</a> of file <a class="el" href="trilinos__helpers_8cc_source.html">trilinos_helpers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00333">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00264">oomph::LinearAlgebraDistribution::first_row()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00189">oomph::LinearAlgebraDistribution::nrow()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00196">oomph::LinearAlgebraDistribution::nrow_local()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__helpers_8cc_source.html#l00280">create_distributed_epetra_matrix()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00482">create_distributed_epetra_matrix_for_aztecoo()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00043">create_distributed_epetra_vector()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00153">create_epetra_vector_view_data()</a>, and <a class="el" href="trilinos__solver_8h_source.html#l00054">oomph::OomphLibPreconditionerEpetraOperator::OomphLibPreconditionerEpetraOperator()</a>.</p>
+
+</div>
+</div>
+<a id="acc7e0619f591ab3b4dc04802444dc92b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc7e0619f591ab3b4dc04802444dc92b">&#9670;&nbsp;</a></span>create_epetra_vector_view_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_Vector * oomph::TrilinosEpetraHelpers::create_epetra_vector_view_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>oomph_vec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>create an Epetra_Vector equivalent of <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> The argument <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> must be built. The Epetra_Vector will point to, and NOT COPY the underlying data in the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>. The oomph-lib <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> and the returned Epetra_Vector will have the the same distribution. </p>
+<p>Create an Epetra_Vector equivalent of <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> The argument <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> must be built. The Epetra_Vector will point to, and NOT COPY the underlying data in the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>. The oomph-lib <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> and the returned Epetra_Vector will have the the same distribution. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__helpers_8cc_source.html#l00153">153</a> of file <a class="el" href="trilinos__helpers_8cc_source.html">trilinos_helpers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l01021">create_epetra_map()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, and <a class="el" href="double__vector_8h_source.html#l00255">oomph::DoubleVector::values_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a0d96936ed1e5f3266ef06564ae300103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d96936ed1e5f3266ef06564ae300103">&#9670;&nbsp;</a></span>multiply() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TrilinosEpetraHelpers::multiply </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix_soln</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_ml</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to perform a matrix-matrix multiplication on oomph-lib matrices by using Trilinos functionality. <b>NOTE</b> 1. There are two Trilinos matrix-matrix multiplication methods available, using either the EpetraExt::MatrixMatrix class (if use_ml == false) or using ML (Epetra_MatrixMult method) <b>NOTE</b> 2. the solution matrix (matrix_soln) will be returned with the same distribution as matrix1 <b>NOTE</b> 3. All matrices must share the same communicator. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__helpers_8cc_source.html#l00777">777</a> of file <a class="el" href="trilinos__helpers_8cc_source.html">trilinos_helpers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8cc_source.html#l01688">oomph::CRDoubleMatrix::build()</a>, <a class="el" href="matrices_8cc_source.html#l01727">oomph::CRDoubleMatrix::build_without_copy()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00346">oomph::LinearAlgebraDistribution::built()</a>, <a class="el" href="matrices_8h_source.html#l01173">oomph::CRDoubleMatrix::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00280">create_distributed_epetra_matrix()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00494">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="matrices_8h_source.html#l00994">oomph::CRDoubleMatrix::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00482">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>.</p>
+
+</div>
+</div>
+<a id="a595c337ff02ad53b3dcac04ed142f8db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a595c337ff02ad53b3dcac04ed142f8db">&#9670;&nbsp;</a></span>multiply() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TrilinosEpetraHelpers::multiply </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *&#160;</td>
+          <td class="paramname"><em>matrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>soln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to perform a matrix-vector multiplication on a oomph-lib matrix and vector using Trilinos functionality. NOTE 1. the matrix and the vectors must have the same communicator. NOTE 2. The vector will be returned with the same distribution as the matrix, unless a distribution is predefined in the solution vector in which case the vector will be returned with that distribution. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__helpers_8cc_source.html#l00675">675</a> of file <a class="el" href="trilinos__helpers_8cc_source.html">trilinos_helpers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00346">oomph::LinearAlgebraDistribution::built()</a>, <a class="el" href="matrices_8h_source.html#l01173">oomph::CRDoubleMatrix::built()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00188">copy_to_oomphlib_vector()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00280">create_distributed_epetra_matrix()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00043">create_distributed_epetra_vector()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03616">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::interpolate_and_correct()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02043">oomph::MGSolver&lt; DIM &gt;::interpolate_and_correct()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02344">oomph::MGSolver&lt; DIM &gt;::interpolation_self_test()</a>, <a class="el" href="matrices_8cc_source.html#l01801">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l01903">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00746">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::residual_norm()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03583">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::restrict_residual()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02019">oomph::MGSolver&lt; DIM &gt;::restrict_residual()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02307">oomph::MGSolver&lt; DIM &gt;::restriction_self_test()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01504">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup_mg_structures()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l01186">oomph::MGSolver&lt; DIM &gt;::setup_mg_structures()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

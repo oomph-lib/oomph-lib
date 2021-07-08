@@ -1,0 +1,261 @@
+\hypertarget{classoomph_1_1TriangleMeshClosedCurve}{}\doxysection{oomph\+::Triangle\+Mesh\+Closed\+Curve Class Reference}
+\label{classoomph_1_1TriangleMeshClosedCurve}\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+
+
+Base class defining a closed curve for the Triangle mesh generation.  
+
+
+
+
+{\ttfamily \#include $<$unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h$>$}
+
+Inheritance diagram for oomph\+::Triangle\+Mesh\+Closed\+Curve\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1TriangleMeshClosedCurve}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a386426ae1bbb2092eabeb33508c03850}{Triangle\+Mesh\+Closed\+Curve}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a8a8d36c6b35f1bffd760877da4f3d52f}{curve\+\_\+section\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&internal\+\_\+point\+\_\+pt=\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$(0), const bool \&\mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a5d48fa39b4cde1ba1bdba129a1587f2f}{is\+\_\+internal\+\_\+point\+\_\+fixed}}=false)
+\begin{DoxyCompactList}\small\item\em Constructor prototype. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_adfdc8f86bd3cddd2c126acae7385a3af}{$\sim$\+Triangle\+Mesh\+Closed\+Curve}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a439e4085f7e220364bbe9bc8040ec72f}{nvertices}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertices. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a6d8c26d0ecfaf5abff2f68fedf158612}{nsegments}} () const
+\begin{DoxyCompactList}\small\item\em Total number of segments. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a246d71ca0cb2dbc9d2c9ad6976f84ba6}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+sample=50)
+\begin{DoxyCompactList}\small\item\em Output each sub-\/boundary at n\+\_\+sample (default\+: 50) points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a373f3f1227c0824b46b1a3be9e492e35}{internal\+\_\+point}} () const
+\begin{DoxyCompactList}\small\item\em Coordinates of the internal point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_aa1c861decfcfd24df63f14f8ccfcd877}{internal\+\_\+point}} ()
+\begin{DoxyCompactList}\small\item\em Coordinates of the internal point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_ac1fe434733d736fba44e580b35dadd10}{fix\+\_\+internal\+\_\+point}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a6e05f2fb46166a64f00e5a3a6d7d7a0f}{unfix\+\_\+internal\+\_\+point}} ()
+\item 
+bool \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a5d48fa39b4cde1ba1bdba129a1587f2f}{is\+\_\+internal\+\_\+point\+\_\+fixed}} () const
+\begin{DoxyCompactList}\small\item\em Test whether the internal point is fixed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a4f54902fa364f654bb9d88c442b2caba}{Internal\+\_\+point\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vertex coordinates. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a66151b7e98cf4871932a6ede46b02e55}{Is\+\_\+internal\+\_\+point\+\_\+fixed}}
+\begin{DoxyCompactList}\small\item\em Indicate whether the internal point should be updated automatically. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class defining a closed curve for the Triangle mesh generation. 
+
+Definition at line 1238 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_a386426ae1bbb2092eabeb33508c03850}\label{classoomph_1_1TriangleMeshClosedCurve_a386426ae1bbb2092eabeb33508c03850}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!TriangleMeshClosedCurve@{TriangleMeshClosedCurve}}
+\index{TriangleMeshClosedCurve@{TriangleMeshClosedCurve}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{TriangleMeshClosedCurve()}{TriangleMeshClosedCurve()}}
+{\footnotesize\ttfamily oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::\+Triangle\+Mesh\+Closed\+Curve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \&}]{curve\+\_\+section\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{internal\+\_\+point\+\_\+pt = {\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$(0)},  }\item[{const bool \&}]{is\+\_\+internal\+\_\+point\+\_\+fixed = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Constructor prototype. 
+
+Class defining a closed curve for the Triangle mesh generation. 
+
+Definition at line 1430 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curve\+::curve\+\_\+section\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt, oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+coordinate(), i, oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+coordinate(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\+Tolerable\+\_\+error, and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_adfdc8f86bd3cddd2c126acae7385a3af}\label{classoomph_1_1TriangleMeshClosedCurve_adfdc8f86bd3cddd2c126acae7385a3af}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!````~TriangleMeshClosedCurve@{$\sim$TriangleMeshClosedCurve}}
+\index{````~TriangleMeshClosedCurve@{$\sim$TriangleMeshClosedCurve}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{$\sim$TriangleMeshClosedCurve()}{~TriangleMeshClosedCurve()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::$\sim$\+Triangle\+Mesh\+Closed\+Curve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 1250 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_ac1fe434733d736fba44e580b35dadd10}\label{classoomph_1_1TriangleMeshClosedCurve_ac1fe434733d736fba44e580b35dadd10}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!fix\_internal\_point@{fix\_internal\_point}}
+\index{fix\_internal\_point@{fix\_internal\_point}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{fix\_internal\_point()}{fix\_internal\_point()}}
+{\footnotesize\ttfamily void oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::fix\+\_\+internal\+\_\+point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Fix the internal point (i.\+e. do not allow our automatic machinery to update it) 
+
+Definition at line 1306 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_aa1c861decfcfd24df63f14f8ccfcd877}\label{classoomph_1_1TriangleMeshClosedCurve_aa1c861decfcfd24df63f14f8ccfcd877}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!internal\_point@{internal\_point}}
+\index{internal\_point@{internal\_point}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{internal\_point()}{internal\_point()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::internal\+\_\+point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Coordinates of the internal point. 
+
+
+
+Definition at line 1302 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_a373f3f1227c0824b46b1a3be9e492e35}\label{classoomph_1_1TriangleMeshClosedCurve_a373f3f1227c0824b46b1a3be9e492e35}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!internal\_point@{internal\_point}}
+\index{internal\_point@{internal\_point}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{internal\_point()}{internal\_point()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::internal\+\_\+point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Coordinates of the internal point. 
+
+
+
+Definition at line 1299 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::closed\+\_\+curve\+\_\+to\+\_\+polygon\+\_\+helper(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_a5d48fa39b4cde1ba1bdba129a1587f2f}\label{classoomph_1_1TriangleMeshClosedCurve_a5d48fa39b4cde1ba1bdba129a1587f2f}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!is\_internal\_point\_fixed@{is\_internal\_point\_fixed}}
+\index{is\_internal\_point\_fixed@{is\_internal\_point\_fixed}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{is\_internal\_point\_fixed()}{is\_internal\_point\_fixed()}}
+{\footnotesize\ttfamily bool oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::is\+\_\+internal\+\_\+point\+\_\+fixed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether the internal point is fixed. 
+
+
+
+Definition at line 1313 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::closed\+\_\+curve\+\_\+to\+\_\+polygon\+\_\+helper(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_a6d8c26d0ecfaf5abff2f68fedf158612}\label{classoomph_1_1TriangleMeshClosedCurve_a6d8c26d0ecfaf5abff2f68fedf158612}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!nsegments@{nsegments}}
+\index{nsegments@{nsegments}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{nsegments()}{nsegments()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::nsegments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Total number of segments. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_abb1f60baf8d94f54f409ae51417e2568}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line 1268 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_a439e4085f7e220364bbe9bc8040ec72f}\label{classoomph_1_1TriangleMeshClosedCurve_a439e4085f7e220364bbe9bc8040ec72f}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!nvertices@{nvertices}}
+\index{nvertices@{nvertices}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{nvertices()}{nvertices()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::nvertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertices. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_acf002aab11af44361b39729d067efbe2}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line 1253 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_a246d71ca0cb2dbc9d2c9ad6976f84ba6}\label{classoomph_1_1TriangleMeshClosedCurve_a246d71ca0cb2dbc9d2c9ad6976f84ba6}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!output@{output}}
+\index{output@{output}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily void oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+sample = {\ttfamily 50} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output each sub-\/boundary at n\+\_\+sample (default\+: 50) points. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a7d40afc7e879fde0319b153a141915df}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line 1281 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_a6e05f2fb46166a64f00e5a3a6d7d7a0f}\label{classoomph_1_1TriangleMeshClosedCurve_a6e05f2fb46166a64f00e5a3a6d7d7a0f}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!unfix\_internal\_point@{unfix\_internal\_point}}
+\index{unfix\_internal\_point@{unfix\_internal\_point}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{unfix\_internal\_point()}{unfix\_internal\_point()}}
+{\footnotesize\ttfamily void oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::unfix\+\_\+internal\+\_\+point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Unfix the internal point (i.\+e. allow our automatic machinery to update it) 
+
+Definition at line 1310 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_a4f54902fa364f654bb9d88c442b2caba}\label{classoomph_1_1TriangleMeshClosedCurve_a4f54902fa364f654bb9d88c442b2caba}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!Internal\_point\_pt@{Internal\_point\_pt}}
+\index{Internal\_point\_pt@{Internal\_point\_pt}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{Internal\_point\_pt}{Internal\_point\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::\+Internal\+\_\+point\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vertex coordinates. 
+
+
+
+Definition at line 1318 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh\+Polygon\+::\+Triangle\+Mesh\+Polygon().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshClosedCurve_a66151b7e98cf4871932a6ede46b02e55}\label{classoomph_1_1TriangleMeshClosedCurve_a66151b7e98cf4871932a6ede46b02e55}} 
+\index{oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}!Is\_internal\_point\_fixed@{Is\_internal\_point\_fixed}}
+\index{Is\_internal\_point\_fixed@{Is\_internal\_point\_fixed}!oomph::TriangleMeshClosedCurve@{oomph::TriangleMeshClosedCurve}}
+\doxysubsubsection{\texorpdfstring{Is\_internal\_point\_fixed}{Is\_internal\_point\_fixed}}
+{\footnotesize\ttfamily bool oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::\+Is\+\_\+internal\+\_\+point\+\_\+fixed\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Indicate whether the internal point should be updated automatically. 
+
+
+
+Definition at line 1321 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc}}\end{DoxyCompactItemize}

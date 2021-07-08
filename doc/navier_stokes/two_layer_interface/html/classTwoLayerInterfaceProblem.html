@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: TwoLayerInterfaceProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classTwoLayerInterfaceProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">TwoLayerInterfaceProblem&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Problem class to simulate viscous drop propagating along 2D channel.  
+ <a href="classTwoLayerInterfaceProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for TwoLayerInterfaceProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classTwoLayerInterfaceProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:abf42cfea7dd731795995051c1de78a32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#abf42cfea7dd731795995051c1de78a32">TwoLayerInterfaceProblem</a> ()</td></tr>
+<tr class="memdesc:abf42cfea7dd731795995051c1de78a32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classTwoLayerInterfaceProblem.html#abf42cfea7dd731795995051c1de78a32">More...</a><br /></td></tr>
+<tr class="separator:abf42cfea7dd731795995051c1de78a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5034f5c3d7ec8fd556b1af7f0c2351ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a5034f5c3d7ec8fd556b1af7f0c2351ef">~TwoLayerInterfaceProblem</a> ()</td></tr>
+<tr class="memdesc:a5034f5c3d7ec8fd556b1af7f0c2351ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classTwoLayerInterfaceProblem.html#a5034f5c3d7ec8fd556b1af7f0c2351ef">More...</a><br /></td></tr>
+<tr class="separator:a5034f5c3d7ec8fd556b1af7f0c2351ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89431a4ad9400976c295c4cfd04b3727"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a89431a4ad9400976c295c4cfd04b3727">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:a89431a4ad9400976c295c4cfd04b3727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the mesh of free surface elements.  <a href="classTwoLayerInterfaceProblem.html#a89431a4ad9400976c295c4cfd04b3727">More...</a><br /></td></tr>
+<tr class="separator:a89431a4ad9400976c295c4cfd04b3727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a496c283472765b000a0348137c1b560b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a496c283472765b000a0348137c1b560b">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:a496c283472765b000a0348137c1b560b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Rebuild the mesh of free surface elements.  <a href="classTwoLayerInterfaceProblem.html#a496c283472765b000a0348137c1b560b">More...</a><br /></td></tr>
+<tr class="separator:a496c283472765b000a0348137c1b560b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3798e4cbf4cfebf7652aea3fd2fbdff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#aa3798e4cbf4cfebf7652aea3fd2fbdff">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:aa3798e4cbf4cfebf7652aea3fd2fbdff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the after solve (empty)  <a href="classTwoLayerInterfaceProblem.html#aa3798e4cbf4cfebf7652aea3fd2fbdff">More...</a><br /></td></tr>
+<tr class="separator:aa3798e4cbf4cfebf7652aea3fd2fbdff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa34b7c3a13847571a9fedc2465daab30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#aa34b7c3a13847571a9fedc2465daab30">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:aa34b7c3a13847571a9fedc2465daab30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve.  <a href="classTwoLayerInterfaceProblem.html#aa34b7c3a13847571a9fedc2465daab30">More...</a><br /></td></tr>
+<tr class="separator:aa34b7c3a13847571a9fedc2465daab30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96392e407b2c1f5fc295fe423404c943"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a96392e407b2c1f5fc295fe423404c943">complete_problem_setup</a> ()</td></tr>
+<tr class="memdesc:a96392e407b2c1f5fc295fe423404c943"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set boundary conditions and complete the build of all elements.  <a href="classTwoLayerInterfaceProblem.html#a96392e407b2c1f5fc295fe423404c943">More...</a><br /></td></tr>
+<tr class="separator:a96392e407b2c1f5fc295fe423404c943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a234f5fe08dbb1286868cf6b1eff7c6a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a234f5fe08dbb1286868cf6b1eff7c6a3">doc_solution</a> (const std::string &amp;comment=&quot;&quot;)</td></tr>
+<tr class="memdesc:a234f5fe08dbb1286868cf6b1eff7c6a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <a href="classTwoLayerInterfaceProblem.html#a234f5fe08dbb1286868cf6b1eff7c6a3">More...</a><br /></td></tr>
+<tr class="separator:a234f5fe08dbb1286868cf6b1eff7c6a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87ef8df1cf7f548b19f14163a085370f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a87ef8df1cf7f548b19f14163a085370f">compute_error_estimate</a> (double &amp;max_err, double &amp;min_err)</td></tr>
+<tr class="memdesc:a87ef8df1cf7f548b19f14163a085370f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the error estimates and assign to elements for plotting.  <a href="classTwoLayerInterfaceProblem.html#a87ef8df1cf7f548b19f14163a085370f">More...</a><br /></td></tr>
+<tr class="separator:a87ef8df1cf7f548b19f14163a085370f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2852a90a68b7cde5c6d04f79d029047"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#ac2852a90a68b7cde5c6d04f79d029047">set_initial_condition</a> ()</td></tr>
+<tr class="memdesc:ac2852a90a68b7cde5c6d04f79d029047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the initial conditions.  <a href="classTwoLayerInterfaceProblem.html#ac2852a90a68b7cde5c6d04f79d029047">More...</a><br /></td></tr>
+<tr class="separator:ac2852a90a68b7cde5c6d04f79d029047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adac700fd7368550b91620a7f79091857"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#adac700fd7368550b91620a7f79091857">deform_interface</a> (const double &amp;<a class="el" href="two__layer__interface_8txt.html#a12ad175f862d3fe119900bd546c618c2">epsilon</a>, const unsigned &amp;n_periods)</td></tr>
+<tr class="memdesc:adac700fd7368550b91620a7f79091857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to deform the interface.  <a href="classTwoLayerInterfaceProblem.html#adac700fd7368550b91620a7f79091857">More...</a><br /></td></tr>
+<tr class="separator:adac700fd7368550b91620a7f79091857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81589b120683037dc07ab9251bf81e85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a81589b120683037dc07ab9251bf81e85">fix_pressure</a> (const unsigned &amp;e, const unsigned &amp;pdof, const double &amp;pvalue)</td></tr>
+<tr class="memdesc:a81589b120683037dc07ab9251bf81e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fix pressure in element e at pressure dof pdof and set to pvalue.  <a href="classTwoLayerInterfaceProblem.html#a81589b120683037dc07ab9251bf81e85">More...</a><br /></td></tr>
+<tr class="separator:a81589b120683037dc07ab9251bf81e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:ad9d1e892e0530f82166a932c24ec5843"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
+&#160;&#160;<a class="el" href="classTwoLayerInterfaceProblem.html#ad9d1e892e0530f82166a932c24ec5843a582586eb71c1946acb7c015f522ca25a">Inflow_boundary_id</a> =0, 
+<a class="el" href="classTwoLayerInterfaceProblem.html#ad9d1e892e0530f82166a932c24ec5843ab1b61715cc4516f188fd88dc95877254">Upper_wall_boundary_id</a> =1, 
+<a class="el" href="classTwoLayerInterfaceProblem.html#ad9d1e892e0530f82166a932c24ec5843a23dd316467ea3d5ee5f372bb76fbe0ed">Outflow_boundary_id</a> =2, 
+<a class="el" href="classTwoLayerInterfaceProblem.html#ad9d1e892e0530f82166a932c24ec5843a9df123da5b21353b2a8400c70f3d4328">Bottom_wall_boundary_id</a> =3, 
+<br />
+&#160;&#160;<a class="el" href="classTwoLayerInterfaceProblem.html#ad9d1e892e0530f82166a932c24ec5843a0252430699fd738de92b51854db0e932">Interface_boundary_id</a> =4
+<br />
+ }</td></tr>
+<tr class="memdesc:ad9d1e892e0530f82166a932c24ec5843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of channel boundaries.  <a href="classTwoLayerInterfaceProblem.html#ad9d1e892e0530f82166a932c24ec5843">More...</a><br /></td></tr>
+<tr class="separator:ad9d1e892e0530f82166a932c24ec5843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a94c52097a6333dd830449ce83b512a4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a94c52097a6333dd830449ce83b512a4f">create_free_surface_elements</a> ()</td></tr>
+<tr class="memdesc:a94c52097a6333dd830449ce83b512a4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create free surface elements.  <a href="classTwoLayerInterfaceProblem.html#a94c52097a6333dd830449ce83b512a4f">More...</a><br /></td></tr>
+<tr class="separator:a94c52097a6333dd830449ce83b512a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a474a9ea9fda21eb1cddf79809b2de6d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a474a9ea9fda21eb1cddf79809b2de6d4">delete_free_surface_elements</a> ()</td></tr>
+<tr class="memdesc:a474a9ea9fda21eb1cddf79809b2de6d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete free surface elements.  <a href="classTwoLayerInterfaceProblem.html#a474a9ea9fda21eb1cddf79809b2de6d4">More...</a><br /></td></tr>
+<tr class="separator:a474a9ea9fda21eb1cddf79809b2de6d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a406dd9cb8b718773530a3d1170bece96"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a406dd9cb8b718773530a3d1170bece96">Free_surface_mesh_pt</a></td></tr>
+<tr class="memdesc:a406dd9cb8b718773530a3d1170bece96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointers to mesh of free surface elements.  <a href="classTwoLayerInterfaceProblem.html#a406dd9cb8b718773530a3d1170bece96">More...</a><br /></td></tr>
+<tr class="separator:a406dd9cb8b718773530a3d1170bece96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accfab13c26afb181d320bd5dc25ed878"><td class="memItemLeft" align="right" valign="top">RefineableSolidTriangleMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#accfab13c26afb181d320bd5dc25ed878">Fluid_mesh_pt</a></td></tr>
+<tr class="memdesc:accfab13c26afb181d320bd5dc25ed878"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Fluid_mesh.  <a href="classTwoLayerInterfaceProblem.html#accfab13c26afb181d320bd5dc25ed878">More...</a><br /></td></tr>
+<tr class="separator:accfab13c26afb181d320bd5dc25ed878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3c380cea3010fcf83b41d854e4595f9"><td class="memItemLeft" align="right" valign="top">Vector&lt; TriangleMeshPolygon * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#ac3c380cea3010fcf83b41d854e4595f9">Drop_polygon_pt</a></td></tr>
+<tr class="memdesc:ac3c380cea3010fcf83b41d854e4595f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector storing pointer to the drop polygons.  <a href="classTwoLayerInterfaceProblem.html#ac3c380cea3010fcf83b41d854e4595f9">More...</a><br /></td></tr>
+<tr class="separator:ac3c380cea3010fcf83b41d854e4595f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade0bdb2267a9fdbab1bea08fc2d87104"><td class="memItemLeft" align="right" valign="top">TriangleMeshPolygon *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#ade0bdb2267a9fdbab1bea08fc2d87104">Outer_boundary_polyline_pt</a></td></tr>
+<tr class="memdesc:ade0bdb2267a9fdbab1bea08fc2d87104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triangle mesh polygon for outer boundary.  <a href="classTwoLayerInterfaceProblem.html#ade0bdb2267a9fdbab1bea08fc2d87104">More...</a><br /></td></tr>
+<tr class="separator:ade0bdb2267a9fdbab1bea08fc2d87104"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9d05acfe4e978cdfd727afb4f27969f"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#ae9d05acfe4e978cdfd727afb4f27969f">Drop_pressure_data_pt</a></td></tr>
+<tr class="memdesc:ae9d05acfe4e978cdfd727afb4f27969f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a global drop pressure datum.  <a href="classTwoLayerInterfaceProblem.html#ae9d05acfe4e978cdfd727afb4f27969f">More...</a><br /></td></tr>
+<tr class="separator:ae9d05acfe4e978cdfd727afb4f27969f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa49f2cb784a03dfb93d33d678cfc1f9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#afa49f2cb784a03dfb93d33d678cfc1f9">Initial_value_for_drop_pressure</a></td></tr>
+<tr class="memdesc:afa49f2cb784a03dfb93d33d678cfc1f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backed up drop pressure between adaptations.  <a href="classTwoLayerInterfaceProblem.html#afa49f2cb784a03dfb93d33d678cfc1f9">More...</a><br /></td></tr>
+<tr class="separator:afa49f2cb784a03dfb93d33d678cfc1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12d0b30397350f3a6dcf56d67216d6ff"><td class="memItemLeft" align="right" valign="top">ELEMENT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#a12d0b30397350f3a6dcf56d67216d6ff">Hijacked_element_pt</a></td></tr>
+<tr class="memdesc:a12d0b30397350f3a6dcf56d67216d6ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to hijacked element.  <a href="classTwoLayerInterfaceProblem.html#a12d0b30397350f3a6dcf56d67216d6ff">More...</a><br /></td></tr>
+<tr class="separator:a12d0b30397350f3a6dcf56d67216d6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add2bdae31e9372250c62608f1a30fdc4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoLayerInterfaceProblem.html#add2bdae31e9372250c62608f1a30fdc4">Use_volume_constraint</a></td></tr>
+<tr class="memdesc:add2bdae31e9372250c62608f1a30fdc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool to indicate if volume constraint is applied (only for steady run)  <a href="classTwoLayerInterfaceProblem.html#add2bdae31e9372250c62608f1a30fdc4">More...</a><br /></td></tr>
+<tr class="separator:add2bdae31e9372250c62608f1a30fdc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class TwoLayerInterfaceProblem&lt; ELEMENT &gt;</h3>
+
+<p>Problem class to simulate viscous drop propagating along 2D channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00351">351</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="ad9d1e892e0530f82166a932c24ec5843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9d1e892e0530f82166a932c24ec5843">&#9670;&nbsp;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enumeration of channel boundaries. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad9d1e892e0530f82166a932c24ec5843a582586eb71c1946acb7c015f522ca25a"></a>Inflow_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad9d1e892e0530f82166a932c24ec5843ab1b61715cc4516f188fd88dc95877254"></a>Upper_wall_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad9d1e892e0530f82166a932c24ec5843a23dd316467ea3d5ee5f372bb76fbe0ed"></a>Outflow_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad9d1e892e0530f82166a932c24ec5843a9df123da5b21353b2a8400c70f3d4328"></a>Bottom_wall_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad9d1e892e0530f82166a932c24ec5843a0252430699fd738de92b51854db0e932"></a>Interface_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00558">558</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abf42cfea7dd731795995051c1de78a32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf42cfea7dd731795995051c1de78a32">&#9670;&nbsp;</a></span>TwoLayerInterfaceProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00575">575</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00291">Problem_Parameter::Doc_info</a>, <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00326">Problem_Parameter::Height</a>, <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00329">Problem_Parameter::Interface_Height</a>, and <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00323">Problem_Parameter::Length</a>.</p>
+
+</div>
+</div>
+<a id="a5034f5c3d7ec8fd556b1af7f0c2351ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5034f5c3d7ec8fd556b1af7f0c2351ef">&#9670;&nbsp;</a></span>~TwoLayerInterfaceProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00360">360</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00332">Problem_Parameter::Constitutive_law_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a496c283472765b000a0348137c1b560b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a496c283472765b000a0348137c1b560b">&#9670;&nbsp;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::actions_after_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Rebuild the mesh of free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00405">405</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa3798e4cbf4cfebf7652aea3fd2fbdff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3798e4cbf4cfebf7652aea3fd2fbdff">&#9670;&nbsp;</a></span>actions_after_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00422">422</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="a89431a4ad9400976c295c4cfd04b3727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89431a4ad9400976c295c4cfd04b3727">&#9670;&nbsp;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::actions_before_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the mesh of free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00393">393</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa34b7c3a13847571a9fedc2465daab30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa34b7c3a13847571a9fedc2465daab30">&#9670;&nbsp;</a></span>actions_before_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00425">425</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="a96392e407b2c1f5fc295fe423404c943"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96392e407b2c1f5fc295fe423404c943">&#9670;&nbsp;</a></span>complete_problem_setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::complete_problem_setup</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set boundary conditions and complete the build of all elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00825">825</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00332">Problem_Parameter::Constitutive_law_pt</a>, <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00311">Problem_Parameter::Density_Ratio</a>, <a class="el" href="namespaceProblem__Parameter.html#a7e5c502c4f97a31cc7d757c43d4b17e7">Problem_Parameter::G()</a>, <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00294">Problem_Parameter::Re</a>, <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00303">Problem_Parameter::ReInvFr</a>, <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00300">Problem_Parameter::ReSt</a>, and <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00307">Problem_Parameter::Viscosity_Ratio</a>.</p>
+
+</div>
+</div>
+<a id="a87ef8df1cf7f548b19f14163a085370f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87ef8df1cf7f548b19f14163a085370f">&#9670;&nbsp;</a></span>compute_error_estimate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::compute_error_estimate </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>max_err</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>min_err</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the error estimates and assign to elements for plotting. </p>
+<p>Compute error estimates and assign to elements for plotting. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l01033">1033</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="a94c52097a6333dd830449ce83b512a4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94c52097a6333dd830449ce83b512a4f">&#9670;&nbsp;</a></span>create_free_surface_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::create_free_surface_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create free surface elements. </p>
+<p>Create elements that impose the kinematic and dynamic bcs for the pseudo-solid fluid mesh </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00775">775</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00314">Problem_Parameter::Ca</a>, and <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00297">Problem_Parameter::St</a>.</p>
+
+</div>
+</div>
+<a id="adac700fd7368550b91620a7f79091857"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adac700fd7368550b91620a7f79091857">&#9670;&nbsp;</a></span>deform_interface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::deform_interface </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>epsilon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_periods</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to deform the interface. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00470">470</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__interface_8txt_source.html#l00238">epsilon</a>, and <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00323">Problem_Parameter::Length</a>.</p>
+
+</div>
+</div>
+<a id="a474a9ea9fda21eb1cddf79809b2de6d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a474a9ea9fda21eb1cddf79809b2de6d4">&#9670;&nbsp;</a></span>delete_free_surface_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::delete_free_surface_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00512">512</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="a234f5fe08dbb1286868cf6b1eff7c6a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a234f5fe08dbb1286868cf6b1eff7c6a3">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>comment</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00969">969</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00291">Problem_Parameter::Doc_info</a>, and <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00335">Problem_Parameter::Trace_file</a>.</p>
+
+</div>
+</div>
+<a id="a81589b120683037dc07ab9251bf81e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81589b120683037dc07ab9251bf81e85">&#9670;&nbsp;</a></span>fix_pressure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::fix_pressure </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>pdof</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>pvalue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fix pressure in element e at pressure dof pdof and set to pvalue. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00495">495</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac2852a90a68b7cde5c6d04f79d029047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2852a90a68b7cde5c6d04f79d029047">&#9670;&nbsp;</a></span>set_initial_condition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::set_initial_condition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the initial conditions. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00444">444</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac3c380cea3010fcf83b41d854e4595f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3c380cea3010fcf83b41d854e4595f9">&#9670;&nbsp;</a></span>Drop_polygon_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;TriangleMeshPolygon*&gt; <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::Drop_polygon_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector storing pointer to the drop polygons. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00540">540</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae9d05acfe4e978cdfd727afb4f27969f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9d05acfe4e978cdfd727afb4f27969f">&#9670;&nbsp;</a></span>Drop_pressure_data_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::Drop_pressure_data_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to a global drop pressure datum. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00546">546</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="accfab13c26afb181d320bd5dc25ed878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accfab13c26afb181d320bd5dc25ed878">&#9670;&nbsp;</a></span>Fluid_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableSolidTriangleMesh&lt;ELEMENT&gt;* <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::Fluid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to Fluid_mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00537">537</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="a406dd9cb8b718773530a3d1170bece96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a406dd9cb8b718773530a3d1170bece96">&#9670;&nbsp;</a></span>Free_surface_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::Free_surface_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointers to mesh of free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00533">533</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="a12d0b30397350f3a6dcf56d67216d6ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12d0b30397350f3a6dcf56d67216d6ff">&#9670;&nbsp;</a></span>Hijacked_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ELEMENT* <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::Hijacked_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to hijacked element. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00552">552</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="afa49f2cb784a03dfb93d33d678cfc1f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa49f2cb784a03dfb93d33d678cfc1f9">&#9670;&nbsp;</a></span>Initial_value_for_drop_pressure</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::Initial_value_for_drop_pressure</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Backed up drop pressure between adaptations. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00549">549</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="ade0bdb2267a9fdbab1bea08fc2d87104"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade0bdb2267a9fdbab1bea08fc2d87104">&#9670;&nbsp;</a></span>Outer_boundary_polyline_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TriangleMeshPolygon* <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::Outer_boundary_polyline_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Triangle mesh polygon for outer boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00543">543</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<a id="add2bdae31e9372250c62608f1a30fdc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add2bdae31e9372250c62608f1a30fdc4">&#9670;&nbsp;</a></span>Use_volume_constraint</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classTwoLayerInterfaceProblem.html">TwoLayerInterfaceProblem</a>&lt; ELEMENT &gt;::Use_volume_constraint</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bool to indicate if volume constraint is applied (only for steady run) </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__two__layer__interface_8cc_source.html#l00555">555</a> of file <a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="refineable__two__layer__interface_8cc_source.html">refineable_two_layer_interface.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:09:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

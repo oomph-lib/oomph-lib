@@ -1,0 +1,906 @@
+\hypertarget{classoomph_1_1AlgebraicNode}{}\doxysection{oomph\+::Algebraic\+Node Class Reference}
+\label{classoomph_1_1AlgebraicNode}\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+
+
+{\ttfamily \#include $<$algebraic\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Algebraic\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1AlgebraicNode}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a7e421172a1063fc49f37559f23837763}{Algebraic\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a88eb17187c750f1f1a04d0dd554dd9b5}{Algebraic\+Node}} (const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+nvalue)
+\begin{DoxyCompactList}\small\item\em Constructor for steady algebraic node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates and with initial\+\_\+nvalue dofs. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicNode_ab97ffb4a9663ce90e4d7788315ba31a1}{Algebraic\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}{time\+\_\+stepper\+\_\+pt}}, const unsigned \&n\+\_\+dim, const unsigned \&n\+\_\+position\+\_\+type, const unsigned \&initial\+\_\+nvalue)
+\begin{DoxyCompactList}\small\item\em Constructor for bog-\/standard algebraic node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates, with initial\+\_\+nvalue dofs and with time dependence. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1AlgebraicNode_af1fef20e4dd950f70003c3db5d289044}{$\sim$\+Algebraic\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a2dc795a77c106b7dd6bd3ab2c8034956}{Algebraic\+Node}} (const \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a754dc8fcac3382a07f60262c9792c84c}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node=false)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a8c9e49f378f2dc9e93e62e281bf58d27}{nnode\+\_\+update\+\_\+fcts}} ()
+\begin{DoxyCompactList}\small\item\em Number of node update fcts. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a8887f3a7c445b098835a7703c3a19bd2}{node\+\_\+update\+\_\+fct\+\_\+id}} ()
+\begin{DoxyCompactList}\small\item\em Default (usually first if there are multiple ones) node update fct id. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a6b910e50ee47113aa0256e46043b0f27}{node\+\_\+update\+\_\+fct\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&id)
+\begin{DoxyCompactList}\small\item\em Return vector of node update fct ids (vector is resized to contain the correct number of entries). Somewhat costly to call as map needs to be copied into vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a929a96691397e1990fdf785dfcea5c07}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Default (usually first) mesh that implements update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ae07189bb28dcba7d31e736de391fe54f}{mesh\+\_\+pt}} (const int \&id)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} that implements the id-\/th node update function. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a0e1fa66d3543da39a5e728d8af5c1734}{ngeom\+\_\+object}} (const int \&id)
+\begin{DoxyCompactList}\small\item\em Number of geometric objects involved in id-\/th update function. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a10f49849e0942e68c6791810ffc6fb31}{ngeom\+\_\+object}} () const
+\begin{DoxyCompactList}\small\item\em Number of geometric objects involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \& \mbox{\hyperlink{classoomph_1_1AlgebraicNode_aa82f9b47f4b7fb1cc49178c48c2873d3}{vector\+\_\+geom\+\_\+object\+\_\+pt}} (const int \&id)
+\begin{DoxyCompactList}\small\item\em Return vector of geometric objects involved in id-\/th update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \& \mbox{\hyperlink{classoomph_1_1AlgebraicNode_aa242d4039f28e65c407bf90033489a75}{vector\+\_\+geom\+\_\+object\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return vector of geometric objects involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_aac2c907cb2258892583d38e8c3e52326}{all\+\_\+geom\+\_\+object\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return the vector of all geometric objects. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a6ea1dc01f3b657b5c63d6de2b67ea990}{geom\+\_\+object\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return pointer to i-\/th geometric object involved in default (usually first) update function. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a18b508012bc638d85539568219865383}{nref\+\_\+value}} (const int \&id)
+\begin{DoxyCompactList}\small\item\em Number of reference values involved in id-\/th update function. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a1d5805d44950ad5783720ba7bb5a372a}{nref\+\_\+value}} ()
+\begin{DoxyCompactList}\small\item\em Number of reference values involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ad2236d78dd07f59345ee7a8275d3fefb}{vector\+\_\+ref\+\_\+value}} ()
+\begin{DoxyCompactList}\small\item\em Return vector of reference values involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a95a41fd3d3aa47a6928715bc7f1059a0}{vector\+\_\+ref\+\_\+value}} (const int \&id)
+\begin{DoxyCompactList}\small\item\em Return vector of reference values involved in id-\/th update function. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463}{ref\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return i-\/th reference value involved in default (usually first) update function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ac6bd268c80889507d92431a4638eb85c}{add\+\_\+node\+\_\+update\+\_\+info}} (const int \&id, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a929a96691397e1990fdf785dfcea5c07}{mesh\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a6ea1dc01f3b657b5c63d6de2b67ea990}{geom\+\_\+object\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463}{ref\+\_\+value}}, const bool \&called\+\_\+from\+\_\+constructor=false)
+\begin{DoxyCompactList}\small\item\em Add algebraic update information for node\+: What\textquotesingle{}s the ID of the mesh update function (typically used within the mesh) Which \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} implements the update operation? Also, pass the vector of geometric objects and the vectors of reference values that are needed for the update operation. Negative values for ID are only allowed when called from node constructor, as indicated by the final argument which defaults to false. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ae6b0a1cf4dc041aa553f834b1ecd0a24}{add\+\_\+node\+\_\+update\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a929a96691397e1990fdf785dfcea5c07}{mesh\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a6ea1dc01f3b657b5c63d6de2b67ea990}{geom\+\_\+object\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463}{ref\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Add algebraic update information for node\+: Which \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} implements the update operation? Also, pass the vector of geometric objects and the vectors of reference values that are needed for the update operation. We\textquotesingle{}re assigning a default node update fct id of 0. ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a9de65e71efa3050187d41f05602accfe}{kill\+\_\+node\+\_\+update\+\_\+info}} (const int \&id=0)
+\begin{DoxyCompactList}\small\item\em Erase algebraic node update information for id-\/th node update function. Id defaults to 0. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a68b0fc5d9b38bb087f889424382a3ecd}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Perform self test\+: If the node has multiple node update functions, check that they all give the same result. Return 1/0 for failure/success. (Failure if max. difference between the nodal positions for different update functions exceeds \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}{Algebraic\+Node\+::\+Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a5f9d80a2826974b63376a4c58e0812fc}{set\+\_\+default\+\_\+node\+\_\+update}} (const int \&id)
+\begin{DoxyCompactList}\small\item\em Make id-\/th node update function the default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_af60d3301f8ffd16bcd3ee32809beebd8}{Mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh that performs the specified node update operation (Map because this node may only use the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) \end{DoxyCompactList}\item 
+std\+::map$<$ int, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a1e378862db7979494c3d224df3f98b2b}{Geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of geometric objects that are involved in the specified node update operation. (Map because this node may only use the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) \end{DoxyCompactList}\item 
+std\+::map$<$ int, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a64362fcb07761e9d523c5c6de01612e0}{Ref\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of reference values that are required for the specified node update operation. (Map because this node may only use the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) \end{DoxyCompactList}\item 
+std\+::map$<$ int, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$ $>$\+::iterator \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ac8cb7e56e80f1c0f3e200562d2b1d39e}{Default\+\_\+it\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Default iterator for mesh\+: This mesh performs the default update. \end{DoxyCompactList}\item 
+std\+::map$<$ int, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ $>$\+::iterator \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a37df439c4a73665cf04548f245419150}{Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Default iterator for vector of geom objects. These Geom\+Objects are involved in the default update. \end{DoxyCompactList}\item 
+std\+::map$<$ int, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$\+::iterator \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a49673336a201aca02390f13ceb72dd19}{Default\+\_\+it\+\_\+ref\+\_\+value}}
+\item 
+int \mbox{\hyperlink{classoomph_1_1AlgebraicNode_adba92e804261f449a9142920661c339a}{Default\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Default node update function ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}{Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts}} =1.\+0e-\/10
+\item 
+static int \mbox{\hyperlink{classoomph_1_1AlgebraicNode_af6d3b50db54114b5cf22f86c0ceed2f8}{Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}} =-\/100
+\begin{DoxyCompactList}\small\item\em Default (negative!) remesh fct id for nodes for which no remesh fct is defined. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a21f78f61150e308456db352907aa26c6}{Dummy\+\_\+mesh\+\_\+pt}} =\&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c}{Algebraic\+Node\+::\+Dummy\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em Default dummy mesh to point to for nodes for which no remesh fct is defined. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classoomph_1_1DummyAlgebraicMesh}{Dummy\+Algebraic\+Mesh}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c}{Dummy\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em Static Dummy mesh to which the pointer is addressed. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a74bfe556a50b852ee06245e6a374d5fc}{Dummy\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Default dummy vector of geom objects to point to for nodes for which no remesh fct is defined. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_af73f0a803e1bdf2a7a1c7f1f4384df61}{Dummy\+\_\+ref\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em Default dummy vector of reference values to point to for nodes for which no remesh fct is defined. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Algebraic nodes are nodes with an algebraic positional update function. 
+
+Definition at line 57 of file algebraic\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a7e421172a1063fc49f37559f23837763}\label{classoomph_1_1AlgebraicNode_a7e421172a1063fc49f37559f23837763}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!AlgebraicNode@{AlgebraicNode}}
+\index{AlgebraicNode@{AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{AlgebraicNode()}{AlgebraicNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Algebraic\+Node\+::\+Algebraic\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default Constructor. 
+
+
+
+Definition at line 64 of file algebraic\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a88eb17187c750f1f1a04d0dd554dd9b5}\label{classoomph_1_1AlgebraicNode_a88eb17187c750f1f1a04d0dd554dd9b5}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!AlgebraicNode@{AlgebraicNode}}
+\index{AlgebraicNode@{AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{AlgebraicNode()}{AlgebraicNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Algebraic\+Node\+::\+Algebraic\+Node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+dim,  }\item[{const unsigned \&}]{n\+\_\+position\+\_\+type,  }\item[{const unsigned \&}]{initial\+\_\+nvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for steady algebraic node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates and with initial\+\_\+nvalue dofs. 
+
+
+
+Definition at line 69 of file algebraic\+\_\+elements.\+h.
+
+
+
+References add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Leak\+Check\+Names\+::\+Algebraic\+Node\+\_\+build, Dummy\+\_\+geom\+\_\+object\+\_\+pt, Dummy\+\_\+mesh\+\_\+pt, Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id, and Dummy\+\_\+ref\+\_\+value.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_ab97ffb4a9663ce90e4d7788315ba31a1}\label{classoomph_1_1AlgebraicNode_ab97ffb4a9663ce90e4d7788315ba31a1}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!AlgebraicNode@{AlgebraicNode}}
+\index{AlgebraicNode@{AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{AlgebraicNode()}{AlgebraicNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Algebraic\+Node\+::\+Algebraic\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+dim,  }\item[{const unsigned \&}]{n\+\_\+position\+\_\+type,  }\item[{const unsigned \&}]{initial\+\_\+nvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for bog-\/standard algebraic node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates, with initial\+\_\+nvalue dofs and with time dependence. 
+
+
+
+Definition at line 91 of file algebraic\+\_\+elements.\+h.
+
+
+
+References add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Leak\+Check\+Names\+::\+Algebraic\+Node\+\_\+build, Dummy\+\_\+geom\+\_\+object\+\_\+pt, Dummy\+\_\+mesh\+\_\+pt, Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id, and Dummy\+\_\+ref\+\_\+value.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_af1fef20e4dd950f70003c3db5d289044}\label{classoomph_1_1AlgebraicNode_af1fef20e4dd950f70003c3db5d289044}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!````~AlgebraicNode@{$\sim$AlgebraicNode}}
+\index{````~AlgebraicNode@{$\sim$AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{$\sim$AlgebraicNode()}{~AlgebraicNode()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Algebraic\+Node\+::$\sim$\+Algebraic\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line 111 of file algebraic\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Leak\+Check\+Names\+::\+Algebraic\+Node\+\_\+build.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a2dc795a77c106b7dd6bd3ab2c8034956}\label{classoomph_1_1AlgebraicNode_a2dc795a77c106b7dd6bd3ab2c8034956}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!AlgebraicNode@{AlgebraicNode}}
+\index{AlgebraicNode@{AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{AlgebraicNode()}{AlgebraicNode()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Algebraic\+Node\+::\+Algebraic\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 119 of file algebraic\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_ae6b0a1cf4dc041aa553f834b1ecd0a24}\label{classoomph_1_1AlgebraicNode_ae6b0a1cf4dc041aa553f834b1ecd0a24}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!add\_node\_update\_info@{add\_node\_update\_info}}
+\index{add\_node\_update\_info@{add\_node\_update\_info}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{add\_node\_update\_info()}{add\_node\_update\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&}]{geom\+\_\+object\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{ref\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add algebraic update information for node\+: Which \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} implements the update operation? Also, pass the vector of geometric objects and the vectors of reference values that are needed for the update operation. We\textquotesingle{}re assigning a default node update fct id of 0. ~\newline
+ 
+
+
+
+Definition at line 338 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+mesh\+\_\+pt, Dummy\+\_\+mesh\+\_\+pt, Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id, geom\+\_\+object\+\_\+pt(), Geom\+\_\+object\+\_\+pt, kill\+\_\+node\+\_\+update\+\_\+info(), mesh\+\_\+pt(), Mesh\+\_\+pt, ref\+\_\+value(), Ref\+\_\+value, and set\+\_\+default\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_ac6bd268c80889507d92431a4638eb85c}\label{classoomph_1_1AlgebraicNode_ac6bd268c80889507d92431a4638eb85c}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!add\_node\_update\_info@{add\_node\_update\_info}}
+\index{add\_node\_update\_info@{add\_node\_update\_info}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{add\_node\_update\_info()}{add\_node\_update\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info (\begin{DoxyParamCaption}\item[{const int \&}]{id,  }\item[{\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&}]{geom\+\_\+object\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{ref\+\_\+value,  }\item[{const bool \&}]{called\+\_\+from\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add algebraic update information for node\+: What\textquotesingle{}s the ID of the mesh update function (typically used within the mesh) Which \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} implements the update operation? Also, pass the vector of geometric objects and the vectors of reference values that are needed for the update operation. Negative values for ID are only allowed when called from node constructor, as indicated by the final argument which defaults to false. 
+
+
+
+Definition at line 285 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+mesh\+\_\+pt, Dummy\+\_\+mesh\+\_\+pt, Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id, geom\+\_\+object\+\_\+pt(), Geom\+\_\+object\+\_\+pt, kill\+\_\+node\+\_\+update\+\_\+info(), mesh\+\_\+pt(), Mesh\+\_\+pt, ref\+\_\+value(), Ref\+\_\+value, and set\+\_\+default\+\_\+node\+\_\+update().
+
+
+
+Referenced by Algebraic\+Node(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_aac2c907cb2258892583d38e8c3e52326}\label{classoomph_1_1AlgebraicNode_aac2c907cb2258892583d38e8c3e52326}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!all\_geom\_object\_pt@{all\_geom\_object\_pt}}
+\index{all\_geom\_object\_pt@{all\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{all\_geom\_object\_pt()}{all\_geom\_object\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$\ast$ oomph\+::\+Algebraic\+Node\+::all\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the vector of all geometric objects. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a2e05b79b6b3249e3ebd9096a550c93b6}{oomph\+::\+Node}}.
+
+
+
+Definition at line 226 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt, and ngeom\+\_\+object().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a6ea1dc01f3b657b5c63d6de2b67ea990}\label{classoomph_1_1AlgebraicNode_a6ea1dc01f3b657b5c63d6de2b67ea990}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!geom\_object\_pt@{geom\_object\_pt}}
+\index{geom\_object\_pt@{geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{geom\_object\_pt()}{geom\_object\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to i-\/th geometric object involved in default (usually first) update function. 
+
+
+
+Definition at line 234 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt, and i.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+body(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+fin(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a9de65e71efa3050187d41f05602accfe}\label{classoomph_1_1AlgebraicNode_a9de65e71efa3050187d41f05602accfe}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!kill\_node\_update\_info@{kill\_node\_update\_info}}
+\index{kill\_node\_update\_info@{kill\_node\_update\_info}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{kill\_node\_update\_info()}{kill\_node\_update\_info()}}
+{\footnotesize\ttfamily void oomph\+::\+Algebraic\+Node\+::kill\+\_\+node\+\_\+update\+\_\+info (\begin{DoxyParamCaption}\item[{const int \&}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Erase algebraic node update information for id-\/th node update function. Id defaults to 0. 
+
+
+
+Definition at line 373 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Geom\+\_\+object\+\_\+pt, Mesh\+\_\+pt, and Ref\+\_\+value.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a929a96691397e1990fdf785dfcea5c07}\label{classoomph_1_1AlgebraicNode_a929a96691397e1990fdf785dfcea5c07}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}}$\ast$ oomph\+::\+Algebraic\+Node\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default (usually first) mesh that implements update function. 
+
+
+
+Definition at line 181 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+mesh\+\_\+pt.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), node\+\_\+update(), and oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_ae07189bb28dcba7d31e736de391fe54f}\label{classoomph_1_1AlgebraicNode_ae07189bb28dcba7d31e736de391fe54f}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}}$\ast$ oomph\+::\+Algebraic\+Node\+::mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{const int \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} that implements the id-\/th node update function. 
+
+
+
+Definition at line 188 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Mesh\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a10f49849e0942e68c6791810ffc6fb31}\label{classoomph_1_1AlgebraicNode_a10f49849e0942e68c6791810ffc6fb31}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!ngeom\_object@{ngeom\_object}}
+\index{ngeom\_object@{ngeom\_object}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{ngeom\_object()}{ngeom\_object()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of geometric objects involved in default (usually first) update function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a2c0fb79493f94d2ce19736737ebf5447}{oomph\+::\+Node}}.
+
+
+
+Definition at line 203 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt.
+
+
+
+Referenced by all\+\_\+geom\+\_\+object\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a0e1fa66d3543da39a5e728d8af5c1734}\label{classoomph_1_1AlgebraicNode_a0e1fa66d3543da39a5e728d8af5c1734}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!ngeom\_object@{ngeom\_object}}
+\index{ngeom\_object@{ngeom\_object}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{ngeom\_object()}{ngeom\_object()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object (\begin{DoxyParamCaption}\item[{const int \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of geometric objects involved in id-\/th update function. 
+
+
+
+Definition at line 195 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Geom\+\_\+object\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a8c9e49f378f2dc9e93e62e281bf58d27}\label{classoomph_1_1AlgebraicNode_a8c9e49f378f2dc9e93e62e281bf58d27}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!nnode\_update\_fcts@{nnode\_update\_fcts}}
+\index{nnode\_update\_fcts@{nnode\_update\_fcts}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{nnode\_update\_fcts()}{nnode\_update\_fcts()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Algebraic\+Node\+::nnode\+\_\+update\+\_\+fcts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of node update fcts. 
+
+
+
+Definition at line 147 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Mesh\+\_\+pt.
+
+
+
+Referenced by node\+\_\+update(), and self\+\_\+test().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a754dc8fcac3382a07f60262c9792c84c}\label{classoomph_1_1AlgebraicNode_a754dc8fcac3382a07f60262c9792c84c}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily void oomph\+::\+Algebraic\+Node\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Update the current nodal position, using the first (default) update function if there are multiple ones. If required perform the auxiliary update of nodal values. If update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node==true, previous positions are also updated -- as indicated by the name of this flag, this should only be done for newly created nodes, when this function is called from Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(...)
+
+Excute the node update function\+: Update the current (and if update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node==true also the previous) nodal position. Also update the current nodal values if an auxiliary update function is defined. Note\+: updating of previous positions is only required (and should only be performed for) newly created Algebraic\+Nodes i.\+e. when this function is called from Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(...). We create the history of its nodal positions from the time-\/dependent version of the specific \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}}\textquotesingle{}s algebraic\+\_\+node\+\_\+update(...) function. Perform auxiliary update of function values?
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_aecf8c979266300d3609de2b4ddfa3cc8}{oomph\+::\+Node}}.
+
+
+
+Definition at line 242 of file algebraic\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Algebraic\+Mesh\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Node\+::\+Aux\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt, oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), mesh\+\_\+pt(), Mesh\+\_\+pt, oomph\+::\+Hang\+Info\+::nmaster(), nnode\+\_\+update\+\_\+fcts(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Node\+::\+Position\+\_\+time\+\_\+stepper\+\_\+pt, and t.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), self\+\_\+test(), and oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a8887f3a7c445b098835a7703c3a19bd2}\label{classoomph_1_1AlgebraicNode_a8887f3a7c445b098835a7703c3a19bd2}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!node\_update\_fct\_id@{node\_update\_fct\_id}}
+\index{node\_update\_fct\_id@{node\_update\_fct\_id}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{node\_update\_fct\_id()}{node\_update\_fct\_id()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default (usually first if there are multiple ones) node update fct id. 
+
+
+
+Definition at line 157 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+node\+\_\+update\+\_\+fct\+\_\+id.
+
+
+
+Referenced by oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), self\+\_\+test(), oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a6b910e50ee47113aa0256e46043b0f27}\label{classoomph_1_1AlgebraicNode_a6b910e50ee47113aa0256e46043b0f27}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!node\_update\_fct\_id@{node\_update\_fct\_id}}
+\index{node\_update\_fct\_id@{node\_update\_fct\_id}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{node\_update\_fct\_id()}{node\_update\_fct\_id()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of node update fct ids (vector is resized to contain the correct number of entries). Somewhat costly to call as map needs to be copied into vector. 
+
+
+
+Definition at line 165 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Mesh\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a1d5805d44950ad5783720ba7bb5a372a}\label{classoomph_1_1AlgebraicNode_a1d5805d44950ad5783720ba7bb5a372a}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!nref\_value@{nref\_value}}
+\index{nref\_value@{nref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{nref\_value()}{nref\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Algebraic\+Node\+::nref\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of reference values involved in default (usually first) update function. 
+
+
+
+Definition at line 248 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+ref\+\_\+value.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a18b508012bc638d85539568219865383}\label{classoomph_1_1AlgebraicNode_a18b508012bc638d85539568219865383}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!nref\_value@{nref\_value}}
+\index{nref\_value@{nref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{nref\_value()}{nref\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Algebraic\+Node\+::nref\+\_\+value (\begin{DoxyParamCaption}\item[{const int \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of reference values involved in id-\/th update function. 
+
+
+
+Definition at line 240 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Ref\+\_\+value.
+
+
+
+Referenced by oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), and oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463}\label{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!ref\_value@{ref\_value}}
+\index{ref\_value@{ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{ref\_value()}{ref\_value()}}
+{\footnotesize\ttfamily double oomph\+::\+Algebraic\+Node\+::ref\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return i-\/th reference value involved in default (usually first) update function. 
+
+
+
+Definition at line 272 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+ref\+\_\+value, and i.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+body(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+fin(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a68b0fc5d9b38bb087f889424382a3ecd}\label{classoomph_1_1AlgebraicNode_a68b0fc5d9b38bb087f889424382a3ecd}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!self\_test@{self\_test}}
+\index{self\_test@{self\_test}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{self\_test()}{self\_test()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Algebraic\+Node\+::self\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Perform self test\+: If the node has multiple node update functions, check that they all give the same result. Return 1/0 for failure/success. (Failure if max. difference between the nodal positions for different update functions exceeds \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}{Algebraic\+Node\+::\+Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts}}. 
+
+Perform self test\+: If the node has multiple update functions, check that all update functions give the same result (with a tolerance of ~\newline
+ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}{Algebraic\+Node\+::\+Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts}} 
+
+Definition at line 311 of file algebraic\+\_\+elements.\+cc.
+
+
+
+References i, Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts, oomph\+::\+Node\+::ndim(), nnode\+\_\+update\+\_\+fcts(), node\+\_\+update(), node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::oomph\+\_\+info, oomph\+::\+Data\+::self\+\_\+test(), set\+\_\+default\+\_\+node\+\_\+update(), and oomph\+::\+Node\+::x().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a5f9d80a2826974b63376a4c58e0812fc}\label{classoomph_1_1AlgebraicNode_a5f9d80a2826974b63376a4c58e0812fc}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!set\_default\_node\_update@{set\_default\_node\_update}}
+\index{set\_default\_node\_update@{set\_default\_node\_update}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{set\_default\_node\_update()}{set\_default\_node\_update()}}
+{\footnotesize\ttfamily void oomph\+::\+Algebraic\+Node\+::set\+\_\+default\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{const int \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Make id-\/th node update function the default. 
+
+
+
+Definition at line 393 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt, Default\+\_\+it\+\_\+mesh\+\_\+pt, Default\+\_\+it\+\_\+ref\+\_\+value, Default\+\_\+node\+\_\+update\+\_\+fct\+\_\+id, Geom\+\_\+object\+\_\+pt, Mesh\+\_\+pt, and Ref\+\_\+value.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), and self\+\_\+test().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_aa242d4039f28e65c407bf90033489a75}\label{classoomph_1_1AlgebraicNode_aa242d4039f28e65c407bf90033489a75}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!vector\_geom\_object\_pt@{vector\_geom\_object\_pt}}
+\index{vector\_geom\_object\_pt@{vector\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{vector\_geom\_object\_pt()}{vector\_geom\_object\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$>$\& oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of geometric objects involved in default (usually first) update function. 
+
+
+
+Definition at line 219 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_aa82f9b47f4b7fb1cc49178c48c2873d3}\label{classoomph_1_1AlgebraicNode_aa82f9b47f4b7fb1cc49178c48c2873d3}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!vector\_geom\_object\_pt@{vector\_geom\_object\_pt}}
+\index{vector\_geom\_object\_pt@{vector\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{vector\_geom\_object\_pt()}{vector\_geom\_object\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$>$\& oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}\item[{const int \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of geometric objects involved in id-\/th update function. 
+
+
+
+Definition at line 211 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Geom\+\_\+object\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+X(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I\+I(), oomph\+::\+Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_ad2236d78dd07f59345ee7a8275d3fefb}\label{classoomph_1_1AlgebraicNode_ad2236d78dd07f59345ee7a8275d3fefb}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!vector\_ref\_value@{vector\_ref\_value}}
+\index{vector\_ref\_value@{vector\_ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{vector\_ref\_value()}{vector\_ref\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of reference values involved in default (usually first) update function. 
+
+
+
+Definition at line 256 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+it\+\_\+ref\+\_\+value.
+
+
+
+Referenced by oomph\+::\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::algebraic\+\_\+node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+central\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I\+I(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+I\+I(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+V(), oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+I\+X(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update\+\_\+\+V\+I\+I\+I(), oomph\+::\+Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a95a41fd3d3aa47a6928715bc7f1059a0}\label{classoomph_1_1AlgebraicNode_a95a41fd3d3aa47a6928715bc7f1059a0}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!vector\_ref\_value@{vector\_ref\_value}}
+\index{vector\_ref\_value@{vector\_ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{vector\_ref\_value()}{vector\_ref\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value (\begin{DoxyParamCaption}\item[{const int \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of reference values involved in id-\/th update function. 
+
+
+
+Definition at line 264 of file algebraic\+\_\+elements.\+h.
+
+
+
+References Ref\+\_\+value.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a37df439c4a73665cf04548f245419150}\label{classoomph_1_1AlgebraicNode_a37df439c4a73665cf04548f245419150}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Default\_it\_geom\_object\_pt@{Default\_it\_geom\_object\_pt}}
+\index{Default\_it\_geom\_object\_pt@{Default\_it\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Default\_it\_geom\_object\_pt}{Default\_it\_geom\_object\_pt}}
+{\footnotesize\ttfamily std\+::map$<$int,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$>$ $>$\+::iterator oomph\+::\+Algebraic\+Node\+::\+Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default iterator for vector of geom objects. These Geom\+Objects are involved in the default update. 
+
+
+
+Definition at line 469 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by all\+\_\+geom\+\_\+object\+\_\+pt(), geom\+\_\+object\+\_\+pt(), ngeom\+\_\+object(), set\+\_\+default\+\_\+node\+\_\+update(), and vector\+\_\+geom\+\_\+object\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_ac8cb7e56e80f1c0f3e200562d2b1d39e}\label{classoomph_1_1AlgebraicNode_ac8cb7e56e80f1c0f3e200562d2b1d39e}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Default\_it\_mesh\_pt@{Default\_it\_mesh\_pt}}
+\index{Default\_it\_mesh\_pt@{Default\_it\_mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Default\_it\_mesh\_pt}{Default\_it\_mesh\_pt}}
+{\footnotesize\ttfamily std\+::map$<$int,\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}}$\ast$$>$\+::iterator oomph\+::\+Algebraic\+Node\+::\+Default\+\_\+it\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default iterator for mesh\+: This mesh performs the default update. 
+
+
+
+Definition at line 464 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), mesh\+\_\+pt(), and set\+\_\+default\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a49673336a201aca02390f13ceb72dd19}\label{classoomph_1_1AlgebraicNode_a49673336a201aca02390f13ceb72dd19}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Default\_it\_ref\_value@{Default\_it\_ref\_value}}
+\index{Default\_it\_ref\_value@{Default\_it\_ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Default\_it\_ref\_value}{Default\_it\_ref\_value}}
+{\footnotesize\ttfamily std\+::map$<$int,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\+::iterator oomph\+::\+Algebraic\+Node\+::\+Default\+\_\+it\+\_\+ref\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
+
+Default iterator for vector of ref values. These reference values are involved in the default update. 
+
+Definition at line 474 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by nref\+\_\+value(), ref\+\_\+value(), set\+\_\+default\+\_\+node\+\_\+update(), and vector\+\_\+ref\+\_\+value().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_adba92e804261f449a9142920661c339a}\label{classoomph_1_1AlgebraicNode_adba92e804261f449a9142920661c339a}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Default\_node\_update\_fct\_id@{Default\_node\_update\_fct\_id}}
+\index{Default\_node\_update\_fct\_id@{Default\_node\_update\_fct\_id}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Default\_node\_update\_fct\_id}{Default\_node\_update\_fct\_id}}
+{\footnotesize\ttfamily int oomph\+::\+Algebraic\+Node\+::\+Default\+\_\+node\+\_\+update\+\_\+fct\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default node update function ID. 
+
+
+
+Definition at line 477 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by node\+\_\+update\+\_\+fct\+\_\+id(), and set\+\_\+default\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a74bfe556a50b852ee06245e6a374d5fc}\label{classoomph_1_1AlgebraicNode_a74bfe556a50b852ee06245e6a374d5fc}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_geom\_object\_pt@{Dummy\_geom\_object\_pt}}
+\index{Dummy\_geom\_object\_pt@{Dummy\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_geom\_object\_pt}{Dummy\_geom\_object\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default dummy vector of geom objects to point to for nodes for which no remesh fct is defined. 
+
+Zero-\/sized default dummy vector of geom objects to point to for nodes for which no remesh fct is defined 
+
+Definition at line 496 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by Algebraic\+Node().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c}\label{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_mesh@{Dummy\_mesh}}
+\index{Dummy\_mesh@{Dummy\_mesh}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_mesh}{Dummy\_mesh}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DummyAlgebraicMesh}{Dummy\+Algebraic\+Mesh}} oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+mesh\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Static Dummy mesh to which the pointer is addressed. 
+
+Set the dummy mesh. 
+
+Definition at line 492 of file algebraic\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a21f78f61150e308456db352907aa26c6}\label{classoomph_1_1AlgebraicNode_a21f78f61150e308456db352907aa26c6}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_mesh\_pt@{Dummy\_mesh\_pt}}
+\index{Dummy\_mesh\_pt@{Dummy\_mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_mesh\_pt}{Dummy\_mesh\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} $\ast$ oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+mesh\+\_\+pt =\&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c}{Algebraic\+Node\+::\+Dummy\+\_\+mesh}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default dummy mesh to point to for nodes for which no remesh fct is defined. 
+
+Default dummy mesh to point to for nodes for which no remesh fct is defined 
+
+Definition at line 489 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), and Algebraic\+Node().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_af6d3b50db54114b5cf22f86c0ceed2f8}\label{classoomph_1_1AlgebraicNode_af6d3b50db54114b5cf22f86c0ceed2f8}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_node\_update\_fct\_id@{Dummy\_node\_update\_fct\_id}}
+\index{Dummy\_node\_update\_fct\_id@{Dummy\_node\_update\_fct\_id}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_node\_update\_fct\_id}{Dummy\_node\_update\_fct\_id}}
+{\footnotesize\ttfamily int oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id =-\/100\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default (negative!) remesh fct id for nodes for which no remesh fct is defined. 
+
+Default (negative!) remesh fct id for nodes for which no remesh fct is defined 
+
+Definition at line 485 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), and Algebraic\+Node().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_af73f0a803e1bdf2a7a1c7f1f4384df61}\label{classoomph_1_1AlgebraicNode_af73f0a803e1bdf2a7a1c7f1f4384df61}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_ref\_value@{Dummy\_ref\_value}}
+\index{Dummy\_ref\_value@{Dummy\_ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_ref\_value}{Dummy\_ref\_value}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+ref\+\_\+value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default dummy vector of reference values to point to for nodes for which no remesh fct is defined. 
+
+Zero-\/sized default dummy vector of reference values to point to for nodes for which no remesh fct is defined 
+
+Definition at line 500 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by Algebraic\+Node().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a1e378862db7979494c3d224df3f98b2b}\label{classoomph_1_1AlgebraicNode_a1e378862db7979494c3d224df3f98b2b}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Geom\_object\_pt@{Geom\_object\_pt}}
+\index{Geom\_object\_pt@{Geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Geom\_object\_pt}{Geom\_object\_pt}}
+{\footnotesize\ttfamily std\+::map$<$int,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$>$ $>$ oomph\+::\+Algebraic\+Node\+::\+Geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of geometric objects that are involved in the specified node update operation. (Map because this node may only use the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) 
+
+
+
+Definition at line 455 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), kill\+\_\+node\+\_\+update\+\_\+info(), ngeom\+\_\+object(), set\+\_\+default\+\_\+node\+\_\+update(), and vector\+\_\+geom\+\_\+object\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}\label{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Max\_allowed\_difference\_between\_node\_update\_fcts@{Max\_allowed\_difference\_between\_node\_update\_fcts}}
+\index{Max\_allowed\_difference\_between\_node\_update\_fcts@{Max\_allowed\_difference\_between\_node\_update\_fcts}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Max\_allowed\_difference\_between\_node\_update\_fcts}{Max\_allowed\_difference\_between\_node\_update\_fcts}}
+{\footnotesize\ttfamily double oomph\+::\+Algebraic\+Node\+::\+Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts =1.\+0e-\/10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+What it says\+: Used in self-\/test to check if different node update functions produce the same result.
+
+Assign default value for test if different node update functions produce the same result. 
+
+Definition at line 481 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by self\+\_\+test().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_af60d3301f8ffd16bcd3ee32809beebd8}\label{classoomph_1_1AlgebraicNode_af60d3301f8ffd16bcd3ee32809beebd8}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Mesh\_pt@{Mesh\_pt}}
+\index{Mesh\_pt@{Mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Mesh\_pt}{Mesh\_pt}}
+{\footnotesize\ttfamily std\+::map$<$int,\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}}$\ast$ $>$ oomph\+::\+Algebraic\+Node\+::\+Mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to mesh that performs the specified node update operation (Map because this node may only use the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) 
+
+
+
+Definition at line 449 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), kill\+\_\+node\+\_\+update\+\_\+info(), mesh\+\_\+pt(), nnode\+\_\+update\+\_\+fcts(), node\+\_\+update(), node\+\_\+update\+\_\+fct\+\_\+id(), and set\+\_\+default\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicNode_a64362fcb07761e9d523c5c6de01612e0}\label{classoomph_1_1AlgebraicNode_a64362fcb07761e9d523c5c6de01612e0}} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Ref\_value@{Ref\_value}}
+\index{Ref\_value@{Ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Ref\_value}{Ref\_value}}
+{\footnotesize\ttfamily std\+::map$<$int,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Algebraic\+Node\+::\+Ref\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of reference values that are required for the specified node update operation. (Map because this node may only use the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) 
+
+
+
+Definition at line 461 of file algebraic\+\_\+elements.\+h.
+
+
+
+Referenced by add\+\_\+node\+\_\+update\+\_\+info(), kill\+\_\+node\+\_\+update\+\_\+info(), nref\+\_\+value(), set\+\_\+default\+\_\+node\+\_\+update(), and vector\+\_\+ref\+\_\+value().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__elements_8h}{algebraic\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{algebraic__elements_8cc}{algebraic\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

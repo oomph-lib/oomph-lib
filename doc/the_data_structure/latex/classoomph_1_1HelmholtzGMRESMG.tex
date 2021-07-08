@@ -1,0 +1,609 @@
+\hypertarget{classoomph_1_1HelmholtzGMRESMG}{}\doxysection{oomph\+::Helmholtz\+G\+M\+R\+E\+S\+MG$<$ M\+A\+T\+R\+IX $>$ Class Template Reference}
+\label{classoomph_1_1HelmholtzGMRESMG}\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+
+
+The \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} method for the Helmholtz solver.  
+
+
+
+
+{\ttfamily \#include $<$complex\+\_\+smoother.\+h$>$}
+
+Inheritance diagram for oomph\+::Helmholtz\+G\+M\+R\+E\+S\+MG$<$ M\+A\+T\+R\+IX $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classoomph_1_1HelmholtzGMRESMG}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ab686680821fe3c9ac0c0a07ccb0e7550}{Helmholtz\+G\+M\+R\+E\+S\+MG}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_aa8bdb804033f8050742706589cd8a072}{$\sim$\+Helmholtz\+G\+M\+R\+E\+S\+MG}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (cleanup storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_aa1e9e5ec373b7dd34787f84f5b518987}{Helmholtz\+G\+M\+R\+E\+S\+MG}} (const \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{Helmholtz\+G\+M\+R\+E\+S\+MG}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ae304723f85ff9f174b020969fdf66e60}{operator=}} (const \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{Helmholtz\+G\+M\+R\+E\+S\+MG}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a842b638722cd45650da8771aea2f9e5c}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Overload disable resolve so that it cleans up memory too. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a6050720b0d12f422e4b2983378dc53e5}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Implementation of the pure virtual base class function. The function has been broken because this is meant to be used as a linear solver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ae566e34da6aa9ca70a034f7ef93a1aa5}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Implementation of the pure virtual base class function. This accompanies the preconditioner\+\_\+solve function and so is also broken. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a5806236b991ac2d7fe4bc7a4f19e98fb}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a3e6405af2506c7b789ba3208d0a9cf6d}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a14ba0370fbc782fa7ab9364a035a7513}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ad6937ea7f72719eb9e33c28c002fa380}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Re-\/solve the system defined by the last assembled Jacobian and the rhs vector specified here. Solution is returned in the vector result. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ad2ae5c641eae7da8c7556b646fe38d36}{iterations}} () const
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a86f6bd77359a37117aeb17798b886a81}{set\+\_\+preconditioner\+\_\+\+L\+HS}} ()
+\begin{DoxyCompactList}\small\item\em Set left preconditioning (the default) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ab10551b0e67b40ad91555b1e612208a2}{set\+\_\+preconditioner\+\_\+\+R\+HS}} ()
+\begin{DoxyCompactList}\small\item\em Enable right preconditioning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a3147aa77b5e71a0822cc5c661dd07e0d}{solve\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}}, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
+\begin{DoxyCompactList}\small\item\em General interface to solve function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_aa94abd65000a9fac33a29a1ae2f9ec73}{complex\+\_\+matrix\+\_\+multiplication}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ const matrices\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&soln)
+\begin{DoxyCompactList}\small\item\em Helper function to calculate a complex matrix-\/vector product. Assumes the matrix has been provided as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of length two; the first entry containing the real part of the system matrix and the second entry containing the imaginary part. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Helper function to update the result vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_afc666c19cb09f252e63e43c3e126fb9a}{generate\+\_\+plane\+\_\+rotation}} (std\+::complex$<$ double $>$ \&dx, std\+::complex$<$ double $>$ \&dy, std\+::complex$<$ double $>$ \&cs, std\+::complex$<$ double $>$ \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a6b9f8cacb73c1bcad749289aac649505}{apply\+\_\+plane\+\_\+rotation}} (std\+::complex$<$ double $>$ \&dx, std\+::complex$<$ double $>$ \&dy, std\+::complex$<$ double $>$ \&cs, std\+::complex$<$ double $>$ \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Apply plane rotation. This is done using the update\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ae2a4718545bd42acb57aba5baa23d52f}{Iterations}}
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a5d8ae2181aecf890386ae48d81f90b42}{Matrices\+\_\+storage\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the real and imaginary part of the system matrix. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_acb64519b62c16bbec32d01c9969f746f}{Resolving}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setup of matrix and preconditioner. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a1550b5147f7fa822e8cbc9de93f1c06f}{Matrix\+\_\+can\+\_\+be\+\_\+deleted}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be deleted. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_a7f151e92397721fc2ae6acdd8253d685}{Preconditioner\+\_\+\+L\+HS}}
+\begin{DoxyCompactList}\small\item\em boolean indicating use of left hand preconditioning (if true) or right hand preconditioning (if false) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename M\+A\+T\+R\+IX$>$\newline
+class oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}
+
+The \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} method for the Helmholtz solver. 
+
+Definition at line 1787 of file complex\+\_\+smoother.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ab686680821fe3c9ac0c0a07ccb0e7550}\label{classoomph_1_1HelmholtzGMRESMG_ab686680821fe3c9ac0c0a07ccb0e7550}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!HelmholtzGMRESMG@{HelmholtzGMRESMG}}
+\index{HelmholtzGMRESMG@{HelmholtzGMRESMG}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{HelmholtzGMRESMG()}{HelmholtzGMRESMG()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{Helmholtz\+G\+M\+R\+E\+S\+MG}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 1793 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Preconditioner\+\_\+\+L\+HS.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_aa8bdb804033f8050742706589cd8a072}\label{classoomph_1_1HelmholtzGMRESMG_aa8bdb804033f8050742706589cd8a072}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!````~HelmholtzGMRESMG@{$\sim$HelmholtzGMRESMG}}
+\index{````~HelmholtzGMRESMG@{$\sim$HelmholtzGMRESMG}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$HelmholtzGMRESMG()}{~HelmholtzGMRESMG()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{Helmholtz\+G\+M\+R\+E\+S\+MG}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor (cleanup storage) 
+
+
+
+Definition at line 1803 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_aa1e9e5ec373b7dd34787f84f5b518987}\label{classoomph_1_1HelmholtzGMRESMG_aa1e9e5ec373b7dd34787f84f5b518987}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!HelmholtzGMRESMG@{HelmholtzGMRESMG}}
+\index{HelmholtzGMRESMG@{HelmholtzGMRESMG}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{HelmholtzGMRESMG()}{HelmholtzGMRESMG()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{Helmholtz\+G\+M\+R\+E\+S\+MG}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 1809 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a6b9f8cacb73c1bcad749289aac649505}\label{classoomph_1_1HelmholtzGMRESMG_a6b9f8cacb73c1bcad749289aac649505}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!apply\_plane\_rotation@{apply\_plane\_rotation}}
+\index{apply\_plane\_rotation@{apply\_plane\_rotation}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_plane\_rotation()}{apply\_plane\_rotation()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::apply\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$ \&}]{dx,  }\item[{std\+::complex$<$ double $>$ \&}]{dy,  }\item[{std\+::complex$<$ double $>$ \&}]{cs,  }\item[{std\+::complex$<$ double $>$ \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function\+: Apply plane rotation. This is done using the update\+: 
+
+\[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. 
+
+Definition at line 2487 of file complex\+\_\+smoother.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}\label{classoomph_1_1HelmholtzGMRESMG_a81ddd10ccc03d6582dcadbd5cae1edda}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 2105 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrices\+\_\+storage\+\_\+pt, and oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::disable\+\_\+resolve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::$\sim$\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G(), and oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::$\sim$\+Helmholtz\+G\+M\+R\+E\+S\+M\+G().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_aa94abd65000a9fac33a29a1ae2f9ec73}\label{classoomph_1_1HelmholtzGMRESMG_aa94abd65000a9fac33a29a1ae2f9ec73}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!complex\_matrix\_multiplication@{complex\_matrix\_multiplication}}
+\index{complex\_matrix\_multiplication@{complex\_matrix\_multiplication}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{complex\_matrix\_multiplication()}{complex\_matrix\_multiplication()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::complex\+\_\+matrix\+\_\+multiplication (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ const}]{matrices\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function to calculate a complex matrix-\/vector product. Assumes the matrix has been provided as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of length two; the first entry containing the real part of the system matrix and the second entry containing the imaginary part. 
+
+
+
+Definition at line 2138 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), and oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrices\+\_\+storage\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a842b638722cd45650da8771aea2f9e5c}\label{classoomph_1_1HelmholtzGMRESMG_a842b638722cd45650da8771aea2f9e5c}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!disable\_resolve@{disable\_resolve}}
+\index{disable\_resolve@{disable\_resolve}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_resolve()}{disable\_resolve()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload disable resolve so that it cleans up memory too. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 1821 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_afc666c19cb09f252e63e43c3e126fb9a}\label{classoomph_1_1HelmholtzGMRESMG_afc666c19cb09f252e63e43c3e126fb9a}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!generate\_plane\_rotation@{generate\_plane\_rotation}}
+\index{generate\_plane\_rotation@{generate\_plane\_rotation}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{generate\_plane\_rotation()}{generate\_plane\_rotation()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::generate\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$ \&}]{dx,  }\item[{std\+::complex$<$ double $>$ \&}]{dy,  }\item[{std\+::complex$<$ double $>$ \&}]{cs,  }\item[{std\+::complex$<$ double $>$ \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: 
+
+\[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \] where $ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} $. The values of a and b are given by\+: The values of dx and dy are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. We also check to see that sn is always a real (nonnegative) number. See pp.\+193-\/194 for an explanation. 
+
+Definition at line 2395 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Iterative\+Linear\+Solver\+::tolerance().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ad2ae5c641eae7da8c7556b646fe38d36}\label{classoomph_1_1HelmholtzGMRESMG_ad2ae5c641eae7da8c7556b646fe38d36}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46}{oomph\+::\+Iterative\+Linear\+Solver}}.
+
+
+
+Definition at line 2086 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Iterations.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ae304723f85ff9f174b020969fdf66e60}\label{classoomph_1_1HelmholtzGMRESMG_ae304723f85ff9f174b020969fdf66e60}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 1815 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a6050720b0d12f422e4b2983378dc53e5}\label{classoomph_1_1HelmholtzGMRESMG_a6050720b0d12f422e4b2983378dc53e5}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implementation of the pure virtual base class function. The function has been broken because this is meant to be used as a linear solver. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 1830 of file complex\+\_\+smoother.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ad6937ea7f72719eb9e33c28c002fa380}\label{classoomph_1_1HelmholtzGMRESMG_ad6937ea7f72719eb9e33c28c002fa380}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!resolve@{resolve}}
+\index{resolve@{resolve}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::resolve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Re-\/solve the system defined by the last assembled Jacobian and the rhs vector specified here. Solution is returned in the vector result. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 2052 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrices\+\_\+storage\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::matrix\+\_\+pt(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Resolving, and oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a86f6bd77359a37117aeb17798b886a81}\label{classoomph_1_1HelmholtzGMRESMG_a86f6bd77359a37117aeb17798b886a81}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!set\_preconditioner\_LHS@{set\_preconditioner\_LHS}}
+\index{set\_preconditioner\_LHS@{set\_preconditioner\_LHS}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{set\_preconditioner\_LHS()}{set\_preconditioner\_LHS()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::set\+\_\+preconditioner\+\_\+\+L\+HS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set left preconditioning (the default) 
+
+
+
+Definition at line 2092 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Preconditioner\+\_\+\+L\+HS.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ab10551b0e67b40ad91555b1e612208a2}\label{classoomph_1_1HelmholtzGMRESMG_ab10551b0e67b40ad91555b1e612208a2}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!set\_preconditioner\_RHS@{set\_preconditioner\_RHS}}
+\index{set\_preconditioner\_RHS@{set\_preconditioner\_RHS}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{set\_preconditioner\_RHS()}{set\_preconditioner\_RHS()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::set\+\_\+preconditioner\+\_\+\+R\+HS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable right preconditioning. 
+
+
+
+Definition at line 2095 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Preconditioner\+\_\+\+L\+HS.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ae566e34da6aa9ca70a034f7ef93a1aa5}\label{classoomph_1_1HelmholtzGMRESMG_ae566e34da6aa9ca70a034f7ef93a1aa5}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!setup@{setup}}
+\index{setup@{setup}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implementation of the pure virtual base class function. This accompanies the preconditioner\+\_\+solve function and so is also broken. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 1848 of file complex\+\_\+smoother.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a3e6405af2506c7b789ba3208d0a9cf6d}\label{classoomph_1_1HelmholtzGMRESMG_a3e6405af2506c7b789ba3208d0a9cf6d}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 2022 of file complex\+\_\+smoother.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a14ba0370fbc782fa7ab9364a035a7513}\label{classoomph_1_1HelmholtzGMRESMG_a14ba0370fbc782fa7ab9364a035a7513}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 2044 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::matrix\+\_\+pt(), and oomph\+::\+Linear\+Solver\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a5806236b991ac2d7fe4bc7a4f19e98fb}\label{classoomph_1_1HelmholtzGMRESMG_a5806236b991ac2d7fe4bc7a4f19e98fb}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG_a36a1d601676df2ebe39fcdb7a0837864}{oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$}}.
+
+
+
+Definition at line 1866 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::block\+\_\+setup(), oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::get\+\_\+block(), oomph\+::\+Problem\+::get\+\_\+jacobian(), i, oomph\+::\+Iterative\+Linear\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time, oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrices\+\_\+storage\+\_\+pt, oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted, oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::matrix\+\_\+pt(), oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::nblock\+\_\+types(), oomph\+::\+Problem\+::ndof(), oomph\+::oomph\+\_\+info, oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Resolving, oomph\+::\+Preconditioner\+::set\+\_\+comm\+\_\+pt(), oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::set\+\_\+mesh(), oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::set\+\_\+nmesh(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+Timing\+Helpers\+::timer().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a3147aa77b5e71a0822cc5c661dd07e0d}\label{classoomph_1_1HelmholtzGMRESMG_a3147aa77b5e71a0822cc5c661dd07e0d}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!solve\_helper@{solve\_helper}}
+\index{solve\_helper@{solve\_helper}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve\_helper()}{solve\_helper()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::solve\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+General interface to solve function. 
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. based on the algorithm presented in Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, Barrett, Berry et al, S\+I\+AM, 2006 and the implementation in the I\+M\+L++ library \+: \href{http://math.nist.gov/iml++/}{\texttt{ http\+://math.\+nist.\+gov/iml++/}} ~\newline
+ 
+
+Definition at line 2535 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Max\+\_\+iter, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::oomph\+\_\+info, s, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Timing\+Helpers\+::timer().
+
+
+
+Referenced by oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::resolve(), and oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}\label{classoomph_1_1HelmholtzGMRESMG_ac08841fffc51bceb21122cd66988329b}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!update@{update}}
+\index{update@{update}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&}]{hessenberg,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function to update the result vector. 
+
+
+
+Definition at line 2236 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::get\+\_\+block\+\_\+vectors(), i, oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Preconditioner\+\_\+\+L\+HS, oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt(), oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::return\+\_\+block\+\_\+vectors(), and s.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_ae2a4718545bd42acb57aba5baa23d52f}\label{classoomph_1_1HelmholtzGMRESMG_ae2a4718545bd42acb57aba5baa23d52f}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Iterations@{Iterations}}
+\index{Iterations@{Iterations}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::Iterations\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Definition at line 2503 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::iterations().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a5d8ae2181aecf890386ae48d81f90b42}\label{classoomph_1_1HelmholtzGMRESMG_a5d8ae2181aecf890386ae48d81f90b42}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Matrices\_storage\_pt@{Matrices\_storage\_pt}}
+\index{Matrices\_storage\_pt@{Matrices\_storage\_pt}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrices\_storage\_pt}{Matrices\_storage\_pt}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::Matrices\+\_\+storage\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the real and imaginary part of the system matrix. 
+
+
+
+Definition at line 2506 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+matrix\+\_\+multiplication(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::resolve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), and oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a1550b5147f7fa822e8cbc9de93f1c06f}\label{classoomph_1_1HelmholtzGMRESMG_a1550b5147f7fa822e8cbc9de93f1c06f}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}}
+\index{Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_can\_be\_deleted}{Matrix\_can\_be\_deleted}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+can\+\_\+be\+\_\+deleted\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be deleted. 
+
+
+
+Definition at line 2514 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), and oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_a7f151e92397721fc2ae6acdd8253d685}\label{classoomph_1_1HelmholtzGMRESMG_a7f151e92397721fc2ae6acdd8253d685}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Preconditioner\_LHS@{Preconditioner\_LHS}}
+\index{Preconditioner\_LHS@{Preconditioner\_LHS}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Preconditioner\_LHS}{Preconditioner\_LHS}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::Preconditioner\+\_\+\+L\+HS\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+boolean indicating use of left hand preconditioning (if true) or right hand preconditioning (if false) 
+
+
+
+Definition at line 2518 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::set\+\_\+preconditioner\+\_\+\+L\+H\+S(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::set\+\_\+preconditioner\+\_\+\+R\+H\+S(), and oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::update().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzGMRESMG_acb64519b62c16bbec32d01c9969f746f}\label{classoomph_1_1HelmholtzGMRESMG_acb64519b62c16bbec32d01c9969f746f}} 
+\index{oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}!Resolving@{Resolving}}
+\index{Resolving@{Resolving}!oomph::HelmholtzGMRESMG$<$ MATRIX $>$@{oomph::HelmholtzGMRESMG$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Resolving}{Resolving}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+MG}}$<$ M\+A\+T\+R\+IX $>$\+::Resolving\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setup of matrix and preconditioner. 
+
+
+
+Definition at line 2510 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::resolve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), and oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{complex__smoother_8h}{complex\+\_\+smoother.\+h}}\end{DoxyCompactItemize}

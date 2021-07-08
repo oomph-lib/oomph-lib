@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TriangleMeshCurve Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TriangleMeshCurve.html">TriangleMeshCurve</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1TriangleMeshCurve-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::TriangleMeshCurve Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::TriangleMeshCurve:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1TriangleMeshCurve.png" usemap="#oomph::TriangleMeshCurve_map" alt=""/>
+  <map id="oomph::TriangleMeshCurve_map" name="oomph::TriangleMeshCurve_map">
+<area href="classoomph_1_1TriangleMeshClosedCurve.html" title="Base class defining a closed curve for the Triangle mesh generation." alt="oomph::TriangleMeshClosedCurve" shape="rect" coords="0,56,288,80"/>
+<area href="classoomph_1_1TriangleMeshOpenCurve.html" alt="oomph::TriangleMeshOpenCurve" shape="rect" coords="298,56,586,80"/>
+<area href="classoomph_1_1TriangleMeshPolygon.html" title="Class defining a closed polygon for the Triangle mesh generation." alt="oomph::TriangleMeshPolygon" shape="rect" coords="0,112,288,136"/>
+<area href="classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon.html" alt="oomph::ImmersedRigidBodyTriangleMeshPolygon" shape="rect" coords="0,168,288,192"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7cdea154c00eeb59e0bd06589796ba28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a7cdea154c00eeb59e0bd06589796ba28">TriangleMeshCurve</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html">TriangleMeshCurveSection</a> * &gt; &amp;<a class="el" href="classoomph_1_1TriangleMeshCurve.html#a8a8d36c6b35f1bffd760877da4f3d52f">curve_section_pt</a>)</td></tr>
+<tr class="memdesc:a7cdea154c00eeb59e0bd06589796ba28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="classoomph_1_1TriangleMeshCurve.html#a7cdea154c00eeb59e0bd06589796ba28">More...</a><br /></td></tr>
+<tr class="separator:a7cdea154c00eeb59e0bd06589796ba28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7fc18e6612c6f82775c3320175acb45"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#aa7fc18e6612c6f82775c3320175acb45">~TriangleMeshCurve</a> ()</td></tr>
+<tr class="memdesc:aa7fc18e6612c6f82775c3320175acb45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <a href="classoomph_1_1TriangleMeshCurve.html#aa7fc18e6612c6f82775c3320175acb45">More...</a><br /></td></tr>
+<tr class="separator:aa7fc18e6612c6f82775c3320175acb45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf002aab11af44361b39729d067efbe2"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#acf002aab11af44361b39729d067efbe2">nvertices</a> () const =0</td></tr>
+<tr class="memdesc:acf002aab11af44361b39729d067efbe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertices.  <a href="classoomph_1_1TriangleMeshCurve.html#acf002aab11af44361b39729d067efbe2">More...</a><br /></td></tr>
+<tr class="separator:acf002aab11af44361b39729d067efbe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb1f60baf8d94f54f409ae51417e2568"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#abb1f60baf8d94f54f409ae51417e2568">nsegments</a> () const =0</td></tr>
+<tr class="memdesc:abb1f60baf8d94f54f409ae51417e2568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of segments.  <a href="classoomph_1_1TriangleMeshCurve.html#abb1f60baf8d94f54f409ae51417e2568">More...</a><br /></td></tr>
+<tr class="separator:abb1f60baf8d94f54f409ae51417e2568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5094b69c9f72db4b079d71c3c9f1ea8"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#ad5094b69c9f72db4b079d71c3c9f1ea8">max_boundary_id</a> ()</td></tr>
+<tr class="memdesc:ad5094b69c9f72db4b079d71c3c9f1ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return max boundary id of associated curves.  <a href="classoomph_1_1TriangleMeshCurve.html#ad5094b69c9f72db4b079d71c3c9f1ea8">More...</a><br /></td></tr>
+<tr class="separator:ad5094b69c9f72db4b079d71c3c9f1ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0b316414dd4a848b8bdfe314e5200ea"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#af0b316414dd4a848b8bdfe314e5200ea">ncurve_section</a> () const</td></tr>
+<tr class="memdesc:af0b316414dd4a848b8bdfe314e5200ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of constituent curves.  <a href="classoomph_1_1TriangleMeshCurve.html#af0b316414dd4a848b8bdfe314e5200ea">More...</a><br /></td></tr>
+<tr class="separator:af0b316414dd4a848b8bdfe314e5200ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5ff31ffc3b930d6e342d3f73d37f5c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#aa5ff31ffc3b930d6e342d3f73d37f5c9">enable_polyline_refinement</a> (const double &amp;tolerance=0.08)</td></tr>
+<tr class="memdesc:aa5ff31ffc3b930d6e342d3f73d37f5c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable refinement of polylines to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the refinement tolerance. It defaults to 0.08 and the smaller the number the finer the surface representation.  <a href="classoomph_1_1TriangleMeshCurve.html#aa5ff31ffc3b930d6e342d3f73d37f5c9">More...</a><br /></td></tr>
+<tr class="separator:aa5ff31ffc3b930d6e342d3f73d37f5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a161683c0c65fa9be9495f1b22a7a2500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a161683c0c65fa9be9495f1b22a7a2500">set_polyline_refinement_tolerance</a> (const double &amp;tolerance)</td></tr>
+<tr class="memdesc:a161683c0c65fa9be9495f1b22a7a2500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tolerance for refinement of polylines to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the refinement tolerance. (The smaller the number the finer the surface representation). If set to a negative value, we're switching off refinement &ndash; equivalent to calling <a class="el" href="classoomph_1_1TriangleMeshCurve.html#a840a3a0c871907660d4ebe571cf36960" title="Disable refinement of polylines.">disable_polyline_refinement()</a>  <a href="classoomph_1_1TriangleMeshCurve.html#a161683c0c65fa9be9495f1b22a7a2500">More...</a><br /></td></tr>
+<tr class="separator:a161683c0c65fa9be9495f1b22a7a2500"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acca896e38e84ed0f7431f21572880781"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#acca896e38e84ed0f7431f21572880781">polyline_refinement_tolerance</a> ()</td></tr>
+<tr class="memdesc:acca896e38e84ed0f7431f21572880781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tolerance for refinement of polylines to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation. If it's negative refinement is disabled.  <a href="classoomph_1_1TriangleMeshCurve.html#acca896e38e84ed0f7431f21572880781">More...</a><br /></td></tr>
+<tr class="separator:acca896e38e84ed0f7431f21572880781"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840a3a0c871907660d4ebe571cf36960"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a840a3a0c871907660d4ebe571cf36960">disable_polyline_refinement</a> ()</td></tr>
+<tr class="memdesc:a840a3a0c871907660d4ebe571cf36960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable refinement of polylines.  <a href="classoomph_1_1TriangleMeshCurve.html#a840a3a0c871907660d4ebe571cf36960">More...</a><br /></td></tr>
+<tr class="separator:a840a3a0c871907660d4ebe571cf36960"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad43caa6186da5d77772dc43521d2fad5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#ad43caa6186da5d77772dc43521d2fad5">enable_polyline_unrefinement</a> (const double &amp;tolerance=0.04)</td></tr>
+<tr class="memdesc:ad43caa6186da5d77772dc43521d2fad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable unrefinement of polylines to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines.  <a href="classoomph_1_1TriangleMeshCurve.html#ad43caa6186da5d77772dc43521d2fad5">More...</a><br /></td></tr>
+<tr class="separator:ad43caa6186da5d77772dc43521d2fad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2174126b383c657bf7c7bc24028844bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a2174126b383c657bf7c7bc24028844bd">set_polyline_unrefinement_tolerance</a> (const double &amp;tolerance)</td></tr>
+<tr class="memdesc:a2174126b383c657bf7c7bc24028844bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tolerance for unrefinement of polylines to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines. If set to a negative value, we're switching off unrefinement &ndash; equivalent to calling <a class="el" href="classoomph_1_1TriangleMeshCurve.html#a43036d1d42da58555ebe9b9ad2036a9c" title="Disable unrefinement of polylines.">disable_polyline_unrefinement()</a>  <a href="classoomph_1_1TriangleMeshCurve.html#a2174126b383c657bf7c7bc24028844bd">More...</a><br /></td></tr>
+<tr class="separator:a2174126b383c657bf7c7bc24028844bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c134821bab203824f06994db321a840"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a9c134821bab203824f06994db321a840">polyline_unrefinement_tolerance</a> ()</td></tr>
+<tr class="memdesc:a9c134821bab203824f06994db321a840"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tolerance for unrefinement of polylines to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation. If it's negative unrefinement is disabled.  <a href="classoomph_1_1TriangleMeshCurve.html#a9c134821bab203824f06994db321a840">More...</a><br /></td></tr>
+<tr class="separator:a9c134821bab203824f06994db321a840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43036d1d42da58555ebe9b9ad2036a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a43036d1d42da58555ebe9b9ad2036a9c">disable_polyline_unrefinement</a> ()</td></tr>
+<tr class="memdesc:a43036d1d42da58555ebe9b9ad2036a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable unrefinement of polylines.  <a href="classoomph_1_1TriangleMeshCurve.html#a43036d1d42da58555ebe9b9ad2036a9c">More...</a><br /></td></tr>
+<tr class="separator:a43036d1d42da58555ebe9b9ad2036a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d40afc7e879fde0319b153a141915df"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a7d40afc7e879fde0319b153a141915df">output</a> (std::ostream &amp;outfile, const unsigned &amp;n_sample=50)=0</td></tr>
+<tr class="memdesc:a7d40afc7e879fde0319b153a141915df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output each sub-boundary at n_sample (default: 50) points.  <a href="classoomph_1_1TriangleMeshCurve.html#a7d40afc7e879fde0319b153a141915df">More...</a><br /></td></tr>
+<tr class="separator:a7d40afc7e879fde0319b153a141915df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a8d36c6b35f1bffd760877da4f3d52f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html">TriangleMeshCurveSection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a8a8d36c6b35f1bffd760877da4f3d52f">curve_section_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a8a8d36c6b35f1bffd760877da4f3d52f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to i-th constituent curve section.  <a href="classoomph_1_1TriangleMeshCurve.html#a8a8d36c6b35f1bffd760877da4f3d52f">More...</a><br /></td></tr>
+<tr class="separator:a8a8d36c6b35f1bffd760877da4f3d52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadac04c87e2db2235bb39ee10b11f5be"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html">TriangleMeshCurveSection</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#aadac04c87e2db2235bb39ee10b11f5be">curve_section_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:aadac04c87e2db2235bb39ee10b11f5be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to i-th constituent curve section.  <a href="classoomph_1_1TriangleMeshCurve.html#aadac04c87e2db2235bb39ee10b11f5be">More...</a><br /></td></tr>
+<tr class="separator:aadac04c87e2db2235bb39ee10b11f5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a5834ebf68c639d6d2b2b8260da5270fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html">TriangleMeshCurveSection</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a5834ebf68c639d6d2b2b8260da5270fe">Curve_section_pt</a></td></tr>
+<tr class="memdesc:a5834ebf68c639d6d2b2b8260da5270fe"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of curve sections.  <a href="classoomph_1_1TriangleMeshCurve.html#a5834ebf68c639d6d2b2b8260da5270fe">More...</a><br /></td></tr>
+<tr class="separator:a5834ebf68c639d6d2b2b8260da5270fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:acc89a4f3f6d43568335131c8db0f1738"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#acc89a4f3f6d43568335131c8db0f1738">Polyline_refinement_tolerance</a></td></tr>
+<tr class="memdesc:acc89a4f3f6d43568335131c8db0f1738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tolerance for refinement of polylines (neg if refinement is disabled)  <a href="classoomph_1_1TriangleMeshCurve.html#acc89a4f3f6d43568335131c8db0f1738">More...</a><br /></td></tr>
+<tr class="separator:acc89a4f3f6d43568335131c8db0f1738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b44a7d207bff00f30e0f83b84816bae"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurve.html#a0b44a7d207bff00f30e0f83b84816bae">Polyline_unrefinement_tolerance</a></td></tr>
+<tr class="memdesc:a0b44a7d207bff00f30e0f83b84816bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tolerance for unrefinement of polylines (neg if refinement is disabled)  <a href="classoomph_1_1TriangleMeshCurve.html#a0b44a7d207bff00f30e0f83b84816bae">More...</a><br /></td></tr>
+<tr class="separator:a0b44a7d207bff00f30e0f83b84816bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>closed curves and open curves. All TriangleMeshCurves are composed of a <a class="el" href="classoomph_1_1Vector.html">Vector</a> of TriangleMeshCurveSections </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01043">1043</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7cdea154c00eeb59e0bd06589796ba28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cdea154c00eeb59e0bd06589796ba28">&#9670;&nbsp;</a></span>TriangleMeshCurve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TriangleMeshCurve::TriangleMeshCurve </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html">TriangleMeshCurveSection</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>curve_section_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01049">1049</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="aa7fc18e6612c6f82775c3320175acb45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7fc18e6612c6f82775c3320175acb45">&#9670;&nbsp;</a></span>~TriangleMeshCurve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::TriangleMeshCurve::~TriangleMeshCurve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01058">1058</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aadac04c87e2db2235bb39ee10b11f5be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadac04c87e2db2235bb39ee10b11f5be">&#9670;&nbsp;</a></span>curve_section_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html">TriangleMeshCurveSection</a>* &amp; oomph::TriangleMeshCurve::curve_section_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to i-th constituent curve section. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01213">1213</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="a8a8d36c6b35f1bffd760877da4f3d52f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a8d36c6b35f1bffd760877da4f3d52f">&#9670;&nbsp;</a></span>curve_section_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html">TriangleMeshCurveSection</a>* oomph::TriangleMeshCurve::curve_section_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to i-th constituent curve section. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01209">1209</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03216">oomph::UnstructuredTwoDMeshGeometryBase::closed_curve_to_polygon_helper()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03369">oomph::UnstructuredTwoDMeshGeometryBase::create_open_curve_with_polyline_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l36171">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::get_face_mesh_representation()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03505">oomph::UnstructuredTwoDMeshGeometryBase::set_geom_objects_and_coordinate_limits_for_close_curve()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03593">oomph::UnstructuredTwoDMeshGeometryBase::set_geom_objects_and_coordinate_limits_for_open_curve()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01430">oomph::TriangleMeshClosedCurve::TriangleMeshClosedCurve()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l40977">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a840a3a0c871907660d4ebe571cf36960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840a3a0c871907660d4ebe571cf36960">&#9670;&nbsp;</a></span>disable_polyline_refinement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurve::disable_polyline_refinement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable refinement of polylines. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01132">1132</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="a43036d1d42da58555ebe9b9ad2036a9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43036d1d42da58555ebe9b9ad2036a9c">&#9670;&nbsp;</a></span>disable_polyline_unrefinement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurve::disable_polyline_unrefinement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable unrefinement of polylines. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01195">1195</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="aa5ff31ffc3b930d6e342d3f73d37f5c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5ff31ffc3b930d6e342d3f73d37f5c9">&#9670;&nbsp;</a></span>enable_polyline_refinement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurve::enable_polyline_refinement </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance</em> = <code>0.08</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable refinement of polylines to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the refinement tolerance. It defaults to 0.08 and the smaller the number the finer the surface representation. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01089">1089</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="ad43caa6186da5d77772dc43521d2fad5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad43caa6186da5d77772dc43521d2fad5">&#9670;&nbsp;</a></span>enable_polyline_unrefinement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurve::enable_polyline_unrefinement </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance</em> = <code>0.04</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable unrefinement of polylines to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01149">1149</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="ad5094b69c9f72db4b079d71c3c9f1ea8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5094b69c9f72db4b079d71c3c9f1ea8">&#9670;&nbsp;</a></span>max_boundary_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurve::max_boundary_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return max boundary id of associated curves. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01067">1067</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="af0b316414dd4a848b8bdfe314e5200ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0b316414dd4a848b8bdfe314e5200ea">&#9670;&nbsp;</a></span>ncurve_section()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::TriangleMeshCurve::ncurve_section </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of constituent curves. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1TriangleMeshPolygon.html#a6ef43be1b982a8dcc2f10545ab251bdb">oomph::TriangleMeshPolygon</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01080">1080</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l31598">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::add_vertices_for_non_deletion()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03216">oomph::UnstructuredTwoDMeshGeometryBase::closed_curve_to_polygon_helper()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03369">oomph::UnstructuredTwoDMeshGeometryBase::create_open_curve_with_polyline_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l32757">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::create_temporary_boundary_connections()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l36171">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::get_face_mesh_representation()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l32884">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_boundary_connections()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03505">oomph::UnstructuredTwoDMeshGeometryBase::set_geom_objects_and_coordinate_limits_for_close_curve()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03593">oomph::UnstructuredTwoDMeshGeometryBase::set_geom_objects_and_coordinate_limits_for_open_curve()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="abb1f60baf8d94f54f409ae51417e2568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb1f60baf8d94f54f409ae51417e2568">&#9670;&nbsp;</a></span>nsegments()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::TriangleMeshCurve::nsegments </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Total number of segments. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshOpenCurve.html#a639fc3a8b9860c98abc7c2d09f6917d8">oomph::TriangleMeshOpenCurve</a>, and <a class="el" href="classoomph_1_1TriangleMeshClosedCurve.html#a6d8c26d0ecfaf5abff2f68fedf158612">oomph::TriangleMeshClosedCurve</a>.</p>
+
+</div>
+</div>
+<a id="acf002aab11af44361b39729d067efbe2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf002aab11af44361b39729d067efbe2">&#9670;&nbsp;</a></span>nvertices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::TriangleMeshCurve::nvertices </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertices. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshOpenCurve.html#ac9671f91a0433ec5cab5a3b7dac45261">oomph::TriangleMeshOpenCurve</a>, and <a class="el" href="classoomph_1_1TriangleMeshClosedCurve.html#a439e4085f7e220364bbe9bc8040ec72f">oomph::TriangleMeshClosedCurve</a>.</p>
+
+</div>
+</div>
+<a id="a7d40afc7e879fde0319b153a141915df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d40afc7e879fde0319b153a141915df">&#9670;&nbsp;</a></span>output()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void oomph::TriangleMeshCurve::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_sample</em> = <code>50</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output each sub-boundary at n_sample (default: 50) points. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshOpenCurve.html#adfffbe10445328b0b021b82443ff8458">oomph::TriangleMeshOpenCurve</a>, and <a class="el" href="classoomph_1_1TriangleMeshClosedCurve.html#a246d71ca0cb2dbc9d2c9ad6976f84ba6">oomph::TriangleMeshClosedCurve</a>.</p>
+
+</div>
+</div>
+<a id="acca896e38e84ed0f7431f21572880781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acca896e38e84ed0f7431f21572880781">&#9670;&nbsp;</a></span>polyline_refinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurve::polyline_refinement_tolerance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get tolerance for refinement of polylines to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation. If it's negative refinement is disabled. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01126">1126</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03216">oomph::UnstructuredTwoDMeshGeometryBase::closed_curve_to_polygon_helper()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03369">oomph::UnstructuredTwoDMeshGeometryBase::create_open_curve_with_polyline_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a9c134821bab203824f06994db321a840"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c134821bab203824f06994db321a840">&#9670;&nbsp;</a></span>polyline_unrefinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurve::polyline_unrefinement_tolerance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get tolerance for unrefinement of polylines to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation. If it's negative unrefinement is disabled. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01189">1189</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03216">oomph::UnstructuredTwoDMeshGeometryBase::closed_curve_to_polygon_helper()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03369">oomph::UnstructuredTwoDMeshGeometryBase::create_open_curve_with_polyline_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a161683c0c65fa9be9495f1b22a7a2500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a161683c0c65fa9be9495f1b22a7a2500">&#9670;&nbsp;</a></span>set_polyline_refinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurve::set_polyline_refinement_tolerance </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set tolerance for refinement of polylines to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the refinement tolerance. (The smaller the number the finer the surface representation). If set to a negative value, we're switching off refinement &ndash; equivalent to calling <a class="el" href="classoomph_1_1TriangleMeshCurve.html#a840a3a0c871907660d4ebe571cf36960" title="Disable refinement of polylines.">disable_polyline_refinement()</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01109">1109</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03216">oomph::UnstructuredTwoDMeshGeometryBase::closed_curve_to_polygon_helper()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03369">oomph::UnstructuredTwoDMeshGeometryBase::create_open_curve_with_polyline_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a2174126b383c657bf7c7bc24028844bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2174126b383c657bf7c7bc24028844bd">&#9670;&nbsp;</a></span>set_polyline_unrefinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurve::set_polyline_unrefinement_tolerance </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set tolerance for unrefinement of polylines to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines. If set to a negative value, we're switching off unrefinement &ndash; equivalent to calling <a class="el" href="classoomph_1_1TriangleMeshCurve.html#a43036d1d42da58555ebe9b9ad2036a9c" title="Disable unrefinement of polylines.">disable_polyline_unrefinement()</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01172">1172</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03216">oomph::UnstructuredTwoDMeshGeometryBase::closed_curve_to_polygon_helper()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03369">oomph::UnstructuredTwoDMeshGeometryBase::create_open_curve_with_polyline_helper()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5834ebf68c639d6d2b2b8260da5270fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5834ebf68c639d6d2b2b8260da5270fe">&#9670;&nbsp;</a></span>Curve_section_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1TriangleMeshCurveSection.html">TriangleMeshCurveSection</a>*&gt; oomph::TriangleMeshCurve::Curve_section_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Vector.html">Vector</a> of curve sections. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01219">1219</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01430">oomph::TriangleMeshClosedCurve::TriangleMeshClosedCurve()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01866">oomph::TriangleMeshOpenCurve::TriangleMeshOpenCurve()</a>.</p>
+
+</div>
+</div>
+<a id="acc89a4f3f6d43568335131c8db0f1738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc89a4f3f6d43568335131c8db0f1738">&#9670;&nbsp;</a></span>Polyline_refinement_tolerance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurve::Polyline_refinement_tolerance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tolerance for refinement of polylines (neg if refinement is disabled) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01224">1224</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a0b44a7d207bff00f30e0f83b84816bae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b44a7d207bff00f30e0f83b84816bae">&#9670;&nbsp;</a></span>Polyline_unrefinement_tolerance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurve::Polyline_unrefinement_tolerance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tolerance for unrefinement of polylines (neg if refinement is disabled) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01227">1227</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:40
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

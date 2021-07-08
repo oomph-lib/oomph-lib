@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: ElasticFishBackElement Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classElasticFishBackElement-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">ElasticFishBackElement Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fish back as a GeneralisedElement: Circular ring whose position is given by.  
+ <a href="classElasticFishBackElement.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for ElasticFishBackElement:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classElasticFishBackElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0411850f03db9f6eeb10562be778dacb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#a0411850f03db9f6eeb10562be778dacb">ElasticFishBackElement</a> (const double &amp;x_c, const double &amp;y_c, const double &amp;r)</td></tr>
+<tr class="memdesc:a0411850f03db9f6eeb10562be778dacb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Build ring from doubles that describe the geometry: x and y positions of centre and the radius. Initialise stiffness to 1.0.  <a href="classElasticFishBackElement.html#a0411850f03db9f6eeb10562be778dacb">More...</a><br /></td></tr>
+<tr class="separator:a0411850f03db9f6eeb10562be778dacb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3889028a8375ef126ec207f73ca18adc"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#a3889028a8375ef126ec207f73ca18adc">~ElasticFishBackElement</a> ()</td></tr>
+<tr class="memdesc:a3889028a8375ef126ec207f73ca18adc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor:  <a href="classElasticFishBackElement.html#a3889028a8375ef126ec207f73ca18adc">More...</a><br /></td></tr>
+<tr class="separator:a3889028a8375ef126ec207f73ca18adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0e376da1420c97403549b3a48f8b356"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#af0e376da1420c97403549b3a48f8b356">k_stiff</a> ()</td></tr>
+<tr class="memdesc:af0e376da1420c97403549b3a48f8b356"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Stiffness" of the ring  <a href="classElasticFishBackElement.html#af0e376da1420c97403549b3a48f8b356">More...</a><br /></td></tr>
+<tr class="separator:af0e376da1420c97403549b3a48f8b356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe29dde5bd5ff5763bcb1ded94adf826"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#afe29dde5bd5ff5763bcb1ded94adf826">load</a> ()</td></tr>
+<tr class="memdesc:afe29dde5bd5ff5763bcb1ded94adf826"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Load" acting on the ring  <a href="classElasticFishBackElement.html#afe29dde5bd5ff5763bcb1ded94adf826">More...</a><br /></td></tr>
+<tr class="separator:afe29dde5bd5ff5763bcb1ded94adf826"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed5858c2ae86823017713d0894cc4052"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#aed5858c2ae86823017713d0894cc4052">get_residuals</a> (Vector&lt; double &gt; &amp;residuals)</td></tr>
+<tr class="memdesc:aed5858c2ae86823017713d0894cc4052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute element residual vector (wrapper)  <a href="classElasticFishBackElement.html#aed5858c2ae86823017713d0894cc4052">More...</a><br /></td></tr>
+<tr class="separator:aed5858c2ae86823017713d0894cc4052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48729984910b86d7210ed218bcb821bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#a48729984910b86d7210ed218bcb821bd">get_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a48729984910b86d7210ed218bcb821bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute element residual Vector and element Jacobian matrix (wrapper)  <a href="classElasticFishBackElement.html#a48729984910b86d7210ed218bcb821bd">More...</a><br /></td></tr>
+<tr class="separator:a48729984910b86d7210ed218bcb821bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14397b102dbefc87a7e8f6a6782ec730"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#a14397b102dbefc87a7e8f6a6782ec730">set_load_pt</a> (Data *load_pt)</td></tr>
+<tr class="memdesc:a14397b102dbefc87a7e8f6a6782ec730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pointer to Data object that specifies the "load" on the fish back.  <a href="classElasticFishBackElement.html#a14397b102dbefc87a7e8f6a6782ec730">More...</a><br /></td></tr>
+<tr class="separator:a14397b102dbefc87a7e8f6a6782ec730"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a03865180362294a36322523ff2a880ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#a03865180362294a36322523ff2a880ad">fill_in_generic_residual_contribution</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, unsigned flag)</td></tr>
+<tr class="memdesc:a03865180362294a36322523ff2a880ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute element residual Vector (only if flag=0) and also the element Jacobian matrix (if flag=1)  <a href="classElasticFishBackElement.html#a03865180362294a36322523ff2a880ad">More...</a><br /></td></tr>
+<tr class="separator:a03865180362294a36322523ff2a880ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:abb0ba4fd55ef0c0b48634eded475e5c7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#abb0ba4fd55ef0c0b48634eded475e5c7">K_stiff</a></td></tr>
+<tr class="memdesc:abb0ba4fd55ef0c0b48634eded475e5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stiffness of the ring's "elastic" support.  <a href="classElasticFishBackElement.html#abb0ba4fd55ef0c0b48634eded475e5c7">More...</a><br /></td></tr>
+<tr class="separator:abb0ba4fd55ef0c0b48634eded475e5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a721b1c81283045f36467355e77b90fea"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticFishBackElement.html#a721b1c81283045f36467355e77b90fea">External_load_index</a></td></tr>
+<tr class="memdesc:a721b1c81283045f36467355e77b90fea"><td class="mdescLeft">&#160;</td><td class="mdescRight">External index of the load object.  <a href="classElasticFishBackElement.html#a721b1c81283045f36467355e77b90fea">More...</a><br /></td></tr>
+<tr class="separator:a721b1c81283045f36467355e77b90fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Fish back as a GeneralisedElement: Circular ring whose position is given by. </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x = X_c + R \cos(\xi) \]" src="form_0.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ y = Y_c + R \sin(\xi) \]" src="form_1.png"/>
+</p>
+<p> The ring's vertical position <img class="formulaInl" alt="$ Y_c $" src="form_2.png"/> is determined by "pseudo elasticity": </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ 0 = Y_c \ k_{stiff} - f_{load} \]" src="form_3.png"/>
+</p>
+<p> This simulates the case where the centre of the ring is mounted on an elastic spring of stiffness <img class="formulaInl" alt="$ k_{stiff} $" src="form_4.png"/> and loaded by the force <img class="formulaInl" alt="$ f_{load}. $" src="form_5.png"/> The "load" is specified by the Data object <code>load_pt()</code>. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00087">87</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0411850f03db9f6eeb10562be778dacb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0411850f03db9f6eeb10562be778dacb">&#9670;&nbsp;</a></span>ElasticFishBackElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ElasticFishBackElement::ElasticFishBackElement </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>x_c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>y_c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Build ring from doubles that describe the geometry: x and y positions of centre and the radius. Initialise stiffness to 1.0. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00095">95</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3889028a8375ef126ec207f73ca18adc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3889028a8375ef126ec207f73ca18adc">&#9670;&nbsp;</a></span>~ElasticFishBackElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual ElasticFishBackElement::~ElasticFishBackElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00117">117</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a03865180362294a36322523ff2a880ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03865180362294a36322523ff2a880ad">&#9670;&nbsp;</a></span>fill_in_generic_residual_contribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ElasticFishBackElement::fill_in_generic_residual_contribution </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>flag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute element residual Vector (only if flag=0) and also the element Jacobian matrix (if flag=1) </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00185">185</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<a id="a48729984910b86d7210ed218bcb821bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48729984910b86d7210ed218bcb821bd">&#9670;&nbsp;</a></span>get_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ElasticFishBackElement::get_jacobian </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute element residual Vector and element Jacobian matrix (wrapper) </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00144">144</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<a id="aed5858c2ae86823017713d0894cc4052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed5858c2ae86823017713d0894cc4052">&#9670;&nbsp;</a></span>get_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ElasticFishBackElement::get_residuals </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute element residual vector (wrapper) </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00131">131</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<a id="af0e376da1420c97403549b3a48f8b356"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0e376da1420c97403549b3a48f8b356">&#9670;&nbsp;</a></span>k_stiff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; ElasticFishBackElement::k_stiff </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>"Stiffness" of the ring </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00125">125</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<a id="afe29dde5bd5ff5763bcb1ded94adf826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe29dde5bd5ff5763bcb1ded94adf826">&#9670;&nbsp;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; ElasticFishBackElement::load </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>"Load" acting on the ring </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00128">128</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<a id="a14397b102dbefc87a7e8f6a6782ec730"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14397b102dbefc87a7e8f6a6782ec730">&#9670;&nbsp;</a></span>set_load_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ElasticFishBackElement::set_load_pt </td>
+          <td>(</td>
+          <td class="paramtype">Data *&#160;</td>
+          <td class="paramname"><em>load_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set pointer to Data object that specifies the "load" on the fish back. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00157">157</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a721b1c81283045f36467355e77b90fea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a721b1c81283045f36467355e77b90fea">&#9670;&nbsp;</a></span>External_load_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned ElasticFishBackElement::External_load_index</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>External index of the load object. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00222">222</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<a id="abb0ba4fd55ef0c0b48634eded475e5c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb0ba4fd55ef0c0b48634eded475e5c7">&#9670;&nbsp;</a></span>K_stiff</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ElasticFishBackElement::K_stiff</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stiffness of the ring's "elastic" support. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8cc_source.html#l00219">219</a> of file <a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="elastic__poisson_8cc_source.html">elastic_poisson.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:05:00
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

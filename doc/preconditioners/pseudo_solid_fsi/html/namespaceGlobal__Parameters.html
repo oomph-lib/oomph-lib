@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Global_Parameters Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Global_Parameters Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Global parameters.  
+<a href="namespaceGlobal__Parameters.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a536aa5314a6cdb36af852e9513351d55"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a536aa5314a6cdb36af852e9513351d55">flux</a> (const double &amp;t)</td></tr>
+<tr class="memdesc:a536aa5314a6cdb36af852e9513351d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flux: Pulsatile flow.  <a href="namespaceGlobal__Parameters.html#a536aa5314a6cdb36af852e9513351d55">More...</a><br /></td></tr>
+<tr class="separator:a536aa5314a6cdb36af852e9513351d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a84d27a1abb5d90476de43a9920dc347f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a84d27a1abb5d90476de43a9920dc347f">Leaflet_x0</a> = 1.0</td></tr>
+<tr class="memdesc:a84d27a1abb5d90476de43a9920dc347f"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-position of root of leaflet  <a href="namespaceGlobal__Parameters.html#a84d27a1abb5d90476de43a9920dc347f">More...</a><br /></td></tr>
+<tr class="separator:a84d27a1abb5d90476de43a9920dc347f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58c392f43a98de12e513c4bc50169fa6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a58c392f43a98de12e513c4bc50169fa6">Leaflet_height</a> =0.5</td></tr>
+<tr class="memdesc:a58c392f43a98de12e513c4bc50169fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">height of leaflet  <a href="namespaceGlobal__Parameters.html#a58c392f43a98de12e513c4bc50169fa6">More...</a><br /></td></tr>
+<tr class="separator:a58c392f43a98de12e513c4bc50169fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced7b712f2e8390ceef273157690001b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aced7b712f2e8390ceef273157690001b">Fluid_length_left</a> =1.0</td></tr>
+<tr class="memdesc:aced7b712f2e8390ceef273157690001b"><td class="mdescLeft">&#160;</td><td class="mdescRight">length of fluid mesh to left of leaflet  <a href="namespaceGlobal__Parameters.html#aced7b712f2e8390ceef273157690001b">More...</a><br /></td></tr>
+<tr class="separator:aced7b712f2e8390ceef273157690001b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a2d2dfd5a51de4b4fcd3937c029010f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a0a2d2dfd5a51de4b4fcd3937c029010f">Fluid_length_right</a> =3.0</td></tr>
+<tr class="memdesc:a0a2d2dfd5a51de4b4fcd3937c029010f"><td class="mdescLeft">&#160;</td><td class="mdescRight">length of fluid mesh to right of leaflet  <a href="namespaceGlobal__Parameters.html#a0a2d2dfd5a51de4b4fcd3937c029010f">More...</a><br /></td></tr>
+<tr class="separator:a0a2d2dfd5a51de4b4fcd3937c029010f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1aaf6e9438d5ff7715fe6ceaeaf4fbc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#ae1aaf6e9438d5ff7715fe6ceaeaf4fbc">Fluid_height</a> =1.0</td></tr>
+<tr class="memdesc:ae1aaf6e9438d5ff7715fe6ceaeaf4fbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">height of fluid mesh  <a href="namespaceGlobal__Parameters.html#ae1aaf6e9438d5ff7715fe6ceaeaf4fbc">More...</a><br /></td></tr>
+<tr class="separator:ae1aaf6e9438d5ff7715fe6ceaeaf4fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a899325ce0b7ede8237bd52d8f0fd44e2"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a899325ce0b7ede8237bd52d8f0fd44e2">Mesh_nleft</a> =4</td></tr>
+<tr class="memdesc:a899325ce0b7ede8237bd52d8f0fd44e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Num elements to left of leaflet in coarse mesh.  <a href="namespaceGlobal__Parameters.html#a899325ce0b7ede8237bd52d8f0fd44e2">More...</a><br /></td></tr>
+<tr class="separator:a899325ce0b7ede8237bd52d8f0fd44e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83ca6bb6240a3f5ef2199a8646607dcf"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a83ca6bb6240a3f5ef2199a8646607dcf">Mesh_nright</a> =12</td></tr>
+<tr class="memdesc:a83ca6bb6240a3f5ef2199a8646607dcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Num elements to right of leaflet in coarse mesh.  <a href="namespaceGlobal__Parameters.html#a83ca6bb6240a3f5ef2199a8646607dcf">More...</a><br /></td></tr>
+<tr class="separator:a83ca6bb6240a3f5ef2199a8646607dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77f2f492d44897203cceb4cbadef7aba"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a77f2f492d44897203cceb4cbadef7aba">Mesh_ny1</a> =2</td></tr>
+<tr class="memdesc:a77f2f492d44897203cceb4cbadef7aba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Num elements in fluid mesh in y dirn adjacent to leaflet.  <a href="namespaceGlobal__Parameters.html#a77f2f492d44897203cceb4cbadef7aba">More...</a><br /></td></tr>
+<tr class="separator:a77f2f492d44897203cceb4cbadef7aba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c1b5c0070b43a56ef64b106b6e2930"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#ab0c1b5c0070b43a56ef64b106b6e2930">Mesh_ny2</a> =2</td></tr>
+<tr class="memdesc:ab0c1b5c0070b43a56ef64b106b6e2930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Num elements in fluid mesh in y dirn above leaflet.  <a href="namespaceGlobal__Parameters.html#ab0c1b5c0070b43a56ef64b106b6e2930">More...</a><br /></td></tr>
+<tr class="separator:ab0c1b5c0070b43a56ef64b106b6e2930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d72e94a9305c6a310940a6a427ebe06"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Re</a> =50.0</td></tr>
+<tr class="memdesc:a9d72e94a9305c6a310940a6a427ebe06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reynolds number.  <a href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">More...</a><br /></td></tr>
+<tr class="separator:a9d72e94a9305c6a310940a6a427ebe06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a59a32365e87566069e458dc83bd18a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">ReSt</a> =50.0</td></tr>
+<tr class="memdesc:a7a59a32365e87566069e458dc83bd18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Womersley number: Product of Reynolds and Strouhal numbers.  <a href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">More...</a><br /></td></tr>
+<tr class="separator:a7a59a32365e87566069e458dc83bd18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab360628e7830e43e355ce5768f6d6a6c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#ab360628e7830e43e355ce5768f6d6a6c">H</a> =0.05</td></tr>
+<tr class="memdesc:ab360628e7830e43e355ce5768f6d6a6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-dimensional wall thickness.  <a href="namespaceGlobal__Parameters.html#ab360628e7830e43e355ce5768f6d6a6c">More...</a><br /></td></tr>
+<tr class="separator:ab360628e7830e43e355ce5768f6d6a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7814fddf663e56168174a42d2cd6b4c1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Q</a> =2.0e-7</td></tr>
+<tr class="memdesc:a7814fddf663e56168174a42d2cd6b4c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fluid structure interaction parameter: Ratio of stresses used for non-dimensionalisation of fluid to solid stresses. <br  />
+  <a href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">More...</a><br /></td></tr>
+<tr class="separator:a7814fddf663e56168174a42d2cd6b4c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb964d25d190afd43c8317d4217f31b4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aeb964d25d190afd43c8317d4217f31b4">T</a> =1.0</td></tr>
+<tr class="memdesc:aeb964d25d190afd43c8317d4217f31b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Period for fluctuations in flux.  <a href="namespaceGlobal__Parameters.html#aeb964d25d190afd43c8317d4217f31b4">More...</a><br /></td></tr>
+<tr class="separator:aeb964d25d190afd43c8317d4217f31b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c27745997f9e118f0a99bf0390dbf4b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a6c27745997f9e118f0a99bf0390dbf4b">U_base</a> =1.0</td></tr>
+<tr class="memdesc:a6c27745997f9e118f0a99bf0390dbf4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Min. flux.  <a href="namespaceGlobal__Parameters.html#a6c27745997f9e118f0a99bf0390dbf4b">More...</a><br /></td></tr>
+<tr class="separator:a6c27745997f9e118f0a99bf0390dbf4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac04d493b5af4d1c99a9574489cf4dda0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#ac04d493b5af4d1c99a9574489cf4dda0">U_perturbation</a> =0.5</td></tr>
+<tr class="memdesc:ac04d493b5af4d1c99a9574489cf4dda0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. flux.  <a href="namespaceGlobal__Parameters.html#ac04d493b5af4d1c99a9574489cf4dda0">More...</a><br /></td></tr>
+<tr class="separator:ac04d493b5af4d1c99a9574489cf4dda0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e3428638f89f970fcf2148b0bab1465"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a3e3428638f89f970fcf2148b0bab1465">Lambda_sq</a> =0.0</td></tr>
+<tr class="memdesc:a3e3428638f89f970fcf2148b0bab1465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pseudo-solid mass density.  <a href="namespaceGlobal__Parameters.html#a3e3428638f89f970fcf2148b0bab1465">More...</a><br /></td></tr>
+<tr class="separator:a3e3428638f89f970fcf2148b0bab1465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af35d88426851c22dd07a69aa66de959a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#af35d88426851c22dd07a69aa66de959a">Lambda_sq_beam</a> =0.0</td></tr>
+<tr class="memdesc:af35d88426851c22dd07a69aa66de959a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Beam mass density.  <a href="namespaceGlobal__Parameters.html#af35d88426851c22dd07a69aa66de959a">More...</a><br /></td></tr>
+<tr class="separator:af35d88426851c22dd07a69aa66de959a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a> =0.1</td></tr>
+<tr class="memdesc:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pseudo-solid Poisson ratio.  <a href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">More...</a><br /></td></tr>
+<tr class="separator:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab29c9f716872de235c78e62bce2c4109"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#ab29c9f716872de235c78e62bce2c4109">Dt</a> = <a class="el" href="namespaceGlobal__Parameters.html#aeb964d25d190afd43c8317d4217f31b4">T</a>/40.0</td></tr>
+<tr class="memdesc:ab29c9f716872de235c78e62bce2c4109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestep for simulation: 40 steps per period.  <a href="namespaceGlobal__Parameters.html#ab29c9f716872de235c78e62bce2c4109">More...</a><br /></td></tr>
+<tr class="separator:ab29c9f716872de235c78e62bce2c4109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Global parameters. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a536aa5314a6cdb36af852e9513351d55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a536aa5314a6cdb36af852e9513351d55">&#9670;&nbsp;</a></span>flux()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::flux </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flux: Pulsatile flow. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00244">244</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00235">T</a>, <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00238">U_base</a>, and <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00241">U_perturbation</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00392">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::actions_before_implicit_timestep()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ab29c9f716872de235c78e62bce2c4109"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab29c9f716872de235c78e62bce2c4109">&#9670;&nbsp;</a></span>Dt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Dt = <a class="el" href="namespaceGlobal__Parameters.html#aeb964d25d190afd43c8317d4217f31b4">T</a>/40.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Timestep for simulation: 40 steps per period. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00259">259</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l01068">main()</a>.</p>
+
+</div>
+</div>
+<a id="ae1aaf6e9438d5ff7715fe6ceaeaf4fbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1aaf6e9438d5ff7715fe6ceaeaf4fbc">&#9670;&nbsp;</a></span>Fluid_height</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Fluid_height =1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>height of fluid mesh </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00207">207</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00392">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::actions_before_implicit_timestep()</a>, and <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="aced7b712f2e8390ceef273157690001b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced7b712f2e8390ceef273157690001b">&#9670;&nbsp;</a></span>Fluid_length_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Fluid_length_left =1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>length of fluid mesh to left of leaflet </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00201">201</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a0a2d2dfd5a51de4b4fcd3937c029010f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a2d2dfd5a51de4b4fcd3937c029010f">&#9670;&nbsp;</a></span>Fluid_length_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Fluid_length_right =3.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>length of fluid mesh to right of leaflet </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00204">204</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ab360628e7830e43e355ce5768f6d6a6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab360628e7830e43e355ce5768f6d6a6c">&#9670;&nbsp;</a></span>H</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::H =0.05</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Non-dimensional wall thickness. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00228">228</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a3e3428638f89f970fcf2148b0bab1465"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e3428638f89f970fcf2148b0bab1465">&#9670;&nbsp;</a></span>Lambda_sq</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Lambda_sq =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pseudo-solid mass density. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00250">250</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="af35d88426851c22dd07a69aa66de959a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af35d88426851c22dd07a69aa66de959a">&#9670;&nbsp;</a></span>Lambda_sq_beam</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Lambda_sq_beam =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Beam mass density. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00253">253</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00428">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::doc_parameters()</a>, and <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a58c392f43a98de12e513c4bc50169fa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58c392f43a98de12e513c4bc50169fa6">&#9670;&nbsp;</a></span>Leaflet_height</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Leaflet_height =0.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>height of leaflet </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00198">198</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a84d27a1abb5d90476de43a9920dc347f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84d27a1abb5d90476de43a9920dc347f">&#9670;&nbsp;</a></span>Leaflet_x0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Leaflet_x0 = 1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>x-position of root of leaflet </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00195">195</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a899325ce0b7ede8237bd52d8f0fd44e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a899325ce0b7ede8237bd52d8f0fd44e2">&#9670;&nbsp;</a></span>Mesh_nleft</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Global_Parameters::Mesh_nleft =4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Num elements to left of leaflet in coarse mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00210">210</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a83ca6bb6240a3f5ef2199a8646607dcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83ca6bb6240a3f5ef2199a8646607dcf">&#9670;&nbsp;</a></span>Mesh_nright</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Global_Parameters::Mesh_nright =12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Num elements to right of leaflet in coarse mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00213">213</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a77f2f492d44897203cceb4cbadef7aba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77f2f492d44897203cceb4cbadef7aba">&#9670;&nbsp;</a></span>Mesh_ny1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Global_Parameters::Mesh_ny1 =2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Num elements in fluid mesh in y dirn adjacent to leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00216">216</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ab0c1b5c0070b43a56ef64b106b6e2930"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0c1b5c0070b43a56ef64b106b6e2930">&#9670;&nbsp;</a></span>Mesh_ny2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Global_Parameters::Mesh_ny2 =2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Num elements in fluid mesh in y dirn above leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00219">219</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a20fccdcfa2c15ad8b951b9ada3bb1661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20fccdcfa2c15ad8b951b9ada3bb1661">&#9670;&nbsp;</a></span>Nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Nu =0.1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pseudo-solid Poisson ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00256">256</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a7814fddf663e56168174a42d2cd6b4c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7814fddf663e56168174a42d2cd6b4c1">&#9670;&nbsp;</a></span>Q</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Q =2.0e-7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fluid structure interaction parameter: Ratio of stresses used for non-dimensionalisation of fluid to solid stresses. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00232">232</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00428">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::doc_parameters()</a>, and <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a9d72e94a9305c6a310940a6a427ebe06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d72e94a9305c6a310940a6a427ebe06">&#9670;&nbsp;</a></span>Re</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Re =50.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reynolds number. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00222">222</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00428">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::doc_parameters()</a>, <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>, and <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l01068">main()</a>.</p>
+
+</div>
+</div>
+<a id="a7a59a32365e87566069e458dc83bd18a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a59a32365e87566069e458dc83bd18a">&#9670;&nbsp;</a></span>ReSt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::ReSt =50.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Womersley number: Product of Reynolds and Strouhal numbers. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00225">225</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00490">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::FSIChannelWithLeafletProblem()</a>, and <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l01068">main()</a>.</p>
+
+</div>
+</div>
+<a id="aeb964d25d190afd43c8317d4217f31b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb964d25d190afd43c8317d4217f31b4">&#9670;&nbsp;</a></span>T</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::T =1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Period for fluctuations in flux. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00235">235</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00428">FSIChannelWithLeafletProblem&lt; ELEMENT &gt;::doc_parameters()</a>, <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00244">flux()</a>, and <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l01068">main()</a>.</p>
+
+</div>
+</div>
+<a id="a6c27745997f9e118f0a99bf0390dbf4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c27745997f9e118f0a99bf0390dbf4b">&#9670;&nbsp;</a></span>U_base</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::U_base =1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Min. flux. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00238">238</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00244">flux()</a>.</p>
+
+</div>
+</div>
+<a id="ac04d493b5af4d1c99a9574489cf4dda0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac04d493b5af4d1c99a9574489cf4dda0">&#9670;&nbsp;</a></span>U_perturbation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::U_perturbation =0.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Max. flux. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00241">241</a> of file <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html">fsi_channel_with_leaflet_precond.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__channel__with__leaflet__precond_8cc_source.html#l00244">flux()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:25:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members - Functions</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>actions_after_newton_solve()
+: <a class="el" href="classChannelSpineFlowProblem.html#a419a80ef3d19438f193bd7843f72446a">ChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classSpikedChannelSpineFlowProblem.html#a4aca63a902ad477dbe1cb9d170aebbc2">SpikedChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>actions_before_newton_solve()
+: <a class="el" href="classChannelSpineFlowProblem.html#aaf6dd8a8a472ccd938df579aba61ec97">ChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classSpikedChannelSpineFlowProblem.html#a98e464ea1ab1c14d703415d63e89115e">SpikedChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>amplitude()
+: <a class="el" href="classSinusoidalWall.html#a654a7ccf081040971442d8534f1e6807">SinusoidalWall</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>ChannelSpineFlowProblem()
+: <a class="el" href="classChannelSpineFlowProblem.html#a23f1b987e3395b1d101eaf3f3b5c94b2">ChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_d"></a>- d -</h3><ul>
+<li>d2position()
+: <a class="el" href="classSinusoidalWall.html#a96bda32ccbca0aa16a5d7e43ed2376e9">SinusoidalWall</a>
+, <a class="el" href="classSpikedLine.html#a5feeb76bcde12139b4fc5b8797ae033b">SpikedLine</a>
+</li>
+<li>doc_solution()
+: <a class="el" href="classChannelSpineFlowProblem.html#a101bdeee56502231945cbac272ca21f6">ChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classSpikedChannelSpineFlowProblem.html#ab9fc5d18831a928a3ad7e2e13efaa6c4">SpikedChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>dposition()
+: <a class="el" href="classSinusoidalWall.html#a3ab79b227fd0bae3694737099c519346">SinusoidalWall</a>
+, <a class="el" href="classSpikedLine.html#a8c7c95b0c572a33ca9206b01d10c99c5">SpikedLine</a>
+</li>
+</ul>
+
+
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>geom_data_pt()
+: <a class="el" href="classSinusoidalWall.html#ab9dc7c9e02dac3171c378cea6949f544">SinusoidalWall</a>
+, <a class="el" href="classSpikedLine.html#abf25117b43790ca3a9afb826188bc5fc">SpikedLine</a>
+</li>
+</ul>
+
+
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>height()
+: <a class="el" href="classSinusoidalWall.html#a78861ab97b81bc78e05c3ec260c6479d">SinusoidalWall</a>
+</li>
+<li>height_fct()
+: <a class="el" href="classSimpleSpineMesh.html#a99398fc7ef50db36d30f6c1d01aa3758">SimpleSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>height_fct_pt()
+: <a class="el" href="classSimpleSpineMesh.html#af84290225b4aea3fd6ba27ad979059a0">SimpleSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>mesh_pt()
+: <a class="el" href="classChannelSpineFlowProblem.html#ab68c7ab5406b90a0ef56c39b67f83a09">ChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classSpikedChannelSpineFlowProblem.html#a2125f8744b2e4a8f76a2bafee264db94">SpikedChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_n"></a>- n -</h3><ul>
+<li>ngeom_data()
+: <a class="el" href="classSinusoidalWall.html#ada343bc36f0d4dd1a0b79da62d10c33d">SinusoidalWall</a>
+, <a class="el" href="classSpikedLine.html#a13ef991b5c044d5f6ce154122c10aeca">SpikedLine</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>position()
+: <a class="el" href="classSinusoidalWall.html#a8a1ce17bdb30f20894e1d85668877502">SinusoidalWall</a>
+, <a class="el" href="classSpikedLine.html#ac6356a30cad06346e46a494e226d5219">SpikedLine</a>
+, <a class="el" href="classWavyWall.html#a9a9f5a98cb0d15ee801b52495be5e5bf">WavyWall</a>
+</li>
+</ul>
+
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>SimpleSpineMesh()
+: <a class="el" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb">SimpleSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>SinusoidalWall()
+: <a class="el" href="classSinusoidalWall.html#a6179a8823d039fc3b090db1cfce30a36">SinusoidalWall</a>
+</li>
+<li>SpikedChannelSpineFlowProblem()
+: <a class="el" href="classSpikedChannelSpineFlowProblem.html#a45f0bab84a0ecc00b7928d2e982af1bb">SpikedChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>SpikedLine()
+: <a class="el" href="classSpikedLine.html#a01d0867c2a0eefe3443456b2557ebc52">SpikedLine</a>
+</li>
+<li>spine_node_update()
+: <a class="el" href="classSimpleSpineMesh.html#a4735e047eab146cafc3090f829373ef2">SimpleSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_u"></a>- u -</h3><ul>
+<li>update_spine_heights()
+: <a class="el" href="classSimpleSpineMesh.html#a2248fb8df448b0a02377a0cfb6f57851">SimpleSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_w"></a>- w -</h3><ul>
+<li>WavyWall()
+: <a class="el" href="classWavyWall.html#a7ef7a36cbce8798c1e4a99165dee8cc0">WavyWall</a>
+</li>
+</ul>
+
+
+<h3><a id="index__7E"></a>- ~ -</h3><ul>
+<li>~ChannelSpineFlowProblem()
+: <a class="el" href="classChannelSpineFlowProblem.html#abdf2cc520915167d8718499459df348b">ChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>~SinusoidalWall()
+: <a class="el" href="classSinusoidalWall.html#a7e5c29a951c707cb87e168ed943a7956">SinusoidalWall</a>
+</li>
+<li>~SpikedChannelSpineFlowProblem()
+: <a class="el" href="classSpikedChannelSpineFlowProblem.html#a48ee634b61ca54658104d476c683264e">SpikedChannelSpineFlowProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>~SpikedLine()
+: <a class="el" href="classSpikedLine.html#a54f1b8a7951ad8205741e78fc75afaa3">SpikedLine</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:10:25
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

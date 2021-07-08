@@ -1,0 +1,275 @@
+\hypertarget{classUnstructuredFluidProblem}{}\doxysection{Unstructured\+Fluid\+Problem$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classUnstructuredFluidProblem}\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+
+
+Unstructured fluid problem.  
+
+
+Inheritance diagram for Unstructured\+Fluid\+Problem$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUnstructuredFluidProblem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUnstructuredFluidProblem_a9751f4afac540e148b3d90ae43dd5187}{Unstructured\+Fluid\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classUnstructuredFluidProblem_a4d660faa6bae35197a4ea73139ac9963}{$\sim$\+Unstructured\+Fluid\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUnstructuredFluidProblem_a3d93e13193cd466fa0901a470e281765}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve\+: empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUnstructuredFluidProblem_af6811af7c3d4241254278ec246733d93}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve\+: empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUnstructuredFluidProblem_abcc9f0065665ae5239988b1a812e3f78}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classUnstructuredFluidProblem_a8afc18327561107094fa94f2918a385f}{nfluid\+\_\+inflow\+\_\+traction\+\_\+boundary}} ()
+\begin{DoxyCompactList}\small\item\em Return total number of fluid inflow traction boundaries. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classUnstructuredFluidProblem_abcaa700f2e0e1b2097e7dc25fe087862}{nfluid\+\_\+outflow\+\_\+traction\+\_\+boundary}} ()
+\begin{DoxyCompactList}\small\item\em Return total number of fluid outflow traction boundaries. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classUnstructuredFluidProblem_ae04e768e915a5e097527cea22558203d}{nfluid\+\_\+traction\+\_\+boundary}} ()
+\begin{DoxyCompactList}\small\item\em Return total number of fluid outflow traction boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classUnstructuredFluidProblem_aea2fa32b4dd90aab81da540566b9925a}{create\+\_\+parallel\+\_\+outflow\+\_\+lagrange\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create Lagrange multiplier elements that enforce parallel outflow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classUnstructuredFluidProblem_ade90cb92dd49b9d897ed538b1876b060}{Fluid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Bulk fluid mesh. \end{DoxyCompactList}\item 
+Vector$<$ Mesh $\ast$ $>$ \mbox{\hyperlink{classUnstructuredFluidProblem_a537c5d8a474eccb58f4de75cbdab4e9d}{Parallel\+\_\+outflow\+\_\+lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Meshes of Face\+Elements imposing parallel outflow and a pressure at the in/outflow. \end{DoxyCompactList}\item 
+Vector$<$ unsigned $>$ \mbox{\hyperlink{classUnstructuredFluidProblem_a2923e009bcea7cdbdd7ea5788580a3f8}{Inflow\+\_\+boundary\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em I\+Ds of fluid mesh boundaries along which inflow boundary conditions are applied. \end{DoxyCompactList}\item 
+Vector$<$ unsigned $>$ \mbox{\hyperlink{classUnstructuredFluidProblem_a9bace139103152045dfe88e3d0163811}{Outflow\+\_\+boundary\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em I\+Ds of fluid mesh boundaries along which inflow boundary conditions are applied. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class Unstructured\+Fluid\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Unstructured fluid problem. 
+
+Definition at line 68 of file vmtk\+\_\+fluid.\+cc.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classUnstructuredFluidProblem_a9751f4afac540e148b3d90ae43dd5187}\label{classUnstructuredFluidProblem_a9751f4afac540e148b3d90ae43dd5187}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!UnstructuredFluidProblem@{UnstructuredFluidProblem}}
+\index{UnstructuredFluidProblem@{UnstructuredFluidProblem}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{UnstructuredFluidProblem()}{UnstructuredFluidProblem()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}}
+
+
+
+Constructor\+: 
+
+Constructor for unstructured 3D fluid problem. 
+
+Definition at line 134 of file vmtk\+\_\+fluid.\+cc.
+
+
+
+References build\+\_\+global\+\_\+mesh(), and Global\+\_\+\+Parameters\+::\+Re.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_a4d660faa6bae35197a4ea73139ac9963}\label{classUnstructuredFluidProblem_a4d660faa6bae35197a4ea73139ac9963}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!````~UnstructuredFluidProblem@{$\sim$UnstructuredFluidProblem}}
+\index{````~UnstructuredFluidProblem@{$\sim$UnstructuredFluidProblem}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$UnstructuredFluidProblem()}{~UnstructuredFluidProblem()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line 77 of file vmtk\+\_\+fluid.\+cc.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classUnstructuredFluidProblem_af6811af7c3d4241254278ec246733d93}\label{classUnstructuredFluidProblem_af6811af7c3d4241254278ec246733d93}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve\+: empty. 
+
+
+
+Definition at line 83 of file vmtk\+\_\+fluid.\+cc.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_a3d93e13193cd466fa0901a470e281765}\label{classUnstructuredFluidProblem_a3d93e13193cd466fa0901a470e281765}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve\+: empty. 
+
+
+
+Definition at line 80 of file vmtk\+\_\+fluid.\+cc.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_aea2fa32b4dd90aab81da540566b9925a}\label{classUnstructuredFluidProblem_aea2fa32b4dd90aab81da540566b9925a}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!create\_parallel\_outflow\_lagrange\_elements@{create\_parallel\_outflow\_lagrange\_elements}}
+\index{create\_parallel\_outflow\_lagrange\_elements@{create\_parallel\_outflow\_lagrange\_elements}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_parallel\_outflow\_lagrange\_elements()}{create\_parallel\_outflow\_lagrange\_elements()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+parallel\+\_\+outflow\+\_\+lagrange\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create Lagrange multiplier elements that enforce parallel outflow. 
+
+Create Lagrange multiplier elements that impose parallel outflow. 
+
+Definition at line 329 of file vmtk\+\_\+fluid.\+cc.
+
+
+
+References Global\+\_\+\+Parameters\+::\+P\+\_\+in, and Global\+\_\+\+Parameters\+::\+P\+\_\+out.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_abcc9f0065665ae5239988b1a812e3f78}\label{classUnstructuredFluidProblem_abcc9f0065665ae5239988b1a812e3f78}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line 396 of file vmtk\+\_\+fluid.\+cc.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_a8afc18327561107094fa94f2918a385f}\label{classUnstructuredFluidProblem_a8afc18327561107094fa94f2918a385f}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!nfluid\_inflow\_traction\_boundary@{nfluid\_inflow\_traction\_boundary}}
+\index{nfluid\_inflow\_traction\_boundary@{nfluid\_inflow\_traction\_boundary}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfluid\_inflow\_traction\_boundary()}{nfluid\_inflow\_traction\_boundary()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nfluid\+\_\+inflow\+\_\+traction\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return total number of fluid inflow traction boundaries. 
+
+
+
+Definition at line 89 of file vmtk\+\_\+fluid.\+cc.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_abcaa700f2e0e1b2097e7dc25fe087862}\label{classUnstructuredFluidProblem_abcaa700f2e0e1b2097e7dc25fe087862}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!nfluid\_outflow\_traction\_boundary@{nfluid\_outflow\_traction\_boundary}}
+\index{nfluid\_outflow\_traction\_boundary@{nfluid\_outflow\_traction\_boundary}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfluid\_outflow\_traction\_boundary()}{nfluid\_outflow\_traction\_boundary()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nfluid\+\_\+outflow\+\_\+traction\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return total number of fluid outflow traction boundaries. 
+
+
+
+Definition at line 95 of file vmtk\+\_\+fluid.\+cc.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_ae04e768e915a5e097527cea22558203d}\label{classUnstructuredFluidProblem_ae04e768e915a5e097527cea22558203d}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!nfluid\_traction\_boundary@{nfluid\_traction\_boundary}}
+\index{nfluid\_traction\_boundary@{nfluid\_traction\_boundary}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfluid\_traction\_boundary()}{nfluid\_traction\_boundary()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nfluid\+\_\+traction\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return total number of fluid outflow traction boundaries. 
+
+
+
+Definition at line 101 of file vmtk\+\_\+fluid.\+cc.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classUnstructuredFluidProblem_ade90cb92dd49b9d897ed538b1876b060}\label{classUnstructuredFluidProblem_ade90cb92dd49b9d897ed538b1876b060}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!Fluid\_mesh\_pt@{Fluid\_mesh\_pt}}
+\index{Fluid\_mesh\_pt@{Fluid\_mesh\_pt}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Fluid\_mesh\_pt}{Fluid\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Tetgen\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Fluid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Bulk fluid mesh. 
+
+
+
+Definition at line 112 of file vmtk\+\_\+fluid.\+cc.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_a2923e009bcea7cdbdd7ea5788580a3f8}\label{classUnstructuredFluidProblem_a2923e009bcea7cdbdd7ea5788580a3f8}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!Inflow\_boundary\_id@{Inflow\_boundary\_id}}
+\index{Inflow\_boundary\_id@{Inflow\_boundary\_id}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Inflow\_boundary\_id}{Inflow\_boundary\_id}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Vector$<$unsigned$>$ \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Inflow\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+I\+Ds of fluid mesh boundaries along which inflow boundary conditions are applied. 
+
+
+
+Definition at line 120 of file vmtk\+\_\+fluid.\+cc.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_a9bace139103152045dfe88e3d0163811}\label{classUnstructuredFluidProblem_a9bace139103152045dfe88e3d0163811}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!Outflow\_boundary\_id@{Outflow\_boundary\_id}}
+\index{Outflow\_boundary\_id@{Outflow\_boundary\_id}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Outflow\_boundary\_id}{Outflow\_boundary\_id}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Vector$<$unsigned$>$ \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Outflow\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+I\+Ds of fluid mesh boundaries along which inflow boundary conditions are applied. 
+
+
+
+Definition at line 124 of file vmtk\+\_\+fluid.\+cc.
+
+\mbox{\Hypertarget{classUnstructuredFluidProblem_a537c5d8a474eccb58f4de75cbdab4e9d}\label{classUnstructuredFluidProblem_a537c5d8a474eccb58f4de75cbdab4e9d}} 
+\index{UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}!Parallel\_outflow\_lagrange\_multiplier\_mesh\_pt@{Parallel\_outflow\_lagrange\_multiplier\_mesh\_pt}}
+\index{Parallel\_outflow\_lagrange\_multiplier\_mesh\_pt@{Parallel\_outflow\_lagrange\_multiplier\_mesh\_pt}!UnstructuredFluidProblem$<$ ELEMENT $>$@{UnstructuredFluidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Parallel\_outflow\_lagrange\_multiplier\_mesh\_pt}{Parallel\_outflow\_lagrange\_multiplier\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Vector$<$Mesh$\ast$$>$ \mbox{\hyperlink{classUnstructuredFluidProblem}{Unstructured\+Fluid\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Parallel\+\_\+outflow\+\_\+lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Meshes of Face\+Elements imposing parallel outflow and a pressure at the in/outflow. 
+
+
+
+Definition at line 116 of file vmtk\+\_\+fluid.\+cc.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{vmtk__fluid_8cc}{vmtk\+\_\+fluid.\+cc}}\end{DoxyCompactItemize}

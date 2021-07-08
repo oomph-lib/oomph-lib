@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::CompressedMatrixCoefficient Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html">CompressedMatrixCoefficient</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1CompressedMatrixCoefficient-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::CompressedMatrixCoefficient Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class for a compressed-matrix coefficent (for either CC or CR matrices). Contains the (row or column) index and value of a coefficient in a compressed row or column. Currently only used in ILU(0) for CCDoubleMatrices to allow the coefficients in each compressed column [row] to be sorted by their row [column] index.  
+ <a href="classoomph_1_1CompressedMatrixCoefficient.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7cbfc9de624baabd04b3501d9970bfb2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#a7cbfc9de624baabd04b3501d9970bfb2">CompressedMatrixCoefficient</a> ()</td></tr>
+<tr class="memdesc:a7cbfc9de624baabd04b3501d9970bfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor (no arguments)  <a href="classoomph_1_1CompressedMatrixCoefficient.html#a7cbfc9de624baabd04b3501d9970bfb2">More...</a><br /></td></tr>
+<tr class="separator:a7cbfc9de624baabd04b3501d9970bfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80eba1cc000e17b7de0a24dbae74cb13"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#a80eba1cc000e17b7de0a24dbae74cb13">CompressedMatrixCoefficient</a> (const unsigned &amp;<a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#a680fdf9009100911ec5c43b53a0dccee">index</a>, const double &amp;<a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#ad37c133b527ae8ad5aa841ba3d3a29b3">value</a>)</td></tr>
+<tr class="memdesc:a80eba1cc000e17b7de0a24dbae74cb13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor (takes the index and value as arguments)  <a href="classoomph_1_1CompressedMatrixCoefficient.html#a80eba1cc000e17b7de0a24dbae74cb13">More...</a><br /></td></tr>
+<tr class="separator:a80eba1cc000e17b7de0a24dbae74cb13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d77f4d596e5263c1fe235dae6a9081c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#a1d77f4d596e5263c1fe235dae6a9081c">~CompressedMatrixCoefficient</a> ()</td></tr>
+<tr class="memdesc:a1d77f4d596e5263c1fe235dae6a9081c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (does nothing)  <a href="classoomph_1_1CompressedMatrixCoefficient.html#a1d77f4d596e5263c1fe235dae6a9081c">More...</a><br /></td></tr>
+<tr class="separator:a1d77f4d596e5263c1fe235dae6a9081c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa45c925ae1a3a0620475b60f64b6cf68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#aa45c925ae1a3a0620475b60f64b6cf68">CompressedMatrixCoefficient</a> (const <a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html">CompressedMatrixCoefficient</a> &amp;<a class="el" href="the__data__structure_8txt.html#a03668dd8951154b5a0d25cfd2a9483d9">a</a>)</td></tr>
+<tr class="memdesc:aa45c925ae1a3a0620475b60f64b6cf68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor. Not Broken. Required for STL sort function.  <a href="classoomph_1_1CompressedMatrixCoefficient.html#aa45c925ae1a3a0620475b60f64b6cf68">More...</a><br /></td></tr>
+<tr class="separator:aa45c925ae1a3a0620475b60f64b6cf68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab58ad8da0c00b3c61acc13f68e865af3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#ab58ad8da0c00b3c61acc13f68e865af3">operator=</a> (const <a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html">CompressedMatrixCoefficient</a> &amp;<a class="el" href="the__data__structure_8txt.html#a03668dd8951154b5a0d25cfd2a9483d9">a</a>)</td></tr>
+<tr class="memdesc:ab58ad8da0c00b3c61acc13f68e865af3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment Operator. Not Broken. Required for STL sort function.  <a href="classoomph_1_1CompressedMatrixCoefficient.html#ab58ad8da0c00b3c61acc13f68e865af3">More...</a><br /></td></tr>
+<tr class="separator:ab58ad8da0c00b3c61acc13f68e865af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69f893759bb296dd6fb862b7d3e2fce3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#a69f893759bb296dd6fb862b7d3e2fce3">operator&lt;</a> (const <a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html">CompressedMatrixCoefficient</a> &amp;<a class="el" href="the__data__structure_8txt.html#a03668dd8951154b5a0d25cfd2a9483d9">a</a>) const</td></tr>
+<tr class="memdesc:a69f893759bb296dd6fb862b7d3e2fce3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Less Than Operator (for the STL sort function)  <a href="classoomph_1_1CompressedMatrixCoefficient.html#a69f893759bb296dd6fb862b7d3e2fce3">More...</a><br /></td></tr>
+<tr class="separator:a69f893759bb296dd6fb862b7d3e2fce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680fdf9009100911ec5c43b53a0dccee"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#a680fdf9009100911ec5c43b53a0dccee">index</a> ()</td></tr>
+<tr class="memdesc:a680fdf9009100911ec5c43b53a0dccee"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the coefficient's (row or column) index  <a href="classoomph_1_1CompressedMatrixCoefficient.html#a680fdf9009100911ec5c43b53a0dccee">More...</a><br /></td></tr>
+<tr class="separator:a680fdf9009100911ec5c43b53a0dccee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad37c133b527ae8ad5aa841ba3d3a29b3"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#ad37c133b527ae8ad5aa841ba3d3a29b3">value</a> ()</td></tr>
+<tr class="memdesc:ad37c133b527ae8ad5aa841ba3d3a29b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the coefficient value  <a href="classoomph_1_1CompressedMatrixCoefficient.html#ad37c133b527ae8ad5aa841ba3d3a29b3">More...</a><br /></td></tr>
+<tr class="separator:ad37c133b527ae8ad5aa841ba3d3a29b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd77daf8774a403432fe019da052c6da"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#acd77daf8774a403432fe019da052c6da">index</a> () const</td></tr>
+<tr class="memdesc:acd77daf8774a403432fe019da052c6da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the coefficient's (row or column_ index (const version)  <a href="classoomph_1_1CompressedMatrixCoefficient.html#acd77daf8774a403432fe019da052c6da">More...</a><br /></td></tr>
+<tr class="separator:acd77daf8774a403432fe019da052c6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8659b8a8c7cb778d337cf58c38a1d24a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#a8659b8a8c7cb778d337cf58c38a1d24a">value</a> () const</td></tr>
+<tr class="memdesc:a8659b8a8c7cb778d337cf58c38a1d24a"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the coefficient's value (const version)  <a href="classoomph_1_1CompressedMatrixCoefficient.html#a8659b8a8c7cb778d337cf58c38a1d24a">More...</a><br /></td></tr>
+<tr class="separator:a8659b8a8c7cb778d337cf58c38a1d24a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ac39f53e43e7edaa4ba58274e0ed939c4"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#ac39f53e43e7edaa4ba58274e0ed939c4">Index</a></td></tr>
+<tr class="memdesc:ac39f53e43e7edaa4ba58274e0ed939c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">the row or column index of the compressed-matrix coefficient  <a href="classoomph_1_1CompressedMatrixCoefficient.html#ac39f53e43e7edaa4ba58274e0ed939c4">More...</a><br /></td></tr>
+<tr class="separator:ac39f53e43e7edaa4ba58274e0ed939c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8873cbcd41c135197f049bbcec71fa6b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html#a8873cbcd41c135197f049bbcec71fa6b">Value</a></td></tr>
+<tr class="memdesc:a8873cbcd41c135197f049bbcec71fa6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">the value of the compressed-matrix coefficient  <a href="classoomph_1_1CompressedMatrixCoefficient.html#a8873cbcd41c135197f049bbcec71fa6b">More...</a><br /></td></tr>
+<tr class="separator:a8873cbcd41c135197f049bbcec71fa6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for a compressed-matrix coefficent (for either CC or CR matrices). Contains the (row or column) index and value of a coefficient in a compressed row or column. Currently only used in ILU(0) for CCDoubleMatrices to allow the coefficients in each compressed column [row] to be sorted by their row [column] index. </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00202">202</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7cbfc9de624baabd04b3501d9970bfb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cbfc9de624baabd04b3501d9970bfb2">&#9670;&nbsp;</a></span>CompressedMatrixCoefficient() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CompressedMatrixCoefficient::CompressedMatrixCoefficient </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor (no arguments) </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00208">208</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+</div>
+</div>
+<a id="a80eba1cc000e17b7de0a24dbae74cb13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80eba1cc000e17b7de0a24dbae74cb13">&#9670;&nbsp;</a></span>CompressedMatrixCoefficient() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CompressedMatrixCoefficient::CompressedMatrixCoefficient </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor (takes the index and value as arguments) </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00211">211</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00242">index()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00257">Index</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00245">value()</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00260">Value</a>.</p>
+
+</div>
+</div>
+<a id="a1d77f4d596e5263c1fe235dae6a9081c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d77f4d596e5263c1fe235dae6a9081c">&#9670;&nbsp;</a></span>~CompressedMatrixCoefficient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CompressedMatrixCoefficient::~CompressedMatrixCoefficient </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (does nothing) </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00219">219</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+</div>
+</div>
+<a id="aa45c925ae1a3a0620475b60f64b6cf68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa45c925ae1a3a0620475b60f64b6cf68">&#9670;&nbsp;</a></span>CompressedMatrixCoefficient() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CompressedMatrixCoefficient::CompressedMatrixCoefficient </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html">CompressedMatrixCoefficient</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy Constructor. Not Broken. Required for STL sort function. </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00222">222</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a26a1818885f7aebd0129ce36f6d391e8">a()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00257">Index</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00260">Value</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a680fdf9009100911ec5c43b53a0dccee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a680fdf9009100911ec5c43b53a0dccee">&#9670;&nbsp;</a></span>index() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::CompressedMatrixCoefficient::index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function for the coefficient's (row or column) index </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00242">242</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00257">Index</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__preconditioners_8h_source.html#l00211">CompressedMatrixCoefficient()</a>.</p>
+
+</div>
+</div>
+<a id="acd77daf8774a403432fe019da052c6da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd77daf8774a403432fe019da052c6da">&#9670;&nbsp;</a></span>index() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CompressedMatrixCoefficient::index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the coefficient's (row or column_ index (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00249">249</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00257">Index</a>.</p>
+
+</div>
+</div>
+<a id="a69f893759bb296dd6fb862b7d3e2fce3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69f893759bb296dd6fb862b7d3e2fce3">&#9670;&nbsp;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::CompressedMatrixCoefficient::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html">CompressedMatrixCoefficient</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Less Than Operator (for the STL sort function) </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00236">236</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a26a1818885f7aebd0129ce36f6d391e8">a()</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00257">Index</a>.</p>
+
+</div>
+</div>
+<a id="ab58ad8da0c00b3c61acc13f68e865af3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab58ad8da0c00b3c61acc13f68e865af3">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CompressedMatrixCoefficient::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1CompressedMatrixCoefficient.html">CompressedMatrixCoefficient</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assignment Operator. Not Broken. Required for STL sort function. </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00229">229</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a26a1818885f7aebd0129ce36f6d391e8">a()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00257">Index</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00260">Value</a>.</p>
+
+</div>
+</div>
+<a id="ad37c133b527ae8ad5aa841ba3d3a29b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad37c133b527ae8ad5aa841ba3d3a29b3">&#9670;&nbsp;</a></span>value() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::CompressedMatrixCoefficient::value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function for the coefficient value </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00245">245</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00260">Value</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__preconditioners_8h_source.html#l00211">CompressedMatrixCoefficient()</a>.</p>
+
+</div>
+</div>
+<a id="a8659b8a8c7cb778d337cf58c38a1d24a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8659b8a8c7cb778d337cf58c38a1d24a">&#9670;&nbsp;</a></span>value() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CompressedMatrixCoefficient::value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function for the coefficient's value (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00252">252</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00260">Value</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac39f53e43e7edaa4ba58274e0ed939c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac39f53e43e7edaa4ba58274e0ed939c4">&#9670;&nbsp;</a></span>Index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CompressedMatrixCoefficient::Index</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the row or column index of the compressed-matrix coefficient </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00257">257</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__preconditioners_8h_source.html#l00211">CompressedMatrixCoefficient()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00242">index()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00236">operator&lt;()</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00229">operator=()</a>.</p>
+
+</div>
+</div>
+<a id="a8873cbcd41c135197f049bbcec71fa6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8873cbcd41c135197f049bbcec71fa6b">&#9670;&nbsp;</a></span>Value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CompressedMatrixCoefficient::Value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the value of the compressed-matrix coefficient </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00260">260</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__preconditioners_8h_source.html#l00211">CompressedMatrixCoefficient()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00229">operator=()</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00245">value()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:25
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

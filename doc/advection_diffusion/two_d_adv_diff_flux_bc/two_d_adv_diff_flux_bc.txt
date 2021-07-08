@@ -1,0 +1,125 @@
+\mainpage Example problem: Adaptive solution of the 2D advection diffusion equation with flux boundary conditions
+
+In this problem we will discuss the 2D advection-diffusion problem
+with Neumann (flux) boundary conditions, using \c oomph-lib's 
+mesh adaptation routines.
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>Two-dimensional advection-diffusion problem in a rectangular domain</B>
+</CENTER> 
+Solve
+\f[
+\mbox{Pe}\ \sum_{i=1}^2 w_i \left(x_1,x_2 \right) \frac{\partial u}{\partial
+x_i} = \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} + f(x_1,x_2), 
+ \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@
+\f]
+in the rectangular domain \f$D =\left\{ (x_1,x_2) \in 
+[0,1] \times [0,2]\right\}\f$. We split the domain boundary \f$
+\partial D \f$ into two parts so that
+\f$ \partial D = \partial D_{Neumann} \cup \partial D_{Dirichlet} \f$,
+where \f$ \partial D_{Neumann} 
+= \left\{ (x_1,x_2) | x_1=1, \ x_2\in [0,2] \right\} \f$.
+On \f$ \partial D_{Dirichlet}\f$ we apply the Dirichlet boundary conditions
+\f[
+\left. u\right|_{\partial D_{Dirichlet}}=u_0,
+\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@
+\f]
+where the function \f$ u_0 \f$ is given. On  \f$ \partial D_{Neumann}\f$
+we apply the Neumann conditions 
+\f[
+\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}} = 
+\left. \frac{\partial u}{\partial x_1}\right|_{\partial D_{Neumann}}
+=g_0,
+\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_fluxBC]@
+\f]
+where the function \f$ g_0 \f$ is given.
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+As always, we validate the code by choosing the  boundary data and the
+source functions such that 
+\f[
+u(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\ \ \ \ \ \ \ \ \  @E[ExactSoln]@
+\f]
+is the exact solution of the problem.
+The plot below shows the numerical solution for \f$\Phi=45^\circ \f$,
+a Peclet number of \f$\mbox{Pe}= 200 \f$, and four 
+different values of the "steepness parameter", 
+\f$ \alpha =  0.2,\ 5,\ 10 \f$ and \f$ 15 \f$. 
+
+@I w 0.75\textwidth step_soln "Animation of the adaptive solution for various values of the `steepness parameter'. "
+
+As in the  <A HREF="../../two_d_adv_diff_adapt/html/index.html">example 
+with Dirichlet boundary conditions</A>, the unforced case is a lot 
+more interesting. The plot below shows the result for a zero source function
+\f$ f \equiv 0 \f$, Dirichlet boundary conditions determined from
+the "exact solution" of the forced problem for \f$ \alpha = 15\f$,
+and a prescribed flux of \f$ g_0 = -1 \f$ on \f$ \partial D_{Neumann}\f$.
+
+
+@I w 0.75\textwidth no_source "Plot of the adaptive solution of the unforced problem. "
+
+Along \f$ \partial D_{Dirichlet}\f$, the value of \f$ u \f$ is enforced
+by the Dirichlet boundary condition (@R[2DPoisson_BC]@) and,
+as in the  <A HREF="../../two_d_adv_diff_adapt/html/index.html">
+previous example</A>, the "wind" either sweeps this value into the
+interior of the domain or creates a sharp boundary layer within
+which the solution that is "swept" along from the interior adjusts itself
+to the prescribed boundary value. Along \f$ \partial D_{Neumann}\f$, the
+flux boundary condition  (@R[2DPoisson_fluxBC]@) imposes the normal
+derivative of the solution. This boundary condition is much
+"softer" than the Dirichlet condition and does not create boundary
+layers that are as sharp as the ones that develop on 
+ \f$ \partial D_{Dirichlet}\f$.
+
+<HR>   
+<HR>
+
+
+\section code The driver code
+The <A HREF="../../../../demo_drivers/advection_diffusion/two_d_adv_diff_flux_bc/two_d_adv_diff_flux_bc.cc">driver
+code</A> for this problem is so similar to the 
+<A HREF="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">
+corresponding Poisson problem</A> that we do not list it here.
+The modifications are the same as those discussed
+in the  <A HREF="../../two_d_adv_diff_adapt/html/index.html">
+advection diffusion problem with Dirichlet boundary conditions:</A>
+We have to specify the wind function and the Peclet number. 
+
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/advection_diffusion/two_d_adv_diff_flux_bc/">
+demo_drivers/advection_diffusion/two_d_adv_diff_flux_bc/
+</A>
+</CENTER>
+- The driver code is: 
+<CENTER>
+<A HREF="../../../../demo_drivers/advection_diffusion/two_d_adv_diff_flux_bc/two_d_adv_diff_flux_bc.cc">
+demo_drivers/advection_diffusion/two_d_adv_diff_flux_bc/two_d_adv_diff_flux_bc.cc
+</A>
+</CENTER>
+.
+
+
+
+
+
+
+
+
+
+

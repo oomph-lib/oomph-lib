@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::HangInfo Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1HangInfo-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::HangInfo Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class that contains data for hanging nodes.  
+ <a href="classoomph_1_1HangInfo.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nodes_8h_source.html">nodes.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a23d3ff929ac052ecb401e2a929e8ca64"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a23d3ff929ac052ecb401e2a929e8ca64">HangInfo</a> ()</td></tr>
+<tr class="memdesc:a23d3ff929ac052ecb401e2a929e8ca64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor, initialise vectors to have size zero.  <a href="classoomph_1_1HangInfo.html#a23d3ff929ac052ecb401e2a929e8ca64">More...</a><br /></td></tr>
+<tr class="separator:a23d3ff929ac052ecb401e2a929e8ca64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72416a50e81cf0646aed5501c8949bf1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a72416a50e81cf0646aed5501c8949bf1">HangInfo</a> (const unsigned &amp;n_master)</td></tr>
+<tr class="memdesc:a72416a50e81cf0646aed5501c8949bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative constructor when the number of master nodes is known.  <a href="classoomph_1_1HangInfo.html#a72416a50e81cf0646aed5501c8949bf1">More...</a><br /></td></tr>
+<tr class="separator:a72416a50e81cf0646aed5501c8949bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12e76983eb02020a62cd49db543414a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a12e76983eb02020a62cd49db543414a2">~HangInfo</a> ()</td></tr>
+<tr class="memdesc:a12e76983eb02020a62cd49db543414a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the storage.  <a href="classoomph_1_1HangInfo.html#a12e76983eb02020a62cd49db543414a2">More...</a><br /></td></tr>
+<tr class="separator:a12e76983eb02020a62cd49db543414a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b5af6e4adb35de2c039be5b9e26d662"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a4b5af6e4adb35de2c039be5b9e26d662">HangInfo</a> (const <a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a> &amp;)</td></tr>
+<tr class="memdesc:a4b5af6e4adb35de2c039be5b9e26d662"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1HangInfo.html#a4b5af6e4adb35de2c039be5b9e26d662">More...</a><br /></td></tr>
+<tr class="separator:a4b5af6e4adb35de2c039be5b9e26d662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b9609ab03f3a1a47a58029e81102466"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a0b9609ab03f3a1a47a58029e81102466">operator=</a> (const <a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a> &amp;)</td></tr>
+<tr class="memdesc:a0b9609ab03f3a1a47a58029e81102466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1HangInfo.html#a0b9609ab03f3a1a47a58029e81102466">More...</a><br /></td></tr>
+<tr class="separator:a0b9609ab03f3a1a47a58029e81102466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c1130b58db2ff6d5eee4f923ba365c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#aa9c1130b58db2ff6d5eee4f923ba365c">nmaster</a> () const</td></tr>
+<tr class="memdesc:aa9c1130b58db2ff6d5eee4f923ba365c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of master nodes.  <a href="classoomph_1_1HangInfo.html#aa9c1130b58db2ff6d5eee4f923ba365c">More...</a><br /></td></tr>
+<tr class="separator:aa9c1130b58db2ff6d5eee4f923ba365c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c102c3048a87bbfdde753a094f641fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a2c102c3048a87bbfdde753a094f641fe">master_node_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a2c102c3048a87bbfdde753a094f641fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the i-th master node.  <a href="classoomph_1_1HangInfo.html#a2c102c3048a87bbfdde753a094f641fe">More...</a><br /></td></tr>
+<tr class="separator:a2c102c3048a87bbfdde753a094f641fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a923bb47b87b6d4dd535e6ae41a4ff88c"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a923bb47b87b6d4dd535e6ae41a4ff88c">master_weight</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a923bb47b87b6d4dd535e6ae41a4ff88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return weight for dofs on i-th master node.  <a href="classoomph_1_1HangInfo.html#a923bb47b87b6d4dd535e6ae41a4ff88c">More...</a><br /></td></tr>
+<tr class="separator:a923bb47b87b6d4dd535e6ae41a4ff88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe4042d5805342d5e12b6a28e376885a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#afe4042d5805342d5e12b6a28e376885a">set_master_node_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1HangInfo.html#a2c102c3048a87bbfdde753a094f641fe">master_node_pt</a>, const double &amp;weight)</td></tr>
+<tr class="memdesc:afe4042d5805342d5e12b6a28e376885a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pointer to the i-th master node and its weight.  <a href="classoomph_1_1HangInfo.html#afe4042d5805342d5e12b6a28e376885a">More...</a><br /></td></tr>
+<tr class="separator:afe4042d5805342d5e12b6a28e376885a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7b5808b80bc4438726383e81a1b1e3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#af7b5808b80bc4438726383e81a1b1e3c">add_master_node_pt</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;<a class="el" href="classoomph_1_1HangInfo.html#a2c102c3048a87bbfdde753a094f641fe">master_node_pt</a>, const double &amp;weight)</td></tr>
+<tr class="memdesc:af7b5808b80bc4438726383e81a1b1e3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add (pointer to) master node and corresponding weight to the internally stored (pointers to) master nodes and weights.  <a href="classoomph_1_1HangInfo.html#af7b5808b80bc4438726383e81a1b1e3c">More...</a><br /></td></tr>
+<tr class="separator:af7b5808b80bc4438726383e81a1b1e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a7aaef82d109bb5daed0721402e97afe8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a7aaef82d109bb5daed0721402e97afe8">range_check</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a7aaef82d109bb5daed0721402e97afe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check that the argument is within the range of stored data values.  <a href="classoomph_1_1HangInfo.html#a7aaef82d109bb5daed0721402e97afe8">More...</a><br /></td></tr>
+<tr class="separator:a7aaef82d109bb5daed0721402e97afe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aa2bceeaff9247520fdd786f612237a18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#aa2bceeaff9247520fdd786f612237a18">Master_nodes_pt</a></td></tr>
+<tr class="memdesc:aa2bceeaff9247520fdd786f612237a18"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style array of pointers to nodes that this hanging node depends on.  <a href="classoomph_1_1HangInfo.html#aa2bceeaff9247520fdd786f612237a18">More...</a><br /></td></tr>
+<tr class="separator:aa2bceeaff9247520fdd786f612237a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9edb46a1890f19fb4dfc02c652cd398"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#ac9edb46a1890f19fb4dfc02c652cd398">Master_weights</a></td></tr>
+<tr class="memdesc:ac9edb46a1890f19fb4dfc02c652cd398"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style array of weights for the dofs on the master nodes.  <a href="classoomph_1_1HangInfo.html#ac9edb46a1890f19fb4dfc02c652cd398">More...</a><br /></td></tr>
+<tr class="separator:ac9edb46a1890f19fb4dfc02c652cd398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e256dac82251e6167bd7a763fe4e134"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a9e256dac82251e6167bd7a763fe4e134">Nmaster</a></td></tr>
+<tr class="memdesc:a9e256dac82251e6167bd7a763fe4e134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of master nodes required by this hanging node.  <a href="classoomph_1_1HangInfo.html#a9e256dac82251e6167bd7a763fe4e134">More...</a><br /></td></tr>
+<tr class="separator:a9e256dac82251e6167bd7a763fe4e134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that contains data for hanging nodes. </p>
+<p>To ensure inter-element continuity, the values and nodal positions of hanging nodes must be linear combinations of the values and positions on certain adjacent "master" nodes. For every hanging node <img class="formulaInl" alt="$ J $" src="form_8.png"/> , </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf U}_J = \sum_{K} {\bf U}_{K} \omega_{JK} \]" src="form_324.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf X}_J = \sum_{K} {\bf X}_{K} \omega_{JK} \]" src="form_11.png"/>
+</p>
+<p>, where <img class="formulaInl" alt="$ {\bf U}_I $" src="form_325.png"/> and <img class="formulaInl" alt="$ {\bf U}_I $" src="form_325.png"/> are Vectors containing the nodal values and positions of node <img class="formulaInl" alt="$ I $" src="form_326.png"/> respectively; the sum is taken over the hanging node's master nodes <img class="formulaInl" alt="$ K $" src="form_12.png"/> and <img class="formulaInl" alt="$ \omega_{JK} $" src="form_13.png"/> are suitable weights. This class provides storage and access functions for the pointers to the master nodes and their associated weights. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00679">679</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a23d3ff929ac052ecb401e2a929e8ca64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23d3ff929ac052ecb401e2a929e8ca64">&#9670;&nbsp;</a></span>HangInfo() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HangInfo::HangInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor, initialise vectors to have size zero. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00684">684</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01527">oomph::LeakCheckNames::HangInfo_build</a>.</p>
+
+</div>
+</div>
+<a id="a72416a50e81cf0646aed5501c8949bf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72416a50e81cf0646aed5501c8949bf1">&#9670;&nbsp;</a></span>HangInfo() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HangInfo::HangInfo </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_master</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Alternative constructor when the number of master nodes is known. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00692">692</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01527">oomph::LeakCheckNames::HangInfo_build</a>, <a class="el" href="nodes_8h_source.html#l00779">Master_nodes_pt</a>, and <a class="el" href="nodes_8h_source.html#l00782">Master_weights</a>.</p>
+
+</div>
+</div>
+<a id="a12e76983eb02020a62cd49db543414a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12e76983eb02020a62cd49db543414a2">&#9670;&nbsp;</a></span>~HangInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HangInfo::~HangInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete the storage. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00702">702</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01527">oomph::LeakCheckNames::HangInfo_build</a>, <a class="el" href="nodes_8h_source.html#l00779">Master_nodes_pt</a>, <a class="el" href="nodes_8h_source.html#l00782">Master_weights</a>, and <a class="el" href="nodes_8h_source.html#l00785">Nmaster</a>.</p>
+
+</div>
+</div>
+<a id="a4b5af6e4adb35de2c039be5b9e26d662"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b5af6e4adb35de2c039be5b9e26d662">&#9670;&nbsp;</a></span>HangInfo() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HangInfo::HangInfo </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00716">716</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af7b5808b80bc4438726383e81a1b1e3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7b5808b80bc4438726383e81a1b1e3c">&#9670;&nbsp;</a></span>add_master_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HangInfo::add_master_node_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>master_node_pt_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>weight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add (pointer to) master node and corresponding weight to the internally stored (pointers to) master nodes and weights. </p>
+<p>Add (pointer to) master node and corresponding weight to the internally stored (pointers to) master nodes and weights. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l01428">1428</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00779">Master_nodes_pt</a>, <a class="el" href="nodes_8h_source.html#l00782">Master_weights</a>, and <a class="el" href="nodes_8h_source.html#l00785">Nmaster</a>.</p>
+
+</div>
+</div>
+<a id="a2c102c3048a87bbfdde753a094f641fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c102c3048a87bbfdde753a094f641fe">&#9670;&nbsp;</a></span>master_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a>* const &amp; oomph::HangInfo::master_node_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a pointer to the i-th master node. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00731">731</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00779">Master_nodes_pt</a>, <a class="el" href="nodes_8h_source.html#l00785">Nmaster</a>, and <a class="el" href="nodes_8cc_source.html#l01393">range_check()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00894">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, <a class="el" href="element__with__moving__nodes_8cc_source.html#l00044">oomph::ElementWithMovingNodes::assemble_set_of_all_geometric_data()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00309">oomph::RefineableElement::assign_hanging_local_eqn_numbers()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01174">oomph::RefineableSolidElement::assign_solid_hanging_local_eqn_numbers()</a>, <a class="el" href="mesh_8cc_source.html#l06910">oomph::Mesh::check_halo_schemes()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l02170">oomph::TreeBasedRefineableMeshBase::complete_hanging_nodes_recursively()</a>, <a class="el" href="mesh_8cc_source.html#l09175">oomph::Mesh::delete_all_external_storage()</a>, <a class="el" href="refineable__advection__diffusion__elements_8h_source.html#l00199">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__spherical__advection__diffusion__elements_8h_source.html#l00202">oomph::RefineableSphericalAdvectionDiffusionEquations::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__axisym__advection__diffusion__elements_8h_source.html#l00206">oomph::RefineableAxisymAdvectionDiffusionEquations::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8h_source.html#l00172">oomph::RefineableAxisymmetricNavierStokesEquations::dinterpolated_u_axi_nst_ddata()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source.html#l00174">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::dinterpolated_u_axi_nst_ddata()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8h_source.html#l00223">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l00496">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l00576">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l00577">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__linear__elasticity__elements_8cc_source.html#l00040">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_linear_elasticity()</a>, <a class="el" href="refineable__time__harmonic__linear__elasticity__elements_8cc_source.html#l00040">oomph::RefineableTimeHarmonicLinearElasticityEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l00302">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::fill_in_generic_pressure_advection_diffusion_contribution_nst()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source.html#l00284">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::fill_in_generic_pressure_advection_diffusion_contribution_nst()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l00284">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::fill_in_generic_pressure_advection_diffusion_contribution_nst()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8cc_source.html#l00050">oomph::RefineablePolarNavierStokesEquations::fill_in_generic_residual_contribution()</a>, <a class="el" href="refineable__advection__diffusion__elements_8cc_source.html#l00040">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_adv_diff()</a>, <a class="el" href="refineable__advection__diffusion__reaction__elements_8cc_source.html#l00040">oomph::RefineableAdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;::fill_in_generic_residual_contribution_adv_diff_react()</a>, <a class="el" href="refineable__axisym__advection__diffusion__elements_8cc_source.html#l00039">oomph::RefineableAxisymAdvectionDiffusionEquations::fill_in_generic_residual_contribution_axi_adv_diff()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="refineable__gen__advection__diffusion__elements_8cc_source.html#l00040">oomph::RefineableGeneralisedAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_cons_adv_diff()</a>, <a class="el" href="refineable__gen__axisym__advection__diffusion__elements_8cc_source.html#l00038">oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations::fill_in_generic_residual_contribution_cons_axisym_adv_diff()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l00084">oomph::RefineableFpPressureAdvDiffRobinBCMixedOrderSpaceTimeElement&lt; ELEMENT &gt;::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l00084">oomph::RefineableFpPressureAdvDiffRobinBCSpaceTimeElement&lt; ELEMENT &gt;::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l00100">oomph::RefineableFpPressureAdvDiffRobinBCElement&lt; ELEMENT &gt;::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()</a>, <a class="el" href="refineable__helmholtz__elements_8cc_source.html#l00042">oomph::RefineableHelmholtzEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_helmholtz()</a>, <a class="el" href="refineable__pml__helmholtz__elements_8cc_source.html#l00044">oomph::RefineablePMLHelmholtzEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_helmholtz()</a>, <a class="el" href="refineable__linear__wave__elements_8cc_source.html#l00042">oomph::RefineableLinearWaveEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_lin_wave()</a>, <a class="el" href="refineable__linearised__axisym__navier__stokes__elements_8cc_source.html#l00041">oomph::RefineableLinearisedAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_linearised_axi_nst()</a>, <a class="el" href="refineable__linearised__navier__stokes__elements_8cc_source.html#l00041">oomph::RefineableLinearisedNavierStokesEquations::fill_in_generic_residual_contribution_linearised_nst()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l00303">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l00586">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source.html#l00570">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l00570">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__poisson__elements_8cc_source.html#l00143">oomph::RefineablePoissonEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_poisson()</a>, <a class="el" href="refineable__solid__elements_8cc_source.html#l00674">oomph::RefineablePVDEquationsWithPressure&lt; DIM &gt;::fill_in_generic_residual_contribution_pvd_with_pressure()</a>, <a class="el" href="refineable__spherical__advection__diffusion__elements_8cc_source.html#l00039">oomph::RefineableSphericalAdvectionDiffusionEquations::fill_in_generic_residual_contribution_spherical_adv_diff()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableSphericalNavierStokesEquations::fill_in_generic_residual_contribution_spherical_nst()</a>, <a class="el" href="refineable__unsteady__heat__elements_8cc_source.html#l00041">oomph::RefineableUnsteadyHeatEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_ust_heat()</a>, <a class="el" href="refineable__space__time__unsteady__heat__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeUnsteadyHeatEquations&lt; SPATIAL_DIM &gt;::fill_in_generic_residual_contribution_ust_heat()</a>, <a class="el" href="refineable__discontinuous__galerkin__space__time__unsteady__heat__mixed__order__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeUnsteadyHeatMixedOrderEquations&lt; SPATIAL_DIM &gt;::fill_in_generic_residual_contribution_ust_heat()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00675">oomph::RefineableElement::fill_in_jacobian_from_nodal_by_fd()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01333">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00201">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00535">oomph::RefineableAdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>, <a class="el" href="boussinesq__elements_8h_source.html#l01207">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_off_diagonal_jacobian_blocks_analytic()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00656">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives_by_fd()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01048">oomph::RefineableSolidElement::geom_data_pt()</a>, <a class="el" href="refineable__poisson__elements_8cc_source.html#l00349">oomph::RefineablePoissonEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00937">oomph::RefineableAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l01475">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l01012">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l01119">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l01268">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l00047">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l00047">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00519">oomph::RefineableElement::identify_field_data_for_interactions()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01132">oomph::RefineableSolidElement::identify_geometric_data()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01001">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::identify_geometric_data()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8h_source.html#l00648">oomph::RefineableGeneralisedNewtonianQTaylorHoodElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8h_source.html#l00913">oomph::RefineableGeneralisedNewtonianQCrouzeixRaviartElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l00941">oomph::RefineableQTaylorHoodElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l01086">oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l01087">oomph::RefineableQTaylorHoodSpaceTimeElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l01213">oomph::RefineableQCrouzeixRaviartElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00509">oomph::RefineablePolarTaylorHoodElement::insert_load_data()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00759">oomph::RefineablePolarCrouzeixRaviartElement::insert_load_data()</a>, <a class="el" href="nodes_8cc_source.html#l03483">oomph::SolidNode::lagrangian_position()</a>, <a class="el" href="nodes_8cc_source.html#l03512">oomph::SolidNode::lagrangian_position_gen()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00992">oomph::RefineableSolidElement::ngeom_data()</a>, <a class="el" href="algebraic__elements_8cc_source.html#l00242">oomph::AlgebraicNode::node_update()</a>, <a class="el" href="mesh_8cc_source.html#l00287">oomph::Mesh::node_update()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l08050">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::oc_hang_helper()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l04288">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02379">oomph::MGSolver&lt; DIM &gt;::plot()</a>, <a class="el" href="nodes_8cc_source.html#l02432">oomph::Node::position()</a>, <a class="el" href="nodes_8cc_source.html#l02491">oomph::Node::position_gen()</a>, <a class="el" href="missing__masters_8cc_source.html#l00106">oomph::Missing_masters_functions::recursively_add_masters_of_external_haloed_node()</a>, <a class="el" href="multi__domain_8cc_source.html#l00464">oomph::Multi_domain_functions::recursively_add_masters_of_external_haloed_node()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02092">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l03164">oomph::RefineableFSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="fluid__traction__elements_8h_source.html#l00392">oomph::RefineableNavierStokesTractionElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source.html#l00514">oomph::RefineableNavierStokesSpaceTimeTractionElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__fluid__traction__elements_8h_source.html#l00542">oomph::RefineableNavierStokesMixedOrderSpaceTimeTractionElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="navier__stokes__flux__control__elements_8h_source.html#l00629">oomph::RefineableNavierStokesFluxControlElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="problem_8cc_source.html#l02550">oomph::Problem::remove_duplicate_data()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02771">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup_interpolation_matrices()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l01513">oomph::MGSolver&lt; DIM &gt;::setup_interpolation_matrices()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03265">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup_interpolation_matrices_unstructured()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l01835">oomph::MGSolver&lt; DIM &gt;::setup_interpolation_matrices_unstructured()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l02333">oomph::TreeBasedRefineableMeshBase::synchronise_hanging_nodes()</a>, and <a class="el" href="nodes_8cc_source.html#l02324">oomph::Node::value()</a>.</p>
+
+</div>
+</div>
+<a id="a923bb47b87b6d4dd535e6ae41a4ff88c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a923bb47b87b6d4dd535e6ae41a4ff88c">&#9670;&nbsp;</a></span>master_weight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double&amp; oomph::HangInfo::master_weight </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return weight for dofs on i-th master node. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00748">748</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00782">Master_weights</a>, <a class="el" href="nodes_8h_source.html#l00785">Nmaster</a>, and <a class="el" href="nodes_8cc_source.html#l01393">range_check()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l02228">oomph::TreeBasedRefineableMeshBase::complete_hanging_nodes()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l02170">oomph::TreeBasedRefineableMeshBase::complete_hanging_nodes_recursively()</a>, <a class="el" href="refineable__advection__diffusion__elements_8h_source.html#l00199">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__spherical__advection__diffusion__elements_8h_source.html#l00202">oomph::RefineableSphericalAdvectionDiffusionEquations::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__axisym__advection__diffusion__elements_8h_source.html#l00206">oomph::RefineableAxisymAdvectionDiffusionEquations::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8h_source.html#l00172">oomph::RefineableAxisymmetricNavierStokesEquations::dinterpolated_u_axi_nst_ddata()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source.html#l00174">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::dinterpolated_u_axi_nst_ddata()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8h_source.html#l00223">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l00496">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l00576">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l00577">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__young__laplace__elements_8cc_source.html#l00037">oomph::RefineableYoungLaplaceEquations::fill_in_contribution_to_residuals()</a>, <a class="el" href="refineable__linear__elasticity__elements_8cc_source.html#l00040">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_linear_elasticity()</a>, <a class="el" href="refineable__solid__elements_8cc_source.html#l00040">oomph::RefineablePVDEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_pvd()</a>, <a class="el" href="refineable__time__harmonic__linear__elasticity__elements_8cc_source.html#l00040">oomph::RefineableTimeHarmonicLinearElasticityEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l00302">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::fill_in_generic_pressure_advection_diffusion_contribution_nst()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source.html#l00284">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::fill_in_generic_pressure_advection_diffusion_contribution_nst()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l00284">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::fill_in_generic_pressure_advection_diffusion_contribution_nst()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8cc_source.html#l00050">oomph::RefineablePolarNavierStokesEquations::fill_in_generic_residual_contribution()</a>, <a class="el" href="refineable__advection__diffusion__elements_8cc_source.html#l00040">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_adv_diff()</a>, <a class="el" href="refineable__advection__diffusion__reaction__elements_8cc_source.html#l00040">oomph::RefineableAdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;::fill_in_generic_residual_contribution_adv_diff_react()</a>, <a class="el" href="refineable__axisym__advection__diffusion__elements_8cc_source.html#l00039">oomph::RefineableAxisymAdvectionDiffusionEquations::fill_in_generic_residual_contribution_axi_adv_diff()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="refineable__gen__advection__diffusion__elements_8cc_source.html#l00040">oomph::RefineableGeneralisedAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_cons_adv_diff()</a>, <a class="el" href="refineable__gen__axisym__advection__diffusion__elements_8cc_source.html#l00038">oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations::fill_in_generic_residual_contribution_cons_axisym_adv_diff()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l00084">oomph::RefineableFpPressureAdvDiffRobinBCSpaceTimeElement&lt; ELEMENT &gt;::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l00084">oomph::RefineableFpPressureAdvDiffRobinBCMixedOrderSpaceTimeElement&lt; ELEMENT &gt;::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l00100">oomph::RefineableFpPressureAdvDiffRobinBCElement&lt; ELEMENT &gt;::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()</a>, <a class="el" href="refineable__helmholtz__elements_8cc_source.html#l00042">oomph::RefineableHelmholtzEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_helmholtz()</a>, <a class="el" href="refineable__pml__helmholtz__elements_8cc_source.html#l00044">oomph::RefineablePMLHelmholtzEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_helmholtz()</a>, <a class="el" href="refineable__linear__wave__elements_8cc_source.html#l00042">oomph::RefineableLinearWaveEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_lin_wave()</a>, <a class="el" href="refineable__linearised__axisym__navier__stokes__elements_8cc_source.html#l00041">oomph::RefineableLinearisedAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_linearised_axi_nst()</a>, <a class="el" href="refineable__linearised__navier__stokes__elements_8cc_source.html#l00041">oomph::RefineableLinearisedNavierStokesEquations::fill_in_generic_residual_contribution_linearised_nst()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l00303">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l00586">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source.html#l00570">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l00570">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__poisson__elements_8cc_source.html#l00143">oomph::RefineablePoissonEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_poisson()</a>, <a class="el" href="refineable__solid__elements_8cc_source.html#l00674">oomph::RefineablePVDEquationsWithPressure&lt; DIM &gt;::fill_in_generic_residual_contribution_pvd_with_pressure()</a>, <a class="el" href="refineable__spherical__advection__diffusion__elements_8cc_source.html#l00039">oomph::RefineableSphericalAdvectionDiffusionEquations::fill_in_generic_residual_contribution_spherical_adv_diff()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableSphericalNavierStokesEquations::fill_in_generic_residual_contribution_spherical_nst()</a>, <a class="el" href="refineable__unsteady__heat__elements_8cc_source.html#l00041">oomph::RefineableUnsteadyHeatEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_ust_heat()</a>, <a class="el" href="refineable__discontinuous__galerkin__space__time__unsteady__heat__mixed__order__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeUnsteadyHeatMixedOrderEquations&lt; SPATIAL_DIM &gt;::fill_in_generic_residual_contribution_ust_heat()</a>, <a class="el" href="refineable__space__time__unsteady__heat__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeUnsteadyHeatEquations&lt; SPATIAL_DIM &gt;::fill_in_generic_residual_contribution_ust_heat()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00201">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00535">oomph::RefineableAdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>, <a class="el" href="boussinesq__elements_8h_source.html#l01207">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_off_diagonal_jacobian_blocks_analytic()</a>, <a class="el" href="refineable__poisson__elements_8cc_source.html#l00349">oomph::RefineablePoissonEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00937">oomph::RefineableAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l01475">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l01012">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l01119">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l01268">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__solid__elements_8cc_source.html#l00545">oomph::RefineablePVDEquationsWithPressure&lt; DIM &gt;::get_mass_matrix_diagonal()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l00047">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l00047">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="nodes_8cc_source.html#l03483">oomph::SolidNode::lagrangian_position()</a>, <a class="el" href="nodes_8cc_source.html#l03512">oomph::SolidNode::lagrangian_position_gen()</a>, <a class="el" href="mesh_8cc_source.html#l00287">oomph::Mesh::node_update()</a>, <a class="el" href="algebraic__elements_8h_source.html#l00695">oomph::AlgebraicMesh::node_update()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l08050">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::oc_hang_helper()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02379">oomph::MGSolver&lt; DIM &gt;::plot()</a>, <a class="el" href="nodes_8cc_source.html#l02432">oomph::Node::position()</a>, <a class="el" href="nodes_8cc_source.html#l02491">oomph::Node::position_gen()</a>, <a class="el" href="missing__masters_8cc_source.html#l00106">oomph::Missing_masters_functions::recursively_add_masters_of_external_haloed_node()</a>, <a class="el" href="multi__domain_8cc_source.html#l00464">oomph::Multi_domain_functions::recursively_add_masters_of_external_haloed_node()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l00542">oomph::RefineableSolidTractionElement&lt; ELEMENT &gt;::refineable_fill_in_contribution_to_residuals_solid_traction()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02092">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l03164">oomph::RefineableFSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="fluid__traction__elements_8h_source.html#l00392">oomph::RefineableNavierStokesTractionElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source.html#l00514">oomph::RefineableNavierStokesSpaceTimeTractionElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__fluid__traction__elements_8h_source.html#l00542">oomph::RefineableNavierStokesMixedOrderSpaceTimeTractionElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="navier__stokes__flux__control__elements_8h_source.html#l00629">oomph::RefineableNavierStokesFluxControlElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="problem_8cc_source.html#l02550">oomph::Problem::remove_duplicate_data()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02771">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup_interpolation_matrices()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l01513">oomph::MGSolver&lt; DIM &gt;::setup_interpolation_matrices()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03265">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup_interpolation_matrices_unstructured()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l01835">oomph::MGSolver&lt; DIM &gt;::setup_interpolation_matrices_unstructured()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l02333">oomph::TreeBasedRefineableMeshBase::synchronise_hanging_nodes()</a>, and <a class="el" href="nodes_8cc_source.html#l02324">oomph::Node::value()</a>.</p>
+
+</div>
+</div>
+<a id="aa9c1130b58db2ff6d5eee4f923ba365c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c1130b58db2ff6d5eee4f923ba365c">&#9670;&nbsp;</a></span>nmaster()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::HangInfo::nmaster </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of master nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00728">728</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00785">Nmaster</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00894">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, <a class="el" href="refineable__mesh_8template_8cc_source.html#l00057">oomph::TreeBasedRefineableMesh&lt; oomph::SpectralPeriodicOrbitElement&lt; NNODE_1D &gt; &gt;::additional_synchronise_hanging_nodes()</a>, <a class="el" href="element__with__moving__nodes_8cc_source.html#l00044">oomph::ElementWithMovingNodes::assemble_set_of_all_geometric_data()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00309">oomph::RefineableElement::assign_hanging_local_eqn_numbers()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01174">oomph::RefineableSolidElement::assign_solid_hanging_local_eqn_numbers()</a>, <a class="el" href="mesh_8cc_source.html#l06910">oomph::Mesh::check_halo_schemes()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l02228">oomph::TreeBasedRefineableMeshBase::complete_hanging_nodes()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l02170">oomph::TreeBasedRefineableMeshBase::complete_hanging_nodes_recursively()</a>, <a class="el" href="mesh_8cc_source.html#l09175">oomph::Mesh::delete_all_external_storage()</a>, <a class="el" href="refineable__advection__diffusion__elements_8h_source.html#l00199">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__spherical__advection__diffusion__elements_8h_source.html#l00202">oomph::RefineableSphericalAdvectionDiffusionEquations::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__axisym__advection__diffusion__elements_8h_source.html#l00206">oomph::RefineableAxisymAdvectionDiffusionEquations::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8h_source.html#l00172">oomph::RefineableAxisymmetricNavierStokesEquations::dinterpolated_u_axi_nst_ddata()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source.html#l00174">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::dinterpolated_u_axi_nst_ddata()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8h_source.html#l00223">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l00496">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l00576">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l00577">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::dinterpolated_u_nst_ddata()</a>, <a class="el" href="refineable__young__laplace__elements_8cc_source.html#l00037">oomph::RefineableYoungLaplaceEquations::fill_in_contribution_to_residuals()</a>, <a class="el" href="refineable__linear__elasticity__elements_8cc_source.html#l00040">oomph::RefineableLinearElasticityEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_linear_elasticity()</a>, <a class="el" href="refineable__solid__elements_8cc_source.html#l00040">oomph::RefineablePVDEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_pvd()</a>, <a class="el" href="refineable__time__harmonic__linear__elasticity__elements_8cc_source.html#l00040">oomph::RefineableTimeHarmonicLinearElasticityEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l00302">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::fill_in_generic_pressure_advection_diffusion_contribution_nst()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source.html#l00284">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::fill_in_generic_pressure_advection_diffusion_contribution_nst()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l00284">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::fill_in_generic_pressure_advection_diffusion_contribution_nst()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8cc_source.html#l00050">oomph::RefineablePolarNavierStokesEquations::fill_in_generic_residual_contribution()</a>, <a class="el" href="refineable__advection__diffusion__elements_8cc_source.html#l00040">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_adv_diff()</a>, <a class="el" href="refineable__advection__diffusion__reaction__elements_8cc_source.html#l00040">oomph::RefineableAdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;::fill_in_generic_residual_contribution_adv_diff_react()</a>, <a class="el" href="refineable__axisym__advection__diffusion__elements_8cc_source.html#l00039">oomph::RefineableAxisymAdvectionDiffusionEquations::fill_in_generic_residual_contribution_axi_adv_diff()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="refineable__gen__advection__diffusion__elements_8cc_source.html#l00040">oomph::RefineableGeneralisedAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_cons_adv_diff()</a>, <a class="el" href="refineable__gen__axisym__advection__diffusion__elements_8cc_source.html#l00038">oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations::fill_in_generic_residual_contribution_cons_axisym_adv_diff()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l00084">oomph::RefineableFpPressureAdvDiffRobinBCMixedOrderSpaceTimeElement&lt; ELEMENT &gt;::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l00084">oomph::RefineableFpPressureAdvDiffRobinBCSpaceTimeElement&lt; ELEMENT &gt;::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l00100">oomph::RefineableFpPressureAdvDiffRobinBCElement&lt; ELEMENT &gt;::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()</a>, <a class="el" href="refineable__helmholtz__elements_8cc_source.html#l00042">oomph::RefineableHelmholtzEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_helmholtz()</a>, <a class="el" href="refineable__pml__helmholtz__elements_8cc_source.html#l00044">oomph::RefineablePMLHelmholtzEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_helmholtz()</a>, <a class="el" href="refineable__linear__wave__elements_8cc_source.html#l00042">oomph::RefineableLinearWaveEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_lin_wave()</a>, <a class="el" href="refineable__linearised__axisym__navier__stokes__elements_8cc_source.html#l00041">oomph::RefineableLinearisedAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_linearised_axi_nst()</a>, <a class="el" href="refineable__linearised__navier__stokes__elements_8cc_source.html#l00041">oomph::RefineableLinearisedNavierStokesEquations::fill_in_generic_residual_contribution_linearised_nst()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l00303">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l00586">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source.html#l00570">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l00570">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_nst()</a>, <a class="el" href="refineable__poisson__elements_8cc_source.html#l00143">oomph::RefineablePoissonEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_poisson()</a>, <a class="el" href="refineable__solid__elements_8cc_source.html#l00674">oomph::RefineablePVDEquationsWithPressure&lt; DIM &gt;::fill_in_generic_residual_contribution_pvd_with_pressure()</a>, <a class="el" href="refineable__spherical__advection__diffusion__elements_8cc_source.html#l00039">oomph::RefineableSphericalAdvectionDiffusionEquations::fill_in_generic_residual_contribution_spherical_adv_diff()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableSphericalNavierStokesEquations::fill_in_generic_residual_contribution_spherical_nst()</a>, <a class="el" href="refineable__unsteady__heat__elements_8cc_source.html#l00041">oomph::RefineableUnsteadyHeatEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_ust_heat()</a>, <a class="el" href="refineable__space__time__unsteady__heat__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeUnsteadyHeatEquations&lt; SPATIAL_DIM &gt;::fill_in_generic_residual_contribution_ust_heat()</a>, <a class="el" href="refineable__discontinuous__galerkin__space__time__unsteady__heat__mixed__order__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeUnsteadyHeatMixedOrderEquations&lt; SPATIAL_DIM &gt;::fill_in_generic_residual_contribution_ust_heat()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00675">oomph::RefineableElement::fill_in_jacobian_from_nodal_by_fd()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01333">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00201">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00535">oomph::RefineableAdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>, <a class="el" href="boussinesq__elements_8h_source.html#l01207">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_off_diagonal_jacobian_blocks_analytic()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00656">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives_by_fd()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01048">oomph::RefineableSolidElement::geom_data_pt()</a>, <a class="el" href="refineable__poisson__elements_8cc_source.html#l00349">oomph::RefineablePoissonEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00937">oomph::RefineableAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l01475">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l01012">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l01119">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l01268">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="refineable__solid__elements_8cc_source.html#l00545">oomph::RefineablePVDEquationsWithPressure&lt; DIM &gt;::get_mass_matrix_diagonal()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l00047">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__navier__stokes__elements_8cc_source.html#l00047">oomph::RefineableNavierStokesEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeNavierStokesMixedOrderEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source.html#l00043">oomph::RefineableSpaceTimeNavierStokesEquations&lt; DIM &gt;::get_pressure_and_velocity_mass_matrix_diagonal()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00519">oomph::RefineableElement::identify_field_data_for_interactions()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01132">oomph::RefineableSolidElement::identify_geometric_data()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01001">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::identify_geometric_data()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8h_source.html#l00648">oomph::RefineableGeneralisedNewtonianQTaylorHoodElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8h_source.html#l00913">oomph::RefineableGeneralisedNewtonianQCrouzeixRaviartElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l00941">oomph::RefineableQTaylorHoodElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l01086">oomph::RefineableQTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l01087">oomph::RefineableQTaylorHoodSpaceTimeElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__navier__stokes__elements_8h_source.html#l01213">oomph::RefineableQCrouzeixRaviartElement&lt; DIM &gt;::identify_load_data()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00509">oomph::RefineablePolarTaylorHoodElement::insert_load_data()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00759">oomph::RefineablePolarCrouzeixRaviartElement::insert_load_data()</a>, <a class="el" href="nodes_8cc_source.html#l03483">oomph::SolidNode::lagrangian_position()</a>, <a class="el" href="nodes_8cc_source.html#l03512">oomph::SolidNode::lagrangian_position_gen()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00992">oomph::RefineableSolidElement::ngeom_data()</a>, <a class="el" href="macro__element__node__update__element_8cc_source.html#l00050">oomph::MacroElementNodeUpdateNode::node_update()</a>, <a class="el" href="algebraic__elements_8cc_source.html#l00242">oomph::AlgebraicNode::node_update()</a>, <a class="el" href="mesh_8cc_source.html#l00287">oomph::Mesh::node_update()</a>, <a class="el" href="algebraic__elements_8h_source.html#l00695">oomph::AlgebraicMesh::node_update()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l08050">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::oc_hang_helper()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l04288">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l02379">oomph::MGSolver&lt; DIM &gt;::plot()</a>, <a class="el" href="nodes_8cc_source.html#l02432">oomph::Node::position()</a>, <a class="el" href="nodes_8cc_source.html#l02491">oomph::Node::position_gen()</a>, <a class="el" href="missing__masters_8cc_source.html#l00106">oomph::Missing_masters_functions::recursively_add_masters_of_external_haloed_node()</a>, <a class="el" href="multi__domain_8cc_source.html#l00464">oomph::Multi_domain_functions::recursively_add_masters_of_external_haloed_node()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l00542">oomph::RefineableSolidTractionElement&lt; ELEMENT &gt;::refineable_fill_in_contribution_to_residuals_solid_traction()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02092">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l03164">oomph::RefineableFSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="fluid__traction__elements_8h_source.html#l00392">oomph::RefineableNavierStokesTractionElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source.html#l00514">oomph::RefineableNavierStokesSpaceTimeTractionElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__fluid__traction__elements_8h_source.html#l00542">oomph::RefineableNavierStokesMixedOrderSpaceTimeTractionElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="navier__stokes__flux__control__elements_8h_source.html#l00629">oomph::RefineableNavierStokesFluxControlElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="problem_8cc_source.html#l02550">oomph::Problem::remove_duplicate_data()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02771">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup_interpolation_matrices()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l01513">oomph::MGSolver&lt; DIM &gt;::setup_interpolation_matrices()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03265">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup_interpolation_matrices_unstructured()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l01835">oomph::MGSolver&lt; DIM &gt;::setup_interpolation_matrices_unstructured()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l02333">oomph::TreeBasedRefineableMeshBase::synchronise_hanging_nodes()</a>, and <a class="el" href="nodes_8cc_source.html#l02324">oomph::Node::value()</a>.</p>
+
+</div>
+</div>
+<a id="a0b9609ab03f3a1a47a58029e81102466"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b9609ab03f3a1a47a58029e81102466">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HangInfo::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00722">722</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a7aaef82d109bb5daed0721402e97afe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aaef82d109bb5daed0721402e97afe8">&#9670;&nbsp;</a></span>range_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HangInfo::range_check </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check that the argument is within the range of stored data values. </p>
+<p>Check that the argument is within the range of stored master nodes </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l01393">1393</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l00785">Nmaster</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l00731">master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00748">master_weight()</a>, and <a class="el" href="nodes_8cc_source.html#l01413">set_master_node_pt()</a>.</p>
+
+</div>
+</div>
+<a id="afe4042d5805342d5e12b6a28e376885a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe4042d5805342d5e12b6a28e376885a">&#9670;&nbsp;</a></span>set_master_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HangInfo::set_master_node_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>master_node_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>weight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the pointer to the i-th master node and its weight. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l01413">1413</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00779">Master_nodes_pt</a>, <a class="el" href="nodes_8h_source.html#l00782">Master_weights</a>, and <a class="el" href="nodes_8cc_source.html#l01393">range_check()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l02228">oomph::TreeBasedRefineableMeshBase::complete_hanging_nodes()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l08050">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::oc_hang_helper()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l01480">oomph::RefineableQElement&lt; 2 &gt;::quad_hang_helper()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l03957">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::quad_hang_helper()</a>, <a class="el" href="missing__masters_8template_8cc_source.html#l00102">oomph::Missing_masters_functions::recursively_add_masters_of_external_halo_node_to_storage()</a>, <a class="el" href="multi__domain_8template_8cc_source.html#l01947">oomph::Multi_domain_functions::recursively_add_masters_of_external_halo_node_to_storage()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l02333">oomph::TreeBasedRefineableMeshBase::synchronise_hanging_nodes()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa2bceeaff9247520fdd786f612237a18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2bceeaff9247520fdd786f612237a18">&#9670;&nbsp;</a></span>Master_nodes_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a>* * oomph::HangInfo::Master_nodes_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style array of pointers to nodes that this hanging node depends on. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00779">779</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l01428">add_master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00692">HangInfo()</a>, <a class="el" href="nodes_8h_source.html#l00731">master_node_pt()</a>, <a class="el" href="nodes_8cc_source.html#l01413">set_master_node_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00702">~HangInfo()</a>.</p>
+
+</div>
+</div>
+<a id="ac9edb46a1890f19fb4dfc02c652cd398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9edb46a1890f19fb4dfc02c652cd398">&#9670;&nbsp;</a></span>Master_weights</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* oomph::HangInfo::Master_weights</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style array of weights for the dofs on the master nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00782">782</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l01428">add_master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00692">HangInfo()</a>, <a class="el" href="nodes_8h_source.html#l00748">master_weight()</a>, <a class="el" href="nodes_8cc_source.html#l01413">set_master_node_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00702">~HangInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a9e256dac82251e6167bd7a763fe4e134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e256dac82251e6167bd7a763fe4e134">&#9670;&nbsp;</a></span>Nmaster</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::HangInfo::Nmaster</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of master nodes required by this hanging node. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00785">785</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l01428">add_master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00731">master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00748">master_weight()</a>, <a class="el" href="nodes_8h_source.html#l00728">nmaster()</a>, <a class="el" href="nodes_8cc_source.html#l01393">range_check()</a>, and <a class="el" href="nodes_8h_source.html#l00702">~HangInfo()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="nodes_8h_source.html">nodes.h</a></li>
+<li><a class="el" href="nodes_8cc_source.html">nodes.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:42
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

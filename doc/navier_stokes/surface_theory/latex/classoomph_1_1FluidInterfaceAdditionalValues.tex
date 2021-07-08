@@ -1,0 +1,122 @@
+\hypertarget{classoomph_1_1FluidInterfaceAdditionalValues}{}\doxysection{oomph\+::Fluid\+Interface\+Additional\+Values$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1FluidInterfaceAdditionalValues}\index{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$@{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$}}
+
+
+This policy class is used to allow additional values to be added to the nodes from new surface equations, for examples of usage see the Surfactant\+Transport\+Fluid\+Interface\+Elements. The use of this class avoids issues with calling virtual functions in constructors and avoids having a global look-\/up able, although it functions in much the same way. Typically, this will only be filled in by \char`\"{}expert users\char`\"{} and is only required if you want to write generic surface-\/element classes. Specific classes can always be overloaded on a case-\/by-\/case basis.  
+
+
+
+
+{\ttfamily \#include $<$specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues_a90883b471723538d92a28fb691ce7230}{Fluid\+Interface\+Additional\+Values}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues_a20e916575114dcb64be896c777dbcbb8}{nadditional\+\_\+values}} (const unsigned \&n)
+\begin{DoxyCompactList}\small\item\em Specific interface that states how many additional values are required for the n-\/th node. Default is zero, but issue error\+\_\+message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues_aaf63152daba918213fbd512e6d5a6c32}{setup\+\_\+equation\+\_\+indices}} (E\+L\+E\+M\+E\+NT $\ast$const \&element\+\_\+pt, const unsigned \&id)
+\begin{DoxyCompactList}\small\item\em Specify any additional index setup information that is required; i.\+e. the look-\/up schemes for the additional values. Default is empty with error message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues_abcf9870977c827475d3ad4f5e9ec9ee9}{error\+\_\+message}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+This policy class is used to allow additional values to be added to the nodes from new surface equations, for examples of usage see the Surfactant\+Transport\+Fluid\+Interface\+Elements. The use of this class avoids issues with calling virtual functions in constructors and avoids having a global look-\/up able, although it functions in much the same way. Typically, this will only be filled in by \char`\"{}expert users\char`\"{} and is only required if you want to write generic surface-\/element classes. Specific classes can always be overloaded on a case-\/by-\/case basis. 
+
+Definition at line 71 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1FluidInterfaceAdditionalValues_a90883b471723538d92a28fb691ce7230}\label{classoomph_1_1FluidInterfaceAdditionalValues_a90883b471723538d92a28fb691ce7230}} 
+\index{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$@{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$}!FluidInterfaceAdditionalValues@{FluidInterfaceAdditionalValues}}
+\index{FluidInterfaceAdditionalValues@{FluidInterfaceAdditionalValues}!oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$@{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{FluidInterfaceAdditionalValues()}{FluidInterfaceAdditionalValues()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{oomph\+::\+Fluid\+Interface\+Additional\+Values}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Fluid\+Interface\+Additional\+Values}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line 98 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1FluidInterfaceAdditionalValues_abcf9870977c827475d3ad4f5e9ec9ee9}\label{classoomph_1_1FluidInterfaceAdditionalValues_abcf9870977c827475d3ad4f5e9ec9ee9}} 
+\index{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$@{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$}!error\_message@{error\_message}}
+\index{error\_message@{error\_message}!oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$@{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{error\_message()}{error\_message()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{oomph\+::\+Fluid\+Interface\+Additional\+Values}}$<$ E\+L\+E\+M\+E\+NT $>$\+::error\+\_\+message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 75 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nadditional\+\_\+values(), and oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+equation\+\_\+indices().
+
+\mbox{\Hypertarget{classoomph_1_1FluidInterfaceAdditionalValues_a20e916575114dcb64be896c777dbcbb8}\label{classoomph_1_1FluidInterfaceAdditionalValues_a20e916575114dcb64be896c777dbcbb8}} 
+\index{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$@{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$}!nadditional\_values@{nadditional\_values}}
+\index{nadditional\_values@{nadditional\_values}!oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$@{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nadditional\_values()}{nadditional\_values()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{oomph\+::\+Fluid\+Interface\+Additional\+Values}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nadditional\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Specific interface that states how many additional values are required for the n-\/th node. Default is zero, but issue error\+\_\+message. 
+
+
+
+Definition at line 102 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ E\+L\+E\+M\+E\+N\+T $>$\+::error\+\_\+message().
+
+
+
+Referenced by oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Update\+Fluid\+Interface\+Element(), and oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+Update\+Fluid\+Interface\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1FluidInterfaceAdditionalValues_aaf63152daba918213fbd512e6d5a6c32}\label{classoomph_1_1FluidInterfaceAdditionalValues_aaf63152daba918213fbd512e6d5a6c32}} 
+\index{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$@{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$}!setup\_equation\_indices@{setup\_equation\_indices}}
+\index{setup\_equation\_indices@{setup\_equation\_indices}!oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$@{oomph::FluidInterfaceAdditionalValues$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_equation\_indices()}{setup\_equation\_indices()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{oomph\+::\+Fluid\+Interface\+Additional\+Values}}$<$ E\+L\+E\+M\+E\+NT $>$\+::setup\+\_\+equation\+\_\+indices (\begin{DoxyParamCaption}\item[{E\+L\+E\+M\+E\+NT $\ast$const \&}]{element\+\_\+pt,  }\item[{const unsigned \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Specify any additional index setup information that is required; i.\+e. the look-\/up schemes for the additional values. Default is empty with error message. 
+
+
+
+Definition at line 108 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ E\+L\+E\+M\+E\+N\+T $>$\+::error\+\_\+message().
+
+
+
+Referenced by oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$\+::\+Elastic\+Update\+Fluid\+Interface\+Element(), and oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+Update\+Fluid\+Interface\+Element().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{specific__node__update__interface__elements_8h}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}\end{DoxyCompactItemize}

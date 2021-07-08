@@ -1,0 +1,2428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::SegregatableFSIProblem Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html">SegregatableFSIProblem</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1SegregatableFSIProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::SegregatableFSIProblem Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::SegregatableFSIProblem:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1SegregatableFSIProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a06634a6823bb5062d11e97f0be78f373"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a06634a6823bb5062d11e97f0be78f373">convergence_criteria</a> { <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a06634a6823bb5062d11e97f0be78f373a96434fdb328f1440d763eb901f0e1dcc">Assess_convergence_based_on_absolute_solid_change</a>, 
+<a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a06634a6823bb5062d11e97f0be78f373a735439a264d7a63a310e12f384d5a081">Assess_convergence_based_on_relative_solid_change</a>, 
+<a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd">Assess_convergence_based_on_max_global_residual</a>
+ }</td></tr>
+<tr class="memdesc:a06634a6823bb5062d11e97f0be78f373"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerated flags for convergence criteria.  <a href="classoomph_1_1SegregatableFSIProblem.html#a06634a6823bb5062d11e97f0be78f373">More...</a><br /></td></tr>
+<tr class="separator:a06634a6823bb5062d11e97f0be78f373"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a263f8553427533dc831bd420b8fbf418"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a263f8553427533dc831bd420b8fbf418">solve_type</a> { <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a263f8553427533dc831bd420b8fbf418a0a2ec06d36907f018f82176e8256e76d">Full_solve</a>, 
+<a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a263f8553427533dc831bd420b8fbf418ab5a200f3f251db5b62d69b7d80b98dae">Fluid_solve</a>, 
+<a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a263f8553427533dc831bd420b8fbf418adb1f2e7a1cc45691468c5a5663ada4ca">Solid_solve</a>
+ }</td></tr>
+<tr class="memdesc:a263f8553427533dc831bd420b8fbf418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerated flags to indicate which solve is taking place.  <a href="classoomph_1_1SegregatableFSIProblem.html#a263f8553427533dc831bd420b8fbf418">More...</a><br /></td></tr>
+<tr class="separator:a263f8553427533dc831bd420b8fbf418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aabbe220c15e7a348a28d54be805ca8d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aabbe220c15e7a348a28d54be805ca8d8">SegregatableFSIProblem</a> ()</td></tr>
+<tr class="memdesc:aabbe220c15e7a348a28d54be805ca8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Set default values for solver parameters:  <a href="classoomph_1_1SegregatableFSIProblem.html#aabbe220c15e7a348a28d54be805ca8d8">More...</a><br /></td></tr>
+<tr class="separator:aabbe220c15e7a348a28d54be805ca8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3c69a4078b02d251e4532e73d5820aa"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aa3c69a4078b02d251e4532e73d5820aa">~SegregatableFSIProblem</a> ()</td></tr>
+<tr class="memdesc:aa3c69a4078b02d251e4532e73d5820aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1SegregatableFSIProblem.html#aa3c69a4078b02d251e4532e73d5820aa">More...</a><br /></td></tr>
+<tr class="separator:aa3c69a4078b02d251e4532e73d5820aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bb2c76228b8f392729e41a288e72948"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a6bb2c76228b8f392729e41a288e72948">identify_fluid_and_solid_dofs</a> (Vector&lt; Data * &gt; &amp;fluid_data_pt, Vector&lt; Data * &gt; &amp;solid_data_pt, Mesh *&amp;fluid_mesh_pt, Mesh *&amp;solid_mesh_pt)=0</td></tr>
+<tr class="memdesc:a6bb2c76228b8f392729e41a288e72948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identify the fluid and solid Data. This is a pure virtual function that MUST be implemented for every specific problem that is to be solved by the segregated solver. The two mesh pointers identify meshes that contain elements and nodes used during the fluid or solid solves respectively. Elements that feature during both phases of the segretated solution must be included in both. These pointers may be set to NULL. In this case, all elements in the global mesh (set up during the monolithic discretisation of the problem) contribute to the global Jacobian matrix and the residual vector, even if their contributions only contain zero entries. This can be costly, though the code will still compute the correct results.  <a href="classoomph_1_1SegregatableFSIProblem.html#a6bb2c76228b8f392729e41a288e72948">More...</a><br /></td></tr>
+<tr class="separator:a6bb2c76228b8f392729e41a288e72948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12e662227e5daf656244a531f40022f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a12e662227e5daf656244a531f40022f9">setup_segregated_solver</a> (const bool &amp;full_setup_of_fluid_and_solid_dofs=true)</td></tr>
+<tr class="memdesc:a12e662227e5daf656244a531f40022f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the segregated solver: Backup the pinned status of the fluid and solid dofs and allocate the internal storage based on the input provided by identify_fluid_and_solid_dofs(...) In addition, reset storage associated with convergence acceleration techniques. If the problem and degrees of freedom has not changed between calls to the solver then it is wasteful to call identify_fluid_and_solid_dofs(...) again and again. If the optional boolean flag is set to false then the storage for convergence acceleration techniques is reset, but the fluid and solid dofs are not altered.  <a href="classoomph_1_1SegregatableFSIProblem.html#a12e662227e5daf656244a531f40022f9">More...</a><br /></td></tr>
+<tr class="separator:a12e662227e5daf656244a531f40022f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87a69561674c1e596bb205e0fc4a387f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PicardConvergenceData.html">PicardConvergenceData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a87a69561674c1e596bb205e0fc4a387f">segregated_solve</a> ()</td></tr>
+<tr class="memdesc:a87a69561674c1e596bb205e0fc4a387f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Segregated solver. Peform a segregated step from the present state of the system. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration.  <a href="classoomph_1_1SegregatableFSIProblem.html#a87a69561674c1e596bb205e0fc4a387f">More...</a><br /></td></tr>
+<tr class="separator:a87a69561674c1e596bb205e0fc4a387f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f8145df86358916df505e2b513caf6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PicardConvergenceData.html">PicardConvergenceData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a8f8145df86358916df505e2b513caf6a">steady_segregated_solve</a> ()</td></tr>
+<tr class="memdesc:a8f8145df86358916df505e2b513caf6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steady version of segregated solver. Makes all timesteppers steady before solving. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. <br  />
+  <a href="classoomph_1_1SegregatableFSIProblem.html#a8f8145df86358916df505e2b513caf6a">More...</a><br /></td></tr>
+<tr class="separator:a8f8145df86358916df505e2b513caf6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae43b43dbc197d238535bcb5c3acf168"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PicardConvergenceData.html">PicardConvergenceData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aae43b43dbc197d238535bcb5c3acf168">unsteady_segregated_solve</a> (const double &amp;dt)</td></tr>
+<tr class="memdesc:aae43b43dbc197d238535bcb5c3acf168"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. <br  />
+  <a href="classoomph_1_1SegregatableFSIProblem.html#aae43b43dbc197d238535bcb5c3acf168">More...</a><br /></td></tr>
+<tr class="separator:aae43b43dbc197d238535bcb5c3acf168"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17f019ebaf83e170219bf605a8554111"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PicardConvergenceData.html">PicardConvergenceData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a17f019ebaf83e170219bf605a8554111">unsteady_segregated_solve</a> (const double &amp;dt, const bool &amp;shift_values)</td></tr>
+<tr class="memdesc:a17f019ebaf83e170219bf605a8554111"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. <br  />
+  <a href="classoomph_1_1SegregatableFSIProblem.html#a17f019ebaf83e170219bf605a8554111">More...</a><br /></td></tr>
+<tr class="separator:a17f019ebaf83e170219bf605a8554111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88eb2704f55c89db093cc2857490b727"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a88eb2704f55c89db093cc2857490b727">assess_convergence_based_on_max_global_residual</a> (const double &amp;tol)</td></tr>
+<tr class="memdesc:a88eb2704f55c89db093cc2857490b727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assess convergence based on max. residual of coupled system of eqns. The argument specifies the convergence tolerance.  <a href="classoomph_1_1SegregatableFSIProblem.html#a88eb2704f55c89db093cc2857490b727">More...</a><br /></td></tr>
+<tr class="separator:a88eb2704f55c89db093cc2857490b727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fba426552e48abb7ff8a554c20953da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a2fba426552e48abb7ff8a554c20953da">assess_convergence_based_on_max_global_residual</a> ()</td></tr>
+<tr class="memdesc:a2fba426552e48abb7ff8a554c20953da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assess convergence based on max. residuals of coupled system of eqns. This interface has no argument and the default convergence tolerance for the Newton solver, Problem::Newton_solver_tolerance is used.  <a href="classoomph_1_1SegregatableFSIProblem.html#a2fba426552e48abb7ff8a554c20953da">More...</a><br /></td></tr>
+<tr class="separator:a2fba426552e48abb7ff8a554c20953da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0b531963389cf3b2ad253891931def9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aa0b531963389cf3b2ad253891931def9">assess_convergence_based_on_absolute_solid_change</a> (const double &amp;tol)</td></tr>
+<tr class="memdesc:aa0b531963389cf3b2ad253891931def9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assess convergence based on max. absolute change of solid dofs. The argument specifies the convergence tolerance.  <a href="classoomph_1_1SegregatableFSIProblem.html#aa0b531963389cf3b2ad253891931def9">More...</a><br /></td></tr>
+<tr class="separator:aa0b531963389cf3b2ad253891931def9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae10cc55b3dc502ba387695e8c010b0c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#ae10cc55b3dc502ba387695e8c010b0c1">assess_convergence_based_on_absolute_solid_change</a> ()</td></tr>
+<tr class="memdesc:ae10cc55b3dc502ba387695e8c010b0c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assess convergence based on max. absolute change of solid dofs. This interface has no argument and the default convergence tolerance for the Newton solver, Problem::Newton_solver_tolerance is used.  <a href="classoomph_1_1SegregatableFSIProblem.html#ae10cc55b3dc502ba387695e8c010b0c1">More...</a><br /></td></tr>
+<tr class="separator:ae10cc55b3dc502ba387695e8c010b0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abec6313054e23d998b4584f2de80bc52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#abec6313054e23d998b4584f2de80bc52">assess_convergence_based_on_relative_solid_change</a> (const double &amp;tol)</td></tr>
+<tr class="memdesc:abec6313054e23d998b4584f2de80bc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assess convergence based on max. relative change of solid dofs. The argument specifies the convergence tolerance.  <a href="classoomph_1_1SegregatableFSIProblem.html#abec6313054e23d998b4584f2de80bc52">More...</a><br /></td></tr>
+<tr class="separator:abec6313054e23d998b4584f2de80bc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af95d2c3833b64d37635e2e07776cef54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#af95d2c3833b64d37635e2e07776cef54">assess_convergence_based_on_relative_solid_change</a> ()</td></tr>
+<tr class="memdesc:af95d2c3833b64d37635e2e07776cef54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assess convergence based on max. relative change of solid dofs. This interface has no argument and the default convergence tolerance for the Newton solver, Problem::Newton_solver_tolerance is used.  <a href="classoomph_1_1SegregatableFSIProblem.html#af95d2c3833b64d37635e2e07776cef54">More...</a><br /></td></tr>
+<tr class="separator:af95d2c3833b64d37635e2e07776cef54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c87f24c9e3ea80182a4b19d3a9fa92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a08c87f24c9e3ea80182a4b19d3a9fa92">enable_pointwise_aitken</a> (const unsigned &amp;pointwise_aitken_start)</td></tr>
+<tr class="memdesc:a08c87f24c9e3ea80182a4b19d3a9fa92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use pointwise Aitken extrapolation. The argument is used to specify the Picard iteration after which pointwise Aitken extrapolation is to be used for the first time. <br  />
+  <a href="classoomph_1_1SegregatableFSIProblem.html#a08c87f24c9e3ea80182a4b19d3a9fa92">More...</a><br /></td></tr>
+<tr class="separator:a08c87f24c9e3ea80182a4b19d3a9fa92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f52d9c6555b43d8ada274ec80940c13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a3f52d9c6555b43d8ada274ec80940c13">enable_pointwise_aitken</a> ()</td></tr>
+<tr class="memdesc:a3f52d9c6555b43d8ada274ec80940c13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use pointwise Aitken extrapolation. This interface has no argument and the current value of Pointwise_aitken_start will be used. The default is zero, extrapolation starts immediately.  <a href="classoomph_1_1SegregatableFSIProblem.html#a3f52d9c6555b43d8ada274ec80940c13">More...</a><br /></td></tr>
+<tr class="separator:a3f52d9c6555b43d8ada274ec80940c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34c040b6fe4860ad44bc48ddf859e9fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a34c040b6fe4860ad44bc48ddf859e9fe">disable_pointwise_aitken</a> ()</td></tr>
+<tr class="memdesc:a34c040b6fe4860ad44bc48ddf859e9fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable the use of pointwise Aitken extrapolation.  <a href="classoomph_1_1SegregatableFSIProblem.html#a34c040b6fe4860ad44bc48ddf859e9fe">More...</a><br /></td></tr>
+<tr class="separator:a34c040b6fe4860ad44bc48ddf859e9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ad67f163160a54024fb0bcd5fa531c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a7ad67f163160a54024fb0bcd5fa531c3">enable_under_relaxation</a> (const double &amp;omega=1.0)</td></tr>
+<tr class="memdesc:a7ad67f163160a54024fb0bcd5fa531c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use under-relaxation and (optionally) specify under-relaxation parameter. Default: omega=1.0 (i.e. no actual under-relaxation; Other extreme: omega=0.0 (freeze wall shape). Under-relaxation parameter can also be computed dynamically by setting use_irons_and_tuck_extrapolation()  <a href="classoomph_1_1SegregatableFSIProblem.html#a7ad67f163160a54024fb0bcd5fa531c3">More...</a><br /></td></tr>
+<tr class="separator:a7ad67f163160a54024fb0bcd5fa531c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb257e933a9b3e0ce6d9f79a263851f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a0cb257e933a9b3e0ce6d9f79a263851f">enable_irons_and_tuck_extrapolation</a> ()</td></tr>
+<tr class="memdesc:a0cb257e933a9b3e0ce6d9f79a263851f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Irons and Tuck extrapolation for solid dofs.  <a href="classoomph_1_1SegregatableFSIProblem.html#a0cb257e933a9b3e0ce6d9f79a263851f">More...</a><br /></td></tr>
+<tr class="separator:a0cb257e933a9b3e0ce6d9f79a263851f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f0bee5113993bf9b4ce4ab846f49c0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a7f0bee5113993bf9b4ce4ab846f49c0a">disable_irons_and_tuck_extrapolation</a> ()</td></tr>
+<tr class="memdesc:a7f0bee5113993bf9b4ce4ab846f49c0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do not use Irons and Tuck extrapolation for solid dofs.  <a href="classoomph_1_1SegregatableFSIProblem.html#a7f0bee5113993bf9b4ce4ab846f49c0a">More...</a><br /></td></tr>
+<tr class="separator:a7f0bee5113993bf9b4ce4ab846f49c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0792ffce87f26d8963846c472f13d08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#ad0792ffce87f26d8963846c472f13d08">get_solid_change</a> (double &amp;rms_change, double &amp;max_change, double &amp;rms_norm)</td></tr>
+<tr class="memdesc:ad0792ffce87f26d8963846c472f13d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get rms of change in the solid dofs; the max. change of the solid dofs and the rms norm of the solid dofs themselves. Change is computed relative to the reference values stored when <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#af6a9e7b6f13b86bf86b65cfb7c4f966f" title="Store the current solid values as reference values for future convergence check. Also add another ent...">store_solid_dofs()</a> was last called.  <a href="classoomph_1_1SegregatableFSIProblem.html#ad0792ffce87f26d8963846c472f13d08">More...</a><br /></td></tr>
+<tr class="separator:ad0792ffce87f26d8963846c472f13d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6a9e7b6f13b86bf86b65cfb7c4f966f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#af6a9e7b6f13b86bf86b65cfb7c4f966f">store_solid_dofs</a> ()</td></tr>
+<tr class="memdesc:af6a9e7b6f13b86bf86b65cfb7c4f966f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store the current solid values as reference values for future convergence check. Also add another entry to pointwise Aitken history if required.  <a href="classoomph_1_1SegregatableFSIProblem.html#af6a9e7b6f13b86bf86b65cfb7c4f966f">More...</a><br /></td></tr>
+<tr class="separator:af6a9e7b6f13b86bf86b65cfb7c4f966f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61ae984ed6baba413b7577ce1d1b5dc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a61ae984ed6baba413b7577ce1d1b5dc3">reset_timer</a> ()</td></tr>
+<tr class="memdesc:a61ae984ed6baba413b7577ce1d1b5dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset timer.  <a href="classoomph_1_1SegregatableFSIProblem.html#a61ae984ed6baba413b7577ce1d1b5dc3">More...</a><br /></td></tr>
+<tr class="separator:a61ae984ed6baba413b7577ce1d1b5dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2896156c47a5a6c2e7a390057d394e10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a2896156c47a5a6c2e7a390057d394e10">restart_timer</a> ()</td></tr>
+<tr class="memdesc:a2896156c47a5a6c2e7a390057d394e10"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re-)start timer (e.g. after completing non-essential parts of the code such as documentation of the iteration's progress)  <a href="classoomph_1_1SegregatableFSIProblem.html#a2896156c47a5a6c2e7a390057d394e10">More...</a><br /></td></tr>
+<tr class="separator:a2896156c47a5a6c2e7a390057d394e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6282056a5c22b707a1e6c939a3f73dcd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a6282056a5c22b707a1e6c939a3f73dcd">halt_timer</a> ()</td></tr>
+<tr class="memdesc:a6282056a5c22b707a1e6c939a3f73dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Halt timer (e.g. before performing non-essential parts of the code such as documentation of the iteration's progress)  <a href="classoomph_1_1SegregatableFSIProblem.html#a6282056a5c22b707a1e6c939a3f73dcd">More...</a><br /></td></tr>
+<tr class="separator:a6282056a5c22b707a1e6c939a3f73dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaaaa08352182dc5e0a38c7003cb7a6b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#adaaaa08352182dc5e0a38c7003cb7a6b">t_spent_on_actual_solve</a> ()</td></tr>
+<tr class="memdesc:adaaaa08352182dc5e0a38c7003cb7a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total elapsed time since start of solve.  <a href="classoomph_1_1SegregatableFSIProblem.html#adaaaa08352182dc5e0a38c7003cb7a6b">More...</a><br /></td></tr>
+<tr class="separator:adaaaa08352182dc5e0a38c7003cb7a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae8c920185dc95ab3be243276fd4253b0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#ae8c920185dc95ab3be243276fd4253b0">actions_before_segregated_solve</a> ()</td></tr>
+<tr class="memdesc:ae8c920185dc95ab3be243276fd4253b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called once at the start of each segregated solve.  <a href="classoomph_1_1SegregatableFSIProblem.html#ae8c920185dc95ab3be243276fd4253b0">More...</a><br /></td></tr>
+<tr class="separator:ae8c920185dc95ab3be243276fd4253b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a284fb37276735a73bca0467fa2e44909"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a284fb37276735a73bca0467fa2e44909">actions_after_segregated_solve</a> ()</td></tr>
+<tr class="memdesc:a284fb37276735a73bca0467fa2e44909"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called once at the end of each segregated solve.  <a href="classoomph_1_1SegregatableFSIProblem.html#a284fb37276735a73bca0467fa2e44909">More...</a><br /></td></tr>
+<tr class="separator:a284fb37276735a73bca0467fa2e44909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc1e909975df69e27f8f1435e215a842"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#abc1e909975df69e27f8f1435e215a842">actions_before_segregated_convergence_check</a> ()</td></tr>
+<tr class="memdesc:abc1e909975df69e27f8f1435e215a842"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is to be filled with actions that take place before the check for convergence of the entire segregated solve.  <a href="classoomph_1_1SegregatableFSIProblem.html#abc1e909975df69e27f8f1435e215a842">More...</a><br /></td></tr>
+<tr class="separator:abc1e909975df69e27f8f1435e215a842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61cad9a0a75f2999c0529caa9cac2b73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a61cad9a0a75f2999c0529caa9cac2b73">rebuild_monolithic_mesh</a> ()</td></tr>
+<tr class="memdesc:a61cad9a0a75f2999c0529caa9cac2b73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebuild global mesh for monolithic discretisation.  <a href="classoomph_1_1SegregatableFSIProblem.html#a61cad9a0a75f2999c0529caa9cac2b73">More...</a><br /></td></tr>
+<tr class="separator:a61cad9a0a75f2999c0529caa9cac2b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbf4987f2891218d8efcf53de6150425"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#abbf4987f2891218d8efcf53de6150425">restore_fluid_dofs</a> ()</td></tr>
+<tr class="memdesc:abbf4987f2891218d8efcf53de6150425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restore pinned status of fluid dofs.  <a href="classoomph_1_1SegregatableFSIProblem.html#abbf4987f2891218d8efcf53de6150425">More...</a><br /></td></tr>
+<tr class="separator:abbf4987f2891218d8efcf53de6150425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf28573efb54e2b33101ba8cb503a5b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#acf28573efb54e2b33101ba8cb503a5b8">pin_solid_dofs</a> ()</td></tr>
+<tr class="memdesc:acf28573efb54e2b33101ba8cb503a5b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin solid dofs.  <a href="classoomph_1_1SegregatableFSIProblem.html#acf28573efb54e2b33101ba8cb503a5b8">More...</a><br /></td></tr>
+<tr class="separator:acf28573efb54e2b33101ba8cb503a5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6da202671582bf7bf13a3dceb115385f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a6da202671582bf7bf13a3dceb115385f">restore_solid_dofs</a> ()</td></tr>
+<tr class="memdesc:a6da202671582bf7bf13a3dceb115385f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restore pinned status of solid dofs.  <a href="classoomph_1_1SegregatableFSIProblem.html#a6da202671582bf7bf13a3dceb115385f">More...</a><br /></td></tr>
+<tr class="separator:a6da202671582bf7bf13a3dceb115385f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99a457e1b3c17e9a08590db163eb7118"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a99a457e1b3c17e9a08590db163eb7118">pointwise_aitken_extrapolate</a> ()</td></tr>
+<tr class="memdesc:a99a457e1b3c17e9a08590db163eb7118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do pointwise Aitken extrapolation for solid.  <a href="classoomph_1_1SegregatableFSIProblem.html#a99a457e1b3c17e9a08590db163eb7118">More...</a><br /></td></tr>
+<tr class="separator:a99a457e1b3c17e9a08590db163eb7118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ad92eead7c5dc21884292a5a501c71388"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#ad92eead7c5dc21884292a5a501c71388">Pointwise_aitken_counter</a></td></tr>
+<tr class="memdesc:ad92eead7c5dc21884292a5a501c71388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Aitken histories available (int because after extrapolation it's re-initialised to -1 to force the computation of three new genuine iterates).  <a href="classoomph_1_1SegregatableFSIProblem.html#ad92eead7c5dc21884292a5a501c71388">More...</a><br /></td></tr>
+<tr class="separator:ad92eead7c5dc21884292a5a501c71388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f0551d5e9dbe5b211bb3b05e80f276"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a16f0551d5e9dbe5b211bb3b05e80f276">Use_pointwise_aitken</a></td></tr>
+<tr class="memdesc:a16f0551d5e9dbe5b211bb3b05e80f276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use pointwise Aitken extrapolation?  <a href="classoomph_1_1SegregatableFSIProblem.html#a16f0551d5e9dbe5b211bb3b05e80f276">More...</a><br /></td></tr>
+<tr class="separator:a16f0551d5e9dbe5b211bb3b05e80f276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47bcf35aed40bbb7e1c3778b8dfad501"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a47bcf35aed40bbb7e1c3778b8dfad501">Pointwise_aitken_start</a></td></tr>
+<tr class="memdesc:a47bcf35aed40bbb7e1c3778b8dfad501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start pointwise Aitken extrpolation after specified number of Picard iterations.  <a href="classoomph_1_1SegregatableFSIProblem.html#a47bcf35aed40bbb7e1c3778b8dfad501">More...</a><br /></td></tr>
+<tr class="separator:a47bcf35aed40bbb7e1c3778b8dfad501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af238c6f11f6d4aacd2ff6e0dea917d40"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#af238c6f11f6d4aacd2ff6e0dea917d40">Solve_type</a></td></tr>
+<tr class="memdesc:af238c6f11f6d4aacd2ff6e0dea917d40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve that is taking place (enumerated flag)  <a href="classoomph_1_1SegregatableFSIProblem.html#af238c6f11f6d4aacd2ff6e0dea917d40">More...</a><br /></td></tr>
+<tr class="separator:af238c6f11f6d4aacd2ff6e0dea917d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9f2f249e0886878f096926b2cfca74b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#ad9f2f249e0886878f096926b2cfca74b">Convergence_tolerance</a></td></tr>
+<tr class="memdesc:ad9f2f249e0886878f096926b2cfca74b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convergence tolerance for Picard iteration.  <a href="classoomph_1_1SegregatableFSIProblem.html#ad9f2f249e0886878f096926b2cfca74b">More...</a><br /></td></tr>
+<tr class="separator:ad9f2f249e0886878f096926b2cfca74b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2a06cb9517d1f183cdbaa20ea077805"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aa2a06cb9517d1f183cdbaa20ea077805">Max_picard</a></td></tr>
+<tr class="memdesc:aa2a06cb9517d1f183cdbaa20ea077805"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. number of Picard iterations.  <a href="classoomph_1_1SegregatableFSIProblem.html#aa2a06cb9517d1f183cdbaa20ea077805">More...</a><br /></td></tr>
+<tr class="separator:aa2a06cb9517d1f183cdbaa20ea077805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadc0d46511ee90dad36d0d00a8c2d7ad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aadc0d46511ee90dad36d0d00a8c2d7ad">Doc_max_global_residual</a></td></tr>
+<tr class="memdesc:aadc0d46511ee90dad36d0d00a8c2d7ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc maximum global residual during iteration? (default: false)  <a href="classoomph_1_1SegregatableFSIProblem.html#aadc0d46511ee90dad36d0d00a8c2d7ad">More...</a><br /></td></tr>
+<tr class="separator:aadc0d46511ee90dad36d0d00a8c2d7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aac015f9f0e9c1b925a534278dc1e55"><td class="memItemLeft" align="right" valign="top">Vector&lt; Data * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a1aac015f9f0e9c1b925a534278dc1e55">Fluid_data_pt</a></td></tr>
+<tr class="memdesc:a1aac015f9f0e9c1b925a534278dc1e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector storing the Data objects associated with the fluid problem: Tyically the nodal and internal data of the elements in the fluid bulk mesh <br  />
+  <a href="classoomph_1_1SegregatableFSIProblem.html#a1aac015f9f0e9c1b925a534278dc1e55">More...</a><br /></td></tr>
+<tr class="separator:a1aac015f9f0e9c1b925a534278dc1e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa39b7f8499588b28b9b490771c4bcff2"><td class="memItemLeft" align="right" valign="top">Vector&lt; std::vector&lt; bool &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aa39b7f8499588b28b9b490771c4bcff2">Fluid_value_is_pinned</a></td></tr>
+<tr class="memdesc:aa39b7f8499588b28b9b490771c4bcff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of vectors that store the pinned status of fluid Data values.  <a href="classoomph_1_1SegregatableFSIProblem.html#aa39b7f8499588b28b9b490771c4bcff2">More...</a><br /></td></tr>
+<tr class="separator:aa39b7f8499588b28b9b490771c4bcff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca9ab5f800334761ae470453ef476067"><td class="memItemLeft" align="right" valign="top">Vector&lt; Data * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aca9ab5f800334761ae470453ef476067">Solid_data_pt</a></td></tr>
+<tr class="memdesc:aca9ab5f800334761ae470453ef476067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector storing the Data objects associated with the solid problem: Typically the positional data of solid nodes and any quantities associated with displacement control, say.  <a href="classoomph_1_1SegregatableFSIProblem.html#aca9ab5f800334761ae470453ef476067">More...</a><br /></td></tr>
+<tr class="separator:aca9ab5f800334761ae470453ef476067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f5d6ec62fd33f83600b69c9fcb1f4ed"><td class="memItemLeft" align="right" valign="top">Vector&lt; std::vector&lt; bool &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a0f5d6ec62fd33f83600b69c9fcb1f4ed">Solid_value_is_pinned</a></td></tr>
+<tr class="memdesc:a0f5d6ec62fd33f83600b69c9fcb1f4ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of vectors that store the pinned status of solid Data values.  <a href="classoomph_1_1SegregatableFSIProblem.html#a0f5d6ec62fd33f83600b69c9fcb1f4ed">More...</a><br /></td></tr>
+<tr class="separator:a0f5d6ec62fd33f83600b69c9fcb1f4ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e056ff378e38504d5e9d522820ca8cf"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a6e056ff378e38504d5e9d522820ca8cf">Previous_solid_value</a></td></tr>
+<tr class="memdesc:a6e056ff378e38504d5e9d522820ca8cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector storing the previous solid values &ndash; used for convergence check.  <a href="classoomph_1_1SegregatableFSIProblem.html#a6e056ff378e38504d5e9d522820ca8cf">More...</a><br /></td></tr>
+<tr class="separator:a6e056ff378e38504d5e9d522820ca8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada29fa4ef2ae7b6460887f8f04eba6bf"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#ada29fa4ef2ae7b6460887f8f04eba6bf">Fluid_mesh_pt</a></td></tr>
+<tr class="memdesc:ada29fa4ef2ae7b6460887f8f04eba6bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh containing only fluid elements &ndash; the elements in this Mesh will be excluded from the assembly process when the solid problem is solved.  <a href="classoomph_1_1SegregatableFSIProblem.html#ada29fa4ef2ae7b6460887f8f04eba6bf">More...</a><br /></td></tr>
+<tr class="separator:ada29fa4ef2ae7b6460887f8f04eba6bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e7f6f5452767279d21ccbfc6336ef12"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a3e7f6f5452767279d21ccbfc6336ef12">Solid_mesh_pt</a></td></tr>
+<tr class="memdesc:a3e7f6f5452767279d21ccbfc6336ef12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh containing only solid elements &ndash; the elements in this mesh will be excluded from the assembly process when the fluid problem is solved.  <a href="classoomph_1_1SegregatableFSIProblem.html#a3e7f6f5452767279d21ccbfc6336ef12">More...</a><br /></td></tr>
+<tr class="separator:a3e7f6f5452767279d21ccbfc6336ef12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13ff18eb51b4eeb727443931cd19bac9"><td class="memItemLeft" align="right" valign="top">Vector&lt; Mesh * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a13ff18eb51b4eeb727443931cd19bac9">Orig_sub_mesh_pt</a></td></tr>
+<tr class="memdesc:a13ff18eb51b4eeb727443931cd19bac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backup for the pointers to the submeshes in the original problem.  <a href="classoomph_1_1SegregatableFSIProblem.html#a13ff18eb51b4eeb727443931cd19bac9">More...</a><br /></td></tr>
+<tr class="separator:a13ff18eb51b4eeb727443931cd19bac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f4545c1a2647486d550499aa89e3136"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a8f4545c1a2647486d550499aa89e3136">Del_irons_and_tuck</a></td></tr>
+<tr class="memdesc:a8f4545c1a2647486d550499aa89e3136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of changes in Irons and Tuck under-relaxation.  <a href="classoomph_1_1SegregatableFSIProblem.html#a8f4545c1a2647486d550499aa89e3136">More...</a><br /></td></tr>
+<tr class="separator:a8f4545c1a2647486d550499aa89e3136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7568103d53df9c84b86fdf41885cf289"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a7568103d53df9c84b86fdf41885cf289">R_irons_and_tuck</a></td></tr>
+<tr class="memdesc:a7568103d53df9c84b86fdf41885cf289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Irons and Tuck relaxation factor.  <a href="classoomph_1_1SegregatableFSIProblem.html#a7568103d53df9c84b86fdf41885cf289">More...</a><br /></td></tr>
+<tr class="separator:a7568103d53df9c84b86fdf41885cf289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa193977e4617aee9906e59bdd31f2263"><td class="memItemLeft" align="right" valign="top">Vector&lt; Vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aa193977e4617aee9906e59bdd31f2263">Pointwise_aitken_solid_value</a></td></tr>
+<tr class="memdesc:aa193977e4617aee9906e59bdd31f2263"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of Vectors containing up to three previous iterates for the solid dofs; used for pointwise Aitken extrapolation.  <a href="classoomph_1_1SegregatableFSIProblem.html#aa193977e4617aee9906e59bdd31f2263">More...</a><br /></td></tr>
+<tr class="separator:aa193977e4617aee9906e59bdd31f2263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cef79bdf839668a2145e9fe5f77a5f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a0cef79bdf839668a2145e9fe5f77a5f2">Recheck_convergence_after_pointwise_aitken</a></td></tr>
+<tr class="memdesc:a0cef79bdf839668a2145e9fe5f77a5f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Have we just done a pointwise Aitken step.  <a href="classoomph_1_1SegregatableFSIProblem.html#a0cef79bdf839668a2145e9fe5f77a5f2">More...</a><br /></td></tr>
+<tr class="separator:a0cef79bdf839668a2145e9fe5f77a5f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0e67b39cdae35ea25ef97e5e768aa60a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a0e67b39cdae35ea25ef97e5e768aa60a">extrapolate_solid_data</a> ()</td></tr>
+<tr class="memdesc:a0e67b39cdae35ea25ef97e5e768aa60a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extrapolate solid data and update fluid mesh during unsteady run.  <a href="classoomph_1_1SegregatableFSIProblem.html#a0e67b39cdae35ea25ef97e5e768aa60a">More...</a><br /></td></tr>
+<tr class="separator:a0e67b39cdae35ea25ef97e5e768aa60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9da3017952982a64496ff9c16ca7024c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a9da3017952982a64496ff9c16ca7024c">under_relax_solid</a> ()</td></tr>
+<tr class="memdesc:a9da3017952982a64496ff9c16ca7024c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Under-relax the most recently computed solid variables, either by classical relaxation or by Irons &amp; Tuck.  <a href="classoomph_1_1SegregatableFSIProblem.html#a9da3017952982a64496ff9c16ca7024c">More...</a><br /></td></tr>
+<tr class="separator:a9da3017952982a64496ff9c16ca7024c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13a9841e0aa05bf57ec228b49b311a26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a13a9841e0aa05bf57ec228b49b311a26">use_only_fluid_elements</a> ()</td></tr>
+<tr class="memdesc:a13a9841e0aa05bf57ec228b49b311a26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Only include fluid elements in the Problem's mesh. This is called before the segregated fluid solve. The fluid elements are identified by the user via the fluid_mesh_pt argument in the pure virtual function identify_fluid_and_solid_dofs(...). If a NULL pointer is returned by this function (i.e. if the user hasn't bothered to identify the fluids elements in a submesh, then no stripping of non-fluid elements is performed. The result of the computation will be correct but it won't be very efficient. <br  />
+  <a href="classoomph_1_1SegregatableFSIProblem.html#a13a9841e0aa05bf57ec228b49b311a26">More...</a><br /></td></tr>
+<tr class="separator:a13a9841e0aa05bf57ec228b49b311a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a330660bc7b69c9c128bfed62b54dcf62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a330660bc7b69c9c128bfed62b54dcf62">use_only_solid_elements</a> ()</td></tr>
+<tr class="memdesc:a330660bc7b69c9c128bfed62b54dcf62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Only include solid elements in the Problem's mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid_mesh_pt argument in the pure virtual function identify_fluid_and_solid_dofs(...). If a NULL pointer is returned by this function (i.e. if the user hasn't bothered to identify the solid elements in a submesh, then no stripping of non-solid elements is performed. The result of the computation will be correct but it won't be very efficient. <br  />
+  <a href="classoomph_1_1SegregatableFSIProblem.html#a330660bc7b69c9c128bfed62b54dcf62">More...</a><br /></td></tr>
+<tr class="separator:a330660bc7b69c9c128bfed62b54dcf62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33397ef8c5410b782cc9801979812be0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a33397ef8c5410b782cc9801979812be0">pin_fluid_dofs</a> ()</td></tr>
+<tr class="memdesc:a33397ef8c5410b782cc9801979812be0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin fluid dofs.  <a href="classoomph_1_1SegregatableFSIProblem.html#a33397ef8c5410b782cc9801979812be0">More...</a><br /></td></tr>
+<tr class="separator:a33397ef8c5410b782cc9801979812be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:adc81fa8a44920be1b41dcea5008db7ed"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#adc81fa8a44920be1b41dcea5008db7ed">Omega_relax</a></td></tr>
+<tr class="memdesc:adc81fa8a44920be1b41dcea5008db7ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Under-relaxation parameter. (1.0: no under-relaxation; 0.0: Freeze wall shape)  <a href="classoomph_1_1SegregatableFSIProblem.html#adc81fa8a44920be1b41dcea5008db7ed">More...</a><br /></td></tr>
+<tr class="separator:adc81fa8a44920be1b41dcea5008db7ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23930085f18e43926b6afcbbdd2a0509"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a23930085f18e43926b6afcbbdd2a0509">Use_irons_and_tuck_extrapolation</a></td></tr>
+<tr class="memdesc:a23930085f18e43926b6afcbbdd2a0509"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to indicate use of Irons and Tuck's extrapolation for solid values.  <a href="classoomph_1_1SegregatableFSIProblem.html#a23930085f18e43926b6afcbbdd2a0509">More...</a><br /></td></tr>
+<tr class="separator:a23930085f18e43926b6afcbbdd2a0509"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a971ddd09518a1771ae3a6ed85a51514e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a971ddd09518a1771ae3a6ed85a51514e">Convergence_criterion</a></td></tr>
+<tr class="memdesc:a971ddd09518a1771ae3a6ed85a51514e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convergence criterion (enumerated flag)  <a href="classoomph_1_1SegregatableFSIProblem.html#a971ddd09518a1771ae3a6ed85a51514e">More...</a><br /></td></tr>
+<tr class="separator:a971ddd09518a1771ae3a6ed85a51514e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a814254917e5cedc6fce1793168124beb"><td class="memItemLeft" align="right" valign="top">clock_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a814254917e5cedc6fce1793168124beb">T_ref</a></td></tr>
+<tr class="memdesc:a814254917e5cedc6fce1793168124beb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference time for segregated solve. Can be re-initialised whenever total elapsed time has been stored (before entering non-essential doc sections of the code)  <a href="classoomph_1_1SegregatableFSIProblem.html#a814254917e5cedc6fce1793168124beb">More...</a><br /></td></tr>
+<tr class="separator:a814254917e5cedc6fce1793168124beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8043214c2864bd7584f40e684dcceb58"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a8043214c2864bd7584f40e684dcceb58">T_spent_on_actual_solve</a></td></tr>
+<tr class="memdesc:a8043214c2864bd7584f40e684dcceb58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total elapsed time since start of solve, can be accumulated by adding bits of time spent in relevant parts of code (bypassing sections that only document the progress)  <a href="classoomph_1_1SegregatableFSIProblem.html#a8043214c2864bd7584f40e684dcceb58">More...</a><br /></td></tr>
+<tr class="separator:a8043214c2864bd7584f40e684dcceb58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb20be243e501b04b18da8697ce0985d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatableFSIProblem.html#abb20be243e501b04b18da8697ce0985d">Timer_has_been_halted</a></td></tr>
+<tr class="memdesc:abb20be243e501b04b18da8697ce0985d"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean flag to indicate if timer has been halted  <a href="classoomph_1_1SegregatableFSIProblem.html#abb20be243e501b04b18da8697ce0985d">More...</a><br /></td></tr>
+<tr class="separator:abb20be243e501b04b18da8697ce0985d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for problems that can be solved by segregated FSI solver </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00149">149</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a06634a6823bb5062d11e97f0be78f373"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06634a6823bb5062d11e97f0be78f373">&#9670;&nbsp;</a></span>convergence_criteria</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a06634a6823bb5062d11e97f0be78f373">oomph::SegregatableFSIProblem::convergence_criteria</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumerated flags for convergence criteria. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a06634a6823bb5062d11e97f0be78f373a96434fdb328f1440d763eb901f0e1dcc"></a>Assess_convergence_based_on_absolute_solid_change&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a06634a6823bb5062d11e97f0be78f373a735439a264d7a63a310e12f384d5a081"></a>Assess_convergence_based_on_relative_solid_change&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd"></a>Assess_convergence_based_on_max_global_residual&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00385">385</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a263f8553427533dc831bd420b8fbf418"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a263f8553427533dc831bd420b8fbf418">&#9670;&nbsp;</a></span>solve_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a263f8553427533dc831bd420b8fbf418">oomph::SegregatableFSIProblem::solve_type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumerated flags to indicate which solve is taking place. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a263f8553427533dc831bd420b8fbf418a0a2ec06d36907f018f82176e8256e76d"></a>Full_solve&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a263f8553427533dc831bd420b8fbf418ab5a200f3f251db5b62d69b7d80b98dae"></a>Fluid_solve&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a263f8553427533dc831bd420b8fbf418adb1f2e7a1cc45691468c5a5663ada4ca"></a>Solid_solve&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00391">391</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aabbe220c15e7a348a28d54be805ca8d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabbe220c15e7a348a28d54be805ca8d8">&#9670;&nbsp;</a></span>SegregatableFSIProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::SegregatableFSIProblem::SegregatableFSIProblem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Set default values for solver parameters: </p>
+<ul>
+<li>Don't use pointwise Aitken extrapolation but if it's used at all, it's used immediately.</li>
+<li>No under-relaxation at all (neither classical nor Irons&amp;Tuck)</li>
+<li>Base convergence on max. residual of coupled system of eqns</li>
+<li>Convergence tolerance = tolerance for Newton solver defined in Problem base class</li>
+<li>Max. 50 Picard iterations </li>
+</ul>
+<p>boolean flag to indicate if timer has been halted</p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">175</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00387">Assess_convergence_based_on_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00581">Convergence_criterion</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00469">Convergence_tolerance</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00475">Doc_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00515">Fluid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00391">Full_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00472">Max_picard</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00574">Omega_relax</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00463">Pointwise_aitken_start</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00536">Recheck_convergence_after_pointwise_aitken</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00520">Solid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00466">Solve_type</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00586">T_ref</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00591">T_spent_on_actual_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00594">Timer_has_been_halted</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00578">Use_irons_and_tuck_extrapolation</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00459">Use_pointwise_aitken</a>.</p>
+
+</div>
+</div>
+<a id="aa3c69a4078b02d251e4532e73d5820aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3c69a4078b02d251e4532e73d5820aa">&#9670;&nbsp;</a></span>~SegregatableFSIProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::SegregatableFSIProblem::~SegregatableFSIProblem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00226">226</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a284fb37276735a73bca0467fa2e44909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a284fb37276735a73bca0467fa2e44909">&#9670;&nbsp;</a></span>actions_after_segregated_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void oomph::SegregatableFSIProblem::actions_after_segregated_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is called once at the end of each segregated solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00159">159</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="abc1e909975df69e27f8f1435e215a842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc1e909975df69e27f8f1435e215a842">&#9670;&nbsp;</a></span>actions_before_segregated_convergence_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void oomph::SegregatableFSIProblem::actions_before_segregated_convergence_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is to be filled with actions that take place before the check for convergence of the entire segregated solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00163">163</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="ae8c920185dc95ab3be243276fd4253b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8c920185dc95ab3be243276fd4253b0">&#9670;&nbsp;</a></span>actions_before_segregated_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void oomph::SegregatableFSIProblem::actions_before_segregated_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is called once at the start of each segregated solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00155">155</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="ae10cc55b3dc502ba387695e8c010b0c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae10cc55b3dc502ba387695e8c010b0c1">&#9670;&nbsp;</a></span>assess_convergence_based_on_absolute_solid_change() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::assess_convergence_based_on_absolute_solid_change </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assess convergence based on max. absolute change of solid dofs. This interface has no argument and the default convergence tolerance for the Newton solver, Problem::Newton_solver_tolerance is used. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00325">325</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="aa0b531963389cf3b2ad253891931def9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0b531963389cf3b2ad253891931def9">&#9670;&nbsp;</a></span>assess_convergence_based_on_absolute_solid_change() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::assess_convergence_based_on_absolute_solid_change </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tol</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assess convergence based on max. absolute change of solid dofs. The argument specifies the convergence tolerance. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00314">314</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00385">Assess_convergence_based_on_absolute_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00581">Convergence_criterion</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00469">Convergence_tolerance</a>.</p>
+
+</div>
+</div>
+<a id="a2fba426552e48abb7ff8a554c20953da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fba426552e48abb7ff8a554c20953da">&#9670;&nbsp;</a></span>assess_convergence_based_on_max_global_residual() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::assess_convergence_based_on_max_global_residual </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assess convergence based on max. residuals of coupled system of eqns. This interface has no argument and the default convergence tolerance for the Newton solver, Problem::Newton_solver_tolerance is used. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00306">306</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a88eb2704f55c89db093cc2857490b727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88eb2704f55c89db093cc2857490b727">&#9670;&nbsp;</a></span>assess_convergence_based_on_max_global_residual() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::assess_convergence_based_on_max_global_residual </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tol</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assess convergence based on max. residual of coupled system of eqns. The argument specifies the convergence tolerance. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00295">295</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00387">Assess_convergence_based_on_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00581">Convergence_criterion</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00469">Convergence_tolerance</a>.</p>
+
+</div>
+</div>
+<a id="af95d2c3833b64d37635e2e07776cef54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af95d2c3833b64d37635e2e07776cef54">&#9670;&nbsp;</a></span>assess_convergence_based_on_relative_solid_change() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::assess_convergence_based_on_relative_solid_change </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assess convergence based on max. relative change of solid dofs. This interface has no argument and the default convergence tolerance for the Newton solver, Problem::Newton_solver_tolerance is used. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00344">344</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="abec6313054e23d998b4584f2de80bc52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abec6313054e23d998b4584f2de80bc52">&#9670;&nbsp;</a></span>assess_convergence_based_on_relative_solid_change() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::assess_convergence_based_on_relative_solid_change </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tol</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assess convergence based on max. relative change of solid dofs. The argument specifies the convergence tolerance. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00333">333</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00386">Assess_convergence_based_on_relative_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00581">Convergence_criterion</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00469">Convergence_tolerance</a>.</p>
+
+</div>
+</div>
+<a id="a7f0bee5113993bf9b4ce4ab846f49c0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f0bee5113993bf9b4ce4ab846f49c0a">&#9670;&nbsp;</a></span>disable_irons_and_tuck_extrapolation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::disable_irons_and_tuck_extrapolation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do not use Irons and Tuck extrapolation for solid dofs. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00381">381</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00578">Use_irons_and_tuck_extrapolation</a>.</p>
+
+</div>
+</div>
+<a id="a34c040b6fe4860ad44bc48ddf859e9fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34c040b6fe4860ad44bc48ddf859e9fe">&#9670;&nbsp;</a></span>disable_pointwise_aitken()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::disable_pointwise_aitken </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable the use of pointwise Aitken extrapolation. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00366">366</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00459">Use_pointwise_aitken</a>.</p>
+
+</div>
+</div>
+<a id="a0cb257e933a9b3e0ce6d9f79a263851f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cb257e933a9b3e0ce6d9f79a263851f">&#9670;&nbsp;</a></span>enable_irons_and_tuck_extrapolation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::enable_irons_and_tuck_extrapolation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use Irons and Tuck extrapolation for solid dofs. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00377">377</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00578">Use_irons_and_tuck_extrapolation</a>.</p>
+
+</div>
+</div>
+<a id="a3f52d9c6555b43d8ada274ec80940c13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f52d9c6555b43d8ada274ec80940c13">&#9670;&nbsp;</a></span>enable_pointwise_aitken() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::enable_pointwise_aitken </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use pointwise Aitken extrapolation. This interface has no argument and the current value of Pointwise_aitken_start will be used. The default is zero, extrapolation starts immediately. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00363">363</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00459">Use_pointwise_aitken</a>.</p>
+
+</div>
+</div>
+<a id="a08c87f24c9e3ea80182a4b19d3a9fa92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c87f24c9e3ea80182a4b19d3a9fa92">&#9670;&nbsp;</a></span>enable_pointwise_aitken() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::enable_pointwise_aitken </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>pointwise_aitken_start</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use pointwise Aitken extrapolation. The argument is used to specify the Picard iteration after which pointwise Aitken extrapolation is to be used for the first time. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00354">354</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00463">Pointwise_aitken_start</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00459">Use_pointwise_aitken</a>.</p>
+
+</div>
+</div>
+<a id="a7ad67f163160a54024fb0bcd5fa531c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ad67f163160a54024fb0bcd5fa531c3">&#9670;&nbsp;</a></span>enable_under_relaxation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::enable_under_relaxation </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>omega</em> = <code>1.0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use under-relaxation and (optionally) specify under-relaxation parameter. Default: omega=1.0 (i.e. no actual under-relaxation; Other extreme: omega=0.0 (freeze wall shape). Under-relaxation parameter can also be computed dynamically by setting use_irons_and_tuck_extrapolation() </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00373">373</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00574">Omega_relax</a>.</p>
+
+</div>
+</div>
+<a id="a0e67b39cdae35ea25ef97e5e768aa60a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e67b39cdae35ea25ef97e5e768aa60a">&#9670;&nbsp;</a></span>extrapolate_solid_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::extrapolate_solid_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extrapolate solid data and update fluid mesh during unsteady run. </p>
+<p>Extrapolate solid data and update fluid mesh. Extrapolation is based on previous history values and is therefore only called in time-dependent runs. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00040">40</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00515">Fluid_mesh_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00502">Solid_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l01082">unsteady_segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="ad0792ffce87f26d8963846c472f13d08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0792ffce87f26d8963846c472f13d08">&#9670;&nbsp;</a></span>get_solid_change()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::get_solid_change </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>rms_change</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>max_change</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>rms_norm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get rms of change in the solid dofs; the max. change of the solid dofs and the rms norm of the solid dofs themselves. Change is computed relative to the reference values stored when <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#af6a9e7b6f13b86bf86b65cfb7c4f966f" title="Store the current solid values as reference values for future convergence check. Also add another ent...">store_solid_dofs()</a> was last called. </p>
+<p>Get rms of change in the solid dofs; the max. change of the solid dofs and the rms norm of the solid dofs themselves. Change is computed relative to the reference values stored when <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#af6a9e7b6f13b86bf86b65cfb7c4f966f" title="Store the current solid values as reference values for future convergence check. Also add another ent...">store_solid_dofs()</a> was last called. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00327">327</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00510">Previous_solid_value</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00502">Solid_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a6282056a5c22b707a1e6c939a3f73dcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6282056a5c22b707a1e6c939a3f73dcd">&#9670;&nbsp;</a></span>halt_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::halt_timer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Halt timer (e.g. before performing non-essential parts of the code such as documentation of the iteration's progress) </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00428">428</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00586">T_ref</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00591">T_spent_on_actual_solve</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00594">Timer_has_been_halted</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">t_spent_on_actual_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a6bb2c76228b8f392729e41a288e72948"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bb2c76228b8f392729e41a288e72948">&#9670;&nbsp;</a></span>identify_fluid_and_solid_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void oomph::SegregatableFSIProblem::identify_fluid_and_solid_dofs </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; Data * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>fluid_data_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; Data * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>solid_data_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mesh *&amp;&#160;</td>
+          <td class="paramname"><em>fluid_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mesh *&amp;&#160;</td>
+          <td class="paramname"><em>solid_mesh_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Identify the fluid and solid Data. This is a pure virtual function that MUST be implemented for every specific problem that is to be solved by the segregated solver. The two mesh pointers identify meshes that contain elements and nodes used during the fluid or solid solves respectively. Elements that feature during both phases of the segretated solution must be included in both. These pointers may be set to NULL. In this case, all elements in the global mesh (set up during the monolithic discretisation of the problem) contribute to the global Jacobian matrix and the residual vector, even if their contributions only contain zero entries. This can be costly, though the code will still compute the correct results. </p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>.</p>
+
+</div>
+</div>
+<a id="a33397ef8c5410b782cc9801979812be0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33397ef8c5410b782cc9801979812be0">&#9670;&nbsp;</a></span>pin_fluid_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::pin_fluid_dofs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pin fluid dofs. </p>
+<p>Pin all fluid dofs. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00161">161</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00493">Fluid_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="acf28573efb54e2b33101ba8cb503a5b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf28573efb54e2b33101ba8cb503a5b8">&#9670;&nbsp;</a></span>pin_solid_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::pin_solid_dofs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pin solid dofs. </p>
+<p>Pin all solid dofs. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00219">219</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00502">Solid_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a99a457e1b3c17e9a08590db163eb7118"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99a457e1b3c17e9a08590db163eb7118">&#9670;&nbsp;</a></span>pointwise_aitken_extrapolate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::pointwise_aitken_extrapolate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do pointwise Aitken extrapolation for solid. </p>
+<p>Pointwise Aitken extrapolation for solid variables. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00520">520</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00456">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Pointwise_aitken_solid_value</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00502">Solid_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a61cad9a0a75f2999c0529caa9cac2b73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61cad9a0a75f2999c0529caa9cac2b73">&#9670;&nbsp;</a></span>rebuild_monolithic_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::rebuild_monolithic_mesh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rebuild global mesh for monolithic discretisation. </p>
+<p>Rebuild global mesh for monolithic problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00089">89</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00523">Orig_sub_mesh_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a61ae984ed6baba413b7577ce1d1b5dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61ae984ed6baba413b7577ce1d1b5dc3">&#9670;&nbsp;</a></span>reset_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::reset_timer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reset timer. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00407">407</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00586">T_ref</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00591">T_spent_on_actual_solve</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00594">Timer_has_been_halted</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a2896156c47a5a6c2e7a390057d394e10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2896156c47a5a6c2e7a390057d394e10">&#9670;&nbsp;</a></span>restart_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::restart_timer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>(Re-)start timer (e.g. after completing non-essential parts of the code such as documentation of the iteration's progress) </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00418">418</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00586">T_ref</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00594">Timer_has_been_halted</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">t_spent_on_actual_solve()</a>.</p>
+
+</div>
+</div>
+<a id="abbf4987f2891218d8efcf53de6150425"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbf4987f2891218d8efcf53de6150425">&#9670;&nbsp;</a></span>restore_fluid_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::restore_fluid_dofs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Restore pinned status of fluid dofs. </p>
+<p>Restore the pinned status of all fluid dofs. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00186">186</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00493">Fluid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00497">Fluid_value_is_pinned</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a6da202671582bf7bf13a3dceb115385f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6da202671582bf7bf13a3dceb115385f">&#9670;&nbsp;</a></span>restore_solid_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::restore_solid_dofs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Restore pinned status of solid dofs. </p>
+<p>Restore the pinned status of all solid dofs. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00245">245</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00502">Solid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00506">Solid_value_is_pinned</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a87a69561674c1e596bb205e0fc4a387f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87a69561674c1e596bb205e0fc4a387f">&#9670;&nbsp;</a></span>segregated_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PicardConvergenceData.html">PicardConvergenceData</a> oomph::SegregatableFSIProblem::segregated_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Segregated solver. Peform a segregated step from the present state of the system. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
+<p>Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">570</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00159">actions_after_segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00163">actions_before_segregated_convergence_check()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00155">actions_before_segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00385">Assess_convergence_based_on_absolute_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00387">Assess_convergence_based_on_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00386">Assess_convergence_based_on_relative_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00581">Convergence_criterion</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00469">Convergence_tolerance</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00070">oomph::PicardConvergenceData::cpu_for_global_residual()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00059">oomph::PicardConvergenceData::cpu_total()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00475">Doc_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00064">oomph::PicardConvergenceData::essential_cpu_total()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00391">Fluid_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00391">Full_solve</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00327">get_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00472">Max_picard</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00056">oomph::PicardConvergenceData::niter()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00161">pin_fluid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00219">pin_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00456">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00520">pointwise_aitken_extrapolate()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00463">Pointwise_aitken_start</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00089">rebuild_monolithic_mesh()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00536">Recheck_convergence_after_pointwise_aitken</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00407">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00186">restore_fluid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00245">restore_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00079">oomph::PicardConvergenceData::set_solver_converged()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00391">Solid_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00466">Solve_type</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00280">store_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">t_spent_on_actual_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00073">oomph::PicardConvergenceData::tol_achieved()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00381">under_relax_solid()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00144">use_only_fluid_elements()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00118">use_only_solid_elements()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00459">Use_pointwise_aitken</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00999">steady_segregated_solve()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01082">unsteady_segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a12e662227e5daf656244a531f40022f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12e662227e5daf656244a531f40022f9">&#9670;&nbsp;</a></span>setup_segregated_solver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::setup_segregated_solver </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>full_setup_of_fluid_and_solid_dofs</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Setup the segregated solver: Backup the pinned status of the fluid and solid dofs and allocate the internal storage based on the input provided by identify_fluid_and_solid_dofs(...) In addition, reset storage associated with convergence acceleration techniques. If the problem and degrees of freedom has not changed between calls to the solver then it is wasteful to call identify_fluid_and_solid_dofs(...) again and again. If the optional boolean flag is set to false then the storage for convergence acceleration techniques is reset, but the fluid and solid dofs are not altered. </p>
+<p>Setup segregated solver, using the information provided by the user in his/her implementation of the pure virtual function identify_fluid_and_solid_dofs(...). </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">1147</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00526">Del_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00493">Fluid_data_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00515">Fluid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00497">Fluid_value_is_pinned</a>, <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a6bb2c76228b8f392729e41a288e72948">identify_fluid_and_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00574">Omega_relax</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00523">Orig_sub_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00456">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Pointwise_aitken_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00510">Previous_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00529">R_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00502">Solid_data_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00520">Solid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00506">Solid_value_is_pinned</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00578">Use_irons_and_tuck_extrapolation</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00459">Use_pointwise_aitken</a>.</p>
+
+</div>
+</div>
+<a id="a8f8145df86358916df505e2b513caf6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f8145df86358916df505e2b513caf6a">&#9670;&nbsp;</a></span>steady_segregated_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PicardConvergenceData.html">PicardConvergenceData</a> oomph::SegregatableFSIProblem::steady_segregated_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Steady version of segregated solver. Makes all timesteppers steady before solving. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. <br  />
+ </p>
+<p>Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00999">999</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00133">oomph::SegregatedSolverError::Ran_out_of_iterations</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="af6a9e7b6f13b86bf86b65cfb7c4f966f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6a9e7b6f13b86bf86b65cfb7c4f966f">&#9670;&nbsp;</a></span>store_solid_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::store_solid_dofs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Store the current solid values as reference values for future convergence check. Also add another entry to pointwise Aitken history if required. </p>
+<p>Store the current solid values as reference values for future convergence check. Also add another entry to pointwise Aitken history. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00280">280</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00456">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Pointwise_aitken_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00510">Previous_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00502">Solid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00459">Use_pointwise_aitken</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="adaaaa08352182dc5e0a38c7003cb7a6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaaaa08352182dc5e0a38c7003cb7a6b">&#9670;&nbsp;</a></span>t_spent_on_actual_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::SegregatableFSIProblem::t_spent_on_actual_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Total elapsed time since start of solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">439</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00428">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00418">restart_timer()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00591">T_spent_on_actual_solve</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a9da3017952982a64496ff9c16ca7024c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9da3017952982a64496ff9c16ca7024c">&#9670;&nbsp;</a></span>under_relax_solid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::under_relax_solid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Under-relax the most recently computed solid variables, either by classical relaxation or by Irons &amp; Tuck. </p>
+<p>Under-relax solid, either by classical relaxation or by Irons &amp; Tuck. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00381">381</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00526">Del_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00574">Omega_relax</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00510">Previous_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00529">R_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00502">Solid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00578">Use_irons_and_tuck_extrapolation</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="aae43b43dbc197d238535bcb5c3acf168"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae43b43dbc197d238535bcb5c3acf168">&#9670;&nbsp;</a></span>unsteady_segregated_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PicardConvergenceData.html">PicardConvergenceData</a> oomph::SegregatableFSIProblem::unsteady_segregated_solve </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. <br  />
+ </p>
+<p>Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l01070">1070</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+</div>
+</div>
+<a id="a17f019ebaf83e170219bf605a8554111"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17f019ebaf83e170219bf605a8554111">&#9670;&nbsp;</a></span>unsteady_segregated_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PicardConvergenceData.html">PicardConvergenceData</a> oomph::SegregatableFSIProblem::unsteady_segregated_solve </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>shift_values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. <br  />
+ </p>
+<p>Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l01082">1082</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8cc_source.html#l00040">extrapolate_solid_data()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00133">oomph::SegregatedSolverError::Ran_out_of_iterations</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a13a9841e0aa05bf57ec228b49b311a26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13a9841e0aa05bf57ec228b49b311a26">&#9670;&nbsp;</a></span>use_only_fluid_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::use_only_fluid_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Only include fluid elements in the Problem's mesh. This is called before the segregated fluid solve. The fluid elements are identified by the user via the fluid_mesh_pt argument in the pure virtual function identify_fluid_and_solid_dofs(...). If a NULL pointer is returned by this function (i.e. if the user hasn't bothered to identify the fluids elements in a submesh, then no stripping of non-fluid elements is performed. The result of the computation will be correct but it won't be very efficient. <br  />
+ </p>
+<p>Only include fluid elements in the Problem's mesh. This is called before the segregated fluid solve. The fluid elements are identified by the user via the fluid_mesh_pt argument in the pure virtual function identify_fluid_and_solid_dofs(...). If a NULL pointer is returned by this function (i.e. if the user hasn't bothered to identify the fluids elements in a submesh, then no stripping of non-fluid elements is performed. The result of the computation will be correct but it won't be very efficient. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00144">144</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00515">Fluid_mesh_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a330660bc7b69c9c128bfed62b54dcf62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a330660bc7b69c9c128bfed62b54dcf62">&#9670;&nbsp;</a></span>use_only_solid_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::SegregatableFSIProblem::use_only_solid_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Only include solid elements in the Problem's mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid_mesh_pt argument in the pure virtual function identify_fluid_and_solid_dofs(...). If a NULL pointer is returned by this function (i.e. if the user hasn't bothered to identify the solid elements in a submesh, then no stripping of non-solid elements is performed. The result of the computation will be correct but it won't be very efficient. <br  />
+ </p>
+<p>Only include solid elements in the Problem's mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid_mesh_pt argument in the pure virtual function identify_fluid_and_solid_dofs(...). If a NULL pointer is returned by this function (i.e. if the user hasn't bothered to identify the solids elements in a submesh, then no stripping of non-solid elements is performed. The result of the computation will be correct but it won't be very efficient. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00118">118</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00520">Solid_mesh_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a971ddd09518a1771ae3a6ed85a51514e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a971ddd09518a1771ae3a6ed85a51514e">&#9670;&nbsp;</a></span>Convergence_criterion</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::SegregatableFSIProblem::Convergence_criterion</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convergence criterion (enumerated flag) </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00581">581</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00314">assess_convergence_based_on_absolute_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00295">assess_convergence_based_on_max_global_residual()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00333">assess_convergence_based_on_relative_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="ad9f2f249e0886878f096926b2cfca74b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f2f249e0886878f096926b2cfca74b">&#9670;&nbsp;</a></span>Convergence_tolerance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::SegregatableFSIProblem::Convergence_tolerance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convergence tolerance for Picard iteration. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00469">469</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00314">assess_convergence_based_on_absolute_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00295">assess_convergence_based_on_max_global_residual()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00333">assess_convergence_based_on_relative_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a8f4545c1a2647486d550499aa89e3136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f4545c1a2647486d550499aa89e3136">&#9670;&nbsp;</a></span>Del_irons_and_tuck</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::SegregatableFSIProblem::Del_irons_and_tuck</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of changes in Irons and Tuck under-relaxation. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00526">526</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00381">under_relax_solid()</a>.</p>
+
+</div>
+</div>
+<a id="aadc0d46511ee90dad36d0d00a8c2d7ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadc0d46511ee90dad36d0d00a8c2d7ad">&#9670;&nbsp;</a></span>Doc_max_global_residual</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::SegregatableFSIProblem::Doc_max_global_residual</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Doc maximum global residual during iteration? (default: false) </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00475">475</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a1aac015f9f0e9c1b925a534278dc1e55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aac015f9f0e9c1b925a534278dc1e55">&#9670;&nbsp;</a></span>Fluid_data_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;Data*&gt; oomph::SegregatableFSIProblem::Fluid_data_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector storing the Data objects associated with the fluid problem: Tyically the nodal and internal data of the elements in the fluid bulk mesh <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00493">493</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00161">pin_fluid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00186">restore_fluid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>.</p>
+
+</div>
+</div>
+<a id="ada29fa4ef2ae7b6460887f8f04eba6bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada29fa4ef2ae7b6460887f8f04eba6bf">&#9670;&nbsp;</a></span>Fluid_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* oomph::SegregatableFSIProblem::Fluid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mesh containing only fluid elements &ndash; the elements in this Mesh will be excluded from the assembly process when the solid problem is solved. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00515">515</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00040">extrapolate_solid_data()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00144">use_only_fluid_elements()</a>.</p>
+
+</div>
+</div>
+<a id="aa39b7f8499588b28b9b490771c4bcff2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa39b7f8499588b28b9b490771c4bcff2">&#9670;&nbsp;</a></span>Fluid_value_is_pinned</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;std::vector&lt;bool&gt; &gt; oomph::SegregatableFSIProblem::Fluid_value_is_pinned</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of vectors that store the pinned status of fluid Data values. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00497">497</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00186">restore_fluid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>.</p>
+
+</div>
+</div>
+<a id="aa2a06cb9517d1f183cdbaa20ea077805"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2a06cb9517d1f183cdbaa20ea077805">&#9670;&nbsp;</a></span>Max_picard</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::SegregatableFSIProblem::Max_picard</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max. number of Picard iterations. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00472">472</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="adc81fa8a44920be1b41dcea5008db7ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc81fa8a44920be1b41dcea5008db7ed">&#9670;&nbsp;</a></span>Omega_relax</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::SegregatableFSIProblem::Omega_relax</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Under-relaxation parameter. (1.0: no under-relaxation; 0.0: Freeze wall shape) </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00574">574</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00373">enable_under_relaxation()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00381">under_relax_solid()</a>.</p>
+
+</div>
+</div>
+<a id="a13ff18eb51b4eeb727443931cd19bac9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13ff18eb51b4eeb727443931cd19bac9">&#9670;&nbsp;</a></span>Orig_sub_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;Mesh*&gt; oomph::SegregatableFSIProblem::Orig_sub_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Backup for the pointers to the submeshes in the original problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00523">523</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00089">rebuild_monolithic_mesh()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>.</p>
+
+</div>
+</div>
+<a id="ad92eead7c5dc21884292a5a501c71388"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad92eead7c5dc21884292a5a501c71388">&#9670;&nbsp;</a></span>Pointwise_aitken_counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::SegregatableFSIProblem::Pointwise_aitken_counter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of Aitken histories available (int because after extrapolation it's re-initialised to -1 to force the computation of three new genuine iterates). </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00456">456</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00520">pointwise_aitken_extrapolate()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00280">store_solid_dofs()</a>.</p>
+
+</div>
+</div>
+<a id="aa193977e4617aee9906e59bdd31f2263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa193977e4617aee9906e59bdd31f2263">&#9670;&nbsp;</a></span>Pointwise_aitken_solid_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;Vector&lt;double&gt; &gt; oomph::SegregatableFSIProblem::Pointwise_aitken_solid_value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of Vectors containing up to three previous iterates for the solid dofs; used for pointwise Aitken extrapolation. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">533</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00520">pointwise_aitken_extrapolate()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00280">store_solid_dofs()</a>.</p>
+
+</div>
+</div>
+<a id="a47bcf35aed40bbb7e1c3778b8dfad501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47bcf35aed40bbb7e1c3778b8dfad501">&#9670;&nbsp;</a></span>Pointwise_aitken_start</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::SegregatableFSIProblem::Pointwise_aitken_start</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Start pointwise Aitken extrpolation after specified number of Picard iterations. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00463">463</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00354">enable_pointwise_aitken()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a6e056ff378e38504d5e9d522820ca8cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e056ff378e38504d5e9d522820ca8cf">&#9670;&nbsp;</a></span>Previous_solid_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::SegregatableFSIProblem::Previous_solid_value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector storing the previous solid values &ndash; used for convergence check. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00510">510</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00327">get_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00280">store_solid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00381">under_relax_solid()</a>.</p>
+
+</div>
+</div>
+<a id="a7568103d53df9c84b86fdf41885cf289"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7568103d53df9c84b86fdf41885cf289">&#9670;&nbsp;</a></span>R_irons_and_tuck</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::SegregatableFSIProblem::R_irons_and_tuck</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Irons and Tuck relaxation factor. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00529">529</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00381">under_relax_solid()</a>.</p>
+
+</div>
+</div>
+<a id="a0cef79bdf839668a2145e9fe5f77a5f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cef79bdf839668a2145e9fe5f77a5f2">&#9670;&nbsp;</a></span>Recheck_convergence_after_pointwise_aitken</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::SegregatableFSIProblem::Recheck_convergence_after_pointwise_aitken</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Have we just done a pointwise Aitken step. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00536">536</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="aca9ab5f800334761ae470453ef476067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca9ab5f800334761ae470453ef476067">&#9670;&nbsp;</a></span>Solid_data_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;Data*&gt; oomph::SegregatableFSIProblem::Solid_data_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector storing the Data objects associated with the solid problem: Typically the positional data of solid nodes and any quantities associated with displacement control, say. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00502">502</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00040">extrapolate_solid_data()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00327">get_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00219">pin_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00520">pointwise_aitken_extrapolate()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00245">restore_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00280">store_solid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00381">under_relax_solid()</a>.</p>
+
+</div>
+</div>
+<a id="a3e7f6f5452767279d21ccbfc6336ef12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e7f6f5452767279d21ccbfc6336ef12">&#9670;&nbsp;</a></span>Solid_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* oomph::SegregatableFSIProblem::Solid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mesh containing only solid elements &ndash; the elements in this mesh will be excluded from the assembly process when the fluid problem is solved. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00520">520</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00118">use_only_solid_elements()</a>.</p>
+
+</div>
+</div>
+<a id="a0f5d6ec62fd33f83600b69c9fcb1f4ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f5d6ec62fd33f83600b69c9fcb1f4ed">&#9670;&nbsp;</a></span>Solid_value_is_pinned</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;std::vector&lt;bool&gt; &gt; oomph::SegregatableFSIProblem::Solid_value_is_pinned</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of vectors that store the pinned status of solid Data values. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00506">506</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00245">restore_solid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>.</p>
+
+</div>
+</div>
+<a id="af238c6f11f6d4aacd2ff6e0dea917d40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af238c6f11f6d4aacd2ff6e0dea917d40">&#9670;&nbsp;</a></span>Solve_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::SegregatableFSIProblem::Solve_type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solve that is taking place (enumerated flag) </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00466">466</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a814254917e5cedc6fce1793168124beb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a814254917e5cedc6fce1793168124beb">&#9670;&nbsp;</a></span>T_ref</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">clock_t oomph::SegregatableFSIProblem::T_ref</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reference time for segregated solve. Can be re-initialised whenever total elapsed time has been stored (before entering non-essential doc sections of the code) </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00586">586</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00428">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00407">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00418">restart_timer()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a8043214c2864bd7584f40e684dcceb58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8043214c2864bd7584f40e684dcceb58">&#9670;&nbsp;</a></span>T_spent_on_actual_solve</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::SegregatableFSIProblem::T_spent_on_actual_solve</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Total elapsed time since start of solve, can be accumulated by adding bits of time spent in relevant parts of code (bypassing sections that only document the progress) </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00591">591</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00428">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00407">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">t_spent_on_actual_solve()</a>.</p>
+
+</div>
+</div>
+<a id="abb20be243e501b04b18da8697ce0985d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb20be243e501b04b18da8697ce0985d">&#9670;&nbsp;</a></span>Timer_has_been_halted</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::SegregatableFSIProblem::Timer_has_been_halted</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>boolean flag to indicate if timer has been halted </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00594">594</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00428">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00407">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00418">restart_timer()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a23930085f18e43926b6afcbbdd2a0509"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23930085f18e43926b6afcbbdd2a0509">&#9670;&nbsp;</a></span>Use_irons_and_tuck_extrapolation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::SegregatableFSIProblem::Use_irons_and_tuck_extrapolation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean flag to indicate use of Irons and Tuck's extrapolation for solid values. </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00578">578</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00381">disable_irons_and_tuck_extrapolation()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00377">enable_irons_and_tuck_extrapolation()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00381">under_relax_solid()</a>.</p>
+
+</div>
+</div>
+<a id="a16f0551d5e9dbe5b211bb3b05e80f276"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16f0551d5e9dbe5b211bb3b05e80f276">&#9670;&nbsp;</a></span>Use_pointwise_aitken</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::SegregatableFSIProblem::Use_pointwise_aitken</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use pointwise Aitken extrapolation? </p>
+
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00459">459</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00366">disable_pointwise_aitken()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00354">enable_pointwise_aitken()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00175">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00570">segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01147">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00280">store_solid_dofs()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a></li>
+<li><a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:21:48
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

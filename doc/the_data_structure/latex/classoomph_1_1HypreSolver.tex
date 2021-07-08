@@ -1,0 +1,916 @@
+\hypertarget{classoomph_1_1HypreSolver}{}\doxysection{oomph\+::Hypre\+Solver Class Reference}
+\label{classoomph_1_1HypreSolver}\index{oomph::HypreSolver@{oomph::HypreSolver}}
+
+
+{\ttfamily \#include $<$hypre\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Hypre\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1HypreSolver}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HypreSolver_a69f39b6d9156643103fff1483c9c6e28}{Hypre\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HypreSolver_a48e1215b0c1cc088369fb78f5ca58b72}{$\sim$\+Hypre\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HypreSolver_acb24f66623db84815531ccd791107938}{Hypre\+Solver}} (const \mbox{\hyperlink{classoomph_1_1HypreSolver}{Hypre\+Solver}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_aae31cbdfcc5d0cd99849f94537b8331b}{operator=}} (const \mbox{\hyperlink{classoomph_1_1HypreSolver}{Hypre\+Solver}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_ae8949856fc75ff767f1ad940a710109f}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Disable resolve function (overloads the \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} disable\+\_\+resolve function). ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a1bc71b4c84ca568da53deea0a4fd8db0}{max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Max\+\_\+iter. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a54945bba18bf066450b85ba21145656a}{tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Tolerance. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a2e6f6cbb98d3bdf91ae657eb2a0a87d9}{hypre\+\_\+method}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Hypre\+\_\+method flag -- specified via enumeration. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_acd4ce0f300c01fe2d9f802e5c0c0876b}{internal\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Internal\+\_\+preconditioner flag -- specified via enumeration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a87dd154df66240c7cb3ef08610ab72f8}{amg\+\_\+using\+\_\+simple\+\_\+smoothing}} ()
+\begin{DoxyCompactList}\small\item\em Function to select use of \textquotesingle{}simple\textquotesingle{} A\+MG smoothers as controlled by A\+M\+G\+\_\+simple\+\_\+smoother flag. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a03802971bc875e562bf91c779188e210}{amg\+\_\+simple\+\_\+smoother}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+simple\+\_\+smoother flag. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a7bef620aeade1b657f5051c93bf7e437}{amg\+\_\+using\+\_\+complex\+\_\+smoothing}} ()
+\begin{DoxyCompactList}\small\item\em Function to select use of \textquotesingle{}complex\textquotesingle{} A\+MG smoothers as controlled by A\+M\+G\+\_\+complex\+\_\+smoother flag. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a71d527f704e0fffaa736f40a483e78e4}{amg\+\_\+complex\+\_\+smoother}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+complex\+\_\+smoother flag. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a3bbf531d61b2ac2a0365f1d7c1ed58b7}{amg\+\_\+print\+\_\+level}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+print\+\_\+level. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_acd44bfa532703a7a60ca538531e6ee09}{amg\+\_\+smoother\+\_\+iterations}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+smoother\+\_\+iterations. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a5ed32fd8b3540cd863c30a76da15b0cb}{amg\+\_\+coarsening}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+coarsening flag. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a9f654a31fed47b7ef941c407518545f9}{amg\+\_\+max\+\_\+levels}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+max\+\_\+levels. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a0d1cd41ca27ea448f4c07e276b223cff}{amg\+\_\+damping}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+damping parameter. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HypreSolver_af49d2527d5d66f349d970f2f161a61a2}{amg\+\_\+strength}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+strength. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a3a7c59ae6c9fb35a2aa4708bee84a3f9}{amg\+\_\+max\+\_\+row\+\_\+sum}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+max\+\_\+row\+\_\+sum. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HypreSolver_ad591a3eb6ba46fef20f027887aeac30b}{amg\+\_\+truncation}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+truncation. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{classoomph_1_1HypreSolver_aa58cd92f9b766dd9a7c77c536530628a}{parasails\+\_\+symmetry}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Para\+Sails symmetry flag. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{classoomph_1_1HypreSolver_ae782f254e96931adc3277ef010bd9896}{parasails\+\_\+nlevel}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Para\+Sails nlevel parameter. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a64bfb100909ce50177f3433b2df83c65}{parasails\+\_\+thresh}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Para\+Sails thresh parameter. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a6bb6fcd2817efa639fcfd68c6c62578f}{parasails\+\_\+filter}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Para\+Sails filter parameter. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a2139396d71f35809314c1eec467a5749}{euclid\+\_\+droptol}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Euclid drop tolerance parameter. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a0cd0d27a90c05a6626f13c6255b6e6d1}{euclid\+\_\+level}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a8a96671322af214937d924546633648f}{enable\+\_\+euclid\+\_\+row\+Scale}} ()
+\begin{DoxyCompactList}\small\item\em Enable euclid row\+Scaling. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a0cedd83299949fcc877c060e6dd7639f}{disable\+\_\+euclid\+\_\+row\+Scale}} ()
+\begin{DoxyCompactList}\small\item\em Disable euclid row scaling. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a1d9e7f9f4419b3a2fc12c3cdffb603d0}{enable\+\_\+euclid\+\_\+using\+\_\+\+BJ}} ()
+\begin{DoxyCompactList}\small\item\em Enable use of Block Jacobi as opposed to P\+I\+LU ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a07def5b52e105be6f19a40f43e41548e}{disable\+\_\+euclid\+\_\+using\+\_\+\+BJ}} ()
+\begin{DoxyCompactList}\small\item\em Disable use of Block Jacobi,. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_ad0206b4977a0e7aa78a386a8803ffcd4}{euclid\+\_\+using\+\_\+\+I\+L\+UK}} ()
+\begin{DoxyCompactList}\small\item\em Function to switch on I\+L\+U(k) factorization for Euclid (default is I\+L\+U(k) factorization) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a831cd8c7324a117e2949ee734adf95cd}{euclid\+\_\+using\+\_\+\+I\+L\+UT}} ()
+\begin{DoxyCompactList}\small\item\em Function to switch on I\+L\+UT factorization for Euclid (default is I\+L\+U(k) factorization) \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a367077503c12f1d5b6b57759cb3ed872}{euclid\+\_\+print\+\_\+level}} ()
+\begin{DoxyCompactList}\small\item\em Function to set the level of printing from Euclid when the Euclid destructor is called 0\+: no printing (default) 1\+: prints summary of runtime settings and timings 2\+: as 1 plus prints memory usage. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HypreSolver_a4ed4bf0114bca132a31b8969c2a8fc00}{krylov\+\_\+print\+\_\+level}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Krylov\+\_\+print\+\_\+level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}{enable\+\_\+delete\+\_\+matrix}} ()
+\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling this function which changes the flag from false (its default) to true. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_ae97158e3b4fca00cc15d0baa4c5444d4}{disable\+\_\+delete\+\_\+matrix}} ()
+\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a3a42a158a390f24d7d91ee78aa53e960}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
+\begin{DoxyCompactList}\small\item\em Function which uses problem\+\_\+pt\textquotesingle{}s get\+\_\+jacobian(...) function to generate a linear system which is then solved. This function deletes any existing internal data and then generates a new Hypre solver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a11265eed48a54ba7dfb148d226cb2130}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
+\begin{DoxyCompactList}\small\item\em Function to solve the linear system defined by matrix\+\_\+pt and rhs. This function will delete any existing internal data and generate a new Hypre solver. ~\newline
+ {\bfseries{Note\+:}} The matrix has to be of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. ~\newline
+ {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}{enable\+\_\+delete\+\_\+matrix()}} function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a892df4a9377dfa5ec978a74badb61423}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
+\begin{DoxyCompactList}\small\item\em Function to resolve a linear system using the existing solver data, allowing a solve with a new right hand side vector. This function must be used after a call to solve(...) with enable\+\_\+resolve set to true. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HypreSolver_a5c1a57f1f74c0748a47c1629635ee0fc}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Function deletes all solver data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1HypreSolver_a79047c84718f95a88ba3c41e1d3963e7}{Delete\+\_\+matrix}}
+\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+An \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} class using the suite of Hypre solvers to allow
+
+Boomer\+A\+MG (A\+MG), \mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} or \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}}
+
+to be used for Linear\+Solver\+::solve(...) or Linear\+Solver\+::resolve(...).
+
+The Krylov subspace solvers (\mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} and \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}}) may be preconditioned using\+: \begin{DoxyVerb}    BoomerAMG, Euclid or ParaSails
+\end{DoxyVerb}
+
+
+By default \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} without preconditioning is used. ~\newline
+ 
+
+Definition at line 513 of file hypre\+\_\+solver.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a69f39b6d9156643103fff1483c9c6e28}\label{classoomph_1_1HypreSolver_a69f39b6d9156643103fff1483c9c6e28}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!HypreSolver@{HypreSolver}}
+\index{HypreSolver@{HypreSolver}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{HypreSolver()}{HypreSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Hypre\+Solver\+::\+Hypre\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 518 of file hypre\+\_\+solver.\+h.
+
+
+
+References Delete\+\_\+matrix, and oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a48e1215b0c1cc088369fb78f5ca58b72}\label{classoomph_1_1HypreSolver_a48e1215b0c1cc088369fb78f5ca58b72}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!````~HypreSolver@{$\sim$HypreSolver}}
+\index{````~HypreSolver@{$\sim$HypreSolver}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{$\sim$HypreSolver()}{~HypreSolver()}}
+{\footnotesize\ttfamily oomph\+::\+Hypre\+Solver\+::$\sim$\+Hypre\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 535 of file hypre\+\_\+solver.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_acb24f66623db84815531ccd791107938}\label{classoomph_1_1HypreSolver_acb24f66623db84815531ccd791107938}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!HypreSolver@{HypreSolver}}
+\index{HypreSolver@{HypreSolver}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{HypreSolver()}{HypreSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Hypre\+Solver\+::\+Hypre\+Solver (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HypreSolver}{Hypre\+Solver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 538 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a5ed32fd8b3540cd863c30a76da15b0cb}\label{classoomph_1_1HypreSolver_a5ed32fd8b3540cd863c30a76da15b0cb}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_coarsening@{amg\_coarsening}}
+\index{amg\_coarsening@{amg\_coarsening}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_coarsening()}{amg\_coarsening()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+coarsening (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+coarsening flag. 
+
+
+
+Definition at line 591 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+coarsening.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a71d527f704e0fffaa736f40a483e78e4}\label{classoomph_1_1HypreSolver_a71d527f704e0fffaa736f40a483e78e4}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_complex\_smoother@{amg\_complex\_smoother}}
+\index{amg\_complex\_smoother@{amg\_complex\_smoother}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_complex\_smoother()}{amg\_complex\_smoother()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+complex\+\_\+smoother (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+complex\+\_\+smoother flag. 
+
+
+
+Definition at line 582 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+complex\+\_\+smoother.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a0d1cd41ca27ea448f4c07e276b223cff}\label{classoomph_1_1HypreSolver_a0d1cd41ca27ea448f4c07e276b223cff}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_damping@{amg\_damping}}
+\index{amg\_damping@{amg\_damping}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_damping()}{amg\_damping()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+damping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+damping parameter. 
+
+
+
+Definition at line 597 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+damping.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a9f654a31fed47b7ef941c407518545f9}\label{classoomph_1_1HypreSolver_a9f654a31fed47b7ef941c407518545f9}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_max\_levels@{amg\_max\_levels}}
+\index{amg\_max\_levels@{amg\_max\_levels}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_max\_levels()}{amg\_max\_levels()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+max\+\_\+levels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+max\+\_\+levels. 
+
+
+
+Definition at line 594 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+max\+\_\+levels.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a3a7c59ae6c9fb35a2aa4708bee84a3f9}\label{classoomph_1_1HypreSolver_a3a7c59ae6c9fb35a2aa4708bee84a3f9}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_max\_row\_sum@{amg\_max\_row\_sum}}
+\index{amg\_max\_row\_sum@{amg\_max\_row\_sum}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_max\_row\_sum()}{amg\_max\_row\_sum()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+max\+\_\+row\+\_\+sum (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+max\+\_\+row\+\_\+sum. 
+
+
+
+Definition at line 603 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+max\+\_\+row\+\_\+sum.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a3bbf531d61b2ac2a0365f1d7c1ed58b7}\label{classoomph_1_1HypreSolver_a3bbf531d61b2ac2a0365f1d7c1ed58b7}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_print\_level@{amg\_print\_level}}
+\index{amg\_print\_level@{amg\_print\_level}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_print\_level()}{amg\_print\_level()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+print\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+print\+\_\+level. 
+
+
+
+Definition at line 585 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+print\+\_\+level.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a03802971bc875e562bf91c779188e210}\label{classoomph_1_1HypreSolver_a03802971bc875e562bf91c779188e210}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_simple\_smoother@{amg\_simple\_smoother}}
+\index{amg\_simple\_smoother@{amg\_simple\_smoother}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_simple\_smoother()}{amg\_simple\_smoother()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+simple\+\_\+smoother (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+simple\+\_\+smoother flag. 
+
+
+
+Definition at line 575 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+simple\+\_\+smoother.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_acd44bfa532703a7a60ca538531e6ee09}\label{classoomph_1_1HypreSolver_acd44bfa532703a7a60ca538531e6ee09}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_smoother\_iterations@{amg\_smoother\_iterations}}
+\index{amg\_smoother\_iterations@{amg\_smoother\_iterations}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_smoother\_iterations()}{amg\_smoother\_iterations()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+smoother\+\_\+iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+smoother\+\_\+iterations. 
+
+
+
+Definition at line 588 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+smoother\+\_\+iterations.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_af49d2527d5d66f349d970f2f161a61a2}\label{classoomph_1_1HypreSolver_af49d2527d5d66f349d970f2f161a61a2}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_strength@{amg\_strength}}
+\index{amg\_strength@{amg\_strength}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_strength()}{amg\_strength()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+strength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+strength. 
+
+
+
+Definition at line 600 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+strength.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_ad591a3eb6ba46fef20f027887aeac30b}\label{classoomph_1_1HypreSolver_ad591a3eb6ba46fef20f027887aeac30b}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_truncation@{amg\_truncation}}
+\index{amg\_truncation@{amg\_truncation}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_truncation()}{amg\_truncation()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Solver\+::amg\+\_\+truncation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+truncation. 
+
+
+
+Definition at line 606 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+truncation.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a7bef620aeade1b657f5051c93bf7e437}\label{classoomph_1_1HypreSolver_a7bef620aeade1b657f5051c93bf7e437}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_using\_complex\_smoothing@{amg\_using\_complex\_smoothing}}
+\index{amg\_using\_complex\_smoothing@{amg\_using\_complex\_smoothing}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_using\_complex\_smoothing()}{amg\_using\_complex\_smoothing()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::amg\+\_\+using\+\_\+complex\+\_\+smoothing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to select use of \textquotesingle{}complex\textquotesingle{} A\+MG smoothers as controlled by A\+M\+G\+\_\+complex\+\_\+smoother flag. 
+
+
+
+Definition at line 579 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+using\+\_\+simple\+\_\+smoothing.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a87dd154df66240c7cb3ef08610ab72f8}\label{classoomph_1_1HypreSolver_a87dd154df66240c7cb3ef08610ab72f8}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!amg\_using\_simple\_smoothing@{amg\_using\_simple\_smoothing}}
+\index{amg\_using\_simple\_smoothing@{amg\_using\_simple\_smoothing}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{amg\_using\_simple\_smoothing()}{amg\_using\_simple\_smoothing()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to select use of \textquotesingle{}simple\textquotesingle{} A\+MG smoothers as controlled by A\+M\+G\+\_\+simple\+\_\+smoother flag. 
+
+
+
+Definition at line 572 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+using\+\_\+simple\+\_\+smoothing.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a5c1a57f1f74c0748a47c1629635ee0fc}\label{classoomph_1_1HypreSolver_a5c1a57f1f74c0748a47c1629635ee0fc}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function deletes all solver data. 
+
+\mbox{\hyperlink{classoomph_1_1HypreSolver_a5c1a57f1f74c0748a47c1629635ee0fc}{clean\+\_\+up\+\_\+memory()}} deletes any existing solver data 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 1612 of file hypre\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::hypre\+\_\+clean\+\_\+up\+\_\+memory().
+
+
+
+Referenced by disable\+\_\+resolve(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_ae97158e3b4fca00cc15d0baa4c5444d4}\label{classoomph_1_1HypreSolver_ae97158e3b4fca00cc15d0baa4c5444d4}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!disable\_delete\_matrix@{disable\_delete\_matrix}}
+\index{disable\_delete\_matrix@{disable\_delete\_matrix}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_delete\_matrix()}{disable\_delete\_matrix()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::disable\+\_\+delete\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. 
+
+or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. Calling this function ensures that the matrix is not deleted. 
+
+Definition at line 674 of file hypre\+\_\+solver.\+h.
+
+
+
+References Delete\+\_\+matrix.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a0cedd83299949fcc877c060e6dd7639f}\label{classoomph_1_1HypreSolver_a0cedd83299949fcc877c060e6dd7639f}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!disable\_euclid\_rowScale@{disable\_euclid\_rowScale}}
+\index{disable\_euclid\_rowScale@{disable\_euclid\_rowScale}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_euclid\_rowScale()}{disable\_euclid\_rowScale()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::disable\+\_\+euclid\+\_\+row\+Scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable euclid row scaling. 
+
+
+
+Definition at line 631 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a07def5b52e105be6f19a40f43e41548e}\label{classoomph_1_1HypreSolver_a07def5b52e105be6f19a40f43e41548e}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!disable\_euclid\_using\_BJ@{disable\_euclid\_using\_BJ}}
+\index{disable\_euclid\_using\_BJ@{disable\_euclid\_using\_BJ}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_euclid\_using\_BJ()}{disable\_euclid\_using\_BJ()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::disable\+\_\+euclid\+\_\+using\+\_\+\+BJ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable use of Block Jacobi,. 
+
+so P\+I\+LU will be used 
+
+Definition at line 639 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+BJ.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_ae8949856fc75ff767f1ad940a710109f}\label{classoomph_1_1HypreSolver_ae8949856fc75ff767f1ad940a710109f}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!disable\_resolve@{disable\_resolve}}
+\index{disable\_resolve@{disable\_resolve}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_resolve()}{disable\_resolve()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Disable resolve function (overloads the \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} disable\+\_\+resolve function). ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 551 of file hypre\+\_\+solver.\+h.
+
+
+
+References clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}\label{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!enable\_delete\_matrix@{enable\_delete\_matrix}}
+\index{enable\_delete\_matrix@{enable\_delete\_matrix}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_delete\_matrix()}{enable\_delete\_matrix()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::enable\+\_\+delete\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling this function which changes the flag from false (its default) to true. 
+
+
+
+Definition at line 668 of file hypre\+\_\+solver.\+h.
+
+
+
+References Delete\+\_\+matrix.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a8a96671322af214937d924546633648f}\label{classoomph_1_1HypreSolver_a8a96671322af214937d924546633648f}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!enable\_euclid\_rowScale@{enable\_euclid\_rowScale}}
+\index{enable\_euclid\_rowScale@{enable\_euclid\_rowScale}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_euclid\_rowScale()}{enable\_euclid\_rowScale()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::enable\+\_\+euclid\+\_\+row\+Scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable euclid row\+Scaling. 
+
+
+
+Definition at line 628 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a1d9e7f9f4419b3a2fc12c3cdffb603d0}\label{classoomph_1_1HypreSolver_a1d9e7f9f4419b3a2fc12c3cdffb603d0}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!enable\_euclid\_using\_BJ@{enable\_euclid\_using\_BJ}}
+\index{enable\_euclid\_using\_BJ@{enable\_euclid\_using\_BJ}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_euclid\_using\_BJ()}{enable\_euclid\_using\_BJ()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::enable\+\_\+euclid\+\_\+using\+\_\+\+BJ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable use of Block Jacobi as opposed to P\+I\+LU ~\newline
+ 
+
+
+
+Definition at line 635 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+BJ.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a2139396d71f35809314c1eec467a5749}\label{classoomph_1_1HypreSolver_a2139396d71f35809314c1eec467a5749}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!euclid\_droptol@{euclid\_droptol}}
+\index{euclid\_droptol@{euclid\_droptol}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{euclid\_droptol()}{euclid\_droptol()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Solver\+::euclid\+\_\+droptol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Euclid drop tolerance parameter. 
+
+
+
+Definition at line 621 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+droptol.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a0cd0d27a90c05a6626f13c6255b6e6d1}\label{classoomph_1_1HypreSolver_a0cd0d27a90c05a6626f13c6255b6e6d1}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!euclid\_level@{euclid\_level}}
+\index{euclid\_level@{euclid\_level}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{euclid\_level()}{euclid\_level()}}
+{\footnotesize\ttfamily int\& oomph\+::\+Hypre\+Solver\+::euclid\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Access function to Euclid level parameter for I\+L\+U(k) factorization 
+
+Definition at line 625 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+level.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a367077503c12f1d5b6b57759cb3ed872}\label{classoomph_1_1HypreSolver_a367077503c12f1d5b6b57759cb3ed872}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!euclid\_print\_level@{euclid\_print\_level}}
+\index{euclid\_print\_level@{euclid\_print\_level}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{euclid\_print\_level()}{euclid\_print\_level()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::euclid\+\_\+print\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set the level of printing from Euclid when the Euclid destructor is called 0\+: no printing (default) 1\+: prints summary of runtime settings and timings 2\+: as 1 plus prints memory usage. 
+
+
+
+Definition at line 654 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+print\+\_\+level.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_ad0206b4977a0e7aa78a386a8803ffcd4}\label{classoomph_1_1HypreSolver_ad0206b4977a0e7aa78a386a8803ffcd4}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!euclid\_using\_ILUK@{euclid\_using\_ILUK}}
+\index{euclid\_using\_ILUK@{euclid\_using\_ILUK}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{euclid\_using\_ILUK()}{euclid\_using\_ILUK()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::euclid\+\_\+using\+\_\+\+I\+L\+UK (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to switch on I\+L\+U(k) factorization for Euclid (default is I\+L\+U(k) factorization) 
+
+
+
+Definition at line 643 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+I\+L\+UT.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a831cd8c7324a117e2949ee734adf95cd}\label{classoomph_1_1HypreSolver_a831cd8c7324a117e2949ee734adf95cd}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!euclid\_using\_ILUT@{euclid\_using\_ILUT}}
+\index{euclid\_using\_ILUT@{euclid\_using\_ILUT}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{euclid\_using\_ILUT()}{euclid\_using\_ILUT()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::euclid\+\_\+using\+\_\+\+I\+L\+UT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to switch on I\+L\+UT factorization for Euclid (default is I\+L\+U(k) factorization) 
+
+
+
+Definition at line 647 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+I\+L\+UT.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a2e6f6cbb98d3bdf91ae657eb2a0a87d9}\label{classoomph_1_1HypreSolver_a2e6f6cbb98d3bdf91ae657eb2a0a87d9}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!hypre\_method@{hypre\_method}}
+\index{hypre\_method@{hypre\_method}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{hypre\_method()}{hypre\_method()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::hypre\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Hypre\+\_\+method flag -- specified via enumeration. 
+
+
+
+Definition at line 564 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_acd4ce0f300c01fe2d9f802e5c0c0876b}\label{classoomph_1_1HypreSolver_acd4ce0f300c01fe2d9f802e5c0c0876b}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!internal\_preconditioner@{internal\_preconditioner}}
+\index{internal\_preconditioner@{internal\_preconditioner}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{internal\_preconditioner()}{internal\_preconditioner()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::internal\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Internal\+\_\+preconditioner flag -- specified via enumeration. 
+
+
+
+Definition at line 568 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Internal\+\_\+preconditioner.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a4ed4bf0114bca132a31b8969c2a8fc00}\label{classoomph_1_1HypreSolver_a4ed4bf0114bca132a31b8969c2a8fc00}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!krylov\_print\_level@{krylov\_print\_level}}
+\index{krylov\_print\_level@{krylov\_print\_level}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{krylov\_print\_level()}{krylov\_print\_level()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::krylov\+\_\+print\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Krylov\+\_\+print\+\_\+level. 
+
+
+
+Definition at line 657 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Krylov\+\_\+print\+\_\+level.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a1bc71b4c84ca568da53deea0a4fd8db0}\label{classoomph_1_1HypreSolver_a1bc71b4c84ca568da53deea0a4fd8db0}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!max\_iter@{max\_iter}}
+\index{max\_iter@{max\_iter}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{max\_iter()}{max\_iter()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Solver\+::max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Max\+\_\+iter. 
+
+
+
+Definition at line 558 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Max\+\_\+iter.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_aae31cbdfcc5d0cd99849f94537b8331b}\label{classoomph_1_1HypreSolver_aae31cbdfcc5d0cd99849f94537b8331b}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HypreSolver}{Hypre\+Solver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 544 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a6bb6fcd2817efa639fcfd68c6c62578f}\label{classoomph_1_1HypreSolver_a6bb6fcd2817efa639fcfd68c6c62578f}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!parasails\_filter@{parasails\_filter}}
+\index{parasails\_filter@{parasails\_filter}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{parasails\_filter()}{parasails\_filter()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Solver\+::parasails\+\_\+filter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Para\+Sails filter parameter. 
+
+
+
+Definition at line 618 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+filter.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_ae782f254e96931adc3277ef010bd9896}\label{classoomph_1_1HypreSolver_ae782f254e96931adc3277ef010bd9896}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!parasails\_nlevel@{parasails\_nlevel}}
+\index{parasails\_nlevel@{parasails\_nlevel}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{parasails\_nlevel()}{parasails\_nlevel()}}
+{\footnotesize\ttfamily int\& oomph\+::\+Hypre\+Solver\+::parasails\+\_\+nlevel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Para\+Sails nlevel parameter. 
+
+
+
+Definition at line 612 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+nlevel.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_aa58cd92f9b766dd9a7c77c536530628a}\label{classoomph_1_1HypreSolver_aa58cd92f9b766dd9a7c77c536530628a}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!parasails\_symmetry@{parasails\_symmetry}}
+\index{parasails\_symmetry@{parasails\_symmetry}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{parasails\_symmetry()}{parasails\_symmetry()}}
+{\footnotesize\ttfamily int\& oomph\+::\+Hypre\+Solver\+::parasails\+\_\+symmetry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Para\+Sails symmetry flag. 
+
+
+
+Definition at line 609 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+symmetry.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a64bfb100909ce50177f3433b2df83c65}\label{classoomph_1_1HypreSolver_a64bfb100909ce50177f3433b2df83c65}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!parasails\_thresh@{parasails\_thresh}}
+\index{parasails\_thresh@{parasails\_thresh}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{parasails\_thresh()}{parasails\_thresh()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Solver\+::parasails\+\_\+thresh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Para\+Sails thresh parameter. 
+
+
+
+Definition at line 615 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+thresh.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a892df4a9377dfa5ec978a74badb61423}\label{classoomph_1_1HypreSolver_a892df4a9377dfa5ec978a74badb61423}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!resolve@{resolve}}
+\index{resolve@{resolve}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::resolve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to resolve a linear system using the existing solver data, allowing a solve with a new right hand side vector. This function must be used after a call to solve(...) with enable\+\_\+resolve set to true. 
+
+Resolve performs a linear solve using current solver data (if such data exists). 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 1555 of file hypre\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Hypre\+Interface\+::existing\+\_\+solver(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Hypre\+Interface\+::\+None, and oomph\+::\+Hypre\+Interface\+::\+Output\+\_\+info.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a11265eed48a54ba7dfb148d226cb2130}\label{classoomph_1_1HypreSolver_a11265eed48a54ba7dfb148d226cb2130}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to solve the linear system defined by matrix\+\_\+pt and rhs. This function will delete any existing internal data and generate a new Hypre solver. ~\newline
+ {\bfseries{Note\+:}} The matrix has to be of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. ~\newline
+ {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HypreSolver_ae917113f255b23448210530b00f55338}{enable\+\_\+delete\+\_\+matrix()}} function. 
+
+Uses Hypre\+Interface\+::hypre\+\_\+solve(...) to solve the linear system for a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or a Distributed\+C\+R\+Double\+Matrix. In the latter case, the rhs needs to be distributed too, i.\+e. the length of the rhs vector must be equal to the number of rows stored locally. Note\+: the returned solution vector is never distributed, i.\+e. all processors hold all values 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 1456 of file hypre\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Hypre\+Interface\+::\+Delete\+\_\+input\+\_\+data, Delete\+\_\+matrix, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup(), oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), and oomph\+::\+Hypre\+Interface\+::\+Output\+\_\+info.
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a3a42a158a390f24d7d91ee78aa53e960}\label{classoomph_1_1HypreSolver_a3a42a158a390f24d7d91ee78aa53e960}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function which uses problem\+\_\+pt\textquotesingle{}s get\+\_\+jacobian(...) function to generate a linear system which is then solved. This function deletes any existing internal data and then generates a new Hypre solver. 
+
+Problem-\/based solve function to generate the Jacobian matrix and residual vector and use Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup(...) and Hypre\+Interface\+::hypre\+\_\+solve(...) to solve the linear system. This function will delete any existing data. Note\+: the returned solution vector is N\+OT distributed, i.\+e. all processors hold all values because this is what the Newton solver requires. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 1401 of file hypre\+\_\+solver.\+cc.
+
+
+
+References clean\+\_\+up\+\_\+memory(), oomph\+::\+Hypre\+Interface\+::\+Delete\+\_\+input\+\_\+data, oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup(), oomph\+::oomph\+\_\+info, oomph\+::\+Hypre\+Interface\+::\+Output\+\_\+info, and oomph\+::\+Timing\+Helpers\+::timer().
+
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a54945bba18bf066450b85ba21145656a}\label{classoomph_1_1HypreSolver_a54945bba18bf066450b85ba21145656a}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!tolerance@{tolerance}}
+\index{tolerance@{tolerance}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{tolerance()}{tolerance()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Solver\+::tolerance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Tolerance. 
+
+
+
+Definition at line 561 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Tolerance.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1HypreSolver_a79047c84718f95a88ba3c41e1d3963e7}\label{classoomph_1_1HypreSolver_a79047c84718f95a88ba3c41e1d3963e7}} 
+\index{oomph::HypreSolver@{oomph::HypreSolver}!Delete\_matrix@{Delete\_matrix}}
+\index{Delete\_matrix@{Delete\_matrix}!oomph::HypreSolver@{oomph::HypreSolver}}
+\doxysubsubsection{\texorpdfstring{Delete\_matrix}{Delete\_matrix}}
+{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Solver\+::\+Delete\+\_\+matrix\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true. 
+
+
+
+Definition at line 720 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by disable\+\_\+delete\+\_\+matrix(), enable\+\_\+delete\+\_\+matrix(), Hypre\+Solver(), and solve().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{hypre__solver_8h}{hypre\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{hypre__solver_8cc}{hypre\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

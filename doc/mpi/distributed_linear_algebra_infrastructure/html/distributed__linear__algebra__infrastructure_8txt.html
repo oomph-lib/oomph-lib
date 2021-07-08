@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: distributed_linear_algebra_infrastructure.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">distributed_linear_algebra_infrastructure.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:adb3296e203def8ae141d705b7fd285f2"><td class="memItemLeft" align="right" valign="top">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra discussing its design and key functionality The aim of this <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is to facilitate the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#adb3296e203def8ae141d705b7fd285f2">parallel</a> (<a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a>) execution of linear algebra type operations with little(or no) user intervention. This requires all linear algebra data and computations to be <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> over all available processes. We begin by defining the \c OomphCommunicator</td></tr>
+<tr class="separator:adb3296e203def8ae141d705b7fd285f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6158430c3ab91b4d433bbf4b6af606fa"><td class="memItemLeft" align="right" valign="top">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra discussing its design and key functionality The aim of this <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is to facilitate the a <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> that is fundamental to <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> computing in c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> Next we discuss the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c LinearAlgebraDistribution which specifies the distribution of the data and computations over the available processes In Sections ref double_vector ref cr_double_matrix and ref distributed_linear_algebra_object we discuss c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects including the key&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a6158430c3ab91b4d433bbf4b6af606fa">containers</a> (matrices and vectors) and operators(solvers and preconditioners). Finally</td></tr>
+<tr class="separator:a6158430c3ab91b4d433bbf4b6af606fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae451763b0d967dcfefea36b518bfe9f0"><td class="memItemLeft" align="right" valign="top">we refer the reader to the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> employs MPI for <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> memory parallelisation Fundamental to MPI is the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#ae451763b0d967dcfefea36b518bfe9f0">communicator</a> (\c MPI_Comm) which determines which processes are involved in a <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#adb3296e203def8ae141d705b7fd285f2">parallel</a> computation. Although \c oomph-<a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> is implemented in C++</td></tr>
+<tr class="separator:ae451763b0d967dcfefea36b518bfe9f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a030a75b8fa88287cb996c32864a8ac1b"><td class="memItemLeft" align="right" valign="top">we refer the reader to the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> employs MPI for <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> memory parallelisation Fundamental to MPI is the the C MPI bindings are utilised c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> provides the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c OomphCommunicator as an object oriented wrapper for a c MPI_Comm Calling c argv It initialises MPI(i.e. calls \c MPI_Init(argc, argv)) and creates \c oomph-<a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> 's global <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#ae451763b0d967dcfefea36b518bfe9f0">communicator</a> section distributed_linear_algebra_object <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> In this section we introduce the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> a base <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> for all <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects This <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> encapsulates a c LinearAlgebraDistribution&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> (protected) access to derived classes to update(\c build_distribution(...)) and clear(\c clear()) the stored distribution. Secondly</td></tr>
+<tr class="separator:a030a75b8fa88287cb996c32864a8ac1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a735f6f26a559982261bb63ecfb78b016"><td class="memItemLeft" align="right" valign="top">we refer the reader to the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> employs MPI for <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> memory parallelisation Fundamental to MPI is the the C MPI bindings are utilised c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c OomphCommunicator as an object oriented wrapper for a c MPI_Comm Calling c argv It initialises MPI(i.e. calls \c MPI_Init(argc, argv)) and creates \c oomph-<a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> 's global <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#ae451763b0d967dcfefea36b518bfe9f0">communicator</a> section distributed_linear_algebra_object <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> In this section we introduce the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> a base <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> for all <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects This <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> encapsulates a c LinearAlgebraDistribution it <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> methods to simplify access to commonly used c LinearAlgebraDistribution data For because a c CRDoubleMatrix is a c until&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a735f6f26a559982261bb63ecfb78b016">first_row</a> ()</td></tr>
+<tr class="separator:a735f6f26a559982261bb63ecfb78b016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a69fed3e93766dd4d6c4ef6bf9c1803fd"><td class="memItemLeft" align="right" valign="top">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a></td></tr>
+<tr class="separator:a69fed3e93766dd4d6c4ef6bf9c1803fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80c527b0f3667ec283518eeb7345d89"><td class="memItemLeft" align="right" valign="top">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph lib s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra discussing its design and key functionality The aim of this <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is to facilitate the a <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> that is fundamental to <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> computing in c oomph lib Next we discuss the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c LinearAlgebraDistribution which specifies the distribution of the data and computations over the available processes In Sections ref double_vector ref cr_double_matrix and ref distributed_linear_algebra_object we discuss c oomph lib s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects including the key we demonstrate how the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is typically used in practice The primary aim of this document is to provide an overview of the design and functionality of <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra capabilities in c oomph&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a></td></tr>
+<tr class="separator:af80c527b0f3667ec283518eeb7345d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5494dc9a29dda7747f202046f268086f"><td class="memItemLeft" align="right" valign="top">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra discussing its design and key functionality The aim of this <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is to facilitate the a class that is fundamental to <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> computing in c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> Next we discuss the class c LinearAlgebraDistribution which specifies the distribution of the data and computations over the available processes In Sections ref double_vector ref cr_double_matrix and ref distributed_linear_algebra_object we discuss c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects including the key we demonstrate how the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is typically used in practice The primary aim of this document is to provide an overview of the design and functionality of <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra capabilities in c oomph and hence we do not discuss every method of every&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a></td></tr>
+<tr class="separator:a5494dc9a29dda7747f202046f268086f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea824d97b842c7aa8423c173b3cf0752"><td class="memItemLeft" align="right" valign="top">we refer the reader to the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> employs MPI for <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> memory parallelisation Fundamental to MPI is the the C MPI bindings are utilised c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c OomphCommunicator as an object oriented wrapper for a c MPI_Comm Calling c argv It initialises MPI(i.e. calls \c MPI_Init(argc, argv)) and creates \c oomph-<a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> 's global <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#ae451763b0d967dcfefea36b518bfe9f0">communicator</a> section distributed_linear_algebra_object <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> In this section we introduce the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> a base <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> for all <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects This <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> encapsulates a c LinearAlgebraDistribution it <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> methods to simplify access to commonly used c LinearAlgebraDistribution data For&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aea824d97b842c7aa8423c173b3cf0752">example</a></td></tr>
+<tr class="separator:aea824d97b842c7aa8423c173b3cf0752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa043904665155b56fb2b5bc86636f402"><td class="memItemLeft" align="right" valign="top">we refer the reader to the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> employs MPI for <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> memory parallelisation Fundamental to MPI is the the C MPI bindings are utilised c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c OomphCommunicator as an object oriented wrapper for a c MPI_Comm Calling c argv It initialises MPI(i.e. calls \c MPI_Init(argc, argv)) and creates \c oomph-<a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> 's global <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#ae451763b0d967dcfefea36b518bfe9f0">communicator</a> section distributed_linear_algebra_object DistributedLinearAlgebraObject In this section we introduce the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c DistributedLinearAlgebraObject a base <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> for all <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects This <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> encapsulates a c LinearAlgebraDistribution it <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> methods to simplify access to commonly used c LinearAlgebraDistribution data For because a c CRDoubleMatrix is a c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a></td></tr>
+<tr class="separator:aa043904665155b56fb2b5bc86636f402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5054677e2f4621bf7f58e1ad6b358579"><td class="memItemLeft" align="right" valign="top">c DistributedLinearAlgebraObjects can be divided into two&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5054677e2f4621bf7f58e1ad6b358579">types</a></td></tr>
+<tr class="separator:a5054677e2f4621bf7f58e1ad6b358579"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a056e3e219f7a380b8c5beb5cb2f1c910"><td class="memItemLeft" align="right" valign="top">c DistributedLinearAlgebraObjects can be divided into two all c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a056e3e219f7a380b8c5beb5cb2f1c910">LinearSolvers</a></td></tr>
+<tr class="separator:a056e3e219f7a380b8c5beb5cb2f1c910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ed178dcab978ed1af6ad487ee471bb6"><td class="memItemLeft" align="right" valign="top">c DistributedLinearAlgebraObjects can be divided into two all c c IterativeLinearSolvers and c Preconditioners(discussed in the&lt; a href=&quot;../../../linear_solvers/html/index.html&quot;&gt;Linear Solvers Tutorial&lt;/A &gt;) are \c DistributedLinearAlgebraObjects. We finish this section by reviewing the key linear algebra operators On the other&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a7ed178dcab978ed1af6ad487ee471bb6">hand</a></td></tr>
+<tr class="separator:a7ed178dcab978ed1af6ad487ee471bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03654fcd0f1ae9cac59686ccb27bd720"><td class="memItemLeft" align="right" valign="top">c DistributedLinearAlgebraObjects can be divided into two all c c IterativeLinearSolvers and c Preconditioners(discussed in the&lt; a href=&quot;../../../linear_solvers/html/index.html&quot;&gt;Linear Solvers Tutorial&lt;/A &gt;) are \c DistributedLinearAlgebraObjects. We finish this section by reviewing the key linear algebra operators On the other a user can specify a return distribution by setting the distribution of the matrix and vector prior to calling c get_jacobian(...). \until std We finally remark that because all linear algebra operations are automatically&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a></td></tr>
+<tr class="separator:a03654fcd0f1ae9cac59686ccb27bd720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90347aadf50ccfd7d93e472be0170cac"><td class="memItemLeft" align="right" valign="top">c DistributedLinearAlgebraObjects can be divided into two all c c IterativeLinearSolvers and c Preconditioners(discussed in the&lt; a href=&quot;../../../linear_solvers/html/index.html&quot;&gt;Linear Solvers Tutorial&lt;/A &gt;) are \c DistributedLinearAlgebraObjects. We finish this section by reviewing the key linear algebra operators On the other a user can specify a return distribution by setting the distribution of the matrix and vector prior to calling c get_jacobian(...). \until std We finally remark that because all linear algebra operations are automatically to parallelise c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s Newton solve&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a90347aadf50ccfd7d93e472be0170cac">phase</a></td></tr>
+<tr class="separator:a90347aadf50ccfd7d93e472be0170cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ae451763b0d967dcfefea36b518bfe9f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae451763b0d967dcfefea36b518bfe9f0">&#9670;&nbsp;</a></span>communicator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we refer the reader to the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> employs MPI for <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> memory parallelisation Fundamental to MPI is the communicator </td>
+          <td>(</td>
+          <td class="paramtype">\c&#160;</td>
+          <td class="paramname"><em>MPI_Comm</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6158430c3ab91b4d433bbf4b6af606fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6158430c3ab91b4d433bbf4b6af606fa">&#9670;&nbsp;</a></span>containers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra discussing its design and key functionality The aim of this <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is to facilitate the a <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> that is fundamental to <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> computing in c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> Next we discuss the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c LinearAlgebraDistribution which specifies the distribution of the data and computations over the available processes In Sections ref double_vector ref cr_double_matrix and ref distributed_linear_algebra_object we discuss c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects including the key containers </td>
+          <td>(</td>
+          <td class="paramtype">matrices and&#160;</td>
+          <td class="paramname"><em>vectors</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a735f6f26a559982261bb63ecfb78b016"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a735f6f26a559982261bb63ecfb78b016">&#9670;&nbsp;</a></span>first_row()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">can be replaced with until first_row </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb3296e203def8ae141d705b7fd285f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb3296e203def8ae141d705b7fd285f2">&#9670;&nbsp;</a></span>parallel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra discussing its design and key functionality The aim of this <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is to facilitate the parallel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a030a75b8fa88287cb996c32864a8ac1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a030a75b8fa88287cb996c32864a8ac1b">&#9670;&nbsp;</a></span>provides()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we refer the reader to the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> employs MPI for <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> memory parallelisation Fundamental to MPI is the the C MPI bindings are utilised c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> provides the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c OomphCommunicator as an object oriented wrapper for a c MPI_Comm Calling c argv It initialises MPI ( i.e. calls \c MPI_Init(argc,argv) ) and creates \c oomph-<a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a>'s global <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#ae451763b0d967dcfefea36b518bfe9f0">communicator</a> section distributed_linear_algebra_object <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> In this section we introduce the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> a base <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> for all <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects This <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> encapsulates a c LinearAlgebraDistribution provides </td>
+          <td>(</td>
+          <td class="paramtype">protected&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a5494dc9a29dda7747f202046f268086f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5494dc9a29dda7747f202046f268086f">&#9670;&nbsp;</a></span>class</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra discussing its design and key functionality The aim of this <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is to facilitate the a class that is fundamental to <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> computing in c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> Next we discuss the class c LinearAlgebraDistribution which specifies the distribution of the data and computations over the available processes In Sections ref double_vector ref cr_double_matrix and ref distributed_linear_algebra_object we discuss c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects including the key we demonstrate how the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is typically used in practice The primary aim of this document is to provide an overview of the design and functionality of <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra capabilities in c oomph and hence we do not discuss every method of every class</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00025">25</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+<a id="a03654fcd0f1ae9cac59686ccb27bd720"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03654fcd0f1ae9cac59686ccb27bd720">&#9670;&nbsp;</a></span>distributed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">c DistributedLinearAlgebraObjects can be divided into two all c c IterativeLinearSolvers and c Preconditioners (discussed in the &lt;a href=&quot;../../../linear_solvers/html/index.html&quot;&gt;Linear Solvers Tutorial&lt;/A&gt;) are \c DistributedLinearAlgebraObjects. We finish this section by reviewing the key linear algebra operators On the other a user can specify a return distribution by setting the distribution of the matrix and vector prior to calling c get_jacobian (...). \until std We finally remark that because all linear algebra operations are automatically distributed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00310">310</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa043904665155b56fb2b5bc86636f402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa043904665155b56fb2b5bc86636f402">&#9670;&nbsp;</a></span>DistributedLinearAlgebraObject</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we refer the reader to the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> employs MPI for <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> memory parallelisation Fundamental to MPI is the the C MPI bindings are utilised c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c OomphCommunicator as an object oriented wrapper for a c MPI_Comm Calling c argv It initialises MPI ( i.e. calls \c MPI_Init(argc,argv) ) and creates \c oomph-<a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a>'s global <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#ae451763b0d967dcfefea36b518bfe9f0">communicator</a> section distributed_linear_algebra_object DistributedLinearAlgebraObject In this section we introduce the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c DistributedLinearAlgebraObject a base <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> for all <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects This <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> encapsulates a c LinearAlgebraDistribution it <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> methods to simplify access to commonly used c LinearAlgebraDistribution data For because a c CRDoubleMatrix is a c DistributedLinearAlgebraObject</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00233">233</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+<a id="aea824d97b842c7aa8423c173b3cf0752"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea824d97b842c7aa8423c173b3cf0752">&#9670;&nbsp;</a></span>example</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we refer the reader to the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> employs MPI for <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> memory parallelisation Fundamental to MPI is the the C MPI bindings are utilised c Oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c OomphCommunicator as an object oriented wrapper for a c MPI_Comm Calling c argv It initialises MPI ( i.e. calls \c MPI_Init(argc,argv) ) and creates \c oomph-<a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a>'s global <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#ae451763b0d967dcfefea36b518bfe9f0">communicator</a> section distributed_linear_algebra_object <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> In this section we introduce the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#aa043904665155b56fb2b5bc86636f402">DistributedLinearAlgebraObject</a> a base <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> for all <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects This <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> encapsulates a c LinearAlgebraDistribution it <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a030a75b8fa88287cb996c32864a8ac1b">provides</a> methods to simplify access to commonly used c LinearAlgebraDistribution data For example</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00232">232</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+<a id="a69fed3e93766dd4d6c4ef6bf9c1803fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69fed3e93766dd4d6c4ef6bf9c1803fd">&#9670;&nbsp;</a></span>framework</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra framework</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00004">4</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7ed178dcab978ed1af6ad487ee471bb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ed178dcab978ed1af6ad487ee471bb6">&#9670;&nbsp;</a></span>hand</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">c DistributedLinearAlgebraObjects can be divided into two all c c IterativeLinearSolvers and c Preconditioners (discussed in the &lt;a href=&quot;../../../linear_solvers/html/index.html&quot;&gt;Linear Solvers Tutorial&lt;/A&gt;) are \c DistributedLinearAlgebraObjects. We finish this section by reviewing the key linear algebra operators On the other hand</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00248">248</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+<a id="af80c527b0f3667ec283518eeb7345d89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af80c527b0f3667ec283518eeb7345d89">&#9670;&nbsp;</a></span>lib</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Distributed Linear Algebra Infrastructure In this document we provide an overview of c oomph lib s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra discussing its design and key functionality The aim of this <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is to facilitate the a <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> that is fundamental to <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> computing in c oomph lib Next we discuss the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a5494dc9a29dda7747f202046f268086f">class</a> c LinearAlgebraDistribution which specifies the distribution of the data and computations over the available processes In Sections ref double_vector ref cr_double_matrix and ref distributed_linear_algebra_object we discuss c oomph lib s <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra objects including the key we demonstrate how the <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a69fed3e93766dd4d6c4ef6bf9c1803fd">framework</a> is typically used in practice The primary aim of this document is to provide an overview of the design and functionality of <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> linear algebra capabilities in c oomph lib</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00024">24</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+<a id="a056e3e219f7a380b8c5beb5cb2f1c910"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a056e3e219f7a380b8c5beb5cb2f1c910">&#9670;&nbsp;</a></span>LinearSolvers</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">c DistributedLinearAlgebraObjects can be divided into two all c LinearSolvers</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00247">247</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+<a id="a90347aadf50ccfd7d93e472be0170cac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90347aadf50ccfd7d93e472be0170cac">&#9670;&nbsp;</a></span>phase</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">c DistributedLinearAlgebraObjects can be divided into two all c c IterativeLinearSolvers and c Preconditioners (discussed in the &lt;a href=&quot;../../../linear_solvers/html/index.html&quot;&gt;Linear Solvers Tutorial&lt;/A&gt;) are \c DistributedLinearAlgebraObjects. We finish this section by reviewing the key linear algebra operators On the other a user can specify a return distribution by setting the distribution of the matrix and vector prior to calling c get_jacobian (...). \until std We finally remark that because all linear algebra operations are automatically to parallelise c oomph <a class="el" href="distributed__linear__algebra__infrastructure_8txt.html#af80c527b0f3667ec283518eeb7345d89">lib</a> s Newton solve phase</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00317">317</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+<a id="a5054677e2f4621bf7f58e1ad6b358579"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5054677e2f4621bf7f58e1ad6b358579">&#9670;&nbsp;</a></span>types</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">c DistributedLinearAlgebraObjects can be divided into two types</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html#l00247">247</a> of file <a class="el" href="distributed__linear__algebra__infrastructure_8txt_source.html">distributed_linear_algebra_infrastructure.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:28:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

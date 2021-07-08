@@ -1,0 +1,487 @@
+\hypertarget{classoomph_1_1BinaryTree}{}\doxysection{oomph\+::Binary\+Tree Class Reference}
+\label{classoomph_1_1BinaryTree}\index{oomph::BinaryTree@{oomph::BinaryTree}}
+
+
+{\ttfamily \#include $<$binary\+\_\+tree.\+h$>$}
+
+Inheritance diagram for oomph\+::Binary\+Tree\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1BinaryTree}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classoomph_1_1BinaryTree_a782282825e91454e43d79a847cedecf5}{$\sim$\+Binary\+Tree}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Note\+: Deleting a binary tree also deletes the objects associated with all non-\/leaf nodes! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BinaryTree_aec7ba886e9b9005b52e6162fab35a5b8}{Binary\+Tree}} (const \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BinaryTree_ad23440beb13ed9207c4489fb744a1d78}{operator=}} (const \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1BinaryTree_adeb5fdb3cc2b86827622586c42afba37}{construct\+\_\+son}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
+\begin{DoxyCompactList}\small\item\em Overload the function construct\+\_\+son to ensure that the son is a specific \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} and not a general \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1BinaryTree_aba768160bad3531d0f62033788619f56}{gteq\+\_\+edge\+\_\+neighbour}} (const int \&direction, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+in\+\_\+neighbour, int \&edge, int \&diff\+\_\+level, bool \&in\+\_\+neighbouring\+\_\+tree) const
+\begin{DoxyCompactList}\small\item\em Return pointer to greater or equal-\/sized edge neighbour in specified {\ttfamily direction}; also provide info regarding the relative size of the neighbour\+: \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1BinaryTree_ac8052fae786bd4aad0a7334d04b59328}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Self-\/test\+: Check all neighbours. Return success (0) if the maximum distance between corresponding points in the neighbours is less than the tolerance specified in the static value \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Binary\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classoomph_1_1BinaryTree_a46528d3d7749ee316f193f28b5abd8fb}{setup\+\_\+static\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Set up the static data, reflection schemes, etc. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classoomph_1_1BinaryTree_a49791c16aedc51ecd542ce65507c68c6}{doc\+\_\+neighbours}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ forest\+\_\+nodes\+\_\+pt, std\+::ofstream \&neighbours\+\_\+file, std\+::ofstream \&neighbours\+\_\+txt\+\_\+file, double \&max\+\_\+error)
+\begin{DoxyCompactList}\small\item\em Doc/check all neighbours of binary tree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Binary\+Tree\+Neighbours.\+mcr. Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the maximum error between vertices when viewed from the neighbouring element. If the two filestreams are closed, output is suppressed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbox{\hyperlink{classoomph_1_1BinaryTree_a24331ca02be2713a58833da84ed02f9b}{Direct\+\_\+string}}
+\begin{DoxyCompactList}\small\item\em Translate (enumerated) directions into strings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1BinaryTree_a3ad7c1ba04813b506e2d70a82b45df9c}{Binary\+Tree}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BinaryTree_a17856140e51fd48c3441d0b48d854152}{Binary\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object. Protected because Binary\+Trees can only be created internally, during the split operation. Only Binary\+Tree\+Roots can be created externally. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BinaryTree_a1e1f22c07b554709b8aa76356d9f005f}{Binary\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
+\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (L/R) it is. Protected because Binary\+Trees can only be created internally, during the split operation. Only Binary\+Tree\+Roots can be created externally. ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classoomph_1_1BinaryTree_a5890507c23970c4e2604fb65a546b9b4}{Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}} = false
+\begin{DoxyCompactList}\small\item\em Boolean indicating that static member data has been setup. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1BinaryTree_aef4ea20b1eb9525513a505975a61d35d}{gteq\+\_\+edge\+\_\+neighbour}} (const int \&direction, double \&s\+\_\+diff, int \&diff\+\_\+level, bool \&in\+\_\+neighbouring\+\_\+tree, int max\+\_\+level, \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} $\ast$const \&orig\+\_\+root\+\_\+pt) const
+\begin{DoxyCompactList}\small\item\em Find greater or equal-\/sized edge neighbour in direction. Auxiliary internal routine which passes additional information around. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbox{\hyperlink{classoomph_1_1BinaryTree_a14b12263ce207c5ab343cd2bc971b983}{Colour}}
+\begin{DoxyCompactList}\small\item\em Colours for neighbours in various directions. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1BinaryTree_a0071402257f6137a0bb19dd702665a92}{S\+\_\+base}}
+\begin{DoxyCompactList}\small\item\em S\+\_\+base(direction)\+: Initial value for coordinate s on the edge indicated by direction (L/R) \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1BinaryTree_af44e99a31403858e88fe62294eb40770}{Reflect\+\_\+edge}}
+\begin{DoxyCompactList}\small\item\em Get opposite edge, e.\+g. Reflect\+\_\+edge\mbox{[}L\mbox{]}=R. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ bool $>$ \mbox{\hyperlink{classoomph_1_1BinaryTree_ae8d579bfff3e2b7b3c344b6839aaa9f3}{Is\+\_\+adjacent}}
+\begin{DoxyCompactList}\small\item\em Array of direction/segment adjacency scheme\+: Is\+\_\+adjacent(i\+\_\+vertex,j\+\_\+segment)\+: Is vertex adjacent to segment? \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1BinaryTree_aa039fcc5eb37f101d449582af4be33fc}{Reflect}}
+\begin{DoxyCompactList}\small\item\em Reflection scheme\+: Reflect(direction,segment)\+: Get mirror of segment in specified direction. E.\+g. Reflect(\+L,\+L)=R. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} class\+: Recursively defined, generalised binary tree.
+
+A \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} has\+:
+\begin{DoxyItemize}
+\item a pointer to the object (of type \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_011_01_4}{Refineable\+Q\+Element$<$1$>$}}) that it represents in a mesh refinement context.
+\item a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to its two (L/R) sons (which are themselves binary trees). If the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the sons has zero length, the \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} is a \char`\"{}leaf node\char`\"{} in the overall binary tree.
+\item a pointer to its father. If this pointer is N\+U\+LL, the \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} is the root node of the overall binary tree. This data is stored in the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} base class.
+\end{DoxyItemize}
+
+The tree can also be part of a forest. If that is the case, the root will have pointers to the roots of neighbouring binary trees.
+
+The objects contained in the binary tree are assumed to be line elements whose geometry is parametrised by local coordinates $ {\bf s} \in [-1,1] $.
+
+The tree can be traversed and actions performed at all its \char`\"{}nodes\char`\"{} or only at the leaf \char`\"{}nodes\char`\"{} (\char`\"{}nodes\char`\"{} without sons).
+
+Finally, the leaf \char`\"{}nodes\char`\"{} can be split depending on a criteria defined by the object.
+
+Note that Binary\+Trees are only generated by splitting existing Binary\+Trees. Therefore, the constructors are protected. The only \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} that \char`\"{}\+Joe User\char`\"{} can create is the (derived) class \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}}. 
+
+Definition at line 86 of file binary\+\_\+tree.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a782282825e91454e43d79a847cedecf5}\label{classoomph_1_1BinaryTree_a782282825e91454e43d79a847cedecf5}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!````~BinaryTree@{$\sim$BinaryTree}}
+\index{````~BinaryTree@{$\sim$BinaryTree}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{$\sim$BinaryTree()}{~BinaryTree()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Binary\+Tree\+::$\sim$\+Binary\+Tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor. Note\+: Deleting a binary tree also deletes the objects associated with all non-\/leaf nodes! 
+
+
+
+Definition at line 92 of file binary\+\_\+tree.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_aec7ba886e9b9005b52e6162fab35a5b8}\label{classoomph_1_1BinaryTree_aec7ba886e9b9005b52e6162fab35a5b8}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!BinaryTree@{BinaryTree}}
+\index{BinaryTree@{BinaryTree}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{BinaryTree()}{BinaryTree()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Binary\+Tree\+::\+Binary\+Tree (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 95 of file binary\+\_\+tree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a3ad7c1ba04813b506e2d70a82b45df9c}\label{classoomph_1_1BinaryTree_a3ad7c1ba04813b506e2d70a82b45df9c}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!BinaryTree@{BinaryTree}}
+\index{BinaryTree@{BinaryTree}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{BinaryTree()}{BinaryTree()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Binary\+Tree\+::\+Binary\+Tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Default constructor (empty and broken) 
+
+
+
+Definition at line 166 of file binary\+\_\+tree.\+h.
+
+
+
+Referenced by construct\+\_\+son().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a17856140e51fd48c3441d0b48d854152}\label{classoomph_1_1BinaryTree_a17856140e51fd48c3441d0b48d854152}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!BinaryTree@{BinaryTree}}
+\index{BinaryTree@{BinaryTree}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{BinaryTree()}{BinaryTree()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Binary\+Tree\+::\+Binary\+Tree (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object. Protected because Binary\+Trees can only be created internally, during the split operation. Only Binary\+Tree\+Roots can be created externally. 
+
+
+
+Definition at line 177 of file binary\+\_\+tree.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a1e1f22c07b554709b8aa76356d9f005f}\label{classoomph_1_1BinaryTree_a1e1f22c07b554709b8aa76356d9f005f}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!BinaryTree@{BinaryTree}}
+\index{BinaryTree@{BinaryTree}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{BinaryTree()}{BinaryTree()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Binary\+Tree\+::\+Binary\+Tree (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&}]{father\+\_\+pt,  }\item[{const int \&}]{son\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (L/R) it is. Protected because Binary\+Trees can only be created internally, during the split operation. Only Binary\+Tree\+Roots can be created externally. ~\newline
+ 
+
+
+
+Definition at line 184 of file binary\+\_\+tree.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_adeb5fdb3cc2b86827622586c42afba37}\label{classoomph_1_1BinaryTree_adeb5fdb3cc2b86827622586c42afba37}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!construct\_son@{construct\_son}}
+\index{construct\_son@{construct\_son}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{construct\_son()}{construct\_son()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}$\ast$ oomph\+::\+Binary\+Tree\+::construct\+\_\+son (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&}]{father\+\_\+pt,  }\item[{const int \&}]{son\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the function construct\+\_\+son to ensure that the son is a specific \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} and not a general \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Tree_a5eb29718044b1bc56403ee9bd15a60b6}{oomph\+::\+Tree}}.
+
+
+
+Definition at line 108 of file binary\+\_\+tree.\+h.
+
+
+
+References Binary\+Tree(), oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Tree\+::object\+\_\+pt(), and oomph\+::\+Tree\+::son\+\_\+type().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a49791c16aedc51ecd542ce65507c68c6}\label{classoomph_1_1BinaryTree_a49791c16aedc51ecd542ce65507c68c6}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!doc\_neighbours@{doc\_neighbours}}
+\index{doc\_neighbours@{doc\_neighbours}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{doc\_neighbours()}{doc\_neighbours()}}
+{\footnotesize\ttfamily void oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$}]{forest\+\_\+nodes\+\_\+pt,  }\item[{std\+::ofstream \&}]{neighbours\+\_\+file,  }\item[{std\+::ofstream \&}]{neighbours\+\_\+txt\+\_\+file,  }\item[{double \&}]{max\+\_\+error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Doc/check all neighbours of binary tree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Binary\+Tree\+Neighbours.\+mcr. Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the maximum error between vertices when viewed from the neighbouring element. If the two filestreams are closed, output is suppressed. 
+
+Doc/check all neighbours of binary tree (\char`\"{}nodes\char`\"{}) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Binary\+Tree\+Neighbours.\+mcr. Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the maximum error between vertices when viewed from neighbouring element. Output is suppressed if the output streams are closed. 
+
+Definition at line 662 of file binary\+\_\+tree.\+cc.
+
+
+
+References oomph\+::\+Finite\+Element\+::get\+\_\+x(), gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Refineable\+Element\+::number(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Binary\+Tree\+Names\+::\+O\+M\+E\+GA, oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Tree\+::root\+\_\+pt(), and s.
+
+
+
+Referenced by oomph\+::\+Binary\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), self\+\_\+test(), and oomph\+::\+Binary\+Tree\+Forest\+::self\+\_\+test().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_aef4ea20b1eb9525513a505975a61d35d}\label{classoomph_1_1BinaryTree_aef4ea20b1eb9525513a505975a61d35d}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!gteq\_edge\_neighbour@{gteq\_edge\_neighbour}}
+\index{gteq\_edge\_neighbour@{gteq\_edge\_neighbour}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{gteq\_edge\_neighbour()}{gteq\_edge\_neighbour()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} $\ast$ oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour (\begin{DoxyParamCaption}\item[{const int \&}]{direction,  }\item[{double \&}]{s\+\_\+diff,  }\item[{int \&}]{diff\+\_\+level,  }\item[{bool \&}]{in\+\_\+neighbouring\+\_\+tree,  }\item[{int}]{max\+\_\+level,  }\item[{\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} $\ast$const \&}]{orig\+\_\+root\+\_\+pt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Find greater or equal-\/sized edge neighbour in direction. Auxiliary internal routine which passes additional information around. 
+
+Find `greater-\/or-\/equal-\/sized edge neighbour' in given direction (L/R).
+
+This is an auxiliary routine which allows neighbour finding in adjacent binary trees. Needs to keep track of previous son types and the maximum level to which search is performed.
+
+Parameters\+:
+\begin{DoxyItemize}
+\item direction (L/R)\+: Direction in which neighbour has to be found.
+\item s\+\_\+diff\+: Offset of left vertex from corresponding vertex in neighbour. Note that this is input/output as it needs to be incremented/decremented during the recursive calls to this function.
+\item edge\+: We\textquotesingle{}re looking for the neighbour across our edge \textquotesingle{}direction\textquotesingle{} (L/R). When viewed from the neighbour, this edge is `edge' (L/R). Since there is no relative rotation between neighbours this is a mere reflection, e.\+g. direction=L -\/-\/$>$ edge=R etc.
+\item diff\+\_\+level $<$= 0 indicates the difference in binary tree levels between the current element and its neighbour.
+\item max\+\_\+level is the maximum level to which the neighbour search is allowed to proceed. This is again necessary because in a forest, the neighbour search isn\textquotesingle{}t based on pure recursion.
+\item orig\+\_\+root\+\_\+pt identifies the root node of the element whose neighbour we\textquotesingle{}re really trying to find by all these recursive calls. 
+\end{DoxyItemize}
+
+Definition at line 257 of file binary\+\_\+tree.\+cc.
+
+
+
+References oomph\+::\+Tree\+::\+Father\+\_\+pt, gteq\+\_\+edge\+\_\+neighbour(), Is\+\_\+adjacent, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Tree\+::\+Level, oomph\+::\+Tree\+Root\+::neighbour\+\_\+pt(), oomph\+::\+Binary\+Tree\+Names\+::R, Reflect, oomph\+::\+Tree\+::\+Root\+\_\+pt, oomph\+::\+Tree\+::\+Son\+\_\+pt, and oomph\+::\+Tree\+::\+Son\+\_\+type.
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_aba768160bad3531d0f62033788619f56}\label{classoomph_1_1BinaryTree_aba768160bad3531d0f62033788619f56}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!gteq\_edge\_neighbour@{gteq\_edge\_neighbour}}
+\index{gteq\_edge\_neighbour@{gteq\_edge\_neighbour}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{gteq\_edge\_neighbour()}{gteq\_edge\_neighbour()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} $\ast$ oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour (\begin{DoxyParamCaption}\item[{const int \&}]{direction,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+in\+\_\+neighbour,  }\item[{int \&}]{edge,  }\item[{int \&}]{diff\+\_\+level,  }\item[{bool \&}]{in\+\_\+neighbouring\+\_\+tree }\end{DoxyParamCaption}) const}
+
+
+
+Return pointer to greater or equal-\/sized edge neighbour in specified {\ttfamily direction}; also provide info regarding the relative size of the neighbour\+: 
+
+
+\begin{DoxyItemize}
+\item In the present binary tree, the left vertex is located at the local coordinate s = -\/1. This point is located at the local coordinate s = {\ttfamily s\+\_\+in\+\_\+neighbour}\mbox{[}0\mbox{]} in the neighbouring binary tree.
+\item We\textquotesingle{}re looking for a neighbour in the specified {\ttfamily direction}. When viewed from the neighbouring binary tree, the edge that separates the present binary tree from its neighbour is the neighbour\textquotesingle{}s {\ttfamily edge} edge. Since in 1D there can be no rotation between the two binary trees, this is a simple reflection. For instance, if we\textquotesingle{}re looking for a neighhbour in the {\ttfamily L} \mbox{[}eft\mbox{]} {\ttfamily direction}, {\ttfamily edge} will be {\ttfamily R} \mbox{[}ight\mbox{]}.
+\item {\ttfamily diff\+\_\+level} $<$= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current binary tree.
+\item {\ttfamily in\+\_\+neighbouring\+\_\+tree} indicates whether the neighbour is actually in another tree in the forest. The introduction of this flag was necessitated by periodic problems where a \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} can be its own neighbour.
+\end{DoxyItemize}
+
+Return pointer to greater or equal-\/sized edge neighbour in specified {\ttfamily direction}; also provide info regarding the relative size of the neighbour\+:
+\begin{DoxyItemize}
+\item In the present binary tree, the left vertex is located at the local coordinate s = -\/1. This point is located at the local coordinate s = {\ttfamily s\+\_\+in\+\_\+neighbour}\mbox{[}0\mbox{]} in the neighbouring binary tree.
+\item We\textquotesingle{}re looking for a neighbour in the specified {\ttfamily direction}. When viewed from the neighbouring binary tree, the edge that separates the present binary tree from its neighbour is the neighbour\textquotesingle{}s {\ttfamily edge} edge. Since in 1D there can be no rotation between the two binary trees, this is a simple reflection. For instance, if we\textquotesingle{}re looking for a neighhbour in the {\ttfamily L} \mbox{[}eft\mbox{]} {\ttfamily direction}, {\ttfamily edge} will be {\ttfamily R} \mbox{[}ight\mbox{]}.
+\item {\ttfamily diff\+\_\+level} $<$= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current binary tree.
+\item {\ttfamily in\+\_\+neighbouring\+\_\+tree} returns true if we have had to flip to a different root, even if that root is actually the same (as it can be in periodic problems). 
+\end{DoxyItemize}
+
+Definition at line 175 of file binary\+\_\+tree.\+cc.
+
+
+
+References oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Tree\+::\+Level, oomph\+::\+Binary\+Tree\+Names\+::R, Reflect\+\_\+edge, oomph\+::\+Tree\+::\+Root\+\_\+pt, and S\+\_\+base.
+
+
+
+Referenced by doc\+\_\+neighbours(), and gteq\+\_\+edge\+\_\+neighbour().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_ad23440beb13ed9207c4489fb744a1d78}\label{classoomph_1_1BinaryTree_ad23440beb13ed9207c4489fb744a1d78}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Binary\+Tree\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 101 of file binary\+\_\+tree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_ac8052fae786bd4aad0a7334d04b59328}\label{classoomph_1_1BinaryTree_ac8052fae786bd4aad0a7334d04b59328}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!self\_test@{self\_test}}
+\index{self\_test@{self\_test}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{self\_test()}{self\_test()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Binary\+Tree\+::self\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Self-\/test\+: Check all neighbours. Return success (0) if the maximum distance between corresponding points in the neighbours is less than the tolerance specified in the static value \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Binary\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}. 
+
+Self-\/test\+: Check neighbour finding routine. For each element in the tree and for each vertex, determine the distance between the vertex and its position in the neighbour. If the difference is less than \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}} return success (0), otherwise failure (1). 
+
+Definition at line 390 of file binary\+\_\+tree.\+cc.
+
+
+
+References doc\+\_\+neighbours(), i, oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance, oomph\+::oomph\+\_\+info, and oomph\+::\+Tree\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a46528d3d7749ee316f193f28b5abd8fb}\label{classoomph_1_1BinaryTree_a46528d3d7749ee316f193f28b5abd8fb}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!setup\_static\_data@{setup\_static\_data}}
+\index{setup\_static\_data@{setup\_static\_data}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{setup\_static\_data()}{setup\_static\_data()}}
+{\footnotesize\ttfamily void oomph\+::\+Binary\+Tree\+::setup\+\_\+static\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set up the static data, reflection schemes, etc. 
+
+Set up the static data stored in the \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} -- this needs to be called before Binary\+Trees can be used. Automatically called by \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} constructor. ~\newline
+ 
+
+Definition at line 86 of file binary\+\_\+tree.\+cc.
+
+
+
+References Colour, Direct\+\_\+string, Is\+\_\+adjacent, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+Binary\+Tree\+Names\+::R, Reflect, Reflect\+\_\+edge, oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize(), S\+\_\+base, and Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup.
+
+
+
+Referenced by oomph\+::\+Refineable\+Line\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::\+Refineable\+Line\+Mesh().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a14b12263ce207c5ab343cd2bc971b983}\label{classoomph_1_1BinaryTree_a14b12263ce207c5ab343cd2bc971b983}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!Colour@{Colour}}
+\index{Colour@{Colour}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{Colour}{Colour}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ oomph\+::\+Binary\+Tree\+::\+Colour\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Colours for neighbours in various directions. 
+
+Colours for neighbours in various directions (static data). 
+
+Definition at line 203 of file binary\+\_\+tree.\+h.
+
+
+
+Referenced by setup\+\_\+static\+\_\+data().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a24331ca02be2713a58833da84ed02f9b}\label{classoomph_1_1BinaryTree_a24331ca02be2713a58833da84ed02f9b}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!Direct\_string@{Direct\_string}}
+\index{Direct\_string@{Direct\_string}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{Direct\_string}{Direct\_string}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ oomph\+::\+Binary\+Tree\+::\+Direct\+\_\+string\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Translate (enumerated) directions into strings. 
+
+Translate (enumerated) directions into strings (static data). 
+
+Definition at line 161 of file binary\+\_\+tree.\+h.
+
+
+
+Referenced by setup\+\_\+static\+\_\+data().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_ae8d579bfff3e2b7b3c344b6839aaa9f3}\label{classoomph_1_1BinaryTree_ae8d579bfff3e2b7b3c344b6839aaa9f3}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!Is\_adjacent@{Is\_adjacent}}
+\index{Is\_adjacent@{Is\_adjacent}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{Is\_adjacent}{Is\_adjacent}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ bool $>$ oomph\+::\+Binary\+Tree\+::\+Is\+\_\+adjacent\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Array of direction/segment adjacency scheme\+: Is\+\_\+adjacent(i\+\_\+vertex,j\+\_\+segment)\+: Is vertex adjacent to segment? 
+
+Array of direction/segment adjacency scheme\+: Is\+\_\+adjacent(i\+\_\+vertex,j\+\_\+segment)\+: Is vertex adjacent to segment? (static data) 
+
+Definition at line 214 of file binary\+\_\+tree.\+h.
+
+
+
+Referenced by gteq\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_aa039fcc5eb37f101d449582af4be33fc}\label{classoomph_1_1BinaryTree_aa039fcc5eb37f101d449582af4be33fc}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!Reflect@{Reflect}}
+\index{Reflect@{Reflect}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{Reflect}{Reflect}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ int $>$ oomph\+::\+Binary\+Tree\+::\+Reflect\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Reflection scheme\+: Reflect(direction,segment)\+: Get mirror of segment in specified direction. E.\+g. Reflect(\+L,\+L)=R. 
+
+Reflection scheme\+: Reflect(direction,segment)\+: Get mirror of segment in specified direction. E.\+g. Reflect(\+L,\+L)=R (static data) ~\newline
+ 
+
+Definition at line 218 of file binary\+\_\+tree.\+h.
+
+
+
+Referenced by gteq\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_af44e99a31403858e88fe62294eb40770}\label{classoomph_1_1BinaryTree_af44e99a31403858e88fe62294eb40770}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!Reflect\_edge@{Reflect\_edge}}
+\index{Reflect\_edge@{Reflect\_edge}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{Reflect\_edge}{Reflect\_edge}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ oomph\+::\+Binary\+Tree\+::\+Reflect\+\_\+edge\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Get opposite edge, e.\+g. Reflect\+\_\+edge\mbox{[}L\mbox{]}=R. 
+
+Get opposite edge, e.\+g. Reflect\+\_\+edge\mbox{[}N\mbox{]}=S (static data) 
+
+Definition at line 210 of file binary\+\_\+tree.\+h.
+
+
+
+Referenced by gteq\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a0071402257f6137a0bb19dd702665a92}\label{classoomph_1_1BinaryTree_a0071402257f6137a0bb19dd702665a92}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!S\_base@{S\_base}}
+\index{S\_base@{S\_base}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{S\_base}{S\_base}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ oomph\+::\+Binary\+Tree\+::\+S\+\_\+base\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+S\+\_\+base(direction)\+: Initial value for coordinate s on the edge indicated by direction (L/R) 
+
+S\+\_\+base(direction)\+: Initial value for coordinate s on the edge indicated by direction (L/R) (static data). 
+
+Definition at line 207 of file binary\+\_\+tree.\+h.
+
+
+
+Referenced by gteq\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTree_a5890507c23970c4e2604fb65a546b9b4}\label{classoomph_1_1BinaryTree_a5890507c23970c4e2604fb65a546b9b4}} 
+\index{oomph::BinaryTree@{oomph::BinaryTree}!Static\_data\_has\_been\_setup@{Static\_data\_has\_been\_setup}}
+\index{Static\_data\_has\_been\_setup@{Static\_data\_has\_been\_setup}!oomph::BinaryTree@{oomph::BinaryTree}}
+\doxysubsubsection{\texorpdfstring{Static\_data\_has\_been\_setup}{Static\_data\_has\_been\_setup}}
+{\footnotesize\ttfamily bool oomph\+::\+Binary\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Boolean indicating that static member data has been setup. 
+
+
+
+Definition at line 189 of file binary\+\_\+tree.\+h.
+
+
+
+Referenced by oomph\+::\+Binary\+Tree\+Root\+::\+Binary\+Tree\+Root(), and setup\+\_\+static\+\_\+data().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{binary__tree_8h}{binary\+\_\+tree.\+h}}\item 
+\mbox{\hyperlink{binary__tree_8cc}{binary\+\_\+tree.\+cc}}\end{DoxyCompactItemize}

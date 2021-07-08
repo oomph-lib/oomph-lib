@@ -1,0 +1,368 @@
+\hypertarget{classoomph_1_1Time}{}\doxysection{oomph\+::Time Class Reference}
+\label{classoomph_1_1Time}\index{oomph::Time@{oomph::Time}}
+
+
+Class to keep track of discrete/continous time. It is essential to have a single \mbox{\hyperlink{classoomph_1_1Time}{Time}} object when using multiple time-\/stepping schemes; e.\+g., in fluid-\/structure interaction problems, it is common to use different schemes for the fluid and solid domains. Storage is allocated for the current value of the (continuous) time and a limited history of previous timesteps. The number of previous timesteps must be equal to the number required by the \char`\"{}highest order\char`\"{} scheme.  
+
+
+
+
+{\ttfamily \#include $<$timesteppers.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Time_aed3c6b92973210d2347fc5be372e41a8}{Time}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Do not allocate any storage for previous timesteps, but set the initial value of the time to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Time_af933eb465690f9630983aa0fe24782a3}{Time}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1Time_ad40953c471eb3ce59921e6870ed755f3}{ndt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of timesteps to be stored and set the initial value of time to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Time_a8fbf9712b8ac81929a4be2ed4c1bcdbd}{Time}} (const \mbox{\hyperlink{classoomph_1_1Time}{Time}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Time_a97eff1a8bf218d7d54ea2728b6599a8b}{operator=}} (const \mbox{\hyperlink{classoomph_1_1Time}{Time}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Time_aeab1acb1e182797c4194af84c0583c3f}{resize}} (const unsigned \&n\+\_\+dt)
+\begin{DoxyCompactList}\small\item\em Resize the vector holding the number of previous timesteps and initialise the new values to zero. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Time_abc1e02cc2988b603bd5e1f6747381546}{initialise\+\_\+dt}} (const double \&dt\+\_\+)
+\begin{DoxyCompactList}\small\item\em Set all timesteps to the same value, dt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Time_a7c0e382ecec0abb600c36bc5a0820a43}{initialise\+\_\+dt}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dt\+\_\+)
+\begin{DoxyCompactList}\small\item\em Set the value of the timesteps to be equal to the values passed in a vector ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Time_aeed85387263214e97be21e075a06371c}{$\sim$\+Time}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1Time_a6e28ea7a6664a2f5f5e1be871304a2c7}{time}} ()
+\begin{DoxyCompactList}\small\item\em Return the current value of the continuous time. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Time_ad40953c471eb3ce59921e6870ed755f3}{ndt}} () const
+\begin{DoxyCompactList}\small\item\em Return the number of timesteps stored. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1Time_a2c684e0a69db7adde90f1f052e424a6b}{dt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}=0)
+\item 
+double \mbox{\hyperlink{classoomph_1_1Time_a4e956b0a5d0ef62ec7be904e66b33133}{dt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}=0) const
+\item 
+double \mbox{\hyperlink{classoomph_1_1Time_a4af91dd6c41ca7defd431bf53c518ba5}{time}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}=0) const
+\begin{DoxyCompactList}\small\item\em Return the value of the continuous time at the t-\/th previous time level (t=0\+: current; t$>$0 previous). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Time_a92ca0ca34a1491744a3315d61d7cee5f}{shift\+\_\+dt}} ()
+\begin{DoxyCompactList}\small\item\em Update all stored values of dt by shifting each value along the array. This function must be called before starting to solve at a new time level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1Time_a0d304d449babd0531b76668c6548ad4b}{Continuous\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Pointer to the value of the continuous time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1Time_a3fbca07ec14a12aaffc2fbfc8503def2}{Dt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} that stores the values of the current and previous timesteps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to keep track of discrete/continous time. It is essential to have a single \mbox{\hyperlink{classoomph_1_1Time}{Time}} object when using multiple time-\/stepping schemes; e.\+g., in fluid-\/structure interaction problems, it is common to use different schemes for the fluid and solid domains. Storage is allocated for the current value of the (continuous) time and a limited history of previous timesteps. The number of previous timesteps must be equal to the number required by the \char`\"{}highest order\char`\"{} scheme. 
+
+Definition at line 63 of file timesteppers.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1Time_aed3c6b92973210d2347fc5be372e41a8}\label{classoomph_1_1Time_aed3c6b92973210d2347fc5be372e41a8}} 
+\index{oomph::Time@{oomph::Time}!Time@{Time}}
+\index{Time@{Time}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{Time()}{Time()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Time\+::\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Do not allocate any storage for previous timesteps, but set the initial value of the time to zero. 
+
+
+
+Definition at line 77 of file timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Time_af933eb465690f9630983aa0fe24782a3}\label{classoomph_1_1Time_af933eb465690f9630983aa0fe24782a3}} 
+\index{oomph::Time@{oomph::Time}!Time@{Time}}
+\index{Time@{Time}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{Time()}{Time()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Time\+::\+Time (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ndt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass the number of timesteps to be stored and set the initial value of time to zero. 
+
+
+
+Definition at line 81 of file timesteppers.\+h.
+
+
+
+References Dt, and ndt().
+
+\mbox{\Hypertarget{classoomph_1_1Time_a8fbf9712b8ac81929a4be2ed4c1bcdbd}\label{classoomph_1_1Time_a8fbf9712b8ac81929a4be2ed4c1bcdbd}} 
+\index{oomph::Time@{oomph::Time}!Time@{Time}}
+\index{Time@{Time}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{Time()}{Time()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Time\+::\+Time (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Time}{Time}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 89 of file timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1Time_aeed85387263214e97be21e075a06371c}\label{classoomph_1_1Time_aeed85387263214e97be21e075a06371c}} 
+\index{oomph::Time@{oomph::Time}!````~Time@{$\sim$Time}}
+\index{````~Time@{$\sim$Time}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{$\sim$Time()}{~Time()}}
+{\footnotesize\ttfamily oomph\+::\+Time\+::$\sim$\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line 123 of file timesteppers.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1Time_a2c684e0a69db7adde90f1f052e424a6b}\label{classoomph_1_1Time_a2c684e0a69db7adde90f1f052e424a6b}} 
+\index{oomph::Time@{oomph::Time}!dt@{dt}}
+\index{dt@{dt}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{dt()}{dt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Time\+::dt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Return the value of the t-\/th stored timestep (t=0\+: present; t$>$0\+: previous). 
+
+Definition at line 133 of file timesteppers.\+h.
+
+
+
+References Dt, and t.
+
+
+
+Referenced by oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::actions\+\_\+after\+\_\+timestep(), oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::actions\+\_\+before\+\_\+timestep(), oomph\+::\+Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Problem\+::calculate\+\_\+predictions(), oomph\+::\+Problem\+::copy(), oomph\+::\+Problem\+::dump(), oomph\+::\+Problem\+::explicit\+\_\+timestep(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+Pseudo\+Buckling\+Ring\+::position(), oomph\+::\+T\+R\+::set\+\_\+error\+\_\+weights(), oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::set\+\_\+newmark\+\_\+veloc\+\_\+weights(), oomph\+::\+T\+R\+::set\+\_\+predictor\+\_\+weights(), oomph\+::\+T\+R\+::set\+\_\+weights(), oomph\+::\+I\+M\+R\+::set\+\_\+weights(), oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::set\+\_\+weights(), oomph\+::\+T\+R\+::shift\+\_\+time\+\_\+values(), oomph\+::\+E\+B\+D\+F3\+::timestep(), oomph\+::\+Problem\+::unsteady\+\_\+newton\+\_\+solve(), and oomph\+::\+Segregatable\+F\+S\+I\+Problem\+::unsteady\+\_\+segregated\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1Time_a4e956b0a5d0ef62ec7be904e66b33133}\label{classoomph_1_1Time_a4e956b0a5d0ef62ec7be904e66b33133}} 
+\index{oomph::Time@{oomph::Time}!dt@{dt}}
+\index{dt@{dt}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{dt()}{dt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double oomph\+::\+Time\+::dt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Return the value of the t-\/th stored timestep (t=0\+: present; t$>$0\+: previous), const version. 
+
+Definition at line 137 of file timesteppers.\+h.
+
+
+
+References Dt, and t.
+
+\mbox{\Hypertarget{classoomph_1_1Time_abc1e02cc2988b603bd5e1f6747381546}\label{classoomph_1_1Time_abc1e02cc2988b603bd5e1f6747381546}} 
+\index{oomph::Time@{oomph::Time}!initialise\_dt@{initialise\_dt}}
+\index{initialise\_dt@{initialise\_dt}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{initialise\_dt()}{initialise\_dt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+::initialise\+\_\+dt (\begin{DoxyParamCaption}\item[{const double \&}]{dt\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set all timesteps to the same value, dt. 
+
+
+
+Definition at line 105 of file timesteppers.\+h.
+
+
+
+References Dt, and ndt().
+
+
+
+Referenced by oomph\+::\+Problem\+::initialise\+\_\+dt().
+
+\mbox{\Hypertarget{classoomph_1_1Time_a7c0e382ecec0abb600c36bc5a0820a43}\label{classoomph_1_1Time_a7c0e382ecec0abb600c36bc5a0820a43}} 
+\index{oomph::Time@{oomph::Time}!initialise\_dt@{initialise\_dt}}
+\index{initialise\_dt@{initialise\_dt}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{initialise\_dt()}{initialise\_dt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+::initialise\+\_\+dt (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dt\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the value of the timesteps to be equal to the values passed in a vector ~\newline
+ 
+
+
+
+Definition at line 113 of file timesteppers.\+h.
+
+
+
+References Dt, and i.
+
+\mbox{\Hypertarget{classoomph_1_1Time_ad40953c471eb3ce59921e6870ed755f3}\label{classoomph_1_1Time_ad40953c471eb3ce59921e6870ed755f3}} 
+\index{oomph::Time@{oomph::Time}!ndt@{ndt}}
+\index{ndt@{ndt}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{ndt()}{ndt()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Time\+::ndt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of timesteps stored. 
+
+
+
+Definition at line 129 of file timesteppers.\+h.
+
+
+
+References Dt.
+
+
+
+Referenced by oomph\+::\+Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::copy(), oomph\+::\+Problem\+::dump(), initialise\+\_\+dt(), Time(), and time().
+
+\mbox{\Hypertarget{classoomph_1_1Time_a97eff1a8bf218d7d54ea2728b6599a8b}\label{classoomph_1_1Time_a97eff1a8bf218d7d54ea2728b6599a8b}} 
+\index{oomph::Time@{oomph::Time}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Time}{Time}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 95 of file timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1Time_aeab1acb1e182797c4194af84c0583c3f}\label{classoomph_1_1Time_aeab1acb1e182797c4194af84c0583c3f}} 
+\index{oomph::Time@{oomph::Time}!resize@{resize}}
+\index{resize@{resize}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+::resize (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize the vector holding the number of previous timesteps and initialise the new values to zero. 
+
+
+
+Definition at line 102 of file timesteppers.\+h.
+
+
+
+References Dt.
+
+
+
+Referenced by oomph\+::\+Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::copy(), and oomph\+::\+Problem\+::read().
+
+\mbox{\Hypertarget{classoomph_1_1Time_a92ca0ca34a1491744a3315d61d7cee5f}\label{classoomph_1_1Time_a92ca0ca34a1491744a3315d61d7cee5f}} 
+\index{oomph::Time@{oomph::Time}!shift\_dt@{shift\_dt}}
+\index{shift\_dt@{shift\_dt}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{shift\_dt()}{shift\_dt()}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+::shift\+\_\+dt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update all stored values of dt by shifting each value along the array. This function must be called before starting to solve at a new time level. 
+
+
+
+Definition at line 162 of file timesteppers.\+h.
+
+
+
+References Dt, and i.
+
+
+
+Referenced by oomph\+::\+Problem\+::shift\+\_\+time\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1Time_a6e28ea7a6664a2f5f5e1be871304a2c7}\label{classoomph_1_1Time_a6e28ea7a6664a2f5f5e1be871304a2c7}} 
+\index{oomph::Time@{oomph::Time}!time@{time}}
+\index{time@{time}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{time()}{time()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Time\+::time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the current value of the continuous time. 
+
+
+
+Definition at line 126 of file timesteppers.\+h.
+
+
+
+References Continuous\+\_\+time.
+
+
+
+Referenced by oomph\+::\+Pseudo\+Buckling\+Ring\+::accel(), oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::actions\+\_\+after\+\_\+timestep(), oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::actions\+\_\+before\+\_\+timestep(), oomph\+::\+Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+Time\+Stepper\+::check\+\_\+predicted\+\_\+values\+\_\+up\+\_\+to\+\_\+date(), oomph\+::\+Problem\+::copy(), oomph\+::\+Problem\+::dump(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff\+\_\+react(), oomph\+::\+Periodic\+Orbit\+Equations\+::orbit\+\_\+output(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Pseudo\+Buckling\+Ring\+::position(), oomph\+::\+Problem\+::read(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::scalar\+\_\+value\+\_\+paraview(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+directly(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+static\+\_\+initial\+\_\+condition(), oomph\+::\+Periodic\+Orbit\+Equations\+::time(), oomph\+::\+Time\+Stepper\+::time(), oomph\+::\+Problem\+::time(), oomph\+::\+Problem\+::unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Segregatable\+F\+S\+I\+Problem\+::unsteady\+\_\+segregated\+\_\+solve(), and oomph\+::\+Pseudo\+Buckling\+Ring\+::veloc().
+
+\mbox{\Hypertarget{classoomph_1_1Time_a4af91dd6c41ca7defd431bf53c518ba5}\label{classoomph_1_1Time_a4af91dd6c41ca7defd431bf53c518ba5}} 
+\index{oomph::Time@{oomph::Time}!time@{time}}
+\index{time@{time}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{time()}{time()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double oomph\+::\+Time\+::time (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the value of the continuous time at the t-\/th previous time level (t=0\+: current; t$>$0 previous). 
+
+
+
+Definition at line 141 of file timesteppers.\+h.
+
+
+
+References Continuous\+\_\+time, Dt, i, ndt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, and oomph\+::\+String\+Conversion\+::to\+\_\+string().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1Time_a0d304d449babd0531b76668c6548ad4b}\label{classoomph_1_1Time_a0d304d449babd0531b76668c6548ad4b}} 
+\index{oomph::Time@{oomph::Time}!Continuous\_time@{Continuous\_time}}
+\index{Continuous\_time@{Continuous\_time}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{Continuous\_time}{Continuous\_time}}
+{\footnotesize\ttfamily double oomph\+::\+Time\+::\+Continuous\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the value of the continuous time. 
+
+
+
+Definition at line 68 of file timesteppers.\+h.
+
+
+
+Referenced by time().
+
+\mbox{\Hypertarget{classoomph_1_1Time_a3fbca07ec14a12aaffc2fbfc8503def2}\label{classoomph_1_1Time_a3fbca07ec14a12aaffc2fbfc8503def2}} 
+\index{oomph::Time@{oomph::Time}!Dt@{Dt}}
+\index{Dt@{Dt}!oomph::Time@{oomph::Time}}
+\doxysubsubsection{\texorpdfstring{Dt}{Dt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Time\+::\+Dt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} that stores the values of the current and previous timesteps. 
+
+
+
+Definition at line 71 of file timesteppers.\+h.
+
+
+
+Referenced by dt(), initialise\+\_\+dt(), ndt(), resize(), shift\+\_\+dt(), Time(), and time().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{timesteppers_8h}{timesteppers.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,99 @@
+#FIG 3.2
+Landscape
+Center
+Inches
+Letter  
+100.00
+Single
+-2
+1200 2
+6 7350 1650 12075 3450
+2 2 0 1 0 29 100 -1 20 0.000 0 0 -1 0 0 5
+	 7350 1650 12075 1650 12075 3450 7350 3450 7350 1650
+4 0 0 50 -1 18 12 0.0000 4 135 1875 8400 2025 RefineableQuadMesh\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3195 7725 2400 Base class for all refineable quad meshes.\001
+4 0 0 50 -1 -1 12 0.0000 4 180 4065 7725 2625 Implements the mesh adaptation procedures (defined \001
+4 0 0 50 -1 -1 12 0.0000 4 180 4215 7725 2850 in the RefineableMesh base class) by QuadTree-based \001
+4 0 0 50 -1 -1 12 0.0000 4 180 2805 7725 3075 refinement/unrefinement techniques. \001
+-6
+6 5250 13350 9825 15300
+2 2 0 1 0 29 100 -1 20 0.000 0 0 -1 0 0 5
+	 5250 13350 9825 13350 9825 15300 5250 15300 5250 13350
+4 0 0 50 -1 18 12 0.0000 4 135 1770 6450 13725 GeneralisedElement\001
+4 0 0 50 -1 -1 12 0.0000 4 180 4350 5400 14550 compute their contributions to the global residual vector . \001
+4 0 0 50 -1 -1 12 0.0000 4 180 4200 5400 14325 The minimum requirement is that GeneralisedElements \001
+4 0 0 50 -1 -1 12 0.0000 4 180 4050 5400 14775 and the global Jacobian matrix. GeneralisedElements \001
+4 0 0 50 -1 -1 12 0.0000 4 180 2370 5400 15000 do not necessarily have nodes. \001
+4 0 0 50 -1 -1 12 0.0000 4 180 3420 5400 14100 Virtual base class for all oomph-lib elements.\001
+-6
+6 5175 10500 9900 12150
+2 2 0 1 0 29 100 -1 20 0.000 0 0 -1 0 0 5
+	 5175 10500 9900 10500 9900 12150 5175 12150 5175 10500
+4 0 0 50 -1 18 12 0.0000 4 135 1200 6375 10875 FiniteElement\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3945 5400 11700 element's geometry to the GeneralisedElement base\001
+4 0 0 50 -1 -1 12 0.0000 4 135 450 5400 11925 class.\001
+4 0 0 50 -1 -1 12 0.0000 4 180 4305 5400 11475 nodes, pure virtual interfaces for shape functions and the\001
+4 0 0 50 -1 -1 12 0.0000 4 135 4305 5400 11250 Virtual base class for all finite elements. This class adds\001
+-6
+6 1725 7200 6600 8925
+2 2 0 1 0 29 100 -1 20 0.000 0 0 -1 0 0 5
+	 1725 7200 6600 7200 6600 8925 1725 8925 1725 7200
+4 0 0 50 -1 -1 12 0.0000 4 180 4140 2025 7875 An example of a geometric element class: Implements \001
+4 0 0 50 -1 -1 12 0.0000 4 180 4470 2025 8100 the shape functions and the element's representation of its \001
+4 0 0 50 -1 -1 12 0.0000 4 180 3975 2025 8325 geometry -- the mapping between its local and global\001
+4 0 0 50 -1 -1 12 0.0000 4 180 4065 2025 8550 coordinates, based on interpolation between its nodal.\001
+4 0 0 50 -1 -1 12 0.0000 4 135 930 2025 8775 coordinates.\001
+4 0 0 50 -1 18 12 0.0000 4 135 870 3600 7575 QElement\001
+-6
+2 1 0 1 0 7 50 -1 -1 0.000 0 0 -1 1 0 2
+	2 1 3.00 150.00 180.00
+	 3825 4950 6300 7875
+2 1 0 1 0 7 50 -1 -1 0.000 0 0 -1 1 0 2
+	2 1 3.00 150.00 180.00
+	 8850 6525 6900 7875
+2 1 0 1 0 7 50 -1 -1 0.000 0 0 -1 1 0 2
+	2 1 3.00 150.00 180.00
+	 6525 525 9375 1500
+2 1 0 1 0 7 50 -1 -1 0.000 0 0 -1 1 0 2
+	2 1 3.00 150.00 180.00
+	 6150 525 3675 2775
+2 1 0 1 0 7 50 -1 -1 0.000 0 0 -1 1 0 2
+	2 1 3.00 150.00 180.00
+	 9525 3525 9525 4500
+2 2 0 3 12 30 100 -1 20 0.000 0 0 -1 0 0 5
+	 4350 -1425 8400 -1425 8400 450 4350 450 4350 -1425
+2 2 0 3 13 30 100 -1 20 0.000 0 0 -1 0 0 5
+	 2100 3000 5550 3000 5550 4800 2100 4800 2100 3000
+2 2 0 1 0 29 100 -1 20 0.000 0 0 -1 0 0 5
+	 5325 3825 10200 3825 10200 5550 5325 5550 5325 3825
+2 2 0 1 0 29 100 -1 20 0.000 0 0 -1 0 0 5
+	 9075 6900 13575 6900 13575 9075 9075 9075 9075 6900
+4 0 0 50 -1 -1 12 0.0000 4 180 2280 2625 3900 Specific, fully functional mesh\001
+4 0 0 50 -1 -1 12 0.0000 4 135 2415 2625 4125 with a fixed number of elements\001
+4 0 0 50 -1 -1 12 0.0000 4 180 2310 2625 4350 and nodes. Cannot be adapted.\001
+4 0 0 50 -1 18 12 0.0000 4 135 840 3225 3525 FishMesh\001
+4 0 0 50 -1 18 12 0.0000 4 180 1620 5325 -1125 AdaptiveFishMesh\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3120 4575 -675 Specfic, fully functional adaptative mesh.\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3585 4575 -450 Combines (by inheritance) the mesh generation\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3330 4575 -225 implemented in the FishMesh class, and the\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3600 4575 0 mesh adaptation procedures implemented in the\001
+4 0 0 50 -1 -1 12 0.0000 4 165 2190 4575 225 RefineableQuadMesh class. \001
+4 0 0 50 -1 18 12 0.0000 4 135 1560 7200 4200 QPoissonElement\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3915 5625 4725 Combines (by inheritance)the representation of the \001
+4 0 0 50 -1 -1 12 0.0000 4 180 3690 5625 4950 element geometry (from the QElement) with the \001
+4 0 0 50 -1 -1 12 0.0000 4 180 3480 9375 7500 Implements the computation of the element's  \001
+4 0 0 50 -1 18 12 0.0000 4 180 1455 10350 7200 PoissonEquation\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3660 5625 5175 computation of the element's residual vector and\001
+4 0 0 50 -1 -1 12 0.0000 4 180 4395 5625 5400 Jacobian matrix (from the PoissonEquations). Implements\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3255 5625 4500 Specific, fully functional, Poisson element. \001
+4 0 0 50 -1 -1 12 0.0000 4 165 4170 9375 7725 residual vector and Jacobian matrix, based on the weak\001
+4 0 0 50 -1 -1 12 0.0000 4 180 4050 9375 7950 form of the Poisson equation. This class contains the \001
+4 0 0 50 -1 -1 12 0.0000 4 180 4035 9375 8175 "abstract" mathematics -- everything is expressed in \001
+4 0 0 50 -1 -1 12 0.0000 4 180 3630 9375 8400 terms of (pure virtual) shape and test functions.\001
+4 0 0 50 -1 -1 12 0.0000 4 180 3990 5625 5625 the shape and test functions (defined as pure virtual \001
+4 0 0 50 -1 -1 12 0.0000 4 180 4305 5625 5850 functions in the PoissonEquation class) by defining them\001
+4 0 0 50 -1 -1 12 0.0000 4 165 4530 5625 6750 unknown function, and are used as test function in the weak\001
+4 0 0 50 -1 -1 12 0.0000 4 180 1650 5625 6975 form of the equations.\001
+4 0 0 50 -1 -1 12 0.0000 4 180 4440 5625 6075 as the QElement's shape function -- this corresponds to an\001
+4 0 0 50 -1 -1 12 0.0000 4 180 4695 5625 6300 iso-parametric Galerkin discretisation since the (same) shape\001
+4 0 0 50 -1 -1 12 0.0000 4 135 1590 5625 6525 functions are used to\001

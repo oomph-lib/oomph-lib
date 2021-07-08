@@ -1,0 +1,384 @@
+\hypertarget{classoomph_1_1TriangleMeshPolygon}{}\doxysection{oomph\+::Triangle\+Mesh\+Polygon Class Reference}
+\label{classoomph_1_1TriangleMeshPolygon}\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+
+
+Class defining a closed polygon for the Triangle mesh generation.  
+
+
+
+
+{\ttfamily \#include $<$unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h$>$}
+
+Inheritance diagram for oomph\+::Triangle\+Mesh\+Polygon\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1TriangleMeshPolygon}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a665856c97e10c29a096af4349fc953e8}{Triangle\+Mesh\+Polygon}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \&boundary\+\_\+polyline\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&internal\+\_\+point\+\_\+pt=\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$(0), const bool \&\mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve_a5d48fa39b4cde1ba1bdba129a1587f2f}{is\+\_\+internal\+\_\+point\+\_\+fixed}}=false)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify vector of pointers to \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} that define the boundary of the segments of the polygon. Each \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} has its own boundary ID and can contain multiple (straight-\/line) segments. For consistency across the various uses of this class, we insist that the closed boundary is represented by at least two separate \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} whose joint vertices must be specified in both. (This is to allow the setup of unique boundary coordinate(s) around the polygon.) This may seem slightly annoying in cases where a polygon really only represents a single boundary, but... Note\+: The specified vector of pointers must consist of only \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} elements. There is a checking on the P\+A\+R\+A\+N\+O\+ID mode for this constraint. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a88641d82d4b496ea61cce64045416e37}{$\sim$\+Triangle\+Mesh\+Polygon}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a6ef43be1b982a8dcc2f10545ab251bdb}{ncurve\+\_\+section}} () const
+\begin{DoxyCompactList}\small\item\em Number of constituent curves. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a050f497ebc58dd0baf036852f764dfd0}{npolyline}} () const
+\begin{DoxyCompactList}\small\item\em Number of constituent polylines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a528399d7e0fe0c8d684b4f851ca08dde}{polyline\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent polyline. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a0e840f360ce9f33c98f928ba72ab1732}{polyline\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent polyline. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a3d252deb06cbe9e6a48b55218b9dde2e}{polygon\+\_\+boundary\+\_\+id}} ()
+\begin{DoxyCompactList}\small\item\em Return vector of boundary ids of associated polylines. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a56e256e6814ae48ff72edba8cdceecd5}{is\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines\+\_\+enabled}} ()
+\begin{DoxyCompactList}\small\item\em Is re-\/distribution of polyline segments in the curve between different boundaries during adaptation enabled? \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_af3988a8dfd66d748819bacdff868715d}{enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines}} ()
+\begin{DoxyCompactList}\small\item\em Enable re-\/distribution of polyline segments in the curve between different boundaries during adaptation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_ac4c6fe4549c10509bf7a9d63ea2404b0}{disable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines}} ()
+\begin{DoxyCompactList}\small\item\em Disable re-\/distribution of polyline segments in the curve between different boundaries during adaptation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a241ca8e26e84e226e3bcb9e4f1cf1fc1}{can\+\_\+update\+\_\+reference\+\_\+configuration}} () const
+\begin{DoxyCompactList}\small\item\em Test whether curve can update reference. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a9c569f8bf7798d423356538651292996}{reset\+\_\+reference\+\_\+configuration}} ()
+\begin{DoxyCompactList}\small\item\em Virtual function that should be overloaded to update the polygons reference configuration. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a0ec0347a6d806f52a441d0fc7b63cece}{is\+\_\+fixed}} () const
+\begin{DoxyCompactList}\small\item\em Test whether the polygon is fixed or not. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a359ed1b0c4a0dfd06572207a1d21f327}{set\+\_\+fixed}} ()
+\begin{DoxyCompactList}\small\item\em Set the polygon to be fixed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a850096fb1d02794a3103102341db4ff8}{set\+\_\+unfixed}} ()
+\begin{DoxyCompactList}\small\item\em Set the polygon to be allowed to move (default) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_ad5f0494a9cda7d7e122eacb0a6c2bd27}{Enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines}}
+\begin{DoxyCompactList}\small\item\em Is re-\/distribution of polyline segments between different boundaries during adaptation enabled? (Default\+: false) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a703de438e3b14d533433833b7d0aea1a}{Can\+\_\+update\+\_\+configuration}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate whether the polygon can update its own reference configuration after it has moved i.\+e. if it is upgraded to a rigid body rather than being a free surface (default false) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a7f79fb03756524e23c8cc717c7c66f75}{Polygon\+\_\+fixed}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate whether the polygon can move (default false because if it doesn\textquotesingle{}t move this will just lead to wasted work) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class defining a closed polygon for the Triangle mesh generation. 
+
+Definition at line 1333 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a665856c97e10c29a096af4349fc953e8}\label{classoomph_1_1TriangleMeshPolygon_a665856c97e10c29a096af4349fc953e8}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!TriangleMeshPolygon@{TriangleMeshPolygon}}
+\index{TriangleMeshPolygon@{TriangleMeshPolygon}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{TriangleMeshPolygon()}{TriangleMeshPolygon()}}
+{\footnotesize\ttfamily oomph\+::\+Triangle\+Mesh\+Polygon\+::\+Triangle\+Mesh\+Polygon (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \&}]{boundary\+\_\+polyline\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{internal\+\_\+point\+\_\+pt = {\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$(0)},  }\item[{const bool \&}]{is\+\_\+internal\+\_\+point\+\_\+fixed = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Specify vector of pointers to \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} that define the boundary of the segments of the polygon. Each \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} has its own boundary ID and can contain multiple (straight-\/line) segments. For consistency across the various uses of this class, we insist that the closed boundary is represented by at least two separate \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} whose joint vertices must be specified in both. (This is to allow the setup of unique boundary coordinate(s) around the polygon.) This may seem slightly annoying in cases where a polygon really only represents a single boundary, but... Note\+: The specified vector of pointers must consist of only \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} elements. There is a checking on the P\+A\+R\+A\+N\+O\+ID mode for this constraint. 
+
+Constructor\+: Specify vector of pointers to \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} that define the boundary of the segments of the polygon. Each \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} has its own boundary ID and can contain multiple (straight-\/line) segments. For consistency across the various uses of this class, we insist that the closed boundary is represented by at least two separate \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} whose joint vertices must be specified in both. (This is to allow the setup of unique boundary coordinate(s) around the polygon.) This may seem slightly annoying in cases where a polygon really only represents a single boundary, but... Note\+: The specified vector of pointers must consist of only \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} elements. There is a checking on the P\+A\+R\+A\+N\+O\+ID mode for this constraint 
+
+Definition at line 1594 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References i, oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::\+Internal\+\_\+point\+\_\+pt, npolyline(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), polyline\+\_\+pt(), oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\+Tolerable\+\_\+error, and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a88641d82d4b496ea61cce64045416e37}\label{classoomph_1_1TriangleMeshPolygon_a88641d82d4b496ea61cce64045416e37}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!````~TriangleMeshPolygon@{$\sim$TriangleMeshPolygon}}
+\index{````~TriangleMeshPolygon@{$\sim$TriangleMeshPolygon}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{$\sim$TriangleMeshPolygon()}{~TriangleMeshPolygon()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Triangle\+Mesh\+Polygon\+::$\sim$\+Triangle\+Mesh\+Polygon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line 1358 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a241ca8e26e84e226e3bcb9e4f1cf1fc1}\label{classoomph_1_1TriangleMeshPolygon_a241ca8e26e84e226e3bcb9e4f1cf1fc1}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!can\_update\_reference\_configuration@{can\_update\_reference\_configuration}}
+\index{can\_update\_reference\_configuration@{can\_update\_reference\_configuration}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{can\_update\_reference\_configuration()}{can\_update\_reference\_configuration()}}
+{\footnotesize\ttfamily bool oomph\+::\+Triangle\+Mesh\+Polygon\+::can\+\_\+update\+\_\+reference\+\_\+configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether curve can update reference. 
+
+
+
+Definition at line 1448 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_ac4c6fe4549c10509bf7a9d63ea2404b0}\label{classoomph_1_1TriangleMeshPolygon_ac4c6fe4549c10509bf7a9d63ea2404b0}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!disable\_redistribution\_of\_segments\_between\_polylines@{disable\_redistribution\_of\_segments\_between\_polylines}}
+\index{disable\_redistribution\_of\_segments\_between\_polylines@{disable\_redistribution\_of\_segments\_between\_polylines}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{disable\_redistribution\_of\_segments\_between\_polylines()}{disable\_redistribution\_of\_segments\_between\_polylines()}}
+{\footnotesize\ttfamily void oomph\+::\+Triangle\+Mesh\+Polygon\+::disable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable re-\/distribution of polyline segments in the curve between different boundaries during adaptation. 
+
+
+
+Definition at line 1444 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_af3988a8dfd66d748819bacdff868715d}\label{classoomph_1_1TriangleMeshPolygon_af3988a8dfd66d748819bacdff868715d}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!enable\_redistribution\_of\_segments\_between\_polylines@{enable\_redistribution\_of\_segments\_between\_polylines}}
+\index{enable\_redistribution\_of\_segments\_between\_polylines@{enable\_redistribution\_of\_segments\_between\_polylines}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{enable\_redistribution\_of\_segments\_between\_polylines()}{enable\_redistribution\_of\_segments\_between\_polylines()}}
+{\footnotesize\ttfamily void oomph\+::\+Triangle\+Mesh\+Polygon\+::enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable re-\/distribution of polyline segments in the curve between different boundaries during adaptation. 
+
+
+
+Definition at line 1439 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a0ec0347a6d806f52a441d0fc7b63cece}\label{classoomph_1_1TriangleMeshPolygon_a0ec0347a6d806f52a441d0fc7b63cece}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!is\_fixed@{is\_fixed}}
+\index{is\_fixed@{is\_fixed}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{is\_fixed()}{is\_fixed()}}
+{\footnotesize\ttfamily bool oomph\+::\+Triangle\+Mesh\+Polygon\+::is\+\_\+fixed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether the polygon is fixed or not. 
+
+
+
+Definition at line 1472 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a56e256e6814ae48ff72edba8cdceecd5}\label{classoomph_1_1TriangleMeshPolygon_a56e256e6814ae48ff72edba8cdceecd5}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!is\_redistribution\_of\_segments\_between\_polylines\_enabled@{is\_redistribution\_of\_segments\_between\_polylines\_enabled}}
+\index{is\_redistribution\_of\_segments\_between\_polylines\_enabled@{is\_redistribution\_of\_segments\_between\_polylines\_enabled}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{is\_redistribution\_of\_segments\_between\_polylines\_enabled()}{is\_redistribution\_of\_segments\_between\_polylines\_enabled()}}
+{\footnotesize\ttfamily bool oomph\+::\+Triangle\+Mesh\+Polygon\+::is\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines\+\_\+enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Is re-\/distribution of polyline segments in the curve between different boundaries during adaptation enabled? 
+
+
+
+Definition at line 1434 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a6ef43be1b982a8dcc2f10545ab251bdb}\label{classoomph_1_1TriangleMeshPolygon_a6ef43be1b982a8dcc2f10545ab251bdb}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!ncurve\_section@{ncurve\_section}}
+\index{ncurve\_section@{ncurve\_section}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{ncurve\_section()}{ncurve\_section()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Triangle\+Mesh\+Polygon\+::ncurve\+\_\+section (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of constituent curves. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_af0b316414dd4a848b8bdfe314e5200ea}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line 1361 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a050f497ebc58dd0baf036852f764dfd0}\label{classoomph_1_1TriangleMeshPolygon_a050f497ebc58dd0baf036852f764dfd0}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!npolyline@{npolyline}}
+\index{npolyline@{npolyline}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{npolyline()}{npolyline()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Triangle\+Mesh\+Polygon\+::npolyline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of constituent polylines. 
+
+
+
+Definition at line 1365 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::add\+\_\+vertices\+\_\+for\+\_\+non\+\_\+deletion(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::assign\+\_\+zeta(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::create\+\_\+temporary\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::get\+\_\+initial\+\_\+position(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::restore\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries(), Triangle\+Mesh\+Polygon(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+after\+\_\+restart(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+using\+\_\+elements\+\_\+area(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+using\+\_\+face\+\_\+mesh().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a3d252deb06cbe9e6a48b55218b9dde2e}\label{classoomph_1_1TriangleMeshPolygon_a3d252deb06cbe9e6a48b55218b9dde2e}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!polygon\_boundary\_id@{polygon\_boundary\_id}}
+\index{polygon\_boundary\_id@{polygon\_boundary\_id}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{polygon\_boundary\_id()}{polygon\_boundary\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Triangle\+Mesh\+Polygon\+::polygon\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of boundary ids of associated polylines. 
+
+
+
+Definition at line 1418 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a0e840f360ce9f33c98f928ba72ab1732}\label{classoomph_1_1TriangleMeshPolygon_a0e840f360ce9f33c98f928ba72ab1732}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!polyline\_pt@{polyline\_pt}}
+\index{polyline\_pt@{polyline\_pt}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{polyline\_pt()}{polyline\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}}$\ast$ oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to i-\/th constituent polyline. 
+
+
+
+Definition at line 1393 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a528399d7e0fe0c8d684b4f851ca08dde}\label{classoomph_1_1TriangleMeshPolygon_a528399d7e0fe0c8d684b4f851ca08dde}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!polyline\_pt@{polyline\_pt}}
+\index{polyline\_pt@{polyline\_pt}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{polyline\_pt()}{polyline\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}}$\ast$ oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to i-\/th constituent polyline. 
+
+
+
+Definition at line 1368 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References i.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::add\+\_\+vertices\+\_\+for\+\_\+non\+\_\+deletion(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::assign\+\_\+zeta(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::create\+\_\+temporary\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::get\+\_\+initial\+\_\+position(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::restore\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries(), Triangle\+Mesh\+Polygon(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+after\+\_\+restart(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+using\+\_\+elements\+\_\+area(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+polygon\+\_\+using\+\_\+face\+\_\+mesh().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a9c569f8bf7798d423356538651292996}\label{classoomph_1_1TriangleMeshPolygon_a9c569f8bf7798d423356538651292996}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!reset\_reference\_configuration@{reset\_reference\_configuration}}
+\index{reset\_reference\_configuration@{reset\_reference\_configuration}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{reset\_reference\_configuration()}{reset\_reference\_configuration()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual function that should be overloaded to update the polygons reference configuration. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a784cda6e03ad1a083de8b03d14102876}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon}}.
+
+
+
+Definition at line 1453 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a359ed1b0c4a0dfd06572207a1d21f327}\label{classoomph_1_1TriangleMeshPolygon_a359ed1b0c4a0dfd06572207a1d21f327}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!set\_fixed@{set\_fixed}}
+\index{set\_fixed@{set\_fixed}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{set\_fixed()}{set\_fixed()}}
+{\footnotesize\ttfamily void oomph\+::\+Triangle\+Mesh\+Polygon\+::set\+\_\+fixed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the polygon to be fixed. 
+
+
+
+Definition at line 1475 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a850096fb1d02794a3103102341db4ff8}\label{classoomph_1_1TriangleMeshPolygon_a850096fb1d02794a3103102341db4ff8}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!set\_unfixed@{set\_unfixed}}
+\index{set\_unfixed@{set\_unfixed}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{set\_unfixed()}{set\_unfixed()}}
+{\footnotesize\ttfamily void oomph\+::\+Triangle\+Mesh\+Polygon\+::set\+\_\+unfixed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the polygon to be allowed to move (default) 
+
+
+
+Definition at line 1478 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a703de438e3b14d533433833b7d0aea1a}\label{classoomph_1_1TriangleMeshPolygon_a703de438e3b14d533433833b7d0aea1a}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!Can\_update\_configuration@{Can\_update\_configuration}}
+\index{Can\_update\_configuration@{Can\_update\_configuration}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{Can\_update\_configuration}{Can\_update\_configuration}}
+{\footnotesize\ttfamily bool oomph\+::\+Triangle\+Mesh\+Polygon\+::\+Can\+\_\+update\+\_\+configuration\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean flag to indicate whether the polygon can update its own reference configuration after it has moved i.\+e. if it is upgraded to a rigid body rather than being a free surface (default false) 
+
+
+
+Definition at line 1489 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_ad5f0494a9cda7d7e122eacb0a6c2bd27}\label{classoomph_1_1TriangleMeshPolygon_ad5f0494a9cda7d7e122eacb0a6c2bd27}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!Enable\_redistribution\_of\_segments\_between\_polylines@{Enable\_redistribution\_of\_segments\_between\_polylines}}
+\index{Enable\_redistribution\_of\_segments\_between\_polylines@{Enable\_redistribution\_of\_segments\_between\_polylines}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{Enable\_redistribution\_of\_segments\_between\_polylines}{Enable\_redistribution\_of\_segments\_between\_polylines}}
+{\footnotesize\ttfamily bool oomph\+::\+Triangle\+Mesh\+Polygon\+::\+Enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Is re-\/distribution of polyline segments between different boundaries during adaptation enabled? (Default\+: false) 
+
+
+
+Definition at line 1484 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a7f79fb03756524e23c8cc717c7c66f75}\label{classoomph_1_1TriangleMeshPolygon_a7f79fb03756524e23c8cc717c7c66f75}} 
+\index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!Polygon\_fixed@{Polygon\_fixed}}
+\index{Polygon\_fixed@{Polygon\_fixed}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{Polygon\_fixed}{Polygon\_fixed}}
+{\footnotesize\ttfamily bool oomph\+::\+Triangle\+Mesh\+Polygon\+::\+Polygon\+\_\+fixed\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate whether the polygon can move (default false because if it doesn\textquotesingle{}t move this will just lead to wasted work) 
+
+
+
+Definition at line 1496 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc}}\end{DoxyCompactItemize}

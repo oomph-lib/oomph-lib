@@ -1,0 +1,56 @@
+\hypertarget{classoomph_1_1PoissonSmoothMesh}{}\doxysection{oomph\+::Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1PoissonSmoothMesh}\index{oomph::PoissonSmoothMesh$<$ POISSON\_ELEMENT $>$@{oomph::PoissonSmoothMesh$<$ POISSON\_ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$mesh\+\_\+smooth.\+h$>$}
+
+Inheritance diagram for oomph\+::Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1PoissonSmoothMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1PoissonSmoothMesh_ad0a3d661fd2048fa4967e68ffeb1d630}{operator()}} (\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$orig\+\_\+mesh\+\_\+pt, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ pinned\+\_\+nodes)
+\begin{DoxyCompactList}\small\item\em Functor\+: Specify \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} whose nodal positions are to be adjusted, and set of nodes in that mesh whose position are to remain fixed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}
+
+Functor to smooth a \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} by adjusting the internal nodal positions by solving a Poisson problem for the nodal displacements in the interior. The displacements of the specified pinned nodes (usually located on boundaries) remain fixed (their displacements are computed from the difference between their Lagrangian and Eulerian coordinates). The assumptions is that the Lagrangian coordinates in the \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} still reflect the original nodal positions before the boundary nodes were moved. ~\newline
+The template parameter specifies the Poisson element that must have the same shape (geometric element type) as the elements contained in the mesh that\textquotesingle{}s to be smoothed. So, e.\+g. for the ten-\/noded three-\/dimensional tetrahedral T\+Taylor\+Hood\+Element$<$3$>$, it would be a T\+Poisson\+Element$<$3,3$>$, etc. 
+
+Definition at line 675 of file mesh\+\_\+smooth.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PoissonSmoothMesh_ad0a3d661fd2048fa4967e68ffeb1d630}\label{classoomph_1_1PoissonSmoothMesh_ad0a3d661fd2048fa4967e68ffeb1d630}} 
+\index{oomph::PoissonSmoothMesh$<$ POISSON\_ELEMENT $>$@{oomph::PoissonSmoothMesh$<$ POISSON\_ELEMENT $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::PoissonSmoothMesh$<$ POISSON\_ELEMENT $>$@{oomph::PoissonSmoothMesh$<$ POISSON\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$class P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoissonSmoothMesh}{oomph\+::\+Poisson\+Smooth\+Mesh}}$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$}]{orig\+\_\+mesh\+\_\+pt,  }\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$}]{pinned\+\_\+nodes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Functor\+: Specify \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} whose nodal positions are to be adjusted, and set of nodes in that mesh whose position are to remain fixed. 
+
+
+
+Definition at line 683 of file mesh\+\_\+smooth.\+h.
+
+
+
+References oomph\+::\+Mesh\+::add\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::add\+\_\+node\+\_\+pt(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), e, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Data\+::pin(), oomph\+::\+Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates(), oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Node\+::value(), oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mesh__smooth_8h}{mesh\+\_\+smooth.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::PMLTimeHarmonicIsotropicElasticityTensor Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html">PMLTimeHarmonicIsotropicElasticityTensor</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::PMLTimeHarmonicIsotropicElasticityTensor Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::PMLTimeHarmonicIsotropicElasticityTensor:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.png" usemap="#oomph::PMLTimeHarmonicIsotropicElasticityTensor_map" alt=""/>
+  <map id="oomph::PMLTimeHarmonicIsotropicElasticityTensor_map" name="oomph::PMLTimeHarmonicIsotropicElasticityTensor_map">
+<area href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html" alt="oomph::PMLTimeHarmonicElasticityTensor" shape="rect" coords="0,0,298,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a31b82a650e6e7f7485d0bf94eac00883"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a31b82a650e6e7f7485d0bf94eac00883">PMLTimeHarmonicIsotropicElasticityTensor</a> (const double &amp;<a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a6cc0a05cf8555f8a233894f65c38b555">nu</a>, const double &amp;E)</td></tr>
+<tr class="memdesc:a31b82a650e6e7f7485d0bf94eac00883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Passing in the values of the Poisson's ratio and Young's modulus (interpreted as the ratio of the actual Young's modulus to the Young's modulus (or other reference stiffness) used to non-dimensionalise stresses and tractions in the governing equations).  <a href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a31b82a650e6e7f7485d0bf94eac00883">More...</a><br /></td></tr>
+<tr class="separator:a31b82a650e6e7f7485d0bf94eac00883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60b7dc4f2a2b71f5fdb4af8026134fbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a60b7dc4f2a2b71f5fdb4af8026134fbd">PMLTimeHarmonicIsotropicElasticityTensor</a> (const double &amp;<a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a6cc0a05cf8555f8a233894f65c38b555">nu</a>)</td></tr>
+<tr class="memdesc:a60b7dc4f2a2b71f5fdb4af8026134fbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Passing in the value of the Poisson's ratio. Stresses and tractions in the governing equations are assumed to have been non-dimensionalised on Young's modulus.  <a href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a60b7dc4f2a2b71f5fdb4af8026134fbd">More...</a><br /></td></tr>
+<tr class="separator:a60b7dc4f2a2b71f5fdb4af8026134fbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc0a05cf8555f8a233894f65c38b555"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a6cc0a05cf8555f8a233894f65c38b555">nu</a> () const</td></tr>
+<tr class="memdesc:a6cc0a05cf8555f8a233894f65c38b555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poisson's ratio.  <a href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a6cc0a05cf8555f8a233894f65c38b555">More...</a><br /></td></tr>
+<tr class="separator:a6cc0a05cf8555f8a233894f65c38b555"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87798565f87daddd8b370ef4cb94f734"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a87798565f87daddd8b370ef4cb94f734">update_constitutive_parameters</a> (const double &amp;<a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a6cc0a05cf8555f8a233894f65c38b555">nu</a>, const double &amp;E=1.0)</td></tr>
+<tr class="memdesc:a87798565f87daddd8b370ef4cb94f734"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update parameters: Specify values of the Poisson's ratio and (optionally) Young's modulus (interpreted as the ratio of the actual Young's modulus to the Young's modulus (or other reference stiffness) used to non-dimensionalise stresses and tractions in the governing equations).  <a href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a87798565f87daddd8b370ef4cb94f734">More...</a><br /></td></tr>
+<tr class="separator:a87798565f87daddd8b370ef4cb94f734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a650332deea93cd5838fc614ac253ec1c"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a650332deea93cd5838fc614ac253ec1c">independent_component</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a650332deea93cd5838fc614ac253ec1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the independent coefficient function.  <a href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a650332deea93cd5838fc614ac253ec1c">More...</a><br /></td></tr>
+<tr class="separator:a650332deea93cd5838fc614ac253ec1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html">oomph::PMLTimeHarmonicElasticityTensor</a></td></tr>
+<tr class="memitem:a520e58b90e02cc9c36f39102e32afa3f inherit pub_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html#a520e58b90e02cc9c36f39102e32afa3f">~PMLTimeHarmonicElasticityTensor</a> ()</td></tr>
+<tr class="memdesc:a520e58b90e02cc9c36f39102e32afa3f inherit pub_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual Destructor.  <a href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html#a520e58b90e02cc9c36f39102e32afa3f">More...</a><br /></td></tr>
+<tr class="separator:a520e58b90e02cc9c36f39102e32afa3f inherit pub_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac253ca0d5530e06f9596a9be7bb728d2 inherit pub_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html#ac253ca0d5530e06f9596a9be7bb728d2">operator()</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</td></tr>
+<tr class="memdesc:ac253ca0d5530e06f9596a9be7bb728d2 inherit pub_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the appropriate independent component via the index translation scheme (const version).  <a href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html#ac253ca0d5530e06f9596a9be7bb728d2">More...</a><br /></td></tr>
+<tr class="separator:ac253ca0d5530e06f9596a9be7bb728d2 inherit pub_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ae0b7edb4584cac4bfdf2cf9b74486a23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#ae0b7edb4584cac4bfdf2cf9b74486a23">set_lame_coefficients</a> (const double &amp;lambda, const double &amp;mu)</td></tr>
+<tr class="separator:ae0b7edb4584cac4bfdf2cf9b74486a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ab577ccf1c4b74e02a287461649b5198e"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#ab577ccf1c4b74e02a287461649b5198e">C</a> [4]</td></tr>
+<tr class="memdesc:ab577ccf1c4b74e02a287461649b5198e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the independent components of the elasticity tensor.  <a href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#ab577ccf1c4b74e02a287461649b5198e">More...</a><br /></td></tr>
+<tr class="separator:ab577ccf1c4b74e02a287461649b5198e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6515ab800426cca35c724f8d7f96e681"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a6515ab800426cca35c724f8d7f96e681">Nu</a></td></tr>
+<tr class="memdesc:a6515ab800426cca35c724f8d7f96e681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poisson's ratio.  <a href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a6515ab800426cca35c724f8d7f96e681">More...</a><br /></td></tr>
+<tr class="separator:a6515ab800426cca35c724f8d7f96e681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:ac1c39fcce5b79af772e89e86def6f623"><td class="memItemLeft" align="right" valign="top">static const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#ac1c39fcce5b79af772e89e86def6f623">StaticIndex</a> [21]</td></tr>
+<tr class="memdesc:ac1c39fcce5b79af772e89e86def6f623"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translation scheme between the 21 independent components of the general elasticity tensor and the isotropic case.  <a href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#ac1c39fcce5b79af772e89e86def6f623">More...</a><br /></td></tr>
+<tr class="separator:ac1c39fcce5b79af772e89e86def6f623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html">oomph::PMLTimeHarmonicElasticityTensor</a></td></tr>
+<tr class="memitem:acc5d6de5e961ad67dd72bf032a47bb7b inherit pro_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html#acc5d6de5e961ad67dd72bf032a47bb7b">range_check</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</td></tr>
+<tr class="memdesc:acc5d6de5e961ad67dd72bf032a47bb7b inherit pro_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper range checking function (Note that this only captures over-runs in 3D but errors are likely to be caught in evaluation of the stress and strain tensors anyway...)  <a href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html#acc5d6de5e961ad67dd72bf032a47bb7b">More...</a><br /></td></tr>
+<tr class="separator:acc5d6de5e961ad67dd72bf032a47bb7b inherit pro_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a487ea0dfb56150b4189f1bc514a9bdda inherit pro_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html#a487ea0dfb56150b4189f1bc514a9bdda">PMLTimeHarmonicElasticityTensor</a> ()</td></tr>
+<tr class="memdesc:a487ea0dfb56150b4189f1bc514a9bdda inherit pro_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Constructor.  <a href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html#a487ea0dfb56150b4189f1bc514a9bdda">More...</a><br /></td></tr>
+<tr class="separator:a487ea0dfb56150b4189f1bc514a9bdda inherit pro_methods_classoomph_1_1PMLTimeHarmonicElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An isotropic elasticity tensor defined in terms of Young's modulus and Poisson's ratio. The elasticity tensor is assumed to be non-dimensionalised on some reference value for Young's modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young's modulus to the Young's modulus used to non-dimensionalise the stresses/tractions in the governing equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00145">145</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a31b82a650e6e7f7485d0bf94eac00883"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31b82a650e6e7f7485d0bf94eac00883">&#9670;&nbsp;</a></span>PMLTimeHarmonicIsotropicElasticityTensor() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PMLTimeHarmonicIsotropicElasticityTensor::PMLTimeHarmonicIsotropicElasticityTensor </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>nu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>E</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Passing in the values of the Poisson's ratio and Young's modulus (interpreted as the ratio of the actual Young's modulus to the Young's modulus (or other reference stiffness) used to non-dimensionalise stresses and tractions in the governing equations). </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00165">165</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::E</a>, <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00193">nu()</a>, and <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00222">set_lame_coefficients()</a>.</p>
+
+</div>
+</div>
+<a id="a60b7dc4f2a2b71f5fdb4af8026134fbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60b7dc4f2a2b71f5fdb4af8026134fbd">&#9670;&nbsp;</a></span>PMLTimeHarmonicIsotropicElasticityTensor() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PMLTimeHarmonicIsotropicElasticityTensor::PMLTimeHarmonicIsotropicElasticityTensor </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>nu</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Passing in the value of the Poisson's ratio. Stresses and tractions in the governing equations are assumed to have been non-dimensionalised on Young's modulus. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00179">179</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::E</a>, <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00193">nu()</a>, and <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00222">set_lame_coefficients()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a650332deea93cd5838fc614ac253ec1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a650332deea93cd5838fc614ac253ec1c">&#9670;&nbsp;</a></span>independent_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt;double&gt; oomph::PMLTimeHarmonicIsotropicElasticityTensor::independent_component </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the independent coefficient function. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1PMLTimeHarmonicElasticityTensor.html#a80876070e0c45dd00bbc21fe9c527a21">oomph::PMLTimeHarmonicElasticityTensor</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00215">215</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00153">StaticIndex</a>.</p>
+
+</div>
+</div>
+<a id="a6cc0a05cf8555f8a233894f65c38b555"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cc0a05cf8555f8a233894f65c38b555">&#9670;&nbsp;</a></span>nu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::PMLTimeHarmonicIsotropicElasticityTensor::nu </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Poisson's ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00193">193</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00156">Nu</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__linear__elasticity__elements_8h_source.html#l00193">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;::nu()</a>, <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00165">PMLTimeHarmonicIsotropicElasticityTensor()</a>, and <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00203">update_constitutive_parameters()</a>.</p>
+
+</div>
+</div>
+<a id="ae0b7edb4584cac4bfdf2cf9b74486a23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0b7edb4584cac4bfdf2cf9b74486a23">&#9670;&nbsp;</a></span>set_lame_coefficients()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PMLTimeHarmonicIsotropicElasticityTensor::set_lame_coefficients </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>mu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00222">222</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00165">PMLTimeHarmonicIsotropicElasticityTensor()</a>, and <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00203">update_constitutive_parameters()</a>.</p>
+
+</div>
+</div>
+<a id="a87798565f87daddd8b370ef4cb94f734"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87798565f87daddd8b370ef4cb94f734">&#9670;&nbsp;</a></span>update_constitutive_parameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PMLTimeHarmonicIsotropicElasticityTensor::update_constitutive_parameters </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>nu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>E</em> = <code>1.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update parameters: Specify values of the Poisson's ratio and (optionally) Young's modulus (interpreted as the ratio of the actual Young's modulus to the Young's modulus (or other reference stiffness) used to non-dimensionalise stresses and tractions in the governing equations). </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00203">203</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::E</a>, <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00193">nu()</a>, and <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00222">set_lame_coefficients()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab577ccf1c4b74e02a287461649b5198e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab577ccf1c4b74e02a287461649b5198e">&#9670;&nbsp;</a></span>C</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt;double&gt; oomph::PMLTimeHarmonicIsotropicElasticityTensor::C[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the independent components of the elasticity tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00149">149</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00215">independent_component()</a>, <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00165">PMLTimeHarmonicIsotropicElasticityTensor()</a>, <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00222">set_lame_coefficients()</a>, and <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00203">update_constitutive_parameters()</a>.</p>
+
+</div>
+</div>
+<a id="a6515ab800426cca35c724f8d7f96e681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6515ab800426cca35c724f8d7f96e681">&#9670;&nbsp;</a></span>Nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::PMLTimeHarmonicIsotropicElasticityTensor::Nu</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Poisson's ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00156">156</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00193">nu()</a>.</p>
+
+</div>
+</div>
+<a id="ac1c39fcce5b79af772e89e86def6f623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1c39fcce5b79af772e89e86def6f623">&#9670;&nbsp;</a></span>StaticIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned oomph::PMLTimeHarmonicIsotropicElasticityTensor::StaticIndex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line"> {1,0,2,3,0,1,0,0,2,0,0,0,3,0,0,0,0,2,3,0,1}</div>
+</div><!-- fragment -->
+<p>Translation scheme between the 21 independent components of the general elasticity tensor and the isotropic case. </p>
+<p>Translation scheme for the isotropic elasticity tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00153">153</a> of file <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html#l00215">independent_component()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="pml__time__harmonic__elasticity__tensor_8h_source.html">pml_time_harmonic_elasticity_tensor.h</a></li>
+<li><a class="el" href="pml__time__harmonic__elasticity__tensor_8cc_source.html">pml_time_harmonic_elasticity_tensor.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:11
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

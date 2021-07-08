@@ -1,0 +1,183 @@
+\hypertarget{classoomph_1_1TriangleMeshOpenCurve}{}\doxysection{oomph\+::Triangle\+Mesh\+Open\+Curve Class Reference}
+\label{classoomph_1_1TriangleMeshOpenCurve}\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+
+
+{\ttfamily \#include $<$unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h$>$}
+
+Inheritance diagram for oomph\+::Triangle\+Mesh\+Open\+Curve\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1TriangleMeshOpenCurve}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_a3ea62c84cdd6e4adac871af928b0aa05}{Triangle\+Mesh\+Open\+Curve}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a8a8d36c6b35f1bffd760877da4f3d52f}{curve\+\_\+section\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_a70a3975f694fcf8bc7c2187ee40da177}{$\sim$\+Triangle\+Mesh\+Open\+Curve}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_ac9671f91a0433ec5cab5a3b7dac45261}{nvertices}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertices. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_a639fc3a8b9860c98abc7c2d09f6917d8}{nsegments}} () const
+\begin{DoxyCompactList}\small\item\em Total number of segments. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_adfffbe10445328b0b021b82443ff8458}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+sample=50)
+\begin{DoxyCompactList}\small\item\em Output each sub-\/boundary at n\+\_\+sample (default\+: 50) points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_ac9fa3405aa0b7d2aef03a12b7b1f3b40}{polyline\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent polyline. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_a51f6862e7ce4a37df206442999f3dd47}{polyline\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent polyline. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Base class defining an open curve for the Triangle mesh generation Basically used to define internal boundaries on the mesh 
+
+Definition at line 1508 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_a3ea62c84cdd6e4adac871af928b0aa05}\label{classoomph_1_1TriangleMeshOpenCurve_a3ea62c84cdd6e4adac871af928b0aa05}} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!TriangleMeshOpenCurve@{TriangleMeshOpenCurve}}
+\index{TriangleMeshOpenCurve@{TriangleMeshOpenCurve}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{TriangleMeshOpenCurve()}{TriangleMeshOpenCurve()}}
+{\footnotesize\ttfamily oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::\+Triangle\+Mesh\+Open\+Curve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \&}]{curve\+\_\+section\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Class defining an open curve for the Triangle mesh generation. 
+
+Definition at line 1866 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt, i, oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\+Tolerable\+\_\+error, and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_a70a3975f694fcf8bc7c2187ee40da177}\label{classoomph_1_1TriangleMeshOpenCurve_a70a3975f694fcf8bc7c2187ee40da177}} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!````~TriangleMeshOpenCurve@{$\sim$TriangleMeshOpenCurve}}
+\index{````~TriangleMeshOpenCurve@{$\sim$TriangleMeshOpenCurve}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{$\sim$TriangleMeshOpenCurve()}{~TriangleMeshOpenCurve()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::$\sim$\+Triangle\+Mesh\+Open\+Curve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 1518 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_a639fc3a8b9860c98abc7c2d09f6917d8}\label{classoomph_1_1TriangleMeshOpenCurve_a639fc3a8b9860c98abc7c2d09f6917d8}} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!nsegments@{nsegments}}
+\index{nsegments@{nsegments}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{nsegments()}{nsegments()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::nsegments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Total number of segments. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_abb1f60baf8d94f54f409ae51417e2568}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line 1533 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_ac9671f91a0433ec5cab5a3b7dac45261}\label{classoomph_1_1TriangleMeshOpenCurve_ac9671f91a0433ec5cab5a3b7dac45261}} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!nvertices@{nvertices}}
+\index{nvertices@{nvertices}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{nvertices()}{nvertices()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::nvertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertices. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_acf002aab11af44361b39729d067efbe2}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line 1521 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_adfffbe10445328b0b021b82443ff8458}\label{classoomph_1_1TriangleMeshOpenCurve_adfffbe10445328b0b021b82443ff8458}} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!output@{output}}
+\index{output@{output}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily void oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+sample = {\ttfamily 50} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output each sub-\/boundary at n\+\_\+sample (default\+: 50) points. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a7d40afc7e879fde0319b153a141915df}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line 1543 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_a51f6862e7ce4a37df206442999f3dd47}\label{classoomph_1_1TriangleMeshOpenCurve_a51f6862e7ce4a37df206442999f3dd47}} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!polyline\_pt@{polyline\_pt}}
+\index{polyline\_pt@{polyline\_pt}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{polyline\_pt()}{polyline\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}}$\ast$ oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to i-\/th constituent polyline. 
+
+
+
+Definition at line 1577 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_ac9fa3405aa0b7d2aef03a12b7b1f3b40}\label{classoomph_1_1TriangleMeshOpenCurve_ac9fa3405aa0b7d2aef03a12b7b1f3b40}} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!polyline\_pt@{polyline\_pt}}
+\index{polyline\_pt@{polyline\_pt}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{polyline\_pt()}{polyline\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}}$\ast$ oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to i-\/th constituent polyline. 
+
+
+
+Definition at line 1554 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References i.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::add\+\_\+vertices\+\_\+for\+\_\+non\+\_\+deletion(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::create\+\_\+temporary\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::restore\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+open\+\_\+curve\+\_\+after\+\_\+restart(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+open\+\_\+curve\+\_\+using\+\_\+elements\+\_\+area(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+open\+\_\+curve\+\_\+using\+\_\+face\+\_\+mesh().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: adaptive_driven_cavity.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">adaptive_driven_cavity.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4d90818cdd55972ed2b0847301dd7c7a"><td class="memItemLeft" align="right" valign="top">mainpage Parallel <a class="el" href="adaptive__driven__cavity_8txt.html#a49c32777c7a5a68360e0e03f7a778e55">solution</a> of the adaptive driven cavity problem This document concerns the parallel <a class="el" href="adaptive__driven__cavity_8txt.html#a49c32777c7a5a68360e0e03f7a778e55">solution</a> of the&lt; a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; adaptive driven cavity problem&lt;/a &gt; It is the first in a&lt; a href=&quot;../../../example_code_list/html/index.html#distributed&quot;&gt; series of tutorials&lt;/a &gt; that discuss how to modify serial driver codes to <a class="el" href="adaptive__driven__cavity_8txt.html#a9c1ab6e1e8c4c9479be1d95df66f792b">distribute</a> the c Problem object across multiple <a class="el" href="adaptive__driven__cavity_8txt.html#a965db887421093850dde2ce216d3cab7">processors</a> Most of the driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> is identical to its serial counterpart and we only discuss the changes required to <a class="el" href="adaptive__driven__cavity_8txt.html#a9c1ab6e1e8c4c9479be1d95df66f792b">distribute</a> the problem Please refer to&lt; a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; another tutorial&lt;/a &gt; for a more detailed discussion of the problem and&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#a4d90818cdd55972ed2b0847301dd7c7a">its</a> (serial) implementation.&lt; HR &gt; \section main_body The main function As described in the&lt; a href</td></tr>
+<tr class="separator:a4d90818cdd55972ed2b0847301dd7c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca71bb1a64a691df23b60eb9dbafe238"><td class="memItemLeft" align="right" valign="top">doc_info&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#aca71bb1a64a691df23b60eb9dbafe238">set_directory</a> (&quot;RESLT&quot;)</td></tr>
+<tr class="separator:aca71bb1a64a691df23b60eb9dbafe238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c1ab6e1e8c4c9479be1d95df66f792b"><td class="memItemLeft" align="right" valign="top">problem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#a9c1ab6e1e8c4c9479be1d95df66f792b">distribute</a> ()</td></tr>
+<tr class="separator:a9c1ab6e1e8c4c9479be1d95df66f792b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1fe0f5bc665eaa744d063ad6f559238"><td class="memItemLeft" align="right" valign="top">problem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#ab1fe0f5bc665eaa744d063ad6f559238">newton_solve</a> (<a class="el" href="adaptive__driven__cavity_8txt.html#aa4165c0479da2600f28861e56babbcc7">max_adapt</a>)</td></tr>
+<tr class="separator:ab1fe0f5bc665eaa744d063ad6f559238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e73fc4b8becce181c42c7dff8c7aad"><td class="memItemLeft" align="right" valign="top">problem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#a72e73fc4b8becce181c42c7dff8c7aad">doc_solution</a> (doc_info)</td></tr>
+<tr class="separator:a72e73fc4b8becce181c42c7dff8c7aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab24ac0c852b9ce23e90f9bed9cab6a7c"><td class="memItemLeft" align="right" valign="top">endcode we must call c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#ab24ac0c852b9ce23e90f9bed9cab6a7c">MPI_finalize</a> () before the end of the main function \dontinclude adaptive_driven_cavity.cc \skipline Finalise MPI \until } The actual driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> is slightly more complicated that the version shown above because it also acts as a self-test. The distribution of individual elements over the <a class="el" href="adaptive__driven__cavity_8txt.html#a965db887421093850dde2ce216d3cab7">processors</a> is determined by \c METIS and we have found that \c METIS occasionally gives slightly different results on different machines. To ensure reproducible results when acting as a self-test</td></tr>
+<tr class="separator:ab24ac0c852b9ce23e90f9bed9cab6a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e058f13d503a19d30bedcb5da5d0d00"><td class="memItemLeft" align="right" valign="top">endcode we must call c the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> (like all our parallel test codes) reads a predetermined element distribution from the disk</td></tr>
+<tr class="separator:a4e058f13d503a19d30bedcb5da5d0d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa4165c0479da2600f28861e56babbcc7"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#aa4165c0479da2600f28861e56babbcc7">max_adapt</a> =3</td></tr>
+<tr class="separator:aa4165c0479da2600f28861e56babbcc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad241ac225845f23822dafee8cce67441"><td class="memItemLeft" align="right" valign="top">endcode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#ad241ac225845f23822dafee8cce67441">Finally</a></td></tr>
+<tr class="separator:ad241ac225845f23822dafee8cce67441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49c32777c7a5a68360e0e03f7a778e55"><td class="memItemLeft" align="right" valign="top">see&lt; a href=&quot;#distribution&quot;&gt; below&lt;/a &gt; for more details&lt; HR &gt; section problem_class Changes to the problem class A particular feature of the&lt; a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; driven cavity problem&lt;/a &gt; is that the flow is completely enclosed and that a single pressure degree of freedom must be prescribed In the serial driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> we arbitrarily pinned the first pressure degree of freedom in the first element in the mesh Once the problem is distributed this element will only be available to particular <a class="el" href="adaptive__driven__cavity_8txt.html#a965db887421093850dde2ce216d3cab7">processors</a> and the pressure degree of freedom must be pinned on each one Consequently we re write the c actions_after_adapt() function as follows this is achieved by including the current processor number in the filename of the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#a49c32777c7a5a68360e0e03f7a778e55">solution</a></td></tr>
+<tr class="separator:a49c32777c7a5a68360e0e03f7a778e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a965db887421093850dde2ce216d3cab7"><td class="memItemLeft" align="right" valign="top">see&lt; a href=&quot;#distribution&quot;&gt; below&lt;/a &gt; for more details&lt; HR &gt; section problem_class Changes to the problem class A particular feature of the&lt; a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; driven cavity problem&lt;/a &gt; is that the flow is completely enclosed and that a single pressure degree of freedom must be prescribed In the serial driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> we arbitrarily pinned the first pressure degree of freedom in the first element in the mesh Once the problem is distributed this element will only be available to particular processors and the pressure degree of freedom must be pinned on each one Consequently we re write the c actions_after_adapt() function as follows this is achieved by including the current processor number in the filename of the distributed across two&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#a965db887421093850dde2ce216d3cab7">processors</a></td></tr>
+<tr class="separator:a965db887421093850dde2ce216d3cab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cc61e8b9f367642f9ab8ab032927cba"><td class="memItemLeft" align="right" valign="top">see&lt; a href=&quot;#distribution&quot;&gt; below&lt;/a &gt; for more details&lt; HR &gt; section problem_class Changes to the problem class A particular feature of the&lt; a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; driven cavity problem&lt;/a &gt; is that the flow is completely enclosed and that a single pressure degree of freedom must be prescribed In the serial driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> we arbitrarily pinned the first pressure degree of freedom in the first element in the mesh Once the problem is distributed this element will only be available to particular <a class="el" href="adaptive__driven__cavity_8txt.html#a965db887421093850dde2ce216d3cab7">processors</a> and the pressure degree of freedom must be pinned on each one Consequently we re write the c actions_after_adapt() function as follows this is achieved by including the current processor number in the filename of the distributed across two with the two colours indicating which processor the elements belong to I w textwidth partition Plot illustrating the distribution of the mesh for the adaptive driven cavity problem&lt; HR &gt; section distribution Customising the distribution The actual driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> demonstrates two of the different options available for the c selected by the presence or absence of command line arguments subsection no_disk Option&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__driven__cavity_8txt.html#a0cc61e8b9f367642f9ab8ab032927cba">I</a></td></tr>
+<tr class="separator:a0cc61e8b9f367642f9ab8ab032927cba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a4e058f13d503a19d30bedcb5da5d0d00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e058f13d503a19d30bedcb5da5d0d00">&#9670;&nbsp;</a></span>code()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode we must call c the code </td>
+          <td>(</td>
+          <td class="paramtype">like all our parallel test&#160;</td>
+          <td class="paramname"><em>codes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9c1ab6e1e8c4c9479be1d95df66f792b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c1ab6e1e8c4c9479be1d95df66f792b">&#9670;&nbsp;</a></span>distribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">problem distribute </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a72e73fc4b8becce181c42c7dff8c7aad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72e73fc4b8becce181c42c7dff8c7aad">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">problem doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">doc_info&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d90818cdd55972ed2b0847301dd7c7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d90818cdd55972ed2b0847301dd7c7a">&#9670;&nbsp;</a></span>its()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Parallel <a class="el" href="adaptive__driven__cavity_8txt.html#a49c32777c7a5a68360e0e03f7a778e55">solution</a> of the adaptive driven cavity problem This document concerns the parallel <a class="el" href="adaptive__driven__cavity_8txt.html#a49c32777c7a5a68360e0e03f7a778e55">solution</a> of the&lt;a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; adaptive driven cavity problem&lt;/a&gt; It is the first in a&lt;a href=&quot;../../../example_code_list/html/index.html#distributed&quot;&gt; series of tutorials&lt;/a&gt; that discuss how to modify serial driver codes to <a class="el" href="adaptive__driven__cavity_8txt.html#a9c1ab6e1e8c4c9479be1d95df66f792b">distribute</a> the c Problem object across multiple <a class="el" href="adaptive__driven__cavity_8txt.html#a965db887421093850dde2ce216d3cab7">processors</a> Most of the driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> is identical to its serial counterpart and we only discuss the changes required to <a class="el" href="adaptive__driven__cavity_8txt.html#a9c1ab6e1e8c4c9479be1d95df66f792b">distribute</a> the problem Please refer to&lt;a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; another tutorial&lt;/a&gt; for a more detailed discussion of the problem and its </td>
+          <td>(</td>
+          <td class="paramtype">serial&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab24ac0c852b9ce23e90f9bed9cab6a7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab24ac0c852b9ce23e90f9bed9cab6a7c">&#9670;&nbsp;</a></span>MPI_finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode we must call c MPI_finalize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1fe0f5bc665eaa744d063ad6f559238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1fe0f5bc665eaa744d063ad6f559238">&#9670;&nbsp;</a></span>newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">problem newton_solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="adaptive__driven__cavity_8txt.html#aa4165c0479da2600f28861e56babbcc7">max_adapt</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aca71bb1a64a691df23b60eb9dbafe238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca71bb1a64a691df23b60eb9dbafe238">&#9670;&nbsp;</a></span>set_directory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">doc_info set_directory </td>
+          <td>(</td>
+          <td class="paramtype">&quot;RESLT&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ad241ac225845f23822dafee8cce67441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad241ac225845f23822dafee8cce67441">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__driven__cavity_8txt_source.html#l00069">69</a> of file <a class="el" href="adaptive__driven__cavity_8txt_source.html">adaptive_driven_cavity.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0cc61e8b9f367642f9ab8ab032927cba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cc61e8b9f367642f9ab8ab032927cba">&#9670;&nbsp;</a></span>I</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see&lt;a href=&quot;#distribution&quot;&gt; below&lt;/a&gt; for more details&lt;HR&gt; section problem_class Changes to the problem class A particular feature of the&lt;a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; driven cavity problem&lt;/a&gt; is that the flow is completely enclosed and that a single pressure degree of freedom must be prescribed In the serial driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> we arbitrarily pinned the first pressure degree of freedom in the first element in the mesh Once the problem is distributed this element will only be available to particular <a class="el" href="adaptive__driven__cavity_8txt.html#a965db887421093850dde2ce216d3cab7">processors</a> and the pressure degree of freedom must be pinned on each one Consequently we re write the c actions_after_adapt () function as follows this is achieved by including the current processor number in the filename of the distributed across two with the two colours indicating which processor the elements belong to I w textwidth partition Plot illustrating the distribution of the mesh for the adaptive driven cavity problem&lt;HR&gt; section distribution Customising the distribution The actual driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> demonstrates two of the different options available for the c selected by the presence or absence of command line arguments subsection no_disk Option I</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__driven__cavity_8txt_source.html#l00148">148</a> of file <a class="el" href="adaptive__driven__cavity_8txt_source.html">adaptive_driven_cavity.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa4165c0479da2600f28861e56babbcc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4165c0479da2600f28861e56babbcc7">&#9670;&nbsp;</a></span>max_adapt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned max_adapt =3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__driven__cavity_8txt_source.html#l00050">50</a> of file <a class="el" href="adaptive__driven__cavity_8txt_source.html">adaptive_driven_cavity.txt</a>.</p>
+
+</div>
+</div>
+<a id="a965db887421093850dde2ce216d3cab7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a965db887421093850dde2ce216d3cab7">&#9670;&nbsp;</a></span>processors</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see&lt;a href=&quot;#distribution&quot;&gt; below&lt;/a&gt; for more details&lt;HR&gt; section problem_class Changes to the problem class A particular feature of the&lt;a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; driven cavity problem&lt;/a&gt; is that the flow is completely enclosed and that a single pressure degree of freedom must be prescribed In the serial driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> we arbitrarily pinned the first pressure degree of freedom in the first element in the mesh Once the problem is distributed this element will only be available to particular processors and the pressure degree of freedom must be pinned on each one Consequently we re write the c actions_after_adapt () function as follows this is achieved by including the current processor number in the filename of the distributed across two processors</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__driven__cavity_8txt_source.html#l00131">131</a> of file <a class="el" href="adaptive__driven__cavity_8txt_source.html">adaptive_driven_cavity.txt</a>.</p>
+
+</div>
+</div>
+<a id="a49c32777c7a5a68360e0e03f7a778e55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49c32777c7a5a68360e0e03f7a778e55">&#9670;&nbsp;</a></span>solution</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see&lt;a href=&quot;#distribution&quot;&gt; below&lt;/a&gt; for more details&lt;HR&gt; section problem_class Changes to the problem class A particular feature of the&lt;a href=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; driven cavity problem&lt;/a&gt; is that the flow is completely enclosed and that a single pressure degree of freedom must be prescribed In the serial driver <a class="el" href="adaptive__driven__cavity_8txt.html#a4e058f13d503a19d30bedcb5da5d0d00">code</a> we arbitrarily pinned the first pressure degree of freedom in the first element in the mesh Once the problem is distributed this element will only be available to particular <a class="el" href="adaptive__driven__cavity_8txt.html#a965db887421093850dde2ce216d3cab7">processors</a> and the pressure degree of freedom must be pinned on each one Consequently we re write the c actions_after_adapt () function as follows this is achieved by including the current processor number in the filename of the solution</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__driven__cavity_8txt_source.html#l00097">97</a> of file <a class="el" href="adaptive__driven__cavity_8txt_source.html">adaptive_driven_cavity.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:27:14
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

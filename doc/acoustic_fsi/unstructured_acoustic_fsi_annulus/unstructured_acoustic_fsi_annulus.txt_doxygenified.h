@@ -1,0 +1,175 @@
+/**
+
+\mainpage Time-harmonic acoustic fluid-structure interaction problems on unstructured meshes
+
+
+In this document we discuss the solution of 
+time-harmonic acoustic fluid-structure interaction problems
+on unstructured meshes.
+
+  The driver code is very similar to the one presented in
+<a href=../../acoustic_fsi_annulus/html/index.html>another tutorial</a>
+and we only discuss the changes necessary to deal with the generation
+of the unstructured mesh for the solid domain and the 
+assignment of different material properties to different parts of the domain.
+
+<HR>
+<HR> 
+
+\section test A test problem
+
+The sketch below shows the problem setup: A 2D elastic annulus
+which is reinforced with two T-ribs is immersed in a compressible
+fluid and subjected to a time-periodic pressure load of magnitude
+\f[
+{\bf t} = P ( \exp(\alpha(\varphi-\pi/4)^2)  + \exp(\alpha(\varphi-3\pi/4)^2) )
+\f]
+(where \f$ \varphi \f$ is the polar angle) along 
+its inner surface. The parameter \f$ \alpha \f$ controls the 
+"sharpness" of the pressure load. For  \f$ \alpha=0 \f$ we obtain a 
+uniform, axisymmetric load; the sketch below shows the pressure 
+distribution (red vectors indicating the traction) for \f$ \alpha = 200. \f$
+
+\image html setup.gif "Sketch of the problem setup. " 
+\image latex setup.eps "Sketch of the problem setup. " width=0.8\textwidth
+
+The structure is symmetric and we only discretise the right half
+(\f$ x_1 > 0 \f$) of the domain and apply symmetry conditions
+(zero horizontal displacement) on the \f$ x_2-\f$ axis. 
+
+
+<HR>
+<HR>
+
+
+\section results Results
+
+The figure below shows an animation of the structure's time-harmonic
+oscillation. The blue shaded region shows the shape of the
+oscillating structure while the pink region shows its initial configuration.
+The left half of the plot is used to show the (mirror image of
+the) adaptive unstructured mesh on which the solution was computed:
+
+\image html anim.gif "Animation of the time-harmonic deformation. " 
+\image latex anim.eps "Animation of the time-harmonic deformation. " width=0.8\textwidth
+
+Here is a plot of the corresponding fluid displacement potential, a 
+measure of the fluid pressure: 
+
+\image html potential_unstr.gif "The fluid displacement potential, a measure of the fluid pressure. Elevation: real part; contours: imaginary part. " 
+\image latex potential_unstr.eps "The fluid displacement potential, a measure of the fluid pressure. Elevation: real part; contours: imaginary part. " width=0.8\textwidth
+
+This looks very pretty and shows that we can solve acoustic FSI
+problems in non-trivial geometries but should you believe the results? 
+Here's an attempt to convince you: If we make the rib much softer than the
+annulus and set its inertia to zero the rib will not offer much 
+structural resistance
+and the annular region will deform as if the rib was not present.
+If we then set \f$ \alpha = 0 \f$ we apply an axisymmetric forcing
+onto the structure and would expect the resulting displacement
+field (at least in the annular region) to be axisymmetric. 
+
+The animation of the displacement field for this case, shown below,
+shows that this is indeed the case:
+
+\image html anim_alpha0.gif "Animation of the time-harmonic deformation for uniform pressure load and a very soft and inertia-less rib. " 
+\image latex anim_alpha0.eps "Animation of the time-harmonic deformation for uniform pressure load and a very soft and inertia-less rib. " width=0.8\textwidth
+
+Here is a plot of the corresponding fluid displacement potential, a 
+measure of the fluid pressure: 
+
+\image html potential_unstr_alpha0.gif "The fluid displacement potential, a measure of the fluid pressure for a uniform pressure load and very soft and inertia-less rib. Elevation: real part; contours: imaginary part. " 
+\image latex potential_unstr_alpha0.eps "The fluid displacement potential, a measure of the fluid pressure for a uniform pressure load and very soft and inertia-less rib. Elevation: real part; contours: imaginary part. " width=0.8\textwidth
+
+
+<HR> 
+<HR>
+
+\section num The numerical solution
+The driver code for this problem is very similar to the one discussed in
+<a href=../../acoustic_fsi_annulus/html/index.html>another tutorial</a>.
+Running \c sdiff on the two driver codes
+<CENTER>
+<A HREF="../../../../demo_drivers/interaction/acoustic_fsi/acoustic_fsi.cc">
+demo_drivers/interaction/acoustic_fsi/acoustic_fsi.cc
+</A>
+</CENTER>
+and
+<CENTER>
+<A HREF="../../../../demo_drivers/interaction/acoustic_fsi/unstructured_acoustic_fsi.cc">
+demo_drivers/interaction/acoustic_fsi/unstructured_acoustic_fsi.cc
+</A>
+</CENTER>
+shows you the differences, the most important of which are:
+- The use of <a href="../../../helmholtz/scattering/html/index.html#ABCs">
+  approximate/absorbing boundary conditions (ABCs)</a>
+  rather than a <a href="../../../helmholtz/scattering/html/index.html#DtN">
+  Dirichlet-to-Neumann mapping</a> for the Helmholtz equation,
+  because the boundary along which the Sommerfeld radiation condition
+  is applied is not a full circle.
+  \n\n
+- The provision of multiple elasticity tensors and frequency
+  parameters for the two different regions (the rib and the 
+  annulus).
+  \n\n
+- The change of forcing from a prescribed time-harmonic displacement
+  to a pressure
+  load on the inside boundary -- this requires yet another mesh of
+  \c FaceElements.
+  \n\n
+- The provision of a helper function \c complete_problem_setup()
+  which rebuilds the elements (by passing the problem parameters
+  to the elements) following the unstructured mesh adaptation.
+  (The need/rationale for such a function is discussed in 
+  <a href="../../../meshes/mesh_from_inline_triangle/html/index.html">
+  another tutorial.</a>)
+  \n\n
+- The mesh generation -- the specification of the curvilinear
+  boundaries and the geometry of the rib is somewhat tedious.
+  We refer to 
+  <a href="../../../meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html">
+  another tutorial</a> for a discussion of how to define the
+  internal mesh boundary that separates the two regions
+  (the rib and the annular region) so that we can assign 
+  different material properties to them. 
+  \n\n
+.  
+All of this is reasonably straightforward and provides a
+powerful code that automatically adapts both meshes while
+respecting the curvilinear boundaries of the domain. 
+Have a look through the driver code and play with it.
+ 
+<HR>
+<HR> 
+
+\section code Code listing
+Here's a listing of the complete driver code:
+
+\include unstructured_acoustic_fsi.cc
+
+<HR>
+<HR>
+  
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/interaction/acoustic_fsi">
+  demo_drivers/interaction/acoustic_fsi/
+  </A>
+  </CENTER>\n
+- The driver code is: \n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/interaction/acoustic_fsi/unstructured_acoustic_fsi.cc">
+  demo_drivers/interaction/acoustic_fsi/unstructured_acoustic_fsi.cc
+  </A>
+  </CENTER>
+.
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

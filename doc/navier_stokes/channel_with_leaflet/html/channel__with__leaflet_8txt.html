@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: channel_with_leaflet.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">channel_with_leaflet.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a7205d8bf9e16d532c8df6ce033012a45"><td class="memItemLeft" align="right" valign="top">and no slip on the stationary channel the mesh must therefore be opened up with a cut along the position of the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> This is done in the constructor of the&lt; A HREF=&quot;../../../meshes/mesh_list/html/index.html#channel_with_leaflet&quot;&gt;&lt; CODE &gt; ChannelWithLeafletMesh&lt;/CODE &gt;&lt;/a &gt; which forms the basis of c <a class="el" href="channel__with__leaflet_8txt.html#acf046c56862cf3978613402f6a3413cd">RefineableAlgebraicChannelWithLeafletMesh</a> used to discretise this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> (See \ref comm_and_ex for a more detailed discussion of the mesh.)&lt; HR &gt;&lt; HR &gt; \<a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a> results Results The figure below shows a snapshot of the <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> field(pressure contours and instantaneous streamlines) for a Reynolds number of \f$ <a class="el" href="channel__with__leaflet_8txt.html#ad9eac8ba7ad90deb29eda54f1ec72086">Re</a></td></tr>
+<tr class="separator:a7205d8bf9e16d532c8df6ce033012a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9797b3113186e79cdae7211ab21327dc"><td class="memItemLeft" align="right" valign="top">and no slip on the stationary channel the mesh must therefore be opened up with a cut along the position of the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> This is done in the constructor of the&lt; A HREF=&quot;../../../meshes/mesh_list/html/index.html#channel_with_leaflet&quot;&gt;&lt; CODE &gt; ChannelWithLeafletMesh&lt;/CODE &gt;&lt;/a &gt; which forms the basis of c <a class="el" href="channel__with__leaflet_8txt.html#acf046c56862cf3978613402f6a3413cd">RefineableAlgebraicChannelWithLeafletMesh</a> used to discretise this as well as the corresponding fluid mesh Note how c oomph lib s automatic mesh adaptation has refined the mesh near the tip of the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> where the pressure has a singularity I w textwidth channel_with_leaflet_flow_cropped&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#a9797b3113186e79cdae7211ab21327dc">Mesh</a> (top) and <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> field(bottom). &quot; The corresponding &lt;A HREF</td></tr>
+<tr class="separator:a9797b3113186e79cdae7211ab21327dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf046c56862cf3978613402f6a3413cd"><td class="memItemLeft" align="right" valign="top">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters(as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady allowing up to five levels of adaptive refinement(fewer if we are performing a validation run) we enter the proper timestepping allowing one spatial adaptation per timestep and suppressing the re assignment of initial conditions following an adaptation by setting the parameter c first to false(see the discussion of timestepping with automatic mesh adaptation in&lt; a href=&quot;../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html&quot;&gt;another tutorial&lt;/a &gt;.) \until }&lt; HR &gt;&lt; HR &gt; \<a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a> <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> The Problem class The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> class has the usual member functions to perform actions after the mesh adaptation and before every implicit timestep&lt; HR &gt;&lt; HR &gt; <a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a> constructor The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> constructor We construct the timestepper and the c GeomObject that represents the and pass it pointers to them to the constructor of the c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#acf046c56862cf3978613402f6a3413cd">RefineableAlgebraicChannelWithLeafletMesh</a> (discussed in more detail in \ref comm_and_ex). \until time_stepper_pt())</td></tr>
+<tr class="separator:acf046c56862cf3978613402f6a3413cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addae5d0024c89858ff6af8be20128e9b"><td class="memItemLeft" align="right" valign="top">mainpage Demo t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a></td></tr>
+<tr class="separator:addae5d0024c89858ff6af8be20128e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affd79b63f00cd0e43facb7aee28d68c3"><td class="memItemLeft" align="right" valign="top">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#affd79b63f00cd0e43facb7aee28d68c3">width</a></td></tr>
+<tr class="separator:affd79b63f00cd0e43facb7aee28d68c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10a9ea60b1b4de3db9420f3e3d89814"><td class="memItemLeft" align="right" valign="top">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#af10a9ea60b1b4de3db9420f3e3d89814">_</a></td></tr>
+<tr class="separator:af10a9ea60b1b4de3db9420f3e3d89814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab102ac4be7dc4bf20fd4b912735c9f00"><td class="memItemLeft" align="right" valign="top">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille flow with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H time on the natural timescale of the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a></td></tr>
+<tr class="separator:ab102ac4be7dc4bf20fd4b912735c9f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8cbcf5bc93365f058e57027e33923cf"><td class="memItemLeft" align="right" valign="top">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average velocity <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H time on the natural timescale of the <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H the velocities on the mean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a></td></tr>
+<tr class="separator:ac8cbcf5bc93365f058e57027e33923cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9eac8ba7ad90deb29eda54f1ec72086"><td class="memItemLeft" align="right" valign="top">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H time on the natural timescale of the <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H the velocities on the mean <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U and the pressure on the viscous scale The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> is then governed by the non dimensional Navier Stokes equations <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>[Re \left(St \frac{\partial u_i}{\partial t}+u_j \frac{\partial u_i}{\partial x_j} \right)=- \frac{\partial p}{\partial x_i}+\frac{\partial }{\partial x_j} \left[\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right) \right],\<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>] where <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#ad9eac8ba7ad90deb29eda54f1ec72086">Re</a> = \rho U^* H_0^* / \mu \f$ and \f$ St = 1 \f$</td></tr>
+<tr class="separator:ad9eac8ba7ad90deb29eda54f1ec72086"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f9c6ea43dde51f49f184a3a84ddbc76"><td class="memItemLeft" align="right" valign="top">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H time on the natural timescale of the <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H the velocities on the mean <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U and the pressure on the viscous scale The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> is then governed by the non dimensional Navier Stokes equations <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>[<a class="el" href="channel__with__leaflet_8txt.html#ad9eac8ba7ad90deb29eda54f1ec72086">Re</a> \left(St \frac{\partial u_i}{\partial t}+u_j \frac{\partial u_i}{\partial x_j} \right)=- \frac{\partial p}{\partial x_i}+\frac{\partial }{\partial x_j} \left[\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right) \right],\<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>] where <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> and&lt; CENTER &gt; <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>[\frac{\partial u_i}{\partial x_i}=0,\<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>]&lt;/CENTER &gt; subject to parabolic inflow&lt; CENTER &gt; <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>[{\bf u}=6 x_2(1-x_2) {\bf e}<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">_1\f</a>]&lt;/CENTER &gt; at the inflow cross&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a></td></tr>
+<tr class="separator:a6f9c6ea43dde51f49f184a3a84ddbc76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfa699c1fb198b4d5003250cd5ca3a33"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a></td></tr>
+<tr class="separator:adfa699c1fb198b4d5003250cd5ca3a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade699c3053b3dd70b4ef68378f9001f8"><td class="memItemLeft" align="right" valign="top">axially traction free outflow at the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#ade699c3053b3dd70b4ef68378f9001f8">outlet</a></td></tr>
+<tr class="separator:ade699c3053b3dd70b4ef68378f9001f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4be636ce1bfc954455fa3c878a3cc2f4"><td class="memItemLeft" align="right" valign="top">and no slip on the stationary channel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#a4be636ce1bfc954455fa3c878a3cc2f4">walls</a></td></tr>
+<tr class="separator:a4be636ce1bfc954455fa3c878a3cc2f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fdcee9fb640a5085fb6dc5d71eec2dc"><td class="memItemLeft" align="right" valign="top">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters(as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#a0fdcee9fb640a5085fb6dc5d71eec2dc">solve</a></td></tr>
+<tr class="separator:a0fdcee9fb640a5085fb6dc5d71eec2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa04c518281f0e06d1e1ff191cd9e7422"><td class="memItemLeft" align="right" valign="top">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters(as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady allowing up to five levels of adaptive refinement(fewer if we are performing a validation run)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#aa04c518281f0e06d1e1ff191cd9e7422">Finally</a></td></tr>
+<tr class="separator:aa04c518281f0e06d1e1ff191cd9e7422"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e5ac584b6aa0eed851500a8a3d76b67"><td class="memItemLeft" align="right" valign="top">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters(as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady allowing up to five levels of adaptive refinement(fewer if we are performing a validation run) we enter the proper timestepping&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#a6e5ac584b6aa0eed851500a8a3d76b67">loop</a></td></tr>
+<tr class="separator:a6e5ac584b6aa0eed851500a8a3d76b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a725b588a1c5d9ff48a0f59c57ea95114"><td class="memItemLeft" align="right" valign="top">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters(as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady allowing up to five levels of adaptive refinement(fewer if we are performing a validation run) we enter the proper timestepping allowing one spatial adaptation per timestep and suppressing the re assignment of initial conditions following an adaptation by setting the parameter c first to false(see the discussion of timestepping with automatic mesh adaptation in&lt; a href=&quot;../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html&quot;&gt;another tutorial&lt;/a &gt;.) \until }&lt; HR &gt;&lt; HR &gt; \<a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a> <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> The Problem class The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> class has the usual member functions to perform actions after the mesh adaptation and before every implicit timestep&lt; HR &gt;&lt; HR &gt; <a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a> constructor The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> constructor We construct the timestepper and the c GeomObject that represents the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a></td></tr>
+<tr class="separator:a725b588a1c5d9ff48a0f59c57ea95114"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a9797b3113186e79cdae7211ab21327dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9797b3113186e79cdae7211ab21327dc">&#9670;&nbsp;</a></span>Mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and no slip on the stationary channel the mesh must therefore be opened up with a cut along the position of the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> This is done in the constructor of the&lt;A HREF=&quot;../../../meshes/mesh_list/html/index.html#channel_with_leaflet&quot;&gt;&lt;CODE&gt; ChannelWithLeafletMesh&lt;/CODE&gt;&lt;/a&gt; which forms the basis of c <a class="el" href="channel__with__leaflet_8txt.html#acf046c56862cf3978613402f6a3413cd">RefineableAlgebraicChannelWithLeafletMesh</a> used to discretise this as well as the corresponding fluid mesh Note how c oomph lib s automatic mesh adaptation has refined the mesh near the tip of the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> where the pressure has a singularity I w textwidth channel_with_leaflet_flow_cropped Mesh </td>
+          <td>(</td>
+          <td class="paramtype">top&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7205d8bf9e16d532c8df6ce033012a45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7205d8bf9e16d532c8df6ce033012a45">&#9670;&nbsp;</a></span>problem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and no slip on the stationary channel the mesh must therefore be opened up with a cut along the position of the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> This is done in the constructor of the&lt;A HREF=&quot;../../../meshes/mesh_list/html/index.html#channel_with_leaflet&quot;&gt;&lt;CODE&gt; ChannelWithLeafletMesh&lt;/CODE&gt;&lt;/a&gt; which forms the basis of c <a class="el" href="channel__with__leaflet_8txt.html#acf046c56862cf3978613402f6a3413cd">RefineableAlgebraicChannelWithLeafletMesh</a> used to discretise this problem </td>
+          <td>(</td>
+          <td class="paramtype">See \ref comm_and_ex for a more detailed discussion of the&#160;</td>
+          <td class="paramname"><em>mesh.</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf046c56862cf3978613402f6a3413cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf046c56862cf3978613402f6a3413cd">&#9670;&nbsp;</a></span>RefineableAlgebraicChannelWithLeafletMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters (as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady allowing up to five levels of adaptive refinement (fewer if we are performing a validation run) we enter the proper timestepping allowing one spatial adaptation per timestep and suppressing the re assignment of initial conditions following an adaptation by setting the parameter c first to false (see the discussion of timestepping with automatic mesh adaptation in &lt;a href=&quot;../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html&quot;&gt;another tutorial&lt;/a&gt;.) \until } &lt;HR&gt; &lt;HR&gt; \<a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a> <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> The Problem class The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> class has the usual member functions to perform actions after the mesh adaptation and before every implicit timestep&lt;HR&gt;&lt;HR&gt; <a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a> constructor The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> constructor We construct the timestepper and the c GeomObject that represents the and pass it pointers to them to the constructor of the c RefineableAlgebraicChannelWithLeafletMesh </td>
+          <td>(</td>
+          <td class="paramtype">discussed in more detail in \ref&#160;</td>
+          <td class="paramname"><em>comm_and_ex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="af10a9ea60b1b4de3db9420f3e3d89814"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af10a9ea60b1b4de3db9420f3e3d89814">&#9670;&nbsp;</a></span>_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U *<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H time on the natural timescale of the <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H * _</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{tot}</div>
+<div class="line"><a class="code" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">\f</a>$</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00032">32</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="addae5d0024c89858ff6af8be20128e9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addae5d0024c89858ff6af8be20128e9b">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and no slip on the stationary channel f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{\bf u} = {\bf 0} <a class="code" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">\f</a>$. The no-slip condition on the</div>
+<div class="line"><a class="code" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> is</div>
+<div class="line">&lt;CENTER&gt;</div>
+<div class="line"><a class="code" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">\f</a>[</div>
+<div class="line">{\bf u} = \frac{\partial {\bf R}_w(\xi,t)}{\partial t}</div>
+<div class="line"><a class="code" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">\f</a>] </div>
+<div class="line">&lt;/CENTER&gt;</div>
+<div class="line">and the <a class="code" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs oscillations with non-dimensional <a class="code" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">period</a></div>
+<div class="line"><a class="code" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">\f</a>$ T = T^* U^* / H^*<a class="code" href="channel__with__leaflet_8txt.html#af10a9ea60b1b4de3db9420f3e3d89814">_</a>{tot} <a class="code" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">\f</a>$. Here is a sketch of </div>
+<div class="line">the non-dimensional version of the <a class="code" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>:</div>
+<div class="line"> </div>
+<div class="line">@I w 0.75\textwidth channel_with_leaflet <span class="stringliteral">&quot;Sketch of the problem in dimensionless variables. &quot;</span></div>
+<div class="line"> </div>
+<div class="line">An interesting feature of <span class="keyword">this</span> <a class="code" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> is that even though the <a class="code" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a></div>
+<div class="line">is assumed to have negligible thickness its presence will generate a pressure</div>
+<div class="line">jump between its two faces. (The velocities are continuous</div>
+<div class="line">because the no-slip condition imposes the same <a class="code" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a></div>
+<div class="line">on both faces.) When discretising the <a class="code" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with</div>
+<div class="line">\c QTaylorHood elements (<span class="keywordflow">for</span> which the pressure varies continuously </div>
+<div class="line">across the element boundaries)</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00021">21</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa04c518281f0e06d1e1ff191cd9e7422"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa04c518281f0e06d1e1ff191cd9e7422">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters (as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady allowing up to five levels of adaptive refinement (fewer if we are performing a validation run) Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00160">160</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab102ac4be7dc4bf20fd4b912735c9f00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab102ac4be7dc4bf20fd4b912735c9f00">&#9670;&nbsp;</a></span>flow</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille flow with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H time on the natural timescale of the flow</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00033">33</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="a725b588a1c5d9ff48a0f59c57ea95114"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a725b588a1c5d9ff48a0f59c57ea95114">&#9670;&nbsp;</a></span>leaflet</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters (as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady allowing up to five levels of adaptive refinement (fewer if we are performing a validation run) we enter the proper timestepping allowing one spatial adaptation per timestep and suppressing the re assignment of initial conditions following an adaptation by setting the parameter c first to false (see the discussion of timestepping with automatic mesh adaptation in &lt;a href=&quot;../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html&quot;&gt;another tutorial&lt;/a&gt;.) \until } &lt;HR&gt; &lt;HR&gt; \<a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a> <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> The Problem class The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> class has the usual member functions to perform actions after the mesh adaptation and before every implicit timestep&lt;HR&gt;&lt;HR&gt; <a class="el" href="channel__with__leaflet_8txt.html#a6f9c6ea43dde51f49f184a3a84ddbc76">section</a> constructor The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> constructor We construct the timestepper and the c GeomObject that represents the leaflet</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00168">168</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6e5ac584b6aa0eed851500a8a3d76b67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e5ac584b6aa0eed851500a8a3d76b67">&#9670;&nbsp;</a></span>loop</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters (as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady allowing up to five levels of adaptive refinement (fewer if we are performing a validation run) we enter the proper timestepping loop</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00165">165</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="ade699c3053b3dd70b4ef68378f9001f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade699c3053b3dd70b4ef68378f9001f8">&#9670;&nbsp;</a></span>outlet</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axially traction free outflow at the outlet</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00059">59</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="adfa699c1fb198b4d5003250cd5ca3a33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfa699c1fb198b4d5003250cd5ca3a33">&#9670;&nbsp;</a></span>parallel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">parallel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00058">58</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00021">21</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet_8cc_source.html#l00386">main()</a>.</p>
+
+</div>
+</div>
+<a id="ad9eac8ba7ad90deb29eda54f1ec72086"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9eac8ba7ad90deb29eda54f1ec72086">&#9670;&nbsp;</a></span>Re</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H time on the natural timescale of the <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H the velocities on the mean <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U and the pressure on the viscous scale The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> is then governed by the non dimensional Navier Stokes equations <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> [Re \left( St \frac{\partial u_i}{\partial t} + u_j \frac{\partial u_i}{\partial x_j} \right) =- \frac{\partial p}{\partial x_i} +\frac{\partial }{\partial x_j} \left[ \left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) \right],\<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>] where <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Re = \rho U^* H_0^* / \mu \f$ and \f$ St = 1 \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00045">45</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6f9c6ea43dde51f49f184a3a84ddbc76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f9c6ea43dde51f49f184a3a84ddbc76">&#9670;&nbsp;</a></span>section</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H time on the natural timescale of the <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H the velocities on the mean <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U and the pressure on the viscous scale The <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> is then governed by the non dimensional Navier Stokes equations <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> [<a class="el" href="channel__with__leaflet_8txt.html#ad9eac8ba7ad90deb29eda54f1ec72086">Re</a> \left( St \frac{\partial u_i}{\partial t} + u_j \frac{\partial u_i}{\partial x_j} \right) =- \frac{\partial p}{\partial x_i} +\frac{\partial }{\partial x_j} \left[ \left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) \right],\<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>] where <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> and&lt;CENTER&gt; <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> [\frac{\partial u_i}{\partial x_i} = 0,\<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a>]&lt;/CENTER&gt; subject to parabolic inflow&lt;CENTER&gt; <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> [{\bf u} = 6 x_2 (1-x_2) {\bf e}<a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">_1\f</a>]&lt;/CENTER&gt; at the inflow cross section</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00058">58</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0fdcee9fb640a5085fb6dc5d71eec2dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fdcee9fb640a5085fb6dc5d71eec2dc">&#9670;&nbsp;</a></span>solve</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we build the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> and assign the time stepping parameters (as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady solve</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00153">153</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac8cbcf5bc93365f058e57027e33923cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8cbcf5bc93365f058e57027e33923cf">&#9670;&nbsp;</a></span>velocity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average velocity <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H time on the natural timescale of the <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> H the velocities on the mean velocity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00034">34</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4be636ce1bfc954455fa3c878a3cc2f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4be636ce1bfc954455fa3c878a3cc2f4">&#9670;&nbsp;</a></span>walls</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and no slip on the stationary channel walls</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00059">59</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+<a id="affd79b63f00cd0e43facb7aee28d68c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affd79b63f00cd0e43facb7aee28d68c3">&#9670;&nbsp;</a></span>width</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t and we assume that the <a class="el" href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a> performs time periodic oscillations with period <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> T* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> Steady Poiseuille <a class="el" href="channel__with__leaflet_8txt.html#ab102ac4be7dc4bf20fd4b912735c9f00">flow</a> with average <a class="el" href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a> <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> U* <a class="el" href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a> is imposed at the left end of the channel while we assume that the outflow is <a class="el" href="channel__with__leaflet_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the <a class="el" href="channel__with__leaflet_8txt.html#a7205d8bf9e16d532c8df6ce033012a45">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the channel width</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet_8txt_source.html#l00032">32</a> of file <a class="el" href="channel__with__leaflet_8txt_source.html">channel_with_leaflet.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="achannel__with__leaflet_8txt_html_af10a9ea60b1b4de3db9420f3e3d89814"><div class="ttname"><a href="channel__with__leaflet_8txt.html#af10a9ea60b1b4de3db9420f3e3d89814">_</a></div><div class="ttdeci">mainpage Demo t and we assume that the leaflet performs time periodic oscillations with period f T *f Steady Poiseuille flow with average velocity f U *f is imposed at the left end of the channel while we assume that the outflow is parallel and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the problem in dimensional variables We non dimensionalise all length and coordinates on the channel f H * _</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8txt_source.html#l00032">channel_with_leaflet.txt:32</a></div></div>
+<div class="ttc" id="achannel__with__leaflet_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8txt_source.html#l00021">channel_with_leaflet.txt:21</a></div></div>
+<div class="ttc" id="achannel__with__leaflet_8txt_html_addae5d0024c89858ff6af8be20128e9b"><div class="ttname"><a href="channel__with__leaflet_8txt.html#addae5d0024c89858ff6af8be20128e9b">f</a></div><div class="ttdeci">mainpage Demo t * f</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8txt_source.html#l00021">channel_with_leaflet.txt:21</a></div></div>
+<div class="ttc" id="achannel__with__leaflet_8txt_html_a725b588a1c5d9ff48a0f59c57ea95114"><div class="ttname"><a href="channel__with__leaflet_8txt.html#a725b588a1c5d9ff48a0f59c57ea95114">leaflet</a></div><div class="ttdeci">Next we build the problem and assign the time stepping parameters(as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments) We start the simulation with a steady allowing up to five levels of adaptive refinement(fewer if we are performing a validation run) we enter the proper timestepping allowing one spatial adaptation per timestep and suppressing the re assignment of initial conditions following an adaptation by setting the parameter c first to false(see the discussion of timestepping with automatic mesh adaptation in&lt; a href=&quot;../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html&quot;&gt;another tutorial&lt;/a &gt;.) \until }&lt; HR &gt;&lt; HR &gt; \section problem The Problem class The problem class has the usual member functions to perform actions after the mesh adaptation and before every implicit timestep&lt; HR &gt;&lt; HR &gt; section constructor The problem constructor We construct the timestepper and the c GeomObject that represents the leaflet</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8txt_source.html#l00168">channel_with_leaflet.txt:168</a></div></div>
+<div class="ttc" id="achannel__with__leaflet_8txt_html_ac8cbcf5bc93365f058e57027e33923cf"><div class="ttname"><a href="channel__with__leaflet_8txt.html#ac8cbcf5bc93365f058e57027e33923cf">velocity</a></div><div class="ttdeci">mainpage Demo t and we assume that the leaflet performs time periodic oscillations with period f T *f Steady Poiseuille flow with average velocity f U *f is imposed at the left end of the channel while we assume that the outflow is parallel and axially traction free I w textwidth channel_with_leaflet_dim Sketch of the problem in dimensional variables We non dimensionalise all length and coordinates on the channel f H time on the natural timescale of the f H the velocities on the mean velocity</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8txt_source.html#l00034">channel_with_leaflet.txt:34</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:10:56
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

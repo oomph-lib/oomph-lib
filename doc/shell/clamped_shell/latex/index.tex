@@ -1,0 +1,572 @@
+In this document, we discuss the solution of the buckling of a cylindrical shell using {\ttfamily oomph-\/lib\textquotesingle{}s} Kirchhoff\+Love\+Shell elements.
+
+\mbox{[}No documentation yet\+: Here\textquotesingle{}s the driver code.\mbox{]}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC// ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// This file forms part of oomph-\/lib, the object-\/oriented, }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//Driver function for a simple test shell problem:}}
+\DoxyCodeLine{\textcolor{comment}{//Calculate the deformation of an elastic tube approximated}}
+\DoxyCodeLine{\textcolor{comment}{//using Kirchoff-\/-\/Love shell theory}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Standard system includes}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <typeinfo>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <cstdio>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Include files from the finite-\/element library}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "shell.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/rectangular\_quadmesh.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using namespace }\mbox{\hyperlink{namespaceoomph}{oomph}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================== }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Global variables that represent physical properties}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================== }}
+\DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Prescribed position of control point}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Prescribed\_y}} = 1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pointer to pressure load (stored in Data so it can }}
+\DoxyCodeLine{\textcolor{comment}{ /// become an unknown in the problem when displacement control is used}}
+\DoxyCodeLine{\textcolor{comment}{} Data* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}{Pext\_data\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Perturbation pressure}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Return a reference to the external pressure }}
+\DoxyCodeLine{\textcolor{comment}{ /// load on the elastic tube.}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{external\_pressure}}() }
+\DoxyCodeLine{  \{\textcolor{keywordflow}{return} (*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}{Pext\_data\_pt}}-\/>value\_pt(0))*pow(0.05,3)/12.0;\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Load function, normal pressure loading}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{press\_load}}(\textcolor{keyword}{const} Vector<double> \&xi,}
+\DoxyCodeLine{                 \textcolor{keyword}{const} Vector<double> \&x,}
+\DoxyCodeLine{                 \textcolor{keyword}{const} Vector<double> \&N,}
+\DoxyCodeLine{                 Vector<double>\& \mbox{\hyperlink{clamped__shell__buckling_8txt_a018f990526757b6bf7c8020a8ca96f1b}{load}})}
+\DoxyCodeLine{ \{}
+\DoxyCodeLine{  \textcolor{comment}{//std::cout << N[0] << " " << N[1] << " " << N[2] << std::endl;}}
+\DoxyCodeLine{  \textcolor{comment}{//std::cout << xi[0] << " " << xi[1] << std::endl;}}
+\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<3;i++) }
+\DoxyCodeLine{   \{}
+\DoxyCodeLine{    \mbox{\hyperlink{clamped__shell__buckling_8txt_a018f990526757b6bf7c8020a8ca96f1b}{load}}[i] = (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{external\_pressure}}() -\/ }
+\DoxyCodeLine{               \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}*pow(0.05,3)/12.0*cos(2.0*xi[1]))*N[i];}
+\DoxyCodeLine{   \}}
+\DoxyCodeLine{ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================== }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// A 2D Mesh class. The tube wall is represented by two Lagrangian }}
+\DoxyCodeLine{\textcolor{comment}{/// coordinates that correspond to z and theta in cylindrical polars. }}
+\DoxyCodeLine{\textcolor{comment}{/// The required mesh is therefore a  2D mesh and is therefore inherited }}
+\DoxyCodeLine{\textcolor{comment}{/// from the generic RectangularQuadMesh }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classShellMesh}{ShellMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} RectangularQuadMesh<ELEMENT>,}
+\DoxyCodeLine{                  \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ ///Constructor for the mesh}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh}{ShellMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, }
+\DoxyCodeLine{           \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly);}
+\DoxyCodeLine{ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short In all elastic problems, the nodes must be assigned an undeformed,}}
+\DoxyCodeLine{\textcolor{comment}{ /// or reference, position, corresponding to the stress-\/free state}}
+\DoxyCodeLine{\textcolor{comment}{ /// of the elastic body. This function assigns the undeformed position }}
+\DoxyCodeLine{\textcolor{comment}{ /// for the nodes on the elastic tube}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} assign\_undeformed\_positions(GeomObject* \textcolor{keyword}{const} \&undeformed\_midplane\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Mesh constructor}}
+\DoxyCodeLine{\textcolor{comment}{/// Argument list:}}
+\DoxyCodeLine{\textcolor{comment}{/// nx  : number of elements in the axial direction}}
+\DoxyCodeLine{\textcolor{comment}{/// ny : number of elements in the azimuthal direction}}
+\DoxyCodeLine{\textcolor{comment}{/// lx  : length in the axial direction}}
+\DoxyCodeLine{\textcolor{comment}{/// ly  : length in theta direction}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classShellMesh_a6ce8404f69fa3f4c10dac5c18cff0699}{ShellMesh<ELEMENT>::ShellMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, }
+\DoxyCodeLine{                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny,}
+\DoxyCodeLine{                              \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, }
+\DoxyCodeLine{                              \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly) :}
+\DoxyCodeLine{ RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \textcolor{comment}{//Find out how many nodes there are}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_node = nnode();}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//Now in this case it is the Lagrangian coordinates that we want to set,}}
+\DoxyCodeLine{ \textcolor{comment}{//so we have to loop over all nodes and set them to the Eulerian}}
+\DoxyCodeLine{ \textcolor{comment}{//coordinates that are set by the generic mesh generator}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_node;i++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   node\_pt(i)-\/>xi(0) = node\_pt(i)-\/>x(0);}
+\DoxyCodeLine{   node\_pt(i)-\/>xi(1) = node\_pt(i)-\/>x(1);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{ }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Assign gradients, etc for the Lagrangian coordinates of }}
+\DoxyCodeLine{ \textcolor{comment}{//hermite-\/type elements}}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//Read out number of position dofs}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_position\_type = finite\_element\_pt(0)-\/>nnodal\_position\_type();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//If this is greater than 1 set the slopes, which are the distances between }}
+\DoxyCodeLine{ \textcolor{comment}{//nodes. If the spacing were non-\/uniform, this part would be more difficult}}
+\DoxyCodeLine{ \textcolor{keywordflow}{if}(n\_position\_type > 1)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} xstep = (this-\/>Xmax -\/ this-\/>Xmin)/((this-\/>Np-\/1)*this-\/>Nx);}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} ystep = (this-\/>Ymax -\/ this-\/>Ymin)/((this-\/>Np-\/1)*this-\/>Ny);}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//The factor 0.5 is because our reference element has length 2.0}}
+\DoxyCodeLine{     node\_pt(n)-\/>xi\_gen(1,0) = 0.5*xstep;}
+\DoxyCodeLine{     node\_pt(n)-\/>xi\_gen(2,1) = 0.5*ystep;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Set the undeformed coordinates of the nodes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classShellMesh_a3576870121fad30d0f99588ea8082ca1}{ShellMesh<ELEMENT>::assign\_undeformed\_positions}}(}
+\DoxyCodeLine{ GeomObject* \textcolor{keyword}{const} \&undeformed\_midplane\_pt)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \textcolor{comment}{//Find out how many nodes there are}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_node = nnode();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Loop over all the nodes}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//Get the Lagrangian coordinates}}
+\DoxyCodeLine{   Vector<double> xi(2);}
+\DoxyCodeLine{   xi[0] = node\_pt(n)-\/>xi(0); }
+\DoxyCodeLine{   xi[1] = node\_pt(n)-\/>xi(1);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Assign memory for values of derivatives, etc}}
+\DoxyCodeLine{   Vector<double> R(3);}
+\DoxyCodeLine{   DenseMatrix<double> a(2,3); }
+\DoxyCodeLine{   RankThreeTensor<double>  dadxi(2,2,3);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Get the geometrical information from the geometric object}}
+\DoxyCodeLine{   undeformed\_midplane\_pt-\/>d2position(xi,R,a,dadxi);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Loop over coordinate directions}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<3;i++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Set the position}}
+\DoxyCodeLine{     node\_pt(n)-\/>x\_gen(0,i) = R[i];}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Set the derivative wrt Lagrangian coordinates}}
+\DoxyCodeLine{     \textcolor{comment}{//Note that we need to scale by the length of each element here!!}}
+\DoxyCodeLine{     node\_pt(n)-\/>x\_gen(1,i) = 0.5*a(0,i)*((this-\/>Xmax -\/ this-\/>Xmin)/this-\/>Nx);}
+\DoxyCodeLine{     node\_pt(n)-\/>x\_gen(2,i) = 0.5*a(1,i)*((this-\/>Ymax -\/ this-\/>Ymin)/this-\/>Ny);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Set the mixed derivative }}
+\DoxyCodeLine{     \textcolor{comment}{//(symmetric so doesn't matter which one we use)}}
+\DoxyCodeLine{     node\_pt(n)-\/>x\_gen(3,i) = 0.25*dadxi(0,1,i);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//Problem class to solve the deformation of an elastic tube}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classShellProblem}{ShellProblem}} : \textcolor{keyword}{public} Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellProblem_a1ec644498c95acea00cc05c5bd30d075}{ShellProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, }
+\DoxyCodeLine{              \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Overload Access function for the mesh}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh}{ShellMesh<ELEMENT>}}* \mbox{\hyperlink{classShellProblem_a1905a1b913469ed54f7c8f55d133ff57}{mesh\_pt}}() }
+\DoxyCodeLine{  \{\textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classShellMesh}{ShellMesh<ELEMENT>}}*\textcolor{keyword}{>}(Problem::mesh\_pt());\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions after solve empty}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classShellProblem_a65636b791c99203ecbb09ba2a2eec214}{actions\_after\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions before solve empty}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classShellProblem_a379156a43ce05fe0e2dcf8a986a2ac64}{actions\_before\_newton\_solve}}() \{\}}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//A self\_test function}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{classShellProblem_aa6d150bd1c137edbf4ded27ed044766d}{solve}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to GeomObject that specifies the undeformed midplane}}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classShellProblem_a1c9e4492c7c7c2716fdf8b812ec41651}{Undeformed\_midplane\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// First trace node}}
+\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{classShellProblem_a45230216c4791c683218ff6d7f4ba9a0}{Trace\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Second trace node}}
+\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{classShellProblem_a1933abc1b3e5637e23fa2809eb1cd88f}{Trace\_node2\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classShellProblem_a1ec644498c95acea00cc05c5bd30d075}{ShellProblem<ELEMENT>::ShellProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, }
+\DoxyCodeLine{                                    \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \textcolor{comment}{//Create the undeformed midplane object}}
+\DoxyCodeLine{ Undeformed\_midplane\_pt = \textcolor{keyword}{new} EllipticalTube(1.0,1.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Now create the mesh}}
+\DoxyCodeLine{ Problem::mesh\_pt() = \textcolor{keyword}{new} \mbox{\hyperlink{classShellMesh}{ShellMesh<ELEMENT>}}(nx,ny,lx,ly); }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Set the undeformed positions in the mesh}}
+\DoxyCodeLine{ mesh\_pt()-\/>assign\_undeformed\_positions(Undeformed\_midplane\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Reorder the elements, since I know what's best for them....}}
+\DoxyCodeLine{ mesh\_pt()-\/>element\_reorder();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Apply boundary conditions to the ends of the tube}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_ends = mesh\_pt()-\/>nboundary\_node(1);}
+\DoxyCodeLine{ \textcolor{comment}{//Loop over the node}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_ends;i++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//Pin in the axial direction (prevents rigid body motions)}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(2);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(2);}
+\DoxyCodeLine{   \textcolor{comment}{//Derived conditions}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(2,2);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(2,2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/CLAMPING CONDITIONS-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{   \textcolor{comment}{//-\/-\/-\/-\/-\/-\/Pin positions in the transverse directions-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{   \textcolor{comment}{// Comment these out to get the ring case}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(0);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(0);}
+\DoxyCodeLine{   \textcolor{comment}{//Derived conditions}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(2,0);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(2,0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(1);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(1);}
+\DoxyCodeLine{   \textcolor{comment}{//Derived conditions}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(2,1);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(2,1);}
+\DoxyCodeLine{   \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Set the axial gradients of the transverse coordinates to be}}
+\DoxyCodeLine{   \textcolor{comment}{// zero -\/-\/-\/ need to be enforced for ring or tube buckling}}
+\DoxyCodeLine{   \textcolor{comment}{//Pin dx/dz and dy/dz}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(1,0);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(1,1);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(1,0);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(1,1);}
+\DoxyCodeLine{   \textcolor{comment}{//Derived conditions}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(3,0);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(1,i)-\/>pin\_position(3,1);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(3,0);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(3,1);}
+\DoxyCodeLine{ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Now loop over the sides and apply symmetry conditions}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_side = mesh\_pt()-\/>nboundary\_node(0);}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_side;i++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//At the side where theta is 0, pin in the y direction}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(0,i)-\/>pin\_position(1);}
+\DoxyCodeLine{   \textcolor{comment}{//Derived condition}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(0,i)-\/>pin\_position(1,1);}
+\DoxyCodeLine{   \textcolor{comment}{//Pin dx/dtheta and dz/dtheta}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(0,i)-\/>pin\_position(2,0);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(0,i)-\/>pin\_position(2,2);}
+\DoxyCodeLine{   \textcolor{comment}{//Pin the mixed derivative}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(0,i)-\/>pin\_position(3,0);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(0,i)-\/>pin\_position(3,2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//At the side when theta is 0.5pi  pin in the x direction}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(2,i)-\/>pin\_position(0);}
+\DoxyCodeLine{   \textcolor{comment}{//Derived condition}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(2,i)-\/>pin\_position(1,0);}
+\DoxyCodeLine{   \textcolor{comment}{//Pin dy/dtheta and dz/dtheta}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(2,i)-\/>pin\_position(2,1);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(2,i)-\/>pin\_position(2,2);}
+\DoxyCodeLine{   \textcolor{comment}{//Pin the mixed derivative}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(2,i)-\/>pin\_position(3,1);}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(2,i)-\/>pin\_position(3,2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//    //Set an initial kick to make sure that we hop onto the}}
+\DoxyCodeLine{\textcolor{comment}{//    //non-\/axisymmetric branch}}
+\DoxyCodeLine{\textcolor{comment}{//    if((i>1) \&\& (i<n\_side-\/1))}}
+\DoxyCodeLine{\textcolor{comment}{//     \{}}
+\DoxyCodeLine{\textcolor{comment}{//      mesh\_pt()-\/>boundary\_node\_pt(0,i)-\/>x(0) += 0.05;}}
+\DoxyCodeLine{\textcolor{comment}{//      mesh\_pt()-\/>boundary\_node\_pt(2,i)-\/>x(1) -\/= 0.1;}}
+\DoxyCodeLine{\textcolor{comment}{//     \}}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Setup displacement control}}
+\DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//  //Setup displacement control}}
+\DoxyCodeLine{\textcolor{comment}{//  //Fix the displacement at the mid-\/point of the tube in the "vertical"}}
+\DoxyCodeLine{\textcolor{comment}{//  //(y) direction.}}
+\DoxyCodeLine{\textcolor{comment}{//  //Set the displacement control element (located halfway along the tube)}}
+\DoxyCodeLine{\textcolor{comment}{// Disp\_ctl\_element\_pt = dynamic\_cast<ELEMENT*>(mesh\_pt()-\/>element\_pt(3*Ny-\/1));}}
+\DoxyCodeLine{\textcolor{comment}{//  //The midpoint of the tube is located exactly half-\/way along the element}}
+\DoxyCodeLine{\textcolor{comment}{//  Vector<double> s(2);  s[0] = 1.0; s[1] = 0.0; //s[1] = 0.5}}
+\DoxyCodeLine{\textcolor{comment}{//  //Fix the displacement at this point in the y (1) direction}}
+\DoxyCodeLine{\textcolor{comment}{//  Disp\_ctl\_element\_pt-\/>fix\_displacement\_for\_displacement\_control(s,1);}}
+\DoxyCodeLine{\textcolor{comment}{//  //Set the pointer to the prescribed position}}
+\DoxyCodeLine{\textcolor{comment}{//  Disp\_ctl\_element\_pt-\/>prescribed\_position\_pt() = \&Prescribed\_y; }}
+\DoxyCodeLine{ }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Choose element in which displacement control is applied: This}}
+\DoxyCodeLine{ \textcolor{comment}{// one is located about halfway along the tube -\/-\/ remember that}}
+\DoxyCodeLine{ \textcolor{comment}{// we've renumbered the elements!}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nel\_ctrl=0;}
+\DoxyCodeLine{ Vector<double> s\_displ\_control(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Even/odd number of elements in axial direction}}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (nx\%2==1)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   nel\_ctrl=unsigned(floor(0.5*\textcolor{keywordtype}{double}(nx))+1.0)*ny-\/1;}
+\DoxyCodeLine{   s\_displ\_control[0]=0.0;}
+\DoxyCodeLine{   s\_displ\_control[1]=1.0;}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   nel\_ctrl=unsigned(floor(0.5*\textcolor{keywordtype}{double}(nx))+1.0)*ny-\/1;}
+\DoxyCodeLine{   s\_displ\_control[0]=-\/1.0;}
+\DoxyCodeLine{   s\_displ\_control[1]=1.0;}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Controlled element}}
+\DoxyCodeLine{ SolidFiniteElement* controlled\_element\_pt=}
+\DoxyCodeLine{  \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(nel\_ctrl));}
+\DoxyCodeLine{ }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Fix the displacement in the y (1) direction...}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} controlled\_direction=1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Pointer to displacement control element}}
+\DoxyCodeLine{ DisplacementControlElement* displ\_control\_el\_pt;}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Build displacement control element}}
+\DoxyCodeLine{ displ\_control\_el\_pt=}
+\DoxyCodeLine{  \textcolor{keyword}{new} DisplacementControlElement(controlled\_element\_pt,}
+\DoxyCodeLine{                                 s\_displ\_control,}
+\DoxyCodeLine{                                 controlled\_direction,}
+\DoxyCodeLine{                                 \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Global\_Physical\_Variables::Prescribed\_y}});}
+\DoxyCodeLine{ }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Doc control point}}
+\DoxyCodeLine{ Vector<double> xi(2);}
+\DoxyCodeLine{ Vector<double> x(3);}
+\DoxyCodeLine{ controlled\_element\_pt-\/>interpolated\_xi(s\_displ\_control,xi);}
+\DoxyCodeLine{ controlled\_element\_pt-\/>interpolated\_x(s\_displ\_control,x);}
+\DoxyCodeLine{ std::cout << std::endl;}
+\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"Controlled element: "} << nel\_ctrl << std::endl;}
+\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"Displacement control applied at xi = ("} }
+\DoxyCodeLine{           << xi[0] << \textcolor{stringliteral}{", "} << xi[1] << \textcolor{stringliteral}{")"} << std::endl;}
+\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"Corresponding to                x  = ("} }
+\DoxyCodeLine{           << x[0] << \textcolor{stringliteral}{", "} << x[1] << \textcolor{stringliteral}{", "} << x[2] << \textcolor{stringliteral}{")"} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// The constructor of the  DisplacementControlElement has created}}
+\DoxyCodeLine{ \textcolor{comment}{// a new Data object whose one-\/and-\/only value contains the}}
+\DoxyCodeLine{ \textcolor{comment}{// adjustable load: Use this Data object in the load function:}}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}{Global\_Physical\_Variables::Pext\_data\_pt}}=displ\_control\_el\_pt-\/>}
+\DoxyCodeLine{  displacement\_control\_load\_pt();}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Add the displacement-\/control element to the mesh}}
+\DoxyCodeLine{ mesh\_pt()-\/>add\_element\_pt(displ\_control\_el\_pt); }
+\DoxyCodeLine{}
+\DoxyCodeLine{ }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Complete build of shell elements}}
+\DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Find number of shell elements in mesh}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_element = nx*ny;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Explicit pointer to first element in the mesh}}
+\DoxyCodeLine{ ELEMENT* first\_el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(0));}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//Loop over the elements }}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//Cast to a shell element}}
+\DoxyCodeLine{   ELEMENT *el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Set the load function}}
+\DoxyCodeLine{   el\_pt-\/>load\_vector\_fct\_pt() = \& \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{Global\_Physical\_Variables::press\_load}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Set the undeformed surface}}
+\DoxyCodeLine{   el\_pt-\/>undeformed\_midplane\_pt() = Undeformed\_midplane\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//The external pressure is external data for all elements}}
+\DoxyCodeLine{   el\_pt-\/>add\_external\_data(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}{Global\_Physical\_Variables::Pext\_data\_pt}});}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Pre-\/compute the second derivatives wrt Lagrangian coordinates}}
+\DoxyCodeLine{   \textcolor{comment}{//for the first element only}}
+\DoxyCodeLine{   \textcolor{keywordflow}{if}(e==0)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     el\_pt-\/>pre\_compute\_d2shape\_lagrangian\_at\_knots();}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Otherwise set the values to be the same as those in the first element}}
+\DoxyCodeLine{   \textcolor{comment}{//this is OK because the Lagrangian mesh is uniform.}}
+\DoxyCodeLine{   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     el\_pt-\/>set\_dshape\_lagrangian\_stored\_from\_element(first\_el\_pt);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Set pointers to two trace nodes, used for output}}
+\DoxyCodeLine{ Trace\_node\_pt = mesh\_pt()-\/>finite\_element\_pt(2*ny-\/1)-\/>node\_pt(3);}
+\DoxyCodeLine{ Trace\_node2\_pt = mesh\_pt()-\/>finite\_element\_pt(ny)-\/>node\_pt(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Do equation numbering}}
+\DoxyCodeLine{ cout << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\# of dofs "} << assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{// /Define the solve function, disp ctl and then continuation}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classShellProblem_aa6d150bd1c137edbf4ded27ed044766d}{ShellProblem<ELEMENT>::solve}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Increase the maximum number of Newton iterations.}}
+\DoxyCodeLine{ \textcolor{comment}{//Finding the first buckled solution requires a large(ish) number}}
+\DoxyCodeLine{ \textcolor{comment}{//of Newton steps -\/-\/ shells are just a bit twitchy}}
+\DoxyCodeLine{ Max\_newton\_iterations = 40;}
+\DoxyCodeLine{ Max\_residuals=1.0e6;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//Open an output trace file}}
+\DoxyCodeLine{ ofstream trace(\textcolor{stringliteral}{"trace.dat"});}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Gradually compress the tube by decreasing the value of the prescribed}}
+\DoxyCodeLine{ \textcolor{comment}{//position }}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=1;i<11;i++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Global\_Physical\_Variables::Prescribed\_y}} -\/= 0.05;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   cout << std::endl << \textcolor{stringliteral}{"Increasing displacement: Prescribed\_y is "} }
+\DoxyCodeLine{        << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Global\_Physical\_Variables::Prescribed\_y}} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Solve}}
+\DoxyCodeLine{   newton\_solve();}
+\DoxyCodeLine{   }
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Output the pressure (on the bending scale)}}
+\DoxyCodeLine{   trace << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{Global\_Physical\_Variables::external\_pressure}}()/(pow(0.05,3)/12.0) }
+\DoxyCodeLine{         << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{         \textcolor{comment}{//Position of first trace node}}
+\DoxyCodeLine{         << Trace\_node\_pt-\/>x(0) << \textcolor{stringliteral}{" "} << Trace\_node\_pt-\/>x(1) << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{          \textcolor{comment}{//Position of second trace node}}
+\DoxyCodeLine{         << Trace\_node2\_pt-\/>x(0) << \textcolor{stringliteral}{" "} << Trace\_node2\_pt-\/>x(1) << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Reset perturbation}}
+\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Global\_Physical\_Variables::Pcos}}=0.0;}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Close the trace file}}
+\DoxyCodeLine{ trace.close();}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//Output the tube shape in the most strongly collapsed configuration}}
+\DoxyCodeLine{ ofstream file(\textcolor{stringliteral}{"final\_shape.dat"});}
+\DoxyCodeLine{ mesh\_pt()-\/>output(file,5);}
+\DoxyCodeLine{ file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{clamped__shell_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Length of domain}}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} L = 10.0;}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} L\_phi=0.5*MathematicalConstants::Pi;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Set up the problem}}
+\DoxyCodeLine{ \mbox{\hyperlink{classShellProblem}{ShellProblem<StorableShapeSolidElement<DiagHermiteShellElement>}} > }
+\DoxyCodeLine{  \mbox{\hyperlink{clamped__shell__buckling_8txt_a02b6a4d549a097d9fb1c023e5f07eb4b}{problem}}(5,3,L,L\_phi);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Solve the problem}}
+\DoxyCodeLine{ \mbox{\hyperlink{clamped__shell__buckling_8txt_a02b6a4d549a097d9fb1c023e5f07eb4b}{problem}}.solve();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

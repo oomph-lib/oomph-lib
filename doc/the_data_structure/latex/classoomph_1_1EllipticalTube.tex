@@ -1,0 +1,303 @@
+\hypertarget{classoomph_1_1EllipticalTube}{}\doxysection{oomph\+::Elliptical\+Tube Class Reference}
+\label{classoomph_1_1EllipticalTube}\index{oomph::EllipticalTube@{oomph::EllipticalTube}}
+
+
+Elliptical tube with half axes a and b.  
+
+
+
+
+{\ttfamily \#include $<$geom\+\_\+objects.\+h$>$}
+
+Inheritance diagram for oomph\+::Elliptical\+Tube\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1EllipticalTube}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1EllipticalTube_a329dbc27caf2d9bfe02ad5e940b17aa6}{Elliptical\+Tube}} (const double \&\mbox{\hyperlink{classoomph_1_1EllipticalTube_a32555e753aaaf305979520c06b26755e}{a}}, const double \&\mbox{\hyperlink{classoomph_1_1EllipticalTube_a5ca528bf85b8c5f2f6b665046e8a613c}{b}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify radius. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1EllipticalTube_a6b8312c32c02f67ba2a716e77f048a1f}{Elliptical\+Tube}} (const \mbox{\hyperlink{classoomph_1_1EllipticalTube}{Elliptical\+Tube}} \&\mbox{\hyperlink{the__data__structure_8txt_ae56499a02d89f315ab025070e7a0058f}{node}})
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1EllipticalTube_a2f85c6d060b35fc390f1ed940bf2f53d}{operator=}} (const \mbox{\hyperlink{classoomph_1_1EllipticalTube}{Elliptical\+Tube}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1EllipticalTube_a32555e753aaaf305979520c06b26755e}{a}} ()
+\begin{DoxyCompactList}\small\item\em Access function to x-\/half axis. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1EllipticalTube_a5ca528bf85b8c5f2f6b665046e8a613c}{b}} ()
+\begin{DoxyCompactList}\small\item\em Access function to y-\/half axis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1EllipticalTube_af7a879adbdba6f7fc1a1dd9c0b9378f6}{position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Position vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1EllipticalTube_a01c6372a901d28892cab9e43ba8b3530}{position}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Position vector (dummy unsteady version returns steady version) \end{DoxyCompactList}\item 
+virtual unsigned \mbox{\hyperlink{classoomph_1_1EllipticalTube_ad137810aac62250463273656db192ed7}{ngeom\+\_\+data}} () const
+\begin{DoxyCompactList}\small\item\em How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1EllipticalTube_a8b64fd523511735679b5820c5fb687cf}{d2position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&ddrdzeta) const
+\begin{DoxyCompactList}\small\item\em Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and 1st and 2nd derivs w.\+r.\+t. zeta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1EllipticalTube_a2fe694a504750371d3ef98a20b92e6a5}{d2position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&drdzeta, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&ddrdzeta) const
+\begin{DoxyCompactList}\small\item\em Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and 1st and 2nd derivs w.\+r.\+t. zeta. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1EllipticalTube_a419f48b14f3e3bc1c884983fc3a7b2ae}{A}}
+\begin{DoxyCompactList}\small\item\em x-\/half axis \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1EllipticalTube_a07babc26d001d03e9048bd3bae1581c1}{B}}
+\begin{DoxyCompactList}\small\item\em x-\/half axis \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Elliptical tube with half axes a and b. 
+
+\[ {\bf r} = ( a \cos(\zeta_1), b \sin(zeta_1), \zeta_0)^T \] 
+
+Definition at line 1117 of file geom\+\_\+objects.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a329dbc27caf2d9bfe02ad5e940b17aa6}\label{classoomph_1_1EllipticalTube_a329dbc27caf2d9bfe02ad5e940b17aa6}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!EllipticalTube@{EllipticalTube}}
+\index{EllipticalTube@{EllipticalTube}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{EllipticalTube()}{EllipticalTube()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Elliptical\+Tube\+::\+Elliptical\+Tube (\begin{DoxyParamCaption}\item[{const double \&}]{a,  }\item[{const double \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Specify radius. 
+
+
+
+Definition at line 1122 of file geom\+\_\+objects.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a6b8312c32c02f67ba2a716e77f048a1f}\label{classoomph_1_1EllipticalTube_a6b8312c32c02f67ba2a716e77f048a1f}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!EllipticalTube@{EllipticalTube}}
+\index{EllipticalTube@{EllipticalTube}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{EllipticalTube()}{EllipticalTube()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Elliptical\+Tube\+::\+Elliptical\+Tube (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1EllipticalTube}{Elliptical\+Tube}} \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 1126 of file geom\+\_\+objects.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a32555e753aaaf305979520c06b26755e}\label{classoomph_1_1EllipticalTube_a32555e753aaaf305979520c06b26755e}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!a@{a}}
+\index{a@{a}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{a()}{a()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Elliptical\+Tube\+::a (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to x-\/half axis. 
+
+
+
+Definition at line 1138 of file geom\+\_\+objects.\+h.
+
+
+
+References A.
+
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a5ca528bf85b8c5f2f6b665046e8a613c}\label{classoomph_1_1EllipticalTube_a5ca528bf85b8c5f2f6b665046e8a613c}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!b@{b}}
+\index{b@{b}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{b()}{b()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Elliptical\+Tube\+::b (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to y-\/half axis. 
+
+
+
+Definition at line 1141 of file geom\+\_\+objects.\+h.
+
+
+
+References B.
+
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a8b64fd523511735679b5820c5fb687cf}\label{classoomph_1_1EllipticalTube_a8b64fd523511735679b5820c5fb687cf}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!d2position@{d2position}}
+\index{d2position@{d2position}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Elliptical\+Tube\+::d2position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and 1st and 2nd derivs w.\+r.\+t. zeta. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a08472dbe196123490ea109762cefd00c}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line 1167 of file geom\+\_\+objects.\+h.
+
+
+
+References A, and B.
+
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a2fe694a504750371d3ef98a20b92e6a5}\label{classoomph_1_1EllipticalTube_a2fe694a504750371d3ef98a20b92e6a5}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!d2position@{d2position}}
+\index{d2position@{d2position}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Elliptical\+Tube\+::d2position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{drdzeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and 1st and 2nd derivs w.\+r.\+t. zeta. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a4fdbd372e26d4486026c06dcfdaafe81}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line 1184 of file geom\+\_\+objects.\+h.
+
+
+
+References A, and B.
+
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_ad137810aac62250463273656db192ed7}\label{classoomph_1_1EllipticalTube_ad137810aac62250463273656db192ed7}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!ngeom\_data@{ngeom\_data}}
+\index{ngeom\_data@{ngeom\_data}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{ngeom\_data()}{ngeom\_data()}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+Elliptical\+Tube\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e127fe124df56f251}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line 1161 of file geom\+\_\+objects.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a2f85c6d060b35fc390f1ed940bf2f53d}\label{classoomph_1_1EllipticalTube_a2f85c6d060b35fc390f1ed940bf2f53d}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Elliptical\+Tube\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1EllipticalTube}{Elliptical\+Tube}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 1132 of file geom\+\_\+objects.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a01c6372a901d28892cab9e43ba8b3530}\label{classoomph_1_1EllipticalTube_a01c6372a901d28892cab9e43ba8b3530}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!position@{position}}
+\index{position@{position}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Elliptical\+Tube\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Position vector (dummy unsteady version returns steady version) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af163a7d80b5c4dfa}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line 1153 of file geom\+\_\+objects.\+h.
+
+
+
+References position().
+
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_af7a879adbdba6f7fc1a1dd9c0b9378f6}\label{classoomph_1_1EllipticalTube_af7a879adbdba6f7fc1a1dd9c0b9378f6}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!position@{position}}
+\index{position@{position}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Elliptical\+Tube\+::position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Position vector. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line 1144 of file geom\+\_\+objects.\+h.
+
+
+
+References A, and B.
+
+
+
+Referenced by position().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a419f48b14f3e3bc1c884983fc3a7b2ae}\label{classoomph_1_1EllipticalTube_a419f48b14f3e3bc1c884983fc3a7b2ae}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!A@{A}}
+\index{A@{A}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily double oomph\+::\+Elliptical\+Tube\+::A\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+x-\/half axis 
+
+
+
+Definition at line 1221 of file geom\+\_\+objects.\+h.
+
+
+
+Referenced by a(), d2position(), and position().
+
+\mbox{\Hypertarget{classoomph_1_1EllipticalTube_a07babc26d001d03e9048bd3bae1581c1}\label{classoomph_1_1EllipticalTube_a07babc26d001d03e9048bd3bae1581c1}} 
+\index{oomph::EllipticalTube@{oomph::EllipticalTube}!B@{B}}
+\index{B@{B}!oomph::EllipticalTube@{oomph::EllipticalTube}}
+\doxysubsubsection{\texorpdfstring{B}{B}}
+{\footnotesize\ttfamily double oomph\+::\+Elliptical\+Tube\+::B\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+x-\/half axis 
+
+
+
+Definition at line 1224 of file geom\+\_\+objects.\+h.
+
+
+
+Referenced by b(), d2position(), and position().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{geom__objects_8h}{geom\+\_\+objects.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html">HerschelBulkleyMenDutRegConstitutiveEquation</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="generalised__newtonian__constitutive__models_8h_source.html">generalised_newtonian_constitutive_models.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.png" usemap="#oomph::HerschelBulkleyMenDutRegConstitutiveEquation_3C_20DIM_20_3E_map" alt=""/>
+  <map id="oomph::HerschelBulkleyMenDutRegConstitutiveEquation_3C_20DIM_20_3E_map" name="oomph::HerschelBulkleyMenDutRegConstitutiveEquation_3C_20DIM_20_3E_map">
+<area href="classoomph_1_1GeneralisedNewtonianConstitutiveEquation.html" title="A Base class defining the generalise Newtonian constitutive relation." alt="oomph::GeneralisedNewtonianConstitutiveEquation&lt; DIM &gt;" shape="rect" coords="0,0,373,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a37aecc4b74de5f30b57ad56f237d9079"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#a37aecc4b74de5f30b57ad56f237d9079">HerschelBulkleyMenDutRegConstitutiveEquation</a> (double *yield_stress_pt, double *flow_index_pt, double *zero_shear_viscosity_pt)</td></tr>
+<tr class="memdesc:a37aecc4b74de5f30b57ad56f237d9079"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Exponentially regularised" Herschel Bulkley constitutive equation  <a href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#a37aecc4b74de5f30b57ad56f237d9079">More...</a><br /></td></tr>
+<tr class="separator:a37aecc4b74de5f30b57ad56f237d9079"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd2e8cb9f733c39736294631dabe61dd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#acd2e8cb9f733c39736294631dabe61dd">viscosity</a> (const double &amp;second_invariant_of_rate_of_strain_tensor)</td></tr>
+<tr class="memdesc:acd2e8cb9f733c39736294631dabe61dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Viscosity ratio as a fct of strain rate invariant.  <a href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#acd2e8cb9f733c39736294631dabe61dd">More...</a><br /></td></tr>
+<tr class="separator:acd2e8cb9f733c39736294631dabe61dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7329879e20bf130cfb1f94d19d62b440"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#a7329879e20bf130cfb1f94d19d62b440">dviscosity_dinvariant</a> (const double &amp;second_invariant_of_rate_of_strain_tensor)</td></tr>
+<tr class="memdesc:a7329879e20bf130cfb1f94d19d62b440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deriv of viscosity w.r.t. strain rate invariant.  <a href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#a7329879e20bf130cfb1f94d19d62b440">More...</a><br /></td></tr>
+<tr class="separator:a7329879e20bf130cfb1f94d19d62b440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1GeneralisedNewtonianConstitutiveEquation"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1GeneralisedNewtonianConstitutiveEquation')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1GeneralisedNewtonianConstitutiveEquation.html">oomph::GeneralisedNewtonianConstitutiveEquation&lt; DIM &gt;</a></td></tr>
+<tr class="memitem:a4b84eb3626aaed2f77f6dc96258f7e01 inherit pub_methods_classoomph_1_1GeneralisedNewtonianConstitutiveEquation"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedNewtonianConstitutiveEquation.html#a4b84eb3626aaed2f77f6dc96258f7e01">GeneralisedNewtonianConstitutiveEquation</a> ()</td></tr>
+<tr class="memdesc:a4b84eb3626aaed2f77f6dc96258f7e01 inherit pub_methods_classoomph_1_1GeneralisedNewtonianConstitutiveEquation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="classoomph_1_1GeneralisedNewtonianConstitutiveEquation.html#a4b84eb3626aaed2f77f6dc96258f7e01">More...</a><br /></td></tr>
+<tr class="separator:a4b84eb3626aaed2f77f6dc96258f7e01 inherit pub_methods_classoomph_1_1GeneralisedNewtonianConstitutiveEquation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85f107604d04e8fdaf03e8274c485e6 inherit pub_methods_classoomph_1_1GeneralisedNewtonianConstitutiveEquation"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedNewtonianConstitutiveEquation.html#af85f107604d04e8fdaf03e8274c485e6">~GeneralisedNewtonianConstitutiveEquation</a> ()</td></tr>
+<tr class="memdesc:af85f107604d04e8fdaf03e8274c485e6 inherit pub_methods_classoomph_1_1GeneralisedNewtonianConstitutiveEquation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1GeneralisedNewtonianConstitutiveEquation.html#af85f107604d04e8fdaf03e8274c485e6">More...</a><br /></td></tr>
+<tr class="separator:af85f107604d04e8fdaf03e8274c485e6 inherit pub_methods_classoomph_1_1GeneralisedNewtonianConstitutiveEquation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aaf7844f5794416ec2e625bf6c326b34f"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#aaf7844f5794416ec2e625bf6c326b34f">Yield_stress_pt</a></td></tr>
+<tr class="memdesc:aaf7844f5794416ec2e625bf6c326b34f"><td class="mdescLeft">&#160;</td><td class="mdescRight">yield stress tau_y  <a href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#aaf7844f5794416ec2e625bf6c326b34f">More...</a><br /></td></tr>
+<tr class="separator:aaf7844f5794416ec2e625bf6c326b34f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb825a9e34ad0ab06023bfcfe6425f7d"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#adb825a9e34ad0ab06023bfcfe6425f7d">Flow_index_pt</a></td></tr>
+<tr class="memdesc:adb825a9e34ad0ab06023bfcfe6425f7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">power law index n  <a href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#adb825a9e34ad0ab06023bfcfe6425f7d">More...</a><br /></td></tr>
+<tr class="separator:adb825a9e34ad0ab06023bfcfe6425f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe037e5299047cce1ef25e2ea1aebe3f"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#abe037e5299047cce1ef25e2ea1aebe3f">Zero_shear_viscosity_pt</a></td></tr>
+<tr class="memdesc:abe037e5299047cce1ef25e2ea1aebe3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the viscosity at zero shear rate  <a href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html#abe037e5299047cce1ef25e2ea1aebe3f">More...</a><br /></td></tr>
+<tr class="separator:abe037e5299047cce1ef25e2ea1aebe3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;unsigned DIM&gt;<br />
+class oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;</h3>
+
+<p>A <a class="el" href="classoomph_1_1GeneralisedNewtonianConstitutiveEquation.html" title="A Base class defining the generalise Newtonian constitutive relation.">GeneralisedNewtonianConstitutiveEquation</a> class defining a Herschel-Bulkley fluid using Mendes and Dutra's (2004) regularisation </p>
+
+<p class="definition">Definition at line <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00568">568</a> of file <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html">generalised_newtonian_constitutive_models.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a37aecc4b74de5f30b57ad56f237d9079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37aecc4b74de5f30b57ad56f237d9079">&#9670;&nbsp;</a></span>HerschelBulkleyMenDutRegConstitutiveEquation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html">oomph::HerschelBulkleyMenDutRegConstitutiveEquation</a>&lt; DIM &gt;::<a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html">HerschelBulkleyMenDutRegConstitutiveEquation</a> </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>yield_stress_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>flow_index_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>zero_shear_viscosity_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>"Exponentially regularised" Herschel Bulkley constitutive equation </p>
+
+<p class="definition">Definition at line <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00587">587</a> of file <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html">generalised_newtonian_constitutive_models.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7329879e20bf130cfb1f94d19d62b440"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7329879e20bf130cfb1f94d19d62b440">&#9670;&nbsp;</a></span>dviscosity_dinvariant()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html">oomph::HerschelBulkleyMenDutRegConstitutiveEquation</a>&lt; DIM &gt;::dviscosity_dinvariant </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>second_invariant_of_rate_of_strain_tensor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deriv of viscosity w.r.t. strain rate invariant. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1GeneralisedNewtonianConstitutiveEquation.html#ad0164e6ca57cc986048346e12c4d353a">oomph::GeneralisedNewtonianConstitutiveEquation&lt; DIM &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00627">627</a> of file <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html">generalised_newtonian_constitutive_models.h</a>.</p>
+
+<p class="reference">References <a class="el" href="orthpoly_8h_source.html#l00053">oomph::Orthpoly::eps</a>, <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00577">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::Flow_index_pt</a>, <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00574">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::Yield_stress_pt</a>, and <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00580">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::Zero_shear_viscosity_pt</a>.</p>
+
+</div>
+</div>
+<a id="acd2e8cb9f733c39736294631dabe61dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd2e8cb9f733c39736294631dabe61dd">&#9670;&nbsp;</a></span>viscosity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html">oomph::HerschelBulkleyMenDutRegConstitutiveEquation</a>&lt; DIM &gt;::viscosity </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>second_invariant_of_rate_of_strain_tensor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Viscosity ratio as a fct of strain rate invariant. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1GeneralisedNewtonianConstitutiveEquation.html#a3e6d811786e39ca3c3a9b1c46249442f">oomph::GeneralisedNewtonianConstitutiveEquation&lt; DIM &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00594">594</a> of file <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html">generalised_newtonian_constitutive_models.h</a>.</p>
+
+<p class="reference">References <a class="el" href="orthpoly_8h_source.html#l00053">oomph::Orthpoly::eps</a>, <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00577">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::Flow_index_pt</a>, <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00574">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::Yield_stress_pt</a>, and <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00580">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::Zero_shear_viscosity_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="adb825a9e34ad0ab06023bfcfe6425f7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb825a9e34ad0ab06023bfcfe6425f7d">&#9670;&nbsp;</a></span>Flow_index_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html">oomph::HerschelBulkleyMenDutRegConstitutiveEquation</a>&lt; DIM &gt;::Flow_index_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>power law index n </p>
+
+<p class="definition">Definition at line <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00577">577</a> of file <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html">generalised_newtonian_constitutive_models.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00627">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::dviscosity_dinvariant()</a>, and <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00594">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::viscosity()</a>.</p>
+
+</div>
+</div>
+<a id="aaf7844f5794416ec2e625bf6c326b34f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf7844f5794416ec2e625bf6c326b34f">&#9670;&nbsp;</a></span>Yield_stress_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html">oomph::HerschelBulkleyMenDutRegConstitutiveEquation</a>&lt; DIM &gt;::Yield_stress_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>yield stress tau_y </p>
+
+<p class="definition">Definition at line <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00574">574</a> of file <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html">generalised_newtonian_constitutive_models.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00627">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::dviscosity_dinvariant()</a>, and <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00594">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::viscosity()</a>.</p>
+
+</div>
+</div>
+<a id="abe037e5299047cce1ef25e2ea1aebe3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe037e5299047cce1ef25e2ea1aebe3f">&#9670;&nbsp;</a></span>Zero_shear_viscosity_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classoomph_1_1HerschelBulkleyMenDutRegConstitutiveEquation.html">oomph::HerschelBulkleyMenDutRegConstitutiveEquation</a>&lt; DIM &gt;::Zero_shear_viscosity_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the viscosity at zero shear rate </p>
+
+<p class="definition">Definition at line <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00580">580</a> of file <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html">generalised_newtonian_constitutive_models.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00627">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::dviscosity_dinvariant()</a>, and <a class="el" href="generalised__newtonian__constitutive__models_8h_source.html#l00594">oomph::HerschelBulkleyMenDutRegConstitutiveEquation&lt; DIM &gt;::viscosity()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="generalised__newtonian__constitutive__models_8h_source.html">generalised_newtonian_constitutive_models.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:45
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

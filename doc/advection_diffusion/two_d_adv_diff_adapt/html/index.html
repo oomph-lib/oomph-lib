@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Adaptive solution of the 2D advection diffusion equation</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: Adaptive solution of the 2D advection diffusion equation </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we discuss the adaptive solution of the 2D advection-diffusion problem</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>Two-dimensional advection-diffusion problem in a rectangular domain</b> </center><p> Solve </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{Pe}\ \sum_{i=1}^2 w_i \left(x_1,x_2\right) \frac{\partial u}{\partial x_i} = \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} + f(x_1,x_2), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_0.png"/>
+</p>
+<p> in the rectangular domain <img class="formulaInl" alt="$D =\left\{ (x_1,x_2) \in [0,1] \times [0,2]\right\}$" src="form_1.png"/>, with Dirichlet boundary conditions </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. u\right|_{\partial D}=u_0, \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_2.png"/>
+</p>
+<p class="endtd">where the <em>Peclet</em> <em>number</em>, <img class="formulaInl" alt="$ \mbox{Pe} $" src="form_3.png"/> the boundary values, <img class="formulaInl" alt="$ u_0$" src="form_4.png"/>, the source function <img class="formulaInl" alt="$ f(x_1,x_2),$" src="form_5.png"/> <br  />
+ and the components of the "wind" <img class="formulaInl" alt="$ w_i(x_1,x_2) \ (i=1,2)$" src="form_6.png"/> are given.   </p>
+</td></tr>
+</table>
+<br  />
+ </center><p> <br  />
+</p>
+<p>We choose the forcing function and the boundary conditions such that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)), \ \ \ \ \ \ \ \ \ (3) \]" src="form_7.png"/>
+</p>
+<p> is the exact solution of the problem. For large values of <img class="formulaInl" alt="$ \alpha, $" src="form_8.png"/> the exact solution approaches a step, oriented at an angle <img class="formulaInl" alt="$\Phi$" src="form_9.png"/> against the <img class="formulaInl" alt="$x_1-$" src="form_10.png"/>axis.</p>
+<p>In the computations we will impose the "wind" </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathbf{w}\left(x_1,x_2 \right) = \left( \begin{array}{c} \sin(6x_2) \\ \cos(6x_1) \end{array} \right), \ \ \ \ \ \ \ \ \ (4) \]" src="form_11.png"/>
+</p>
+<p> illustrated in this vector plot:</p>
+<div class="image">
+<img src="wind.gif" alt=""/>
+<div class="caption">
+Plot of the wind. </div></div>
+ <p>The graph below shows a plot of the solution, computed at various levels of mesh adaptation, for <img class="formulaInl" alt="$\Phi=45^\circ, \ \alpha=50 $" src="form_12.png"/> and a Peclet number of <img class="formulaInl" alt="$ Pe = 200.$" src="form_13.png"/></p>
+<div class="image">
+<img src="step_soln.gif" alt=""/>
+<div class="caption">
+Plot of the forced solution at different levels of mesh refinement. </div></div>
+ <p>More interesting is the following plot which shows the solution for the same parameter values and boundary conditions, but for a zero forcing function, <img class="formulaInl" alt="$ f\equiv 0. $" src="form_14.png"/></p>
+<div class="image">
+<img src="unforced_soln.gif" alt=""/>
+<div class="caption">
+Plot of the unforced solution at different levels of mesh refinement. </div></div>
+ <p>The plot nicely illustrates the physical effects represented by the (unforced) advection diffusion equation. If <img class="formulaInl" alt="$ u(x_1,x_2) $" src="form_15.png"/> represents the concentration of a chemical that is advected by the velocity field <img class="formulaInl" alt="$ {\bf w}$" src="form_16.png"/>, while being dispersed by molecular diffusion, the advection-diffusion equation describes the steady-state concentration of this chemical. In this context the Peclet number is a measure of the relative importance of advective and diffusive effects. For very small Peclet number, the concentration is determined predominantly by diffusive effects &ndash; as <img class="formulaInl" alt="$ \mbox{Pe} \to 0$" src="form_17.png"/>, the advection diffusion equation approaches the Poisson equation. Conversely, at large values of the Peclet number, the concentration is determined predominantly by advective effects. The chemical is "swept along" by the flow and diffusive effects are only important in thin "boundary" or "shear" layers in which the concentration varies over short lengthscales. These can be seen clearly in the most finely resolved solution above.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>Overall, the structure of the driver code is very similar to that in the <a href="../../../poisson/two_d_poisson/html/index.html">corresponding Poisson example</a>. The only difference is that we have to specify function pointers to the source and the "wind" functions, which are passed to the problem constructor. We create the problem, perform a self-test, set the global parameters that affect the solution and solve the problem using <code>oomph-lib's</code> "black-box" adaptive Newton solver.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===== start_of_main=====================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for 2D AdvectionDiffusion problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="two__d__adv__diff__adapt_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> <span class="comment">//------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create the problem with 2D nine-node refineable elements from the</span></div>
+<div class="line"> <span class="comment">// RefineableQuadAdvectionDiffusionElement family. Pass pointer to </span></div>
+<div class="line"> <span class="comment">// source and wind function. </span></div>
+<div class="line"> <a class="code" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt;RefineableQAdvectionDiffusionElement&lt;2,</div>
+<div class="line">  3&gt; &gt; <a class="code" href="two__d__adv__diff__adapt_8txt.html#a324468ffa84fee5e9c1f91c323c12672">problem</a>(&amp;<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#aaa1aa95713b02b211812fdd18eeaa369">TanhSolnForAdvectionDiffusion::source_function</a>,</div>
+<div class="line">               &amp;<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#ab40e93031d34986762c69616c3c8b065">TanhSolnForAdvectionDiffusion::wind_function</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check if we&#39;re ready to go:</span></div>
+<div class="line"> <span class="comment">//----------------------------</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\n\n\nProblem self-test &quot;</span>;</div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code" href="two__d__adv__diff__adapt_8txt.html#a324468ffa84fee5e9c1f91c323c12672">problem</a>.self_test()==0) </div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;passed: Problem can be solved.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(<span class="stringliteral">&quot;Self test failed&quot;</span>,</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the orientation of the &quot;step&quot; to 45 degrees</span></div>
+<div class="line"> <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanhSolnForAdvectionDiffusion::TanPhi</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Choose a large value for the steepness of the &quot;step&quot;</span></div>
+<div class="line"> <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">TanhSolnForAdvectionDiffusion::Alpha</a>=50.0; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve the problem, performing up to 4 adptive refinements</span></div>
+<div class="line"> <a class="code" href="two__d__adv__diff__adapt_8txt.html#a324468ffa84fee5e9c1f91c323c12672">problem</a>.newton_solve(4);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output the solution</span></div>
+<div class="line"> <a class="code" href="two__d__adv__diff__adapt_8txt.html#a324468ffa84fee5e9c1f91c323c12672">problem</a>.doc_solution();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+</div><!-- fragment --><hr  />
+<p> <br  />
+ </p><hr  />
+<h1><a class="anchor" id="global"></a>
+Global parameters and functions</h1>
+<p>The specification of the source function and the exact solution in the namespace <code><a class="el" href="namespaceTanhSolnForAdvectionDiffusion.html">TanhSolnForAdvectionDiffusion</a></code> is similar to that for the <a href="../../../poisson/two_d_poisson/html/index.html#global">Poisson examples.</a> The only difference is the inclusion of the Peclet number and the "wind" function.</p>
+ <div class="fragment"><div class="line"><span class="comment">//======start_of_namespace============================================</span></div>
+<div class="line"><span class="comment">/// Namespace for exact solution for AdvectionDiffusion equation </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// with &quot;sharp&quot; step </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html">TanhSolnForAdvectionDiffusion</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Peclet number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#aeba486af70e92ab7eec1da3ce44d51ee">Peclet</a>=200.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Parameter for steepness of step</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Parameter for angle of step</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exact solution as a Vector</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#ae4c9ed0a4f123ec8e634f0cc45bfcebc">get_exact_u</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  u[0]=tanh(1.0-<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*(<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>*x[0]-x[1]));</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exact solution as a scalar</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#ae4c9ed0a4f123ec8e634f0cc45bfcebc">get_exact_u</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  u=tanh(1.0-<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*(<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>*x[0]-x[1]));</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Source function required to make the solution above an exact solution </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#aaa1aa95713b02b211812fdd18eeaa369">source_function</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x_vect, <span class="keywordtype">double</span>&amp; source)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">double</span> x=x_vect[0];</div>
+<div class="line">  <span class="keywordtype">double</span> y=x_vect[1];</div>
+<div class="line">  source = </div>
+<div class="line">2.0*tanh(-0.1E1+<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*(<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>*x-y))*(1.0-pow(tanh(-0.1E1+<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*(</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>*x-y)),2.0))*<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>*<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>+2.0*tanh(-0.1E1+<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*(<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>*x-y)</div>
+<div class="line">)*(1.0-pow(tanh(-0.1E1+<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*(<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>*x-y)),2.0))*<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>-<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#aeba486af70e92ab7eec1da3ce44d51ee">Peclet</a>*(-sin(6.0*y</div>
+<div class="line">)*(1.0-pow(tanh(-0.1E1+<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*(<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>*x-y)),2.0))*<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>+cos(6.0*x)*(1.0-</div>
+<div class="line">pow(tanh(-0.1E1+<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>*(<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanPhi</a>*x-y)),2.0))*<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">Alpha</a>);</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Wind</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#ab40e93031d34986762c69616c3c8b065">wind_function</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; wind)</div>
+<div class="line"> {</div>
+<div class="line">  wind[0]=sin(6.0*x[1]);</div>
+<div class="line">  wind[1]=cos(6.0*x[0]);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class is very similar to those used in the corresponding <a href="../../../poisson/two_d_poisson/html/index.html#problem">Poisson examples.</a> The only change is that we use the function <code>Problem::actions_before_adapt()</code> to document the progress of the automatic spatial adaptation. For this purpose, we store a <code>DocInfo</code> as private member data in the <code>Problem</code>. This allows us to increment the counter that labels the output files, accessible from <code>DocInfo::number()</code>, whenever a new solution has been documented.</p>
+ <div class="fragment"><div class="line"><span class="comment">//====== start_of_problem_class=======================================</span></div>
+<div class="line"><span class="comment">/// 2D AdvectionDiffusion problem on rectangular domain, discretised </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// with refineable 2D QAdvectionDiffusion elements. The specific type</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// of element is specified via the template parameter.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass pointer to source and wind functions</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a515147bf0907ad339811955edb89817c">RefineableAdvectionDiffusionProblem</a>(</div>
+<div class="line">  AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionSourceFctPt source_fct_pt,</div>
+<div class="line">  AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionWindFctPt wind_fct_pt);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor. Empty</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classRefineableAdvectionDiffusionProblem.html#ae746646f6c255dca13e5abe9fcf85fe3">~RefineableAdvectionDiffusionProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve: Reset boundary conditions</span></div>
+<div class="line"><span class="comment"> /// to the values from the tanh solution.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a7cbcaa45fd7e932f335cc07a83b4d3e2">actions_before_newton_solve</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a949296e60bc661fbd523974055a93f8b">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before adapt: Document the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a3470a408c458e5500ac614b8f0e65634">actions_before_adapt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Doc the solution</span></div>
+<div class="line">   <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a735d7fdd587d4730ffe1113b11ca3b56">doc_solution</a>();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Increment label for output files</span></div>
+<div class="line">   <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a42bd65f40095a70a103ee900e7614b19">Doc_info</a>.number()++;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Doc the solution.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a735d7fdd587d4730ffe1113b11ca3b56">doc_solution</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Overloaded version of the problem&#39;s access function to </span></div>
+<div class="line"><span class="comment"> /// the mesh. Recasts the pointer to the base Mesh object to </span></div>
+<div class="line"><span class="comment"> /// the actual mesh type.</span></div>
+<div class="line"><span class="comment"></span> RefineableRectangularQuadMesh&lt;ELEMENT&gt;* <a class="code" href="classRefineableAdvectionDiffusionProblem.html#abe616b5b3d3e4d3c0d3be777e3b3ac34">mesh_pt</a>() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>RefineableRectangularQuadMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// DocInfo object</span></div>
+<div class="line"><span class="comment"></span> DocInfo <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a42bd65f40095a70a103ee900e7614b19">Doc_info</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to source function</span></div>
+<div class="line"><span class="comment"></span> AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionSourceFctPt <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a8fa313562d365965e24282c2e11a8ec6">Source_fct_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to wind function</span></div>
+<div class="line"><span class="comment"></span> AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionWindFctPt <a class="code" href="classRefineableAdvectionDiffusionProblem.html#ab52483c93bacbb9521aaaf52680be996">Wind_fct_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>The constructor is practically identical to the constructors used in the various <a href="../../../poisson/two_d_poisson/html/index.html#constructor">Poisson examples.</a> We specify the output directory in the <code>Problem's</code> <code>DocInfo</code> object, create the mesh and an error estimator, and apply the boundary conditions by pinning the nodal values on the Dirichlet boundaries.</p>
+<div class="fragment"><div class="line"><span class="comment">//=====start_of_constructor===============================================</span></div>
+<div class="line"><span class="comment">/// \short Constructor for AdvectionDiffusion problem: Pass pointer to </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// source function.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classRefineableAdvectionDiffusionProblem.html#a515147bf0907ad339811955edb89817c">RefineableAdvectionDiffusionProblem&lt;ELEMENT&gt;::RefineableAdvectionDiffusionProblem</a>(</div>
+<div class="line"> AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionSourceFctPt source_fct_pt,</div>
+<div class="line"> AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionWindFctPt wind_fct_pt)</div>
+<div class="line">       :  Source_fct_pt(source_fct_pt), Wind_fct_pt(wind_fct_pt)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> Doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_x=4;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_y=4;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in x-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_x=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_y=2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build and assign mesh</span></div>
+<div class="line"> Problem::mesh_pt() = </div>
+<div class="line">  <span class="keyword">new</span> RefineableRectangularQuadMesh&lt;ELEMENT&gt;(n_x,n_y,l_x,l_y);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create/set error estimator</span></div>
+<div class="line"> mesh_pt()-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- only need to pin the ones that have Dirichlet </span></div>
+<div class="line"> <span class="comment">// conditions here</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0); </div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+</div><!-- fragment --><p>We complete the problem setup by passing the function pointers to the source and wind functions, and the pointer to the Peclet number to the elements. Finally, we set up the equation numbering scheme.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by the (argument-free!) ELEMENT </span></div>
+<div class="line"> <span class="comment">// constructor: Pass pointer to source function</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralsedElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   el_pt-&gt;source_fct_pt() = Source_fct_pt;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the wind function pointer</span></div>
+<div class="line">   el_pt-&gt;wind_fct_pt() = Wind_fct_pt;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the Peclet number</span></div>
+<div class="line">   el_pt-&gt;pe_pt() = &amp;<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#aeba486af70e92ab7eec1da3ce44d51ee">TanhSolnForAdvectionDiffusion::Peclet</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="actions_before"></a>
+Actions before solve</h1>
+<p>As before, we use the <code>Problem::actions_before_newton_solve()</code> function to set/update the boundary conditions.</p>
+<div class="fragment"><div class="line"><span class="comment">//========================================start_of_actions_before_newton_solve===</span></div>
+<div class="line"><span class="comment">/// Update the problem specs before solve: (Re-)set boundary conditions</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// to the values from the tanh solution.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a7cbcaa45fd7e932f335cc07a83b4d3e2">RefineableAdvectionDiffusionProblem&lt;ELEMENT&gt;::actions_before_newton_solve</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many boundaries are there?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the boundaries</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// How many nodes are there on this boundary?</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over the nodes on boundary</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to node</span></div>
+<div class="line">     Node* nod_pt=mesh_pt()-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Extract nodal coordinates from node:</span></div>
+<div class="line">     Vector&lt;double&gt; x(2);</div>
+<div class="line">     x[0]=nod_pt-&gt;x(0);</div>
+<div class="line">     x[1]=nod_pt-&gt;x(1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Compute the value of the exact solution at the nodal point</span></div>
+<div class="line">     Vector&lt;double&gt; u(1);</div>
+<div class="line">     <a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#ae4c9ed0a4f123ec8e634f0cc45bfcebc">TanhSolnForAdvectionDiffusion::get_exact_u</a>(x,u);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Assign the value to the one (and only) nodal value at this node</span></div>
+<div class="line">     nod_pt-&gt;set_value(0,u[0]);</div>
+<div class="line">    }</div>
+<div class="line">  } </div>
+<div class="line">}  <span class="comment">// end of actions before solve</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The function <code>doc_solution(...)</code> is identical to that in the <a href="../../../poisson/two_d_poisson/html/index.html#doc">Poisson example.</a> We output the solution, the exact solution and the error.</p>
+<div class="fragment"><div class="line"><span class="comment">//===============start_of_doc=============================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classRefineableAdvectionDiffusionProblem.html#a735d7fdd587d4730ffe1113b11ca3b56">RefineableAdvectionDiffusionProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points: npts x npts</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output_fct(some_file,npts,<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#ae4c9ed0a4f123ec8e634f0cc45bfcebc">TanhSolnForAdvectionDiffusion::get_exact_u</a>); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error and return of the square of the L2 error</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------------</span></div>
+<div class="line"> <span class="keywordtype">double</span> error,norm;</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/error%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;compute_error(some_file,<a class="code" href="namespaceTanhSolnForAdvectionDiffusion.html#ae4c9ed0a4f123ec8e634f0cc45bfcebc">TanhSolnForAdvectionDiffusion::get_exact_u</a>,</div>
+<div class="line">                          error,norm); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc L2 error and norm of solution</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\nNorm of error   : &quot;</span> &lt;&lt; sqrt(error) &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Norm of solution: &quot;</span> &lt;&lt; sqrt(norm) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="com"></a>
+Comments and Exercises</h1>
+<ol type="1">
+<li>Explore the change in the character of the solution of the unforced problem when the Peclet number is slowly increased from 0 to 200, say. Note how at small Peclet number, strong diffusive effects smooth out the rapid spatial variations imposed by the boundary conditions. Conversely, at large values of the Peclet number, the behaviour is dominated by advective effects. As a result, in regions where the "wind" is directed into the domain, the value of <img class="formulaInl" alt="$ u $" src="form_18.png"/> set by the Dirichlet boundary conditions is "swept" into the domain. In regions where the "wind" is directed out of the domain, the value of <img class="formulaInl" alt="$ u $" src="form_18.png"/> "swept along" by the flow in the interior "clashes" with the value prescribed by the boundary conditions and the solution adjusts itself over a very short length scale, leading to the development of thin "boundary layers".</li>
+<li>Explore the character of the solution on coarse meshes at large and small Peclet numbers. Note how at large Peclet numbers the solution on the coarse meshes displays strong "wiggles" throughout the domain. These only disappear once the mesh adaptation fully resolves the regions of rapid variation. We will explore this issue further in <a href="../../two_d_adv_diff_SUPG/html/index.html">another example.</a></li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/advection_diffusion/two_d_adv_diff_adapt/">demo_drivers/advection_diffusion/two_d_adv_diff_adapt/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/advection_diffusion/two_d_adv_diff_adapt/two_d_adv_diff_adapt.cc">demo_drivers/advection_diffusion/two_d_adv_diff_adapt/two_d_adv_diff_adapt.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_a735d7fdd587d4730ffe1113b11ca3b56"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#a735d7fdd587d4730ffe1113b11ca3b56">RefineableAdvectionDiffusionProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00277">two_d_adv_diff_adapt.cc:277</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForAdvectionDiffusion_html_a236bf82c661189623706b7c9d9b0c52f"><div class="ttname"><a href="namespaceTanhSolnForAdvectionDiffusion.html#a236bf82c661189623706b7c9d9b0c52f">TanhSolnForAdvectionDiffusion::TanPhi</a></div><div class="ttdeci">double TanPhi</div><div class="ttdoc">Parameter for angle of step.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00056">two_d_adv_diff_adapt.cc:56</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForAdvectionDiffusion_html_ab40e93031d34986762c69616c3c8b065"><div class="ttname"><a href="namespaceTanhSolnForAdvectionDiffusion.html#ab40e93031d34986762c69616c3c8b065">TanhSolnForAdvectionDiffusion::wind_function</a></div><div class="ttdeci">void wind_function(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;wind)</div><div class="ttdoc">Wind.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00084">two_d_adv_diff_adapt.cc:84</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00102">two_d_adv_diff_adapt.cc:102</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForAdvectionDiffusion_html_aeba486af70e92ab7eec1da3ce44d51ee"><div class="ttname"><a href="namespaceTanhSolnForAdvectionDiffusion.html#aeba486af70e92ab7eec1da3ce44d51ee">TanhSolnForAdvectionDiffusion::Peclet</a></div><div class="ttdeci">double Peclet</div><div class="ttdoc">Peclet number.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00050">two_d_adv_diff_adapt.cc:50</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_ae746646f6c255dca13e5abe9fcf85fe3"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#ae746646f6c255dca13e5abe9fcf85fe3">RefineableAdvectionDiffusionProblem::~RefineableAdvectionDiffusionProblem</a></div><div class="ttdeci">~RefineableAdvectionDiffusionProblem()</div><div class="ttdoc">Destructor. Empty.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00113">two_d_adv_diff_adapt.cc:113</a></div></div>
+<div class="ttc" id="atwo__d__adv__diff__adapt_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="two__d__adv__diff__adapt_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver code for 2D AdvectionDiffusion problem.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00322">two_d_adv_diff_adapt.cc:322</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForAdvectionDiffusion_html"><div class="ttname"><a href="namespaceTanhSolnForAdvectionDiffusion.html">TanhSolnForAdvectionDiffusion</a></div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00046">two_d_adv_diff_adapt.cc:46</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForAdvectionDiffusion_html_aaa1aa95713b02b211812fdd18eeaa369"><div class="ttname"><a href="namespaceTanhSolnForAdvectionDiffusion.html#aaa1aa95713b02b211812fdd18eeaa369">TanhSolnForAdvectionDiffusion::source_function</a></div><div class="ttdeci">void source_function(const Vector&lt; double &gt; &amp;x_vect, double &amp;source)</div><div class="ttdoc">Source function required to make the solution above an exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00071">two_d_adv_diff_adapt.cc:71</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_a7cbcaa45fd7e932f335cc07a83b4d3e2"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#a7cbcaa45fd7e932f335cc07a83b4d3e2">RefineableAdvectionDiffusionProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve: Reset boundary conditions to the values from the tanh solution...</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00239">two_d_adv_diff_adapt.cc:239</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_a8fa313562d365965e24282c2e11a8ec6"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#a8fa313562d365965e24282c2e11a8ec6">RefineableAdvectionDiffusionProblem::Source_fct_pt</a></div><div class="ttdeci">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00150">two_d_adv_diff_adapt.cc:150</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_a3470a408c458e5500ac614b8f0e65634"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#a3470a408c458e5500ac614b8f0e65634">RefineableAdvectionDiffusionProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt: Document the solution.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00123">two_d_adv_diff_adapt.cc:123</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForAdvectionDiffusion_html_a4d202e8ac48cc75f760ef40681402ec7"><div class="ttname"><a href="namespaceTanhSolnForAdvectionDiffusion.html#a4d202e8ac48cc75f760ef40681402ec7">TanhSolnForAdvectionDiffusion::Alpha</a></div><div class="ttdeci">double Alpha</div><div class="ttdoc">Parameter for steepness of step.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00053">two_d_adv_diff_adapt.cc:53</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_abe616b5b3d3e4d3c0d3be777e3b3ac34"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#abe616b5b3d3e4d3c0d3be777e3b3ac34">RefineableAdvectionDiffusionProblem::mesh_pt</a></div><div class="ttdeci">RefineableRectangularQuadMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Overloaded version of the problem's access function to the mesh. Recasts the pointer to the base Mesh...</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00138">two_d_adv_diff_adapt.cc:138</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_a515147bf0907ad339811955edb89817c"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#a515147bf0907ad339811955edb89817c">RefineableAdvectionDiffusionProblem::RefineableAdvectionDiffusionProblem</a></div><div class="ttdeci">RefineableAdvectionDiffusionProblem(AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt source_fct_pt, AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt wind_fct_pt)</div><div class="ttdoc">Constructor: Pass pointer to source and wind functions.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00164">two_d_adv_diff_adapt.cc:164</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_ab52483c93bacbb9521aaaf52680be996"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#ab52483c93bacbb9521aaaf52680be996">RefineableAdvectionDiffusionProblem::Wind_fct_pt</a></div><div class="ttdeci">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt Wind_fct_pt</div><div class="ttdoc">Pointer to wind function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00153">two_d_adv_diff_adapt.cc:153</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_a42bd65f40095a70a103ee900e7614b19"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#a42bd65f40095a70a103ee900e7614b19">RefineableAdvectionDiffusionProblem::Doc_info</a></div><div class="ttdeci">DocInfo Doc_info</div><div class="ttdoc">DocInfo object.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00147">two_d_adv_diff_adapt.cc:147</a></div></div>
+<div class="ttc" id="atwo__d__adv__diff__adapt_8txt_html_a324468ffa84fee5e9c1f91c323c12672"><div class="ttname"><a href="two__d__adv__diff__adapt_8txt.html#a324468ffa84fee5e9c1f91c323c12672">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8txt_source.html#l00016">two_d_adv_diff_adapt.txt:16</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForAdvectionDiffusion_html_ae4c9ed0a4f123ec8e634f0cc45bfcebc"><div class="ttname"><a href="namespaceTanhSolnForAdvectionDiffusion.html#ae4c9ed0a4f123ec8e634f0cc45bfcebc">TanhSolnForAdvectionDiffusion::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00059">two_d_adv_diff_adapt.cc:59</a></div></div>
+<div class="ttc" id="aclassRefineableAdvectionDiffusionProblem_html_a949296e60bc661fbd523974055a93f8b"><div class="ttname"><a href="classRefineableAdvectionDiffusionProblem.html#a949296e60bc661fbd523974055a93f8b">RefineableAdvectionDiffusionProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__adapt_8cc_source.html#l00120">two_d_adv_diff_adapt.cc:120</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:13:25
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

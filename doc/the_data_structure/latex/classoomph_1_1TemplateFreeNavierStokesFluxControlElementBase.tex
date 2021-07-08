@@ -1,0 +1,164 @@
+\hypertarget{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase}{}\doxysection{oomph\+::Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base Class Reference}
+\label{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase}\index{oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}}
+
+
+{\ttfamily \#include $<$navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a40aa0d1bfde79887f6203474478acbb7}{Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a42ebf77b9062c9eb84236e03f9f6ad3d}{$\sim$\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a32bc6e84461a78a1637f05f0a2e2185a}{get\+\_\+volume\+\_\+flux}} ()=0
+\begin{DoxyCompactList}\small\item\em Pure virtual function to calculate integral of the volume flux. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a494ba420ccfba69e09cd6a6e7dc7225c}{add\+\_\+pressure\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$pressure\+\_\+data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Function adds to the external data the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a9b36749e5dd3d4932609f6e050d5b343}{pressure\+\_\+data\+\_\+id}} ()
+\begin{DoxyCompactList}\small\item\em Access function gives id of external \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_aa2241fa9932f0e17286c2f8c02811b1a}{Pressure\+\_\+data\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Id of external \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A template free base class for an element to imposes an applied boundary pressure to the Navier-\/\+Stokes equations in order to control a volume flux when used in conjunction with a \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}} or \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}}). ~\newline
+ 
+
+Definition at line 54 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a40aa0d1bfde79887f6203474478acbb7}\label{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a40aa0d1bfde79887f6203474478acbb7}} 
+\index{oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}!TemplateFreeNavierStokesFluxControlElementBase@{TemplateFreeNavierStokesFluxControlElementBase}}
+\index{TemplateFreeNavierStokesFluxControlElementBase@{TemplateFreeNavierStokesFluxControlElementBase}!oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}}
+\doxysubsubsection{\texorpdfstring{TemplateFreeNavierStokesFluxControlElementBase()}{TemplateFreeNavierStokesFluxControlElementBase()}}
+{\footnotesize\ttfamily oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line 60 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a42ebf77b9062c9eb84236e03f9f6ad3d}\label{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a42ebf77b9062c9eb84236e03f9f6ad3d}} 
+\index{oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}!````~TemplateFreeNavierStokesFluxControlElementBase@{$\sim$TemplateFreeNavierStokesFluxControlElementBase}}
+\index{````~TemplateFreeNavierStokesFluxControlElementBase@{$\sim$TemplateFreeNavierStokesFluxControlElementBase}!oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}}
+\doxysubsubsection{\texorpdfstring{$\sim$TemplateFreeNavierStokesFluxControlElementBase()}{~TemplateFreeNavierStokesFluxControlElementBase()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::$\sim$\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line 63 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a494ba420ccfba69e09cd6a6e7dc7225c}\label{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a494ba420ccfba69e09cd6a6e7dc7225c}} 
+\index{oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}!add\_pressure\_data@{add\_pressure\_data}}
+\index{add\_pressure\_data@{add\_pressure\_data}!oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}}
+\doxysubsubsection{\texorpdfstring{add\_pressure\_data()}{add\_pressure\_data()}}
+{\footnotesize\ttfamily void oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::add\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$}]{pressure\+\_\+data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function adds to the external data the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the element. 
+
+
+
+Definition at line 70 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), and Pressure\+\_\+data\+\_\+id.
+
+
+
+Referenced by oomph\+::\+Net\+Flux\+Control\+Element\+::\+Net\+Flux\+Control\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a32bc6e84461a78a1637f05f0a2e2185a}\label{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a32bc6e84461a78a1637f05f0a2e2185a}} 
+\index{oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}!get\_volume\_flux@{get\_volume\_flux}}
+\index{get\_volume\_flux@{get\_volume\_flux}!oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}}
+\doxysubsubsection{\texorpdfstring{get\_volume\_flux()}{get\_volume\_flux()}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::get\+\_\+volume\+\_\+flux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pure virtual function to calculate integral of the volume flux. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a3a2ff525c8a522dff91efc61c0b52a80}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+
+
+
+Referenced by oomph\+::\+Net\+Flux\+Control\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+control().
+
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a9b36749e5dd3d4932609f6e050d5b343}\label{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_a9b36749e5dd3d4932609f6e050d5b343}} 
+\index{oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}!pressure\_data\_id@{pressure\_data\_id}}
+\index{pressure\_data\_id@{pressure\_data\_id}!oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}}
+\doxysubsubsection{\texorpdfstring{pressure\_data\_id()}{pressure\_data\_id()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::pressure\+\_\+data\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Access function gives id of external \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the element. 
+
+
+
+Definition at line 79 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References Pressure\+\_\+data\+\_\+id.
+
+
+
+Referenced by oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_aa2241fa9932f0e17286c2f8c02811b1a}\label{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase_aa2241fa9932f0e17286c2f8c02811b1a}} 
+\index{oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}!Pressure\_data\_id@{Pressure\_data\_id}}
+\index{Pressure\_data\_id@{Pressure\_data\_id}!oomph::TemplateFreeNavierStokesFluxControlElementBase@{oomph::TemplateFreeNavierStokesFluxControlElementBase}}
+\doxysubsubsection{\texorpdfstring{Pressure\_data\_id}{Pressure\_data\_id}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::\+Pressure\+\_\+data\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Id of external \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the elements. 
+
+
+
+Definition at line 85 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+Referenced by add\+\_\+pressure\+\_\+data(), and pressure\+\_\+data\+\_\+id().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{navier__stokes__flux__control__elements_8h}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: fish_mesh.template.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6c67e72d2f29709d1e2582429aa24112.html">meshes</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">fish_mesh.template.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="fish__mesh_8template_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#ifndef OOMPH_FISH_MESH_HEADER</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define OOMPH_FISH_MESH_HEADER</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Headers</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;../generic/refineable_quad_mesh.h&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;../generic/macro_element.h&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;../generic/domain.h&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;../generic/algebraic_elements.h&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;../generic/quad_mesh.h&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;../generic/macro_element_node_update_element.h&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//Include algebraic elements</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;../generic/algebraic_elements.h&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//Include the macro element node update elements</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;../generic/macro_element_node_update_element.h&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//Include the headers file for domain</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="fish__domain_8h.html">fish_domain.h</a>&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">//=================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/// \short Fish shaped mesh. The geometry is defined by</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/// the Domain object FishDomain.</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span><span class="comment">//=================================================================</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classoomph_1_1FishMesh.html">   55</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> QuadMeshBase</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{ </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> /// \short Constructor: Pass pointer to timestepper</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> /// (defaults to the (Steady) default timestepper defined in Mesh)</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1FishMesh.html#a492c0535a4a0bf97729dfdff3754d211">FishMesh</a>(TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> /// \short Constructor: Pass pointer GeomObject that defines</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> /// the fish&#39;s back and pointer to timestepper</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> /// (defaults to the (Steady) default timestepper defined in Mesh)</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1FishMesh.html#a492c0535a4a0bf97729dfdff3754d211">FishMesh</a>(GeomObject* back_pt, </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;          TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> /// \short Destructor: Kill the geom object that represents the fish&#39;s back</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> /// (if necessary)</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classoomph_1_1FishMesh.html#a3763b9be54c74d15a8c5b2129e0f4fae">   73</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1FishMesh.html#a3763b9be54c74d15a8c5b2129e0f4fae">~FishMesh</a>()</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;   <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1FishMesh.html#ad1dd5a431f711d3ac14498cc6ab4d856">Must_kill_fish_back</a>)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;     <span class="keyword">delete</span> <a class="code" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">Back_pt</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;     <a class="code" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">Back_pt</a>=0;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> /// Access function to geom object that represents the fish&#39;s back</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classoomph_1_1FishMesh.html#aa6d659caf657ce5fd549431fadb009d7">   83</a></span>&#160;<span class="comment"></span> GeomObject*&amp; <a class="code" href="classoomph_1_1FishMesh.html#aa6d659caf657ce5fd549431fadb009d7">fish_back_pt</a>()</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">Back_pt</a>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> /// Access function to FishDomain</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="classoomph_1_1FishMesh.html#ad5076610d83a07e6306375a2632ee460">   90</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1FishDomain.html">FishDomain</a>*&amp; <a class="code" href="classoomph_1_1FishMesh.html#ad5076610d83a07e6306375a2632ee460">domain_pt</a>()</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1FishMesh.html#ae18c3154ad99054c073840c6b134c49b">Domain_pt</a>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"> /// Remesh function ids</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a773d3896b889d4f05ed5902482650da1">   98</a></span>&#160;<span class="comment"></span> <span class="keyword">enum</span>{<a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a3d3771209da5e9d30eedf957678f24fb">Lower_body</a>, <a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62aee1779e3610fcc506554edb97df12b81">Upper_body</a>, <a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a616ba7504cd0d8970e1e275579f5606d">Lower_fin</a>, <a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a773d3896b889d4f05ed5902482650da1">Upper_fin</a>};</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"> /// \short Build the mesh, using the geometric object identified by Back_pt</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FishMesh.html#aabde81364817d938f0924997bf4f63cc">build_mesh</a>(TimeStepper* time_stepper_pt);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> /// Pointer to fish back</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">  104</a></span>&#160;<span class="comment"></span> GeomObject* <a class="code" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">Back_pt</a>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"> /// Pointer to domain</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classoomph_1_1FishMesh.html#ae18c3154ad99054c073840c6b134c49b">  107</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1FishDomain.html">FishDomain</a>* <a class="code" href="classoomph_1_1FishMesh.html#ae18c3154ad99054c073840c6b134c49b">Domain_pt</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"> /// Do I need to kill the fish back geom object?</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classoomph_1_1FishMesh.html#ad1dd5a431f711d3ac14498cc6ab4d856">  110</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1FishMesh.html#ad1dd5a431f711d3ac14498cc6ab4d856">Must_kill_fish_back</a>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"></span><span class="comment">// Refineable fish-shaped mesh</span><span class="comment"></span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">//=================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">/// Refineable fish shaped mesh. The geometry is defined by</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">/// the Domain object FishDomain.</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment"></span><span class="comment">//=============================start_adaptive_fish_mesh============</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableFishMesh.html">  130</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1RefineableFishMesh.html">RefineableFishMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a>&lt;ELEMENT&gt;,  </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                         <span class="keyword">public</span> RefineableQuadMesh&lt;ELEMENT&gt;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;{ </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment"> /// \short Constructor: Pass pointer to timestepper -- defaults to (Steady) </span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment"> /// default timestepper defined in the Mesh base class</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableFishMesh.html#a7f31e65306286e83a5d17459bae9163d">  140</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1RefineableFishMesh.html#a7f31e65306286e83a5d17459bae9163d">RefineableFishMesh</a>(TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper) : </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  <a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a>&lt;ELEMENT&gt;(time_stepper_pt) </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;   <span class="comment">// Nodal positions etc. were created in constructor for</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;   <span class="comment">// FishMesh&lt;...&gt;. Only need to setup adaptive information.</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;   <span class="comment">// Do what it says....</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;   <a class="code" href="classoomph_1_1RefineableFishMesh.html#a1fb10f94f78c7a4e37113fbf4c72f00c">setup_adaptivity</a>();</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  } <span class="comment">// end of constructor</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"> /// \short Constructor: Pass pointer GeomObject that defines</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"> /// the fish&#39;s back and pointer to timestepper</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"> /// (defaults to (Steady) default timestepper defined in Mesh)</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableFishMesh.html#a82bc04aea6deaf2faa7306aa047e12ef">  155</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1RefineableFishMesh.html#a82bc04aea6deaf2faa7306aa047e12ef">RefineableFishMesh</a>(GeomObject* back_pt, </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                  TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  : <a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a>&lt;ELEMENT&gt;(back_pt,time_stepper_pt) </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;   <span class="comment">// Nodal positions etc. were created in constructor for</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;   <span class="comment">// FishMesh&lt;...&gt;. Only need to setup adaptive information.</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;   <span class="comment">// Do what it says....</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;   <a class="code" href="classoomph_1_1RefineableFishMesh.html#a1fb10f94f78c7a4e37113fbf4c72f00c">setup_adaptivity</a>();</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment"> /// \short Destructor: Empty -- all cleanup gets handled in the base</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment"> /// classes</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableFishMesh.html#a8304d093e015001a6d56faebdd2d4636">  168</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1RefineableFishMesh.html#a8304d093e015001a6d56faebdd2d4636">~RefineableFishMesh</a>() {}</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment"> ///\short Setup all the information that&#39;s required for spatial adaptivity:</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment"> /// Set pointers to macro elements and build quadtree forest.</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment"> /// (contained in separate function as this functionality is common</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment"> /// to both constructors),</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineableFishMesh.html#a1fb10f94f78c7a4e37113fbf4c72f00c">setup_adaptivity</a>();</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;}; <span class="comment">// end adaptive fish mesh</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment"></span><span class="comment">// MacroElementNodeUpdate-version of RefineableFishMesh</span><span class="comment"></span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">// Forward declaration</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keyword">class </span>MacroElementNodeUpdateNode;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">/// Refineable fish shaped mesh with MacroElement-based node update.</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">/// The fish&#39;s back is represented by a specified geometric object.</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">/// Some or all of the geometric Data in that geometric object</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">/// may contain unknowns in the global Problem. The dependency</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">/// on these unknowns is taken into account when setting up</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">/// the Jacobian matrix of the elements. For this purpose,</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">/// the element (whose type is specified by the template parameter)</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">/// must inherit from MacroElementNodeUpdateElementBase. </span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html">  204</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html">MacroElementNodeUpdateRefineableFishMesh</a> : </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keyword">public</span> <span class="keyword">virtual</span> MacroElementNodeUpdateMesh, </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1RefineableFishMesh.html">RefineableFishMesh</a>&lt;ELEMENT&gt;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;{</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment"> /// \short Constructor: Pass pointer GeomObject that defines</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment"> /// the fish&#39;s back and pointer to timestepper</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment"> /// (defaults to (Steady) default timestepper defined in Mesh).</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno"><a class="line" href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html#a7adcb19be3d66c63d88bf87d4822dacc">  214</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html#a7adcb19be3d66c63d88bf87d4822dacc">MacroElementNodeUpdateRefineableFishMesh</a>(GeomObject* back_pt, </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                   TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper) :  </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a>&lt;ELEMENT&gt;(back_pt,time_stepper_pt),</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <a class="code" href="classoomph_1_1RefineableFishMesh.html">RefineableFishMesh</a>&lt;ELEMENT&gt;(time_stepper_pt)</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  {</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;   ELEMENT* el_pt=<span class="keyword">new</span> ELEMENT;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;   <span class="keywordflow">if</span> (<span class="keyword">dynamic_cast&lt;</span>MacroElementNodeUpdateElementBase*<span class="keyword">&gt;</span>(el_pt)==0)</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;     std::ostringstream error_message;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;     error_message </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;Base class for ELEMENT in &quot;</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;MacroElementNodeUpdateRefineableFishMesh needs&quot;</span> </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;to be of type MacroElementNodeUpdateElement!\n&quot;</span>;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;     error_message &lt;&lt; <span class="stringliteral">&quot;Whereas it is: typeid(el_pt).name()&quot;</span> </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                   &lt;&lt; <span class="keyword">typeid</span>(el_pt).name() </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                   &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;     </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;     std::string function_name =</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;      <span class="stringliteral">&quot;MacroElementNodeUpdateRefineableFishMesh::\n&quot;</span>;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;     function_name += </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      <span class="stringliteral">&quot;MacroElementNodeUpdateRefineableFishMesh()&quot;</span>;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;     <span class="keywordflow">throw</span> OomphLibError(error_message.str(),</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    }</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;   <span class="keyword">delete</span> el_pt;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;   <span class="comment">// Setup all the information that&#39;s required for MacroElement-based</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;   <span class="comment">// node update: Tell the elements that their geometry depends on the</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;   <span class="comment">// fishback geometric object</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;   <span class="keywordtype">unsigned</span> n_element = this-&gt;nelement();</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;     <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;     ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(this-&gt;element_pt(i));</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;     </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;     <span class="comment">// Check if cast is successful</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;     MacroElementNodeUpdateElementBase* m_el_pt=<span class="keyword">dynamic_cast&lt;</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;      MacroElementNodeUpdateElementBase*<span class="keyword">&gt;</span>(el_pt);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;     <span class="keywordflow">if</span> (m_el_pt==0)</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;      {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;       std::ostringstream error_message;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;       error_message </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        &lt;&lt; <span class="stringliteral">&quot;Failed to upcast to MacroElementNodeUpdateElementBase\n&quot;</span>;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;       error_message</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        &lt;&lt; <span class="stringliteral">&quot;Element must be derived from MacroElementNodeUpdateElementBase\n&quot;</span>;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;       error_message &lt;&lt; <span class="stringliteral">&quot;but it is of type &quot;</span> &lt;&lt; <span class="keyword">typeid</span>(el_pt).name();</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;       </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;       std::string function_name =</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="stringliteral">&quot;MacroElementNodeUpdateRefineableFishMesh::\n&quot;</span>;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;       function_name += <span class="stringliteral">&quot;MacroElementNodeUpdateRefinableFishMesh()&quot;</span>;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;       <span class="keywordflow">throw</span> OomphLibError(error_message.str(),</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                           OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                           OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;      }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="preprocessor">#endif       </span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;     <span class="comment">// There&#39;s just one GeomObject</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;     Vector&lt;GeomObject*&gt; geom_object_pt(1);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;     geom_object_pt[0] = this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">Back_pt</a>;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;     </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;     <span class="comment">// Tell the element which geom objects its macro-element-based</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;     <span class="comment">// node update depends on     </span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;     el_pt-&gt;set_node_update_info(geom_object_pt);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    }</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;   <span class="comment">// Add the geometric object(s) for the wall to the mesh&#39;s storage</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;   Vector&lt;GeomObject*&gt; geom_object_pt(1);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;   geom_object_pt[0] = this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">Back_pt</a>;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;   MacroElementNodeUpdateMesh::set_geom_object_vector_pt(geom_object_pt);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;   <span class="comment">// Fill in the domain pointer to the mesh&#39;s storage in the base class</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;   MacroElementNodeUpdateMesh::macro_domain_pt()=this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#ad5076610d83a07e6306375a2632ee460">domain_pt</a>();</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;  }</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment"> /// \short Destructor: empty</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html#a68cdd294ca61ad64dbcd1313356d2ca4">  296</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html#a68cdd294ca61ad64dbcd1313356d2ca4">~MacroElementNodeUpdateRefineableFishMesh</a>(){}</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment"> /// \short Resolve mesh update: NodeUpdate current nodal</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment"> /// positions via sparse MacroElement-based update.</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment"> /// [Doesn&#39;t make sense to use this mesh with SolidElements anyway,</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment"> /// so we buffer the case if update_all_solid_nodes is set to </span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment"> /// true.]</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html#a1008dd9faa50699dcef68c8c35d6979c">  303</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html#a1008dd9faa50699dcef68c8c35d6979c">node_update</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; update_all_solid_nodes=<span class="keyword">false</span>)</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  {</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;   <span class="keywordflow">if</span> (update_all_solid_nodes)</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    {</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;     std::string error_message =</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;      <span class="stringliteral">&quot;Doesn&#39;t make sense to use an MacroElementNodeUpdateMesh with\n&quot;</span>;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;     error_message += </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;      <span class="stringliteral">&quot;SolidElements so specifying update_all_solid_nodes=true\n&quot;</span>;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;     error_message += <span class="stringliteral">&quot;doesn&#39;t make sense either\n&quot;</span>;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;     std::string function_name =</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;      <span class="stringliteral">&quot;MacroElementNodeUpdateRefineableFishMesh::&quot;</span>;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;     function_name += <span class="stringliteral">&quot;node_update()&quot;</span>;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;     </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;     <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    }</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;   MacroElementNodeUpdateMesh::node_update();</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;  }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;};</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment"></span><span class="comment">// AlgebraicElement fish-shaped mesh</span><span class="comment"></span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">//=================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">/// \short Fish shaped mesh with algebraic node update function for nodes.</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment"></span><span class="comment">//=================================================================</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicFishMesh.html">  345</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1AlgebraicFishMesh.html">AlgebraicFishMesh</a> : <span class="keyword">public</span> AlgebraicMesh,</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                          <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a>&lt;ELEMENT&gt;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;{ </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment"> /// \short Constructor: Pass pointer to timestepper.</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment"> /// (defaults to (Steady) default timestepper defined in Mesh)</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicFishMesh.html#a4382cbf0c75b2b76c9b28e9bae45fd4f">  353</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a4382cbf0c75b2b76c9b28e9bae45fd4f">AlgebraicFishMesh</a>(TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper) :  </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  <a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a>&lt;ELEMENT&gt;(time_stepper_pt) </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  {</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;   <span class="comment">// Setup algebraic node update operations</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;   <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a1a6d22eedc77299d843274e8ce34b560">setup_algebraic_node_update</a>();</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;  }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment"> /// \short Constructor: Pass pointer GeomObject that defines</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment"> /// the fish&#39;s back and pointer to timestepper</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment"> /// (defaults to (Steady) default timestepper defined in Mesh).</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicFishMesh.html#aac4b7f18a6e1d10c64edf431af921ce7">  363</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#aac4b7f18a6e1d10c64edf431af921ce7">AlgebraicFishMesh</a>(GeomObject* back_pt, </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                   TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper) :  </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  <a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a>&lt;ELEMENT&gt;(back_pt,time_stepper_pt) </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  {</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;   <span class="comment">// Add the geometric object to the list associated with this AlgebraicMesh</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;   AlgebraicMesh::add_geom_object_list_pt(back_pt);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;   <span class="comment">// Setup algebraic node update operations</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;   <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a1a6d22eedc77299d843274e8ce34b560">setup_algebraic_node_update</a>();</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  }</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment"> /// \short Destructor: empty</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicFishMesh.html#a027d54d158e22ce8fe3c1246cb030440">  375</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a027d54d158e22ce8fe3c1246cb030440">~AlgebraicFishMesh</a>(){}</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment"> /// \short Update nodal position at time level t (t=0: present; </span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment"> /// t&gt;0: previous)</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicFishMesh.html#ac66d6542472dac702a7414aa9d7f995f">  379</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#ac66d6542472dac702a7414aa9d7f995f">algebraic_node_update</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, AlgebraicNode*&amp; node_pt)</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  {</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;   <span class="comment">// Update with the update function for the node&#39;s first (default)</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;   <span class="comment">// node update fct</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;   <span class="keywordtype">unsigned</span> <span class="keywordtype">id</span>=node_pt-&gt;node_update_fct_id();</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;   </div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;   <span class="comment">// Upper/lower body</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;   <span class="keywordflow">if</span> ((<span class="keywordtype">id</span>==this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a3d3771209da5e9d30eedf957678f24fb">Lower_body</a>)||(<span class="keywordtype">id</span>==this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62aee1779e3610fcc506554edb97df12b81">Upper_body</a>))</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    {</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;     <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a4aee83d1b0a42418fe886b2f244c1d49">node_update_in_body</a>(t,node_pt);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    }</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;   <span class="comment">// Upper/lower fin</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;   <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((<span class="keywordtype">id</span>==this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a616ba7504cd0d8970e1e275579f5606d">Lower_fin</a>)||(<span class="keywordtype">id</span>==this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a773d3896b889d4f05ed5902482650da1">Upper_fin</a>))</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    {</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;     <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#ad4a6f95e21e3d81b9defde90636e7d45">node_update_in_fin</a>(t,node_pt);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    }</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;   <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    {</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;     std::ostringstream error_message;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;     error_message &lt;&lt; <span class="stringliteral">&quot;The node update fct id is &quot;</span> </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                   &lt;&lt; <span class="keywordtype">id</span> &lt;&lt; <span class="stringliteral">&quot;, but it should only be one of &quot;</span> </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                   &lt;&lt; this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a3d3771209da5e9d30eedf957678f24fb">Lower_body</a>  &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;                   &lt;&lt; this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62aee1779e3610fcc506554edb97df12b81">Upper_body</a>  &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> </div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;                   &lt;&lt; this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a616ba7504cd0d8970e1e275579f5606d">Lower_fin</a>  &lt;&lt; <span class="stringliteral">&quot; or &quot;</span> </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;                   &lt;&lt; this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a773d3896b889d4f05ed5902482650da1">Upper_fin</a>  &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;     std::string function_name = <span class="stringliteral">&quot;AlgebraicFishMesh::algebraic_node_update()&quot;</span>;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;     </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;     <span class="keywordflow">throw</span> OomphLibError(error_message.str(),</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    }</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;  }</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment"> /// \short Resolve the node update function (we neither want the broken empty</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment"> /// one in the Mesh base class nor the macro-element-based one</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment"> /// in the RefineableQuadMesh base class but the AlgebraicElement one).</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment"> /// [It doesn&#39;t make sense to use this mesh with SolidElements</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment"> /// so we buffer the case if update_all_solid_nodes is set to </span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment"> /// true.]</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicFishMesh.html#a39cd5a86b0f762efd09f4fefba6da1c3">  418</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a39cd5a86b0f762efd09f4fefba6da1c3">node_update</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; update_all_solid_nodes=<span class="keyword">false</span>)</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  {</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;   <span class="keywordflow">if</span> (update_all_solid_nodes)</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    {</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;     std::string error_message =</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;      <span class="stringliteral">&quot;Doesn&#39;t make sense to use an AlgebraicMesh with\n&quot;</span>;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;     error_message += </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;      <span class="stringliteral">&quot;SolidElements so specifying update_all_solid_nodes=true\n&quot;</span>;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;     error_message += <span class="stringliteral">&quot;doesn&#39;t make sense either\n&quot;</span>;</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;     std::string function_name =</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;      <span class="stringliteral">&quot;AlgebraicFishMesh::node_update()&quot;</span>;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;     </div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;     <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    }</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;   AlgebraicMesh::node_update();</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;  }</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment"> /// \short Update the geometric references that are used </span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment"> /// to update node after mesh adaptation.</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment"> /// We&#39;re assuming that the GeomObject that specifies</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment"> /// the fish back does not have sub-objects, therefore</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment"> /// no update is required -- all reference</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment"> /// values can simply be scaled. We simply</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment"> /// paranoid-check that this is actually the case,</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment"> /// by checking if locate_zeta() returns the</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment"> /// original data.</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicFishMesh.html#a4f992939c299f87abc762c14aab50b5c">  449</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a4f992939c299f87abc762c14aab50b5c">update_node_update</a>(AlgebraicNode*&amp; node_pt)</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;  {</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;   <span class="comment">// Get the start and end Lagrangian coordinates on the</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;   <span class="comment">// wall from the domain:</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;   <span class="comment"></span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">   /// Start coordinate on wall (near nose)</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment"></span>   <span class="keywordtype">double</span> xi_nose=this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#ae18c3154ad99054c073840c6b134c49b">Domain_pt</a>-&gt;<a class="code" href="classoomph_1_1FishDomain.html#a773b98977806c2b27531425ecf5e3f8e">xi_nose</a>();</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;   <span class="comment"></span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment">   /// End coordinate on wall (near tail)</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment"></span>   <span class="keywordtype">double</span> xi_tail=this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#ae18c3154ad99054c073840c6b134c49b">Domain_pt</a>-&gt;<a class="code" href="classoomph_1_1FishDomain.html#ae2bcc0014506ba2225b928f319a27c9d">xi_tail</a>();</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;   <span class="comment"></span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment">   /// Check halfway along the object</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment"></span>   Vector&lt;double&gt; zeta(1);</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;   zeta[0]=0.5*(xi_nose+xi_tail);</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;   </div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;   Vector&lt;double&gt; s(1); </div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;   GeomObject* geom_obj_pt=0;</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;   this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">Back_pt</a>-&gt;locate_zeta(zeta,geom_obj_pt,s);</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;   <span class="keywordflow">if</span> ((geom_obj_pt!=this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">Back_pt</a>)||(s[0]!=zeta[0]))</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    {</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;     std::ostringstream error_message;</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;     error_message </div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;AlgebraicFishMesh only works with GeomObjects\n&quot;</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;that do not contain sub-elements (e.g. GeomObjects\n&quot;</span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;that represent a wall finite element mesh!\n&quot;</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;Back_pt    : &quot;</span> &lt;&lt; this-&gt;<a class="code" href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">Back_pt</a> &lt;&lt; std::endl </div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;geom_obj_pt: &quot;</span> &lt;&lt; geom_obj_pt &lt;&lt; std::endl </div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;s[0]       : &quot;</span> &lt;&lt; s[0]  &lt;&lt; std::endl </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;      &lt;&lt; <span class="stringliteral">&quot;zeta[0]    : &quot;</span> &lt;&lt; zeta[0]  &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; </div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;     <span class="keywordflow">throw</span> OomphLibError(error_message.str(),</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;    }</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;  }</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;   </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160; </div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment"> /// \short Algebraic update function for nodes in upper/lower body</span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a4aee83d1b0a42418fe886b2f244c1d49">node_update_in_body</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, AlgebraicNode*&amp; node_pt);</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment"> /// \short Algebraic update function for nodes in upper/lower fin</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#ad4a6f95e21e3d81b9defde90636e7d45">node_update_in_fin</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, AlgebraicNode*&amp; node_pt);</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment"> /// \short Setup algebraic update operation for all nodes</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment"> /// (separate function because this task needs to be performed by</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment"> /// both constructors)</span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a1a6d22eedc77299d843274e8ce34b560">setup_algebraic_node_update</a>();</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160; </div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;};</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160; </div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160; </div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="comment"></span><span class="comment">// Refineable algebraic element fish-shaped mesh</span><span class="comment"></span></div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160; </div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160; </div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="comment">//=================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment">/// \short Refineable fish shaped mesh with algebraic node update function.</span></div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment"></span><span class="comment">//=================================================================</span></div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00519"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicRefineableFishMesh.html">  519</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1AlgebraicRefineableFishMesh.html">AlgebraicRefineableFishMesh</a> : <span class="keyword">public</span> <a class="code" href="classoomph_1_1AlgebraicFishMesh.html">AlgebraicFishMesh</a>&lt;ELEMENT&gt;, </div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;                                  <span class="keyword">public</span> <a class="code" href="classoomph_1_1RefineableFishMesh.html">RefineableFishMesh</a>&lt;ELEMENT&gt;</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;{ </div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160; </div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160; </div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160; </div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="comment"> /// Constructor: Pass pointer to timestepper.</span></div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="comment"> /// (defaults to (Steady) default timestepper defined in Mesh)</span></div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="comment"></span> <span class="comment">// Note: FishMesh is virtual base and its constructor is automatically</span></div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160; <span class="comment">// called first! --&gt; this is where we need to build the mesh;</span></div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160; <span class="comment">// the constructors of the derived meshes don&#39;t call the</span></div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160; <span class="comment">// base constructor again and simply add the extra functionality.</span></div>
+<div class="line"><a name="l00533"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicRefineableFishMesh.html#afe4643b107e47fbad0c8836bc0516518">  533</a></span>&#160; <a class="code" href="classoomph_1_1AlgebraicRefineableFishMesh.html#afe4643b107e47fbad0c8836bc0516518">AlgebraicRefineableFishMesh</a>(TimeStepper* time_stepper_pt=</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;                           &amp;Mesh::Default_TimeStepper) :</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;  <a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a>&lt;ELEMENT&gt;(time_stepper_pt), </div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;  <a class="code" href="classoomph_1_1AlgebraicFishMesh.html">AlgebraicFishMesh</a>&lt;ELEMENT&gt;(time_stepper_pt),</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;  <a class="code" href="classoomph_1_1RefineableFishMesh.html">RefineableFishMesh</a>&lt;ELEMENT&gt;(time_stepper_pt)</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;  {}</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160; </div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; </div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="comment"> /// \short Constructor: Pass pointer GeomObject that defines</span></div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="comment"> /// the fish&#39;s back and pointer to timestepper.</span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment"> /// (defaults to (Steady) default timestepper defined in Mesh)</span></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment"></span> <span class="comment">// Note: FishMesh is virtual base and its constructor is automatically</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160; <span class="comment">// called first! --&gt; this is where we need to build the mesh;</span></div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160; <span class="comment">// the constructors of the derived meshes don&#39;t call the</span></div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160; <span class="comment">// base constructor again and simply add the extra functionality.</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicRefineableFishMesh.html#a04f6b6114c70638b4f26ac6b70f5c0fe">  549</a></span>&#160; <a class="code" href="classoomph_1_1AlgebraicRefineableFishMesh.html#a04f6b6114c70638b4f26ac6b70f5c0fe">AlgebraicRefineableFishMesh</a>(GeomObject* back_pt, </div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;                           TimeStepper* time_stepper_pt=</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;                           &amp;Mesh::Default_TimeStepper) :</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;  <a class="code" href="classoomph_1_1FishMesh.html">FishMesh</a>&lt;ELEMENT&gt;(back_pt,time_stepper_pt), </div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;  <a class="code" href="classoomph_1_1AlgebraicFishMesh.html">AlgebraicFishMesh</a>&lt;ELEMENT&gt;(back_pt,time_stepper_pt),</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;  <a class="code" href="classoomph_1_1RefineableFishMesh.html">RefineableFishMesh</a>&lt;ELEMENT&gt;(back_pt,time_stepper_pt)</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;  {}</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160; </div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;<span class="comment"> /// \short Destructor: empty</span></div>
+<div class="line"><a name="l00559"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicRefineableFishMesh.html#a69145c9bf09e0fbc1a4bffe7bee379cd">  559</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1AlgebraicRefineableFishMesh.html#a69145c9bf09e0fbc1a4bffe7bee379cd">~AlgebraicRefineableFishMesh</a>(){}</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="comment"> /// \short Resolve node update function: Use the one defined</span></div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="comment"> /// in the AlgebraicFishMesh (where the bool flag is explained)</span></div>
+<div class="line"><a name="l00563"></a><span class="lineno"><a class="line" href="classoomph_1_1AlgebraicRefineableFishMesh.html#a8123da4b48355b39f19e0494a9d4545c">  563</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1AlgebraicRefineableFishMesh.html#a8123da4b48355b39f19e0494a9d4545c">node_update</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; update_all_solid_nodes=<span class="keyword">false</span>)</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;  {</div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;   <a class="code" href="classoomph_1_1AlgebraicFishMesh.html#a39cd5a86b0f762efd09f4fefba6da1c3">AlgebraicFishMesh&lt;ELEMENT&gt;::node_update</a>(update_all_solid_nodes);</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;  }</div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160; </div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;};</div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160; </div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;}</div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160; </div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html_aac4b7f18a6e1d10c64edf431af921ce7"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html#aac4b7f18a6e1d10c64edf431af921ce7">oomph::AlgebraicFishMesh::AlgebraicFishMesh</a></div><div class="ttdeci">AlgebraicFishMesh(GeomObject *back_pt, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass pointer GeomObject that defines the fish's back and pointer to timestepper (default...</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00363">fish_mesh.template.h:363</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_aa6d659caf657ce5fd549431fadb009d7"><div class="ttname"><a href="classoomph_1_1FishMesh.html#aa6d659caf657ce5fd549431fadb009d7">oomph::FishMesh::fish_back_pt</a></div><div class="ttdeci">GeomObject *&amp; fish_back_pt()</div><div class="ttdoc">Access function to geom object that represents the fish's back.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00083">fish_mesh.template.h:83</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishDomain_html"><div class="ttname"><a href="classoomph_1_1FishDomain.html">oomph::FishDomain</a></div><div class="ttdoc">Fish shaped domain, represented by four MacroElements. Shape is parametrised by GeomObject that repre...</div><div class="ttdef"><b>Definition:</b> <a href="fish__domain_8h_source.html#l00045">fish_domain.h:45</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_ad1dd5a431f711d3ac14498cc6ab4d856"><div class="ttname"><a href="classoomph_1_1FishMesh.html#ad1dd5a431f711d3ac14498cc6ab4d856">oomph::FishMesh::Must_kill_fish_back</a></div><div class="ttdeci">bool Must_kill_fish_back</div><div class="ttdoc">Do I need to kill the fish back geom object?</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00110">fish_mesh.template.h:110</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicRefineableFishMesh_html"><div class="ttname"><a href="classoomph_1_1AlgebraicRefineableFishMesh.html">oomph::AlgebraicRefineableFishMesh</a></div><div class="ttdoc">Refineable fish shaped mesh with algebraic node update function.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00519">fish_mesh.template.h:519</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableFishMesh_html_a1fb10f94f78c7a4e37113fbf4c72f00c"><div class="ttname"><a href="classoomph_1_1RefineableFishMesh.html#a1fb10f94f78c7a4e37113fbf4c72f00c">oomph::RefineableFishMesh::setup_adaptivity</a></div><div class="ttdeci">void setup_adaptivity()</div><div class="ttdoc">Setup all the information that's required for spatial adaptivity: Set pointers to macro elements and ...</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8cc_source.html#l00698">fish_mesh.template.cc:698</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicRefineableFishMesh_html_afe4643b107e47fbad0c8836bc0516518"><div class="ttname"><a href="classoomph_1_1AlgebraicRefineableFishMesh.html#afe4643b107e47fbad0c8836bc0516518">oomph::AlgebraicRefineableFishMesh::AlgebraicRefineableFishMesh</a></div><div class="ttdeci">AlgebraicRefineableFishMesh(TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00533">fish_mesh.template.h:533</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableFishMesh_html_a8304d093e015001a6d56faebdd2d4636"><div class="ttname"><a href="classoomph_1_1RefineableFishMesh.html#a8304d093e015001a6d56faebdd2d4636">oomph::RefineableFishMesh::~RefineableFishMesh</a></div><div class="ttdeci">virtual ~RefineableFishMesh()</div><div class="ttdoc">Destructor: Empty – all cleanup gets handled in the base classes.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00168">fish_mesh.template.h:168</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_a492c0535a4a0bf97729dfdff3754d211"><div class="ttname"><a href="classoomph_1_1FishMesh.html#a492c0535a4a0bf97729dfdff3754d211">oomph::FishMesh::FishMesh</a></div><div class="ttdeci">FishMesh(TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass pointer to timestepper (defaults to the (Steady) default timestepper defined in Mes...</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8cc_source.html#l00040">fish_mesh.template.cc:40</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_aabde81364817d938f0924997bf4f63cc"><div class="ttname"><a href="classoomph_1_1FishMesh.html#aabde81364817d938f0924997bf4f63cc">oomph::FishMesh::build_mesh</a></div><div class="ttdeci">void build_mesh(TimeStepper *time_stepper_pt)</div><div class="ttdoc">Build the mesh, using the geometric object identified by Back_pt.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8cc_source.html#l00085">fish_mesh.template.cc:85</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableFishMesh_html_a82bc04aea6deaf2faa7306aa047e12ef"><div class="ttname"><a href="classoomph_1_1RefineableFishMesh.html#a82bc04aea6deaf2faa7306aa047e12ef">oomph::RefineableFishMesh::RefineableFishMesh</a></div><div class="ttdeci">RefineableFishMesh(GeomObject *back_pt, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass pointer GeomObject that defines the fish's back and pointer to timestepper (default...</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00155">fish_mesh.template.h:155</a></div></div>
+<div class="ttc" id="afish__domain_8h_html"><div class="ttname"><a href="fish__domain_8h.html">fish_domain.h</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html_a39cd5a86b0f762efd09f4fefba6da1c3"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html#a39cd5a86b0f762efd09f4fefba6da1c3">oomph::AlgebraicFishMesh::node_update</a></div><div class="ttdeci">virtual void node_update(const bool &amp;update_all_solid_nodes=false)</div><div class="ttdoc">Resolve the node update function (we neither want the broken empty one in the Mesh base class nor the...</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00418">fish_mesh.template.h:418</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html_a4382cbf0c75b2b76c9b28e9bae45fd4f"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html#a4382cbf0c75b2b76c9b28e9bae45fd4f">oomph::AlgebraicFishMesh::AlgebraicFishMesh</a></div><div class="ttdeci">AlgebraicFishMesh(TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass pointer to timestepper. (defaults to (Steady) default timestepper defined in Mesh)</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00353">fish_mesh.template.h:353</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html">oomph::AlgebraicFishMesh</a></div><div class="ttdoc">Fish shaped mesh with algebraic node update function for nodes.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00345">fish_mesh.template.h:345</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_ae18c3154ad99054c073840c6b134c49b"><div class="ttname"><a href="classoomph_1_1FishMesh.html#ae18c3154ad99054c073840c6b134c49b">oomph::FishMesh::Domain_pt</a></div><div class="ttdeci">FishDomain * Domain_pt</div><div class="ttdoc">Pointer to domain.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00107">fish_mesh.template.h:107</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_a4a4137c4add890a283e51651c5c47f62a616ba7504cd0d8970e1e275579f5606d"><div class="ttname"><a href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a616ba7504cd0d8970e1e275579f5606d">oomph::FishMesh::Lower_fin</a></div><div class="ttdeci">@ Lower_fin</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00098">fish_mesh.template.h:98</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_a4a4137c4add890a283e51651c5c47f62a773d3896b889d4f05ed5902482650da1"><div class="ttname"><a href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a773d3896b889d4f05ed5902482650da1">oomph::FishMesh::Upper_fin</a></div><div class="ttdeci">@ Upper_fin</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00098">fish_mesh.template.h:98</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_ad5076610d83a07e6306375a2632ee460"><div class="ttname"><a href="classoomph_1_1FishMesh.html#ad5076610d83a07e6306375a2632ee460">oomph::FishMesh::domain_pt</a></div><div class="ttdeci">FishDomain *&amp; domain_pt()</div><div class="ttdoc">Access function to FishDomain.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00090">fish_mesh.template.h:90</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicRefineableFishMesh_html_a04f6b6114c70638b4f26ac6b70f5c0fe"><div class="ttname"><a href="classoomph_1_1AlgebraicRefineableFishMesh.html#a04f6b6114c70638b4f26ac6b70f5c0fe">oomph::AlgebraicRefineableFishMesh::AlgebraicRefineableFishMesh</a></div><div class="ttdeci">AlgebraicRefineableFishMesh(GeomObject *back_pt, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass pointer GeomObject that defines the fish's back and pointer to timestepper....</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00549">fish_mesh.template.h:549</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html"><div class="ttname"><a href="classoomph_1_1FishMesh.html">oomph::FishMesh</a></div><div class="ttdoc">Fish shaped mesh. The geometry is defined by the Domain object FishDomain.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00055">fish_mesh.template.h:55</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableFishMesh_html_a7f31e65306286e83a5d17459bae9163d"><div class="ttname"><a href="classoomph_1_1RefineableFishMesh.html#a7f31e65306286e83a5d17459bae9163d">oomph::RefineableFishMesh::RefineableFishMesh</a></div><div class="ttdeci">RefineableFishMesh(TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass pointer to timestepper – defaults to (Steady) default timestepper defined in the Me...</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00140">fish_mesh.template.h:140</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html_a4aee83d1b0a42418fe886b2f244c1d49"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html#a4aee83d1b0a42418fe886b2f244c1d49">oomph::AlgebraicFishMesh::node_update_in_body</a></div><div class="ttdeci">void node_update_in_body(const unsigned &amp;t, AlgebraicNode *&amp;node_pt)</div><div class="ttdoc">Algebraic update function for nodes in upper/lower body.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8cc_source.html#l00946">fish_mesh.template.cc:946</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishDomain_html_ae2bcc0014506ba2225b928f319a27c9d"><div class="ttname"><a href="classoomph_1_1FishDomain.html#ae2bcc0014506ba2225b928f319a27c9d">oomph::FishDomain::xi_tail</a></div><div class="ttdeci">double &amp; xi_tail()</div><div class="ttdoc">End coordinate on wall (near tail)</div><div class="ttdef"><b>Definition:</b> <a href="fish__domain_8h_source.html#l00108">fish_domain.h:108</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html_a1a6d22eedc77299d843274e8ce34b560"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html#a1a6d22eedc77299d843274e8ce34b560">oomph::AlgebraicFishMesh::setup_algebraic_node_update</a></div><div class="ttdeci">void setup_algebraic_node_update()</div><div class="ttdoc">Setup algebraic update operation for all nodes (separate function because this task needs to be perfo...</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8cc_source.html#l00724">fish_mesh.template.cc:724</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishDomain_html_a773b98977806c2b27531425ecf5e3f8e"><div class="ttname"><a href="classoomph_1_1FishDomain.html#a773b98977806c2b27531425ecf5e3f8e">oomph::FishDomain::xi_nose</a></div><div class="ttdeci">double &amp; xi_nose()</div><div class="ttdoc">Start coordinate on wall (near nose)</div><div class="ttdef"><b>Definition:</b> <a href="fish__domain_8h_source.html#l00105">fish_domain.h:105</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition:</b> <a href="annular__domain_8h_source.html#l00034">annular_domain.h:34</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicRefineableFishMesh_html_a69145c9bf09e0fbc1a4bffe7bee379cd"><div class="ttname"><a href="classoomph_1_1AlgebraicRefineableFishMesh.html#a69145c9bf09e0fbc1a4bffe7bee379cd">oomph::AlgebraicRefineableFishMesh::~AlgebraicRefineableFishMesh</a></div><div class="ttdeci">virtual ~AlgebraicRefineableFishMesh()</div><div class="ttdoc">Destructor: empty.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00559">fish_mesh.template.h:559</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicRefineableFishMesh_html_a8123da4b48355b39f19e0494a9d4545c"><div class="ttname"><a href="classoomph_1_1AlgebraicRefineableFishMesh.html#a8123da4b48355b39f19e0494a9d4545c">oomph::AlgebraicRefineableFishMesh::node_update</a></div><div class="ttdeci">void node_update(const bool &amp;update_all_solid_nodes=false)</div><div class="ttdoc">Resolve node update function: Use the one defined in the AlgebraicFishMesh (where the bool flag is ex...</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00563">fish_mesh.template.h:563</a></div></div>
+<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateRefineableFishMesh_html_a1008dd9faa50699dcef68c8c35d6979c"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html#a1008dd9faa50699dcef68c8c35d6979c">oomph::MacroElementNodeUpdateRefineableFishMesh::node_update</a></div><div class="ttdeci">void node_update(const bool &amp;update_all_solid_nodes=false)</div><div class="ttdoc">Resolve mesh update: NodeUpdate current nodal positions via sparse MacroElement-based update....</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00303">fish_mesh.template.h:303</a></div></div>
+<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateRefineableFishMesh_html"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html">oomph::MacroElementNodeUpdateRefineableFishMesh</a></div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00204">fish_mesh.template.h:204</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html_ac66d6542472dac702a7414aa9d7f995f"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html#ac66d6542472dac702a7414aa9d7f995f">oomph::AlgebraicFishMesh::algebraic_node_update</a></div><div class="ttdeci">void algebraic_node_update(const unsigned &amp;t, AlgebraicNode *&amp;node_pt)</div><div class="ttdoc">Update nodal position at time level t (t=0: present; t&gt;0: previous)</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00379">fish_mesh.template.h:379</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html_ad4a6f95e21e3d81b9defde90636e7d45"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html#ad4a6f95e21e3d81b9defde90636e7d45">oomph::AlgebraicFishMesh::node_update_in_fin</a></div><div class="ttdeci">void node_update_in_fin(const unsigned &amp;t, AlgebraicNode *&amp;node_pt)</div><div class="ttdoc">Algebraic update function for nodes in upper/lower fin.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8cc_source.html#l01006">fish_mesh.template.cc:1006</a></div></div>
+<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateRefineableFishMesh_html_a68cdd294ca61ad64dbcd1313356d2ca4"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html#a68cdd294ca61ad64dbcd1313356d2ca4">oomph::MacroElementNodeUpdateRefineableFishMesh::~MacroElementNodeUpdateRefineableFishMesh</a></div><div class="ttdeci">virtual ~MacroElementNodeUpdateRefineableFishMesh()</div><div class="ttdoc">Destructor: empty.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00296">fish_mesh.template.h:296</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html_a4f992939c299f87abc762c14aab50b5c"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html#a4f992939c299f87abc762c14aab50b5c">oomph::AlgebraicFishMesh::update_node_update</a></div><div class="ttdeci">void update_node_update(AlgebraicNode *&amp;node_pt)</div><div class="ttdoc">Update the geometric references that are used to update node after mesh adaptation....</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00449">fish_mesh.template.h:449</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_a26e8eb98c11d6b45cc3b5c5a8e45b530"><div class="ttname"><a href="classoomph_1_1FishMesh.html#a26e8eb98c11d6b45cc3b5c5a8e45b530">oomph::FishMesh::Back_pt</a></div><div class="ttdeci">GeomObject * Back_pt</div><div class="ttdoc">Pointer to fish back.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00104">fish_mesh.template.h:104</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_a3763b9be54c74d15a8c5b2129e0f4fae"><div class="ttname"><a href="classoomph_1_1FishMesh.html#a3763b9be54c74d15a8c5b2129e0f4fae">oomph::FishMesh::~FishMesh</a></div><div class="ttdeci">virtual ~FishMesh()</div><div class="ttdoc">Destructor: Kill the geom object that represents the fish's back (if necessary)</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00073">fish_mesh.template.h:73</a></div></div>
+<div class="ttc" id="aclassoomph_1_1AlgebraicFishMesh_html_a027d54d158e22ce8fe3c1246cb030440"><div class="ttname"><a href="classoomph_1_1AlgebraicFishMesh.html#a027d54d158e22ce8fe3c1246cb030440">oomph::AlgebraicFishMesh::~AlgebraicFishMesh</a></div><div class="ttdeci">virtual ~AlgebraicFishMesh()</div><div class="ttdoc">Destructor: empty.</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00375">fish_mesh.template.h:375</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_a4a4137c4add890a283e51651c5c47f62a3d3771209da5e9d30eedf957678f24fb"><div class="ttname"><a href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62a3d3771209da5e9d30eedf957678f24fb">oomph::FishMesh::Lower_body</a></div><div class="ttdeci">@ Lower_body</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00098">fish_mesh.template.h:98</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FishMesh_html_a4a4137c4add890a283e51651c5c47f62aee1779e3610fcc506554edb97df12b81"><div class="ttname"><a href="classoomph_1_1FishMesh.html#a4a4137c4add890a283e51651c5c47f62aee1779e3610fcc506554edb97df12b81">oomph::FishMesh::Upper_body</a></div><div class="ttdeci">@ Upper_body</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00098">fish_mesh.template.h:98</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableFishMesh_html"><div class="ttname"><a href="classoomph_1_1RefineableFishMesh.html">oomph::RefineableFishMesh</a></div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00130">fish_mesh.template.h:130</a></div></div>
+<div class="ttc" id="aclassoomph_1_1MacroElementNodeUpdateRefineableFishMesh_html_a7adcb19be3d66c63d88bf87d4822dacc"><div class="ttname"><a href="classoomph_1_1MacroElementNodeUpdateRefineableFishMesh.html#a7adcb19be3d66c63d88bf87d4822dacc">oomph::MacroElementNodeUpdateRefineableFishMesh::MacroElementNodeUpdateRefineableFishMesh</a></div><div class="ttdeci">MacroElementNodeUpdateRefineableFishMesh(GeomObject *back_pt, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass pointer GeomObject that defines the fish's back and pointer to timestepper (default...</div><div class="ttdef"><b>Definition:</b> <a href="fish__mesh_8template_8h_source.html#l00214">fish_mesh.template.h:214</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:56:49
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

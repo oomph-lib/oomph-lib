@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html">MacroElementNodeUpdateRefineableQuarterCircleSectorMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html">quarter_circle_sector_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.png" usemap="#oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_3C_20ELEMENT_20_3E_map" name="oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1RefineableQuarterCircleSectorMesh.html" alt="oomph::RefineableQuarterCircleSectorMesh&lt; ELEMENT &gt;" shape="rect" coords="503,112,996,136"/>
+<area href="classoomph_1_1QuarterCircleSectorMesh.html" alt="oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;" shape="rect" coords="251,56,744,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ace75c8edb3d87019dc7f06152205adab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html#ace75c8edb3d87019dc7f06152205adab">MacroElementNodeUpdateRefineableQuarterCircleSectorMesh</a> (GeomObject *<a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a0b03071bbe7e95cc6723c221ddc0998a">wall_pt</a>, const double &amp;xi_lo, const double &amp;fract_mid, const double &amp;xi_hi, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ace75c8edb3d87019dc7f06152205adab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying <a class="el" href="classoomph_1_1RefineableQuarterCircleSectorMesh.html">RefineableQuarterCircleSectorMesh</a>) and the algebraic node update functions for nodes.  <a href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html#ace75c8edb3d87019dc7f06152205adab">More...</a><br /></td></tr>
+<tr class="separator:ace75c8edb3d87019dc7f06152205adab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d8953d309eba614524fce77c44c8d46"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html#a2d8953d309eba614524fce77c44c8d46">~MacroElementNodeUpdateRefineableQuarterCircleSectorMesh</a> ()</td></tr>
+<tr class="memdesc:a2d8953d309eba614524fce77c44c8d46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: empty.  <a href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html#a2d8953d309eba614524fce77c44c8d46">More...</a><br /></td></tr>
+<tr class="separator:a2d8953d309eba614524fce77c44c8d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99403c711c3fdc2a601b478deebef9fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html#a99403c711c3fdc2a601b478deebef9fe">node_update</a> (const bool &amp;update_all_solid_nodes=false)</td></tr>
+<tr class="memdesc:a99403c711c3fdc2a601b478deebef9fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve mesh update: Update current nodal positions via sparse MacroElement-based update. [Doesn't make sense to use this mesh with SolidElements anyway, so we buffer the case if update_all_solid_nodes is set to true.].  <a href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html#a99403c711c3fdc2a601b478deebef9fe">More...</a><br /></td></tr>
+<tr class="separator:a99403c711c3fdc2a601b478deebef9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1RefineableQuarterCircleSectorMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1RefineableQuarterCircleSectorMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1RefineableQuarterCircleSectorMesh.html">oomph::RefineableQuarterCircleSectorMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a07b183ff3e548456e67b92b6fce41cde inherit pub_methods_classoomph_1_1RefineableQuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableQuarterCircleSectorMesh.html#a07b183ff3e548456e67b92b6fce41cde">RefineableQuarterCircleSectorMesh</a> (GeomObject *<a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a0b03071bbe7e95cc6723c221ddc0998a">wall_pt</a>, const double &amp;xi_lo, const double &amp;fract_mid, const double &amp;xi_hi, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a07b183ff3e548456e67b92b6fce41cde inherit pub_methods_classoomph_1_1RefineableQuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper (defaults to (Steady) default timestepper defined in Mesh). Adds refinement data to elements of <a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html">QuarterCircleSectorMesh</a>.  <a href="classoomph_1_1RefineableQuarterCircleSectorMesh.html#a07b183ff3e548456e67b92b6fce41cde">More...</a><br /></td></tr>
+<tr class="separator:a07b183ff3e548456e67b92b6fce41cde inherit pub_methods_classoomph_1_1RefineableQuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf958060ab5ea27a2ca079cba58af8f5 inherit pub_methods_classoomph_1_1RefineableQuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableQuarterCircleSectorMesh.html#abf958060ab5ea27a2ca079cba58af8f5">~RefineableQuarterCircleSectorMesh</a> ()</td></tr>
+<tr class="memdesc:abf958060ab5ea27a2ca079cba58af8f5 inherit pub_methods_classoomph_1_1RefineableQuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Empty.  <a href="classoomph_1_1RefineableQuarterCircleSectorMesh.html#abf958060ab5ea27a2ca079cba58af8f5">More...</a><br /></td></tr>
+<tr class="separator:abf958060ab5ea27a2ca079cba58af8f5 inherit pub_methods_classoomph_1_1RefineableQuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1QuarterCircleSectorMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html">oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a3fbcc7dd28aefc3dddda607785695afc inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a3fbcc7dd28aefc3dddda607785695afc">QuarterCircleSectorMesh</a> (GeomObject *<a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a0b03071bbe7e95cc6723c221ddc0998a">wall_pt</a>, const double &amp;xi_lo, const double &amp;fract_mid, const double &amp;xi_hi, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a3fbcc7dd28aefc3dddda607785695afc inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper (defaults to (Steady) default timestepper defined in Mesh)  <a href="classoomph_1_1QuarterCircleSectorMesh.html#a3fbcc7dd28aefc3dddda607785695afc">More...</a><br /></td></tr>
+<tr class="separator:a3fbcc7dd28aefc3dddda607785695afc inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3aec899bd005cacb011c13bcb6e5f22 inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#af3aec899bd005cacb011c13bcb6e5f22">~QuarterCircleSectorMesh</a> ()</td></tr>
+<tr class="memdesc:af3aec899bd005cacb011c13bcb6e5f22 inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor:  <a href="classoomph_1_1QuarterCircleSectorMesh.html#af3aec899bd005cacb011c13bcb6e5f22">More...</a><br /></td></tr>
+<tr class="separator:af3aec899bd005cacb011c13bcb6e5f22 inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b03071bbe7e95cc6723c221ddc0998a inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top">GeomObject *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a0b03071bbe7e95cc6723c221ddc0998a">wall_pt</a> ()</td></tr>
+<tr class="memdesc:a0b03071bbe7e95cc6723c221ddc0998a inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to GeomObject representing wall.  <a href="classoomph_1_1QuarterCircleSectorMesh.html#a0b03071bbe7e95cc6723c221ddc0998a">More...</a><br /></td></tr>
+<tr class="separator:a0b03071bbe7e95cc6723c221ddc0998a inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53adafee1a15301fe99a481b641df45b inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html">QuarterCircleSectorDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a53adafee1a15301fe99a481b641df45b">domain_pt</a> ()</td></tr>
+<tr class="memdesc:a53adafee1a15301fe99a481b641df45b inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to domain.  <a href="classoomph_1_1QuarterCircleSectorMesh.html#a53adafee1a15301fe99a481b641df45b">More...</a><br /></td></tr>
+<tr class="separator:a53adafee1a15301fe99a481b641df45b inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f149022d7a40bd0efed49adacd716bf inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a6cffab57f87c9f4ab01744647240bb1e">QuarterCircleSectorDomain::BLSquashFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a6f149022d7a40bd0efed49adacd716bf">bl_squash_fct_pt</a> ()</td></tr>
+<tr class="memdesc:a6f149022d7a40bd0efed49adacd716bf inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value (defined in the underlying Domain object)  <a href="classoomph_1_1QuarterCircleSectorMesh.html#a6f149022d7a40bd0efed49adacd716bf">More...</a><br /></td></tr>
+<tr class="separator:a6f149022d7a40bd0efed49adacd716bf inherit pub_methods_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a94b5efa53ac7689757dad989098df7ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html#a94b5efa53ac7689757dad989098df7ed">setup_macro_element_node_update</a> ()</td></tr>
+<tr class="memdesc:a94b5efa53ac7689757dad989098df7ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup all the information that's required for MacroElement-based node update: Tell the elements that their geometry depends on the geometric object that parametrises the wall.  <a href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html#a94b5efa53ac7689757dad989098df7ed">More...</a><br /></td></tr>
+<tr class="separator:a94b5efa53ac7689757dad989098df7ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1QuarterCircleSectorMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html">oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a49e72c17a9409ec4a2b7a1ebf98fb4a1 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html">QuarterCircleSectorDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a49e72c17a9409ec4a2b7a1ebf98fb4a1">Domain_pt</a></td></tr>
+<tr class="memdesc:a49e72c17a9409ec4a2b7a1ebf98fb4a1 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Domain.  <a href="classoomph_1_1QuarterCircleSectorMesh.html#a49e72c17a9409ec4a2b7a1ebf98fb4a1">More...</a><br /></td></tr>
+<tr class="separator:a49e72c17a9409ec4a2b7a1ebf98fb4a1 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cbdec5f0ee2f370c38f1fdc4e2904f8 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top">GeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a2cbdec5f0ee2f370c38f1fdc4e2904f8">Wall_pt</a></td></tr>
+<tr class="memdesc:a2cbdec5f0ee2f370c38f1fdc4e2904f8 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the geometric object that represents the curved wall (mesh boundary 1)  <a href="classoomph_1_1QuarterCircleSectorMesh.html#a2cbdec5f0ee2f370c38f1fdc4e2904f8">More...</a><br /></td></tr>
+<tr class="separator:a2cbdec5f0ee2f370c38f1fdc4e2904f8 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5c1e4484c69eb78bd3323321605a93c inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#ab5c1e4484c69eb78bd3323321605a93c">Xi_lo</a></td></tr>
+<tr class="memdesc:ab5c1e4484c69eb78bd3323321605a93c inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower limit for the (1D) coordinates along the wall.  <a href="classoomph_1_1QuarterCircleSectorMesh.html#ab5c1e4484c69eb78bd3323321605a93c">More...</a><br /></td></tr>
+<tr class="separator:ab5c1e4484c69eb78bd3323321605a93c inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a149224b002f785eb357553f8210ad5d3 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a149224b002f785eb357553f8210ad5d3">Fract_mid</a></td></tr>
+<tr class="memdesc:a149224b002f785eb357553f8210ad5d3 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fraction along wall where outer ring is to be divided.  <a href="classoomph_1_1QuarterCircleSectorMesh.html#a149224b002f785eb357553f8210ad5d3">More...</a><br /></td></tr>
+<tr class="separator:a149224b002f785eb357553f8210ad5d3 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fa3bfeddd4467e9fe0ec45fbfac0740 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a1fa3bfeddd4467e9fe0ec45fbfac0740">Xi_hi</a></td></tr>
+<tr class="memdesc:a1fa3bfeddd4467e9fe0ec45fbfac0740 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upper limit for the (1D) coordinates along the wall.  <a href="classoomph_1_1QuarterCircleSectorMesh.html#a1fa3bfeddd4467e9fe0ec45fbfac0740">More...</a><br /></td></tr>
+<tr class="separator:a1fa3bfeddd4467e9fe0ec45fbfac0740 inherit pro_attribs_classoomph_1_1QuarterCircleSectorMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt;</h3>
+
+<p>MacroElementNodeUpdate version of <a class="el" href="classoomph_1_1RefineableQuarterCircleSectorMesh.html">RefineableQuarterCircleSectorMesh</a></p>
+<div class="fragment"><div class="line">                     ---___</div>
+<div class="line">                    |      ---____</div>
+<div class="line">                    |              -   BOUNDARY 1</div>
+<div class="line">                    |               /  </div>
+<div class="line">                    |     [2]      /  |  </div>
+<div class="line">                    |             /     | </div>
+<div class="line">                    | N          /        |  </div>
+<div class="line">                    | |_ E      /          |    </div>
+<div class="line">     BOUNDARY 2     |-----------           |  </div>
+<div class="line">                    |          |    [1]    |</div>
+<div class="line">                    |   [0]    |           |  ^</div>
+<div class="line">                    |          |           | / \  direction of</div>
+<div class="line">                    | N        |    N      |  |   Lagrangian </div>
+<div class="line">                    | |_ E     |    |_ E   |  |   coordinate </div>
+<div class="line">                    |__________|___________|  |   along <a class="code" href="fsi__chan__alg_8txt.html#a0a0d4ba6149e87b8c0b0c4e8e33f7e11">wall</a> GeomObject</div>
+<div class="line"> </div>
+<div class="line">                         BOUNDARY 0</div>
+<div class="line"> </div>
+<div class="line">Within <a class="code" href="fsi__chan__alg_8txt.html#af1ca369cf5d9c84bb9d78787e09be829">the</a> elements (MacroElements), <a class="code" href="fsi__chan__alg_8txt.html#af1ca369cf5d9c84bb9d78787e09be829">the</a> local <a class="code" href="fsi__chan__alg_8txt.html#a75f15746e5758321c4131e0c2146346f">coordinates</a></div>
+<div class="line">are such <a class="code" href="fsi__chan__alg_8txt.html#a28366a9775c6f52fb8596c1d643ab794">that</a> <a class="code" href="fsi__chan__alg_8txt.html#af1ca369cf5d9c84bb9d78787e09be829">the</a> (E)astern direction coincides with <a class="code" href="fsi__chan__alg_8txt.html#af1ca369cf5d9c84bb9d78787e09be829">the</a> positive </div>
+<div class="line">s_0 direction,  <span class="keywordflow">while</span> <a class="code" href="fsi__chan__alg_8txt.html#af1ca369cf5d9c84bb9d78787e09be829">the</a> (N)orther direction coincides with <a class="code" href="fsi__chan__alg_8txt.html#af1ca369cf5d9c84bb9d78787e09be829">the</a> positive </div>
+<div class="line">s_1 direction.</div>
+</div><!-- fragment --><p>Domain is parametrised by three macro elements as sketched. Elements need to be derived from MacroElementNodeUpdateElementBase. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html#l00271">271</a> of file <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html">quarter_circle_sector_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ace75c8edb3d87019dc7f06152205adab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace75c8edb3d87019dc7f06152205adab">&#9670;&nbsp;</a></span>MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html">oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html">MacroElementNodeUpdateRefineableQuarterCircleSectorMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">GeomObject *&#160;</td>
+          <td class="paramname"><em>wall_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xi_lo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>fract_mid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xi_hi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying <a class="el" href="classoomph_1_1RefineableQuarterCircleSectorMesh.html">RefineableQuarterCircleSectorMesh</a>) and the algebraic node update functions for nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html#l00288">288</a> of file <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html">quarter_circle_sector_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html#l00366">oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt;::setup_macro_element_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a2d8953d309eba614524fce77c44c8d46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d8953d309eba614524fce77c44c8d46">&#9670;&nbsp;</a></span>~MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html">oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh</a>&lt; ELEMENT &gt;::~<a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html">MacroElementNodeUpdateRefineableQuarterCircleSectorMesh</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html#l00331">331</a> of file <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html">quarter_circle_sector_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a99403c711c3fdc2a601b478deebef9fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99403c711c3fdc2a601b478deebef9fe">&#9670;&nbsp;</a></span>node_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html">oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh</a>&lt; ELEMENT &gt;::node_update </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>update_all_solid_nodes</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resolve mesh update: Update current nodal positions via sparse MacroElement-based update. [Doesn't make sense to use this mesh with SolidElements anyway, so we buffer the case if update_all_solid_nodes is set to true.]. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html#l00338">338</a> of file <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html">quarter_circle_sector_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a94b5efa53ac7689757dad989098df7ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94b5efa53ac7689757dad989098df7ed">&#9670;&nbsp;</a></span>setup_macro_element_node_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh.html">oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh</a>&lt; ELEMENT &gt;::setup_macro_element_node_update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup all the information that's required for MacroElement-based node update: Tell the elements that their geometry depends on the geometric object that parametrises the wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html#l00366">366</a> of file <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html">quarter_circle_sector_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html#l00113">oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;::domain_pt()</a>, and <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html#l00134">oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;::Wall_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html#l00288">oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt;::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="quarter__circle__sector__mesh_8template_8h_source.html">quarter_circle_sector_mesh.template.h</a></li>
+</ul>
+</div><!-- contents -->
+<div class="ttc" id="afsi__chan__alg_8txt_html_a75f15746e5758321c4131e0c2146346f"><div class="ttname"><a href="fsi__chan__alg_8txt.html#a75f15746e5758321c4131e0c2146346f">coordinates</a></div><div class="ttdeci">its constituent FSI beam elements are sub GeomObjects that are parametrised by their coordinates</div><div class="ttdef"><b>Definition:</b> <a href="fsi__chan__alg_8txt_source.html#l00138">fsi_chan_alg.txt:138</a></div></div>
+<div class="ttc" id="afsi__chan__alg_8txt_html_a0a0d4ba6149e87b8c0b0c4e8e33f7e11"><div class="ttname"><a href="fsi__chan__alg_8txt.html#a0a0d4ba6149e87b8c0b0c4e8e33f7e11">wall</a></div><div class="ttdeci">The setup of the algebraic node update is very similar to that used in the&lt; A HREF=&quot;../../../navier_stokes/algebraic_collapsible_channel/html/index.html&quot;&gt; non FSI example discussed earlier&lt;/A &gt; The main difference between the two versions of the mesh is that we use the function c the default implementation of this function in the c GeomObject base class ensures that the mesh can be used with compound and non compound c GeomObjects We start by determining the x and y coordinates of the nodes and decide if they are located in the collapsible part of the we determine the intrinsic coordinate of the reference point on the upper wall(taking the offset between \f$ x\f$ and \f$ \zeta\f$ into account:The left end of the elastic wall is located at\f$ \zeta=0\f$ and at \f$ x=L_{up} \f$)</div></div>
+<div class="ttc" id="afsi__chan__alg_8txt_html_a28366a9775c6f52fb8596c1d643ab794"><div class="ttname"><a href="fsi__chan__alg_8txt.html#a28366a9775c6f52fb8596c1d643ab794">that</a></div><div class="ttdeci">the c GeomObject therefore acts as its own sub object This is a sensible default as it ensures that(\c geom_obj_pt, \f$ \zeta_{compound}\f$) and(\c sub_geom_obj_pt</div></div>
+<div class="ttc" id="afsi__chan__alg_8txt_html_af1ca369cf5d9c84bb9d78787e09be829"><div class="ttname"><a href="fsi__chan__alg_8txt.html#af1ca369cf5d9c84bb9d78787e09be829">the</a></div><div class="ttdeci">The setup of the algebraic node update is very similar to that used in the&lt; A HREF=&quot;../../../navier_stokes/algebraic_collapsible_channel/html/index.html&quot;&gt; non FSI example discussed earlier&lt;/A &gt; The main difference between the two versions of the mesh is that we use the function c the default implementation of this function in the c GeomObject base class ensures that the mesh can be used with compound and non compound c GeomObjects We start by determining the x and y coordinates of the nodes and decide if they are located in the collapsible part of the we determine the intrinsic coordinate of the reference point on the upper and identify the sub c GeomObject within which the reference point is located until locate_zeta Just to be on the safe we double check that the wall is still in its undeformed the fractional height of the and its intrinsic coordinate in the(sub-)\c GeomObject on the upper wall. We also store the intrinsic coordinate of the reference point in the compound \c GeomObject(i.e. the Lagrangian coordinate of the reference point in the continuous beam). This will turn out to be useful in the refineable version of this mesh</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:18:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,2011 @@
+\hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase}{}\doxysection{oomph\+::Unstructured\+Two\+D\+Mesh\+Geometry\+Base Class Reference}
+\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase}\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+
+
+{\ttfamily \#include $<$unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h$>$}
+
+Inheritance diagram for oomph\+::Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.816216cm]{classoomph_1_1UnstructuredTwoDMeshGeometryBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1base__vertex__info}{base\+\_\+vertex\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Data}{Data}} structure to store the base vertex info, initial or final vertex in the polylines have an associated base vertex. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1vertex__connection__info}{vertex\+\_\+connection\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Data}{Data}} structure filled when the connection matrix is created, for each polyline, there are two \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1vertex__connection__info}{vertex\+\_\+connection\+\_\+info}} structures, one for each end. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aedeab24841b52a4b1f11e01c7c254bd1}{Unstructured\+Two\+D\+Mesh\+Geometry\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a39637a4295ad41082d7c87c733448fff}{Unstructured\+Two\+D\+Mesh\+Geometry\+Base}} (const \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase}{Unstructured\+Two\+D\+Mesh\+Geometry\+Base}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8ca153f1dfa57edf9931d4cc4c5ef9b6}{operator=}} (const \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase}{Unstructured\+Two\+D\+Mesh\+Geometry\+Base}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a68f77a0ca6fa3eba42b69770b06ef97a}{$\sim$\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9776e5d11ad42ce4d49750d31a87e1fc}{nregion}} ()
+\begin{DoxyCompactList}\small\item\em Return the number of regions specified by attributes. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aec1fffbd004b1dd32a04d2665b5ea455}{nregion\+\_\+element}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the number of elements in the i-\/th region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abfc8c7de4f4b0050c818a0186e087531}{region\+\_\+element\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})
+\begin{DoxyCompactList}\small\item\em Return the e-\/th element in the i-\/th region. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab9ae7866b6cdc9f28253edbe4d634fe2}{nregion\+\_\+attribute}} ()
+\begin{DoxyCompactList}\small\item\em Return the number of attributes used in the mesh. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a166bb8462a9ccb50ce7d93b037bb6597}{region\+\_\+attribute}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the attribute associated with region i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac22d7ec6fc75341039ad5d6241e55541}{boundary\+\_\+geom\+\_\+object\+\_\+pt}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the geometric object associated with the b-\/th boundary or null if the boundary has associated geometric object. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab6e96f2bdf4d7cd76c6ed3b3459bf065}{boundary\+\_\+geom\+\_\+object\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the geometric object storage. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a020d5b78ac82fbc04e131f8ba3eea638}{boundary\+\_\+coordinate\+\_\+limits}} ()
+\begin{DoxyCompactList}\small\item\em Return access to the vector of boundary coordinates associated with each geometric object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac43fe4d9229d910fbce52db70f7b815c}{boundary\+\_\+coordinate\+\_\+limits}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return access to the coordinate limits associated with the geometric object associated with boundary b. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a93eb7cb31573833c66dc0eaa4ae357ef}{nboundary\+\_\+element\+\_\+in\+\_\+region}} (const unsigned \&b, const unsigned \&r) const
+\begin{DoxyCompactList}\small\item\em Return the number of elements adjacent to boundary b in region r. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a68c814fe9fb770509bfaec8f4ad1b932}{boundary\+\_\+element\+\_\+in\+\_\+region\+\_\+pt}} (const unsigned \&b, const unsigned \&r, const unsigned \&\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}) const
+\begin{DoxyCompactList}\small\item\em Return pointer to the e-\/th element adjacent to boundary b in region r. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a79e290f51b212b71d021cd1bd60abd3b}{face\+\_\+index\+\_\+at\+\_\+boundary\+\_\+in\+\_\+region}} (const unsigned \&b, const unsigned \&r, const unsigned \&\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}) const
+\begin{DoxyCompactList}\small\item\em Return face index of the e-\/th element adjacent to boundary b in region r. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9b65df01b68d6b5c81662c39a8523db4}{boundary\+\_\+polyline\+\_\+pt}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return pointer to the current polyline that describes the b-\/th mesh boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a12e63d83e38ef8f7cb31d9fe09f0de71}{nodes\+\_\+on\+\_\+boundary\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Gets a pointer to a set with all the nodes related with a boundary. \end{DoxyCompactList}\item 
+const bool \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a250f79da0b57d5567dbacf91ba93f29c}{get\+\_\+connected\+\_\+vertex\+\_\+number\+\_\+on\+\_\+destination\+\_\+polyline}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$dst\+\_\+polyline\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&vertex\+\_\+coordinates, unsigned \&vertex\+\_\+number)
+\begin{DoxyCompactList}\small\item\em Gets the vertex number on the destination polyline (used to create the connections among shared boundaries) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0d709e87f038a60e3c8f8b84af412fa4}{check\+\_\+contiguousness\+\_\+on\+\_\+polylines\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&polylines\+\_\+pt, unsigned \&index)
+\begin{DoxyCompactList}\small\item\em Sort the polylines coming from joining them. Check whether it is necessary to reverse them or not. Used when joining two curve polylines in order to create a polygon. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3c9454772f4b9fd99aba7e99e2b15d6b}{check\+\_\+contiguousness\+\_\+on\+\_\+polylines\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&polylines\+\_\+pt, unsigned \&index\+\_\+halo\+\_\+start, unsigned \&index\+\_\+halo\+\_\+end)
+\begin{DoxyCompactList}\small\item\em Sort the polylines coming from joining them. Check whether it is necessary to reverse them or not. Used when joining polylines and they still do not create a polygon. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_adc3f1f9607dcf468c6cfb458538248df}{is\+\_\+point\+\_\+inside\+\_\+polygon\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ polygon\+\_\+vertices, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ point)
+\begin{DoxyCompactList}\small\item\em Helper function that checks if a given point is inside a polygon. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a745b1231879429cfb16c2c7b59fbdad6}{enable\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1c91523d587f6cabf3c1fc275799a83d}{disable\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries}} ()
+\item 
+bool \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a23b5ebef48eda89918643c78e927b94a}{is\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries\+\_\+allowed}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aefb9c0246505a9f260ed7f91022d6576}{flush\+\_\+boundary\+\_\+segment\+\_\+node}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Flush the boundary segment node storage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3928fb706b699964e0705a7fe2a1c8dc}{set\+\_\+nboundary\+\_\+segment\+\_\+node}} (const unsigned \&b, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
+\begin{DoxyCompactList}\small\item\em Set the number of segments associated with a boundary. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a5408ad4ce30e3c987c32dab46cdffba2}{nboundary\+\_\+segment}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the number of segments associated with a boundary. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a667c4dff46145685622836fc3b7af92d}{nboundary\+\_\+segment\+\_\+node}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the number of segments associated with a boundary. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_af9b3b54526e72cc9a1909f141e8d5675}{nboundary\+\_\+segment\+\_\+node}} (const unsigned \&b, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
+\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a967d6bf715fca6ed9d8cd9a38382990b}{add\+\_\+boundary\+\_\+segment\+\_\+node}} (const unsigned \&b, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Mesh_aebdb699466fe07f2e27aa4404008cde4}{node\+\_\+pt}})
+\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aecab296a3a2dc4b413458309748b6065}{boundary\+\_\+initial\+\_\+coordinate}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the initial coordinates of a boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a20fb1983af13d17646e665bd0128d20c}{boundary\+\_\+final\+\_\+coordinate}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the final coordinates of a boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a14a3519c23aff7de59569335e4103eaf}{boundary\+\_\+initial\+\_\+zeta\+\_\+coordinate}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the initial zeta coordinate of a boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_adfb63b763c3b6ffe323d442db59282e1}{boundary\+\_\+final\+\_\+zeta\+\_\+coordinate}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the final zeta coordinates of a boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3fec5401134aabfc558e6e5cbd4c64a3}{boundary\+\_\+segment\+\_\+inverted}} ()
+\begin{DoxyCompactList}\small\item\em Return the info. to know if it is necessary to reverse the segment based on a previous mesh. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a80f8674a188d2b915ef5a81ea47c3c2c}{boundary\+\_\+segment\+\_\+initial\+\_\+coordinate}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the initial coordinates for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_af6babfe55a6332df94e6edd6fdeab0c1}{boundary\+\_\+segment\+\_\+final\+\_\+coordinate}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the final coordinates for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8c7a3d2e637451a4dd01182ee6e8481d}{boundary\+\_\+segment\+\_\+initial\+\_\+arclength}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the initial arclength for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a7008843c35d7b2d31d221157c8963946}{boundary\+\_\+segment\+\_\+final\+\_\+arclength}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the final arclength for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a437a73c9d0b078c121c254ed2e8cd487}{boundary\+\_\+segment\+\_\+initial\+\_\+zeta}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the initial zeta for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0c4ddf7cd3106ffde2b8cbb6528e0d7d}{boundary\+\_\+segment\+\_\+final\+\_\+zeta}} ()
+\begin{DoxyCompactList}\small\item\em Return direct access to the final zeta for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_affa5cd6a3e3cf61b376cea5ab3d06123}{boundary\+\_\+segment\+\_\+initial\+\_\+zeta}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the initial zeta for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9c5a285a5b12a4b211ceb19e54d3d3d9}{boundary\+\_\+segment\+\_\+final\+\_\+zeta}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the final zeta for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9722a9b359c6ef422e423067416d3018}{boundary\+\_\+initial\+\_\+coordinate}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the initial coordinates for the boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab89b546b971d716e13157e3758c8b3ef}{boundary\+\_\+final\+\_\+coordinate}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the final coordinates for the boundary. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0ff7b48dd70784f8128cd5ec494e3efa}{boundary\+\_\+segment\+\_\+inverted}} (const unsigned \&b) const
+\begin{DoxyCompactList}\small\item\em Return the info. to know if it is necessary to reverse the segment based on a previous mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aad1837f55c6d5c9788e80e8cfa3db365}{boundary\+\_\+segment\+\_\+inverted}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the info. to know if it is necessary to reverse the segment based on a previous mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab631fe3d2b7f0d4ac7155d0636db7c3b}{boundary\+\_\+initial\+\_\+zeta\+\_\+coordinate}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the initial zeta coordinate for the boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a261c52001f2bddc41821162ed5ccfe77}{boundary\+\_\+final\+\_\+zeta\+\_\+coordinate}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the final zeta coordinate for the boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a46f0b2d486e0610acebc5eb17bc9dea0}{boundary\+\_\+segment\+\_\+initial\+\_\+arclength}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the initial arclength for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1a97201d4f2c21a1612296a58ba2358d}{boundary\+\_\+segment\+\_\+final\+\_\+arclength}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the final arclength for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aae49290cc9b125e7e837a77e1aa8c7e8}{boundary\+\_\+segment\+\_\+initial\+\_\+coordinate}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the initial coordinates for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a2ce0bf675ce11df098c279b5f5d52f1d}{boundary\+\_\+segment\+\_\+final\+\_\+coordinate}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Return the final coordinates for the segments that are part of a boundary. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9edf47b5d621689f7c1d376b9c057ede}{setup\+\_\+boundary\+\_\+coordinates}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Setup boundary coordinate on boundary b. Boundary coordinate increases continously along polygonal boundary. It\textquotesingle{}s zero at the lowest left node on the boundary. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a133876ad6f2c50ca0325b1f8f49fb42d}{setup\+\_\+boundary\+\_\+coordinates}} (const unsigned \&b, std\+::ofstream \&outfile)
+\begin{DoxyCompactList}\small\item\em Setup boundary coordinate on boundary b. Doc Faces in outfile. Boundary coordinate increases continously along polygonal boundary. It\textquotesingle{}s zero at the lowest left node on the boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ unsigned, bool $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a218948f01cea679c910950782ba8ffde}{Assigned\+\_\+segments\+\_\+initial\+\_\+zeta\+\_\+values}}
+\begin{DoxyCompactList}\small\item\em Flag used at the setup\+\_\+boundary\+\_\+coordinate function to know if initial zeta values for segments have been assigned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1ae304480461c0dba53e7ce07e7ed21f}{Suppress\+\_\+warning\+\_\+about\+\_\+regions\+\_\+and\+\_\+boundaries}} =true
+\begin{DoxyCompactList}\small\item\em Public static flag to suppress warning; defaults to false. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad718283a37c45ff4fbd96149867b30bf}{build\+\_\+triangulateio}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&outer\+\_\+polygons\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&internal\+\_\+polygons\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&open\+\_\+curves\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&extra\+\_\+holes\+\_\+coordinates, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&regions\+\_\+coordinates, std\+::map$<$ unsigned, double $>$ \&regions\+\_\+areas, \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&triangulate\+\_\+io)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object from outer boundaries, internal boundaries, and open curves. Add the holes and regions information as well. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae05fb2391856e555435632c64fa63f08}{add\+\_\+connection\+\_\+matrix\+\_\+info\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$polyline\+\_\+pt, std\+::map$<$ unsigned, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1vertex__connection__info}{vertex\+\_\+connection\+\_\+info}} $>$ $>$ $>$ \&connection\+\_\+matrix, \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$next\+\_\+polyline\+\_\+pt=0)
+\begin{DoxyCompactList}\small\item\em Helps to add information to the connection matrix of the given polyline. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae6266526c3321933f8e13f3b53d234bf}{initialise\+\_\+base\+\_\+vertex}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$polyline\+\_\+pt, std\+::map$<$ unsigned, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1base__vertex__info}{base\+\_\+vertex\+\_\+info}} $>$ $>$ $>$ \&base\+\_\+vertices)
+\begin{DoxyCompactList}\small\item\em Initialise the base vertex structure, set every vertex to no visited and not being a base vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_af23ca325fcc70af06e9fad71fc284b29}{add\+\_\+base\+\_\+vertex\+\_\+info\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$polyline\+\_\+pt, std\+::map$<$ unsigned, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1base__vertex__info}{base\+\_\+vertex\+\_\+info}} $>$ $>$ $>$ \&base\+\_\+vertices, std\+::map$<$ unsigned, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1vertex__connection__info}{vertex\+\_\+connection\+\_\+info}} $>$ $>$ $>$ \&connection\+\_\+matrix, std\+::map$<$ unsigned, std\+::map$<$ unsigned, unsigned $>$ $>$ \&boundary\+\_\+chunk\+\_\+nvertices)
+\begin{DoxyCompactList}\small\item\em Helps to identify the base vertex of the given polyline. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a569174a8d7d51bd5ef8f468a625c7316}{snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects}} ()
+\begin{DoxyCompactList}\small\item\em Snap the boundary nodes onto any curvilinear boundaries defined by geometric objects. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa120eef8da13fbd69503ae1087d0dccf}{copy\+\_\+connection\+\_\+information}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$input\+\_\+curve\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$output\+\_\+curve\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Helper function to copy the connection information from the input curve(polyline or curviline) to the output polyline. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a929e73858bd06401ad92955aef69985c}{copy\+\_\+connection\+\_\+information\+\_\+to\+\_\+sub\+\_\+polylines}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$input\+\_\+curve\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$output\+\_\+curve\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Helper function to copy the connection information from the input curve(polyline or curviline) to the output sub-\/polyline. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa4c390235c6d7865b62a6604a6d7b780}{create\+\_\+vertex\+\_\+coordinates\+\_\+for\+\_\+polyline\+\_\+no\+\_\+connections}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshCurviLine}{Triangle\+Mesh\+Curvi\+Line}} $\ast$boundary\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&vertex\+\_\+coord, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ double, double $>$ $>$ \&polygonal\+\_\+vertex\+\_\+arclength\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Helper function to create polyline vertex coordinates for curvilinear boundary specified by boundary\+\_\+pt, using either equal increments in zeta or in (approximate) arclength along the curviline. vertex\+\_\+coord\mbox{[}i\+\_\+vertex\mbox{]}\mbox{[}i\+\_\+dim\mbox{]} stores i\+\_\+dim-\/th coordinate of i\+\_\+vertex-\/th vertex. polygonal\+\_\+vertex\+\_\+arclength\+\_\+info\mbox{[}i\+\_\+vertex\mbox{]} contains the pair of doubles made of the arclength of the i\+\_\+vertex-\/th vertex along the polygonal representation (.first), and the corresponding coordinate on the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (.second) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a22ba2b359eebe24f9ba1f40be54643d8}{create\+\_\+vertex\+\_\+coordinates\+\_\+for\+\_\+polyline\+\_\+connections}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshCurviLine}{Triangle\+Mesh\+Curvi\+Line}} $\ast$boundary\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&vertex\+\_\+coord, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ double, double $>$ $>$ \&polygonal\+\_\+vertex\+\_\+arclength\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Helper function to create polyline vertex coordinates for curvilinear boundary specified by boundary\+\_\+pt, using either equal increments in zeta or in (approximate) arclength along the curviline. vertex\+\_\+coord\mbox{[}i\+\_\+vertex\mbox{]}\mbox{[}i\+\_\+dim\mbox{]} stores i\+\_\+dim-\/th coordinate of i\+\_\+vertex-\/th vertex. polygonal\+\_\+vertex\+\_\+arclength\+\_\+info\mbox{[}i\+\_\+vertex\mbox{]} contains the pair of doubles made of the arclength of the i\+\_\+vertex-\/th vertex along the polygonal representation (.first), and the corresponding coordinate on the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (.second) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aae3789d2b4c4d3c244dfb2cd7c33eafb}{closed\+\_\+curve\+\_\+to\+\_\+polygon\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve}{Triangle\+Mesh\+Closed\+Curve}} $\ast$closed\+\_\+curve\+\_\+pt, unsigned \&max\+\_\+bnd\+\_\+id\+\_\+local)
+\begin{DoxyCompactList}\small\item\em Helper function that returns a polygon representation for the given closed curve, it also computes the maximum boundary id of the constituent curves. If the \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve}{Triangle\+Mesh\+Closed\+Curve}} is already a \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} we simply return a pointer to it. Otherwise a new Trilangle\+Mesh\+Polygon is created -- this is deleted automatically when the \mbox{\hyperlink{classoomph_1_1TriangleMesh}{Triangle\+Mesh}} destructor is called, so no external book-\/keeping is required. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a66cbc8235c29cec41322f4e367a4e228}{create\+\_\+open\+\_\+curve\+\_\+with\+\_\+polyline\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$open\+\_\+curve\+\_\+pt, unsigned \&max\+\_\+bnd\+\_\+id\+\_\+local)
+\begin{DoxyCompactList}\small\item\em Helper function that creates and returns an open curve with the polyline representation of its constituent curve sections. The new created open curve is deleted when the \mbox{\hyperlink{classoomph_1_1TriangleMesh}{Triangle\+Mesh}} destructor is called. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae245bcf2f048ba47e59aa98abc437970}{set\+\_\+geom\+\_\+objects\+\_\+and\+\_\+coordinate\+\_\+limits\+\_\+for\+\_\+close\+\_\+curve}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve}{Triangle\+Mesh\+Closed\+Curve}} $\ast$input\+\_\+closed\+\_\+curve\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Stores the geometric objects associated to the curve sections that compound the closed curve. It also stores the limits defined by these geometric objects. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad79be82dd161b1f6e5dc967969f88f6f}{set\+\_\+geom\+\_\+objects\+\_\+and\+\_\+coordinate\+\_\+limits\+\_\+for\+\_\+open\+\_\+curve}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$input\+\_\+open\+\_\+curve\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Stores the geometric objects associated to the curve sections that compound the open curve. It also stores the limits defined by these geometric objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad32540548b45899b632136726d85721c}{Boundary\+\_\+segment\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Used to store the nodes associated to a boundary and to an specific segment (this only applies in distributed meshes where the boundary is splitted in segments) \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a758438ca379cd0922b0b5ebf4f52bb5f}{Boundary\+\_\+segment\+\_\+initial\+\_\+zeta}}
+\begin{DoxyCompactList}\small\item\em Stores the initial zeta coordinate for the segments that appear when a boundary is splited among processors. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac49ab6620bdbd45c8ea57139e35c0043}{Boundary\+\_\+segment\+\_\+final\+\_\+zeta}}
+\begin{DoxyCompactList}\small\item\em Stores the final zeta coordinate for the segments that appear when a boundary is splited among processors. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a4ad531467bdd7f379902a81d9eaa9e3e}{Boundary\+\_\+initial\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em Stores the initial coordinates for the boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1753fbd79a4a982ab4ab0f5b276404f2}{Boundary\+\_\+final\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em Stores the final coordinates for the boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a66043cfe6f94d288008be15053313423}{Boundary\+\_\+segment\+\_\+inverted}}
+\begin{DoxyCompactList}\small\item\em Stores the info. to know if it is necessary to reverse the segment based on a previous mesh. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abde4ed32016c0d3f78308414d3d06184}{Boundary\+\_\+initial\+\_\+zeta\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em Stores the initial zeta coordinate for the boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa142423836a48f4efddc0c932f52c5e3}{Boundary\+\_\+final\+\_\+zeta\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em Stores the final zeta coordinate for the boundary. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac7b44efb9a02617df5e9e2294383f94a}{Boundary\+\_\+segment\+\_\+initial\+\_\+arclength}}
+\begin{DoxyCompactList}\small\item\em Stores the initial arclength for the segments that appear when a boundary is splited among processors. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3490d696ab12e97ec95762d712e86084}{Boundary\+\_\+segment\+\_\+final\+\_\+arclength}}
+\begin{DoxyCompactList}\small\item\em Stores the final arclength for the segments that appear when a boundary is splited among processors. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3010ddd2e1491f2c69db31a6e2031fbd}{Boundary\+\_\+segment\+\_\+initial\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em Stores the initial coordinates for the segments that appear when a boundary is splited among processors. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a5b6d5112a12d39e9ddd45b91c5fc7670}{Boundary\+\_\+segment\+\_\+final\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em Stores the final coordinates for the segments that appear when a boundary is splited among processors. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a76998de1646db8791b5c4935e9820577}{Allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate whether the automatic creation of vertices along the boundaries by Triangle is allowed. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a409ca5d71a2010d3ab423726d8ca76aa}{Region\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of elements in each region differentiated by attribute (the key of the map is the attribute) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8f809ba6140c7d14c08dcefddd9674e3}{Region\+\_\+attribute}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of attributes associated with the elements in each region. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab3704f72854a655c2821b3be9873c469}{Boundary\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the geometric objects associated with any boundaries. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab9fd3f991e47b75610acd7bcef61a2e0}{Boundary\+\_\+coordinate\+\_\+limits}}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a2b91a5fed5bff190887ae03a2e6ee256}{Outer\+\_\+boundary\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Polygon that defines outer boundaries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3de1aa3ecfee67b29078369da4bc6738}{Internal\+\_\+polygon\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of polygons that define internal polygons. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0f3abdd0856a496bd73baf613d4e6fde}{Internal\+\_\+open\+\_\+curve\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of open polylines that define internal curves. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a75f6839c28d529b43ada0bd94df8b79f}{Extra\+\_\+holes\+\_\+coordinates}}
+\begin{DoxyCompactList}\small\item\em Storage for extra coordinates for holes. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa94a901c613b135fc1409697aa32d3eb}{Regions\+\_\+coordinates}}
+\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abde107f80f0a70d1dd35bd21f96d20d3}{Boundary\+\_\+curve\+\_\+section\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A map that stores the associated curve section of the specified boundary id. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_afa7317f52f742cf5ea8c4d0b6c9b6e2f}{Boundary\+\_\+region\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for elements adjacent to a boundary in a particular region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9133b1b7ec58c2b199700037cffbd1d7}{Face\+\_\+index\+\_\+region\+\_\+at\+\_\+boundary}}
+\begin{DoxyCompactList}\small\item\em Storage for the face index adjacent to a boundary in a particular region. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ double, double $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a6141935bb2268112a29b4f40073aa207}{Polygonal\+\_\+vertex\+\_\+arclength\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Storage for pairs of doubles representing\+: .first\+: the arclength along the polygonal representation of the curviline .second\+: the corresponding intrinsic coordinate on the associated geometric object at which the vertices on the specified boundary are located. Only used for boundaries represented by geom objects. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9e7db5c7ede7df8d7e79e0f93567f047}{Nodes\+\_\+on\+\_\+boundary\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Stores a pointer to a set with all the nodes related with a boundary. \end{DoxyCompactList}\item 
+std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac3aa35d17523a1dbeaf4739c6ab5adc8}{Free\+\_\+curve\+\_\+section\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A set that contains the curve sections created by this object therefore it is necessary to free their associated memory. \end{DoxyCompactList}\item 
+std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad0e156686ae6ae41a187d7a0c71c6861}{Free\+\_\+polygon\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A set that contains the polygons created by this object therefore it is necessary to free their associated memory. \end{DoxyCompactList}\item 
+std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa3b1beb78b5261398428c1e14a6411ae}{Free\+\_\+open\+\_\+curve\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A set that contains the open curves created by this object therefore it is necessary to free their associated memory. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_adc292b9fbb1e65a3b768597169c5de91}{Immersed\+\_\+rigid\+\_\+body\+\_\+triangle\+\_\+mesh\+\_\+polygon\+\_\+used}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae0287b88002273bb17ebcc5b3a25776a}{curviline\+\_\+to\+\_\+polyline}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshCurviLine}{Triangle\+Mesh\+Curvi\+Line}} $\ast$\&curviline\+\_\+pt, unsigned \&bnd\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Helper function that creates the associated polyline representation for curvilines. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8f1cbe4c85634fc1bc7141ad3d2e973f}{get\+\_\+associated\+\_\+vertex\+\_\+to\+\_\+svalue}} (double \&target\+\_\+s\+\_\+value, unsigned \&bnd\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Get the associated vertex to the given s value by looking to the list of s values created when changing from curviline to polyline. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abb5c8ca1b64f62215f860b03990acd16}{get\+\_\+associated\+\_\+vertex\+\_\+to\+\_\+svalue}} (double \&target\+\_\+s\+\_\+value, unsigned \&bnd\+\_\+id, double \&s\+\_\+tolerance)
+\begin{DoxyCompactList}\small\item\em Get the associated vertex to the given s value by looking to the list of s values created when changing from curviline to polyline. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Contains functions which define the geometry of the mesh, i.\+e. regions, boundaries, etc. 
+
+Definition at line 1605 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aedeab24841b52a4b1f11e01c7c254bd1}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aedeab24841b52a4b1f11e01c7c254bd1}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!UnstructuredTwoDMeshGeometryBase@{UnstructuredTwoDMeshGeometryBase}}
+\index{UnstructuredTwoDMeshGeometryBase@{UnstructuredTwoDMeshGeometryBase}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{UnstructuredTwoDMeshGeometryBase()}{UnstructuredTwoDMeshGeometryBase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line 1613 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a39637a4295ad41082d7c87c733448fff}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a39637a4295ad41082d7c87c733448fff}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!UnstructuredTwoDMeshGeometryBase@{UnstructuredTwoDMeshGeometryBase}}
+\index{UnstructuredTwoDMeshGeometryBase@{UnstructuredTwoDMeshGeometryBase}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{UnstructuredTwoDMeshGeometryBase()}{UnstructuredTwoDMeshGeometryBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase}{Unstructured\+Two\+D\+Mesh\+Geometry\+Base}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 1616 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a68f77a0ca6fa3eba42b69770b06ef97a}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a68f77a0ca6fa3eba42b69770b06ef97a}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!````~UnstructuredTwoDMeshGeometryBase@{$\sim$UnstructuredTwoDMeshGeometryBase}}
+\index{````~UnstructuredTwoDMeshGeometryBase@{$\sim$UnstructuredTwoDMeshGeometryBase}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{$\sim$UnstructuredTwoDMeshGeometryBase()}{~UnstructuredTwoDMeshGeometryBase()}}
+{\footnotesize\ttfamily oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::$\sim$\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 1629 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_af23ca325fcc70af06e9fad71fc284b29}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_af23ca325fcc70af06e9fad71fc284b29}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!add\_base\_vertex\_info\_helper@{add\_base\_vertex\_info\_helper}}
+\index{add\_base\_vertex\_info\_helper@{add\_base\_vertex\_info\_helper}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{add\_base\_vertex\_info\_helper()}{add\_base\_vertex\_info\_helper()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::add\+\_\+base\+\_\+vertex\+\_\+info\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$}]{polyline\+\_\+pt,  }\item[{std\+::map$<$ unsigned, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1base__vertex__info}{base\+\_\+vertex\+\_\+info}} $>$ $>$ $>$ \&}]{base\+\_\+vertices,  }\item[{std\+::map$<$ unsigned, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1vertex__connection__info}{vertex\+\_\+connection\+\_\+info}} $>$ $>$ $>$ \&}]{connection\+\_\+matrix,  }\item[{std\+::map$<$ unsigned, std\+::map$<$ unsigned, unsigned $>$ $>$ \&}]{boundary\+\_\+chunk\+\_\+nvertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helps to identify the base vertex of the given polyline. 
+
+
+
+Definition at line 3621 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+chunk(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::boundary\+\_\+chunk, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::vertex\+\_\+connection\+\_\+info\+::boundary\+\_\+chunk\+\_\+to\+\_\+connect, oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+id(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::boundary\+\_\+id, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::vertex\+\_\+connection\+\_\+info\+::boundary\+\_\+id\+\_\+to\+\_\+connect, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::has\+\_\+base\+\_\+vertex\+\_\+assigned, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::is\+\_\+base\+\_\+vertex, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::vertex\+\_\+connection\+\_\+info\+::is\+\_\+connected, oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::vertex\+\_\+number, and oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::vertex\+\_\+connection\+\_\+info\+::vertex\+\_\+number\+\_\+to\+\_\+connect.
+
+
+
+Referenced by build\+\_\+triangulateio().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a967d6bf715fca6ed9d8cd9a38382990b}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a967d6bf715fca6ed9d8cd9a38382990b}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!add\_boundary\_segment\_node@{add\_boundary\_segment\_node}}
+\index{add\_boundary\_segment\_node@{add\_boundary\_segment\_node}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{add\_boundary\_segment\_node()}{add\_boundary\_segment\_node()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::add\+\_\+boundary\+\_\+segment\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Add the node node\+\_\+pt to the b-\/th boundary and the s-\/th segment of the mesh 
+
+Definition at line 1918 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References n, and s.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae05fb2391856e555435632c64fa63f08}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae05fb2391856e555435632c64fa63f08}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!add\_connection\_matrix\_info\_helper@{add\_connection\_matrix\_info\_helper}}
+\index{add\_connection\_matrix\_info\_helper@{add\_connection\_matrix\_info\_helper}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{add\_connection\_matrix\_info\_helper()}{add\_connection\_matrix\_info\_helper()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::add\+\_\+connection\+\_\+matrix\+\_\+info\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$}]{polyline\+\_\+pt,  }\item[{std\+::map$<$ unsigned, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1vertex__connection__info}{vertex\+\_\+connection\+\_\+info}} $>$ $>$ $>$ \&}]{connection\+\_\+matrix,  }\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$}]{next\+\_\+polyline\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helps to add information to the connection matrix of the given polyline. 
+
+
+
+Definition at line 3458 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+chunk(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::vertex\+\_\+connection\+\_\+info\+::boundary\+\_\+chunk\+\_\+to\+\_\+connect, oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+id(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::vertex\+\_\+connection\+\_\+info\+::boundary\+\_\+id\+\_\+to\+\_\+connect, oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+bnd\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+chunk(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+vertex(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+bnd\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+chunk(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+vertex(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::vertex\+\_\+connection\+\_\+info\+::is\+\_\+connected, oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+final\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+initial\+\_\+vertex\+\_\+connected(), and oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::vertex\+\_\+connection\+\_\+info\+::vertex\+\_\+number\+\_\+to\+\_\+connect.
+
+
+
+Referenced by build\+\_\+triangulateio().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a020d5b78ac82fbc04e131f8ba3eea638}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a020d5b78ac82fbc04e131f8ba3eea638}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_coordinate\_limits@{boundary\_coordinate\_limits}}
+\index{boundary\_coordinate\_limits@{boundary\_coordinate\_limits}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_coordinate\_limits()}{boundary\_coordinate\_limits()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+coordinate\+\_\+limits (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return access to the vector of boundary coordinates associated with each geometric object. 
+
+
+
+Definition at line 1725 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac43fe4d9229d910fbce52db70f7b815c}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac43fe4d9229d910fbce52db70f7b815c}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_coordinate\_limits@{boundary\_coordinate\_limits}}
+\index{boundary\_coordinate\_limits@{boundary\_coordinate\_limits}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_coordinate\_limits()}{boundary\_coordinate\_limits()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+coordinate\+\_\+limits (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return access to the coordinate limits associated with the geometric object associated with boundary b. 
+
+
+
+Definition at line 1732 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a68c814fe9fb770509bfaec8f4ad1b932}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a68c814fe9fb770509bfaec8f4ad1b932}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_element\_in\_region\_pt@{boundary\_element\_in\_region\_pt}}
+\index{boundary\_element\_in\_region\_pt@{boundary\_element\_in\_region\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_element\_in\_region\_pt()}{boundary\_element\_in\_region\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+element\+\_\+in\+\_\+region\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{r,  }\item[{const unsigned \&}]{e }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to the e-\/th element adjacent to boundary b in region r. 
+
+
+
+Definition at line 1768 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References e.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a20fb1983af13d17646e665bd0128d20c}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a20fb1983af13d17646e665bd0128d20c}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_final\_coordinate@{boundary\_final\_coordinate}}
+\index{boundary\_final\_coordinate@{boundary\_final\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_final\_coordinate()}{boundary\_final\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+final\+\_\+coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the final coordinates of a boundary. 
+
+
+
+Definition at line 1954 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab89b546b971d716e13157e3758c8b3ef}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab89b546b971d716e13157e3758c8b3ef}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_final\_coordinate@{boundary\_final\_coordinate}}
+\index{boundary\_final\_coordinate@{boundary\_final\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_final\_coordinate()}{boundary\_final\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+final\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the final coordinates for the boundary. 
+
+
+
+Definition at line 2095 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_adfb63b763c3b6ffe323d442db59282e1}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_adfb63b763c3b6ffe323d442db59282e1}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_final\_zeta\_coordinate@{boundary\_final\_zeta\_coordinate}}
+\index{boundary\_final\_zeta\_coordinate@{boundary\_final\_zeta\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_final\_zeta\_coordinate()}{boundary\_final\_zeta\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+final\+\_\+zeta\+\_\+coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the final zeta coordinates of a boundary. 
+
+
+
+Definition at line 1968 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a261c52001f2bddc41821162ed5ccfe77}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a261c52001f2bddc41821162ed5ccfe77}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_final\_zeta\_coordinate@{boundary\_final\_zeta\_coordinate}}
+\index{boundary\_final\_zeta\_coordinate@{boundary\_final\_zeta\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_final\_zeta\_coordinate()}{boundary\_final\_zeta\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+final\+\_\+zeta\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the final zeta coordinate for the boundary. 
+
+
+
+Definition at line 2190 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab6e96f2bdf4d7cd76c6ed3b3459bf065}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab6e96f2bdf4d7cd76c6ed3b3459bf065}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_geom\_object\_pt@{boundary\_geom\_object\_pt}}
+\index{boundary\_geom\_object\_pt@{boundary\_geom\_object\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_geom\_object\_pt()}{boundary\_geom\_object\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the geometric object storage. 
+
+
+
+Definition at line 1718 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac22d7ec6fc75341039ad5d6241e55541}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac22d7ec6fc75341039ad5d6241e55541}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_geom\_object\_pt@{boundary\_geom\_object\_pt}}
+\index{boundary\_geom\_object\_pt@{boundary\_geom\_object\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_geom\_object\_pt()}{boundary\_geom\_object\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the geometric object associated with the b-\/th boundary or null if the boundary has associated geometric object. 
+
+
+
+Definition at line 1703 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aecab296a3a2dc4b413458309748b6065}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aecab296a3a2dc4b413458309748b6065}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_initial\_coordinate@{boundary\_initial\_coordinate}}
+\index{boundary\_initial\_coordinate@{boundary\_initial\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_initial\_coordinate()}{boundary\_initial\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+initial\+\_\+coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the initial coordinates of a boundary. 
+
+
+
+Definition at line 1948 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9722a9b359c6ef422e423067416d3018}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9722a9b359c6ef422e423067416d3018}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_initial\_coordinate@{boundary\_initial\_coordinate}}
+\index{boundary\_initial\_coordinate@{boundary\_initial\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_initial\_coordinate()}{boundary\_initial\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+initial\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the initial coordinates for the boundary. 
+
+
+
+Definition at line 2073 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a14a3519c23aff7de59569335e4103eaf}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a14a3519c23aff7de59569335e4103eaf}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_initial\_zeta\_coordinate@{boundary\_initial\_zeta\_coordinate}}
+\index{boundary\_initial\_zeta\_coordinate@{boundary\_initial\_zeta\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_initial\_zeta\_coordinate()}{boundary\_initial\_zeta\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+initial\+\_\+zeta\+\_\+coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the initial zeta coordinate of a boundary. 
+
+
+
+Definition at line 1961 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab631fe3d2b7f0d4ac7155d0636db7c3b}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab631fe3d2b7f0d4ac7155d0636db7c3b}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_initial\_zeta\_coordinate@{boundary\_initial\_zeta\_coordinate}}
+\index{boundary\_initial\_zeta\_coordinate@{boundary\_initial\_zeta\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_initial\_zeta\_coordinate()}{boundary\_initial\_zeta\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+initial\+\_\+zeta\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the initial zeta coordinate for the boundary. 
+
+
+
+Definition at line 2166 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9b65df01b68d6b5c81662c39a8523db4}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9b65df01b68d6b5c81662c39a8523db4}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_polyline\_pt@{boundary\_polyline\_pt}}
+\index{boundary\_polyline\_pt@{boundary\_polyline\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_polyline\_pt()}{boundary\_polyline\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}}$\ast$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to the current polyline that describes the b-\/th mesh boundary. 
+
+
+
+Definition at line 1812 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a7008843c35d7b2d31d221157c8963946}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a7008843c35d7b2d31d221157c8963946}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_final\_arclength@{boundary\_segment\_final\_arclength}}
+\index{boundary\_segment\_final\_arclength@{boundary\_segment\_final\_arclength}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_final\_arclength()}{boundary\_segment\_final\_arclength()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+final\+\_\+arclength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the final arclength for the segments that are part of a boundary. 
+
+
+
+Definition at line 2005 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1a97201d4f2c21a1612296a58ba2358d}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1a97201d4f2c21a1612296a58ba2358d}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_final\_arclength@{boundary\_segment\_final\_arclength}}
+\index{boundary\_segment\_final\_arclength@{boundary\_segment\_final\_arclength}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_final\_arclength()}{boundary\_segment\_final\_arclength()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+final\+\_\+arclength (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the final arclength for the segments that are part of a boundary. 
+
+
+
+Definition at line 2238 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_af6babfe55a6332df94e6edd6fdeab0c1}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_af6babfe55a6332df94e6edd6fdeab0c1}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_final\_coordinate@{boundary\_segment\_final\_coordinate}}
+\index{boundary\_segment\_final\_coordinate@{boundary\_segment\_final\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_final\_coordinate()}{boundary\_segment\_final\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+final\+\_\+coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the final coordinates for the segments that are part of a boundary. 
+
+
+
+Definition at line 1991 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a2ce0bf675ce11df098c279b5f5d52f1d}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a2ce0bf675ce11df098c279b5f5d52f1d}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_final\_coordinate@{boundary\_segment\_final\_coordinate}}
+\index{boundary\_segment\_final\_coordinate@{boundary\_segment\_final\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_final\_coordinate()}{boundary\_segment\_final\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+final\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the final coordinates for the segments that are part of a boundary. 
+
+
+
+Definition at line 2286 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0c4ddf7cd3106ffde2b8cbb6528e0d7d}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0c4ddf7cd3106ffde2b8cbb6528e0d7d}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_final\_zeta@{boundary\_segment\_final\_zeta}}
+\index{boundary\_segment\_final\_zeta@{boundary\_segment\_final\_zeta}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_final\_zeta()}{boundary\_segment\_final\_zeta()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+final\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the final zeta for the segments that are part of a boundary. 
+
+
+
+Definition at line 2019 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9c5a285a5b12a4b211ceb19e54d3d3d9}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9c5a285a5b12a4b211ceb19e54d3d3d9}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_final\_zeta@{boundary\_segment\_final\_zeta}}
+\index{boundary\_segment\_final\_zeta@{boundary\_segment\_final\_zeta}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_final\_zeta()}{boundary\_segment\_final\_zeta()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+final\+\_\+zeta (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the final zeta for the segments that are part of a boundary. 
+
+
+
+Definition at line 2050 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8c7a3d2e637451a4dd01182ee6e8481d}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8c7a3d2e637451a4dd01182ee6e8481d}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_initial\_arclength@{boundary\_segment\_initial\_arclength}}
+\index{boundary\_segment\_initial\_arclength@{boundary\_segment\_initial\_arclength}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_initial\_arclength()}{boundary\_segment\_initial\_arclength()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+initial\+\_\+arclength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the initial arclength for the segments that are part of a boundary. 
+
+
+
+Definition at line 1998 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a46f0b2d486e0610acebc5eb17bc9dea0}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a46f0b2d486e0610acebc5eb17bc9dea0}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_initial\_arclength@{boundary\_segment\_initial\_arclength}}
+\index{boundary\_segment\_initial\_arclength@{boundary\_segment\_initial\_arclength}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_initial\_arclength()}{boundary\_segment\_initial\_arclength()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+initial\+\_\+arclength (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the initial arclength for the segments that are part of a boundary. 
+
+
+
+Definition at line 2214 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a80f8674a188d2b915ef5a81ea47c3c2c}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a80f8674a188d2b915ef5a81ea47c3c2c}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_initial\_coordinate@{boundary\_segment\_initial\_coordinate}}
+\index{boundary\_segment\_initial\_coordinate@{boundary\_segment\_initial\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_initial\_coordinate()}{boundary\_segment\_initial\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+initial\+\_\+coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the initial coordinates for the segments that are part of a boundary. 
+
+
+
+Definition at line 1983 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aae49290cc9b125e7e837a77e1aa8c7e8}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aae49290cc9b125e7e837a77e1aa8c7e8}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_initial\_coordinate@{boundary\_segment\_initial\_coordinate}}
+\index{boundary\_segment\_initial\_coordinate@{boundary\_segment\_initial\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_initial\_coordinate()}{boundary\_segment\_initial\_coordinate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+initial\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the initial coordinates for the segments that are part of a boundary. 
+
+
+
+Definition at line 2262 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a437a73c9d0b078c121c254ed2e8cd487}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a437a73c9d0b078c121c254ed2e8cd487}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_initial\_zeta@{boundary\_segment\_initial\_zeta}}
+\index{boundary\_segment\_initial\_zeta@{boundary\_segment\_initial\_zeta}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_initial\_zeta()}{boundary\_segment\_initial\_zeta()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+initial\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return direct access to the initial zeta for the segments that are part of a boundary. 
+
+
+
+Definition at line 2012 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+boundary\+\_\+segments\+\_\+and\+\_\+assign\+\_\+initial\+\_\+zeta\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_affa5cd6a3e3cf61b376cea5ab3d06123}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_affa5cd6a3e3cf61b376cea5ab3d06123}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_initial\_zeta@{boundary\_segment\_initial\_zeta}}
+\index{boundary\_segment\_initial\_zeta@{boundary\_segment\_initial\_zeta}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_initial\_zeta()}{boundary\_segment\_initial\_zeta()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+initial\+\_\+zeta (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the initial zeta for the segments that are part of a boundary. 
+
+
+
+Definition at line 2026 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3fec5401134aabfc558e6e5cbd4c64a3}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3fec5401134aabfc558e6e5cbd4c64a3}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_inverted@{boundary\_segment\_inverted}}
+\index{boundary\_segment\_inverted@{boundary\_segment\_inverted}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_inverted()}{boundary\_segment\_inverted()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+inverted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the info. to know if it is necessary to reverse the segment based on a previous mesh. 
+
+
+
+Definition at line 1975 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aad1837f55c6d5c9788e80e8cfa3db365}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aad1837f55c6d5c9788e80e8cfa3db365}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_inverted@{boundary\_segment\_inverted}}
+\index{boundary\_segment\_inverted@{boundary\_segment\_inverted}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_inverted()}{boundary\_segment\_inverted()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+inverted (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the info. to know if it is necessary to reverse the segment based on a previous mesh. 
+
+
+
+Definition at line 2143 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0ff7b48dd70784f8128cd5ec494e3efa}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0ff7b48dd70784f8128cd5ec494e3efa}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!boundary\_segment\_inverted@{boundary\_segment\_inverted}}
+\index{boundary\_segment\_inverted@{boundary\_segment\_inverted}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{boundary\_segment\_inverted()}{boundary\_segment\_inverted()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::boundary\+\_\+segment\+\_\+inverted (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the info. to know if it is necessary to reverse the segment based on a previous mesh. 
+
+
+
+Definition at line 2119 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad718283a37c45ff4fbd96149867b30bf}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad718283a37c45ff4fbd96149867b30bf}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!build\_triangulateio@{build\_triangulateio}}
+\index{build\_triangulateio@{build\_triangulateio}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{build\_triangulateio()}{build\_triangulateio()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::build\+\_\+triangulateio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{outer\+\_\+polygons\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} $\ast$ $>$ \&}]{internal\+\_\+polygons\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$ $>$ \&}]{open\+\_\+curves\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{extra\+\_\+holes\+\_\+coordinates,  }\item[{std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{regions\+\_\+coordinates,  }\item[{std\+::map$<$ unsigned, double $>$ \&}]{regions\+\_\+areas,  }\item[{\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&}]{triangulate\+\_\+io }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Create \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object from outer boundaries, internal boundaries, and open curves. Add the holes and regions information as well. 
+
+Create \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object from outer boundaries, internal boundaries, and open curves. Add the holes and regions information as well 
+
+Definition at line 1939 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References add\+\_\+base\+\_\+vertex\+\_\+info\+\_\+helper(), add\+\_\+connection\+\_\+matrix\+\_\+info\+\_\+helper(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+chunk(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::boundary\+\_\+chunk, oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+id(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::boundary\+\_\+id, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::has\+\_\+base\+\_\+vertex\+\_\+assigned, oomph\+::\+Triangulate\+I\+O\+::holelist, i, initialise\+\_\+base\+\_\+vertex(), oomph\+::\+Triangle\+Helper\+::initialise\+\_\+triangulateio(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::is\+\_\+base\+\_\+vertex, oomph\+::\+Triangulate\+I\+O\+::numberofholes, oomph\+::\+Triangulate\+I\+O\+::numberofpoints, oomph\+::\+Triangulate\+I\+O\+::numberofregions, oomph\+::\+Triangulate\+I\+O\+::numberofsegments, oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Triangulate\+I\+O\+::pointlist, oomph\+::\+Triangulate\+I\+O\+::regionlist, oomph\+::\+Triangulate\+I\+O\+::segmentlist, oomph\+::\+Triangulate\+I\+O\+::segmentmarkerlist, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate(), and oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::vertex\+\_\+number.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0d709e87f038a60e3c8f8b84af412fa4}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0d709e87f038a60e3c8f8b84af412fa4}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!check\_contiguousness\_on\_polylines\_helper@{check\_contiguousness\_on\_polylines\_helper}}
+\index{check\_contiguousness\_on\_polylines\_helper@{check\_contiguousness\_on\_polylines\_helper}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{check\_contiguousness\_on\_polylines\_helper()}{check\_contiguousness\_on\_polylines\_helper()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::check\+\_\+contiguousness\+\_\+on\+\_\+polylines\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&}]{polylines\+\_\+pt,  }\item[{unsigned \&}]{index }\end{DoxyParamCaption})}
+
+
+
+Sort the polylines coming from joining them. Check whether it is necessary to reverse them or not. Used when joining two curve polylines in order to create a polygon. 
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3c9454772f4b9fd99aba7e99e2b15d6b}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3c9454772f4b9fd99aba7e99e2b15d6b}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!check\_contiguousness\_on\_polylines\_helper@{check\_contiguousness\_on\_polylines\_helper}}
+\index{check\_contiguousness\_on\_polylines\_helper@{check\_contiguousness\_on\_polylines\_helper}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{check\_contiguousness\_on\_polylines\_helper()}{check\_contiguousness\_on\_polylines\_helper()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::check\+\_\+contiguousness\+\_\+on\+\_\+polylines\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ $>$ \&}]{polylines\+\_\+pt,  }\item[{unsigned \&}]{index\+\_\+halo\+\_\+start,  }\item[{unsigned \&}]{index\+\_\+halo\+\_\+end }\end{DoxyParamCaption})}
+
+
+
+Sort the polylines coming from joining them. Check whether it is necessary to reverse them or not. Used when joining polylines and they still do not create a polygon. 
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aae3789d2b4c4d3c244dfb2cd7c33eafb}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aae3789d2b4c4d3c244dfb2cd7c33eafb}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!closed\_curve\_to\_polygon\_helper@{closed\_curve\_to\_polygon\_helper}}
+\index{closed\_curve\_to\_polygon\_helper@{closed\_curve\_to\_polygon\_helper}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{closed\_curve\_to\_polygon\_helper()}{closed\_curve\_to\_polygon\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}}$\ast$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::closed\+\_\+curve\+\_\+to\+\_\+polygon\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve}{Triangle\+Mesh\+Closed\+Curve}} $\ast$}]{closed\+\_\+curve\+\_\+pt,  }\item[{unsigned \&}]{max\+\_\+bnd\+\_\+id\+\_\+local }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function that returns a polygon representation for the given closed curve, it also computes the maximum boundary id of the constituent curves. If the \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve}{Triangle\+Mesh\+Closed\+Curve}} is already a \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} we simply return a pointer to it. Otherwise a new Trilangle\+Mesh\+Polygon is created -- this is deleted automatically when the \mbox{\hyperlink{classoomph_1_1TriangleMesh}{Triangle\+Mesh}} destructor is called, so no external book-\/keeping is required. 
+
+
+
+Definition at line 3216 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::boundary\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+::curve\+\_\+section\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::internal\+\_\+point(), oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::is\+\_\+internal\+\_\+point\+\_\+fixed(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::maximum\+\_\+length(), oomph\+::\+Triangle\+Mesh\+Curve\+::ncurve\+\_\+section(), oomph\+::\+Triangle\+Mesh\+Curve\+::polyline\+\_\+refinement\+\_\+tolerance(), oomph\+::\+Triangle\+Mesh\+Curve\+::polyline\+\_\+unrefinement\+\_\+tolerance(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::refinement\+\_\+tolerance(), oomph\+::\+Triangle\+Mesh\+Curve\+::set\+\_\+polyline\+\_\+refinement\+\_\+tolerance(), oomph\+::\+Triangle\+Mesh\+Curve\+::set\+\_\+polyline\+\_\+unrefinement\+\_\+tolerance(), and oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::unrefinement\+\_\+tolerance().
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Triangle\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa120eef8da13fbd69503ae1087d0dccf}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa120eef8da13fbd69503ae1087d0dccf}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!copy\_connection\_information@{copy\_connection\_information}}
+\index{copy\_connection\_information@{copy\_connection\_information}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{copy\_connection\_information()}{copy\_connection\_information()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::copy\+\_\+connection\+\_\+information (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$}]{input\+\_\+curve\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$}]{output\+\_\+curve\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function to copy the connection information from the input curve(polyline or curviline) to the output polyline. 
+
+
+
+Definition at line 4199 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+s\+\_\+connection\+\_\+value(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+bnd\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+chunk(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+vertex(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+coordinate(), get\+\_\+associated\+\_\+vertex\+\_\+to\+\_\+svalue(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+s\+\_\+connection\+\_\+value(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+bnd\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+chunk(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+vertex(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+coordinate(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+final\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+final\+\_\+vertex\+\_\+connected\+\_\+to\+\_\+curviline(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+initial\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+initial\+\_\+vertex\+\_\+connected\+\_\+to\+\_\+curviline(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::set\+\_\+final\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::set\+\_\+initial\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::tolerance\+\_\+for\+\_\+s\+\_\+connection(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::unset\+\_\+final\+\_\+vertex\+\_\+connected\+\_\+to\+\_\+curviline(), and oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::unset\+\_\+initial\+\_\+vertex\+\_\+connected\+\_\+to\+\_\+curviline().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a929e73858bd06401ad92955aef69985c}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a929e73858bd06401ad92955aef69985c}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!copy\_connection\_information\_to\_sub\_polylines@{copy\_connection\_information\_to\_sub\_polylines}}
+\index{copy\_connection\_information\_to\_sub\_polylines@{copy\_connection\_information\_to\_sub\_polylines}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{copy\_connection\_information\_to\_sub\_polylines()}{copy\_connection\_information\_to\_sub\_polylines()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::copy\+\_\+connection\+\_\+information\+\_\+to\+\_\+sub\+\_\+polylines (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$}]{input\+\_\+curve\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$}]{output\+\_\+curve\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function to copy the connection information from the input curve(polyline or curviline) to the output sub-\/polyline. 
+
+
+
+Definition at line 4476 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+s\+\_\+connection\+\_\+value(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+bnd\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+chunk(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+vertex(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::final\+\_\+vertex\+\_\+coordinate(), get\+\_\+associated\+\_\+vertex\+\_\+to\+\_\+svalue(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+s\+\_\+connection\+\_\+value(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+bnd\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+chunk(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+connected\+\_\+n\+\_\+vertex(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::initial\+\_\+vertex\+\_\+coordinate(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+final\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+final\+\_\+vertex\+\_\+connected\+\_\+to\+\_\+curviline(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+initial\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::is\+\_\+initial\+\_\+vertex\+\_\+connected\+\_\+to\+\_\+curviline(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::set\+\_\+final\+\_\+vertex\+\_\+connected(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::set\+\_\+initial\+\_\+vertex\+\_\+connected(), oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\+Tolerable\+\_\+error, oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::tolerance\+\_\+for\+\_\+s\+\_\+connection(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::unset\+\_\+final\+\_\+vertex\+\_\+connected\+\_\+to\+\_\+curviline(), and oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::unset\+\_\+initial\+\_\+vertex\+\_\+connected\+\_\+to\+\_\+curviline().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a66cbc8235c29cec41322f4e367a4e228}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a66cbc8235c29cec41322f4e367a4e228}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!create\_open\_curve\_with\_polyline\_helper@{create\_open\_curve\_with\_polyline\_helper}}
+\index{create\_open\_curve\_with\_polyline\_helper@{create\_open\_curve\_with\_polyline\_helper}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{create\_open\_curve\_with\_polyline\_helper()}{create\_open\_curve\_with\_polyline\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}}$\ast$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::create\+\_\+open\+\_\+curve\+\_\+with\+\_\+polyline\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$}]{open\+\_\+curve\+\_\+pt,  }\item[{unsigned \&}]{max\+\_\+bnd\+\_\+id\+\_\+local }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function that creates and returns an open curve with the polyline representation of its constituent curve sections. The new created open curve is deleted when the \mbox{\hyperlink{classoomph_1_1TriangleMesh}{Triangle\+Mesh}} destructor is called. 
+
+
+
+Definition at line 3369 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::boundary\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+::curve\+\_\+section\+\_\+pt(), i, oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::maximum\+\_\+length(), oomph\+::\+Triangle\+Mesh\+Curve\+::ncurve\+\_\+section(), oomph\+::\+Triangle\+Mesh\+Curve\+::polyline\+\_\+refinement\+\_\+tolerance(), oomph\+::\+Triangle\+Mesh\+Curve\+::polyline\+\_\+unrefinement\+\_\+tolerance(), oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::refinement\+\_\+tolerance(), oomph\+::\+Triangle\+Mesh\+Curve\+::set\+\_\+polyline\+\_\+refinement\+\_\+tolerance(), oomph\+::\+Triangle\+Mesh\+Curve\+::set\+\_\+polyline\+\_\+unrefinement\+\_\+tolerance(), and oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::unrefinement\+\_\+tolerance().
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Triangle\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a22ba2b359eebe24f9ba1f40be54643d8}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a22ba2b359eebe24f9ba1f40be54643d8}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!create\_vertex\_coordinates\_for\_polyline\_connections@{create\_vertex\_coordinates\_for\_polyline\_connections}}
+\index{create\_vertex\_coordinates\_for\_polyline\_connections@{create\_vertex\_coordinates\_for\_polyline\_connections}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{create\_vertex\_coordinates\_for\_polyline\_connections()}{create\_vertex\_coordinates\_for\_polyline\_connections()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::create\+\_\+vertex\+\_\+coordinates\+\_\+for\+\_\+polyline\+\_\+connections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshCurviLine}{Triangle\+Mesh\+Curvi\+Line}} $\ast$}]{boundary\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{vertex\+\_\+coord,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{polygonal\+\_\+vertex\+\_\+arclength\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function to create polyline vertex coordinates for curvilinear boundary specified by boundary\+\_\+pt, using either equal increments in zeta or in (approximate) arclength along the curviline. vertex\+\_\+coord\mbox{[}i\+\_\+vertex\mbox{]}\mbox{[}i\+\_\+dim\mbox{]} stores i\+\_\+dim-\/th coordinate of i\+\_\+vertex-\/th vertex. polygonal\+\_\+vertex\+\_\+arclength\+\_\+info\mbox{[}i\+\_\+vertex\mbox{]} contains the pair of doubles made of the arclength of the i\+\_\+vertex-\/th vertex along the polygonal representation (.first), and the corresponding coordinate on the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (.second) 
+
+
+
+Definition at line 2721 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::boundary\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::connection\+\_\+points\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::geom\+\_\+object\+\_\+pt(), i, oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::nsegment(), oomph\+::\+Geom\+Object\+::position(), s, oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::space\+\_\+vertices\+\_\+evenly\+\_\+in\+\_\+arclength(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::zeta\+\_\+end(), and oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::zeta\+\_\+start().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa4c390235c6d7865b62a6604a6d7b780}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa4c390235c6d7865b62a6604a6d7b780}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!create\_vertex\_coordinates\_for\_polyline\_no\_connections@{create\_vertex\_coordinates\_for\_polyline\_no\_connections}}
+\index{create\_vertex\_coordinates\_for\_polyline\_no\_connections@{create\_vertex\_coordinates\_for\_polyline\_no\_connections}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{create\_vertex\_coordinates\_for\_polyline\_no\_connections()}{create\_vertex\_coordinates\_for\_polyline\_no\_connections()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::create\+\_\+vertex\+\_\+coordinates\+\_\+for\+\_\+polyline\+\_\+no\+\_\+connections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshCurviLine}{Triangle\+Mesh\+Curvi\+Line}} $\ast$}]{boundary\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{vertex\+\_\+coord,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{polygonal\+\_\+vertex\+\_\+arclength\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function to create polyline vertex coordinates for curvilinear boundary specified by boundary\+\_\+pt, using either equal increments in zeta or in (approximate) arclength along the curviline. vertex\+\_\+coord\mbox{[}i\+\_\+vertex\mbox{]}\mbox{[}i\+\_\+dim\mbox{]} stores i\+\_\+dim-\/th coordinate of i\+\_\+vertex-\/th vertex. polygonal\+\_\+vertex\+\_\+arclength\+\_\+info\mbox{[}i\+\_\+vertex\mbox{]} contains the pair of doubles made of the arclength of the i\+\_\+vertex-\/th vertex along the polygonal representation (.first), and the corresponding coordinate on the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (.second) 
+
+
+
+Definition at line 2552 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::geom\+\_\+object\+\_\+pt(), i, oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::nsegment(), oomph\+::\+Geom\+Object\+::position(), s, oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::space\+\_\+vertices\+\_\+evenly\+\_\+in\+\_\+arclength(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::zeta\+\_\+end(), and oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::zeta\+\_\+start().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae0287b88002273bb17ebcc5b3a25776a}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae0287b88002273bb17ebcc5b3a25776a}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!curviline\_to\_polyline@{curviline\_to\_polyline}}
+\index{curviline\_to\_polyline@{curviline\_to\_polyline}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{curviline\_to\_polyline()}{curviline\_to\_polyline()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}}$\ast$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::curviline\+\_\+to\+\_\+polyline (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshCurviLine}{Triangle\+Mesh\+Curvi\+Line}} $\ast$\&}]{curviline\+\_\+pt,  }\item[{unsigned \&}]{bnd\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function that creates the associated polyline representation for curvilines. 
+
+
+
+Definition at line 3631 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::are\+\_\+there\+\_\+connection\+\_\+points().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1c91523d587f6cabf3c1fc275799a83d}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1c91523d587f6cabf3c1fc275799a83d}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!disable\_automatic\_creation\_of\_vertices\_on\_boundaries@{disable\_automatic\_creation\_of\_vertices\_on\_boundaries}}
+\index{disable\_automatic\_creation\_of\_vertices\_on\_boundaries@{disable\_automatic\_creation\_of\_vertices\_on\_boundaries}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{disable\_automatic\_creation\_of\_vertices\_on\_boundaries()}{disable\_automatic\_creation\_of\_vertices\_on\_boundaries()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::disable\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Disables the creation of points (by Triangle) on the outer and internal boundaries 
+
+Definition at line 1865 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a745b1231879429cfb16c2c7b59fbdad6}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a745b1231879429cfb16c2c7b59fbdad6}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!enable\_automatic\_creation\_of\_vertices\_on\_boundaries@{enable\_automatic\_creation\_of\_vertices\_on\_boundaries}}
+\index{enable\_automatic\_creation\_of\_vertices\_on\_boundaries@{enable\_automatic\_creation\_of\_vertices\_on\_boundaries}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{enable\_automatic\_creation\_of\_vertices\_on\_boundaries()}{enable\_automatic\_creation\_of\_vertices\_on\_boundaries()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::enable\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enables the creation of points (by Triangle) on the outer and internal boundaries 
+
+Definition at line 1858 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a79e290f51b212b71d021cd1bd60abd3b}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a79e290f51b212b71d021cd1bd60abd3b}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!face\_index\_at\_boundary\_in\_region@{face\_index\_at\_boundary\_in\_region}}
+\index{face\_index\_at\_boundary\_in\_region@{face\_index\_at\_boundary\_in\_region}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{face\_index\_at\_boundary\_in\_region()}{face\_index\_at\_boundary\_in\_region()}}
+{\footnotesize\ttfamily int oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::face\+\_\+index\+\_\+at\+\_\+boundary\+\_\+in\+\_\+region (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{r,  }\item[{const unsigned \&}]{e }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return face index of the e-\/th element adjacent to boundary b in region r. 
+
+
+
+Definition at line 1786 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References e.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aefb9c0246505a9f260ed7f91022d6576}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aefb9c0246505a9f260ed7f91022d6576}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!flush\_boundary\_segment\_node@{flush\_boundary\_segment\_node}}
+\index{flush\_boundary\_segment\_node@{flush\_boundary\_segment\_node}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{flush\_boundary\_segment\_node()}{flush\_boundary\_segment\_node()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::flush\+\_\+boundary\+\_\+segment\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Flush the boundary segment node storage. 
+
+
+
+Definition at line 1880 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8f1cbe4c85634fc1bc7141ad3d2e973f}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8f1cbe4c85634fc1bc7141ad3d2e973f}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!get\_associated\_vertex\_to\_svalue@{get\_associated\_vertex\_to\_svalue}}
+\index{get\_associated\_vertex\_to\_svalue@{get\_associated\_vertex\_to\_svalue}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{get\_associated\_vertex\_to\_svalue()}{get\_associated\_vertex\_to\_svalue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::get\+\_\+associated\+\_\+vertex\+\_\+to\+\_\+svalue (\begin{DoxyParamCaption}\item[{double \&}]{target\+\_\+s\+\_\+value,  }\item[{unsigned \&}]{bnd\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Get the associated vertex to the given s value by looking to the list of s values created when changing from curviline to polyline. 
+
+
+
+Definition at line 3658 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by copy\+\_\+connection\+\_\+information(), and copy\+\_\+connection\+\_\+information\+\_\+to\+\_\+sub\+\_\+polylines().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abb5c8ca1b64f62215f860b03990acd16}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abb5c8ca1b64f62215f860b03990acd16}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!get\_associated\_vertex\_to\_svalue@{get\_associated\_vertex\_to\_svalue}}
+\index{get\_associated\_vertex\_to\_svalue@{get\_associated\_vertex\_to\_svalue}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{get\_associated\_vertex\_to\_svalue()}{get\_associated\_vertex\_to\_svalue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::get\+\_\+associated\+\_\+vertex\+\_\+to\+\_\+svalue (\begin{DoxyParamCaption}\item[{double \&}]{target\+\_\+s\+\_\+value,  }\item[{unsigned \&}]{bnd\+\_\+id,  }\item[{double \&}]{s\+\_\+tolerance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Get the associated vertex to the given s value by looking to the list of s values created when changing from curviline to polyline. 
+
+
+
+Definition at line 3667 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a250f79da0b57d5567dbacf91ba93f29c}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a250f79da0b57d5567dbacf91ba93f29c}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!get\_connected\_vertex\_number\_on\_destination\_polyline@{get\_connected\_vertex\_number\_on\_destination\_polyline}}
+\index{get\_connected\_vertex\_number\_on\_destination\_polyline@{get\_connected\_vertex\_number\_on\_destination\_polyline}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{get\_connected\_vertex\_number\_on\_destination\_polyline()}{get\_connected\_vertex\_number\_on\_destination\_polyline()}}
+{\footnotesize\ttfamily const bool oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::get\+\_\+connected\+\_\+vertex\+\_\+number\+\_\+on\+\_\+destination\+\_\+polyline (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$}]{dst\+\_\+polyline\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{vertex\+\_\+coordinates,  }\item[{unsigned \&}]{vertex\+\_\+number }\end{DoxyParamCaption})}
+
+
+
+Gets the vertex number on the destination polyline (used to create the connections among shared boundaries) 
+
+Gets the vertex number on the destination polyline (used / to create the connections among shared boundaries) 
+
+Definition at line 4146 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References i, oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\+Tolerable\+\_\+error, and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae6266526c3321933f8e13f3b53d234bf}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae6266526c3321933f8e13f3b53d234bf}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!initialise\_base\_vertex@{initialise\_base\_vertex}}
+\index{initialise\_base\_vertex@{initialise\_base\_vertex}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{initialise\_base\_vertex()}{initialise\_base\_vertex()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::initialise\+\_\+base\+\_\+vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$}]{polyline\+\_\+pt,  }\item[{std\+::map$<$ unsigned, std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1base__vertex__info}{base\+\_\+vertex\+\_\+info}} $>$ $>$ $>$ \&}]{base\+\_\+vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Initialise the base vertex structure, set every vertex to no visited and not being a base vertex. 
+
+
+
+Definition at line 3584 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+chunk(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::boundary\+\_\+chunk, oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::boundary\+\_\+id(), oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::boundary\+\_\+id, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::has\+\_\+base\+\_\+vertex\+\_\+assigned, oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::is\+\_\+base\+\_\+vertex, and oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info\+::vertex\+\_\+number.
+
+
+
+Referenced by build\+\_\+triangulateio().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a23b5ebef48eda89918643c78e927b94a}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a23b5ebef48eda89918643c78e927b94a}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!is\_automatic\_creation\_of\_vertices\_on\_boundaries\_allowed@{is\_automatic\_creation\_of\_vertices\_on\_boundaries\_allowed}}
+\index{is\_automatic\_creation\_of\_vertices\_on\_boundaries\_allowed@{is\_automatic\_creation\_of\_vertices\_on\_boundaries\_allowed}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{is\_automatic\_creation\_of\_vertices\_on\_boundaries\_allowed()}{is\_automatic\_creation\_of\_vertices\_on\_boundaries\_allowed()}}
+{\footnotesize\ttfamily bool oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::is\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries\+\_\+allowed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the status of the variable Allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries 
+
+Definition at line 1872 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_adc3f1f9607dcf468c6cfb458538248df}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_adc3f1f9607dcf468c6cfb458538248df}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!is\_point\_inside\_polygon\_helper@{is\_point\_inside\_polygon\_helper}}
+\index{is\_point\_inside\_polygon\_helper@{is\_point\_inside\_polygon\_helper}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{is\_point\_inside\_polygon\_helper()}{is\_point\_inside\_polygon\_helper()}}
+{\footnotesize\ttfamily bool oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::is\+\_\+point\+\_\+inside\+\_\+polygon\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$}]{polygon\+\_\+vertices,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$}]{point }\end{DoxyParamCaption})}
+
+
+
+Helper function that checks if a given point is inside a polygon. 
+
+Helper function that checks if a given point is inside a polygon (a set of sorted vertices that connected create a polygon) 
+
+Definition at line 4091 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a93eb7cb31573833c66dc0eaa4ae357ef}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a93eb7cb31573833c66dc0eaa4ae357ef}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!nboundary\_element\_in\_region@{nboundary\_element\_in\_region}}
+\index{nboundary\_element\_in\_region@{nboundary\_element\_in\_region}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{nboundary\_element\_in\_region()}{nboundary\_element\_in\_region()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::nboundary\+\_\+element\+\_\+in\+\_\+region (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of elements adjacent to boundary b in region r. 
+
+
+
+Definition at line 1749 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), and oomph\+::\+Mesh\+::distribute().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a5408ad4ce30e3c987c32dab46cdffba2}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a5408ad4ce30e3c987c32dab46cdffba2}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!nboundary\_segment@{nboundary\_segment}}
+\index{nboundary\_segment@{nboundary\_segment}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{nboundary\_segment()}{nboundary\_segment()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::nboundary\+\_\+segment (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of segments associated with a boundary. 
+
+
+
+Definition at line 1892 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a667c4dff46145685622836fc3b7af92d}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a667c4dff46145685622836fc3b7af92d}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!nboundary\_segment\_node@{nboundary\_segment\_node}}
+\index{nboundary\_segment\_node@{nboundary\_segment\_node}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{nboundary\_segment\_node()}{nboundary\_segment\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::nboundary\+\_\+segment\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of segments associated with a boundary. 
+
+
+
+Definition at line 1898 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_af9b3b54526e72cc9a1909f141e8d5675}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_af9b3b54526e72cc9a1909f141e8d5675}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!nboundary\_segment\_node@{nboundary\_segment\_node}}
+\index{nboundary\_segment\_node@{nboundary\_segment\_node}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{nboundary\_segment\_node()}{nboundary\_segment\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::nboundary\+\_\+segment\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Return the number of nodes associated with a given segment of a boundary 
+
+Definition at line 1911 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a12e63d83e38ef8f7cb31d9fe09f0de71}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a12e63d83e38ef8f7cb31d9fe09f0de71}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!nodes\_on\_boundary\_pt@{nodes\_on\_boundary\_pt}}
+\index{nodes\_on\_boundary\_pt@{nodes\_on\_boundary\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{nodes\_on\_boundary\_pt()}{nodes\_on\_boundary\_pt()}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,std\+::set$<$\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$$>$ $>$\& oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::nodes\+\_\+on\+\_\+boundary\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a pointer to a set with all the nodes related with a boundary. 
+
+
+
+Definition at line 1826 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9776e5d11ad42ce4d49750d31a87e1fc}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9776e5d11ad42ce4d49750d31a87e1fc}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!nregion@{nregion}}
+\index{nregion@{nregion}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{nregion()}{nregion()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::nregion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of regions specified by attributes. 
+
+
+
+Definition at line 1632 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), and oomph\+::\+Mesh\+::distribute().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab9ae7866b6cdc9f28253edbe4d634fe2}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab9ae7866b6cdc9f28253edbe4d634fe2}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!nregion\_attribute@{nregion\_attribute}}
+\index{nregion\_attribute@{nregion\_attribute}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{nregion\_attribute()}{nregion\_attribute()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::nregion\+\_\+attribute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of attributes used in the mesh. 
+
+
+
+Definition at line 1690 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aec1fffbd004b1dd32a04d2665b5ea455}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aec1fffbd004b1dd32a04d2665b5ea455}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!nregion\_element@{nregion\_element}}
+\index{nregion\_element@{nregion\_element}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{nregion\_element()}{nregion\_element()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::nregion\+\_\+element (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of elements in the i-\/th region. 
+
+
+
+Definition at line 1638 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References i.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8ca153f1dfa57edf9931d4cc4c5ef9b6}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8ca153f1dfa57edf9931d4cc4c5ef9b6}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase}{Unstructured\+Two\+D\+Mesh\+Geometry\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 1622 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a166bb8462a9ccb50ce7d93b037bb6597}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a166bb8462a9ccb50ce7d93b037bb6597}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!region\_attribute@{region\_attribute}}
+\index{region\_attribute@{region\_attribute}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{region\_attribute()}{region\_attribute()}}
+{\footnotesize\ttfamily double oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::region\+\_\+attribute (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the attribute associated with region i. 
+
+
+
+Definition at line 1696 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References i.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), and oomph\+::\+Mesh\+::distribute().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abfc8c7de4f4b0050c818a0186e087531}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abfc8c7de4f4b0050c818a0186e087531}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!region\_element\_pt@{region\_element\_pt}}
+\index{region\_element\_pt@{region\_element\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{region\_element\_pt()}{region\_element\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::region\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the e-\/th element in the i-\/th region. 
+
+
+
+Definition at line 1658 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References e, and i.
+
+
+
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae245bcf2f048ba47e59aa98abc437970}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ae245bcf2f048ba47e59aa98abc437970}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!set\_geom\_objects\_and\_coordinate\_limits\_for\_close\_curve@{set\_geom\_objects\_and\_coordinate\_limits\_for\_close\_curve}}
+\index{set\_geom\_objects\_and\_coordinate\_limits\_for\_close\_curve@{set\_geom\_objects\_and\_coordinate\_limits\_for\_close\_curve}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{set\_geom\_objects\_and\_coordinate\_limits\_for\_close\_curve()}{set\_geom\_objects\_and\_coordinate\_limits\_for\_close\_curve()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::set\+\_\+geom\+\_\+objects\+\_\+and\+\_\+coordinate\+\_\+limits\+\_\+for\+\_\+close\+\_\+curve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve}{Triangle\+Mesh\+Closed\+Curve}} $\ast$}]{input\+\_\+closed\+\_\+curve\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Stores the geometric objects associated to the curve sections that compound the closed curve. It also stores the limits defined by these geometric objects. 
+
+
+
+Definition at line 3505 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curve\+Section\+::boundary\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::boundary\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+::curve\+\_\+section\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Curve\+::ncurve\+\_\+section(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::zeta\+\_\+end(), and oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::zeta\+\_\+start().
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Triangle\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad79be82dd161b1f6e5dc967969f88f6f}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad79be82dd161b1f6e5dc967969f88f6f}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!set\_geom\_objects\_and\_coordinate\_limits\_for\_open\_curve@{set\_geom\_objects\_and\_coordinate\_limits\_for\_open\_curve}}
+\index{set\_geom\_objects\_and\_coordinate\_limits\_for\_open\_curve@{set\_geom\_objects\_and\_coordinate\_limits\_for\_open\_curve}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{set\_geom\_objects\_and\_coordinate\_limits\_for\_open\_curve()}{set\_geom\_objects\_and\_coordinate\_limits\_for\_open\_curve()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::set\+\_\+geom\+\_\+objects\+\_\+and\+\_\+coordinate\+\_\+limits\+\_\+for\+\_\+open\+\_\+curve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}} $\ast$}]{input\+\_\+open\+\_\+curve\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Stores the geometric objects associated to the curve sections that compound the open curve. It also stores the limits defined by these geometric objects. 
+
+
+
+Definition at line 3593 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::boundary\+\_\+id(), oomph\+::\+Triangle\+Mesh\+Curve\+::curve\+\_\+section\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Curve\+::ncurve\+\_\+section(), oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::zeta\+\_\+end(), and oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::zeta\+\_\+start().
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Triangle\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3928fb706b699964e0705a7fe2a1c8dc}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3928fb706b699964e0705a7fe2a1c8dc}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!set\_nboundary\_segment\_node@{set\_nboundary\_segment\_node}}
+\index{set\_nboundary\_segment\_node@{set\_nboundary\_segment\_node}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{set\_nboundary\_segment\_node()}{set\_nboundary\_segment\_node()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::set\+\_\+nboundary\+\_\+segment\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the number of segments associated with a boundary. 
+
+
+
+Definition at line 1886 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9edf47b5d621689f7c1d376b9c057ede}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9edf47b5d621689f7c1d376b9c057ede}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!setup\_boundary\_coordinates@{setup\_boundary\_coordinates}}
+\index{setup\_boundary\_coordinates@{setup\_boundary\_coordinates}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{setup\_boundary\_coordinates()}{setup\_boundary\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::setup\+\_\+boundary\+\_\+coordinates (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setup boundary coordinate on boundary b. Boundary coordinate increases continously along polygonal boundary. It\textquotesingle{}s zero at the lowest left node on the boundary. 
+
+
+
+Definition at line 2315 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a133876ad6f2c50ca0325b1f8f49fb42d}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a133876ad6f2c50ca0325b1f8f49fb42d}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!setup\_boundary\_coordinates@{setup\_boundary\_coordinates}}
+\index{setup\_boundary\_coordinates@{setup\_boundary\_coordinates}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{setup\_boundary\_coordinates()}{setup\_boundary\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::setup\+\_\+boundary\+\_\+coordinates (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})}
+
+
+
+Setup boundary coordinate on boundary b. Doc Faces in outfile. Boundary coordinate increases continously along polygonal boundary. It\textquotesingle{}s zero at the lowest left node on the boundary. 
+
+Setup boundary coordinate on boundary b. Doc Faces in outfile. Boundary coordinate increases continously along polygonal boundary. It\textquotesingle{}s zero at the lexicographically smallest node on the boundary. 
+
+Definition at line 3731 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+References e, oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary(), i, oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\+Tolerable\+\_\+error, and oomph\+::\+Node\+::x().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a569174a8d7d51bd5ef8f468a625c7316}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a569174a8d7d51bd5ef8f468a625c7316}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!snap\_nodes\_onto\_geometric\_objects@{snap\_nodes\_onto\_geometric\_objects}}
+\index{snap\_nodes\_onto\_geometric\_objects@{snap\_nodes\_onto\_geometric\_objects}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{snap\_nodes\_onto\_geometric\_objects()}{snap\_nodes\_onto\_geometric\_objects()}}
+{\footnotesize\ttfamily void oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Snap the boundary nodes onto any curvilinear boundaries defined by geometric objects. 
+
+Move the nodes on boundaries with associated Geometric Objects so that they exactly coincide with the geometric object. This requires that the boundary coordinates are set up consistently 
+
+Definition at line 4047 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
+
+
+
+References boundary\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt(), oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary(), i, n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+node(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt(), t, and oomph\+::\+Node\+::x().
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio(), and oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Triangle\+Mesh().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a76998de1646db8791b5c4935e9820577}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a76998de1646db8791b5c4935e9820577}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Allow\_automatic\_creation\_of\_vertices\_on\_boundaries@{Allow\_automatic\_creation\_of\_vertices\_on\_boundaries}}
+\index{Allow\_automatic\_creation\_of\_vertices\_on\_boundaries@{Allow\_automatic\_creation\_of\_vertices\_on\_boundaries}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Allow\_automatic\_creation\_of\_vertices\_on\_boundaries}{Allow\_automatic\_creation\_of\_vertices\_on\_boundaries}}
+{\footnotesize\ttfamily bool oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Flag to indicate whether the automatic creation of vertices along the boundaries by Triangle is allowed. 
+
+
+
+Definition at line 2448 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Triangle\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a218948f01cea679c910950782ba8ffde}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a218948f01cea679c910950782ba8ffde}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Assigned\_segments\_initial\_zeta\_values@{Assigned\_segments\_initial\_zeta\_values}}
+\index{Assigned\_segments\_initial\_zeta\_values@{Assigned\_segments\_initial\_zeta\_values}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Assigned\_segments\_initial\_zeta\_values}{Assigned\_segments\_initial\_zeta\_values}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,bool$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Assigned\+\_\+segments\+\_\+initial\+\_\+zeta\+\_\+values}
+
+
+
+Flag used at the setup\+\_\+boundary\+\_\+coordinate function to know if initial zeta values for segments have been assigned. 
+
+
+
+Definition at line 1945 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab9fd3f991e47b75610acd7bcef61a2e0}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab9fd3f991e47b75610acd7bcef61a2e0}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_coordinate\_limits@{Boundary\_coordinate\_limits}}
+\index{Boundary\_coordinate\_limits@{Boundary\_coordinate\_limits}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_coordinate\_limits}{Boundary\_coordinate\_limits}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+coordinate\+\_\+limits\hspace{0.3cm}{\ttfamily [protected]}}
+
+Storage for the limits of the boundary coordinates defined by the use of geometric objects. Only used for curvilinear boundaries. 
+
+Definition at line 2466 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abde107f80f0a70d1dd35bd21f96d20d3}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abde107f80f0a70d1dd35bd21f96d20d3}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_curve\_section\_pt@{Boundary\_curve\_section\_pt}}
+\index{Boundary\_curve\_section\_pt@{Boundary\_curve\_section\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_curve\_section\_pt}{Boundary\_curve\_section\_pt}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}}$\ast$$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+curve\+\_\+section\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+A map that stores the associated curve section of the specified boundary id. 
+
+
+
+Definition at line 2485 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1753fbd79a4a982ab4ab0f5b276404f2}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1753fbd79a4a982ab4ab0f5b276404f2}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_final\_coordinate@{Boundary\_final\_coordinate}}
+\index{Boundary\_final\_coordinate@{Boundary\_final\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_final\_coordinate}{Boundary\_final\_coordinate}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+final\+\_\+coordinate\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the final coordinates for the boundary. 
+
+
+
+Definition at line 2416 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa142423836a48f4efddc0c932f52c5e3}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa142423836a48f4efddc0c932f52c5e3}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_final\_zeta\_coordinate@{Boundary\_final\_zeta\_coordinate}}
+\index{Boundary\_final\_zeta\_coordinate@{Boundary\_final\_zeta\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_final\_zeta\_coordinate}{Boundary\_final\_zeta\_coordinate}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+final\+\_\+zeta\+\_\+coordinate\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the final zeta coordinate for the boundary. 
+
+
+
+Definition at line 2426 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab3704f72854a655c2821b3be9873c469}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ab3704f72854a655c2821b3be9873c469}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_geom\_object\_pt@{Boundary\_geom\_object\_pt}}
+\index{Boundary\_geom\_object\_pt@{Boundary\_geom\_object\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_geom\_object\_pt}{Boundary\_geom\_object\_pt}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storage for the geometric objects associated with any boundaries. 
+
+
+
+Definition at line 2462 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a4ad531467bdd7f379902a81d9eaa9e3e}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a4ad531467bdd7f379902a81d9eaa9e3e}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_initial\_coordinate@{Boundary\_initial\_coordinate}}
+\index{Boundary\_initial\_coordinate@{Boundary\_initial\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_initial\_coordinate}{Boundary\_initial\_coordinate}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+initial\+\_\+coordinate\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the initial coordinates for the boundary. 
+
+
+
+Definition at line 2413 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abde4ed32016c0d3f78308414d3d06184}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_abde4ed32016c0d3f78308414d3d06184}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_initial\_zeta\_coordinate@{Boundary\_initial\_zeta\_coordinate}}
+\index{Boundary\_initial\_zeta\_coordinate@{Boundary\_initial\_zeta\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_initial\_zeta\_coordinate}{Boundary\_initial\_zeta\_coordinate}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+initial\+\_\+zeta\+\_\+coordinate\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the initial zeta coordinate for the boundary. 
+
+
+
+Definition at line 2423 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_afa7317f52f742cf5ea8c4d0b6c9b6e2f}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_afa7317f52f742cf5ea8c4d0b6c9b6e2f}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_region\_element\_pt@{Boundary\_region\_element\_pt}}
+\index{Boundary\_region\_element\_pt@{Boundary\_region\_element\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_region\_element\_pt}{Boundary\_region\_element\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$$>$ $>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+region\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storage for elements adjacent to a boundary in a particular region. 
+
+
+
+Definition at line 2488 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3490d696ab12e97ec95762d712e86084}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3490d696ab12e97ec95762d712e86084}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_segment\_final\_arclength@{Boundary\_segment\_final\_arclength}}
+\index{Boundary\_segment\_final\_arclength@{Boundary\_segment\_final\_arclength}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_segment\_final\_arclength}{Boundary\_segment\_final\_arclength}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+segment\+\_\+final\+\_\+arclength\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the final arclength for the segments that appear when a boundary is splited among processors. 
+
+
+
+Definition at line 2434 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a5b6d5112a12d39e9ddd45b91c5fc7670}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a5b6d5112a12d39e9ddd45b91c5fc7670}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_segment\_final\_coordinate@{Boundary\_segment\_final\_coordinate}}
+\index{Boundary\_segment\_final\_coordinate@{Boundary\_segment\_final\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_segment\_final\_coordinate}{Boundary\_segment\_final\_coordinate}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+segment\+\_\+final\+\_\+coordinate\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the final coordinates for the segments that appear when a boundary is splited among processors. 
+
+
+
+Definition at line 2442 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac49ab6620bdbd45c8ea57139e35c0043}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac49ab6620bdbd45c8ea57139e35c0043}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_segment\_final\_zeta@{Boundary\_segment\_final\_zeta}}
+\index{Boundary\_segment\_final\_zeta@{Boundary\_segment\_final\_zeta}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_segment\_final\_zeta}{Boundary\_segment\_final\_zeta}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+segment\+\_\+final\+\_\+zeta\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the final zeta coordinate for the segments that appear when a boundary is splited among processors. 
+
+
+
+Definition at line 2410 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac7b44efb9a02617df5e9e2294383f94a}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac7b44efb9a02617df5e9e2294383f94a}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_segment\_initial\_arclength@{Boundary\_segment\_initial\_arclength}}
+\index{Boundary\_segment\_initial\_arclength@{Boundary\_segment\_initial\_arclength}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_segment\_initial\_arclength}{Boundary\_segment\_initial\_arclength}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+segment\+\_\+initial\+\_\+arclength\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the initial arclength for the segments that appear when a boundary is splited among processors. 
+
+
+
+Definition at line 2430 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3010ddd2e1491f2c69db31a6e2031fbd}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3010ddd2e1491f2c69db31a6e2031fbd}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_segment\_initial\_coordinate@{Boundary\_segment\_initial\_coordinate}}
+\index{Boundary\_segment\_initial\_coordinate@{Boundary\_segment\_initial\_coordinate}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_segment\_initial\_coordinate}{Boundary\_segment\_initial\_coordinate}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+segment\+\_\+initial\+\_\+coordinate\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the initial coordinates for the segments that appear when a boundary is splited among processors. 
+
+
+
+Definition at line 2438 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a758438ca379cd0922b0b5ebf4f52bb5f}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a758438ca379cd0922b0b5ebf4f52bb5f}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_segment\_initial\_zeta@{Boundary\_segment\_initial\_zeta}}
+\index{Boundary\_segment\_initial\_zeta@{Boundary\_segment\_initial\_zeta}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_segment\_initial\_zeta}{Boundary\_segment\_initial\_zeta}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+segment\+\_\+initial\+\_\+zeta\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the initial zeta coordinate for the segments that appear when a boundary is splited among processors. 
+
+
+
+Definition at line 2406 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a66043cfe6f94d288008be15053313423}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a66043cfe6f94d288008be15053313423}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_segment\_inverted@{Boundary\_segment\_inverted}}
+\index{Boundary\_segment\_inverted@{Boundary\_segment\_inverted}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_segment\_inverted}{Boundary\_segment\_inverted}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+segment\+\_\+inverted\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores the info. to know if it is necessary to reverse the segment based on a previous mesh. 
+
+
+
+Definition at line 2420 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad32540548b45899b632136726d85721c}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad32540548b45899b632136726d85721c}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Boundary\_segment\_node\_pt@{Boundary\_segment\_node\_pt}}
+\index{Boundary\_segment\_node\_pt@{Boundary\_segment\_node\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Boundary\_segment\_node\_pt}{Boundary\_segment\_node\_pt}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$$>$ $>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Boundary\+\_\+segment\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Used to store the nodes associated to a boundary and to an specific segment (this only applies in distributed meshes where the boundary is splitted in segments) 
+
+
+
+Definition at line 2402 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::boundary\+\_\+segment\+\_\+node\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a75f6839c28d529b43ada0bd94df8b79f}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a75f6839c28d529b43ada0bd94df8b79f}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Extra\_holes\_coordinates@{Extra\_holes\_coordinates}}
+\index{Extra\_holes\_coordinates@{Extra\_holes\_coordinates}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Extra\_holes\_coordinates}{Extra\_holes\_coordinates}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Extra\+\_\+holes\+\_\+coordinates\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storage for extra coordinates for holes. 
+
+
+
+Definition at line 2478 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9133b1b7ec58c2b199700037cffbd1d7}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9133b1b7ec58c2b199700037cffbd1d7}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Face\_index\_region\_at\_boundary@{Face\_index\_region\_at\_boundary}}
+\index{Face\_index\_region\_at\_boundary@{Face\_index\_region\_at\_boundary}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Face\_index\_region\_at\_boundary}{Face\_index\_region\_at\_boundary}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$int$>$ $>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Face\+\_\+index\+\_\+region\+\_\+at\+\_\+boundary\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storage for the face index adjacent to a boundary in a particular region. 
+
+
+
+Definition at line 2491 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac3aa35d17523a1dbeaf4739c6ab5adc8}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ac3aa35d17523a1dbeaf4739c6ab5adc8}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Free\_curve\_section\_pt@{Free\_curve\_section\_pt}}
+\index{Free\_curve\_section\_pt@{Free\_curve\_section\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Free\_curve\_section\_pt}{Free\_curve\_section\_pt}}
+{\footnotesize\ttfamily std\+::set$<$\mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}}$\ast$$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Free\+\_\+curve\+\_\+section\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+A set that contains the curve sections created by this object therefore it is necessary to free their associated memory. 
+
+
+
+Definition at line 2509 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::$\sim$\+Triangle\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa3b1beb78b5261398428c1e14a6411ae}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa3b1beb78b5261398428c1e14a6411ae}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Free\_open\_curve\_pt@{Free\_open\_curve\_pt}}
+\index{Free\_open\_curve\_pt@{Free\_open\_curve\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Free\_open\_curve\_pt}{Free\_open\_curve\_pt}}
+{\footnotesize\ttfamily std\+::set$<$\mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}}$\ast$$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Free\+\_\+open\+\_\+curve\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+A set that contains the open curves created by this object therefore it is necessary to free their associated memory. 
+
+
+
+Definition at line 2517 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::$\sim$\+Triangle\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad0e156686ae6ae41a187d7a0c71c6861}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_ad0e156686ae6ae41a187d7a0c71c6861}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Free\_polygon\_pt@{Free\_polygon\_pt}}
+\index{Free\_polygon\_pt@{Free\_polygon\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Free\_polygon\_pt}{Free\_polygon\_pt}}
+{\footnotesize\ttfamily std\+::set$<$\mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}}$\ast$$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Free\+\_\+polygon\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+A set that contains the polygons created by this object therefore it is necessary to free their associated memory. 
+
+
+
+Definition at line 2513 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::$\sim$\+Triangle\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_adc292b9fbb1e65a3b768597169c5de91}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_adc292b9fbb1e65a3b768597169c5de91}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Immersed\_rigid\_body\_triangle\_mesh\_polygon\_used@{Immersed\_rigid\_body\_triangle\_mesh\_polygon\_used}}
+\index{Immersed\_rigid\_body\_triangle\_mesh\_polygon\_used@{Immersed\_rigid\_body\_triangle\_mesh\_polygon\_used}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Immersed\_rigid\_body\_triangle\_mesh\_polygon\_used}{Immersed\_rigid\_body\_triangle\_mesh\_polygon\_used}}
+{\footnotesize\ttfamily bool oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Immersed\+\_\+rigid\+\_\+body\+\_\+triangle\+\_\+mesh\+\_\+polygon\+\_\+used\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 2537 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0f3abdd0856a496bd73baf613d4e6fde}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a0f3abdd0856a496bd73baf613d4e6fde}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Internal\_open\_curve\_pt@{Internal\_open\_curve\_pt}}
+\index{Internal\_open\_curve\_pt@{Internal\_open\_curve\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Internal\_open\_curve\_pt}{Internal\_open\_curve\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{Triangle\+Mesh\+Open\+Curve}}$\ast$$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Internal\+\_\+open\+\_\+curve\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of open polylines that define internal curves. 
+
+
+
+Definition at line 2475 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3de1aa3ecfee67b29078369da4bc6738}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a3de1aa3ecfee67b29078369da4bc6738}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Internal\_polygon\_pt@{Internal\_polygon\_pt}}
+\index{Internal\_polygon\_pt@{Internal\_polygon\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Internal\_polygon\_pt}{Internal\_polygon\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}}$\ast$$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Internal\+\_\+polygon\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of polygons that define internal polygons. 
+
+
+
+Definition at line 2472 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9e7db5c7ede7df8d7e79e0f93567f047}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a9e7db5c7ede7df8d7e79e0f93567f047}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Nodes\_on\_boundary\_pt@{Nodes\_on\_boundary\_pt}}
+\index{Nodes\_on\_boundary\_pt@{Nodes\_on\_boundary\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Nodes\_on\_boundary\_pt}{Nodes\_on\_boundary\_pt}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,std\+::set$<$\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Nodes\+\_\+on\+\_\+boundary\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores a pointer to a set with all the nodes related with a boundary. 
+
+
+
+Definition at line 2505 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a2b91a5fed5bff190887ae03a2e6ee256}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a2b91a5fed5bff190887ae03a2e6ee256}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Outer\_boundary\_pt@{Outer\_boundary\_pt}}
+\index{Outer\_boundary\_pt@{Outer\_boundary\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Outer\_boundary\_pt}{Outer\_boundary\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}}$\ast$$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Outer\+\_\+boundary\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Polygon that defines outer boundaries. 
+
+
+
+Definition at line 2469 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a6141935bb2268112a29b4f40073aa207}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a6141935bb2268112a29b4f40073aa207}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Polygonal\_vertex\_arclength\_info@{Polygonal\_vertex\_arclength\_info}}
+\index{Polygonal\_vertex\_arclength\_info@{Polygonal\_vertex\_arclength\_info}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Polygonal\_vertex\_arclength\_info}{Polygonal\_vertex\_arclength\_info}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$double,double$>$ $>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Polygonal\+\_\+vertex\+\_\+arclength\+\_\+info\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storage for pairs of doubles representing\+: .first\+: the arclength along the polygonal representation of the curviline .second\+: the corresponding intrinsic coordinate on the associated geometric object at which the vertices on the specified boundary are located. Only used for boundaries represented by geom objects. 
+
+
+
+Definition at line 2501 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8f809ba6140c7d14c08dcefddd9674e3}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a8f809ba6140c7d14c08dcefddd9674e3}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Region\_attribute@{Region\_attribute}}
+\index{Region\_attribute@{Region\_attribute}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Region\_attribute}{Region\_attribute}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Region\+\_\+attribute\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of attributes associated with the elements in each region. 
+
+
+
+Definition at line 2459 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a409ca5d71a2010d3ab423726d8ca76aa}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a409ca5d71a2010d3ab423726d8ca76aa}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Region\_element\_pt@{Region\_element\_pt}}
+\index{Region\_element\_pt@{Region\_element\_pt}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Region\_element\_pt}{Region\_element\_pt}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$ $>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Region\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of elements in each region differentiated by attribute (the key of the map is the attribute) 
+
+
+
+Definition at line 2456 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa94a901c613b135fc1409697aa32d3eb}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_aa94a901c613b135fc1409697aa32d3eb}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Regions\_coordinates@{Regions\_coordinates}}
+\index{Regions\_coordinates@{Regions\_coordinates}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Regions\_coordinates}{Regions\_coordinates}}
+{\footnotesize\ttfamily std\+::map$<$unsigned,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Regions\+\_\+coordinates\hspace{0.3cm}{\ttfamily [protected]}}
+
+Storage for extra coordinates for regions. The key on the map is the region id 
+
+Definition at line 2482 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::generic\+\_\+constructor().
+
+\mbox{\Hypertarget{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1ae304480461c0dba53e7ce07e7ed21f}\label{classoomph_1_1UnstructuredTwoDMeshGeometryBase_a1ae304480461c0dba53e7ce07e7ed21f}} 
+\index{oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}!Suppress\_warning\_about\_regions\_and\_boundaries@{Suppress\_warning\_about\_regions\_and\_boundaries}}
+\index{Suppress\_warning\_about\_regions\_and\_boundaries@{Suppress\_warning\_about\_regions\_and\_boundaries}!oomph::UnstructuredTwoDMeshGeometryBase@{oomph::UnstructuredTwoDMeshGeometryBase}}
+\doxysubsubsection{\texorpdfstring{Suppress\_warning\_about\_regions\_and\_boundaries}{Suppress\_warning\_about\_regions\_and\_boundaries}}
+{\footnotesize\ttfamily bool oomph\+::\+Unstructured\+Two\+D\+Mesh\+Geometry\+Base\+::\+Suppress\+\_\+warning\+\_\+about\+\_\+regions\+\_\+and\+\_\+boundaries =true\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Public static flag to suppress warning; defaults to false. 
+
+Public static flag to suppress warning; defaults to true because it really clutters up the output. It\textquotesingle{}s unlikely to ever be a genuine error... ~\newline
+ 
+
+Definition at line 1610 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc}}\end{DoxyCompactItemize}

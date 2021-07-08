@@ -1,0 +1,803 @@
+/**
+
+\mainpage Parallel processing
+
+\c oomph-lib is designed so that,
+provided the library is compiled with MPI support, discussed below in 
+ \ref basics, many of the
+most computationally-expensive phases of a typical computation are 
+automatically performed in parallel. 
+Examples of "automatically parallelised" tasks include
+- The assembly of the Jacobian matrix and the residual vector in
+  Newton's method.
+- Error estimation.
+- The solution of the linear systems within the Newton iteration, and any
+  preconditioning operations performed within \c oomph-lib's 
+  <a  href="../../../mpi/block_preconditioners/html/index.html">
+  block-preconditioning framework</a> which relies heavily on the
+  library's 
+  <a href="../../../mpi/distributed_linear_algebra_infrastructure/html/index.html">
+  distributed linear algebra infrastructure.</a>
+.
+The only parallel task that requires user intervention is 
+the distribution of a problem over multiple processors
+so that each processor stores a subset of the elements. 
+For
+straightforward problems, a single call to  \c Problem::distribute() 
+suffices.
+Furthermore, the majority of \c oomph-lib's
+multi-physics helper functions (<em> e.g.</em> the automatic setup of the
+fluid load on solid elements in FSI problems; the determination
+of "source elements" in multi-field problems; etc) can be used in
+distributed problems. For less-straightforward problems, the user may 
+have to intervene in the distribution process and/or be aware of the
+consequences of the distribution. Hence, the section \ref domain_decomposition
+provides an overview of the underlying design used for problem
+distribution within \c oomph-lib. A number of 
+<a href="../../../example_code_list/html/index.html#parallel">demo
+driver codes for distributed problems</a> are provided and
+any additional issues are discussed in the accompanying tutorials.
+
+\n\n
+<HR>
+<HR>
+
+\section basics Basic parallel usage
+
+\subsection installation How to build/install oomph-lib with MPI support
+
+- To compile \c oomph-lib with MPI support you must specify the configure flag
+  \n\n
+  \code
+  --enable-MPI
+  \endcode
+  \n
+  If you use \c oomph-lib's <code>autogen.sh</code> script to build
+  the library you should add this line to the
+  <code>config/configure_options/current</code> file.
+  You should also ensure that appropriate parallel compilers are specified by 
+  the \c CXX, \c CC, \c F77 and \c LD flags. For instance, if you use 
+  <a href="http://www.lam-mpi.org/">LAM</a>, 
+  you should use \c CXX=mpic++, \c CC=mpicc, \c F77=mpif77 and \c LD=mpif77.
+  \n\n
+- When \c oomph-lib is built with MPI support, the macro \c
+  OOMPH_HAS_MPI is defined. It is used to isolate parallel 
+  sections of code to ensure that the
+  library can be used in serial and parallel: <em> e.g. </em>
+  \n\n
+  \code
+
+  [...]
+
+  #ifdef OOMPH_HAS_MPI
+
+     std::cout << "This code has been compiled with mpi support \n " 
+               << "and is running on " << Communicator_pt->nproc() 
+               << " processors. " << std::endl;
+
+  #else
+
+     std::cout << "This code has been compiled without mpi support" 
+               << std::endl;
+
+  #endif
+
+  [...]
+
+  \endcode
+  \n
+.
+
+
+<HR>
+
+\subsection running How to run a driver code in parallel
+
+- MPI <strong> must </strong> be initialised in every driver code 
+ that is to be run in  parallel, which means that the 
+  commands \c MPI_Helpers::init(...) and \c  MPI_Helpers::finalize()
+  must be added to the beginning and end of the \c main(...) function, 
+  respectively 
+  \n\n
+  \code   
+  int main(int argc, char **argv)
+    { 
+
+      // Initialise oomph-lib's MPI       
+      MPI_Helpers::init(argc,argv);     
+    
+
+      // Normal "serial" code
+      [...]  
+ 
+      
+      // Shut down oomph-lib's MPI
+      MPI_Helpers::finalize();
+    }
+  \endcode
+  \n  
+  Running the code on multiple processors should immediately lead to a
+ speedup, although this depends on the specific problem. 
+ In most applications, the most computationally-expensive tasks
+  are the setup of the Jacobian matrix and the solution of the 
+  linear systems. When a driver code is run on multiple processors,
+  each processor assembles contributions to the Jacobian matrix from a
+  different subset of the elements, dividing the work of the
+  assembly between processors. In our experience, 
+  the assembly of the Jacobian
+  matrix tends to scale very well with the number of processors. 
+  The parallel performance of 
+  the (third-party) linear solvers available from within \c oomph-lib
+  varies greatly and their performance is also strongly dependent on
+  the underlying hardware, <em> e.g.</em> the speed of your machine's 
+  interconnects, etc.
+  \n\n
+- The MPI header file \c mpi.h is included in \c oomph-lib's
+  generic header, so it is not necessary to include it in the
+  driver code. The functions \c MPI_Helpers::init(...) 
+  and \c  MPI_Helpers::finalize() call their MPI counterparts,
+  \c MPI_Init(...) and \c MPI_Finalize(), which \b must \b not be called
+  again.  Note also that the \c main(...) function must take arguments
+  which are then passed into the \c MPI_Helpers::init(...) function.
+  \n\n
+- The command used to run a parallel job depends on your particular
+  MPI installation. If you use <a href="http://www.open-mpi.org/">OpenMPI</a>,
+  for example, the executable \c parallel_executable is run on, say, four 
+  processors by issuing the command
+  \n\n
+  \code
+  mpirun -np 4 ./parallel_executable
+  \endcode
+  \n
+.
+
+
+
+<HR>
+
+\subsection solvers oomph-lib's parallel linear solvers
+- \c oomph-lib's default linear solver is \c SuperLUSolver. This is a
+  wrapper to the direct linear solvers from the 
+  <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU /
+  SuperLU_DIST</A> projects. 
+  If \c oomph-lib is built with MPI support and the executable is
+  run on multiple processors, \c SuperLU_DIST will be used by default,
+  otherwise \c SuperLU is used.
+  \n\n
+- Of \c oomph-lib's own iterative linear solvers, only \c CG
+  is parallelised. We recommend using \c oomph-lib's  wrapper to the 
+  parallel Krylov subspace solvers from the
+  <a href="http://trilinos.sandia.gov/">
+  Trilinos </a> library (see 
+  <a href="../../../the_distribution/html/index.html#external_dist"> 
+  the \c oomph-lib installation page</a> for details on how to install
+  this) instead. The interfaces are identical to those
+  used to call these solvers in serial; see 
+  <a href="../../../linear_solvers/html/index.html"> the linear solver
+  tutorial</a> for details.
+  \n\n
+- \c oomph-lib's block preconditioning framework is fully 
+  parallelised and can be used in the same way as in a serial code.
+
+
+
+<HR>
+
+\subsection self_tests How to include parallel demo codes into the self-tests
+
+- The configure flag \c --with-mpi-self-tests includes 
+  \c oomph-lib's parallel demo driver codes into the self-tests 
+  executed when \c make \c check is run. The self-tests
+  require the executable to be run on two processors and the command 
+  that spawns a two-processor parallel job on the target
+  machine must be specified as an argument to the configure flag. 
+  For example, under <a href="http://www.lam-mpi.org/">LAM</a>
+  \n\n
+  \code
+  --with-mpi-self-tests="mpirun -np 2"
+  \endcode
+  \n
+  Some self-tests are performed with a greater number of processors.
+  To perform these tests as part of the \c make \c test procedure,
+  add the configure flag  \c --with-mpi-self-tests-variablenp
+  to the configure options. Its argument has to specify how to spawn
+  an mpi job on an arbitrary number of processors, using the
+  placeholder \c OOMPHNP for the number of processors. E.g. 
+  \n\n
+  \code
+  --with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
+  \endcode
+  \n
+  It is easiest to add the appropriate lines to the
+  <code>config/configure_options/current</code> file before
+  building/installing \c oomph-lib with <code>autogen.sh</code>.
+  \n\n
+  \b NOTE: When using LAM, make sure your MPI demons are started
+  before running the parallel self-tests, e.g. by using the \c lamboot 
+  command, otherwise the self-tests will fail. 
+.
+
+
+<HR>
+<HR>
+
+
+\section domain_decomposition Distribution of problems by domain decomposition
+
+By default each processor stores the entire \c Problem object, which
+means that all data is available on all processors. As a result the
+size of the problem is limited by the smallest amount of memory
+available on any of the processors. In addition, the mesh adaptation 
+does not benefit from parallel processing because each 
+processor must adapt its own copy of the entire mesh, even though it
+operates on a subset of the elements when assembling the Jacobian 
+matrix.
+
+To address this problem, \c oomph-lib's domain decomposition
+procedures allow a \c Problem
+to be distributed over multiple processors so that each processor 
+holds a fraction of the \c Problem's elements, which 
+can lead to substantial reductions in memory usage per processor and
+allows the mesh adaptation to be performed in parallel. 
+
+
+<HR>
+
+\subsection how_to_distribute Basic usage: How to distribute a simple problem
+
+- In most cases the problem distribution is extremely
+  straightforward. Given an existing serial driver code,
+  modified by the addition of calls to \c MPI_Helpers::init(...) 
+  and \c  MPI_Helpers::finalize(), the function
+  \n\n
+  \code
+  Problem::distribute()
+  \endcode
+  \n
+  can be called at any point \b after the \c Problem has been 
+  constructed and equation numbers have been assigned 
+  (i.e. at a point at which \c Problem::newton_solve()
+  could be called), but \b before any <b>non</b>-uniform mesh refinement has 
+  taken place. Equation numbering is required because 
+  the automatic distribution procedure uses the global
+  equation numbering scheme to identify interactions between elements
+  and attempts to store strongly-coupled elements on the same
+  processor. 
+  \n\n
+  After the call to \c Problem::distribute() each processor
+  holds a sub-set of the \c Problem's elements: those elements
+  whose contribution to the Jacobian are assembled by the processor, 
+  and additional "halo" elements
+  that are retained to facilitate the subsequent mesh adaptation.
+  (Halo elements are discussed in the \ref how_it_works
+  below). We note that the meshes' boundary lookup schemes 
+  are updated during the
+  distribution process so that \c Mesh::nboundary_element(b) returns the
+  number of elements on the processor 
+  that are adjacent to boundary \c b. Hence, 
+  functions that were written (in serial) to
+  update time-dependent boundary conditions on a mesh's boundary
+  nodes, say, continue to work in parallel without requiring any
+  modifications. 
+  \n\n
+- Now that each processor holds a subset of the \c Problem's 
+  elements, it is sensible to modify the post-processing 
+  routines such that output files are labelled by the processor 
+  number:
+  \n\n 
+  \dontinclude adaptive_driven_cavity.cc
+  \skipline start_of_doc_solution
+  \until end_of_doc_solution
+  \n 
+  Without such a modification multiple processors will attempt to
+  write to the same file, leading to incomplete output if/when the file 
+  produced by one processor is overwritten by another. 
+  By default, \c oomph-lib's mesh-based output functions do
+  not include output from halo elements; this can be re-enabled or
+  disabled by calls to
+  \n\n 
+  \code
+  Mesh::enable_output_of_halo_elements()
+  \endcode
+  \n
+  or
+  \n\n
+  \code
+  Mesh::disable_output_of halo_elements()
+  \endcode
+  \n 
+  respectively.
+  \n\n
+- Other, equally-straightforward modifications to existing driver codes
+  tend to be required if the serial version of the code contains explicit
+  references to individual elements or nodes, <em> e.g. </em> 
+  pinning a pressure
+  value in a Navier--Stokes computation with enclosed boundaries. 
+  In such cases, it is important to remember that, once the problem 
+  is distributed, \b (i) not every processor has direct access to a
+  specific element (or node), and  \b (ii) the pointer to the "first" 
+  element in a mesh (say) points to a different element on each processor.
+  The particular example of pinning a pressure degree of freedom in a
+  Navier--Stokes problem is discussed in detail in the 
+  <a href="../../adaptive_driven_cavity/html/index.html">adaptive
+  driven cavity tutorial</a>.
+. 
+
+
+<HR>
+
+\subsection how_it_works Overview of the implementation of Problem distribution
+
+  The main task of the \c Problem::distribute() function is
+to distribute the \c Problem's global mesh (possibly
+comprising multiple sub-meshes) amongst the processors so that 
+<b>(a)</b> the storage requirements on each processor are reduced;
+<b>(b)</b>  during the mesh adaptation each processor only acts
+on a fraction of the overall mesh; while ensuring that <b>(c)</b> 
+communication between processors required to synchronise any shared 
+ data structures is minimised. 
+
+The figure below shows a conceptual sketch of the parallelisation
+strategy adopted. For simplicity, we shall restrict the discussion
+to the 2D case and ignore various complications that arise with more 
+complicated mesh partitionings.
+
+
+ The initial distribution of a problem proceeds in two stages:
+ 
+- <b>Initial refinement and partitioning</b>
+  \n\n
+  Each processor constructs the same \c Problem object, 
+  using a (typically very coarse) initial mesh; in the figure below,
+  the mesh contains a single four-node quad. Repeated
+  calls to  \c Problem::refine_uniformly() should be made to increase the
+  number of elements sufficiently for a sensible
+  mesh partitioning --- for example, 
+  there should be at least as many elements as
+  processors. By default, 
+  <A HREF="http://www-users.cs.umn.edu/~karypis/metis/">METIS</A> 
+  is used to associate each element
+  with a unique processor. Alternatively, user-defined distributions 
+  may be specified via a vector that contains the processor number to be
+  associated with each element. Nodes located in the interior of a
+  processor's patch of elements are associated with that processor;
+  nodes shared by elements associated
+  with different processors are associated with the highest-numbered
+  processor.
+  \n\n
+- <b>Identification of halo[ed] nodes/elements and pruning</b>
+  \n\n
+   The elements and nodes required by each processor must now be determined.
+   Each processor retains its own elements:
+   those elements associated with the processor by the partitioning
+   process. In addition,
+   each processor retains a single layer of elements adjacent to 
+   its own elements, and their nodes.  Nodes that lie directly
+   on the boundary between this layer and the processor's own elements
+   are shared between processors and are associated
+   with the highest-numbered processor, as explained above.
+   These additional elements/nodes that are retained but not associated
+   with the processor are termed ``halo'' elements/nodes. Conversely, 
+   objects are termed  ``haloed'' if they are associated with the
+   processor,  but they have halo counterparts on other processors. 
+   [It is possible
+    to request that all elements in a mesh are retained as halo
+    elements. This is useful
+    in certain free-boundary problems; see the section 
+   \ref alg_node_update below for details].
+  \n\n
+   At this stage of the process, each processor
+   has access to the entire mesh and it is, therefore, possible to establish 
+   a consistent numbering scheme for halo[ed] elements/nodes.
+  Once this information has been set up, any superfluous nodes and elements
+  are deleted and the mesh's boundary lookup-schemes (required to identify the
+  nodes and elements located adjacent to domain boundaries) and
+  neighbour information for adaptive refinement are re-generated. 
+  Finally, each processor  independently assigns equation numbers for 
+  its associated (non-halo) elements and nodes; the equation
+  numbers are then synchronised between processors.
+
+\image html decomposition.gif "Sketch illustrating the phases of the parallel mesh adaptation procedure for a problem that is distributed over four processors. The columns illustrate the evolution of the mesh on each of the four processors. The colours of the objects indicate which processor is associated with them. " 
+\image latex decomposition.eps "Sketch illustrating the phases of the parallel mesh adaptation procedure for a problem that is distributed over four processors. The columns illustrate the evolution of the mesh on each of the four processors. The colours of the objects indicate which processor is associated with them. " width=0.75\textwidth
+
+  Aside from the initial refinement process, 
+  the functionality described above is implemented in a single
+  function, \c Problem::distribute(). Following its execution
+  on all processors, each processor can assemble its contribution to the 
+  distributed Jacobian matrix and residual vector, required by
+  \c oomph-lib's parallel linear solvers, using only 
+  to locally stored non-halo objects. Once the Newton correction 
+  to the unknowns has been computed, each processor updates the unknowns 
+  associated with its elements and nodes, before MPI-based 
+  communication is employed to update the unknowns stored at 
+  the processors' halo nodes.
+
+  After a problem has been distributed, further mesh refinement can 
+  be performed in parallel using the existing mesh adaptation 
+  procedures on the (partial) meshes held on the different 
+  processors. For spatially non-uniform refinement, each haloed
+  element communicates whether or not it is to be refined to its halo
+  counterparts before the adaptation takes place.
+  Any nodes created during the refinement are associated 
+  with a unique processor, using the rules described above, and halo[ed] 
+  nodes are identified and added to the appropriate lookup schemes. 
+  These steps are performed automatically
+  when \c Problem::refine_uniformly() or any of the other
+  mesh adaptation routines within \c oomph-lib are executed.
+
+<strong> Optional pruning of superfluous halo[ed] nodes and 
+  elements </strong>
+
+  The parallel efficiency of the distributed mesh adaptation
+  (in terms of the memory required to hold the partial meshes, and 
+  in terms of the CPU time required for their adaptation) is 
+  limited by the fact that each processor must adapt not only 
+  the \f$N_{\rm in \ charge}\f$ elements it is in charge of, 
+  but also its \f$N_{\rm halo}\f$ halo elements. We define the efficiency 
+  of the problem distribution as
+  \f[ e_{dist} = 
+  \frac{N_{\rm in \ charge}}{N_{\rm halo} + N_{\rm in \ charge}} 
+  \le 1, \f]
+  where the equality could only be achieved in the absence of any 
+  halo elements. 
+
+  When the mesh is first distributed, the halo layer has a 
+depth of one element, but repeated mesh refinement can make the halo
+layers (the original halo elements and their sons) much thicker than a
+single-element layer. Thus, to a large extent, the efficiency is determined 
+during the initial problem 
+  distribution and at that stage of the process it
+  can only be improved by <b>(i)</b> increasing the number of non-distributed
+  initial mesh refinements; <b>(ii)</b> reducing the number of
+  processors. Since both options reduce the parallelism they are not
+  desirable. It is possible, however, to improve the parallel 
+  efficiency by  pruning superfluous halo[ed] elements after each
+  mesh refinement by  calling the function
+\n\n
+\code
+Problem::prune_halo_elements_and_nodes()
+\endcode
+\n
+as illustrated in the figure. 
+If this is done 
+  after every mesh adaptation \f$ e_{dist}\f$  increases significantly as 
+  the refinement proceeds. However, the pruning of halo[ed] nodes and elements 
+  makes the refinement irreversible and the mesh(es) involved
+can no longer be unrefined below the previous highest level of uniform
+refinement.
+
+<HR>
+
+\subsection advanced Customising the distribution
+
+ The procedures described above are completely sufficient 
+ for straightforward problems, <em> e.g. </em> 
+ a single mesh containing single-physics elements. For
+ less-straightforward problems, <em> e.g. </em> those that involve
+ interactions between multiple meshes, the interactions must be set up
+ both <strong> before </strong> and <strong> after </strong> the
+ distribution. The functions 
+\n\n
+\code
+Problem::actions_before_distribute()
+\endcode 
+\n
+and
+\n\n
+\code
+Problem::actions_after_distribute()
+\endcode 
+\n
+can be used to perform any additional commands required to complete
+ the setup of the problem after distribution. In many cases, these
+ functions will contain the same commands as those required in the
+ equivalent \c Problem::actions_before_adapt() and \c
+ Problem::actions_after_adapt() functions used during mesh adaptation.
+
+
+
+<HR>
+
+\subsubsection face_elements Distributing problems involving FaceElements
+
+\c FaceElements are typically used to apply Neumann/traction-type
+boundary conditions; see the tutorials that discuss the
+application of such boundary conditions in
+<a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
+Poisson</a> or
+<a href="../../../navier_stokes/rayleigh_traction_channel/html/index.html">
+Navier-Stokes</a> equations. Since the \c FaceElements
+that apply the Neumann boundary conditions are attached
+to "bulk" elements that may disappear during mesh adaptation, 
+we generally recommend to store the (pointers to the) 
+\c FaceElements in a separate mesh, and to use
+the \c Problem::actions_before_adapt() and 
+\c Problem::actions_after_adapt() functions to detach and re-attach 
+the \c FaceElements to/from the bulk elements before and after the
+mesh adaptation.
+
+  The same issues arise during the problem distribution: A 
+\c FaceElement that was created before the problem was distributed
+may have been attached to a bulk element that is deleted when the
+distribution is performed, resulting in obvious (and disastrous) 
+consequences. We therefore recommend using the functions
+\n\n
+\code
+Problem::actions_before_distribute()
+\endcode 
+\n
+and
+\n\n
+\code
+Problem::actions_after_distribute()
+\endcode 
+\n
+to detach and re-attach any \c FaceElements before and after the
+problem distribution. In this context it is important to note that:
+\n
+-# The \c FaceElements \b should be available before \c Problem::distribute() 
+   is called to allow the load-balancing routines to take their 
+   presence into account. 
+   \n\n
+-# \c FaceElements that are attached to halo (bulk-)elements become
+   halo-elements themselves.
+.
+Further details are provided in  
+<a href="../../two_d_poisson_flux_bc_adapt/html/index.html">another 
+tutorial</a> which explains the modifications
+to the serial driver code required to distribute
+a Poisson problem with Neumann boundary conditions.
+
+
+
+<HR>
+
+\subsubsection multi_domain Distributing multi-domain problems
+
+Multi-domain problems involve interactions
+between PDEs that are defined in different domains, such as
+fluid-structure interaction problems.
+Within \c oomph-lib, multi-domain problems typically involve
+elements, derived from the \c ElementWithExternalElement class,  
+that store pointers to any "external" elements that take part
+in the interaction. These "external" elements are
+determined by helper functions such as 
+ \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) or
+\c Multi_domain_functions::setup_multi_domain_interactions(...). 
+The appropriate helper functions must be called in the function 
+\c Problem::actions_after_distribute() to ensure that the interactions
+are correctly set up once the problem has been distributed.
+
+The helper function \c
+Multi_domain_functions::locate_external_elements() has been written to
+work even after a problem has been distributed and uses the following
+algorithm:
+-# Loop over all (non-halo) \c ElementWithExternalElements
+   and try to locate the "external" elements (<em> e.g.</em>  fluid elements
+   adjacent to an elastic wall in an fluid-structure interaction
+   problem) on the current processor. 
+   If the required "external" element is found
+   locally, the \c ElementWithExternalElement stores a pointer to it.
+   \n\n
+-# If the "external" element cannot be found locally, MPI-based
+   communication is employed to find the "external" element on one
+   of the other processors. Once found, a halo-copy of the "external"
+   element (and its nodes) is made on the current processor and a
+   pointer to the halo-element is stored. These "external" halo elements 
+   and nodes are stored in the appropriate mesh, <em> i.e.</em>
+    in an FSI problem, the
+   "external" fluid elements are added to the fluid mesh. 
+   \n\n
+.
+
+"External" halo[ed] elements are automatically included in any
+halo/haloed synchronisation operations performed when assigning
+equation numbers, or updating unknowns during the Newton iteration,
+etc. 
+
+
+The procedure discussed above has the following important consequence:
+\n
+- When an "external" halo element is created we also automatically create
+  halo-copies of those of its nodes that do not already exist
+  on the current processor. Such nodes are stored as "external" halo nodes 
+  and they are automatically synchronised with their non-halo
+  counterparts on other processors. However, synchronisation of nodes
+  does not (and cannot) include the specification of auxiliary node 
+  update functions (such as the function 
+  \c FSI_functions::apply_no_slip_on_moving_wall(...) which automatically 
+  applies the no-slip condition on moving fluid-solid interfaces). 
+  Such functions should therefore be re-assigned to the appropriate nodes
+  after \c FSI_functions::setup_fluid_load_info_for_solid_elements() 
+  has been called. This is exactly equivalent to the sequence of steps
+  required following an adaptive mesh refinement; see <em> e.g.</em> the
+  <a href="../../../interaction/fsi_collapsible_channel_adapt/html/index.html#before_and_after">tutorial
+  discussing the adaptive solution of the collapsible channel problem</a>
+  for a more detailed discussion of this issue. We note that "external"
+  halo-nodes are added to the mesh's boundary lookup schemes, so the
+  specification of auxiliary node update functions for all nodes
+  on a given mesh boundary does not require any further modification
+  to the serial code.  
+.
+
+
+
+<HR>
+
+\subsubsection alg_node_update Distributing problems involving meshes with algebraic node updates
+
+\c oomph-lib provides a variety of algebraic node-update methods. 
+These allow the fast and sparse update of the nodal positions 
+in response to changes in the domain boundaries. The shape and 
+position of such boundaries is typically represented by one or 
+more \c GeomObjects. If the motion of the boundary is prescribed, 
+(as in the case of the
+<a href="../../../navier_stokes/osc_ellipse/html/index.html">flow 
+inside an oscillating ellipse</a>, say) no modifications are
+required when the meshes are used in a distributed problem.
+
+In order to minimise communication, the design decision was taken
+that any \c GeomObjects defining the position of domain boundaries
+must be available on all processors after the problem is distributed. 
+Thus, if the \c GeomObject is actually a \c MeshAsGeomObject,
+a compound \c GeomObject formed from a mesh of \c FiniteElements,
+then all the elements in the mesh, or all elements required to
+construct the mesh,  must be retained as halo elements on
+every processor. This leads to a 
+slight increase in the overall storage requirements 
+(because none of the elements involved in the interaction are deleted
+when the problem is distributed) but it means that the entire 
+\c GeomObject remains accessible to the fluid mesh without invoking
+MPI communications. Two functions can be used to specify that elements
+must be retained:
+\n\n
+\code
+Mesh::keep_all_elements_as_halos()
+\endcode
+\n
+keeps every element in the \c Mesh available to every processor,
+and
+\code
+GeneralisedElement::must_be_kept_as_halo()
+\endcode
+\n
+can be called for a particular element to ensure that it is kept
+available to every processor.
+
+We stress that the increase in storage requirements due to the
+retention of these elements is minimal because the  
+elements are only located along the (lower-dimensional) boundaries 
+of the domain. For instance, in the 
+<a href="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">collapsible 
+channel problem</a> the 1D mesh of beam elements
+bounds the 2D mesh of fluid elements; in
+<A HREF="../../../interaction/turek_flag/html/index.html">Turek and 
+Hron's FSI benchmark problem</a>, the 2D fluid domain is bounded
+by a 1D mesh of \c FSISolidTractionElements, and so on.
+
+Examples of the implementation of these ideas are given for the  
+<a href="../../fsi_channel_with_leaflet/html/index.html">flow past an
+elastic leaflet</a> and <a href="../../turek_flag/html/index.html"> 
+Turek and Hron's FSI benchmark problem </a>.
+
+
+
+<HR>
+<HR>
+
+\section mpidetails Further MPI Details
+
+- \c oomph-lib mirrors the MPI C bindings with the methods 
+  \c MPI_Helpers::init(...) and \c MPI_Helpers::finalize(); 
+  they call the methods \c MPI_Init(...) and \c MPI_Finalize()
+  respectively. In addition, these methods automatically create 
+  (and destroy) a new instance of \c MPI_Comm  with the same set of 
+  processes as \c MPI_COMM_WORLD but with a different communication context. 
+  This \c MPI_Comm instance is accessible through 
+  \c MPI_Helpers::Communicator_pt which
+  returns a pointer to an \c OomphCommunicator object.
+- An \c OomphCommunicator is \c oomph-lib's object oriented wrapper to an 
+  \c MPI_Comm.
+- Under normal operation, a user does not need to specify the
+  \c OomphCommunicator for any object -- this is all handled
+  automatically by \c oomph-lib. For example, on construction a \c
+  Problem will use the \c MPI_Helpers communicator; a \c LinearSolver 
+  will use the corresponding \c Problem communicator; and a 
+  \c Preconditioner will
+  use the corresponding \c IterativeLinearSolver communicator.
+  
+
+  
+
+
+<HR>
+<HR>
+
+\section problem Trouble-shooting and debugging
+
+\subsection checking_and_documenting Debugging and documenting the distribution
+
+Once a problem has been distributed, the function
+\code
+Problem::check_halo_schemes()
+\endcode
+can be called to check that the halo lookup schemes for each mesh 
+are set up correctly.
+
+Details about the mesh distribution can be generated by
+calling
+\code
+Mesh::doc_mesh_distribution(DocInfo& doc_info)
+\endcode
+which outputs the elements, nodes, halo(ed) elements, halo(ed) nodes, mesh, 
+boundary elements and boundary nodes on each processor.  This routine
+is automatically called when \c Problem::distribute() is called with a
+\c DocInfo object whose \c Doc_flag is set to true (the default behaviour).
+
+
+
+<HR>
+
+\subsection parallel_debug Debugging parallel code
+
+Parallel code can obviously fail in many more ways than a code
+that runs on a single processor. Here is a procedure that 
+allows basic parallel debugging without requiring access to 
+expensive commercial tools such as totalview, say.
+(The instructions below assume that you use 
+<a href="http://www.lam-mpi.org/">LAM</a> as your MPI installation; 
+they can probably be modified to work with other versions of MPI, too). 
+
+Let's assume you use <a href="http://www.gnu.org/software/gdb/">gdb</a> 
+as your debugger. To debug a serial code
+with <a href="http://www.gnu.org/software/gdb/">gdb</a> you would 
+load the executable <code>a.out</code> into the debugger using
+the command
+\code
+gdb ./a.out
+\endcode
+on the command line. Once inside 
+<a href="http://www.gnu.org/software/gdb/">gdb</a>, you run 
+the code by typing "run". If the code crashes, typing "where" will tell
+you in which line of the code the crash occurred, and it will also
+provide a traceback of the function calls that got you to this
+point. 
+
+ To do this in parallel, we have to run each (parallel) instance of
+the code within its own <a href="http://www.gnu.org/software/gdb/">gdb</a>
+session. To this, create the following three files:
+- A shell script \c mpidbg that must be executable, which contains:
+\code
+mpirun $1 $2 -x DISPLAY rungdb.sh -x cmds.gdb
+\endcode
+- The executable file \c rungdb.sh must be in the same directory as \c
+mpidbg and contain the following
+\code
+echo "Running GDB on node `hostname`"
+echo $DISPLAY
+xterm -geometry 200x40 -e gdb $*
+exit 0
+\endcode
+- Finally the \c cmds.gdb file should also be in the same directory
+and must contain the \c run command (so that all processors start
+their <a href="http://www.gnu.org/software/gdb/">gdb</a> session
+simultaneously), and may also include other commands such as \c set
+\c args \c command-line-arguments, and so on.
+
+Then, to run the debugger in parallel on 3 processors for the
+executable \c a.out, the command would be
+\code
+mpidbg -np 3 ./a.out 
+\endcode
+Once the command is issued, an \c xterm window will be opened for each
+processor, and if a crash occurs on any processor, the usual
+<a href="http://www.gnu.org/software/gdb/">gdb</a>
+commands (\c back, \c up, \c down, \c quit and so on) may be used
+within any of the \c xterm sessions where a crash has taken place.
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

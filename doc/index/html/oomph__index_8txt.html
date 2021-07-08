@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph_index.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph_index.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a30315afc4bfdd2e7991cd3e20434bb84"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a> = &quot;anchor&quot; id=&quot;W&quot;&gt;&lt;/a &gt; W&lt;/h2 &gt;&lt; div id=&quot;div_id 310 &quot; &gt;&lt; h3 &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;W.WeakForm&quot;&gt;&lt;/a &gt; Weak Form&lt;/h3 &gt;&lt; div id=&quot;div_id 311 &quot; &gt;&lt; ul &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;W.WeakForm.WeakFormofPoissonEquation&quot;&gt;&lt;/a &gt; Weak Form of Poisson Equation&lt; br &gt; &amp;<a class="el" href="oomph__index_8txt.html#aef915316f784c9063d942974538301a6">nbsp</a></td></tr>
+<tr class="separator:a30315afc4bfdd2e7991cd3e20434bb84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a63922e55c14502f8bb93a07db2d4647a"><td class="memItemLeft" align="right" valign="top">&lt; a href=&quot; ../../index/html/index.html#T.TemporalAdaptivity &quot;&gt; see entry on Temporal <a class="el" href="oomph__index_8txt.html#aa7d9752c502efb5c73e16a00d76f4352">Adaptivity</a>&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Adaptivity.Spatio-TemporalAdaptivity&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../unsteady_heat/two_d_unsteady_heat_2adapt/html/index.html &quot;&gt; Spatio Temporal <a class="el" href="oomph__index_8txt.html#aa7d9752c502efb5c73e16a00d76f4352">Adaptivity</a>&lt;/a &gt;&lt;/li &gt;&lt;/ul &gt;&lt;/div &gt;&lt; h3 &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Advection-DiffusionEquation&quot;&gt;&lt;/a &gt; Advection Diffusion Equation&lt;/h3 &gt;&lt; div id=&quot;div_id 15 &quot; &gt;&lt; ul &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Advection-DiffusionEquation.ListofAdvection-DiffusionDemoDrivers&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../example_code_list/html/index.html#adv_diff &quot;&gt; List of Advection Diffusion Demo Drivers&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Advection-DiffusionEquation.FluxBoundaryConditions&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../advection_diffusion/two_d_adv_diff_flux_bc/html/index.html &quot;&gt; Flux Boundary Conditions&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Advection-DiffusionEquation.SUPGstabilisation&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../advection_diffusion/two_d_adv_diff_SUPG/html/index.html &quot;&gt; SUPG stabilisation&lt;/a &gt;&lt;/li &gt;&lt;/ul &gt;&lt;/div &gt;&lt;/div &gt;&lt; h2 &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B&quot;&gt;&lt;/a &gt; B&lt;/h2 &gt;&lt; div id=&quot;div_id 19 &quot; &gt;&lt; h3 &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BeamStructures&quot;&gt;&lt;/a &gt; Beam Structures&lt;/h3 &gt;&lt; div id=&quot;div_id 20 &quot; &gt;&lt; ul &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BeamStructures.ListofBeamDemoDrivers&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../example_code_list/html/index.html#beam &quot;&gt; List of Beam Demo Drivers&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BeamStructures.TheoryandImplementation&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../beam/tensioned_string/html/index.html &quot;&gt; Theory and Implementation&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BeamStructures.HermiteElements&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../beam/tensioned_string/html/index.html#hermite &quot;&gt; Hermite Elements&lt;/a &gt;&lt;/li &gt;&lt;/ul &gt;&lt;/div &gt;&lt; h3 &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BoundaryConditions&quot;&gt;&lt;/a &gt; Boundary Conditions&lt;/h3 &gt;&lt; div id=&quot;div_id 24 &quot; &gt;&lt; ul &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BoundaryConditions.Absorbing(SommerfeldRadiation)BCs&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../helmholtz/scattering/html/index.html#ABCs &quot;&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oomph__index_8txt.html#a63922e55c14502f8bb93a07db2d4647a">Absorbing</a> (Sommerfeld Radiation) BCs&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a></td></tr>
+<tr class="separator:a63922e55c14502f8bb93a07db2d4647a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa1bf5b62e6086cd9e608bbad225e3aa6"><td class="memItemLeft" align="right" valign="top">mainpage Document index The purpose of this document is to provide a means of navigating around the c oomph lib documentation The documentation is presented through a series of example codes which is fine if you know which type of problem you want to solve In that case you can go directly to the appropriate section of the&lt; a href=&quot;../../example_code_list/html/index.html&quot;&gt; list of example codes&lt;/a &gt; If you want to learn about general concept rather than a specific type of problem then it can be more difficult to find the appropriate documentation In this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a></td></tr>
+<tr class="separator:aa1bf5b62e6086cd9e608bbad225e3aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c1f59aaa3f7160fb1ffd0c49ce559c"><td class="memItemLeft" align="right" valign="top">mainpage Document <a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a> The purpose of this document is to provide a means of navigating around the c oomph lib documentation The documentation is presented through a series of example codes which is fine if you know which type of problem you want to solve In that case you can go directly to the appropriate section of the&lt; a href=&quot;../../example_code_list/html/index.html&quot;&gt; list of example codes&lt;/a &gt; If you want to learn about general concept rather than a specific type of problem then it can be more difficult to find the appropriate documentation In this both general concepts and specific types of problem are arranged alphabetically with hyperlinks to the appropriate documents n n latexonly This document only makes sense as an html&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oomph__index_8txt.html#ad3c1f59aaa3f7160fb1ffd0c49ce559c">page</a></td></tr>
+<tr class="separator:ad3c1f59aaa3f7160fb1ffd0c49ce559c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef915316f784c9063d942974538301a6"><td class="memItemLeft" align="right" valign="top">mainpage Document <a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a> The purpose of this document is to provide a means of navigating around the c oomph lib documentation The documentation is presented through a series of example codes which is fine if you know which type of problem you want to solve In that case you can go directly to the appropriate section of the&lt; a href=&quot;../../example_code_list/html/index.html&quot;&gt; list of example codes&lt;/a &gt; If you want to learn about general concept rather than a specific type of problem then it can be more difficult to find the appropriate documentation In this both general concepts and specific types of problem are arranged alphabetically with hyperlinks to the appropriate documents n n latexonly This document only makes sense as an html so the pdf version is empty Please consult the html version endlatexonly htmlonly&lt; h1 &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#A &gt; A&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#B &gt; B&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#C &gt; C&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#D &gt; D&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#E &gt; E&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#F &gt; F&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#G &gt; G&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#H &gt; H&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#I &gt; I&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#J &gt; J&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#K &gt; K&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#L &gt; L&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#M &gt; M&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#N &gt; N&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#O &gt; O&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#P &gt; P&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#Q &gt; Q&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#R &gt; R&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#S &gt; S&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#T &gt; T&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#U &gt; U&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#V &gt; V&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#W &gt; W&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#X &gt; X&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#Y &gt; Y&lt;/a &gt;&lt; a href=../../<a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a>/html/index.html#Z &gt; Z&lt;/a &gt;&lt;/h1 &gt;&lt; h2 &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A&quot;&gt;&lt;/a &gt; A&lt;/h2 &gt;&lt; div id=&quot;div_id 1 &quot; &gt;&lt; h3 &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.ALEmethods&quot;&gt;&lt;/a &gt; ALE methods&lt;/h3 &gt;&lt; div id=&quot;div_id 2 &quot; &gt;&lt; ul &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.ALEmethods.TheoryandImplementationforALEmethods&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html#ale &quot;&gt; Theory and Implementation for ALE methods&lt;/a &gt;&lt;/li &gt;&lt;/ul &gt;&lt;/div &gt;&lt; h3 &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.ActionFunctions&quot;&gt;&lt;/a &gt; Action Functions&lt;/h3 &gt;&lt; div id=&quot;div_id 4 &quot; &gt;&lt; ul &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.ActionFunctions.OverviewofActionFunctionsinNewtonSolver&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../order_of_action_functions/html/index.html &quot;&gt; Overview of Action Functions in Newton Solver&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.ActionFunctions.actions_before_newton_solve&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../poisson/one_d_poisson/html/index.html#actions_before &quot;&gt; actions_before_newton_solve&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.ActionFunctions.actions_before/after_implicit_timestep&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../unsteady_heat/two_d_unsteady_heat/html/index.html#before_timestep &quot;&gt; actions_before after_implicit_timestep&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.ActionFunctions.actions_before/after_adapt&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../poisson/fish_poisson/html/index.html#adapt_bc &quot;&gt; actions_before after_adapt&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.ActionFunctions.actions_before/after_distribute&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../mpi/two_d_poisson_flux_bc_adapt/html/index.html &quot;&gt; actions_before after_distribute&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.ActionFunctions.UsageforDocumentation&quot;&gt;&lt;/a &gt;&lt; a href=&quot; ../../advection_diffusion/two_d_adv_diff_adapt/html/index.html#problem &quot;&gt; Usage for Documentation&lt;/a &gt;&lt;/li &gt;&lt;/ul &gt;&lt;/div &gt;&lt; h3 &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Adaptivity&quot;&gt;&lt;/a &gt; <a class="el" href="oomph__index_8txt.html#aa7d9752c502efb5c73e16a00d76f4352">Adaptivity</a>&lt;/h3 &gt;&lt; div id=&quot;div_id 11 &quot; &gt;&lt; ul &gt;&lt; li &gt;&lt; a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Adaptivity.SpatialAdaptivity&quot;&gt;&lt;/a &gt; Spatial <a class="el" href="oomph__index_8txt.html#aa7d9752c502efb5c73e16a00d76f4352">Adaptivity</a>&lt; br &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oomph__index_8txt.html#aef915316f784c9063d942974538301a6">nbsp</a></td></tr>
+<tr class="separator:aef915316f784c9063d942974538301a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b2341332f0cb94b2433d4ddc888bede"><td class="memItemLeft" align="right" valign="top">&lt; a href=&quot; ../../index/html/index.html#S.SolidMechanics.Implementation.SolidFiniteElement &quot;&gt; see entry on Solid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oomph__index_8txt.html#a2b2341332f0cb94b2433d4ddc888bede">Mechanics</a></td></tr>
+<tr class="separator:a2b2341332f0cb94b2433d4ddc888bede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53cfb18d2b1c3025b9d774e8d86874ab"><td class="memItemLeft" align="right" valign="top">Huron sBenchmarkProblem&lt;/a &gt; Turek &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oomph__index_8txt.html#a53cfb18d2b1c3025b9d774e8d86874ab">amp</a></td></tr>
+<tr class="separator:a53cfb18d2b1c3025b9d774e8d86874ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7d9752c502efb5c73e16a00d76f4352"><td class="memItemLeft" align="right" valign="top">&lt; a href=&quot; ../../index/html/index.html#S.SpatialAdaptivity.FluxBoundaryConditions &quot;&gt; see entry on Spatial&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oomph__index_8txt.html#aa7d9752c502efb5c73e16a00d76f4352">Adaptivity</a></td></tr>
+<tr class="separator:aa7d9752c502efb5c73e16a00d76f4352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a390890d32c4b77bb0d7af06940596f7e"><td class="memItemLeft" align="right" valign="top">&lt; a href=&quot; ../../index/html/index.html#M.Meshing.VascularModlingToolkit &quot;&gt; see entry on&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oomph__index_8txt.html#a390890d32c4b77bb0d7af06940596f7e">Meshing</a></td></tr>
+<tr class="separator:a390890d32c4b77bb0d7af06940596f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a30315afc4bfdd2e7991cd3e20434bb84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30315afc4bfdd2e7991cd3e20434bb84">&#9670;&nbsp;</a></span>class</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a> =  &quot;anchor&quot; id=&quot;W&quot;&gt;&lt;/a&gt; W &lt;/h2&gt; &lt;div id=&quot;div_id 310 &quot; &gt; &lt;h3&gt; &lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;W.WeakForm&quot;&gt;&lt;/a&gt; Weak Form &lt;/h3&gt; &lt;div id=&quot;div_id 311 &quot; &gt; &lt;ul&gt; &lt;li&gt; &lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;W.WeakForm.WeakFormofPoissonEquation&quot;&gt;&lt;/a&gt; Weak Form of Poisson Equation &lt;br&gt; &amp;<a class="el" href="oomph__index_8txt.html#aef915316f784c9063d942974538301a6">nbsp</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__index_8txt_source.html#l00773">773</a> of file <a class="el" href="oomph__index_8txt_source.html">oomph_index.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a63922e55c14502f8bb93a07db2d4647a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63922e55c14502f8bb93a07db2d4647a">&#9670;&nbsp;</a></span>Absorbing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;a href=&quot; ../../index/html/index.html#T.TemporalAdaptivity &quot;&gt; see entry on Temporal <a class="el" href="oomph__index_8txt.html#aa7d9752c502efb5c73e16a00d76f4352">Adaptivity</a>&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Adaptivity.Spatio-TemporalAdaptivity&quot;&gt;&lt;/a&gt;&lt;a href=&quot; ../../unsteady_heat/two_d_unsteady_heat_2adapt/html/index.html &quot;&gt; Spatio Temporal <a class="el" href="oomph__index_8txt.html#aa7d9752c502efb5c73e16a00d76f4352">Adaptivity</a>&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;h3&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Advection-DiffusionEquation&quot;&gt;&lt;/a&gt; Advection Diffusion Equation&lt;/h3&gt;&lt;div id=&quot;div_id 15 &quot; &gt;&lt;ul&gt;&lt;li&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Advection-DiffusionEquation.ListofAdvection-DiffusionDemoDrivers&quot;&gt;&lt;/a&gt;&lt;a href=&quot; ../../example_code_list/html/index.html#adv_diff &quot;&gt; List of Advection Diffusion Demo Drivers&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Advection-DiffusionEquation.FluxBoundaryConditions&quot;&gt;&lt;/a&gt;&lt;a href=&quot; ../../advection_diffusion/two_d_adv_diff_flux_bc/html/index.html &quot;&gt; Flux Boundary Conditions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;A.Advection-DiffusionEquation.SUPGstabilisation&quot;&gt;&lt;/a&gt;&lt;a href=&quot; ../../advection_diffusion/two_d_adv_diff_SUPG/html/index.html &quot;&gt; SUPG stabilisation&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;h2&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B&quot;&gt;&lt;/a&gt; B&lt;/h2&gt;&lt;div id=&quot;div_id 19 &quot; &gt;&lt;h3&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BeamStructures&quot;&gt;&lt;/a&gt; Beam Structures&lt;/h3&gt;&lt;div id=&quot;div_id 20 &quot; &gt;&lt;ul&gt;&lt;li&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BeamStructures.ListofBeamDemoDrivers&quot;&gt;&lt;/a&gt;&lt;a href=&quot; ../../example_code_list/html/index.html#beam &quot;&gt; List of Beam Demo Drivers&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BeamStructures.TheoryandImplementation&quot;&gt;&lt;/a&gt;&lt;a href=&quot; ../../beam/tensioned_string/html/index.html &quot;&gt; Theory and Implementation&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BeamStructures.HermiteElements&quot;&gt;&lt;/a&gt;&lt;a href=&quot; ../../beam/tensioned_string/html/index.html#hermite &quot;&gt; Hermite Elements&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;h3&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BoundaryConditions&quot;&gt;&lt;/a&gt; Boundary Conditions&lt;/h3&gt;&lt;div id=&quot;div_id 24 &quot; &gt;&lt;ul&gt;&lt;li&gt;&lt;a <a class="el" href="oomph__index_8txt.html#a30315afc4bfdd2e7991cd3e20434bb84">class</a>=&quot;anchor&quot; id=&quot;B.BoundaryConditions.Absorbing(SommerfeldRadiation)BCs&quot;&gt;&lt;/a&gt;&lt;a href=&quot; ../../helmholtz/scattering/html/index.html#ABCs &quot;&gt; Absorbing </td>
+          <td>(</td>
+          <td class="paramtype">Sommerfeld&#160;</td>
+          <td class="paramname"><em>Radiation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aa7d9752c502efb5c73e16a00d76f4352"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7d9752c502efb5c73e16a00d76f4352">&#9670;&nbsp;</a></span>Adaptivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;a href=&quot; ../../index/html/index.html#S.SpatialAdaptivity.FluxBoundaryConditions &quot;&gt; see entry on Spatial Adaptivity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__index_8txt_source.html#l00368">368</a> of file <a class="el" href="oomph__index_8txt_source.html">oomph_index.txt</a>.</p>
+
+</div>
+</div>
+<a id="a53cfb18d2b1c3025b9d774e8d86874ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53cfb18d2b1c3025b9d774e8d86874ab">&#9670;&nbsp;</a></span>amp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Huron sBenchmarkProblem&lt;/a&gt; Turek&amp; amp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__index_8txt_source.html#l00175">175</a> of file <a class="el" href="oomph__index_8txt_source.html">oomph_index.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa1bf5b62e6086cd9e608bbad225e3aa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1bf5b62e6086cd9e608bbad225e3aa6">&#9670;&nbsp;</a></span>index</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Document index The purpose of this document is to provide a means of navigating around the c oomph lib documentation The documentation is presented through a series of example codes which is fine if you know which type of problem you want to solve In that case you can go directly to the appropriate section of the&lt;a href=&quot;../../example_code_list/html/index.html&quot;&gt; list of example codes&lt;/a&gt; If you want to learn about general concept rather than a specific type of problem then it can be more difficult to find the appropriate documentation In this index</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__index_8txt_source.html#l00012">12</a> of file <a class="el" href="oomph__index_8txt_source.html">oomph_index.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2b2341332f0cb94b2433d4ddc888bede"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b2341332f0cb94b2433d4ddc888bede">&#9670;&nbsp;</a></span>Mechanics</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;a href=&quot; ../../index/html/index.html#S.SolidMechanics.Implementation.SolidFiniteElement &quot;&gt; see entry on Solid Mechanics</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__index_8txt_source.html#l00174">174</a> of file <a class="el" href="oomph__index_8txt_source.html">oomph_index.txt</a>.</p>
+
+</div>
+</div>
+<a id="a390890d32c4b77bb0d7af06940596f7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a390890d32c4b77bb0d7af06940596f7e">&#9670;&nbsp;</a></span>Meshing</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;a href=&quot; ../../index/html/index.html#M.Meshing.VascularModlingToolkit &quot;&gt; see entry on Meshing</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__index_8txt_source.html#l00549">549</a> of file <a class="el" href="oomph__index_8txt_source.html">oomph_index.txt</a>.</p>
+
+</div>
+</div>
+<a id="aef915316f784c9063d942974538301a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef915316f784c9063d942974538301a6">&#9670;&nbsp;</a></span>nbsp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&amp; nbsp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__index_8txt_source.html#l00052">52</a> of file <a class="el" href="oomph__index_8txt_source.html">oomph_index.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad3c1f59aaa3f7160fb1ffd0c49ce559c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3c1f59aaa3f7160fb1ffd0c49ce559c">&#9670;&nbsp;</a></span>page</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Document <a class="el" href="oomph__index_8txt.html#aa1bf5b62e6086cd9e608bbad225e3aa6">index</a> The purpose of this document is to provide a means of navigating around the c oomph lib documentation The documentation is presented through a series of example codes which is fine if you know which type of problem you want to solve In that case you can go directly to the appropriate section of the&lt;a href=&quot;../../example_code_list/html/index.html&quot;&gt; list of example codes&lt;/a&gt; If you want to learn about general concept rather than a specific type of problem then it can be more difficult to find the appropriate documentation In this both general concepts and specific types of problem are arranged alphabetically with hyperlinks to the appropriate documents n n latexonly This document only makes sense as an html page</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__index_8txt_source.html#l00020">20</a> of file <a class="el" href="oomph__index_8txt_source.html">oomph_index.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:52:11
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

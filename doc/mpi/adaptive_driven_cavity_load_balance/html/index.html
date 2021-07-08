@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Parallel adaptive driven cavity problem with load balancing</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Parallel adaptive driven cavity problem with load balancing </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this tutorial we demonstrate how to perform load balancing to (re-)distribute elements between processors in parallel, distributed computations. Following a brief discussion of the underlying methodology, we illustrate the application in the <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">adaptive driven cavity problem</a> where the spatially non-uniform refinement of the mesh leads to a significant load imbalance.</p>
+<p>Most of the driver code is identical to the codes discussed in the tutorials explaining the <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">serial</a> and <a href="../../adaptive_driven_cavity/html/index.html">distributed, parallel </a> solution of the problem. Therefore we only discuss the changes required to perform load balancing on the problem.</p>
+<hr  />
+<h1><a class="anchor" id="load_balance"></a>
+Load balancing</h1>
+<p>The initial distribution of a problem via a call to </p><div class="fragment"><div class="line">Problem::distribute(...)</div>
+</div><!-- fragment --><p> attempts to distribute the elements in the Problem's mesh over the available processors such that (i) each processor stores approximately the same number of elements and (ii) the anticipated volume of inter-processor communication required to synchronise the solution across processor boundaries is minimised. Typically, this procedure works very well in the sense that the assembly times for the Jacobian matrix in a distributed computation scale extremely well with the number of processors.</p>
+<p>A re-distribution of elements may be required because</p><ol type="1">
+<li>strongly non-uniform mesh adaptation may lead to a drastic increase in the number of elements on some processors; <br  />
+<br  />
+</li>
+<li>in multi-physics computations the cpu times required to compute the elements' contributions to the global Jacobian matrix may differ significantly between different element types. In such cases, the mere equidistribution of elements between processors will not achieve good parallel scaling; <br  />
+<br  />
+</li>
+<li>when restarting a computation on a larger number of processors, elements need to be re-distributed to populate the (otherwise empty) additional processors.</li>
+</ol>
+<p>As with other methods within <code>oomph-lib</code>, load balancing is implemented such that only minimal user intervention is required. The function </p><div class="fragment"><div class="line">Problem::load_balance() </div>
+</div><!-- fragment --><p> may be called at any point following the distribution of the problem. The only change required to an existing driver code is the provision (via overloading of a broken virtual function in the Problem base class) of the function </p><div class="fragment"><div class="line">Problem::build_mesh()</div>
+</div><!-- fragment --><p> This function must</p><ol type="1">
+<li>Build the mesh (and in the case of multiple sub-meshes, build these and combine them to a global mesh using the <code>Problem::build_global_mesh()</code> function). <br  />
+<br  />
+</li>
+<li>Complete the build of the elements by setting pointers to physical parameters (such as Reynolds numbers) or functions (such as source function pointers), etc. <br  />
+<br  />
+</li>
+<li>Apply the boundary conditions. <br  />
+<br  />
+</li>
+<li>Perform any uniform mesh refinement that was applied before calling <code>Problem::distribute()</code>.</li>
+</ol>
+<p>Typically this requires no more than a straightforward cut-and-paste of code from the problem constructor into the <code>Problem::build_mesh()</code> function; see also the discussion <a class="el" href="index.html#What">What goes into the build_mesh() function?</a> for more details.</p>
+<p>The load balancing routines then perform the following steps:</p><ol type="1">
+<li>Take the current (distributed) global mesh, and calculate a new partition for each of the current elements, taking into account the cpu time that each element spent on the most recent computation of its contribution to the problem's Jacobian matrix. <br  />
+<br  />
+</li>
+<li>Build a new (global) mesh using the <code>Problem::build_mesh()</code> function. <br  />
+<br  />
+</li>
+<li>Distribute the new (global) mesh according to the new partitioning. <br  />
+<br  />
+</li>
+<li>Once distributed, refine the new (global) mesh on each processor to achieve the same refinement pattern as in the original problem. <br  />
+<br  />
+</li>
+<li>Copy the <code>Data</code> values from the old to the new (global) meshes. <br  />
+<br  />
+</li>
+</ol>
+<p>We note that for "structured" meshes (i.e. meshes whose refinement pattern is represented by <a href="../../../the_data_structure/html/index.html#RefineableQuadMesh_setup_section">"tree forests"</a>) only complete trees can be moved between processors. If the mesh was refined uniformly after being distributed, a more fine-grained tree-forest (which may allow better load balancing) can be built by calling <code>Problem::prune_halo_elements_and_nodes()</code> as discussed in <a href="../../../mpi/general_mpi/html/index.html#how_it_works">another tutorial.</a> </p><hr  />
+<h1><a class="anchor" id="example"></a>
+An example: Revisiting the adaptive driven cavity problem</h1>
+<p>In this section we outline the required changes to the <a href="../../adaptive_driven_cavity/html/index.html">parallel version of the adaptive driven cavity problem</a> so that the problem can use the load balancing method described above.</p>
+<p>The figure below demonstrates the advantages of load balancing in that problem: The left hand panel shows the distribution of the mesh across four processors (indicated by the colours) after three spatially adaptive solves. Note how the singularities in the bottom corners result in a strongly non-uniform spatial refinement which leads to a significant load imbalance because the "pink" and "grey" processors contain far more elements than then "green" and "cyan" ones. The right hand panel shows the distribution of the mesh across four processors when load balancing is performed in between the second and third mesh adaptation.</p>
+<div class="image">
+<img src="load_balance_partition.gif" alt=""/>
+<div class="caption">
+Plot illustrating the distribution of the mesh for the adaptive driven cavity problem, both without (left image) and with (right image) the use of load balancing. </div></div>
+ <h2><a class="anchor" id="build_mesh"></a>
+The build_mesh() function</h2>
+<p>As discussed above, the function <code>Problem::build_mesh()</code> is created most easily by moving the code that (i) creates the mesh, (ii) applies the relevant boundary conditions, and (iii) completes the build of all the elements in the problem from the problem constructor.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_build_mesh===================================================</span></div>
+<div class="line"><span class="comment">/// Build the mesh for RefineableDrivenCavity problem </span></div>
+<div class="line"><span class="comment"></span><span class="comment">///</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> RefineableDrivenCavityProblem&lt;ELEMENT&gt;::build_mesh()</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_x=10;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_y=10;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in x-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_x=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_y=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build and assign mesh</span></div>
+<div class="line"> Problem::mesh_pt() = </div>
+<div class="line">  <span class="keyword">new</span> RefineableRectangularQuadMesh&lt;ELEMENT&gt;(n_x,n_y,l_x,l_y);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator</span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>RefineableRectangularQuadMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(mesh_pt())-&gt;</div>
+<div class="line">  spatial_error_estimator_pt()=error_estimator_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fine tune error targets to get &quot;interesting&quot; refinement pattern</span></div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>RefineableRectangularQuadMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(mesh_pt())-&gt;</div>
+<div class="line">  max_permitted_error()=1.0e-5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>RefineableRectangularQuadMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(mesh_pt())-&gt;</div>
+<div class="line">  min_permitted_error()=1.0e-6;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here: All boundaries are Dirichlet boundaries.</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Loop over values (u and v velocities)</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(i); </div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of elements in mesh</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor: Pass pointer to Reynolds</span></div>
+<div class="line"> <span class="comment">// number</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   ELEMENT* el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e));</div>
+<div class="line">   <span class="comment">//Set the Reynolds number</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;Global_Physical_Variables::Re;</div>
+<div class="line">  } <span class="comment">// end loop over elements</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin pressure at origin no matter which processor contains that node</span></div>
+<div class="line"> pin_only_pressure_at_origin();</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end_of_build_mesh</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="problem_constructor"></a>
+Changes to the problem constructor</h2>
+<p>The problem constructor becomes very short since the bulk of the code has been moved into the <code>Problem::build_mesh()</code> function.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_constructor==================================================</span></div>
+<div class="line"><span class="comment">/// Constructor for RefineableDrivenCavity problem </span></div>
+<div class="line"><span class="comment"></span><span class="comment">///</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line">RefineableDrivenCavityProblem&lt;ELEMENT&gt;::RefineableDrivenCavityProblem()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> Doc_info.set_directory(<span class="stringliteral">&quot;RESLT_LOAD_BALANCE&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the mesh</span></div>
+<div class="line"> build_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_constructor</span></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="customising_load_balance"></a>
+Customising the load balancing</h1>
+<p>The <a href="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc">driver code</a> demonstrates some of the different options available for the <code>Problem::load_balance(...)</code> function.</p><ul>
+<li>Passing a boolean argument to <code>Problem::load_balance(...)</code> enables the output of extended statistics. <br  />
+<br  />
+</li>
+<li>By default, the mesh partitioning for the initial problem distribution and any subsequent load balancing operations is determined by METIS. Unfortunately, METIS is not completely deterministic. This makes it difficult to compute reference data that can be used to assert the correct execution of the code during self-tests. When the driver code is run with the <code>&ndash;validate</code> command line flag, we therefore call the <code>Problem::distribute(...)</code> function with a pre-determined (and deterministic but non-optimal) distribution of the elements. The use of METIS during the load balancing operations can be bypassed by calling <div class="fragment"><div class="line">Problem::set_default_partition_in_load_balance()</div>
+</div><!-- fragment --></li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_and_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="comm"></a>
+Comments</h2>
+<h3><a class="anchor" id="What"></a>
+What goes into the build_mesh() function?</h3>
+<p>The main rule regarding what should (and should not) be moved from the problem constructor into the <code>build_mesh()</code> function is that following the return from the <code>build_mesh()</code> function, all meshes should be re-generated (and refined to the same degree as when <code>Problem::distribute()</code> was called), their constituent elements made fully functional, and all boundary conditions applied.</p>
+<p>It is <b>not</b> necessary (and would, in fact, be undesirable) to re-create <code>Timesteppers</code> and/or <code>GeomObjects</code> that are used to define curvilinear mesh boundaries. We recommend generating such objects once (in the Problem constructor) and making them available to the <code>build_mesh()</code> function by storing pointers to them in the problem's private member data.</p>
+<p>It is not necessary to re-generate the error estimator, though the pointer to it (and any non-default target errors) need to be passed to all (newly re-generated) adaptive meshes.</p>
+<h3><a class="anchor" id="pointers"></a>
+Updating pointers</h3>
+<p>Since load balancing re-generates the meshes &ndash; and thus their constituent elements and nodes &ndash; pointers to such objects must be re-assigned on return from <code>Problem::load_balance()</code>. In our experience such pointers tend to be used predominantly in</p><ul>
+<li>Post-processing functions (e.g. to document the solution at a fixed node) <br  />
+<br  />
+</li>
+<li>Multi-physics/block preconditioners which tend to use pointers to meshes to classify the degrees of freedom. <br  />
+<br  />
+</li>
+</ul>
+<p>Failure to re-assign any dangling pointers will cause segmentation faults &ndash; recompile <code>oomph-lib</code> with debugging enabled and use <a href="http://www.gnu.org/software/ddd">ddd</a> to see where the code crashes.</p>
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>Explore what happens if you "forget" to implement the <code>Problem::build_mesh()</code> function (e.g. by renaming it <code>my_build_mesh()</code>, say, so that it no longer overloads the function the <code>Problem</code> base class. <br  />
+<br  />
+</li>
+<li>The <code>Problem::build_mesh()</code> shown above (accidentally) illustrates a common problem with a mere cut-and-paste approach &ndash; it creates a memory leak! Where is it and how would you fix it? <br  />
+<br  />
+</li>
+<li>The <code>demo_drivers</code> directory contains a few additional driver codes that employ load balancing. These codes exist mainly for self-test purposes and do not have separate tutorials. It may be instructive to compare the different versions of these codes to further clarify the modifications required to enable load balancing. We suggest you compare <br  />
+<br  />
+<ul>
+<li>The original version of the distributed, adaptive driven cavity code <br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc">demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc </a> </center> <br  />
+<br  />
+ and the version with load balancing <br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc">demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc </a> </center> <br  />
+<br  />
+</li>
+<li>The original version of the distributed code for the doubly-adaptive solution of the unsteady heat equation, <br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc">demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc </a> </center> <br  />
+<br  />
+ and the version with load balancing <br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/mpi/distribution/restart/two_d_unsteady_heat_2adapt_load_balance.cc">demo_drivers/mpi/distribution/restart/two_d_unsteady_heat_2adapt_load_balance.cc </a> </center> <br  />
+<br  />
+</li>
+<li>The original version of the distributed code for the solution of Turek &amp; Hron's FSI benchmark problem heat equation, <br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc">demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc </a> </center> <br  />
+<br  />
+ and the version with load balancing <br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc">demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc </a> </center> <br  />
+<br  />
+</li>
+</ul>
+Comparing the codes with sdiff is particularly instructive.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity">demo_drivers/mpi/distribution/adaptive_driven_cavity </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc">demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:27:17
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

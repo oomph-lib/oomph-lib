@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TetMeshVertex Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TetMeshVertex.html">TetMeshVertex</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="classoomph_1_1TetMeshVertex-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::TetMeshVertex Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af76c065906c82fa548ce145b6d34e7e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#af76c065906c82fa548ce145b6d34e7e1">TetMeshVertex</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="classoomph_1_1TetMeshVertex.html#af579c7e0bb184bc2d67aa31f25872a2b">x</a>)</td></tr>
+<tr class="memdesc:af76c065906c82fa548ce145b6d34e7e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass coordinates (length 3!)  <a href="classoomph_1_1TetMeshVertex.html#af76c065906c82fa548ce145b6d34e7e1">More...</a><br /></td></tr>
+<tr class="separator:af76c065906c82fa548ce145b6d34e7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6226592d4d5ee64955d8652a2e818ee3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#a6226592d4d5ee64955d8652a2e818ee3">TetMeshVertex</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt)</td></tr>
+<tr class="separator:a6226592d4d5ee64955d8652a2e818ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25bf54df192efe3bdb74bc67983dea34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#a25bf54df192efe3bdb74bc67983dea34">set_zeta_in_geom_object</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta)</td></tr>
+<tr class="memdesc:a25bf54df192efe3bdb74bc67983dea34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set intrinisic coordinates in <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a>.  <a href="classoomph_1_1TetMeshVertex.html#a25bf54df192efe3bdb74bc67983dea34">More...</a><br /></td></tr>
+<tr class="separator:a25bf54df192efe3bdb74bc67983dea34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d6ea2c9ca186e0a377505f37800ddaa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#a6d6ea2c9ca186e0a377505f37800ddaa">zeta_in_geom_object</a> () const</td></tr>
+<tr class="memdesc:a6d6ea2c9ca186e0a377505f37800ddaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get intrinisic coordinates in <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> (returns zero sized vector if no such coordinates have been specified)  <a href="classoomph_1_1TetMeshVertex.html#a6d6ea2c9ca186e0a377505f37800ddaa">More...</a><br /></td></tr>
+<tr class="separator:a6d6ea2c9ca186e0a377505f37800ddaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af579c7e0bb184bc2d67aa31f25872a2b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#af579c7e0bb184bc2d67aa31f25872a2b">x</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:af579c7e0bb184bc2d67aa31f25872a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">i-th coordinate  <a href="classoomph_1_1TetMeshVertex.html#af579c7e0bb184bc2d67aa31f25872a2b">More...</a><br /></td></tr>
+<tr class="separator:af579c7e0bb184bc2d67aa31f25872a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844ff66de0e3ed28b3ad186c81e6d0c7"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#a844ff66de0e3ed28b3ad186c81e6d0c7">one_based_boundary_id</a> () const</td></tr>
+<tr class="memdesc:a844ff66de0e3ed28b3ad186c81e6d0c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">First (of possibly multiple) one-based boundary id.  <a href="classoomph_1_1TetMeshVertex.html#a844ff66de0e3ed28b3ad186c81e6d0c7">More...</a><br /></td></tr>
+<tr class="separator:a844ff66de0e3ed28b3ad186c81e6d0c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ae228ef9cdc61d5902ac8bffdf163c618"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#ae228ef9cdc61d5902ac8bffdf163c618">set_one_based_boundary_id</a> (const unsigned &amp;id)</td></tr>
+<tr class="memdesc:ae228ef9cdc61d5902ac8bffdf163c618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of (one-based!) boundary IDs this vertex lives on.  <a href="classoomph_1_1TetMeshVertex.html#ae228ef9cdc61d5902ac8bffdf163c618">More...</a><br /></td></tr>
+<tr class="separator:ae228ef9cdc61d5902ac8bffdf163c618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a32a797224c3506b9594b657e1032e7d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#a32a797224c3506b9594b657e1032e7d9">X</a></td></tr>
+<tr class="memdesc:a32a797224c3506b9594b657e1032e7d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinate vector.  <a href="classoomph_1_1TetMeshVertex.html#a32a797224c3506b9594b657e1032e7d9">More...</a><br /></td></tr>
+<tr class="separator:a32a797224c3506b9594b657e1032e7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bbd3bde4360f101314b6059abeecd8b"><td class="memItemLeft" align="right" valign="top">std::set&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#a7bbd3bde4360f101314b6059abeecd8b">One_based_boundary_id</a></td></tr>
+<tr class="memdesc:a7bbd3bde4360f101314b6059abeecd8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of (one-based!) boundary IDs this vertex lives on.  <a href="classoomph_1_1TetMeshVertex.html#a7bbd3bde4360f101314b6059abeecd8b">More...</a><br /></td></tr>
+<tr class="separator:a7bbd3bde4360f101314b6059abeecd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a945dd663092098554d394e2b50ef9ef2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#a945dd663092098554d394e2b50ef9ef2">Zeta_in_geom_object</a></td></tr>
+<tr class="memdesc:a945dd663092098554d394e2b50ef9ef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intrinisic coordinates in <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> (zero sized if there isn't one.  <a href="classoomph_1_1TetMeshVertex.html#a945dd663092098554d394e2b50ef9ef2">More...</a><br /></td></tr>
+<tr class="separator:a945dd663092098554d394e2b50ef9ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ae3c796a1351f1249d195202d011532ce"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshVertex.html#ae3c796a1351f1249d195202d011532ce">TetMeshFacet</a></td></tr>
+<tr class="memdesc:ae3c796a1351f1249d195202d011532ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Only friends can set boundary ID &ndash; the facet is my only friend!  <a href="classoomph_1_1TetMeshVertex.html#ae3c796a1351f1249d195202d011532ce">More...</a><br /></td></tr>
+<tr class="separator:ae3c796a1351f1249d195202d011532ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Vertex for Tet mesh generation. Can lie on multiple boundaries (identified via one-based enumeration!) and can have intrinisic coordinates in a <a class="el" href="classoomph_1_1DiskLikeGeomObjectWithBoundaries.html">DiskLikeGeomObjectWithBoundaries</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00051">51</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af76c065906c82fa548ce145b6d34e7e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af76c065906c82fa548ce145b6d34e7e1">&#9670;&nbsp;</a></span>TetMeshVertex() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TetMeshVertex::TetMeshVertex </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass coordinates (length 3!) </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00059">59</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00131">x()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00155">X</a>.</p>
+
+</div>
+</div>
+<a id="a6226592d4d5ee64955d8652a2e818ee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6226592d4d5ee64955d8652a2e818ee3">&#9670;&nbsp;</a></span>TetMeshVertex() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TetMeshVertex::TetMeshVertex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00078">78</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00987">oomph::Node::ndim()</a>, <a class="el" href="tet__mesh_8h_source.html#l00155">X</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a844ff66de0e3ed28b3ad186c81e6d0c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844ff66de0e3ed28b3ad186c81e6d0c7">&#9670;&nbsp;</a></span>one_based_boundary_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TetMeshVertex::one_based_boundary_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>First (of possibly multiple) one-based boundary id. </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00137">137</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00158">One_based_boundary_id</a>.</p>
+
+</div>
+</div>
+<a id="ae228ef9cdc61d5902ac8bffdf163c618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae228ef9cdc61d5902ac8bffdf163c618">&#9670;&nbsp;</a></span>set_one_based_boundary_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TetMeshVertex::set_one_based_boundary_id </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set of (one-based!) boundary IDs this vertex lives on. </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00149">149</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00158">One_based_boundary_id</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00224">oomph::TetMeshFacet::set_one_based_boundary_id()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00204">oomph::TetMeshFacet::set_vertex_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a25bf54df192efe3bdb74bc67983dea34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25bf54df192efe3bdb74bc67983dea34">&#9670;&nbsp;</a></span>set_zeta_in_geom_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TetMeshVertex::set_zeta_in_geom_object </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set intrinisic coordinates in <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00103">103</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00162">Zeta_in_geom_object</a>.</p>
+
+</div>
+</div>
+<a id="af579c7e0bb184bc2d67aa31f25872a2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af579c7e0bb184bc2d67aa31f25872a2b">&#9670;&nbsp;</a></span>x()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TetMeshVertex::x </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>i-th coordinate </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00131">131</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tet__mesh_8h_source.html#l00155">X</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l01130">oomph::TetMeshBase::setup_boundary_coordinates()</a>, <a class="el" href="tet__mesh_8h_source.html#l00059">TetMeshVertex()</a>, and <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01030">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
+
+</div>
+</div>
+<a id="a6d6ea2c9ca186e0a377505f37800ddaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d6ea2c9ca186e0a377505f37800ddaa">&#9670;&nbsp;</a></span>zeta_in_geom_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;double&gt; oomph::TetMeshVertex::zeta_in_geom_object </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get intrinisic coordinates in <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> (returns zero sized vector if no such coordinates have been specified) </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00125">125</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00162">Zeta_in_geom_object</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8cc_source.html#l00472">oomph::TetMeshBase::snap_nodes_onto_geometric_objects()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="ae3c796a1351f1249d195202d011532ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3c796a1351f1249d195202d011532ce">&#9670;&nbsp;</a></span>TetMeshFacet</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classoomph_1_1TetMeshFacet.html">TetMeshFacet</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Only friends can set boundary ID &ndash; the facet is my only friend! </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00056">56</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7bbd3bde4360f101314b6059abeecd8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bbd3bde4360f101314b6059abeecd8b">&#9670;&nbsp;</a></span>One_based_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;unsigned&gt; oomph::TetMeshVertex::One_based_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set of (one-based!) boundary IDs this vertex lives on. </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00158">158</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00137">one_based_boundary_id()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00149">set_one_based_boundary_id()</a>.</p>
+
+</div>
+</div>
+<a id="a32a797224c3506b9594b657e1032e7d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32a797224c3506b9594b657e1032e7d9">&#9670;&nbsp;</a></span>X</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;double&gt; oomph::TetMeshVertex::X</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Coordinate vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00155">155</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00059">TetMeshVertex()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00131">x()</a>.</p>
+
+</div>
+</div>
+<a id="a945dd663092098554d394e2b50ef9ef2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a945dd663092098554d394e2b50ef9ef2">&#9670;&nbsp;</a></span>Zeta_in_geom_object</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;double&gt; oomph::TetMeshVertex::Zeta_in_geom_object</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Intrinisic coordinates in <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> (zero sized if there isn't one. </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00162">162</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00103">set_zeta_in_geom_object()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00125">zeta_in_geom_object()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:31
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

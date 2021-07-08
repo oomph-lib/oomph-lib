@@ -1,0 +1,505 @@
+\hypertarget{classoomph_1_1RankThreeTensor}{}\doxysection{oomph\+::Rank\+Three\+Tensor$<$ T $>$ Class Template Reference}
+\label{classoomph_1_1RankThreeTensor}\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+
+
+A Rank 3 Tensor class.  
+
+
+
+
+{\ttfamily \#include $<$matrices.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor_a8f2c4cf96f9e6c1c66e6958fd52b0b76}{Rank\+Three\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor_a7de68d66eec11565e0ffb55494fd66c6}{Rank\+Three\+Tensor}} (const \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}} \&source\+\_\+tensor)
+\begin{DoxyCompactList}\small\item\em Copy constructor\+: Deep copy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}} \& \mbox{\hyperlink{classoomph_1_1RankThreeTensor_ad79699cce8e7432fa7ccf880345059f8}{operator=}} (const \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}} \&source\+\_\+tensor)
+\begin{DoxyCompactList}\small\item\em Copy assignement. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor_af3f6a2cc2032025608f5c8564c6da651}{Rank\+Three\+Tensor}} (const unsigned long \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\begin{DoxyCompactList}\small\item\em One parameter constructor produces a cubic nxnxn tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor_ae876d81ad44aafcd195aeddfdfa913f7}{Rank\+Three\+Tensor}} (const unsigned long \&n\+\_\+index1, const unsigned long \&n\+\_\+index2, const unsigned long \&n\+\_\+index3)
+\begin{DoxyCompactList}\small\item\em Three parameter constructor, general non-\/square tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor_a3b3599070a42f679597bcd8a263aed25}{Rank\+Three\+Tensor}} (const unsigned long \&n\+\_\+index1, const unsigned long \&n\+\_\+index2, const unsigned long \&n\+\_\+index3, const T \&initial\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Three parameter constructor, general non-\/square tensor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1RankThreeTensor_a19b8797a792309e78106dbb2d90f83a7}{$\sim$\+Rank\+Three\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: delete the pointers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor_ab09490399cf8db93b08e07f893e8724d}{resize}} (const unsigned long \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\begin{DoxyCompactList}\small\item\em Resize to a square nxnxn tensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor_ac192a93e6971712de84c705895443544}{resize}} (const unsigned long \&n\+\_\+index1, const unsigned long \&n\+\_\+index2, const unsigned long \&n\+\_\+index3)
+\begin{DoxyCompactList}\small\item\em Resize to a general tensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor_a2b7967ca1fb782b26d9b2d9f0d760d16}{resize}} (const unsigned long \&n\+\_\+index1, const unsigned long \&n\+\_\+index2, const unsigned long \&n\+\_\+index3, const T \&initial\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Resize to a general tensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor_ad63ed4eef146b20783c1df45584f0847}{initialise}} (const T \&val)
+\begin{DoxyCompactList}\small\item\em Initialise all values in the tensor to val. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1RankThreeTensor_a6efa48062b66970a12ac5bc712d8704b}{nindex1}} () const
+\begin{DoxyCompactList}\small\item\em Return the range of index 1 of the tensor. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1RankThreeTensor_a7934dad6cda9e9716c086cd15ee05dad}{nindex2}} () const
+\begin{DoxyCompactList}\small\item\em Return the range of index 2 of the tensor. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1RankThreeTensor_ac8c7eb798506698c0e231557af26310d}{nindex3}} () const
+\begin{DoxyCompactList}\small\item\em Return the range of index 3 of the tensor. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1RankThreeTensor_ae5180883710cddbc2de5929df147bed5}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j, const unsigned long \&k)
+\begin{DoxyCompactList}\small\item\em Overload the round brackets to give access as a(i,j,k) \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classoomph_1_1RankThreeTensor_aa97b7b4cb4b619c24ef9abebcd0d892c}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j, const unsigned long \&k) const
+\begin{DoxyCompactList}\small\item\em Overload a const version for read-\/only access as a(i,j,k) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor_a7a54cd8aaf72f4876314ed23aa9b813e}{range\+\_\+check}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j, const unsigned long \&k) const
+\begin{DoxyCompactList}\small\item\em Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ \mbox{\hyperlink{classoomph_1_1RankThreeTensor_aef2671e89361c2260c7d3936fc8860ec}{Tensordata}}
+\begin{DoxyCompactList}\small\item\em Private internal representation as pointer to data. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RankThreeTensor_a2d5b895e2cb3543b16a64159041d52c3}{N}}
+\begin{DoxyCompactList}\small\item\em 1st Tensor dimension \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RankThreeTensor_a9e28da9e2862c47f2f5562742202748d}{M}}
+\begin{DoxyCompactList}\small\item\em 2nd Tensor dimension \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RankThreeTensor_ae93ba8b2baf4f92af533ae66bfcbe570}{P}}
+\begin{DoxyCompactList}\small\item\em 3rd Tensor dimension \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class oomph\+::\+Rank\+Three\+Tensor$<$ T $>$}
+
+A Rank 3 Tensor class. 
+
+Definition at line 1333 of file matrices.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a8f2c4cf96f9e6c1c66e6958fd52b0b76}\label{classoomph_1_1RankThreeTensor_a8f2c4cf96f9e6c1c66e6958fd52b0b76}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!RankThreeTensor@{RankThreeTensor}}
+\index{RankThreeTensor@{RankThreeTensor}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankThreeTensor()}{RankThreeTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line 1392 of file matrices.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a7de68d66eec11565e0ffb55494fd66c6}\label{classoomph_1_1RankThreeTensor_a7de68d66eec11565e0ffb55494fd66c6}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!RankThreeTensor@{RankThreeTensor}}
+\index{RankThreeTensor@{RankThreeTensor}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankThreeTensor()}{RankThreeTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ T $>$ \&}]{source\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor\+: Deep copy. 
+
+
+
+Definition at line 1395 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::nindex1(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::nindex2(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::nindex3(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_af3f6a2cc2032025608f5c8564c6da651}\label{classoomph_1_1RankThreeTensor_af3f6a2cc2032025608f5c8564c6da651}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!RankThreeTensor@{RankThreeTensor}}
+\index{RankThreeTensor@{RankThreeTensor}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankThreeTensor()}{RankThreeTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}} (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+One parameter constructor produces a cubic nxnxn tensor. 
+
+
+
+Definition at line 1447 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, n, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_ae876d81ad44aafcd195aeddfdfa913f7}\label{classoomph_1_1RankThreeTensor_ae876d81ad44aafcd195aeddfdfa913f7}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!RankThreeTensor@{RankThreeTensor}}
+\index{RankThreeTensor@{RankThreeTensor}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankThreeTensor()}{RankThreeTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}} (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n\+\_\+index1,  }\item[{const unsigned long \&}]{n\+\_\+index2,  }\item[{const unsigned long \&}]{n\+\_\+index3 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Three parameter constructor, general non-\/square tensor. 
+
+
+
+Definition at line 1460 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a3b3599070a42f679597bcd8a263aed25}\label{classoomph_1_1RankThreeTensor_a3b3599070a42f679597bcd8a263aed25}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!RankThreeTensor@{RankThreeTensor}}
+\index{RankThreeTensor@{RankThreeTensor}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankThreeTensor()}{RankThreeTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}} (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n\+\_\+index1,  }\item[{const unsigned long \&}]{n\+\_\+index2,  }\item[{const unsigned long \&}]{n\+\_\+index3,  }\item[{const T \&}]{initial\+\_\+val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Three parameter constructor, general non-\/square tensor. 
+
+
+
+Definition at line 1475 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a19b8797a792309e78106dbb2d90f83a7}\label{classoomph_1_1RankThreeTensor_a19b8797a792309e78106dbb2d90f83a7}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!````~RankThreeTensor@{$\sim$RankThreeTensor}}
+\index{````~RankThreeTensor@{$\sim$RankThreeTensor}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$RankThreeTensor()}{~RankThreeTensor()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: delete the pointers. 
+
+
+
+Definition at line 1487 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_ad63ed4eef146b20783c1df45584f0847}\label{classoomph_1_1RankThreeTensor_ad63ed4eef146b20783c1df45584f0847}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!initialise@{initialise}}
+\index{initialise@{initialise}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::initialise (\begin{DoxyParamCaption}\item[{const T \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialise all values in the tensor to val. 
+
+
+
+Definition at line 1577 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+
+
+Referenced by oomph\+::\+Scalar\+Advection\+Equations$<$ D\+I\+M $>$\+::dflux\+\_\+du(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Rank\+Three\+Tensor(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a6efa48062b66970a12ac5bc712d8704b}\label{classoomph_1_1RankThreeTensor_a6efa48062b66970a12ac5bc712d8704b}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!nindex1@{nindex1}}
+\index{nindex1@{nindex1}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex1()}{nindex1()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::nindex1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 1 of the tensor. 
+
+
+
+Definition at line 1581 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N.
+
+
+
+Referenced by oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator=(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Rank\+Three\+Tensor().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a7934dad6cda9e9716c086cd15ee05dad}\label{classoomph_1_1RankThreeTensor_a7934dad6cda9e9716c086cd15ee05dad}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!nindex2@{nindex2}}
+\index{nindex2@{nindex2}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex2()}{nindex2()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::nindex2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 2 of the tensor. 
+
+
+
+Definition at line 1584 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M.
+
+
+
+Referenced by oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator=(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Rank\+Three\+Tensor().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_ac8c7eb798506698c0e231557af26310d}\label{classoomph_1_1RankThreeTensor_ac8c7eb798506698c0e231557af26310d}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!nindex3@{nindex3}}
+\index{nindex3@{nindex3}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex3()}{nindex3()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::nindex3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 3 of the tensor. 
+
+
+
+Definition at line 1587 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P.
+
+
+
+Referenced by oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator=(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Rank\+Three\+Tensor().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_ae5180883710cddbc2de5929df147bed5}\label{classoomph_1_1RankThreeTensor_ae5180883710cddbc2de5929df147bed5}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T\& \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j,  }\item[{const unsigned long \&}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the round brackets to give access as a(i,j,k) 
+
+
+
+Definition at line 1590 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::range\+\_\+check(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_aa97b7b4cb4b619c24ef9abebcd0d892c}\label{classoomph_1_1RankThreeTensor_aa97b7b4cb4b619c24ef9abebcd0d892c}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j,  }\item[{const unsigned long \&}]{k }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload a const version for read-\/only access as a(i,j,k) 
+
+
+
+Definition at line 1600 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::range\+\_\+check(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_ad79699cce8e7432fa7ccf880345059f8}\label{classoomph_1_1RankThreeTensor_ad79699cce8e7432fa7ccf880345059f8}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}\& \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ T $>$ \&}]{source\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy assignement. 
+
+
+
+Definition at line 1417 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, n, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::nindex1(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::nindex2(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::nindex3(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a7a54cd8aaf72f4876314ed23aa9b813e}\label{classoomph_1_1RankThreeTensor_a7a54cd8aaf72f4876314ed23aa9b813e}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!range\_check@{range\_check}}
+\index{range\_check@{range\_check}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{range\_check()}{range\_check()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::range\+\_\+check (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j,  }\item[{const unsigned long \&}]{k }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}}. 
+
+
+
+Definition at line 1352 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P.
+
+
+
+Referenced by oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator()().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_ab09490399cf8db93b08e07f893e8724d}\label{classoomph_1_1RankThreeTensor_ab09490399cf8db93b08e07f893e8724d}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a square nxnxn tensor. 
+
+
+
+Definition at line 1490 of file matrices.\+h.
+
+
+
+References n, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::resize().
+
+
+
+Referenced by oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator=(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_ac192a93e6971712de84c705895443544}\label{classoomph_1_1RankThreeTensor_ac192a93e6971712de84c705895443544}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n\+\_\+index1,  }\item[{const unsigned long \&}]{n\+\_\+index2,  }\item[{const unsigned long \&}]{n\+\_\+index3 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a general tensor. 
+
+
+
+Definition at line 1493 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a2b7967ca1fb782b26d9b2d9f0d760d16}\label{classoomph_1_1RankThreeTensor_a2b7967ca1fb782b26d9b2d9f0d760d16}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n\+\_\+index1,  }\item[{const unsigned long \&}]{n\+\_\+index2,  }\item[{const unsigned long \&}]{n\+\_\+index3,  }\item[{const T \&}]{initial\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a general tensor. 
+
+
+
+Definition at line 1535 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::P, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Tensordata.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a9e28da9e2862c47f2f5562742202748d}\label{classoomph_1_1RankThreeTensor_a9e28da9e2862c47f2f5562742202748d}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!M@{M}}
+\index{M@{M}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{M}{M}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::M\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+2nd Tensor dimension 
+
+
+
+Definition at line 1345 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::nindex2(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator()(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator=(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::range\+\_\+check(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Rank\+Three\+Tensor(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_a2d5b895e2cb3543b16a64159041d52c3}\label{classoomph_1_1RankThreeTensor_a2d5b895e2cb3543b16a64159041d52c3}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!N@{N}}
+\index{N@{N}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::N\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+1st Tensor dimension 
+
+
+
+Definition at line 1342 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::nindex1(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator=(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::range\+\_\+check(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Rank\+Three\+Tensor(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_ae93ba8b2baf4f92af533ae66bfcbe570}\label{classoomph_1_1RankThreeTensor_ae93ba8b2baf4f92af533ae66bfcbe570}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!P@{P}}
+\index{P@{P}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{P}{P}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::P\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+3rd Tensor dimension 
+
+
+
+Definition at line 1348 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::nindex3(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator()(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator=(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::range\+\_\+check(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Rank\+Three\+Tensor(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankThreeTensor_aef2671e89361c2260c7d3936fc8860ec}\label{classoomph_1_1RankThreeTensor_aef2671e89361c2260c7d3936fc8860ec}} 
+\index{oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}!Tensordata@{Tensordata}}
+\index{Tensordata@{Tensordata}!oomph::RankThreeTensor$<$ T $>$@{oomph::RankThreeTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Tensordata}{Tensordata}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{oomph\+::\+Rank\+Three\+Tensor}}$<$ T $>$\+::Tensordata\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Private internal representation as pointer to data. 
+
+
+
+Definition at line 1339 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::operator()(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::\+Rank\+Three\+Tensor(), oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::resize(), and oomph\+::\+Rank\+Three\+Tensor$<$ T $>$\+::$\sim$\+Rank\+Three\+Tensor().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{matrices_8h}{matrices.\+h}}\end{DoxyCompactItemize}

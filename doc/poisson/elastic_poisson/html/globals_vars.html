@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: File Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+&#160;<ul>
+<li>$D_
+: <a class="el" href="elastic__poisson_8txt.html#aaa7936f2a66f20ede7779a79c27db8f1">elastic_poisson.txt</a>
+</li>
+<li>accurate
+: <a class="el" href="elastic__poisson_8txt.html#a85c69acb0ce4eb61bba09962e48b2f16">elastic_poisson.txt</a>
+</li>
+<li>adaptations
+: <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">elastic_poisson.txt</a>
+</li>
+<li>adaptivity
+: <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">elastic_poisson.txt</a>
+</li>
+<li>automatically
+: <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">elastic_poisson.txt</a>
+</li>
+<li>before
+: <a class="el" href="elastic__poisson_8txt.html#a3bbec99409932fde7859cec8d0d8e8bc">elastic_poisson.txt</a>
+</li>
+<li>compute
+: <a class="el" href="elastic__poisson_8txt.html#a05d44fbb1f4e5f46c3cef426ebdf2814">elastic_poisson.txt</a>
+</li>
+<li>f
+: <a class="el" href="elastic__poisson_8txt.html#a4ecd5e6d588d73a281c326848c6be412">elastic_poisson.txt</a>
+</li>
+<li>Furthermore
+: <a class="el" href="elastic__poisson_8txt.html#a3c4cd009bdb28954678a9e3bdb660ed5">elastic_poisson.txt</a>
+</li>
+<li>mesh
+: <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">elastic_poisson.txt</a>
+</li>
+<li>object
+: <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">elastic_poisson.txt</a>
+</li>
+<li>original
+: <a class="el" href="elastic__poisson_8txt.html#a47540e7de1c52b3b7a14e1b936a828b5">elastic_poisson.txt</a>
+</li>
+<li>pattern
+: <a class="el" href="elastic__poisson_8txt.html#a6c28f9c59b0fa01016ca61aab0057283">elastic_poisson.txt</a>
+</li>
+<li>problem
+: <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">elastic_poisson.txt</a>
+</li>
+<li>process
+: <a class="el" href="elastic__poisson_8txt.html#a4125e3ad3928c95792c4ad809399592f">elastic_poisson.txt</a>
+</li>
+<li>refined
+: <a class="el" href="elastic__poisson_8txt.html#a69e877866b0e4c13b2212c9e22f6c297">elastic_poisson.txt</a>
+</li>
+<li>refinement
+: <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">elastic_poisson.txt</a>
+</li>
+<li>result
+: <a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">elastic_poisson.txt</a>
+</li>
+<li>scheme
+: <a class="el" href="elastic__poisson_8txt.html#a0433e75d51d613b1ab3fa3ad3490256b">elastic_poisson.txt</a>
+</li>
+<li>solution
+: <a class="el" href="elastic__poisson_8txt.html#a485ffcc5225dd7d0c21198ff6078436b">elastic_poisson.txt</a>
+</li>
+<li>Specifically
+: <a class="el" href="elastic__poisson_8txt.html#a477dbbf64d92923676bfbfa830a47e6b">elastic_poisson.txt</a>
+</li>
+<li>subsequent
+: <a class="el" href="elastic__poisson_8txt.html#ac62bd0f5e90621f5f05911809c2f4bf7">elastic_poisson.txt</a>
+</li>
+<li>targets
+: <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">elastic_poisson.txt</a>
+</li>
+<li>Therefore
+: <a class="el" href="elastic__poisson_8txt.html#ad97081418ac6de6ebd946218f25a4760">elastic_poisson.txt</a>
+</li>
+<li>to
+: <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">elastic_poisson.txt</a>
+</li>
+<li>unrefinement
+: <a class="el" href="elastic__poisson_8txt.html#a9441d22198dfc5f0e547ba8ce6c0806d">elastic_poisson.txt</a>
+</li>
+<li>vital
+: <a class="el" href="elastic__poisson_8txt.html#a262d1d2b6982328293e2a808e92c670a">elastic_poisson.txt</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:05:01
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

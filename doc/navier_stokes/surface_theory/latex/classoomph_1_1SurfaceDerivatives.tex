@@ -1,0 +1,69 @@
+\hypertarget{classoomph_1_1SurfaceDerivatives}{}\doxysection{oomph\+::Surface\+Derivatives Class Reference}
+\label{classoomph_1_1SurfaceDerivatives}\index{oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}}
+
+
+{\ttfamily \#include $<$interface\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Surface\+Derivatives\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.834575cm]{classoomph_1_1SurfaceDerivatives}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SurfaceDerivatives_a7bd520c805a4444073f5b05501d747fd}{Surface\+Derivatives}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1SurfaceDerivatives_a44e841bfa4ad82dcb87e672c821ffde7}{compute\+\_\+surface\+\_\+derivatives}} (const Shape \&\mbox{\hyperlink{surface__theory_8txt_a778489f3b8ca18a936dc9fa53e7994da}{psi}}, const D\+Shape \&dpsids, const Dense\+Matrix$<$ double $>$ \&interpolated\+\_\+t, const Vector$<$ double $>$ \&interpolated\+\_\+x, D\+Shape \&surface\+\_\+gradient, D\+Shape \&surface\+\_\+divergence)
+\begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that establishes the surface derivative functions for Surface\+Interface\+Elements (2D surfaces in 3D space) These are defined in a separate class so that they can be used by other interface equation-\/type classes. 
+
+Definition at line 690 of file interface\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SurfaceDerivatives_a7bd520c805a4444073f5b05501d747fd}\label{classoomph_1_1SurfaceDerivatives_a7bd520c805a4444073f5b05501d747fd}} 
+\index{oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}!SurfaceDerivatives@{SurfaceDerivatives}}
+\index{SurfaceDerivatives@{SurfaceDerivatives}!oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}}
+\doxysubsubsection{\texorpdfstring{SurfaceDerivatives()}{SurfaceDerivatives()}}
+{\footnotesize\ttfamily oomph\+::\+Surface\+Derivatives\+::\+Surface\+Derivatives (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 694 of file interface\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SurfaceDerivatives_a44e841bfa4ad82dcb87e672c821ffde7}\label{classoomph_1_1SurfaceDerivatives_a44e841bfa4ad82dcb87e672c821ffde7}} 
+\index{oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
+\index{compute\_surface\_derivatives@{compute\_surface\_derivatives}!oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}}
+\doxysubsubsection{\texorpdfstring{compute\_surface\_derivatives()}{compute\_surface\_derivatives()}}
+{\footnotesize\ttfamily double oomph\+::\+Surface\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const Shape \&}]{psi,  }\item[{const D\+Shape \&}]{dpsids,  }\item[{const Dense\+Matrix$<$ double $>$ \&}]{interpolated\+\_\+t,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{D\+Shape \&}]{surface\+\_\+gradient,  }\item[{D\+Shape \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Fill in the specific surface derivative calculations. 
+
+Specialise the surface derivatives for 2D surface case. 
+
+Definition at line 847 of file interface\+\_\+elements.\+cc.
+
+
+
+References al(), and psi.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface__elements_8h}{interface\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{interface__elements_8cc}{interface\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

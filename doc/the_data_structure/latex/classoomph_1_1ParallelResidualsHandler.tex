@@ -1,0 +1,218 @@
+\hypertarget{classoomph_1_1ParallelResidualsHandler}{}\doxysection{oomph\+::Parallel\+Residuals\+Handler Class Reference}
+\label{classoomph_1_1ParallelResidualsHandler}\index{oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}}
+
+
+A class that is used to assemble the residuals in parallel by overloading the get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices, so that only the residuals are returned. This ensures that the (moderately complex) distributed parallel assembly loops are only in one place.  
+
+
+
+
+{\ttfamily \#include $<$assembly\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Parallel\+Residuals\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1ParallelResidualsHandler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_a900d86e1f8e9f4fa9369b0afec456b22}{Parallel\+Residuals\+Handler}} (\mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} $\ast$const \&assembly\+\_\+handler\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor, set the original assembly handler. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_a16eb9ec097e85c5da57b2e588d9683b6}{ndof}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Use underlying assembly handler to return the number of degrees of freedom in the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_a0541d552e54eb2ca8681054180eafb87}{eqn\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, const unsigned \&ieqn\+\_\+local)
+\begin{DoxyCompactList}\small\item\em Use underlying \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} to return the global equation number of the local unknown ieqn\+\_\+local in elem\+\_\+pt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_a9a4e40b86cfb1db2b4c770d8d7241ad1}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Use underlying \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} to return the contribution to the residuals of the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_a366186bb0905d7251390ec726fe33797}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Use underlying \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} to Calculate the elemental Jacobian matrix \char`\"{}d equation 
+/ d variable\char`\"{} for elem\+\_\+pt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_adea071e3131e4e84b7c3e9400892fb17}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Calculate all desired vectors and matrices provided by the element elem\+\_\+pt This function calls only the get\+\_\+residuals function associated with the original assembly handler. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_abe905bb4dfc8977da144e8796f65ebf4}{$\sim$\+Parallel\+Residuals\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} $\ast$ \mbox{\hyperlink{classoomph_1_1ParallelResidualsHandler_a39fa02ec4efbb5f23df78a593d116672}{Assembly\+\_\+handler\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em The original assembly handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that is used to assemble the residuals in parallel by overloading the get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices, so that only the residuals are returned. This ensures that the (moderately complex) distributed parallel assembly loops are only in one place. 
+
+Definition at line 270 of file assembly\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ParallelResidualsHandler_a900d86e1f8e9f4fa9369b0afec456b22}\label{classoomph_1_1ParallelResidualsHandler_a900d86e1f8e9f4fa9369b0afec456b22}} 
+\index{oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}!ParallelResidualsHandler@{ParallelResidualsHandler}}
+\index{ParallelResidualsHandler@{ParallelResidualsHandler}!oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}}
+\doxysubsubsection{\texorpdfstring{ParallelResidualsHandler()}{ParallelResidualsHandler()}}
+{\footnotesize\ttfamily oomph\+::\+Parallel\+Residuals\+Handler\+::\+Parallel\+Residuals\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} $\ast$const \&}]{assembly\+\_\+handler\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, set the original assembly handler. 
+
+
+
+Definition at line 278 of file assembly\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ParallelResidualsHandler_abe905bb4dfc8977da144e8796f65ebf4}\label{classoomph_1_1ParallelResidualsHandler_abe905bb4dfc8977da144e8796f65ebf4}} 
+\index{oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}!````~ParallelResidualsHandler@{$\sim$ParallelResidualsHandler}}
+\index{````~ParallelResidualsHandler@{$\sim$ParallelResidualsHandler}!oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}}
+\doxysubsubsection{\texorpdfstring{$\sim$ParallelResidualsHandler()}{~ParallelResidualsHandler()}}
+{\footnotesize\ttfamily oomph\+::\+Parallel\+Residuals\+Handler\+::$\sim$\+Parallel\+Residuals\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line 318 of file assembly\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ParallelResidualsHandler_a0541d552e54eb2ca8681054180eafb87}\label{classoomph_1_1ParallelResidualsHandler_a0541d552e54eb2ca8681054180eafb87}} 
+\index{oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}!eqn\_number@{eqn\_number}}
+\index{eqn\_number@{eqn\_number}!oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}}
+\doxysubsubsection{\texorpdfstring{eqn\_number()}{eqn\_number()}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+Parallel\+Residuals\+Handler\+::eqn\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{const unsigned \&}]{ieqn\+\_\+local }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Use underlying \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} to return the global equation number of the local unknown ieqn\+\_\+local in elem\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559cde803d1ba2195b5290}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line 288 of file assembly\+\_\+handler.\+h.
+
+
+
+References Assembly\+\_\+handler\+\_\+pt, and oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number().
+
+\mbox{\Hypertarget{classoomph_1_1ParallelResidualsHandler_adea071e3131e4e84b7c3e9400892fb17}\label{classoomph_1_1ParallelResidualsHandler_adea071e3131e4e84b7c3e9400892fb17}} 
+\index{oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}!get\_all\_vectors\_and\_matrices@{get\_all\_vectors\_and\_matrices}}
+\index{get\_all\_vectors\_and\_matrices@{get\_all\_vectors\_and\_matrices}!oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}}
+\doxysubsubsection{\texorpdfstring{get\_all\_vectors\_and\_matrices()}{get\_all\_vectors\_and\_matrices()}}
+{\footnotesize\ttfamily void oomph\+::\+Parallel\+Residuals\+Handler\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Calculate all desired vectors and matrices provided by the element elem\+\_\+pt This function calls only the get\+\_\+residuals function associated with the original assembly handler. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab2e4ee4623116b18245ca90cfe9ba144}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line 312 of file assembly\+\_\+handler.\+h.
+
+
+
+References Assembly\+\_\+handler\+\_\+pt, and oomph\+::\+Assembly\+Handler\+::get\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1ParallelResidualsHandler_a366186bb0905d7251390ec726fe33797}\label{classoomph_1_1ParallelResidualsHandler_a366186bb0905d7251390ec726fe33797}} 
+\index{oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}!get\_jacobian@{get\_jacobian}}
+\index{get\_jacobian@{get\_jacobian}!oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}}
+\doxysubsubsection{\texorpdfstring{get\_jacobian()}{get\_jacobian()}}
+{\footnotesize\ttfamily void oomph\+::\+Parallel\+Residuals\+Handler\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Use underlying \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} to Calculate the elemental Jacobian matrix \char`\"{}d equation 
+/ d variable\char`\"{} for elem\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0ba6ebee8d82509458e5}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line 302 of file assembly\+\_\+handler.\+h.
+
+
+
+References Assembly\+\_\+handler\+\_\+pt, oomph\+::\+Assembly\+Handler\+::get\+\_\+jacobian(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1ParallelResidualsHandler_a9a4e40b86cfb1db2b4c770d8d7241ad1}\label{classoomph_1_1ParallelResidualsHandler_a9a4e40b86cfb1db2b4c770d8d7241ad1}} 
+\index{oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}!get\_residuals@{get\_residuals}}
+\index{get\_residuals@{get\_residuals}!oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}}
+\doxysubsubsection{\texorpdfstring{get\_residuals()}{get\_residuals()}}
+{\footnotesize\ttfamily void oomph\+::\+Parallel\+Residuals\+Handler\+::get\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Use underlying \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} to return the contribution to the residuals of the element elem\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90da62b4da2af8a26d08b3}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line 294 of file assembly\+\_\+handler.\+h.
+
+
+
+References Assembly\+\_\+handler\+\_\+pt, oomph\+::\+Assembly\+Handler\+::get\+\_\+residuals(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1ParallelResidualsHandler_a16eb9ec097e85c5da57b2e588d9683b6}\label{classoomph_1_1ParallelResidualsHandler_a16eb9ec097e85c5da57b2e588d9683b6}} 
+\index{oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}!ndof@{ndof}}
+\index{ndof@{ndof}!oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}}
+\doxysubsubsection{\texorpdfstring{ndof()}{ndof()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Parallel\+Residuals\+Handler\+::ndof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Use underlying assembly handler to return the number of degrees of freedom in the element elem\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa009e0366460a7ed78e68}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line 283 of file assembly\+\_\+handler.\+h.
+
+
+
+References Assembly\+\_\+handler\+\_\+pt, and oomph\+::\+Assembly\+Handler\+::ndof().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ParallelResidualsHandler_a39fa02ec4efbb5f23df78a593d116672}\label{classoomph_1_1ParallelResidualsHandler_a39fa02ec4efbb5f23df78a593d116672}} 
+\index{oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}!Assembly\_handler\_pt@{Assembly\_handler\_pt}}
+\index{Assembly\_handler\_pt@{Assembly\_handler\_pt}!oomph::ParallelResidualsHandler@{oomph::ParallelResidualsHandler}}
+\doxysubsubsection{\texorpdfstring{Assembly\_handler\_pt}{Assembly\_handler\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}}$\ast$ oomph\+::\+Parallel\+Residuals\+Handler\+::\+Assembly\+\_\+handler\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The original assembly handler. 
+
+
+
+Definition at line 273 of file assembly\+\_\+handler.\+h.
+
+
+
+Referenced by eqn\+\_\+number(), get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices(), get\+\_\+jacobian(), get\+\_\+residuals(), and ndof().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{assembly__handler_8h}{assembly\+\_\+handler.\+h}}\end{DoxyCompactItemize}

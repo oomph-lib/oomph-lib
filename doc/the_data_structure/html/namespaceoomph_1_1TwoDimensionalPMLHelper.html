@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TwoDimensionalPMLHelper Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html">TwoDimensionalPMLHelper</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::TwoDimensionalPMLHelper Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace with functions that allow the construction of PML layers on axis aligned boundaries.  
+<a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae66c595a953e030ae366699eec3ca3ab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#ae66c595a953e030ae366699eec3ca3ab">sorter_right_boundary</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *nod_i_pt, <a class="el" href="classoomph_1_1Node.html">Node</a> *nod_j_pt)</td></tr>
+<tr class="memdesc:ae66c595a953e030ae366699eec3ca3ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper function for sorting the right boundary nodes  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#ae66c595a953e030ae366699eec3ca3ab">More...</a><br /></td></tr>
+<tr class="separator:ae66c595a953e030ae366699eec3ca3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d2786e22298095bd190435d11c4f0e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a98d2786e22298095bd190435d11c4f0e">sorter_top_boundary</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *nod_i_pt, <a class="el" href="classoomph_1_1Node.html">Node</a> *nod_j_pt)</td></tr>
+<tr class="memdesc:a98d2786e22298095bd190435d11c4f0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper function for sorting the top boundary nodes  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a98d2786e22298095bd190435d11c4f0e">More...</a><br /></td></tr>
+<tr class="separator:a98d2786e22298095bd190435d11c4f0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecb74c39efe7c572a9d87b2d11be3d69"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#aecb74c39efe7c572a9d87b2d11be3d69">sorter_left_boundary</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *nod_i_pt, <a class="el" href="classoomph_1_1Node.html">Node</a> *nod_j_pt)</td></tr>
+<tr class="memdesc:aecb74c39efe7c572a9d87b2d11be3d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper function for sorting the left boundary nodes  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#aecb74c39efe7c572a9d87b2d11be3d69">More...</a><br /></td></tr>
+<tr class="separator:aecb74c39efe7c572a9d87b2d11be3d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bd68e9d424ff3f05266786cc6c78baa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a0bd68e9d424ff3f05266786cc6c78baa">sorter_bottom_boundary</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *nod_i_pt, <a class="el" href="classoomph_1_1Node.html">Node</a> *nod_j_pt)</td></tr>
+<tr class="memdesc:a0bd68e9d424ff3f05266786cc6c78baa"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper function for sorting the bottom boundary nodes  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a0bd68e9d424ff3f05266786cc6c78baa">More...</a><br /></td></tr>
+<tr class="separator:a0bd68e9d424ff3f05266786cc6c78baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefa58c9106ac3bee876a0bff81ab1a64"><td class="memTemplParams" colspan="2">template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </td></tr>
+<tr class="memitem:aefa58c9106ac3bee876a0bff81ab1a64"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#aefa58c9106ac3bee876a0bff81ab1a64">create_right_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *bulk_mesh_pt, const unsigned &amp;right_boundary_id, const unsigned &amp;n_x_right_pml, const double &amp;width_x_right_pml, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:aefa58c9106ac3bee876a0bff81ab1a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML mesh,aligned with the right physical domain boundary  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#aefa58c9106ac3bee876a0bff81ab1a64">More...</a><br /></td></tr>
+<tr class="separator:aefa58c9106ac3bee876a0bff81ab1a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f19139e8145fb29caf9be94b1909ed1"><td class="memTemplParams" colspan="2">template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </td></tr>
+<tr class="memitem:a5f19139e8145fb29caf9be94b1909ed1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a5f19139e8145fb29caf9be94b1909ed1">create_top_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *bulk_mesh_pt, const unsigned &amp;top_boundary_id, const unsigned &amp;n_y_top_pml, const double &amp;width_y_top_pml, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:a5f19139e8145fb29caf9be94b1909ed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML mesh, aligned with the top physical domain boundary  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a5f19139e8145fb29caf9be94b1909ed1">More...</a><br /></td></tr>
+<tr class="separator:a5f19139e8145fb29caf9be94b1909ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc70ea22db897a5e20676d8136759308"><td class="memTemplParams" colspan="2">template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </td></tr>
+<tr class="memitem:acc70ea22db897a5e20676d8136759308"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#acc70ea22db897a5e20676d8136759308">create_left_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *bulk_mesh_pt, const unsigned &amp;left_boundary_id, const unsigned &amp;n_x_left_pml, const double &amp;width_x_left_pml, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:acc70ea22db897a5e20676d8136759308"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML mesh, aligned with the left physical domain boundary  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#acc70ea22db897a5e20676d8136759308">More...</a><br /></td></tr>
+<tr class="separator:acc70ea22db897a5e20676d8136759308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaeafd3af9d2d34e4e7e0f8a2bd78216"><td class="memTemplParams" colspan="2">template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </td></tr>
+<tr class="memitem:acaeafd3af9d2d34e4e7e0f8a2bd78216"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#acaeafd3af9d2d34e4e7e0f8a2bd78216">create_bottom_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *bulk_mesh_pt, const unsigned &amp;bottom_boundary_id, const unsigned &amp;n_y_bottom_pml, const double &amp;width_y_bottom_pml, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:acaeafd3af9d2d34e4e7e0f8a2bd78216"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML mesh,aligned with the bottom physical domain boundary  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#acaeafd3af9d2d34e4e7e0f8a2bd78216">More...</a><br /></td></tr>
+<tr class="separator:acaeafd3af9d2d34e4e7e0f8a2bd78216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e37eb00dd89dad4cc51531472c9b1ad"><td class="memTemplParams" colspan="2">template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </td></tr>
+<tr class="memitem:a3e37eb00dd89dad4cc51531472c9b1ad"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a3e37eb00dd89dad4cc51531472c9b1ad">create_top_right_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *pml_right_mesh_pt, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *pml_top_mesh_pt, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *bulk_mesh_pt, const unsigned &amp;right_boundary_id, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:a3e37eb00dd89dad4cc51531472c9b1ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML top right corner mesh, aligned with the existing PML meshes  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a3e37eb00dd89dad4cc51531472c9b1ad">More...</a><br /></td></tr>
+<tr class="separator:a3e37eb00dd89dad4cc51531472c9b1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24327201a96ccb79e34caad6a577672a"><td class="memTemplParams" colspan="2">template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </td></tr>
+<tr class="memitem:a24327201a96ccb79e34caad6a577672a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a24327201a96ccb79e34caad6a577672a">create_bottom_right_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *pml_right_mesh_pt, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *pml_bottom_mesh_pt, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *bulk_mesh_pt, const unsigned &amp;right_boundary_id, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:a24327201a96ccb79e34caad6a577672a"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML bottom right corner mesh, aligned with the existing PML meshes  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a24327201a96ccb79e34caad6a577672a">More...</a><br /></td></tr>
+<tr class="separator:a24327201a96ccb79e34caad6a577672a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60f24bcfa2ad065577e47d97015995ac"><td class="memTemplParams" colspan="2">template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </td></tr>
+<tr class="memitem:a60f24bcfa2ad065577e47d97015995ac"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a60f24bcfa2ad065577e47d97015995ac">create_top_left_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *pml_left_mesh_pt, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *pml_top_mesh_pt, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *bulk_mesh_pt, const unsigned &amp;left_boundary_id, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:a60f24bcfa2ad065577e47d97015995ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML top left corner mesh, aligned with the existing PML meshes  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a60f24bcfa2ad065577e47d97015995ac">More...</a><br /></td></tr>
+<tr class="separator:a60f24bcfa2ad065577e47d97015995ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba3dace3fd7f0d481d986e6cc98c770f"><td class="memTemplParams" colspan="2">template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </td></tr>
+<tr class="memitem:aba3dace3fd7f0d481d986e6cc98c770f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#aba3dace3fd7f0d481d986e6cc98c770f">create_bottom_left_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *pml_left_mesh_pt, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *pml_bottom_mesh_pt, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *bulk_mesh_pt, const unsigned &amp;left_boundary_id, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:aba3dace3fd7f0d481d986e6cc98c770f"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML bottom left corner mesh, aligned with the existing PML meshes  <a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#aba3dace3fd7f0d481d986e6cc98c770f">More...</a><br /></td></tr>
+<tr class="separator:aba3dace3fd7f0d481d986e6cc98c770f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace with functions that allow the construction of PML layers on axis aligned boundaries. </p>
+<p>All helper routines for 2D bulk boundary mesh usage in order to generate PML meshes aligned to the main mesh. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="aba3dace3fd7f0d481d986e6cc98c770f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba3dace3fd7f0d481d986e6cc98c770f">&#9670;&nbsp;</a></span>create_bottom_left_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a>* oomph::TwoDimensionalPMLHelper::create_bottom_left_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_left_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_bottom_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>left_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML bottom left corner mesh, aligned with the existing PML meshes </p>
+<p>Relevant boundary id's to be used in construction Parent id refers to already existing PML meshes</p>
+<p>Sort them from lowest to highest (in y coordinate) sorter_right_boundary is still functional, as the sorting is performed by the same criterion</p>
+<p>Number of elements and boundary nodes to be acted upon during construction are extracted from the 'parent' PML meshes</p>
+<p>Specific PML sizes needed, taken directly from physical domain and existing PML meshes</p>
+<p>The enabling must be perfromed in both x- and y-directions as this is a corner PML mesh</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l02243">2243</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00493">oomph::Mesh::boundary_node_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00802">oomph::Mesh::nboundary()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00379">oomph::Data::pin()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="pml__meshes_8cc_source.html#l00040">sorter_right_boundary()</a>, and <a class="el" href="classoomph_1_1PMLElementBase.html#ad63639f1966cd3191fad69852732fd90">oomph::PMLElementBase&lt; DIM &gt;::values_to_be_pinned_on_outer_pml_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01354">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="acaeafd3af9d2d34e4e7e0f8a2bd78216"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaeafd3af9d2d34e4e7e0f8a2bd78216">&#9670;&nbsp;</a></span>create_bottom_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a>* oomph::TwoDimensionalPMLHelper::create_bottom_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>bottom_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_y_bottom_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>width_y_bottom_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML mesh,aligned with the bottom physical domain boundary </p>
+<p>PML layer width subtracted from the bulk mesh lower boundary coordinate</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01757">1757</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00493">oomph::Mesh::boundary_node_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00802">oomph::Mesh::nboundary()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00379">oomph::Data::pin()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="pml__meshes_8cc_source.html#l00058">sorter_bottom_boundary()</a>, and <a class="el" href="classoomph_1_1PMLElementBase.html#ad63639f1966cd3191fad69852732fd90">oomph::PMLElementBase&lt; DIM &gt;::values_to_be_pinned_on_outer_pml_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01354">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="a24327201a96ccb79e34caad6a577672a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24327201a96ccb79e34caad6a577672a">&#9670;&nbsp;</a></span>create_bottom_right_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a>* oomph::TwoDimensionalPMLHelper::create_bottom_right_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_right_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_bottom_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>right_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML bottom right corner mesh, aligned with the existing PML meshes </p>
+<p>Relevant boundary id's to be used in construction Parent id refers to already existing PML meshes</p>
+<p>Number of elements and boundary nodes to be acted upon during construction are extracted from the 'parent' PML meshes</p>
+<p>Specific PML sizes needed, taken directly from physical domain and existing PML meshes</p>
+<p>The enabling must be perfromed in both x- and y-directions as this is a corner PML mesh</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01990">1990</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00493">oomph::Mesh::boundary_node_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00802">oomph::Mesh::nboundary()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00379">oomph::Data::pin()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="pml__meshes_8cc_source.html#l00040">sorter_right_boundary()</a>, and <a class="el" href="classoomph_1_1PMLElementBase.html#ad63639f1966cd3191fad69852732fd90">oomph::PMLElementBase&lt; DIM &gt;::values_to_be_pinned_on_outer_pml_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01354">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="acc70ea22db897a5e20676d8136759308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc70ea22db897a5e20676d8136759308">&#9670;&nbsp;</a></span>create_left_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a>* oomph::TwoDimensionalPMLHelper::create_left_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>left_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_x_left_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>width_x_left_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML mesh, aligned with the left physical domain boundary </p>
+<p>PML layer width subtracted from left bulk mesh coordinate</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01653">1653</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00493">oomph::Mesh::boundary_node_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00802">oomph::Mesh::nboundary()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00379">oomph::Data::pin()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="pml__meshes_8cc_source.html#l00052">sorter_left_boundary()</a>, and <a class="el" href="classoomph_1_1PMLElementBase.html#ad63639f1966cd3191fad69852732fd90">oomph::PMLElementBase&lt; DIM &gt;::values_to_be_pinned_on_outer_pml_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01354">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="aefa58c9106ac3bee876a0bff81ab1a64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefa58c9106ac3bee876a0bff81ab1a64">&#9670;&nbsp;</a></span>create_right_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a>* oomph::TwoDimensionalPMLHelper::create_right_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>right_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_x_right_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>width_x_right_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML mesh,aligned with the right physical domain boundary </p>
+<p>PML layer with added to the bulk mesh coordinate</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01444">1444</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00493">oomph::Mesh::boundary_node_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00802">oomph::Mesh::nboundary()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00379">oomph::Data::pin()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="pml__meshes_8cc_source.html#l00040">sorter_right_boundary()</a>, and <a class="el" href="classoomph_1_1PMLElementBase.html#ad63639f1966cd3191fad69852732fd90">oomph::PMLElementBase&lt; DIM &gt;::values_to_be_pinned_on_outer_pml_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a60f24bcfa2ad065577e47d97015995ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60f24bcfa2ad065577e47d97015995ac">&#9670;&nbsp;</a></span>create_top_left_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a>* oomph::TwoDimensionalPMLHelper::create_top_left_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_left_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_top_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>left_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML top left corner mesh, aligned with the existing PML meshes </p>
+<p>Relevant boundary id's to be used in construction Parent id refers to already existing PML meshes</p>
+<p>Sort them from lowest to highest (in y coordinate) sorter_right_boundary is still functional, as the sorting is performed by the same criterion</p>
+<p>Number of elements and boundary nodes to be acted upon during construction are extracted from the 'parent' PML meshes</p>
+<p>Specific PML sizes needed, taken directly from physical domain and existing PML meshes</p>
+<p>The enabling must be perfromed in both x- and y-directions as this is a corner PML mesh</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l02116">2116</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00493">oomph::Mesh::boundary_node_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00802">oomph::Mesh::nboundary()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00379">oomph::Data::pin()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="pml__meshes_8cc_source.html#l00040">sorter_right_boundary()</a>, and <a class="el" href="classoomph_1_1PMLElementBase.html#ad63639f1966cd3191fad69852732fd90">oomph::PMLElementBase&lt; DIM &gt;::values_to_be_pinned_on_outer_pml_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01354">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="a5f19139e8145fb29caf9be94b1909ed1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f19139e8145fb29caf9be94b1909ed1">&#9670;&nbsp;</a></span>create_top_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a>* oomph::TwoDimensionalPMLHelper::create_top_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>top_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_y_top_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>width_y_top_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML mesh, aligned with the top physical domain boundary </p>
+<p>PML layer width added to the bulk mesh coordinate</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01549">1549</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00493">oomph::Mesh::boundary_node_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00802">oomph::Mesh::nboundary()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00379">oomph::Data::pin()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="pml__meshes_8cc_source.html#l00046">sorter_top_boundary()</a>, and <a class="el" href="classoomph_1_1PMLElementBase.html#ad63639f1966cd3191fad69852732fd90">oomph::PMLElementBase&lt; DIM &gt;::values_to_be_pinned_on_outer_pml_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01354">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="a3e37eb00dd89dad4cc51531472c9b1ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e37eb00dd89dad4cc51531472c9b1ad">&#9670;&nbsp;</a></span>create_top_right_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ASSOCIATED_PML_QUAD_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a>* oomph::TwoDimensionalPMLHelper::create_top_right_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_right_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_top_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>right_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML top right corner mesh, aligned with the existing PML meshes </p>
+<p>Relevant boundary id's to be used in construction Parent id refers to already existing PML meshes</p>
+<p>Number of elements and boundary nodes to be acted upon during construction are extracted from the 'parent' PML meshes</p>
+<p>Specific PML sizes needed, taken directly from physical domain and existing PML meshes</p>
+<p>The enabling must be perfromed in both x- and y-directions as this is a corner PML mesh</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01864">1864</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l00493">oomph::Mesh::boundary_node_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00802">oomph::Mesh::nboundary()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="nodes_8h_source.html#l00379">oomph::Data::pin()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="pml__meshes_8cc_source.html#l00040">sorter_right_boundary()</a>, and <a class="el" href="classoomph_1_1PMLElementBase.html#ad63639f1966cd3191fad69852732fd90">oomph::PMLElementBase&lt; DIM &gt;::values_to_be_pinned_on_outer_pml_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01354">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="a0bd68e9d424ff3f05266786cc6c78baa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bd68e9d424ff3f05266786cc6c78baa">&#9670;&nbsp;</a></span>sorter_bottom_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TwoDimensionalPMLHelper::sorter_bottom_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_i_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_j_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>helper function for sorting the bottom boundary nodes </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8cc_source.html#l00058">58</a> of file <a class="el" href="pml__meshes_8cc_source.html">pml_meshes.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__meshes_8h_source.html#l01757">create_bottom_pml_mesh()</a>, and <a class="el" href="pml__meshes_8h_source.html#l00438">oomph::PMLQuadMesh&lt; ELEMENT &gt;::PMLQuadMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aecb74c39efe7c572a9d87b2d11be3d69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecb74c39efe7c572a9d87b2d11be3d69">&#9670;&nbsp;</a></span>sorter_left_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TwoDimensionalPMLHelper::sorter_left_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_i_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_j_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>helper function for sorting the left boundary nodes </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8cc_source.html#l00052">52</a> of file <a class="el" href="pml__meshes_8cc_source.html">pml_meshes.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__meshes_8h_source.html#l01653">create_left_pml_mesh()</a>, and <a class="el" href="pml__meshes_8h_source.html#l00438">oomph::PMLQuadMesh&lt; ELEMENT &gt;::PMLQuadMesh()</a>.</p>
+
+</div>
+</div>
+<a id="ae66c595a953e030ae366699eec3ca3ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66c595a953e030ae366699eec3ca3ab">&#9670;&nbsp;</a></span>sorter_right_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TwoDimensionalPMLHelper::sorter_right_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_i_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_j_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>helper function for sorting the right boundary nodes </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8cc_source.html#l00040">40</a> of file <a class="el" href="pml__meshes_8cc_source.html">pml_meshes.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__meshes_8h_source.html#l02243">create_bottom_left_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l01990">create_bottom_right_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l01444">create_right_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l02116">create_top_left_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l01864">create_top_right_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l00762">oomph::PMLCornerQuadMesh&lt; ELEMENT &gt;::PMLCornerQuadMesh()</a>, and <a class="el" href="pml__meshes_8h_source.html#l00438">oomph::PMLQuadMesh&lt; ELEMENT &gt;::PMLQuadMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a98d2786e22298095bd190435d11c4f0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98d2786e22298095bd190435d11c4f0e">&#9670;&nbsp;</a></span>sorter_top_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TwoDimensionalPMLHelper::sorter_top_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_i_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_j_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>helper function for sorting the top boundary nodes </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8cc_source.html#l00046">46</a> of file <a class="el" href="pml__meshes_8cc_source.html">pml_meshes.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__meshes_8h_source.html#l01549">create_top_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l00762">oomph::PMLCornerQuadMesh&lt; ELEMENT &gt;::PMLCornerQuadMesh()</a>, and <a class="el" href="pml__meshes_8h_source.html#l00438">oomph::PMLQuadMesh&lt; ELEMENT &gt;::PMLQuadMesh()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

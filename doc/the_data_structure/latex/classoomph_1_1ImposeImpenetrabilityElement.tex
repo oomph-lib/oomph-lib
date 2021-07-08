@@ -1,0 +1,316 @@
+\hypertarget{classoomph_1_1ImposeImpenetrabilityElement}{}\doxysection{oomph\+::Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1ImposeImpenetrabilityElement}\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+
+
+\mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{Impose\+Impenetrability\+Element}} are elements that coincide with the faces of higher-\/dimensional \char`\"{}bulk\char`\"{} elements. They are used on boundaries where we would like to impose impenetrability.  
+
+
+
+
+{\ttfamily \#include $<$impose\+\_\+impenetrability\+\_\+element.\+h$>$}
+
+Inheritance diagram for oomph\+::Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.416397cm]{classoomph_1_1ImposeImpenetrabilityElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_ae00b64597005a63ba62f7db13784a5fd}{Impose\+Impenetrability\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}}, const unsigned \&id=0)
+\begin{DoxyCompactList}\small\item\em Constructor takes a \char`\"{}bulk\char`\"{} element, the index that identifies which face the \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{Impose\+Impenetrability\+Element}} is supposed to be attached to, and the face element ID. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a1642298b1eca7806849324886672273e}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Fill in the residuals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a9a53b713347bdb2b9c04692ea708eb01}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Fill in contribution from Jacobian. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a44097c20f6a16ab6a8f60daeaba7aa7d}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_ad23ac5158f42b7a6c65ec7cbd3deac44}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_acd1ef4e239729447691ba0b973e395ae}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default This final over-\/ride is required because both Solid\+Finite\+Elements and Face\+Elements overload zeta\+\_\+nodal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a943dc887f5a792524e418b23dea934c3}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+\begin{DoxyCompactList}\small\item\em Helper function to compute the residuals and, if flag==1, the Jacobian. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a0aa0ca45ff2d80ca16708224d09749de}{ndof\+\_\+types}} () const
+\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a9bd9f83e67108ac008efa20601fb1ade}{additional\+\_\+ndof\+\_\+types}} () const
+\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a722461f623710d20a71a28b5fa6018a9}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement_a6a8cf1048dbcc32288ea8eca1e6c380d}{Id}}
+\begin{DoxyCompactList}\small\item\em Lagrange Id. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+\mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{Impose\+Impenetrability\+Element}} are elements that coincide with the faces of higher-\/dimensional \char`\"{}bulk\char`\"{} elements. They are used on boundaries where we would like to impose impenetrability. 
+
+Definition at line 43 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_ae00b64597005a63ba62f7db13784a5fd}\label{classoomph_1_1ImposeImpenetrabilityElement_ae00b64597005a63ba62f7db13784a5fd}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!ImposeImpenetrabilityElement@{ImposeImpenetrabilityElement}}
+\index{ImposeImpenetrabilityElement@{ImposeImpenetrabilityElement}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ImposeImpenetrabilityElement()}{ImposeImpenetrabilityElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{Impose\+Impenetrability\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const unsigned \&}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor takes a \char`\"{}bulk\char`\"{} element, the index that identifies which face the \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{Impose\+Impenetrability\+Element}} is supposed to be attached to, and the face element ID. 
+
+
+
+Definition at line 59 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Face\+Element\+::add\+\_\+additional\+\_\+values(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Id, and oomph\+::\+Finite\+Element\+::nnode().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a9bd9f83e67108ac008efa20601fb1ade}\label{classoomph_1_1ImposeImpenetrabilityElement_a9bd9f83e67108ac008efa20601fb1ade}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!additional\_ndof\_types@{additional\_ndof\_types}}
+\index{additional\_ndof\_types@{additional\_ndof\_types}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{additional\_ndof\_types()}{additional\_ndof\_types()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::additional\+\_\+ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 293 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dim().
+
+
+
+Referenced by oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), and oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ndof\+\_\+types().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a9a53b713347bdb2b9c04692ea708eb01}\label{classoomph_1_1ImposeImpenetrabilityElement_a9a53b713347bdb2b9c04692ea708eb01}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Fill in contribution from Jacobian. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 89 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a1642298b1eca7806849324886672273e}\label{classoomph_1_1ImposeImpenetrabilityElement_a1642298b1eca7806849324886672273e}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Fill in the residuals. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 81 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a943dc887f5a792524e418b23dea934c3}\label{classoomph_1_1ImposeImpenetrabilityElement_a943dc887f5a792524e418b23dea934c3}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!fill\_in\_generic\_contribution\_to\_residuals\_parall\_lagr\_multiplier@{fill\_in\_generic\_contribution\_to\_residuals\_parall\_lagr\_multiplier}}
+\index{fill\_in\_generic\_contribution\_to\_residuals\_parall\_lagr\_multiplier@{fill\_in\_generic\_contribution\_to\_residuals\_parall\_lagr\_multiplier}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_contribution\_to\_residuals\_parall\_lagr\_multiplier()}{fill\_in\_generic\_contribution\_to\_residuals\_parall\_lagr\_multiplier()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function to compute the residuals and, if flag==1, the Jacobian. 
+
+
+
+Definition at line 117 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Id, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), residuals(), oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot(), oomph\+::\+Node\+::value(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+
+
+
+Referenced by oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a722461f623710d20a71a28b5fa6018a9}\label{classoomph_1_1ImposeImpenetrabilityElement_a722461f623710d20a71a28b5fa6018a9}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
+\index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 306 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::additional\+\_\+ndof\+\_\+types(), oomph\+::\+Face\+Element\+::\+Bulk\+\_\+element\+\_\+pt, oomph\+::\+Face\+Element\+::\+Bulk\+\_\+node\+\_\+number, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Id, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a0aa0ca45ff2d80ca16708224d09749de}\label{classoomph_1_1ImposeImpenetrabilityElement_a0aa0ca45ff2d80ca16708224d09749de}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!ndof\_types@{ndof\_types}}
+\index{ndof\_types@{ndof\_types}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870597b35dcf1c780710b9a56}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 283 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::additional\+\_\+ndof\+\_\+types().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a44097c20f6a16ab6a8f60daeaba7aa7d}\label{classoomph_1_1ImposeImpenetrabilityElement_a44097c20f6a16ab6a8f60daeaba7aa7d}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 98 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_ad23ac5158f42b7a6c65ec7cbd3deac44}\label{classoomph_1_1ImposeImpenetrabilityElement_ad23ac5158f42b7a6c65ec7cbd3deac44}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 101 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_acd1ef4e239729447691ba0b973e395ae}\label{classoomph_1_1ImposeImpenetrabilityElement_acd1ef4e239729447691ba0b973e395ae}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default This final over-\/ride is required because both Solid\+Finite\+Elements and Face\+Elements overload zeta\+\_\+nodal. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f76c8487d152e68a6}{oomph\+::\+Face\+Element}}.
+
+
+
+Definition at line 109 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ImposeImpenetrabilityElement_a6a8cf1048dbcc32288ea8eca1e6c380d}\label{classoomph_1_1ImposeImpenetrabilityElement_a6a8cf1048dbcc32288ea8eca1e6c380d}} 
+\index{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}!Id@{Id}}
+\index{Id@{Id}!oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$@{oomph::ImposeImpenetrabilityElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeImpenetrabilityElement}{oomph\+::\+Impose\+Impenetrability\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Lagrange Id. 
+
+
+
+Definition at line 50 of file impose\+\_\+impenetrability\+\_\+element.\+h.
+
+
+
+Referenced by oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+parall\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), and oomph\+::\+Impose\+Impenetrability\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Impenetrability\+Element().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{impose__impenetrability__element_8h}{impose\+\_\+impenetrability\+\_\+element.\+h}}\end{DoxyCompactItemize}

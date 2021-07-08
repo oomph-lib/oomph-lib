@@ -1,0 +1,166 @@
+\hypertarget{classNavierStokesProblem}{}\doxysection{Navier\+Stokes\+Problem$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classNavierStokesProblem}\index{NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}}
+
+
+Entry flow problem in quarter tube domain.  
+
+
+Inheritance diagram for Navier\+Stokes\+Problem$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classNavierStokesProblem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNavierStokesProblem_a46835b845a017b66b7cbb45dad10bd17}{Navier\+Stokes\+Problem}} (Doc\+Info \&doc\+\_\+info, const string \&node\+\_\+file\+\_\+name, const string \&element\+\_\+file\+\_\+name, const string \&face\+\_\+file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass Doc\+Info object and file names. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classNavierStokesProblem_ac519026cc9a3ad11a1a0b702a96aa9ee}{$\sim$\+Navier\+Stokes\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNavierStokesProblem_aaf0ba897bf867aeb91dd557a577cb391}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution after solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNavierStokesProblem_a61feda03c9972cae62cfa1c3486bf17a}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNavierStokesProblem_a220db7388319f4215b54459d32ba784b}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classNavierStokesProblem_a1d69e5e56711b1132e23b569679f04f6}{mesh\+\_\+pt}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Doc\+Info \mbox{\hyperlink{classNavierStokesProblem_af77a241c0eb484c1669b538286d22e18}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc info object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class Navier\+Stokes\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Entry flow problem in quarter tube domain. 
+
+Definition at line 55 of file mesh\+\_\+from\+\_\+tetgen\+\_\+navier\+\_\+stokes.\+cc.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classNavierStokesProblem_a46835b845a017b66b7cbb45dad10bd17}\label{classNavierStokesProblem_a46835b845a017b66b7cbb45dad10bd17}} 
+\index{NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}!NavierStokesProblem@{NavierStokesProblem}}
+\index{NavierStokesProblem@{NavierStokesProblem}!NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{NavierStokesProblem()}{NavierStokesProblem()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classNavierStokesProblem}{Navier\+Stokes\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classNavierStokesProblem}{Navier\+Stokes\+Problem}} (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{const string \&}]{node\+\_\+file\+\_\+name,  }\item[{const string \&}]{element\+\_\+file\+\_\+name,  }\item[{const string \&}]{face\+\_\+file\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass Doc\+Info object and file names. 
+
+Constructor\+: Pass Doc\+Info object mesh files. 
+
+Definition at line 107 of file mesh\+\_\+from\+\_\+tetgen\+\_\+navier\+\_\+stokes.\+cc.
+
+
+
+References Navier\+Stokes\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::mesh\+\_\+pt(), and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re.
+
+\mbox{\Hypertarget{classNavierStokesProblem_ac519026cc9a3ad11a1a0b702a96aa9ee}\label{classNavierStokesProblem_ac519026cc9a3ad11a1a0b702a96aa9ee}} 
+\index{NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}!````~NavierStokesProblem@{$\sim$NavierStokesProblem}}
+\index{````~NavierStokesProblem@{$\sim$NavierStokesProblem}!NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$NavierStokesProblem()}{~NavierStokesProblem()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classNavierStokesProblem}{Navier\+Stokes\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classNavierStokesProblem}{Navier\+Stokes\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line 67 of file mesh\+\_\+from\+\_\+tetgen\+\_\+navier\+\_\+stokes.\+cc.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classNavierStokesProblem_aaf0ba897bf867aeb91dd557a577cb391}\label{classNavierStokesProblem_aaf0ba897bf867aeb91dd557a577cb391}} 
+\index{NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classNavierStokesProblem}{Navier\+Stokes\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Doc the solution after solve. 
+
+
+
+Definition at line 70 of file mesh\+\_\+from\+\_\+tetgen\+\_\+navier\+\_\+stokes.\+cc.
+
+\mbox{\Hypertarget{classNavierStokesProblem_a61feda03c9972cae62cfa1c3486bf17a}\label{classNavierStokesProblem_a61feda03c9972cae62cfa1c3486bf17a}} 
+\index{NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classNavierStokesProblem}{Navier\+Stokes\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve}
+
+
+
+Update the problem specs before solve. 
+
+Set the inflow boundary conditions. 
+
+Definition at line 185 of file mesh\+\_\+from\+\_\+tetgen\+\_\+navier\+\_\+stokes.\+cc.
+
+\mbox{\Hypertarget{classNavierStokesProblem_a220db7388319f4215b54459d32ba784b}\label{classNavierStokesProblem_a220db7388319f4215b54459d32ba784b}} 
+\index{NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classNavierStokesProblem}{Navier\+Stokes\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line 205 of file mesh\+\_\+from\+\_\+tetgen\+\_\+navier\+\_\+stokes.\+cc.
+
+\mbox{\Hypertarget{classNavierStokesProblem_a1d69e5e56711b1132e23b569679f04f6}\label{classNavierStokesProblem_a1d69e5e56711b1132e23b569679f04f6}} 
+\index{NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}}$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classNavierStokesProblem}{Navier\+Stokes\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 86 of file mesh\+\_\+from\+\_\+tetgen\+\_\+navier\+\_\+stokes.\+cc.
+
+
+
+Referenced by Navier\+Stokes\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Problem().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classNavierStokesProblem_af77a241c0eb484c1669b538286d22e18}\label{classNavierStokesProblem_af77a241c0eb484c1669b538286d22e18}} 
+\index{NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!NavierStokesProblem$<$ ELEMENT $>$@{NavierStokesProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Doc\+Info \mbox{\hyperlink{classNavierStokesProblem}{Navier\+Stokes\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc info object. 
+
+
+
+Definition at line 96 of file mesh\+\_\+from\+\_\+tetgen\+\_\+navier\+\_\+stokes.\+cc.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mesh__from__tetgen__navier__stokes_8cc}{mesh\+\_\+from\+\_\+tetgen\+\_\+navier\+\_\+stokes.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,622 @@
+\hypertarget{classoomph_1_1RankFourTensor}{}\doxysection{oomph\+::Rank\+Four\+Tensor$<$ T $>$ Class Template Reference}
+\label{classoomph_1_1RankFourTensor}\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+
+
+A Rank 4 Tensor class.  
+
+
+
+
+{\ttfamily \#include $<$matrices.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RankFourTensor_a1fc311bc9c6ae0d7e2845b743b963e80}{Rank\+Four\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFourTensor_ae1d00ed47ac1c4ce7dd1b8360affeecc}{Rank\+Four\+Tensor}} (const \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}} \&source\+\_\+tensor)
+\begin{DoxyCompactList}\small\item\em Copy constructor\+: Deep copy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}} \& \mbox{\hyperlink{classoomph_1_1RankFourTensor_ada0e9ac228c3515b8d785fdf7bd950a3}{operator=}} (const \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}} \&source\+\_\+tensor)
+\begin{DoxyCompactList}\small\item\em Copy assignement. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFourTensor_abc9c7f196e6a8521ee01a8a656700cc4}{Rank\+Four\+Tensor}} (const unsigned long \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\begin{DoxyCompactList}\small\item\em One parameter constructor produces a nxnxnxn tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFourTensor_a24e7326e6ca5143f47d221ad7f45e7a6}{Rank\+Four\+Tensor}} (const unsigned long \&n\+\_\+index1, const unsigned long \&n\+\_\+index2, const unsigned long \&n\+\_\+index3, const unsigned long \&n\+\_\+index4)
+\begin{DoxyCompactList}\small\item\em Four parameter constructor, general non-\/square tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFourTensor_ac23f09c14842914d318c594a2dd0d424}{Rank\+Four\+Tensor}} (const unsigned long \&n\+\_\+index1, const unsigned long \&n\+\_\+index2, const unsigned long \&n\+\_\+index3, const unsigned long \&n\+\_\+index4, const T \&initial\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Four parameter constructor, general non-\/square tensor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1RankFourTensor_a4165ed9adc8b0c0702a3a6d883cd9844}{$\sim$\+Rank\+Four\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: delete the pointers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor_af70b319deb21a179326460b41def5aff}{resize}} (const unsigned long \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\begin{DoxyCompactList}\small\item\em Resize to a square nxnxnxn tensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor_a57fbad42c64d5e452851730e64a2dfcf}{resize}} (const unsigned long \&n\+\_\+index1, const unsigned long \&n\+\_\+index2, const unsigned long \&n\+\_\+index3, const unsigned long \&n\+\_\+index4)
+\begin{DoxyCompactList}\small\item\em Resize to a general tensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor_a26e0b2c9eb50816ec3f30e6bfeb39293}{resize}} (const unsigned long \&n\+\_\+index1, const unsigned long \&n\+\_\+index2, const unsigned long \&n\+\_\+index3, const unsigned long \&n\+\_\+index4, const T \&initial\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Resize to a general tensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor_ae75018549ea237c4608b41ecc62eef65}{initialise}} (const T \&val)
+\begin{DoxyCompactList}\small\item\em Initialise all values in the tensor to val. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1RankFourTensor_a96a373f0573d4fc37a23a6eaee4c3fec}{nindex1}} () const
+\begin{DoxyCompactList}\small\item\em Return the range of index 1 of the tensor. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1RankFourTensor_a78ffffb217f84535529c6c9cb5d1b91f}{nindex2}} () const
+\begin{DoxyCompactList}\small\item\em Return the range of index 2 of the tensor. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1RankFourTensor_ab9d4f33cb872d48050eb05c879f19011}{nindex3}} () const
+\begin{DoxyCompactList}\small\item\em Return the range of index 3 of the tensor. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1RankFourTensor_a5bf51e7091f081ff09d2ef710131b9e0}{nindex4}} () const
+\begin{DoxyCompactList}\small\item\em Return the range of index 4 of the tensor. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1RankFourTensor_ab156bfb614c94c72d72452812d39897d}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j, const unsigned long \&k, const unsigned long \&l)
+\begin{DoxyCompactList}\small\item\em Overload the round brackets to give access as a(i,j,k,l) \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classoomph_1_1RankFourTensor_ab2319b2c0d1e48c6908b3a51c6105099}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j, const unsigned long \&k, const unsigned long \&l) const
+\begin{DoxyCompactList}\small\item\em Overload a const version for read-\/only access as a(i,j,k,l) \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1RankFourTensor_a07c6ce750dba7430ef8215bbd1f6a307}{raw\+\_\+direct\+\_\+access}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Direct access to internal storage of data in flat-\/packed C-\/style column-\/major format. W\+A\+R\+N\+I\+NG\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. \end{DoxyCompactList}\item 
+const T \& \mbox{\hyperlink{classoomph_1_1RankFourTensor_a92c57d9b49eff2f3bd6759ead3a98414}{raw\+\_\+direct\+\_\+access}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Direct access to internal storage of data in flat-\/packed C-\/style column-\/major format. W\+A\+R\+N\+I\+NG\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor_a4218f2bff16fe393ed704207e39c9b55}{offset}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
+\begin{DoxyCompactList}\small\item\em Caculate the offset in flat-\/packed C-\/style, column-\/major format, required for a given i,j. W\+A\+R\+N\+I\+NG\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor_ad9e629184b51ee7cb8074ce6d3641f36}{range\+\_\+check}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j, const unsigned long \&k, const unsigned long \&l) const
+\begin{DoxyCompactList}\small\item\em Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ \mbox{\hyperlink{classoomph_1_1RankFourTensor_a4e195572c01989507a4be4cfdcd26210}{Tensordata}}
+\begin{DoxyCompactList}\small\item\em Private internal representation as pointer to data. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor_a122b61b1b83d3a8df6976e735b89244c}{N}}
+\begin{DoxyCompactList}\small\item\em 1st Tensor dimension \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor_a0f0e34937940e082dbba6b95383086d5}{M}}
+\begin{DoxyCompactList}\small\item\em 2nd Tensor dimension \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor_ad7c18005b6cb68643c2718e67dd6a0d7}{P}}
+\begin{DoxyCompactList}\small\item\em 3rd Tensor dimension \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor_ae62059ee0897816d899c266ad6c03c8b}{Q}}
+\begin{DoxyCompactList}\small\item\em 4th Tensor dimension \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class oomph\+::\+Rank\+Four\+Tensor$<$ T $>$}
+
+A Rank 4 Tensor class. 
+
+Definition at line 1621 of file matrices.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a1fc311bc9c6ae0d7e2845b743b963e80}\label{classoomph_1_1RankFourTensor_a1fc311bc9c6ae0d7e2845b743b963e80}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!RankFourTensor@{RankFourTensor}}
+\index{RankFourTensor@{RankFourTensor}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFourTensor()}{RankFourTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line 1692 of file matrices.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ae1d00ed47ac1c4ce7dd1b8360affeecc}\label{classoomph_1_1RankFourTensor_ae1d00ed47ac1c4ce7dd1b8360affeecc}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!RankFourTensor@{RankFourTensor}}
+\index{RankFourTensor@{RankFourTensor}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFourTensor()}{RankFourTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ T $>$ \&}]{source\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor\+: Deep copy. 
+
+
+
+Definition at line 1695 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex1(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex2(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex3(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex4(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_abc9c7f196e6a8521ee01a8a656700cc4}\label{classoomph_1_1RankFourTensor_abc9c7f196e6a8521ee01a8a656700cc4}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!RankFourTensor@{RankFourTensor}}
+\index{RankFourTensor@{RankFourTensor}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFourTensor()}{RankFourTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}} (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+One parameter constructor produces a nxnxnxn tensor. 
+
+
+
+Definition at line 1757 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, n, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a24e7326e6ca5143f47d221ad7f45e7a6}\label{classoomph_1_1RankFourTensor_a24e7326e6ca5143f47d221ad7f45e7a6}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!RankFourTensor@{RankFourTensor}}
+\index{RankFourTensor@{RankFourTensor}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFourTensor()}{RankFourTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}} (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n\+\_\+index1,  }\item[{const unsigned long \&}]{n\+\_\+index2,  }\item[{const unsigned long \&}]{n\+\_\+index3,  }\item[{const unsigned long \&}]{n\+\_\+index4 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Four parameter constructor, general non-\/square tensor. 
+
+
+
+Definition at line 1770 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ac23f09c14842914d318c594a2dd0d424}\label{classoomph_1_1RankFourTensor_ac23f09c14842914d318c594a2dd0d424}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!RankFourTensor@{RankFourTensor}}
+\index{RankFourTensor@{RankFourTensor}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFourTensor()}{RankFourTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}} (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n\+\_\+index1,  }\item[{const unsigned long \&}]{n\+\_\+index2,  }\item[{const unsigned long \&}]{n\+\_\+index3,  }\item[{const unsigned long \&}]{n\+\_\+index4,  }\item[{const T \&}]{initial\+\_\+val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Four parameter constructor, general non-\/square tensor. 
+
+
+
+Definition at line 1785 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a4165ed9adc8b0c0702a3a6d883cd9844}\label{classoomph_1_1RankFourTensor_a4165ed9adc8b0c0702a3a6d883cd9844}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!````~RankFourTensor@{$\sim$RankFourTensor}}
+\index{````~RankFourTensor@{$\sim$RankFourTensor}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$RankFourTensor()}{~RankFourTensor()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: delete the pointers. 
+
+
+
+Definition at line 1798 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ae75018549ea237c4608b41ecc62eef65}\label{classoomph_1_1RankFourTensor_ae75018549ea237c4608b41ecc62eef65}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!initialise@{initialise}}
+\index{initialise@{initialise}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::initialise (\begin{DoxyParamCaption}\item[{const T \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialise all values in the tensor to val. 
+
+
+
+Definition at line 1901 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+
+
+Referenced by oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a96a373f0573d4fc37a23a6eaee4c3fec}\label{classoomph_1_1RankFourTensor_a96a373f0573d4fc37a23a6eaee4c3fec}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!nindex1@{nindex1}}
+\index{nindex1@{nindex1}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex1()}{nindex1()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::nindex1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 1 of the tensor. 
+
+
+
+Definition at line 1905 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N.
+
+
+
+Referenced by oomph\+::\+Finite\+Element\+::d\+\_\+dshape\+\_\+eulerian\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator=(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a78ffffb217f84535529c6c9cb5d1b91f}\label{classoomph_1_1RankFourTensor_a78ffffb217f84535529c6c9cb5d1b91f}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!nindex2@{nindex2}}
+\index{nindex2@{nindex2}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex2()}{nindex2()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::nindex2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 2 of the tensor. 
+
+
+
+Definition at line 1908 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M.
+
+
+
+Referenced by oomph\+::\+Finite\+Element\+::d\+\_\+dshape\+\_\+eulerian\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator=(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ab9d4f33cb872d48050eb05c879f19011}\label{classoomph_1_1RankFourTensor_ab9d4f33cb872d48050eb05c879f19011}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!nindex3@{nindex3}}
+\index{nindex3@{nindex3}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex3()}{nindex3()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::nindex3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 3 of the tensor. 
+
+
+
+Definition at line 1911 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P.
+
+
+
+Referenced by oomph\+::\+Finite\+Element\+::d\+\_\+dshape\+\_\+eulerian\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator=(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a5bf51e7091f081ff09d2ef710131b9e0}\label{classoomph_1_1RankFourTensor_a5bf51e7091f081ff09d2ef710131b9e0}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!nindex4@{nindex4}}
+\index{nindex4@{nindex4}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex4()}{nindex4()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::nindex4 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 4 of the tensor. 
+
+
+
+Definition at line 1914 of file matrices.\+h.
+
+
+
+References oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q.
+
+
+
+Referenced by oomph\+::\+Finite\+Element\+::d\+\_\+dshape\+\_\+eulerian\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator=(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a4218f2bff16fe393ed704207e39c9b55}\label{classoomph_1_1RankFourTensor_a4218f2bff16fe393ed704207e39c9b55}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!offset@{offset}}
+\index{offset@{offset}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{offset()}{offset()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::offset (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Caculate the offset in flat-\/packed C-\/style, column-\/major format, required for a given i,j. W\+A\+R\+N\+I\+NG\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. 
+
+
+
+Definition at line 1956 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q.
+
+
+
+Referenced by oomph\+::\+Refineable\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd(), oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure(), and oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ab156bfb614c94c72d72452812d39897d}\label{classoomph_1_1RankFourTensor_ab156bfb614c94c72d72452812d39897d}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T\& \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j,  }\item[{const unsigned long \&}]{k,  }\item[{const unsigned long \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the round brackets to give access as a(i,j,k,l) 
+
+
+
+Definition at line 1917 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::range\+\_\+check(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ab2319b2c0d1e48c6908b3a51c6105099}\label{classoomph_1_1RankFourTensor_ab2319b2c0d1e48c6908b3a51c6105099}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j,  }\item[{const unsigned long \&}]{k,  }\item[{const unsigned long \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload a const version for read-\/only access as a(i,j,k,l) 
+
+
+
+Definition at line 1927 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::range\+\_\+check(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ada0e9ac228c3515b8d785fdf7bd950a3}\label{classoomph_1_1RankFourTensor_ada0e9ac228c3515b8d785fdf7bd950a3}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}\& \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ T $>$ \&}]{source\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy assignement. 
+
+
+
+Definition at line 1723 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, n, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex1(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex2(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex3(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex4(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ad9e629184b51ee7cb8074ce6d3641f36}\label{classoomph_1_1RankFourTensor_ad9e629184b51ee7cb8074ce6d3641f36}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!range\_check@{range\_check}}
+\index{range\_check@{range\_check}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{range\_check()}{range\_check()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::range\+\_\+check (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j,  }\item[{const unsigned long \&}]{k,  }\item[{const unsigned long \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}}. 
+
+
+
+Definition at line 1643 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q.
+
+
+
+Referenced by oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator()().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a07c6ce750dba7430ef8215bbd1f6a307}\label{classoomph_1_1RankFourTensor_a07c6ce750dba7430ef8215bbd1f6a307}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!raw\_direct\_access@{raw\_direct\_access}}
+\index{raw\_direct\_access@{raw\_direct\_access}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{raw\_direct\_access()}{raw\_direct\_access()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T\& \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::raw\+\_\+direct\+\_\+access (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to internal storage of data in flat-\/packed C-\/style column-\/major format. W\+A\+R\+N\+I\+NG\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. 
+
+
+
+Definition at line 1942 of file matrices.\+h.
+
+
+
+References i, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+
+
+Referenced by oomph\+::\+Refineable\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd(), oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd(), oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure(), and oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a92c57d9b49eff2f3bd6759ead3a98414}\label{classoomph_1_1RankFourTensor_a92c57d9b49eff2f3bd6759ead3a98414}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!raw\_direct\_access@{raw\_direct\_access}}
+\index{raw\_direct\_access@{raw\_direct\_access}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{raw\_direct\_access()}{raw\_direct\_access()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T\& \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::raw\+\_\+direct\+\_\+access (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to internal storage of data in flat-\/packed C-\/style column-\/major format. W\+A\+R\+N\+I\+NG\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. 
+
+
+
+Definition at line 1949 of file matrices.\+h.
+
+
+
+References i, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_af70b319deb21a179326460b41def5aff}\label{classoomph_1_1RankFourTensor_af70b319deb21a179326460b41def5aff}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a square nxnxnxn tensor. 
+
+
+
+Definition at line 1801 of file matrices.\+h.
+
+
+
+References n, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::resize().
+
+
+
+Referenced by oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator=(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a57fbad42c64d5e452851730e64a2dfcf}\label{classoomph_1_1RankFourTensor_a57fbad42c64d5e452851730e64a2dfcf}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n\+\_\+index1,  }\item[{const unsigned long \&}]{n\+\_\+index2,  }\item[{const unsigned long \&}]{n\+\_\+index3,  }\item[{const unsigned long \&}]{n\+\_\+index4 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a general tensor. 
+
+
+
+Definition at line 1804 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a26e0b2c9eb50816ec3f30e6bfeb39293}\label{classoomph_1_1RankFourTensor_a26e0b2c9eb50816ec3f30e6bfeb39293}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n\+\_\+index1,  }\item[{const unsigned long \&}]{n\+\_\+index2,  }\item[{const unsigned long \&}]{n\+\_\+index3,  }\item[{const unsigned long \&}]{n\+\_\+index4,  }\item[{const T \&}]{initial\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a general tensor. 
+
+
+
+Definition at line 1852 of file matrices.\+h.
+
+
+
+References i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::M, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::N, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::P, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::Q, oomph\+::\+Element\+Geometry\+::T, and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Tensordata.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a0f0e34937940e082dbba6b95383086d5}\label{classoomph_1_1RankFourTensor_a0f0e34937940e082dbba6b95383086d5}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!M@{M}}
+\index{M@{M}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{M}{M}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::M\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+2nd Tensor dimension 
+
+
+
+Definition at line 1633 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex2(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::offset(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator()(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator=(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::range\+\_\+check(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a122b61b1b83d3a8df6976e735b89244c}\label{classoomph_1_1RankFourTensor_a122b61b1b83d3a8df6976e735b89244c}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!N@{N}}
+\index{N@{N}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::N\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+1st Tensor dimension 
+
+
+
+Definition at line 1630 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex1(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator=(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::range\+\_\+check(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ad7c18005b6cb68643c2718e67dd6a0d7}\label{classoomph_1_1RankFourTensor_ad7c18005b6cb68643c2718e67dd6a0d7}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!P@{P}}
+\index{P@{P}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{P}{P}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::P\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+3rd Tensor dimension 
+
+
+
+Definition at line 1636 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex3(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::offset(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator()(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator=(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::range\+\_\+check(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_ae62059ee0897816d899c266ad6c03c8b}\label{classoomph_1_1RankFourTensor_ae62059ee0897816d899c266ad6c03c8b}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!Q@{Q}}
+\index{Q@{Q}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Q}{Q}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::Q\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+4th Tensor dimension 
+
+
+
+Definition at line 1639 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::nindex4(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::offset(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator()(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator=(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::range\+\_\+check(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1RankFourTensor_a4e195572c01989507a4be4cfdcd26210}\label{classoomph_1_1RankFourTensor_a4e195572c01989507a4be4cfdcd26210}} 
+\index{oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}!Tensordata@{Tensordata}}
+\index{Tensordata@{Tensordata}!oomph::RankFourTensor$<$ T $>$@{oomph::RankFourTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Tensordata}{Tensordata}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \mbox{\hyperlink{classoomph_1_1RankFourTensor}{oomph\+::\+Rank\+Four\+Tensor}}$<$ T $>$\+::Tensordata\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Private internal representation as pointer to data. 
+
+
+
+Definition at line 1627 of file matrices.\+h.
+
+
+
+Referenced by oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::initialise(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::operator()(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::\+Rank\+Four\+Tensor(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::resize(), and oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::$\sim$\+Rank\+Four\+Tensor().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{matrices_8h}{matrices.\+h}}\end{DoxyCompactItemize}

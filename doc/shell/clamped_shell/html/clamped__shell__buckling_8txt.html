@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: clamped_shell_buckling.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">clamped_shell_buckling.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceR__"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceR__.html">R_</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a491d5b8f30003197a78dba957661a38e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> = -T/R \f$. We use geometrical arguments to calculate the radius of the circle, \f$ R=2\<a class="el" href="clamped__shell__buckling_8txt.html#ad6f2445261b8b8c8b3618e9d6c022d20">sin\alpha</a>/L \f$</td></tr>
+<tr class="separator:a491d5b8f30003197a78dba957661a38e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af651d094fafbc27819a31da8cb115c20"><td class="memItemLeft" align="right" valign="top">and a double that stores the undeformed length of the beam dontinclude tensioned_string cc skipline start_of_problem_class until end of <a class="el" href="clamped__shell__buckling_8txt.html#a02b6a4d549a097d9fb1c023e5f07eb4b">problem</a> class HR&lt; HR &gt; section constructor The Problem constructor We start by creating the undeformed midplane of the beam a&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#af651d094fafbc27819a31da8cb115c20">StraightLine</a> (one of \c oomph-lib 's standard geometric objects). \skipline start_of_constructor \until Undef_beam_pt We then const ruct the a one-dimensional Lagrangian mesh in two-dimensional space</td></tr>
+<tr class="separator:af651d094fafbc27819a31da8cb115c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a02b6a4d549a097d9fb1c023e5f07eb4b"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a02b6a4d549a097d9fb1c023e5f07eb4b">problem</a></td></tr>
+<tr class="separator:a02b6a4d549a097d9fb1c023e5f07eb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6f2445261b8b8c8b3618e9d6c022d20"><td class="memItemLeft" align="right" valign="top">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#ad6f2445261b8b8c8b3618e9d6c022d20">alpha</a></td></tr>
+<tr class="separator:ad6f2445261b8b8c8b3618e9d6c022d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa5a18d292e1d7e18b6a01f0aef9dc4f"><td class="memItemLeft" align="right" valign="top">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> which include both stretching and bending effects In the standard&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#afa5a18d292e1d7e18b6a01f0aef9dc4f">formulation</a></td></tr>
+<tr class="separator:afa5a18d292e1d7e18b6a01f0aef9dc4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a8573b4cdc090cf5539cc567620d49f"><td class="memItemLeft" align="right" valign="top">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> which include both stretching and bending effects In the standard the displacements are unknowns and the external&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a></td></tr>
+<tr class="separator:a7a8573b4cdc090cf5539cc567620d49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11cfe1f14c4f9924f0356cb203382aea"><td class="memItemLeft" align="right" valign="top">the isosceles triangle f $ACE f may be used to determine the angle f which include both stretching and bending effects In the standard the displacements are unknowns and the external f $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a></td></tr>
+<tr class="separator:a11cfe1f14c4f9924f0356cb203382aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cfca6ebab26cef9345f5bd8037cc7e8"><td class="memItemLeft" align="right" valign="top">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> which include both stretching and bending effects In the standard the displacements are unknowns and the external <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> is prescribed in a <a class="el" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a> function In an&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a2cfca6ebab26cef9345f5bd8037cc7e8">alternative</a></td></tr>
+<tr class="separator:a2cfca6ebab26cef9345f5bd8037cc7e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05a2d940a687a9f897f73ac943466633"><td class="memItemLeft" align="right" valign="top">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> which include both stretching and bending effects In the standard the displacements are unknowns and the external <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> is prescribed in a <a class="el" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a> function In an <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a></td></tr>
+<tr class="separator:a05a2d940a687a9f897f73ac943466633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5231019c174cff35375bf4b170d26f95"><td class="memItemLeft" align="right" valign="top">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> which include both stretching and bending effects In the standard the displacements are unknowns and the external <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> is prescribed in a <a class="el" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a> function In an displacement the displacements at a particular position is prescribed and the <a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a> becomes an unknown Displacement <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> is often essential problems in which buckling occurs through a sub critical bifurcation The driver code&lt; A HREF=&quot;../../../../demo_drivers/beam/tensioned_string/tensioned_string.cc&quot;&gt; tensioned_string cc&lt;/A &gt; is written so that either the external <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> or the mid point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a></td></tr>
+<tr class="separator:a5231019c174cff35375bf4b170d26f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f48b3e53742ad47880765d4c6acaad2"><td class="memItemLeft" align="right" valign="top">the dimensionless pre&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a5f48b3e53742ad47880765d4c6acaad2">stress</a></td></tr>
+<tr class="separator:a5f48b3e53742ad47880765d4c6acaad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e4fe702f85d0eb54ac50dc6a850b9f"><td class="memItemLeft" align="right" valign="top">the dimensionless pre <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#ab7e4fe702f85d0eb54ac50dc6a850b9f">sigma_</a> {0}\f$</td></tr>
+<tr class="separator:ab7e4fe702f85d0eb54ac50dc6a850b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a018f990526757b6bf7c8020a8ca96f1b"><td class="memItemLeft" align="right" valign="top">the dimensionless pre <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> a pointer to the <a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a></td></tr>
+<tr class="separator:a018f990526757b6bf7c8020a8ca96f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e89de6fabcfc03c00dfefff9a4fbd37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> the mid point <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a5e89de6fabcfc03c00dfefff9a4fbd37">parameter</a></td></tr>
+<tr class="separator:a5e89de6fabcfc03c00dfefff9a4fbd37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76b2814cb8a971839d657856664fe1d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> the mid point <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> if&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a76b2814cb8a971839d657856664fe1d0">false</a></td></tr>
+<tr class="separator:a76b2814cb8a971839d657856664fe1d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92638e5335c84b7b43e5fdd974a681c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> the mid point <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> if the external <a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> <a class="el" href="clamped__shell__buckling_8txt.html#a5e89de6fabcfc03c00dfefff9a4fbd37">parameter</a> The final call is to the function only two of which are non&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a92638e5335c84b7b43e5fdd974a681c8">trivial</a></td></tr>
+<tr class="separator:a92638e5335c84b7b43e5fdd974a681c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70e030baca043b118cd35695e4fe7ed3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> the mid point <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> if the external <a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> <a class="el" href="clamped__shell__buckling_8txt.html#a5e89de6fabcfc03c00dfefff9a4fbd37">parameter</a> The final call is to the function only two of which are non described in ref param In the present the functions c Problem::actions_before_newton_solve() and \c Problem a pointer to a GeomObject that represents the beam s undeformed&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clamped__shell__buckling_8txt.html#a70e030baca043b118cd35695e4fe7ed3">geometry</a></td></tr>
+<tr class="separator:a70e030baca043b118cd35695e4fe7ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a491d5b8f30003197a78dba957661a38e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a491d5b8f30003197a78dba957661a38e">&#9670;&nbsp;</a></span>P</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> =  -T/R \f$. We use geometrical arguments to calculate the radius of the circle, \f$ R = 2\<a class="el" href="clamped__shell__buckling_8txt.html#ad6f2445261b8b8c8b3618e9d6c022d20">sin\alpha</a>/L \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00045">45</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="af651d094fafbc27819a31da8cb115c20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af651d094fafbc27819a31da8cb115c20">&#9670;&nbsp;</a></span>StraightLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and a double that stores the undeformed length of the beam dontinclude tensioned_string cc skipline start_of_problem_class until end of <a class="el" href="clamped__shell__buckling_8txt.html#a02b6a4d549a097d9fb1c023e5f07eb4b">problem</a> class HR&lt;HR&gt; section constructor The Problem constructor We start by creating the undeformed midplane of the beam a StraightLine </td>
+          <td>(</td>
+          <td class="paramtype">one of \c oomph-lib 's standard geometric&#160;</td>
+          <td class="paramname"><em>objects</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ad6f2445261b8b8c8b3618e9d6c022d20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6f2445261b8b8c8b3618e9d6c022d20">&#9670;&nbsp;</a></span>alpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> alpha</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= \pi - 2<a class="code" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">\beta\f</a>$. It follows <a class="code" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">that</a></div>
+<div class="line"><a class="code" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea"> \f</a>[<a class="code" href="clamped__shell__buckling_8txt.html#ad6f2445261b8b8c8b3618e9d6c022d20">\tan\alpha</a> = \tan(\pi -</div>
+<div class="line"> 2\beta) = - \tan 2\beta = \frac{2\tan\beta}{\tan^{2}\beta -1}, <a class="code" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">\f</a>]</div>
+<div class="line"> <a class="code" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">where \f</a>$\tan\beta</div>
+<div class="line"> = 2d/<a class="code" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">L\f</a>$ <a class="code" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">and \f</a><a class="code" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">$d\f</a>$ is the vertical <a class="code" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> of the</div>
+<div class="line"> mid-point of the beam. </div>
+<div class="line"> The <a class="code" href="clamped__shell__buckling_8txt.html#a5f48b3e53742ad47880765d4c6acaad2">stress</a> is calculated <span class="keyword">using</span> Hooke<span class="stringliteral">&#39;s law and the tension is</span></div>
+<div class="line"><span class="stringliteral"> the stress multiplied by the width of the beam:</span></div>
+<div class="line"><span class="stringliteral">\f[ T = \sigma_{0} \frac{h}{R_{0}} \frac{2\alpha R}{L}, \f]</span></div>
+<div class="line"><span class="stringliteral"> and so</span></div>
+<div class="line"><span class="stringliteral"> \f[ P = - T/R = \sigma_{0} \frac{h}{R_{0}} \frac{2\alpha}{L} \f]</span></div>
+<div class="line"><span class="stringliteral"> </span></div>
+<div class="line"><span class="stringliteral"> We shall solve the above problem numerically using \c oomph-lib&#39;</span>s</div>
+<div class="line"> KirchhoffBeamElements</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00047">47</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2cfca6ebab26cef9345f5bd8037cc7e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cfca6ebab26cef9345f5bd8037cc7e8">&#9670;&nbsp;</a></span>alternative</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> which include both stretching and bending effects In the standard the displacements are unknowns and the external <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> is prescribed in a <a class="el" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a> function In an alternative</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00063">63</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a05a2d940a687a9f897f73ac943466633"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05a2d940a687a9f897f73ac943466633">&#9670;&nbsp;</a></span>control</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> which include both stretching and bending effects In the standard the displacements are unknowns and the external <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> is prescribed in a <a class="el" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a> function In an <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> control</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00063">63</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a5231019c174cff35375bf4b170d26f95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5231019c174cff35375bf4b170d26f95">&#9670;&nbsp;</a></span>displacement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the dimensionless pre <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> a pointer to the <a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a> <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> and a variable that will be used to specify the prescribed position of the mid point displacement</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00070">70</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a11cfe1f14c4f9924f0356cb203382aea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11cfe1f14c4f9924f0356cb203382aea">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the dimensionless pre f a pointer to the <a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a> f $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00062">62</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__clamped__curved__shell_8cc_source.html#l00638">oomph::MyShellEquations&lt; DIM, NNODE_1D &gt;::fill_in_generic_residual_contribution_shell()</a>.</p>
+
+</div>
+</div>
+<a id="a76b2814cb8a971839d657856664fe1d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76b2814cb8a971839d657856664fe1d0">&#9670;&nbsp;</a></span>false</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> the mid point <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> if false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00098">98</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="afa5a18d292e1d7e18b6a01f0aef9dc4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa5a18d292e1d7e18b6a01f0aef9dc4f">&#9670;&nbsp;</a></span>formulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> which include both stretching and bending effects In the standard the displacements are unknowns and the external <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> is prescribed in a <a class="el" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a> function In an <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> formulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00061">61</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a70e030baca043b118cd35695e4fe7ed3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70e030baca043b118cd35695e4fe7ed3">&#9670;&nbsp;</a></span>geometry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> the mid point <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> if the external <a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> <a class="el" href="clamped__shell__buckling_8txt.html#a5e89de6fabcfc03c00dfefff9a4fbd37">parameter</a> The final call is to the function only two of which are non described in ref param In the present the functions c Problem::actions_before_newton_solve () and \c Problem a pointer to a GeomObject that represents the beam s undeformed geometry</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00118">118</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a018f990526757b6bf7c8020a8ca96f1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a018f990526757b6bf7c8020a8ca96f1b">&#9670;&nbsp;</a></span>load</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace also contains the function c ConstPressureForBeam::load</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00079">79</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="clamped__shell_8cc_source.html#l00071">Global_Physical_Variables::press_load()</a>.</p>
+
+</div>
+</div>
+<a id="a5e89de6fabcfc03c00dfefff9a4fbd37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e89de6fabcfc03c00dfefff9a4fbd37">&#9670;&nbsp;</a></span>parameter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> the mid point <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> parameter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00098">98</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7a8573b4cdc090cf5539cc567620d49f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a8573b4cdc090cf5539cc567620d49f">&#9670;&nbsp;</a></span>pressure</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the isosceles triangle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $ACE <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> may be used to determine the angle <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> which include both stretching and bending effects In the standard the displacements are unknowns and the external <a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> $<a class="el" href="clamped__shell__buckling_8txt.html#a491d5b8f30003197a78dba957661a38e">P</a> is prescribed in a <a class="el" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a> function In an <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> the displacements at a particular position is prescribed and the pressure becomes an unknown Displacement <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> is often essential problems in which buckling occurs through a sub critical bifurcation The driver code&lt; A HREF=&quot;../../../../demo_drivers/beam/tensioned_string/tensioned_string.cc&quot;&gt; tensioned_string cc&lt;/A &gt; is written so that either the external pressure</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00062">62</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a02b6a4d549a097d9fb1c023e5f07eb4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02b6a4d549a097d9fb1c023e5f07eb4b">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> the mid point <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> if the external <a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> <a class="el" href="clamped__shell__buckling_8txt.html#a5e89de6fabcfc03c00dfefff9a4fbd37">parameter</a> The final call is to the function only two of which are non described in ref param In the present problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00003">3</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="clamped__shell_8cc_source.html#l00540">main()</a>.</p>
+
+</div>
+</div>
+<a id="ab7e4fe702f85d0eb54ac50dc6a850b9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7e4fe702f85d0eb54ac50dc6a850b9f">&#9670;&nbsp;</a></span>sigma_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> sigma_ {0}\f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00079">79</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a5f48b3e53742ad47880765d4c6acaad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f48b3e53742ad47880765d4c6acaad2">&#9670;&nbsp;</a></span>stress</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the dimensionless pre stress</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00078">78</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+<a id="a92638e5335c84b7b43e5fdd974a681c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92638e5335c84b7b43e5fdd974a681c8">&#9670;&nbsp;</a></span>trivial</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a> the mid point <a class="el" href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> if the external <a class="el" href="clamped__shell__buckling_8txt.html#a7a8573b4cdc090cf5539cc567620d49f">pressure</a> will be the <a class="el" href="clamped__shell__buckling_8txt.html#a05a2d940a687a9f897f73ac943466633">control</a> <a class="el" href="clamped__shell__buckling_8txt.html#a5e89de6fabcfc03c00dfefff9a4fbd37">parameter</a> The final call is to the function only two of which are non trivial</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="clamped__shell__buckling_8txt_source.html#l00114">114</a> of file <a class="el" href="clamped__shell__buckling_8txt_source.html">clamped_shell_buckling.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aclamped__shell__buckling_8txt_html_a5231019c174cff35375bf4b170d26f95"><div class="ttname"><a href="clamped__shell__buckling_8txt.html#a5231019c174cff35375bf4b170d26f95">displacement</a></div><div class="ttdeci">the isosceles triangle f $ACE f may be used to determine the angle f which include both stretching and bending effects In the standard the displacements are unknowns and the external f $P is prescribed in a load function In an displacement the displacements at a particular position is prescribed and the pressure becomes an unknown Displacement control is often essential problems in which buckling occurs through a sub critical bifurcation The driver code&lt; A HREF=&quot;../../../../demo_drivers/beam/tensioned_string/tensioned_string.cc&quot;&gt; tensioned_string cc&lt;/A &gt; is written so that either the external f $P or the mid point displacement</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell__buckling_8txt_source.html#l00070">clamped_shell_buckling.txt:70</a></div></div>
+<div class="ttc" id="aclamped__shell__buckling_8txt_html_ad6f2445261b8b8c8b3618e9d6c022d20"><div class="ttname"><a href="clamped__shell__buckling_8txt.html#ad6f2445261b8b8c8b3618e9d6c022d20">alpha</a></div><div class="ttdeci">the isosceles triangle f $ACE f may be used to determine the angle f alpha</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell__buckling_8txt_source.html#l00047">clamped_shell_buckling.txt:47</a></div></div>
+<div class="ttc" id="aclamped__shell__buckling_8txt_html_a5f48b3e53742ad47880765d4c6acaad2"><div class="ttname"><a href="clamped__shell__buckling_8txt.html#a5f48b3e53742ad47880765d4c6acaad2">stress</a></div><div class="ttdeci">the dimensionless pre stress</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell__buckling_8txt_source.html#l00078">clamped_shell_buckling.txt:78</a></div></div>
+<div class="ttc" id="aclamped__shell__buckling_8txt_html_a11cfe1f14c4f9924f0356cb203382aea"><div class="ttname"><a href="clamped__shell__buckling_8txt.html#a11cfe1f14c4f9924f0356cb203382aea">f</a></div><div class="ttdeci">the isosceles triangle f $ACE f may be used to determine the angle f which include both stretching and bending effects In the standard the displacements are unknowns and the external f $P f</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell__buckling_8txt_source.html#l00062">clamped_shell_buckling.txt:62</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:14:42
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

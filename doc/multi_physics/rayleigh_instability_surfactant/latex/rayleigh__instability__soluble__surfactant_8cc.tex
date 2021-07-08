@@ -1,0 +1,61 @@
+\hypertarget{rayleigh__instability__soluble__surfactant_8cc}{}\doxysection{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc File Reference}
+\label{rayleigh__instability__soluble__surfactant_8cc}\index{rayleigh\_instability\_soluble\_surfactant.cc@{rayleigh\_instability\_soluble\_surfactant.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\item 
+class \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::G}} (3)
+\begin{DoxyCompactList}\small\item\em Direction of gravity. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code for single fluid axisymmetric horizontal interface problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a012c14d34c5c0e65d114711c34a4361e}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha\+\_\+absorption}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Alpha for absorption kinetics. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9da8be10d9e20eb0329af7fd8d6e0e98}{Global\+\_\+\+Physical\+\_\+\+Variables\+::K}} = 0.\+01
+\begin{DoxyCompactList}\small\item\em K parameter that describes solubility number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af252119266d6a28d2111d9d52bf59e87}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pe}} = 10000.\+0
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0d381c0d7044e78db412ca695e1edca0}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pe\+St}} = Pe
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66121b333d26605f8f30ad916d8082f0}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pe\+\_\+reference\+\_\+scale}} =1.\+0
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5fdab26ae05957e84318279a47f71bde}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Diff}} = 1.\+0/Pe
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{rayleigh__instability__soluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{rayleigh__instability__soluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{rayleigh\_instability\_soluble\_surfactant.cc@{rayleigh\_instability\_soluble\_surfactant.cc}!main@{main}}
+\index{main@{main}!rayleigh\_instability\_soluble\_surfactant.cc@{rayleigh\_instability\_soluble\_surfactant.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code for single fluid axisymmetric horizontal interface problem. 
+
+Maximum time
+
+Duration of timestep
+
+Definition at line 943 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+
+
+
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G(), and Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::unsteady\+\_\+run().
+

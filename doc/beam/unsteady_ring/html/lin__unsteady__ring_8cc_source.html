@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: lin_unsteady_ring.cc Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_ddb094a380b94394dbbcf95a63b535e6.html">demo_drivers</a></li><li class="navelem"><a class="el" href="dir_74eb9d4bd38af196d0ea20e2b0c80a1e.html">beam</a></li><li class="navelem"><a class="el" href="dir_309cde8abc437df16bdafa4e147940f5.html">unsteady_ring</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">lin_unsteady_ring.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="lin__unsteady__ring_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//Driver for small amplitude ring oscillations</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//OOMPH-LIB includes</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;beam.h&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;meshes/one_d_lagrangian_mesh.h&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using namespace </span>oomph;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//====start_of_namespace============================</span><span class="comment"></span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span><span class="comment">//==================================================</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html">   45</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> /// Flag for long/short run: Default =  perform long run</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">   49</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Long_run_flag</a>=1;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> /// \short Flag for fixed timestep: Default = fixed timestep</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">   52</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Fixed_timestep_flag</a>=1;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> /// \short Boolean flag to decide if to set IC for Newmark</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> /// directly or consistently : No Default</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">   56</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Consistent_newmark_ic</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// end of namespace</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">//==start_of_problem_class==============================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/// Oscillating ring problem: Compare small-amplitude oscillations</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/// against analytical solution of the linearised equations.</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html">   71</a></span>&#160;<span class="keyword">class </span><a class="code" href="classElasticRingProblem.html">ElasticRingProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> /// \short Constructor: Number of elements, length of domain, flag for</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> /// setting Newmark IC directly or consistently</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span> <a class="code" href="classElasticRingProblem.html">ElasticRingProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;N, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;L);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    <span class="comment"></span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> /// Access function for the mesh</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#a763200d4985bca4a120f2be2a217f4a8">   81</a></span>&#160;<span class="comment"></span> OneDLagrangianMesh&lt;ELEMENT&gt;* <a class="code" href="classElasticRingProblem.html#a763200d4985bca4a120f2be2a217f4a8">mesh_pt</a>() </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>OneDLagrangianMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(Problem::mesh_pt());</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> /// Update function is empty </span></div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#ab0eb0dcecfa7e9c9e52ecf319f6e873e">   87</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#ab0eb0dcecfa7e9c9e52ecf319f6e873e">actions_after_newton_solve</a>() {}</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> /// Update function is empty </span></div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#aac5f3adac1e1a42492bd428eeb732a3d">   90</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#aac5f3adac1e1a42492bd428eeb732a3d">actions_before_newton_solve</a>() {}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> /// Doc solution</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> doc_solution(DocInfo&amp; doc_info);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> /// Do unsteady run</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> unsteady_run();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"> /// Length of domain (in terms of the Lagrangian coordinates)</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#a74aac22a4e8673b1e58c024610f8220f">  101</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classElasticRingProblem.html#a74aac22a4e8673b1e58c024610f8220f">Length</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> /// \short In which element are we applying displacement control?</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"> /// (here only used for doc of radius)</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#aba78b855677ef08ea3d9678dcde8a71b">  105</a></span>&#160;<span class="comment"></span> ELEMENT* <a class="code" href="classElasticRingProblem.html#aba78b855677ef08ea3d9678dcde8a71b">Displ_control_elem_pt</a>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"> /// At what local coordinate are we applying displacement control?</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#a0acfcb485441bbe0c9e4202d8a5e72d3">  108</a></span>&#160;<span class="comment"></span> Vector&lt;double&gt; <a class="code" href="classElasticRingProblem.html#a0acfcb485441bbe0c9e4202d8a5e72d3">S_displ_control</a>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"> /// Pointer to geometric object that represents the undeformed shape</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#ab0f0f02cc67dcabfc38f051e3d3cebfc">  111</a></span>&#160;<span class="comment"></span> GeomObject* <a class="code" href="classElasticRingProblem.html#ab0f0f02cc67dcabfc38f051e3d3cebfc">Undef_geom_pt</a>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"> /// \short Pointer to object that specifies the initial condition</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#a0d314051b66afb53fa7f28c298f38206">  114</a></span>&#160;<span class="comment"></span> SolidInitialCondition* <a class="code" href="classElasticRingProblem.html#a0d314051b66afb53fa7f28c298f38206">IC_pt</a>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> /// Trace file for recording control data</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#a7f0f8c10b57021446e19c5833863cc7f">  117</a></span>&#160;<span class="comment"></span> ofstream <a class="code" href="classElasticRingProblem.html#a7f0f8c10b57021446e19c5833863cc7f">Trace_file</a>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}; <span class="comment">// end of problem class</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">//===start_of_constructor===============================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">/// Constructor for elastic ring problem</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<a class="code" href="classElasticRingProblem.html#a57be33a379c1ec4418a7fb3e8db8ef2b">ElasticRingProblem&lt;ELEMENT,TIMESTEPPER&gt;::ElasticRingProblem</a></div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#a57be33a379c1ec4418a7fb3e8db8ef2b">  128</a></span>&#160;(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; N, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; L) </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; : Length(L)</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;{</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; <span class="comment">//Allocate the timestepper -- This constructs the time object as well</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; add_time_stepper_pt(<span class="keyword">new</span> TIMESTEPPER());</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; <span class="comment">// Undeformed beam is an elliptical ring </span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; Undef_geom_pt=<span class="keyword">new</span> Ellipse(1.0,1.0); </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; <span class="comment">//Now create the (Lagrangian!) mesh</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; Problem::mesh_pt() = <span class="keyword">new</span> OneDLagrangianMesh&lt;ELEMENT&gt;(</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  N,L,Undef_geom_pt,Problem::time_stepper_pt()); </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; <span class="comment">// Boundary condition: </span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; <span class="comment">// Bottom: </span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; <span class="keywordtype">unsigned</span> ibound=0;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; <span class="comment">// No vertical displacement</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(1); </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; <span class="comment">// Zero slope: Pin type 1 dof for displacement direction 0 </span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(1,0);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; <span class="comment">// Top: </span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; ibound=1;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; <span class="comment">// No horizontal displacement</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(0); </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; <span class="comment">// Zero slope: Pin type 1 dof for displacement direction 1</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(1,1); </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; <span class="comment">// Resize vector of local coordinates for control displacement</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; <span class="comment">// (here only used to identify the point whose displacement we&#39;re</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; <span class="comment">// tracing)</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; S_displ_control.resize(1);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; <span class="comment">// Complete build of all elements so they are fully functional</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; <span class="comment">// -----------------------------------------------------------</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; <span class="comment">// Find number of elements in mesh</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; <span class="keywordtype">unsigned</span> Nelement = mesh_pt()-&gt;nelement();</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; <span class="comment">// Loop over the elements to set pointer to undeformed wall shape</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;Nelement;i++)</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;   <span class="comment">// Cast to proper element type</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;   ELEMENT *elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;   <span class="comment">// Assign the undeformed surface</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;   elem_pt-&gt;undeformed_beam_pt() = Undef_geom_pt;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; <span class="comment">// Establish control displacment: (even though no displacement </span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; <span class="comment">// control is applied we still want to doc the displacement at the same point)</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; <span class="comment">// Choose element: (This is the last one)</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; Displ_control_elem_pt=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  mesh_pt()-&gt;element_pt(Nelement-1));</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; <span class="comment">// Fix/doc the displacement in the vertical (1) direction at right end of</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; <span class="comment">// the control element</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; S_displ_control[0]=1.0;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; <span class="comment">// Do equation numbering</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; cout &lt;&lt; <span class="stringliteral">&quot;# of dofs &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; <span class="comment">// Geometric object that specifies the initial conditions</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; <span class="keywordtype">double</span> eps_buckl=1.0e-2;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; <span class="keywordtype">double</span> HoR=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(0))-&gt;h();</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; <span class="keywordtype">unsigned</span> n_buckl=2;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; <span class="keywordtype">unsigned</span> imode=2;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; GeomObject* ic_geom_object_pt=</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keyword">new</span> PseudoBucklingRing(eps_buckl,HoR,n_buckl,imode,</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                         Problem::time_stepper_pt()); </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; <span class="comment">// Setup object that specifies the initial conditions:</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; IC_pt = <span class="keyword">new</span> SolidInitialCondition(ic_geom_object_pt);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;} <span class="comment">// end of constructor</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">//===start_of_doc_solution================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">/// Document solution</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00213"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#a9aa904e4cf82d45711f890cd8440ced9">  213</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#a9aa904e4cf82d45711f890cd8440ced9">ElasticRingProblem&lt;ELEMENT, TIMESTEPPER&gt;::doc_solution</a>(</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; DocInfo&amp; doc_info)</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;{ </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; cout &lt;&lt; <span class="stringliteral">&quot;Doc-ing step &quot;</span> &lt;&lt;  doc_info.number()</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;      &lt;&lt; <span class="stringliteral">&quot; for time &quot;</span> &lt;&lt; time_stepper_pt()-&gt;time_pt()-&gt;time() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; <span class="comment">// Loop over all elements to get global kinetic and potential energy</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; <span class="keywordtype">unsigned</span> Nelem=mesh_pt()-&gt;nelement();</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; <span class="keywordtype">double</span> global_kin=0;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; <span class="keywordtype">double</span> global_pot=0;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; <span class="keywordtype">double</span> pot,kin;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ielem=0;ielem&lt;Nelem;ielem++)</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  {</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(ielem))-&gt;get_energy(pot,kin);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;   global_kin+=kin;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;   global_pot+=pot;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; <span class="comment">// Control displacement for initial condition object</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; Vector&lt;double&gt; xi_ctrl(1);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; Vector&lt;double&gt; posn_ctrl(2);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; <span class="comment">// Lagrangian coordinate of control point</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; xi_ctrl[0]=Displ_control_elem_pt-&gt;interpolated_xi(S_displ_control,0);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; <span class="comment">// Get position</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; IC_pt-&gt;geom_object_pt()-&gt;position(xi_ctrl,posn_ctrl);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; <span class="comment">// Write trace file: Time, control position, energies</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; Trace_file &lt;&lt; time_pt()-&gt;time()  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            &lt;&lt; Displ_control_elem_pt-&gt;interpolated_x(S_displ_control,1) </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; global_pot  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; global_kin</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; global_pot + global_kin </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; posn_ctrl[1]</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            &lt;&lt; std::endl; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; ofstream some_file;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; <span class="comment">// Number of plot points</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; <span class="comment">// Output solution </span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; sprintf(filename,<span class="stringliteral">&quot;%s/ring%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;         doc_info.number());</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; some_file.open(filename);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; some_file.close();</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; <span class="comment">// Loop over all elements do dump out previous solutions</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; <span class="keywordtype">unsigned</span> nsteps=time_stepper_pt()-&gt;nprev_values();</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>=0;<a class="code" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&lt;=nsteps;<a class="code" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>++)</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  {     </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;   sprintf(filename,<span class="stringliteral">&quot;%s/ring%i-%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;           doc_info.number(),<a class="code" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;   some_file.open(filename);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;   <span class="keywordtype">unsigned</span> Nelem=mesh_pt()-&gt;nelement();</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ielem=0;ielem&lt;Nelem;ielem++)</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    {</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;     <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(ielem))-&gt;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;      output(<a class="code" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>,some_file,npts);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;   some_file.close();</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  }</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; <span class="comment">// Output for initial condition object</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; sprintf(filename,<span class="stringliteral">&quot;%s/ic_ring%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;         doc_info.number());</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; some_file.open(filename);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; <span class="keywordtype">unsigned</span> nplot=1+(npts-1)*mesh_pt()-&gt;nelement();</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; Vector&lt;double&gt; xi(1);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; Vector&lt;double&gt; posn(2);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; Vector&lt;double&gt; veloc(2);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; Vector&lt;double&gt; accel(2);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> iplot=0;iplot&lt;nplot;iplot++)</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  {</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;   xi[0]=Length/double(nplot-1)*double(iplot);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;   IC_pt-&gt;geom_object_pt()-&gt;position(xi,posn);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;   IC_pt-&gt;geom_object_pt()-&gt;dposition_dt(xi,1,veloc);</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;   IC_pt-&gt;geom_object_pt()-&gt;dposition_dt(xi,2,accel);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;   some_file &lt;&lt; posn[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; posn[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;             &lt;&lt; xi[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;             &lt;&lt; veloc[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; veloc[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;             &lt;&lt; accel[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; accel[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;             &lt;&lt; sqrt(pow(posn[0],2)+pow(posn[1],2)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;             &lt;&lt; sqrt(pow(veloc[0],2)+pow(veloc[1],2)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;             &lt;&lt; sqrt(pow(accel[0],2)+pow(accel[1],2)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;             &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  }</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; some_file.close();</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;} <span class="comment">// end of doc solution</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">//===start_of_unsteady_run=================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">/// Solver loop to perform unsteady run</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="classElasticRingProblem.html#acd30c4363ffedbaadc1523aa8b85523b">  320</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#acd30c4363ffedbaadc1523aa8b85523b">ElasticRingProblem&lt;ELEMENT,TIMESTEPPER&gt;::unsteady_run</a>()</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;{</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment"> /// Label for output</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment"></span> DocInfo doc_info;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; <span class="comment">// Output directory</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; <span class="comment">// Step number</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; doc_info.number()=0;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; <span class="comment">// Set up trace file</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; sprintf(filename,<span class="stringliteral">&quot;%s/trace_ring.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; Trace_file.open(filename);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; Trace_file &lt;&lt;  <span class="stringliteral">&quot;VARIABLES=\&quot;time\&quot;,\&quot;R&lt;sub&gt;ctrl&lt;/sub&gt;\&quot;,\&quot;E&lt;sub&gt;pot&lt;/sub&gt;\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;E&lt;sub&gt;kin&lt;/sub&gt;\&quot;,\&quot;E&lt;sub&gt;kin&lt;/sub&gt;+E&lt;sub&gt;pot&lt;/sub&gt;\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;&lt;sub&gt;exact&lt;/sub&gt;R&lt;sub&gt;ctrl&lt;/sub&gt;\&quot;&quot;</span> </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; <span class="comment">// Number of steps</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; <span class="keywordtype">unsigned</span> nstep=600; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; <span class="keywordflow">if</span> (<a class="code" href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Global_Physical_Variables::Long_run_flag</a>==0) {nstep=10;}</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; <span class="comment">// Initial timestep</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; <span class="keywordtype">double</span> dt=1.0;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; <span class="comment">// Ratio for timestep reduction</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; <span class="keywordtype">double</span> timestep_ratio=1.0;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; <span class="keywordflow">if</span> (<a class="code" href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Global_Physical_Variables::Fixed_timestep_flag</a>==0) {timestep_ratio=0.995;}</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; <span class="comment">// Number of previous timesteps stored</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; <span class="keywordtype">unsigned</span> ndt=time_stepper_pt()-&gt;time_pt()-&gt;ndt();</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; <span class="comment">// Setup vector of &quot;previous&quot; timesteps</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; Vector&lt;double&gt; dt_prev(ndt);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; dt_prev[0]=dt; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=1;i&lt;ndt;i++)</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;  {</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;   dt_prev[i]=dt_prev[i-1]/timestep_ratio;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  }</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; <span class="comment">// Initialise the history of previous timesteps</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; time_pt()-&gt;initialise_dt(dt_prev);</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; <span class="comment">// Initialise time</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; <span class="keywordtype">double</span> time0=10.0;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; time_pt()-&gt;time()=time0;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; <span class="comment">// Setup analytical initial condition?</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; <span class="keywordflow">if</span> (<a class="code" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>)</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  {</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;   <span class="comment">// Note: Time has been scaled on intrinsic timescale so</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;   <span class="comment">// we don&#39;t need to specify a multiplier for the inertia</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;   <span class="comment">// terms (the default assignment of 1.0 is OK)</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;   SolidMesh::Solid_IC_problem.</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    set_newmark_initial_condition_consistently(</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;     <span class="keyword">this</span>,mesh_pt(),<span class="keyword">static_cast&lt;</span>TIMESTEPPER*<span class="keyword">&gt;</span>(time_stepper_pt()),IC_pt,dt);</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  }</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;  {</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;   SolidMesh::Solid_IC_problem.</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    set_newmark_initial_condition_directly(</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;     <span class="keyword">this</span>,mesh_pt(),<span class="keyword">static_cast&lt;</span>TIMESTEPPER*<span class="keyword">&gt;</span>(time_stepper_pt()),IC_pt,dt);</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;  }</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; <span class="comment">//Output initial data</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; doc_solution(doc_info);</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; <span class="comment">// Time integration loop</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=1;i&lt;=nstep;i++)</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;  {</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;   <span class="comment">// Solve</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;   unsteady_newton_solve(dt); </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;   </div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;   <span class="comment">// Doc solution</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;   doc_info.number()++;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;   doc_solution(doc_info);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;   </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;   <span class="comment">// Reduce timestep</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;   <span class="keywordflow">if</span> (time_pt()-&gt;time()&lt;100.0) {dt=timestep_ratio*dt;}</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;  }</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;} <span class="comment">// end of unsteady run</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160; </div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">//===start_of_main=====================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">/// Driver for ring that performs small-amplitude oscillations</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno"><a class="line" href="lin__unsteady__ring_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">  412</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="lin__unsteady__ring_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;{</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; <span class="comment">// Store command line arguments</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; CommandLineArgs::setup(argc,argv);</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment"> /// Convert command line arguments (if any) into flags:</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment"></span> <span class="keywordflow">if</span> (argc==2)</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;  {</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;   <span class="comment">// Nontrivial command line input: Setup Newmark IC directly</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;   <span class="comment">// (rather than consistently with PVD)</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;   <span class="keywordflow">if</span> (atoi(argv[1])==1) </div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    {</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;     <a class="code" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;     cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC consistently&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    }</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;   <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    {</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;     <a class="code" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;     cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC directly&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    }</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;   </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;   cout &lt;&lt; <span class="stringliteral">&quot;Not enough command line arguments specified -- using defaults.&quot;</span> </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;        &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;  } <span class="comment">// end of 1 argument</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; <span class="keywordflow">else</span> <span class="keywordflow">if</span> (argc==4)</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;  {</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;   cout &lt;&lt; <span class="stringliteral">&quot;Three command line arguments specified:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;   <span class="comment">// Nontrivial command line input: Setup Newmark IC directly</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;   <span class="comment">// (rather than consistently with PVD)</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;   <span class="keywordflow">if</span> (atoi(argv[1])==1) </div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    {</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;     <a class="code" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;     cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC consistently&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    }</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;   <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    {</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;     <a class="code" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;     cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC directly&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    }</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;   <span class="comment">// Flag for long run</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;   <a class="code" href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Global_Physical_Variables::Long_run_flag</a>=atoi(argv[2]);</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;   <span class="comment">// Flag for fixed timestep</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;   <a class="code" href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Global_Physical_Variables::Fixed_timestep_flag</a>=atoi(argv[3]);</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;  } <span class="comment">// end of 3 arguments</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;  {</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;   std::string error_message =</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <span class="stringliteral">&quot;Wrong number of command line arguments. Specify one or three.\n&quot;</span>;</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;   error_message += <span class="stringliteral">&quot;Arg1: Long_run_flag [0/1]\n&quot;</span>;</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;   error_message += <span class="stringliteral">&quot;Arg2: Impulsive_start_flag [0/1]\n&quot;</span>;</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;   error_message += <span class="stringliteral">&quot;Arg3: Restart_flag [restart_file] (optional)\n&quot;</span>;</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160; </div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;   <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;  } <span class="comment">// too many arguments</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC consistently: &quot;</span></div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;      &lt;&lt;  <a class="code" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; cout &lt;&lt; <span class="stringliteral">&quot;Long run flag: &quot;</span> </div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;      &lt;&lt;  <a class="code" href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Global_Physical_Variables::Long_run_flag</a> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; cout &lt;&lt; <span class="stringliteral">&quot;Fixed timestep flag: &quot;</span> </div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;      &lt;&lt;  <a class="code" href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Global_Physical_Variables::Fixed_timestep_flag</a> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; <span class="comment">//Length of domain</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; <span class="keywordtype">double</span> L = MathematicalConstants::Pi/2.0;</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;  </div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; <span class="comment">// Number of elements</span></div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160; <span class="keywordtype">unsigned</span> nelem = 13;</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; </div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; <span class="comment">//Set up the problem</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; <a class="code" href="classElasticRingProblem.html">ElasticRingProblem&lt;HermiteBeamElement,Newmark&lt;3&gt;</a> &gt; </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;  <a class="code" href="unsteady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>(nelem,L);</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160; </div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; <span class="comment">// Do unsteady run</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160; <a class="code" href="unsteady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.unsteady_run();</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;} <span class="comment">// end of main</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160; </div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; </div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160; </div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160; </div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160; </div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160; </div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassElasticRingProblem_html_acd30c4363ffedbaadc1523aa8b85523b"><div class="ttname"><a href="classElasticRingProblem.html#acd30c4363ffedbaadc1523aa8b85523b">ElasticRingProblem::unsteady_run</a></div><div class="ttdeci">void unsteady_run()</div><div class="ttdoc">Do unsteady run.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00320">lin_unsteady_ring.cc:320</a></div></div>
+<div class="ttc" id="aunsteady__ring_8txt_html_a7a0eb570c0549e9c0d2d326ff26344f0"><div class="ttname"><a href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a></div><div class="ttdeci">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous timesteps&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Large amplitude oscillations of a thin walled elastic beam&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius f R_0 f and wall thickness f h subject to a transient pressure load f[p_{ext}\left(\xi,t \right)=\left\{ \begin{array}{ll}-P_{cos}\cos\left(2\xi\right) &amp;\mbox{for $t&lt; T_{kick}$} \\0 &amp;\mbox{for $t &gt;T_{kick}$} \end{array}\right.\mbox{\ \ \ \ \ \ \ \ \ \ @E[load]@ }\f] which initiates an oscillation in which the ring deforms into a non axisymmetric as indicated in the sketch t</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__ring_8txt_source.html#l00048">unsteady_ring.txt:48</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html"><div class="ttname"><a href="classElasticRingProblem.html">ElasticRingProblem</a></div><div class="ttdoc">Ring problem.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00071">lin_unsteady_ring.cc:71</a></div></div>
+<div class="ttc" id="aunsteady__ring_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="unsteady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__ring_8txt_source.html#l00007">unsteady_ring.txt:7</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_affe3ddb0b7c1d7dbf3955738edbda1af"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a></div><div class="ttdeci">bool Consistent_newmark_ic</div><div class="ttdoc">Boolean flag to decide if to set IC for Newmark directly or consistently : No Default.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00056">lin_unsteady_ring.cc:56</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_aba78b855677ef08ea3d9678dcde8a71b"><div class="ttname"><a href="classElasticRingProblem.html#aba78b855677ef08ea3d9678dcde8a71b">ElasticRingProblem::Displ_control_elem_pt</a></div><div class="ttdeci">ELEMENT * Displ_control_elem_pt</div><div class="ttdoc">In which element are we applying displacement control? (here only used for doc of radius)</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00105">lin_unsteady_ring.cc:105</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_ab0f0f02cc67dcabfc38f051e3d3cebfc"><div class="ttname"><a href="classElasticRingProblem.html#ab0f0f02cc67dcabfc38f051e3d3cebfc">ElasticRingProblem::Undef_geom_pt</a></div><div class="ttdeci">GeomObject * Undef_geom_pt</div><div class="ttdoc">Pointer to geometric object that represents the undeformed shape.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00111">lin_unsteady_ring.cc:111</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_aac5f3adac1e1a42492bd428eeb732a3d"><div class="ttname"><a href="classElasticRingProblem.html#aac5f3adac1e1a42492bd428eeb732a3d">ElasticRingProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function is empty.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00090">lin_unsteady_ring.cc:90</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a0acfcb485441bbe0c9e4202d8a5e72d3"><div class="ttname"><a href="classElasticRingProblem.html#a0acfcb485441bbe0c9e4202d8a5e72d3">ElasticRingProblem::S_displ_control</a></div><div class="ttdeci">Vector&lt; double &gt; S_displ_control</div><div class="ttdoc">At what local coordinate are we applying displacement control?</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00108">lin_unsteady_ring.cc:108</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_ab0eb0dcecfa7e9c9e52ecf319f6e873e"><div class="ttname"><a href="classElasticRingProblem.html#ab0eb0dcecfa7e9c9e52ecf319f6e873e">ElasticRingProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function is empty.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00087">lin_unsteady_ring.cc:87</a></div></div>
+<div class="ttc" id="alin__unsteady__ring_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="lin__unsteady__ring_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver for ring that performs small-amplitude oscillations.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00412">lin_unsteady_ring.cc:412</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a9aa904e4cf82d45711f890cd8440ced9"><div class="ttname"><a href="classElasticRingProblem.html#a9aa904e4cf82d45711f890cd8440ced9">ElasticRingProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc solution.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00213">lin_unsteady_ring.cc:213</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_acb18f0e4952b6a1b0840ca94828ace3b"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Global_Physical_Variables::Long_run_flag</a></div><div class="ttdeci">unsigned Long_run_flag</div><div class="ttdoc">Flag for long/short run: Default = perform long run.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00049">lin_unsteady_ring.cc:49</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a763200d4985bca4a120f2be2a217f4a8"><div class="ttname"><a href="classElasticRingProblem.html#a763200d4985bca4a120f2be2a217f4a8">ElasticRingProblem::mesh_pt</a></div><div class="ttdeci">OneDLagrangianMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Access function for the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00081">lin_unsteady_ring.cc:81</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a7f0f8c10b57021446e19c5833863cc7f"><div class="ttname"><a href="classElasticRingProblem.html#a7f0f8c10b57021446e19c5833863cc7f">ElasticRingProblem::Trace_file</a></div><div class="ttdeci">ofstream Trace_file</div><div class="ttdoc">Trace file for recording control data.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00117">lin_unsteady_ring.cc:117</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a57be33a379c1ec4418a7fb3e8db8ef2b"><div class="ttname"><a href="classElasticRingProblem.html#a57be33a379c1ec4418a7fb3e8db8ef2b">ElasticRingProblem::ElasticRingProblem</a></div><div class="ttdeci">ElasticRingProblem(const unsigned &amp;N, const double &amp;L)</div><div class="ttdoc">Constructor: Number of elements, length of domain, flag for setting Newmark IC directly or consistent...</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00128">lin_unsteady_ring.cc:128</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_aae2e69454e5e73519e13dd3424d41a2c"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Global_Physical_Variables::Fixed_timestep_flag</a></div><div class="ttdeci">unsigned Fixed_timestep_flag</div><div class="ttdoc">Flag for fixed timestep: Default = fixed timestep.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00052">lin_unsteady_ring.cc:52</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a0d314051b66afb53fa7f28c298f38206"><div class="ttname"><a href="classElasticRingProblem.html#a0d314051b66afb53fa7f28c298f38206">ElasticRingProblem::IC_pt</a></div><div class="ttdeci">SolidInitialCondition * IC_pt</div><div class="ttdoc">Pointer to object that specifies the initial condition.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00114">lin_unsteady_ring.cc:114</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00045">lin_unsteady_ring.cc:45</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a74aac22a4e8673b1e58c024610f8220f"><div class="ttname"><a href="classElasticRingProblem.html#a74aac22a4e8673b1e58c024610f8220f">ElasticRingProblem::Length</a></div><div class="ttdeci">double Length</div><div class="ttdoc">Length of domain (in terms of the Lagrangian coordinates)</div><div class="ttdef"><b>Definition:</b> <a href="lin__unsteady__ring_8cc_source.html#l00101">lin_unsteady_ring.cc:101</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:14:25
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

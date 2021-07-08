@@ -1,0 +1,193 @@
+\hypertarget{classoomph_1_1MGPreconditioner}{}\doxysection{oomph\+::M\+G\+Preconditioner$<$ D\+IM $>$ Class Template Reference}
+\label{classoomph_1_1MGPreconditioner}\index{oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}}
+
+
+An interface to allow scalar MG to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}.  
+
+
+
+
+{\ttfamily \#include $<$geometric\+\_\+multigrid.\+h$>$}
+
+Inheritance diagram for oomph\+::M\+G\+Preconditioner$<$ D\+IM $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classoomph_1_1MGPreconditioner}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MGPreconditioner_a57daf87cd60b23d39670c462afba7371}{M\+G\+Preconditioner}} (\mbox{\hyperlink{classoomph_1_1MGProblem}{M\+G\+Problem}} $\ast$mg\+\_\+problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MGPreconditioner_ae11d01b071f771150fcc608cee379bf1}{$\sim$\+M\+G\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MGPreconditioner_aaa38a856cda8e4b6ee612bc9d4ad1509}{M\+G\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1MGPreconditioner}{M\+G\+Preconditioner}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MGPreconditioner_ad7b9ea2798522fc6ae0aff7455ef4885}{operator=}} (const \mbox{\hyperlink{classoomph_1_1MGPreconditioner}{M\+G\+Preconditioner}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MGPreconditioner_a476a8e769a62e52e1db6c618ede7408d}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Function to set up a preconditioner for the linear system. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1MGPreconditioner_afa4c545cc49e9712e4d68f5c0275aefe}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Function applies MG to the vector r for a full solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MGPreconditioner_acc92bd3f8c9b729283d35c1f4ae37dd2}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Clean up memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned D\+IM$>$\newline
+class oomph\+::\+M\+G\+Preconditioner$<$ D\+I\+M $>$}
+
+An interface to allow scalar MG to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}. 
+
+Definition at line 743 of file geometric\+\_\+multigrid.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1MGPreconditioner_a57daf87cd60b23d39670c462afba7371}\label{classoomph_1_1MGPreconditioner_a57daf87cd60b23d39670c462afba7371}} 
+\index{oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}!MGPreconditioner@{MGPreconditioner}}
+\index{MGPreconditioner@{MGPreconditioner}!oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{MGPreconditioner()}{MGPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1MGPreconditioner}{oomph\+::\+M\+G\+Preconditioner}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1MGPreconditioner}{M\+G\+Preconditioner}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MGProblem}{M\+G\+Problem}} $\ast$}]{mg\+\_\+problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 748 of file geometric\+\_\+multigrid.\+h.
+
+
+
+References oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::\+Nvcycle.
+
+\mbox{\Hypertarget{classoomph_1_1MGPreconditioner_ae11d01b071f771150fcc608cee379bf1}\label{classoomph_1_1MGPreconditioner_ae11d01b071f771150fcc608cee379bf1}} 
+\index{oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}!````~MGPreconditioner@{$\sim$MGPreconditioner}}
+\index{````~MGPreconditioner@{$\sim$MGPreconditioner}!oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$MGPreconditioner()}{~MGPreconditioner()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1MGPreconditioner}{oomph\+::\+M\+G\+Preconditioner}}$<$ D\+IM $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1MGPreconditioner}{M\+G\+Preconditioner}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line 755 of file geometric\+\_\+multigrid.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MGPreconditioner_aaa38a856cda8e4b6ee612bc9d4ad1509}\label{classoomph_1_1MGPreconditioner_aaa38a856cda8e4b6ee612bc9d4ad1509}} 
+\index{oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}!MGPreconditioner@{MGPreconditioner}}
+\index{MGPreconditioner@{MGPreconditioner}!oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{MGPreconditioner()}{MGPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1MGPreconditioner}{oomph\+::\+M\+G\+Preconditioner}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1MGPreconditioner}{M\+G\+Preconditioner}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1MGPreconditioner}{M\+G\+Preconditioner}}$<$ D\+IM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 758 of file geometric\+\_\+multigrid.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1MGPreconditioner_acc92bd3f8c9b729283d35c1f4ae37dd2}\label{classoomph_1_1MGPreconditioner_acc92bd3f8c9b729283d35c1f4ae37dd2}} 
+\index{oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1MGPreconditioner}{oomph\+::\+M\+G\+Preconditioner}}$<$ D\+IM $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Clean up memory. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1MGSolver_a85e3e6f32b4e77d696d5b001e1428f08}{oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 832 of file geometric\+\_\+multigrid.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MGPreconditioner_ad7b9ea2798522fc6ae0aff7455ef4885}\label{classoomph_1_1MGPreconditioner_ad7b9ea2798522fc6ae0aff7455ef4885}} 
+\index{oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1MGPreconditioner}{oomph\+::\+M\+G\+Preconditioner}}$<$ D\+IM $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1MGPreconditioner}{M\+G\+Preconditioner}}$<$ D\+IM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 764 of file geometric\+\_\+multigrid.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1MGPreconditioner_afa4c545cc49e9712e4d68f5c0275aefe}\label{classoomph_1_1MGPreconditioner_afa4c545cc49e9712e4d68f5c0275aefe}} 
+\index{oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1MGPreconditioner}{oomph\+::\+M\+G\+Preconditioner}}$<$ D\+IM $>$\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function applies MG to the vector r for a full solve. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 797 of file geometric\+\_\+multigrid.\+h.
+
+
+
+References oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::\+Mg\+\_\+problem\+\_\+pt, oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::mg\+\_\+solve(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::oomph\+\_\+info, oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage, oomph\+::\+Oomph\+Info\+::stream\+\_\+pt(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::\+Stream\+\_\+pt, oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::\+Suppress\+\_\+all\+\_\+output, and oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output.
+
+\mbox{\Hypertarget{classoomph_1_1MGPreconditioner_a476a8e769a62e52e1db6c618ede7408d}\label{classoomph_1_1MGPreconditioner_a476a8e769a62e52e1db6c618ede7408d}} 
+\index{oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}!setup@{setup}}
+\index{setup@{setup}!oomph::MGPreconditioner$<$ DIM $>$@{oomph::MGPreconditioner$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1MGPreconditioner}{oomph\+::\+M\+G\+Preconditioner}}$<$ D\+IM $>$\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function to set up a preconditioner for the linear system. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 770 of file geometric\+\_\+multigrid.\+h.
+
+
+
+References oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::communicator\+\_\+pt(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::full\+\_\+setup(), oomph\+::oomph\+\_\+info, oomph\+::\+Oomph\+Info\+::stream\+\_\+pt(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::\+Stream\+\_\+pt, and oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::\+Suppress\+\_\+all\+\_\+output.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{geometric__multigrid_8h}{geometric\+\_\+multigrid.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: How to create refineable meshes in domains with curvilinear and/or moving boundaries</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: How to create refineable meshes in domains with curvilinear and/or moving boundaries </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In an <a href="../../../../doc/poisson/two_d_poisson_adapt/html/index.html">earlier example</a> we demonstrated how easy it is to "upgrade" an existing quad mesh to a <code>RefineableMesh</code> that can be used with <code>oomph-lib's</code> mesh adaptation routines. The "upgrade" was achieved by multiple inheritance: We combined the basic (non-refineable) mesh object with <code>oomph-lib's</code> <code>RefineableQuadMesh</code> &ndash; a class that implements the required mesh adaptation procedures, using <code>QuadTree</code> - based refinement techniques for meshes that contain quadrilateral elements. During the refinement process, selected elements are split into four "son" elements and the nodal values and coordinates of any newly created nodes are determined by interpolation from the "father" element. This procedure is perfectly adequate for problems with polygonal domain boundaries in which the initial coarse mesh provides a perfect representation of the domain. The situation is more complicated in problems with curvilinear domain boundaries since we must ensure that successive mesh refinements lead to an increasingly accurate representation of the domain boundary.</p>
+<p>To illustrate these issues we (re-)consider the 2D Poisson problem </p><center> <table class="doxtable">
+<tr>
+<td><center> <b>Two-dimensional model Poisson problem in a non-trivial domain</b> </center> Solve <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = -1, \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_0.png"/>
+</p>
+ in the fish-shaped domain <img class="formulaInl" alt="$D_{fish} $" src="form_1.png"/> with homogeneous Dirichlet boundary conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. u\right|_{\partial D_{fish}}=0. \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_2.png"/>
+</p>
+   </td></tr>
+</table>
+<br  />
+ </center><p> <br  />
+</p>
+<p>In Part 1 of this document we shall explain how <code>oomph-lib's</code> mesh adaptation procedures employ the <code>Domain</code> and <code>MacroElement</code> objects to adapt meshes in domains with curvilinear boundaries. In Part 2, we demonstrate how to create new <code>Domain</code> objects.</p>
+<hr  />
+<h1><a class="anchor" id="adapt"></a>
+Part 1: Mesh adaptation in domains with curvilinear boundaries, using Domain and MacroElement objects</h1>
+<p>The plot below shows the domain <img class="formulaInl" alt="$D_{fish} $" src="form_1.png"/>, represented by the multi-coloured, shaded region and its (extremely coarse) discretisation with four four-node quad elements. The elements' edges and nodes are shown in black.</p>
+<div class="image">
+<img src="coarse_fish_mesh_and_domain.gif" alt=""/>
+<div class="caption">
+The fish-shaped domain and its discretisation with four four-node quad elements </div></div>
+ <p>Obviously, the curvilinear boundaries of the fish-shaped domain (arcs of circles) are very poorly resolved by the elements' straight edges. Simple mesh adaptation, based on the techniques described in the <a href="../../../../doc/poisson/two_d_poisson_adapt/html/index.html">earlier example</a> will not result in convergence to the exact solution since the refined mesh never approaches the exact domain geometry:</p>
+<div class="image">
+<img src="fish_poisson_soln_no_macro.gif" alt=""/>
+<div class="caption">
+Plot of the mesh adaptation without MacroElements </div></div>
+ <p>To overcome this problem, the mesh adaptation routines must be given access to an exact, analytical representation of the actual domain. This is the purpose of <code>oomph-lib's</code> <code>Domain</code> object. A <code>Domain</code> provides an analytical description of a mathematical domain, by decomposing it into a number of so-called <code>MacroElements</code>. Each <code>MacroElement</code> provides a mapping between a set of local and global coordinates <img class="formulaInl" alt="$ {\bf r}_{macro}({\bf s})$" src="form_3.png"/> &ndash; similar to the mapping between the local and global coordinates in a finite element. The key difference between the two types of element is that the <code>MacroElement</code> mapping resolves curvilinear domain boundaries exactly, whereas the finite element mapping interpolates the global coordinates between the coordinates of its nodes. The topology of <code>MacroElements</code> mirrors that of the associated (geometric) finite elements: For instance, the <code>QMacroElement</code> family is the counterpart of the <code>QElement</code> family of geometric finite elements. Both are templated by the spatial dimension, and the local coordinates (in their right-handed local coordinate systems) are in the range between -1 and +1.</p>
+<p>The different-coloured, shaded regions in the above sketch represent the four two-dimensional <code>QMacroElements</code> by which the <code>FishDomain</code> represents the fish-shaped domain <img class="formulaInl" alt="$ D_{fish} $" src="form_4.png"/>. For instance, <code>MacroElement</code> 0 (shown in orange) represents the lower half of the fish's body; within this <code>MacroElement</code>, the curved "belly" is represented by the line <img class="formulaInl" alt="$ {\bf r}_{macro}(s_0,s_1=-1)$" src="form_5.png"/> for <img class="formulaInl" alt="$s_0\in[-1,1]$" src="form_6.png"/>; the lower "jaw" is represented by <img class="formulaInl" alt="$ {\bf r}_{macro}(s_0=-1,s_1)$" src="form_7.png"/> for <img class="formulaInl" alt="$s_1\in[-1,1]$" src="form_8.png"/>; etc.</p>
+<p>To illustrate the use of <code>MacroElements</code> / <code>Domains</code>, the following code fragment (from <br  />
+ <a href="../../../../src/meshes/fish_mesh.template.cc">fish_mesh.template.cc </a>) demonstrates how the constructor of the original, non-refineable <code>FishMesh</code> assigns the nodal positions. Each of the <code>FishDomain's</code> four <code>QMacroElements</code> is associated with one of the four finite elements in the mesh. Since both types of elements are parametrised by the same local coordinate systems, we determine the position of the node that is located at <img class="formulaInl" alt="$(s_0, s_1)$" src="form_9.png"/> (in the finite element's local coordinate system) from the corresponding <code>MacroElement</code> mapping, <img class="formulaInl" alt="${\bf r}_{macro}(s_0, s_1)$" src="form_10.png"/>:</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Create elements and all nodes in element</span></div>
+<div class="line"> <span class="comment">//-----------------------------------------</span></div>
+<div class="line"> <span class="comment">// (ignore repetitions for now -- we&#39;ll clean them up later)</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------------------</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nelem;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Create element</span></div>
+<div class="line">   Element_pt[e] = <span class="keyword">new</span> ELEMENT;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over rows in y/s_1-direction</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i1=0;i1&lt;n_node_1d;i1++)</div>
+<div class="line">    {</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Loop over rows in x/s_0-direction</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i0=0;i0&lt;n_node_1d;i0++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// Local node number</span></div>
+<div class="line">       <span class="keywordtype">unsigned</span> j_local=i0+i1*n_node_1d;</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Create the node and store pointer to it</span></div>
+<div class="line">       Node* node_pt=finite_element_pt(e)-&gt;</div>
+<div class="line">        construct_node(j_local,time_stepper_pt);</div>
+<div class="line"> </div>
+<div class="line">       <span class="comment">// Work out the node&#39;s coordinates in the finite element&#39;s local</span></div>
+<div class="line">       <span class="comment">// coordinate system:</span></div>
+<div class="line">       finite_element_pt(e)-&gt;local_fraction_of_node(j_local,s_fraction);</div>
+<div class="line">       </div>
+<div class="line">       s[0]=-1.0+2.0*s_fraction[0];</div>
+<div class="line">       s[1]=-1.0+2.0*s_fraction[1];</div>
+<div class="line"> </div>
+<div class="line">       <span class="comment">// Get the global position of the node from macro element mapping</span></div>
+<div class="line">       Domain_pt-&gt;macro_element_pt(e)-&gt;macro_map(s,r);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Set the nodal position</span></div>
+<div class="line">       node_pt-&gt;x(0) = r[0];</div>
+<div class="line">       node_pt-&gt;x(1) = r[1];</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end of loop over elements</span></div>
+</div><!-- fragment --><p>This technique ensures that the mesh's boundary nodes are placed on the exact domain boundary when the mesh is created.</p>
+<p>To retain this functionality during the mesh adaptation, each <code>FiniteElement</code> provides storage for a pointer to an associated <code>MacroElement</code>. By default, the <code>MacroElement</code> pointer is set to <code>NULL</code>, indicating that the element is not associated with a <code>MacroElement</code>. In that case, the coordinates of newly created nodes are determined by interpolation from the father element, as discussed above. If the <code>MacroElement</code> pointer is non-<code>NULL</code>, the refinement process refers to the element's <code>MacroElement</code> representation to determine the new nodal positions.</p>
+<p>To enable the mesh adaptation process to respect the domain's curvilinear boundaries, each element in the coarse base mesh must therefore be given a pointer to its associated <code>MacroElement</code>, e.g. by using the following loop:  </p><div class="fragment"><div class="line"> <span class="comment">// Loop over all elements and set macro element pointer</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element=this-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to element</span></div>
+<div class="line">   FiniteElement* el_pt=this-&gt;finite_element_pt(e);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set pointer to macro element to enable MacroElement-based</span></div>
+<div class="line">   <span class="comment">// remesh. Also enables the curvlinear boundaries</span></div>
+<div class="line">   <span class="comment">// of the mesh/domain get picked up during adaptive</span></div>
+<div class="line">   <span class="comment">// mesh refinement in derived classes.</span></div>
+<div class="line">   el_pt-&gt;set_macro_elem_pt(this-&gt;Domain_pt-&gt;macro_element_pt(e));</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>Once the mesh is aware of the curvilinear boundaries, each level of mesh refinement produces a better representation of the curvilinear domain, ensuring the convergence to the exact solution:</p>
+<div class="image">
+<img src="fish_poisson_adapt_soln.gif" alt=""/>
+<div class="caption">
+Plot of the mesh adaptation with MacroElements </div></div>
+ <p>The results shown in this animation were computed with the demo code <a href="../../../../demo_drivers/poisson/fish_poisson2/fish_poisson_adapt.cc">fish_poisson_adapt.cc</a> &ndash; a simple modification of the code <br  />
+ <a href="../../../../demo_drivers/poisson/fish_poisson/fish_poisson.cc">fish_poisson.cc</a> that we used in the <a href="../../../../doc/poisson/fish_poisson/html/index.html">earlier example</a>. The only difference between the two codes is that in the present example, the <code>FishDomain</code> is discretised with four-node rather than nine-node <code>RefineableQPoissonElements</code> to highlight the inadequacy of the basic mesh refinement process. Note that, as a result of lower accuracy of the four-node elements, we require a much finer discretisation in the interior of the domain.</p>
+<hr  />
+<h1><a class="anchor" id="domain"></a>
+Part 2: How to represent domains with curvilinear boundaries by Domain and MacroElement objects</h1>
+<p>The above example demonstrated that "upgrading" existing meshes to <code>RefineableMeshes</code> that can be used with <code>oomph-lib's</code> mesh adaptation procedures, can be achieved in two trivial steps:</p><ol type="1">
+<li>Associate each <code>RefineableQElement</code> with a <code>QuadTree</code> &ndash; this can done completely automatically by calling the function <code>RefineableQuadMesh::setup_quadtree_forest()</code>.</li>
+<li>If the problem's domain has curvilinear boundaries, associate each <code>RefineableQElement</code> with a <code>MacroElement</code> &ndash; defined in the <code>Domain</code> object that provides an <br  />
+ analytical representation of the domain.</li>
+</ol>
+<p>While this looks (and indeed is) impressively simple, we still have to explain how to create <code>Domain</code> objects. We start by introducing yet another useful <code>oomph-lib</code> class, the <code>GeomObject</code>.</p>
+<h2><a class="anchor" id="geom_object"></a>
+The geometric object, GeomObject</h2>
+<p>As the name suggests, <code>GeomObjects</code> are <code>oomph-lib</code> objects that provide an analytical description/parametrisation of geometric objects. Mathematically, <code>GeomObjects</code> define a mapping from a set of "Lagrangian" (intrinsic) coordinates to the global "Eulerian" coordinates of the object. The number of Lagrangian and Eulerian coordinates can differ. For instance, the unit circle, centred at the origin may be parametrised by a single coordinate, <img class="formulaInl" alt="$ \xi $" src="form_11.png"/> (representing the polar angle), as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf r}_{circle} = \left( \begin{array}{c} \cos \xi \\ \sin \xi \end{array} \right), \]" src="form_12.png"/>
+</p>
+<p> while a 2D disk may be parametrised by two coordinates <img class="formulaInl" alt="$ \xi_1 $" src="form_13.png"/> and <img class="formulaInl" alt="$ \xi_2 $" src="form_14.png"/> (representing the radius and the polar angle, respectively) as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf r}_{disk} = \xi_1 \left( \begin{array}{c} \cos \xi_2 \\ \sin \xi_2 \end{array} \right). \]" src="form_15.png"/>
+</p>
+<p> All specific <code>GeomObjects</code> must implement the pure virtual function <code>GeomObject::position(...)</code> which computes the Eulerian position vector <img class="formulaInl" alt="$ {\bf r}$" src="form_16.png"/> as a function of the (vector of) Lagrangian coordinates <img class="formulaInl" alt="$ {\bf \xi}$" src="form_17.png"/>. (The <code>GeomObject</code> base class also provides interfaces for a multitude of other functions, such as functions that compute the spatial and temporal derivatives of the position vector. These functions are implemented as "broken" virtual functions and their implementation is optional; see the <a href="../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html">earlier example</a> for a discussion of "broken" virtual functions.)</p>
+<p>Here is a complete example of a specific <code>GeomObject:</code> </p>
+ <div class="fragment"><div class="line"><span class="comment">//=======================start_of_unit_circle==============================</span></div>
+<div class="line"><span class="comment">/// Unit circle in 2D, centred at the origin, parametrised by a single</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// Lagrangian coordinate, the polar angle.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classUnitCircle.html">UnitCircle</a> : <span class="keyword">public</span> <a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a></div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// \short Constructor: Pass the number of Lagrangian</span></div>
+<div class="line"><span class="comment">  /// and Eulerian coordinates to the constructor of the</span></div>
+<div class="line"><span class="comment">  ///  GeomObject base class.</span></div>
+<div class="line"><span class="comment"></span>  <a class="code" href="classUnitCircle.html#a494ddf1cb37b659c6f8c44ddde2b9b33">UnitCircle</a>() : <a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a>(1,2) {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Destructor -- emtpy</span></div>
+<div class="line"><span class="comment"></span>  <span class="keyword">virtual</span> <a class="code" href="classUnitCircle.html#a9eb314d8152f5de298e1e155737a69b9">~UnitCircle</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// \short Position vector, r, to the point on the circle identified by  </span></div>
+<div class="line"><span class="comment">  /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector):</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classUnitCircle.html#adc7fc660ba1d2ecc5bcbe2312e2fb87b">position</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; <a class="code" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a>, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Eulerian position vector</span></div>
+<div class="line">   r[0] = cos(<a class="code" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a>[0]);</div>
+<div class="line">   r[1] = sin(<a class="code" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a>[0]);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// \short Position vector, r, to the point on the circle identified by  </span></div>
+<div class="line"><span class="comment">  /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector) at discrete time</span></div>
+<div class="line"><span class="comment">  /// level t (t=0: present; t&gt;0: previous). The shape of the object </span></div>
+<div class="line"><span class="comment">  /// is not time-dependent, therefore we forward this call to the </span></div>
+<div class="line"><span class="comment">  /// steady version. </span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classUnitCircle.html#adc7fc660ba1d2ecc5bcbe2312e2fb87b">position</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp; <a class="code" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a>, </div>
+<div class="line">                Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <a class="code" href="classUnitCircle.html#adc7fc660ba1d2ecc5bcbe2312e2fb87b">position</a>(<a class="code" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a>,r);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of unit circle class</span></div>
+</div><!-- fragment --><p>[The dummy time-dependent version of the <code>position(...)</code> function is required to stop the compiler from complaining about "only partially 
+overridden" virtual functions].</p>
+<h2><a class="anchor" id="domain_objects"></a>
+Domains</h2>
+<p><code>GeomObjects</code> provide a natural way of representing a <code>Domain's</code> curvilinear boundaries. For instance, the fish's body in <img class="formulaInl" alt="$ D_{fish}$" src="form_18.png"/> is bounded by two circular arcs. These may be represented by <code>GeomObjects</code> of type <code>Circle</code> &ndash; a slight generalisation of the <code><a class="el" href="classUnitCircle.html">UnitCircle</a></code> class shown above. The <code>FishDomain</code> constructor therefore takes a pointer to a 2D <code>GeomObject</code> and the "start" and "end" values of the Lagrangian coordinate along this object. The <code>GeomObject</code> represents the curvilinear boundary of the fish's (upper) body and the two coordinates represent the Lagrangian coordinates of the "nose" and the "tail" on this <code>GeomObject</code>, as shown in this sketch:</p>
+<div class="image">
+<img src="fish_domain.gif" alt=""/>
+<div class="caption">
+The fish-shaped domain and its MacroElement-based representation by the FishDomain object. The arrows show the orientation of the MacroElements' local coordinate systems. </div></div>
+ <p>To construct a <code>FishDomain</code> whose curvilinear boundaries are arcs of unit circles, centred at <img class="formulaInl" alt="$ (x_0,x_1) = (1/2 , 0) $" src="form_19.png"/> we create a <code>GeomObject</code> of type <code>Circle</code>, passing the appropriate parameters to its constructor:</p>
+<div class="fragment"><div class="line"><span class="comment">// Fish back is a circle of radius 1, centred at (0.5,0.0)</span></div>
+<div class="line"><span class="keywordtype">double</span> x_c=0.5;</div>
+<div class="line"><span class="keywordtype">double</span> <a class="code" href="fish__poisson2_8txt.html#a824e389b6c88d0ae12c1e97b08712cd3">y_c</a>=0.0;</div>
+<div class="line"><span class="keywordtype">double</span> <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>=1.0;</div>
+<div class="line"><a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a>* <a class="code" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>=<span class="keyword">new</span> Circle(x_c,<a class="code" href="fish__poisson2_8txt.html#a824e389b6c88d0ae12c1e97b08712cd3">y_c</a>,<a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>);</div>
+</div><!-- fragment --><p>Next, we pass the (pointer to the) <code>Circle</code> object to the constructor of the <code>FishDomain</code>, locating the "nose end" of the fish's back at <img class="formulaInl" alt="$\xi=2.4$" src="form_20.png"/> and its "tail end" at <img class="formulaInl" alt="$\xi=0.4$" src="form_21.png"/>:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">double</span> xi_nose=2.6; </div>
+<div class="line"><span class="keywordtype">double</span> <a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>=0.4; </div>
+<div class="line"><a class="code" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a>* <a class="code" href="fish__poisson2_8txt.html#af5f8290ba6539fcd5dd8fb6357487caa">domain_pt</a>=<span class="keyword">new</span> <a class="code" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a>(<a class="code" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>,xi_nose,<a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>);</div>
+</div><!-- fragment --><p>To see how this works internally, let us have a look at the <code>FishDomain</code> constructor. The constructor stores the pointer to the fish's "back", and the start and end values of the Lagrangian coordinates in the private data members <code>Back_pt</code>, <code>Xi_nose</code> and <code>Xi_tail</code>. Next we set some additional parameters, that define the geometry (the mouth is located at the origin; the fin is a vertical line at <img class="formulaInl" alt="$ x=1.7$" src="form_22.png"/>, ranging from <img class="formulaInl" alt="$ y=-0.9$" src="form_23.png"/> to <img class="formulaInl" alt="$ y=+0.9$" src="form_24.png"/>). Finally, we allocate storage for the four <code>MacroElements</code> and build them. Note that the constructor of the <code>MacroElement</code> takes a pointer to the Domain, and the <code>MacroElement's</code> number within that <code>Domain:</code> </p>
+ <div class="fragment"><div class="line"> <span class="comment">/// \short Constructor: Pass pointer to GeomObject that represents the</span></div>
+<div class="line"><span class="comment"> /// (upper) curved boundary of the fish&#39;s body, and the start and end values</span></div>
+<div class="line"><span class="comment"></span><span class="comment"> /// of the Lagrangian coordinates along the GeomObject. </span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a>(<a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a>* <a class="code" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>, </div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xi_nose,  </div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>) :  </div>
+<div class="line">  Xi_nose(xi_nose),  Xi_tail(<a class="code" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>), <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>(<a class="code" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Set values for private data members that are describe</span></div>
+<div class="line">   <span class="comment">// geometric features of the fish: x-coordinate of the fin,</span></div>
+<div class="line">   <span class="comment">// (half-)height of the fin, and x-position of the mouth.</span></div>
+<div class="line">   X_fin=1.7;</div>
+<div class="line">   Y_fin=0.9;</div>
+<div class="line">   X_mouth=0.0;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// There are four macro elements</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> nmacro=4;</div>
+<div class="line">   Macro_element_pt.resize(nmacro); </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Build them</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>=0;<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>&lt;nmacro;<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     Macro_element_pt[<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>]= <span class="keyword">new</span> QMacroElement&lt;2&gt;(<span class="keyword">this</span>,<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>);</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><p>Most of the remaining public member functions are equally straightforward: The destructor deletes the <code>MacroElements</code>,</p>
+ <div class="fragment"></div><!-- fragment --><p>and we provide various access functions to the geometric parameters such as <code>X_mouth</code>, etc &ndash; we will not list these explicitly. All the "real work" is done in the implementation of the pure virtual function <code>Domain::macro_element_boundary(...)</code>. Given</p><ul>
+<li>the number of the <code>MacroElement</code> in its <code>Domain</code> </li>
+<li>the direction of its boundary (N[orth], S[outh], E[ast], W[est], enumerated in the namespace <code>QuadTreeNames</code>)</li>
+</ul>
+<p>this function must compute the vector <img class="formulaInl" alt="$ {\bf r}(\zeta)$" src="form_25.png"/> to the <code>MacroElement's</code> boundary. Here <img class="formulaInl" alt="$ \zeta \in [-1,1]$" src="form_26.png"/> is the 1D coordinate along the element boundary, aligned with the direction of the <code>MacroElement's</code> 2D coordinates <img class="formulaInl" alt="$(s_0,s_1) $" src="form_27.png"/> as indicated in this sketch:</p>
+<div class="image">
+<img src="macro_element_sketch.gif" alt=""/>
+<div class="caption">
+Sketch illustrating the parametrisation of the MacroElement's four boundaries. </div></div>
+ <p>Since the shape of the domain can evolve in time, the full interface for the function includes an additional parameter, <code>t</code>, which indicates the (discrete) time level at which the domain shape is to be evaluated. If <code>t=0</code> the function computes the domain shape at the current time; if <code>t&gt;0</code> it computes the shape at the <code>t</code> -th previous timestep. (<a href="../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html">Another example</a> in which we solve the unsteady heat equation in a moving domain, provides a a more detailed discussion of this aspect.) Here is the full interface for the <code>FishDomain::macro_element_boundary(...)</code> function:</p>
+<div class="fragment"></div><!-- fragment --><p>The implementation of this function is the only tedious task that needs to be performed by the "mesh writer". Once <code>Domain::macro_element_boundary(...)</code> is implemented, the <code>Domain's</code> constituent <code>MacroElements</code> can refer to this function to establish the positions of their boundaries (recall that we passed the pointer to the <code>Domain</code> and the <code>MacroElement's</code> number in the <code>Domain</code> to the <code>MacroElement</code> constructor). The <code>MacroElement::macro_map(...)</code> functions interpolate the position of the <code>MacroElement's</code> boundaries into their interior.</p>
+<p>To illustrate the general procedure, here is the complete listing of the <code>FishDomain::macro_element_boundary(...)</code> function. The function employs switch statements to identify the private member functions that provide the parametrisation of individual <code>MacroElement</code> boundaries. Some of these functions are listed below.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==========start_of_macro_element_boundary========================</span></div>
+<div class="line"><span class="comment">/// \short Vector representation of the  imacro-th macro element</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// boundary idirect (N/S/W/E) at time level t </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// (t=0: present; t&gt;0: previous): \f$ {\bf r}({\bf zeta}) \f$</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// Note that the local coordinate \b zeta is a 1D</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// Vector rather than a scalar -- this is unavoidable because</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// this function implements the pure virtual function in the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// Domain base class.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=================================================================</span></div>
+<div class="line"><span class="keywordtype">void</span> FishDomain::macro_element_boundary(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t,</div>
+<div class="line">                                        <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; imacro,</div>
+<div class="line">                                        <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; idirect,</div>
+<div class="line">                                        <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                        Vector&lt;double&gt;&amp; r)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="keyword">using namespace </span>QuadTreeNames;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES</span></div>
+<div class="line">   <span class="comment">// Warn about time argument being moved to the front</span></div>
+<div class="line">   OomphLibWarning(</div>
+<div class="line">    <span class="stringliteral">&quot;Order of function arguments has changed between versions 0.8 and 0.85&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;FishDomain::macro_element_boundary(...)&quot;</span>,</div>
+<div class="line">    OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Which macro element?</span></div>
+<div class="line"> <span class="comment">// --------------------</span></div>
+<div class="line"> <span class="keywordflow">switch</span>(imacro)</div>
+<div class="line">  {</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Macro element 0: Lower body</span></div>
+<div class="line">  <span class="keywordflow">case</span> 0:</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Which direction?</span></div>
+<div class="line">   <span class="keywordflow">if</span> (idirect==N)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_lower_body_N(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#aff5c7f5413186755d84d595d45239926">S</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_lower_body_S(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#af3bf412369a3982586f54f0e04d60630">W</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_lower_body_W(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_lower_body_E(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     std::ostringstream error_stream;</div>
+<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect </div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span> &lt;&lt;  std::endl;</div>
+<div class="line">     </div>
+<div class="line">     <span class="keywordflow">throw</span> OomphLibError(</div>
+<div class="line">      error_stream.str(),</div>
+<div class="line">      OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Macro element 1: Lower Fin</span></div>
+<div class="line">  <span class="keywordflow">case</span> 1:</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Which direction?</span></div>
+<div class="line">   <span class="keywordflow">if</span> (idirect==N)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_lower_fin_N(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#aff5c7f5413186755d84d595d45239926">S</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_lower_fin_S(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#af3bf412369a3982586f54f0e04d60630">W</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_lower_fin_W(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_lower_fin_E(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     std::ostringstream error_stream;</div>
+<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect </div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span> &lt;&lt;  std::endl;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">throw</span> OomphLibError(</div>
+<div class="line">      error_stream.str(),</div>
+<div class="line">      OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="keywordflow">break</span>;   </div>
+<div class="line">   </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Macro element 2: Upper body</span></div>
+<div class="line">  <span class="keywordflow">case</span> 2:</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Which direction?</span></div>
+<div class="line">   <span class="keywordflow">if</span> (idirect==N)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_upper_body_N(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#aff5c7f5413186755d84d595d45239926">S</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_upper_body_S(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#af3bf412369a3982586f54f0e04d60630">W</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_upper_body_W(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_upper_body_E(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     std::ostringstream error_stream;</div>
+<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect </div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span> &lt;&lt;  std::endl;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">throw</span> OomphLibError(</div>
+<div class="line">      error_stream.str(),</div>
+<div class="line">      OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Macro element 3: Upper Fin</span></div>
+<div class="line">  <span class="keywordflow">case</span> 3:</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Which direction?</span></div>
+<div class="line">   <span class="keywordflow">if</span> (idirect==N)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_upper_fin_N(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#aff5c7f5413186755d84d595d45239926">S</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_upper_fin_S(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#af3bf412369a3982586f54f0e04d60630">W</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_upper_fin_W(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idirect==<a class="code" href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a>)</div>
+<div class="line">    {</div>
+<div class="line">     FishDomain::r_upper_fin_E(t,zeta,r);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     std::ostringstream error_stream;</div>
+<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;idirect is &quot;</span> &lt;&lt; idirect </div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; not one of N, S, E, W&quot;</span> &lt;&lt;  std::endl;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">throw</span> OomphLibError(</div>
+<div class="line">      error_stream.str(),</div>
+<div class="line">      OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="keywordflow">break</span>;   </div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">default</span>:</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Error</span></div>
+<div class="line">   std::ostringstream error_stream;</div>
+<div class="line">   error_stream &lt;&lt; <span class="stringliteral">&quot;Wrong imacro &quot;</span> &lt;&lt; imacro &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(</div>
+<div class="line">    error_stream.str(),</div>
+<div class="line">    OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">    OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of macro_element_boundary</span></div>
+</div><!-- fragment --><p>Here are a few of the private member functions that define individual <code>MacroElement</code> boundaries:</p>
+<ul>
+<li>The N[orthern] boundary of macro element 2 (which represents the upper body) coincides with the domain boundary that is parametrised by the geometric object pointed to by <code>Back_pt</code>. The function translates the coordinate <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_28.png"/> to the Lagrangian coordinate <img class="formulaInl" alt="$ \xi \in [\xi_{nose}, \xi_{tail}] $" src="form_29.png"/> along the geometric object. We use this Lagrangian coordinate to obtain the position vector to the domain boundary via a call to the <code>GeomObject::position(...)</code> function of the geometric object pointed to by <code>Back_pt:</code>  <div class="fragment"><div class="line"><span class="comment">//===============start_of_r_upper_body_N==============================</span></div>
+<div class="line"><span class="comment">/// Northern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">void</span> FishDomain::r_upper_body_N(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
+<div class="line">                                <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                Vector&lt;double&gt;&amp; r)</div>
+<div class="line">{                                   </div>
+<div class="line"> <span class="comment">// Lagrangian coordinate along curved &quot;back&quot;</span></div>
+<div class="line"> Vector&lt;double&gt; x(1);</div>
+<div class="line"> x[0]=Xi_nose+(Xi_tail-Xi_nose)*0.5*(zeta[0]+1.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get position on curved back</span></div>
+<div class="line"> <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t,x,r);</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// end of r_upper_body_N                                       </span></div>
+</div><!-- fragment --></li>
+<li>The E[astern] boundary of macro element 2 is a straight vertical line from the "tail end" of the curved fish back to the x-axis:  <div class="fragment"><div class="line"><span class="comment">//================start_of_r_upper_body_E=============================</span></div>
+<div class="line"><span class="comment">/// Eastern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">void</span> FishDomain::r_upper_body_E(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
+<div class="line">                                <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                Vector&lt;double&gt;&amp; r)</div>
+<div class="line">{                                   </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Top right corner (tail end) of body</span></div>
+<div class="line"> Vector&lt;double&gt; r_top(2);</div>
+<div class="line"> Vector&lt;double&gt; x(1);</div>
+<div class="line"> x[0]=Xi_tail;</div>
+<div class="line"> <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t,x,r_top);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Corresponding point on the x-axis</span></div>
+<div class="line"> Vector&lt;double&gt; <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>(2);</div>
+<div class="line"> <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[0]=r_top[0];</div>
+<div class="line"> <a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> r[0]=<a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[0]+(r_top[0]-<a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[0])*0.5*(zeta[0]+1.0);</div>
+<div class="line"> r[1]=<a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[1]+(r_top[1]-<a class="code" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>[1])*0.5*(zeta[0]+1.0);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of r_upper_body_E</span></div>
+</div><!-- fragment --></li>
+<li>The S[outhern] boundary of macro element 2 is a straight horizontal line from the "mouth" to the end of the body:  <div class="fragment"><div class="line"><span class="comment">//==================start_of_r_upper_body_S============================</span></div>
+<div class="line"><span class="comment">/// Southern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">void</span> FishDomain::r_upper_body_S(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
+<div class="line">                                <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                Vector&lt;double&gt;&amp; r)</div>
+<div class="line">{                                   </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Top right (tail) corner of fish body</span></div>
+<div class="line"> Vector&lt;double&gt; r_top(2);</div>
+<div class="line"> Vector&lt;double&gt; x(1);</div>
+<div class="line"> x[0]=Xi_tail;</div>
+<div class="line"> <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t,x,r_top);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Straight line from mouth to start of fin (=end of body)</span></div>
+<div class="line"> r[0]=X_mouth+(r_top[0]-X_mouth)*0.5*(zeta[0]+1.0);</div>
+<div class="line"> r[1]=0.0;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of r_upper_body_S                                          </span></div>
+</div><!-- fragment --></li>
+<li>The W[estern] boundary of macro element 2 is a straight line from the "mouth" to the "mouth" end of the curved upper boundary of the body:  <div class="fragment"><div class="line"><span class="comment">//===============start_of_r_upper_body_W==============================</span></div>
+<div class="line"><span class="comment">/// Western edge of upper body macro element; \f$ \zeta \in [-1,1] \f$</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keywordtype">void</span> FishDomain::r_upper_body_W(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
+<div class="line">                                <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">                                Vector&lt;double&gt;&amp; r)</div>
+<div class="line">{                                   </div>
+<div class="line"> <span class="comment">// Top left (mouth) corner of curved boundary of upper body</span></div>
+<div class="line"> Vector&lt;double&gt; r_top(2);</div>
+<div class="line"> Vector&lt;double&gt; x(1);</div>
+<div class="line"> x[0]=Xi_nose;</div>
+<div class="line"> <a class="code" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a>-&gt;position(t,x,r_top);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The &quot;mouth&quot;</span></div>
+<div class="line"> Vector&lt;double&gt; r_mouth(2);</div>
+<div class="line"> r_mouth[0]=X_mouth;</div>
+<div class="line"> r_mouth[1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Straight line from mouth to leftmost corner on curved boundary</span></div>
+<div class="line"> <span class="comment">// of upper body</span></div>
+<div class="line"> r[0]=r_mouth[0]+(r_top[0]-r_mouth[0])*0.5*(zeta[0]+1.0);</div>
+<div class="line"> r[1]=r_mouth[1]+(r_top[1]-r_mouth[1])*0.5*(zeta[0]+1.0);</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// end of r_upper_body_W                                   </span></div>
+</div><!-- fragment --></li>
+<li>The S[outhern] boundary of macro element 0 (which represents the lower body) is simply a reflection of the N[orthern] boundary of macro element 2:  <div class="fragment"><div class="line"> <span class="comment">///\short Southern boundary of lower body macro element zeta \f$\in [-1,1] \f$</span></div>
+<div class="line"> <span class="keywordtype">void</span> r_lower_body_S(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta, </div>
+<div class="line">                     Vector&lt;double&gt;&amp; <a class="code" href="namespacef.html">f</a>)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// South of lower body is element is north of upper one.</span></div>
+<div class="line">   <span class="comment">// Direction of the coordinate stays the same.</span></div>
+<div class="line">   r_upper_body_N(t,zeta,<a class="code" href="namespacef.html">f</a>);</div>
+<div class="line">   <span class="comment">// Reflect vertical position</span></div>
+<div class="line">   <a class="code" href="namespacef.html">f</a>[1]=-<a class="code" href="namespacef.html">f</a>[1];</div>
+<div class="line">  }</div>
+</div><!-- fragment --></li>
+<li>etc.</li>
+</ul>
+<p>Tedious? Yes! Rocket Science? No!</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="com"></a>
+Further comments</h1>
+<h2><a class="anchor" id="nod_update"></a>
+Node updates in response to changes in the Domain shape.</h2>
+<p>You may have noticed that, even though we introduced <code>MacroElements</code> in the context of adaptive mesh refinement, the pointer to a refineable element's <code>MacroElement</code> is stored in the <code>FiniteElement</code>, rather than the (derived) <code>RefineableElement</code> class, suggesting that <code>MacroElements</code> have additional uses outside the context of mesh adaptation. Indeed, the code fragment that illustrated the use of <code>Domains</code> and <code>MacroElements</code> during mesh generation, was taken from the constructor of the <em>non-refineable</em> <code>FishMesh</code>, rather than its adaptive counterpart. During the mesh generation process, the <code>FiniteElement's</code> <code>MacroElement</code> representation was used to determine the position of its <code>Nodes</code> within the <code>Domain</code>. The same procedure can be employed to <em>update</em> the nodal positions in response to changes in the domain shape. This is implemented, generically, in the function</p>
+<div class="fragment"><div class="line">Mesh::node_update()</div>
+</div><!-- fragment --><p>This function loops over all elements in a <code>Mesh</code> and updates their nodal positions in response to changes in the domain boundary. (If the <code>Mesh's</code> constituent elements's are not associated with <code>MacroElements</code> and if the <code>Mesh</code> does not implement the node update by other means, this function does not change the mesh.)</p>
+<p>The following code fragment illustrates the trivial modifications to the driver code required to compute the solution of Poisson's equation in fish-shaped domain of various widths. We simply change the position of the <code>GeomObject</code> that specifies the curvilinear boundary (by changing the position of the circle's centre), call the <code>Mesh::node_update()</code> function, and recompute the solution.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=================start_of_main==========================================</span></div>
+<div class="line"><span class="comment">/// Demonstrate how to solve 2D Poisson problem in </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// fish-shaped domain with black-box mesh adaptation</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// and domain updates in response to changes in the domain</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// shape.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="fish__poisson__node__update_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem with 9 node refineable Poisson elements</span></div>
+<div class="line"> <a class="code" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem&lt;RefineableQPoissonElement&lt;2,3&gt;</a> &gt; <a class="code" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup labels for output</span></div>
+<div class="line"> <span class="comment">//------------------------</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Adjust the domain shape by changing the width of the fish</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------------------</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=3;</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>=0;<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>&lt;nstep;<a class="code" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to GeomObject that defines the position of the</span></div>
+<div class="line">   <span class="comment">// fish&#39;s back:</span></div>
+<div class="line">   <a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a>* fish_back_pt=<a class="code" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.mesh_pt()-&gt;fish_back_pt();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Recast to pointer to Circle object to get access to the member function</span></div>
+<div class="line">   <span class="comment">// that sets the y-position of the Circle&#39;s centre and decrease its</span></div>
+<div class="line">   <span class="comment">// value, making the fish narrower</span></div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>Circle*<span class="keyword">&gt;</span>(fish_back_pt)-&gt;<a class="code" href="fish__poisson2_8txt.html#a824e389b6c88d0ae12c1e97b08712cd3">y_c</a>()-=0.1;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Update the domain shape in response to the changes in its</span></div>
+<div class="line">   <span class="comment">// boundary</span></div>
+<div class="line">   <a class="code" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.mesh_pt()-&gt;node_update();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Solve the problem, allowing for up to two levels of refinement</span></div>
+<div class="line">   <a class="code" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.newton_solve(2);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Output solution</span></div>
+<div class="line">   <a class="code" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution(doc_info);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Increment counter for solutions </span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+</div><!-- fragment --><p>The <a href="../../../../demo_drivers/poisson/fish_poisson2/fish_poisson_node_update.cc">rest of the code</a> remains unchanged. Here is a plot of the solution for various widths of the domain (computed with nine-node elements).</p>
+<div class="image">
+<img src="fish_poisson_node_update.gif" alt=""/>
+<div class="caption">
+Adaptive solution of Poisson's equation in fish-shaped domains of varying width. </div></div>
+ <hr  />
+ <hr  />
+<h2><a class="anchor" id="boundary_coords"></a>
+Good practice: Storing boundary coordinates</h2>
+<p>The above example demonstrated how the representation of curvilinear domain boundaries by <code>GeomObjects</code> allows <code>oomph-lib's</code> mesh generation and adaptation procedures to place nodes on these boundaries. We note that the Lagrangian coordinate(s) that parametrise(s) the relevant <code>GeomObjects</code> also provide a parametrisation of the corresponding domain boundaries. In certain applications (such as free-boundary or fluid-structure interaction problems) it is useful to have direct access to these boundary coordinates. For this purpose the <code>Node</code> class provides the function </p><div class="fragment"><div class="line">Node::set_coordinates_on_boundary(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code" href="fish__poisson2_8txt.html#a7ac19cf035a3f378028c7167eb0ec0bf">b</a>, </div>
+<div class="line">                                  <span class="keyword">const</span> Vector&lt;double&gt;&amp; <a class="code" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a>);</div>
+</div><!-- fragment --><p> which allows the mesh writer to store the (vector of) boundary coordinates that a given (<code>Boundary</code>)<code>Node</code> is located at. The argument <code>b</code> specifies the number of the mesh boundary, reflecting the fact that nodes may be located on multiple domain boundaries, each of which is likely to have a different set of surface coordinates. [<b>Note:</b> The function is implemented as a broken virtual function in the <code>Node</code> base class. The actual functionality to store boundary coordinates is only provided in (and required by) the derived <code>BoundaryNode</code> class.]</p>
+<p>Since the storage of boundary coordinates is optional, the <code>Mesh</code> base class provides a protected vector of bools, </p><div class="fragment"><div class="line">std::vector&lt;bool&gt; Mesh::Boundary_coordinate_exists;</div>
+</div><!-- fragment --><p> that indicates if the boundary coordinates have been stored for all <code>Nodes</code> on a specific mesh boundary. This vector is resized and its entries are initialised to <code>false</code>, when the number of mesh boundaries is declared with a call to <code>Mesh::set_nboundary(...)</code>. If, during mesh refinement, a new <code>BoundaryNode</code> is created on the mesh's boundary <code>b</code>, its boundary coordinates are computed by interpolation from the corresponding values at the nodes in the father element, if <code>Mesh::Boundary_coordinate_exists</code>[b] has been set to <code>true</code>.</p>
+<p>We regard it as good practice to set boundary coordinates for all <code>BoundaryNodes</code> that are located on curvlinear mesh boundaries. The source code <a href="../../../../src/meshes/fish_mesh.template.cc">fish_mesh.template.cc</a> for the refineable FishMesh illustrates the methodology.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/poisson/fish_poisson2/">demo_drivers/poisson/fish_poisson2/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/poisson/fish_poisson2/fish_poisson_adapt.cc">demo_drivers/poisson/fish_poisson2/fish_poisson_adapt.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassUnitCircle_html"><div class="ttname"><a href="classUnitCircle.html">UnitCircle</a></div><div class="ttdef"><b>Definition:</b> <a href="fish__domain_8cc_source.html#l00043">fish_domain.cc:43</a></div></div>
+<div class="ttc" id="aclassUnitCircle_html_adc7fc660ba1d2ecc5bcbe2312e2fb87b"><div class="ttname"><a href="classUnitCircle.html#adc7fc660ba1d2ecc5bcbe2312e2fb87b">UnitCircle::position</a></div><div class="ttdeci">void position(const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;r) const</div><div class="ttdoc">Position vector, r, to the point on the circle identified by   its 1D Lagrangian coordinate,...</div><div class="ttdef"><b>Definition:</b> <a href="fish__domain_8cc_source.html#l00058">fish_domain.cc:58</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html"><div class="ttname"><a href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson__adapt_8cc_source.html#l00067">fish_poisson_adapt.cc:67</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_af3bf412369a3982586f54f0e04d60630"><div class="ttname"><a href="fish__poisson2_8txt.html#af3bf412369a3982586f54f0e04d60630">W</a></div><div class="ttdeci">endcode To see how this works let us have a look at the c FishDomain constructor The constructor stores the pointer to the fish s and the start and end values of the Lagrangian coordinates in the private data members c c Xi_nose and c Xi_tail Next we set some additional that define the we allocate storage for the four c MacroElements and build them Note that the constructor of the c MacroElement takes a pointer to the and the c MacroElement s number within that c dontinclude fish_domain h skipline Destructor for etc we will not list these explicitly All the real work is done in the implementation of the virtual pure function c W[est]</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00322">fish_poisson2.txt:322</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a42536cd36f5f484d09e2343c570769c0"><div class="ttname"><a href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a></div><div class="ttdeci">endcode To see how this works let us have a look at the c FishDomain constructor The constructor stores the pointer to the fish s and the start and end values of the Lagrangian coordinates in the private data members c c Xi_nose and c Xi_tail Next we set some additional that define the we allocate storage for the four c MacroElements and build them Note that the constructor of the c MacroElement takes a pointer to the and the c MacroElement s number within that c dontinclude fish_domain h skipline Destructor for FishDomain</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00318">fish_poisson2.txt:318</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00012">fish_poisson2.txt:12</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a7ac19cf035a3f378028c7167eb0ec0bf"><div class="ttname"><a href="fish__poisson2_8txt.html#a7ac19cf035a3f378028c7167eb0ec0bf">b</a></div><div class="ttdeci">endcode that indicates if the boundary coordinates have been stored for all c Nodes on a specific mesh boundary This vector is resized and its entries are initialised to c when the number of mesh boundaries is declared with a call to c during mesh a new c BoundaryNode is created on the mesh s boundary c b</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00513">fish_poisson2.txt:513</a></div></div>
+<div class="ttc" id="anamespacef_html"><div class="ttname"><a href="namespacef.html">f</a></div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00323">fish_poisson2.txt:323</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a36182deccc274d25f67a270c999c54c3"><div class="ttname"><a href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a></div><div class="ttdeci">endcode To see how this works let us have a look at the c FishDomain constructor The constructor stores the pointer to the fish s and the start and end values of the Lagrangian coordinates in the private data members c c Xi_nose and c Xi_tail Next we set some additional that define the we allocate storage for the four c MacroElements and build them Note that the constructor of the c MacroElement takes a pointer to the Domain</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00302">fish_poisson2.txt:302</a></div></div>
+<div class="ttc" id="afish__poisson__node__update_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="fish__poisson__node__update_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson__node__update_8cc_source.html#l00197">fish_poisson_node_update.cc:197</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a4f499ba251dff6813d20832f9f36834a"><div class="ttname"><a href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a></div><div class="ttdeci">double r_back</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00274">fish_poisson2.txt:274</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a04763e696f9abee872a515865c843251"><div class="ttname"><a href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a></div><div class="ttdeci">1}^2 \frac{\partial^2u}{\partial x_i^2}=-1, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@ \f] in the fish-shaped domain \f $D_{fish} \f$ with homogeneous Dirichlet boundary conditions \f[\left. u\right|_{\partial D_{fish}}=0. \ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@ \f]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; In Part 1 of this document we shall explain how \c oomph-lib 's mesh adaptation procedures employ the \c Domain and \c MacroElement objects to adapt meshes in domains with curvilinear boundaries. In Part 2, we demonstrate how to create new \c Domain objects.&lt; HR &gt; \section adapt Part 1:Mesh adaptation in domains with curvilinear boundaries, using Domain and MacroElement objects The plot below shows the domain \f $D_{fish} \f$, represented by the multi-coloured, shaded region and its(extremely coarse) discretisation with four four-node quad elements. The elements' edges and nodes are shown in black. @I w 0.75\textwidth coarse_fish_mesh_and_domain &quot;The fish-shaped domain and its discretisation with four four-node quad elements &quot; Obviously, the curvilinear boundaries of the fish-shaped domain(arcs of circles) are very poorly resolved by the elements' straight edges. Simple mesh adaptation, based on the techniques described in the&lt; A HREF=&quot;../../../../doc/poisson/two_d_poisson_adapt/html/index.html&quot;&gt; earlier example&lt;/A &gt; will not result in convergence to the exact solution since the refined mesh never approaches the exact domain geometry:@I w 0.75\textwidth fish_poisson_soln_no_macro &quot;Plot of the mesh adaptation without MacroElements &quot; To overcome this problem, the mesh adaptation routines must be given access to an exact, analytical representation of the actual domain. This is the purpose of \c oomph-lib 's \c Domain object. A \c Domain provides an analytical description of a mathematical domain, by decomposing it into a number of so-called \c MacroElements. Each \c MacroElement provides a mapping between a set of local and global coordinates \f$ {\bf r}_{macro}({\bf s})\f$ -- similar to the mapping between the local and global coordinates in a finite element. The key difference between the two types of element is that the \c MacroElement mapping resolves curvilinear domain boundaries exactly, whereas the finite element mapping interpolates the global coordinates between the coordinates of its nodes. The topology of \c MacroElements mirrors that of the associated(geometric) finite elements:For instance, the \c QMacroElement family is the counterpart of the \c QElement family of geometric finite elements. Both are templated by the spatial dimension, and the local coordinates(in their right-handed local coordinate systems) are in the range between -1 and+1. The different-coloured, shaded regions in the above sketch represent the four two-dimensional \c QMacroElements by which the \c FishDomain represents the fish-shaped domain \f$ D_{fish} \f$. For instance, \c MacroElement 0(shown in orange) represents the lower half of the fish 's body i</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00106">fish_poisson2.txt:106</a></div></div>
+<div class="ttc" id="aclassUnitCircle_html_a9eb314d8152f5de298e1e155737a69b9"><div class="ttname"><a href="classUnitCircle.html#a9eb314d8152f5de298e1e155737a69b9">UnitCircle::~UnitCircle</a></div><div class="ttdeci">virtual ~UnitCircle()</div><div class="ttdoc">Destructor – emtpy.</div><div class="ttdef"><b>Definition:</b> <a href="fish__domain_8cc_source.html#l00054">fish_domain.cc:54</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_af5f8290ba6539fcd5dd8fb6357487caa"><div class="ttname"><a href="fish__poisson2_8txt.html#af5f8290ba6539fcd5dd8fb6357487caa">domain_pt</a></div><div class="ttdeci">Domain * domain_pt</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00288">fish_poisson2.txt:288</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a493a882b1dd7b4a37614521db1740c2e"><div class="ttname"><a href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a></div><div class="ttdeci">endcode To see how this works let us have a look at the c FishDomain constructor The constructor stores the pointer to the fish s and the start and end values of the Lagrangian coordinates in the private data members c c Xi_nose and c Xi_tail Next we set some additional that define the we allocate storage for the four c MacroElements and build them Note that the constructor of the c MacroElement takes a pointer to the and the c MacroElement s number within that c dontinclude fish_domain h skipline Destructor for etc we will not list these explicitly All the real work is done in the implementation of the virtual pure function c E[ast]</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00322">fish_poisson2.txt:322</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_abecec0ffd252d5c008335db6e6a529b4"><div class="ttname"><a href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a></div><div class="ttdeci">endcode To see how this works let us have a look at the c FishDomain constructor The constructor stores the pointer to the fish s and the start and end values of the Lagrangian coordinates in the private data members c Back_pt</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00296">fish_poisson2.txt:296</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a68a3f92caf63697dc8a7fa23dcd50d53"><div class="ttname"><a href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a></div><div class="ttdeci">GeomObject * back_pt</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00275">fish_poisson2.txt:275</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a296cf8991ee09d7e9a1beeb8ad3da837"><div class="ttname"><a href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a></div><div class="ttdeci">endcode we pass locating the nose end of the fish s back at f xi</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00281">fish_poisson2.txt:281</a></div></div>
+<div class="ttc" id="aclassUnitCircle_html_a494ddf1cb37b659c6f8c44ddde2b9b33"><div class="ttname"><a href="classUnitCircle.html#a494ddf1cb37b659c6f8c44ddde2b9b33">UnitCircle::UnitCircle</a></div><div class="ttdeci">UnitCircle()</div><div class="ttdoc">Constructor: Pass the number of Lagrangian and Eulerian coordinates to the constructor of the GeomObj...</div><div class="ttdef"><b>Definition:</b> <a href="fish__domain_8cc_source.html#l00051">fish_domain.cc:51</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a44a04c4143efa1228ac3cd5add2a1917"><div class="ttname"><a href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a></div><div class="ttdeci">double xi_tail</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00287">fish_poisson2.txt:287</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_aff5c7f5413186755d84d595d45239926"><div class="ttname"><a href="fish__poisson2_8txt.html#aff5c7f5413186755d84d595d45239926">S</a></div><div class="ttdeci">endcode To see how this works let us have a look at the c FishDomain constructor The constructor stores the pointer to the fish s and the start and end values of the Lagrangian coordinates in the private data members c c Xi_nose and c Xi_tail Next we set some additional that define the we allocate storage for the four c MacroElements and build them Note that the constructor of the c MacroElement takes a pointer to the and the c MacroElement s number within that c dontinclude fish_domain h skipline Destructor for etc we will not list these explicitly All the real work is done in the implementation of the virtual pure function c S[outh]</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00322">fish_poisson2.txt:322</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a21f866477909132765bd833a91c16259"><div class="ttname"><a href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a></div><div class="ttdeci">see the&lt; A HREF=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A &gt; for a discussion of virtual broken functions Here is a complete example of a specific c GeomObject</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00249">fish_poisson2.txt:249</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a824e389b6c88d0ae12c1e97b08712cd3"><div class="ttname"><a href="fish__poisson2_8txt.html#a824e389b6c88d0ae12c1e97b08712cd3">y_c</a></div><div class="ttdeci">double y_c</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00273">fish_poisson2.txt:273</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:04:47
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

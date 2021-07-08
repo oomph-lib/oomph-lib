@@ -1,0 +1,240 @@
+/**
+
+\mainpage Demo problem: Bending of a 3D non-symmetric cantilever beam made of incompressible material
+
+In this tutorial we demonstrate the solution of a 3D solid mechanics
+problem: the large-amplitude bending deformation of a non-symmetric 
+cantilever beam made of incompressible Mooney-Rivlin material.
+
+Here is an animation of the beam's deformation. In its undeformed
+configuration, the beam is straight and its cross-section is given
+by a quarter circle. The beam is loaded by an increasing gravitational 
+body force, acting in the negative \f$ y\f$-direction, while its left 
+end (at \f$ z=0 \f$) is held fixed. Because of its non-symmetric 
+cross-section, the beam's downward bending deformation is
+accompanied by a sideways deflection.
+
+\image html cantilever.gif "Animation of the beam's bending deformation. " 
+\image latex cantilever.eps "Animation of the beam's bending deformation. " width=0.75\textwidth
+
+Note how the automatic mesh adaptation refines the mesh in the region
+of strongest bending.
+
+<HR>   
+<HR>
+
+\section mesh The mesh
+We use multiple inheritance to upgrade the already-existing refineable
+"quarter tube mesh" to a solid mesh. Following a call to the
+constructor of the underlying meshes, we set the nodes' Lagrangian
+coordinates to their current Eulerian positions to make the initial
+configuration stress-free.
+
+\dontinclude three_d_cantilever.cc
+\skipline start_mesh
+\until };
+
+<HR>   
+<HR> 
+
+\section global Global parameters and functions
+As usual, we define a namespace, \c Global_Physical_Variables,
+to define the problem parameters: the length of the cantilever
+beam, \f$ L \f$, a (pointer to) a strain energy function, the constitutive
+parameters \f$ C_1 \f$ and \f$ C_2 \f$ for the Mooney-Rivlin 
+strain energy function, and a (pointer to) a constitutive equation. 
+Finally, we define the gravitational body force which acts in the
+negative \f$ y\f$-direction.
+
+\dontinclude three_d_cantilever.cc
+\skipline start_namespace
+\until end namespace
+
+
+<HR>
+<HR>
+
+
+\section main The driver code
+
+ If the code is executed without command line arguments we perform
+a single simulation. We start by creating the strain energy function
+and pass it to the constructor of the strain-energy-based constitutive 
+equation. We then build the problem object, using \c oomph-lib's
+large-displacement Taylor-Hood solid mechanics elements which are
+based on a continuous-pressure/displacement formulation.
+
+\dontinclude three_d_cantilever.cc
+\skipline start_of_main
+\until problem;
+
+We document the initial configuration before starting a parameter
+study in which the magnitude of the gravitational body force
+is increased in small steps:
+
+\until end main demo code
+
+If the code is executed with a non-zero number of command line
+arguments, it performs a large number of additional self tests
+that we will not discuss here. See the driver code
+<A HREF="../../../../demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc">
+three_d_cantilever.cc</A> for details.
+
+
+<HR>
+<HR>
+
+\section class The problem class
+
+The problem class contains the usual member functions. 
+No action is required before the mesh adaptation;
+we overload the function  \c Problem::actions_after_adapt()
+to pin the redundant solid pressure degrees of freedom afterwards.
+
+\dontinclude three_d_cantilever.cc
+\skipline begin_problem
+\until doc_solution()
+
+We overload the \c Problem::mesh_pt() function to 
+return a pointer to the specific mesh used in this problem:
+
+\skipline Access function for the mesh
+\until }
+
+The private member data stores a \c DocInfo object in which we
+will store the name of the output directory.
+
+\skipline private:
+\until };
+
+<HR>
+<HR>
+
+\section constructor The problem constructor
+
+We start by creating the \c GeomObject that defines the curvilinear boundary
+of the beam: a circular cylinder of unit radius.
+
+\skipline start_of_constructor
+\until xi_hi[1]
+
+We build the mesh, using six axial layers of elements, before
+creating an error estimator and specifying the error targets for
+the adaptive mesh refinement. 
+
+
+\skipline of layers
+\until min_permitted_error()
+
+We complete the build of the elements by specifying the
+constitutive equation and the body force. We check that
+the element is based on a pressure/displacement formulation,
+and, if so, select an incompressible formulation. 
+(This check is only required because the self-tests not shown
+here also include cases in which the problem is solved
+using a displacement-based formulation with compressible
+elasticity; see also the section \ref incompr below). 
+
+\skipline Complete build of elements
+\until done build of elements
+
+We fix the position of all nodes at the left end of the beam 
+(on boundary 0) and pin any redundant solid pressures.
+
+\until mesh_pt()->element_pt());
+
+Finally, we assign the equation numbers and define the output
+directory.
+
+\until end of constructor 
+
+<HR>
+<HR> 
+
+\section doc Post-processing
+
+The post-processing function \c doc_solution() simply outputs the
+shape of the deformed beam.
+
+\dontinclude three_d_cantilever.cc
+\skipline start_doc
+\until end doc
+
+
+<HR>
+<HR>
+
+
+\section exercises Comments and exercises
+
+\subsection incompr How to enforce incompressibility
+We stress that the imposition of incompressibility must be requested
+explicitly via the element's member function \c incompressible().
+Mathematically, incompressibility is enforced via a Lagrange
+multiplier which manifests itself physically as the pressure. 
+Incompressibility can therefore only be enforced for
+elements that employ the pressure-displacement formulation
+of the principle of virtual displacements. This is why we
+the \c Problem constructor checked if the element is
+derived from the \c PVDEquationsWithPressure class before 
+setting the element's \c incompressible flag to \c true. 
+
+As usual, \c oomph-lib provides self-tests that assess if the 
+enforcement incompressibility (or the lack thereof) is consistent:
+- The compiler will not allow the user to enforce incompressibility
+  on elements that are based on the displacement form of the
+  principle of virtual displacements.
+  \n\n
+- Certain constitutive laws, such as the Mooney-Rivlin law used in
+  the present example require an incompressible formulation. If \c oomph-lib
+  is compiled with the \c PARANOID flag, an error is thrown if
+  such a constitutive law is used by an element for which
+  incompressibility has not been requested. 
+  \n\n
+  <center>
+  <b>Recall that the default setting is not to enforce
+  incompressibility!</b>
+  </center>
+  \n
+  If the library is
+  compiled without the \c PARANOID flag no warning will be issued
+  but the results will be "wrong" at least in the sense that
+  the material does not behave like an incompressible Mooney-Rivlin
+  solid. In fact, it is likely that the Newton solver will
+  diverge.  Anyway, as we keep saying, without the \c PARANOID flag, 
+  you're on your own!
+  \n\n
+- Some constitutive laws can be used for compressible and
+  incompressible behaviour. In this case it is important to 
+  set the \c incompressible() flag to the correct value. 
+  This issue is discussed in more detail in 
+  <a href="../../compressed_square/html/index.html">another tutorial.</a>
+.
+You should experiment with different combinations of constitutive laws and
+element types to familiarise yourself with these.
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial 
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/solid/three_d_cantilever/">
+demo_drivers/solid/three_d_cantilever/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc">
+demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc
+</A>
+</CENTER>
+.
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

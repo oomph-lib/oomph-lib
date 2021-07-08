@@ -1,0 +1,49 @@
+\hypertarget{refineable__young__laplace_8cc}{}\doxysection{refineable\+\_\+young\+\_\+laplace.\+cc File Reference}
+\label{refineable__young__laplace_8cc}\index{refineable\_young\_laplace.cc@{refineable\_young\_laplace.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classRefineableYoungLaplaceProblem}{Refineable\+Young\+Laplace\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{refineable__young__laplace_8cc_ae164cec5b3a54dd85b4b4f36ad5cb1e2}{run\+\_\+it}} (const string \&output\+\_\+directory)
+\item 
+int \mbox{\hyperlink{refineable__young__laplace_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{refineable__young__laplace_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{refineable__young__laplace_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{refineable\_young\_laplace.cc@{refineable\_young\_laplace.cc}!main@{main}}
+\index{main@{main}!refineable\_young\_laplace.cc@{refineable\_young\_laplace.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Driver code for 2D Refineable\+Young\+Laplace problem. Input arguments\+: none (for validation) or case (0,1,2,3 for all pinned, barrel with spines, barrel without spines, and T junction), and number of steps. 
+
+Definition at line 616 of file refineable\+\_\+young\+\_\+laplace.\+cc.
+
+
+
+References Global\+Parameters\+::\+All\+\_\+pinned, Global\+Parameters\+::\+Barrel\+\_\+shape, Global\+Parameters\+::\+Case, Global\+Parameters\+::\+Controlled\+\_\+height\+\_\+increment, Global\+Parameters\+::\+Gamma, Global\+Parameters\+::\+L\+\_\+x, Global\+Parameters\+::\+L\+\_\+y, Global\+Parameters\+::\+Nsteps, run\+\_\+it(), Global\+Parameters\+::\+T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle, and Global\+Parameters\+::\+Use\+\_\+spines.
+
+\mbox{\Hypertarget{refineable__young__laplace_8cc_ae164cec5b3a54dd85b4b4f36ad5cb1e2}\label{refineable__young__laplace_8cc_ae164cec5b3a54dd85b4b4f36ad5cb1e2}} 
+\index{refineable\_young\_laplace.cc@{refineable\_young\_laplace.cc}!run\_it@{run\_it}}
+\index{run\_it@{run\_it}!refineable\_young\_laplace.cc@{refineable\_young\_laplace.cc}}
+\doxysubsubsection{\texorpdfstring{run\_it()}{run\_it()}}
+{\footnotesize\ttfamily void run\+\_\+it (\begin{DoxyParamCaption}\item[{const string \&}]{output\+\_\+directory }\end{DoxyParamCaption})}
+
+Run code for current setting of parameter values -- specify name of output directory 
+
+Definition at line 541 of file refineable\+\_\+young\+\_\+laplace.\+cc.
+
+
+
+References Global\+Parameters\+::\+Nsteps, and problem.
+
+
+
+Referenced by main().
+

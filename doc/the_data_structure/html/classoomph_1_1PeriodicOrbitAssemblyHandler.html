@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">PeriodicOrbitAssemblyHandler</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1PeriodicOrbitAssemblyHandler-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:abe3fe6f2f74260df121bbf115ef3a5ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#abe3fe6f2f74260df121bbf115ef3a5ee">PeriodicOrbitAssemblyHandler</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, const unsigned &amp;n_element_in_period, const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;initial_guess, const double &amp;omega)</td></tr>
+<tr class="memdesc:abe3fe6f2f74260df121bbf115ef3a5ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, initialises values and constructs mesh of elements.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#abe3fe6f2f74260df121bbf115ef3a5ee">More...</a><br /></td></tr>
+<tr class="separator:abe3fe6f2f74260df121bbf115ef3a5ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3296942fb40f5ca642521db38d44988"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ac3296942fb40f5ca642521db38d44988">set_previous_dofs_to_current_dofs</a> ()</td></tr>
+<tr class="memdesc:ac3296942fb40f5ca642521db38d44988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the previous dofs.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ac3296942fb40f5ca642521db38d44988">More...</a><br /></td></tr>
+<tr class="separator:ac3296942fb40f5ca642521db38d44988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab960ecaac9239cfbc47f1036893362ff"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ab960ecaac9239cfbc47f1036893362ff">ndof</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt)</td></tr>
+<tr class="memdesc:ab960ecaac9239cfbc47f1036893362ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of degrees of freedom in the element elem_pt.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ab960ecaac9239cfbc47f1036893362ff">More...</a><br /></td></tr>
+<tr class="separator:ab960ecaac9239cfbc47f1036893362ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4d1e4e7e566061c2129157c67adab5b"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ac4d1e4e7e566061c2129157c67adab5b">eqn_number</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, const unsigned &amp;ieqn_local)</td></tr>
+<tr class="memdesc:ac4d1e4e7e566061c2129157c67adab5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the global equation number of the local unknown ieqn_local in elem_pt.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ac4d1e4e7e566061c2129157c67adab5b">More...</a><br /></td></tr>
+<tr class="separator:ac4d1e4e7e566061c2129157c67adab5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af43abc524b34d8e8035e2c2323e2fc87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#af43abc524b34d8e8035e2c2323e2fc87">get_residuals</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td></tr>
+<tr class="memdesc:af43abc524b34d8e8035e2c2323e2fc87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the contribution to the residuals of the element elem_pt.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#af43abc524b34d8e8035e2c2323e2fc87">More...</a><br /></td></tr>
+<tr class="separator:af43abc524b34d8e8035e2c2323e2fc87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e8d41c8ad79134466a1a50c11c62dc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a9e8d41c8ad79134466a1a50c11c62dc3">get_dofs_for_element</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dofs)</td></tr>
+<tr class="separator:a9e8d41c8ad79134466a1a50c11c62dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a681a727dc0a463e924aa88e0e691e2c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a681a727dc0a463e924aa88e0e691e2c6">get_previous_dofs_for_element</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dofs)</td></tr>
+<tr class="separator:a681a727dc0a463e924aa88e0e691e2c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d1d9f709e983495dac3113b8e716843"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a3d1d9f709e983495dac3113b8e716843">set_dofs_for_element</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;dofs)</td></tr>
+<tr class="separator:a3d1d9f709e983495dac3113b8e716843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d901ecdefca1c59403a4ae4b215446f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a6d901ecdefca1c59403a4ae4b215446f">get_jacobian</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a6d901ecdefca1c59403a4ae4b215446f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the elemental Jacobian matrix "d equation 
+/ d variable" for elem_pt.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a6d901ecdefca1c59403a4ae4b215446f">More...</a><br /></td></tr>
+<tr class="separator:a6d901ecdefca1c59403a4ae4b215446f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51b7db6467c46b417b3e630d0ef96a8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a51b7db6467c46b417b3e630d0ef96a8f">orbit_output</a> (std::ostream &amp;outfile, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a51b7db6467c46b417b3e630d0ef96a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate all desired vectors and matrices provided by the element elem_pt.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a51b7db6467c46b417b3e630d0ef96a8f">More...</a><br /></td></tr>
+<tr class="separator:a51b7db6467c46b417b3e630d0ef96a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a555a59c5c5b5dd2e08a31f6c6e176611"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a555a59c5c5b5dd2e08a31f6c6e176611">discrete_times</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>)</td></tr>
+<tr class="memdesc:a555a59c5c5b5dd2e08a31f6c6e176611"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tell me the times at which you want the solution.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a555a59c5c5b5dd2e08a31f6c6e176611">More...</a><br /></td></tr>
+<tr class="separator:a555a59c5c5b5dd2e08a31f6c6e176611"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a358d1749faa8ac7dd0de87340d878088"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a358d1749faa8ac7dd0de87340d878088">adapt_temporal_mesh</a> ()</td></tr>
+<tr class="memdesc:a358d1749faa8ac7dd0de87340d878088"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapt the time mesh.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a358d1749faa8ac7dd0de87340d878088">More...</a><br /></td></tr>
+<tr class="separator:a358d1749faa8ac7dd0de87340d878088"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a919aba117d2e7f08d1462b9d00799782"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a919aba117d2e7f08d1462b9d00799782">~PeriodicOrbitAssemblyHandler</a> ()</td></tr>
+<tr class="memdesc:a919aba117d2e7f08d1462b9d00799782"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, destroy the time mesh.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a919aba117d2e7f08d1462b9d00799782">More...</a><br /></td></tr>
+<tr class="separator:a919aba117d2e7f08d1462b9d00799782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ae2a8149c7cd33e41765ef080e1654e81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PeriodicOrbitTimeDiscretisation.html">PeriodicOrbitTimeDiscretisation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ae2a8149c7cd33e41765ef080e1654e81">Time_stepper_pt</a></td></tr>
+<tr class="memdesc:ae2a8149c7cd33e41765ef080e1654e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the timestepper.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ae2a8149c7cd33e41765ef080e1654e81">More...</a><br /></td></tr>
+<tr class="separator:ae2a8149c7cd33e41765ef080e1654e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3a8b481f99a46352f50186a8f9efe4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ac3a8b481f99a46352f50186a8f9efe4b">Problem_pt</a></td></tr>
+<tr class="memdesc:ac3a8b481f99a46352f50186a8f9efe4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the problem.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ac3a8b481f99a46352f50186a8f9efe4b">More...</a><br /></td></tr>
+<tr class="separator:ac3a8b481f99a46352f50186a8f9efe4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PeriodicOrbitTemporalMesh.html">PeriodicOrbitTemporalMesh</a>&lt; <a class="el" href="classoomph_1_1SpectralPeriodicOrbitElement.html">SpectralPeriodicOrbitElement</a>&lt; NNODE_1D &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90">Time_mesh_pt</a></td></tr>
+<tr class="memdesc:aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for mesh of temporal elements.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90">More...</a><br /></td></tr>
+<tr class="separator:aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae527e33cddc33225b532e6a64f255483"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ae527e33cddc33225b532e6a64f255483">Basic_time_mesh_pt</a></td></tr>
+<tr class="memdesc:ae527e33cddc33225b532e6a64f255483"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the mesh of temporal elements with a simple mesh pointer.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ae527e33cddc33225b532e6a64f255483">More...</a><br /></td></tr>
+<tr class="separator:ae527e33cddc33225b532e6a64f255483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac4a358fed9397f2ffcb796252f78025"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#aac4a358fed9397f2ffcb796252f78025">Previous_dofs</a></td></tr>
+<tr class="memdesc:aac4a358fed9397f2ffcb796252f78025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the previous solution.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#aac4a358fed9397f2ffcb796252f78025">More...</a><br /></td></tr>
+<tr class="separator:aac4a358fed9397f2ffcb796252f78025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa04e0d8d17e69d64d53df7f9d7369fad"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#aa04e0d8d17e69d64d53df7f9d7369fad">Ndof</a></td></tr>
+<tr class="memdesc:aa04e0d8d17e69d64d53df7f9d7369fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store number of degrees of freedom in the original problem.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#aa04e0d8d17e69d64d53df7f9d7369fad">More...</a><br /></td></tr>
+<tr class="separator:aa04e0d8d17e69d64d53df7f9d7369fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52b49ec4c94b9cf480395c7cad123ced"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a52b49ec4c94b9cf480395c7cad123ced">N_element_in_period</a></td></tr>
+<tr class="memdesc:a52b49ec4c94b9cf480395c7cad123ced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for number of elements in the period.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a52b49ec4c94b9cf480395c7cad123ced">More...</a><br /></td></tr>
+<tr class="separator:a52b49ec4c94b9cf480395c7cad123ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada223550212a4e5e5b6838f96e5a2170"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ada223550212a4e5e5b6838f96e5a2170">N_tstorage</a></td></tr>
+<tr class="memdesc:ada223550212a4e5e5b6838f96e5a2170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the number of unknown time values.  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ada223550212a4e5e5b6838f96e5a2170">More...</a><br /></td></tr>
+<tr class="separator:ada223550212a4e5e5b6838f96e5a2170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae922867706dcf2e79e837bbbe774e053"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ae922867706dcf2e79e837bbbe774e053">Omega</a></td></tr>
+<tr class="memdesc:ae922867706dcf2e79e837bbbe774e053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the frequency of the orbit (scaled by 2pi)  <a href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ae922867706dcf2e79e837bbbe774e053">More...</a><br /></td></tr>
+<tr class="separator:ae922867706dcf2e79e837bbbe774e053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;unsigned NNODE_1D&gt;<br />
+class oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;</h3>
+
+<p>A class that is used to assemble and solve the augmented system of equations associated with calculating periodic orbits directly </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00563">563</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abe3fe6f2f74260df121bbf115ef3a5ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe3fe6f2f74260df121bbf115ef3a5ee">&#9670;&nbsp;</a></span>PeriodicOrbitAssemblyHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::<a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">PeriodicOrbitAssemblyHandler</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>problem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_element_in_period</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>initial_guess</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>omega</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor, initialises values and constructs mesh of elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">707</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="problem_8cc_source.html#l01968">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00687">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Basic_time_mesh_pt</a>, <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="problem_8h_source.html#l01699">oomph::Problem::dof()</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00619">oomph::GeneralisedElement::internal_data_pt()</a>, <a class="el" href="nodes_8h_source.html#l00399">oomph::Data::is_pinned()</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00693">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Ndof</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l00824">oomph::GeneralisedElement::ninternal_data()</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="problem_8h_source.html#l01292">oomph::Problem::nsub_mesh()</a>, <a class="el" href="nodes_8cc_source.html#l00843">oomph::Data::ntstorage()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00702">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Omega</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00210">oomph::PeriodicOrbitEquations::omega_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00216">oomph::PeriodicOrbitEquations::set_ntstorage()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>, <a class="el" href="nodes_8cc_source.html#l00388">oomph::Data::set_time_stepper()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00219">oomph::PeriodicOrbitEquations::time_pt()</a>, <a class="el" href="problem_8h_source.html#l01449">oomph::Problem::time_pt()</a>, <a class="el" href="geom__objects_8h_source.html#l00193">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00677">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_stepper_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00044">value</a>, <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>, and <a class="el" href="nodes_8cc_source.html#l02324">oomph::Node::value()</a>.</p>
+
+</div>
+</div>
+<a id="a919aba117d2e7f08d1462b9d00799782"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a919aba117d2e7f08d1462b9d00799782">&#9670;&nbsp;</a></span>~PeriodicOrbitAssemblyHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::~<a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">PeriodicOrbitAssemblyHandler</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor, destroy the time mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01426">1426</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a358d1749faa8ac7dd0de87340d878088"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a358d1749faa8ac7dd0de87340d878088">&#9670;&nbsp;</a></span>adapt_temporal_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::adapt_temporal_mesh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adapt the time mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">1018</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="problem_8cc_source.html#l01968">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00687">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Basic_time_mesh_pt</a>, <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="mesh_8h_source.html#l00081">oomph::Mesh::Default_TimeStepper</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="problem_8h_source.html#l01560">oomph::Problem::global_data_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00619">oomph::GeneralisedElement::internal_data_pt()</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00696">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_element_in_period</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00693">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Ndof</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="problem_8h_source.html#l01584">oomph::Problem::nglobal_data()</a>, <a class="el" href="elements_8h_source.html#l00824">oomph::GeneralisedElement::ninternal_data()</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="problem_8h_source.html#l01292">oomph::Problem::nsub_mesh()</a>, <a class="el" href="nodes_8h_source.html#l00444">oomph::Data::nvalue()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00702">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Omega</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00210">oomph::PeriodicOrbitEquations::omega_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00216">oomph::PeriodicOrbitEquations::set_ntstorage()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>, <a class="el" href="nodes_8cc_source.html#l00388">oomph::Data::set_time_stepper()</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00219">oomph::PeriodicOrbitEquations::time_pt()</a>, <a class="el" href="problem_8h_source.html#l01449">oomph::Problem::time_pt()</a>, <a class="el" href="geom__objects_8h_source.html#l00193">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00677">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_stepper_pt</a>, <a class="el" href="nodes_8h_source.html#l00287">oomph::Data::value()</a>, <a class="el" href="nodes_8cc_source.html#l02324">oomph::Node::value()</a>, and <a class="el" href="nodes_8h_source.html#l01650">oomph::SolidNode::variable_position_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a555a59c5c5b5dd2e08a31f6c6e176611"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a555a59c5c5b5dd2e08a31f6c6e176611">&#9670;&nbsp;</a></span>discrete_times()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::discrete_times </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tell me the times at which you want the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l01010">1010</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="ac4d1e4e7e566061c2129157c67adab5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d1e4e7e566061c2129157c67adab5b">&#9670;&nbsp;</a></span>eqn_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::eqn_number </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ieqn_local</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the global equation number of the local unknown ieqn_local in elem_pt. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">899</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00693">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Ndof</a>, <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l00926">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00940">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_previous_dofs_for_element()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00955">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_dofs_for_element()</a>.</p>
+
+</div>
+</div>
+<a id="a9e8d41c8ad79134466a1a50c11c62dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e8d41c8ad79134466a1a50c11c62dc3">&#9670;&nbsp;</a></span>get_dofs_for_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::get_dofs_for_element </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dofs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00926">926</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01699">oomph::Problem::dof()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>.</p>
+
+</div>
+</div>
+<a id="a6d901ecdefca1c59403a4ae4b215446f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d901ecdefca1c59403a4ae4b215446f">&#9670;&nbsp;</a></span>get_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::get_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the elemental Jacobian matrix "d equation 
+/ d variable" for elem_pt. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00971">971</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="a681a727dc0a463e924aa88e0e691e2c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a681a727dc0a463e924aa88e0e691e2c6">&#9670;&nbsp;</a></span>get_previous_dofs_for_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::get_previous_dofs_for_element </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dofs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00940">940</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>.</p>
+
+</div>
+</div>
+<a id="af43abc524b34d8e8035e2c2323e2fc87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af43abc524b34d8e8035e2c2323e2fc87">&#9670;&nbsp;</a></span>get_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::get_residuals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the contribution to the residuals of the element elem_pt. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">919</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="ab960ecaac9239cfbc47f1036893362ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab960ecaac9239cfbc47f1036893362ff">&#9670;&nbsp;</a></span>ndof()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::ndof </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of degrees of freedom in the element elem_pt. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">894</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, and <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l00926">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00940">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_previous_dofs_for_element()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00955">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_dofs_for_element()</a>.</p>
+
+</div>
+</div>
+<a id="a51b7db6467c46b417b3e630d0ef96a8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51b7db6467c46b417b3e630d0ef96a8f">&#9670;&nbsp;</a></span>orbit_output()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::orbit_output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate all desired vectors and matrices provided by the element elem_pt. </p>
+<p>Return an unsigned integer to indicate whether the handler is a bifurcation tracking handler. The default is zero (not)</p>
+<p>Return a pointer to the bifurcation parameter in bifurcation tracking problems</p>
+<p>Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems Return the contribution to the residuals of the element elem_pt </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00999">999</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Time_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="a3d1d9f709e983495dac3113b8e716843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d1d9f709e983495dac3113b8e716843">&#9670;&nbsp;</a></span>set_dofs_for_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::set_dofs_for_element </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>dofs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00955">955</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01699">oomph::Problem::dof()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>.</p>
+
+</div>
+</div>
+<a id="ac3296942fb40f5ca642521db38d44988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3296942fb40f5ca642521db38d44988">&#9670;&nbsp;</a></span>set_previous_dofs_to_current_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the previous dofs. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">885</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01699">oomph::Problem::dof()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::N_tstorage</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Previous_dofs</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::Problem_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae527e33cddc33225b532e6a64f255483"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae527e33cddc33225b532e6a64f255483">&#9670;&nbsp;</a></span>Basic_time_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::Basic_time_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the mesh of temporal elements with a simple mesh pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00687">687</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+
+</div>
+</div>
+<a id="a52b49ec4c94b9cf480395c7cad123ced"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52b49ec4c94b9cf480395c7cad123ced">&#9670;&nbsp;</a></span>N_element_in_period</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::N_element_in_period</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for number of elements in the period. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00696">696</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="ada223550212a4e5e5b6838f96e5a2170"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada223550212a4e5e5b6838f96e5a2170">&#9670;&nbsp;</a></span>N_tstorage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::N_tstorage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the number of unknown time values. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00699">699</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00894">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::ndof()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>.</p>
+
+</div>
+</div>
+<a id="aa04e0d8d17e69d64d53df7f9d7369fad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa04e0d8d17e69d64d53df7f9d7369fad">&#9670;&nbsp;</a></span>Ndof</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::Ndof</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Store number of degrees of freedom in the original problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00693">693</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00899">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::eqn_number()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+
+</div>
+</div>
+<a id="ae922867706dcf2e79e837bbbe774e053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae922867706dcf2e79e837bbbe774e053">&#9670;&nbsp;</a></span>Omega</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::Omega</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the frequency of the orbit (scaled by 2pi) </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00702">702</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+
+</div>
+</div>
+<a id="aac4a358fed9397f2ffcb796252f78025"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac4a358fed9397f2ffcb796252f78025">&#9670;&nbsp;</a></span>Previous_dofs</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;double&gt; <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::Previous_dofs</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the previous solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00690">690</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00940">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_previous_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>.</p>
+
+</div>
+</div>
+<a id="ac3a8b481f99a46352f50186a8f9efe4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3a8b481f99a46352f50186a8f9efe4b">&#9670;&nbsp;</a></span>Problem_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Problem.html">Problem</a>* <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::Problem_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00680">680</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00926">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_dofs_for_element()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00999">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::orbit_output()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00955">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_dofs_for_element()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00885">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::set_previous_dofs_to_current_dofs()</a>.</p>
+
+</div>
+</div>
+<a id="aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90">&#9670;&nbsp;</a></span>Time_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PeriodicOrbitTemporalMesh.html">PeriodicOrbitTemporalMesh</a>&lt;<a class="el" href="classoomph_1_1SpectralPeriodicOrbitElement.html">SpectralPeriodicOrbitElement</a>&lt;NNODE_1D&gt; &gt;* <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::Time_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for mesh of temporal elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00684">684</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l01010">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::discrete_times()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00971">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_jacobian()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00919">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::get_residuals()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00999">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::orbit_output()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l01426">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::~PeriodicOrbitAssemblyHandler()</a>.</p>
+
+</div>
+</div>
+<a id="ae2a8149c7cd33e41765ef080e1654e81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2a8149c7cd33e41765ef080e1654e81">&#9670;&nbsp;</a></span>Time_stepper_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PeriodicOrbitTimeDiscretisation.html">PeriodicOrbitTimeDiscretisation</a>* <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html">oomph::PeriodicOrbitAssemblyHandler</a>&lt; NNODE_1D &gt;::Time_stepper_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the timestepper. </p>
+
+<p class="definition">Definition at line <a class="el" href="periodic__orbit__handler_8h_source.html#l00677">677</a> of file <a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01018">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, and <a class="el" href="periodic__orbit__handler_8h_source.html#l00707">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::PeriodicOrbitAssemblyHandler()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="periodic__orbit__handler_8h_source.html">periodic_orbit_handler.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

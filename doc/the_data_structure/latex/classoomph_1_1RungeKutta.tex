@@ -1,0 +1,170 @@
+\hypertarget{classoomph_1_1RungeKutta}{}\doxysection{oomph\+::Runge\+Kutta$<$ O\+R\+D\+ER $>$ Class Template Reference}
+\label{classoomph_1_1RungeKutta}\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+
+
+{\ttfamily \#include $<$explicit\+\_\+timesteppers.\+h$>$}
+
+Inheritance diagram for oomph\+::Runge\+Kutta$<$ O\+R\+D\+ER $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1RungeKutta}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RungeKutta_a31a3f1886f1243e7a7b9fb10f999a017}{Runge\+Kutta}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, set the type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RungeKutta_a26001afd775b24e25043fb0a2d449248}{Runge\+Kutta}} (const \mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RungeKutta_a06cc882a44817b7c894b3e7dc04fc79e}{operator=}} (const \mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RungeKutta_a53a492b4190ccd3dfc0b4af35b2c240f}{timestep}} (\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} $\ast$const \&object\+\_\+pt, const double \&dt)
+\begin{DoxyCompactList}\small\item\em Function that is used to advance time in the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RungeKutta_a22ceced74a6c8d7725c915ba8ff8a736}{timestep}} (\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} $\ast$const \&object\+\_\+pt, const double \&dt)
+\begin{DoxyCompactList}\small\item\em Explicit specialisation for fourth-\/order RK scheme. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RungeKutta_ac989c64573eb79b5d064f7af9bf1ffd2}{timestep}} (\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} $\ast$const \&object\+\_\+pt, const double \&dt)
+\begin{DoxyCompactList}\small\item\em Explicit specialisation for second-\/order RK scheme. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned O\+R\+D\+ER$>$\newline
+class oomph\+::\+Runge\+Kutta$<$ O\+R\+D\+E\+R $>$}
+
+=========================================================== Standard Runge Kutta Timestepping 
+
+Definition at line 206 of file explicit\+\_\+timesteppers.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RungeKutta_a31a3f1886f1243e7a7b9fb10f999a017}\label{classoomph_1_1RungeKutta_a31a3f1886f1243e7a7b9fb10f999a017}} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!RungeKutta@{RungeKutta}}
+\index{RungeKutta@{RungeKutta}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{RungeKutta()}{RungeKutta()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
+\mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ O\+R\+D\+ER $>$\+::\mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, set the type. 
+
+
+
+Definition at line 211 of file explicit\+\_\+timesteppers.\+h.
+
+
+
+References oomph\+::\+Explicit\+Time\+Stepper\+::\+Type.
+
+\mbox{\Hypertarget{classoomph_1_1RungeKutta_a26001afd775b24e25043fb0a2d449248}\label{classoomph_1_1RungeKutta_a26001afd775b24e25043fb0a2d449248}} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!RungeKutta@{RungeKutta}}
+\index{RungeKutta@{RungeKutta}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{RungeKutta()}{RungeKutta()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
+\mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ O\+R\+D\+ER $>$\+::\mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}}$<$ O\+R\+D\+ER $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 217 of file explicit\+\_\+timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1RungeKutta_a06cc882a44817b7c894b3e7dc04fc79e}\label{classoomph_1_1RungeKutta_a06cc882a44817b7c894b3e7dc04fc79e}} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ O\+R\+D\+ER $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}}$<$ O\+R\+D\+ER $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 223 of file explicit\+\_\+timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1RungeKutta_a22ceced74a6c8d7725c915ba8ff8a736}\label{classoomph_1_1RungeKutta_a22ceced74a6c8d7725c915ba8ff8a736}} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!timestep@{timestep}}
+\index{timestep@{timestep}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{timestep()}{timestep()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ 4 $>$\+::timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} $\ast$const \&}]{object\+\_\+pt,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Explicit specialisation for fourth-\/order RK scheme. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_ab43bbab17960d0f50b8842e996f5c765}{oomph\+::\+Explicit\+Time\+Stepper}}.
+
+
+
+Definition at line 217 of file explicit\+\_\+timesteppers.\+cc.
+
+
+
+References oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+stage(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+timestep(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+stage(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+timestep(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::add\+\_\+to\+\_\+dofs(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::get\+\_\+dofs(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::get\+\_\+dvaluesdt(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::set\+\_\+dofs(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::time(), and u().
+
+\mbox{\Hypertarget{classoomph_1_1RungeKutta_a53a492b4190ccd3dfc0b4af35b2c240f}\label{classoomph_1_1RungeKutta_a53a492b4190ccd3dfc0b4af35b2c240f}} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!timestep@{timestep}}
+\index{timestep@{timestep}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{timestep()}{timestep()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$unsigned O\+R\+D\+ER$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ O\+R\+D\+ER $>$\+::timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} $\ast$const \&}]{object\+\_\+pt,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function that is used to advance time in the object. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_ab43bbab17960d0f50b8842e996f5c765}{oomph\+::\+Explicit\+Time\+Stepper}}.
+
+
+
+Definition at line 203 of file explicit\+\_\+timesteppers.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1RungeKutta_ac989c64573eb79b5d064f7af9bf1ffd2}\label{classoomph_1_1RungeKutta_ac989c64573eb79b5d064f7af9bf1ffd2}} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!timestep@{timestep}}
+\index{timestep@{timestep}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{timestep()}{timestep()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ 2 $>$\+::timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} $\ast$const \&}]{object\+\_\+pt,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Explicit specialisation for second-\/order RK scheme. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_ab43bbab17960d0f50b8842e996f5c765}{oomph\+::\+Explicit\+Time\+Stepper}}.
+
+
+
+Definition at line 293 of file explicit\+\_\+timesteppers.\+cc.
+
+
+
+References oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+stage(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+timestep(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+stage(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+timestep(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::add\+\_\+to\+\_\+dofs(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::get\+\_\+dofs(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::get\+\_\+dvaluesdt(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::set\+\_\+dofs(), oomph\+::\+Explicit\+Time\+Steppable\+Object\+::time(), and u().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{explicit__timesteppers_8h}{explicit\+\_\+timesteppers.\+h}}\item 
+\mbox{\hyperlink{explicit__timesteppers_8cc}{explicit\+\_\+timesteppers.\+cc}}\end{DoxyCompactItemize}

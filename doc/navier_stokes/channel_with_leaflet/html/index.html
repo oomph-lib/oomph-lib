@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Flow in a 2D channel with an oscillating leaflet</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Flow in a 2D channel with an oscillating leaflet </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we consider the flow in a 2D channel which is partially obstructed by an oscillating leaflet. We consider the case where the motion of the leaflet is prescribed &ndash; this is a "warm-up exercise" for the <a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">corresponding FSI problem </a> in which the leaflet is an elastic structure.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="the_problem"></a>
+The Problem</h1>
+<p>The figure below shows a sketch of the problem: A 2D channel of height <img class="formulaInl" alt="$ H^*_{tot}$" src="form_0.png"/> and length <img class="formulaInl" alt="$ L^*_{left} + L^*_{right} $" src="form_1.png"/> is partially occluded by a (zero-thickness) leaflet of height <img class="formulaInl" alt="$ H^*_{leaflet} $" src="form_2.png"/>. The leaflet is parametrised by a Lagrangian coordinate <img class="formulaInl" alt="$ \xi^* $" src="form_3.png"/> so that the position vector to a material point on the leaflet is given by <img class="formulaInl" alt="$ {\bf R}^*_w(\xi^*,t^*) $" src="form_4.png"/>, and we assume that the leaflet performs time-periodic oscillations with period <img class="formulaInl" alt="$ T^*. $" src="form_5.png"/> Steady Poiseuille flow with average velocity <img class="formulaInl" alt="$ U^* $" src="form_6.png"/> is imposed at the left end of the channel while we assume that the outflow is parallel and axially traction-free.</p>
+<div class="image">
+<img src="channel_with_leaflet_dim.gif" alt=""/>
+<div class="caption">
+Sketch of the problem in dimensional </div></div>
+ <p>We non-dimensionalise all length and coordinates on the channel width, <img class="formulaInl" alt="$ H^*_{tot} $" src="form_7.png"/> , time on the natural timescale of the flow, <img class="formulaInl" alt="$ H^*_{tot}/U^* $" src="form_8.png"/>, the velocities on the mean velocity, <img class="formulaInl" alt="$ U^* $" src="form_6.png"/>, and the pressure on the viscous scale. The problem is then governed by the non-dimensional Navier-Stokes equations </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re \left( St \frac{\partial u_i}{\partial t} + u_j \frac{\partial u_i}{\partial x_j} \right) = - \frac{\partial p}{\partial x_i} + \frac{\partial }{\partial x_j} \left[ \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) \right], \]" src="form_9.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ Re = \rho U^* H_0^* / \mu $" src="form_10.png"/> and <img class="formulaInl" alt="$ St = 1 $" src="form_11.png"/>, and </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u_i}{\partial x_i} = 0, \]" src="form_12.png"/>
+</p>
+ </center><p> subject to parabolic inflow </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf u} = 6 x_2 (1-x_2) {\bf e}_1 \]" src="form_13.png"/>
+</p>
+ </center><p> at the inflow cross-section; parallel, axially-traction-free outflow at the outlet; and no-slip on the stationary channel walls, <img class="formulaInl" alt="$ {\bf u} = {\bf 0} $" src="form_14.png"/>. The no-slip condition on the leaflet is </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf u} = \frac{\partial {\bf R}_w(\xi,t)}{\partial t} \]" src="form_15.png"/>
+</p>
+ </center><p> and the leaflet performs oscillations with non-dimensional period <img class="formulaInl" alt="$ T = T^* U^* / H^*_{tot} $" src="form_16.png"/>. Here is a sketch of the non-dimensional version of the problem:</p>
+<div class="image">
+<img src="channel_with_leaflet.gif" alt=""/>
+<div class="caption">
+Sketch of the problem in dimensionless variables. </div></div>
+ <p>An interesting feature of this problem is that even though the leaflet is assumed to have negligible thickness its presence will generate a pressure jump between its two faces. (The velocities are continuous because the no-slip condition imposes the same velocity on both faces.) When discretising the problem with <code>QTaylorHood</code> elements (for which the pressure varies continuously across the element boundaries), the mesh must therefore be "opened up" with a cut along the position of the leaflet. This is done in the constructor of the <a href="../../../meshes/mesh_list/html/index.html#channel_with_leaflet"><code>ChannelWithLeafletMesh</code></a> which forms the basis of <code>RefineableAlgebraicChannelWithLeafletMesh</code> used to discretise this problem. (See <a class="el" href="index.html#comm_and_ex">Further comments and exercises</a> for a more detailed discussion of the mesh.)</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figure below shows a snapshot of the flow field <br  />
+ (pressure contours and instantaneous streamlines) for a Reynolds number of <img class="formulaInl" alt="$ Re=20 $" src="form_17.png"/> and an oscillation period of <img class="formulaInl" alt="$ T=20 $" src="form_18.png"/>, as well as the corresponding fluid mesh. Note how <code>oomph-lib's</code> automatic mesh adaptation has refined the mesh near the tip of the leaflet where the pressure has a singularity.</p>
+<div class="image">
+<img src="channel_with_leaflet_flow_cropped.gif" alt=""/>
+<div class="caption">
+Mesh (top) and flow field (bottom). </div></div>
+ <p>The corresponding <a href="../figures/channel_with_leaflet_flow.avi">animation</a> illustrates the algebraic node update strategy (implemented with an <code>AlgebraicMesh</code>, discussed in more detail in <a href="../../algebraic_collapsible_channel/html/index.html">another tutorial</a>) and the evolution of the flow field. Note that the instantaneous streamlines intersect the (impermeable) leaflet because the leaflet is not stationary.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="parameters"></a>
+The global parameters</h1>
+<p>As usual we use a namespace to define the (single) global parameter, the Reynolds number.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_global_parameters=======================================</span></div>
+<div class="line"><span class="comment">/// Global parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a>=20.0;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="leaflet"></a>
+Specification of the leaflet geometry</h1>
+<p>We specify the leaflet geometry and its time-dependent motion by representing it as a <code>GeomObject</code>. The <code>GeomObject</code> has one Lagrangian and two Eulerian coordinates, and its geometry is characterised by its length, the x-coordinate of its origin, <img class="formulaInl" alt="$ X_0 $" src="form_19.png"/>, and the period and amplitude of the horizontal and vertical tip deflection.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_leaflet_class===========================================</span></div>
+<div class="line"><span class="comment">/// GeomObject representing a vertical leaflet that performs</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// bending and stretching oscillations. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classLeaflet.html">Leaflet</a> : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor: Pass length (in Lagrangian coordinates),</span></div>
+<div class="line"><span class="comment"> /// the amplitude of the horizontal and vertical deflection of the tip,</span></div>
+<div class="line"><span class="comment"> /// the x-coordinate of the origin and the period of the oscillation.</span></div>
+<div class="line"><span class="comment"> /// Passes the number of Lagrangian and Eulerian coordinates to the</span></div>
+<div class="line"><span class="comment"> /// constructor of the GeomObject base class.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classLeaflet.html#acb53ccf4578a9981216cf0afd4b38453">Leaflet</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="classLeaflet.html#a7a28827b7081107ac9e33087598ca868">length</a>, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="classLeaflet.html#a48e4d16790ffd9de527093eac8ff566c">d_x</a>,<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="classLeaflet.html#a8ff8044a3da540c7c9d7a89790b6ee58">d_y</a>,</div>
+<div class="line">         <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="classLeaflet.html#af4a819a3ba64960f4b796dc5a0d3eb5b">x_0</a>, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; period, Time* time_pt)</div>
+<div class="line">  : GeomObject(1,2), <a class="code" href="classLeaflet.html#a64c27b796ceece358d09d137f15bbf20">Length</a>(<a class="code" href="classLeaflet.html#a7a28827b7081107ac9e33087598ca868">length</a>), <a class="code" href="classLeaflet.html#a473b6f4ef98bfba9e2c6974027ba4f4b">D_x</a>(<a class="code" href="classLeaflet.html#a48e4d16790ffd9de527093eac8ff566c">d_x</a>), <a class="code" href="classLeaflet.html#af9c75c7aeecae4b14f7ba0fb245eb8ee">D_y</a>(<a class="code" href="classLeaflet.html#a8ff8044a3da540c7c9d7a89790b6ee58">d_y</a>), <a class="code" href="classLeaflet.html#a29a25366a0cf97ad0dd36172fdfa3d0c">X_0</a>(<a class="code" href="classLeaflet.html#af4a819a3ba64960f4b796dc5a0d3eb5b">x_0</a>),</div>
+<div class="line">   <a class="code" href="classLeaflet.html#a0d78b5fb3ec71009d4a9bcc79f8a85a9">T</a>(period),<a class="code" href="classLeaflet.html#ac10f13ad45456dc714ab57042861de53">Time_pt</a>(time_pt) {}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor -- emtpy</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classLeaflet.html#a0bbfaeec2534389b203fd2a2316db859">~Leaflet</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Position vector, r, to the point identified by  </span></div>
+<div class="line"><span class="comment"> /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector) at discrete time</span></div>
+<div class="line"><span class="comment"> /// level t (t=0: present; t&gt;0: previous).</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classLeaflet.html#a5b78c2735652b6a5c08c6aa9d38b6232">position</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, </div>
+<div class="line">               Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">    <span class="keyword">using namespace </span>MathematicalConstants;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Position</span></div>
+<div class="line">    r[0] =  <a class="code" href="classLeaflet.html#a29a25366a0cf97ad0dd36172fdfa3d0c">X_0</a> + <a class="code" href="classLeaflet.html#a473b6f4ef98bfba9e2c6974027ba4f4b">D_x</a>*xi[0]*xi[0]/<a class="code" href="classLeaflet.html#a64c27b796ceece358d09d137f15bbf20">Length</a>/<a class="code" href="classLeaflet.html#a64c27b796ceece358d09d137f15bbf20">Length</a>*sin(2.0*Pi*<a class="code" href="classLeaflet.html#ac10f13ad45456dc714ab57042861de53">Time_pt</a>-&gt;time(t)/<a class="code" href="classLeaflet.html#a0d78b5fb3ec71009d4a9bcc79f8a85a9">T</a>);</div>
+<div class="line">    r[1] = xi[0]*(1.0+<a class="code" href="classLeaflet.html#af9c75c7aeecae4b14f7ba0fb245eb8ee">D_y</a>/<a class="code" href="classLeaflet.html#a64c27b796ceece358d09d137f15bbf20">Length</a>*0.5*(1.0-cos(4.0*Pi*<a class="code" href="classLeaflet.html#ac10f13ad45456dc714ab57042861de53">Time_pt</a>-&gt;time(t)/<a class="code" href="classLeaflet.html#a0d78b5fb3ec71009d4a9bcc79f8a85a9">T</a>)));</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Steady version: Get current shape</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classLeaflet.html#a5b78c2735652b6a5c08c6aa9d38b6232">position</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <a class="code" href="classLeaflet.html#a5b78c2735652b6a5c08c6aa9d38b6232">position</a>(0,xi,r); </div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Number of geometric Data in GeomObject: None.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classLeaflet.html#a91f2460718ec5a4ef32e302b8b14cdca">ngeom_data</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> 0;}  </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of the leaflet</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classLeaflet.html#a7a28827b7081107ac9e33087598ca868">length</a>() { <span class="keywordflow">return</span> <a class="code" href="classLeaflet.html#a64c27b796ceece358d09d137f15bbf20">Length</a>; }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Amplitude of horizontal tip displacement</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span>&amp; <a class="code" href="classLeaflet.html#a48e4d16790ffd9de527093eac8ff566c">d_x</a>() {<span class="keywordflow">return</span> <a class="code" href="classLeaflet.html#a473b6f4ef98bfba9e2c6974027ba4f4b">D_x</a>;}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Amplitude of vertical tip displacement</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classLeaflet.html#a8ff8044a3da540c7c9d7a89790b6ee58">d_y</a>() {<span class="keywordflow">return</span> <a class="code" href="classLeaflet.html#af9c75c7aeecae4b14f7ba0fb245eb8ee">D_y</a>;}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// x-coordinate of leaflet origin</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classLeaflet.html#af4a819a3ba64960f4b796dc5a0d3eb5b">x_0</a>() {<span class="keywordflow">return</span> <a class="code" href="classLeaflet.html#a29a25366a0cf97ad0dd36172fdfa3d0c">X_0</a>;}</div>
+<div class="line"> </div>
+<div class="line">private :</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Length in terms of Lagrangian coordinates</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classLeaflet.html#a64c27b796ceece358d09d137f15bbf20">Length</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> ///\short Horizontal displacement of tip</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classLeaflet.html#a473b6f4ef98bfba9e2c6974027ba4f4b">D_x</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> ///\short Vertical displacement of tip</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classLeaflet.html#af9c75c7aeecae4b14f7ba0fb245eb8ee">D_y</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment">///\short Origin</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classLeaflet.html#a29a25366a0cf97ad0dd36172fdfa3d0c">X_0</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> ///Period of the oscillations</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classLeaflet.html#a0d78b5fb3ec71009d4a9bcc79f8a85a9">T</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Pointer to the global time object</span></div>
+<div class="line"><span class="comment"></span> Time* <a class="code" href="classLeaflet.html#ac10f13ad45456dc714ab57042861de53">Time_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">//end_of_the_GeomObject</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+ <h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>We store the command line arguments, create a <code>DocInfo</code> object, and assign the parameters that specify the domain and the leaflet geometry:</p>
+ <div class="fragment"><div class="line"><span class="comment">//======start_of_main==================================================</span></div>
+<div class="line"><span class="comment">/// Driver code -- pass a command line argument if you want to run</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// the code in validation mode where it only performs a few steps</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="channel__with__leaflet_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up doc info</span></div>
+<div class="line"> DocInfo doc_info; </div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parameters for the leaflet</span></div>
+<div class="line"> <span class="comment">//----------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Height</span></div>
+<div class="line"> <span class="keywordtype">double</span> h_leaflet = 0.5;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Tip deflection</span></div>
+<div class="line"> <span class="keywordtype">double</span> d_x = 0.25;</div>
+<div class="line"> <span class="keywordtype">double</span> d_y = -0.05;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// x-positon of root</span></div>
+<div class="line"> <span class="keywordtype">double</span> x_0 = 3.0; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Period of the oscillation on the natural timescale of the flow</span></div>
+<div class="line"> <span class="keywordtype">double</span> period = 20.0;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Parameters for the domain</span></div>
+<div class="line"> <span class="comment">//-------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Length of the mesh to right and left of the leaflet</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_left =2.0;</div>
+<div class="line"> <span class="keywordtype">double</span> l_right= 3.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Total height of domain (unity because lengths have been scaled on it)</span></div>
+<div class="line"> <span class="keywordtype">double</span> h_tot=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial number of element rows/columns in various mesh regions</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nleft=8;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nright=12;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> ny1=2;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> ny2=2; </div>
+</div><!-- fragment --><p>Next we build the problem and assign the time-stepping parameters (as usual, fewer timesteps are used during a validation run which is identified by a non-zero number of command line arguments):</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Build the problem</span></div>
+<div class="line"> <a class="code" href="classChannelWithLeafletProblem.html">ChannelWithLeafletProblem&lt;AlgebraicElement&lt;RefineableQTaylorHoodElement&lt;2&gt;</a> &gt; &gt;</div>
+<div class="line">  <a class="code" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>(l_left, l_right, h_leaflet,</div>
+<div class="line">          h_tot,nleft, nright,ny1,ny2,</div>
+<div class="line">          d_x, d_y, x_0,</div>
+<div class="line">          period);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of timesteps per period</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nsteps_per_period=40;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of periods</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nperiod=3; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of timesteps (reduced for validation)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=nsteps_per_period*nperiod;</div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1)</div>
+<div class="line">  {</div>
+<div class="line">   nstep=3;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Timestep: </span></div>
+<div class="line"> <span class="keywordtype">double</span> dt=period/double(nsteps_per_period);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Initialise timestep </span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.initialise_dt(dt);</div>
+</div><!-- fragment --><p>We start the simulation with a steady solve, allowing up to five levels of adaptive refinement (fewer if we are performing a validation run):</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set max. number of adaptations (reduced for validation)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> max_adapt=5;</div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1)</div>
+<div class="line">  {</div>
+<div class="line">   max_adapt=2;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do steady solve first -- this also sets the history values</span></div>
+<div class="line"> <span class="comment">// to those corresponding to an impulsive start from the</span></div>
+<div class="line"> <span class="comment">// steady solution</span></div>
+<div class="line"> <a class="code" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.steady_newton_solve(max_adapt);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Output steady solution</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution(doc_info);</div>
+<div class="line"> doc_info.number()++;</div>
+</div><!-- fragment --><p>Finally, we enter the proper timestepping loop, allowing one spatial adaptation per timestep and suppressing the re-assignment of initial conditions following an adaptation by setting the parameter <code>first</code> to false (see the discussion of timestepping with automatic mesh adaptation in <a href="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">another tutorial</a>.)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Reduce the max number of adaptations for time-dependent simulation</span></div>
+<div class="line"><span class="comment"></span> max_adapt=1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// We don&#39;t want to re-assign the initial condition </span></div>
+<div class="line"> <span class="keywordtype">bool</span> first=<span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Timestepping loop</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line">  { </div>
+<div class="line">   <span class="comment">// Solve the problem</span></div>
+<div class="line">   <a class="code" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.unsteady_newton_solve(dt,max_adapt,first);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Output the solution</span></div>
+<div class="line">   <a class="code" href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution(doc_info);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Step number</span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">//end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The Problem class</h1>
+<p>The problem class has the usual member functions to perform actions after the mesh adaptation and before every implicit timestep:</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_problem_class===========================================</span></div>
+<div class="line"><span class="comment">/// Problem class</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classChannelWithLeafletProblem.html">ChannelWithLeafletProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass the length of the domain at the left</span></div>
+<div class="line"><span class="comment"> /// of the leaflet lleft,the length of the domain at the right of the</span></div>
+<div class="line"><span class="comment"> /// leaflet lright,the height of the leaflet hleaflet, the total height</span></div>
+<div class="line"><span class="comment"> /// of the domain htot, the number of macro-elements at the left of the</span></div>
+<div class="line"><span class="comment"> /// leaflet nleft, the number of macro-elements at the right of the</span></div>
+<div class="line"><span class="comment"> /// leaflet nright, the number of macro-elements under hleaflet ny1,</span></div>
+<div class="line"><span class="comment"> /// the number of macro-elements above hleaflet ny2,the x-displacement</span></div>
+<div class="line"><span class="comment"> /// of the leaflet d_x,the y-displacement of the leaflet d_y,the abscissa </span></div>
+<div class="line"><span class="comment"> /// of the origin of the leaflet x_0, the period of the moving leaflet.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classChannelWithLeafletProblem.html#a3c5a4c97ec66fe53bc130005c74a47b5">ChannelWithLeafletProblem</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; l_left,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; l_right, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; h_leaflet,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; h_tot,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nleft, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nright,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ny1, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp;  ny2,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; d_x,<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; d_y,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; x_0, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; period);  </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classChannelWithLeafletProblem.html#a5dec8333d345e4bcaac7fcd5b463eafc">~ChannelWithLeafletProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Overloaded access function to specific mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableAlgebraicChannelWithLeafletMesh&lt;ELEMENT&gt;* <a class="code" href="classChannelWithLeafletProblem.html#a023dc7718a98f820e4bc4541150a0c08">mesh_pt</a>() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from pointer to the Mesh base class to the specific </span></div>
+<div class="line">   <span class="comment">// element type that we&#39;re using here.</span></div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>RefineableAlgebraicChannelWithLeafletMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classChannelWithLeafletProblem.html#a2fcba9dc98f40bbca1919a715fa087d7">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classChannelWithLeafletProblem.html#a5721dfad66d13a1ae60adce7801dcb12">actions_before_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adaptation: Pin redundant pressure dofs</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classChannelWithLeafletProblem.html#a7978755f073d950e5012951ced9e455e">actions_after_adapt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the velocity boundary condition on the moving leaflet</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classChannelWithLeafletProblem.html#acef6ec771775162f77295a8f92d695ac">actions_before_implicit_timestep</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classChannelWithLeafletProblem.html#adb8e1420844f7b40d71beae81111c4d0">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the GeomObject</span></div>
+<div class="line"><span class="comment"></span> GeomObject* <a class="code" href="classChannelWithLeafletProblem.html#ac32f0451749ec4e85d39246f5823a5f2">Leaflet_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>We construct the timestepper and the <code>GeomObject</code> that represents the leaflet, and pass it pointers to them to the constructor of the <code>RefineableAlgebraicChannelWithLeafletMesh</code> (discussed in more detail in <a class="el" href="index.html#comm_and_ex">Further comments and exercises</a>).</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==start_of_constructor=================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classChannelWithLeafletProblem.html#a3c5a4c97ec66fe53bc130005c74a47b5">ChannelWithLeafletProblem&lt;ELEMENT&gt;::ChannelWithLeafletProblem</a>(</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; l_left,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; l_right, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; h_leaflet,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; h_tot,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nleft, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nright,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ny1, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp;  ny2,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; d_x,<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; d_y,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; x_0, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; period)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Allocate the timestepper</span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> BDF&lt;2&gt;);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Create the geometric object that represents the leaflet</span></div>
+<div class="line"> Leaflet_pt = <span class="keyword">new</span> <a class="code" href="classLeaflet.html">Leaflet</a>(h_leaflet, d_x, d_y, x_0, period, time_pt()) ;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Build the mesh</span></div>
+<div class="line">Problem::mesh_pt()=<span class="keyword">new</span> RefineableAlgebraicChannelWithLeafletMesh&lt;ELEMENT&gt;(</div>
+<div class="line"> Leaflet_pt,</div>
+<div class="line"> l_left, l_right,</div>
+<div class="line"> h_leaflet,</div>
+<div class="line"> h_tot,nleft,</div>
+<div class="line"> nright,ny1,ny2,</div>
+<div class="line"> time_stepper_pt());     </div>
+</div><!-- fragment --><p>Next we create the spatial error estimator and loop over the elements to set the pointers to the relevant physical parameters.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator</span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>RefineableAlgebraicChannelWithLeafletMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(mesh_pt())-&gt;</div>
+<div class="line">  spatial_error_estimator_pt()=error_estimator_pt;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   ELEMENT* el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the Reynolds number</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">  </div>
+<div class="line">   <span class="comment">// Set the Womersley number (product of Reynolds and Strouhal).</span></div>
+<div class="line">   <span class="comment">// We&#39;re assuming a Strouhal number of one, corresponding to</span></div>
+<div class="line">   <span class="comment">// a non-dimensionalisation of time on the flow&#39;s natural timescale.</span></div>
+<div class="line">   el_pt-&gt;re_st_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">  </div>
+<div class="line">  } <span class="comment">// end loop over elements</span></div>
+</div><!-- fragment --><p>The velocity is prescribed everywhere apart from the outflow boundary (boundary 1; see the sketch in <a class="el" href="index.html#comm_and_ex">Further comments and exercises</a> for the enumeration of the mesh boundaries). Along the inflow (boundary 3) we apply a parabolic velocity profile with unit flux:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Pin the boundary nodes</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">      mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1);</div>
+<div class="line">      <span class="comment">//do not pin the x velocity of the outflow</span></div>
+<div class="line">      <span class="keywordflow">if</span>( ibound != 1)</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0); </div>
+<div class="line">      }     </div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup parabolic flow along the inflow boundary 3</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=3; </div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">double</span> ycoord = mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;x(1); </div>
+<div class="line">   <span class="keywordtype">double</span> uy = 6.0*(ycoord/h_tot)*(1.0-(ycoord/h_tot));</div>
+<div class="line"> </div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(0,uy);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(1,0.0);    </div>
+<div class="line">  }<span class="comment">// end of setup boundary condition</span></div>
+</div><!-- fragment --><p>Finally, we pin the redundant pressure degrees of freedom (see <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">another tutorial</a> for details), and assign the equations numbers.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Pin redudant pressure dofs</span></div>
+<div class="line"> RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line">  pin_redundant_nodal_pressures(Problem::mesh_pt()-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">//end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="timestep"></a>
+Actions before the timestep</h1>
+<p>Before each timestep we update the nodal positions in the mesh and re-apply the no-slip condition on the nodes of the moving leaflet (boundaries 4 and 5; see the sketch in <a class="el" href="index.html#comm_and_ex">Further comments and exercises</a> for the enumeration of the mesh boundaries).</p>
+<div class="fragment"><div class="line"><span class="comment">//=====start_of_actions_before_implicit_timestep=========================</span></div>
+<div class="line"><span class="comment">/// Actions before implicit timestep: Update domain shape and</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// the velocity boundary conditions</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classChannelWithLeafletProblem.html#acef6ec771775162f77295a8f92d695ac">ChannelWithLeafletProblem&lt;ELEMENT&gt;::actions_before_implicit_timestep</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Update the domain shape</span></div>
+<div class="line"> mesh_pt()-&gt;node_update();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Moving leaflet: No slip; this implies that the velocity needs</span></div>
+<div class="line"> <span class="comment">// to be updated in response to leaflet motion</span></div>
+<div class="line"> <span class="keywordflow">for</span>( <span class="keywordtype">unsigned</span> ibound=4;ibound&lt;6;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Which node are we dealing with?</span></div>
+<div class="line">     Node* node_pt=mesh_pt()-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Apply no slip</span></div>
+<div class="line">     FSI_functions::apply_no_slip_on_moving_wall(node_pt);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">//end_of_actions_before_implicit_timestep</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="adapt"></a>
+Actions after the mesh adaptation</h1>
+<p>Once the mesh has been adapted, we free all pressure degrees of freedom and then (re-)pin any redundant ones (see <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">another tutorial</a> for details):</p>
+<div class="fragment"><div class="line"><span class="comment">//==========start_of_actions_after_adaptation============================</span></div>
+<div class="line"><span class="comment">// Actions after adaptation: Pin redundant pressure dofs</span></div>
+<div class="line"><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classChannelWithLeafletProblem.html#a7978755f073d950e5012951ced9e455e">ChannelWithLeafletProblem&lt;ELEMENT&gt;::actions_after_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Unpin all pressure dofs</span></div>
+<div class="line"> RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line">  unpin_all_pressure_dofs(mesh_pt()-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin redundant pressure dofs</span></div>
+<div class="line"> RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line">  pin_redundant_nodal_pressures(mesh_pt()-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_actions_after_adapt</span></div>
+</div><!-- fragment --><p>Note that the default interpolation of the (quadratic!) inflow velocity profile from father to son elements during the mesh adaptation already ensures that the inflow profile remains quadratic, therefore no further action is required.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The function <code>doc_solution(...)</code> documents the results.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_doc_solution=================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classChannelWithLeafletProblem.html#adb8e1420844f7b40d71beae81111c4d0">ChannelWithLeafletProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output boundaries</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/boundaries%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output_boundaries(some_file);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_doc_solution</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_and_ex"></a>
+Further comments and exercises</h1>
+<h2><a class="anchor" id="comm"></a>
+Further comments: The algebraic node update procedure</h2>
+<p>The figure below illustrates the algebraic node update procedure employed in the <code>RefineableAlgebraicChannelWithLeafletMesh</code>. The mesh employs four different node update functions, depending on which region a node is located in: Nodes in region I (or II) are located on straight lines that connect the upstream (or downstream) boundary with the leaflet; nodes in region III (or IV) are located on straight lines that connect the upstream and (or downstream) boundary with the straight line from the tip of the leaflet to upper channel wall.</p>
+<div class="image">
+<img src="channel_with_leaflet_mesh.gif" alt=""/>
+<div class="caption">
+Sketch illustrating the algebraic node update procedure. </div></div>
+ <p>The implementation of the node update functions is straightforward and can be found in the source files </p><center> <a href="
+../../../../src/meshes/channel_with_leaflet_mesh.template.h">src/meshes/channel_with_leaflet_mesh.template.h </a> </center><p><br  />
+and </p><center> <a href="
+../../../../src/meshes/channel_with_leaflet_mesh.template.cc">src/meshes/channel_with_leaflet_mesh.template.cc </a> </center><p><br  />
+which also illustrate how the mesh is constructed by inheritance from the <code>SimpleRectangularQuadMesh</code> (the main task being the creation of additional nodes in the interior to "cut open" the mesh along the position of the leaflet). The source files also contain other versions of the mesh in which the node update is performed with Domain/MacroElements, using the technique described in <a href="../../../poisson/fish_poisson2/html/index.html">another tutorial</a>.</p>
+<h2><a class="anchor" id="ex"></a>
+Exercise</h2>
+<p>With the node update strategy illustrated above, the position of <em>all</em> nodes in the fluid mesh has to be updated when the leaflet moves. This is not a particular problem in the current application where the node-update is only performed once per timestep. However, in the <a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">corresponding FSI problem </a>, the approach is costly because of the of large number of shape derivatives to be computed.</p>
+<p>As an exercise, we suggest to make the node-update procedure more efficient by sub-dividing the regions upstream and downstream of the leaflet into a central section in which the nodes move in response to the motion of the leaflet (the old regions I-IV) and two additional regions (regions V and VI) in which they remain stationary. This is easy because, as explained <a href="../../algebraic_collapsible_channel/html/index.html#comm">elsewhere,</a> all <code>AlgebraicNodes</code> already have a default node update function that leaves them stationary.</p>
+<div class="image">
+<img src="channel_with_leaflet_better_mesh.gif" alt=""/>
+<div class="caption">
+A better node update strategy. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="ackn"></a>
+Acknowledgements</h1>
+<ul>
+<li>This code was originally developed by Floraine Cordier.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="
+../../../../
+demo_drivers/navier_stokes/channel_with_leaflet/
+">demo_drivers/navier_stokes/channel_with_leaflet/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="
+../../../../
+demo_drivers/navier_stokes/channel_with_leaflet/channel_with_leaflet.cc
+">demo_drivers/navier_stokes/channel_with_leaflet/channel_with_leaflet.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassChannelWithLeafletProblem_html_acef6ec771775162f77295a8f92d695ac"><div class="ttname"><a href="classChannelWithLeafletProblem.html#acef6ec771775162f77295a8f92d695ac">ChannelWithLeafletProblem::actions_before_implicit_timestep</a></div><div class="ttdeci">void actions_before_implicit_timestep()</div><div class="ttdoc">Update the velocity boundary condition on the moving leaflet.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00305">channel_with_leaflet.cc:305</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_af9c75c7aeecae4b14f7ba0fb245eb8ee"><div class="ttname"><a href="classLeaflet.html#af9c75c7aeecae4b14f7ba0fb245eb8ee">Leaflet::D_y</a></div><div class="ttdeci">double D_y</div><div class="ttdoc">Vertical displacement of tip.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00105">channel_with_leaflet.cc:105</a></div></div>
+<div class="ttc" id="achannel__with__leaflet_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="channel__with__leaflet_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8txt_source.html#l00021">channel_with_leaflet.txt:21</a></div></div>
+<div class="ttc" id="aclassChannelWithLeafletProblem_html_a5dec8333d345e4bcaac7fcd5b463eafc"><div class="ttname"><a href="classChannelWithLeafletProblem.html#a5dec8333d345e4bcaac7fcd5b463eafc">ChannelWithLeafletProblem::~ChannelWithLeafletProblem</a></div><div class="ttdeci">~ChannelWithLeafletProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00170">channel_with_leaflet.cc:170</a></div></div>
+<div class="ttc" id="aclassChannelWithLeafletProblem_html_a3c5a4c97ec66fe53bc130005c74a47b5"><div class="ttname"><a href="classChannelWithLeafletProblem.html#a3c5a4c97ec66fe53bc130005c74a47b5">ChannelWithLeafletProblem::ChannelWithLeafletProblem</a></div><div class="ttdeci">ChannelWithLeafletProblem(const double &amp;l_left, const double &amp;l_right, const double &amp;h_leaflet, const double &amp;h_tot, const unsigned &amp;nleft, const unsigned &amp;nright, const unsigned &amp;ny1, const unsigned &amp;ny2, const double &amp;d_x, const double &amp;d_y, const double &amp;x_0, const double &amp;period)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00210">channel_with_leaflet.cc:210</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a48e4d16790ffd9de527093eac8ff566c"><div class="ttname"><a href="classLeaflet.html#a48e4d16790ffd9de527093eac8ff566c">Leaflet::d_x</a></div><div class="ttdeci">double &amp; d_x()</div><div class="ttdoc">Amplitude of horizontal tip displacement.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00088">channel_with_leaflet.cc:88</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a29a25366a0cf97ad0dd36172fdfa3d0c"><div class="ttname"><a href="classLeaflet.html#a29a25366a0cf97ad0dd36172fdfa3d0c">Leaflet::X_0</a></div><div class="ttdeci">double X_0</div><div class="ttdoc">Origin.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00108">channel_with_leaflet.cc:108</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a0bbfaeec2534389b203fd2a2316db859"><div class="ttname"><a href="classLeaflet.html#a0bbfaeec2534389b203fd2a2316db859">Leaflet::~Leaflet</a></div><div class="ttdeci">virtual ~Leaflet()</div><div class="ttdoc">Destructor – emtpy.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00060">channel_with_leaflet.cc:60</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_acb53ccf4578a9981216cf0afd4b38453"><div class="ttname"><a href="classLeaflet.html#acb53ccf4578a9981216cf0afd4b38453">Leaflet::Leaflet</a></div><div class="ttdeci">Leaflet(const double &amp;length, const double &amp;d_x, const double &amp;d_y, const double &amp;x_0, const double &amp;period, Time *time_pt)</div><div class="ttdoc">Constructor: Pass length (in Lagrangian coordinates), the amplitude of the horizontal and vertical de...</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00053">channel_with_leaflet.cc:53</a></div></div>
+<div class="ttc" id="aclassChannelWithLeafletProblem_html"><div class="ttname"><a href="classChannelWithLeafletProblem.html">ChannelWithLeafletProblem</a></div><div class="ttdoc">Problem class.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00147">channel_with_leaflet.cc:147</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a5b78c2735652b6a5c08c6aa9d38b6232"><div class="ttname"><a href="classLeaflet.html#a5b78c2735652b6a5c08c6aa9d38b6232">Leaflet::position</a></div><div class="ttdeci">void position(const unsigned &amp;t, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;r) const</div><div class="ttdoc">Position vector, r, to the point identified by   its 1D Lagrangian coordinate, xi (passed as a 1D Vec...</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00065">channel_with_leaflet.cc:65</a></div></div>
+<div class="ttc" id="aclassChannelWithLeafletProblem_html_a023dc7718a98f820e4bc4541150a0c08"><div class="ttname"><a href="classChannelWithLeafletProblem.html#a023dc7718a98f820e4bc4541150a0c08">ChannelWithLeafletProblem::mesh_pt</a></div><div class="ttdeci">RefineableAlgebraicChannelWithLeafletMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Overloaded access function to specific mesh.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00173">channel_with_leaflet.cc:173</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_ac10f13ad45456dc714ab57042861de53"><div class="ttname"><a href="classLeaflet.html#ac10f13ad45456dc714ab57042861de53">Leaflet::Time_pt</a></div><div class="ttdeci">Time * Time_pt</div><div class="ttdoc">Pointer to the global time object.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00114">channel_with_leaflet.cc:114</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a64c27b796ceece358d09d137f15bbf20"><div class="ttname"><a href="classLeaflet.html#a64c27b796ceece358d09d137f15bbf20">Leaflet::Length</a></div><div class="ttdeci">double Length</div><div class="ttdoc">Length in terms of Lagrangian coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00099">channel_with_leaflet.cc:99</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a8ff8044a3da540c7c9d7a89790b6ee58"><div class="ttname"><a href="classLeaflet.html#a8ff8044a3da540c7c9d7a89790b6ee58">Leaflet::d_y</a></div><div class="ttdeci">double d_y()</div><div class="ttdoc">Amplitude of vertical tip displacement.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00091">channel_with_leaflet.cc:91</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a7a28827b7081107ac9e33087598ca868"><div class="ttname"><a href="classLeaflet.html#a7a28827b7081107ac9e33087598ca868">Leaflet::length</a></div><div class="ttdeci">double length()</div><div class="ttdoc">Length of the leaflet.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00085">channel_with_leaflet.cc:85</a></div></div>
+<div class="ttc" id="aclassChannelWithLeafletProblem_html_a5721dfad66d13a1ae60adce7801dcb12"><div class="ttname"><a href="classChannelWithLeafletProblem.html#a5721dfad66d13a1ae60adce7801dcb12">ChannelWithLeafletProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update before solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00185">channel_with_leaflet.cc:185</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a91f2460718ec5a4ef32e302b8b14cdca"><div class="ttname"><a href="classLeaflet.html#a91f2460718ec5a4ef32e302b8b14cdca">Leaflet::ngeom_data</a></div><div class="ttdeci">unsigned ngeom_data() const</div><div class="ttdoc">Number of geometric Data in GeomObject: None.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00082">channel_with_leaflet.cc:82</a></div></div>
+<div class="ttc" id="achannel__with__leaflet_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="channel__with__leaflet_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00386">channel_with_leaflet.cc:386</a></div></div>
+<div class="ttc" id="aclassLeaflet_html"><div class="ttname"><a href="classLeaflet.html">Leaflet</a></div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00043">channel_with_leaflet.cc:43</a></div></div>
+<div class="ttc" id="aclassChannelWithLeafletProblem_html_a2fcba9dc98f40bbca1919a715fa087d7"><div class="ttname"><a href="classChannelWithLeafletProblem.html#a2fcba9dc98f40bbca1919a715fa087d7">ChannelWithLeafletProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00182">channel_with_leaflet.cc:182</a></div></div>
+<div class="ttc" id="aclassChannelWithLeafletProblem_html_ac32f0451749ec4e85d39246f5823a5f2"><div class="ttname"><a href="classChannelWithLeafletProblem.html#ac32f0451749ec4e85d39246f5823a5f2">ChannelWithLeafletProblem::Leaflet_pt</a></div><div class="ttdeci">GeomObject * Leaflet_pt</div><div class="ttdoc">Pointer to the GeomObject.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00199">channel_with_leaflet.cc:199</a></div></div>
+<div class="ttc" id="aclassChannelWithLeafletProblem_html_a7978755f073d950e5012951ced9e455e"><div class="ttname"><a href="classChannelWithLeafletProblem.html#a7978755f073d950e5012951ced9e455e">ChannelWithLeafletProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adaptation: Pin redundant pressure dofs.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00332">channel_with_leaflet.cc:332</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Global parameters.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00128">channel_with_leaflet.cc:128</a></div></div>
+<div class="ttc" id="aclassChannelWithLeafletProblem_html_adb8e1420844f7b40d71beae81111c4d0"><div class="ttname"><a href="classChannelWithLeafletProblem.html#adb8e1420844f7b40d71beae81111c4d0">ChannelWithLeafletProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00350">channel_with_leaflet.cc:350</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a473b6f4ef98bfba9e2c6974027ba4f4b"><div class="ttname"><a href="classLeaflet.html#a473b6f4ef98bfba9e2c6974027ba4f4b">Leaflet::D_x</a></div><div class="ttdeci">double D_x</div><div class="ttdoc">Horizontal displacement of tip.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00102">channel_with_leaflet.cc:102</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00132">channel_with_leaflet.cc:132</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_a0d78b5fb3ec71009d4a9bcc79f8a85a9"><div class="ttname"><a href="classLeaflet.html#a0d78b5fb3ec71009d4a9bcc79f8a85a9">Leaflet::T</a></div><div class="ttdeci">double T</div><div class="ttdoc">Period of the oscillations.</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00111">channel_with_leaflet.cc:111</a></div></div>
+<div class="ttc" id="aclassLeaflet_html_af4a819a3ba64960f4b796dc5a0d3eb5b"><div class="ttname"><a href="classLeaflet.html#af4a819a3ba64960f4b796dc5a0d3eb5b">Leaflet::x_0</a></div><div class="ttdeci">double x_0()</div><div class="ttdoc">x-coordinate of leaflet origin</div><div class="ttdef"><b>Definition:</b> <a href="channel__with__leaflet_8cc_source.html#l00094">channel_with_leaflet.cc:94</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:11:03
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

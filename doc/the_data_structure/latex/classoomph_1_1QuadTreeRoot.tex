@@ -1,0 +1,172 @@
+\hypertarget{classoomph_1_1QuadTreeRoot}{}\doxysection{oomph\+::Quad\+Tree\+Root Class Reference}
+\label{classoomph_1_1QuadTreeRoot}\index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}}
+
+
+{\ttfamily \#include $<$quadtree.\+h$>$}
+
+Inheritance diagram for oomph\+::Quad\+Tree\+Root\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1QuadTreeRoot}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a30cf086b11949193946818c43aeec5e5}{Quad\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
+\item 
+\mbox{\hyperlink{classoomph_1_1QuadTreeRoot_aa808ed64cac1a2e07229dbc27523555e}{Quad\+Tree\+Root}} (const \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_afbf242b23375516d29a087417bb1bf30}{operator=}} (const \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a9b91196bd6112e7f205c0882b163ea2a}{north\+\_\+equivalent}} (const int \&neighbour)
+\begin{DoxyCompactList}\small\item\em Return north equivalent of the neighbours in specified direction\+: When viewed from the current quadtree\textquotesingle{}s {\ttfamily neighbour} neighbour, our northern direction is the neighbour\textquotesingle{}s north\+\_\+equivalent(neighbour) direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily north\+\_\+equivalent(\+W)=N} (read as\+: \char`\"{}in my Western
+neighbour, my North is its North\char`\"{}). If the western neighbour is rotated by 180 degrees relative to the current quadtree, say, we have {\ttfamily north\+\_\+equivalent(\+W)=S} (read as\+: \char`\"{}in my Western
+neighbour, my North is its South\char`\"{}); etc. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_ac106ae83ae55b7a510d8bad7c5f0db65}{direction\+\_\+of\+\_\+neighbour}} (\mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} $\ast$quadtree\+\_\+root\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em If quadtree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}N/\+S/\+E/W\mbox{]} in which it is found, otherwise return O\+M\+E\+GA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a1fab216e4efa231e156c8406ad2e0da6}{North\+\_\+equivalent}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} giving the north equivalent of the neighbours\+: When viewed from the current quadtree\textquotesingle{}s {\ttfamily neighbour} neighbour, our northern direction is the neighbour\textquotesingle{}s North\+\_\+equivalent\mbox{[}neighbour\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily North\+\_\+equivalent}\mbox{[}W\mbox{]}=N (read as\+: \char`\"{}in my Western
+neighbour, my North is its North\char`\"{}). If the western neighbour is rotated by 180 degrees relative to the current quadtree, say, we have {\ttfamily North\+\_\+equivalent}\mbox{[}W\mbox{]}=S (read as\+: \char`\"{}in my Western
+neighbour, my North is its South\char`\"{}); etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} is a \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} that forms the root of a (recursive) quadtree. The \char`\"{}root node\char`\"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \mbox{\hyperlink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}}). 
+
+Definition at line 286 of file quadtree.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_a30cf086b11949193946818c43aeec5e5}\label{classoomph_1_1QuadTreeRoot_a30cf086b11949193946818c43aeec5e5}} 
+\index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}!QuadTreeRoot@{QuadTreeRoot}}
+\index{QuadTreeRoot@{QuadTreeRoot}!oomph::QuadTreeRoot@{oomph::QuadTreeRoot}}
+\doxysubsubsection{\texorpdfstring{QuadTreeRoot()}{QuadTreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Quad\+Tree\+Root\+::\+Quad\+Tree\+Root (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor for the (empty) root quadtree\+: Pass pointer to associated object, a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4}{Refineable\+Q\+Element$<$2$>$}}. 
+
+Definition at line 305 of file quadtree.\+h.
+
+
+
+References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, North\+\_\+equivalent, oomph\+::\+Quad\+Tree\+Names\+::S, oomph\+::\+Quad\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Quad\+Tree\+Names\+::W.
+
+\mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_aa808ed64cac1a2e07229dbc27523555e}\label{classoomph_1_1QuadTreeRoot_aa808ed64cac1a2e07229dbc27523555e}} 
+\index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}!QuadTreeRoot@{QuadTreeRoot}}
+\index{QuadTreeRoot@{QuadTreeRoot}!oomph::QuadTreeRoot@{oomph::QuadTreeRoot}}
+\doxysubsubsection{\texorpdfstring{QuadTreeRoot()}{QuadTreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Quad\+Tree\+Root\+::\+Quad\+Tree\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 338 of file quadtree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_ac106ae83ae55b7a510d8bad7c5f0db65}\label{classoomph_1_1QuadTreeRoot_ac106ae83ae55b7a510d8bad7c5f0db65}} 
+\index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}!direction\_of\_neighbour@{direction\_of\_neighbour}}
+\index{direction\_of\_neighbour@{direction\_of\_neighbour}!oomph::QuadTreeRoot@{oomph::QuadTreeRoot}}
+\doxysubsubsection{\texorpdfstring{direction\_of\_neighbour()}{direction\_of\_neighbour()}}
+{\footnotesize\ttfamily int oomph\+::\+Quad\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} $\ast$}]{quadtree\+\_\+root\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+If quadtree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}N/\+S/\+E/W\mbox{]} in which it is found, otherwise return O\+M\+E\+GA. 
+
+
+
+Definition at line 381 of file quadtree.\+h.
+
+
+
+References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt, oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+Quad\+Tree\+Names\+::S, and oomph\+::\+Quad\+Tree\+Names\+::W.
+
+
+
+Referenced by oomph\+::\+Quad\+Tree\+Forest\+::construct\+\_\+north\+\_\+equivalents().
+
+\mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_a9b91196bd6112e7f205c0882b163ea2a}\label{classoomph_1_1QuadTreeRoot_a9b91196bd6112e7f205c0882b163ea2a}} 
+\index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}!north\_equivalent@{north\_equivalent}}
+\index{north\_equivalent@{north\_equivalent}!oomph::QuadTreeRoot@{oomph::QuadTreeRoot}}
+\doxysubsubsection{\texorpdfstring{north\_equivalent()}{north\_equivalent()}}
+{\footnotesize\ttfamily int\& oomph\+::\+Quad\+Tree\+Root\+::north\+\_\+equivalent (\begin{DoxyParamCaption}\item[{const int \&}]{neighbour }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return north equivalent of the neighbours in specified direction\+: When viewed from the current quadtree\textquotesingle{}s {\ttfamily neighbour} neighbour, our northern direction is the neighbour\textquotesingle{}s north\+\_\+equivalent(neighbour) direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily north\+\_\+equivalent(\+W)=N} (read as\+: \char`\"{}in my Western
+neighbour, my North is its North\char`\"{}). If the western neighbour is rotated by 180 degrees relative to the current quadtree, say, we have {\ttfamily north\+\_\+equivalent(\+W)=S} (read as\+: \char`\"{}in my Western
+neighbour, my North is its South\char`\"{}); etc. 
+
+
+
+Definition at line 359 of file quadtree.\+h.
+
+
+
+References oomph\+::\+Quad\+Tree\+::\+Direct\+\_\+string, oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, North\+\_\+equivalent, oomph\+::\+Quad\+Tree\+Names\+::S, and oomph\+::\+Quad\+Tree\+Names\+::W.
+
+
+
+Referenced by oomph\+::\+Quad\+Tree\+Forest\+::construct\+\_\+north\+\_\+equivalents(), and oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour().
+
+\mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_afbf242b23375516d29a087417bb1bf30}\label{classoomph_1_1QuadTreeRoot_afbf242b23375516d29a087417bb1bf30}} 
+\index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::QuadTreeRoot@{oomph::QuadTreeRoot}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Quad\+Tree\+Root\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 344 of file quadtree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_a1fab216e4efa231e156c8406ad2e0da6}\label{classoomph_1_1QuadTreeRoot_a1fab216e4efa231e156c8406ad2e0da6}} 
+\index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}!North\_equivalent@{North\_equivalent}}
+\index{North\_equivalent@{North\_equivalent}!oomph::QuadTreeRoot@{oomph::QuadTreeRoot}}
+\doxysubsubsection{\texorpdfstring{North\_equivalent}{North\_equivalent}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$int$>$ oomph\+::\+Quad\+Tree\+Root\+::\+North\+\_\+equivalent\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} giving the north equivalent of the neighbours\+: When viewed from the current quadtree\textquotesingle{}s {\ttfamily neighbour} neighbour, our northern direction is the neighbour\textquotesingle{}s North\+\_\+equivalent\mbox{[}neighbour\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily North\+\_\+equivalent}\mbox{[}W\mbox{]}=N (read as\+: \char`\"{}in my Western
+neighbour, my North is its North\char`\"{}). If the western neighbour is rotated by 180 degrees relative to the current quadtree, say, we have {\ttfamily North\+\_\+equivalent}\mbox{[}W\mbox{]}=S (read as\+: \char`\"{}in my Western
+neighbour, my North is its South\char`\"{}); etc. 
+
+
+
+Definition at line 299 of file quadtree.\+h.
+
+
+
+Referenced by north\+\_\+equivalent(), and Quad\+Tree\+Root().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quadtree_8h}{quadtree.\+h}}\end{DoxyCompactItemize}

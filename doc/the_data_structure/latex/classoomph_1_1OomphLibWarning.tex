@@ -1,0 +1,124 @@
+\hypertarget{classoomph_1_1OomphLibWarning}{}\doxysection{oomph\+::Oomph\+Lib\+Warning Class Reference}
+\label{classoomph_1_1OomphLibWarning}\index{oomph::OomphLibWarning@{oomph::OomphLibWarning}}
+
+
+{\ttfamily \#include $<$oomph\+\_\+definitions.\+h$>$}
+
+Inheritance diagram for oomph\+::Oomph\+Lib\+Warning\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1OomphLibWarning}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibWarning_ae85fe4479e40f450a797074549c09ed8}{Oomph\+Lib\+Warning}} (const std\+::string \&warning\+\_\+description, const std\+::string \&function\+\_\+name, const char $\ast$location)
+\begin{DoxyCompactList}\small\item\em Constructor requires the warning description and the function in which the warning occurred. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classoomph_1_1OomphLibWarning_ade3b8f1484c2f91b0f2c7723ce056e93}{set\+\_\+stream\+\_\+pt}} (std\+::ostream $\ast$const \&stream\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Static member function used to specify the error stream, which must be passed as a pointer because streams cannot be copied. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classoomph_1_1OomphLibWarning_a7e6ae645796506845779005aba0b4a7a}{set\+\_\+output\+\_\+width}} (const unsigned \&output\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Static member function used to specify the width (in characters) of the error stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::ostream $\ast$ \mbox{\hyperlink{classoomph_1_1OomphLibWarning_a9ef9ec69eb260474537065b7a285717c}{Stream\+\_\+pt}} = \&std\+::cerr
+\begin{DoxyCompactList}\small\item\em Output stream that is used to write the errors. \end{DoxyCompactList}\item 
+static unsigned \mbox{\hyperlink{classoomph_1_1OomphLibWarning_a9050b8bcb8654198a681483b9c3d5e27}{Output\+\_\+width}} = 70
+\begin{DoxyCompactList}\small\item\em Width of output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+An \mbox{\hyperlink{classoomph_1_1OomphLibWarning}{Oomph\+Lib\+Warning}} object which should be created as a temporary object to issue a warning. The warning stream and stream width can be specified. The default is cerr with a width of 70 characters. 
+
+Definition at line 262 of file oomph\+\_\+definitions.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1OomphLibWarning_ae85fe4479e40f450a797074549c09ed8}\label{classoomph_1_1OomphLibWarning_ae85fe4479e40f450a797074549c09ed8}} 
+\index{oomph::OomphLibWarning@{oomph::OomphLibWarning}!OomphLibWarning@{OomphLibWarning}}
+\index{OomphLibWarning@{OomphLibWarning}!oomph::OomphLibWarning@{oomph::OomphLibWarning}}
+\doxysubsubsection{\texorpdfstring{OomphLibWarning()}{OomphLibWarning()}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Lib\+Warning\+::\+Oomph\+Lib\+Warning (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{warning\+\_\+description,  }\item[{const std\+::string \&}]{function\+\_\+name,  }\item[{const char $\ast$}]{location }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor requires the warning description and the function in which the warning occurred. 
+
+
+
+Definition at line 274 of file oomph\+\_\+definitions.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1OomphLibWarning_a7e6ae645796506845779005aba0b4a7a}\label{classoomph_1_1OomphLibWarning_a7e6ae645796506845779005aba0b4a7a}} 
+\index{oomph::OomphLibWarning@{oomph::OomphLibWarning}!set\_output\_width@{set\_output\_width}}
+\index{set\_output\_width@{set\_output\_width}!oomph::OomphLibWarning@{oomph::OomphLibWarning}}
+\doxysubsubsection{\texorpdfstring{set\_output\_width()}{set\_output\_width()}}
+{\footnotesize\ttfamily static void oomph\+::\+Oomph\+Lib\+Warning\+::set\+\_\+output\+\_\+width (\begin{DoxyParamCaption}\item[{const unsigned \&}]{output\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Static member function used to specify the width (in characters) of the error stream. 
+
+
+
+Definition at line 288 of file oomph\+\_\+definitions.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1OomphLibWarning_ade3b8f1484c2f91b0f2c7723ce056e93}\label{classoomph_1_1OomphLibWarning_ade3b8f1484c2f91b0f2c7723ce056e93}} 
+\index{oomph::OomphLibWarning@{oomph::OomphLibWarning}!set\_stream\_pt@{set\_stream\_pt}}
+\index{set\_stream\_pt@{set\_stream\_pt}!oomph::OomphLibWarning@{oomph::OomphLibWarning}}
+\doxysubsubsection{\texorpdfstring{set\_stream\_pt()}{set\_stream\_pt()}}
+{\footnotesize\ttfamily static void oomph\+::\+Oomph\+Lib\+Warning\+::set\+\_\+stream\+\_\+pt (\begin{DoxyParamCaption}\item[{std\+::ostream $\ast$const \&}]{stream\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Static member function used to specify the error stream, which must be passed as a pointer because streams cannot be copied. 
+
+
+
+Definition at line 283 of file oomph\+\_\+definitions.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1OomphLibWarning_a9050b8bcb8654198a681483b9c3d5e27}\label{classoomph_1_1OomphLibWarning_a9050b8bcb8654198a681483b9c3d5e27}} 
+\index{oomph::OomphLibWarning@{oomph::OomphLibWarning}!Output\_width@{Output\_width}}
+\index{Output\_width@{Output\_width}!oomph::OomphLibWarning@{oomph::OomphLibWarning}}
+\doxysubsubsection{\texorpdfstring{Output\_width}{Output\_width}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Oomph\+Lib\+Warning\+::\+Output\+\_\+width = 70\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Width of output. 
+
+Default output width for Oomph\+Lib\+Warnings (70) 
+
+Definition at line 268 of file oomph\+\_\+definitions.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1OomphLibWarning_a9ef9ec69eb260474537065b7a285717c}\label{classoomph_1_1OomphLibWarning_a9ef9ec69eb260474537065b7a285717c}} 
+\index{oomph::OomphLibWarning@{oomph::OomphLibWarning}!Stream\_pt@{Stream\_pt}}
+\index{Stream\_pt@{Stream\_pt}!oomph::OomphLibWarning@{oomph::OomphLibWarning}}
+\doxysubsubsection{\texorpdfstring{Stream\_pt}{Stream\_pt}}
+{\footnotesize\ttfamily std\+::ostream $\ast$ oomph\+::\+Oomph\+Lib\+Warning\+::\+Stream\+\_\+pt = \&std\+::cerr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Output stream that is used to write the errors. 
+
+Default output stream for Oomph\+Lib\+Warnings(cerr) 
+
+Definition at line 265 of file oomph\+\_\+definitions.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__definitions_8h}{oomph\+\_\+definitions.\+h}}\item 
+\mbox{\hyperlink{oomph__definitions_8cc}{oomph\+\_\+definitions.\+cc}}\end{DoxyCompactItemize}

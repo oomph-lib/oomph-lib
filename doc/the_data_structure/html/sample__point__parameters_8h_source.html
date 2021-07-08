@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: sample_point_parameters.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4075b182e53a3873a42d885f4e1e98c4.html">generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">sample_point_parameters.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="sample__point__parameters_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#ifndef SAMPLE_POINT_PARAMETERS_HEADER</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define SAMPLE_POINT_PARAMETERS_HEADER</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// oomph-lib includes</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="elements_8h.html">elements.h</a>&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mesh_8h.html">mesh.h</a>&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//=========================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/// Enumeration to identify type of sample point container</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span><span class="comment">//=========================================================</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991">   40</a></span>&#160; <span class="keyword">enum</span> <a class="code" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991">Sample_Point_Container_Type</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; {</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991a6bd4eede6af4e6e7881a96e4dc0e34cd">   42</a></span>&#160;  <a class="code" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991a6bd4eede6af4e6e7881a96e4dc0e34cd">UseRefineableBinArray</a>=1,</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991ae9f4b2ff7655b9f053dd855d15d929af">   43</a></span>&#160;  <a class="code" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991ae9f4b2ff7655b9f053dd855d15d929af">UseNonRefineableBinArray</a>=2</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#ifdef OOMPH_HAS_CGAL</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991a75595ef05f43add7443737e4fe76cd61">   45</a></span>&#160;  , <a class="code" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991a75595ef05f43add7443737e4fe76cd61">UseCGALSamplePointContainer</a>=3</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; };</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; <span class="comment">// Forward references</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; <span class="keyword">class </span><a class="code" href="classRefineableBinArray.html">RefineableBinArray</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; <span class="keyword">class </span><a class="code" href="classNonRefineableBinArray.html">NonRefineableBinArray</a>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/// \short Helper object for dealing with the parameters used for the</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">/// SamplePointContainer objects</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html">   74</a></span>&#160; <span class="keyword">class </span><a class="code" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">  /// \short Constructor is private and only accessible by friends</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">  /// to ensure that parameters are set correctly</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#aeb332079314307f60dd3920aa46b8d81">   81</a></span>&#160;<span class="comment"></span>  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a8e6251aa45b1fe0683105714f4d1721a">   82</a></span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a63762b7198d7c1a8df01b39c74ba2ad9">   83</a></span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html">NonRefineableBinArrayParameters</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifdef OOMPH_HAS_CGAL</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a2c9bab15d3e9295341cb9a94d77b3b9f">   85</a></span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classoomph_1_1CGALSamplePointContainerParameters.html">CGALSamplePointContainerParameters</a>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">  /// \short Broken copy constructor.</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a63f93ee4ddc61cb01af363187de21947">   89</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a63f93ee4ddc61cb01af363187de21947">SamplePointContainerParameters</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a>&amp; data)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;   {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;SamplePointContainerParameters&quot;</span>);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;   }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">  /// Broken assignment operator.</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#aa089aeff405b3e4362b4335a9acfb5a2">   95</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#aa089aeff405b3e4362b4335a9acfb5a2">operator=</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a>&amp;) </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">BrokenCopy::broken_assign</a>(<span class="stringliteral">&quot;SamplePointContainerParameters&quot;</span>);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">  /// Empty destructor</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a5e0ced492320cc06615bcb1782b7bb22">  102</a></span>&#160;<span class="comment"></span>  <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a5e0ced492320cc06615bcb1782b7bb22">~SamplePointContainerParameters</a>() { }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">  /// Pointer to mesh from whose FiniteElements sample points are created</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">  105</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a9047299fdfac8074a9996267d66e901e">Mesh_pt</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">  /// \short Vector of pairs of doubles for min and maximum coordinates. </span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">  /// Call: Min_and_max_coordinates[j] gives me the</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">  /// pair of min (first) and max. (second) coordinates in the j-th </span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">  /// coordinate direction.</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#ae5b9cd742d38c42d337ede45bb9dda8c">  114</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;std::pair&lt;double, double&gt;</a> &gt;&amp; <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ae5b9cd742d38c42d337ede45bb9dda8c">min_and_max_coordinates</a>() </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a980161906be89a1cf50835fe45949cfe">Min_and_max_coordinates</a>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">  /// \short Vector of pairs of doubles for min and maximum coordinates. </span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">  /// Call: Min_and_max_coordinates[j] gives me the</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">  /// pair of min (first) and max. (second) coordinates in the j-th </span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">  /// coordinate direction. Const version</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#ad619df6bc0253178dbbaf195cea2fb5a">  123</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;std::pair&lt;double, double&gt;</a> &gt; <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ad619df6bc0253178dbbaf195cea2fb5a">min_and_max_coordinates</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a980161906be89a1cf50835fe45949cfe">Min_and_max_coordinates</a>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">  /// \short &quot;Measure of&quot; number of sample points generated in each element</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">  /// const version</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a710a6a32b2518b202a38fde405cdf7e5">  130</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a710a6a32b2518b202a38fde405cdf7e5">nsample_points_generated_per_element</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a68141123ff5252ad3dd1a8a5279282c4">Nsample_points_generated_per_element</a>;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">  /// &quot;Measure of&quot; number of sample points generated in each element</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a645bbbfc9395e5fe39a05845b2352b99">  136</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span>&amp; <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a645bbbfc9395e5fe39a05845b2352b99">nsample_points_generated_per_element</a>()</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  {</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a68141123ff5252ad3dd1a8a5279282c4">Nsample_points_generated_per_element</a>;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">  /// \short Use eulerian coordinates (via interpolated_x) during</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">  /// setup (otherwise use interpolated_zeta())?</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a946a3657f6c50f2e14dccf421ed5e178">  143</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a946a3657f6c50f2e14dccf421ed5e178">use_eulerian_coordinates_during_setup</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ab8757aae90e85b2a860fd07acd19a92a">Use_eulerian_coordinates_during_setup</a>;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">  /// Enable use of eulerian coordinates (via interpolated_x) during</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">  /// setup (otherwise use interpolated_zeta())</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a8aa712173bb8242b17e49df97c0072e3">  150</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a8aa712173bb8242b17e49df97c0072e3">enable_use_eulerian_coordinates_during_setup</a>()</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  {</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;   <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ab8757aae90e85b2a860fd07acd19a92a">Use_eulerian_coordinates_during_setup</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">  /// Disable use of eulerian coordinates (via interpolated_x) during</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">  /// setup (otherwise use interpolated_zeta())</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a9c59f44fa07b7f79e8b854d5b918e3bd">  157</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a9c59f44fa07b7f79e8b854d5b918e3bd">disable_use_eulerian_coordinates_during_setup</a>()</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;   <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ab8757aae90e85b2a860fd07acd19a92a">Use_eulerian_coordinates_during_setup</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">  /// Ignore halo elements? (MPI only)</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a436175c53c2801c510673146cdb75761">  163</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a436175c53c2801c510673146cdb75761">ignore_halo_elements_during_locate_zeta_search</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ad6ba2b667c746fc6c66830e4f3dc3f70">Ignore_halo_elements_during_locate_zeta_search</a>;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  }</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">  /// Enable Ignore halo elements? (MPI only)</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a6585db241b22e087222ca3b09e99b663">  169</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a6585db241b22e087222ca3b09e99b663">enable_ignore_halo_elements_during_locate_zeta_search</a>()</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;   <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ad6ba2b667c746fc6c66830e4f3dc3f70">Ignore_halo_elements_during_locate_zeta_search</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">  /// Disable Ignore halo elements? (MPI only)</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#ae1520f275ffb0941541aa51c89f3eeec">  175</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ae1520f275ffb0941541aa51c89f3eeec">disable_ignore_halo_elements_during_locate_zeta_search</a>()</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;   <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ad6ba2b667c746fc6c66830e4f3dc3f70">Ignore_halo_elements_during_locate_zeta_search</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">  /// Default for &quot;measure of&quot; number of sample points per element</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#ad8a463ddc961e51f6f77b4e8f678b962">  181</a></span>&#160;<span class="comment"></span>  <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ad8a463ddc961e51f6f77b4e8f678b962">Default_nsample_points_generated_per_element</a>;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;   <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">  /// Pointer to mesh from whose FiniteElements sample points are created</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a9047299fdfac8074a9996267d66e901e">  186</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a9047299fdfac8074a9996267d66e901e">Mesh_pt</a>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">  /// Vector of pairs of doubles for min and maximum coordinates. </span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">  /// Call: Min_and_max_coordinates[j] gives me the</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">  /// pair of min (first) and max. (second) coordinates in the j-th </span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">  /// coordinate direction.</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a980161906be89a1cf50835fe45949cfe">  192</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;std::pair&lt;double, double&gt;</a> &gt; <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a980161906be89a1cf50835fe45949cfe">Min_and_max_coordinates</a>;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">  /// &quot;Measure of&quot; number of sample points generated in each element</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a68141123ff5252ad3dd1a8a5279282c4">  195</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a68141123ff5252ad3dd1a8a5279282c4">Nsample_points_generated_per_element</a>;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">  /// \short Use Eulerian coordinates to setup bin (i.e. use interpolated_x()</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">  /// rather than interpolated_zeta() when setting up and searching sample</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">  /// point container)</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#ab8757aae90e85b2a860fd07acd19a92a">  200</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ab8757aae90e85b2a860fd07acd19a92a">Use_eulerian_coordinates_during_setup</a>;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">  /// \short Ignore halo elements? Accepting halo elements can drastically </span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">  /// reduce the number of external halo elements in multidomain </span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">  /// problems -- currently not aware of any problems with doing this</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">  /// therefore set to false by default but retention</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">  /// of this flag allows easy return to previous implementation.</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#ad6ba2b667c746fc6c66830e4f3dc3f70">  207</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ad6ba2b667c746fc6c66830e4f3dc3f70">Ignore_halo_elements_during_locate_zeta_search</a>;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;   <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">  /// \short Constructor: Pass mesh. </span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">  /// Constructor is private and can only be called</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">  /// by the derived friends.</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a2513e0c918a2ec86c05ac39318c1c6c3">  215</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a2513e0c918a2ec86c05ac39318c1c6c3">SamplePointContainerParameters</a>(<a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>) : </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a9047299fdfac8074a9996267d66e901e">Mesh_pt</a>(<a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>),</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;   <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a68141123ff5252ad3dd1a8a5279282c4">Nsample_points_generated_per_element</a>(</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ad8a463ddc961e51f6f77b4e8f678b962">Default_nsample_points_generated_per_element</a>),</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;   <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ab8757aae90e85b2a860fd07acd19a92a">Use_eulerian_coordinates_during_setup</a>(false),</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;   <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#ad6ba2b667c746fc6c66830e4f3dc3f70">Ignore_halo_elements_during_locate_zeta_search</a>(false)</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    {}</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">  /// \short Broken default constructor; needed for broken</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">  /// copy constructors. Don&#39;t call. It will die.</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno"><a class="line" href="classoomph_1_1SamplePointContainerParameters.html#a57f37f055a2f3b9509705988d2ee31a5">  225</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a57f37f055a2f3b9509705988d2ee31a5">SamplePointContainerParameters</a>()</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;   {</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="comment">//Throw the error</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(<span class="stringliteral">&quot;Broken default constructor. Don&#39;t call this!&quot;</span>,</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                        OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                        OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;   }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; };</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="preprocessor">#ifdef OOMPH_HAS_CGAL</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">/// \short Helper object for dealing with the parameters used for the</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">/// CGALSamplePointContainer objects</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="classoomph_1_1CGALSamplePointContainerParameters.html">  246</a></span>&#160; <span class="keyword">class </span><a class="code" href="classoomph_1_1CGALSamplePointContainerParameters.html">CGALSamplePointContainerParameters</a>: <span class="keyword">public</span> <span class="keyword">virtual</span> </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <a class="code" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; {</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">  /// Constructor: Pass mesh. </span></div>
+<div class="line"><a name="l00253"></a><span class="lineno"><a class="line" href="classoomph_1_1CGALSamplePointContainerParameters.html#ab8dea419a55474ba42a15992c479804e">  253</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1CGALSamplePointContainerParameters.html#ab8dea419a55474ba42a15992c479804e">CGALSamplePointContainerParameters</a>(<a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>) :</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  <a class="code" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a>(<a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>)</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  {}</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">  /// \short Broken copy constructor.</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="classoomph_1_1CGALSamplePointContainerParameters.html#a34e7dd9df2cc7eb6edc54f9a873c9853">  259</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1CGALSamplePointContainerParameters.html#a34e7dd9df2cc7eb6edc54f9a873c9853">CGALSamplePointContainerParameters</a>(</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;   <span class="keyword">const</span> <a class="code" href="classoomph_1_1CGALSamplePointContainerParameters.html">CGALSamplePointContainerParameters</a>&amp; data)</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;   {</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;CGALSamplePointContainerParameters&quot;</span>);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;   }</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">  /// Broken assignment operator.</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno"><a class="line" href="classoomph_1_1CGALSamplePointContainerParameters.html#a41ed00b3d08398968b8492085cb2abb5">  266</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1CGALSamplePointContainerParameters.html#a41ed00b3d08398968b8492085cb2abb5">operator=</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1CGALSamplePointContainerParameters.html">CGALSamplePointContainerParameters</a>&amp;) </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">BrokenCopy::broken_assign</a>(<span class="stringliteral">&quot;CGALSamplePointContainerParameters&quot;</span>);</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  }</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; };</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">/// \short Helper object for dealing with the parameters used for the</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">/// BinArray objects</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html">  284</a></span>&#160; <span class="keyword">class </span><a class="code" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; {</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">  /// Constructor is private and only accessible by friends</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#a8e6251aa45b1fe0683105714f4d1721a">  290</a></span>&#160;<span class="comment"></span>  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a>;</div>
+<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#a63762b7198d7c1a8df01b39c74ba2ad9">  291</a></span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html">NonRefineableBinArrayParameters</a>;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">  /// \short Broken copy constructor.</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#a5a1bf38b22afec8348b47d3ccbc9c2a9">  294</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1BinArrayParameters.html#a5a1bf38b22afec8348b47d3ccbc9c2a9">BinArrayParameters</a>(</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;   <span class="keyword">const</span> <a class="code" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a>&amp; data)</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;   {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;BinArrayParameters&quot;</span>);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;   }</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">  /// Broken assignment operator.</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#a75c95b9419516e5ca6328a9f03432467">  301</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1BinArrayParameters.html#a75c95b9419516e5ca6328a9f03432467">operator=</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a>&amp;) </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;  {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">BrokenCopy::broken_assign</a>(<span class="stringliteral">&quot;BinArrayParameters&quot;</span>);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">  /// Empty destructor</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#a55a4fb68a273000d3782364ccac09c3f">  307</a></span>&#160;<span class="comment"></span>  <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1BinArrayParameters.html#a55a4fb68a273000d3782364ccac09c3f">~BinArrayParameters</a>() { }</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">  /// \short Number of bins in each coordinate direction</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#aafb1b653260c401db87ed75c51d06de8">  310</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a>&amp; <a class="code" href="classoomph_1_1BinArrayParameters.html#aafb1b653260c401db87ed75c51d06de8">dimensions_of_bin_array</a>()</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;   {</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1BinArrayParameters.html#af3dfb49b2d50911c4b8b2f063ffa8de9">Dimensions_of_bin_array</a>;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;   }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">  /// \short Number of bins in each coordinate direction. Const version</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#a9f14007784881e7da72d48d80dcaebc9">  316</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> <a class="code" href="classoomph_1_1BinArrayParameters.html#a9f14007784881e7da72d48d80dcaebc9">dimensions_of_bin_array</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="keyword">   </span>{</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1BinArrayParameters.html#af3dfb49b2d50911c4b8b2f063ffa8de9">Dimensions_of_bin_array</a>;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;   }</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;   <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">  /// \short Number of bins in each coordinate direction</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#af3dfb49b2d50911c4b8b2f063ffa8de9">  324</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> <a class="code" href="classoomph_1_1BinArrayParameters.html#af3dfb49b2d50911c4b8b2f063ffa8de9">Dimensions_of_bin_array</a>;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;   <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">  /// \short Constructor: Pass mesh. Constructor is private and can only </span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">  /// be called by the derived friends.</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#ae2bfef88dd9025fc731b11a7dd8fcb1b">  330</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1BinArrayParameters.html#ae2bfef88dd9025fc731b11a7dd8fcb1b">BinArrayParameters</a>(<a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>) : <a class="code" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a>(<a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>)</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  {}</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">  /// \short Broken default constructor; needed for broken</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">  /// copy constructors. Don&#39;t call. It will die.</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno"><a class="line" href="classoomph_1_1BinArrayParameters.html#a25db158eff522cb0ad014eecbfa0d106">  335</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1BinArrayParameters.html#a25db158eff522cb0ad014eecbfa0d106">BinArrayParameters</a>()</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;   {</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="comment">//Throw the error</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(<span class="stringliteral">&quot;Broken default constructor. Don&#39;t call this!&quot;</span>,</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                        OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                        OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;   }</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; };</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">/// \short Helper object for dealing with the parameters used for the</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">/// RefineableBinArray objects</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html">  355</a></span>&#160; <span class="keyword">class </span><a class="code" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; {</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">  /// Constructor: Pass mesh</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a818b4740e10aa5869981ce9f5bf1193e">  361</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a818b4740e10aa5869981ce9f5bf1193e">RefineableBinArrayParameters</a>(<a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>) : </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  <a class="code" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a>(<a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>),</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;   <a class="code" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a>(<a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>),</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;   <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a1f0e523056c7a2aed792b0fabeb06bda">Bin_array_is_recursive</a>(true),</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;   <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a298bbaa33862244e5c153c07da29636c">Depth</a>(0),</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;   <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a31ec6c0f07ea4ce3b5d29ae3a9e8dc11">Max_depth</a>(<a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a5de4867a1cd15e1e494cb53261f0b1a7">Default_max_depth</a>),</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;   <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ad6bec286a43785726d81c0bcadcb75be">Max_number_of_sample_point_per_bin</a>(</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a0e94143bc3bdbd74d8927ea7e9c5f234">Default_max_number_of_sample_point_per_bin</a>),</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;   <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ab4e2e5c03c4d3e725bd4f595b850bc2d">Root_bin_array_pt</a>(0)</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    {}</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">  /// \short Broken copy constructor.</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a2f1ba6468651705363da2637e9a142b9">  373</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a2f1ba6468651705363da2637e9a142b9">RefineableBinArrayParameters</a>(</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;   <span class="keyword">const</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a>&amp; data)</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;   {</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;RefineableBinArrayParameters&quot;</span>);</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;   }</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">  /// Broken assignment operator.</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a5b307d5acebd67ad9ce7745b848da5a6">  380</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a5b307d5acebd67ad9ce7745b848da5a6">operator=</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a>&amp;) </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;   {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">BrokenCopy::broken_assign</a>(<span class="stringliteral">&quot;RefineableBinArrayParameters&quot;</span>);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;   }</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">  /// Empty destructor</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#afc0752c4b4731443b5ec6e960afa61ae">  386</a></span>&#160;<span class="comment"></span>  <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#afc0752c4b4731443b5ec6e960afa61ae">~RefineableBinArrayParameters</a>()</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;   {}</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;  </div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">  /// Is bin recursive?</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a0e7008ab131125dd1ed4118f5953848a">  391</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a0e7008ab131125dd1ed4118f5953848a">bin_array_is_recursive</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a1f0e523056c7a2aed792b0fabeb06bda">Bin_array_is_recursive</a>;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;  }</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">  /// Enable recursiveness</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#ac06c56e4dd074e6f133e0708dc7a1fb7">  397</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ac06c56e4dd074e6f133e0708dc7a1fb7">enable_bin_array_is_recursive</a>()</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;  {</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;   <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a1f0e523056c7a2aed792b0fabeb06bda">Bin_array_is_recursive</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;  }</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">  /// Disable recursiveness</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#ad2922f7c04fcc8a21aec0ab8c6a0651b">  403</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ad2922f7c04fcc8a21aec0ab8c6a0651b">disable_bin_array_is_recursive</a>()</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;  {</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;   <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a1f0e523056c7a2aed792b0fabeb06bda">Bin_array_is_recursive</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;  }</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">  /// \short Variable which stores the Depth value of the bin_array.</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a4056b694152383da1440ff8ee62811b8">  409</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span>&amp; <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a4056b694152383da1440ff8ee62811b8">depth</a>()</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;  {</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a298bbaa33862244e5c153c07da29636c">Depth</a>;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;  }</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">  /// \short Variable which stores the Depth value of the bin_array.</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">  /// const version</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a198892de079e38ec6b7e3e39c878ffd5">  416</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a198892de079e38ec6b7e3e39c878ffd5">depth</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a298bbaa33862244e5c153c07da29636c">Depth</a>;</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  }</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">  /// \short Max. depth value of the bin_array.</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a7d341ba18f784b2669f9e75561ea3321">  422</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span>&amp; <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a7d341ba18f784b2669f9e75561ea3321">max_depth</a>()</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;  {</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a31ec6c0f07ea4ce3b5d29ae3a9e8dc11">Max_depth</a>;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;  }</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">  /// \short Max. depth value of the bin_array.</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">  /// const version</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a5e27c9afc435df8c4980349a12373c78">  429</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a5e27c9afc435df8c4980349a12373c78">max_depth</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a31ec6c0f07ea4ce3b5d29ae3a9e8dc11">Max_depth</a>;</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;  }</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">  /// \short Maximum number of sample points in bin (before it&#39;s subdivided</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">  /// recursively)</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a9a5739f3fed040e8d342d5b46f43151b">  436</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span>&amp; <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a9a5739f3fed040e8d342d5b46f43151b">max_number_of_sample_point_per_bin</a>()</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;  {</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ad6bec286a43785726d81c0bcadcb75be">Max_number_of_sample_point_per_bin</a>;</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;  } </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">  /// \short Maximum number of sample points in bin (before it&#39;s subdivided</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">  /// recursively; const version</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a0a9b5ec5cb8b505a4166e9edacc2b964">  443</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a0a9b5ec5cb8b505a4166e9edacc2b964">max_number_of_sample_point_per_bin</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ad6bec286a43785726d81c0bcadcb75be">Max_number_of_sample_point_per_bin</a>;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;  } </div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">  /// Pointer to root bin array</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a2e76aec48f38072750e1951f1373f5b9">  449</a></span>&#160;<span class="comment"></span>  <a class="code" href="classRefineableBinArray.html">RefineableBinArray</a>*&amp; <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a2e76aec48f38072750e1951f1373f5b9">root_bin_array_pt</a>()</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;   {</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ab4e2e5c03c4d3e725bd4f595b850bc2d">Root_bin_array_pt</a>;</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;   }</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">  /// Pointer to root bin array; const version</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a2405a7ef44b0b511a64e2410e53a4ca8">  455</a></span>&#160;<span class="comment"></span>  <a class="code" href="classRefineableBinArray.html">RefineableBinArray</a>* <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a2405a7ef44b0b511a64e2410e53a4ca8">root_bin_array_pt</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="keyword">   </span>{</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ab4e2e5c03c4d3e725bd4f595b850bc2d">Root_bin_array_pt</a>;</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;   }</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment">  /// Default value for max. depth</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a5de4867a1cd15e1e494cb53261f0b1a7">  461</a></span>&#160;<span class="comment"></span>  <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a5de4867a1cd15e1e494cb53261f0b1a7">Default_max_depth</a>;</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">  /// Default value for max. number of sample points before refinement</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a0e94143bc3bdbd74d8927ea7e9c5f234">  464</a></span>&#160;<span class="comment"></span>  <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a0e94143bc3bdbd74d8927ea7e9c5f234">Default_max_number_of_sample_point_per_bin</a>;</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160; </div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;   <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="comment">  /// \short Variable which stores if the RefineableBinArray is </span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment">  /// recursive or not.</span></div>
+<div class="line"><a name="l00470"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a1f0e523056c7a2aed792b0fabeb06bda">  470</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a1f0e523056c7a2aed792b0fabeb06bda">Bin_array_is_recursive</a>;</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="comment">  /// \short Variable which stores the Depth value of the bin_array. Useful for</span></div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment">  /// debugging and for preventing &quot;infinite&quot; recursion in case if there is</span></div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="comment">  /// a problem.</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a298bbaa33862244e5c153c07da29636c">  475</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a298bbaa33862244e5c153c07da29636c">Depth</a>;</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">  /// \short Max. depth value of the bin_array.</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#a31ec6c0f07ea4ce3b5d29ae3a9e8dc11">  478</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#a31ec6c0f07ea4ce3b5d29ae3a9e8dc11">Max_depth</a>;</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">  /// \short Maximum number of sample points in bin (before its subdivided</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment">  /// recursively</span></div>
+<div class="line"><a name="l00482"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#ad6bec286a43785726d81c0bcadcb75be">  482</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ad6bec286a43785726d81c0bcadcb75be">Max_number_of_sample_point_per_bin</a>;</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment">  /// Pointer to root bin array</span></div>
+<div class="line"><a name="l00485"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableBinArrayParameters.html#ab4e2e5c03c4d3e725bd4f595b850bc2d">  485</a></span>&#160;<span class="comment"></span>  <a class="code" href="classRefineableBinArray.html">RefineableBinArray</a>* <a class="code" href="classoomph_1_1RefineableBinArrayParameters.html#ab4e2e5c03c4d3e725bd4f595b850bc2d">Root_bin_array_pt</a>;</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; </div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160; };</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160; </div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160; </div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; </div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160; </div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160; </div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="comment">/// \short Helper object for dealing with the parameters used for the</span></div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="comment">/// NonRefineableBinArray objects</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno"><a class="line" href="classoomph_1_1NonRefineableBinArrayParameters.html">  504</a></span>&#160; <span class="keyword">class </span><a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html">NonRefineableBinArrayParameters</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a></div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160; {</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160; </div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="comment">  /// Constructor: Pass mesh</span></div>
+<div class="line"><a name="l00510"></a><span class="lineno"><a class="line" href="classoomph_1_1NonRefineableBinArrayParameters.html#a9dd0d9a3ee86b493d7944efe943ed419">  510</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a9dd0d9a3ee86b493d7944efe943ed419">NonRefineableBinArrayParameters</a>(<a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>) : </div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;  <a class="code" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a>(<a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>),</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;   <a class="code" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a>(<a class="code" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>),</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;   <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a5d642bbd9718111a8aba118e2e911e4f">Nspiral_chunk</a>(<a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a117183d5d98185162e5fd150c89cfde6">Default_nspiral_chunk</a>)</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    {}</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment">  /// \short Broken copy constructor.</span></div>
+<div class="line"><a name="l00517"></a><span class="lineno"><a class="line" href="classoomph_1_1NonRefineableBinArrayParameters.html#a3f9bc402be8e192190f62927947d135f">  517</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a3f9bc402be8e192190f62927947d135f">NonRefineableBinArrayParameters</a>(</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;   <span class="keyword">const</span> <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html">NonRefineableBinArrayParameters</a>&amp; data)</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;   {</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;    <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;NonRefineableBinArrayParameters&quot;</span>);</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;   }</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="comment">  /// Broken assignment operator.</span></div>
+<div class="line"><a name="l00524"></a><span class="lineno"><a class="line" href="classoomph_1_1NonRefineableBinArrayParameters.html#a983009919c352b06ca15fd32169b10e6">  524</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a983009919c352b06ca15fd32169b10e6">operator=</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html">NonRefineableBinArrayParameters</a>&amp;) </div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;  {</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">BrokenCopy::broken_assign</a>(<span class="stringliteral">&quot;NonRefineableBinArrayParameters&quot;</span>);</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;  }</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="comment">  /// Empty destructor</span></div>
+<div class="line"><a name="l00530"></a><span class="lineno"><a class="line" href="classoomph_1_1NonRefineableBinArrayParameters.html#a377a6754b51d9e2129f301509ae6353a">  530</a></span>&#160;<span class="comment"></span>  <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a377a6754b51d9e2129f301509ae6353a">~NonRefineableBinArrayParameters</a>()</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;   {}</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;<span class="comment">  /// \short Number of spirals that are being</span></div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="comment">  /// visited before doing another circular mpi communication</span></div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="comment">  /// const version </span></div>
+<div class="line"><a name="l00536"></a><span class="lineno"><a class="line" href="classoomph_1_1NonRefineableBinArrayParameters.html#adfaea5d556a6e9fa5b9b874039ddc069">  536</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#adfaea5d556a6e9fa5b9b874039ddc069">nspiral_chunk</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a5d642bbd9718111a8aba118e2e911e4f">Nspiral_chunk</a>;</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;  }<span class="comment"></span></div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="comment">  /// \short Number of spirals that are being</span></div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="comment">  /// visited before doing another circular mpi communication</span></div>
+<div class="line"><a name="l00542"></a><span class="lineno"><a class="line" href="classoomph_1_1NonRefineableBinArrayParameters.html#a8815febdad327ff6c39d7e0c5e470033">  542</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span>&amp; <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a8815febdad327ff6c39d7e0c5e470033">nspiral_chunk</a>()</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;  {</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a5d642bbd9718111a8aba118e2e911e4f">Nspiral_chunk</a>;</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;  }</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="comment">  /// \short Default value for number of spirals that are being</span></div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="comment">  /// visited before doing another circular mpi communication</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno"><a class="line" href="classoomph_1_1NonRefineableBinArrayParameters.html#a117183d5d98185162e5fd150c89cfde6">  549</a></span>&#160;<span class="comment"></span>  <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a117183d5d98185162e5fd150c89cfde6">Default_nspiral_chunk</a>;</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160; </div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;   <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="comment">  /// \short Number of spirals that are being</span></div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="comment">  /// visited before doing another circular mpi communication</span></div>
+<div class="line"><a name="l00555"></a><span class="lineno"><a class="line" href="classoomph_1_1NonRefineableBinArrayParameters.html#a5d642bbd9718111a8aba118e2e911e4f">  555</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1NonRefineableBinArrayParameters.html#a5d642bbd9718111a8aba118e2e911e4f">Nspiral_chunk</a>;</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160; </div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160; </div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160; };</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160; </div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;}</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160; </div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a6585db241b22e087222ca3b09e99b663"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a6585db241b22e087222ca3b09e99b663">oomph::SamplePointContainerParameters::enable_ignore_halo_elements_during_locate_zeta_search</a></div><div class="ttdeci">void enable_ignore_halo_elements_during_locate_zeta_search()</div><div class="ttdoc">Enable Ignore halo elements? (MPI only)</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00169">sample_point_parameters.h:169</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a5b307d5acebd67ad9ce7745b848da5a6"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a5b307d5acebd67ad9ce7745b848da5a6">oomph::RefineableBinArrayParameters::operator=</a></div><div class="ttdeci">void operator=(const RefineableBinArrayParameters &amp;)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00380">sample_point_parameters.h:380</a></div></div>
+<div class="ttc" id="anamespaceoomph_html_a8c0fdc9bd9751811cd49fe6f06c55991"><div class="ttname"><a href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991">oomph::Sample_Point_Container_Type</a></div><div class="ttdeci">Sample_Point_Container_Type</div><div class="ttdoc">Enumeration to identify type of sample point container.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00040">sample_point_parameters.h:40</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a2f1ba6468651705363da2637e9a142b9"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a2f1ba6468651705363da2637e9a142b9">oomph::RefineableBinArrayParameters::RefineableBinArrayParameters</a></div><div class="ttdeci">RefineableBinArrayParameters(const RefineableBinArrayParameters &amp;data)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00373">sample_point_parameters.h:373</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a0e7008ab131125dd1ed4118f5953848a"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a0e7008ab131125dd1ed4118f5953848a">oomph::RefineableBinArrayParameters::bin_array_is_recursive</a></div><div class="ttdeci">bool bin_array_is_recursive() const</div><div class="ttdoc">Is bin recursive?</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00391">sample_point_parameters.h:391</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BinArrayParameters_html_a75c95b9419516e5ca6328a9f03432467"><div class="ttname"><a href="classoomph_1_1BinArrayParameters.html#a75c95b9419516e5ca6328a9f03432467">oomph::BinArrayParameters::operator=</a></div><div class="ttdeci">void operator=(const BinArrayParameters &amp;)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00301">sample_point_parameters.h:301</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NonRefineableBinArrayParameters_html_a117183d5d98185162e5fd150c89cfde6"><div class="ttname"><a href="classoomph_1_1NonRefineableBinArrayParameters.html#a117183d5d98185162e5fd150c89cfde6">oomph::NonRefineableBinArrayParameters::Default_nspiral_chunk</a></div><div class="ttdeci">static unsigned Default_nspiral_chunk</div><div class="ttdoc">Default value for number of spirals that are being visited before doing another circular mpi communic...</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00549">sample_point_parameters.h:549</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html">oomph::SamplePointContainerParameters</a></div><div class="ttdoc">Helper object for dealing with the parameters used for the SamplePointContainer objects.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00074">sample_point_parameters.h:74</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NonRefineableBinArrayParameters_html_a5d642bbd9718111a8aba118e2e911e4f"><div class="ttname"><a href="classoomph_1_1NonRefineableBinArrayParameters.html#a5d642bbd9718111a8aba118e2e911e4f">oomph::NonRefineableBinArrayParameters::Nspiral_chunk</a></div><div class="ttdeci">unsigned Nspiral_chunk</div><div class="ttdoc">Number of spirals that are being visited before doing another circular mpi communication.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00555">sample_point_parameters.h:555</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_aa089aeff405b3e4362b4335a9acfb5a2"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#aa089aeff405b3e4362b4335a9acfb5a2">oomph::SamplePointContainerParameters::operator=</a></div><div class="ttdeci">void operator=(const SamplePointContainerParameters &amp;)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00095">sample_point_parameters.h:95</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a63f93ee4ddc61cb01af363187de21947"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a63f93ee4ddc61cb01af363187de21947">oomph::SamplePointContainerParameters::SamplePointContainerParameters</a></div><div class="ttdeci">SamplePointContainerParameters(const SamplePointContainerParameters &amp;data)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00089">sample_point_parameters.h:89</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BinArrayParameters_html_a9f14007784881e7da72d48d80dcaebc9"><div class="ttname"><a href="classoomph_1_1BinArrayParameters.html#a9f14007784881e7da72d48d80dcaebc9">oomph::BinArrayParameters::dimensions_of_bin_array</a></div><div class="ttdeci">Vector&lt; unsigned &gt; dimensions_of_bin_array() const</div><div class="ttdoc">Number of bins in each coordinate direction. Const version.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00316">sample_point_parameters.h:316</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a9a5739f3fed040e8d342d5b46f43151b"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a9a5739f3fed040e8d342d5b46f43151b">oomph::RefineableBinArrayParameters::max_number_of_sample_point_per_bin</a></div><div class="ttdeci">unsigned &amp; max_number_of_sample_point_per_bin()</div><div class="ttdoc">Maximum number of sample points in bin (before it's subdivided recursively)</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00436">sample_point_parameters.h:436</a></div></div>
+<div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00225">oomph_definitions.h:225</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a645bbbfc9395e5fe39a05845b2352b99"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a645bbbfc9395e5fe39a05845b2352b99">oomph::SamplePointContainerParameters::nsample_points_generated_per_element</a></div><div class="ttdeci">unsigned &amp; nsample_points_generated_per_element()</div><div class="ttdoc">&quot;Measure of&quot; number of sample points generated in each element</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00136">sample_point_parameters.h:136</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a980161906be89a1cf50835fe45949cfe"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a980161906be89a1cf50835fe45949cfe">oomph::SamplePointContainerParameters::Min_and_max_coordinates</a></div><div class="ttdeci">Vector&lt; std::pair&lt; double, double &gt; &gt; Min_and_max_coordinates</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00192">sample_point_parameters.h:192</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a2e76aec48f38072750e1951f1373f5b9"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a2e76aec48f38072750e1951f1373f5b9">oomph::RefineableBinArrayParameters::root_bin_array_pt</a></div><div class="ttdeci">RefineableBinArray *&amp; root_bin_array_pt()</div><div class="ttdoc">Pointer to root bin array.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00449">sample_point_parameters.h:449</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_afc0752c4b4731443b5ec6e960afa61ae"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#afc0752c4b4731443b5ec6e960afa61ae">oomph::RefineableBinArrayParameters::~RefineableBinArrayParameters</a></div><div class="ttdeci">virtual ~RefineableBinArrayParameters()</div><div class="ttdoc">Empty destructor.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00386">sample_point_parameters.h:386</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_ae1520f275ffb0941541aa51c89f3eeec"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#ae1520f275ffb0941541aa51c89f3eeec">oomph::SamplePointContainerParameters::disable_ignore_halo_elements_during_locate_zeta_search</a></div><div class="ttdeci">void disable_ignore_halo_elements_during_locate_zeta_search()</div><div class="ttdoc">Disable Ignore halo elements? (MPI only)</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00175">sample_point_parameters.h:175</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a4056b694152383da1440ff8ee62811b8"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a4056b694152383da1440ff8ee62811b8">oomph::RefineableBinArrayParameters::depth</a></div><div class="ttdeci">unsigned &amp; depth()</div><div class="ttdoc">Variable which stores the Depth value of the bin_array.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00409">sample_point_parameters.h:409</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a946a3657f6c50f2e14dccf421ed5e178"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a946a3657f6c50f2e14dccf421ed5e178">oomph::SamplePointContainerParameters::use_eulerian_coordinates_during_setup</a></div><div class="ttdeci">bool use_eulerian_coordinates_during_setup() const</div><div class="ttdoc">Use eulerian coordinates (via interpolated_x) during setup (otherwise use interpolated_zeta())?</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00143">sample_point_parameters.h:143</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BinArrayParameters_html_a25db158eff522cb0ad014eecbfa0d106"><div class="ttname"><a href="classoomph_1_1BinArrayParameters.html#a25db158eff522cb0ad014eecbfa0d106">oomph::BinArrayParameters::BinArrayParameters</a></div><div class="ttdeci">BinArrayParameters()</div><div class="ttdoc">Broken default constructor; needed for broken copy constructors. Don't call. It will die.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00335">sample_point_parameters.h:335</a></div></div>
+<div class="ttc" id="aclassoomph_1_1CGALSamplePointContainerParameters_html_ab8dea419a55474ba42a15992c479804e"><div class="ttname"><a href="classoomph_1_1CGALSamplePointContainerParameters.html#ab8dea419a55474ba42a15992c479804e">oomph::CGALSamplePointContainerParameters::CGALSamplePointContainerParameters</a></div><div class="ttdeci">CGALSamplePointContainerParameters(Mesh *mesh_pt)</div><div class="ttdoc">Constructor: Pass mesh.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00253">sample_point_parameters.h:253</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_ab8757aae90e85b2a860fd07acd19a92a"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#ab8757aae90e85b2a860fd07acd19a92a">oomph::SamplePointContainerParameters::Use_eulerian_coordinates_during_setup</a></div><div class="ttdeci">bool Use_eulerian_coordinates_during_setup</div><div class="ttdoc">Use Eulerian coordinates to setup bin (i.e. use interpolated_x() rather than interpolated_zeta() when...</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00200">sample_point_parameters.h:200</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BinArrayParameters_html_af3dfb49b2d50911c4b8b2f063ffa8de9"><div class="ttname"><a href="classoomph_1_1BinArrayParameters.html#af3dfb49b2d50911c4b8b2f063ffa8de9">oomph::BinArrayParameters::Dimensions_of_bin_array</a></div><div class="ttdeci">Vector&lt; unsigned &gt; Dimensions_of_bin_array</div><div class="ttdoc">Number of bins in each coordinate direction.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00324">sample_point_parameters.h:324</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a5e0ced492320cc06615bcb1782b7bb22"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a5e0ced492320cc06615bcb1782b7bb22">oomph::SamplePointContainerParameters::~SamplePointContainerParameters</a></div><div class="ttdeci">virtual ~SamplePointContainerParameters()</div><div class="ttdoc">Empty destructor.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00102">sample_point_parameters.h:102</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NonRefineableBinArrayParameters_html_a9dd0d9a3ee86b493d7944efe943ed419"><div class="ttname"><a href="classoomph_1_1NonRefineableBinArrayParameters.html#a9dd0d9a3ee86b493d7944efe943ed419">oomph::NonRefineableBinArrayParameters::NonRefineableBinArrayParameters</a></div><div class="ttdeci">NonRefineableBinArrayParameters(Mesh *mesh_pt)</div><div class="ttdoc">Constructor: Pass mesh.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00510">sample_point_parameters.h:510</a></div></div>
+<div class="ttc" id="anamespaceoomph_html_a8c0fdc9bd9751811cd49fe6f06c55991a75595ef05f43add7443737e4fe76cd61"><div class="ttname"><a href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991a75595ef05f43add7443737e4fe76cd61">oomph::UseCGALSamplePointContainer</a></div><div class="ttdeci">@ UseCGALSamplePointContainer</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00045">sample_point_parameters.h:45</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_ac06c56e4dd074e6f133e0708dc7a1fb7"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#ac06c56e4dd074e6f133e0708dc7a1fb7">oomph::RefineableBinArrayParameters::enable_bin_array_is_recursive</a></div><div class="ttdeci">void enable_bin_array_is_recursive()</div><div class="ttdoc">Enable recursiveness.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00397">sample_point_parameters.h:397</a></div></div>
+<div class="ttc" id="aclassoomph_1_1CGALSamplePointContainerParameters_html_a34e7dd9df2cc7eb6edc54f9a873c9853"><div class="ttname"><a href="classoomph_1_1CGALSamplePointContainerParameters.html#a34e7dd9df2cc7eb6edc54f9a873c9853">oomph::CGALSamplePointContainerParameters::CGALSamplePointContainerParameters</a></div><div class="ttdeci">CGALSamplePointContainerParameters(const CGALSamplePointContainerParameters &amp;data)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00259">sample_point_parameters.h:259</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Mesh_html"><div class="ttname"><a href="classoomph_1_1Mesh.html">oomph::Mesh</a></div><div class="ttdoc">A general mesh class.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8h_source.html#l00070">mesh.h:70</a></div></div>
+<div class="ttc" id="aclassRefineableBinArray_html"><div class="ttname"><a href="classRefineableBinArray.html">RefineableBinArray</a></div><div class="ttdoc">RefineableBinArray class.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__container_8h_source.html#l00542">sample_point_container.h:542</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BinArrayParameters_html_a5a1bf38b22afec8348b47d3ccbc9c2a9"><div class="ttname"><a href="classoomph_1_1BinArrayParameters.html#a5a1bf38b22afec8348b47d3ccbc9c2a9">oomph::BinArrayParameters::BinArrayParameters</a></div><div class="ttdeci">BinArrayParameters(const BinArrayParameters &amp;data)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00294">sample_point_parameters.h:294</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a0a9b5ec5cb8b505a4166e9edacc2b964"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a0a9b5ec5cb8b505a4166e9edacc2b964">oomph::RefineableBinArrayParameters::max_number_of_sample_point_per_bin</a></div><div class="ttdeci">unsigned max_number_of_sample_point_per_bin() const</div><div class="ttdoc">Maximum number of sample points in bin (before it's subdivided recursively; const version.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00443">sample_point_parameters.h:443</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a9c59f44fa07b7f79e8b854d5b918e3bd"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a9c59f44fa07b7f79e8b854d5b918e3bd">oomph::SamplePointContainerParameters::disable_use_eulerian_coordinates_during_setup</a></div><div class="ttdeci">void disable_use_eulerian_coordinates_during_setup()</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00157">sample_point_parameters.h:157</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_ab4e2e5c03c4d3e725bd4f595b850bc2d"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#ab4e2e5c03c4d3e725bd4f595b850bc2d">oomph::RefineableBinArrayParameters::Root_bin_array_pt</a></div><div class="ttdeci">RefineableBinArray * Root_bin_array_pt</div><div class="ttdoc">Pointer to root bin array.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00485">sample_point_parameters.h:485</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BinArrayParameters_html"><div class="ttname"><a href="classoomph_1_1BinArrayParameters.html">oomph::BinArrayParameters</a></div><div class="ttdoc">Helper object for dealing with the parameters used for the BinArray objects.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00284">sample_point_parameters.h:284</a></div></div>
+<div class="ttc" id="anamespaceoomph_html_a8c0fdc9bd9751811cd49fe6f06c55991a6bd4eede6af4e6e7881a96e4dc0e34cd"><div class="ttname"><a href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991a6bd4eede6af4e6e7881a96e4dc0e34cd">oomph::UseRefineableBinArray</a></div><div class="ttdeci">@ UseRefineableBinArray</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00042">sample_point_parameters.h:42</a></div></div>
+<div class="ttc" id="aelements_8h_html"><div class="ttname"><a href="elements_8h.html">elements.h</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BinArrayParameters_html_ae2bfef88dd9025fc731b11a7dd8fcb1b"><div class="ttname"><a href="classoomph_1_1BinArrayParameters.html#ae2bfef88dd9025fc731b11a7dd8fcb1b">oomph::BinArrayParameters::BinArrayParameters</a></div><div class="ttdeci">BinArrayParameters(Mesh *mesh_pt)</div><div class="ttdoc">Constructor: Pass mesh. Constructor is private and can only be called by the derived friends.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00330">sample_point_parameters.h:330</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a5e27c9afc435df8c4980349a12373c78"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a5e27c9afc435df8c4980349a12373c78">oomph::RefineableBinArrayParameters::max_depth</a></div><div class="ttdeci">unsigned max_depth() const</div><div class="ttdoc">Max. depth value of the bin_array. const version.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00429">sample_point_parameters.h:429</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NonRefineableBinArrayParameters_html_a377a6754b51d9e2129f301509ae6353a"><div class="ttname"><a href="classoomph_1_1NonRefineableBinArrayParameters.html#a377a6754b51d9e2129f301509ae6353a">oomph::NonRefineableBinArrayParameters::~NonRefineableBinArrayParameters</a></div><div class="ttdeci">virtual ~NonRefineableBinArrayParameters()</div><div class="ttdoc">Empty destructor.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00530">sample_point_parameters.h:530</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a710a6a32b2518b202a38fde405cdf7e5"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a710a6a32b2518b202a38fde405cdf7e5">oomph::SamplePointContainerParameters::nsample_points_generated_per_element</a></div><div class="ttdeci">unsigned nsample_points_generated_per_element() const</div><div class="ttdoc">&quot;Measure of&quot; number of sample points generated in each element const version</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00130">sample_point_parameters.h:130</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a68141123ff5252ad3dd1a8a5279282c4"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a68141123ff5252ad3dd1a8a5279282c4">oomph::SamplePointContainerParameters::Nsample_points_generated_per_element</a></div><div class="ttdeci">unsigned Nsample_points_generated_per_element</div><div class="ttdoc">&quot;Measure of&quot; number of sample points generated in each element</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00195">sample_point_parameters.h:195</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a8aa712173bb8242b17e49df97c0072e3"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a8aa712173bb8242b17e49df97c0072e3">oomph::SamplePointContainerParameters::enable_use_eulerian_coordinates_during_setup</a></div><div class="ttdeci">void enable_use_eulerian_coordinates_during_setup()</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00150">sample_point_parameters.h:150</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BinArrayParameters_html_aafb1b653260c401db87ed75c51d06de8"><div class="ttname"><a href="classoomph_1_1BinArrayParameters.html#aafb1b653260c401db87ed75c51d06de8">oomph::BinArrayParameters::dimensions_of_bin_array</a></div><div class="ttdeci">Vector&lt; unsigned &gt; &amp; dimensions_of_bin_array()</div><div class="ttdoc">Number of bins in each coordinate direction.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00310">sample_point_parameters.h:310</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1BrokenCopy_html_a7e5cd7fda8b8c790003151bee77a84ac"><div class="ttname"><a href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">oomph::BrokenCopy::broken_copy</a></div><div class="ttdeci">void broken_copy(const std::string &amp;class_name)</div><div class="ttdoc">Issue error message and terminate execution.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l00214">oomph_utilities.cc:214</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_ad8a463ddc961e51f6f77b4e8f678b962"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#ad8a463ddc961e51f6f77b4e8f678b962">oomph::SamplePointContainerParameters::Default_nsample_points_generated_per_element</a></div><div class="ttdeci">static unsigned Default_nsample_points_generated_per_element</div><div class="ttdoc">Default for &quot;measure of&quot; number of sample points per element.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00181">sample_point_parameters.h:181</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a92bcab955d47e99d47b601253da7b6b2"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">oomph::SamplePointContainerParameters::mesh_pt</a></div><div class="ttdeci">Mesh * mesh_pt() const</div><div class="ttdoc">Pointer to mesh from whose FiniteElements sample points are created.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00105">sample_point_parameters.h:105</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html">oomph::RefineableBinArrayParameters</a></div><div class="ttdoc">Helper object for dealing with the parameters used for the RefineableBinArray objects.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00355">sample_point_parameters.h:355</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_ae5b9cd742d38c42d337ede45bb9dda8c"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#ae5b9cd742d38c42d337ede45bb9dda8c">oomph::SamplePointContainerParameters::min_and_max_coordinates</a></div><div class="ttdeci">Vector&lt; std::pair&lt; double, double &gt; &gt; &amp; min_and_max_coordinates()</div><div class="ttdoc">Vector of pairs of doubles for min and maximum coordinates. Call: Min_and_max_coordinates[j] gives me...</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00114">sample_point_parameters.h:114</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a5de4867a1cd15e1e494cb53261f0b1a7"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a5de4867a1cd15e1e494cb53261f0b1a7">oomph::RefineableBinArrayParameters::Default_max_depth</a></div><div class="ttdeci">static unsigned Default_max_depth</div><div class="ttdoc">Default value for max. depth.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00461">sample_point_parameters.h:461</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NonRefineableBinArrayParameters_html_adfaea5d556a6e9fa5b9b874039ddc069"><div class="ttname"><a href="classoomph_1_1NonRefineableBinArrayParameters.html#adfaea5d556a6e9fa5b9b874039ddc069">oomph::NonRefineableBinArrayParameters::nspiral_chunk</a></div><div class="ttdeci">unsigned nspiral_chunk() const</div><div class="ttdoc">Number of spirals that are being visited before doing another circular mpi communication const versio...</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00536">sample_point_parameters.h:536</a></div></div>
+<div class="ttc" id="amesh_8h_html"><div class="ttname"><a href="mesh_8h.html">mesh.h</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NonRefineableBinArrayParameters_html"><div class="ttname"><a href="classoomph_1_1NonRefineableBinArrayParameters.html">oomph::NonRefineableBinArrayParameters</a></div><div class="ttdoc">Helper object for dealing with the parameters used for the NonRefineableBinArray objects.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00504">sample_point_parameters.h:504</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector</a></div><div class="ttdef"><b>Definition:</b> <a href="Vector_8h_source.html#l00059">Vector.h:59</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a31ec6c0f07ea4ce3b5d29ae3a9e8dc11"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a31ec6c0f07ea4ce3b5d29ae3a9e8dc11">oomph::RefineableBinArrayParameters::Max_depth</a></div><div class="ttdeci">unsigned Max_depth</div><div class="ttdoc">Max. depth value of the bin_array.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00478">sample_point_parameters.h:478</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a2513e0c918a2ec86c05ac39318c1c6c3"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a2513e0c918a2ec86c05ac39318c1c6c3">oomph::SamplePointContainerParameters::SamplePointContainerParameters</a></div><div class="ttdeci">SamplePointContainerParameters(Mesh *mesh_pt)</div><div class="ttdoc">Constructor: Pass mesh. Constructor is private and can only be called by the derived friends.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00215">sample_point_parameters.h:215</a></div></div>
+<div class="ttc" id="anamespaceoomph_html_a8c0fdc9bd9751811cd49fe6f06c55991ae9f4b2ff7655b9f053dd855d15d929af"><div class="ttname"><a href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991ae9f4b2ff7655b9f053dd855d15d929af">oomph::UseNonRefineableBinArray</a></div><div class="ttdeci">@ UseNonRefineableBinArray</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00043">sample_point_parameters.h:43</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BinArrayParameters_html_a55a4fb68a273000d3782364ccac09c3f"><div class="ttname"><a href="classoomph_1_1BinArrayParameters.html#a55a4fb68a273000d3782364ccac09c3f">oomph::BinArrayParameters::~BinArrayParameters</a></div><div class="ttdeci">virtual ~BinArrayParameters()</div><div class="ttdoc">Empty destructor.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00307">sample_point_parameters.h:307</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a436175c53c2801c510673146cdb75761"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a436175c53c2801c510673146cdb75761">oomph::SamplePointContainerParameters::ignore_halo_elements_during_locate_zeta_search</a></div><div class="ttdeci">bool ignore_halo_elements_during_locate_zeta_search() const</div><div class="ttdoc">Ignore halo elements? (MPI only)</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00163">sample_point_parameters.h:163</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a57f37f055a2f3b9509705988d2ee31a5"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a57f37f055a2f3b9509705988d2ee31a5">oomph::SamplePointContainerParameters::SamplePointContainerParameters</a></div><div class="ttdeci">SamplePointContainerParameters()</div><div class="ttdoc">Broken default constructor; needed for broken copy constructors. Don't call. It will die.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00225">sample_point_parameters.h:225</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_ad619df6bc0253178dbbaf195cea2fb5a"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#ad619df6bc0253178dbbaf195cea2fb5a">oomph::SamplePointContainerParameters::min_and_max_coordinates</a></div><div class="ttdeci">Vector&lt; std::pair&lt; double, double &gt; &gt; min_and_max_coordinates() const</div><div class="ttdoc">Vector of pairs of doubles for min and maximum coordinates. Call: Min_and_max_coordinates[j] gives me...</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00123">sample_point_parameters.h:123</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a198892de079e38ec6b7e3e39c878ffd5"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a198892de079e38ec6b7e3e39c878ffd5">oomph::RefineableBinArrayParameters::depth</a></div><div class="ttdeci">unsigned depth() const</div><div class="ttdoc">Variable which stores the Depth value of the bin_array. const version.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00416">sample_point_parameters.h:416</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_ad6ba2b667c746fc6c66830e4f3dc3f70"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#ad6ba2b667c746fc6c66830e4f3dc3f70">oomph::SamplePointContainerParameters::Ignore_halo_elements_during_locate_zeta_search</a></div><div class="ttdeci">bool Ignore_halo_elements_during_locate_zeta_search</div><div class="ttdoc">Ignore halo elements? Accepting halo elements can drastically reduce the number of external halo elem...</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00207">sample_point_parameters.h:207</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a7d341ba18f784b2669f9e75561ea3321"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a7d341ba18f784b2669f9e75561ea3321">oomph::RefineableBinArrayParameters::max_depth</a></div><div class="ttdeci">unsigned &amp; max_depth()</div><div class="ttdoc">Max. depth value of the bin_array.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00422">sample_point_parameters.h:422</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_ad2922f7c04fcc8a21aec0ab8c6a0651b"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#ad2922f7c04fcc8a21aec0ab8c6a0651b">oomph::RefineableBinArrayParameters::disable_bin_array_is_recursive</a></div><div class="ttdeci">void disable_bin_array_is_recursive()</div><div class="ttdoc">Disable recursiveness.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00403">sample_point_parameters.h:403</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a0e94143bc3bdbd74d8927ea7e9c5f234"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a0e94143bc3bdbd74d8927ea7e9c5f234">oomph::RefineableBinArrayParameters::Default_max_number_of_sample_point_per_bin</a></div><div class="ttdeci">static unsigned Default_max_number_of_sample_point_per_bin</div><div class="ttdoc">Default value for max. number of sample points before refinement.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00464">sample_point_parameters.h:464</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a2405a7ef44b0b511a64e2410e53a4ca8"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a2405a7ef44b0b511a64e2410e53a4ca8">oomph::RefineableBinArrayParameters::root_bin_array_pt</a></div><div class="ttdeci">RefineableBinArray * root_bin_array_pt() const</div><div class="ttdoc">Pointer to root bin array; const version.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00455">sample_point_parameters.h:455</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_ad6bec286a43785726d81c0bcadcb75be"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#ad6bec286a43785726d81c0bcadcb75be">oomph::RefineableBinArrayParameters::Max_number_of_sample_point_per_bin</a></div><div class="ttdeci">unsigned Max_number_of_sample_point_per_bin</div><div class="ttdoc">Maximum number of sample points in bin (before its subdivided recursively.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00482">sample_point_parameters.h:482</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NonRefineableBinArrayParameters_html_a983009919c352b06ca15fd32169b10e6"><div class="ttname"><a href="classoomph_1_1NonRefineableBinArrayParameters.html#a983009919c352b06ca15fd32169b10e6">oomph::NonRefineableBinArrayParameters::operator=</a></div><div class="ttdeci">void operator=(const NonRefineableBinArrayParameters &amp;)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00524">sample_point_parameters.h:524</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a298bbaa33862244e5c153c07da29636c"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a298bbaa33862244e5c153c07da29636c">oomph::RefineableBinArrayParameters::Depth</a></div><div class="ttdeci">unsigned Depth</div><div class="ttdoc">Variable which stores the Depth value of the bin_array. Useful for debugging and for preventing &quot;infi...</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00475">sample_point_parameters.h:475</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a1f0e523056c7a2aed792b0fabeb06bda"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a1f0e523056c7a2aed792b0fabeb06bda">oomph::RefineableBinArrayParameters::Bin_array_is_recursive</a></div><div class="ttdeci">bool Bin_array_is_recursive</div><div class="ttdoc">Variable which stores if the RefineableBinArray is recursive or not.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00470">sample_point_parameters.h:470</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBinArrayParameters_html_a818b4740e10aa5869981ce9f5bf1193e"><div class="ttname"><a href="classoomph_1_1RefineableBinArrayParameters.html#a818b4740e10aa5869981ce9f5bf1193e">oomph::RefineableBinArrayParameters::RefineableBinArrayParameters</a></div><div class="ttdeci">RefineableBinArrayParameters(Mesh *mesh_pt)</div><div class="ttdoc">Constructor: Pass mesh.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00361">sample_point_parameters.h:361</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NonRefineableBinArrayParameters_html_a8815febdad327ff6c39d7e0c5e470033"><div class="ttname"><a href="classoomph_1_1NonRefineableBinArrayParameters.html#a8815febdad327ff6c39d7e0c5e470033">oomph::NonRefineableBinArrayParameters::nspiral_chunk</a></div><div class="ttdeci">unsigned &amp; nspiral_chunk()</div><div class="ttdoc">Number of spirals that are being visited before doing another circular mpi communication.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00542">sample_point_parameters.h:542</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1BrokenCopy_html_a32dc384e671e786bac0c67cbff701f45"><div class="ttname"><a href="namespaceoomph_1_1BrokenCopy.html#a32dc384e671e786bac0c67cbff701f45">oomph::BrokenCopy::broken_assign</a></div><div class="ttdeci">void broken_assign(const std::string &amp;class_name)</div><div class="ttdoc">Issue error message and terminate execution.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l00197">oomph_utilities.cc:197</a></div></div>
+<div class="ttc" id="aclassoomph_1_1CGALSamplePointContainerParameters_html"><div class="ttname"><a href="classoomph_1_1CGALSamplePointContainerParameters.html">oomph::CGALSamplePointContainerParameters</a></div><div class="ttdoc">Helper object for dealing with the parameters used for the CGALSamplePointContainer objects.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00246">sample_point_parameters.h:246</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SamplePointContainerParameters_html_a9047299fdfac8074a9996267d66e901e"><div class="ttname"><a href="classoomph_1_1SamplePointContainerParameters.html#a9047299fdfac8074a9996267d66e901e">oomph::SamplePointContainerParameters::Mesh_pt</a></div><div class="ttdeci">Mesh * Mesh_pt</div><div class="ttdoc">Pointer to mesh from whose FiniteElements sample points are created.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00186">sample_point_parameters.h:186</a></div></div>
+<div class="ttc" id="aclassoomph_1_1NonRefineableBinArrayParameters_html_a3f9bc402be8e192190f62927947d135f"><div class="ttname"><a href="classoomph_1_1NonRefineableBinArrayParameters.html#a3f9bc402be8e192190f62927947d135f">oomph::NonRefineableBinArrayParameters::NonRefineableBinArrayParameters</a></div><div class="ttdeci">NonRefineableBinArrayParameters(const NonRefineableBinArrayParameters &amp;data)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00517">sample_point_parameters.h:517</a></div></div>
+<div class="ttc" id="aclassNonRefineableBinArray_html"><div class="ttname"><a href="classNonRefineableBinArray.html">NonRefineableBinArray</a></div><div class="ttdoc">NonRefineableBinArray class.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__container_8h_source.html#l00851">sample_point_container.h:851</a></div></div>
+<div class="ttc" id="aclassoomph_1_1CGALSamplePointContainerParameters_html_a41ed00b3d08398968b8492085cb2abb5"><div class="ttname"><a href="classoomph_1_1CGALSamplePointContainerParameters.html#a41ed00b3d08398968b8492085cb2abb5">oomph::CGALSamplePointContainerParameters::operator=</a></div><div class="ttdeci">void operator=(const CGALSamplePointContainerParameters &amp;)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="sample__point__parameters_8h_source.html#l00266">sample_point_parameters.h:266</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:57:58
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

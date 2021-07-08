@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: single_layer_spine_mesh.template.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6c67e72d2f29709d1e2582429aa24112.html">meshes</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">single_layer_spine_mesh.template.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="single__layer__spine__mesh_8template_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#ifndef OOMPH_SINGLE_LAYER_SPINE_MESH_HEADER</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define OOMPH_SINGLE_LAYER_SPINE_MESH_HEADER</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// oomph-lib includes</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;../generic/spines.h&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rectangular__quadmesh_8template_8h.html">rectangular_quadmesh.template.h</a>&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/// Single-layer spine mesh class derived from standard 2D mesh.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/// The mesh contains a layer of spinified fluid elements (of type ELEMENT;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/// e.g  SpineElement&lt;QCrouzeixRaviartElement&lt;2&gt;).</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/// It constructs the spines and contains the information on how to update</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">/// the nodal positions within the mesh as a function of the spine lengths.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/// Equations that determine the spine heights (even if they are pinned)</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">/// must be specified externally or else there will be problems.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classoomph_1_1SingleLayerSpineMesh.html">   47</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1SingleLayerSpineMesh.html">SingleLayerSpineMesh</a> : <span class="keyword">public</span> <a class="code" href="classoomph_1_1RectangularQuadMesh.html">RectangularQuadMesh</a>&lt;ELEMENT &gt;, </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                          <span class="keyword">public</span> SpineMesh</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> /// \short Constructor: Pass number of elements in x-direction, number of</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> /// elements in y-direction, axial length, height of layer, and pointer </span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> /// to timestepper (defaults to Steady timestepper)</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1SingleLayerSpineMesh.html#a2cdbf36114a4da773fb7d659218d09cb">SingleLayerSpineMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;h,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                   TimeStepper* time_stepper_pt=</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                   &amp;Mesh::Default_TimeStepper);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> /// \short Constructor: Pass number of elements in x-direction, number of</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> /// elements in y-direction, axial length, height of layer, a boolean</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> /// flag to make the mesh periodic in the x-direction, and a pointer </span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> /// to timestepper (defaults to Steady timestepper) </span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1SingleLayerSpineMesh.html#a2cdbf36114a4da773fb7d659218d09cb">SingleLayerSpineMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;h,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; periodic_in_x,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                   TimeStepper* time_stepper_pt=</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                   &amp;Mesh::Default_TimeStepper);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> /// \short General node update function implements pure virtual function </span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> /// defined in SpineMesh base class and performs specific node update</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> /// actions:  along vertical spines</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classoomph_1_1SingleLayerSpineMesh.html#a364648c15ab29c0c8d1cf7c2bc4cb792">   79</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SingleLayerSpineMesh.html#a364648c15ab29c0c8d1cf7c2bc4cb792">spine_node_update</a>(SpineNode* spine_node_pt)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;   <span class="comment">//Get fraction along the spine</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;   <span class="keywordtype">double</span> W = spine_node_pt-&gt;fraction();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;   <span class="comment">//Get spine height</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;   <span class="keywordtype">double</span> H = spine_node_pt-&gt;h();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;   <span class="comment">//Set the value of y</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;   spine_node_pt-&gt;x(1) = this-&gt;<a class="code" href="classoomph_1_1RectangularQuadMesh.html#ade53fec7446044418ccba9f55d692adb">Ymin</a> + W*H;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> /// \short Helper function to actually build the single-layer spine mesh </span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> /// (called from various constructors)</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SingleLayerSpineMesh.html#a6829fa8216137c0e2f5eb40b389dda35">build_single_layer_mesh</a>(TimeStepper* time_stepper_pt);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1SingleLayerSpineMesh_html_a6829fa8216137c0e2f5eb40b389dda35"><div class="ttname"><a href="classoomph_1_1SingleLayerSpineMesh.html#a6829fa8216137c0e2f5eb40b389dda35">oomph::SingleLayerSpineMesh::build_single_layer_mesh</a></div><div class="ttdeci">virtual void build_single_layer_mesh(TimeStepper *time_stepper_pt)</div><div class="ttdoc">Helper function to actually build the single-layer spine mesh (called from various constructors)</div><div class="ttdef"><b>Definition:</b> <a href="single__layer__spine__mesh_8template_8cc_source.html#l00115">single_layer_spine_mesh.template.cc:115</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RectangularQuadMesh_html"><div class="ttname"><a href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh</a></div><div class="ttdef"><b>Definition:</b> <a href="rectangular__quadmesh_8template_8h_source.html#l00059">rectangular_quadmesh.template.h:59</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RectangularQuadMesh_html_abfef93d6322886cdce14a437186e4821"><div class="ttname"><a href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">oomph::RectangularQuadMesh::nx</a></div><div class="ttdeci">const unsigned &amp; nx() const</div><div class="ttdoc">Return number of elements in x direction.</div><div class="ttdef"><b>Definition:</b> <a href="rectangular__quadmesh_8template_8h_source.html#l00182">rectangular_quadmesh.template.h:182</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RectangularQuadMesh_html_ade53fec7446044418ccba9f55d692adb"><div class="ttname"><a href="classoomph_1_1RectangularQuadMesh.html#ade53fec7446044418ccba9f55d692adb">oomph::RectangularQuadMesh::Ymin</a></div><div class="ttdeci">double Ymin</div><div class="ttdoc">Minimum value of y coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="rectangular__quadmesh_8template_8h_source.html#l00076">rectangular_quadmesh.template.h:76</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SingleLayerSpineMesh_html"><div class="ttname"><a href="classoomph_1_1SingleLayerSpineMesh.html">oomph::SingleLayerSpineMesh</a></div><div class="ttdef"><b>Definition:</b> <a href="single__layer__spine__mesh_8template_8h_source.html#l00047">single_layer_spine_mesh.template.h:47</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition:</b> <a href="annular__domain_8h_source.html#l00034">annular_domain.h:34</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RectangularQuadMesh_html_a86d76a55eb7c4e8bca9b74d23c8b0412"><div class="ttname"><a href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">oomph::RectangularQuadMesh::ny</a></div><div class="ttdeci">const unsigned &amp; ny() const</div><div class="ttdoc">Return number of elements in y direction.</div><div class="ttdef"><b>Definition:</b> <a href="rectangular__quadmesh_8template_8h_source.html#l00189">rectangular_quadmesh.template.h:189</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SingleLayerSpineMesh_html_a2cdbf36114a4da773fb7d659218d09cb"><div class="ttname"><a href="classoomph_1_1SingleLayerSpineMesh.html#a2cdbf36114a4da773fb7d659218d09cb">oomph::SingleLayerSpineMesh::SingleLayerSpineMesh</a></div><div class="ttdeci">SingleLayerSpineMesh(const unsigned &amp;nx, const unsigned &amp;ny, const double &amp;lx, const double &amp;h, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass number of elements in x-direction, number of elements in y-direction,...</div><div class="ttdef"><b>Definition:</b> <a href="single__layer__spine__mesh_8template_8cc_source.html#l00051">single_layer_spine_mesh.template.cc:51</a></div></div>
+<div class="ttc" id="arectangular__quadmesh_8template_8h_html"><div class="ttname"><a href="rectangular__quadmesh_8template_8h.html">rectangular_quadmesh.template.h</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SingleLayerSpineMesh_html_a364648c15ab29c0c8d1cf7c2bc4cb792"><div class="ttname"><a href="classoomph_1_1SingleLayerSpineMesh.html#a364648c15ab29c0c8d1cf7c2bc4cb792">oomph::SingleLayerSpineMesh::spine_node_update</a></div><div class="ttdeci">virtual void spine_node_update(SpineNode *spine_node_pt)</div><div class="ttdoc">General node update function implements pure virtual function defined in SpineMesh base class and per...</div><div class="ttdef"><b>Definition:</b> <a href="single__layer__spine__mesh_8template_8h_source.html#l00079">single_layer_spine_mesh.template.h:79</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:55:17
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::IMRByBDF Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1IMRByBDF.html">IMRByBDF</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="classoomph_1_1IMRByBDF-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::IMRByBDF Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::IMRByBDF:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1IMRByBDF.png" usemap="#oomph::IMRByBDF_map" alt=""/>
+  <map id="oomph::IMRByBDF_map" name="oomph::IMRByBDF_map">
+<area href="classoomph_1_1IMRBase.html" title="Implicit midpoint rule base class for the two implementations." alt="oomph::IMRBase" shape="rect" coords="0,56,125,80"/>
+<area href="classoomph_1_1TimeStepper.html" title="Base class for time-stepping schemes. Timestepper provides an approximation of the temporal derivativ..." alt="oomph::TimeStepper" shape="rect" coords="0,0,125,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a9b39aef878c283d7e7c5ad23ac7c8213"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRByBDF.html#a9b39aef878c283d7e7c5ad23ac7c8213">IMRByBDF</a> (const bool &amp;adaptive=false)</td></tr>
+<tr class="memdesc:a9b39aef878c283d7e7c5ad23ac7c8213"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with initialisation.  <a href="classoomph_1_1IMRByBDF.html#a9b39aef878c283d7e7c5ad23ac7c8213">More...</a><br /></td></tr>
+<tr class="separator:a9b39aef878c283d7e7c5ad23ac7c8213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa70e7e8090f3e454bc392e733b3185a"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRByBDF.html#aaa70e7e8090f3e454bc392e733b3185a">~IMRByBDF</a> ()</td></tr>
+<tr class="memdesc:aaa70e7e8090f3e454bc392e733b3185a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classoomph_1_1IMRByBDF.html#aaa70e7e8090f3e454bc392e733b3185a">More...</a><br /></td></tr>
+<tr class="separator:aaa70e7e8090f3e454bc392e733b3185a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6060b6098113085753083a2dc53723ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRByBDF.html#a6060b6098113085753083a2dc53723ee">set_weights</a> ()</td></tr>
+<tr class="memdesc:a6060b6098113085753083a2dc53723ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup weights for time derivative calculations.  <a href="classoomph_1_1IMRByBDF.html#a6060b6098113085753083a2dc53723ee">More...</a><br /></td></tr>
+<tr class="separator:a6060b6098113085753083a2dc53723ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fb7f902b1a266b19cfdfe640d4c78d5"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRByBDF.html#a4fb7f902b1a266b19cfdfe640d4c78d5">nprev_values_for_value_at_evaluation_time</a> () const</td></tr>
+<tr class="memdesc:a4fb7f902b1a266b19cfdfe640d4c78d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of history values to interpolate over to get the "current" value. Evaluation time is the end of the bdf1 "half-step", so only need one value as normal. <br  />
+  <a href="classoomph_1_1IMRByBDF.html#a4fb7f902b1a266b19cfdfe640d4c78d5">More...</a><br /></td></tr>
+<tr class="separator:a4fb7f902b1a266b19cfdfe640d4c78d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc155a68889d297f732a083d911b4627"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRByBDF.html#abc155a68889d297f732a083d911b4627">actions_before_timestep</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt)</td></tr>
+<tr class="memdesc:abc155a68889d297f732a083d911b4627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Half the timestep before starting solve.  <a href="classoomph_1_1IMRByBDF.html#abc155a68889d297f732a083d911b4627">More...</a><br /></td></tr>
+<tr class="separator:abc155a68889d297f732a083d911b4627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eb1b47643bf37e27c478c6987c7716d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRByBDF.html#a1eb1b47643bf37e27c478c6987c7716d">actions_after_timestep</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt)</td></tr>
+<tr class="separator:a1eb1b47643bf37e27c478c6987c7716d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1IMRBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1IMRBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1IMRBase.html">oomph::IMRBase</a></td></tr>
+<tr class="memitem:af0cee00bd97a2f6d8bafdb9f965a9982 inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#af0cee00bd97a2f6d8bafdb9f965a9982">IMRBase</a> (const bool &amp;adaptive=false)</td></tr>
+<tr class="memdesc:af0cee00bd97a2f6d8bafdb9f965a9982 inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with initialisation.  <a href="classoomph_1_1IMRBase.html#af0cee00bd97a2f6d8bafdb9f965a9982">More...</a><br /></td></tr>
+<tr class="separator:af0cee00bd97a2f6d8bafdb9f965a9982 inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d42ce83608fef0367c421b7c4cfeadf inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a0d42ce83608fef0367c421b7c4cfeadf">~IMRBase</a> ()</td></tr>
+<tr class="memdesc:a0d42ce83608fef0367c421b7c4cfeadf inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classoomph_1_1IMRBase.html#a0d42ce83608fef0367c421b7c4cfeadf">More...</a><br /></td></tr>
+<tr class="separator:a0d42ce83608fef0367c421b7c4cfeadf inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e556df579d73b46214f8993b2ff12d1 inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a8e556df579d73b46214f8993b2ff12d1">order</a> () const</td></tr>
+<tr class="memdesc:a8e556df579d73b46214f8993b2ff12d1 inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actual order (accuracy) of the scheme.  <a href="classoomph_1_1IMRBase.html#a8e556df579d73b46214f8993b2ff12d1">More...</a><br /></td></tr>
+<tr class="separator:a8e556df579d73b46214f8993b2ff12d1 inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d7c5c2dedead518b9b0882e74914f54 inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a7d7c5c2dedead518b9b0882e74914f54">ndt</a> () const</td></tr>
+<tr class="memdesc:a7d7c5c2dedead518b9b0882e74914f54 inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of timestep increments that are required by the scheme.  <a href="classoomph_1_1IMRBase.html#a7d7c5c2dedead518b9b0882e74914f54">More...</a><br /></td></tr>
+<tr class="separator:a7d7c5c2dedead518b9b0882e74914f54 inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a973faf88d44644bde495ffd6b9acbef1 inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a973faf88d44644bde495ffd6b9acbef1">nprev_values</a> () const</td></tr>
+<tr class="memdesc:a973faf88d44644bde495ffd6b9acbef1 inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">??ds  <a href="classoomph_1_1IMRBase.html#a973faf88d44644bde495ffd6b9acbef1">More...</a><br /></td></tr>
+<tr class="separator:a973faf88d44644bde495ffd6b9acbef1 inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34c72011189de014a69288fbcfac54f4 inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a34c72011189de014a69288fbcfac54f4">shift_time_values</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;data_pt)</td></tr>
+<tr class="memdesc:a34c72011189de014a69288fbcfac54f4 inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function advances the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>'s time history so that we can move on to the next timestep.  <a href="classoomph_1_1IMRBase.html#a34c72011189de014a69288fbcfac54f4">More...</a><br /></td></tr>
+<tr class="separator:a34c72011189de014a69288fbcfac54f4 inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61d4487fcf0a9eb7a829b08027a9500f inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a61d4487fcf0a9eb7a829b08027a9500f">shift_time_positions</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt)</td></tr>
+<tr class="memdesc:a61d4487fcf0a9eb7a829b08027a9500f inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function advances the time history of the positions at a node.  <a href="classoomph_1_1IMRBase.html#a61d4487fcf0a9eb7a829b08027a9500f">More...</a><br /></td></tr>
+<tr class="separator:a61d4487fcf0a9eb7a829b08027a9500f inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8122f3fa05e8622db6a98072d88685e2 inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a8122f3fa05e8622db6a98072d88685e2">set_error_weights</a> ()</td></tr>
+<tr class="memdesc:a8122f3fa05e8622db6a98072d88685e2 inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the weights for the error computation. This is not used by midpoint rule.  <a href="classoomph_1_1IMRBase.html#a8122f3fa05e8622db6a98072d88685e2">More...</a><br /></td></tr>
+<tr class="separator:a8122f3fa05e8622db6a98072d88685e2 inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68771c915a13f5a3e3655fff12cb73a3 inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a68771c915a13f5a3e3655fff12cb73a3">set_predictor_weights</a> ()</td></tr>
+<tr class="memdesc:a68771c915a13f5a3e3655fff12cb73a3 inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the weights for the predictor previous timestep. This is not used by midpint rule.  <a href="classoomph_1_1IMRBase.html#a68771c915a13f5a3e3655fff12cb73a3">More...</a><br /></td></tr>
+<tr class="separator:a68771c915a13f5a3e3655fff12cb73a3 inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2de3063187cd9d18db4cd36c36806f2f inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a2de3063187cd9d18db4cd36c36806f2f">assign_initial_values_impulsive</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;data_pt)</td></tr>
+<tr class="memdesc:a2de3063187cd9d18db4cd36c36806f2f inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">not implemented (??ds TODO)  <a href="classoomph_1_1IMRBase.html#a2de3063187cd9d18db4cd36c36806f2f">More...</a><br /></td></tr>
+<tr class="separator:a2de3063187cd9d18db4cd36c36806f2f inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9c3433ed870a32d2f94f7aa7b39104e inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#ae9c3433ed870a32d2f94f7aa7b39104e">assign_initial_positions_impulsive</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt)</td></tr>
+<tr class="memdesc:ae9c3433ed870a32d2f94f7aa7b39104e inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialiset the positions for the node corresponding to an impulsive start.  <a href="classoomph_1_1IMRBase.html#ae9c3433ed870a32d2f94f7aa7b39104e">More...</a><br /></td></tr>
+<tr class="separator:ae9c3433ed870a32d2f94f7aa7b39104e inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac206f72b8054828b715756417dcd230a inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#ac206f72b8054828b715756417dcd230a">calculate_predicted_positions</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt)</td></tr>
+<tr class="memdesc:ac206f72b8054828b715756417dcd230a inherit pub_methods_classoomph_1_1IMRBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do the predictor step for the positions at a node (currently empty &mdash; overwrite for a specific scheme)  <a href="classoomph_1_1IMRBase.html#ac206f72b8054828b715756417dcd230a">More...</a><br /></td></tr>
+<tr class="separator:ac206f72b8054828b715756417dcd230a inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e57fd5364c261cd7c1bd49688899a13 inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a6e57fd5364c261cd7c1bd49688899a13">temporal_error_in_position</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="separator:a6e57fd5364c261cd7c1bd49688899a13 inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1512b1a47e5b6dc6c8540fd024c44d1d inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#a1512b1a47e5b6dc6c8540fd024c44d1d">calculate_predicted_values</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;data_pt)</td></tr>
+<tr class="separator:a1512b1a47e5b6dc6c8540fd024c44d1d inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa51711d15be423119178f2b0c5ec8097 inherit pub_methods_classoomph_1_1IMRBase"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRBase.html#aa51711d15be423119178f2b0c5ec8097">temporal_error_in_value</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;data_pt, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="separator:aa51711d15be423119178f2b0c5ec8097 inherit pub_methods_classoomph_1_1IMRBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1TimeStepper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1TimeStepper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1TimeStepper.html">oomph::TimeStepper</a></td></tr>
+<tr class="memitem:a8a4f14d18d49b82f0a6ad1c279485cd9 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a8a4f14d18d49b82f0a6ad1c279485cd9">TimeStepper</a> (const unsigned &amp;tstorage, const unsigned &amp;max_deriv)</td></tr>
+<tr class="memdesc:a8a4f14d18d49b82f0a6ad1c279485cd9 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Pass the amount of storage required by timestepper (present value + history values) and the order of highest time-derivative.  <a href="classoomph_1_1TimeStepper.html#a8a4f14d18d49b82f0a6ad1c279485cd9">More...</a><br /></td></tr>
+<tr class="separator:a8a4f14d18d49b82f0a6ad1c279485cd9 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67f21ad40e01e35dd4cbb218aecbf596 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a67f21ad40e01e35dd4cbb218aecbf596">TimeStepper</a> ()</td></tr>
+<tr class="memdesc:a67f21ad40e01e35dd4cbb218aecbf596 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken empty constructor.  <a href="classoomph_1_1TimeStepper.html#a67f21ad40e01e35dd4cbb218aecbf596">More...</a><br /></td></tr>
+<tr class="separator:a67f21ad40e01e35dd4cbb218aecbf596 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aeeb26e2ce471978bf29641c10b3c1b inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a7aeeb26e2ce471978bf29641c10b3c1b">TimeStepper</a> (const <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> &amp;)</td></tr>
+<tr class="memdesc:a7aeeb26e2ce471978bf29641c10b3c1b inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1TimeStepper.html#a7aeeb26e2ce471978bf29641c10b3c1b">More...</a><br /></td></tr>
+<tr class="separator:a7aeeb26e2ce471978bf29641c10b3c1b inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85cc67365648d1bf5270311d460e0ec inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af85cc67365648d1bf5270311d460e0ec">operator=</a> (const <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> &amp;)</td></tr>
+<tr class="memdesc:af85cc67365648d1bf5270311d460e0ec inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1TimeStepper.html#af85cc67365648d1bf5270311d460e0ec">More...</a><br /></td></tr>
+<tr class="separator:af85cc67365648d1bf5270311d460e0ec inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a171b5bbc223c889474ee38fd02eefc4d inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a171b5bbc223c889474ee38fd02eefc4d">~TimeStepper</a> ()</td></tr>
+<tr class="memdesc:a171b5bbc223c889474ee38fd02eefc4d inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual destructor  <a href="classoomph_1_1TimeStepper.html#a171b5bbc223c889474ee38fd02eefc4d">More...</a><br /></td></tr>
+<tr class="separator:a171b5bbc223c889474ee38fd02eefc4d inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02483da1254fab8f268d70bb3ef2289 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#aa02483da1254fab8f268d70bb3ef2289">highest_derivative</a> () const</td></tr>
+<tr class="memdesc:aa02483da1254fab8f268d70bb3ef2289 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Highest order derivative that the scheme can compute.  <a href="classoomph_1_1TimeStepper.html#aa02483da1254fab8f268d70bb3ef2289">More...</a><br /></td></tr>
+<tr class="separator:aa02483da1254fab8f268d70bb3ef2289 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab902086340e6b33c5114db30c1f644c1 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ab902086340e6b33c5114db30c1f644c1">time</a> ()</td></tr>
+<tr class="memdesc:ab902086340e6b33c5114db30c1f644c1 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return current value of continous time.  <a href="classoomph_1_1TimeStepper.html#ab902086340e6b33c5114db30c1f644c1">More...</a><br /></td></tr>
+<tr class="separator:ab902086340e6b33c5114db30c1f644c1 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0fe7c6da82843fbaf406a29f5aaa78b inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ab0fe7c6da82843fbaf406a29f5aaa78b">time</a> () const</td></tr>
+<tr class="memdesc:ab0fe7c6da82843fbaf406a29f5aaa78b inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return current value of continous time.  <a href="classoomph_1_1TimeStepper.html#ab0fe7c6da82843fbaf406a29f5aaa78b">More...</a><br /></td></tr>
+<tr class="separator:ab0fe7c6da82843fbaf406a29f5aaa78b inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ea0ff2e66cef5e0184b616c608e418 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a81ea0ff2e66cef5e0184b616c608e418">make_steady</a> ()</td></tr>
+<tr class="memdesc:a81ea0ff2e66cef5e0184b616c608e418 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to make the time stepper temporarily steady. This is trivially achieved by setting all the weights to zero.  <a href="classoomph_1_1TimeStepper.html#a81ea0ff2e66cef5e0184b616c608e418">More...</a><br /></td></tr>
+<tr class="separator:a81ea0ff2e66cef5e0184b616c608e418 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad341ba9e80265e1c26c1cda0f40c8292 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ad341ba9e80265e1c26c1cda0f40c8292">is_steady</a> () const</td></tr>
+<tr class="memdesc:ad341ba9e80265e1c26c1cda0f40c8292 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to indicate if a timestepper has been made steady (possibly temporarily to switch off time-dependence)  <a href="classoomph_1_1TimeStepper.html#ad341ba9e80265e1c26c1cda0f40c8292">More...</a><br /></td></tr>
+<tr class="separator:ad341ba9e80265e1c26c1cda0f40c8292 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf0f84ac9e7c1266dea9bd9e479fb2bf inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#abf0f84ac9e7c1266dea9bd9e479fb2bf">predict_by_explicit_step</a> () const</td></tr>
+<tr class="memdesc:abf0f84ac9e7c1266dea9bd9e479fb2bf inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag: is adaptivity done by taking a separate step using an <a class="el" href="classoomph_1_1ExplicitTimeStepper.html" title="A Base class for explicit timesteppers.">ExplicitTimeStepper</a> object?  <a href="classoomph_1_1TimeStepper.html#abf0f84ac9e7c1266dea9bd9e479fb2bf">More...</a><br /></td></tr>
+<tr class="separator:abf0f84ac9e7c1266dea9bd9e479fb2bf inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab570dfd6a22d73079599a97d462de9ef inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ab570dfd6a22d73079599a97d462de9ef">explicit_predictor_pt</a> ()</td></tr>
+<tr class="separator:ab570dfd6a22d73079599a97d462de9ef inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affb7d9405e9b8cfbd108082faa0c74e4 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#affb7d9405e9b8cfbd108082faa0c74e4">set_predictor_pt</a> (<a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> *_pred_pt)</td></tr>
+<tr class="separator:affb7d9405e9b8cfbd108082faa0c74e4 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9813c8ea8ad981f0db9a467302b9cd0 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ab9813c8ea8ad981f0db9a467302b9cd0">update_predicted_time</a> (const double &amp;new_time)</td></tr>
+<tr class="separator:ab9813c8ea8ad981f0db9a467302b9cd0 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a385e522bb6b5c6109e20e860b70e9b6b inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a385e522bb6b5c6109e20e860b70e9b6b">check_predicted_values_up_to_date</a> () const</td></tr>
+<tr class="memdesc:a385e522bb6b5c6109e20e860b70e9b6b inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check that the predicted values are the ones we want.  <a href="classoomph_1_1TimeStepper.html#a385e522bb6b5c6109e20e860b70e9b6b">More...</a><br /></td></tr>
+<tr class="separator:a385e522bb6b5c6109e20e860b70e9b6b inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e756a339277e21f74b21a5d61c9841 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a31e756a339277e21f74b21a5d61c9841">predictor_storage_index</a> () const</td></tr>
+<tr class="memdesc:a31e756a339277e21f74b21a5d61c9841 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the time-index in each <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> where predicted values are stored if the timestepper is adaptive.  <a href="classoomph_1_1TimeStepper.html#a31e756a339277e21f74b21a5d61c9841">More...</a><br /></td></tr>
+<tr class="separator:a31e756a339277e21f74b21a5d61c9841 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a365cc834ec75291eba462f671ec997e1 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a365cc834ec75291eba462f671ec997e1">enable_warning_in_assign_initial_data_values</a> ()</td></tr>
+<tr class="memdesc:a365cc834ec75291eba462f671ec997e1 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable the output of warnings due to possible fct pointer vector size mismatch in assign_initial_data_values (Default)  <a href="classoomph_1_1TimeStepper.html#a365cc834ec75291eba462f671ec997e1">More...</a><br /></td></tr>
+<tr class="separator:a365cc834ec75291eba462f671ec997e1 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f97ab9e4d8d4269cf75bf79b72da5bc inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a7f97ab9e4d8d4269cf75bf79b72da5bc">disable_warning_in_assign_initial_data_values</a> ()</td></tr>
+<tr class="memdesc:a7f97ab9e4d8d4269cf75bf79b72da5bc inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable the output of warnings due to possible fct pointer vector size mismatch in assign_initial_data_values.  <a href="classoomph_1_1TimeStepper.html#a7f97ab9e4d8d4269cf75bf79b72da5bc">More...</a><br /></td></tr>
+<tr class="separator:a7f97ab9e4d8d4269cf75bf79b72da5bc inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac70698873c23a3a5963c76fecf9ed678 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ac70698873c23a3a5963c76fecf9ed678">weights_pt</a> () const</td></tr>
+<tr class="memdesc:ac70698873c23a3a5963c76fecf9ed678 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a (const) pointer to the weights.  <a href="classoomph_1_1TimeStepper.html#ac70698873c23a3a5963c76fecf9ed678">More...</a><br /></td></tr>
+<tr class="separator:ac70698873c23a3a5963c76fecf9ed678 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada05f89e86aae352bd5b32bfb173b18 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#aada05f89e86aae352bd5b32bfb173b18">undo_make_steady</a> ()</td></tr>
+<tr class="memdesc:aada05f89e86aae352bd5b32bfb173b18 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the is_steady status of a specific <a class="el" href="classoomph_1_1TimeStepper.html" title="Base class for time-stepping schemes. Timestepper provides an approximation of the temporal derivativ...">TimeStepper</a> to its default and re-assign the weights.  <a href="classoomph_1_1TimeStepper.html#aada05f89e86aae352bd5b32bfb173b18">More...</a><br /></td></tr>
+<tr class="separator:aada05f89e86aae352bd5b32bfb173b18 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd69b35e54efa29b219bbb56ba49260 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#acbd69b35e54efa29b219bbb56ba49260">type</a> () const</td></tr>
+<tr class="memdesc:acbd69b35e54efa29b219bbb56ba49260 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return string that indicates the type of the timestepper (e.g. "BDF", "Newmark", etc.)  <a href="classoomph_1_1TimeStepper.html#acbd69b35e54efa29b219bbb56ba49260">More...</a><br /></td></tr>
+<tr class="separator:acbd69b35e54efa29b219bbb56ba49260 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802c8b2a2e1933e4e8da30c6d10d1f9c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a802c8b2a2e1933e4e8da30c6d10d1f9c">time_derivative</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;data_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;deriv)</td></tr>
+<tr class="memdesc:a802c8b2a2e1933e4e8da30c6d10d1f9c inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of all values in <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and return in <a class="el" href="classoomph_1_1Vector.html">Vector</a> deriv[].  <a href="classoomph_1_1TimeStepper.html#a802c8b2a2e1933e4e8da30c6d10d1f9c">More...</a><br /></td></tr>
+<tr class="separator:a802c8b2a2e1933e4e8da30c6d10d1f9c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab88e09cb347f024c07d7341ee6ba7389 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ab88e09cb347f024c07d7341ee6ba7389">time_derivative</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;data_pt, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:ab88e09cb347f024c07d7341ee6ba7389 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of j-th value in <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>.  <a href="classoomph_1_1TimeStepper.html#ab88e09cb347f024c07d7341ee6ba7389">More...</a><br /></td></tr>
+<tr class="separator:ab88e09cb347f024c07d7341ee6ba7389 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3adfcfcf4ba99366d1475df8b4722082 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a3adfcfcf4ba99366d1475df8b4722082">time_derivative</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;deriv)</td></tr>
+<tr class="memdesc:a3adfcfcf4ba99366d1475df8b4722082 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of all values in <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> and return in <a class="el" href="classoomph_1_1Vector.html">Vector</a> deriv[] (this can't be simply combined with time_derivative(.., <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>, ...) because of differences with haning nodes).  <a href="classoomph_1_1TimeStepper.html#a3adfcfcf4ba99366d1475df8b4722082">More...</a><br /></td></tr>
+<tr class="separator:a3adfcfcf4ba99366d1475df8b4722082 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">time_derivative</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *const &amp;node_pt, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of j-th value in <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>. Note the use of the node's <a class="el" href="the__data__structure_8txt.html#a3b0d20781021ec2f0e788713f8b0fec8">value()</a> function so that hanging nodes are taken into account (this is why the functions for <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> cannot be combined through simple polymorphism: value is not virtual).  <a href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">More...</a><br /></td></tr>
+<tr class="separator:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">time_pt</a> () const</td></tr>
+<tr class="memdesc:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <a href="classoomph_1_1TimeStepper.html#ad77678873af47aa208a9385b26ac1641">More...</a><br /></td></tr>
+<tr class="separator:ad77678873af47aa208a9385b26ac1641 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a3219b7e7ccdc37f733961eeb8cce0a49">time_pt</a> ()</td></tr>
+<tr class="separator:a3219b7e7ccdc37f733961eeb8cce0a49 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a4cb0aecb044b77ba0553cdd54b586d8a">weight</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j) const</td></tr>
+<tr class="memdesc:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for j-th weight for the i-th derivative.  <a href="classoomph_1_1TimeStepper.html#a4cb0aecb044b77ba0553cdd54b586d8a">More...</a><br /></td></tr>
+<tr class="separator:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3939b77ec3578e4bd5b453c85649d631 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a3939b77ec3578e4bd5b453c85649d631">ntstorage</a> () const</td></tr>
+<tr class="memdesc:a3939b77ec3578e4bd5b453c85649d631 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of doubles required to represent history (one for steady)  <a href="classoomph_1_1TimeStepper.html#a3939b77ec3578e4bd5b453c85649d631">More...</a><br /></td></tr>
+<tr class="separator:a3939b77ec3578e4bd5b453c85649d631 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6168cca9a2a3c7bfd50c8797aed72d2d inherit pub_methods_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a6168cca9a2a3c7bfd50c8797aed72d2d">adaptive_flag</a> () const</td></tr>
+<tr class="memdesc:a6168cca9a2a3c7bfd50c8797aed72d2d inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to indicate whether the scheme is adaptive (false by default)  <a href="classoomph_1_1TimeStepper.html#a6168cca9a2a3c7bfd50c8797aed72d2d">More...</a><br /></td></tr>
+<tr class="separator:a6168cca9a2a3c7bfd50c8797aed72d2d inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1c2bf7b4272f4c5b28c2e6e9811b2e14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRByBDF.html#a1c2bf7b4272f4c5b28c2e6e9811b2e14">Update_pinned</a></td></tr>
+<tr class="memdesc:a1c2bf7b4272f4c5b28c2e6e9811b2e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should we update pinned variables after the half-step?  <a href="classoomph_1_1IMRByBDF.html#a1c2bf7b4272f4c5b28c2e6e9811b2e14">More...</a><br /></td></tr>
+<tr class="separator:a1c2bf7b4272f4c5b28c2e6e9811b2e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a736422b80df5286da0a56301da073b16"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRByBDF.html#a736422b80df5286da0a56301da073b16">IMRByBDF</a> (const <a class="el" href="classoomph_1_1IMRByBDF.html">IMRByBDF</a> &amp;dummy)</td></tr>
+<tr class="memdesc:a736422b80df5286da0a56301da073b16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inaccessible copy constructor.  <a href="classoomph_1_1IMRByBDF.html#a736422b80df5286da0a56301da073b16">More...</a><br /></td></tr>
+<tr class="separator:a736422b80df5286da0a56301da073b16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a1aec8458acb8cd8285f7b6d69fca4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IMRByBDF.html#a0a1aec8458acb8cd8285f7b6d69fca4a">operator=</a> (const <a class="el" href="classoomph_1_1IMRByBDF.html">IMRByBDF</a> &amp;dummy)</td></tr>
+<tr class="memdesc:a0a1aec8458acb8cd8285f7b6d69fca4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inaccessible assignment operator.  <a href="classoomph_1_1IMRByBDF.html#a0a1aec8458acb8cd8285f7b6d69fca4a">More...</a><br /></td></tr>
+<tr class="separator:a0a1aec8458acb8cd8285f7b6d69fca4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1TimeStepper"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1TimeStepper')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1TimeStepper.html">oomph::TimeStepper</a></td></tr>
+<tr class="memitem:a38740bc33e75ecfd61746ff43be54358 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a38740bc33e75ecfd61746ff43be54358">Time_pt</a></td></tr>
+<tr class="memdesc:a38740bc33e75ecfd61746ff43be54358 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to discrete time storage scheme.  <a href="classoomph_1_1TimeStepper.html#a38740bc33e75ecfd61746ff43be54358">More...</a><br /></td></tr>
+<tr class="separator:a38740bc33e75ecfd61746ff43be54358 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dbf867c7f0e06f790a470d547b6b3f2 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a0dbf867c7f0e06f790a470d547b6b3f2">Weight</a></td></tr>
+<tr class="memdesc:a0dbf867c7f0e06f790a470d547b6b3f2 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the weights associated with the timestepper.  <a href="classoomph_1_1TimeStepper.html#a0dbf867c7f0e06f790a470d547b6b3f2">More...</a><br /></td></tr>
+<tr class="separator:a0dbf867c7f0e06f790a470d547b6b3f2 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39dfe6cf216263d547c430d6f7a67530 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a39dfe6cf216263d547c430d6f7a67530">Type</a></td></tr>
+<tr class="memdesc:a39dfe6cf216263d547c430d6f7a67530 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">String that indicates the type of the timestepper (e.g. "BDF", "Newmark", etc.)  <a href="classoomph_1_1TimeStepper.html#a39dfe6cf216263d547c430d6f7a67530">More...</a><br /></td></tr>
+<tr class="separator:a39dfe6cf216263d547c430d6f7a67530 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6d4d7cf3e0b2a186694f24c8cf016f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#afe6d4d7cf3e0b2a186694f24c8cf016f">Adaptive_Flag</a></td></tr>
+<tr class="memdesc:afe6d4d7cf3e0b2a186694f24c8cf016f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable to indicate whether the timestepping scheme can be adaptive.  <a href="classoomph_1_1TimeStepper.html#afe6d4d7cf3e0b2a186694f24c8cf016f">More...</a><br /></td></tr>
+<tr class="separator:afe6d4d7cf3e0b2a186694f24c8cf016f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a23db485d16d7f9598c011850d0563f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a5a23db485d16d7f9598c011850d0563f">Is_steady</a></td></tr>
+<tr class="memdesc:a5a23db485d16d7f9598c011850d0563f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool to indicate if the timestepper is steady, i.e. its time-derivatives evaluate to zero. This status may be achieved temporarily by calling <a class="el" href="classoomph_1_1TimeStepper.html#a81ea0ff2e66cef5e0184b616c608e418" title="Function to make the time stepper temporarily steady. This is trivially achieved by setting all the w...">make_steady()</a>. It can be reset to the appropriate default by the function <a class="el" href="classoomph_1_1TimeStepper.html#aada05f89e86aae352bd5b32bfb173b18" title="Reset the is_steady status of a specific TimeStepper to its default and re-assign the weights.">undo_make_steady()</a>.  <a href="classoomph_1_1TimeStepper.html#a5a23db485d16d7f9598c011850d0563f">More...</a><br /></td></tr>
+<tr class="separator:a5a23db485d16d7f9598c011850d0563f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a8928784f3903a8f0f3f5e2400fa430 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a1a8928784f3903a8f0f3f5e2400fa430">Shut_up_in_assign_initial_data_values</a></td></tr>
+<tr class="memdesc:a1a8928784f3903a8f0f3f5e2400fa430 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate if the timestepper will output warnings when setting possibly an incorrect number of initial data values from function pointers.  <a href="classoomph_1_1TimeStepper.html#a1a8928784f3903a8f0f3f5e2400fa430">More...</a><br /></td></tr>
+<tr class="separator:a1a8928784f3903a8f0f3f5e2400fa430 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f71fb3ee14db4dd9d9d2cef1189ddc inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a30f71fb3ee14db4dd9d9d2cef1189ddc">Predict_by_explicit_step</a></td></tr>
+<tr class="memdesc:a30f71fb3ee14db4dd9d9d2cef1189ddc inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag: is adaptivity done by taking a separate step using an <a class="el" href="classoomph_1_1ExplicitTimeStepper.html" title="A Base class for explicit timesteppers.">ExplicitTimeStepper</a> object?  <a href="classoomph_1_1TimeStepper.html#a30f71fb3ee14db4dd9d9d2cef1189ddc">More...</a><br /></td></tr>
+<tr class="separator:a30f71fb3ee14db4dd9d9d2cef1189ddc inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f408e1a313ae5b1806c3a306d720a2 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a41f408e1a313ae5b1806c3a306d720a2">Explicit_predictor_pt</a></td></tr>
+<tr class="separator:a41f408e1a313ae5b1806c3a306d720a2 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41318cc5f48050e143182f59a06e5d6 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af41318cc5f48050e143182f59a06e5d6">Predicted_time</a></td></tr>
+<tr class="separator:af41318cc5f48050e143182f59a06e5d6 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af91eb510f32a9d072399f37389853174 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af91eb510f32a9d072399f37389853174">Predictor_storage_index</a></td></tr>
+<tr class="memdesc:af91eb510f32a9d072399f37389853174 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time-index in each <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object where predicted values are stored. -1 if not set.  <a href="classoomph_1_1TimeStepper.html#af91eb510f32a9d072399f37389853174">More...</a><br /></td></tr>
+<tr class="separator:af91eb510f32a9d072399f37389853174 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of implicit midpoint rule by taking half a step of bdf1 then applying an update to all dofs. This implementation <em>should</em> work with any existing problem for which the <a class="el" href="classoomph_1_1BDF.html" title="Templated class for BDF-type time-steppers with fixed or variable timestep. 1st time derivative recov...">BDF</a> methods work.</p>
+<p>The exception is when multiple different time steppers are being used simultaneously for different parts of the problem. In this case the <a class="el" href="classoomph_1_1IMR.html">IMR</a> class should be used. </p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00210">210</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9b39aef878c283d7e7c5ad23ac7c8213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b39aef878c283d7e7c5ad23ac7c8213">&#9670;&nbsp;</a></span>IMRByBDF() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::IMRByBDF::IMRByBDF </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>adaptive</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with initialisation. </p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00214">214</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="implicit__midpoint__rule_8h_source.html#l00244">Update_pinned</a>.</p>
+
+</div>
+</div>
+<a id="aaa70e7e8090f3e454bc392e733b3185a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa70e7e8090f3e454bc392e733b3185a">&#9670;&nbsp;</a></span>~IMRByBDF()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::IMRByBDF::~IMRByBDF </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00220">220</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="a736422b80df5286da0a56301da073b16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a736422b80df5286da0a56301da073b16">&#9670;&nbsp;</a></span>IMRByBDF() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::IMRByBDF::IMRByBDF </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1IMRByBDF.html">IMRByBDF</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inaccessible copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00249">249</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1eb1b47643bf37e27c478c6987c7716d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eb1b47643bf37e27c478c6987c7716d">&#9670;&nbsp;</a></span>actions_after_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IMRByBDF::actions_after_timestep </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td>
+          <td class="paramname"><em>problem_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Take problem from t={n+1/2} to t=n+1 by algebraic update and restore time step. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a3a0fabf83f9bdc89800cd3501df2c586">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00204">204</a> of file <a class="el" href="implicit__midpoint__rule_8cc_source.html">implicit_midpoint_rule.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00133">oomph::Time::dt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="problem_8cc_source.html#l02457">oomph::Problem::get_dofs()</a>, <a class="el" href="problem_8h_source.html#l01560">oomph::Problem::global_data_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00619">oomph::GeneralisedElement::internal_data_pt()</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="problem_8h_source.html#l01584">oomph::Problem::nglobal_data()</a>, <a class="el" href="elements_8h_source.html#l00824">oomph::GeneralisedElement::ninternal_data()</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00186">oomph::post_midpoint_update()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="timesteppers_8h_source.html#l00126">oomph::Time::time()</a>, <a class="el" href="problem_8h_source.html#l01449">oomph::Problem::time_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00192">oomph::StringConversion::to_string()</a>, and <a class="el" href="implicit__midpoint__rule_8h_source.html#l00244">Update_pinned</a>.</p>
+
+</div>
+</div>
+<a id="abc155a68889d297f732a083d911b4627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc155a68889d297f732a083d911b4627">&#9670;&nbsp;</a></span>actions_before_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IMRByBDF::actions_before_timestep </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td>
+          <td class="paramname"><em>problem_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Half the timestep before starting solve. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a36cbcee0c1127085ba3aa2331bfc0f74">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00140">140</a> of file <a class="el" href="implicit__midpoint__rule_8cc_source.html">implicit_midpoint_rule.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01699">oomph::Problem::dof()</a>, <a class="el" href="timesteppers_8h_source.html#l00133">oomph::Time::dt()</a>, <a class="el" href="problem_8cc_source.html#l02457">oomph::Problem::get_dofs()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="problem_8h_source.html#l01581">oomph::Problem::ntime_stepper()</a>, <a class="el" href="implicit__midpoint__rule_8h_source.html#l00223">set_weights()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="timesteppers_8h_source.html#l00126">oomph::Time::time()</a>, <a class="el" href="timesteppers_8h_source.html#l00536">oomph::TimeStepper::time_pt()</a>, and <a class="el" href="problem_8h_source.html#l01874">oomph::Problem::use_predictor_values_as_initial_guess()</a>.</p>
+
+</div>
+</div>
+<a id="a4fb7f902b1a266b19cfdfe640d4c78d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fb7f902b1a266b19cfdfe640d4c78d5">&#9670;&nbsp;</a></span>nprev_values_for_value_at_evaluation_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::IMRByBDF::nprev_values_for_value_at_evaluation_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of history values to interpolate over to get the "current" value. Evaluation time is the end of the bdf1 "half-step", so only need one value as normal. <br  />
+ </p>
+
+<p>Implements <a class="el" href="classoomph_1_1IMRBase.html#a93df756c834f8ba27956b8efb2af3636">oomph::IMRBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00234">234</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="a0a1aec8458acb8cd8285f7b6d69fca4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a1aec8458acb8cd8285f7b6d69fca4a">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IMRByBDF::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1IMRByBDF.html">IMRByBDF</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inaccessible assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00252">252</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="a6060b6098113085753083a2dc53723ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6060b6098113085753083a2dc53723ee">&#9670;&nbsp;</a></span>set_weights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IMRByBDF::set_weights </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup weights for time derivative calculations. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1IMRBase.html#a36b8a37b4c0bb9e8cca821bfb74fd373">oomph::IMRBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00223">223</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00133">oomph::Time::dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00220">oomph::TimeStepper::Time_pt</a>, and <a class="el" href="timesteppers_8h_source.html#l00223">oomph::TimeStepper::Weight</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00140">actions_before_timestep()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1c2bf7b4272f4c5b28c2e6e9811b2e14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c2bf7b4272f4c5b28c2e6e9811b2e14">&#9670;&nbsp;</a></span>Update_pinned</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::IMRByBDF::Update_pinned</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Should we update pinned variables after the half-step? </p>
+
+<p class="definition">Definition at line <a class="el" href="implicit__midpoint__rule_8h_source.html#l00244">244</a> of file <a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00204">actions_after_timestep()</a>, and <a class="el" href="implicit__midpoint__rule_8h_source.html#l00214">IMRByBDF()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="implicit__midpoint__rule_8h_source.html">implicit_midpoint_rule.h</a></li>
+<li><a class="el" href="implicit__midpoint__rule_8cc_source.html">implicit_midpoint_rule.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:49
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

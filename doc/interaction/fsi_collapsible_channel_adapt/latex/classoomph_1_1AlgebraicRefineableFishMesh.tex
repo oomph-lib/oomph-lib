@@ -1,0 +1,114 @@
+\hypertarget{classoomph_1_1AlgebraicRefineableFishMesh}{}\doxysection{oomph\+::Algebraic\+Refineable\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1AlgebraicRefineableFishMesh}\index{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$}}
+
+
+Refineable fish shaped mesh with algebraic node update function.  
+
+
+
+
+{\ttfamily \#include $<$fish\+\_\+mesh.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::Algebraic\+Refineable\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.777778cm]{classoomph_1_1AlgebraicRefineableFishMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh_afe4643b107e47fbad0c8836bc0516518}{Algebraic\+Refineable\+Fish\+Mesh}} (\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh_a04f6b6114c70638b4f26ac6b70f5c0fe}{Algebraic\+Refineable\+Fish\+Mesh}} (\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$back\+\_\+pt, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer Geom\+Object that defines the fish\textquotesingle{}s back and pointer to timestepper. (defaults to (Steady) default timestepper defined in Mesh) \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh_a69145c9bf09e0fbc1a4bffe7bee379cd}{$\sim$\+Algebraic\+Refineable\+Fish\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh_a8123da4b48355b39f19e0494a9d4545c}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
+\begin{DoxyCompactList}\small\item\em Resolve node update function\+: Use the one defined in the \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh}{Algebraic\+Fish\+Mesh}} (where the bool flag is explained) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Algebraic\+Refineable\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Refineable fish shaped mesh with algebraic node update function. 
+
+Definition at line 519 of file fish\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableFishMesh_afe4643b107e47fbad0c8836bc0516518}\label{classoomph_1_1AlgebraicRefineableFishMesh_afe4643b107e47fbad0c8836bc0516518}} 
+\index{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$}!AlgebraicRefineableFishMesh@{AlgebraicRefineableFishMesh}}
+\index{AlgebraicRefineableFishMesh@{AlgebraicRefineableFishMesh}!oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicRefineableFishMesh()}{AlgebraicRefineableFishMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh}{oomph\+::\+Algebraic\+Refineable\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh}{Algebraic\+Refineable\+Fish\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor\+: Pass pointer to timestepper. (defaults to (Steady) default timestepper defined in Mesh) 
+
+Definition at line 533 of file fish\+\_\+mesh.\+template.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableFishMesh_a04f6b6114c70638b4f26ac6b70f5c0fe}\label{classoomph_1_1AlgebraicRefineableFishMesh_a04f6b6114c70638b4f26ac6b70f5c0fe}} 
+\index{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$}!AlgebraicRefineableFishMesh@{AlgebraicRefineableFishMesh}}
+\index{AlgebraicRefineableFishMesh@{AlgebraicRefineableFishMesh}!oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicRefineableFishMesh()}{AlgebraicRefineableFishMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh}{oomph\+::\+Algebraic\+Refineable\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh}{Algebraic\+Refineable\+Fish\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$}]{back\+\_\+pt,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer Geom\+Object that defines the fish\textquotesingle{}s back and pointer to timestepper. (defaults to (Steady) default timestepper defined in Mesh) 
+
+
+
+Definition at line 549 of file fish\+\_\+mesh.\+template.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableFishMesh_a69145c9bf09e0fbc1a4bffe7bee379cd}\label{classoomph_1_1AlgebraicRefineableFishMesh_a69145c9bf09e0fbc1a4bffe7bee379cd}} 
+\index{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$}!````~AlgebraicRefineableFishMesh@{$\sim$AlgebraicRefineableFishMesh}}
+\index{````~AlgebraicRefineableFishMesh@{$\sim$AlgebraicRefineableFishMesh}!oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$AlgebraicRefineableFishMesh()}{~AlgebraicRefineableFishMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh}{oomph\+::\+Algebraic\+Refineable\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh}{Algebraic\+Refineable\+Fish\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line 559 of file fish\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableFishMesh_a8123da4b48355b39f19e0494a9d4545c}\label{classoomph_1_1AlgebraicRefineableFishMesh_a8123da4b48355b39f19e0494a9d4545c}} 
+\index{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableFishMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh}{oomph\+::\+Algebraic\+Refineable\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Resolve node update function\+: Use the one defined in the \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh}{Algebraic\+Fish\+Mesh}} (where the bool flag is explained) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_a39cd5a86b0f762efd09f4fefba6da1c3}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+
+
+
+Definition at line 563 of file fish\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::node\+\_\+update().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fish__mesh_8template_8h}{fish\+\_\+mesh.\+template.\+h}}\end{DoxyCompactItemize}

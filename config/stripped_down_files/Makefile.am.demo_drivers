@@ -1,0 +1,12 @@
+
+# Here are the sub-directories in which we actually want to build/run
+#---------------------------------------------------------------------
+# demo codes
+#-----------
+
+SUBDIRS = \
+poisson 
+if WANT_MPI
+SUBDIRS += mpi
+endif
+

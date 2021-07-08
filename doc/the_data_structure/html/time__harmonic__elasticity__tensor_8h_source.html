@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: time_harmonic_elasticity_tensor.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c00b0166515da19061bdc9fe7956cde6.html">time_harmonic_linear_elasticity</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">time_harmonic_elasticity_tensor.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="time__harmonic__elasticity__tensor_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//Header file for objects representing the fourth-rank elasticity tensor</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//for linear elasticity problems</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//Include guards to prevent multiple inclusion of the header</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#ifndef OOMPH_TIME_HARMONIC_ELASTICITY_TENSOR_HEADER</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define OOMPH_TIME_HARMONIC_ELASTICITY_TENSOR_HEADER</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// Config header generated by autoconfig</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">  #include &lt;oomph-lib-config.h&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;../generic/oomph_utilities.h&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; <span class="comment">//=====================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> /// A base class that represents the fourth-rank elasticity tensor</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> /// \f$E_{ijkl}\f$ defined such that</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"> /// \f[\tau_{ij} = E_{ijkl} e_{kl},\f]</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> /// where \f$e_{ij}\f$ is the infinitessimal (Cauchy) strain tensor</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> /// and \f$\tau_{ij}\f$ is the stress tensor. The symmetries of the </span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> /// tensor are such that</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> /// \f[E_{ijkl} = E_{jikl} = E_{ijlk} = E_{klij}\f]</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> /// and thus there are relatively few independent components. These</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> /// symmetries are included in the definition of the object so that</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> /// non-physical symmetries cannot be accidentally imposed.</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span> <span class="comment">//=====================================================================</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicElasticityTensor.html">   54</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html">TimeHarmonicElasticityTensor</a></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">  ///\short Translation table from the four indices to the corresponding</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">  ///independent component</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a74fa19d788154430e65c6652f05b056f">   59</a></span>&#160;<span class="comment"></span>  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a74fa19d788154430e65c6652f05b056f">Index</a>[3][3][3][3];</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">  ///Member function that returns the i-th independent component of the</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">  ///elasticity tensor</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a23ac2beedc3d47b22876faaacc0e27a0">   65</a></span>&#160;<span class="comment"></span>  <span class="keyword">virtual</span> <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a23ac2beedc3d47b22876faaacc0e27a0">independent_component</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)<span class="keyword"> const </span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">   </span>{<span class="keywordflow">return</span> 0.0;}</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">  ///\short Helper range checking function</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">  /// (Note that this only captures over-runs in 3D but</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">  /// errors are likely to be caught in evaluation of the</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">  /// stress and strain tensors anyway...)</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a825792d8631abc2a23ed5f12c445384c">   73</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a825792d8631abc2a23ed5f12c445384c">range_check</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;j,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;k, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;l)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">   </span>{</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">if</span>((<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &gt; 2) || (j &gt; 2) || (k&gt; 2) || (l&gt;2))</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;     {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      std::ostringstream error_message;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="keywordflow">if</span>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &gt; 2)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;       {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        error_message &lt;&lt; <span class="stringliteral">&quot;Range Error : Index 1 &quot;</span> &lt;&lt; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                      &lt;&lt; <span class="stringliteral">&quot; is not in the range (0,2)&quot;</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;       }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keywordflow">if</span>(j &gt; 2)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;       {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        error_message &lt;&lt; <span class="stringliteral">&quot;Range Error : Index 2 &quot;</span> &lt;&lt; j </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                      &lt;&lt; <span class="stringliteral">&quot; is not in the range (0,2)&quot;</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;       }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="keywordflow">if</span>(k &gt; 2)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;       {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        error_message &lt;&lt; <span class="stringliteral">&quot;Range Error : Index 2 &quot;</span> &lt;&lt; k </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                      &lt;&lt; <span class="stringliteral">&quot; is not in the range (0,2)&quot;</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;       }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      <span class="keywordflow">if</span>(l &gt; 2)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;       {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        error_message &lt;&lt; <span class="stringliteral">&quot;Range Error : Index 4 &quot;</span> &lt;&lt; l </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                      &lt;&lt; <span class="stringliteral">&quot; is not in the range (0,2)&quot;</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;       }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      <span class="comment">//Throw the error</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_message.str(),</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;     }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;   }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">  ///Empty Constructor</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a1d0ac894717da5725d03a4d18594ef7b">  111</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a1d0ac894717da5725d03a4d18594ef7b">TimeHarmonicElasticityTensor</a>() {}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">  ///Empty virtual Destructor </span></div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicElasticityTensor.html#aa1813e96fe387cfb05ae97892a1fdd84">  116</a></span>&#160;<span class="comment"></span>  <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html#aa1813e96fe387cfb05ae97892a1fdd84">~TimeHarmonicElasticityTensor</a>() {}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">  ///\short Return the appropriate independent component</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">  ///via the index translation scheme (const version).</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a9af7ee0d97cb9308092795098b775b11">  122</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">double</span> <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a9af7ee0d97cb9308092795098b775b11">operator()</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;j,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;k, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;l)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">   </span>{</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="comment">//Range check</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a825792d8631abc2a23ed5f12c445384c">range_check</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>,j,k,l);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a23ac2beedc3d47b22876faaacc0e27a0">independent_component</a>(<a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a74fa19d788154430e65c6652f05b056f">Index</a>[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>][j][k][l]);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;   } </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; };</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">//===================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">/// An isotropic elasticity tensor defined in terms of Young&#39;s modulus</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">/// and Poisson&#39;s ratio. The elasticity tensor is assumed to be</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">/// non-dimensionalised on some reference value for Young&#39;s modulus</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">/// so the value provided to the constructor (if any) is to be</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">/// interpreted as the ratio of the actual Young&#39;s modulus to the</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">/// Young&#39;s modulus used to non-dimensionalise the stresses/tractions</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">/// in the governing equations.</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html">  143</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html">TimeHarmonicIsotropicElasticityTensor</a> : </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">public</span> <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html">TimeHarmonicElasticityTensor</a></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;   <span class="comment">//Storage for the independent components of the elasticity tensor</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">  147</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">C</a>[4];</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="comment">//Translation scheme between the 21 independent components of the general</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="comment">//elasticity tensor and the isotropic case</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a28d880860aa3de7cfc6ebc07ec0a5ee9">  151</a></span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a28d880860aa3de7cfc6ebc07ec0a5ee9">StaticIndex</a>[21];</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">  /// \short Constructor. Passing in the values of the Poisson&#39;s ratio </span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">  /// and Young&#39;s modulus (interpreted as the ratio of the actual </span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">  /// Young&#39;s modulus to the Young&#39;s modulus (or other reference stiffness)</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">  /// used to non-dimensionalise stresses and tractions in the governing</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">  /// equations).</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a877c58bd18dbe1485fbb07ce0e3e2b38">  160</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a877c58bd18dbe1485fbb07ce0e3e2b38">TimeHarmonicIsotropicElasticityTensor</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;nu,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                                        <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">E</a>) : </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html">TimeHarmonicElasticityTensor</a>()</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;   {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="comment">//Set the three indepdent components</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">C</a>[0] = 0.0;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordtype">double</span> lambda=<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">E</a>*nu/((1.0+nu)*(1.0-2.0*nu));</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordtype">double</span> mu=<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">E</a>/(2.0*(1.0+nu));</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    this-&gt;<a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a96e8a8cb8cc50a09f2e5d1e39defc1a8">set_lame_coefficients</a>(lambda,mu);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;   }</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">  /// \short Constructor. Passing in the value of the Poisson&#39;s ratio.</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">  /// Stresses and tractions in the governing equations are assumed</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">  /// to have been non-dimensionalised on Young&#39;s modulus.</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a3d3e2187be7b2934ff064b3fbf040f6f">  174</a></span>&#160;<span class="comment"></span>  <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a3d3e2187be7b2934ff064b3fbf040f6f">TimeHarmonicIsotropicElasticityTensor</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;nu) : </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <a class="code" href="classoomph_1_1TimeHarmonicElasticityTensor.html">TimeHarmonicElasticityTensor</a>()</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;   {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="comment">//Set the three indepdent components</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">C</a>[0] = 0.0;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="comment">// reference value</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">E</a>=1.0;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordtype">double</span> lambda=<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">E</a>*nu/((1.0+nu)*(1.0-2.0*nu));</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordtype">double</span> mu=<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">E</a>/(2.0*(1.0+nu));</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    this-&gt;<a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a96e8a8cb8cc50a09f2e5d1e39defc1a8">set_lame_coefficients</a>(lambda,mu);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;   }    </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">  /// \short Update parameters: Specify values of the Poisson&#39;s ratio </span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">  /// and (optionally) Young&#39;s modulus (interpreted as the ratio of the actual </span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">  /// Young&#39;s modulus to the Young&#39;s modulus (or other reference stiffness)</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">  /// used to non-dimensionalise stresses and tractions in the governing</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">  /// equations).</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a607f47914b93b3dba5d3696862e0ba20">  192</a></span>&#160;<span class="comment"></span>  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a607f47914b93b3dba5d3696862e0ba20">update_constitutive_parameters</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;nu,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                                      <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">E</a>=1.0)</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;   {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="comment">//Set the three indepdent components</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">C</a>[0] = 0.0;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordtype">double</span> lambda=<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">E</a>*nu/((1.0+nu)*(1.0-2.0*nu));</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordtype">double</span> mu=<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">E</a>/(2.0*(1.0+nu));</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    this-&gt;<a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a96e8a8cb8cc50a09f2e5d1e39defc1a8">set_lame_coefficients</a>(lambda,mu);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;   }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">  ///Overload the independent coefficient function</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a23e7e1a4c9ad0563378e613adce3c635">  204</a></span>&#160;<span class="comment"></span>  <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a23e7e1a4c9ad0563378e613adce3c635">independent_component</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keyword">  </span>{<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">C</a>[<a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a28d880860aa3de7cfc6ebc07ec0a5ee9">StaticIndex</a>[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>]];}</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  <span class="comment">//Set the values of the lame coefficients</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a96e8a8cb8cc50a09f2e5d1e39defc1a8">  211</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a96e8a8cb8cc50a09f2e5d1e39defc1a8">set_lame_coefficients</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lambda, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;mu)</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;   <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">C</a>[1] = lambda + 2.0*mu;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;   <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">C</a>[2] = lambda;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;   <a class="code" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">C</a>[3] = mu;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  }</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  };</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicElasticityTensor_html_a23ac2beedc3d47b22876faaacc0e27a0"><div class="ttname"><a href="classoomph_1_1TimeHarmonicElasticityTensor.html#a23ac2beedc3d47b22876faaacc0e27a0">oomph::TimeHarmonicElasticityTensor::independent_component</a></div><div class="ttdeci">virtual double independent_component(const unsigned &amp;i) const</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00065">time_harmonic_elasticity_tensor.h:65</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicElasticityTensor_html_a74fa19d788154430e65c6652f05b056f"><div class="ttname"><a href="classoomph_1_1TimeHarmonicElasticityTensor.html#a74fa19d788154430e65c6652f05b056f">oomph::TimeHarmonicElasticityTensor::Index</a></div><div class="ttdeci">static const unsigned Index[3][3][3][3]</div><div class="ttdoc">Translation table from the four indices to the corresponding independent component.</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00059">time_harmonic_elasticity_tensor.h:59</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">oomph::QuadTreeNames::E</a></div><div class="ttdeci">@ E</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00056">quadtree.h:56</a></div></div>
+<div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00225">oomph_definitions.h:225</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicIsotropicElasticityTensor_html_a607f47914b93b3dba5d3696862e0ba20"><div class="ttname"><a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a607f47914b93b3dba5d3696862e0ba20">oomph::TimeHarmonicIsotropicElasticityTensor::update_constitutive_parameters</a></div><div class="ttdeci">void update_constitutive_parameters(const double &amp;nu, const double &amp;E=1.0)</div><div class="ttdoc">Update parameters: Specify values of the Poisson's ratio and (optionally) Young's modulus (interprete...</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00192">time_harmonic_elasticity_tensor.h:192</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicIsotropicElasticityTensor_html_afa7b0b518e23a6cc069b1618033b4947"><div class="ttname"><a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">oomph::TimeHarmonicIsotropicElasticityTensor::C</a></div><div class="ttdeci">double C[4]</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00147">time_harmonic_elasticity_tensor.h:147</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicElasticityTensor_html"><div class="ttname"><a href="classoomph_1_1TimeHarmonicElasticityTensor.html">oomph::TimeHarmonicElasticityTensor</a></div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00054">time_harmonic_elasticity_tensor.h:54</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicIsotropicElasticityTensor_html_a877c58bd18dbe1485fbb07ce0e3e2b38"><div class="ttname"><a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a877c58bd18dbe1485fbb07ce0e3e2b38">oomph::TimeHarmonicIsotropicElasticityTensor::TimeHarmonicIsotropicElasticityTensor</a></div><div class="ttdeci">TimeHarmonicIsotropicElasticityTensor(const double &amp;nu, const double &amp;E)</div><div class="ttdoc">Constructor. Passing in the values of the Poisson's ratio and Young's modulus (interpreted as the rat...</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00160">time_harmonic_elasticity_tensor.h:160</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicElasticityTensor_html_aa1813e96fe387cfb05ae97892a1fdd84"><div class="ttname"><a href="classoomph_1_1TimeHarmonicElasticityTensor.html#aa1813e96fe387cfb05ae97892a1fdd84">oomph::TimeHarmonicElasticityTensor::~TimeHarmonicElasticityTensor</a></div><div class="ttdeci">virtual ~TimeHarmonicElasticityTensor()</div><div class="ttdoc">Empty virtual Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00116">time_harmonic_elasticity_tensor.h:116</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicIsotropicElasticityTensor_html"><div class="ttname"><a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html">oomph::TimeHarmonicIsotropicElasticityTensor</a></div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00143">time_harmonic_elasticity_tensor.h:143</a></div></div>
+<div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicElasticityTensor_html_a825792d8631abc2a23ed5f12c445384c"><div class="ttname"><a href="classoomph_1_1TimeHarmonicElasticityTensor.html#a825792d8631abc2a23ed5f12c445384c">oomph::TimeHarmonicElasticityTensor::range_check</a></div><div class="ttdeci">void range_check(const unsigned &amp;i, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</div><div class="ttdoc">Helper range checking function (Note that this only captures over-runs in 3D but errors are likely to...</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00073">time_harmonic_elasticity_tensor.h:73</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicIsotropicElasticityTensor_html_a28d880860aa3de7cfc6ebc07ec0a5ee9"><div class="ttname"><a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a28d880860aa3de7cfc6ebc07ec0a5ee9">oomph::TimeHarmonicIsotropicElasticityTensor::StaticIndex</a></div><div class="ttdeci">static const unsigned StaticIndex[21]</div><div class="ttdoc">Translation scheme for the isotropic elasticity tensor.</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00151">time_harmonic_elasticity_tensor.h:151</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicIsotropicElasticityTensor_html_a3d3e2187be7b2934ff064b3fbf040f6f"><div class="ttname"><a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a3d3e2187be7b2934ff064b3fbf040f6f">oomph::TimeHarmonicIsotropicElasticityTensor::TimeHarmonicIsotropicElasticityTensor</a></div><div class="ttdeci">TimeHarmonicIsotropicElasticityTensor(const double &amp;nu)</div><div class="ttdoc">Constructor. Passing in the value of the Poisson's ratio. Stresses and tractions in the governing equ...</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00174">time_harmonic_elasticity_tensor.h:174</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicIsotropicElasticityTensor_html_a23e7e1a4c9ad0563378e613adce3c635"><div class="ttname"><a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a23e7e1a4c9ad0563378e613adce3c635">oomph::TimeHarmonicIsotropicElasticityTensor::independent_component</a></div><div class="ttdeci">double independent_component(const unsigned &amp;i) const</div><div class="ttdoc">Overload the independent coefficient function.</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00204">time_harmonic_elasticity_tensor.h:204</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicElasticityTensor_html_a9af7ee0d97cb9308092795098b775b11"><div class="ttname"><a href="classoomph_1_1TimeHarmonicElasticityTensor.html#a9af7ee0d97cb9308092795098b775b11">oomph::TimeHarmonicElasticityTensor::operator()</a></div><div class="ttdeci">double operator()(const unsigned &amp;i, const unsigned &amp;j, const unsigned &amp;k, const unsigned &amp;l) const</div><div class="ttdoc">Return the appropriate independent component via the index translation scheme (const version).</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00122">time_harmonic_elasticity_tensor.h:122</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicElasticityTensor_html_a1d0ac894717da5725d03a4d18594ef7b"><div class="ttname"><a href="classoomph_1_1TimeHarmonicElasticityTensor.html#a1d0ac894717da5725d03a4d18594ef7b">oomph::TimeHarmonicElasticityTensor::TimeHarmonicElasticityTensor</a></div><div class="ttdeci">TimeHarmonicElasticityTensor()</div><div class="ttdoc">Empty Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00111">time_harmonic_elasticity_tensor.h:111</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TimeHarmonicIsotropicElasticityTensor_html_a96e8a8cb8cc50a09f2e5d1e39defc1a8"><div class="ttname"><a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a96e8a8cb8cc50a09f2e5d1e39defc1a8">oomph::TimeHarmonicIsotropicElasticityTensor::set_lame_coefficients</a></div><div class="ttdeci">void set_lame_coefficients(const double &amp;lambda, const double &amp;mu)</div><div class="ttdef"><b>Definition:</b> <a href="time__harmonic__elasticity__tensor_8h_source.html#l00211">time_harmonic_elasticity_tensor.h:211</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:00
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

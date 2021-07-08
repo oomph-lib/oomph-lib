@@ -1,0 +1,500 @@
+\hypertarget{classoomph_1_1ComplexDampedJacobi}{}\doxysection{oomph\+::Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+IX $>$ Class Template Reference}
+\label{classoomph_1_1ComplexDampedJacobi}\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+
+
+{\ttfamily \#include $<$complex\+\_\+smoother.\+h$>$}
+
+Inheritance diagram for oomph\+::Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+IX $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classoomph_1_1ComplexDampedJacobi}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a5c76dd5e5fac0246eced85a66df6c7ee}{Complex\+Damped\+Jacobi}} (const double \&\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a7132c319d14c6d3c6aac8ac0536af801}{omega}}=0.\+5)
+\begin{DoxyCompactList}\small\item\em Constructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a102defdc208413f82a6cd377bf5e0517}{$\sim$\+Complex\+Damped\+Jacobi}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a4e246d712c8eb9e4db05f859148784d3}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a290c1a7f550d0abff01d6bfd69c2fbe0}{Complex\+Damped\+Jacobi}} (const \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{Complex\+Damped\+Jacobi}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_abff6e2acd7cf7b7bb3a82612f9404460}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{Complex\+Damped\+Jacobi}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_af7a53121690e157bdd5bc191a31f9892}{calculate\+\_\+omega}} (const double \&k, const double \&h)
+\begin{DoxyCompactList}\small\item\em Function to calculate the value of Omega by passing in the value of k and h \mbox{[}see Elman et al. \char`\"{}\+A multigrid method enhanced by
+\+Krylov subspace iteration for discrete Helmholtz equations\char`\"{}, p.\+1303\mbox{]}. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a7132c319d14c6d3c6aac8ac0536af801}{omega}} ()
+\begin{DoxyCompactList}\small\item\em Get access to the value of Omega (lvalue) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a4cf2cdac05266021cd0660ba60ae6a8b}{complex\+\_\+smoother\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ helmholtz\+\_\+matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Setup\+: Pass pointer to the matrix and store in cast form. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a3e548db0f775e4239ff7b9c76a7b1c76}{complex\+\_\+smoother\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&solution)
+\begin{DoxyCompactList}\small\item\em The smoother\+\_\+solve function performs fixed number of iterations on the system A$\ast$result=rhs. The number of (smoothing) iterations is the same as the max. number of iterations in the underlying \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_ab9267bcbaf8435303190a1c12dbb7c2b}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Use damped Jacobi iteration as an \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}}\+: This obtains the Jacobian matrix J and the residual vector r (needed for the Newton method) from the problem\textquotesingle{}s get\+\_\+jacobian function and returns the result of Jx=r. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a34e565b3536b286b5544f5e30935b9e9}{iterations}} () const
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a09214dc600fe5d261bdb3795aa943aac}{complex\+\_\+solve\+\_\+helper}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&solution)
+\begin{DoxyCompactList}\small\item\em This is where the actual work is done. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a36cb47a2cec4a979de7aa93ccc3dfc7f}{Matrix\+\_\+can\+\_\+be\+\_\+deleted}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the matrices pointed to by Matrix\+\_\+real\+\_\+pt and Matrix\+\_\+imag\+\_\+pt can be deleted. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_aad28f093e125e259fb34b0c33269ec04}{Matrix\+\_\+real\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the real part of the system matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a6f1e4350f4e9075d1bcb0fa518ffc0ea}{Matrix\+\_\+imag\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the real part of the system matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a5f8a5cd7da48fc81c9224c2c0a6d509e}{Matrix\+\_\+diagonal\+\_\+real}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} containing the diagonal entries of A\+\_\+r (real(\+A)) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a68788038c7bd09732455662c5be2ab85}{Matrix\+\_\+diagonal\+\_\+imag}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} containing the diagonal entries of A\+\_\+c (imag(\+A)) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a5626c629f590cee327c045a333ca315d}{Matrix\+\_\+diagonal\+\_\+inv\+\_\+sq}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} whose j\textquotesingle{}th entry is given by 1/(A\+\_\+r(j,j)$^\wedge$2 + A\+\_\+c(j,j)$^\wedge$2) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_af6c791c81e9600c9c4daa13ae3024dec}{Iterations}}
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a735337bf7a2a9d3f2265d8c5eaf74850}{Omega}}
+\begin{DoxyCompactList}\small\item\em Damping factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename M\+A\+T\+R\+IX$>$\newline
+class oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}
+
+Damped Jacobi \char`\"{}solver\char`\"{} templated by matrix type. The \char`\"{}solver\char`\"{} exists in many different incarnations\+: It\textquotesingle{}s an \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}}, and a \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}}, all of which use the same basic iteration. 
+
+Definition at line 284 of file complex\+\_\+smoother.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a5c76dd5e5fac0246eced85a66df6c7ee}\label{classoomph_1_1ComplexDampedJacobi_a5c76dd5e5fac0246eced85a66df6c7ee}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!ComplexDampedJacobi@{ComplexDampedJacobi}}
+\index{ComplexDampedJacobi@{ComplexDampedJacobi}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{ComplexDampedJacobi()}{ComplexDampedJacobi()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{Complex\+Damped\+Jacobi}} (\begin{DoxyParamCaption}\item[{const double \&}]{omega = {\ttfamily 0.5} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor (empty) 
+
+
+
+Definition at line 290 of file complex\+\_\+smoother.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a102defdc208413f82a6cd377bf5e0517}\label{classoomph_1_1ComplexDampedJacobi_a102defdc208413f82a6cd377bf5e0517}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!````~ComplexDampedJacobi@{$\sim$ComplexDampedJacobi}}
+\index{````~ComplexDampedJacobi@{$\sim$ComplexDampedJacobi}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$ComplexDampedJacobi()}{~ComplexDampedJacobi()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{Complex\+Damped\+Jacobi}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 298 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a290c1a7f550d0abff01d6bfd69c2fbe0}\label{classoomph_1_1ComplexDampedJacobi_a290c1a7f550d0abff01d6bfd69c2fbe0}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!ComplexDampedJacobi@{ComplexDampedJacobi}}
+\index{ComplexDampedJacobi@{ComplexDampedJacobi}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{ComplexDampedJacobi()}{ComplexDampedJacobi()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{Complex\+Damped\+Jacobi}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 331 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_af7a53121690e157bdd5bc191a31f9892}\label{classoomph_1_1ComplexDampedJacobi_af7a53121690e157bdd5bc191a31f9892}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!calculate\_omega@{calculate\_omega}}
+\index{calculate\_omega@{calculate\_omega}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_omega()}{calculate\_omega()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::calculate\+\_\+omega (\begin{DoxyParamCaption}\item[{const double \&}]{k,  }\item[{const double \&}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to calculate the value of Omega by passing in the value of k and h \mbox{[}see Elman et al. \char`\"{}\+A multigrid method enhanced by
+\+Krylov subspace iteration for discrete Helmholtz equations\char`\"{}, p.\+1303\mbox{]}. 
+
+
+
+Definition at line 345 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::omega(), oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Omega, oomph\+::\+Mathematical\+Constants\+::\+Pi, and oomph\+::\+Iterative\+Linear\+Solver\+::tolerance().
+
+
+
+Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+smoothers().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a4e246d712c8eb9e4db05f859148784d3}\label{classoomph_1_1ComplexDampedJacobi_a4e246d712c8eb9e4db05f859148784d3}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 305 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted, oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+imag\+\_\+pt, and oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+real\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::$\sim$\+Complex\+Damped\+Jacobi().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a4cf2cdac05266021cd0660ba60ae6a8b}\label{classoomph_1_1ComplexDampedJacobi_a4cf2cdac05266021cd0660ba60ae6a8b}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!complex\_smoother\_setup@{complex\_smoother\_setup}}
+\index{complex\_smoother\_setup@{complex\_smoother\_setup}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{complex\_smoother\_setup()}{complex\_smoother\_setup()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::complex\+\_\+smoother\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$}]{helmholtz\+\_\+matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Setup\+: Pass pointer to the matrix and store in cast form. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a7c46336fdc3b386b0bab6111a3c55d44}{oomph\+::\+Helmholtz\+Smoother}}.
+
+
+
+Definition at line 410 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+C\+R\+Double\+Matrix\+::diagonal\+\_\+entries(), i, oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted, oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+diagonal\+\_\+imag, oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+diagonal\+\_\+inv\+\_\+sq, oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+diagonal\+\_\+real, oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+imag\+\_\+pt, oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+real\+\_\+pt, and oomph\+::\+C\+R\+Double\+Matrix\+::nrow().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a3e548db0f775e4239ff7b9c76a7b1c76}\label{classoomph_1_1ComplexDampedJacobi_a3e548db0f775e4239ff7b9c76a7b1c76}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!complex\_smoother\_solve@{complex\_smoother\_solve}}
+\index{complex\_smoother\_solve@{complex\_smoother\_solve}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{complex\_smoother\_solve()}{complex\_smoother\_solve()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::complex\+\_\+smoother\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The smoother\+\_\+solve function performs fixed number of iterations on the system A$\ast$result=rhs. The number of (smoothing) iterations is the same as the max. number of iterations in the underlying \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a8ec748270df3e1199f19ef267d5b8e85}{oomph\+::\+Helmholtz\+Smoother}}.
+
+
+
+Definition at line 483 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+solve\+\_\+helper(), and oomph\+::\+Helmholtz\+Smoother\+::\+Use\+\_\+as\+\_\+smoother.
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a09214dc600fe5d261bdb3795aa943aac}\label{classoomph_1_1ComplexDampedJacobi_a09214dc600fe5d261bdb3795aa943aac}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!complex\_solve\_helper@{complex\_solve\_helper}}
+\index{complex\_solve\_helper@{complex\_solve\_helper}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{complex\_solve\_helper()}{complex\_solve\_helper()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::complex\+\_\+solve\+\_\+helper (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+This is where the actual work is done. 
+
+
+
+Definition at line 546 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Double\+Vector\+::build(), i, oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Max\+\_\+iter, oomph\+::\+Double\+Vector\+::norm(), oomph\+::oomph\+\_\+info, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Timing\+Helpers\+::timer().
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a34e565b3536b286b5544f5e30935b9e9}\label{classoomph_1_1ComplexDampedJacobi_a34e565b3536b286b5544f5e30935b9e9}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46}{oomph\+::\+Iterative\+Linear\+Solver}}.
+
+
+
+Definition at line 503 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Iterations.
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a7132c319d14c6d3c6aac8ac0536af801}\label{classoomph_1_1ComplexDampedJacobi_a7132c319d14c6d3c6aac8ac0536af801}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!omega@{omega}}
+\index{omega@{omega}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{omega()}{omega()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+double\& \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::omega (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get access to the value of Omega (lvalue) 
+
+
+
+Definition at line 403 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::\+Omega.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::calculate\+\_\+omega().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_abff6e2acd7cf7b7bb3a82612f9404460}\label{classoomph_1_1ComplexDampedJacobi_abff6e2acd7cf7b7bb3a82612f9404460}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 337 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_ab9267bcbaf8435303190a1c12dbb7c2b}\label{classoomph_1_1ComplexDampedJacobi_ab9267bcbaf8435303190a1c12dbb7c2b}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Use damped Jacobi iteration as an \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}}\+: This obtains the Jacobian matrix J and the residual vector r (needed for the Newton method) from the problem\textquotesingle{}s get\+\_\+jacobian function and returns the result of Jx=r. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 497 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_af6c791c81e9600c9c4daa13ae3024dec}\label{classoomph_1_1ComplexDampedJacobi_af6c791c81e9600c9c4daa13ae3024dec}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!Iterations@{Iterations}}
+\index{Iterations@{Iterations}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::Iterations\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Definition at line 534 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::iterations().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a36cb47a2cec4a979de7aa93ccc3dfc7f}\label{classoomph_1_1ComplexDampedJacobi_a36cb47a2cec4a979de7aa93ccc3dfc7f}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}}
+\index{Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_can\_be\_deleted}{Matrix\_can\_be\_deleted}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+can\+\_\+be\+\_\+deleted\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate if the matrices pointed to by Matrix\+\_\+real\+\_\+pt and Matrix\+\_\+imag\+\_\+pt can be deleted. 
+
+
+
+Definition at line 516 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+setup().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a68788038c7bd09732455662c5be2ab85}\label{classoomph_1_1ComplexDampedJacobi_a68788038c7bd09732455662c5be2ab85}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!Matrix\_diagonal\_imag@{Matrix\_diagonal\_imag}}
+\index{Matrix\_diagonal\_imag@{Matrix\_diagonal\_imag}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_diagonal\_imag}{Matrix\_diagonal\_imag}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+diagonal\+\_\+imag\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} containing the diagonal entries of A\+\_\+c (imag(\+A)) 
+
+
+
+Definition at line 528 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+setup().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a5626c629f590cee327c045a333ca315d}\label{classoomph_1_1ComplexDampedJacobi_a5626c629f590cee327c045a333ca315d}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!Matrix\_diagonal\_inv\_sq@{Matrix\_diagonal\_inv\_sq}}
+\index{Matrix\_diagonal\_inv\_sq@{Matrix\_diagonal\_inv\_sq}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_diagonal\_inv\_sq}{Matrix\_diagonal\_inv\_sq}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+diagonal\+\_\+inv\+\_\+sq\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} whose j\textquotesingle{}th entry is given by 1/(A\+\_\+r(j,j)$^\wedge$2 + A\+\_\+c(j,j)$^\wedge$2) 
+
+
+
+Definition at line 531 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+setup().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a5f8a5cd7da48fc81c9224c2c0a6d509e}\label{classoomph_1_1ComplexDampedJacobi_a5f8a5cd7da48fc81c9224c2c0a6d509e}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!Matrix\_diagonal\_real@{Matrix\_diagonal\_real}}
+\index{Matrix\_diagonal\_real@{Matrix\_diagonal\_real}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_diagonal\_real}{Matrix\_diagonal\_real}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+diagonal\+\_\+real\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} containing the diagonal entries of A\+\_\+r (real(\+A)) 
+
+
+
+Definition at line 525 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+setup().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a6f1e4350f4e9075d1bcb0fa518ffc0ea}\label{classoomph_1_1ComplexDampedJacobi_a6f1e4350f4e9075d1bcb0fa518ffc0ea}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!Matrix\_imag\_pt@{Matrix\_imag\_pt}}
+\index{Matrix\_imag\_pt@{Matrix\_imag\_pt}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_imag\_pt}{Matrix\_imag\_pt}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}$\ast$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+imag\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the real part of the system matrix. 
+
+
+
+Definition at line 522 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+setup().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_aad28f093e125e259fb34b0c33269ec04}\label{classoomph_1_1ComplexDampedJacobi_aad28f093e125e259fb34b0c33269ec04}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!Matrix\_real\_pt@{Matrix\_real\_pt}}
+\index{Matrix\_real\_pt@{Matrix\_real\_pt}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_real\_pt}{Matrix\_real\_pt}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}$\ast$ \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+real\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the real part of the system matrix. 
+
+
+
+Definition at line 519 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+setup().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexDampedJacobi_a735337bf7a2a9d3f2265d8c5eaf74850}\label{classoomph_1_1ComplexDampedJacobi_a735337bf7a2a9d3f2265d8c5eaf74850}} 
+\index{oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}!Omega@{Omega}}
+\index{Omega@{Omega}!oomph::ComplexDampedJacobi$<$ MATRIX $>$@{oomph::ComplexDampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Omega}{Omega}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi}}$<$ M\+A\+T\+R\+IX $>$\+::Omega\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Damping factor. 
+
+
+
+Definition at line 537 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::calculate\+\_\+omega(), and oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::omega().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{complex__smoother_8h}{complex\+\_\+smoother.\+h}}\end{DoxyCompactItemize}

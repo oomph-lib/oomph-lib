@@ -1,0 +1,749 @@
+\hypertarget{classoomph_1_1LinearAlgebraDistribution}{}\doxysection{oomph\+::Linear\+Algebra\+Distribution Class Reference}
+\label{classoomph_1_1LinearAlgebraDistribution}\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+
+
+Describes the distribution of a distributable linear algebra type object. Typically this is a container (such as a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}) or an operator (e.\+g \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} or \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}). This object is used in both serial and parallel implementations. In the serial context (no M\+PI) this just contains an integer indicating the number of rows. In parallel either each processor holds a subset of the set of global rows. (each processor contains only a single continuous block of rows -\/ parametised with variables denoting the first row and the number of local rows) or, all rows are be duplicated across all processors. In parallel this object also contains an \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} object which primarily contains the M\+P\+I\+\_\+\+Comm communicator associated with this object.  
+
+
+
+
+{\ttfamily \#include $<$linear\+\_\+algebra\+\_\+distribution.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ad1f6bbede398679d0e257abebae17951}{Linear\+Algebra\+Distribution}} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor -\/ creates a Distribution that has not been setup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ae8714449bcd3d63c7bb7ebe7e6e01c7a}{Linear\+Algebra\+Distribution}} (const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \&comm, const unsigned \&first\+\_\+row\+\_\+, const unsigned \&n\+\_\+row\+\_\+local, const unsigned \&n\+\_\+row=0)
+\begin{DoxyCompactList}\small\item\em Constructor. Takes the first\+\_\+row, nrow\+\_\+local (both for this processor) and nrow as arguments. If nrow is not provided or equal to 0 then it will be computed automatically. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a65474439fb8537b2236f933c9225142a}{Linear\+Algebra\+Distribution}} (const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \&comm, const unsigned \&n\+\_\+row, const bool \&distributed\+\_\+=true)
+\begin{DoxyCompactList}\small\item\em Constructor. Takes the number of global rows and uniformly distributes them over the processors if distributed = true (default), if distributed = false then every row is duplicated on every processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a1fcec07ae49b0cb9799dcc87cc0d9ffe}{Linear\+Algebra\+Distribution}} (const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$const comm\+\_\+pt, const unsigned \&first\+\_\+row\+\_\+, const unsigned \&n\+\_\+row\+\_\+local, const unsigned \&n\+\_\+row=0)
+\begin{DoxyCompactList}\small\item\em Constructor. Takes the first\+\_\+row, nrow\+\_\+local (both for this processor) and nrow as arguments. If nrow is not provided or equal to 0 then it will be computed automatically. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a5bb5b3cfbe3b635779066e5a3e00be6e}{Linear\+Algebra\+Distribution}} (const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$const comm\+\_\+pt, const unsigned \&n\+\_\+row, const bool \&distributed\+\_\+=true)
+\begin{DoxyCompactList}\small\item\em Constructor. Takes the number of global rows and uniformly distributes them over the processors if distributed = true (default), if distributed = false then every row is duplicated on every processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ad1857bf3eaab8d87991b651f7a52d4ff}{Linear\+Algebra\+Distribution}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&old\+\_\+dist)
+\begin{DoxyCompactList}\small\item\em Copy Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ad7984b69feba8f8797f60639dc962fe4}{Linear\+Algebra\+Distribution}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$old\+\_\+dist\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em pointer based copy constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a3d4a398895bcdd1a66493ac555cd6dee}{$\sim$\+Linear\+Algebra\+Distribution}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a0339adfd0ac99e1a443b7313063beaa9}{operator=}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&old\+\_\+dist)
+\begin{DoxyCompactList}\small\item\em Assignment Operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a3cab441019e738e4c6db6ee22dd71515}{build}} (const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$const comm\+\_\+pt, const unsigned \&\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\+\_\+row}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}{nrow\+\_\+local}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_aafad0b69de2284808366b65bd63e493b}{nrow}}=0)
+\begin{DoxyCompactList}\small\item\em Sets the distribution. Takes first\+\_\+row, nrow\+\_\+local and nrow as arguments. If nrow is not provided or equal to 0 then it is computed automatically. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a0cc6e977d9922918c86b4546a5cf1e1a}{build}} (const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$const comm\+\_\+pt, const unsigned \&\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_aafad0b69de2284808366b65bd63e493b}{nrow}}, const bool \&\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a05842d032d28880ae37951deae804ad8}{distributed}}=true)
+\begin{DoxyCompactList}\small\item\em Build the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}. if distributed = true (default) then uniformly distribute nrow over all processors where processors 0 holds approximately the first nrow/n\+\_\+proc, processor 1 holds the next nrow/n\+\_\+proc and so on... or if distributed = false then every row is held on every processor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a49b331da406e8a5b5af87f4177ddd41e}{build}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&new\+\_\+dist)
+\begin{DoxyCompactList}\small\item\em Copy the argument distribution. Also a helper method for the =assignment operator and copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ae1ac321822ddea9a156dc46a1d3bad86}{build}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$new\+\_\+dist\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Copy the argument distribution. Also a helper method for the =assignment operator and copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac23e08b5c10d041a01bead478573a8ea}{clear}} ()
+\begin{DoxyCompactList}\small\item\em clears the distribution \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_aafad0b69de2284808366b65bd63e493b}{nrow}} () const
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}{nrow\+\_\+local}} () const
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. If no M\+PI then Nrow is returned. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_aa58810320f461524a5e1181be3477fe7}{nrow\+\_\+local}} (const unsigned \&p) const
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. If no M\+PI the nrow is returned \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}{first\+\_\+row}} () const
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor. If not distributed then this is just zero. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a128e0a982fdbfd658b261981c9740b20}{first\+\_\+row}} (const unsigned \&p) const
+\begin{DoxyCompactList}\small\item\em access function for the first row on the p-\/th processor \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a05842d032d28880ae37951deae804ad8}{distributed}} () const
+\begin{DoxyCompactList}\small\item\em access function to the distributed -\/ indicates whether the distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2e4736826a65253f574d4f6f152ab514}{communicator\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em const access to the communicator pointer \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a92bfff97fd228b9c528922c39ab563b2}{built}} () const
+\item 
+bool \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a2b38cf76c6636227fb3144812250a7e8}{operator==}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&other\+\_\+dist) const
+\begin{DoxyCompactList}\small\item\em == Operator \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a40765b8fee6c000dbe5b94c38d76466e}{operator!=}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&other\+\_\+dist) const
+\begin{DoxyCompactList}\small\item\em != operator \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a899aa7ebf7b1aab1fae2fccfc5b3b43d}{global\+\_\+to\+\_\+local\+\_\+row\+\_\+map}} (const unsigned \&global\+\_\+i) const
+\begin{DoxyCompactList}\small\item\em return the local index corresponding to the global index \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_acd5ffc5ff4b91a8e63677f9677cd0039}{rank\+\_\+of\+\_\+global\+\_\+row}} (const unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em return the processor rank of the global row number i \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a8d8bc283c4b70295bafe1f5bacebbe64}{nrow\+\_\+local\+\_\+vector}} () const
+\begin{DoxyCompactList}\small\item\em return the nrow\+\_\+local \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a0d5b29bcfad98c3aa803dd8dab873ca9}{first\+\_\+row\+\_\+vector}} () const
+\begin{DoxyCompactList}\small\item\em return the first\+\_\+row \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a59d82db90a05edbf0444a31cc6b8f0b2}{Nrow}}
+\begin{DoxyCompactList}\small\item\em the number of global rows \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a3b9b16db35836dc06b160c0ddaa8e3fc}{Nrow\+\_\+local}}
+\begin{DoxyCompactList}\small\item\em the number of local rows on the processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a6dfae7ca9376aee99ca97d490a79dd9b}{First\+\_\+row}}
+\begin{DoxyCompactList}\small\item\em the first row on this processor \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a94492939a554e3415a477a13d0eb11c0}{Distributed}}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a4ed739bdcab7465b2e7651a9e2a23ed8}{Comm\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em the pointer to the M\+PI communicator object in this distribution \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution_a30dc1f50bb5c060c30c94281bcbe6815}{operator$<$$<$}} (std\+::ostream \&stream, \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&dist)
+\begin{DoxyCompactList}\small\item\em $<$$<$ operator \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Describes the distribution of a distributable linear algebra type object. Typically this is a container (such as a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}) or an operator (e.\+g \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} or \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}). This object is used in both serial and parallel implementations. In the serial context (no M\+PI) this just contains an integer indicating the number of rows. In parallel either each processor holds a subset of the set of global rows. (each processor contains only a single continuous block of rows -\/ parametised with variables denoting the first row and the number of local rows) or, all rows are be duplicated across all processors. In parallel this object also contains an \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} object which primarily contains the M\+P\+I\+\_\+\+Comm communicator associated with this object. 
+
+Definition at line 64 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_ad1f6bbede398679d0e257abebae17951}\label{classoomph_1_1LinearAlgebraDistribution_ad1f6bbede398679d0e257abebae17951}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!LinearAlgebraDistribution@{LinearAlgebraDistribution}}
+\index{LinearAlgebraDistribution@{LinearAlgebraDistribution}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{LinearAlgebraDistribution()}{LinearAlgebraDistribution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily oomph\+::\+Linear\+Algebra\+Distribution\+::\+Linear\+Algebra\+Distribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default Constructor -\/ creates a Distribution that has not been setup. 
+
+
+
+Definition at line 71 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_ae8714449bcd3d63c7bb7ebe7e6e01c7a}\label{classoomph_1_1LinearAlgebraDistribution_ae8714449bcd3d63c7bb7ebe7e6e01c7a}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!LinearAlgebraDistribution@{LinearAlgebraDistribution}}
+\index{LinearAlgebraDistribution@{LinearAlgebraDistribution}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{LinearAlgebraDistribution()}{LinearAlgebraDistribution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily oomph\+::\+Linear\+Algebra\+Distribution\+::\+Linear\+Algebra\+Distribution (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \&}]{comm,  }\item[{const unsigned \&}]{first\+\_\+row\+\_\+,  }\item[{const unsigned \&}]{n\+\_\+row\+\_\+local,  }\item[{const unsigned \&}]{n\+\_\+row = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Takes the first\+\_\+row, nrow\+\_\+local (both for this processor) and nrow as arguments. If nrow is not provided or equal to 0 then it will be computed automatically. 
+
+
+
+Definition at line 76 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a65474439fb8537b2236f933c9225142a}\label{classoomph_1_1LinearAlgebraDistribution_a65474439fb8537b2236f933c9225142a}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!LinearAlgebraDistribution@{LinearAlgebraDistribution}}
+\index{LinearAlgebraDistribution@{LinearAlgebraDistribution}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{LinearAlgebraDistribution()}{LinearAlgebraDistribution()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily oomph\+::\+Linear\+Algebra\+Distribution\+::\+Linear\+Algebra\+Distribution (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \&}]{comm,  }\item[{const unsigned \&}]{n\+\_\+row,  }\item[{const bool \&}]{distributed\+\_\+ = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Takes the number of global rows and uniformly distributes them over the processors if distributed = true (default), if distributed = false then every row is duplicated on every processor. 
+
+
+
+Definition at line 88 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a1fcec07ae49b0cb9799dcc87cc0d9ffe}\label{classoomph_1_1LinearAlgebraDistribution_a1fcec07ae49b0cb9799dcc87cc0d9ffe}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!LinearAlgebraDistribution@{LinearAlgebraDistribution}}
+\index{LinearAlgebraDistribution@{LinearAlgebraDistribution}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{LinearAlgebraDistribution()}{LinearAlgebraDistribution()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily oomph\+::\+Linear\+Algebra\+Distribution\+::\+Linear\+Algebra\+Distribution (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$const}]{comm\+\_\+pt,  }\item[{const unsigned \&}]{first\+\_\+row\+\_\+,  }\item[{const unsigned \&}]{n\+\_\+row\+\_\+local,  }\item[{const unsigned \&}]{n\+\_\+row = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Takes the first\+\_\+row, nrow\+\_\+local (both for this processor) and nrow as arguments. If nrow is not provided or equal to 0 then it will be computed automatically. 
+
+
+
+Definition at line 99 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a5bb5b3cfbe3b635779066e5a3e00be6e}\label{classoomph_1_1LinearAlgebraDistribution_a5bb5b3cfbe3b635779066e5a3e00be6e}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!LinearAlgebraDistribution@{LinearAlgebraDistribution}}
+\index{LinearAlgebraDistribution@{LinearAlgebraDistribution}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{LinearAlgebraDistribution()}{LinearAlgebraDistribution()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily oomph\+::\+Linear\+Algebra\+Distribution\+::\+Linear\+Algebra\+Distribution (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$const}]{comm\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+row,  }\item[{const bool \&}]{distributed\+\_\+ = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Takes the number of global rows and uniformly distributes them over the processors if distributed = true (default), if distributed = false then every row is duplicated on every processor. 
+
+
+
+Definition at line 111 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_ad1857bf3eaab8d87991b651f7a52d4ff}\label{classoomph_1_1LinearAlgebraDistribution_ad1857bf3eaab8d87991b651f7a52d4ff}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!LinearAlgebraDistribution@{LinearAlgebraDistribution}}
+\index{LinearAlgebraDistribution@{LinearAlgebraDistribution}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{LinearAlgebraDistribution()}{LinearAlgebraDistribution()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily oomph\+::\+Linear\+Algebra\+Distribution\+::\+Linear\+Algebra\+Distribution (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{old\+\_\+dist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy Constructor. 
+
+
+
+Definition at line 120 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_ad7984b69feba8f8797f60639dc962fe4}\label{classoomph_1_1LinearAlgebraDistribution_ad7984b69feba8f8797f60639dc962fe4}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!LinearAlgebraDistribution@{LinearAlgebraDistribution}}
+\index{LinearAlgebraDistribution@{LinearAlgebraDistribution}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{LinearAlgebraDistribution()}{LinearAlgebraDistribution()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily oomph\+::\+Linear\+Algebra\+Distribution\+::\+Linear\+Algebra\+Distribution (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$}]{old\+\_\+dist\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+pointer based copy constructor 
+
+
+
+Definition at line 127 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a3d4a398895bcdd1a66493ac555cd6dee}\label{classoomph_1_1LinearAlgebraDistribution_a3d4a398895bcdd1a66493ac555cd6dee}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!````~LinearAlgebraDistribution@{$\sim$LinearAlgebraDistribution}}
+\index{````~LinearAlgebraDistribution@{$\sim$LinearAlgebraDistribution}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{$\sim$LinearAlgebraDistribution()}{~LinearAlgebraDistribution()}}
+{\footnotesize\ttfamily oomph\+::\+Linear\+Algebra\+Distribution\+::$\sim$\+Linear\+Algebra\+Distribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 134 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Comm\+\_\+pt.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a49b331da406e8a5b5af87f4177ddd41e}\label{classoomph_1_1LinearAlgebraDistribution_a49b331da406e8a5b5af87f4177ddd41e}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!build@{build}}
+\index{build@{build}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Linear\+Algebra\+Distribution\+::build (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{new\+\_\+dist }\end{DoxyParamCaption})}
+
+
+
+Copy the argument distribution. Also a helper method for the =assignment operator and copy constructor. 
+
+helper method for the =assignment operator and copy constructor 
+
+Definition at line 218 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+
+
+
+References Comm\+\_\+pt, communicator\+\_\+pt(), distributed(), Distributed, First\+\_\+row, first\+\_\+row\+\_\+vector(), nrow(), Nrow, Nrow\+\_\+local, and nrow\+\_\+local\+\_\+vector().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_ae1ac321822ddea9a156dc46a1d3bad86}\label{classoomph_1_1LinearAlgebraDistribution_ae1ac321822ddea9a156dc46a1d3bad86}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!build@{build}}
+\index{build@{build}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Linear\+Algebra\+Distribution\+::build (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$}]{new\+\_\+dist\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy the argument distribution. Also a helper method for the =assignment operator and copy constructor. 
+
+
+
+Definition at line 168 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a3cab441019e738e4c6db6ee22dd71515}\label{classoomph_1_1LinearAlgebraDistribution_a3cab441019e738e4c6db6ee22dd71515}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!build@{build}}
+\index{build@{build}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Linear\+Algebra\+Distribution\+::build (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$const}]{comm\+\_\+pt,  }\item[{const unsigned \&}]{first\+\_\+row,  }\item[{const unsigned \&}]{local\+\_\+nrow,  }\item[{const unsigned \&}]{global\+\_\+nrow = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Sets the distribution. Takes first\+\_\+row, nrow\+\_\+local and nrow as arguments. If nrow is not provided or equal to 0 then it is computed automatically. 
+
+Sets the distribution. Takes first\+\_\+row, local\+\_\+nrow and global\+\_\+nrow as arguments. If global\+\_\+nrow is not provided or equal to 0 then it is computed automatically 
+
+Definition at line 37 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+
+
+
+References Comm\+\_\+pt, Distributed, first\+\_\+row(), First\+\_\+row, Nrow, and Nrow\+\_\+local.
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Fold\+Handler\+::\+Fold\+Handler(), oomph\+::\+C\+R\+Double\+Matrix\+::get\+\_\+matrix\+\_\+transpose(), oomph\+::\+Hopf\+Handler\+::\+Hopf\+Handler(), Linear\+Algebra\+Distribution(), oomph\+::\+Sum\+Of\+Matrices\+::multiply(), operator=(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+Fold\+Handler\+::solve\+\_\+augmented\+\_\+block\+\_\+system(), oomph\+::\+Fold\+Handler\+::solve\+\_\+block\+\_\+system(), oomph\+::\+Hopf\+Handler\+::solve\+\_\+complex\+\_\+system(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+Fold\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Hopf\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Hopf\+Handler\+::solve\+\_\+standard\+\_\+system(), oomph\+::\+Problem\+::synchronise\+\_\+eqn\+\_\+numbers(), oomph\+::\+Fold\+Handler\+::$\sim$\+Fold\+Handler(), and oomph\+::\+Hopf\+Handler\+::$\sim$\+Hopf\+Handler().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a0cc6e977d9922918c86b4546a5cf1e1a}\label{classoomph_1_1LinearAlgebraDistribution_a0cc6e977d9922918c86b4546a5cf1e1a}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!build@{build}}
+\index{build@{build}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Linear\+Algebra\+Distribution\+::build (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$const}]{comm\+\_\+pt,  }\item[{const unsigned \&}]{nrow,  }\item[{const bool \&}]{distributed = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Build the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}. if distributed = true (default) then uniformly distribute nrow over all processors where processors 0 holds approximately the first nrow/n\+\_\+proc, processor 1 holds the next nrow/n\+\_\+proc and so on... or if distributed = false then every row is held on every processor. 
+
+Uniformly distribute global\+\_\+nrow over all processors where processors 0 holds approximately the first global\+\_\+nrow/n\+\_\+proc, processor 1 holds the next global\+\_\+nrow/n\+\_\+proc and so on... 
+
+Definition at line 166 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+
+
+
+References Comm\+\_\+pt, Distributed, First\+\_\+row, Nrow, and Nrow\+\_\+local.
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a92bfff97fd228b9c528922c39ab563b2}\label{classoomph_1_1LinearAlgebraDistribution_a92bfff97fd228b9c528922c39ab563b2}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!built@{built}}
+\index{built@{built}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{built()}{built()}}
+{\footnotesize\ttfamily bool oomph\+::\+Linear\+Algebra\+Distribution\+::built (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true 
+
+Definition at line 346 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Comm\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+C\+R\+Double\+Matrix\+::add(), oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed(), oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Multi\+Vector\+::build(), oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Double\+Multi\+Vector\+::shallow\+\_\+build(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve\+\_\+helper(), and oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_ac23e08b5c10d041a01bead478573a8ea}\label{classoomph_1_1LinearAlgebraDistribution_ac23e08b5c10d041a01bead478573a8ea}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!clear@{clear}}
+\index{clear@{clear}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void oomph\+::\+Linear\+Algebra\+Distribution\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+clears the distribution 
+
+
+
+Definition at line 174 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Comm\+\_\+pt, First\+\_\+row, Nrow, and Nrow\+\_\+local.
+
+
+
+Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+structures(), and oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a2e4736826a65253f574d4f6f152ab514}\label{classoomph_1_1LinearAlgebraDistribution_a2e4736826a65253f574d4f6f152ab514}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!communicator\_pt@{communicator\_pt}}
+\index{communicator\_pt@{communicator\_pt}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{communicator\_pt()}{communicator\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}}$\ast$ oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+const access to the communicator pointer 
+
+
+
+Definition at line 339 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Comm\+\_\+pt.
+
+
+
+Referenced by build(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd\+\_\+helper(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+C\+R\+Double\+Matrix\+::global\+\_\+matrix(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::interpolation\+\_\+matrix\+\_\+set(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::interpolation\+\_\+matrix\+\_\+set(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Double\+Vector\+::output(), oomph\+::\+Double\+Multi\+Vector\+::output(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::self\+\_\+test(), oomph\+::\+Matrix\+Vector\+Product\+::setup(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::setup(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+structures(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+structures(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+smoothers(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+smoothers(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::split(), and oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a05842d032d28880ae37951deae804ad8}\label{classoomph_1_1LinearAlgebraDistribution_a05842d032d28880ae37951deae804ad8}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!distributed@{distributed}}
+\index{distributed@{distributed}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{distributed()}{distributed()}}
+{\footnotesize\ttfamily bool oomph\+::\+Linear\+Algebra\+Distribution\+::distributed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function to the distributed -\/ indicates whether the distribution is serial or distributed 
+
+
+
+Definition at line 333 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Distributed.
+
+
+
+Referenced by oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+serial(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose\+\_\+serial(), build(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd\+\_\+helper(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::operator$<$$<$(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Matrix\+Vector\+Product\+::setup(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}\label{classoomph_1_1LinearAlgebraDistribution_a2634e540a78fe1ee3f5c907aff500b58}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!first\_row@{first\_row}}
+\index{first\_row@{first\_row}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{first\_row()}{first\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the first row on this processor. If not distributed then this is just zero. 
+
+
+
+Definition at line 264 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Comm\+\_\+pt, Distributed, and First\+\_\+row.
+
+
+
+Referenced by oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), build(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::index\+\_\+in\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+dof\+\_\+number(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof(), oomph\+::operator$<$$<$(), oomph\+::\+Problem\+::parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), rank\+\_\+of\+\_\+global\+\_\+row(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), and oomph\+::\+C\+R\+Double\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a128e0a982fdbfd658b261981c9740b20}\label{classoomph_1_1LinearAlgebraDistribution_a128e0a982fdbfd658b261981c9740b20}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!first\_row@{first\_row}}
+\index{first\_row@{first\_row}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{first\_row()}{first\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the first row on the p-\/th processor 
+
+
+
+Definition at line 293 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Comm\+\_\+pt, Distributed, and First\+\_\+row.
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a0d5b29bcfad98c3aa803dd8dab873ca9}\label{classoomph_1_1LinearAlgebraDistribution_a0d5b29bcfad98c3aa803dd8dab873ca9}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!first\_row\_vector@{first\_row\_vector}}
+\index{first\_row\_vector@{first\_row\_vector}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{first\_row\_vector()}{first\_row\_vector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row\+\_\+vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+return the first\+\_\+row \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} 
+
+
+
+Definition at line 408 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References First\+\_\+row.
+
+
+
+Referenced by build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a899aa7ebf7b1aab1fae2fccfc5b3b43d}\label{classoomph_1_1LinearAlgebraDistribution_a899aa7ebf7b1aab1fae2fccfc5b3b43d}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!global\_to\_local\_row\_map@{global\_to\_local\_row\_map}}
+\index{global\_to\_local\_row\_map@{global\_to\_local\_row\_map}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{global\_to\_local\_row\_map()}{global\_to\_local\_row\_map()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linear\+Algebra\+Distribution\+::global\+\_\+to\+\_\+local\+\_\+row\+\_\+map (\begin{DoxyParamCaption}\item[{const unsigned \&}]{global\+\_\+i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+return the local index corresponding to the global index 
+
+
+
+Definition at line 369 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Nrow, and nrow\+\_\+local().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_aafad0b69de2284808366b65bd63e493b}\label{classoomph_1_1LinearAlgebraDistribution_aafad0b69de2284808366b65bd63e493b}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linear\+Algebra\+Distribution\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function to the number of global rows. 
+
+
+
+Definition at line 189 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Nrow.
+
+
+
+Referenced by oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::apply\+\_\+schur\+\_\+complement\+\_\+preconditioner(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed(), build(), oomph\+::\+Super\+L\+U\+Solver\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::operator$<$$<$(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block(), and oomph\+::\+Problem\+::synchronise\+\_\+eqn\+\_\+numbers().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}\label{classoomph_1_1LinearAlgebraDistribution_ac9310de740f9c3a61f8d5dab9bef88ca}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!nrow\_local@{nrow\_local}}
+\index{nrow\_local@{nrow\_local}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{nrow\_local()}{nrow\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the num of local rows on this processor. If no M\+PI then Nrow is returned. 
+
+
+
+Definition at line 196 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Comm\+\_\+pt, Distributed, Nrow, and Nrow\+\_\+local.
+
+
+
+Referenced by oomph\+::\+Problem\+::adapt(), oomph\+::\+Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse(), oomph\+::\+Problem\+::arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd\+\_\+helper(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Problem\+::get\+\_\+residuals(), oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt(), global\+\_\+to\+\_\+local\+\_\+row\+\_\+map(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::index\+\_\+in\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+dof\+\_\+number(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), oomph\+::operator$<$$<$(), oomph\+::\+Problem\+::parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), rank\+\_\+of\+\_\+global\+\_\+row(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Problem\+::restore\+\_\+dof\+\_\+values(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+block\+\_\+system(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Problem\+::store\+\_\+current\+\_\+dof\+\_\+values(), and oomph\+::\+Pitch\+Fork\+Handler\+::$\sim$\+Pitch\+Fork\+Handler().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_aa58810320f461524a5e1181be3477fe7}\label{classoomph_1_1LinearAlgebraDistribution_aa58810320f461524a5e1181be3477fe7}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!nrow\_local@{nrow\_local}}
+\index{nrow\_local@{nrow\_local}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{nrow\_local()}{nrow\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the num of local rows on this processor. If no M\+PI the nrow is returned 
+
+
+
+Definition at line 225 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Comm\+\_\+pt, Distributed, Nrow, and Nrow\+\_\+local.
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a8d8bc283c4b70295bafe1f5bacebbe64}\label{classoomph_1_1LinearAlgebraDistribution_a8d8bc283c4b70295bafe1f5bacebbe64}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!nrow\_local\_vector@{nrow\_local\_vector}}
+\index{nrow\_local\_vector@{nrow\_local\_vector}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{nrow\_local\_vector()}{nrow\_local\_vector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local\+\_\+vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+return the nrow\+\_\+local \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} 
+
+
+
+Definition at line 402 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Nrow\+\_\+local.
+
+
+
+Referenced by build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a40765b8fee6c000dbe5b94c38d76466e}\label{classoomph_1_1LinearAlgebraDistribution_a40765b8fee6c000dbe5b94c38d76466e}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool oomph\+::\+Linear\+Algebra\+Distribution\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{other\+\_\+dist }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+!= operator 
+
+
+
+Definition at line 359 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a0339adfd0ac99e1a443b7313063beaa9}\label{classoomph_1_1LinearAlgebraDistribution_a0339adfd0ac99e1a443b7313063beaa9}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Linear\+Algebra\+Distribution\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{old\+\_\+dist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment Operator. 
+
+
+
+Definition at line 140 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References build().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a2b38cf76c6636227fb3144812250a7e8}\label{classoomph_1_1LinearAlgebraDistribution_a2b38cf76c6636227fb3144812250a7e8}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!operator==@{operator==}}
+\index{operator==@{operator==}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool oomph\+::\+Linear\+Algebra\+Distribution\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{other\+\_\+dist }\end{DoxyParamCaption}) const}
+
+
+
+== Operator 
+
+operator== 
+
+Definition at line 262 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_acd5ffc5ff4b91a8e63677f9677cd0039}\label{classoomph_1_1LinearAlgebraDistribution_acd5ffc5ff4b91a8e63677f9677cd0039}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!rank\_of\_global\_row@{rank\_of\_global\_row}}
+\index{rank\_of\_global\_row@{rank\_of\_global\_row}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{rank\_of\_global\_row()}{rank\_of\_global\_row()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linear\+Algebra\+Distribution\+::rank\+\_\+of\+\_\+global\+\_\+row (\begin{DoxyParamCaption}\item[{const unsigned}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+return the processor rank of the global row number i 
+
+
+
+Definition at line 391 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References first\+\_\+row(), i, and nrow\+\_\+local().
+
+
+
+Referenced by oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::index\+\_\+in\+\_\+block(), and oomph\+::\+Problem\+::parallel\+\_\+sparse\+\_\+assemble().
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a30dc1f50bb5c060c30c94281bcbe6815}\label{classoomph_1_1LinearAlgebraDistribution_a30dc1f50bb5c060c30c94281bcbe6815}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream,  }\item[{\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{dist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+$<$$<$ operator 
+
+
+
+Definition at line 311 of file linear\+\_\+algebra\+\_\+distribution.\+cc.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a4ed739bdcab7465b2e7651a9e2a23ed8}\label{classoomph_1_1LinearAlgebraDistribution_a4ed739bdcab7465b2e7651a9e2a23ed8}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!Comm\_pt@{Comm\_pt}}
+\index{Comm\_pt@{Comm\_pt}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{Comm\_pt}{Comm\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}}$\ast$ oomph\+::\+Linear\+Algebra\+Distribution\+::\+Comm\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the pointer to the M\+PI communicator object in this distribution 
+
+
+
+Definition at line 430 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+Referenced by build(), built(), clear(), communicator\+\_\+pt(), first\+\_\+row(), nrow\+\_\+local(), and $\sim$\+Linear\+Algebra\+Distribution().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a94492939a554e3415a477a13d0eb11c0}\label{classoomph_1_1LinearAlgebraDistribution_a94492939a554e3415a477a13d0eb11c0}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!Distributed@{Distributed}}
+\index{Distributed@{Distributed}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{Distributed}{Distributed}}
+{\footnotesize\ttfamily bool oomph\+::\+Linear\+Algebra\+Distribution\+::\+Distributed\hspace{0.3cm}{\ttfamily [private]}}
+
+flag to indicate whether this distribution describes an object that is distributed over the processors of Comm\+\_\+pt (true) or duplicated over the processors of Comm\+\_\+pt (false) 
+
+Definition at line 427 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+Referenced by build(), distributed(), first\+\_\+row(), and nrow\+\_\+local().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a6dfae7ca9376aee99ca97d490a79dd9b}\label{classoomph_1_1LinearAlgebraDistribution_a6dfae7ca9376aee99ca97d490a79dd9b}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!First\_row@{First\_row}}
+\index{First\_row@{First\_row}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{First\_row}{First\_row}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Linear\+Algebra\+Distribution\+::\+First\+\_\+row\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the first row on this processor 
+
+
+
+Definition at line 422 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+Referenced by build(), clear(), first\+\_\+row(), and first\+\_\+row\+\_\+vector().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a59d82db90a05edbf0444a31cc6b8f0b2}\label{classoomph_1_1LinearAlgebraDistribution_a59d82db90a05edbf0444a31cc6b8f0b2}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!Nrow@{Nrow}}
+\index{Nrow@{Nrow}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{Nrow}{Nrow}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linear\+Algebra\+Distribution\+::\+Nrow\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the number of global rows 
+
+
+
+Definition at line 416 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+Referenced by build(), clear(), global\+\_\+to\+\_\+local\+\_\+row\+\_\+map(), nrow(), and nrow\+\_\+local().
+
+\mbox{\Hypertarget{classoomph_1_1LinearAlgebraDistribution_a3b9b16db35836dc06b160c0ddaa8e3fc}\label{classoomph_1_1LinearAlgebraDistribution_a3b9b16db35836dc06b160c0ddaa8e3fc}} 
+\index{oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}!Nrow\_local@{Nrow\_local}}
+\index{Nrow\_local@{Nrow\_local}!oomph::LinearAlgebraDistribution@{oomph::LinearAlgebraDistribution}}
+\doxysubsubsection{\texorpdfstring{Nrow\_local}{Nrow\_local}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Linear\+Algebra\+Distribution\+::\+Nrow\+\_\+local\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the number of local rows on the processor 
+
+
+
+Definition at line 419 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+Referenced by build(), clear(), nrow\+\_\+local(), and nrow\+\_\+local\+\_\+vector().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{linear__algebra__distribution_8h}{linear\+\_\+algebra\+\_\+distribution.\+h}}\item 
+\mbox{\hyperlink{linear__algebra__distribution_8cc}{linear\+\_\+algebra\+\_\+distribution.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,612 @@
+In this document, we discuss the solution of a simple two-\/dimensional thin elastic problem, using oomph-\/lib\textquotesingle{}s Kirchhoff-\/\+Love shell elements.
+
+Specifically, in this document we demonstrate
+
+
+\begin{DoxyItemize}
+\item the descriptions of the governing equation of a thin-\/shell deformation with a small strain
+\end{DoxyItemize}and
+\begin{DoxyItemize}
+\item how to implement a shell problem with the {\ttfamily Bell\+Element} and the {\ttfamily C1\+Curved\+Element} in {\ttfamily oomph-\/lib} 
+\end{DoxyItemize}The reader is referred to \href{../../../c1_element/bell_element/html/index.html}{\texttt{ the Bell triangular finite element}} and \href{../../../c1_element/curved_element/html/index.html}{\texttt{ the $ C^1 $-\/curved triangular finite element tutorials}}, for more detailed descriptions on the {\ttfamily Bell\+Element} and {\ttfamily C1\+Curved\+Element}.
+
+\DoxyHorRuler{0}
+ ~\newline
+ \DoxyHorRuler{0}
+\hypertarget{index_overview}{}\doxysection{Overview of a thin shell}\label{index_overview}
+A shell is defined as a thin three-\/dimensional elastic body where the thickness, $ h $, is smaller compared to the other two dimensions. Many analyses of thin shells neglect the effect of the transverse shear and follow the theory of Kirchhoff-\/\+Love. This theory states that a normal vector of the undeformed mid-\/surface remains normal to the deformed mid-\/surface throughout the deformation and it deforms inextensionally.
+
+Employing the Kirchhoff-\/\+Love assumption in a shell theory intends to reduce the dimension of a shell problem from the three-\/dimensional to the two-\/dimensional theory. Therefore, the shell governing equation which is derived from the principle of virtual displacement can be reduced to two-\/dimensional space. This is a result of allowing the integration in the coordinate perpendicular to the mid-\/surface to be carried out analytically. Therefore, all quantities can be expressed only on the two Lagrangian coordinates of the mid-\/surface.
+
+Since the elastic material under consideration is a thin shell, the structure can experience large deflections and rotations, although strains and stresses may remain small. In such thin bodies, an assumption for small deformations (strains) is employed to simplify excessive deflections. This has been done by employing the linear (or Hookean) constitutive equation to represent the stress components as a linear function of all strain components.
+
+\DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysubsection{A thin-\/shell governing equation with a small strain}\label{index_theory}
+In this section, we illustrate the linearisation of the governing equation of a static shell in a general geometry. It will be seen that a thin-\/elastic shell can be modelled by equations defined on a two-\/dimensional domain.
+
+To develop a mathematical description of the deformation of a three-\/dimensional shell, we consider a shell geometry illustrated in the following figure. From the thinness feature of a shell, its geometry is allowed to specify by the two-\/dimensional reference surface and its thickness. We can choose the coordinate $ \xi_3 = 0 $ to be the shell\textquotesingle{}s mid-\/surface and the reference surface. Therefore, we have that two coordinates $ \xi_1 $ and $ \xi_2 $ are located on the reference surface where the third coordinate $ \xi_3 $ is normal to the reference surface. The upper and lower surfaces of the shell have the coordinates $ \xi_3 = h/2 $ and $ \xi_3 = -h/2 $, respectively, where $ h $ is the thickness of the shell.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.45\textwidth]{shell_geometry}
+\doxyfigcaption{A shell geometry. }
+\end{DoxyImage}
+
+
+The governing equation of a static shell with zero pre-\/stress is parametrised by the two coordinates $ \xi_1, \xi_2 $ on the mid-\/surface of the shell and can be obtained as
+
+\[ \int_{\Omega}{\left\{ \tilde{E}^{\alpha\beta\gamma\delta}\left( \gamma_{\alpha\beta}\delta\gamma_{\gamma\delta} + \frac{1}{12}h^2\kappa_{\alpha\beta}\delta\kappa_{\gamma\delta}\right) - \frac{1}{h}\sqrt{\frac{A}{a}}\mathbf{f} \cdotp \delta\mathbf{R}\right\}\sqrt{a}}d\xi_1d\xi_2=0, \ \ \ \ (1) \]
+
+where $ \tilde{E}^{\alpha\beta\gamma\delta} $ represents the plane stress stiffness tensor defined on the mid-\/surface and can be computed by
+
+\[ \tilde{E}^{\alpha\beta\gamma\delta} = \frac{E}{2(1+\nu)}\left( t^{\alpha\gamma}t^{\beta\delta} + t^{\alpha\delta}t^{\beta\gamma} + \frac{2\nu}{1-\nu}t^{\alpha\beta}t^{\gamma\delta}\right), \ \ \ \ (2) \]
+
+where $ \nu $ denotes the Poisson\textquotesingle{}s ratio. This equation is presented with a non-\/dimensional form and is described in details in \href{../../../beam/tensioned_string/html/index.html}{\texttt{ another tutorial}}. Non-\/dimensionalisation of quantities is also explained here.
+
+Note that in the small strain regime, an area element between the undeformed and deformed configurations are indistinguishable. Hence, the external force is preferable to express on the area element of the undeformed midplane which is related with that of the deformed midplane as \[ \hat{\mathbf{f}}\sqrt{a} = \mathbf{f}\sqrt{A}, \] where $ \bf{f}, \hat{\bf{f}} $ denote the external force expressed on the area element of the undeformed and the deformed midplane, respectively.
+
+In order to obtain a linearised version of the governing equation of a thin-\/shell deformation, all terms in the equation (1) have to be linearised. A small strain is then assumed. Therefore, we have that $ \forall\epsilon << 1 $,
+
+\[ \mathbf{f} = \epsilon\mathbf{\tilde{f}}, \ \ \ \mathbf{u} = \epsilon\mathbf{\tilde{u}}, \]
+
+where a displacement $ \bf{u} $ will be considered in the tangential and normal directions (rather than the Cartesian system) in this study. Therefore, a displacement $ \mathbf{u} $ on the midplane which is parametrised by the two-\/dimensional coordinates, $ \xi_1, \xi_2 $ can be decomposed into two tangential and normal components as
+
+\[ \mathbf{u} = u^{j}\mathbf{t}_{j}, \]
+
+where the covariant base vectors $ \mathbf{t}_{1}, \mathbf{t}_{2} $ are tangent in direction of coordinate lines $ \xi_{1}, \xi_{2}$, respectively, and $ \mathbf{\hat{t}}_{3} $ is a unit normal vector to the undeformed mid-\/surface. Coefficients $ u^{j}; j=1,2,3$ are associated components of a displacement $ \mathbf{u} $ in two tangential and one normal directions.
+
+The linear version of the undeformed covariant metric tensor of the mid-\/surface is expressed as
+
+\[ a_{\alpha\beta} = \mathbf{t}_{\alpha}\cdotp \mathbf{t}_{\beta}, \] and, the linear version of the deformed metric tensor can be considered as
+
+\[ A_{\alpha\beta} = a_{\alpha\beta} + u^{\beta}|_{\alpha} + u^{\alpha}|_{\beta}, \] where the quantity $ u^{j}|_{\alpha} = (u^{j}_{,\alpha}+u^{i}\Gamma^{j}_{i\alpha}) $ is the $ j $-\/component of $ \alpha $-\/derivative of a displacement $ \mathbf{u} $ in the tangential and normal directions. Furthermore, $ \Gamma^{j}_{i\alpha} = \left(\frac{\partial\mathbf{t}_{i}}{\partial\xi_{\alpha}}\cdotp\mathbf{t}_{j}\right) $ denotes Christoffel symbol of the second kind. Note that the comma preceding the subscript $ j $ signifies partial differentiation with respect to the coordinate line $ \xi_j. $ Also, a Latin index represents any of the numbers $ 1,2,3 $ and a Greek index represents the numbers $ 1,2. $
+
+The determinants of the covariant metric tensor in undeformed and deformed shell are $ a $ and $ A, $ respectively, and can be calculated by the determinant of the associated metric tensors.
+
+Then, the linearised strain tensor is expressed as
+
+\[ \gamma_{\alpha\beta} = \frac{1}{2}\left(A_{\alpha\beta} - a_{\alpha\beta} \right) = \frac{1}{2}\left( u^{\beta}|_{\alpha} + u^{\alpha}|_{\beta} \right). \]
+
+Next, the linear version of the curvature tensor in the undeformed and deformed configurations can be specified as, respectively,
+
+\[ b_{\alpha\beta} = \mathbf{\hat{t}}_3\cdotp\mathbf{r}_{,\alpha\beta}, \]
+
+and,
+
+\[ B_{\alpha\beta} = b_{\alpha\beta} + \left[ \frac{1}{a}L_{j}\Gamma^j_{\alpha\beta} -\frac{L_{3}}{a^2}\Gamma^3_{\alpha\beta}\right] + \left( u^{i}|_{\alpha}\Gamma^{3}_{i\beta} + u^{3}_{,\alpha\beta} + u^{k}\frac{\partial \Gamma^{3}_{k\alpha}}{\partial\xi_{\beta}} + \frac{\partial u^{k}}{\partial\xi_{\beta}}\Gamma^{3}_{k\alpha}\right). \]
+
+Then, the linearised bending tensor can be obtained as \[ \kappa_{\alpha\beta} = b_{\alpha\beta} - B_{\alpha\beta} = - \left[ \frac{1}{a}L_{j}\Gamma^{j}_{\alpha\beta}-\frac{L_{3}}{a^2}\Gamma^{3}_{\alpha\beta}\right] - \left( u^{i}|_{\alpha}\Gamma^{3}_{i\beta} + u^{3}_{,\alpha\beta} + u^{k}\frac{\partial \Gamma^{3}_{k\alpha}}{\partial\xi_{\beta}} + \frac{\partial u^{k}}{\partial\xi_{\beta}}\Gamma^{3}_{k\alpha}\right), \]
+
+where $ L_{j} $ is defined as
+
+\[ L = \left( a_{12} u^{3}|_{2} - a_{22} u^{3}|_{1}, -a_{11} u^{3}|_{2} + a_{21} u^{3}|_{1}, a_{11} u^{2}|_{2} - a_{12} u^{1}|_{2} + a_{22} u^{1}|_{1} - a_{21} u^{2}|_{1} \right)^T. \]
+
+\DoxyHorRuler{0}
+\hypertarget{index_repr}{}\doxysubsection{A finite element representation of the displacements}\label{index_repr}
+When we substitute all linearised terms of the strain tensor, $ \gamma_{\alpha\beta} $ and the bending tensor, $ \kappa_{\alpha\beta} $ and their variations back into the shell governing equation (1), it can be seen that the governing equation contains a second-\/order derivative of a normal displacement and a first-\/order derivative of tangential displacements in both directions. Therefore, we have that the normal displacement requires $ C^1 $-\/continuity while the tangential displacements in both directions require only $ C^0 $-\/continuity.
+
+To approximate the normal displacement, a $ C^1 $-\/continuous interpolation function has to be considered in order to ensure the continuity of its derivatives in the finite element method. In {\ttfamily oomph-\/lib}, the Bell shape functions can be employed to provide the $ C^1 $-\/continuity when the straight boundary domain is concerned. Alternatively, the $ C^1 $-\/curved triangular shape functions can be used when the curvilinear boundary is concerned. The Bell and the $ C^1 $-\/curved triangular shape functions can be overloaded from {\ttfamily Bell\+Element\+Shape$<$$>$} and {\ttfamily C1\+Curved\+Element\+Shape$<$$>$}, respectively.
+
+Unlike the normal displacement, an interpolation function approximating the solution of the tangential displacements does not require a continuity for its derivatives. Therefore, a Lagrange-\/type interpolation function will be employed to approximate the tangential displacements, $ u_1, u_2. $ These interpolation functions will be overloaded from {\ttfamily T\+Element\+Shape$<$$>$}.
+
+{\ttfamily Oomph-\/lib\textquotesingle{}s} {\ttfamily Bell\+Shell\+Element} and {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily C1\+Curved\+Shell\+Element} provide a discretisation of the variational principle (1) with two-\/dimensional, subparametric, triangular finite elements on a straight-\/sided and curvilinear boundaries, respectively. In these elements, the displacements are regarded as unknowns, and the $ C^1 $-\/interpolation is used to interpolate the normal displacement while the Lagrange polynomials is used to interpolate the tangential displacements. Furthermore, the geometry is approximated by the linear Lagrange interpolations for a straight-\/sided boundary domain while the cubic polynomial is employed to approximate the curved boundary domain.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_reslt}{}\doxysection{Numerical results}\label{index_reslt}
+In this section, implementations of the linearised governing equations for thin-\/shell problems will be illustrated. There are three problems considered in this document; square-\/ and circular-\/plate, and circular tube bending. The implementations will be based on the governing equations (1) that we derived in section 1.\+1.
+
+In all cases, the problems will be solved with the assumption that the thickness is thin so that the linear theory can be applied. Our choice of thickness is 0.\+01. Also, applied forces will be applied in normal direction to the undeformed surface with no initial stress.
+
+Furthermore, in order to perform the finite element implementations, the domains of interest will be discretised by triangular elements with an unstructured mesh. In this study, {\ttfamily Oomph-\/lib\textquotesingle{}s} {\ttfamily Bell\+Shell\+Element} is employed when straight-\/sided boundaries are concerned while {\ttfamily Oomph-\/lib\textquotesingle{}s} {\ttfamily C1\+Curved\+Shell\+Element} is employed when curvilinear boundaries are involved.
+
+Note that figures of the displacements that we will illustrate throughout this document will be in the Cartesian coordinate system. Since the displacements obtained as the solution of (1) are in the tangential and normal coordinates, the transformation to the Cartesian coordinate system has to be done by
+
+\[ u_x = u^1t^1_1 + u^2t^1_2 + u^3\hat{t}^1_3, \ \ \ \ u_y = u^1t^2_1 + u^2t^2_2 + u^3\hat{t}^2_3, \ \ \ \ u_z = u^1t^3_1 + u^2t^3_2 + u^3\hat{t}^3_3, \]
+
+where $ t^j_i; j=1,2,3, $ denote components of the tangent base vector $ \mathbf{t}_i; i=1,2 $, and the unit normal vector, $ \mathbf{\hat{t}}_3 $, respectively.
+
+\DoxyHorRuler{0}
+ \hypertarget{index_plate}{}\doxysubsection{The square-\/plate bending problem}\label{index_plate}
+Here, we will consider a deformation of a flat plate which is subjected to a pressure loading on its upper surface as illustrated in the following figure. The length of the plate in both directions is 1. The boundary conditions in this problem are two clamped boundaries, $ \xi_1=0, \xi_1=1 $, and two free edges, $ \xi_2=0, \xi_2=1 $. Therefore, the displacement and its rotational degrees of freedom are pinned at the boundaries $ \xi_1=0, \xi_1=1 $ while all degrees of freedom are set to be free at $ \xi_2=0, \xi_2=1 $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.55\textwidth]{plate_geometry}
+\doxyfigcaption{The geometry of the square plate with two clamped edges and two free edges. Forces applied to a body are uniform in the outward normal direction. }
+\end{DoxyImage}
+
+
+In order to implement the finite element method of a two-\/dimensional space in this study, the domains of interest which is the unit square will be discretised by triangles. Note that the unstructured mesh contains 150 elements.
+
+Here are figures illustrate displacements in all directions in Cartesian coordinates system for the flat plate problem stated above with the applied loads in the normal direction equal to $ 1.0\times 10^{-8} $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.65\textwidth]{Plate_x_direction}
+\doxyfigcaption{The displacement in x-\/direction. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.65\textwidth]{Plate_y_direction}
+\doxyfigcaption{The displacement in y-\/direction. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.65\textwidth]{Plate_z_direction}
+\doxyfigcaption{The displacement in z-\/direction. }
+\end{DoxyImage}
+
+
+Regarding the displacements in both tangential directions, it can be seen from Figures 1.\+3 and 1.\+4 that no deformation occurs in the $ x $-\/ and $ y $-\/directions. The underlying reason is that the forces are applied in the normal direction to the surface of the plate which correspond to the $ z $-\/direction. Hence, there is no force applied in both tangential directions which correspond to the $ x $-\/ and $ y $-\/directions. Therefore, there is no contribution to make the body deforms in those directions as the linear governing equations are not coupled between displacements in each direction. To see this, the reader have to expand (1) after substituting $ \gamma_{\alpha\beta} $, $ \kappa_{\alpha\beta} $, and their variations in.
+
+\DoxyHorRuler{0}
+\hypertarget{index_tube}{}\doxysubsection{The circular-\/tube problem}\label{index_tube}
+In this section, we consider a deformation of a circular tube which is subjected to a pressure loading on its surface as illustrated in the following figure. The loads applied on the tube are uniformly distributed in the normal direction.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.55\textwidth]{circular_tube}
+\doxyfigcaption{The geometry of the square plate with two clamped edges and two free edges. }
+\end{DoxyImage}
+
+
+To implement the deformation of the circular tube in this study, the quarter of a circular tube will be implemented and symmetric conditions are assumed along the tube. The boundary conditions determined in this problem are clamped supports at both ends of the tube.
+
+Similar to the plate bending problem, the domains of interest will be discretised by an unstructured triangular mesh with 248 elements.
+
+Here are figures illustrate displacements in all directions in Cartesian coordinates system for the circular tube problem stated above with the applied loads in the normal direction equal to $ 1.0\times 10^{-6} $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.65\textwidth]{Tube_x_direction}
+\doxyfigcaption{The displacement in x-\/direction. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.65\textwidth]{Tube_y_direction}
+\doxyfigcaption{The displacement in y-\/direction. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.65\textwidth]{Tube_z_direction}
+\doxyfigcaption{The displacement in z-\/direction. }
+\end{DoxyImage}
+
+
+It can be seen that the displacement in $ x $-\/ and $ y $-\/directions are symmetry. This behaviour depicts that the thin-\/circular tube deforms axisymmetrically within a small-\/strain regime.
+
+\DoxyHorRuler{0}
+\hypertarget{index_plate2}{}\doxysubsection{The circular-\/plate bending problem}\label{index_plate2}
+Here, we will consider a deformation of a flat plate which is subjected to a pressure loading on its upper surface like in section 1.\+2.\+1. However, the domain of interest considered here will be curved. Therefore, the unit circular plate is considered with clamped boundaries. Note that only one quarter of the unit circular plate is analysed and symmetric conditions are applied in this problem.
+
+In order to implement the finite element method of a two-\/dimensional space in this study, the domains of interest which is the unit circular plate will be discretised by triangles. Note that the unstructured mesh contains 84 elements.
+
+Here are figures illustrate displacements in all directions in Cartesian coordinates system for the flat plate problem stated above with the applied loads in the normal direction equal to $ 1.0\times 10^{-7} $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.65\textwidth]{Cir_Plate_x_direction}
+\doxyfigcaption{The displacement in x-\/direction. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.65\textwidth]{Cir_Plate_y_direction}
+\doxyfigcaption{The displacement in y-\/direction. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.65\textwidth]{Cir_Plate_z_direction}
+\doxyfigcaption{The displacement in z-\/direction. }
+\end{DoxyImage}
+
+
+Similarly, there is no deformation in both x-\/ and y-\/directions as explained in section 1.\+2.\+1.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_impl}{}\doxysection{Implementation in oomph-\/lib}\label{index_impl}
+In the following, we illustrate the driver codes for the square-\/plate bending problem while other problems can be determined similarly.
+
+\DoxyHorRuler{0}
+\hypertarget{index_global}{}\doxysubsection{Global parameters and functions}\label{index_global}
+The namespace {\ttfamily \mbox{\hyperlink{namespacePhysical__Variables}{Physical\+\_\+\+Variables}}} is where the source function and the exact solution are defined. The source function can be specified via {\ttfamily \mbox{\hyperlink{namespacePhysical__Variables_a36f0d0dc5f8aa4eafd7c4d6fe943c4e8}{Physical\+\_\+\+Variables\+::source\+\_\+function()}}} while the exact solutions are defined via {\ttfamily \mbox{\hyperlink{namespacePhysical__Variables_af90d0c580c57b1152fd1cc7046055031}{Physical\+\_\+\+Variables\+::get\+\_\+exact\+\_\+u()}}}. Note that the six exact solutions correspond to the six degrees of freedom defined on each node. Furthermore, the applied source functions are required to be in the direction of the unit normal vector.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======================start\_of\_namespace===========================}}
+\DoxyCodeLine{\textcolor{comment}{/// Namespace for the solution of 2D linear shell equation}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespacePhysical__Variables}{Physical\_Variables}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pressure load}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacePhysical__Variables_a58adc76bae4751599143c613f9100904}{P\_ext}};}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacePhysical__Variables_ac374cc60da0f1e5df3fc48a3c9ce1d74}{epsilon}} = 1.0e-\/8;}
+\DoxyCodeLine{ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Exact solution as a vector}}
+\DoxyCodeLine{\textcolor{comment}{ /// differentiate u with respect to global coordinates }}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacePhysical__Variables_af90d0c580c57b1152fd1cc7046055031}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}})}
+\DoxyCodeLine{ \{}
+\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[0] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[1] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[2] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[3] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[4] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[5] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[6] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[7] = 0.0;}
+\DoxyCodeLine{ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Source function applied in the normal vector }}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacePhysical__Variables_a36f0d0dc5f8aa4eafd7c4d6fe943c4e8}{source\_function}}(\textcolor{keyword}{const} Vector<double>\& x, \textcolor{keyword}{const} Vector<double>\& unit\_n, Vector<double>\& source)}
+\DoxyCodeLine{ \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<3;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
+\DoxyCodeLine{   \{}
+\DoxyCodeLine{    source[\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}] = \mbox{\hyperlink{namespacePhysical__Variables_ac374cc60da0f1e5df3fc48a3c9ce1d74}{epsilon}}*\mbox{\hyperlink{namespacePhysical__Variables_a58adc76bae4751599143c613f9100904}{P\_ext}}*unit\_n[\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}];}
+\DoxyCodeLine{   \}}
+\DoxyCodeLine{ \}}
+\DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysubsection{The driver code}\label{index_main}
+The driver code is very simple and short. It is where the problem is defined. In this study, the problem is constructed using the unstructured mesh with triangular elements in 2D. A number of nodes in an element has to be specific as a template parameter in the problem set up. This is crucial in order to take care of element nodes when the number of nodes on the element defined differently for each interpolation functions.
+
+Normally, in the problem that $ C^1 $-\/shape functions are the only interpolation functions used to approximate the variable space, the number of {\ttfamily N\+N\+O\+D\+E\+\_\+1D} remains 2 as required by the $ C^1 $-\/shape functions (see \href{../../../c1_element/bell_element/html/index.html}{\texttt{ the Bell triangular finite element}} and \href{../../../c1_element/curved_element/html/index.html}{\texttt{ the $ C^1 $-\/curved triangular finite element tutorials}}). However, in a linear shell problem, different shape functions are used to interpolate displacements in different directions as different order of continuity is required in their governing equations.
+
+In this study, the displacements in tangential directions are chosen to approximate by the quadratic Lagrange interpolations which provide only $ C^0 $ continuity and are defined to have 3 nodes per side on a triangle. On the other hand, the approximation of the normal displacement employs the $ C^1 $-\/interpolation functions which are defined to have 2 nodes per side on a triangle.
+
+Therefore, the number of {\ttfamily N\+N\+O\+D\+E\+\_\+1D} has been modified in the {\ttfamily Bell\+Shell\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$} (and {\ttfamily C1\+Curved\+Shell\+Element} when dealing with the curvilinear boundary domain) to be 3 in this problem. Consequencely, the extra nodes that are not necessary for the $ C^1 $-\/shape functions have to be taken care.
+
+Following the usual self-\/test, we call the function {\ttfamily \mbox{\hyperlink{classMyLinearisedShellProblem_ab9255e3cbaae69ad5d61757d891b633e}{My\+Linearised\+Shell\+Problem\+::parameter\+\_\+study()}}} to compute the solution of the problem within a range of external pressures.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//======start\_of\_main==================================================}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver for 2D linearised shell problem: square flat plate}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__clamped__square__plate_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
+\DoxyCodeLine{ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Check number of command line arguments: Need exactly two.}}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (argc!=4)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   std::string error\_message =}
+\DoxyCodeLine{    \textcolor{stringliteral}{"Wrong number of command line arguments.\(\backslash\)n"};}
+\DoxyCodeLine{   error\_message +=}
+\DoxyCodeLine{    \textcolor{stringliteral}{"Must specify the following file names  \(\backslash\)n"};}
+\DoxyCodeLine{   error\_message += }
+\DoxyCodeLine{    \textcolor{stringliteral}{"filename.node then filename.ele then filename.poly\(\backslash\)n"};}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(error\_message,}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"main()"},}
+\DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{ \textcolor{comment}{// Convert arguments to strings that specify th input file names}}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name(argv[1]);}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name(argv[2]);}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} poly\_file\_name(argv[3]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Set up the problem: }}
+\DoxyCodeLine{ \mbox{\hyperlink{classMyLinearisedShellProblem}{MyLinearisedShellProblem<BellShellElement<2,3>}},2,3> \textcolor{comment}{//Element type as template parameter}}
+\DoxyCodeLine{  \mbox{\hyperlink{linear__shell_8txt_a560411ef94f070ecd32898bd4df006cf}{problem}}(\mbox{\hyperlink{namespacePhysical__Variables_a36f0d0dc5f8aa4eafd7c4d6fe943c4e8}{Physical\_Variables::source\_function}},node\_file\_name,element\_file\_name,poly\_file\_name);}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Check whether the problem can be solved}}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "};}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (\mbox{\hyperlink{linear__shell_8txt_a560411ef94f070ecd32898bd4df006cf}{problem}}.self\_test()==0)  }
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"passed: Problem can be solved."} << std::endl;}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{ \textcolor{keywordflow}{else} }
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"failed!"},\textcolor{stringliteral}{"main()"},OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{  }
+\DoxyCodeLine{ \textcolor{comment}{// Solve the problem}}
+\DoxyCodeLine{ \mbox{\hyperlink{linear__shell_8txt_a560411ef94f070ecd32898bd4df006cf}{problem}}.parameter\_study();}
+\DoxyCodeLine{\} \textcolor{comment}{//end of main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysubsection{The problem class}\label{index_problem}
+The problem class has five member functions, illustrated as follows\+:
+
+
+\begin{DoxyItemize}
+\item The problem constructor
+\item {\ttfamily action\+\_\+before\+\_\+newton\+\_\+solve()} \+: Update the problem specifications before solve. Boundary conditions maybe set here.
+\item {\ttfamily action\+\_\+after\+\_\+newton\+\_\+solve()} \+: Update the problem specifications after solve.
+\item {\ttfamily doc\+\_\+solution()} \+: Pass the number of the case considered, so that output files can be distinguished.
+\item {\ttfamily parameter\+\_\+study()} \+: Computes the shell\textquotesingle{}s deformation for a range of external pressures.
+\end{DoxyItemize}From the above mentioned functions, only the problem constructor is non-\/trivial. The reader is referred to \href{../../../beam/tensioned_string/html/index.html}{\texttt{ another tutorial}} for a description on {\ttfamily parameter\+\_\+study}.
+
+In the present problem, the function {\ttfamily Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve()} is not required, so it remains empty. Also, the class includes two private data members which store pointers to a source function and to the geometric object that specifies the shell\textquotesingle{}s undeformed shape.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D linearised shell problem.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keywordtype}{unsigned} DIM, \textcolor{keywordtype}{unsigned} NNODE\_1D> }
+\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMyLinearisedShellProblem}{MyLinearisedShellProblem}} : \textcolor{keyword}{public} Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass number of elements and pointer to source function}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyLinearisedShellProblem_a2ccc4ed3e631ca68d1d86423ef8eeb03}{MyLinearisedShellProblem}}(\textcolor{keyword}{typename} MyShellEquations<DIM,NNODE\_1D>::SourceFctPt source\_fct\_pt,}
+\DoxyCodeLine{                          \textcolor{keyword}{const} \textcolor{keywordtype}{string}\& node\_file\_name,}
+\DoxyCodeLine{                          \textcolor{keyword}{const} \textcolor{keywordtype}{string}\& element\_file\_name,}
+\DoxyCodeLine{                          \textcolor{keyword}{const} \textcolor{keywordtype}{string}\& poly\_file\_name);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyLinearisedShellProblem_a8720e7226adb9f23266fe729f7e4eb5a}{\string~MyLinearisedShellProblem}}()}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keyword}{delete} mesh\_pt();}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve: (Re)set boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_a81d050ee6958694b7645ea73cc8e4e9f}{actions\_before\_newton\_solve}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_a8ad6606f22859a5bd32d238bcc10efd1}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc the solution, pass the number of the case considered,}}
+\DoxyCodeLine{\textcolor{comment}{ /// so that output files can be distinguished.}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_a5894d8fae239fd5255b6a661cbc23fa5}{doc\_solution}}(DocInfo\& doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_ab9255e3cbaae69ad5d61757d891b633e}{parameter\_study}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to source function}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{typename} MyShellEquations<DIM,NNODE\_1D>::SourceFctPt \mbox{\hyperlink{classMyLinearisedShellProblem_a55fd5e4ce59d478cb41bd8457e868dea}{Source\_fct\_pt}};\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to geometric object that represents the shell's undeformed shape}}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classMyLinearisedShellProblem_a18e84aab4a7fad179e35d381e61c4584}{Undef\_midplane\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysubsection{The Problem constructor}\label{index_constructor}
+The problem constructor starts by overloading the function {\ttfamily Problem\+::mesh\+\_\+pt()} and set to the specific mesh used in the problem. In this tutorial, we implement the problem with 2D triangular unstructured mesh which is externally created by {\ttfamily Triangle}. The generated output will be used to build {\ttfamily oomph-\/lib} mesh. The reader may refer to \href{../../../meshes/mesh_from_inline_triangle/html/index.html}{\texttt{ another tutorial}} to create an unstructured triangular mesh internally.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Constructor for 2D Shell problem.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Discretise the 2D domain with n\_element elements of type ELEMENT.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Specify function pointer to source function. }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keywordtype}{unsigned} DIM, \textcolor{keywordtype}{unsigned} NNODE\_1D>}
+\DoxyCodeLine{\mbox{\hyperlink{classMyLinearisedShellProblem_a2ccc4ed3e631ca68d1d86423ef8eeb03}{MyLinearisedShellProblem<ELEMENT,DIM,NNODE\_1D>::MyLinearisedShellProblem}}}
+\DoxyCodeLine{(\textcolor{keyword}{typename} MyShellEquations<DIM,NNODE\_1D>::SourceFctPt source\_fct\_pt,}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& node\_file\_name,\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& element\_file\_name,}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& poly\_file\_name) : }
+\DoxyCodeLine{ Source\_fct\_pt(source\_fct\_pt)}
+\DoxyCodeLine{\{ }
+\DoxyCodeLine{ \textcolor{comment}{// Build mesh and store pointer in Problem}}
+\DoxyCodeLine{ Problem::mesh\_pt() = \textcolor{keyword}{new} TriangleMesh<ELEMENT>(node\_file\_name,element\_file\_name,poly\_file\_name);}
+
+\end{DoxyCodeInclude}
+
+
+We then create the undeformed centreline of the shell to one of an oomph-\/lib\textquotesingle{}s standard shell geometric objects.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{ \textcolor{comment}{// set the undeformed shell}}
+\DoxyCodeLine{ Undef\_midplane\_pt = \textcolor{keyword}{new} Plate(1.0,1.0);}
+
+\end{DoxyCodeInclude}
+
+
+Prior to consider the boundary conditions, we will illustrate how to take care extra nodes on the element for the $ C^1 $-\/interpolations. Since there is no degree of freedom of the $ C^1 $-\/interpolations defined on the mid-\/sided nodes, they have to be pinned.
+
+In order to do this, firstly, we loop over the element and pin all degrees of freedom on non-\/vertex nodes that associated with the $ C^1 $-\/interpolations. Since nodes in the element situate anticlockwise and the midside nodes fill in progressing along the consecutive edges, the pinning procedure is easily done by starting to pin from the third node and so on.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{ \textcolor{comment}{// pinning the middle nodes in each element for normal direction}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<n\_element;n++)}
+\DoxyCodeLine{ \{}
+\DoxyCodeLine{  \textcolor{comment}{// Upcast from GeneralisedElement to the present element}}
+\DoxyCodeLine{  ELEMENT *elem\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(n));}
+\DoxyCodeLine{   }
+\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} nnode = elem\_pt-\/>nnode();}
+\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<nnode;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
+\DoxyCodeLine{   \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if}((\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}==0) || (\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}==1) || (\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}==2))}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(2);}
+\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(3);}
+\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(4);}
+\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(5); }
+\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(6);}
+\DoxyCodeLine{      elem\_pt-\/>node\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(7);}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{   \}}
+\DoxyCodeLine{ \} \textcolor{comment}{// end of the middle node pinning}}
+
+\end{DoxyCodeInclude}
+
+
+Next, the boundary conditions of the problem will be taken care. We pin the nodal values on the boundaries where the boundary conditions applied. Note that, at the clamped boundaries, all second-\/order derivatives degrees of freedom are also pinned in order to reduce the number of degrees of freedom in the problem. These second-\/order derivatives are the derived boundary conditions that can be taken care by the natural boundary conditions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{ \textcolor{comment}{// start\_of\_boundary\_conditions}}
+\DoxyCodeLine{ \textcolor{comment}{// Set the boundary conditions for this problem: By default, all nodal}}
+\DoxyCodeLine{ \textcolor{comment}{// values are free -\/-\/ we only need to pin the ones that have }}
+\DoxyCodeLine{ \textcolor{comment}{// Dirichlet conditions. }}
+\DoxyCodeLine{\textcolor{comment}{// unsigned n\_side0 = mesh\_pt()-\/>nboundary\_node(0);}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_side1 = mesh\_pt()-\/>nboundary\_node(1);}
+\DoxyCodeLine{ \textcolor{comment}{//unsigned n\_side2 = mesh\_pt()-\/>nboundary\_node(2);}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_side3 = mesh\_pt()-\/>nboundary\_node(3);}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/ PLATE BENDING PROBLEM -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{ \textcolor{comment}{// Pin the single nodal value at the single node on mesh }}
+\DoxyCodeLine{ \textcolor{comment}{// boundary 1 (= the right domain boundary at x=l)}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// loop over the nodes on the boundary}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<n\_side1;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{// loop over the degrees of freedom that need to be}}
+\DoxyCodeLine{   \textcolor{comment}{// taken care for the Dirichlet boundary conditions}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}=0;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}<8;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     mesh\_pt()-\/>boundary\_node\_pt(1,\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}); }
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \} }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// boundary 3 (= the left domain boundary at x=0)}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// loop over the nodes on the boundary}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<n\_side3;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{// loop over the degrees of freedom that need to be}}
+\DoxyCodeLine{   \textcolor{comment}{// taken care for the Dirichlet boundary conditions}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}=0;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}<8;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     mesh\_pt()-\/>boundary\_node\_pt(3,\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}})-\/>pin(\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}); }
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \} \textcolor{comment}{// end of boundary conditions}}
+
+\end{DoxyCodeInclude}
+
+
+We then loop over the elements and set the pointer to the physical parameters (if any), the function pointer to the source function, and the pointer to the geometric object that specifies the undeformed surface of the shell.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{ \textcolor{comment}{// Loop over elements and set pointers to Physical parameters}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<n\_element;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{// Upcast from GeneralisedElement to the present element}}
+\DoxyCodeLine{   ELEMENT *elem\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}));}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Set the source function pointer and all physical variables}}
+\DoxyCodeLine{   elem\_pt-\/>source\_fct\_pt() = Source\_fct\_pt;}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Set the pointer to the undeformed mid-\/plane geometry}}
+\DoxyCodeLine{   elem\_pt-\/>undeformed\_midplane\_pt() = Undef\_midplane\_pt;}
+\DoxyCodeLine{  \} \textcolor{comment}{// end of loop over elements}}
+
+\end{DoxyCodeInclude}
+
+
+We finish the constructor by assigning the equation numbering scheme. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
+\DoxyCodeLine{ assign\_eqn\_numbers();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_actionbefore}{}\doxysubsection{Action before newton solve}\label{index_actionbefore}
+In the {\ttfamily action\+\_\+before\+\_\+newton\+\_\+solve()}, the problem specifications will be updated before performing the newton solve. The boundary values will be (re)set from the exact solutions.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_actions\_before\_newton\_solve=================================}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Update the problem specs before solve: (Re)set boundary values}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from the exact solution. }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keywordtype}{unsigned} DIM, \textcolor{keywordtype}{unsigned} NNODE\_1D>}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classMyLinearisedShellProblem_a81d050ee6958694b7645ea73cc8e4e9f}{MyLinearisedShellProblem<ELEMENT,DIM,NNODE\_1D>::actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \textcolor{comment}{// Assign boundary values for this problem by reading them out}}
+\DoxyCodeLine{ \textcolor{comment}{// from the exact solution.}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<mesh\_pt()-\/>nboundary();n++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{// find number of nodes in each boundary}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_side = mesh\_pt()-\/>nboundary\_node(n);\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{   /// loop over the nodes on the boundary}}
+\DoxyCodeLine{\textcolor{comment}{}   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}=0;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}<n\_side;\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}}++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{// Left boundary is every nodes on the left boundary }}
+\DoxyCodeLine{     Node* left\_node\_pt=mesh\_pt()-\/>boundary\_node\_pt(n,\mbox{\hyperlink{linear__shell_8txt_abf2bc2545a4a5f5683d9ef3ed0d977e0}{j}});}
+\DoxyCodeLine{   }
+\DoxyCodeLine{     \textcolor{comment}{// Loop for variables u}}
+\DoxyCodeLine{     ELEMENT e;}
+\DoxyCodeLine{     Vector<double> \mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}((e.required\_nvalue(0)));}
+\DoxyCodeLine{     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<(e.required\_nvalue(0));\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{       \textcolor{comment}{// Determine the position of the boundary node (the exact solution}}
+\DoxyCodeLine{       \textcolor{comment}{// requires the coordinate in a 1D vector!)}}
+\DoxyCodeLine{       Vector<double> x(2);}
+\DoxyCodeLine{       x[0]=left\_node\_pt-\/>x(0);}
+\DoxyCodeLine{       x[1]=left\_node\_pt-\/>x(1);}
+\DoxyCodeLine{       }
+\DoxyCodeLine{       \textcolor{comment}{// Boundary value (read in from exact solution)}}
+\DoxyCodeLine{       \mbox{\hyperlink{namespacePhysical__Variables_af90d0c580c57b1152fd1cc7046055031}{Physical\_Variables::get\_exact\_u}}(x,\mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}});}
+\DoxyCodeLine{  }
+\DoxyCodeLine{       \textcolor{comment}{// Assign the boundary condition to nodal values}}
+\DoxyCodeLine{       left\_node\_pt-\/>set\_value(\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}},\mbox{\hyperlink{linear__shell_8txt_a9306993569365df2424bb3d6b4ec8903}{u}}[\mbox{\hyperlink{linear__shell_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}]);}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \} }
+\DoxyCodeLine{\} \textcolor{comment}{// end of actions before solve}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{Source files for this tutorial}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/shell/}{\texttt{ demo\+\_\+drivers/shell/ }} \end{center} ~\newline
+
+\item The driver code for the square plate bending problem is\+: ~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/shell/plate/unstructured_clamped_square_plate.cc
+}{\texttt{ demo\+\_\+drivers/shell/plate/unstructured\+\_\+clamped\+\_\+square\+\_\+plate.\+cc }} \end{center} ~\newline
+
+\item The driver code for the circular tube problem is\+: ~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/shell/clamped_shell/unstructured_clamped_curved_shell.cc
+}{\texttt{ demo\+\_\+drivers/shell/clamped\+\_\+shell/unstructured\+\_\+clamped\+\_\+curved\+\_\+shell.\+cc }} \end{center} ~\newline
+
+\item The driver code for the circular plate bending problem is\+: ~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/shell/circular_plate/unstructured_clamped_circular_plate.cc
+}{\texttt{ demo\+\_\+drivers/shell/circular\+\_\+plate/unstructured\+\_\+clamped\+\_\+circular\+\_\+plate.\+cc }} \end{center} 
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

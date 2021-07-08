@@ -1,0 +1,53 @@
+\hypertarget{pressure__loaded__cylinder_8cc}{}\doxysection{pressure\+\_\+loaded\+\_\+cylinder.\+cc File Reference}
+\label{pressure__loaded__cylinder_8cc}\index{pressure\_loaded\_cylinder.cc@{pressure\_loaded\_cylinder.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem}{Fourier\+Decomposed\+Time\+Harmonic\+Linear\+Elasticity\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a5978c2a1498ec7775b228a11a3912209}{Global\+\_\+\+Parameters\+::\+Nu}} (0.\+3, 0.\+05)
+\begin{DoxyCompactList}\small\item\em Define Poisson\textquotesingle{}s ratio Nu. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_ac74d762d76b56416281173421b018460}{Global\+\_\+\+Parameters\+::E}} (1.\+0, 0.\+01)
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_acaf0a15a236b8a1af4a4c604b70a63ac}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq}} (10.\+0, 0.\+0)
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional square angular frequency of time-\/harmonic motion. \end{DoxyCompactList}\item 
+const std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a2ceef30cf51dfd432bafde39945a4e45}{Global\+\_\+\+Parameters\+::I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Define the imaginary unit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a579fa434bf9ee57e66d4bd42b208fc23}{Global\+\_\+\+Parameters\+::boundary\+\_\+traction}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The traction function at r=rmin\+: (t\+\_\+r, t\+\_\+z, t\+\_\+theta) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pressure__loaded__cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\+\_\+\+Parameters\+::P}} =1.\+0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{pressure__loaded__cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{pressure__loaded__cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{pressure\_loaded\_cylinder.cc@{pressure\_loaded\_cylinder.cc}!main@{main}}
+\index{main@{main}!pressure\_loaded\_cylinder.cc@{pressure\_loaded\_cylinder.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code. 
+
+
+
+Definition at line 451 of file pressure\+\_\+loaded\+\_\+cylinder.\+cc.
+
+
+
+References Global\+\_\+\+Parameters\+::\+Lr, Global\+\_\+\+Parameters\+::\+Lz, Global\+\_\+\+Parameters\+::rmax, Global\+\_\+\+Parameters\+::rmin, Global\+\_\+\+Parameters\+::zmax, and Global\+\_\+\+Parameters\+::zmin.
+

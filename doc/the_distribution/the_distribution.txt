@@ -1,0 +1,1006 @@
+\mainpage Download/installation instructions
+
+
+\htmlonly
+<p>The latest version of the library is 1.0, 
+<script>
+      // This odd/hacky construction extracts the svn information automatically
+       var revString = "$LastChangedRevision$";
+       var dateString = "$LastChangedDate$";
+       
+       //Revision number should never be more than 5 digits
+       revString = revString.substr(revString.indexOf(":")+1,5).trim();
+       
+       // The string should always be the same length
+       var timeString = dateString.substr(28,8);
+       
+       dateString = dateString.substr(dateString.indexOf("(")+1, dateString.indexOf(")") - dateString.indexOf("(")-1);
+       
+       document.write("revision number ");
+       document.write(revString);
+       document.write(" and was committed on ");
+       document.write(dateString);
+       document.write(".");
+</script> 
+</p>
+\endhtmlonly
+
+See the <a href="../../change_log/html/index.html">change log page</a> for an overview of the changes made since the previous release.</p>
+      
+
+\section instructions The download/install process, step by step
+-# \ref download
+  -# \ref tar_file
+  -# \ref subversion
+  .
+-# \ref install
+  -# \ref manual_install
+  -# \ref standard_install 
+  -# \ref custom_install 
+  .
+-# \ref nav 
+-# \ref external
+   -# \ref external_src
+      -# \ref blas
+      -# \ref lapack
+   -# \ref external_dist_cgal_etc
+   -# \ref external_dist
+      -# \ref hypre
+      -# \ref trilinos
+      -# \ref mumps
+      .
+   .
+-# \ref own
+  -# \ref have_auto_tools
+    -# \ref add_driver
+    -# \ref add_src
+    .
+  -# \ref dont_have_auto_tools
+  .
+.
+
+<HR>
+<HR>
+
+\section download Get the distribution
+
+\subsection tar_file Option 1: Get a tar file
+
+
+You can download a tar file of the latest distribution
+from the <A HREF="../../download/html/index.html">oomph-lib download
+page</A>.
+
+Once you have downloaded the tar file unpack it:
+
+\code
+tar xvfz oomph-lib-*.tar.gz
+\endcode
+
+The entire distribution will now be contained in the sub-directory
+<code>oomph-lib-*</code> where the "*" indicates the version/revision 
+number (the same as in the tar file).
+
+\subsection subversion Option 2: Get the distribution from the subversion repository
+
+You can also get hold of the library from our 
+<a href="http://www.subversion.tigris.org">subversion</a>-based
+repository. The procedure for checking out from the repository is
+explained in <a href="../../subversion/html/index.html">another 
+tutorial.</a> When checking out from the repository, you can specify
+where the distribution is placed. By default subversion will place it
+into a directory called <code>trunk</code>.
+
+
+<HR>
+
+\section install Install the distribution
+
+\subsection standard_install Option 1: Standard installation
+
+Change into the \c oomph-lib directory and run the \c autogen.sh
+build script:
+
+\code
+cd oomph-lib-*
+./autogen.sh
+\endcode
+
+This build script will ask a few questions, e.g. to verify that the default
+build directory (<code>build </code>, relative to the oomph-lib home
+directory) is appropriate before starting the build.
+
+By default, \c autogen.\c sh will build the library and the
+demo codes with certain default settings (using the gcc compilers with full
+optimisation, no debugging, no PARANOIA, and fully installed header files
+rather than symbolic links). These are appropriate if you wish to install
+the library once-and-for-all and do not anticipate any changes to their
+sources. The section \ref custom_install provides more details on the
+various options). `autogen.sh` will display the configure
+options and ask for confirmation that they are appropriate. If you are
+unsure if they are, simply hit return -- the default will be fine.
+
+The following flags for `autogen.sh` may be of interest:
+
+- `--jobs=n`: Run the build process using `n` cores. This can greatly speed
+  up build times and is strongly recommended if you have a multicore
+  machine.
+
+- `--rebuild`: Rebuild the configuration files from scratch. This is 
+  useful if you
+  believe you may have somehow broken the build process, but should not be
+  necessary normally.
+
+
+Under the hood `autogen.sh` simply collects settings in a
+question and answer manner then calls a non-interactive script 
+`non_interactive_autogen.sh` (yes, really!) with the appropriate
+flags. If you prefer you can simply call `non_interactive_autogen.sh` 
+directly. 
+
+The self-tests can be initiated outside of `autogen.sh` using
+`make check -k` (to run on a single core) or `./bin/parallel_self_test.py`
+(to run on all available cores). These commands will compile and run all
+the demo codes and verify their output. This is an optional step and can be
+very time consuming, especially if run on a small number of cores. 
+
+\subsection manual_install Manual installation
+
+If you're an experienced linux/unix user, you may prefer to control the
+build/install process manually, using the standard \c configure; \c make;
+\c make \c install; \c make \c check; sequence. Note that this will *only*
+work when building the tar file version (i.e. not the version from svn
+which still requires the configure script to be generated). In this case,
+the library will be compiled with GNU's default compiler options ("-O3 -g")
+and the libraries and include files will be installed in \c /usr/local/
+unless you specify a different directory with the \c --prefix argument to
+the \c configure command. Here's an example of a manual installation
+ 
+- Unpack the distribution (you may have to replace the "*" with the 
+  actual revision number)
+  \code
+  tar xvfz oomph-lib-*.tar.gz
+  \endcode 
+- Change into the oomph-lib home directory (again, you may have to
+  replace the "*" with the actual revision information)
+  \code 
+  cd oomph-lib-*
+  \endcode
+- Store the oomph-lib home directory in shell variable -- in a bash
+  shell this is done like this:
+  \code 
+  OOMPH_HOME=`pwd`
+  \endcode 
+- Create the build directory -- specify your own here! 
+  \code 
+  mkdir $OOMPH_HOME/build
+  \endcode
+- Configure the distribution -- prefix specifies the build directory
+  \code 
+  ./configure --prefix $OOMPH_HOME/build
+  \endcode
+- Make and install the library
+  \code 
+  make; make install
+  \endcode
+- Done! Check if we can make and run the user codes
+  \code 
+  cd $OOMPH_HOME/user_drivers/joe_cool
+  make
+  ./joes_poisson_code
+  \endcode
+- Run the self-tests
+  \code 
+  cd $OOMPH_HOME
+  make check -k
+  \endcode
+.
+
+\subsection custom_install Configuration options
+
+The build scripts allow you to specify a file of configure options. 
+For instance, you may wish to
+specify another compiler, change the optimisation level, allow for
+debugging or range checking, etc. Previously used sets of options are
+stored in various files in the sub-directory `config/configure_options/`.
+The default settings are in `default`; the currently used ones are in
+`current`.
+
+What options are there? You can get a complete list by typing
+
+    ./configure --help
+
+in `oomph-lib`'s top level directory. Here are some options that
+we use frequently:
+
+
+\subsubsection no_doc Suppressing the build of the documentation:
+Building the online documentation locally is time consuming and
+requires a significant amount of disk space. Since the documentation
+is also available from the <A href="http://www.oomph-lib.org">oomph-lib
+homepage</a> you may wish to suppress this step.
+To achieve this, specify the configure option
+
+    --enable-suppress-doc
+
+\subsubsection no_doc Suppressing the build of the pdf version of the documentation:
+By default the tutorials are built as html files (which are best accessed by
+starting from the local copy of the \c oomph-lib homepage, which is in
+`doc/html/index.html`) and as pdf files
+(which are accessible via a link at the bottom of the relevant html-based
+tutorial). In the past we have sometimes had problems with 
+\c doxygen (and hence the entire build process!) hanging while the 
+pdf files are generated. To avoid this (by not even attempting
+to create the pdf files) specify the configure option
+
+    --enable-suppress-pdf-doc
+
+(or better: update to a more recent version of \c doxygen -- for
+instance version 1.8.6 works).
+
+\subsubsection sym_links Replace library headers by symbolic links to the sources
+During the build process \c oomph-lib's various libraries are installed in
+the subdirectory \c build/lib (or in whatever other directory you may
+have specified when asked to confirm their location) and the
+associated header files are copied to \c build/include. This is a
+sensible default for libraries that are only installed
+once and then never again tinkered with. Here the situation is
+slightly different: If you ever decide to add your own "user libraries" to \c
+oomph-lib (and you are encouraged to do so!), their header files will 
+also be copied to \c build/include. 
+If during code development, any of your header files contain syntax errors,
+the compiler will complain about the syntax errors in the copied file
+in \c build/include rather than the one in your source directory. 
+This will encourage you to edit the copied file rather than the
+original -- clearly a recipe for disaster! To avoid it we provide 
+the configure option 
+
+     --enable-symbolic-links-for-headers
+
+In this mode, the copies of the header files in \c build/include
+are replaced by symbolic links to the actual sources in 
+\c src or \c user_src. 
+ 
+\subsubsection paranoia PARANOIA
+\c oomph-lib provides an extensive range of optional run-time self-tests. The
+self-tests issue diagnostic error messages if any inconsistencies are 
+detected at run-time and then terminate the code execution (semi-)gracefully
+by throwing an exception which (if not caught) aborts. This 
+allows backtracking of the call sequence
+in a debugger during code development. Obviously, the self-tests 
+introduce a slight run-time overhead and are therefore only performed if the 
+C++ code is compiled with a special compiler flag, \c PARANOID.
+For gcc (and most other compilers we know) this is done by passing the flag
+\c -DPARANOID to the C++ compiler. This is achieved by adding
+\code
+CXXFLAGS="-DPARANOID"
+\endcode
+to the configure options. As discussed, during code development, 
+this is most useful if debugging is also enabled, so the combination
+\code
+CXXFLAGS="-g -DPARANOID"
+\endcode
+is common.
+
+
+\subsubsection bounds Range checking
+Most of the containers used in \c oomph-lib allow for optional
+(and very costly!) range checking which is enabled by 
+specifying the C++ compiler flag \c RANGE_CHECKING. You are advised
+to recompile the code (yes, all of it!) if (and only if) you 
+encounter some mysterious segmentation fault. Again, this is most
+useful if used together with debugging,
+\code
+CXXFLAGS="-g -DRANGE_CHECKING"
+\endcode
+(Without the \c -g flag you will only find out that an illegal
+index has been specified, not where this happened...)
+
+<HR>
+
+\section nav Finding your way through the distribution
+
+The \c oomph-lib distribution has several main sub-directories:
+
+\subsection src The src directory
+
+The \c src sub-directory contains the source code for the
+various sub-libraries that make up \c oomph-lib.
+The most important one is the \c generic library which is built from
+the sources in the sub-directory \c src/generic. This library
+defines the fundamental \c oomph-lib objects (nodes, elements, meshes,
+timesteppers, linear and nonlinear solvers, mesh-adaptation routines,
+etc.) 
+
+The other libraries  (\c poisson, \c navier-stokes,...)
+define elements for the solution of specific systems of PDEs. 
+
+Finally, the \c src/meshes subdirectory contains several fully 
+functional \c Meshes (and, where appropriate, the associated
+\c Domains) that are used in the demo codes.
+All \c Meshes in this directory are templated by the type of element they
+contain. Since the element type can only be specified in the driver
+codes, the meshes cannot be compiled into libraries --
+the sources are always included as header-like files. Our 
+<A HREF="../../example_code_list/html/index.html">list of
+example codes</A> contains an 
+<A HREF="../../poisson/two_d_poisson/html/index.html#precompile_mesh">
+example</A> that explains this in more detail. 
+
+
+
+
+\subsection ext_src The external_src directory
+
+The \c  external_src directory contains "frozen" versions of
+various external libraries (e.g.  
+<A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</A>). Inclusion of these
+libraries into the distribution facilitates the overall build process:
+You only have to download and install a single distribution. This
+is much easier than finding out (typically halfway through the install 
+process), that library A depends on library B which invariably turns
+out to depend on library C, etc.) Often the sources in the \c external_src
+subdirectories are sub-sets of the full libraries. For instance,
+we only include the double precision sources for 
+<A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</A> as
+neither the complex nor the single-precision versions are required 
+within \c oomph-lib.
+
+\subsection ext_dist The external_distributions directory
+
+\c oomph-lib provides interfaces to various third-party libraries
+which have their own build machinery. Some of these libraries are built by
+default in the course of the oomph-lib installation, using tar 
+files that are distributed with \c oomph-lib; others
+will only be built if the user places the relevant tar files
+into the approproriate location within the \c oomph-lib directory
+structure.
+
+\subsubsection cgal External distributions that are built by default
+
+By default \c oomph-lib builds CGAL, the Computational Geometry Algorithms 
+Library, <a href="http://www.cgal.org">http://www.cgal.org</a>. This
+library requires three other libraries which we also install:
+- The GNU Multiple Precision Arithmetic Library (GMP), 
+  <a href="https://gmplib.org">https://gmplib.org</a>.
+- The GNU MPFR Library <a href="http://www.mpfr.org">https://gmplib.org</a>.
+- The Boost library, <a href="http://www.boost.org">http://www.boost.org</a>.
+.
+Note that the installation of these libraries is not quick. We
+therefore provide the option to (i) suppress their installation (in which case
+\c oomph-lib will employ a sub-optimal "locate_zeta" algorithm in its
+multi-domain algorithms) or to (ii) link against already existing 
+installations of the libraries; see \ref external_dist_cgal_etc for details.
+
+\subsubsection trilinos_hypre_external External distributions that are not built by default
+
+\c oomph-lib provides interfaces to various optional third-party libraries
+whose sources we deemed to be too big to be included in the \c oomph-lib 
+distribution. If you wish to use these we expect you to install them
+yourself. To facilitate this task, we provide the option
+to let the \c oomph-lib build machinery perform the installation
+for you. If you place a copy of the tar file into the appropriate 
+sub-directory in \c external_distributions, \c oomph-lib will build 
+and install the library for you; see \ref external_dist for details.
+(Note that \c oomph-lib is fully functional without these libraries --
+if the libraries are not available the build process ignores any \c oomph-lib
+code that depends on them.)
+
+
+\subsection demo_drivers The demo_drivers directory
+
+The \c demo_drivers directory contains a large number of demo codes.
+They are arranged in sub-directories, based on the type of the
+problem that is being solved. For instance, the \c demo_drivers/poisson 
+subdirectory contains a number of demo problems involving
+the Poisson equation.
+
+ All sub-directories  in 
+\c demo_drivers contain shell scripts that validate the output
+from the demo codes by comparing the computed results against the
+reference results stored in the \c validata sub-directories.
+The comparison is performed with the \c python 
+script \c bin/fpdiff.\c py which tolerates slight differences due
+to the unavoidable variations in roundoff error on different 
+platforms and/or at different optimisation levels. The validation
+scripts can either be executed individually in each sub-directory
+or for all sub-directories by issuing the command
+\c make \c check.
+
+ If the self-test is run at the top-level, a summary of the
+self-tests is stored in \c self_test/analyse_self_tests/validation.\c log
+
+
+\subsection doc The doc directory
+
+The structure of the \c doc directory (approximately) mirrors that 
+of \c demo_drivers
+and contains the source code for the \c doxygen - based detailed
+explanation of the demo codes. If \c configure locates a 
+sufficiently up-to-date version of \c doxygen on your system,
+the entire \c oomph-lib documentation will be built locally
+and can be navigated from the homepage in
+\c doc/html/index.\c html  -- a copy of the \c oomph-lib homepage.
+
+
+
+\subsection user The user_src and user_drivers directories
+
+The \c configure script and the associated \c Makefiles that build and 
+install the \c oomph-lib libraries and demo codes are generated 
+by  <A HREF="http://www.gnu.org/software/autoconf/">autoconf</A> and
+<A HREF="http://www.gnu.org/software/automake/">automake</A>. 
+If these powerful tools are installed on your machine,
+you can include your own libraries and driver codes into the
+fully-automated \c oomph-lib build process. Store your code in 
+suitably named sub-directories in \c user_src and \c user_drivers.
+See \ref own for more details.
+
+
+<HR>
+ 
+\section external External (third-party) libraries
+
+\c oomph-lib provides interfaces to a number of third-party libraries.
+Those libraries that are essential for \c oomph-lib are distributed 
+with the library to ensure that the user does not have to install 
+these separately. We also provide interfaces to a number of 
+third-party libraries that are not distributed with \c oomph-lib,
+typically because they are too big and/or take (too?) long to build. 
+\c oomph-lib will only build the interfaces to these libraries if 
+they are available and their location is specified during the
+configuration stage (or if the appropriate tar file 
+is dropped into the required directory in which case \c oomph-lib's
+build process will build and install the library for you). In the
+latter case, the compiler flags used to build \c oomph-lib will
+be passed directly to the third-party libraries, so you may wish to compile
+the libraries separately if you wish to specify different compiler
+flags, e.g. no debugging information.
+
+
+\subsection external_src External (third-party) libraries that are distributed with oomph-lib
+
+\c oomph-lib provides local copies of the following third-party libraries:
+- <A HREF="http://netlib.org/blas">BLAS</A>
+- <A HREF="http://netlib.org/lapack">LAPACK</A>
+- <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</A>
+- <A HREF="http://www-users.cs.umn.edu/~karypis/metis/">METIS</A>
+.
+By default \c oomph-lib automatically builds and links against these.
+
+\subsubsection blas Specifying an existing, local copy of the blas library
+
+If a local, possibly optimised version of the 
+<A HREF="http://netlib.org/blas">blas library</A>
+already exists on your machine you can force \c oomph-lib to link
+against it and avoid the compilation of \c oomph-lib's own copy. 
+
+If  your local copy of the <A HREF="http://netlib.org/blas">blas library</A>
+is located at 
+\code
+/home/mheil/local/lib/blas/blas.a
+\endcode
+say, you can link against it by specifying the configure option
+\code
+--with-blas=/home/mheil/local/lib/blas/blas.a
+\endcode
+
+\subsubsection lapack Specifying an existing, local copy of the lapack library
+If a local, possibly optimised version of the 
+<A HREF="http://netlib.org/lapack">lapack library</A>
+already exists on your machine you can force \c oomph-lib to 
+link against it and avoid the compilation of \c oomph-lib's
+ own copy. 
+
+For instance, if your local copy of the 
+<A HREF="http://netlib.org/lapack">lapack library</A> is located at 
+\code
+/home/mheil/local/lib/lapack/lapack.a
+\endcode
+you can link against it by specifying the configure option
+\code
+--with-lapack=/home/mheil/local/lib/lapack/lapack.a
+\endcode
+
+
+\subsection external_dist_cgal_etc External (third-party) libraries whose tar files are distributed with oomph-lib
+
+By default \c oomph-lib builds CGAL, the Computational Geometry Algorithms 
+Library, <a href="http://www.cgal.org">http://www.cgal.org</a>. This
+library requires three other libraries which we also install:
+- The GNU Multiple Precision Arithmetic Library (GMP), 
+  <a href="https://gmplib.org">https://gmplib.org</a>.
+- The GNU MPFR Library <a href="http://www.mpfr.org">https://gmplib.org</a>.
+- The Boost library, <a href="http://www.boost.org">http://www.boost.org</a>.
+.
+These four libraries are built from tar files that we downloaded
+from the relevant webpages and then included into the \c oomph-lib
+distribution. We adopted this procedure to ensure that the versions 
+of the libraries are consistent with each other.
+
+\subsubsection cgal_default_install Default CGAL installation.
+ 
+By default the four libraries are installed within \c oomph-lib's
+\c external_distributions directory, and the paths to the relevant
+\c lib and \c include directories are propagated to \c oomph-lib's
+\c Makefile s. The installations are deleted by "make clean" or 
+"make distclean", i.e. they are treated like any other \c oomph-lib
+code.
+
+\subsubsection cgal_permanent_install Installing CGAL in a permanent location
+
+Given that the installation of the libraries takes a fair amount of
+time, we also provide the option to install them in a permanent location
+outside the \c oomph-lib directory structure. This is done by
+specifying the configure flag:
+\code
+--with-cgal-permanent-installation-dir=ABSOLUTE_PATH_TO_PERMAMENT_INSTALL_DIRECTORY
+\endcode
+where \c ABSOLUTE_PATH_TO_PERMAMENT_INSTALL_DIRECTORY specifies what
+it says. So, for instance, specifying 
+\code
+--with-cgal-permanent-installation-dir=/home/mheil/junk_default_installation
+\endcode
+installs the libraries in \c /home/mheil/junk_default_installation.
+In subsequent rebuilds of \c oomph-lib it is then possible to 
+specify the location of these libraries using configure options.
+Following an \c oomph-lib installation with 
+\c --with-cgal-permanent-installation-dir these configure options 
+are displayed at the end of the \c oomph-lib build procedure. (They are
+also contained in the file  
+\c external_distributions/cgal_configure_flags.txt.)
+For instance, if the libraries have been installed in 
+\c /home/mheil/junk_default_installation the relevant, the configure
+options are:
+\code
+--with-boost=/home/mheil/junk_default_installation/boost_default_installation
+--with-gmp=/home/mheil/junk_default_installation/gmp_default_installation
+--with-mpfr=/home/mheil/junk_default_installation/mpfr_default_installation
+--with-cgal=/home/mheil/junk_default_installation/cgal_default_installation
+\endcode
+
+hierher auto?
+
+\subsubsection cgal_no_install Suppressing the CGAL installation
+Finally, it is possible to suppress the installation of CGAL (and the
+related libraries) using the configure option
+\code
+--enable-suppress-cgal-build
+\endcode
+In this case \c oomph-lib will employ a sub-optimal "locate_zeta" 
+algorithm in its multi-domain algorithms.
+
+\subsection external_dist External (third-party) libraries that are not distributed with oomph-lib
+
+\subsubsection hypre Hypre
+
+\c oomph-lib provides wrappers to the powerful solvers and
+preconditioners from the
+<a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">
+Scalable Linear Solvers Project</a>. The wrappers are only built
+if \c Hypre is available on your machine. If your local  
+copy of the \c Hypre library installed in 
+\code
+/home/mheil/local/hypre
+\endcode
+i.e. if this directory contains \c Hypre's lib and include
+directories:
+\code
+biowulf:~ 10:44:22$ ll /home/mheil/local/hypre
+total 8
+drwxr-xr-x    2 mheil    users        4096 Nov  3  2007 include
+drwxr-xr-x    2 mheil    users        4096 Nov  3  2007 lib
+\endcode
+you can get \c oomph-lib to link against it (and to compile
+\c oomph-lib's wrappers to \c Hypre's solvers and preconditioners)
+by specifying the configure option
+\code
+--with-hypre=/home/mheil/local/hypre
+\endcode
+
+
+\b Note: \c oomph-lib works with version 2.0.0 of the library. 
+If this version of \c Hypre is not available on your machine
+download the tar file from the our own website: 
+
+<CENTER>
+<a href="../../../../oomph-lib_external_distfiles/hypre-2.0.0.tar.gz">hypre-2.0.0.tar.gz</a>
+</CENTER>
+
+You can either build the library yourself
+or get \c oomph-lib to build it for you. To do this simply place a copy of the
+tar file into the directory
+\code
+external_distributions/hypre
+\endcode
+and (re-)run \c autogen.sh. The installation procedure will detect
+the tar file, unpack it, and install the library in 
+\code
+external_distributions/hypre/hypre_default_installation
+\endcode
+Unless you explicitly specified a library location using
+the \c --with-hypre flag, \c oomph-lib will then link against
+this newly created version of the library. However, we strongly
+recommend moving the newly created library 
+to another place (outside the \c oomph-lib distribution) to 
+preserve it for future use. Once this is done you simply specify the 
+(new) location of the library with the \c --with-hypre flag, as 
+discussed above. (Also make sure to delete the tar file
+from \c external_distributions/hypre, otherwise the library
+will be re-built.) Note that \c make \c clean will delete the
+unpacked \c Hypre sources but not the tar file and the library itself.
+
+
+
+\subsubsection trilinos Trilinos
+\c oomph-lib provides wrappers to the powerful solvers and
+preconditioners from the
+<a href="http://trilinos.sandia.gov/">
+Trilinos Project</a>. The wrappers are only built
+if \c Trilinos is available on your machine. If your local  
+copy of the \c Trilinos library installed in 
+\code
+/home/mheil/local/trilinos
+\endcode
+i.e. if this directory contains \c Trilinos's lib and include
+directories:
+\code
+biowulf:~ 10:44:31$ ll /home/mheil/local/trilinos
+total 24
+drwxr-xr-x    2 mheil    users        4096 Dec 20 15:34 bin
+drwxr-xr-x    2 mheil    users       16384 Dec 20 15:35 include
+drwxr-xr-x    2 mheil    users        4096 Dec 20 15:35 lib
+\endcode
+you can get \c oomph-lib to link against it (and to compile
+\c oomph-lib's wrappers to \c Trilinos's solvers and preconditioners)
+by specifying the configure option
+\code
+--with-trilinos=/home/mheil/local/trilinos
+\endcode
+
+
+\b Note: \c oomph-lib should work with major version numbers 9, 10 and 11
+of the Trilinos library, and for revision numbers from 11 onwards you will
+need to have \c cmake installed on your machine.
+If these versions of \c Trilinos are not available on your machine you
+can get the latest version from the <a href="http://trilinos.sandia.gov/">
+Trilinos web site </a> or download a copy of the relevant tar file
+from our own website:
+
+
+<CENTER>
+<a href="../../../../oomph-lib_external_distfiles/trilinos-11.8.1-Source.tar.gz">trilinos-11.8.1-Source.tar.gz</a>
+</CENTER>
+
+You can either build the library yourself
+or get \c oomph-lib to build it for you. To do this simply place a copy of the
+tar file into the directory
+\code
+external_distributions/trilinos
+\endcode
+and (re-)run \c autogen.sh. The build process is somewhat different
+for major version numbers 9 and 10, but oomph-lib will detect this
+automatically, provided that the source file is called
+trilinos-N.*.tar.gz, where N is the major version number. 
+The installation procedure will then detect
+the tar file, unpack it, and install the library in 
+\code
+external_distributions/trilinos/trilinos_default_installation
+\endcode
+Unless you explicitly specified a library location using
+the \c --with-trilinos flag, \c oomph-lib will then link against
+this newly created version of the library. However, we strongly
+recommend moving the newly created library 
+to another place (outside the \c oomph-lib distribution) to 
+preserve it for future use. Once this is done you simply specify the 
+(new) location of the library with the \c --with-trilinos flag, as 
+discussed above. (Also make sure to delete the tar file from
+\c external_distributions/trilinos, otherwise the library
+will be re-built.) Note that \c make \c clean will delete the
+unpacked \c Trilinos sources but not the tar file and the library itself.
+
+
+<HR>
+
+
+\subsubsection mumps MUMPS and ScaLAPACK
+
+\c oomph-lib also provides wrappers to the 
+<a href="http://graal.ens-lyon.fr/MUMPS/"> MUMPS
+</a> multifrontal solver, if it is available on your system. 
+\c MUMPS needs the linear algebra library
+<a href="http://www.netlib.org/scalapack/"> 
+ ScaLAPACK </a> which must also be installed on your system.
+The
+configure options
+\code
+--with-mumps=/opt/mumps
+--with-scalapack=/opt/scalapack
+\endcode
+will compile \c oomph-lib's wrappers and link against the \c MUMPS
+solver provided that \c MUMPS and ScaLAPACK </a> are installed in the 
+directories 
+\code
+/opt/mumps
+/opt/scalapack
+\endcode
+i.e. these directories contain the \c lib and \c include directories that
+result from successful installations of \c MUMPS and \c ScaLAPACK,
+respectively.
+
+
+If you do not have \c MUMPS available you can download the latest
+version 
+<a href="http://graal.ens-lyon.fr/MUMPS/index.php?page=dwnld"> here. </a>
+You can build and install the library yourself, or get \c oomph-lib to build it
+during part of its own build process. Simply place a copy of the tar file
+\c MUMPS_4.10.0.tar.gz in the directory
+\code
+external_distributions/mumps_and_scalapack
+\endcode
+You will also need to download the \c scalapack_installer.tgz from 
+<a href="http://www.netlib.org/scalapack/#_scalapack_installer_for_linux">
+here, </a> and place a copy in the same directory
+\code
+external_distributions/mumps_and_scalapack
+\endcode
+
+
+You can also download both files from our own website:
+<CENTER>
+<a href="../../../../oomph-lib_external_distfiles/MUMPS_4.10.0.tar.gz">MUMPS_4.10.0.tar.gz</a>
+</CENTER>
+<CENTER>
+<a href="../../../../oomph-lib_external_distfiles/scalapack_installer.tgz">scalapack_installer.tgz</a>
+</CENTER>
+
+Note that the configure option
+\code
+--with-mpi-include-directory=/usr/lib/openmpi/include
+\endcode
+<b> must </b> be specified in order to build \c MUMPS, where \c
+/usr/lib/openmpi/include is the directory that contains the file \c mpi.h.
+[You can use `locate mpi.h`, to, well, locate that directory.]
+
+Once the files have been placed in the \c
+external_distributions/mumps_and_scalapack directory, simply (re-)run
+\c autogen.sh, which will detect and build the libraries and install
+then in directory
+\code
+external_distributions/mumps_and_scalapack/mumps_and_scalapack_default_installation
+\endcode
+
+Note that the installation of `ScaLAPACK` requires an
+active Internet connection because it automatically downloads
+additional files.
+
+Unless you explicitly specified a library location using
+the \c --with-mumps and \c --with-scalapack flags, 
+\c oomph-lib will then link against
+the newly created versions of the libraries. However, we strongly
+recommend moving the libraries outside the \c oomph-lib distribution to 
+preserve them for future use. Once this is done you simply specify the 
+(new) location of the library with the \c --with-mumps and \c
+--with-scalapack flags, as 
+discussed above. (Also make sure to delete the tar files from
+\c external_distributions/mumps_and_scalapack, otherwise the libraries
+will be built again.) Note that \c make \c clean will delete the
+unpacked sources but not the tar files nor the installed libraries.
+
+
+<HR>
+
+\section own How to write your own code and link it against oomph-lib's library/libraries
+
+If you followed the instructions so far, you will be able to install
+\c oomph-lib and run the demo codes that are provided in the
+\c demo_drivers directory. Great! Now on to the next step: How do 
+you write your own codes and link them against \c oomph-lib? 
+There are two options, depending on
+whether you have (or are willing to install) the gnu autotools
+<A HREF="http://www.gnu.org/software/autoconf/">autoconf</A>,
+<A HREF="http://www.gnu.org/software/automake/">automake</A>
+and <A HREF="http://www.gnu.org/software/libtool/">libtool</A>
+on your machine. 
+
+\subsection have_auto_tools Writing/linking your own driver codes under autotools control
+
+\subsubsection add_driver Adding your own driver codes
+Let's start with the straightforward case: You want to use \c
+oomph-lib to solve one of your own problems. To do this within 
+\c oomph-lib's autotools framework, simply create a new
+directory in \c user_drivers and write your driver code. To facilitate
+these steps, the \c user_drivers directory already contains a 
+sample directory \c joe_cool for which all these steps have been
+performed. If you don't object to the directory name (or if your
+name is Joe Cool) you can simply work in that directory. 
+If not, we suggest the following sequence of steps:
+-# Go to the \c user_drivers directory and create a new 
+   directory, e.g.
+\code
+cd user_drivers
+mkdir josephine_cool
+\endcode
+
+-# Copy the \c Makefile.am and the driver code \c joes_poisson_code.cc
+   from \c user_drivers/joe_cool to \c user_drivers/josephine_cool.
+
+-# Return to \c oomph-lib's top-level directory and re-run `./autogen.sh`
+   to generate the required Makefile etc. in your own directory.
+
+-# You may now return to your own directory in \c user_drivers and
+   make your own driver code:
+\code
+cd user_drivers/josephine_cool
+make
+\endcode
+   This will create the required executable. 
+   \n\n
+-# Unfortunately, the driver code (copied from Joe Cool's directory!) is 
+   unlikely to be the one you want but you can now rename it, edit it, 
+   or add further driver codes to your directory. In general we
+   suggest that you have a look at the 
+   <A HREF="../../example_code_list/html/index.html">list of
+   example codes</A> and try to identify a problem that is similar to the
+   one you want to solve. The associated driver code will be a good starting
+   point for your own. Note that whenever you add new driver codes or
+   rename existing ones you will have to update the local 
+   \c Makefile.\c am, though it is not necessary to re-run
+   \c autogen.\c sh. The sample \c Makefile.\c am
+   copied from Joe Cool's directory is well annotated and gives
+   clear instructions how to adapt its contents:
+   \n\n
+\include "joe_cool_makefile.am"
+   \n\n 
+   Note the following points: \n\n
+   - Lines that start with a "#" are comments.
+     \n\n
+   - The first (non-comment) line in the above file specifies the name(s) of 
+     the executable(s) that will be created by make. These names must be
+     the same as those in the \c  *_SOURCES and \c *_LDADD variables. 
+     \n\n
+   - The \c joes_poisson_code_SOURCES variable declares which (local)
+     sources your executable depends on. In the current example there
+     is only a single file, the driver code,
+     \c joes_poisson_code. \c cc, itself. 
+     \n\n
+   - The \c joes_poisson_code_LDADD variable declares:
+     - the location of the library directory (automake
+       will convert the macro \c -L\@libdir\@ into the actual 
+       directory -- you don't have to change this!).
+     - the libraries (\c oomph-lib or otherwise) that you wish to link
+       against. This is done with the usual \c -l flag that you
+       will be familiar with from your compiler. Have a look at the
+       comments regarding the order of the libraries!
+     \n\n
+   - The \c INCLUDES variable specifies where to find the include
+     header files. This line is again completely generic -- automake
+     will convert the macro \c -I\@includedir\@ into the actual 
+     location. 
+     \n\n
+   - If you have multiple driver codes, add the name of all
+     executables to the \c noinst_PROGRAMS variable, and specify
+     the \c *_SOURCES and \c *_LDADD variables
+     for each one. 
+     \n\n
+   - The \c INCLUDES variable should only be specified once.
+   .
+  
+
+\subsubsection add_src Adding new libraries and linking against them from driver codes
+
+The above instructions should be sufficient to get you started.
+You can create multiple sub-directories for different projects 
+and each sub-directory may, of course, contain multiple files, 
+separated into header and source files. \c automake will ensure that 
+only those files that have been
+changed will be recompiled when you issue the \c make
+command. However, at some point you may wish to package some of your sources 
+into your own library and maybe even offer it for permanent inclusion into
+\c oomph-lib. For this purpose the \c oomph-lib distribution provides the
+sub-directory \c user_src which closely mirrors that of the 
+\c src and \c external_src directories discussed earlier. During the
+build process, each  sub-directory in  \c user_src is compiled
+into its own library and installed in the standard location. 
+
+ The steps required to include your own library into the \c oomph-lib
+build process are very similar to those required to
+add additional user drivers. As before, the \c user_src directory 
+already contains a sample directory \c jack_cool, to facilitate
+the procedure. We therefore suggest the following sequence of steps:
+-# Go to the \c user_src directory and create a new 
+   directory, e.g.
+\code
+cd user_src
+mkdir jacqueline_cool
+\endcode
+   \n\n
+-# Copy the \c Makefile.am and the codes \c hello_world.cc and 
+   \c hello_world.h 
+   from \c user_src/jack_cool to \c user_src/jacqueline_cool.
+   \n\n
+-# Return to the top-level \c oomph-lib directory and re-run
+   `autogen.sh`.
+
+-# You may now return to your own directory in \c user_src and
+   make and install our own library
+\code
+cd user_src/jacqueline_cool
+make
+make install
+\endcode
+   This will create the library and install it in \c build/lib
+   \n\n
+   The \c Makefile.\c am for libraries is slightly more complicated
+   (though reasonably well documented) so -- for now -- we'll
+   just list it here and hope that the changes required 
+   to include additional sources are obvious. If you really can't
+   figure it out, send us an email and prompt us to complete
+   this bit of the documentation....
+   \n\n
+\include "linked_make_file.am" 
+
+Note that the directory  \c user_drivers/jack_cool contains
+an example of a user driver code (\c jacks_own_code \c .cc) 
+that uses a user library.
+
+
+
+\subsection dont_have_auto_tools Writing/linking user code without autotools
+Linking directly against \c oomph-lib's (sub-)libraries 
+is slightly complicated by cross-compilation issues arising from
+the fact that the \c oomph-lib distribution includes a few C and Fortran 
+sources. When linking is done (by the C++ compiler) one usually has to 
+explicitly specify a few compiler-specific Fortran libraries.
+The beauty of the \c autotools approach described above is that these libraries
+(and any other flags that need to be passed to the compiler/linker)
+are determined and specified automatically. Doing this manually 
+is no fun! Have a look at
+Mike Gerdts's excellent document 
+<A HREF="https://sites.google.com/site/mgerdts/whatgccreallydoes">
+"How gcc really works"</A> for details.
+
+ The good news is that \c oomph-lib's installation procedure automatically 
+generates a sample \c Makefile that contains all the relevant
+information. Once the installation is complete, the sample makefile is
+located at
+\code
+demo_drivers/linking/makefile.sample
+\endcode
+Here is the version that was generated one of our machines:
+
+\include makefile.sample.biowulf
+
+The version that is generated during the build process
+on your machine provides template for your own customised
+Makefiles. When modifying the sample to different driver codes, 
+you should not (have to) edit any of the "installation specific"
+variables. Simply specify the \c oomph-lib (sub-)libraries that you wish to 
+link against in the \c OOMPH_LIB-LIBS variable (in the example shown
+above, we are linking against the \c generic and \c poisson libraries),
+and specify the dependencies for your own driver code, following the
+usual \c Makefile syntax. The executable may then be created by the usual
+\code
+make -f makefile.sample my_demo_code
+\endcode
+
+<a name="apple_linking">
+<b>Note/Disclaimer:</b></a> The sample \c Makefile generated during \c oomph-lib's 
+installation should work for most (if not all) linux machines, though it may
+require slight tweaks for Darwin (the BSD-derived UNIX core of Apple's
+OSX operating system). Problems are most 
+likely to arise from the \c SHARED_LIBRARY_FLAGS variable. 
+As mentioned in the comment in the sample \c Makefile, on such 
+machines the fragment <code>-Wl,--rpath -Wl,</code> should be deleted from the 
+\c SHARED_LIBRARY_FLAGS variable. 
+
+#dummy
+#dummy
+#dummy
+#dummy
+#dummy
+#dummy
+#dummy
+#dummy
+#dummy
+#dummy

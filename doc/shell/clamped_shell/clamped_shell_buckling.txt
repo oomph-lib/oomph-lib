@@ -1,0 +1,254 @@
+\mainpage Demo problem: Buckling of a clamped cylindrical shell under pressure loading
+
+In this document, we discuss the solution of the buckling of a
+cylindrical shell using \c oomph-lib's KirchhoffLoveShell elements.
+
+[No documentation yet: Here's the driver code.]
+
+\include clamped_shell.cc
+
+
+@@END@@
+
+
+<CENTER> 
+<TABLE>
+<TR>
+<TD>
+\n
+<CENTER>
+<B>One-dimensional Beam problem</B>
+</CENTER> 
+\n
+ Find the deformation of an elastic beam under constant pressure
+ loading. The beam is pinned at each end and has an undeformed length
+ \f$L\f$.
+\n
+</TD>
+</TR>
+</TABLE>  
+</CENTER>  
+
+@I w 0.75\textwidth string "An elastic beam deforms under constant pressure loading. The midpoint of the beam has moved from point D to point E."
+
+In the limit of large initial pre-stress, bending effects may be
+neglected and the beam behaves as though it were an elastic
+string of undeformed length \f$L\f$, for which an exact solution may
+be found.
+Under the action of a constant external pressure, \f$ P\f$, 
+the stress will be uniform along the string, leading to a uniform
+tension, \f$T\f$, and the shape is 
+an arc of a circle with radius \f$R\f$, see the above Figure.
+A simple force balance shows that \f$ P = -T/R \f$.
+
+ We use geometrical arguments to calculate the radius of the circle,
+ \f$ R = 2\sin\alpha/L \f$; 
+ the isosceles triangle \f$ACE\f$ may be used to determine the angle
+ \f$\alpha = \pi - 2\beta\f$. It follows that
+ \f[\tan\alpha = \tan(\pi -
+ 2\beta) = - \tan 2\beta = \frac{2\tan\beta}{\tan^{2}\beta -1}, \f]
+ where \f$\tan\beta
+ = 2d/L\f$ and \f$d\f$ is the vertical displacement of the
+ mid-point of the beam. 
+ The stress is calculated using Hooke's law and the tension is
+ the stress multiplied by the width of the beam:
+\f[ T = \sigma_{0} \frac{h}{R_{0}} \frac{2\alpha R}{L}, \f]
+ and so
+ \f[ P = - T/R = \sigma_{0} \frac{h}{R_{0}} \frac{2\alpha}{L} \f]
+ 
+ We shall solve the above problem numerically using \c oomph-lib's
+ KirchhoffBeamElements, which include both stretching and bending effects.
+ In the standard formulation, the displacements are unknowns and the
+ external pressure, \f$P\f$, is prescribed in a load function. In an
+ alternative, displacement-control, formulation, the
+ displacements at a particular position is prescribed and 
+ the pressure becomes an unknown. Displacement control is often 
+ essential problems in which buckling occurs through a sub-critical 
+ bifurcation. The driver code 
+ <A HREF="../../../../demo_drivers/beam/tensioned_string/tensioned_string.cc">
+ tensioned_string.cc</A> is written so that either the 
+ external pressure, \f$P\f$, or the mid-point displacement, \f$d\f$, may be 
+ a prescribed control parameter.
+
+<HR>   
+<HR>
+
+\section global Global parameters and functions
+The namespace \c ConstPressureForBeam contains the dimensionless beam
+thickness, \f$ h/R_{0}\f$, the dimensionless pre-stress,
+\f$\sigma_{0}\f$, a pointer to the pressure load, \f$P\f$, and a
+variable that will be used to specify the prescribed position of the
+mid-point displacement, \f$d\f$. The namespace
+also contains the function \c ConstPressureForBeam::load() which returns a constant
+pressure load of magnitude \f$P\f$.
+
+\dontinclude tensioned_string.cc
+\skipline start_of_namespace
+\until end of namespace
+
+<HR>
+<HR>
+
+\section main The driver code
+
+The main code is again very short. The physical parameters
+\f$h/R_{0}\f$, \f$\sigma_{0}\f$ and \f$L\f$ are initialised and the
+problem is constructed using 10 elements. The final argument of the 
+ElasticBeamProblem constructor is a boolean: if true, the mid-point
+displacement will be the control parameter, if false, the external
+pressure will be the control parameter.
+The final call is to the function ElasticBeamProblem::parameter_study().
+
+\dontinclude tensioned_string.cc
+\skipline start_of_main
+\until end of main
+
+<HR>
+<HR>
+
+\section problem The problem class
+
+The problem class has six member functions, only two of which are
+non-trivial:
+ - the constructor \ref constructor
+ - the function \c parameter_study(), described in \ref param
+.
+
+ In the present problem, the functions 
+\c Problem::actions_before_newton_solve() and \c
+Problem::actions_after_newton_solve() are not required, so remain
+empty. The function 
+\c ElasticBeamProblem::mesh_pt() overloads the
+(virtual) function \c Problem::mesh_pt() to return a pointer
+to the specific mesh used in this problem, which avoids explicit re-casts
+when member functions of the 
+specific mesh need to be accessed. The final function 
+\c ElasticBeamProblem::pext() returns a pointer to the external
+pressure, which is stored in a global Data object, 
+because it may be a variable in the problem.
+
+ The class also includes private data members: three used for displacement
+ control; a pointer to a GeomObject that represents the beam's
+ undeformed geometry; and a double that stores the undeformed length
+ of the beam.
+
+\dontinclude tensioned_string.cc
+\skipline start_of_problem_class
+\until end of problem class
+ 
+<HR>
+<HR>
+
+\section constructor The Problem constructor
+We start by creating the undeformed midplane of the beam a
+StraightLine (one of \c oomph-lib's standard geometric objects). 
+
+\skipline start_of_constructor   
+\until Undef_beam_pt
+
+ We then construct the a one-dimensional Lagrangian mesh in
+ two-dimensional space, using the previously-constructed geometric
+ object to set the initial positions of the nodes. 
+ \skipline Create
+ \until OneDLagrangianMesh
+
+ Next we pin the nodal positions on all boundaries
+
+\skipline Set the 
+\until }
+
+ The next task is to allocate memory for the external pressure, which
+ is stored in a global data object
+ \skipline The external
+ \until ConstPressureForBeam
+
+ We then loop over the elements, setting the physical parameters, the
+ load, the undeformed surface and the external pressure (if
+ displacement control is to be used).
+ \skipline Loop
+ \until end of loop over elements
+
+ We choose an element, and local position therein, at which the
+ displacement is to be monitored.
+ \skipline Establish
+ \until S_displ_control[0]
+
+ If we are using displacement control, the pressure is not a degree of
+ freedom, so must be unpinned and the displacement must be fixed at the
+ chosen position in our chosen element. We must also pass a pointer to
+ the variable that stores the desired displacment to the element
+ \skipline Unpin
+ \until fix_displ
+ \skip ,1) 
+ \skip endl
+ \until Midpoint_position 
+
+ If we are not using displacement control, then the pressure is not a
+ variable in the problem and must be pinned
+ \skipline Pin
+ \until Global
+ 
+ Finally, we assign the equation numbers
+ \skipline Assign
+ \until cout
+
+\section param The Parameter Study
+
+ The function ElasticBeamProblem::parameter_study() is used to run a
+ parameter study using either the external pressure or the mid-point 
+ displacement as the control parameter. During the solution of this
+ particular problem, the maximum residual can be greater than the
+ default maximum value of 10.0. The maximum permitted value of the
+ residuals is increased by changing the protected member data 
+ Problem::Max_residuals.
+
+ Next, we choose values of the increments in the control parameters,
+ set their initial values and open an output file that will contain
+ the value of the external pressure, the mid-point displacement and
+ external pressure computed from the analytic solution for each value
+ of the control parameter. We also create an output stream and string
+ that will be used to write the complete solution at each parameter
+ value.
+
+ In the loop, we increment the control parameter (either Pext, or
+ Midpoint_position), solve the problem, calculate the exact pressure,
+ save the solution and write the pressure, control position and exact
+ pressure to the trace file.
+
+ \skipline start_of_parameter
+ \until end of parameter
+  
+
+\section comments Comments and Exercises
+
+
+\subsection exercises Exercises
+
+-# Modify the code so that pressure is the control parameter. What do
+   you notice? What is the convention for calculating the normal direction?
+
+-# Modify the code so that one end of the beam is no longer fixed in
+   space. What happens? Why?
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/beam/tensioned_string/">
+demo_drivers/beam/tensioned_string/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/beam/tensioned_string/tensioned_string.cc
+">
+demo_drivers/beam/tensioned_string/tensioned_string.cc
+</A>
+</CENTER>
+.

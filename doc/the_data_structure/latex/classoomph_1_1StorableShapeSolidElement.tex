@@ -1,0 +1,117 @@
+\hypertarget{classoomph_1_1StorableShapeSolidElement}{}\doxysection{oomph\+::Storable\+Shape\+Solid\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1StorableShapeSolidElement}\index{oomph::StorableShapeSolidElement$<$ ELEMENT $>$@{oomph::StorableShapeSolidElement$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$stored\+\_\+shape\+\_\+function\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Storable\+Shape\+Solid\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.333333cm]{classoomph_1_1StorableShapeSolidElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement_a8f5bbc17bdcf01df0f9d924a67c0139d}{Storable\+Shape\+Solid\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Set defaults. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement_ae5d33f517e64c4fcee7e07a6cf4e63bb}{$\sim$\+Storable\+Shape\+Solid\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to clean up any allocated memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement_a7576ba483d40ebc5d9b93695a83c59ac}{Storable\+Shape\+Solid\+Element}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{Storable\+Shape\+Solid\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement_a14294c89e5870f845215e3f04ef40883}{operator=}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{Storable\+Shape\+Solid\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Storable\+Shape\+Solid\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Templated wrapper that attaches the ability to store the shape functions and their derivatives w.\+r.\+t. to the local and global (Eulerian) coordinates at the integration points to the \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}} specified by the template parameter. 
+
+Definition at line 564 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElement_a8f5bbc17bdcf01df0f9d924a67c0139d}\label{classoomph_1_1StorableShapeSolidElement_a8f5bbc17bdcf01df0f9d924a67c0139d}} 
+\index{oomph::StorableShapeSolidElement$<$ ELEMENT $>$@{oomph::StorableShapeSolidElement$<$ ELEMENT $>$}!StorableShapeSolidElement@{StorableShapeSolidElement}}
+\index{StorableShapeSolidElement@{StorableShapeSolidElement}!oomph::StorableShapeSolidElement$<$ ELEMENT $>$@{oomph::StorableShapeSolidElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{StorableShapeSolidElement()}{StorableShapeSolidElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{oomph\+::\+Storable\+Shape\+Solid\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{Storable\+Shape\+Solid\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Set defaults. 
+
+
+
+Definition at line 571 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), and oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::set\+\_\+integration\+\_\+scheme().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElement_ae5d33f517e64c4fcee7e07a6cf4e63bb}\label{classoomph_1_1StorableShapeSolidElement_ae5d33f517e64c4fcee7e07a6cf4e63bb}} 
+\index{oomph::StorableShapeSolidElement$<$ ELEMENT $>$@{oomph::StorableShapeSolidElement$<$ ELEMENT $>$}!````~StorableShapeSolidElement@{$\sim$StorableShapeSolidElement}}
+\index{````~StorableShapeSolidElement@{$\sim$StorableShapeSolidElement}!oomph::StorableShapeSolidElement$<$ ELEMENT $>$@{oomph::StorableShapeSolidElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$StorableShapeSolidElement()}{~StorableShapeSolidElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{oomph\+::\+Storable\+Shape\+Solid\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{Storable\+Shape\+Solid\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor to clean up any allocated memory. 
+
+
+
+Definition at line 580 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElement_a7576ba483d40ebc5d9b93695a83c59ac}\label{classoomph_1_1StorableShapeSolidElement_a7576ba483d40ebc5d9b93695a83c59ac}} 
+\index{oomph::StorableShapeSolidElement$<$ ELEMENT $>$@{oomph::StorableShapeSolidElement$<$ ELEMENT $>$}!StorableShapeSolidElement@{StorableShapeSolidElement}}
+\index{StorableShapeSolidElement@{StorableShapeSolidElement}!oomph::StorableShapeSolidElement$<$ ELEMENT $>$@{oomph::StorableShapeSolidElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{StorableShapeSolidElement()}{StorableShapeSolidElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{oomph\+::\+Storable\+Shape\+Solid\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{Storable\+Shape\+Solid\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{Storable\+Shape\+Solid\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 584 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElement_a14294c89e5870f845215e3f04ef40883}\label{classoomph_1_1StorableShapeSolidElement_a14294c89e5870f845215e3f04ef40883}} 
+\index{oomph::StorableShapeSolidElement$<$ ELEMENT $>$@{oomph::StorableShapeSolidElement$<$ ELEMENT $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::StorableShapeSolidElement$<$ ELEMENT $>$@{oomph::StorableShapeSolidElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{oomph\+::\+Storable\+Shape\+Solid\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElement}{Storable\+Shape\+Solid\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 590 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{stored__shape__function__elements_8h}{stored\+\_\+shape\+\_\+function\+\_\+elements.\+h}}\end{DoxyCompactItemize}

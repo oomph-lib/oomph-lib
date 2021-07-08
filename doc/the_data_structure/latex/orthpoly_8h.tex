@@ -1,0 +1,39 @@
+\hypertarget{orthpoly_8h}{}\doxysection{orthpoly.\+h File Reference}
+\label{orthpoly_8h}\index{orthpoly.h@{orthpoly.h}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespaceoomph_1_1Orthpoly}{oomph\+::\+Orthpoly}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_aa71411bff7bff140b78e33bebc5133c0}{oomph\+::\+Orthpoly\+::legendre}} (const unsigned \&p, const double \&x)
+\begin{DoxyCompactList}\small\item\em Calculates Legendre polynomial of degree p at x using the three term recurrence relation $ (n+1) P_{n+1} = (2n+1)xP_{n} - nP_{n-1} $ ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f2929f6ec8fde591799edaebc66380}{oomph\+::\+Orthpoly\+::legendre\+\_\+vector}} (const unsigned \&p, const double \&x, Vector$<$ double $>$ \&polys)
+\begin{DoxyCompactList}\small\item\em Calculates Legendre polynomial of degree p at x using three term recursive formula. Returns all polynomials up to order p in the vector. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a4062725a9af419d3c0a24927725e5435}{oomph\+::\+Orthpoly\+::dlegendre}} (const unsigned \&p, const double \&x)
+\begin{DoxyCompactList}\small\item\em Calculates first derivative of Legendre polynomial of degree p at x using three term recursive formula. $ nP_{n+1}^{\textnormal{\textquotesingle}} = (2n+1)xP_{n}^{\textnormal{\textquotesingle}} - (n+1)P_{n-1}^{\textnormal{\textquotesingle}} $. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a560de3e87ebd12628426d853d8b4d5b3}{oomph\+::\+Orthpoly\+::ddlegendre}} (const unsigned \&p, const double \&x)
+\begin{DoxyCompactList}\small\item\em Calculates second derivative of Legendre polynomial of degree p at x using three term recursive formula. ~\newline
+ \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ac25d63a7188b81c1462d6cb7f9a99790}{oomph\+::\+Orthpoly\+::jacobi}} (const int \&alpha, const int \&beta, const unsigned \&p, const double \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the Jacobi polnomials. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a47ba7dd85f8851622d734e14e883cb9a}{oomph\+::\+Orthpoly\+::jacobi}} (const int \&alpha, const int \&beta, const unsigned \&p, const double \&x, Vector$<$ double $>$ \&polys)
+\begin{DoxyCompactList}\small\item\em Calculate the Jacobi polnomials all in one goe. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{oomph\+::\+Orthpoly\+::gll\+\_\+nodes}} (const unsigned \&Nnode, Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculates the \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} Lobatto Legendre abscissas for degree p = N\+Node-\/1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a49a1cd8050963fdbf455f520e8a8b228}{oomph\+::\+Orthpoly\+::gll\+\_\+nodes}} (const unsigned \&Nnode, Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&w)
+\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{oomph\+::\+Orthpoly\+::gl\+\_\+nodes}} (const unsigned \&Nnode, Vector$<$ double $>$ \&x)
+\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a9b11a3992826d8daf747565d4cfcc819}{oomph\+::\+Orthpoly\+::gl\+\_\+nodes}} (const unsigned \&Nnode, Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&w)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a52ec97f3d99bf542a69568fbdddd68ec}{oomph\+::\+Orthpoly\+::eps}} = 1.\+0e-\/15
+\end{DoxyCompactItemize}

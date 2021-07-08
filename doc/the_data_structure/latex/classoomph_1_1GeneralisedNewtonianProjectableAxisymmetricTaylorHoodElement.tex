@@ -1,0 +1,237 @@
+\hypertarget{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}{}\doxysection{oomph\+::Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}\index{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+
+
+Generalised\+Newtonian\+Axisymmetric Taylor Hood upgraded to become projectable.  
+
+
+
+
+{\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.125402cm]{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a89cf2117918a1d5074e26bb386aac730}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a0fadb5b52ae5980e6826d75e6be982b3}{nfields\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a128887a8ec6ac7e2054d5343e85afde1}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field (includes current value!) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a43822b73b545d33e21a300247e1954b3}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of positional history values (includes current value!) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a00a9a3ba14ff4202b64a8cdc21344b71}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+\begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_aa95fa09d025d470d83606c41174c9498}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a81ea5945349c6295624df0615ec76b82}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a0aae7918d2345fd33db3c7970a596736}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}
+
+Generalised\+Newtonian\+Axisymmetric Taylor Hood upgraded to become projectable. 
+
+Definition at line 1902 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a89cf2117918a1d5074e26bb386aac730}\label{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a89cf2117918a1d5074e26bb386aac730}} 
+\index{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
+\index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
+{\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. ~\newline
+ 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 1914 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_aa95fa09d025d470d83606c41174c9498}\label{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_aa95fa09d025d470d83606c41174c9498}} 
+\index{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!get\_field@{get\_field}}
+\index{get\_field@{get\_field}!oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
+{\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 2015 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Finite\+Element\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a00a9a3ba14ff4202b64a8cdc21344b71}\label{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a00a9a3ba14ff4202b64a8cdc21344b71}} 
+\index{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
+\index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
+{\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return Jacobian of mapping and shape functions of field fld at local coordinate s. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 1979 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::nnode(), and s.
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a0aae7918d2345fd33db3c7970a596736}\label{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a0aae7918d2345fd33db3c7970a596736}} 
+\index{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!local\_equation@{local\_equation}}
+\index{local\_equation@{local\_equation}!oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
+{\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return local equation number of value j in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 2067 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a0fadb5b52ae5980e6826d75e6be982b3}\label{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a0fadb5b52ae5980e6826d75e6be982b3}} 
+\index{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
+\index{nfields\_for\_projection@{nfields\_for\_projection}!oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfields\_for\_projection()}{nfields\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nfields\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 1950 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a43822b73b545d33e21a300247e1954b3}\label{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a43822b73b545d33e21a300247e1954b3}} 
+\index{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
+\index{nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}!oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_coordinate\_projection()}{nhistory\_values\_for\_coordinate\_projection()}}
+{\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of positional history values (includes current value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a3ed675dc7198203c1f}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 1972 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a128887a8ec6ac7e2054d5343e85afde1}\label{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a128887a8ec6ac7e2054d5343e85afde1}} 
+\index{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
+\index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of history values to be stored for fld-\/th field. Whatever the timestepper has set up for the velocity components and none for the pressure field (includes current value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b964663281f8740f43a5}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 1958 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a81ea5945349c6295624df0615ec76b82}\label{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_a81ea5945349c6295624df0615ec76b82}} 
+\index{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
+\index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
+{\footnotesize\ttfamily template$<$class T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement}{oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element}}$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return number of values in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 2053 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nnode().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}\end{DoxyCompactItemize}

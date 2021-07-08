@@ -1,0 +1,459 @@
+\hypertarget{classoomph_1_1PoroelasticityFaceElement}{}\doxysection{oomph\+::Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1PoroelasticityFaceElement}\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$poroelasticity\+\_\+face\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.539683cm]{classoomph_1_1PoroelasticityFaceElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a1eb47446a15ae0a5762685ea34757362}{Poroelasticity\+Face\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a4396aa8d950dca2c1eba4bfb9e8d608c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Return the residuals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a14cbf11e9cf001563087f15f8f9806b7}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Fill in contribution from Jacobian. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_af8381ad4d2c26cbc397d571ff56bc85f}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a9a9f13d76e62d8d7035af1a96804170f}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_af3fd2b11f51ab4c5824e31d0658fd30b}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_ad996cd2d792e1d74d4d80950493facf8}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C\+\_\+style output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a27547d8d4f375ad212f6108bf1d818f8}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a1e82041ba48cda7bc31aa65165cf8208}{traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&traction)
+\begin{DoxyCompactList}\small\item\em Compute traction vector at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_af0ecc8b5c372d479f9ba46892a21e955}{pressure}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double \&pressure)
+\begin{DoxyCompactList}\small\item\em Compute pressure value at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a1e82041ba48cda7bc31aa65165cf8208}{traction}}) \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a50f847881ebe385a49e7e31bf2e84985}{traction\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Reference to the traction function pointer. \end{DoxyCompactList}\item 
+void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, double \&\mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_af0ecc8b5c372d479f9ba46892a21e955}{pressure}}) \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_af2e65648f0bd2ebcdef444d47bad6861}{pressure\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Reference to the pressure function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_ada36786b5d21bf6c024a8f5344bae84e}{get\+\_\+traction}} (const double \&time, const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a1e82041ba48cda7bc31aa65165cf8208}{traction}})
+\begin{DoxyCompactList}\small\item\em Get the traction vector\+: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the pressure (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for F\+SI. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_adac5f074dfe38b1aa402601507f940b4}{get\+\_\+pressure}} (const double \&time, const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, double \&\mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_af0ecc8b5c372d479f9ba46892a21e955}{pressure}})
+\begin{DoxyCompactList}\small\item\em Get the pressure value\+: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the pressure (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for F\+SI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_ac399e61815a50cd59aaee283464fcc09}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+darcy\+\_\+face}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Helper function that actually calculates the residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+E\+L\+E\+M\+E\+NT $\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_abc3e4d3ab29b19432676b25962b7994d}{Element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em pointer to the bulk element this face element is attached to \end{DoxyCompactList}\item 
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a5b6babb5cb6ced6a3928617730eafb83}{Traction\+\_\+fct\+\_\+pt}} )(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Pointer to an imposed traction function. Arguments\+: Eulerian coordinate; outer unit normal; applied traction. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases) \end{DoxyCompactList}\item 
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_afbc70ad45cf51317cee1134237daf962}{Pressure\+\_\+fct\+\_\+pt}} )(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, double \&result)
+\begin{DoxyCompactList}\small\item\em Pointer to an imposed pressure function. Arguments\+: Eulerian coordinate; outer unit normal; applied pressure. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+A class for elements that allow the imposition of an applied pressure in the Darcy equations. The geometrical information can be read from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class. 
+
+Definition at line 87 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_a1eb47446a15ae0a5762685ea34757362}\label{classoomph_1_1PoroelasticityFaceElement_a1eb47446a15ae0a5762685ea34757362}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!PoroelasticityFaceElement@{PoroelasticityFaceElement}}
+\index{PoroelasticityFaceElement@{PoroelasticityFaceElement}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PoroelasticityFaceElement()}{PoroelasticityFaceElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{Poroelasticity\+Face\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. 
+
+
+
+Definition at line 155 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Element\+\_\+pt, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Pressure\+\_\+fct\+\_\+pt, oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt, oomph\+::\+Poroelasticity\+Face\+Element\+Helper\+::\+Zero\+\_\+pressure\+\_\+fct(), and oomph\+::\+Poroelasticity\+Face\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_a14cbf11e9cf001563087f15f8f9806b7}\label{classoomph_1_1PoroelasticityFaceElement_a14cbf11e9cf001563087f15f8f9806b7}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Fill in contribution from Jacobian. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 218 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+darcy\+\_\+face(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_a4396aa8d950dca2c1eba4bfb9e8d608c}\label{classoomph_1_1PoroelasticityFaceElement_a4396aa8d950dca2c1eba4bfb9e8d608c}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the residuals. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 210 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+darcy\+\_\+face(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_ac399e61815a50cd59aaee283464fcc09}\label{classoomph_1_1PoroelasticityFaceElement_ac399e61815a50cd59aaee283464fcc09}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals\_darcy\_face@{fill\_in\_contribution\_to\_residuals\_darcy\_face}}
+\index{fill\_in\_contribution\_to\_residuals\_darcy\_face@{fill\_in\_contribution\_to\_residuals\_darcy\_face}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals\_darcy\_face()}{fill\_in\_contribution\_to\_residuals\_darcy\_face()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+darcy\+\_\+face (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function that actually calculates the residuals. 
+
+Return the residuals for the \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{Poroelasticity\+Face\+Element}} equations. 
+
+Definition at line 330 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References i, residuals(), and oomph\+::\+Quad\+Tree\+Names\+::W.
+
+
+
+Referenced by oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_adac5f074dfe38b1aa402601507f940b4}\label{classoomph_1_1PoroelasticityFaceElement_adac5f074dfe38b1aa402601507f940b4}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!get\_pressure@{get\_pressure}}
+\index{get\_pressure@{get\_pressure}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_pressure()}{get\_pressure()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+pressure (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const unsigned \&}]{intpt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{double \&}]{pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Get the pressure value\+: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the pressure (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for F\+SI. 
+
+
+
+Definition at line 133 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References n, oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pressure(), and oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Pressure\+\_\+fct\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_ada36786b5d21bf6c024a8f5344bae84e}\label{classoomph_1_1PoroelasticityFaceElement_ada36786b5d21bf6c024a8f5344bae84e}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!get\_traction@{get\_traction}}
+\index{get\_traction@{get\_traction}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const unsigned \&}]{intpt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Get the traction vector\+: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the pressure (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for F\+SI. 
+
+
+
+Definition at line 119 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References n, oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::traction(), and oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_ad996cd2d792e1d74d4d80950493facf8}\label{classoomph_1_1PoroelasticityFaceElement_ad996cd2d792e1d74d4d80950493facf8}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C\+\_\+style output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 243 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_a27547d8d4f375ad212f6108bf1d818f8}\label{classoomph_1_1PoroelasticityFaceElement_a27547d8d4f375ad212f6108bf1d818f8}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 247 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_a9a9f13d76e62d8d7035af1a96804170f}\label{classoomph_1_1PoroelasticityFaceElement_a9a9f13d76e62d8d7035af1a96804170f}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 235 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_af3fd2b11f51ab4c5824e31d0658fd30b}\label{classoomph_1_1PoroelasticityFaceElement_af3fd2b11f51ab4c5824e31d0658fd30b}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 239 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_af0ecc8b5c372d479f9ba46892a21e955}\label{classoomph_1_1PoroelasticityFaceElement_af0ecc8b5c372d479f9ba46892a21e955}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!pressure@{pressure}}
+\index{pressure@{pressure}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{pressure()}{pressure()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::pressure (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{double \&}]{pressure }\end{DoxyParamCaption})}
+
+
+
+Compute pressure value at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! 
+
+Compute pressure value at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! 
+
+Definition at line 303 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References s.
+
+
+
+Referenced by oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+pressure().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_a1e82041ba48cda7bc31aa65165cf8208}\label{classoomph_1_1PoroelasticityFaceElement_a1e82041ba48cda7bc31aa65165cf8208}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!traction@{traction}}
+\index{traction@{traction}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{traction()}{traction()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})}
+
+
+
+Compute traction vector at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! 
+
+Compute traction vector at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! 
+
+Definition at line 277 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References s.
+
+
+
+Referenced by oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_af8381ad4d2c26cbc397d571ff56bc85f}\label{classoomph_1_1PoroelasticityFaceElement_af8381ad4d2c26cbc397d571ff56bc85f}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) 
+
+Specify the value of nodal zeta from the face geometry 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f76c8487d152e68a6}{oomph\+::\+Face\+Element}}.
+
+
+
+Definition at line 230 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_abc3e4d3ab29b19432676b25962b7994d}\label{classoomph_1_1PoroelasticityFaceElement_abc3e4d3ab29b19432676b25962b7994d}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!Element\_pt@{Element\_pt}}
+\index{Element\_pt@{Element\_pt}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Element\_pt}{Element\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+E\+L\+E\+M\+E\+NT$\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+pointer to the bulk element this face element is attached to 
+
+
+
+Definition at line 93 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Poroelasticity\+Face\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_af2e65648f0bd2ebcdef444d47bad6861}\label{classoomph_1_1PoroelasticityFaceElement_af2e65648f0bd2ebcdef444d47bad6861}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!pressure\_fct\_pt@{pressure\_fct\_pt}}
+\index{pressure\_fct\_pt@{pressure\_fct\_pt}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{pressure\_fct\_pt}{pressure\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void($\ast$ \&)(const double\& time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, double \&\mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_af0ecc8b5c372d479f9ba46892a21e955}{pressure}}) \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::pressure\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reference to the pressure function pointer. 
+
+
+
+Definition at line 202 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_afbc70ad45cf51317cee1134237daf962}\label{classoomph_1_1PoroelasticityFaceElement_afbc70ad45cf51317cee1134237daf962}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!Pressure\_fct\_pt@{Pressure\_fct\_pt}}
+\index{Pressure\_fct\_pt@{Pressure\_fct\_pt}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Pressure\_fct\_pt}{Pressure\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Pressure\+\_\+fct\+\_\+pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, double \&result)\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to an imposed pressure function. Arguments\+: Eulerian coordinate; outer unit normal; applied pressure. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases) 
+
+
+
+Definition at line 108 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+pressure(), and oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Poroelasticity\+Face\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_a50f847881ebe385a49e7e31bf2e84985}\label{classoomph_1_1PoroelasticityFaceElement_a50f847881ebe385a49e7e31bf2e84985}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!traction\_fct\_pt@{traction\_fct\_pt}}
+\index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void($\ast$ \&)(const double\& time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \&\mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement_a1e82041ba48cda7bc31aa65165cf8208}{traction}}) \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reference to the traction function pointer. 
+
+
+
+Definition at line 195 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PoroelasticityFaceElement_a5b6babb5cb6ced6a3928617730eafb83}\label{classoomph_1_1PoroelasticityFaceElement_a5b6babb5cb6ced6a3928617730eafb83}} 
+\index{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
+\index{Traction\_fct\_pt@{Traction\_fct\_pt}!oomph::PoroelasticityFaceElement$<$ ELEMENT $>$@{oomph::PoroelasticityFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traction\_fct\_pt}{Traction\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Traction\+\_\+fct\+\_\+pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to an imposed traction function. Arguments\+: Eulerian coordinate; outer unit normal; applied traction. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases) 
+
+
+
+Definition at line 99 of file poroelasticity\+\_\+face\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction(), and oomph\+::\+Poroelasticity\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Poroelasticity\+Face\+Element().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{poroelasticity__face__elements_8h}{poroelasticity\+\_\+face\+\_\+elements.\+h}}\end{DoxyCompactItemize}

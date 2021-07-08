@@ -1,0 +1,111 @@
+\hypertarget{classoomph_1_1SolidFaceElement}{}\doxysection{oomph\+::Solid\+Face\+Element Class Reference}
+\label{classoomph_1_1SolidFaceElement}\index{oomph::SolidFaceElement@{oomph::SolidFaceElement}}
+
+
+{\ttfamily \#include $<$elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Solid\+Face\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.298874cm]{classoomph_1_1SolidFaceElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1SolidFaceElement_a28526b0f7a7daa2ab90348e16cf6a529}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default This final over-\/ride is required because both Solid\+Finite\+Elements and Face\+Elements overload zeta\+\_\+nodal. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1SolidFaceElement_ace3eb64ce511c869bd140922b6597667}{interpolated\+\_\+xi}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return i-\/th F\+E-\/interpolated Lagrangian coordinate xi\mbox{[}i\mbox{]} at local coordinate s. Overloaded from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}. Note that the Lagrangian coordinates are those defined in the bulk! For instance, in a 1D \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} that is aligned with the Lagrangian coordinate line xi\+\_\+0=const, only xi\+\_\+1 will vary in the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. This may confuse you if you (wrongly!) believe that in a 1D Solid\+Element there should only a single Lagrangian coordinate, namely xi\+\_\+0! \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidFaceElement_ae1c414e42a48c736a9b634e922dbb314}{interpolated\+\_\+xi}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi) const
+\begin{DoxyCompactList}\small\item\em Compute FE interpolated Lagrangian coordinate vector xi\mbox{[}\mbox{]} at local coordinate s as \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Overloaded from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}. Note that the Lagrangian coordinates are those defined in the bulk! For instance, in a 1D \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} that is aligned with the Lagrangian coordinate line xi\+\_\+0=const, only xi\+\_\+1 will vary in the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. This may confuse you if you (wrongly!) believe that in a 1D Solid\+Element there should only a single Lagrangian coordinate, namely xi\+\_\+0! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Solid\+Face\+Elements combine Face\+Elements and Solid\+Finite\+Elements and overload various functions so they work properly in the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} context 
+
+Definition at line 4743 of file elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidFaceElement_ace3eb64ce511c869bd140922b6597667}\label{classoomph_1_1SolidFaceElement_ace3eb64ce511c869bd140922b6597667}} 
+\index{oomph::SolidFaceElement@{oomph::SolidFaceElement}!interpolated\_xi@{interpolated\_xi}}
+\index{interpolated\_xi@{interpolated\_xi}!oomph::SolidFaceElement@{oomph::SolidFaceElement}}
+\doxysubsubsection{\texorpdfstring{interpolated\_xi()}{interpolated\_xi()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return i-\/th F\+E-\/interpolated Lagrangian coordinate xi\mbox{[}i\mbox{]} at local coordinate s. Overloaded from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}. Note that the Lagrangian coordinates are those defined in the bulk! For instance, in a 1D \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} that is aligned with the Lagrangian coordinate line xi\+\_\+0=const, only xi\+\_\+1 will vary in the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. This may confuse you if you (wrongly!) believe that in a 1D Solid\+Element there should only a single Lagrangian coordinate, namely xi\+\_\+0! 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a94ab4919b462d52cfdf6235bb9367d15}{oomph\+::\+Solid\+Finite\+Element}}.
+
+
+
+Definition at line 4768 of file elements.\+h.
+
+
+
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), and s.
+
+
+
+Referenced by interpolated\+\_\+xi(), oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), and oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1SolidFaceElement_ae1c414e42a48c736a9b634e922dbb314}\label{classoomph_1_1SolidFaceElement_ae1c414e42a48c736a9b634e922dbb314}} 
+\index{oomph::SolidFaceElement@{oomph::SolidFaceElement}!interpolated\_xi@{interpolated\_xi}}
+\index{interpolated\_xi@{interpolated\_xi}!oomph::SolidFaceElement@{oomph::SolidFaceElement}}
+\doxysubsubsection{\texorpdfstring{interpolated\_xi()}{interpolated\_xi()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute FE interpolated Lagrangian coordinate vector xi\mbox{[}\mbox{]} at local coordinate s as \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Overloaded from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}. Note that the Lagrangian coordinates are those defined in the bulk! For instance, in a 1D \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} that is aligned with the Lagrangian coordinate line xi\+\_\+0=const, only xi\+\_\+1 will vary in the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. This may confuse you if you (wrongly!) believe that in a 1D Solid\+Element there should only a single Lagrangian coordinate, namely xi\+\_\+0! 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_ae7a83078da76450db70b82b97f70bc2d}{oomph\+::\+Solid\+Finite\+Element}}.
+
+
+
+Definition at line 4789 of file elements.\+h.
+
+
+
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), interpolated\+\_\+xi(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), and s.
+
+\mbox{\Hypertarget{classoomph_1_1SolidFaceElement_a28526b0f7a7daa2ab90348e16cf6a529}\label{classoomph_1_1SolidFaceElement_a28526b0f7a7daa2ab90348e16cf6a529}} 
+\index{oomph::SolidFaceElement@{oomph::SolidFaceElement}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::SolidFaceElement@{oomph::SolidFaceElement}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily double oomph\+::\+Solid\+Face\+Element\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default This final over-\/ride is required because both Solid\+Finite\+Elements and Face\+Elements overload zeta\+\_\+nodal. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a4a377d7acaa7fbe444a65ed3d4a79bed}{oomph\+::\+Solid\+Finite\+Element}}.
+
+
+
+Definition at line 4754 of file elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elements_8h}{elements.\+h}}\end{DoxyCompactItemize}

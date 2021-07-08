@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: unstructured_three_d_fluid.txt_doxygenified.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">unstructured_three_d_fluid.txt_doxygenified.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="unstructured__three__d__fluid_8txt__doxygenified_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">\mainpage Demo problem: Fluid Mechanics on unstructured 3D meshes</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">This tutorial provides another demonstration of how to use</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">3D unstructured meshes for the solution of fluid flow problems.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">(The main &lt;a href=&quot;../../../meshes/mesh_from_tetgen/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">tetgen tutorial&lt;/a&gt; already contains a 3D unstructured fluid example.)</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">The specific problem considered here also serves as a &quot;warm-up problem&quot; for the</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">&lt;a href=&quot;../../../interaction/unstructured_three_d_fsi/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">corresponding fluid-structure interaction problem&lt;/a&gt; in which the</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">domain boundary is replaced by an elastic vessel.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">\section problem The problem </span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">Here is a sketch of the problem: Flow is driven through a 3D rigid vessel</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">made of three rectangular tubes that meet at a common junction. </span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">The flow is driven by a prescribed pressure</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">drop between the upstream and the two downstream ends, \f$ \Delta P^* = </span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">P^*_{in} - P^*_{out}, \f$ and we assume/impose parallel in- and outflow</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">in the inlet and outlet cross-sections, all of which are parallel to </span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">\f$ x-y \f$ coordinate plane. </span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">\image html problem_sketch.gif &quot;Sketch of the domain with boundary conditions. &quot; </span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">\image latex problem_sketch.eps &quot;Sketch of the domain with boundary conditions. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">We non-dimensionalise all lengths on the half-width, \f$ W \f$, of the</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">square main vessel and use the overall pressure drop,</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">\f$ \Delta P^* \f$ to define the (viscous) </span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">velocity scale</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">{\cal U} = \frac{\Delta P^*\  W}{\mu}.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">\f] </span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">With this choice the Reynolds number becomes</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">Re = \frac{\rho {\cal U} W }{\mu} = \frac{ \Delta P^* \rho W^2 }{\mu^2},</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">and we choose to drive the flow with  a dimensionless pressure drop of</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">\f$ \Delta P = 1. \f$ An increase in Reynolds number may </span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">therefore be interpreted as in increase in the applied </span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">(dimensional) pressure drop along the vessel.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">\section mesh 3D unstructured mesh generation</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">We use </span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">&lt;A HREF=&quot;http://www.wias-berlin.de/~si &quot;&gt;Hang Si&#39;s&lt;/A&gt;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">open-source mesh generator </span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt; to generate the </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">unstructured tetrahedral mesh &quot;offline&quot;. We then</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">process the output files produced by  </span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt;</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">to generate an unstructured \c oomph-lib mesh. </span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c Tetgen &lt;/A&gt;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">requires the specification of the domain boundaries</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">via so-called facets -- planar surface patches that are bounded</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">by closed polygonal line segments. In our simple geometry</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">each of the three tube segments has four external</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">faces. Together with the three in- and outflow sections</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">this results in a total of 15 facets.</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">The 15 facets are defined in a &lt;code&gt;*.poly&lt;/code&gt; file that</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">specifies the position of the vertices, and identifies the </span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">facets via a &quot;face list&quot; that establishes their bounding vertices. </span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">The well-annotated &lt;code&gt;*.poly&lt;/code&gt; file for this problem </span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">is located at:</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">&lt;center&gt;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">&lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.poly&quot;&gt;demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.poly&lt;/a&gt;</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">&lt;/center&gt;</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">We refer to the &lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen webpages &lt;/A&gt;</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">and \c oomph-lib&#39;s own </span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">&lt;a href=&quot;../../../meshes/mesh_from_tetgen/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">tetgen tutorial&lt;/a&gt; for further details on how to </span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">create &lt;code&gt;*.poly&lt;/code&gt; files.</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">Here is a plot of the domain specified by </span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">&lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.poly&quot;&gt;fsi_bifurcation_fluid.poly&lt;/a&gt;.</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">The plot was created using \c tetview which is distributed with</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt;.</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">\image html tetgen_boundaries.gif &quot;The domain and its bounding facets. &quot; </span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">\image latex tetgen_boundaries.eps &quot;The domain and its bounding facets. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">Note that we have deliberately assigned a different boundary ID to </span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">each facet. This will make the assignment of the boundary</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">condition somewhat tedious as the domain boundaries of interest </span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">tend to be represented by multiple, separate mesh boundaries. However, </span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">the assignment of distinct boundary IDs for the different facets </span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">is essential for the automatic generation of boundary coordinates in the</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">&lt;a href=&quot;../../../interaction/unstructured_three_d_fsi/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">corresponding fluid-structure interaction problem &lt;/a&gt; and is</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">therefore &lt;b&gt;strongly recommended&lt;/b&gt;.</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c Tetgen &lt;/A&gt; generates</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">an unstructured volumetric mesh from the information contained</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">in the &lt;code&gt;*.poly&lt;/code&gt; file and outputs the mesh&#39;s nodes, </span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">elements and faces in the files</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">- &lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.node&quot;&gt;demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.node&lt;/a&gt;</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">- &lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.ele&quot;&gt;demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.ele&lt;/a&gt;</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">- &lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.face&quot;&gt;demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.face&lt;/a&gt;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">These files can be used as input to \c oomph-lib&#39;s \c TetgenMesh</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">class, using the procedure discussed in </span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">&lt;a href=&quot;../../../meshes/mesh_from_tetgen/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">another tutorial.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">   </span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">  The figure below shows a \c tetview plot of the mesh, created with a volume</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">constraint of 0.2 (i.e. the maximum volume of each tetrahedron is</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">guaranteed to be less than 0.2 units), using the command</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">\code</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">tetgen -a0.2 fsi_bifurcation_fluid.poly </span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">\endcode</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">\image html mesh_boundaries.gif &quot;Plot of the mesh, generated by tetgen. &quot; </span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">\image latex mesh_boundaries.eps &quot;Plot of the mesh, generated by tetgen. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">Note how &lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt;</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">has subdivided each of the 15 original facets specified in the </span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">&lt;code&gt;*.poly&lt;/code&gt; file into a surface triangulation. The </span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">nodes and tetrahedral elements that are located on (or adjacent to) the</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">15 original facets inherit their boundary IDs. This is important</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">when we assign the boundary conditions for the actual computation.</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">\section results Results</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">The plot shown below illustrates the flow field (streamribbons </span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">coloured by pressure contours) for a Reynolds number of \f$ Re = 100. \f$</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">The transparent faces show the boundaries of the fluid elements and</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">illustrate that the mesh is very coarse. As a result, the flow is </span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">clearly under-resolved, particularly near the two outflow </span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">cross-sections where the imposition of parallel outflow forces</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">the fluid velocity to re-adjust rapidly as it approaches the outlet.</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">(See \ref finer_mesh in \ref comm_ex for a more detailed discussion of this aspect.)</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">\image html flow_with_stream_ribbons.gif &quot;Flowfield (streamribbons, coloured by the pressure contours) and element boundaries. &quot; </span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">\image latex flow_with_stream_ribbons.eps &quot;Flowfield (streamribbons, coloured by the pressure contours) and element boundaries. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">\section namespace Problem parameters</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">As usual we define the various problem parameters in a </span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">global namespace. We define the Reynolds number and </span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">specify the tractions to be applied at the in- and outflow </span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">cross-sections:</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">\dontinclude unstructured_three_d_fluid.cc</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">\skipline start_namespace</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">\until end namespace</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">\section main The driver code</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">We specify an output directory, create the \c Problem object </span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">using ten-node tetrahedral Taylor-Hood elements, and output the</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">initial guess for the flow field:</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">\skipline start_main</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">\until doc_info.number()++;</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">Next we perform a parameter study in which we increase the Reynolds</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">number of the flow -- corresponding to an increase in the</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">applied pressure drop. (As usual we perform a smaller number</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">of steps in a validation run -- performed when the code is run</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">with nonzero number of command-line arguments.) </span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">\until end_of_main</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">\section class The Problem class</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">The \c Problem class has the usual member functions and provides</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">explicit storage for the fluid mesh and the meshes containing</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">the \c FaceElements that apply the traction conditions at the</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">in- and outflow boundaries. We also provide storage for the</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">IDs of the mesh boundaries that constitute the in- and outflow</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">boundaries to facilitate the application of the boundary conditions.</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">\dontinclude unstructured_three_d_fluid.cc</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">\skipline start_problem_class</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">\until };</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">\section constructor The Problem constructor</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">We start by building the fluid mesh, using the files created</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">by &lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt;:</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">\skipline start_constructor</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">\until split_corner_elements);</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">(We refer to the subsection \ref split in the </span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">section \ref comm_ex for a discussion of the \c split_corner_elements flag). </span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">Next, we set up the boundary lookup schemes that determine which elements</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">are located next to which domain boundaries, and specify the </span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">IDs of the mesh boundaries that coincide with the in- and outflow</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">cross-sections. Note that this information reflects the</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">specification of the boundary IDs in the \c tetgen &lt;code&gt;*.poly&lt;/code&gt;</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">file. </span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">\until Outflow_boundary_id[1]=2;</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">Next we apply the boundary conditions. We impose parallel in- and</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">outflow by pinning the transverse velocities at all nodes</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">that are located on the in- and outflow boundaries, identifying the</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">nodes via the boundary IDs just set up. We use the boolean map \c done</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">to indicate which boundaries we have visited already.</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">\until done in and outflow</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">The nodes on all other boundaries (i.e. the ones for which \c done[b] is</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">still \c false) are subjected to no-slip conditions by pinning</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">all three velocity components. (This approach facilitates</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">the &quot;extension&quot; of the mesh discussed in section \ref finer_mesh, but</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">we note that, in general, keeping track of the boundary IDs associated</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">with each physical boundary must be done &quot;by hand&quot;. )</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">\until done no slip elsewhere</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">We complete the build of the Navier-Stokes elements by specifying</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">the pointer to the Reynolds number,</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">and attach the \c FaceElements that apply the imposed in- and outflow</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">tractions to the appropriate faces of the elements on the in- and</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">outflow boundaries:</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">\until create_fluid_traction_elements();</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">Finally, we combine the various sub-meshes to a combined global mesh</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">and assign the equation numbers.</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">\until end constructor</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">\section traction Creating the fluid traction elements</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">The helper function \c create_fluid_traction_elements() </span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">loops over the bulk elements that are adjacent to the in- and outflow</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">cross-sections and attaches \c NavierStokesTractionElements</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">to the relevant faces. We store pointers to the newly-created</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">elements in the appropriate meshes, and pass pointers to the functions</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">that specify the imposed traction to the elements.</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">\skipline start_of_fluid_traction_elements</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">\until end of create</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">\section doc Post-processing</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">The post-processing routine outputs the flow field.</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">\section comm_ex Comments and Exercises</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">\subsection split Splitting corner elements in unstructured meshes to avoid locking</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">Meshes generated by &lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">&lt;/A&gt; tend to be of very high quality and can usually be used</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">without further modification. However, in Navier-Stokes computations</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">(or other problems in which the elements have to satisfy an LBB-type </span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">stability constraint) problems can arise if too many of an </span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">element&#39;s nodes are constrained by boundary conditions, causing</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">the discretisation to &quot;lock&quot;. This tends to </span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">happen when three of the element&#39;s four faces are located on</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">domain boundaries, as in the case of the top-left and bottom-left</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">elements in the inflow cross-section shown below.</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">\image html mesh_without_split.gif &quot;Plot of the mesh generated by tetgen. &quot; </span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">\image latex mesh_without_split.eps &quot;Plot of the mesh generated by tetgen. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">Ten-noded tetrahedral elements have nodes at their vertices</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">and on their edges only. Therefore all the nodes in these particular</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">two elements are located on</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">domain boundaries. Furthermore, only one of these (the node </span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">halfway along the edge that traverses the inflow cross-section) is</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">unconstrained; the imposition of parallel flow at</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">the inflow face only  constrains the node&#39;s transverse</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">velocities. Thus, both elements </span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">have a single velocity degree of freedom (the axial </span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">velocity at the node on the inflow face) but they retain their four pressure </span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">degrees of freedom (the pressures at their vertices). This does not</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">\e necessarily over-constrain the problem (and in the present problem</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">it does not) -- &quot;locking&quot;, due to the presence of too many</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">pressure degrees of freedom, arises at the level of the global, fully-assembled</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">problem, not on an element-by-element basis. However, the presence</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">of such elements makes the occurrence of locking more likely and we</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">have occasionally come across examples in which locking does occur. </span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">The remedy would be to pin exactly the required number of</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">superfluous pressure degrees of freedom (no more and no fewer!) </span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">to &quot;unlock&quot; the problem. However, the diagnosis of the problem </span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">is as difficult as its practical resolution: How do we determine </span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">in advance if a problem will lock and, if so, which pressures </span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">should be pinned, etc.?</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">To avoid the problem altogether, \c oomph-lib&#39;s \c TetgenMesh </span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">constructor provides</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">an optional boolean flag, \c split_corner_elements. If this flag is </span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">set to \c true, the mesh constructor identifies all elements in which at least </span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">three faces are located on mesh boundaries. These elements are then</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">split into four smaller ones, using a localised refinement as </span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">shown in this plot:</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">\image html mesh_with_split.gif &quot;Plot of the mesh after splitting corner elements. &quot; </span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">\image latex mesh_with_split.eps &quot;Plot of the mesh after splitting corner elements. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">Note that the localised refinement leads to a small deterioration </span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">in the element quality but this is usually acceptable. If you are concerned </span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">about this aspect, allow the splitting of corner elements only if </span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">locking actually occurs (see below), or try to generate a different </span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">\c tetgen mesh that does not suffer from this problem, e.g. by imposing a </span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">different volume constraint. </span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">&lt;center&gt;</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment">&lt;b&gt;How to spot &quot;locking&quot;:&lt;/b&gt;</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">&lt;/center&gt;</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">- If a solution can be computed (using a direct solver) the occurrence of</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment">  &quot;locking&quot; is easy to spot: Typically the pressure in over-constrained </span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">  elements becomes extremely large while the rest of the flow field</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">  looks fairly normal. Iterative solvers may fail to converge. If you</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">  suspect that locking may have occurred, try re-computing the</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">  solution on a mesh with the \c split_corner_elements flag set to </span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment">  \c true.</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment">\subsection finer_mesh Creating a finer mesh and applying more appropriate outflow boundary conditions</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">The flow field shown in the \ref results section is clearly </span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">under-resolved and a much</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">finer mesh would have to be used to fully resolve all flow features.</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">The problem is particularly bad because we have imposed parallel outflow</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">(i.e. flow in the \f$ z \f$-direction) at the ends of tubes whose axes are not</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">aligned with the \f$ z \f$-axis. This creates thin</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">outflow boundary layers within which the flow</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">is forced to change direction as it exits the tubes. These</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">observations motivate the following exercises that </span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">allow you to explore unstructured mesh generation.</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">- &lt;b&gt;Exercise 1: Refining the mesh&lt;/b&gt; \n\n</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">  Create a finer mesh by specifying a smaller volume constraint for</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">  tetgen. For instance, using </span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">  \n \n</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">  tetgen -a0.02 fsi_bifurcation_fluid.poly</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">  \n</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">  will generate a much finer mesh, containing 3345 tets. Note that the</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">  driver code can remain completely unchanged.</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">- &lt;b&gt;Exercise 2: Add straight outflow vessels&lt;/b&gt; \n\n</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">  The imposition of parallel flow at the outlet boundaries would be</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">  less problematic if at least the final part of the two outflow tubes was</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">  aligned with the \f$ z \f$-axis. Modify the file </span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">  &lt;code&gt;&lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.poly&quot;&gt;fsi_bifurcation_fluid.poly&lt;/a&gt;</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">  &lt;/code&gt; so that two straight vessel </span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">  segments, parallel to the \f$ z \f$-axis, are added to the</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">  mesh. The modification to the &lt;code&gt;*.poly&lt;/code&gt; file should be </span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">  straightforward. You have to add eight additional vertices and faces,</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">  and re-define the two outflow faces. </span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">  Here is a sample plot of a modified mesh in which two additional </span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">  straight segments of different lengths have been attached to the</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">  downstream tubes. Note that the enumeration of the in- </span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">  and outflow boundaries was retained, allowing the mesh to be used with </span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">  the same driver code.</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">\image html mesh_boundaries_extended.gif &quot;Plot of the mesh, with two straight segments added to the outflow branches. &quot; </span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">\image latex mesh_boundaries_extended.eps &quot;Plot of the mesh, with two straight segments added to the outflow branches. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">  \n</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">  The modified mesh was created with the file</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">  &lt;code&gt;&lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid_with_extended_tubes.poly&quot;&gt;fsi_bifurcation_fluid_with_extended_tubes.poly&lt;/a&gt;</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">  &lt;/code&gt; which you may wish to consult. However, we do encourage you </span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">  to do this exercise by yourself first, in order to familiarise </span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">  yourself with \c tetgen -- you will notice that \c tetgen is not very </span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">  forgiving (or verbose) when it encounters errors in the &lt;code&gt;*.poly&lt;/code&gt;</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">  file.</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">- &lt;b&gt;Exercise 3: Use Lagrange multipliers to allow parallel outflow in</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">  cross-sections that are not aligned with the coordinate axes.&lt;/b&gt;</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">  The main (only?) reason why we tend to impose parallel in- or outflow</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">  in cross-sections that are aligned with the Cartesian coordinate</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">  planes is, of course, that such boundary conditions are easiest to apply in a </span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">  discretisation that is based on the Cartesian form of the</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">  Navier-Stokes equations.  What if we wished to impose parallel</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">  outflow from cross-sections that are not aligned with such planes?</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">  The proper way to do this is to use Lagrange multipliers </span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">  to enforce the two constraints</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">  \f[</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">  {\bf u} \cdot {\bf t}_\alpha = 0 \mbox{\ \ \ \ for $\alpha = 1,2$,}</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">  \f] </span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">  where \f$ {\bf t}_\alpha \f$ (for \f$\alpha = 1,2\f$) are the</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">  two tangent vectors spanning the in- or outflow cross-sections. </span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">  The imposition of these constraints requires two Lagrange multiplier </span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">  fields, defined in the in-/outflow cross-sections. Physically, these </span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">  Lagrange multipliers act as tangential tractions that enforce the </span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">  parallel in- or outflow.</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">  The Lagrange multipliers introduce additional degrees of freedom</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">  into the problem and an implementation can be based </span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">  on an extension of the existing \c NavierStokesTractionElements,</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">  using a technique similar to that used to enforce prescribed</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">  boundary displacements in solid mechanics problems, discussed</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment">  in   &lt;a href=&quot;../../../solid/prescribed_displ_lagr_mult/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment">  another tutorial.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment">  Note that, compared to the previous two exercises, this one is not entirely </span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">  trivial. An implementation is provided in \c</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment">  ImposeParallelOutflowElement, but, as always, it is more instructive to</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">  try to write it yourself!</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="comment">\section sources Source files for this tutorial</span></div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="comment">- The source files for this tutorial are located in the directory:\n\n</span></div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/&quot;&gt;</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="comment">demo_drivers/navier_stokes/unstructured_three_d_fluid/</span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">&lt;/CENTER&gt;\n</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">- The driver code is: \n\n</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/unstructured_three_d_fluid.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment">demo_drivers/navier_stokes/unstructured_three_d_fluid/unstructured_three_d_fluid.cc</span></div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a022515602927e3a581de3110406f43d9"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a022515602927e3a581de3110406f43d9">the</a></div><div class="ttdeci">mainpage Demo f Delta P f and we assume impose parallel in and outflow in the inlet and outlet cross all of which are parallel to f x y f coordinate plane I w textwidth problem_sketch Sketch of the domain with boundary conditions We non dimensionalise all lengths on the half f W of the square main vessel and use the overall pressure f Delta P *f to define the(viscous) velocity scale \f[</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00030">unstructured_three_d_fluid.txt:30</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a4b2679e25d5aef3b51eddc064fa0f2ae"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a4b2679e25d5aef3b51eddc064fa0f2ae">href</a></div><div class="ttdeci">&quot;../../../meshes/mesh_from_tetgen/html/index.html&quot;&gt; another tutorial.&lt;/a &gt; The figure below shows a \c tetview plot of the mesh, created with a volume constraint of 0.2(i.e. the maximum volume of each tetrahedron is guaranteed to be less than 0.2 units), using the command \code tetgen -a0.2 fsi_bifurcation_fluid.poly \endcode @I w 0.75\textwidth mesh_boundaries &quot;Plot of the mesh, generated by tetgen. &quot; Note how&lt; A HREF=&quot;http: has subdivided each of the 15 original facets specified in the &lt;code&gt;*.poly&lt;/code&gt; file into a surface triangulation. The nodes and tetrahedral elements that are located on (or adjacent to) the 15 original facets inherit their boundary IDs. This is important when we assign the boundary conditions for the actual computation. &lt;HR&gt; &lt;HR&gt; \section results Results The plot shown below illustrates the flow field (streamribbons coloured by pressure contours) for a Reynolds number of \f$ Re = 100. \f$ The transparent faces show the boundaries of the fluid elements and illustrate that the mesh is very coarse. As a result, the flow is clearly under-resolved, particularly near the two outflow cross-sections where the imposition of parallel outflow forces the fluid velocity to re-adjust rapidly as it approaches the outlet. (See \ref finer_mesh in \ref comm_ex for a more detailed discussion of this aspect.) @I w 0.75\textwidth flow_with_stream_ribbons &quot;Flowfield(streamribbons, coloured by the pressure contours) and element boundaries. &quot; &lt;HR&gt; &lt;HR&gt; \section namespace Problem parameters As usual we define the various problem parameters in a global namespace. We define the Reynolds number and specify the tractions to be applied at the in- and outflow cross-sections: \dontinclude unstructured_three_d_fluid.cc \skipline start_namespace \until end namespace &lt;HR&gt; &lt;HR&gt; \section main The driver code We specify an output directory, create the \c Problem object using ten-node tetrahedral Taylor-Hood elements, and output the initial guess for the flow field: \skipline start_main \until doc_info.number()++ href</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00174">unstructured_three_d_fluid.txt:174</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="unstructured__three__d__fluid_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Demonstrate how to solve an unstructured 3D fluids problem.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8cc_source.html#l00411">unstructured_three_d_fluid.cc:411</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a6be34ec04ef0e0030c67c91ff48137ce"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a6be34ec04ef0e0030c67c91ff48137ce">number</a></div><div class="ttdeci">Next we apply the boundary conditions We impose parallel in and outflow by pinning the transverse velocities at all nodes that are located on the in and outflow identifying the nodes via the boundary IDs just set up We use the boolean map c done to indicate which boundaries we have visited already until done in and outflow The nodes on all other but we note in keeping track of the boundary IDs associated with each physical boundary must be done by hand until done no slip elsewhere We complete the build of the Navier Stokes elements by specifying the pointer to the Reynolds number</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00246">unstructured_three_d_fluid.txt:246</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a61ecc917bd1e6c8a29f3d9c92b6a2e45"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a61ecc917bd1e6c8a29f3d9c92b6a2e45">sections</a></div><div class="ttdeci">mainpage Demo f Delta P f and we assume impose parallel in and outflow in the inlet and outlet cross sections</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00021">unstructured_three_d_fluid.txt:21</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00021">unstructured_three_d_fluid.txt:21</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a1da1df44cd9ee3c0b9ece0772585538c"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a1da1df44cd9ee3c0b9ece0772585538c">drop</a></div><div class="ttdeci">mainpage Demo f Delta P f and we assume impose parallel in and outflow in the inlet and outlet cross all of which are parallel to f x y f coordinate plane I w textwidth problem_sketch Sketch of the domain with boundary conditions We non dimensionalise all lengths on the half f W of the square main vessel and use the overall pressure drop</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00029">unstructured_three_d_fluid.txt:29</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_af94184f82c66ea987f1b6ca6a7f3e28b"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#af94184f82c66ea987f1b6ca6a7f3e28b">that</a></div><div class="ttdeci">Next we apply the boundary conditions We impose parallel in and outflow by pinning the transverse velocities at all nodes that are located on the in and outflow identifying the nodes via the boundary IDs just set up We use the boolean map c done to indicate which boundaries we have visited already until done in and outflow The nodes on all other but we note that</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00240">unstructured_three_d_fluid.txt:240</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_adfacbdf7a35a79f44e427954530a9493"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#adfacbdf7a35a79f44e427954530a9493">f</a></div><div class="ttdeci">mainpage Demo f Delta P f and we assume impose parallel in and outflow in the inlet and outlet cross all of which are parallel to f x y f coordinate plane I w textwidth problem_sketch Sketch of the domain with boundary conditions We non dimensionalise all lengths on the half f W f</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00028">unstructured_three_d_fluid.txt:28</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_ad929b1cb755dfec91450fd4b3154900e"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#ad929b1cb755dfec91450fd4b3154900e">Finally</a></div><div class="ttdeci">Finally</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00256">unstructured_three_d_fluid.txt:256</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a63571c1ed951be59b93257632ae7dd4b"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a63571c1ed951be59b93257632ae7dd4b">nodes</a></div><div class="ttdeci">f and we choose to drive the flow with a dimensionless pressure drop of f Delta and identifies the facets via a face list that establishes their bounding vertices The well annotated&lt; code &gt; *poly&lt;/code &gt; file for this problem is located separate mesh boundaries the assignment of distinct boundary IDs for the different facets is essential for the automatic generation of boundary coordinates in the&lt; a href=&quot;../../../interaction/unstructured_three_d_fsi/html/index.html&quot;&gt; corresponding fluid structure interaction problem&lt;/a &gt; and is therefore&lt; b &gt; strongly recommended&lt;/b &gt;&lt; A HREF=&quot;http: an unstructured volumetric mesh from the information contained in the &lt;code&gt; * poly&lt;/code&gt; file and outputs the mesh s nodes</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00105">unstructured_three_d_fluid.txt:105</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a512c4eea4ef1e42b8ae6eb89e3eb34d0"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a512c4eea4ef1e42b8ae6eb89e3eb34d0">mesh</a></div><div class="ttdeci">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We start by building the fluid mesh</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00209">unstructured_three_d_fluid.txt:209</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a2980d68f5ebdbf11b02b01d79b1d6e99"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a2980d68f5ebdbf11b02b01d79b1d6e99">HREF</a></div><div class="ttdeci">&quot;http: \skipline start_constructor \until split_corner_elements) HREF</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00213">unstructured_three_d_fluid.txt:213</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a6a1acc30347d87cb10a1490ea44ce046"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a6a1acc30347d87cb10a1490ea44ce046">Outflow_boundary_id</a></div><div class="ttdeci">We refer to the subsection ref split in the section ref comm_ex for a discussion of the c split_corner_elements flag we set up the boundary lookup schemes that determine which elements are located next to which domain and specify the IDs of the mesh boundaries that coincide with the in and outflow cross sections Note that this information reflects the specification of the boundary IDs in the c tetgen&lt; code &gt; *poly&lt;/code &gt; file until Outflow_boundary_id[1]</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00226">unstructured_three_d_fluid.txt:226</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_ab881409e35a4efe1ace634dc45a287da"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#ab881409e35a4efe1ace634dc45a287da">width</a></div><div class="ttdeci">mainpage Demo f Delta P f and we assume impose parallel in and outflow in the inlet and outlet cross all of which are parallel to f x y f coordinate plane I w textwidth problem_sketch Sketch of the domain with boundary conditions We non dimensionalise all lengths on the half width</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00028">unstructured_three_d_fluid.txt:28</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a2ff302c10f08896901a454f2cd0c6257"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a2ff302c10f08896901a454f2cd0c6257">create_fluid_traction_elements</a></div><div class="ttdeci">we combine the various sub meshes to a combined global mesh and assign the equation numbers until end constructor&lt; HR &gt;&lt; HR &gt; section traction Creating the fluid traction elements The helper function c create_fluid_traction_elements() loops over the bulk elements that are adjacent to the in- and outflow cross-sections and attaches \c NavierStokesTractionElements to the relevant faces. We store pointers to the new ly-created elements in the appropriate meshes</div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_acd2c81d5241664315e5e07fe85c20c2b"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#acd2c81d5241664315e5e07fe85c20c2b">P</a></div><div class="ttdeci">f and we choose to drive the flow with a dimensionless pressure drop of f Delta P</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00040">unstructured_three_d_fluid.txt:40</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a85a50a69180dbae5d4b008b7a1a68a66"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a85a50a69180dbae5d4b008b7a1a68a66">at</a></div><div class="ttdeci">f and we choose to drive the flow with a dimensionless pressure drop of f Delta and identifies the facets via a face list that establishes their bounding vertices The well annotated&lt; code &gt; *poly&lt;/code &gt; file for this problem is located at</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00095">unstructured_three_d_fluid.txt:95</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_acae3b2208960cd6a406eac88108ec068"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#acae3b2208960cd6a406eac88108ec068">boundaries</a></div><div class="ttdeci">We refer to the subsection ref split in the section ref comm_ex for a discussion of the c split_corner_elements flag we set up the boundary lookup schemes that determine which elements are located next to which domain boundaries</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00220">unstructured_three_d_fluid.txt:220</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a9d72e94a9305c6a310940a6a427ebe06"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Global_Parameters::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Default Reynolds number.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8cc_source.html#l00055">unstructured_three_d_fluid.cc:55</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_a63c2c56ef21b915c6b9b642640de1c36"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#a63c2c56ef21b915c6b9b642640de1c36">However</a></div><div class="ttdeci">f and we choose to drive the flow with a dimensionless pressure drop of f Delta and identifies the facets via a face list that establishes their bounding vertices The well annotated&lt; code &gt; *poly&lt;/code &gt; file for this problem is located separate mesh boundaries However</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00095">unstructured_three_d_fluid.txt:95</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_ac7a1fff0bebcba814d5df6bcbaf56237"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#ac7a1fff0bebcba814d5df6bcbaf56237">class</a></div><div class="ttdeci">f and we choose to drive the flow with a dimensionless pressure drop of f Delta and identifies the facets via a face list that establishes their bounding vertices The well annotated&lt; code &gt; *poly&lt;/code &gt; file for this problem is located separate mesh boundaries the assignment of distinct boundary IDs for the different facets is essential for the automatic generation of boundary coordinates in the&lt; a href=&quot;../../../interaction/unstructured_three_d_fsi/html/index.html&quot;&gt; corresponding fluid structure interaction problem&lt;/a &gt; and is therefore&lt; b &gt; strongly recommended&lt;/b &gt;&lt; A HREF=&quot;http: an unstructured volumetric mesh from the information contained in the &lt;code&gt; * poly&lt;/code&gt; file and outputs the mesh s elements and faces in the files&lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.node&quot;&gt; demo_drivers navier_stokes unstructured_three_d_fluid fsi_bifurcation_fluid node&lt;/a&gt;&lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.ele&quot;&gt; demo_drivers navier_stokes unstructured_three_d_fluid fsi_bifurcation_fluid ele&lt;/a&gt;&lt;a href=&quot;../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.face&quot;&gt; demo_drivers navier_stokes unstructured_three_d_fluid fsi_bifurcation_fluid face&lt;/a&gt; These files can be used as input to c oomph lib s c TetgenMesh class</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00112">unstructured_three_d_fluid.txt:112</a></div></div>
+<div class="ttc" id="aunstructured__three__d__fluid_8txt_html_abd14ded5092097a7b59c43ec525016ad"><div class="ttname"><a href="unstructured__three__d__fluid_8txt.html#abd14ded5092097a7b59c43ec525016ad">Next</a></div><div class="ttdeci">We refer to the subsection ref split in the section ref comm_ex for a discussion of the c split_corner_elements flag Next</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__fluid_8txt_source.html#l00219">unstructured_three_d_fluid.txt:219</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:11:39
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

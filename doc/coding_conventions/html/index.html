@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Coding conventions and C++-style</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Coding conventions and C++-style </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This document provides an overview of the general coding conventions that are used throughout <code>oomph-lib</code>. Knowledge of these conventions will greatly facilitate the use of the library. Contributors to the library are expected to adhere to these standards.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="naming"></a>
+Naming conventions</h1>
+<h2><a class="anchor" id="filenames"></a>
+File names</h2>
+<p>All C++ source files end with the standard extensions *.h and *.cc.</p>
+<ul>
+<li><code>*</code>.h: Contains the class definitions and any inline functions.</li>
+<li><code>*</code>.cc: Contains all non-inline member functions that can be compiled once and for all. This includes<ul>
+<li>member functions of classes that do not have any template parameters</li>
+<li>member functions of templated classes for which it is known a priori which instantiations are required. Examples are classes that are templated by the spatial dimension. In this case we're unlikely to require instantiations for any values other than 0,1,2 and 3.</li>
+</ul>
+</li>
+<li><code>*</code>.template.cc: Contains any non-inline member function of templated classes. This file must be included (together with the corresponding <code>*</code>.h file) when a specific instantiation of a templated class is required. For instance, most specific <code>Mesh</code> classes are templated by the element type and the mesh writer can obviously not predict which element types his/her specific mesh is going to be used with.</li>
+</ul>
+<h2><a class="anchor" id="variables"></a>
+General variables</h2>
+<ul>
+<li>General variables are all lowercase</li>
+<li>Variables that contain multiple words contain underscores to separate them, e.g. <div class="fragment"><div class="line">FiniteElement* <a class="code" href="coding__conventions_8txt.html#abdf54a843c828adc77dc76b43eed4a00">surface_element_pt</a>; </div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="classes"></a>
+Classes</h2>
+<ul>
+<li>Classes start with capital letter, e.g. <div class="fragment"><div class="line"><span class="keyword">class </span>Shape </div>
+</div><!-- fragment --></li>
+<li>If the class name contains multiple words, the first letter of any subsequent word also gets capitalised, e.g. <div class="fragment"><div class="line"><span class="keyword">class </span>AlgebraicElement </div>
+</div><!-- fragment --> <b>Note:</b> No underscores in class names.</li>
+</ul>
+<h2><a class="anchor" id="private_public"></a>
+Private data and access functions to  private data</h2>
+<p>Use a capital first letter for private data, and the all-lowercase equivalent for the access functions. Examples:</p><ul>
+<li>This is a declaration for a private data member: <div class="fragment"><div class="line"><span class="keyword">private</span>: </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Pointer to boundary node</span></div>
+<div class="line"><span class="comment"></span>  Node* Boundary_node_pt; </div>
+</div><!-- fragment --></li>
+<li>Here are two public access functions to the private data member: <div class="fragment"><div class="line"><span class="keyword">public</span>: </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access to boundary node (const version)</span></div>
+<div class="line"><span class="comment"></span> Node* <a class="code" href="coding__conventions_8txt.html#ae2354be5cf2b6fd97ded218f0282e485">boundary_node_pt</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> Boundary_node_pt;}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access to boundary node</span></div>
+<div class="line"><span class="comment"></span> Node*&amp; <a class="code" href="coding__conventions_8txt.html#ae2354be5cf2b6fd97ded218f0282e485">boundary_node_pt</a>() {<span class="keywordflow">return</span> Boundary_node_pt;}</div>
+</div><!-- fragment --></li>
+</ul>
+<p><b>Note:</b> Do <b>not</b> use public data &ndash; ever! Make it private and and provide an access function &ndash; even if it seems "perfectly
+ obvious" at the time of writing the class that the internal storage for the data item is "never going to be changed".</p>
+<h2><a class="anchor" id="pointers"></a>
+Pointers</h2>
+<ul>
+<li>Pointers and access functions to pointers are identified explicitly by the postfix <em>_pt</em> to the variable names, as shown in the previous examples.</li>
+</ul>
+<h2><a class="anchor" id="numbering"></a>
+Access functions to containers</h2>
+<p>Many classes have member functions that provide access to data in private containers (e.g. vectors); they are usually accompanied by a member function that returns the number of entries in that container. Naming conventions:</p><ul>
+<li>Use singular for the access function to the container, i.e. <div class="fragment"><div class="line"><span class="comment">/// Return pointer to e-th element</span></div>
+<div class="line"><span class="comment"></span>FiniteElement* <a class="code" href="coding__conventions_8txt.html#ae11c23d019f158839e6002c47913bb4a">element_pt</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; e);</div>
+</div><!-- fragment --> rather than <code><a class="el" href="coding__conventions_8txt.html#ab59e60957ba7a4692ded05fe49a956d6">elements_pt(...)</a></code> </li>
+<li>Use a prefix &lsquo;<code>n&rsquo;</code> for the access function for the number of entries in the container, i.e. <div class="fragment"><div class="line"><span class="comment">/// Total number of elements </span></div>
+<div class="line"><span class="comment"></span><span class="keywordtype">unsigned</span> <a class="code" href="coding__conventions_8txt.html#a7b8627ed669d599b2fcbf99832ef334f">nelement</a>();</div>
+</div><!-- fragment --> <b>Notes:</b> (i) No underscore between the "n" and the container's name. (ii) No trailing <code>_pt</code> in the function that returns the number of objects in the container.</li>
+</ul>
+<h2><a class="anchor" id="template"></a>
+Template parameters</h2>
+<ul>
+<li>Template parameters are all caps, e.g. <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classNavierStokesEquations.html">NavierStokesEquations</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">public</span>:</div>
+<div class="line">  [...]</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="verbose"></a>
+Use descriptive function/variable names</h2>
+<ul>
+<li>Make sure you choose descriptive names for functions and variables, even if the names become long.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="layout"></a>
+Layout etc.</h1>
+<h2><a class="anchor" id="include_files"></a>
+Position of include statements</h2>
+<ul>
+<li>Place include statements at the beginning of each file.</li>
+</ul>
+<h2><a class="anchor" id="layout_blocks"></a>
+Layout of blocks</h2>
+<ul>
+<li>Braces on separate lines (unless the content is extremely short) <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;10;i++)</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   [...]</div>
+<div class="line"> </div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;doing something&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   [...]</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="indentation"></a>
+Indentation</h2>
+<ul>
+<li>Indentation of blocks etc. should follow the emacs standards.</li>
+</ul>
+<h2><a class="anchor" id="layout_functions_etc"></a>
+Layout of functions, classes, etc.</h2>
+<ul>
+<li>Precede all functions by a comment block, enclosed between lines of &lsquo;===&rsquo; <div class="fragment"><div class="line"><span class="comment">// =============================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// \short (add \short to make sure that multi-line descriptions</span></div>
+<div class="line"><span class="comment">/// appear in doxygen&#39;s short documentation. Include lists with items</span></div>
+<div class="line"><span class="comment">/// - first item</span></div>
+<div class="line"><span class="comment">/// - second item</span></div>
+<div class="line"><span class="comment">///   - first item of sublist</span></div>
+<div class="line"><span class="comment">///   - second item of sublist</span></div>
+<div class="line"><span class="comment">///   . //end of sublist</span></div>
+<div class="line"><span class="comment">/// . //end of main list</span></div>
+<div class="line"><span class="comment"></span><span class="comment">// =============================================================</span></div>
+<div class="line"><span class="keywordtype">void</span> SomeClass::some_function()</div>
+<div class="line">{</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;10;i++)</div>
+<div class="line">  {</div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;doing something&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> }</div>
+</div><!-- fragment --> Note the triple slash "///" in the comment block that preceeds the function definition &ndash; comments contained in such lines are automatically extracted by doxygen and inserted into the code documentation.</li>
+</ul>
+<h2><a class="anchor" id="oomph"></a>
+The oomph-lib namespace</h2>
+<ul>
+<li><code>oomph-lib</code> is contained in its own namespace, <code>oomph</code>, to avoid clashes of class names with those of other (third-party) libraries. If there is no danger of name clashes, the entire <code>oomph</code> namespace may be imported at the beginning of each driver code by placing the statement <div class="fragment"><div class="line"><span class="keyword">using namespace </span>oomph;</div>
+</div><!-- fragment --> at the beginning of the source code (after the included header files). Any additions to the library (this includes the instantiation of templated <code>oomph-lib</code> classes inside a driver code!) must be included into the <code>oomph</code> namespace by surrounding the code by <div class="fragment"><div class="line"><span class="keyword">namespace </span>oomph</div>
+<div class="line"> {</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Additions to the library go here...</span></div>
+<div class="line">    [...]</div>
+<div class="line"> </div>
+<div class="line"> }</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="std"></a>
+Namespace pollution</h2>
+<ul>
+<li>To avoid namespace pollution, the namespace <code>std</code> <b>must</b> <b>not</b> be included globally in any header files. The statement <div class="fragment"><div class="line"><span class="keyword">using namespace </span>std;</div>
+</div><!-- fragment --> may only be used in driver codes, in *.cc files, or inside specific functions in a *.h file.</li>
+</ul>
+<h2><a class="anchor" id="layout_classes"></a>
+Layout of class definitions and include guards.</h2>
+<p>Here is an example of a complete header file, including include guards and library includes. </p><div class="fragment"><div class="line"><span class="preprocessor">#ifndef OOMPH_SOME_CLASS_HEADER     // Assuming that the file is </span></div>
+<div class="line"><span class="preprocessor">#define OOMPH_SOME_CLASS_HEADER     // called some_class.h</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Include generic oomph-lib library</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Add to oomph-lib namespace</span></div>
+<div class="line"><span class="keyword">namespace </span>oomph</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// =============================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Waffle about what the class does etc.</span></div>
+<div class="line"><span class="comment">/// </span></div>
+<div class="line"><span class="comment"></span><span class="comment">// =============================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><span class="keyword">class </span>SomeClass : <span class="keyword">public</span> SomeBaseClass</div>
+<div class="line"> {</div>
+<div class="line">   <span class="keyword">public</span>: </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Constructor: Pass coefficients n1 and n2</span></div>
+<div class="line"><span class="comment"></span>    SomeClass(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; n1, <span class="keyword">const</span> T&amp; n2) : N1(n1), N2(n2)</div>
+<div class="line">     {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Access function to coefficient </span></div>
+<div class="line"><span class="comment"></span>    <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> n1()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">     </span>{</div>
+<div class="line">      <span class="keywordflow">return</span> N1;</div>
+<div class="line">     }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Access function to other coefficient</span></div>
+<div class="line"><span class="comment"></span>    <span class="keyword">inline</span> T&amp; n2()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">     </span>{</div>
+<div class="line">      <span class="keywordflow">return</span> N2;</div>
+<div class="line">     }</div>
+<div class="line">   </div>
+<div class="line"> </div>
+<div class="line">   <span class="keyword">protected</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">      /// Coefficient </span></div>
+<div class="line"><span class="comment"></span>      <span class="keywordtype">unsigned</span> N1;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">      /// Second coefficient</span></div>
+<div class="line"><span class="comment"></span>      T  N2;</div>
+<div class="line"> </div>
+<div class="line">  };</div>
+<div class="line"> </div>
+<div class="line"> } </div>
+<div class="line"><span class="preprocessor"> #endif</span></div>
+</div><!-- fragment --><ul>
+<li>Order of public/protected/private may be reversed but the declarations should always be explicit (even though everything is private by default).</li>
+<li>Note the prefix <code> OOMPH_*</code> in the include guard. This is to avoid clashes with include guards of other libraries.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="debug"></a>
+Debugging etc.</h1>
+<h2><a class="anchor" id="paranoia"></a>
+The PARANOID flag and error handling</h2>
+<ul>
+<li>Implement optional validation routines, self-tests, and other sanity checks via conditional compilation, using the compiler flag PARANOID, so that the relevant statements are only activated if <code>-DPARANOID</code> is specified as a compilation flag for the C++ compiler. If errors are detected, a meaningful diagnostic should be issued, by throwing an <code>OomphLibError</code>. If the code is compiled without the PARANOID flag, all sanity checks are bypassed &ndash; good for the overall execution speed, bad for error handling... The user can choose. <br  />
+<br  />
+ Here's an example: <br  />
+<br  />
+<div class="fragment"><div class="line"><span class="comment">// Has a global mesh already been built?</span></div>
+<div class="line"><span class="keywordflow">if</span>(Mesh_pt!=0)</div>
+<div class="line"> {</div>
+<div class="line">  std::string error_message = </div>
+<div class="line">   <span class="stringliteral">&quot;Problem::build_global_mesh() called,\n&quot;</span>;</div>
+<div class="line">  error_message += <span class="stringliteral">&quot; but a global mesh has already been built:\n&quot;</span>;</div>
+<div class="line">  error_message += <span class="stringliteral">&quot;Problem::Mesh_pt is not zero!\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
+<div class="line">                      OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                      OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"> }</div>
+</div><!-- fragment --></li>
+<li><code>oomph-lib</code> also has an object that allows warning messages to be issued in a uniform format. Here's an example of its use: <div class="fragment"><div class="line"><span class="comment">// Was it a duplicate?</span></div>
+<div class="line"><span class="keywordtype">unsigned</span> nel_now=element_set_pt.size();</div>
+<div class="line"><span class="keywordflow">if</span> (nel_now==nel_before)</div>
+<div class="line"> {</div>
+<div class="line">  std::ostringstream warning_stream;</div>
+<div class="line">  warning_stream  &lt;&lt;<span class="stringliteral">&quot;WARNING: &quot;</span> &lt;&lt; std::endl</div>
+<div class="line">                  &lt;&lt;<span class="stringliteral">&quot;Element &quot;</span> &lt;&lt; e &lt;&lt; <span class="stringliteral">&quot; in submesh &quot;</span> &lt;&lt; imesh </div>
+<div class="line">                  &lt;&lt;<span class="stringliteral">&quot; is a duplicate \n and was ignored when assembling &quot;</span> </div>
+<div class="line">                  &lt;&lt;<span class="stringliteral">&quot;global mesh.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  OomphLibWarning(warning_stream.str(),</div>
+<div class="line">                  OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                  OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"> }</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="range"></a>
+Range checking</h2>
+<ul>
+<li>Most access functions that provide indexed access to a private container, do, in fact, access a private STL vector. Explicit range checking for these (frequent!) cases can be avoided by changing to container to Vector class instead. Vectors performs automatic range checking, if the <code>generic</code> library is compiled with the <code>RANGE_CHECKING</code> flag, i.e. if <code>-DRANGE_CHECKING</code> is specified as a compilation flag for the C++ compiler. <b>Note:</b> While it is generally a good idea to compile with <code>PARANOID</code> while developing code, <code>RANGE_CHECKING</code> is <b>very</b> <b>expensive</b> and is therefore activated via a second independent flag. We only tend to active this flag as a last resort, typically to track down particularly stubborn segmentation faults.</li>
+</ul>
+<h2><a class="anchor" id="self_test"></a>
+Self test routines</h2>
+<ul>
+<li>Every sufficiently complex class should come with its own <div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> self_test() </div>
+</div><!-- fragment --> routine which returns 1 for failure, 0 for successful test.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="other"></a>
+Other conventions</h1>
+<h2><a class="anchor" id="constness"></a>
+Const-ness</h2>
+<ul>
+<li>Use const wherever applicable (arguments, member functions,...)</li>
+<li>Always provide const and non-const overloaded subscript operators.</li>
+<li>Example: <div class="fragment"><div class="line"><span class="comment">// Return i-th coordinate of Point</span></div>
+<div class="line"> <span class="keywordtype">double</span>&amp; operator[](<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; i){<span class="keywordflow">return</span> x[i];}  </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Return i-th coordinate of Point -- const version</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">double</span>&amp; operator[](<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; i)<span class="keyword"> const </span>{<span class="keywordflow">return</span> x[i];} </div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="unsigned"></a>
+Only use int if a variable can actually take negative values</h2>
+<ul>
+<li>Just as the name of a variable gives some indication of its likely use, its type does too. For instance this code fragment <br  />
+<div class="fragment"><div class="line"><span class="comment">// Create a counter</span></div>
+<div class="line"><span class="keywordtype">int</span> counter=0;</div>
+</div><!-- fragment --> <br  />
+ immediately raises the question why the programmer anticipates circumstances in which the counter might be negative. Are negative values used to indicate special cases; etc? If the name of the variable was chosen correctly (i.e. if the variable really is used as a counter) then <br  />
+<div class="fragment"><div class="line"><span class="comment">// Create a counter</span></div>
+<div class="line"><span class="keywordtype">unsigned</span> counter=0;</div>
+</div><!-- fragment --> <br  />
+ is much clearer and therefore preferable, even if the two versions of the code would, of course, give the same result.</li>
+</ul>
+<h2><a class="anchor" id="pass_by_reference"></a>
+Only use "pass by reference"</h2>
+<ul>
+<li>Arguments to functions should only be passed "by reference", not "by value". Use "pass by constant reference" if you want to ensure the const-ness of any (input) arguments.</li>
+<li>To "encourage" this behaviour, most <code>oomph-lib</code> objects have (deliberately) broken copy constructors and assignment operators, making a "pass by value" impossible. The only exceptions are cases in which we could see a good reason why a fully-functional, non-memory-leaking copy/assignment operator might be required.</li>
+</ul>
+<h2><a class="anchor" id="break_copy"></a>
+Provide fully-functional or deliberately-broken copy constructors and assignment operators</h2>
+<ul>
+<li>For the reasons mentioned above, "passing by value" is discouraged and we have only implemented copy constructors for very few classes. To make the use of C++'s default copy constructor impossible (as their accidental use may lead to serious memory leaks) all classes should either have a deliberately-broken copy constructor or provide a "proper" implementation (as in the case of <code>oomph-lib's</code> <code>Vector</code> class). The same applies to assignment operators. <br  />
+ <br  />
+ The namespace <code>BrokenCopy</code> provides two helper functions, <code>BrokenCopy::broken_copy(...)</code> and <code>BrokenCopy::broken_assign(...)</code> that issue a suitable error message and then throw an <code>OomphLibError</code>. The name of the class should be passed to these functions as a string, as in this example from the <code>Mesh</code> class: <br  />
+<br  />
+<div class="fragment"><div class="line"><span class="comment">/// Broken copy constructor</span></div>
+<div class="line"><span class="comment"></span>Mesh(<span class="keyword">const</span> Mesh&amp; dummy) </div>
+<div class="line"> { </div>
+<div class="line">  BrokenCopy::broken_copy(<span class="stringliteral">&quot;Mesh&quot;</span>);</div>
+<div class="line"> } </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/// Broken assignment operator</span></div>
+<div class="line"><span class="comment"></span><span class="keywordtype">void</span> operator=(<span class="keyword">const</span> Mesh&amp;) </div>
+<div class="line"> {</div>
+<div class="line">  BrokenCopy::broken_assign(<span class="stringliteral">&quot;Mesh&quot;</span>);</div>
+<div class="line"> }</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="order_of_args"></a>
+Order of arguments</h2>
+<ul>
+<li>If values are returned from a function, put them at the end of the argument list.</li>
+<li>"Time" arguments always come first, e.g. <div class="fragment"><div class="line"><span class="comment">/// \short Return FE interpolated coordinate x[i] at local coordinate s</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// at previous timestep t (t=0: present; t&gt;0: previous timestep)</span></div>
+<div class="line"><span class="comment"></span><span class="keyword">virtual</span> <span class="keywordtype">double</span> interpolated_x(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
+<div class="line">                              <span class="keyword">const</span> Vector&lt;double&gt; &amp;s,</div>
+<div class="line">                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;i) <span class="keyword">const</span>;</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="brackets"></a>
+Access to elements in containers</h2>
+<ul>
+<li>Avoid access via square brackets (i.e. via operators) and write access functions instead, as they can be overloaded more easily.</li>
+</ul>
+<h2><a class="anchor" id="boolean"></a>
+Boolean member data</h2>
+<ul>
+<li>Avoid access to boolean member data via trivial wrapper functions that return references. These constructions lead to somewhat ugly driver codes and can lead to code that appears to set a boolean, when it does not. Instead the status of the boolean should be modified by two set/unset or enable/disable subroutines (i.e. returning void) and tested using a (const) has_ or is_ function that returns a bool . For example <div class="fragment"><div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Boolean to indicate whether documentation should be on or off</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">bool</span> Doc_flag;</div>
+<div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Enable documentation</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> enable_doc() {Doc_flag=<span class="keyword">true</span>;}<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Disable documentation</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> disable_doc() {Doc_flag=<span class="keyword">false</span>;}<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Test whether documentation is on or off</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">bool</span> is_doc_enabled()<span class="keyword"> const </span>{<span class="keywordflow">return</span> Doc_flag;}</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="dont_use_macros"></a>
+Macros</h2>
+<ul>
+<li>Don't use macros! There are two exceptions to this rule: We use the macros <code>OOMPH_EXCEPTION_LOCATION</code> and <code>OOMPH_CURRENT_FUNCTION</code> to make the file name, line number and current function name available to the <code>OomphLibException</code> object &ndash; the object that is thrown if a run-time error is detected.</li>
+</ul>
+<h2><a class="anchor" id="inlining"></a>
+Inlining</h2>
+<ul>
+<li>Inline all simple set/get functions by placing them into the *.h file.</li>
+<li><b>Careful:</b> Inlined functions should not contain calls to member functions of classes that are defined in other files as this can lead to triangular dependencies.</li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassNavierStokesEquations_html"><div class="ttname"><a href="classNavierStokesEquations.html">NavierStokesEquations</a></div><div class="ttdef"><b>Definition:</b> <a href="coding__conventions_8txt_source.html#l00116">coding_conventions.txt:116</a></div></div>
+<div class="ttc" id="acoding__conventions_8txt_html_ae11c23d019f158839e6002c47913bb4a"><div class="ttname"><a href="coding__conventions_8txt.html#ae11c23d019f158839e6002c47913bb4a">element_pt</a></div><div class="ttdeci">they are usually accompanied by a member function that returns the number of entries in that container Naming i e code FiniteElement * element_pt(const unsigned &amp;e)</div><div class="ttdoc">Return pointer to e-th element.</div></div>
+<div class="ttc" id="acoding__conventions_8txt_html_ae2354be5cf2b6fd97ded218f0282e485"><div class="ttname"><a href="coding__conventions_8txt.html#ae2354be5cf2b6fd97ded218f0282e485">boundary_node_pt</a></div><div class="ttdeci">Node *&amp; boundary_node_pt()</div><div class="ttdoc">Access to boundary node.</div><div class="ttdef"><b>Definition:</b> <a href="coding__conventions_8txt_source.html#l00076">coding_conventions.txt:76</a></div></div>
+<div class="ttc" id="acoding__conventions_8txt_html_a7b8627ed669d599b2fcbf99832ef334f"><div class="ttname"><a href="coding__conventions_8txt.html#a7b8627ed669d599b2fcbf99832ef334f">nelement</a></div><div class="ttdeci">endcode rather than c i e code unsigned nelement()</div><div class="ttdoc">Total number of elements.</div></div>
+<div class="ttc" id="acoding__conventions_8txt_html_abdf54a843c828adc77dc76b43eed4a00"><div class="ttname"><a href="coding__conventions_8txt.html#abdf54a843c828adc77dc76b43eed4a00">surface_element_pt</a></div><div class="ttdeci">mainpage Coding conventions and C style This document provides an overview of the general coding conventions that are used throughout c oomph lib Knowledge of these conventions will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt; HR &gt;&lt; HR &gt; section naming Naming conventions subsection filenames File names All C source files end with the standard extensions *h and *cc c and c *template most specific c Mesh classes are templated by the element type and the mesh writer can obviously not predict which element types his her specific mesh is going to be used with subsection variables General variables General variables are all lowercase Variables that contain multiple words contain underscores to separate e g code FiniteElement * surface_element_pt</div><div class="ttdef"><b>Definition:</b> <a href="coding__conventions_8txt_source.html#l00043">coding_conventions.txt:43</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:52:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

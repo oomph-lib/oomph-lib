@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classRingWithTRibProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Annular disk.  
+ <a href="classRingWithTRibProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classRingWithTRibProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad0313aac3c0cdb87e753ba474a4e334f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#ad0313aac3c0cdb87e753ba474a4e334f">RingWithTRibProblem</a> ()</td></tr>
+<tr class="memdesc:ad0313aac3c0cdb87e753ba474a4e334f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor:  <a href="classRingWithTRibProblem.html#ad0313aac3c0cdb87e753ba474a4e334f">More...</a><br /></td></tr>
+<tr class="separator:ad0313aac3c0cdb87e753ba474a4e334f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d9f7b05cc71c02275f6c3c1a465fd20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#a5d9f7b05cc71c02275f6c3c1a465fd20">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a5d9f7b05cc71c02275f6c3c1a465fd20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function (empty)  <a href="classRingWithTRibProblem.html#a5d9f7b05cc71c02275f6c3c1a465fd20">More...</a><br /></td></tr>
+<tr class="separator:a5d9f7b05cc71c02275f6c3c1a465fd20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa74a20d5bd6d7f16eb00080734dde0d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#aa74a20d5bd6d7f16eb00080734dde0d1">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:aa74a20d5bd6d7f16eb00080734dde0d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function (empty)  <a href="classRingWithTRibProblem.html#aa74a20d5bd6d7f16eb00080734dde0d1">More...</a><br /></td></tr>
+<tr class="separator:aa74a20d5bd6d7f16eb00080734dde0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a170199d58390ae43a044294bfc7ac5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#a7a170199d58390ae43a044294bfc7ac5">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:a7a170199d58390ae43a044294bfc7ac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the mesh of traction elements.  <a href="classRingWithTRibProblem.html#a7a170199d58390ae43a044294bfc7ac5">More...</a><br /></td></tr>
+<tr class="separator:a7a170199d58390ae43a044294bfc7ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8749aaf1e46d802c210b51e07093505b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#a8749aaf1e46d802c210b51e07093505b">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:a8749aaf1e46d802c210b51e07093505b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Rebuild the mesh of traction elements.  <a href="classRingWithTRibProblem.html#a8749aaf1e46d802c210b51e07093505b">More...</a><br /></td></tr>
+<tr class="separator:a8749aaf1e46d802c210b51e07093505b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43b70b125f467aa5bb9c74d08f193aa5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#a43b70b125f467aa5bb9c74d08f193aa5">doc_solution</a> ()</td></tr>
+<tr class="memdesc:a43b70b125f467aa5bb9c74d08f193aa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <a href="classRingWithTRibProblem.html#a43b70b125f467aa5bb9c74d08f193aa5">More...</a><br /></td></tr>
+<tr class="separator:a43b70b125f467aa5bb9c74d08f193aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ac4445c7a9fbfdcb69063d36fe0fe08c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#ac4445c7a9fbfdcb69063d36fe0fe08c3">create_traction_elements</a> ()</td></tr>
+<tr class="memdesc:ac4445c7a9fbfdcb69063d36fe0fe08c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create traction elements.  <a href="classRingWithTRibProblem.html#ac4445c7a9fbfdcb69063d36fe0fe08c3">More...</a><br /></td></tr>
+<tr class="separator:ac4445c7a9fbfdcb69063d36fe0fe08c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa85169a96623cb39f18111ee436f5b9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#aa85169a96623cb39f18111ee436f5b9d">delete_traction_elements</a> ()</td></tr>
+<tr class="memdesc:aa85169a96623cb39f18111ee436f5b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete traction elements.  <a href="classRingWithTRibProblem.html#aa85169a96623cb39f18111ee436f5b9d">More...</a><br /></td></tr>
+<tr class="separator:aa85169a96623cb39f18111ee436f5b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aa8c978ec6ff0a9823ef895b263fb41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#a7aa8c978ec6ff0a9823ef895b263fb41">complete_problem_setup</a> ()</td></tr>
+<tr class="memdesc:a7aa8c978ec6ff0a9823ef895b263fb41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to complete problem setup.  <a href="classRingWithTRibProblem.html#a7aa8c978ec6ff0a9823ef895b263fb41">More...</a><br /></td></tr>
+<tr class="separator:a7aa8c978ec6ff0a9823ef895b263fb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a89da884cecc2d8984168817de7b1927e"><td class="memItemLeft" align="right" valign="top">RefineableTriangleMesh&lt; ELASTICITY_ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#a89da884cecc2d8984168817de7b1927e">Solid_mesh_pt</a></td></tr>
+<tr class="memdesc:a89da884cecc2d8984168817de7b1927e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to refineable solid mesh.  <a href="classRingWithTRibProblem.html#a89da884cecc2d8984168817de7b1927e">More...</a><br /></td></tr>
+<tr class="separator:a89da884cecc2d8984168817de7b1927e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9502dc1955f4d3d40adb5ca581aacb6"><td class="memItemLeft" align="right" valign="top">TriangleMesh&lt; ELASTICITY_ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#ac9502dc1955f4d3d40adb5ca581aacb6">Solid_mesh_pt</a></td></tr>
+<tr class="memdesc:ac9502dc1955f4d3d40adb5ca581aacb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to solid mesh.  <a href="classRingWithTRibProblem.html#ac9502dc1955f4d3d40adb5ca581aacb6">More...</a><br /></td></tr>
+<tr class="separator:ac9502dc1955f4d3d40adb5ca581aacb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf11b5c5d0c63c91ca7b248c18acad5b"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#abf11b5c5d0c63c91ca7b248c18acad5b">Traction_mesh_pt</a></td></tr>
+<tr class="memdesc:abf11b5c5d0c63c91ca7b248c18acad5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh of traction elements.  <a href="classRingWithTRibProblem.html#abf11b5c5d0c63c91ca7b248c18acad5b">More...</a><br /></td></tr>
+<tr class="separator:abf11b5c5d0c63c91ca7b248c18acad5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a086bb927e3091b5d38e193b2ccb84e3b"><td class="memItemLeft" align="right" valign="top">DocInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#a086bb927e3091b5d38e193b2ccb84e3b">Doc_info</a></td></tr>
+<tr class="memdesc:a086bb927e3091b5d38e193b2ccb84e3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">DocInfo object for output.  <a href="classRingWithTRibProblem.html#a086bb927e3091b5d38e193b2ccb84e3b">More...</a><br /></td></tr>
+<tr class="separator:a086bb927e3091b5d38e193b2ccb84e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad15da3f1436b47c6cd7a79962aaa895d"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#ad15da3f1436b47c6cd7a79962aaa895d">Upper_symmetry_boundary_id</a></td></tr>
+<tr class="memdesc:ad15da3f1436b47c6cd7a79962aaa895d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary ID of upper symmetry boundary.  <a href="classRingWithTRibProblem.html#ad15da3f1436b47c6cd7a79962aaa895d">More...</a><br /></td></tr>
+<tr class="separator:ad15da3f1436b47c6cd7a79962aaa895d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93f5abb451b85f65316b930802c727f8"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#a93f5abb451b85f65316b930802c727f8">Lower_symmetry_boundary_id</a></td></tr>
+<tr class="memdesc:a93f5abb451b85f65316b930802c727f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary ID of lower symmetry boundary.  <a href="classRingWithTRibProblem.html#a93f5abb451b85f65316b930802c727f8">More...</a><br /></td></tr>
+<tr class="separator:a93f5abb451b85f65316b930802c727f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88918269cac403640e2659d48210d03c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingWithTRibProblem.html#a88918269cac403640e2659d48210d03c">Outer_boundary_id</a></td></tr>
+<tr class="memdesc:a88918269cac403640e2659d48210d03c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary ID of outer boundary.  <a href="classRingWithTRibProblem.html#a88918269cac403640e2659d48210d03c">More...</a><br /></td></tr>
+<tr class="separator:a88918269cac403640e2659d48210d03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELASTICITY_ELEMENT&gt;<br />
+class RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;</h3>
+
+<p>Annular disk. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00155">155</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad0313aac3c0cdb87e753ba474a4e334f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0313aac3c0cdb87e753ba474a4e334f">&#9670;&nbsp;</a></span>RingWithTRibProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::<a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00223">223</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__annulus_8txt.html#abab50edf3fca9faf4edf2d43c95ad07f">create_traction_elements()</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00097">Global_Parameters::Directory</a>, <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00118">Global_Parameters::E_pt</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00062">Global_Parameters::H_annulus</a>, and <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00053">Global_Parameters::Nu</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8749aaf1e46d802c210b51e07093505b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8749aaf1e46d802c210b51e07093505b">&#9670;&nbsp;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::actions_after_adapt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Rebuild the mesh of traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00664">664</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__annulus_8txt.html#abab50edf3fca9faf4edf2d43c95ad07f">create_traction_elements()</a>.</p>
+
+</div>
+</div>
+<a id="a5d9f7b05cc71c02275f6c3c1a465fd20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d9f7b05cc71c02275f6c3c1a465fd20">&#9670;&nbsp;</a></span>actions_after_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00164">164</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="a7a170199d58390ae43a044294bfc7ac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a170199d58390ae43a044294bfc7ac5">&#9670;&nbsp;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::actions_before_adapt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the mesh of traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00648">648</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa74a20d5bd6d7f16eb00080734dde0d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa74a20d5bd6d7f16eb00080734dde0d1">&#9670;&nbsp;</a></span>actions_before_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00167">167</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="a7aa8c978ec6ff0a9823ef895b263fb41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aa8c978ec6ff0a9823ef895b263fb41">&#9670;&nbsp;</a></span>complete_problem_setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::complete_problem_setup</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to complete problem setup. </p>
+<p>Complete problem setup. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00566">566</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00118">Global_Parameters::E_pt</a>, and <a class="el" href="namespaceGlobal__Parameters.html#a58a76124a7c047adf58388cc12e84f23">Global_Parameters::Omega_sq_region()</a>.</p>
+
+</div>
+</div>
+<a id="ac4445c7a9fbfdcb69063d36fe0fe08c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4445c7a9fbfdcb69063d36fe0fe08c3">&#9670;&nbsp;</a></span>create_traction_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::create_traction_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00683">683</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00130">Global_Parameters::pressure_load()</a>.</p>
+
+</div>
+</div>
+<a id="aa85169a96623cb39f18111ee436f5b9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa85169a96623cb39f18111ee436f5b9d">&#9670;&nbsp;</a></span>delete_traction_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::delete_traction_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete traction elements. </p>
+<p>Delete traction elements and wipe the traction meshes. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00728">728</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="a43b70b125f467aa5bb9c74d08f193aa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43b70b125f467aa5bb9c74d08f193aa5">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::doc_solution</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00753">753</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a086bb927e3091b5d38e193b2ccb84e3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a086bb927e3091b5d38e193b2ccb84e3b">&#9670;&nbsp;</a></span>Doc_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DocInfo <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::Doc_info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>DocInfo object for output. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00205">205</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="a93f5abb451b85f65316b930802c727f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93f5abb451b85f65316b930802c727f8">&#9670;&nbsp;</a></span>Lower_symmetry_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::Lower_symmetry_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary ID of lower symmetry boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00211">211</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="a88918269cac403640e2659d48210d03c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88918269cac403640e2659d48210d03c">&#9670;&nbsp;</a></span>Outer_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::Outer_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary ID of outer boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00214">214</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="a89da884cecc2d8984168817de7b1927e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89da884cecc2d8984168817de7b1927e">&#9670;&nbsp;</a></span>Solid_mesh_pt <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableTriangleMesh&lt;ELASTICITY_ELEMENT&gt;* <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::Solid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to refineable solid mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00192">192</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac9502dc1955f4d3d40adb5ca581aacb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9502dc1955f4d3d40adb5ca581aacb6">&#9670;&nbsp;</a></span>Solid_mesh_pt <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TriangleMesh&lt;ELASTICITY_ELEMENT&gt;* <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::Solid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to solid mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00197">197</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="abf11b5c5d0c63c91ca7b248c18acad5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf11b5c5d0c63c91ca7b248c18acad5b">&#9670;&nbsp;</a></span>Traction_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::Traction_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to mesh of traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00202">202</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<a id="ad15da3f1436b47c6cd7a79962aaa895d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad15da3f1436b47c6cd7a79962aaa895d">&#9670;&nbsp;</a></span>Upper_symmetry_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classRingWithTRibProblem.html">RingWithTRibProblem</a>&lt; ELASTICITY_ELEMENT &gt;::Upper_symmetry_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary ID of upper symmetry boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00208">208</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:29:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

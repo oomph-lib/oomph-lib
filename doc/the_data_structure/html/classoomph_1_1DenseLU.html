@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::DenseLU Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1DenseLU.html">DenseLU</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="classoomph_1_1DenseLU-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::DenseLU Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to illustrate the principle. Only suitable for use with Serial matrices and vectors. This solver will only work with non-distributed matrices and vectors (note: <a class="el" href="classoomph_1_1DenseDoubleMatrix.html" title="Class of matrices containing doubles, and stored as a DenseMatrix&lt;double&gt;, but with solving functiona...">DenseDoubleMatrix</a> is not distributable)  
+ <a href="classoomph_1_1DenseLU.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::DenseLU:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1DenseLU.png" usemap="#oomph::DenseLU_map" alt=""/>
+  <map id="oomph::DenseLU_map" name="oomph::DenseLU_map">
+<area href="classoomph_1_1LinearSolver.html" alt="oomph::LinearSolver" shape="rect" coords="0,56,243,80"/>
+<area href="classoomph_1_1DistributableLinearAlgebraObject.html" title="Base class for any linear algebra object that is distributable. Just contains storage for the LinearA..." alt="oomph::DistributableLinearAlgebraObject" shape="rect" coords="0,0,243,24"/>
+<area href="classoomph_1_1FD__LU.html" title="Dense LU decomposition-based solve of linear system assembled via finite differencing of the residual..." alt="oomph::FD_LU" shape="rect" coords="0,168,243,192"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7d8217ef310a5c5ad224e4e6aa40d923"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a7d8217ef310a5c5ad224e4e6aa40d923">DenseLU</a> ()</td></tr>
+<tr class="memdesc:a7d8217ef310a5c5ad224e4e6aa40d923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, initialise storage.  <a href="classoomph_1_1DenseLU.html#a7d8217ef310a5c5ad224e4e6aa40d923">More...</a><br /></td></tr>
+<tr class="separator:a7d8217ef310a5c5ad224e4e6aa40d923"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f0c2eb1cbe142498d12ae14e3cadca2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a5f0c2eb1cbe142498d12ae14e3cadca2">DenseLU</a> (const <a class="el" href="classoomph_1_1DenseLU.html">DenseLU</a> &amp;dummy)</td></tr>
+<tr class="memdesc:a5f0c2eb1cbe142498d12ae14e3cadca2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1DenseLU.html#a5f0c2eb1cbe142498d12ae14e3cadca2">More...</a><br /></td></tr>
+<tr class="separator:a5f0c2eb1cbe142498d12ae14e3cadca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90c01b2a2471b4e038c6d5138c86c378"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a90c01b2a2471b4e038c6d5138c86c378">operator=</a> (const <a class="el" href="classoomph_1_1DenseLU.html">DenseLU</a> &amp;)</td></tr>
+<tr class="memdesc:a90c01b2a2471b4e038c6d5138c86c378"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1DenseLU.html#a90c01b2a2471b4e038c6d5138c86c378">More...</a><br /></td></tr>
+<tr class="separator:a90c01b2a2471b4e038c6d5138c86c378"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a012d934c8dec17f2ca3ad504939ab29d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a012d934c8dec17f2ca3ad504939ab29d">~DenseLU</a> ()</td></tr>
+<tr class="memdesc:a012d934c8dec17f2ca3ad504939ab29d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, clean up the stored LU factors.  <a href="classoomph_1_1DenseLU.html#a012d934c8dec17f2ca3ad504939ab29d">More...</a><br /></td></tr>
+<tr class="separator:a012d934c8dec17f2ca3ad504939ab29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac354b224819146618ce8a1396f8f980e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#ac354b224819146618ce8a1396f8f980e">solve</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:ac354b224819146618ce8a1396f8f980e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solver: Takes pointer to problem and returns the results <a class="el" href="classoomph_1_1Vector.html">Vector</a> which contains the solution of the linear system defined by the problem's fully assembled Jacobian and residual <a class="el" href="classoomph_1_1Vector.html">Vector</a>.  <a href="classoomph_1_1DenseLU.html#ac354b224819146618ce8a1396f8f980e">More...</a><br /></td></tr>
+<tr class="separator:ac354b224819146618ce8a1396f8f980e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae82e044bb5a1173b8105b6fedd904801"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#ae82e044bb5a1173b8105b6fedd904801">solve</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:ae82e044bb5a1173b8105b6fedd904801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1DenseLU.html#ae82e044bb5a1173b8105b6fedd904801">More...</a><br /></td></tr>
+<tr class="separator:ae82e044bb5a1173b8105b6fedd904801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d79cf13a269733d655e3e90c447f84d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a1d79cf13a269733d655e3e90c447f84d">solve</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
+<tr class="memdesc:a1d79cf13a269733d655e3e90c447f84d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system.  <a href="classoomph_1_1DenseLU.html#a1d79cf13a269733d655e3e90c447f84d">More...</a><br /></td></tr>
+<tr class="separator:a1d79cf13a269733d655e3e90c447f84d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4605ec2ca02ff0b30f4cefc2458dfb66"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a4605ec2ca02ff0b30f4cefc2458dfb66">jacobian_setup_time</a> () const</td></tr>
+<tr class="memdesc:a4605ec2ca02ff0b30f4cefc2458dfb66"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the time taken to assemble the jacobian matrix and residual vector  <a href="classoomph_1_1DenseLU.html#a4605ec2ca02ff0b30f4cefc2458dfb66">More...</a><br /></td></tr>
+<tr class="separator:a4605ec2ca02ff0b30f4cefc2458dfb66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabe93cf400bb488f0bc08755ee0dfde4"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#aabe93cf400bb488f0bc08755ee0dfde4">linear_solver_solution_time</a> () const</td></tr>
+<tr class="memdesc:aabe93cf400bb488f0bc08755ee0dfde4"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the time taken to solve the linear system (needs to be overloaded for each linear solver)  <a href="classoomph_1_1DenseLU.html#aabe93cf400bb488f0bc08755ee0dfde4">More...</a><br /></td></tr>
+<tr class="separator:aabe93cf400bb488f0bc08755ee0dfde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1LinearSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1LinearSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1LinearSolver.html">oomph::LinearSolver</a></td></tr>
+<tr class="memitem:a6e7e8728f36c888f052e49df8624b8ca inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a6e7e8728f36c888f052e49df8624b8ca">LinearSolver</a> ()</td></tr>
+<tr class="memdesc:a6e7e8728f36c888f052e49df8624b8ca inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor, initialise the member data.  <a href="classoomph_1_1LinearSolver.html#a6e7e8728f36c888f052e49df8624b8ca">More...</a><br /></td></tr>
+<tr class="separator:a6e7e8728f36c888f052e49df8624b8ca inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53c67c7ccd63b318f3af48e826ad57dc inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a53c67c7ccd63b318f3af48e826ad57dc">LinearSolver</a> (const <a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> &amp;dummy)</td></tr>
+<tr class="memdesc:a53c67c7ccd63b318f3af48e826ad57dc inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1LinearSolver.html#a53c67c7ccd63b318f3af48e826ad57dc">More...</a><br /></td></tr>
+<tr class="separator:a53c67c7ccd63b318f3af48e826ad57dc inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb1820234b9335b2a5072e5ee19306d4 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#aeb1820234b9335b2a5072e5ee19306d4">operator=</a> (const <a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> &amp;)</td></tr>
+<tr class="memdesc:aeb1820234b9335b2a5072e5ee19306d4 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1LinearSolver.html#aeb1820234b9335b2a5072e5ee19306d4">More...</a><br /></td></tr>
+<tr class="separator:aeb1820234b9335b2a5072e5ee19306d4 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cc9b2c9a239777c4f9b15f26bb324a0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a9cc9b2c9a239777c4f9b15f26bb324a0">~LinearSolver</a> ()</td></tr>
+<tr class="memdesc:a9cc9b2c9a239777c4f9b15f26bb324a0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1LinearSolver.html#a9cc9b2c9a239777c4f9b15f26bb324a0">More...</a><br /></td></tr>
+<tr class="separator:a9cc9b2c9a239777c4f9b15f26bb324a0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeb9ef9127e927bf6df75d03645d6a81 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#abeb9ef9127e927bf6df75d03645d6a81">enable_doc_time</a> ()</td></tr>
+<tr class="memdesc:abeb9ef9127e927bf6df75d03645d6a81 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable documentation of solve times.  <a href="classoomph_1_1LinearSolver.html#abeb9ef9127e927bf6df75d03645d6a81">More...</a><br /></td></tr>
+<tr class="separator:abeb9ef9127e927bf6df75d03645d6a81 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91ffe51f3de82dad1a110c099f256d73 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a91ffe51f3de82dad1a110c099f256d73">disable_doc_time</a> ()</td></tr>
+<tr class="memdesc:a91ffe51f3de82dad1a110c099f256d73 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable documentation of solve times.  <a href="classoomph_1_1LinearSolver.html#a91ffe51f3de82dad1a110c099f256d73">More...</a><br /></td></tr>
+<tr class="separator:a91ffe51f3de82dad1a110c099f256d73 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a451ce3af5db82f9edbddf8f417597248 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a451ce3af5db82f9edbddf8f417597248">is_doc_time_enabled</a> () const</td></tr>
+<tr class="memdesc:a451ce3af5db82f9edbddf8f417597248 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is documentation of solve times enabled?  <a href="classoomph_1_1LinearSolver.html#a451ce3af5db82f9edbddf8f417597248">More...</a><br /></td></tr>
+<tr class="separator:a451ce3af5db82f9edbddf8f417597248 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1e4d34a7e2b1537d36153f87e8a62a6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#ae1e4d34a7e2b1537d36153f87e8a62a6">is_resolve_enabled</a> () const</td></tr>
+<tr class="memdesc:ae1e4d34a7e2b1537d36153f87e8a62a6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag indicating if resolves are enabled.  <a href="classoomph_1_1LinearSolver.html#ae1e4d34a7e2b1537d36153f87e8a62a6">More...</a><br /></td></tr>
+<tr class="separator:ae1e4d34a7e2b1537d36153f87e8a62a6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3000ebd9becb3468d8a6a821a9cc0cd9 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a3000ebd9becb3468d8a6a821a9cc0cd9">enable_resolve</a> ()</td></tr>
+<tr class="memdesc:a3000ebd9becb3468d8a6a821a9cc0cd9 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable resolve (i.e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks.  <a href="classoomph_1_1LinearSolver.html#a3000ebd9becb3468d8a6a821a9cc0cd9">More...</a><br /></td></tr>
+<tr class="separator:a3000ebd9becb3468d8a6a821a9cc0cd9 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#ad61c63af94c5961830bd9807225a48d6">disable_resolve</a> ()</td></tr>
+<tr class="memdesc:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable resolve (i.e. store matrix and/or LU decomposition, say) This function simply resets an internal flag. It's virtual so it can be overloaded to perform additional tasks such as cleaning up memory that is only required for the resolve.  <a href="classoomph_1_1LinearSolver.html#ad61c63af94c5961830bd9807225a48d6">More...</a><br /></td></tr>
+<tr class="separator:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a8e970813a1583f6105ee2d677d3e45f3">solve_transpose</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solver: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem's fully assembled Jacobian and residual vector (broken virtual).  <a href="classoomph_1_1LinearSolver.html#a8e970813a1583f6105ee2d677d3e45f3">More...</a><br /></td></tr>
+<tr class="separator:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">solve_transpose</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
+  <a href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">More...</a><br /></td></tr>
+<tr class="separator:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">solve_transpose</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
+<tr class="memdesc:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
+  <a href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">More...</a><br /></td></tr>
+<tr class="separator:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a3b310d08333033edc119b2a5bd7dcbfb">resolve</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual)  <a href="classoomph_1_1LinearSolver.html#a3b310d08333033edc119b2a5bd7dcbfb">More...</a><br /></td></tr>
+<tr class="separator:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf539c2dd415e22e597fade4c0ca4022 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#acf539c2dd415e22e597fade4c0ca4022">resolve_transpose</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:acf539c2dd415e22e597fade4c0ca4022 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solver: Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual)  <a href="classoomph_1_1LinearSolver.html#acf539c2dd415e22e597fade4c0ca4022">More...</a><br /></td></tr>
+<tr class="separator:acf539c2dd415e22e597fade4c0ca4022 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37f1f8b8c6d45115e649739abd5d2f5d inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a37f1f8b8c6d45115e649739abd5d2f5d">enable_computation_of_gradient</a> ()</td></tr>
+<tr class="memdesc:a37f1f8b8c6d45115e649739abd5d2f5d inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to enable the computation of the gradient required for the globally convergent Newton method  <a href="classoomph_1_1LinearSolver.html#a37f1f8b8c6d45115e649739abd5d2f5d">More...</a><br /></td></tr>
+<tr class="separator:a37f1f8b8c6d45115e649739abd5d2f5d inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc045e20074cb9b45ab3f304d037fc6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a8bc045e20074cb9b45ab3f304d037fc6">disable_computation_of_gradient</a> ()</td></tr>
+<tr class="memdesc:a8bc045e20074cb9b45ab3f304d037fc6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to disable the computation of the gradient required for the globally convergent Newton method  <a href="classoomph_1_1LinearSolver.html#a8bc045e20074cb9b45ab3f304d037fc6">More...</a><br /></td></tr>
+<tr class="separator:a8bc045e20074cb9b45ab3f304d037fc6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceef502cbdf826cdf6aa31f5803982e0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#aceef502cbdf826cdf6aa31f5803982e0">reset_gradient</a> ()</td></tr>
+<tr class="memdesc:aceef502cbdf826cdf6aa31f5803982e0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to reset the size of the gradient before each Newton solve  <a href="classoomph_1_1LinearSolver.html#aceef502cbdf826cdf6aa31f5803982e0">More...</a><br /></td></tr>
+<tr class="separator:aceef502cbdf826cdf6aa31f5803982e0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6733411e85f0a1d6d82200c802481681 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a6733411e85f0a1d6d82200c802481681">get_gradient</a> (<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;gradient)</td></tr>
+<tr class="memdesc:a6733411e85f0a1d6d82200c802481681 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to access the gradient, provided it has been computed  <a href="classoomph_1_1LinearSolver.html#a6733411e85f0a1d6d82200c802481681">More...</a><br /></td></tr>
+<tr class="separator:a6733411e85f0a1d6d82200c802481681 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor - create a distribution.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">More...</a><br /></td></tr>
+<tr class="separator:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e24b4ce887a2e2da4dc60808f53f91 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e24b4ce887a2e2da4dc60808f53f91">DistributableLinearAlgebraObject</a> (const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;matrix)</td></tr>
+<tr class="memdesc:a21e24b4ce887a2e2da4dc60808f53f91 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e24b4ce887a2e2da4dc60808f53f91">More...</a><br /></td></tr>
+<tr class="separator:a21e24b4ce887a2e2da4dc60808f53f91 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d60098e4938b78dd3e2724551a4c7c9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a0d60098e4938b78dd3e2724551a4c7c9">operator=</a> (const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;)</td></tr>
+<tr class="memdesc:a0d60098e4938b78dd3e2724551a4c7c9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a0d60098e4938b78dd3e2724551a4c7c9">More...</a><br /></td></tr>
+<tr class="separator:a0d60098e4938b78dd3e2724551a4c7c9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">~DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">More...</a><br /></td></tr>
+<tr class="separator:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a603105384d60c9a3710378af39f538b9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a> () const</td></tr>
+<tr class="memdesc:a603105384d60c9a3710378af39f538b9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a>  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">More...</a><br /></td></tr>
+<tr class="separator:a603105384d60c9a3710378af39f538b9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a> () const</td></tr>
+<tr class="memdesc:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the number of global rows.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">More...</a><br /></td></tr>
+<tr class="separator:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> () const</td></tr>
+<tr class="memdesc:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">More...</a><br /></td></tr>
+<tr class="separator:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">nrow_local</a> (const unsigned &amp;p) const</td></tr>
+<tr class="memdesc:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">More...</a><br /></td></tr>
+<tr class="separator:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> () const</td></tr>
+<tr class="memdesc:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">More...</a><br /></td></tr>
+<tr class="separator:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">first_row</a> (const unsigned &amp;p) const</td></tr>
+<tr class="memdesc:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">More...</a><br /></td></tr>
+<tr class="separator:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a> () const</td></tr>
+<tr class="memdesc:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">distribution is serial or distributed  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">More...</a><br /></td></tr>
+<tr class="separator:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a8c35baa65e335043f62954c92c090a5a">distribution_built</a> () const</td></tr>
+<tr class="separator:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const dist_pt)</td></tr>
+<tr class="memdesc:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">More...</a><br /></td></tr>
+<tr class="separator:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">build_distribution</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;dist)</td></tr>
+<tr class="memdesc:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">More...</a><br /></td></tr>
+<tr class="separator:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a943a629a67289120473855bc96766dfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a943a629a67289120473855bc96766dfc">factorise</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt)</td></tr>
+<tr class="memdesc:a943a629a67289120473855bc96766dfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the LU decomposition of the matrix.  <a href="classoomph_1_1DenseLU.html#a943a629a67289120473855bc96766dfc">More...</a><br /></td></tr>
+<tr class="separator:a943a629a67289120473855bc96766dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fc7e7a29cb86df73883df9c6a65600b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a4fc7e7a29cb86df73883df9c6a65600b">backsub</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:a4fc7e7a29cb86df73883df9c6a65600b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do the backsubstitution step to solve the system LU result = rhs.  <a href="classoomph_1_1DenseLU.html#a4fc7e7a29cb86df73883df9c6a65600b">More...</a><br /></td></tr>
+<tr class="separator:a4fc7e7a29cb86df73883df9c6a65600b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef3a68bf4e28465a7c316dba135f504"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#acef3a68bf4e28465a7c316dba135f504">backsub</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
+<tr class="memdesc:acef3a68bf4e28465a7c316dba135f504"><td class="mdescLeft">&#160;</td><td class="mdescRight">perform back substitution using <a class="el" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>  <a href="classoomph_1_1DenseLU.html#acef3a68bf4e28465a7c316dba135f504">More...</a><br /></td></tr>
+<tr class="separator:acef3a68bf4e28465a7c316dba135f504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d4d454874476adadb3bc23913b1190b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a5d4d454874476adadb3bc23913b1190b">clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:a5d4d454874476adadb3bc23913b1190b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up the stored LU factors.  <a href="classoomph_1_1DenseLU.html#a5d4d454874476adadb3bc23913b1190b">More...</a><br /></td></tr>
+<tr class="separator:a5d4d454874476adadb3bc23913b1190b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">clear_distribution</a> ()</td></tr>
+<tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">More...</a><br /></td></tr>
+<tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a3618b27ae286e468251f52091ddf1e70"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a3618b27ae286e468251f52091ddf1e70">Jacobian_setup_time</a></td></tr>
+<tr class="memdesc:a3618b27ae286e468251f52091ddf1e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Jacobian setup time.  <a href="classoomph_1_1DenseLU.html#a3618b27ae286e468251f52091ddf1e70">More...</a><br /></td></tr>
+<tr class="separator:a3618b27ae286e468251f52091ddf1e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd10caf6beabb9c81fb7a8072212c6ad"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#abd10caf6beabb9c81fb7a8072212c6ad">Solution_time</a></td></tr>
+<tr class="memdesc:abd10caf6beabb9c81fb7a8072212c6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solution time.  <a href="classoomph_1_1DenseLU.html#abd10caf6beabb9c81fb7a8072212c6ad">More...</a><br /></td></tr>
+<tr class="separator:abd10caf6beabb9c81fb7a8072212c6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea4118f8ead9e3f89f8d234f572766d1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#aea4118f8ead9e3f89f8d234f572766d1">Sign_of_determinant_of_matrix</a></td></tr>
+<tr class="memdesc:aea4118f8ead9e3f89f8d234f572766d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sign of the determinant of the matrix (obtained during the LU decomposition)  <a href="classoomph_1_1DenseLU.html#aea4118f8ead9e3f89f8d234f572766d1">More...</a><br /></td></tr>
+<tr class="separator:aea4118f8ead9e3f89f8d234f572766d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1LinearSolver"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1LinearSolver')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1LinearSolver.html">oomph::LinearSolver</a></td></tr>
+<tr class="memitem:a5f5e7e7a44ff0897b0e4cd9524000edc inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a5f5e7e7a44ff0897b0e4cd9524000edc">Enable_resolve</a></td></tr>
+<tr class="memdesc:a5f5e7e7a44ff0897b0e4cd9524000edc inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean that indicates whether the matrix (or its factors, in the case of direct solver) should be stored so that the resolve function can be used.  <a href="classoomph_1_1LinearSolver.html#a5f5e7e7a44ff0897b0e4cd9524000edc">More...</a><br /></td></tr>
+<tr class="separator:a5f5e7e7a44ff0897b0e4cd9524000edc inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a536e41b50b3f3464ca9cb4a5776acc19 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a536e41b50b3f3464ca9cb4a5776acc19">Doc_time</a></td></tr>
+<tr class="memdesc:a536e41b50b3f3464ca9cb4a5776acc19 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag that indicates whether the time taken.  <a href="classoomph_1_1LinearSolver.html#a536e41b50b3f3464ca9cb4a5776acc19">More...</a><br /></td></tr>
+<tr class="separator:a536e41b50b3f3464ca9cb4a5776acc19 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef857e4c0c16e8b342a14493e558bb15 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#aef857e4c0c16e8b342a14493e558bb15">Compute_gradient</a></td></tr>
+<tr class="memdesc:aef857e4c0c16e8b342a14493e558bb15 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">flag that indicates whether the gradient required for the globally convergent Newton method should be computed or not  <a href="classoomph_1_1LinearSolver.html#aef857e4c0c16e8b342a14493e558bb15">More...</a><br /></td></tr>
+<tr class="separator:aef857e4c0c16e8b342a14493e558bb15 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fd3bf9a5a94dcc23b7d903f99535e72 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a9fd3bf9a5a94dcc23b7d903f99535e72">Gradient_has_been_computed</a></td></tr>
+<tr class="memdesc:a9fd3bf9a5a94dcc23b7d903f99535e72 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">flag that indicates whether the gradient was computed or not  <a href="classoomph_1_1LinearSolver.html#a9fd3bf9a5a94dcc23b7d903f99535e72">More...</a><br /></td></tr>
+<tr class="separator:a9fd3bf9a5a94dcc23b7d903f99535e72 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad38255ae12611787a857cc5c90ffa9f8 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#ad38255ae12611787a857cc5c90ffa9f8">Gradient_for_glob_conv_newton_solve</a></td></tr>
+<tr class="memdesc:ad38255ae12611787a857cc5c90ffa9f8 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> storing the gradient for the globally convergent Newton method.  <a href="classoomph_1_1LinearSolver.html#ad38255ae12611787a857cc5c90ffa9f8">More...</a><br /></td></tr>
+<tr class="separator:ad38255ae12611787a857cc5c90ffa9f8 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a66730f6a64112fe29601fefb08f4dc4f"><td class="memItemLeft" align="right" valign="top">long *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a66730f6a64112fe29601fefb08f4dc4f">Index</a></td></tr>
+<tr class="memdesc:a66730f6a64112fe29601fefb08f4dc4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to storage for the index of permutations in the LU solve.  <a href="classoomph_1_1DenseLU.html#a66730f6a64112fe29601fefb08f4dc4f">More...</a><br /></td></tr>
+<tr class="separator:a66730f6a64112fe29601fefb08f4dc4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b393b33667887cfdafa6290c7b3e209"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a9b393b33667887cfdafa6290c7b3e209">LU_factors</a></td></tr>
+<tr class="memdesc:a9b393b33667887cfdafa6290c7b3e209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to storage for the LU decomposition.  <a href="classoomph_1_1DenseLU.html#a9b393b33667887cfdafa6290c7b3e209">More...</a><br /></td></tr>
+<tr class="separator:a9b393b33667887cfdafa6290c7b3e209"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a6140531810d729d53113b6ac65193197"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseLU.html#a6140531810d729d53113b6ac65193197">DenseDoubleMatrix</a></td></tr>
+<tr class="memdesc:a6140531810d729d53113b6ac65193197"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classoomph_1_1DenseDoubleMatrix.html" title="Class of matrices containing doubles, and stored as a DenseMatrix&lt;double&gt;, but with solving functiona...">DenseDoubleMatrix</a> class is a friend.  <a href="classoomph_1_1DenseLU.html#a6140531810d729d53113b6ac65193197">More...</a><br /></td></tr>
+<tr class="separator:a6140531810d729d53113b6ac65193197"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to illustrate the principle. Only suitable for use with Serial matrices and vectors. This solver will only work with non-distributed matrices and vectors (note: <a class="el" href="classoomph_1_1DenseDoubleMatrix.html" title="Class of matrices containing doubles, and stored as a DenseMatrix&lt;double&gt;, but with solving functiona...">DenseDoubleMatrix</a> is not distributable) </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00319">319</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7d8217ef310a5c5ad224e4e6aa40d923"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d8217ef310a5c5ad224e4e6aa40d923">&#9670;&nbsp;</a></span>DenseLU() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseLU::DenseLU </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor, initialise storage. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00327">327</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>.</p>
+
+</div>
+</div>
+<a id="a5f0c2eb1cbe142498d12ae14e3cadca2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f0c2eb1cbe142498d12ae14e3cadca2">&#9670;&nbsp;</a></span>DenseLU() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseLU::DenseLU </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseLU.html">DenseLU</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00337">337</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="a012d934c8dec17f2ca3ad504939ab29d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a012d934c8dec17f2ca3ad504939ab29d">&#9670;&nbsp;</a></span>~DenseLU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseLU::~DenseLU </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor, clean up the stored LU factors. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00349">349</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l00103">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4fc7e7a29cb86df73883df9c6a65600b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fc7e7a29cb86df73883df9c6a65600b">&#9670;&nbsp;</a></span>backsub() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseLU::backsub </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do the backsubstitution step to solve the system LU result = rhs. </p>
+<p>Do the backsubstitution for the <a class="el" href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il...">DenseLU</a> solver. WARNING: this class does not perform any PARANOID checks on the vectors - these are all performed in the solve(...) method. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00309">309</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__solver_8h_source.html#l00410">Index</a>, <a class="el" href="linear__solver_8h_source.html#l00413">LU_factors</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, and <a class="el" href="double__vector_8h_source.html#l00255">oomph::DoubleVector::values_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00410">solve()</a>.</p>
+
+</div>
+</div>
+<a id="acef3a68bf4e28465a7c316dba135f504"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acef3a68bf4e28465a7c316dba135f504">&#9670;&nbsp;</a></span>backsub() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseLU::backsub </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>perform back substitution using <a class="el" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> </p>
+<p>Do the backsubstitution for the <a class="el" href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il...">DenseLU</a> solver. WARNING: this class does not perform any PARANOID checks on the vectors - these are all performed in the solve(...) method. So, if you call backsub directly, you have been warned... </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00362">362</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__solver_8h_source.html#l00410">Index</a>, <a class="el" href="linear__solver_8h_source.html#l00413">LU_factors</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>.</p>
+
+</div>
+</div>
+<a id="a5d4d454874476adadb3bc23913b1190b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d4d454874476adadb3bc23913b1190b">&#9670;&nbsp;</a></span>clean_up_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseLU::clean_up_memory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clean up the stored LU factors. </p>
+<p>Delete the storage that has been allocated for the LU factors, if the matrix data is not itself being overwritten. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a9d66f3262e80ca06a365f98216afd85f">oomph::LinearSolver</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00103">103</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00536">oomph::DistributableLinearAlgebraObject::clear_distribution()</a>, <a class="el" href="linear__solver_8h_source.html#l00410">Index</a>, and <a class="el" href="linear__solver_8h_source.html#l00413">LU_factors</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00128">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l00410">solve()</a>, and <a class="el" href="linear__solver_8h_source.html#l00349">~DenseLU()</a>.</p>
+
+</div>
+</div>
+<a id="a943a629a67289120473855bc96766dfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a943a629a67289120473855bc96766dfc">&#9670;&nbsp;</a></span>factorise()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseLU::factorise </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>matrix_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Perform the LU decomposition of the matrix. </p>
+<p>LU decompose the matrix. WARNING: this class does not perform any PARANOID checks on the vectors - these are all performed in the solve(...) method. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00128">128</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l00103">clean_up_memory()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__solver_8h_source.html#l00410">Index</a>, <a class="el" href="linear__solver_8h_source.html#l00413">LU_factors</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, and <a class="el" href="linear__solver_8h_source.html#l00405">Sign_of_determinant_of_matrix</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00410">solve()</a>.</p>
+
+</div>
+</div>
+<a id="a4605ec2ca02ff0b30f4cefc2458dfb66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4605ec2ca02ff0b30f4cefc2458dfb66">&#9670;&nbsp;</a></span>jacobian_setup_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::DenseLU::jacobian_setup_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>returns the time taken to assemble the jacobian matrix and residual vector </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a0fedfb9d9855d0e998c0e32140bc56d4">oomph::LinearSolver</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00370">370</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00398">Jacobian_setup_time</a>.</p>
+
+</div>
+</div>
+<a id="aabe93cf400bb488f0bc08755ee0dfde4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabe93cf400bb488f0bc08755ee0dfde4">&#9670;&nbsp;</a></span>linear_solver_solution_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double oomph::DenseLU::linear_solver_solution_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>return the time taken to solve the linear system (needs to be overloaded for each linear solver) </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a3c66f77db812a9c196478c7e2f77ef09">oomph::LinearSolver</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00377">377</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00401">Solution_time</a>.</p>
+
+</div>
+</div>
+<a id="a90c01b2a2471b4e038c6d5138c86c378"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90c01b2a2471b4e038c6d5138c86c378">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseLU::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseLU.html">DenseLU</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00343">343</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="ae82e044bb5a1173b8105b6fedd904801"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae82e044bb5a1173b8105b6fedd904801">&#9670;&nbsp;</a></span>solve() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseLU::solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>matrix_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">oomph::LinearSolver</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1FD__LU.html#ab8c9d6006352d0ea61a721b9c58cd523">oomph::FD_LU</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00410">410</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l00309">backsub()</a>, <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00520">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="linear__solver_8cc_source.html#l00103">clean_up_memory()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00333">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00513">oomph::DistributableLinearAlgebraObject::distribution_built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__solver_8h_source.html#l00076">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="linear__solver_8cc_source.html#l00128">factorise()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase::ncol()</a>, <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="linear__solver_8h_source.html#l00401">Solution_time</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01638">oomph::TimingHelpers::timer()</a>.</p>
+
+</div>
+</div>
+<a id="a1d79cf13a269733d655e3e90c447f84d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d79cf13a269733d655e3e90c447f84d">&#9670;&nbsp;</a></span>solve() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseLU::solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>matrix_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">oomph::LinearSolver</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1FD__LU.html#a2a44542b29faa39f1b816dc80da9eba1">oomph::FD_LU</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00525">525</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__solver_8cc_source.html#l00309">backsub()</a>, <a class="el" href="linear__solver_8cc_source.html#l00103">clean_up_memory()</a>, <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="linear__solver_8h_source.html#l00076">oomph::LinearSolver::Enable_resolve</a>, <a class="el" href="linear__solver_8cc_source.html#l00128">factorise()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="linear__solver_8h_source.html#l00401">Solution_time</a>.</p>
+
+</div>
+</div>
+<a id="ac354b224819146618ce8a1396f8f980e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac354b224819146618ce8a1396f8f980e">&#9670;&nbsp;</a></span>solve() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseLU::solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>problem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solver: Takes pointer to problem and returns the results <a class="el" href="classoomph_1_1Vector.html">Vector</a> which contains the solution of the linear system defined by the problem's fully assembled Jacobian and residual <a class="el" href="classoomph_1_1Vector.html">Vector</a>. </p>
+<p>Solver: Takes pointer to problem and returns the results <a class="el" href="classoomph_1_1Vector.html">Vector</a> which contains the solution of the linear system defined by the problem's fully assembled Jacobian and residual <a class="el" href="classoomph_1_1Vector.html">Vector</a>. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">oomph::LinearSolver</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1FD__LU.html#a6fd251bef9cdb7efbed4927f005eda2f">oomph::FD_LU</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8cc_source.html#l00053">53</a> of file <a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__solver_8h_source.html#l00080">oomph::LinearSolver::Doc_time</a>, <a class="el" href="problem_8cc_source.html#l03854">oomph::Problem::get_jacobian()</a>, <a class="el" href="linear__solver_8h_source.html#l00398">Jacobian_setup_time</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="linear__solver_8h_source.html#l00405">Sign_of_determinant_of_matrix</a>, <a class="el" href="problem_8h_source.html#l02311">oomph::Problem::sign_of_jacobian()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01638">oomph::TimingHelpers::timer()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00448">oomph::FD_LU::solve()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a6140531810d729d53113b6ac65193197"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6140531810d729d53113b6ac65193197">&#9670;&nbsp;</a></span>DenseDoubleMatrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="classoomph_1_1DenseDoubleMatrix.html" title="Class of matrices containing doubles, and stored as a DenseMatrix&lt;double&gt;, but with solving functiona...">DenseDoubleMatrix</a> class is a friend. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00322">322</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a66730f6a64112fe29601fefb08f4dc4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66730f6a64112fe29601fefb08f4dc4f">&#9670;&nbsp;</a></span>Index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long* oomph::DenseLU::Index</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to storage for the index of permutations in the LU solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00410">410</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00309">backsub()</a>, <a class="el" href="linear__solver_8cc_source.html#l00103">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l00128">factorise()</a>.</p>
+
+</div>
+</div>
+<a id="a3618b27ae286e468251f52091ddf1e70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3618b27ae286e468251f52091ddf1e70">&#9670;&nbsp;</a></span>Jacobian_setup_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::DenseLU::Jacobian_setup_time</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Jacobian setup time. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00398">398</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00370">jacobian_setup_time()</a>, <a class="el" href="linear__solver_8cc_source.html#l00053">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l00554">oomph::FD_LU::solve()</a>.</p>
+
+</div>
+</div>
+<a id="a9b393b33667887cfdafa6290c7b3e209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b393b33667887cfdafa6290c7b3e209">&#9670;&nbsp;</a></span>LU_factors</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* oomph::DenseLU::LU_factors</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to storage for the LU decomposition. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00413">413</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00309">backsub()</a>, <a class="el" href="linear__solver_8cc_source.html#l00103">clean_up_memory()</a>, and <a class="el" href="linear__solver_8cc_source.html#l00128">factorise()</a>.</p>
+
+</div>
+</div>
+<a id="aea4118f8ead9e3f89f8d234f572766d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea4118f8ead9e3f89f8d234f572766d1">&#9670;&nbsp;</a></span>Sign_of_determinant_of_matrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::DenseLU::Sign_of_determinant_of_matrix</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sign of the determinant of the matrix (obtained during the LU decomposition) </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00405">405</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00128">factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l00053">solve()</a>, and <a class="el" href="linear__solver_8cc_source.html#l00554">oomph::FD_LU::solve()</a>.</p>
+
+</div>
+</div>
+<a id="abd10caf6beabb9c81fb7a8072212c6ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd10caf6beabb9c81fb7a8072212c6ad">&#9670;&nbsp;</a></span>Solution_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::DenseLU::Solution_time</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solution time. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__solver_8h_source.html#l00401">401</a> of file <a class="el" href="linear__solver_8h_source.html">linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8h_source.html#l00377">linear_solver_solution_time()</a>, and <a class="el" href="linear__solver_8cc_source.html#l00410">solve()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="linear__solver_8h_source.html">linear_solver.h</a></li>
+<li><a class="el" href="linear__solver_8cc_source.html">linear_solver.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:27
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,532 @@
+\hypertarget{classoomph_1_1SamplePointContainerParameters}{}\doxysection{oomph\+::Sample\+Point\+Container\+Parameters Class Reference}
+\label{classoomph_1_1SamplePointContainerParameters}\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+
+
+Helper object for dealing with the parameters used for the \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}} objects.  
+
+
+
+
+{\ttfamily \#include $<$sample\+\_\+point\+\_\+parameters.\+h$>$}
+
+Inheritance diagram for oomph\+::Sample\+Point\+Container\+Parameters\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.964912cm]{classoomph_1_1SamplePointContainerParameters}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a63f93ee4ddc61cb01af363187de21947}{Sample\+Point\+Container\+Parameters}} (const \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \&data)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_aa089aeff405b3e4362b4335a9acfb5a2}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a5e0ced492320cc06615bcb1782b7bb22}{$\sim$\+Sample\+Point\+Container\+Parameters}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a92bcab955d47e99d47b601253da7b6b2}{mesh\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Pointer to mesh from whose Finite\+Elements sample points are created. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ double, double $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ae5b9cd742d38c42d337ede45bb9dda8c}{min\+\_\+and\+\_\+max\+\_\+coordinates}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ double, double $>$ $>$ \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ad619df6bc0253178dbbaf195cea2fb5a}{min\+\_\+and\+\_\+max\+\_\+coordinates}} () const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. Const version. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a710a6a32b2518b202a38fde405cdf7e5}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}} () const
+\begin{DoxyCompactList}\small\item\em \char`\"{}\+Measure of\char`\"{} number of sample points generated in each element const version \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a645bbbfc9395e5fe39a05845b2352b99}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em \char`\"{}\+Measure of\char`\"{} number of sample points generated in each element \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a946a3657f6c50f2e14dccf421ed5e178}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}} () const
+\begin{DoxyCompactList}\small\item\em Use eulerian coordinates (via interpolated\+\_\+x) during setup (otherwise use interpolated\+\_\+zeta())? \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a8aa712173bb8242b17e49df97c0072e3}{enable\+\_\+use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a9c59f44fa07b7f79e8b854d5b918e3bd}{disable\+\_\+use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}} ()
+\item 
+bool \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a436175c53c2801c510673146cdb75761}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}} () const
+\begin{DoxyCompactList}\small\item\em Ignore halo elements? (M\+PI only) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a6585db241b22e087222ca3b09e99b663}{enable\+\_\+ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}} ()
+\begin{DoxyCompactList}\small\item\em Enable Ignore halo elements? (M\+PI only) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ae1520f275ffb0941541aa51c89f3eeec}{disable\+\_\+ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}} ()
+\begin{DoxyCompactList}\small\item\em Disable Ignore halo elements? (M\+PI only) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ad8a463ddc961e51f6f77b4e8f678b962}{Default\+\_\+nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}}
+\begin{DoxyCompactList}\small\item\em Default for \char`\"{}measure of\char`\"{} number of sample points per element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a9047299fdfac8074a9996267d66e901e}{Mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh from whose Finite\+Elements sample points are created. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ double, double $>$ $>$ \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a980161906be89a1cf50835fe45949cfe}{Min\+\_\+and\+\_\+max\+\_\+coordinates}}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a68141123ff5252ad3dd1a8a5279282c4}{Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}}
+\begin{DoxyCompactList}\small\item\em \char`\"{}\+Measure of\char`\"{} number of sample points generated in each element \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ab8757aae90e85b2a860fd07acd19a92a}{Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Use Eulerian coordinates to setup bin (i.\+e. use interpolated\+\_\+x() rather than interpolated\+\_\+zeta() when setting up and searching sample point container) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ad6ba2b667c746fc6c66830e4f3dc3f70}{Ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}
+\begin{DoxyCompactList}\small\item\em Ignore halo elements? Accepting halo elements can drastically reduce the number of external halo elements in multidomain problems -- currently not aware of any problems with doing this therefore set to false by default but retention of this flag allows easy return to previous implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a2513e0c918a2ec86c05ac39318c1c6c3}{Sample\+Point\+Container\+Parameters}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a92bcab955d47e99d47b601253da7b6b2}{mesh\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass mesh. Constructor is private and can only be called by the derived friends. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a57f37f055a2f3b9509705988d2ee31a5}{Sample\+Point\+Container\+Parameters}} ()
+\begin{DoxyCompactList}\small\item\em Broken default constructor; needed for broken copy constructors. Don\textquotesingle{}t call. It will die. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_aeb332079314307f60dd3920aa46b8d81}{Bin\+Array\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Constructor is private and only accessible by friends to ensure that parameters are set correctly. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a8e6251aa45b1fe0683105714f4d1721a}{Refineable\+Bin\+Array\+Parameters}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a63762b7198d7c1a8df01b39c74ba2ad9}{Non\+Refineable\+Bin\+Array\+Parameters}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a2c9bab15d3e9295341cb9a94d77b3b9f}{C\+G\+A\+L\+Sample\+Point\+Container\+Parameters}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper object for dealing with the parameters used for the \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}} objects. 
+
+Definition at line 74 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a63f93ee4ddc61cb01af363187de21947}\label{classoomph_1_1SamplePointContainerParameters_a63f93ee4ddc61cb01af363187de21947}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!SamplePointContainerParameters@{SamplePointContainerParameters}}
+\index{SamplePointContainerParameters@{SamplePointContainerParameters}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{SamplePointContainerParameters()}{SamplePointContainerParameters()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Sample\+Point\+Container\+Parameters (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 89 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a5e0ced492320cc06615bcb1782b7bb22}\label{classoomph_1_1SamplePointContainerParameters_a5e0ced492320cc06615bcb1782b7bb22}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!````~SamplePointContainerParameters@{$\sim$SamplePointContainerParameters}}
+\index{````~SamplePointContainerParameters@{$\sim$SamplePointContainerParameters}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{$\sim$SamplePointContainerParameters()}{~SamplePointContainerParameters()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Sample\+Point\+Container\+Parameters\+::$\sim$\+Sample\+Point\+Container\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 102 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a2513e0c918a2ec86c05ac39318c1c6c3}\label{classoomph_1_1SamplePointContainerParameters_a2513e0c918a2ec86c05ac39318c1c6c3}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!SamplePointContainerParameters@{SamplePointContainerParameters}}
+\index{SamplePointContainerParameters@{SamplePointContainerParameters}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{SamplePointContainerParameters()}{SamplePointContainerParameters()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Sample\+Point\+Container\+Parameters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Constructor\+: Pass mesh. Constructor is private and can only be called by the derived friends. 
+
+
+
+Definition at line 215 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a57f37f055a2f3b9509705988d2ee31a5}\label{classoomph_1_1SamplePointContainerParameters_a57f37f055a2f3b9509705988d2ee31a5}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!SamplePointContainerParameters@{SamplePointContainerParameters}}
+\index{SamplePointContainerParameters@{SamplePointContainerParameters}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{SamplePointContainerParameters()}{SamplePointContainerParameters()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Sample\+Point\+Container\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Broken default constructor; needed for broken copy constructors. Don\textquotesingle{}t call. It will die. 
+
+
+
+Definition at line 225 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_ae1520f275ffb0941541aa51c89f3eeec}\label{classoomph_1_1SamplePointContainerParameters_ae1520f275ffb0941541aa51c89f3eeec}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!disable\_ignore\_halo\_elements\_during\_locate\_zeta\_search@{disable\_ignore\_halo\_elements\_during\_locate\_zeta\_search}}
+\index{disable\_ignore\_halo\_elements\_during\_locate\_zeta\_search@{disable\_ignore\_halo\_elements\_during\_locate\_zeta\_search}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{disable\_ignore\_halo\_elements\_during\_locate\_zeta\_search()}{disable\_ignore\_halo\_elements\_during\_locate\_zeta\_search()}}
+{\footnotesize\ttfamily void oomph\+::\+Sample\+Point\+Container\+Parameters\+::disable\+\_\+ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable Ignore halo elements? (M\+PI only) 
+
+
+
+Definition at line 175 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a9c59f44fa07b7f79e8b854d5b918e3bd}\label{classoomph_1_1SamplePointContainerParameters_a9c59f44fa07b7f79e8b854d5b918e3bd}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!disable\_use\_eulerian\_coordinates\_during\_setup@{disable\_use\_eulerian\_coordinates\_during\_setup}}
+\index{disable\_use\_eulerian\_coordinates\_during\_setup@{disable\_use\_eulerian\_coordinates\_during\_setup}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{disable\_use\_eulerian\_coordinates\_during\_setup()}{disable\_use\_eulerian\_coordinates\_during\_setup()}}
+{\footnotesize\ttfamily void oomph\+::\+Sample\+Point\+Container\+Parameters\+::disable\+\_\+use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Disable use of eulerian coordinates (via interpolated\+\_\+x) during setup (otherwise use interpolated\+\_\+zeta()) 
+
+Definition at line 157 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a6585db241b22e087222ca3b09e99b663}\label{classoomph_1_1SamplePointContainerParameters_a6585db241b22e087222ca3b09e99b663}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!enable\_ignore\_halo\_elements\_during\_locate\_zeta\_search@{enable\_ignore\_halo\_elements\_during\_locate\_zeta\_search}}
+\index{enable\_ignore\_halo\_elements\_during\_locate\_zeta\_search@{enable\_ignore\_halo\_elements\_during\_locate\_zeta\_search}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{enable\_ignore\_halo\_elements\_during\_locate\_zeta\_search()}{enable\_ignore\_halo\_elements\_during\_locate\_zeta\_search()}}
+{\footnotesize\ttfamily void oomph\+::\+Sample\+Point\+Container\+Parameters\+::enable\+\_\+ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable Ignore halo elements? (M\+PI only) 
+
+
+
+Definition at line 169 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a8aa712173bb8242b17e49df97c0072e3}\label{classoomph_1_1SamplePointContainerParameters_a8aa712173bb8242b17e49df97c0072e3}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!enable\_use\_eulerian\_coordinates\_during\_setup@{enable\_use\_eulerian\_coordinates\_during\_setup}}
+\index{enable\_use\_eulerian\_coordinates\_during\_setup@{enable\_use\_eulerian\_coordinates\_during\_setup}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{enable\_use\_eulerian\_coordinates\_during\_setup()}{enable\_use\_eulerian\_coordinates\_during\_setup()}}
+{\footnotesize\ttfamily void oomph\+::\+Sample\+Point\+Container\+Parameters\+::enable\+\_\+use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enable use of eulerian coordinates (via interpolated\+\_\+x) during setup (otherwise use interpolated\+\_\+zeta()) 
+
+Definition at line 150 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup.
+
+
+
+Referenced by oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), oomph\+::\+Refineable\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::adapt().
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a436175c53c2801c510673146cdb75761}\label{classoomph_1_1SamplePointContainerParameters_a436175c53c2801c510673146cdb75761}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!ignore\_halo\_elements\_during\_locate\_zeta\_search@{ignore\_halo\_elements\_during\_locate\_zeta\_search}}
+\index{ignore\_halo\_elements\_during\_locate\_zeta\_search@{ignore\_halo\_elements\_during\_locate\_zeta\_search}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{ignore\_halo\_elements\_during\_locate\_zeta\_search()}{ignore\_halo\_elements\_during\_locate\_zeta\_search()}}
+{\footnotesize\ttfamily bool oomph\+::\+Sample\+Point\+Container\+Parameters\+::ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Ignore halo elements? (M\+PI only) 
+
+
+
+Definition at line 163 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a92bcab955d47e99d47b601253da7b6b2}\label{classoomph_1_1SamplePointContainerParameters_a92bcab955d47e99d47b601253da7b6b2}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ oomph\+::\+Sample\+Point\+Container\+Parameters\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to mesh from whose Finite\+Elements sample points are created. 
+
+
+
+Definition at line 105 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Mesh\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Mesh\+As\+Geom\+Object\+::build\+\_\+it().
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_ae5b9cd742d38c42d337ede45bb9dda8c}\label{classoomph_1_1SamplePointContainerParameters_ae5b9cd742d38c42d337ede45bb9dda8c}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!min\_and\_max\_coordinates@{min\_and\_max\_coordinates}}
+\index{min\_and\_max\_coordinates@{min\_and\_max\_coordinates}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{min\_and\_max\_coordinates()}{min\_and\_max\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$double, double$>$ $>$\& oomph\+::\+Sample\+Point\+Container\+Parameters\+::min\+\_\+and\+\_\+max\+\_\+coordinates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. 
+
+
+
+Definition at line 114 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Min\+\_\+and\+\_\+max\+\_\+coordinates.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_ad619df6bc0253178dbbaf195cea2fb5a}\label{classoomph_1_1SamplePointContainerParameters_ad619df6bc0253178dbbaf195cea2fb5a}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!min\_and\_max\_coordinates@{min\_and\_max\_coordinates}}
+\index{min\_and\_max\_coordinates@{min\_and\_max\_coordinates}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{min\_and\_max\_coordinates()}{min\_and\_max\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$double, double$>$ $>$ oomph\+::\+Sample\+Point\+Container\+Parameters\+::min\+\_\+and\+\_\+max\+\_\+coordinates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. Const version. 
+
+
+
+Definition at line 123 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Min\+\_\+and\+\_\+max\+\_\+coordinates.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a645bbbfc9395e5fe39a05845b2352b99}\label{classoomph_1_1SamplePointContainerParameters_a645bbbfc9395e5fe39a05845b2352b99}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!nsample\_points\_generated\_per\_element@{nsample\_points\_generated\_per\_element}}
+\index{nsample\_points\_generated\_per\_element@{nsample\_points\_generated\_per\_element}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{nsample\_points\_generated\_per\_element()}{nsample\_points\_generated\_per\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Sample\+Point\+Container\+Parameters\+::nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\char`\"{}\+Measure of\char`\"{} number of sample points generated in each element 
+
+
+
+Definition at line 136 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a710a6a32b2518b202a38fde405cdf7e5}\label{classoomph_1_1SamplePointContainerParameters_a710a6a32b2518b202a38fde405cdf7e5}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!nsample\_points\_generated\_per\_element@{nsample\_points\_generated\_per\_element}}
+\index{nsample\_points\_generated\_per\_element@{nsample\_points\_generated\_per\_element}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{nsample\_points\_generated\_per\_element()}{nsample\_points\_generated\_per\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Sample\+Point\+Container\+Parameters\+::nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\char`\"{}\+Measure of\char`\"{} number of sample points generated in each element const version 
+
+
+
+Definition at line 130 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_aa089aeff405b3e4362b4335a9acfb5a2}\label{classoomph_1_1SamplePointContainerParameters_aa089aeff405b3e4362b4335a9acfb5a2}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Sample\+Point\+Container\+Parameters\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 95 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a946a3657f6c50f2e14dccf421ed5e178}\label{classoomph_1_1SamplePointContainerParameters_a946a3657f6c50f2e14dccf421ed5e178}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!use\_eulerian\_coordinates\_during\_setup@{use\_eulerian\_coordinates\_during\_setup}}
+\index{use\_eulerian\_coordinates\_during\_setup@{use\_eulerian\_coordinates\_during\_setup}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{use\_eulerian\_coordinates\_during\_setup()}{use\_eulerian\_coordinates\_during\_setup()}}
+{\footnotesize\ttfamily bool oomph\+::\+Sample\+Point\+Container\+Parameters\+::use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Use eulerian coordinates (via interpolated\+\_\+x) during setup (otherwise use interpolated\+\_\+zeta())? 
+
+
+
+Definition at line 143 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+References Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup.
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_aeb332079314307f60dd3920aa46b8d81}\label{classoomph_1_1SamplePointContainerParameters_aeb332079314307f60dd3920aa46b8d81}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!BinArrayParameters@{BinArrayParameters}}
+\index{BinArrayParameters@{BinArrayParameters}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{BinArrayParameters}{BinArrayParameters}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classoomph_1_1BinArrayParameters}{Bin\+Array\+Parameters}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Constructor is private and only accessible by friends to ensure that parameters are set correctly. 
+
+
+
+Definition at line 81 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a2c9bab15d3e9295341cb9a94d77b3b9f}\label{classoomph_1_1SamplePointContainerParameters_a2c9bab15d3e9295341cb9a94d77b3b9f}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!CGALSamplePointContainerParameters@{CGALSamplePointContainerParameters}}
+\index{CGALSamplePointContainerParameters@{CGALSamplePointContainerParameters}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{CGALSamplePointContainerParameters}{CGALSamplePointContainerParameters}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classoomph_1_1CGALSamplePointContainerParameters}{C\+G\+A\+L\+Sample\+Point\+Container\+Parameters}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 85 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a63762b7198d7c1a8df01b39c74ba2ad9}\label{classoomph_1_1SamplePointContainerParameters_a63762b7198d7c1a8df01b39c74ba2ad9}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!NonRefineableBinArrayParameters@{NonRefineableBinArrayParameters}}
+\index{NonRefineableBinArrayParameters@{NonRefineableBinArrayParameters}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{NonRefineableBinArrayParameters}{NonRefineableBinArrayParameters}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classoomph_1_1NonRefineableBinArrayParameters}{Non\+Refineable\+Bin\+Array\+Parameters}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 83 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a8e6251aa45b1fe0683105714f4d1721a}\label{classoomph_1_1SamplePointContainerParameters_a8e6251aa45b1fe0683105714f4d1721a}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!RefineableBinArrayParameters@{RefineableBinArrayParameters}}
+\index{RefineableBinArrayParameters@{RefineableBinArrayParameters}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{RefineableBinArrayParameters}{RefineableBinArrayParameters}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classoomph_1_1RefineableBinArrayParameters}{Refineable\+Bin\+Array\+Parameters}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 82 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_ad8a463ddc961e51f6f77b4e8f678b962}\label{classoomph_1_1SamplePointContainerParameters_ad8a463ddc961e51f6f77b4e8f678b962}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!Default\_nsample\_points\_generated\_per\_element@{Default\_nsample\_points\_generated\_per\_element}}
+\index{Default\_nsample\_points\_generated\_per\_element@{Default\_nsample\_points\_generated\_per\_element}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{Default\_nsample\_points\_generated\_per\_element}{Default\_nsample\_points\_generated\_per\_element}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Default\+\_\+nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Default for \char`\"{}measure of\char`\"{} number of sample points per element. 
+
+
+
+Definition at line 181 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_ad6ba2b667c746fc6c66830e4f3dc3f70}\label{classoomph_1_1SamplePointContainerParameters_ad6ba2b667c746fc6c66830e4f3dc3f70}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!Ignore\_halo\_elements\_during\_locate\_zeta\_search@{Ignore\_halo\_elements\_during\_locate\_zeta\_search}}
+\index{Ignore\_halo\_elements\_during\_locate\_zeta\_search@{Ignore\_halo\_elements\_during\_locate\_zeta\_search}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{Ignore\_halo\_elements\_during\_locate\_zeta\_search}{Ignore\_halo\_elements\_during\_locate\_zeta\_search}}
+{\footnotesize\ttfamily bool oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Ignore halo elements? Accepting halo elements can drastically reduce the number of external halo elements in multidomain problems -- currently not aware of any problems with doing this therefore set to false by default but retention of this flag allows easy return to previous implementation. 
+
+
+
+Definition at line 207 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+Referenced by disable\+\_\+ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search(), enable\+\_\+ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search(), and ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search().
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a9047299fdfac8074a9996267d66e901e}\label{classoomph_1_1SamplePointContainerParameters_a9047299fdfac8074a9996267d66e901e}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!Mesh\_pt@{Mesh\_pt}}
+\index{Mesh\_pt@{Mesh\_pt}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{Mesh\_pt}{Mesh\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to mesh from whose Finite\+Elements sample points are created. 
+
+
+
+Definition at line 186 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+Referenced by mesh\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a980161906be89a1cf50835fe45949cfe}\label{classoomph_1_1SamplePointContainerParameters_a980161906be89a1cf50835fe45949cfe}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!Min\_and\_max\_coordinates@{Min\_and\_max\_coordinates}}
+\index{Min\_and\_max\_coordinates@{Min\_and\_max\_coordinates}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{Min\_and\_max\_coordinates}{Min\_and\_max\_coordinates}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$double, double$>$ $>$ oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. 
+
+Definition at line 192 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+Referenced by min\+\_\+and\+\_\+max\+\_\+coordinates().
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_a68141123ff5252ad3dd1a8a5279282c4}\label{classoomph_1_1SamplePointContainerParameters_a68141123ff5252ad3dd1a8a5279282c4}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!Nsample\_points\_generated\_per\_element@{Nsample\_points\_generated\_per\_element}}
+\index{Nsample\_points\_generated\_per\_element@{Nsample\_points\_generated\_per\_element}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{Nsample\_points\_generated\_per\_element}{Nsample\_points\_generated\_per\_element}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\char`\"{}\+Measure of\char`\"{} number of sample points generated in each element 
+
+
+
+Definition at line 195 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+Referenced by nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element().
+
+\mbox{\Hypertarget{classoomph_1_1SamplePointContainerParameters_ab8757aae90e85b2a860fd07acd19a92a}\label{classoomph_1_1SamplePointContainerParameters_ab8757aae90e85b2a860fd07acd19a92a}} 
+\index{oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}!Use\_eulerian\_coordinates\_during\_setup@{Use\_eulerian\_coordinates\_during\_setup}}
+\index{Use\_eulerian\_coordinates\_during\_setup@{Use\_eulerian\_coordinates\_during\_setup}!oomph::SamplePointContainerParameters@{oomph::SamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{Use\_eulerian\_coordinates\_during\_setup}{Use\_eulerian\_coordinates\_during\_setup}}
+{\footnotesize\ttfamily bool oomph\+::\+Sample\+Point\+Container\+Parameters\+::\+Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Use Eulerian coordinates to setup bin (i.\+e. use interpolated\+\_\+x() rather than interpolated\+\_\+zeta() when setting up and searching sample point container) 
+
+
+
+Definition at line 200 of file sample\+\_\+point\+\_\+parameters.\+h.
+
+
+
+Referenced by disable\+\_\+use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup(), enable\+\_\+use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup(), and use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{sample__point__parameters_8h}{sample\+\_\+point\+\_\+parameters.\+h}}\end{DoxyCompactItemize}

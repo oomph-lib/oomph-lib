@@ -1,0 +1,490 @@
+/**
+
+\mainpage Demo problem: Free, small-amplitude axisymmetric oscillation of 2D circular disk
+
+
+In this tutorial we demonstrate how to solve time-dependent solid mechanics
+problems. We consider the small-amplitude oscillations of a circular
+disk and compare the computed solution against analytical predictions
+based on linear elasticity.
+
+
+<HR>
+<HR>
+
+\section theory Theory
+Small-amplitude, axisymmetric oscillations of a circular disk of
+radius \f$ a \f$ are governed by the Navier-Lame equations
+\f[
+(\lambda +2 \mu) \ \mbox{grad}^* \mbox{div}^* {\bf u}^* = 
+\rho \frac{\partial^2 {\bf u}^*}{\partial t^{*2}},
+\f]
+where the displacement field is given by 
+\f$ {\bf u}^*  = u^*(r^*,t^*) \ {\bf e}_r\f$.
+Here \f$ \lambda, \mu \f$ are the disk's two Lame
+constants and \f$ \rho \f$ is its density. The outer boundary
+is stress-free so that 
+\f[
+\tau_{rr} = \lambda \ \mbox{div}^*  {\bf u}^* + 
+2 \mu \frac{\partial u^*}{\partial r^*} = 0 \ \ \ \ \ \mbox{at }
+r^* = a.
+\f]
+
+We non-dimensionalise all lengths and displacements on the 
+disk's undeformed radius, \f$ {\cal L} = a \f$, and scale time on 
+\f[ 
+{\cal T} = a \sqrt{\frac{\rho}{(\lambda+2\mu)}}. \ \ \ \ \ \ \ \ \ \ \
+\ \ \ \ \ \ \ \ \ \ (1)
+\f]
+This transforms the governing PDE into the dimensionless and
+parameter-free form
+\f[
+\frac{\partial}{\partial r}\left(\frac{1}{r} \frac{\partial
+(ru)}{\partial r}\right) = \frac{\partial^2 u}{\partial t^2},
+\f]
+subject to the boundary condition
+\f[
+\frac{\nu}{1-2\nu}\frac{1}{r} \frac{\partial (ru)}{\partial r} +
+\frac{\partial u}{\partial r} = 0 \mbox{\ \ \ \ \ at } r=1,
+\f]
+where \f$ \nu \f$ is Poisson's ratio.
+
+Making the ansatz \f$ u(r,t) = U(r) \sin(\omega t)\f$ transforms the
+PDE into an ODE for \f$ U(r) \f$:
+\f[
+\frac{d}{dr}\left( \frac{1}{r} \frac{d(rU)}{d r}\right)
++ \omega^2 U = 0. 
+\f]
+The solution of this ODE are Bessel functions and the requirement that
+\f$ U(r) \f$ is finite at \f$ r=0 \f$ implies that
+\f[
+U(r) \sim J_1(\omega r).
+\f]
+where \f$ J_1 \f$ is the Bessel function of first order. 
+
+Substituting this into the stress-free boundary condition yields
+the dispersion relation
+\f[
+\frac{\nu}{1-2\nu}\frac{1}{r} \frac{d (rJ_1(\omega r))}{d r} +
+\frac{dJ_1(\omega r)}{dr} = 0 \mbox{\ \ \ \ \ at } r=1,
+\f]
+for the eigenfrequencies \f$ \omega \f$.
+
+If the disk performs oscillations in a single mode with eigenfrequency
+\f$ \omega \f$ its displacement field is therefore given by
+\f[
+u(r,t) = A \ J_1(\omega r) \ \sin(\omega t),
+\f]
+where \f$ A \f$ is the (small) amplitude of the oscillations.
+
+
+
+<HR>
+<HR>
+
+\section implementation Implementation
+
+We discretise the disk with \c oomph-lib's large-displacement solid
+mechanics elements and apply initial conditions that are consistent
+with an oscillation in its first eigenmode. As discussed in the
+<a href="../../solid_theory/html/index.html#non-dim_solid">Solid Mechanics
+Theory Tutorial</a>, time-dependent problems require the specification
+of the (square of the) parameter
+\f[
+\Lambda = \frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{{\cal S}}}
+\f]
+which represents the ratio of the system's intrinsic timescale
+\f$ {\cal L} \sqrt{\rho/{\cal S}} \f$, to the timescale 
+\f$ {\cal T} \f$ used to non-dimensionalise time; here \f${\cal S}\f$
+is the reference stiffness used to non-dimensionalise the stresses.
+
+Since the disk performs small-amplitude oscillations it is appropriate
+to assume linear elastic behaviour with Young's modulus \f$ E \f$
+and Poisson's ratio \f$ \nu \f$. We therefore use Young's modulus
+to non-dimensionalise the stresses by setting \f$ {\cal S} =
+E. \f$ Using (1), the parameter \f$ \Lambda^2 \f$ 
+is then given by
+\f[
+\Lambda^2 = \frac{(1-\nu)}{(1+\nu)(1-2\nu)}
+\f]
+where we used the identity \f$ E = \mu(3\lambda +2
+\mu)/(\lambda+\mu). \f$
+
+<HR>
+<HR>
+
+\section results Results
+
+Here is an animation of the computed time-dependent displacement field.
+(Computations were only performed in a quarter of the domain, using
+appropriate symmetry boundary conditions along the lines
+\f$ x=0 \f$ and \f$ y=0. \f$
+
+\image html displ.gif "Animation of the displacement field. " 
+\image latex displ.eps "Animation of the displacement field. " width=0.75\textwidth
+
+The figure below shows (in red) the radius of a control point 
+on the disk's curvilinear boundary. The green line
+shows the corresponding theoretical prediction for disk's radius
+for the first eigenfrequency \f$ \omega = 2.126. \f$ 
+Theoretical and computational results are in excellent agreement.
+
+\image html trace.gif "Time trace of the radius. Red: FE. Green: Linearised theory. " 
+\image latex trace.eps "Time trace of the radius. Red: FE. Green: Linearised theory. " width=0.75\textwidth
+
+The final plot shows an animation of the theoretical and computed
+radial displacement fields along the line \f$ y=0 \f$, parametrised
+by a Lagrangian coordinate \f$ \xi \f$. The results 
+are again in excellent agreement throughout the domain.
+
+\image html line_displ.gif "Animation of the exact (linearised) and computed radial displacement field. " 
+\image latex line_displ.eps "Animation of the exact (linearised) and computed radial displacement field. " width=0.75\textwidth
+
+<HR>
+<HR>
+
+\section namespace Global parameters
+As usual we define the global problem parameters in a namespace. 
+We define Poisson's ratio, compute the associated timescale ratio
+\f$ \Lambda^2 \f$, and provide a pointer to the constitutive law.
+
+The \c multiplier(...) function is needed during the assignment
+of the initial conditions. It is used to specify the product of
+the timescale ratio \f$ \Lambda^2 \f$ and the isotropic growth
+\f$ \Gamma \f$. Since the present problem does not involve any
+growth we have \f$ \Gamma = 1 \f$, so the function simply returns
+the (spatially constant) timescale ratio. See the 
+<a href="../../solid_theory/html/index.html#Solid_IC">
+Solid Mechanics Theory Tutorial</a> and section \ref newmark_ic for 
+further details.
+
+\dontinclude disk_oscillation.cc
+\skipline start_namespace
+\until end namespace
+
+
+<HR>
+<HR>
+
+\section main The driver code
+We use command line arguments to indicate if the
+time-dependent simulation is run in validation mode, in which
+case we only perform a few timesteps: 
+
+\dontinclude disk_oscillation.cc
+\skipline start_main
+\until }
+
+We create a Hookean constitutive equation, build the problem
+and run the simulation:
+ 
+\until end of main
+
+
+
+<HR>
+<HR>
+
+\section ic_object Specifying the initial condition via a time-dependent GeomObject
+
+The equations of solid mechanics require the assignment of initial
+conditions for the position and the velocity of all material particles
+at some initial time. Within \c oomph-lib, such initial conditions
+are most naturally specified in the form of time-dependent \c
+GeomObjects. Here is the specification of an axisymmetric, oscillating
+disk of unit radius whose displacement field is given by the
+analytical solution derived in the \ref theory section.
+The analytical solution requires the specification of the 
+amplitude of the oscillation and the Poisson's ratio -- these suffice
+to compute the time-dependent position, velocity and acceleration
+as a function of the current time, specified by the 
+\c TimeStepper object.
+
+\dontinclude disk_oscillation.cc
+\skipline disk_as_geom_object
+\until accel(
+
+The class provides a static member function \c
+residual_for_dispersion(...) which is used to solve the nonlinear dispersion
+relation for the disk's eigenfrequency \f$ \omega \f$. The function
+is static (and thus essentially a global function) because
+it interacts with \c oomph-lib's black-box Newton solver.
+
+\until residual);
+
+The private member data stores the amplitude and period of the oscillation,
+the material's Poisson ratio and the eigenfrequency.
+
+\until end disk_as_geom_object
+
+<HR>
+
+
+\subsection ic_constructor Constructor
+The constructor uses \c oomph-lib's black-box Newton solver, defined
+in the namespace \c BlackBoxFDNewtonSolver, to determine the
+eigenfrequency.
+
+\dontinclude disk_oscillation.cc
+\skipline ic_constructor
+\until }
+
+
+<HR>
+
+
+\subsection dispersion The dispersion relation
+Here is the specification of the dispersion relation, in the form
+required by \c oomph-lib's black-box Newton solver. The Bessel
+functions are computed by <a href="http://www.crbond.com/">C.R. Bond's</a> 
+\c bessjy01a(...) function, available (with permission) via
+\c oomph-lib's \c CRBond_Bessel namespace.
+
+\dontinclude disk_oscillation.cc
+\skipline start_of_dispersion
+\until }
+
+<HR>
+
+
+\subsection position The position(...), veloc(...) and accel(...) functions
+
+The \c position(...), \c veloc(...) and \c accel(...) functions
+specify the motion of the \c GeomObject, according to the
+solution of the linearised equations derived in the
+ \ref theory section. Here is a listing of the \c position(...)
+function:
+
+\dontinclude disk_oscillation.cc
+\skipline start_position
+\until end position
+
+The \c veloc(...) and \c accel(...) functions are very similar
+and we omit their listings in the interest of brevity. See the source code
+<a href="../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc">
+disk_oscillation.cc</a> for details.
+
+<HR>
+<HR>
+ 
+\section mesh The mesh
+We discretise a quarter of the domain with a solid mechanics version
+of the refineable quarter circle sector mesh, constructed using multiple
+inheritance. 
+
+\dontinclude disk_oscillation.cc
+\skipline start_mesh
+\until {
+
+The constructor calls the constructor of the underlying 
+non-solid mesh, checks that the element type, specified by
+the template argument, is a \c SolidFiniteElement, and sets
+the Lagrangian coordinates of all nodes to their
+Eulerian positions, making the current configuration stress-free.
+
+\until }; 
+
+<HR>
+<HR>
+ 
+\section problem_class The Problem class
+The \c Problem class has the usual member functions which will be
+discussed in more detail below.
+
+\dontinclude disk_oscillation.cc
+\skipline start_class
+\until end class
+
+
+
+<HR>
+<HR>
+ 
+\section start_constructor The Problem constructor
+We start by creating the timestepper -- the standard
+\c Newmark timestepper with two history values (We refer to
+<a href="../../../beam/unsteady_ring/html/index.html#prev">
+another tutorial</a> for a discussion of the template parameter 
+in the \c Newmark timestepper).
+Next, we create a \c GeomObject that
+specifies the curvilinear boundary of the quarter circle domain
+and pass it to the mesh constructor.
+
+\dontinclude disk_oscillation.cc
+\skipline start_constructor
+\until time_stepper_pt());
+
+We select the nodes on the horizontal symmetry boundary and
+on the curvilinear boundary as control nodes whose displacement
+we shall document in a trace file.
+
+\until done choosing
+
+We apply symmetry boundary conditions along the horizontal and
+vertical symmetry boundaries: zero vertical displacement along
+the line \f$ y=0 \f$ (boundary 0) and  zero horizontal displacement along
+the line \f$ x=0 \f$ (boundary 2).
+
+\until done bcs
+
+We complete the build of the elements by specifying the pointer
+to the constitutive law and to the timescale ratio \f$ \Lambda^2. \f$ 
+
+\until }
+
+Finally, we apply one level of uniform refinement and assign the
+equation numbers.
+
+\until end constructor
+
+
+
+
+<HR>
+<HR>
+ 
+
+ 
+\section doc Post-processing
+We start the post-processing routine by plotting the shape of the deformed
+body, before documenting the radii of the control points and the 
+exact outer radius of the disk (according to linear theory) in 
+the trace file.
+
+
+\dontinclude disk_oscillation.cc
+\skipline start_doc
+\until Trace_file << std::endl; 
+
+Next we and output the exact and computed displacements and
+velocities (as a function of the Lagrangian coordinate) along 
+the horizontal symmetry line where \f$ y=0. \f$ The displacements
+are given by the difference between the current Eulerian and the
+Lagrangian positions:
+
+\until end line output
+
+The function also contains similar output for 2D displacements
+fields but we suppress the listing here and refer to the source code 
+<a href="../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc">
+disk_oscillation.cc</a> for details.
+
+<HR>
+<HR>
+ 
+
+ 
+\section start_run Running the time-integration
+Before starting the time-integration we create an output 
+directory and open a trace file that we shall use to record the
+displacements of the control points selected earlier.
+
+\dontinclude disk_oscillation.cc
+\skipline start_run
+\until open(filename)
+
+Next, we initialise the global \c Time object so that the initial
+condition is assigned at \f$ t= 1 \f$, and set the timestep 
+for the time integration.
+
+\until initialise_dt(dt)
+
+We choose the amplitude of the oscillation and pass it and 
+the value of Poisson's ratio to the constructor of the
+\c GeomObject that specifies the initial condition. 
+
+\until time_stepper_pt()
+
+To assign the initial conditions, we create a \c
+SolidInitialCondition object from the \c GeomObject and call the 
+helper function \c set_newmark_initial_condition_consistently(...)
+which assigns the (Newmark) history values of the nodal positions to be
+consistent with the current motion of the \c AxisymOscillationDisk.
+
+\until ::multiplier
+
+Finally, we document the initial condition and start the timestepping
+loop.
+
+\until end of run
+
+
+
+<HR>
+<HR>
+
+\section comex Comments and Exercises
+
+\subsection higher_modes Higher modes
+In the constructor of the \c AxisymOscillationDisk we 
+used an initial guess of \f$ \omega=2 \f$ for the eigenfrequency.
+With this initial guess the Newton iteration converges to the
+first eigenfrequency with a period of \f$ T=2.96. \f$
+The first eigenmode is relatively smooth and therefore easily resolved on 
+a coarse mesh. Explore the system's higher eigenmodes by specifying
+larger initial guesses for  \f$ \omega  \f$. For instance, specifying
+an initial guess of \f$ \omega=4 \f$ the Newton iteration converges to 
+an eigenmode with a period of \f$ 0.297. \f$ You will need much 
+finer meshes and smaller timesteps to accurately resolve these
+oscillations. This is because the Newmark scheme does not have
+any dissipation. This implies that any spurious features
+that are generated by under-resolved computations persist
+indefinitely.
+
+
+
+\subsection newmark_ic Assignment of history values for the Newmark timestepper
+We commented 
+<a href="../../../linear_wave/two_d_linear_wave/html/index.html#IC">
+elsewhere</a> that, even though the mathematical initial value problem only
+requires the specification of the initial position and the velocity, the
+Newmark timestepper requires assignments for the initial positions and
+for \e two history values, representing the discrete velocities and
+accelerations. We refer to the relevant section in the 
+<a href="../../../solid/solid_theory/html/index.html#Solid_IC">
+Solid Mechanics Tutorial</a> for a discussion of the automatic assignment
+of these history values for solid mechanics problems.
+
+We note that the function  \c
+SolidMesh::Solid_IC_problem.set_newmark_initial_condition_consistently(...)
+which may be used to assign the history values, requires the
+specification of the product of the (possibly spatially-varying) 
+"multiplier" \f$\Gamma \Lambda^2 \f$ -- the product of the growth
+factor and the timescale ratio -- via a function pointer. If this
+function pointer is not specified, it is assumed that the product of
+these two quantities is equal to one -- appropriate for a case without
+growth and when time is non-dimensionalised on the system's intrinsic
+timescale. 
+
+  If the "multiplier" is not (or wrongly) specified, the assignment
+of the history values will be incorrect and \c oomph-lib will issue
+a suitable warning if the library is compiled with the \c PARANOID flag. 
+You should experiment with this by removing the function 
+pointer in the call to \c
+SolidMesh::Solid_IC_problem.set_newmark_initial_condition_consistently(...).
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial 
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/solid/disk_oscillation/">
+demo_drivers/solid/disk_oscillation/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc">
+demo_drivers/solid/disk_oscillation/disk_oscillation.cc
+</A>
+</CENTER>
+.
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

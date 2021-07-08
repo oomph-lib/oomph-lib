@@ -1,0 +1,157 @@
+\hypertarget{classoomph_1_1GeneralisedTimeStepper}{}\doxysection{oomph\+::Generalised\+Time\+Stepper Class Reference}
+\label{classoomph_1_1GeneralisedTimeStepper}\index{oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}}
+
+
+Generalised timestepper that can serve a variety of purposes in continuation, bifurcation detection and periodic-\/orbit computations. The key generalisation is that more than one of the entries is actually a degree of freedom in the problem. These are distinct from our standard (implict) Timesteppers in which the only dof is the current value (first entry in the storage scheme). These objects will typically be used to replace exisiting timesteppers for specific tasks. ~\newline
+  
+
+
+
+
+{\ttfamily \#include $<$generalised\+\_\+timesteppers.\+h$>$}
+
+Inheritance diagram for oomph\+::Generalised\+Time\+Stepper\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1GeneralisedTimeStepper}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper_a0ffd908ef40b0dcd0ef5a4adbfbe4d3e}{ndof\+\_\+storage\+\_\+entries}} () const
+\begin{DoxyCompactList}\small\item\em Return the number of entries that correspond to dof storage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper_a900fa5bbfd48ee5a133ed8c6c2ba44a8}{Generalised\+Time\+Stepper}} (const unsigned \&n\+\_\+tstorage, const unsigned \&max\+\_\+deriv, const unsigned \&\mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper_a0ffd908ef40b0dcd0ef5a4adbfbe4d3e}{ndof\+\_\+storage\+\_\+entries}}=1)
+\item 
+\mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper_a8a200841329ed3abbf45ebe051598967}{Generalised\+Time\+Stepper}} ()
+\begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper_aa7fc21faecb4859ec7cbaf212a88d082}{Generalised\+Time\+Stepper}} (const \mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper}{Generalised\+Time\+Stepper}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper_af89420c5b7f70db01b9f568687c1dc83}{operator=}} (const \mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper}{Generalised\+Time\+Stepper}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper_a5041d173762ea30fbd724281df50f1fc}{Ndof\+\_\+storage\+\_\+entries}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generalised timestepper that can serve a variety of purposes in continuation, bifurcation detection and periodic-\/orbit computations. The key generalisation is that more than one of the entries is actually a degree of freedom in the problem. These are distinct from our standard (implict) Timesteppers in which the only dof is the current value (first entry in the storage scheme). These objects will typically be used to replace exisiting timesteppers for specific tasks. ~\newline
+ 
+
+Definition at line 51 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1GeneralisedTimeStepper_a900fa5bbfd48ee5a133ed8c6c2ba44a8}\label{classoomph_1_1GeneralisedTimeStepper_a900fa5bbfd48ee5a133ed8c6c2ba44a8}} 
+\index{oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}!GeneralisedTimeStepper@{GeneralisedTimeStepper}}
+\index{GeneralisedTimeStepper@{GeneralisedTimeStepper}!oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}}
+\doxysubsubsection{\texorpdfstring{GeneralisedTimeStepper()}{GeneralisedTimeStepper()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Generalised\+Time\+Stepper\+::\+Generalised\+Time\+Stepper (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+tstorage,  }\item[{const unsigned \&}]{max\+\_\+deriv,  }\item[{const unsigned \&}]{ndof\+\_\+storage\+\_\+entries = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Constructor that can only be called by derived objects. Pass the information directly through to the \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} object 
+
+Definition at line 64 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedTimeStepper_a8a200841329ed3abbf45ebe051598967}\label{classoomph_1_1GeneralisedTimeStepper_a8a200841329ed3abbf45ebe051598967}} 
+\index{oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}!GeneralisedTimeStepper@{GeneralisedTimeStepper}}
+\index{GeneralisedTimeStepper@{GeneralisedTimeStepper}!oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}}
+\doxysubsubsection{\texorpdfstring{GeneralisedTimeStepper()}{GeneralisedTimeStepper()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Generalised\+Time\+Stepper\+::\+Generalised\+Time\+Stepper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Broken empty constructor. 
+
+
+
+Definition at line 73 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedTimeStepper_aa7fc21faecb4859ec7cbaf212a88d082}\label{classoomph_1_1GeneralisedTimeStepper_aa7fc21faecb4859ec7cbaf212a88d082}} 
+\index{oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}!GeneralisedTimeStepper@{GeneralisedTimeStepper}}
+\index{GeneralisedTimeStepper@{GeneralisedTimeStepper}!oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}}
+\doxysubsubsection{\texorpdfstring{GeneralisedTimeStepper()}{GeneralisedTimeStepper()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Generalised\+Time\+Stepper\+::\+Generalised\+Time\+Stepper (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper}{Generalised\+Time\+Stepper}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 76 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1GeneralisedTimeStepper_a0ffd908ef40b0dcd0ef5a4adbfbe4d3e}\label{classoomph_1_1GeneralisedTimeStepper_a0ffd908ef40b0dcd0ef5a4adbfbe4d3e}} 
+\index{oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}!ndof\_storage\_entries@{ndof\_storage\_entries}}
+\index{ndof\_storage\_entries@{ndof\_storage\_entries}!oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}}
+\doxysubsubsection{\texorpdfstring{ndof\_storage\_entries()}{ndof\_storage\_entries()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Time\+Stepper\+::ndof\+\_\+storage\+\_\+entries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of entries that correspond to dof storage. 
+
+
+
+Definition at line 90 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References Ndof\+\_\+storage\+\_\+entries.
+
+
+
+Referenced by oomph\+::\+Continuation\+Storage\+Scheme\+::modify\+\_\+storage().
+
+\mbox{\Hypertarget{classoomph_1_1GeneralisedTimeStepper_af89420c5b7f70db01b9f568687c1dc83}\label{classoomph_1_1GeneralisedTimeStepper_af89420c5b7f70db01b9f568687c1dc83}} 
+\index{oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Time\+Stepper\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper}{Generalised\+Time\+Stepper}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 82 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1GeneralisedTimeStepper_a5041d173762ea30fbd724281df50f1fc}\label{classoomph_1_1GeneralisedTimeStepper_a5041d173762ea30fbd724281df50f1fc}} 
+\index{oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}!Ndof\_storage\_entries@{Ndof\_storage\_entries}}
+\index{Ndof\_storage\_entries@{Ndof\_storage\_entries}!oomph::GeneralisedTimeStepper@{oomph::GeneralisedTimeStepper}}
+\doxysubsubsection{\texorpdfstring{Ndof\_storage\_entries}{Ndof\_storage\_entries}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Time\+Stepper\+::\+Ndof\+\_\+storage\+\_\+entries\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 57 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+Referenced by oomph\+::\+Continuation\+Storage\+Scheme\+::modify\+\_\+storage(), ndof\+\_\+storage\+\_\+entries(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+positions(), and oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalised__timesteppers_8h}{generalised\+\_\+timesteppers.\+h}}\end{DoxyCompactItemize}

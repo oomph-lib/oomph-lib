@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: quick_guide.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">quick_guide.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a9ed426cbbaefff05802e5157f6e8bd88"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a> = &quot;../../example_code_list/html/index.html&quot;&gt; list of example codes&lt;/A &gt; distributed with the library. \section main_how_to How to solve simple PDEs with oomph-lib To solve a given PDE with \c oomph-lib, its discretisation needs to be specified in a \c Problem object. This usually involves the specification of the \c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> and the element types, followed by the application of the boundary conditions. If these steps are performed in the \c Problem constructor, the driver <a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> itself can be as simple as:\dontinclude one_d_poisson_generic_only.cc \skipline main(\until } <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> amount of work required to represent a given PDE as a \c Problem object is problem-dependent:- If \c oomph-lib 's existing \c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> objects and element types are sufficient to discretise the problem, the generation of a fully-functional \c Problem object is straightforward. We shall discuss this case in the section \ref problem. - If \c oomph-lib provides the required element type but none of the available meshes are suitable, you will have to write your own \c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> object. We shall discuss this in the section \ref mesh. It is also possible to create \c oomph-lib meshes based on the output from third-party(commercial) mesh generators. This is illustrated in&lt; A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../meshes/third_party_meshes/html/index.html&quot;&gt; another example.&lt;/A &gt; - Finally, the problem might involve a PDE <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> which \c oomph-lib does not provide any suitable elements. In this case you will need to write your own element. When implementing elements in \c oomph-lib the element formulation is generally sub-divided into(at least) two levels. Geometric elements implement the element geometry(e.g. 2D quad elements, 3D brick elements, etc)</td></tr>
+<tr class="separator:a9ed426cbbaefff05802e5157f6e8bd88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad24e4b91f35d2da58d987fd895983a0c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#ad24e4b91f35d2da58d987fd895983a0c">class</a> = &quot;oomph-table&quot;&gt;&lt; TR &gt;&lt; TD <a class="el" href="quick__guide_8txt.html#ad24e4b91f35d2da58d987fd895983a0c">class</a>=&quot;panel panel-<a class="el" href="quick__guide_8txt.html#a4d0781152eba93dda92287ed2b1550a8">default</a>&quot;&gt;&lt; CENTER <a class="el" href="quick__guide_8txt.html#ad24e4b91f35d2da58d987fd895983a0c">class</a>=&quot;panel-heading&quot;&gt;&lt; B &gt;One-dimensional model Poisson problem&lt;/B &gt;&lt;/CENTER &gt;&lt; div <a class="el" href="quick__guide_8txt.html#ad24e4b91f35d2da58d987fd895983a0c">class</a>=&quot;panel-body&quot;&gt; Solve \<a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a>[\frac{\mbox{d}^2u}{\mbox{d}x^2}=\pm 30 \sin(\sqrt{30} x), \ \ \ \ \ \ \ \ \ \ @E[1DPoisson]@ \<a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a>] in the one-dimensional domain \<a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> $x\in[0, 1]\f$, subject to \<a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a>[u(0)=0 \ \mbox{\ \ \ and \ \ \ } \ \ u(1)=\mp 1, \ \ \ \ \ \ \ \ \ \ @E[1DPoisson_BC]@ \<a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a>]&lt;/div &gt;&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; by isoparametric two-node elements.(Please consult the&lt; A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../intro/html/index.html&quot;&gt;Introduction&lt;/A &gt; <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> a review of the relevant finite element theory.) <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> source <a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> this example(&lt; A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../../demo_drivers/poisson/one_d_poisson_generic_only/one_d_poisson_generic_only.cc&quot;&gt;one_d_poisson_generic_only.cc&lt;/A &gt;) is self-contained and uses only objects from the &quot;generic&quot; part of the \c oomph-lib library.[\c oomph-lib does, of course, provide 1D meshes and Poisson elements but we deliberately ignore these because we wish to illustrate how to build such objects from scratch. <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> alternative example <a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a>&lt; A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../../demo_drivers/poisson/one_d_poisson/one_d_poisson.cc&quot;&gt; one_d_poisson.cc&lt;/A &gt;, discussed in&lt; A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../poisson/one_d_poisson/html/index.html&quot;&gt; another example&lt;/A &gt; illustrates the implementation of the same problem using existing library objects.] <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> main purpose of this document is to provide a \e &quot;quick&quot; introduction to \c oomph-lib 's fundamental objects, so the example classes presented below are fully-functional but very basic. We provide exercises at the end of each section to allow the reader to explore various straightforward improvements, most of which are implemented in the corresponding objects in the library. Finally, the section \ref comments provides a discussion of some general design principles that should be respected when creating new classes <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> use with the library.&lt; HR &gt;&lt; HR &gt; \section problem How to build a Problem All specific \c Problems should be implemented as objects that inherit from the generic \c Problem class. These specific \c Problem objects will vary considerably depending on the exact details of the problem being solved. Only a few member functions \e must be implemented <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> each specific \c Problem class:- <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> problem constructor \<a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> SomeSpecificProblem(...) \endcode - and the member functions \<a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> Problem::actions_before_newton_solve() \endcode \<a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> Problem::actions_after_newton_solve() \endcode . \subsection spec <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> constructor:SomeSpecificProblem(...) <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> Problem constructor \c SomeSpecificProblem(...) usually contains the following steps:- Construction of the timestepper(if required), e.g. \<a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> Problem::add_time_stepper_pt(new SomeTimeStepper())</td></tr>
+<tr class="separator:ad24e4b91f35d2da58d987fd895983a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a82cfecd465e2d249c843fd678debe61b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a82cfecd465e2d249c843fd678debe61b">mainpage</a> (Not-So-) Quick Users Guide <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> purpose of this document is to provide a &quot;quick&quot; introduction to the fundamental objects in \c oomph-lib. Assuming that you - have a basic understanding of the finite element method . and - are reasonably familiar with object-oriented programming in C++</td></tr>
+<tr class="separator:a82cfecd465e2d249c843fd678debe61b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87e4bf3e024429aa7aa103e7b432bfeb"><td class="memItemLeft" align="right" valign="top">endcode Construction of the c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> (which may involve passing a particular element type as a template parameter)</td></tr>
+<tr class="separator:a87e4bf3e024429aa7aa103e7b432bfeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63e01640fb0d539d1b7d6f6f9a381274"><td class="memItemLeft" align="right" valign="top">endcode This statement sets the first(=zero-th in C++ 's zero-based indexing) nodal value to 1.0. - Completion of the build of the elements endcode subsection actbef The function in time dependent temporal discretisation Within this linear <a class="el" href="quick__guide_8txt.html#a4b4416668e498cab1d80a1242381c0f2">problems</a> are special cases <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> which Newton s method converges in one step&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> (pure virtual) member function \c Problem</td></tr>
+<tr class="separator:a63e01640fb0d539d1b7d6f6f9a381274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2d00a6560c109390f77f64ad86fd601"><td class="memItemLeft" align="right" valign="top">endcode subsection distorted_mesh How to adapt an existing <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> to a different domain shape Given that mesh generation tends to be a fairly tedious one should always check whether it is possible to deform an existing c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> into a shape that matches the required domain Provided that the new domain has the same topology as the domain represented by the original c this can always be done by re positioning the Nodes Such deformed c Meshes should be implemented via by deriving the new c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> from an existing one Here is an example that illustrates the procedure Assume we wish to solve an equation in the annular domain&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#aa2d00a6560c109390f77f64ad86fd601">bounded</a> (in polar coordinates) by \f$ r \in[<a class="el" href="quick__guide_8txt.html#a9646ddcfbc2f9bc39d1cf1982e289472">r_</a></td></tr>
+<tr class="separator:aa2d00a6560c109390f77f64ad86fd601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf1cb6924dd6da8c2881c34e811bffad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> (unsigned n=0;n&lt; n_node;n++)</td></tr>
+<tr class="separator:adf1cb6924dd6da8c2881c34e811bffad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a2a9a5d0af7e32f1db04179a574e86c90"><td class="memItemLeft" align="right" valign="top">these geometric elements act as base classes <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> specific c FiniteElements that implement the discretisation of particular PDEs We discuss the implementation of the two types of elements in two separate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a2a9a5d0af7e32f1db04179a574e86c90">sections</a></td></tr>
+<tr class="separator:a2a9a5d0af7e32f1db04179a574e86c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d0781152eba93dda92287ed2b1550a8"><td class="memItemLeft" align="right" valign="top">endcode Specification of the boundary conditions By&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a4d0781152eba93dda92287ed2b1550a8">default</a></td></tr>
+<tr class="separator:a4d0781152eba93dda92287ed2b1550a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2776bbc2bbeace0b362c3df824fe8eb4"><td class="memItemLeft" align="right" valign="top">endcode Specification of the boundary conditions By all nodal values are assumed to be free and their values are initialised to zero&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a2776bbc2bbeace0b362c3df824fe8eb4">Therefore</a></td></tr>
+<tr class="separator:a2776bbc2bbeace0b362c3df824fe8eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1930459dda66e6f5cc5abde6217fd8b"><td class="memItemLeft" align="right" valign="top">endcode Specification of the boundary conditions By all nodal values are assumed to be free and their values are initialised to zero we only need to pin the values that are prescribed by boundary conditions and assign any nonzero boundary values For&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#aa1930459dda66e6f5cc5abde6217fd8b">instance</a></td></tr>
+<tr class="separator:aa1930459dda66e6f5cc5abde6217fd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b4416668e498cab1d80a1242381c0f2"><td class="memItemLeft" align="right" valign="top">endcode This statement sets the first(=zero-th in C++ 's zero-based indexing) nodal value to 1.0. - Completion of the build of the elements endcode subsection actbef <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> function in time dependent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a4b4416668e498cab1d80a1242381c0f2">problems</a></td></tr>
+<tr class="separator:a4b4416668e498cab1d80a1242381c0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6da34e5fa987afcf75ad6a5f57a3002a"><td class="memItemLeft" align="right" valign="top">endcode This statement sets the first(=zero-th in C++ 's zero-based indexing) nodal value to 1.0. - Completion of the build of the elements endcode subsection actbef <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> function in time dependent temporal discretisation Within this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a6da34e5fa987afcf75ad6a5f57a3002a">framework</a></td></tr>
+<tr class="separator:a6da34e5fa987afcf75ad6a5f57a3002a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554d25b3b938ef393a362cb50a68ca30"><td class="memItemLeft" align="right" valign="top">endcode If&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a554d25b3b938ef393a362cb50a68ca30">desired</a></td></tr>
+<tr class="separator:a554d25b3b938ef393a362cb50a68ca30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cc40741e259335e99d97bb624c09eed"><td class="memItemLeft" align="right" valign="top">endcode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a3cc40741e259335e99d97bb624c09eed">Again</a></td></tr>
+<tr class="separator:a3cc40741e259335e99d97bb624c09eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22617638d13e02e2355396f0efac6441"><td class="memItemLeft" align="right" valign="top">endcode the finer grained member functions c Problem::actions_after_newton_step() and \c Problem To build a c OneDimMesh with ten elements of type c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a22617638d13e02e2355396f0efac6441">SomeElement</a></td></tr>
+<tr class="separator:a22617638d13e02e2355396f0efac6441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cf0d45f1e422b066836c6b451d8f938"><td class="memItemLeft" align="right" valign="top">endcode the finer grained member functions c Problem::actions_after_newton_step() and \c Problem To build a c OneDimMesh with ten elements of type c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a3cf0d45f1e422b066836c6b451d8f938">say</a></td></tr>
+<tr class="separator:a3cf0d45f1e422b066836c6b451d8f938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ed4f14a2273ad89cd15c532cba12f6e"><td class="memItemLeft" align="right" valign="top">endcode subsection distorted_mesh How to adapt an existing <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> to a different domain shape Given that mesh generation tends to be a fairly tedious&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a6ed4f14a2273ad89cd15c532cba12f6e">process</a></td></tr>
+<tr class="separator:a6ed4f14a2273ad89cd15c532cba12f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87d98d9383cf4ede5d237d15f8b45b54"><td class="memItemLeft" align="right" valign="top">endcode subsection distorted_mesh How to adapt an existing Mesh to a different domain shape Given that mesh generation tends to be a fairly tedious one should always check whether it is possible to deform an existing c Mesh into a shape that matches the required domain Provided that the new domain has the same topology as the domain represented by the original c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a87d98d9383cf4ede5d237d15f8b45b54">Mesh</a></td></tr>
+<tr class="separator:a87d98d9383cf4ede5d237d15f8b45b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0a739cc0ae056a11b0d9a30b87be62a"><td class="memItemLeft" align="right" valign="top">endcode subsection distorted_mesh How to adapt an existing <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> to a different domain shape Given that mesh generation tends to be a fairly tedious one should always check whether it is possible to deform an existing c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> into a shape that matches the required domain Provided that the new domain has the same topology as the domain represented by the original c this can always be done by re positioning the Nodes Such deformed c Meshes should be implemented via&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#af0a739cc0ae056a11b0d9a30b87be62a">inheritance</a></td></tr>
+<tr class="separator:af0a739cc0ae056a11b0d9a30b87be62a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9646ddcfbc2f9bc39d1cf1982e289472"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a9646ddcfbc2f9bc39d1cf1982e289472">r_</a></td></tr>
+<tr class="separator:a9646ddcfbc2f9bc39d1cf1982e289472"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29cd0618a88c307916802833ae667965"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a29cd0618a88c307916802833ae667965">varphi_</a></td></tr>
+<tr class="separator:a29cd0618a88c307916802833ae667965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79ef5533024c5cca04a9ad7ff4689107"><td class="memItemLeft" align="right" valign="top">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in[0, L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a79ef5533024c5cca04a9ad7ff4689107">identical</a></td></tr>
+<tr class="separator:a79ef5533024c5cca04a9ad7ff4689107"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3164cb91556c51fc6ca3aa4de05205"><td class="memItemLeft" align="right" valign="top">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in[0, L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a></td></tr>
+<tr class="separator:a5e3164cb91556c51fc6ca3aa4de05205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28c512be778574961174106e95825c6d"><td class="memItemLeft" align="right" valign="top">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in[0, L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a28c512be778574961174106e95825c6d">n_phi</a></td></tr>
+<tr class="separator:a28c512be778574961174106e95825c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78d8afa5582b00e09020ac467b127397"><td class="memItemLeft" align="right" valign="top">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in[0, L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a78d8afa5582b00e09020ac467b127397">r_min</a></td></tr>
+<tr class="separator:a78d8afa5582b00e09020ac467b127397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a75da5e2f56dd5571b8a556e1a6c500"><td class="memItemLeft" align="right" valign="top">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in[0, L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a9a75da5e2f56dd5571b8a556e1a6c500">r_max</a></td></tr>
+<tr class="separator:a9a75da5e2f56dd5571b8a556e1a6c500"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10de6107417dc48a16cf00b58d00fc7"><td class="memItemLeft" align="right" valign="top">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in[0, L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double const double const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#af10de6107417dc48a16cf00b58d00fc7">phi_min</a></td></tr>
+<tr class="separator:af10de6107417dc48a16cf00b58d00fc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac839063c3988d3908e1455a2213bc073"><td class="memItemLeft" align="right" valign="top">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in[0, L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double const double const double const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#ac839063c3988d3908e1455a2213bc073">phi_max</a></td></tr>
+<tr class="separator:ac839063c3988d3908e1455a2213bc073"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4648272fb56eaaebdcdfc9f50f47daba"><td class="memItemLeft" align="right" valign="top">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in[0, L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double const double const double const double const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a4648272fb56eaaebdcdfc9f50f47daba">pi</a> = 4.0*atan(1.0)</td></tr>
+<tr class="separator:a4648272fb56eaaebdcdfc9f50f47daba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a405d86defb546a9435e2ef1714834112"><td class="memItemLeft" align="right" valign="top">endcode&lt; HR &gt; subsection mes_exercise&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a405d86defb546a9435e2ef1714834112">Exercise</a></td></tr>
+<tr class="separator:a405d86defb546a9435e2ef1714834112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac17939ce74bee1d9d5e41f861c653489"><td class="memItemLeft" align="right" valign="top">endcode&lt; HR &gt; subsection mes_exercise&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a></td></tr>
+<tr class="separator:ac17939ce74bee1d9d5e41f861c653489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d40451f6364de6fea6dcc6058ffe213"><td class="memItemLeft" align="right" valign="top">endcode&lt; HR &gt; subsection mes_exercise&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#a7d40451f6364de6fea6dcc6058ffe213">hat</a></td></tr>
+<tr class="separator:a7d40451f6364de6fea6dcc6058ffe213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0d8d5a7b9f9ffb2f59a7322a31eb771"><td class="memItemLeft" align="right" valign="top">endcode&lt; HR &gt; subsection mes_exercise <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> Pass the parameters <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quick__guide_8txt.html#ad0d8d5a7b9f9ffb2f59a7322a31eb771">N_0</a></td></tr>
+<tr class="separator:ad0d8d5a7b9f9ffb2f59a7322a31eb771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ad24e4b91f35d2da58d987fd895983a0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad24e4b91f35d2da58d987fd895983a0c">&#9670;&nbsp;</a></span>class</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="quick__guide_8txt.html#ad24e4b91f35d2da58d987fd895983a0c">class</a> =  &quot;oomph-table&quot;&gt; &lt;TR&gt; &lt;TD <a class="el" href="quick__guide_8txt.html#ad24e4b91f35d2da58d987fd895983a0c">class</a>=&quot;panel panel-<a class="el" href="quick__guide_8txt.html#a4d0781152eba93dda92287ed2b1550a8">default</a>&quot;&gt; &lt;CENTER <a class="el" href="quick__guide_8txt.html#ad24e4b91f35d2da58d987fd895983a0c">class</a>=&quot;panel-heading&quot;&gt; &lt;B&gt;One-dimensional model Poisson problem&lt;/B&gt; &lt;/CENTER&gt; &lt;div <a class="el" href="quick__guide_8txt.html#ad24e4b91f35d2da58d987fd895983a0c">class</a>=&quot;panel-body&quot;&gt; Solve \<a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a>[ \frac{\mbox{d}^2u}{\mbox{d}x^2} = \pm 30 \sin(\sqrt{30} x), \ \ \ \ \ \ \ \ \ \ @E[1DPoisson]@ \<a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a>] in the one-dimensional domain \f$x\in[0,1]\f$, subject to \<a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a>[ u(0)=0 \ \mbox{\ \ \ and \ \ \ } \ \ u(1)=\mp 1, \ \ \ \ \ \ \ \ \ \ @E[1DPoisson_BC]@ \<a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a>] &lt;/div&gt; &lt;/TD&gt; &lt;/TR&gt; &lt;/TABLE&gt; &lt;/CENTER&gt; by isoparametric two-node elements. (Please consult the &lt;A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../intro/html/index.html&quot;&gt;Introduction&lt;/A&gt; <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> a review of the relevant finite element theory.) <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> source <a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> this example (&lt;A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../../demo_drivers/poisson/one_d_poisson_generic_only/one_d_poisson_generic_only.cc&quot;&gt;one_d_poisson_generic_only.cc&lt;/A&gt;) is self-contained and uses only objects from the &quot;generic&quot; part of the \c oomph-lib library. [\c oomph-lib does, of course, provide 1D meshes and Poisson elements but we deliberately ignore these because we wish to illustrate how to build such objects from scratch. <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> alternative example <a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> &lt;A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../../demo_drivers/poisson/one_d_poisson/one_d_poisson.cc&quot;&gt; one_d_poisson.cc&lt;/A&gt;, discussed in &lt;A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../poisson/one_d_poisson/html/index.html&quot;&gt; another example&lt;/A&gt; illustrates the implementation of the same problem using existing library objects.] <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> main purpose of this document is to provide a \e &quot;quick&quot; introduction to \c oomph-lib's fundamental objects, so the example classes presented below are fully-functional but very basic. We provide exercises at the end of each section to allow the reader to explore various straightforward improvements, most of which are implemented in the corresponding objects in the library. Finally, the section \ref comments provides a discussion of some general design principles that should be respected when creating new classes <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> use with the library. &lt;HR&gt; &lt;HR&gt; \section problem How to build a Problem All specific \c Problems should be implemented as objects that inherit from the generic \c Problem class. These specific \c Problem objects will vary considerably depending on the exact details of the problem being solved. Only a few member functions \e must be implemented <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> each specific \c Problem class: - <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> problem constructor \<a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> SomeSpecificProblem(...) \endcode - and the member functions \<a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> Problem::actions_before_newton_solve() \endcode \<a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> Problem::actions_after_newton_solve() \endcode . \subsection spec <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> constructor: SomeSpecificProblem(...) <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> Problem constructor \c SomeSpecificProblem(...) usually contains the following steps: - Construction of the timestepper (if required), e.g. \<a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> Problem::add_time_stepper_pt(new SomeTimeStepper())</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00131">131</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9ed426cbbaefff05802e5157f6e8bd88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed426cbbaefff05802e5157f6e8bd88">&#9670;&nbsp;</a></span>HREF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a> =  &quot;../../example_code_list/html/index.html&quot;&gt; list of example codes&lt;/A&gt; distributed with the library. \section main_how_to How to solve simple PDEs with oomph-lib To solve a given PDE with \c oomph-lib, its discretisation needs to be specified in a \c Problem object. This usually involves the specification of the \c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> and the element types, followed by the application of the boundary conditions. If these steps are performed in the \c Problem constructor, the driver <a class="el" href="quick__guide_8txt.html#a5e3164cb91556c51fc6ca3aa4de05205">code</a> itself can be as simple as: \dontinclude one_d_poisson_generic_only.cc \skipline main( \until } <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> amount of work required to represent a given PDE as a \c Problem object is problem-dependent: - If \c oomph-lib's existing \c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> objects and element types are sufficient to discretise the problem, the generation of a fully-functional \c Problem object is straightforward. We shall discuss this case in the section \ref problem. - If \c oomph-lib provides the required element type but none of the available meshes are suitable, you will have to write your own \c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> object. We shall discuss this in the section \ref mesh. It is also possible to create \c oomph-lib meshes based on the output from third-party (commercial) mesh generators. This is illustrated in &lt;A <a class="el" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=&quot;../../meshes/third_party_meshes/html/index.html&quot;&gt; another example.&lt;/A&gt; - Finally, the problem might involve a PDE <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> which \c oomph-lib does not provide any suitable elements. In this case you will need to write your own element. When implementing elements in \c oomph-lib the element formulation is generally sub-divided into (at least) two levels. Geometric elements implement the element geometry (e.g. 2D quad elements, 3D brick elements, etc)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00045">45</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="aa2d00a6560c109390f77f64ad86fd601"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2d00a6560c109390f77f64ad86fd601">&#9670;&nbsp;</a></span>bounded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode subsection distorted_mesh How to adapt an existing <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> to a different domain shape Given that mesh generation tends to be a fairly tedious one should always check whether it is possible to deform an existing c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> into a shape that matches the required domain Provided that the new domain has the same topology as the domain represented by the original c this can always be done by re positioning the Nodes Such deformed c Meshes should be implemented via by deriving the new c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> from an existing one Here is an example that illustrates the procedure Assume we wish to solve an equation in the annular domain bounded </td>
+          <td>(</td>
+          <td class="paramtype">in polar&#160;</td>
+          <td class="paramname"><em>coordinates</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00351">351</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="adf1cb6924dd6da8c2881c34e811bffad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf1cb6924dd6da8c2881c34e811bffad">&#9670;&nbsp;</a></span>for()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">for </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00397">397</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+<p class="reference">References <a class="el" href="quick__guide_8txt_source.html#l00382">phi_max</a>, <a class="el" href="quick__guide_8txt_source.html#l00381">phi_min</a>, <a class="el" href="quick__guide_8txt_source.html#l00394">pi</a>, <a class="el" href="quick__guide_8txt_source.html#l00380">r_max</a>, and <a class="el" href="quick__guide_8txt_source.html#l00380">r_min</a>.</p>
+
+</div>
+</div>
+<a id="a82cfecd465e2d249c843fd678debe61b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82cfecd465e2d249c843fd678debe61b">&#9670;&nbsp;</a></span>mainpage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage </td>
+          <td>(</td>
+          <td class="paramtype">Not-So-&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a87e4bf3e024429aa7aa103e7b432bfeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87e4bf3e024429aa7aa103e7b432bfeb">&#9670;&nbsp;</a></span>Mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode Construction of the c Mesh </td>
+          <td>(</td>
+          <td class="paramtype">which may involve passing a particular element type as a template&#160;</td>
+          <td class="paramname"><em>parameter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63e01640fb0d539d1b7d6f6f9a381274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63e01640fb0d539d1b7d6f6f9a381274">&#9670;&nbsp;</a></span>The()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode This statement sets the first (= zero-th in C++'s zero-based indexing) nodal value to 1.0. - Completion of the build of the elements endcode subsection actbef The function in time dependent temporal discretisation Within this linear <a class="el" href="quick__guide_8txt.html#a4b4416668e498cab1d80a1242381c0f2">problems</a> are special cases <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> which Newton s method converges in one step The </td>
+          <td>(</td>
+          <td class="paramtype">pure&#160;</td>
+          <td class="paramname"><em>virtual</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00173">173</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a3cc40741e259335e99d97bb624c09eed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cc40741e259335e99d97bb624c09eed">&#9670;&nbsp;</a></span>Again</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode Again</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00211">211</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a5e3164cb91556c51fc6ca3aa4de05205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e3164cb91556c51fc6ca3aa4de05205">&#9670;&nbsp;</a></span>code</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in [0,L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of code</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00379">379</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4d0781152eba93dda92287ed2b1550a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d0781152eba93dda92287ed2b1550a8">&#9670;&nbsp;</a></span>default</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode Specification of the boundary conditions By default</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00137">137</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a554d25b3b938ef393a362cb50a68ca30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a554d25b3b938ef393a362cb50a68ca30">&#9670;&nbsp;</a></span>desired</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode If desired</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00181">181</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a405d86defb546a9435e2ef1714834112"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a405d86defb546a9435e2ef1714834112">&#9670;&nbsp;</a></span>Exercise</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode&lt;HR&gt; subsection mes_exercise Exercise</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00416">416</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac17939ce74bee1d9d5e41f861c653489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac17939ce74bee1d9d5e41f861c653489">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode&lt;HR&gt; subsection mes_exercise f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00428">428</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6da34e5fa987afcf75ad6a5f57a3002a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6da34e5fa987afcf75ad6a5f57a3002a">&#9670;&nbsp;</a></span>framework</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode This statement sets the first (= zero-th in C++'s zero-based indexing) nodal value to 1.0. - Completion of the build of the elements endcode subsection actbef <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> function in time dependent temporal discretisation Within this framework</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00169">169</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7d40451f6364de6fea6dcc6058ffe213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d40451f6364de6fea6dcc6058ffe213">&#9670;&nbsp;</a></span>hat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode&lt;HR&gt; subsection mes_exercise hat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{x}]<a class="code" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">\f</a>$, <a class="code" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">while</a></div>
+<div class="line"><a class="code" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">\f</a>$ <a class="code" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">N_1 \f</a>$ elements are to be placed in the the <a class="code" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">region \f</a>$ x \in</div>
+<div class="line">[<a class="code" href="quick__guide_8txt.html#a7d40451f6364de6fea6dcc6058ffe213">\hat</a>{x}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00428">428</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a79ef5533024c5cca04a9ad7ff4689107"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79ef5533024c5cca04a9ad7ff4689107">&#9670;&nbsp;</a></span>identical</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in [0,L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is identical</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00361">361</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="af0a739cc0ae056a11b0d9a30b87be62a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0a739cc0ae056a11b0d9a30b87be62a">&#9670;&nbsp;</a></span>inheritance</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode subsection distorted_mesh How to adapt an existing <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> to a different domain shape Given that mesh generation tends to be a fairly tedious one should always check whether it is possible to deform an existing c <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> into a shape that matches the required domain Provided that the new domain has the same topology as the domain represented by the original c this can always be done by re positioning the Nodes Such deformed c Meshes should be implemented via inheritance</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00348">348</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa1930459dda66e6f5cc5abde6217fd8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1930459dda66e6f5cc5abde6217fd8b">&#9670;&nbsp;</a></span>instance</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode Specification of the boundary conditions By all nodal values are assumed to be free and their values are initialised to zero we only need to pin the values that are prescribed by boundary conditions and assign any nonzero boundary values For instance</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00141">141</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a87d98d9383cf4ede5d237d15f8b45b54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87d98d9383cf4ede5d237d15f8b45b54">&#9670;&nbsp;</a></span>Mesh</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode subsection distorted_mesh How to adapt an existing Mesh to a different domain shape Given that mesh generation tends to be a fairly tedious one should always check whether it is possible to deform an existing c Mesh into a shape that matches the required domain Provided that the new domain has the same topology as the domain represented by the original c Mesh</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00346">346</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad0d8d5a7b9f9ffb2f59a7322a31eb771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0d8d5a7b9f9ffb2f59a7322a31eb771">&#9670;&nbsp;</a></span>N_0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode&lt;HR&gt; subsection mes_exercise <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> Pass the parameters <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00430">430</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a28c512be778574961174106e95825c6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28c512be778574961174106e95825c6d">&#9670;&nbsp;</a></span>n_phi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in [0,L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double const double const double const double n_phi</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00379">379</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac839063c3988d3908e1455a2213bc073"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac839063c3988d3908e1455a2213bc073">&#9670;&nbsp;</a></span>phi_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in [0,L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double const double const double const double&amp; phi_max</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00382">382</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quick__guide_8txt_source.html#l00397">for()</a>.</p>
+
+</div>
+</div>
+<a id="af10de6107417dc48a16cf00b58d00fc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af10de6107417dc48a16cf00b58d00fc7">&#9670;&nbsp;</a></span>phi_min</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in [0,L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double const double const double&amp; phi_min</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00381">381</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quick__guide_8txt_source.html#l00397">for()</a>.</p>
+
+</div>
+</div>
+<a id="a4648272fb56eaaebdcdfc9f50f47daba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4648272fb56eaaebdcdfc9f50f47daba">&#9670;&nbsp;</a></span>pi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in [0,L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double const double const double const double const double pi = 4.0*atan(1.0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00394">394</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quick__guide_8txt_source.html#l00397">for()</a>.</p>
+
+</div>
+</div>
+<a id="a4b4416668e498cab1d80a1242381c0f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b4416668e498cab1d80a1242381c0f2">&#9670;&nbsp;</a></span>problems</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode This statement sets the first (= zero-th in C++'s zero-based indexing) nodal value to 1.0. - Completion of the build of the elements endcode subsection actbef <a class="el" href="quick__guide_8txt.html#a63e01640fb0d539d1b7d6f6f9a381274">The</a> function in time dependent problems</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00169">169</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6ed4f14a2273ad89cd15c532cba12f6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ed4f14a2273ad89cd15c532cba12f6e">&#9670;&nbsp;</a></span>process</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode subsection distorted_mesh How to adapt an existing <a class="el" href="quick__guide_8txt.html#a87e4bf3e024429aa7aa103e7b432bfeb">Mesh</a> to a different domain shape Given that mesh generation tends to be a fairly tedious process</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00342">342</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9646ddcfbc2f9bc39d1cf1982e289472"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9646ddcfbc2f9bc39d1cf1982e289472">&#9670;&nbsp;</a></span>r_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">r_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{max}] <a class="code" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">\f</a>$ <a class="code" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">and  \f</a>$ \varphi \in </div>
+<div class="line">[<a class="code" href="quick__guide_8txt.html#a29cd0618a88c307916802833ae667965">\varphi_</a>{min}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00352">352</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9a75da5e2f56dd5571b8a556e1a6c500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a75da5e2f56dd5571b8a556e1a6c500">&#9670;&nbsp;</a></span>r_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in [0,L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double const double&amp; r_max</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00380">380</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quick__guide_8txt_source.html#l00397">for()</a>.</p>
+
+</div>
+</div>
+<a id="a78d8afa5582b00e09020ac467b127397"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d8afa5582b00e09020ac467b127397">&#9670;&nbsp;</a></span>r_min</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L_x <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> and <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> y in [0,L_y] <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> with <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> N_x times N_y <a class="el" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a> quadrilateral elements Since the topology of the two domains is the annular mesh can be implemented in a few lines of const unsigned const double&amp; r_min</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00380">380</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quick__guide_8txt_source.html#l00397">for()</a>.</p>
+
+</div>
+</div>
+<a id="a3cf0d45f1e422b066836c6b451d8f938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cf0d45f1e422b066836c6b451d8f938">&#9670;&nbsp;</a></span>say</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode the finer grained member functions c Problem::actions_after_newton_step () and \c Problem To build a c OneDimMesh with ten elements of type c say</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00334">334</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2a9a5d0af7e32f1db04179a574e86c90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a9a5d0af7e32f1db04179a574e86c90">&#9670;&nbsp;</a></span>sections</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">these geometric elements act as base classes <a class="el" href="quick__guide_8txt.html#adf1cb6924dd6da8c2881c34e811bffad">for</a> specific c FiniteElements that implement the discretisation of particular PDEs We discuss the implementation of the two types of elements in two separate sections</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00050">50</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a22617638d13e02e2355396f0efac6441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22617638d13e02e2355396f0efac6441">&#9670;&nbsp;</a></span>SomeElement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode the finer grained member functions c Problem::actions_after_newton_step () and \c Problem To build a c OneDimMesh with ten elements of type c SomeElement</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00212">212</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2776bbc2bbeace0b362c3df824fe8eb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2776bbc2bbeace0b362c3df824fe8eb4">&#9670;&nbsp;</a></span>Therefore</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode Specification of the boundary conditions By all nodal values are assumed to be free and their values are initialised to zero Therefore</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00139">139</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+<a id="a29cd0618a88c307916802833ae667965"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29cd0618a88c307916802833ae667965">&#9670;&nbsp;</a></span>varphi_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">varphi_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{max}] <a class="code" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">\f</a>$. Inspection of the </div>
+<div class="line">&lt;A <a class="code" href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a>=<span class="stringliteral">&quot;../../meshes/mesh_list/html/index.html&quot;</span>&gt; list of available</div>
+<div class="line">meshes &lt;/A&gt; shows that \c oomph-lib does not provide a mesh <span class="keywordflow">for</span> </div>
+<div class="line"><span class="keyword">this</span> geometry. However, there is a \c <a class="code" href="quick__guide_8txt.html#a87d98d9383cf4ede5d237d15f8b45b54">Mesh</a> object,</div>
+<div class="line"> \c SimpleRectangularMesh, which provides a uniform </div>
+<div class="line">discretisation of a 2D rectangular <a class="code" href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">domain \f</a>$ x\in [0</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="quick__guide_8txt_source.html#l00353">353</a> of file <a class="el" href="quick__guide_8txt_source.html">quick_guide.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aquick__guide_8txt_html_a29cd0618a88c307916802833ae667965"><div class="ttname"><a href="quick__guide_8txt.html#a29cd0618a88c307916802833ae667965">varphi_</a></div><div class="ttdeci">varphi_</div><div class="ttdef"><b>Definition:</b> <a href="quick__guide_8txt_source.html#l00353">quick_guide.txt:353</a></div></div>
+<div class="ttc" id="aquick__guide_8txt_html_ac17939ce74bee1d9d5e41f861c653489"><div class="ttname"><a href="quick__guide_8txt.html#ac17939ce74bee1d9d5e41f861c653489">f</a></div><div class="ttdeci">endcode&lt; HR &gt; subsection mes_exercise f</div><div class="ttdef"><b>Definition:</b> <a href="quick__guide_8txt_source.html#l00428">quick_guide.txt:428</a></div></div>
+<div class="ttc" id="aquick__guide_8txt_html_a87d98d9383cf4ede5d237d15f8b45b54"><div class="ttname"><a href="quick__guide_8txt.html#a87d98d9383cf4ede5d237d15f8b45b54">Mesh</a></div><div class="ttdeci">endcode subsection distorted_mesh How to adapt an existing Mesh to a different domain shape Given that mesh generation tends to be a fairly tedious one should always check whether it is possible to deform an existing c Mesh into a shape that matches the required domain Provided that the new domain has the same topology as the domain represented by the original c Mesh</div><div class="ttdef"><b>Definition:</b> <a href="quick__guide_8txt_source.html#l00346">quick_guide.txt:346</a></div></div>
+<div class="ttc" id="aquick__guide_8txt_html_a7d40451f6364de6fea6dcc6058ffe213"><div class="ttname"><a href="quick__guide_8txt.html#a7d40451f6364de6fea6dcc6058ffe213">hat</a></div><div class="ttdeci">endcode&lt; HR &gt; subsection mes_exercise hat</div><div class="ttdef"><b>Definition:</b> <a href="quick__guide_8txt_source.html#l00428">quick_guide.txt:428</a></div></div>
+<div class="ttc" id="aquick__guide_8txt_html_a9ed426cbbaefff05802e5157f6e8bd88"><div class="ttname"><a href="quick__guide_8txt.html#a9ed426cbbaefff05802e5157f6e8bd88">HREF</a></div><div class="ttdeci">&quot;../../example_code_list/html/index.html&quot;&gt; list of example codes&lt;/A &gt; distributed with the library. \section main_how_to How to solve simple PDEs with oomph-lib To solve a given PDE with \c oomph-lib, its discretisation needs to be specified in a \c Problem object. This usually involves the specification of the \c Mesh and the element types, followed by the application of the boundary conditions. If these steps are performed in the \c Problem constructor, the driver code itself can be as simple as:\dontinclude one_d_poisson_generic_only.cc \skipline main(\until } The amount of work required to represent a given PDE as a \c Problem object is problem-dependent:- If \c oomph-lib 's existing \c Mesh objects and element types are sufficient to discretise the problem, the generation of a fully-functional \c Problem object is straightforward. We shall discuss this case in the section \ref problem. - If \c oomph-lib provides the required element type but none of the available meshes are suitable, you will have to write your own \c Mesh object. We shall discuss this in the section \ref mesh. It is also possible to create \c oomph-lib meshes based on the output from third-party(commercial) mesh generators. This is illustrated in&lt; A HREF=&quot;../../meshes/third_party_meshes/html/index.html&quot;&gt; another example.&lt;/A &gt; - Finally, the problem might involve a PDE for which \c oomph-lib does not provide any suitable elements. In this case you will need to write your own element. When implementing elements in \c oomph-lib the element formulation is generally sub-divided into(at least) two levels. Geometric elements implement the element geometry(e.g. 2D quad elements, 3D brick elements, etc) HREF</div><div class="ttdef"><b>Definition:</b> <a href="quick__guide_8txt_source.html#l00045">quick_guide.txt:45</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:03:40
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

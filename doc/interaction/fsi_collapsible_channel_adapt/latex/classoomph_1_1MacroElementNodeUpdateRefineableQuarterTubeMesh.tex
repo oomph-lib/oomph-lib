@@ -1,0 +1,125 @@
+\hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh}{}\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh}\index{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+
+
+Macro\+Element\+Node\+Update version of \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}}.  
+
+
+
+
+{\ttfamily \#include $<$quarter\+\_\+tube\+\_\+mesh.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.630277cm]{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_a05355134c7930d4aa73969f6c743ed17}{Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh}} (\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_af59c4cde343ddd76caea4bc8c8ad8b94}{wall\+\_\+pt}}, const Vector$<$ double $>$ \&xi\+\_\+lo, const double \&fract\+\_\+mid, const Vector$<$ double $>$ \&xi\+\_\+hi, const unsigned \&nlayer, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}}) and the algebraic node update functions for nodes. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_ae4a4028ac41a7721c87bd484be894d02}{$\sim$\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_a6255c22765a484ac11642ade0c084082}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
+\begin{DoxyCompactList}\small\item\em Resolve mesh update\+: Update current nodal positions via sparse Macro\+Element-\/based update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_ae98ab46cf2030928d805894dffe1b642}{setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em Setup all the information that\textquotesingle{}s required for Macro\+Element-\/based node update\+: Tell the elements that their geometry depends on the geometric object that parametrises the wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Macro\+Element\+Node\+Update version of \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}}. 
+
+Definition at line 247 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_a05355134c7930d4aa73969f6c743ed17}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_a05355134c7930d4aa73969f6c743ed17}} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$}!MacroElementNodeUpdateRefineableQuarterTubeMesh@{MacroElementNodeUpdateRefineableQuarterTubeMesh}}
+\index{MacroElementNodeUpdateRefineableQuarterTubeMesh@{MacroElementNodeUpdateRefineableQuarterTubeMesh}!oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateRefineableQuarterTubeMesh()}{MacroElementNodeUpdateRefineableQuarterTubeMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh}{Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$}]{wall\+\_\+pt,  }\item[{const Vector$<$ double $>$ \&}]{xi\+\_\+lo,  }\item[{const double \&}]{fract\+\_\+mid,  }\item[{const Vector$<$ double $>$ \&}]{xi\+\_\+hi,  }\item[{const unsigned \&}]{nlayer,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}}) and the algebraic node update functions for nodes. 
+
+
+
+Definition at line 263 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_ae4a4028ac41a7721c87bd484be894d02}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_ae4a4028ac41a7721c87bd484be894d02}} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$}!````~MacroElementNodeUpdateRefineableQuarterTubeMesh@{$\sim$MacroElementNodeUpdateRefineableQuarterTubeMesh}}
+\index{````~MacroElementNodeUpdateRefineableQuarterTubeMesh@{$\sim$MacroElementNodeUpdateRefineableQuarterTubeMesh}!oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$MacroElementNodeUpdateRefineableQuarterTubeMesh()}{~MacroElementNodeUpdateRefineableQuarterTubeMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh}{Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line 309 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_a6255c22765a484ac11642ade0c084082}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_a6255c22765a484ac11642ade0c084082}} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resolve mesh update\+: Update current nodal positions via sparse Macro\+Element-\/based update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. 
+
+
+
+Definition at line 316 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_ae98ab46cf2030928d805894dffe1b642}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_ae98ab46cf2030928d805894dffe1b642}} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$}!setup\_macro\_element\_node\_update@{setup\_macro\_element\_node\_update}}
+\index{setup\_macro\_element\_node\_update@{setup\_macro\_element\_node\_update}!oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_macro\_element\_node\_update()}{setup\_macro\_element\_node\_update()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Setup all the information that\textquotesingle{}s required for Macro\+Element-\/based node update\+: Tell the elements that their geometry depends on the geometric object that parametrises the wall. 
+
+
+
+Definition at line 344 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::domain\+\_\+pt(), and oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Wall\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quarter__tube__mesh_8template_8h}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}\end{DoxyCompactItemize}

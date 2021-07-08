@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Compression of 2D circular disk</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Compression of 2D circular disk </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we study the compression of a 2D circular disk, loaded by an external pressure. We also demonstrate:</p><ul>
+<li>how to "upgrade" a <code>Mesh</code> to a <code>SolidMesh</code> </li>
+<li>why it is necessary to use "undeformed MacroElements" to ensure that the numerical results converge to the correct solution under mesh refinement if the domain has curvilinear boundaries.</li>
+<li>how to switch between different constitutive equations</li>
+<li>how to incorporate isotropic growth into the model</li>
+</ul>
+<p>We validate the numerical results by comparing them against the analytical solution of the equations of linear elasticity which are valid for small deflections.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem</h1>
+<p>The figure below shows a sketch of the basic problem: A 2D circular disk of radius <img class="formulaInl" alt="$ a $" src="form_0.png"/> is loaded by a uniform pressure <img class="formulaInl" alt="$ p_0^*$" src="form_1.png"/>. We wish to compute the disk's deformation for a variety of constitutive equations.</p>
+<div class="image">
+<img src="disk_compression.gif" alt=""/>
+<div class="caption">
+Sketch of the problem. </div></div>
+ <p>The next sketch shows a variant of the problem: We assume that the material undergoes isotropic growth (e.g. via a biological growth process or thermal expansion, say) with a constant growth factor <img class="formulaInl" alt="$ \Gamma $" src="form_2.png"/>. We refer to the the document <a href="../../solid_theory/html/index.html#isotropic_growth">"Solid mechanics: Theory and implementation"</a> for a detailed discussion of the theory of isotropic growth. Briefly, the growth factor defines the relative increase in the volume of an infinitesimal material element, relative to its volume in the stress-free reference configuration. If the growth factor is spatially uniform, isotropic growth leads to a uniform expansion of the material. For a circular disk, uniform growth increases the disk's radius from <img class="formulaInl" alt="$ a_0 $" src="form_3.png"/> to <img class="formulaInl" alt="$ a = a_0 \sqrt{\Gamma} $" src="form_4.png"/> without inducing any internal stresses. This uniformly expanded disk may then be regarded as the stress-free reference configuration upon which the external pressure acts.</p>
+<div class="image">
+<img src="disk_compression_with_growth.gif" alt=""/>
+<div class="caption">
+Sketch of the problem. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The animation shows the disk's deformation when subjected to uniform growth of <img class="formulaInl" alt="$ \Gamma = 1.1 $" src="form_5.png"/> and loaded by a pressure that ranges from negative to positive values. All lengths were scaled on the disks initial radius (i.e. its radius in the absence of growth and without any external load).</p>
+<div class="image">
+<img src="disk_compression_anim.gif" alt=""/>
+<div class="caption">
+Deformation of the uniformly grown disk when subjected to an external pressure. </div></div>
+ <p>The figure below illustrates the disk's load-displacement characteristics by plotting the disk's non-dimensional radius as function of the non-dimensional pressure, <img class="formulaInl" alt="$ p_0 = p_0^*/{\cal S} $" src="form_6.png"/> , where <img class="formulaInl" alt="$ {\cal S} $" src="form_7.png"/> is the characteristic stiffness of the material, for a variety of constitutive equations. <br  />
+</p>
+<div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Load displacement characteristics for various constitutive equations. </div></div>
+ <h2><a class="anchor" id="hooke"></a>
+Generalised Hooke's law</h2>
+<p>The blue, dash-dotted line corresponds to <code>oomph-lib's</code> generalisation of Hooke's law (with Young's modulus <img class="formulaInl" alt="$ E $" src="form_8.png"/> and Poisson ratio <img class="formulaInl" alt="$ \nu $" src="form_9.png"/> ) in which the dimensionless second Piola Kirchhoff stress tensor (non-dimensionalised with the material's Young's modulus <img class="formulaInl" alt="$ E $" src="form_8.png"/>, so that <img class="formulaInl" alt="$ {\cal S} = E $" src="form_10.png"/> ) is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sigma^{ij} = \frac{1}{2(1+\nu)} \left( G^{ik} G^{jl} + G^{il} G^{jk} + \frac{2\nu}{1-2\nu} G^{ij} G^{kl} \right) \gamma_{kl}. \]" src="form_11.png"/>
+</p>
+<p> Here <img class="formulaInl" alt="$ \gamma_{ij}= 1/2 (G_{ij}-g_{ij})$" src="form_12.png"/> is Green's strain tensor, formed from the difference between the deformed and undeformed metric tensors, <img class="formulaInl" alt="$ G_{ij} $" src="form_13.png"/> and <img class="formulaInl" alt="$ g_{ij} $" src="form_14.png"/>, respectively. The three different markers identify the results obtained with the two forms of the principle of virtual displacement, employing the displacement formulation (squares), and a pressure/displacement formulation with a continuous (delta) and a discontinuous (nabla) pressure interpolation.</p>
+<p>For zero pressure the disk's non-dimensional radius is equal to the uniformly grown radius <img class="formulaInl" alt="$ \sqrt{\Gamma} = 1.0488. $" src="form_15.png"/> For small pressures the load-displacement curve follows the linear approximation </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r = \sqrt{\Gamma} \big( 1-p_0 (1+\nu)(1-2\nu) \big). \]" src="form_16.png"/>
+</p>
+<p> We note that the generalised Hooke's law leads to strain softening behaviour under compression (the pressure required to reduce the disk's radius to a given value increases more rapidly than predicted by the linear approximation) whereas under expansion (for negative external pressures) the behaviour is strain softening.</p>
+<h2><a class="anchor" id="mr"></a>
+Generalised Mooney-Rivlin law</h2>
+<p>The red, dashed line illustrates the behaviour when Fung &amp; Tong's generalisation of the Mooney-Rivlin law (with Young's modulus, <img class="formulaInl" alt="$ E $" src="form_8.png"/>, Poisson ratio <img class="formulaInl" alt="$ \nu $" src="form_9.png"/> and Mooney-Rivlin parameter <img class="formulaInl" alt="$ C_1$" src="form_17.png"/>) is used as the constitutive equation. For this constitutive law, the non-dimensional strain energy function <img class="formulaInl" alt="$ W = W^*/{\cal S}$" src="form_18.png"/>, where the characteristic stress is given by Young's modulus, i.e. <img class="formulaInl" alt="$ {\cal S} =E $" src="form_19.png"/>, is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ W = \frac{1}{2} (I_1-3) + (G-C_1)(I_2-3) + (C_1-2G)(I_3-1) + (I_3-1)^2 \ \frac{G(1-\nu)}{2(1-2\nu)} \ , \]" src="form_20.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ G = \frac{E}{2(1+\nu)} \]" src="form_21.png"/>
+</p>
+<p> is the shear modulus, and <img class="formulaInl" alt="$ I_1, I_2 $" src="form_22.png"/> and <img class="formulaInl" alt="$ I_3 $" src="form_23.png"/> are the three invariants of Green's strain tensor. See <a href="../../solid_theory/html/index.html#strain-energy">"Solid mechanics: Theory and implementation"</a> for a detailed discussion of strain energy functions. The figure shows that for small deflections, the disk's behaviour is again well approximated by linear elasticity. However, in the large-displacement regime the Mooney-Rivlin is strain hardening under extension and softening under compression when compared to the linear elastic behaviour.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>As usual we define the global problem parameters in a namespace. We provide pointers to the constitutive equations and strain energy functions to be explored, and define the associated constitutive parameters.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============namespace_for_problem_parameters=====================</span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to strain energy function</span></div>
+<div class="line"><span class="comment"></span> StrainEnergyFunction* <a class="code" href="namespaceGlobal__Physical__Variables.html#a73135f793690b4386bf83bbefc7bf310">Strain_energy_function_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to constitutive law</span></div>
+<div class="line"><span class="comment"></span> ConstitutiveLaw* <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Constitutive_law_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Elastic modulus</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a9d6c61f3dcbc92b55a5f6289ae1b29ff">E</a>=1.0; </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a>=0.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// &quot;Mooney Rivlin&quot; coefficient for generalised Mooney Rivlin law</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">C1</a>=1.3;</div>
+</div><!-- fragment --><p>Next we define the pressure load, using the general interface defined in the <code>SolidTractionElement</code> class. The arguments of the function reflect that the load on a solid may be a function of the Lagrangian and Eulerian coordinates, and the external unit normal on the solid. Here we apply a spatially constant external pressure of magnitude <code>P</code> which acts in the direction of the negative outer unit normal on the solid.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Uniform pressure</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">P</a> = 0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constant pressure load</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a19f4e20a92e7d216b4d2b00308f96917">constant_pressure</a>(<span class="keyword">const</span> Vector&lt;double&gt; &amp;xi,<span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                        <span class="keyword">const</span> Vector&lt;double&gt; &amp;n, Vector&lt;double&gt; &amp;traction)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> dim = traction.size();</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;dim;i++)</div>
+<div class="line">   {</div>
+<div class="line">    traction[i] = -<a class="code" href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">P</a>*n[i];</div>
+<div class="line">   }</div>
+<div class="line"> } <span class="comment">// end of pressure load</span></div>
+</div><!-- fragment --><p>Finally, we define the growth function and impose a spatially uniform expansion that (in the absence of any external load) would increase the disk's volume by 10%.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Uniform volumetric expansion</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ae02b5f5b098b05fba75f3b61f381c5f7">Uniform_gamma</a>=1.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Growth function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a6be3760e5494b1772e4bfe5d5f3c5d53">growth_function</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, <span class="keywordtype">double</span>&amp; gamma)</div>
+<div class="line"> {</div>
+<div class="line">  gamma = <a class="code" href="namespaceGlobal__Physical__Variables.html#ae02b5f5b098b05fba75f3b61f381c5f7">Uniform_gamma</a>;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The driver code is very short: We store the command line arguments (as usual, we use a non-zero number of command line arguments as an indication that the code is run in self-test mode and reduce the number of steps performed in the parameter study) and create a strain-energy-based constitutive equation: Fung &amp; Tong's generalisation of the Mooney-Rivlin law.</p>
+<div class="fragment"><div class="line"><span class="comment">//=====start_of_main====================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for disk-compression</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="disk__compression_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Define a strain energy function: Generalised Mooney Rivlin</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a73135f793690b4386bf83bbefc7bf310">Global_Physical_Variables::Strain_energy_function_pt</a> = </div>
+<div class="line">  <span class="keyword">new</span> GeneralisedMooneyRivlin(&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>,</div>
+<div class="line">                              &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">Global_Physical_Variables::C1</a>,</div>
+<div class="line">                              &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a9d6c61f3dcbc92b55a5f6289ae1b29ff">Global_Physical_Variables::E</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define a constitutive law (based on strain energy function)</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a> = </div>
+<div class="line">  <span class="keyword">new</span> IsotropicStrainEnergyFunctionConstitutiveLaw(</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#a73135f793690b4386bf83bbefc7bf310">Global_Physical_Variables::Strain_energy_function_pt</a>);</div>
+</div><!-- fragment --><p>We build a problem object, using the displacement-based <code>RefineableQPVDElements</code> to discretise the domain, and perform a parameter study, exploring the disk's deformation for a range of external pressures.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Case 0: No pressure, generalised Mooney Rivlin</span></div>
+<div class="line"> <span class="comment">//-----------------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">    <span class="comment">//Set up the problem</span></div>
+<div class="line">  <a class="code" href="classStaticDiskCompressionProblem.html">StaticDiskCompressionProblem&lt;RefineableQPVDElement&lt;2,3&gt;</a> &gt; <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot;gen. M.R.: RefineableQPVDElement&lt;2,3&gt;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Run the simulation</span></div>
+<div class="line">  <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.parameter_study(0);</div>
+<div class="line">  </div>
+<div class="line"> } <span class="comment">// done case 0</span></div>
+</div><!-- fragment --><p>We repeat the exercise with elements from the <code>RefineableQPVDElementWithContinuousPressure</code> family which discretise the principle of virtual displacements (PVD) in the pressure/displacement formulation, using continuous pressures (Q2Q1; Taylor Hood).</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Case 1: Continuous pressure formulation with generalised Mooney Rivlin</span></div>
+<div class="line"> <span class="comment">//------------------------------------------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Set up the problem</span></div>
+<div class="line">  <a class="code" href="classStaticDiskCompressionProblem.html">StaticDiskCompressionProblem</a>&lt;</div>
+<div class="line">   RefineableQPVDElementWithContinuousPressure&lt;2&gt; &gt; <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot;gen. M.R.: RefineableQPVDElementWithContinuousPressure&lt;2&gt; &quot;</span> </div>
+<div class="line">       &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Run the simulation</span></div>
+<div class="line">  <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.parameter_study(1);</div>
+<div class="line"> </div>
+<div class="line"> }  <span class="comment">// done case 1</span></div>
+</div><!-- fragment --><p>The next computation employs <code>RefineableQPVDElementWithPressure</code> elements in which the pressure is interpolated by piecewise linear but globally discontinuous basis functions (Q2Q-1; Crouzeiux-Raviart).</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Case 2: Discontinuous pressure formulation with generalised Mooney Rivlin</span></div>
+<div class="line"> <span class="comment">//--------------------------------------------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Set up the problem</span></div>
+<div class="line">  <a class="code" href="classStaticDiskCompressionProblem.html">StaticDiskCompressionProblem&lt;RefineableQPVDElementWithPressure&lt;2&gt;</a> &gt; </div>
+<div class="line">   <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot;gen. M.R.: RefineableQPVDElementWithPressure&lt;2&gt;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Run the simulation</span></div>
+<div class="line">  <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.parameter_study(2);</div>
+<div class="line">  </div>
+<div class="line"> }  <span class="comment">// done case 2</span></div>
+</div><!-- fragment --><p>Next, we change the constitutive equation to <code>oomph-lib's</code> generalised Hooke's law,</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Change the consitutive law: Delete the old one</span></div>
+<div class="line"> <span class="keyword">delete</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create oomph-lib&#39;s generalised Hooke&#39;s law constitutive equation</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a> = </div>
+<div class="line">  <span class="keyword">new</span> GeneralisedHookean(&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>,</div>
+<div class="line">                         &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a9d6c61f3dcbc92b55a5f6289ae1b29ff">Global_Physical_Variables::E</a>);</div>
+</div><!-- fragment --><p>before repeating the parameter studies with the same three element types:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Case 3: No pressure, generalised Hooke&#39;s law</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Set up the problem</span></div>
+<div class="line">  <a class="code" href="classStaticDiskCompressionProblem.html">StaticDiskCompressionProblem&lt;RefineableQPVDElement&lt;2,3&gt;</a> &gt; <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot;gen. Hooke: RefineableQPVDElement&lt;2,3&gt; &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Run the simulation</span></div>
+<div class="line">  <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.parameter_study(3);  </div>
+<div class="line"> </div>
+<div class="line"> }  <span class="comment">// done case 3</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Case 4: Continuous pressure formulation with generalised Hooke&#39;s law</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Set up the problem</span></div>
+<div class="line">  <a class="code" href="classStaticDiskCompressionProblem.html">StaticDiskCompressionProblem</a>&lt;</div>
+<div class="line">   RefineableQPVDElementWithContinuousPressure&lt;2&gt; &gt; <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot;gen. Hooke: RefineableQPVDElementWithContinuousPressure&lt;2&gt; &quot;</span> </div>
+<div class="line">       &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Run the simulation</span></div>
+<div class="line">  <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.parameter_study(4);</div>
+<div class="line">  </div>
+<div class="line"> }  <span class="comment">// done case 4</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Case 5:  Discontinous pressure formulation with generalised Hooke&#39;s law</span></div>
+<div class="line"> <span class="comment">//------------------------------------------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Set up the problem</span></div>
+<div class="line">  <a class="code" href="classStaticDiskCompressionProblem.html">StaticDiskCompressionProblem&lt;RefineableQPVDElementWithPressure&lt;2&gt;</a> &gt; <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot;gen. Hooke: RefineableQPVDElementWithPressure&lt;2&gt; &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Run the simulation</span></div>
+<div class="line">  <a class="code" href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.parameter_study(5);</div>
+<div class="line">    </div>
+<div class="line"> }  <span class="comment">// done case 5</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Clean up </span></div>
+<div class="line"> <span class="keyword">delete</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>=0;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="mesh"></a>
+The mesh</h1>
+<p>We formulate the problem in cartesian coordinates (ignoring the problem's axisymmetry) but discretise only one quarter of the domain, applying appropriate symmetry conditions along the x and y axes. The computational domain may be discretised with the <code>RefineableQuarterCircleSectorMesh</code> that we already used in many previous examples. To use the mesh in this solid mechanics problem we must first "upgrade" it to a <code>SolidMesh</code>. This is easily done by multiple inheritance:</p>
+ <div class="fragment"><div class="line"><span class="comment">//==========start_mesh=================================================</span></div>
+<div class="line"><span class="comment">/// Elastic quarter circle sector mesh with functionality to</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// attach traction elements to the curved surface. We &quot;upgrade&quot;</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// the RefineableQuarterCircleSectorMesh to become an</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// SolidMesh and equate the Eulerian and Lagrangian coordinates,</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// thus making the domain represented by the mesh the stress-free </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// configuration. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \n\n</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// The member function \c make_traction_element_mesh() creates</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// a separate mesh of SolidTractionElements that are attached to the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// mesh&#39;s curved boundary (boundary 1). </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh</a> :</div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> RefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;,</div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh</div>
+<div class="line">{</div>
+</div><!-- fragment --><p>The constructor calls the constructor of the underlying <code>RefineableQuarterCircleSectorMesh</code> and sets the Lagrangian coordinates of the nodes to their current Eulerian positions, making the initial configuration stress-free.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian</span></div>
+<div class="line"><span class="comment"> /// ones so that the initial configuration is the stress-free one.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;</a>(GeomObject* wall_pt,</div>
+<div class="line">                                         <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xi_lo,</div>
+<div class="line">                                         <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; fract_mid,</div>
+<div class="line">                                         <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xi_hi,</div>
+<div class="line">                                         TimeStepper* time_stepper_pt=</div>
+<div class="line">                                         &amp;Mesh::Default_TimeStepper) :</div>
+<div class="line">  RefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;(wall_pt,xi_lo,fract_mid,xi_hi,</div>
+<div class="line">                                             time_stepper_pt)</div>
+<div class="line">  {<span class="comment"></span></div>
+<div class="line"><span class="comment">   /// Make the current configuration the undeformed one by</span></div>
+<div class="line"><span class="comment">   /// setting the nodal Lagrangian coordinates to their current</span></div>
+<div class="line"><span class="comment">   /// Eulerian ones</span></div>
+<div class="line"><span class="comment"></span>   set_lagrangian_nodal_coordinates();</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>We also provide a helper function that creates a mesh of <code>SolidTractionElements</code> which are attached to the curved domain boundary (boundary 1). These elements will be used to apply the external pressure load.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Function to create mesh made of traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> make_traction_element_mesh(SolidMesh*&amp; traction_mesh_pt)</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Make new mesh</span></div>
+<div class="line">   traction_mesh_pt = <span class="keyword">new</span> SolidMesh;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over all elements on boundary 1:</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> b=1;</div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = this-&gt;nboundary_element(b);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// The element itself:</span></div>
+<div class="line">     FiniteElement* fe_pt = this-&gt;boundary_element_pt(b,e);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Find the index of the face of element e along boundary b</span></div>
+<div class="line">     <span class="keywordtype">int</span> face_index = this-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Create new element</span></div>
+<div class="line">     traction_mesh_pt-&gt;add_element_pt(<span class="keyword">new</span> SolidTractionElement&lt;ELEMENT&gt;</div>
+<div class="line">                                      (fe_pt,face_index));</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem_class"></a>
+The Problem class</h1>
+<p>The definition of the Problem class is very straightforward. In addition to the constructor and the (empty) <code>actions_before_newton_solve()</code> and <code>actions_after_newton_solve()</code> functions, we provide the function <code><a class="el" href="disk__compression_8txt.html#a88c7f0e1e79d044cf041550e654d05c0">parameter_study(...)</a></code> which performs a parameter study, computing the disk's deformation for a range of external pressures. The member data includes pointers to the mesh of "bulk" solid elements, and the mesh of <code>SolidTractionElements</code> that apply the pressure load. The trace file is used to document the disk's load-displacement characteristics by plotting the radial displacement of the nodes on the curvilinear boundary, pointers to which are stored in the vector <code>Trace_node_pt</code>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Uniform compression of a circular disk in a state of plane strain,</span></div>
+<div class="line"><span class="comment">/// subject to uniform growth. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classStaticDiskCompressionProblem.html">StaticDiskCompressionProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classStaticDiskCompressionProblem.html#a462e81aec225a5d6204b579719b3db87">StaticDiskCompressionProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Run simulation: Pass case number to label output files</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classStaticDiskCompressionProblem.html#ac64db4786efde78e70b1110422331b02">parameter_study</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; case_number);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classStaticDiskCompressionProblem.html#a9154152d022e86461966b5562f5acba4">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classStaticDiskCompressionProblem.html#a484b47d6a10a91cbd30cb807a49b1f58">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classStaticDiskCompressionProblem.html#a2b00608d2992b40217248e01b2294153">actions_before_newton_solve</a>() {}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream <a class="code" href="classStaticDiskCompressionProblem.html#a7affbfca1efcaadb4770386dc7d23e4c">Trace_file</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Vector of pointers to nodes whose position we&#39;re tracing</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;Node*&gt; <a class="code" href="classStaticDiskCompressionProblem.html#a8e98a225a1bb49cb6943b59d9f3145dc">Trace_node_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to solid mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;</a>* <a class="code" href="classStaticDiskCompressionProblem.html#a6ad5b428d535a90f71e2e9325e9a5b15">Solid_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> SolidMesh* <a class="code" href="classStaticDiskCompressionProblem.html#a66623722b4cb3bdc94d46a56c18d2908">Traction_mesh_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Constructor</h1>
+<p>We start by constructing the mesh of "bulk" <code>SolidElements</code>, using the <code>Ellipse</code> object to specify the shape of the curvilinear domain boundary.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor: </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classStaticDiskCompressionProblem.html#a462e81aec225a5d6204b579719b3db87">StaticDiskCompressionProblem&lt;ELEMENT&gt;::StaticDiskCompressionProblem</a>() </div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Build the geometric object that describes the curvilinear</span></div>
+<div class="line"> <span class="comment">// boundary of the quarter circle domain</span></div>
+<div class="line"> Ellipse* curved_boundary_pt = <span class="keyword">new</span> Ellipse(1.0,1.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The curved boundary of the mesh is defined by the geometric object</span></div>
+<div class="line"> <span class="comment">// What follows are the start and end coordinates on the geometric object:</span></div>
+<div class="line"> <span class="keywordtype">double</span> xi_lo=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> xi_hi=2.0*atan(1.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fraction along geometric object at which the radial dividing line</span></div>
+<div class="line"> <span class="comment">// is placed</span></div>
+<div class="line"> <span class="keywordtype">double</span> fract_mid=0.5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the mesh using the geometric object</span></div>
+<div class="line"> Solid_mesh_pt = <span class="keyword">new</span> <a class="code" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;</a>(</div>
+<div class="line">  curved_boundary_pt,xi_lo,fract_mid,xi_hi);</div>
+</div><!-- fragment --><p>Next we choose the nodes on the curvilinear domain boundary (boundary 1) as the nodes whose displacement we document in the trace file.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Setup trace nodes as the nodes on boundary  1 (=curved boundary) </span></div>
+<div class="line"> <span class="comment">// in the original mesh.</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_boundary_node = Solid_mesh_pt-&gt;nboundary_node(1);</div>
+<div class="line"> Trace_node_pt.resize(n_boundary_node);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> j=0;j&lt;n_boundary_node;j++)</div>
+<div class="line">  {Trace_node_pt[j]=Solid_mesh_pt-&gt;boundary_node_pt(1,j);}</div>
+</div><!-- fragment --><p>The <code>QuarterCircleSectorMesh</code> that forms the basis of the "bulk" mesh contains only three elements &ndash; not enough to expect the solution to be accurate. Therefore we apply one round of uniform mesh refinement before attaching the <code>SolidTractionElements</code> to the mesh boundary 1, using the function <code>make_traction_element_mesh()</code> in the <code><a class="el" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh</a></code>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Refine the mesh uniformly</span></div>
+<div class="line"> Solid_mesh_pt-&gt;refine_uniformly();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now construct the traction element mesh</span></div>
+<div class="line"> Solid_mesh_pt-&gt;make_traction_element_mesh(Traction_mesh_pt);</div>
+</div><!-- fragment --><p>We add both meshes to the <code>Problem</code> and build a combined global mesh:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Solid mesh is first sub-mesh</span></div>
+<div class="line"> add_sub_mesh(Solid_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Traction mesh is second sub-mesh</span></div>
+<div class="line"> add_sub_mesh(Traction_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build combined &quot;global&quot; mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p>Symmetry boundary conditions along the horizontal and vertical symmetry lines require that the nodes' vertical position is pinned along boundary 0, while their horizontal position is pinned along boundary 2.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the left edge in the horizontal direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_side = mesh_pt()-&gt;nboundary_node(2);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_side;i++)</div>
+<div class="line">  {Solid_mesh_pt-&gt;boundary_node_pt(2,i)-&gt;pin_position(0);}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the bottom in the vertical direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_bottom = mesh_pt()-&gt;nboundary_node(0);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_bottom;i++)</div>
+<div class="line">  {Solid_mesh_pt-&gt;boundary_node_pt(0,i)-&gt;pin_position(1);}</div>
+</div><!-- fragment --><p>Since we are using refineable solid elements, we pin any "redundant" pressure degrees of freedom in the "bulk" solid mesh (see <a href="../../airy_cantilever/html/index.html#ex">the exercises in another tutorial</a> for a more detailed discussion of this issue).</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line"> PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures(</div>
+<div class="line">  Solid_mesh_pt-&gt;element_pt());</div>
+</div><!-- fragment --><p>Next, we complete the build of the elements in the "bulk" solid mesh by passing the pointer to the constitutive equation and the pointer to the isotropic-growth function to the elements:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Complete the build process for elements in &quot;bulk&quot; solid mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element =Solid_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Solid_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   el_pt-&gt;constitutive_law_pt() =</div>
+<div class="line">    <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the isotropic growth function pointer</span></div>
+<div class="line">   el_pt-&gt;isotropic_growth_fct_pt()=<a class="code" href="namespaceGlobal__Physical__Variables.html#a6be3760e5494b1772e4bfe5d5f3c5d53">Global_Physical_Variables::growth_function</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>We repeat this exercise for the <code>SolidTractionElements</code> which must be given a pointer to the function that applies the pressure load</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Complete build process for SolidTractionElements</span></div>
+<div class="line"> n_element=Traction_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid traction element</span></div>
+<div class="line">   SolidTractionElement&lt;ELEMENT&gt; *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>SolidTractionElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line">    (Traction_mesh_pt-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the traction function</span></div>
+<div class="line">   el_pt-&gt;traction_fct_pt() = <a class="code" href="namespaceGlobal__Physical__Variables.html#a19f4e20a92e7d216b4d2b00308f96917">Global_Physical_Variables::constant_pressure</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>Finally, we set up the equation numbering scheme and report the number of unknowns.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Set up equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt;  assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line">}</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc_solution"></a>
+Post-processing</h1>
+<p>The post-processing function outputs the shape of the deformed disk. We use the trace file to record how the disk's volume (area) and the radii of the control nodes on the curvilinear domain boundary vary with the applied pressure. To facilitate the validation of the results against the analytical solution, we also add the radius predicted by the linear theory to the trace file.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classStaticDiskCompressionProblem.html#a9154152d022e86461966b5562f5acba4">StaticDiskCompressionProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts = 5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output shape of deformed body</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Solid_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of solid elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nelement = Solid_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Work out volume</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="disk__compression_8txt.html#a4fba999865b0c5b6630e5741a4423cfc">volume</a> = 0.0;</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;nelement;e++) </div>
+<div class="line">  {<a class="code" href="disk__compression_8txt.html#a4fba999865b0c5b6630e5741a4423cfc">volume</a>+= Solid_mesh_pt-&gt;finite_element_pt(e)-&gt;size();}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Exact outer radius for linear elasticity</span></div>
+<div class="line"> <span class="keywordtype">double</span> nu=<a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>;</div>
+<div class="line"> <span class="keywordtype">double</span> exact_r=sqrt(<a class="code" href="namespaceGlobal__Physical__Variables.html#ae02b5f5b098b05fba75f3b61f381c5f7">Global_Physical_Variables::Uniform_gamma</a>)*</div>
+<div class="line">  (1.0-<a class="code" href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">Global_Physical_Variables::P</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a9d6c61f3dcbc92b55a5f6289ae1b29ff">Global_Physical_Variables::E</a></div>
+<div class="line">   *((1.0+nu)*(1.0-2.0*nu)));</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write trace file: Problem parameters</span></div>
+<div class="line"> Trace_file &lt;&lt; <a class="code" href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">Global_Physical_Variables::P</a>  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; <a class="code" href="namespaceGlobal__Physical__Variables.html#ae02b5f5b098b05fba75f3b61f381c5f7">Global_Physical_Variables::Uniform_gamma</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; <a class="code" href="disk__compression_8txt.html#a4fba999865b0c5b6630e5741a4423cfc">volume</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; exact_r &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Write radii of trace nodes</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ntrace_node=Trace_node_pt.size();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;ntrace_node;j++)</div>
+<div class="line">  {</div>
+<div class="line">   Trace_file &lt;&lt; sqrt(pow(Trace_node_pt[j]-&gt;x(0),2)+</div>
+<div class="line">                      pow(Trace_node_pt[j]-&gt;x(1),2)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> Trace_file &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc_solution</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="run_it"></a>
+Performing the parameter study</h1>
+<p>The function <code><a class="el" href="disk__compression_8txt.html#a88c7f0e1e79d044cf041550e654d05c0">parameter_study(...)</a></code> computes the disk's deformation for a range of external pressures and outputs the results. The output directory is labelled by the <code>unsigned</code> function argument. This ensures that parameter studies performed with different constitutive equations are written into different directories.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Run the paramter study</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classStaticDiskCompressionProblem.html#ac64db4786efde78e70b1110422331b02">StaticDiskCompressionProblem&lt;ELEMENT&gt;::parameter_study</a>(</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; case_number)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">char</span> dirname[100];</div>
+<div class="line"> sprintf(dirname,<span class="stringliteral">&quot;RESLT%i&quot;</span>,case_number);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(dirname);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Step number</span></div>
+<div class="line"> doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];   </div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Parameter incrementation</span></div>
+<div class="line"> <span class="keywordtype">double</span> delta_p=0.0125;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=21; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Perform fewer steps if run as self-test (indicated by nonzero number</span></div>
+<div class="line"> <span class="comment">// of command line arguments)</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc!=1)</div>
+<div class="line">  {</div>
+<div class="line">   nstep=3;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Offset external pressure so that the computation sweeps </span></div>
+<div class="line"> <span class="comment">// over a range of positive and negative pressures</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">Global_Physical_Variables::P</a> =-delta_p*double(nstep-1)*0.5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do the parameter study</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Solve the problem for current load</span></div>
+<div class="line">   newton_solve();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   doc_solution(doc_info);</div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Increment pressure load</span></div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">Global_Physical_Variables::P</a> += delta_p;   </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of parameter study</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_and_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="macro"></a>
+The use of MacroElements in solid mechanics problems</h2>
+<p><a href="../../../poisson/fish_poisson2/html/index.html">Recall</a> how <code>oomph-lib</code> employs <code>MacroElements</code> to represent the exact domain shapes in adaptive computations involving problems with curvilinear boundaries. When an element is refined, the (Eulerian) position of any newly-created nodes is based on the element's <code>MacroElement</code> counterpart, rather than being determined by finite-element interpolation from the "father element". This ensures that <b>(i)</b> newly-created nodes on curvilinear domain boundaries are placed exactly onto those boundaries and <b>(ii)</b> that newly-created nodes in the interior are placed at positions that match smoothly onto the boundary.</p>
+<p>This strategy is adapted slightly for solid mechanics problems:</p><ol type="1">
+<li>The Eulerian position of newly-created <code>SolidNodes</code> is determined by finite element interpolation from the "father element", <b>unless</b> the newly-created <code>SolidNode</code> is located on a domain boundary and its position is pinned by displacement boundary conditions. <br  />
+<br  />
+</li>
+<li>The same procedure is employed to determine the Lagrangian coordinates of newly-created <code>SolidNodes</code>.</li>
+</ol>
+<p>These modifications ensure that, as before, newly-created nodes on curvilinear domain boundaries are placed exactly onto those boundaries if their positions are pinned by displacement boundary conditions. (If the nodal positions are not pinned, the node's Eulerian position will be determined as part of the solution.) The use of finite-element interpolation from the "father element" in the interior of the domain for both Lagrangian and Eulerian coordinates ensures that the creation of new nodes does not induce any stresses into a previously computed solution.</p>
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>Our discretisation of the problem in cartesian coordinates did not exploit the problem's axisymmetry. Examine the trace file to assess to which extent the computation retained the axisymmetry. <br  />
+<br  />
+</li>
+</ol>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html_a6ad5b428d535a90f71e2e9325e9a5b15"><div class="ttname"><a href="classStaticDiskCompressionProblem.html#a6ad5b428d535a90f71e2e9325e9a5b15">StaticDiskCompressionProblem::Solid_mesh_pt</a></div><div class="ttdeci">ElasticRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; * Solid_mesh_pt</div><div class="ttdoc">Pointer to solid mesh.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00199">disk_compression.cc:199</a></div></div>
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html_a8e98a225a1bb49cb6943b59d9f3145dc"><div class="ttname"><a href="classStaticDiskCompressionProblem.html#a8e98a225a1bb49cb6943b59d9f3145dc">StaticDiskCompressionProblem::Trace_node_pt</a></div><div class="ttdeci">Vector&lt; Node * &gt; Trace_node_pt</div><div class="ttdoc">Vector of pointers to nodes whose position we're tracing.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00196">disk_compression.cc:196</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a19f4e20a92e7d216b4d2b00308f96917"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a19f4e20a92e7d216b4d2b00308f96917">Global_Physical_Variables::constant_pressure</a></div><div class="ttdeci">void constant_pressure(const Vector&lt; double &gt; &amp;xi, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction)</div><div class="ttdoc">Constant pressure load.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00070">disk_compression.cc:70</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a73135f793690b4386bf83bbefc7bf310"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a73135f793690b4386bf83bbefc7bf310">Global_Physical_Variables::Strain_energy_function_pt</a></div><div class="ttdeci">StrainEnergyFunction * Strain_energy_function_pt</div><div class="ttdoc">Pointer to strain energy function.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00052">disk_compression.cc:52</a></div></div>
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html_a9154152d022e86461966b5562f5acba4"><div class="ttname"><a href="classStaticDiskCompressionProblem.html#a9154152d022e86461966b5562f5acba4">StaticDiskCompressionProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00303">disk_compression.cc:303</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a6be3760e5494b1772e4bfe5d5f3c5d53"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a6be3760e5494b1772e4bfe5d5f3c5d53">Global_Physical_Variables::growth_function</a></div><div class="ttdeci">void growth_function(const Vector&lt; double &gt; &amp;xi, double &amp;gamma)</div><div class="ttdoc">Growth function.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00085">disk_compression.cc:85</a></div></div>
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html_a7affbfca1efcaadb4770386dc7d23e4c"><div class="ttname"><a href="classStaticDiskCompressionProblem.html#a7affbfca1efcaadb4770386dc7d23e4c">StaticDiskCompressionProblem::Trace_file</a></div><div class="ttdeci">ofstream Trace_file</div><div class="ttdoc">Trace file.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00193">disk_compression.cc:193</a></div></div>
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html_a2b00608d2992b40217248e01b2294153"><div class="ttname"><a href="classStaticDiskCompressionProblem.html#a2b00608d2992b40217248e01b2294153">StaticDiskCompressionProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00188">disk_compression.cc:188</a></div></div>
+<div class="ttc" id="adisk__compression_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="disk__compression_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code for disk-compression.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00411">disk_compression.cc:411</a></div></div>
+<div class="ttc" id="aclassElasticRefineableQuarterCircleSectorMesh_html"><div class="ttname"><a href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh</a></div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00112">disk_compression.cc:112</a></div></div>
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html_a484b47d6a10a91cbd30cb807a49b1f58"><div class="ttname"><a href="classStaticDiskCompressionProblem.html#a484b47d6a10a91cbd30cb807a49b1f58">StaticDiskCompressionProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00185">disk_compression.cc:185</a></div></div>
+<div class="ttc" id="adisk__compression_8txt_html_a4fba999865b0c5b6630e5741a4423cfc"><div class="ttname"><a href="disk__compression_8txt.html#a4fba999865b0c5b6630e5741a4423cfc">volume</a></div><div class="ttdeci">Symmetry boundary conditions along the horizontal and vertical symmetry lines require that the nodes vertical position is pinned along while their horizontal position is pinned along boundary until we pin any redundant pressure degrees of freedom in the bulk solid we complete the build of the elements in the bulk solid mesh by passing the pointer to the constitutive equation and the pointer to the isotropic growth function to the we set up the equation numbering scheme and report the number of unknowns until&lt; HR &gt;&lt; HR &gt; section doc_solution Post processing The post processing function outputs the shape of the deformed disk We use the trace file to record how the disk s volume(area) and the radii of the control nodes on the curvilinear domain boundary vary with the applied pressure. To facilitate the validation of the results against the analytical solution</div></div>
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html"><div class="ttname"><a href="classStaticDiskCompressionProblem.html">StaticDiskCompressionProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00170">disk_compression.cc:170</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson's ratio.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00061">disk_compression.cc:61</a></div></div>
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html_a66623722b4cb3bdc94d46a56c18d2908"><div class="ttname"><a href="classStaticDiskCompressionProblem.html#a66623722b4cb3bdc94d46a56c18d2908">StaticDiskCompressionProblem::Traction_mesh_pt</a></div><div class="ttdeci">SolidMesh * Traction_mesh_pt</div><div class="ttdoc">Pointer to mesh of traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00202">disk_compression.cc:202</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a849754fa7155c1a31481674ce4845658"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">Global_Physical_Variables::C1</a></div><div class="ttdeci">double C1</div><div class="ttdoc">&quot;Mooney Rivlin&quot; coefficient for generalised Mooney Rivlin law</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00064">disk_compression.cc:64</a></div></div>
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html_ac64db4786efde78e70b1110422331b02"><div class="ttname"><a href="classStaticDiskCompressionProblem.html#ac64db4786efde78e70b1110422331b02">StaticDiskCompressionProblem::parameter_study</a></div><div class="ttdeci">void parameter_study(const unsigned &amp;case_number)</div><div class="ttdoc">Run simulation: Pass case number to label output files.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00356">disk_compression.cc:356</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a2a37fb040c832ee7a086bb13bb02a100"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">Pointer to constitutive law.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00055">disk_compression.cc:55</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a9d6c61f3dcbc92b55a5f6289ae1b29ff"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a9d6c61f3dcbc92b55a5f6289ae1b29ff">Global_Physical_Variables::E</a></div><div class="ttdeci">double E</div><div class="ttdoc">Elastic modulus.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00058">disk_compression.cc:58</a></div></div>
+<div class="ttc" id="aclassStaticDiskCompressionProblem_html_a462e81aec225a5d6204b579719b3db87"><div class="ttname"><a href="classStaticDiskCompressionProblem.html#a462e81aec225a5d6204b579719b3db87">StaticDiskCompressionProblem::StaticDiskCompressionProblem</a></div><div class="ttdeci">StaticDiskCompressionProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00210">disk_compression.cc:210</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00049">disk_compression.cc:49</a></div></div>
+<div class="ttc" id="adisk__compression_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="disk__compression_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8txt_source.html#l00003">disk_compression.txt:3</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a23c2ade6398f54040b869f7f3a2bcc4b"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">Global_Physical_Variables::P</a></div><div class="ttdeci">double P</div><div class="ttdoc">Uniform pressure.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00067">disk_compression.cc:67</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ae02b5f5b098b05fba75f3b61f381c5f7"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ae02b5f5b098b05fba75f3b61f381c5f7">Global_Physical_Variables::Uniform_gamma</a></div><div class="ttdeci">double Uniform_gamma</div><div class="ttdoc">Uniform volumetric expansion.</div><div class="ttdef"><b>Definition:</b> <a href="disk__compression_8cc_source.html#l00082">disk_compression.cc:82</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:15:47
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

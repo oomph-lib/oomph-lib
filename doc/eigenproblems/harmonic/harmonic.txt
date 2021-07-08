@@ -1,0 +1,370 @@
+\mainpage Demo problem: A one-dimensional eigenproblem
+In this document, we demonstrate how to solve a 1D eigenproblem
+(eigenvalues of the 1D Laplace operator in a bounded domain) by
+creating custom elements. The tutorial is similar in spirit to the 
+<a href="../../../quick_guide/html/index.html"> quick guide </a> but far
+less detailed.
+<CENTER>
+<TABLE>
+<TR>
+<TD>
+<CENTER>
+<B>One-dimensional model eigenvalue problem</B>
+</CENTER> 
+Solve
+\f[
+\frac{\partial^2u}{\partial x_1^2} + \lambda u = 0,
+ \ \ \ \ \ \ \ \ \ \ @E[1DEigen]@
+\f]
+in the domain \f$D =\left\{ x_1 \in 
+[0,1] \right\}\f$, 
+with homogeneous Dirichlet boundary conditions
+\f[
+\left. u\right|_{\partial D}=0. 
+\ \ \ \ \ \ \ \ \ \ @E[1DEigen_BC]@
+\f]
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+ An eigenfunction must be non-zero by definition and so the exact
+solutions are given by the countably infinite set:
+\f[
+   u_{n} = \sin (\sqrt{\lambda}_{n} x_{1}), \ \ \ \ \ \ \
+   \lambda_{n} = n^{2}\pi^{2}.
+\f]
+
+We provide a detailed discussion of the driver code 
+<A HREF="../../../../demo_drivers/eigenproblems/harmonic/harmonic.cc">
+harmonic.cc</A> which solves the problem for the first four eigenvalues.
+
+In \c oomph-lib all eigenproblems are solved by using interfaces to third-party
+libraries. The default is LAPACK's (direct) QZ solver which is included with
+the library. An interface is also provided to the serial version of 
+ARPACK, an iterative solver, but we are not allowed to 
+redistribute the source code, so it
+must be downloaded separately. That said, much of 
+the functionality of ARPACK has
+been superseded by the ANASAZI solver that is part of The Trilinos
+Project. Thus, if you want to solve small problems, use the default QZ
+solver; for larger problems, we recommend using ANASAZI.
+
+<HR>
+<HR>
+
+\section theory Overview of the theory
+
+ A discrete (linear) eigenproblem takes the form
+\f[ J_{ij} V_{j} = \lambda M_{ij} V_{j}, \ \ \ \ \ \ \ \ @E[Eigen]@ \f]
+ where \f$ V_{j} \f$ is the vector of discrete unknowns, \f$ \lambda \f$ is
+ the eigenvalue, and \f$ J_{ij}  \f$ and \f$ M_{ij} \f$ are two matrices:
+ \f$ J_{ij} \f$ (often denoted \f$ K_{ij} \f$ in the
+ literature) is known as the stiffness matrix and \f$ M_{ij}
+ \f$ is termed the mass matrix. The third-party libraries mentioned
+ above all solve systems of the form (@R[Eigen]@), and within \c
+ oomph-lib we must simply provide the required mass and stiffness
+ matrices.
+
+\subsection linear_stab Linear Stability Theory 
+
+In many cases, eigenproblems arise from
+linear stability analyses of steady solutions to our set of nonlinear
+residuals. For example, if we have a time-dependent system of equations
+\f[ \frac{\partial u}{\partial t} = \mathcal{F}(u), \f]
+then the residual formulation is
+\f[ \mathcal{R}(u) = \mathcal{F}(u) - \frac{\partial u}{\partial t} =
+0;  \ \ \ \ \ \ \ @E[Eigen_res]@ \f]
+and steady solutions, \f$ u_{s} \f$ are found by setting \f$ \partial
+u / \partial t  =
+0 \f$. Note that in a nonlinear system there may be many possible
+steady solutions for the same set of parameter values.
+
+A linear stability analysis proceeds by assuming that the steady
+solution is perturbed by a small amount, so that
+\f$ u = u_{s} + \epsilon \hat{u} \f$, where \f$ |\epsilon| \ll
+1\f$. If we substitute this expression into the governing equation
+(@R[Eigen_res]@) and
+neglect terms that involve \f$ \epsilon^{2} \f$ (on the assumption that they
+are really small) then we obtain the equation:
+\f[ \mathcal{F}(u_{s}) + \epsilon \left[\frac{\partial
+\mathcal{F}(u_{s})}{\partial u} \hat{u}  - \frac{\partial
+\hat{u}}{\partial t} \right] \approx 0. \f]
+Note that we have used a Taylor expansion of \f$ \mathcal{F} \f$, so
+we are assuming that such an operation "makes sense". The solution \f$
+u_{s} \f$ is a steady state, so by definition \f$\mathcal{F}(u_{s}) =
+0\f$ and then we are left with the \b linear equation
+ \f[ \frac{\partial \mathcal{F} (u_{s})}{\partial u} \hat{u} =
+ \mathcal{J}(u_{s}) \hat{u} = \frac{\partial
+ \hat{u}}{\partial t}. \ \ \ \ \ \ \ \ \ @E[linear]@ \f]
+ The Jacobian \f$ \mathcal{J} \f$ is exactly the same as that required by the
+ Newton method when solving the steady set of equations, \f$
+ \mathcal{F}(u) = 0.\f$
+
+The general solution of equation (@R[linear]@) takes the form \f$
+\hat{u} = \mbox{e}^{\lambda t} v\f$ because the only function that is
+proportional to its derivative is the exponential. The necessary
+functional form of the solution means that equation (@R[linear]@)
+becomes
+\f[ \mathcal{J}(u_{s}) v = \lambda v, \f]
+which is an eigenproblem in which the mass "matrix" is the identity.
+Thus, in order to assess the stability of a solution to our nonlinear
+system we must solve an eigenproblem using the Jacobian matrix, which
+is why we used the notation \f$ J_{ij} \f$ rather than \f$ K_{ij} \f$
+in equation (@R[Eigen]@). The solution is said to be linearly stable if the real
+part of all eigenvalues is negative because then the perturbation
+decays as \f$ t \to \infty\f$, but it is linearly unstable if even a single
+eigenvalue has positive real part. Note that in even more general equations
+the mass "matrix" is not necessarily the identity.
+
+ 
+\subsection weak Weak formulation of the problem
+
+ If we wish to solve the problem (@R[1DEigen]@) using finite elements,
+we must first derive the weak form, which follows from the standard
+procedure of multiplication by a test function and integration by
+parts
+\f[ \int_{D} \frac{\partial u}{\partial x_{1}} \frac{\partial
+\phi^{(test)}}{\partial x_{1}}\,\mbox{d} x_{1} = 
+ \lambda \int_{D} u\, \phi^{(test)}\,\mbox{d} x_{1}. \f]
+Note that the boundary terms are neglected as a consequence of the
+Dirichlet boundary conditions.
+
+If we expand the \f$ u(x_{1}) = V_{j} \psi_{j}(x_{1}) \f$ in terms of
+known basis functions \f$ \psi_{j} \f$ and use
+the same basis functions as our test functions (Galerkin method), then the
+weak form becomes
+\f[ \int_{D} \frac{\partial \psi_{j}}{\partial x_{1}} \frac{\partial
+\psi_{i}}{\partial x_{1}}\,\mbox{d} x_{1} V_{j} = \lambda \int_{D}
+\psi_{i} \psi_{j}\,\mbox{d} x_{1} V_{j}. \f]
+On comparison with equation (@R[Eigen]@), we identify the Jacobian and
+mass matrices
+\f[ J_{ij} =  \int_{D} \frac{\partial \psi_{j}}{\partial x_{1}} \frac{\partial
+\psi_{i}}{\partial x_{1}}\,\mbox{d} x_{1}, \ \ \ \ \ 
+    M_{ij} = \int_{D}
+\psi_{i} \psi_{j}\,\mbox{d} x_{1}. \ \ \ \ \ @E[Jac_Mass]@ \f]
+
+<HR>
+<HR>
+
+\section impl Implementation
+
+ In \c oomph-lib, eigenproblems are formulated on an
+element-by-element basis in a similar way to standard
+problems. Eigenproblems make use of the function
+\code
+ GeneralisedElement::get_jacobian_and_mass_matrix(
+   Vector<double> &residuals, 
+   DenseMatrix<double> &jacobian,
+   DenseMatrix<double> &mass_matrix);
+\endcode
+ where the Jacobian is the matrix \f$J_{ij}\f$ and the mass matrix is
+ \f$M_{ij}\f$ in equation (@R[Eigen]@). The residuals need not be
+ returned when solving an eigenproblem, but the interface is chosen so
+ that linear stability of solutions to the nonlinear system can easily be
+ calculated without reformulating the problem.
+
+ Once again, to avoid reinitialisation in multi-physics problems, the helper
+ function
+\code
+ GeneralisedElement::fill_in_contribution_to_jacobian_and_mass_matrix(
+   Vector<double> &residuals, 
+   DenseMatrix<double> &jacobian,
+   DenseMatrix<double> &mass_matrix);
+\endcode
+ is used and this will be overloaded in our custom elements below.
+
+
+\subsection equations Creating the elements
+ 
+ For generality, we implement the mathematics to assemble contributions to the
+Jacobian and mass matrices defined in equations (@R[Jac_Mass]@) in the
+class \c HarmonicEquations that inherits from \c FiniteElement. This
+construction mirrors that in our standard equation classes and allows
+a clean separation between the equations and the choice of basis function.
+
+\dontinclude harmonic.cc
+\skipline A class
+\until HarmonicEquations()
+
+The  unknowns that represent 
+the discretised eigenfunction are assumed to be stored at the nodes.
+
+\until {return nodal_value
+
+The class contains functions to output the
+eigenfunction; interpolate the nodal unknown;
+and provides interfaces for the shape functions and their
+derivatives. The key function is \c
+fill_in_contribution_to_jacobian_and_mass_matrix 
+ which implements the calculation of the equations
+ (@R[Jac_Mass]@). The residuals vector is not filled in and does not
+ need to be unless we also wish to solve an associated (non-eigen) problem.
+
+\skipline fill_in_contribution
+\until end_of_fill_in
+
+
+ The shape functions are specified in the \c QHarmonicElement
+class that inherits from our standard one-dimensional Lagrange elements
+ \c QElement<1,NNODE_1D> as well as \c HarmonicEquations.
+ The number of unknowns (one) is specified and the output functions
+and shape functions are overloaded as required: the output functions are
+ specified in the \c HarmonicEquations class, whereas the shape
+ functions are provided by the \c QElement<1,NNODE_1D> class.
+
+\skipline template <unsigned
+\until end_of_QHarmonic
+
+
+
+\section main The driver code
+
+In order to solve the 1D eigenproblem using \c oomph-lib, we represent the 
+mathematical problem defined by equations (@R[1DEigen]@) 
+and (@R[1DEigen_BC]@) in a specific \c Problem object, \c
+HarmonicProblem, which is templated by the element type and the
+eigensolver. We use \c QHarmonicElement<3>, a quadratic element and our
+three different eigensolvers, including timing statements to compare
+the three approaches. Note that if you do not have Trilinos or ARPACK
+installed then only the LAPACK_QZ solver will do anything. 
+
+The problem class takes a single argument corresponding to the number
+of elements used to discretise the domain and contains a member
+function \c solve that takes an integer used for documentation purposes.
+
+\skipline n_element=100
+\until t_end1 = clock
+
+The same problem is then solved with a different solver
+
+\skipline t_start2 = clock
+\until t_end2 = clock
+
+and again with the Trilinos ANASAZI solver if it is installed.
+
+<HR>
+<HR>
+
+\section problem The problem class
+The \c HarmonicProblem is derived from \c oomph-lib's generic
+\c Problem class and the specific element
+type and eigensolver are specified as template parameters to make it easy for 
+the "user" to change either of these from the driver code.
+
+\dontinclude harmonic.cc
+\skipline start_of_problem_class
+\until public Problem
+
+The problem class has four member functions:
+- the constructor \c HarmonicProblem(...)
+- the destructor \c ~HarmonicProblem()
+- the function \c solve(...)
+- the function \c doc_solution(...)
+.
+
+ The destructor merely cleans up the memory by deleting the objects that are
+allocated in the constructor, so we shall not discuss it further
+here. The \c doc_solution function is also simple and writes the
+eigenfunction to a file.
+
+<HR>
+<HR>
+
+\section constructor The Problem constructor
+In the \c Problem constructor, we start by creating the eigensolver
+specified by the second template parameter.
+We then discretise the domain using \c oomph-lib's \c 1DMesh object. 
+The arguments of this object's constructor are the number of elements 
+(whose type is specified by the template parameter), 
+and the domain length. Next, we pin the nodal values on the domain
+boundaries, which corresponds to applying the Dirichlet boundary conditions.
+Finally we call the generic \c
+Problem::assign_eqn_numbers() routine to set up the equation
+numbers.
+
+\dontinclude harmonic.cc
+\skipline start_of_constructor
+\until end of constructor
+
+<HR>
+<HR>
+
+\section solve Solving the problem
+
+ The \c solve(...) function is where all the action happens 
+ and takes a single unsigned integer argument which is used as a
+ label to distinguish the output from different eigensolvers.
+
+ The function \c Problem::solve_eigenproblem(...) plays an equivalent
+ role to \c Problem::newton_solve(...) in eigenproblems. Here, 
+ additional storage must be allocated for the
+ eigenvalues (a vector of complex numbers)
+ and eigenvectors (a vector of double vectors). The vectors will be
+ resized internally depending on the number of eigenvalues
+ returned. The number is not always the same as the number of
+ eigenvalues requested because both parts of a 
+ complex conjugate pair of eigenvalues are always returned.
+ In the \c solve(..) function we first
+ allocate the required storage, specify the desired number of
+ eigenvalues and then solve the eigenproblem:
+ 
+ \skipline start_of_solve
+ \until solve_eigenproblem(
+
+ The rest of the function post-processes the output from the
+ eigensolver. In order to ensure repeatability of the output for our
+ self-tests the eigenvalues are sorted on the size of their real
+ part. The eigenfunction associated with the second smallest
+ eigenvalue is normalised to have unit length and then output to a file. 
+
+ In order to output the eigenfunction the values must be transferred
+ to the nodal values so that it can be interpolated. This is performed
+ by the function \c Problem::assign_eigenvector_to_dofs(...). Note
+ that this function overwrites the existing nodal data, so a backup
+ must be taken if it is important. This can be done using the function
+ \c Problem::store_current_dof_values() and the stored values can be
+ recovered via \c Problem::restore_dof_values().
+
+ Finally, the sorted eigenvalues are reported and also saved to a file.
+
+ \until end_of_solve
+
+<HR>
+<HR>
+
+\section exercises Comments and exercises
+
+-# Modify the code to compute a different number of eigenvalues. What is the maximum number of eigenvalues that could be computed? 
+-# Write a function to calculate the error between the numerical
+and exact solutions to the eigenproblem. 
+How does the error vary with changes in the number of elements?
+-# Compare the errors for each different eigenfunction. What happens
+to the error as the eigenvalue increase? Can you explain why?
+-# Repeat the above experiments with \c QHarmonicElement<2>. What
+happens?
+-# Modify the problem to include a convective-like term \f$ \mu
+\frac{\partial u}{\partial x_{1}} \f$. Compare the computed results
+to the analytic solution. What happens to the eigenvalues and eigenfunctions?
+.
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/eigenproblems/harmonic/">
+demo_drivers/eigenproblems/harmonic/
+</A>
+</CENTER>
+- The driver code is: 
+<CENTER>
+<A HREF="../../../../demo_drivers/eigenproblems/harmonic/harmonic.cc">
+demo_drivers/eigenproblems/harmonic/harmonic.cc
+</A>
+</CENTER>
+.
+
+

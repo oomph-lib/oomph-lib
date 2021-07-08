@@ -1,0 +1,69 @@
+\hypertarget{classoomph_1_1UnsteadyHeatEquationsBase}{}\doxysection{oomph\+::Unsteady\+Heat\+Equations\+Base Class Reference}
+\label{classoomph_1_1UnsteadyHeatEquationsBase}\index{oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}}
+
+
+{\ttfamily \#include $<$unsteady\+\_\+heat\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Unsteady\+Heat\+Equations\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.955145cm]{classoomph_1_1UnsteadyHeatEquationsBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}{Unsteady\+Heat\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})
+\begin{DoxyCompactList}\small\item\em Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}{Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_a723b841dae0679dcfda13e565dd40f6b}{source\+\_\+fct\+\_\+pt}} ()=0
+\begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Base class so that we don\textquotesingle{}t need to know the dimension just to set the source function! 
+
+Definition at line 48 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}\label{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}} 
+\index{oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}!UnsteadyHeatSourceFctPt@{UnsteadyHeatSourceFctPt}}
+\index{UnsteadyHeatSourceFctPt@{UnsteadyHeatSourceFctPt}!oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}}
+\doxysubsubsection{\texorpdfstring{UnsteadyHeatSourceFctPt}{UnsteadyHeatSourceFctPt}}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Unsteady\+Heat\+Equations\+Base\+::\+Unsteady\+Heat\+Source\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})}
+
+
+
+Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! 
+
+
+
+Definition at line 53 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquationsBase_a723b841dae0679dcfda13e565dd40f6b}\label{classoomph_1_1UnsteadyHeatEquationsBase_a723b841dae0679dcfda13e565dd40f6b}} 
+\index{oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}!source\_fct\_pt@{source\_fct\_pt}}
+\index{source\_fct\_pt@{source\_fct\_pt}!oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}}
+\doxysubsubsection{\texorpdfstring{source\_fct\_pt()}{source\_fct\_pt()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}{Unsteady\+Heat\+Source\+Fct\+Pt}}\& oomph\+::\+Unsteady\+Heat\+Equations\+Base\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Access function\+: Pointer to source function. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a8bd87b25f079be4dbee6edfc00127d47}{oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{unsteady__heat__elements_8h}{unsteady\+\_\+heat\+\_\+elements.\+h}}\end{DoxyCompactItemize}

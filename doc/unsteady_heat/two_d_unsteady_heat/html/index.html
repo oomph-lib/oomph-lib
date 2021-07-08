@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Solution of the 2D unsteady heat equation.</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: Solution of the 2D unsteady heat equation. </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This is our first time-dependent example problem. We will demonstrate that, compared to the solution of steady problems, the solution of time-dependent problems only requires a few additional steps:</p><ul>
+<li>The creation of a suitable <code>TimeStepper</code> object and its addition to the <code>Problem's</code> list of timesteppers. (<code>Problems</code> may employ multiple <code>TimeSteppers</code> &ndash; a key requirement for the simulation of multiphysics problems.)</li>
+<li>The initialisation of the timestep, <code>dt</code>.</li>
+<li>Setting the initial conditions by assigning suitable values for the <code>Data</code> objects' "history values" and the <code>Nodes'</code> "positional
+  history values".</li>
+<li>Optionally: (Re-)implementing the empty virtual functions <code>Problem::actions_before_implicit_timestep()</code> and <code>Problem::actions_after_implicit_timestep()</code>, e.g. to update time-dependent boundary conditions before each timestep.</li>
+</ul>
+<p>Once these steps have been performed, <code>oomph-lib's</code> unsteady Newton solver, <code>Problem::unsteady_newton_solve(...)</code>, may be called to advance the solution from its state at time <img class="formulaInl" alt="$ t $" src="form_0.png"/> to its new state at <img class="formulaInl" alt="$ t \ + $" src="form_1.png"/> <code>dt</code>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+The example problem</h1>
+<p>We will illustrate the basic timestepping procedures by considering the solution of the 2D unsteady heat equation in a square domain:</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>The two-dimensional unsteady heat equation in a square domain.</b> </center> Solve <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial t} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_2.png"/>
+</p>
+ in the square domain <img class="formulaInl" alt="$ D = \{x_i \in [0,1]; i=1,2 \} $" src="form_3.png"/>, subject to the Dirichlet boundary conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. u\right|_{\partial D}=g_0 \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_4.png"/>
+</p>
+ and initial conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(x_1,x_2,t=0)=h_0(x_1,x_2), \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_5.png"/>
+</p>
+ where the functions <img class="formulaInl" alt="$ g_0 $" src="form_6.png"/> and <img class="formulaInl" alt="$ h_0 $" src="form_7.png"/> are given.   </td></tr>
+</table>
+<br  />
+ </center><p>Here we consider the unforced case, <img class="formulaInl" alt="$ f=0 $" src="form_8.png"/>, and choose boundary and initial conditions that are consistent with the exact solution </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_0(x_1,x_2,t) = e^{-Kt}\sin\left( \sqrt{K} \left( x_1 \cos \Phi + x_2 \sin \Phi\right)\right), \ \ \ \ \ \ \ \ \ \ (4) \]" src="form_9.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ K $" src="form_10.png"/> and <img class="formulaInl" alt="$ \Phi $" src="form_11.png"/> are constants, controlling the decay rate of the solution and its spatial orientation, respectively.</p>
+<p>The figure below shows a plot of computed and exact solutions at time <img class="formulaInl" alt="$ t = 0.01 $" src="form_12.png"/> (for an animation <br  />
+ <a href="../figures/unsteady_heat_soln.avi">click here</a>).</p>
+<div class="image">
+<img src="unsteady_heat_soln.gif" alt=""/>
+<div class="caption">
+Plot of the exact and computed solutions. </div></div>
+ <div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Time evolution of the computed and exact solutions at a control node, the global error norm and the norm of the solution. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>As usual, we store the problem parameters in a namespace.</p>
+ <div class="fragment"><div class="line"><span class="comment">//======start_of_ExactSolnForUnsteadyHeat=====================</span></div>
+<div class="line"><span class="comment">/// Namespace for unforced exact solution for UnsteadyHeat equation </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceExactSolnForUnsteadyHeat.html">ExactSolnForUnsteadyHeat</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Decay factor</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a20d04bcf14546becd4bcdf45446be756">K</a>=10;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Angle of bump</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a630f9e8d892cfcc41cdaef25bfc87ca1">Phi</a>=1.0; </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Exact solution as a Vector</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">get_exact_u</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time, <span class="keyword">const</span> Vector&lt;double&gt;&amp; x, </div>
+<div class="line">                  Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">double</span> zeta=cos(<a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a630f9e8d892cfcc41cdaef25bfc87ca1">Phi</a>)*x[0]+sin(<a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a630f9e8d892cfcc41cdaef25bfc87ca1">Phi</a>)*x[1];</div>
+<div class="line">  u[0]=exp(-<a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a20d04bcf14546becd4bcdf45446be756">K</a>*time)*sin(zeta*sqrt(<a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a20d04bcf14546becd4bcdf45446be756">K</a>));</div>
+<div class="line"> }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Exact solution as a scalar</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">get_exact_u</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time, <span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">double</span> zeta=cos(<a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a630f9e8d892cfcc41cdaef25bfc87ca1">Phi</a>)*x[0]+sin(<a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a630f9e8d892cfcc41cdaef25bfc87ca1">Phi</a>)*x[1];</div>
+<div class="line">  u=exp(-<a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a20d04bcf14546becd4bcdf45446be756">K</a>*time)*sin(zeta*sqrt(<a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a20d04bcf14546becd4bcdf45446be756">K</a>));</div>
+<div class="line"> }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Source function to make it an exact solution </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#ab4e853d6368b1fcdbd6205079687455a">get_source</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time, <span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; source)</div>
+<div class="line"> {</div>
+<div class="line">  source = 0.0;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of ExactSolnForUnsteadyHeat</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>We start by building the <code>Problem</code> object, create a <code>DocInfo</code> object to label the output files, and open a trace file in which we will record the time evolution of the solution and the error. We choose the length <code>t_max</code> of the simulation and the (constant) timestep, <code>dt</code>.</p>
+<div class="fragment"><div class="line"><span class="comment">//=======start_of_main====================================================</span></div>
+<div class="line"><span class="comment">/// \short Driver code for unsteady heat equation</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="two__d__unsteady__heat_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build problem</span></div>
+<div class="line"> <a class="code" href="classUnsteadyHeatProblem.html">UnsteadyHeatProblem&lt;QUnsteadyHeatElement&lt;2,4&gt;</a> &gt;</div>
+<div class="line">  <a class="code" href="two__d__unsteady__heat_8txt.html#aaff9a073880a8a1831a6f9563f872749">problem</a>(&amp;<a class="code" href="namespaceExactSolnForUnsteadyHeat.html#ab4e853d6368b1fcdbd6205079687455a">ExactSolnForUnsteadyHeat::get_source</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup labels for output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output number</span></div>
+<div class="line"> doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open a trace file</span></div>
+<div class="line"> ofstream trace_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];   </div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> trace_file.open(filename);</div>
+<div class="line"> trace_file &lt;&lt; <span class="stringliteral">&quot;VARIABLES=\&quot;time\&quot;,\&quot;u&lt;SUB&gt;FE&lt;/SUB&gt;\&quot;,&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\&quot;u&lt;SUB&gt;exact&lt;/SUB&gt;\&quot;,\&quot;norm of error\&quot;,\&quot;norm of solution\&quot;&quot;</span></div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Choose simulation interval and timestep</span></div>
+<div class="line"> <span class="keywordtype">double</span> t_max=0.5;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="two__d__unsteady__heat_8txt.html#a86b85e72d6c63eeaa3e9ddd1be283f8e">dt</a>=0.01;</div>
+</div><!-- fragment --><p>Before using any of <code>oomph-lib's</code> timestepping functions, the timestep <code>dt</code> <b>must</b> be passed to the <code>Problem's</code> timestepping routines by calling the function <code>Problem::initialise_dt(...)</code> which sets the weights for all timesteppers in the problem.</p>
+<p>Next we assign the initial conditions by calling <code>set_initial_condition()</code>, to be discussed in more detail below, and document the initial conditions.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Initialise timestep -- also sets the weights for all timesteppers</span></div>
+<div class="line"> <span class="comment">// in the problem.</span></div>
+<div class="line"> <a class="code" href="two__d__unsteady__heat_8txt.html#aaff9a073880a8a1831a6f9563f872749">problem</a>.initialise_dt(<a class="code" href="two__d__unsteady__heat_8txt.html#a86b85e72d6c63eeaa3e9ddd1be283f8e">dt</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set IC</span></div>
+<div class="line"> <a class="code" href="two__d__unsteady__heat_8txt.html#aaff9a073880a8a1831a6f9563f872749">problem</a>.set_initial_condition();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output initial condition</span></div>
+<div class="line"> <a class="code" href="two__d__unsteady__heat_8txt.html#aaff9a073880a8a1831a6f9563f872749">problem</a>.doc_solution(doc_info,trace_file);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Increment counter for solutions </span></div>
+<div class="line"> doc_info.number()++;</div>
+</div><!-- fragment --><p>Finally, we execute the timestepping loop and document the computed solutions.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Find number of steps</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep = unsigned(t_max/<a class="code" href="two__d__unsteady__heat_8txt.html#a86b85e72d6c63eeaa3e9ddd1be283f8e">dt</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Timestepping loop</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot; Timestep &quot;</span> &lt;&lt; istep &lt;&lt; std::endl;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Take timestep</span></div>
+<div class="line">   <a class="code" href="two__d__unsteady__heat_8txt.html#aaff9a073880a8a1831a6f9563f872749">problem</a>.unsteady_newton_solve(<a class="code" href="two__d__unsteady__heat_8txt.html#a86b85e72d6c63eeaa3e9ddd1be283f8e">dt</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Output solution</span></div>
+<div class="line">   <a class="code" href="two__d__unsteady__heat_8txt.html#aaff9a073880a8a1831a6f9563f872749">problem</a>.doc_solution(doc_info,trace_file);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Increment counter for solutions </span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Close trace file</span></div>
+<div class="line"> trace_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of main</span></div>
+</div><!-- fragment --><p>In this loop, each call to the unsteady Newton solver, <code>Problem::unsteady_newton_solve(...)</code>, advances the solution from its current state, at time <img class="formulaInl" alt="$ t = $" src="form_13.png"/> <code>Problem::time_pt()-&gt;time()</code>, to <img class="formulaInl" alt="$ t \ + $" src="form_1.png"/> <code>dt</code>. The unsteady Newton solver automatically "shifts" the history values "backwards" and advances the value of the continuous time.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The <code>Problem</code> classes for time-dependent problems are very similar to those for steady problems. The most important additional member functions are <code>Problem::actions_before_implicit_timestep()</code> and <code>Problem::actions_after_implicit_timestep()</code> (both defined as empty virtual functions in the <code>Problem</code> base class) and <code>set_initial_condition()</code>. The functions <code>Problem::actions_before_implicit_timestep()</code> and <code>Problem::actions_after_implicit_timestep()</code> are called automatically by <code>oomph-lib's</code> unsteady Newton solver <code>Problem::unsteady_newton_solve()</code> and may be used to update any time-dependent boundary conditions before the Newton solve, or to perform any postprocessing steps after a timestep has been completed. Here we only use the first of these two functions.</p>
+<p>We note that the (self-explanatory) function <code>set_initial_condition()</code> overwrites an empty virtual function in the <code>Problem</code> base class. While the assignment of initial conditions could, in principle, be performed by any other function, e.g. the <code>Problem</code> constructor, we strongly recommend using this function to facilitate the extension to spatial adaptivity. (In spatially adaptive computations of time-dependent problems, a standard interface for the re-assignment of initial conditions following mesh adaptations is required; we will discuss this aspect in <br  />
+ <a href="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">another example</a>).</p>
+<p>Finally, the private member data <code>Control_node_pt</code> provides storage for a pointer to a control <code>Node</code> at which we shall document the evolution of the solution.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====start_of_problem_class=========================================</span></div>
+<div class="line"><span class="comment">/// UnsteadyHeat problem </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classUnsteadyHeatProblem.html">UnsteadyHeatProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classUnsteadyHeatProblem.html#abd3a46eea132b1e5872be6a6309a51b2">UnsteadyHeatProblem</a>(UnsteadyHeatEquations&lt;2&gt;::UnsteadyHeatSourceFctPt </div>
+<div class="line"> source_fct_pt);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classUnsteadyHeatProblem.html#acd342b40828d9e18b3571e00b3d34add">~UnsteadyHeatProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#a88e3d534b5904f7c10ce6a8fbd6df0ea">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#aa1ee8fbe2a5439d1cacb37131e0f81c6">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#afd14cbe343adfa39e3b8b2ca681c5020">actions_after_implicit_timestep</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before next timestep: </span></div>
+<div class="line"><span class="comment"> /// Set Dirchlet boundary conditions from exact solution.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#a7074e52f6a3a791549687e1b4ddd059a">actions_before_implicit_timestep</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Set initial condition (incl previous timesteps) according</span></div>
+<div class="line"><span class="comment"> /// to specified function. </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#a98de3ed2d9cf5409323121bbb482bc1b">set_initial_condition</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#a2c0c4b762d2dbde7396dca2a6750f433">doc_solution</a>(DocInfo&amp; doc_info, ofstream&amp; trace_file);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to source function</span></div>
+<div class="line"><span class="comment"></span> UnsteadyHeatEquations&lt;2&gt;::UnsteadyHeatSourceFctPt <a class="code" href="classUnsteadyHeatProblem.html#a923d1a0bd45b1cd747a5b4558ae3f190">Source_fct_pt</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to control node at which the solution is documented</span></div>
+<div class="line"><span class="comment"></span> Node* <a class="code" href="classUnsteadyHeatProblem.html#ac0cf04bd0b915f02b171fd50cae13874">Control_node_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>We start by constructing the <code>TimeStepper</code>, the second-order accurate <code>BDF&lt;2&gt;</code> timestepper from the <code>BDF</code> family, and pass a pointer to it to the <code>Problem</code>, using the member function <code>Problem::add_time_stepper_pt(...)</code>. As the name of this function indicates, <code>oomph-lib</code> can operate with multiple timesteppers &ndash; an essential feature in multi-physics problems. (For instance, in fluid-structure interaction-problems timestepping for the solid equations might be performed with a timestepper from the <code>Newmark</code> family, while a <code>BDF</code> timestepper might be used for the Navier&ndash;Stokes equations.) When called for the first time, the function <br  />
+ <code>Problem::add_time_stepper_pt(...)</code> creates the <code>Problem's</code> <code>Time</code> object (accessible via <code>Problem::time_pt()</code>) with sufficient storage for the history of previous timesteps. This is required if the timestep is adjusted during the simulation, e.g. when an adaptive timestepper is used. (If further <code>TimeSteppers</code> which require more storage are added subsequently, <code>Problem::add_time_stepper(...)</code> updates the amount of storage in the <code>Problem's</code> <code>Time</code> object accordingly).</p>
+ <div class="fragment"><div class="line"><span class="comment">//========start_of_constructor============================================</span></div>
+<div class="line"><span class="comment">/// Constructor for UnsteadyHeat problem in square domain</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classUnsteadyHeatProblem.html#abd3a46eea132b1e5872be6a6309a51b2">UnsteadyHeatProblem&lt;ELEMENT&gt;::UnsteadyHeatProblem</a>(</div>
+<div class="line"> UnsteadyHeatEquations&lt;2&gt;::UnsteadyHeatSourceFctPt source_fct_pt) : </div>
+<div class="line"> Source_fct_pt(source_fct_pt)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Allocate the timestepper -- this constructs the Problem&#39;s </span></div>
+<div class="line"> <span class="comment">// time object with a sufficient amount of storage to store the</span></div>
+<div class="line"> <span class="comment">// previous timsteps. </span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> BDF&lt;2&gt;);</div>
+</div><!-- fragment --><p>Next we set the problem parameters and build the mesh, passing the pointer to the <code>TimeStepper</code> as the <em>last</em> argument to the mesh constructor.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Setup parameters for exact solution</span></div>
+<div class="line"> <span class="comment">// -----------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Decay parameter</span></div>
+<div class="line"> <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a20d04bcf14546becd4bcdf45446be756">ExactSolnForUnsteadyHeat::K</a>=5.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> <span class="comment">//-----------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in x and y directions</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nx=5;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> ny=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Lengths in x and y directions</span></div>
+<div class="line"> <span class="keywordtype">double</span> lx=1.0;</div>
+<div class="line"> <span class="keywordtype">double</span> ly=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build mesh</span></div>
+<div class="line"> mesh_pt() = <span class="keyword">new</span> RectangularQuadMesh&lt;ELEMENT&gt;(nx,ny,lx,ly,time_stepper_pt());</div>
+</div><!-- fragment --><p>The position of the pointer to the timestepper in the list of arguments to the mesh constructor reflects another <code>oomph-lib</code> convention:</p>
+<table class="doxtable">
+<tr>
+<td bgcolor="cornsilk"><p class="starttd"><a class="anchor" id="conv_mesh_const"></a></p><center><b>A general convention</b></center><p class="intertd">Recall that all <code>Data</code> objects store a pointer to a <code>TimeStepper</code> that translates their "history values" into approximations of the values' time derivatives. The required number of "history values" depends on the specific timestepper. For instance, a BDF&lt;1&gt; timestepper (the backward Euler scheme) requires storage of the solution at the previous timestep; the BDF&lt;2&gt; timestepper computes an approximation of the time-derivative, based on the solution at two previous timesteps, etc.</p>
+<p class="intertd"><code>Nodes</code> (which <em>are</em> <code>Data!</code>) are typically built by the <code>Mesh</code> constructor using the <code>FiniteElement's</code> member function <code>FiniteElement::construct_node(...)</code>. This function takes a pointer to the timestepper from which the required amount of storage for the "history values" is extracted. To facilitate the (re-)use of meshes in steady and time-dependent problems, we adopt the convention that</p>
+<center> <table class="doxtable">
+<tr>
+<td width="500" bgcolor="pink"><center> The final argument of all mesh constructors should be the pointer to a <code>TimeStepper</code> which defaults to <code>&amp;Mesh::Default_TimeStepper</code> &ndash; a (static) instantiation of <code>oomph-lib's</code> dummy steady timestepper, <code>Steady</code>. </center>   </td></tr>
+</table>
+</center><p class="intertd">This convention allows the use of meshes in steady problems without having to (artificially) create a timestepper. The following code fragment illustrates the implementation of this approach in a mesh constructor:</p>
+<div class="fragment"><div class="line"><span class="comment">//=======================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Some mesh class</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span>SomeMesh : <span class="keyword">public</span> <span class="keyword">virtual</span> Mesh</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// \short Constructor: Pass number of elements and pointer to timestepper.</span></div>
+<div class="line"><span class="comment">  /// Note that the timestepper defaults to the Steady default timestepper.</span></div>
+<div class="line"><span class="comment"></span>  SomeMesh(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; n_element, TimeStepper* time_stepper_pt=</div>
+<div class="line">           &amp;Mesh::Default_TimeStepper)</div>
+<div class="line">   {</div>
+<div class="line">   </div>
+<div class="line">     [...]</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Allocate storage for all n_element elements in the mesh</span></div>
+<div class="line">     Element_pt.resize(n_element); </div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Create first element and store it (in its incarnation as        </span></div>
+<div class="line">     <span class="comment">// a GeneralisedElement) in the Mesh&#39;s Element_pt[] array</span></div>
+<div class="line">     Element_pt[0] = <span class="keyword">new</span> ELEMENT;</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Create the element&#39;s first node and store it in the</span></div>
+<div class="line">     <span class="comment">// Mesh&#39;s Node_pt[] array. [The member function</span></div>
+<div class="line">     <span class="comment">// Mesh::finite_element_pt(...) recasts the pointer to the</span></div>
+<div class="line">     <span class="comment">// GeneralisedElement to a pointer to a FiniteElement -- only      </span></div>
+<div class="line">     <span class="comment">// FiniteElements have a member function construct_node(...)]</span></div>
+<div class="line">     Node_pt[0] = finite_element_pt(0)-&gt;construct_node(0,time_stepper_pt);</div>
+<div class="line"> </div>
+<div class="line">     [...]</div>
+<div class="line"> </div>
+<div class="line">   }</div>
+<div class="line"> </div>
+<div class="line">[...]</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><p class="endtd"></p>
+</td></tr>
+</table>
+<p>Next, we apply the boundary conditions, pinning the values at all boundary nodes. </p><div class="fragment"><div class="line"> <span class="comment">// Set the boundary conditions for this problem: </span></div>
+<div class="line"> <span class="comment">// ---------------------------------------------</span></div>
+<div class="line"> <span class="comment">// All nodes are free by default -- just pin the ones that have </span></div>
+<div class="line"> <span class="comment">// Dirichlet conditions here. </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;n_bound;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_node = mesh_pt()-&gt;nboundary_node(b);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">    {</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(b,n)-&gt;pin(0); </div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end of set boundary conditions</span></div>
+</div><!-- fragment --><p>Finally, we loop over the elements and pass the pointer to the source function.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Find number of elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   el_pt-&gt;source_fct_pt() = Source_fct_pt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do equation numbering</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="before_timestep"></a>
+Actions before (implicit) timestep</h1>
+<p>We overload the (empty) virtual function <code>Problem::actions_before_implicit_timestep()</code> to update the time-dependent boundary conditions (2), using the current value of the continuous time from the <code>Problem's</code> <code>Time</code> object.</p>
+<div class="fragment"><div class="line"><span class="comment">//=========start of actions_before_implicit_timestep===============================</span></div>
+<div class="line"><span class="comment">/// \short Actions before timestep: update the domain, then reset the </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// boundary conditions for the current time.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#a7074e52f6a3a791549687e1b4ddd059a">UnsteadyHeatProblem&lt;ELEMENT&gt;::actions_before_implicit_timestep</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Get current time</span></div>
+<div class="line"> <span class="keywordtype">double</span> time=time_pt()-&gt;time();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the boundaries</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Loop over the nodes on boundary</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     Node* nod_pt=mesh_pt()-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">     <span class="keywordtype">double</span> u;</div>
+<div class="line">     Vector&lt;double&gt; x(2);</div>
+<div class="line">     x[0]=nod_pt-&gt;x(0);</div>
+<div class="line">     x[1]=nod_pt-&gt;x(1);</div>
+<div class="line">     <span class="comment">// Get current values of the boundary conditions from the</span></div>
+<div class="line">     <span class="comment">// exact solution</span></div>
+<div class="line">     <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">ExactSolnForUnsteadyHeat::get_exact_u</a>(time,x,u);</div>
+<div class="line">     nod_pt-&gt;set_value(0,u);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// end of actions_before_implicit_timestep</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="IC"></a>
+Set initial condition</h1>
+<p>Before starting a time-dependent simulation, the current and history values of all <code>Data</code> objects must be initialised. In a <code>BDF</code> timestepping scheme, the history values represent the solution at previous discrete timesteps. In the present problem (where the exact solution is known &ndash; admittedly, a somewhat artificial situation) we can therefore assign the history values by looping over the previous timesteps and setting the history values with <code>Data::set_value(...)</code>.</p>
+<p><b>Important:</b> <code>oomph-lib's</code> <code>UnsteadyHeatEquations</code> are based on the Arbitrary-Lagrangian-Eulerian (ALE) formulation of the unsteady heat equation to permit computations in moving domains; we will illustrate this capability in <br  />
+ <a href="../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html">another example. </a> In such problems, the nodal positions may vary as a function of time. In the present problem, the computation is performed in a fixed domain, therefore we initialise the previous nodal positions with their current values, accessed via the member function <code>Node::x(t,i)</code> which returns (a reference to) the <code>i</code> -th nodal coordinate at previous timestep <code>t</code>.</p>
+<center> <table class="doxtable">
+<tr>
+<td bgcolor="cornsilk"><p class="starttd"><a class="anchor" id="conv_t_arg"></a></p><center><b>A general convention</b></center><p> Many functions in <code>oomph-lib</code> have steady and time-dependent versions which usually differ in their first argument. Typically, the first argument of the time-dependent function is an additional (unsigned) integer, <code>t</code>, say. As a general convention, the time-dependent versions return values (or perform actions) that are appropriate for the current time if called with <code>t=0</code>, and return values (or perform actions) that are appropriate for previous time levels if the argument is set to <code>t&gt;0</code>. Note that we refer to previous time levels, rather than previous timesteps, because history values do not necessarily represent values at previous timesteps, as they do for <code>BDF</code> schemes. For instance, in <code>Newmark</code> timestepping schemes, the history values include approximations of the first and second time-derivatives at the previous timestep.</p>
+<hr  />
+<p> <a class="anchor" id="conv_hist_vals"></a></p><center><b>Another general convention</b></center><p> While, in general, not all "history values" represent the solution at previous timesteps, the "history values" that do, should be (and, for any existing <code>TimeSteppers</code>, are) listed before those that represent other quantities. The number of history values required/used by a <code>TimeStepper</code> may be obtained from its member function</p>
+<div class="fragment"><div class="line">TimeStepper::nprev_values()</div>
+</div><!-- fragment --><p class="intertd">As an example, <code>BDF&lt;4&gt;::nprev_values()</code> returns 4. The total number of history values (including the current value!) is returned by</p>
+<div class="fragment"><div class="line">TimeStepper::ntstorage()</div>
+</div><!-- fragment --><p class="endtd">As an example, <code>BDF&lt;4&gt;::ntstorage()</code> returns 5.   </p>
+</td></tr>
+</table>
+</center><p>Here is the source code for the <code>set_initial_condition()</code> function: </p><div class="fragment"><div class="line"><span class="comment">//======================start_of_set_initial_condition====================</span></div>
+<div class="line"><span class="comment">/// \short Set initial condition: Assign previous and current values</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// from exact solution.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#a98de3ed2d9cf5409323121bbb482bc1b">UnsteadyHeatProblem&lt;ELEMENT&gt;::set_initial_condition</a>()</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">// Backup time in global Time object</span></div>
+<div class="line"> <span class="keywordtype">double</span> backed_up_time=time_pt()-&gt;time();</div>
+<div class="line">         </div>
+<div class="line"> <span class="comment">// Past history needs to be established for t=time0-deltat, ...</span></div>
+<div class="line"> <span class="comment">// Then provide current values (at t=time0) which will also form</span></div>
+<div class="line"> <span class="comment">// the initial guess for the first solve at t=time0+deltat</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Vector of exact solution value</span></div>
+<div class="line"> Vector&lt;double&gt; soln(1);</div>
+<div class="line"> Vector&lt;double&gt; x(2);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of nodes in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod = mesh_pt()-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set continuous times at previous timesteps:</span></div>
+<div class="line"> <span class="comment">// How many previous timesteps does the timestepper use?</span></div>
+<div class="line"> <span class="keywordtype">int</span> nprev_steps=time_stepper_pt()-&gt;nprev_values();</div>
+<div class="line"> Vector&lt;double&gt; prev_time(nprev_steps+1);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>=nprev_steps;<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>&gt;=0;<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>--)</div>
+<div class="line">  {</div>
+<div class="line">   prev_time[<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>]=time_pt()-&gt;time(<span class="keywordtype">unsigned</span>(<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>));</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over current &amp; previous timesteps</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>=nprev_steps;<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>&gt;=0;<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>--)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Continuous time</span></div>
+<div class="line">   <span class="keywordtype">double</span> time=prev_time[<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>];</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;setting IC at time =&quot;</span> &lt;&lt; time &lt;&lt; std::endl;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the nodes to set initial guess everywhere</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;num_nod;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get nodal coordinates</span></div>
+<div class="line">     x[0]=mesh_pt()-&gt;node_pt(n)-&gt;x(0);</div>
+<div class="line">     x[1]=mesh_pt()-&gt;node_pt(n)-&gt;x(1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Get exact solution at previous time</span></div>
+<div class="line">     <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">ExactSolnForUnsteadyHeat::get_exact_u</a>(time,x,soln);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Assign solution</span></div>
+<div class="line">     mesh_pt()-&gt;node_pt(n)-&gt;set_value(<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>,0,soln[0]);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Loop over coordinate directions: Mesh doesn&#39;t move, so </span></div>
+<div class="line">     <span class="comment">// previous position = present position</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;node_pt(n)-&gt;x(<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>,i)=x[i];</div>
+<div class="line">      }</div>
+<div class="line">    } </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Reset backed up time for global timestepper</span></div>
+<div class="line"> time_pt()-&gt;time()=backed_up_time;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of set_initial_condition</span></div>
+</div><!-- fragment --><p> <br  />
+</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>As in many previous examples, this member function outputs the computed solution, the exact solution and the error. We augment the solution data by tecplot text and geometries to facilitate the visualisation and record the time evolution of the solution and the error in the trace file.</p>
+<div class="fragment"><div class="line"><span class="comment">//=======start_of_doc_solution============================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#a2c0c4b762d2dbde7396dca2a6750f433">UnsteadyHeatProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classUnsteadyHeatProblem.html#a2c0c4b762d2dbde7396dca2a6750f433">doc_solution</a>(DocInfo&amp; doc_info,ofstream&amp; trace_file)</div>
+<div class="line">{ </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> cout &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;=================================================&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Docing solution for t=&quot;</span> &lt;&lt; time_pt()-&gt;time() &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;=================================================&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write file as a tecplot text object</span></div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\&quot;time = &quot;</span> </div>
+<div class="line">           &lt;&lt; time_pt()-&gt;time() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;</div>
+<div class="line"> <span class="comment">// ...and draw a horizontal line whose length is proportional</span></div>
+<div class="line"> <span class="comment">// to the elapsed time</span></div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;1&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;2&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot; 0 0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; time_pt()-&gt;time()*20.0 &lt;&lt; <span class="stringliteral">&quot; 0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output_fct(some_file,npts,time_pt()-&gt;time(),</div>
+<div class="line">                       <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">ExactSolnForUnsteadyHeat::get_exact_u</a>); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error</span></div>
+<div class="line"> <span class="comment">//----------</span></div>
+<div class="line"> <span class="keywordtype">double</span> error,norm;</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/error%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;compute_error(some_file,</div>
+<div class="line">                          <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">ExactSolnForUnsteadyHeat::get_exact_u</a>,</div>
+<div class="line">                          time_pt()-&gt;time(),</div>
+<div class="line">                          error,norm); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc solution and error</span></div>
+<div class="line"> <span class="comment">//-----------------------</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;error: &quot;</span> &lt;&lt; error &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;norm : &quot;</span> &lt;&lt; norm &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get exact solution at control node</span></div>
+<div class="line"> Vector&lt;double&gt; x_ctrl(2);</div>
+<div class="line"> x_ctrl[0]=Control_node_pt-&gt;x(0);</div>
+<div class="line"> x_ctrl[1]=Control_node_pt-&gt;x(1);</div>
+<div class="line"> <span class="keywordtype">double</span> u_exact;</div>
+<div class="line"> <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">ExactSolnForUnsteadyHeat::get_exact_u</a>(time_pt()-&gt;time(),x_ctrl,u_exact);</div>
+<div class="line"> trace_file &lt;&lt; time_pt()-&gt;time() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; Control_node_pt-&gt;value(0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; u_exact &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; error   &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; norm    &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc_solution</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<p>The current example only illustrates the most basic timestepping procedures. In subsequent examples we will demonstrate <code>oomph-lib's</code> <br  />
+ <a href="../../two_d_unsteady_heat2/html/index.html">dump and restart functions,</a> <a href="../../two_d_unsteady_heat_t_adapt/html/index.html">the use of adaptive timestepping,</a> <a href="../../two_d_unsteady_heat_adapt/html/index.html">the use of spatial adaptivity,</a> <a href="../../two_d_unsteady_heat_ALE/html/index.html">computations in moving domains,</a> and <a href="../../two_d_unsteady_heat_2adapt/html/index.html">the combination of temporal and spatial adaptivity</a>.</p>
+<p>We stress that setting the initial conditions in a "real" problem often presents a delicate step, especially if higher-order timesteppers from the BDF family are used. This is because in the absence of a known exact solution, the initial condition (3) only provides enough information to determine a single "history value" at each node &ndash; the value at the initial time. <code>oomph-lib's</code> timestepping procedures provide several functions that allow the simulation to be initiated with an "impulsive start", corresponding to a past history in which the boundary condition (3) describes the system's state for all <img class="formulaInl" alt="$ t \le 0$" src="form_14.png"/> rather than only <em>at</em> <img class="formulaInl" alt="$ t = 0$" src="form_15.png"/> . For instance, the top-level function <code>Problem::assign_initial_values_impulsive()</code> sets the "history values" of all <code>Data</code> objects and the <code>Nodes'</code> "positional history values" to values that are appropriate for an impulsive start from the currently assigned nodal values and positions. The following exercises aim to explore this functionality.</p>
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ol type="1">
+<li>Replace the call to <code>problem.set_initial_condition()</code> in the main function by a call to <code>Problem::assign_initial_values_impulsive()</code> and analyse the results. [Hint: When <code>Data</code> objects are created, their values are initialised to zero.]</li>
+<li>Confirm that the loop over the coordinate directions  <div class="fragment"><div class="line">     <span class="comment">// Loop over coordinate directions: Mesh doesn&#39;t move, so </span></div>
+<div class="line">     <span class="comment">// previous position = present position</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;node_pt(n)-&gt;x(<a class="code" href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a>,i)=x[i];</div>
+<div class="line">      }</div>
+</div><!-- fragment --> in <code>set_initial_condition()</code>, can be replaced by <div class="fragment"><div class="line">time_stepper_pt()-&gt;assign_initial_positions_impulsive(</div>
+<div class="line">                     mesh_pt()-&gt;node_pt(n));</div>
+</div><!-- fragment --> [This statement could then be moved outside the loop over the previous time levels.]</li>
+<li>Confirm that the initialisation of the previous nodal positions is essential by commenting out this step &ndash; see the <br  />
+ <a href="../../two_d_unsteady_heat_ALE/html/index.html">ALE example</a> for further details on computations in moving domains.</li>
+<li>Overwrite the correct assignment of the "history values" in <code>set_initial_condition()</code> by adding the statement <code>Problem::assign_initial_values_impulsive()</code> at the end of this function (rather than bypassing the assignment completely as in the first exercise). Repeat this with the <code>BDF&lt;1&gt;</code> and <code>BDF&lt;4&gt;</code> timesteppers and explain the different behaviour.</li>
+<li>Examine the accuracy of the various <code>BDF</code> timesteppers by re-running the simulations with various timesteppers and with different timesteps.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat/">demo_drivers/unsteady_heat/two_d_unsteady_heat/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat/two_d_unsteady_heat.cc">demo_drivers/unsteady_heat/two_d_unsteady_heat/two_d_unsteady_heat.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_a923d1a0bd45b1cd747a5b4558ae3f190"><div class="ttname"><a href="classUnsteadyHeatProblem.html#a923d1a0bd45b1cd747a5b4558ae3f190">UnsteadyHeatProblem::Source_fct_pt</a></div><div class="ttdeci">UnsteadyHeatEquations&lt; 2 &gt;::UnsteadyHeatSourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00126">two_d_unsteady_heat.cc:126</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat_8txt_html_ad5984e4c059a564ceba033747647feb1"><div class="ttname"><a href="two__d__unsteady__heat_8txt.html#ad5984e4c059a564ceba033747647feb1">t</a></div><div class="ttdeci">mainpage Example compared to the solution of steady the solution of time dependent problems only requires a few additional c dt Setting the initial conditions by assigning suitable values for the c Data objects history values and the c Nodes positional history values e g to update time dependent boundary conditions before each timestep Once these steps have been c oomph lib s unsteady Newton c may be called to advance the solution from its state at time f t f to its new state at f t f c dt&lt; HR &gt;&lt; HR &gt; section example The example problem We will illustrate the basic timestepping procedures by considering the solution of the unsteady heat equation in a square t E[2DHeat] f in the square domain f subject to the Dirichlet boundary conditions f[\left. u\right|_{\partial D}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\f] and initial conditions f[u(x_1, x_2, t=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\f] where the functions f g_0 f and f h_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; Here we consider the unforced f and choose boundary and initial conditions that are consistent with the exact solution f[u_0(x_1, x_2, t)=e^{-Kt}\sin\left(\sqrt{K} \left(x_1 \cos \Phi+x_2 \sin\Phi\right)\right), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\f] where f K f and f Phi f are controlling the decay rate of the solution and its spatial respectively The figure below shows a plot of computed and exact solutions at time f t</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8txt_source.html#l00073">two_d_unsteady_heat.txt:73</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_afd14cbe343adfa39e3b8b2ca681c5020"><div class="ttname"><a href="classUnsteadyHeatProblem.html#afd14cbe343adfa39e3b8b2ca681c5020">UnsteadyHeatProblem::actions_after_implicit_timestep</a></div><div class="ttdeci">void actions_after_implicit_timestep()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00110">two_d_unsteady_heat.cc:110</a></div></div>
+<div class="ttc" id="anamespaceExactSolnForUnsteadyHeat_html_ab4e853d6368b1fcdbd6205079687455a"><div class="ttname"><a href="namespaceExactSolnForUnsteadyHeat.html#ab4e853d6368b1fcdbd6205079687455a">ExactSolnForUnsteadyHeat::get_source</a></div><div class="ttdeci">void get_source(const double &amp;time, const Vector&lt; double &gt; &amp;x, double &amp;source)</div><div class="ttdoc">Source function to make it an exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00076">two_d_unsteady_heat.cc:76</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_aa1ee8fbe2a5439d1cacb37131e0f81c6"><div class="ttname"><a href="classUnsteadyHeatProblem.html#aa1ee8fbe2a5439d1cacb37131e0f81c6">UnsteadyHeatProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00107">two_d_unsteady_heat.cc:107</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_a2c0c4b762d2dbde7396dca2a6750f433"><div class="ttname"><a href="classUnsteadyHeatProblem.html#a2c0c4b762d2dbde7396dca2a6750f433">UnsteadyHeatProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info, ofstream &amp;trace_file)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00327">two_d_unsteady_heat.cc:327</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_abd3a46eea132b1e5872be6a6309a51b2"><div class="ttname"><a href="classUnsteadyHeatProblem.html#abd3a46eea132b1e5872be6a6309a51b2">UnsteadyHeatProblem::UnsteadyHeatProblem</a></div><div class="ttdeci">UnsteadyHeatProblem(UnsteadyHeatEquations&lt; 2 &gt;::UnsteadyHeatSourceFctPt source_fct_pt)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00138">two_d_unsteady_heat.cc:138</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_a7074e52f6a3a791549687e1b4ddd059a"><div class="ttname"><a href="classUnsteadyHeatProblem.html#a7074e52f6a3a791549687e1b4ddd059a">UnsteadyHeatProblem::actions_before_implicit_timestep</a></div><div class="ttdeci">void actions_before_implicit_timestep()</div><div class="ttdoc">Update the problem specs before next timestep: Set Dirchlet boundary conditions from exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00228">two_d_unsteady_heat.cc:228</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat_8txt_html_a86b85e72d6c63eeaa3e9ddd1be283f8e"><div class="ttname"><a href="two__d__unsteady__heat_8txt.html#a86b85e72d6c63eeaa3e9ddd1be283f8e">dt</a></div><div class="ttdeci">namespace dontinclude two_d_unsteady_heat cc skipline start_of_ExactSolnForUnsteadyHeat until end of ExactSolnForUnsteadyHeat&lt; HR &gt;&lt; HR &gt; section main The driver code We start by building the c Problem object create a c DocInfo object to label the output files and open a trace file in which we will record the time evolution of the solution and the error We choose the length c t_max of the simulation and c dt skipline start_of_main until dt</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8txt_source.html#l00103">two_d_unsteady_heat.txt:103</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_a98de3ed2d9cf5409323121bbb482bc1b"><div class="ttname"><a href="classUnsteadyHeatProblem.html#a98de3ed2d9cf5409323121bbb482bc1b">UnsteadyHeatProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set initial condition (incl previous timesteps) according to specified function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00261">two_d_unsteady_heat.cc:261</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html"><div class="ttname"><a href="classUnsteadyHeatProblem.html">UnsteadyHeatProblem</a></div><div class="ttdoc">UnsteadyHeat problem.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00091">two_d_unsteady_heat.cc:91</a></div></div>
+<div class="ttc" id="anamespaceExactSolnForUnsteadyHeat_html_a1d5b22857bd2a7825397daf1cf9c89eb"><div class="ttname"><a href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">ExactSolnForUnsteadyHeat::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const double &amp;time, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00061">two_d_unsteady_heat.cc:61</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_ac0cf04bd0b915f02b171fd50cae13874"><div class="ttname"><a href="classUnsteadyHeatProblem.html#ac0cf04bd0b915f02b171fd50cae13874">UnsteadyHeatProblem::Control_node_pt</a></div><div class="ttdeci">Node * Control_node_pt</div><div class="ttdoc">Pointer to control node at which the solution is documented.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00129">two_d_unsteady_heat.cc:129</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_acd342b40828d9e18b3571e00b3d34add"><div class="ttname"><a href="classUnsteadyHeatProblem.html#acd342b40828d9e18b3571e00b3d34add">UnsteadyHeatProblem::~UnsteadyHeatProblem</a></div><div class="ttdeci">~UnsteadyHeatProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00101">two_d_unsteady_heat.cc:101</a></div></div>
+<div class="ttc" id="anamespaceExactSolnForUnsteadyHeat_html"><div class="ttname"><a href="namespaceExactSolnForUnsteadyHeat.html">ExactSolnForUnsteadyHeat</a></div><div class="ttdoc">Namespace for unforced exact solution for UnsteadyHeat equation.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00051">two_d_unsteady_heat.cc:51</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat_8txt_html_aaff9a073880a8a1831a6f9563f872749"><div class="ttname"><a href="two__d__unsteady__heat_8txt.html#aaff9a073880a8a1831a6f9563f872749">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8txt_source.html#l00004">two_d_unsteady_heat.txt:4</a></div></div>
+<div class="ttc" id="anamespaceExactSolnForUnsteadyHeat_html_a630f9e8d892cfcc41cdaef25bfc87ca1"><div class="ttname"><a href="namespaceExactSolnForUnsteadyHeat.html#a630f9e8d892cfcc41cdaef25bfc87ca1">ExactSolnForUnsteadyHeat::Phi</a></div><div class="ttdeci">double Phi</div><div class="ttdoc">Angle of bump.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00058">two_d_unsteady_heat.cc:58</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="two__d__unsteady__heat_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver code for unsteady heat equation.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00414">two_d_unsteady_heat.cc:414</a></div></div>
+<div class="ttc" id="anamespaceExactSolnForUnsteadyHeat_html_a20d04bcf14546becd4bcdf45446be756"><div class="ttname"><a href="namespaceExactSolnForUnsteadyHeat.html#a20d04bcf14546becd4bcdf45446be756">ExactSolnForUnsteadyHeat::K</a></div><div class="ttdeci">double K</div><div class="ttdoc">Decay factor.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00055">two_d_unsteady_heat.cc:55</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_a88e3d534b5904f7c10ce6a8fbd6df0ea"><div class="ttname"><a href="classUnsteadyHeatProblem.html#a88e3d534b5904f7c10ce6a8fbd6df0ea">UnsteadyHeatProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00104">two_d_unsteady_heat.cc:104</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:05:13
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

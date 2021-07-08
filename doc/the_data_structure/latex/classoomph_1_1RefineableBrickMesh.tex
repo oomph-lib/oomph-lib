@@ -1,0 +1,169 @@
+\hypertarget{classoomph_1_1RefineableBrickMesh}{}\doxysection{oomph\+::Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1RefineableBrickMesh}\index{oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$refineable\+\_\+brick\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=7.338248cm]{classoomph_1_1RefineableBrickMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableBrickMesh_a8812801e58475d1296b08f7891c9287d}{Refineable\+Brick\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Setup static octree data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableBrickMesh_add68645a4655055660c49388d345c421}{Refineable\+Brick\+Mesh}} (const \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{Refineable\+Brick\+Mesh}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh_a72505ccf7f32899ea724c9a2ab1883e0}{operator=}} (const \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{Refineable\+Brick\+Mesh}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh_a179600dd1c82fb9f3753f59d9cc262f6}{$\sim$\+Refineable\+Brick\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh_afdb7af23886c1088ce9dcc855028fb84}{setup\+\_\+tree\+\_\+forest}} ()
+\begin{DoxyCompactList}\small\item\em Set up the tree forest associated with the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}. Forwards call to \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh_a7488ae090e09e3f1e01b20a2c2c7a188}{setup\+\_\+octree\+\_\+forest()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh_a7488ae090e09e3f1e01b20a2c2c7a188}{setup\+\_\+octree\+\_\+forest}} ()
+\begin{DoxyCompactList}\small\item\em Do what it says... \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Intermediate mesh class that implements the mesh adaptation functions specified in the \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} class for meshes that contain the refineable variant of \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} s \mbox{[}The class E\+L\+E\+M\+E\+NT provided as the template parameter must be of type \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}}\mbox{]}.
+
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} adaptation/refinement is implemented by \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} procedures and any concrete implementation of this class needs to provide a \mbox{\hyperlink{classoomph_1_1OcTreeForest}{Oc\+Tree\+Forest}} representation of the initial (coarse) mesh. 
+
+Definition at line 60 of file refineable\+\_\+brick\+\_\+mesh.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableBrickMesh_a8812801e58475d1296b08f7891c9287d}\label{classoomph_1_1RefineableBrickMesh_a8812801e58475d1296b08f7891c9287d}} 
+\index{oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}!RefineableBrickMesh@{RefineableBrickMesh}}
+\index{RefineableBrickMesh@{RefineableBrickMesh}!oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableBrickMesh()}{RefineableBrickMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{oomph\+::\+Refineable\+Brick\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{Refineable\+Brick\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Setup static octree data. 
+
+
+
+Definition at line 68 of file refineable\+\_\+brick\+\_\+mesh.\+h.
+
+
+
+References oomph\+::\+Oc\+Tree\+::setup\+\_\+static\+\_\+data().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableBrickMesh_add68645a4655055660c49388d345c421}\label{classoomph_1_1RefineableBrickMesh_add68645a4655055660c49388d345c421}} 
+\index{oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}!RefineableBrickMesh@{RefineableBrickMesh}}
+\index{RefineableBrickMesh@{RefineableBrickMesh}!oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableBrickMesh()}{RefineableBrickMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{oomph\+::\+Refineable\+Brick\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{Refineable\+Brick\+Mesh}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{Refineable\+Brick\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 76 of file refineable\+\_\+brick\+\_\+mesh.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableBrickMesh_a179600dd1c82fb9f3753f59d9cc262f6}\label{classoomph_1_1RefineableBrickMesh_a179600dd1c82fb9f3753f59d9cc262f6}} 
+\index{oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}!````~RefineableBrickMesh@{$\sim$RefineableBrickMesh}}
+\index{````~RefineableBrickMesh@{$\sim$RefineableBrickMesh}!oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$RefineableBrickMesh()}{~RefineableBrickMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{oomph\+::\+Refineable\+Brick\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{Refineable\+Brick\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: 
+
+
+
+Definition at line 88 of file refineable\+\_\+brick\+\_\+mesh.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableBrickMesh_a72505ccf7f32899ea724c9a2ab1883e0}\label{classoomph_1_1RefineableBrickMesh_a72505ccf7f32899ea724c9a2ab1883e0}} 
+\index{oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{oomph\+::\+Refineable\+Brick\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{Refineable\+Brick\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 82 of file refineable\+\_\+brick\+\_\+mesh.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableBrickMesh_a7488ae090e09e3f1e01b20a2c2c7a188}\label{classoomph_1_1RefineableBrickMesh_a7488ae090e09e3f1e01b20a2c2c7a188}} 
+\index{oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}!setup\_octree\_forest@{setup\_octree\_forest}}
+\index{setup\_octree\_forest@{setup\_octree\_forest}!oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_octree\_forest()}{setup\_octree\_forest()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{oomph\+::\+Refineable\+Brick\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::setup\+\_\+octree\+\_\+forest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Do what it says... 
+
+
+
+Definition at line 98 of file refineable\+\_\+brick\+\_\+mesh.\+h.
+
+
+
+References oomph\+::\+Mesh\+::\+Comm\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Tree\+::flush\+\_\+sons(), oomph\+::\+Tree\+Forest\+::flush\+\_\+trees(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Forest\+\_\+pt, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::get\+\_\+refinement\+\_\+levels(), i, level, n, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Tree\+::nsons(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Refineable\+Element\+::refinement\+\_\+level(), oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Tree\+::set\+\_\+father\+\_\+pt(), oomph\+::\+Tree\+::set\+\_\+son\+\_\+pt(), oomph\+::\+Tree\+::son\+\_\+pt(), oomph\+::\+Tree\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), and oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector().
+
+
+
+Referenced by oomph\+::\+Refineable\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Brick\+From\+Tet\+Mesh(), oomph\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh(), oomph\+::\+Refineable\+Simple\+Cubic\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Simple\+Cubic\+Mesh(), oomph\+::\+Refineable\+Solid\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Solid\+Brick\+From\+Tet\+Mesh(), oomph\+::\+Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh(), oomph\+::\+Refineable\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Thin\+Layer\+Brick\+On\+Tet\+Mesh(), and oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+tree\+\_\+forest().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableBrickMesh_afdb7af23886c1088ce9dcc855028fb84}\label{classoomph_1_1RefineableBrickMesh_afdb7af23886c1088ce9dcc855028fb84}} 
+\index{oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}!setup\_tree\_forest@{setup\_tree\_forest}}
+\index{setup\_tree\_forest@{setup\_tree\_forest}!oomph::RefineableBrickMesh$<$ ELEMENT $>$@{oomph::RefineableBrickMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_tree\_forest()}{setup\_tree\_forest()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh}{oomph\+::\+Refineable\+Brick\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::setup\+\_\+tree\+\_\+forest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Set up the tree forest associated with the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}. Forwards call to \mbox{\hyperlink{classoomph_1_1RefineableBrickMesh_a7488ae090e09e3f1e01b20a2c2c7a188}{setup\+\_\+octree\+\_\+forest()}} 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_aab7cbaa680b2258f2b1eea5de6bbe605}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base}}.
+
+
+
+Definition at line 92 of file refineable\+\_\+brick\+\_\+mesh.\+h.
+
+
+
+References oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__brick__mesh_8h}{refineable\+\_\+brick\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

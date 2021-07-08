@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: 3D Solid Mechanics on unstructured meshes</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: 3D Solid Mechanics on unstructured meshes </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>The purpose of this tutorial is to demonstrate the solution of 3D solid mechanics problems on unstructured meshes. The problem studied here also serves as a "warm-up problem" for the <a href="../../../interaction/unstructured_three_d_fsi/html/index.html">corresponding fluid-structure interaction problem </a> in which the elastic, bifurcating vessel whose deformation is studied here conveys (and is loaded by) a viscous fluid.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem (and results)</h1>
+<p>Here is an animation of the problem: An elastic, bifurcating vessel is loaded by an internal pressure and by gravity which acts in the negative <img class="formulaInl" alt="$x$" src="form_0.png"/>-direction. The "ends" of the vessel are held in a fixed position. As the magnitude of the loading is increased the vessel inflates and sags downwards.</p>
+<div class="image">
+<img src="deform.gif" alt=""/>
+<div class="caption">
+An elastic, bifurcating vessel, loaded by an internal pressure and transverse gravity. </div></div>
+ <p>The blue frame surrounding the vessel is drawn to clarify its spatial orientation. The yellow edges show the boundaries of the internal faces via which the pressure loading is applied, and the red arrows indicate the direction and magnitude of the pressure loading.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="mesh"></a>
+3D unstructured mesh generation</h1>
+<p>We use <a href="http://www.wias-berlin.de/~si ">Hang Si's</a> open-source mesh generator <a href="http://wias-berlin.de/software/tetgen//"><code>tetgen</code> </a> to generate the unstructured tetrahedral mesh "offline". We then process the output files produced by <br  />
+ <a href="http://wias-berlin.de/software/tetgen//"><code>tetgen</code> </a> to generate an unstructured <code>oomph-lib</code> mesh.</p>
+<p><a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> requires the specification of the domain boundaries via so-called facets &ndash; planar surface patches that are bounded by closed polygonal line segments. For simplicity, we only consider a very simplistic bifurcation, comprising three tube segments of approximately rectangular cross-section that meet at a common junction. Each of the three tube segments has four internal and four external faces. The internal and external faces are connected by three further faces at the "in- and outflow" cross-sections (using terminology that anticipates the mesh's use in the corresponding <a href="../../../interaction/unstructured_three_d_fsi/html/index.html">fluid-structure interaction problem</a>), resulting in a total of 27 facets.</p>
+<p>The 27 facets are defined in a <code>*.poly</code> file that specifies the position of the vertices, and identifies the facets via a "face list" that establishes their bounding vertices. Facets that have holes (e.g. the in- and outflow facets) require the specification of the hole's position. Finally, if the mesh itself has a hole (as in the current example where the vessel's lumen forms a hole in the mesh) the position of the hole must be identified by specifying the position of a single point inside that hole. The well-annotated <code>*.poly</code> file is located at:</p>
+<center> <a href="../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly">demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly</a> </center><p>We refer to the <a href="http://wias-berlin.de/software/tetgen//"><code>tetgen</code> webpages </a> and another <a href="../../../meshes/mesh_from_tetgen/html/index.html"><code>oomph-lib</code> tutorial</a> for further details on how to create <code>*.poly</code> files.</p>
+<p>Here is a plot of the domain specified by <a href="../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly">fsi_bifurcation_solid.poly</a>. The plot was created using <code>tetview</code> which is distributed with <a href="http://wias-berlin.de/software/tetgen//"><code>tetgen</code> </a>.</p>
+<div class="image">
+<img src="tetgen_boundaries.gif" alt=""/>
+<div class="caption">
+The domain and its bounding facets. </div></div>
+ <p>Note that we have deliberately assigned a different boundary ID to each facet. This will make the assignment of the traction boundary condition somewhat tedious as the inner surface of the vessel (where the traction is to be applied) is represented by twelve separate mesh boundaries. However, the assignment of distinct boundary IDs for the different facets is essential for the automatic generation of boundary coordinates in the <a href="../../../interaction/unstructured_three_d_fsi/html/index.html">corresponding fluid-structure interaction problem </a> and is therefore <b>strongly recommended</b>.</p>
+<p><a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> generates an unstructured volumetric mesh from the information contained in the <code>*.poly</code> file and writes the mesh's nodes, elements and faces in the files</p><ul>
+<li><a href="../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.node">demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.node </a></li>
+<li><a href="../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.ele">demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.ele </a></li>
+<li><a href="../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.face">demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.face</a></li>
+</ul>
+<p>These files can be used as input to <code>oomph-lib's</code> <code>TetgenMesh</code> class, using the procedure discussed in <a href="../../../meshes/mesh_from_tetgen/html/index.html">another tutorial.</a></p>
+<p>The figure below shows a <code>tetview</code> plot of the mesh, created with a volume constraint of 0.2 (i.e. the maximum volume of each tetrahedron is guaranteed to be less than 0.2 units), using the command </p><div class="fragment"><div class="line">tetgen -a0.2 fsi_bifurcation_solid.poly </div>
+</div><!-- fragment --><div class="image">
+<img src="mesh_boundaries.gif" alt=""/>
+<div class="caption">
+Plot of the mesh, generated by tetgen. </div></div>
+ <p>Note how <a href="http://wias-berlin.de/software/tetgen//"><code>tetgen</code> </a> has subdivided each of the 27 original facets specified in the <code>*.poly</code> file into a surface triangulation. The nodes and tetrahedral elements that are located on (or adjacent to) the 27 original facets inherit their boundary IDs. This will be important when we assign the boundary conditions.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="mesh_code"></a>
+Creating the mesh</h1>
+<p>We create the solid mesh by multiple inheritance from <code>oomph-lib's</code> <code>TetgenMesh</code> and the <code>SolidMesh</code> base class:</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======================start_mesh========================================</span></div>
+<div class="line"><span class="comment">/// Tetgen-based mesh upgraded to become a solid mesh</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classMySolidTetgenMesh.html">MySolidTetgenMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> TetgenMesh&lt;ELEMENT&gt;, </div>
+<div class="line">                       <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh </div>
+<div class="line">{</div>
+</div><!-- fragment --><p>The constructor calls the constructor of the underlying <code>TetgenMesh</code> (using the <code>*.node </code> <code>*.ele</code> and <code>*.face</code> files created by <a href="http://wias-berlin.de/software/tetgen//"><code>tetgen</code>. </a> As usual we set the nodes' Lagrangian coordinates to their current Eulerian positions, making the current configuration stress-free.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Constructor: </span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classMySolidTetgenMesh.html">MySolidTetgenMesh</a>(<span class="keyword">const</span> std::string&amp; node_file_name,</div>
+<div class="line">                <span class="keyword">const</span> std::string&amp; element_file_name,</div>
+<div class="line">                <span class="keyword">const</span> std::string&amp; face_file_name,</div>
+<div class="line">                TimeStepper* time_stepper_pt=</div>
+<div class="line">                &amp;Mesh::Default_TimeStepper) : </div>
+<div class="line">  TetgenMesh&lt;ELEMENT&gt;(node_file_name, element_file_name,</div>
+<div class="line">                      face_file_name, time_stepper_pt)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Assign the Lagrangian coordinates</span></div>
+<div class="line">   set_lagrangian_nodal_coordinates();</div>
+</div><!-- fragment --><p>Finally, we identify the elements that are located next to the various mesh boundaries to facilitate the application of the traction boundary conditions.</p>
+<div class="fragment"><div class="line">   </div>
+<div class="line">   <span class="comment">// Find elements next to boundaries</span></div>
+<div class="line">   setup_boundary_element_info();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Empty Destructor</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> ~<a class="code" href="classMySolidTetgenMesh.html">MySolidTetgenMesh</a>() { }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Problem parameters</h1>
+<p>As usual, we define the various problem parameters in a global namespace. We use <code>oomph-lib's</code> generalised Hookean constitutive law as the constitutive equation, using a Poisson's ratio of 0.3. (<a href="../../solid_theory/html/index.html#non-dim_solid">Recall</a> that omitting the specification of Young's modulus, <img class="formulaInl" alt="$ E $" src="form_1.png"/>, implies that the stresses are non-dimensionalised on <img class="formulaInl" alt="$ E $" src="form_1.png"/> .)</p>
+<div class="fragment"><div class="line"><span class="comment">//=======start_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Parameters.html">Global_Parameters</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>=0.3;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Create constitutive law</span></div>
+<div class="line"><span class="comment"></span> ConstitutiveLaw* <a class="code" href="namespaceGlobal__Parameters.html#adbd1f040f375c96fe56b3f475f7dbec2">Constitutive_law_pt</a>=<span class="keyword">new</span> GeneralisedHookean(&amp;<a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>);</div>
+</div><!-- fragment --><p>Next we define the gravitational body force which acts in the negative <img class="formulaInl" alt="$x$" src="form_0.png"/>-direction,</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Non-dim gravity</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a335000b5db4206486a116ae0468d2d0c">Gravity</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Non-dimensional gravity as body force</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Parameters.html#a200109847bf4cc26da4d00e8d68d569e">gravity</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line">              <span class="keyword">const</span> Vector&lt;double&gt; &amp;xi,</div>
+<div class="line">              Vector&lt;double&gt; &amp;b)</div>
+<div class="line"> {</div>
+<div class="line">  b[0]=-<a class="code" href="namespaceGlobal__Parameters.html#a335000b5db4206486a116ae0468d2d0c">Gravity</a>; </div>
+<div class="line">  b[1]=0.0;</div>
+<div class="line">  b[2]=0.0;</div>
+<div class="line"> } <span class="comment">// end gravity</span></div>
+</div><!-- fragment --><p>and the pressure load, <img class="formulaInl" alt="$ {\bf t} = -P {\bf n} $" src="form_2.png"/>, that acts on internal walls of the bifurcation (note that the outer unit normal <img class="formulaInl" alt="$ {\bf n} $" src="form_3.png"/> on the wall is passed to the function).</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Uniform pressure</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">P</a> = 0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constant pressure load. The arguments to this function are imposed</span></div>
+<div class="line"><span class="comment"> /// on us by the SolidTractionElements which allow the traction to </span></div>
+<div class="line"><span class="comment"> /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the </span></div>
+<div class="line"><span class="comment"> /// outer unit normal to the surface. Here we only need the outer unit</span></div>
+<div class="line"><span class="comment"> /// normal.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Parameters.html#a7dc25ca2abd48b7f1bffb2d6129f02bd">constant_pressure</a>(<span class="keyword">const</span> Vector&lt;double&gt; &amp;xi, <span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                        <span class="keyword">const</span> Vector&lt;double&gt; &amp;n, Vector&lt;double&gt; &amp;traction)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> dim = traction.size();</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;dim;i++)</div>
+<div class="line">   {</div>
+<div class="line">    traction[i] = -<a class="code" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">P</a>*n[i];</div>
+<div class="line">   }</div>
+<div class="line"> } <span class="comment">// end traction</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The driver code is straightforward. We store the command line arguments, specify an output directory and create the problem object, using ten-noded tetrahedral solid mechanics elements to discretise the principle of virtual displacements.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============================start_main==================================</span></div>
+<div class="line"><span class="comment">/// Demonstrate how to solve an unstructured 3D solid problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="unstructured__three__d__solid_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Label for output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> <a class="code" href="classUnstructuredSolidProblem.html">UnstructuredSolidProblem&lt;TPVDElement&lt;3,3&gt;</a> &gt; <a class="code" href="unstructured__three__d__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+</div><!-- fragment --><p>We output the initial configuration and then perform a parameter study in which we increment the gravitational body force and the pressure loads simultaneously, causing the vessel to expand and sag, as shown in the animation at the beginning of this tutorial. (As usual we perform a smaller number of steps if the code is run in self-test mode; this is indicated by a non-zero number of command line arguments.)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Output initial configuration</span></div>
+<div class="line"> <a class="code" href="unstructured__three__d__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution(doc_info);</div>
+<div class="line"> doc_info.number()++;   </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Parameter study</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">Global_Parameters::P</a>=0.0; </div>
+<div class="line"> <span class="keywordtype">double</span> g_increment=1.0e-3; </div>
+<div class="line"> <span class="keywordtype">double</span> p_increment=1.0e-2; </div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=6;</div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc!=1)</div>
+<div class="line">  {</div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;Validation -- only doing two steps&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   nstep=2;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do the parameter study</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Solve the problem</span></div>
+<div class="line">   <a class="code" href="unstructured__three__d__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.newton_solve();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Output solution</span></div>
+<div class="line">   <a class="code" href="unstructured__three__d__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution(doc_info);</div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Bump up load</span></div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#a335000b5db4206486a116ae0468d2d0c">Global_Parameters::Gravity</a>+=g_increment;</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">Global_Parameters::P</a>+=p_increment; </div>
+<div class="line">   </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="class"></a>
+The Problem class</h1>
+<p>The <code>Problem</code> class has the usual member functions, and provides storage for the various sub-meshes &ndash; the bulk mesh of 3D solid elements and the meshes of 2D solid traction elements that apply the pressure load to the internal boundaries of the vessel.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=============start_problem===========================================</span></div>
+<div class="line"><span class="comment">/// Unstructured solid problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classUnstructuredSolidProblem.html">UnstructuredSolidProblem</a> : <span class="keyword">public</span> <a class="code" href="unstructured__three__d__solid_8txt.html#a369f11bc5cf9fc0b3069a6f53624f7e2">Problem</a></div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: </span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classUnstructuredSolidProblem.html#a18ce02b6e4bbc86403c9e1b32c095772">UnstructuredSolidProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classUnstructuredSolidProblem.html#a25fe105d949498bf8f7c15aff96a7d00">~UnstructuredSolidProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classUnstructuredSolidProblem.html#ab3d66fd61b69d12b4f159d763fc44f15">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classUnstructuredSolidProblem.html#a9137960284200ed998989f785965f902">create_traction_elements</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Bulk solid mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classMySolidTetgenMesh.html">MySolidTetgenMesh&lt;ELEMENT&gt;</a>* <a class="code" href="classUnstructuredSolidProblem.html#ad6a8cbe2c2f3596385e1a2484bfb68f7">Solid_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Meshes of traction elements</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;SolidMesh*&gt; <a class="code" href="classUnstructuredSolidProblem.html#a32e691a698667053003e21333fc65057">Solid_traction_mesh_pt</a>;</div>
+</div><!-- fragment --><p>The two vectors <code>Pinned_solid_boundary_id</code> and <code>Solid_traction_boundary_id</code> are used to store the IDs of mesh boundaries that make up the in- and outflow cross-sections (where the bifurcation is pinned), and the internal boundaries (where the pressure load has to be applied). Recall that <code>tetgen</code> requires the domain boundaries to be specified as a collection of planar facets. Boundary of interest in the computation, such as the "internal boundary of the
+bifurcation", therefore tend to comprise multiple distinct mesh boundaries.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// IDs of solid mesh boundaries where displacements are pinned</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;unsigned&gt; Pinned_solid_boundary_id;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short IDs of solid mesh boundaries which make up the traction interface</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;unsigned&gt; Solid_traction_boundary_id;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>We start by building the bulk mesh, using the files created by <a href="http://wias-berlin.de/software/tetgen//"><code>tetgen</code> </a>:</p>
+<div class="fragment"><div class="line"><span class="comment">//=============start_constructor==========================================</span></div>
+<div class="line"><span class="comment">/// Constructor for unstructured solid problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classUnstructuredSolidProblem.html#a18ce02b6e4bbc86403c9e1b32c095772">UnstructuredSolidProblem&lt;ELEMENT&gt;::UnstructuredSolidProblem</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Create solid bulk mesh</span></div>
+<div class="line"> <span class="keywordtype">string</span> node_file_name=<span class="stringliteral">&quot;fsi_bifurcation_solid.1.node&quot;</span>;</div>
+<div class="line"> <span class="keywordtype">string</span> element_file_name=<span class="stringliteral">&quot;fsi_bifurcation_solid.1.ele&quot;</span>;</div>
+<div class="line"> <span class="keywordtype">string</span> face_file_name=<span class="stringliteral">&quot;fsi_bifurcation_solid.1.face&quot;</span>;</div>
+<div class="line"> Solid_mesh_pt =  <span class="keyword">new</span> <a class="code" href="classMySolidTetgenMesh.html">MySolidTetgenMesh&lt;ELEMENT&gt;</a>(node_file_name,</div>
+<div class="line">                                              element_file_name,</div>
+<div class="line">                                              face_file_name);</div>
+</div><!-- fragment --><p>Next we specify the IDs of the <a href="http://wias-berlin.de/software/tetgen//"><code>tetgen</code> </a> boundaries that form part of specific domain boundaries in our problem. Boundaries 0, 1 and 2 are the in- and outflow faces along which the solid is pinned. (See the specification of the boundaries in <a href="../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly">fsi_bifurcation_solid.poly</a> and/or check the boundary enumeration using <code>tetview</code> as shown in the <code>tetview</code> plot of the domain boundaries at the beginning of this tutorial.)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// The following IDs corresponds to the boundary IDs specified in</span></div>
+<div class="line"> <span class="comment">// the *.poly file from which tetgen generated the unstructured mesh.</span></div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// IDs of solid mesh boundaries where displacements are pinned</span></div>
+<div class="line"><span class="comment"></span> Pinned_solid_boundary_id.resize(3);</div>
+<div class="line"> Pinned_solid_boundary_id[0]=0;</div>
+<div class="line"> Pinned_solid_boundary_id[1]=1;</div>
+<div class="line"> Pinned_solid_boundary_id[2]=2;</div>
+</div><!-- fragment --><p>Similarly, boundaries 3 to 15 are the faces that define the internal boundary of the bifurcation, i.e. the boundary along which we have to apply the pressure load:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  <span class="comment">// The solid mesh boundaries where an internal pressure is applied</span></div>
+<div class="line"> Solid_traction_boundary_id.resize(12);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;12;i++)</div>
+<div class="line">  {</div>
+<div class="line">   Solid_traction_boundary_id[i]=i+3;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>We apply the boundary conditions by pinning the displacements of all nodes that are located on the in- and outflow faces, and document their positions.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Apply BCs for solid</span></div>
+<div class="line"> <span class="comment">//--------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc pinned solid nodes</span></div>
+<div class="line"> std::ofstream bc_file(<span class="stringliteral">&quot;RESLT/pinned_solid_nodes.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin positions at inflow boundary (boundaries 0 and 1)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n=Pinned_solid_boundary_id.size();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;n;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get boundary ID</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> b=Pinned_solid_boundary_id[i];</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= Solid_mesh_pt-&gt;nboundary_node(b);  </div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {    </div>
+<div class="line">     <span class="comment">// Get node</span></div>
+<div class="line">     SolidNode* nod_pt=Solid_mesh_pt-&gt;boundary_node_pt(b,inod);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Pin all directions</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;3;i++)</div>
+<div class="line">      {</div>
+<div class="line">       nod_pt-&gt;pin_position(i);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// ...and doc it as pinned</span></div>
+<div class="line">       bc_file &lt;&lt; nod_pt-&gt;x(i) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">      }</div>
+<div class="line">     </div>
+<div class="line">     bc_file &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> bc_file.close();</div>
+</div><!-- fragment --><p>We complete the build of the elements by setting the pointer to the constitutive equation and the body force.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------------------------</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Solid_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Solid_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law   </span></div>
+<div class="line">   el_pt-&gt;constitutive_law_pt() =</div>
+<div class="line">    <a class="code" href="namespaceGlobal__Parameters.html#adbd1f040f375c96fe56b3f475f7dbec2">Global_Parameters::Constitutive_law_pt</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the body force</span></div>
+<div class="line">   el_pt-&gt;body_force_fct_pt() = <a class="code" href="namespaceGlobal__Parameters.html#a200109847bf4cc26da4d00e8d68d569e">Global_Parameters::gravity</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>Next we create the traction elements, attaching them to the "bulk" solid elements that are adjacent to the boundaries that constitute the inside of the vessel.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create traction elements</span></div>
+<div class="line"> <span class="comment">//-------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create meshes of traction elements</span></div>
+<div class="line"> n=Solid_traction_boundary_id.size();</div>
+<div class="line"> Solid_traction_mesh_pt.resize(n);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;n;i++)</div>
+<div class="line">  {</div>
+<div class="line">   Solid_traction_mesh_pt[i]=<span class="keyword">new</span> SolidMesh;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the traction elements</span></div>
+<div class="line"> <a class="code" href="unstructured__three__d__solid_8txt.html#a99adc9b3c56170216a114b9b14978e9a">create_traction_elements</a>();</div>
+</div><!-- fragment --><p>Finally, we add the various meshes as sub-meshes to the <code>Problem</code>, build the global mesh, and assign the equation numbers.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Combine the lot</span></div>
+<div class="line"> <span class="comment">//----------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The solid bulk mesh</span></div>
+<div class="line"> add_sub_mesh(Solid_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The solid traction meshes</span></div>
+<div class="line"> n=Solid_traction_boundary_id.size();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;n;i++)</div>
+<div class="line">  {</div>
+<div class="line">   add_sub_mesh(Solid_traction_mesh_pt[i]);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build global mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> std::cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="traction"></a>
+Creating the traction elements</h1>
+<p>The helper function <code><a class="el" href="unstructured__three__d__solid_8txt.html#a99adc9b3c56170216a114b9b14978e9a">create_traction_elements()</a></code> does exactly what it says: It loops over the bulk elements that are adjacent to the inner surface of the vessel, and attaches <code>SolidTractionElements</code> to the appropriate faces. We store the pointers to the newly-created traction elements in separate meshes and specify the function pointer to the load function.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//============start_of_create_traction_elements==========================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Create traction elements </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classUnstructuredSolidProblem.html#a9137960284200ed998989f785965f902">UnstructuredSolidProblem&lt;ELEMENT&gt;::create_traction_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over traction boundaries</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n=Solid_traction_boundary_id.size();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;n;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get boundary ID</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> b=Solid_traction_boundary_id[i];</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// How many bulk elements are adjacent to boundary b?</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = Solid_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the bulk elements adjacent to boundary b</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">     ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">      Solid_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//What is the index of the face of the element e along boundary b</span></div>
+<div class="line">     <span class="keywordtype">int</span> face_index = Solid_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Create new element </span></div>
+<div class="line">     SolidTractionElement&lt;ELEMENT&gt;* el_pt=</div>
+<div class="line">      <span class="keyword">new</span> SolidTractionElement&lt;ELEMENT&gt;(bulk_elem_pt,face_index);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Add it to the mesh</span></div>
+<div class="line">     Solid_traction_mesh_pt[i]-&gt;add_element_pt(el_pt);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Set the traction function</span></div>
+<div class="line">     el_pt-&gt;traction_fct_pt() = <a class="code" href="namespaceGlobal__Parameters.html#a7dc25ca2abd48b7f1bffb2d6129f02bd">Global_Parameters::constant_pressure</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of create_traction_elements</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The post-processing routine outputs the deformed domain shape and the applied traction.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classUnstructuredSolidProblem.html#ab3d66fd61b69d12b4f159d763fc44f15">UnstructuredSolidProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solid solution</span></div>
+<div class="line"> <span class="comment">//-----------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/solid_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Solid_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">    </div>
+<div class="line"> <span class="comment">// Output traction</span></div>
+<div class="line"> <span class="comment">//----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/traction%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> <span class="keywordtype">unsigned</span> n=Solid_traction_boundary_id.size();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;n;i++)</div>
+<div class="line">  {</div>
+<div class="line">   Solid_traction_mesh_pt[i]-&gt;output(some_file,npts);</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="bound"></a>
+Identification/assignment of mesh boundaries</h2>
+<p>This tutorial shows that the use of unstructured 3D meshes for solid mechanics problems is extremely straightforward. The only aspect that requires some care (and not just for solid mechanics applications) is the correct identification/assignment of domain boundaries. The fact that we documented the position of the pinned nodes in the driver code suggests (correctly!) that we managed to get both assignments (slightly) wrong when we first generated the mesh and wrote the corresponding driver code. As usual, it pays off to <b>be as a paranoid as possible</b>! Ignore this advice at your own risk...</p>
+<p>Here is a plot of the position of the pinned solid nodes</p>
+<div class="image">
+<img src="pinned_solid_nodes.gif" alt=""/>
+<div class="caption">
+Plot of the pinned solid nodes. </div></div>
+ <p>and here's a plot showing the <code>SolidTractionElements</code> attached to the inside of the vessel:</p>
+<div class="image">
+<img src="traction_faces.gif" alt=""/>
+<div class="caption">
+Plot of the SolidTractionElements that apply the pressure load to the inner surface of the vessel. </div></div>
+ <hr  />
+<h2><a class="anchor" id="your_own"></a>
+Exercise: Try it yourself</h2>
+<p>Experiment with the <code>tetgen</code> -based mesh generation by modifying the <code>*.poly</code> file used in this example to different vessel geometries.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/solid/unstructured_three_d_solid/">demo_drivers/solid/unstructured_three_d_solid/ </a> </center><br  />
+</li>
+<li>The driver codes are: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc">demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc </a> </center> and <center> <a href="../../../../demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc">demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aunstructured__three__d__solid_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="unstructured__three__d__solid_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Demonstrate how to solve an unstructured 3D solid problem.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00380">unstructured_three_d_solid.cc:380</a></div></div>
+<div class="ttc" id="aclassUnstructuredSolidProblem_html_a32e691a698667053003e21333fc65057"><div class="ttname"><a href="classUnstructuredSolidProblem.html#a32e691a698667053003e21333fc65057">UnstructuredSolidProblem::Solid_traction_mesh_pt</a></div><div class="ttdeci">Vector&lt; SolidMesh * &gt; Solid_traction_mesh_pt</div><div class="ttdoc">Meshes of traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00159">unstructured_three_d_solid.cc:159</a></div></div>
+<div class="ttc" id="aclassUnstructuredSolidProblem_html_a25fe105d949498bf8f7c15aff96a7d00"><div class="ttname"><a href="classUnstructuredSolidProblem.html#a25fe105d949498bf8f7c15aff96a7d00">UnstructuredSolidProblem::~UnstructuredSolidProblem</a></div><div class="ttdeci">~UnstructuredSolidProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00145">unstructured_three_d_solid.cc:145</a></div></div>
+<div class="ttc" id="aunstructured__three__d__solid_8txt_html_a369f11bc5cf9fc0b3069a6f53624f7e2"><div class="ttname"><a href="unstructured__three__d__solid_8txt.html#a369f11bc5cf9fc0b3069a6f53624f7e2">Problem</a></div><div class="ttdeci">we add the various meshes as sub meshes to the c Problem</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8txt_source.html#l00286">unstructured_three_d_solid.txt:286</a></div></div>
+<div class="ttc" id="aclassUnstructuredSolidProblem_html_a9137960284200ed998989f785965f902"><div class="ttname"><a href="classUnstructuredSolidProblem.html#a9137960284200ed998989f785965f902">UnstructuredSolidProblem::create_traction_elements</a></div><div class="ttdeci">void create_traction_elements()</div><div class="ttdoc">Create traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00297">unstructured_three_d_solid.cc:297</a></div></div>
+<div class="ttc" id="aclassUnstructuredSolidProblem_html_a18ce02b6e4bbc86403c9e1b32c095772"><div class="ttname"><a href="classUnstructuredSolidProblem.html#a18ce02b6e4bbc86403c9e1b32c095772">UnstructuredSolidProblem::UnstructuredSolidProblem</a></div><div class="ttdeci">UnstructuredSolidProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00175">unstructured_three_d_solid.cc:175</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html"><div class="ttname"><a href="namespaceGlobal__Parameters.html">Global_Parameters</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00084">unstructured_three_d_solid.cc:84</a></div></div>
+<div class="ttc" id="aclassUnstructuredSolidProblem_html"><div class="ttname"><a href="classUnstructuredSolidProblem.html">UnstructuredSolidProblem</a></div><div class="ttdoc">Unstructured solid problem.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00136">unstructured_three_d_solid.cc:136</a></div></div>
+<div class="ttc" id="aunstructured__three__d__solid_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="unstructured__three__d__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8txt_source.html#l00007">unstructured_three_d_solid.txt:7</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a31fb55c20db4aa0127aafa20f0d76731"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">Global_Parameters::P</a></div><div class="ttdeci">double P</div><div class="ttdoc">Uniform pressure.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00107">unstructured_three_d_solid.cc:107</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a200109847bf4cc26da4d00e8d68d569e"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a200109847bf4cc26da4d00e8d68d569e">Global_Parameters::gravity</a></div><div class="ttdeci">void gravity(const double &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;b)</div><div class="ttdoc">Non-dimensional gravity as body force.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00097">unstructured_three_d_solid.cc:97</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_adbd1f040f375c96fe56b3f475f7dbec2"><div class="ttname"><a href="namespaceGlobal__Parameters.html#adbd1f040f375c96fe56b3f475f7dbec2">Global_Parameters::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">Create constitutive law.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00091">unstructured_three_d_solid.cc:91</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a20fccdcfa2c15ad8b951b9ada3bb1661"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Global_Parameters::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson's ratio.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00088">unstructured_three_d_solid.cc:88</a></div></div>
+<div class="ttc" id="aclassUnstructuredSolidProblem_html_ad6a8cbe2c2f3596385e1a2484bfb68f7"><div class="ttname"><a href="classUnstructuredSolidProblem.html#ad6a8cbe2c2f3596385e1a2484bfb68f7">UnstructuredSolidProblem::Solid_mesh_pt</a></div><div class="ttdeci">MySolidTetgenMesh&lt; ELEMENT &gt; * Solid_mesh_pt</div><div class="ttdoc">Bulk solid mesh.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00156">unstructured_three_d_solid.cc:156</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a335000b5db4206486a116ae0468d2d0c"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a335000b5db4206486a116ae0468d2d0c">Global_Parameters::Gravity</a></div><div class="ttdeci">double Gravity</div><div class="ttdoc">Non-dim gravity.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00094">unstructured_three_d_solid.cc:94</a></div></div>
+<div class="ttc" id="aclassUnstructuredSolidProblem_html_ab3d66fd61b69d12b4f159d763fc44f15"><div class="ttname"><a href="classUnstructuredSolidProblem.html#ab3d66fd61b69d12b4f159d763fc44f15">UnstructuredSolidProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00340">unstructured_three_d_solid.cc:340</a></div></div>
+<div class="ttc" id="aunstructured__three__d__solid_8txt_html_a99adc9b3c56170216a114b9b14978e9a"><div class="ttname"><a href="unstructured__three__d__solid_8txt.html#a99adc9b3c56170216a114b9b14978e9a">create_traction_elements</a></div><div class="ttdeci">mainpage Demo bifurcating vessel whose deformation is studied here conveys(and is loaded by) a viscous fluid.&lt; HR &gt;&lt; HR &gt; \section problem The problem(and results) Here is an animation of the problem We complete the build of the elements by setting the pointer to the constitutive equation and the body force until Next we create the traction attaching them to the bulk solid elements that are adjacent to the boundaries that constitute the inside of the vessel until create_traction_elements()</div></div>
+<div class="ttc" id="aclassMySolidTetgenMesh_html"><div class="ttname"><a href="classMySolidTetgenMesh.html">MySolidTetgenMesh</a></div><div class="ttdoc">Tetgen-based mesh upgraded to become a solid mesh.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00047">unstructured_three_d_solid.cc:47</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a7dc25ca2abd48b7f1bffb2d6129f02bd"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a7dc25ca2abd48b7f1bffb2d6129f02bd">Global_Parameters::constant_pressure</a></div><div class="ttdeci">void constant_pressure(const Vector&lt; double &gt; &amp;xi, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction)</div><div class="ttdoc">Constant pressure load. The arguments to this function are imposed on us by the SolidTractionElements...</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00114">unstructured_three_d_solid.cc:114</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:17:24
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Thermoelasticity: Combining the Heat equation and non-linear Solid Mechanics</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Thermoelasticity: Combining the Heat equation and non-linear Solid Mechanics </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="image">
+<img src="undef.gif" alt=""/>
+<div class="caption">
+Undeformed configuration of an elastic block. </div></div>
+ <p>We consider the uniform steady thermal expansion of an elastic body that is differentially heated. The top surface is heated and the bottom surface is maintained at the reference temperature, which leads to a uniform temperature gradient throughout the material. The material expands more near the upper surface than near the lower surface, deforming the initially rectangular block into an curved configuration.</p>
+<div class="image">
+<img src="def.gif" alt=""/>
+<div class="caption">
+Deformed elastica when the top surface is heated and the lower surface is maintained at the reference temperature. The contours indicate the temperature of the body. </div></div>
+ <hr  />
+ <hr  />
+ <h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The driver code for this example is given below:</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">//Driver for a multi-physics problem that couples the </span></div>
+<div class="line"><span class="comment">//unsteady heat equation to the equations of large-displacement solid</span></div>
+<div class="line"><span class="comment">//mechanics</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Oomph-lib headers, we require the generic, unsteady heat</span></div>
+<div class="line"><span class="comment">//and and elements.</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;solid.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;unsteady_heat.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The mesh is our standard rectangular quadmesh</span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/rectangular_quadmesh.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Use the oomph and std namespaces </span></div>
+<div class="line"><span class="keyword">using namespace </span>oomph;</div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=====================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// A class that solves the equations of steady thermoelasticity by </span></div>
+<div class="line"><span class="comment">/// combining the UnsteadyHeat and PVD equations into a single element.</span></div>
+<div class="line"><span class="comment">/// A temperature-dependent growth term is added to the PVD equations by</span></div>
+<div class="line"><span class="comment">/// overloading the member function get_istotropic_growth()</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================class definition==============================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classQThermalPVDElement.html">QThermalPVDElement</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> QPVDElement&lt;DIM,3&gt;,</div>
+<div class="line">                           <span class="keyword">public</span> <span class="keyword">virtual</span> QUnsteadyHeatElement&lt;DIM,3&gt;</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to a private data member, the thermal expansion coefficient</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span>* Alpha_pt;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// The static default value of Alpha</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">static</span> <span class="keywordtype">double</span> Default_Physical_Constant_Value;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Constructor: call the underlying constructors and </span></div>
+<div class="line"><span class="comment"> /// initialise the pointer to Alpha to point</span></div>
+<div class="line"><span class="comment"> /// to the default value of 1.0.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classQThermalPVDElement.html">QThermalPVDElement</a>() : QPVDElement&lt;DIM,3&gt;(),</div>
+<div class="line">                        QUnsteadyHeatElement&lt;DIM,3&gt;() </div>
+<div class="line">  {</div>
+<div class="line">   Alpha_pt = &amp;Default_Physical_Constant_Value;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///\short The required number of values stored at the nodes is the sum of the</span></div>
+<div class="line"><span class="comment"> ///required values of the two single-physics elements. Note that this step is</span></div>
+<div class="line"><span class="comment"> ///generic for any multi-physics element of this type.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> required_nvalue(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;n)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{<span class="keywordflow">return</span> (QUnsteadyHeatElement&lt;DIM,3&gt;::required_nvalue(n) +</div>
+<div class="line">           QPVDElement&lt;DIM,3&gt;::required_nvalue(n));}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Access function for the thermal expansion coefficient (const version)</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;alpha()<span class="keyword"> const </span>{<span class="keywordflow">return</span> *Alpha_pt;}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Access function for the pointer to the thermal expansion coefficientr</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span>* &amp;alpha_pt() {<span class="keywordflow">return</span> Alpha_pt;}</div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> ///  Overload the standard output function with the broken default</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> output(ostream &amp;outfile) {FiniteElement::output(outfile);}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Output function:  </span></div>
+<div class="line"><span class="comment"> ///  Output x, y, u, v, p, theta at Nplot^DIM plot points</span></div>
+<div class="line"><span class="comment"></span> <span class="comment">// Start of output function</span></div>
+<div class="line"> <span class="keywordtype">void</span> output(ostream &amp;outfile, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nplot)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//vector of local coordinates</span></div>
+<div class="line">   Vector&lt;double&gt; s(DIM);</div>
+<div class="line">   Vector&lt;double&gt; xi(DIM);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Tecplot header info</span></div>
+<div class="line">   outfile &lt;&lt; this-&gt;tecplot_zone_string(nplot);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over plot points</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_plot_points=this-&gt;nplot_points(nplot);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> iplot=0;iplot&lt;num_plot_points;iplot++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get local coordinates of plot point</span></div>
+<div class="line">     this-&gt;get_s_plot(iplot,nplot,s);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Get the Lagrangian coordinate</span></div>
+<div class="line">     this-&gt;interpolated_xi(s,xi);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Output the position of the plot point</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;DIM;i++) </div>
+<div class="line">      {outfile &lt;&lt; this-&gt;interpolated_x(s,i) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;}</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Output the temperature (the advected variable) at the plot point</span></div>
+<div class="line">     outfile &lt;&lt; this-&gt;interpolated_u_ust_heat(s) &lt;&lt; std::endl;   </div>
+<div class="line">    }</div>
+<div class="line">   outfile &lt;&lt; std::endl;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Write tecplot footer (e.g. FE connectivity lists)</span></div>
+<div class="line">   this-&gt;write_tecplot_zone_footer(outfile,nplot);</div>
+<div class="line">  } <span class="comment">//End of output function</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short C-style output function: Broken default</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> output(FILE* file_pt)</div>
+<div class="line">  {FiniteElement::output(file_pt);}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///  \short C-style output function: Broken default</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> output(FILE* file_pt, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;n_plot)</div>
+<div class="line">  {FiniteElement::output(file_pt,n_plot);}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Output function for an exact solution: Broken default</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> output_fct(ostream &amp;outfile, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;Nplot,</div>
+<div class="line">                 FiniteElement::SteadyExactSolutionFctPt </div>
+<div class="line">                 exact_soln_pt)</div>
+<div class="line">  {FiniteElement::output_fct(outfile,Nplot,exact_soln_pt);}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Output function for a time-dependent exact solution:</span></div>
+<div class="line"><span class="comment"> /// Broken default.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> output_fct(ostream &amp;outfile, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;Nplot,</div>
+<div class="line">                 <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line">                 FiniteElement::UnsteadyExactSolutionFctPt </div>
+<div class="line">                 exact_soln_pt)</div>
+<div class="line">  {</div>
+<div class="line">   FiniteElement::</div>
+<div class="line">    output_fct(outfile,Nplot,time,exact_soln_pt);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Compute norm of solution: use the version in the unsteady heat</span></div>
+<div class="line"><span class="comment"> /// class </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> compute_norm(<span class="keywordtype">double</span>&amp; el_norm)</div>
+<div class="line"> {</div>
+<div class="line">  QUnsteadyHeatElement&lt;DIM,3&gt;::compute_norm(el_norm);</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Validate against exact solution at given time</span></div>
+<div class="line"><span class="comment"> /// Solution is provided via function pointer.</span></div>
+<div class="line"><span class="comment"> /// Plot at a given number of plot points and compute L2 error</span></div>
+<div class="line"><span class="comment"> /// and L2 norm of velocity solution over element</span></div>
+<div class="line"><span class="comment"> /// Call the broken default</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> compute_error(ostream &amp;outfile,</div>
+<div class="line">                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,</div>
+<div class="line">                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line">                    <span class="keywordtype">double</span>&amp; error, <span class="keywordtype">double</span>&amp; norm)</div>
+<div class="line">  {FiniteElement::compute_error(outfile,exact_soln_pt,</div>
+<div class="line">                                time,error,norm);}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Validate against exact solution.</span></div>
+<div class="line"><span class="comment"> /// Solution is provided via function pointer.</span></div>
+<div class="line"><span class="comment"> /// Plot at a given number of plot points and compute L2 error</span></div>
+<div class="line"><span class="comment"> /// and L2 norm of velocity solution over element</span></div>
+<div class="line"><span class="comment"> /// Call the broken default</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> compute_error(ostream &amp;outfile,</div>
+<div class="line">                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,</div>
+<div class="line">                    <span class="keywordtype">double</span>&amp; error, <span class="keywordtype">double</span>&amp; norm)</div>
+<div class="line">  {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Overload the growth function in the advection-diffusion equations.</span></div>
+<div class="line"><span class="comment"> /// to be temperature-dependent.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> get_isotropic_growth(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ipt, <span class="keyword">const</span> Vector&lt;double&gt; &amp;s, </div>
+<div class="line">                           <span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, <span class="keywordtype">double</span> &amp;gamma)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword"> </span>{</div>
+<div class="line">  <span class="comment">//The growth is the undeformed coefficient plus linear thermal</span></div>
+<div class="line">  <span class="comment">//expansion</span></div>
+<div class="line">  gamma = 1.0 + (*Alpha_pt)*this-&gt;interpolated_u_ust_heat(s);</div>
+<div class="line"> }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Calculate the contribution to the residual vector.</span></div>
+<div class="line"><span class="comment"> /// We assume that the vector has been initialised to zero</span></div>
+<div class="line"><span class="comment"> /// before this function is called.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> fill_in_contribution_to_residuals(Vector&lt;double&gt; &amp;residuals)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Call the residuals of the advection-diffusion eqautions</span></div>
+<div class="line">   UnsteadyHeatEquations&lt;DIM&gt;::</div>
+<div class="line">    fill_in_contribution_to_residuals(residuals);</div>
+<div class="line">   <span class="comment">//Call the residuals of the Navier-Stokes equations</span></div>
+<div class="line">   PVDEquations&lt;DIM&gt;::</div>
+<div class="line">    fill_in_contribution_to_residuals(residuals);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///\short Compute the element&#39;s residual Vector and the jacobian matrix</span></div>
+<div class="line"><span class="comment"> /// We assume that the residuals vector and jacobian matrix have been</span></div>
+<div class="line"><span class="comment"> /// initialised to zero before calling this function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> fill_in_contribution_to_jacobian(Vector&lt;double&gt; &amp;residuals,</div>
+<div class="line">                                       DenseMatrix&lt;double&gt; &amp;jacobian)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Just call standard finite difference for a SolidFiniteElement so </span></div>
+<div class="line">   <span class="comment">//that variations in the nodal positions are taken into account</span></div>
+<div class="line">   SolidFiniteElement::fill_in_contribution_to_jacobian(residuals,jacobian);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Set the default physical value to be one</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><span class="keywordtype">double</span> <a class="code" href="classQThermalPVDElement.html">QThermalPVDElement&lt;2&gt;::Default_Physical_Constant_Value</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======start_of_namespace============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace for the physical parameters in the problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Thermal expansion coefficient </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#aa2e802ee7cc8e1ac900ba94c3ce86eb7">Alpha</a>=0.0;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Young&#39;s modulus for solid mechanics</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">E</a> = 1.0; <span class="comment">// ADJUST </span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Poisson ratio for solid mechanics</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a> = 0.3; <span class="comment">// ADJUST</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// We need a constitutive law for the solid mechanics</span></div>
+<div class="line"><span class="comment"></span> ConstitutiveLaw* <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Constitutive_law_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_namespace</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">//====== start_of_problem_class=======================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// 2D Thermoelasticity problem on rectangular domain, discretised </span></div>
+<div class="line"><span class="comment">/// with refineable elements. The specific type</span></div>
+<div class="line"><span class="comment">/// of element is specified via the template parameter.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classThermalProblem.html">ThermalProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classThermalProblem.html">ThermalProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor. Empty</span></div>
+<div class="line"><span class="comment"></span> ~<a class="code" href="classThermalProblem.html">ThermalProblem</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_newton_solve(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before adapt:(empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_adapt(){}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Doc the solution.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Overloaded version of the problem&#39;s access function to </span></div>
+<div class="line"><span class="comment"> /// the mesh. Recasts the pointer to the base Mesh object to </span></div>
+<div class="line"><span class="comment"> /// the actual mesh type.</span></div>
+<div class="line"><span class="comment"></span> ElasticRectangularQuadMesh&lt;ELEMENT&gt;* mesh_pt() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>ElasticRectangularQuadMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// DocInfo object</span></div>
+<div class="line"><span class="comment"></span> DocInfo Doc_info;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// \short Constructor for Convection problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classThermalProblem.html#a12ad5d383929b1ef4ed29503c5a271b0">ThermalProblem&lt;ELEMENT&gt;::ThermalProblem</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> Doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_x=8;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_y=8;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in x-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_x=3.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_y=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build a standard rectangular quadmesh</span></div>
+<div class="line"> Problem::mesh_pt() = </div>
+<div class="line">  <span class="keyword">new</span> ElasticRectangularQuadMesh&lt;ELEMENT&gt;(n_x,n_y,l_x,l_y);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- only need to pin the ones that have Dirichlet </span></div>
+<div class="line"> <span class="comment">// conditions here</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//The temperature is prescribed on the lower boundary</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> n_boundary_node = mesh_pt()-&gt;nboundary_node(0);</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_boundary_node;n++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">//Get the pointer to the node</span></div>
+<div class="line">    Node* nod_pt = mesh_pt()-&gt;boundary_node_pt(0,n);</div>
+<div class="line">    <span class="comment">//Pin the temperature at the node </span></div>
+<div class="line">    nod_pt-&gt;pin(0);</div>
+<div class="line">    <span class="comment">//Set the temperature to 0.0 (cooled)</span></div>
+<div class="line">    nod_pt-&gt;set_value(0,0.0);</div>
+<div class="line">   }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//The temperature is prescribed on the upper boundary</span></div>
+<div class="line">  n_boundary_node = mesh_pt()-&gt;nboundary_node(2);</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_boundary_node;n++)</div>
+<div class="line">   {</div>
+<div class="line">    Node* nod_pt = mesh_pt()-&gt;boundary_node_pt(2,n);</div>
+<div class="line">    <span class="comment">//Pin the temperature at the node</span></div>
+<div class="line">    nod_pt-&gt;pin(0);</div>
+<div class="line">    <span class="comment">//Set the temperature to 1.0 (heated)</span></div>
+<div class="line">    nod_pt-&gt;set_value(0,1.0);</div>
+<div class="line">   }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//The horizontal-position is fixed on the vertical boundary (symmetry)</span></div>
+<div class="line">  n_boundary_node = mesh_pt()-&gt;nboundary_node(1);</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_boundary_node;n++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="keyword">static_cast&lt;</span>SolidNode*<span class="keyword">&gt;</span>(mesh_pt()-&gt;boundary_node_pt(1,n))-&gt;pin_position(0);</div>
+<div class="line">   }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//We need to completely fix the lower-right corner of the block to </span></div>
+<div class="line">  <span class="comment">//prevent vertical rigid-body motions</span></div>
+<div class="line">  <span class="keyword">static_cast&lt;</span>SolidNode*<span class="keyword">&gt;</span>(mesh_pt()-&gt;boundary_node_pt(1,0))-&gt;pin_position(1);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by the (argument-free!) ELEMENT </span></div>
+<div class="line"> <span class="comment">// constructor.</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralsedElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the coefficient of thermal expansion</span></div>
+<div class="line">   el_pt-&gt;alpha_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#aa2e802ee7cc8e1ac900ba94c3ce86eb7">Global_Physical_Variables::Alpha</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set a constitutive law</span></div>
+<div class="line">   el_pt-&gt;constitutive_law_pt() = </div>
+<div class="line">    <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classThermalProblem.html#aa085f248542811385fefe623a9193fd8">ThermalProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">//Declare an output stream and filename</span></div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points: npts x npts</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> Doc_info.number()++;</div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=====================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver code for 2D Thermoelasticity problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="thermo_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// &quot;Big G&quot; Linear constitutive equations:</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a> = </div>
+<div class="line">  <span class="keyword">new</span> GeneralisedHookean(&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>,</div>
+<div class="line">                         &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">Global_Physical_Variables::E</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Construct our problem</span></div>
+<div class="line"> <a class="code" href="classThermalProblem.html">ThermalProblem&lt;QThermalPVDElement&lt;2&gt;</a> &gt; problem;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Number of quasi-steady steps</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_steps = 11;</div>
+<div class="line"> <span class="comment">//If we have additional command line arguemnts, take fewer steps</span></div>
+<div class="line"> <span class="keywordflow">if</span>(argc &gt; 1) {n_steps = 2;}</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_steps;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Increase the thermal expansion coefficient</span></div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#aa2e802ee7cc8e1ac900ba94c3ce86eb7">Global_Physical_Variables::Alpha</a> = 0.1*i;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Perform a single steady newton solve</span></div>
+<div class="line">   problem.newton_solve();</div>
+<div class="line">   <span class="comment">//Document the solution</span></div>
+<div class="line">   problem.<a class="code" href="classThermalProblem.html#aa085f248542811385fefe623a9193fd8">doc_solution</a>();</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// end of main</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="
+../../../../
+demo_drivers/multi_physics/thermo/
+">demo_drivers/multi_physics/thermo/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="
+../../../../
+demo_drivers/multi_physics/thermo/thermo.cc
+">demo_drivers/multi_physics/thermo/thermo.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassThermalProblem_html_aa085f248542811385fefe623a9193fd8"><div class="ttname"><a href="classThermalProblem.html#aa085f248542811385fefe623a9193fd8">ThermalProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00382">thermo.cc:382</a></div></div>
+<div class="ttc" id="aclassQThermalPVDElement_html"><div class="ttname"><a href="classQThermalPVDElement.html">QThermalPVDElement</a></div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00052">thermo.cc:52</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a09a019474b7405b35da2437f7779bc7e"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">Global_Physical_Variables::E</a></div><div class="ttdeci">double E</div><div class="ttdoc">Young's modulus for solid mechanics.</div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00230">thermo.cc:230</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson ratio for solid mechanics.</div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00233">thermo.cc:233</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_aa2e802ee7cc8e1ac900ba94c3ce86eb7"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#aa2e802ee7cc8e1ac900ba94c3ce86eb7">Global_Physical_Variables::Alpha</a></div><div class="ttdeci">double Alpha</div><div class="ttdoc">Thermal expansion coefficient.</div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00227">thermo.cc:227</a></div></div>
+<div class="ttc" id="athermo_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="thermo_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Driver code for 2D Thermoelasticity problem.</div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00406">thermo.cc:406</a></div></div>
+<div class="ttc" id="aclassThermalProblem_html_a12ad5d383929b1ef4ed29503c5a271b0"><div class="ttname"><a href="classThermalProblem.html#a12ad5d383929b1ef4ed29503c5a271b0">ThermalProblem::ThermalProblem</a></div><div class="ttdeci">ThermalProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00293">thermo.cc:293</a></div></div>
+<div class="ttc" id="aclassThermalProblem_html"><div class="ttname"><a href="classThermalProblem.html">ThermalProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00250">thermo.cc:250</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a2a37fb040c832ee7a086bb13bb02a100"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">We need a constitutive law for the solid mechanics.</div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00236">thermo.cc:236</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for the physical parameters in the problem.</div><div class="ttdef"><b>Definition:</b> <a href="thermo_8cc_source.html#l00224">thermo.cc:224</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:26
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

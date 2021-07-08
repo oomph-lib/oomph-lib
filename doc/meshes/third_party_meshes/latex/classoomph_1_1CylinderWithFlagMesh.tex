@@ -1,0 +1,127 @@
+\hypertarget{classoomph_1_1CylinderWithFlagMesh}{}\doxysection{oomph\+::Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1CylinderWithFlagMesh}\index{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.886598cm]{classoomph_1_1CylinderWithFlagMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh_a6591a2b9fdcb8080c899e34b9c8277cd}{Cylinder\+With\+Flag\+Mesh}} (Circle $\ast$cylinder\+\_\+pt, Geom\+Object $\ast$top\+\_\+flag\+\_\+pt, Geom\+Object $\ast$bottom\+\_\+flag\+\_\+pt, Geom\+Object $\ast$tip\+\_\+flag\+\_\+pt, const double \&length, const double \&height, const double \&flag\+\_\+length, const double \&flag\+\_\+height, const double \&centre\+\_\+x, const double \&centre\+\_\+y, const double \&a, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor. Pass the pointers to the Geom\+Objects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh_a04fb9a6ea7a70eb8dbfb83ef73ed7b48}{$\sim$\+Cylinder\+With\+Flag\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Kill the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain}{Cylinder\+With\+Flag\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh_abfaa03615a4a6f99ddc9100f739cb94f}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain}{Cylinder\+With\+Flag\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh_a257b36fed6fb0d20d108a27c6a1c5f86}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Domain-\/based mesh for cylinder with flag as in Turek benchmark. 
+
+Definition at line 49 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1CylinderWithFlagMesh_a6591a2b9fdcb8080c899e34b9c8277cd}\label{classoomph_1_1CylinderWithFlagMesh_a6591a2b9fdcb8080c899e34b9c8277cd}} 
+\index{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$}!CylinderWithFlagMesh@{CylinderWithFlagMesh}}
+\index{CylinderWithFlagMesh@{CylinderWithFlagMesh}!oomph::CylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{CylinderWithFlagMesh()}{CylinderWithFlagMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh}{oomph\+::\+Cylinder\+With\+Flag\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh}{Cylinder\+With\+Flag\+Mesh}} (\begin{DoxyParamCaption}\item[{Circle $\ast$}]{cylinder\+\_\+pt,  }\item[{Geom\+Object $\ast$}]{top\+\_\+flag\+\_\+pt,  }\item[{Geom\+Object $\ast$}]{bottom\+\_\+flag\+\_\+pt,  }\item[{Geom\+Object $\ast$}]{tip\+\_\+flag\+\_\+pt,  }\item[{const double \&}]{length,  }\item[{const double \&}]{height,  }\item[{const double \&}]{flag\+\_\+length,  }\item[{const double \&}]{flag\+\_\+height,  }\item[{const double \&}]{centre\+\_\+x,  }\item[{const double \&}]{centre\+\_\+y,  }\item[{const double \&}]{a,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor. Pass the pointers to the Geom\+Objects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper. 
+
+
+
+Definition at line 44 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1CylinderWithFlagMesh_a04fb9a6ea7a70eb8dbfb83ef73ed7b48}\label{classoomph_1_1CylinderWithFlagMesh_a04fb9a6ea7a70eb8dbfb83ef73ed7b48}} 
+\index{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$}!````~CylinderWithFlagMesh@{$\sim$CylinderWithFlagMesh}}
+\index{````~CylinderWithFlagMesh@{$\sim$CylinderWithFlagMesh}!oomph::CylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$CylinderWithFlagMesh()}{~CylinderWithFlagMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh}{oomph\+::\+Cylinder\+With\+Flag\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh}{Cylinder\+With\+Flag\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: Kill the domain. 
+
+
+
+Definition at line 74 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1CylinderWithFlagMesh_abfaa03615a4a6f99ddc9100f739cb94f}\label{classoomph_1_1CylinderWithFlagMesh_abfaa03615a4a6f99ddc9100f739cb94f}} 
+\index{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$}!domain\_pt@{domain\_pt}}
+\index{domain\_pt@{domain\_pt}!oomph::CylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain}{Cylinder\+With\+Flag\+Domain}}$\ast$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh}{oomph\+::\+Cylinder\+With\+Flag\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the domain. 
+
+
+
+Definition at line 80 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+bottom\+\_\+flag\+\_\+pt(), oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+tip\+\_\+flag\+\_\+pt(), and oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+top\+\_\+flag\+\_\+pt().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1CylinderWithFlagMesh_a257b36fed6fb0d20d108a27c6a1c5f86}\label{classoomph_1_1CylinderWithFlagMesh_a257b36fed6fb0d20d108a27c6a1c5f86}} 
+\index{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$}!Domain\_pt@{Domain\_pt}}
+\index{Domain\_pt@{Domain\_pt}!oomph::CylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::CylinderWithFlagMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain}{Cylinder\+With\+Flag\+Domain}}$\ast$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh}{oomph\+::\+Cylinder\+With\+Flag\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the domain. 
+
+
+
+Definition at line 85 of file cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::domain\+\_\+pt(), and oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::$\sim$\+Cylinder\+With\+Flag\+Mesh().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{cylinder__with__flag__mesh_8template_8h}{cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+h}}\item 
+\mbox{\hyperlink{cylinder__with__flag__mesh_8template_8cc}{cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

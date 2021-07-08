@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::MapMatrix&lt; KEY_TYPE, VALUE_TYPE &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1MapMatrix-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::MapMatrix&lt; KEY_TYPE, VALUE_TYPE &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::MapMatrix&lt; KEY_TYPE, VALUE_TYPE &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1MapMatrix.png" usemap="#oomph::MapMatrix_3C_20KEY_5FTYPE_2C_20VALUE_5FTYPE_20_3E_map" alt=""/>
+  <map id="oomph::MapMatrix_3C_20KEY_5FTYPE_2C_20VALUE_5FTYPE_20_3E_map" name="oomph::MapMatrix_3C_20KEY_5FTYPE_2C_20VALUE_5FTYPE_20_3E_map">
+<area href="classoomph_1_1MapMatrixMixed.html" alt="oomph::MapMatrixMixed&lt; KEY_TYPE, KEY_TYPE, VALUE_TYPE &gt;" shape="rect" coords="0,0,399,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a9514409eb8ed5c6c3f3ceaa3d51e7eae"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; KEY_TYPE, VALUE_TYPE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrix.html#a9514409eb8ed5c6c3f3ceaa3d51e7eae">InnerMap</a></td></tr>
+<tr class="memdesc:a9514409eb8ed5c6c3f3ceaa3d51e7eae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrix.html#a9514409eb8ed5c6c3f3ceaa3d51e7eae">More...</a><br /></td></tr>
+<tr class="separator:a9514409eb8ed5c6c3f3ceaa3d51e7eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23ece77bd36f3cdecf83c5ef7d490608"><td class="memItemLeft" align="right" valign="top">typedef InnerMap::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrix.html#a23ece77bd36f3cdecf83c5ef7d490608">InnerIt</a></td></tr>
+<tr class="memdesc:a23ece77bd36f3cdecf83c5ef7d490608"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrix.html#a23ece77bd36f3cdecf83c5ef7d490608">More...</a><br /></td></tr>
+<tr class="separator:a23ece77bd36f3cdecf83c5ef7d490608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3738b797386c7ad5dbe170d3558ace9"><td class="memItemLeft" align="right" valign="top">typedef InnerMap::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrix.html#ac3738b797386c7ad5dbe170d3558ace9">ConstInnerIt</a></td></tr>
+<tr class="memdesc:ac3738b797386c7ad5dbe170d3558ace9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrix.html#ac3738b797386c7ad5dbe170d3558ace9">More...</a><br /></td></tr>
+<tr class="separator:ac3738b797386c7ad5dbe170d3558ace9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af73388510565fa9af6b2946d23bd7709"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; KEY_TYPE, std::map&lt; KEY_TYPE, VALUE_TYPE &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrix.html#af73388510565fa9af6b2946d23bd7709">OuterMap</a></td></tr>
+<tr class="memdesc:af73388510565fa9af6b2946d23bd7709"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrix.html#af73388510565fa9af6b2946d23bd7709">More...</a><br /></td></tr>
+<tr class="separator:af73388510565fa9af6b2946d23bd7709"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96c70b7ef6e89440c40648a6be9e4216"><td class="memItemLeft" align="right" valign="top">typedef OuterMap::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrix.html#a96c70b7ef6e89440c40648a6be9e4216">OuterIt</a></td></tr>
+<tr class="memdesc:a96c70b7ef6e89440c40648a6be9e4216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrix.html#a96c70b7ef6e89440c40648a6be9e4216">More...</a><br /></td></tr>
+<tr class="separator:a96c70b7ef6e89440c40648a6be9e4216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a795543d1b91f719b845b7588f7644eb3"><td class="memItemLeft" align="right" valign="top">typedef OuterMap::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrix.html#a795543d1b91f719b845b7588f7644eb3">ConstOuterIt</a></td></tr>
+<tr class="memdesc:a795543d1b91f719b845b7588f7644eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrix.html#a795543d1b91f719b845b7588f7644eb3">More...</a><br /></td></tr>
+<tr class="separator:a795543d1b91f719b845b7588f7644eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classoomph_1_1MapMatrixMixed"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classoomph_1_1MapMatrixMixed')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classoomph_1_1MapMatrixMixed.html">oomph::MapMatrixMixed&lt; KEY_TYPE, KEY_TYPE, VALUE_TYPE &gt;</a></td></tr>
+<tr class="memitem:aed39c3f0e6377a36ea7653c6de21b0ce inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; KEY_TYPE, VALUE_TYPE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#aed39c3f0e6377a36ea7653c6de21b0ce">InnerMapMixed</a></td></tr>
+<tr class="memdesc:aed39c3f0e6377a36ea7653c6de21b0ce inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrixMixed.html#aed39c3f0e6377a36ea7653c6de21b0ce">More...</a><br /></td></tr>
+<tr class="separator:aed39c3f0e6377a36ea7653c6de21b0ce inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88516855a59e81851521a52d5355e9c9 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">typedef InnerMapMixed::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a88516855a59e81851521a52d5355e9c9">InnerMixedIt</a></td></tr>
+<tr class="memdesc:a88516855a59e81851521a52d5355e9c9 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrixMixed.html#a88516855a59e81851521a52d5355e9c9">More...</a><br /></td></tr>
+<tr class="separator:a88516855a59e81851521a52d5355e9c9 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0599160ea5bf25e9666f6825af3ed480 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">typedef InnerMapMixed::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a0599160ea5bf25e9666f6825af3ed480">ConstInnerMixedIt</a></td></tr>
+<tr class="memdesc:a0599160ea5bf25e9666f6825af3ed480 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable const version.  <a href="classoomph_1_1MapMatrixMixed.html#a0599160ea5bf25e9666f6825af3ed480">More...</a><br /></td></tr>
+<tr class="separator:a0599160ea5bf25e9666f6825af3ed480 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accfdbc5eed007b560e52b4ce77c11680 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; KEY_TYPE, std::map&lt; KEY_TYPE, VALUE_TYPE &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#accfdbc5eed007b560e52b4ce77c11680">OuterMapMixed</a></td></tr>
+<tr class="memdesc:accfdbc5eed007b560e52b4ce77c11680 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrixMixed.html#accfdbc5eed007b560e52b4ce77c11680">More...</a><br /></td></tr>
+<tr class="separator:accfdbc5eed007b560e52b4ce77c11680 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9b361be3e0ce68e8f6618b95cbad231 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">typedef OuterMapMixed::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#ae9b361be3e0ce68e8f6618b95cbad231">OuterMixedIt</a></td></tr>
+<tr class="memdesc:ae9b361be3e0ce68e8f6618b95cbad231 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable.  <a href="classoomph_1_1MapMatrixMixed.html#ae9b361be3e0ce68e8f6618b95cbad231">More...</a><br /></td></tr>
+<tr class="separator:ae9b361be3e0ce68e8f6618b95cbad231 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae407586fb40aaf48fd20a0678adb591 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">typedef OuterMapMixed::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#aae407586fb40aaf48fd20a0678adb591">ConstOuterMixedIt</a></td></tr>
+<tr class="memdesc:aae407586fb40aaf48fd20a0678adb591 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef to keep the code more readable const version.  <a href="classoomph_1_1MapMatrixMixed.html#aae407586fb40aaf48fd20a0678adb591">More...</a><br /></td></tr>
+<tr class="separator:aae407586fb40aaf48fd20a0678adb591 inherit pub_types_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a52ace9b2ef78f96cebbe3b6e2173a87c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrix.html#a52ace9b2ef78f96cebbe3b6e2173a87c">MapMatrix</a> ()</td></tr>
+<tr class="memdesc:a52ace9b2ef78f96cebbe3b6e2173a87c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default (empty) constructor.  <a href="classoomph_1_1MapMatrix.html#a52ace9b2ef78f96cebbe3b6e2173a87c">More...</a><br /></td></tr>
+<tr class="separator:a52ace9b2ef78f96cebbe3b6e2173a87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac58797d44964ccff957077b74076c231"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrix.html#ac58797d44964ccff957077b74076c231">MapMatrix</a> (const <a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt; &amp;map_mat)</td></tr>
+<tr class="memdesc:ac58797d44964ccff957077b74076c231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classoomph_1_1MapMatrix.html#ac58797d44964ccff957077b74076c231">More...</a><br /></td></tr>
+<tr class="separator:ac58797d44964ccff957077b74076c231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad28a61f99589c46468dada134650857d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrix.html#ad28a61f99589c46468dada134650857d">operator=</a> (const <a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a> &amp;)</td></tr>
+<tr class="memdesc:ad28a61f99589c46468dada134650857d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1MapMatrix.html#ad28a61f99589c46468dada134650857d">More...</a><br /></td></tr>
+<tr class="separator:ad28a61f99589c46468dada134650857d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1MapMatrixMixed"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1MapMatrixMixed')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1MapMatrixMixed.html">oomph::MapMatrixMixed&lt; KEY_TYPE, KEY_TYPE, VALUE_TYPE &gt;</a></td></tr>
+<tr class="memitem:a51d284e72805320fe36239f5d33e2973 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a51d284e72805320fe36239f5d33e2973">MapMatrixMixed</a> ()</td></tr>
+<tr class="memdesc:a51d284e72805320fe36239f5d33e2973 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default (empty) constructor.  <a href="classoomph_1_1MapMatrixMixed.html#a51d284e72805320fe36239f5d33e2973">More...</a><br /></td></tr>
+<tr class="separator:a51d284e72805320fe36239f5d33e2973 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae510212b296340607ddce4083b3ed36a inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#ae510212b296340607ddce4083b3ed36a">MapMatrixMixed</a> (const <a class="el" href="classoomph_1_1MapMatrixMixed.html">MapMatrixMixed</a>&lt; KEY_TYPE, KEY_TYPE, VALUE_TYPE &gt; &amp;map_mat)</td></tr>
+<tr class="memdesc:ae510212b296340607ddce4083b3ed36a inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classoomph_1_1MapMatrixMixed.html#ae510212b296340607ddce4083b3ed36a">More...</a><br /></td></tr>
+<tr class="separator:ae510212b296340607ddce4083b3ed36a inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a52484fc1b32bcbda6a198de2bd83cb inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a5a52484fc1b32bcbda6a198de2bd83cb">operator=</a> (const <a class="el" href="classoomph_1_1MapMatrixMixed.html">MapMatrixMixed</a> &amp;)</td></tr>
+<tr class="memdesc:a5a52484fc1b32bcbda6a198de2bd83cb inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1MapMatrixMixed.html#a5a52484fc1b32bcbda6a198de2bd83cb">More...</a><br /></td></tr>
+<tr class="separator:a5a52484fc1b32bcbda6a198de2bd83cb inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cd31cfd9771420625c92fc2a3a53210 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a2cd31cfd9771420625c92fc2a3a53210">copy_column</a> (const KEY_TYPE &amp;j, std::map&lt; KEY_TYPE, VALUE_TYPE &gt; &amp;copied_map)</td></tr>
+<tr class="memdesc:a2cd31cfd9771420625c92fc2a3a53210 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a single column into its own map.  <a href="classoomph_1_1MapMatrixMixed.html#a2cd31cfd9771420625c92fc2a3a53210">More...</a><br /></td></tr>
+<tr class="separator:a2cd31cfd9771420625c92fc2a3a53210 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cf0f3eb68c457db64d4bd8213594618 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a7cf0f3eb68c457db64d4bd8213594618">~MapMatrixMixed</a> ()</td></tr>
+<tr class="memdesc:a7cf0f3eb68c457db64d4bd8213594618 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classoomph_1_1MapMatrixMixed.html#a7cf0f3eb68c457db64d4bd8213594618">More...</a><br /></td></tr>
+<tr class="separator:a7cf0f3eb68c457db64d4bd8213594618 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab061e2b557441b3b2a9fee98fe105af2 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#ab061e2b557441b3b2a9fee98fe105af2">clear</a> ()</td></tr>
+<tr class="memdesc:ab061e2b557441b3b2a9fee98fe105af2 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wipe all entries.  <a href="classoomph_1_1MapMatrixMixed.html#ab061e2b557441b3b2a9fee98fe105af2">More...</a><br /></td></tr>
+<tr class="separator:ab061e2b557441b3b2a9fee98fe105af2 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad348711a05b2266ccd0fa80b82992610 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">VALUE_TYPE &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#ad348711a05b2266ccd0fa80b82992610">operator()</a> (const KEY_TYPE &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const KEY_TYPE &amp;j)</td></tr>
+<tr class="memdesc:ad348711a05b2266ccd0fa80b82992610 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return (reference to) entry. Careful: If the entry does not exist then it is created and set to zero.  <a href="classoomph_1_1MapMatrixMixed.html#ad348711a05b2266ccd0fa80b82992610">More...</a><br /></td></tr>
+<tr class="separator:ad348711a05b2266ccd0fa80b82992610 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee00d676e6d7833a9b2399bf919bb58a inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">VALUE_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#aee00d676e6d7833a9b2399bf919bb58a">get</a> (const KEY_TYPE &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const KEY_TYPE &amp;j) const</td></tr>
+<tr class="memdesc:aee00d676e6d7833a9b2399bf919bb58a inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an element corresponding to the key (i,j) Searches the container for an element with a key equivalent to (i,j) and returns the element if found, otherwise the default 0 value for the value type is returned. The container is not modified.  <a href="classoomph_1_1MapMatrixMixed.html#aee00d676e6d7833a9b2399bf919bb58a">More...</a><br /></td></tr>
+<tr class="separator:aee00d676e6d7833a9b2399bf919bb58a inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa250e1584c330b589b2153dd5e170d31 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#aa250e1584c330b589b2153dd5e170d31">output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:aa250e1584c330b589b2153dd5e170d31 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dump all non-&lsquo;zero&rsquo; entries to file. Output is in the format &lsquo;i&rsquo;, &lsquo;j&rsquo;, &lsquo;entry[i][j]&rsquo;.  <a href="classoomph_1_1MapMatrixMixed.html#aa250e1584c330b589b2153dd5e170d31">More...</a><br /></td></tr>
+<tr class="separator:aa250e1584c330b589b2153dd5e170d31 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24bcb7415eaecc66e0649122ba748e5c inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a24bcb7415eaecc66e0649122ba748e5c">nnz</a> ()</td></tr>
+<tr class="memdesc:a24bcb7415eaecc66e0649122ba748e5c inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Work out number of non-&lsquo;zero&rsquo; entries.  <a href="classoomph_1_1MapMatrixMixed.html#a24bcb7415eaecc66e0649122ba748e5c">More...</a><br /></td></tr>
+<tr class="separator:a24bcb7415eaecc66e0649122ba748e5c inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a578320f7979e3f69578e8fb8a42c3ee6 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a578320f7979e3f69578e8fb8a42c3ee6">nnz</a> () const</td></tr>
+<tr class="memdesc:a578320f7979e3f69578e8fb8a42c3ee6 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Work out number of non-&lsquo;zero&rsquo; entries, const version.  <a href="classoomph_1_1MapMatrixMixed.html#a578320f7979e3f69578e8fb8a42c3ee6">More...</a><br /></td></tr>
+<tr class="separator:a578320f7979e3f69578e8fb8a42c3ee6 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af26d8be251e0d02354d242f84622c1ff inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#af26d8be251e0d02354d242f84622c1ff">size</a> ()</td></tr>
+<tr class="memdesc:af26d8be251e0d02354d242f84622c1ff inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Work out total number of entries.  <a href="classoomph_1_1MapMatrixMixed.html#af26d8be251e0d02354d242f84622c1ff">More...</a><br /></td></tr>
+<tr class="separator:af26d8be251e0d02354d242f84622c1ff inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f2f66dd90a57957c732a9ef1dd5197 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#ae3f2f66dd90a57957c732a9ef1dd5197">size</a> () const</td></tr>
+<tr class="memdesc:ae3f2f66dd90a57957c732a9ef1dd5197 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Work out total number of entries const version.  <a href="classoomph_1_1MapMatrixMixed.html#ae3f2f66dd90a57957c732a9ef1dd5197">More...</a><br /></td></tr>
+<tr class="separator:ae3f2f66dd90a57957c732a9ef1dd5197 inherit pub_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1MapMatrixMixed"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1MapMatrixMixed')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1MapMatrixMixed.html">oomph::MapMatrixMixed&lt; KEY_TYPE, KEY_TYPE, VALUE_TYPE &gt;</a></td></tr>
+<tr class="memitem:a964536bfab6dc7426ddcdca07fe25d12 inherit pro_methods_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">VALUE_TYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a964536bfab6dc7426ddcdca07fe25d12">entry_pt</a> (const KEY_TYPE &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const KEY_TYPE &amp;j)</td></tr>
+<tr class="memdesc:a964536bfab6dc7426ddcdca07fe25d12 inherit pro_methods_classoomph_1_1MapMatrixMixed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to entry.  <a href="classoomph_1_1MapMatrixMixed.html#a964536bfab6dc7426ddcdca07fe25d12">More...</a><br /></td></tr>
+<tr class="separator:a964536bfab6dc7426ddcdca07fe25d12 inherit pro_methods_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1MapMatrixMixed"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1MapMatrixMixed')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1MapMatrixMixed.html">oomph::MapMatrixMixed&lt; KEY_TYPE, KEY_TYPE, VALUE_TYPE &gt;</a></td></tr>
+<tr class="memitem:a1ff123a221da0b158636e28782150e1e inherit pro_attribs_classoomph_1_1MapMatrixMixed"><td class="memItemLeft" align="right" valign="top">std::map&lt; KEY_TYPE, std::map&lt; KEY_TYPE, VALUE_TYPE &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MapMatrixMixed.html#a1ff123a221da0b158636e28782150e1e">Row_pt</a></td></tr>
+<tr class="separator:a1ff123a221da0b158636e28782150e1e inherit pro_attribs_classoomph_1_1MapMatrixMixed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class KEY_TYPE, class VALUE_TYPE&gt;<br />
+class oomph::MapMatrix&lt; KEY_TYPE, VALUE_TYPE &gt;</h3>
+
+<p><a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a> is a generalised, STL-map-based, sparse(-ish) matrix class.</p>
+<p>The matrix is indexed by indices of type KEY_TYPE and has entries of type VALUE_TYPE. It is a specialisation of the class <a class="el" href="classoomph_1_1MapMatrixMixed.html">MapMatrixMixed</a>. Please implement future functions in that class.</p>
+<p>Careful: If a zero entry is referenced then it is created in memory. Therefore this isn't really a practical sparse matrix scheme. Do not loop over &lsquo;all&rsquo; possible indices as even looking at them will inflate the matrix until it occupies as much space as a full one &ndash; use (modification of) output routine to retrieve all nonzero entries.</p>
+<p>However, this is not a serious restriction, as the main purpose of this class is to allow non-integer indices.</p>
+<p>Example of usage: </p><div class="fragment"><div class="line"> <span class="comment">// Assume we have a Vector of pointers to objects:</span></div>
+<div class="line"> Vector&lt;Rubbish*&gt; object_pt;</div>
+<div class="line"> </div>
+<div class="line"> [...]</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of objects</span></div>
+<div class="line"> <span class="keywordtype">int</span> nentry=object_pt.size();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use the pointers to the objects as indices </span></div>
+<div class="line"> <span class="comment">// in a MapMatrix whose entries are of type int</span></div>
+<div class="line"> MapMatrix&lt;Rubbish*,int&gt; like_a_matrix;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=1;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;nentry;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=1;j&lt;nentry;j++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">int</span> number=100*<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>+j;</div>
+<div class="line">     like_a_matrix(object_pt[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>],object_pt[j])=number;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <a class="code" href="namespaceoomph.html#aec474227917784dc0a255faf289cfc16">oomph_info</a> &lt;&lt; <span class="stringliteral">&quot;Matrix has nnz() &quot;</span> &lt;&lt; like_a_matrix.nnz() &lt;&lt; </div>
+<div class="line">         <span class="stringliteral">&quot; and size() &quot;</span> &lt;&lt; like_a_matrix.size() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> <a class="code" href="namespaceoomph.html#aec474227917784dc0a255faf289cfc16">oomph_info</a> &lt;&lt; <span class="stringliteral">&quot;\n\n\n Here are the nonzero entries: i, j, a(i,j)\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"> like_a_matrix.output(<a class="code" href="namespaceoomph.html#aec474227917784dc0a255faf289cfc16">oomph_info</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Can be used like a normal matrix:</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Add to existing entry</span></div>
+<div class="line"> like_a_matrix(object_pt[1],object_pt[2])+=13;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add to non-existing entry</span></div>
+<div class="line"> Rubbish* temp_pt=<span class="keyword">new</span> Rubbish(20);</div>
+<div class="line"> like_a_matrix(object_pt[1],temp_pt)+=13;</div>
+<div class="line"> </div>
+<div class="line"> <a class="code" href="namespaceoomph.html#aec474227917784dc0a255faf289cfc16">oomph_info</a> &lt;&lt; <span class="stringliteral">&quot;\n\n\n Here are the nonzero entries: i, j, a(i,j)\n&quot;</span>;</div>
+<div class="line">like_a_matrix.output(<a class="code" href="namespaceoomph.html#aec474227917784dc0a255faf289cfc16">oomph_info</a>);</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00516">516</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ac3738b797386c7ad5dbe170d3558ace9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3738b797386c7ad5dbe170d3558ace9">&#9670;&nbsp;</a></span>ConstInnerIt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KEY_TYPE , class VALUE_TYPE &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef InnerMap::const_iterator <a class="el" href="classoomph_1_1MapMatrix.html">oomph::MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt;::<a class="el" href="classoomph_1_1MapMatrix.html#ac3738b797386c7ad5dbe170d3558ace9">ConstInnerIt</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef to keep the code more readable. </p>
+
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00531">531</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+
+</div>
+</div>
+<a id="a795543d1b91f719b845b7588f7644eb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a795543d1b91f719b845b7588f7644eb3">&#9670;&nbsp;</a></span>ConstOuterIt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KEY_TYPE , class VALUE_TYPE &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef OuterMap::const_iterator <a class="el" href="classoomph_1_1MapMatrix.html">oomph::MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt;::<a class="el" href="classoomph_1_1MapMatrix.html#a795543d1b91f719b845b7588f7644eb3">ConstOuterIt</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef to keep the code more readable. </p>
+
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00540">540</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+
+</div>
+</div>
+<a id="a23ece77bd36f3cdecf83c5ef7d490608"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23ece77bd36f3cdecf83c5ef7d490608">&#9670;&nbsp;</a></span>InnerIt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KEY_TYPE , class VALUE_TYPE &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef InnerMap::iterator <a class="el" href="classoomph_1_1MapMatrix.html">oomph::MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt;::<a class="el" href="classoomph_1_1MapMatrix.html#a23ece77bd36f3cdecf83c5ef7d490608">InnerIt</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef to keep the code more readable. </p>
+
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00528">528</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+
+</div>
+</div>
+<a id="a9514409eb8ed5c6c3f3ceaa3d51e7eae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9514409eb8ed5c6c3f3ceaa3d51e7eae">&#9670;&nbsp;</a></span>InnerMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KEY_TYPE , class VALUE_TYPE &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::map&lt;KEY_TYPE,VALUE_TYPE&gt; <a class="el" href="classoomph_1_1MapMatrix.html">oomph::MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt;::<a class="el" href="classoomph_1_1MapMatrix.html#a9514409eb8ed5c6c3f3ceaa3d51e7eae">InnerMap</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef to keep the code more readable. </p>
+
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00522">522</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+
+</div>
+</div>
+<a id="a96c70b7ef6e89440c40648a6be9e4216"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96c70b7ef6e89440c40648a6be9e4216">&#9670;&nbsp;</a></span>OuterIt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KEY_TYPE , class VALUE_TYPE &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef OuterMap::iterator <a class="el" href="classoomph_1_1MapMatrix.html">oomph::MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt;::<a class="el" href="classoomph_1_1MapMatrix.html#a96c70b7ef6e89440c40648a6be9e4216">OuterIt</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef to keep the code more readable. </p>
+
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00537">537</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+
+</div>
+</div>
+<a id="af73388510565fa9af6b2946d23bd7709"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af73388510565fa9af6b2946d23bd7709">&#9670;&nbsp;</a></span>OuterMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KEY_TYPE , class VALUE_TYPE &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::map&lt;KEY_TYPE,std::map&lt;KEY_TYPE,VALUE_TYPE&gt;*&gt; <a class="el" href="classoomph_1_1MapMatrix.html">oomph::MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt;::<a class="el" href="classoomph_1_1MapMatrix.html#af73388510565fa9af6b2946d23bd7709">OuterMap</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef to keep the code more readable. </p>
+
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00534">534</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a52ace9b2ef78f96cebbe3b6e2173a87c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52ace9b2ef78f96cebbe3b6e2173a87c">&#9670;&nbsp;</a></span>MapMatrix() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KEY_TYPE , class VALUE_TYPE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MapMatrix.html">oomph::MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt;::<a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default (empty) constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00522">522</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+
+</div>
+</div>
+<a id="ac58797d44964ccff957077b74076c231"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac58797d44964ccff957077b74076c231">&#9670;&nbsp;</a></span>MapMatrix() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KEY_TYPE , class VALUE_TYPE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MapMatrix.html">oomph::MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt;::<a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_mat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00543">543</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad28a61f99589c46468dada134650857d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad28a61f99589c46468dada134650857d">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KEY_TYPE , class VALUE_TYPE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1MapMatrix.html">oomph::MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1MapMatrix.html">MapMatrix</a>&lt; KEY_TYPE, VALUE_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="map__matrix_8h_source.html#l00568">568</a> of file <a class="el" href="map__matrix_8h_source.html">map_matrix.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="map__matrix_8h_source.html">map_matrix.h</a></li>
+</ul>
+</div><!-- contents -->
+<div class="ttc" id="anamespaceoomph_html_aec474227917784dc0a255faf289cfc16"><div class="ttname"><a href="namespaceoomph.html#aec474227917784dc0a255faf289cfc16">oomph::oomph_info</a></div><div class="ttdeci">OomphInfo oomph_info</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8cc_source.html#l00322">oomph_definitions.cc:322</a></div></div>
+<div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:57
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

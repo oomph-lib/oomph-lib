@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: HarmonicEquations Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="classHarmonicEquations-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">HarmonicEquations Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for HarmonicEquations:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classHarmonicEquations.png" usemap="#HarmonicEquations_map" alt=""/>
+  <map id="HarmonicEquations_map" name="HarmonicEquations_map">
+<area href="classQHarmonicElement.html" alt="QHarmonicElement&lt; NNODE_1D &gt;" shape="rect" coords="0,112,212,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a288d1c0777b2cf5360e1310d48f8c217"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHarmonicEquations.html#a288d1c0777b2cf5360e1310d48f8c217">HarmonicEquations</a> ()</td></tr>
+<tr class="memdesc:a288d1c0777b2cf5360e1310d48f8c217"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Constructor.  <a href="classHarmonicEquations.html#a288d1c0777b2cf5360e1310d48f8c217">More...</a><br /></td></tr>
+<tr class="separator:a288d1c0777b2cf5360e1310d48f8c217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab801694318460d371e066419263995d7"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHarmonicEquations.html#ab801694318460d371e066419263995d7">u</a> (const unsigned &amp;n) const</td></tr>
+<tr class="memdesc:ab801694318460d371e066419263995d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Eigenfunction value at local node n Note that solving the eigenproblem does not assign values to this storage space. It is used for output purposes only.  <a href="classHarmonicEquations.html#ab801694318460d371e066419263995d7">More...</a><br /></td></tr>
+<tr class="separator:ab801694318460d371e066419263995d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe34292042ce1394f8979618ee10f354"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHarmonicEquations.html#abe34292042ce1394f8979618ee10f354">output</a> (ostream &amp;outfile)</td></tr>
+<tr class="memdesc:abe34292042ce1394f8979618ee10f354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the eigenfunction with default number of plot points.  <a href="classHarmonicEquations.html#abe34292042ce1394f8979618ee10f354">More...</a><br /></td></tr>
+<tr class="separator:abe34292042ce1394f8979618ee10f354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5e53f73bbefb6509ad014c3b236e31f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHarmonicEquations.html#ab5e53f73bbefb6509ad014c3b236e31f">output</a> (ostream &amp;outfile, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:ab5e53f73bbefb6509ad014c3b236e31f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output FE representation of soln: x,y,u or x,y,z,u at Nplot plot points.  <a href="classHarmonicEquations.html#ab5e53f73bbefb6509ad014c3b236e31f">More...</a><br /></td></tr>
+<tr class="separator:ab5e53f73bbefb6509ad014c3b236e31f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b756d9ac8dd9c7b9b7785c06f4fce77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHarmonicEquations.html#a0b756d9ac8dd9c7b9b7785c06f4fce77">fill_in_contribution_to_jacobian_and_mass_matrix</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, DenseMatrix&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="memdesc:a0b756d9ac8dd9c7b9b7785c06f4fce77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble the contributions to the jacobian and mass matrices.  <a href="classHarmonicEquations.html#a0b756d9ac8dd9c7b9b7785c06f4fce77">More...</a><br /></td></tr>
+<tr class="separator:a0b756d9ac8dd9c7b9b7785c06f4fce77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d1ba796d0b62885cab6ef47a83f6b08"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHarmonicEquations.html#a5d1ba796d0b62885cab6ef47a83f6b08">interpolated_u</a> (const Vector&lt; double &gt; &amp;s) const</td></tr>
+<tr class="memdesc:a5d1ba796d0b62885cab6ef47a83f6b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return FE representation of function value u(s) at local coordinate s.  <a href="classHarmonicEquations.html#a5d1ba796d0b62885cab6ef47a83f6b08">More...</a><br /></td></tr>
+<tr class="separator:a5d1ba796d0b62885cab6ef47a83f6b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae013637e60841f46cf4c452ee3469163"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHarmonicEquations.html#ae013637e60841f46cf4c452ee3469163">dshape_eulerian</a> (const Vector&lt; double &gt; &amp;s, Shape &amp;psi, DShape &amp;dpsidx) const =0</td></tr>
+<tr class="memdesc:ae013637e60841f46cf4c452ee3469163"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shape/test functions and derivs w.r.t. to global coords at local coord. s; return Jacobian of mapping.  <a href="classHarmonicEquations.html#ae013637e60841f46cf4c452ee3469163">More...</a><br /></td></tr>
+<tr class="separator:ae013637e60841f46cf4c452ee3469163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf04ba09dd948dcb0efb8e7e43da9736"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHarmonicEquations.html#aaf04ba09dd948dcb0efb8e7e43da9736">dshape_eulerian_at_knot</a> (const unsigned &amp;ipt, Shape &amp;psi, DShape &amp;dpsidx) const =0</td></tr>
+<tr class="memdesc:aaf04ba09dd948dcb0efb8e7e43da9736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shape/test functions and derivs w.r.t. to global coords at integration point ipt; return Jacobian of mapping.  <a href="classHarmonicEquations.html#aaf04ba09dd948dcb0efb8e7e43da9736">More...</a><br /></td></tr>
+<tr class="separator:aaf04ba09dd948dcb0efb8e7e43da9736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89ff4c11fade61386745931722a75e1d"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHarmonicEquations.html#a89ff4c11fade61386745931722a75e1d">u_local_eqn</a> (const unsigned &amp;n)</td></tr>
+<tr class="memdesc:a89ff4c11fade61386745931722a75e1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function that returns the local equation number of the unknown in the problem. Default is to assume that it is the first (only) value stored at the node.  <a href="classHarmonicEquations.html#a89ff4c11fade61386745931722a75e1d">More...</a><br /></td></tr>
+<tr class="separator:a89ff4c11fade61386745931722a75e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class for all elements that solve the simple one-dimensional eigenvalue problem </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial^2 u}{\partial x_i^2} + \lambda u = 0 \]" src="form_30.png"/>
+</p>
+<p> These elements are very closely related to the Poisson elements and could inherit from them. They are here developed from scratch for pedagogical purposes. This class contains the generic maths. Shape functions, geometric mapping etc. must get implemented in derived class. </p>
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8cc_source.html#l00070">70</a> of file <a class="el" href="harmonic_8cc_source.html">harmonic.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a288d1c0777b2cf5360e1310d48f8c217"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a288d1c0777b2cf5360e1310d48f8c217">&#9670;&nbsp;</a></span>HarmonicEquations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HarmonicEquations::HarmonicEquations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8cc_source.html#l00075">75</a> of file <a class="el" href="harmonic_8cc_source.html">harmonic.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae013637e60841f46cf4c452ee3469163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae013637e60841f46cf4c452ee3469163">&#9670;&nbsp;</a></span>dshape_eulerian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double HarmonicEquations::dshape_eulerian </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shape &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DShape &amp;&#160;</td>
+          <td class="paramname"><em>dpsidx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shape/test functions and derivs w.r.t. to global coords at local coord. s; return Jacobian of mapping. </p>
+
+<p>Implemented in <a class="el" href="classQHarmonicElement.html#a206b7334e82cb563d7d575deb9f755b1">QHarmonicElement&lt; NNODE_1D &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aaf04ba09dd948dcb0efb8e7e43da9736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf04ba09dd948dcb0efb8e7e43da9736">&#9670;&nbsp;</a></span>dshape_eulerian_at_knot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double HarmonicEquations::dshape_eulerian_at_knot </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shape &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DShape &amp;&#160;</td>
+          <td class="paramname"><em>dpsidx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shape/test functions and derivs w.r.t. to global coords at integration point ipt; return Jacobian of mapping. </p>
+
+<p>Implemented in <a class="el" href="classQHarmonicElement.html#a6b11b5a42bd20c4e1d1e9840ba22a80a">QHarmonicElement&lt; NNODE_1D &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a0b756d9ac8dd9c7b9b7785c06f4fce77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b756d9ac8dd9c7b9b7785c06f4fce77">&#9670;&nbsp;</a></span>fill_in_contribution_to_jacobian_and_mass_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HarmonicEquations::fill_in_contribution_to_jacobian_and_mass_matrix </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mass_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assemble the contributions to the jacobian and mass matrices. </p>
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8cc_source.html#l00115">115</a> of file <a class="el" href="harmonic_8cc_source.html">harmonic.cc</a>.</p>
+
+</div>
+</div>
+<a id="a5d1ba796d0b62885cab6ef47a83f6b08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d1ba796d0b62885cab6ef47a83f6b08">&#9670;&nbsp;</a></span>interpolated_u()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double HarmonicEquations::interpolated_u </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return FE representation of function value u(s) at local coordinate s. </p>
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8cc_source.html#l00170">170</a> of file <a class="el" href="harmonic_8cc_source.html">harmonic.cc</a>.</p>
+
+</div>
+</div>
+<a id="abe34292042ce1394f8979618ee10f354"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe34292042ce1394f8979618ee10f354">&#9670;&nbsp;</a></span>output() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HarmonicEquations::output </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output the eigenfunction with default number of plot points. </p>
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8cc_source.html#l00084">84</a> of file <a class="el" href="harmonic_8cc_source.html">harmonic.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="harmonic_8cc_source.html#l00237">QHarmonicElement&lt; NNODE_1D &gt;::output()</a>.</p>
+
+</div>
+</div>
+<a id="ab5e53f73bbefb6509ad014c3b236e31f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5e53f73bbefb6509ad014c3b236e31f">&#9670;&nbsp;</a></span>output() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HarmonicEquations::output </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nplot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output FE representation of soln: x,y,u or x,y,z,u at Nplot plot points. </p>
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8cc_source.html#l00092">92</a> of file <a class="el" href="harmonic_8cc_source.html">harmonic.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab801694318460d371e066419263995d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab801694318460d371e066419263995d7">&#9670;&nbsp;</a></span>u()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double HarmonicEquations::u </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function: Eigenfunction value at local node n Note that solving the eigenproblem does not assign values to this storage space. It is used for output purposes only. </p>
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8cc_source.html#l00080">80</a> of file <a class="el" href="harmonic_8cc_source.html">harmonic.cc</a>.</p>
+
+</div>
+</div>
+<a id="a89ff4c11fade61386745931722a75e1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89ff4c11fade61386745931722a75e1d">&#9670;&nbsp;</a></span>u_local_eqn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int HarmonicEquations::u_local_eqn </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function that returns the local equation number of the unknown in the problem. Default is to assume that it is the first (only) value stored at the node. </p>
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8cc_source.html#l00207">207</a> of file <a class="el" href="harmonic_8cc_source.html">harmonic.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="harmonic_8cc_source.html">harmonic.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:52
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,443 @@
+\hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{}\doxysection{oomph\+::P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+
+
+A class for elements that allow the imposition of an applied flux on the boundaries of Fourier decomposed Helmholtz elements. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class.  
+
+
+
+
+{\ttfamily \#include $<$pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.830065cm]{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a21d234dc11d179dbe417b624c41e764f}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Prescribed\+Flux\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the flux is a complex. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a168802ca10329d01a3274161b71bf615}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a784b400c46607dbe67dd1c51d418cdb6}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_adedaa1af5b462492bbe2b6c9500e7774}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}} (const \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a21d234dc11d179dbe417b624c41e764f}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_ae27d4f85798035296911cdfef02a4d40}{flux\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a25de3113d82c48966a78004d5b2bdca6}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_aa24365f7454ab68b0c1b989cc34bd34b}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a88de9165ecb2201d50cf5dc7c33f1ec3}{output}} (std\+::ostream \&outfile)
+\item 
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_afc5b763269729cdd6a6080dfcca81c86}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a3c0bed2bf396c9ebf5d0379acd968546}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\item 
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a0e6e5da60194eadcc9eaa50cabe0eafb}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a182637b5b3650432f2b80e4e64218b3f}{u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} () const
+\begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. (Real/imag part gives real index of real/imag part). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a8c440496f9b1b68b057bd2a443ad4005}{shape\+\_\+and\+\_\+test}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a5156a0e6215bd2df2d7eeb4df9ccf0ca}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_ac4d3e3702156481651c49e1a1241f0bc}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)
+\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a810a3c1e0ef99cf88cfed7e6e4b0d3c1}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a3fa91e9ac6bcd4483e55f74396e19f96}{U\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}}
+\begin{DoxyCompactList}\small\item\em The index at which the real and imag part of the unknown is stored at the nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a21d234dc11d179dbe417b624c41e764f}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Prescribed\+Flux\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_ac55988a86c387ecfdff38e54a683a7a3}{Flux\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to the (global) prescribed-\/flux function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+A class for elements that allow the imposition of an applied flux on the boundaries of Fourier decomposed Helmholtz elements. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
+
+Definition at line 54 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a21d234dc11d179dbe417b624c41e764f}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a21d234dc11d179dbe417b624c41e764f}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!PMLFourierDecomposedHelmholtzPrescribedFluxFctPt@{PMLFourierDecomposedHelmholtzPrescribedFluxFctPt}}
+\index{PMLFourierDecomposedHelmholtzPrescribedFluxFctPt@{PMLFourierDecomposedHelmholtzPrescribedFluxFctPt}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PMLFourierDecomposedHelmholtzPrescribedFluxFctPt}{PMLFourierDecomposedHelmholtzPrescribedFluxFctPt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Prescribed\+Flux\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)}
+
+
+
+Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the flux is a complex. 
+
+
+
+Definition at line 65 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a168802ca10329d01a3274161b71bf615}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a168802ca10329d01a3274161b71bf615}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!PMLFourierDecomposedHelmholtzFluxElement@{PMLFourierDecomposedHelmholtzFluxElement}}
+\index{PMLFourierDecomposedHelmholtzFluxElement@{PMLFourierDecomposedHelmholtzFluxElement}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PMLFourierDecomposedHelmholtzFluxElement()}{PMLFourierDecomposedHelmholtzFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. 
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. 
+
+Definition at line 254 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Flux\+\_\+fct\+\_\+pt, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), and oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz.
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a784b400c46607dbe67dd1c51d418cdb6}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a784b400c46607dbe67dd1c51d418cdb6}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!PMLFourierDecomposedHelmholtzFluxElement@{PMLFourierDecomposedHelmholtzFluxElement}}
+\index{PMLFourierDecomposedHelmholtzFluxElement@{PMLFourierDecomposedHelmholtzFluxElement}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PMLFourierDecomposedHelmholtzFluxElement()}{PMLFourierDecomposedHelmholtzFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken empty constructor. 
+
+
+
+Definition at line 74 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_adedaa1af5b462492bbe2b6c9500e7774}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_adedaa1af5b462492bbe2b6c9500e7774}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!PMLFourierDecomposedHelmholtzFluxElement@{PMLFourierDecomposedHelmholtzFluxElement}}
+\index{PMLFourierDecomposedHelmholtzFluxElement@{PMLFourierDecomposedHelmholtzFluxElement}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PMLFourierDecomposedHelmholtzFluxElement()}{PMLFourierDecomposedHelmholtzFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 83 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_aa24365f7454ab68b0c1b989cc34bd34b}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_aa24365f7454ab68b0c1b989cc34bd34b}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 119 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a25de3113d82c48966a78004d5b2bdca6}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a25de3113d82c48966a78004d5b2bdca6}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 108 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a810a3c1e0ef99cf88cfed7e6e4b0d3c1}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a810a3c1e0ef99cf88cfed7e6e4b0d3c1}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_pml\_fourier\_decomposed\_helmholtz\_flux@{fill\_in\_generic\_residual\_contribution\_pml\_fourier\_decomposed\_helmholtz\_flux}}
+\index{fill\_in\_generic\_residual\_contribution\_pml\_fourier\_decomposed\_helmholtz\_flux@{fill\_in\_generic\_residual\_contribution\_pml\_fourier\_decomposed\_helmholtz\_flux}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_pml\_fourier\_decomposed\_helmholtz\_flux()}{fill\_in\_generic\_residual\_contribution\_pml\_fourier\_decomposed\_helmholtz\_flux()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. 
+
+Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
+
+Definition at line 299 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::get\+\_\+flux(), i, residuals(), s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+
+
+
+Referenced by oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_ae27d4f85798035296911cdfef02a4d40}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_ae27d4f85798035296911cdfef02a4d40}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!flux\_fct\_pt@{flux\_fct\_pt}}
+\index{flux\_fct\_pt@{flux\_fct\_pt}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{flux\_fct\_pt()}{flux\_fct\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a21d234dc11d179dbe417b624c41e764f}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Prescribed\+Flux\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Access function for the prescribed-\/flux function pointer 
+
+Definition at line 103 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Flux\+\_\+fct\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_ac4d3e3702156481651c49e1a1241f0bc}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_ac4d3e3702156481651c49e1a1241f0bc}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!get\_flux@{get\_flux}}
+\index{get\_flux@{get\_flux}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{std\+::complex$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Function to calculate the prescribed flux at a given spatial position 
+
+Definition at line 205 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Flux\+\_\+fct\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a3c0bed2bf396c9ebf5d0379acd968546}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a3c0bed2bf396c9ebf5d0379acd968546}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 139 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a0e6e5da60194eadcc9eaa50cabe0eafb}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a0e6e5da60194eadcc9eaa50cabe0eafb}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 144 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a88de9165ecb2201d50cf5dc7c33f1ec3}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a88de9165ecb2201d50cf5dc7c33f1ec3}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 129 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_afc5b763269729cdd6a6080dfcca81c86}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_afc5b763269729cdd6a6080dfcca81c86}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 133 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a8c440496f9b1b68b057bd2a443ad4005}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a8c440496f9b1b68b057bd2a443ad4005}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
+\index{shape\_and\_test@{shape\_and\_test}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_and\_test()}{shape\_and\_test()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
+
+
+
+Definition at line 164 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a5156a0e6215bd2df2d7eeb4df9ccf0ca}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a5156a0e6215bd2df2d7eeb4df9ccf0ca}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
+\index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
+
+
+
+Definition at line 185 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a182637b5b3650432f2b80e4e64218b3f}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a182637b5b3650432f2b80e4e64218b3f}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!u\_index\_pml\_fourier\_decomposed\_helmholtz@{u\_index\_pml\_fourier\_decomposed\_helmholtz}}
+\index{u\_index\_pml\_fourier\_decomposed\_helmholtz@{u\_index\_pml\_fourier\_decomposed\_helmholtz}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{u\_index\_pml\_fourier\_decomposed\_helmholtz()}{u\_index\_pml\_fourier\_decomposed\_helmholtz()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the index at which the unknown value is stored. (Real/imag part gives real index of real/imag part). 
+
+
+
+Definition at line 151 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_ac55988a86c387ecfdff38e54a683a7a3}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_ac55988a86c387ecfdff38e54a683a7a3}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!Flux\_fct\_pt@{Flux\_fct\_pt}}
+\index{Flux\_fct\_pt@{Flux\_fct\_pt}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Flux\_fct\_pt}{Flux\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a21d234dc11d179dbe417b624c41e764f}{P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Prescribed\+Flux\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Flux\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Function pointer to the (global) prescribed-\/flux function. 
+
+
+
+Definition at line 235 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::flux\+\_\+fct\+\_\+pt(), oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+flux(), and oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a3fa91e9ac6bcd4483e55f74396e19f96}\label{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement_a3fa91e9ac6bcd4483e55f74396e19f96}} 
+\index{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}!U\_index\_pml\_fourier\_decomposed\_helmholtz@{U\_index\_pml\_fourier\_decomposed\_helmholtz}}
+\index{U\_index\_pml\_fourier\_decomposed\_helmholtz@{U\_index\_pml\_fourier\_decomposed\_helmholtz}!oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{U\_index\_pml\_fourier\_decomposed\_helmholtz}{U\_index\_pml\_fourier\_decomposed\_helmholtz}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::U\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The index at which the real and imag part of the unknown is stored at the nodes. 
+
+
+
+Definition at line 222 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element(), and oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}\end{DoxyCompactItemize}

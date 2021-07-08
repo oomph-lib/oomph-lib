@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Solution of the 2D unsteady heat equation with restarts</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: Solution of the 2D unsteady heat equation with restarts </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Simulations of time-dependent problem can be very time consuming and it is important to be able to restart simulations, e.g. to continue a run after a system crash, etc. We shall illustrate <code>oomph-lib's</code> dump/restart capabilities by re-visiting the 2D unsteady heat equation discussed in a <a href="../../two_d_unsteady_heat/html/index.html">previous example.</a></p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>The two-dimensional unsteady heat equation in a square domain.</b> </center> Solve <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial t} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_0.png"/>
+</p>
+ in the square domain <img class="formulaInl" alt="$ D = \{x_i \in [0,1]; i=1,2 \} $" src="form_1.png"/> , subject to the Dirichlet boundary conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. u\right|_{\partial D}=g_0 \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_2.png"/>
+</p>
+ and initial conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(x_1,x_2,t=0)=h_0(x_1,x_2), \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_3.png"/>
+</p>
+ where the functions <img class="formulaInl" alt="$ g_0 $" src="form_4.png"/> and <img class="formulaInl" alt="$ h_0 $" src="form_5.png"/> are given.   </td></tr>
+</table>
+<br  />
+ </center><p>As before, we consider the unforced case, <img class="formulaInl" alt="$ f=0 $" src="form_6.png"/>, and choose boundary and initial conditions that are consistent with the exact solution </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_0(x_1,x_2,t) = e^{-Kt}\sin\left( \sqrt{K} \left( x_1 \cos \Phi + x_2 \sin \Phi\right)\right), \ \ \ \ \ \ \ \ \ \ (4) \]" src="form_7.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ K $" src="form_8.png"/> and <img class="formulaInl" alt="$ \Phi $" src="form_9.png"/> are constants, controlling the decay rate of the solution and its spatial orientation, respectively.</p>
+<p>The figure below shows a plot of computed and exact solution at a control node as a function of time. The solid lines represent quantities computed during the original simulation; the dashed line shows the corresponding data from a second simulation that was restarted with the restart file generated at timestep 23 of the original simulation.</p>
+<div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Time evolution of the computed and exact solutions at a control node, the global error norm and the norm of the solution. Solid lines: original simulation; dashed lines: restarted simulation. </div></div>
+ <p>Most of the driver code for this example is identical to that discussed in the <a href="../../two_d_unsteady_heat/html/index.html">previous example,</a> therefore we only discuss the modifications required to enable the dump and restart operations:</p><ul>
+<li>We use optional command line arguments to specify the name of the restart file. If the code is run without any command line arguments, we start the simulation at time <img class="formulaInl" alt="$ t=0 $" src="form_10.png"/> and generate the initial conditions as in the <a href="../../two_d_unsteady_heat/html/index.html">previous example</a></li>
+<li>We add dump and restart functions to the Problem class and call the dump function when post-processing the solution in <code><a class="el" href="two__d__unsteady__heat2_8txt.html#a8c33f390f5dc2186b59cece9f9017efa">doc_solution(...)</a></code>.</li>
+<li>We modify the Problem member function <code><a class="el" href="two__d__unsteady__heat2_8txt.html#af39003811eefdbd2d5b4564c02a4decf">set_initial_condition()</a></code> <br  />
+ so that the initial conditions are read from the restart file if a restart file was specified on the command line.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>The namespace <code><a class="el" href="namespaceExactSolnForUnsteadyHeat.html" title="Namespace for unforced exact solution for UnsteadyHeat equation.">ExactSolnForUnsteadyHeat</a></code> that stores the problem parameters is identical to that in the <a href="../../two_d_unsteady_heat/html/index.html">previous example.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The only change to the main function is that we record the command line arguments and store them in the namespace <code>CommandLineArgs</code> </p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_main====================================================</span></div>
+<div class="line"><span class="comment">/// \short Driver code for unsteady heat equation with option for</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// restart from disk: Only a single command line argument is allowed.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// If specified it is interpreted as the name of the restart file.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+</div><!-- fragment --><p>The rest of the main function is identical to that in the <a href="../../two_d_unsteady_heat/html/index.html">previous example.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class contains the two additional member functions</p>
+ <div class="fragment"><div class="line"> <span class="comment">/// \short Dump problem to disk to allow for restart.</span></div>
+<div class="line"> <span class="keywordtype">void</span> dump_it(ofstream&amp; dump_file);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Read problem for restart from specified restart file.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a>(ifstream&amp; restart_file);</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>The problem constructor is identical to that in the <a href="../../two_d_unsteady_heat/html/index.html">previous example.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="destructor"></a>
+The problem destructor</h1>
+<p>The problem destructor is identical to that in the <a href="../../two_d_unsteady_heat/html/index.html">previous example.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="before_timestep"></a>
+Actions before timestep</h1>
+<p>This function is identical to that in the <a href="../../two_d_unsteady_heat/html/index.html">previous example.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="IC"></a>
+Set initial condition</h1>
+<p>We start by checking the validity of the command line arguments, accessible via the namespace <code>CommandLineArgs</code>, as only a single command line argument is allowed. If a command line argument is provided, it is interpreted as the name of the restart file. We try to open the file and, if successful, pass the input stream to the <code><a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart(...)</a></code> function, discussed below. If no command line arguments are specified, we generate the initial conditions, essentially as in the <br  />
+ <a href="../../two_d_unsteady_heat/html/index.html">previous example.</a> The only difference is that in the current version of the code, we moved the specification and initialisation of the timestep from the <code>main</code> function into <code><a class="el" href="two__d__unsteady__heat2_8txt.html#af39003811eefdbd2d5b4564c02a4decf">set_initial_condition()</a></code>. This is because in a restarted simulation, the value of <code>dt</code> must be consistent with that used in the original simulation. If the simulation is restarted, the generic <code>Problem::read(...)</code> function, called by <code><a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart(...)</a></code>, automatically initialises the previous timestep; otherwise we have to perform the initialisation ourselves.</p>
+<div class="fragment"><div class="line"><span class="comment">//======================start_of_set_initial_condition====================</span></div>
+<div class="line"><span class="comment">/// \short Set initial condition: Assign previous and current values</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// from exact solution or from restart file.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#a98de3ed2d9cf5409323121bbb482bc1b">UnsteadyHeatProblem&lt;ELEMENT&gt;::set_initial_condition</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pointer to restart file</span></div>
+<div class="line"> ifstream* restart_file_pt=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Restart?</span></div>
+<div class="line"> <span class="comment">//---------</span></div>
+<div class="line"> <span class="comment">// Restart file specified via command line [all programs have at least</span></div>
+<div class="line"> <span class="comment">// a single command line argument: their name. Ignore this here.]</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc==1)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;No restart -- setting IC from exact solution&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> <span class="keywordflow">if</span> (CommandLineArgs::Argc==2)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Open restart file</span></div>
+<div class="line">   restart_file_pt= <span class="keyword">new</span> ifstream(CommandLineArgs::Argv[1],ios_base::in);</div>
+<div class="line">   <span class="keywordflow">if</span> (restart_file_pt!=0)</div>
+<div class="line">    {</div>
+<div class="line">     cout &lt;&lt; <span class="stringliteral">&quot;Have opened &quot;</span> &lt;&lt; CommandLineArgs::Argv[1] &lt;&lt; </div>
+<div class="line">      <span class="stringliteral">&quot; for restart. &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     std::ostringstream error_stream;</div>
+<div class="line">     error_stream </div>
+<div class="line">      &lt;&lt; <span class="stringliteral">&quot;ERROR while trying to open &quot;</span> &lt;&lt; CommandLineArgs::Argv[1] &lt;&lt; </div>
+<div class="line">      <span class="stringliteral">&quot; for restart.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">throw</span> OomphLibError(</div>
+<div class="line">      error_stream.str(),</div>
+<div class="line">      OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">      OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment">// More than one command line argument?</span></div>
+<div class="line"> <span class="keywordflow">else</span> </div>
+<div class="line">  {</div>
+<div class="line">   std::ostringstream error_stream;</div>
+<div class="line">   error_stream &lt;&lt; <span class="stringliteral">&quot;Can only specify one input file\n&quot;</span> </div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;You specified the following command line arguments:\n&quot;</span>;</div>
+<div class="line">   <span class="comment">//Fix this</span></div>
+<div class="line">   CommandLineArgs::output();</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError( </div>
+<div class="line">    error_stream.str(),</div>
+<div class="line">    OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">    OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Read restart data:</span></div>
+<div class="line"> <span class="comment">//-------------------</span></div>
+<div class="line"> <span class="keywordflow">if</span> (restart_file_pt!=0)</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Read the problem data from the restart file</span></div>
+<div class="line">   <a class="code" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a>(*restart_file_pt);</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment">// Assign initial condition from exact solution</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------</span></div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Choose timestep</span></div>
+<div class="line">   <span class="keywordtype">double</span> <a class="code" href="two__d__unsteady__heat2_8txt.html#a8d9b1de956335a98b4b70f8c32b2c130">dt</a>=0.01;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Initialise timestep -- also sets the weights for all timesteppers</span></div>
+<div class="line">   <span class="comment">// in the problem.</span></div>
+<div class="line">   initialise_dt(<a class="code" href="two__d__unsteady__heat2_8txt.html#a8d9b1de956335a98b4b70f8c32b2c130">dt</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Backup time in global Time object</span></div>
+<div class="line">   <span class="keywordtype">double</span> backed_up_time=time_pt()-&gt;time();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Past history fo needs to be established for t=time0-deltat, ...</span></div>
+<div class="line">   <span class="comment">// Then provide current values (at t=time0) which will also form</span></div>
+<div class="line">   <span class="comment">// the initial guess for the first solve at t=time0+deltat</span></div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Vector of exact solution value</span></div>
+<div class="line">   Vector&lt;double&gt; soln(1);</div>
+<div class="line">   Vector&lt;double&gt; x(2);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Find number of nodes in mesh</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod = mesh_pt()-&gt;nnode();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set continuous times at previous timesteps</span></div>
+<div class="line">   <span class="keywordtype">int</span> nprev_steps=time_stepper_pt()-&gt;nprev_values();</div>
+<div class="line">   Vector&lt;double&gt; prev_time(nprev_steps+1);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> itime=nprev_steps;itime&gt;=0;itime--)</div>
+<div class="line">    {</div>
+<div class="line">     prev_time[itime]=time_pt()-&gt;time(<span class="keywordtype">unsigned</span>(itime));</div>
+<div class="line">    } </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over current &amp; previous timesteps</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> itime=nprev_steps;itime&gt;=0;itime--)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Continuous time</span></div>
+<div class="line">     <span class="keywordtype">double</span> time=prev_time[itime];</div>
+<div class="line">     cout &lt;&lt; <span class="stringliteral">&quot;setting IC at time =&quot;</span> &lt;&lt; time &lt;&lt; std::endl;</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Loop over the nodes to set initial guess everywhere</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;num_nod;n++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// Get nodal coordinates</span></div>
+<div class="line">       x[0]=mesh_pt()-&gt;node_pt(n)-&gt;x(0);</div>
+<div class="line">       x[1]=mesh_pt()-&gt;node_pt(n)-&gt;x(1);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Get intial solution</span></div>
+<div class="line">       <a class="code" href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">ExactSolnForUnsteadyHeat::get_exact_u</a>(time,x,soln);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Assign solution</span></div>
+<div class="line">       mesh_pt()-&gt;node_pt(n)-&gt;set_value(itime,0,soln[0]);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Loop over coordinate directions: Previous position = present position</span></div>
+<div class="line">       <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">        {</div>
+<div class="line">         mesh_pt()-&gt;node_pt(n)-&gt;x(itime,i)=x[i];</div>
+<div class="line">        }</div>
+<div class="line">      } </div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Reset backed up time for global timestepper</span></div>
+<div class="line">   time_pt()-&gt;time()=backed_up_time;</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of set_initial_condition</span></div>
+</div><!-- fragment --><p> <br  />
+</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The Problem member function <code><a class="el" href="two__d__unsteady__heat2_8txt.html#a8c33f390f5dc2186b59cece9f9017efa">doc_solution(...)</a></code> is identical to that in the <a href="../../two_d_unsteady_heat/html/index.html">previous example,</a> apart from the addition of a call to the new <code>dump_it(...)</code> function, discussed below.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Write restart file</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/restart%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> dump_it(some_file);</div>
+<div class="line"> some_file.close();</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="dump"></a>
+Dumping the solution</h1>
+<p>The <code>Problem::dump(...)</code> function writes the generic <code>Problem</code> data in ASCII format to the specified output file. The content of the file can therefore be inspected and, if necessary, manipulated before a restart. However, the specific content of the file is generally of little interest &ndash; it is written in a format that can be read by the corresponding function <code>Problem::read(...)</code>.</p>
+<p>Briefly, the dump file contains:</p><ul>
+<li>A flag that indicates if the data was produced by a time-dependent simulation.</li>
+<li>The current value of the "continuous" time, i.e. the value returned by <code>Problem::time_pt()-&gt;time()</code>;</li>
+<li>The number of previous timesteps, <code>dt</code>, stored in the <code>Problem's</code> <code>Time</code> object, and their values.</li>
+<li>The values and history values for all <code>Data</code> objects in the <code>Problem</code>, as well as the present and previous coordinates of all <code>Nodes</code>.</li>
+</ul>
+<p>The "raw data" is augmented by brief comments that facilitate the identification of individual entries.</p>
+<p>In the present problem, the generic <code>Problem::dump(...)</code> function is sufficient to record the current state of the simulation, therefore no additional information needs to be added to the dump file. The section <a class="el" href="index.html#comments">Comments and Exercises</a> below contains an exercise that illustrates how to customise the dump function to record additional parameters; the <a href="../../two_d_unsteady_heat_ALE/html/index.html">demo code with spatial adaptivity</a> provides another example of a customised dump/restart function.</p>
+<div class="fragment"><div class="line"><span class="comment">//=====start_of_dump_it===================================================</span></div>
+<div class="line"><span class="comment">/// Dump the solution to disk to allow for restart</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#a9a60874a6471414819301705f1a2afd1">UnsteadyHeatProblem&lt;ELEMENT&gt;::dump_it</a>(ofstream&amp; dump_file)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Call generic dump()</span></div>
+<div class="line"> Problem::dump(dump_file); </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of dump_it</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="read"></a>
+Reading a solution from disk</h1>
+<p>Since the restart file was written by the generic <code>Problem::dump(...)</code> function, it can be read back with the generic <code>Problem::read(...)</code> function. If any additional data had been recorded in the restart file, additional read statements could be added here; see <a class="el" href="index.html#comments">Comments and Exercises</a>.</p>
+<div class="fragment"><div class="line"><span class="comment">//=================start_of_restart=======================================</span></div>
+<div class="line"><span class="comment">/// Read solution from disk for restart</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classUnsteadyHeatProblem.html#ad0a4a1c1da24f6d62f64b0d40be31709">UnsteadyHeatProblem&lt;ELEMENT&gt;::restart</a>(ifstream&amp; restart_file)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Read the generic problem data from restart file</span></div>
+<div class="line"> Problem::read(restart_file);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of restart</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<p>The <code>Problem::dump(...)</code> and <code>Problem::read(...)</code> functions write/read the generic data that is common to all <code>oomph-lib</code> problems. Occasionally, it is necessary to record additional data to re-create the system's state when the simulations is restarted. We will explore this in more detail in <a href="../../two_d_unsteady_heat_2adapt/html/index.html">another example</a>. Here we provide a brief exercise that illustrates the general idea and addresses a shortcoming of the driver code: Currently the program computes the same number of timesteps, regardless of whether or not the simulation was restarted. If a simulation is restarted, the computation therefore continues past <img class="formulaInl" alt="$ t=t_{max}. $" src="form_11.png"/></p>
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ul>
+<li>Change the <code>for</code> loop over the fixed number of timesteps in the <code>main</code> function to a <code>while</code> loop that checks if the continuous time, accessible via <code>Problem::time_pt()-&gt;time()</code>, has reached or exceeded <img class="formulaInl" alt="$ t_{max} $" src="form_12.png"/>. This works because the <code>Problem::dump(...)</code> and <code>Problem::read(...)</code> functions dump and restore the value of the continuous time.</li>
+<li>Following this trivial change, the restarted simulation is terminated at the appropriate point but the numbering of the output files begins at 0, making it difficult to merge the results from the original and the restarted simulations. Modify the functions <code>dump_it(...)</code> and <code><a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart(...)</a></code> so that they write/read the current label for the output files to/from the restart file. <br  />
+<br  />
+ <b>Hints:</b> <b>(i)</b> You can write to/read from the restart file before calling <code>Problem::dump(...)</code> and <code>Problem::read(...)</code>; just make sure you do it in the same order in both functions. <b>(ii)</b> The easiest way to make the label, currently stored in the <code>DocInfo</code> object in the <code>main</code> function, accessible to all member functions in the <code>Problem</code> is to make the <code>DocInfo</code> object a private data member of the <code>Problem</code> class.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat/">demo_drivers/unsteady_heat/two_d_unsteady_heat/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat/two_d_unsteady_heat_restarted.cc">demo_drivers/unsteady_heat/two_d_unsteady_heat/two_d_unsteady_heat_restarted.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a8d9b1de956335a98b4b70f8c32b2c130"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a8d9b1de956335a98b4b70f8c32b2c130">dt</a></div><div class="ttdeci">The number of previous c dt</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00198">two_d_unsteady_heat2.txt:198</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_a98de3ed2d9cf5409323121bbb482bc1b"><div class="ttname"><a href="classUnsteadyHeatProblem.html#a98de3ed2d9cf5409323121bbb482bc1b">UnsteadyHeatProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set initial condition (incl previous timesteps) according to specified function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00261">two_d_unsteady_heat.cc:261</a></div></div>
+<div class="ttc" id="anamespaceExactSolnForUnsteadyHeat_html_a1d5b22857bd2a7825397daf1cf9c89eb"><div class="ttname"><a href="namespaceExactSolnForUnsteadyHeat.html#a1d5b22857bd2a7825397daf1cf9c89eb">ExactSolnForUnsteadyHeat::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const double &amp;time, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00061">two_d_unsteady_heat.cc:61</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a7db09e50f04a54496d12ea041f5864b2"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a></div><div class="ttdeci">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the restart file We try to open the file and if successful pass the input stream to the c restart(...) function</div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_ad0a4a1c1da24f6d62f64b0d40be31709"><div class="ttname"><a href="classUnsteadyHeatProblem.html#ad0a4a1c1da24f6d62f64b0d40be31709">UnsteadyHeatProblem::restart</a></div><div class="ttdeci">void restart(ifstream &amp;restart_file)</div><div class="ttdoc">Read problem for restart from specified restart file.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__restarted_8cc_source.html#l00510">two_d_unsteady_heat_restarted.cc:510</a></div></div>
+<div class="ttc" id="aclassUnsteadyHeatProblem_html_a9a60874a6471414819301705f1a2afd1"><div class="ttname"><a href="classUnsteadyHeatProblem.html#a9a60874a6471414819301705f1a2afd1">UnsteadyHeatProblem::dump_it</a></div><div class="ttdeci">void dump_it(ofstream &amp;dump_file)</div><div class="ttdoc">Dump problem to disk to allow for restart.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__restarted_8cc_source.html#l00496">two_d_unsteady_heat_restarted.cc:496</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat__restarted_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code for unsteady heat equation with option for restart from disk: Only a single command line ...</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__restarted_8cc_source.html#l00532">two_d_unsteady_heat_restarted.cc:532</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:05:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

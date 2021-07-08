@@ -1,0 +1,186 @@
+\hypertarget{classoomph_1_1MatrixBasedDiagPreconditioner}{}\doxysection{oomph\+::Matrix\+Based\+Diag\+Preconditioner Class Reference}
+\label{classoomph_1_1MatrixBasedDiagPreconditioner}\index{oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}}
+
+
+Matrix-\/based diagonal preconditioner.  
+
+
+
+
+{\ttfamily \#include $<$general\+\_\+purpose\+\_\+preconditioners.\+h$>$}
+
+Inheritance diagram for oomph\+::Matrix\+Based\+Diag\+Preconditioner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1MatrixBasedDiagPreconditioner}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner_a8ed53c8e6a4b7a522d6b4042db14f58a}{Matrix\+Based\+Diag\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Constructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner_ae828842bc06a5151173d9e403239caf1}{$\sim$\+Matrix\+Based\+Diag\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner_a1dfcbd3db03bfa17afa519dd339d2ff4}{Matrix\+Based\+Diag\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner}{Matrix\+Based\+Diag\+Preconditioner}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner_a2e604fdea080deb6eca9227fc756abc6}{operator=}} (const \mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner}{Matrix\+Based\+Diag\+Preconditioner}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner_a202ee7ff4183a585a0b9bd772e2cbcc1}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Apply preconditioner to z, i.\+e. z=D$^\wedge$-\/1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner_abdc2e202dcf014e49373b4c180033d29}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner (store diagonal) from the fully assembled matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner_a2d794c7cec62acb81ad2e93d49a401ed}{Inv\+\_\+diag}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of inverse diagonal entries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Matrix-\/based diagonal preconditioner. 
+
+Definition at line 52 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1MatrixBasedDiagPreconditioner_a8ed53c8e6a4b7a522d6b4042db14f58a}\label{classoomph_1_1MatrixBasedDiagPreconditioner_a8ed53c8e6a4b7a522d6b4042db14f58a}} 
+\index{oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}!MatrixBasedDiagPreconditioner@{MatrixBasedDiagPreconditioner}}
+\index{MatrixBasedDiagPreconditioner@{MatrixBasedDiagPreconditioner}!oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}}
+\doxysubsubsection{\texorpdfstring{MatrixBasedDiagPreconditioner()}{MatrixBasedDiagPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::\+Matrix\+Based\+Diag\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor (empty) 
+
+
+
+Definition at line 57 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MatrixBasedDiagPreconditioner_ae828842bc06a5151173d9e403239caf1}\label{classoomph_1_1MatrixBasedDiagPreconditioner_ae828842bc06a5151173d9e403239caf1}} 
+\index{oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}!````~MatrixBasedDiagPreconditioner@{$\sim$MatrixBasedDiagPreconditioner}}
+\index{````~MatrixBasedDiagPreconditioner@{$\sim$MatrixBasedDiagPreconditioner}!oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}}
+\doxysubsubsection{\texorpdfstring{$\sim$MatrixBasedDiagPreconditioner()}{~MatrixBasedDiagPreconditioner()}}
+{\footnotesize\ttfamily oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::$\sim$\+Matrix\+Based\+Diag\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line 60 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MatrixBasedDiagPreconditioner_a1dfcbd3db03bfa17afa519dd339d2ff4}\label{classoomph_1_1MatrixBasedDiagPreconditioner_a1dfcbd3db03bfa17afa519dd339d2ff4}} 
+\index{oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}!MatrixBasedDiagPreconditioner@{MatrixBasedDiagPreconditioner}}
+\index{MatrixBasedDiagPreconditioner@{MatrixBasedDiagPreconditioner}!oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}}
+\doxysubsubsection{\texorpdfstring{MatrixBasedDiagPreconditioner()}{MatrixBasedDiagPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::\+Matrix\+Based\+Diag\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner}{Matrix\+Based\+Diag\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 63 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1MatrixBasedDiagPreconditioner_a2e604fdea080deb6eca9227fc756abc6}\label{classoomph_1_1MatrixBasedDiagPreconditioner_a2e604fdea080deb6eca9227fc756abc6}} 
+\index{oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner}{Matrix\+Based\+Diag\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 69 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1MatrixBasedDiagPreconditioner_a202ee7ff4183a585a0b9bd772e2cbcc1}\label{classoomph_1_1MatrixBasedDiagPreconditioner_a202ee7ff4183a585a0b9bd772e2cbcc1}} 
+\index{oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily void oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Apply preconditioner to z, i.\+e. z=D$^\wedge$-\/1. 
+
+Apply preconditioner\+: Multiply r by the inverse of the diagonal. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 120 of file general\+\_\+purpose\+\_\+preconditioners.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, Inv\+\_\+diag, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1MatrixBasedDiagPreconditioner_abdc2e202dcf014e49373b4c180033d29}\label{classoomph_1_1MatrixBasedDiagPreconditioner_abdc2e202dcf014e49373b4c180033d29}} 
+\index{oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Setup the preconditioner (store diagonal) from the fully assembled matrix. 
+
+Setup diagonal preconditioner\+: Store the inverse of the diagonal entries from the fully assembled matrix. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 45 of file general\+\_\+purpose\+\_\+preconditioners.\+cc.
+
+
+
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Preconditioner\+::comm\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, Inv\+\_\+diag, oomph\+::\+Preconditioner\+::matrix\+\_\+pt(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), and oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1MatrixBasedDiagPreconditioner_a2d794c7cec62acb81ad2e93d49a401ed}\label{classoomph_1_1MatrixBasedDiagPreconditioner_a2d794c7cec62acb81ad2e93d49a401ed}} 
+\index{oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}!Inv\_diag@{Inv\_diag}}
+\index{Inv\_diag@{Inv\_diag}!oomph::MatrixBasedDiagPreconditioner@{oomph::MatrixBasedDiagPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Inv\_diag}{Inv\_diag}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::\+Inv\+\_\+diag\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of inverse diagonal entries. 
+
+
+
+Definition at line 84 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
+
+
+
+Referenced by preconditioner\+\_\+solve(), and setup().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{general__purpose__preconditioners_8h}{general\+\_\+purpose\+\_\+preconditioners.\+h}}\item 
+\mbox{\hyperlink{general__purpose__preconditioners_8cc}{general\+\_\+purpose\+\_\+preconditioners.\+cc}}\end{DoxyCompactItemize}

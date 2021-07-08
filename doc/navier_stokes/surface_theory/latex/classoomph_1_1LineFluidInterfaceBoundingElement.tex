@@ -1,0 +1,87 @@
+\hypertarget{classoomph_1_1LineFluidInterfaceBoundingElement}{}\doxysection{oomph\+::Line\+Fluid\+Interface\+Bounding\+Element Class Reference}
+\label{classoomph_1_1LineFluidInterfaceBoundingElement}\index{oomph::LineFluidInterfaceBoundingElement@{oomph::LineFluidInterfaceBoundingElement}}
+
+
+Specialisation of the interface boundary constraint to a line.  
+
+
+
+
+{\ttfamily \#include $<$interface\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Line\+Fluid\+Interface\+Bounding\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.138211cm]{classoomph_1_1LineFluidInterfaceBoundingElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LineFluidInterfaceBoundingElement_a29d14ee44cd9b2db52779ea570850821}{Line\+Fluid\+Interface\+Bounding\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1LineFluidInterfaceBoundingElement_aa162a09ba8dfcba4d81e6abaa7a29986}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, unsigned flag)
+\begin{DoxyCompactList}\small\item\em Overload the helper function to calculate the residuals and (if flag==true) the Jacobian -- this function only deals with the part of the Jacobian that can be handled generically. Specific additional contributions may be provided in \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a4510bd81b572d758694715f673080041}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface\+\_\+boundary()}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Specialisation of the interface boundary constraint to a line. 
+
+Definition at line 285 of file interface\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1LineFluidInterfaceBoundingElement_a29d14ee44cd9b2db52779ea570850821}\label{classoomph_1_1LineFluidInterfaceBoundingElement_a29d14ee44cd9b2db52779ea570850821}} 
+\index{oomph::LineFluidInterfaceBoundingElement@{oomph::LineFluidInterfaceBoundingElement}!LineFluidInterfaceBoundingElement@{LineFluidInterfaceBoundingElement}}
+\index{LineFluidInterfaceBoundingElement@{LineFluidInterfaceBoundingElement}!oomph::LineFluidInterfaceBoundingElement@{oomph::LineFluidInterfaceBoundingElement}}
+\doxysubsubsection{\texorpdfstring{LineFluidInterfaceBoundingElement()}{LineFluidInterfaceBoundingElement()}}
+{\footnotesize\ttfamily oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::\+Line\+Fluid\+Interface\+Bounding\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 303 of file interface\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1LineFluidInterfaceBoundingElement_aa162a09ba8dfcba4d81e6abaa7a29986}\label{classoomph_1_1LineFluidInterfaceBoundingElement_aa162a09ba8dfcba4d81e6abaa7a29986}} 
+\index{oomph::LineFluidInterfaceBoundingElement@{oomph::LineFluidInterfaceBoundingElement}!fill\_in\_generic\_residual\_contribution\_interface\_boundary@{fill\_in\_generic\_residual\_contribution\_interface\_boundary}}
+\index{fill\_in\_generic\_residual\_contribution\_interface\_boundary@{fill\_in\_generic\_residual\_contribution\_interface\_boundary}!oomph::LineFluidInterfaceBoundingElement@{oomph::LineFluidInterfaceBoundingElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_interface\_boundary()}{fill\_in\_generic\_residual\_contribution\_interface\_boundary()}}
+{\footnotesize\ttfamily void oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Overload the helper function to calculate the residuals and (if flag==true) the Jacobian -- this function only deals with the part of the Jacobian that can be handled generically. Specific additional contributions may be provided in \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a4510bd81b572d758694715f673080041}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface\+\_\+boundary()}} 
+
+Add contribution to element\textquotesingle{}s residual vector and Jacobian. 
+
+Implements \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement_a69fa099e0cbfe8ae028a4edc77fedc60}{oomph\+::\+Fluid\+Interface\+Bounding\+Element}}.
+
+
+
+Definition at line 234 of file interface\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface\+\_\+boundary(), oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::ca(), oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::contact\+\_\+angle(), oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::\+Contact\+\_\+angle\+\_\+flag, oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::kinematic\+\_\+local\+\_\+eqn(), psi, sigma, oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::\+U\+\_\+index\+\_\+interface\+\_\+boundary, and oomph\+::\+Fluid\+Interface\+Bounding\+Element\+::wall\+\_\+unit\+\_\+normal().
+
+
+
+Referenced by oomph\+::\+Spine\+Line\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface__elements_8h}{interface\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{interface__elements_8cc}{interface\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

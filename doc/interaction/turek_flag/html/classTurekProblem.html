@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classTurekProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Problem class.  
+ <a href="classTurekProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classTurekProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a69f6624fd854393f0c0e5303603ec749"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a69f6624fd854393f0c0e5303603ec749">TurekProblem</a> (const double &amp;length, const double &amp;height)</td></tr>
+<tr class="memdesc:a69f6624fd854393f0c0e5303603ec749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass length and height of domain.  <a href="classTurekProblem.html#a69f6624fd854393f0c0e5303603ec749">More...</a><br /></td></tr>
+<tr class="separator:a69f6624fd854393f0c0e5303603ec749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fc23b86efec256cb7f4450a928f7999"><td class="memItemLeft" align="right" valign="top">RefineableAlgebraicCylinderWithFlagMesh&lt; FLUID_ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a0fc23b86efec256cb7f4450a928f7999">fluid_mesh_pt</a> ()</td></tr>
+<tr class="memdesc:a0fc23b86efec256cb7f4450a928f7999"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the fluid mesh.  <a href="classTurekProblem.html#a0fc23b86efec256cb7f4450a928f7999">More...</a><br /></td></tr>
+<tr class="separator:a0fc23b86efec256cb7f4450a928f7999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89430ae6d87a85a83e23e14e0b0d72b7"><td class="memItemLeft" align="right" valign="top">ElasticRefineableRectangularQuadMesh&lt; SOLID_ELEMENT &gt; *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a89430ae6d87a85a83e23e14e0b0d72b7">solid_mesh_pt</a> ()</td></tr>
+<tr class="memdesc:a89430ae6d87a85a83e23e14e0b0d72b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the solid mesh.  <a href="classTurekProblem.html#a89430ae6d87a85a83e23e14e0b0d72b7">More...</a><br /></td></tr>
+<tr class="separator:a89430ae6d87a85a83e23e14e0b0d72b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a4b3d4e598a499631e00cfa701ee3c"><td class="memItemLeft" align="right" valign="top">SolidMesh *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a93a4b3d4e598a499631e00cfa701ee3c">traction_mesh_pt</a> (const unsigned &amp;i)</td></tr>
+<tr class="memdesc:a93a4b3d4e598a499631e00cfa701ee3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the i-th mesh of FSI traction elements.  <a href="classTurekProblem.html#a93a4b3d4e598a499631e00cfa701ee3c">More...</a><br /></td></tr>
+<tr class="separator:a93a4b3d4e598a499631e00cfa701ee3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39df0332d7606a5befe89bb0e581184b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a39df0332d7606a5befe89bb0e581184b">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:a39df0332d7606a5befe89bb0e581184b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Re-setup the fsi lookup scheme.  <a href="classTurekProblem.html#a39df0332d7606a5befe89bb0e581184b">More...</a><br /></td></tr>
+<tr class="separator:a39df0332d7606a5befe89bb0e581184b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cf0eb1610b4c3a7cdbd3c7948cdd46e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a2cf0eb1610b4c3a7cdbd3c7948cdd46e">doc_solution</a> (DocInfo &amp;doc_info, ofstream &amp;trace_file)</td></tr>
+<tr class="memdesc:a2cf0eb1610b4c3a7cdbd3c7948cdd46e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <a href="classTurekProblem.html#a2cf0eb1610b4c3a7cdbd3c7948cdd46e">More...</a><br /></td></tr>
+<tr class="separator:a2cf0eb1610b4c3a7cdbd3c7948cdd46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae97d3bad44e12274168e883c966b3983"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#ae97d3bad44e12274168e883c966b3983">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ae97d3bad44e12274168e883c966b3983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function (empty)  <a href="classTurekProblem.html#ae97d3bad44e12274168e883c966b3983">More...</a><br /></td></tr>
+<tr class="separator:ae97d3bad44e12274168e883c966b3983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a889518fdaf0c4215e21981afbfc669bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a889518fdaf0c4215e21981afbfc669bd">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a889518fdaf0c4215e21981afbfc669bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function (empty)  <a href="classTurekProblem.html#a889518fdaf0c4215e21981afbfc669bd">More...</a><br /></td></tr>
+<tr class="separator:a889518fdaf0c4215e21981afbfc669bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa896171b1a817ca35cba9b723bb15ed2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#aa896171b1a817ca35cba9b723bb15ed2">actions_before_newton_convergence_check</a> ()</td></tr>
+<tr class="memdesc:aa896171b1a817ca35cba9b723bb15ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the (dependent) fluid node positions following the update of the solid variables before performing Newton convergence check.  <a href="classTurekProblem.html#aa896171b1a817ca35cba9b723bb15ed2">More...</a><br /></td></tr>
+<tr class="separator:aa896171b1a817ca35cba9b723bb15ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ad226ceec27cb3c3ea4d1ecfd4e573f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a4ad226ceec27cb3c3ea4d1ecfd4e573f">actions_before_implicit_timestep</a> ()</td></tr>
+<tr class="memdesc:a4ad226ceec27cb3c3ea4d1ecfd4e573f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the time-dependent influx.  <a href="classTurekProblem.html#a4ad226ceec27cb3c3ea4d1ecfd4e573f">More...</a><br /></td></tr>
+<tr class="separator:a4ad226ceec27cb3c3ea4d1ecfd4e573f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ad460a2e860c9425297cf70ee125de10b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#ad460a2e860c9425297cf70ee125de10b">create_fsi_traction_elements</a> ()</td></tr>
+<tr class="memdesc:ad460a2e860c9425297cf70ee125de10b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create FSI traction elements.  <a href="classTurekProblem.html#ad460a2e860c9425297cf70ee125de10b">More...</a><br /></td></tr>
+<tr class="separator:ad460a2e860c9425297cf70ee125de10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a1a449088ae3cc96ade1c58979294afed"><td class="memItemLeft" align="right" valign="top">ElasticRefineableRectangularQuadMesh&lt; SOLID_ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a1a449088ae3cc96ade1c58979294afed">Solid_mesh_pt</a></td></tr>
+<tr class="memdesc:a1a449088ae3cc96ade1c58979294afed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to solid mesh.  <a href="classTurekProblem.html#a1a449088ae3cc96ade1c58979294afed">More...</a><br /></td></tr>
+<tr class="separator:a1a449088ae3cc96ade1c58979294afed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18a0daace5dc50db4b93879e4a600e6a"><td class="memItemLeft" align="right" valign="top">RefineableAlgebraicCylinderWithFlagMesh&lt; FLUID_ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a18a0daace5dc50db4b93879e4a600e6a">Fluid_mesh_pt</a></td></tr>
+<tr class="memdesc:a18a0daace5dc50db4b93879e4a600e6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to fluid mesh.  <a href="classTurekProblem.html#a18a0daace5dc50db4b93879e4a600e6a">More...</a><br /></td></tr>
+<tr class="separator:a18a0daace5dc50db4b93879e4a600e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b8588d0f133ffb9a281c5747786f95f"><td class="memItemLeft" align="right" valign="top">Vector&lt; SolidMesh * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a0b8588d0f133ffb9a281c5747786f95f">Traction_mesh_pt</a></td></tr>
+<tr class="memdesc:a0b8588d0f133ffb9a281c5747786f95f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to mesh of FSI traction elements.  <a href="classTurekProblem.html#a0b8588d0f133ffb9a281c5747786f95f">More...</a><br /></td></tr>
+<tr class="separator:a0b8588d0f133ffb9a281c5747786f95f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61477b19dfaaba6fb2c7a5c72240ac6"><td class="memItemLeft" align="right" valign="top">SolidMesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#ac61477b19dfaaba6fb2c7a5c72240ac6">Combined_traction_mesh_pt</a></td></tr>
+<tr class="memdesc:ac61477b19dfaaba6fb2c7a5c72240ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combined mesh of traction elements &ndash; only used for documentation.  <a href="classTurekProblem.html#ac61477b19dfaaba6fb2c7a5c72240ac6">More...</a><br /></td></tr>
+<tr class="separator:ac61477b19dfaaba6fb2c7a5c72240ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24d68af05e815f7164e30f53ce7357ce"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a24d68af05e815f7164e30f53ce7357ce">Domain_height</a></td></tr>
+<tr class="memdesc:a24d68af05e815f7164e30f53ce7357ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overall height of domain.  <a href="classTurekProblem.html#a24d68af05e815f7164e30f53ce7357ce">More...</a><br /></td></tr>
+<tr class="separator:a24d68af05e815f7164e30f53ce7357ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff485942ff327ccfcafd3608910ef635"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#aff485942ff327ccfcafd3608910ef635">Domain_length</a></td></tr>
+<tr class="memdesc:aff485942ff327ccfcafd3608910ef635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overall length of domain.  <a href="classTurekProblem.html#aff485942ff327ccfcafd3608910ef635">More...</a><br /></td></tr>
+<tr class="separator:aff485942ff327ccfcafd3608910ef635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad65b9a2f833ed9bae3520980c76d1f2f"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#ad65b9a2f833ed9bae3520980c76d1f2f">Solid_control_node_pt</a></td></tr>
+<tr class="memdesc:ad65b9a2f833ed9bae3520980c76d1f2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to solid control node.  <a href="classTurekProblem.html#ad65b9a2f833ed9bae3520980c76d1f2f">More...</a><br /></td></tr>
+<tr class="separator:ad65b9a2f833ed9bae3520980c76d1f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d297a52fffd79bb7083fd57c2574fff"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTurekProblem.html#a3d297a52fffd79bb7083fd57c2574fff">Fluid_control_node_pt</a></td></tr>
+<tr class="memdesc:a3d297a52fffd79bb7083fd57c2574fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to fluid control node.  <a href="classTurekProblem.html#a3d297a52fffd79bb7083fd57c2574fff">More...</a><br /></td></tr>
+<tr class="separator:a3d297a52fffd79bb7083fd57c2574fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class FLUID_ELEMENT, class SOLID_ELEMENT&gt;<br />
+class TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;</h3>
+
+<p>Problem class. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00370">370</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a69f6624fd854393f0c0e5303603ec749"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69f6624fd854393f0c0e5303603ec749">&#9670;&nbsp;</a></span>TurekProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::<a class="el" href="classTurekProblem.html">TurekProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass length and height of domain. </p>
+<p>Left point on centreline of flag so that the top and bottom vertices merge with the cylinder.</p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00447">447</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="turek__flag_8txt.html#a1b26656bb9ec986a1e2e78eca382269a">build_global_mesh()</a>, <a class="el" href="turek__flag_8cc_source.html#l00078">Global_Parameters::Centre_x</a>, <a class="el" href="turek__flag_8cc_source.html#l00081">Global_Parameters::Centre_y</a>, <a class="el" href="turek__flag_8cc_source.html#l00087">Global_Parameters::Constitutive_law_pt</a>, <a class="el" href="turek__flag_8cc_source.html#l00953">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::create_fsi_traction_elements()</a>, <a class="el" href="turek__flag_8cc_source.html#l00428">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Domain_height</a>, <a class="el" href="turek__flag_8txt_source.html#l00445">flag_time_stepper_pt</a>, <a class="el" href="turek__flag_8cc_source.html#l00437">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Fluid_control_node_pt</a>, <a class="el" href="turek__flag_8cc_source.html#l00379">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::fluid_mesh_pt()</a>, <a class="el" href="turek__flag_8cc_source.html#l00419">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Fluid_mesh_pt</a>, <a class="el" href="turek__flag_8cc_source.html#l00128">Global_Parameters::flux()</a>, <a class="el" href="turek__flag_8cc_source.html#l00109">Global_Parameters::gravity()</a>, <a class="el" href="turek__flag_8cc_source.html#l00075">Global_Parameters::H</a>, <a class="el" href="turek__flag_8cc_source.html#l00097">Global_Parameters::Ignore_fluid_loading</a>, <a class="el" href="turek__flag_8txt_source.html#l00445">l_x</a>, <a class="el" href="turek__flag_8txt_source.html#l00445">l_y</a>, <a class="el" href="turek__flag_8cc_source.html#l00091">Global_Parameters::Lambda_sq</a>, <a class="el" href="turek__flag_8txt_source.html#l00445">n_x</a>, <a class="el" href="turek__flag_8txt_source.html#l00445">n_y</a>, <a class="el" href="turek__flag_8txt_source.html#l00445">origin</a>, <a class="el" href="turek__flag_8cc_source.html#l00068">Global_Parameters::Q</a>, <a class="el" href="turek__flag_8cc_source.html#l00084">Global_Parameters::Radius</a>, <a class="el" href="turek__flag_8cc_source.html#l00058">Global_Parameters::Re</a>, <a class="el" href="turek__flag_8cc_source.html#l00065">Global_Parameters::ReSt</a>, <a class="el" href="turek__flag_8cc_source.html#l00434">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Solid_control_node_pt</a>, <a class="el" href="turek__flag_8cc_source.html#l00383">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::solid_mesh_pt()</a>, <a class="el" href="turek__flag_8cc_source.html#l00061">Global_Parameters::St</a>, <a class="el" href="turek__flag_8txt_source.html#l00263">t</a>, <a class="el" href="turek__flag_8cc_source.html#l00387">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::traction_mesh_pt()</a>, and <a class="el" href="turek__flag_8cc_source.html#l00422">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Traction_mesh_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a39df0332d7606a5befe89bb0e581184b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39df0332d7606a5befe89bb0e581184b">&#9670;&nbsp;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::actions_after_adapt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Re-setup the fsi lookup scheme. </p>
+<p>Actions after adapt: Re-setup FSI. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00895">895</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="turek__flag_8cc_source.html#l00097">Global_Parameters::Ignore_fluid_loading</a>, and <a class="el" href="turek__flag_8txt.html#acdd098bc82b9d35854b3a4959e4291f9">solid_mesh_pt()</a>.</p>
+
+</div>
+</div>
+<a id="ae97d3bad44e12274168e883c966b3983"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae97d3bad44e12274168e883c966b3983">&#9670;&nbsp;</a></span>actions_after_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00397">397</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4ad226ceec27cb3c3ea4d1ecfd4e573f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ad226ceec27cb3c3ea4d1ecfd4e573f">&#9670;&nbsp;</a></span>actions_before_implicit_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::actions_before_implicit_timestep</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the time-dependent influx. </p>
+<p>Actions before implicit timestep: Update inflow profile. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00869">869</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="turek__flag_8cc_source.html#l00128">Global_Parameters::flux()</a>, and <a class="el" href="turek__flag_8txt_source.html#l00263">t</a>.</p>
+
+</div>
+</div>
+<a id="aa896171b1a817ca35cba9b723bb15ed2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa896171b1a817ca35cba9b723bb15ed2">&#9670;&nbsp;</a></span>actions_before_newton_convergence_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::actions_before_newton_convergence_check</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the (dependent) fluid node positions following the update of the solid variables before performing Newton convergence check. </p>
+<p>Update the (dependent) fluid node positions following the update of the solid variables </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00857">857</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+</div>
+</div>
+<a id="a889518fdaf0c4215e21981afbfc669bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a889518fdaf0c4215e21981afbfc669bd">&#9670;&nbsp;</a></span>actions_before_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00400">400</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+</div>
+</div>
+<a id="ad460a2e860c9425297cf70ee125de10b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad460a2e860c9425297cf70ee125de10b">&#9670;&nbsp;</a></span>create_fsi_traction_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::create_fsi_traction_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create FSI traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00953">953</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="turek__flag_8txt.html#acdd098bc82b9d35854b3a4959e4291f9">solid_mesh_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a2cf0eb1610b4c3a7cdbd3c7948cdd46e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cf0eb1610b4c3a7cdbd3c7948cdd46e">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>trace_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l01008">1008</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="turek__flag_8cc_source.html#l00128">Global_Parameters::flux()</a>, and <a class="el" href="turek__flag_8txt.html#acdd098bc82b9d35854b3a4959e4291f9">solid_mesh_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a0fc23b86efec256cb7f4450a928f7999"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fc23b86efec256cb7f4450a928f7999">&#9670;&nbsp;</a></span>fluid_mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableAlgebraicCylinderWithFlagMesh&lt;FLUID_ELEMENT&gt;* <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::fluid_mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the fluid mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00379">379</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a89430ae6d87a85a83e23e14e0b0d72b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89430ae6d87a85a83e23e14e0b0d72b7">&#9670;&nbsp;</a></span>solid_mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ElasticRefineableRectangularQuadMesh&lt;SOLID_ELEMENT&gt;*&amp; <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::solid_mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the solid mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00383">383</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a93a4b3d4e598a499631e00cfa701ee3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93a4b3d4e598a499631e00cfa701ee3c">&#9670;&nbsp;</a></span>traction_mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SolidMesh*&amp; <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::traction_mesh_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the i-th mesh of FSI traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00387">387</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac61477b19dfaaba6fb2c7a5c72240ac6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac61477b19dfaaba6fb2c7a5c72240ac6">&#9670;&nbsp;</a></span>Combined_traction_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SolidMesh* <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Combined_traction_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Combined mesh of traction elements &ndash; only used for documentation. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00425">425</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+</div>
+</div>
+<a id="a24d68af05e815f7164e30f53ce7357ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24d68af05e815f7164e30f53ce7357ce">&#9670;&nbsp;</a></span>Domain_height</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Domain_height</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overall height of domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00428">428</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="aff485942ff327ccfcafd3608910ef635"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff485942ff327ccfcafd3608910ef635">&#9670;&nbsp;</a></span>Domain_length</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Domain_length</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overall length of domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00431">431</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3d297a52fffd79bb7083fd57c2574fff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d297a52fffd79bb7083fd57c2574fff">&#9670;&nbsp;</a></span>Fluid_control_node_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node* <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Fluid_control_node_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to fluid control node. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00437">437</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a18a0daace5dc50db4b93879e4a600e6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18a0daace5dc50db4b93879e4a600e6a">&#9670;&nbsp;</a></span>Fluid_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableAlgebraicCylinderWithFlagMesh&lt;FLUID_ELEMENT&gt;* <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Fluid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to fluid mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00419">419</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ad65b9a2f833ed9bae3520980c76d1f2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad65b9a2f833ed9bae3520980c76d1f2f">&#9670;&nbsp;</a></span>Solid_control_node_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node* <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Solid_control_node_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to solid control node. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00434">434</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a1a449088ae3cc96ade1c58979294afed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a449088ae3cc96ade1c58979294afed">&#9670;&nbsp;</a></span>Solid_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ElasticRefineableRectangularQuadMesh&lt;SOLID_ELEMENT&gt;* <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Solid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to solid mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00416">416</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0b8588d0f133ffb9a281c5747786f95f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b8588d0f133ffb9a281c5747786f95f">&#9670;&nbsp;</a></span>Traction_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;SolidMesh*&gt; <a class="el" href="classTurekProblem.html">TurekProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Traction_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of pointers to mesh of FSI traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8cc_source.html#l00422">422</a> of file <a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="turek__flag_8cc_source.html">turek_flag.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:20:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

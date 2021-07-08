@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Buckling of a clamped cylindrical shell under pressure loading</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Buckling of a clamped cylindrical shell under pressure loading </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document, we discuss the solution of the buckling of a cylindrical shell using <code>oomph-lib's</code> KirchhoffLoveShell elements.</p>
+<p>[No documentation yet: Here's the driver code.]</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">//Driver function for a simple test shell problem:</span></div>
+<div class="line"><span class="comment">//Calculate the deformation of an elastic tube approximated</span></div>
+<div class="line"><span class="comment">//using Kirchoff--Love shell theory</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Standard system includes</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;typeinfo&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Include files from the finite-element library</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;shell.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/rectangular_quadmesh.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespaceoomph.html">oomph</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Global variables that represent physical properties</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================== </span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Prescribed position of control point</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#aa2f7ea98cb8462b3920a026bed5f6099">Prescribed_y</a> = 1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Pointer to pressure load (stored in Data so it can </span></div>
+<div class="line"><span class="comment"> /// become an unknown in the problem when displacement control is used</span></div>
+<div class="line"><span class="comment"></span> Data* <a class="code" href="namespaceGlobal__Physical__Variables.html#ae5107b48f68b31302f3d37b038739904">Pext_data_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Perturbation pressure</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab55734aaa66260cd9d4bf68a4ecafdd5">Pcos</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Return a reference to the external pressure </span></div>
+<div class="line"><span class="comment"> /// load on the elastic tube.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a80149b39ce76ea0a779f7493905eb1b8">external_pressure</a>() </div>
+<div class="line">  {<span class="keywordflow">return</span> (*<a class="code" href="namespaceGlobal__Physical__Variables.html#ae5107b48f68b31302f3d37b038739904">Pext_data_pt</a>-&gt;value_pt(0))*pow(0.05,3)/12.0;}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Load function, normal pressure loading</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a86fd8f502cb8c4c7939ffae742f023eb">press_load</a>(<span class="keyword">const</span> Vector&lt;double&gt; &amp;xi,</div>
+<div class="line">                 <span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                 <span class="keyword">const</span> Vector&lt;double&gt; &amp;N,</div>
+<div class="line">                 Vector&lt;double&gt;&amp; <a class="code" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a>)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//std::cout &lt;&lt; N[0] &lt;&lt; &quot; &quot; &lt;&lt; N[1] &lt;&lt; &quot; &quot; &lt;&lt; N[2] &lt;&lt; std::endl;</span></div>
+<div class="line">  <span class="comment">//std::cout &lt;&lt; xi[0] &lt;&lt; &quot; &quot; &lt;&lt; xi[1] &lt;&lt; std::endl;</span></div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;3;i++) </div>
+<div class="line">   {</div>
+<div class="line">    <a class="code" href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a>[i] = (<a class="code" href="namespaceGlobal__Physical__Variables.html#a80149b39ce76ea0a779f7493905eb1b8">external_pressure</a>() - </div>
+<div class="line">               <a class="code" href="namespaceGlobal__Physical__Variables.html#ab55734aaa66260cd9d4bf68a4ecafdd5">Pcos</a>*pow(0.05,3)/12.0*cos(2.0*xi[1]))*N[i];</div>
+<div class="line">   }</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// A 2D Mesh class. The tube wall is represented by two Lagrangian </span></div>
+<div class="line"><span class="comment">/// coordinates that correspond to z and theta in cylindrical polars. </span></div>
+<div class="line"><span class="comment">/// The required mesh is therefore a  2D mesh and is therefore inherited </span></div>
+<div class="line"><span class="comment">/// from the generic RectangularQuadMesh </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classShellMesh.html">ShellMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> RectangularQuadMesh&lt;ELEMENT&gt;,</div>
+<div class="line">                  <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> ///Constructor for the mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classShellMesh.html">ShellMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny, </div>
+<div class="line">           <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ly);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short In all elastic problems, the nodes must be assigned an undeformed,</span></div>
+<div class="line"><span class="comment"> /// or reference, position, corresponding to the stress-free state</span></div>
+<div class="line"><span class="comment"> /// of the elastic body. This function assigns the undeformed position </span></div>
+<div class="line"><span class="comment"> /// for the nodes on the elastic tube</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> assign_undeformed_positions(GeomObject* <span class="keyword">const</span> &amp;undeformed_midplane_pt);</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=======================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Mesh constructor</span></div>
+<div class="line"><span class="comment">/// Argument list:</span></div>
+<div class="line"><span class="comment">/// nx  : number of elements in the axial direction</span></div>
+<div class="line"><span class="comment">/// ny : number of elements in the azimuthal direction</span></div>
+<div class="line"><span class="comment">/// lx  : length in the axial direction</span></div>
+<div class="line"><span class="comment">/// ly  : length in theta direction</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classShellMesh.html#a6ce8404f69fa3f4c10dac5c18cff0699">ShellMesh&lt;ELEMENT&gt;::ShellMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, </div>
+<div class="line">                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny,</div>
+<div class="line">                              <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, </div>
+<div class="line">                              <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ly) :</div>
+<div class="line"> RectangularQuadMesh&lt;ELEMENT&gt;(nx,ny,lx,ly)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Find out how many nodes there are</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_node = nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now in this case it is the Lagrangian coordinates that we want to set,</span></div>
+<div class="line"> <span class="comment">//so we have to loop over all nodes and set them to the Eulerian</span></div>
+<div class="line"> <span class="comment">//coordinates that are set by the generic mesh generator</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_node;i++)</div>
+<div class="line">  {</div>
+<div class="line">   node_pt(i)-&gt;xi(0) = node_pt(i)-&gt;x(0);</div>
+<div class="line">   node_pt(i)-&gt;xi(1) = node_pt(i)-&gt;x(1);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Assign gradients, etc for the Lagrangian coordinates of </span></div>
+<div class="line"> <span class="comment">//hermite-type elements</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Read out number of position dofs</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_position_type = finite_element_pt(0)-&gt;nnodal_position_type();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//If this is greater than 1 set the slopes, which are the distances between </span></div>
+<div class="line"> <span class="comment">//nodes. If the spacing were non-uniform, this part would be more difficult</span></div>
+<div class="line"> <span class="keywordflow">if</span>(n_position_type &gt; 1)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">double</span> xstep = (this-&gt;Xmax - this-&gt;Xmin)/((this-&gt;Np-1)*this-&gt;Nx);</div>
+<div class="line">   <span class="keywordtype">double</span> ystep = (this-&gt;Ymax - this-&gt;Ymin)/((this-&gt;Np-1)*this-&gt;Ny);</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//The factor 0.5 is because our reference element has length 2.0</span></div>
+<div class="line">     node_pt(n)-&gt;xi_gen(1,0) = 0.5*xstep;</div>
+<div class="line">     node_pt(n)-&gt;xi_gen(2,1) = 0.5*ystep;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=======================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Set the undeformed coordinates of the nodes</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classShellMesh.html#a3576870121fad30d0f99588ea8082ca1">ShellMesh&lt;ELEMENT&gt;::assign_undeformed_positions</a>(</div>
+<div class="line"> GeomObject* <span class="keyword">const</span> &amp;undeformed_midplane_pt)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Find out how many nodes there are</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_node = nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over all the nodes</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Get the Lagrangian coordinates</span></div>
+<div class="line">   Vector&lt;double&gt; xi(2);</div>
+<div class="line">   xi[0] = node_pt(n)-&gt;xi(0); </div>
+<div class="line">   xi[1] = node_pt(n)-&gt;xi(1);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Assign memory for values of derivatives, etc</span></div>
+<div class="line">   Vector&lt;double&gt; R(3);</div>
+<div class="line">   DenseMatrix&lt;double&gt; a(2,3); </div>
+<div class="line">   RankThreeTensor&lt;double&gt;  dadxi(2,2,3);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Get the geometrical information from the geometric object</span></div>
+<div class="line">   undeformed_midplane_pt-&gt;d2position(xi,R,a,dadxi);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Loop over coordinate directions</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;3;i++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Set the position</span></div>
+<div class="line">     node_pt(n)-&gt;x_gen(0,i) = R[i];</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Set the derivative wrt Lagrangian coordinates</span></div>
+<div class="line">     <span class="comment">//Note that we need to scale by the length of each element here!!</span></div>
+<div class="line">     node_pt(n)-&gt;x_gen(1,i) = 0.5*a(0,i)*((this-&gt;Xmax - this-&gt;Xmin)/this-&gt;Nx);</div>
+<div class="line">     node_pt(n)-&gt;x_gen(2,i) = 0.5*a(1,i)*((this-&gt;Ymax - this-&gt;Ymin)/this-&gt;Ny);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Set the mixed derivative </span></div>
+<div class="line">     <span class="comment">//(symmetric so doesn&#39;t matter which one we use)</span></div>
+<div class="line">     node_pt(n)-&gt;x_gen(3,i) = 0.25*dadxi(0,1,i);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="comment">//Problem class to solve the deformation of an elastic tube</span></div>
+<div class="line"><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classShellProblem.html">ShellProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classShellProblem.html#a1ec644498c95acea00cc05c5bd30d075">ShellProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny, </div>
+<div class="line">              <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ly);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Overload Access function for the mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classShellMesh.html">ShellMesh&lt;ELEMENT&gt;</a>* <a class="code" href="classShellProblem.html#a1905a1b913469ed54f7c8f55d133ff57">mesh_pt</a>() </div>
+<div class="line">  {<span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShellMesh.html">ShellMesh&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span>(Problem::mesh_pt());}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after solve empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classShellProblem.html#a65636b791c99203ecbb09ba2a2eec214">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before solve empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classShellProblem.html#a379156a43ce05fe0e2dcf8a986a2ac64">actions_before_newton_solve</a>() {}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//A self_test function</span></div>
+<div class="line"> <span class="keywordtype">void</span> <a class="code" href="classShellProblem.html#aa6d150bd1c137edbf4ded27ed044766d">solve</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to GeomObject that specifies the undeformed midplane</span></div>
+<div class="line"><span class="comment"></span> GeomObject* <a class="code" href="classShellProblem.html#a1c9e4492c7c7c2716fdf8b812ec41651">Undeformed_midplane_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// First trace node</span></div>
+<div class="line"><span class="comment"></span> Node* <a class="code" href="classShellProblem.html#a45230216c4791c683218ff6d7f4ba9a0">Trace_node_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Second trace node</span></div>
+<div class="line"><span class="comment"></span> Node* <a class="code" href="classShellProblem.html#a1933abc1b3e5637e23fa2809eb1cd88f">Trace_node2_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classShellProblem.html#a1ec644498c95acea00cc05c5bd30d075">ShellProblem&lt;ELEMENT&gt;::ShellProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny, </div>
+<div class="line">                                    <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ly)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Create the undeformed midplane object</span></div>
+<div class="line"> Undeformed_midplane_pt = <span class="keyword">new</span> EllipticalTube(1.0,1.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the mesh</span></div>
+<div class="line"> Problem::mesh_pt() = <span class="keyword">new</span> <a class="code" href="classShellMesh.html">ShellMesh&lt;ELEMENT&gt;</a>(nx,ny,lx,ly); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set the undeformed positions in the mesh</span></div>
+<div class="line"> mesh_pt()-&gt;assign_undeformed_positions(Undeformed_midplane_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Reorder the elements, since I know what&#39;s best for them....</span></div>
+<div class="line"> mesh_pt()-&gt;element_reorder();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Apply boundary conditions to the ends of the tube</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_ends = mesh_pt()-&gt;nboundary_node(1);</div>
+<div class="line"> <span class="comment">//Loop over the node</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_ends;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Pin in the axial direction (prevents rigid body motions)</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(2);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(2);</div>
+<div class="line">   <span class="comment">//Derived conditions</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(2,2);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(2,2);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//------------------CLAMPING CONDITIONS----------------------</span></div>
+<div class="line">   <span class="comment">//------Pin positions in the transverse directions-----------</span></div>
+<div class="line">   <span class="comment">// Comment these out to get the ring case</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(0);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(0);</div>
+<div class="line">   <span class="comment">//Derived conditions</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(2,0);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(2,0);</div>
+<div class="line"> </div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(1);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(1);</div>
+<div class="line">   <span class="comment">//Derived conditions</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(2,1);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(2,1);</div>
+<div class="line">   <span class="comment">//----------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the axial gradients of the transverse coordinates to be</span></div>
+<div class="line">   <span class="comment">// zero --- need to be enforced for ring or tube buckling</span></div>
+<div class="line">   <span class="comment">//Pin dx/dz and dy/dz</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(1,0);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(1,1);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(1,0);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(1,1);</div>
+<div class="line">   <span class="comment">//Derived conditions</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(3,0);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(1,i)-&gt;pin_position(3,1);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(3,0);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(3,i)-&gt;pin_position(3,1);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now loop over the sides and apply symmetry conditions</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_side = mesh_pt()-&gt;nboundary_node(0);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_side;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//At the side where theta is 0, pin in the y direction</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(0,i)-&gt;pin_position(1);</div>
+<div class="line">   <span class="comment">//Derived condition</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(0,i)-&gt;pin_position(1,1);</div>
+<div class="line">   <span class="comment">//Pin dx/dtheta and dz/dtheta</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(0,i)-&gt;pin_position(2,0);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(0,i)-&gt;pin_position(2,2);</div>
+<div class="line">   <span class="comment">//Pin the mixed derivative</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(0,i)-&gt;pin_position(3,0);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(0,i)-&gt;pin_position(3,2);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//At the side when theta is 0.5pi  pin in the x direction</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(2,i)-&gt;pin_position(0);</div>
+<div class="line">   <span class="comment">//Derived condition</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(2,i)-&gt;pin_position(1,0);</div>
+<div class="line">   <span class="comment">//Pin dy/dtheta and dz/dtheta</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(2,i)-&gt;pin_position(2,1);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(2,i)-&gt;pin_position(2,2);</div>
+<div class="line">   <span class="comment">//Pin the mixed derivative</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(2,i)-&gt;pin_position(3,1);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(2,i)-&gt;pin_position(3,2);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//    //Set an initial kick to make sure that we hop onto the</span></div>
+<div class="line"><span class="comment">//    //non-axisymmetric branch</span></div>
+<div class="line"><span class="comment">//    if((i&gt;1) &amp;&amp; (i&lt;n_side-1))</span></div>
+<div class="line"><span class="comment">//     {</span></div>
+<div class="line"><span class="comment">//      mesh_pt()-&gt;boundary_node_pt(0,i)-&gt;x(0) += 0.05;</span></div>
+<div class="line"><span class="comment">//      mesh_pt()-&gt;boundary_node_pt(2,i)-&gt;x(1) -= 0.1;</span></div>
+<div class="line"><span class="comment">//     }</span></div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup displacement control</span></div>
+<div class="line"> <span class="comment">//---------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//  //Setup displacement control</span></div>
+<div class="line"><span class="comment">//  //Fix the displacement at the mid-point of the tube in the &quot;vertical&quot;</span></div>
+<div class="line"><span class="comment">//  //(y) direction.</span></div>
+<div class="line"><span class="comment">//  //Set the displacement control element (located halfway along the tube)</span></div>
+<div class="line"><span class="comment">// Disp_ctl_element_pt = dynamic_cast&lt;ELEMENT*&gt;(mesh_pt()-&gt;element_pt(3*Ny-1));</span></div>
+<div class="line"><span class="comment">//  //The midpoint of the tube is located exactly half-way along the element</span></div>
+<div class="line"><span class="comment">//  Vector&lt;double&gt; s(2);  s[0] = 1.0; s[1] = 0.0; //s[1] = 0.5</span></div>
+<div class="line"><span class="comment">//  //Fix the displacement at this point in the y (1) direction</span></div>
+<div class="line"><span class="comment">//  Disp_ctl_element_pt-&gt;fix_displacement_for_displacement_control(s,1);</span></div>
+<div class="line"><span class="comment">//  //Set the pointer to the prescribed position</span></div>
+<div class="line"><span class="comment">//  Disp_ctl_element_pt-&gt;prescribed_position_pt() = &amp;Prescribed_y; </span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Choose element in which displacement control is applied: This</span></div>
+<div class="line"> <span class="comment">// one is located about halfway along the tube -- remember that</span></div>
+<div class="line"> <span class="comment">// we&#39;ve renumbered the elements!</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nel_ctrl=0;</div>
+<div class="line"> Vector&lt;double&gt; s_displ_control(2);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Even/odd number of elements in axial direction</span></div>
+<div class="line"> <span class="keywordflow">if</span> (nx%2==1)</div>
+<div class="line">  {</div>
+<div class="line">   nel_ctrl=unsigned(floor(0.5*<span class="keywordtype">double</span>(nx))+1.0)*ny-1;</div>
+<div class="line">   s_displ_control[0]=0.0;</div>
+<div class="line">   s_displ_control[1]=1.0;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   nel_ctrl=unsigned(floor(0.5*<span class="keywordtype">double</span>(nx))+1.0)*ny-1;</div>
+<div class="line">   s_displ_control[0]=-1.0;</div>
+<div class="line">   s_displ_control[1]=1.0;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Controlled element</span></div>
+<div class="line"> SolidFiniteElement* controlled_element_pt=</div>
+<div class="line">  <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(nel_ctrl));</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fix the displacement in the y (1) direction...</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> controlled_direction=1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pointer to displacement control element</span></div>
+<div class="line"> DisplacementControlElement* displ_control_el_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build displacement control element</span></div>
+<div class="line"> displ_control_el_pt=</div>
+<div class="line">  <span class="keyword">new</span> DisplacementControlElement(controlled_element_pt,</div>
+<div class="line">                                 s_displ_control,</div>
+<div class="line">                                 controlled_direction,</div>
+<div class="line">                                 &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#aa2f7ea98cb8462b3920a026bed5f6099">Global_Physical_Variables::Prescribed_y</a>);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc control point</span></div>
+<div class="line"> Vector&lt;double&gt; xi(2);</div>
+<div class="line"> Vector&lt;double&gt; x(3);</div>
+<div class="line"> controlled_element_pt-&gt;interpolated_xi(s_displ_control,xi);</div>
+<div class="line"> controlled_element_pt-&gt;interpolated_x(s_displ_control,x);</div>
+<div class="line"> std::cout &lt;&lt; std::endl;</div>
+<div class="line"> std::cout &lt;&lt; <span class="stringliteral">&quot;Controlled element: &quot;</span> &lt;&lt; nel_ctrl &lt;&lt; std::endl;</div>
+<div class="line"> std::cout &lt;&lt; <span class="stringliteral">&quot;Displacement control applied at xi = (&quot;</span> </div>
+<div class="line">           &lt;&lt; xi[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; xi[1] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> std::cout &lt;&lt; <span class="stringliteral">&quot;Corresponding to                x  = (&quot;</span> </div>
+<div class="line">           &lt;&lt; x[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; x[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; x[2] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The constructor of the  DisplacementControlElement has created</span></div>
+<div class="line"> <span class="comment">// a new Data object whose one-and-only value contains the</span></div>
+<div class="line"> <span class="comment">// adjustable load: Use this Data object in the load function:</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#ae5107b48f68b31302f3d37b038739904">Global_Physical_Variables::Pext_data_pt</a>=displ_control_el_pt-&gt;</div>
+<div class="line">  displacement_control_load_pt();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the displacement-control element to the mesh</span></div>
+<div class="line"> mesh_pt()-&gt;add_element_pt(displ_control_el_pt); </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete build of shell elements</span></div>
+<div class="line"> <span class="comment">//---------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of shell elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = nx*ny;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Explicit pointer to first element in the mesh</span></div>
+<div class="line"> ELEMENT* first_el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(0));</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the elements </span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a shell element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the load function</span></div>
+<div class="line">   el_pt-&gt;load_vector_fct_pt() = &amp; <a class="code" href="namespaceGlobal__Physical__Variables.html#a86fd8f502cb8c4c7939ffae742f023eb">Global_Physical_Variables::press_load</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the undeformed surface</span></div>
+<div class="line">   el_pt-&gt;undeformed_midplane_pt() = Undeformed_midplane_pt;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//The external pressure is external data for all elements</span></div>
+<div class="line">   el_pt-&gt;add_external_data(<a class="code" href="namespaceGlobal__Physical__Variables.html#ae5107b48f68b31302f3d37b038739904">Global_Physical_Variables::Pext_data_pt</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Pre-compute the second derivatives wrt Lagrangian coordinates</span></div>
+<div class="line">   <span class="comment">//for the first element only</span></div>
+<div class="line">   <span class="keywordflow">if</span>(e==0)</div>
+<div class="line">    {</div>
+<div class="line">     el_pt-&gt;pre_compute_d2shape_lagrangian_at_knots();</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Otherwise set the values to be the same as those in the first element</span></div>
+<div class="line">   <span class="comment">//this is OK because the Lagrangian mesh is uniform.</span></div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     el_pt-&gt;set_dshape_lagrangian_stored_from_element(first_el_pt);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set pointers to two trace nodes, used for output</span></div>
+<div class="line"> Trace_node_pt = mesh_pt()-&gt;finite_element_pt(2*ny-1)-&gt;node_pt(3);</div>
+<div class="line"> Trace_node2_pt = mesh_pt()-&gt;finite_element_pt(ny)-&gt;node_pt(1);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do equation numbering</span></div>
+<div class="line"> cout &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;# of dofs &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//================================================================</span></div>
+<div class="line"><span class="comment">// /Define the solve function, disp ctl and then continuation</span></div>
+<div class="line"><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classShellProblem.html#aa6d150bd1c137edbf4ded27ed044766d">ShellProblem&lt;ELEMENT&gt;::solve</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Increase the maximum number of Newton iterations.</span></div>
+<div class="line"> <span class="comment">//Finding the first buckled solution requires a large(ish) number</span></div>
+<div class="line"> <span class="comment">//of Newton steps -- shells are just a bit twitchy</span></div>
+<div class="line"> Max_newton_iterations = 40;</div>
+<div class="line"> Max_residuals=1.0e6;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Open an output trace file</span></div>
+<div class="line"> ofstream trace(<span class="stringliteral">&quot;trace.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Gradually compress the tube by decreasing the value of the prescribed</span></div>
+<div class="line"> <span class="comment">//position </span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=1;i&lt;11;i++)</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#aa2f7ea98cb8462b3920a026bed5f6099">Global_Physical_Variables::Prescribed_y</a> -= 0.05;</div>
+<div class="line"> </div>
+<div class="line">   cout &lt;&lt; std::endl &lt;&lt; <span class="stringliteral">&quot;Increasing displacement: Prescribed_y is &quot;</span> </div>
+<div class="line">        &lt;&lt; <a class="code" href="namespaceGlobal__Physical__Variables.html#aa2f7ea98cb8462b3920a026bed5f6099">Global_Physical_Variables::Prescribed_y</a> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Solve</span></div>
+<div class="line">   newton_solve();</div>
+<div class="line">   </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Output the pressure (on the bending scale)</span></div>
+<div class="line">   trace &lt;&lt; <a class="code" href="namespaceGlobal__Physical__Variables.html#a80149b39ce76ea0a779f7493905eb1b8">Global_Physical_Variables::external_pressure</a>()/(pow(0.05,3)/12.0) </div>
+<div class="line">         &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">         <span class="comment">//Position of first trace node</span></div>
+<div class="line">         &lt;&lt; Trace_node_pt-&gt;x(0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Trace_node_pt-&gt;x(1) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">          <span class="comment">//Position of second trace node</span></div>
+<div class="line">         &lt;&lt; Trace_node2_pt-&gt;x(0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Trace_node2_pt-&gt;x(1) &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Reset perturbation</span></div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#ab55734aaa66260cd9d4bf68a4ecafdd5">Global_Physical_Variables::Pcos</a>=0.0;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Close the trace file</span></div>
+<div class="line"> trace.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output the tube shape in the most strongly collapsed configuration</span></div>
+<div class="line"> ofstream file(<span class="stringliteral">&quot;final_shape.dat&quot;</span>);</div>
+<div class="line"> mesh_pt()-&gt;output(file,5);</div>
+<div class="line"> file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="clamped__shell_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Length of domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> L = 10.0;</div>
+<div class="line"> <span class="keywordtype">double</span> L_phi=0.5*MathematicalConstants::Pi;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> <a class="code" href="classShellProblem.html">ShellProblem&lt;StorableShapeSolidElement&lt;DiagHermiteShellElement&gt;</a> &gt; </div>
+<div class="line">  <a class="code" href="clamped__shell__buckling_8txt.html#a02b6a4d549a097d9fb1c023e5f07eb4b">problem</a>(5,3,L,L_phi);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Solve the problem</span></div>
+<div class="line"> <a class="code" href="clamped__shell__buckling_8txt.html#a02b6a4d549a097d9fb1c023e5f07eb4b">problem</a>.solve();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+</div><!-- fragment --><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassShellProblem_html_a379156a43ce05fe0e2dcf8a986a2ac64"><div class="ttname"><a href="classShellProblem.html#a379156a43ce05fe0e2dcf8a986a2ac64">ShellProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Actions before solve empty.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00231">clamped_shell.cc:231</a></div></div>
+<div class="ttc" id="aclassShellProblem_html"><div class="ttname"><a href="classShellProblem.html">ShellProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00214">clamped_shell.cc:214</a></div></div>
+<div class="ttc" id="aclamped__shell__buckling_8txt_html_a018f990526757b6bf7c8020a8ca96f1b"><div class="ttname"><a href="clamped__shell__buckling_8txt.html#a018f990526757b6bf7c8020a8ca96f1b">load</a></div><div class="ttdeci">the dimensionless pre f a pointer to the pressure load</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell__buckling_8txt_source.html#l00079">clamped_shell_buckling.txt:79</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab55734aaa66260cd9d4bf68a4ecafdd5"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab55734aaa66260cd9d4bf68a4ecafdd5">Global_Physical_Variables::Pcos</a></div><div class="ttdeci">double Pcos</div><div class="ttdoc">Perturbation pressure.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00061">clamped_shell.cc:61</a></div></div>
+<div class="ttc" id="aclassShellMesh_html_a3576870121fad30d0f99588ea8082ca1"><div class="ttname"><a href="classShellMesh.html#a3576870121fad30d0f99588ea8082ca1">ShellMesh::assign_undeformed_positions</a></div><div class="ttdeci">void assign_undeformed_positions(GeomObject *const &amp;undeformed_midplane_pt)</div><div class="ttdoc">In all elastic problems, the nodes must be assigned an undeformed, or reference, position,...</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00169">clamped_shell.cc:169</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ae5107b48f68b31302f3d37b038739904"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ae5107b48f68b31302f3d37b038739904">Global_Physical_Variables::Pext_data_pt</a></div><div class="ttdeci">Data * Pext_data_pt</div><div class="ttdoc">Pointer to pressure load (stored in Data so it can become an unknown in the problem when displacement...</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00058">clamped_shell.cc:58</a></div></div>
+<div class="ttc" id="aclamped__shell_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="clamped__shell_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00540">clamped_shell.cc:540</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a1c9e4492c7c7c2716fdf8b812ec41651"><div class="ttname"><a href="classShellProblem.html#a1c9e4492c7c7c2716fdf8b812ec41651">ShellProblem::Undeformed_midplane_pt</a></div><div class="ttdeci">GeomObject * Undeformed_midplane_pt</div><div class="ttdoc">Pointer to GeomObject that specifies the undeformed midplane.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00239">clamped_shell.cc:239</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a65636b791c99203ecbb09ba2a2eec214"><div class="ttname"><a href="classShellProblem.html#a65636b791c99203ecbb09ba2a2eec214">ShellProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Actions after solve empty.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00228">clamped_shell.cc:228</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition:</b> <a href="unstructured__clamped__curved__shell_8cc_source.html#l00052">unstructured_clamped_curved_shell.cc:52</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a86fd8f502cb8c4c7939ffae742f023eb"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a86fd8f502cb8c4c7939ffae742f023eb">Global_Physical_Variables::press_load</a></div><div class="ttdeci">void press_load(const Vector&lt; double &gt; &amp;xi, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;N, Vector&lt; double &gt; &amp;load)</div><div class="ttdoc">Load function, normal pressure loading.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00071">clamped_shell.cc:71</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_aa6d150bd1c137edbf4ded27ed044766d"><div class="ttname"><a href="classShellProblem.html#aa6d150bd1c137edbf4ded27ed044766d">ShellProblem::solve</a></div><div class="ttdeci">void solve()</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00485">clamped_shell.cc:485</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a80149b39ce76ea0a779f7493905eb1b8"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a80149b39ce76ea0a779f7493905eb1b8">Global_Physical_Variables::external_pressure</a></div><div class="ttdeci">double external_pressure()</div><div class="ttdoc">Return a reference to the external pressure load on the elastic tube.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00066">clamped_shell.cc:66</a></div></div>
+<div class="ttc" id="aclassShellMesh_html_a6ce8404f69fa3f4c10dac5c18cff0699"><div class="ttname"><a href="classShellMesh.html#a6ce8404f69fa3f4c10dac5c18cff0699">ShellMesh::ShellMesh</a></div><div class="ttdeci">ShellMesh(const unsigned &amp;nx, const unsigned &amp;ny, const double &amp;lx, const double &amp;ly)</div><div class="ttdoc">Constructor for the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00124">clamped_shell.cc:124</a></div></div>
+<div class="ttc" id="aclamped__shell__buckling_8txt_html_a02b6a4d549a097d9fb1c023e5f07eb4b"><div class="ttname"><a href="clamped__shell__buckling_8txt.html#a02b6a4d549a097d9fb1c023e5f07eb4b">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell__buckling_8txt_source.html#l00003">clamped_shell_buckling.txt:3</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_aa2f7ea98cb8462b3920a026bed5f6099"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#aa2f7ea98cb8462b3920a026bed5f6099">Global_Physical_Variables::Prescribed_y</a></div><div class="ttdeci">double Prescribed_y</div><div class="ttdoc">Prescribed position of control point.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00054">clamped_shell.cc:54</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Global variables that represent physical properties.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00050">clamped_shell.cc:50</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a1ec644498c95acea00cc05c5bd30d075"><div class="ttname"><a href="classShellProblem.html#a1ec644498c95acea00cc05c5bd30d075">ShellProblem::ShellProblem</a></div><div class="ttdeci">ShellProblem(const unsigned &amp;nx, const unsigned &amp;ny, const double &amp;lx, const double &amp;ly)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00255">clamped_shell.cc:255</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a1905a1b913469ed54f7c8f55d133ff57"><div class="ttname"><a href="classShellProblem.html#a1905a1b913469ed54f7c8f55d133ff57">ShellProblem::mesh_pt</a></div><div class="ttdeci">ShellMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Overload Access function for the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00224">clamped_shell.cc:224</a></div></div>
+<div class="ttc" id="aclassShellMesh_html"><div class="ttname"><a href="classShellMesh.html">ShellMesh</a></div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00094">clamped_shell.cc:94</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a1933abc1b3e5637e23fa2809eb1cd88f"><div class="ttname"><a href="classShellProblem.html#a1933abc1b3e5637e23fa2809eb1cd88f">ShellProblem::Trace_node2_pt</a></div><div class="ttdeci">Node * Trace_node2_pt</div><div class="ttdoc">Second trace node.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00245">clamped_shell.cc:245</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a45230216c4791c683218ff6d7f4ba9a0"><div class="ttname"><a href="classShellProblem.html#a45230216c4791c683218ff6d7f4ba9a0">ShellProblem::Trace_node_pt</a></div><div class="ttdeci">Node * Trace_node_pt</div><div class="ttdoc">First trace node.</div><div class="ttdef"><b>Definition:</b> <a href="clamped__shell_8cc_source.html#l00242">clamped_shell.cc:242</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:14:43
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,331 @@
+/**
+
+\mainpage The Rayleigh--Plateau instability in the presence of an insoluble surfactant
+
+In this tutorial we present an example of surface-transport equations
+in a free-surface Navier--Stokes problem. This is a multi-domain, multi-physics
+problem because there is a coupling between the equations on
+the surface and those in the bulk. The coupling from the bulk to the
+surface transport arises through the surface velocity in the surface
+transport equation. The coupling from the surface transport to bulk arises in a
+more subtle manner because the surface concentration affects the
+surface tension. In this tutorial, we describe how to use 
+the existing framework to create surface transport equations and 
+how to include them in a free-surface problem.
+
+<HR>
+<HR>
+
+\section example_problem The example problem
+
+The problem to be solved is the evolution of an annular film of fluid
+on the inside of a solid cylinder in the presence of an insoluble surfactant
+on the interface: a modification of the classic Rayleigh--Plateau
+instability. For validation, we reproduce some of the results given in `A 2-D 
+model of Rayleigh instability in capillary tubes --- surfactant 
+effects' by D. Campana, J. Di Paolo & F. A. Saita, <em> Int. J. Multiphase Flow,
+</em> vol <b> 30 </b>, pp 431--454, (2004). Our formulation, however,
+is different from their approach as described in detail in our 
+<a href="../../../navier_stokes/surface_theory/html/index.html">
+free-surface theory document. </a>
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>
+The unsteady axisymmetric free-surface Navier--Stokes equations with insoluble surfactant .</B>
+</CENTER> 
+Solve
+\f[
+Re \left[
+ St \frac{\partial u_r}{\partial t}
+ + u_r \frac{\partial u_r}{\partial r}
+ - \frac{u_\theta^2}{r}
+ + u_z \frac{\partial u_r}{\partial z}
+\right] = -\frac{\partial p}{\partial r}
++ \left[
+  \frac{\partial^2 u_r}{\partial r^2}
+  + \frac{1}{r}\frac{\partial u_r}{\partial r}
+  - \frac{u_r}{r^2}
+  + \frac{\partial^2 u_r}{\partial z^2}
+\right],
+\f]
+\f[
+Re \left[
+  St \frac{\partial u_\theta}{\partial t}
+  + u_r \frac{\partial u_\theta}{\partial r}
+  + \frac{u_r u_\theta}{r}
+  + u_z \frac{\partial u_\theta}{\partial z}
+\right]
+= 
++ \left[
+  \frac{\partial^2 u_\theta}{\partial r^2}
+  + \frac{1}{r}\frac{\partial u_\theta}{\partial r}
+  - \frac{u_\theta}{r^2}
+  + \frac{\partial^2 u_\theta}{\partial z^2}
+\right],
+\f]
+\f[
+Re \left[
+  St \frac{\partial u_z}{\partial t}
+  + u_r \frac{\partial u_z}{\partial r}
+  + u_z \frac{\partial u_z}{\partial z}
+\right] = -\frac{\partial p}{\partial z}
++ \left[
+  \frac{\partial^2 u_z}{\partial r^2}
+  + \frac{1}{r}\frac{\partial u_z}{\partial r}
+  + \frac{\partial^2 u_z}{\partial z^2}
+\right],
+\f]
+and
+\f[
+\frac{\partial u_r}{\partial r}
++ \frac{u_r}{r}
++ \frac{\partial u_z}{\partial z} = 0
+\ \ \ \ \ \ \ \ \ \ (1)
+\f]
+in the bulk fluid.
+
+The
+governing equations are subject to the no slip boundary conditions
+\f[
+u_r = u_\theta = u_z = 0 \ \ \ \ \ \ \ \ \ \ (2)
+\f]
+on the outer solid boundary (\f$ r = 1.0 \f$) 
+and the symmetry boundary conditions
+\f[
+u_z = u_\theta = 0 \ \ \ \ \ \ \ \ \ \ (3)
+\f]
+on the bottom (\f$ z = 0.0 \f$) and top (\f$ z = \pi / \alpha \f$)
+boundaries.
+
+We denote the position vector to the free surface
+by \f$ \mathbf{R} \f$, which is subject to the kinematic condition
+\f[
+\left(u_i - St\, \frac{\partial R_i}{\partial t}\right) n_i = 0,
+\ \ \ \ \ \ \ \ \ \ (4)
+\f]
+and the dynamic condition
+\f[
+\tau_{ij}^{[2]}n_j = \tau_{ij}^{[1]}n_j+\frac{1}{Ca}\left (\sigma \kappa n_i
++ \frac{\partial \sigma}{\partial s} t_{i} \right).
+\ \ \ \ \ \ \ \ \ \ (5)
+\f]
+where \f$ \sigma = \sigma^{*} / \sigma_{ref} \f$ is the dimensionless
+surface tension relative to a reference value.
+
+An insoluble surfactant of surface concentration \f$ \Gamma^{*}\f$ is
+ non-dimensionalised with respect to a reference value \f$ \Gamma =
+ \Gamma^{*}/\Gamma_{ref} \f$ and obeys the surface transport equation
+ \f[ St \left(\frac{\partial \Gamma}{\partial t} -
+   \dot{\mbox{\boldmath$R$}} \mbox{\boldmath$\cdot$} 
+   \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right) +
+   \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} 
+   \left(\Gamma \mbox{\boldmath$U$}\right) =
+   \frac{1}{Pe_{s}}
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$}
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}
+   \Gamma  \f]
+on the interface.
+
+The surface tension is a function of the surfactant concentration \f$
+\sigma(\Gamma)\f$ and a linear equation of state is chosen 
+\f[ \sigma = 1 - \beta (\Gamma - 1).
+ \f]
+
+The symmetry boundary conditions on the bottom (\f$ z = 0.0 \f$) and
+top (\f$ z = \pi / \alpha \f$) boundaries are
+ \f[ \frac{\partial \Gamma}{\partial z} = 0. \f]
+
+Initially, the system is at rest and \f$ \Gamma =1 \f$. The free
+surface is moved into the position:
+\f[
+ \mathbf{R} = \left[1.0 - H*(1.0 + \epsilon\cos \left(\alpha z\right)
+ \right] \mbox{\boldmath$e$}_{r} \f] 
+where \f$ \epsilon \f$ is a small parameter and \f$ H\f$ is the
+undeformed film thickness.
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+<HR>
+<HR>
+
+\section results Results
+
+We choose parameters based on those used to compute Figures 8 and 9 in
+Campana et al; namely \f$ H = 0.2 \f$, \f$ Re = 40 \f$, \f$ St = 1\f$,
+\f$ Ca = H^{3} \f$, \f$ \alpha = 1.047 \f$, \f$ \epsilon = 10^{-3}\f$,
+\f$ \beta = 3.6 \times 10^{-3} \f$ and
+\f$Pe_{S} = 4032\f$. For these parameters, the system is unstable
+to the Rayleigh--Plateau instability and evolves towards a state in
+which the tube is completely occluded by the fluid at one end.
+
+\image html trace.gif "Time trace of the radius of the interface at z=0 showing dramatic collapse near t=80. " 
+\image latex trace.eps "Time trace of the radius of the interface at z=0 showing dramatic collapse near t=80. " width=0.5\textwidth
+
+\image html evolution.gif "Evolution of the interface at times t=0, 10, 20, 30, 40, 50, 60, 70, 80 showing the developing lobe. " 
+\image latex evolution.eps "Evolution of the interface at times t=0, 10, 20, 30, 40, 50, 60, 70, 80 showing the developing lobe. " width=0.5\textwidth
+
+\image html evo_conc.gif "Evolution of the surfactant concentration on the interface at times t=0, 10, 20, 30, 40, 50, 60, 70, 80 accumulation in the developing lobe caused by the reduced surface area and advective flow into the lobe. " 
+\image latex evo_conc.eps "Evolution of the surfactant concentration on the interface at times t=0, 10, 20, 30, 40, 50, 60, 70, 80 accumulation in the developing lobe caused by the reduced surface area and advective flow into the lobe. " width=0.5\textwidth
+
+<HR>
+<HR>
+
+\section global Global parameters and functions
+
+ The global parameters are simply the dimensionless parameters described above.
+
+ \dontinclude rayleigh_instability_insoluble_surfactant.cc
+ \skipline start_of_namespace
+ \until End of namespace
+
+<HR>
+<HR>
+
+\section main The driver code and problem class
+ 
+ The driver code and problem are very similar to those in the 
+ <a href="../../../navier_stokes/single_layer_free_surface/html/index.html">
+ two-dimensional </a> and <a href="../../../axisym_navier_stokes/two_layer_interface_axisym/html/index.html">
+ axisymmetric </a>
+ interface-relaxation problems on which this driver was based.
+  The main difference between this problem and standard free surface
+ problems is that instead of  
+ oomph::SpineAxisymmetricFluidInterfaceElement, we use the custom 
+ oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement.
+ The symmetry boundary conditions for the surface concentration are
+ the natural boundary conditions of our formulation, so we "do
+ nothing" for the additional field at the boundaries.
+ 
+ An additional member function \c
+ InterfaceProblem::compute_total_mass() is provided as a check on the
+ implementation of the the surface transport equations. The surfactant
+ cannot be removed from the surface, so its mass must be
+ conserved. The function simply loops over the interface elements and
+ sums their contribution to the total mass.
+ \dontinclude rayleigh_instability_insoluble_surfactant.cc
+ \skipline Compute the total mass
+ \until End of compute_total_mass
+
+<HR>
+<HR>
+
+\section element The SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement class
+
+ This class is implemented in our driver code and inherits directly
+ from oomph::SpineAxisymmetricFluidInterfaceElement. The class
+ provides storage for the required additional dimensionless groups
+ and the nodal index where the surface concentration will be stored.
+ \dontinclude rayleigh_instability_insoluble_surfactant.cc
+ \skipline Spine-based Marangoni
+ \until C_index
+ 
+ Most of the functionality is already provided by the underlying \c
+ FluidInterfaceElement and we need simply to overload a few
+ functions. The constructor sets default values for the physical constants
+ and adds the additional data value to nodes on the surface.
+ \skipline Constructor
+ \until }
+ 
+ The function \c FluidInterfaceElement::sigma() is
+ overloaded using the equation of state defined in the problem specification
+ \dontinclude rayleigh_instability_insoluble_surfactant.cc
+ \skipline sigma(
+ \until End of sigma
+
+ The majority of the work is performed in 
+ \skipline add_additional
+ \until {
+  which provides the additional surface transport equations. In the
+ example code two formulations of the surface transport equations are
+ provided the one used by Campana et al in which the curvature is
+ computed explicitly and the formulation derived in our <a href="../../../navier_stokes/surface_theory/html/index.html">
+free-surface theory, </a> in which the curvature is not required. The
+ version used is determined by an internal boolean
+ \until Integrated_curvature
+ The remainder of the function adds the residuals associated with the
+ surfactant transport equations which are described in the 
+ <a href="../../../navier_stokes/surface_theory/html/index.html">
+ free-surface theory. </a> Note that an additional term arises due to
+ the azimuthal curvature compared to the standard one-dimensional
+ surface.
+
+ The function \c fill_in_contribution_to_jacobian(...) is also
+ overloaded to that the effect of surfactant concentration on the bulk
+ equations is computed by finite differences. This could be modified
+ in the future so that the appropriate derivative terms are included
+ in \c add_additional_residual_contributions_interface(...).
+
+ Finally the elements contain a function
+ \skipline integrate_c()
+ \until const
+ that computes the integral of the concentration over the elemental
+ surface, representing the total mass of surfactant within the
+ element.
+
+ <HR>
+ <HR>
+
+\subsection exercises Exercises
+-# Investigate the difference between the solutions for the two
+formulations of the surfactant transport equations. Which conserves
+mass more accurately?
+   \n\n
+-# Investigate the influence of variations in \f$\beta\f$ and try to
+reproduce the results found by Campana et al.
+-# Look at the three-dimensional (non-axisymmetric) version of the
+code found in the same directory. Confirm that the same results are
+produced. Is the instability stable to non-axisymmetric perturbations?
+Use the code to investigate what happens if you make the cross-sectional 
+boundary slightly elliptical rather than circular?
+.
+<hr>
+<hr>
+\section sources Source files for this tutorial
+-  The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/multi_physics/rayleigh_instability_surfactant">
+demo_drivers/multi_physics/rayleigh_instability_surfactant
+</A>
+</CENTER>
+\n\n
+ which contains refineable and non-refineable multi-domain
+versions of the Boussinesq convection problem.
+\n\n
+- The full driver code for the problem described in this tutorial is:\n\n
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/multi_physics/rayleigh_instability_surfactant/rayleigh_instability_insoluble_surfactant.cc
+">
+demo_drivers/multi_physics/rayleigh_instability_surfactant/rayleigh_instability_insoluble_surfactant.cc
+</A>
+</CENTER>
+\n\n
+- The corresponding driver code for the non-refineable version of the
+  problem is:\n\n
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc
+">
+demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc
+</A>
+</CENTER>
+.
+
+
+
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

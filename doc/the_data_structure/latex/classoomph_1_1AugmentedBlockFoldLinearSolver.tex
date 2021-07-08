@@ -1,0 +1,265 @@
+\hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver}{}\doxysection{oomph\+::Augmented\+Block\+Fold\+Linear\+Solver Class Reference}
+\label{classoomph_1_1AugmentedBlockFoldLinearSolver}\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+
+
+{\ttfamily \#include $<$assembly\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Augmented\+Block\+Fold\+Linear\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1AugmentedBlockFoldLinearSolver}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a40e92987fc351227d16cb4c65c56988b}{Augmented\+Block\+Fold\+Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a565f2b65d78f91ccac3fe2b03ac57dfc}{linear\+\_\+solver\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor, inherits the original linear solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_adae26b8b348384e909bee9e57da6301d}{$\sim$\+Augmented\+Block\+Fold\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: clean up the allocated memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a11690b33089e999d0c894b4e4b0646d9}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em The solve function uses the block factorisation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_afdea4d6668393ad1cccc810b81fdc957}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_ae7f5f1459fef68479b39f0d1a1dce243}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a7728fc74802b6802ed966765bc1e62d9}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em The resolve function also uses the block factorisation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$ \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a565f2b65d78f91ccac3fe2b03ac57dfc}{linear\+\_\+solver\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Access function to the original linear solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$ \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a1e8706ee6a97424bcbaf1992a09549ee}{Linear\+\_\+solver\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the original linear solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$ \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a65a5a2a87943d506cf4afc5cdbcfc06f}{Problem\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $\ast$ \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_ae4f2e27925a6ceef247bac84f49fdb90}{Alpha\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the storage for the vector alpha. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $\ast$ \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver_a6793e6c00a07d6a037f12b78c7d32182}{E\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the storage for the vector e. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A custom linear solver class that is used to solve a block-\/factorised version of the Fold bifurcation detection problem. 
+
+Definition at line 384 of file assembly\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_a40e92987fc351227d16cb4c65c56988b}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_a40e92987fc351227d16cb4c65c56988b}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!AugmentedBlockFoldLinearSolver@{AugmentedBlockFoldLinearSolver}}
+\index{AugmentedBlockFoldLinearSolver@{AugmentedBlockFoldLinearSolver}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{AugmentedBlockFoldLinearSolver()}{AugmentedBlockFoldLinearSolver()}}
+{\footnotesize\ttfamily oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::\+Augmented\+Block\+Fold\+Linear\+Solver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const}]{linear\+\_\+solver\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, inherits the original linear solver. 
+
+
+
+Definition at line 401 of file assembly\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_adae26b8b348384e909bee9e57da6301d}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_adae26b8b348384e909bee9e57da6301d}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!````~AugmentedBlockFoldLinearSolver@{$\sim$AugmentedBlockFoldLinearSolver}}
+\index{````~AugmentedBlockFoldLinearSolver@{$\sim$AugmentedBlockFoldLinearSolver}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{$\sim$AugmentedBlockFoldLinearSolver()}{~AugmentedBlockFoldLinearSolver()}}
+{\footnotesize\ttfamily oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::$\sim$\+Augmented\+Block\+Fold\+Linear\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor\+: clean up the allocated memory. 
+
+Clean up the memory that may have been allocated by the solver. 
+
+Definition at line 373 of file assembly\+\_\+handler.\+cc.
+
+
+
+References Alpha\+\_\+pt, and E\+\_\+pt.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_a565f2b65d78f91ccac3fe2b03ac57dfc}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_a565f2b65d78f91ccac3fe2b03ac57dfc}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!linear\_solver\_pt@{linear\_solver\_pt}}
+\index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the original linear solver. 
+
+
+
+Definition at line 438 of file assembly\+\_\+handler.\+h.
+
+
+
+References Linear\+\_\+solver\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Fold\+Handler\+::$\sim$\+Fold\+Handler().
+
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_a7728fc74802b6802ed966765bc1e62d9}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_a7728fc74802b6802ed966765bc1e62d9}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!resolve@{resolve}}
+\index{resolve@{resolve}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
+{\footnotesize\ttfamily void oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The resolve function also uses the block factorisation. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 634 of file assembly\+\_\+handler.\+cc.
+
+
+
+References a(), oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter(), Alpha\+\_\+pt, oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt(), oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Problem\+::dof(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve(), oomph\+::\+Fold\+Handler\+::eqn\+\_\+number(), oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+F\+D\+\_\+step, oomph\+::\+Fold\+Handler\+::get\+\_\+jacobian(), Linear\+\_\+solver\+\_\+pt, oomph\+::\+Problem\+::mesh\+\_\+pt(), n, oomph\+::\+Fold\+Handler\+::ndof(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Mesh\+::nelement(), Problem\+\_\+pt, oomph\+::\+Linear\+Solver\+::resolve(), oomph\+::\+Fold\+Handler\+::solve\+\_\+augmented\+\_\+block\+\_\+system(), oomph\+::\+Fold\+Handler\+::solve\+\_\+full\+\_\+system(), and oomph\+::\+Fold\+Handler\+::Y.
+
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_afdea4d6668393ad1cccc810b81fdc957}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_afdea4d6668393ad1cccc810b81fdc957}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 412 of file assembly\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_ae7f5f1459fef68479b39f0d1a1dce243}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_ae7f5f1459fef68479b39f0d1a1dce243}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 424 of file assembly\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_a11690b33089e999d0c894b4e4b0646d9}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_a11690b33089e999d0c894b4e4b0646d9}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The solve function uses the block factorisation. 
+
+Use a block factorisation to solve the augmented system associated with a Pitch\+Fork bifurcation. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 383 of file assembly\+\_\+handler.\+cc.
+
+
+
+References a(), oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter(), Alpha\+\_\+pt, oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt(), oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Problem\+::dof(), e, E\+\_\+pt, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve(), oomph\+::\+Fold\+Handler\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+F\+D\+\_\+step, oomph\+::\+Fold\+Handler\+::get\+\_\+jacobian(), oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian(), Linear\+\_\+solver\+\_\+pt, oomph\+::\+Problem\+::mesh\+\_\+pt(), n, oomph\+::\+Fold\+Handler\+::ndof(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Mesh\+::nelement(), Problem\+\_\+pt, oomph\+::\+Linear\+Solver\+::resolve(), oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian(), oomph\+::\+Linear\+Solver\+::solve(), oomph\+::\+Fold\+Handler\+::solve\+\_\+augmented\+\_\+block\+\_\+system(), oomph\+::\+Fold\+Handler\+::solve\+\_\+full\+\_\+system(), and oomph\+::\+Fold\+Handler\+::Y.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_ae4f2e27925a6ceef247bac84f49fdb90}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_ae4f2e27925a6ceef247bac84f49fdb90}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!Alpha\_pt@{Alpha\_pt}}
+\index{Alpha\_pt@{Alpha\_pt}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Alpha\_pt}{Alpha\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}$\ast$ oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::\+Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the storage for the vector alpha. 
+
+
+
+Definition at line 393 of file assembly\+\_\+handler.\+h.
+
+
+
+Referenced by resolve(), solve(), and $\sim$\+Augmented\+Block\+Fold\+Linear\+Solver().
+
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_a6793e6c00a07d6a037f12b78c7d32182}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_a6793e6c00a07d6a037f12b78c7d32182}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!E\_pt@{E\_pt}}
+\index{E\_pt@{E\_pt}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{E\_pt}{E\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}$\ast$ oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::\+E\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the storage for the vector e. 
+
+
+
+Definition at line 396 of file assembly\+\_\+handler.\+h.
+
+
+
+Referenced by solve(), and $\sim$\+Augmented\+Block\+Fold\+Linear\+Solver().
+
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_a1e8706ee6a97424bcbaf1992a09549ee}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_a1e8706ee6a97424bcbaf1992a09549ee}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!Linear\_solver\_pt@{Linear\_solver\_pt}}
+\index{Linear\_solver\_pt@{Linear\_solver\_pt}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Linear\_solver\_pt}{Linear\_solver\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::\+Linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the original linear solver. 
+
+
+
+Definition at line 387 of file assembly\+\_\+handler.\+h.
+
+
+
+Referenced by linear\+\_\+solver\+\_\+pt(), resolve(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1AugmentedBlockFoldLinearSolver_a65a5a2a87943d506cf4afc5cdbcfc06f}\label{classoomph_1_1AugmentedBlockFoldLinearSolver_a65a5a2a87943d506cf4afc5cdbcfc06f}} 
+\index{oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}!Problem\_pt@{Problem\_pt}}
+\index{Problem\_pt@{Problem\_pt}!oomph::AugmentedBlockFoldLinearSolver@{oomph::AugmentedBlockFoldLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Problem\_pt}{Problem\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}$\ast$ oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::\+Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 390 of file assembly\+\_\+handler.\+h.
+
+
+
+Referenced by resolve(), and solve().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{assembly__handler_8h}{assembly\+\_\+handler.\+h}}\item 
+\mbox{\hyperlink{assembly__handler_8cc}{assembly\+\_\+handler.\+cc}}\end{DoxyCompactItemize}

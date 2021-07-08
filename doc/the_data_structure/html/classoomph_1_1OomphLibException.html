@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::OomphLibException Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1OomphLibException.html">OomphLibException</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1OomphLibException-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::OomphLibException Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::OomphLibException:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1OomphLibException.png" usemap="#oomph::OomphLibException_map" alt=""/>
+  <map id="oomph::OomphLibException_map" name="oomph::OomphLibException_map">
+<area href="classoomph_1_1OomphLibError.html" alt="oomph::OomphLibError" shape="rect" coords="0,112,167,136"/>
+<area href="classoomph_1_1OomphLibWarning.html" alt="oomph::OomphLibWarning" shape="rect" coords="177,112,344,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a92da7bc6b484044587ca2e8db4e1e507"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OomphLibException.html#a92da7bc6b484044587ca2e8db4e1e507">disable_error_message</a> ()</td></tr>
+<tr class="memdesc:a92da7bc6b484044587ca2e8db4e1e507"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suppress issueing of the error message in destructor (useful if error is caught successfully!)  <a href="classoomph_1_1OomphLibException.html#a92da7bc6b484044587ca2e8db4e1e507">More...</a><br /></td></tr>
+<tr class="separator:a92da7bc6b484044587ca2e8db4e1e507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2bcc47316fcc96608e79bec5ab49f82b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OomphLibException.html#a2bcc47316fcc96608e79bec5ab49f82b">OomphLibException</a> (const std::string &amp;error_description, const std::string &amp;function_name, const char *location, const std::string &amp;exception_type, std::ostream &amp;exception_stream, const unsigned &amp;output_width, bool list_trace_back)</td></tr>
+<tr class="memdesc:a2bcc47316fcc96608e79bec5ab49f82b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor takes the error description, function name and a location string provided by the OOMPH_EXCEPTION_LOCATION macro and combines them into a standard header. The exception type will be the string "WARNING" or "ERROR" and the message is written to the exception_stream, with a specified output_width. Optionally provide a traceback of the function calls.  <a href="classoomph_1_1OomphLibException.html#a2bcc47316fcc96608e79bec5ab49f82b">More...</a><br /></td></tr>
+<tr class="separator:a2bcc47316fcc96608e79bec5ab49f82b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cc216d83aa854e965c3c8376d2c4d39"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OomphLibException.html#a0cc216d83aa854e965c3c8376d2c4d39">~OomphLibException</a> ()  throw ()</td></tr>
+<tr class="memdesc:a0cc216d83aa854e965c3c8376d2c4d39"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor cannot throw an exception (C++ STL standard)  <a href="classoomph_1_1OomphLibException.html#a0cc216d83aa854e965c3c8376d2c4d39">More...</a><br /></td></tr>
+<tr class="separator:a0cc216d83aa854e965c3c8376d2c4d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ab9177b3f4d969f3e4d102487165103c7"><td class="memItemLeft" align="right" valign="top">std::ostream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OomphLibException.html#ab9177b3f4d969f3e4d102487165103c7">Exception_stream_pt</a></td></tr>
+<tr class="memdesc:ab9177b3f4d969f3e4d102487165103c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception stream to which we write message in destructor <br  />
+  <a href="classoomph_1_1OomphLibException.html#ab9177b3f4d969f3e4d102487165103c7">More...</a><br /></td></tr>
+<tr class="separator:ab9177b3f4d969f3e4d102487165103c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94df333a8bdcb4b89eeb516a64a3429e"><td class="memItemLeft" align="right" valign="top">std::stringstream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OomphLibException.html#a94df333a8bdcb4b89eeb516a64a3429e">Exception_stringstream_pt</a></td></tr>
+<tr class="memdesc:a94df333a8bdcb4b89eeb516a64a3429e"><td class="mdescLeft">&#160;</td><td class="mdescRight">String stream that records the error message.  <a href="classoomph_1_1OomphLibException.html#a94df333a8bdcb4b89eeb516a64a3429e">More...</a><br /></td></tr>
+<tr class="separator:a94df333a8bdcb4b89eeb516a64a3429e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac374cd3358bf26639860a6778779786d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OomphLibException.html#ac374cd3358bf26639860a6778779786d">Suppress_error_message</a></td></tr>
+<tr class="memdesc:ac374cd3358bf26639860a6778779786d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to suppress issuing of the error message in destructor (useful if error is caught successfully!)  <a href="classoomph_1_1OomphLibException.html#ac374cd3358bf26639860a6778779786d">More...</a><br /></td></tr>
+<tr class="separator:ac374cd3358bf26639860a6778779786d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>===================================================================== A Base class for oomph-lib run-time exception (error and warning) handling.</p>
+<p>The class can only be instantiated by the derived classes <a class="el" href="classoomph_1_1OomphLibError.html">OomphLibError</a> and <a class="el" href="classoomph_1_1OomphLibWarning.html">OomphLibWarning</a>. The (protected) constructor combines its string arguments into a standard format for uniform exception reports which are written to the specified output stream. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8h_source.html#l00173">173</a> of file <a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2bcc47316fcc96608e79bec5ab49f82b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bcc47316fcc96608e79bec5ab49f82b">&#9670;&nbsp;</a></span>OomphLibException()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::OomphLibException::OomphLibException </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>error_description</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>function_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>exception_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>exception_stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>output_width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>list_trace_back</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor takes the error description, function name and a location string provided by the OOMPH_EXCEPTION_LOCATION macro and combines them into a standard header. The exception type will be the string "WARNING" or "ERROR" and the message is written to the exception_stream, with a specified output_width. Optionally provide a traceback of the function calls. </p>
+<p>The <a class="el" href="classoomph_1_1OomphLibException.html">OomphLibException</a> constructor takes the error description, function name, a location string provided by the OOMPH_EXCEPTION_LOCATION and an exception type "WARNING" or "ERROR" and combines them into a standard error message that is written to the exception stream. The output_width of the message can also be specified. Optionally provide a traceback of the function calls. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8cc_source.html#l00150">150</a> of file <a class="el" href="oomph__definitions_8cc_source.html">oomph_definitions.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__definitions_8h_source.html#l00209">Exception_stream_pt</a>, <a class="el" href="oomph__definitions_8h_source.html#l00212">Exception_stringstream_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="stacktrace_8h_source.html#l00047">print_stacktrace()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>, and <a class="el" href="oomph__definitions_8h_source.html#l00216">Suppress_error_message</a>.</p>
+
+</div>
+</div>
+<a id="a0cc216d83aa854e965c3c8376d2c4d39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cc216d83aa854e965c3c8376d2c4d39">&#9670;&nbsp;</a></span>~OomphLibException()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::OomphLibException::~OomphLibException </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The destructor cannot throw an exception (C++ STL standard) </p>
+<p>created in the constructor (unless suppresed)</p>
+<p>The <a class="el" href="classoomph_1_1OomphLibException.html">OomphLibException</a> destructor actually spawns the error message </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8cc_source.html#l00132">132</a> of file <a class="el" href="oomph__definitions_8cc_source.html">oomph_definitions.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__definitions_8h_source.html#l00212">Exception_stringstream_pt</a>, and <a class="el" href="oomph__definitions_8h_source.html#l00216">Suppress_error_message</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a92da7bc6b484044587ca2e8db4e1e507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92da7bc6b484044587ca2e8db4e1e507">&#9670;&nbsp;</a></span>disable_error_message()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::OomphLibException::disable_error_message </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Suppress issueing of the error message in destructor (useful if error is caught successfully!) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8h_source.html#l00180">180</a> of file <a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__definitions_8h_source.html#l00216">Suppress_error_message</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00076">oomph::TerminateHelper::suppress_exception_error_messages()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l04616">oomph::FiniteElement::locate_zeta()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab9177b3f4d969f3e4d102487165103c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9177b3f4d969f3e4d102487165103c7">&#9670;&nbsp;</a></span>Exception_stream_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream* oomph::OomphLibException::Exception_stream_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Exception stream to which we write message in destructor <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8h_source.html#l00209">209</a> of file <a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__definitions_8cc_source.html#l00150">OomphLibException()</a>.</p>
+
+</div>
+</div>
+<a id="a94df333a8bdcb4b89eeb516a64a3429e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94df333a8bdcb4b89eeb516a64a3429e">&#9670;&nbsp;</a></span>Exception_stringstream_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::stringstream* oomph::OomphLibException::Exception_stringstream_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>String stream that records the error message. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8h_source.html#l00212">212</a> of file <a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__definitions_8cc_source.html#l00150">OomphLibException()</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00132">~OomphLibException()</a>.</p>
+
+</div>
+</div>
+<a id="ac374cd3358bf26639860a6778779786d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac374cd3358bf26639860a6778779786d">&#9670;&nbsp;</a></span>Suppress_error_message</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::OomphLibException::Suppress_error_message</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean to suppress issuing of the error message in destructor (useful if error is caught successfully!) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__definitions_8h_source.html#l00216">216</a> of file <a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__definitions_8h_source.html#l00180">disable_error_message()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00150">OomphLibException()</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00132">~OomphLibException()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="oomph__definitions_8h_source.html">oomph_definitions.h</a></li>
+<li><a class="el" href="oomph__definitions_8cc_source.html">oomph_definitions.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: UnstructuredImmersedEllipseProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classUnstructuredImmersedEllipseProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">UnstructuredImmersedEllipseProblem&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for UnstructuredImmersedEllipseProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classUnstructuredImmersedEllipseProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a544a35f261200bb4a4e29a88faa1a69c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a544a35f261200bb4a4e29a88faa1a69c">UnstructuredImmersedEllipseProblem</a> ()</td></tr>
+<tr class="memdesc:a544a35f261200bb4a4e29a88faa1a69c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classUnstructuredImmersedEllipseProblem.html#a544a35f261200bb4a4e29a88faa1a69c">More...</a><br /></td></tr>
+<tr class="separator:a544a35f261200bb4a4e29a88faa1a69c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84cdf81be59fc646eb4d5b3bc0ff4280"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a84cdf81be59fc646eb4d5b3bc0ff4280">~UnstructuredImmersedEllipseProblem</a> ()</td></tr>
+<tr class="memdesc:a84cdf81be59fc646eb4d5b3bc0ff4280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classUnstructuredImmersedEllipseProblem.html#a84cdf81be59fc646eb4d5b3bc0ff4280">More...</a><br /></td></tr>
+<tr class="separator:a84cdf81be59fc646eb4d5b3bc0ff4280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368c412c4c9a9e9403b4e67d3582e3a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a368c412c4c9a9e9403b4e67d3582e3a5">actions_before_implicit_timestep</a> ()</td></tr>
+<tr class="memdesc:a368c412c4c9a9e9403b4e67d3582e3a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the boundary conditions when timestepping.  <a href="classUnstructuredImmersedEllipseProblem.html#a368c412c4c9a9e9403b4e67d3582e3a5">More...</a><br /></td></tr>
+<tr class="separator:a368c412c4c9a9e9403b4e67d3582e3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa560217a33a9a9bc150fbdf15dbf1877"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#aa560217a33a9a9bc150fbdf15dbf1877">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:aa560217a33a9a9bc150fbdf15dbf1877"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wipe the meshes of Lagrange multiplier and drag elements.  <a href="classUnstructuredImmersedEllipseProblem.html#aa560217a33a9a9bc150fbdf15dbf1877">More...</a><br /></td></tr>
+<tr class="separator:aa560217a33a9a9bc150fbdf15dbf1877"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1558b409285aea617f4abf7d3a64b3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#ab1558b409285aea617f4abf7d3a64b3d">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:ab1558b409285aea617f4abf7d3a64b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebuild the meshes of Lagrange multiplier and drag elements.  <a href="classUnstructuredImmersedEllipseProblem.html#ab1558b409285aea617f4abf7d3a64b3d">More...</a><br /></td></tr>
+<tr class="separator:ab1558b409285aea617f4abf7d3a64b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa51876a2af9dd7640ff1f5a434804bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#afa51876a2af9dd7640ff1f5a434804bf">actions_before_newton_convergence_check</a> ()</td></tr>
+<tr class="memdesc:afa51876a2af9dd7640ff1f5a434804bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-apply the no slip condition (imposed indirectly via dependent velocities)  <a href="classUnstructuredImmersedEllipseProblem.html#afa51876a2af9dd7640ff1f5a434804bf">More...</a><br /></td></tr>
+<tr class="separator:afa51876a2af9dd7640ff1f5a434804bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42b13e3306ff2a94053907644ba17c8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a42b13e3306ff2a94053907644ba17c8d">complete_problem_setup</a> ()</td></tr>
+<tr class="memdesc:a42b13e3306ff2a94053907644ba17c8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set boundary condition, assign auxiliary node update fct. Complete the build of all elements, attach power elements that allow computation of drag vector.  <a href="classUnstructuredImmersedEllipseProblem.html#a42b13e3306ff2a94053907644ba17c8d">More...</a><br /></td></tr>
+<tr class="separator:a42b13e3306ff2a94053907644ba17c8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab201b187b240105fd8d444d943f6dada"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#ab201b187b240105fd8d444d943f6dada">set_boundary_velocity</a> ()</td></tr>
+<tr class="memdesc:ab201b187b240105fd8d444d943f6dada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the boundary velocity.  <a href="classUnstructuredImmersedEllipseProblem.html#ab201b187b240105fd8d444d943f6dada">More...</a><br /></td></tr>
+<tr class="separator:ab201b187b240105fd8d444d943f6dada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a88b40ff1988de0fc696f1eb755ea54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a2a88b40ff1988de0fc696f1eb755ea54">solve_for_consistent_nodal_positions</a> ()</td></tr>
+<tr class="memdesc:a2a88b40ff1988de0fc696f1eb755ea54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that solves a simplified problem to ensure that the positions of the boundary nodes are initially consistent with the lagrange multiplier formulation.  <a href="classUnstructuredImmersedEllipseProblem.html#a2a88b40ff1988de0fc696f1eb755ea54">More...</a><br /></td></tr>
+<tr class="separator:a2a88b40ff1988de0fc696f1eb755ea54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e12dd83c98f96e14e8152cc758d398"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a08e12dd83c98f96e14e8152cc758d398">doc_solution</a> (const bool &amp;project=false)</td></tr>
+<tr class="memdesc:a08e12dd83c98f96e14e8152cc758d398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <a href="classUnstructuredImmersedEllipseProblem.html#a08e12dd83c98f96e14e8152cc758d398">More...</a><br /></td></tr>
+<tr class="separator:a08e12dd83c98f96e14e8152cc758d398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29a232dfac18ea901332bebdc14fad15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a29a232dfac18ea901332bebdc14fad15">output_exact_solution</a> (std::ofstream &amp;output_file)</td></tr>
+<tr class="memdesc:a29a232dfac18ea901332bebdc14fad15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the exact solution.  <a href="classUnstructuredImmersedEllipseProblem.html#a29a232dfac18ea901332bebdc14fad15">More...</a><br /></td></tr>
+<tr class="separator:a29a232dfac18ea901332bebdc14fad15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a3b4a4e279a11b37d79d040b348008765"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a3b4a4e279a11b37d79d040b348008765">create_lagrange_multiplier_elements</a> ()</td></tr>
+<tr class="memdesc:a3b4a4e279a11b37d79d040b348008765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create elements that enforce prescribed boundary motion for the pseudo-solid fluid mesh by Lagrange multipliers.  <a href="classUnstructuredImmersedEllipseProblem.html#a3b4a4e279a11b37d79d040b348008765">More...</a><br /></td></tr>
+<tr class="separator:a3b4a4e279a11b37d79d040b348008765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51555f77dc360c94591ee68c3fc9928a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a51555f77dc360c94591ee68c3fc9928a">delete_lagrange_multiplier_elements</a> ()</td></tr>
+<tr class="memdesc:a51555f77dc360c94591ee68c3fc9928a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete elements that impose the prescribed boundary displacement and wipe the associated mesh.  <a href="classUnstructuredImmersedEllipseProblem.html#a51555f77dc360c94591ee68c3fc9928a">More...</a><br /></td></tr>
+<tr class="separator:a51555f77dc360c94591ee68c3fc9928a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a7c6022867f709ebdd59b8fee2004a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a16a7c6022867f709ebdd59b8fee2004a">create_drag_elements</a> ()</td></tr>
+<tr class="memdesc:a16a7c6022867f709ebdd59b8fee2004a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create elements that calculate the drag and torque on the boundaries.  <a href="classUnstructuredImmersedEllipseProblem.html#a16a7c6022867f709ebdd59b8fee2004a">More...</a><br /></td></tr>
+<tr class="separator:a16a7c6022867f709ebdd59b8fee2004a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d7b84968988d37091b29957b0af5bfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a7d7b84968988d37091b29957b0af5bfa">delete_drag_elements</a> ()</td></tr>
+<tr class="memdesc:a7d7b84968988d37091b29957b0af5bfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete elements that calculate the drag and torque on the boundaries.  <a href="classUnstructuredImmersedEllipseProblem.html#a7d7b84968988d37091b29957b0af5bfa">More...</a><br /></td></tr>
+<tr class="separator:a7d7b84968988d37091b29957b0af5bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07dc16909c0223fe4b656fd270f27c11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a07dc16909c0223fe4b656fd270f27c11">pin_rigid_body</a> ()</td></tr>
+<tr class="memdesc:a07dc16909c0223fe4b656fd270f27c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin the degrees of freedom associated with the solid bodies.  <a href="classUnstructuredImmersedEllipseProblem.html#a07dc16909c0223fe4b656fd270f27c11">More...</a><br /></td></tr>
+<tr class="separator:a07dc16909c0223fe4b656fd270f27c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f8c7e7e4d626084f6515a152b165567"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a4f8c7e7e4d626084f6515a152b165567">unpin_rigid_body</a> ()</td></tr>
+<tr class="memdesc:a4f8c7e7e4d626084f6515a152b165567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpin the degrees of freedom associated with the solid bodies.  <a href="classUnstructuredImmersedEllipseProblem.html#a4f8c7e7e4d626084f6515a152b165567">More...</a><br /></td></tr>
+<tr class="separator:a4f8c7e7e4d626084f6515a152b165567"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad644e67ccd6ab0811c5fe2b7b944fbca"><td class="memItemLeft" align="right" valign="top">SolidMesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#ad644e67ccd6ab0811c5fe2b7b944fbca">Lagrange_multiplier_mesh_pt</a></td></tr>
+<tr class="memdesc:ad644e67ccd6ab0811c5fe2b7b944fbca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointers to mesh of Lagrange multiplier elements.  <a href="classUnstructuredImmersedEllipseProblem.html#ad644e67ccd6ab0811c5fe2b7b944fbca">More...</a><br /></td></tr>
+<tr class="separator:ad644e67ccd6ab0811c5fe2b7b944fbca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ba79ccde26b781b66d9839460f08bd3"><td class="memItemLeft" align="right" valign="top">RefineableSolidTriangleMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a0ba79ccde26b781b66d9839460f08bd3">Fluid_mesh_pt</a></td></tr>
+<tr class="memdesc:a0ba79ccde26b781b66d9839460f08bd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Fluid_mesh.  <a href="classUnstructuredImmersedEllipseProblem.html#a0ba79ccde26b781b66d9839460f08bd3">More...</a><br /></td></tr>
+<tr class="separator:a0ba79ccde26b781b66d9839460f08bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0b35188432c371804887b6de86b48c7"><td class="memItemLeft" align="right" valign="top">TriangleMeshPolygon *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#ae0b35188432c371804887b6de86b48c7">Outer_boundary_polygon_pt</a></td></tr>
+<tr class="memdesc:ae0b35188432c371804887b6de86b48c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triangle mesh polygon for outer boundary.  <a href="classUnstructuredImmersedEllipseProblem.html#ae0b35188432c371804887b6de86b48c7">More...</a><br /></td></tr>
+<tr class="separator:ae0b35188432c371804887b6de86b48c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b4d04277b1f42c9428b610968f6f10d"><td class="memItemLeft" align="right" valign="top">Vector&lt; Mesh * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a9b4d04277b1f42c9428b610968f6f10d">Drag_mesh_pt</a></td></tr>
+<tr class="memdesc:a9b4d04277b1f42c9428b610968f6f10d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh of drag elements.  <a href="classUnstructuredImmersedEllipseProblem.html#a9b4d04277b1f42c9428b610968f6f10d">More...</a><br /></td></tr>
+<tr class="separator:a9b4d04277b1f42c9428b610968f6f10d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34f1376227d4b995678eedd77813388b"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a34f1376227d4b995678eedd77813388b">Rigid_body_mesh_pt</a></td></tr>
+<tr class="memdesc:a34f1376227d4b995678eedd77813388b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh of the generalised elements for the rigid bodies.  <a href="classUnstructuredImmersedEllipseProblem.html#a34f1376227d4b995678eedd77813388b">More...</a><br /></td></tr>
+<tr class="separator:a34f1376227d4b995678eedd77813388b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa6d1c19f3634a6f08f3dd7e5046217e"><td class="memItemLeft" align="right" valign="top">Vector&lt; GeomObject * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#aaa6d1c19f3634a6f08f3dd7e5046217e">Rigid_body_pt</a></td></tr>
+<tr class="memdesc:aaa6d1c19f3634a6f08f3dd7e5046217e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the geom object.  <a href="classUnstructuredImmersedEllipseProblem.html#aaa6d1c19f3634a6f08f3dd7e5046217e">More...</a><br /></td></tr>
+<tr class="separator:aaa6d1c19f3634a6f08f3dd7e5046217e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c463ed904f01e6466baae0533c79780"><td class="memItemLeft" align="right" valign="top">DocInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a1c463ed904f01e6466baae0533c79780">Doc_info</a></td></tr>
+<tr class="memdesc:a1c463ed904f01e6466baae0533c79780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal DocInfo object.  <a href="classUnstructuredImmersedEllipseProblem.html#a1c463ed904f01e6466baae0533c79780">More...</a><br /></td></tr>
+<tr class="separator:a1c463ed904f01e6466baae0533c79780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71a3b24b610e05f7be916c4214dab8dc"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a71a3b24b610e05f7be916c4214dab8dc">Norm_file</a></td></tr>
+<tr class="memdesc:a71a3b24b610e05f7be916c4214dab8dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">File to document the norm of the solution (for validation purposes)  <a href="classUnstructuredImmersedEllipseProblem.html#a71a3b24b610e05f7be916c4214dab8dc">More...</a><br /></td></tr>
+<tr class="separator:a71a3b24b610e05f7be916c4214dab8dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd1e8ec8e510f029f449f13dfdebbc99"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#acd1e8ec8e510f029f449f13dfdebbc99">Cog_file</a></td></tr>
+<tr class="memdesc:acd1e8ec8e510f029f449f13dfdebbc99"><td class="mdescLeft">&#160;</td><td class="mdescRight">File to document the motion of the centre of gravity.  <a href="classUnstructuredImmersedEllipseProblem.html#acd1e8ec8e510f029f449f13dfdebbc99">More...</a><br /></td></tr>
+<tr class="separator:acd1e8ec8e510f029f449f13dfdebbc99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dc1ec2e066466a6f228864b873d95fa"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredImmersedEllipseProblem.html#a3dc1ec2e066466a6f228864b873d95fa">Cog_exact_file</a></td></tr>
+<tr class="memdesc:a3dc1ec2e066466a6f228864b873d95fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">File to document the exact motion of the centre of gravity.  <a href="classUnstructuredImmersedEllipseProblem.html#a3dc1ec2e066466a6f228864b873d95fa">More...</a><br /></td></tr>
+<tr class="separator:a3dc1ec2e066466a6f228864b873d95fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class UnstructuredImmersedEllipseProblem&lt; ELEMENT &gt;</h3>
+
+<p>Unstructured Navier-Stokes ALE Problem for a rigid ellipse immersed within a viscous fluid </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00193">193</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a544a35f261200bb4a4e29a88faa1a69c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a544a35f261200bb4a4e29a88faa1a69c">&#9670;&nbsp;</a></span>UnstructuredImmersedEllipseProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Constructor: Open output files, construct time steppers, build fluid mesh, immersed rigid body and combine to form the problem </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00306">306</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="jeffery__orbit_8cc_source.html#l00068">Problem_Parameter::A</a>, <a class="el" href="jeffery__orbit_8cc_source.html#l00072">Problem_Parameter::B</a>, <a class="el" href="jeffery__orbit_8cc_source.html#l00065">Problem_Parameter::Density_ratio</a>, <a class="el" href="jeffery__orbit_8cc_source.html#l00059">Problem_Parameter::Re</a>, <a class="el" href="jeffery__orbit_8cc_source.html#l00062">Problem_Parameter::St</a>, and <a class="el" href="jeffery__orbit_8txt.html#a4e766b209b7fbcc1bf8cd431947fa412">time_stepper_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a84cdf81be59fc646eb4d5b3bc0ff4280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84cdf81be59fc646eb4d5b3bc0ff4280">&#9670;&nbsp;</a></span>~UnstructuredImmersedEllipseProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+<p>Destructor that cleans up memory and closes files. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00553">553</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="jeffery__orbit_8cc_source.html#l00082">Problem_Parameter::Constitutive_law_pt</a>, and <a class="el" href="jeffery__orbit_8txt.html#a4e766b209b7fbcc1bf8cd431947fa412">time_stepper_pt()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab1558b409285aea617f4abf7d3a64b3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1558b409285aea617f4abf7d3a64b3d">&#9670;&nbsp;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::actions_after_adapt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rebuild the meshes of Lagrange multiplier and drag elements. </p>
+<p>Actions after adapt: Rebuild the mesh of Lagrange multiplier elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00618">618</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa560217a33a9a9bc150fbdf15dbf1877"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa560217a33a9a9bc150fbdf15dbf1877">&#9670;&nbsp;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::actions_before_adapt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wipe the meshes of Lagrange multiplier and drag elements. </p>
+<p>Actions before adapt: Wipe the mesh of Lagrange multiplier elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00597">597</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a368c412c4c9a9e9403b4e67d3582e3a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a368c412c4c9a9e9403b4e67d3582e3a5">&#9670;&nbsp;</a></span>actions_before_implicit_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::actions_before_implicit_timestep </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reset the boundary conditions when timestepping. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00205">205</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="afa51876a2af9dd7640ff1f5a434804bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa51876a2af9dd7640ff1f5a434804bf">&#9670;&nbsp;</a></span>actions_before_newton_convergence_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::actions_before_newton_convergence_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Re-apply the no slip condition (imposed indirectly via dependent velocities) </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00218">218</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a42b13e3306ff2a94053907644ba17c8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42b13e3306ff2a94053907644ba17c8d">&#9670;&nbsp;</a></span>complete_problem_setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::complete_problem_setup</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set boundary condition, assign auxiliary node update fct. Complete the build of all elements, attach power elements that allow computation of drag vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00654">654</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="jeffery__orbit_8cc_source.html#l00082">Problem_Parameter::Constitutive_law_pt</a>, <a class="el" href="jeffery__orbit_8cc_source.html#l00079">Problem_Parameter::Lambda_sq</a>, and <a class="el" href="jeffery__orbit_8cc_source.html#l00059">Problem_Parameter::Re</a>.</p>
+
+</div>
+</div>
+<a id="a16a7c6022867f709ebdd59b8fee2004a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16a7c6022867f709ebdd59b8fee2004a">&#9670;&nbsp;</a></span>create_drag_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::create_drag_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create elements that calculate the drag and torque on the boundaries. </p>
+<p>Create elements that calculate the drag and torque on the obstacles in the fluid mesh </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l01006">1006</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3b4a4e279a11b37d79d040b348008765"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b4a4e279a11b37d79d040b348008765">&#9670;&nbsp;</a></span>create_lagrange_multiplier_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::create_lagrange_multiplier_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create elements that enforce prescribed boundary motion for the pseudo-solid fluid mesh by Lagrange multipliers. </p>
+<p>Create elements that impose the prescribed boundary displacement for the pseudo-solid fluid mesh </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00898">898</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a7d7b84968988d37091b29957b0af5bfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d7b84968988d37091b29957b0af5bfa">&#9670;&nbsp;</a></span>delete_drag_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::delete_drag_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete elements that calculate the drag and torque on the boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l01079">1079</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a51555f77dc360c94591ee68c3fc9928a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51555f77dc360c94591ee68c3fc9928a">&#9670;&nbsp;</a></span>delete_lagrange_multiplier_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::delete_lagrange_multiplier_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete elements that impose the prescribed boundary displacement and wipe the associated mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00981">981</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a08e12dd83c98f96e14e8152cc758d398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08e12dd83c98f96e14e8152cc758d398">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>project</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l01106">1106</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a29a232dfac18ea901332bebdc14fad15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29a232dfac18ea901332bebdc14fad15">&#9670;&nbsp;</a></span>output_exact_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::output_exact_solution </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>output_file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Output the exact solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l01183">1183</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="jeffery__orbit_8cc_source.html#l00120">Jeffery_Solution::acceleration()</a>, <a class="el" href="jeffery__orbit_8cc_source.html#l00098">Jeffery_Solution::angle()</a>, and <a class="el" href="jeffery__orbit_8cc_source.html#l00107">Jeffery_Solution::velocity()</a>.</p>
+
+</div>
+</div>
+<a id="a07dc16909c0223fe4b656fd270f27c11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07dc16909c0223fe4b656fd270f27c11">&#9670;&nbsp;</a></span>pin_rigid_body()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::pin_rigid_body</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pin the degrees of freedom associated with the solid bodies. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00824">824</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab201b187b240105fd8d444d943f6dada"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab201b187b240105fd8d444d943f6dada">&#9670;&nbsp;</a></span>set_boundary_velocity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::set_boundary_velocity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the boundary velocity. </p>
+<p>Set the boundary velocity for current and history values. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00737">737</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2a88b40ff1988de0fc696f1eb755ea54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a88b40ff1988de0fc696f1eb755ea54">&#9670;&nbsp;</a></span>solve_for_consistent_nodal_positions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::solve_for_consistent_nodal_positions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that solves a simplified problem to ensure that the positions of the boundary nodes are initially consistent with the lagrange multiplier formulation. </p>
+<p>Assemble and solve a simplified problem that ensures that the positions of the boundary nodes are consistent with the weak imposition of the displacement boundary conditions on the surface of the ellipse. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00864">864</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="jeffery__orbit_8cc_source.html#l01198">main()</a>.</p>
+
+</div>
+</div>
+<a id="a4f8c7e7e4d626084f6515a152b165567"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f8c7e7e4d626084f6515a152b165567">&#9670;&nbsp;</a></span>unpin_rigid_body()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::unpin_rigid_body</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unpin the degrees of freedom associated with the solid bodies. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00842">842</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a3dc1ec2e066466a6f228864b873d95fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dc1ec2e066466a6f228864b873d95fa">&#9670;&nbsp;</a></span>Cog_exact_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Cog_exact_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>File to document the exact motion of the centre of gravity. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00295">295</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="acd1e8ec8e510f029f449f13dfdebbc99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd1e8ec8e510f029f449f13dfdebbc99">&#9670;&nbsp;</a></span>Cog_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Cog_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>File to document the motion of the centre of gravity. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00292">292</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a1c463ed904f01e6466baae0533c79780"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c463ed904f01e6466baae0533c79780">&#9670;&nbsp;</a></span>Doc_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DocInfo <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Doc_info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal DocInfo object. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00286">286</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a9b4d04277b1f42c9428b610968f6f10d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b4d04277b1f42c9428b610968f6f10d">&#9670;&nbsp;</a></span>Drag_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;Mesh*&gt; <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Drag_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mesh of drag elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00277">277</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0ba79ccde26b781b66d9839460f08bd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ba79ccde26b781b66d9839460f08bd3">&#9670;&nbsp;</a></span>Fluid_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableSolidTriangleMesh&lt;ELEMENT&gt;* <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Fluid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to Fluid_mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00271">271</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="ad644e67ccd6ab0811c5fe2b7b944fbca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad644e67ccd6ab0811c5fe2b7b944fbca">&#9670;&nbsp;</a></span>Lagrange_multiplier_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SolidMesh* <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Lagrange_multiplier_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointers to mesh of Lagrange multiplier elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00268">268</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a71a3b24b610e05f7be916c4214dab8dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71a3b24b610e05f7be916c4214dab8dc">&#9670;&nbsp;</a></span>Norm_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Norm_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>File to document the norm of the solution (for validation purposes) </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00289">289</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae0b35188432c371804887b6de86b48c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0b35188432c371804887b6de86b48c7">&#9670;&nbsp;</a></span>Outer_boundary_polygon_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TriangleMeshPolygon* <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Outer_boundary_polygon_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Triangle mesh polygon for outer boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00274">274</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="a34f1376227d4b995678eedd77813388b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34f1376227d4b995678eedd77813388b">&#9670;&nbsp;</a></span>Rigid_body_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Rigid_body_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mesh of the generalised elements for the rigid bodies. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00280">280</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<a id="aaa6d1c19f3634a6f08f3dd7e5046217e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6d1c19f3634a6f08f3dd7e5046217e">&#9670;&nbsp;</a></span>Rigid_body_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;GeomObject*&gt; <a class="el" href="classUnstructuredImmersedEllipseProblem.html">UnstructuredImmersedEllipseProblem</a>&lt; ELEMENT &gt;::Rigid_body_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the geom object. </p>
+
+<p class="definition">Definition at line <a class="el" href="jeffery__orbit_8cc_source.html#l00283">283</a> of file <a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="jeffery__orbit_8cc_source.html">jeffery_orbit.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:11:56
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

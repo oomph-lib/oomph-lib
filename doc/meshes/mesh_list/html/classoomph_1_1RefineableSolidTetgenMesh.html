@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RefineableSolidTetgenMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html">RefineableSolidTetgenMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1RefineableSolidTetgenMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::RefineableSolidTetgenMesh&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="refineable__tetgen__mesh_8template_8h_source.html">refineable_tetgen_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::RefineableSolidTetgenMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1RefineableSolidTetgenMesh.png" usemap="#oomph::RefineableSolidTetgenMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::RefineableSolidTetgenMesh_3C_20ELEMENT_20_3E_map" name="oomph::RefineableSolidTetgenMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1RefineableTetgenMesh.html" alt="oomph::RefineableTetgenMesh&lt; ELEMENT &gt;" shape="rect" coords="152,112,446,136"/>
+<area href="classoomph_1_1TetgenMesh.html" title="Unstructured tet mesh based on output from Tetgen: http://wias-berlin.de/software/tetgen/." alt="oomph::TetgenMesh&lt; ELEMENT &gt;" shape="rect" coords="0,56,294,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a41ce4d45bdd2bacc45218f51cdd8f651"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html#a41ce4d45bdd2bacc45218f51cdd8f651">RefineableSolidTetgenMesh</a> (TetMeshFacetedClosedSurface *const &amp;outer_boundary_pt, Vector&lt; TetMeshFacetedSurface * &gt; &amp;internal_closed_surface_pt, const double &amp;element_volume, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false, const bool &amp;split_corner_elements=false)</td></tr>
+<tr class="memdesc:a41ce4d45bdd2bacc45218f51cdd8f651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh, based on closed curve that specifies the outer boundary of the domain and any number of internal closed curves. Specify target area for uniform element size.  <a href="classoomph_1_1RefineableSolidTetgenMesh.html#a41ce4d45bdd2bacc45218f51cdd8f651">More...</a><br /></td></tr>
+<tr class="separator:a41ce4d45bdd2bacc45218f51cdd8f651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a316eeacca5760fb6517732ff93072a3f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html#a316eeacca5760fb6517732ff93072a3f">RefineableSolidTetgenMesh</a> (const Vector&lt; double &gt; &amp;target_volume, tetgenio *const &amp;tetgen_io_pt, TetMeshFacetedClosedSurface *const &amp;outer_boundary_pt, Vector&lt; TetMeshFacetedSurface * &gt; &amp;internal_surface_pt, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:a316eeacca5760fb6517732ff93072a3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh from specified triangulation and associated target areas for elements in it.  <a href="classoomph_1_1RefineableSolidTetgenMesh.html#a316eeacca5760fb6517732ff93072a3f">More...</a><br /></td></tr>
+<tr class="separator:a316eeacca5760fb6517732ff93072a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8386e0befb5c197208918f7f43265974"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html#a8386e0befb5c197208918f7f43265974">~RefineableSolidTetgenMesh</a> ()</td></tr>
+<tr class="memdesc:a8386e0befb5c197208918f7f43265974"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor.  <a href="classoomph_1_1RefineableSolidTetgenMesh.html#a8386e0befb5c197208918f7f43265974">More...</a><br /></td></tr>
+<tr class="separator:a8386e0befb5c197208918f7f43265974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1RefineableTetgenMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1RefineableTetgenMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:ada94219c3458198308cae44387887de8 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#ada94219c3458198308cae44387887de8">RefineableTetgenMesh</a> (TetMeshFacetedClosedSurface *const &amp;outer_boundary_pt, Vector&lt; TetMeshFacetedSurface * &gt; &amp;internal_closed_surface_pt, const double &amp;element_volume, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false, const bool &amp;split_corner_elements=false)</td></tr>
+<tr class="memdesc:ada94219c3458198308cae44387887de8 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh, based on a TetMeshFacetedClosedSurface that specifies the outer boundary of the domain and any number of internal closed curves, specified by TetMeshFacetedSurfaces. Also specify target volume for uniform element size.  <a href="classoomph_1_1RefineableTetgenMesh.html#ada94219c3458198308cae44387887de8">More...</a><br /></td></tr>
+<tr class="separator:ada94219c3458198308cae44387887de8 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ac6c6961647d0f332a6742f52dd27d inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#ac2ac6c6961647d0f332a6742f52dd27d">~RefineableTetgenMesh</a> ()</td></tr>
+<tr class="memdesc:ac2ac6c6961647d0f332a6742f52dd27d inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor.  <a href="classoomph_1_1RefineableTetgenMesh.html#ac2ac6c6961647d0f332a6742f52dd27d">More...</a><br /></td></tr>
+<tr class="separator:ac2ac6c6961647d0f332a6742f52dd27d inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ddc94b2545c82bfb2795583f9b98db2 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a5ddc94b2545c82bfb2795583f9b98db2">refine_uniformly</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a5ddc94b2545c82bfb2795583f9b98db2 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refine mesh uniformly and doc process.  <a href="classoomph_1_1RefineableTetgenMesh.html#a5ddc94b2545c82bfb2795583f9b98db2">More...</a><br /></td></tr>
+<tr class="separator:a5ddc94b2545c82bfb2795583f9b98db2 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add609c3184ffa1786e183f4c6dc24a57 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#add609c3184ffa1786e183f4c6dc24a57">unrefine_uniformly</a> ()</td></tr>
+<tr class="memdesc:add609c3184ffa1786e183f4c6dc24a57 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unrefine mesh uniformly: Return 0 for success, 1 for failure (if unrefinement has reached the coarsest permitted level)  <a href="classoomph_1_1RefineableTetgenMesh.html#add609c3184ffa1786e183f4c6dc24a57">More...</a><br /></td></tr>
+<tr class="separator:add609c3184ffa1786e183f4c6dc24a57 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad75ff5f1e088e611311c3f6a30feea5b inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#ad75ff5f1e088e611311c3f6a30feea5b">adapt</a> (const Vector&lt; double &gt; &amp;elem_error)</td></tr>
+<tr class="memdesc:ad75ff5f1e088e611311c3f6a30feea5b inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapt mesh, based on elemental error provided.  <a href="classoomph_1_1RefineableTetgenMesh.html#ad75ff5f1e088e611311c3f6a30feea5b">More...</a><br /></td></tr>
+<tr class="separator:ad75ff5f1e088e611311c3f6a30feea5b inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c2bb21844f02403fa687fefc55ba5ad inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a3c2bb21844f02403fa687fefc55ba5ad">projection_is_disabled</a> ()</td></tr>
+<tr class="memdesc:a3c2bb21844f02403fa687fefc55ba5ad inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is projection of old solution onto new mesh disabled?  <a href="classoomph_1_1RefineableTetgenMesh.html#a3c2bb21844f02403fa687fefc55ba5ad">More...</a><br /></td></tr>
+<tr class="separator:a3c2bb21844f02403fa687fefc55ba5ad inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5342732d4a4e715a443688a53801c00 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#af5342732d4a4e715a443688a53801c00">disable_projection</a> ()</td></tr>
+<tr class="memdesc:af5342732d4a4e715a443688a53801c00 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable projection of old solution onto new mesh.  <a href="classoomph_1_1RefineableTetgenMesh.html#af5342732d4a4e715a443688a53801c00">More...</a><br /></td></tr>
+<tr class="separator:af5342732d4a4e715a443688a53801c00 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fabe6ae591918c313213fd0528e21d1 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a7fabe6ae591918c313213fd0528e21d1">enable_projection</a> ()</td></tr>
+<tr class="memdesc:a7fabe6ae591918c313213fd0528e21d1 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable projection of old solution onto new mesh.  <a href="classoomph_1_1RefineableTetgenMesh.html#a7fabe6ae591918c313213fd0528e21d1">More...</a><br /></td></tr>
+<tr class="separator:a7fabe6ae591918c313213fd0528e21d1 inherit pub_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1TetgenMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1TetgenMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a2d2c7796e578f9fed1faf17569893531 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a2d2c7796e578f9fed1faf17569893531">TetgenMesh</a> ()</td></tr>
+<tr class="memdesc:a2d2c7796e578f9fed1faf17569893531 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="classoomph_1_1TetgenMesh.html#a2d2c7796e578f9fed1faf17569893531">More...</a><br /></td></tr>
+<tr class="separator:a2d2c7796e578f9fed1faf17569893531 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10976b817c361f04da4ce996bd019c02 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a10976b817c361f04da4ce996bd019c02">TetgenMesh</a> (const std::string &amp;node_file_name, const std::string &amp;element_file_name, const std::string &amp;face_file_name, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:a10976b817c361f04da4ce996bd019c02 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with the input files.  <a href="classoomph_1_1TetgenMesh.html#a10976b817c361f04da4ce996bd019c02">More...</a><br /></td></tr>
+<tr class="separator:a10976b817c361f04da4ce996bd019c02 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace863f736d0dfa0a059b28959fced51d inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ace863f736d0dfa0a059b28959fced51d">TetgenMesh</a> (tetgenio &amp;tetgen_data, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:ace863f736d0dfa0a059b28959fced51d inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with tetgenio data structure.  <a href="classoomph_1_1TetgenMesh.html#ace863f736d0dfa0a059b28959fced51d">More...</a><br /></td></tr>
+<tr class="separator:ace863f736d0dfa0a059b28959fced51d inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867b3f70bd0f5063901720d04f28e95e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a867b3f70bd0f5063901720d04f28e95e">TetgenMesh</a> (const std::string &amp;node_file_name, const std::string &amp;element_file_name, const std::string &amp;face_file_name, const bool &amp;split_corner_elements, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:a867b3f70bd0f5063901720d04f28e95e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with the input files. Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
+  <a href="classoomph_1_1TetgenMesh.html#a867b3f70bd0f5063901720d04f28e95e">More...</a><br /></td></tr>
+<tr class="separator:a867b3f70bd0f5063901720d04f28e95e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa783641ea515a942941425c468df01 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a0fa783641ea515a942941425c468df01">TetgenMesh</a> (tetgenio &amp;tetgen_data, const bool &amp;split_corner_elements, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:a0fa783641ea515a942941425c468df01 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with tetgen data structure Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
+  <a href="classoomph_1_1TetgenMesh.html#a0fa783641ea515a942941425c468df01">More...</a><br /></td></tr>
+<tr class="separator:a0fa783641ea515a942941425c468df01 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eb01196bfadb426bb926f34f50261d6 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a5eb01196bfadb426bb926f34f50261d6">TetgenMesh</a> (TetMeshFacetedClosedSurface *const &amp;outer_boundary_pt, Vector&lt; TetMeshFacetedSurface * &gt; &amp;internal_surface_pt, const double &amp;element_volume, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false, const bool &amp;split_corner_elements=false)</td></tr>
+<tr class="memdesc:a5eb01196bfadb426bb926f34f50261d6 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh, based on a TetgenMeshFactedClosedSurface that specifies the outer boundary of the domain and any number of internal boundaries, specified by TetMeshFacetedSurfaces. Also specify target size for uniform element size.  <a href="classoomph_1_1TetgenMesh.html#a5eb01196bfadb426bb926f34f50261d6">More...</a><br /></td></tr>
+<tr class="separator:a5eb01196bfadb426bb926f34f50261d6 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab730bd5c3d87754b679c284fd37733ff inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ab730bd5c3d87754b679c284fd37733ff">build_tetgenio</a> (TetMeshFacetedSurface *const &amp;outer_boundary_pt, Vector&lt; TetMeshFacetedSurface * &gt; &amp;internal_surface_pt, tetgenio &amp;tetgen_io)</td></tr>
+<tr class="memdesc:ab730bd5c3d87754b679c284fd37733ff inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build tetgenio object from the TetMeshFacetedSurfaces.  <a href="classoomph_1_1TetgenMesh.html#ab730bd5c3d87754b679c284fd37733ff">More...</a><br /></td></tr>
+<tr class="separator:ab730bd5c3d87754b679c284fd37733ff inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a83c64b6481463161f6eb87f347ee9e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a9a83c64b6481463161f6eb87f347ee9e">~TetgenMesh</a> ()</td></tr>
+<tr class="memdesc:a9a83c64b6481463161f6eb87f347ee9e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <a href="classoomph_1_1TetgenMesh.html#a9a83c64b6481463161f6eb87f347ee9e">More...</a><br /></td></tr>
+<tr class="separator:a9a83c64b6481463161f6eb87f347ee9e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c0441ea7404e7ea404979955ffbb5dd inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a9c0441ea7404e7ea404979955ffbb5dd">set_mesh_level_time_stepper</a> (TimeStepper *const &amp;time_stepper_pt, const bool &amp;preserve_existing_data)</td></tr>
+<tr class="memdesc:a9c0441ea7404e7ea404979955ffbb5dd inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload set_mesh_level_time_stepper so that the stored time stepper now corresponds to the new timestepper.  <a href="classoomph_1_1TetgenMesh.html#a9c0441ea7404e7ea404979955ffbb5dd">More...</a><br /></td></tr>
+<tr class="separator:a9c0441ea7404e7ea404979955ffbb5dd inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab19209f141e65511a52f195d89d6ac inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#aeab19209f141e65511a52f195d89d6ac">tetgenio_exists</a> () const</td></tr>
+<tr class="memdesc:aeab19209f141e65511a52f195d89d6ac inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolen defining whether tetgenio object has been built or not.  <a href="classoomph_1_1TetgenMesh.html#aeab19209f141e65511a52f195d89d6ac">More...</a><br /></td></tr>
+<tr class="separator:aeab19209f141e65511a52f195d89d6ac inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47071bb8a8c0df965a5e013f0a8fb1ba inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">tetgenio *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a47071bb8a8c0df965a5e013f0a8fb1ba">tetgenio_pt</a> ()</td></tr>
+<tr class="memdesc:a47071bb8a8c0df965a5e013f0a8fb1ba inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the triangulateio representation of the mesh.  <a href="classoomph_1_1TetgenMesh.html#a47071bb8a8c0df965a5e013f0a8fb1ba">More...</a><br /></td></tr>
+<tr class="separator:a47071bb8a8c0df965a5e013f0a8fb1ba inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8758320eb646d20b578414c35145f0d7 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a8758320eb646d20b578414c35145f0d7">set_deep_copy_tetgenio_pt</a> (tetgenio *const &amp;<a class="el" href="classoomph_1_1TetgenMesh.html#a47071bb8a8c0df965a5e013f0a8fb1ba">tetgenio_pt</a>)</td></tr>
+<tr class="memdesc:a8758320eb646d20b578414c35145f0d7 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the tetgen pointer by a deep copy.  <a href="classoomph_1_1TetgenMesh.html#a8758320eb646d20b578414c35145f0d7">More...</a><br /></td></tr>
+<tr class="separator:a8758320eb646d20b578414c35145f0d7 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93e764a63a21a93d4a2548058eb1a7c4 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a93e764a63a21a93d4a2548058eb1a7c4">deep_copy_of_tetgenio</a> (tetgenio *const &amp;input_pt, tetgenio *&amp;output_pt)</td></tr>
+<tr class="separator:a93e764a63a21a93d4a2548058eb1a7c4 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1RefineableTetgenMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1RefineableTetgenMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:ae1cdeb38e28b0840cc3b53d76f353e89 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#ae1cdeb38e28b0840cc3b53d76f353e89">RefineableTetgenMesh</a> (const Vector&lt; double &gt; &amp;target_volume, tetgenio *const &amp;tetgen_io_pt, TetMeshFacetedClosedSurface *const &amp;outer_boundary_pt, Vector&lt; TetMeshFacetedSurface * &gt; &amp;internal_surface_pt, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:ae1cdeb38e28b0840cc3b53d76f353e89 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialised constructor used during adaptation only. Element sizes are specified by vector tetgen_io is passed in from previous mesh (is then modified to build new mesh) Ditto with use_attributes, which comes from the previous mesh.  <a href="classoomph_1_1RefineableTetgenMesh.html#ae1cdeb38e28b0840cc3b53d76f353e89">More...</a><br /></td></tr>
+<tr class="separator:ae1cdeb38e28b0840cc3b53d76f353e89 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78ed78a656617d294c73118eda904253 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a78ed78a656617d294c73118eda904253">initialise_adaptation_data</a> ()</td></tr>
+<tr class="memdesc:a78ed78a656617d294c73118eda904253 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to initialise data associated with adaptation.  <a href="classoomph_1_1RefineableTetgenMesh.html#a78ed78a656617d294c73118eda904253">More...</a><br /></td></tr>
+<tr class="separator:a78ed78a656617d294c73118eda904253 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48331c4310ecbad71e98b482d0d3ea0c inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a48331c4310ecbad71e98b482d0d3ea0c">update_faceted_surface_using_face_mesh</a> (TetMeshFacetedSurface *&amp;faceted_surface_pt)</td></tr>
+<tr class="memdesc:a48331c4310ecbad71e98b482d0d3ea0c inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that updates the input faceted surface by using the flattened elements from FaceMesh(es) that are constructed for the boundaries associated with the segments of the polygon.  <a href="classoomph_1_1RefineableTetgenMesh.html#a48331c4310ecbad71e98b482d0d3ea0c">More...</a><br /></td></tr>
+<tr class="separator:a48331c4310ecbad71e98b482d0d3ea0c inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a001c3ff513cabdfbd67c65bd97ebb768 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a001c3ff513cabdfbd67c65bd97ebb768">surface_remesh_for_inner_hole_boundaries</a> ()</td></tr>
+<tr class="memdesc:a001c3ff513cabdfbd67c65bd97ebb768 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a new faceted representation of the inner hole boundaries.  <a href="classoomph_1_1RefineableTetgenMesh.html#a001c3ff513cabdfbd67c65bd97ebb768">More...</a><br /></td></tr>
+<tr class="separator:a001c3ff513cabdfbd67c65bd97ebb768 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf9eea5998765dc36b96a2050db3e1e3 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#acf9eea5998765dc36b96a2050db3e1e3">snap_nodes_onto_boundary</a> (<a class="el" href="classoomph_1_1RefineableTetgenMesh.html">RefineableTetgenMesh</a>&lt; ELEMENT &gt; *&amp;new_mesh_pt, const unsigned &amp;b)</td></tr>
+<tr class="memdesc:acf9eea5998765dc36b96a2050db3e1e3 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Snap the boundary nodes onto any curvilinear boundaries.  <a href="classoomph_1_1RefineableTetgenMesh.html#acf9eea5998765dc36b96a2050db3e1e3">More...</a><br /></td></tr>
+<tr class="separator:acf9eea5998765dc36b96a2050db3e1e3 inherit pro_methods_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1TetgenMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1TetgenMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a3b0d214cb14243f7ecc2c82e6641930b inherit pro_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a3b0d214cb14243f7ecc2c82e6641930b">build_from_scaffold</a> (TimeStepper *time_stepper_pt, const bool &amp;use_attributes)</td></tr>
+<tr class="memdesc:a3b0d214cb14243f7ecc2c82e6641930b inherit pro_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh from scaffold.  <a href="classoomph_1_1TetgenMesh.html#a3b0d214cb14243f7ecc2c82e6641930b">More...</a><br /></td></tr>
+<tr class="separator:a3b0d214cb14243f7ecc2c82e6641930b inherit pro_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a685e57d2adeb2a378ffc7e244e38c910 inherit pro_methods_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a685e57d2adeb2a378ffc7e244e38c910">setup_reverse_lookup_schemes_for_faceted_surface</a> (TetMeshFacetedSurface *const &amp;faceted_surface_pt)</td></tr>
+<tr class="memdesc:a685e57d2adeb2a378ffc7e244e38c910 inherit pro_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to setup the reverse look-up schemes.  <a href="classoomph_1_1TetgenMesh.html#a685e57d2adeb2a378ffc7e244e38c910">More...</a><br /></td></tr>
+<tr class="separator:a685e57d2adeb2a378ffc7e244e38c910 inherit pro_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1RefineableTetgenMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1RefineableTetgenMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a274ebedf983f3b34620fa2bbb1980fcd inherit pro_attribs_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a274ebedf983f3b34620fa2bbb1980fcd">Projection_is_disabled</a></td></tr>
+<tr class="memdesc:a274ebedf983f3b34620fa2bbb1980fcd inherit pro_attribs_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable projection of solution onto new mesh during adaptation.  <a href="classoomph_1_1RefineableTetgenMesh.html#a274ebedf983f3b34620fa2bbb1980fcd">More...</a><br /></td></tr>
+<tr class="separator:a274ebedf983f3b34620fa2bbb1980fcd inherit pro_attribs_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72b505d4bfd018471ef1543e18ae5fce inherit pro_attribs_classoomph_1_1RefineableTetgenMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a72b505d4bfd018471ef1543e18ae5fce">Corner_elements_must_be_split</a></td></tr>
+<tr class="memdesc:a72b505d4bfd018471ef1543e18ae5fce inherit pro_attribs_classoomph_1_1RefineableTetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Corner elements which have all of their nodes on the outer boundary are to be split into elements which have some non-boundary nodes.  <a href="classoomph_1_1RefineableTetgenMesh.html#a72b505d4bfd018471ef1543e18ae5fce">More...</a><br /></td></tr>
+<tr class="separator:a72b505d4bfd018471ef1543e18ae5fce inherit pro_attribs_classoomph_1_1RefineableTetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1TetgenMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1TetgenMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:ac11e90fcf927bbf8317800db7723bad2 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">TetgenScaffoldMesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ac11e90fcf927bbf8317800db7723bad2">Tmp_mesh_pt</a></td></tr>
+<tr class="memdesc:ac11e90fcf927bbf8317800db7723bad2 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary scaffold mesh.  <a href="classoomph_1_1TetgenMesh.html#ac11e90fcf927bbf8317800db7723bad2">More...</a><br /></td></tr>
+<tr class="separator:ac11e90fcf927bbf8317800db7723bad2 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9aa31216620790d084d133b8781be37 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ab9aa31216620790d084d133b8781be37">Tetgenio_exists</a></td></tr>
+<tr class="memdesc:ab9aa31216620790d084d133b8781be37 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether a tetgenio representation of the mesh exists.  <a href="classoomph_1_1TetgenMesh.html#ab9aa31216620790d084d133b8781be37">More...</a><br /></td></tr>
+<tr class="separator:ab9aa31216620790d084d133b8781be37 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508672e33aa773da58c834a526cb5c59 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">tetgenio *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a508672e33aa773da58c834a526cb5c59">Tetgenio_pt</a></td></tr>
+<tr class="memdesc:a508672e33aa773da58c834a526cb5c59 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tetgen representation of mesh.  <a href="classoomph_1_1TetgenMesh.html#a508672e33aa773da58c834a526cb5c59">More...</a><br /></td></tr>
+<tr class="separator:a508672e33aa773da58c834a526cb5c59 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94c4ac3940ecfdd87679167d300ce75d inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a94c4ac3940ecfdd87679167d300ce75d">Use_attributes</a></td></tr>
+<tr class="memdesc:a94c4ac3940ecfdd87679167d300ce75d inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to indicate whether to use attributes or not (required for multidomain meshes)  <a href="classoomph_1_1TetgenMesh.html#a94c4ac3940ecfdd87679167d300ce75d">More...</a><br /></td></tr>
+<tr class="separator:a94c4ac3940ecfdd87679167d300ce75d inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::RefineableSolidTetgenMesh&lt; ELEMENT &gt;</h3>
+
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00280">280</a> of file <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html">refineable_tetgen_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a41ce4d45bdd2bacc45218f51cdd8f651"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41ce4d45bdd2bacc45218f51cdd8f651">&#9670;&nbsp;</a></span>RefineableSolidTetgenMesh() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html">oomph::RefineableSolidTetgenMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html">RefineableSolidTetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">TetMeshFacetedClosedSurface *const &amp;&#160;</td>
+          <td class="paramname"><em>outer_boundary_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; TetMeshFacetedSurface * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>internal_closed_surface_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>element_volume</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>split_corner_elements</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build mesh, based on closed curve that specifies the outer boundary of the domain and any number of internal closed curves. Specify target area for uniform element size. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00290">290</a> of file <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html">refineable_tetgen_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a316eeacca5760fb6517732ff93072a3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a316eeacca5760fb6517732ff93072a3f">&#9670;&nbsp;</a></span>RefineableSolidTetgenMesh() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html">oomph::RefineableSolidTetgenMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html">RefineableSolidTetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target_volume</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">tetgenio *const &amp;&#160;</td>
+          <td class="paramname"><em>tetgen_io_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TetMeshFacetedClosedSurface *const &amp;&#160;</td>
+          <td class="paramname"><em>outer_boundary_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; TetMeshFacetedSurface * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>internal_surface_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build mesh from specified triangulation and associated target areas for elements in it. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00312">312</a> of file <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html">refineable_tetgen_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a8386e0befb5c197208918f7f43265974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8386e0befb5c197208918f7f43265974">&#9670;&nbsp;</a></span>~RefineableSolidTetgenMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html">oomph::RefineableSolidTetgenMesh</a>&lt; ELEMENT &gt;::~<a class="el" href="classoomph_1_1RefineableSolidTetgenMesh.html">RefineableSolidTetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00330">330</a> of file <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html">refineable_tetgen_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="refineable__tetgen__mesh_8template_8h_source.html">refineable_tetgen_mesh.template.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:53:55
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

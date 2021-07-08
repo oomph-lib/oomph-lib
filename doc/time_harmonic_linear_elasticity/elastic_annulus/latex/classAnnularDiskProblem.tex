@@ -1,0 +1,266 @@
+\hypertarget{classAnnularDiskProblem}{}\doxysection{Annular\+Disk\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classAnnularDiskProblem}\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+
+
+Annular disk.  
+
+
+Inheritance diagram for Annular\+Disk\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAnnularDiskProblem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAnnularDiskProblem_aad1ce56fa5c26045fb14d46acf29c89e}{Annular\+Disk\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAnnularDiskProblem_a35d3a481c66849a57b9797c2338b8fc2}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAnnularDiskProblem_a147e5fbe37f7132bbace2b713acb03a5}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAnnularDiskProblem_a83c987045b1bdc704ed336072b8ceb16}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+: Wipe the mesh of traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAnnularDiskProblem_a491ee3537f3b08d9a10942c4744d8d2b}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adapt\+: Rebuild the mesh of traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAnnularDiskProblem_a8034c630f21ccf5882a21eef2c1464fc}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classAnnularDiskProblem_aeab547741d3b500af5f465e52e1ba57c}{create\+\_\+traction\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAnnularDiskProblem_ae665013c94a3277cd1bf124158a4e8f2}{delete\+\_\+traction\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Delete traction elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Tree\+Based\+Refineable\+Mesh\+Base $\ast$ \mbox{\hyperlink{classAnnularDiskProblem_a7ef68977578d396e673a57bdf35f931c}{Solid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to refineable solid mesh. \end{DoxyCompactList}\item 
+Mesh $\ast$ \mbox{\hyperlink{classAnnularDiskProblem_a2cc0ee9d7a87cdd2857b1c34e9d14c00}{Solid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to solid mesh. \end{DoxyCompactList}\item 
+Mesh $\ast$ \mbox{\hyperlink{classAnnularDiskProblem_ac35f917b7678de36c2942530fc9ba4d6}{Traction\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh of traction elements. \end{DoxyCompactList}\item 
+Doc\+Info \mbox{\hyperlink{classAnnularDiskProblem_aabdb5b1d506e3f758629c87395d0747d}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc\+Info object for output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT$>$\newline
+class Annular\+Disk\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}
+
+Annular disk. 
+
+Definition at line 300 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classAnnularDiskProblem_aad1ce56fa5c26045fb14d46acf29c89e}\label{classAnnularDiskProblem_aad1ce56fa5c26045fb14d46acf29c89e}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!AnnularDiskProblem@{AnnularDiskProblem}}
+\index{AnnularDiskProblem@{AnnularDiskProblem}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AnnularDiskProblem()}{AnnularDiskProblem()}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}}
+
+
+
+Constructor\+: 
+
+
+
+Definition at line 356 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+
+
+References create\+\_\+traction\+\_\+elements(), Global\+\_\+\+Parameters\+::\+Directory, Global\+\_\+\+Parameters\+::\+E(), Global\+\_\+\+Parameters\+::\+H\+\_\+annulus, Global\+\_\+\+Parameters\+::\+Nr, Global\+\_\+\+Parameters\+::\+Ntheta, Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq, periodic, and Global\+\_\+\+Parameters\+::solid\+\_\+boundary\+\_\+displacement().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAnnularDiskProblem_a491ee3537f3b08d9a10942c4744d8d2b}\label{classAnnularDiskProblem_a491ee3537f3b08d9a10942c4744d8d2b}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+adapt}
+
+
+
+Actions after adapt\+: Rebuild the mesh of traction elements. 
+
+
+
+Definition at line 506 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+
+
+References create\+\_\+traction\+\_\+elements().
+
+\mbox{\Hypertarget{classAnnularDiskProblem_a35d3a481c66849a57b9797c2338b8fc2}\label{classAnnularDiskProblem_a35d3a481c66849a57b9797c2338b8fc2}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line 309 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+\mbox{\Hypertarget{classAnnularDiskProblem_a83c987045b1bdc704ed336072b8ceb16}\label{classAnnularDiskProblem_a83c987045b1bdc704ed336072b8ceb16}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+adapt}
+
+
+
+Actions before adapt\+: Wipe the mesh of traction elements. 
+
+
+
+Definition at line 490 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+\mbox{\Hypertarget{classAnnularDiskProblem_a147e5fbe37f7132bbace2b713acb03a5}\label{classAnnularDiskProblem_a147e5fbe37f7132bbace2b713acb03a5}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line 312 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+\mbox{\Hypertarget{classAnnularDiskProblem_aeab547741d3b500af5f465e52e1ba57c}\label{classAnnularDiskProblem_aeab547741d3b500af5f465e52e1ba57c}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!create\_traction\_elements@{create\_traction\_elements}}
+\index{create\_traction\_elements@{create\_traction\_elements}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_traction\_elements()}{create\_traction\_elements()}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+traction\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create traction elements. 
+
+
+
+Definition at line 522 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+
+
+References Global\+\_\+\+Parameters\+::constant\+\_\+pressure().
+
+\mbox{\Hypertarget{classAnnularDiskProblem_ae665013c94a3277cd1bf124158a4e8f2}\label{classAnnularDiskProblem_ae665013c94a3277cd1bf124158a4e8f2}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!delete\_traction\_elements@{delete\_traction\_elements}}
+\index{delete\_traction\_elements@{delete\_traction\_elements}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{delete\_traction\_elements()}{delete\_traction\_elements()}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::delete\+\_\+traction\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Delete traction elements. 
+
+Delete traction elements and wipe the traction meshes. 
+
+Definition at line 577 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+\mbox{\Hypertarget{classAnnularDiskProblem_a8034c630f21ccf5882a21eef2c1464fc}\label{classAnnularDiskProblem_a8034c630f21ccf5882a21eef2c1464fc}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line 602 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+
+
+References Global\+\_\+\+Parameters\+::exact\+\_\+u().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classAnnularDiskProblem_aabdb5b1d506e3f758629c87395d0747d}\label{classAnnularDiskProblem_aabdb5b1d506e3f758629c87395d0747d}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Doc\+Info \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc\+Info object for output. 
+
+
+
+Definition at line 347 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+\mbox{\Hypertarget{classAnnularDiskProblem_a7ef68977578d396e673a57bdf35f931c}\label{classAnnularDiskProblem_a7ef68977578d396e673a57bdf35f931c}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
+\index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Tree\+Based\+Refineable\+Mesh\+Base$\ast$ \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to refineable solid mesh. 
+
+
+
+Definition at line 334 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+\mbox{\Hypertarget{classAnnularDiskProblem_a2cc0ee9d7a87cdd2857b1c34e9d14c00}\label{classAnnularDiskProblem_a2cc0ee9d7a87cdd2857b1c34e9d14c00}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
+\index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Mesh$\ast$ \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to solid mesh. 
+
+
+
+Definition at line 339 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+\mbox{\Hypertarget{classAnnularDiskProblem_ac35f917b7678de36c2942530fc9ba4d6}\label{classAnnularDiskProblem_ac35f917b7678de36c2942530fc9ba4d6}} 
+\index{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}!Traction\_mesh\_pt@{Traction\_mesh\_pt}}
+\index{Traction\_mesh\_pt@{Traction\_mesh\_pt}!AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$@{AnnularDiskProblem$<$ ELASTICITY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traction\_mesh\_pt}{Traction\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Mesh$\ast$ \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem}}$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to mesh of traction elements. 
+
+
+
+Definition at line 344 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{time__harmonic__elastic__annulus_8cc}{time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc}}\end{DoxyCompactItemize}

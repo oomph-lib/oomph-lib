@@ -1,0 +1,548 @@
+/**
+
+\mainpage Parallel solution of the Boussinesq convection problem
+
+Part I of this document provides an overview of how to distribute 
+the Boussinesq convection problem, using the 
+<a href="../../../multi_physics/refine_b_convect/html/index.html">single-domain</a>
+and 
+<a href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">multi-domain</a>
+approaches. It is part of a
+<a href="../../../example_code_list/html/index.html#distributed">
+series of tutorials</a>
+that discuss how to modify existing serial driver codes so that the
+\c Problem object can be distributed across multiple processors.
+Part II provides a more detailed discussion of the 
+serial and parallel implementation of the various helper 
+functions that may be used to set up multi-domain interactions.
+
+<HR>
+<HR>
+
+\section boussinesq Part I: Distributing the Boussinesq convection problem
+  
+For the single-domain discretisation of the Boussinesq convection  
+problem, in which the Navier--Stokes and advection-diffusion equations 
+are combined using a single element, the procedure required to distribute
+the problem is exactly the same as that described in the
+<a href="../../adaptive_driven_cavity/html/index.html">adaptive driven
+cavity tutorial</a>. We therefore omit a detailed discussion 
+of the changes to the driver code but encourage you to compare
+the serial driver codes,  
+
+<center>
+<a href="../../../../demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc"><code>demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc</code></a>
+</center>
+
+and
+
+<center>
+<a href="../../../../demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.cc"><code>demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.cc</code></a>
+</center>
+
+with their distributed counterparts, 
+
+<center>
+<a href="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_boussinesq_convection.cc"><code>demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_boussinesq_convection.cc</code></a>
+</center>
+
+and
+
+<center>
+<a href="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_b_convection.cc"><code>demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_convection.cc</code></a>.
+</center>
+
+The parallelisation of the 
+<a href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">
+multi-domain driver code </a> is also quite
+straightforward. The key point is that the interaction between the domains
+must be set up again after the distribution of the problem
+because, on each processor, some of the "external elements" will have been 
+deleted during the distribution. The required changes to the serial
+driver code are described below.
+
+\subsection main_body The main function
+
+The main function begins and ends with the usual calls to 
+\c MPI_Helpers::init() and  \c MPI_Helpers::finalize(); the 
+problem is distributed with a simple call to \c Problem::distribute().
+
+<HR>
+
+\subsection problem_class The problem class
+The problem class is identical to its serial counterpart, apart from 
+the addition of the \c actions_after_distribute() function, discussed
+below. 
+
+<HR>
+
+\subsection actions_after_adapt Actions after adaptation
+The boundary conditions 
+are such that a single pressure degree of freedom must be pinned after
+the adaptation. Once
+the problem has been distributed, pinning the first
+pressure freedom in the first element no longer works because the
+first element will be different on  each processor. The required 
+modifications mirror
+those in the
+<a href="../../adaptive_driven_cavity/html/index.html">adaptive driven
+cavity problem</a> and ensure that the pressure is only pinned in the 
+first element in the mesh by testing the Eulerian position of the
+element. The remainder of the function is the same
+as in the serial driver code.
+
+\dontinclude multi_domain_ref_b_convection.cc
+\skipline Actions after adaptation
+\until //end_of_actions_after_adapt
+
+
+<HR>
+
+\subsection actions_after_distribute Actions after distribution
+After the problem distribution, the multi-domain interactions must be
+set up again because some of the "external elements" may now only 
+exist on other processors. Such elements are re-created 
+locally as "external halo elements" when 
+\c Multi_domain_functions::setup_multi_domain_interactions(...)
+is called.
+
+\dontinclude multi_domain_ref_b_convection.cc
+\skipline  Actions after distribute
+\until }
+
+<HR>
+
+\subsection doc_solution The doc_solution() routine
+
+As usual, the \c doc_solution() function is modified by adding the
+processor ID to each output file, ensuring that output from one
+processor does not overwrite that from another.
+
+<HR>
+
+The remainder of the driver code is identical to the
+<a href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">
+serial version</a>.
+
+<HR>
+<HR>
+
+
+\section multi_domain Part II: Setting up multi-domain interactions
+
+The namespace \c Multi_domain_functions provides several helper
+functions that facilitate the location of "external elements"
+in multi-domain problems, in which the two interacting 
+domains occupy the same physical space. The namespace also provides functions 
+that can be used for problems in which the interacting domains 
+meet at a lower-dimensional interface, <em> e.g.</em> 
+in fluid-structure interaction problems.
+The functions have a sensible default behaviour and can 
+be used as "block-box" routines. We provide a brief overview
+of their (serial and parallel) implementation, providing enough detail
+to allow users to appreciate the role of the parameters that
+can be adjusted in order to optimise the functions' performance in 
+specific applications.
+
+The function
+
+\code
+template<class ELEMENT_0,class ELEMENT_1>     
+void Multi_domain_functions::setup_multi_domain_interactions(
+                                       Problem* problem_pt, 
+                                       Mesh* const &first_mesh_pt,
+                                       Mesh* const &second_mesh_pt);
+\endcode
+
+sets up a two-way interaction between two domains of the same spatial
+dimension represented by \c first_mesh_pt, a mesh of elements of type
+\c ELEMENT_0, and \c second_mesh_pt, a mesh of elements of type \c
+ELEMENT_1. Both \c ELEMENT_0 and \c ELEMENT_1 must inherit from \c
+ElementWithExternalElements.  The function loops over the integration
+points of all the elements
+in \c first_mesh_pt and establishes which "external element" 
+in \c second_mesh_pt
+covers the same spatial position as the integration point. 
+A pointer to this "external element" and the appropriate local
+coordinate are stored in the element in the \c first_mesh_pt, using
+the storage provided by the \c ElementWithExternalElement base class.
+Once the "external elements" have been found for all elements in \c
+first_mesh_pt, the procedure is repeated with the roles of the two meshes
+interchanged.
+
+The corresponding function 
+
+\code 
+template<class EXT_ELEMENT>
+void Multi_domain_functions::setup_multi_domain_interaction(
+                                       Problem* problem_pt,
+                                       Mesh* const &mesh_pt,
+                                       Mesh* const &external_mesh_pt);
+\endcode
+
+(note the singular) sets up a one-way interaction in which the 
+mesh pointed to by \c external_mesh_pt provides the "external
+elements" (of type \c EXT_ELEMENT) for the \c ElementWithExternalElements 
+stored in \c mesh_pt, but not vice versa. In fact, the two-way
+interaction described above is performed by two successive
+calls to this function
+
+\code
+     
+ setup_multi_domain_interaction<ELEMENT_1>
+      (problem_pt,first_mesh_pt,second_mesh_pt);
+ setup_multi_domain_interaction<ELEMENT_0>
+      (problem_pt,second_mesh_pt,first_mesh_pt);
+  
+\endcode
+ 
+Finally, the function 
+\code
+template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
+void Multi_domain_functions:: setup_multi_domain_interaction(
+                                       Problem* problem_pt,
+                                       Mesh* const &mesh_pt,
+                                       Mesh* const &external_mesh_pt,
+                                       Mesh* const &external_face_mesh_pt);
+\endcode  
+ 
+may be used to set up multi-domain interactions for problems in which
+the interaction occurs across the boundaries of adjacent domains
+(<em> e.g. </em> in FSI problems where the fluid and solid domains meet
+along a lower-dimensional interface).  We do not anticipate that
+users will have to call this function directly; it is called internally by
+the function \c FSI_functions::setup_fluid_load_info_for_solid_elements(...).
+
+<HR>
+
+\subsection overview Overview of the implementation
+The  setup of multi-domain interactions requires the
+identification of local coordinates within "external elements" 
+that occupy the same Eulerian position as the integration points of the
+\c ElementWithExternalElements with which they interact. Initially, 
+the helper functions convert the mesh containing the "external elements" 
+into a \c MeshAsGeomObject --- a
+compound \c GeomObject in which the constituent finite elements act as
+sub-\c GeomObjects. Given the Eulerian coordinates of a 
+"target point", the function 
+\c MeshAsGeomObject::locate_zeta(...) is used
+to locate the "external element" (and the local
+coordinate within it) that contains the "target point". The simplest
+implementation of this function is to loop over all the elements in
+the mesh, calling \c FiniteElement::locate_zeta(...) until the
+required point is located. The function \c
+FiniteElement::locate_zeta(...) can be overloaded for specific
+elements to take into account the interpolation method 
+used within the element. By default, a Newton method
+is employed to determine the local coordinates of the 
+"target point" within an element. If the Newton method fails to
+converge or if the "target point" is found at a 
+local coordinate that is outside the element, then the functions
+return values are set to indicate that the "target point" has not been
+found within the element.
+
+One problem with the naive "loop over all the elements" approach is that
+in most cases, the candidate element will not contain the "target
+point", so there will be a lot of wasted work. In addition, there 
+is no guarantee that the (default) Newton iteration will converge,
+even when the element does contain the required point. A further
+complication in a distributed problem is that 
+the element that contains the "target point" may not be 
+located on the current processor. For these reasons, 
+\c MeshAsGeomObject::locate_zeta(...) uses a bin-based search
+procedure described below. Conceptually, the algorithm still loops
+over all elements until it finds the one containing the "target
+point"; the efficiency gains are achieved by choosing a sensible search
+order so that the element containing the point is found quickly.
+ 
+<hr>
+
+\subsection impl Basic (serial) implementation 
+ To make the search process efficient, the constructor of the
+\c MeshAsGeomObject automatically creates a bin structure
+that aids the identification of elements that are close to a
+given "target point". The setup of the bin structure is performed as
+follows:
+<CENTER>
+<b>Setting up the bin structure</b>
+</CENTER>
+-# We start by sampling the position of the elements in the 
+   \c MeshAsGeomObject to determine the mesh's maximum and minimum
+   Eulerian coordinates. 
+   \n\n
+-# Next we create a rectangular (or cubic) bin structure that spans
+   the entire mesh (using the extremal coordinates determined
+   in the previous step, plus a small margin for safety),
+   using \c Nx_bin \f$ \times \f$ \c Ny_bin (\f$ \times \f$ \c Nz_bin)
+   equal-sized rectangular (or cubic) bins. 
+   \n\n
+-# Finally, we populate the bin structure by evaluating the position of a 
+   number of sampling points within each element. For each sampling point
+   we determine in which bin the point is located and associate 
+   a pair, comprising the pointer to the element and appropriate local
+   coordinate, with that bin.
+   \n\n
+. 
+
+Once the bin structure has been set up, a given "target point" can be 
+located very quickly within the \c MeshAsGeomObject by the following
+procedure:
+
+<CENTER>
+<b>Locating points within the <code>MeshAsGeomObject</code></b>
+</CENTER>
+-# Given the coordinates of the "target point", we identify the bin
+   in which it is located. This is a cheap operation because all bins
+   have the same size and are aligned with the coordinate axes.
+   \n\n
+-# Next we visit the element/local coordinate pairs associated with 
+   that bin. For each pair, we use the \c
+   FiniteElement::locate_zeta(...) function to (attempt to!) 
+   find the the local coordinate within the element that corresponds 
+   to the "target point". The local coordinate stored in the pair is
+   passed to the function to be used as the initial guess for the
+   (default) Newton iteration. If the "target point" is
+   not found, the procedure is repeated 
+   with next pair of element and local coordinates. 
+   \n\n
+-# If the relevant point is not located within the initial bin 
+   (<em> e.g. </em> because the bin is empty) 
+   the procedure is repeated in adjacent bins, spiralling outwards 
+   through the bin structure.
+   \n\n
+-# If the "target point" cannot be found in any of the bins,
+   the search fails, indicating/suggesting that the "target point" is 
+   not contained in the mesh. (The search may also fail when the
+   Newton method is used if 
+   none of the element/local coordinate pairs associated with the 
+   bins were close enough to the "target point". If this happens,
+   we recommend increasing the number of sampling points
+   by increasing the value of \c Multi_domain_functions::Nsample_points
+   before re-running the code. Note, however, that we have never encountered
+   this problem in any of our test cases.)
+. 
+A tacit assumption in the above procedure is that, since the two 
+interacting meshes represent the same physical domain, 
+any point in one mesh can also be found in the other, regardless
+of possible differences in the meshes' refinement patterns. While 
+this is true for meshes that discretise domains with 
+polygonal boundaries, problems may arise in domains whose boundaries
+are curvilinear because \c oomph-lib's 
+<code>MacroElement/Domain</code>-based representation of 
+such domains ensures that during
+successive mesh refinements, any newly-created nodes are placed
+exactly on the curvilinear boundary. This procedure is 
+necessary to guarantee
+convergence to the exact solution under 
+mesh refinement, but it creates the problem that a strongly refined mesh (whose
+boundaries provide a better approximation to the exact curvilinear boundary) 
+may contain points that are not contained within the coarser mesh with which it
+interacts. To avoid this problem, we determine the location of
+"target points" within each element using the 
+\c MacroElement (exact curvilinear) representation, if there is one. 
+An important consequence of this approach is that 
+points in the two interacting meshes deemed to be 
+located at the same spatial
+position (same position in the exact representation) 
+may actually have slightly different positions. 
+Nonetheless, the difference between their positions 
+decreases under mesh refinement
+at the same rate at which the finite-element representation of the curvilinear
+domain approaches the domain itself.
+
+
+<HR>
+
+\subsection parallel Parallel implementation
+When setting up multi-domain interactions for distributed meshes
+we face the additional challenge that the "external
+element" that contains a "target point" may not be located on the 
+same processor as the \c ElementWithExternalElement with which it interacts. 
+When dealing with distributed meshes, the search procedure described
+above is therefore modified as follows:
+-# When creating the \c MeshAsGeomObject representation of the distributed
+   mesh that contains the "external elements", each processor sets up
+   a bin structure for its own part of that mesh. Some communication
+   takes place at this point so that every processor holds the
+  "global" extrema of the mesh.
+   \n\n
+-# When setting up the multi-domain interaction, 
+   each processor only
+   determines the "external elements" for the locally-stored
+   \c ElementWithExternalElements
+   Initially, the required "external elements" are sought among 
+   the locally-stored "external elements" and 
+   the search is restricted to the bin that
+   contains the "target point". Each processor then creates a list of 
+   the "external elements" that have not been found locally.
+   \n\n
+-# Each processor communicates its list of missing "external elements"
+   to the "next" processor,  using a ring-like communication pattern.
+   \n\n
+-# All processors search for the yet-to-be-found "external
+   elements" amongst the "external elements" stored in their
+   part of the distributed mesh. Again the search is restricted to 
+   the "external elements" that are associated with the bin
+   that contains the "target point". If an
+   "external element" is found, a halo copy of it is created on the
+   processor that contains the \c ElementWithExternalElement. 
+   \n\n
+-# The list of any remaining missing "external elements" is then
+   forwarded to the next processor in the communication ring where the
+   search process is repeated.
+   \n\n
+-# If, after a complete sweep through all processors, some
+   "external elements" have still not been located, we initiate 
+   another search loop,  re-commencing the search at the next
+   level of the search spiral through the bins.
+   \n\n
+-# The setup of the multi-domain interaction is complete when 
+   all "external elements" have been located and halo copies have
+   been made where required. The setup fails (for the 
+   same possible reasons listed in the discussion of the serial implementation) 
+   if none of the processors are able to locate one or more of the required
+   "external elements".
+.
+
+ The algorithm is based on the assumption that the majority of the
+ pairs of interacting elements will be stored on the same processor, 
+ which is typically the case when \c METIS is used to determine the
+ distribution. The algorithm also assumes that the external elements
+ can usually be found by searching only in the bin containing the "target
+ point", which is true provided the bin structure is not too
+ fine. The algorithm should always find the external elements even if
+ these assumptions are not satisfied, but it may not be optimal in
+ these situations.
+
+ 
+<HR>
+
+\subsection optim Optimising the setup of multi-domain interactions
+It is possible to optimise the setup of the multi-domain interactions
+by changing the default parameters defined in the 
+\c Multi_domain_functions namespace. (\b Note: Because the
+parameters discussed below are defined in a global namespace, they
+have to be re-set manually to their defaults.) 
+- If the size of the domain is known, the extremal
+  coordinates of the bin structure do not have to be (re-)computed 
+  "on the fly". Hence if the user knows that a 2D mesh is contained
+  within the region \f$ 0 \le x \le 3 \f$ and
+  \f$ 0 \le y \le 1 \f$, say, the determination of the bin boundaries 
+  may be bypassed by setting
+  \n\n
+  \dontinclude multi_domain_ref_b_convection.cc
+  \skipline Change the minimum
+  \until Y_max
+  If the size of the mesh is known exactly, it makes sense to suppress the 
+  slight increase in the size of the bin structure
+  beyond the extreme mesh coordinates:
+  \n\n
+  \until Percentage_offset
+  \n\n
+  (By default, this parameter is set to 5% to allow for the fact
+  that the automatic determination of the mesh's size only samples
+  the mesh at the vertex nodes of its elements. In problems with
+  strongly curved boundaries, elements may extend slightly beyond
+  their vertex nodes.)
+  \n\n
+- Similarly, the number of bins in each of the coordinate
+  directions may be adjusted. For instance, if the 
+  width of the domain (in the x-direction) is three times
+  greater than its height (in the y-direction), it makes sense to adjust the
+  number of bins accordingly. 
+  \n\n
+  \dontinclude multi_domain_ref_b_convection.cc
+  \skipline Change from the default number
+  \until Ny_bin
+  \n\n
+  Unfortunately, the optimal number of bins is problem-dependent. If we use 
+  very few bins, each bin will contain a large number of "external 
+  elements" and it may take a long time to locate the element that 
+  actually contains the "target point". 
+  \n\n
+  Choosing a large number of
+  bins is therefore likely to be beneficial (at least for non-distributed
+  problems) as long as the (relatively small) storage requirements for the bin
+  structure itself remain acceptable. This is because in a sufficiently fine bin
+  structure (where the number of bins greatly exceeds
+  the number of sampling points), most of the bins will be empty.
+  When spiralling outwards from the bin that contains the "target
+  point", the fact that a bin is empty can be detected very quickly,
+  and there is no need to perform any costly Newton iterations until we
+  encounter the first non-empty bin. The bin that contains the 
+  "external element" with the "target point" can therefore be 
+  located fairly quickly even if a large number of empty bins have 
+  to be visited first.
+  \n\n 
+  In a distributed problem, the issue is more complicated because
+  we only perform one level of the spiralling search through
+  the bins before communicating the missing "external elements" 
+  to other processors. An unnecessarily fine bin structure therefore
+  incurs large communication costs. 
+  \n\n
+- Finally, we can adjust the parameter \c Multi_domain::Nsample_point 
+  which controls the number of sampling points per element used
+  when populating the bins with the pairs of elements
+  and local coordinates. We note that \c Multi_domain::Nsample_point
+  does not specify the number of sampling points within the element
+  directly; the sampling points are, in fact, the same as the 
+  element's plot points and 
+  their number may be obtained from the 
+  \c FiniteElement::nplot_points(...) function.
+  \n\n
+  The number of sampling points should be increased if the mesh contains 
+  strongly distorted elements. This is because in such elements the Newton 
+  method may not converge to the "target point" from all sample points
+  in the element, even if the "target point" is contained in the element. 
+  Increasing the number of sampling points ensures that more of them    
+  are "close" to the "target point", thus improving the chances that 
+  the Newton method will converge. An increase in the number of 
+  sampling points can lead to a significant increase in the 
+  multi-domain setup times, however. 
+  In the present problem, the elements are only stretched in the
+  coordinate directions so a small number of sample points per
+  element suffices:
+  \n\n
+  \dontinclude multi_domain_ref_b_convection.cc
+  \skipline Set the parameter
+  \until Nsample_point
+.
+
+
+  Luckily, the setup of the multi-domain interactions tends to be
+relatively cheap (compared to other phases of a typical computation)
+so in most cases the default settings for above parameters are
+perfectly adequate.
+
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+
+The full parallel driver code for the distributed, multi-domain based
+solution of the Boussinesq convection problem can be found at
+
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_b_convection.cc">
+demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_b_convection.cc
+</A>
+</CENTER>
+
+Additional parallel driver codes for the distributed Boussinesq 
+problem using both single- and multi-domain methods are located in 
+
+
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection">
+demo_drivers/mpi/multi_domain/boussinesq_convection
+</A>
+</CENTER>
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

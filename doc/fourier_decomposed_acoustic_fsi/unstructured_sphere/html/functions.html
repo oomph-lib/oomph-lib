@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
+
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>actions_after_adapt()
+: <a class="el" href="classCoatedSphereProblem.html#a77906dadd8ceb1d1d3182f298a0ca2d2">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>actions_after_newton_solve()
+: <a class="el" href="classCoatedSphereProblem.html#ae5287efab54b16ec1bd5cced98971c9c">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>actions_before_adapt()
+: <a class="el" href="classCoatedSphereProblem.html#a0cd5d4eea9d34eefd829f7539c41c998">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>actions_before_newton_convergence_check()
+: <a class="el" href="classCoatedSphereProblem.html#a2f55bc904971ca96eb9af3451ef5b4c4">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>actions_before_newton_solve()
+: <a class="el" href="classCoatedSphereProblem.html#aa268009485d4d2bb6b4856bfa318aaa9">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>CoatedSphereProblem()
+: <a class="el" href="classCoatedSphereProblem.html#ab9c983e7f0bed66f13d59bd65d6d151b">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>complete_problem_setup()
+: <a class="el" href="classCoatedSphereProblem.html#a7417ba994216c3d817259891176cd392">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>create_fsi_traction_elements()
+: <a class="el" href="classCoatedSphereProblem.html#a2d342158b3058cd5392e2de3fd7595da">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>create_helmholtz_DtN_elements()
+: <a class="el" href="classCoatedSphereProblem.html#a867f4ed706f00a73c87c2c862dcf19c3">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>create_helmholtz_fsi_flux_elements()
+: <a class="el" href="classCoatedSphereProblem.html#a9a301689052eefd53552aadc23ff893b">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>create_solid_traction_elements()
+: <a class="el" href="classCoatedSphereProblem.html#a93cb1d435858c7a1835cbd74f7cb5db8">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_d"></a>- d -</h3><ul>
+<li>delete_face_elements()
+: <a class="el" href="classCoatedSphereProblem.html#a1092568f8c12afcefe7cbf56ebbb115c">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>doc_solution()
+: <a class="el" href="classCoatedSphereProblem.html#aaeade2a110160c002b2b45954a5a0edc">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_f"></a>- f -</h3><ul>
+<li>FSI_traction_mesh_pt
+: <a class="el" href="classCoatedSphereProblem.html#a4bb400e47b8d3713bfd5e27ae2c89683">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>Helmholtz_DtN_mesh_pt
+: <a class="el" href="classCoatedSphereProblem.html#abb33720ab0a096c5e1d6be33310bff21">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>Helmholtz_fsi_flux_mesh_pt
+: <a class="el" href="classCoatedSphereProblem.html#aef75017cfe8c77449e00f8f70aa4dcef">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>Helmholtz_mesh_pt
+: <a class="el" href="classCoatedSphereProblem.html#aabab389170891d6387c3cd9a7aa92f24">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>HH_inner_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#a2d8f60f068d2e9442a9f096843ffb098">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>HH_lower_symmetry_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#a92c1c0e05c620f01d8b6851d952cfc19">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>HH_outer_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#a7462cad0a109f08ee2dcff2b45bff9bc">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>HH_upper_symmetry_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#a020701b863392278cc7e1dfb3ff8fc3b">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_l"></a>- l -</h3><ul>
+<li>Lower_inner_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#ac5b9684155899ef6c43d73c1dbffc076">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>Lower_symmetry_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#a9bfac78ea8fcd9d1fc4844e9db66c0d1">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>MyStraightLine()
+: <a class="el" href="classMyStraightLine.html#a2c63e574f21703250a31fc446ab8045d">MyStraightLine</a>
+</li>
+</ul>
+
+
+<h3><a id="index_o"></a>- o -</h3><ul>
+<li>Outer_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#abf88cdcfd5fe2e91dde565ef0801ed47">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>position()
+: <a class="el" href="classMyStraightLine.html#ae3ee51a7b81acc2ef652bec4ee955d2f">MyStraightLine</a>
+</li>
+</ul>
+
+
+<h3><a id="index_r"></a>- r -</h3><ul>
+<li>R_end
+: <a class="el" href="classMyStraightLine.html#afa466e12301ccea99a02fe1bde615691">MyStraightLine</a>
+</li>
+<li>R_start
+: <a class="el" href="classMyStraightLine.html#a0f66636dd5d1e7ff6ec93acf90879f0c">MyStraightLine</a>
+</li>
+<li>Rib_divider_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#a4eeb21412dc4a62d33c03048286fb4b6">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>setup_interaction()
+: <a class="el" href="classCoatedSphereProblem.html#aeea43c892871a6c65df992aedc3b3547">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>Solid_mesh_pt
+: <a class="el" href="classCoatedSphereProblem.html#a4bba1d667061b296208039207bd3347d">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>Solid_traction_mesh_pt
+: <a class="el" href="classCoatedSphereProblem.html#aa51300e92727226f4b150eac2c62ddd7">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_t"></a>- t -</h3><ul>
+<li>Trace_file
+: <a class="el" href="classCoatedSphereProblem.html#a79847476b26744153c0359041a52a270">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_u"></a>- u -</h3><ul>
+<li>Upper_inner_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#abdd54d39d9757a4da7d2eb56bab1c392">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+<li>Upper_symmetry_boundary_id
+: <a class="el" href="classCoatedSphereProblem.html#add071e3a8d3159b181b31559ca233408">CoatedSphereProblem&lt; ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index__7E"></a>- ~ -</h3><ul>
+<li>~MyStraightLine()
+: <a class="el" href="classMyStraightLine.html#ae2f9a5860652a726b2f4dc94d1332ef1">MyStraightLine</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:34:52
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

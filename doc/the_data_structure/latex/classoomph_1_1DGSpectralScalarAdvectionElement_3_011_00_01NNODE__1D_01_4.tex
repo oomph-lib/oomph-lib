@@ -1,0 +1,212 @@
+\hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4}{}\doxysection{oomph\+::D\+G\+Spectral\+Scalar\+Advection\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4}\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+
+
+{\ttfamily \#include $<$scalar\+\_\+advection\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::D\+G\+Spectral\+Scalar\+Advection\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.245989cm]{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a0966bfa51ec4e244580be3212c1db919}{required\+\_\+nflux}} ()
+\begin{DoxyCompactList}\small\item\em Set the number of flux components. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a39a30e2966dde6acf1eb44d58ce0013a}{calculate\+\_\+element\+\_\+averages}} (double $\ast$\&\mbox{\hyperlink{classoomph_1_1DGElement_a9349e3c349f9cf3b25bcb6121e86a7f2}{average\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Calculate the averages in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a15a0f59b87fb1eb728ba943b52509ed2}{D\+G\+Spectral\+Scalar\+Advection\+Element}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a4a3ab08fb4a06976a07c6cf8df7affb5}{$\sim$\+D\+G\+Spectral\+Scalar\+Advection\+Element}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ac52a57b0eb393440d0a182260cfc1ce3}{build\+\_\+all\+\_\+faces}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ac24a1132d34b1062498ebf6010379017}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
+\begin{DoxyCompactList}\small\item\em Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_af5e59ed30beabf17ae00ee64b19d8775}{get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&minv\+\_\+res)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a330e72eb72656497739be617dac1986b}{Inverse\+\_\+mass\+\_\+diagonal}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a6497c3da7e48fdfe0592526345654352}{D\+G\+Scalar\+Advection\+Face\+Element$<$ D\+G\+Spectral\+Scalar\+Advection\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
+class oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+
+
+
+Definition at line 454 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a15a0f59b87fb1eb728ba943b52509ed2}\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a15a0f59b87fb1eb728ba943b52509ed2}} 
+\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}!DGSpectralScalarAdvectionElement@{DGSpectralScalarAdvectionElement}}
+\index{DGSpectralScalarAdvectionElement@{DGSpectralScalarAdvectionElement}!oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{DGSpectralScalarAdvectionElement()}{DGSpectralScalarAdvectionElement()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{D\+G\+Spectral\+Scalar\+Advection\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 472 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a4a3ab08fb4a06976a07c6cf8df7affb5}\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a4a3ab08fb4a06976a07c6cf8df7affb5}} 
+\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}!````~DGSpectralScalarAdvectionElement@{$\sim$DGSpectralScalarAdvectionElement}}
+\index{````~DGSpectralScalarAdvectionElement@{$\sim$DGSpectralScalarAdvectionElement}!oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$DGSpectralScalarAdvectionElement()}{~DGSpectralScalarAdvectionElement()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{D\+G\+Spectral\+Scalar\+Advection\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 476 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ac52a57b0eb393440d0a182260cfc1ce3}\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ac52a57b0eb393440d0a182260cfc1ce3}} 
+\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}!build\_all\_faces@{build\_all\_faces}}
+\index{build\_all\_faces@{build\_all\_faces}!oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{build\_all\_faces()}{build\_all\_faces()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::build\+\_\+all\+\_\+faces (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}{oomph\+::\+D\+G\+Element}}.
+
+
+
+Definition at line 478 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a39a30e2966dde6acf1eb44d58ce0013a}\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a39a30e2966dde6acf1eb44d58ce0013a}} 
+\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}!calculate\_element\_averages@{calculate\_element\_averages}}
+\index{calculate\_element\_averages@{calculate\_element\_averages}!oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_element\_averages()}{calculate\_element\_averages()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::calculate\+\_\+element\+\_\+averages (\begin{DoxyParamCaption}\item[{double $\ast$\&}]{average\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Calculate the averages in the element. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DGElement_a336c61ef405a4710060f177e707c3ec9}{oomph\+::\+D\+G\+Element}}.
+
+
+
+Definition at line 468 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$\+::calculate\+\_\+element\+\_\+averages().
+
+\mbox{\Hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ac24a1132d34b1062498ebf6010379017}\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ac24a1132d34b1062498ebf6010379017}} 
+\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}!fill\_in\_generic\_residual\_contribution\_flux\_transport@{fill\_in\_generic\_residual\_contribution\_flux\_transport}}
+\index{fill\_in\_generic\_residual\_contribution\_flux\_transport@{fill\_in\_generic\_residual\_contribution\_flux\_transport}!oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_flux\_transport()}{fill\_in\_generic\_residual\_contribution\_flux\_transport()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6994eab818eb7236e24e45b6fedec1f7}{oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 497 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_af5e59ed30beabf17ae00ee64b19d8775}\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_af5e59ed30beabf17ae00ee64b19d8775}} 
+\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}!get\_inverse\_mass\_matrix\_times\_residuals@{get\_inverse\_mass\_matrix\_times\_residuals}}
+\index{get\_inverse\_mass\_matrix\_times\_residuals@{get\_inverse\_mass\_matrix\_times\_residuals}!oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_inverse\_mass\_matrix\_times\_residuals()}{get\_inverse\_mass\_matrix\_times\_residuals()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{minv\+\_\+res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Function that returns the current value of the residuals multiplied by the inverse mass matrix (virtual so that it can be overloaded specific elements in which time and memory saving tricks can be applied) 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DGElement_ad2247a9d65eb229dbf30d709c7b28d6d}{oomph\+::\+D\+G\+Element}}.
+
+
+
+Definition at line 516 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+References oomph\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and n.
+
+\mbox{\Hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a0966bfa51ec4e244580be3212c1db919}\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a0966bfa51ec4e244580be3212c1db919}} 
+\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}!required\_nflux@{required\_nflux}}
+\index{required\_nflux@{required\_nflux}!oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{required\_nflux()}{required\_nflux()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nflux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Set the number of flux components. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DGElement_a87dc9f5b40437c3ab22db35229012c07}{oomph\+::\+D\+G\+Element}}.
+
+
+
+Definition at line 465 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a6497c3da7e48fdfe0592526345654352}\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a6497c3da7e48fdfe0592526345654352}} 
+\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}!DGScalarAdvectionFaceElement$<$ DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$ $>$@{DGScalarAdvectionFaceElement$<$ DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$ $>$}}
+\index{DGScalarAdvectionFaceElement$<$ DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$ $>$@{DGScalarAdvectionFaceElement$<$ DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$ $>$}!oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{DGScalarAdvectionFaceElement$<$ DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$ $>$}{DGScalarAdvectionFaceElement< DGSpectralScalarAdvectionElement< 1, NNODE\_1D > >}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+friend class \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement}{D\+G\+Scalar\+Advection\+Face\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{D\+G\+Spectral\+Scalar\+Advection\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$ $>$\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 458 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a330e72eb72656497739be617dac1986b}\label{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a330e72eb72656497739be617dac1986b}} 
+\index{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}!Inverse\_mass\_diagonal@{Inverse\_mass\_diagonal}}
+\index{Inverse\_mass\_diagonal@{Inverse\_mass\_diagonal}!oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$@{oomph::DGSpectralScalarAdvectionElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Inverse\_mass\_diagonal}{Inverse\_mass\_diagonal}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement}{oomph\+::\+D\+G\+Spectral\+Scalar\+Advection\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::Inverse\+\_\+mass\+\_\+diagonal\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 460 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{scalar__advection__elements_8h}{scalar\+\_\+advection\+\_\+elements.\+h}}\end{DoxyCompactItemize}

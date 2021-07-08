@@ -1,0 +1,117 @@
+\hypertarget{classoomph_1_1FpPreconditionerAssemblyHandler}{}\doxysection{oomph\+::Fp\+Preconditioner\+Assembly\+Handler Class Reference}
+\label{classoomph_1_1FpPreconditionerAssemblyHandler}\index{oomph::FpPreconditionerAssemblyHandler@{oomph::FpPreconditionerAssemblyHandler}}
+
+
+{\ttfamily \#include $<$navier\+\_\+stokes\+\_\+preconditioners.\+h$>$}
+
+Inheritance diagram for oomph\+::Fp\+Preconditioner\+Assembly\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1FpPreconditionerAssemblyHandler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FpPreconditionerAssemblyHandler_a7eaaf83208b73afdd805f4e8c816827f}{Fp\+Preconditioner\+Assembly\+Handler}} (const unsigned \&ndim)
+\begin{DoxyCompactList}\small\item\em Constructor. Pass spatial dimension. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1FpPreconditionerAssemblyHandler_a2945d993d1b45c02eb7af8ae752bff05}{$\sim$\+Fp\+Preconditioner\+Assembly\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FpPreconditionerAssemblyHandler_adfebe7f48f6fc715c258e1733218b12b}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Return the contribution to the residuals of the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FpPreconditionerAssemblyHandler_a6360dd27d3530576487cb7e239dfe17e}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation 
+/ d variable\char`\"{} for elem\+\_\+pt. ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that is used to define the functions used to assemble the elemental contributions to the pressure advection diffusion problem used by the Fp preconditioner. 
+
+Definition at line 99 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1FpPreconditionerAssemblyHandler_a7eaaf83208b73afdd805f4e8c816827f}\label{classoomph_1_1FpPreconditionerAssemblyHandler_a7eaaf83208b73afdd805f4e8c816827f}} 
+\index{oomph::FpPreconditionerAssemblyHandler@{oomph::FpPreconditionerAssemblyHandler}!FpPreconditionerAssemblyHandler@{FpPreconditionerAssemblyHandler}}
+\index{FpPreconditionerAssemblyHandler@{FpPreconditionerAssemblyHandler}!oomph::FpPreconditionerAssemblyHandler@{oomph::FpPreconditionerAssemblyHandler}}
+\doxysubsubsection{\texorpdfstring{FpPreconditionerAssemblyHandler()}{FpPreconditionerAssemblyHandler()}}
+{\footnotesize\ttfamily oomph\+::\+Fp\+Preconditioner\+Assembly\+Handler\+::\+Fp\+Preconditioner\+Assembly\+Handler (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ndim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Pass spatial dimension. 
+
+
+
+Definition at line 105 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FpPreconditionerAssemblyHandler_a2945d993d1b45c02eb7af8ae752bff05}\label{classoomph_1_1FpPreconditionerAssemblyHandler_a2945d993d1b45c02eb7af8ae752bff05}} 
+\index{oomph::FpPreconditionerAssemblyHandler@{oomph::FpPreconditionerAssemblyHandler}!````~FpPreconditionerAssemblyHandler@{$\sim$FpPreconditionerAssemblyHandler}}
+\index{````~FpPreconditionerAssemblyHandler@{$\sim$FpPreconditionerAssemblyHandler}!oomph::FpPreconditionerAssemblyHandler@{oomph::FpPreconditionerAssemblyHandler}}
+\doxysubsubsection{\texorpdfstring{$\sim$FpPreconditionerAssemblyHandler()}{~FpPreconditionerAssemblyHandler()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Fp\+Preconditioner\+Assembly\+Handler\+::$\sim$\+Fp\+Preconditioner\+Assembly\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line 109 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1FpPreconditionerAssemblyHandler_a6360dd27d3530576487cb7e239dfe17e}\label{classoomph_1_1FpPreconditionerAssemblyHandler_a6360dd27d3530576487cb7e239dfe17e}} 
+\index{oomph::FpPreconditionerAssemblyHandler@{oomph::FpPreconditionerAssemblyHandler}!get\_jacobian@{get\_jacobian}}
+\index{get\_jacobian@{get\_jacobian}!oomph::FpPreconditionerAssemblyHandler@{oomph::FpPreconditionerAssemblyHandler}}
+\doxysubsubsection{\texorpdfstring{get\_jacobian()}{get\_jacobian()}}
+{\footnotesize\ttfamily void oomph\+::\+Fp\+Preconditioner\+Assembly\+Handler\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Calculate the elemental Jacobian matrix \char`\"{}d equation 
+/ d variable\char`\"{} for elem\+\_\+pt. ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0ba6ebee8d82509458e5}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line 127 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+
+
+
+References i, oomph\+::\+Generalised\+Element\+::ndof(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1FpPreconditionerAssemblyHandler_adfebe7f48f6fc715c258e1733218b12b}\label{classoomph_1_1FpPreconditionerAssemblyHandler_adfebe7f48f6fc715c258e1733218b12b}} 
+\index{oomph::FpPreconditionerAssemblyHandler@{oomph::FpPreconditionerAssemblyHandler}!get\_residuals@{get\_residuals}}
+\index{get\_residuals@{get\_residuals}!oomph::FpPreconditionerAssemblyHandler@{oomph::FpPreconditionerAssemblyHandler}}
+\doxysubsubsection{\texorpdfstring{get\_residuals()}{get\_residuals()}}
+{\footnotesize\ttfamily void oomph\+::\+Fp\+Preconditioner\+Assembly\+Handler\+::get\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the contribution to the residuals of the element elem\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90da62b4da2af8a26d08b3}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line 112 of file navier\+\_\+stokes\+\_\+preconditioners.\+h.
+
+
+
+References i, oomph\+::\+Generalised\+Element\+::ndof(), and residuals().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{navier__stokes__preconditioners_8h}{navier\+\_\+stokes\+\_\+preconditioners.\+h}}\end{DoxyCompactItemize}

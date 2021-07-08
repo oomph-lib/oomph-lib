@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members - Variables</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index_e"></a>- e -</h3><ul>
+<li>E_mat_vec_pt
+: <a class="el" href="classoomph_1_1NavierStokesSchurComplementPreconditioner.html#a6a02950e86b2b8a092dda57587850d1c">oomph::NavierStokesSchurComplementPreconditioner</a>
+, <a class="el" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a5c6f62a80349652aeff75140ec9c54f1">oomph::PressureBasedSolidLSCPreconditioner</a>
+</li>
+<li>E_preconditioner_type
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#abb84100d37f174e683b2d7a0dd688584">oomph::PseudoElasticPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerOld.html#a4cb348ca052099063282dc8adb76d5fc">oomph::PseudoElasticPreconditionerOld</a>
+</li>
+<li>E_pt
+: <a class="el" href="classoomph_1_1AugmentedBlockFoldLinearSolver.html#a6793e6c00a07d6a037f12b78c7d32182">oomph::AugmentedBlockFoldLinearSolver</a>
+, <a class="el" href="classoomph_1_1AugmentedBlockPitchForkLinearSolver.html#a478bca515ee961576f523b1b5152651f">oomph::AugmentedBlockPitchForkLinearSolver</a>
+, <a class="el" href="classoomph_1_1BlockHopfLinearSolver.html#a9f3aabed3c101b9a9a9fb1cdce4bbbbf">oomph::BlockHopfLinearSolver</a>
+, <a class="el" href="classoomph_1_1GeneralisedHookean.html#a7a68b35f227848a065a7a844766b4eeb">oomph::GeneralisedHookean</a>
+, <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a4844de8de168e51c24c5508ef195ae7a">oomph::GeneralisedMooneyRivlin</a>
+</li>
+<li>East_boundary_fn_pt
+: <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#ac6f1166ec8fd2e62704512bfb612dfb4">oomph::TopologicallyRectangularDomain</a>
+</li>
+<li>Edge_boundary
+: <a class="el" href="classoomph_1_1TetgenScaffoldMesh.html#a023c244b1bac044abbb0d52a25f26d89">oomph::TetgenScaffoldMesh</a>
+, <a class="el" href="classoomph_1_1TriangleScaffoldMesh.html#aaf277ebb4f0d73ab9f4211884b5cbf7c">oomph::TriangleScaffoldMesh</a>
+</li>
+<li>Edge_index
+: <a class="el" href="classoomph_1_1TetgenScaffoldMesh.html#abfe6528465bcfd20119a23a397f846b0">oomph::TetgenScaffoldMesh</a>
+, <a class="el" href="classoomph_1_1TriangleScaffoldMesh.html#af3a887e26d82342a8cf6d45ef2eb2f79">oomph::TriangleScaffoldMesh</a>
+</li>
+<li>Edge_neighbour_pt
+: <a class="el" href="classoomph_1_1OcTreeRoot.html#afa562a1888008194b352be57f2c3d9a9">oomph::OcTreeRoot</a>
+</li>
+<li>edgelist
+: <a class="el" href="structoomph_1_1TriangulateIO.html#ad5f468b0711991370f24d47aea673b0b">oomph::TriangulateIO</a>
+</li>
+<li>edgemarkerlist
+: <a class="el" href="structoomph_1_1TriangulateIO.html#a5a2743276f51517729ed47f29722e061">oomph::TriangulateIO</a>
+</li>
+<li>Eigen_solver_pt
+: <a class="el" href="classoomph_1_1Problem.html#ab7938313fa45df9be16515a6b0bfd324">oomph::Problem</a>
+</li>
+<li>Elastic_mesh_pt
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aba765545c62b9dc52f7c2ea25ea13177">oomph::PseudoElasticPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerOld.html#ab45147d893d104fbf3c0ebc0bacafc7d">oomph::PseudoElasticPreconditionerOld</a>
+</li>
+<li>Elastic_preconditioner_pt
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#ae5cbfeac8ef38461d7816ca01dbd9eb3">oomph::PseudoElasticPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerOld.html#a14f587c9c01c392b14c235bde00453b3">oomph::PseudoElasticPreconditionerOld</a>
+</li>
+<li>Elastic_subsidiary_preconditioner_function_pt
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aa3ca9f5ccba13b8a2038afb386f73b2d">oomph::PseudoElasticPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerOld.html#a48a6c1d213cabb8849b6abcad8415152">oomph::PseudoElasticPreconditionerOld</a>
+</li>
+<li>Elasticity_tensor_pt
+: <a class="el" href="classoomph_1_1LinearElasticityEquationsBase.html#a0d7307299ede86c07c002a86cf965a70">oomph::LinearElasticityEquationsBase&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase.html#a8b5bc9bc89d1e98c4970e561c19564f2">oomph::PMLTimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1PoroelasticityEquations.html#a9b4045d28fd71937c3a211d3f14f51d5">oomph::PoroelasticityEquations&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1TimeHarmonicLinearElasticityEquationsBase.html#a654ac9241cca62bea65d5a3dd19d136d">oomph::TimeHarmonicLinearElasticityEquationsBase&lt; DIM &gt;</a>
+</li>
+<li>Element_area
+: <a class="el" href="classoomph_1_1TriangleMeshParameters.html#afb48563db8d81652f699b3bc5964c8e3">oomph::TriangleMeshParameters</a>
+</li>
+<li>Element_attribute
+: <a class="el" href="classoomph_1_1TetgenScaffoldMesh.html#a47b01372fe4cf5c305169fdb57fc5e5a">oomph::TetgenScaffoldMesh</a>
+, <a class="el" href="classoomph_1_1TriangleScaffoldMesh.html#a5eefdeebf6e15c37bf5bc5e8cf89242a">oomph::TriangleScaffoldMesh</a>
+</li>
+<li>Element_count_per_dof
+: <a class="el" href="classoomph_1_1Problem.html#ae4177b73a790b80d541b416d1e83c6c3">oomph::Problem</a>
+</li>
+<li>Element_index_in_mesh
+: <a class="el" href="classSamplePoint.html#ac2fcd449feb15e9fdf348b946b60ae37">SamplePoint</a>
+</li>
+<li>Element_pt
+: <a class="el" href="classoomph_1_1Mesh.html#aca12acfe655a4d5c4a4eab4a7b970812">oomph::Mesh</a>
+, <a class="el" href="classoomph_1_1PoroelasticityFaceElement.html#abc3e4d3ab29b19432676b25962b7994d">oomph::PoroelasticityFaceElement&lt; ELEMENT &gt;</a>
+</li>
+<li>Element_volume
+: <a class="el" href="classoomph_1_1GmshParameters.html#aa7993da33a0468681e5f661ac5b00bfb">oomph::GmshParameters</a>
+</li>
+<li>Elemental_assembly_time
+: <a class="el" href="classoomph_1_1Problem.html#a2b2bcde2b051f47278ccf8446699bbfb">oomph::Problem</a>
+</li>
+<li>Elemental_dimension
+: <a class="el" href="classoomph_1_1FiniteElement.html#a92fb5f65488fb499541910d86dd73df0">oomph::FiniteElement</a>
+</li>
+<li>Empty_actions_after_read_unstructured_meshes_has_been_called
+: <a class="el" href="classoomph_1_1Problem.html#a71f87e46a571a54abd27a26f6c701c36">oomph::Problem</a>
+</li>
+<li>Empty_actions_before_read_unstructured_meshes_has_been_called
+: <a class="el" href="classoomph_1_1Problem.html#a5f13ea67c29022392857b5c19bb3af71">oomph::Problem</a>
+</li>
+<li>Enable_redistribution_of_segments_between_polylines
+: <a class="el" href="classoomph_1_1TriangleMeshPolygon.html#ad5f0494a9cda7d7e122eacb0a6c2bd27">oomph::TriangleMeshPolygon</a>
+</li>
+<li>Enable_resolve
+: <a class="el" href="classoomph_1_1LinearSolver.html#a5f5e7e7a44ff0897b0e4cd9524000edc">oomph::LinearSolver</a>
+</li>
+<li>Enable_timing_of_setup
+: <a class="el" href="classSamplePointContainer.html#a1755d4419776cc87ab27e845d03449de">SamplePointContainer</a>
+</li>
+<li>Epetra_matrix_pt
+: <a class="el" href="classoomph_1_1MatrixVectorProduct.html#a14264b497811bc0d959be7f3022cd4d2">oomph::MatrixVectorProduct</a>
+, <a class="el" href="classoomph_1_1TrilinosAztecOOSolver.html#a2d0905cb4a63b119e784a5caee458691">oomph::TrilinosAztecOOSolver</a>
+, <a class="el" href="classoomph_1_1TrilinosPreconditionerBase.html#a515a6df2a535337d520cfe98bdcd38f4">oomph::TrilinosPreconditionerBase</a>
+</li>
+<li>Epetra_preconditioner_pt
+: <a class="el" href="classoomph_1_1TrilinosAztecOOSolver.html#a7a419b3a461f998608dcc9b868fb0a89">oomph::TrilinosAztecOOSolver</a>
+, <a class="el" href="classoomph_1_1TrilinosPreconditionerBase.html#a082fb118f5c9cb80daffba53d85a74d8">oomph::TrilinosPreconditionerBase</a>
+</li>
+<li>Epsilon
+: <a class="el" href="classoomph_1_1WarpedCircularDisk.html#a1b247844e433658dd5b829220543ac78">oomph::WarpedCircularDisk</a>
+</li>
+<li>Eqn_number
+: <a class="el" href="classoomph_1_1Data.html#a1863d191b66fc4b22fa282ef357c0513">oomph::Data</a>
+, <a class="el" href="classoomph_1_1GeneralisedElement.html#a26e06e097f06b11892645d725ef85890">oomph::GeneralisedElement</a>
+</li>
+<li>Eqn_number_backup
+: <a class="el" href="classoomph_1_1FpPressureAdvectionDiffusionProblem.html#ad2e52d2785ab08702684bab80542bbd8">oomph::FpPressureAdvectionDiffusionProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1NavierStokesSchurComplementPreconditioner.html#a7677eca3c799be64774cae9a23c8c858">oomph::NavierStokesSchurComplementPreconditioner</a>
+</li>
+<li>Error_weight
+: <a class="el" href="classoomph_1_1BDF.html#a64fe5c2a1e2872698dd72033d9f0087f">oomph::BDF&lt; NSTEPS &gt;</a>
+, <a class="el" href="classoomph_1_1TR.html#a5dbcb466fcff21c9780c0cf1b8971bc4">oomph::TR</a>
+</li>
+<li>Essential_cpu_total
+: <a class="el" href="classoomph_1_1PicardConvergenceData.html#aa79f69879023de7cd55d7343a504b3b6">oomph::PicardConvergenceData</a>
+</li>
+<li>Eta
+: <a class="el" href="classoomph_1_1PolarNavierStokesTractionElement.html#ae80d473cf67d10d4ffe7e3124a9ffce9">oomph::PolarNavierStokesTractionElement&lt; ELEMENT &gt;</a>
+</li>
+<li>Eta_pt
+: <a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a31a8e3c278b1c2ce7238b71902812ffd">oomph::AxisymFoepplvonKarmanEquations</a>
+, <a class="el" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#abf9d5f5d90d02be23cec55593b6f0e16">oomph::DisplacementBasedFoepplvonKarmanEquations</a>
+, <a class="el" href="classoomph_1_1FoepplvonKarmanEquations.html#a87b07cdd082aeda0e5c1d731328492bf">oomph::FoepplvonKarmanEquations</a>
+</li>
+<li>Euclid_droptol
+: <a class="el" href="classoomph_1_1HypreInterface.html#af91bb7e92785e510c04cdb0c11ef99cf">oomph::HypreInterface</a>
+</li>
+<li>Euclid_level
+: <a class="el" href="classoomph_1_1HypreInterface.html#a0ae9320b5116bb330ddd1096d20f556e">oomph::HypreInterface</a>
+</li>
+<li>Euclid_print_level
+: <a class="el" href="classoomph_1_1HypreInterface.html#adc83c27b78ac44ccdba2a85191e474c1">oomph::HypreInterface</a>
+</li>
+<li>Euclid_rowScale
+: <a class="el" href="classoomph_1_1HypreInterface.html#a16a2f90a3e7fcdb2909d400d82b90286">oomph::HypreInterface</a>
+</li>
+<li>Euclid_using_BJ
+: <a class="el" href="classoomph_1_1HypreInterface.html#a1405f23d6ffdf4afe2839434a3f738e0">oomph::HypreInterface</a>
+</li>
+<li>Euclid_using_ILUT
+: <a class="el" href="classoomph_1_1HypreInterface.html#afe6e93b2655b578090a5d9abb91c2e22">oomph::HypreInterface</a>
+</li>
+<li>Evaluate_dresidual_dnodal_coordinates_by_fd
+: <a class="el" href="classoomph_1_1ElementWithMovingNodes.html#a48a91f84864bc2346ee4b9d50d2250b1">oomph::ElementWithMovingNodes</a>
+</li>
+<li>Evaluate_jacobian_by_fd
+: <a class="el" href="classoomph_1_1PVDEquationsBase.html#ab63c545f5b34501a58d5d47c56ba1471">oomph::PVDEquationsBase&lt; DIM &gt;</a>
+</li>
+<li>Exact_solution_pt
+: <a class="el" href="classoomph_1_1ODEElement.html#a57144f54edb040be5d139d2768fcd396">oomph::ODEElement</a>
+</li>
+<li>Exact_vorticity_fct_pt
+: <a class="el" href="classoomph_1_1VorticitySmootherElement.html#a63f838b49c19f7c3686c50b455da2e36">oomph::VorticitySmootherElement&lt; ELEMENT &gt;</a>
+</li>
+<li>Exception_stream_pt
+: <a class="el" href="classoomph_1_1OomphLibException.html#ab9177b3f4d969f3e4d102487165103c7">oomph::OomphLibException</a>
+</li>
+<li>Exception_stringstream_pt
+: <a class="el" href="classoomph_1_1OomphLibException.html#a94df333a8bdcb4b89eeb516a64a3429e">oomph::OomphLibException</a>
+</li>
+<li>Existing_preconditioner
+: <a class="el" href="classoomph_1_1HypreInterface.html#afbf32858e2c01d037c7f16de713df49e">oomph::HypreInterface</a>
+</li>
+<li>Existing_solver
+: <a class="el" href="classoomph_1_1HypreInterface.html#ab81e804ece2fbf658eac9c1f5c1ddc0b">oomph::HypreInterface</a>
+</li>
+<li>Explicit_predictor_pt
+: <a class="el" href="classoomph_1_1TimeStepper.html#a41f408e1a313ae5b1806c3a306d720a2">oomph::TimeStepper</a>
+</li>
+<li>Explicit_time_stepper_pt
+: <a class="el" href="classoomph_1_1Problem.html#af8466091ea4f5b57033bb3ad24831167">oomph::Problem</a>
+</li>
+<li>Exponential_parameter_pt
+: <a class="el" href="classoomph_1_1HerschelBulkleyPapRegConstitutiveEquation.html#ad21182de6f65351e6dcac6e288ecc51d">oomph::HerschelBulkleyPapRegConstitutiveEquation&lt; DIM &gt;</a>
+</li>
+<li>External_data_number_of_external_pressure
+: <a class="el" href="classoomph_1_1FluidInterfaceElement.html#a2d4c5b3e08177f5695fa9e76bf08b570">oomph::FluidInterfaceElement</a>
+</li>
+<li>External_data_number_of_Pext
+: <a class="el" href="classoomph_1_1PolarNavierStokesTractionElement.html#a58a8649d507efb205d2abbad55c31f57">oomph::PolarNavierStokesTractionElement&lt; ELEMENT &gt;</a>
+</li>
+<li>External_element_local_coord
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a7de6fe7b0230003be863e156e516d803">oomph::ElementWithExternalElement</a>
+</li>
+<li>External_element_pt
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a716c9187aad0ca94fc39391fed292f96">oomph::ElementWithExternalElement</a>
+</li>
+<li>External_force_fct_pt
+: <a class="el" href="classoomph_1_1ImmersedRigidBodyElement.html#aac35cbe02cabee08a706aadd03af801a">oomph::ImmersedRigidBodyElement</a>
+</li>
+<li>External_halo_element_pt
+: <a class="el" href="classoomph_1_1Mesh.html#afb2def03c6259295dbd65303584edf31">oomph::Mesh</a>
+</li>
+<li>External_halo_node_pt
+: <a class="el" href="classoomph_1_1Mesh.html#ad30b8d9485ce49908983600293887440">oomph::Mesh</a>
+</li>
+<li>External_haloed_element_pt
+: <a class="el" href="classoomph_1_1Mesh.html#a3a031fedb3ebe4762e09c0416f2eaca2">oomph::Mesh</a>
+</li>
+<li>External_haloed_node_pt
+: <a class="el" href="classoomph_1_1Mesh.html#a6af0686ce8758874520426cfac5e7899">oomph::Mesh</a>
+</li>
+<li>External_interaction_field_data_index
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a4974acb07f164a01a41912e7aae63f02">oomph::ElementWithExternalElement</a>
+</li>
+<li>External_interaction_field_data_local_eqn
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a7dfd20a89ea1ad65f4263525aacdab59">oomph::ElementWithExternalElement</a>
+</li>
+<li>External_interaction_field_data_pt
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a78e89193aa13a86a88c8b6b16141e194">oomph::ElementWithExternalElement</a>
+</li>
+<li>External_interaction_geometric_data_index
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#aba1db798c02c38ae859b381c5d00b7dc">oomph::ElementWithExternalElement</a>
+</li>
+<li>External_interaction_geometric_data_local_eqn
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#ae4da8e21a19748487f716505f08c0d5f">oomph::ElementWithExternalElement</a>
+</li>
+<li>External_interaction_geometric_data_pt
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#ab72abfc5f23aebc3ea25083be8857c3e">oomph::ElementWithExternalElement</a>
+</li>
+<li>External_or_internal_data_index_of_eigenvalue
+: <a class="el" href="classoomph_1_1LinearisedNavierStokesEigenfunctionNormalisationElement.html#ab76cf80d4d2c9856b1bde4b835107c99">oomph::LinearisedNavierStokesEigenfunctionNormalisationElement</a>
+</li>
+<li>External_or_internal_data_index_of_traded_pressure
+: <a class="el" href="classoomph_1_1VolumeConstraintElement.html#a51d3b504e02842219a50f043e8cd81f3">oomph::VolumeConstraintElement</a>
+</li>
+<li>External_reference_pressure_index
+: <a class="el" href="classoomph_1_1PseudoBucklingRingElement.html#a5be4c42822597f8fe8d73c4188f7e81e">oomph::PseudoBucklingRingElement</a>
+</li>
+<li>External_reference_pressure_pt
+: <a class="el" href="classoomph_1_1PseudoBucklingRingElement.html#a236c62ff5aa7f3daab7861cea26c6bbd">oomph::PseudoBucklingRingElement</a>
+</li>
+<li>External_torque_fct_pt
+: <a class="el" href="classoomph_1_1ImmersedRigidBodyElement.html#a4061f0ed0ea1ca3a8d0b618664ce889a">oomph::ImmersedRigidBodyElement</a>
+</li>
+<li>Extra_holes_coordinates
+: <a class="el" href="classoomph_1_1TriangleMeshParameters.html#aa503725c7d6941b3b55d00498576ea5a">oomph::TriangleMeshParameters</a>
+, <a class="el" href="classoomph_1_1UnstructuredTwoDMeshGeometryBase.html#a75f6839c28d529b43ada0bd94df8b79f">oomph::UnstructuredTwoDMeshGeometryBase</a>
+</li>
+<li>Extruded_domain_pt
+: <a class="el" href="classoomph_1_1ExtrudedCubeMeshFromQuadMesh.html#a4ca62b8ba6a7828647dc1e10e09102a0">oomph::ExtrudedCubeMeshFromQuadMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1ExtrudedMacroElement.html#a953e0b43da1ee646e9be3a329ceaf390">oomph::ExtrudedMacroElement</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:03:35
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

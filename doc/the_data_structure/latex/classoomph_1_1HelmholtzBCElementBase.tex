@@ -1,0 +1,409 @@
+\hypertarget{classoomph_1_1HelmholtzBCElementBase}{}\doxysection{oomph\+::Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1HelmholtzBCElementBase}\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+
+
+A class for elements that allow the approximation of the Sommerfeld radiation BC. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class.  
+
+
+
+
+{\ttfamily \#include $<$helmholtz\+\_\+bc\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.925810cm]{classoomph_1_1HelmholtzBCElementBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a3d3dae6a01616db735b2624f5a06bdd5}{Helmholtz\+B\+C\+Element\+Base}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a5d421cc79d20936a49dea012ef38077a}{Helmholtz\+B\+C\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a29f6e4cfef6066d637f0eea0e2253075}{Helmholtz\+B\+C\+Element\+Base}} (const \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{Helmholtz\+B\+C\+Element\+Base}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a66defe3dfc1150d37015c43c08fd93b1}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a7337e98fa91e804f02d2d1642b01977b}{output}} (std\+::ostream \&outfile)
+\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a10eda724d26f4b2e10b914cba57c8339}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a6dbcc0b0a81ab422f6a45f4d4a63d9a3}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ac521eae27bbc9dbd72c788ecfe59f4cc}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a756997c0a98903754b30fed24c92091a}{u\+\_\+index\+\_\+helmholtz}} () const
+\begin{DoxyCompactList}\small\item\em Return the index at which the real/imag unknown value is stored. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a32688fe93c7350d93b90ee0a81add3e5}{global\+\_\+power\+\_\+contribution}} ()
+\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a406cb34eb2852b9507cca4f97b3002bc}{global\+\_\+power\+\_\+contribution}} (std\+::ofstream \&outfile)
+\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. Also output the power density as a fct of the polar angle in the specified output file if it\textquotesingle{}s open. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a893de4dec96142dfbc64ea78e88737ec}{compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&a\+\_\+coeff\+\_\+pos, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&a\+\_\+coeff\+\_\+neg)
+\begin{DoxyCompactList}\small\item\em Compute element\textquotesingle{}s contribution to Fourier components of the solution -- length of vector indicates number of terms to be computed. ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a0ab124ee22e66e97013264cad6cc0c07}{test\+\_\+only}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ab3183e6c6d742852fc890742a4e06d3f}{d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsi\+\_\+ds, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtest\+\_\+ds) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape, test functions and derivates and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}{U\+\_\+index\+\_\+helmholtz}}
+\begin{DoxyCompactList}\small\item\em The index at which the real and imag part of the unknown is stored at the nodes. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}{Dim}}
+\begin{DoxyCompactList}\small\item\em The spatial dimension of the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+A class for elements that allow the approximation of the Sommerfeld radiation BC. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
+
+Definition at line 169 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a3d3dae6a01616db735b2624f5a06bdd5}\label{classoomph_1_1HelmholtzBCElementBase_a3d3dae6a01616db735b2624f5a06bdd5}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!HelmholtzBCElementBase@{HelmholtzBCElementBase}}
+\index{HelmholtzBCElementBase@{HelmholtzBCElementBase}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{HelmholtzBCElementBase()}{HelmholtzBCElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{Helmholtz\+B\+C\+Element\+Base}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. 
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index. 
+
+Definition at line 1891 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+helmholtz(), and oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+helmholtz.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a5d421cc79d20936a49dea012ef38077a}\label{classoomph_1_1HelmholtzBCElementBase_a5d421cc79d20936a49dea012ef38077a}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!HelmholtzBCElementBase@{HelmholtzBCElementBase}}
+\index{HelmholtzBCElementBase@{HelmholtzBCElementBase}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{HelmholtzBCElementBase()}{HelmholtzBCElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{Helmholtz\+B\+C\+Element\+Base}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken empty constructor. 
+
+
+
+Definition at line 180 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a29f6e4cfef6066d637f0eea0e2253075}\label{classoomph_1_1HelmholtzBCElementBase_a29f6e4cfef6066d637f0eea0e2253075}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!HelmholtzBCElementBase@{HelmholtzBCElementBase}}
+\index{HelmholtzBCElementBase@{HelmholtzBCElementBase}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{HelmholtzBCElementBase()}{HelmholtzBCElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{Helmholtz\+B\+C\+Element\+Base}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 189 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a893de4dec96142dfbc64ea78e88737ec}\label{classoomph_1_1HelmholtzBCElementBase_a893de4dec96142dfbc64ea78e88737ec}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!compute\_contribution\_to\_fourier\_components@{compute\_contribution\_to\_fourier\_components}}
+\index{compute\_contribution\_to\_fourier\_components@{compute\_contribution\_to\_fourier\_components}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_contribution\_to\_fourier\_components()}{compute\_contribution\_to\_fourier\_components()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{a\+\_\+coeff\+\_\+pos,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{a\+\_\+coeff\+\_\+neg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute element\textquotesingle{}s contribution to Fourier components of the solution -- length of vector indicates number of terms to be computed. ~\newline
+ 
+
+
+
+Definition at line 387 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Finite\+Element\+::dshape\+\_\+local(), oomph\+::\+Mathematical\+Constants\+::\+I(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Integral\+::knot(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Integral\+::nweight(), s, oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+helmholtz, and oomph\+::\+Integral\+::weight().
+
+
+
+Referenced by oomph\+::\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+fourier\+\_\+components().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_ab3183e6c6d742852fc890742a4e06d3f}\label{classoomph_1_1HelmholtzBCElementBase_ab3183e6c6d742852fc890742a4e06d3f}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!d\_shape\_and\_test\_local@{d\_shape\_and\_test\_local}}
+\index{d\_shape\_and\_test\_local@{d\_shape\_and\_test\_local}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{d\_shape\_and\_test\_local()}{d\_shape\_and\_test\_local()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsi\+\_\+ds,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtest\+\_\+ds }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape, test functions and derivates and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
+
+
+
+Definition at line 520 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Finite\+Element\+::dshape\+\_\+local(), i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), and s.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+Absorbing\+B\+C\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a32688fe93c7350d93b90ee0a81add3e5}\label{classoomph_1_1HelmholtzBCElementBase_a32688fe93c7350d93b90ee0a81add3e5}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
+\index{global\_power\_contribution@{global\_power\_contribution}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{global\_power\_contribution()}{global\_power\_contribution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::global\+\_\+power\+\_\+contribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. 
+
+
+
+Definition at line 244 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a406cb34eb2852b9507cca4f97b3002bc}\label{classoomph_1_1HelmholtzBCElementBase_a406cb34eb2852b9507cca4f97b3002bc}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
+\index{global\_power\_contribution@{global\_power\_contribution}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{global\_power\_contribution()}{global\_power\_contribution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::global\+\_\+power\+\_\+contribution (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. Also output the power density as a fct of the polar angle in the specified output file if it\textquotesingle{}s open. 
+
+
+
+Definition at line 255 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::u\+\_\+index\+\_\+helmholtz(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a6dbcc0b0a81ab422f6a45f4d4a63d9a3}\label{classoomph_1_1HelmholtzBCElementBase_a6dbcc0b0a81ab422f6a45f4d4a63d9a3}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 226 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_ac521eae27bbc9dbd72c788ecfe59f4cc}\label{classoomph_1_1HelmholtzBCElementBase_ac521eae27bbc9dbd72c788ecfe59f4cc}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 231 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a7337e98fa91e804f02d2d1642b01977b}\label{classoomph_1_1HelmholtzBCElementBase_a7337e98fa91e804f02d2d1642b01977b}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 217 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a10eda724d26f4b2e10b914cba57c8339}\label{classoomph_1_1HelmholtzBCElementBase_a10eda724d26f4b2e10b914cba57c8339}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 221 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a0ab124ee22e66e97013264cad6cc0c07}\label{classoomph_1_1HelmholtzBCElementBase_a0ab124ee22e66e97013264cad6cc0c07}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!test\_only@{test\_only}}
+\index{test\_only@{test\_only}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{test\_only()}{test\_only()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::test\+\_\+only (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
+
+
+
+Definition at line 507 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), s, and oomph\+::\+Finite\+Element\+::shape().
+
+
+
+Referenced by oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a756997c0a98903754b30fed24c92091a}\label{classoomph_1_1HelmholtzBCElementBase_a756997c0a98903754b30fed24c92091a}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!u\_index\_helmholtz@{u\_index\_helmholtz}}
+\index{u\_index\_helmholtz@{u\_index\_helmholtz}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{u\_index\_helmholtz()}{u\_index\_helmholtz()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u\+\_\+index\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the index at which the real/imag unknown value is stored. 
+
+
+
+Definition at line 236 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+helmholtz.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::global\+\_\+power\+\_\+contribution(), and oomph\+::\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a66defe3dfc1150d37015c43c08fd93b1}\label{classoomph_1_1HelmholtzBCElementBase_a66defe3dfc1150d37015c43c08fd93b1}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f76c8487d152e68a6}{oomph\+::\+Face\+Element}}.
+
+
+
+Definition at line 210 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}\label{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28f28286abb6d0b7cc}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!Dim@{Dim}}
+\index{Dim@{Dim}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Dim}{Dim}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Dim\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The spatial dimension of the problem. 
+
+
+
+Definition at line 549 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local(), oomph\+::\+Helmholtz\+Absorbing\+B\+C\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc(), oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), and oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Helmholtz\+B\+C\+Element\+Base().
+
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}\label{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}} 
+\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!U\_index\_helmholtz@{U\_index\_helmholtz}}
+\index{U\_index\_helmholtz@{U\_index\_helmholtz}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{U\_index\_helmholtz}{U\_index\_helmholtz}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+B\+C\+Element\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::U\+\_\+index\+\_\+helmholtz\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The index at which the real and imag part of the unknown is stored at the nodes. 
+
+
+
+Definition at line 546 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components(), oomph\+::\+Helmholtz\+Absorbing\+B\+C\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc(), oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Helmholtz\+B\+C\+Element\+Base(), and oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::u\+\_\+index\+\_\+helmholtz().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{helmholtz__bc__elements_8h}{helmholtz\+\_\+bc\+\_\+elements.\+h}}\end{DoxyCompactItemize}

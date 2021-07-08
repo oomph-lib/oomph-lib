@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Parallel solution of a 2D Poisson problem with flux boundary conditions</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Parallel solution of a 2D Poisson problem with flux boundary conditions </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This document provides an overview of how to distribute the <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">2D Poisson problem with flux boundary conditions</a>. It is part of a <a href="../../../example_code_list/html/index.html#distributed">series of tutorials</a> that discuss how to modify existing serial driver codes so that the <code>Problem</code> object can be distributed across multiple processors.</p>
+<p>A feature of this problem is that the flux boundary conditions are applied by attaching "flux elements" (derived from the <code>FaceElement</code> base class) to the "bulk elements" adjacent to the appropriate mesh boundary. As discussed in the <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">tutorial for the serial driver code</a>, the <code>FaceElements</code> are not involved in any adaptation within the bulk mesh. Instead, they are detached before the bulk mesh is adapted and re-attached afterwards, which ensures that the <code>FaceElements</code> are only attached to bulk elements present in the adapted mesh.</p>
+<p>The same issue arises when the <code>Problem</code> is distributed: all <code>FaceElements</code> must be attached before the problem is distributed to allow <code>METIS</code> to analyse the interaction between face and bulk elements correctly. However, after the <code>Problem</code> has been distributed, some of the bulk elements on each processor will have been deleted, leaving the corresponding <code>FaceElement</code> dangling. To deal with such problems, <code>oomph-lib</code> provides the empty virtual functions</p>
+<div class="fragment"><div class="line">Problem::actions_before_distribute() </div>
+</div><!-- fragment --><p>and</p>
+<div class="fragment"><div class="line">Problem::actions_after_distribute() </div>
+</div><!-- fragment --><p>which are called automatically by <code>Problem::distribute(...)</code>. Specifically, <code>Problem::actions_before_distribute()</code> is called <b>after</b> the problem distribution has been determined by <code>METIS</code> but <b>before</b> the actual distribution (during which elements are deleted) takes place. <code>Problem::actions_after_distribute()</code> is called after the problem distribution is complete.</p>
+<p>In the present problem we overload the functions <code>Problem::actions_before_distribute()</code> and <code>Problem::actions_after_distribute()</code> to perform the same functions as <code>actions_before_adapt()</code> (i.e. delete the flux elements) and <code>actions_after_adapt()</code> (i.e. re-attach the flux elements). <br  />
+ We note that any <code>FaceElement</code> that is attached to a halo element in the bulk mesh becomes a halo element itself; see the <a href="../../general_mpi/html/index.html#face_elements">general MPI tutorial</a> for further details.</p>
+<p>Most of driver code is identical to its serial counterpart and we only discuss the changes required to distribute the problem. Please refer to <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">another tutorial</a> for a more detailed discussion of the problem and its (serial) implementation.</p>
+<hr  />
+<h1><a class="anchor" id="main_body"></a>
+The main function</h1>
+<p>The only changes required to the main function are the usual calls to initialise and finalise <code>oomph-lib's</code> MPI routines and a single call to <code>Problem::distribute()</code> after the problem has been constructed. The source code is actually slightly more complicated because the distribution is read in from a file so that the driver can be used as a self-test. Note that the file must specify the partition for <b>all</b> elements, including the <code>FaceElements</code>. (We refer to <a href="../../adaptive_driven_cavity/html/index.html#no_disk">another tutorial</a> for details on how to create the distribution file.)</p>
+<hr  />
+<h1><a class="anchor" id="problem_class"></a>
+The problem class</h1>
+<p>The only additions to the problem class are the functions <code>actions_before_distribute()</code> and <code>actions_after_distribute()</code>. As explained above, these perform exactly the same functions as <code>actions_before_adapt()</code> and <code>actions_after_adapt()</code>, respectively.</p>
+ <div class="fragment"><div class="line"> <span class="comment">/// \short Actions before distribute: Wipe the mesh of prescribed flux elements</span></div>
+<div class="line"><span class="comment"> /// (simply call actions_before_adapt() which does the same thing)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_distribute()</div>
+<div class="line">  {</div>
+<div class="line">   actions_before_adapt();</div>
+<div class="line">  }</div>
+</div><!-- fragment --><div class="fragment"><div class="line"> <span class="comment">/// \short Actions after distribute: Rebuild the mesh of prescribed flux </span></div>
+<div class="line"><span class="comment"> /// elements (simply call actions_after_adapt() which does the same thing)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_distribute()</div>
+<div class="line">  {</div>
+<div class="line">   actions_after_adapt();</div>
+<div class="line">  }</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="doc_solution"></a>
+The doc_solution() function</h1>
+<p>As with other driver codes, the output files are modified to allow each processor to output its elements into files that include the processor number.</p>
+<div class="fragment"><div class="line"><span class="comment">//=====================start_of_doc=======================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution: doc_info contains labels/output directory etc.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> RefineableTwoMeshFluxPoissonProblem&lt;ELEMENT&gt;::doc_solution(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc refinement levels in bulk mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> min_refinement_level;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_refinement_level;</div>
+<div class="line"> Bulk_mesh_pt-&gt;get_refinement_levels(min_refinement_level,</div>
+<div class="line">                                     max_refinement_level); </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Ultimate min/max. refinement levels in bulk mesh : &quot;</span> </div>
+<div class="line">      &lt;&lt; min_refinement_level &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">      &lt;&lt; max_refinement_level &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution with halo elements </span></div>
+<div class="line"> <span class="comment">//-----------------------------------</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;enable_output_of_halo_elements();</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln_with_halo%i_on_proc%i.dat&quot;</span>,</div>
+<div class="line">         doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number(),this-&gt;communicator_pt()-&gt;my_rank());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> Bulk_mesh_pt-&gt;disable_output_of_halo_elements();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i_on_proc%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number(),this-&gt;communicator_pt()-&gt;my_rank());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/exact_soln%i_on_proc%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number(),this-&gt;communicator_pt()-&gt;my_rank());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error and return of the square of the L2 error</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------------</span></div>
+<div class="line"> <span class="keywordtype">double</span> error,norm;</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/error%i_on_proc%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number(),this-&gt;communicator_pt()-&gt;my_rank());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;compute_error(some_file,TanhSolnForPoisson::get_exact_u,</div>
+<div class="line">                               error,norm); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc L2 error and norm of solution</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\nNorm of error   : &quot;</span> &lt;&lt; sqrt(error) &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Norm of solution: &quot;</span> &lt;&lt; sqrt(norm) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+</div><!-- fragment --><hr  />
+<p>The remainder of this driver code is unchanged from the <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">serial version</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/mpi/distribution/two_d_poisson_flux_bc_adapt/">demo_drivers/mpi/distribution/two_d_poisson_flux_bc_adapt/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/mpi/distribution/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc">demo_drivers/mpi/distribution/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:27:30
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

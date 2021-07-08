@@ -1,0 +1,150 @@
+\hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{}\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.490353cm]{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_ace75c8edb3d87019dc7f06152205adab}{Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a0b03071bbe7e95cc6723c221ddc0998a}{wall\+\_\+pt}}, const double \&xi\+\_\+lo, const double \&fract\+\_\+mid, const double \&xi\+\_\+hi, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}}) and the algebraic node update functions for nodes. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a2d8953d309eba614524fce77c44c8d46}{$\sim$\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a99403c711c3fdc2a601b478deebef9fe}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
+\begin{DoxyCompactList}\small\item\em Resolve mesh update\+: Update current nodal positions via sparse Macro\+Element-\/based update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a94b5efa53ac7689757dad989098df7ed}{setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em Setup all the information that\textquotesingle{}s required for Macro\+Element-\/based node update\+: Tell the elements that their geometry depends on the geometric object that parametrises the wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Macro\+Element\+Node\+Update version of \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                     -\/-\/-\/\_\_\_}
+\DoxyCodeLine{                    |      -\/-\/-\/\_\_\_\_}
+\DoxyCodeLine{                    |              -\/   BOUNDARY 1}
+\DoxyCodeLine{                    |               /  }
+\DoxyCodeLine{                    |     [2]      /  |  }
+\DoxyCodeLine{                    |             /     | }
+\DoxyCodeLine{                    | N          /        |  }
+\DoxyCodeLine{                    | |\_ E      /          |    }
+\DoxyCodeLine{     BOUNDARY 2     |-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/           |  }
+\DoxyCodeLine{                    |          |    [1]    |}
+\DoxyCodeLine{                    |   [0]    |           |  \string^}
+\DoxyCodeLine{                    |          |           | / \(\backslash\)  direction \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a63db2bdb4f52051f8eedaa4d840052a0}{of}}}
+\DoxyCodeLine{                    | N        |    N      |  |   Lagrangian }
+\DoxyCodeLine{                    | |\_ E     |    |\_ E   |  |   coordinate }
+\DoxyCodeLine{                    |\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_|  |   along wall \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{GeomObject}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{                         BOUNDARY 0}
+\DoxyCodeLine{}
+\DoxyCodeLine{Within \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_ae3472ac0ca382c5891ce00bc933b3d82}{the}} elements (MacroElements), \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_ae3472ac0ca382c5891ce00bc933b3d82}{the}} local coordinates}
+\DoxyCodeLine{are such that \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_ae3472ac0ca382c5891ce00bc933b3d82}{the}} (E)astern \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a1524c35ac1b2d58c3987908e5ced7143}{direction}} coincides with \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_ae3472ac0ca382c5891ce00bc933b3d82}{the}} positive }
+\DoxyCodeLine{s\_0 \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a1524c35ac1b2d58c3987908e5ced7143}{direction}},  \textcolor{keywordflow}{while} \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_ae3472ac0ca382c5891ce00bc933b3d82}{the}} (N)orther \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a1524c35ac1b2d58c3987908e5ced7143}{direction}} coincides with \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_ae3472ac0ca382c5891ce00bc933b3d82}{the}} positive }
+\DoxyCodeLine{s\_1 \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a1524c35ac1b2d58c3987908e5ced7143}{direction}}.}
+\end{DoxyCode}
+
+
+Domain is parametrised by three macro elements as sketched. Elements need to be derived from Macro\+Element\+Node\+Update\+Element\+Base. ~\newline
+ 
+
+Definition at line 271 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_ace75c8edb3d87019dc7f06152205adab}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_ace75c8edb3d87019dc7f06152205adab}} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!MacroElementNodeUpdateRefineableQuarterCircleSectorMesh@{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}}
+\index{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh@{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}!oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()}{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$}]{wall\+\_\+pt,  }\item[{const double \&}]{xi\+\_\+lo,  }\item[{const double \&}]{fract\+\_\+mid,  }\item[{const double \&}]{xi\+\_\+hi,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}}) and the algebraic node update functions for nodes. 
+
+
+
+Definition at line 288 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a2d8953d309eba614524fce77c44c8d46}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a2d8953d309eba614524fce77c44c8d46}} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!````~MacroElementNodeUpdateRefineableQuarterCircleSectorMesh@{$\sim$MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}}
+\index{````~MacroElementNodeUpdateRefineableQuarterCircleSectorMesh@{$\sim$MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}!oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()}{~MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line 331 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a99403c711c3fdc2a601b478deebef9fe}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a99403c711c3fdc2a601b478deebef9fe}} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resolve mesh update\+: Update current nodal positions via sparse Macro\+Element-\/based update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. 
+
+
+
+Definition at line 338 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a94b5efa53ac7689757dad989098df7ed}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a94b5efa53ac7689757dad989098df7ed}} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!setup\_macro\_element\_node\_update@{setup\_macro\_element\_node\_update}}
+\index{setup\_macro\_element\_node\_update@{setup\_macro\_element\_node\_update}!oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_macro\_element\_node\_update()}{setup\_macro\_element\_node\_update()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Setup all the information that\textquotesingle{}s required for Macro\+Element-\/based node update\+: Tell the elements that their geometry depends on the geometric object that parametrises the wall. 
+
+
+
+Definition at line 366 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::domain\+\_\+pt(), and oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Wall\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}\end{DoxyCompactItemize}

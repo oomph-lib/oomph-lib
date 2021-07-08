@@ -1,0 +1,370 @@
+\hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{}\doxysection{oomph\+::Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.866667cm]{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a2a37e8e8ecd533cecf206b6e721a7c40}{Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}}, const bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
+\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a356e76ecee122d1b8c6af2cf57eb1f50}{$\sim$\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Destructor should not delete anything. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aa7bce6c4395e0d1e15dfb64c7778296d}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em This function returns just the residuals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_acdd0da587eca88b8361ffacb503c717e}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em This function returns the residuals and the jacobian. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aa18851e7f1cd4dd9cf9e06c606625c96}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_ad68da7b74369c3cd69ac1ab004216e01}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void($\ast$\&)(const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a600e109c2ae2435add97cd5d7a9d644c}{traction\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the imposed traction pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a350157b77114d4d761e1a04846fbb1d3}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
+ \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a51874f9c60a2025f00998dc2dab65464}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Space\+Time\+Element representation, by default. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a0dd0c98bad3a48200a5bd1cec80ec307}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a34d6765470ce98acbb4ad4855300e4a1}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_ad0dabb5d3e4bf3d085a8edcd0ec137a0}{get\+\_\+traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a6063edc480ffa07b832dc24d11800c4f}{Dim}}
+\begin{DoxyCompactList}\small\item\em The highest dimension of the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void($\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aec5d2670416767435ae242444db71565}{Traction\+\_\+fct\+\_\+pt}} )(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Pointer to an imposed traction function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+A class for elements that allow the imposition of an applied traction to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class 
+
+Definition at line 51 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a2a37e8e8ecd533cecf206b6e721a7c40}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a2a37e8e8ecd533cecf206b6e721a7c40}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!NavierStokesMixedOrderSpaceTimeTractionElement@{NavierStokesMixedOrderSpaceTimeTractionElement}}
+\index{NavierStokesMixedOrderSpaceTimeTractionElement@{NavierStokesMixedOrderSpaceTimeTractionElement}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{NavierStokesMixedOrderSpaceTimeTractionElement()}{NavierStokesMixedOrderSpaceTimeTractionElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
+
+Definition at line 67 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a356e76ecee122d1b8c6af2cf57eb1f50}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a356e76ecee122d1b8c6af2cf57eb1f50}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!````~NavierStokesMixedOrderSpaceTimeTractionElement@{$\sim$NavierStokesMixedOrderSpaceTimeTractionElement}}
+\index{````~NavierStokesMixedOrderSpaceTimeTractionElement@{$\sim$NavierStokesMixedOrderSpaceTimeTractionElement}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$NavierStokesMixedOrderSpaceTimeTractionElement()}{~NavierStokesMixedOrderSpaceTimeTractionElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor should not delete anything. 
+
+
+
+Definition at line 123 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_acdd0da587eca88b8361ffacb503c717e}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_acdd0da587eca88b8361ffacb503c717e}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This function returns the residuals and the jacobian. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{oomph\+::\+Finite\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesMixedOrderSpaceTimeTractionElement_a8ab58019e773b8d78302cb3c27052dc2}{oomph\+::\+Refineable\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+
+
+
+Definition at line 148 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aa7bce6c4395e0d1e15dfb64c7778296d}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aa7bce6c4395e0d1e15dfb64c7778296d}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This function returns just the residuals. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesMixedOrderSpaceTimeTractionElement_a53e0038a491b158e6c6ba71e4bb2b5a4}{oomph\+::\+Refineable\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+
+
+
+Definition at line 138 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a350157b77114d4d761e1a04846fbb1d3}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a350157b77114d4d761e1a04846fbb1d3}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}
+\index{fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
+ 
+
+Function that returns the residuals for the imposed traction Navier-\/\+Stokes equations 
+
+Definition at line 341 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, e, i, residuals(), and oomph\+::\+Quad\+Tree\+Names\+::W.
+
+
+
+Referenced by oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_ad0dabb5d3e4bf3d085a8edcd0ec137a0}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_ad0dabb5d3e4bf3d085a8edcd0ec137a0}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!get\_traction@{get\_traction}}
+\index{get\_traction@{get\_traction}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to calculate the traction applied to the fluid. 
+
+
+
+Definition at line 303 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, i, n, and oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aa18851e7f1cd4dd9cf9e06c606625c96}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aa18851e7f1cd4dd9cf9e06c606625c96}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 157 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_ad68da7b74369c3cd69ac1ab004216e01}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_ad68da7b74369c3cd69ac1ab004216e01}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 164 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a34d6765470ce98acbb4ad4855300e4a1}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a34d6765470ce98acbb4ad4855300e4a1}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
+\index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
+ 
+
+
+
+Definition at line 202 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), s, oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$(), oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::shape$<$ 3 $>$(), and oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Test\+::shape$<$ 3 $>$().
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a0dd0c98bad3a48200a5bd1cec80ec307}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a0dd0c98bad3a48200a5bd1cec80ec307}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!u\_local\_eqn@{u\_local\_eqn}}
+\index{u\_local\_eqn@{u\_local\_eqn}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{u\_local\_eqn()}{u\_local\_eqn()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
+
+
+
+Definition at line 195 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a51874f9c60a2025f00998dc2dab65464}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a51874f9c60a2025f00998dc2dab65464}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Space\+Time\+Element representation, by default. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f76c8487d152e68a6}{oomph\+::\+Face\+Element}}.
+
+
+
+Definition at line 182 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a6063edc480ffa07b832dc24d11800c4f}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a6063edc480ffa07b832dc24d11800c4f}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!Dim@{Dim}}
+\index{Dim@{Dim}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Dim}{Dim}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Dim\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The highest dimension of the problem. 
+
+
+
+Definition at line 328 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction(), and oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a600e109c2ae2435add97cd5d7a9d644c}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_a600e109c2ae2435add97cd5d7a9d644c}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!traction\_fct\_pt@{traction\_fct\_pt}}
+\index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void($\ast$\&)(const double\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& result) \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the imposed traction pointer. 
+
+
+
+Definition at line 127 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aec5d2670416767435ae242444db71565}\label{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement_aec5d2670416767435ae242444db71565}} 
+\index{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
+\index{Traction\_fct\_pt@{Traction\_fct\_pt}!oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesMixedOrderSpaceTimeTractionElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traction\_fct\_pt}{Traction\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void($\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Traction\+\_\+fct\+\_\+pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to an imposed traction function. 
+
+
+
+Definition at line 58 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction(), and oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__fluid__traction__elements_8h}{mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}\end{DoxyCompactItemize}

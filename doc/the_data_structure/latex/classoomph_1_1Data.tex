@@ -1,0 +1,1748 @@
+\hypertarget{classoomph_1_1Data}{}\doxysection{oomph\+::Data Class Reference}
+\label{classoomph_1_1Data}\index{oomph::Data@{oomph::Data}}
+
+
+A class that represents a collection of data; each \mbox{\hyperlink{classoomph_1_1Data}{Data}} object may contain many different individual values, as would be natural in non-\/scalar problems. \mbox{\hyperlink{classoomph_1_1Data}{Data}} provides storage for auxiliary `history' values that are used by \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} objects to calculate the time derivatives of the stored data and also stores a pointer to the appropriate \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} object. In addition, an associated (global) equation number is stored for each value.  
+
+
+
+
+{\ttfamily \#include $<$nodes.\+h$>$}
+
+Inheritance diagram for oomph\+::Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.382716cm]{classoomph_1_1Data}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_a409e3140829def2b1e738a24cc1f48bb}{clear\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Helper function that should be overloaded derived classes that contain copies of data. The function must unset (N\+U\+LL out) the internal pointers to the copied data. This is used when destructing data to ensure that all pointers remain valid. The default implementation throws an error because \mbox{\hyperlink{classoomph_1_1Data}{Data}} cannot be a copy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data_acbecfbd1dd3af51da9facdd897b64e74}{Data}} ()
+\begin{DoxyCompactList}\small\item\em Default\+: Just set pointer to (steady) timestepper. No storage for values is allocated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data_a352ab3876876780d366866704a29dbb0}{Data}} (const unsigned \&initial\+\_\+n\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Default constructor for steady problems\+: assign memory for initial\+\_\+n\+\_\+value values. ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data_afe56d22d0dba308e33191e922993c5ee}{Data}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}{time\+\_\+stepper\+\_\+pt}}, const unsigned \&initial\+\_\+n\+\_\+value, const bool \&allocate\+\_\+storage=true)
+\begin{DoxyCompactList}\small\item\em Constructor for unsteady problems\+: assign memory for initial\+\_\+n\+\_\+value values and any memory required by the Timestepper for the storage of history values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data_a196816030b33f26c011cb45bce2f6897}{Data}} (const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&data)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_ae68161e2bb30db0938b09db2f8fb4c9d}{operator=}} (const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1Data_a91d15d22184e0488123d856ea4c455f8}{$\sim$\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, deallocates memory assigned for data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_acd22fabfb127ff4ea37a5bc60c61b414}{set\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}{time\+\_\+stepper\+\_\+pt}}, const bool \&preserve\+\_\+existing\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Set a new timestepper by resizing the appropriate storage. If already assigned the equation numbering will not be altered. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\& \mbox{\hyperlink{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}{time\+\_\+stepper\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return the pointer to the timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1Data_a1c862c3ff907f78f2c1da03f753ca5f4}{time\+\_\+stepper\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return the pointer to the timestepper (const version). \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}{is\+\_\+a\+\_\+copy}} () const
+\begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the \mbox{\hyperlink{classoomph_1_1Data}{Data}} objact contains any copied values. A base \mbox{\hyperlink{classoomph_1_1Data}{Data}} object can never be a copy so the default implementation always returns false. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classoomph_1_1Data_ae31cff2285588c40cd33fac0cabcc371}{is\+\_\+a\+\_\+copy}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return flag to indicate whether the i-\/th value is a copy. A base \mbox{\hyperlink{classoomph_1_1Data}{Data}} object can never be a copy so the default implementation always returns false. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const double \&value\+\_\+)
+\begin{DoxyCompactList}\small\item\em Set the i-\/th stored data value to specified value. The only reason that we require an explicit set function is because we redefine \mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value()}} in the \mbox{\hyperlink{classoomph_1_1Node}{Node}} class to interpolate the values for nodes that are hanging and so we cannot return a reference to the value in this case. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a39c1ab8b0a45af29101c606b965bed07}{set\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const double \&value\+\_\+)
+\begin{DoxyCompactList}\small\item\em Set the t-\/th history value of the i-\/th stored data value to specified value. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return i-\/th stored value. This function is not virtual so that it can be inlined. This means that if we have an explicit pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object Data$\ast$ data\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value()}} always returns the \char`\"{}raw\char`\"{} stored value. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1Data_a3fad35eda2f9e1c69f163f1cd4d104ea}{value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return i-\/th value at time level t (t=0\+: present, t$>$0\+: previous) This function is not virtual so that it can be inlined. This means that if we have an explicit pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object Data$\ast$ data\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value()}} always returns to the \char`\"{}raw\char`\"{} stored value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a0a28f485ac3508c1cc37d3e0b7e86efe}{value}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}}) const
+\begin{DoxyCompactList}\small\item\em Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a15ab0a61bc348ba1b8b73d096a1bc70f}{value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}}) const
+\begin{DoxyCompactList}\small\item\em Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinned) in this data at time level t (t=0\+: present; t$>$0\+: previous). \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1Data_a559dc196abee87cad34d655c8d6dac1e}{value\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return the pointer to the i-\/the stored value. Typically this is required when direct access to the stored value is required, e.\+g. when writing functions that return a reference to a variable that is stored in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1Data_ae96cadc48ab7d39aa6ed7bd91abe2e47}{value\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return the pointer to the i-\/th stored value, or any of its history values (const version). Typically this is required when direct access to the stored value is required, e.\+g. when writing functions that return a reference to a variable that is stored in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1Data_a1f001b88764d62579e0ed8d53f9d359f}{does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+value}} (double $\ast$const \&parameter\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Check whether the pointer parameter\+\_\+pt addresses internal data values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a57889a9db7ca009434f0268173fcf3f8}{copy}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$orig\+\_\+data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Copy \mbox{\hyperlink{classoomph_1_1Data}{Data}} values from specified \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a87fa5ba80f2e6f0d0fb9658b9b358c05}{dump}} (std\+::ostream \&dump\+\_\+file) const
+\begin{DoxyCompactList}\small\item\em Dump the data object to a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_ad520cff679734b7654b1638ada2c728a}{read}} (std\+::ifstream \&restart\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Read data object from a file. \end{DoxyCompactList}\item 
+long $\ast$ \mbox{\hyperlink{classoomph_1_1Data_a35cc8d05b72d9101e54ddf5808da4a54}{eqn\+\_\+number\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the pointer to the equation number of the i-\/th stored variable. \end{DoxyCompactList}\item 
+long \& \mbox{\hyperlink{classoomph_1_1Data_a13206dcb7a088db0ef845ab71af505d2}{eqn\+\_\+number}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the equation number of the i-\/th stored variable. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{classoomph_1_1Data_a0181614ab39e3b02d28acba40bb33cb2}{eqn\+\_\+number}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return the equation number of the i-\/th stored variable. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Pin the i-\/th stored variable. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Unpin the i-\/th stored variable. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a16277ea5b41cd9b09739b21a379d7eb4}{pin\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Pin all the stored variables. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a590a3262e33167e464bb5d34c90a88ef}{unpin\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Unpin all the stored variables. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1Data_aedd0c445396ddcd650c814d17fef77dc}{is\+\_\+pinned}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Test whether the i-\/th variable is pinned (1\+: true; 0\+: false). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1Data_a46bcce858da1ca61069329fda4876171}{is\+\_\+segregated\+\_\+solve\+\_\+pinned}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Test whether the i-\/th variable is temporaily pinned for a segregated solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a210c28ac93988dd8dbbbd944f6138c35}{constrain}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Constrain the i-\/th stored variable when making hanging data If the data is already pinned leave it along, otherwise mark as constrained (hanging) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_accb670734a29a841e9ead16b703626ce}{unconstrain}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Unconstrain the i-\/th stored variable when make the data nonhanging. Only unconstrain if it was actually constrained (hanging) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_ab8a322d75fc3e744cc6c9e945232ff4e}{constrain\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Constrain all the stored variables when the data is made hanging. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a5e6a0d030f5e3230908f8a5eaf607082}{unconstrain\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Unconstrain all the stored variables when the data is made nonhanging. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1Data_ac3169455e25c1dc8fd2d3de458c5e101}{is\+\_\+constrained}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Test whether the i-\/th variable is constrained (1\+: true; 0\+: false). \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Data_ae43b63b56afb8574db6da68f85802f80}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}} () const
+\begin{DoxyCompactList}\small\item\em Return number of values stored in data object (incl pinned ones). \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}} () const
+\begin{DoxyCompactList}\small\item\em Return total number of doubles stored per value to record time history of each value (one for steady problems). \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_a98412724efd3d51925de1a24341f7f41}{assign\+\_\+eqn\+\_\+numbers}} (unsigned long \&global\+\_\+ndof, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Assign global equation numbers; increment global number of unknowns, global\+\_\+ndof; and add any new dofs to the dof\+\_\+pt. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_a2dae16e2dcff9a40029f834c83364df5}{describe\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
+\begin{DoxyCompactList}\small\item\em Function to describe the dofs of the \mbox{\hyperlink{classoomph_1_1Node}{Node}}. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_ac68583834c9bef47f5c37c890960e186}{resize}} (const unsigned \&n\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Change (increase) the number of values that may be stored. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_a314ae9723424aa30d1275ab213d38936}{add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map}} (std\+::map$<$ unsigned, double $\ast$ $>$ \&map\+\_\+of\+\_\+value\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Add pointers to all unpinned and unconstrained data to a map indexed by (global) equation number. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_ac96b285ae3f1ce549807072b652573bf}{set\+\_\+halo}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1Data_ae8ef6f90c536b83bd393dbc87920741e}{non\+\_\+halo\+\_\+proc\+\_\+\+ID}})
+\begin{DoxyCompactList}\small\item\em Label the node as halo and specify processor that holds non-\/halo counterpart. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_ab2c485e220d3cf13647d251c509f5136}{set\+\_\+nonhalo}} ()
+\begin{DoxyCompactList}\small\item\em Label the node as not being a halo. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1Data_a6227d2775850d6cf482d8af0afc50f5c}{is\+\_\+halo}} () const
+\begin{DoxyCompactList}\small\item\em Is this \mbox{\hyperlink{classoomph_1_1Data}{Data}} a halo? \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1Data_ae8ef6f90c536b83bd393dbc87920741e}{non\+\_\+halo\+\_\+proc\+\_\+\+ID}} ()
+\begin{DoxyCompactList}\small\item\em ID of processor ID that holds non-\/halo counterpart of halo node; negative if not a halo. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_a6c40a2fbaf44f976d71d9768e1c9ccfa}{add\+\_\+values\+\_\+to\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&vector\+\_\+of\+\_\+values)
+\begin{DoxyCompactList}\small\item\em Add all data and time history values to the vector in the internal storage order. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_a6b8bc02debd1bce8e1bfc68cd9a54695}{read\+\_\+values\+\_\+from\+\_\+vector}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&vector\+\_\+of\+\_\+values, unsigned \&index)
+\begin{DoxyCompactList}\small\item\em Read all data and time history values from the vector starting from index. On return the index will be set to the value at the end of the data that has been read in. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_a1d3f7c4200506d11fea3c647fe498f5d}{add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ long $>$ \&vector\+\_\+of\+\_\+eqn\+\_\+numbers)
+\begin{DoxyCompactList}\small\item\em Add all equation numbers to the vector in the internal storage order. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_ae958e52df6ede2a08f957db4ee685ca7}{read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ long $>$ \&vector\+\_\+of\+\_\+eqn\+\_\+numbers, unsigned \&index)
+\begin{DoxyCompactList}\small\item\em Read all equation numbers from the vector starting from index. On return the index will be set to the value at the end of the data that has been read in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static long \mbox{\hyperlink{classoomph_1_1Data_a3f351624d334f1babf55170d539b36fa}{Is\+\_\+pinned}} =-\/1
+\begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to indicate that the value is pinned. \end{DoxyCompactList}\item 
+static long \mbox{\hyperlink{classoomph_1_1Data_ad83f76cbcd76d8ed96aca53dd04d5abf}{Is\+\_\+segregated\+\_\+solve\+\_\+pinned}} =-\/3
+\begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to indicate that the value is pinned, but only for the duration of a segregated solve. \end{DoxyCompactList}\item 
+static long \mbox{\hyperlink{classoomph_1_1Data_ac56011da9a923069793ecc3cb54f5e20}{Is\+\_\+unclassified}} =-\/10
+\begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to denote a value that hasn\textquotesingle{}t been classified as pinned or free. \end{DoxyCompactList}\item 
+static long \mbox{\hyperlink{classoomph_1_1Data_a71225ddbb54744f6fe662af5a5520ab8}{Is\+\_\+constrained}} =-\/2
+\begin{DoxyCompactList}\small\item\em Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to indicate that the value is constrained because it is associated with non-\/conforming element boundaries --- a hanging node --- (and is therefore pinned) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Data_afd33533f3ddf61bc34106a4dc72de541}{reset\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Helper function that should be overloaded in derived classes that can contain copies of \mbox{\hyperlink{classoomph_1_1Data}{Data}}. The function must reset the internal pointers to the copied data. This is used when resizing data to ensure that all the pointers remain valid. The default implementation throws an error beacause \mbox{\hyperlink{classoomph_1_1Data}{Data}} cannot be a copy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1Data_a4e1e4a227baddb8f075761c48b06f4af}{Copy\+\_\+of\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em C-\/style array of any \mbox{\hyperlink{classoomph_1_1Data}{Data}} objects that contain copies of the current \mbox{\hyperlink{classoomph_1_1Data}{Data}} object\textquotesingle{}s data values. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Data_a7e8dbdf96bf78658e85c1d7f81ff10dd}{Ncopies}}
+\begin{DoxyCompactList}\small\item\em Number of \mbox{\hyperlink{classoomph_1_1Data}{Data}} that contain copies of this \mbox{\hyperlink{classoomph_1_1Data}{Data}} object\textquotesingle{}s values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ \mbox{\hyperlink{classoomph_1_1Data_a05936a16f5fca1612ad3f47b4e87d267}{Default\+\_\+static\+\_\+time\+\_\+stepper\+\_\+pt}} =new \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$0$>$()
+\begin{DoxyCompactList}\small\item\em Default (static) timestepper used in steady problems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a3fcd8a39ef027a9329b8e71439cf11bc}{range\+\_\+check}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Check that the arguments are within the range of the stored data values and timesteps. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_ac5e1189e9f12749545ab95d560968aee}{delete\+\_\+value\+\_\+storage}} ()
+\begin{DoxyCompactList}\small\item\em Delete all storage allocated by the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object for values and equation numbers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a12041550d37ff348ce82c85076fe36ba}{add\+\_\+copy}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Add the pointer data\+\_\+pt to the array Copy\+\_\+of\+\_\+data\+\_\+pt. This should be used whenever copies are made of the data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Data_a3fd7b4d0cc8ac713572f04ffda5a92c7}{remove\+\_\+copy}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Remove the pointer data\+\_\+pt from the array Copy\+\_\+of\+\_\+data\+\_\+pt. This should be used whenever copies of the data are deleted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1Data_aa69aab29cca43c9be329904807203ef1}{Value}}
+\begin{DoxyCompactList}\small\item\em C-\/style array of pointers to data values and possible history values. The data must be ordered in such a way that Value\mbox{[}i\mbox{]}\mbox{[}t\mbox{]} gives the i-\/th data value at the time value t. The ordering is chosen so that all the time levels of a particular value can be access from a single pointer to a double. This is required for copying/hijacking functionality. The data should be accessed by using the member functions value(time,ival) and set\+\_\+value(time,ival,value), where time=0\+: present. ~\newline
+ \end{DoxyCompactList}\item 
+long $\ast$ \mbox{\hyperlink{classoomph_1_1Data_a1863d191b66fc4b22fa282ef357c0513}{Eqn\+\_\+number}}
+\begin{DoxyCompactList}\small\item\em C-\/style array of pointers to the (global) equation numbers of the values. ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ \mbox{\hyperlink{classoomph_1_1Data_a63442f4cabaff13e7116e0b80d350d92}{Time\+\_\+stepper\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a Timestepper. The inclusion of a Timestepper pointer in the \mbox{\hyperlink{classoomph_1_1Data}{Data}} class, ensures that time-\/derivatives can be calculated and storage can be managed at the low (\mbox{\hyperlink{classoomph_1_1Data}{Data}}) level. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Data_a379d45fb0d0170fcdec06dbbc97a504d}{Nvalue}}
+\begin{DoxyCompactList}\small\item\em Number of values stored in the data object. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1Data_a5474e601ebda6bde66c179c92831729e}{Non\+\_\+halo\+\_\+proc\+\_\+\+ID}}
+\begin{DoxyCompactList}\small\item\em Non-\/halo processor ID for \mbox{\hyperlink{classoomph_1_1Data}{Data}}; -\/1 if it\textquotesingle{}s not a halo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1Data_a45b7c97b9e9c5f94eb2a9efeae2dbc08}{Hijacked\+Data}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1Data_a68cfdb0f861066a7be74be2524466388}{Copied\+Data}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1Data_a3d5c6d911301ca1704ce34955d8b3c6b}{Boundary\+Node\+Base}}
+\item 
+{\footnotesize template$<$class N\+O\+D\+E\+\_\+\+T\+Y\+PE $>$ }\\class \mbox{\hyperlink{classoomph_1_1Data_a75261ed432ecec54f676ec5bb0db4d5a}{Boundary\+Node}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1Data_afe40e893f1c68d80f58bdbfc1e1d3cdc}{Solid\+Node}}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classoomph_1_1Data_abad7fa6bf4988e5a0336ba3ce71b5147}{operator$<$$<$}} (std\+::ostream \&out, const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&d)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that represents a collection of data; each \mbox{\hyperlink{classoomph_1_1Data}{Data}} object may contain many different individual values, as would be natural in non-\/scalar problems. \mbox{\hyperlink{classoomph_1_1Data}{Data}} provides storage for auxiliary `history' values that are used by \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} objects to calculate the time derivatives of the stored data and also stores a pointer to the appropriate \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} object. In addition, an associated (global) equation number is stored for each value. 
+
+The \mbox{\hyperlink{classoomph_1_1Data}{Data}} class permits copies of the stored data values and equation numbers into another \mbox{\hyperlink{classoomph_1_1Data}{Data}} object using the \mbox{\hyperlink{classoomph_1_1Data_a57889a9db7ca009434f0268173fcf3f8}{copy()}} function. Shallow (pointer based) copies of the values can be obtained by using specific derived classes. In such cases pointers to the objects that contain the pointer-\/based copies should be stored in the original \mbox{\hyperlink{classoomph_1_1Data}{Data}} class (in the array Copy\+\_\+of\+\_\+data\+\_\+pt) so that resize and destruction operations can be performed safely. ~\newline
+ 
+
+Definition at line 85 of file nodes.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1Data_acbecfbd1dd3af51da9facdd897b64e74}\label{classoomph_1_1Data_acbecfbd1dd3af51da9facdd897b64e74}} 
+\index{oomph::Data@{oomph::Data}!Data@{Data}}
+\index{Data@{Data}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Data\+::\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default\+: Just set pointer to (steady) timestepper. No storage for values is allocated. 
+
+Default constructor.
+
+Default constructor for steady problems. Memory is assigned for a given number of values, which are assumed to be free (not pinned) Constructor for unsteady problems. Memory is assigned for a given number of values; and the additional storage required by the Timestepper. The values are assumed to be free (not pinned). \mbox{\hyperlink{classoomph_1_1Data}{Data}} output operator\+: output equation numbers and values at all times, along with any extra information stored for the timestepper. 
+
+Definition at line 231 of file nodes.\+cc.
+
+
+
+Referenced by oomph\+::\+Solid\+Node\+::\+Solid\+Node().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a352ab3876876780d366866704a29dbb0}\label{classoomph_1_1Data_a352ab3876876780d366866704a29dbb0}} 
+\index{oomph::Data@{oomph::Data}!Data@{Data}}
+\index{Data@{Data}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Data\+::\+Data (\begin{DoxyParamCaption}\item[{const unsigned \&}]{initial\+\_\+n\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Default constructor for steady problems\+: assign memory for initial\+\_\+n\+\_\+value values. ~\newline
+ 
+
+\mbox{\Hypertarget{classoomph_1_1Data_afe56d22d0dba308e33191e922993c5ee}\label{classoomph_1_1Data_afe56d22d0dba308e33191e922993c5ee}} 
+\index{oomph::Data@{oomph::Data}!Data@{Data}}
+\index{Data@{Data}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Data\+::\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt,  }\item[{const unsigned \&}]{initial\+\_\+n\+\_\+value,  }\item[{const bool \&}]{allocate\+\_\+storage = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Constructor for unsteady problems\+: assign memory for initial\+\_\+n\+\_\+value values and any memory required by the Timestepper for the storage of history values. 
+
+\mbox{\Hypertarget{classoomph_1_1Data_a196816030b33f26c011cb45bce2f6897}\label{classoomph_1_1Data_a196816030b33f26c011cb45bce2f6897}} 
+\index{oomph::Data@{oomph::Data}!Data@{Data}}
+\index{Data@{Data}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Data\+::\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 224 of file nodes.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a91d15d22184e0488123d856ea4c455f8}\label{classoomph_1_1Data_a91d15d22184e0488123d856ea4c455f8}} 
+\index{oomph::Data@{oomph::Data}!````~Data@{$\sim$Data}}
+\index{````~Data@{$\sim$Data}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{$\sim$Data()}{~Data()}}
+{\footnotesize\ttfamily oomph\+::\+Data\+::$\sim$\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor, deallocates memory assigned for data. 
+
+Virtual destructor, deallocates memory assigned for data. 
+
+Definition at line 450 of file nodes.\+cc.
+
+
+
+References clear\+\_\+copied\+\_\+pointers(), Copy\+\_\+of\+\_\+data\+\_\+pt, delete\+\_\+value\+\_\+storage(), i, and Ncopies.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1Data_a12041550d37ff348ce82c85076fe36ba}\label{classoomph_1_1Data_a12041550d37ff348ce82c85076fe36ba}} 
+\index{oomph::Data@{oomph::Data}!add\_copy@{add\_copy}}
+\index{add\_copy@{add\_copy}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{add\_copy()}{add\_copy()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::add\+\_\+copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Add the pointer data\+\_\+pt to the array Copy\+\_\+of\+\_\+data\+\_\+pt. This should be used whenever copies are made of the data. 
+
+Add the pointer data\+\_\+pt to the internal storage used to keep track of copies of the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
+
+Definition at line 80 of file nodes.\+cc.
+
+
+
+References Copy\+\_\+of\+\_\+data\+\_\+pt, i, and Ncopies.
+
+
+
+Referenced by oomph\+::\+Copied\+Data\+::\+Copied\+Data(), oomph\+::\+Hijacked\+Data\+::\+Hijacked\+Data(), oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic(), and oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+nodes\+\_\+periodic().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a1d3f7c4200506d11fea3c647fe498f5d}\label{classoomph_1_1Data_a1d3f7c4200506d11fea3c647fe498f5d}} 
+\index{oomph::Data@{oomph::Data}!add\_eqn\_numbers\_to\_vector@{add\_eqn\_numbers\_to\_vector}}
+\index{add\_eqn\_numbers\_to\_vector@{add\_eqn\_numbers\_to\_vector}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{add\_eqn\_numbers\_to\_vector()}{add\_eqn\_numbers\_to\_vector()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ long $>$ \&}]{vector\+\_\+of\+\_\+eqn\+\_\+numbers }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Add all equation numbers to the vector in the internal storage order. 
+
+Add all equation numbers to the vector. The function is virtual so that it can be overloaded by Solid\+Nodes to add the additional equation numbers associated with the solid dofs in those objects. 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_ad875a778d7d3bc32a847d93f6698bce4}{oomph\+::\+Solid\+Node}}.
+
+
+
+Definition at line 1177 of file nodes.\+cc.
+
+
+
+References Eqn\+\_\+number, eqn\+\_\+number\+\_\+pt(), i, and nvalue().
+
+
+
+Referenced by oomph\+::\+Solid\+Node\+::add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), and oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a314ae9723424aa30d1275ab213d38936}\label{classoomph_1_1Data_a314ae9723424aa30d1275ab213d38936}} 
+\index{oomph::Data@{oomph::Data}!add\_value\_pt\_to\_map@{add\_value\_pt\_to\_map}}
+\index{add\_value\_pt\_to\_map@{add\_value\_pt\_to\_map}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{add\_value\_pt\_to\_map()}{add\_value\_pt\_to\_map()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map (\begin{DoxyParamCaption}\item[{std\+::map$<$ unsigned, double $\ast$ $>$ \&}]{map\+\_\+of\+\_\+value\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Add pointers to all unpinned and unconstrained data to a map indexed by (global) equation number. 
+
+Add pointers to all unpinned and unconstrained data to a map indexed by (global) equation number 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a5f40df8654ff95575da7aaa7b31dca2e}{oomph\+::\+Solid\+Node}}.
+
+
+
+Definition at line 1037 of file nodes.\+cc.
+
+
+
+References eqn\+\_\+number(), i, nvalue(), and value\+\_\+pt().
+
+
+
+Referenced by oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), and oomph\+::\+Solid\+Node\+::add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a6c40a2fbaf44f976d71d9768e1c9ccfa}\label{classoomph_1_1Data_a6c40a2fbaf44f976d71d9768e1c9ccfa}} 
+\index{oomph::Data@{oomph::Data}!add\_values\_to\_vector@{add\_values\_to\_vector}}
+\index{add\_values\_to\_vector@{add\_values\_to\_vector}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{add\_values\_to\_vector()}{add\_values\_to\_vector()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::add\+\_\+values\+\_\+to\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{vector\+\_\+of\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Add all data and time history values to the vector in the internal storage order. 
+
+Add all data and time history values to a vector that will be used when communicating data between processors. The function is virtual so that it can be overloaded by Nodes and Solid\+Nodes to add the additional data present in those objects. 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a20562ea5133c1150b6999a73badb63e8}{oomph\+::\+Solid\+Node}}, and \mbox{\hyperlink{classoomph_1_1Node_a11400682e1fd2851777234a779e8bf8d}{oomph\+::\+Node}}.
+
+
+
+Definition at line 1061 of file nodes.\+cc.
+
+
+
+References i, ntstorage(), nvalue(), t, and Value.
+
+
+
+Referenced by oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data\+\_\+values\+\_\+to\+\_\+vector(), and oomph\+::\+Node\+::add\+\_\+values\+\_\+to\+\_\+vector().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a98412724efd3d51925de1a24341f7f41}\label{classoomph_1_1Data_a98412724efd3d51925de1a24341f7f41}} 
+\index{oomph::Data@{oomph::Data}!assign\_eqn\_numbers@{assign\_eqn\_numbers}}
+\index{assign\_eqn\_numbers@{assign\_eqn\_numbers}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{assign\_eqn\_numbers()}{assign\_eqn\_numbers()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::assign\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{unsigned long \&}]{global\+\_\+number,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&}]{dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Assign global equation numbers; increment global number of unknowns, global\+\_\+ndof; and add any new dofs to the dof\+\_\+pt. 
+
+Assign (global) equation number. This function does N\+OT initialise the value because if we\textquotesingle{}re using things like node position as variables in the problem they will have been set before the call to assign equation numbers and setting it to zero will wipe it out \+:(.
+
+Pass\+:
+\begin{DoxyItemize}
+\item current number of global dofs global\+\_\+number (which gets incremented)
+\item the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to global dofs (to which new dofs get added) 
+\end{DoxyItemize}
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_ae0f41fc05338192c3e9d4492c516110d}{oomph\+::\+Solid\+Node}}, \mbox{\hyperlink{classoomph_1_1Node_a5f727227a1c8fdc7d5d422492b98cefd}{oomph\+::\+Node}}, \mbox{\hyperlink{classoomph_1_1CopiedData_a112772da6e653b066c93016ac8aba32c}{oomph\+::\+Copied\+Data}}, and \mbox{\hyperlink{classoomph_1_1HijackedData_aa6408f434b1674ee1cd40c1348e95a87}{oomph\+::\+Hijacked\+Data}}.
+
+
+
+Definition at line 857 of file nodes.\+cc.
+
+
+
+References Eqn\+\_\+number, eqn\+\_\+number(), i, is\+\_\+constrained(), is\+\_\+halo(), Is\+\_\+pinned, is\+\_\+pinned(), is\+\_\+segregated\+\_\+solve\+\_\+pinned(), Nvalue, and value\+\_\+pt().
+
+
+
+Referenced by oomph\+::\+Node\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Solid\+Node\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Boundary\+Node$<$ N\+O\+D\+E\+\_\+\+T\+Y\+P\+E $>$\+::assign\+\_\+eqn\+\_\+numbers(), and oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+eqn\+\_\+numbers().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a409e3140829def2b1e738a24cc1f48bb}\label{classoomph_1_1Data_a409e3140829def2b1e738a24cc1f48bb}} 
+\index{oomph::Data@{oomph::Data}!clear\_copied\_pointers@{clear\_copied\_pointers}}
+\index{clear\_copied\_pointers@{clear\_copied\_pointers}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{clear\_copied\_pointers()}{clear\_copied\_pointers()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::clear\+\_\+copied\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Helper function that should be overloaded derived classes that contain copies of data. The function must unset (N\+U\+LL out) the internal pointers to the copied data. This is used when destructing data to ensure that all pointers remain valid. The default implementation throws an error because \mbox{\hyperlink{classoomph_1_1Data}{Data}} cannot be a copy. 
+
+Helper function that should be overloaded classes that contain copies of data. The function must unset (N\+U\+LL out) the internal pointers to the copied data. This is used when destructing data to ensure that all pointers remain valid. 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1CopiedData_a675b1811d9c6b1ba1ce4bbcb7b681245}{oomph\+::\+Copied\+Data}}, and \mbox{\hyperlink{classoomph_1_1HijackedData_aff8443f8455e18b3893c094326c4d212}{oomph\+::\+Hijacked\+Data}}.
+
+
+
+Definition at line 175 of file nodes.\+cc.
+
+
+
+Referenced by $\sim$\+Data().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a210c28ac93988dd8dbbbd944f6138c35}\label{classoomph_1_1Data_a210c28ac93988dd8dbbbd944f6138c35}} 
+\index{oomph::Data@{oomph::Data}!constrain@{constrain}}
+\index{constrain@{constrain}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{constrain()}{constrain()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::constrain (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constrain the i-\/th stored variable when making hanging data If the data is already pinned leave it along, otherwise mark as constrained (hanging) 
+
+
+
+Definition at line 412 of file nodes.\+h.
+
+
+
+References eqn\+\_\+number(), i, Is\+\_\+constrained, and Is\+\_\+pinned.
+
+
+
+Referenced by oomph\+::\+Node\+::assign\+\_\+eqn\+\_\+numbers(), constrain\+\_\+all(), oomph\+::\+Node\+::resize(), and oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ab8a322d75fc3e744cc6c9e945232ff4e}\label{classoomph_1_1Data_ab8a322d75fc3e744cc6c9e945232ff4e}} 
+\index{oomph::Data@{oomph::Data}!constrain\_all@{constrain\_all}}
+\index{constrain\_all@{constrain\_all}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{constrain\_all()}{constrain\_all()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::constrain\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constrain all the stored variables when the data is made hanging. 
+
+
+
+Definition at line 421 of file nodes.\+h.
+
+
+
+References constrain(), i, and Nvalue.
+
+
+
+Referenced by oomph\+::\+Solid\+Node\+::constrain\+\_\+positions().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a57889a9db7ca009434f0268173fcf3f8}\label{classoomph_1_1Data_a57889a9db7ca009434f0268173fcf3f8}} 
+\index{oomph::Data@{oomph::Data}!copy@{copy}}
+\index{copy@{copy}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$}]{orig\+\_\+data\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Copy \mbox{\hyperlink{classoomph_1_1Data}{Data}} values from specified \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
+
+
+
+Definition at line 557 of file nodes.\+cc.
+
+
+
+References ntstorage(), nvalue(), set\+\_\+value(), t, and value().
+
+
+
+Referenced by oomph\+::\+Node\+::copy(), oomph\+::\+Solid\+Node\+::copy(), and oomph\+::\+Problem\+::copy().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ac5e1189e9f12749545ab95d560968aee}\label{classoomph_1_1Data_ac5e1189e9f12749545ab95d560968aee}} 
+\index{oomph::Data@{oomph::Data}!delete\_value\_storage@{delete\_value\_storage}}
+\index{delete\_value\_storage@{delete\_value\_storage}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{delete\_value\_storage()}{delete\_value\_storage()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::delete\+\_\+value\+\_\+storage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Delete all storage allocated by the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object for values and equation numbers. 
+
+Delete all the storage allocated by the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and set its pointers to N\+U\+LL 
+
+Definition at line 186 of file nodes.\+cc.
+
+
+
+References Eqn\+\_\+number, and Value.
+
+
+
+Referenced by oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic(), oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+nodes\+\_\+periodic(), and $\sim$\+Data().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a2dae16e2dcff9a40029f834c83364df5}\label{classoomph_1_1Data_a2dae16e2dcff9a40029f834c83364df5}} 
+\index{oomph::Data@{oomph::Data}!describe\_dofs@{describe\_dofs}}
+\index{describe\_dofs@{describe\_dofs}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{describe\_dofs()}{describe\_dofs()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::describe\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to describe the dofs of the \mbox{\hyperlink{classoomph_1_1Node}{Node}}. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) 
+
+Function to describe the dofs of the \mbox{\hyperlink{classoomph_1_1Data}{Data}}. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a93ba15b4ab3ccd1d0030179878df4330}{oomph\+::\+Solid\+Node}}.
+
+
+
+Definition at line 901 of file nodes.\+cc.
+
+
+
+References Eqn\+\_\+number, eqn\+\_\+number(), i, and Nvalue.
+
+
+
+Referenced by oomph\+::\+Generalised\+Element\+::describe\+\_\+dofs(), oomph\+::\+Solid\+Node\+::describe\+\_\+dofs(), oomph\+::\+Element\+With\+Moving\+Nodes\+::describe\+\_\+local\+\_\+dofs(), oomph\+::\+Spectral\+Element\+::describe\+\_\+local\+\_\+dofs(), oomph\+::\+F\+S\+I\+Wall\+Element\+::describe\+\_\+local\+\_\+dofs(), oomph\+::\+Element\+With\+External\+Element\+::describe\+\_\+local\+\_\+dofs(), oomph\+::\+Generalised\+Element\+::describe\+\_\+local\+\_\+dofs(), and oomph\+::\+Finite\+Element\+::describe\+\_\+nodal\+\_\+local\+\_\+dofs().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a1f001b88764d62579e0ed8d53f9d359f}\label{classoomph_1_1Data_a1f001b88764d62579e0ed8d53f9d359f}} 
+\index{oomph::Data@{oomph::Data}!does\_pointer\_correspond\_to\_value@{does\_pointer\_correspond\_to\_value}}
+\index{does\_pointer\_correspond\_to\_value@{does\_pointer\_correspond\_to\_value}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{does\_pointer\_correspond\_to\_value()}{does\_pointer\_correspond\_to\_value()}}
+{\footnotesize\ttfamily bool oomph\+::\+Data\+::does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+value (\begin{DoxyParamCaption}\item[{double $\ast$const \&}]{parameter\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Check whether the pointer parameter\+\_\+pt addresses internal data values. 
+
+If pointer parameter\+\_\+pt addresses internal data values then return return true, otherwise return false 
+
+Definition at line 529 of file nodes.\+cc.
+
+
+
+References i, ntstorage(), nvalue(), and Value.
+
+
+
+Referenced by oomph\+::\+Mesh\+::does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+mesh\+\_\+data(), and oomph\+::\+Solid\+Node\+::does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+position\+\_\+data().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a87fa5ba80f2e6f0d0fb9658b9b358c05}\label{classoomph_1_1Data_a87fa5ba80f2e6f0d0fb9658b9b358c05}} 
+\index{oomph::Data@{oomph::Data}!dump@{dump}}
+\index{dump@{dump}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{dump()}{dump()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::dump (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{dump\+\_\+file }\end{DoxyParamCaption}) const}
+
+
+
+Dump the data object to a file. 
+
+Dump data object to a file. 
+
+Definition at line 604 of file nodes.\+cc.
+
+
+
+References ntstorage(), nvalue(), t, and value().
+
+
+
+Referenced by oomph\+::\+Spine\+Mesh\+::dump(), oomph\+::\+Mesh\+::dump(), and oomph\+::\+Node\+::dump().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a13206dcb7a088db0ef845ab71af505d2}\label{classoomph_1_1Data_a13206dcb7a088db0ef845ab71af505d2}} 
+\index{oomph::Data@{oomph::Data}!eqn\_number@{eqn\_number}}
+\index{eqn\_number@{eqn\_number}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{eqn\_number()}{eqn\_number()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily long\& oomph\+::\+Data\+::eqn\+\_\+number (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the equation number of the i-\/th stored variable. 
+
+
+
+Definition at line 361 of file nodes.\+h.
+
+
+
+References Eqn\+\_\+number, i, and range\+\_\+check().
+
+
+
+Referenced by oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+N\+T, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::add\+\_\+element\+\_\+contribution\+\_\+to\+\_\+aux\+\_\+integral(), add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers(), constrain(), oomph\+::\+Added\+Main\+Numbering\+Lookup\+::construct\+\_\+added\+\_\+to\+\_\+main\+\_\+mapping(), describe\+\_\+dofs(), oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+adv\+\_\+diff\+\_\+ddata(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::dinterpolated\+\_\+u\+\_\+nst\+\_\+ddata(), oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ B\+U\+L\+K\+\_\+\+N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+E\+L\+E\+M\+E\+N\+T, W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Problem\+::get\+\_\+dofs(), pin(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), oomph\+::\+Solid\+Node\+::position\+\_\+eqn\+\_\+number(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset\+\_\+pin\+\_\+status(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::reset\+\_\+pin\+\_\+status(), oomph\+::\+Problem\+::set\+\_\+dofs(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::set\+\_\+self\+\_\+test\+\_\+vector(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured(), oomph\+::\+Problem\+::synchronise\+\_\+eqn\+\_\+numbers(), unconstrain(), and unpin().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a0181614ab39e3b02d28acba40bb33cb2}\label{classoomph_1_1Data_a0181614ab39e3b02d28acba40bb33cb2}} 
+\index{oomph::Data@{oomph::Data}!eqn\_number@{eqn\_number}}
+\index{eqn\_number@{eqn\_number}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{eqn\_number()}{eqn\_number()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily long oomph\+::\+Data\+::eqn\+\_\+number (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the equation number of the i-\/th stored variable. 
+
+
+
+Definition at line 370 of file nodes.\+h.
+
+
+
+References Eqn\+\_\+number, i, and range\+\_\+check().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a35cc8d05b72d9101e54ddf5808da4a54}\label{classoomph_1_1Data_a35cc8d05b72d9101e54ddf5808da4a54}} 
+\index{oomph::Data@{oomph::Data}!eqn\_number\_pt@{eqn\_number\_pt}}
+\index{eqn\_number\_pt@{eqn\_number\_pt}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{eqn\_number\_pt()}{eqn\_number\_pt()}}
+{\footnotesize\ttfamily long$\ast$ oomph\+::\+Data\+::eqn\+\_\+number\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the equation number of the i-\/th stored variable. 
+
+
+
+Definition at line 352 of file nodes.\+h.
+
+
+
+References Eqn\+\_\+number, i, and range\+\_\+check().
+
+
+
+Referenced by add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::hijack\+\_\+nodal\+\_\+position\+\_\+value(), read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), and oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::set\+\_\+volume\+\_\+constraint\+\_\+element().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}\label{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}} 
+\index{oomph::Data@{oomph::Data}!is\_a\_copy@{is\_a\_copy}}
+\index{is\_a\_copy@{is\_a\_copy}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{is\_a\_copy()}{is\_a\_copy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual bool oomph\+::\+Data\+::is\+\_\+a\+\_\+copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return a boolean to indicate whether the \mbox{\hyperlink{classoomph_1_1Data}{Data}} objact contains any copied values. A base \mbox{\hyperlink{classoomph_1_1Data}{Data}} object can never be a copy so the default implementation always returns false. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1CopiedData_ac76cb0c286daa39b501bff9ef82bb05c}{oomph\+::\+Copied\+Data}}, and \mbox{\hyperlink{classoomph_1_1HijackedData_ad392e7561212e3196d05a35417697112}{oomph\+::\+Hijacked\+Data}}.
+
+
+
+Definition at line 251 of file nodes.\+h.
+
+
+
+Referenced by oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+Mesh\+::check\+\_\+for\+\_\+repeated\+\_\+nodes(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies(), oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies(), oomph\+::\+Copied\+Data\+::\+Copied\+Data(), oomph\+::\+Hijacked\+Data\+::\+Hijacked\+Data(), oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic(), oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+nodes\+\_\+periodic(), oomph\+::\+Solid\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), set\+\_\+time\+\_\+stepper(), oomph\+::\+I\+M\+R\+Base\+::shift\+\_\+time\+\_\+values(), oomph\+::\+T\+R\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), and oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ae31cff2285588c40cd33fac0cabcc371}\label{classoomph_1_1Data_ae31cff2285588c40cd33fac0cabcc371}} 
+\index{oomph::Data@{oomph::Data}!is\_a\_copy@{is\_a\_copy}}
+\index{is\_a\_copy@{is\_a\_copy}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{is\_a\_copy()}{is\_a\_copy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual bool oomph\+::\+Data\+::is\+\_\+a\+\_\+copy (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return flag to indicate whether the i-\/th value is a copy. A base \mbox{\hyperlink{classoomph_1_1Data}{Data}} object can never be a copy so the default implementation always returns false. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1CopiedData_a80b677702e0cb94c5356214f5cf9f9fb}{oomph\+::\+Copied\+Data}}, and \mbox{\hyperlink{classoomph_1_1HijackedData_acfd12ec29b7787c8796effbb8284892d}{oomph\+::\+Hijacked\+Data}}.
+
+
+
+Definition at line 256 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Data_ac3169455e25c1dc8fd2d3de458c5e101}\label{classoomph_1_1Data_ac3169455e25c1dc8fd2d3de458c5e101}} 
+\index{oomph::Data@{oomph::Data}!is\_constrained@{is\_constrained}}
+\index{is\_constrained@{is\_constrained}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{is\_constrained()}{is\_constrained()}}
+{\footnotesize\ttfamily bool oomph\+::\+Data\+::is\+\_\+constrained (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether the i-\/th variable is constrained (1\+: true; 0\+: false). 
+
+
+
+Definition at line 435 of file nodes.\+h.
+
+
+
+References Eqn\+\_\+number, i, and Is\+\_\+constrained.
+
+
+
+Referenced by assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Node\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::pin\+\_\+real\+\_\+or\+\_\+imag(), and oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+real\+\_\+or\+\_\+imag().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a6227d2775850d6cf482d8af0afc50f5c}\label{classoomph_1_1Data_a6227d2775850d6cf482d8af0afc50f5c}} 
+\index{oomph::Data@{oomph::Data}!is\_halo@{is\_halo}}
+\index{is\_halo@{is\_halo}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{is\_halo()}{is\_halo()}}
+{\footnotesize\ttfamily bool oomph\+::\+Data\+::is\+\_\+halo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Is this \mbox{\hyperlink{classoomph_1_1Data}{Data}} a halo? 
+
+
+
+Definition at line 486 of file nodes.\+h.
+
+
+
+References Non\+\_\+halo\+\_\+proc\+\_\+\+ID.
+
+
+
+Referenced by assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Mesh\+::classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution(), and oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper().
+
+\mbox{\Hypertarget{classoomph_1_1Data_aedd0c445396ddcd650c814d17fef77dc}\label{classoomph_1_1Data_aedd0c445396ddcd650c814d17fef77dc}} 
+\index{oomph::Data@{oomph::Data}!is\_pinned@{is\_pinned}}
+\index{is\_pinned@{is\_pinned}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{is\_pinned()}{is\_pinned()}}
+{\footnotesize\ttfamily bool oomph\+::\+Data\+::is\+\_\+pinned (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether the i-\/th variable is pinned (1\+: true; 0\+: false). 
+
+
+
+Definition at line 399 of file nodes.\+h.
+
+
+
+References Eqn\+\_\+number, i, and Is\+\_\+pinned.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Problem\+::arc\+\_\+length\+\_\+step\+\_\+solve(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Node\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Solid\+I\+C\+Problem\+::backup\+\_\+original\+\_\+state(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Solid\+Node\+::position\+\_\+is\+\_\+pinned(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), and oomph\+::\+Problem\+::set\+\_\+pinned\+\_\+values\+\_\+to\+\_\+zero().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a46bcce858da1ca61069329fda4876171}\label{classoomph_1_1Data_a46bcce858da1ca61069329fda4876171}} 
+\index{oomph::Data@{oomph::Data}!is\_segregated\_solve\_pinned@{is\_segregated\_solve\_pinned}}
+\index{is\_segregated\_solve\_pinned@{is\_segregated\_solve\_pinned}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{is\_segregated\_solve\_pinned()}{is\_segregated\_solve\_pinned()}}
+{\footnotesize\ttfamily bool oomph\+::\+Data\+::is\+\_\+segregated\+\_\+solve\+\_\+pinned (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether the i-\/th variable is temporaily pinned for a segregated solve. 
+
+
+
+Definition at line 404 of file nodes.\+h.
+
+
+
+References Eqn\+\_\+number, i, and Is\+\_\+segregated\+\_\+solve\+\_\+pinned.
+
+
+
+Referenced by assign\+\_\+eqn\+\_\+numbers().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ae8ef6f90c536b83bd393dbc87920741e}\label{classoomph_1_1Data_ae8ef6f90c536b83bd393dbc87920741e}} 
+\index{oomph::Data@{oomph::Data}!non\_halo\_proc\_ID@{non\_halo\_proc\_ID}}
+\index{non\_halo\_proc\_ID@{non\_halo\_proc\_ID}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{non\_halo\_proc\_ID()}{non\_halo\_proc\_ID()}}
+{\footnotesize\ttfamily int oomph\+::\+Data\+::non\+\_\+halo\+\_\+proc\+\_\+\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+ID of processor ID that holds non-\/halo counterpart of halo node; negative if not a halo. 
+
+
+
+Definition at line 490 of file nodes.\+h.
+
+
+
+References Non\+\_\+halo\+\_\+proc\+\_\+\+ID.
+
+
+
+Referenced by oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), set\+\_\+halo(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+hanging\+\_\+nodes(), and oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::synchronize\+\_\+boundary\+\_\+coordinates().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}\label{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}} 
+\index{oomph::Data@{oomph::Data}!ntstorage@{ntstorage}}
+\index{ntstorage@{ntstorage}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{ntstorage()}{ntstorage()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Data\+::ntstorage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return total number of doubles stored per value to record time history of each value (one for steady problems). 
+
+Return the total number of doubles stored per value to record the time history of ecah value. The information is read from the time stepper 
+
+Definition at line 843 of file nodes.\+cc.
+
+
+
+References oomph\+::\+Time\+Stepper\+::ntstorage(), and Time\+\_\+stepper\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), add\+\_\+values\+\_\+to\+\_\+vector(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), copy(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+value(), dump(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux(), oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Linear\+Elasticity\+Element$<$ L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ F\+V\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Poisson\+Element$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ A\+D\+R\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Element$<$ F\+O\+U\+R\+I\+E\+R\+\_\+\+D\+E\+C\+O\+M\+P\+O\+S\+E\+D\+\_\+\+H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+P\+M\+L\+Helmholtz\+Element$<$ H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+M\+E\+T\+R\+I\+C\+\_\+\+P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Generalised\+Newtonian\+Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Taylor\+Hood\+Element$<$ T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+O\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element$<$ C\+R\+O\+U\+Z\+E\+I\+X\+\_\+\+R\+A\+V\+I\+A\+R\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection(), oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms(), oomph\+::operator$<$$<$(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), range\+\_\+check(), read(), read\+\_\+values\+\_\+from\+\_\+vector(), resize(), set\+\_\+time\+\_\+stepper(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+nonhanging\+\_\+nodes().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}\label{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}} 
+\index{oomph::Data@{oomph::Data}!nvalue@{nvalue}}
+\index{nvalue@{nvalue}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{nvalue()}{nvalue()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Data\+::nvalue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return number of values stored in data object (incl pinned ones). 
+
+
+
+Definition at line 444 of file nodes.\+h.
+
+
+
+References Nvalue.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), add\+\_\+values\+\_\+to\+\_\+vector(), oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Node\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+External\+Element\+::assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Solid\+I\+C\+Problem\+::backup\+\_\+original\+\_\+state(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Circle\+::\+Circle(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), copy(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::data\+\_\+values\+\_\+of\+\_\+field(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ A\+X\+I\+S\+Y\+M\+M\+E\+T\+R\+I\+C\+\_\+\+P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::data\+\_\+values\+\_\+of\+\_\+field(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Displacement\+Control\+Element\+::\+Displacement\+Control\+Element(), oomph\+::\+F\+S\+I\+\_\+functions\+::doc\+\_\+fsi(), oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+value(), dump(), oomph\+::\+Ellipse\+::\+Ellipse(), oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Block\+Prec\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Block\+Prec\+Q\+Taylor\+Hood\+Space\+Time\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Biharmonic\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ A\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Problem\+::get\+\_\+dofs(), oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+field(), oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+field(), oomph\+::\+Projectable\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+field(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+load\+\_\+data(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Node\+::hang\+\_\+code(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Refineable\+Element\+::identify\+\_\+field\+\_\+data\+\_\+for\+\_\+interactions(), oomph\+::\+Finite\+Element\+::identify\+\_\+field\+\_\+data\+\_\+for\+\_\+interactions(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::identify\+\_\+pressure\+\_\+data(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::identify\+\_\+pressure\+\_\+data(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::identify\+\_\+pressure\+\_\+data(), oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn(), oomph\+::\+Biharmonic\+Equations$<$ D\+I\+M $>$\+::interpolated\+\_\+dudx(), oomph\+::\+Biharmonic\+Equations$<$ D\+I\+M $>$\+::interpolated\+\_\+u\+\_\+biharmonic(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::local\+\_\+equation(), oomph\+::\+Projectable\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::local\+\_\+equation(), oomph\+::\+Projectable\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::local\+\_\+equation(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+F\+S\+I\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ncont\+\_\+interpolated\+\_\+values(), oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nfields\+\_\+for\+\_\+projection(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+O\+D\+E\+Element\+::nvalue(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Projection\+Problem$<$ P\+R\+O\+J\+E\+C\+T\+A\+B\+L\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::plot(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+Projection\+Problem$<$ P\+R\+O\+J\+E\+C\+T\+A\+B\+L\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::project(), oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring(), read(), read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), read\+\_\+values\+\_\+from\+\_\+vector(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data(), oomph\+::\+Copied\+Data\+::reset\+\_\+copied\+\_\+pointers(), oomph\+::\+Solid\+I\+C\+Problem\+::reset\+\_\+original\+\_\+state(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset\+\_\+pin\+\_\+status(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::reset\+\_\+pin\+\_\+status(), resize(), oomph\+::\+Node\+::resize(), oomph\+::\+Mesh\+::resize\+\_\+halo\+\_\+nodes(), oomph\+::\+Face\+Element\+::resize\+\_\+nodes(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), oomph\+::\+Problem\+::set\+\_\+dofs(), oomph\+::\+Fluid\+Interface\+Element\+::set\+\_\+external\+\_\+pressure\+\_\+data(), oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), oomph\+::\+Young\+Laplace\+Equations\+::set\+\_\+kappa(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+Node\+::set\+\_\+nonhanging(), oomph\+::\+Problem\+::set\+\_\+pinned\+\_\+values\+\_\+to\+\_\+zero(), oomph\+::\+Womersley\+Equations$<$ D\+I\+M $>$\+::set\+\_\+pressure\+\_\+gradient\+\_\+pt(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::set\+\_\+self\+\_\+test\+\_\+vector(), set\+\_\+time\+\_\+stepper(), oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::set\+\_\+volume\+\_\+constraint\+\_\+element(), oomph\+::\+Foepplvon\+Karman\+Equations\+::set\+\_\+volume\+\_\+constraint\+\_\+pressure\+\_\+data\+\_\+as\+\_\+external\+\_\+data(), oomph\+::\+Solid\+I\+C\+Problem\+::setup\+\_\+problem(), oomph\+::\+I\+M\+R\+Base\+::shift\+\_\+time\+\_\+values(), oomph\+::\+T\+R\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::solve(), oomph\+::\+Straight\+Line\+::\+Straight\+Line(), oomph\+::\+Problem\+::synchronise\+\_\+eqn\+\_\+numbers(), oomph\+::\+Time\+Stepper\+::time\+\_\+derivative(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), value(), oomph\+::\+Node\+::value(), and oomph\+::\+Node\+::$\sim$\+Node().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ae68161e2bb30db0938b09db2f8fb4c9d}\label{classoomph_1_1Data_ae68161e2bb30db0938b09db2f8fb4c9d}} 
+\index{oomph::Data@{oomph::Data}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 227 of file nodes.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}\label{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}} 
+\index{oomph::Data@{oomph::Data}!pin@{pin}}
+\index{pin@{pin}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{pin()}{pin()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::pin (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pin the i-\/th stored variable. 
+
+
+
+Definition at line 379 of file nodes.\+h.
+
+
+
+References eqn\+\_\+number(), i, and Is\+\_\+pinned.
+
+
+
+Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Polar\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Projection\+Problem$<$ P\+R\+O\+J\+E\+C\+T\+A\+B\+L\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+spines(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::pin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate(), oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+Solid\+Node\+::pin\+\_\+position(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+edge\+\_\+value(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::pin\+\_\+real\+\_\+or\+\_\+imag(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::pin\+\_\+rotation\+\_\+angle(), oomph\+::\+Vorticity\+Smoother\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+smoothed\+\_\+vorticity(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+superfluous\+\_\+darcy\+\_\+dofs(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Solid\+I\+C\+Problem\+::setup\+\_\+problem(), oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::use\+\_\+linear\+\_\+bending\+\_\+model(), oomph\+::\+Foepplvon\+Karman\+Equations\+::use\+\_\+linear\+\_\+bending\+\_\+model(), oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::use\+\_\+linear\+\_\+bending\+\_\+model(), and oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a16277ea5b41cd9b09739b21a379d7eb4}\label{classoomph_1_1Data_a16277ea5b41cd9b09739b21a379d7eb4}} 
+\index{oomph::Data@{oomph::Data}!pin\_all@{pin\_all}}
+\index{pin\_all@{pin\_all}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{pin\_all()}{pin\_all()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::pin\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pin all the stored variables. 
+
+
+
+Definition at line 385 of file nodes.\+h.
+
+
+
+References Eqn\+\_\+number, i, Is\+\_\+pinned, and Nvalue.
+
+
+
+Referenced by oomph\+::\+Node\+::pin\+\_\+all(), oomph\+::\+Solid\+Node\+::pin\+\_\+all(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::pin\+\_\+pressure\+\_\+normalisation\+\_\+dofs(), and oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::pin\+\_\+real\+\_\+or\+\_\+imag().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a3fcd8a39ef027a9329b8e71439cf11bc}\label{classoomph_1_1Data_a3fcd8a39ef027a9329b8e71439cf11bc}} 
+\index{oomph::Data@{oomph::Data}!range\_check@{range\_check}}
+\index{range\_check@{range\_check}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{range\_check()}{range\_check()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::range\+\_\+check (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check that the arguments are within the range of the stored data values and timesteps. 
+
+Private function to check that the arguments are within the range of the stored data values and timesteps. 
+
+Definition at line 48 of file nodes.\+cc.
+
+
+
+References i, ntstorage(), Nvalue, and t.
+
+
+
+Referenced by eqn\+\_\+number(), eqn\+\_\+number\+\_\+pt(), set\+\_\+value(), value(), and value\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ad520cff679734b7654b1638ada2c728a}\label{classoomph_1_1Data_ad520cff679734b7654b1638ada2c728a}} 
+\index{oomph::Data@{oomph::Data}!read@{read}}
+\index{read@{read}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::read (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{restart\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Read data object from a file. 
+
+Read data object from file. 
+
+Definition at line 631 of file nodes.\+cc.
+
+
+
+References i, oomph\+::\+Node\+::ndim(), ntstorage(), nvalue(), set\+\_\+value(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, and oomph\+::\+Node\+::x().
+
+
+
+Referenced by oomph\+::\+Spine\+Mesh\+::read(), oomph\+::\+Mesh\+::read(), and oomph\+::\+Node\+::read().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ae958e52df6ede2a08f957db4ee685ca7}\label{classoomph_1_1Data_ae958e52df6ede2a08f957db4ee685ca7}} 
+\index{oomph::Data@{oomph::Data}!read\_eqn\_numbers\_from\_vector@{read\_eqn\_numbers\_from\_vector}}
+\index{read\_eqn\_numbers\_from\_vector@{read\_eqn\_numbers\_from\_vector}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{read\_eqn\_numbers\_from\_vector()}{read\_eqn\_numbers\_from\_vector()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ long $>$ \&}]{vector\+\_\+of\+\_\+eqn\+\_\+numbers,  }\item[{unsigned \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Read all equation numbers from the vector starting from index. On return the index will be set to the value at the end of the data that has been read in. 
+
+Read all equation numbers from the vector. The function is virtual so that it can be overloaded by Solid\+Nodes to add the additional equation numbers associated with the solid dofs in those objects. The unsigned index is used to indicate the start position for reading in the vector and will be set the end of the data that has been read in on return. 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a38bede9e51c7d6355969db2bc075f476}{oomph\+::\+Solid\+Node}}.
+
+
+
+Definition at line 1212 of file nodes.\+cc.
+
+
+
+References Eqn\+\_\+number, eqn\+\_\+number\+\_\+pt(), i, and nvalue().
+
+
+
+Referenced by oomph\+::\+Solid\+Node\+::read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), and oomph\+::\+Generalised\+Element\+::read\+\_\+internal\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a6b8bc02debd1bce8e1bfc68cd9a54695}\label{classoomph_1_1Data_a6b8bc02debd1bce8e1bfc68cd9a54695}} 
+\index{oomph::Data@{oomph::Data}!read\_values\_from\_vector@{read\_values\_from\_vector}}
+\index{read\_values\_from\_vector@{read\_values\_from\_vector}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{read\_values\_from\_vector()}{read\_values\_from\_vector()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::read\+\_\+values\+\_\+from\+\_\+vector (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{vector\+\_\+of\+\_\+values,  }\item[{unsigned \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Read all data and time history values from the vector starting from index. On return the index will be set to the value at the end of the data that has been read in. 
+
+Read all data and time history values from a vector that will be used when communicating data between processors. The function is virtual so that it can be overloaded by Nodes and Solid\+Nodes to read the additional data present in those objects. The unsigned index is used to indicate the start position for reading in the vector and will be set the end of the data that has been read in on return. 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidNode_a8884dfe9e2808883e90c7f2822151784}{oomph\+::\+Solid\+Node}}, and \mbox{\hyperlink{classoomph_1_1Node_accb033ab8ed4f96331014f7c4cd131f9}{oomph\+::\+Node}}.
+
+
+
+Definition at line 1125 of file nodes.\+cc.
+
+
+
+References i, ntstorage(), nvalue(), t, and Value.
+
+
+
+Referenced by oomph\+::\+Generalised\+Element\+::read\+\_\+internal\+\_\+data\+\_\+values\+\_\+from\+\_\+vector(), and oomph\+::\+Node\+::read\+\_\+values\+\_\+from\+\_\+vector().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a3fd7b4d0cc8ac713572f04ffda5a92c7}\label{classoomph_1_1Data_a3fd7b4d0cc8ac713572f04ffda5a92c7}} 
+\index{oomph::Data@{oomph::Data}!remove\_copy@{remove\_copy}}
+\index{remove\_copy@{remove\_copy}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{remove\_copy()}{remove\_copy()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::remove\+\_\+copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Remove the pointer data\+\_\+pt from the array Copy\+\_\+of\+\_\+data\+\_\+pt. This should be used whenever copies of the data are deleted. 
+
+Remove the pointer data\+\_\+pt from the internal storage used to keep track of copies 
+
+Definition at line 104 of file nodes.\+cc.
+
+
+
+References Copy\+\_\+of\+\_\+data\+\_\+pt, i, and Ncopies.
+
+
+
+Referenced by oomph\+::\+Copied\+Data\+::$\sim$\+Copied\+Data(), and oomph\+::\+Hijacked\+Data\+::$\sim$\+Hijacked\+Data().
+
+\mbox{\Hypertarget{classoomph_1_1Data_afd33533f3ddf61bc34106a4dc72de541}\label{classoomph_1_1Data_afd33533f3ddf61bc34106a4dc72de541}} 
+\index{oomph::Data@{oomph::Data}!reset\_copied\_pointers@{reset\_copied\_pointers}}
+\index{reset\_copied\_pointers@{reset\_copied\_pointers}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{reset\_copied\_pointers()}{reset\_copied\_pointers()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::reset\+\_\+copied\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Helper function that should be overloaded in derived classes that can contain copies of \mbox{\hyperlink{classoomph_1_1Data}{Data}}. The function must reset the internal pointers to the copied data. This is used when resizing data to ensure that all the pointers remain valid. The default implementation throws an error beacause \mbox{\hyperlink{classoomph_1_1Data}{Data}} cannot be a copy. 
+
+Helper function that should be overloaded in classes that contain copies of \mbox{\hyperlink{classoomph_1_1Data}{Data}}. The function must reset the internal pointers to the copied data. This is used when resizing data to ensure that all the pointers remain valid. The base \mbox{\hyperlink{classoomph_1_1Data}{Data}} class cannot be a copy, so throw an error ~\newline
+ 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1CopiedData_a7e29b2bb1cf0ebad16afac2e5d7342d8}{oomph\+::\+Copied\+Data}}, and \mbox{\hyperlink{classoomph_1_1HijackedData_ae8253ed64e04771ea3d45c3d84d614d7}{oomph\+::\+Hijacked\+Data}}.
+
+
+
+Definition at line 161 of file nodes.\+cc.
+
+
+
+Referenced by resize(), and set\+\_\+time\+\_\+stepper().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ac68583834c9bef47f5c37c890960e186}\label{classoomph_1_1Data_ac68583834c9bef47f5c37c890960e186}} 
+\index{oomph::Data@{oomph::Data}!resize@{resize}}
+\index{resize@{resize}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::resize (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Change (increase) the number of values that may be stored. 
+
+Increase the number of data values stored, useful when adding additional data at a node, almost always Lagrange multipliers. Note if any of the unresized data is copied, then we assume all the resized data is copied from the same node as the unresized data. 
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1Node_ae6598da29d403889020ccd47a2c07cc4}{oomph\+::\+Node}}, \mbox{\hyperlink{classoomph_1_1CopiedData_aa7c48fb5ea17cd42260965bf2c800b3d}{oomph\+::\+Copied\+Data}}, and \mbox{\hyperlink{classoomph_1_1HijackedData_ae2ae3e860b36b40c133d56aae5fc39a3}{oomph\+::\+Hijacked\+Data}}.
+
+
+
+Definition at line 957 of file nodes.\+cc.
+
+
+
+References Copy\+\_\+of\+\_\+data\+\_\+pt, Eqn\+\_\+number, i, Is\+\_\+unclassified, Ncopies, ntstorage(), Nvalue, nvalue(), reset\+\_\+copied\+\_\+pointers(), t, Value, and values.
+
+
+
+Referenced by oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element(), and oomph\+::\+Node\+::resize().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ae43b63b56afb8574db6da68f85802f80}\label{classoomph_1_1Data_ae43b63b56afb8574db6da68f85802f80}} 
+\index{oomph::Data@{oomph::Data}!self\_test@{self\_test}}
+\index{self\_test@{self\_test}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{self\_test()}{self\_test()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Data\+::self\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. ~\newline
+ 
+
+Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. ~\newline
+ 
+
+Definition at line 926 of file nodes.\+cc.
+
+
+
+References Eqn\+\_\+number, i, Is\+\_\+unclassified, Nvalue, and oomph\+::oomph\+\_\+info.
+
+
+
+Referenced by oomph\+::\+Algebraic\+Node\+::self\+\_\+test().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ac96b285ae3f1ce549807072b652573bf}\label{classoomph_1_1Data_ac96b285ae3f1ce549807072b652573bf}} 
+\index{oomph::Data@{oomph::Data}!set\_halo@{set\_halo}}
+\index{set\_halo@{set\_halo}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{set\_halo()}{set\_halo()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::set\+\_\+halo (\begin{DoxyParamCaption}\item[{const unsigned \&}]{non\+\_\+halo\+\_\+proc\+\_\+\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Label the node as halo and specify processor that holds non-\/halo counterpart. 
+
+
+
+Definition at line 477 of file nodes.\+h.
+
+
+
+References Non\+\_\+halo\+\_\+proc\+\_\+\+ID, and non\+\_\+halo\+\_\+proc\+\_\+\+I\+D().
+
+
+
+Referenced by oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Mesh\+::classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), and oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ab2c485e220d3cf13647d251c509f5136}\label{classoomph_1_1Data_ab2c485e220d3cf13647d251c509f5136}} 
+\index{oomph::Data@{oomph::Data}!set\_nonhalo@{set\_nonhalo}}
+\index{set\_nonhalo@{set\_nonhalo}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{set\_nonhalo()}{set\_nonhalo()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::set\+\_\+nonhalo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Label the node as not being a halo. 
+
+
+
+Definition at line 483 of file nodes.\+h.
+
+
+
+References Non\+\_\+halo\+\_\+proc\+\_\+\+ID.
+
+
+
+Referenced by oomph\+::\+Mesh\+::classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes().
+
+\mbox{\Hypertarget{classoomph_1_1Data_acd22fabfb127ff4ea37a5bc60c61b414}\label{classoomph_1_1Data_acd22fabfb127ff4ea37a5bc60c61b414}} 
+\index{oomph::Data@{oomph::Data}!set\_time\_stepper@{set\_time\_stepper}}
+\index{set\_time\_stepper@{set\_time\_stepper}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{set\_time\_stepper()}{set\_time\_stepper()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::set\+\_\+time\+\_\+stepper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt,  }\item[{const bool \&}]{preserve\+\_\+existing\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Set a new timestepper by resizing the appropriate storage. If already assigned the equation numbering will not be altered. 
+
+Set a new \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} be resizing the appropriate storage. Equation numbering (if already performed) will be unaffected. The current (zero) values will be unaffected, but all other entries will be set to zero. 
+
+Definition at line 388 of file nodes.\+cc.
+
+
+
+References Copy\+\_\+of\+\_\+data\+\_\+pt, i, is\+\_\+a\+\_\+copy(), Ncopies, ntstorage(), oomph\+::\+Time\+Stepper\+::ntstorage(), nvalue(), reset\+\_\+copied\+\_\+pointers(), t, Time\+\_\+stepper\+\_\+pt, time\+\_\+stepper\+\_\+pt(), Value, and values.
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Generalised\+Element\+::set\+\_\+internal\+\_\+data\+\_\+time\+\_\+stepper(), oomph\+::\+Solid\+Node\+::set\+\_\+position\+\_\+time\+\_\+stepper(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::set\+\_\+q\+\_\+internal\+\_\+timestepper(), and oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::set\+\_\+q\+\_\+internal\+\_\+timestepper().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}\label{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}} 
+\index{oomph::Data@{oomph::Data}!set\_value@{set\_value}}
+\index{set\_value@{set\_value}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{set\_value()}{set\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::set\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const double \&}]{value\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the i-\/th stored data value to specified value. The only reason that we require an explicit set function is because we redefine \mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value()}} in the \mbox{\hyperlink{classoomph_1_1Node}{Node}} class to interpolate the values for nodes that are hanging and so we cannot return a reference to the value in this case. 
+
+
+
+Definition at line 263 of file nodes.\+h.
+
+
+
+References i, range\+\_\+check(), and Value.
+
+
+
+Referenced by oomph\+::\+Womersley\+Problem$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+F\+S\+I\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall(), oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), copy(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::copy\+\_\+efunction\+\_\+to\+\_\+normalisation(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Linearised\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::fix\+\_\+pressure(), oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ 2 $>$\+::fix\+\_\+pressure(), oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::fix\+\_\+solid\+\_\+pressure(), oomph\+::\+Foepplvon\+Karman\+Volume\+Constraint\+Element$<$ E\+L\+E\+M\+E\+N\+T, M\+E\+S\+H $>$\+::\+Foepplvon\+Karman\+Volume\+Constraint\+Element(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ D\+I\+M $>$\+::\+Impose\+Flux\+For\+Womersley\+Element(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ P\+O\+I\+S\+S\+O\+N\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+edge\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::pin\+\_\+q\+\_\+internal\+\_\+value(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), read(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), oomph\+::\+Problem\+::set\+\_\+dofs(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+p\+\_\+value(), oomph\+::\+Problem\+::set\+\_\+pinned\+\_\+values\+\_\+to\+\_\+zero(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+edge(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+edge(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+internal(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::set\+\_\+q\+\_\+internal(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::set\+\_\+solid\+\_\+p(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::set\+\_\+solid\+\_\+p(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::set\+\_\+solid\+\_\+p(), oomph\+::\+I\+M\+R\+Base\+::shift\+\_\+time\+\_\+values(), oomph\+::\+T\+R\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), and oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a39c1ab8b0a45af29101c606b965bed07}\label{classoomph_1_1Data_a39c1ab8b0a45af29101c606b965bed07}} 
+\index{oomph::Data@{oomph::Data}!set\_value@{set\_value}}
+\index{set\_value@{set\_value}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{set\_value()}{set\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::set\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{i,  }\item[{const double \&}]{value\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the t-\/th history value of the i-\/th stored data value to specified value. 
+
+
+
+Definition at line 273 of file nodes.\+h.
+
+
+
+References i, range\+\_\+check(), t, and Value.
+
+\mbox{\Hypertarget{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}\label{classoomph_1_1Data_a5b34970d16205921dca3ada720da8445}} 
+\index{oomph::Data@{oomph::Data}!time\_stepper\_pt@{time\_stepper\_pt}}
+\index{time\_stepper\_pt@{time\_stepper\_pt}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{time\_stepper\_pt()}{time\_stepper\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}$\ast$\& oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the timestepper. 
+
+
+
+Definition at line 242 of file nodes.\+h.
+
+
+
+References Time\+\_\+stepper\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ G\+E\+O\+M\+E\+T\+R\+I\+C\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Mesh\+::convert\+\_\+to\+\_\+boundary\+\_\+node(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::d2u\+\_\+dt2(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+lin\+\_\+wave(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::d2u\+\_\+dt2\+\_\+linear\+\_\+elasticity(), oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::dc\+\_\+dt\+\_\+adv\+\_\+diff\+\_\+react(), oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::dcdt\+\_\+surface(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::dposition\+\_\+dt(), oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::dposition\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+edge\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+internal\+\_\+dt(), oomph\+::\+Poroelasticity\+Equations$<$ 2 $>$\+::du\+\_\+dt(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::du\+\_\+dt(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+adv\+\_\+diff(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Generalised\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+cons\+\_\+adv\+\_\+diff(), oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+lin\+\_\+wave(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+nst(), oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+pnst(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+nst(), oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat(), oomph\+::\+Womersley\+Equations$<$ D\+I\+M $>$\+::du\+\_\+dt\+\_\+womersley(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Generalised\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst(), oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic(), oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff\+\_\+react(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+F\+S\+I\+Linearised\+Axisym\+Poroelastic\+Traction\+Element$<$ P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, N\+A\+V\+I\+E\+R\+\_\+\+S\+T\+O\+K\+E\+S\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Projectable\+Unsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::output\+\_\+centre\+\_\+of\+\_\+gravity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::scalar\+\_\+value\+\_\+paraview(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), and set\+\_\+time\+\_\+stepper().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a1c862c3ff907f78f2c1da03f753ca5f4}\label{classoomph_1_1Data_a1c862c3ff907f78f2c1da03f753ca5f4}} 
+\index{oomph::Data@{oomph::Data}!time\_stepper\_pt@{time\_stepper\_pt}}
+\index{time\_stepper\_pt@{time\_stepper\_pt}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{time\_stepper\_pt()}{time\_stepper\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}$\ast$ const \& oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the timestepper (const version). 
+
+
+
+Definition at line 245 of file nodes.\+h.
+
+
+
+References Time\+\_\+stepper\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1Data_accb670734a29a841e9ead16b703626ce}\label{classoomph_1_1Data_accb670734a29a841e9ead16b703626ce}} 
+\index{oomph::Data@{oomph::Data}!unconstrain@{unconstrain}}
+\index{unconstrain@{unconstrain}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{unconstrain()}{unconstrain()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::unconstrain (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unconstrain the i-\/th stored variable when make the data nonhanging. Only unconstrain if it was actually constrained (hanging) 
+
+
+
+Definition at line 417 of file nodes.\+h.
+
+
+
+References eqn\+\_\+number(), i, Is\+\_\+constrained, and Is\+\_\+unclassified.
+
+
+
+Referenced by oomph\+::\+Node\+::resize(), oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), oomph\+::\+Node\+::set\+\_\+nonhanging(), and unconstrain\+\_\+all().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a5e6a0d030f5e3230908f8a5eaf607082}\label{classoomph_1_1Data_a5e6a0d030f5e3230908f8a5eaf607082}} 
+\index{oomph::Data@{oomph::Data}!unconstrain\_all@{unconstrain\_all}}
+\index{unconstrain\_all@{unconstrain\_all}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{unconstrain\_all()}{unconstrain\_all()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::unconstrain\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unconstrain all the stored variables when the data is made nonhanging. 
+
+
+
+Definition at line 428 of file nodes.\+h.
+
+
+
+References i, Nvalue, and unconstrain().
+
+
+
+Referenced by oomph\+::\+Solid\+Node\+::unconstrain\+\_\+positions().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}\label{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}} 
+\index{oomph::Data@{oomph::Data}!unpin@{unpin}}
+\index{unpin@{unpin}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{unpin()}{unpin()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::unpin (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unpin the i-\/th stored variable. 
+
+
+
+Definition at line 382 of file nodes.\+h.
+
+
+
+References eqn\+\_\+number(), i, and Is\+\_\+unclassified.
+
+
+
+Referenced by oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures(), oomph\+::\+Solid\+I\+C\+Problem\+::reset\+\_\+original\+\_\+state(), oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unfix\+\_\+pressure(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+all\+\_\+internal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+all\+\_\+internal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::unpin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Linearised\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+P\+V\+D\+Element\+With\+Continuous\+Pressure$<$ D\+I\+M $>$\+::unpin\+\_\+elemental\+\_\+solid\+\_\+pressure\+\_\+dofs(), oomph\+::\+Solid\+Node\+::unpin\+\_\+position(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Axisymmetric\+T\+Taylor\+Hood\+Element\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+real\+\_\+or\+\_\+imag(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::unpin\+\_\+rotation\+\_\+angle(), and oomph\+::\+Womersley\+Mesh$<$ W\+O\+M\+E\+R\+S\+L\+E\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Womersley\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a590a3262e33167e464bb5d34c90a88ef}\label{classoomph_1_1Data_a590a3262e33167e464bb5d34c90a88ef}} 
+\index{oomph::Data@{oomph::Data}!unpin\_all@{unpin\_all}}
+\index{unpin\_all@{unpin\_all}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{unpin\_all()}{unpin\_all()}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::unpin\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unpin all the stored variables. 
+
+
+
+Definition at line 392 of file nodes.\+h.
+
+
+
+References Eqn\+\_\+number, i, Is\+\_\+unclassified, and Nvalue.
+
+
+
+Referenced by oomph\+::\+Node\+::unpin\+\_\+all(), oomph\+::\+Solid\+Node\+::unpin\+\_\+all(), and oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+real\+\_\+or\+\_\+imag().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}\label{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}} 
+\index{oomph::Data@{oomph::Data}!value@{value}}
+\index{value@{value}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily double oomph\+::\+Data\+::value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return i-\/th stored value. This function is not virtual so that it can be inlined. This means that if we have an explicit pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object Data$\ast$ data\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value()}} always returns the \char`\"{}raw\char`\"{} stored value. 
+
+
+
+Definition at line 287 of file nodes.\+h.
+
+
+
+References i, range\+\_\+check(), and Value.
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::apply\+\_\+rigid\+\_\+body\+\_\+motion(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(), oomph\+::\+Steady$<$ 0 $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+T\+R\+::calculate\+\_\+predicted\+\_\+values(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+of\+\_\+gravity(), copy(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::copy\+\_\+efunction\+\_\+to\+\_\+normalisation(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::dposition\+\_\+dt(), dump(), oomph\+::\+Linearised\+Navier\+Stokes\+Eigenfunction\+Normalisation\+Element\+::eigenvalue(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Problem\+::get\+\_\+dofs(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque(), oomph\+::\+Young\+Laplace\+Equations\+::get\+\_\+kappa(), oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::output\+\_\+centre\+\_\+of\+\_\+gravity(), oomph\+::\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+T\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+linearised\+\_\+axi\+\_\+nst(), oomph\+::\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+linearised\+\_\+nst(), oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+P\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+P\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst(), oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::p\+\_\+spherical\+\_\+nst(), oomph\+::\+Volume\+Constraint\+Element\+::p\+\_\+traded(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::p\+\_\+value(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::p\+\_\+value(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), oomph\+::\+Fluid\+Interface\+Element\+::pext(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::q\+\_\+internal(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::q\+\_\+internal(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::q\+\_\+internal(), oomph\+::\+Node\+::raw\+\_\+value(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::reference\+\_\+pressure(), oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+I\+M\+R\+Base\+::shift\+\_\+time\+\_\+values(), oomph\+::\+T\+R\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Steady$<$ 0 $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::shift\+\_\+time\+\_\+values(), oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::solid\+\_\+p(), oomph\+::\+Q\+P\+V\+D\+Element\+With\+Pressure$<$ D\+I\+M $>$\+::solid\+\_\+p(), oomph\+::\+I\+M\+R\+Base\+::temporal\+\_\+error\+\_\+in\+\_\+value(), oomph\+::\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$\+::temporal\+\_\+error\+\_\+in\+\_\+value(), oomph\+::\+T\+R\+::temporal\+\_\+error\+\_\+in\+\_\+value(), oomph\+::\+Time\+Stepper\+::time\+\_\+derivative(), and value().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a3fad35eda2f9e1c69f163f1cd4d104ea}\label{classoomph_1_1Data_a3fad35eda2f9e1c69f163f1cd4d104ea}} 
+\index{oomph::Data@{oomph::Data}!value@{value}}
+\index{value@{value}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily double oomph\+::\+Data\+::value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return i-\/th value at time level t (t=0\+: present, t$>$0\+: previous) This function is not virtual so that it can be inlined. This means that if we have an explicit pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object Data$\ast$ data\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value()}} always returns to the \char`\"{}raw\char`\"{} stored value. 
+
+
+
+Definition at line 299 of file nodes.\+h.
+
+
+
+References i, range\+\_\+check(), t, and Value.
+
+\mbox{\Hypertarget{classoomph_1_1Data_a15ab0a61bc348ba1b8b73d096a1bc70f}\label{classoomph_1_1Data_a15ab0a61bc348ba1b8b73d096a1bc70f}} 
+\index{oomph::Data@{oomph::Data}!value@{value}}
+\index{value@{value}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption}) const}
+
+
+
+Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinned) in this data at time level t (t=0\+: present; t$>$0\+: previous). 
+
+Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinned) at this node at time level t (t=0\+: present; t$>$0\+: previous) 
+
+Definition at line 480 of file nodes.\+cc.
+
+
+
+References i, nvalue(), t, value(), and values.
+
+\mbox{\Hypertarget{classoomph_1_1Data_a0a28f485ac3508c1cc37d3e0b7e86efe}\label{classoomph_1_1Data_a0a28f485ac3508c1cc37d3e0b7e86efe}} 
+\index{oomph::Data@{oomph::Data}!value@{value}}
+\index{value@{value}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Data\+::value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption}) const}
+
+
+
+Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} value. 
+
+Compute \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of values (dofs or pinned) at this \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
+
+Definition at line 469 of file nodes.\+cc.
+
+
+
+References i, nvalue(), value(), and values.
+
+\mbox{\Hypertarget{classoomph_1_1Data_a559dc196abee87cad34d655c8d6dac1e}\label{classoomph_1_1Data_a559dc196abee87cad34d655c8d6dac1e}} 
+\index{oomph::Data@{oomph::Data}!value\_pt@{value\_pt}}
+\index{value\_pt@{value\_pt}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{value\_pt()}{value\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Data\+::value\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the i-\/the stored value. Typically this is required when direct access to the stored value is required, e.\+g. when writing functions that return a reference to a variable that is stored in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
+
+
+
+Definition at line 318 of file nodes.\+h.
+
+
+
+References i, range\+\_\+check(), and Value.
+
+
+
+Referenced by add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map(), oomph\+::\+Problem\+::arc\+\_\+length\+\_\+step\+\_\+solve(), oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+rotation\+\_\+angle(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+x\+\_\+displacement(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+y\+\_\+displacement(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd(), oomph\+::\+Refineable\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure(), oomph\+::\+Polar\+Taylor\+Hood\+Element\+::fix\+\_\+pressure(), oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::p\+\_\+pnst(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$\+::re\+\_\+st\+\_\+pt(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::set\+\_\+eigenfunction\+\_\+normalisation\+\_\+element(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::st(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::st\+\_\+pt(), and oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::u().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ae96cadc48ab7d39aa6ed7bd91abe2e47}\label{classoomph_1_1Data_ae96cadc48ab7d39aa6ed7bd91abe2e47}} 
+\index{oomph::Data@{oomph::Data}!value\_pt@{value\_pt}}
+\index{value\_pt@{value\_pt}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{value\_pt()}{value\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Data\+::value\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the i-\/th stored value, or any of its history values (const version). Typically this is required when direct access to the stored value is required, e.\+g. when writing functions that return a reference to a variable that is stored in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
+
+
+
+Definition at line 331 of file nodes.\+h.
+
+
+
+References i, range\+\_\+check(), t, and Value.
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1Data_a75261ed432ecec54f676ec5bb0db4d5a}\label{classoomph_1_1Data_a75261ed432ecec54f676ec5bb0db4d5a}} 
+\index{oomph::Data@{oomph::Data}!BoundaryNode@{BoundaryNode}}
+\index{BoundaryNode@{BoundaryNode}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{BoundaryNode}{BoundaryNode}}
+{\footnotesize\ttfamily template$<$class N\+O\+D\+E\+\_\+\+T\+Y\+PE $>$ \\
+friend class \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 97 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Data_a3d5c6d911301ca1704ce34955d8b3c6b}\label{classoomph_1_1Data_a3d5c6d911301ca1704ce34955d8b3c6b}} 
+\index{oomph::Data@{oomph::Data}!BoundaryNodeBase@{BoundaryNodeBase}}
+\index{BoundaryNodeBase@{BoundaryNodeBase}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{BoundaryNodeBase}{BoundaryNodeBase}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase}{Boundary\+Node\+Base}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 96 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Data_a68cfdb0f861066a7be74be2524466388}\label{classoomph_1_1Data_a68cfdb0f861066a7be74be2524466388}} 
+\index{oomph::Data@{oomph::Data}!CopiedData@{CopiedData}}
+\index{CopiedData@{CopiedData}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{CopiedData}{CopiedData}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 95 of file nodes.\+h.
+
+
+
+Referenced by oomph\+::\+Solid\+Node\+::set\+\_\+external\+\_\+variable\+\_\+position\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a45b7c97b9e9c5f94eb2a9efeae2dbc08}\label{classoomph_1_1Data_a45b7c97b9e9c5f94eb2a9efeae2dbc08}} 
+\index{oomph::Data@{oomph::Data}!HijackedData@{HijackedData}}
+\index{HijackedData@{HijackedData}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{HijackedData}{HijackedData}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classoomph_1_1HijackedData}{Hijacked\+Data}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 94 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Data_abad7fa6bf4988e5a0336ba3ce71b5147}\label{classoomph_1_1Data_abad7fa6bf4988e5a0336ba3ce71b5147}} 
+\index{oomph::Data@{oomph::Data}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+Output operator\+: output all values at all times, along with any extra information stored for the timestepper. \mbox{\Hypertarget{classoomph_1_1Data_afe40e893f1c68d80f58bdbfc1e1d3cdc}\label{classoomph_1_1Data_afe40e893f1c68d80f58bdbfc1e1d3cdc}} 
+\index{oomph::Data@{oomph::Data}!SolidNode@{SolidNode}}
+\index{SolidNode@{SolidNode}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{SolidNode}{SolidNode}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 102 of file nodes.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1Data_a4e1e4a227baddb8f075761c48b06f4af}\label{classoomph_1_1Data_a4e1e4a227baddb8f075761c48b06f4af}} 
+\index{oomph::Data@{oomph::Data}!Copy\_of\_data\_pt@{Copy\_of\_data\_pt}}
+\index{Copy\_of\_data\_pt@{Copy\_of\_data\_pt}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Copy\_of\_data\_pt}{Copy\_of\_data\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$$\ast$ oomph\+::\+Data\+::\+Copy\+\_\+of\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+C-\/style array of any \mbox{\hyperlink{classoomph_1_1Data}{Data}} objects that contain copies of the current \mbox{\hyperlink{classoomph_1_1Data}{Data}} object\textquotesingle{}s data values. 
+
+
+
+Definition at line 128 of file nodes.\+h.
+
+
+
+Referenced by add\+\_\+copy(), remove\+\_\+copy(), resize(), set\+\_\+time\+\_\+stepper(), and $\sim$\+Data().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a05936a16f5fca1612ad3f47b4e87d267}\label{classoomph_1_1Data_a05936a16f5fca1612ad3f47b4e87d267}} 
+\index{oomph::Data@{oomph::Data}!Default\_static\_time\_stepper\_pt@{Default\_static\_time\_stepper\_pt}}
+\index{Default\_static\_time\_stepper\_pt@{Default\_static\_time\_stepper\_pt}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Default\_static\_time\_stepper\_pt}{Default\_static\_time\_stepper\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$ oomph\+::\+Data\+::\+Default\+\_\+static\+\_\+time\+\_\+stepper\+\_\+pt =new \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$0$>$()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Default (static) timestepper used in steady problems. 
+
+Default (steady) timestepper for steady \mbox{\hyperlink{classoomph_1_1Data}{Data}}. 
+
+Definition at line 165 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Data_a1863d191b66fc4b22fa282ef357c0513}\label{classoomph_1_1Data_a1863d191b66fc4b22fa282ef357c0513}} 
+\index{oomph::Data@{oomph::Data}!Eqn\_number@{Eqn\_number}}
+\index{Eqn\_number@{Eqn\_number}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Eqn\_number}{Eqn\_number}}
+{\footnotesize\ttfamily long$\ast$ oomph\+::\+Data\+::\+Eqn\+\_\+number\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+C-\/style array of pointers to the (global) equation numbers of the values. ~\newline
+ 
+
+
+
+Definition at line 116 of file nodes.\+h.
+
+
+
+Referenced by add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Hijacked\+Data\+::clear\+\_\+copied\+\_\+pointers(), oomph\+::\+Copied\+Data\+::clear\+\_\+copied\+\_\+pointers(), oomph\+::\+Copied\+Data\+::\+Copied\+Data(), delete\+\_\+value\+\_\+storage(), describe\+\_\+dofs(), eqn\+\_\+number(), eqn\+\_\+number\+\_\+pt(), oomph\+::\+Hijacked\+Data\+::\+Hijacked\+Data(), is\+\_\+constrained(), is\+\_\+pinned(), is\+\_\+segregated\+\_\+solve\+\_\+pinned(), oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic(), oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+nodes\+\_\+periodic(), pin\+\_\+all(), read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector(), oomph\+::\+Hijacked\+Data\+::reset\+\_\+copied\+\_\+pointers(), oomph\+::\+Copied\+Data\+::reset\+\_\+copied\+\_\+pointers(), resize(), self\+\_\+test(), unpin\+\_\+all(), oomph\+::\+Copied\+Data\+::$\sim$\+Copied\+Data(), and oomph\+::\+Hijacked\+Data\+::$\sim$\+Hijacked\+Data().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a71225ddbb54744f6fe662af5a5520ab8}\label{classoomph_1_1Data_a71225ddbb54744f6fe662af5a5520ab8}} 
+\index{oomph::Data@{oomph::Data}!Is\_constrained@{Is\_constrained}}
+\index{Is\_constrained@{Is\_constrained}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Is\_constrained}{Is\_constrained}}
+{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+constrained =-\/2\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to indicate that the value is constrained because it is associated with non-\/conforming element boundaries --- a hanging node --- (and is therefore pinned) 
+
+Static \char`\"{}\+Magic number\char`\"{} to indicate that the value is constrained, usually because is it associated with non-\/conforming data, otherwise known as hanging nodes 
+
+Definition at line 203 of file nodes.\+h.
+
+
+
+Referenced by constrain(), is\+\_\+constrained(), and unconstrain().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a3f351624d334f1babf55170d539b36fa}\label{classoomph_1_1Data_a3f351624d334f1babf55170d539b36fa}} 
+\index{oomph::Data@{oomph::Data}!Is\_pinned@{Is\_pinned}}
+\index{Is\_pinned@{Is\_pinned}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Is\_pinned}{Is\_pinned}}
+{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+pinned =-\/1\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to indicate that the value is pinned. 
+
+Static \char`\"{}\+Magic number\char`\"{} to indicate pinned values. 
+
+Definition at line 188 of file nodes.\+h.
+
+
+
+Referenced by oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+External\+Element\+::assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Element\+::assign\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Refineable\+Solid\+Element\+::assign\+\_\+solid\+\_\+hanging\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Solid\+Finite\+Element\+::assign\+\_\+solid\+\_\+local\+\_\+eqn\+\_\+numbers(), constrain(), is\+\_\+pinned(), pin(), and pin\+\_\+all().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ad83f76cbcd76d8ed96aca53dd04d5abf}\label{classoomph_1_1Data_ad83f76cbcd76d8ed96aca53dd04d5abf}} 
+\index{oomph::Data@{oomph::Data}!Is\_segregated\_solve\_pinned@{Is\_segregated\_solve\_pinned}}
+\index{Is\_segregated\_solve\_pinned@{Is\_segregated\_solve\_pinned}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Is\_segregated\_solve\_pinned}{Is\_segregated\_solve\_pinned}}
+{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+segregated\+\_\+solve\+\_\+pinned =-\/3\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to indicate that the value is pinned, but only for the duration of a segregated solve. 
+
+
+
+Definition at line 193 of file nodes.\+h.
+
+
+
+Referenced by is\+\_\+segregated\+\_\+solve\+\_\+pinned().
+
+\mbox{\Hypertarget{classoomph_1_1Data_ac56011da9a923069793ecc3cb54f5e20}\label{classoomph_1_1Data_ac56011da9a923069793ecc3cb54f5e20}} 
+\index{oomph::Data@{oomph::Data}!Is\_unclassified@{Is\_unclassified}}
+\index{Is\_unclassified@{Is\_unclassified}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Is\_unclassified}{Is\_unclassified}}
+{\footnotesize\ttfamily long oomph\+::\+Data\+::\+Is\+\_\+unclassified =-\/10\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static \char`\"{}\+Magic number\char`\"{} used in place of the equation number to denote a value that hasn\textquotesingle{}t been classified as pinned or free. 
+
+Static \char`\"{}\+Magic number\char`\"{} to indicate values that haven\textquotesingle{}t been classified as pinned or free. 
+
+Definition at line 197 of file nodes.\+h.
+
+
+
+Referenced by oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Element\+With\+Moving\+Nodes\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Finite\+Element\+::assign\+\_\+nodal\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), resize(), self\+\_\+test(), unconstrain(), unpin(), and unpin\+\_\+all().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a7e8dbdf96bf78658e85c1d7f81ff10dd}\label{classoomph_1_1Data_a7e8dbdf96bf78658e85c1d7f81ff10dd}} 
+\index{oomph::Data@{oomph::Data}!Ncopies@{Ncopies}}
+\index{Ncopies@{Ncopies}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Ncopies}{Ncopies}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Data\+::\+Ncopies\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of \mbox{\hyperlink{classoomph_1_1Data}{Data}} that contain copies of this \mbox{\hyperlink{classoomph_1_1Data}{Data}} object\textquotesingle{}s values. 
+
+
+
+Definition at line 132 of file nodes.\+h.
+
+
+
+Referenced by add\+\_\+copy(), remove\+\_\+copy(), resize(), set\+\_\+time\+\_\+stepper(), and $\sim$\+Data().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a5474e601ebda6bde66c179c92831729e}\label{classoomph_1_1Data_a5474e601ebda6bde66c179c92831729e}} 
+\index{oomph::Data@{oomph::Data}!Non\_halo\_proc\_ID@{Non\_halo\_proc\_ID}}
+\index{Non\_halo\_proc\_ID@{Non\_halo\_proc\_ID}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Non\_halo\_proc\_ID}{Non\_halo\_proc\_ID}}
+{\footnotesize\ttfamily int oomph\+::\+Data\+::\+Non\+\_\+halo\+\_\+proc\+\_\+\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Non-\/halo processor ID for \mbox{\hyperlink{classoomph_1_1Data}{Data}}; -\/1 if it\textquotesingle{}s not a halo. 
+
+
+
+Definition at line 142 of file nodes.\+h.
+
+
+
+Referenced by is\+\_\+halo(), non\+\_\+halo\+\_\+proc\+\_\+\+I\+D(), set\+\_\+halo(), and set\+\_\+nonhalo().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a379d45fb0d0170fcdec06dbbc97a504d}\label{classoomph_1_1Data_a379d45fb0d0170fcdec06dbbc97a504d}} 
+\index{oomph::Data@{oomph::Data}!Nvalue@{Nvalue}}
+\index{Nvalue@{Nvalue}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Nvalue}{Nvalue}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Data\+::\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of values stored in the data object. 
+
+
+
+Definition at line 137 of file nodes.\+h.
+
+
+
+Referenced by assign\+\_\+eqn\+\_\+numbers(), constrain\+\_\+all(), describe\+\_\+dofs(), nvalue(), pin\+\_\+all(), range\+\_\+check(), oomph\+::\+Copied\+Data\+::reset\+\_\+copied\+\_\+pointers(), resize(), self\+\_\+test(), unconstrain\+\_\+all(), and unpin\+\_\+all().
+
+\mbox{\Hypertarget{classoomph_1_1Data_a63442f4cabaff13e7116e0b80d350d92}\label{classoomph_1_1Data_a63442f4cabaff13e7116e0b80d350d92}} 
+\index{oomph::Data@{oomph::Data}!Time\_stepper\_pt@{Time\_stepper\_pt}}
+\index{Time\_stepper\_pt@{Time\_stepper\_pt}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Time\_stepper\_pt}{Time\_stepper\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}$\ast$ oomph\+::\+Data\+::\+Time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to a Timestepper. The inclusion of a Timestepper pointer in the \mbox{\hyperlink{classoomph_1_1Data}{Data}} class, ensures that time-\/derivatives can be calculated and storage can be managed at the low (\mbox{\hyperlink{classoomph_1_1Data}{Data}}) level. 
+
+
+
+Definition at line 122 of file nodes.\+h.
+
+
+
+Referenced by ntstorage(), set\+\_\+time\+\_\+stepper(), and time\+\_\+stepper\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1Data_aa69aab29cca43c9be329904807203ef1}\label{classoomph_1_1Data_aa69aab29cca43c9be329904807203ef1}} 
+\index{oomph::Data@{oomph::Data}!Value@{Value}}
+\index{Value@{Value}!oomph::Data@{oomph::Data}}
+\doxysubsubsection{\texorpdfstring{Value}{Value}}
+{\footnotesize\ttfamily double$\ast$$\ast$ oomph\+::\+Data\+::\+Value\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+C-\/style array of pointers to data values and possible history values. The data must be ordered in such a way that Value\mbox{[}i\mbox{]}\mbox{[}t\mbox{]} gives the i-\/th data value at the time value t. The ordering is chosen so that all the time levels of a particular value can be access from a single pointer to a double. This is required for copying/hijacking functionality. The data should be accessed by using the member functions value(time,ival) and set\+\_\+value(time,ival,value), where time=0\+: present. ~\newline
+ 
+
+
+
+Definition at line 112 of file nodes.\+h.
+
+
+
+Referenced by add\+\_\+values\+\_\+to\+\_\+vector(), oomph\+::\+Hijacked\+Data\+::clear\+\_\+copied\+\_\+pointers(), oomph\+::\+Copied\+Data\+::clear\+\_\+copied\+\_\+pointers(), oomph\+::\+Copied\+Data\+::\+Copied\+Data(), delete\+\_\+value\+\_\+storage(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+value(), oomph\+::\+Hijacked\+Data\+::\+Hijacked\+Data(), oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic(), oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+nodes\+\_\+periodic(), read\+\_\+values\+\_\+from\+\_\+vector(), oomph\+::\+Hijacked\+Data\+::reset\+\_\+copied\+\_\+pointers(), oomph\+::\+Copied\+Data\+::reset\+\_\+copied\+\_\+pointers(), resize(), oomph\+::\+Solid\+Node\+::set\+\_\+external\+\_\+variable\+\_\+position\+\_\+pt(), oomph\+::\+Solid\+Node\+::set\+\_\+position\+\_\+time\+\_\+stepper(), set\+\_\+time\+\_\+stepper(), set\+\_\+value(), oomph\+::\+Solid\+Node\+::\+Solid\+Node(), value(), value\+\_\+pt(), oomph\+::\+Copied\+Data\+::$\sim$\+Copied\+Data(), and oomph\+::\+Hijacked\+Data\+::$\sim$\+Hijacked\+Data().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{nodes_8h}{nodes.\+h}}\item 
+\mbox{\hyperlink{nodes_8cc}{nodes.\+cc}}\end{DoxyCompactItemize}

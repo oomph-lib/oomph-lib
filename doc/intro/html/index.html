@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: The Finite Element Method</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">The Finite Element Method </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="intro"></a>
+Introduction</h1>
+<p>This document provides a brief introduction to the finite element method and illustrates how the method is implemented in <code>oomph-lib</code>. The first few sections present a brief, self-contained derivation of the method. The exposition is "constructive" and avoids a number of subtleties, which can be found in standard textbooks [e.g. E.B. Becker, G.F. Carey, and J.T. Oden. Finite Elements: An Introduction. Prentice-Hall, Englewood Cliffs, New Jersey, (1981)] . We generally assume that all functions are sufficiently "well behaved" so that all mathematical manipulations "make sense". Function spaces are only used where they help to make the notation more compact.</p>
+<p>Readers who are familiar with the theory of finite elements may skip the introductory sections, but should consult the section <a class="el" href="index.html#towards_oo">An object-oriented implementation</a> which explains the particular implementation used in <code>oomph-lib</code>.</p>
+<p>Initially, we develop the method for scalar second-order (elliptic) PDEs with Dirichlet boundary conditions, using classical 1D and 2D Poisson problems as model problems. Specifically, we consider the 1D problem </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\mbox{d}^2 u(x)}{\mbox{d} x^2} = f(x) \mbox{ \ \ \ \ for $x\in[0,1]$ \ \ \ subject to \ \ \ } u(x=0)= g_0 \mbox{\ \ \ and \ \ \ } u(x=1)= g_1, \mbox{\hspace{3cm}} \]" src="form_0.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ f(x)$" src="form_1.png"/> and the constants <img class="formulaInl" alt="$g_0$" src="form_2.png"/> and <img class="formulaInl" alt="$g_1$" src="form_3.png"/> are given. The 2D equivalent is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial^2 u(x_1,x_2)}{\partial x_1^{2}} + \frac{\partial^{2} u(x_1,x_2)}{\partial x_2^{2}} = f(x_1,x_2) \mbox{ \ \ \ \ for $(x_1,x_2)\in D$ \ \ \ subject to \ \ \ } u|_{\partial D} = g, \mbox{\hspace{5cm}} \]" src="form_4.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ f(x_1,x_2)$" src="form_5.png"/> and <img class="formulaInl" alt="$ g(x_1,x_2)$" src="form_6.png"/> are given.</p>
+<center> <table class="oomph-table">
+<tr>
+<td class="panel panel-default"><center class="panel-heading"> <b> A note on notation</b> </center><div class="panel-body"> Throughout this document, we use index notation and write, e.g., <img class="formulaInl" alt="$ u(x_1,x_2) $" src="form_7.png"/> as <img class="formulaInl" alt="$ u(x_i) $" src="form_8.png"/>. We do not explicitly state the range of free indices where it is clear from the context &ndash; in the above example it would be equal to the spatial dimension of the problem.</div><div class="panel-body">All mathematical derivations are presented using the "natural" numbering of the indices: e.g., the components of the 3D vector <img class="formulaInl" alt="${\bf f}$" src="form_9.png"/> are <img class="formulaInl" alt="$ f_1, f_2 $" src="form_10.png"/> and <img class="formulaInl" alt="$ f_3 $" src="form_11.png"/>. Unfortunately, this notation is inconsistent with the implementation of vectors (and most other standard "containers") in C++ where the indices start from 0 and the components of <code>vector&lt;double&gt;</code> <code>f(3)</code> are <code>f</code>[0], <code>f</code>[1] and <code>f</code>[2]. There is no elegant way to resolve this conflict. Adopting C++-style numbering in the theoretical development would make the mathematics look very odd (try it!); conversely, adopting the "natural" numbering when discussing the C++-implementation would make this documentation inconsistent with the actual implementation. We therefore use both numbering systems, each within their appropriate context. </div>   </td></tr>
+</table>
+</center><p>Physically, the Poisson equation describes steady diffusion processes. For instance, the 2D Poisson problem describes the temperature distribution <img class="formulaInl" alt="$u(x_i) $" src="form_12.png"/> within a 2D body, <img class="formulaInl" alt="$D$" src="form_13.png"/>, whose boundary <img class="formulaInl" alt="$\partial D$" src="form_14.png"/> is maintained at a prescribed temperature, <img class="formulaInl" alt="$ g(x_i)$" src="form_15.png"/>. The function <img class="formulaInl" alt="$ f(x_i)$" src="form_16.png"/> describes the strength of (distributed) heat sources in the body. In practical applications, the strength of these heat sources is bounded because no physical process can release infinite amounts of energy in a finite domain. Hence, we assume that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_D f(x_i) \ dx_1 dx_2 &lt; \infty. \]" src="form_17.png"/>
+</p>
+<p>We usually write all PDEs in "residual form", obtained by moving all terms to the left-hand-side of the equation, so that the general second-order scalar PDE problem is</p>
+<center> <table class="oomph-table">
+<tr>
+<td class="panel panel-default"><center class="panel-heading"> <b> Problem P </b> </center><center class="panel-body"> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal R}\left(x_i; u(x_i), \frac{\partial u}{\partial x_i}, \frac{\partial^2 u}{\partial x_i \ \partial x_j}\right) = 0 \ \mbox{ \ \ \ \ in \ \ \ } D,\]" src="form_18.png"/>
+</p>
+ <br  />
+ with Dirichlet (essential) boundary conditions on <img class="formulaInl" alt="$ \partial D $" src="form_19.png"/> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \hfill u|_{\partial D} = g, \]" src="form_20.png"/>
+</p>
+ where the function <img class="formulaInl" alt="$g$" src="form_21.png"/> is given </center>   </td></tr>
+</table>
+</center><p>To keep the notation compact, we suppress the explicit dependence of <img class="formulaInl" alt="$ {\cal R} $" src="form_22.png"/> on the derivatives and write the residual as <br  />
+ <img class="formulaInl" alt="$ {\cal R}(x_i; u(x_i))$" src="form_23.png"/>. For example, the residual forms of the two Poisson problems are given by: </p><center> <table class="oomph-table">
+<tr>
+<td class="panel panel-default"><center class="panel-heading"> <b> Problem P1</b> </center><center class="panel-body"> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal R}(x; u(x)) = \frac{\mbox{d}^2 u(x)}{\mbox{d} x^2} - f(x) =0 \mbox{\ \ \ \ for $x\in[0,1]$ \ \ \ subject to \ \ \ } u(x=0)= g_0 \mbox{\ \ \ and \ \ \ } u(x=1)= g_1, \]" src="form_24.png"/>
+</p>
+ where <img class="formulaInl" alt="$ f(x)$" src="form_1.png"/> and the constants <img class="formulaInl" alt="$g_0$" src="form_2.png"/> and <img class="formulaInl" alt="$g_1$" src="form_3.png"/> are given. </center>   </td></tr>
+</table>
+</center><p>and</p>
+<center> <table class="oomph-table">
+<tr>
+<td class="panel panel-default"><center class="panel-heading"> <b> Problem P2</b> </center><center class="panel-body"> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal R}(x_i; u(x_i)) = \sum_{j=1}^2 \frac{\partial^2 u(x_i)}{\partial x_j^2} - f(x_i) =0 \mbox{ \ \ \ \ for $x_i\in D$ \ \ \ subject to \ \ \ } u|_{\partial D} = g, \]" src="form_25.png"/>
+</p>
+ where <img class="formulaInl" alt="$ f(x_i)$" src="form_16.png"/> and <img class="formulaInl" alt="$ g(x_i)$" src="form_15.png"/> are given, and <img class="formulaInl" alt="$ i = 1,2$" src="form_26.png"/>. </center>   </td></tr>
+</table>
+</center><p>We stress that neither the finite element method, nor <code>oomph-lib</code> are restricted to scalar second-order PDEs. Documentation for the example drivers discusses generalisations to:</p><ul>
+<li>non-Dirichlet boundary conditions</li>
+<li>systems of PDEs</li>
+<li>mixed interpolation</li>
+<li>discontinuous interpolation</li>
+<li>timestepping</li>
+<li>higher-order PDEs</li>
+<li>solid mechanics and Lagrangian coordinates.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="mathFE"></a>
+Mathematical background</h1>
+<h2><a class="anchor" id="weaksoln"></a>
+The weak solution</h2>
+<p>A classical (or strong) solution of the problem P is any function <img class="formulaInl" alt="$ u(x_i) $" src="form_8.png"/> that satisfies the PDE and boundary condition at every point in <img class="formulaInl" alt="$ D$" src="form_27.png"/>, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal R}(x_i; u(x_i)) \equiv 0 \ \ \ \forall x_i \in D \mbox{\ \ \ \ and \ \ \ \ } u|_{\partial D} = g. \]" src="form_28.png"/>
+</p>
+<p> The concept of a "weak" solution is based on a slight relaxation of this criterion. A weak solution, <img class="formulaInl" alt="$u_w(x_i), $" src="form_29.png"/> of problem P is any function that satisfies the essential boundary condition, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_w|_{\partial D} = g, \]" src="form_30.png"/>
+</p>
+<p> and for which the so-called "weighted residual" </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r = \int_{D} {\cal R}(x_i; u_w(x_i)) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 \ \ \ \ \ \ \ \ (1) \]" src="form_31.png"/>
+</p>
+<p> vanishes for <em>any</em> "test function" <img class="formulaInl" alt="$ \phi^{(test)}(x_i) $" src="form_32.png"/> which satisfies homogeneous boundary conditions so that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \phi^{(test)}|_{\partial D} = 0. \]" src="form_33.png"/>
+</p>
+<p>At this point it might appear that we have fatally weakened the concept of a solution. If we only require the PDE to be satisfied in an average sense, couldn't any function <br  />
+ be a "solution"? In fact, this is not the case and we shall now demonstrate that, for all practical purposes [we refer to the standard literature for a rigorous derivation], the statement </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{ &quot;weak solutions are strong solutions&quot; } \]" src="form_34.png"/>
+</p>
+<p> is true. The crucial observation is that the weak solution requires the weighted residual to vanish for <em>any</em> test function. To show that this is equivalent to demanding that <img class="formulaInl" alt="$ {\cal R} \equiv 0 \ \ \forall x_i \in D $" src="form_35.png"/> (as in the definition of the strong solution), let us try to construct a counter-example for which <img class="formulaInl" alt="$ {\cal R} \not\equiv 0 $" src="form_36.png"/> in some part of the domain (implying that the candidate solution is not a classical solution) while <img class="formulaInl" alt="$r=0$" src="form_37.png"/> (so that it qualifies as a weak solution). For simplicity we illustrate the impossibility of this in a 1D example. First consider a candidate solution <img class="formulaInl" alt="$ u_c(x)$" src="form_38.png"/> which satisfies the essential boundary condition but does not satisfy the PDE anywhere, and that <img class="formulaInl" alt="$ {\cal R}(x; u_c(x)) &gt; 0 $" src="form_39.png"/> throughout the domain, as indicated in this sketch: </p><div class="image">
+<img src="weaksoln1.gif" alt=""/>
+<div class="caption">
+Residual (blue/solid) is nonzero (and positive) throughout the domain. A constant test function (red/dotted) is sufficient to show that the candidate solution is not a weak solution. </div></div>
+<p>  Could this candidate solution possibly qualify as a weak solution? No, using the trivial test function <img class="formulaInl" alt="$ \phi^{(test)} \equiv 1 $" src="form_40.png"/> gives a nonzero weighted residual, and it follows that <img class="formulaInl" alt="$ {\cal R}(x, u_c(x)) $" src="form_41.png"/> must have zero average if <img class="formulaInl" alt="$ u_c(x) $" src="form_42.png"/> is to qualify as a weak solution.</p>
+<p>The figure below shows the residual for a more sophisticated candidate solution which satisfies the PDE over most of the domain. </p><div class="image">
+<img src="weaksoln2.gif" alt=""/>
+<div class="caption">
+Residual (blue/solid) is nonzero only in two small sub-domains. A suitably constructed test function with finite support (red/dotted) is sufficient to show that the candidate solution is not a weak solution. </div></div>
+<p>  The residual is nonzero only in two small subdomains, <img class="formulaInl" alt="$ D_1$" src="form_43.png"/> and <img class="formulaInl" alt="$ D_2 $" src="form_44.png"/>. The candidate solution is such that the residual has different signs in <img class="formulaInl" alt="$ D_1$" src="form_43.png"/> and <img class="formulaInl" alt="$ D_2 $" src="form_44.png"/> so that its average over the domain is zero. Could this solution qualify as a weak solution? Again the answer is no because we can choose a test function that is nonzero in only one of the two subdomains (e.g. the function shown by the red/dotted line), which gives a nonzero weighted residual.</p>
+<p>It is clear that such a procedure may be used to obtain a nonzero weighted residual whenever the residual <img class="formulaInl" alt="$ {\cal R} $" src="form_22.png"/> is nonzero <em>anywhere</em> in the domain. In other words, a weak solution is a strong solution, as claimed. [To make this argument mathematically rigorous, we would have to re-assess the argument for (pathological) cases in which the residual is nonzero only at finite number of points, etc.].</p>
+<hr  />
+<h2><a class="anchor" id="int_by_parts_1"></a>
+A useful trick: Integration by parts</h2>
+<p>Consider now the weak form of the 2D Poisson problem P2, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_D \left( \sum_{j=1}^2 \frac{\partial^2 u(x_i)}{\partial x_j^2} - f(x_i) \right) \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 =0 \mbox{\ \ \ \ subject to\ \ \ \ } u|_{\partial D}=g. \ \ \ \ \ \ \ \ (2) \]" src="form_45.png"/>
+</p>
+<p> After integration by parts and use of the divergence theorem, we obtain </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_D \sum_{j=1}^2 \frac{\partial u(x_i)}{\partial x_j} \ \frac{\partial \phi^{(test)}(x_i)}{\partial x_j} \ \mbox{d}x_1 \mbox{d}x_2 + \int_D f(x_i) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = \oint_{\partial D} \frac{\partial u}{\partial n} \ \phi^{(test)} \ \mbox{d}s, \ \ \ \ \ (3) \]" src="form_46.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$s$" src="form_47.png"/> is the arclength along the domain boundary <img class="formulaInl" alt="$ \partial D$" src="form_48.png"/> and <img class="formulaInl" alt="$ \partial/\partial n$" src="form_49.png"/> the outward normal derivative. Since the test functions satisfy homogeneous boundary conditions, <img class="formulaInl" alt="$ \left. \phi^{(test)} \right|_{\partial D} = 0, $" src="form_50.png"/> the line integral on the RHS of equation (3) vanishes. Therefore, an alternative version of the weak form of problem P2 is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_D \sum_{j=1}^2 \frac{\partial u(x_i)}{\partial x_j} \ \frac{\partial \phi^{(test)}(x_i)}{\partial x_j} \ \mbox{d}x_1 \mbox{d}x_2 + \int_D f(x_i) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0. \ \ \ \ \ \ (4) \]" src="form_51.png"/>
+</p>
+<p> We note that (4) involves first derivatives of the unknown function <img class="formulaInl" alt="$ u $" src="form_52.png"/> and the test function <img class="formulaInl" alt="$ \phi^{(test)} $" src="form_53.png"/>, whereas (2) involves second derivatives of <img class="formulaInl" alt="$ u $" src="form_52.png"/> and the zero-th derivatives of <img class="formulaInl" alt="$ \phi^{(test)} $" src="form_53.png"/>. The advantages of using the "symmetric", integrated-by-parts version of the weak form will become apparent in the subsequent sections.</p>
+<hr  />
+<h2><a class="anchor" id="function_spaces"></a>
+[Nearly an aside:] Function spaces</h2>
+<p>We stated in the introduction that all functions are assumed to be <em> sufficiently "well-behaved" so that all mathematical manipulations "make sense"</em>. It is important to realise that we have already (tacitly) used this assumption in the derivation of the weak form. The weak form does not "make sense" if we allow candidate solutions and test functions for which the integral in (1) does not exist. This imposes restrictions on the types of functions that are "admissible" in our problem. The precise form of these restrictions depends on the form of the residual <img class="formulaInl" alt="${\cal R}(x_i,u(x_i))$" src="form_54.png"/>, and, typically, the restrictions are related to the functions' differentiability. It is convenient to employ the concept of a "function space" to collectively refer to all functions that satisfy the required restrictions. [In this introduction, none of the additional (heavy) machinery from functional analysis is required].</p>
+<p>For instance, we can ensure that the integrated-by-parts version of problem P2 in equation (4) "makes sense" if we restrict <img class="formulaInl" alt="$u(x_i)$" src="form_55.png"/> and <img class="formulaInl" alt="$\phi^{(test)}(x_i)$" src="form_56.png"/> to all functions whose zeroth and first derivatives are square integrable over the domain <img class="formulaInl" alt="$D$" src="form_13.png"/>. These functions are members of a (well-known) function space that is usually denoted by <img class="formulaInl" alt="$H^{1}(D)$" src="form_57.png"/>. In fact, <img class="formulaInl" alt="$H^{1}(D)$" src="form_57.png"/> is a particular instance of a family of function spaces &ndash; the Sobolev spaces <img class="formulaInl" alt="$H^{i}(D)$" src="form_58.png"/> where <img class="formulaInl" alt="$i=0,1,2,...$" src="form_59.png"/> which contain all functions whose zeroth, first, ..., i-th derivatives are square-integrable over the domain <img class="formulaInl" alt="$D$" src="form_13.png"/>. The members of these function spaces have the property that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(x_i) \in H^0(D) \ \ \ \iff \ \ \ \int_D u^2(x_i) \ dx_1 dx_2 &lt; \infty, \]" src="form_60.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(x_i) \in H^1(D) \ \ \ \iff \ \ \ \int_D \left( u^2(x_i) + \sum_{j=1}^2 \left(\frac{\partial u(x_i)}{\partial x_j}\right)^2 \right) dx_1 dx_2 &lt; \infty, \]" src="form_61.png"/>
+</p>
+<p> etc. We use the subscript "0" to restrict a given function space to the subset of its members which vanish on the domain boundary <img class="formulaInl" alt="$ \partial D,$" src="form_62.png"/> </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(x_i) \in H^i_0(D) \ \ \ \iff \ \ \ \ u(x_i) \in H^i(D) \mbox{\ \ \ and \ \ \ } u|{\partial D}=0. \]" src="form_63.png"/>
+</p>
+<p>Using these function spaces, we can provide a concise definition of the weak form of problem P2: </p><center> <table class="oomph-table">
+<tr>
+<td class="panel panel-default"><center class="panel-heading"> <b> Problem P2<sub>weak</sub> </b> </center><center class="panel-body"> Find the function <img class="formulaInl" alt="$ u(x_i) \in H^1(D) $" src="form_64.png"/> that satisfies the essential boundary conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \hfill u|_{\partial D} = g, \]" src="form_20.png"/>
+</p>
+ and for which <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_D \sum_{j=1}^2 \frac{\partial u(x_i)}{\partial x_j} \ \frac{\partial \phi^{(test)}(x_i)}{\partial x_j} \ \mbox{d}x_1 \mbox{d}x_2 + \int_D f(x_i) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0 \]" src="form_65.png"/>
+</p>
+ for <em>all</em> test functions <img class="formulaInl" alt="$ \phi^{(test)}(x_i) \in H^1_0(D). $" src="form_66.png"/> </center>   </td></tr>
+</table>
+</center><p>It is important to realise that the choice of suitable function spaces for <img class="formulaInl" alt="$u(x_i)$" src="form_55.png"/> and <img class="formulaInl" alt="$\phi^{(test)}(x_i)$" src="form_56.png"/> is problem-dependent, <br  />
+ guided by the inspection of the weak form for a specific problem. The (pragmatic) procedure is straightforward: write down the weak form and determine the (minimal) constraints that must be imposed on <img class="formulaInl" alt="$u(x_i)$" src="form_55.png"/> and <img class="formulaInl" alt="$\phi(x_i)$" src="form_67.png"/> for the weak form to "make sense". All functions that satisfy these constraints, are "admissible" and, collectively, they form a function space <img class="formulaInl" alt="$ H(D) $" src="form_68.png"/>, say. The weak form of the general problem P can then be written as <br  />
+ <br  />
+</p><center> <table class="oomph-table">
+<tr>
+<td class="panel panel-default"><center class="panel-heading"><b> Problem P<sub>weak</sub> </b></center> <center class="panel-body"> Find the function <img class="formulaInl" alt="$ u(x_i) \in H(D) $" src="form_69.png"/> that satisfies the essential boundary conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \hfill u|_{\partial D} = g, \]" src="form_20.png"/>
+</p>
+ and for which <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_D {\cal R}(x_i,u(x_i)) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0 \]" src="form_70.png"/>
+</p>
+ for <em>all</em> test functions <img class="formulaInl" alt="$ \phi^{(test)}(x_i) \in H_0(D). $" src="form_71.png"/> </center>   </td></tr>
+</table>
+</center><p> <br  />
+ [If you followed the above argument carefully you will have realised that our strategy for ensuring that the weak form "makes sense" uses a sufficient rather than a necessary condition. For instance, it is not necessary for <img class="formulaInl" alt="$ u(x_i)$" src="form_72.png"/> and <img class="formulaInl" alt="$ \phi^{(test)}(x_i)$" src="form_73.png"/> to be members of the same function space. Alternative formulations are possible but we shall not pursue such ideas any further in this introduction.]</p>
+<hr  />
+<h2><a class="anchor" id="galerkin"></a>
+The Galerkin method</h2>
+<p>We now exploit the definition of the weak solution to develop a numerical method that can be used to determine approximate solutions to problem P<sub>weak</sub>. We start by splitting the solution into two parts, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(x_i) = u_{h}(x_i) + u_{p}(x_i), \]" src="form_74.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ u_{p}(x_i)$" src="form_75.png"/> is an (arbitrary) function that satisfies the Dirichlet boundary conditions, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_{p}|_{\partial D} = g. \]" src="form_76.png"/>
+</p>
+<p> The unknown function <img class="formulaInl" alt="$ u_{h}(x_i) $" src="form_77.png"/> then has to satisfy the homogeneous boundary conditions </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_{h}|_{\partial D} = 0.\]" src="form_78.png"/>
+</p>
+<p> We expand <img class="formulaInl" alt="$ u_{h}(x_i) $" src="form_77.png"/> in terms of a (given) infinite set of basis functions <img class="formulaInl" alt="$ \psi_j(x_i) \in H_0(D) \ \ \ (j=1,...,\infty) $" src="form_79.png"/>, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(x_i) = u_{p}(x_i) + \sum_{j=1}^{\infty} U_j \psi_j(x_i), \ \ \ \ \ \ (5) \]" src="form_80.png"/>
+</p>
+<p> which discretises the problem because the solution is now determined by the (as yet unknown) discrete coefficients <img class="formulaInl" alt="$ U_j \ \ \ (j=1,...,\infty). $" src="form_81.png"/> There are many possible sets of basis functions: polynomials, trigonometric functions, systems of eigenfunctions; mathematically speaking, the only requirement is that the basis functions are sufficiently general that the solution can be represented by the expansion (5). In other words, the functions must be a complete basis for <img class="formulaInl" alt="$H_0(D)$" src="form_82.png"/>.</p>
+<p>How do we determine the discrete coefficients <img class="formulaInl" alt="$ U_j $" src="form_83.png"/>? Inserting the expansion for <img class="formulaInl" alt="$u(x)$" src="form_84.png"/> into the definition of the weighted residual yields </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0, \ \ \ \ \ \ (6) \]" src="form_85.png"/>
+</p>
+<p> <br  />
+ and we recall that this equation must be satisfied for <em>any</em> test function <img class="formulaInl" alt="$ \phi^{(test)} \in H_0(D) $" src="form_86.png"/>. The functions <img class="formulaInl" alt="$\psi_j(x_i)$" src="form_87.png"/> form a complete basis for <img class="formulaInl" alt="$ H_0(D)$" src="form_88.png"/>, and so all possible test functions <img class="formulaInl" alt="$ \phi^{(test)}(x_i) $" src="form_32.png"/> may be represented as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \phi^{(test)}(x_i) = \sum_{k=1}^{\infty} \Phi_k \psi_k(x_i). \ \ \ \ \ \ \ (7) \]" src="form_89.png"/>
+</p>
+<p> Thus, the condition </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{...for any basis function $ \phi^{(test)}(x_i) $...} \]" src="form_90.png"/>
+</p>
+<p> becomes </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{...for any values of the coefficients $ \Phi_k$...} \]" src="form_91.png"/>
+</p>
+<p> Inserting the expansion (7) into the definition of the weak solution (6) yields </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r = \sum_{k=1}^{\infty} \Phi_k \ r_k(U_1, U_2,...) = 0, \ \ \ \ \ (8) \]" src="form_92.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k(U_1, U_2,...) = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \psi_k(x_i) \ \mbox{d}x_1 \mbox{d}x_2. \ \ \ \ \ \ \ (9) \]" src="form_93.png"/>
+</p>
+<p> Equation (8) must hold for <em>any</em> value of the coefficients <img class="formulaInl" alt="$ \Phi_k $" src="form_94.png"/>, so the coefficients <img class="formulaInl" alt="$ U_j $" src="form_83.png"/> must satisfy the equations </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k(U_1, U_2,...) = 0, \mbox{ \ \ \ \ for } k=1,2,... \]" src="form_95.png"/>
+</p>
+<p>In practice, we truncate the expansions (5) and (7) after a finite number of terms to obtain the approximations (indicated by tildes) </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \widetilde{u}(x_i) = u_p(x_i) + \sum_{j=1}^{M} U_j \psi_j(x_i) \mbox{ \ \ and \ \ } \widetilde{\phi^{(test)}}(x_i) = \sum_{k=1}^{M} \Phi_k \psi_k(x_i), \ \ \ \ \ \ (10) \]" src="form_96.png"/>
+</p>
+<p> and we determine the <img class="formulaInl" alt="$M$" src="form_97.png"/> unknown coefficients, <img class="formulaInl" alt="$U_1,...,U_M$" src="form_98.png"/>, from the <img class="formulaInl" alt="$M$" src="form_97.png"/> algebraic equations </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k(U_1,...,U_M)=0, \mbox{\ \ where \ \ $k=1,...,M$}. \ \ \ \ \ \ \ \ (11) \]" src="form_99.png"/>
+</p>
+<p> The number of terms in each truncated expansion must be the same, so that we obtain <img class="formulaInl" alt="$M$" src="form_97.png"/> equations for <img class="formulaInl" alt="$M$" src="form_97.png"/> unknowns.</p>
+<p>The truncation of the expansions (5) and (7) introduces two approximations:</p><ul>
+<li>The approximate solution <img class="formulaInl" alt="$ \widetilde{u}(x_i) $" src="form_100.png"/> is a member of the finite-dimensional function space <img class="formulaInl" alt="$\widetilde{H}(D) \subset H(D)$" src="form_101.png"/> spanned by the basis functions included in the expansion (10).</li>
+<li>We "test" the solution with functions from <img class="formulaInl" alt="$ \widetilde{H_{0}}(D) $" src="form_102.png"/> rather than with "all" functions <img class="formulaInl" alt="$ \phi^{(test)} \in H_0(D). $" src="form_103.png"/></li>
+</ul>
+<p><img class="formulaInl" alt="$\widetilde{H}(D) \to H(D)$" src="form_104.png"/> as <img class="formulaInl" alt="$M \to \infty$" src="form_105.png"/>, however, so the approximate solution <img class="formulaInl" alt="$\widetilde{u}(x_i)$" src="form_106.png"/> converges to the exact solution <img class="formulaInl" alt="$u(x_i)$" src="form_55.png"/> as we include more and more terms in the expansion. [The precise definition of "convergence" requires the introduction of a norm, which allows us to measure the "difference" between two functions. We refer to the standard literature for a more detailed discussion of this issue.]</p>
+<p>In general, the equations <img class="formulaInl" alt="$r_k(U_1,...,U_M)$" src="form_107.png"/> are nonlinear and must be solved by an iterative method such as Newton's method. Consult your favourite numerical analysis textbook (if you can't think of one, have a look through chapter 9 in Press, W. H.; Flannery, B. P.; Teukolsky, S. A.; and Vetterling, W. T. "Numerical Recipes in C++.
+The Art of Scientific Computing", Cambridge University Press) for a reminder of how (and why) Newton's method works. The following algorithm shows the method applied to our equations:</p>
+<p><a class="anchor" id="Newton"></a> </p><center> <b> Algorithm 1: Newton's method </b> </center><ol type="1">
+<li>Set the iteration counter <img class="formulaInl" alt="$i=0$" src="form_108.png"/> and provide an initial approximation for the unknowns, <img class="formulaInl" alt="$ U^{(0)}_j\ \ (j=1,..,M)$" src="form_109.png"/>.</li>
+<li>Evaluate the residuals <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k^{(i)} = r_k\left( U^{(i)}_1,..., U^{(i)}_M\right) \mbox{\ \ \ for $k=1,...,M$}. \]" src="form_110.png"/>
+</p>
+</li>
+<li>Compute a suitable norm of the residual vector (e.g. the maximum norm). If the norm is less than some pre-assigned tolerance, stop and and accept <img class="formulaInl" alt="$U_j^{(i)} (j=1,...,M) $" src="form_111.png"/> as the solution.</li>
+<li>Compute the Jacobian matrix <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{kj} = \left. \frac{\partial r_k}{\partial U_j} \right|_{\left( U^{(i)}_1,..., U^{(i)}_M\right)} \mbox{\ \ \ for $j,k=1,...,M$}.\]" src="form_112.png"/>
+</p>
+</li>
+<li>Solve the linear system <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{j=1}^{M} J_{kj} \ \delta U_j = - r_k^{(i)} \mbox{\ \ \ \ \ \ where $k=1,...,M$} \]" src="form_113.png"/>
+</p>
+ for <img class="formulaInl" alt="$ \delta U_{j} \ \ ($j=1,...,M$).$" src="form_114.png"/></li>
+<li>Compute an improved approximation via <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ U_j^{(i+1)} = U_j^{(i)} + \delta U_j \mbox{\ \ \ for $j=1,...,M$}. \]" src="form_115.png"/>
+</p>
+ <br  />
+</li>
+<li>Set <img class="formulaInl" alt="$ i=i+1$" src="form_116.png"/> and go to 2.</li>
+</ol>
+<p>For a "good" initial approximation, <img class="formulaInl" alt="$ U^{(0)}_j$" src="form_117.png"/>, Newton's method converges quadratically towards the exact solution. Furthermore, for linear problems, Newton's method provides the exact solution (modulo any roundoff errors that might be introduced during the solution of the linear system) in a single iteration. Newton's method can, therefore, be used as a robust, general-purpose solver, if (!) a good initial guess for the solution can be provided. In practice, this is not a serious restriction, because good initial guesses can often be generated by continuation methods. In <code>oomph-lib</code>, Newton's method is the default nonlinear solver.</p>
+<p>Let us, briefly, examine the cost of the non-trivial steps involved in Newton's method:</p><ul>
+<li>Step 2 requires the evaluation of <img class="formulaInl" alt="$M$" src="form_97.png"/> integrals over the domain to determine the discrete residuals <img class="formulaInl" alt="$ r_k^{(i)} $" src="form_118.png"/> from (9). (We note that, in general, the integrals must be evaluated numerically.)</li>
+<li>Step 3 requires the computation of <img class="formulaInl" alt="$M^2$" src="form_119.png"/> entries in the Jacobian matrix, each an integral of the form <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{kj} = \int_{D} \frac{\partial }{\partial U_j} {\cal R}\left(x_i; \ \sum_{j=1}^{M} U_j \psi_j(x_i)\right) \ \psi_k(x_i) \ \mbox{d}x_1 \mbox{d}x_2 \mbox{\ \ \ for $j,k=1,...,M$.} \]" src="form_120.png"/>
+</p>
+</li>
+<li>Step 4 requires the solution of a <img class="formulaInl" alt="$M \times M$" src="form_121.png"/> linear system.</li>
+</ul>
+<p>In general, steps 3 and 4 will be very costly if <img class="formulaInl" alt="$M$" src="form_97.png"/> is large. However, if the domain has a simple shape and the differential operator has a sufficiently simple structure, it is often possible to choose basis functions with suitable orthogonality properties that render the Jacobian matrix <img class="formulaInl" alt="$J_{kj}$" src="form_122.png"/> sparse. As an example, we consider the application of Galerkin's method in the 1D Poisson problem P1:</p>
+<center> <b> Example: Galerkin method applied to the model problem P1 <br  />
+ </b></center><p> We perform the usual integration by parts to derive the symmetric weak form of the problem: <br  />
+ <br  />
+</p><center> <table class="oomph-table">
+<tr>
+<td class="panel panel-default"><center class="panel-heading"> <b> Problem P1<sub>weak</sub> </b></center> <center class="panel-body"> Find the function <img class="formulaInl" alt="$ u(x) \in H(D) $" src="form_123.png"/> that satisfies the essential boundary conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(0) = g_0 \ \ \ \mbox{and} \ \ \ u(1) = g_1, \]" src="form_124.png"/>
+</p>
+ and for which <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_0^1 \left( \frac{\mbox{d} u(x)}{\mbox{d} x} \ \frac{\mbox{d} \phi^{(test)}(x)}{\mbox{d} x} \ + f(x) \ \phi^{(test)}(x) \right)\ \mbox{d}x = 0 \]" src="form_125.png"/>
+</p>
+ for <em>all</em> test functions <img class="formulaInl" alt="$ \phi^{(test)}(x) \in H_0(D). $" src="form_126.png"/> </center>   </td></tr>
+</table>
+</center><p> <br  />
+<br  />
+Inspection of the weak form shows that the choice <img class="formulaInl" alt="$H(D) = H^1(D) $" src="form_127.png"/> is sufficient to ensure the existence of the integral. Of course, the "higher" Sobolev spaces <img class="formulaInl" alt="$ H^2(D), H^3(D), ... $" src="form_128.png"/> would also ensure the existence of the integral but would impose unnecessary additional restrictions on our functions.</p>
+<p>Next, we need to construct a function <img class="formulaInl" alt="$u_p(x)$" src="form_129.png"/> that satisfies the Dirichlet boundary conditions. In 1D this is trivial, and the simplest option is the function <img class="formulaInl" alt="$ u_p(x)=g_0+ (g_1-g_0) x$" src="form_130.png"/>, which interpolates linearly between the two boundary values. Since <img class="formulaInl" alt="$ \mbox{d}u_p(x)/ \mbox{d} x = g_1-g_0$" src="form_131.png"/>, the discrete residuals are given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k(U_1,U_2,...,U_M) = \int_0^1 \left[ \left( (g_1 - g_0) + \sum_{j=1}^{M} U_j \frac{\mbox{d} \psi_j(x)}{\mbox{d} x} \right) \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} + f(x) \ \psi_k(x) \right] \ \mbox{d}x \mbox{\ \ for $k=1,..,M$}, \ \ \ \ \ \ \ \ (12) \]" src="form_132.png"/>
+</p>
+<p> and the Jacobian matrix has the form </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{kj} = \int_0^1 \frac{\mbox{d} \psi_j(x)}{\mbox{d} x} \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} \ \mbox{d}x \mbox{\ \ for $j,k=1,..,M$}. \ \ \ \ \ \ \ \ (13) \]" src="form_133.png"/>
+</p>
+<p> The (Fourier) basis functions </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_j(x) = \sin\left(\pi j x \right)\]" src="form_134.png"/>
+</p>
+<p> are a suitable basis because</p><ul>
+<li>they satisfy the homogeneous boundary conditions,</li>
+<li>they and their derivatives are square integrable, allowing all integrals to be evaluated, and</li>
+<li>they are a complete basis for <img class="formulaInl" alt="$ H^1_0(D)$" src="form_135.png"/>.</li>
+</ul>
+<p>Furthermore, the orthogonality relation </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_0^1 \cos\left(\pi k x\right) \cos\left(\pi j x\right) dx = 0 \mbox{\ \ \ for \ } j\ne k \]" src="form_136.png"/>
+</p>
+<p> implies that the Jacobian matrix is a diagonal matrix, which is cheap to assemble and invert. Indeed, the assembly of the Jacobian matrix in step 4, and the solution of the linear system in step 5 have an "optimal" computational complexity: their cost increases linearly with the number of unknowns in the problem.</p>
+<p>Unfortunately, the application of the method becomes difficult, if not impossible, in cases where the differential operators have a more complicated structure, and/or the domain has a more complicated shape. The task of finding a complete set of basis functions that vanish on the domain boundary in an arbitrarily-shaped, higher-dimensional domain is nontrivial. Furthermore, for a complicated differential operator, it will be extremely difficult to find a system of basis functions for which the Jacobian matrix has a sparse structure. If the matrix is dense, the assembly and solution of the linear system in steps 4 and 5 of Newton's method can become prohibitively expensive.</p>
+<center> <table class="oomph-table">
+<tr>
+<td class="panel panel-default"><center class="panel-heading"> <b> An aside: Integration by parts revisited </b></center><div class="panel-body"></div><div class="panel-body">Let us briefly return to the two versions of the weak form and examine the equations that we would have obtained had we applied Galerkin's method to the original form of the weak equations, <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_0^1 \left( \frac{\mbox{d}^2 u(x)}{\mbox{d}x^2} \ - f(x) \right) \phi^{(test)}(x) \ \mbox{d}x = 0. \]" src="form_137.png"/>
+</p>
+ The discrete residuals are then given by <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k = \int_0^1 \left( \sum_{j=1}^{M} U_{j} \frac{\mbox{d}^2 \psi_j(x)}{\mbox{d} x^2} - f(x) \right) \psi_k(x) \ \mbox{d}x = 0, \mbox{\ \ \ \ \ \ for $k=1,...,M.$\ \ \ \ \ \ } (14) \]" src="form_138.png"/>
+</p>
+ and the Jacobian matrix has the form <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{kj} = \int_0^1\frac{\mbox{d}^2 \psi_j(x)}{\mbox{d} x^2} \ \psi_k(x)\ \mbox{d}x. \ \ \ \ \ \ \ (15) \]" src="form_139.png"/>
+</p>
+<ul>
+<li>The restrictions that must be imposed on the basis functions, <img class="formulaInl" alt="$ \psi_j(x) $" src="form_140.png"/>, if (14) is to "make sense" are much more awkward than for the symmetric form for the problem; the product of their zeroth and second derivatives must be integrable over the domain.</li>
+<li>The Jacobian matrix (13) that arises from the symmetric form of the weak problem is symmetric for <em>any</em> choice of basis functions whereas the Jacobian matrix (15) that arises from the original form is symmetric only for certain types of basis functions. This is not only advantageous for the solution of the linear system (only a fraction of the entries in the matrix need to be computed, and (more efficient) linear solvers that exploit the symmetry of the matrix can be used), but also properly reflects the symmetry in the (self-adjoint!) ODE.</li>
+</ul>
+</div>   </td></tr>
+</table>
+</center><hr  />
+ <hr  />
+<h1><a class="anchor" id="fe"></a>
+The Finite Element Method</h1>
+<p>Galerkin's method is an efficient method for finding the approximate solution to a given problem if (and only if) we can:</p><ol type="1">
+<li>Construct a function <img class="formulaInl" alt="$ u_p(x_i) \in H(D)$" src="form_141.png"/> that satisfies the essential boundary conditions.</li>
+<li>Specify a set of basis functions that<ol type="a">
+<li>spans the function space <img class="formulaInl" alt="$ H_0(D)$" src="form_88.png"/>,</li>
+<li>vanishes on the domain boundary, and</li>
+<li>leads to a sparse Jacobian matrix.</li>
+</ol>
+</li>
+</ol>
+<p><br  />
+ We shall now develop the finite element method: an implementation of Galerkin's method that automatically satisfies all the above requirements.</p>
+<hr  />
+<h2><a class="anchor" id="fe_basis_fct"></a>
+Finite Element shape functions</h2>
+<p>The key feature of the finite element method is that the basis functions have finite support, being zero over most of the domain, and have the same functional form. We illustrate the idea and its implementation for the 1D Poisson problem P1 in its symmetric (integrated-by-parts) form:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k = \int_0^1 \left\{ \left( \frac{\mbox{d} u_p(x)}{\mbox{d} x} +\sum_{j=1}^{M} U_{j} \frac{\mbox{d} \psi_j(x)}{\mbox{d} x} \right) \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} + f(x) \ \psi_k(x) \right\} \mbox{d}x =0, \mbox{\ \ \ \ \ \ for $k=1,...,M.$}\ \ \ \ \ \ \ (16) \]" src="form_142.png"/>
+</p>
+<p> The integral (16) exists for all basis functions <img class="formulaInl" alt="$ \psi_j(x)$" src="form_143.png"/> whose first derivatives are square integrable; a class of functions that includes piecewise linear functions. <br  />
+</p>
+<p>We shall now construct a particular set of piecewise linear basis functions &mdash; the (global) linear finite-element shape functions, often known as "hat functions". For this purpose, we introduce <img class="formulaInl" alt="$N$" src="form_144.png"/> equally-spaced "nodes" into the domain <img class="formulaInl" alt="$ x \in [0,1]$" src="form_145.png"/>; node <img class="formulaInl" alt="$j$" src="form_146.png"/> is located at <img class="formulaInl" alt="$X_j = (j-1) h $" src="form_147.png"/>, where <img class="formulaInl" alt="$h=1/(N-1)$" src="form_148.png"/> is the distance between the nodes. The (global) linear finite-element shape functions are defined by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_j(x) = \left\{ \begin{array}{ll} 0 &amp; \mbox{\ \ \ for $x &lt; X_{j-1}$} \\ \frac{x-X_{j-1}}{X_j-X_{j-1}} &amp; \mbox{\ \ \ for $ X_{j-1} &lt;x &lt; X_j$} \\ \frac{X_{j+1}-x}{X_{j+1}-X_j} &amp; \mbox{\ \ \ for $ X_{j} &lt;x &lt; X_{j+1}$} \\ 0 &amp; \mbox{\ \ \ for $x &gt; X_{j+1}$} \\ \end{array} \right. \ \ \ \ \ \ \ \ (17) \]" src="form_149.png"/>
+</p>
+<p> and are illustrated below:</p>
+<div class="image">
+<img src="1Dmesh_with_linear_shape_fcts.gif" alt=""/>
+<div class="caption">
+The (global) linear finite-element shape functions in 1D. </div></div>
+<p>  The finite-element shape functions have finite support; in particular, the function <img class="formulaInl" alt="$ \psi_j(x) $" src="form_140.png"/> is nonzero only in the vicinity of node j and varies linearly between one (at node j) and zero (at nodes <img class="formulaInl" alt="$ j-1 $" src="form_150.png"/> and <img class="formulaInl" alt="$ j+1 $" src="form_151.png"/>). Furthermore, the shape functions satisfy the "interpolation condition" </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_j(X_i) = \delta_{ij} = \left\{\begin{array}{c} 1, \mbox{ if } i=j,\\ 0, \mbox{ if } i\neq j, \end{array}\right. \]" src="form_152.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \delta_{ij}$" src="form_153.png"/> is the Kronecker delta. <br  />
+ The coefficients <img class="formulaInl" alt="$V_j$" src="form_154.png"/> in an expansion of the form </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tilde{v}(x) = \sum_{j=1}^{N} V_j \ \psi_j(x)\]" src="form_155.png"/>
+</p>
+<p> have a straightforward interpretation: <img class="formulaInl" alt="$V_j$" src="form_154.png"/> is the value of the function <img class="formulaInl" alt="$ v(x) $" src="form_156.png"/> at node <img class="formulaInl" alt="$ j $" src="form_157.png"/>. The global shape functions vary linearly between the nodes, and so <img class="formulaInl" alt="$ \tilde{v}(x) $" src="form_158.png"/> provides piecewise linear interpolation between the &lsquo;nodal values&rsquo; <img class="formulaInl" alt="$V_j$" src="form_154.png"/>.</p>
+<div class="image">
+<img src="fe_is_interpolant.gif" alt=""/>
+<div class="caption">
+The superposition of the (global) linear finite-element shape functions provides a piecewise linear interpolation between the `nodal values'. </div></div>
+ <p>Why are these shape functions useful in the Galerkin method? Consider the requirements listed at the beginning of this section:</p><ol type="1">
+<li>It is easy to construct a function <img class="formulaInl" alt="$ u_p(x) $" src="form_159.png"/> that satisfies the essential boundary conditions by choosing <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_p(x) = g_0 \psi_1(x) + g_1 \psi_N(x), \]" src="form_160.png"/>
+</p>
+ where <img class="formulaInl" alt="$ \psi_1(x) $" src="form_161.png"/> and <img class="formulaInl" alt="$ \psi_N(x) $" src="form_162.png"/> are the global finite-element shape functions associated with the two boundary nodes, <img class="formulaInl" alt="$1$" src="form_163.png"/> and <img class="formulaInl" alt="$N$" src="form_144.png"/>.</li>
+<li>Regarding the requirements on the basis functions:<ol type="a">
+<li>The global finite-element shape functions <img class="formulaInl" alt="$ \psi_j(x) $" src="form_140.png"/> and their first derivatives are square integrable. Hence, the finite-dimensional function space <img class="formulaInl" alt="$ H^1_{0,FEM}(D) $" src="form_164.png"/> spanned by the basis functions <img class="formulaInl" alt="$ \psi_j(x) \ \ (j=2,...,N-1)$" src="form_165.png"/>, associated with the internal nodes, is a subset of <img class="formulaInl" alt="$ H^1_0,$" src="form_166.png"/> as required. Furthermore, it is easy to show that <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left| v(x) - \sum_{j=2}^{N-1} v(X_j) \psi_j(x) \right| \to 0 \mbox{\ \ \ as $N\to\infty$ and $h=\frac{1}{N-1} \to 0,$ \ \ \ \ \ \ \ (18) } \]" src="form_167.png"/>
+</p>
+ for any <img class="formulaInl" alt="$ v(x) \in H^1_0(D) $" src="form_168.png"/>. In other words, <img class="formulaInl" alt="$ H^1_{0,FEM}(D) $" src="form_164.png"/> approaches <img class="formulaInl" alt="$ H^1_0(D) $" src="form_169.png"/> as <img class="formulaInl" alt="$ N \to \infty. $" src="form_170.png"/></li>
+<li>The global finite-element shape functions <img class="formulaInl" alt="$ \psi_2(x), \psi_3(x),...,\psi_{N-1}(x) $" src="form_171.png"/> vanish on the domain boundary.</li>
+<li>The Jacobian matrix is sparse because its entries <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{kj} = \frac{\partial r_k}{\partial U_j} = \int_0^1 \frac{\mbox{d} \psi_j(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} \, \mbox{d}x \]" src="form_172.png"/>
+</p>
+ are nonzero when the basis functions <img class="formulaInl" alt="$ \psi_j(x) $" src="form_140.png"/> and <img class="formulaInl" alt="$ \psi_k(x) $" src="form_173.png"/> are both non-zero. For these shape functions, <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{kj} \ne 0 \mbox{\ \ \ \ when \ \ $k=j-1,\ j, \ j+1,$} \]" src="form_174.png"/>
+</p>
+ indicating that the Jacobian matrix is tri-diagonal.</li>
+</ol>
+</li>
+</ol>
+<p>We can now formulate the finite-element-based solution of problem P1 in the following algorithm: </p><center> <b> Algorithm 2: Finite Element solution of problem P1 by Newton's method</b> </center><ul>
+<li>Choose the number of nodal points, <img class="formulaInl" alt="$ N $" src="form_175.png"/>, and distribute them evenly through the domain so that <img class="formulaInl" alt="$ X_j=(j-1)h$" src="form_176.png"/>, where <img class="formulaInl" alt="$h=1/(N-1)$" src="form_148.png"/>. This defines the global shape functions <img class="formulaInl" alt="$ \psi_j(x)$" src="form_143.png"/>.</li>
+<li>Set <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_p(x) = g_0 \psi_1(x) + g_1 \psi_N(x) \]" src="form_177.png"/>
+</p>
+ and <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_h(x) = \sum_{j=2}^{N-1} U_{j}\ \psi_j(x). \]" src="form_178.png"/>
+</p>
+</li>
+<li>Provide an initial guess for the unknowns <img class="formulaInl" alt="$ U_2,U_3,...,U_{N-1}$" src="form_179.png"/>. Since P1 is a linear problem, the quality of the initial guess is irrelevant and we can simply set <img class="formulaInl" alt="$ U_i^{(0)}=0 \mbox{\ \ \ for $i=2,...,N-1$}. $" src="form_180.png"/></li>
+<li>Determine the residuals <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k^{(0)} = \int_0^1 \left\{ \left( g_0 \frac{\mbox{d} \psi_1(x)}{\mbox{d} x} + \ g_1 \frac{\mbox{d} \psi_N(x)}{\mbox{d} x} + \ \sum_{j=2}^{N-1} U_{j}^{(0)}\frac{\mbox{d} \psi_j(x)}{\mbox{d} x} \right) \frac{\mbox{d} \psi_k(x)}{\mbox{d} x}\ + f(x) \ \psi_k(x) \right\} \mbox{d}x \mbox{\ \ \ \ \ \ for $k=2,...,N-1,$} \]" src="form_181.png"/>
+</p>
+ and the entries in the Jacobian matrix <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{kj} = \frac{\partial r_k}{\partial U_j} = \int_0^1 \frac{\mbox{d} \psi_j(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} \ dx \mbox{\ \ \ for $j,k=2,...,N-1.$} \]" src="form_182.png"/>
+</p>
+</li>
+<li>Solve the linear system <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{j=2}^{N-1} J_{kj} \ \delta U_j = - r_k^{(0)} \mbox{\ \ \ for $k=2,...,N-1.$} \]" src="form_183.png"/>
+</p>
+ for <img class="formulaInl" alt="$ \delta U_k \ (k=2,...,N-1) $" src="form_184.png"/> .</li>
+<li>Correct the initial guess via <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ U_j = U_j^{(0)} + \ \delta U_j \mbox{\ \ \ for $j=2,...,N-1.$} \]" src="form_185.png"/>
+</p>
+ P1 is a linear problem, so <img class="formulaInl" alt="$ U_j \ (j=2,...,N-1) $" src="form_186.png"/> is the exact solution. For nonlinear problems, we would have to continue the <a class="el" href="index.html#Newton">Newton</a> iteration until the residuals <img class="formulaInl" alt="$ r_k(U_2,...,U_{N-1}) \ (k=2,...,N-1) $" src="form_187.png"/> were sufficiently small.</li>
+<li>The finite-element solution is <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u^{(FE)}(x) = g_0 \psi_1(x)+ g_1 \psi_N(x) + \sum_{j=2}^{N-1} U_j \psi_j(x) \ \ \ \ \ (19) \]" src="form_188.png"/>
+</p>
+ <br  />
+</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="non_uniform"></a>
+Improving the quality of the solution: non-uniformly spaced nodes and higher-order shape functions</h2>
+<p>Algorithm 2 presents the simplest possible implementation of the finite element method for problem P1. We now discuss two straightforward extensions that can significantly improve the quality of the approximate solution.</p>
+<p>The finite-element approximation in the previous section is piecewise linear between the nodal values. The accuracy to which the exact solution can be represented by a piecewise linear interpolant is limited by the number of nodal points, which is the essence of the convergence statement (18). The number of nodes required to resolve the solution to a given accuracy depends on the nature of the solution &mdash; more nodes are needed to interpolate rapidly varying functions.</p>
+<p>If the solution is rapidly varying in a small portion of the domain it would be wasteful to use the same (fine) nodal spacing throughout the domain. A non-uniform spacing, see below, </p><div class="image">
+<img src="fe_adaptive_interpolant.gif" alt=""/>
+<div class="caption">
+Adaptive 1D finite element mesh: Non-uniform spacing of nodes to achieve a high resolution only where it is required. </div></div>
+<p>  improves the accuracy of the solution without greatly increasing the total number of unknowns. Non-uniform spacing of the nodes is easy to implement and does not require any significant changes in Algorithm 2 &ndash; we simply choose appropriate values for the nodal positions <img class="formulaInl" alt="$ X_j $" src="form_189.png"/>; an approach known as "h-refinement" because it alters the distance, <img class="formulaInl" alt="$ h $" src="form_190.png"/>, between nodes.</p>
+<center> <table class="oomph-table">
+<tr>
+<td class="panel panel-default"><center class="panel-heading"> <b> An aside: adaptive mesh refinement </b></center> <div class="panel-body"> A non-uniform distribution of nodes requires a priori knowledge of the regions in which we expect the solution to undergo rapid variations. The alternative is to use adaptive mesh refinement: start with a relatively coarse, uniform mesh and compute the solution. If the solution on the coarse mesh displays rapid variations in certain parts of the domain (and is therefore likely to be poorly resolved), refine the mesh in these regions and re-compute. Such adaptive mesh refinement procedures can be automated and are implemented in <code>oomph-lib</code> for a large number of problems; see the section <a class="el" href="index.html#example_P2">A 2D example</a> for an example. </div>   </td></tr>
+</table>
+</center><p>The quality of the interpolation can also be improved by using higher-order interpolation, but maintaining</p><ul>
+<li>the compact support for the global shape functions, so that <img class="formulaInl" alt="$ \psi_j(x) $" src="form_140.png"/> is nonzero only in the vicinity of node <img class="formulaInl" alt="$ j $" src="form_157.png"/>, and</li>
+<li>the interpolation condition <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_j(X_i) = \delta_{ij} \]" src="form_191.png"/>
+</p>
+ so that the shape function <img class="formulaInl" alt="$ \psi_j $" src="form_192.png"/> is equal to one at node <img class="formulaInl" alt="$ j $" src="form_157.png"/> and zero at all others.</li>
+</ul>
+<p>For instance, we can use the (global) quadratic finite-element shape functions shown below: </p><div class="image">
+<img src="1Dmesh_with_quadratic_shape_fcts.gif" alt=""/>
+<div class="caption">
+(Global) quadratic finite-element basis functions in 1D. </div></div>
+<p>  Note that we could also use shape functions with identical functional forms; instead, we have chosen two different forms for the shape functions so that the smooth sections of the different shape functions overlap within the elements. This is not necessary but facilitates the representation of the global shape functions in terms of their local counterparts within elements, see section <a class="el" href="index.html#local_coords">Local coordinates</a>.</p>
+<p>The implementation of higher-order interpolation does not require any significant changes in Algorithm 2. We merely specify the functional form of the (global) quadratic finite-element shape functions sketched above. This approach is known as "p-refinement", because it increases order of the <b>p</b>olynomials that are used to represent the solution.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="implementation"></a>
+An element-by-element implementation for 1D problems</h1>
+<p>From a mathematical point of view, the development of the finite element method for the 1D model problem P1 is now complete, but Algorithm 2 has a number of features that would make it awkward to implement in an actual computer program. Furthermore, having been derived directly from Galerkin's method, the algorithm is based on globally-defined shape functions and does not exploit the potential subdivision of the domain into "elements". We shall now derive a mathematically equivalent scheme that can be implemented more easily.</p>
+<h2><a class="anchor" id="book_keeping"></a>
+Improved book-keeping: distinguishing between equations and nodes.</h2>
+<p>Since only a subset of the global finite-element shape functions act as basis functions for the (homogeneous) functions <img class="formulaInl" alt="$ \phi^{(test)}(x)$" src="form_193.png"/> and <img class="formulaInl" alt="$ u_h(x)$" src="form_194.png"/>, algorithm 2 resulted in a slightly awkward numbering scheme for the equations and the unknown (nodal) values. The equation numbers range from 2 to <img class="formulaInl" alt="$N-1$" src="form_195.png"/>, rather than from 1 to <img class="formulaInl" alt="$N-2$" src="form_196.png"/> because we identified the unknowns by the node numbers. Although this is perfectly transparent in our simple 1D example, the book-keeping quickly becomes rather involved in more complicated problems. We therefore treat node and equation numbers separately. [<b>Note:</b> We shall use the terms "equation number" and "number of the unknown" interchangeably; this is possible because we must always have the same number of equations and unknowns.] We can (re-)write the finite-element solution (19) in more compact form as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u^{(FE)}(x) =\sum_{j=1}^{N} U_j \ \psi_j(x). \]" src="form_197.png"/>
+</p>
+<p> where the summation now includes <em>all</em> nodes in the finite element mesh. To make this representation consistent with the boundary conditions, the nodal values, <img class="formulaInl" alt="$U_j$" src="form_198.png"/>, of nodes on the boundary are set to the prescribed boundary values </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ U_j = g(X_j) \mbox{\ \ \ if $X_j\in \partial D$}.\]" src="form_199.png"/>
+</p>
+<p> In the 1D problem P1, <img class="formulaInl" alt="$U_1=g_0$" src="form_200.png"/> and <img class="formulaInl" alt="$U_N=g_1$" src="form_201.png"/>.</p>
+<p>Furthermore, we associate each unknown nodal value, <img class="formulaInl" alt="$ U_j $" src="form_83.png"/>, with a distinct equation number, <img class="formulaInl" alt="${\cal E}(j)$" src="form_202.png"/>, in the range from 1 to <img class="formulaInl" alt="$N-2$" src="form_196.png"/>. In the above example, the equation numbering scheme is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{ \begin{tabular}{l c c c c c c} \hline \\ \mbox{Node number $j$} &amp; 1 &amp; 2 &amp; 3 &amp; ... &amp; $N-1$ &amp; $N$ \\ \hline \\ \mbox{Equation number ${\cal E}(j)$} &amp; n/a &amp; 1 &amp; 2 &amp; ... &amp; $N-2$ &amp; n/a \\ \hline \\ \end{tabular} } \]" src="form_203.png"/>
+</p>
+<p> where n/a indicates a node whose value is prescribed by the boundary conditions. To facilitate the implementation in a computer program, we indicate the fact that a nodal value is determined by boundary conditions (i.e. that it is "pinned"), by setting the equation number to a negative value (-1, say), so that the equation numbering scheme becomes </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{ \begin{tabular}{l c c c c c c} \hline \\ \mbox{Node number $j$} &amp; 1 &amp; 2 &amp; 3 &amp; ... &amp; $N-1$ &amp; $N$ \\ \hline \\ \mbox{Equation number ${\cal E}(j)$} &amp; -1 &amp; 1 &amp; 2 &amp; ... &amp; $N-2$ &amp; -1\\ \hline \\ \end{tabular} } \]" src="form_204.png"/>
+</p>
+<p> We now re-formulate algorithm 2 as follows (the revised parts of the algorithm are enclosed in boxes):</p>
+<center> <b> Algorithm 3: Finite Element solution of problem P1 </b> </center><p> <br  />
+ <b> Phase 1: Setup</b></p><ul>
+<li>Discretise the domain with <img class="formulaInl" alt="$ N $" src="form_175.png"/> nodes which are located at <img class="formulaInl" alt="$ X_j, \ j=1,...,N$" src="form_205.png"/>, and choose the order of the global shape functions <img class="formulaInl" alt="$ \psi_j(x).$" src="form_206.png"/> <table border="0">
+<tr>
+<td bgcolor="cornsilk"></td></tr>
+</table>
+</li>
+<li>Initialise the total number of unknowns, <img class="formulaInl" alt="$M=0.$" src="form_207.png"/></li>
+<li>Loop over all nodes <img class="formulaInl" alt="$ j=1,...,N $" src="form_208.png"/>:<ul>
+<li>If node j lies on the boundary:<ul>
+<li>Assign its value according to the (known) boundary condition <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ U_j = g(X_j) \]" src="form_209.png"/>
+</p>
+</li>
+<li>Assign a negative equation number to reflect its "pinned" status: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal E}(j) = -1 \]" src="form_210.png"/>
+</p>
+</li>
+</ul>
+</li>
+<li>Else:<ul>
+<li>Increment the number of the unknowns <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ M=M+1 \]" src="form_211.png"/>
+</p>
+</li>
+<li>Assign the equation number <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal E}(j) = M \]" src="form_212.png"/>
+</p>
+</li>
+<li>Provide an initial guess for the unknown nodal value, e.g. <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ U_j=0. \]" src="form_213.png"/>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Now that <img class="formulaInl" alt="$ \psi_j(x) $" src="form_140.png"/> and <img class="formulaInl" alt="$ U_j $" src="form_83.png"/> have been defined and initialised, we can determine the current FE approximations for <img class="formulaInl" alt="$ u(x)$" src="form_214.png"/> and <img class="formulaInl" alt="$ \mbox{d} u(x)/\mbox{d} x$" src="form_215.png"/> from <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u^{(FE)}(x) = \sum_{k=1}^{N} U_k \psi_k(x) \mbox{\ \ \ \ and \ \ \ \ } \frac{\mbox{d} u^{(FE)}(x)}{\mbox{d} x} = \sum_{k=1}^{N} U_k \frac{\mbox{d} \psi_k(x)}{\mbox{d} x}. \]" src="form_216.png"/>
+</p>
+</li>
+</ul>
+<p><b> Phase 2: Solution </b> <br  />
+</p><table border="0">
+<tr>
+<td bgcolor="cornsilk"><ul>
+<li>Loop over all nodes <img class="formulaInl" alt="$ k=1,...,N$" src="form_217.png"/>:<ul>
+<li>Determine the equation number: <img class="formulaInl" alt="$ {\cal E}(k) $" src="form_218.png"/></li>
+<li>If <img class="formulaInl" alt="$ {\cal E}(k) \ne -1 $" src="form_219.png"/>: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{{\cal E}(k)} = \int_0^1 \frac{\mbox{d} u^{(FE)}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} \ dx + \int_0^1 f(x) \ \psi_k(x) \ dx. \]" src="form_220.png"/>
+</p>
+<ul>
+<li>Loop over all nodes <img class="formulaInl" alt="$ j=1,...,N$" src="form_221.png"/>:</li>
+<li>Determine the equation number: <img class="formulaInl" alt="$ {\cal E}(j) $" src="form_222.png"/></li>
+<li>If <img class="formulaInl" alt="$ {\cal E}(j) \ne -1 $" src="form_223.png"/>: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{{\cal E}(k){\cal E}(j)} = \frac{\partial r_{{\cal E}(k)}}{\partial U_j} = \int_0^1 \frac{\mbox{d} \psi_j(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} \ dx \]" src="form_224.png"/>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+<ul>
+<li>Solve the <img class="formulaInl" alt="$ M \times M$" src="form_225.png"/> linear system <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{j=1}^{M} J_{kj} \ y_j = - r_k \mbox{\ \ \ for $k=1,...,M.$} \]" src="form_226.png"/>
+</p>
+ for <img class="formulaInl" alt="$ y_k \ (k=1,...,M)$" src="form_227.png"/>.</li>
+</ul>
+<table border="0">
+<tr>
+<td bgcolor="cornsilk"><ul>
+<li>Loop over all nodes <img class="formulaInl" alt="$ j=1,...,N$" src="form_221.png"/>:<ul>
+<li>Determine the equation number: <img class="formulaInl" alt="$ {\cal E}(j) $" src="form_222.png"/></li>
+<li>If <img class="formulaInl" alt="$ {\cal E}(j) \ne -1 $" src="form_223.png"/>:</li>
+<li>Correct the initial guess via <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ U_{{\cal E}(j)} = U_{{\cal E}(j)} + y_{{\cal E}(j)} \]" src="form_228.png"/>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<br  />
+   </td></tr>
+</table>
+<ul>
+<li>P1 is a linear problem, so <img class="formulaInl" alt="$ U_j \ (j=1,...,N) $" src="form_229.png"/> is the exact solution. For nonlinear problems, we would have to continue the <a class="el" href="index.html#Newton">Newton</a> iteration until the residuals <img class="formulaInl" alt="$r_k \ (k=1,...,M) $" src="form_230.png"/> were sufficiently small.</li>
+</ul>
+<p><b> Phase 3: Postprocessing (document the solution)</b></p><ul>
+<li>The finite-element solution is given by <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u^{(FE)}(x) = \sum_{j=1}^{N} U_j \psi_j(x). \]" src="form_231.png"/>
+</p>
+ <br  />
+</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="element_by_element"></a>
+Element-by-element assembly</h2>
+<p>In its current form, our algorithm assembles the equations and the Jacobian matrix equation-by-equation and does not exploit the finite support of the global shape functions, which permits decomposition of the domain into elements. Each element consists of a given number of nodes that depends upon the order of local approximation within the element. In the case of linear interpolation each element consists of two nodes, as seen below: </p><div class="image">
+<img src="1Dmesh.gif" alt=""/>
+<div class="caption">
+A 1D finite element mesh. </div></div>
+ <p>In the following three sections we shall develop an alternative, element-based assembly procedure, which involves the introduction of</p><ul>
+<li>local and global node numbers,</li>
+<li>local and global equation numbers,</li>
+<li>local coordinates.</li>
+</ul>
+<h3><a class="anchor" id="local_global_nodes"></a>
+Local and global node numbers</h3>
+<p>Consider the discretisation of the 1D problem P1 with <img class="formulaInl" alt="$N_E$" src="form_232.png"/> two-node (linear) finite elements. The residual associated with node k is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{{\cal E}(k)} = \int_0^1 \left( \frac{\mbox{d} u^{(FE)}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} + f(x) \ \psi_k(x) \right) dx. \ \ \ \ \ \ \ \ (20) \]" src="form_233.png"/>
+</p>
+<p> The global finite-element shape functions have finite support, so the integrand is non-zero only in the two elements <img class="formulaInl" alt="$k-1$" src="form_234.png"/> and <img class="formulaInl" alt="$k$" src="form_235.png"/>, adjacent to node <img class="formulaInl" alt="$k$" src="form_235.png"/>. This allows us to write </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{{\cal E}(k)} = \int_{\mbox{Element }k-1} \left( \frac{\mbox{d} u^{(FE)}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} \ dx + f(x) \ \psi_k(x) \right) dx + \int_{\mbox{Element }k} \left( \frac{\mbox{d} u^{(FE)}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} \ dx + f(x) \ \psi_k(x) \right) dx. \ \ \ \ \ \ \ (21) \]" src="form_236.png"/>
+</p>
+<p> Typically (e.g. in the Newton method) we require <em>all</em> the residuals <img class="formulaInl" alt="$ r_k \ (k=1,...,M) $" src="form_237.png"/> &mdash; the entire residual vector. We could compute the entries in this vector by using the above equation to calculate each residual <img class="formulaInl" alt="$ r_{{\cal E}(k)}$" src="form_238.png"/> individually for all (unpinned) nodes <img class="formulaInl" alt="$k$" src="form_235.png"/>. In the process, we would visit each element twice: once for each of the two residuals that are associated with its nodes. We can, instead, re-arrange this procedure to consist of a single loop over the elements, in which the appropriate contribution is added to the global residuals associated with each element's nodes. In order to achieve this, we must introduce the concept of local and global node numbers, illustrated in this sketch: </p><div class="image">
+<img src="1Dmesh_local_and_global_node_numbers.gif" alt=""/>
+<div class="caption">
+Local and global node numbers in a 1D mesh. </div></div>
+<p>  We label the nodes in each element <img class="formulaInl" alt="$ e $" src="form_239.png"/> with local node numbers so that for two-node elements, the left (right) node has the local node number 1 (2). The relation between local and global node numbers can be represented in a simple lookup scheme </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ j_{global} = {\cal J}(j_{local},e), \]" src="form_240.png"/>
+</p>
+<p> which determines the global node number <img class="formulaInl" alt="$ j_{global}$" src="form_241.png"/> of local node <img class="formulaInl" alt="$ j_{local}$" src="form_242.png"/> in element <img class="formulaInl" alt="$ e $" src="form_239.png"/>. The lookup scheme establishes how the nodes are connected by elements and is one of the main steps in the "mesh generation" process. For the 1D example above, the lookup scheme is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{ \begin{tabular}{l l l l l l l l} \hline \\ \mbox{Element $e$} &amp; 1 &amp; &amp; 2 &amp; &amp; ... &amp; $N_E$ &amp; \\ \hline \\ \mbox{Local node number $j$} &amp; 1 &amp; 2 &amp; 1 &amp; 2 &amp; ... &amp; 1 &amp; 2 \\ \hline \\ \mbox{Global node number ${\cal J}(j,e)$} &amp; 1 &amp; 2 &amp; 2 &amp; 3 &amp;...&amp; $N-1$ &amp; $N$ \\ \hline \\ \end{tabular} } \]" src="form_243.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$N=N_E+1$" src="form_244.png"/>.</p>
+<p>If we discretise the domain with three-node (quadratic) elements, as in this sketch, </p><div class="image">
+<img src="1Dmesh_quadr_elements_local_and_global_eqn_numbers.gif" alt=""/>
+<div class="caption">
+Local and global node numbers in a 1D mesh with three-node elements. </div></div>
+<p>  the lookup scheme becomes </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{ \begin{tabular}{l l l l l l l l l l l} \hline \\ \mbox{Element $e$} &amp; 1 &amp; &amp; &amp; 2 &amp; &amp; &amp; ... &amp; $N_E$ &amp; &amp; \\ \hline \\ \mbox{Local node number $j$} &amp; 1 &amp; 2 &amp; 3 &amp; 1 &amp; 2 &amp; 3 &amp; ... &amp; 1 &amp; 2 &amp;3\\ \hline \\ \mbox{Global node number ${\cal J}(j,e)$} &amp; 1 &amp; 2 &amp; 3 &amp; 3 &amp; 4 &amp; 5 &amp; ...&amp; N-2 &amp; N-1 &amp;N\\ \hline \\ \end{tabular} } \]" src="form_245.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$N=2 N_E+1$" src="form_246.png"/>. Provided such a lookup scheme has been constructed, the global residual vector and the global Jacobian matrix for <img class="formulaInl" alt="$n$" src="form_247.png"/>-node elements can be assembled with the following algorithm</p>
+<center> <b> Algorithm 4: Assembling the residual vector and the Jacobian matrix using local and global node numbers </b> </center><ul>
+<li>Initialise the residual vector, <img class="formulaInl" alt="$ r_k=0 $" src="form_248.png"/> for <img class="formulaInl" alt="$k=1,...,M $" src="form_249.png"/> and the Jacobian matrix <img class="formulaInl" alt="$ J_{kj}=0 $" src="form_250.png"/> for <img class="formulaInl" alt="$j,k=1,...,M. $" src="form_251.png"/></li>
+<li>Loop over the elements <img class="formulaInl" alt="$e = 1,...,N_E $" src="form_252.png"/><ul>
+<li>Loop over the local nodes <img class="formulaInl" alt="$ k_{local}=1,...,n $" src="form_253.png"/><ul>
+<li>Determine the global node number <img class="formulaInl" alt="$ k_{global}={\cal J}(k_{local},e) $" src="form_254.png"/>.</li>
+<li>Determine the global equation number <img class="formulaInl" alt="${\cal E}(k_{global})$" src="form_255.png"/>.<ul>
+<li>If <img class="formulaInl" alt="${\cal E}(k_{global})\ne -1$" src="form_256.png"/> <br  />
+<br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Add the element's contribution to the residual <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{{\cal E}(k_{global})} = r_{{\cal E}(k_{global})} + \int_{e} \left( \frac{\mbox{d} u^{(FE)}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} + f(x) \ \psi_{k_{global}}(x) \right) dx \]" src="form_258.png"/>
+</p>
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Loop over the local nodes <img class="formulaInl" alt="$ j_{local}=1,...,n $" src="form_259.png"/> <br  />
+<br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the global node number <img class="formulaInl" alt="$ j_{global}={\cal J}(j_{local},e) $" src="form_260.png"/> <br  />
+<br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the global equation number <img class="formulaInl" alt="${\cal E}(j_{global})$" src="form_261.png"/> <br  />
+<br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> If <img class="formulaInl" alt="${\cal E}(j_{global})\ne -1$" src="form_262.png"/>: Add the element's contribution to the Jacobian matrix <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{{\cal E}(k_{global}) {\cal E}(j_{global})} = J_{{\cal E}(k_{global}) {\cal E}(j_{global})} + \int_{e} \left( \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \right) dx \]" src="form_263.png"/>
+</p>
+ <br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr  />
+<h3><a class="anchor" id="local_eqn_numbers"></a>
+Local and global equation numbers</h3>
+<p>Each element makes a contribution to only a small number of entries in the global residual vector and the Jacobian matrix; namely, those entries associated with the unknowns stored at the nodes in the element. In general, each element is associated with <img class="formulaInl" alt="$ {\cal N}_{dof}(e)$" src="form_264.png"/> unknowns, say. Element <img class="formulaInl" alt="$e$" src="form_265.png"/> contributes to <img class="formulaInl" alt="$ {\cal N}_{dof}(e)$" src="form_264.png"/> entries in the <em>global</em> residual vector and <img class="formulaInl" alt="$ {\cal N}^2_{dof}(e)$" src="form_266.png"/> entries in the <em>global</em> Jacobian matrix. In fact, the finite support of the shape functions leads to sparse <em>global</em> Jacobian matrices and it would be extremely wasteful to allocate storage for all its entries, and use Algorithm 4 to calculate those that are non-zero. Instead, we combine each element's contributions into <br  />
+ an <img class="formulaInl" alt="$ {\cal N}_{dof}(e) \times {\cal N}_{dof}(e) $" src="form_267.png"/> "element Jacobian matrix" <img class="formulaInl" alt="$ J_{ij}^{(e)}, \ i,j=1,...,{\cal N}_{dof}(e) $" src="form_268.png"/> and "element residual vector" <img class="formulaInl" alt="$ r_{i}^{(e)}, \ i=1,..., {\cal N}_{dof}(e) $" src="form_269.png"/>. These (dense) matrices and vectors are then assembled into the global matrix and residuals vector.</p>
+<p>The entries in the element's Jacobian matrix and its residual vector are labelled by the "local equation numbers", which range from 1 to <img class="formulaInl" alt="$ {\cal N}_{dof}(e)$" src="form_264.png"/> and are illustrated in this sketch: </p><div class="image">
+<img src="1Dmesh_local_and_global_node_and_equation_numbers.gif" alt=""/>
+<div class="caption">
+Local and global node and equation numbers. </div></div>
+ <p>In order to add the elemental contributions to the correct <em>global</em> entries in the residual vector and Jacobian matrix, it is necessary to translate between the local and global equation numbers; and we introduce another lookup scheme <img class="formulaInl" alt="$ \widehat{\cal E}(i_{local},e)$" src="form_270.png"/> that stores the global equation number corresponding to local equation <img class="formulaInl" alt="$i_{local}$" src="form_271.png"/> in element <img class="formulaInl" alt="$e$" src="form_265.png"/>. The lookup scheme can be generated by the following algorithm</p>
+<center> <b> Algorithm 5: Establishing the relation between local and global equation numbers </b> </center><ul>
+<li>Construct the global equation numbering scheme, using the algorithm detailed in Phase 1 of Algorithm 3.</li>
+<li>Loop over the elements <img class="formulaInl" alt="$ e=1,...,N_e $" src="form_272.png"/><ul>
+<li>Initialise the counter for the number of degrees of freedom in the element, <img class="formulaInl" alt="$ j_{dof}=0 $" src="form_273.png"/>.</li>
+<li>Loop over the element's local nodes <img class="formulaInl" alt="$ j_{local}=1,...,n$" src="form_274.png"/><ul>
+<li>Determine the global node number <img class="formulaInl" alt="$ j_{global} = {\cal J}(j_{local},e) $" src="form_275.png"/></li>
+<li>Determine the global equation number <img class="formulaInl" alt="${\cal E}(j_{global})$" src="form_261.png"/></li>
+<li>If <img class="formulaInl" alt="${\cal E}(j_{global}) \ne -1$" src="form_276.png"/>: <table border="0">
+<tr>
+<td bgcolor="cornsilk"><ul>
+<li>Increment the number of degrees of freedom in the element, <img class="formulaInl" alt="$ j_{dof}=j_{dof}+1$" src="form_277.png"/>   </li>
+</ul>
+</td></tr>
+</table>
+<ul>
+<li>Add the entry to the lookup scheme that relates local and global equation numbers, <img class="formulaInl" alt="$ \widehat{\cal E}(j_{dof},e) = {\cal E}(j_{global})$" src="form_278.png"/></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Assign the number of degrees of freedom in the element, <img class="formulaInl" alt="$ {\cal N}_{dof}(e)=j_{dof} $" src="form_279.png"/></li>
+</ul>
+</li>
+</ul>
+<p>For the 1D problem P1 with two-node elements, the lookup scheme has the following form: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{ \begin{tabular}{l l l l l l l l l l l } \hline \\ \mbox{Element $e$} &amp; 1 &amp; 2 &amp; &amp; 3 &amp; &amp; ... &amp; $N_E-1$ &amp; &amp; $N_E$ \\ \hline \\ \mbox{Number of degrees of freedom ${\cal N}_{dof}(e)$} &amp; 1 &amp; 2 &amp; &amp; 2 &amp; &amp; ... &amp; 2 &amp; &amp; 1\\ \hline \\ \mbox{Local equation number $i_{local}$} &amp; 1 &amp; 1 &amp; 2 &amp; 1 &amp; 2 &amp; ... &amp; 1 &amp; 2 &amp; 1\\ \hline \\ \mbox{Global equation number $\widehat{\cal E}(i_{local},e)$} &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 3 &amp; ... &amp; $N-3$ &amp; $N-2$ &amp; $N-2$ \\ \hline \\ \end{tabular} } \]" src="form_280.png"/>
+</p>
+<p>Using this lookup scheme, we can re-arrange the computation of the residual vector and the Jacobian matrix as follows:</p>
+<center> <b> Algorithm 6: Element-based assembly of the residual vector and the Jacobian matrix </b> </center><ul>
+<li>Initialise the global residual vector, <img class="formulaInl" alt="$ r_j=0 $" src="form_281.png"/> for <img class="formulaInl" alt="$j=1,...,M $" src="form_282.png"/> and the global Jacobian matrix <img class="formulaInl" alt="$ J_{jk}=0 $" src="form_283.png"/> for <img class="formulaInl" alt="$j,k=1,...,M $" src="form_284.png"/></li>
+<li>Loop over the elements <img class="formulaInl" alt="$ e=1,...,N_E$" src="form_285.png"/> <br  />
+<br  />
+ <br  />
+ <center> <b> Compute the element's residual vector and Jacobian matrix </b> </center> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the number of degrees of freedom in this element, <img class="formulaInl" alt="$ n_{dof}={\cal N}_{dof}(e) $" src="form_286.png"/>. <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Initialise the counter for the local degrees of freedom <img class="formulaInl" alt="$ i_{dof}=0$" src="form_287.png"/> (counting the entries in the element's residual vector and the rows of the element's Jacobian matrix) <br  />
+<ul>
+<li>Loop over the local nodes <img class="formulaInl" alt="$ j_{local}=1,...,n $" src="form_259.png"/> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the global node number <img class="formulaInl" alt="$ j_{global}={\cal J}(j_{local},e)$" src="form_288.png"/> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the global equation number <img class="formulaInl" alt="$ {\cal E}( j_{global}) $" src="form_289.png"/> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> If <img class="formulaInl" alt="$ {\cal E}( j_{global}) \ne -1 $" src="form_290.png"/>: <table border="0">
+<tr>
+<td bgcolor="cornsilk"><img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Increment the counter for the local degrees of freedom <img class="formulaInl" alt="$ i_{dof}= i_{dof}+1$" src="form_291.png"/>   </td></tr>
+</table>
+<img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the entry in the element's residual vector <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{i_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} u^{(FE)}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} + f(x) \ \psi_{j_{global}}(x) \right) dx \]" src="form_292.png"/>
+</p>
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Initialise the second counter for the local degrees of freedom <img class="formulaInl" alt="$ j_{dof}=0$" src="form_293.png"/> (counting the columns in the element's Jacobian matrix) <br  />
+<br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Loop over the local nodes <img class="formulaInl" alt="$ k_{local}=1,...,n $" src="form_253.png"/><ul>
+<li>Determine the global node number <img class="formulaInl" alt="$ k_{global}={\cal J}(k_{local},e)$" src="form_294.png"/></li>
+<li>Determine the global equation number <img class="formulaInl" alt="$ {\cal E}( k_{global}) $" src="form_295.png"/></li>
+<li>If <img class="formulaInl" alt="$ {\cal E}( k_{global}) \ne -1 $" src="form_296.png"/>: <table border="0">
+<tr>
+<td bgcolor="cornsilk"><img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Increment the counter for the local degrees of freedom <img class="formulaInl" alt="$ j_{dof}= j_{dof}+1$" src="form_297.png"/>   </td></tr>
+</table>
+<img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the entry in the element's Jacobian matrix <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{i_{dof}j_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \right) dx \]" src="form_298.png"/>
+</p>
+ <br  />
+</li>
+</ul>
+</li>
+</ul>
+<br  />
+ <br  />
+ <br  />
+ <center> <b> Add the element's contribution to the global residual vector and Jacobian matrix </b> </center> <br  />
+<ul>
+<li>Loop over the local degrees of freedom <img class="formulaInl" alt="$ i_{dof}=1,...,n_{dof} $" src="form_299.png"/><ul>
+<li>Add the element's contribution to the global residual vector <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{\widehat{\cal E}(i_{dof},e)} = r_{\widehat{\cal E}(i_{dof},e)} + r_{i_{dof}}^{(e)} \]" src="form_300.png"/>
+</p>
+ <br  />
+<ul>
+<li>Loop over the local degrees of freedom <img class="formulaInl" alt="$ j_{dof}=1,...,n_{dof}$" src="form_301.png"/> <br  />
+<br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Add the element's contribution to the global Jacobian matrix <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \]" src="form_302.png"/>
+</p>
+ <br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Note that the order in which we loop over the local degrees of freedom within each element <em>must</em> be the same as the order used when constructing the local equation numbering scheme of Algorithm</p><ol type="1">
+<li><p class="startli">[<b>Exercise:</b> What would happen if we reversed the order in which we loop over the element's nodes in Algorithm 5 while retaining Algorithm 6 in its present form? Hint: Note that the local equation numbers are computed "on the fly" by the highlighted sections of the two algorithms.] In an actual implementation of the above procedure, Algorithms 5 and 6 are likely to be contained in separate functions. When the functions are first implemented (in the form described above), they will obviously be consistent with each other. However, there is a danger that in subsequent code revisions changes might only be introduced in one of the two functions. To avoid the potential for such disasters, it is preferable to create an explicit storage scheme for the local equation numbers that is constructed during the execution of Algorithm 5 and used in Algorithm 6. For this purpose, we introduce yet another lookup table, <img class="formulaInl" alt="$ {\cal L}(j_{local},e)$" src="form_303.png"/>, which stores the local equation number associated with the nodal value stored at local node <img class="formulaInl" alt="$ j_{local}$" src="form_242.png"/> in element <img class="formulaInl" alt="$e$" src="form_265.png"/>. Again we set the equation number to -1 if the nodal value is pinned. The revised form of Algorithm 5 is then given by (as before, only the sections that are highlighted have been changed):</p>
+<center> <b> Algorithm 7: Establishing the relation between local and global equation numbers (revised) </b> </center></li>
+</ol>
+<ul>
+<li>Set up the global equation numbering scheme, using the algorithm detailed in Phase 1 of Algorithm 3.</li>
+<li>Loop over the elements <img class="formulaInl" alt="$ e=1,...,N_e $" src="form_272.png"/><ul>
+<li>Initialise the counter for the number of degrees of freedom in the element, <img class="formulaInl" alt="$ j_{dof}=0 $" src="form_273.png"/>.</li>
+<li>Loop over the element's local nodes <img class="formulaInl" alt="$ j_{local}=1,...,n$" src="form_274.png"/><ul>
+<li>Determine the global node number <img class="formulaInl" alt="$ j_{global} = {\cal J}(j_{local},e) $" src="form_275.png"/></li>
+<li>Determine the global equation number <img class="formulaInl" alt="${\cal E}(j_{global})$" src="form_261.png"/></li>
+<li>If <img class="formulaInl" alt="${\cal E}(j_{global}) \ne -1$" src="form_276.png"/>:<ul>
+<li>Increment the number of degrees of freedom in the element, <img class="formulaInl" alt="$ j_{dof}=j_{dof}+1$" src="form_277.png"/></li>
+<li>Add the entry to the lookup scheme that relates local and global equation numbers, <img class="formulaInl" alt="$ \widehat{\cal E}(j_{dof},e) = {\cal E}(j_{global})$" src="form_278.png"/></li>
+<li><table border="0">
+<tr>
+<td bgcolor="cornsilk">Store the local equation number associated with the current local node: <img class="formulaInl" alt="$ {\cal L}(j_{local},e)=j_{dof}.$" src="form_304.png"/>   </td></tr>
+</table>
+</li>
+</ul>
+</li>
+<li>Else: <table border="0">
+<tr>
+<td bgcolor="cornsilk"><ul>
+<li>Set the local equation number associated with the current local node to -1 to indicate that it is pinned: <img class="formulaInl" alt="$ {\cal L}(j_{local},e)=-1$" src="form_305.png"/>   </li>
+</ul>
+</td></tr>
+</table>
+</li>
+</ul>
+</li>
+<li>Assign the number of degrees of freedom in the element, <img class="formulaInl" alt="$ {\cal N}_{dof}(e)=j_{dof} $" src="form_279.png"/></li>
+</ul>
+</li>
+</ul>
+<p>For the 1D problem P1 with two-node elements the elements, the lookup table <img class="formulaInl" alt="$ {\cal L}(j_{local},e)$" src="form_303.png"/> has the following entries: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{ \begin{tabular}{l l l l l l l l l l l l } \hline \\ \mbox{Element $e$} &amp; 1 &amp; &amp; 2 &amp; &amp; 3 &amp; &amp; ... &amp; $N_E-1$ &amp; &amp; $N_E$ &amp; \\ \hline \\ \mbox{Local node number $j_{local}$} &amp; 1 &amp; 2 &amp; 1 &amp; 2 &amp; 1 &amp; 2 &amp; ... &amp; 1 &amp; 2 &amp; 1 &amp; 2 \\ \hline \\ \mbox{Local equation number ${\cal L}(j_{local},e)$} &amp; -1 &amp; 1 &amp; 1 &amp; 2 &amp; 1 &amp; 2 &amp; ... &amp; 1 &amp; 2 &amp; 1 &amp; -1\\ \hline \\ \end{tabular} } \]" src="form_306.png"/>
+</p>
+<p> Using this lookup scheme, we revise Algorithm 6 as follows (only the highlighted regions have changed; we have removed the initialisation of the "counters" for the equation numbers since they are no longer computed "on the fly"):</p>
+<center> <b> Algorithm 9: Element-based assembly of the residual vector and the Jacobian matrix (revised) </b> </center><ul>
+<li>Initialise the global residual vector, <img class="formulaInl" alt="$ r_j=0 $" src="form_281.png"/> for <img class="formulaInl" alt="$j=1,...,M $" src="form_282.png"/> and the global Jacobian matrix <img class="formulaInl" alt="$ J_{jk}=0 $" src="form_283.png"/> for <img class="formulaInl" alt="$j,k=1,...,M $" src="form_284.png"/></li>
+<li>Loop over the elements <img class="formulaInl" alt="$ e=1,...,N_E$" src="form_285.png"/> <br  />
+<br  />
+ <br  />
+ <center> <b> Compute the element's residual vector and Jacobian matrix </b> </center> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the number of degrees of freedom in this element, <img class="formulaInl" alt="$ n_{dof}={\cal N}_{dof}(e) $" src="form_286.png"/>. <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Loop over the local nodes <img class="formulaInl" alt="$ j_{local}=1,...,n $" src="form_259.png"/> <br  />
+<ul>
+<li>Determine the global node number <img class="formulaInl" alt="$ j_{global}={\cal J}(j_{local},e)$" src="form_288.png"/></li>
+<li>Determine the global equation number <img class="formulaInl" alt="$ {\cal E}( j_{global}) $" src="form_289.png"/> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> If <img class="formulaInl" alt="$ {\cal E}( j_{global}) \ne -1 $" src="form_290.png"/>: <br  />
+ <table border="0">
+<tr>
+<td bgcolor="cornsilk"><img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the local equation number from the element's lookup scheme <img class="formulaInl" alt="$ i_{dof}= {\cal L}(j_{local},e)$" src="form_307.png"/>.   </td></tr>
+</table>
+<img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the entry in the element's residual vector <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{i_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} u^{(FE)}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} + f(x) \ \psi_{j_{global}}(x) \right) dx \]" src="form_292.png"/>
+</p>
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Loop over the local nodes <img class="formulaInl" alt="$ k_{local}=1,...,n $" src="form_253.png"/><ul>
+<li>Determine the global node number <img class="formulaInl" alt="$ k_{global}={\cal J}(k_{local},e)$" src="form_294.png"/></li>
+<li>Determine the global equation number <img class="formulaInl" alt="$ {\cal E}( k_{global}) $" src="form_295.png"/></li>
+<li>If <img class="formulaInl" alt="$ {\cal E}( k_{global}) \ne -1 $" src="form_296.png"/>: <table border="0">
+<tr>
+<td bgcolor="cornsilk"><ul>
+<li>Determine the local equation number from the element's lookup scheme <img class="formulaInl" alt="$ j_{dof}= {\cal L}(k_{local},e)$" src="form_308.png"/>.   </li>
+</ul>
+</td></tr>
+</table>
+<ul>
+<li>Determine the entry in the element's Jacobian matrix <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{i_{dof}j_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \right) dx \]" src="form_298.png"/>
+</p>
+ <br  />
+</li>
+</ul>
+</li>
+</ul>
+<br  />
+ <br  />
+ <br  />
+ <center> <b> Add the element's contribution to the global residual vector and Jacobian matrix </b> </center> <br  />
+</li>
+<li>Loop over the local degrees of freedom <img class="formulaInl" alt="$ i_{dof}=1,...,n_{dof} $" src="form_299.png"/><ul>
+<li>Add the element's contribution to the global residual vector <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{\widehat{\cal E}(i_{dof},e)} = r_{\widehat{\cal E}(i_{dof},e)} + r_{i_{dof}}^{(e)} \]" src="form_300.png"/>
+</p>
+</li>
+<li>Loop over the local degrees of freedom <img class="formulaInl" alt="$ j_{dof}=1,...,n_{dof}$" src="form_301.png"/><ul>
+<li>Add the element's contribution to the global Jacobian matrix <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \]" src="form_302.png"/>
+</p>
+ <br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr  />
+<h3><a class="anchor" id="local_coords"></a>
+Local coordinates</h3>
+<p>Algorithm 9 computes the residual vector and the Jacobian matrix using an element-by-element assembly process. The basis functions are still based on a global definition (17) that involves unnecessary references to quantities external to the element. For example, in element <img class="formulaInl" alt="$ j $" src="form_157.png"/> the tests for <img class="formulaInl" alt="$ x &lt; X_j$" src="form_309.png"/> and <img class="formulaInl" alt="$ x &gt; X_{j+1}$" src="form_310.png"/> in (17) are unnecessary because these coordinate ranges are always outside the element. We shall now develop an alternative, local representation of the shape functions that involves only quantities that are intrinsic to each element. <br  />
+ For this purpose, we introduce a local coordinate <img class="formulaInl" alt="$s \in [-1,1] $" src="form_311.png"/> that parametrises the position <img class="formulaInl" alt="$ x(s) $" src="form_312.png"/> within an element so that (for two-node elements) the local coordinates <img class="formulaInl" alt="$s=\pm 1$" src="form_313.png"/> correspond to local nodes 1 and 2, respectively. The local linear shape functions </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_1(s) = \frac{1}{2}(1-s) \mbox{\ \ \ and \ \ \ } \psi_2(s) = \frac{1}{2}(1+s)\]" src="form_314.png"/>
+</p>
+<p> are the natural generalisations of the global shape functions:</p><ul>
+<li><img class="formulaInl" alt="$ \psi_j(s) $" src="form_315.png"/> is equal to 1 at local node j and zero at the element's other node,</li>
+<li><img class="formulaInl" alt="$ \psi_j(s) $" src="form_315.png"/> varies linearly between the nodes.</li>
+</ul>
+<p>These local shape functions are easily generalised to elements with a larger number of nodes. For instance, the local shape functions for a three-node element whose nodes are distributed uniformly along the element, are given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_1(s) = \frac{1}{2} s (s-1), \ \ \ \psi_2(s) = (s+1)(1-s) \mbox{\ \ \ and \ \ \ } \psi_3(s) = \frac{1}{2} s (s+1). \]" src="form_316.png"/>
+</p>
+<p> We represent the solution within element <img class="formulaInl" alt="$ e $" src="form_239.png"/> as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u^{(FE)}(s) = \sum_{j=1}^n U_{{\cal J}(j,e)} \ \psi_j(s), \]" src="form_317.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$n$" src="form_247.png"/> is the number of nodes in the element. <img class="formulaInl" alt="$ u $" src="form_52.png"/> is now represented exclusively in terms of quantities that are intrinsic to the element: the element's nodal values and the local coordinate. The evaluation of the integrals in algorithm 2 requires the evaluation of <img class="formulaInl" alt="$ {\mbox{d} u}/{\mbox{d} x}$" src="form_318.png"/>, rather than <img class="formulaInl" alt="$ {\mbox{d} u}/{\mbox{d} s}$" src="form_319.png"/>, and <img class="formulaInl" alt="$f(x)$" src="form_320.png"/> rather than <img class="formulaInl" alt="$f(s).$" src="form_321.png"/> In order to evaluate these terms, we must specify the mapping <img class="formulaInl" alt="$ x(s) $" src="form_312.png"/> between the local and global coordinates. The mapping <img class="formulaInl" alt="$ x(s) $" src="form_312.png"/> should be one-to-one and it must interpolate the nodal positions so that in a two-node element <img class="formulaInl" alt="$e$" src="form_265.png"/> </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x(s=-1) = X_{{\cal J}(1,e)} \mbox{\ \ \ and \ \ \ } x(s=1) = X_{{\cal J}(2,e)}.\]" src="form_322.png"/>
+</p>
+<p> There are many mappings that satisfy these conditions but, within the finite-element context, the simplest choice is to use the local shape functions themselves by writing </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x(s) = \sum_{j=1}^n X_{{\cal J}(j,e)} \ \psi_j(s). \]" src="form_323.png"/>
+</p>
+<p> This is known as an "isoparametric mapping" because the same ("iso") functions are used to interpolate the unknown function <em>and</em> the global coordinates. Derivatives with respect to the global coordinates can now be evaluated via the chain rule </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\mbox{d} u}{\mbox{d} x} = \frac{\mbox{d} u}{\mbox{d} s} \left(\frac{\mbox{d} x}{\mbox{d} s}\right)^{-1}. \]" src="form_324.png"/>
+</p>
+<p> In element <img class="formulaInl" alt="$ e $" src="form_239.png"/>, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\mbox{d} u}{\mbox{d} x} = \left(\sum_{j=1}^n U_{{\cal J}(j,e)} \ \frac{\mbox{d} \psi_j(s)}{\mbox{d} s} \right) \left(\sum_{j=1}^n X_{{\cal J}(j,e)} \ \frac{\mbox{d} \psi_j(s)}{\mbox{d} s} \right)^{-1}. \]" src="form_325.png"/>
+</p>
+<p> Finally, integration over the element can be performed in local coordinates via </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_e (...) \ dx = \int_{-1}^1 (...)\ \widehat{\cal J} \ ds, \]" src="form_326.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \widehat{\cal J} = \frac{\mbox{d} x}{\mbox{d} s} \]" src="form_327.png"/>
+</p>
+<p> is the Jacobian of the mapping between <img class="formulaInl" alt="$x$" src="form_328.png"/> and <img class="formulaInl" alt="$ s. $" src="form_329.png"/></p>
+<p>Typically the integrands are too complicated to be evaluated analytically and we use Gauss quadrature rules to evaluate them numerically. Gauss rules (or any other quadrature rules) are defined by</p><ul>
+<li>the number of integration points <img class="formulaInl" alt="$N_{int} $" src="form_330.png"/>,</li>
+<li>the position of the integration points in the element <img class="formulaInl" alt="$S_{i}, \ i=1,...,N_{int} $" src="form_331.png"/>,</li>
+<li>the weights <img class="formulaInl" alt="$W_{i}, \ i=1,...,N_{int} $" src="form_332.png"/>,</li>
+</ul>
+<p>and approximate the integral over the range <img class="formulaInl" alt="$ s\in [-1,1]$" src="form_333.png"/> by the sum </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_{-1}^1 {\cal F}(s)\ ds \approx \sum_{i=1}^{N_{int}} W_i \ {\cal F}(S_i). \]" src="form_334.png"/>
+</p>
+<p>As an example, the integration points and weights for a three-point Gauss rule are given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{ \begin{tabular}{l c c c} \hline \\ \mbox{Integration point $i$} &amp; 1 &amp; 2 &amp; 3 \\ \hline \\ \mbox{Location $S_i$} &amp; $-\sqrt{3/5}$ &amp; $ 0$ &amp; $\sqrt{3/5}$ \\ \hline \\ \mbox{Weight $W_i$} &amp; 5/9 &amp; 8/9 &amp; 5/9 \\ \hline \\ \end{tabular} } \]" src="form_335.png"/>
+</p>
+<hr  />
+<h3><a class="anchor" id="altogether"></a>
+Putting it all together</h3>
+<p>We have now developed the necessary tools to formulate the final version of the finite element solution of problem P1 which we summarise in the following algorithm:</p>
+<center> <b> Algorithm 10: The final version of the finite-element solution of problem P1 </b> </center><p> <b> Phase 1: Setup</b></p>
+<p><b> Phase 1a: Problem specification</b></p>
+<ul>
+<li><p class="startli">Choose the number of elements, <img class="formulaInl" alt="$ N_E $" src="form_336.png"/>, and the number of nodes per element, <img class="formulaInl" alt="$ n$" src="form_337.png"/>. This defines the total number of nodes, <img class="formulaInl" alt="$N$" src="form_144.png"/>, and the local shape functions <br  />
+ <img class="formulaInl" alt="$ \psi_j(s) \ \ (j=1,...,n)$" src="form_338.png"/> for all elements.</p>
+<p class="startli"><b> Phase 1b: Mesh generation</b></p>
+</li>
+<li>Discretise the domain by specifying the positions <img class="formulaInl" alt="$ X_j \ (j=1,..,N)$" src="form_339.png"/>, of the <img class="formulaInl" alt="$ N $" src="form_175.png"/> nodes.</li>
+<li>Generate the lookup scheme <img class="formulaInl" alt="$ {\cal J}(j,e)$" src="form_340.png"/> that establishes the relation between global and local node numbers.</li>
+<li><p class="startli">Identify which nodes are located on which domain boundaries.</p>
+<p class="startli"><b> Phase 1c: "Pin" nodes with essential (Dirichlet) boundary conditions </b> <br  />
+</p>
+</li>
+<li><p class="startli">Loop over all global nodes <img class="formulaInl" alt="$ j $" src="form_157.png"/> that are located on Dirichlet boundaries:</p><ul>
+<li>Assign a negative equation number to reflect the node's "pinned" status: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal E}(j) = -1 \]" src="form_210.png"/>
+</p>
+</li>
+</ul>
+<p class="startli"><b> Phase 1d: Apply boundary conditions and provide initial guesses for all unknowns</b></p>
+</li>
+<li><p class="startli">Loop over all global nodes <img class="formulaInl" alt="$j=1,...,N$" src="form_341.png"/>:</p><ul>
+<li>Provide an initial guess for the unknown nodal value (e.g. <img class="formulaInl" alt="$ U_j=0 $" src="form_342.png"/>), while ensuring that the values assigned to nodes on the boundary are consistent with the boundary conditions so that <img class="formulaInl" alt="$ U_j = g(X_j). $" src="form_343.png"/></li>
+</ul>
+<p class="startli"><b> Phase 1e: Set up the global equation numbering scheme</b></p>
+</li>
+<li>Initialise the total number of unknowns, <img class="formulaInl" alt="$M=0.$" src="form_207.png"/></li>
+<li><p class="startli">Loop over all global nodes <img class="formulaInl" alt="$j=1,...,N$" src="form_341.png"/>:</p><ul>
+<li>If global node <img class="formulaInl" alt="$ j $" src="form_157.png"/> is not pinned (i.e. if <img class="formulaInl" alt="$ {\cal E}(j) \ne -1 $" src="form_223.png"/>)<ul>
+<li>Increment the number of unknowns <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ M=M+1 \]" src="form_211.png"/>
+</p>
+</li>
+<li>Assign the global equation number <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal E}(j) = M \]" src="form_212.png"/>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<p class="startli"><b> Phase 1f: Set up the local equation numbering scheme</b></p>
+</li>
+<li><p class="startli">Loop over the elements <img class="formulaInl" alt="$ e=1,...,N_e $" src="form_272.png"/></p><ul>
+<li>Initialise the counter for the number of degrees of freedom in this element, <img class="formulaInl" alt="$ j_{dof}=0 $" src="form_273.png"/>.</li>
+<li>Loop over the element's local nodes <img class="formulaInl" alt="$ j_{local}=1,...,n$" src="form_274.png"/><ul>
+<li>Determine the global node number <img class="formulaInl" alt="$ j_{global} = {\cal J}(j_{local},e) $" src="form_275.png"/></li>
+<li>Determine the global equation number <img class="formulaInl" alt="${\cal E}(j_{global})$" src="form_261.png"/></li>
+<li>If <img class="formulaInl" alt="${\cal E}(j_{global}) \ne -1$" src="form_276.png"/>:<ul>
+<li>Increment the number of degrees of freedom in this element <img class="formulaInl" alt="$ j_{dof}=j_{dof}+1$" src="form_277.png"/></li>
+<li>Add the entry to the lookup scheme that relates global and local equation numbers, <img class="formulaInl" alt="$ \widehat{\cal E}(j_{dof},e) = {\cal E}(j_{global})$" src="form_278.png"/></li>
+<li>Store the local equation number associated with the current local node: <img class="formulaInl" alt="$ {\cal L}(j_{local},e)=j_{dof}.$" src="form_304.png"/></li>
+</ul>
+</li>
+<li>Else:<ul>
+<li>Set the local equation number associated with the current local node to -1 to indicate that it is pinned: <img class="formulaInl" alt="$ {\cal L}(j_{local},e)=-1$" src="form_305.png"/></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Assign the number of degrees of freedom in the element <img class="formulaInl" alt="$ {\cal N}_{dof}(e)=j_{dof} $" src="form_279.png"/></li>
+</ul>
+<p class="startli"><b> End of setup:</b></p>
+<p class="startli">The setup phase is now complete and we can determine the current FE representation of <br  />
+ <img class="formulaInl" alt="$ u^{(FE)}(x)$" src="form_344.png"/> and <img class="formulaInl" alt="$ \mbox{d} u^{(FE)}(x)/\mbox{d} x$" src="form_345.png"/> in any element <img class="formulaInl" alt="$e \ (e=1,..,N_E) $" src="form_346.png"/> from </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u = \sum_{j=1}^{n} U_{{\cal J}(j,e)} \psi_j(s) \mbox{\ \ \ \ \ \ \ \ and \ \ \ \ \ \ \ \ } \frac{\mbox{d} u}{\mbox{d} x} = \left(\sum_{j=1}^n U_{{\cal J}(j,e)} \ \frac{\mbox{d} \psi_j(s)}{\mbox{d} s} \right) \left(\sum_{j=1}^n X_{{\cal J}(j,e)} \ \frac{\mbox{d} \psi_j(s)}{\mbox{d} s} \right)^{-1} \]" src="form_347.png"/>
+</p>
+<p> Similarly, the global coordinates and their derivatives with respect to the local coordinates are given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x = \sum_{j=1}^{n} X_{{\cal J}(j,e)} \psi_j(s) \mbox{\ \ \ \ \ \ \ \ and \ \ \ \ \ \ \ \ } \widehat{\cal J} = \frac{\mbox{d} x}{\mbox{d} s} = \sum_{j=1}^n X_{{\cal J}(j,e)} \ \frac{\mbox{d} \psi_j(s)}{\mbox{d} s}. \]" src="form_348.png"/>
+</p>
+<p class="startli">The derivatives of the local shape functions, <img class="formulaInl" alt="$ \psi_j $" src="form_192.png"/>, with respect to the global coordinate <img class="formulaInl" alt="$ x $" src="form_349.png"/> are </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\mbox{d} \psi_j}{\mbox{d} x} = \frac{\mbox{d} \psi_j(s)}{\mbox{d} s} \left(\sum_{j=1}^n X_{{\cal J}(j,e)} \ \frac{\mbox{d} \psi_j(s)}{\mbox{d} s} \right)^{-1} \mbox{\ \ \ for $j=1,..,n$} \]" src="form_350.png"/>
+</p>
+<p class="startli"><b> Phase 2: Solution </b></p>
+<p class="startli"><b> Phase 2a: Set up the linear system </b></p>
+</li>
+<li>Initialise the global residual vector, <img class="formulaInl" alt="$ r_j=0 $" src="form_281.png"/> for <img class="formulaInl" alt="$j=1,...,M $" src="form_282.png"/> and the global Jacobian matrix <img class="formulaInl" alt="$ J_{jk}=0 $" src="form_283.png"/> for <img class="formulaInl" alt="$j,k=1,...,M $" src="form_284.png"/></li>
+<li>Loop over the elements <img class="formulaInl" alt="$ e=1,...,N_E$" src="form_285.png"/> <br  />
+<br  />
+ <br  />
+ <center> <b> Compute the element's residual vector and Jacobian matrix </b> </center> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the number of degrees of freedom in this element, <img class="formulaInl" alt="$ n_{dof}={\cal N}_{dof}(e) $" src="form_286.png"/>. <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Initialise the element residual vector, <img class="formulaInl" alt="$ r_{j}^{(e)}=0 $" src="form_351.png"/> for <img class="formulaInl" alt="$j=1,...,n_{dof} $" src="form_352.png"/> and the element Jacobian matrix <img class="formulaInl" alt="$ J_{jk}^{(e)}=0 $" src="form_353.png"/> for <img class="formulaInl" alt="$j,k=1,...,n_{dof} $" src="form_354.png"/> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Loop over the Gauss points <img class="formulaInl" alt="$ i_{int}=1,...,N_{int}$" src="form_355.png"/> <br  />
+<ul>
+<li>Determine the local coordinate of the integration point <img class="formulaInl" alt="$ s = S_{i_{int}} $" src="form_356.png"/> and the associated weight <img class="formulaInl" alt="$W_{i_{int}}.$" src="form_357.png"/></li>
+<li>Compute <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> the global coordinate <img class="formulaInl" alt="$ x = x(s) $" src="form_358.png"/><br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> the source function <img class="formulaInl" alt="$ f = f(x) =f(x(s)) $" src="form_359.png"/><br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> the derivative <img class="formulaInl" alt="$ \mbox{d} u/\mbox{d} x $" src="form_360.png"/> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> the shape functions <img class="formulaInl" alt="$ \psi_j $" src="form_192.png"/> and their derivatives <img class="formulaInl" alt="$ \mbox{d} \psi_j/\mbox{d} x $" src="form_361.png"/><br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> the Jacobian of the mapping between local and global coordinates, <img class="formulaInl" alt="$ \widehat{\cal J} = \mbox{d} x/\mbox{d} s$" src="form_362.png"/><br  />
+</li>
+<li>Loop over the local nodes <img class="formulaInl" alt="$ j_{local}=1,...,n $" src="form_259.png"/><ul>
+<li>Determine the global node number <img class="formulaInl" alt="$ j_{global}={\cal J}(j_{local},e)$" src="form_288.png"/></li>
+<li>Determine the global equation number <img class="formulaInl" alt="$ {\cal E}( j_{global}) $" src="form_289.png"/></li>
+<li>If <img class="formulaInl" alt="$ {\cal E}( j_{global}) \ne -1 $" src="form_290.png"/> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the local equation number from the element's lookup scheme <img class="formulaInl" alt="$ i_{dof}= {\cal L}(j_{local},e)$" src="form_307.png"/>.<br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Add the contribution to the element's residual vector <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{i_{dof}}^{(e)} = r_{i_{dof}}^{(e)} + \left( \frac{\mbox{d} u}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{local}}}{\mbox{d} x} + f \ \psi_{j_{local}} \right) \widehat{\cal J}\ W_{i_{int}} \]" src="form_363.png"/>
+</p>
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Loop over the local nodes <img class="formulaInl" alt="$ k_{local}=1,...,n$" src="form_364.png"/><ul>
+<li>Determine the global node number <img class="formulaInl" alt="$ k_{global}={\cal J}(k_{local},e)$" src="form_294.png"/></li>
+<li>Determine the global equation number <img class="formulaInl" alt="$ {\cal E}( k_{global}) $" src="form_295.png"/></li>
+<li>If <img class="formulaInl" alt="$ {\cal E}( k_{global}) \ne -1 $" src="form_296.png"/> <br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Determine the local equation number from the element's lookup scheme <img class="formulaInl" alt="$ j_{dof}= {\cal L}(k_{local},e)$" src="form_308.png"/>.<br  />
+ <img class="formulaInl" alt="$ \bullet $" src="form_257.png"/> Add the contribution to the element's Jacobian matrix <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{i_{dof}j_{dof}}^{(e)} = J_{i_{dof}j_{dof}}^{(e)} + \left( \frac{\mbox{d} \psi_{k_{local}}}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{local}}}{\mbox{d} x} \right) \widehat{\cal J} \ W_{i_{int}} \]" src="form_365.png"/>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<br  />
+ <br  />
+ <br  />
+ <center> <b> Add the element's contribution to the global residual vector and Jacobian matrix </b> </center> <br  />
+</li>
+<li>Loop over the local degrees of freedom <img class="formulaInl" alt="$ i_{dof}=1,...,n_{dof} $" src="form_299.png"/><ul>
+<li>Add the element's contribution to the global residual vector <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{\widehat{\cal E}(i_{dof},e)} = r_{\widehat{\cal E}(i_{dof},e)} + r_{i_{dof}}^{(e)} \]" src="form_300.png"/>
+</p>
+</li>
+<li>Loop over the local degrees of freedom <img class="formulaInl" alt="$ j_{dof}=1,...,n_{dof}$" src="form_301.png"/> <br  />
+ <img class="formulaInl" alt="$\bullet $" src="form_366.png"/> Add the element's contribution to the global Jacobian matrix <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \]" src="form_302.png"/>
+</p>
+ <br  />
+</li>
+</ul>
+</li>
+</ul>
+<b> Phase 2b: Solve the linear system </b></li>
+<li><p class="startli">Solve the <img class="formulaInl" alt="$ M \times M$" src="form_225.png"/> linear system </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{j=1}^{M} J_{jk} \ y_k = - r_j \mbox{\ \ \ for $j=1,...,M.$} \]" src="form_367.png"/>
+</p>
+<p> for <img class="formulaInl" alt="$ y_k \ \ (k=1,...,M).$" src="form_368.png"/></p>
+<p class="startli"><b> Phase 2c: Update the initial guess </b></p>
+</li>
+<li>Loop over all global nodes <img class="formulaInl" alt="$ j$" src="form_369.png"/>:<ul>
+<li>Determine the equation number: <img class="formulaInl" alt="$ {\cal E}(j) $" src="form_222.png"/></li>
+<li>If <img class="formulaInl" alt="$ {\cal E}(j) \ne -1 $" src="form_223.png"/>: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ U_{{\cal E}(j)} = U_{{\cal E}(j)} + y_{{\cal E}(j)} \]" src="form_228.png"/>
+</p>
+</li>
+</ul>
+</li>
+<li><p class="startli">Since P1 is a linear problem, <img class="formulaInl" alt="$ U_j \ (j=1,...,N) $" src="form_229.png"/> is the exact solution; if the problem was nonlinear, we would have to continue the <a class="el" href="index.html#Newton">Newton</a> iteration until the residuals <img class="formulaInl" alt="$r_j \ (j=1,...,M) $" src="form_370.png"/> are sufficiently small.</p>
+<p class="startli"><b> Phase 3: Postprocessing (document the solution)</b></p>
+</li>
+<li><p class="startli">The finite-element solution in element <img class="formulaInl" alt="$e$" src="form_265.png"/> is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u = \sum_{j=1}^{n} U_{{\cal J}(j,e)} \psi_j(s) \]" src="form_371.png"/>
+</p>
+<hr  />
+</li>
+</ul>
+<h3><a class="anchor" id="example_P1"></a>
+A 1D example</h3>
+<p>Here is an example of the finite element solution of the problem P1, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\mbox{d}^2 u}{\mbox{d} x^2} = \pm 30 \sin(5.5 x), \mbox{\ \ \ subject to $u(0)=0$ and $u(1)=\mp 1$} \]" src="form_372.png"/>
+</p>
+<p> This problem has the (fish-shaped) exact solution </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(x) = \mp \left(\sin(5.5)-1\right) x - \sin(5.5 x). \]" src="form_373.png"/>
+</p>
+<p>The figure below compares the exact solution against the finite-element solution, obtained from a discretisation wth ten two-node elements. The finite-element solution was computed with <code>oomph-lib</code>, using the driver codes discussed in the <a href="../../quick_guide/html/index.html">Quick Guide</a> and the example code that illustrates the solution of a <a href="../../poisson/one_d_poisson/html/index.html">1D Poisson equation </a> with elements from the <code>oomph-lib</code> element library.</p>
+<div class="image">
+<img src="fish.gif" alt=""/>
+<div class="caption">
+Exact (green) and finite-element solution (red) obtained with ten two-node elements. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="higher_dims"></a>
+Extension to higher-dimensional problems</h1>
+<p>Thus far, we have only discussed the implementation of the finite element method for a 1D scalar problem. For such (relatively trivial) problems, the sophisticated "machinery" of Algorithm 10 might appear to be overly complicated. The advantage of the algorithm is that it can easily be generalised to more complicated problems. We will illustrate this by extending the algorithm to higher-dimensional problems and consider the solution of the 2D Poisson problem P2</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal R}(x_i; u(x_i)) = \frac{\partial^2 u(x_i)}{\partial x_i^2} - f(x_i) =0 \mbox{ \ \ \ subject to \ \ \ } u|_{\partial D} = g, \]" src="form_374.png"/>
+</p>
+<p> in the non-trivial (fish-shaped) domain shown in this sketch: </p><div class="image">
+<img src="fish_domain.gif" alt=""/>
+<div class="caption">
+Fish-shaped domain </div></div>
+<p>  A careful inspection of Algorithm 10 shows that only very few steps need to be modified to implement this extension. Specifically, we need to</p><ul>
+<li>modify the mesh generation process so that it<ul>
+<li>decomposes the domain into 2D elements</li>
+<li>assigns two coordinates for each nodal point.</li>
+</ul>
+</li>
+<li>define suitable (local) shape functions for the elements</li>
+<li>implement the computation of the elements' residuals and Jacobian matrices which correspond to the (integrated-by-parts) weak form of problem P2, <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k = \int_D \sum_{l=1}^2 \frac{\partial u(x_i)}{\partial x_l} \ \frac{\partial \psi_k(x_i)}{\partial x_l} \ dx_1 dx_2 + \int_D f(x_i) \ \psi_k(x_i) \ dx_1 dx_2 =0. \]" src="form_375.png"/>
+</p>
+</li>
+</ul>
+<p>There are many ways to decompose the 2D domain into finite elements. The figure below shows a discretisation using four-node quadrilaterals: a generalisation of the two-node 1D elements used in problem P1: </p><div class="image">
+<img src="fish_domain_with_mesh.gif" alt=""/>
+<div class="caption">
+Fish-shaped domain discretised with four-node quadrilateral </div></div>
+<p>  Each node in the mesh now has two coordinates and we denote the <img class="formulaInl" alt="$i$" src="form_376.png"/>-th coordinate of nodal point <img class="formulaInl" alt="$j$" src="form_146.png"/> by <img class="formulaInl" alt="$ X_{ij}$" src="form_377.png"/> where <img class="formulaInl" alt="$ i=1,2 $" src="form_378.png"/>. We parametrise the 2D elements by two local coordinates, <img class="formulaInl" alt="$ s_i \in [-1,1] \ (i=1,2)$" src="form_379.png"/>, where the local nodes 1,2,3 and 4 are located at <img class="formulaInl" alt="$(s_1,s_2)=(-1,-1), (1,-1), (-1,1)$" src="form_380.png"/> and <img class="formulaInl" alt="$(1,1)$" src="form_381.png"/>, respectively. We define the local shape functions as tensor products of the corresponding 1D linear shape functions, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_1(s_1,s_2) = \frac{1}{4}(1-s_1)(1-s_2) \]" src="form_382.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_2(s_1,s_2) = \frac{1}{4}(1+s_1)(1-s_2) \]" src="form_383.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_3(s_1,s_2) = \frac{1}{4}(1-s_1)(1+s_2) \]" src="form_384.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_4(s_1,s_2) = \frac{1}{4}(1+s_1)(1+s_2), \]" src="form_385.png"/>
+</p>
+<p> and note that shape function <img class="formulaInl" alt="$ \psi_j(s_1,s_2)$" src="form_386.png"/> is equal to 1 at local node <img class="formulaInl" alt="$j$" src="form_146.png"/> and it vanishes at the other local nodes, as required. The sketch below illustrates the corresponding global shape function associated with a node in the interior of the domain: </p><div class="image">
+<img src="fish_domain_with_shape_fct.gif" alt=""/>
+<div class="caption">
+Discretised fish-shaped domain with a single (global) shape </div></div>
+<p>  The solution <img class="formulaInl" alt="$u$" src="form_387.png"/> and the coordinates <img class="formulaInl" alt="$x_i$" src="form_388.png"/> in an isoparametric element <img class="formulaInl" alt="$e$" src="form_265.png"/> can be written as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u = \sum_{j=1}^n U_{{\cal J}(j,e)} \ \psi_j(s_1,s_2) \]" src="form_389.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_i = \sum_{j=1}^n X_{i{\cal J}(j,e)} \ \psi_j(s_1,s_2). \]" src="form_390.png"/>
+</p>
+<p>In 1D, the Jacobian of the mapping between <img class="formulaInl" alt="$x$" src="form_328.png"/> and <img class="formulaInl" alt="$s$" src="form_47.png"/> is given by <img class="formulaInl" alt="$ \widehat{\cal J} = dx/ds$" src="form_391.png"/>; in 2D the derivatives transform according to the linear system </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left( \begin{array}{c} \frac{\partial }{\partial s_1} \\ \frac{\partial }{\partial s_2} \end{array} \right) = \left( \begin{array}{cc} \frac{\partial x_1 }{\partial s_1} &amp; \frac{\partial x_2}{\partial s_1} \\ \frac{\partial x_1 }{\partial s_2} &amp; \frac{\partial x_2}{\partial s_2} \end{array} \right) \left( \begin{array}{c} \frac{\partial }{\partial x_1} \\ \frac{\partial }{\partial x_2} \end{array} \right), \]" src="form_392.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u}{\partial x_i} = \widehat{\cal J}_{ij}^{-1} \frac{\partial u}{\partial s_j} \]" src="form_393.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \widehat{\cal J}_{ij}^{-1} $" src="form_394.png"/> is the inverse of the Jacobian of the mapping (not to be confused with the Jacobian matrix in the Newton method!), </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \widehat{\cal J}_{ij} = \frac{\partial x_i}{\partial s_j} = \sum_{k=1}^n X_{i{\cal J}(k,e)} \frac{\partial \psi_k(s_1,s_2)}{\partial s_j}. \]" src="form_395.png"/>
+</p>
+<p> If </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \widehat{\cal J} = \det \widehat{\cal J}_{ij} \]" src="form_396.png"/>
+</p>
+<p> then the integrals over the elements are </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int \int_e (...) \ dx_1 dx_2 = \int_{-1}^{1} \int_{-1}^{1} (...) \ \widehat{\cal J} \ ds_1 ds_2. \]" src="form_397.png"/>
+</p>
+<p>The integrals over the elements can be evaluated by 2D Gauss rules </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_{-1}^1 \int_{-1}^1 {\cal F}(s_1,s_2) \ ds_1 ds_2 \approx \sum_{i=1}^{N_{int}} {\cal F}(S_{i1},S_{i2}) \ W_{i}, \]" src="form_398.png"/>
+</p>
+<p> where, for quadrilateral elements the integration points <img class="formulaInl" alt="$S_{i1},S_{i2} \ (i=1,...,N_{int})$" src="form_399.png"/> and weights <img class="formulaInl" alt="$ W_{i} \ (i=1,...,N_{int})$" src="form_400.png"/> are given by tensor products of the corresponding quantities in the 1D Gauss rules.</p>
+<hr  />
+<h2><a class="anchor" id="example_P2"></a>
+A 2D example</h2>
+<p>Here is an example of the finite element solution of problem P2, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{j=1}^2 \frac{\partial^2 u(x_i)}{\partial x_j^2} = f(x_i), \mbox{\ \ \ subject to $u|_{\partial D}=0$} \]" src="form_401.png"/>
+</p>
+<p> for </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ f(x_i) = -1\]" src="form_402.png"/>
+</p>
+<p> in the fish-shaped domain.</p>
+<div class="image">
+<img src="fish_poisson_soln.gif" alt=""/>
+<div class="caption">
+(Adaptive) solution of Poisson's equation in a 2D fish-shaped domain. </div></div>
+ <p>The solution was computed with <code>oomph-lib</code>, using a <a href="../../poisson/fish_poisson/html/index.html">driver code</a> discussed elsewhere. Initially, the solution is computed on a very coarse mesh which contains only four nine-node elements. Then the mesh is adaptively refined, guided by an automatic error estimator, and the problem is re-solved. This procedure is repeated several times. Note how the adaptation refines the mesh predominantly near the inward corners where the solution has an unbounded gradient and is therefore (always) under-resolved.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="towards_oo"></a>
+An object-oriented implementation</h1>
+<p>The steps described in Algorithm 10 can easily be implemented in a procedural language such as Fortran or C. The algorithm already contains a number of well-defined phases, which lend themselves to implementation as subroutines/functions. The various (global) parameters (the number of nodes and elements, etc) and lookup schemes (the relation between local and global equation numbers, the number of unknowns per element, etc.) generated during the setup phase would usually be passed to the subroutines (or functions) via common blocks (or <a href="http://c2.com/cgi/wiki?GlobalVariablesAreBad">(bad!) global data</a>).</p>
+<p>We shall now discuss <code>oomph-lib's</code> object-oriented implementation of the finite-element method. We begin by examining the "objects" that occur naturally in algorithm 10 and aim to re-distribute all global data so that it becomes member data of an appropriate object. Three "objects" already feature prominently in many parts of our algorithms:</p><ul>
+<li>the Nodes,</li>
+<li>the Elements,</li>
+<li>the Mesh.</li>
+</ul>
+<p>In the procedural version of the algorithm, data associated with Nodes is stored in global arrays. For instance, <img class="formulaInl" alt="$ X_{ij}$" src="form_377.png"/> stores the <img class="formulaInl" alt="$i$" src="form_376.png"/>-th coordinate of global node <img class="formulaInl" alt="$ j $" src="form_157.png"/>; similarly, <img class="formulaInl" alt="$ U_{j} $" src="form_403.png"/> stores the nodal value at global node <img class="formulaInl" alt="$j$" src="form_146.png"/>; etc. Nodal positions and values are accessed either directly via their global node number (which identifies Nodes within the Mesh) or indirectly via their local node number within an Element. The latter requires the global lookup scheme <img class="formulaInl" alt="$ J(j_{local},e)$" src="form_404.png"/> which determines the global node number of local Node <img class="formulaInl" alt="$j_{local}$" src="form_405.png"/> in Element <img class="formulaInl" alt="$e$" src="form_265.png"/>.</p>
+<p>In <code>oomph-lib's</code> object-oriented implementation, all nodal data is stored as member data of a Node object. Each Node stores</p><ul>
+<li>a (vector of) coordinates, and</li>
+<li>a nodal value</li>
+</ul>
+<p>as private member data. Access to these data is provided by member functions, e.g. </p><div class="fragment"><div class="line">Node node;</div>
+<div class="line"><span class="keywordtype">double</span> x_coord=node.x(0);</div>
+<div class="line"><span class="keywordtype">double</span> y_coord=node.x(1);</div>
+</div><!-- fragment --><p>[Note the C++ convention of starting indices at 0, rather than 1!]</p>
+<p>The Node object does <b>not</b> store a node number! This is because node numbers are only used to identify Nodes in specific contexts. For instance, as discussed above, the global node number identifies Nodes within the context of the global Mesh. Instead, we provide the Mesh object with a member function <code>Mesh::node_pt(...)</code> which provides pointer-based access to its constituent Nodes: </p><div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> j;</div>
+<div class="line">Mesh mesh;</div>
+<div class="line">Node* node_pt=mesh.node_pt(j);</div>
+</div><!-- fragment --><p> Thus, we obtain the <img class="formulaInl" alt="$x$" src="form_328.png"/>-coordinate of global node <img class="formulaInl" alt="$j$" src="form_146.png"/> via </p><div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> j;</div>
+<div class="line">Mesh mesh;</div>
+<div class="line"><span class="keywordtype">double</span> <a class="code" href="intro_8txt.html#a2f9cf9d0788477757896c69e94741dbb">x</a>=mesh.node_pt(j)-&gt;x(0);</div>
+</div><!-- fragment --><p> Similarly, rather than determining the coordinates of local node <img class="formulaInl" alt="$j_{local}$" src="form_405.png"/> in element <img class="formulaInl" alt="$e$" src="form_265.png"/> via the global lookup scheme </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_i = X_{iJ(j_{local},e)}, \]" src="form_406.png"/>
+</p>
+<p> we provide each <code>FiniteElement</code> with a member function that provides pointer-based access to its constituent Nodes </p><div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> j_local;</div>
+<div class="line">FiniteElement element;</div>
+<div class="line">Node* node_pt=element.node_pt(j_local);</div>
+</div><!-- fragment --><p>Similar procedures can be implemented for all other objects. We use the general design principle that all objects store only their "own" intrinsic data and we replace all global lookup schemes by pointer-based access functions. To guide the implementation, we observe the following inter-dependence between our three fundamental objects:</p>
+<ul>
+<li><b>The</b> <b>Nodes:</b> Nodes have positions and values. The nodal values are either "pinned" or "free", in which case they represent unknowns in the problem. The "pinned status" of a Node is indicated by its global equation number, either a unique non-negative number, for unknowns, or -1, for values that are "pinned". Note that this convention makes "-1" a "magic number" &ndash; bad practice! In <code>oomph-lib</code>, we set the equation number of pinned Nodes to <code>Node::Is_pinned</code> &ndash; a static data member of the Node class that is, in fact, set to -1.</li>
+<li><b>The</b> <b>Elements:</b> Elements contain Nodes and, within an Element, Nodes are identified by their local node numbers. Elements define their (local) shape functions and compute the elemental residual vector and Jacobian matrix, using data that is intrinsic to the Element. The entries in the Element's residual vector and its Jacobian matrix are labelled by local equation numbers, and each element stores a lookup scheme for the correspondence between local and global equation numbers.</li>
+<li><b>The</b> <b>Mesh:</b> The Mesh consists of Elements and Nodes. The mesh generation process defines the nodal positions and establishes the connectivity between the Nodes. Meshes typically have a number of boundaries and the Mesh defines which Nodes are located on which boundary. Nodes are identified by a global node number within the Mesh.</li>
+</ul>
+<p>An important difference between the three fundamental objects is the degree to which their member functions can be implemented in complete generality. For instance, the Node object is completely generic &ndash; there is only one type of Node, allowing the Node class to be fully implemented (as a "concrete class", in C++ terminology) in <code>oomph-lib</code>. Conversely, although all Meshes have a certain amount of common functionality (e.g. they all provide pointer-based access to their constituent nodes), the implementation of other functions are Mesh-specific. For instance, the Mesh generation process itself (typically performed in the Mesh constructor) depends on the domain geometry, the topology of its elements etc. Such functions must be implemented differently in different Meshes. <code>oomph-lib</code> therefore provides an abstract base class <code>Mesh</code>, which defines and implements all functions that are common to all Meshes. The class also defines a number of virtual functions to establish standard interfaces for functions that can only be implemented in a concrete (derived) class, such as <code>FishMesh</code>. The same principle applies to Elements which we endow with a three-level inheritance structure:</p><ul>
+<li>The abstract base class <code>GeneralisedElement</code> defines the common functionality that <em>all</em> Elements must have. All Elements must have member functions that compute the elemental Jacobian matrix and the elemental residual vector. The distinction between <code>GeneralisedElements</code> and <code>FiniteElements</code> is useful because many elements in <code>oomph-lib</code> are not finite elements, and, for instance, do not have nodes.</li>
+<li>The abstract base class <code>FiniteElement</code> is derived from <code>GeneralisedElement</code> and defines the common functionality that is shared by all finite elements. The <code>FiniteElement</code> class implements all functions that are generic for finite elements and specifies the interfaces for any remaining functions that cannot be implemented in complete generality. For instance, all finite elements have shape functions but their implementation depends on the geometry of the element.</li>
+<li><p class="startli">Finally, we have concrete Elements that are derived from <code>FiniteElement</code> and implement any virtual functions defined at lower levels; these Elements provide a specific discretisation of a specific PDE. The <code>QPoissonElement&lt;3,2&gt;</code> implements, inter alia, the computation of the element residual and the element Jacobian matrix for the 2D Poisson equation, in a nine-node quadrilateral element. [<b>Note:</b> In many cases, it is useful to sub-divide this level further by introducing an intermediate class that implements only the Element geometry; motivated by the observation that a specific (geometric) Element type (e.g. a 2D quadrilateral element) can form the basis for many different concrete Elements, e.g. Elements that solve the Poisson, Advection-Diffusion or Navier-Stokes equations. Examples of "geometric Elements" in <code>oomph-lib</code> include the <code>QElements</code>, a family of 1D line/2D quad/3D brick elements with linear (or {bi/tri}linear), quadratic (or {bi/tri}quadratic),... shape functions.]</p>
+<p class="startli">Algorithm 10 can easily be expressed in an object-oriented form because most steps involve operations that act exclusively on the objects' member data. Such operations are implemented as member functions of the appropriate objects.</p>
+<p class="startli">The steps in Algorithm 10 that do not fall into this category (the application of boundary conditions, setting of initial conditions and boundary values, etc) are usually problem-dependent and cannot be implemented in generality. However, certain steps (e.g. the solution of the nonlinear algebraic equations by Newton's method) are identical for all problems and should be implemented in a general form. For this purpose, we introduce a fourth fundamental object, <b>The</b> <b>Problem</b>, an abstract base class that provides member functions for generic procedures such as</p><ul>
+<li>setting up the equation numbering scheme</li>
+<li>solving the equations by Newton's method</li>
+</ul>
+<p class="startli">and stores</p><ul>
+<li>a pointer to the Mesh object</li>
+<li>a vector of pointers to the unknowns which must be updated during the solution of the nonlinear system by Newton's method.</li>
+</ul>
+<p class="startli">Concrete problems, such as the <code>FishPoissonProblem</code> discussed above, should be derived from the abstract <code>Problem</code> class. Any problem-specific steps can be implemented in member functions of the derived class, often the constructor.</p>
+</li>
+</ul>
+<p>Here is an overview of overall data structure, as required by the Poisson problems described above. The complete data structure implemented in <code>oomph-lib</code> contains numerous extensions to permit the solution of time-dependent problems, problems with many nodal values, problems in deforming domains, adaptive mesh refinement and many other features. A complete description of <a href="../../the_data_structure/html/index.html">the data structure </a> is given elsewhere.</p>
+<center> <table bgcolor="pink">
+<tr>
+<td><center> <table bgcolor="cornsilk">
+<tr>
+<td><center> <b>Data:</b> </center><ul>
+<li>Stores and provides access to:<ul>
+<li>(pointers to) to values ( = double precision numbers).</li>
+<li>(pointers to) the global equation numbers for all values.</li>
+</ul>
+</li>
+<li>Defines and implements the functions that:<ul>
+<li>allow pinning and unpinning of the values.</li>
+<li>assign global equation numbers to all unknown values.   </li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+<table bgcolor="cornsilk">
+<tr>
+<td><center> <b>Node:</b> <br  />
+[derived from <b>Data</b>] </center><ul>
+<li>Stores and provides access to:<ul>
+<li>the spatial dimension of the Node.</li>
+<li>the Eulerian coordinates of the Node.   </li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+</center></td></tr>
+</table>
+</center><center><table bgcolor="pink">
+<tr>
+<td><center> <table bgcolor="cornsilk">
+<tr>
+<td><center> <b>GeneralisedElement:</b> </center><ul>
+<li>Stores and provides access to:<ul>
+<li>the lookup scheme that stores the correspondence between local and global equation numbers.</li>
+</ul>
+</li>
+<li>Defines interfaces for the (virtual) functions that:<ul>
+<li>compute the element's residual vector and Jacobian matrix [<b>V1</b>].</li>
+</ul>
+</li>
+<li>Defines and implements functions that:<ul>
+<li>return the global equation number for a given local unknown.</li>
+<li>return the number of degrees of freedom (= the total number of unknowns) in the element.   </li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+</center> <center> <table bgcolor="cornsilk">
+<tr>
+<td><center> <b>FiniteElement:</b> <br  />
+[derived from <b>GeneralisedElement</b>] </center><ul>
+<li>Stores and provides access to:<ul>
+<li>(pointers to) the <code>Nodes</code>.</li>
+<li>(a pointer to) the spatial integration scheme.</li>
+<li>the lookup scheme that stores the local equation number of the <br  />
+ values stored at the <code>Nodes</code>.</li>
+</ul>
+</li>
+<li>Defines interfaces for the (virtual) functions that:<ul>
+<li>specify the dimension of the element (i.e. the number of local coordinates needed to parametrise its shape &ndash; this may differ from the spatial dimension of its <code>Nodes!</code>) [<b>V2</b>]</li>
+<li>specify the shape functions and their derivatives with respect to the local coordinates [<b>V3</b>]</li>
+<li>specify the number of nodal values that should be stored at each node, etc. [<b>V4</b>]</li>
+</ul>
+</li>
+<li>Defines and implements functions that:<ul>
+<li>construct <code>Nodes</code> of the required spatial dimension, with sufficient storage for the nodal values, etc. (This information is obtained by calls to the virtual functions [V4] that are defined at this level but only implemented for specific, derived elements).</li>
+<li>calculate the mapping between local and global (Eulerian) coordinates, in terms of the abstract shape functions defined in the virtual functions [V3]</li>
+<li>provide direct access to the nodal coordinates and the nodal values.</li>
+<li>assign local equation numbers to the values stored at the <code>Nodes</code>.   </li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+</center> <table class="doxtable">
+<tr>
+<td bgcolor="cornsilk"><center> <b>Specific Geometric Element:</b> [e.g. a <code>QElement</code>] <br  />
+ [derived from <b>FiniteElement</b>] </center><ul>
+<li>Implements functions that:<ul>
+<li>allocate the storage for the (pointers to the) element's <code>Nodes</code>.</li>
+<li>construct the spatial integration scheme and set the pointer defined in <code>FiniteElement</code>.</li>
+<li>define the dimension of the element, i.e. the number of local coordinates required to parametrise its shape. This implements the virtual function [V2] defined in <code>FiniteElement</code>.</li>
+<li>compute the shape functions and their derivatives with respect to the local coordinates. This implements the virtual functions [V3], defined in <code>FiniteElement</code>.</li>
+</ul>
+</li>
+</ul>
+<b>Note:</b><ul>
+<li>Templating is often used to implement entire families of geometric elements. For instance, the elements of the <code>QElement</code> family have two template parameters: One defines the dimension of the element, the other the number of nodes along a 1D element edge, so that a <code>QElement&lt;1,3&gt;</code> is a three-node line element, while a <code>QElement&lt;3,2&gt;</code> is an eight-node brick element, etc.  </li>
+</ul>
+</td><td bgcolor="cornsilk"><center> <b>Specific Equation:</b> [e.g. the <code>PoissonEquations</code>] <br  />
+ [derived from <b>FiniteElement</b>] </center><ul>
+<li>Stores and provides access to:<ul>
+<li>(function pointers to) any source functions, forcing terms, etc. that occur in the governing equations.</li>
+<li>(pointers to) any parameters in the governing equation.</li>
+</ul>
+</li>
+<li>Implements functions that:<ul>
+<li>compute the element's residual vector and Jacobian matrix, as defined by the virtual functions [V1] in <code>FiniteElement</code>. These functions have access to the geometric shape functions, the number of <code>Nodes</code>, the mapping between local and global coordinates, etc, via the (abstract and concrete) functions defined in <code>FiniteElement</code>.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Defines and implements functions that:<ul>
+<li>compute derived quantities of interest, e.g. the local flux</li>
+</ul>
+</li>
+</ul>
+<b>Notes:</b><ul>
+<li>Templating is often used to implement the equations in arbitrary spatial dimensions, such as <code>PoissonEquations&lt;DIM&gt;</code>.   </li>
+</ul>
+</td></tr>
+</table>
+<center> <table bgcolor="cornsilk">
+<tr>
+<td><center> <b>Specific Element:</b> [e.g. a <code>QPoissonElement</code>] <br  />
+ [Derived from a <b>Specific Equation </b> and a <b>Specific Geometric Element</b> by multiple inheritance] </center> <ul>
+<li>Implements functions that:<ul>
+<li>specify the number of nodal values etc. to be stored at each <code>Node</code>; this implements the virtual functions <br  />
+ [V4] defined in <code>FiniteElement</code>.</li>
+<li>provide any additional functionality that might be required at the <b>Specific</b> <b>Element</b> level. </li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+</center></td></tr>
+</table>
+</center> <center> </center><p><b>Note:</b> The subdivision into classes that define the element geometry and the specific equations to be solved is often useful but not compulsory. It is possible (and in some cases probably preferable) to provide the complete implementation for a specific element in a single class. Furthermore, not all elements in <code>oomph-lib</code> need to be <code>FiniteElements</code>. It is possible to formulate fully functional GeneralisedElements. Such elements are often used to formulate discrete constraints or boundary conditions.</p>
+<center> <table bgcolor="pink">
+<tr>
+<td><center> <table bgcolor="cornsilk">
+<tr>
+<td><center> <b>Mesh:</b> </center><ul>
+<li>Stores and provides access to:<ul>
+<li>(pointers to) its constituent <code>GeneralisedElements</code>.</li>
+<li>(pointers to) its constituent <code>Nodes</code>.</li>
+<li>(pointers to) the <code>Nodes</code> that are located on the <code>Mesh</code> boundaries.</li>
+</ul>
+</li>
+<li>Defines and implements functions that:<ul>
+<li>assign the global equation numbers for all nodal values.</li>
+<li>execute the <code>GeneralisedElement::assign_local_eqn_numbers()</code> function for all constituent GeneralisedElements.   </li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+</center> <center> <table bgcolor="cornsilk">
+<tr>
+<td><center> <b>Specific Mesh:</b> <br  />
+[derived from <b>Mesh</b>] </center><ul>
+<li>Defines and implements functions that:<ul>
+<li>create the Mesh. This is typically done in the Mesh constructor and involves the following tasks:<ul>
+<li>creating the <code>Mesh's</code> constituent <code>Nodes</code> and <code>GeneralisedElements</code> </li>
+<li>setting up the lookup schemes that allow direct access to <code>Nodes</code> and <code>FiniteElements</code> on the domain boundaries.   </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+</center>   </td></tr>
+</table>
+</center><center> <table bgcolor="pink">
+<tr>
+<td><center> <table bgcolor="cornsilk">
+<tr>
+<td><center> <b>Problem:</b> </center><ul>
+<li>Stores and provides access to:<ul>
+<li>(pointer to) the global <code>Mesh</code> which provides ordered access to all <code>Nodes</code> and <code>GeneralisedElements</code> in the <code>Problem</code>.</li>
+<li>(pointers to) any global <code>Data</code>.</li>
+<li>(pointer to) a <code>LinearSolver</code> that will be used in the Newton method.</li>
+<li>a vector of (pointers to) the <code>Problem's</code> degrees of freedom (= double precision numbers).</li>
+</ul>
+</li>
+<li>Defines and implements functions that:<ul>
+<li>set up the global and local equation numbering schemes.</li>
+<li>solve the (global) nonlinear system of equations, formally defined by the assembly of the <code>GeneralisedElement's</code> residual vectors, using Newton's method.</li>
+<li>perform a self test of all fundamental objects involved in the problem to check if the <code>Problem</code> has been set up properly.</li>
+<li>allow the entire Problem to be written to disk, in a format that allows restarts.   </li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+</center> <center> <table bgcolor="cornsilk">
+<tr>
+<td><center> <b>Specific Problem:</b> <br  />
+[derived from <b>Problem</b>] </center><ul>
+<li>Implements functions that:<ul>
+<li>Set up the problem. This is usually done in the <code>Problem</code> constructor and involves the following tasks:<ul>
+<li>creation of the <code>Mesh</code> object</li>
+<li>application of boundary conditions</li>
+<li>completion of the build process for any <code>GeneralisedElements</code> that need to be passed some global data, such as function pointers to source functions, etc.</li>
+<li>setting up the equation numbering scheme.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Defines and implements functions that:<ul>
+<li>perform parameter studies</li>
+<li>perform the post-processing of the results.   </li>
+</ul>
+</li>
+</ul>
+</td></tr>
+</table>
+</center>   </td></tr>
+</table>
+</center><hr  />
+ <hr  />
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aintro_8txt_html_a2f9cf9d0788477757896c69e94741dbb"><div class="ttname"><a href="intro_8txt.html#a2f9cf9d0788477757896c69e94741dbb">x</a></div><div class="ttdeci">f(x) \mbox{ \ \ \ \ for $x\in[0, 1]$ \ \ \ subject to \ \ \ } u(x=0)=g_0 \mbox{\ \ \ and \ \ \ } u(x=1)=g_1, \mbox{\hspace{3cm}} \f] where \f$ f(x)\f$ and the constants \f $g_0\f$ and \f $g_1\f$ are given. The 2D equivalent is given by \f[\frac{\partial^2 u(x_1, x_2)}{\partial x_1^{2}}+\frac{\partial^{2} u(x_1, x_2)}{\partial x_2^{2}}=f(x_1, x_2) \mbox{ \ \ \ \ for $(x_1, x_2)\in D$ \ \ \ subject to \ \ \ } u|_{\partial D}=g, \mbox{\hspace{5cm}} \f] where \f$ f(x_1, x_2)\f$ and \f$ g(x_1, x_2)\f$ are given.&lt; CENTER &gt;&lt; TABLE class=&quot;oomph-table&quot;&gt;&lt; TR &gt;&lt; TD class=&quot;panel panel-default&quot;&gt;&lt; CENTER class=&quot;panel-heading&quot;&gt;&lt; B &gt; A note on notation&lt;/B &gt;&lt;/CENTER &gt;&lt; div class=&quot;panel-body&quot;&gt; Throughout this document, we use index notation and write, e.g., \f$ u(x_1, x_2) \f$ as \f$ u(x_i) \f$. We do not explicitly state the range of free indices where it is clear from the context -- in the above example it would be equal to the spatial dimension of the problem. All mathematical derivations are presented using the &quot;natural&quot; numbering of the indices:e.g., the components of the 3D vector \f${\bf f}\f$ are \f$ f_1, f_2 \f$ and \f$ f_3 \f$. Unfortunately, this notation is inconsistent with the implementation of vectors(and most other standard &quot;containers&quot;) in C++where the indices start from 0 and the components of \c vector&lt; double &gt; \c f(3) are \c f[0], \c f[1] and \c f[2]. There is no elegant way to resolve this conflict. Adopting C++-style numbering in the theoretical development would make the mathematics look very odd(try it!) x</div><div class="ttdef"><b>Definition:</b> <a href="intro_8txt_source.html#l00069">intro.txt:69</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:53:36
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

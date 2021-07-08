@@ -1,0 +1,259 @@
+\hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{}\doxysection{oomph\+::Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+
+
+Time-\/harmonic linear elasticity upgraded to become projectable.  
+
+
+
+
+{\ttfamily \#include $<$time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.116427cm]{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a74a8d33ebab8ac2e3dc76b35a71eb794}{Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_aa7e723386c104650e9b8f7f3e856786b}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying time-\/harmonic linear elasticity elements the real and complex parts of the displacements are stored at the nodal values. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a2c8f219649069bad135a0a1ca7bcd907}{nfields\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 2$\ast$dim, corresponding to real and imag parts of the displacement components. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a4615e8cf28f14603d0215006db2218fc}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. (includes present value!) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a5d6d66a33214a0aff4e661fca8350a83}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of positional history values\+: Read out from positional timestepper (Note\+: count includes current value!) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_af5b374081d576de7e29fe579ea06fd7d}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+\begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_ac65b20b221ae454e0b236612ebd3e30b}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_acda6973da9b435f90d5e5be2f30836a6}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a773b3f4a6cf431ca3a95248f6f9766e6}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}
+
+Time-\/harmonic linear elasticity upgraded to become projectable. 
+
+Definition at line 504 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a74a8d33ebab8ac2e3dc76b35a71eb794}\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a74a8d33ebab8ac2e3dc76b35a71eb794}} 
+\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!ProjectableTimeHarmonicLinearElasticityElement@{ProjectableTimeHarmonicLinearElasticityElement}}
+\index{ProjectableTimeHarmonicLinearElasticityElement@{ProjectableTimeHarmonicLinearElasticityElement}!oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ProjectableTimeHarmonicLinearElasticityElement()}{ProjectableTimeHarmonicLinearElasticityElement()}}
+{\footnotesize\ttfamily template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. 
+
+
+
+Definition at line 512 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_aa7e723386c104650e9b8f7f3e856786b}\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_aa7e723386c104650e9b8f7f3e856786b}} 
+\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
+\index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
+{\footnotesize\ttfamily template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying time-\/harmonic linear elasticity elements the real and complex parts of the displacements are stored at the nodal values. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 521 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_ac65b20b221ae454e0b236612ebd3e30b}\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_ac65b20b221ae454e0b236612ebd3e30b}} 
+\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!get\_field@{get\_field}}
+\index{get\_field@{get\_field}!oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
+{\footnotesize\ttfamily template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 593 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References interpolated\+\_\+u(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), and oomph\+::\+Finite\+Element\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_af5b374081d576de7e29fe579ea06fd7d}\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_af5b374081d576de7e29fe579ea06fd7d}} 
+\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
+\index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
+{\footnotesize\ttfamily template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return Jacobian of mapping and shape functions of field fld at local coordinate s. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 576 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), and oomph\+::\+Finite\+Element\+::nnode().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a773b3f4a6cf431ca3a95248f6f9766e6}\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a773b3f4a6cf431ca3a95248f6f9766e6}} 
+\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!local\_equation@{local\_equation}}
+\index{local\_equation@{local\_equation}!oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
+{\footnotesize\ttfamily template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return local equation number of value j in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 643 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::nvalue().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a2c8f219649069bad135a0a1ca7bcd907}\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a2c8f219649069bad135a0a1ca7bcd907}} 
+\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
+\index{nfields\_for\_projection@{nfields\_for\_projection}!oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfields\_for\_projection()}{nfields\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nfields\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of fields to be projected\+: 2$\ast$dim, corresponding to real and imag parts of the displacement components. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 541 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dim().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a5d6d66a33214a0aff4e661fca8350a83}\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a5d6d66a33214a0aff4e661fca8350a83}} 
+\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
+\index{nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}!oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_coordinate\_projection()}{nhistory\_values\_for\_coordinate\_projection()}}
+{\footnotesize\ttfamily template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of positional history values\+: Read out from positional timestepper (Note\+: count includes current value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a3ed675dc7198203c1f}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 569 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a4615e8cf28f14603d0215006db2218fc}\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_a4615e8cf28f14603d0215006db2218fc}} 
+\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
+\index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of history values to be stored for fld-\/th field. (includes present value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b964663281f8740f43a5}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 548 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_acda6973da9b435f90d5e5be2f30836a6}\label{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement_acda6973da9b435f90d5e5be2f30836a6}} 
+\index{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
+\index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableTimeHarmonicLinearElasticityElement$<$ TIME\_HARMONIC\_LINEAR\_ELAST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
+{\footnotesize\ttfamily template$<$class T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement}{oomph\+::\+Projectable\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ T\+I\+M\+E\+\_\+\+H\+A\+R\+M\+O\+N\+I\+C\+\_\+\+L\+I\+N\+E\+A\+R\+\_\+\+E\+L\+A\+S\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return number of values in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 636 of file time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nnode().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{time__harmonic__linear__elasticity__elements_8h}{time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}\end{DoxyCompactItemize}

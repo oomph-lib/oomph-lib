@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members - Variables</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index_n"></a>- n -</h3><ul>
+<li>N
+: <a class="el" href="classoomph_1_1DenseMatrix.html#a23cb539be0b4ef0381b9f18e8e50f75e">oomph::DenseMatrix&lt; T &gt;</a>
+, <a class="el" href="classoomph_1_1OneDMesh.html#a6f6f4087d7dd7417c79f39f2c3a2865a">oomph::OneDMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1RankFiveTensor.html#aeea12f3e80605e2c7b6b4a8ec47bf91c">oomph::RankFiveTensor&lt; T &gt;</a>
+, <a class="el" href="classoomph_1_1RankFourTensor.html#a122b61b1b83d3a8df6976e735b89244c">oomph::RankFourTensor&lt; T &gt;</a>
+, <a class="el" href="classoomph_1_1RankThreeTensor.html#a2d5b895e2cb3543b16a64159041d52c3">oomph::RankThreeTensor&lt; T &gt;</a>
+, <a class="el" href="classoomph_1_1SparseMatrix.html#a8f15f962605f52fc75e8679efc6c8677">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;</a>
+, <a class="el" href="classoomph_1_1WarpedCircularDisk.html#ab2c77c18aedee5f502637dfbf96c0794">oomph::WarpedCircularDisk</a>
+</li>
+<li>N2deriv
+: <a class="el" href="classoomph_1_1FiniteElement.html#ad1600b17efbe61db27a4c622af1f28cf">oomph::FiniteElement</a>
+</li>
+<li>N_assigned_geom_data
+: <a class="el" href="classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement.html#a152b5d78d73fa32a82153b32633794c0">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;</a>
+</li>
+<li>N_dim
+: <a class="el" href="classoomph_1_1VorticitySmootherElement.html#afc0f746d35e11a455fe36df7be1069ec">oomph::VorticitySmootherElement&lt; ELEMENT &gt;</a>
+</li>
+<li>N_dof
+: <a class="el" href="classoomph_1_1HSL__MA42.html#aff8698e483ecef88d1a326ebe300a7ce">oomph::HSL_MA42</a>
+</li>
+<li>N_dof_types
+: <a class="el" href="classoomph_1_1BlockPreconditionableSpaceTimeElementBase.html#aec9b8d069ac86329806ba67042b7f81a">oomph::BlockPreconditionableSpaceTimeElementBase</a>
+</li>
+<li>N_element_in_period
+: <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#a52b49ec4c94b9cf480395c7cad123ced">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;</a>
+</li>
+<li>N_extruded_element
+: <a class="el" href="classoomph_1_1ExtrudedDomain.html#a413f4a9c0ed71a03fbafdc813ee23ddb">oomph::ExtrudedDomain</a>
+</li>
+<li>N_fluid_doftypes
+: <a class="el" href="classoomph_1_1LagrangeEnforcedFlowPreconditioner.html#a1c3f53129425f029bf918f33430c0635">oomph::LagrangeEnforcedFlowPreconditioner</a>
+</li>
+<li>N_fourier_pt
+: <a class="el" href="classoomph_1_1FourierDecomposedHelmholtzEquations.html#a3155682758b790c46ca6d2e9eea2fb92">oomph::FourierDecomposedHelmholtzEquations</a>
+</li>
+<li>N_lagrange_doftypes
+: <a class="el" href="classoomph_1_1LagrangeEnforcedFlowPreconditioner.html#a0d62cc72563ff5a2feae895d91ebca1e">oomph::LagrangeEnforcedFlowPreconditioner</a>
+</li>
+<li>N_node_1d
+: <a class="el" href="classoomph_1_1ExtrudedCubeMeshFromQuadMesh.html#a818f184ecbd22bbcbc945849821c6bd3">oomph::ExtrudedCubeMeshFromQuadMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>N_pml_fourier_pt
+: <a class="el" href="classoomph_1_1PMLFourierDecomposedHelmholtzEquations.html#a7afde5377aa7bdd59c51a5d73c1f6fca">oomph::PMLFourierDecomposedHelmholtzEquations</a>
+</li>
+<li>N_reagent
+: <a class="el" href="classoomph_1_1AdvectionDiffusionReactionEquations.html#a4f62236cc1ae06f2f7d8f4463d0796b5">oomph::AdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;</a>
+</li>
+<li>N_terms
+: <a class="el" href="classoomph_1_1FourierDecomposedHelmholtzDtNMesh.html#a79e18c0ebbb532a4d95dfb2f1f3570ba">oomph::FourierDecomposedHelmholtzDtNMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>N_tstorage
+: <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#ada223550212a4e5e5b6838f96e5a2170">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;</a>
+</li>
+<li>N_velocity_doftypes
+: <a class="el" href="classoomph_1_1LagrangeEnforcedFlowPreconditioner.html#afdf4577b51473f146c55cb6016b11797">oomph::LagrangeEnforcedFlowPreconditioner</a>
+</li>
+<li>NArnoldi
+: <a class="el" href="classoomph_1_1ANASAZI.html#a4ace6fc3f5e4503d9d1e42eb81c52fd8">oomph::ANASAZI</a>
+, <a class="el" href="classoomph_1_1ARPACK.html#a2f430dc8c1a8d890a90a95bdd66e97cc">oomph::ARPACK</a>
+</li>
+<li>Navier_stokes_mesh_pt
+: <a class="el" href="classoomph_1_1FSIPreconditioner.html#a201e3fcf3e13bd19b3871e9d3a734a1d">oomph::FSIPreconditioner</a>
+, <a class="el" href="classoomph_1_1NavierStokesSchurComplementPreconditioner.html#a6153711f9561d3d617b78d3035147326">oomph::NavierStokesSchurComplementPreconditioner</a>
+, <a class="el" href="classoomph_1_1SimpleFSIPreconditioner.html#a957b57dc5d05df008c15aec8f3c2ea0f">oomph::SimpleFSIPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>Navier_stokes_outflow_mesh_pt
+: <a class="el" href="classoomph_1_1NavierStokesImpedanceTractionElementBase.html#a460dbb1435dcd04e506b90d029513fc2">oomph::NavierStokesImpedanceTractionElementBase</a>
+, <a class="el" href="classoomph_1_1WomersleyImpedanceTubeBase.html#a59b41acf37d7bfce3c1a8676304915d7">oomph::WomersleyImpedanceTubeBase&lt; ELEMENT, DIM &gt;</a>
+</li>
+<li>Navier_stokes_preconditioner_is_block_preconditioner
+: <a class="el" href="classoomph_1_1LagrangeEnforcedFlowPreconditioner.html#abd83bbbc271df1e5d5f5a96054b0742a">oomph::LagrangeEnforcedFlowPreconditioner</a>
+</li>
+<li>Navier_stokes_preconditioner_pt
+: <a class="el" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">oomph::FSIPreconditioner</a>
+, <a class="el" href="classoomph_1_1LagrangeEnforcedFlowPreconditioner.html#a03e1316c85ca538a3b6912154e57fd42">oomph::LagrangeEnforcedFlowPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html#a5314b4734298c3de8f394a45792ba1c9">oomph::PseudoElasticFSIPreconditioner</a>
+</li>
+<li>Navier_stokes_schur_complement_preconditioner_pt
+: <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html#a438b2a5932c1fde633a73107043f0b09">oomph::PseudoElasticFSIPreconditioner</a>
+</li>
+<li>Navier_stokes_subsidiary_preconditioner_pt
+: <a class="el" href="classoomph_1_1GMRESBlockPreconditioner.html#a66b8ac42169d3247d5e3d9678e905b88">oomph::GMRESBlockPreconditioner</a>
+</li>
+<li>Nbin_x_for_area_transfer
+: <a class="el" href="classoomph_1_1RefineableTriangleMesh.html#a3a9e90149a6ccc80f1bccca77f46fb2e">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nbin_y_for_area_transfer
+: <a class="el" href="classoomph_1_1RefineableTriangleMesh.html#af2c7213f1094f8e81e7dbd28b60cff18">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nbulk_value
+: <a class="el" href="classoomph_1_1FaceElement.html#abd04b85066da626341294b5f0b97516e">oomph::FaceElement</a>
+</li>
+<li>Ncentre_spine
+: <a class="el" href="classoomph_1_1ChannelSpineMesh.html#af6ef1bb007083a803561e5f0062f820b">oomph::ChannelSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Ncol
+: <a class="el" href="classoomph_1_1MatrixVectorProduct.html#ade21a9a8255e6adab4ff367d3716f851">oomph::MatrixVectorProduct</a>
+</li>
+<li>Ncollapsible
+: <a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a607c389c3f0c06f0240d97aaca65cdf7">oomph::CollapsibleChannelDomain</a>
+, <a class="el" href="classoomph_1_1CollapsibleChannelMesh.html#aa59ff7af47247b2e17b13c45f83fcf86">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Ncopies
+: <a class="el" href="classoomph_1_1Data.html#a7e8dbdf96bf78658e85c1d7f81ff10dd">oomph::Data</a>
+</li>
+<li>Ndim
+: <a class="el" href="classoomph_1_1FpPressureAdvectionDiffusionProblem.html#a026383763af2a00ca7c9052f10098375">oomph::FpPressureAdvectionDiffusionProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1GeomObject.html#a6351e2d8fbd54ff23498eb6f77c905cc">oomph::GeomObject</a>
+, <a class="el" href="classoomph_1_1Node.html#aa8ce049e9f9de38fa20d886a5c6b8116">oomph::Node</a>
+</li>
+<li>Ndim_zeta
+: <a class="el" href="classCGALSamplePointContainer.html#abb1a9488b631a288360397b2587f69ea">CGALSamplePointContainer</a>
+</li>
+<li>Ndof
+: <a class="el" href="classoomph_1_1FoldHandler.html#aa3f143846245ecea5967ba7c79bedf56">oomph::FoldHandler</a>
+, <a class="el" href="classoomph_1_1GeneralisedElement.html#a954670a779127bc0f1ac514a93b3c0d1">oomph::GeneralisedElement</a>
+, <a class="el" href="classoomph_1_1HopfHandler.html#ac35b7c357ab453b686e80d8efe761945">oomph::HopfHandler</a>
+, <a class="el" href="classoomph_1_1PeriodicOrbitAssemblyHandler.html#aa04e0d8d17e69d64d53df7f9d7369fad">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;</a>
+, <a class="el" href="classoomph_1_1PitchForkHandler.html#a9314a176be55e7e9c5a359accfbec751">oomph::PitchForkHandler</a>
+</li>
+<li>Ndof_in_block
+: <a class="el" href="classoomph_1_1BlockPreconditioner.html#a874cbe5520d546ee24004e229a48037e">oomph::BlockPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>Ndof_storage_entries
+: <a class="el" href="classoomph_1_1GeneralisedTimeStepper.html#a5041d173762ea30fbd724281df50f1fc">oomph::GeneralisedTimeStepper</a>
+</li>
+<li>Ndof_types_in_mesh
+: <a class="el" href="classoomph_1_1BlockPreconditioner.html#a43e9d73ff61daa00aea4e4deff0d6aff">oomph::BlockPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>Ndown
+: <a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a1f9c92507803d56e12cf5cb24b11cd83">oomph::CollapsibleChannelDomain</a>
+, <a class="el" href="classoomph_1_1CollapsibleChannelMesh.html#acd1b5ea7597a079b4321d3658f2e03f4">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>neighborlist
+: <a class="el" href="structoomph_1_1TriangulateIO.html#a3f0a3004099431cc5f5a7293b24663d6">oomph::TriangulateIO</a>
+</li>
+<li>Neighbour_external_data
+: <a class="el" href="classoomph_1_1DGFaceElement.html#aa7fe8fcf78455ee3b01077607c91f483">oomph::DGFaceElement</a>
+</li>
+<li>Neighbour_face_pt
+: <a class="el" href="classoomph_1_1DGFaceElement.html#a35240deb7d12eebe5e45e5e4ff2e9dae">oomph::DGFaceElement</a>
+</li>
+<li>Neighbour_local_coordinate
+: <a class="el" href="classoomph_1_1DGFaceElement.html#ad3fdd3f2199aa96f3d01422ac2ffe944">oomph::DGFaceElement</a>
+</li>
+<li>Neighbour_periodic
+: <a class="el" href="classoomph_1_1TreeRoot.html#a735d46a67142786a3368d0e719513c03">oomph::TreeRoot</a>
+</li>
+<li>Neighbour_pt
+: <a class="el" href="classoomph_1_1TreeRoot.html#a01e5f3564f923fa92015c444d9f656bd">oomph::TreeRoot</a>
+</li>
+<li>Nelement
+: <a class="el" href="classoomph_1_1HermiteQuadMesh.html#a0d02ca1a2769955ce57f09616195bd27">oomph::HermiteQuadMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1PitchForkHandler.html#ac85263fcd40fa913e4bc12c07f6b7343">oomph::PitchForkHandler</a>
+</li>
+<li>New_node_pt
+: <a class="el" href="classoomph_1_1BackupMeshForProjection.html#ae921b83792e20e1a5d974e1e89be6489">oomph::BackupMeshForProjection&lt; GEOMETRIC_ELEMENT &gt;</a>
+</li>
+<li>Newmark_veloc_weight
+: <a class="el" href="classoomph_1_1NewmarkBDF.html#ac6032c3a2bd0f7c64f51ad3c84c3ca16">oomph::NewmarkBDF&lt; NSTEPS &gt;</a>
+</li>
+<li>Newton_solver_tolerance
+: <a class="el" href="classoomph_1_1Problem.html#a94536b381e949edf5bb4d44434e08925">oomph::Problem</a>
+</li>
+<li>Nexternal_data
+: <a class="el" href="classoomph_1_1GeneralisedElement.html#a7afd137fc0cdb37af809a9204cf74c2b">oomph::GeneralisedElement</a>
+</li>
+<li>Nexternal_element_storage
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a206553e5b109dd57b8b8fae4214d7a80">oomph::ElementWithExternalElement</a>
+</li>
+<li>Nexternal_interaction_field_data
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a0efc97c132438693e09a50224cb82a24">oomph::ElementWithExternalElement</a>
+</li>
+<li>Nexternal_interaction_geometric_data
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a36b114ef8617af637cf3726308cb4304">oomph::ElementWithExternalElement</a>
+</li>
+<li>Nface_nodal_dof
+: <a class="el" href="classoomph_1_1BiharmonicFluxElement.html#a00a39afe7b520d6439a29039d3ad041a">oomph::BiharmonicFluxElement&lt; DIM &gt;</a>
+</li>
+<li>Nflux
+: <a class="el" href="classoomph_1_1DGEulerFaceElement.html#ab2c9036ce56daafed333108febfa2f7b">oomph::DGEulerFaceElement&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1DGEulerFaceReflectionElement.html#afdb06b622f23a5ccea9173283d68df2f">oomph::DGEulerFaceReflectionElement&lt; ELEMENT &gt;</a>
+</li>
+<li>Nfourier_terms
+: <a class="el" href="classoomph_1_1HelmholtzDtNMesh.html#a606cf4e783b8dc36f3c059c4ec8ac503">oomph::HelmholtzDtNMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Ngeom_dof
+: <a class="el" href="classoomph_1_1ElementWithMovingNodes.html#a346ca61cbdd374683a4fa1073a5f5dec">oomph::ElementWithMovingNodes</a>
+</li>
+<li>Nglobal_edge
+: <a class="el" href="classoomph_1_1TetgenScaffoldMesh.html#aafa53fcb1ac09cc8667783a0d514def3">oomph::TetgenScaffoldMesh</a>
+, <a class="el" href="classoomph_1_1TriangleScaffoldMesh.html#a5a054950a3e779af9dbe9d062f1c2968">oomph::TriangleScaffoldMesh</a>
+</li>
+<li>Nglobal_face
+: <a class="el" href="classoomph_1_1TetgenScaffoldMesh.html#a0439e81af29a84043e68d107c71a66c4">oomph::TetgenScaffoldMesh</a>
+</li>
+<li>Nh
+: <a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a4ba20dfa61b6c342f2defbc0cdb47851">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;</a>
+</li>
+<li>Nhalf
+: <a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a1e58d18dd2231c785008efa07260e8da">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;</a>
+</li>
+<li>Ninteraction
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#ae0507a6c0f498237fa1e8fb75425374e">oomph::ElementWithExternalElement</a>
+</li>
+<li>Ninternal_data
+: <a class="el" href="classoomph_1_1GeneralisedElement.html#a79bc03b73044e8367ea24c42dd0775a1">oomph::GeneralisedElement</a>
+</li>
+<li>Nintpt
+: <a class="el" href="classoomph_1_1ElementWithExternalElement.html#adf2db2b2968b867ff989b31eda9cc245">oomph::ElementWithExternalElement</a>
+</li>
+<li>Niter
+: <a class="el" href="classoomph_1_1PicardConvergenceData.html#ac288000c0ccc529a43cf98dd9a6ef85c">oomph::PicardConvergenceData</a>
+</li>
+<li>NLagrangian
+: <a class="el" href="classoomph_1_1GeomObject.html#a11d8ac51be65ee822a6c782c5e079a2c">oomph::GeomObject</a>
+</li>
+<li>Nlagrangian
+: <a class="el" href="classoomph_1_1SolidNode.html#a155e729f069278a17a2828690ed67904">oomph::SolidNode</a>
+</li>
+<li>Nlagrangian_type
+: <a class="el" href="classoomph_1_1SolidNode.html#a6676ab16593ad3d062ac8e29906d7786">oomph::SolidNode</a>
+</li>
+<li>Nlayer
+: <a class="el" href="classoomph_1_1QuarterTubeDomain.html#a64d806aba766a439eb6ea49798c50b13">oomph::QuarterTubeDomain</a>
+, <a class="el" href="classoomph_1_1TubeDomain.html#a76d77b0dde9979a92e88d3d0143bf114">oomph::TubeDomain</a>
+</li>
+<li>Nleft
+: <a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ad0abd8837f9f0924b801d2fb78c69532">oomph::ChannelWithLeafletDomain</a>
+</li>
+<li>Nleft_spine
+: <a class="el" href="classoomph_1_1ChannelSpineMesh.html#a56fbad56271c5e37cd7f1d2de7b7bb36">oomph::ChannelSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nlevel
+: <a class="el" href="classoomph_1_1HelmholtzMGPreconditioner.html#af9e0d8ee42dc6f596f384cbe0d9ce882">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1MGSolver.html#a4ab5b80c46b66867e720b1c28f170bb9">oomph::MGSolver&lt; DIM &gt;</a>
+</li>
+<li>Nmaster
+: <a class="el" href="classoomph_1_1HangInfo.html#a9e256dac82251e6167bd7a763fe4e134">oomph::HangInfo</a>
+</li>
+<li>Nnewton_iter_taken
+: <a class="el" href="classoomph_1_1Problem.html#a3c05eefd6891808a1ef01e51288e0108">oomph::Problem</a>
+</li>
+<li>Nnodal_lagrangian_type
+: <a class="el" href="classoomph_1_1SolidFiniteElement.html#a82f45b63fe051fc87deae77c6e6106e6">oomph::SolidFiniteElement</a>
+</li>
+<li>Nnodal_position_type
+: <a class="el" href="classoomph_1_1FiniteElement.html#a8d7f2875e0aefb0b9433b4691383b3d8">oomph::FiniteElement</a>
+</li>
+<li>Nnode
+: <a class="el" href="classoomph_1_1FiniteElement.html#ac774e40aa69ffa0c895ce5519ef450d7">oomph::FiniteElement</a>
+</li>
+<li>Nnz
+: <a class="el" href="classoomph_1_1SparseMatrix.html#a1459cbaeec275fe95ba45f7d843b26a5">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;</a>
+</li>
+<li>No_independent_position
+: <a class="el" href="classoomph_1_1Node.html#a4c2238b9aeac6cf2236ec3e03f34736e">oomph::Node</a>
+</li>
+<li>Nodal_dimension
+: <a class="el" href="classoomph_1_1FiniteElement.html#a68c650c708d83bb66967dd0d127835c1">oomph::FiniteElement</a>
+</li>
+<li>Nodal_local_eqn
+: <a class="el" href="classoomph_1_1FiniteElement.html#ab77a6e52233c0e702dc59912cd97989d">oomph::FiniteElement</a>
+</li>
+<li>Nodal_spectral_order
+: <a class="el" href="classoomph_1_1SpectralElement.html#ad4be04e6b166472ca5f18d4678884994">oomph::SpectralElement</a>
+</li>
+<li>Node1_pt
+: <a class="el" href="classoomph_1_1Edge.html#abeda3f3e0e770102690fe836c1a5ee70">oomph::Edge</a>
+, <a class="el" href="classoomph_1_1TFace.html#aa41911e6e35f06bf9f22b4fda74ca96c">oomph::TFace</a>
+</li>
+<li>Node2_pt
+: <a class="el" href="classoomph_1_1Edge.html#ad5c83aa8a63acf45173e5f255477a9b9">oomph::Edge</a>
+, <a class="el" href="classoomph_1_1TFace.html#a1b04ddf3bdd8e1a0b6c469450d598070">oomph::TFace</a>
+</li>
+<li>Node3_pt
+: <a class="el" href="classoomph_1_1TFace.html#a5cda3e55b6d46d3b6b08b7bf91591b4d">oomph::TFace</a>
+</li>
+<li>Node_location_tolerance
+: <a class="el" href="classoomph_1_1FiniteElement.html#a56eb1d0614eb76ba1591285e3efed268">oomph::FiniteElement</a>
+</li>
+<li>Node_on_face
+: <a class="el" href="classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4.html#a75b99450e2a11a5d6723f86defde1cc0">oomph::TElement&lt; 2, NNODE_1D &gt;</a>
+, <a class="el" href="classoomph_1_1TElement_3_013_00_01NNODE__1D_01_4.html#a11d8a7cd61ba94009c98063233eee1e0">oomph::TElement&lt; 3, NNODE_1D &gt;</a>
+</li>
+<li>Node_pt
+: <a class="el" href="classoomph_1_1FiniteElement.html#a8714cf8113528d76a7ca7fa6004df734">oomph::FiniteElement</a>
+, <a class="el" href="classoomph_1_1Mesh.html#a0a42111e7eb200e5831f8b73c018b7dc">oomph::Mesh</a>
+, <a class="el" href="structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct.html#ad427be917515d875cabad06307e9ae03">oomph::TreeBasedRefineableMeshBase::HangHelperStruct</a>
+</li>
+<li>Node_spacing_fn
+: <a class="el" href="classoomph_1_1HermiteQuadMesh.html#a3b3cc55576538fc29e6975def870536f">oomph::HermiteQuadMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Node_update_element_pt
+: <a class="el" href="classoomph_1_1MacroElementNodeUpdateNode.html#acf9d92fa04ab826b442a25625b823e9f">oomph::MacroElementNodeUpdateNode</a>
+</li>
+<li>Node_update_fct_id
+: <a class="el" href="classoomph_1_1SpineNode.html#ac68d55d54018e5d908c5f81ab4b053a7">oomph::SpineNode</a>
+</li>
+<li>NodeOnFace
+: <a class="el" href="classoomph_1_1C1CurvedElement_3_012_00_01NNODE__1D_01_4.html#a7af342e536c2474e8377eab50c29415a">oomph::C1CurvedElement&lt; 2, NNODE_1D &gt;</a>
+</li>
+<li>Nodes_calculated
+: <a class="el" href="classoomph_1_1OneDimensionalLegendreShape.html#ac10397bf5b832aa567e4114d8e9a5795">oomph::OneDimensionalLegendreShape&lt; NNODE_1D &gt;</a>
+</li>
+<li>Nodes_on_boundary_pt
+: <a class="el" href="classoomph_1_1UnstructuredTwoDMeshGeometryBase.html#a9e7db5c7ede7df8d7e79e0f93567f047">oomph::UnstructuredTwoDMeshGeometryBase</a>
+</li>
+<li>Non_halo_proc_ID
+: <a class="el" href="classoomph_1_1Data.html#a5474e601ebda6bde66c179c92831729e">oomph::Data</a>
+, <a class="el" href="classoomph_1_1GeneralisedElement.html#a710f464f432f1704270931453118c60c">oomph::GeneralisedElement</a>
+</li>
+<li>Normal_points_into_fluid
+: <a class="el" href="classoomph_1_1FSIDiagHermiteShellElement.html#ab3c496db5b5f7a9321bd9a94559cb72c">oomph::FSIDiagHermiteShellElement</a>
+, <a class="el" href="classoomph_1_1FSIHermiteBeamElement.html#aee929633dfedcd059ed2f4236739be40">oomph::FSIHermiteBeamElement</a>
+, <a class="el" href="classoomph_1_1FSISolidTractionElement.html#ab00f0ee9793a838bac6d2343e42bfa7c">oomph::FSISolidTractionElement&lt; ELEMENT, DIM &gt;</a>
+</li>
+<li>Normal_sign
+: <a class="el" href="classoomph_1_1FaceElement.html#a5b72b90a01168c323f57714bb9a27376">oomph::FaceElement</a>
+</li>
+<li>Normal_to_clamping_plane
+: <a class="el" href="classoomph_1_1ClampedHermiteShellBoundaryConditionElement.html#ae374c52cd948ff9871ea64442ef8a53d">oomph::ClampedHermiteShellBoundaryConditionElement</a>
+</li>
+<li>Normal_to_symmetry_line
+: <a class="el" href="classoomph_1_1ClampedSlidingHermiteBeamBoundaryConditionElement.html#aa4bdf8a594367b91fd9ce7c0111ed543">oomph::ClampedSlidingHermiteBeamBoundaryConditionElement</a>
+</li>
+<li>Normalisation_element_pt
+: <a class="el" href="classoomph_1_1LinearisedNavierStokesEquations.html#a458b34ae6dfb06578ff198cecffcd8ba">oomph::LinearisedNavierStokesEquations</a>
+</li>
+<li>Normalisation_pt
+: <a class="el" href="classoomph_1_1LinearisedNavierStokesEigenfunctionNormalisationElement.html#ad80670e9f19b1ae05e22a3ddfa5c4955">oomph::LinearisedNavierStokesEigenfunctionNormalisationElement</a>
+</li>
+<li>normlist
+: <a class="el" href="structoomph_1_1TriangulateIO.html#aaee7350c5c3ac8105643724ae5455823">oomph::TriangulateIO</a>
+</li>
+<li>North_boundary_fn_pt
+: <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a78adac085b81bd6efed96c43f9c1f8a2">oomph::TopologicallyRectangularDomain</a>
+</li>
+<li>North_equivalent
+: <a class="el" href="classoomph_1_1QuadTreeRoot.html#a1fab216e4efa231e156c8406ad2e0da6">oomph::QuadTreeRoot</a>
+</li>
+<li>Np
+: <a class="el" href="classoomph_1_1RectangularQuadMesh.html#a92502c7536a6644ebffd806841cd4d98">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nplot_points
+: <a class="el" href="classoomph_1_1LineVisualiser.html#a6786384d0c0c0de6df02b2b9a34a298a">oomph::LineVisualiser</a>
+</li>
+<li>Npoint_element
+: <a class="el" href="classoomph_1_1BiharmonicFluidProblem.html#a2dd20deeccc884a3859577a0b7f636e9">oomph::BiharmonicFluidProblem&lt; DIM &gt;</a>
+</li>
+<li>Nposition_type
+: <a class="el" href="classoomph_1_1Node.html#aa5419b3f46cb65976e1e1311eed9419d">oomph::Node</a>
+</li>
+<li>Npost_smooth
+: <a class="el" href="classoomph_1_1HelmholtzMGPreconditioner.html#a752216736f7fcb37f8476cea03916b6e">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1MGSolver.html#aa1bd9b32d6d5976582b57739bcc10b6d">oomph::MGSolver&lt; DIM &gt;</a>
+</li>
+<li>Npre_smooth
+: <a class="el" href="classoomph_1_1HelmholtzMGPreconditioner.html#a61acd84465a380527d9b0dc24b85ac42">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1MGSolver.html#acc27929d8448646bd1551a32db05c966">oomph::MGSolver&lt; DIM &gt;</a>
+</li>
+<li>Nprec
+: <a class="el" href="classoomph_1_1PreconditionerArray.html#ab4f9ea783d3db44cf8401a0e0acc46dd">oomph::PreconditionerArray</a>
+</li>
+<li>Nproc_for_prec
+: <a class="el" href="classoomph_1_1PreconditionerArray.html#accd34d22e7859ca172624b3882127e30">oomph::PreconditionerArray</a>
+</li>
+<li>Npts
+: <a class="el" href="classoomph_1_1Gauss_3_011_00_012_01_4.html#a48c241a8812e55bb89ebcf0f7803050b">oomph::Gauss&lt; 1, 2 &gt;</a>
+, <a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#a303e40987dc6ba6449d7e43949055402">oomph::Gauss&lt; 1, 3 &gt;</a>
+, <a class="el" href="classoomph_1_1Gauss_3_011_00_014_01_4.html#a36bef895ea6c367b8dcf32e6d88c61cb">oomph::Gauss&lt; 1, 4 &gt;</a>
+, <a class="el" href="classoomph_1_1Gauss_3_012_00_012_01_4.html#a29a76ea48e4ca0de157896e062d981e3">oomph::Gauss&lt; 2, 2 &gt;</a>
+, <a class="el" href="classoomph_1_1Gauss_3_012_00_013_01_4.html#a3bf464fda1f207de75b487283cb9ffbb">oomph::Gauss&lt; 2, 3 &gt;</a>
+, <a class="el" href="classoomph_1_1Gauss_3_012_00_014_01_4.html#adbd25826c5d6062f49392d692584b56b">oomph::Gauss&lt; 2, 4 &gt;</a>
+, <a class="el" href="classoomph_1_1Gauss_3_013_00_012_01_4.html#afd00a1b937d71d1eb35a6ab66fff12eb">oomph::Gauss&lt; 3, 2 &gt;</a>
+, <a class="el" href="classoomph_1_1Gauss_3_013_00_013_01_4.html#ae94ce1237b25d8fde9af9e0484159e13">oomph::Gauss&lt; 3, 3 &gt;</a>
+, <a class="el" href="classoomph_1_1Gauss_3_013_00_014_01_4.html#a359a6f461bc51c7abd755d36828e1c12">oomph::Gauss&lt; 3, 4 &gt;</a>
+, <a class="el" href="classoomph_1_1GaussLegendre_3_011_00_01NPTS__1D_01_4.html#ac84ac1ef6d2afb4be37107c122bdf84a">oomph::GaussLegendre&lt; 1, NPTS_1D &gt;</a>
+, <a class="el" href="classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4.html#a897ee85bffd6510822ebdc5e60e5faee">oomph::GaussLegendre&lt; 2, NPTS_1D &gt;</a>
+, <a class="el" href="classoomph_1_1GaussLegendre_3_013_00_01NPTS__1D_01_4.html#a3aba142a86a348d09bbeca16f3d72f52">oomph::GaussLegendre&lt; 3, NPTS_1D &gt;</a>
+, <a class="el" href="classoomph_1_1GaussLobattoLegendre_3_011_00_01NPTS__1D_01_4.html#ac6fa89f49e0b7d26e344a5b8a4973b00">oomph::GaussLobattoLegendre&lt; 1, NPTS_1D &gt;</a>
+, <a class="el" href="classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4.html#ad7b67b90f29484aff0f1567467aaf9bc">oomph::GaussLobattoLegendre&lt; 2, NPTS_1D &gt;</a>
+, <a class="el" href="classoomph_1_1GaussLobattoLegendre_3_013_00_01NPTS__1D_01_4.html#a8c36b09f421300c58ee207ed82c049c4">oomph::GaussLobattoLegendre&lt; 3, NPTS_1D &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_011_00_012_01_4.html#ae020377e678963b7dcc514903776fbcb">oomph::TGauss&lt; 1, 2 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_011_00_013_01_4.html#ad3a9885b9b14798d71d0b96c54b0b2f4">oomph::TGauss&lt; 1, 3 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_011_00_014_01_4.html#a219e645b38a17ae8c5de31501d6b3eb7">oomph::TGauss&lt; 1, 4 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_011_00_015_01_4.html#a084afcbba5a00a9c929c5e865474b921">oomph::TGauss&lt; 1, 5 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_012_00_0113_01_4.html#a1f22b664968ea48225bec386d8c70efe">oomph::TGauss&lt; 2, 13 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_012_00_0116_01_4.html#a46633a677c921b569a7ac650ce2d69dd">oomph::TGauss&lt; 2, 16 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_012_00_012_01_4.html#a8b4cada9b62d5e8ee18fbd7e66780368">oomph::TGauss&lt; 2, 2 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_012_00_013_01_4.html#a056ee4c02fcdd17b4de1740bfa1b3473">oomph::TGauss&lt; 2, 3 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_012_00_014_01_4.html#aab349ebbfc0ea19da48b832686a2f5c8">oomph::TGauss&lt; 2, 4 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_012_00_015_01_4.html#a73143008f48d015ee81725470845a876">oomph::TGauss&lt; 2, 5 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_012_00_019_01_4.html#adbb9f0ca0c71842bbb3bfb56e5e4ac91">oomph::TGauss&lt; 2, 9 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_013_00_012_01_4.html#a70f1dcbd8c967a9e035f50899e6780be">oomph::TGauss&lt; 3, 2 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_013_00_013_01_4.html#a4580f87095e136688fa32b19ee08e5f8">oomph::TGauss&lt; 3, 3 &gt;</a>
+, <a class="el" href="classoomph_1_1TGauss_3_013_00_015_01_4.html#a24395831f6818cf1fbd9c5234d3026c2">oomph::TGauss&lt; 3, 5 &gt;</a>
+</li>
+<li>Nr
+: <a class="el" href="classoomph_1_1AnnularDomain.html#a0cbd02650762aa5b6baf32936e553b64">oomph::AnnularDomain</a>
+, <a class="el" href="classoomph_1_1QuarterPipeDomain.html#a18ac22546af74ac9b76a870d3f5abe3d">oomph::QuarterPipeDomain</a>
+, <a class="el" href="classoomph_1_1QuarterPipeMesh.html#a8e6896852024ecf017ab687926fb3ef3">oomph::QuarterPipeMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nrefined
+: <a class="el" href="classoomph_1_1RefineableMeshBase.html#a1a35c13c3c37ddc5ac2852217d903459">oomph::RefineableMeshBase</a>
+</li>
+<li>Nrefinement_overruled
+: <a class="el" href="classoomph_1_1RefineableMeshBase.html#ad52549170de34203f6b558c50ecf8f8f">oomph::RefineableMeshBase</a>
+</li>
+<li>Nright
+: <a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a11aac62965f9bcb7d4c0043669b28f15">oomph::ChannelWithLeafletDomain</a>
+</li>
+<li>Nright_spine
+: <a class="el" href="classoomph_1_1ChannelSpineMesh.html#a56f7259d8e5dee66a8c83ffe99526c62">oomph::ChannelSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nrow
+: <a class="el" href="classoomph_1_1BlockPreconditioner.html#a4aa232afd2a76adac97fb7d484a18c5e">oomph::BlockPreconditioner&lt; MATRIX &gt;</a>
+, <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html#a59d82db90a05edbf0444a31cc6b8f0b2">oomph::LinearAlgebraDistribution</a>
+, <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a6aa1a6b695761df04e32db3563b89272">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>Nrow_local
+: <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html#a3b9b16db35836dc06b160c0ddaa8e3fc">oomph::LinearAlgebraDistribution</a>
+</li>
+<li>Nrow_local_for_proc
+: <a class="el" href="classoomph_1_1PreconditionerArray.html#a513f1f2a2ded6e0b377f58c34bf47647">oomph::PreconditionerArray</a>
+</li>
+<li>Nrow_local_from_proc
+: <a class="el" href="classoomph_1_1PreconditionerArray.html#aa48322538496f9f1b6d2d89666972ac4">oomph::PreconditionerArray</a>
+</li>
+<li>Nrows_to_recv_for_get_block
+: <a class="el" href="classoomph_1_1BlockPreconditioner.html#a9ab1a931e617f04a50e8f24e75069628">oomph::BlockPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>Nrows_to_recv_for_get_ordered
+: <a class="el" href="classoomph_1_1BlockPreconditioner.html#a0265c19418608d4a525c159abe1b5c60">oomph::BlockPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>Nrows_to_send_for_get_block
+: <a class="el" href="classoomph_1_1BlockPreconditioner.html#a2080668f30dd3095ce8f2f791536f20e">oomph::BlockPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>Nrows_to_send_for_get_ordered
+: <a class="el" href="classoomph_1_1BlockPreconditioner.html#ae1a0fcd29c4939f668d2225b5d33caf5">oomph::BlockPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>Nsample_points_generated_per_element
+: <a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a68141123ff5252ad3dd1a8a5279282c4">oomph::SamplePointContainerParameters</a>
+, <a class="el" href="classSamplePointContainer.html#a849e85891df1b33c5cbe65c8a1f3b4f7">SamplePointContainer</a>
+</li>
+<li>Nsegment
+: <a class="el" href="classoomph_1_1TriangleMeshCurviLine.html#ad623f3774469ffacddb79862263ad70d">oomph::TriangleMeshCurviLine</a>
+</li>
+<li>Nspiral_chunk
+: <a class="el" href="classNonRefineableBinArray.html#a0f3b174a09336f9e941813a09f11b866">NonRefineableBinArray</a>
+, <a class="el" href="classoomph_1_1NonRefineableBinArrayParameters.html#a5d642bbd9718111a8aba118e2e911e4f">oomph::NonRefineableBinArrayParameters</a>
+</li>
+<li>Ntheta
+: <a class="el" href="classoomph_1_1AnnularDomain.html#a42f197d2b806a961395f905d947b3e6e">oomph::AnnularDomain</a>
+, <a class="el" href="classoomph_1_1QuarterPipeDomain.html#aeb912b40da8cd2883768fe2ca989e640">oomph::QuarterPipeDomain</a>
+, <a class="el" href="classoomph_1_1QuarterPipeMesh.html#aabe271e163f56d913936d12d2c4d0f21">oomph::QuarterPipeMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Ntstorage
+: <a class="el" href="classoomph_1_1PeriodicOrbitEquations.html#a15f995392ba77c8c664c22df656efb60">oomph::PeriodicOrbitEquations</a>
+</li>
+<li>Nu
+: <a class="el" href="classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor.html#a6515ab800426cca35c724f8d7f96e681">oomph::PMLTimeHarmonicIsotropicElasticityTensor</a>
+</li>
+<li>Nu_pt
+: <a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a02dd0294aa3239752ea7c21018ac65b6">oomph::AxisymFoepplvonKarmanEquations</a>
+, <a class="el" href="classoomph_1_1AxisymmetricLinearElasticityEquationsBase.html#a8cfaabdb9413b153d83b27d3efd9a28c">oomph::AxisymmetricLinearElasticityEquationsBase</a>
+, <a class="el" href="classoomph_1_1AxisymmetricPoroelasticityEquations.html#a50ce35e6b58e7ace1b741cbfb08babfc">oomph::AxisymmetricPoroelasticityEquations</a>
+, <a class="el" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a4afa5c268f1fea01e6cedf4bf7e17541">oomph::DisplacementBasedFoepplvonKarmanEquations</a>
+, <a class="el" href="classoomph_1_1GeneralisedHookean.html#ad719ee5ed6d1bcacb18fec3339ae98de">oomph::GeneralisedHookean</a>
+, <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#ae66d1130fccc98fc68d810f1f3e6b281">oomph::GeneralisedMooneyRivlin</a>
+, <a class="el" href="classoomph_1_1KirchhoffLoveShellEquations.html#a8e22a8093db86c446cca68b3db60d6a4">oomph::KirchhoffLoveShellEquations</a>
+, <a class="el" href="classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquationsBase.html#a49485f369ed9d1236c3ab84bf7bccfd7">oomph::TimeHarmonicFourierDecomposedLinearElasticityEquationsBase</a>
+</li>
+<li>Number
+: <a class="el" href="classoomph_1_1DocInfo.html#a184ec7b9fb261d77014f5203c8dbef75">oomph::DocInfo</a>
+, <a class="el" href="classoomph_1_1RefineableElement.html#a8ad33274f3d7a65f8a633b9d9fa36a1d">oomph::RefineableElement</a>
+</li>
+<li>Number_of_values_per_field
+: <a class="el" href="classoomph_1_1VorticitySmootherElement.html#ab25f6ce614cbcca04d1dc8e72baf80e6">oomph::VorticitySmootherElement&lt; ELEMENT &gt;</a>
+, <a class="el" href="classVorticityRecoveryHelpers_1_1RecoveryHelper.html#a8c3f392e7798627cc08eeebdfa535ff0">VorticityRecoveryHelpers::RecoveryHelper</a>
+</li>
+<li>numberofcorners
+: <a class="el" href="structoomph_1_1TriangulateIO.html#adc650f3a1adb293757fe9877c68bdc67">oomph::TriangulateIO</a>
+</li>
+<li>numberofedges
+: <a class="el" href="structoomph_1_1TriangulateIO.html#ab444b409c5d6d1796e114e5846c7fc1b">oomph::TriangulateIO</a>
+</li>
+<li>numberofholes
+: <a class="el" href="structoomph_1_1TriangulateIO.html#a3a79dd389487ce78445394dc8c042ad8">oomph::TriangulateIO</a>
+</li>
+<li>numberofpointattributes
+: <a class="el" href="structoomph_1_1TriangulateIO.html#acfe3391dd2b35a7f04de5935c112678c">oomph::TriangulateIO</a>
+</li>
+<li>numberofpoints
+: <a class="el" href="structoomph_1_1TriangulateIO.html#a56b30cea17878e957906eed61f53a9c2">oomph::TriangulateIO</a>
+</li>
+<li>numberofregions
+: <a class="el" href="structoomph_1_1TriangulateIO.html#a90d13cdb572f5d3cd51946cd10210b17">oomph::TriangulateIO</a>
+</li>
+<li>numberofsegments
+: <a class="el" href="structoomph_1_1TriangulateIO.html#a8344f9d855e55a6af46640818ba4886b">oomph::TriangulateIO</a>
+</li>
+<li>numberoftriangleattributes
+: <a class="el" href="structoomph_1_1TriangulateIO.html#a51314a924a2c9ddd3490853b81dc61a7">oomph::TriangulateIO</a>
+</li>
+<li>numberoftriangles
+: <a class="el" href="structoomph_1_1TriangulateIO.html#ab5df959c5a822eab8acedec2d806bae0">oomph::TriangulateIO</a>
+</li>
+<li>Numerical_zero_for_sparse_assembly
+: <a class="el" href="classoomph_1_1Problem.html#ad1a1ffc2bd685377ce7213452876b127">oomph::Problem</a>
+</li>
+<li>Nunrefined
+: <a class="el" href="classoomph_1_1RefineableMeshBase.html#a62c0314a69b2e40355a2aa27ff5ea133">oomph::RefineableMeshBase</a>
+</li>
+<li>Nup
+: <a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a16bef61c4223f92cb1b0c35e9a7ea7d2">oomph::CollapsibleChannelDomain</a>
+, <a class="el" href="classoomph_1_1CollapsibleChannelMesh.html#aafd1c6d21bb891f1188ba6eed1705a45">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nvalue
+: <a class="el" href="classoomph_1_1Data.html#a379d45fb0d0170fcdec06dbbc97a504d">oomph::Data</a>
+</li>
+<li>Nvcycle
+: <a class="el" href="classoomph_1_1HelmholtzMGPreconditioner.html#ad7cd9523e0f32e2f882d570db7382d6c">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1MGSolver.html#ab3d4af8ea6d7bc8d0a6f528cb669e920">oomph::MGSolver&lt; DIM &gt;</a>
+</li>
+<li>Nvector
+: <a class="el" href="classoomph_1_1DoubleMultiVector.html#a21446924694c708c6a82cc908bf7846a">oomph::DoubleMultiVector</a>
+</li>
+<li>Nx
+: <a class="el" href="classoomph_1_1FSIDrivenCavityMesh.html#a179f742e7bb521e8943107be3005d49b">oomph::FSIDrivenCavityMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1b2c0a2d1f8399713033953c72d399ee">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1SimpleCubicMesh.html#aad51fb31a4f31f2681740793a07594e9">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>NX
+: <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html#ab6ec406039698222f051d4ec977f1788">oomph::SimpleRectangularQuadMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nx
+: <a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html#ad997a3ce1ed243b79cd49eb5a0687844">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nx0
+: <a class="el" href="classoomph_1_1ChannelSpineMesh.html#a283ffaeb501cec43df629d3bf06fe3d2">oomph::ChannelSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nx1
+: <a class="el" href="classoomph_1_1BrethertonSpineMesh.html#af6ef10fb80559c3ad27a50116da60dcc">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1ChannelSpineMesh.html#a678cfaebcb1c7a31027188af36be9e7b">oomph::ChannelSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nx2
+: <a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a237b4f516eb3f74e42e190f2a23f93c3">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1ChannelSpineMesh.html#a46534250de6f75890463bfddefdb39cd">oomph::ChannelSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nx3
+: <a class="el" href="classoomph_1_1BrethertonSpineMesh.html#a26c57f832b7cdc495087cef7b54c98fd">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;</a>
+</li>
+<li>Nx_bl
+: <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a1a7ed3a5cd4c03c6254e5a8a0d3e532a">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Ny
+: <a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a13c992ef93891493c5da50afff67d38c">oomph::CollapsibleChannelDomain</a>
+, <a class="el" href="classoomph_1_1CollapsibleChannelMesh.html#afa8d1dceef1cafeb166794d9275a30a3">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1FSIDrivenCavityMesh.html#af80a5662c2f61ebe49caba4ab08886b9">oomph::FSIDrivenCavityMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1SimpleCubicMesh.html#a084445d7cbea1c3d1d67739934bbd6ec">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>NY
+: <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html#a6db96125790b46858fb00eef46bf7201">oomph::SimpleRectangularQuadMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Ny
+: <a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html#ac180c4ab5947c4417d912bc75621fc7e">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Ny1
+: <a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a3c6393ef6e626d7a2f2a8ea70c8addbe">oomph::ChannelWithLeafletDomain</a>
+, <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a614e800b8c5ba2963254e7e41bcfc9e2">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Ny2
+: <a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a1596a538b4263b42d20f9c098c5f2752">oomph::ChannelWithLeafletDomain</a>
+, <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a48a69edc318571675eed16c9154235e3">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Nz
+: <a class="el" href="classoomph_1_1ExtrudedCubeMeshFromQuadMesh.html#a7ed68dab30f3e19371a1729d82c3e83e">oomph::ExtrudedCubeMeshFromQuadMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1QuarterPipeDomain.html#aab1bf3900c3537c44942e3fee0c3d24e">oomph::QuarterPipeDomain</a>
+, <a class="el" href="classoomph_1_1QuarterPipeMesh.html#a43bdaa4d81e936615332c5d43e347413">oomph::QuarterPipeMesh&lt; ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1SimpleCubicMesh.html#a370e4597208fa51bca60750ae1e5acd4">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:03:35
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

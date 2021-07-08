@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::QuarterPipeMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1QuarterPipeMesh.html">QuarterPipeMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1QuarterPipeMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::QuarterPipeMesh&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::QuarterPipeMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1QuarterPipeMesh.png" usemap="#oomph::QuarterPipeMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::QuarterPipeMesh_3C_20ELEMENT_20_3E_map" name="oomph::QuarterPipeMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1SimpleCubicMesh.html" title="Simple cubic 3D Brick mesh class." alt="oomph::SimpleCubicMesh&lt; ELEMENT &gt;" shape="rect" coords="172,56,506,80"/>
+<area href="classoomph_1_1ElasticQuarterPipeMesh.html" alt="oomph::ElasticQuarterPipeMesh&lt; ELEMENT &gt;" shape="rect" coords="0,168,334,192"/>
+<area href="classoomph_1_1RefineableQuarterPipeMesh.html" title="Refineable quarter pipe mesh class." alt="oomph::RefineableQuarterPipeMesh&lt; ELEMENT &gt;" shape="rect" coords="344,168,678,192"/>
+<area href="classoomph_1_1ElasticRefineableQuarterPipeMesh.html" title="Refineable elastic quarter pipe mesh class." alt="oomph::ElasticRefineableQuarterPipeMesh&lt; ELEMENT &gt;" shape="rect" coords="0,224,334,248"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a453b84a80ccde867b8526e538135f43b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#a453b84a80ccde867b8526e538135f43b">QuarterPipeMesh</a> (const unsigned &amp;ntheta, const unsigned &amp;nr, const unsigned &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad78725440e4e87598fd9339653b28e61">nz</a>, const double &amp;rmin, const double &amp;rmax, const double &amp;length, <a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a76005d00b12acac8677ecc7c968ff865">TimeStepper</a> *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a453b84a80ccde867b8526e538135f43b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in various directions, the inner and outer radius and the length of the tube.  <a href="classoomph_1_1QuarterPipeMesh.html#a453b84a80ccde867b8526e538135f43b">More...</a><br /></td></tr>
+<tr class="separator:a453b84a80ccde867b8526e538135f43b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a591e2d48bd5783bb390093a18c066ffc"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#a591e2d48bd5783bb390093a18c066ffc">~QuarterPipeMesh</a> ()</td></tr>
+<tr class="memdesc:a591e2d48bd5783bb390093a18c066ffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor.  <a href="classoomph_1_1QuarterPipeMesh.html#a591e2d48bd5783bb390093a18c066ffc">More...</a><br /></td></tr>
+<tr class="separator:a591e2d48bd5783bb390093a18c066ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a1bce41d07ab1bdb8f83e77f59c4a1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#a9a1bce41d07ab1bdb8f83e77f59c4a1b">domain_pt</a> ()</td></tr>
+<tr class="memdesc:a9a1bce41d07ab1bdb8f83e77f59c4a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to domain.  <a href="classoomph_1_1QuarterPipeMesh.html#a9a1bce41d07ab1bdb8f83e77f59c4a1b">More...</a><br /></td></tr>
+<tr class="separator:a9a1bce41d07ab1bdb8f83e77f59c4a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9c9f2cbf3c9e722a480e7a056d4c63"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#ade9c9f2cbf3c9e722a480e7a056d4c63">domain_pt</a> () const</td></tr>
+<tr class="memdesc:ade9c9f2cbf3c9e722a480e7a056d4c63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to underlying domain.  <a href="classoomph_1_1QuarterPipeMesh.html#ade9c9f2cbf3c9e722a480e7a056d4c63">More...</a><br /></td></tr>
+<tr class="separator:ade9c9f2cbf3c9e722a480e7a056d4c63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1SimpleCubicMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1SimpleCubicMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1SimpleCubicMesh.html">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a6732b9fc1cd2e98929158fc300b5b0c7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a6732b9fc1cd2e98929158fc300b5b0c7">SimpleCubicMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad29c917ec0adb29ad24e086e3dcd0b6f">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a16979ec3b0e88fb37730415190021c1c">ny</a>, const unsigned &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad78725440e4e87598fd9339653b28e61">nz</a>, const double &amp;lx, const double &amp;ly, const double &amp;lz, <a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a76005d00b12acac8677ecc7c968ff865">TimeStepper</a> *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a6732b9fc1cd2e98929158fc300b5b0c7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in the x, y, and z directions, and the corresponding dimensions. Assume that the back lower left corner is located at (0,0,0) Timestepper defaults to Steady.  <a href="classoomph_1_1SimpleCubicMesh.html#a6732b9fc1cd2e98929158fc300b5b0c7">More...</a><br /></td></tr>
+<tr class="separator:a6732b9fc1cd2e98929158fc300b5b0c7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d32a0d85ab3ec9ac3e52cad0bb81d7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a22d32a0d85ab3ec9ac3e52cad0bb81d7">SimpleCubicMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad29c917ec0adb29ad24e086e3dcd0b6f">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a16979ec3b0e88fb37730415190021c1c">ny</a>, const unsigned &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad78725440e4e87598fd9339653b28e61">nz</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, const double &amp;zmin, const double &amp;zmax, <a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a76005d00b12acac8677ecc7c968ff865">TimeStepper</a> *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a22d32a0d85ab3ec9ac3e52cad0bb81d7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass the number of elements in the x,y and z directions and the correspoding minimum and maximum values of the coordinates in each direction.  <a href="classoomph_1_1SimpleCubicMesh.html#a22d32a0d85ab3ec9ac3e52cad0bb81d7">More...</a><br /></td></tr>
+<tr class="separator:a22d32a0d85ab3ec9ac3e52cad0bb81d7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad29c917ec0adb29ad24e086e3dcd0b6f inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad29c917ec0adb29ad24e086e3dcd0b6f">nx</a> () const</td></tr>
+<tr class="memdesc:ad29c917ec0adb29ad24e086e3dcd0b6f inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for number of elements in x directions.  <a href="classoomph_1_1SimpleCubicMesh.html#ad29c917ec0adb29ad24e086e3dcd0b6f">More...</a><br /></td></tr>
+<tr class="separator:ad29c917ec0adb29ad24e086e3dcd0b6f inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16979ec3b0e88fb37730415190021c1c inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a16979ec3b0e88fb37730415190021c1c">ny</a> () const</td></tr>
+<tr class="memdesc:a16979ec3b0e88fb37730415190021c1c inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for number of elements in y directions.  <a href="classoomph_1_1SimpleCubicMesh.html#a16979ec3b0e88fb37730415190021c1c">More...</a><br /></td></tr>
+<tr class="separator:a16979ec3b0e88fb37730415190021c1c inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad78725440e4e87598fd9339653b28e61 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad78725440e4e87598fd9339653b28e61">nz</a> () const</td></tr>
+<tr class="memdesc:ad78725440e4e87598fd9339653b28e61 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for number of elements in y directions.  <a href="classoomph_1_1SimpleCubicMesh.html#ad78725440e4e87598fd9339653b28e61">More...</a><br /></td></tr>
+<tr class="separator:ad78725440e4e87598fd9339653b28e61 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aabe271e163f56d913936d12d2c4d0f21"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#aabe271e163f56d913936d12d2c4d0f21">Ntheta</a></td></tr>
+<tr class="memdesc:aabe271e163f56d913936d12d2c4d0f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements azimuthal direction.  <a href="classoomph_1_1QuarterPipeMesh.html#aabe271e163f56d913936d12d2c4d0f21">More...</a><br /></td></tr>
+<tr class="separator:aabe271e163f56d913936d12d2c4d0f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e6896852024ecf017ab687926fb3ef3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#a8e6896852024ecf017ab687926fb3ef3">Nr</a></td></tr>
+<tr class="memdesc:a8e6896852024ecf017ab687926fb3ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements radial direction.  <a href="classoomph_1_1QuarterPipeMesh.html#a8e6896852024ecf017ab687926fb3ef3">More...</a><br /></td></tr>
+<tr class="separator:a8e6896852024ecf017ab687926fb3ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43bdaa4d81e936615332c5d43e347413"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#a43bdaa4d81e936615332c5d43e347413">Nz</a></td></tr>
+<tr class="memdesc:a43bdaa4d81e936615332c5d43e347413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements axial direction.  <a href="classoomph_1_1QuarterPipeMesh.html#a43bdaa4d81e936615332c5d43e347413">More...</a><br /></td></tr>
+<tr class="separator:a43bdaa4d81e936615332c5d43e347413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa75ba32bf5f825254f1e92a00109af3e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#aa75ba32bf5f825254f1e92a00109af3e">Rmin</a></td></tr>
+<tr class="memdesc:aa75ba32bf5f825254f1e92a00109af3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inner radius.  <a href="classoomph_1_1QuarterPipeMesh.html#aa75ba32bf5f825254f1e92a00109af3e">More...</a><br /></td></tr>
+<tr class="separator:aa75ba32bf5f825254f1e92a00109af3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab080d887f508016140bac78d82be37d4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#ab080d887f508016140bac78d82be37d4">Rmax</a></td></tr>
+<tr class="memdesc:ab080d887f508016140bac78d82be37d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outer radius.  <a href="classoomph_1_1QuarterPipeMesh.html#ab080d887f508016140bac78d82be37d4">More...</a><br /></td></tr>
+<tr class="separator:ab080d887f508016140bac78d82be37d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00530b53de926a9a4f37cace7e2ffbdb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#a00530b53de926a9a4f37cace7e2ffbdb">Length</a></td></tr>
+<tr class="memdesc:a00530b53de926a9a4f37cace7e2ffbdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length.  <a href="classoomph_1_1QuarterPipeMesh.html#a00530b53de926a9a4f37cace7e2ffbdb">More...</a><br /></td></tr>
+<tr class="separator:a00530b53de926a9a4f37cace7e2ffbdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b3656a71bc9f6159aa237d3a76d5a15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeMesh.html#a1b3656a71bc9f6159aa237d3a76d5a15">Domain_pt</a></td></tr>
+<tr class="memdesc:a1b3656a71bc9f6159aa237d3a76d5a15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to domain.  <a href="classoomph_1_1QuarterPipeMesh.html#a1b3656a71bc9f6159aa237d3a76d5a15">More...</a><br /></td></tr>
+<tr class="separator:a1b3656a71bc9f6159aa237d3a76d5a15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1SimpleCubicMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1SimpleCubicMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1SimpleCubicMesh.html">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:aad51fb31a4f31f2681740793a07594e9 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#aad51fb31a4f31f2681740793a07594e9">Nx</a></td></tr>
+<tr class="memdesc:aad51fb31a4f31f2681740793a07594e9 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in x direction.  <a href="classoomph_1_1SimpleCubicMesh.html#aad51fb31a4f31f2681740793a07594e9">More...</a><br /></td></tr>
+<tr class="separator:aad51fb31a4f31f2681740793a07594e9 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a084445d7cbea1c3d1d67739934bbd6ec inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a084445d7cbea1c3d1d67739934bbd6ec">Ny</a></td></tr>
+<tr class="memdesc:a084445d7cbea1c3d1d67739934bbd6ec inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in y direction.  <a href="classoomph_1_1SimpleCubicMesh.html#a084445d7cbea1c3d1d67739934bbd6ec">More...</a><br /></td></tr>
+<tr class="separator:a084445d7cbea1c3d1d67739934bbd6ec inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370e4597208fa51bca60750ae1e5acd4 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a370e4597208fa51bca60750ae1e5acd4">Nz</a></td></tr>
+<tr class="memdesc:a370e4597208fa51bca60750ae1e5acd4 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in y direction.  <a href="classoomph_1_1SimpleCubicMesh.html#a370e4597208fa51bca60750ae1e5acd4">More...</a><br /></td></tr>
+<tr class="separator:a370e4597208fa51bca60750ae1e5acd4 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad04c180e97b51e795d79759916006d0f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad04c180e97b51e795d79759916006d0f">Xmin</a></td></tr>
+<tr class="memdesc:ad04c180e97b51e795d79759916006d0f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of x coordinate.  <a href="classoomph_1_1SimpleCubicMesh.html#ad04c180e97b51e795d79759916006d0f">More...</a><br /></td></tr>
+<tr class="separator:ad04c180e97b51e795d79759916006d0f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdfcb28e93c910a57b9c6ab116f5fd2f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#afdfcb28e93c910a57b9c6ab116f5fd2f">Xmax</a></td></tr>
+<tr class="memdesc:afdfcb28e93c910a57b9c6ab116f5fd2f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of x coordinate.  <a href="classoomph_1_1SimpleCubicMesh.html#afdfcb28e93c910a57b9c6ab116f5fd2f">More...</a><br /></td></tr>
+<tr class="separator:afdfcb28e93c910a57b9c6ab116f5fd2f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a004fc52edde081924073c49b0dd853 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a7a004fc52edde081924073c49b0dd853">Ymin</a></td></tr>
+<tr class="memdesc:a7a004fc52edde081924073c49b0dd853 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of y coordinate.  <a href="classoomph_1_1SimpleCubicMesh.html#a7a004fc52edde081924073c49b0dd853">More...</a><br /></td></tr>
+<tr class="separator:a7a004fc52edde081924073c49b0dd853 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7933aa6e3d1755d6a5fbcc2a16af79a7 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a7933aa6e3d1755d6a5fbcc2a16af79a7">Ymax</a></td></tr>
+<tr class="memdesc:a7933aa6e3d1755d6a5fbcc2a16af79a7 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of y coordinate.  <a href="classoomph_1_1SimpleCubicMesh.html#a7933aa6e3d1755d6a5fbcc2a16af79a7">More...</a><br /></td></tr>
+<tr class="separator:a7933aa6e3d1755d6a5fbcc2a16af79a7 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af01c08e1e33360eaa2102d0bebb11bcd inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#af01c08e1e33360eaa2102d0bebb11bcd">Zmin</a></td></tr>
+<tr class="memdesc:af01c08e1e33360eaa2102d0bebb11bcd inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of z coordinate.  <a href="classoomph_1_1SimpleCubicMesh.html#af01c08e1e33360eaa2102d0bebb11bcd">More...</a><br /></td></tr>
+<tr class="separator:af01c08e1e33360eaa2102d0bebb11bcd inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec11ab3ae84b1ba658024d833b7eafbf inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#aec11ab3ae84b1ba658024d833b7eafbf">Zmax</a></td></tr>
+<tr class="memdesc:aec11ab3ae84b1ba658024d833b7eafbf inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of z coordinate.  <a href="classoomph_1_1SimpleCubicMesh.html#aec11ab3ae84b1ba658024d833b7eafbf">More...</a><br /></td></tr>
+<tr class="separator:aec11ab3ae84b1ba658024d833b7eafbf inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1SimpleCubicMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1SimpleCubicMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1SimpleCubicMesh.html">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:aea141bf600aaed7c7c9ccfa3f4f1edfc inherit pro_methods_classoomph_1_1SimpleCubicMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#aea141bf600aaed7c7c9ccfa3f4f1edfc">build_mesh</a> (<a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a76005d00b12acac8677ecc7c968ff865">TimeStepper</a> *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aea141bf600aaed7c7c9ccfa3f4f1edfc inherit pro_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic mesh construction function: contains all the hard work.  <a href="classoomph_1_1SimpleCubicMesh.html#aea141bf600aaed7c7c9ccfa3f4f1edfc">More...</a><br /></td></tr>
+<tr class="separator:aea141bf600aaed7c7c9ccfa3f4f1edfc inherit pro_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::QuarterPipeMesh&lt; ELEMENT &gt;</h3>
+
+<p>Non refineable quarter pipe mesh class Deform a simple cubic mesh into a quarter pipe r: radial direction theta: azimuthal direction z: axis direction </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00055">55</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a453b84a80ccde867b8526e538135f43b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453b84a80ccde867b8526e538135f43b">&#9670;&nbsp;</a></span>QuarterPipeMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1QuarterPipeMesh.html">QuarterPipeMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ntheta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>rmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>rmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a76005d00b12acac8677ecc7c968ff865">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass number of elements in various directions, the inner and outer radius and the length of the tube. </p>
+<p>Constructor: Pass number of elements in various directions, the inner and outer radius and the length of the tube </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00041">41</a> of file <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html">quarter_pipe_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00102">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Domain_pt</a>, <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00099">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Length</a>, <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00087">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Nr</a>, <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00084">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Ntheta</a>, <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00090">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Nz</a>, <a class="el" href="simple__cubic__mesh_8template_8h_source.html#l00095">oomph::SimpleCubicMesh&lt; ELEMENT &gt;::nz()</a>, <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00096">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Rmax</a>, and <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00093">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Rmin</a>.</p>
+
+</div>
+</div>
+<a id="a591e2d48bd5783bb390093a18c066ffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a591e2d48bd5783bb390093a18c066ffc">&#9670;&nbsp;</a></span>~QuarterPipeMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::~<a class="el" href="classoomph_1_1QuarterPipeMesh.html">QuarterPipeMesh</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00070">70</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00102">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9a1bce41d07ab1bdb8f83e77f59c4a1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a1bce41d07ab1bdb8f83e77f59c4a1b">&#9670;&nbsp;</a></span>domain_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a>* <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::domain_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00076">76</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00102">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+</div>
+</div>
+<a id="ade9c9f2cbf3c9e722a480e7a056d4c63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade9c9f2cbf3c9e722a480e7a056d4c63">&#9670;&nbsp;</a></span>domain_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a>* <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::domain_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to underlying domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00079">79</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00102">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1b3656a71bc9f6159aa237d3a76d5a15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b3656a71bc9f6159aa237d3a76d5a15">&#9670;&nbsp;</a></span>Domain_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a>* <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::Domain_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00102">102</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00076">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::domain_pt()</a>, <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00222">oomph::ElasticRefineableQuarterPipeMesh&lt; ELEMENT &gt;::ElasticRefineableQuarterPipeMesh()</a>, <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00041">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::QuarterPipeMesh()</a>, and <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00070">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::~QuarterPipeMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a00530b53de926a9a4f37cace7e2ffbdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00530b53de926a9a4f37cace7e2ffbdb">&#9670;&nbsp;</a></span>Length</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::Length</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00099">99</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00041">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::QuarterPipeMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a8e6896852024ecf017ab687926fb3ef3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e6896852024ecf017ab687926fb3ef3">&#9670;&nbsp;</a></span>Nr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::Nr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements radial direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00087">87</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00041">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::QuarterPipeMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aabe271e163f56d913936d12d2c4d0f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabe271e163f56d913936d12d2c4d0f21">&#9670;&nbsp;</a></span>Ntheta</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::Ntheta</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements azimuthal direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00084">84</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00041">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::QuarterPipeMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a43bdaa4d81e936615332c5d43e347413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43bdaa4d81e936615332c5d43e347413">&#9670;&nbsp;</a></span>Nz</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::Nz</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements axial direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00090">90</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00041">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::QuarterPipeMesh()</a>.</p>
+
+</div>
+</div>
+<a id="ab080d887f508016140bac78d82be37d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab080d887f508016140bac78d82be37d4">&#9670;&nbsp;</a></span>Rmax</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::Rmax</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Outer radius. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00096">96</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00041">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::QuarterPipeMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aa75ba32bf5f825254f1e92a00109af3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa75ba32bf5f825254f1e92a00109af3e">&#9670;&nbsp;</a></span>Rmin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1QuarterPipeMesh.html">oomph::QuarterPipeMesh</a>&lt; ELEMENT &gt;::Rmin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inner radius. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__mesh_8template_8h_source.html#l00093">93</a> of file <a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__mesh_8template_8cc_source.html#l00041">oomph::QuarterPipeMesh&lt; ELEMENT &gt;::QuarterPipeMesh()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="quarter__pipe__mesh_8template_8h_source.html">quarter_pipe_mesh.template.h</a></li>
+<li><a class="el" href="quarter__pipe__mesh_8template_8cc_source.html">quarter_pipe_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:19:30
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

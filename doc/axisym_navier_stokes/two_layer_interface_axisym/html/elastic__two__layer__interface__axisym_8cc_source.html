@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: elastic_two_layer_interface_axisym.cc Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_ddb094a380b94394dbbcf95a63b535e6.html">demo_drivers</a></li><li class="navelem"><a class="el" href="dir_3386d0f77feb48d210654cc33f7e70ac.html">axisym_navier_stokes</a></li><li class="navelem"><a class="el" href="dir_7e796b2233db9806c660cd63f8ef36d5.html">two_layer_interface_axisym</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">elastic_two_layer_interface_axisym.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="elastic__two__layer__interface__axisym_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Driver for an adaptive axisymmetric two fluid interface problem,</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// where the mesh is deformed using a pseudo-solid node-update strategy</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Generic oomph-lib header</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// Axisymmetric Navier-Stokes headers</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;axisym_navier_stokes.h&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;navier_stokes.h&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// Interface headers</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;fluid_interface.h&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// Constitutive law headers</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;constitutive.h&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// Solid headers</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;solid.h&quot;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// Bessel function headers</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;oomph_crbond_bessel.h&quot;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// The mesh</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &quot;meshes/rectangular_quadmesh.h&quot;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">using namespace </span>oomph;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">//==start_of_namespace====================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html">   59</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> /// Reynolds number</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">   63</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a> = 5.0;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> /// Strouhal number</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">   66</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">St</a> = 1.0;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> /// Womersley number (Reynolds x Strouhal)</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">   69</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">ReSt</a> = 5.0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> /// Product of Reynolds number and inverse of Froude number</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">   72</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">ReInvFr</a> = 5.0;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> /// \short Ratio of viscosity in upper fluid to viscosity in lower</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> /// fluid. Reynolds number etc. is based on viscosity in lower fluid.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">   76</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">Viscosity_Ratio</a> = 0.1;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> /// \short Ratio of density in upper fluid to density in lower</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"> /// fluid. Reynolds number etc. is based on density in lower fluid.</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#a80a34b6dfb7e1501966b8d6c7501e718">   80</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a80a34b6dfb7e1501966b8d6c7501e718">Density_Ratio</a> = 0.5;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> /// Capillary number</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">   83</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Ca</a> = 0.01;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> /// Direction of gravity</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span> Vector&lt;double&gt; <a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">G</a>(3);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> /// Pseudo-solid Poisson ratio</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">   89</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a> = 0.1;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;} <span class="comment">// End of namespace</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">//==start_of_specific_mesh_class==========================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">/// Two layer mesh which employs a pseudo-solid node-update strategy.</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">/// This class is essentially a wrapper to an</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">/// ElasticRefineableRectangularQuadMesh, with an additional boundary</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">/// to represent the interface between the two fluid layers.</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classElasticRefineableTwoLayerMesh.html">  106</a></span>&#160;<span class="keyword">class </span><a class="code" href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh</a> :</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; <span class="keyword">public</span> <span class="keyword">virtual</span> ElasticRefineableRectangularQuadMesh&lt;ELEMENT&gt;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"> /// \short Constructor: Pass number of elements in x-direction, number of</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"> /// elements in y-direction in bottom and top layer, respectively,</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"> /// axial length and height of top and bottom layers, and pointer </span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"> /// to timestepper (defaults to Steady timestepper)</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classElasticRefineableTwoLayerMesh.html#a868e53937a6cd94e2ff252fe2002a216">  116</a></span>&#160;<span class="comment"></span> <a class="code" href="classElasticRefineableTwoLayerMesh.html#a868e53937a6cd94e2ff252fe2002a216">ElasticRefineableTwoLayerMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny1,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny2, </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;h1,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;h2,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                               TimeStepper* time_stepper_pt=</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                               &amp;Mesh::Default_TimeStepper)</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  : RectangularQuadMesh&lt;ELEMENT&gt;(nx,ny1+ny2,lx,h1+h2,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                                 false,time_stepper_pt),</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    ElasticRectangularQuadMesh&lt;ELEMENT&gt;(nx,ny1+ny2,lx,h1+h2,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                                        false,time_stepper_pt),</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    ElasticRefineableRectangularQuadMesh&lt;ELEMENT&gt;(nx,ny1+ny2,lx,h1+h2,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                                  false,time_stepper_pt)</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;   <span class="comment">// ----------------------------------------------------</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;   <span class="comment">// Convert all nodes on the interface to boundary nodes</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;   <span class="comment">// ----------------------------------------------------</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;   <span class="comment">// Set the number of boundaries to 5</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;   this-&gt;set_nboundary(5);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;   <span class="comment">// Loop over horizontal elements</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;nx;e++)</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;     <span class="comment">// Get pointer to element in lower fluid adjacent to interface</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;     FiniteElement* el_pt = this-&gt;finite_element_pt(nx*(ny1-1)+e);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;     <span class="comment">// Determine number of nodes in this element</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = el_pt-&gt;nnode();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;     <span class="comment">// The last three nodes in this element are those on the interface.</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;     <span class="comment">// Loop over these nodes and convert them to boundary nodes.</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;3;n++)</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;      {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;       Node* nod_pt = el_pt-&gt;node_pt(n_node-3+n);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;       this-&gt;convert_to_boundary_node(nod_pt);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;       this-&gt;add_boundary_node(4,nod_pt);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;      }</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    } <span class="comment">// End of loop over horizontal elements</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;   <span class="comment">// Set up the boundary element information</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;   this-&gt;setup_boundary_element_info();</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;}; <span class="comment">// End of specific mesh class</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">//==start_of_problem_class================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">/// Axisymmetric two fluid interface problem in a rectangular domain</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html">  173</a></span>&#160;<span class="keyword">class </span><a class="code" href="classInterfaceProblem.html">InterfaceProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;{</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment"> /// Constructor</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment"></span> <a class="code" href="classInterfaceProblem.html">InterfaceProblem</a>();</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a90c191f8046069099b199743e7ce7111">  182</a></span>&#160;<span class="comment"></span> <a class="code" href="classInterfaceProblem.html#a90c191f8046069099b199743e7ce7111">~InterfaceProblem</a>() {}</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment"> /// Set initial conditions</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> set_initial_condition();</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"> /// Set boundary conditions</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> set_boundary_conditions();</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment"> /// Document the solution</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> doc_solution(DocInfo &amp;doc_info);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment"> /// Do unsteady run up to maximum time t_max with given timestep dt</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> unsteady_run(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;t_max, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dt); </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment"> /// No actions required before solve step</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#ade63c8a74f666edf530460b989968b4f">  199</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#ade63c8a74f666edf530460b989968b4f">actions_before_newton_solve</a>() {}</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment"> /// No actions required after solve step</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#aedc2e58b3d2f5f8c898a21ba2d245cee">  202</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#aedc2e58b3d2f5f8c898a21ba2d245cee">actions_after_newton_solve</a>() {}</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment"> /// \short Actions before the timestep: For maximum stability, reset</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"> /// the current nodal positions to be the &quot;stress-free&quot; ones.</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#ae3ec75fcc8ccca97207dc7eca23b1cce">  206</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#ae3ec75fcc8ccca97207dc7eca23b1cce">actions_before_implicit_timestep</a>()</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;   Bulk_mesh_pt-&gt;set_lagrangian_nodal_coordinates();</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment"> /// Strip off the interface elements before adapting the bulk mesh</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> actions_before_adapt();</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment"> /// Rebuild the mesh of interface elements after adapting the bulk mesh</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> actions_after_adapt();</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment"> /// Create the 1d interface elements</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> create_interface_elements();</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"> /// Delete the 1d interface elements</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> delete_interface_elements();</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment"> /// Deform the mesh/free surface to a prescribed function</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> deform_free_surface(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;epsilon, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;k);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment"> /// Fix pressure in element e at pressure dof pdof and set to pvalue</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a9d1a04da451b6f41336cb6f3bd910633">  227</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#a9d1a04da451b6f41336cb6f3bd910633">fix_pressure</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;e,</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;pdof, </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;pvalue)</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;   <span class="comment">// Fix the pressure at that element</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e))-&gt;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                          fix_pressure(pdof,pvalue);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  }</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment"> /// Pointer to the (specific) &quot;bulk&quot; mesh</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#ad7cdca485f230393096667bf0709ef8d">  237</a></span>&#160;<span class="comment"></span> <a class="code" href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh&lt;ELEMENT&gt;</a>* <a class="code" href="classInterfaceProblem.html#ad7cdca485f230393096667bf0709ef8d">Bulk_mesh_pt</a>;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"> /// Pointer to the &quot;surface&quot; mesh</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a011c7b4f2307ff909f64dc158e8fc674">  240</a></span>&#160;<span class="comment"></span> Mesh* <a class="code" href="classInterfaceProblem.html#a011c7b4f2307ff909f64dc158e8fc674">Surface_mesh_pt</a>;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; <span class="comment">// Pointer to the constitutive law used to determine the mesh deformation</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a5bf645cbdbf7775ab6438be324caf3c3">  243</a></span>&#160; ConstitutiveLaw* <a class="code" href="classInterfaceProblem.html#a5bf645cbdbf7775ab6438be324caf3c3">Constitutive_law_pt</a>;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment"> /// Width of domain</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a6ebe4e37868be26465c7bc6d2cef95e7">  246</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classInterfaceProblem.html#a6ebe4e37868be26465c7bc6d2cef95e7">Lr</a>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment"> /// Trace file</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a45e3bf3b44bcbeefab21a3598bef6179">  249</a></span>&#160;<span class="comment"></span> ofstream <a class="code" href="classInterfaceProblem.html#a45e3bf3b44bcbeefab21a3598bef6179">Trace_file</a>;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;}; <span class="comment">// End of problem class</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">//==start_of_constructor==================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">/// Constructor for axisymmetric two fluid interface problem</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<a class="code" href="classInterfaceProblem.html#a5889be7fc8eab5d222f1bfb750c845ba">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::</a></div>
+<div class="line"><a name="l00260"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a5889be7fc8eab5d222f1bfb750c845ba">  260</a></span>&#160;<a class="code" href="classInterfaceProblem.html#a5889be7fc8eab5d222f1bfb750c845ba">InterfaceProblem</a>()</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;{</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; <span class="comment">// Allocate the timestepper (this constructs the time object as well)</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; add_time_stepper_pt(<span class="keyword">new</span> TIMESTEPPER); </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; <span class="comment">// Define number of elements in r direction</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_r = 3;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;   </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; <span class="comment">// Define number of elements in z direction in lower fluid (fluid 1)</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_z1 = 3;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; <span class="comment">// Define number of elements in z direction in upper fluid (fluid 2)</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_z2 = 3;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; <span class="comment">// Define width of domain and store as class member data</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; <span class="keyword">const</span> <span class="keywordtype">double</span> l_r = 1.0;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; this-&gt;Lr = l_r;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; <span class="comment">// Define height of lower fluid layer</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; <span class="keyword">const</span> <span class="keywordtype">double</span> h1 = 1.0;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; <span class="comment">// Define height of upper fluid layer</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; <span class="keyword">const</span> <span class="keywordtype">double</span> h2 = 1.0;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; <span class="comment">// Build and assign the &quot;bulk&quot; mesh</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; Bulk_mesh_pt = <span class="keyword">new</span> <a class="code" href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh&lt;ELEMENT&gt;</a></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  (n_r,n_z1,n_z2,l_r,h1,h2,time_stepper_pt());</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; <span class="comment">// Create and set the error estimator for spatial adaptivity</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; Bulk_mesh_pt-&gt;spatial_error_estimator_pt() = <span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; <span class="comment">// Set the maximum refinement level for the mesh to 4</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; Bulk_mesh_pt-&gt;max_refinement_level() = 4;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; <span class="comment">// Create the &quot;surface&quot; mesh that will contain only the interface</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; <span class="comment">// elements. The constructor just creates the mesh without giving</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; <span class="comment">// it any elements, nodes, etc.</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; Surface_mesh_pt = <span class="keyword">new</span> Mesh;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; <span class="comment">// Create interface elements at the boundary between the two fluids,</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; <span class="comment">// and add them to the surface mesh</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; create_interface_elements();</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; <span class="comment">// Add the two sub meshes to the problem</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; add_sub_mesh(Surface_mesh_pt);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; <span class="comment">// Combine all sub-meshes into a single mesh</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; build_global_mesh();</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; <span class="comment">// --------------------------------------------</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; <span class="comment">// Set the boundary conditions for this problem</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; <span class="comment">// --------------------------------------------</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; <span class="comment">// All nodes are free by default -- just pin the ones that have</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; <span class="comment">// Dirichlet conditions here</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; <span class="comment">// Determine number of mesh boundaries</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_boundary = Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; <span class="comment">// Loop over mesh boundaries</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;n_boundary;b++)</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  {</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;   <span class="comment">// Determine number of nodes on boundary b</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;   <span class="comment">// Loop over nodes on boundary b</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;     <span class="comment">// Fluid boundary conditions:</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;     <span class="comment">// --------------------------</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;     <span class="comment">// Pin radial and azimuthal velocities (no slip/penetration)</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;     <span class="comment">// on all boundaries other than the interface (b=4)</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;     <span class="keywordflow">if</span>(b!=4)</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;      {</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;       Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin(0);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;       Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin(2);</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;      }</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;     <span class="comment">// Pin axial velocity on top (b=2) and bottom (b=0) boundaries</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;     <span class="comment">// (no penetration). Because we have a slippery outer wall we do</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;     <span class="comment">// NOT pin the axial velocity on this boundary (b=1); similarly,</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;     <span class="comment">// we do not pin the axial velocity on the symmetry boundary (b=3).</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;     <span class="keywordflow">if</span>(b==0 || b==2) { Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin(1); }</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;     <span class="comment">// Solid boundary conditions:</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;     <span class="comment">// --------------------------</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;     <span class="comment">// Pin vertical displacement on solid boundaries</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;     <span class="keywordflow">if</span>(b==0 || b==2) { Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin_position(1); }</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    } <span class="comment">// End of loop over nodes on boundary b</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  } <span class="comment">// End of loop over mesh boundaries</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; <span class="comment">// Loop over all nodes in mesh</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;  {</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;   <span class="comment">// Pin horizontal displacement of all nodes</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;   Bulk_mesh_pt-&gt;node_pt(n)-&gt;pin_position(0);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;   <span class="comment">// Pin all azimuthal velocities throughout the bulk of the domain</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;   Bulk_mesh_pt-&gt;node_pt(n)-&gt;pin(2);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  }</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; <span class="comment">// Define a constitutive law for the solid equations: generalised Hookean</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; Constitutive_law_pt = <span class="keyword">new</span> GeneralisedHookean(&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>);</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; <span class="comment">// ----------------------------------------------------------------</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; <span class="comment">// Complete the problem setup to make the elements fully functional</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; <span class="comment">// ----------------------------------------------------------------</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; <span class="comment">// Compute number of bulk elements in lower/upper fluids</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_lower = n_r*n_z1;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_upper = n_r*n_z2;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; <span class="comment">// Loop over bulk elements in lower fluid</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_lower;e++)</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;  {</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(e));</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;   <span class="comment">// Set the Reynolds number</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;   el_pt-&gt;re_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;   <span class="comment">// Set the Womersley number</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;   el_pt-&gt;re_st_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a>;</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;   <span class="comment">// Set the product of the Reynolds number and the inverse of the</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;   <span class="comment">// Froude number</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;   el_pt-&gt;re_invfr_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">Global_Physical_Variables::ReInvFr</a>;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;   <span class="comment">// Set the direction of gravity</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;   el_pt-&gt;g_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a>;</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;   <span class="comment">// Set the constitutive law</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;   el_pt-&gt;constitutive_law_pt() = Constitutive_law_pt;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;  } <span class="comment">// End of loop over bulk elements in lower fluid</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160; <span class="comment">// Loop over bulk elements in upper fluid </span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=n_lower;e&lt;(n_lower+n_upper);e++)</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;  {</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(e));</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;   <span class="comment">// Set the Reynolds number</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;   el_pt-&gt;re_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;   <span class="comment">// Set the Womersley number</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;   el_pt-&gt;re_st_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a>;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;   <span class="comment">// Set the product of the Reynolds number and the inverse of the</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;   <span class="comment">// Froude number</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;   el_pt-&gt;re_invfr_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">Global_Physical_Variables::ReInvFr</a>;</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;   <span class="comment">// Set the direction of gravity</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;   el_pt-&gt;g_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a>;</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;   <span class="comment">// Set the viscosity ratio</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;   el_pt-&gt;viscosity_ratio_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">Global_Physical_Variables::Viscosity_Ratio</a>;</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;   <span class="comment">// Set the density ratio</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;   el_pt-&gt;density_ratio_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a80a34b6dfb7e1501966b8d6c7501e718">Global_Physical_Variables::Density_Ratio</a>;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;   <span class="comment">// Set the constitutive law</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;   el_pt-&gt;constitutive_law_pt() = Constitutive_law_pt;</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;  } <span class="comment">// End of loop over bulk elements in upper fluid</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; <span class="comment">// Set the pressure in the first element at &#39;node&#39; 0 to 0.0</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160; fix_pressure(0,0,0.0);</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures(</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;  Bulk_mesh_pt-&gt;element_pt());</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160; <span class="comment">// Apply the boundary conditions</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; set_boundary_conditions();</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160; </div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; <span class="comment">// Set up equation numbering scheme</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; cout &lt;&lt; <span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;} <span class="comment">// End of constructor</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160; </div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160; </div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; </div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">//==start_of_set_initial_condition========================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">/// \short Set initial conditions: Set all nodal velocities to zero and</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">/// initialise the previous velocities and nodal positions to correspond</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">/// to an impulsive start</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00454"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">  454</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::set_initial_condition</a>()</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;{</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; <span class="comment">// Determine number of nodes in mesh</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; <span class="comment">// Loop over all nodes in mesh</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;  {</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;   <span class="comment">// Loop over the three velocity components</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;3;i++)</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    {</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;     <span class="comment">// Set velocity component i of node n to zero</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;     Bulk_mesh_pt-&gt;node_pt(n)-&gt;set_value(i,0.0);</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    }</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;  }</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; <span class="comment">// Initialise the previous velocity values and nodal positions</span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; <span class="comment">// for timestepping corresponding to an impulsive start</span></div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160; assign_initial_values_impulsive();</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; </div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;} <span class="comment">// End of set_initial_condition</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; </div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">//==start_of_set_boundary_conditions======================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment">/// \short Set boundary conditions: Set all velocity components to zero</span></div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">/// on the top and bottom (solid) walls and the radial and azimuthal</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment">/// components only to zero on the side boundaries</span></div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00484"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">  484</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::set_boundary_conditions</a>()</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;{</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; <span class="comment">// Determine number of mesh boundaries</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_boundary = Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160; <span class="comment">// Loop over mesh boundaries</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;n_boundary;b++)</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;  {</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;   <span class="comment">// Determine number of nodes on boundary b</span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;   </div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;   <span class="comment">// Loop over nodes on boundary b</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    {</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;     <span class="comment">// Set radial component of the velocity to zero on all boundaries</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;     <span class="comment">// other than the interface (b=4)</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;     <span class="keywordflow">if</span>(b!=4) { Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;set_value(0,0.0); }</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160; </div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;     <span class="comment">// Set azimuthal component of the velocity to zero on all boundaries</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;     <span class="comment">// other than the interface (b=4)</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;     <span class="keywordflow">if</span>(b!=4) { Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;set_value(2,0.0); }</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160; </div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;     <span class="comment">// Set axial component of the velocity to zero on solid boundaries</span></div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;     <span class="keywordflow">if</span>(b==0 || b==2)</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;      {</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;       Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;set_value(1,0.0);</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;      }</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;    }</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;  }</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;} <span class="comment">// End of set_boundary_conditions</span></div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160; </div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160; </div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160; </div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment">//==start_of_actions_before_adapt=========================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="comment">/// Strip off the interface elements before adapting the bulk mesh</span></div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00521"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a944e5754e9b3f3394211b6c62f705abe">  521</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#a944e5754e9b3f3394211b6c62f705abe">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::actions_before_adapt</a>()</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;{</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160; <span class="comment">// Delete the interface elements and wipe the surface mesh</span></div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160; delete_interface_elements();</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160; </div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160; <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160; rebuild_global_mesh();</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160; </div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;} <span class="comment">// End of actions_before_adapt</span></div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160; </div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160; </div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160; </div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;<span class="comment">//==start_of_actions_after_adapt==========================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="comment">/// Rebuild the mesh of interface elements after adapting the bulk mesh</span></div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00537"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a1c8a5dee970dccc3f1da993cf531872d">  537</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#a1c8a5dee970dccc3f1da993cf531872d">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::actions_after_adapt</a>()</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;{</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160; <span class="comment">// Create the interface elements</span></div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; this-&gt;create_interface_elements();</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160; </div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160; <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160; rebuild_global_mesh();</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160; </div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160; <span class="comment">// Pin horizontal displacement of all nodes</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++) { Bulk_mesh_pt-&gt;node_pt(n)-&gt;pin_position(0); }</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160; </div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160; <span class="comment">// Unpin all fluid pressure dofs</span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160; RefineableAxisymmetricNavierStokesEquations::</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;  unpin_all_pressure_dofs(Bulk_mesh_pt-&gt;element_pt());</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160; </div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160; <span class="comment">// Pin redudant fluid pressure dofs</span></div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160; RefineableAxisymmetricNavierStokesEquations::</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;  pin_redundant_nodal_pressures(Bulk_mesh_pt-&gt;element_pt());</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160; </div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160; <span class="comment">// Now set the pressure in the first element at &#39;node&#39; 0 to 0.0</span></div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160; fix_pressure(0,0,0.0);</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160; </div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160; <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160; PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures(</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;  Bulk_mesh_pt-&gt;element_pt());</div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160; </div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160; <span class="comment">// Reset the boundary conditions</span></div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160; set_boundary_conditions();</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160; </div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;} <span class="comment">// End of actions_after_adapt</span></div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160; </div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160; </div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160; </div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="comment">//==start_of_create_interface_elements====================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="comment">/// \short Create interface elements between the two fluids in the mesh</span></div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="comment">/// pointed to by Bulk_mesh_pt and add the elements to the Mesh object</span></div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="comment">/// pointed to by Surface_mesh_pt.</span></div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00577"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a94e2cc71fe27c0c329030874e05734b8">  577</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#a94e2cc71fe27c0c329030874e05734b8">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::create_interface_elements</a>()</div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;{</div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160; <span class="comment">// Determine number of bulk elements adjacent to interface (boundary 4)</span></div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_element = this-&gt;Bulk_mesh_pt-&gt;nboundary_element(4);</div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160; </div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160; <span class="comment">// Loop over those elements adjacent to the interface</span></div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;  {</div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;   <span class="comment">// Get pointer to the bulk element that is adjacent to the interface</span></div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;   ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;    this-&gt;Bulk_mesh_pt-&gt;boundary_element_pt(4,e));</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160; </div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;   <span class="comment">// We only want to attach interface elements to the bulk elements</span></div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;   <span class="comment">// which are BELOW the interface, and so we filter out those above by</span></div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;   <span class="comment">// referring to the viscosity_ratio_pt</span></div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;   <span class="keywordflow">if</span>(bulk_elem_pt-&gt;viscosity_ratio_pt()</div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;      !=&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">Global_Physical_Variables::Viscosity_Ratio</a>)</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;    {</div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;     <span class="comment">// Find index of the face of element e that corresponds to the interface</span></div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">int</span> face_index = this-&gt;Bulk_mesh_pt-&gt;face_index_at_boundary(4,e);</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;     </div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;     <span class="comment">// Create the interface element</span></div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;     FiniteElement* interface_element_element_pt =</div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;      <span class="keyword">new</span> ElasticAxisymmetricFluidInterfaceElement&lt;ELEMENT&gt;(bulk_elem_pt,</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;                                                            face_index);</div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160; </div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;     <span class="comment">// Add the interface element to the surface mesh</span></div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;     this-&gt;Surface_mesh_pt-&gt;add_element_pt(interface_element_element_pt);</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;    }</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;  }</div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160; </div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160; <span class="comment">// --------------------------------------------------------</span></div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160; <span class="comment">// Complete the setup to make the elements fully functional</span></div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160; <span class="comment">// --------------------------------------------------------</span></div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160; </div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160; <span class="comment">// Determine number of 1D interface elements in mesh</span></div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_interface_element = this-&gt;Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160; </div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160; <span class="comment">// Loop over the interface elements</span></div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_interface_element;e++)</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;  {</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;   ElasticAxisymmetricFluidInterfaceElement&lt;ELEMENT&gt;* el_pt = </div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    <span class="keyword">dynamic_cast&lt;</span>ElasticAxisymmetricFluidInterfaceElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    (Surface_mesh_pt-&gt;element_pt(e));</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160; </div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;   <span class="comment">// Set the Strouhal number</span></div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;   el_pt-&gt;st_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">Global_Physical_Variables::St</a>;</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160; </div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;   <span class="comment">// Set the Capillary number</span></div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;   el_pt-&gt;ca_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Global_Physical_Variables::Ca</a>;</div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160; </div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;  } <span class="comment">// End of loop over interface elements</span></div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160; </div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;} <span class="comment">// End of create_interface_elements()</span></div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160; </div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160; </div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160; </div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="comment">//==start_of_delete_interface_elements====================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;<span class="comment">/// Delete the interface elements and wipe the surface mesh</span></div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00639"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#ac2aaab086d9bbd3913ce8bc0d244413d">  639</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#ac2aaab086d9bbd3913ce8bc0d244413d">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::delete_interface_elements</a>()</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;{</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160; <span class="comment">// Determine number of interface elements</span></div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_interface_element = Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160; </div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160; <span class="comment">// Loop over interface elements and delete</span></div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_interface_element;e++)</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;  {</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;   <span class="keyword">delete</span> Surface_mesh_pt-&gt;element_pt(e);</div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;  }</div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160; </div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160; <span class="comment">// Wipe the mesh</span></div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160; Surface_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160; </div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;} <span class="comment">// End of delete_interface_elements</span></div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160; </div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160; </div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160; </div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment">//==start_of_deform_free_surface==========================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="comment">/// Deform the mesh/free surface to a prescribed function</span></div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#aa93d492461ac53f0d9f88516bce322dc">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::</a></div>
+<div class="line"><a name="l00662"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#aa93d492461ac53f0d9f88516bce322dc">  662</a></span>&#160;<a class="code" href="classInterfaceProblem.html#aa93d492461ac53f0d9f88516bce322dc">deform_free_surface</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;epsilon,<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;k)</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;{</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160; <span class="comment">// Initialise Bessel functions (only need the first!)</span></div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160; <span class="keywordtype">double</span> j0, j1, y0, y1, j0p, j1p, y0p, y1p;</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160; </div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160; <span class="comment">// Determine number of nodes in the &quot;bulk&quot; mesh</span></div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160; </div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160; <span class="comment">// Loop over all nodes in mesh</span></div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;  {</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;   <span class="comment">// Determine eulerian position of node</span></div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;   <span class="keyword">const</span> <span class="keywordtype">double</span> current_r_pos = Bulk_mesh_pt-&gt;node_pt(n)-&gt;x(0);</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;   <span class="keyword">const</span> <span class="keywordtype">double</span> current_z_pos = Bulk_mesh_pt-&gt;node_pt(n)-&gt;x(1);</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;   </div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;   <span class="comment">// Compute Bessel functions</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;   CRBond_Bessel::bessjy01a(k*current_r_pos,j0,j1,y0,y1,j0p,j1p,y0p,y1p);</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;   </div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;   <span class="comment">// Determine new vertical position of node</span></div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;   <span class="keyword">const</span> <span class="keywordtype">double</span> new_z_pos = current_z_pos</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;    + (1.0-fabs(1.0-current_z_pos))*epsilon*j0;</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;   </div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;   <span class="comment">// Set new position</span></div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;   Bulk_mesh_pt-&gt;node_pt(n)-&gt;x(1) = new_z_pos;</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;  }</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;} <span class="comment">// End of deform_free_surface</span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160; </div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160; </div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160; </div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="comment">//==start_of_doc_solution=================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="comment">/// Doc the solution</span></div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00695"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#a49714e35e94f7d2af0b6ddd22b851f52">  695</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#a49714e35e94f7d2af0b6ddd22b851f52">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::doc_solution</a>(DocInfo &amp;doc_info)</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;{ </div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160; </div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160; <span class="comment">// Output the time</span></div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160; cout &lt;&lt; <span class="stringliteral">&quot;Time is now &quot;</span> &lt;&lt; time_pt()-&gt;time() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160; </div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160; <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160; ElasticAxisymmetricFluidInterfaceElement&lt;ELEMENT&gt;* el_pt = </div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;  <span class="keyword">dynamic_cast&lt;</span>ElasticAxisymmetricFluidInterfaceElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;  (Surface_mesh_pt-&gt;element_pt(0));</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160; </div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160; <span class="comment">// Document time and vertical position of left hand side of interface</span></div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160; <span class="comment">// in trace file</span></div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160; Trace_file &lt;&lt; time_pt()-&gt;time() &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;            &lt;&lt; el_pt-&gt;node_pt(0)-&gt;x(1) &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160; </div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160; ofstream some_file;</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160; <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160; </div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160; <span class="comment">// Set number of plot points (in each coordinate direction)</span></div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> npts = 5;</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160; </div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160; <span class="comment">// Open solution output file</span></div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160; sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,</div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;         doc_info.directory().c_str(),doc_info.number());</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160; some_file.open(filename);</div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160; </div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160; <span class="comment">// Output solution to file</span></div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160; Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160; </div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160; <span class="comment">// Close solution output file</span></div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160; some_file.close();</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160; </div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160; <span class="comment">// Open interface solution output file</span></div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; sprintf(filename,<span class="stringliteral">&quot;%s/interface_soln%i.dat&quot;</span>,</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;         doc_info.directory().c_str(),doc_info.number());</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160; some_file.open(filename);</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160; </div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160; <span class="comment">// Output solution to file</span></div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160; Surface_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160; </div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160; <span class="comment">// Close solution output file</span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160; some_file.close();</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160; </div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;} <span class="comment">// End of doc_solution</span></div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160; </div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160; </div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160; </div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="comment">//==start_of_unsteady_run=================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="comment">/// Perform run up to specified time t_max with given timestep dt</span></div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::</a></div>
+<div class="line"><a name="l00748"></a><span class="lineno"><a class="line" href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">  748</a></span>&#160;<a class="code" href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">unsteady_run</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;t_max, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dt)</div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;{</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160; </div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160; <span class="comment">// Set value of epsilon</span></div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160; <span class="keyword">const</span> <span class="keywordtype">double</span> epsilon = 0.1;</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160; </div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160; <span class="comment">// Set value of k in Bessel function J_0(kr)</span></div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160; <span class="keyword">const</span> <span class="keywordtype">double</span> k_bessel = 3.8317;</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160; </div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160; <span class="comment">// Deform the mesh/free surface</span></div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160; deform_free_surface(epsilon,k_bessel);</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160; </div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160; <span class="comment">// Initialise DocInfo object</span></div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160; DocInfo doc_info;</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160; </div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160; <span class="comment">// Set output directory</span></div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160; doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160; </div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160; <span class="comment">// Initialise counter for solutions</span></div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160; doc_info.number()=0;</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160; </div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160; <span class="comment">// Open trace file</span></div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160; <span class="keywordtype">char</span> filename[100];   </div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160; sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160; Trace_file.open(filename);</div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160; </div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160; <span class="comment">// Initialise trace file</span></div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160; Trace_file &lt;&lt; <span class="stringliteral">&quot;time, interface height&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160; </div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160; <span class="comment">// Initialise timestep</span></div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160; initialise_dt(dt);</div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160; </div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160; <span class="comment">// Set initial condition</span></div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160; set_initial_condition();</div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160; </div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160; <span class="comment">// Maximum number of spatial adaptations per timestep</span></div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160; <span class="keywordtype">unsigned</span> max_adapt = 2;</div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160; </div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160; <span class="comment">// Call refine_uniformly twice</span></div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++) { refine_uniformly(); }</div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160; </div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160; <span class="comment">// Doc initial solution</span></div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160; doc_solution(doc_info);</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160; </div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160; <span class="comment">// Increment counter for solutions</span></div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160; doc_info.number()++;</div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160; </div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160; <span class="comment">// Determine number of timesteps</span></div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160; <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_timestep = unsigned(t_max/dt);</div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160; </div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160; <span class="comment">// Are we on the first timestep? At this point, yes!</span></div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160; <span class="keywordtype">bool</span> first_timestep = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160; </div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160; <span class="comment">// Timestepping loop</span></div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> t=1;t&lt;=n_timestep;t++)</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;  {</div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;   <span class="comment">// Output current timestep to screen</span></div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;   cout &lt;&lt; <span class="stringliteral">&quot;\nTimestep &quot;</span> &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot; of &quot;</span> &lt;&lt; n_timestep &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;   </div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;   <span class="comment">// Take one fixed timestep with spatial adaptivity</span></div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;   unsteady_newton_solve(dt,max_adapt,first_timestep);</div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160; </div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;   <span class="comment">// No longer on first timestep, so set first_timestep flag to false</span></div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;   first_timestep = <span class="keyword">false</span>; </div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160; </div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;   <span class="comment">// Reset maximum number of adaptations for all future timesteps</span></div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;   max_adapt = 1;</div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160; </div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;   <span class="comment">// Doc solution</span></div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;   doc_solution(doc_info);</div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160; </div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;   <span class="comment">// Increment counter for solutions </span></div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;   doc_info.number()++;</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160; </div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;  } <span class="comment">// End of timestepping loop</span></div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160; </div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;} <span class="comment">// End of unsteady_run</span></div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160; </div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160; </div>
+<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;<span class="comment">//==start_of_main=========================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;<span class="comment">/// Driver code for axisymmetric two fluid interface problem</span></div>
+<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00835"></a><span class="lineno"><a class="line" href="elastic__two__layer__interface__axisym_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">  835</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="elastic__two__layer__interface__axisym_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) </div>
+<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;{</div>
+<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160; <span class="comment">// Store command line arguments</span></div>
+<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160; CommandLineArgs::setup(argc,argv);</div>
+<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160; </div>
+<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160; <span class="comment">// -----------------------------------------------------------------</span></div>
+<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160; <span class="comment">// Define possible command line arguments and parse the ones that</span></div>
+<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160; <span class="comment">// were actually specified</span></div>
+<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160; <span class="comment">// -----------------------------------------------------------------</span></div>
+<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160; </div>
+<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160; <span class="comment">// Are we performing a validation run?</span></div>
+<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160; CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--validation&quot;</span>);</div>
+<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160; </div>
+<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160; <span class="comment">// Parse command line</span></div>
+<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160; CommandLineArgs::parse_and_assign();</div>
+<div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160; </div>
+<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160; <span class="comment">// Doc what has actually been specified on the command line</span></div>
+<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160; CommandLineArgs::doc_specified_flags();</div>
+<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160; </div>
+<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160; <span class="comment">// Check that definition of Womersley number is consistent with those</span></div>
+<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160; <span class="comment">// of the Reynolds and Strouhal numbers</span></div>
+<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160; <span class="keywordflow">if</span>(<a class="code" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a> !=</div>
+<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;    <a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>*<a class="code" href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">Global_Physical_Variables::St</a>)</div>
+<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;  {</div>
+<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;   std::ostringstream error_stream;</div>
+<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;Definition of Global_Physical_Variables::ReSt is &quot;</span></div>
+<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;inconsistant with those\n&quot;</span></div>
+<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;of Global_Physical_Variables::Re and &quot;</span></div>
+<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;Global_Physical_Variables::St.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;   <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;                       OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;  }</div>
+<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;<span class="comment"> /// Maximum time</span></div>
+<div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> t_max = 1.2;</div>
+<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;<span class="comment"> /// Duration of timestep</span></div>
+<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;<span class="comment"></span> <span class="keyword">const</span> <span class="keywordtype">double</span> dt = 0.005;</div>
+<div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160; </div>
+<div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160; <span class="comment">// If we are doing validation run, use smaller number of timesteps</span></div>
+<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160; <span class="keywordflow">if</span>(CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--validation&quot;</span>))</div>
+<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;  {</div>
+<div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;   t_max = 0.01;</div>
+<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;  }</div>
+<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160; </div>
+<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160; <span class="comment">// Set direction of gravity (vertically downwards)</span></div>
+<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160; <a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a>[0] = 0.0;</div>
+<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160; <a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a>[1] = -1.0;</div>
+<div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160; <a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a>[2] = 0.0;</div>
+<div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160; </div>
+<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160; <span class="comment">// Set up the elastic test problem with AxisymmetricQCrouzeixRaviartElements,</span></div>
+<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160; <span class="comment">// using the BDF&lt;2&gt; timestepper</span></div>
+<div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160; <a class="code" href="classInterfaceProblem.html">InterfaceProblem</a>&lt;RefineablePseudoSolidNodeUpdateElement&lt;</div>
+<div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160; RefineableAxisymmetricQCrouzeixRaviartElement,</div>
+<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;  RefineableQPVDElement&lt;2,3&gt; &gt;,BDF&lt;2&gt; &gt; <a class="code" href="two__layer__interface__axisym_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160;   </div>
+<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160; <span class="comment">// Run the unsteady simulation</span></div>
+<div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160; <a class="code" href="two__layer__interface__axisym_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.unsteady_run(t_max,dt);</div>
+<div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160; </div>
+<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;} <span class="comment">// End of main</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassInterfaceProblem_html_a90c191f8046069099b199743e7ce7111"><div class="ttname"><a href="classInterfaceProblem.html#a90c191f8046069099b199743e7ce7111">InterfaceProblem::~InterfaceProblem</a></div><div class="ttdeci">~InterfaceProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00182">elastic_two_layer_interface_axisym.cc:182</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a9d1a04da451b6f41336cb6f3bd910633"><div class="ttname"><a href="classInterfaceProblem.html#a9d1a04da451b6f41336cb6f3bd910633">InterfaceProblem::fix_pressure</a></div><div class="ttdeci">void fix_pressure(const unsigned &amp;e, const unsigned &amp;pdof, const double &amp;pvalue)</div><div class="ttdoc">Fix pressure in element e at pressure dof pdof and set to pvalue.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00227">elastic_two_layer_interface_axisym.cc:227</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a4b6ef72bd221361c37f5b9a4a6899afc"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">Global_Physical_Variables::St</a></div><div class="ttdeci">double St</div><div class="ttdoc">Strouhal number.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00066">elastic_two_layer_interface_axisym.cc:66</a></div></div>
+<div class="ttc" id="aclassElasticRefineableTwoLayerMesh_html_a868e53937a6cd94e2ff252fe2002a216"><div class="ttname"><a href="classElasticRefineableTwoLayerMesh.html#a868e53937a6cd94e2ff252fe2002a216">ElasticRefineableTwoLayerMesh::ElasticRefineableTwoLayerMesh</a></div><div class="ttdeci">ElasticRefineableTwoLayerMesh(const unsigned &amp;nx, const unsigned &amp;ny1, const unsigned &amp;ny2, const double &amp;lx, const double &amp;h1, const double &amp;h2, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass number of elements in x-direction, number of elements in y-direction in bottom and ...</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00116">elastic_two_layer_interface_axisym.cc:116</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_aa93d492461ac53f0d9f88516bce322dc"><div class="ttname"><a href="classInterfaceProblem.html#aa93d492461ac53f0d9f88516bce322dc">InterfaceProblem::deform_free_surface</a></div><div class="ttdeci">void deform_free_surface(const double &amp;epsilon, const double &amp;k)</div><div class="ttdoc">Deform the mesh/free surface to a prescribed function.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00662">elastic_two_layer_interface_axisym.cc:662</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_aa6286f02b476912dd7550eced538331a"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">Global_Physical_Variables::ReInvFr</a></div><div class="ttdeci">double ReInvFr</div><div class="ttdoc">Product of Reynolds number and inverse of Froude number.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00072">elastic_two_layer_interface_axisym.cc:72</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a80a34b6dfb7e1501966b8d6c7501e718"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a80a34b6dfb7e1501966b8d6c7501e718">Global_Physical_Variables::Density_Ratio</a></div><div class="ttdeci">double Density_Ratio</div><div class="ttdoc">Ratio of density in upper fluid to density in lower fluid. Reynolds number etc. is based on density i...</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00080">elastic_two_layer_interface_axisym.cc:80</a></div></div>
+<div class="ttc" id="atwo__layer__interface__axisym_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="two__layer__interface__axisym_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface__axisym_8txt_source.html#l00010">two_layer_interface_axisym.txt:10</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_aedc2e58b3d2f5f8c898a21ba2d245cee"><div class="ttname"><a href="classInterfaceProblem.html#aedc2e58b3d2f5f8c898a21ba2d245cee">InterfaceProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">No actions required after solve step.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00202">elastic_two_layer_interface_axisym.cc:202</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a0d3af8378c4f0a6e38636be958c300d5"><div class="ttname"><a href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">InterfaceProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set initial conditions.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00454">elastic_two_layer_interface_axisym.cc:454</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_ad7cdca485f230393096667bf0709ef8d"><div class="ttname"><a href="classInterfaceProblem.html#ad7cdca485f230393096667bf0709ef8d">InterfaceProblem::Bulk_mesh_pt</a></div><div class="ttdeci">ElasticRefineableTwoLayerMesh&lt; ELEMENT &gt; * Bulk_mesh_pt</div><div class="ttdoc">Pointer to the (specific) &quot;bulk&quot; mesh.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00237">elastic_two_layer_interface_axisym.cc:237</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_ae3ec75fcc8ccca97207dc7eca23b1cce"><div class="ttname"><a href="classInterfaceProblem.html#ae3ec75fcc8ccca97207dc7eca23b1cce">InterfaceProblem::actions_before_implicit_timestep</a></div><div class="ttdeci">void actions_before_implicit_timestep()</div><div class="ttdoc">Actions before the timestep: For maximum stability, reset the current nodal positions to be the &quot;stre...</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00206">elastic_two_layer_interface_axisym.cc:206</a></div></div>
+<div class="ttc" id="aclassElasticRefineableTwoLayerMesh_html"><div class="ttname"><a href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh</a></div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00106">elastic_two_layer_interface_axisym.cc:106</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_adb51428300a01b19395c43c0d3586d6f"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">Global_Physical_Variables::Viscosity_Ratio</a></div><div class="ttdeci">double Viscosity_Ratio</div><div class="ttdoc">Ratio of viscosity in upper fluid to viscosity in lower fluid. Reynolds number etc....</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00076">elastic_two_layer_interface_axisym.cc:76</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a5bf645cbdbf7775ab6438be324caf3c3"><div class="ttname"><a href="classInterfaceProblem.html#a5bf645cbdbf7775ab6438be324caf3c3">InterfaceProblem::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00243">elastic_two_layer_interface_axisym.cc:243</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_af5ae275cf339105b9a54821c034df470"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a></div><div class="ttdeci">Vector&lt; double &gt; G(3)</div><div class="ttdoc">Direction of gravity.</div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a49714e35e94f7d2af0b6ddd22b851f52"><div class="ttname"><a href="classInterfaceProblem.html#a49714e35e94f7d2af0b6ddd22b851f52">InterfaceProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Document the solution.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00695">elastic_two_layer_interface_axisym.cc:695</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Pseudo-solid Poisson ratio.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00089">elastic_two_layer_interface_axisym.cc:89</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a011c7b4f2307ff909f64dc158e8fc674"><div class="ttname"><a href="classInterfaceProblem.html#a011c7b4f2307ff909f64dc158e8fc674">InterfaceProblem::Surface_mesh_pt</a></div><div class="ttdeci">Mesh * Surface_mesh_pt</div><div class="ttdoc">Pointer to the &quot;surface&quot; mesh.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00240">elastic_two_layer_interface_axisym.cc:240</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a6ebe4e37868be26465c7bc6d2cef95e7"><div class="ttname"><a href="classInterfaceProblem.html#a6ebe4e37868be26465c7bc6d2cef95e7">InterfaceProblem::Lr</a></div><div class="ttdeci">double Lr</div><div class="ttdoc">Width of domain.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00246">elastic_two_layer_interface_axisym.cc:246</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a085ee4bf968ffdd01a41b8c41864f907"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a></div><div class="ttdeci">double ReSt</div><div class="ttdoc">Womersley number (Reynolds x Strouhal)</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00069">elastic_two_layer_interface_axisym.cc:69</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a45e3bf3b44bcbeefab21a3598bef6179"><div class="ttname"><a href="classInterfaceProblem.html#a45e3bf3b44bcbeefab21a3598bef6179">InterfaceProblem::Trace_file</a></div><div class="ttdeci">ofstream Trace_file</div><div class="ttdoc">Trace file.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00249">elastic_two_layer_interface_axisym.cc:249</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_ade63c8a74f666edf530460b989968b4f"><div class="ttname"><a href="classInterfaceProblem.html#ade63c8a74f666edf530460b989968b4f">InterfaceProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">No actions required before solve step.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00199">elastic_two_layer_interface_axisym.cc:199</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a8b32b93d2e546f9375ec418474107838"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Global_Physical_Variables::Ca</a></div><div class="ttdeci">double Ca</div><div class="ttdoc">Capillary number.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00083">elastic_two_layer_interface_axisym.cc:83</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a944e5754e9b3f3394211b6c62f705abe"><div class="ttname"><a href="classInterfaceProblem.html#a944e5754e9b3f3394211b6c62f705abe">InterfaceProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Strip off the interface elements before adapting the bulk mesh.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00521">elastic_two_layer_interface_axisym.cc:521</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a5889be7fc8eab5d222f1bfb750c845ba"><div class="ttname"><a href="classInterfaceProblem.html#a5889be7fc8eab5d222f1bfb750c845ba">InterfaceProblem::InterfaceProblem</a></div><div class="ttdeci">InterfaceProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00260">elastic_two_layer_interface_axisym.cc:260</a></div></div>
+<div class="ttc" id="aelastic__two__layer__interface__axisym_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="elastic__two__layer__interface__axisym_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code for axisymmetric two fluid interface problem.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00835">elastic_two_layer_interface_axisym.cc:835</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a1c8a5dee970dccc3f1da993cf531872d"><div class="ttname"><a href="classInterfaceProblem.html#a1c8a5dee970dccc3f1da993cf531872d">InterfaceProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Rebuild the mesh of interface elements after adapting the bulk mesh.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00537">elastic_two_layer_interface_axisym.cc:537</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00059">elastic_two_layer_interface_axisym.cc:59</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a844445832ad7a32aa9f5d03ffdb40ebb"><div class="ttname"><a href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">InterfaceProblem::set_boundary_conditions</a></div><div class="ttdeci">void set_boundary_conditions()</div><div class="ttdoc">Set boundary conditions.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00484">elastic_two_layer_interface_axisym.cc:484</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_adf1f4e43d10939e4323e0e315b711085"><div class="ttname"><a href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">InterfaceProblem::unsteady_run</a></div><div class="ttdeci">void unsteady_run(const double &amp;t_max, const double &amp;dt)</div><div class="ttdoc">Do unsteady run up to maximum time t_max with given timestep dt.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00748">elastic_two_layer_interface_axisym.cc:748</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html"><div class="ttname"><a href="classInterfaceProblem.html">InterfaceProblem</a></div><div class="ttdoc">Axisymmetric two fluid interface problem in a rectangular domain.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00173">elastic_two_layer_interface_axisym.cc:173</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_ac2aaab086d9bbd3913ce8bc0d244413d"><div class="ttname"><a href="classInterfaceProblem.html#ac2aaab086d9bbd3913ce8bc0d244413d">InterfaceProblem::delete_interface_elements</a></div><div class="ttdeci">void delete_interface_elements()</div><div class="ttdoc">Delete the 1d interface elements.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00639">elastic_two_layer_interface_axisym.cc:639</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00063">elastic_two_layer_interface_axisym.cc:63</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a94e2cc71fe27c0c329030874e05734b8"><div class="ttname"><a href="classInterfaceProblem.html#a94e2cc71fe27c0c329030874e05734b8">InterfaceProblem::create_interface_elements</a></div><div class="ttdeci">void create_interface_elements()</div><div class="ttdoc">Create the 1d interface elements.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00577">elastic_two_layer_interface_axisym.cc:577</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:12:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,206 @@
+\hypertarget{classoomph_1_1RefineableTetMeshBase}{}\doxysection{oomph\+::Refineable\+Tet\+Mesh\+Base Class Reference}
+\label{classoomph_1_1RefineableTetMeshBase}\index{oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}}
+
+
+Base class for refineable tet meshes.  
+
+
+
+
+{\ttfamily \#include $<$refineable\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Tet\+Mesh\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.635761cm]{classoomph_1_1RefineableTetMeshBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \& \mbox{\hyperlink{classoomph_1_1RefineableTetMeshBase_a84198746ef0ce7787a1282d9de223504}{max\+\_\+element\+\_\+size}} ()
+\begin{DoxyCompactList}\small\item\em Max element size allowed during adaptation. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1RefineableTetMeshBase_ab5b73ad7265db80510c5b822516b0575}{min\+\_\+element\+\_\+size}} ()
+\begin{DoxyCompactList}\small\item\em Min element size allowed during adaptation. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1RefineableTetMeshBase_af62f816ad38f1221f24e5637731ed320}{max\+\_\+permitted\+\_\+edge\+\_\+ratio}} ()
+\begin{DoxyCompactList}\small\item\em Min edge ratio before remesh gets triggered. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableTetMeshBase_a2e94ec6d2b35b8f84a38a165d9037908}{doc\+\_\+adaptivity\+\_\+targets}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Doc the targets for mesh adaptation. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1RefineableTetMeshBase_a32bd7424c47ada606aa3a5248f19771a}{compute\+\_\+volume\+\_\+target}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&elem\+\_\+error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&target\+\_\+volume)
+\begin{DoxyCompactList}\small\item\em Compute target volume based on the elements\textquotesingle{} error and the error target; return max edge ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1RefineableTetMeshBase_ac123c6d33e2df7259fd0b604b7be1595}{Max\+\_\+element\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Max permitted element size. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1RefineableTetMeshBase_ad218437fae016c99b5b7a26e82f69a03}{Min\+\_\+element\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Min permitted element size. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1RefineableTetMeshBase_ae37561a28948852409a84dd5e8fe068e}{Max\+\_\+permitted\+\_\+edge\+\_\+ratio}}
+\begin{DoxyCompactList}\small\item\em Max edge ratio before remesh gets triggered. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Base class for refineable tet meshes. 
+
+Definition at line 846 of file refineable\+\_\+mesh.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableTetMeshBase_a32bd7424c47ada606aa3a5248f19771a}\label{classoomph_1_1RefineableTetMeshBase_a32bd7424c47ada606aa3a5248f19771a}} 
+\index{oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}!compute\_volume\_target@{compute\_volume\_target}}
+\index{compute\_volume\_target@{compute\_volume\_target}!oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}}
+\doxysubsubsection{\texorpdfstring{compute\_volume\_target()}{compute\_volume\_target()}}
+{\footnotesize\ttfamily double oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::compute\+\_\+volume\+\_\+target (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{elem\+\_\+error,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{target\+\_\+volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute target volume based on the elements\textquotesingle{} error and the error target; return max edge ratio. 
+
+
+
+Definition at line 883 of file refineable\+\_\+mesh.\+h.
+
+
+
+References e, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, Max\+\_\+element\+\_\+size, oomph\+::\+Refineable\+Mesh\+Base\+::max\+\_\+permitted\+\_\+error(), Min\+\_\+element\+\_\+size, oomph\+::\+Refineable\+Mesh\+Base\+::min\+\_\+permitted\+\_\+error(), n, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Refineable\+Mesh\+Base\+::\+Nrefined, oomph\+::\+Refineable\+Mesh\+Base\+::\+Nrefinement\+\_\+overruled, oomph\+::\+Refineable\+Mesh\+Base\+::\+Nunrefined, oomph\+::\+Finite\+Element\+::size(), oomph\+::\+Double\+Matrix\+Base\+::solve(), oomph\+::\+Cumulative\+Timings\+::start(), and oomph\+::\+Node\+::x().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableTetMeshBase_a2e94ec6d2b35b8f84a38a165d9037908}\label{classoomph_1_1RefineableTetMeshBase_a2e94ec6d2b35b8f84a38a165d9037908}} 
+\index{oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}!doc\_adaptivity\_targets@{doc\_adaptivity\_targets}}
+\index{doc\_adaptivity\_targets@{doc\_adaptivity\_targets}!oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}}
+\doxysubsubsection{\texorpdfstring{doc\_adaptivity\_targets()}{doc\_adaptivity\_targets()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::doc\+\_\+adaptivity\+\_\+targets (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Doc the targets for mesh adaptation. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableMeshBase_a9f54bbde6fbfe2fef719c4d3fa5e0ae7}{oomph\+::\+Refineable\+Mesh\+Base}}.
+
+
+
+Definition at line 863 of file refineable\+\_\+mesh.\+h.
+
+
+
+References Max\+\_\+element\+\_\+size, oomph\+::\+Refineable\+Mesh\+Base\+::\+Max\+\_\+keep\+\_\+unrefined, Max\+\_\+permitted\+\_\+edge\+\_\+ratio, oomph\+::\+Refineable\+Mesh\+Base\+::\+Max\+\_\+permitted\+\_\+error, Min\+\_\+element\+\_\+size, and oomph\+::\+Refineable\+Mesh\+Base\+::\+Min\+\_\+permitted\+\_\+error.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableTetMeshBase_a84198746ef0ce7787a1282d9de223504}\label{classoomph_1_1RefineableTetMeshBase_a84198746ef0ce7787a1282d9de223504}} 
+\index{oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}!max\_element\_size@{max\_element\_size}}
+\index{max\_element\_size@{max\_element\_size}!oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}}
+\doxysubsubsection{\texorpdfstring{max\_element\_size()}{max\_element\_size()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::max\+\_\+element\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Max element size allowed during adaptation. 
+
+
+
+Definition at line 853 of file refineable\+\_\+mesh.\+h.
+
+
+
+References Max\+\_\+element\+\_\+size.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableTetMeshBase_af62f816ad38f1221f24e5637731ed320}\label{classoomph_1_1RefineableTetMeshBase_af62f816ad38f1221f24e5637731ed320}} 
+\index{oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}!max\_permitted\_edge\_ratio@{max\_permitted\_edge\_ratio}}
+\index{max\_permitted\_edge\_ratio@{max\_permitted\_edge\_ratio}!oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}}
+\doxysubsubsection{\texorpdfstring{max\_permitted\_edge\_ratio()}{max\_permitted\_edge\_ratio()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::max\+\_\+permitted\+\_\+edge\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Min edge ratio before remesh gets triggered. 
+
+
+
+Definition at line 859 of file refineable\+\_\+mesh.\+h.
+
+
+
+References Max\+\_\+permitted\+\_\+edge\+\_\+ratio.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableTetMeshBase_ab5b73ad7265db80510c5b822516b0575}\label{classoomph_1_1RefineableTetMeshBase_ab5b73ad7265db80510c5b822516b0575}} 
+\index{oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}!min\_element\_size@{min\_element\_size}}
+\index{min\_element\_size@{min\_element\_size}!oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}}
+\doxysubsubsection{\texorpdfstring{min\_element\_size()}{min\_element\_size()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::min\+\_\+element\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Min element size allowed during adaptation. 
+
+
+
+Definition at line 856 of file refineable\+\_\+mesh.\+h.
+
+
+
+References Min\+\_\+element\+\_\+size.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableTetMeshBase_ac123c6d33e2df7259fd0b604b7be1595}\label{classoomph_1_1RefineableTetMeshBase_ac123c6d33e2df7259fd0b604b7be1595}} 
+\index{oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}!Max\_element\_size@{Max\_element\_size}}
+\index{Max\_element\_size@{Max\_element\_size}!oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}}
+\doxysubsubsection{\texorpdfstring{Max\_element\_size}{Max\_element\_size}}
+{\footnotesize\ttfamily double oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::\+Max\+\_\+element\+\_\+size}
+
+
+
+Max permitted element size. 
+
+
+
+Definition at line 1004 of file refineable\+\_\+mesh.\+h.
+
+
+
+Referenced by compute\+\_\+volume\+\_\+target(), doc\+\_\+adaptivity\+\_\+targets(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initialise\+\_\+adaptation\+\_\+data(), oomph\+::\+Refineable\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initialise\+\_\+adaptation\+\_\+data(), and max\+\_\+element\+\_\+size().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableTetMeshBase_ae37561a28948852409a84dd5e8fe068e}\label{classoomph_1_1RefineableTetMeshBase_ae37561a28948852409a84dd5e8fe068e}} 
+\index{oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}!Max\_permitted\_edge\_ratio@{Max\_permitted\_edge\_ratio}}
+\index{Max\_permitted\_edge\_ratio@{Max\_permitted\_edge\_ratio}!oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}}
+\doxysubsubsection{\texorpdfstring{Max\_permitted\_edge\_ratio}{Max\_permitted\_edge\_ratio}}
+{\footnotesize\ttfamily double oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::\+Max\+\_\+permitted\+\_\+edge\+\_\+ratio}
+
+
+
+Max edge ratio before remesh gets triggered. 
+
+
+
+Definition at line 1010 of file refineable\+\_\+mesh.\+h.
+
+
+
+Referenced by doc\+\_\+adaptivity\+\_\+targets(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initialise\+\_\+adaptation\+\_\+data(), oomph\+::\+Refineable\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initialise\+\_\+adaptation\+\_\+data(), and max\+\_\+permitted\+\_\+edge\+\_\+ratio().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableTetMeshBase_ad218437fae016c99b5b7a26e82f69a03}\label{classoomph_1_1RefineableTetMeshBase_ad218437fae016c99b5b7a26e82f69a03}} 
+\index{oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}!Min\_element\_size@{Min\_element\_size}}
+\index{Min\_element\_size@{Min\_element\_size}!oomph::RefineableTetMeshBase@{oomph::RefineableTetMeshBase}}
+\doxysubsubsection{\texorpdfstring{Min\_element\_size}{Min\_element\_size}}
+{\footnotesize\ttfamily double oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::\+Min\+\_\+element\+\_\+size}
+
+
+
+Min permitted element size. 
+
+
+
+Definition at line 1007 of file refineable\+\_\+mesh.\+h.
+
+
+
+Referenced by compute\+\_\+volume\+\_\+target(), doc\+\_\+adaptivity\+\_\+targets(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initialise\+\_\+adaptation\+\_\+data(), oomph\+::\+Refineable\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initialise\+\_\+adaptation\+\_\+data(), and min\+\_\+element\+\_\+size().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__mesh_8h}{refineable\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

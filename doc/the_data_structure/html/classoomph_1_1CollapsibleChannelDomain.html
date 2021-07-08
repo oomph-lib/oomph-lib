@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::CollapsibleChannelDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html">CollapsibleChannelDomain</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1CollapsibleChannelDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::CollapsibleChannelDomain Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Collapsible channel domain.  
+ <a href="classoomph_1_1CollapsibleChannelDomain.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::CollapsibleChannelDomain:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1CollapsibleChannelDomain.png" usemap="#oomph::CollapsibleChannelDomain_map" alt=""/>
+  <map id="oomph::CollapsibleChannelDomain_map" name="oomph::CollapsibleChannelDomain_map">
+<area href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic..." alt="oomph::Domain" shape="rect" coords="0,0,206,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a2bf1d7943bfac134a5c27a54c7e1faed"><td class="memItemLeft" align="right" valign="top">typedef double(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a2bf1d7943bfac134a5c27a54c7e1faed">BLSquashFctPt</a>) (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>)</td></tr>
+<tr class="memdesc:a2bf1d7943bfac134a5c27a54c7e1faed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for function pointer for function that squashes the macro elements near the wall to help resolution of any wall boundary layers.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a2bf1d7943bfac134a5c27a54c7e1faed">More...</a><br /></td></tr>
+<tr class="separator:a2bf1d7943bfac134a5c27a54c7e1faed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a317472dab112beac771ecf6442a465f5"><td class="memItemLeft" align="right" valign="top">typedef double(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a317472dab112beac771ecf6442a465f5">AxialSpacingFctPt</a>) (const double &amp;xi)</td></tr>
+<tr class="memdesc:a317472dab112beac771ecf6442a465f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for function pointer for function that implements axial spacing of macro elements.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a317472dab112beac771ecf6442a465f5">More...</a><br /></td></tr>
+<tr class="separator:a317472dab112beac771ecf6442a465f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a85e64b812b36155302407269d77dc6b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a85e64b812b36155302407269d77dc6b3">CollapsibleChannelDomain</a> (const unsigned &amp;<a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a7e098bcffc76332af4ca220701fd32e2">nup</a>, const unsigned &amp;<a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a59dd9d4001621752439ad95ceb8daa1b">ncollapsible</a>, const unsigned &amp;<a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a0e1c69ac122606e4f883e96b51989d9f">ndown</a>, const unsigned &amp;<a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a62e15782984f3d5e10ba44a6d8ad06ee">ny</a>, const double &amp;lup, const double &amp;lcollapsible, const double &amp;ldown, const double &amp;ly, <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *<a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a0a98c02b478d61d2cd4c899d0d37344a">wall_pt</a>)</td></tr>
+<tr class="memdesc:a85e64b812b36155302407269d77dc6b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass the number of (macro-)elements, the domain lengths in the x- and y-direction and the pointer to the geometric object that specifies the shape of the "collapsible" segment.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a85e64b812b36155302407269d77dc6b3">More...</a><br /></td></tr>
+<tr class="separator:a85e64b812b36155302407269d77dc6b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22469fc91a872e6252133af6e97d6e48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a22469fc91a872e6252133af6e97d6e48">~CollapsibleChannelDomain</a> ()</td></tr>
+<tr class="memdesc:a22469fc91a872e6252133af6e97d6e48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: emtpy; cleanup done in base class.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a22469fc91a872e6252133af6e97d6e48">More...</a><br /></td></tr>
+<tr class="separator:a22469fc91a872e6252133af6e97d6e48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e098bcffc76332af4ca220701fd32e2"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a7e098bcffc76332af4ca220701fd32e2">nup</a> ()</td></tr>
+<tr class="memdesc:a7e098bcffc76332af4ca220701fd32e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertical columns of macro elements the upstream section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a7e098bcffc76332af4ca220701fd32e2">More...</a><br /></td></tr>
+<tr class="separator:a7e098bcffc76332af4ca220701fd32e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59dd9d4001621752439ad95ceb8daa1b"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a59dd9d4001621752439ad95ceb8daa1b">ncollapsible</a> ()</td></tr>
+<tr class="memdesc:a59dd9d4001621752439ad95ceb8daa1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertical clumns of macro elements in the "collapsible" segment.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a59dd9d4001621752439ad95ceb8daa1b">More...</a><br /></td></tr>
+<tr class="separator:a59dd9d4001621752439ad95ceb8daa1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e1c69ac122606e4f883e96b51989d9f"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a0e1c69ac122606e4f883e96b51989d9f">ndown</a> ()</td></tr>
+<tr class="memdesc:a0e1c69ac122606e4f883e96b51989d9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertical columns of macro elements in the downstream section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a0e1c69ac122606e4f883e96b51989d9f">More...</a><br /></td></tr>
+<tr class="separator:a0e1c69ac122606e4f883e96b51989d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62e15782984f3d5e10ba44a6d8ad06ee"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a62e15782984f3d5e10ba44a6d8ad06ee">ny</a> ()</td></tr>
+<tr class="memdesc:a62e15782984f3d5e10ba44a6d8ad06ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro-elements across the channel.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a62e15782984f3d5e10ba44a6d8ad06ee">More...</a><br /></td></tr>
+<tr class="separator:a62e15782984f3d5e10ba44a6d8ad06ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3773afa34e21e3e4ed7a86cf42808dd7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a3773afa34e21e3e4ed7a86cf42808dd7">l_up</a> ()</td></tr>
+<tr class="memdesc:a3773afa34e21e3e4ed7a86cf42808dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of upstream section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a3773afa34e21e3e4ed7a86cf42808dd7">More...</a><br /></td></tr>
+<tr class="separator:a3773afa34e21e3e4ed7a86cf42808dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b38028581a27e6b34529ba2c3fa1af2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a0b38028581a27e6b34529ba2c3fa1af2">l_collapsible</a> ()</td></tr>
+<tr class="memdesc:a0b38028581a27e6b34529ba2c3fa1af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of collapsible segment.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a0b38028581a27e6b34529ba2c3fa1af2">More...</a><br /></td></tr>
+<tr class="separator:a0b38028581a27e6b34529ba2c3fa1af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93dc02b16ab1cbab2f42f62d0a7aeb8e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a93dc02b16ab1cbab2f42f62d0a7aeb8e">l_down</a> ()</td></tr>
+<tr class="memdesc:a93dc02b16ab1cbab2f42f62d0a7aeb8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of downstream section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a93dc02b16ab1cbab2f42f62d0a7aeb8e">More...</a><br /></td></tr>
+<tr class="separator:a93dc02b16ab1cbab2f42f62d0a7aeb8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab95f48218b922883be6c8b9bfb39c2a8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#ab95f48218b922883be6c8b9bfb39c2a8">l_y</a> ()</td></tr>
+<tr class="memdesc:ab95f48218b922883be6c8b9bfb39c2a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Width of channel.  <a href="classoomph_1_1CollapsibleChannelDomain.html#ab95f48218b922883be6c8b9bfb39c2a8">More...</a><br /></td></tr>
+<tr class="separator:ab95f48218b922883be6c8b9bfb39c2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a98c02b478d61d2cd4c899d0d37344a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a0a98c02b478d61d2cd4c899d0d37344a">wall_pt</a> ()</td></tr>
+<tr class="memdesc:a0a98c02b478d61d2cd4c899d0d37344a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to pointer to the geometric object that parametrises the collapsible wall.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a0a98c02b478d61d2cd4c899d0d37344a">More...</a><br /></td></tr>
+<tr class="separator:a0a98c02b478d61d2cd4c899d0d37344a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48237d8c4d10ff3ccdf68d02da5b29c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a48237d8c4d10ff3ccdf68d02da5b29c7">wall_pt</a> () const</td></tr>
+<tr class="memdesc:a48237d8c4d10ff3ccdf68d02da5b29c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to pointer to the geometric object that parametrises the collapsible wall (const version)  <a href="classoomph_1_1CollapsibleChannelDomain.html#a48237d8c4d10ff3ccdf68d02da5b29c7">More...</a><br /></td></tr>
+<tr class="separator:a48237d8c4d10ff3ccdf68d02da5b29c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c7def97a2248a8e5a2dca79ee3a54eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a2bf1d7943bfac134a5c27a54c7e1faed">BLSquashFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a9c7def97a2248a8e5a2dca79ee3a54eb">bl_squash_fct_pt</a> ()</td></tr>
+<tr class="memdesc:a9c7def97a2248a8e5a2dca79ee3a54eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that squashes the macro elements near wall. Default mapping (identity) leaves the y-coordinate of the nodal points unchanged.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a9c7def97a2248a8e5a2dca79ee3a54eb">More...</a><br /></td></tr>
+<tr class="separator:a9c7def97a2248a8e5a2dca79ee3a54eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a638fd3959b72ef3287615f2b0f968e33"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a638fd3959b72ef3287615f2b0f968e33">s_squash</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>)</td></tr>
+<tr class="memdesc:a638fd3959b72ef3287615f2b0f968e33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that squashes the macro elements near the wall. Input argument should vary between 0 and 1; function should return stretched/squashed coordinate in the same range. Default implementation is the identity; can be overloaded by specifying a different function pointer with <a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a9c7def97a2248a8e5a2dca79ee3a54eb" title="Function pointer for function that squashes the macro elements near wall. Default mapping (identity) ...">bl_squash_fct_pt()</a>.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a638fd3959b72ef3287615f2b0f968e33">More...</a><br /></td></tr>
+<tr class="separator:a638fd3959b72ef3287615f2b0f968e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17bfb9fe218dc539669bdbdf0ecc4bf8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a317472dab112beac771ecf6442a465f5">AxialSpacingFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a17bfb9fe218dc539669bdbdf0ecc4bf8">axial_spacing_fct_pt</a> ()</td></tr>
+<tr class="memdesc:a17bfb9fe218dc539669bdbdf0ecc4bf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that implements axial spacing of macro elements.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a17bfb9fe218dc539669bdbdf0ecc4bf8">More...</a><br /></td></tr>
+<tr class="separator:a17bfb9fe218dc539669bdbdf0ecc4bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc7b20efd68bdd11f1bea5df79ae579d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#abc7b20efd68bdd11f1bea5df79ae579d">axial_spacing_fct</a> (const double &amp;xi)</td></tr>
+<tr class="memdesc:abc7b20efd68bdd11f1bea5df79ae579d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that implements axial spacing of macro elements.  <a href="classoomph_1_1CollapsibleChannelDomain.html#abc7b20efd68bdd11f1bea5df79ae579d">More...</a><br /></td></tr>
+<tr class="separator:abc7b20efd68bdd11f1bea5df79ae579d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c0a5bd21e12fbcc1cdd753c0f205da2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a2c0a5bd21e12fbcc1cdd753c0f205da2">macro_element_boundary</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const unsigned &amp;imacro, const unsigned &amp;idirect, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;r)</td></tr>
+<tr class="memdesc:a2c0a5bd21e12fbcc1cdd753c0f205da2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the imacro-th macro element boundary idirect (N/S/W/E) at time level t (t=0: present; t&gt;0: previous): <img class="formulaInl" alt="$ {\bf r}({\bf zeta}) $" src="form_372.png"/> Note that the local coordinate <b>zeta</b> is a 1D <a class="el" href="classoomph_1_1Vector.html">Vector</a> rather than a scalar &ndash; this is unavoidable because this function implements the pure virtual function in the <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> base class.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a2c0a5bd21e12fbcc1cdd753c0f205da2">More...</a><br /></td></tr>
+<tr class="separator:a2c0a5bd21e12fbcc1cdd753c0f205da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91008f47dd3c4eb8a78842df88d9c9e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a91008f47dd3c4eb8a78842df88d9c9e4">enable_rotate_domain</a> ()</td></tr>
+<tr class="memdesc:a91008f47dd3c4eb8a78842df88d9c9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the domain (for axisymmetric problems)  <a href="classoomph_1_1CollapsibleChannelDomain.html#a91008f47dd3c4eb8a78842df88d9c9e4">More...</a><br /></td></tr>
+<tr class="separator:a91008f47dd3c4eb8a78842df88d9c9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65aae3aa3c5585bcff7db51751049d27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a65aae3aa3c5585bcff7db51751049d27">disable_rotate_domain</a> ()</td></tr>
+<tr class="memdesc:a65aae3aa3c5585bcff7db51751049d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Undo rotation of the domain (for axisymmetric problems)  <a href="classoomph_1_1CollapsibleChannelDomain.html#a65aae3aa3c5585bcff7db51751049d27">More...</a><br /></td></tr>
+<tr class="separator:a65aae3aa3c5585bcff7db51751049d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1Domain"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1Domain')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1Domain.html">oomph::Domain</a></td></tr>
+<tr class="memitem:a091982333107142c3ac71a02fbdb6ac8 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a091982333107142c3ac71a02fbdb6ac8">Domain</a> ()</td></tr>
+<tr class="memdesc:a091982333107142c3ac71a02fbdb6ac8 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classoomph_1_1Domain.html#a091982333107142c3ac71a02fbdb6ac8">More...</a><br /></td></tr>
+<tr class="separator:a091982333107142c3ac71a02fbdb6ac8 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ca7b8845faa8689ec8d2c396383bc29 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a3ca7b8845faa8689ec8d2c396383bc29">Domain</a> (const <a class="el" href="classoomph_1_1Domain.html">Domain</a> &amp;)</td></tr>
+<tr class="memdesc:a3ca7b8845faa8689ec8d2c396383bc29 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1Domain.html#a3ca7b8845faa8689ec8d2c396383bc29">More...</a><br /></td></tr>
+<tr class="separator:a3ca7b8845faa8689ec8d2c396383bc29 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43b1baf8fcafd4a75d54cf915e4dca44 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a43b1baf8fcafd4a75d54cf915e4dca44">operator=</a> (const <a class="el" href="classoomph_1_1Domain.html">Domain</a> &amp;)</td></tr>
+<tr class="memdesc:a43b1baf8fcafd4a75d54cf915e4dca44 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1Domain.html#a43b1baf8fcafd4a75d54cf915e4dca44">More...</a><br /></td></tr>
+<tr class="separator:a43b1baf8fcafd4a75d54cf915e4dca44 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd6c101003640d74becabcd8f1dcbc67 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#afd6c101003640d74becabcd8f1dcbc67">~Domain</a> ()</td></tr>
+<tr class="memdesc:afd6c101003640d74becabcd8f1dcbc67 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Strictly speaking, whoever creates an object dynamically should be responsible for the cleanup of said object but it makes sense here for the <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> to generically kill any MacroElements left over in the <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> container (if it hasn't already been done in the derived class) to avoid memory leaks.  <a href="classoomph_1_1Domain.html#afd6c101003640d74becabcd8f1dcbc67">More...</a><br /></td></tr>
+<tr class="separator:afd6c101003640d74becabcd8f1dcbc67 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d8ca47c89812a0d6dda0b9142441efc inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a9d8ca47c89812a0d6dda0b9142441efc">macro_element_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a9d8ca47c89812a0d6dda0b9142441efc inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to i-th macro element.  <a href="classoomph_1_1Domain.html#a9d8ca47c89812a0d6dda0b9142441efc">More...</a><br /></td></tr>
+<tr class="separator:a9d8ca47c89812a0d6dda0b9142441efc inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ed63583615d0e8471d95ba13ccc0aff inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a3ed63583615d0e8471d95ba13ccc0aff">nmacro_element</a> ()</td></tr>
+<tr class="memdesc:a3ed63583615d0e8471d95ba13ccc0aff inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro elements in domain.  <a href="classoomph_1_1Domain.html#a3ed63583615d0e8471d95ba13ccc0aff">More...</a><br /></td></tr>
+<tr class="separator:a3ed63583615d0e8471d95ba13ccc0aff inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b0c50db44e3bc3c8ae1a0d34ac835c8 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a7b0c50db44e3bc3c8ae1a0d34ac835c8">output</a> (const std::string &amp;filename, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:a7b0c50db44e3bc3c8ae1a0d34ac835c8 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output macro elements.  <a href="classoomph_1_1Domain.html#a7b0c50db44e3bc3c8ae1a0d34ac835c8">More...</a><br /></td></tr>
+<tr class="separator:a7b0c50db44e3bc3c8ae1a0d34ac835c8 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7ccc375ba2e46ffb11e4e2c5c485578 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#ab7ccc375ba2e46ffb11e4e2c5c485578">output</a> (std::ostream &amp;outfile, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:ab7ccc375ba2e46ffb11e4e2c5c485578 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output macro elements.  <a href="classoomph_1_1Domain.html#ab7ccc375ba2e46ffb11e4e2c5c485578">More...</a><br /></td></tr>
+<tr class="separator:ab7ccc375ba2e46ffb11e4e2c5c485578 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10142c029e8a57c5470d22701518e9d1 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a10142c029e8a57c5470d22701518e9d1">macro_element_boundary</a> (const double &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const unsigned &amp;i_macro, const unsigned &amp;i_direct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a10142c029e8a57c5470d22701518e9d1 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary i_direct (e.g. N/S/W/E in 2D) at continuous time, t.  <a href="classoomph_1_1Domain.html#a10142c029e8a57c5470d22701518e9d1">More...</a><br /></td></tr>
+<tr class="separator:a10142c029e8a57c5470d22701518e9d1 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d293b736e74bfeace64c1c8858add8a inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a9d293b736e74bfeace64c1c8858add8a">macro_element_boundary</a> (const unsigned &amp;i_macro, const unsigned &amp;i_direct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a9d293b736e74bfeace64c1c8858add8a inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary i_direct (e.g. N/S/W/E in 2D) at current time: f(s).  <a href="classoomph_1_1Domain.html#a9d293b736e74bfeace64c1c8858add8a">More...</a><br /></td></tr>
+<tr class="separator:a9d293b736e74bfeace64c1c8858add8a inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac663be35932981a1c02b3ed930ec2eda inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#ac663be35932981a1c02b3ed930ec2eda">output_macro_element_boundaries</a> (const std::string &amp;filename, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:ac663be35932981a1c02b3ed930ec2eda inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output all macro element boundaries as tecplot zones.  <a href="classoomph_1_1Domain.html#ac663be35932981a1c02b3ed930ec2eda">More...</a><br /></td></tr>
+<tr class="separator:ac663be35932981a1c02b3ed930ec2eda inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59dfe3a2cff10aa2e12f86dba9584f15 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a59dfe3a2cff10aa2e12f86dba9584f15">output_macro_element_boundaries</a> (std::ostream &amp;outfile, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:a59dfe3a2cff10aa2e12f86dba9584f15 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output all macro element boundaries as tecplot zones.  <a href="classoomph_1_1Domain.html#a59dfe3a2cff10aa2e12f86dba9584f15">More...</a><br /></td></tr>
+<tr class="separator:a59dfe3a2cff10aa2e12f86dba9584f15 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae573c54363a8e9d33951e59208a9bc39 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#ae573c54363a8e9d33951e59208a9bc39">dmacro_element_boundary</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const unsigned &amp;i_macro, const unsigned &amp;i_direct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:ae573c54363a8e9d33951e59208a9bc39 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary derivatives i_direct (e.g. N/S/W/E in 2D) at time level t (t=0: present; t&gt;0: previous): f(s). Broken virtual.  <a href="classoomph_1_1Domain.html#ae573c54363a8e9d33951e59208a9bc39">More...</a><br /></td></tr>
+<tr class="separator:ae573c54363a8e9d33951e59208a9bc39 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4de3686bcfbf5a8e98b92a071607e0f inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#af4de3686bcfbf5a8e98b92a071607e0f">dmacro_element_boundary</a> (const double &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const unsigned &amp;i_macro, const unsigned &amp;i_direct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:af4de3686bcfbf5a8e98b92a071607e0f inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary derivatives i_direct (e.g. N/S/W/E in 2D) at continuous time level t. Broken virtual.  <a href="classoomph_1_1Domain.html#af4de3686bcfbf5a8e98b92a071607e0f">More...</a><br /></td></tr>
+<tr class="separator:af4de3686bcfbf5a8e98b92a071607e0f inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6973f0ef86b83c6cadcd722374c62270 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a6973f0ef86b83c6cadcd722374c62270">dmacro_element_boundary</a> (const unsigned &amp;i_macro, const unsigned &amp;i_direct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a6973f0ef86b83c6cadcd722374c62270 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary derivatives i_direct (e.g. N/S/W/E in 2D) at current time: f(s).  <a href="classoomph_1_1Domain.html#a6973f0ef86b83c6cadcd722374c62270">More...</a><br /></td></tr>
+<tr class="separator:a6973f0ef86b83c6cadcd722374c62270 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeeb40f9179abe710f14effbe4db42a1 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#afeeb40f9179abe710f14effbe4db42a1">d2macro_element_boundary</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const unsigned &amp;i_macro, const unsigned &amp;i_direct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:afeeb40f9179abe710f14effbe4db42a1 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary second derivatives i_direct (e.g. N/S/W/E in 2D) at time level t (t=0: present; t&gt;0: previous): f(s). Broken virtual.  <a href="classoomph_1_1Domain.html#afeeb40f9179abe710f14effbe4db42a1">More...</a><br /></td></tr>
+<tr class="separator:afeeb40f9179abe710f14effbe4db42a1 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645d0e40b2e378eca3b6230741b21169 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a645d0e40b2e378eca3b6230741b21169">d2macro_element_boundary</a> (const double &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const unsigned &amp;i_macro, const unsigned &amp;i_direct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a645d0e40b2e378eca3b6230741b21169 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary seocond derivatives i_direct (e.g. N/S/W/E in 2D) at continuous time level t. Broken virtual.  <a href="classoomph_1_1Domain.html#a645d0e40b2e378eca3b6230741b21169">More...</a><br /></td></tr>
+<tr class="separator:a645d0e40b2e378eca3b6230741b21169 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a837d82e917451ca9adc755aa99ad99a2 inherit pub_methods_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a837d82e917451ca9adc755aa99ad99a2">d2macro_element_boundary</a> (const unsigned &amp;i_macro, const unsigned &amp;i_direct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a837d82e917451ca9adc755aa99ad99a2 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the i_macro-th macro element boundary second derivatives i_direct (e.g. N/S/W/E in 2D) at current time: f(s).  <a href="classoomph_1_1Domain.html#a837d82e917451ca9adc755aa99ad99a2">More...</a><br /></td></tr>
+<tr class="separator:a837d82e917451ca9adc755aa99ad99a2 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a4222184a903df3efdd93cc306bac4414"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a4222184a903df3efdd93cc306bac4414">default_BL_squash_fct</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>)</td></tr>
+<tr class="memdesc:a4222184a903df3efdd93cc306bac4414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default for function that squashes the macro elements near the walls. Identity.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a4222184a903df3efdd93cc306bac4414">More...</a><br /></td></tr>
+<tr class="separator:a4222184a903df3efdd93cc306bac4414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aec5509d4e6a229da9fec78ceb78dcb18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#aec5509d4e6a229da9fec78ceb78dcb18">r_N_straight</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;r, const unsigned &amp;imacro, const unsigned &amp;part)</td></tr>
+<tr class="memdesc:aec5509d4e6a229da9fec78ceb78dcb18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Northern boundary of the macro element imacro in the upstream (part=0) or downstream (part=1) sections.  <a href="classoomph_1_1CollapsibleChannelDomain.html#aec5509d4e6a229da9fec78ceb78dcb18">More...</a><br /></td></tr>
+<tr class="separator:aec5509d4e6a229da9fec78ceb78dcb18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94cebe8b3380c469cfd77924ec57d576"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a94cebe8b3380c469cfd77924ec57d576">r_W_straight</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;r, const unsigned &amp;imacro, const unsigned &amp;part)</td></tr>
+<tr class="memdesc:a94cebe8b3380c469cfd77924ec57d576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Western boundary of the macro element imacro in the upstream (part=0) or downstream (part=1) sections.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a94cebe8b3380c469cfd77924ec57d576">More...</a><br /></td></tr>
+<tr class="separator:a94cebe8b3380c469cfd77924ec57d576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12b9fbd546a2375fea2461a07b5db089"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a12b9fbd546a2375fea2461a07b5db089">r_S_straight</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;r, const unsigned &amp;imacro, const unsigned &amp;part)</td></tr>
+<tr class="memdesc:a12b9fbd546a2375fea2461a07b5db089"><td class="mdescLeft">&#160;</td><td class="mdescRight">Southern boundary of the macro element imacro in the upstream (part=0) or downstream (part=1) sections.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a12b9fbd546a2375fea2461a07b5db089">More...</a><br /></td></tr>
+<tr class="separator:a12b9fbd546a2375fea2461a07b5db089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f880915f7c2f9163fc1ec8cac676831"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a1f880915f7c2f9163fc1ec8cac676831">r_E_straight</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;r, const unsigned &amp;imacro, const unsigned &amp;part)</td></tr>
+<tr class="memdesc:a1f880915f7c2f9163fc1ec8cac676831"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eastern boundary of the macro element imacro in the upstream (part=0) or downstream (part=1) sections.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a1f880915f7c2f9163fc1ec8cac676831">More...</a><br /></td></tr>
+<tr class="separator:a1f880915f7c2f9163fc1ec8cac676831"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0044d3e848b4c643a8a30f4f00a88e8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a0044d3e848b4c643a8a30f4f00a88e8d">r_N_collapsible</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;r, const unsigned &amp;imacro)</td></tr>
+<tr class="memdesc:a0044d3e848b4c643a8a30f4f00a88e8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Northern boundary of the macro element imacro in the collapsible section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a0044d3e848b4c643a8a30f4f00a88e8d">More...</a><br /></td></tr>
+<tr class="separator:a0044d3e848b4c643a8a30f4f00a88e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8b0f990e596b2725ca8d84f2c9750eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#ab8b0f990e596b2725ca8d84f2c9750eb">r_W_collapsible</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;r, const unsigned &amp;imacro)</td></tr>
+<tr class="memdesc:ab8b0f990e596b2725ca8d84f2c9750eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Western boundary of the macro element imacro in the collapsible section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#ab8b0f990e596b2725ca8d84f2c9750eb">More...</a><br /></td></tr>
+<tr class="separator:ab8b0f990e596b2725ca8d84f2c9750eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc35b555f16401ec12854ff5a486800"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a1cc35b555f16401ec12854ff5a486800">r_S_collapsible</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;r, const unsigned &amp;imacro)</td></tr>
+<tr class="memdesc:a1cc35b555f16401ec12854ff5a486800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Southern boundary of the macro element imacro in the collapsible section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a1cc35b555f16401ec12854ff5a486800">More...</a><br /></td></tr>
+<tr class="separator:a1cc35b555f16401ec12854ff5a486800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af684e8e3271ed8f599a02495f794c4e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#af684e8e3271ed8f599a02495f794c4e8">r_E_collapsible</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;r, const unsigned &amp;imacro)</td></tr>
+<tr class="memdesc:af684e8e3271ed8f599a02495f794c4e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eastern boundary of the macro element imacro in the collapsible section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#af684e8e3271ed8f599a02495f794c4e8">More...</a><br /></td></tr>
+<tr class="separator:af684e8e3271ed8f599a02495f794c4e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:a3c814ed3312790877d193d4a018c30da"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a3c814ed3312790877d193d4a018c30da">default_axial_spacing_fct</a> (const double &amp;xi)</td></tr>
+<tr class="memdesc:a3c814ed3312790877d193d4a018c30da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default for function that implements axial spacing of macro elements.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a3c814ed3312790877d193d4a018c30da">More...</a><br /></td></tr>
+<tr class="separator:a3c814ed3312790877d193d4a018c30da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3d3f5d77c3221da20cd02bf02be800b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a2bf1d7943bfac134a5c27a54c7e1faed">BLSquashFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a3d3f5d77c3221da20cd02bf02be800b7">BL_squash_fct_pt</a></td></tr>
+<tr class="memdesc:a3d3f5d77c3221da20cd02bf02be800b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that squashes the macro elements near the walls.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a3d3f5d77c3221da20cd02bf02be800b7">More...</a><br /></td></tr>
+<tr class="separator:a3d3f5d77c3221da20cd02bf02be800b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f4c3319be685553715f5cd776eea0fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a317472dab112beac771ecf6442a465f5">AxialSpacingFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a6f4c3319be685553715f5cd776eea0fc">Axial_spacing_fct_pt</a></td></tr>
+<tr class="memdesc:a6f4c3319be685553715f5cd776eea0fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that implements axial spacing of macro elements.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a6f4c3319be685553715f5cd776eea0fc">More...</a><br /></td></tr>
+<tr class="separator:a6f4c3319be685553715f5cd776eea0fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16bef61c4223f92cb1b0c35e9a7ea7d2"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a16bef61c4223f92cb1b0c35e9a7ea7d2">Nup</a></td></tr>
+<tr class="memdesc:a16bef61c4223f92cb1b0c35e9a7ea7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertical element columns in upstream section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a16bef61c4223f92cb1b0c35e9a7ea7d2">More...</a><br /></td></tr>
+<tr class="separator:a16bef61c4223f92cb1b0c35e9a7ea7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a607c389c3f0c06f0240d97aaca65cdf7"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a607c389c3f0c06f0240d97aaca65cdf7">Ncollapsible</a></td></tr>
+<tr class="memdesc:a607c389c3f0c06f0240d97aaca65cdf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertical element columns in "collapsible" section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a607c389c3f0c06f0240d97aaca65cdf7">More...</a><br /></td></tr>
+<tr class="separator:a607c389c3f0c06f0240d97aaca65cdf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f9c92507803d56e12cf5cb24b11cd83"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a1f9c92507803d56e12cf5cb24b11cd83">Ndown</a></td></tr>
+<tr class="memdesc:a1f9c92507803d56e12cf5cb24b11cd83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertical element columns in downstream section.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a1f9c92507803d56e12cf5cb24b11cd83">More...</a><br /></td></tr>
+<tr class="separator:a1f9c92507803d56e12cf5cb24b11cd83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13c992ef93891493c5da50afff67d38c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a13c992ef93891493c5da50afff67d38c">Ny</a></td></tr>
+<tr class="memdesc:a13c992ef93891493c5da50afff67d38c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro elements across channel.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a13c992ef93891493c5da50afff67d38c">More...</a><br /></td></tr>
+<tr class="separator:a13c992ef93891493c5da50afff67d38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c4dbe3313e696290ad9da4765d0a0e1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a1c4dbe3313e696290ad9da4765d0a0e1">Lup</a></td></tr>
+<tr class="memdesc:a1c4dbe3313e696290ad9da4765d0a0e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-length in the upstream part of the channel  <a href="classoomph_1_1CollapsibleChannelDomain.html#a1c4dbe3313e696290ad9da4765d0a0e1">More...</a><br /></td></tr>
+<tr class="separator:a1c4dbe3313e696290ad9da4765d0a0e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa44cd6613cea2a67dda8f4de0d9c6f1e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#aa44cd6613cea2a67dda8f4de0d9c6f1e">Lcollapsible</a></td></tr>
+<tr class="memdesc:aa44cd6613cea2a67dda8f4de0d9c6f1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-length in the "collapsible" part of the channel  <a href="classoomph_1_1CollapsibleChannelDomain.html#aa44cd6613cea2a67dda8f4de0d9c6f1e">More...</a><br /></td></tr>
+<tr class="separator:aa44cd6613cea2a67dda8f4de0d9c6f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade4ee8220972fe6c454211d1f837fcf9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#ade4ee8220972fe6c454211d1f837fcf9">Ldown</a></td></tr>
+<tr class="memdesc:ade4ee8220972fe6c454211d1f837fcf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-length in the downstream part of the channel  <a href="classoomph_1_1CollapsibleChannelDomain.html#ade4ee8220972fe6c454211d1f837fcf9">More...</a><br /></td></tr>
+<tr class="separator:ade4ee8220972fe6c454211d1f837fcf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac70912e194ac3e211cc0ce625c8f5c41"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#ac70912e194ac3e211cc0ce625c8f5c41">Ly</a></td></tr>
+<tr class="memdesc:ac70912e194ac3e211cc0ce625c8f5c41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Width.  <a href="classoomph_1_1CollapsibleChannelDomain.html#ac70912e194ac3e211cc0ce625c8f5c41">More...</a><br /></td></tr>
+<tr class="separator:ac70912e194ac3e211cc0ce625c8f5c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f1ef65c47937800e35477863b1439ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a6f1ef65c47937800e35477863b1439ab">Wall_pt</a></td></tr>
+<tr class="memdesc:a6f1ef65c47937800e35477863b1439ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the geometric object that parametrises the collapsible wall.  <a href="classoomph_1_1CollapsibleChannelDomain.html#a6f1ef65c47937800e35477863b1439ab">More...</a><br /></td></tr>
+<tr class="separator:a6f1ef65c47937800e35477863b1439ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a313b7177f2794c65d199213976900082"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a313b7177f2794c65d199213976900082">Rotate_domain</a></td></tr>
+<tr class="memdesc:a313b7177f2794c65d199213976900082"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate domain (for axisymmetric problems, say)  <a href="classoomph_1_1CollapsibleChannelDomain.html#a313b7177f2794c65d199213976900082">More...</a><br /></td></tr>
+<tr class="separator:a313b7177f2794c65d199213976900082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1Domain"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1Domain')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1Domain.html">oomph::Domain</a></td></tr>
+<tr class="memitem:a3a54693bb493f31acccadc62468dd7ae inherit pro_attribs_classoomph_1_1Domain"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a3a54693bb493f31acccadc62468dd7ae">Macro_element_pt</a></td></tr>
+<tr class="memdesc:a3a54693bb493f31acccadc62468dd7ae inherit pro_attribs_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of pointers to macro elements.  <a href="classoomph_1_1Domain.html#a3a54693bb493f31acccadc62468dd7ae">More...</a><br /></td></tr>
+<tr class="separator:a3a54693bb493f31acccadc62468dd7ae inherit pro_attribs_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Collapsible channel domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00041">41</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a317472dab112beac771ecf6442a465f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a317472dab112beac771ecf6442a465f5">&#9670;&nbsp;</a></span>AxialSpacingFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef double(* oomph::CollapsibleChannelDomain::AxialSpacingFctPt) (const double &amp;xi)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef for function pointer for function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00179">179</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+</div>
+</div>
+<a id="a2bf1d7943bfac134a5c27a54c7e1faed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bf1d7943bfac134a5c27a54c7e1faed">&#9670;&nbsp;</a></span>BLSquashFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef double(* oomph::CollapsibleChannelDomain::BLSquashFctPt) (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef for function pointer for function that squashes the macro elements near the wall to help resolution of any wall boundary layers. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00149">149</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a85e64b812b36155302407269d77dc6b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85e64b812b36155302407269d77dc6b3">&#9670;&nbsp;</a></span>CollapsibleChannelDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CollapsibleChannelDomain::CollapsibleChannelDomain </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ncollapsible</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ndown</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lcollapsible</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ldown</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>wall_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass the number of (macro-)elements, the domain lengths in the x- and y-direction and the pointer to the geometric object that specifies the shape of the "collapsible" segment. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">50</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00317">Ldown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00320">Ly</a>, <a class="el" href="domain_8h_source.html#l00307">oomph::Domain::Macro_element_pt</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00096">ncollapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00102">ndown()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00090">nup()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00108">ny()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00139">wall_pt()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00323">Wall_pt</a>.</p>
+
+</div>
+</div>
+<a id="a22469fc91a872e6252133af6e97d6e48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22469fc91a872e6252133af6e97d6e48">&#9670;&nbsp;</a></span>~CollapsibleChannelDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CollapsibleChannelDomain::~CollapsibleChannelDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: emtpy; cleanup done in base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00086">86</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="abc7b20efd68bdd11f1bea5df79ae579d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc7b20efd68bdd11f1bea5df79ae579d">&#9670;&nbsp;</a></span>axial_spacing_fct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::axial_spacing_fct </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xi</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00190">190</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00288">Axial_spacing_fct_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="a17bfb9fe218dc539669bdbdf0ecc4bf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17bfb9fe218dc539669bdbdf0ecc4bf8">&#9670;&nbsp;</a></span>axial_spacing_fct_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a317472dab112beac771ecf6442a465f5">AxialSpacingFctPt</a>&amp; oomph::CollapsibleChannelDomain::axial_spacing_fct_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer for function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00183">183</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00288">Axial_spacing_fct_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00128">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::axial_spacing_fct_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a9c7def97a2248a8e5a2dca79ee3a54eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c7def97a2248a8e5a2dca79ee3a54eb">&#9670;&nbsp;</a></span>bl_squash_fct_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a2bf1d7943bfac134a5c27a54c7e1faed">BLSquashFctPt</a>&amp; oomph::CollapsibleChannelDomain::bl_squash_fct_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer for function that squashes the macro elements near wall. Default mapping (identity) leaves the y-coordinate of the nodal points unchanged. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00162">162</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00284">BL_squash_fct_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00475">oomph::AlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt;::AlgebraicCollapsibleChannelMesh()</a>, and <a class="el" href="collapsible__channel__mesh_8template_8h_source.html#l00107">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::bl_squash_fct_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a3c814ed3312790877d193d4a018c30da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c814ed3312790877d193d4a018c30da">&#9670;&nbsp;</a></span>default_axial_spacing_fct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static double oomph::CollapsibleChannelDomain::default_axial_spacing_fct </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xi</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default for function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00292">292</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+</div>
+</div>
+<a id="a4222184a903df3efdd93cc306bac4414"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4222184a903df3efdd93cc306bac4414">&#9670;&nbsp;</a></span>default_BL_squash_fct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static double oomph::CollapsibleChannelDomain::default_BL_squash_fct </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default for function that squashes the macro elements near the walls. Identity. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00154">154</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+</div>
+</div>
+<a id="a65aae3aa3c5585bcff7db51751049d27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65aae3aa3c5585bcff7db51751049d27">&#9670;&nbsp;</a></span>disable_rotate_domain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::disable_rotate_domain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Undo rotation of the domain (for axisymmetric problems) </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00217">217</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00326">Rotate_domain</a>.</p>
+
+</div>
+</div>
+<a id="a91008f47dd3c4eb8a78842df88d9c9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91008f47dd3c4eb8a78842df88d9c9e4">&#9670;&nbsp;</a></span>enable_rotate_domain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::enable_rotate_domain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rotate the domain (for axisymmetric problems) </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00211">211</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00326">Rotate_domain</a>.</p>
+
+</div>
+</div>
+<a id="a0b38028581a27e6b34529ba2c3fa1af2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b38028581a27e6b34529ba2c3fa1af2">&#9670;&nbsp;</a></span>l_collapsible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::l_collapsible </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of collapsible segment. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00120">120</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>.</p>
+
+</div>
+</div>
+<a id="a93dc02b16ab1cbab2f42f62d0a7aeb8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93dc02b16ab1cbab2f42f62d0a7aeb8e">&#9670;&nbsp;</a></span>l_down()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::l_down </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of downstream section. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00126">126</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00317">Ldown</a>.</p>
+
+</div>
+</div>
+<a id="a3773afa34e21e3e4ed7a86cf42808dd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3773afa34e21e3e4ed7a86cf42808dd7">&#9670;&nbsp;</a></span>l_up()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::l_up </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of upstream section. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00114">114</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>.</p>
+
+</div>
+</div>
+<a id="ab95f48218b922883be6c8b9bfb39c2a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab95f48218b922883be6c8b9bfb39c2a8">&#9670;&nbsp;</a></span>l_y()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::l_y </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Width of channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00132">132</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00320">Ly</a>.</p>
+
+</div>
+</div>
+<a id="a2c0a5bd21e12fbcc1cdd753c0f205da2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c0a5bd21e12fbcc1cdd753c0f205da2">&#9670;&nbsp;</a></span>macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>idirect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the imacro-th macro element boundary idirect (N/S/W/E) at time level t (t=0: present; t&gt;0: previous): <img class="formulaInl" alt="$ {\bf r}({\bf zeta}) $" src="form_372.png"/> Note that the local coordinate <b>zeta</b> is a 1D <a class="el" href="classoomph_1_1Vector.html">Vector</a> rather than a scalar &ndash; this is unavoidable because this function implements the pure virtual function in the <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> base class. </p>
+<p><a class="el" href="classoomph_1_1Vector.html">Vector</a> representation of the imacro-th macro element boundary idirect (N/S/W/E) at time level t (t=0: present; t&gt;0: previous): <img class="formulaInl" alt="$ {\bf r}({\bf zeta}) $" src="form_372.png"/> Note that the local coordinate <b>zeta</b> is a 1D <a class="el" href="classoomph_1_1Vector.html">Vector</a> rather than a scalar &ndash; this is unavoidable because this function implements the pure virtual function in the <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> base class. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Domain.html#a95f3e00d28ea37e6c4d3027bfac91096">oomph::Domain</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">344</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::E</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::N</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">r_E_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">r_N_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">r_S_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">r_W_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00326">Rotate_domain</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::S</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::W</a>.</p>
+
+</div>
+</div>
+<a id="a59dd9d4001621752439ad95ceb8daa1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59dd9d4001621752439ad95ceb8daa1b">&#9670;&nbsp;</a></span>ncollapsible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CollapsibleChannelDomain::ncollapsible </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertical clumns of macro elements in the "collapsible" segment. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00096">96</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a0e1c69ac122606e4f883e96b51989d9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e1c69ac122606e4f883e96b51989d9f">&#9670;&nbsp;</a></span>ndown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CollapsibleChannelDomain::ndown </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertical columns of macro elements in the downstream section. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00102">102</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a7e098bcffc76332af4ca220701fd32e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e098bcffc76332af4ca220701fd32e2">&#9670;&nbsp;</a></span>nup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CollapsibleChannelDomain::nup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertical columns of macro elements the upstream section. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00090">90</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a62e15782984f3d5e10ba44a6d8ad06ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62e15782984f3d5e10ba44a6d8ad06ee">&#9670;&nbsp;</a></span>ny()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CollapsibleChannelDomain::ny </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro-elements across the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00108">108</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>.</p>
+
+</div>
+</div>
+<a id="af684e8e3271ed8f599a02495f794c4e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af684e8e3271ed8f599a02495f794c4e8">&#9670;&nbsp;</a></span>r_E_collapsible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::r_E_collapsible </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Eastern boundary of the macro element imacro in the collapsible section. </p>
+<p>Eastern edge of the macro element in the collapsible part of the channel; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_373.png"/> </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">768</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">s_squash()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00323">Wall_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a1f880915f7c2f9163fc1ec8cac676831"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f880915f7c2f9163fc1ec8cac676831">&#9670;&nbsp;</a></span>r_E_straight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::r_E_straight </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>part</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Eastern boundary of the macro element imacro in the upstream (part=0) or downstream (part=1) sections. </p>
+<p>Eastern edge of the macro element in the straight parts of the channel; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_373.png"/> part=0 in the upstream part, part=1 in the downstream part. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">557</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00190">axial_spacing_fct()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00317">Ldown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00320">Ly</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">s_squash()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a0044d3e848b4c643a8a30f4f00a88e8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0044d3e848b4c643a8a30f4f00a88e8d">&#9670;&nbsp;</a></span>r_N_collapsible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::r_N_collapsible </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Northern boundary of the macro element imacro in the collapsible section. </p>
+<p>Northern edge of the macro element in the collapsible part of the channel; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_373.png"/> </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">806</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">s_squash()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00323">Wall_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aec5509d4e6a229da9fec78ceb78dcb18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec5509d4e6a229da9fec78ceb78dcb18">&#9670;&nbsp;</a></span>r_N_straight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::r_N_straight </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>part</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Northern boundary of the macro element imacro in the upstream (part=0) or downstream (part=1) sections. </p>
+<p>Northern edge of the macro element in the straight parts of the channel; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_373.png"/> part=0 in the left part, part=1 in the right part. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">611</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00190">axial_spacing_fct()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00317">Ldown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00320">Ly</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">s_squash()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a1cc35b555f16401ec12854ff5a486800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cc35b555f16401ec12854ff5a486800">&#9670;&nbsp;</a></span>r_S_collapsible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::r_S_collapsible </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Southern boundary of the macro element imacro in the collapsible section. </p>
+<p>Southern edge of the macro element in the collapsible part of the channel; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_373.png"/> </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">844</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">s_squash()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00323">Wall_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a12b9fbd546a2375fea2461a07b5db089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12b9fbd546a2375fea2461a07b5db089">&#9670;&nbsp;</a></span>r_S_straight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::r_S_straight </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>part</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Southern boundary of the macro element imacro in the upstream (part=0) or downstream (part=1) sections. </p>
+<p>Southern edge of the macro element in the straight parts of the channel; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_373.png"/> part=0 in the left part, part=1 in the right part. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">668</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00190">axial_spacing_fct()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00317">Ldown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00320">Ly</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">s_squash()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ab8b0f990e596b2725ca8d84f2c9750eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8b0f990e596b2725ca8d84f2c9750eb">&#9670;&nbsp;</a></span>r_W_collapsible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::r_W_collapsible </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Western boundary of the macro element imacro in the collapsible section. </p>
+<p>Western edge of the macro element in the collapsible part of the channel; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_373.png"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">728</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">s_squash()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00323">Wall_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a94cebe8b3380c469cfd77924ec57d576"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94cebe8b3380c469cfd77924ec57d576">&#9670;&nbsp;</a></span>r_W_straight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CollapsibleChannelDomain::r_W_straight </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>part</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Western boundary of the macro element imacro in the upstream (part=0) or downstream (part=1) sections. </p>
+<p>Western edge of the macro element in the upstream (part=0) or downstream (part=1) parts of the channel; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_373.png"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">502</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00190">axial_spacing_fct()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">Lcollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00317">Ldown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">Lup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00320">Ly</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">Ncollapsible</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">Ndown</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">Nup</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">Ny</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">s_squash()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a638fd3959b72ef3287615f2b0f968e33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a638fd3959b72ef3287615f2b0f968e33">&#9670;&nbsp;</a></span>s_squash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::s_squash </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that squashes the macro elements near the wall. Input argument should vary between 0 and 1; function should return stretched/squashed coordinate in the same range. Default implementation is the identity; can be overloaded by specifying a different function pointer with <a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a9c7def97a2248a8e5a2dca79ee3a54eb" title="Function pointer for function that squashes the macro elements near wall. Default mapping (identity) ...">bl_squash_fct_pt()</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">172</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00284">BL_squash_fct_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">r_E_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">r_N_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">r_S_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">r_W_collapsible()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="a0a98c02b478d61d2cd4c899d0d37344a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a98c02b478d61d2cd4c899d0d37344a">&#9670;&nbsp;</a></span>wall_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a>*&amp; oomph::CollapsibleChannelDomain::wall_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to pointer to the geometric object that parametrises the collapsible wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00139">139</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00323">Wall_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a48237d8c4d10ff3ccdf68d02da5b29c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48237d8c4d10ff3ccdf68d02da5b29c7">&#9670;&nbsp;</a></span>wall_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a>* oomph::CollapsibleChannelDomain::wall_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to pointer to the geometric object that parametrises the collapsible wall (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00144">144</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__domain_8h_source.html#l00323">Wall_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6f4c3319be685553715f5cd776eea0fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4c3319be685553715f5cd776eea0fc">&#9670;&nbsp;</a></span>Axial_spacing_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a317472dab112beac771ecf6442a465f5">AxialSpacingFctPt</a> oomph::CollapsibleChannelDomain::Axial_spacing_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer for function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00288">288</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00190">axial_spacing_fct()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00183">axial_spacing_fct_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a3d3f5d77c3221da20cd02bf02be800b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d3f5d77c3221da20cd02bf02be800b7">&#9670;&nbsp;</a></span>BL_squash_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CollapsibleChannelDomain.html#a2bf1d7943bfac134a5c27a54c7e1faed">BLSquashFctPt</a> oomph::CollapsibleChannelDomain::BL_squash_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer for function that squashes the macro elements near the walls. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00284">284</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00162">bl_squash_fct_pt()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00172">s_squash()</a>.</p>
+
+</div>
+</div>
+<a id="aa44cd6613cea2a67dda8f4de0d9c6f1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa44cd6613cea2a67dda8f4de0d9c6f1e">&#9670;&nbsp;</a></span>Lcollapsible</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::Lcollapsible</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>x-length in the "collapsible" part of the channel </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00314">314</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00120">l_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">r_E_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">r_N_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">r_S_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">r_W_collapsible()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="ade4ee8220972fe6c454211d1f837fcf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade4ee8220972fe6c454211d1f837fcf9">&#9670;&nbsp;</a></span>Ldown</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::Ldown</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>x-length in the downstream part of the channel </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00317">317</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00126">l_down()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="a1c4dbe3313e696290ad9da4765d0a0e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c4dbe3313e696290ad9da4765d0a0e1">&#9670;&nbsp;</a></span>Lup</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::Lup</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>x-length in the upstream part of the channel </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00311">311</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00114">l_up()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">r_E_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">r_N_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">r_S_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">r_W_collapsible()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="ac70912e194ac3e211cc0ce625c8f5c41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac70912e194ac3e211cc0ce625c8f5c41">&#9670;&nbsp;</a></span>Ly</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::CollapsibleChannelDomain::Ly</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Width. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00320">320</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00132">l_y()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="a607c389c3f0c06f0240d97aaca65cdf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a607c389c3f0c06f0240d97aaca65cdf7">&#9670;&nbsp;</a></span>Ncollapsible</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CollapsibleChannelDomain::Ncollapsible</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertical element columns in "collapsible" section. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00302">302</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00096">ncollapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">r_E_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">r_N_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">r_S_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">r_W_collapsible()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="a1f9c92507803d56e12cf5cb24b11cd83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f9c92507803d56e12cf5cb24b11cd83">&#9670;&nbsp;</a></span>Ndown</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CollapsibleChannelDomain::Ndown</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertical element columns in downstream section. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00305">305</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00102">ndown()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">r_E_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">r_N_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">r_S_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">r_W_collapsible()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="a16bef61c4223f92cb1b0c35e9a7ea7d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16bef61c4223f92cb1b0c35e9a7ea7d2">&#9670;&nbsp;</a></span>Nup</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CollapsibleChannelDomain::Nup</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertical element columns in upstream section. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00299">299</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00090">nup()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">r_E_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">r_N_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">r_S_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">r_W_collapsible()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="a13c992ef93891493c5da50afff67d38c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13c992ef93891493c5da50afff67d38c">&#9670;&nbsp;</a></span>Ny</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::CollapsibleChannelDomain::Ny</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro elements across channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00308">308</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00108">ny()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">r_E_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00557">r_E_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">r_N_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00611">r_N_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">r_S_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00668">r_S_straight()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">r_W_collapsible()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00502">r_W_straight()</a>.</p>
+
+</div>
+</div>
+<a id="a313b7177f2794c65d199213976900082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a313b7177f2794c65d199213976900082">&#9670;&nbsp;</a></span>Rotate_domain</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::CollapsibleChannelDomain::Rotate_domain</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rotate domain (for axisymmetric problems, say) </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00326">326</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00217">disable_rotate_domain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00211">enable_rotate_domain()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00344">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a6f1ef65c47937800e35477863b1439ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f1ef65c47937800e35477863b1439ab">&#9670;&nbsp;</a></span>Wall_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a>* oomph::CollapsibleChannelDomain::Wall_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the geometric object that parametrises the collapsible wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="collapsible__channel__domain_8h_source.html#l00323">323</a> of file <a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="collapsible__channel__domain_8h_source.html#l00050">CollapsibleChannelDomain()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00768">r_E_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00806">r_N_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00844">r_S_collapsible()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00728">r_W_collapsible()</a>, and <a class="el" href="collapsible__channel__domain_8h_source.html#l00139">wall_pt()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="collapsible__channel__domain_8h_source.html">collapsible_channel_domain.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:24
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

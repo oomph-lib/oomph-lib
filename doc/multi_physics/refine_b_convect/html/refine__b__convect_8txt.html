@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: refine_b_convect.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">refine_b_convect.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a652760e0529a489769c0132b14a1bdef"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a> = &quot;../../b_convection/html/index.html&quot;&gt;non-refineable version of the <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a>&lt;/a &gt; we create the refineable <a class="el" href="refine__b__convect_8txt.html#a76374ef3c6061f3c4786702a50a907ed">element</a> \c RefineableBuoyantQCrouzeixRaviartElement by multiple inheritance from the \c RefineableQCrouzeixRaviartElement <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> \c RefineableQAdvectionDiffusionElement:\dontinclude boussinesq_elements.h \skipline start_element_class \until { Many of the additional member <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required in the combined multi-physics <a class="el" href="refine__b__convect_8txt.html#a76374ef3c6061f3c4786702a50a907ed">element</a> are identical to those in the non-refineable version:- the access function to(the pointer to the) Rayleigh number, \c ra_pt(), - the output <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a>, \c output(...), - the function \c required_n_value(...) which specifies the number of values required at each node, - the function \c u_index_adv_diff(...) which specifies the index at which the temperature is stored within the elements' \c Nodes, - the function \c get_wind_adv_diff(...) which specifies the &quot;wind&quot; in the advection diffusion equations in terms of the Navier-Stokes velocities, - the function \c get_body_force_nst(...) which specifies the body force in the Navier-Stokes equations in terms of the temperature. - the two &quot;fill in&quot; function are implemented as in the non-refineable element. The function \c fill_in_contribution_to_residuals(...) concatenates the contributions from the two underlying elements</td></tr>
+<tr class="separator:a652760e0529a489769c0132b14a1bdef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a94a201c7ba6a4bac422b4209ddd924f4"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity and linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation and re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> (empty) destructor</td></tr>
+<tr class="separator:a94a201c7ba6a4bac422b4209ddd924f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef81b175242f105f4cfa6465e82a5948"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt; HR &gt;&lt; HR &gt; section problem The problem class The problem class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this problem dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> (Since the domain is enclosed the pressure is only determined up to an arbitrary constant.) The pressure degree of freedom that was pinned before the adaptation may have disappeared during the adaptation</td></tr>
+<tr class="separator:aef81b175242f105f4cfa6465e82a5948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb1ff8cf837bf38120135bebec006cd4"><td class="memItemLeft" align="right" valign="top">the function c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#afb1ff8cf837bf38120135bebec006cd4">fill_in_contribution_to_jacobian</a> (...) computes the coupled elemental Jacobian matrix by finite-differencing. . We shall only discuss those additional <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> that are required in the refineable version of the combined multi-physics element. Both const ituent elements are derived from the \c ElementWithZ2ErrorEstimator base class <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> each <a class="el" href="refine__b__convect_8txt.html#a76374ef3c6061f3c4786702a50a907ed">element</a> provides its own definition of the &quot;Z2-flux&quot; that is <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> by the Z2 error estimator to compute elemental error estimates. We must decide on a single error estimator for the combined element. We could base the error estimation entirely on the fluid flow</td></tr>
+<tr class="separator:afb1ff8cf837bf38120135bebec006cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208f161875a2b8b1c7302a9d2b409f70"><td class="memItemLeft" align="right" valign="top">a choice that would be appropriate for problems with thin thermal boundary layers The different error estimates can all be specified by user defined <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> that combine the vector of compound flux error estimates into a single number For the function code double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a208f161875a2b8b1c7302a9d2b409f70">navier_stokes_flux_error</a> (const Vector&lt; double &gt; &amp;errors)</td></tr>
+<tr class="separator:a208f161875a2b8b1c7302a9d2b409f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a45c28d7c95e6c5c1c6023e8af810b0cb"><td class="memItemLeft" align="right" valign="top">mainpage Refineable Boussinesq&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a45c28d7c95e6c5c1c6023e8af810b0cb">Convection</a></td></tr>
+<tr class="separator:a45c28d7c95e6c5c1c6023e8af810b0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a045af2547c93c6b9801986cc145179"><td class="memItemLeft" align="right" valign="top">nard <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The lower wall is maintained at a temperature f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a4a045af2547c93c6b9801986cc145179">theta_</a></td></tr>
+<tr class="separator:a4a045af2547c93c6b9801986cc145179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bc94e43fb4273f87ea807c066ffd698"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a3bc94e43fb4273f87ea807c066ffd698">example</a></td></tr>
+<tr class="separator:a3bc94e43fb4273f87ea807c066ffd698"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00f33da8657b7c8459f10df3ab2c3272"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a00f33da8657b7c8459f10df3ab2c3272">Therefore</a></td></tr>
+<tr class="separator:a00f33da8657b7c8459f10df3ab2c3272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11778e96d5cb3a43210ca8e38083780f"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a11778e96d5cb3a43210ca8e38083780f">problem</a></td></tr>
+<tr class="separator:a11778e96d5cb3a43210ca8e38083780f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c1fa6e10991638196020d39232e43d1"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady state of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a></td></tr>
+<tr class="separator:a7c1fa6e10991638196020d39232e43d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0da63057661cd5950bb6ea2e67737e60"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a></td></tr>
+<tr class="separator:a0da63057661cd5950bb6ea2e67737e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad36caf34ab0237a3578c42f2c4a9244a"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the therefore the constraint must be re applied&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#ad36caf34ab0237a3578c42f2c4a9244a">However</a></td></tr>
+<tr class="separator:ad36caf34ab0237a3578c42f2c4a9244a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a325f28a20fa4ec06f5574b0c0b4e61"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the therefore the constraint must be re applied we unpin all pressure degrees of freedom first to ensure that we do not accidentally pin two pressure degrees of freedom until end_of_fix The remaining member <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> provide access to the boolean flag that controls the application of the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a9a325f28a20fa4ec06f5574b0c0b4e61">imperfection</a></td></tr>
+<tr class="separator:a9a325f28a20fa4ec06f5574b0c0b4e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80824adb7703bf8f436e10e7386f2692"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the solution from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the solution into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken solution shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the therefore the constraint must be re applied we unpin all pressure degrees of freedom first to ensure that we do not accidentally pin two pressure degrees of freedom until end_of_fix The remaining member <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> provide access to the boolean flag that controls the application of the <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> document the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a></td></tr>
+<tr class="separator:a80824adb7703bf8f436e10e7386f2692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ab223d59a01d8efabc714852a703bbe"><td class="memItemLeft" align="right" valign="top">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the therefore the constraint must be re applied we unpin all pressure degrees of freedom first to ensure that we do not accidentally pin two pressure degrees of freedom until end_of_fix The remaining member <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> provide access to the boolean flag that controls the application of the <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> document the which has no arguments The constructor builds a coarse initial c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a3ab223d59a01d8efabc714852a703bbe">RefineableRectangularQuadMesh</a></td></tr>
+<tr class="separator:a3ab223d59a01d8efabc714852a703bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48e3ff99683c6fde7db73706d5aff2aa"><td class="memItemLeft" align="right" valign="top">the function c or the temperature&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a></td></tr>
+<tr class="separator:a48e3ff99683c6fde7db73706d5aff2aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb1d642e2d099efbec7c4aebec8d84c8"><td class="memItemLeft" align="right" valign="top">the function c or the temperature but instead we shall choose our single error estimate to be the maximum of the fluid <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature error estimates The <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required by the c Z2ErrorEstimator are overloaded to return all the flux terms associated with both the velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#adb1d642e2d099efbec7c4aebec8d84c8">fields</a></td></tr>
+<tr class="separator:adb1d642e2d099efbec7c4aebec8d84c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76374ef3c6061f3c4786702a50a907ed"><td class="memItemLeft" align="right" valign="top">the function c or the temperature but instead we shall choose our single error estimate to be the maximum of the fluid <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature error estimates The <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required by the c Z2ErrorEstimator are overloaded to return all the flux terms associated with both the velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature with the velocity <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a> terms stored first dontinclude boussinesq_elements h skipline The recovery order is that of until end of get_Z2_flux The default behaviour of the Z2 error estimator is to combine all components of the flux vector into a single compound flux In the present multi physics&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a76374ef3c6061f3c4786702a50a907ed">element</a></td></tr>
+<tr class="separator:a76374ef3c6061f3c4786702a50a907ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e63fd5c89a130dca9c63ccc02d69afb"><td class="memItemLeft" align="right" valign="top">the function c or the temperature but instead we shall choose our single error estimate to be the maximum of the fluid <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature error estimates The <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required by the c Z2ErrorEstimator are overloaded to return all the flux terms associated with both the velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature with the velocity <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a> terms stored first dontinclude boussinesq_elements h skipline The recovery order is that of until end of get_Z2_flux The default behaviour of the Z2 error estimator is to combine all components of the flux vector into a single compound flux In the present multi physics we instead define two compound&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a2e63fd5c89a130dca9c63ccc02d69afb">fluxes</a></td></tr>
+<tr class="separator:a2e63fd5c89a130dca9c63ccc02d69afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712a71924df6c574241cb6c5a2ddba8b"><td class="memItemLeft" align="right" valign="top">the function c or the temperature but instead we shall choose our single error estimate to be the maximum of the fluid <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature error estimates The <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required by the c Z2ErrorEstimator are overloaded to return all the flux terms associated with both the velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature with the velocity <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a> terms stored first dontinclude boussinesq_elements h skipline The recovery order is that of until end of get_Z2_flux The default behaviour of the Z2 error estimator is to combine all components of the flux vector into a single compound flux In the present multi physics we instead define two compound containing the index of the compound flux to which the flux component contributes dontinclude boussinesq_elements h skipline The number of compound <a class="el" href="refine__b__convect_8txt.html#a2e63fd5c89a130dca9c63ccc02d69afb">fluxes</a> until end of get_Z2_compound_flux_indices The c Z2ErrorEstimator calculates the error estimates for each compound flux The individual error estimates are then combined to a single error estimate by the function c Z2ErrorEstimator::get_combined_error_estimate(). By default the single error estimate is chosen to be the maximum of all calculated error estimates. Alternative user-defined <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> can be specified via the function pointer \c Z2ErrorEstimator an appropriate choice for problems in which the variations in the velocity <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a> are expected to be much more rapid than those in the temperature <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a712a71924df6c574241cb6c5a2ddba8b">Alternatively</a></td></tr>
+<tr class="separator:a712a71924df6c574241cb6c5a2ddba8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c2c21bccf7a2b590e22a9d0e2b1b98"><td class="memItemLeft" align="right" valign="top">endcode specifies that the combined error estimate is the first of the compound error estimates the error estimate for the Navier Stokes equations n n In the current <a class="el" href="refine__b__convect_8txt.html#a3bc94e43fb4273f87ea807c066ffd698">example</a> both <a class="el" href="refine__b__convect_8txt.html#adb1d642e2d099efbec7c4aebec8d84c8">fields</a> vary very&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#aa2c2c21bccf7a2b590e22a9d0e2b1b98">smoothly</a></td></tr>
+<tr class="separator:aa2c2c21bccf7a2b590e22a9d0e2b1b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8243e0f56e579a9799a10c24a49568d9"><td class="memItemLeft" align="right" valign="top">endcode specifies that the combined error estimate is the first of the compound error estimates the error estimate for the Navier Stokes equations n n In the current <a class="el" href="refine__b__convect_8txt.html#a3bc94e43fb4273f87ea807c066ffd698">example</a> both <a class="el" href="refine__b__convect_8txt.html#adb1d642e2d099efbec7c4aebec8d84c8">fields</a> vary very <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> as a result spatial adaptivity is not really required in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> This is why we set a very narrow range of target errors if the default targets are&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a></td></tr>
+<tr class="separator:a8243e0f56e579a9799a10c24a49568d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b22ddd6f9262a97f12413b125f9da7"><td class="memItemLeft" align="right" valign="top">endcode specifies that the combined error estimate is the first of the compound error estimates the error estimate for the Navier Stokes equations n n In the current <a class="el" href="refine__b__convect_8txt.html#a3bc94e43fb4273f87ea807c066ffd698">example</a> both <a class="el" href="refine__b__convect_8txt.html#adb1d642e2d099efbec7c4aebec8d84c8">fields</a> vary very <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> as a result spatial adaptivity is not really required in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> This is why we set a very narrow range of target errors if the default targets are c oomph lib refines the mesh uniformly subsection exercises Exercises is&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="refine__b__convect_8txt.html#a19b22ddd6f9262a97f12413b125f9da7">stable</a></td></tr>
+<tr class="separator:a19b22ddd6f9262a97f12413b125f9da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a652760e0529a489769c0132b14a1bdef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a652760e0529a489769c0132b14a1bdef">&#9670;&nbsp;</a></span>href</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a> =  &quot;../../b_convection/html/index.html&quot;&gt;non-refineable version of the <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a>&lt;/a&gt; we create the refineable <a class="el" href="refine__b__convect_8txt.html#a76374ef3c6061f3c4786702a50a907ed">element</a> \c RefineableBuoyantQCrouzeixRaviartElement by multiple inheritance from the \c RefineableQCrouzeixRaviartElement <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> \c RefineableQAdvectionDiffusionElement: \dontinclude boussinesq_elements.h \skipline start_element_class \until { Many of the additional member <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required in the combined multi-physics <a class="el" href="refine__b__convect_8txt.html#a76374ef3c6061f3c4786702a50a907ed">element</a> are identical to those in the non-refineable version: - the access function to (the pointer to the) Rayleigh number, \c ra_pt(), - the output <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a>, \c output(...), - the function \c required_n_value(...) which specifies the number of values required at each node, - the function \c u_index_adv_diff(...) which specifies the index at which the temperature is stored within the elements' \c Nodes, - the function \c get_wind_adv_diff(...) which specifies the &quot;wind&quot; in the advection diffusion equations in terms of the Navier-Stokes velocities, - the function \c get_body_force_nst(...) which specifies the body force in the Navier-Stokes equations in terms of the temperature. - the two &quot;fill in&quot; function are implemented as in the non-refineable element. The function \c fill_in_contribution_to_residuals(...) concatenates the contributions from the two underlying elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00180">180</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a94a201c7ba6a4bac422b4209ddd924f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94a201c7ba6a4bac422b4209ddd924f4">&#9670;&nbsp;</a></span>and()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">As discussed in the&lt;a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a&gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity and linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation and re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor and </td>
+          <td>(</td>
+          <td class="paramtype">empty&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb1ff8cf837bf38120135bebec006cd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb1ff8cf837bf38120135bebec006cd4">&#9670;&nbsp;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the function c fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00155">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="boussinesq__elements_8h_source.html#l00315">oomph::BuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00468">oomph::RefineableAdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00848">oomph::NavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01138">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="boussinesq__elements_8h_source.html#l01174">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a208f161875a2b8b1c7302a9d2b409f70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a208f161875a2b8b1c7302a9d2b409f70">&#9670;&nbsp;</a></span>navier_stokes_flux_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">a choice that would be appropriate for problems with thin thermal boundary layers The different error estimates can all be specified by user defined <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> that combine the vector of compound flux error estimates into a single number For the function code double navier_stokes_flux_error </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>errors</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00303">303</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="aef81b175242f105f4cfa6465e82a5948"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef81b175242f105f4cfa6465e82a5948">&#9670;&nbsp;</a></span>problem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">As discussed in the&lt;a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a&gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt;HR&gt;&lt;HR&gt; section problem The problem class The problem class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this problem dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the problem </td>
+          <td>(</td>
+          <td class="paramtype">Since the domain is enclosed the pressure is only determined up to an arbitrary&#160;</td>
+          <td class="paramname"><em>constant.</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a712a71924df6c574241cb6c5a2ddba8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a712a71924df6c574241cb6c5a2ddba8b">&#9670;&nbsp;</a></span>Alternatively</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the function c or the temperature but instead we shall choose our single error estimate to be the maximum of the fluid <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature error estimates The <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required by the c Z2ErrorEstimator are overloaded to return all the flux terms associated with both the velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature with the velocity <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a> terms stored first dontinclude boussinesq_elements h skipline The recovery order is that of until end of get_Z2_flux The default behaviour of the Z2 error estimator is to combine all components of the flux vector into a single compound flux In the present multi physics we instead define two compound containing the index of the compound flux to which the flux component contributes dontinclude boussinesq_elements h skipline The number of compound <a class="el" href="refine__b__convect_8txt.html#a2e63fd5c89a130dca9c63ccc02d69afb">fluxes</a> until end of get_Z2_compound_flux_indices The c Z2ErrorEstimator calculates the error estimates for each compound flux The individual error estimates are then combined to a single error estimate by the function c Z2ErrorEstimator::get_combined_error_estimate (). By default the single error estimate is chosen to be the maximum of all calculated error estimates. Alternative user-defined <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> can be specified via the function pointer \c Z2ErrorEstimator an appropriate choice for problems in which the variations in the velocity <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a> are expected to be much more rapid than those in the temperature <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a> Alternatively</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00222">222</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a45c28d7c95e6c5c1c6023e8af810b0cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c28d7c95e6c5c1c6023e8af810b0cb">&#9670;&nbsp;</a></span>Convection</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Refineable Boussinesq Convection</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00008">8</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a76374ef3c6061f3c4786702a50a907ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76374ef3c6061f3c4786702a50a907ed">&#9670;&nbsp;</a></span>element</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the function c or the temperature but instead we shall choose our single error estimate to be the maximum of the fluid <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature error estimates The <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required by the c Z2ErrorEstimator are overloaded to return all the flux terms associated with both the velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature with the velocity <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a> terms stored first dontinclude boussinesq_elements h skipline The recovery order is that of until end of get_Z2_flux The default behaviour of the Z2 error estimator is to combine all components of the flux vector into a single compound flux In the present multi physics element</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00206">206</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3bc94e43fb4273f87ea807c066ffd698"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bc94e43fb4273f87ea807c066ffd698">&#9670;&nbsp;</a></span>example</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">a choice that would be appropriate for problems with thin thermal boundary layers The different error estimates can all be specified by user defined <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> that combine the vector of compound flux error estimates into a single number For example</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00036">36</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a48e3ff99683c6fde7db73706d5aff2aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e3ff99683c6fde7db73706d5aff2aa">&#9670;&nbsp;</a></span>field</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the function c or the temperature but instead we shall choose our single error estimate to be the maximum of the fluid <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature error estimates The <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required by the c Z2ErrorEstimator are overloaded to return all the flux terms associated with both the velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature with the velocity field terms stored first dontinclude boussinesq_elements h skipline The recovery order is that of until end of get_Z2_flux The default behaviour of the Z2 error estimator is to combine all components of the flux vector into a single compound flux In the present multi physics we instead define two compound containing the index of the compound flux to which the flux component contributes dontinclude boussinesq_elements h skipline The number of compound <a class="el" href="refine__b__convect_8txt.html#a2e63fd5c89a130dca9c63ccc02d69afb">fluxes</a> until end of get_Z2_compound_flux_indices The c Z2ErrorEstimator calculates the error estimates for each compound flux The individual error estimates are then combined to a single error estimate by the function c Z2ErrorEstimator::get_combined_error_estimate (). By default the single error estimate is chosen to be the maximum of all calculated error estimates. Alternative user-defined <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> can be specified via the function pointer \c Z2ErrorEstimator an appropriate choice for problems in which the variations in the velocity field are expected to be much more rapid than those in the temperature field the error estimation could be based exclusively on the temperature field</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00193">193</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="adb1d642e2d099efbec7c4aebec8d84c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb1d642e2d099efbec7c4aebec8d84c8">&#9670;&nbsp;</a></span>fields</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the function c or the temperature but instead we shall choose our single error estimate to be the maximum of the fluid <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature error estimates The <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required by the c Z2ErrorEstimator are overloaded to return all the flux terms associated with both the velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature fields</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00198">198</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2e63fd5c89a130dca9c63ccc02d69afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e63fd5c89a130dca9c63ccc02d69afb">&#9670;&nbsp;</a></span>fluxes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the function c or the temperature but instead we shall choose our single error estimate to be the maximum of the fluid <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature error estimates The <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> required by the c Z2ErrorEstimator are overloaded to return all the flux terms associated with both the velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> temperature with the velocity <a class="el" href="refine__b__convect_8txt.html#a48e3ff99683c6fde7db73706d5aff2aa">field</a> terms stored first dontinclude boussinesq_elements h skipline The recovery order is that of until end of get_Z2_flux The default behaviour of the Z2 error estimator is to combine all components of the flux vector into a single compound flux In the present multi physics we instead define two compound fluxes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00212">212</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0da63057661cd5950bb6ea2e67737e60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0da63057661cd5950bb6ea2e67737e60">&#9670;&nbsp;</a></span>functions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">As discussed in the&lt;a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a&gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action functions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00058">58</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad36caf34ab0237a3578c42f2c4a9244a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad36caf34ab0237a3578c42f2c4a9244a">&#9670;&nbsp;</a></span>However</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">As discussed in the&lt;a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a&gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the therefore the constraint must be re applied However</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00071">71</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9a325f28a20fa4ec06f5574b0c0b4e61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a325f28a20fa4ec06f5574b0c0b4e61">&#9670;&nbsp;</a></span>imperfection</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">As discussed in the&lt;a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a&gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the therefore the constraint must be re applied we unpin all pressure degrees of freedom first to ensure that we do not accidentally pin two pressure degrees of freedom until end_of_fix The remaining member <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> provide access to the boolean flag that controls the application of the imperfection</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00078">78</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a11778e96d5cb3a43210ca8e38083780f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11778e96d5cb3a43210ca8e38083780f">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">As discussed in the&lt; a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00040">40</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__convection_8cc_source.html#l00314">main()</a>.</p>
+
+</div>
+</div>
+<a id="a3ab223d59a01d8efabc714852a703bbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab223d59a01d8efabc714852a703bbe">&#9670;&nbsp;</a></span>RefineableRectangularQuadMesh</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">As discussed in the&lt;a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a&gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the therefore the constraint must be re applied we unpin all pressure degrees of freedom first to ensure that we do not accidentally pin two pressure degrees of freedom until end_of_fix The remaining member <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> provide access to the boolean flag that controls the application of the <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> document the which has no arguments The constructor builds a coarse initial c RefineableRectangularQuadMesh</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00090">90</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa2c2c21bccf7a2b590e22a9d0e2b1b98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2c2c21bccf7a2b590e22a9d0e2b1b98">&#9670;&nbsp;</a></span>smoothly</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode specifies that the combined error estimate is the first of the compound error estimates the error estimate for the Navier Stokes equations n n In the current <a class="el" href="refine__b__convect_8txt.html#a3bc94e43fb4273f87ea807c066ffd698">example</a> both <a class="el" href="refine__b__convect_8txt.html#adb1d642e2d099efbec7c4aebec8d84c8">fields</a> vary very smoothly</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00310">310</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a80824adb7703bf8f436e10e7386f2692"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80824adb7703bf8f436e10e7386f2692">&#9670;&nbsp;</a></span>solution</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">As discussed in the&lt;a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a&gt; a small perturbation is required to force the solution from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the solution into a non trivial symmetry broken we switch off the perturbation <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken solution shown above until end of <a class="el" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class The <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> class contains the constructor the usual action <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> an access function to the specific mesh <a class="el" href="refine__b__convect_8txt.html#a8243e0f56e579a9799a10c24a49568d9">used</a> in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> dontinclude refineable_b_convection cc skipline start_of_problem_class until end of access No specific action is required before the adaptation but following the mesh adaptation exactly one pressure degree of freedom must be pinned in the therefore the constraint must be re applied we unpin all pressure degrees of freedom first to ensure that we do not accidentally pin two pressure degrees of freedom until end_of_fix The remaining member <a class="el" href="refine__b__convect_8txt.html#a0da63057661cd5950bb6ea2e67737e60">functions</a> provide access to the boolean flag that controls the application of the <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> document the solution</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00089">89</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a19b22ddd6f9262a97f12413b125f9da7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19b22ddd6f9262a97f12413b125f9da7">&#9670;&nbsp;</a></span>stable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode specifies that the combined error estimate is the first of the compound error estimates the error estimate for the Navier Stokes equations n n In the current <a class="el" href="refine__b__convect_8txt.html#a3bc94e43fb4273f87ea807c066ffd698">example</a> both <a class="el" href="refine__b__convect_8txt.html#adb1d642e2d099efbec7c4aebec8d84c8">fields</a> vary very <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> as a result spatial adaptivity is not really required in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> This is why we set a very narrow range of target errors if the default targets are c oomph lib refines the mesh uniformly subsection exercises Exercises is stable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00317">317</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7c1fa6e10991638196020d39232e43d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c1fa6e10991638196020d39232e43d1">&#9670;&nbsp;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode specifies that the combined error estimate is the first of the compound error estimates the error estimate for the Navier Stokes equations n n In the current <a class="el" href="refine__b__convect_8txt.html#a3bc94e43fb4273f87ea807c066ffd698">example</a> both <a class="el" href="refine__b__convect_8txt.html#adb1d642e2d099efbec7c4aebec8d84c8">fields</a> vary very <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> as a result spatial adaptivity is not really required in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> This is why we set a very narrow range of target errors if the default targets are c oomph lib refines the mesh uniformly subsection exercises Exercises is i e it returns to the trivial state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00045">45</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a00f33da8657b7c8459f10df3ab2c3272"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00f33da8657b7c8459f10df3ab2c3272">&#9670;&nbsp;</a></span>Therefore</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">As discussed in the&lt;a <a class="el" href="refine__b__convect_8txt.html#a652760e0529a489769c0132b14a1bdef">href</a>=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a&gt; a small perturbation is required to force the <a class="el" href="refine__b__convect_8txt.html#a80824adb7703bf8f436e10e7386f2692">solution</a> from the trivial steady <a class="el" href="refine__b__convect_8txt.html#a7c1fa6e10991638196020d39232e43d1">state</a> of zero velocity <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> linear temperature variation Therefore</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00038">38</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4a045af2547c93c6b9801986cc145179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a045af2547c93c6b9801986cc145179">&#9670;&nbsp;</a></span>theta_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nard <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> The lower wall is maintained at a temperature f where f theta_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{bottom} \f$ <a class="code" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> the upper wall is maintained at</div>
+<div class="line"> a temperature \f$ <a class="code" href="refine__b__convect_8txt.html#a4a045af2547c93c6b9801986cc145179">\theta_</a>{top} \f$</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00009">9</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8243e0f56e579a9799a10c24a49568d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8243e0f56e579a9799a10c24a49568d9">&#9670;&nbsp;</a></span>used</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode specifies that the combined error estimate is the first of the compound error estimates the error estimate for the Navier Stokes equations n n In the current <a class="el" href="refine__b__convect_8txt.html#a3bc94e43fb4273f87ea807c066ffd698">example</a> both <a class="el" href="refine__b__convect_8txt.html#adb1d642e2d099efbec7c4aebec8d84c8">fields</a> vary very <a class="el" href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a> as a result spatial adaptivity is not really required in this <a class="el" href="refine__b__convect_8txt.html#aef81b175242f105f4cfa6465e82a5948">problem</a> This is why we set a very narrow range of target errors if the default targets are used</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="refine__b__convect_8txt_source.html#l00313">313</a> of file <a class="el" href="refine__b__convect_8txt_source.html">refine_b_convect.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="arefine__b__convect_8txt_html_a94a201c7ba6a4bac422b4209ddd924f4"><div class="ttname"><a href="refine__b__convect_8txt.html#a94a201c7ba6a4bac422b4209ddd924f4">and</a></div><div class="ttdeci">As discussed in the&lt; a href=&quot;../../b_convection/html/index.html&quot;&gt; previous&lt;/a &gt; a small perturbation is required to force the solution from the trivial steady state of zero velocity and linear temperature variation we add a small perturbation to the vertical velocity on the upper wall before solving the steady allowing for up to two levels of adaptive mesh refinement until doc_solution Having forced the solution into a non trivial symmetry broken we switch off the perturbation and re solve the allowing for another two levels of adaptive refinement The Newton solver now converges to the unperturbed but symmetry broken solution shown above until end of main&lt; HR &gt;&lt; HR &gt; section problem The problem class The problem class contains the constructor and(empty) destructor</div></div>
+<div class="ttc" id="arefine__b__convect_8txt_html_a4a045af2547c93c6b9801986cc145179"><div class="ttname"><a href="refine__b__convect_8txt.html#a4a045af2547c93c6b9801986cc145179">theta_</a></div><div class="ttdeci">nard problem The lower wall is maintained at a temperature f theta_</div><div class="ttdef"><b>Definition:</b> <a href="refine__b__convect_8txt_source.html#l00009">refine_b_convect.txt:9</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:08
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

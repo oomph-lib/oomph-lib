@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">CircularCylindricalShellMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1CircularCylindricalShellMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1CircularCylindricalShellMesh.png" usemap="#oomph::CircularCylindricalShellMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::CircularCylindricalShellMesh_3C_20ELEMENT_20_3E_map" name="oomph::CircularCylindricalShellMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1RectangularQuadMesh.html" alt="oomph::RectangularQuadMesh&lt; ELEMENT &gt;" shape="rect" coords="0,56,303,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a770336fa72e8911f31b9fe3f70197a51"><td class="memItemLeft" align="right" valign="top">typedef double(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a770336fa72e8911f31b9fe3f70197a51">AxialBLStretchingFctPt</a>) (const double &amp;x)</td></tr>
+<tr class="memdesc:a770336fa72e8911f31b9fe3f70197a51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for fct that defines the axial stretching fct.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a770336fa72e8911f31b9fe3f70197a51">More...</a><br /></td></tr>
+<tr class="separator:a770336fa72e8911f31b9fe3f70197a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad392c085b9a8f87fd9a24e02738f5d60"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#ad392c085b9a8f87fd9a24e02738f5d60">CircularCylindricalShellMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ad392c085b9a8f87fd9a24e02738f5d60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the mesh &ndash; uniformly spaced elements.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#ad392c085b9a8f87fd9a24e02738f5d60">More...</a><br /></td></tr>
+<tr class="separator:ad392c085b9a8f87fd9a24e02738f5d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2382a9ed0cd210c7b697e6ba4f4e2b0b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a2382a9ed0cd210c7b697e6ba4f4e2b0b">CircularCylindricalShellMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a770336fa72e8911f31b9fe3f70197a51">AxialBLStretchingFctPt</a> <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#aa9c69dc3c6692d19706178d558d07f86">axial_bl_stretching_fct_pt</a>, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a2382a9ed0cd210c7b697e6ba4f4e2b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the mesh &ndash; specify fct that maps axial Lagr. coordinates to new positions to allow for better resolution of bending boundary layer.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a2382a9ed0cd210c7b697e6ba4f4e2b0b">More...</a><br /></td></tr>
+<tr class="separator:a2382a9ed0cd210c7b697e6ba4f4e2b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba83d68289f90a8567887443c3b9c6f0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#aba83d68289f90a8567887443c3b9c6f0">CircularCylindricalShellMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, const unsigned &amp;nx_bl, const double &amp;delta_bl, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aba83d68289f90a8567887443c3b9c6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the mesh. nx_bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta_bl. <br  />
+  <a href="classoomph_1_1CircularCylindricalShellMesh.html#aba83d68289f90a8567887443c3b9c6f0">More...</a><br /></td></tr>
+<tr class="separator:aba83d68289f90a8567887443c3b9c6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03bba13301e4dec893d73716e146c71d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a03bba13301e4dec893d73716e146c71d">assign_undeformed_positions</a> (GeomObject *const &amp;undeformed_midplane_pt)</td></tr>
+<tr class="memdesc:a03bba13301e4dec893d73716e146c71d"><td class="mdescLeft">&#160;</td><td class="mdescRight">In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a03bba13301e4dec893d73716e146c71d">More...</a><br /></td></tr>
+<tr class="separator:a03bba13301e4dec893d73716e146c71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c69dc3c6692d19706178d558d07f86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a770336fa72e8911f31b9fe3f70197a51">AxialBLStretchingFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#aa9c69dc3c6692d19706178d558d07f86">axial_bl_stretching_fct_pt</a> () const</td></tr>
+<tr class="memdesc:aa9c69dc3c6692d19706178d558d07f86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to fct pointer to fct that defines the axial stretching fct.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#aa9c69dc3c6692d19706178d558d07f86">More...</a><br /></td></tr>
+<tr class="separator:aa9c69dc3c6692d19706178d558d07f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1f906bca42da3d44765382013667e40d">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to Steady)  <a href="classoomph_1_1RectangularQuadMesh.html#a1f906bca42da3d44765382013667e40d">More...</a><br /></td></tr>
+<tr class="separator:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aea506679674e4fc5c43b62a53798d0be">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates.  <a href="classoomph_1_1RectangularQuadMesh.html#aea506679674e4fc5c43b62a53798d0be">More...</a><br /></td></tr>
+<tr class="separator:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a40f120e00d682026e54593ca0f823535">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, const bool &amp;periodic_in_x, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-direction. Also pass pointer to timestepper (defaults to Steady)  <a href="classoomph_1_1RectangularQuadMesh.html#a40f120e00d682026e54593ca0f823535">More...</a><br /></td></tr>
+<tr class="separator:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ac36869a7d72ec7524b18272657cb6167">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, const bool &amp;periodic_in_x, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#ac36869a7d72ec7524b18272657cb6167">More...</a><br /></td></tr>
+<tr class="separator:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfef93d6322886cdce14a437186e4821 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a> () const</td></tr>
+<tr class="memdesc:abfef93d6322886cdce14a437186e4821 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of elements in x direction.  <a href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">More...</a><br /></td></tr>
+<tr class="separator:abfef93d6322886cdce14a437186e4821 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86d76a55eb7c4e8bca9b74d23c8b0412 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a> () const</td></tr>
+<tr class="memdesc:a86d76a55eb7c4e8bca9b74d23c8b0412 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of elements in y direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">More...</a><br /></td></tr>
+<tr class="separator:a86d76a55eb7c4e8bca9b74d23c8b0412 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab311c3bec7f9f721bae1f93e0798ab2c">x_min</a> () const</td></tr>
+<tr class="memdesc:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ab311c3bec7f9f721bae1f93e0798ab2c">More...</a><br /></td></tr>
+<tr class="separator:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a3449b36a5e4fc4728e517bd38d7b0cc6">x_max</a> () const</td></tr>
+<tr class="memdesc:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#a3449b36a5e4fc4728e517bd38d7b0cc6">More...</a><br /></td></tr>
+<tr class="separator:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1c493af1dae35746bed7a31e61b46c5b">y_min</a> () const</td></tr>
+<tr class="memdesc:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#a1c493af1dae35746bed7a31e61b46c5b">More...</a><br /></td></tr>
+<tr class="separator:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a7d4a00a545efc20451b00a9b8ad1e17d">y_max</a> () const</td></tr>
+<tr class="memdesc:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#a7d4a00a545efc20451b00a9b8ad1e17d">More...</a><br /></td></tr>
+<tr class="separator:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae1e1d67808d4efb6e16a3835162a4504">element_reorder</a> ()</td></tr>
+<tr class="memdesc:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder the elements: By default they are ordered in "horizontal" layers (increasing in x, then in y). This function changes this to an ordering in the vertical direction (y first, then x). This is more efficient if a frontal solver is used and the mesh has more elements in the x than the y direction. Can be overloaded in specific derived meshes.  <a href="classoomph_1_1RectangularQuadMesh.html#ae1e1d67808d4efb6e16a3835162a4504">More...</a><br /></td></tr>
+<tr class="separator:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4c2f349cf201cb3107f0a4e5447c16f inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ad4c2f349cf201cb3107f0a4e5447c16f">x_spacing_function</a> (unsigned xelement, unsigned xnode, unsigned yelement, unsigned ynode)</td></tr>
+<tr class="memdesc:ad4c2f349cf201cb3107f0a4e5447c16f inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the x-coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "psudeo" two-dimensional coordinate system, so the range of xelement is [0,Nx-1], yelement is [0,Ny-1], and that of xnode and ynode is [0,Np-1]. The default is to return nodes that are equally spaced in the x coodinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ad4c2f349cf201cb3107f0a4e5447c16f">More...</a><br /></td></tr>
+<tr class="separator:ad4c2f349cf201cb3107f0a4e5447c16f inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae78204de1f176cdf2e819673bd34e78a inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae78204de1f176cdf2e819673bd34e78a">y_spacing_function</a> (unsigned xelement, unsigned xnode, unsigned yelement, unsigned ynode)</td></tr>
+<tr class="memdesc:ae78204de1f176cdf2e819673bd34e78a inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the y-coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "psudeo" two-dimensional coordinate system, so the range of xelement is [0,Nx-1], yelement is [0,Ny-1], and that of xnode and ynode is [0,Np-1]. The default it to return nodes that are equally spaced in the y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ae78204de1f176cdf2e819673bd34e78a">More...</a><br /></td></tr>
+<tr class="separator:ae78204de1f176cdf2e819673bd34e78a inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a032ddb9b1afa4ef446ca74c8a6965000"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a032ddb9b1afa4ef446ca74c8a6965000">build_mesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly)</td></tr>
+<tr class="memdesc:a032ddb9b1afa4ef446ca74c8a6965000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh build helper fct.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a032ddb9b1afa4ef446ca74c8a6965000">More...</a><br /></td></tr>
+<tr class="separator:a032ddb9b1afa4ef446ca74c8a6965000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fb67c76ca3ad60efadfe2d3aabcfa0b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a4fb67c76ca3ad60efadfe2d3aabcfa0b">scaled_x</a> (const double &amp;x)</td></tr>
+<tr class="memdesc:a4fb67c76ca3ad60efadfe2d3aabcfa0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fct that defines the axial stretching to accomodate bending boundary layers.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a4fb67c76ca3ad60efadfe2d3aabcfa0b">More...</a><br /></td></tr>
+<tr class="separator:a4fb67c76ca3ad60efadfe2d3aabcfa0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5730df8baedd890ca909f31e5452f3db"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a5730df8baedd890ca909f31e5452f3db">piecewise_linear_axial_bl_stretching_fct</a> (const double &amp;xi)</td></tr>
+<tr class="memdesc:a5730df8baedd890ca909f31e5452f3db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default axial scaling fct.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a5730df8baedd890ca909f31e5452f3db">More...</a><br /></td></tr>
+<tr class="separator:a5730df8baedd890ca909f31e5452f3db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a5669a7c088fe0d30f7d011275861f6b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a770336fa72e8911f31b9fe3f70197a51">AxialBLStretchingFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a5669a7c088fe0d30f7d011275861f6b9">Axial_bl_stretching_fct_pt</a></td></tr>
+<tr class="memdesc:a5669a7c088fe0d30f7d011275861f6b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fct pointer to fct that defines the axial stretching fct.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a5669a7c088fe0d30f7d011275861f6b9">More...</a><br /></td></tr>
+<tr class="separator:a5669a7c088fe0d30f7d011275861f6b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a7ed3a5cd4c03c6254e5a8a0d3e532a"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a1a7ed3a5cd4c03c6254e5a8a0d3e532a">Nx_bl</a></td></tr>
+<tr class="memdesc:a1a7ed3a5cd4c03c6254e5a8a0d3e532a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of azimuthal element layers that get squashed into each of the the two boundary layers at the ends of the tube.  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a1a7ed3a5cd4c03c6254e5a8a0d3e532a">More...</a><br /></td></tr>
+<tr class="separator:a1a7ed3a5cd4c03c6254e5a8a0d3e532a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a935925bc28901cf99f2ebdc2cff1b692"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a935925bc28901cf99f2ebdc2cff1b692">Delta_bl</a></td></tr>
+<tr class="memdesc:a935925bc28901cf99f2ebdc2cff1b692"><td class="mdescLeft">&#160;</td><td class="mdescRight">Axial extent of the squashed boundary layer part of the mesh occupied by Nx_bl elements (at each end of the tube)  <a href="classoomph_1_1CircularCylindricalShellMesh.html#a935925bc28901cf99f2ebdc2cff1b692">More...</a><br /></td></tr>
+<tr class="separator:a935925bc28901cf99f2ebdc2cff1b692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#afa579b413a2d8120e8228d840cb3582c">build_mesh</a> (TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic mesh construction function: contains all the hard work.  <a href="classoomph_1_1RectangularQuadMesh.html#afa579b413a2d8120e8228d840cb3582c">More...</a><br /></td></tr>
+<tr class="separator:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aeda49fb3896e9e3aec328391b196a6bf">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, const bool &amp;periodic_in_x, const bool &amp;build, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!!  <a href="classoomph_1_1RectangularQuadMesh.html#aeda49fb3896e9e3aec328391b196a6bf">More...</a><br /></td></tr>
+<tr class="separator:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1b2c0a2d1f8399713033953c72d399ee">Nx</a></td></tr>
+<tr class="memdesc:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nx: number of elements in x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a1b2c0a2d1f8399713033953c72d399ee">More...</a><br /></td></tr>
+<tr class="separator:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">Ny</a></td></tr>
+<tr class="memdesc:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ny: number of elements in y-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">More...</a><br /></td></tr>
+<tr class="separator:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a92502c7536a6644ebffd806841cd4d98">Np</a></td></tr>
+<tr class="memdesc:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Np: number of (linear) points in the element.  <a href="classoomph_1_1RectangularQuadMesh.html#a92502c7536a6644ebffd806841cd4d98">More...</a><br /></td></tr>
+<tr class="separator:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#af3aab508d077460545031e758396514a">Xmin</a></td></tr>
+<tr class="memdesc:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#af3aab508d077460545031e758396514a">More...</a><br /></td></tr>
+<tr class="separator:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab8e4ddba0ce8315cf480cdd1f3447684">Xmax</a></td></tr>
+<tr class="memdesc:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ab8e4ddba0ce8315cf480cdd1f3447684">More...</a><br /></td></tr>
+<tr class="separator:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ade53fec7446044418ccba9f55d692adb">Ymin</a></td></tr>
+<tr class="memdesc:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ade53fec7446044418ccba9f55d692adb">More...</a><br /></td></tr>
+<tr class="separator:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">Ymax</a></td></tr>
+<tr class="memdesc:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">More...</a><br /></td></tr>
+<tr class="separator:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">Xperiodic</a></td></tr>
+<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction <br  />
+  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
+<tr class="separator:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;</h3>
+
+<p>A 2D solid mesh for (topologically) circular cylindrical shells. The shell is represented by two Lagrangian coordinates that correspond to z and theta in cylindrical polars. The required mesh is therefore a 2D mesh and is therefore inherited from the generic <a class="el" href="classoomph_1_1RectangularQuadMesh.html">RectangularQuadMesh</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00053">53</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a770336fa72e8911f31b9fe3f70197a51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a770336fa72e8911f31b9fe3f70197a51">&#9670;&nbsp;</a></span>AxialBLStretchingFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef double(* <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::AxialBLStretchingFctPt) (const double &amp;x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef for fct that defines the axial stretching fct. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00060">60</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad392c085b9a8f87fd9a24e02738f5d60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad392c085b9a8f87fd9a24e02738f5d60">&#9670;&nbsp;</a></span>CircularCylindricalShellMesh() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">CircularCylindricalShellMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for the mesh &ndash; uniformly spaced elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">63</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00043">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00182">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::nx()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00189">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>.</p>
+
+</div>
+</div>
+<a id="a2382a9ed0cd210c7b697e6ba4f4e2b0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2382a9ed0cd210c7b697e6ba4f4e2b0b">&#9670;&nbsp;</a></span>CircularCylindricalShellMesh() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">CircularCylindricalShellMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a770336fa72e8911f31b9fe3f70197a51">AxialBLStretchingFctPt</a>&#160;</td>
+          <td class="paramname"><em>axial_bl_stretching_fct_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for the mesh &ndash; specify fct that maps axial Lagr. coordinates to new positions to allow for better resolution of bending boundary layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00086">86</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00141">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::axial_bl_stretching_fct_pt()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00043">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00182">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::nx()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00189">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>.</p>
+
+</div>
+</div>
+<a id="aba83d68289f90a8567887443c3b9c6f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba83d68289f90a8567887443c3b9c6f0">&#9670;&nbsp;</a></span>CircularCylindricalShellMesh() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">CircularCylindricalShellMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx_bl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>delta_bl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for the mesh. nx_bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta_bl. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00110">110</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00043">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00189">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::ny()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a03bba13301e4dec893d73716e146c71d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03bba13301e4dec893d73716e146c71d">&#9670;&nbsp;</a></span>assign_undeformed_positions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::assign_undeformed_positions </td>
+          <td>(</td>
+          <td class="paramtype">GeomObject *const &amp;&#160;</td>
+          <td class="paramname"><em>undeformed_midplane_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube. </p>
+<p>Set the undeformed coordinates of the nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00133">133</a> of file <a class="el" href="circular__shell__mesh_8template_8cc_source.html">circular_shell_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa9c69dc3c6692d19706178d558d07f86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c69dc3c6692d19706178d558d07f86">&#9670;&nbsp;</a></span>axial_bl_stretching_fct_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a770336fa72e8911f31b9fe3f70197a51">AxialBLStretchingFctPt</a> <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::axial_bl_stretching_fct_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to fct pointer to fct that defines the axial stretching fct. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00141">141</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00086">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a032ddb9b1afa4ef446ca74c8a6965000"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a032ddb9b1afa4ef446ca74c8a6965000">&#9670;&nbsp;</a></span>build_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::build_mesh </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ly</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mesh build helper fct. </p>
+<p>Mesh build fct. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00043">43</a> of file <a class="el" href="circular__shell__mesh_8template_8cc_source.html">circular_shell_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a5730df8baedd890ca909f31e5452f3db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5730df8baedd890ca909f31e5452f3db">&#9670;&nbsp;</a></span>piecewise_linear_axial_bl_stretching_fct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xi</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default axial scaling fct. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">170</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Delta_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00064">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Nx</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Nx_bl</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00073">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00071">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Xmin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00157">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::scaled_x()</a>.</p>
+
+</div>
+</div>
+<a id="a4fb67c76ca3ad60efadfe2d3aabcfa0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fb67c76ca3ad60efadfe2d3aabcfa0b">&#9670;&nbsp;</a></span>scaled_x()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::scaled_x </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fct that defines the axial stretching to accomodate bending boundary layers. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00157">157</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5669a7c088fe0d30f7d011275861f6b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5669a7c088fe0d30f7d011275861f6b9">&#9670;&nbsp;</a></span>Axial_bl_stretching_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html#a770336fa72e8911f31b9fe3f70197a51">AxialBLStretchingFctPt</a> <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::Axial_bl_stretching_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fct pointer to fct that defines the axial stretching fct. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00198">198</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00141">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::axial_bl_stretching_fct_pt()</a>, <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00157">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::scaled_x()</a>.</p>
+
+</div>
+</div>
+<a id="a935925bc28901cf99f2ebdc2cff1b692"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a935925bc28901cf99f2ebdc2cff1b692">&#9670;&nbsp;</a></span>Delta_bl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::Delta_bl</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Axial extent of the squashed boundary layer part of the mesh occupied by Nx_bl elements (at each end of the tube) </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00206">206</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>.</p>
+
+</div>
+</div>
+<a id="a1a7ed3a5cd4c03c6254e5a8a0d3e532a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7ed3a5cd4c03c6254e5a8a0d3e532a">&#9670;&nbsp;</a></span>Nx_bl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1CircularCylindricalShellMesh.html">oomph::CircularCylindricalShellMesh</a>&lt; ELEMENT &gt;::Nx_bl</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of azimuthal element layers that get squashed into each of the the two boundary layers at the ends of the tube. </p>
+
+<p class="definition">Definition at line <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00202">202</a> of file <a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00063">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::CircularCylindricalShellMesh()</a>, and <a class="el" href="circular__shell__mesh_8template_8h_source.html#l00170">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::piecewise_linear_axial_bl_stretching_fct()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="circular__shell__mesh_8template_8h_source.html">circular_shell_mesh.template.h</a></li>
+<li><a class="el" href="circular__shell__mesh_8template_8cc_source.html">circular_shell_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:56:52
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

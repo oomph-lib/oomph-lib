@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Time-harmonic acoustic fluid-structure interaction problems</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Time-harmonic acoustic fluid-structure interaction problems </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we discuss the solution of time-harmonic acoustic fluid-structure interaction problems. We start by reviewing the relevant theory and then present the solution of a simple model problem &ndash; the sound radiation from an oscillating circular cylinder that is coated with a compressible elastic layer.</p>
+<p>This problem combines the problems discussed in the tutorials illustrating</p><ul>
+<li><a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">the solution of the time-harmonic equations of linear elasticity</a></li>
+</ul>
+<p>and</p><ul>
+<li><a href="../../../helmholtz/scattering/html/index.html">the Helmholtz equation.</a></li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="theory"></a>
+Theory: Time-harmonic acoustic fluid-structure interaction problems</h1>
+<p>The figure below shows a sketch of a representative model problem: a circular cylinder is immersed in an inviscid compressible fluid and performs a prescribed two-dimensional harmonic oscillation of radian frequency <img class="formulaInl" alt="$\omega$" src="form_0.png"/>. The cylinder is coated with a compressible elastic layer. We wish to compute the displacement field in the elastic coating (assumed to be described by the <a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">equations of time-harmonic linear elasticity</a>) and the pressure distribution in the fluid (governed by <a href="../../../helmholtz/scattering/html/index.html">the Helmholtz equation</a>). The two sets of equations interact at the interface between fluid and solid: the fluid pressure exerts a traction onto the elastic layer, while the motion of the elastic layer drives the fluid motion via the non-penetration condition.</p>
+<div class="image">
+<img src="coated_pipe.gif" alt=""/>
+<div class="caption">
+Sketch of the model problem: Forced oscillations of a circular cylinder (black) deform an elastic coating layer (pink) which is surrounded by a compressible fluid. </div></div>
+ <h2><a class="anchor" id="fluid"></a>
+The fluid model: the Helmholtz equation</h2>
+<p>We describe the behaviour of the fluid in terms of the displacement field, <img class="formulaInl" alt="$ d_i^*(x_j^*,t^*)$" src="form_1.png"/>, of the fluid particles. As usual we employ index notation and the summation convention, and use asterisks to distinguish dimensional quantities from their non-dimensional equivalents. The fluid is inviscid and compressible, with a bulk modulus <img class="formulaInl" alt="$ B $" src="form_2.png"/>, such that the acoustic pressure is given by <img class="formulaInl" alt="$ P^* = - B \ \partial d_j^*/\partial x_j^* $" src="form_3.png"/> We assume that the fluid motion is irrotational and can be described by a displacement potential <img class="formulaInl" alt="$\Phi^*$" src="form_4.png"/>, such that <img class="formulaInl" alt="$ d^*_j = \partial \Phi^*/\partial x_j^*. $" src="form_5.png"/> We consider steady-state time-harmonic oscillations and write the displacement potential and the pressure as <img class="formulaInl" alt="$\Phi^*(x_j^*,t^*) = \mbox{Re} \{\phi^*(x_j^*) \exp(-{\rm i} \omega t^*)\} $" src="form_6.png"/> and <img class="formulaInl" alt="$P^*(x_j^*,t^*) = \mbox{Re}\{p^*(x_j^*) \exp(-{\rm i} \omega t^*)\}$" src="form_7.png"/>, respectively, where <img class="formulaInl" alt="$\mbox{Re}\{\ldots \}$" src="form_8.png"/> denotes the real part. For small disturbances, the linearised Euler equation reveals that the time-harmonic pressure is related to the displacement potential via <img class="formulaInl" alt="$ p^* = \rho_{\rm f} \omega^2 \phi^*$" src="form_9.png"/> where <img class="formulaInl" alt="$ \rho_{\rm f} $" src="form_10.png"/> is the ambient fluid density. We non-dimensionalise all lengths on a problem-specific lengthscale <img class="formulaInl" alt="$ {\cal L}$" src="form_11.png"/> (e.g. the outer radius of the coating layer) such that <img class="formulaInl" alt="$x_j^* = {\cal L} x_j,\ d_j^* = {\cal L} d_j$" src="form_12.png"/> and <img class="formulaInl" alt="$\phi^* = {\cal L}^2 \phi$" src="form_13.png"/>. The non-dimensional displacement potential <img class="formulaInl" alt="$\phi$" src="form_14.png"/> is then governed by the Helmholtz equation </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial^2 \phi}{\partial x_j^{2}} + k^2 \phi = 0, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_15.png"/>
+</p>
+<p> where the square of the non-dimensional wavenumber, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ k^2 = \frac{\rho_f (\omega {\cal L})^2}{B}, \]" src="form_16.png"/>
+</p>
+<p> represents the ratio of the typical inertial fluid pressure induced by the wall oscillation to the &lsquo;stiffness&rsquo; of the fluid.</p>
+<h2><a class="anchor" id="elastic"></a>
+The solid model: the time harmonic equations of linear elasticity</h2>
+<p>We model the coating layer as a linearly elastic solid, described in terms of a displacement field <img class="formulaInl" alt="$U^*_i(x_j^*,t^*)$" src="form_17.png"/>, with stress tensor </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tau_{ij}^* = E \left[ \frac{\nu}{(1+\nu)(1-2\nu)} \, \frac{\partial U_k^*}{\partial x_k^*} \, \delta_{ij} +\frac{1}{2(1+\nu)}\left( \frac{\partial U_i^*}{\partial x_j^*}+ \frac{\partial U_j^*}{\partial x_i^*} \right) \right], \]" src="form_18.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$E$" src="form_19.png"/> and <img class="formulaInl" alt="$\nu$" src="form_20.png"/> are the material's Young's modulus and Poisson's ratio, respectively. As before, we assume a time-harmonic solution with frequency <img class="formulaInl" alt="$\omega$" src="form_0.png"/> so that <img class="formulaInl" alt="$U_i^*(x_j^*,t^*) = {\rm Re} \{ u_i^*(x_j^*) \exp(-{\rm i}\omega t^*)\}$" src="form_21.png"/>, and we non-dimensionalise the displacements on <img class="formulaInl" alt="${\cal L}$" src="form_22.png"/> and the stress on Young's modulus, <img class="formulaInl" alt="$E$" src="form_19.png"/>, so that <img class="formulaInl" alt="$u_j^* = {\cal L} u_j$" src="form_23.png"/> and <img class="formulaInl" alt="$\tau_{ij}^* = E \tau_{ij}$" src="form_24.png"/>. The deformation of the elastic coating is then governed by the time-harmonic Navier-Lame equations </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial \tau_{ij}}{\partial x_j} + \Omega^2 u_i = 0, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_25.png"/>
+</p>
+<p> which depend (implicitly) on Poisson's ratio <img class="formulaInl" alt="$\nu$" src="form_20.png"/>, and on the (square of the) non-dimensional wavenumber </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \Omega^2 = \frac{\rho_{\rm s} (\omega {\cal L})^2}{E}, \]" src="form_26.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \rho_{\rm s} $" src="form_27.png"/> is the solid density. The parameter <img class="formulaInl" alt="$ \Omega^2 $" src="form_28.png"/> represents the ratio of the typical inertial solid pressure induced by the wall oscillation to the stiffness of the elastic coating. We note that for a &lsquo;light&rsquo; coating we have <img class="formulaInl" alt="$\Omega \ll 1$" src="form_29.png"/>.</p>
+<h2><a class="anchor" id="bc"></a>
+Boundary conditions</h2>
+<p>The inner surface of the elastic coating, <img class="formulaInl" alt="$ \partial D_{\rm s} $" src="form_30.png"/>, is subject to the prescribed displacement imposed by the oscillating cylinder. For instance, if the inner cylinder performs axisymmetric oscillations of non-dimensional amplitude <img class="formulaInl" alt="$ \epsilon$" src="form_31.png"/>, we have </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{\bf u} = \epsilon \, \mbox{\bf e}_r \mbox{\ \ \ \ \ on $\partial D_{\rm s}$}, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_32.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \mbox{\bf e}_r $" src="form_33.png"/> is the unit vector in the radial direction. The fluid-loaded surface of the elastic coating, <img class="formulaInl" alt="$ \partial D_{\rm f} $" src="form_34.png"/>, is subject to the fluid pressure. The non-dimensional traction exerted by the fluid onto the solid (on the solid stress scale) is therefore given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ t_i^{\rm [solid]} = \tau_{ij}^{\rm [solid]} n_j = - \phi \ Q \ n_i \mbox{\ \ \ \ \ on $\partial D_{\rm f}$}, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) \]" src="form_35.png"/>
+</p>
+<p> where the <img class="formulaInl" alt="$n_i$" src="form_36.png"/> are the components of the outer unit normal on the solid boundary <img class="formulaInl" alt="$\partial D_{\rm f}$" src="form_37.png"/> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Q=\frac{\rho_{\rm f}({\cal L}\omega)^2}{E} \]" src="form_38.png"/>
+</p>
+<p> is the final non-dimensional parameter in the problem. It represents the ratio of the typical inertial fluid pressure induced by the wall oscillation to the stiffness of the elastic coating. The parameter <img class="formulaInl" alt="$Q$" src="form_39.png"/> therefore provides a measure of the strength of the fluid-structure interaction (FSI) in the sense that for <img class="formulaInl" alt="$Q \to 0$" src="form_40.png"/> the elastic coating does not &lsquo;feel&rsquo; the presence of the fluid.</p>
+<p>The fluid is forced by the normal displacement of the solid. Imposing the non-penetration condition <img class="formulaInl" alt="$(d_j - u_j) n_j = 0$" src="form_41.png"/> on <img class="formulaInl" alt="$\partial D_{\rm f}$" src="form_37.png"/> yields a Neumann condition for the displacement potential, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial \phi}{\partial n} = u_j n_j \mbox{\ \ \ \ \ on $\partial D_{\rm f}$}. \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \]" src="form_42.png"/>
+</p>
+<p> Finally, the displacement potential for the fluid must satisfy the Sommerfeld radiation condition </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \lim_{r \to \infty} \sqrt{r}\left( \frac{\partial \phi}{\partial r} - {\rm i} k \phi \right) = 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6) \]" src="form_43.png"/>
+</p>
+<p> which ensures that the oscillating cylinder does not generate any incoming waves.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="impl"></a>
+Implementation</h1>
+<p>The implementation of the coupled problem follows the usual procedure for multi-domain problems in <code>oomph-lib</code>. We discretise the constituent single-physics problems using the existing single-physics elements, here <code>oomph-lib's</code> </p><ul>
+<li><a href="../../../helmholtz/scattering/html/index.html">Helmholtz elements</a></li>
+</ul>
+<p>and</p><ul>
+<li><a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">time-harmonic linear elasticity elements</a></li>
+</ul>
+<p>for the discretisation of the PDEs (1) and (2), respectively. The displacement boundary condition (3) on the inner surface of the elastic coating is imposed as usual by pinning the relevant degrees of freedom, exactly as in a <a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">single-physics solid mechanics problem</a>. Similarly, the Sommerfeld radiation condition (6) on the outer boundary of the fluid domain can be imposed by any of the methods available for the solution of the single-physics Helmholtz equation, such as <a href="../../../helmholtz/scattering/html/index.html#ABCs">approximate/absorbing boundary conditions (ABCs)</a> or a <a href="../../../helmholtz/scattering/html/index.html#DtN">Dirichlet-to-Neumann mapping.</a></p>
+<p>The boundary conditions (4) and (5) at the fluid-solid interface are traction boundary conditions for the solid, and Neumann boundary conditions for the Helmholtz equation, respectively. In a single-physics problem we would impose such boundary conditions by attaching suitable <code>FaceElements</code> to the appropriate boundaries of the "bulk" elements, as shown in the sketch below: <code>TimeHarmonicLinearElasticityTractionElements</code> could be used to impose a (given) traction, <img class="formulaInl" alt="$ {\bf t}_0$" src="form_44.png"/>, onto the solid; <code>HelmholtzFluxElements</code> could be used to impose a (given) normal derivative, <img class="formulaInl" alt="$ f_0$" src="form_45.png"/>, on the displacement potential. Both <img class="formulaInl" alt="$ {\bf t}_0$" src="form_44.png"/> and <img class="formulaInl" alt="$ f_0 $" src="form_46.png"/> would usually be specified in a user-defined namespace and accessed via function pointers as indicated in the right half of the sketch.</p>
+<div class="image">
+<img src="single_physics.gif" alt=""/>
+<div class="caption">
+Sketch illustrating the imposition of flux and traction boundary conditions in single-physics problems. The continuous problems are shown on the left; the discretised ones on the right. </div></div>
+ <p>In the coupled problem, illustrated in the left half of the next sketch, the traction acting on the solid becomes a function of the displacement potential via the boundary condition (4), while the normal derivative of the displacement potential is given in terms of the solid displacement via equation (5). Note that corresponding points on the FSI boundary <img class="formulaInl" alt="$ \partial D_{\rm f}$" src="form_47.png"/> are identified by matching values of the boundary coordinate <img class="formulaInl" alt="$ \zeta $" src="form_48.png"/> which is assumed to be consistent between the two domains.</p>
+<p>The implementation of this interaction in the discretised problem is illustrated in the right half of the sketch: We replace the single-physics <code>HelmholtzFluxElements</code> by <code>HelmholtzFluxFromNormalDisplacementBCElements</code>, and the <code>TimeHarmonicLinearElasticityTractionElements</code> by <code>TimeHarmonicLinElastLoadedByHelmholtzPressureBCElements</code>. (Yes, we like to be verbose...). Both of these <code>FaceElements</code> are derived from the <code>ElementWithExternalElement</code> base class and can therefore store a pointer to an "external" element that provides the information required to impose the appropriate boundary condition. Thus, the <code>HelmholtzFluxFromNormalDisplacementBCElements</code> store pointers to the "adjacent" time-harmonic linear elasticity elements (from which they obtain the boundary displacement required for the imposition of (5)), while the <code>TimeHarmonicLinElastLoadedByHelmholtzPressureBCElements</code> store pointers to the "adjacent" Helmholtz elements that provide the value of the displacement potential required for the evaluation of (4).</p>
+<div class="image">
+<img src="multi_physics.gif" alt=""/>
+<div class="caption">
+Sketch illustrating the imposition of flux and traction boundary conditions in the coupled multi-physics problem. The continuous problems are shown on the left; the discretised ones on the right. </div></div>
+ <p>The identification of the "adjacent" bulk elements can be performed using the <code>Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)</code> helper function. We note that, as suggested by the sketch above, this function does not require to the two adjacent meshes to have a consistent discretisation &ndash; the identification of adjacent elements is based entirely on the (assumed to be consistent) boundary coordinate <img class="formulaInl" alt="$ \zeta $" src="form_48.png"/> in the two meshes. We refer to <a href="../../../poisson/fish_poisson2/html/index.html#boundary_coords">another tutorial</a> for a discussion of how to set up (or change) the parametrisation of mesh boundaries by boundary coordinates.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The animation below shows the deformation of the elastic coating if a non-axisymmetric displacement </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{\bf u} = \epsilon \, \mbox{\bf e}_r \cos (N\varphi) \mbox{\ \ \ \ \ on $\partial D_{\rm s}$}, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7) \]" src="form_49.png"/>
+</p>
+<p> (for <img class="formulaInl" alt="$ N=3 $" src="form_50.png"/>) is imposed on the inner boundary of the coating <img class="formulaInl" alt="$\partial D_{\rm s}$" src="form_51.png"/>.</p>
+<div class="image">
+<img src="anim.gif" alt=""/>
+<div class="caption">
+Animation showing the time-harmonic oscillation of the elastic coating. (The pink region in the background shows the undeformed configuration.) </div></div>
+ <p>Here is a plot of the corresponding pressure field:</p>
+<div class="image">
+<img src="potential.gif" alt=""/>
+<div class="caption">
+Plot of the displacement potential (a measure of the fluid pressure). The elevation in the carpet plot indicates the real part; the colour contours represent the imaginary part. </div></div>
+ <p>Finally, we provide some validation of the computational results by comparing the non-dimensional time-average radiated power </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \overline{\cal P} = \frac{1}{2} \oint\bigg[Im\bigg(\frac{\partial \phi}{\partial n}\bigg) \ Re(\phi) - Re\bigg(\frac{\partial \phi}{\partial n}\bigg) \ Im(\phi) \bigg] \ dS \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8) \]" src="form_52.png"/>
+</p>
+<p> against the analytical solution for axisymmetric forcing ( <img class="formulaInl" alt="$ N=0 $" src="form_53.png"/>) for the parameter values <img class="formulaInl" alt="$ k^2 = 10 $" src="form_54.png"/>, <img class="formulaInl" alt="$ \Omega^2 = 0 $" src="form_55.png"/>, <img class="formulaInl" alt="$ \nu =0.3 $" src="form_56.png"/> and a non-dimensional coating thickness of <img class="formulaInl" alt="$ h = 0.2; $" src="form_57.png"/> see <a href="http://dx.doi.org/10.1016/j.jsv.2012.05.029">Heil, M., Kharrat, T., Cotterill, P.A. &amp; Abrahams, I.D. (2012) Quasi-resonances in sound-insulating coatings. <em>Journal of Sound and Vibration</em> <b>331</b> 4774-4784</a> for details. In the computations the integral in (8) is evaluated along the outer boundary of the computational domain.</p>
+<div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Radiated power as function of the FSI parameter Q for an axisymmetrically oscillating coating. Markers: computed results; continuous line: analytical result. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="num_soln"></a>
+The numerical solution</h1>
+<h2><a class="anchor" id="namespace"></a>
+The global namespace</h2>
+<p>As usual we define the problem parameters in a namespace.  </p><div class="fragment"><div class="line"><span class="comment">//=======start_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Parameters.html">Global_Parameters</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Square of wavenumber for the Helmholtz equation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">K_squared</a>=10.0;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Radius of outer boundary of Helmholtz domain</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Outer_radius</a>=4.0; </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// FSI parameter</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Q</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Non-dim thickness of elastic coating</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#ae3cf8878ede839bffda01f79bbe3e819">H_coating</a>=0.3; </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a> = 0.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The elasticity tensor for the solid</span></div>
+<div class="line"><span class="comment"></span> TimeHarmonicIsotropicElasticityTensor <a class="code" href="namespaceGlobal__Parameters.html#aeeb26e11ef275bdfce14710e00290bb6">E</a>(<a class="code" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>);</div>
+</div><!-- fragment --><p>We wish to perform parameter studies in which we vary the FSI parameter <img class="formulaInl" alt="$ Q $" src="form_58.png"/>. To make this physically meaningful, we interpret <img class="formulaInl" alt="$ Q =(\rho_{\rm f}({\cal L}\omega)^2)/E $" src="form_59.png"/> as a measure of the stiffness of the elastic coating (so that an increase in <img class="formulaInl" alt="$ Q $" src="form_58.png"/> corresponds to a reduction in the layer's elastic modulus <img class="formulaInl" alt="$ E $" src="form_60.png"/>). In that case, the frequency parameter <img class="formulaInl" alt="$ \Omega^2 = (\rho_{\rm s} (\omega {\cal L})^2)/E $" src="form_61.png"/> in the time-harmonic linear elasticity equations becomes a dependent parameter and is given in terms of the density ratio <img class="formulaInl" alt="$ \rho_{\rm solid}/\rho_{\rm fluid} $" src="form_62.png"/> and <img class="formulaInl" alt="$ Q $" src="form_58.png"/> by <img class="formulaInl" alt="$ \Omega^2 = (\rho_{\rm solid}/\rho_{\rm fluid}) Q$" src="form_63.png"/>. We therefore provide a helper function to update the dependent parameter following any change in the independent parameters.</p>
+<div class="fragment"><div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Density ratio: solid to fluid</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#a517d4c31b8bce6563c2f605266dd9679">Density_ratio</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Non-dim square of frequency for solid -- dependent variable!</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Function to update dependent parameter values</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Parameters.html#ae0f9a80fb7510dbfbbef22582da231b7">update_parameter_values</a>()</div>
+<div class="line"> {</div>
+<div class="line">  <a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a>=<a class="code" href="namespaceGlobal__Parameters.html#a517d4c31b8bce6563c2f605266dd9679">Density_ratio</a>*<a class="code" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Q</a>;</div>
+<div class="line"> }</div>
+</div><!-- fragment --><p>We force the system by imposing a prescribed displacement on the inner surface of the elastic coating and allow this to vary in the azimuthal direction with wavenumber <img class="formulaInl" alt="$ N $" src="form_64.png"/>:</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Azimuthal wavenumber for imposed displacement of coating</span></div>
+<div class="line"><span class="comment"> /// on inner boundary </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="namespaceGlobal__Parameters.html#aff31353c09f439f3d537ad06ce868787">N</a>=0; </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Displacement field on inner boundary of solid</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Parameters.html#ab51fa55d06d9963d363bcf966cfcc62b">solid_boundary_displacement</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x,</div>
+<div class="line">                                  Vector&lt;std::complex&lt;double&gt; &gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  Vector&lt;double&gt; normal(2);</div>
+<div class="line">  <span class="keywordtype">double</span> norm=sqrt(x[0]*x[0]+x[1]*x[1]);</div>
+<div class="line">  <span class="keywordtype">double</span> phi=atan2(x[1],x[0]);</div>
+<div class="line">  normal[0]=x[0]/norm;</div>
+<div class="line">  normal[1]=x[1]/norm;</div>
+<div class="line"> </div>
+<div class="line">  u[0]=complex&lt;double&gt;(normal[0]*cos(<span class="keywordtype">double</span>(<a class="code" href="namespaceGlobal__Parameters.html#aff31353c09f439f3d537ad06ce868787">N</a>)*phi),0.0);</div>
+<div class="line">  u[1]=complex&lt;double&gt;(normal[1]*cos(<span class="keywordtype">double</span>(<a class="code" href="namespaceGlobal__Parameters.html#aff31353c09f439f3d537ad06ce868787">N</a>)*phi),0.0);</div>
+<div class="line"> }</div>
+</div><!-- fragment --><p>The rest of the namespace contains lengthy expressions for various exact solutions and is omitted here.</p>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="main"></a>
+The driver code</h2>
+<p>The driver code is very straightforward. We parse the command line to determine the parameters for the parameter study and build the problem object, using refineable nine-noded quadrilateral elements for the solution of the time-harmonic elasticity and Helmholtz equations.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_main==================================================</span></div>
+<div class="line"><span class="comment">/// Driver for acoustic fsi problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="acoustic__fsi_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define possible command line arguments and parse the ones that</span></div>
+<div class="line"> <span class="comment">// were actually specified</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output directory</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--dir&quot;</span>,</div>
+<div class="line">                                            &amp;<a class="code" href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Azimuthal wavenumber of forcing</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--n&quot;</span>,&amp;<a class="code" href="namespaceGlobal__Parameters.html#aff31353c09f439f3d537ad06ce868787">Global_Parameters::N</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Minimum refinement level</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--el_multiplier&quot;</span>,</div>
+<div class="line">                            &amp;<a class="code" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Outer radius of Helmholtz domain</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--outer_radius&quot;</span>,</div>
+<div class="line">                            &amp;<a class="code" href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Global_Parameters::Outer_radius</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of steps in parameter study</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=2;</div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--nstep&quot;</span>,&amp;nstep);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increment in FSI parameter in parameter study</span></div>
+<div class="line"> <span class="keywordtype">double</span> q_increment=5.0;</div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--q_increment&quot;</span>,&amp;q_increment);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Max. number of adaptations</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_adapt=3;</div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--max_adapt&quot;</span>,&amp;max_adapt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parse command line</span></div>
+<div class="line"> CommandLineArgs::parse_and_assign(); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc what has actually been specified on the command line</span></div>
+<div class="line"> CommandLineArgs::doc_specified_flags();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> <a class="code" href="classCoatedDiskProblem.html">CoatedDiskProblem&lt;RefineableQTimeHarmonicLinearElasticityElement&lt;2,3&gt;</a>,</div>
+<div class="line">                   RefineableQHelmholtzElement&lt;2,3&gt; &gt; <a class="code" href="acoustic__fsi__annulus_8txt.html#a6ce5cf2f5cb97c91327121ea31211ad2">problem</a>; </div>
+</div><!-- fragment --><p>We then solve the problem for various values of <img class="formulaInl" alt="$ Q $" src="form_58.png"/>, updating the dependent variables after every increment.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Initial values for parameter values</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a>=0.0; </div>
+<div class="line"> <a class="code" href="namespaceGlobal__Parameters.html#ae0f9a80fb7510dbfbbef22582da231b7">Global_Parameters::update_parameter_values</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Parameter incrementation</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Solve the problem with Newton&#39;s method, allowing</span></div>
+<div class="line">   <span class="comment">// up to max_adapt mesh adaptations after every solve.</span></div>
+<div class="line">   <a class="code" href="acoustic__fsi__annulus_8txt.html#a6ce5cf2f5cb97c91327121ea31211ad2">problem</a>.newton_solve(max_adapt);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   <a class="code" href="acoustic__fsi__annulus_8txt.html#a6ce5cf2f5cb97c91327121ea31211ad2">problem</a>.doc_solution();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Increment FSI parameter</span></div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a>+=q_increment;</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#ae0f9a80fb7510dbfbbef22582da231b7">Global_Parameters::update_parameter_values</a>();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="class"></a>
+The problem class</h2>
+<p>The <code>Problem</code> class is templated by the types of the "bulk" elements used to discretise the time-harmonic linear elasticity and Helmholtz equations, respectively. It contains the usual member functions to detach and attach <code>FaceElements</code> from the bulk meshes before and after any mesh adaptation, respectively.  </p><div class="fragment"><div class="line"><span class="comment">//=============begin_problem============================================ </span></div>
+<div class="line"><span class="comment">/// Coated disk FSI</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classCoatedDiskProblem.html">CoatedDiskProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classCoatedDiskProblem.html#a9585ca5b422c72dc2b91cbb3e311b736">CoatedDiskProblem</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a3b94aaddee6a8f386ba249f418813963">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#aa0b9b4e706cdb1b31738c3db8759e9ee">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Recompute gamma integral before checking Newton residuals</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a8f52f13933fba3b053d50de544d8cafc">actions_before_newton_convergence_check</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code" href="classCoatedDiskProblem.html#a142852ffdecdb2f76acf3e4c11ce4b04">Helmholtz_outer_boundary_mesh_pt</a>-&gt;setup_gamma();</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Actions before adapt: Wipe the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a89e972df172b024b1358f0fac7646d6d">actions_before_adapt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adapt: Rebuild the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a93f9d34cd24f08ca1ec726ae0057b939">actions_after_adapt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#af8e103d494f526c0e24c0c4ccef4ea6b">doc_solution</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Create FSI traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a143908e8db74ad6bd8b7efaaa26c78c3">create_fsi_traction_elements</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Create Helmholtz FSI flux elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a34f61c03b152f2ac06e1e771b0dbe09b">create_helmholtz_fsi_flux_elements</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Delete (face) elements in specified mesh </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a55b4cead41e01ab5fd728b607f62bb74">delete_face_elements</a>(Mesh* <span class="keyword">const</span> &amp; boundary_mesh_pt);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Create DtN face elements </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a222b74395afde602617965f60c885491">create_helmholtz_DtN_elements</a>();</div>
+</div><!-- fragment --><p>The private member data includes storage for the various meshes and objects that are used for outputting the results.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Setup interaction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> setup_interaction();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to solid mesh</span></div>
+<div class="line"><span class="comment"></span> TreeBasedRefineableMeshBase* Solid_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to mesh of FSI traction elements</span></div>
+<div class="line"><span class="comment"></span> Mesh* FSI_traction_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to Helmholtz mesh</span></div>
+<div class="line"><span class="comment"></span> TreeBasedRefineableMeshBase* Helmholtz_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to mesh of Helmholtz FSI flux elements</span></div>
+<div class="line"><span class="comment"></span> Mesh* Helmholtz_fsi_flux_mesh_pt;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Pointer to mesh containing the DtN elements</span></div>
+<div class="line"><span class="comment"></span> HelmholtzDtNMesh&lt;HELMHOLTZ_ELEMENT&gt;* Helmholtz_outer_boundary_mesh_pt;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// DocInfo object for output</span></div>
+<div class="line"><span class="comment"></span> DocInfo Doc_info;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream Trace_file;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="constr"></a>
+The problem constructor</h2>
+<p>We start by building the meshes for the elasticity and Helmholtz equations. Both domains are complete annular regions, so the annular mesh (which is built from a rectangular quad mesh) is periodic.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===========start_of_constructor======================================= </span></div>
+<div class="line"><span class="comment">/// Constructor</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classCoatedDiskProblem.html#a9585ca5b422c72dc2b91cbb3e311b736">CoatedDiskProblem&lt;ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT&gt;::CoatedDiskProblem</a>() </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The coating mesh is periodic</span></div>
+<div class="line"> <span class="keywordtype">bool</span> periodic=<span class="keyword">true</span>;</div>
+<div class="line"> <span class="keywordtype">double</span> azimuthal_fraction_of_coating=1.0;</div>
+</div><!-- fragment --><p>The solid mesh occupies the region between <img class="formulaInl" alt="$ r = 1-h $" src="form_65.png"/> and <img class="formulaInl" alt="$ r=1 $" src="form_66.png"/> where <img class="formulaInl" alt="$ h $" src="form_67.png"/> is the thickness of the elastic coating:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Solid mesh</span></div>
+<div class="line"> <span class="comment">//-----------</span></div>
+<div class="line"> <span class="comment">// Number of elements in azimuthal direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ntheta_solid=10*<a class="code" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in radial direction </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nr_solid=3*<a class="code" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Innermost radius for solid mesh</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="acoustic__fsi__annulus_8txt.html#afcdf3cf58b27c390ca237fb28e609606">a</a>=1.0-<a class="code" href="namespaceGlobal__Parameters.html#ae3cf8878ede839bffda01f79bbe3e819">Global_Parameters::H_coating</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build solid mesh</span></div>
+<div class="line"> Solid_mesh_pt = <span class="keyword">new</span> </div>
+<div class="line">  RefineableTwoDAnnularMesh&lt;ELASTICITY_ELEMENT&gt;</div>
+<div class="line">  (periodic,azimuthal_fraction_of_coating,</div>
+<div class="line">   ntheta_solid,nr_solid,<a class="code" href="acoustic__fsi__annulus_8txt.html#afcdf3cf58b27c390ca237fb28e609606">a</a>,<a class="code" href="namespaceGlobal__Parameters.html#ae3cf8878ede839bffda01f79bbe3e819">Global_Parameters::H_coating</a>);</div>
+</div><!-- fragment --><p>The Helmholtz mesh occupies the region between <img class="formulaInl" alt="$ r = 1 $" src="form_68.png"/> and <img class="formulaInl" alt="$ r=R_{\rm outer} $" src="form_69.png"/> where <img class="formulaInl" alt="$ R_{\rm outer}$" src="form_70.png"/> is the outer radius of the computational domain where we will apply the Sommerfeld radiation condition. Note that the two meshes are not matching &ndash; both meshes have 3 element layers in the radial direction but 10 and 11 in the azimuthal direction, respectively. This is done mainly to illustrate our claim that the multi-domain setup functions can operate with non-matching meshes.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Helmholtz mesh</span></div>
+<div class="line"> <span class="comment">//---------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in azimuthal direction in Helmholtz mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ntheta_helmholtz=11*<a class="code" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in radial direction in Helmholtz mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nr_helmholtz=3*<a class="code" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Innermost radius of Helmholtz mesh</span></div>
+<div class="line"> <a class="code" href="acoustic__fsi__annulus_8txt.html#afcdf3cf58b27c390ca237fb28e609606">a</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Thickness of Helmholtz mesh</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="acoustic__fsi__annulus_8txt.html#a05fee6304cdd89e7b7155d220e5d5c4a">h_thick_helmholtz</a>=<a class="code" href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Global_Parameters::Outer_radius</a>-<a class="code" href="acoustic__fsi__annulus_8txt.html#afcdf3cf58b27c390ca237fb28e609606">a</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build mesh</span></div>
+<div class="line"> Helmholtz_mesh_pt = <span class="keyword">new</span> </div>
+<div class="line">  RefineableTwoDAnnularMesh&lt;HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line">  (periodic,azimuthal_fraction_of_coating,</div>
+<div class="line">   ntheta_helmholtz,nr_helmholtz,<a class="code" href="acoustic__fsi__annulus_8txt.html#afcdf3cf58b27c390ca237fb28e609606">a</a>,<a class="code" href="acoustic__fsi__annulus_8txt.html#a05fee6304cdd89e7b7155d220e5d5c4a">h_thick_helmholtz</a>);</div>
+</div><!-- fragment --><p>Both bulk meshes are adaptive so we create error estimators for them:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimators</span></div>
+<div class="line"> Solid_mesh_pt-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> Helmholtz_mesh_pt-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+</div><!-- fragment --><p>Next we create the mesh that will store the <code>FaceElements</code> that will apply the Sommerfeld radiation condition, using the specified number of Fourier terms in the Dirichlet-to-Neumann mapping; see the <a href="../../../helmholtz/scattering/html/index.html#DtN">Helmholtz tutorial</a> for details.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Mesh containing the Helmholtz DtN</span></div>
+<div class="line"> <span class="comment">// elements. Specify outer radius and number of Fourier terms to be</span></div>
+<div class="line"> <span class="comment">// used in gamma integral</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code" href="acoustic__fsi__annulus_8txt.html#a39dacc9c00a07bd516299e94fbd8be5b">nfourier</a>=20;</div>
+<div class="line"> Helmholtz_outer_boundary_mesh_pt = </div>
+<div class="line">  <span class="keyword">new</span> HelmholtzDtNMesh&lt;HELMHOLTZ_ELEMENT&gt;(<a class="code" href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Global_Parameters::Outer_radius</a>,</div>
+<div class="line">                                          <a class="code" href="acoustic__fsi__annulus_8txt.html#a39dacc9c00a07bd516299e94fbd8be5b">nfourier</a>);</div>
+</div><!-- fragment --><p>Next we pass the problem parameters to the bulk elements. The elasticity elements require a pointer to the elasticity tensor and the frequency parameter <img class="formulaInl" alt="$ \Omega^2 $" src="form_28.png"/>:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Assign the physical properties to the elements before any refinement</span></div>
+<div class="line"> <span class="comment">//Loop over the elements in the solid mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element=Solid_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   ELASTICITY_ELEMENT *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>ELASTICITY_ELEMENT*<span class="keyword">&gt;</span>(Solid_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   el_pt-&gt;elasticity_tensor_pt() = &amp;<a class="code" href="namespaceGlobal__Parameters.html#aeeb26e11ef275bdfce14710e00290bb6">Global_Parameters::E</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Square of non-dim frequency</span></div>
+<div class="line">   el_pt-&gt;omega_sq_pt()= &amp;<a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>The Helmholtz elements need a pointer to the (square of the) wavenumber, <img class="formulaInl" alt="$ k^2 $" src="form_71.png"/>:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Same for Helmholtz mesh</span></div>
+<div class="line"> n_element =Helmholtz_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   HELMHOLTZ_ELEMENT *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>HELMHOLTZ_ELEMENT*<span class="keyword">&gt;</span>(Helmholtz_mesh_pt-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the pointer to square of Helmholtz wavenumber</span></div>
+<div class="line">   el_pt-&gt;k_squared_pt() = &amp;<a class="code" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>It is always a good idea to check the enumeration of the mesh boundaries to facilitate the application of boundary conditions:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output meshes and their boundaries so far so we can double </span></div>
+<div class="line"> <span class="comment">// check the boundary enumeration</span></div>
+<div class="line"> Solid_mesh_pt-&gt;output(<span class="stringliteral">&quot;solid_mesh.dat&quot;</span>);</div>
+<div class="line"> Helmholtz_mesh_pt-&gt;output(<span class="stringliteral">&quot;helmholtz_mesh.dat&quot;</span>);</div>
+<div class="line"> Solid_mesh_pt-&gt;output_boundaries(<span class="stringliteral">&quot;solid_mesh_boundary.dat&quot;</span>);</div>
+<div class="line"> Helmholtz_mesh_pt-&gt;output_boundaries(<span class="stringliteral">&quot;helmholtz_mesh_boundary.dat&quot;</span>);</div>
+</div><!-- fragment --><p>Next we create the meshes containing the various <code>FaceElements</code> used to apply to the FSI traction boundary condition (4), the FSI flux boundary condition (5) for the Helmholtz equation, and the Sommerfeld radiation condition (6), respectively, using helper functions discussed below.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create FaceElement meshes for boundary conditions</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Construct the fsi traction element mesh</span></div>
+<div class="line"> FSI_traction_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> create_fsi_traction_elements(); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Construct the Helmholtz fsi flux element mesh</span></div>
+<div class="line"> Helmholtz_fsi_flux_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> create_helmholtz_fsi_flux_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create DtN elements on outer boundary of Helmholtz mesh</span></div>
+<div class="line"> <a class="code" href="acoustic__fsi__annulus_8txt.html#a9c2c22ab245f20317da0684389b32e03">create_helmholtz_DtN_elements</a>();</div>
+</div><!-- fragment --><p>We add the various sub-meshes to the problem and build the global mesh</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Combine sub meshes</span></div>
+<div class="line"> <span class="comment">//-------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solid mesh is first sub-mesh</span></div>
+<div class="line"> add_sub_mesh(Solid_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add traction sub-mesh</span></div>
+<div class="line"> add_sub_mesh(FSI_traction_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add Helmholtz mesh</span></div>
+<div class="line"> add_sub_mesh(Helmholtz_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add Helmholtz FSI flux mesh</span></div>
+<div class="line"> add_sub_mesh(Helmholtz_fsi_flux_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add Helmholtz DtN mesh</span></div>
+<div class="line"> add_sub_mesh(Helmholtz_outer_boundary_mesh_pt); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build combined &quot;global&quot; mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p>The solid displacements are prescribed on the inner boundary (boundary 0) of the solid mesh so we pin all four values (representing the real and imaginary parts of the displacements in the <img class="formulaInl" alt="$ x_1- $" src="form_72.png"/> and <img class="formulaInl" alt="$ x_2-$" src="form_73.png"/> directions, respectively) and assign the boundary values using the function <code>Global_Parameters::solid_boundary_displacement(...)</code>. (The enumeration of the unknowns is discussed in <a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html#element_types">another tutorial</a>.)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solid boundary conditions:</span></div>
+<div class="line"> <span class="comment">//---------------------------</span></div>
+<div class="line"> <span class="comment">// Pin displacements on innermost boundary (boundary 0) of solid mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_node = Solid_mesh_pt-&gt;nboundary_node(0);</div>
+<div class="line"> Vector&lt;std::complex&lt;double&gt; &gt; u(2);</div>
+<div class="line"> Vector&lt;double&gt; x(2);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_node;i++)</div>
+<div class="line">  {</div>
+<div class="line">   Node* nod_pt=Solid_mesh_pt-&gt;boundary_node_pt(0,i);</div>
+<div class="line">   nod_pt-&gt;pin(0);</div>
+<div class="line">   nod_pt-&gt;pin(1);</div>
+<div class="line">   nod_pt-&gt;pin(2);</div>
+<div class="line">   nod_pt-&gt;pin(3);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Assign displacements</span></div>
+<div class="line">   x[0]=nod_pt-&gt;x(0);   </div>
+<div class="line">   x[1]=nod_pt-&gt;x(1);   </div>
+<div class="line">   <a class="code" href="namespaceGlobal__Parameters.html#ab51fa55d06d9963d363bcf966cfcc62b">Global_Parameters::solid_boundary_displacement</a>(x,u);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Real part of x-displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(0,u[0].real());</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Imag part of x-displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(1,u[1].real());</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Real part of y-displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(2,u[0].imag());</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Imag part of y-displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(3,u[1].imag());</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>Finally, we set up the fluid-structure interaction, assign the equation numbers, define the output directory and open a trace file to record the radiated power as a function of the FSI parameter <img class="formulaInl" alt="$ Q $" src="form_58.png"/>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup fluid-structure interaction</span></div>
+<div class="line"> <span class="comment">//----------------------------------</span></div>
+<div class="line"> setup_interaction();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Assign equation  numbers</span></div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;Number of unknowns: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> Doc_info.set_directory(<a class="code" href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,Doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+<div class="line">  </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="before_adapt"></a>
+Actions before adapt</h2>
+<p>The mesh adaptation is driven by the error estimates for the bulk elements. The various <code>FaceElements</code> must therefore be removed from the global mesh before the adaptation takes place. We do this by calling the helper function <code>delete_face_elements(...)</code> (discussed below) for the three face meshes, before rebuilding the Problem's global mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====================start_of_actions_before_adapt======================</span></div>
+<div class="line"><span class="comment">/// Actions before adapt: Wipe the meshes face elements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a89e972df172b024b1358f0fac7646d6d">CoatedDiskProblem&lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classCoatedDiskProblem.html#a89e972df172b024b1358f0fac7646d6d">actions_before_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Kill the fsi traction elements and wipe surface mesh</span></div>
+<div class="line"> delete_face_elements(FSI_traction_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Kill Helmholtz FSI flux elements</span></div>
+<div class="line"> delete_face_elements(Helmholtz_fsi_flux_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Kill Helmholtz BC elements </span></div>
+<div class="line"> delete_face_elements(Helmholtz_outer_boundary_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> rebuild_global_mesh();</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end of actions_before_adapt</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="after_adapt"></a>
+Actions after adapt</h2>
+<p>After the (bulk-)mesh has been adapted, the various <code>FaceElements</code> must be re-attached. We then (re-)setup the fluid-structure interaction and rebuild the global mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====================start_of_actions_after_adapt=======================</span></div>
+<div class="line"><span class="comment">///  Actions after adapt: Rebuild the meshes of face elements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a93f9d34cd24f08ca1ec726ae0057b939">CoatedDiskProblem&lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classCoatedDiskProblem.html#a93f9d34cd24f08ca1ec726ae0057b939">actions_after_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Create fsi traction elements from all elements that are </span></div>
+<div class="line"> <span class="comment">// adjacent to FSI boundaries and add them to surface meshes</span></div>
+<div class="line"> create_fsi_traction_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create Helmholtz fsi flux elements</span></div>
+<div class="line"> create_helmholtz_fsi_flux_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create DtN elements from all elements that are </span></div>
+<div class="line"> <span class="comment">// adjacent to the outer boundary of Helmholtz mesh</span></div>
+<div class="line"> <a class="code" href="acoustic__fsi__annulus_8txt.html#a9c2c22ab245f20317da0684389b32e03">create_helmholtz_DtN_elements</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup interaction</span></div>
+<div class="line"> setup_interaction();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> rebuild_global_mesh();</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end of actions_after_adapt</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="delete"></a>
+Delete face elements</h2>
+<p>The helper function <code>delete_face_elements()</code> is used to delete all <code>FaceElements</code> in a given surface mesh before the mesh adaptation.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_delete_face_elements================</span></div>
+<div class="line"><span class="comment">/// Delete face elements and wipe the mesh</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==========================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a55b4cead41e01ab5fd728b607f62bb74">CoatedDiskProblem&lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classCoatedDiskProblem.html#a55b4cead41e01ab5fd728b607f62bb74">delete_face_elements</a>(Mesh* <span class="keyword">const</span> &amp; boundary_mesh_pt)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many surface elements are in the surface mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = boundary_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the surface elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//   Kill surface element</span></div>
+<div class="line">   <span class="keyword">delete</span> boundary_mesh_pt-&gt;element_pt(e);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Wipe the mesh</span></div>
+<div class="line"> boundary_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of delete_face_elements</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="create_flux"></a>
+Creating the FSI traction elements (and the FSI flux and DtN elements)</h2>
+<p>The function <code>create_fsi_traction_elements()</code> creates the <code>FaceElements</code> required to apply the FSI traction boundary condition (4) on the outer boundary (boundary 2) of the solid mesh:</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_create_fsi_traction_elements======================</span></div>
+<div class="line"><span class="comment">/// Create fsi traction elements </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#a143908e8db74ad6bd8b7efaaa26c78c3">CoatedDiskProblem&lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classCoatedDiskProblem.html#a143908e8db74ad6bd8b7efaaa26c78c3">create_fsi_traction_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// We&#39;re on boundary 2 of the solid mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> b=2;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// How many bulk elements are adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Solid_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the bulk elements adjacent to boundary b</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   ELASTICITY_ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELASTICITY_ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Solid_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Find the index of the face of element e along boundary b</span></div>
+<div class="line">   <span class="keywordtype">int</span> face_index = Solid_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Create element</span></div>
+<div class="line">   TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</div>
+<div class="line">    &lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;* el_pt=</div>
+<div class="line">    <span class="keyword">new</span> TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</div>
+<div class="line">    &lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;(bulk_elem_pt,</div>
+<div class="line">                                           face_index);   </div>
+<div class="line">   <span class="comment">// Add to mesh</span></div>
+<div class="line">   FSI_traction_mesh_pt-&gt;add_element_pt(el_pt);</div>
+</div><!-- fragment --><p>To function properly, the elements need to know the number of the bulk mesh boundary they are attached to (this allows them to determine the boundary coordinate <img class="formulaInl" alt="$ \zeta $" src="form_48.png"/> required to set up the fluid-structure interaction; see <a class="el" href="index.html#impl">Implementation</a> ), and the FSI parameter <img class="formulaInl" alt="$ Q $" src="form_58.png"/>.</p>
+<div class="fragment"><div class="line">   </div>
+<div class="line">   <span class="comment">// Associate element with bulk boundary (to allow it to access</span></div>
+<div class="line">   <span class="comment">// the boundary coordinates in the bulk mesh)</span></div>
+<div class="line">   el_pt-&gt;set_boundary_number_in_bulk_mesh(b); </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set FSI parameter</span></div>
+<div class="line">   el_pt-&gt;q_pt()=&amp;<a class="code" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a>;          </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of create_traction_elements</span></div>
+</div><!-- fragment --><p>[<b>Note:</b> We omit the listings of the functions <code>create_helmholtz_fsi_flux_elements()</code> and <code><a class="el" href="acoustic__fsi__annulus_8txt.html#a9c2c22ab245f20317da0684389b32e03">create_helmholtz_DtN_elements()</a></code> which create the <code>FaceElements</code> required to apply the FSI flux boundary condition (5) on the inner boundary (boundary 0), and the Sommerfeld radiation condition (6) on the outer boundary (boundary 2) of the Helmholtz mesh because they are very similar. Feel free to inspect the <br  />
+ <a href="../../../../demo_drivers/interaction/acoustic_fsi/acoustic_fsi.cc">source code.</a>]</p>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="fsi"></a>
+Setting up the fluid-structure interaction</h2>
+<p>The setup of the fluid-structure interaction requires the identification of the "bulk" Helmholtz elements that are adjacent to (the Gauss points of) the <code>FaceElements</code> that impose the FSI traction boundary condition (4), in terms of the displacement potential <img class="formulaInl" alt="$ \phi $" src="form_74.png"/> computed by these "bulk" elements. This can be done using the helper function <code>Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)</code> which is templated by the type of the "bulk" element and its spatial dimension, and takes as arguments:</p><ul>
+<li>a pointer to the <code>Problem</code>,</li>
+<li>the boundary ID of the FSI boundary in the "bulk" mesh,</li>
+<li>a pointer to that mesh,</li>
+<li>a pointer to the mesh of <code>FaceElements</code>.</li>
+</ul>
+<p>Nearly a one-liner:</p>
+<div class="fragment"><div class="line"><span class="comment">//=====================start_of_setup_interaction======================</span></div>
+<div class="line"><span class="comment">/// Setup interaction between two fields</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#ad24d43389155a6a9f2f66faf4b239c26">CoatedDiskProblem&lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classCoatedDiskProblem.html#ad24d43389155a6a9f2f66faf4b239c26">setup_interaction</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Setup Helmholtz &quot;pressure&quot; load on traction elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> boundary_in_helmholtz_mesh=0;</div>
+<div class="line">  Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh</div>
+<div class="line">  &lt;HELMHOLTZ_ELEMENT,2&gt;</div>
+<div class="line">  (<span class="keyword">this</span>,boundary_in_helmholtz_mesh,Helmholtz_mesh_pt,FSI_traction_mesh_pt);</div>
+</div><!-- fragment --><p>Exactly the same method can be used for the identification of the "bulk" elasticity elements that are adjacent to (the Gauss points of) the <code>FaceElements</code> that impose the FSI flux boundary condition (5), using the displacement <img class="formulaInl" alt="$ {\bf u} $" src="form_75.png"/> computed by these "bulk" elements:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Setup Helmholtz flux from normal displacement interaction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> boundary_in_solid_mesh=2;</div>
+<div class="line"> Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh</div>
+<div class="line">  &lt;ELASTICITY_ELEMENT,2&gt;(</div>
+<div class="line">   <span class="keyword">this</span>,boundary_in_solid_mesh,Solid_mesh_pt,Helmholtz_fsi_flux_mesh_pt);</div>
+<div class="line">}</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="doc"></a>
+Post-processing</h2>
+<p>The post-processing function <code>doc_solution(...)</code> computes and outputs the total radiated power, and plots the computed and exact solutions (real and imaginary parts) for all fields.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==============start_doc===========================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCoatedDiskProblem.html#af8e103d494f526c0e24c0c4ccef4ea6b">CoatedDiskProblem&lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file,some_file2;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_plot=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Compute/output the radiated power</span></div>
+<div class="line"> <span class="comment">//----------------------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/power%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Accumulate contribution from elements</span></div>
+<div class="line"> <span class="keywordtype">double</span> power=0.0;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nn_element=Helmholtz_outer_boundary_mesh_pt-&gt;nelement(); </div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;nn_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   HelmholtzBCElementBase&lt;HELMHOLTZ_ELEMENT&gt; *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>HelmholtzBCElementBase&lt;HELMHOLTZ_ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">     Helmholtz_outer_boundary_mesh_pt-&gt;element_pt(e)); </div>
+<div class="line">   power += el_pt-&gt;global_power_contribution(some_file);</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;Step: &quot;</span> &lt;&lt; Doc_info.number() </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;: Q=&quot;</span> &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a>  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; k_squared=&quot;</span> &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a>  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; density ratio=&quot;</span> &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#a517d4c31b8bce6563c2f605266dd9679">Global_Parameters::Density_ratio</a>  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; omega_sq=&quot;</span> &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a>  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; Total radiated power &quot;</span> &lt;&lt; power  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; Axisymmetric radiated power &quot;</span>  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt;  <a class="code" href="namespaceGlobal__Parameters.html#a79131fd1bf3eb1ab080c21c2d98a92d5">Global_Parameters::exact_axisym_radiated_power</a>()  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write trace file</span></div>
+<div class="line"> Trace_file &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#a517d4c31b8bce6563c2f605266dd9679">Global_Parameters::Density_ratio</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; power &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#a79131fd1bf3eb1ab080c21c2d98a92d5">Global_Parameters::exact_axisym_radiated_power</a>() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line"> std::ostringstream case_string;</div>
+<div class="line"> case_string &lt;&lt; <span class="stringliteral">&quot;TEXT X=10,Y=90, T=\&quot;Q=&quot;</span> </div>
+<div class="line">             &lt;&lt;  <a class="code" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a> </div>
+<div class="line">             &lt;&lt; <span class="stringliteral">&quot;,  k&lt;sup&gt;2&lt;/sup&gt;=&quot;</span></div>
+<div class="line">             &lt;&lt;  <a class="code" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a></div>
+<div class="line">             &lt;&lt; <span class="stringliteral">&quot;,  density ratio=&quot;</span></div>
+<div class="line">             &lt;&lt;  <a class="code" href="namespaceGlobal__Parameters.html#a517d4c31b8bce6563c2f605266dd9679">Global_Parameters::Density_ratio</a></div>
+<div class="line">             &lt;&lt; <span class="stringliteral">&quot;,  omega_sq=&quot;</span></div>
+<div class="line">             &lt;&lt;  <a class="code" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a></div>
+<div class="line">             &lt;&lt; <span class="stringliteral">&quot;\&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output displacement field</span></div>
+<div class="line"> <span class="comment">//--------------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/elast_soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Solid_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output fsi traction elements</span></div>
+<div class="line"> <span class="comment">//----------------------------- </span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/traction_soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> FSI_traction_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output Helmholtz fsi flux elements</span></div>
+<div class="line"> <span class="comment">//----------------------------------- </span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/flux_bc_soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Helmholtz_fsi_flux_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output Helmholtz</span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/helmholtz_soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Helmholtz_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file &lt;&lt; case_string.str();</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution for Helmholtz </span></div>
+<div class="line"> <span class="comment">//------------------------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/exact_helmholtz_soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Helmholtz_mesh_pt-&gt;output_fct(some_file,n_plot,</div>
+<div class="line">                                 <a class="code" href="namespaceGlobal__Parameters.html#af95baf4096a1393ab06bfa9ff9a57a35">Global_Parameters::exact_axisym_potential</a>); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Doced for Q=&quot;</span> &lt;&lt; <a class="code" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a> &lt;&lt; <span class="stringliteral">&quot; (step &quot;</span></div>
+<div class="line">      &lt;&lt; Doc_info.number() &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increment label for output files</span></div>
+<div class="line"> Doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="comm"></a>
+Comments</h2>
+<ul>
+<li>This tutorial emerged from an actual research project in which we investigated how efficiently the acoustic power radiated from an oscillating cylinder is reduced when the cylinder is coated with an elastic layer, exactly as in the model problem considered here. The paper then went on to investigate the effect of gaps in the coating and discovered some (rather nice) quasi-resonances &ndash; values of the FSI parameter <img class="formulaInl" alt="$ Q $" src="form_58.png"/> at which the radiated acoustic power increases significantly. Read all about it in this paper: <br  />
+<br  />
+<ul>
+<li>Heil, M., Kharrat, T., Cotterill, P.A. &amp; Abrahams, I.D. (2012) Quasi-resonances in sound-insulating coatings. <em>Journal of Sound and Vibration</em> <b>331</b> 4774-4784. DOI: <a href="http://dx.doi.org/10.1016/j.jsv.2012.05.029">10.1016/j.sv.2012.05.029</a></li>
+</ul>
+</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ul>
+<li>Equation (8) for the time-averaged radiated power shows that <img class="formulaInl" alt="$ \overline{\cal P}$" src="form_76.png"/> depends on the derivatives of the displacement potential <img class="formulaInl" alt="$ \phi $" src="form_74.png"/>. This implies that the value for <img class="formulaInl" alt="$ \overline{\cal P}$" src="form_76.png"/> computed from the finite-element solution for <img class="formulaInl" alt="$ \phi $" src="form_74.png"/> is not as accurate as the displacement potential itself. Computing <img class="formulaInl" alt="$ \overline{\cal P}$" src="form_76.png"/> to a certain tolerance (e.g. to "graphical accuracy" as in the plot shown above) therefore tends to require meshes that are much finer than would be required if we were only interested in <img class="formulaInl" alt="$ \phi $" src="form_74.png"/> itself. <br  />
+<br  />
+ Investigate the accuracy of the computational predictions for <img class="formulaInl" alt="$ \overline{\cal P}$" src="form_76.png"/> by: <br  />
+<br  />
+<ul>
+<li>increasing the spatial resolution e.g. by using the command line flag <code>&ndash;el_multiplier</code> (which controls the number of elements in the mesh) and suppressing any automatic (un)refinement by setting the maximum number of adaptations to zero using the <code>&ndash;max_adapt</code> command line flag. <br  />
+<br  />
+</li>
+<li>reducing the outer radius of the computational domain, using the command line flag <code>&ndash;outer_radius</code>, say. <br  />
+<br  />
+</li>
+<li>varying the element type, from the bi-linear <code>RefineableQHelmholtzElement&lt;2,2&gt;</code> to the bi-cubic <code>RefineableQHelmholtzElement&lt;2,4&gt;</code>, say.</li>
+</ul>
+<br  />
+<br  />
+ Which of these approaches gives you the "most accuracy" for a given number of degrees of freedom?</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/interaction/acoustic_fsi">demo_drivers/interaction/acoustic_fsi/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/interaction/acoustic_fsi/acoustic_fsi.cc">demo_drivers/interaction/acoustic_fsi/acoustic_fsi.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aacoustic__fsi__annulus_8txt_html_a9c2c22ab245f20317da0684389b32e03"><div class="ttname"><a href="acoustic__fsi__annulus_8txt.html#a9c2c22ab245f20317da0684389b32e03">create_helmholtz_DtN_elements</a></div><div class="ttdeci">f see&lt; A HREF=&quot;http:Heil, M., Kharrat, T., Cotterill, P.A. &amp; Abrahams, I.D. (2012) Quasi-resonances in sound-insulating coatings.&lt;EM&gt;Journal of Sound and Vibration&lt;/EM&gt;&lt;b&gt;331&lt;/B&gt; 4774-4784&lt;/a&gt; for details.In the computations the integral in (@R[power]@) is evaluated along the outer boundary of the computational domain. @I w 0.6\textwidth trace &quot;Radiated power as function of the FSI parameter Q for an axisymmetrically oscillating coating. Markers:computed results;continuous line:analytical result. &quot;&lt;HR&gt;&lt;HR&gt;\section num_soln The numerical solution\subsection namespace The global namespaceAs usual we define the problem parameters in a namespace.\dontinclude acoustic_fsi.cc\skipline start_namespace\until TimeHarmonicIsotropicElasticityTensorWe wish to perform parameter studies in which we vary the FSI parameter\f$ Q \f$. To make this physically meaningful, we interpret \f$ Q =(\rho_{\rm f}({\cal L}\omega)^2)/E \f$ as a measure of the stiffness of the elastic coating(so that an increase in \f$ Q \f$ corresponds to a reduction in thelayer's elastic modulus \f$ E \f$). In that case, the frequencyparameter \f$ \Omega^2 = (\rho_{\rm s} (\omega {\cal L})^2)/E \f$ in the time-harmonic linear elasticityequations becomes a dependent parameter and is givenin terms of the density ratio \f$ \rho_{\rm solid}/\rho_{\rm fluid}\f$ and \f$ Q \f$ by \f$ \Omega^2 = (\rho_{\rm solid}/\rho_{\rm fluid}) Q\f$.We therefore provide a helper function to update the dependent parameterfollowing any change in the independent parameters.\until }We force the system by imposing a prescribed displacementon the inner surface of the elastic coating and allow this to varyin the azimuthal direction with wavenumber \f$ N \f$:\until } The rest of the namespace contains lengthy expressions forvarious exact solutions and is omitted here.&lt;HR&gt;&lt;HR&gt;\subsection main The driver codeThe driver code is very straightforward. We parse the command lineto determine the parameters for the parameter study and buildthe problem object, using refineable nine-noded quadrilateral elements forthe solution of the time-harmonic elasticity and Helmholtzequations. \dontinclude acoustic_fsi.cc\skipline start_of_main\until &gt; problem We then solve the problem for various values of f Q updating the dependent variables after every increment until&lt;HR&gt;&lt;HR&gt; subsection class The problem class The c Problem class is templated by the types of the bulk elements used to discretise the time harmonic linear elasticity and Helmholtz equations respectively It contains the usual member functions to detach and attach c FaceElements from the bulk meshes before and after any mesh adaptation respectively dontinclude acoustic_fsi cc skipline begin_problem until create_helmholtz_DtN_elements() The private member data includes storage for the various meshes and objects that are used for outputting the results. \until }</div></div>
+<div class="ttc" id="aacoustic__fsi__annulus_8txt_html_a39dacc9c00a07bd516299e94fbd8be5b"><div class="ttname"><a href="acoustic__fsi__annulus_8txt.html#a39dacc9c00a07bd516299e94fbd8be5b">nfourier</a></div><div class="ttdeci">see the&lt; a href=&quot;../../../helmholtz/scattering/html/index.html#DtN&quot;&gt; Helmholtz tutorial&lt;/a &gt; for details until nfourier</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi__annulus_8txt_source.html#l00429">acoustic_fsi_annulus.txt:429</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a8f52f13933fba3b053d50de544d8cafc"><div class="ttname"><a href="classCoatedDiskProblem.html#a8f52f13933fba3b053d50de544d8cafc">CoatedDiskProblem::actions_before_newton_convergence_check</a></div><div class="ttdeci">void actions_before_newton_convergence_check()</div><div class="ttdoc">Recompute gamma integral before checking Newton residuals.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00250">acoustic_fsi.cc:250</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a79131fd1bf3eb1ab080c21c2d98a92d5"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a79131fd1bf3eb1ab080c21c2d98a92d5">Global_Parameters::exact_axisym_radiated_power</a></div><div class="ttdeci">double exact_axisym_radiated_power()</div><div class="ttdoc">Exact radiated power for axisymmetric solution.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00205">acoustic_fsi.cc:205</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html"><div class="ttname"><a href="classCoatedDiskProblem.html">CoatedDiskProblem</a></div><div class="ttdoc">Coated disk FSI.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00235">acoustic_fsi.cc:235</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a517d4c31b8bce6563c2f605266dd9679"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a517d4c31b8bce6563c2f605266dd9679">Global_Parameters::Density_ratio</a></div><div class="ttdeci">double Density_ratio</div><div class="ttdoc">Density ratio: solid to fluid.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00070">acoustic_fsi.cc:70</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a34f61c03b152f2ac06e1e771b0dbe09b"><div class="ttname"><a href="classCoatedDiskProblem.html#a34f61c03b152f2ac06e1e771b0dbe09b">CoatedDiskProblem::create_helmholtz_fsi_flux_elements</a></div><div class="ttdeci">void create_helmholtz_fsi_flux_elements()</div><div class="ttdoc">Create Helmholtz FSI flux elements.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00621">acoustic_fsi.cc:621</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a7814fddf663e56168174a42d2cd6b4c1"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a></div><div class="ttdeci">double Q</div><div class="ttdoc">FSI parameter.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00058">acoustic_fsi.cc:58</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a35d5d2ecfff0cec6150a5dc79e5c1ad1"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a></div><div class="ttdeci">unsigned El_multiplier</div><div class="ttdoc">Multiplier for number of elements.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00104">acoustic_fsi.cc:104</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ae0f9a80fb7510dbfbbef22582da231b7"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ae0f9a80fb7510dbfbbef22582da231b7">Global_Parameters::update_parameter_values</a></div><div class="ttdeci">void update_parameter_values()</div><div class="ttdoc">Function to update dependent parameter values.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00076">acoustic_fsi.cc:76</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html"><div class="ttname"><a href="namespaceGlobal__Parameters.html">Global_Parameters</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00048">acoustic_fsi.cc:48</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a142852ffdecdb2f76acf3e4c11ce4b04"><div class="ttname"><a href="classCoatedDiskProblem.html#a142852ffdecdb2f76acf3e4c11ce4b04">CoatedDiskProblem::Helmholtz_outer_boundary_mesh_pt</a></div><div class="ttdeci">HelmholtzDtNMesh&lt; HELMHOLTZ_ELEMENT &gt; * Helmholtz_outer_boundary_mesh_pt</div><div class="ttdoc">Pointer to mesh containing the DtN elements.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00294">acoustic_fsi.cc:294</a></div></div>
+<div class="ttc" id="aacoustic__fsi__annulus_8txt_html_a6ce5cf2f5cb97c91327121ea31211ad2"><div class="ttname"><a href="acoustic__fsi__annulus_8txt.html#a6ce5cf2f5cb97c91327121ea31211ad2">problem</a></div><div class="ttdeci">mainpage Time harmonic acoustic fluid structure interaction problems In this document we discuss the solution of time harmonic acoustic fluid structure interaction problems We start by reviewing the relevant theory and then present the solution of a simple model problem the sound radiation from an oscillating circular cylinder that is coated with a compressible elastic layer This problem combines the problems discussed in the tutorials illustrating&lt; a href=&quot;../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html&quot;&gt; the solution of the time harmonic equations of linear elasticity&lt;/a &gt; and&lt; a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt; the Helmholtz equation&lt;/a &gt;&lt; HR &gt;&lt; HR &gt; section theory while the motion of the elastic layer drives the fluid motion via the non penetration condition I w textwidth coated_pipe Sketch of the model problem</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi__annulus_8txt_source.html#l00042">acoustic_fsi_annulus.txt:42</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_af8e103d494f526c0e24c0c4ccef4ea6b"><div class="ttname"><a href="classCoatedDiskProblem.html#af8e103d494f526c0e24c0c4ccef4ea6b">CoatedDiskProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00727">acoustic_fsi.cc:727</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ab51fa55d06d9963d363bcf966cfcc62b"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ab51fa55d06d9963d363bcf966cfcc62b">Global_Parameters::solid_boundary_displacement</a></div><div class="ttdeci">void solid_boundary_displacement(const Vector&lt; double &gt; &amp;x, Vector&lt; std::complex&lt; double &gt; &gt; &amp;u)</div><div class="ttdoc">Displacement field on inner boundary of solid.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00086">acoustic_fsi.cc:86</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a88ded445ecd7bd89701409e68fd0b900"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Global_Parameters::Outer_radius</a></div><div class="ttdeci">double Outer_radius</div><div class="ttdoc">Radius of outer boundary of Helmholtz domain.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00055">acoustic_fsi.cc:55</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_aa0b9b4e706cdb1b31738c3db8759e9ee"><div class="ttname"><a href="classCoatedDiskProblem.html#aa0b9b4e706cdb1b31738c3db8759e9ee">CoatedDiskProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00247">acoustic_fsi.cc:247</a></div></div>
+<div class="ttc" id="aacoustic__fsi__annulus_8txt_html_afcdf3cf58b27c390ca237fb28e609606"><div class="ttname"><a href="acoustic__fsi__annulus_8txt.html#afcdf3cf58b27c390ca237fb28e609606">a</a></div><div class="ttdeci">c HelmholtzFluxElements could be used to impose a(given) normal derivative</div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a89e972df172b024b1358f0fac7646d6d"><div class="ttname"><a href="classCoatedDiskProblem.html#a89e972df172b024b1358f0fac7646d6d">CoatedDiskProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt: Wipe the mesh of traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00501">acoustic_fsi.cc:501</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a301ab922df72030c660b21328d6caf76"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a></div><div class="ttdeci">string Directory</div><div class="ttdoc">Output directory.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00101">acoustic_fsi.cc:101</a></div></div>
+<div class="ttc" id="aacoustic__fsi_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="acoustic__fsi_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Driver for acoustic fsi problem.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00845">acoustic_fsi.cc:845</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_af95baf4096a1393ab06bfa9ff9a57a35"><div class="ttname"><a href="namespaceGlobal__Parameters.html#af95baf4096a1393ab06bfa9ff9a57a35">Global_Parameters::exact_axisym_potential</a></div><div class="ttdeci">void exact_axisym_potential(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;soln)</div><div class="ttdoc">Exact solution for Helmholtz potential for axisymmetric solution.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00195">acoustic_fsi.cc:195</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a143908e8db74ad6bd8b7efaaa26c78c3"><div class="ttname"><a href="classCoatedDiskProblem.html#a143908e8db74ad6bd8b7efaaa26c78c3">CoatedDiskProblem::create_fsi_traction_elements</a></div><div class="ttdeci">void create_fsi_traction_elements()</div><div class="ttdoc">Create FSI traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00575">acoustic_fsi.cc:575</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a93f9d34cd24f08ca1ec726ae0057b939"><div class="ttname"><a href="classCoatedDiskProblem.html#a93f9d34cd24f08ca1ec726ae0057b939">CoatedDiskProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adapt: Rebuild the mesh of traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00524">acoustic_fsi.cc:524</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aff31353c09f439f3d537ad06ce868787"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aff31353c09f439f3d537ad06ce868787">Global_Parameters::N</a></div><div class="ttdeci">unsigned N</div><div class="ttdoc">Azimuthal wavenumber for imposed displacement of coating on inner boundary</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00083">acoustic_fsi.cc:83</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a3b94aaddee6a8f386ba249f418813963"><div class="ttname"><a href="classCoatedDiskProblem.html#a3b94aaddee6a8f386ba249f418813963">CoatedDiskProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00244">acoustic_fsi.cc:244</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aeeb26e11ef275bdfce14710e00290bb6"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aeeb26e11ef275bdfce14710e00290bb6">Global_Parameters::E</a></div><div class="ttdeci">TimeHarmonicIsotropicElasticityTensor E(Nu)</div><div class="ttdoc">The elasticity tensor for the solid.</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_af9e1e178dfb7f5e35b452599bd4c4324"><div class="ttname"><a href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a></div><div class="ttdeci">double Omega_sq</div><div class="ttdoc">Non-dim square of frequency for solid – dependent variable!</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00073">acoustic_fsi.cc:73</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ae3cf8878ede839bffda01f79bbe3e819"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ae3cf8878ede839bffda01f79bbe3e819">Global_Parameters::H_coating</a></div><div class="ttdeci">double H_coating</div><div class="ttdoc">Non-dim thickness of elastic coating.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00061">acoustic_fsi.cc:61</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_ad24d43389155a6a9f2f66faf4b239c26"><div class="ttname"><a href="classCoatedDiskProblem.html#ad24d43389155a6a9f2f66faf4b239c26">CoatedDiskProblem::setup_interaction</a></div><div class="ttdeci">void setup_interaction()</div><div class="ttdoc">Setup interaction.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00706">acoustic_fsi.cc:706</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a20fccdcfa2c15ad8b951b9ada3bb1661"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Global_Parameters::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson's ratio.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00064">acoustic_fsi.cc:64</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a91a3fa265abaf9e724c668ee800ffb29"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a></div><div class="ttdeci">double K_squared</div><div class="ttdoc">Square of wavenumber for the Helmholtz equation.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00052">acoustic_fsi.cc:52</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a55b4cead41e01ab5fd728b607f62bb74"><div class="ttname"><a href="classCoatedDiskProblem.html#a55b4cead41e01ab5fd728b607f62bb74">CoatedDiskProblem::delete_face_elements</a></div><div class="ttdeci">void delete_face_elements(Mesh *const &amp;boundary_mesh_pt)</div><div class="ttdoc">Delete (face) elements in specified mesh.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00551">acoustic_fsi.cc:551</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a9585ca5b422c72dc2b91cbb3e311b736"><div class="ttname"><a href="classCoatedDiskProblem.html#a9585ca5b422c72dc2b91cbb3e311b736">CoatedDiskProblem::CoatedDiskProblem</a></div><div class="ttdeci">CoatedDiskProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00309">acoustic_fsi.cc:309</a></div></div>
+<div class="ttc" id="aclassCoatedDiskProblem_html_a222b74395afde602617965f60c885491"><div class="ttname"><a href="classCoatedDiskProblem.html#a222b74395afde602617965f60c885491">CoatedDiskProblem::create_helmholtz_DtN_elements</a></div><div class="ttdeci">void create_helmholtz_DtN_elements()</div><div class="ttdoc">Create DtN face elements.</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi_8cc_source.html#l00665">acoustic_fsi.cc:665</a></div></div>
+<div class="ttc" id="aacoustic__fsi__annulus_8txt_html_a05fee6304cdd89e7b7155d220e5d5c4a"><div class="ttname"><a href="acoustic__fsi__annulus_8txt.html#a05fee6304cdd89e7b7155d220e5d5c4a">h_thick_helmholtz</a></div><div class="ttdeci">The Helmholtz mesh occupies the region between f respectively This is done mainly to illustrate our claim that the multi domain setup functions can operate with non matching meshes until h_thick_helmholtz</div><div class="ttdef"><b>Definition:</b> <a href="acoustic__fsi__annulus_8txt_source.html#l00417">acoustic_fsi_annulus.txt:417</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:32:10
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

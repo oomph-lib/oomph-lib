@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: unstructured_adaptive_solid.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">unstructured_adaptive_solid.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a74ee20745a922d96c6bba3edf2fdbf0c"><td class="memItemLeft" align="right" valign="top">mainpage Demo Eulerian coordinates <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> history see the description in&lt; a href=&quot;../../../meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; The solid mechanics <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> described here can be regarded as a sub <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> for the&lt; a href=&quot;../../../../doc/interaction/unstructured_adaptive_fsi/html/index.html&quot;&gt; unstructured adaptive fluid structure interaction tutorial&lt;/a &gt; In we can use the <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> to assess the errors incurred when projecting the solution between different meshes&lt; HR &gt;&lt; HR &gt; section <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> The <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> An elastic bar is fixed at the <a class="el" href="unstructured__adaptive__solid_8txt.html#aa0bc1453a5e2580054edf49e6cc8fc34">base</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> loaded by a constant pressure on its left hand side The pressure load is increased <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then decreased so that at the end of the simulation the bar should return to its undeformed position The strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> in the final configuration is a measure of the projection error because if there were no projection at all it would be exactly&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a74ee20745a922d96c6bba3edf2fdbf0c">zero</a> (or certainly zero to less than machine precision). @I w 0.75\textwidth solid_sketch &quot;Sketch of the problem. &quot;&lt; HR &gt;&lt; HR &gt; \section results Results The animation shown below illustrates the solid 's deformation <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> illustrates the adaptation of the mesh as the load changes. @I w 0.75\textwidth solid_res &quot;Plot of the deformation. &quot; The initial strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> is \f$ <a class="el" href="unstructured__adaptive__solid_8txt.html#aafb82541fcf8823f637af3743e19aeae">O</a>(10^</td></tr>
+<tr class="separator:a74ee20745a922d96c6bba3edf2fdbf0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb82541fcf8823f637af3743e19aeae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> the strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> in the final configuration after the external pressure has been reset to but the mesh has been is <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#aafb82541fcf8823f637af3743e19aeae">O</a> (10^{-8}) \f$. The strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> at the maximum deflection is \f$ O(10^</td></tr>
+<tr class="separator:aafb82541fcf8823f637af3743e19aeae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba681874a277ffa79b460fbe08a5010"><td class="memItemLeft" align="right" valign="top">()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a4ba681874a277ffa79b460fbe08a5010">ii</a> (compressible) displacement-pressure</td></tr>
+<tr class="separator:a4ba681874a277ffa79b460fbe08a5010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a340c185a4916c42ff81def0d0f1f2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> (iii) incompressible displacement-pressure. We shall describe the code only for the first formulation. Initially</td></tr>
+<tr class="separator:a9a340c185a4916c42ff81def0d0f1f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea3775f7f10607852c81db687ce9a6e2"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt; a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#aea3775f7f10607852c81db687ce9a6e2">min_element_size</a> () We output the boundaries</td></tr>
+<tr class="separator:aea3775f7f10607852c81db687ce9a6e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a405c0087eaf1546eefe3aece86600a49"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt; a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a405c0087eaf1546eefe3aece86600a49">build_global_mesh</a> () Finally we call \c actions_after_adapt()</td></tr>
+<tr class="separator:a405c0087eaf1546eefe3aece86600a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9265bfef6260fe1f6a0f03e87f0d72e1"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt; a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction sets the boundary conditions <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> completes the build of the <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then we assign the equation numbers until end constructor&lt; HR &gt;&lt; HR &gt; section adapt_after Actions before adaptation The c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a9265bfef6260fe1f6a0f03e87f0d72e1">actions_before_adapt</a> () function simply deletes the traction <a class="el" href="unstructured__adaptive__solid_8txt.html#a99997c930878edaca8d6a46624b20812">elements</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> clears the storage in the face mesh. \dontinclude unstructured_adaptive_solid.cc \skipline start_actions_before \until end_actions_before&lt; HR &gt;&lt; HR &gt; \section adapt_after Actions after adaptation The function \c actions_after_adapt() first builds the traction <a class="el" href="unstructured__adaptive__solid_8txt.html#a99997c930878edaca8d6a46624b20812">elements</a> adjacent to the left-hand boundary(boundary 0) <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> rebuilds the global mesh. The \c const ant_pressure() load function is passed to each of the traction elements. \until rebuild_global_mesh() Next</td></tr>
+<tr class="separator:a9265bfef6260fe1f6a0f03e87f0d72e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0bc1453a5e2580054edf49e6cc8fc34"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt; a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction sets the boundary conditions <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> completes the build of the <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then we assign the equation numbers until end constructor&lt; HR &gt;&lt; HR &gt; section adapt_after Actions before adaptation The c the boundary conditions of a fixed&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#aa0bc1453a5e2580054edf49e6cc8fc34">base</a> (boundary 3) are set. These must be reset every time after an adaptation because completely new nodes are generated. \until End of set boundary Finally</td></tr>
+<tr class="separator:aa0bc1453a5e2580054edf49e6cc8fc34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ff6bb082d1c98d3e07e128680422fe5"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt; a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the bulk <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction sets the boundary conditions <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> completes the build of the <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then we assign the equation numbers until end constructor&lt; HR &gt;&lt; HR &gt; section adapt_after Actions before adaptation The c the boundary conditions of a fixed the constitutive law if incompressibility flag are passed to the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> (solid) elements. Again</td></tr>
+<tr class="separator:a7ff6bb082d1c98d3e07e128680422fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5348b32ffaf26c617c951e21e8e51eb"><td class="memItemLeft" align="right" valign="top">mainpage Demo Eulerian coordinates <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> history&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#ac5348b32ffaf26c617c951e21e8e51eb">values</a></td></tr>
+<tr class="separator:ac5348b32ffaf26c617c951e21e8e51eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b70c60d5370c97b494d4fd728a2214"><td class="memItemLeft" align="right" valign="top">mainpage Demo Eulerian coordinates <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> history see the description in&lt; a href=&quot;../../../meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; The solid mechanics <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> described here can be regarded as a sub <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> for the&lt; a href=&quot;../../../../doc/interaction/unstructured_adaptive_fsi/html/index.html&quot;&gt; unstructured adaptive fluid structure interaction tutorial&lt;/a &gt; In&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#ab4b70c60d5370c97b494d4fd728a2214">addition</a></td></tr>
+<tr class="separator:ab4b70c60d5370c97b494d4fd728a2214"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a633de4b0c14ca52ea2432a3c8a5c4c31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a></td></tr>
+<tr class="separator:a633de4b0c14ca52ea2432a3c8a5c4c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33e858060975bd82ce57cfe7e921ddf6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> the strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> in the final configuration after the external pressure has been reset to&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a33e858060975bd82ce57cfe7e921ddf6">zero</a></td></tr>
+<tr class="separator:a33e858060975bd82ce57cfe7e921ddf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a032ea2192a01d9f898fcc43a8e0148fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> the strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> in the final configuration after the external pressure has been reset to but the mesh has been&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a032ea2192a01d9f898fcc43a8e0148fd">adapted</a></td></tr>
+<tr class="separator:a032ea2192a01d9f898fcc43a8e0148fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a162e2b772f01354aa62f4eb2a9b04441"><td class="memItemLeft" align="right" valign="top">we specify an output directory <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> instantiate a constitutive equation(Recall that the single-argument constructor to the \c GeneralisedHookean constitutive law implies that all stresses are non-dimensionalised on Young 's modulus \f$ E \f$). \dontinclude unstructured_adaptive_solid.cc \skipline start_main \until We then open an output file for the strain&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a></td></tr>
+<tr class="separator:a162e2b772f01354aa62f4eb2a9b04441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1931dcec25f83ecec5d4b6b3e23646fd"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a1931dcec25f83ecec5d4b6b3e23646fd">closed</a></td></tr>
+<tr class="separator:a1931dcec25f83ecec5d4b6b3e23646fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb517a28218f52a1404a477624cd2685"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#aeb517a28218f52a1404a477624cd2685">x_</a> {1} \in [0,1] \f$</td></tr>
+<tr class="separator:aeb517a28218f52a1404a477624cd2685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99997c930878edaca8d6a46624b20812"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt; a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a99997c930878edaca8d6a46624b20812">elements</a></td></tr>
+<tr class="separator:a99997c930878edaca8d6a46624b20812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a290591bf5980088c856160dc292c8c0e"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt; a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator and specify the target errors and element sizes until construct an empty traction mesh and combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> and traction meshes into a global mesh until which constructs the traction sets the boundary conditions and completes the build of the and then we assign the equation numbers until end constructor&lt; HR &gt;&lt; HR &gt; section adapt_after Actions before adaptation The c the boundary conditions of a fixed the constitutive law&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a290591bf5980088c856160dc292c8c0e">and</a></td></tr>
+<tr class="separator:a290591bf5980088c856160dc292c8c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a59a0611b9f3345177910f4874565f"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt; a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction sets the boundary conditions <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> completes the build of the <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then we assign the equation numbers until end constructor&lt; HR &gt;&lt; HR &gt; section adapt_after Actions before adaptation The c the boundary conditions of a fixed the constitutive law if&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unstructured__adaptive__solid_8txt.html#a40a59a0611b9f3345177910f4874565f">required</a></td></tr>
+<tr class="separator:a40a59a0611b9f3345177910f4874565f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a9265bfef6260fe1f6a0f03e87f0d72e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9265bfef6260fe1f6a0f03e87f0d72e1">&#9670;&nbsp;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt;a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction sets the boundary conditions <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> completes the build of the <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then we assign the equation numbers until end constructor&lt;HR&gt;&lt;HR&gt; section adapt_after Actions before adaptation The c actions_before_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a340c185a4916c42ff81def0d0f1f2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a340c185a4916c42ff81def0d0f1f2a">&#9670;&nbsp;</a></span>and()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and </td>
+          <td>(</td>
+          <td class="paramtype">iii&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa0bc1453a5e2580054edf49e6cc8fc34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0bc1453a5e2580054edf49e6cc8fc34">&#9670;&nbsp;</a></span>base()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt;a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction sets the boundary conditions <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> completes the build of the <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then we assign the equation numbers until end constructor&lt;HR&gt;&lt;HR&gt; section adapt_after Actions before adaptation The c the boundary conditions of a fixed base </td>
+          <td>(</td>
+          <td class="paramtype">boundary&#160;</td>
+          <td class="paramname"><em>3</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">new</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a405c0087eaf1546eefe3aece86600a49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a405c0087eaf1546eefe3aece86600a49">&#9670;&nbsp;</a></span>build_global_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt;a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until build_global_mesh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="unstructured__adaptive__solid_8cc_source.html#l00133">UnstructuredSolidProblem&lt; ELEMENT &gt;::UnstructuredSolidProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a7ff6bb082d1c98d3e07e128680422fe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ff6bb082d1c98d3e07e128680422fe5">&#9670;&nbsp;</a></span>bulk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt;a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the bulk <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction sets the boundary conditions <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> completes the build of the <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then we assign the equation numbers until end constructor&lt;HR&gt;&lt;HR&gt; section adapt_after Actions before adaptation The c the boundary conditions of a fixed the constitutive law if incompressibility flag are passed to the bulk </td>
+          <td>(</td>
+          <td class="paramtype">solid&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4ba681874a277ffa79b460fbe08a5010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba681874a277ffa79b460fbe08a5010">&#9670;&nbsp;</a></span>ii()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">() ii </td>
+          <td>(</td>
+          <td class="paramtype">compressible&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea3775f7f10607852c81db687ce9a6e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea3775f7f10607852c81db687ce9a6e2">&#9670;&nbsp;</a></span>min_element_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt;a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until min_element_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aafb82541fcf8823f637af3743e19aeae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafb82541fcf8823f637af3743e19aeae">&#9670;&nbsp;</a></span>O()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> the strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> in the final configuration after the external pressure has been reset to but the mesh has been is <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> O </td>
+          <td>(</td>
+          <td class="paramtype">10^{-8}&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00049">49</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a74ee20745a922d96c6bba3edf2fdbf0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74ee20745a922d96c6bba3edf2fdbf0c">&#9670;&nbsp;</a></span>zero()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo Eulerian coordinates <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> history see the description in&lt;a href=&quot;../../../meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; The solid mechanics <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> described here can be regarded as a sub <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> for the&lt;a href=&quot;../../../../doc/interaction/unstructured_adaptive_fsi/html/index.html&quot;&gt; unstructured adaptive fluid structure interaction tutorial&lt;/a&gt; In we can use the <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> to assess the errors incurred when projecting the solution between different meshes&lt;HR&gt;&lt;HR&gt; section <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> The <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> An elastic bar is fixed at the <a class="el" href="unstructured__adaptive__solid_8txt.html#aa0bc1453a5e2580054edf49e6cc8fc34">base</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> loaded by a constant pressure on its left hand side The pressure load is increased <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then decreased so that at the end of the simulation the bar should return to its undeformed position The strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> in the final configuration is a measure of the projection error because if there were no projection at all it would be exactly zero </td>
+          <td>(</td>
+          <td class="paramtype">or certainly zero to less than machine&#160;</td>
+          <td class="paramname"><em>precision</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00034">34</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a032ea2192a01d9f898fcc43a8e0148fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a032ea2192a01d9f898fcc43a8e0148fd">&#9670;&nbsp;</a></span>adapted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> the strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> in the final configuration after the external pressure has been reset to but the mesh has been adapted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00049">49</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab4b70c60d5370c97b494d4fd728a2214"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4b70c60d5370c97b494d4fd728a2214">&#9670;&nbsp;</a></span>addition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo Eulerian coordinates <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> history see the description in&lt;a href=&quot;../../../meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; The solid mechanics <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> described here can be regarded as a sub <a class="el" href="unstructured__adaptive__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> for the&lt;a href=&quot;../../../../doc/interaction/unstructured_adaptive_fsi/html/index.html&quot;&gt; unstructured adaptive fluid structure interaction tutorial&lt;/a&gt; In addition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00021">21</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a290591bf5980088c856160dc292c8c0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a290591bf5980088c856160dc292c8c0e">&#9670;&nbsp;</a></span>and</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt;a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator and specify the target errors and element sizes until construct an empty traction mesh and combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> and traction meshes into a global mesh until which constructs the traction sets the boundary conditions and completes the build of the and then we assign the equation numbers until end constructor&lt;HR&gt;&lt;HR&gt; section adapt_after Actions before adaptation The c the boundary conditions of a fixed the constitutive law and</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00181">181</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1931dcec25f83ecec5d4b6b3e23646fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1931dcec25f83ecec5d4b6b3e23646fd">&#9670;&nbsp;</a></span>closed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We begin by building the closed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00123">123</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a99997c930878edaca8d6a46624b20812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99997c930878edaca8d6a46624b20812">&#9670;&nbsp;</a></span>elements</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt; a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a &gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction sets the boundary conditions <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> completes the build of the elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00146">146</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a162e2b772f01354aa62f4eb2a9b04441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a162e2b772f01354aa62f4eb2a9b04441">&#9670;&nbsp;</a></span>energy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we specify an output directory <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> instantiate a constitutive equation (Recall that the single-argument constructor to the \c GeneralisedHookean constitutive law implies that all stresses are non-dimensionalised on Young's modulus \f$ E \f$). \dontinclude unstructured_adaptive_solid.cc \skipline start_main \until We then open an output file for the strain energy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00080">80</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a633de4b0c14ca52ea2432a3c8a5c4c31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a633de4b0c14ca52ea2432a3c8a5c4c31">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00047">47</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00012">12</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__adaptive__solid_8cc_source.html#l00419">main()</a>.</p>
+
+</div>
+</div>
+<a id="a40a59a0611b9f3345177910f4874565f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a59a0611b9f3345177910f4874565f">&#9670;&nbsp;</a></span>required</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> see the sketch above This process is a simplified version of the construction used in&lt;a href=&quot;../../../../doc/meshes/mesh_from_inline_triangle/html/index.html&quot;&gt; another tutorial&lt;/a&gt; dontinclude unstructured_adaptive_solid cc skipline start_constructor until triangle_mesh_parameters We next construct an error estimator <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> specify the target errors <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> element sizes until construct an empty traction mesh <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> combine the <a class="el" href="unstructured__adaptive__solid_8txt.html#a7ff6bb082d1c98d3e07e128680422fe5">bulk</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> traction meshes into a global mesh until which constructs the traction sets the boundary conditions <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> completes the build of the <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> then we assign the equation numbers until end constructor&lt;HR&gt;&lt;HR&gt; section adapt_after Actions before adaptation The c the boundary conditions of a fixed the constitutive law if required</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00181">181</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac5348b32ffaf26c617c951e21e8e51eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5348b32ffaf26c617c951e21e8e51eb">&#9670;&nbsp;</a></span>values</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo Eulerian coordinates <a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> history values</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00013">13</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="aeb517a28218f52a1404a477624cd2685"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb517a28218f52a1404a477624cd2685">&#9670;&nbsp;</a></span>x_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt; HR &gt;&lt; HR &gt; section constructor The Problem constructor We begin by building the piecewise linear boundary of the undeformed solid body <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> <a class="el" href="unstructured__adaptive__solid_8txt.html#a633de4b0c14ca52ea2432a3c8a5c4c31">f</a> x_ {1} \in [0,1] \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00124">124</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a33e858060975bd82ce57cfe7e921ddf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33e858060975bd82ce57cfe7e921ddf6">&#9670;&nbsp;</a></span>zero</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="unstructured__adaptive__solid_8txt.html#a9a340c185a4916c42ff81def0d0f1f2a">and</a> the strain <a class="el" href="unstructured__adaptive__solid_8txt.html#a162e2b772f01354aa62f4eb2a9b04441">energy</a> in the final configuration after the external pressure has been reset to zero</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unstructured__adaptive__solid_8txt_source.html#l00049">49</a> of file <a class="el" href="unstructured__adaptive__solid_8txt_source.html">unstructured_adaptive_solid.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:17:31
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

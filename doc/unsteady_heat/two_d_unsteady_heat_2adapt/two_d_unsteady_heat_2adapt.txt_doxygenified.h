@@ -1,0 +1,336 @@
+/**
+
+\mainpage Example problem: Spatially and temporally adaptive solution of the 2D unsteady heat equation with flux boundary conditions in a moving domain.
+
+This is the final and most complex problem in our series of
+demo codes for the unsteady heat equation. We re-visit the
+moving domain problem considered in the 
+<A HREF="../../two_d_unsteady_heat_ALE/html/index.html"> previous
+example </A> and solve it with a \e combination of spatial and
+temporal adaptivity. 
+ 
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>The two-dimensional unsteady heat equation with flux boundary
+conditions in a moving domain.</B>
+</CENTER> 
+Solve
+\f[
+\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} 
+= \frac{\partial u}{\partial t} + f\left(x_1,x_2,t\right),
+ \ \ \ \ \ \ \ \ \ \ (1)
+\f]
+in the domain \f$ D \f$, bounded by the coordinate axes
+and the time-dependent ellipse
+\f[
+\mathbf{r}_{ellipse}(\xi,t) = 
+\left( \begin{array}{c}
+\big(a+\hat{a}\sin(2\pi t/\hat{T})\big) \cos(\xi) \\
+\big(b+\hat{b}\sin(2\pi t/\hat{T})\big) \sin(\xi)
+\end{array}
+ \right),
+ \ \ \ \ \ \ \ \ \ \ (2)
+\f]
+subject to Neumann boundary conditions,
+\f[
+\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}=
+- \left. \frac{\partial u}{\partial x_2}\right|_{\partial D_{Neumann}}=
+g_0, 
+\ \ \ \ \ \ \ \ \ \ (3)
+\f]
+along the horizontal domain boundary \f$ \partial D_{Neumann} = 
+\{ (x_1,x_2) | x_1 \in [0,1], x_2=0 \} \f$, and to Dirichlet 
+boundary conditions,
+\f[
+\left. u\right|_{\partial D_{Dirichlet}}=h_0, 
+\ \ \ \ \ \ \ \ \ \ (4)
+\f]
+elsewhere.
+\image html domain.gif "Sketch of the time-dependent domain and the boundary conditions. " 
+\image latex domain.eps "Sketch of the time-dependent domain and the boundary conditions. " width=0.75\textwidth
+The initial conditions are given by
+\f[
+u(x_1,x_2,t=0)=k_0(x_1,x_2),
+\ \ \ \ \ \ \ \ \ \ (5)
+\f]
+where the functions \f$ f, g_0, \ h_0\f$ and  \f$ k_0\f$ are given. 
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+We choose the functions \f$ f, g_0, \ h_0\f$ and  \f$ k_0\f$ 
+so that
+\f[
+u_0(x_1,x_2,t) = \tanh\bigg[1-\alpha\bigg(\tan\Phi
+\big(x_1-\beta\tanh[ \gamma\cos\left(2\pi
+t\right)]\big)- x_2\bigg)\bigg]
+ \ \ \ \ \ \ \ \ \ \ (6)
+\f]
+is the exact solution.
+
+The solution represents the "usual" tanh profile, whose steepness
+is controlled by the parameter \f$ \alpha \f$ so that for \f$ \alpha
+\gg 1 \f$ the solution approaches a step. The step is oriented
+at an angle \f$ \Phi \f$ against the \f$ x_1-\f$-axis and its position varies
+periodically. The parameter \f$ \beta \f$ controls the amplitude
+of the step's lateral displacement, while \f$ \gamma \f$ determines the
+rate at which its position changes. For \f$ \gamma \gg 1\f$,
+the step remains stationary for most of the period and then
+translates rapidly parallel to the \f$ x_1-\f$-axis, making this a very 
+challenging problem.
+
+
+
+<HR>
+<HR>
+
+\section comb Background: Combined spatial and temporal adaptivity
+When  <A HREF="../../two_d_unsteady_heat_ALE/html/index.html">
+solving the above problem with pure spatial adaptivity,</A> we
+observed that the error of the computed solution increased noticeably 
+during phases when the "step" moved rapidly through the
+domain, suggesting that the error is due to the temporal rather
+than the spatial discretisation. If you attempted the exercises suggested
+at the end of that demo problem, you will have confirmed this by
+observing that the error is reduced when the time-integration is performed
+with a smaller timestep. Since the solution only undergoes rapid
+changes during short periods of time, the use of temporal adaptivity 
+is highly desirable. Before demonstrating that the combined use
+of temporal and spatial adaptivity only requires trivial changes to 
+the driver code with purely spatial adaptivity, we 
+briefly comment on the strategy employed by \c oomph-lib's
+doubly-adaptive unsteady Newton solver
+
+\code
+doubly_adaptive_unsteady_newton_solve(dt,epsilon_t,max_adapt,first)
+\endcode
+
+This Newton solver performs the spatial and temporal 
+adaptations sequentially, as follows:
+-# Given a mesh and the solution on that mesh at time \f$ t \f$, we first
+   advance the solution to time \f$ t + dt\f$, adjusting the timestep
+   \f$ dt \f$ until the global temporal error norm computed by
+   \c Problem::global_temporal_error_norm() falls below the target
+   error specified by the (\c double) argument \c epsilon_t. The
+   (\c double) argument \c dt, specifies the suggestion for the timestep.
+-# Once a temporally accurate solution has been computed on that
+   mesh, we perform up to \c max_adapt spatial adaptations to reduce
+   the spatial error. We re-compute the solution on the adapted
+   meshes, using the (fixed)
+   timestep selected previously by the temporal adaptation. Once the spatial 
+   adaptations are complete, we could, in principle, re-evaluate
+   the temporal error and, if required, re-compute the timestep yet
+   again -- at a significant additional cost. We omit this further adjustment
+   and accept the solution "as is".
+.
+As before, the boolean argument \c first indicates
+if the first timestep is being computed (see the  
+<A HREF="../../two_d_unsteady_heat_adapt/html/index.html">example
+without temporal adaptivity</A> for more information on this important
+issue). As in the 
+ <A HREF="../../two_d_unsteady_heat_t_adapt/html/index.html">case of pure 
+temporal adaptivity</A>, the adaptive unsteady Newton solver 
+returns a suggestion for the size of the next timestep. 
+
+<HR>
+<HR>
+
+\section impl The implementation
+
+Since the spatial and temporal adaptations are performed independently,
+adding "double adaptivity" to the existing 
+<A HREF="../../two_d_unsteady_heat_ALE/html/index.html">
+driver code with pure spatial adaptivity</A> only requires the
+implementation of the additional
+member function \c Problem::global_temporal_error_norm().
+In the current problem we can use the one that we created for 
+the  <A HREF="../../two_d_unsteady_heat_t_adapt/html/index.html">example with pure temporal adaptivity</A>. Furthermore, we 
+pass a true boolean flag to the constructor of the \c BDF<2> 
+timestepper, to make it adaptive.  That's all! Apart from
+a few (optional) improvements to the dump/restart functions (discussed below),
+<A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc">the
+code</A> does not require any other changes. 
+
+
+<HR>
+<HR>
+
+\section reslt Some results
+The figure below shows a snapshot of the <A HREF="../figures/step_soln.avi">
+animated solution</A>, obtained from the doubly adaptive simulation.
+
+\image html step_soln.gif "Snapshot of the solution. " 
+\image latex step_soln.eps "Snapshot of the solution. " width=0.75\textwidth
+
+When viewing the  <A HREF="../figures/step_soln.avi">
+animation of the solution</A>, note how the time-bar grows much more rapidly
+during phases when the solution only changes slowly, reflecting
+the larger timestep used during these phases. 
+
+The time-traces shown below compare the exact and computed solutions,
+and document the variations in timestep and the norm of the error
+throughout the simulation, for a temporal error target of \c
+epsilon_t = \f$ 10^{-2}. \f$ The plots show clearly how the adaptive 
+timestepper selects a much larger timestep during the phases when 
+the solution only changes slowly. However, the error during phases 
+of rapid change is still relatively large -- the comparison
+between the exact and computed solution shows that the two are not
+graphically indistinguishable. We ought to do better!
+
+\image html trace.gif "Time trace of the solution, the error and the timestep chosen by the adaptive timestepper for a temporal error target of 1E-2. " 
+\image latex trace.eps "Time trace of the solution, the error and the timestep chosen by the adaptive timestepper for a temporal error target of 1E-2. " width=0.75\textwidth
+
+The time-traces below show the results from a second simulation with a
+smaller target error of \c epsilon_t = \f$ 10^{-3} \f$. The exact 
+and computed solutions are now graphically indistinguishable and the
+error has been reduced significantly -- at the cost of having to take
+much smaller timesteps throughout the simulation. Without adaptive 
+time-stepping, this simulation would become \e very expensive as 
+timesteps as small as \f$ dt = 2 \times 10^{-4}\f$ are required to 
+properly resolve the solution during the phases of rapid change. 
+ 
+
+\image html trace_target1e-3.gif "Time trace of the solution, the error and the timestep chosen by the adaptive timestepper for a temporal error target of 1E-3. " 
+\image latex trace_target1e-3.eps "Time trace of the solution, the error and the timestep chosen by the adaptive timestepper for a temporal error target of 1E-3. " width=0.75\textwidth
+
+
+<HR>
+<HR>
+
+\section comments Comments and Exercises
+\subsection cust Customising the dump/restart procedure
+
+In two earlier examples, we commented on two undesirable features of the
+default dump/restart procedures: 
+- The restart files do not record the counter (stored in a
+  \c DocInfo object) that we typically use to label the output files.
+  Therefore the output files produced in the restarted run start 
+  with label "0", making it difficult to merge the data files from the 
+  original and restarted simulations.
+- In an adaptive simulation, the restart files do not record the adaptive
+  timestepper's suggestion for the next timestep, therefore the
+  first timestep in the restarted simulation 
+  is performed with the timestep that was used when the 
+  solution was dumped to disk, leading to slight differences
+  in the history of the timesteps chosen; see the plot shown at the end of
+  the discussion of the 
+  <A HREF="../../two_d_unsteady_heat_t_adapt/html/index.html"> 
+  example with purely temporal adaptivity. </A>
+.
+
+To address these problems, we modified the \c Problem class 
+for the present example slightly: We added the \c DocInfo object 
+which stores the label for the output file to the \c Problem's private
+member data, and provide storage for the size of the next timestep
+suggested by the adaptive timestepper.
+
+\dontinclude two_d_unsteady_heat_2adapt.cc     
+\skipline private:
+\until double Next_dt;
+
+[We also provide a public access function, \c double \c next_dt(), 
+to the suggested next timestep; see \ref no_pub .]
+
+ 
+We initialise the output label in the \c Problem constructor,
+
+\dontinclude two_d_unsteady_heat_2adapt.cc     
+\skipline start_of_constructor
+\until number()=0;
+
+and set \c Next_dt to the initial timestep when the 
+initial condition is assigned in \c set_initial_condition():
+
+\dontinclude two_d_unsteady_heat_2adapt.cc     
+\skipline Choose initial timestep
+\until Next_dt
+
+
+We modify the timestepping loop so that the adaptive timestepper's
+suggestion for the next timestep is stored in the \c Problem's
+private data member \c Next_dt, which is accessible via
+the public member function \c next_dt():
+
+\dontinclude two_d_unsteady_heat_2adapt.cc     
+\skipline Timestepping loop
+\until }
+
+Since the \c Problem now has access to the \c DocInfo object (and
+therefore to the label that we use to identify the output files), and 
+to the suggested next timestep, we write both to the
+restart file, adding brief comments behind the "raw" data.
+
+\dontinclude two_d_unsteady_heat_2adapt.cc     
+\skipline start_of_dump_it
+\until end of dump_it
+
+
+These values are then read during the restart:
+
+\dontinclude two_d_unsteady_heat_2adapt.cc     
+\skipline start_of_restart
+\until end of restart
+
+[The slightly clumsy read procedure is required to ensure that
+the comments that follow the "raw" data are ignored.]
+
+Following the assignment of the initial conditions, the first
+timestep for the timestepping loop in the \c main function 
+can now be obtained from \c next_dt() since \c Next_dt will either
+have been set to the actual first timestep used when setting up
+the initial conditions at time \f$ t=0\f$, or to the next
+timestep that had been suggested by the adaptive timestepper when the restart
+file was created. 
+
+Here are the time-traces for the solution and the timesteps from the
+original and the restarted simulations -- apart from the (very small) 
+roundoff errors due to the finite precision in which all data is
+recorded in the restart files, they are now in perfect agreement.
+
+\image html restart_trace.gif "Time-traces of the solution and the timestep for the original (green) and restarted (red) simulations with the customised dump/restart procedure. " 
+\image latex restart_trace.eps "Time-traces of the solution and the timestep for the original (green) and restarted (red) simulations with the customised dump/restart procedure. " width=0.75\textwidth
+
+<HR>
+
+\subsection no_pub Do NOT use public member data in any classes
+
+A little aside: Yes, we really do recommend storing the suggestion for the
+size of the next timestep as private member data and providing 
+an access function to it. This must seem like (and indeed is) slight 
+overkill in the present context: Why can't we just store it as
+public member data and avoid having to write the access function?
+The answer is: Because public data is bad and it's a good habit
+to avoid it as a matter of principle -- even in trivial examples.
+
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/">
+demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/
+</A>
+</CENTER>
+- The driver code is:
+<CENTER>
+<A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc">
+demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc
+</A>
+</CENTER>
+.
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

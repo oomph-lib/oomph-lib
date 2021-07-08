@@ -1,0 +1,274 @@
+\hypertarget{classoomph_1_1CopiedData}{}\doxysection{oomph\+::Copied\+Data Class Reference}
+\label{classoomph_1_1CopiedData}\index{oomph::CopiedData@{oomph::CopiedData}}
+
+
+Custom \mbox{\hyperlink{classoomph_1_1Data}{Data}} class that is used when making a shallow copy of a data object. The class contains a copy of an entire other \mbox{\hyperlink{classoomph_1_1Data}{Data}} object.  
+
+
+
+
+{\ttfamily \#include $<$nodes.\+h$>$}
+
+Inheritance diagram for oomph\+::Copied\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1CopiedData}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1CopiedData_a675b1811d9c6b1ba1ce4bbcb7b681245}{clear\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Clear the pointers to the copied data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CopiedData_ab613f17b01f372d5dbe7365cdb8b8819}{Copied\+Data}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CopiedData_a80125e8a22f8de1d26be39fe85a5e207}{Copied\+Data}} (const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&data)
+\begin{DoxyCompactList}\small\item\em (Shallow) copy constructor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1CopiedData_a1548a29a62fb5bb646af063a16a110c9}{operator=}} (const \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CopiedData_a3a2a07b9a7c41b687cf32da306cbbb9d}{$\sim$\+Copied\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Destructor informs original object that the copy is being deleted and clears its pointers to the stored values. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1CopiedData_ac76cb0c286daa39b501bff9ef82bb05c}{is\+\_\+a\+\_\+copy}} () const
+\begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the data contains any copied values. Copied data is always a copy. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1CopiedData_a80b677702e0cb94c5356214f5cf9f9fb}{is\+\_\+a\+\_\+copy}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the i-\/th value is a copied value. All copied data is always a copy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1CopiedData_a112772da6e653b066c93016ac8aba32c}{assign\+\_\+eqn\+\_\+numbers}} (unsigned long \&global\+\_\+ndof, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} is always a copy, so no equation numbers should be allocated. This function just returns. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1CopiedData_aa7c48fb5ea17cd42260965bf2c800b3d}{resize}} (const unsigned \&n\+\_\+value)
+\begin{DoxyCompactList}\small\item\em We cannot resize \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}}, so the resize function throws a warning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1CopiedData_a7e29b2bb1cf0ebad16afac2e5d7342d8}{reset\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Reset the pointers to the copied data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1CopiedData_a592934e0ca9ade33ed91a7f74c091864}{Copied\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object from which the values are copied. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Custom \mbox{\hyperlink{classoomph_1_1Data}{Data}} class that is used when making a shallow copy of a data object. The class contains a copy of an entire other \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
+
+Definition at line 596 of file nodes.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1CopiedData_ab613f17b01f372d5dbe7365cdb8b8819}\label{classoomph_1_1CopiedData_ab613f17b01f372d5dbe7365cdb8b8819}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!CopiedData@{CopiedData}}
+\index{CopiedData@{CopiedData}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{CopiedData()}{CopiedData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Copied\+Data\+::\+Copied\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Constructor, creates a \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} object with all values copied from another \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. ~\newline
+ 
+
+Definition at line 1344 of file nodes.\+cc.
+
+
+
+References oomph\+::\+Data\+::add\+\_\+copy(), oomph\+::\+Data\+::\+Eqn\+\_\+number, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), and oomph\+::\+Data\+::\+Value.
+
+\mbox{\Hypertarget{classoomph_1_1CopiedData_a80125e8a22f8de1d26be39fe85a5e207}\label{classoomph_1_1CopiedData_a80125e8a22f8de1d26be39fe85a5e207}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!CopiedData@{CopiedData}}
+\index{CopiedData@{CopiedData}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{CopiedData()}{CopiedData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Copied\+Data\+::\+Copied\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Shallow) copy constructor 
+
+
+
+Definition at line 615 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1CopiedData_a3a2a07b9a7c41b687cf32da306cbbb9d}\label{classoomph_1_1CopiedData_a3a2a07b9a7c41b687cf32da306cbbb9d}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!````~CopiedData@{$\sim$CopiedData}}
+\index{````~CopiedData@{$\sim$CopiedData}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{$\sim$CopiedData()}{~CopiedData()}}
+{\footnotesize\ttfamily oomph\+::\+Copied\+Data\+::$\sim$\+Copied\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor informs original object that the copy is being deleted and clears its pointers to the stored values. 
+
+
+
+Definition at line 625 of file nodes.\+h.
+
+
+
+References Copied\+\_\+data\+\_\+pt, oomph\+::\+Data\+::\+Eqn\+\_\+number, oomph\+::\+Data\+::remove\+\_\+copy(), and oomph\+::\+Data\+::\+Value.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1CopiedData_a112772da6e653b066c93016ac8aba32c}\label{classoomph_1_1CopiedData_a112772da6e653b066c93016ac8aba32c}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!assign\_eqn\_numbers@{assign\_eqn\_numbers}}
+\index{assign\_eqn\_numbers@{assign\_eqn\_numbers}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{assign\_eqn\_numbers()}{assign\_eqn\_numbers()}}
+{\footnotesize\ttfamily void oomph\+::\+Copied\+Data\+::assign\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{unsigned long \&}]{global\+\_\+ndof,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&}]{dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} is always a copy, so no equation numbers should be allocated. This function just returns. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a98412724efd3d51925de1a24341f7f41}{oomph\+::\+Data}}.
+
+
+
+Definition at line 647 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1CopiedData_a675b1811d9c6b1ba1ce4bbcb7b681245}\label{classoomph_1_1CopiedData_a675b1811d9c6b1ba1ce4bbcb7b681245}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!clear\_copied\_pointers@{clear\_copied\_pointers}}
+\index{clear\_copied\_pointers@{clear\_copied\_pointers}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{clear\_copied\_pointers()}{clear\_copied\_pointers()}}
+{\footnotesize\ttfamily void oomph\+::\+Copied\+Data\+::clear\+\_\+copied\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clear the pointers to the copied data. 
+
+Clear ther pointers to the copied data. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a409e3140829def2b1e738a24cc1f48bb}{oomph\+::\+Data}}.
+
+
+
+Definition at line 1334 of file nodes.\+cc.
+
+
+
+References Copied\+\_\+data\+\_\+pt, oomph\+::\+Data\+::\+Eqn\+\_\+number, and oomph\+::\+Data\+::\+Value.
+
+\mbox{\Hypertarget{classoomph_1_1CopiedData_ac76cb0c286daa39b501bff9ef82bb05c}\label{classoomph_1_1CopiedData_ac76cb0c286daa39b501bff9ef82bb05c}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!is\_a\_copy@{is\_a\_copy}}
+\index{is\_a\_copy@{is\_a\_copy}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{is\_a\_copy()}{is\_a\_copy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool oomph\+::\+Copied\+Data\+::is\+\_\+a\+\_\+copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return a boolean to indicate whether the data contains any copied values. Copied data is always a copy. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}{oomph\+::\+Data}}.
+
+
+
+Definition at line 638 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1CopiedData_a80b677702e0cb94c5356214f5cf9f9fb}\label{classoomph_1_1CopiedData_a80b677702e0cb94c5356214f5cf9f9fb}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!is\_a\_copy@{is\_a\_copy}}
+\index{is\_a\_copy@{is\_a\_copy}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{is\_a\_copy()}{is\_a\_copy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool oomph\+::\+Copied\+Data\+::is\+\_\+a\+\_\+copy (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return a boolean to indicate whether the i-\/th value is a copied value. All copied data is always a copy. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_ae31cff2285588c40cd33fac0cabcc371}{oomph\+::\+Data}}.
+
+
+
+Definition at line 643 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1CopiedData_a1548a29a62fb5bb646af063a16a110c9}\label{classoomph_1_1CopiedData_a1548a29a62fb5bb646af063a16a110c9}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Copied\+Data\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 618 of file nodes.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1CopiedData_a7e29b2bb1cf0ebad16afac2e5d7342d8}\label{classoomph_1_1CopiedData_a7e29b2bb1cf0ebad16afac2e5d7342d8}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!reset\_copied\_pointers@{reset\_copied\_pointers}}
+\index{reset\_copied\_pointers@{reset\_copied\_pointers}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{reset\_copied\_pointers()}{reset\_copied\_pointers()}}
+{\footnotesize\ttfamily void oomph\+::\+Copied\+Data\+::reset\+\_\+copied\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Reset the pointers to the copied data. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_afd33533f3ddf61bc34106a4dc72de541}{oomph\+::\+Data}}.
+
+
+
+Definition at line 1317 of file nodes.\+cc.
+
+
+
+References Copied\+\_\+data\+\_\+pt, oomph\+::\+Data\+::\+Eqn\+\_\+number, oomph\+::\+Data\+::\+Nvalue, oomph\+::\+Data\+::nvalue(), and oomph\+::\+Data\+::\+Value.
+
+\mbox{\Hypertarget{classoomph_1_1CopiedData_aa7c48fb5ea17cd42260965bf2c800b3d}\label{classoomph_1_1CopiedData_aa7c48fb5ea17cd42260965bf2c800b3d}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!resize@{resize}}
+\index{resize@{resize}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void oomph\+::\+Copied\+Data\+::resize (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+We cannot resize \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}}, so the resize function throws a warning. 
+
+We do not allow Copied \mbox{\hyperlink{classoomph_1_1Data}{Data}} to be resized. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_ac68583834c9bef47f5c37c890960e186}{oomph\+::\+Data}}.
+
+
+
+Definition at line 1374 of file nodes.\+cc.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1CopiedData_a592934e0ca9ade33ed91a7f74c091864}\label{classoomph_1_1CopiedData_a592934e0ca9ade33ed91a7f74c091864}} 
+\index{oomph::CopiedData@{oomph::CopiedData}!Copied\_data\_pt@{Copied\_data\_pt}}
+\index{Copied\_data\_pt@{Copied\_data\_pt}!oomph::CopiedData@{oomph::CopiedData}}
+\doxysubsubsection{\texorpdfstring{Copied\_data\_pt}{Copied\_data\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ oomph\+::\+Copied\+Data\+::\+Copied\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object from which the values are copied. 
+
+
+
+Definition at line 601 of file nodes.\+h.
+
+
+
+Referenced by clear\+\_\+copied\+\_\+pointers(), reset\+\_\+copied\+\_\+pointers(), and $\sim$\+Copied\+Data().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{nodes_8h}{nodes.\+h}}\item 
+\mbox{\hyperlink{nodes_8cc}{nodes.\+cc}}\end{DoxyCompactItemize}

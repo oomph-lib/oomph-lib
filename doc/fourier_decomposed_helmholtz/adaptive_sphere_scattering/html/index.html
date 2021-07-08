@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: The spatially-adaptive solution of the azimuthally Fourier-decomposed 3D Helmholtz equation</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: The spatially-adaptive solution of the azimuthally Fourier-decomposed 3D Helmholtz equation </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we discuss the spatially-adaptive finite-element-based solution of the 3D Helmholtz equation in cylindrical polar coordinates, using a Fourier-decomposition of the solution in the azimuthal direction.</p>
+<p>The driver code is very similar to the one discussed in <a href="../../sphere_scattering/html/index.html">another tutorial </a> &ndash; the main purpose of the current tutorial is to demonstrate the use of spatial adaptivity on unstructured meshes.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="scattering"></a>
+A specific example</h1>
+<p>We will solve the azimuthally Fourier-decomposed Helmholtz equation </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0, \ \ \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_0.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ N $" src="form_1.png"/> is the azimuthal wavenumber, in the finite domain <img class="formulaInl" alt="$ 1 &lt; \sqrt{r^2 + z^2} &lt; 3 $" src="form_2.png"/>. We impose the Sommerfeld radiation condition at the outer boundary of the computational domain at <img class="formulaInl" alt="$ \sqrt{r^2 + z^2} = 3$" src="form_3.png"/>, using a Dirichlet-to-Neumann mapping, and apply flux boundary condition on the surface of the unit-sphere (where <img class="formulaInl" alt="$ \sqrt{r^2 + z^2} = 1 $" src="form_4.png"/>) such that the exact solution is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_N(r,z)=u_N^{[exact]}(r,z)=\sum_{l=N}^{N_{\rm terms}} h_{l}^{(1)}(k\sqrt{r^2+z^2}) \ P_{l}^{N}\left(\frac{z}{\sqrt{r^2+z^2}}\right). \]" src="form_5.png"/>
+</p>
+<p> This solution corresponds to the superposition of several outgoing waves that emerge from the unit sphere.</p>
+<p>The two plots below show a comparison between the exact and computed solutions for <img class="formulaInl" alt="$ N_{\rm terms}=6 $" src="form_6.png"/> , a Fourier wavenumber of <img class="formulaInl" alt="$ N=1 $" src="form_7.png"/> , and a (squared) Helmholtz wavenumber of <img class="formulaInl" alt="$ k^2 = 10 $" src="form_8.png"/>.</p>
+<div class="image">
+<img src="re.gif" alt=""/>
+<div class="caption">
+Plot of the exact (green) and computed (red) real parts of the solution of the Fourier-decomposed Helmholtz equation for N=1 and a wavenumber of k^2 = 10. </div></div>
+ <div class="image">
+<img src="im.gif" alt=""/>
+<div class="caption">
+Plot of the exact (green) and computed (red) imaginary parts of the solution of the Fourier-decomposed Helmholtz equation for N=1 and a wavenumber of k^2 = 10. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="num_soln"></a>
+The numerical solution</h1>
+<p>The driver code for this problem is very similar to the one discussed in <a href="../../sphere_scattering/html/index.html">another tutorial. </a></p>
+<p>Running <code>sdiff</code> on the driver codes </p><center> <a href="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc </a> </center><p> and </p><center> <a href="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc">demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc </a> </center><p> shows the main differences required to discretise the computational domain with an adaptive, unstructured mesh:</p><ul>
+<li>The provision of the functions <code>actions_before/after_adapt</code>() to detach/re-attach the <code>FaceElements</code> that are used to enforce the Neumann boundary conditions before and after every spatial adaptation, and to pass the physical parameters to the newly created bulk elements. <br  />
+<br  />
+</li>
+<li>The generation of an unstructured mesh whose curvilinear boundaries are represented by <code>GeomObjects</code> &ndash; this ensures that the domain boundaries become increasingly well resolved under mesh refinement.</li>
+</ul>
+<p>That's all!</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="code"></a>
+Code listing</h1>
+<p>Here's a listing of the complete driver code:</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">//Driver for Fourier-decomposed  Helmholtz problem </span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;complex&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Generic routines</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The Helmholtz equations</span></div>
+<div class="line"><span class="preprocessor">#include &quot;fourier_decomposed_helmholtz.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The mesh</span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/triangle_mesh.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Get the Bessel functions</span></div>
+<div class="line"><span class="preprocessor">#include &quot;oomph_crbond_bessel.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>oomph;</div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===== start_of_namespace_planar_wave=================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace to test representation of planar wave in spherical</span></div>
+<div class="line"><span class="comment">/// polars</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespacePlanarWave.html">PlanarWave</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Number of terms in series</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>=100;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Wave number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespacePlanarWave.html#a1d51c00058fbc80aa9d255fffd92abac">K</a>=3.0*MathematicalConstants::Pi;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Imaginary unit </span></div>
+<div class="line"><span class="comment"></span> std::complex&lt;double&gt; <a class="code" href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">I</a>(0.0,1.0); </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exact solution as a Vector of size 2, containing real and imag parts</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespacePlanarWave.html#a00f252bcf0181187c656a58ce36b07b5">get_exact_u</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Switch to spherical coordinates</span></div>
+<div class="line">  <span class="keywordtype">double</span> R=sqrt(x[0]*x[0]+x[1]*x[1]);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordtype">double</span> theta;</div>
+<div class="line">  theta=atan2(x[0],x[1]);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Argument for Bessel/Hankel functions</span></div>
+<div class="line">  <span class="keywordtype">double</span> kr = <a class="code" href="namespacePlanarWave.html#a1d51c00058fbc80aa9d255fffd92abac">K</a>*R;  </div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Need half-order Bessel functions</span></div>
+<div class="line">  <span class="keywordtype">double</span> bessel_offset=0.5;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Evaluate Bessel/Hankel functions</span></div>
+<div class="line">  Vector&lt;double&gt; jv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  Vector&lt;double&gt; yv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  Vector&lt;double&gt; djv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  Vector&lt;double&gt; dyv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  <span class="keywordtype">double</span> order_max_in=double(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>-1)+bessel_offset;</div>
+<div class="line">  <span class="keywordtype">double</span> order_max_out=0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// This function returns vectors containing </span></div>
+<div class="line">  <span class="comment">// J_k(x), Y_k(x) and their derivatives</span></div>
+<div class="line">  <span class="comment">// up to k=order_max, with k increasing in</span></div>
+<div class="line">  <span class="comment">// integer increments starting with smallest</span></div>
+<div class="line">  <span class="comment">// positive value. So, e.g. for order_max=3.5</span></div>
+<div class="line">  <span class="comment">// jv[0] contains J_{1/2}(x),</span></div>
+<div class="line">  <span class="comment">// jv[1] contains J_{3/2}(x),</span></div>
+<div class="line">  <span class="comment">// jv[2] contains J_{5/2}(x),</span></div>
+<div class="line">  <span class="comment">// jv[3] contains J_{7/2}(x).</span></div>
+<div class="line">  CRBond_Bessel::bessjyv(order_max_in,</div>
+<div class="line">                         kr,</div>
+<div class="line">                         order_max_out,</div>
+<div class="line">                         &amp;jv[0],&amp;yv[0],</div>
+<div class="line">                         &amp;djv[0],&amp;dyv[0]);</div>
+<div class="line">  </div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Assemble  exact solution (actually no need to add terms</span></div>
+<div class="line">  <span class="comment">// below i=N_fourier as Legendre polynomial would be zero anyway)</span></div>
+<div class="line">  complex&lt;double&gt; u_ex(0.0,0.0);</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>;i++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">//Associated_legendre_functions</span></div>
+<div class="line">    <span class="keywordtype">double</span> p=Legendre_functions_helper::plgndr2(i,0,cos(theta));</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Set exact solution</span></div>
+<div class="line">    u_ex+=(2.0*i+1.0)*pow(<a class="code" href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">I</a>,i)*</div>
+<div class="line">     sqrt(MathematicalConstants::Pi/(2.0*kr))*jv[i]*p;</div>
+<div class="line">   }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Get the real &amp; imaginary part of the result</span></div>
+<div class="line">  u[0]=u_ex.real();</div>
+<div class="line">  u[1]=u_ex.imag();</div>
+<div class="line">  </div>
+<div class="line"> }<span class="comment">//end of get_exact_u</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Plot </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespacePlanarWave.html#afe1e9812d1b1dc40a89f7a1f18d1165f">plot</a>()</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> nr=20;</div>
+<div class="line">  <span class="keywordtype">unsigned</span> nz=100;</div>
+<div class="line">  <span class="keywordtype">unsigned</span> nt=40;</div>
+<div class="line"> </div>
+<div class="line">  ofstream some_file(<span class="stringliteral">&quot;planar_wave.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i_t=0;i_t&lt;nt;i_t++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="keywordtype">double</span> t=2.0*MathematicalConstants::Pi*double(i_t)/double(nt-1);</div>
+<div class="line"> </div>
+<div class="line">    some_file &lt;&lt; <span class="stringliteral">&quot;ZONE I=&quot;</span>&lt;&lt; nz &lt;&lt; <span class="stringliteral">&quot;, J=&quot;</span>&lt;&lt; nr &lt;&lt; std::endl;</div>
+<div class="line">    </div>
+<div class="line">    Vector&lt;double&gt; x(2);</div>
+<div class="line">    Vector&lt;double&gt; u(2);</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;nr;i++)</div>
+<div class="line">     {</div>
+<div class="line">      x[0]=0.001+double(i)/double(nr-1);</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;nz;j++)</div>
+<div class="line">       {</div>
+<div class="line">        x[1]=double(j)/double(nz-1);</div>
+<div class="line">        <a class="code" href="namespacePlanarWave.html#a00f252bcf0181187c656a58ce36b07b5">get_exact_u</a>(x,u); </div>
+<div class="line">        complex&lt;double&gt; uu=complex&lt;double&gt;(u[0],u[1])*exp(-<a class="code" href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">I</a>*t);</div>
+<div class="line">        some_file &lt;&lt; x[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">                  &lt;&lt; uu.real() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; uu.imag() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">       }</div>
+<div class="line">     } </div>
+<div class="line">   }</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===== start_of_namespace=============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace for the Fourier decomposed Helmholtz problem parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceProblemParameters.html">ProblemParameters</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Square of the wavenumber</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">K_squared</a>=10.0;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Fourier wave number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">int</span> <a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">N_fourier</a>=3;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Number of terms in computation of DtN boundary condition</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="namespaceProblemParameters.html#aa529b33b7feb959e0c044447bf0f6c6f">Nterms_for_DtN</a>=6;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Number of terms in the exact solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>=6; </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Coefficients in the exact solution</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;double&gt; <a class="code" href="namespaceProblemParameters.html#acb1788444ef78fe2adec824504f24246">Coeff</a>(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>,1.0);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Imaginary unit </span></div>
+<div class="line"><span class="comment"></span> std::complex&lt;double&gt; <a class="code" href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">I</a>(0.0,1.0); </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exact solution as a Vector of size 2, containing real and imag parts</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespacePlanarWave.html#a00f252bcf0181187c656a58ce36b07b5">get_exact_u</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Switch to spherical coordinates</span></div>
+<div class="line">  <span class="keywordtype">double</span> R=sqrt(x[0]*x[0]+x[1]*x[1]);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordtype">double</span> theta;</div>
+<div class="line">  theta=atan2(x[0],x[1]);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Argument for Bessel/Hankel functions</span></div>
+<div class="line">  <span class="keywordtype">double</span> kr = sqrt(<a class="code" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">K_squared</a>)*R;  </div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Need half-order Bessel functions</span></div>
+<div class="line">  <span class="keywordtype">double</span> bessel_offset=0.5;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Evaluate Bessel/Hankel functions</span></div>
+<div class="line">  Vector&lt;double&gt; jv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  Vector&lt;double&gt; yv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  Vector&lt;double&gt; djv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  Vector&lt;double&gt; dyv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  <span class="keywordtype">double</span> order_max_in=double(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>-1)+bessel_offset;</div>
+<div class="line">  <span class="keywordtype">double</span> order_max_out=0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// This function returns vectors containing </span></div>
+<div class="line">  <span class="comment">// J_k(x), Y_k(x) and their derivatives</span></div>
+<div class="line">  <span class="comment">// up to k=order_max, with k increasing in</span></div>
+<div class="line">  <span class="comment">// integer increments starting with smallest</span></div>
+<div class="line">  <span class="comment">// positive value. So, e.g. for order_max=3.5</span></div>
+<div class="line">  <span class="comment">// jv[0] contains J_{1/2}(x),</span></div>
+<div class="line">  <span class="comment">// jv[1] contains J_{3/2}(x),</span></div>
+<div class="line">  <span class="comment">// jv[2] contains J_{5/2}(x),</span></div>
+<div class="line">  <span class="comment">// jv[3] contains J_{7/2}(x).</span></div>
+<div class="line">  CRBond_Bessel::bessjyv(order_max_in,</div>
+<div class="line">                         kr,</div>
+<div class="line">                         order_max_out,</div>
+<div class="line">                         &amp;jv[0],&amp;yv[0],</div>
+<div class="line">                         &amp;djv[0],&amp;dyv[0]);</div>
+<div class="line">  </div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Assemble  exact solution (actually no need to add terms</span></div>
+<div class="line">  <span class="comment">// below i=N_fourier as Legendre polynomial would be zero anyway)</span></div>
+<div class="line">  complex&lt;double&gt; u_ex(0.0,0.0);</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=<a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">N_fourier</a>;i&lt;<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>;i++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">//Associated_legendre_functions</span></div>
+<div class="line">    <span class="keywordtype">double</span> p=Legendre_functions_helper::plgndr2(i,<a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">N_fourier</a>,</div>
+<div class="line">                                                cos(theta));</div>
+<div class="line">    <span class="comment">// Set exact solution</span></div>
+<div class="line">    u_ex+=<a class="code" href="namespaceProblemParameters.html#acb1788444ef78fe2adec824504f24246">Coeff</a>[i]*sqrt(MathematicalConstants::Pi/(2.0*kr))*(jv[i]+<a class="code" href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">I</a>*yv[i])*p;</div>
+<div class="line">   }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Get the real &amp; imaginary part of the result</span></div>
+<div class="line">  u[0]=u_ex.real();</div>
+<div class="line">  u[1]=u_ex.imag();</div>
+<div class="line">  </div>
+<div class="line"> }<span class="comment">//end of get_exact_u</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Get -du/dr (spherical r) for exact solution. Equal to prescribed</span></div>
+<div class="line"><span class="comment"> /// flux on inner boundary.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceProblemParameters.html#aa544d1f3e384d3283f7113512931ea8f">exact_minus_dudr</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, std::complex&lt;double&gt;&amp; flux)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Initialise flux</span></div>
+<div class="line">  flux=std::complex&lt;double&gt;(0.0,0.0);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Switch to spherical coordinates</span></div>
+<div class="line">  <span class="keywordtype">double</span> R=sqrt(x[0]*x[0]+x[1]*x[1]);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordtype">double</span> theta;</div>
+<div class="line">  theta=atan2(x[0],x[1]);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Argument for Bessel/Hankel functions</span></div>
+<div class="line">  <span class="keywordtype">double</span> kr=sqrt(<a class="code" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">K_squared</a>)*R;  </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Helmholtz wavenumber</span></div>
+<div class="line">  <span class="keywordtype">double</span> k=sqrt(<a class="code" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">K_squared</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Need half-order Bessel functions</span></div>
+<div class="line">  <span class="keywordtype">double</span> bessel_offset=0.5;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Evaluate Bessel/Hankel functions</span></div>
+<div class="line">  Vector&lt;double&gt; jv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  Vector&lt;double&gt; yv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  Vector&lt;double&gt; djv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  Vector&lt;double&gt; dyv(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>);</div>
+<div class="line">  <span class="keywordtype">double</span> order_max_in=double(<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>-1)+bessel_offset;</div>
+<div class="line">  <span class="keywordtype">double</span> order_max_out=0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// This function returns vectors containing </span></div>
+<div class="line">  <span class="comment">// J_k(x), Y_k(x) and their derivatives</span></div>
+<div class="line">  <span class="comment">// up to k=order_max, with k increasing in</span></div>
+<div class="line">  <span class="comment">// integer increments starting with smallest</span></div>
+<div class="line">  <span class="comment">// positive value. So, e.g. for order_max=3.5</span></div>
+<div class="line">  <span class="comment">// jv[0] contains J_{1/2}(x),</span></div>
+<div class="line">  <span class="comment">// jv[1] contains J_{3/2}(x),</span></div>
+<div class="line">  <span class="comment">// jv[2] contains J_{5/2}(x),</span></div>
+<div class="line">  <span class="comment">// jv[3] contains J_{7/2}(x).</span></div>
+<div class="line">  CRBond_Bessel::bessjyv(order_max_in,</div>
+<div class="line">                         kr,</div>
+<div class="line">                         order_max_out,</div>
+<div class="line">                         &amp;jv[0],&amp;yv[0],</div>
+<div class="line">                         &amp;djv[0],&amp;dyv[0]);</div>
+<div class="line">  </div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Assemble  exact solution (actually no need to add terms</span></div>
+<div class="line">  <span class="comment">// below i=N_fourier as Legendre polynomial would be zero anyway)</span></div>
+<div class="line">  complex&lt;double&gt; u_ex(0.0,0.0);</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=<a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">N_fourier</a>;i&lt;<a class="code" href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">N_terms</a>;i++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">//Associated_legendre_functions</span></div>
+<div class="line">    <span class="keywordtype">double</span> p=Legendre_functions_helper::plgndr2(i,<a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">N_fourier</a>,</div>
+<div class="line">                                                cos(theta));</div>
+<div class="line">    <span class="comment">// Set flux of exact solution</span></div>
+<div class="line">    flux-=<a class="code" href="namespaceProblemParameters.html#acb1788444ef78fe2adec824504f24246">Coeff</a>[i]*sqrt(MathematicalConstants::Pi/(2.0*kr))*p*</div>
+<div class="line">     ( k*(djv[i]+<a class="code" href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">I</a>*dyv[i]) - (0.5*(jv[i]+<a class="code" href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">I</a>*yv[i])/R) );</div>
+<div class="line">   }</div>
+<div class="line">  </div>
+<div class="line"> }<span class="comment">// end of exact_normal_derivative</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========= start_of_problem_class=====================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Problem class </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> ~<a class="code" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>(){}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve(){}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update the problem after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_newton_solve(){}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Doc the solution. DocInfo object stores flags/labels for where the</span></div>
+<div class="line"><span class="comment"> /// output gets written to</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution(DocInfo&amp; doc_info);</div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Recompute gamma integral before checking Newton residuals</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_convergence_check()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">if</span> (!CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--square_domain&quot;</span>))</div>
+<div class="line">    {</div>
+<div class="line">     Helmholtz_outer_boundary_mesh_pt-&gt;setup_gamma();</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before adapt: Wipe the mesh of prescribed flux elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_adapt();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Actions after adapt: Rebuild the mesh of prescribed flux elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_adapt();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Check gamma computation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> check_gamma(DocInfo&amp; doc_info);</div>
+<div class="line">  </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Create BC elements on outer boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> create_outer_bc_elements();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Create flux elements on inner boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> create_flux_elements_on_inner_boundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Delete boundary face elements and wipe the surface mesh</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> delete_face_elements( Mesh* <span class="keyword">const</span> &amp; boundary_mesh_pt)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Loop over the surface elements</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = boundary_mesh_pt-&gt;nelement();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Kill surface element</span></div>
+<div class="line">     <span class="keyword">delete</span>  boundary_mesh_pt-&gt;element_pt(e);</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Wipe the mesh</span></div>
+<div class="line">   boundary_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line">   </div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef ADAPTIVE</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the &quot;bulk&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableTriangleMesh&lt;ELEMENT&gt;* Bulk_mesh_pt;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the &quot;bulk&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> TriangleMesh&lt;ELEMENT&gt;* Bulk_mesh_pt;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Pointer to mesh containing the DtN boundary</span></div>
+<div class="line"><span class="comment"> /// condition elements</span></div>
+<div class="line"><span class="comment"></span> FourierDecomposedHelmholtzDtNMesh&lt;ELEMENT&gt;* Helmholtz_outer_boundary_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// on the inner boundary</span></div>
+<div class="line"><span class="comment"></span> Mesh* Helmholtz_inner_boundary_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream Trace_file;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=====================start_of_actions_before_adapt======================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Actions before adapt: Wipe the mesh of face elements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classFourierDecomposedHelmholtzProblem.html#acbc6f3c692463e5a098ccec7fe9029c1">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::actions_before_adapt</a>()</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">// Kill the flux elements and wipe the boundary meshs</span></div>
+<div class="line"> <span class="keywordflow">if</span> (!CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--square_domain&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   delete_face_elements(Helmholtz_outer_boundary_mesh_pt);</div>
+<div class="line">  }</div>
+<div class="line"> delete_face_elements(Helmholtz_inner_boundary_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> rebuild_global_mesh();</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end of actions_before_adapt</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=====================start_of_actions_after_adapt=======================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">///  Actions after adapt: Rebuild the face element meshes</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classFourierDecomposedHelmholtzProblem.html#a3258e3817d8747aac0409eca1a24d14b">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::actions_after_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the Helmholtz bulk elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor: Pass pointer to </span></div>
+<div class="line"> <span class="comment">// wave number squared</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to Helmholtz bulk element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the k_squared  pointer</span></div>
+<div class="line">   el_pt-&gt;k_squared_pt() = &amp;<a class="code" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set pointer to Fourier wave number</span></div>
+<div class="line">   el_pt-&gt;fourier_wavenumber_pt()=&amp;<a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create prescribed-flux elements and BC elements </span></div>
+<div class="line"> <span class="comment">// from all elements that are adjacent to the boundaries and add them to </span></div>
+<div class="line"> <span class="comment">// Helmholtz_boundary_meshes</span></div>
+<div class="line"> create_flux_elements_on_inner_boundary();</div>
+<div class="line"> <span class="keywordflow">if</span> (!CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--square_domain&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   create_outer_bc_elements();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> rebuild_global_mesh();</div>
+<div class="line">  </div>
+<div class="line">}<span class="comment">// end of actions_after_adapt</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=======start_of_constructor=============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor for Fourier-decomposed Helmholtz problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">FourierDecomposedHelmholtzProblem</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> Trace_file.open(<span class="stringliteral">&quot;RESLT/trace.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create circles representing inner and outer boundary</span></div>
+<div class="line"> <span class="keywordtype">double</span> x_c=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> y_c=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> r_min=1.0;</div>
+<div class="line"> <span class="keywordtype">double</span> r_max=3.0;</div>
+<div class="line"> Circle* inner_circle_pt=<span class="keyword">new</span> Circle(x_c,y_c,r_min);</div>
+<div class="line"> Circle* outer_circle_pt=<span class="keyword">new</span> Circle(x_c,y_c,r_max);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Edges/boundary segments making up outer boundary</span></div>
+<div class="line"> <span class="comment">//-------------------------------------------------</span></div>
+<div class="line"> Vector&lt;TriangleMeshCurveSection*&gt; outer_boundary_line_pt(4);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of segments used for representing the curvilinear boundaries</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_segments = 20;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// All poly boundaries are defined by two vertices</span></div>
+<div class="line"> Vector&lt;Vector&lt;double&gt; &gt; boundary_vertices(2);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Bottom straight boundary on symmetry line</span></div>
+<div class="line"> <span class="comment">//------------------------------------------</span></div>
+<div class="line"> boundary_vertices[0].resize(2);</div>
+<div class="line"> boundary_vertices[0][0]=0.0;</div>
+<div class="line"> boundary_vertices[0][1]=-r_min;</div>
+<div class="line"> boundary_vertices[1].resize(2);</div>
+<div class="line"> boundary_vertices[1][0]=0.0;</div>
+<div class="line"> boundary_vertices[1][1]=-r_max;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">unsigned</span> boundary_id=0;</div>
+<div class="line"> outer_boundary_line_pt[0]=</div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshPolyLine(boundary_vertices,boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--square_domain&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Square outer boundary:</span></div>
+<div class="line">   <span class="comment">//-----------------------</span></div>
+<div class="line"> </div>
+<div class="line">   Vector&lt;Vector&lt;double&gt; &gt; boundary_vertices(4);</div>
+<div class="line">   boundary_vertices[0].resize(2);</div>
+<div class="line">   boundary_vertices[0][0]=0.0;</div>
+<div class="line">   boundary_vertices[0][1]=-r_max;</div>
+<div class="line">   boundary_vertices[1].resize(2);</div>
+<div class="line">   boundary_vertices[1][0]=r_max;</div>
+<div class="line">   boundary_vertices[1][1]=-r_max;</div>
+<div class="line">   boundary_vertices[2].resize(2);</div>
+<div class="line">   boundary_vertices[2][0]=r_max;</div>
+<div class="line">   boundary_vertices[2][1]=r_max;</div>
+<div class="line">   boundary_vertices[3].resize(2);</div>
+<div class="line">   boundary_vertices[3][0]=0.0;</div>
+<div class="line">   boundary_vertices[3][1]=r_max;</div>
+<div class="line"> </div>
+<div class="line">   boundary_id=1;</div>
+<div class="line">   outer_boundary_line_pt[1]=</div>
+<div class="line">    <span class="keyword">new</span> TriangleMeshPolyLine(boundary_vertices,boundary_id);</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Outer circular boundary:</span></div>
+<div class="line">   <span class="comment">//-------------------------</span></div>
+<div class="line">   <span class="comment">// The intrinsic coordinates for the beginning and end of the curve</span></div>
+<div class="line">   <span class="keywordtype">double</span> s_start = -0.5*MathematicalConstants::Pi;</div>
+<div class="line">   <span class="keywordtype">double</span> s_end   =  0.5*MathematicalConstants::Pi;</div>
+<div class="line">   </div>
+<div class="line">   boundary_id = 1;</div>
+<div class="line">   outer_boundary_line_pt[1]=</div>
+<div class="line">    <span class="keyword">new</span> TriangleMeshCurviLine(outer_circle_pt,</div>
+<div class="line">                              s_start,</div>
+<div class="line">                              s_end,</div>
+<div class="line">                              n_segments,</div>
+<div class="line">                              boundary_id);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Top straight boundary on symmetry line</span></div>
+<div class="line"> <span class="comment">//---------------------------------------</span></div>
+<div class="line"> boundary_vertices[0][0]=0.0;</div>
+<div class="line"> boundary_vertices[0][1]=r_max;</div>
+<div class="line"> boundary_vertices[1][0]=0.0;</div>
+<div class="line"> boundary_vertices[1][1]=r_min;</div>
+<div class="line"> </div>
+<div class="line"> boundary_id=2;</div>
+<div class="line"> outer_boundary_line_pt[2]=</div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshPolyLine(boundary_vertices,boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Inner circular boundary:</span></div>
+<div class="line"> <span class="comment">//-------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The intrinsic coordinates for the beginning and end of the curve</span></div>
+<div class="line"> <span class="keywordtype">double</span> s_start =  0.5*MathematicalConstants::Pi;</div>
+<div class="line"> <span class="keywordtype">double</span> s_end   =  -0.5*MathematicalConstants::Pi;</div>
+<div class="line"> </div>
+<div class="line"> boundary_id = 3;</div>
+<div class="line"> outer_boundary_line_pt[3]=</div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshCurviLine(inner_circle_pt,</div>
+<div class="line">                            s_start,</div>
+<div class="line">                            s_end,</div>
+<div class="line">                            n_segments,</div>
+<div class="line">                            boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create closed curve that defines outer boundary</span></div>
+<div class="line"> <span class="comment">//------------------------------------------------</span></div>
+<div class="line"> TriangleMeshClosedCurve *outer_boundary_pt =</div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshClosedCurve(outer_boundary_line_pt);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use the TriangleMeshParameters object for helping on the manage of the</span></div>
+<div class="line"> <span class="comment">// TriangleMesh parameters. The only parameter that needs to take is the</span></div>
+<div class="line"> <span class="comment">// outer boundary.</span></div>
+<div class="line"> TriangleMeshParameters triangle_mesh_parameters(outer_boundary_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify maximum element area</span></div>
+<div class="line"> <span class="keywordtype">double</span> element_area = 0.1; </div>
+<div class="line"> triangle_mesh_parameters.element_area() = element_area;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef ADAPTIVE</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build &quot;bulk&quot; mesh</span></div>
+<div class="line"> Bulk_mesh_pt=<span class="keyword">new</span> RefineableTriangleMesh&lt;ELEMENT&gt;(triangle_mesh_parameters);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create/set error estimator</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Choose error tolerances to force some uniform refinement</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;min_permitted_error()=0.00004;</div>
+<div class="line"> Bulk_mesh_pt-&gt;max_permitted_error()=0.0001;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pass the TriangleMeshParameters object to the TriangleMesh one</span></div>
+<div class="line"> Bulk_mesh_pt= <span class="keyword">new</span> TriangleMesh&lt;ELEMENT&gt;(triangle_mesh_parameters);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check what we&#39;ve built so far...</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;output(<span class="stringliteral">&quot;mesh.dat&quot;</span>);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output_boundaries(<span class="stringliteral">&quot;boundaries.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">if</span> (!CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--square_domain&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Create mesh for DtN elements on outer boundary</span></div>
+<div class="line">   Helmholtz_outer_boundary_mesh_pt=</div>
+<div class="line">    <span class="keyword">new</span> FourierDecomposedHelmholtzDtNMesh&lt;ELEMENT&gt;(</div>
+<div class="line">     r_max,<a class="code" href="namespaceProblemParameters.html#aa529b33b7feb959e0c044447bf0f6c6f">ProblemParameters::Nterms_for_DtN</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Populate it with elements</span></div>
+<div class="line">   create_outer_bc_elements();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create flux elements on inner boundary</span></div>
+<div class="line"> Helmholtz_inner_boundary_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> create_flux_elements_on_inner_boundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the several sub meshes to the problem</span></div>
+<div class="line"> add_sub_mesh(Bulk_mesh_pt); </div>
+<div class="line"> add_sub_mesh(Helmholtz_inner_boundary_mesh_pt); </div>
+<div class="line"> <span class="keywordflow">if</span> (!CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--square_domain&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   add_sub_mesh(Helmholtz_outer_boundary_mesh_pt); </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> build_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralsedElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the k_squared pointer</span></div>
+<div class="line">   el_pt-&gt;k_squared_pt()=&amp;<a class="code" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set pointer to Fourier wave number</span></div>
+<div class="line">   el_pt-&gt;fourier_wavenumber_pt()=&amp;<a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=================================start_of_check_gamma===================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Check gamma computation: \f$ \gamma = -du/dn \f$</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classFourierDecomposedHelmholtzProblem.html#ac4f3f737660b11e8762a61bca999eb0f">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::check_gamma</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Compute gamma stuff</span></div>
+<div class="line"> Helmholtz_outer_boundary_mesh_pt-&gt;setup_gamma();</div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/gamma_test%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">//first loop over elements e</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nel=Helmholtz_outer_boundary_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nel;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get a pointer to element</span></div>
+<div class="line">   FourierDecomposedHelmholtzDtNBoundaryElement&lt;ELEMENT&gt;* el_pt=</div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>FourierDecomposedHelmholtzDtNBoundaryElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line">    (Helmholtz_outer_boundary_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the value of n_intpt</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_intpt =el_pt-&gt;integral_pt()-&gt;nweight();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Get gamma at all gauss points in element</span></div>
+<div class="line">   Vector&lt;std::complex&lt;double&gt; &gt; gamma(</div>
+<div class="line">    Helmholtz_outer_boundary_mesh_pt-&gt;gamma_at_gauss_point(el_pt));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Loop over the integration points</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ipt=0;ipt&lt;n_intpt;ipt++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Allocate and initialise coordiante</span></div>
+<div class="line">     Vector&lt;double&gt; x(el_pt-&gt;dim()+1,0.0);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Set the Vector to hold local coordinates</span></div>
+<div class="line">     <span class="keywordtype">unsigned</span> n=el_pt-&gt;dim();</div>
+<div class="line">     Vector&lt;double&gt; s(n,0.0);</div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n;i++)</div>
+<div class="line">      {</div>
+<div class="line">       s[i]=el_pt-&gt;integral_pt()-&gt;knot(ipt,i);</div>
+<div class="line">      }</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Get the coordinates of the integration point</span></div>
+<div class="line">     el_pt-&gt;interpolated_x(s,x);</div>
+<div class="line">     </div>
+<div class="line">     complex&lt;double&gt; flux;</div>
+<div class="line">     <a class="code" href="namespaceProblemParameters.html#aa544d1f3e384d3283f7113512931ea8f">ProblemParameters::exact_minus_dudr</a>(x,flux);</div>
+<div class="line">     some_file &lt;&lt; atan2(x[0],x[1]) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">               &lt;&lt; gamma[ipt].real() &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">               &lt;&lt; gamma[ipt].imag() &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">               &lt;&lt; flux.real() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">               &lt;&lt; flux.imag() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">               &lt;&lt; std::endl;</div>
+<div class="line">     </div>
+<div class="line">    }<span class="comment">// end of loop over integration points</span></div>
+<div class="line">   </div>
+<div class="line">  }<span class="comment">// end of loop over elements</span></div>
+<div class="line"> </div>
+<div class="line"> some_file.close();</div>
+<div class="line">  </div>
+<div class="line">}<span class="comment">//end of output_gamma</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===============start_of_doc=============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution: doc_info contains labels/output directory etc.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classFourierDecomposedHelmholtzProblem.html#a893efb01f8f1d254315201121766d882">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points: npts x npts</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output_fct(some_file,npts,<a class="code" href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">ProblemParameters::get_exact_u</a>); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error and return of the square of the L2 error</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------------</span></div>
+<div class="line"> <span class="keywordtype">double</span> error,norm;</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/error%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;compute_error(some_file,<a class="code" href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">ProblemParameters::get_exact_u</a>,</div>
+<div class="line">                             error,norm); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc L2 error and norm of solution</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\nNorm of error   : &quot;</span> &lt;&lt; sqrt(error) &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Norm of solution: &quot;</span> &lt;&lt; sqrt(norm) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write norm of solution to trace file</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;compute_norm(norm); </div>
+<div class="line"> Trace_file  &lt;&lt; norm &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">if</span> (!CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--square_domain&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Check gamma computation</span></div>
+<div class="line">   check_gamma(doc_info);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//============start_of_create_outer_bc_elements==============================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Create BC elements on outer boundary</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classFourierDecomposedHelmholtzProblem.html#a359d402bb4aed7d83973248d82085efb">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::create_outer_bc_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Outer boundary is boundary 1:</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> b=1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the bulk elements adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Bulk_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Find the index of the face of element e along boundary b </span></div>
+<div class="line">   <span class="keywordtype">int</span> face_index = Bulk_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Build the corresponding DtN element</span></div>
+<div class="line">   FourierDecomposedHelmholtzDtNBoundaryElement&lt;ELEMENT&gt;* flux_element_pt = <span class="keyword">new</span> </div>
+<div class="line">    FourierDecomposedHelmholtzDtNBoundaryElement&lt;ELEMENT&gt;(bulk_elem_pt,</div>
+<div class="line">                                                          face_index);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Add the flux boundary element to the  helmholtz_outer_boundary_mesh</span></div>
+<div class="line">   Helmholtz_outer_boundary_mesh_pt-&gt;add_element_pt(flux_element_pt);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set pointer to the mesh that contains all the boundary condition</span></div>
+<div class="line">   <span class="comment">// elements on this boundary</span></div>
+<div class="line">   flux_element_pt-&gt;</div>
+<div class="line">    set_outer_boundary_mesh_pt(Helmholtz_outer_boundary_mesh_pt);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of create_outer_bc_elements</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//============start_of_create_flux_elements=================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Create flux elements on inner boundary</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==========================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span>  <a class="code" href="classFourierDecomposedHelmholtzProblem.html#a81d64611f2de2492cec6b0621d8124b0">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classFourierDecomposedHelmholtzProblem.html#a81d64611f2de2492cec6b0621d8124b0">create_flux_elements_on_inner_boundary</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Apply flux bc on inner boundary (boundary 3)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> b=3;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Loop over the bulk elements adjacent to boundary b</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Bulk_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Find the index of the face of element e along boundary b </span></div>
+<div class="line">   <span class="keywordtype">int</span> face_index = Bulk_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Build the corresponding prescribed incoming-flux element</span></div>
+<div class="line">   FourierDecomposedHelmholtzFluxElement&lt;ELEMENT&gt;* flux_element_pt = <span class="keyword">new</span> </div>
+<div class="line">    FourierDecomposedHelmholtzFluxElement&lt;ELEMENT&gt;(bulk_elem_pt,face_index);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Add the prescribed incoming-flux element to the surface mesh</span></div>
+<div class="line">   Helmholtz_inner_boundary_mesh_pt-&gt;add_element_pt(flux_element_pt);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the pointer to the prescribed flux function</span></div>
+<div class="line">   flux_element_pt-&gt;flux_fct_pt() = &amp;<a class="code" href="namespaceProblemParameters.html#aa544d1f3e384d3283f7113512931ea8f">ProblemParameters::exact_minus_dudr</a>;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">//end of loop over bulk elements adjacent to boundary b</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of create flux elements on inner boundary</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===== start_of_main=====================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver code for Fourier decomposed Helmholtz problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="sphere__scattering_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define possible command line arguments and parse the ones that</span></div>
+<div class="line"> <span class="comment">// were actually specified</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Square domain without DtN</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--square_domain&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parse command line</span></div>
+<div class="line"> CommandLineArgs::parse_and_assign(); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc what has actually been specified on the command line</span></div>
+<div class="line"> CommandLineArgs::doc_specified_flags();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check if the claimed representation of a planar wave in</span></div>
+<div class="line"> <span class="comment">// the tutorial is correct -- of course it is!</span></div>
+<div class="line"> <span class="comment">//PlanarWave::plot();</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Test Bessel/Hankel functions</span></div>
+<div class="line"> <span class="comment">//-----------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Number of Bessel functions to be computed</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> n=3;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Offset of Bessel function order (less than 1!)</span></div>
+<div class="line">  <span class="keywordtype">double</span> bessel_offset=0.5;</div>
+<div class="line">  </div>
+<div class="line">  ofstream bessely_file(<span class="stringliteral">&quot;besselY.dat&quot;</span>);</div>
+<div class="line">  ofstream bessely_deriv_file(<span class="stringliteral">&quot;dbesselY.dat&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  ofstream besselj_file(<span class="stringliteral">&quot;besselJ.dat&quot;</span>);</div>
+<div class="line">  ofstream besselj_deriv_file(<span class="stringliteral">&quot;dbesselJ.dat&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Evaluate Bessel/Hankel functions</span></div>
+<div class="line">  Vector&lt;double&gt; jv(n+1);</div>
+<div class="line">  Vector&lt;double&gt; yv(n+1);</div>
+<div class="line">  Vector&lt;double&gt; djv(n+1);</div>
+<div class="line">  Vector&lt;double&gt; dyv(n+1);</div>
+<div class="line">  <span class="keywordtype">double</span> x_min=0.5;</div>
+<div class="line">  <span class="keywordtype">double</span> x_max=5.0;</div>
+<div class="line">  <span class="keywordtype">unsigned</span> nplot=100;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;nplot;i++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="keywordtype">double</span> x=x_min+(x_max-x_min)*<span class="keywordtype">double</span>(i)/double(nplot-1);</div>
+<div class="line">    <span class="keywordtype">double</span> order_max_in=double(n)+bessel_offset;</div>
+<div class="line">    <span class="keywordtype">double</span> order_max_out=0;</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// This function returns vectors containing </span></div>
+<div class="line">    <span class="comment">// J_k(x), Y_k(x) and their derivatives</span></div>
+<div class="line">    <span class="comment">// up to k=order_max, with k increasing in</span></div>
+<div class="line">    <span class="comment">// integer increments starting with smallest</span></div>
+<div class="line">    <span class="comment">// positive value. So, e.g. for order_max=3.5</span></div>
+<div class="line">    <span class="comment">// jv[0] contains J_{1/2}(x),</span></div>
+<div class="line">    <span class="comment">// jv[1] contains J_{3/2}(x),</span></div>
+<div class="line">    <span class="comment">// jv[2] contains J_{5/2}(x),</span></div>
+<div class="line">    <span class="comment">// jv[3] contains J_{7/2}(x).</span></div>
+<div class="line">    CRBond_Bessel::bessjyv(order_max_in,x,</div>
+<div class="line">                           order_max_out,</div>
+<div class="line">                           &amp;jv[0],&amp;yv[0],</div>
+<div class="line">                           &amp;djv[0],&amp;dyv[0]);</div>
+<div class="line">    bessely_file &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;=n;j++)</div>
+<div class="line">     {</div>
+<div class="line">      bessely_file &lt;&lt; yv[j] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">     }</div>
+<div class="line">    bessely_file &lt;&lt; std::endl;</div>
+<div class="line">    </div>
+<div class="line">    besselj_file &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;=n;j++)</div>
+<div class="line">     {</div>
+<div class="line">      besselj_file &lt;&lt; jv[j] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">     }</div>
+<div class="line">    besselj_file &lt;&lt; std::endl;</div>
+<div class="line">    </div>
+<div class="line">    bessely_deriv_file &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;=n;j++)</div>
+<div class="line">     {</div>
+<div class="line">      bessely_deriv_file &lt;&lt; dyv[j] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">     }</div>
+<div class="line">    bessely_deriv_file &lt;&lt; std::endl;</div>
+<div class="line">    </div>
+<div class="line">    besselj_deriv_file &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;=n;j++)</div>
+<div class="line">     {</div>
+<div class="line">      besselj_deriv_file &lt;&lt; djv[j] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">     }</div>
+<div class="line">    besselj_deriv_file &lt;&lt; std::endl;</div>
+<div class="line">    </div>
+<div class="line">   }</div>
+<div class="line">  bessely_file.close();</div>
+<div class="line">  besselj_file.close();</div>
+<div class="line">  bessely_deriv_file.close();</div>
+<div class="line">  besselj_deriv_file.close();</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Test Legrendre Polynomials</span></div>
+<div class="line"> <span class="comment">//---------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Number of lower indices</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> n=3;</div>
+<div class="line">    </div>
+<div class="line">  ofstream some_file(<span class="stringliteral">&quot;legendre3.dat&quot;</span>);</div>
+<div class="line">  <span class="keywordtype">unsigned</span> nplot=100;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;nplot;i++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="keywordtype">double</span> x=double(i)/double(nplot-1);</div>
+<div class="line"> </div>
+<div class="line">    some_file &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;=n;j++)</div>
+<div class="line">     {</div>
+<div class="line">      some_file &lt;&lt;  Legendre_functions_helper::plgndr2(n,j,x) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">     }</div>
+<div class="line">    some_file &lt;&lt; std::endl;</div>
+<div class="line">   }</div>
+<div class="line">  some_file.close();</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef ADAPTIVE</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create the problem with 2D six-node elements from the</span></div>
+<div class="line"> <span class="comment">// TFourierDecomposedHelmholtzElement family. </span></div>
+<div class="line"> <a class="code" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt;ProjectableFourierDecomposedHelmholtzElement&lt;</div>
+<div class="line">  TFourierDecomposedHelmholtzElement&lt;3&gt; &gt; &gt; <a class="code" href="adaptive__sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create the problem with 2D six-node elements from the</span></div>
+<div class="line"> <span class="comment">// TFourierDecomposedHelmholtzElement family. </span></div>
+<div class="line"> <a class="code" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem&lt;TFourierDecomposedHelmholtzElement&lt;3&gt;</a> &gt; </div>
+<div class="line">  <a class="code" href="adaptive__sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create label for output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve for a few Fourier wavenumbers</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>=0;<a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>&lt;4;</div>
+<div class="line">      <a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Step number</span></div>
+<div class="line">   doc_info.number()=<a class="code" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>;</div>
+<div class="line">   </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef ADAPTIVE</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Max. number of adaptations</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_adapt=1;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Solve the problem with Newton&#39;s method, allowing</span></div>
+<div class="line">   <span class="comment">// up to max_adapt mesh adaptations after every solve.</span></div>
+<div class="line">   <a class="code" href="adaptive__sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve(max_adapt);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Solve the problem</span></div>
+<div class="line">   <a class="code" href="adaptive__sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve();</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Output the solution</span></div>
+<div class="line">   <a class="code" href="adaptive__sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution(doc_info);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of main</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering">demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc">demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="anamespaceProblemParameters_html"><div class="ttname"><a href="namespaceProblemParameters.html">ProblemParameters</a></div><div class="ttdoc">Namespace for the Fourier decomposed Helmholtz problem parameters.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00222">sphere_scattering.cc:222</a></div></div>
+<div class="ttc" id="anamespacePlanarWave_html_afe1e9812d1b1dc40a89f7a1f18d1165f"><div class="ttname"><a href="namespacePlanarWave.html#afe1e9812d1b1dc40a89f7a1f18d1165f">PlanarWave::plot</a></div><div class="ttdeci">void plot()</div><div class="ttdoc">Plot.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00180">sphere_scattering.cc:180</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aa5362de1af9e257fde4317c367158a93"><div class="ttname"><a href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a></div><div class="ttdeci">double K_squared</div><div class="ttdoc">Square of the wavenumber.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00225">sphere_scattering.cc:225</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a359d402bb4aed7d83973248d82085efb"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a359d402bb4aed7d83973248d82085efb">FourierDecomposedHelmholtzProblem::create_outer_bc_elements</a></div><div class="ttdeci">void create_outer_bc_elements()</div><div class="ttdoc">Create BC elements on outer boundary.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00658">sphere_scattering.cc:658</a></div></div>
+<div class="ttc" id="anamespacePlanarWave_html_a00f252bcf0181187c656a58ce36b07b5"><div class="ttname"><a href="namespacePlanarWave.html#a00f252bcf0181187c656a58ce36b07b5">PlanarWave::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector of size 2, containing real and imag parts.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00121">sphere_scattering.cc:121</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_ac4f3f737660b11e8762a61bca999eb0f"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#ac4f3f737660b11e8762a61bca999eb0f">FourierDecomposedHelmholtzProblem::check_gamma</a></div><div class="ttdeci">void check_gamma(DocInfo &amp;doc_info)</div><div class="ttdoc">Check gamma computation.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00505">sphere_scattering.cc:505</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_acb1788444ef78fe2adec824504f24246"><div class="ttname"><a href="namespaceProblemParameters.html#acb1788444ef78fe2adec824504f24246">ProblemParameters::Coeff</a></div><div class="ttdeci">Vector&lt; double &gt; Coeff(N_terms, 1.0)</div><div class="ttdoc">Coefficients in the exact solution.</div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aa544d1f3e384d3283f7113512931ea8f"><div class="ttname"><a href="namespaceProblemParameters.html#aa544d1f3e384d3283f7113512931ea8f">ProblemParameters::exact_minus_dudr</a></div><div class="ttdeci">void exact_minus_dudr(const Vector&lt; double &gt; &amp;x, std::complex&lt; double &gt; &amp;flux)</div><div class="ttdoc">Get -du/dr (spherical r) for exact solution. Equal to prescribed flux on inner boundary.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00302">sphere_scattering.cc:302</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_ab368ed8fe04d4e3db67d13bab9e7b52e"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">FourierDecomposedHelmholtzProblem::FourierDecomposedHelmholtzProblem</a></div><div class="ttdeci">FourierDecomposedHelmholtzProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00437">sphere_scattering.cc:437</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_acbc6f3c692463e5a098ccec7fe9029c1"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#acbc6f3c692463e5a098ccec7fe9029c1">FourierDecomposedHelmholtzProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt: Wipe the mesh of prescribed flux elements.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__sphere__scattering_8cc_source.html#l00418">unstructured_sphere_scattering.cc:418</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a3258e3817d8747aac0409eca1a24d14b"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a3258e3817d8747aac0409eca1a24d14b">FourierDecomposedHelmholtzProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adapt: Rebuild the mesh of prescribed flux elements.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__sphere__scattering_8cc_source.html#l00437">unstructured_sphere_scattering.cc:437</a></div></div>
+<div class="ttc" id="asphere__scattering_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="sphere__scattering_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Driver code for Fourier decomposed Helmholtz problem.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00732">sphere_scattering.cc:732</a></div></div>
+<div class="ttc" id="anamespacePlanarWave_html_a541691caf71477c8c389062797c0fdab"><div class="ttname"><a href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">PlanarWave::I</a></div><div class="ttdeci">std::complex&lt; double &gt; I(0.0, 1.0)</div><div class="ttdoc">Imaginary unit.</div></div>
+<div class="ttc" id="anamespacePlanarWave_html"><div class="ttname"><a href="namespacePlanarWave.html">PlanarWave</a></div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00108">sphere_scattering.cc:108</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a893efb01f8f1d254315201121766d882"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a893efb01f8f1d254315201121766d882">FourierDecomposedHelmholtzProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00574">sphere_scattering.cc:574</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aaa674958a1ca6ee0b99de3377288c93f"><div class="ttname"><a href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a></div><div class="ttdeci">int N_fourier</div><div class="ttdoc">Fourier wave number.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00228">sphere_scattering.cc:228</a></div></div>
+<div class="ttc" id="aadaptive__sphere__scattering_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="adaptive__sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__sphere__scattering_8txt_source.html#l00006">adaptive_sphere_scattering.txt:6</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aa529b33b7feb959e0c044447bf0f6c6f"><div class="ttname"><a href="namespaceProblemParameters.html#aa529b33b7feb959e0c044447bf0f6c6f">ProblemParameters::Nterms_for_DtN</a></div><div class="ttdeci">unsigned Nterms_for_DtN</div><div class="ttdoc">Number of terms in computation of DtN boundary condition.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00231">sphere_scattering.cc:231</a></div></div>
+<div class="ttc" id="anamespacePlanarWave_html_a1d51c00058fbc80aa9d255fffd92abac"><div class="ttname"><a href="namespacePlanarWave.html#a1d51c00058fbc80aa9d255fffd92abac">PlanarWave::K</a></div><div class="ttdeci">double K</div><div class="ttdoc">Wave number.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00115">sphere_scattering.cc:115</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a81d64611f2de2492cec6b0621d8124b0"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a81d64611f2de2492cec6b0621d8124b0">FourierDecomposedHelmholtzProblem::create_flux_elements_on_inner_boundary</a></div><div class="ttdeci">void create_flux_elements_on_inner_boundary()</div><div class="ttdoc">Create flux elements on inner boundary.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00697">sphere_scattering.cc:697</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_af750b29069b29bd38b5220ecf534e7f7"><div class="ttname"><a href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">ProblemParameters::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector of size 2, containing real and imag parts.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00243">sphere_scattering.cc:243</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a></div><div class="ttdoc">Problem class.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00379">sphere_scattering.cc:379</a></div></div>
+<div class="ttc" id="anamespacePlanarWave_html_a56abdb2474ccaffd88346ee3607d8672"><div class="ttname"><a href="namespacePlanarWave.html#a56abdb2474ccaffd88346ee3607d8672">PlanarWave::N_terms</a></div><div class="ttdeci">unsigned N_terms</div><div class="ttdoc">Number of terms in series.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00112">sphere_scattering.cc:112</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:29:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

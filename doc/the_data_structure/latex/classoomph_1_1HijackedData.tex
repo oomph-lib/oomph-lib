@@ -1,0 +1,293 @@
+\hypertarget{classoomph_1_1HijackedData}{}\doxysection{oomph\+::Hijacked\+Data Class Reference}
+\label{classoomph_1_1HijackedData}\index{oomph::HijackedData@{oomph::HijackedData}}
+
+
+Custom \mbox{\hyperlink{classoomph_1_1Data}{Data}} class that is used when Hijacking\+Data. The class always contains a single value that is copied from another \mbox{\hyperlink{classoomph_1_1Data}{Data}} object.  
+
+
+
+
+{\ttfamily \#include $<$nodes.\+h$>$}
+
+Inheritance diagram for oomph\+::Hijacked\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1HijackedData}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1HijackedData_aff8443f8455e18b3893c094326c4d212}{clear\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Clear the pointers to the copied data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HijackedData_a7c9c9735ad6199fdf2e9a341559d45cc}{Hijacked\+Data}} (const unsigned \&copied\+\_\+value, \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HijackedData_a8f8c054b84f8f27443dea6094d7e9ce8}{Hijacked\+Data}} (const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&data)
+\begin{DoxyCompactList}\small\item\em (Shallow) copy constructor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HijackedData_a4e499c40d950eb025f5584070ea9f3a1}{operator=}} (const \mbox{\hyperlink{classoomph_1_1HijackedData}{Hijacked\+Data}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HijackedData_a62d4c2d9f9dc30750c7a2fb414de2174}{$\sim$\+Hijacked\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Destructor informs original object that the copy is being deleted and clears its pointers to the stored values. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1HijackedData_ad392e7561212e3196d05a35417697112}{is\+\_\+a\+\_\+copy}} () const
+\begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the data contains any copied values. \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} data is always a copy. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1HijackedData_acfd12ec29b7787c8796effbb8284892d}{is\+\_\+a\+\_\+copy}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the i-\/th value is a copied value. \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} data is always a copy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HijackedData_aa6408f434b1674ee1cd40c1348e95a87}{assign\+\_\+eqn\+\_\+numbers}} (unsigned long \&global\+\_\+ndof, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1HijackedData}{Hijacked\+Data}} is always a copy, so no equation numbers should be allocated. This function just returns. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HijackedData_ae2ae3e860b36b40c133d56aae5fc39a3}{resize}} (const unsigned \&n\+\_\+value)
+\begin{DoxyCompactList}\small\item\em We cannot resize \mbox{\hyperlink{classoomph_1_1HijackedData}{Hijacked\+Data}}, so the resize function throws a warning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1HijackedData_ae8253ed64e04771ea3d45c3d84d614d7}{reset\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Reset the pointers to the copied data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1HijackedData_a19ec740b0ea8dc8cafc5aff3836a01cb}{Copied\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object from which the value is copied. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1HijackedData_ac033302cfc0833e251501eae1e10001f}{Copied\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Index of the value that is copied from within the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Custom \mbox{\hyperlink{classoomph_1_1Data}{Data}} class that is used when Hijacking\+Data. The class always contains a single value that is copied from another \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
+
+Definition at line 526 of file nodes.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1HijackedData_a7c9c9735ad6199fdf2e9a341559d45cc}\label{classoomph_1_1HijackedData_a7c9c9735ad6199fdf2e9a341559d45cc}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!HijackedData@{HijackedData}}
+\index{HijackedData@{HijackedData}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{HijackedData()}{HijackedData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Hijacked\+Data\+::\+Hijacked\+Data (\begin{DoxyParamCaption}\item[{const unsigned \&}]{copied\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Constructor, creates a \mbox{\hyperlink{classoomph_1_1HijackedData}{Hijacked\+Data}} object with a single value that is copied from another \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. The ordering of the aguments is used to distinguish this case from that of copying all data values, except one independent value. 
+
+Definition at line 1267 of file nodes.\+cc.
+
+
+
+References oomph\+::\+Data\+::add\+\_\+copy(), oomph\+::\+Data\+::\+Eqn\+\_\+number, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), and oomph\+::\+Data\+::\+Value.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedData_a8f8c054b84f8f27443dea6094d7e9ce8}\label{classoomph_1_1HijackedData_a8f8c054b84f8f27443dea6094d7e9ce8}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!HijackedData@{HijackedData}}
+\index{HijackedData@{HijackedData}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{HijackedData()}{HijackedData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Hijacked\+Data\+::\+Hijacked\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Shallow) copy constructor 
+
+
+
+Definition at line 548 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedData_a62d4c2d9f9dc30750c7a2fb414de2174}\label{classoomph_1_1HijackedData_a62d4c2d9f9dc30750c7a2fb414de2174}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!````~HijackedData@{$\sim$HijackedData}}
+\index{````~HijackedData@{$\sim$HijackedData}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{$\sim$HijackedData()}{~HijackedData()}}
+{\footnotesize\ttfamily oomph\+::\+Hijacked\+Data\+::$\sim$\+Hijacked\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor informs original object that the copy is being deleted and clears its pointers to the stored values. 
+
+
+
+Definition at line 558 of file nodes.\+h.
+
+
+
+References Copied\+\_\+data\+\_\+pt, oomph\+::\+Data\+::\+Eqn\+\_\+number, oomph\+::\+Data\+::remove\+\_\+copy(), and oomph\+::\+Data\+::\+Value.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1HijackedData_aa6408f434b1674ee1cd40c1348e95a87}\label{classoomph_1_1HijackedData_aa6408f434b1674ee1cd40c1348e95a87}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!assign\_eqn\_numbers@{assign\_eqn\_numbers}}
+\index{assign\_eqn\_numbers@{assign\_eqn\_numbers}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{assign\_eqn\_numbers()}{assign\_eqn\_numbers()}}
+{\footnotesize\ttfamily void oomph\+::\+Hijacked\+Data\+::assign\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{unsigned long \&}]{global\+\_\+ndof,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&}]{dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1HijackedData}{Hijacked\+Data}} is always a copy, so no equation numbers should be allocated. This function just returns. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a98412724efd3d51925de1a24341f7f41}{oomph\+::\+Data}}.
+
+
+
+Definition at line 580 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedData_aff8443f8455e18b3893c094326c4d212}\label{classoomph_1_1HijackedData_aff8443f8455e18b3893c094326c4d212}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!clear\_copied\_pointers@{clear\_copied\_pointers}}
+\index{clear\_copied\_pointers@{clear\_copied\_pointers}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{clear\_copied\_pointers()}{clear\_copied\_pointers()}}
+{\footnotesize\ttfamily void oomph\+::\+Hijacked\+Data\+::clear\+\_\+copied\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clear the pointers to the copied data. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a409e3140829def2b1e738a24cc1f48bb}{oomph\+::\+Data}}.
+
+
+
+Definition at line 1253 of file nodes.\+cc.
+
+
+
+References Copied\+\_\+data\+\_\+pt, oomph\+::\+Data\+::\+Eqn\+\_\+number, and oomph\+::\+Data\+::\+Value.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedData_ad392e7561212e3196d05a35417697112}\label{classoomph_1_1HijackedData_ad392e7561212e3196d05a35417697112}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!is\_a\_copy@{is\_a\_copy}}
+\index{is\_a\_copy@{is\_a\_copy}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{is\_a\_copy()}{is\_a\_copy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool oomph\+::\+Hijacked\+Data\+::is\+\_\+a\+\_\+copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return a boolean to indicate whether the data contains any copied values. \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} data is always a copy. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}{oomph\+::\+Data}}.
+
+
+
+Definition at line 571 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedData_acfd12ec29b7787c8796effbb8284892d}\label{classoomph_1_1HijackedData_acfd12ec29b7787c8796effbb8284892d}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!is\_a\_copy@{is\_a\_copy}}
+\index{is\_a\_copy@{is\_a\_copy}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{is\_a\_copy()}{is\_a\_copy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool oomph\+::\+Hijacked\+Data\+::is\+\_\+a\+\_\+copy (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return a boolean to indicate whether the i-\/th value is a copied value. \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} data is always a copy. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_ae31cff2285588c40cd33fac0cabcc371}{oomph\+::\+Data}}.
+
+
+
+Definition at line 576 of file nodes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedData_a4e499c40d950eb025f5584070ea9f3a1}\label{classoomph_1_1HijackedData_a4e499c40d950eb025f5584070ea9f3a1}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Hijacked\+Data\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HijackedData}{Hijacked\+Data}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 551 of file nodes.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1HijackedData_ae8253ed64e04771ea3d45c3d84d614d7}\label{classoomph_1_1HijackedData_ae8253ed64e04771ea3d45c3d84d614d7}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!reset\_copied\_pointers@{reset\_copied\_pointers}}
+\index{reset\_copied\_pointers@{reset\_copied\_pointers}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{reset\_copied\_pointers()}{reset\_copied\_pointers()}}
+{\footnotesize\ttfamily void oomph\+::\+Hijacked\+Data\+::reset\+\_\+copied\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Reset the pointers to the copied data. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_afd33533f3ddf61bc34106a4dc72de541}{oomph\+::\+Data}}.
+
+
+
+Definition at line 1239 of file nodes.\+cc.
+
+
+
+References Copied\+\_\+data\+\_\+pt, Copied\+\_\+index, oomph\+::\+Data\+::\+Eqn\+\_\+number, and oomph\+::\+Data\+::\+Value.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedData_ae2ae3e860b36b40c133d56aae5fc39a3}\label{classoomph_1_1HijackedData_ae2ae3e860b36b40c133d56aae5fc39a3}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!resize@{resize}}
+\index{resize@{resize}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void oomph\+::\+Hijacked\+Data\+::resize (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+We cannot resize \mbox{\hyperlink{classoomph_1_1HijackedData}{Hijacked\+Data}}, so the resize function throws a warning. 
+
+We do not allow \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} \mbox{\hyperlink{classoomph_1_1Data}{Data}} to be resized. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_ac68583834c9bef47f5c37c890960e186}{oomph\+::\+Data}}.
+
+
+
+Definition at line 1299 of file nodes.\+cc.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1HijackedData_a19ec740b0ea8dc8cafc5aff3836a01cb}\label{classoomph_1_1HijackedData_a19ec740b0ea8dc8cafc5aff3836a01cb}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!Copied\_data\_pt@{Copied\_data\_pt}}
+\index{Copied\_data\_pt@{Copied\_data\_pt}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{Copied\_data\_pt}{Copied\_data\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ oomph\+::\+Hijacked\+Data\+::\+Copied\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object from which the value is copied. 
+
+
+
+Definition at line 531 of file nodes.\+h.
+
+
+
+Referenced by clear\+\_\+copied\+\_\+pointers(), reset\+\_\+copied\+\_\+pointers(), and $\sim$\+Hijacked\+Data().
+
+\mbox{\Hypertarget{classoomph_1_1HijackedData_ac033302cfc0833e251501eae1e10001f}\label{classoomph_1_1HijackedData_ac033302cfc0833e251501eae1e10001f}} 
+\index{oomph::HijackedData@{oomph::HijackedData}!Copied\_index@{Copied\_index}}
+\index{Copied\_index@{Copied\_index}!oomph::HijackedData@{oomph::HijackedData}}
+\doxysubsubsection{\texorpdfstring{Copied\_index}{Copied\_index}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Hijacked\+Data\+::\+Copied\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Index of the value that is copied from within the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
+
+
+
+Definition at line 534 of file nodes.\+h.
+
+
+
+Referenced by reset\+\_\+copied\+\_\+pointers().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{nodes_8h}{nodes.\+h}}\item 
+\mbox{\hyperlink{nodes_8cc}{nodes.\+cc}}\end{DoxyCompactItemize}

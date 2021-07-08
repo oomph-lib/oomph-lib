@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Namespace Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all namespace members with links to the namespace documentation for each member:</div>
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>S
+: <a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da85b07d6c087e0cb66bac32a0b6a45198">oomph::QuadTreeNames</a>
+</li>
+<li>Sample_Point_Container_Type
+: <a class="el" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991">oomph</a>
+</li>
+<li>Scale
+: <a class="el" href="namespaceoomph_1_1Helper__namespace__for__mesh__smoothing.html#a1becf6969521c3750d1267dd619a2d41">oomph::Helper_namespace_for_mesh_smoothing</a>
+</li>
+<li>Scale_increment
+: <a class="el" href="namespaceoomph_1_1Helper__namespace__for__mesh__smoothing.html#aba8998d13da8e9dc69ad0a2e2d59f215">oomph::Helper_namespace_for_mesh_smoothing</a>
+</li>
+<li>SE
+: <a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da03479dd620c853ccd3c767125d6f29a4">oomph::QuadTreeNames</a>
+</li>
+<li>second_invariant()
+: <a class="el" href="namespaceoomph_1_1SecondInvariantHelper.html#a25244c7a064549dd3f474b0d6ca1fae4">oomph::SecondInvariantHelper</a>
+</li>
+<li>self_test()
+: <a class="el" href="namespaceoomph.html#a6a5cfce839009bef49cce08492ec6aeb">oomph</a>
+</li>
+<li>send_and_receive_located_info()
+: <a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a131c53d0a1557066df4719d24796b3a8">oomph::Multi_domain_functions</a>
+</li>
+<li>send_and_receive_missing_zetas()
+: <a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a2fb1a620c45f362039bef826b32b6785">oomph::Multi_domain_functions</a>
+</li>
+<li>set_defaults()
+: <a class="el" href="namespaceoomph_1_1Biharmonic__schur__complement__Hypre__defaults.html#acff454a359087ff5bcdc63521c9e6228">oomph::Biharmonic_schur_complement_Hypre_defaults</a>
+</li>
+<li>set_defaults_for_2D_poisson_problem()
+: <a class="el" href="namespaceoomph_1_1Hypre__default__settings.html#a8e616a1267ca88b82032b059ab573241">oomph::Hypre_default_settings</a>
+</li>
+<li>set_defaults_for_3D_poisson_problem()
+: <a class="el" href="namespaceoomph_1_1Hypre__default__settings.html#a8c726c9ee016fbf9257a9cbd667873d6">oomph::Hypre_default_settings</a>
+</li>
+<li>set_defaults_for_navier_stokes_momentum_block()
+: <a class="el" href="namespaceoomph_1_1Hypre__default__settings.html#a2537d48181e8542f129522a06b457e11">oomph::Hypre_default_settings</a>
+</li>
+<li>set_hypre_preconditioner()
+: <a class="el" href="namespaceoomph_1_1HypreSubsidiaryPreconditionerHelper.html#a51a022eaa12ee632f81039de080e7cbf">oomph::HypreSubsidiaryPreconditionerHelper</a>
+</li>
+<li>set_ntimers()
+: <a class="el" href="namespaceoomph_1_1CumulativeTimings.html#a49a6558826c7842f0e14dbdaccc3ed01">oomph::CumulativeTimings</a>
+</li>
+<li>set_text_effect()
+: <a class="el" href="namespaceoomph_1_1ANSIEscapeCode.html#a745d12f5554c0048681e8d2a69e23c61">oomph::ANSIEscapeCode</a>
+</li>
+<li>setup()
+: <a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a02666c3d933af7c70da94bb0e87ebeb0">oomph::CommandLineArgs</a>
+, <a class="el" href="namespaceoomph_1_1TecplotNames.html#ad453a1e2569435e1d28aed2abe025cdd">oomph::TecplotNames</a>
+, <a class="el" href="namespaceoomph_1_1TerminateHelper.html#a38ec1b047a4438b6eba8a21b669c229d">oomph::TerminateHelper</a>
+</li>
+<li>setup_bulk_elements_adjacent_to_face_mesh()
+: <a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a35d48459a5261d565afbc106cb61fe60">oomph::Multi_domain_functions</a>
+</li>
+<li>setup_fluid_load_info_for_solid_elements()
+: <a class="el" href="namespaceoomph_1_1FSI__functions.html#ac71732700aad0d671fa1285d173d5b27">oomph::FSI_functions</a>
+</li>
+<li>setup_multi_domain_interaction()
+: <a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#ac64183e03f173c69ed6ed6f493a1a67e">oomph::Multi_domain_functions</a>
+</li>
+<li>setup_multi_domain_interactions()
+: <a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a4a7ac2c45985582b30ed3ecb5d2623d2">oomph::Multi_domain_functions</a>
+</li>
+<li>setup_solid_elements_for_displacement_bc()
+: <a class="el" href="namespaceoomph_1_1FSI__functions.html#aacfff5c6e8f9ee75e7d2ae490d28fb7b">oomph::FSI_functions</a>
+</li>
+<li>shape()
+: <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#ae1c6ebc64829c1a52280adc14194ef88">oomph::OneDimDiscontinuousGalerkin</a>
+, <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis.html#addb2651435ac3f5e7f4365e2c82fecb4">oomph::OneDimDiscontinuousGalerkinMixedOrderBasis</a>
+, <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderTest.html#aa1f4b7cf79268acb8bf6d51de9fb1d99">oomph::OneDimDiscontinuousGalerkinMixedOrderTest</a>
+, <a class="el" href="namespaceoomph_1_1OneDimHermite.html#aebab8114996e792678738c0b203ee6dc">oomph::OneDimHermite</a>
+, <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a117f8b892dc89989ecdad99ff261e120">oomph::OneDimLagrange</a>
+</li>
+<li>shape&lt; 2 &gt;()
+: <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a8a4f1a50762b23b751c9f472c71d0cc8">oomph::OneDimDiscontinuousGalerkin</a>
+, <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis.html#a97bf7354897068717f5c9461fb976117">oomph::OneDimDiscontinuousGalerkinMixedOrderBasis</a>
+, <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderTest.html#aacd3197eddd00304a6d7f36d7abca7d9">oomph::OneDimDiscontinuousGalerkinMixedOrderTest</a>
+, <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#aec7f5263cb672ddfef50bdd3462ada19">oomph::OneDimLagrange</a>
+</li>
+<li>shape&lt; 3 &gt;()
+: <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a6df0c47696f1111a24b546fb08c882c4">oomph::OneDimDiscontinuousGalerkin</a>
+, <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis.html#abbfe53c6539cf5435a7d11a17116b1c8">oomph::OneDimDiscontinuousGalerkinMixedOrderBasis</a>
+, <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderTest.html#a397df83121521496801c86075b8520cb">oomph::OneDimDiscontinuousGalerkinMixedOrderTest</a>
+, <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#acccbf08730b769433dd95c7c564fa28a">oomph::OneDimLagrange</a>
+</li>
+<li>shape&lt; 4 &gt;()
+: <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#aa365262493b48bfac3b1adfe0ed0b01f">oomph::OneDimDiscontinuousGalerkin</a>
+, <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis.html#ad17bea497f267224986e1ccb4bbf6587">oomph::OneDimDiscontinuousGalerkinMixedOrderBasis</a>
+, <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderTest.html#adbdc3f33d223754f88537405b0d97e51">oomph::OneDimDiscontinuousGalerkinMixedOrderTest</a>
+, <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#aead7e479371c7eb764b8f4ad68986ade">oomph::OneDimLagrange</a>
+</li>
+<li>sorter_bottom_boundary()
+: <a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a0bd68e9d424ff3f05266786cc6c78baa">oomph::TwoDimensionalPMLHelper</a>
+</li>
+<li>sorter_left_boundary()
+: <a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#aecb74c39efe7c572a9d87b2d11be3d69">oomph::TwoDimensionalPMLHelper</a>
+</li>
+<li>sorter_right_boundary()
+: <a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#ae66c595a953e030ae366699eec3ca3ab">oomph::TwoDimensionalPMLHelper</a>
+</li>
+<li>sorter_top_boundary()
+: <a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a98d2786e22298095bd190435d11c4f0e">oomph::TwoDimensionalPMLHelper</a>
+</li>
+<li>source_fct_pt()
+: <a class="el" href="namespaceoomph.html#aaeb31b697ac413871cfe74e70c3a60b1">oomph</a>
+</li>
+<li>Source_fct_pt
+: <a class="el" href="namespaceoomph.html#a051e9244ca4fd64439699c8e7e7bcf09">oomph</a>
+</li>
+<li>source_function()
+: <a class="el" href="namespaceoomph_1_1PressureAdvectionDiffusionValidation.html#a704323835d1c48a60a83670d8694c938">oomph::PressureAdvectionDiffusionValidation</a>
+</li>
+<li>spawn_errors_from_uncaught_errors()
+: <a class="el" href="namespaceoomph_1_1TerminateHelper.html#a9651e6be0ad4ac01e26242c1fd4a66a2">oomph::TerminateHelper</a>
+</li>
+<li>Specified_command_line_double_pt
+: <a class="el" href="namespaceoomph_1_1CommandLineArgs.html#aa4decec3dde9efd1b7e2e447fe656f41">oomph::CommandLineArgs</a>
+</li>
+<li>Specified_command_line_flag
+: <a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a26248b14a69e0839c647c5c9540a09b3">oomph::CommandLineArgs</a>
+</li>
+<li>Specified_command_line_int_pt
+: <a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a872a9f3ad510078d12dc24f19dd54f88">oomph::CommandLineArgs</a>
+</li>
+<li>Specified_command_line_string_pt
+: <a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a6801e3bd896891e4c5b40399c56df332">oomph::CommandLineArgs</a>
+</li>
+<li>Specified_command_line_unsigned_pt
+: <a class="el" href="namespaceoomph_1_1CommandLineArgs.html#ae489c2891e5e891242ed788b2a64d477">oomph::CommandLineArgs</a>
+</li>
+<li>specify_command_line_flag()
+: <a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a4f5c63f51f006503cf75dd6fccaf971c">oomph::CommandLineArgs</a>
+</li>
+<li>split()
+: <a class="el" href="namespaceoomph_1_1DoubleVectorHelpers.html#a3c0fa6de2c35301c556b9530c9ab2bc4">oomph::DoubleVectorHelpers</a>
+</li>
+<li>split_string()
+: <a class="el" href="namespaceoomph_1_1StringConversion.html#a15f87a508bc9515945d8c8891e7134a9">oomph::StringConversion</a>
+</li>
+<li>split_without_communication()
+: <a class="el" href="namespaceoomph_1_1DoubleVectorHelpers.html#a66afcc493558424fb89f26bc23dd5bf2">oomph::DoubleVectorHelpers</a>
+</li>
+<li>start()
+: <a class="el" href="namespaceoomph_1_1CumulativeTimings.html#aeafe5cb81741d54561e4b62572a1e3df">oomph::CumulativeTimings</a>
+</li>
+<li>Start_time
+: <a class="el" href="namespaceoomph_1_1CumulativeTimings.html#ad9ef14aa764288369edd9265b61dc39c">oomph::CumulativeTimings</a>
+</li>
+<li>stop_continous_top()
+: <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a64410078236ee55e630ee6416b4ccdb0">oomph::MemoryUsage</a>
+</li>
+<li>string()
+: <a class="el" href="namespaceoomph_1_1Global__string__for__annotation.html#ac5379de2fa7fe44f2cb31785fc208135">oomph::Global_string_for_annotation</a>
+</li>
+<li>String
+: <a class="el" href="namespaceoomph_1_1Global__string__for__annotation.html#a3e4fe39c6055ee6fe5c367533905591b">oomph::Global_string_for_annotation</a>
+</li>
+<li>Strouhal_for_no_slip
+: <a class="el" href="namespaceoomph_1_1FSI__functions.html#aa213854665524b0720b63a115ef57fd8">oomph::FSI_functions</a>
+</li>
+<li>superlu()
+: <a class="el" href="namespaceoomph.html#ad3cf4046d72d2de41baaa7505068d9ab">oomph</a>
+</li>
+<li>superlu_complex()
+: <a class="el" href="namespaceoomph.html#a86eed4072592007720b957cf58c7bbe5">oomph</a>
+</li>
+<li>superlu_cr_to_cc()
+: <a class="el" href="namespaceoomph.html#ac806709e87d971d63a6a4ba4c9e0e40d">oomph</a>
+</li>
+<li>superlu_dist_distributed_matrix()
+: <a class="el" href="namespaceoomph.html#afda4e6a29a247cb24203d0c93047a05e">oomph</a>
+</li>
+<li>superlu_dist_global_matrix()
+: <a class="el" href="namespaceoomph.html#a69210c78770d5e7a589b23ca3b821ec1">oomph</a>
+</li>
+<li>suppress_exception_error_messages()
+: <a class="el" href="namespaceoomph_1_1TerminateHelper.html#a2b5ff4c65cd6891d1852d18ff4b8d9ff">oomph::TerminateHelper</a>
+</li>
+<li>Suppress_mpi_synchronisation
+: <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a77ed83cae1c77e9a046bc6b1ff55645a">oomph::MemoryUsage</a>
+</li>
+<li>SW
+: <a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7dab02ffb52d34a25323447061474613d81">oomph::QuadTreeNames</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:03:35
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

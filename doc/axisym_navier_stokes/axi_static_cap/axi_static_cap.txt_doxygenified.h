@@ -1,0 +1,128 @@
+/**
+
+\mainpage Demo problem: The (axisymmetric) static free surface bounding a layer of viscous fluid.
+
+\section overview Overview of the problem
+
+ We consider an open circular container of unit radius
+ containing a still viscous fluid of
+ prescribed volume \f$ \mathcal{V} \f$ 
+ that meets the wall of the container at a contact
+ angle \f$ \theta_{c} \f$. The problem is extremely similar to that
+ described in the  
+ <a href="../../../navier_stokes/static_single_layer/html/index.html">
+ two-dimensional static cap tutorial. </a>  The exact solution
+ corresponds to a free surface of constant curvature that 
+ is the arc of a circle
+ rotated about the axis to give a section of a sphere. 
+ The mean curvature of
+ the interface in this problem is  \f$ \kappa = 2/r = 4\cos\theta_{c}
+ \f$, which differs from the two-dimensional problem in which it was \f$
+ 2\cos\theta_{c} \f$.
+
+ The only differences between the axisymmetric and the 
+ <a href="../../../navier_stokes/static_single_layer/html/index.html">
+ two-dimensional </a> driver codes are that:
+-# two-dimensional elements are replaced by the equivalent axisymmetric elements;\n
+-# specified volume is different;\n
+-# swirl (theta) component of velocity is pinned; \n
+-# analytic pressure drop is changed. \n
+.
+
+In other words we make the following changes:
+ <center>
+ <table border="2" cellspacing="5">
+ <tr>
+ <td> </td> <td> Two-dimensional problem </td> <td> Axisymmetric
+ problem </td>
+</tr>
+ <tr>
+ <td> Bulk Fluid Element </td>
+ <td> QCrouzeixRaviartElement<2> </td> <td>
+ AxisymmetricQCrouzeixRaviartElement </td>
+</tr>
+<tr>
+ <td> Pseudo-Solid Free Surface Face Element </td>
+ <td> ElasticLineFluidInterfaceElement </td> 
+ <td> ElasticAxisymmetricFluidInterfaceElement </td> 
+</tr>
+<tr> 
+<td>Spine Free Surface Face Element </td>
+<td> SpineLineFluidInterfaceElement </td>
+<td> SpineAxisymmetricFluidInterfaceElement </td>
+</tr>
+<tr>
+ <td> Pseudo-Solid Volume Constraint Face Element </td>
+ <td> ElasticLineVolumeConstraintBoundingElement </td>
+ <td> ElasticAxisymmetricVolumeConstraintBoundingElement </td>
+</tr>
+<tr>
+ <td> Spine Volume Constraint Face Element </td>
+ <td> SpineLineVolumeConstraintBoundingElement </td>
+ <td> SpineAxisymmetricVolumeConstraintBoundingElement </td>
+</tr>
+<tr> <td> Specific Volume </td>
+     <td> \f$ x h  = 0.5 \f$ </td> 
+     <td> \f$ r^{2} h /2 = 0.125 \f$ </td> </tr>
+<tr>
+    <td> Analytic pressure drop </td>
+    <td> \f$ 2\cos\theta_{c} \f$ </td>
+    <td> \f$ 4\cos\theta_{c} \f$ </td>
+</tr>
+</table>
+</center>
+
+\section comments Comments and Exercises
+
+\subsection com Comments
+
+- The formula for the specified volume in the axisymmetric
+case is the true volume \f$ \mathcal{V} \f$ divided by \f$ 2\pi \f$ because 
+all the axisymmetric equations are divided by the common factor 
+of \f$ 2 \pi \f$. The \c AxisymmetricVolumeConstraintBoundingElement
+class must be used so that the volume is correctly calculated.
+
+- The swirl velocity is pinned on the boundaries by including the
+additional code
+\code
+   Bulk_mesh_pt->boundary_node_pt(b,n)->pin(2);
+\endcode
+.
+
+\subsection exercises Exercises
+
+-# Confirm that the computed pressure differences agree with the
+   analytic expression. Verify that the interface shape is unaffected
+   by the capillary number, but that the pressure difference
+   across the interface changes in inverse proportion to it. Check
+   that the pressure difference is unaffected by the choice of
+   reference pressure.\n\n
+-# Investigate what happens when the two-dimensional volume constraint
+   elements are used. Explain your result. \n\n
+.
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- Source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/axisym_navier_stokes/axi_static_cap/">
+demo_drivers/axisym_navier_stokes/axi_static_cap/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/axisym_navier_stokes/axi_static_cap/axi_static_cap.cc">
+demo_drivers/axisym_navier_stokes/axi_static_cap/axi_static_cap.cc
+</A>
+</CENTER>
+.
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

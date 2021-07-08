@@ -1,0 +1,488 @@
+\hypertarget{classoomph_1_1YoungLaplaceContactAngleElement}{}\doxysection{oomph\+::Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1YoungLaplaceContactAngleElement}\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+
+
+A class for elements that allow the imposition of an contact angle bcs for Young Laplace elements. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. Jacobian is evaluated by finite differencing.  
+
+
+
+
+{\ttfamily \#include $<$young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.151777cm]{classoomph_1_1YoungLaplaceContactAngleElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a357c030b7a30cf89a670524e1def7d92}{Young\+Laplace\+Contact\+Angle\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_ac7fff7e187e14fed48b43c2b322b8b85}{Young\+Laplace\+Contact\+Angle\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a47ffe6169393d1da5d5760209fab07db}{Young\+Laplace\+Contact\+Angle\+Element}} (const \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{Young\+Laplace\+Contact\+Angle\+Element}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a7c0ab1be7efdcb28da20c431aed61b4c}{operator=}} (const \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{Young\+Laplace\+Contact\+Angle\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a75bfc79df63b02f0b445116482048250}{prescribed\+\_\+cos\+\_\+gamma\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Access function for the pointer to the prescribed contact angle (const version) \end{DoxyCompactList}\item 
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_aa93c0c35fd02e9aacf77695efdf25816}{prescribed\+\_\+cos\+\_\+gamma\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the pointer to the prescribed contact angle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a58e1367abd5655dafc45749cc92a5ce3}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a0469df9bf4d8888312929e66821dc408}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\begin{DoxyCompactList}\small\item\em Get the local equation number of the (one and only) unknown stored at local node n (returns -\/1 if value is pinned). Can be overloaded in derived multiphysics elements. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_ac6e3f26da35682eb715693755b661a5c}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_afc1ae43e1b279e52c7d3a030f1740d93}{output}} (std\+::ostream \&outfile)
+\item 
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a16968ee7e86d676783b07400a4afc61d}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a589f36dd06e87691b15d1f9700311833}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\item 
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_adbabdfc299dcc79b82870690ccd9ec64}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a39f908b46a8fbf92f8997f8acafd64ee}{actual\+\_\+cos\+\_\+contact\+\_\+angle}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
+\begin{DoxyCompactList}\small\item\em Compute cosinus of actual contact angle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_acfe3c702386c20a1f769be260cccb9d2}{contact\+\_\+line\+\_\+vectors}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&tangent, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&normal)
+\begin{DoxyCompactList}\small\item\em Get unit tangent and normal vectors to contact line. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_ad0dfedac360bd5a6975a199f7dc3d8bd}{contact\+\_\+line\+\_\+vectors}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&tangent, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&normal, double \&norm\+\_\+of\+\_\+drds)
+\begin{DoxyCompactList}\small\item\em Get unit tangent and normal vectors to contact line. Final argument gives the norm of d\+R/ds where R is the vector to the contact line and s the local coordinate in the element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_af61855a9ea41833eed6ad3a519d68687}{contact\+\_\+line\+\_\+vectors}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&tangent, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&normal, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine, double \&norm\+\_\+of\+\_\+drds)
+\begin{DoxyCompactList}\small\item\em Get tangent and normal vectors to contact line and spine vector (wall normal can then be obtained by cross-\/product). Final argument gives the norm of d\+R/ds where R is the vector to the contact line and s the local coordinate in the element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \& \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_ab2050063b575605e2e9469ddad7f9904}{u}} (const unsigned int \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\begin{DoxyCompactList}\small\item\em Define an access function to the first data value stored at each node. In a more general \char`\"{}\+Equation\char`\"{} element, such abstraction is essential, because different Elements will store the same variables in different locations. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_a7c48ab9660cdd1db7cda9fedcbae6bb9}{prescribed\+\_\+cos\+\_\+gamma}} ()
+\begin{DoxyCompactList}\small\item\em Function to calculate the cos of the prescribed contact angle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_ad93443e52c595b5c69301fdf92925554}{Prescribed\+\_\+cos\+\_\+gamma\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to prescribed cos gamma. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+A class for elements that allow the imposition of an contact angle bcs for Young Laplace elements. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. Jacobian is evaluated by finite differencing. 
+
+Definition at line 52 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a357c030b7a30cf89a670524e1def7d92}\label{classoomph_1_1YoungLaplaceContactAngleElement_a357c030b7a30cf89a670524e1def7d92}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!YoungLaplaceContactAngleElement@{YoungLaplaceContactAngleElement}}
+\index{YoungLaplaceContactAngleElement@{YoungLaplaceContactAngleElement}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{YoungLaplaceContactAngleElement()}{YoungLaplaceContactAngleElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{Young\+Laplace\+Contact\+Angle\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. 
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. 
+
+Definition at line 40 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Prescribed\+\_\+cos\+\_\+gamma\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_ac7fff7e187e14fed48b43c2b322b8b85}\label{classoomph_1_1YoungLaplaceContactAngleElement_ac7fff7e187e14fed48b43c2b322b8b85}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!YoungLaplaceContactAngleElement@{YoungLaplaceContactAngleElement}}
+\index{YoungLaplaceContactAngleElement@{YoungLaplaceContactAngleElement}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{YoungLaplaceContactAngleElement()}{YoungLaplaceContactAngleElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{Young\+Laplace\+Contact\+Angle\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken empty constructor. 
+
+
+
+Definition at line 64 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a47ffe6169393d1da5d5760209fab07db}\label{classoomph_1_1YoungLaplaceContactAngleElement_a47ffe6169393d1da5d5760209fab07db}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!YoungLaplaceContactAngleElement@{YoungLaplaceContactAngleElement}}
+\index{YoungLaplaceContactAngleElement@{YoungLaplaceContactAngleElement}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{YoungLaplaceContactAngleElement()}{YoungLaplaceContactAngleElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{Young\+Laplace\+Contact\+Angle\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 73 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a39f908b46a8fbf92f8997f8acafd64ee}\label{classoomph_1_1YoungLaplaceContactAngleElement_a39f908b46a8fbf92f8997f8acafd64ee}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!actual\_cos\_contact\_angle@{actual\_cos\_contact\_angle}}
+\index{actual\_cos\_contact\_angle@{actual\_cos\_contact\_angle}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actual\_cos\_contact\_angle()}{actual\_cos\_contact\_angle()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actual\+\_\+cos\+\_\+contact\+\_\+angle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Compute cosinus of actual contact angle. 
+
+Get the actual contact angle. 
+
+Definition at line 164 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+cc.
+
+
+
+References i, and s.
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_acfe3c702386c20a1f769be260cccb9d2}\label{classoomph_1_1YoungLaplaceContactAngleElement_acfe3c702386c20a1f769be260cccb9d2}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!contact\_line\_vectors@{contact\_line\_vectors}}
+\index{contact\_line\_vectors@{contact\_line\_vectors}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{contact\_line\_vectors()}{contact\_line\_vectors()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::contact\+\_\+line\+\_\+vectors (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{tangent,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{normal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get unit tangent and normal vectors to contact line. 
+
+
+
+Definition at line 145 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References s.
+
+
+
+Referenced by oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::contact\+\_\+line\+\_\+vectors().
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_ad0dfedac360bd5a6975a199f7dc3d8bd}\label{classoomph_1_1YoungLaplaceContactAngleElement_ad0dfedac360bd5a6975a199f7dc3d8bd}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!contact\_line\_vectors@{contact\_line\_vectors}}
+\index{contact\_line\_vectors@{contact\_line\_vectors}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{contact\_line\_vectors()}{contact\_line\_vectors()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::contact\+\_\+line\+\_\+vectors (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{tangent,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{normal,  }\item[{double \&}]{norm\+\_\+of\+\_\+drds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get unit tangent and normal vectors to contact line. Final argument gives the norm of d\+R/ds where R is the vector to the contact line and s the local coordinate in the element. 
+
+
+
+Definition at line 158 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::contact\+\_\+line\+\_\+vectors(), and s.
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_af61855a9ea41833eed6ad3a519d68687}\label{classoomph_1_1YoungLaplaceContactAngleElement_af61855a9ea41833eed6ad3a519d68687}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!contact\_line\_vectors@{contact\_line\_vectors}}
+\index{contact\_line\_vectors@{contact\_line\_vectors}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{contact\_line\_vectors()}{contact\_line\_vectors()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::contact\+\_\+line\+\_\+vectors (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{tangent,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{normal,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{spine,  }\item[{double \&}]{norm\+\_\+of\+\_\+drds }\end{DoxyParamCaption})}
+
+
+
+Get tangent and normal vectors to contact line and spine vector (wall normal can then be obtained by cross-\/product). Final argument gives the norm of d\+R/ds where R is the vector to the contact line and s the local coordinate in the element. 
+
+Get unit tangent and normal to contact line and the spine itself (this allows the wall normal to be worked out by a cross product). Final argument gives the norm of d\+R/ds where R is the vector to the contact line and s the local coordinate in the element. 
+
+Definition at line 279 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+cc.
+
+
+
+References i, interpolated\+\_\+u(), and s.
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a58e1367abd5655dafc45749cc92a5ce3}\label{classoomph_1_1YoungLaplaceContactAngleElement_a58e1367abd5655dafc45749cc92a5ce3}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector. 
+
+Compute the element\textquotesingle{}s contribution to the residual vector. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 77 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+cc.
+
+
+
+References i, residuals(), and s.
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a7c0ab1be7efdcb28da20c431aed61b4c}\label{classoomph_1_1YoungLaplaceContactAngleElement_a7c0ab1be7efdcb28da20c431aed61b4c}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 79 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a589f36dd06e87691b15d1f9700311833}\label{classoomph_1_1YoungLaplaceContactAngleElement_a589f36dd06e87691b15d1f9700311833}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 133 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_adbabdfc299dcc79b82870690ccd9ec64}\label{classoomph_1_1YoungLaplaceContactAngleElement_adbabdfc299dcc79b82870690ccd9ec64}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 138 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_afc1ae43e1b279e52c7d3a030f1740d93}\label{classoomph_1_1YoungLaplaceContactAngleElement_afc1ae43e1b279e52c7d3a030f1740d93}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 124 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a16968ee7e86d676783b07400a4afc61d}\label{classoomph_1_1YoungLaplaceContactAngleElement_a16968ee7e86d676783b07400a4afc61d}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 128 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a7c48ab9660cdd1db7cda9fedcbae6bb9}\label{classoomph_1_1YoungLaplaceContactAngleElement_a7c48ab9660cdd1db7cda9fedcbae6bb9}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!prescribed\_cos\_gamma@{prescribed\_cos\_gamma}}
+\index{prescribed\_cos\_gamma@{prescribed\_cos\_gamma}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{prescribed\_cos\_gamma()}{prescribed\_cos\_gamma()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::prescribed\+\_\+cos\+\_\+gamma (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to calculate the cos of the prescribed contact angle. 
+
+
+
+Definition at line 188 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Prescribed\+\_\+cos\+\_\+gamma\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_aa93c0c35fd02e9aacf77695efdf25816}\label{classoomph_1_1YoungLaplaceContactAngleElement_aa93c0c35fd02e9aacf77695efdf25816}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!prescribed\_cos\_gamma\_pt@{prescribed\_cos\_gamma\_pt}}
+\index{prescribed\_cos\_gamma\_pt@{prescribed\_cos\_gamma\_pt}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{prescribed\_cos\_gamma\_pt()}{prescribed\_cos\_gamma\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::prescribed\+\_\+cos\+\_\+gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the pointer to the prescribed contact angle. 
+
+
+
+Definition at line 94 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Prescribed\+\_\+cos\+\_\+gamma\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a75bfc79df63b02f0b445116482048250}\label{classoomph_1_1YoungLaplaceContactAngleElement_a75bfc79df63b02f0b445116482048250}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!prescribed\_cos\_gamma\_pt@{prescribed\_cos\_gamma\_pt}}
+\index{prescribed\_cos\_gamma\_pt@{prescribed\_cos\_gamma\_pt}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{prescribed\_cos\_gamma\_pt()}{prescribed\_cos\_gamma\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::prescribed\+\_\+cos\+\_\+gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the pointer to the prescribed contact angle (const version) 
+
+
+
+Definition at line 87 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Prescribed\+\_\+cos\+\_\+gamma\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_ab2050063b575605e2e9469ddad7f9904}\label{classoomph_1_1YoungLaplaceContactAngleElement_ab2050063b575605e2e9469ddad7f9904}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!u@{u}}
+\index{u@{u}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{u()}{u()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double\& \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u (\begin{DoxyParamCaption}\item[{const unsigned int \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Define an access function to the first data value stored at each node. In a more general \char`\"{}\+Equation\char`\"{} element, such abstraction is essential, because different Elements will store the same variables in different locations. 
+
+
+
+Definition at line 185 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::value\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_a0469df9bf4d8888312929e66821dc408}\label{classoomph_1_1YoungLaplaceContactAngleElement_a0469df9bf4d8888312929e66821dc408}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!u\_local\_eqn@{u\_local\_eqn}}
+\index{u\_local\_eqn@{u\_local\_eqn}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{u\_local\_eqn()}{u\_local\_eqn()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the local equation number of the (one and only) unknown stored at local node n (returns -\/1 if value is pinned). Can be overloaded in derived multiphysics elements. 
+
+
+
+Definition at line 106 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References n, and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_ac6e3f26da35682eb715693755b661a5c}\label{classoomph_1_1YoungLaplaceContactAngleElement_ac6e3f26da35682eb715693755b661a5c}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) 
+
+Specify the value of nodal zeta from the face geometry 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f76c8487d152e68a6}{oomph\+::\+Face\+Element}}.
+
+
+
+Definition at line 118 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1YoungLaplaceContactAngleElement_ad93443e52c595b5c69301fdf92925554}\label{classoomph_1_1YoungLaplaceContactAngleElement_ad93443e52c595b5c69301fdf92925554}} 
+\index{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}!Prescribed\_cos\_gamma\_pt@{Prescribed\_cos\_gamma\_pt}}
+\index{Prescribed\_cos\_gamma\_pt@{Prescribed\_cos\_gamma\_pt}!oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$@{oomph::YoungLaplaceContactAngleElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Prescribed\_cos\_gamma\_pt}{Prescribed\_cos\_gamma\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement}{oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Prescribed\+\_\+cos\+\_\+gamma\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to prescribed cos gamma. 
+
+
+
+Definition at line 206 of file young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::prescribed\+\_\+cos\+\_\+gamma(), oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::prescribed\+\_\+cos\+\_\+gamma\+\_\+pt(), and oomph\+::\+Young\+Laplace\+Contact\+Angle\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Young\+Laplace\+Contact\+Angle\+Element().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{young__laplace__contact__angle__elements_8h}{young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{young__laplace__contact__angle__elements_8cc}{young\+\_\+laplace\+\_\+contact\+\_\+angle\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,1055 @@
+\hypertarget{classoomph_1_1TTaylorHoodElement}{}\doxysection{oomph\+::T\+Taylor\+Hood\+Element$<$ D\+IM $>$ Class Template Reference}
+\label{classoomph_1_1TTaylorHoodElement}\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+
+
+{\ttfamily \#include $<$Tnavier\+\_\+stokes\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::T\+Taylor\+Hood\+Element$<$ D\+IM $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.393035cm]{classoomph_1_1TTaylorHoodElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a0b7cf5da6700fe2566cdf69ea5af3506}{T\+Taylor\+Hood\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, no internal data points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a2fb2e282044fd3f85a78b1b916335612}{T\+Taylor\+Hood\+Element}} (const \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$ \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+virtual unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a43c139cf8d078cb943024d2c0673a02b}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a78814850aa0ff675479394d0dda7d1e8}{pshape\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+\begin{DoxyCompactList}\small\item\em Test whether the pressure dof p\+\_\+dof hanging or not? \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a73ffecb519bf03336ea6cfe2eb7567df}{pshape\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+\begin{DoxyCompactList}\small\item\em Pressure shape and test functions at local coordinte s. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a051ebd14ec8a7327e6dd76986eb007a0}{p\+\_\+index\+\_\+nst}} ()
+\begin{DoxyCompactList}\small\item\em Which nodal value represents the pressure? \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_adb29767b15234d632c11991a4f9a3911}{p\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+\begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_aabf332af5cb1c937251466fbb1cb7274}{p\+\_\+nst}} (const unsigned \&n\+\_\+p) const
+\begin{DoxyCompactList}\small\item\em Access function for the pressure values at local pressure node n\+\_\+p (const version) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_aa04b4b4ec9d1e04f4d6b6bb00c8fa629}{p\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&n\+\_\+p) const
+\begin{DoxyCompactList}\small\item\em Access function for the pressure values at local pressure node n\+\_\+p (const version) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_abbf584f29e53f15d5b0b263882138eac}{p\+\_\+nodal\+\_\+index\+\_\+nst}} () const
+\begin{DoxyCompactList}\small\item\em Set the value at which the pressure is stored in the nodes. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_ae8b8462176202ddc647cd59c731d9eb9}{npres\+\_\+nst}} () const
+\begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_af20b4527dcb0206523f22d0dd4825727}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a3ed1ee43804db6acde4aa996a0e878c0}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_adfc82bce12e96bb4e93e855dd16ac195}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_ab1d985e874073ad6900655563dbfacab}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_ac811dc5fb7c1dcad508cf2e4759bef32}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a42a3843e4b3ee8e02c6f992b4c0284a8}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_af3f6c0194dd358936c610fc81e7ff215}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_ab7aa0a74ee8fd566b95d3681f2240c62}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a132c8f850554a160cdc8d2afecb26b3a}{nrecovery\+\_\+order}} ()
+\begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a88de8397e5afde8e3d5bb2639d1b91ff}{nvertex\+\_\+node}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a3275ab39f68ac0db35dc31bce6b0bdf5}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a17f2b01ed0325674c23b272ce217e66a}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
+\begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a6442b4be0666587043f9a837c0054519}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain rate tensor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_ab4b5b18fb755a690e296b2ed00b32647}{ndof\+\_\+types}} () const
+\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_ab575a23e0341900bcd8b02732319a45d}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a3430db94f0e2856fb01f144b270327fc}{npres\+\_\+nst}} () const
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a2accbb99c17131435d1bd22be57a58cc}{npres\+\_\+nst}} () const
+\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_aed6e6b0772239166fa78a6711f6687d4}{pshape\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a1b652199291c5639b3b9d67687d879c7}{pshape\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_afada2580f5b4f0f94a91c383fe41ac5b}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a2e400e85a0fa2da44846f2a9d46c7066}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a4380043c9e57717edcd47202a1b87571}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
+\begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping (J). Also compute derivatives of dpsidx, dtestdx and J w.\+r.\+t. nodal coordinates. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a85a25696971d271d8e2fd407b7b593d7}{dpshape\+\_\+and\+\_\+dptest\+\_\+eulerian\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&ppsi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dppsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&ptest, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dptestdx) const
+\begin{DoxyCompactList}\small\item\em Compute the pressure shape and test functions and derivatives ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a3c82a2ad750904e97a90e8e0fbe8e3c8}{unpin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs}} ()
+\begin{DoxyCompactList}\small\item\em Unpin all pressure dofs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a07845585c278b8bfd1a919e0cfe9e8ef}{pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs}} ()
+\begin{DoxyCompactList}\small\item\em Pin all nodal pressure dofs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a3472c28aa1ce10f4a2cb754b78681b3f}{unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs}} ()
+\begin{DoxyCompactList}\small\item\em Unpin the proper nodal pressure dofs. \end{DoxyCompactList}\item 
+const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a2eee3481f3234d0050775e810a61d3dc}{Pconv}} \mbox{[}3\mbox{]}
+\item 
+const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a498fce7ef055f6e94b4e24035958d40d}{Pconv}} \mbox{[}4\mbox{]}
+\item 
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a767919abe529efc836b7211f8975caf5}{dpshape\+\_\+and\+\_\+dptest\+\_\+eulerian\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&ppsi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dppsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&ptest, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dptestdx) const
+\item 
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a18b4311a048e20d6fa8664a656f2f18c}{dpshape\+\_\+and\+\_\+dptest\+\_\+eulerian\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&ppsi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dppsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&ptest, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dptestdx) const
+\item 
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_abb6fc15e7d11a66b94a94de0cc0f5c47}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
+\item 
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a8e2e846dcbcae95d6162de230dadd61a}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_ae03a113811196f41d3d3a4b5fd6d60c9}{Pconv}} \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em Static array of ints to hold conversion from pressure node numbers to actual node numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_abb3be7f2e34c9dbf5c84ee3bb41a1917}{Initial\+\_\+\+Nvalue}} \mbox{[}6\mbox{]}
+\item 
+const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a195a2e28d6608c26a5e6b832755ab7ba}{Initial\+\_\+\+Nvalue}} \mbox{[}10\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a3b1c1055569f41cccf1d9b32a9d20a41}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned D\+IM$>$\newline
+class oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}
+
+Taylor--Hood elements are Navier--Stokes elements with quadratic interpolation for velocities and positions and continous linear pressure interpolation 
+
+Definition at line 721 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a0b7cf5da6700fe2566cdf69ea5af3506}\label{classoomph_1_1TTaylorHoodElement_a0b7cf5da6700fe2566cdf69ea5af3506}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!TTaylorHoodElement@{TTaylorHoodElement}}
+\index{TTaylorHoodElement@{TTaylorHoodElement}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{TTaylorHoodElement()}{TTaylorHoodElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{T\+Taylor\+Hood\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, no internal data points. 
+
+
+
+Definition at line 789 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a2fb2e282044fd3f85a78b1b916335612}\label{classoomph_1_1TTaylorHoodElement_a2fb2e282044fd3f85a78b1b916335612}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!TTaylorHoodElement@{TTaylorHoodElement}}
+\index{TTaylorHoodElement@{TTaylorHoodElement}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{TTaylorHoodElement()}{TTaylorHoodElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{T\+Taylor\+Hood\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 793 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a3ed1ee43804db6acde4aa996a0e878c0}\label{classoomph_1_1TTaylorHoodElement_a3ed1ee43804db6acde4aa996a0e878c0}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!build\_fp\_press\_adv\_diff\_robin\_bc\_element@{build\_fp\_press\_adv\_diff\_robin\_bc\_element}}
+\index{build\_fp\_press\_adv\_diff\_robin\_bc\_element@{build\_fp\_press\_adv\_diff\_robin\_bc\_element}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{build\_fp\_press\_adv\_diff\_robin\_bc\_element()}{build\_fp\_press\_adv\_diff\_robin\_bc\_element()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element (\begin{DoxyParamCaption}\item[{const unsigned \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a16bfab3df70ad2204217590c0e3b7de1}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 859 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a85a25696971d271d8e2fd407b7b593d7}\label{classoomph_1_1TTaylorHoodElement_a85a25696971d271d8e2fd407b7b593d7}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}}
+\index{dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dpshape\_and\_dptest\_eulerian\_nst()}{dpshape\_and\_dptest\_eulerian\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+virtual double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::dpshape\+\_\+and\+\_\+dptest\+\_\+eulerian\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{ppsi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dppsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{ptest,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dptestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Compute the pressure shape and test functions and derivatives ~\newline
+ 
+
+w.\+r.\+t. global coords at local coordinate s. Return Jacobian of mapping between local and global coordinates. 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2f3024a4d370ec45ddffacb236bc2bb2}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a767919abe529efc836b7211f8975caf5}\label{classoomph_1_1TTaylorHoodElement_a767919abe529efc836b7211f8975caf5}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}}
+\index{dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dpshape\_and\_dptest\_eulerian\_nst()}{dpshape\_and\_dptest\_eulerian\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 2 $>$\+::dpshape\+\_\+and\+\_\+dptest\+\_\+eulerian\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{ppsi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dppsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{ptest,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dptestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+2D \+: Pressure shape and test functions and derivs w.\+r.\+t. to Eulerian coords. Return Jacobian of mapping between local and global coordinates. 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2f3024a4d370ec45ddffacb236bc2bb2}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1095 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a18b4311a048e20d6fa8664a656f2f18c}\label{classoomph_1_1TTaylorHoodElement_a18b4311a048e20d6fa8664a656f2f18c}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}}
+\index{dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dpshape\_and\_dptest\_eulerian\_nst()}{dpshape\_and\_dptest\_eulerian\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 3 $>$\+::dpshape\+\_\+and\+\_\+dptest\+\_\+eulerian\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{ppsi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dppsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{ptest,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dptestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+3D \+: Pressure shape and test functions and derivs w.\+r.\+t. to Eulerian coords. Return Jacobian of mapping between local and global coordinates. 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2f3024a4d370ec45ddffacb236bc2bb2}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1148 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a4380043c9e57717edcd47202a1b87571}\label{classoomph_1_1TTaylorHoodElement_a4380043c9e57717edcd47202a1b87571}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
+\index{dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dpsidx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dtestdx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djacobian\+\_\+dX }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping (J). Also compute derivatives of dpsidx, dtestdx and J w.\+r.\+t. nodal coordinates. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_afbc63afd804f5143c74b0ca1be76ef82}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_abb6fc15e7d11a66b94a94de0cc0f5c47}\label{classoomph_1_1TTaylorHoodElement_abb6fc15e7d11a66b94a94de0cc0f5c47}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
+\index{dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 2 $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dpsidx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dtestdx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djacobian\+\_\+dX }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+2D \+: Define the shape functions (psi) and test functions (test) and their derivatives w.\+r.\+t. global coordinates (dpsidx and dtestdx) and return Jacobian of mapping (J). Additionally compute the derivatives of dpsidx, dtestdx and J w.\+r.\+t. nodal coordinates.
+
+Galerkin\+: Test functions = shape functions 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_afbc63afd804f5143c74b0ca1be76ef82}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1215 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a8e2e846dcbcae95d6162de230dadd61a}\label{classoomph_1_1TTaylorHoodElement_a8e2e846dcbcae95d6162de230dadd61a}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
+\index{dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 3 $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dpsidx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dtestdx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djacobian\+\_\+dX }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+3D \+: Define the shape functions (psi) and test functions (test) and their derivatives w.\+r.\+t. global coordinates (dpsidx and dtestdx) and return Jacobian of mapping (J). Additionally compute the derivatives of dpsidx, dtestdx and J w.\+r.\+t. nodal coordinates.
+
+Galerkin\+: Test functions = shape functions 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_afbc63afd804f5143c74b0ca1be76ef82}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1263 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a2e400e85a0fa2da44846f2a9d46c7066}\label{classoomph_1_1TTaylorHoodElement_a2e400e85a0fa2da44846f2a9d46c7066}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
+\index{dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. 
+
+Derivatives of the shape functions and test functions w.\+r.\+t to global (Eulerian) coordinates. Return Jacobian of mapping between local and global coordinates. 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a46f9c15f162160fab6419f60ef619916}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1076 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_afada2580f5b4f0f94a91c383fe41ac5b}\label{classoomph_1_1TTaylorHoodElement_afada2580f5b4f0f94a91c383fe41ac5b}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_nst@{dshape\_and\_dtest\_eulerian\_nst}}
+\index{dshape\_and\_dtest\_eulerian\_nst@{dshape\_and\_dtest\_eulerian\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_nst()}{dshape\_and\_dtest\_eulerian\_nst()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. 
+
+2D \+: Derivatives of the shape functions and test functions w.\+r.\+t to global (Eulerian) coordinates. Return Jacobian of mapping between local and global coordinates. 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aeea4a1a3035ef93deaa68cc869e67dd8}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1054 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_af20b4527dcb0206523f22d0dd4825727}\label{classoomph_1_1TTaylorHoodElement_af20b4527dcb0206523f22d0dd4825727}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p\+\_\+dof,  }\item[{const double \&}]{p\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aa33a3dd5c1cdba0a044e40ad290e487c}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 849 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_ab575a23e0341900bcd8b02732319a45d}\label{classoomph_1_1TTaylorHoodElement_ab575a23e0341900bcd8b02732319a45d}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
+\index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 979 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), and oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::required\+\_\+nvalue().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a6442b4be0666587043f9a837c0054519}\label{classoomph_1_1TTaylorHoodElement_a6442b4be0666587043f9a837c0054519}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
+\index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain rate tensor. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 925 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, and oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::strain\+\_\+rate().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_adfc82bce12e96bb4e93e855dd16ac195}\label{classoomph_1_1TTaylorHoodElement_adfc82bce12e96bb4e93e855dd16ac195}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!identify\_load\_data@{identify\_load\_data}}
+\index{identify\_load\_data@{identify\_load\_data}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. 
+
+
+\begin{DoxyItemize}
+\item the pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and
+\item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
+\end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. ~\newline
+
+
+Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
+\begin{DoxyItemize}
+\item the pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and
+\item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
+\end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
+
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
+
+
+
+Definition at line 211 of file Tnavier\+\_\+stokes\+\_\+elements.\+cc.
+
+
+
+References i, and n.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_ab1d985e874073ad6900655563dbfacab}\label{classoomph_1_1TTaylorHoodElement_ab1d985e874073ad6900655563dbfacab}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!identify\_pressure\_data@{identify\_pressure\_data}}
+\index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. 
+
+
+\begin{DoxyItemize}
+\item the pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and
+\item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
+\end{DoxyItemize}for all pressure values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function.
+
+Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing
+\begin{DoxyItemize}
+\item the pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and
+\item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
+\end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
+
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{oomph\+::\+F\+S\+I\+Fluid\+Element}}.
+
+
+
+Definition at line 240 of file Tnavier\+\_\+stokes\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a195a2e28d6608c26a5e6b832755ab7ba}\label{classoomph_1_1TTaylorHoodElement_a195a2e28d6608c26a5e6b832755ab7ba}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
+\index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 3 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 137 of file Tnavier\+\_\+stokes\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_abb3be7f2e34c9dbf5c84ee3bb41a1917}\label{classoomph_1_1TTaylorHoodElement_abb3be7f2e34c9dbf5c84ee3bb41a1917}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
+\index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 2 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 128 of file Tnavier\+\_\+stokes\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_ab4b5b18fb755a690e296b2ed00b32647}\label{classoomph_1_1TTaylorHoodElement_ab4b5b18fb755a690e296b2ed00b32647}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!ndof\_types@{ndof\_types}}
+\index{ndof\_types@{ndof\_types}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870597b35dcf1c780710b9a56}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 968 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_ae8b8462176202ddc647cd59c731d9eb9}\label{classoomph_1_1TTaylorHoodElement_ae8b8462176202ddc647cd59c731d9eb9}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
+\index{npres\_nst@{npres\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{npres\_nst()}{npres\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::npres\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return number of pressure values. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a4a17a76873bf3131d1e0acc74fb1c2d8}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a3430db94f0e2856fb01f144b270327fc}\label{classoomph_1_1TTaylorHoodElement_a3430db94f0e2856fb01f144b270327fc}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
+\index{npres\_nst@{npres\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{npres\_nst()}{npres\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 2 $>$\+::npres\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+2D \+: Number of pressure values 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a4a17a76873bf3131d1e0acc74fb1c2d8}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1030 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a2accbb99c17131435d1bd22be57a58cc}\label{classoomph_1_1TTaylorHoodElement_a2accbb99c17131435d1bd22be57a58cc}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
+\index{npres\_nst@{npres\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{npres\_nst()}{npres\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 3 $>$\+::npres\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+3D \+: Number of pressure values 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a4a17a76873bf3131d1e0acc74fb1c2d8}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1040 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a132c8f850554a160cdc8d2afecb26b3a}\label{classoomph_1_1TTaylorHoodElement_a132c8f850554a160cdc8d2afecb26b3a}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!nrecovery\_order@{nrecovery\_order}}
+\index{nrecovery\_order@{nrecovery\_order}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835bd3e0f6b2f4f7a9a4044798}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 905 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a17f2b01ed0325674c23b272ce217e66a}\label{classoomph_1_1TTaylorHoodElement_a17f2b01ed0325674c23b272ce217e66a}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
+\index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c5728902e13da31be19c390fc28e3}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 917 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a88de8397e5afde8e3d5bb2639d1b91ff}\label{classoomph_1_1TTaylorHoodElement_a88de8397e5afde8e3d5bb2639d1b91ff}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!nvertex\_node@{nvertex\_node}}
+\index{nvertex\_node@{nvertex\_node}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertex nodes in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e77ef4ff35f15fdf7913b4077}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 908 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_af3f6c0194dd358936c610fc81e7ff215}\label{classoomph_1_1TTaylorHoodElement_af3f6c0194dd358936c610fc81e7ff215}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_acb921a406e5825d9b17ed41c40317e4a}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 897 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_ab7aa0a74ee8fd566b95d3681f2240c62}\label{classoomph_1_1TTaylorHoodElement_ab7aa0a74ee8fd566b95d3681f2240c62}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_af09ce1e73bca9a9ac93cb2e34de24f6b}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 900 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_ac811dc5fb7c1dcad508cf2e4759bef32}\label{classoomph_1_1TTaylorHoodElement_ac811dc5fb7c1dcad508cf2e4759bef32}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_ae2c8742419aae8961eb34dad989c69b9}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 889 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a42a3843e4b3ee8e02c6f992b4c0284a8}\label{classoomph_1_1TTaylorHoodElement_a42a3843e4b3ee8e02c6f992b4c0284a8}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2bc96a264dad4175d1aca7946db5f303}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 893 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a051ebd14ec8a7327e6dd76986eb007a0}\label{classoomph_1_1TTaylorHoodElement_a051ebd14ec8a7327e6dd76986eb007a0}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!p\_index\_nst@{p\_index\_nst}}
+\index{p\_index\_nst@{p\_index\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{p\_index\_nst()}{p\_index\_nst()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::p\+\_\+index\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Which nodal value represents the pressure? 
+
+
+
+Definition at line 822 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_adb29767b15234d632c11991a4f9a3911}\label{classoomph_1_1TTaylorHoodElement_adb29767b15234d632c11991a4f9a3911}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!p\_local\_eqn@{p\_local\_eqn}}
+\index{p\_local\_eqn@{p\_local\_eqn}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+int \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to n\+\_\+p-\/th pressure node. 
+
+Return the local equation numbers for the pressure values. 
+
+Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_a4e84f2f4260a0e65201cbb19fd63b398}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base}}.
+
+
+
+Definition at line 829 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References n, and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_abbf584f29e53f15d5b0b263882138eac}\label{classoomph_1_1TTaylorHoodElement_abbf584f29e53f15d5b0b263882138eac}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!p\_nodal\_index\_nst@{p\_nodal\_index\_nst}}
+\index{p\_nodal\_index\_nst@{p\_nodal\_index\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{p\_nodal\_index\_nst()}{p\_nodal\_index\_nst()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+int \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Set the value at which the pressure is stored in the nodes. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a3694d3e2f09259cfda71547259f031ed}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 843 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_aabf332af5cb1c937251466fbb1cb7274}\label{classoomph_1_1TTaylorHoodElement_aabf332af5cb1c937251466fbb1cb7274}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!p\_nst@{p\_nst}}
+\index{p\_nst@{p\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{p\_nst()}{p\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::p\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Access function for the pressure values at local pressure node n\+\_\+p (const version) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_ae00a22f99df3630b3ab751a4453a7fd8}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 834 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_aa04b4b4ec9d1e04f4d6b6bb00c8fa629}\label{classoomph_1_1TTaylorHoodElement_aa04b4b4ec9d1e04f4d6b6bb00c8fa629}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!p\_nst@{p\_nst}}
+\index{p\_nst@{p\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{p\_nst()}{p\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::p\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Access function for the pressure values at local pressure node n\+\_\+p (const version) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a0a39f638a61fd9a6c999c16e94deb31b}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 839 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::\+Pconv.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a2eee3481f3234d0050775e810a61d3dc}\label{classoomph_1_1TTaylorHoodElement_a2eee3481f3234d0050775e810a61d3dc}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!Pconv@{Pconv}}
+\index{Pconv@{Pconv}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pconv()}{Pconv()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 2 $>$\+::Pconv\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 132 of file Tnavier\+\_\+stokes\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a498fce7ef055f6e94b4e24035958d40d}\label{classoomph_1_1TTaylorHoodElement_a498fce7ef055f6e94b4e24035958d40d}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!Pconv@{Pconv}}
+\index{Pconv@{Pconv}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pconv()}{Pconv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 3 $>$\+::Pconv\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 141 of file Tnavier\+\_\+stokes\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a07845585c278b8bfd1a919e0cfe9e8ef}\label{classoomph_1_1TTaylorHoodElement_a07845585c278b8bfd1a919e0cfe9e8ef}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!pin\_all\_nodal\_pressure\_dofs@{pin\_all\_nodal\_pressure\_dofs}}
+\index{pin\_all\_nodal\_pressure\_dofs@{pin\_all\_nodal\_pressure\_dofs}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{pin\_all\_nodal\_pressure\_dofs()}{pin\_all\_nodal\_pressure\_dofs()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pin all nodal pressure dofs. 
+
+Pin all nodal pressure dofs, incl the mid-\/face/side ones where they have been allocated (e.\+g. in the refineable version of this element). 
+
+Definition at line 170 of file Tnavier\+\_\+stokes\+\_\+elements.\+cc.
+
+
+
+References n.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a78814850aa0ff675479394d0dda7d1e8}\label{classoomph_1_1TTaylorHoodElement_a78814850aa0ff675479394d0dda7d1e8}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
+\index{pshape\_nst@{pshape\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{pshape\_nst()}{pshape\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::pshape\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Test whether the pressure dof p\+\_\+dof hanging or not? 
+
+Pressure shape functions at local coordinate s 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a487030303b71da299aed3d4639a022ab}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_aed6e6b0772239166fa78a6711f6687d4}\label{classoomph_1_1TTaylorHoodElement_aed6e6b0772239166fa78a6711f6687d4}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
+\index{pshape\_nst@{pshape\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{pshape\_nst()}{pshape\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 2 $>$\+::pshape\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+2D \+: Pressure shape functions 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a487030303b71da299aed3d4639a022ab}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1306 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a1b652199291c5639b3b9d67687d879c7}\label{classoomph_1_1TTaylorHoodElement_a1b652199291c5639b3b9d67687d879c7}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
+\index{pshape\_nst@{pshape\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{pshape\_nst()}{pshape\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ 3 $>$\+::pshape\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+3D \+: Pressure shape functions 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a487030303b71da299aed3d4639a022ab}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1319 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a73ffecb519bf03336ea6cfe2eb7567df}\label{classoomph_1_1TTaylorHoodElement_a73ffecb519bf03336ea6cfe2eb7567df}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
+\index{pshape\_nst@{pshape\_nst}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{pshape\_nst()}{pshape\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::pshape\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pressure shape and test functions at local coordinte s. 
+
+Pressure shape and test functions. 
+
+Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a55f96a5c9f985476aeb145f683d63001}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1333 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a43c139cf8d078cb943024d2c0673a02b}\label{classoomph_1_1TTaylorHoodElement_a43c139cf8d078cb943024d2c0673a02b}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
+\index{required\_nvalue@{required\_nvalue}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+virtual unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Number of values (pinned or dofs) required at node n. Can be overwritten for hanging node version 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 806 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::\+Initial\+\_\+\+Nvalue, and n.
+
+
+
+Referenced by oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a3c82a2ad750904e97a90e8e0fbe8e3c8}\label{classoomph_1_1TTaylorHoodElement_a3c82a2ad750904e97a90e8e0fbe8e3c8}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!unpin\_all\_nodal\_pressure\_dofs@{unpin\_all\_nodal\_pressure\_dofs}}
+\index{unpin\_all\_nodal\_pressure\_dofs@{unpin\_all\_nodal\_pressure\_dofs}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{unpin\_all\_nodal\_pressure\_dofs()}{unpin\_all\_nodal\_pressure\_dofs()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::unpin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Unpin all pressure dofs. 
+
+Unpin all pressure dofs, incl the mid-\/face/side ones where they have been allocated (e.\+g. in the refineable version of this element). 
+
+Definition at line 150 of file Tnavier\+\_\+stokes\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a3472c28aa1ce10f4a2cb754b78681b3f}\label{classoomph_1_1TTaylorHoodElement_a3472c28aa1ce10f4a2cb754b78681b3f}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!unpin\_proper\_nodal\_pressure\_dofs@{unpin\_proper\_nodal\_pressure\_dofs}}
+\index{unpin\_proper\_nodal\_pressure\_dofs@{unpin\_proper\_nodal\_pressure\_dofs}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{unpin\_proper\_nodal\_pressure\_dofs()}{unpin\_proper\_nodal\_pressure\_dofs()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::unpin\+\_\+proper\+\_\+nodal\+\_\+pressure\+\_\+dofs\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Unpin the proper nodal pressure dofs. 
+
+Unpin the proper nodal pressure dofs which are not hanging. 
+
+Definition at line 187 of file Tnavier\+\_\+stokes\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Node\+::is\+\_\+hanging(), and oomph\+::\+Data\+::unpin().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a3275ab39f68ac0db35dc31bce6b0bdf5}\label{classoomph_1_1TTaylorHoodElement_a3275ab39f68ac0db35dc31bce6b0bdf5}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
+\index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to the j-\/th vertex node in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 912 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_a3b1c1055569f41cccf1d9b32a9d20a41}\label{classoomph_1_1TTaylorHoodElement_a3b1c1055569f41cccf1d9b32a9d20a41}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
+\index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::Initial\+\_\+\+Nvalue\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Static array of ints to hold number of variables at node. 
+
+
+
+Definition at line 729 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::required\+\_\+nvalue().
+
+\mbox{\Hypertarget{classoomph_1_1TTaylorHoodElement_ae03a113811196f41d3d3a4b5fd6d60c9}\label{classoomph_1_1TTaylorHoodElement_ae03a113811196f41d3d3a4b5fd6d60c9}} 
+\index{oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}!Pconv@{Pconv}}
+\index{Pconv@{Pconv}!oomph::TTaylorHoodElement$<$ DIM $>$@{oomph::TTaylorHoodElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pconv}{Pconv}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+const unsigned \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement}{oomph\+::\+T\+Taylor\+Hood\+Element}}$<$ D\+IM $>$\+::Pconv\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Static array of ints to hold conversion from pressure node numbers to actual node numbers. 
+
+
+
+Definition at line 735 of file Tnavier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$\+::p\+\_\+nst().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Tnavier__stokes__elements_8h}{Tnavier\+\_\+stokes\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{Tnavier__stokes__elements_8cc}{Tnavier\+\_\+stokes\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

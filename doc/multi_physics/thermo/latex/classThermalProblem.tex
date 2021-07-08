@@ -1,0 +1,182 @@
+\hypertarget{classThermalProblem}{}\doxysection{Thermal\+Problem$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classThermalProblem}\index{ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}}
+Inheritance diagram for Thermal\+Problem$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classThermalProblem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classThermalProblem_a12ad5d383929b1ef4ed29503c5a271b0}{Thermal\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classThermalProblem_af563f946765bdae233c202738bf7e725}{$\sim$\+Thermal\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classThermalProblem_ab2d2efaf155756144c9796b76af3ee8d}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classThermalProblem_ad38edfd46e049fdbc5b00bafb661f8e2}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classThermalProblem_a40bda0a4d45851f7e45dc461107d7c0f}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+:(empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classThermalProblem_aa085f248542811385fefe623a9193fd8}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+Elastic\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classThermalProblem_ac1ebc681e22c65c384aa63a7e9da6129}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Overloaded version of the problem\textquotesingle{}s access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Doc\+Info \mbox{\hyperlink{classThermalProblem_ae03e6df96a793f3735d1674e4e8a6cb3}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc\+Info object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class Thermal\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+2D Thermoelasticity problem on rectangular domain, discretised with refineable elements. The specific type of element is specified via the template parameter. 
+
+Definition at line 250 of file thermo.\+cc.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classThermalProblem_a12ad5d383929b1ef4ed29503c5a271b0}\label{classThermalProblem_a12ad5d383929b1ef4ed29503c5a271b0}} 
+\index{ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}!ThermalProblem@{ThermalProblem}}
+\index{ThermalProblem@{ThermalProblem}!ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ThermalProblem()}{ThermalProblem()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}}}
+
+
+
+Constructor. 
+
+Constructor for Convection problem. 
+
+Definition at line 293 of file thermo.\+cc.
+
+
+
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt.
+
+\mbox{\Hypertarget{classThermalProblem_af563f946765bdae233c202738bf7e725}\label{classThermalProblem_af563f946765bdae233c202738bf7e725}} 
+\index{ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}!````~ThermalProblem@{$\sim$ThermalProblem}}
+\index{````~ThermalProblem@{$\sim$ThermalProblem}!ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$ThermalProblem()}{~ThermalProblem()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. Empty. 
+
+
+
+Definition at line 259 of file thermo.\+cc.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classThermalProblem_ad38edfd46e049fdbc5b00bafb661f8e2}\label{classThermalProblem_ad38edfd46e049fdbc5b00bafb661f8e2}} 
+\index{ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem after solve (empty) 
+
+
+
+Definition at line 265 of file thermo.\+cc.
+
+\mbox{\Hypertarget{classThermalProblem_a40bda0a4d45851f7e45dc461107d7c0f}\label{classThermalProblem_a40bda0a4d45851f7e45dc461107d7c0f}} 
+\index{ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions before adapt\+:(empty) 
+
+
+
+Definition at line 268 of file thermo.\+cc.
+
+\mbox{\Hypertarget{classThermalProblem_ab2d2efaf155756144c9796b76af3ee8d}\label{classThermalProblem_ab2d2efaf155756144c9796b76af3ee8d}} 
+\index{ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve (empty) 
+
+
+
+Definition at line 262 of file thermo.\+cc.
+
+\mbox{\Hypertarget{classThermalProblem_aa085f248542811385fefe623a9193fd8}\label{classThermalProblem_aa085f248542811385fefe623a9193fd8}} 
+\index{ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line 382 of file thermo.\+cc.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{classThermalProblem_ac1ebc681e22c65c384aa63a7e9da6129}\label{classThermalProblem_ac1ebc681e22c65c384aa63a7e9da6129}} 
+\index{ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Elastic\+Rectangular\+Quad\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overloaded version of the problem\textquotesingle{}s access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. 
+
+
+
+Definition at line 276 of file thermo.\+cc.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classThermalProblem_ae03e6df96a793f3735d1674e4e8a6cb3}\label{classThermalProblem_ae03e6df96a793f3735d1674e4e8a6cb3}} 
+\index{ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!ThermalProblem$<$ ELEMENT $>$@{ThermalProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Doc\+Info \mbox{\hyperlink{classThermalProblem}{Thermal\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc\+Info object. 
+
+
+
+Definition at line 285 of file thermo.\+cc.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{thermo_8cc}{thermo.\+cc}}\end{DoxyCompactItemize}

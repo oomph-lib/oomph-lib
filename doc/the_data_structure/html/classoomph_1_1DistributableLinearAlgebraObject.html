@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::DistributableLinearAlgebraObject Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1DistributableLinearAlgebraObject-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::DistributableLinearAlgebraObject Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Base class for any linear algebra object that is distributable. Just contains storage for the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> object and access functions.  
+ <a href="classoomph_1_1DistributableLinearAlgebraObject.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::DistributableLinearAlgebraObject:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1DistributableLinearAlgebraObject.png" usemap="#oomph::DistributableLinearAlgebraObject_map" alt=""/>
+  <map id="oomph::DistributableLinearAlgebraObject_map" name="oomph::DistributableLinearAlgebraObject_map">
+<area href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object." alt="oomph::CRDoubleMatrix" shape="rect" coords="0,56,411,80"/>
+<area href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications...." alt="oomph::DoubleMultiVector" shape="rect" coords="421,56,832,80"/>
+<area href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications...." alt="oomph::DoubleVector" shape="rect" coords="842,56,1253,80"/>
+<area href="classoomph_1_1EigenSolver.html" alt="oomph::EigenSolver" shape="rect" coords="1263,56,1674,80"/>
+<area href="classoomph_1_1LinearSolver.html" alt="oomph::LinearSolver" shape="rect" coords="2105,56,2516,80"/>
+<area href="classoomph_1_1MatrixVectorProduct.html" title="Matrix vector product helper class - primarily a wrapper to Trilinos&#39;s Epetra matrix vector product m..." alt="oomph::MatrixVectorProduct" shape="rect" coords="2526,56,2937,80"/>
+<area href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th..." alt="oomph::Preconditioner" shape="rect" coords="2947,56,3358,80"/>
+<area href="classoomph_1_1DoubleVectorWithHaloEntries.html" alt="oomph::DoubleVectorWithHaloEntries" shape="rect" coords="842,112,1253,136"/>
+<area href="classoomph_1_1ANASAZI.html" title="Class for the Anasazi eigensolver." alt="oomph::ANASAZI" shape="rect" coords="1684,112,2095,136"/>
+<area href="classoomph_1_1ARPACK.html" title="Class for the ARPACK eigensolver." alt="oomph::ARPACK" shape="rect" coords="1684,168,2095,192"/>
+<area href="classoomph_1_1LAPACK__QZ.html" title="Class for the LAPACK eigensolver." alt="oomph::LAPACK_QZ" shape="rect" coords="1684,224,2095,248"/>
+<area href="classoomph_1_1AugmentedBlockFoldLinearSolver.html" alt="oomph::AugmentedBlockFoldLinearSolver" shape="rect" coords="2526,112,2937,136"/>
+<area href="classoomph_1_1AugmentedBlockPitchForkLinearSolver.html" alt="oomph::AugmentedBlockPitchForkLinearSolver" shape="rect" coords="2526,168,2937,192"/>
+<area href="classoomph_1_1BlockHopfLinearSolver.html" alt="oomph::BlockHopfLinearSolver" shape="rect" coords="2526,224,2937,248"/>
+<area href="classoomph_1_1BlockPitchForkLinearSolver.html" alt="oomph::BlockPitchForkLinearSolver" shape="rect" coords="2526,280,2937,304"/>
+<area href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il..." alt="oomph::DenseLU" shape="rect" coords="2526,336,2937,360"/>
+<area href="classoomph_1_1HSL__MA42.html" alt="oomph::HSL_MA42" shape="rect" coords="2526,392,2937,416"/>
+<area href="classoomph_1_1HypreSolver.html" alt="oomph::HypreSolver" shape="rect" coords="2526,448,2937,472"/>
+<area href="classoomph_1_1IterativeLinearSolver.html" title="Base class for all linear iterative solvers. This merely defines standard interfaces for linear itera..." alt="oomph::IterativeLinearSolver" shape="rect" coords="2526,504,2937,528"/>
+<area href="classoomph_1_1MumpsSolver.html" title="Wrapper to Mumps solver." alt="oomph::MumpsSolver" shape="rect" coords="2526,560,2937,584"/>
+<area href="classoomph_1_1SuperLUSolver.html" title=". SuperLU Project Solver class. This is a combined wrapper for both SuperLU and SuperLU Dist...." alt="oomph::SuperLUSolver" shape="rect" coords="2526,616,2937,640"/>
+<area href="classoomph_1_1BlockPreconditioner.html" alt="oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;" shape="rect" coords="3368,112,3779,136"/>
+<area href="classoomph_1_1MatrixBasedLumpedPreconditioner.html" alt="oomph::MatrixBasedLumpedPreconditioner&lt; oomph::CRDoubleMatrix &gt;" shape="rect" coords="3368,168,3779,192"/>
+<area href="classoomph_1_1BlockPreconditioner.html" alt="oomph::BlockPreconditioner&lt; MATRIX &gt;" shape="rect" coords="3368,224,3779,248"/>
+<area href="classoomph_1_1HyprePreconditioner.html" alt="oomph::HyprePreconditioner" shape="rect" coords="3368,280,3779,304"/>
+<area href="classoomph_1_1IdentityPreconditioner.html" title="The Identity Preconditioner." alt="oomph::IdentityPreconditioner" shape="rect" coords="3368,336,3779,360"/>
+<area href="classoomph_1_1ILUZeroPreconditioner.html" title="ILU(0) Preconditioner." alt="oomph::ILUZeroPreconditioner&lt; MATRIX &gt;" shape="rect" coords="3368,392,3779,416"/>
+<area href="classoomph_1_1ILUZeroPreconditioner_3_01CCDoubleMatrix_01_4.html" title="ILU(0) Preconditioner for matrices of CCDoubleMatrix Format." alt="oomph::ILUZeroPreconditioner&lt; CCDoubleMatrix &gt;" shape="rect" coords="3368,448,3779,472"/>
+<area href="classoomph_1_1ILUZeroPreconditioner_3_01CRDoubleMatrix_01_4.html" title="ILU(0) Preconditioner for matrices of CRDoubleMatrix Format." alt="oomph::ILUZeroPreconditioner&lt; CRDoubleMatrix &gt;" shape="rect" coords="3368,504,3779,528"/>
+<area href="classoomph_1_1InnerIterationPreconditioner.html" title="A preconditioner for performing inner iteration preconditioner solves. The template argument SOLVER s..." alt="oomph::InnerIterationPreconditioner&lt; SOLVER, PRECONDITIONER &gt;" shape="rect" coords="3368,560,3779,584"/>
+<area href="classoomph_1_1MatrixBasedDiagPreconditioner.html" title="Matrix-based diagonal preconditioner." alt="oomph::MatrixBasedDiagPreconditioner" shape="rect" coords="3368,616,3779,640"/>
+<area href="classoomph_1_1MatrixBasedLumpedPreconditioner.html" title="Matrix-based lumped preconditioner." alt="oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;" shape="rect" coords="3368,672,3779,696"/>
+<area href="classoomph_1_1MGPreconditioner.html" title="An interface to allow scalar MG to be used as a Preconditioner." alt="oomph::MGPreconditioner&lt; DIM &gt;" shape="rect" coords="3368,728,3779,752"/>
+<area href="classoomph_1_1NewMumpsPreconditioner.html" title="An interface to allow Mumps to be used as an (exact) Preconditioner." alt="oomph::NewMumpsPreconditioner" shape="rect" coords="3368,784,3779,808"/>
+<area href="classoomph_1_1SuperLUPreconditioner.html" title="An interface to allow SuperLU to be used as an (exact) Preconditioner." alt="oomph::SuperLUPreconditioner" shape="rect" coords="3368,840,3779,864"/>
+<area href="classoomph_1_1TrilinosPreconditionerBase.html" title="Base class for Trilinos preconditioners as oomph-lib preconditioner." alt="oomph::TrilinosPreconditionerBase" shape="rect" coords="3368,896,3779,920"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac9492d59cff9d9b0098712ae72989cd3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:ac9492d59cff9d9b0098712ae72989cd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor - create a distribution.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">More...</a><br /></td></tr>
+<tr class="separator:ac9492d59cff9d9b0098712ae72989cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e24b4ce887a2e2da4dc60808f53f91"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e24b4ce887a2e2da4dc60808f53f91">DistributableLinearAlgebraObject</a> (const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;matrix)</td></tr>
+<tr class="memdesc:a21e24b4ce887a2e2da4dc60808f53f91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e24b4ce887a2e2da4dc60808f53f91">More...</a><br /></td></tr>
+<tr class="separator:a21e24b4ce887a2e2da4dc60808f53f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d60098e4938b78dd3e2724551a4c7c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a0d60098e4938b78dd3e2724551a4c7c9">operator=</a> (const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;)</td></tr>
+<tr class="memdesc:a0d60098e4938b78dd3e2724551a4c7c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a0d60098e4938b78dd3e2724551a4c7c9">More...</a><br /></td></tr>
+<tr class="separator:a0d60098e4938b78dd3e2724551a4c7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4038de53b5737dc625411e7848d21dad"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">~DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:a4038de53b5737dc625411e7848d21dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">More...</a><br /></td></tr>
+<tr class="separator:a4038de53b5737dc625411e7848d21dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a603105384d60c9a3710378af39f538b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a> () const</td></tr>
+<tr class="memdesc:a603105384d60c9a3710378af39f538b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a>  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">More...</a><br /></td></tr>
+<tr class="separator:a603105384d60c9a3710378af39f538b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7569556f14fd68b28508920e89bd5eee"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a> () const</td></tr>
+<tr class="memdesc:a7569556f14fd68b28508920e89bd5eee"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the number of global rows.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">More...</a><br /></td></tr>
+<tr class="separator:a7569556f14fd68b28508920e89bd5eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd7e1d242c69a28da85a804a7717fce"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> () const</td></tr>
+<tr class="memdesc:a9bd7e1d242c69a28da85a804a7717fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">More...</a><br /></td></tr>
+<tr class="separator:a9bd7e1d242c69a28da85a804a7717fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e966b025edec79067b41d7f1f25220"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">nrow_local</a> (const unsigned &amp;p) const</td></tr>
+<tr class="memdesc:a21e966b025edec79067b41d7f1f25220"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">More...</a><br /></td></tr>
+<tr class="separator:a21e966b025edec79067b41d7f1f25220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00a3919b8634c698749f14a4d92947d"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> () const</td></tr>
+<tr class="memdesc:ab00a3919b8634c698749f14a4d92947d"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">More...</a><br /></td></tr>
+<tr class="separator:ab00a3919b8634c698749f14a4d92947d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4266c1d18d8e102bad3f4aec26c9b7cf"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">first_row</a> (const unsigned &amp;p) const</td></tr>
+<tr class="memdesc:a4266c1d18d8e102bad3f4aec26c9b7cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">More...</a><br /></td></tr>
+<tr class="separator:a4266c1d18d8e102bad3f4aec26c9b7cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5505731e7e73d7e4251c67c7adec6bf5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a> () const</td></tr>
+<tr class="memdesc:a5505731e7e73d7e4251c67c7adec6bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">distribution is serial or distributed  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">More...</a><br /></td></tr>
+<tr class="separator:a5505731e7e73d7e4251c67c7adec6bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c35baa65e335043f62954c92c090a5a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a8c35baa65e335043f62954c92c090a5a">distribution_built</a> () const</td></tr>
+<tr class="separator:a8c35baa65e335043f62954c92c090a5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5340bac40b9559b0378037b57005203"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const dist_pt)</td></tr>
+<tr class="memdesc:ac5340bac40b9559b0378037b57005203"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">More...</a><br /></td></tr>
+<tr class="separator:ac5340bac40b9559b0378037b57005203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad20ac61a61d907f823da7694b50616"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">build_distribution</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;dist)</td></tr>
+<tr class="memdesc:adad20ac61a61d907f823da7694b50616"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">More...</a><br /></td></tr>
+<tr class="separator:adad20ac61a61d907f823da7694b50616"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a30742aa2ac9abcfa037179f2d28ff43a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">clear_distribution</a> ()</td></tr>
+<tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">More...</a><br /></td></tr>
+<tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a94280ec477823427098dc46b20e29f5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a94280ec477823427098dc46b20e29f5a">Distribution_pt</a></td></tr>
+<tr class="memdesc:a94280ec477823427098dc46b20e29f5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a94280ec477823427098dc46b20e29f5a">More...</a><br /></td></tr>
+<tr class="separator:a94280ec477823427098dc46b20e29f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for any linear algebra object that is distributable. Just contains storage for the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> object and access functions. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00439">439</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac9492d59cff9d9b0098712ae72989cd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9492d59cff9d9b0098712ae72989cd3">&#9670;&nbsp;</a></span>DistributableLinearAlgebraObject() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DistributableLinearAlgebraObject::DistributableLinearAlgebraObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor - create a distribution. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00445">445</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>.</p>
+
+</div>
+</div>
+<a id="a21e24b4ce887a2e2da4dc60808f53f91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21e24b4ce887a2e2da4dc60808f53f91">&#9670;&nbsp;</a></span>DistributableLinearAlgebraObject() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DistributableLinearAlgebraObject::DistributableLinearAlgebraObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00452">452</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="a4038de53b5737dc625411e7848d21dad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4038de53b5737dc625411e7848d21dad">&#9670;&nbsp;</a></span>~DistributableLinearAlgebraObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::DistributableLinearAlgebraObject::~DistributableLinearAlgebraObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00464">464</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="adad20ac61a61d907f823da7694b50616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adad20ac61a61d907f823da7694b50616">&#9670;&nbsp;</a></span>build_distribution() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DistributableLinearAlgebraObject::build_distribution </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>setup the distribution of this distributable linear algebra object </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00527">527</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>.</p>
+
+</div>
+</div>
+<a id="ac5340bac40b9559b0378037b57005203"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5340bac40b9559b0378037b57005203">&#9670;&nbsp;</a></span>build_distribution() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DistributableLinearAlgebraObject::build_distribution </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const&#160;</td>
+          <td class="paramname"><em>dist_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>setup the distribution of this distributable linear algebra object </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00520">520</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__vector_8cc_source.html#l00062">oomph::DoubleVector::build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00317">oomph::DoubleMultiVector::build()</a>, <a class="el" href="matrices_8cc_source.html#l01373">oomph::CRDoubleMatrix::build()</a>, <a class="el" href="matrices_8cc_source.html#l01254">oomph::CRDoubleMatrix::CRDoubleMatrix()</a>, <a class="el" href="mumps__solver_8cc_source.html#l00182">oomph::MumpsSolver::factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="double__vector_8cc_source.html#l00160">oomph::DoubleVector::redistribute()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">oomph::DoubleMultiVector::redistribute()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02376">oomph::AugmentedBlockPitchForkLinearSolver::resolve()</a>, <a class="el" href="double__vector_8h_source.html#l00168">oomph::DoubleVector::set_external_values()</a>, <a class="el" href="SuperLU__preconditioner_8h_source.html#l00073">oomph::SuperLUPreconditioner::setup()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00045">oomph::MatrixBasedDiagPreconditioner::setup()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00043">oomph::MatrixVectorProduct::setup()</a>, <a class="el" href="trilinos__preconditioners_8cc_source.html#l00055">oomph::TrilinosPreconditionerBase::setup()</a>, <a class="el" href="preconditioner_8h_source.html#l00271">oomph::IdentityPreconditioner::setup()</a>, <a class="el" href="mumps__solver_8h_source.html#l00284">oomph::NewMumpsPreconditioner::setup()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00323">oomph::ILUZeroPreconditioner&lt; CCDoubleMatrix &gt;::setup()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00468">oomph::ILUZeroPreconditioner&lt; CRDoubleMatrix &gt;::setup()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00450">oomph::InnerIterationPreconditioner&lt; SOLVER, PRECONDITIONER &gt;::setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01734">oomph::HyprePreconditioner::setup()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00246">oomph::DoubleMultiVector::shallow_build()</a>, <a class="el" href="mumps__solver_8cc_source.html#l00673">oomph::MumpsSolver::solve()</a>, <a class="el" href="frontal__solver_8cc_source.html#l00127">oomph::HSL_MA42::solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00310">oomph::CG&lt; MATRIX &gt;::solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l00410">oomph::DenseLU::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00383">oomph::AugmentedBlockFoldLinearSolver::solve()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00045">oomph::TrilinosAztecOOSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00441">oomph::BiCGStab&lt; MATRIX &gt;::solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l00759">oomph::SuperLUSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l01640">oomph::BlockPitchForkLinearSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00663">oomph::GS&lt; MATRIX &gt;::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02160">oomph::AugmentedBlockPitchForkLinearSolver::solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01456">oomph::HypreSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01386">oomph::GS&lt; CRDoubleMatrix &gt;::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01145">oomph::DampedJacobi&lt; MATRIX &gt;::solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01290">oomph::GMRES&lt; MATRIX &gt;::solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02766">oomph::AugmentedProblemGMRES::solve()</a>, <a class="el" href="complex__smoother_8h_source.html#l01866">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::solve()</a>, <a class="el" href="complex__smoother_8h_source.html#l03362">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::solve()</a>, <a class="el" href="eigen__solver_8cc_source.html#l00063">oomph::ARPACK::solve_eigenproblem()</a>, <a class="el" href="eigen__solver_8cc_source.html#l00458">oomph::LAPACK_QZ::solve_eigenproblem()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>, <a class="el" href="linear__solver_8cc_source.html#l01229">oomph::SuperLUSolver::solve_transpose()</a>, and <a class="el" href="trilinos__solver_8cc_source.html#l00292">oomph::TrilinosAztecOOSolver::solver_setup()</a>.</p>
+
+</div>
+</div>
+<a id="a30742aa2ac9abcfa037179f2d28ff43a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30742aa2ac9abcfa037179f2d28ff43a">&#9670;&nbsp;</a></span>clear_distribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DistributableLinearAlgebraObject::clear_distribution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>clear the distribution of this distributable linear algebra object </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00536">536</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00174">oomph::LinearAlgebraDistribution::clear()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__solver_8cc_source.html#l00103">oomph::DenseLU::clean_up_memory()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">oomph::SuperLUSolver::clean_up_memory()</a>, <a class="el" href="double__vector_8h_source.html#l00146">oomph::DoubleVector::clear()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00381">oomph::DoubleMultiVector::clear()</a>, <a class="el" href="matrices_8cc_source.html#l01673">oomph::CRDoubleMatrix::clear()</a>, and <a class="el" href="block__preconditioner_8h_source.html#l02185">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::clear_block_preconditioner_base()</a>.</p>
+
+</div>
+</div>
+<a id="a5505731e7e73d7e4251c67c7adec6bf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5505731e7e73d7e4251c67c7adec6bf5">&#9670;&nbsp;</a></span>distributed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::DistributableLinearAlgebraObject::distributed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>distribution is serial or distributed </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">506</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00333">oomph::LinearAlgebraDistribution::distributed()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="navier__stokes__preconditioners_8cc_source.html#l00863">oomph::NavierStokesSchurComplementPreconditioner::assemble_inv_press_and_veloc_mass_matrix_diagonal()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00726">oomph::PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()</a>, <a class="el" href="complex__smoother_8h_source.html#l00190">oomph::HelmholtzSmoother::check_validity_of_solve_helper_inputs()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01054">oomph::Smoother::check_validity_of_solve_helper_inputs()</a>, <a class="el" href="double__vector_8cc_source.html#l00989">oomph::DoubleVectorHelpers::concatenate()</a>, <a class="el" href="matrices_8cc_source.html#l04305">oomph::CRDoubleMatrixHelpers::concatenate()</a>, <a class="el" href="double__vector_8cc_source.html#l01823">oomph::DoubleVectorHelpers::concatenate_without_communication()</a>, <a class="el" href="matrices_8cc_source.html#l05160">oomph::CRDoubleMatrixHelpers::concatenate_without_communication()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00188">oomph::TrilinosEpetraHelpers::copy_to_oomphlib_vector()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00280">oomph::TrilinosEpetraHelpers::create_distributed_epetra_matrix()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00482">oomph::TrilinosEpetraHelpers::create_distributed_epetra_matrix_for_aztecoo()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00043">oomph::TrilinosEpetraHelpers::create_distributed_epetra_vector()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00274">oomph::HypreHelpers::create_HYPRE_Matrix()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00181">oomph::HypreHelpers::create_HYPRE_Vector()</a>, <a class="el" href="double__vector_8cc_source.html#l00802">oomph::DoubleVector::dot()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00778">oomph::DoubleMultiVector::dot()</a>, <a class="el" href="matrices_8cc_source.html#l01386">oomph::CRDoubleMatrix::entries_are_sorted()</a>, <a class="el" href="mumps__solver_8cc_source.html#l00182">oomph::MumpsSolver::factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02052">oomph::SuperLUSolver::factorise_serial()</a>, <a class="el" href="matrices_8cc_source.html#l03246">oomph::CRDoubleMatrix::get_matrix_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l02454">oomph::CRDoubleMatrix::global_matrix()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00215">oomph::DoubleVectorWithHaloEntries::global_value()</a>, <a class="el" href="matrices_8cc_source.html#l03388">oomph::CRDoubleMatrix::inf_norm()</a>, <a class="el" href="double__vector_8cc_source.html#l00610">oomph::DoubleVector::max()</a>, <a class="el" href="matrices_8cc_source.html#l01801">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00299">oomph::DenseDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00629">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l01903">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l00389">oomph::DenseDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l00725">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00225">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvTransMv()</a>, <a class="el" href="double__vector_8cc_source.html#l00863">oomph::DoubleVector::norm()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00844">oomph::DoubleMultiVector::norm()</a>, <a class="el" href="double__vector_8cc_source.html#l00655">oomph::DoubleVector::output()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00678">oomph::DoubleMultiVector::output()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00616">oomph::ILUZeroPreconditioner&lt; CCDoubleMatrix &gt;::preconditioner_solve()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00673">oomph::ILUZeroPreconditioner&lt; CRDoubleMatrix &gt;::preconditioner_solve()</a>, <a class="el" href="double__vector_8cc_source.html#l00160">oomph::DoubleVector::redistribute()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">oomph::DoubleMultiVector::redistribute()</a>, <a class="el" href="matrices_8cc_source.html#l02576">oomph::CRDoubleMatrix::redistribute()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00634">oomph::AugmentedBlockFoldLinearSolver::resolve()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00468">oomph::ILUZeroPreconditioner&lt; CRDoubleMatrix &gt;::setup()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00383">oomph::AugmentedBlockFoldLinearSolver::solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l00554">oomph::FD_LU::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02160">oomph::AugmentedBlockPitchForkLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>, <a class="el" href="matrices_8cc_source.html#l01469">oomph::CRDoubleMatrix::sort_entries()</a>, <a class="el" href="double__vector_8cc_source.html#l01396">oomph::DoubleVectorHelpers::split()</a>, <a class="el" href="double__vector_8cc_source.html#l02043">oomph::DoubleVectorHelpers::split_without_communication()</a>, <a class="el" href="double__vector__with__halo_8cc_source.html#l00293">oomph::DoubleVectorWithHaloEntries::sum_all_halo_and_haloed_values()</a>, and <a class="el" href="double__vector__with__halo_8cc_source.html#l00249">oomph::DoubleVectorWithHaloEntries::synchronise()</a>.</p>
+
+</div>
+</div>
+<a id="a8c35baa65e335043f62954c92c090a5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c35baa65e335043f62954c92c090a5a">&#9670;&nbsp;</a></span>distribution_built()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::DistributableLinearAlgebraObject::distribution_built </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>if the communicator_pt is null then the distribution is not setup then false is returned, otherwise return true </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00513">513</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00346">oomph::LinearAlgebraDistribution::built()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mumps__solver_8cc_source.html#l00483">oomph::MumpsSolver::backsub()</a>, <a class="el" href="linear__solver_8cc_source.html#l02227">oomph::SuperLUSolver::backsub_distributed()</a>, <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00275">oomph::DoubleMultiVector::build()</a>, <a class="el" href="problem_8cc_source.html#l08340">oomph::Problem::get_eigenproblem_matrices()</a>, <a class="el" href="problem_8cc_source.html#l03964">oomph::Problem::get_jacobian()</a>, <a class="el" href="matrices_8cc_source.html#l03388">oomph::CRDoubleMatrix::inf_norm()</a>, <a class="el" href="matrices_8cc_source.html#l02013">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="double__vector_8cc_source.html#l00553">oomph::DoubleVector::operator*=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00632">oomph::DoubleMultiVector::operator*=()</a>, <a class="el" href="double__vector_8cc_source.html#l00504">oomph::DoubleVector::operator-=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00586">oomph::DoubleMultiVector::operator-=()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00501">oomph::TrilinosAztecOOSolver::resolve()</a>, <a class="el" href="double__vector_8h_source.html#l00192">oomph::DoubleVector::set_external_values()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">oomph::DoubleMultiVector::shallow_build()</a>, and <a class="el" href="linear__solver_8cc_source.html#l00410">oomph::DenseLU::solve()</a>.</p>
+
+</div>
+</div>
+<a id="a603105384d60c9a3710378af39f538b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a603105384d60c9a3710378af39f538b9">&#9670;&nbsp;</a></span>distribution_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a>* oomph::DistributableLinearAlgebraObject::distribution_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">470</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8cc_source.html#l03491">oomph::CRDoubleMatrix::add()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00494">oomph::ProblemBasedShiftInvertOperator::apply()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01775">oomph::AugmentedProblemGMRES::apply_schur_complement_preconditioner()</a>, <a class="el" href="trilinos__solver_8h_source.html#l00132">oomph::OomphLibPreconditionerEpetraOperator::ApplyInverse()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01736">oomph::AugmentedProblemGMRES::augmented_matrix_multiply()</a>, <a class="el" href="mumps__solver_8cc_source.html#l00483">oomph::MumpsSolver::backsub()</a>, <a class="el" href="linear__solver_8cc_source.html#l02227">oomph::SuperLUSolver::backsub_distributed()</a>, <a class="el" href="linear__solver_8cc_source.html#l02369">oomph::SuperLUSolver::backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02454">oomph::SuperLUSolver::backsub_transpose_serial()</a>, <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00275">oomph::DoubleMultiVector::build()</a>, <a class="el" href="complex__smoother_8h_source.html#l00190">oomph::HelmholtzSmoother::check_validity_of_solve_helper_inputs()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01054">oomph::Smoother::check_validity_of_solve_helper_inputs()</a>, <a class="el" href="linear__solver_8cc_source.html#l02539">oomph::SuperLUSolver::clean_up_memory()</a>, <a class="el" href="complex__smoother_8h_source.html#l00072">oomph::HelmholtzSmoother::complex_matrix_multiplication()</a>, <a class="el" href="complex__smoother_8h_source.html#l02138">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::complex_matrix_multiplication()</a>, <a class="el" href="double__vector_8cc_source.html#l00989">oomph::DoubleVectorHelpers::concatenate()</a>, <a class="el" href="matrices_8cc_source.html#l04305">oomph::CRDoubleMatrixHelpers::concatenate()</a>, <a class="el" href="double__vector_8cc_source.html#l01823">oomph::DoubleVectorHelpers::concatenate_without_communication()</a>, <a class="el" href="matrices_8cc_source.html#l05160">oomph::CRDoubleMatrixHelpers::concatenate_without_communication()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00188">oomph::TrilinosEpetraHelpers::copy_to_oomphlib_vector()</a>, <a class="el" href="matrices_8cc_source.html#l01254">oomph::CRDoubleMatrix::CRDoubleMatrix()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00280">oomph::TrilinosEpetraHelpers::create_distributed_epetra_matrix()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00482">oomph::TrilinosEpetraHelpers::create_distributed_epetra_matrix_for_aztecoo()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00043">oomph::TrilinosEpetraHelpers::create_distributed_epetra_vector()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00153">oomph::TrilinosEpetraHelpers::create_epetra_vector_view_data()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00274">oomph::HypreHelpers::create_HYPRE_Matrix()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00181">oomph::HypreHelpers::create_HYPRE_Vector()</a>, <a class="el" href="matrices_8h_source.html#l03240">oomph::CRDoubleMatrixHelpers::deep_copy()</a>, <a class="el" href="double__vector_8cc_source.html#l00802">oomph::DoubleVector::dot()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00778">oomph::DoubleMultiVector::dot()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00094">oomph::DoubleMultiVector::DoubleMultiVector()</a>, <a class="el" href="mumps__solver_8cc_source.html#l00182">oomph::MumpsSolver::factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l01743">oomph::SuperLUSolver::factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04732">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_ordered_preconditioner_vector()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04132">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vector()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l02913">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_block_vectors()</a>, <a class="el" href="block__preconditioner_8h_source.html#l01142">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_concatenated_block()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l02565">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::get_concatenated_block_vector()</a>, <a class="el" href="problem_8cc_source.html#l08340">oomph::Problem::get_eigenproblem_matrices()</a>, <a class="el" href="problem_8cc_source.html#l07970">oomph::Problem::get_hessian_vector_products()</a>, <a class="el" href="problem_8cc_source.html#l03964">oomph::Problem::get_jacobian()</a>, <a class="el" href="matrices_8cc_source.html#l03246">oomph::CRDoubleMatrix::get_matrix_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l02454">oomph::CRDoubleMatrix::global_matrix()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00523">oomph::HypreInterface::hypre_matrix_setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01102">oomph::HypreInterface::hypre_solve()</a>, <a class="el" href="matrices_8cc_source.html#l03388">oomph::CRDoubleMatrix::inf_norm()</a>, <a class="el" href="block__preconditioner_8h_source.html#l03083">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_dof_number()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l05037">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_get_block()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04545">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_get_block_ordered_preconditioner_vector()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l03962">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_get_block_vector()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l03109">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_get_block_vectors()</a>, <a class="el" href="block__preconditioner_8h_source.html#l03150">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_index_in_dof()</a>, <a class="el" href="block__preconditioner_8h_source.html#l03292">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_preconditioner_matrix_distribution_pt()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04790">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_return_block_ordered_preconditioner_vector()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04241">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_return_block_vector()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l03655">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_return_block_vectors()</a>, <a class="el" href="matrices_8cc_source.html#l01768">oomph::CRDoubleMatrix::lubksub()</a>, <a class="el" href="block__preconditioner_8h_source.html#l02044">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::master_distribution_pt()</a>, <a class="el" href="double__vector_8cc_source.html#l00610">oomph::DoubleVector::max()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00109">oomph::MatrixVectorProduct::multiply()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00675">oomph::TrilinosEpetraHelpers::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l01801">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00299">oomph::DenseDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00629">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00178">oomph::MatrixVectorProduct::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l01903">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l00389">oomph::DenseDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l00725">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00225">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvTransMv()</a>, <a class="el" href="double__vector_8cc_source.html#l00863">oomph::DoubleVector::norm()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00844">oomph::DoubleMultiVector::norm()</a>, <a class="el" href="trilinos__solver_8h_source.html#l00054">oomph::OomphLibPreconditionerEpetraOperator::OomphLibPreconditionerEpetraOperator()</a>, <a class="el" href="double__vector_8cc_source.html#l00456">oomph::DoubleVector::operator+=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00539">oomph::DoubleMultiVector::operator+=()</a>, <a class="el" href="double__vector_8cc_source.html#l00504">oomph::DoubleVector::operator-=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00586">oomph::DoubleMultiVector::operator-=()</a>, <a class="el" href="double__vector_8cc_source.html#l00655">oomph::DoubleVector::output()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00678">oomph::DoubleMultiVector::output()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02535">oomph::PitchForkHandler::PitchForkHandler()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00120">oomph::MatrixBasedDiagPreconditioner::preconditioner_solve()</a>, <a class="el" href="trilinos__preconditioners_8cc_source.html#l00131">oomph::TrilinosPreconditionerBase::preconditioner_solve()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00275">oomph::MatrixBasedLumpedPreconditioner&lt; oomph::CRDoubleMatrix &gt;::preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00482">oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner::preconditioner_solve()</a>, <a class="el" href="fsi__preconditioners_8h_source.html#l00381">oomph::FSIPreconditioner::preconditioner_solve()</a>, <a class="el" href="lagrange__enforced__flow__preconditioner_8cc_source.html#l00317">oomph::LagrangeEnforcedFlowPreconditioner::preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">oomph::PressureBasedSolidLSCPreconditioner::preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__block__preconditioner_8cc_source.html#l00597">oomph::BandedBlockTriangularPreconditioner&lt; MATRIX &gt;::preconditioner_solve()</a>, <a class="el" href="preconditioner_8h_source.html#l00296">oomph::IdentityPreconditioner::preconditioner_solve()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00616">oomph::ILUZeroPreconditioner&lt; CCDoubleMatrix &gt;::preconditioner_solve()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00729">oomph::GMRESBlockPreconditioner::preconditioner_solve()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00673">oomph::ILUZeroPreconditioner&lt; CRDoubleMatrix &gt;::preconditioner_solve()</a>, <a class="el" href="general__purpose__block__preconditioners_8cc_source.html#l00211">oomph::BlockDiagonalPreconditioner&lt; MATRIX &gt;::preconditioner_solve()</a>, <a class="el" href="general__purpose__block__preconditioners_8cc_source.html#l00449">oomph::BlockTriangularPreconditioner&lt; MATRIX &gt;::preconditioner_solve()</a>, <a class="el" href="navier__stokes__preconditioners_8cc_source.html#l00669">oomph::NavierStokesSchurComplementPreconditioner::preconditioner_solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01799">oomph::HyprePreconditioner::preconditioner_solve()</a>, <a class="el" href="double__vector_8cc_source.html#l00160">oomph::DoubleVector::redistribute()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">oomph::DoubleMultiVector::redistribute()</a>, <a class="el" href="matrices_8cc_source.html#l02576">oomph::CRDoubleMatrix::redistribute()</a>, <a class="el" href="mumps__solver_8cc_source.html#l00946">oomph::MumpsSolver::resolve()</a>, <a class="el" href="frontal__solver_8cc_source.html#l00833">oomph::HSL_MA42::resolve()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00501">oomph::TrilinosAztecOOSolver::resolve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00634">oomph::AugmentedBlockFoldLinearSolver::resolve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l01913">oomph::BlockPitchForkLinearSolver::resolve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01555">oomph::HypreSolver::resolve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02376">oomph::AugmentedBlockPitchForkLinearSolver::resolve()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04977">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_ordered_preconditioner_vector()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l04432">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vector()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l03404">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_block_vectors()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l02738">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::return_concatenated_block_vector()</a>, <a class="el" href="SuperLU__preconditioner_8h_source.html#l00073">oomph::SuperLUPreconditioner::setup()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00045">oomph::MatrixBasedDiagPreconditioner::setup()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00043">oomph::MatrixVectorProduct::setup()</a>, <a class="el" href="trilinos__preconditioners_8cc_source.html#l00055">oomph::TrilinosPreconditionerBase::setup()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00224">oomph::MatrixBasedLumpedPreconditioner&lt; oomph::CRDoubleMatrix &gt;::setup()</a>, <a class="el" href="lagrange__enforced__flow__preconditioner_8cc_source.html#l00521">oomph::LagrangeEnforcedFlowPreconditioner::setup()</a>, <a class="el" href="preconditioner_8h_source.html#l00271">oomph::IdentityPreconditioner::setup()</a>, <a class="el" href="mumps__solver_8h_source.html#l00284">oomph::NewMumpsPreconditioner::setup()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00468">oomph::ILUZeroPreconditioner&lt; CRDoubleMatrix &gt;::setup()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00450">oomph::InnerIterationPreconditioner&lt; SOLVER, PRECONDITIONER &gt;::setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01734">oomph::HyprePreconditioner::setup()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00930">oomph::DoubleMultiVector::setup_doublevector_representation()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">oomph::DoubleMultiVector::shallow_build()</a>, <a class="el" href="mumps__solver_8cc_source.html#l00673">oomph::MumpsSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00974">oomph::CG&lt; MATRIX &gt;::solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l00410">oomph::DenseLU::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00383">oomph::AugmentedBlockFoldLinearSolver::solve()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00045">oomph::TrilinosAztecOOSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00096">oomph::BiCGStab&lt; MATRIX &gt;::solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l00759">oomph::SuperLUSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l01640">oomph::BlockPitchForkLinearSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00663">oomph::GS&lt; MATRIX &gt;::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02160">oomph::AugmentedBlockPitchForkLinearSolver::solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01456">oomph::HypreSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01386">oomph::GS&lt; CRDoubleMatrix &gt;::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01145">oomph::DampedJacobi&lt; MATRIX &gt;::solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02187">oomph::GMRES&lt; MATRIX &gt;::solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02766">oomph::AugmentedProblemGMRES::solve()</a>, <a class="el" href="complex__smoother_8h_source.html#l01866">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::solve()</a>, <a class="el" href="complex__smoother_8h_source.html#l03362">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::solve()</a>, <a class="el" href="eigen__solver_8cc_source.html#l00063">oomph::ARPACK::solve_eigenproblem()</a>, <a class="el" href="eigen__solver_8cc_source.html#l00458">oomph::LAPACK_QZ::solve_eigenproblem()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00621">oomph::CG&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00181">oomph::BiCGStab&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01190">oomph::GS&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01504">oomph::GS&lt; CRDoubleMatrix &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01947">oomph::DampedJacobi&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02268">oomph::GMRES&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l02535">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l03628">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="linear__solver_8cc_source.html#l01229">oomph::SuperLUSolver::solve_transpose()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00292">oomph::TrilinosAztecOOSolver::solver_setup()</a>, <a class="el" href="matrices_8h_source.html#l01017">oomph::CRDoubleMatrix::sparse_indexed_output_with_offset()</a>, <a class="el" href="double__vector_8cc_source.html#l01396">oomph::DoubleVectorHelpers::split()</a>, <a class="el" href="double__vector_8cc_source.html#l02043">oomph::DoubleVectorHelpers::split_without_communication()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00395">oomph::LowStorageRungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00427">oomph::GMRESBlockPreconditioner::update()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01378">oomph::GMRES&lt; MATRIX &gt;::update()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01828">oomph::AugmentedProblemGMRES::update()</a>, <a class="el" href="complex__smoother_8h_source.html#l02236">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::update()</a>, and <a class="el" href="complex__smoother_8h_source.html#l03524">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::update()</a>.</p>
+
+</div>
+</div>
+<a id="ab00a3919b8634c698749f14a4d92947d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab00a3919b8634c698749f14a4d92947d">&#9670;&nbsp;</a></span>first_row() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::DistributableLinearAlgebraObject::first_row </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function for the first row on this processor </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00494">494</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00264">oomph::LinearAlgebraDistribution::first_row()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="solid__preconditioners_8cc_source.html#l00726">oomph::PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00482">oomph::TrilinosEpetraHelpers::create_distributed_epetra_matrix_for_aztecoo()</a>, <a class="el" href="matrices_8cc_source.html#l03438">oomph::CRDoubleMatrix::diagonal_entries()</a>, <a class="el" href="mumps__solver_8cc_source.html#l00182">oomph::MumpsSolver::factorise()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="matrices_8cc_source.html#l02454">oomph::CRDoubleMatrix::global_matrix()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00215">oomph::DoubleVectorWithHaloEntries::global_value()</a>, <a class="el" href="double__vector_8cc_source.html#l00131">oomph::DoubleVector::initialise()</a>, <a class="el" href="block__preconditioner_8h_source.html#l03083">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_dof_number()</a>, <a class="el" href="block__preconditioner_8h_source.html#l03150">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_index_in_dof()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00777">oomph::TrilinosEpetraHelpers::multiply()</a>, <a class="el" href="double__vector_8cc_source.html#l00655">oomph::DoubleVector::output()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00678">oomph::DoubleMultiVector::output()</a>, <a class="el" href="double__vector_8cc_source.html#l00769">oomph::DoubleVector::output_local_values_with_offset()</a>, <a class="el" href="double__vector_8cc_source.html#l00160">oomph::DoubleVector::redistribute()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">oomph::DoubleMultiVector::redistribute()</a>, <a class="el" href="matrices_8cc_source.html#l02576">oomph::CRDoubleMatrix::redistribute()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00045">oomph::MatrixBasedDiagPreconditioner::setup()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00834">oomph::PseudoElasticPreconditionerSubsidiaryPreconditionerOld::setup()</a>, <a class="el" href="matrices_8h_source.html#l01017">oomph::CRDoubleMatrix::sparse_indexed_output_with_offset()</a>, and <a class="el" href="double__vector_8cc_source.html#l01396">oomph::DoubleVectorHelpers::split()</a>.</p>
+
+</div>
+</div>
+<a id="a4266c1d18d8e102bad3f4aec26c9b7cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4266c1d18d8e102bad3f4aec26c9b7cf">&#9670;&nbsp;</a></span>first_row() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::DistributableLinearAlgebraObject::first_row </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function for the first row on this processor </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00500">500</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00264">oomph::LinearAlgebraDistribution::first_row()</a>.</p>
+
+</div>
+</div>
+<a id="a7569556f14fd68b28508920e89bd5eee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7569556f14fd68b28508920e89bd5eee">&#9670;&nbsp;</a></span>nrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::DistributableLinearAlgebraObject::nrow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function to the number of global rows. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">476</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00189">oomph::LinearAlgebraDistribution::nrow()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="implicit__midpoint__rule_8cc_source.html#l00204">oomph::IMRByBDF::actions_after_timestep()</a>, <a class="el" href="problem_8cc_source.html#l08707">oomph::Problem::add_eigenvector_to_dofs()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00726">oomph::PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()</a>, <a class="el" href="problem_8cc_source.html#l08674">oomph::Problem::assign_eigenvector_to_dofs()</a>, <a class="el" href="linear__solver_8cc_source.html#l00309">oomph::DenseLU::backsub()</a>, <a class="el" href="linear__solver_8cc_source.html#l02369">oomph::SuperLUSolver::backsub_serial()</a>, <a class="el" href="linear__solver_8cc_source.html#l02454">oomph::SuperLUSolver::backsub_transpose_serial()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l05749">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::block_matrix_test()</a>, <a class="el" href="complex__smoother_8h_source.html#l00190">oomph::HelmholtzSmoother::check_validity_of_solve_helper_inputs()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01054">oomph::Smoother::check_validity_of_solve_helper_inputs()</a>, <a class="el" href="complex__smoother_8h_source.html#l00948">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_smoother_setup()</a>, <a class="el" href="double__vector_8cc_source.html#l00989">oomph::DoubleVectorHelpers::concatenate()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00043">oomph::TrilinosEpetraHelpers::create_distributed_epetra_vector()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00148">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::GetVecLength()</a>, <a class="el" href="block__preconditioner_8cc_source.html#l03962">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_get_block_vector()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l00423">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::interpolation_matrix_set()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00425">oomph::MGSolver&lt; DIM &gt;::interpolation_matrix_set()</a>, <a class="el" href="double__vector_8cc_source.html#l00610">oomph::DoubleVector::max()</a>, <a class="el" href="matrices_8cc_source.html#l00299">oomph::DenseDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00629">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00389">oomph::DenseDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8cc_source.html#l00725">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8h_source.html#l00988">oomph::CRDoubleMatrix::nrow()</a>, <a class="el" href="double__vector_8cc_source.html#l00655">oomph::DoubleVector::output()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00678">oomph::DoubleMultiVector::output()</a>, <a class="el" href="lagrange__enforced__flow__preconditioner_8cc_source.html#l00317">oomph::LagrangeEnforcedFlowPreconditioner::preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00506">oomph::PressureBasedSolidLSCPreconditioner::preconditioner_solve()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00616">oomph::ILUZeroPreconditioner&lt; CCDoubleMatrix &gt;::preconditioner_solve()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00673">oomph::ILUZeroPreconditioner&lt; CRDoubleMatrix &gt;::preconditioner_solve()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00797">oomph::MGPreconditioner&lt; DIM &gt;::preconditioner_solve()</a>, <a class="el" href="navier__stokes__preconditioners_8cc_source.html#l00669">oomph::NavierStokesSchurComplementPreconditioner::preconditioner_solve()</a>, <a class="el" href="double__vector_8cc_source.html#l00160">oomph::DoubleVector::redistribute()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">oomph::DoubleMultiVector::redistribute()</a>, <a class="el" href="frontal__solver_8cc_source.html#l00833">oomph::HSL_MA42::resolve()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00501">oomph::TrilinosAztecOOSolver::resolve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01695">oomph::SuperLUSolver::resolve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01718">oomph::SuperLUSolver::resolve_transpose()</a>, <a class="el" href="problem_8cc_source.html#l03364">oomph::Problem::set_dofs()</a>, <a class="el" href="trilinos__preconditioners_8cc_source.html#l00055">oomph::TrilinosPreconditionerBase::setup()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00450">oomph::InnerIterationPreconditioner&lt; SOLVER, PRECONDITIONER &gt;::setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01734">oomph::HyprePreconditioner::setup()</a>, <a class="el" href="mumps__solver_8cc_source.html#l00673">oomph::MumpsSolver::solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l00410">oomph::DenseLU::solve()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00141">oomph::TrilinosAztecOOSolver::solve()</a>, <a class="el" href="linear__solver_8cc_source.html#l01014">oomph::SuperLUSolver::solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00621">oomph::CG&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00181">oomph::BiCGStab&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01190">oomph::GS&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01504">oomph::GS&lt; CRDoubleMatrix &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01947">oomph::DampedJacobi&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02268">oomph::GMRES&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l02535">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l03628">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="linear__solver_8cc_source.html#l01485">oomph::SuperLUSolver::solve_transpose()</a>, <a class="el" href="double__vector_8cc_source.html#l01396">oomph::DoubleVectorHelpers::split()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00395">oomph::LowStorageRungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8h_source.html#l00427">oomph::GMRESBlockPreconditioner::update()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01378">oomph::GMRES&lt; MATRIX &gt;::update()</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l01828">oomph::AugmentedProblemGMRES::update()</a>.</p>
+
+</div>
+</div>
+<a id="a9bd7e1d242c69a28da85a804a7717fce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bd7e1d242c69a28da85a804a7717fce">&#9670;&nbsp;</a></span>nrow_local() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::DistributableLinearAlgebraObject::nrow_local </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function for the num of local rows on this processor. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00482">482</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00196">oomph::LinearAlgebraDistribution::nrow_local()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8cc_source.html#l03491">oomph::CRDoubleMatrix::add()</a>, <a class="el" href="problem_8cc_source.html#l08707">oomph::Problem::add_eigenvector_to_dofs()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00494">oomph::ProblemBasedShiftInvertOperator::apply()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00726">oomph::PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()</a>, <a class="el" href="problem_8cc_source.html#l08674">oomph::Problem::assign_eigenvector_to_dofs()</a>, <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00275">oomph::DoubleMultiVector::build()</a>, <a class="el" href="matrices_8cc_source.html#l01710">oomph::CRDoubleMatrix::build()</a>, <a class="el" href="matrices_8cc_source.html#l01727">oomph::CRDoubleMatrix::build_without_copy()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00188">oomph::TrilinosEpetraHelpers::copy_to_oomphlib_vector()</a>, <a class="el" href="matrices_8cc_source.html#l01254">oomph::CRDoubleMatrix::CRDoubleMatrix()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00482">oomph::TrilinosEpetraHelpers::create_distributed_epetra_matrix_for_aztecoo()</a>, <a class="el" href="matrices_8h_source.html#l03240">oomph::CRDoubleMatrixHelpers::deep_copy()</a>, <a class="el" href="matrices_8cc_source.html#l03438">oomph::CRDoubleMatrix::diagonal_entries()</a>, <a class="el" href="double__vector_8cc_source.html#l00802">oomph::DoubleVector::dot()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00778">oomph::DoubleMultiVector::dot()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00106">oomph::DoubleMultiVector::DoubleMultiVector()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="problem_8cc_source.html#l07871">oomph::Problem::get_derivative_wrt_global_parameter()</a>, <a class="el" href="matrices_8cc_source.html#l02454">oomph::CRDoubleMatrix::global_matrix()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00215">oomph::DoubleVectorWithHaloEntries::global_value()</a>, <a class="el" href="matrices_8cc_source.html#l03388">oomph::CRDoubleMatrix::inf_norm()</a>, <a class="el" href="double__vector_8cc_source.html#l00116">oomph::DoubleVector::initialise()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00358">oomph::DoubleMultiVector::initialise()</a>, <a class="el" href="block__preconditioner_8h_source.html#l03083">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_dof_number()</a>, <a class="el" href="block__preconditioner_8h_source.html#l03150">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::internal_index_in_dof()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00509">oomph::PseudoElasticPreconditioner::lagrange_multiplier_preconditioner_solve()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00780">oomph::PseudoElasticPreconditionerOld::lagrange_multiplier_preconditioner_solve()</a>, <a class="el" href="matrices_8cc_source.html#l02388">oomph::CRDoubleMatrix::matrix_reduction()</a>, <a class="el" href="double__vector_8cc_source.html#l00610">oomph::DoubleVector::max()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00777">oomph::TrilinosEpetraHelpers::multiply()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00187">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvAddMv()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00365">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvRandom()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00209">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvScale()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00156">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvTimesMatAddMv()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00225">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvTransMv()</a>, <a class="el" href="double__vector_8cc_source.html#l00863">oomph::DoubleVector::norm()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00844">oomph::DoubleMultiVector::norm()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00472">oomph::DoubleMultiVector::operator()()</a>, <a class="el" href="double__vector_8cc_source.html#l00553">oomph::DoubleVector::operator*=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00632">oomph::DoubleMultiVector::operator*=()</a>, <a class="el" href="double__vector_8cc_source.html#l00456">oomph::DoubleVector::operator+=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00539">oomph::DoubleMultiVector::operator+=()</a>, <a class="el" href="double__vector_8cc_source.html#l00504">oomph::DoubleVector::operator-=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00586">oomph::DoubleMultiVector::operator-=()</a>, <a class="el" href="double__vector_8cc_source.html#l00423">oomph::DoubleVector::operator==()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00504">oomph::DoubleMultiVector::operator==()</a>, <a class="el" href="double__vector_8cc_source.html#l00403">oomph::DoubleVector::operator[]()</a>, <a class="el" href="double__vector_8cc_source.html#l00655">oomph::DoubleVector::output()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00678">oomph::DoubleMultiVector::output()</a>, <a class="el" href="double__vector_8cc_source.html#l00739">oomph::DoubleVector::output_local_values()</a>, <a class="el" href="double__vector_8cc_source.html#l00769">oomph::DoubleVector::output_local_values_with_offset()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00120">oomph::MatrixBasedDiagPreconditioner::preconditioner_solve()</a>, <a class="el" href="lagrange__enforced__flow__preconditioner_8cc_source.html#l00317">oomph::LagrangeEnforcedFlowPreconditioner::preconditioner_solve()</a>, <a class="el" href="double__vector_8cc_source.html#l00160">oomph::DoubleVector::redistribute()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">oomph::DoubleMultiVector::redistribute()</a>, <a class="el" href="matrices_8cc_source.html#l02576">oomph::CRDoubleMatrix::redistribute()</a>, <a class="el" href="matrices_8h_source.html#l00339">oomph::DoubleMatrixBase::residual()</a>, <a class="el" href="assembly__handler_8cc_source.html#l01913">oomph::BlockPitchForkLinearSolver::resolve()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00308">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::SetBlock()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00045">oomph::MatrixBasedDiagPreconditioner::setup()</a>, <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00224">oomph::MatrixBasedLumpedPreconditioner&lt; oomph::CRDoubleMatrix &gt;::setup()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00834">oomph::PseudoElasticPreconditionerSubsidiaryPreconditionerOld::setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01734">oomph::HyprePreconditioner::setup()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00613">oomph::ANASAZI::solve_eigenproblem()</a>, <a class="el" href="matrices_8h_source.html#l01017">oomph::CRDoubleMatrix::sparse_indexed_output_with_offset()</a>, and <a class="el" href="double__vector_8cc_source.html#l01396">oomph::DoubleVectorHelpers::split()</a>.</p>
+
+</div>
+</div>
+<a id="a21e966b025edec79067b41d7f1f25220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21e966b025edec79067b41d7f1f25220">&#9670;&nbsp;</a></span>nrow_local() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::DistributableLinearAlgebraObject::nrow_local </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function for the num of local rows on this processor. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00488">488</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">Distribution_pt</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00196">oomph::LinearAlgebraDistribution::nrow_local()</a>.</p>
+
+</div>
+</div>
+<a id="a0d60098e4938b78dd3e2724551a4c7c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d60098e4938b78dd3e2724551a4c7c9">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DistributableLinearAlgebraObject::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00458">458</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a94280ec477823427098dc46b20e29f5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94280ec477823427098dc46b20e29f5a">&#9670;&nbsp;</a></span>Distribution_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a>* oomph::DistributableLinearAlgebraObject::Distribution_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> object </p>
+
+<p class="definition">Definition at line <a class="el" href="linear__algebra__distribution_8h_source.html#l00544">544</a> of file <a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linear__algebra__distribution_8h_source.html#l00520">build_distribution()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00536">clear_distribution()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00445">DistributableLinearAlgebraObject()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00513">distribution_built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">distribution_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00494">first_row()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00482">nrow_local()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00464">~DistributableLinearAlgebraObject()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="linear__algebra__distribution_8h_source.html">linear_algebra_distribution.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:30
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

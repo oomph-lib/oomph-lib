@@ -1,0 +1,71 @@
+\hypertarget{algebraic__free__boundary__poisson_8cc}{}\doxysection{algebraic\+\_\+free\+\_\+boundary\+\_\+poisson.\+cc File Reference}
+\label{algebraic__free__boundary__poisson_8cc}\index{algebraic\_free\_boundary\_poisson.cc@{algebraic\_free\_boundary\_poisson.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\+Source\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em Namespace for const source term in Poisson equation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceConstSourceForPoisson_a40ef79083874b58ed42b4df2ca0f4c10}{Const\+Source\+For\+Poisson\+::get\+\_\+source}} (const Vector$<$ double $>$ \&x, double \&source)
+\begin{DoxyCompactList}\small\item\em Const source function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{demo\+\_\+fish\+\_\+poisson}} (const string \&directory\+\_\+name)
+\item 
+{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_a28565f965d7ffb7f92f3773a6333023b}{demo\+\_\+elastic\+\_\+fish\+\_\+poisson}} (const string \&directory\+\_\+name)
+\item 
+int \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceConstSourceForPoisson_add351c5acab2561d68d1fc9ec3d5fc5e}{Const\+Source\+For\+Poisson\+::\+Strength}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Strength of source function\+: default value 1.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{algebraic__free__boundary__poisson_8cc_a28565f965d7ffb7f92f3773a6333023b}\label{algebraic__free__boundary__poisson_8cc_a28565f965d7ffb7f92f3773a6333023b}} 
+\index{algebraic\_free\_boundary\_poisson.cc@{algebraic\_free\_boundary\_poisson.cc}!demo\_elastic\_fish\_poisson@{demo\_elastic\_fish\_poisson}}
+\index{demo\_elastic\_fish\_poisson@{demo\_elastic\_fish\_poisson}!algebraic\_free\_boundary\_poisson.cc@{algebraic\_free\_boundary\_poisson.cc}}
+\doxysubsubsection{\texorpdfstring{demo\_elastic\_fish\_poisson()}{demo\_elastic\_fish\_poisson()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void demo\+\_\+elastic\+\_\+fish\+\_\+poisson (\begin{DoxyParamCaption}\item[{const string \&}]{directory\+\_\+name }\end{DoxyParamCaption})}
+
+Demonstrate how to solve \char`\"{}elastic\char`\"{} 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. 
+
+Definition at line 511 of file algebraic\+\_\+free\+\_\+boundary\+\_\+poisson.\+cc.
+
+
+
+References Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fish\+\_\+mesh\+\_\+pt(), and Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::load().
+
+\mbox{\Hypertarget{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}\label{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}} 
+\index{algebraic\_free\_boundary\_poisson.cc@{algebraic\_free\_boundary\_poisson.cc}!demo\_fish\_poisson@{demo\_fish\_poisson}}
+\index{demo\_fish\_poisson@{demo\_fish\_poisson}!algebraic\_free\_boundary\_poisson.cc@{algebraic\_free\_boundary\_poisson.cc}}
+\doxysubsubsection{\texorpdfstring{demo\_fish\_poisson()}{demo\_fish\_poisson()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void demo\+\_\+fish\+\_\+poisson (\begin{DoxyParamCaption}\item[{const string \&}]{directory\+\_\+name }\end{DoxyParamCaption})}
+
+Demonstrate how to solve 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. 
+
+Definition at line 460 of file algebraic\+\_\+free\+\_\+boundary\+\_\+poisson.\+cc.
+
+
+
+References Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+info(), Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fish\+\_\+mesh\+\_\+pt(), and Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+c().
+
+\mbox{\Hypertarget{algebraic__free__boundary__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{algebraic__free__boundary__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{algebraic\_free\_boundary\_poisson.cc@{algebraic\_free\_boundary\_poisson.cc}!main@{main}}
+\index{main@{main}!algebraic\_free\_boundary\_poisson.cc@{algebraic\_free\_boundary\_poisson.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Driver for \char`\"{}elastic\char`\"{} fish poisson solver with adaptation. If there are any command line arguments, we regard this as a validation run and perform only a single step. 
+
+Definition at line 558 of file algebraic\+\_\+free\+\_\+boundary\+\_\+poisson.\+cc.
+

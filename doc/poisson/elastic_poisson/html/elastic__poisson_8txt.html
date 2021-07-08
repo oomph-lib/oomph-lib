@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: elastic_poisson.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">elastic_poisson.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a9ea9e8bcebca9a16e505416ded75d252"><td class="memItemLeft" align="right" valign="top">mainpage Demo computed with full in a variety of fish shaped domains we solved the following <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Two dimensional model Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> in a non trivial domain&lt;/B &gt;&lt;/CENTER &gt; n Solve <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>[\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2}=-1, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] in the fish shaped domain <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> with homogeneous Dirichlet boundary conditions <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>[\left. u\right|_{\partial D_{fish}}=0.\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] n&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; I w textwidth fish_poisson_soln Plot of the solution&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; dontinclude elastic_poisson cc skipline Destructor until&lt;/TD &gt;&lt; TD &gt; dontinclude elastic_poisson cc skipline Doc the solution until&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt; END The sharp corners in the domain create singularities in the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> (its derivatives are unbounded) and so <a class="el" href="elastic__poisson_8txt.html#a85c69acb0ce4eb61bba09962e48b2f16">accurate</a> results can only be obtained if we use a sufficiently fine discretisation. Implementing this by uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> would create a huge <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of elements in the interior of the domain where the fine discretisation is not required. To avoid this <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a></td></tr>
+<tr class="separator:a9ea9e8bcebca9a16e505416ded75d252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a65de52525bad4b319ab4aa7dae78e9"><td class="memItemLeft" align="right" valign="top">namespace c ConstSourceForPoisson only contains the constant source function f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> (x)</td></tr>
+<tr class="separator:a1a65de52525bad4b319ab4aa7dae78e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44610d2bfb91ddb5d73d5e0434b847b8"><td class="memItemLeft" align="right" valign="top">namespace c ConstSourceForPoisson only contains the constant source function <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> is performed <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> until the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> satisfies the required error&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a44610d2bfb91ddb5d73d5e0434b847b8">bounds</a> (or until the maximum permitted <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps has been reached). - In the second approach we start by performing a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> steps</td></tr>
+<tr class="separator:a44610d2bfb91ddb5d73d5e0434b847b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b06edd8be76f054e95c5cb022ba9769"><td class="memItemLeft" align="right" valign="top">the c RefineableQPoissonElement&lt; 2, 3 &gt; is a nine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a4b06edd8be76f054e95c5cb022ba9769">node</a> (bi-quadratic) quad element. \dontinclude fish_poisson.cc \skipline start_black_box \until RefineableFish After creating the \c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a></td></tr>
+<tr class="separator:a4b06edd8be76f054e95c5cb022ba9769"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a812aacbbdd46869040dfbbb1707b8451"><td class="memItemLeft" align="right" valign="top">the c RefineableQPoissonElement&lt; 2, 3 &gt; is a nine we document the(default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum number of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt; HR &gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a number of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> exactly as we solve the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> on the very coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> and document the very coarse until doc_info&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> ()++</td></tr>
+<tr class="separator:a812aacbbdd46869040dfbbb1707b8451"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a576a2de28bff0faf2c4d2e96665ce433"><td class="memItemLeft" align="right" valign="top">and in time dependent problems where the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> at one timestep provides initial conditions for the next one See the discussion of&lt; A HREF=&quot;../../../unsteady_heat/adaptive_unsteady_heat/html/index.html&quot;&gt; the adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the unsteady heat equation&lt;/A &gt; for more details the source function pointers are <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> passed <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> an element s four son elements when the element is subdivided This allows the adaptation <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> proceed completely without any intervention by the user On return from c certain actions may need <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> be performed <a class="el" href="elastic__poisson_8txt.html#a3bbec99409932fde7859cec8d0d8e8bc">before</a> or after the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> (see \b Todo:***Insert link <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> an applied flux/traction example with spatial <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> in which the FaceElements get stripped out <a class="el" href="elastic__poisson_8txt.html#a3bbec99409932fde7859cec8d0d8e8bc">before</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a>, and rebuilt afterwards. ***for an example). To ensure that these steps are performed when the adaptation is controlled by the &quot;black-box&quot; adaptive Newton solver</td></tr>
+<tr class="separator:a576a2de28bff0faf2c4d2e96665ce433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add94b33b3e185538fc03d79b770a682d"><td class="memItemLeft" align="right" valign="top">endcode n n <a class="el" href="elastic__poisson_8txt.html#a3bbec99409932fde7859cec8d0d8e8bc">before</a> n n code <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#add94b33b3e185538fc03d79b770a682d">mesh_pt</a> () -&gt; doc_adaptivity_targets(cout)</td></tr>
+<tr class="separator:add94b33b3e185538fc03d79b770a682d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:afb579f8a629fcc14bd8f7635af4c3866"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a></td></tr>
+<tr class="separator:afb579f8a629fcc14bd8f7635af4c3866"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa231e861f4fdf9b5bba872882f2f481c"><td class="memItemLeft" align="right" valign="top">mainpage Demo computed with full&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a></td></tr>
+<tr class="separator:aa231e861f4fdf9b5bba872882f2f481c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a477dbbf64d92923676bfbfa830a47e6b"><td class="memItemLeft" align="right" valign="top">mainpage Demo computed with full in a variety of fish shaped domains&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a477dbbf64d92923676bfbfa830a47e6b">Specifically</a></td></tr>
+<tr class="separator:a477dbbf64d92923676bfbfa830a47e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa7936f2a66f20ede7779a79c27db8f1"><td class="memItemLeft" align="right" valign="top">mainpage Demo computed with full in a variety of fish shaped domains we solved the following <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Two dimensional model Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> in a non trivial domain&lt;/B &gt;&lt;/CENTER &gt; n Solve <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>[\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2}=-1, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] in the fish shaped domain <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#aaa7936f2a66f20ede7779a79c27db8f1">$D_</a> {fish} \f$</td></tr>
+<tr class="separator:aaa7936f2a66f20ede7779a79c27db8f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b951afd52c56d1b9dc8eb5ab074d341"><td class="memItemLeft" align="right" valign="top">mainpage Demo computed with full in a variety of fish shaped domains we solved the following <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Two dimensional model Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> in a non trivial domain&lt;/B &gt;&lt;/CENTER &gt; n Solve <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>[\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2}=-1, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] in the fish shaped domain <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> with homogeneous Dirichlet boundary conditions <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>[\left. u\right|_{\partial D_{fish}}=0.\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] n&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; I w textwidth fish_poisson_soln Plot of the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a>&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; dontinclude elastic_poisson cc skipline Destructor until&lt;/TD &gt;&lt; TD &gt; dontinclude elastic_poisson cc skipline Doc the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> until&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt; END The sharp corners in the domain create singularities in the c oomph lib provides mesh <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> routines that <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> adapt the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a></td></tr>
+<tr class="separator:a9b951afd52c56d1b9dc8eb5ab074d341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69e877866b0e4c13b2212c9e22f6c297"><td class="memItemLeft" align="right" valign="top">mainpage Demo computed with full in a variety of fish shaped domains we solved the following <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Two dimensional model Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> in a non trivial domain&lt;/B &gt;&lt;/CENTER &gt; n Solve <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>[\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2}=-1, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] in the fish shaped domain <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> with homogeneous Dirichlet boundary conditions <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>[\left. u\right|_{\partial D_{fish}}=0.\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] n&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; I w textwidth fish_poisson_soln Plot of the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a>&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; dontinclude elastic_poisson cc skipline Destructor until&lt;/TD &gt;&lt; TD &gt; dontinclude elastic_poisson cc skipline Doc the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> until&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt; END The sharp corners in the domain create singularities in the c oomph lib provides <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> routines that <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> adapt the based on e a e posteriori error estimates Regions in which an error estimator indicates that the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> is not resolved <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the required accuracy are&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a69e877866b0e4c13b2212c9e22f6c297">refined</a></td></tr>
+<tr class="separator:a69e877866b0e4c13b2212c9e22f6c297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49162212defb4c884184a5d834d96f41"><td class="memItemLeft" align="right" valign="top">namespace c ConstSourceForPoisson only contains the constant source function <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> is performed <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> until the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> satisfies the required error and then use incremental&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a></td></tr>
+<tr class="separator:a49162212defb4c884184a5d834d96f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde57dd3a3b918551e05f7bf51137501"><td class="memItemLeft" align="right" valign="top">namespace c ConstSourceForPoisson only contains the constant source function <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> is performed <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> until the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> satisfies the required error and then use incremental allowing us <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> document how the <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> proceeds dontinclude fish_poisson cc skipline start_of_main until end of <a class="el" href="elastic__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>&lt; HR &gt; subsection black_box Black box <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> We start by creating the Problem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a></td></tr>
+<tr class="separator:afde57dd3a3b918551e05f7bf51137501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4125e3ad3928c95792c4ad809399592f"><td class="memItemLeft" align="right" valign="top">the c RefineableQPoissonElement&lt; 2, 3 &gt; is a nine we document the(default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt; HR &gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a4125e3ad3928c95792c4ad809399592f">process</a></td></tr>
+<tr class="separator:a4125e3ad3928c95792c4ad809399592f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9441d22198dfc5f0e547ba8ce6c0806d"><td class="memItemLeft" align="right" valign="top">the c RefineableQPoissonElement&lt; 2, 3 &gt; is a nine we document the(default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt; HR &gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a9441d22198dfc5f0e547ba8ce6c0806d">unrefinement</a></td></tr>
+<tr class="separator:a9441d22198dfc5f0e547ba8ce6c0806d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c28f9c59b0fa01016ca61aab0057283"><td class="memItemLeft" align="right" valign="top">the c RefineableQPoissonElement&lt; 2, 3 &gt; is a nine we document the(default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt; HR &gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a6c28f9c59b0fa01016ca61aab0057283">pattern</a></td></tr>
+<tr class="separator:a6c28f9c59b0fa01016ca61aab0057283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60fe9ab203e7eeb1a8bb1ab8d405d815"><td class="memItemLeft" align="right" valign="top">the c RefineableQPoissonElement&lt; 2, 3 &gt; is a nine we document the(default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> targets see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt; HR &gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a></td></tr>
+<tr class="separator:a60fe9ab203e7eeb1a8bb1ab8d405d815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bbec99409932fde7859cec8d0d8e8bc"><td class="memItemLeft" align="right" valign="top">the c RefineableQPoissonElement&lt; 2, 3 &gt; is a nine we document the(default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt; HR &gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> exactly as&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a3bbec99409932fde7859cec8d0d8e8bc">before</a></td></tr>
+<tr class="separator:a3bbec99409932fde7859cec8d0d8e8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47540e7de1c52b3b7a14e1b936a828b5"><td class="memItemLeft" align="right" valign="top">the c RefineableQPoissonElement&lt; 2, 3 &gt; is a nine we document the(default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt; HR &gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> exactly as we solve the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> on the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a47540e7de1c52b3b7a14e1b936a828b5">original</a></td></tr>
+<tr class="separator:a47540e7de1c52b3b7a14e1b936a828b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a6cebe9d03f42ff2161f61b8def39ca"><td class="memItemLeft" align="right" valign="top">the c RefineableQPoissonElement&lt; 2, 3 &gt; is a nine we document the(default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt; HR &gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> exactly as we solve the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> on the very coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> and document the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">result</a></td></tr>
+<tr class="separator:a3a6cebe9d03f42ff2161f61b8def39ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85c69acb0ce4eb61bba09962e48b2f16"><td class="memItemLeft" align="right" valign="top">We know that the <a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">result</a> is unlikely <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> be very&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a85c69acb0ce4eb61bba09962e48b2f16">accurate</a></td></tr>
+<tr class="separator:a85c69acb0ce4eb61bba09962e48b2f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41ff97c38da9e357bb805e3fad9e82f1"><td class="memItemLeft" align="right" valign="top">We know that the <a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">result</a> is unlikely <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> be very so we apply three levels of uniform&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a></td></tr>
+<tr class="separator:a41ff97c38da9e357bb805e3fad9e82f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1ee5ba52e17a6d00bb517bf1ab3f939"><td class="memItemLeft" align="right" valign="top">We know that the <a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">result</a> is unlikely to be very so we apply three levels of uniform increasing the <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of elements from&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a></td></tr>
+<tr class="separator:ac1ee5ba52e17a6d00bb517bf1ab3f939"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05d44fbb1f4e5f46c3cef426ebdf2814"><td class="memItemLeft" align="right" valign="top">We know that the <a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">result</a> is unlikely <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> be very so we apply three levels of uniform increasing the <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of elements from and re&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a05d44fbb1f4e5f46c3cef426ebdf2814">compute</a></td></tr>
+<tr class="separator:a05d44fbb1f4e5f46c3cef426ebdf2814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad97081418ac6de6ebd946218f25a4760"><td class="memItemLeft" align="right" valign="top">The <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> looks much smoother but we suspect that the corner regions are still under resolved&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#ad97081418ac6de6ebd946218f25a4760">Therefore</a></td></tr>
+<tr class="separator:ad97081418ac6de6ebd946218f25a4760"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a485ffcc5225dd7d0c21198ff6078436b"><td class="memItemLeft" align="right" valign="top">The solution looks much smoother but we suspect that the corner regions are still under resolved we call the c we recompute the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a485ffcc5225dd7d0c21198ff6078436b">solution</a></td></tr>
+<tr class="separator:a485ffcc5225dd7d0c21198ff6078436b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac62bd0f5e90621f5f05911809c2f4bf7"><td class="memItemLeft" align="right" valign="top">the final two frames show the progress of the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#ac62bd0f5e90621f5f05911809c2f4bf7">subsequent</a></td></tr>
+<tr class="separator:ac62bd0f5e90621f5f05911809c2f4bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0433e75d51d613b1ab3fa3ad3490256b"><td class="memItemLeft" align="right" valign="top">the final two frames show the progress of the error estimate driven <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> The <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> class The <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> class is virtually identical <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> that used in the&lt; A HREF=&quot;../../../poisson/two_d_poisson/html/index.html&quot;&gt; D Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> without <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a>&lt;/A &gt; In the present <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> we leave the function c Problem::actions_before_newton_solve() empty because the boundary conditions do not change. The function \c <a class="el" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem</a> it <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> updates the equation numbering&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a0433e75d51d613b1ab3fa3ad3490256b">scheme</a></td></tr>
+<tr class="separator:a0433e75d51d613b1ab3fa3ad3490256b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a262d1d2b6982328293e2a808e92c670a"><td class="memItemLeft" align="right" valign="top">the final two frames show the progress of the error estimate driven <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> The <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> class The <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> class is virtually identical <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> that used in the&lt; A HREF=&quot;../../../poisson/two_d_poisson/html/index.html&quot;&gt; D Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> without <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a>&lt;/A &gt; In the present <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> we leave the function c Problem::actions_before_newton_solve() empty because the boundary conditions do not change. The function \c <a class="el" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem</a> it <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> updates the equation numbering and interpolates the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> from the <a class="el" href="elastic__poisson_8txt.html#a47540e7de1c52b3b7a14e1b936a828b5">original</a> <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> onto the adapted <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> This is important in nonlinear problems where the provision of a good initial guess for the Newton iteration is&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a262d1d2b6982328293e2a808e92c670a">vital</a></td></tr>
+<tr class="separator:a262d1d2b6982328293e2a808e92c670a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c4cd009bdb28954678a9e3bdb660ed5"><td class="memItemLeft" align="right" valign="top">and in time dependent problems where the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> at one timestep provides initial conditions for the next one See the discussion of&lt; A HREF=&quot;../../../unsteady_heat/adaptive_unsteady_heat/html/index.html&quot;&gt; the adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the unsteady heat equation&lt;/A &gt; for more details&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a3c4cd009bdb28954678a9e3bdb660ed5">Furthermore</a></td></tr>
+<tr class="separator:a3c4cd009bdb28954678a9e3bdb660ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3125fd6042665fc4eb3d25ba9c484145"><td class="memItemLeft" align="right" valign="top">and in time dependent problems where the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> at one timestep provides initial conditions for the next one See the discussion of&lt; A HREF=&quot;../../../unsteady_heat/adaptive_unsteady_heat/html/index.html&quot;&gt; the adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the unsteady heat equation&lt;/A &gt; for more details the source function pointers are automatically passed <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> an element s four son elements when the element is subdivided This allows the <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> proceed completely&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a></td></tr>
+<tr class="separator:a3125fd6042665fc4eb3d25ba9c484145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ecd5e6d588d73a281c326848c6be412"><td class="memItemLeft" align="right" valign="top">f <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__poisson_8txt.html#a4ecd5e6d588d73a281c326848c6be412">f</a></td></tr>
+<tr class="separator:a4ecd5e6d588d73a281c326848c6be412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a576a2de28bff0faf2c4d2e96665ce433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a576a2de28bff0faf2c4d2e96665ce433">&#9670;&nbsp;</a></span>adaptation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and in time dependent problems where the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> at one timestep provides initial conditions for the next one See the discussion of&lt;A HREF=&quot;../../../unsteady_heat/adaptive_unsteady_heat/html/index.html&quot;&gt; the adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the unsteady heat equation&lt;/A&gt; for more details the source function pointers are <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> passed <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> an element s four son elements when the element is subdivided This allows the adaptation <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> proceed completely without any intervention by the user On return from c certain actions may need <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> be performed <a class="el" href="elastic__poisson_8txt.html#a3bbec99409932fde7859cec8d0d8e8bc">before</a> or after the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> adaptation </td>
+          <td>(</td>
+          <td class="paramtype">see \b Todo:***Insert link <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> an applied flux/traction example with spatial <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> in which the FaceElements get stripped out <a class="el" href="elastic__poisson_8txt.html#a3bbec99409932fde7859cec8d0d8e8bc">before</a>&#160;</td>
+          <td class="paramname"><em>refinement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">and rebuilt afterwards. ***for an&#160;</td>
+          <td class="paramname"><em>example</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a44610d2bfb91ddb5d73d5e0434b847b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44610d2bfb91ddb5d73d5e0434b847b8">&#9670;&nbsp;</a></span>bounds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c ConstSourceForPoisson only contains the constant source function <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> is performed <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> until the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> satisfies the required error bounds </td>
+          <td>(</td>
+          <td class="paramtype">or until the maximum permitted <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps has been&#160;</td>
+          <td class="paramname"><em>reached</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a65de52525bad4b319ab4aa7dae78e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a65de52525bad4b319ab4aa7dae78e9">&#9670;&nbsp;</a></span>f()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c ConstSourceForPoisson only contains the constant source function f f </td>
+          <td>(</td>
+          <td class="paramtype">x&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="add94b33b3e185538fc03d79b770a682d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add94b33b3e185538fc03d79b770a682d">&#9670;&nbsp;</a></span>mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode n n <a class="el" href="elastic__poisson_8txt.html#a3bbec99409932fde7859cec8d0d8e8bc">before</a> n n code <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  doc_adaptivity_targets(cout)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b06edd8be76f054e95c5cb022ba9769"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b06edd8be76f054e95c5cb022ba9769">&#9670;&nbsp;</a></span>node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine node </td>
+          <td>(</td>
+          <td class="paramtype">bi-&#160;</td>
+          <td class="paramname"><em>quadratic</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a812aacbbdd46869040dfbbb1707b8451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a812aacbbdd46869040dfbbb1707b8451">&#9670;&nbsp;</a></span>number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine we document the (default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum number of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt;HR&gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a number of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> exactly as we solve the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> on the very coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> and document the very coarse until doc_info number </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ea9e8bcebca9a16e505416ded75d252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ea9e8bcebca9a16e505416ded75d252">&#9670;&nbsp;</a></span>solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo computed with full in a variety of fish shaped domains we solved the following <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Two dimensional model Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> in a non trivial domain&lt;/B&gt;&lt;/CENTER&gt; n Solve <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> [\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = -1, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] in the fish shaped domain <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> with homogeneous Dirichlet boundary conditions <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> [\left. u\right|_{\partial D_{fish}}=0.\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] n&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; I w textwidth fish_poisson_soln Plot of the solution&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; dontinclude elastic_poisson cc skipline Destructor until&lt;/TD&gt;&lt;TD&gt; dontinclude elastic_poisson cc skipline Doc the solution until&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt; END The sharp corners in the domain create singularities in the solution </td>
+          <td>(</td>
+          <td class="paramtype">its derivatives are&#160;</td>
+          <td class="paramname"><em>unbounded</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aaa7936f2a66f20ede7779a79c27db8f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa7936f2a66f20ede7779a79c27db8f1">&#9670;&nbsp;</a></span>$D_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo computed with full in a variety of fish shaped domains we solved the following <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Two dimensional model Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> in a non trivial domain&lt;/B&gt;&lt;/CENTER&gt; n Solve <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> [\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = -1, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] in the fish shaped domain <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> $D_ {fish} \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00034">34</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a85c69acb0ce4eb61bba09962e48b2f16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85c69acb0ce4eb61bba09962e48b2f16">&#9670;&nbsp;</a></span>accurate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We know that the <a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">result</a> is unlikely <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> be very accurate</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00233">233</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a49162212defb4c884184a5d834d96f41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49162212defb4c884184a5d834d96f41">&#9670;&nbsp;</a></span>adaptations</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c ConstSourceForPoisson only contains the constant source function <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> is performed <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> until the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> satisfies the required error and then use incremental adaptations</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00137">137</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa231e861f4fdf9b5bba872882f2f481c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa231e861f4fdf9b5bba872882f2f481c">&#9670;&nbsp;</a></span>adaptivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo computed with full adaptivity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00017">17</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3125fd6042665fc4eb3d25ba9c484145"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3125fd6042665fc4eb3d25ba9c484145">&#9670;&nbsp;</a></span>automatically</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and in time dependent problems where the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> at one timestep provides initial conditions for the next one See the discussion of&lt;A HREF=&quot;../../../unsteady_heat/adaptive_unsteady_heat/html/index.html&quot;&gt; the adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the unsteady heat equation&lt;/A&gt; for more details the source function pointers are automatically passed <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> an element s four son elements when the element is subdivided This allows the <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> proceed completely automatically</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00374">374</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3bbec99409932fde7859cec8d0d8e8bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bbec99409932fde7859cec8d0d8e8bc">&#9670;&nbsp;</a></span>before</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine we document the (default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt;HR&gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> exactly as before</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00225">225</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a05d44fbb1f4e5f46c3cef426ebdf2814"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05d44fbb1f4e5f46c3cef426ebdf2814">&#9670;&nbsp;</a></span>compute</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We know that the <a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">result</a> is unlikely <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> be very so we apply three levels of uniform increasing the <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of elements from and re compute</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00239">239</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4ecd5e6d588d73a281c326848c6be412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ecd5e6d588d73a281c326848c6be412">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">f <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{-4} <a class="code" href="elastic__poisson_8txt.html#a4ecd5e6d588d73a281c326848c6be412">\f</a>$ by adding the statement </div>
+<div class="line">   \n\n</div>
+<div class="line">   \code </div>
+<div class="line">   <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.mesh_pt()-&gt;min_permitted_error()=1.0e-4</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00440">440</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3c4cd009bdb28954678a9e3bdb660ed5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c4cd009bdb28954678a9e3bdb660ed5">&#9670;&nbsp;</a></span>Furthermore</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and in time dependent problems where the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> at one timestep provides initial conditions for the next one See the discussion of&lt;A HREF=&quot;../../../unsteady_heat/adaptive_unsteady_heat/html/index.html&quot;&gt; the adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the unsteady heat equation&lt;/A&gt; for more details Furthermore</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00371">371</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9b951afd52c56d1b9dc8eb5ab074d341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b951afd52c56d1b9dc8eb5ab074d341">&#9670;&nbsp;</a></span>mesh</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode n n This value forces an <a class="el" href="elastic__poisson_8txt.html#a9441d22198dfc5f0e547ba8ce6c0806d">unrefinement</a> of several elements in the mesh</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00080">80</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="afde57dd3a3b918551e05f7bf51137501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afde57dd3a3b918551e05f7bf51137501">&#9670;&nbsp;</a></span>object</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c ConstSourceForPoisson only contains the constant source function <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> is performed <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> until the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> satisfies the required error and then use incremental allowing us <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> document how the <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> proceeds dontinclude fish_poisson cc skipline start_of_main until end of <a class="el" href="elastic__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>&lt;HR&gt; subsection black_box Black box <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> We start by creating the Problem object</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00149">149</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a47540e7de1c52b3b7a14e1b936a828b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47540e7de1c52b3b7a14e1b936a828b5">&#9670;&nbsp;</a></span>original</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine we document the (default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt;HR&gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> exactly as we solve the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> on the original</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00225">225</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6c28f9c59b0fa01016ca61aab0057283"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c28f9c59b0fa01016ca61aab0057283">&#9670;&nbsp;</a></span>pattern</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine we document the (default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt;HR&gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> pattern</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00213">213</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="afb579f8a629fcc14bd8f7635af4c3866"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb579f8a629fcc14bd8f7635af4c3866">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine we document the (default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the problem is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt;HR&gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00017">17</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__poisson_8cc_source.html#l00578">demo_elastic_fish_poisson()</a>, and <a class="el" href="elastic__poisson_8cc_source.html#l00529">demo_fish_poisson()</a>.</p>
+
+</div>
+</div>
+<a id="a4125e3ad3928c95792c4ad809399592f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4125e3ad3928c95792c4ad809399592f">&#9670;&nbsp;</a></span>process</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine we document the (default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt;HR&gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> process</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00161">161</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a69e877866b0e4c13b2212c9e22f6c297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69e877866b0e4c13b2212c9e22f6c297">&#9670;&nbsp;</a></span>refined</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo computed with full in a variety of fish shaped domains we solved the following <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Two dimensional model Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> in a non trivial domain&lt;/B&gt;&lt;/CENTER&gt; n Solve <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> [\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = -1, \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] in the fish shaped domain <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> with homogeneous Dirichlet boundary conditions <a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a> [\left. u\right|_{\partial D_{fish}}=0.\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@\<a class="el" href="elastic__poisson_8txt.html#a1a65de52525bad4b319ab4aa7dae78e9">f</a>] n&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; I w textwidth fish_poisson_soln Plot of the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a>&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; dontinclude elastic_poisson cc skipline Destructor until&lt;/TD&gt;&lt;TD&gt; dontinclude elastic_poisson cc skipline Doc the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> until&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt; END The sharp corners in the domain create singularities in the c oomph lib provides <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> routines that <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> adapt the based on e a e posteriori error estimates Regions in which an error estimator indicates that the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> is not resolved <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the required accuracy are refined</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00082">82</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a41ff97c38da9e357bb805e3fad9e82f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41ff97c38da9e357bb805e3fad9e82f1">&#9670;&nbsp;</a></span>refinement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We know that the <a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">result</a> is unlikely <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> be very so we apply three levels of uniform refinement</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00234">234</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3a6cebe9d03f42ff2161f61b8def39ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a6cebe9d03f42ff2161f61b8def39ca">&#9670;&nbsp;</a></span>result</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine we document the (default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt;HR&gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> exactly as we solve the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> on the very coarse <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> and document the result</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00229">229</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0433e75d51d613b1ab3fa3ad3490256b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0433e75d51d613b1ab3fa3ad3490256b">&#9670;&nbsp;</a></span>scheme</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the final two frames show the progress of the error estimate driven <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> The <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> class The <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> class is virtually identical <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> that used in the&lt;A HREF=&quot;../../../poisson/two_d_poisson/html/index.html&quot;&gt; D Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> without <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a>&lt;/A&gt; In the present <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> we leave the function c Problem::actions_before_newton_solve () empty because the boundary conditions do not change. The function \c <a class="el" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem</a> it <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> updates the equation numbering scheme</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00272">272</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a485ffcc5225dd7d0c21198ff6078436b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a485ffcc5225dd7d0c21198ff6078436b">&#9670;&nbsp;</a></span>solution</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The solution looks much smoother but we suspect that the corner regions are still under resolved we call the c we recompute the solution</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00246">246</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a477dbbf64d92923676bfbfa830a47e6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a477dbbf64d92923676bfbfa830a47e6b">&#9670;&nbsp;</a></span>Specifically</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo computed with full in a variety of fish shaped domains Specifically</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00018">18</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac62bd0f5e90621f5f05911809c2f4bf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac62bd0f5e90621f5f05911809c2f4bf7">&#9670;&nbsp;</a></span>subsequent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the final two frames show the progress of the subsequent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00261">261</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a60fe9ab203e7eeb1a8bb1ab8d405d815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60fe9ab203e7eeb1a8bb1ab8d405d815">&#9670;&nbsp;</a></span>targets</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine we document the (default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> targets see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt;HR&gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and impose a specific <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> monitor document the progress of the automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> The second driver function illustrates some of these functions We start by setting up the create the c DocInfo <a class="el" href="elastic__poisson_8txt.html#afde57dd3a3b918551e05f7bf51137501">object</a> and document the <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> targets</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00219">219</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad97081418ac6de6ebd946218f25a4760"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad97081418ac6de6ebd946218f25a4760">&#9670;&nbsp;</a></span>Therefore</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> looks much smoother but we suspect that the corner regions are still under resolved Therefore</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00242">242</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac1ee5ba52e17a6d00bb517bf1ab3f939"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1ee5ba52e17a6d00bb517bf1ab3f939">&#9670;&nbsp;</a></span>to</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We know that the <a class="el" href="elastic__poisson_8txt.html#a3a6cebe9d03f42ff2161f61b8def39ca">result</a> is unlikely to be very so we apply three levels of uniform increasing the <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of elements from to</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00235">235</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9441d22198dfc5f0e547ba8ce6c0806d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9441d22198dfc5f0e547ba8ce6c0806d">&#9670;&nbsp;</a></span>unrefinement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the c RefineableQPoissonElement&lt;2,3&gt; is a nine we document the (default) <a class="el" href="elastic__poisson_8txt.html#aa231e861f4fdf9b5bba872882f2f481c">adaptivity</a> <a class="el" href="elastic__poisson_8txt.html#a60fe9ab203e7eeb1a8bb1ab8d405d815">targets</a> see ref comments The fully adaptive <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> of the <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> is very simple We simply pass the maximum <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of <a class="el" href="elastic__poisson_8txt.html#a49162212defb4c884184a5d834d96f41">adaptations</a> <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> the Newton solver and document the results Done dontinclude fish_poisson cc skipline with fully automatic <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> until end black box&lt;HR&gt; subsection incremental Incremental <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> To allow the user more control over the <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> c oomph lib provides a <a class="el" href="elastic__poisson_8txt.html#a812aacbbdd46869040dfbbb1707b8451">number</a> of functions that perform individual <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a> steps without re computing the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> immediately This allows the user <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> perform uniform <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a> and unrefinement</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00212">212</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+<a id="a262d1d2b6982328293e2a808e92c670a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a262d1d2b6982328293e2a808e92c670a">&#9670;&nbsp;</a></span>vital</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the final two frames show the progress of the error estimate driven <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a576a2de28bff0faf2c4d2e96665ce433">adaptation</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> The <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> class The <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> class is virtually identical <a class="el" href="elastic__poisson_8txt.html#ac1ee5ba52e17a6d00bb517bf1ab3f939">to</a> that used in the&lt;A HREF=&quot;../../../poisson/two_d_poisson/html/index.html&quot;&gt; D Poisson <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> without <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> <a class="el" href="elastic__poisson_8txt.html#a41ff97c38da9e357bb805e3fad9e82f1">refinement</a>&lt;/A&gt; In the present <a class="el" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a> we leave the function c Problem::actions_before_newton_solve () empty because the boundary conditions do not change. The function \c <a class="el" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem</a> it <a class="el" href="elastic__poisson_8txt.html#a3125fd6042665fc4eb3d25ba9c484145">automatically</a> updates the equation numbering and interpolates the <a class="el" href="elastic__poisson_8txt.html#a9ea9e8bcebca9a16e505416ded75d252">solution</a> from the <a class="el" href="elastic__poisson_8txt.html#a47540e7de1c52b3b7a14e1b936a828b5">original</a> <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> onto the adapted <a class="el" href="elastic__poisson_8txt.html#a9b951afd52c56d1b9dc8eb5ab074d341">mesh</a> This is important in nonlinear problems where the provision of a good initial guess for the Newton iteration is vital</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__poisson_8txt_source.html#l00365">365</a> of file <a class="el" href="elastic__poisson_8txt_source.html">elastic_poisson.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aelastic__poisson_8txt_html_afb579f8a629fcc14bd8f7635af4c3866"><div class="ttname"><a href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8txt_source.html#l00017">elastic_poisson.txt:17</a></div></div>
+<div class="ttc" id="aelastic__poisson_8txt_html_a4ecd5e6d588d73a281c326848c6be412"><div class="ttname"><a href="elastic__poisson_8txt.html#a4ecd5e6d588d73a281c326848c6be412">f</a></div><div class="ttdeci">f to f</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8txt_source.html#l00440">elastic_poisson.txt:440</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:04:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

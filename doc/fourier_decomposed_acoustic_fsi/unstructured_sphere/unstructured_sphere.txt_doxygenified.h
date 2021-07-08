@@ -1,0 +1,171 @@
+/**
+
+\mainpage The spatially-adaptive solution of azimuthally Fourier-decomposed time-harmonic 3D acoustic fluid-structure interaction problems on unstructured meshes
+
+
+In this document we discuss the spatially-adaptive solution of 3D
+time-harmonic acoustic fluid-structure interaction problems
+in cylindrical polar coordinates on unstructured meshes.
+
+  The driver code is very similar to the one presented in
+<a href=../../sphere/html/index.html>another tutorial</a>
+and we only discuss the changes necessary to deal with the generation
+of the adaptive, unstructured meshes and the 
+assignment of different material properties to different parts of the 
+solid domain.
+
+<HR>
+<HR> 
+
+\section test A test problem
+
+The sketch below shows the problem setup: An elastic sphere
+which is reinforced with an azimuthal T-rib is immersed in a compressible
+fluid and subjected to a time-periodic pressure load of magnitude
+\f[
+{\bf t} = P ( \exp(\alpha(\theta-\pi/4)^2)  + \exp(\alpha(\theta-3\pi/4)^2) )
+\f]
+(where \f$ \theta \f$ is the zenith angle) along 
+its inner surface. The parameter \f$ \alpha \f$ controls the 
+"sharpness" of the pressure load. For  \f$ \alpha=0 \f$ we obtain a 
+uniform, spherically symmetric load; the sketch below shows the pressure 
+distribution (red vectors indicating the traction) for \f$ \alpha = 200. \f$
+
+\image html setup.gif "Sketch of the problem setup. " 
+\image latex setup.eps "Sketch of the problem setup. " width=0.8\textwidth
+
+
+<HR>
+<HR>
+
+   
+\section results Results
+
+The figure below shows an animation of the structure's time-harmonic
+oscillation. The blue shaded region shows the shape of the
+oscillating structure while the pink region shows its undeformed configuration.
+The left half of the plot is used to show the (mirror image of
+the) adaptive unstructured mesh on which the displacement field was computed:
+
+\image html anim.gif "Animation of the time-harmonic deformation. " 
+\image latex anim.eps "Animation of the time-harmonic deformation. " width=0.8\textwidth
+
+Here is a plot of the corresponding fluid displacement potential, a 
+measure of the fluid pressure:   
+ 
+\image html potential_unstr.gif "The fluid displacement potential, a measure of the fluid pressure. Elevation: real part; contours: imaginary part. " 
+\image latex potential_unstr.eps "The fluid displacement potential, a measure of the fluid pressure. Elevation: real part; contours: imaginary part. " width=0.8\textwidth
+
+This looks very pretty and shows that we can solve acoustic FSI
+problems in non-trivial geometries but should you believe the results? 
+Here's an attempt to convince you: If we make the rib much softer than the
+sphere and set its inertia to zero, the rib will not offer much 
+structural resistance and the sphere will deform as if the rib was not present.
+If we then set \f$ \alpha = 0 \f$ we apply a spherically symmetric forcing
+onto the structure and would expect the resulting displacement
+field (at least in the sphere) to be spherically symmetric, too.
+
+The animation of the displacement field for this case, shown below,
+shows that this is indeed the case:
+
+\image html anim_alpha0.gif "Animation of the time-harmonic deformation for a uniform pressure load and a very soft and inertia-less rib. " 
+\image latex anim_alpha0.eps "Animation of the time-harmonic deformation for a uniform pressure load and a very soft and inertia-less rib. " width=0.8\textwidth
+
+Here is a plot of the corresponding fluid displacement potential, a 
+measure of the fluid pressure: 
+
+\image html potential_unstr_alpha0.gif "The fluid displacement potential, a measure of the fluid pressure for a uniform pressure load and a very soft and inertia-less rib. Elevation: real part; contours: imaginary part. " 
+\image latex potential_unstr_alpha0.eps "The fluid displacement potential, a measure of the fluid pressure for a uniform pressure load and a very soft and inertia-less rib. Elevation: real part; contours: imaginary part. " width=0.8\textwidth
+
+
+<HR> 
+<HR>
+
+\section num The numerical solution
+The driver code for this problem is very similar to the one discussed in
+<a href=../../sphere/html/index.html>another tutorial</a>.
+Running \c sdiff on the two driver codes
+<CENTER>
+<A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc">
+demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc
+</A>
+</CENTER>
+and
+<CENTER>
+<A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/unstructured_fourier_decomposed_acoustic_fsi.cc">
+demo_drivers/interaction/fourier_decomposed_acoustic_fsi/unstructured_fourier_decomposed_acoustic_fsi.cc
+</A>
+</CENTER>
+shows you the differences, the most important of which are:
+- The provision of multiple non-dimensional Young's moduli and frequency
+  parameters for the two different regions (the rib and the 
+  sphere). 
+  <a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html#comments">Recall</a>
+  that the non-dimensional Young's modulus specified via \c
+  TimeHarmonicFourierDecomposedLinearElasticityEquations::youngs_modulus_pt()
+  represents the ratio of the material's actual Young's modulus to the
+  Young's modulus used in <a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html#theory">the
+  non-dimensionalisation of the equations. </a>
+  \n\n
+- The change of forcing from a prescribed time-harmonic displacement
+  to a pressure
+  load on the inside boundary -- this requires yet another mesh of
+  \c FaceElements.
+  \n\n
+- The provision of the \c actions_before/after_adapt() functions and a 
+  helper function \c complete_problem_setup()
+  which rebuilds the elements (by passing the problem parameters
+  to the elements) following the unstructured mesh adaptation.
+  (The need/rationale for such a function is discussed in 
+  <a href="../../../meshes/mesh_from_inline_triangle/html/index.html">
+  another tutorial.</a>)
+  \n\n
+- The mesh generation -- the specification of the curvilinear
+  boundaries and the geometry of the rib is somewhat tedious.
+  We refer to 
+  <a href="../../../meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html">
+  another tutorial</a> for a discussion of how to define the
+  internal mesh boundary that separates the two regions
+  (the rib and the sphere) so that we can assign 
+  different material properties to them. 
+  \n\n
+.  
+All of this is reasonably straightforward and provides a
+powerful code that automatically adapts both meshes while
+respecting the curvilinear boundaries of the domain. 
+Have a look through the driver code and play with it.
+ 
+<HR>
+<HR> 
+
+\section code Code listing
+Here's a listing of the complete driver code:
+
+\include unstructured_fourier_decomposed_acoustic_fsi.cc
+
+<HR>
+<HR>
+  
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi">
+  demo_drivers/interaction/fourier_decomposed_acoustic_fsi/
+  </A>
+  </CENTER>\n
+- The driver code is: \n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/unstructured_fourier_decomposed_acoustic_fsi.cc">
+  demo_drivers/interaction/fourier_decomposed_acoustic_fsi/unstructured_fourier_decomposed_acoustic_fsi.cc
+  </A>
+  </CENTER>
+.
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

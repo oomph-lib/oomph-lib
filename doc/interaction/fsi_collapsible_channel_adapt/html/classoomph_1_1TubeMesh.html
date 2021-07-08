@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TubeMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TubeMesh.html">TubeMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1TubeMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::TubeMesh&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>3D tube mesh class. The domain is specified by the GeomObject that identifies the entire volume. Non-refineable base version!  
+ <a href="classoomph_1_1TubeMesh.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="tube__mesh_8template_8h_source.html">tube_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::TubeMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1TubeMesh.png" usemap="#oomph::TubeMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::TubeMesh_3C_20ELEMENT_20_3E_map" name="oomph::TubeMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1RefineableTubeMesh.html" alt="oomph::RefineableTubeMesh&lt; ELEMENT &gt;" shape="rect" coords="0,112,256,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6c2aaa81de6298a3f3a7bf1ae4d2b11d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TubeMesh.html#a6c2aaa81de6298a3f3a7bf1ae4d2b11d">TubeMesh</a> (<a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a9c6741891789e8156d85c39d4e3adaa7">GeomObject</a> *wall_pt, const Vector&lt; double &gt; &amp;centreline_limits, const Vector&lt; double &gt; &amp;theta_positions, const Vector&lt; double &gt; &amp;radius_box, const unsigned &amp;nlayer, <a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a76005d00b12acac8677ecc7c968ff865">TimeStepper</a> *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a6c2aaa81de6298a3f3a7bf1ae4d2b11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to geometric object that specifies the volume, start and end coordinates for the centreline on the geometric object. Values of theta at which dividing lines are to be placed, fractions of the radius for the central box at the dividing lines, the number of layers and the timestepper. Timestepper defaults to Steady dummy timestepper.  <a href="classoomph_1_1TubeMesh.html#a6c2aaa81de6298a3f3a7bf1ae4d2b11d">More...</a><br /></td></tr>
+<tr class="separator:a6c2aaa81de6298a3f3a7bf1ae4d2b11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af77e5d5022c77c3bf7340387258b2d51"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TubeMesh.html#af77e5d5022c77c3bf7340387258b2d51">~TubeMesh</a> ()</td></tr>
+<tr class="memdesc:af77e5d5022c77c3bf7340387258b2d51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: empty.  <a href="classoomph_1_1TubeMesh.html#af77e5d5022c77c3bf7340387258b2d51">More...</a><br /></td></tr>
+<tr class="separator:af77e5d5022c77c3bf7340387258b2d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a152971dbd327aaf840fd157bad87d995"><td class="memItemLeft" align="right" valign="top"><a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a9c6741891789e8156d85c39d4e3adaa7">GeomObject</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TubeMesh.html#a152971dbd327aaf840fd157bad87d995">volume_pt</a> ()</td></tr>
+<tr class="memdesc:a152971dbd327aaf840fd157bad87d995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to GeomObject representing wall.  <a href="classoomph_1_1TubeMesh.html#a152971dbd327aaf840fd157bad87d995">More...</a><br /></td></tr>
+<tr class="separator:a152971dbd327aaf840fd157bad87d995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96715b52dbbccaaf89d722a05e57e28a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TubeDomain.html">TubeDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TubeMesh.html#a96715b52dbbccaaf89d722a05e57e28a">domain_pt</a> ()</td></tr>
+<tr class="memdesc:a96715b52dbbccaaf89d722a05e57e28a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to domain.  <a href="classoomph_1_1TubeMesh.html#a96715b52dbbccaaf89d722a05e57e28a">More...</a><br /></td></tr>
+<tr class="separator:a96715b52dbbccaaf89d722a05e57e28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a223a82a89304553d71b279aa6fe045fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TubeDomain.html">TubeDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TubeMesh.html#a223a82a89304553d71b279aa6fe045fd">domain_pt</a> () const</td></tr>
+<tr class="memdesc:a223a82a89304553d71b279aa6fe045fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to underlying domain.  <a href="classoomph_1_1TubeMesh.html#a223a82a89304553d71b279aa6fe045fd">More...</a><br /></td></tr>
+<tr class="separator:a223a82a89304553d71b279aa6fe045fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aa40f91e3d55b4ab61304d0b8eca3859f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TubeDomain.html">TubeDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TubeMesh.html#aa40f91e3d55b4ab61304d0b8eca3859f">Domain_pt</a></td></tr>
+<tr class="memdesc:aa40f91e3d55b4ab61304d0b8eca3859f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to domain.  <a href="classoomph_1_1TubeMesh.html#aa40f91e3d55b4ab61304d0b8eca3859f">More...</a><br /></td></tr>
+<tr class="separator:aa40f91e3d55b4ab61304d0b8eca3859f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b89c07eff15d0eb9d5fe9e0c93f8ec2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a9c6741891789e8156d85c39d4e3adaa7">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TubeMesh.html#a3b89c07eff15d0eb9d5fe9e0c93f8ec2">Volume_pt</a></td></tr>
+<tr class="memdesc:a3b89c07eff15d0eb9d5fe9e0c93f8ec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the geometric object that represents the curved wall.  <a href="classoomph_1_1TubeMesh.html#a3b89c07eff15d0eb9d5fe9e0c93f8ec2">More...</a><br /></td></tr>
+<tr class="separator:a3b89c07eff15d0eb9d5fe9e0c93f8ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::TubeMesh&lt; ELEMENT &gt;</h3>
+
+<p>3D tube mesh class. The domain is specified by the GeomObject that identifies the entire volume. Non-refineable base version! </p>
+<p>The mesh boundaries are numbered as follows:</p><ul>
+<li>Boundary 0: "Inflow" cross section; located along the line parametrised by <img class="formulaInl" alt="$ \xi_0 = \xi_0^{lo} $" src="form_32.png"/>.</li>
+<li>Boundary 1: The outer wall, represetned by <img class="formulaInl" alt="$\xi_2 = 1$" src="form_35.png"/>.</li>
+<li>Boundary 2: The out flow, represented by <img class="formulaInl" alt="$\xi_0 = \xi_0^{hi}$" src="form_36.png"/>. </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="tube__mesh_8template_8h_source.html#l00058">58</a> of file <a class="el" href="tube__mesh_8template_8h_source.html">tube_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6c2aaa81de6298a3f3a7bf1ae4d2b11d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c2aaa81de6298a3f3a7bf1ae4d2b11d">&#9670;&nbsp;</a></span>TubeMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TubeMesh.html">oomph::TubeMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TubeMesh.html">TubeMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a9c6741891789e8156d85c39d4e3adaa7">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>wall_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>centreline_limits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>theta_positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>radius_box</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nlayer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a76005d00b12acac8677ecc7c968ff865">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to geometric object that specifies the volume, start and end coordinates for the centreline on the geometric object. Values of theta at which dividing lines are to be placed, fractions of the radius for the central box at the dividing lines, the number of layers and the timestepper. Timestepper defaults to Steady dummy timestepper. </p>
+<p>Constructor for deformable quarter tube mesh class. The domain is specified by the GeomObject that identifies the entire volume. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="tube__mesh_8template_8cc_source.html#l00042">42</a> of file <a class="el" href="tube__mesh_8template_8cc_source.html">tube_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tube__mesh_8template_8h_source.html#l00096">oomph::TubeMesh&lt; ELEMENT &gt;::Domain_pt</a>, <a class="el" href="fsi__collapsible__channel__adapt_8txt_source.html#l00254">s</a>, and <a class="el" href="tube__mesh_8template_8h_source.html#l00085">oomph::TubeMesh&lt; ELEMENT &gt;::volume_pt()</a>.</p>
+
+</div>
+</div>
+<a id="af77e5d5022c77c3bf7340387258b2d51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af77e5d5022c77c3bf7340387258b2d51">&#9670;&nbsp;</a></span>~TubeMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classoomph_1_1TubeMesh.html">oomph::TubeMesh</a>&lt; ELEMENT &gt;::~<a class="el" href="classoomph_1_1TubeMesh.html">TubeMesh</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="tube__mesh_8template_8h_source.html#l00079">79</a> of file <a class="el" href="tube__mesh_8template_8h_source.html">tube_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tube__mesh_8template_8h_source.html#l00096">oomph::TubeMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a96715b52dbbccaaf89d722a05e57e28a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96715b52dbbccaaf89d722a05e57e28a">&#9670;&nbsp;</a></span>domain_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TubeDomain.html">TubeDomain</a>* <a class="el" href="classoomph_1_1TubeMesh.html">oomph::TubeMesh</a>&lt; ELEMENT &gt;::domain_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="tube__mesh_8template_8h_source.html#l00088">88</a> of file <a class="el" href="tube__mesh_8template_8h_source.html">tube_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tube__mesh_8template_8h_source.html#l00096">oomph::TubeMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+</div>
+</div>
+<a id="a223a82a89304553d71b279aa6fe045fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a223a82a89304553d71b279aa6fe045fd">&#9670;&nbsp;</a></span>domain_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TubeDomain.html">TubeDomain</a>* <a class="el" href="classoomph_1_1TubeMesh.html">oomph::TubeMesh</a>&lt; ELEMENT &gt;::domain_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to underlying domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="tube__mesh_8template_8h_source.html#l00091">91</a> of file <a class="el" href="tube__mesh_8template_8h_source.html">tube_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tube__mesh_8template_8h_source.html#l00096">oomph::TubeMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+</div>
+</div>
+<a id="a152971dbd327aaf840fd157bad87d995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152971dbd327aaf840fd157bad87d995">&#9670;&nbsp;</a></span>volume_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a9c6741891789e8156d85c39d4e3adaa7">GeomObject</a>*&amp; <a class="el" href="classoomph_1_1TubeMesh.html">oomph::TubeMesh</a>&lt; ELEMENT &gt;::volume_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to GeomObject representing wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="tube__mesh_8template_8h_source.html#l00085">85</a> of file <a class="el" href="tube__mesh_8template_8h_source.html">tube_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tube__mesh_8template_8h_source.html#l00099">oomph::TubeMesh&lt; ELEMENT &gt;::Volume_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tube__mesh_8template_8cc_source.html#l00042">oomph::TubeMesh&lt; ELEMENT &gt;::TubeMesh()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa40f91e3d55b4ab61304d0b8eca3859f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa40f91e3d55b4ab61304d0b8eca3859f">&#9670;&nbsp;</a></span>Domain_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TubeDomain.html">TubeDomain</a>* <a class="el" href="classoomph_1_1TubeMesh.html">oomph::TubeMesh</a>&lt; ELEMENT &gt;::Domain_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="tube__mesh_8template_8h_source.html#l00096">96</a> of file <a class="el" href="tube__mesh_8template_8h_source.html">tube_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tube__mesh_8template_8h_source.html#l00088">oomph::TubeMesh&lt; ELEMENT &gt;::domain_pt()</a>, <a class="el" href="tube__mesh_8template_8h_source.html#l00142">oomph::RefineableTubeMesh&lt; ELEMENT &gt;::RefineableTubeMesh()</a>, <a class="el" href="tube__mesh_8template_8cc_source.html#l00042">oomph::TubeMesh&lt; ELEMENT &gt;::TubeMesh()</a>, and <a class="el" href="tube__mesh_8template_8h_source.html#l00079">oomph::TubeMesh&lt; ELEMENT &gt;::~TubeMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a3b89c07eff15d0eb9d5fe9e0c93f8ec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b89c07eff15d0eb9d5fe9e0c93f8ec2">&#9670;&nbsp;</a></span>Volume_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="fsi__collapsible__channel__adapt_8txt.html#a9c6741891789e8156d85c39d4e3adaa7">GeomObject</a>* <a class="el" href="classoomph_1_1TubeMesh.html">oomph::TubeMesh</a>&lt; ELEMENT &gt;::Volume_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the geometric object that represents the curved wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="tube__mesh_8template_8h_source.html#l00099">99</a> of file <a class="el" href="tube__mesh_8template_8h_source.html">tube_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tube__mesh_8template_8h_source.html#l00085">oomph::TubeMesh&lt; ELEMENT &gt;::volume_pt()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="tube__mesh_8template_8h_source.html">tube_mesh.template.h</a></li>
+<li><a class="el" href="tube__mesh_8template_8cc_source.html">tube_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:19:37
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

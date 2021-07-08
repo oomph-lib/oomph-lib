@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: sphere_scattering.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">sphere_scattering.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a096d09a4073736cd7d31a93a7d8aa60d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a096d09a4073736cd7d31a93a7d8aa60d">BORDER</a> = 1, WIDTH=500px &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt;Acknowledgement:&lt;/B &gt; This implementation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> equations and <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> documentation were developed jointly with Ahmed Wassfi(EnstaParisTech, Paris).&lt;/CENTER &gt;&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; \section theory Theory:The Fourier-decomposed Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> The Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> governs time-harmonic solutions of problems governed by <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> linear wave <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> \f[\nabla^2 U(x, y, <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>, t)=\frac{1}{c^2} \frac{\partial^2 U(x, y, <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>, t)}{\partial t^2}, \ \ \ \ \ \ \ \ \ \ \ \ @E[lin_wave]@ \f] where \f$ c \f$ is <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> wavespeed. Assuming that \f$ U(x, y, <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>, t) \f$ is time-harmonic, with frequency \f$ \omega \f$, we write <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> function \f$ U(x, y, <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>, t) \f$ as \f[U(x, y, <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>, t)=Re({\tt U}(x, y, <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \ e^{-i \omega t}) \ \ \ \ \ \ \ \ \ \ \ \ @E[time_decomp]@ \f] where \f$ {\tt U}(x, y, <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \f$ is complex-valued. This transforms( @R[lin_wave]@) into <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> \f[\nabla^2 {\tt U}(x, y, <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>)+k^2 {\tt U}=0 \ \ \ \ \ \ \ \ \ \ \ \ @E[helmholtz]@ \f] where \f[k=\frac{\omega}{c} \ \ \ \ \ \ \ \ \ \ \ \ @E[wavenumber]@ \f] is <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> wave number. Like other elliptic PDEs <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> admits Dirichlet, Neumann(flux) and Robin boundary conditions. If <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> is solved in an infinite <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a>(e.g. in scattering problems) <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution must satisfy <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> so-called&lt; a href=&quot;http: Sommerfeld radiation condition&lt;/a&gt; which in 3D has <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> form \f[ \lim_{r\to \infty} <a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a> \left(\frac{\partial {\tt U}}{\partial <a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>} - ik{\tt U} \right) =0. \f] Mathematically, this conditions is required to ensure <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> uniqueness of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution (and hence <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> well-posedness of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>). In a physical context, such as a scattering <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>, <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> condition ensures that scattering of an incoming wave only produces outgoing not incoming waves from infinity. These equations can be solved using \c oomph-lib's cartesian Helmholtz <a class="el" href="sphere__scattering_8txt.html#a8f5a56ee0c9b2dc351ffcf36f961d1a6">elements</a>, described in &lt;a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt;another tutorial.&lt;/a&gt; Here we consider an alternative approach in which we solve <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> equations in cylindrical polar coordinates \f$ (<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \f$, related to <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> cartesian coordinates \f$ (x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \f$ <a class="el" href="sphere__scattering_8txt.html#a7557e4dbfc2d473bef0bcc76d5c0af2c">via</a> \f[ x = <a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a> \cos(\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>), \f] \f[ y = <a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a> \sin(\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>), \f] \f[ <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a> = z. \f] We then decompose <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution into its Fourier components by writing \f[ {\tt U}(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) = \sum_{N=-\infty}^{\infty} u_N(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \exp({\rm i} N \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \f] Since <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> governing equations are linear we can compute each Fourier component \f$ u_N(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \f$ individually by solving \f[ \nabla^2 {u_{N}}(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) + \left(k^2-\frac{N^2}{<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>^2}\right) u_N(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) = 0 \ \ \ \ \ \ \ \ \ \ \ \ @E[fourier_helmholtz]@ \f] while specifying <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Fourier wavenumber \f$ N \f$ as a parameter. &lt;HR&gt; &lt;HR&gt; \section discr Discretisation by finite <a class="el" href="sphere__scattering_8txt.html#a8f5a56ee0c9b2dc351ffcf36f961d1a6">elements</a> The discretisation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Fourier-decomposed Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> itself only requires a trivial modification of its &lt;a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt;cartesian counterpart&lt;/a&gt;. Since most practical applications of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> involve complex-valued solutions, we provide separate storage <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution -- each \c Node therefore stores two unknowns values. By <a class="el" href="sphere__scattering_8txt.html#a4c1c9b04410c96a61a43978344bcbfa8">default</a>, <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts are stored as values 0 and 1, <a class="el" href="sphere__scattering_8txt.html#aaafac441e46d3dfe3bf9a0df8938178b">respectively</a></td></tr>
+<tr class="separator:a096d09a4073736cd7d31a93a7d8aa60d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa721ef4aa2ae10fe5e4793c2e5fe068d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#aa721ef4aa2ae10fe5e4793c2e5fe068d">HREF</a> = &quot;../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc&quot;&gt; source code.&lt;/A &gt;)&lt; HR &gt;&lt; HR &gt; \subsection doc Post-processing The post-processing function \c doc_solution(...) plots <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> computed and exact solutions(<a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and complex parts) and assesses <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> error in <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> computed solution. \dontinclude sphere_scattering.cc \skipline start_of_doc \<a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> Norm of solution The function \c check_gamma(...) is used to check <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> computation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> \f$ \gamma \f$ integral. If computed correctly, its values(pre-computed at <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Gauss points of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> \c FourierDecomposedHelmholtzFluxElement) ought to agree(well) with <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivative of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> exact solution. They do</td></tr>
+<tr class="separator:aa721ef4aa2ae10fe5e4793c2e5fe068d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a83d6bf9a354c9fb66acf78c7aa73ca41"><td class="memItemLeft" align="right" valign="top">d E[gamma_bc] f a Dirichlet to Neumann mapping&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a83d6bf9a354c9fb66acf78c7aa73ca41">Equation</a> (@R[gamma_bc]@) provides a condition on <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> normal derivative of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution along <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> artificial boundary and is implemented in <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> \c FourierDecomposedHelmholtzDtNBoundaryElement class. Since \f$ \gamma \f$ depends on <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution everywhere along <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> artificial boundary</td></tr>
+<tr class="separator:a83d6bf9a354c9fb66acf78c7aa73ca41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7557e4dbfc2d473bef0bcc76d5c0af2c"><td class="memItemLeft" align="right" valign="top">d E[gamma_bc] f a Dirichlet to Neumann mapping <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> application of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Sommerfeld radiation condition&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a7557e4dbfc2d473bef0bcc76d5c0af2c">via</a> (@R[gamma_bc]@) introduces a non-local coupling between all <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> degrees of freedom located on that boundary. This is handled by classifying <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> unknowns that affect \f$ \gamma \f$ but are not associated with an element 's own nodes as its external \c Data. To facilitate <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> setup of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> interaction between <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> \c FourierDecomposedHelmholtzDtNBoundaryElements</td></tr>
+<tr class="separator:a7557e4dbfc2d473bef0bcc76d5c0af2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9bec731509dad4c1575deb7e208e13b"><td class="memItemLeft" align="right" valign="top">d E[gamma_bc] f a Dirichlet to Neumann mapping <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> application of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Sommerfeld radiation condition c oomph lib provides <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> class c FourierDecomposedHelmholtzDtNMesh which provides storage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> (<a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pointers to) <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> \c FourierDecomposedHelmholtzDtNBoundaryElements that discretise <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> artificial boundary. The member function \c FourierDecomposedHelmholtzDtNMesh</td></tr>
+<tr class="separator:aa9bec731509dad4c1575deb7e208e13b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a384e5700473bec26563c017dbd284a77"><td class="memItemLeft" align="right" valign="top">see ref acc dontinclude sphere_scattering cc skipline skipline Get du&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a384e5700473bec26563c017dbd284a77">dr</a> (spherical <a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>) \<a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> void exact_minus_dudr whose listings we omit here.&lt; HR &gt;&lt; HR &gt; \subsection <a class="el" href="unstructured__sphere__scattering_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> The driver code The driver code is very straightforward. We create <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> object</td></tr>
+<tr class="separator:a384e5700473bec26563c017dbd284a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943c0a352a0d8369bcf252f814a56fa0"><td class="memItemLeft" align="right" valign="top">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising the <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up the output directory dontinclude sphere_scattering cc skipline start_of_main of the cartesian Helmholtz <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> discussed in&lt; a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt; another tutorial&lt;/a &gt; We provide two separate meshes of c and one <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> the outer boundary where we apply&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> (approximate) Sommerfeld radiation condition. As discussed in section \ref DtN</td></tr>
+<tr class="separator:a943c0a352a0d8369bcf252f814a56fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affc4feabe54e674d239116538628c210"><td class="memItemLeft" align="right" valign="top">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> output directory dontinclude sphere_scattering cc skipline start_of_main of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> cartesian Helmholtz <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> discussed in&lt; a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt; another tutorial&lt;/a &gt; We provide two separate meshes of c and one <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary where we apply we use <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> function c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#affc4feabe54e674d239116538628c210">actions_before_newton_convergence_check</a> () to recompute <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> \f$ \gamma \f$ integral whenever <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> unknowns are updated during <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Newton iteration. \dontinclude sphere_scattering.cc \skipline start_of_problem_class \<a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> }</td></tr>
+<tr class="separator:affc4feabe54e674d239116538628c210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ad4e531c6ad76afb4c03738f2135166"><td class="memItemLeft" align="right" valign="top">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> defined as f[\<a class="el" href="sphere__scattering_8txt.html#a4ba81bc4b3e079786c1eb1c1f1017d7f">overline</a>{\cal P }_N=\pi R^2 \int_0^\pi \left.\bigg(Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.\f] We refer to&lt; a href=&quot;../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix&quot;&gt; another tutorial&lt;/a &gt; <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivation which&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a7ad4e531c6ad76afb4c03738f2135166">shows</a> (in <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> context of an acoustic fluid-structure interaction <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>) why this is a sensible definition of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> radiated power. \<a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> }&lt; HR &gt;&lt; HR &gt; \section comm_ex Comments and Exercises \subsection numbering The enumeration of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> unknowns As discussed in <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> introduction</td></tr>
+<tr class="separator:a7ad4e531c6ad76afb4c03738f2135166"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac6face6e9e2896dd5c7592648166973"><td class="memItemLeft" align="right" valign="top">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> defined as f[\<a class="el" href="sphere__scattering_8txt.html#a4ba81bc4b3e079786c1eb1c1f1017d7f">overline</a>{\cal P }_N=\pi R^2 \int_0^\pi \left.\bigg(Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.\f] We refer to&lt; a href=&quot;../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix&quot;&gt; another tutorial&lt;/a &gt; <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivation which most practically relevant solutions of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> are complex valued Since c oomph lib s solvers only deal with&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> (double precision) unknowns</td></tr>
+<tr class="separator:aac6face6e9e2896dd5c7592648166973"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a8d895bb93cd829890aa4c1a2d5682792"><td class="memItemLeft" align="right" valign="top">mainpage Example&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></td></tr>
+<tr class="separator:a8d895bb93cd829890aa4c1a2d5682792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68841c31de7e2ddf9987db078384d4d4"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a></td></tr>
+<tr class="separator:a68841c31de7e2ddf9987db078384d4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4994640a101ccf8a9146ee31c95037a2"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a></td></tr>
+<tr class="separator:a4994640a101ccf8a9146ee31c95037a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0972490c76ec4f8ae59d8208e932f87"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f[{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right) <a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#ad0972490c76ec4f8ae59d8208e932f87">$a_</a> [gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f {ln}</td></tr>
+<tr class="separator:ad0972490c76ec4f8ae59d8208e932f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a61ae20c86e97ab977868e7b7c5d262"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f[{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+b_{ln} \ h_{l}^{(2)}(k\rho)\right) <a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a> [gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f</td></tr>
+<tr class="separator:a2a61ae20c86e97ab977868e7b7c5d262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaafac441e46d3dfe3bf9a0df8938178b"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f[{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right) <a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#aaafac441e46d3dfe3bf9a0df8938178b">respectively</a> [gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f</td></tr>
+<tr class="separator:aaafac441e46d3dfe3bf9a0df8938178b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922f5912804e6103b099adc5147618f3"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f[{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right) <a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> [gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel functions f[j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The functions f[<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre</td></tr>
+<tr class="separator:a922f5912804e6103b099adc5147618f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83c3ad80d756a1ed3a83ee43191a7693"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f[{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right) P_{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a> [gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f[j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f[P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre expressed in terms of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Legendre polynomials f[P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].\f] This definition <a class="el" href="sphere__scattering_8txt.html#a7ad4e531c6ad76afb4c03738f2135166">shows</a> that f</td></tr>
+<tr class="separator:a83c3ad80d756a1ed3a83ee43191a7693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3f6a027ac861610e75ed6be432d4090"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f[{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right) <a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#aa3f6a027ac861610e75ed6be432d4090">unchanged</a> [gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f[j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f[<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre expressed in terms of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Legendre polynomials f[<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].\f] This definition <a class="el" href="sphere__scattering_8txt.html#a7ad4e531c6ad76afb4c03738f2135166">shows</a> that f f f[\theta=\arctan(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>/<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>),\f] f[\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>=\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,\f] so f <a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a> in[0, 2\pi] f remains</td></tr>
+<tr class="separator:aa3f6a027ac861610e75ed6be432d4090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fcd7145b40df9dde9d94ef5cbaa3f8e"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f[{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right) <a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a9fcd7145b40df9dde9d94ef5cbaa3f8e">pole</a> [gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f[j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f[<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre expressed in terms of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Legendre polynomials f[<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].\f] This definition <a class="el" href="sphere__scattering_8txt.html#a7ad4e531c6ad76afb4c03738f2135166">shows</a> that f f f[\theta=\arctan(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>/<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>),\f] f[\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>=\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,\f] so f <a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a> in[0, 2\pi] f remains and f theta in[0,\pi] f sweeps from <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> north(\f$ \theta=0 \f$)</td></tr>
+<tr class="separator:a9fcd7145b40df9dde9d94ef5cbaa3f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04f73e88b5c7c0074d50196121103a73"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f[{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right) <a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a04f73e88b5c7c0074d50196121103a73">equator</a> [gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f[j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f[<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre expressed in terms of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Legendre polynomials f[<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].\f] This definition <a class="el" href="sphere__scattering_8txt.html#a7ad4e531c6ad76afb4c03738f2135166">shows</a> that f f f[\theta=\arctan(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>/<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>),\f] f[\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>=\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,\f] so f <a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a> in[0, 2\pi] f remains and f theta in[0,\pi] f sweeps from <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> north <a class="el" href="sphere__scattering_8txt.html#a7557e4dbfc2d473bef0bcc76d5c0af2c">via</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a>(\f$ \theta=\pi/2 \f$) to <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> south <a class="el" href="sphere__scattering_8txt.html#a9fcd7145b40df9dde9d94ef5cbaa3f8e">pole</a>(\f$ \theta</td></tr>
+<tr class="separator:a04f73e88b5c7c0074d50196121103a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba81bc4b3e079786c1eb1c1f1017d7f"><td class="memItemLeft" align="right" valign="top">d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a4ba81bc4b3e079786c1eb1c1f1017d7f">overline</a> {\theta}</td></tr>
+<tr class="separator:a4ba81bc4b3e079786c1eb1c1f1017d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a514f1b439f404f86f77090fa9edc96ce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a></td></tr>
+<tr class="separator:a514f1b439f404f86f77090fa9edc96ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25ed1bcb423b0b7200f485fc5ff71c8e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a></td></tr>
+<tr class="separator:a25ed1bcb423b0b7200f485fc5ff71c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37b71560eea82d3169d23bd07db8b370"><td class="memItemLeft" align="right" valign="top">see ref acc dontinclude sphere_scattering cc skipline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a37b71560eea82d3169d23bd07db8b370">start_of_namespace</a></td></tr>
+<tr class="separator:a37b71560eea82d3169d23bd07db8b370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6762bf2f0bcfab7216d831ed3f60d920"><td class="memItemLeft" align="right" valign="top">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> output directory dontinclude sphere_scattering cc skipline start_of_main&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a></td></tr>
+<tr class="separator:a6762bf2f0bcfab7216d831ed3f60d920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab101a448eb033c2519256d025dccb226"><td class="memItemLeft" align="right" valign="top">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> output directory dontinclude sphere_scattering cc skipline start_of_main of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#ab101a448eb033c2519256d025dccb226">course</a></td></tr>
+<tr class="separator:ab101a448eb033c2519256d025dccb226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aada8950eb2aa3679b0b58e8d14c7c7"><td class="memItemLeft" align="right" valign="top">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> output directory dontinclude sphere_scattering cc skipline start_of_main of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> cartesian Helmholtz <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> discussed in&lt; a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt; another tutorial&lt;/a &gt; We provide two separate meshes of c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a9aada8950eb2aa3679b0b58e8d14c7c7">FaceElements</a></td></tr>
+<tr class="separator:a9aada8950eb2aa3679b0b58e8d14c7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92eea6031e56d61acdba9c8dbf4d4cb8"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; subsection constr The <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> constructor We start by building <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> bulk&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a92eea6031e56d61acdba9c8dbf4d4cb8">mesh</a></td></tr>
+<tr class="separator:a92eea6031e56d61acdba9c8dbf4d4cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0993cd786c3e70bc3a09ed9c1ee2c6b0"><td class="memItemLeft" align="right" valign="top">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a0993cd786c3e70bc3a09ed9c1ee2c6b0">Finally</a></td></tr>
+<tr class="separator:a0993cd786c3e70bc3a09ed9c1ee2c6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46553e1c788e277e1863915ee21a7fe3"><td class="memItemLeft" align="right" valign="top">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a></td></tr>
+<tr class="separator:a46553e1c788e277e1863915ee21a7fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f5a56ee0c9b2dc351ffcf36f961d1a6"><td class="memItemLeft" align="right" valign="top">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> defined as f[\<a class="el" href="sphere__scattering_8txt.html#a4ba81bc4b3e079786c1eb1c1f1017d7f">overline</a>{\cal P }_N=\pi R^2 \int_0^\pi \left.\bigg(Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.\f] We refer to&lt; a href=&quot;../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix&quot;&gt; another tutorial&lt;/a &gt; <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivation which most practically relevant solutions of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> are complex valued Since c oomph lib s solvers only deal with <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> equations are separated into their <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts In <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> implementation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a8f5a56ee0c9b2dc351ffcf36f961d1a6">elements</a></td></tr>
+<tr class="separator:a8f5a56ee0c9b2dc351ffcf36f961d1a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c1c9b04410c96a61a43978344bcbfa8"><td class="memItemLeft" align="right" valign="top">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> defined as f[\<a class="el" href="sphere__scattering_8txt.html#a4ba81bc4b3e079786c1eb1c1f1017d7f">overline</a>{\cal P }_N=\pi R^2 \int_0^\pi \left.\bigg(Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.\f] We refer to&lt; a href=&quot;../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix&quot;&gt; another tutorial&lt;/a &gt; <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivation which most practically relevant solutions of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> are complex valued Since c oomph lib s solvers only deal with <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> equations are separated into their <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts In <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> implementation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz we store <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution as two separate values at each node By&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphere__scattering_8txt.html#a4c1c9b04410c96a61a43978344bcbfa8">default</a></td></tr>
+<tr class="separator:a4c1c9b04410c96a61a43978344bcbfa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a096d09a4073736cd7d31a93a7d8aa60d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a096d09a4073736cd7d31a93a7d8aa60d">&#9670;&nbsp;</a></span>BORDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="sphere__scattering_8txt.html#a096d09a4073736cd7d31a93a7d8aa60d">BORDER</a> =  1, WIDTH=500px&gt; &lt;TR&gt; &lt;TD bgcolor=&quot;cornsilk&quot;&gt; &lt;CENTER&gt; &lt;B&gt;Acknowledgement:&lt;/B&gt; This implementation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> equations and <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> documentation were developed jointly with Ahmed Wassfi (EnstaParisTech, Paris). &lt;/CENTER&gt; &lt;/TD&gt; &lt;/TR&gt; &lt;/TABLE&gt; &lt;/CENTER&gt; &lt;HR&gt; &lt;HR&gt; \section theory Theory: The Fourier-decomposed Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> The Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> governs time-harmonic solutions of problems governed by <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> linear wave <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> \f[ \nabla^2 U(x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>,t)}{\partial t^2}, \ \ \ \ \ \ \ \ \ \ \ \ @E[lin_wave]@ \f] where \f$ c \f$ is <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> wavespeed. Assuming that \f$ U(x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>,t) \f$ is time-harmonic, with frequency \f$ \omega \f$, we write <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> function \f$ U(x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>,t) \f$ as \f[ U(x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>,t) = Re ({\tt U}(x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \ e^{-i \omega t}) \ \ \ \ \ \ \ \ \ \ \ \ @E[time_decomp]@ \f] where \f$ {\tt U}(x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \f$ is complex-valued. This transforms (@R[lin_wave]@) into <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> \f[ \nabla^2 {\tt U}(x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) + k^2 {\tt U} = 0 \ \ \ \ \ \ \ \ \ \ \ \ @E[helmholtz]@ \f] where \f[ k = \frac{\omega}{c} \ \ \ \ \ \ \ \ \ \ \ \ @E[wavenumber]@ \f] is <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> wave number. Like other elliptic PDEs <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> admits Dirichlet, Neumann (flux) and Robin boundary conditions. If <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> is solved in an infinite <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> (e.g. in scattering problems) <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution must satisfy <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> so-called &lt;a href=&quot;http: Sommerfeld radiation condition&lt;/a&gt; which in 3D has <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> form \f[ \lim_{r\to \infty} <a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a> \left(\frac{\partial {\tt U}}{\partial <a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>} - ik{\tt U} \right) =0. \f] Mathematically, this conditions is required to ensure <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> uniqueness of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution (and hence <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> well-posedness of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>). In a physical context, such as a scattering <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>, <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> condition ensures that scattering of an incoming wave only produces outgoing not incoming waves from infinity. These equations can be solved using \c oomph-lib's cartesian Helmholtz <a class="el" href="sphere__scattering_8txt.html#a8f5a56ee0c9b2dc351ffcf36f961d1a6">elements</a>, described in &lt;a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt;another tutorial.&lt;/a&gt; Here we consider an alternative approach in which we solve <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> equations in cylindrical polar coordinates \f$ (<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \f$, related to <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> cartesian coordinates \f$ (x,y,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \f$ <a class="el" href="sphere__scattering_8txt.html#a7557e4dbfc2d473bef0bcc76d5c0af2c">via</a> \f[ x = <a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a> \cos(\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>), \f] \f[ y = <a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a> \sin(\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>), \f] \f[ <a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a> = z. \f] We then decompose <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution into its Fourier components by writing \f[ {\tt U}(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) = \sum_{N=-\infty}^{\infty} u_N(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \exp({\rm i} N \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \f] Since <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> governing equations are linear we can compute each Fourier component \f$ u_N(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) \f$ individually by solving \f[ \nabla^2 {u_{N}}(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) + \left(k^2-\frac{N^2}{<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>^2}\right) u_N(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>) = 0 \ \ \ \ \ \ \ \ \ \ \ \ @E[fourier_helmholtz]@ \f] while specifying <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Fourier wavenumber \f$ N \f$ as a parameter. &lt;HR&gt; &lt;HR&gt; \section discr Discretisation by finite <a class="el" href="sphere__scattering_8txt.html#a8f5a56ee0c9b2dc351ffcf36f961d1a6">elements</a> The discretisation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Fourier-decomposed Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> itself only requires a trivial modification of its &lt;a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt;cartesian counterpart&lt;/a&gt;. Since most practical applications of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> involve complex-valued solutions, we provide separate storage <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution -- each \c Node therefore stores two unknowns values. By <a class="el" href="sphere__scattering_8txt.html#a4c1c9b04410c96a61a43978344bcbfa8">default</a>, <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts are stored as values 0 and 1, <a class="el" href="sphere__scattering_8txt.html#aaafac441e46d3dfe3bf9a0df8938178b">respectively</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00113">113</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa721ef4aa2ae10fe5e4793c2e5fe068d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa721ef4aa2ae10fe5e4793c2e5fe068d">&#9670;&nbsp;</a></span>HREF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="sphere__scattering_8txt.html#aa721ef4aa2ae10fe5e4793c2e5fe068d">HREF</a> =  &quot;../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc&quot;&gt; source code.&lt;/A&gt;) &lt;HR&gt; &lt;HR&gt; \subsection doc Post-processing The post-processing function \c doc_solution(...) plots <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> computed and exact solutions (<a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and complex parts) and assesses <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> error in <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> computed solution. \dontinclude sphere_scattering.cc \skipline start_of_doc \<a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> Norm of solution The function \c check_gamma(...) is used to check <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> computation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> \f$ \gamma \f$ integral. If computed correctly, its values (pre-computed at <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Gauss points of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> \c FourierDecomposedHelmholtzFluxElement) ought to agree (well) with <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivative of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> exact solution. They do</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00475">475</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="affc4feabe54e674d239116538628c210"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affc4feabe54e674d239116538628c210">&#9670;&nbsp;</a></span>actions_before_newton_convergence_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> output directory dontinclude sphere_scattering cc skipline start_of_main of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> cartesian Helmholtz <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> discussed in&lt;a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt; another tutorial&lt;/a&gt; We provide two separate meshes of c and one <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary where we apply we use <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> function c actions_before_newton_convergence_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a384e5700473bec26563c017dbd284a77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a384e5700473bec26563c017dbd284a77">&#9670;&nbsp;</a></span>dr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc dontinclude sphere_scattering cc skipline skipline Get du dr </td>
+          <td>(</td>
+          <td class="paramtype">spherical&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a83d6bf9a354c9fb66acf78c7aa73ca41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83d6bf9a354c9fb66acf78c7aa73ca41">&#9670;&nbsp;</a></span>Equation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">d E [gamma_bc] f a Dirichlet to Neumann mapping Equation </td>
+          <td>(</td>
+          <td class="paramtype">@R@&#160;</td>
+          <td class="paramname">[gamma_bc]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9bec731509dad4c1575deb7e208e13b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9bec731509dad4c1575deb7e208e13b">&#9670;&nbsp;</a></span>for()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">d E [gamma_bc] f a Dirichlet to Neumann mapping <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> application of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Sommerfeld radiation condition c oomph lib provides <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> class c FourierDecomposedHelmholtzDtNMesh which provides storage for </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pointers&#160;</td>
+          <td class="paramname"><em>to</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00257">257</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="aac6face6e9e2896dd5c7592648166973"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac6face6e9e2896dd5c7592648166973">&#9670;&nbsp;</a></span>real()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> defined as f [\<a class="el" href="sphere__scattering_8txt.html#a4ba81bc4b3e079786c1eb1c1f1017d7f">overline</a>{\cal P }_N = \pi R^2 \int_0^\pi \left.\bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.\f] We refer to&lt;a href=&quot;../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix&quot;&gt; another tutorial&lt;/a&gt; <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivation which most practically relevant solutions of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> are complex valued Since c oomph lib s solvers only deal with real </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>precision</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ad4e531c6ad76afb4c03738f2135166"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ad4e531c6ad76afb4c03738f2135166">&#9670;&nbsp;</a></span>shows()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> defined as f [\<a class="el" href="sphere__scattering_8txt.html#a4ba81bc4b3e079786c1eb1c1f1017d7f">overline</a>{\cal P }_N = \pi R^2 \int_0^\pi \left.\bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.\f] We refer to&lt;a href=&quot;../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix&quot;&gt; another tutorial&lt;/a&gt; <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivation which shows </td>
+          <td>(</td>
+          <td class="paramtype">in <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> context of an acoustic fluid-structure interaction&#160;</td>
+          <td class="paramname"><em>problem</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a943c0a352a0d8369bcf252f814a56fa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a943c0a352a0d8369bcf252f814a56fa0">&#9670;&nbsp;</a></span>the()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising the <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up the output directory dontinclude sphere_scattering cc skipline start_of_main of the cartesian Helmholtz <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> discussed in&lt;a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt; another tutorial&lt;/a&gt; We provide two separate meshes of c and one <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> the outer boundary where we apply the </td>
+          <td>(</td>
+          <td class="paramtype">approximate&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7557e4dbfc2d473bef0bcc76d5c0af2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7557e4dbfc2d473bef0bcc76d5c0af2c">&#9670;&nbsp;</a></span>via()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">d E [gamma_bc] f a Dirichlet to Neumann mapping <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> application of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Sommerfeld radiation condition via </td>
+          <td>(</td>
+          <td class="paramtype">@R@&#160;</td>
+          <td class="paramname">[gamma_bc]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ad0972490c76ec4f8ae59d8208e932f87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0972490c76ec4f8ae59d8208e932f87">&#9670;&nbsp;</a></span>$a_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f [{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right)<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E $a_[gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f {ln}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00145">145</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2a61ae20c86e97ab977868e7b7c5d262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a61ae20c86e97ab977868e7b7c5d262">&#9670;&nbsp;</a></span>b_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f [{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+b_{ln} \ h_{l}^{(2)}(k\rho)\right)<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E b_[gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{ln} \f$ are arbitrary coefficients and <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> functions</div>
+<div class="line">\f[</div>
+<div class="line">h_{l}^{(1)}(x)=j_{l}(x)+{\rm i} y_{l}(x) \mbox{ \ \ \ \ and \ \ \ \ }</div>
+<div class="line">h_{l}^{(2)}(x)=j_{l}(x)-{\rm i} y_{l}(x) </div>
+<div class="line">\f]</div>
+<div class="line">are <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Hankel <a class="code" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> of first and second kind</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00145">145</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab101a448eb033c2519256d025dccb226"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab101a448eb033c2519256d025dccb226">&#9670;&nbsp;</a></span>course</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> output directory dontinclude sphere_scattering cc skipline start_of_main of course</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00380">380</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4c1c9b04410c96a61a43978344bcbfa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c1c9b04410c96a61a43978344bcbfa8">&#9670;&nbsp;</a></span>default</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> defined as f [\<a class="el" href="sphere__scattering_8txt.html#a4ba81bc4b3e079786c1eb1c1f1017d7f">overline</a>{\cal P }_N = \pi R^2 \int_0^\pi \left.\bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.\f] We refer to&lt;a href=&quot;../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix&quot;&gt; another tutorial&lt;/a&gt; <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivation which most practically relevant solutions of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> are complex valued Since c oomph lib s solvers only deal with <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> equations are separated into their <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts In <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> implementation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz we store <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution as two separate values at each node By default</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00508">508</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a46553e1c788e277e1863915ee21a7fe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46553e1c788e277e1863915ee21a7fe3">&#9670;&nbsp;</a></span>domain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> domain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00480">480</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8f5a56ee0c9b2dc351ffcf36f961d1a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f5a56ee0c9b2dc351ffcf36f961d1a6">&#9670;&nbsp;</a></span>elements</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma we output <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> time averaged power radiated over <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> outer boundary of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> defined as f [\<a class="el" href="sphere__scattering_8txt.html#a4ba81bc4b3e079786c1eb1c1f1017d7f">overline</a>{\cal P }_N = \pi R^2 \int_0^\pi \left.\bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.\f] We refer to&lt;a href=&quot;../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix&quot;&gt; another tutorial&lt;/a&gt; <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> derivation which most practically relevant solutions of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz <a class="el" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> are complex valued Since c oomph lib s solvers only deal with <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> equations are separated into their <a class="el" href="sphere__scattering_8txt.html#aac6face6e9e2896dd5c7592648166973">real</a> and imaginary parts In <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> implementation of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Helmholtz elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00506">506</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a68841c31de7e2ddf9987db078384d4d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68841c31de7e2ddf9987db078384d4d4">&#9670;&nbsp;</a></span>equation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson equation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00134">134</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a04f73e88b5c7c0074d50196121103a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04f73e88b5c7c0074d50196121103a73">&#9670;&nbsp;</a></span>equator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f [{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right)<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E equator[gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f [j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f [<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre expressed in terms of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Legendre polynomials f [<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].\f] This definition <a class="el" href="sphere__scattering_8txt.html#a7ad4e531c6ad76afb4c03738f2135166">shows</a> that f f f [\theta = \arctan(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>/<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>),\f] f [\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a> = \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,\f] so f <a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a> in [0,2\pi] f remains and f theta in [0,\pi] f sweeps from <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> north <a class="el" href="sphere__scattering_8txt.html#a7557e4dbfc2d473bef0bcc76d5c0af2c">via</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a>(\f$ \theta=\pi/2 \f$) to <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> south <a class="el" href="sphere__scattering_8txt.html#a9fcd7145b40df9dde9d94ef5cbaa3f8e">pole</a>(\f$ \theta</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9aada8950eb2aa3679b0b58e8d14c7c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aada8950eb2aa3679b0b58e8d14c7c7">&#9670;&nbsp;</a></span>FaceElements</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> output directory dontinclude sphere_scattering cc skipline start_of_main of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> cartesian Helmholtz <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> discussed in&lt;a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt; another tutorial&lt;/a&gt; We provide two separate meshes of c FaceElements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00387">387</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0993cd786c3e70bc3a09ed9c1ee2c6b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0993cd786c3e70bc3a09ed9c1ee2c6b0">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc <a class="el" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> check_gamma Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00479">479</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a922f5912804e6103b099adc5147618f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a922f5912804e6103b099adc5147618f3">&#9670;&nbsp;</a></span>functions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f [{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right)<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E functions[gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel functions f [j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The functions f [<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00160">160</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a92eea6031e56d61acdba9c8dbf4d4cb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92eea6031e56d61acdba9c8dbf4d4cb8">&#9670;&nbsp;</a></span>mesh</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; subsection constr The <a class="el" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> constructor We start by building <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> bulk mesh</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00404">404</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4ba81bc4b3e079786c1eb1c1f1017d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba81bc4b3e079786c1eb1c1f1017d7f">&#9670;&nbsp;</a></span>overline</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">d overline {\theta}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00238">238</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a83c3ad80d756a1ed3a83ee43191a7693"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83c3ad80d756a1ed3a83ee43191a7693">&#9670;&nbsp;</a></span>P_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f [{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right)P_{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E P_[gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f [j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f [P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre expressed in terms of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Legendre polynomials f [P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].\f] This definition <a class="el" href="sphere__scattering_8txt.html#a7ad4e531c6ad76afb4c03738f2135166">shows</a> that f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{l}^{m}(x)=0 \f$ <span class="keywordflow">for</span> \f$ m&gt;l \f$</div>
+<div class="line">which explains <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> limited range of summation indices in <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> second</div>
+<div class="line">sum in (@R[gen_polar_hh]@).</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">The relation between <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> cylindrical polar coordinates \f$</div>
+<div class="line">(<a class="code" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>,<a class="code" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">\varphi</a>,<a class="code" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>)\f$ and spherical polar coordinates \f$</div>
+<div class="line">(\rho,\theta,\<a class="code" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>) \f$</div>
+<div class="line">is given by </div>
+<div class="line">\f[</div>
+<div class="line">\rho = \sqrt{<a class="code" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>^2 + <a class="code" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>^2}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00165">165</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9fcd7145b40df9dde9d94ef5cbaa3f8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fcd7145b40df9dde9d94ef5cbaa3f8e">&#9670;&nbsp;</a></span>pole</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f [{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right)<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E pole[gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f [j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f [<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre expressed in terms of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Legendre polynomials f [<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].\f] This definition <a class="el" href="sphere__scattering_8txt.html#a7ad4e531c6ad76afb4c03738f2135166">shows</a> that f f f [\theta = \arctan(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>/<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>),\f] f [\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a> = \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,\f] so f <a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a> in [0,2\pi] f remains and f theta in [0,\pi] f sweeps from <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> north(\f$ \theta=0 \f$)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d895bb93cd829890aa4c1a2d5682792"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d895bb93cd829890aa4c1a2d5682792">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00005">5</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sphere__scattering_8cc_source.html#l00732">main()</a>.</p>
+
+</div>
+</div>
+<a id="a514f1b439f404f86f77090fa9edc96ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a514f1b439f404f86f77090fa9edc96ce">&#9670;&nbsp;</a></span>r</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">r</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00287">287</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sphere__scattering_8cc_source.html#l00065">AnnularQuadMesh&lt; ELEMENT &gt;::AnnularQuadMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aaafac441e46d3dfe3bf9a0df8938178b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaafac441e46d3dfe3bf9a0df8938178b">&#9670;&nbsp;</a></span>respectively</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f [{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right)<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E respectively[gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00151">151</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a37b71560eea82d3169d23bd07db8b370"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37b71560eea82d3169d23bd07db8b370">&#9670;&nbsp;</a></span>start_of_namespace</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc dontinclude sphere_scattering cc skipline start_of_namespace</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">===</div>
+<div class="line"><a class="code" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">\until</a> <a class="code" href="namespaceProblemParameters.html#aa529b33b7feb959e0c044447bf0f6c6f">Nterms_for_DtN</a></div>
+<div class="line"> </div>
+<div class="line">Next we define <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="code" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">coefficients</a></div>
+<div class="line"><a class="code" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920"></a> </div>
+<div class="line"><a class="code" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">\until</a> <a class="code" href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">I</a>(0.0,1.0) </div>
+<div class="line"> </div>
+<div class="line">required <a class="code" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> specification of <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> exact solution</div>
+<div class="line"> </div>
+<div class="line">\skipline Exact solution</div>
+<div class="line">\<a class="code" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a> <span class="keywordtype">void</span> <a class="code" href="namespacePlanarWave.html#a00f252bcf0181187c656a58ce36b07b5">get_exact_u</a></div>
+<div class="line"> </div>
+<div class="line">and its derivative</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00333">333</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa3f6a027ac861610e75ed6be432d4090"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3f6a027ac861610e75ed6be432d4090">&#9670;&nbsp;</a></span>unchanged</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson theta f as f [{\tt U}(\rho,\theta,\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+<a class="el" href="sphere__scattering_8txt.html#a2a61ae20c86e97ab977868e7b7c5d262">b_</a>{ln} \ h_{l}^{(2)}(k\rho)\right)<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{n}(\cos\theta)\exp({\rm i} n \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>). \ \ \ \ \ \ \ @E unchanged[gen_polar_hh]@\f] where <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> f expressed in terms <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> spherical Bessel <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f [j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The <a class="el" href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a> f [<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{l}(x)\f] are <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> associated Legendre expressed in terms of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Legendre polynomials f [<a class="el" href="sphere__scattering_8txt.html#a83c3ad80d756a1ed3a83ee43191a7693">P_</a>{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].\f] This definition <a class="el" href="sphere__scattering_8txt.html#a7ad4e531c6ad76afb4c03738f2135166">shows</a> that f f f [\theta = \arctan(<a class="el" href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a>/<a class="el" href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a>),\f] f [\<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a> = \<a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a>,\f] so f <a class="el" href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a> in [0,2\pi] f remains</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00184">184</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6762bf2f0bcfab7216d831ed3f60d920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6762bf2f0bcfab7216d831ed3f60d920">&#9670;&nbsp;</a></span>until</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="el" href="sphere__scattering_8txt.html#a46553e1c788e277e1863915ee21a7fe3">domain</a> with noded c QFourierDecomposedHelmholtzElements and set up <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> output directory dontinclude sphere_scattering cc skipline start_of_main until</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">\skipline Create <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="code" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">problem</a></div>
+<div class="line"><a class="code" href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">\until</a> RESLT</div>
+<div class="line"> </div>
+<div class="line">We solve <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> <a class="code" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> <span class="keywordflow">for</span> a range of Fourier wavenumbers</div>
+<div class="line">and document <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> results.</div>
+<div class="line"> </div>
+<div class="line">\until } </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">&lt;HR&gt;</div>
+<div class="line">&lt;HR&gt;</div>
+<div class="line"> </div>
+<div class="line">\subsection <span class="keyword">class </span>The <a class="code" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> class</div>
+<div class="line"> </div>
+<div class="line">The <a class="code" href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a> class is very similar to that employed <a class="code" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> </div>
+<div class="line"><a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> &lt;a href=<span class="stringliteral">&quot;../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html&quot;</span>&gt;</div>
+<div class="line">solution of <a class="code" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> 2D Poisson <a class="code" href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a> with flux boundary</div>
+<div class="line">conditions&lt;/a&gt; or</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00362">362</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4994640a101ccf8a9146ee31c95037a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4994640a101ccf8a9146ee31c95037a2">&#9670;&nbsp;</a></span>varphi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> section ref numbering <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> details The application of Dirichlet and Neumann boundary conditions is straightforward and follows <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> pattern employed <a class="el" href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a> <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> solution of <a class="el" href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a> Poisson varphi</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00134">134</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+<a id="a25ed1bcb423b0b7200f485fc5ff71c8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25ed1bcb423b0b7200f485fc5ff71c8e">&#9670;&nbsp;</a></span>z</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">z</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8txt_source.html#l00287">287</a> of file <a class="el" href="sphere__scattering_8txt_source.html">sphere_scattering.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="anamespacePlanarWave_html_a00f252bcf0181187c656a58ce36b07b5"><div class="ttname"><a href="namespacePlanarWave.html#a00f252bcf0181187c656a58ce36b07b5">PlanarWave::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector of size 2, containing real and imag parts.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00121">sphere_scattering.cc:121</a></div></div>
+<div class="ttc" id="asphere__scattering_8txt_html_a68841c31de7e2ddf9987db078384d4d4"><div class="ttname"><a href="sphere__scattering_8txt.html#a68841c31de7e2ddf9987db078384d4d4">equation</a></div><div class="ttdeci">see the section ref numbering for details The application of Dirichlet and Neumann boundary conditions is straightforward and follows the pattern employed for the solution of the Poisson equation</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8txt_source.html#l00134">sphere_scattering.txt:134</a></div></div>
+<div class="ttc" id="asphere__scattering_8txt_html_a514f1b439f404f86f77090fa9edc96ce"><div class="ttname"><a href="sphere__scattering_8txt.html#a514f1b439f404f86f77090fa9edc96ce">r</a></div><div class="ttdeci">r</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8txt_source.html#l00287">sphere_scattering.txt:287</a></div></div>
+<div class="ttc" id="asphere__scattering_8txt_html_a25ed1bcb423b0b7200f485fc5ff71c8e"><div class="ttname"><a href="sphere__scattering_8txt.html#a25ed1bcb423b0b7200f485fc5ff71c8e">z</a></div><div class="ttdeci">z</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8txt_source.html#l00287">sphere_scattering.txt:287</a></div></div>
+<div class="ttc" id="asphere__scattering_8txt_html_a6762bf2f0bcfab7216d831ed3f60d920"><div class="ttname"><a href="sphere__scattering_8txt.html#a6762bf2f0bcfab7216d831ed3f60d920">until</a></div><div class="ttdeci">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising the domain with noded c QFourierDecomposedHelmholtzElements and set up the output directory dontinclude sphere_scattering cc skipline start_of_main until</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8txt_source.html#l00362">sphere_scattering.txt:362</a></div></div>
+<div class="ttc" id="asphere__scattering_8txt_html_a922f5912804e6103b099adc5147618f3"><div class="ttname"><a href="sphere__scattering_8txt.html#a922f5912804e6103b099adc5147618f3">functions</a></div><div class="ttdeci">see the section ref numbering for details The application of Dirichlet and Neumann boundary conditions is straightforward and follows the pattern employed for the solution of the Poisson theta f as f[{\tt U}(\rho,\theta,\varphi)=\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}\left(a_{ln} \ h_{l}^{(1)}(k\rho)+b_{ln} \ h_{l}^{(2)}(k\rho)\right) P_{l}^{n}(\cos\theta)\exp({\rm i} n \varphi). \ \ \ \ \ \ \ @E functions[gen_polar_hh]@\f] where the f expressed in terms the spherical Bessel functions f[j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).\f] The functions f[P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)\f] are the associated Legendre</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8txt_source.html#l00160">sphere_scattering.txt:160</a></div></div>
+<div class="ttc" id="anamespacePlanarWave_html_a541691caf71477c8c389062797c0fdab"><div class="ttname"><a href="namespacePlanarWave.html#a541691caf71477c8c389062797c0fdab">PlanarWave::I</a></div><div class="ttdeci">std::complex&lt; double &gt; I(0.0, 1.0)</div><div class="ttdoc">Imaginary unit.</div></div>
+<div class="ttc" id="asphere__scattering_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="sphere__scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8txt_source.html#l00005">sphere_scattering.txt:5</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aa529b33b7feb959e0c044447bf0f6c6f"><div class="ttname"><a href="namespaceProblemParameters.html#aa529b33b7feb959e0c044447bf0f6c6f">ProblemParameters::Nterms_for_DtN</a></div><div class="ttdeci">unsigned Nterms_for_DtN</div><div class="ttdoc">Number of terms in computation of DtN boundary condition.</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8cc_source.html#l00231">sphere_scattering.cc:231</a></div></div>
+<div class="ttc" id="asphere__scattering_8txt_html_a943c0a352a0d8369bcf252f814a56fa0"><div class="ttname"><a href="sphere__scattering_8txt.html#a943c0a352a0d8369bcf252f814a56fa0">the</a></div><div class="ttdeci">see ref acc dontinclude sphere_scattering cc skipline skipline Get du discretising the domain with noded c QFourierDecomposedHelmholtzElements and set up the output directory dontinclude sphere_scattering cc skipline start_of_main of the cartesian Helmholtz problem discussed in&lt; a href=&quot;../../../helmholtz/scattering/html/index.html&quot;&gt; another tutorial&lt;/a &gt; We provide two separate meshes of c and one for the outer boundary where we apply the(approximate) Sommerfeld radiation condition. As discussed in section \ref DtN</div></div>
+<div class="ttc" id="asphere__scattering_8txt_html_a4994640a101ccf8a9146ee31c95037a2"><div class="ttname"><a href="sphere__scattering_8txt.html#a4994640a101ccf8a9146ee31c95037a2">varphi</a></div><div class="ttdeci">see the section ref numbering for details The application of Dirichlet and Neumann boundary conditions is straightforward and follows the pattern employed for the solution of the Poisson varphi</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8txt_source.html#l00134">sphere_scattering.txt:134</a></div></div>
+<div class="ttc" id="asphere__scattering_8txt_html_aa9bec731509dad4c1575deb7e208e13b"><div class="ttname"><a href="sphere__scattering_8txt.html#aa9bec731509dad4c1575deb7e208e13b">for</a></div><div class="ttdeci">d E[gamma_bc] f a Dirichlet to Neumann mapping the application of the Sommerfeld radiation condition c oomph lib provides the class c FourierDecomposedHelmholtzDtNMesh which provides storage for(the pointers to) the \c FourierDecomposedHelmholtzDtNBoundaryElements that discretise the artificial boundary. The member function \c FourierDecomposedHelmholtzDtNMesh</div><div class="ttdef"><b>Definition:</b> <a href="sphere__scattering_8txt_source.html#l00257">sphere_scattering.txt:257</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:28:43
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

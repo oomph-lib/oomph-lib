@@ -1,0 +1,460 @@
+\hypertarget{classoomph_1_1Shape}{}\doxysection{oomph\+::Shape Class Reference}
+\label{classoomph_1_1Shape}\index{oomph::Shape@{oomph::Shape}}
+
+
+{\ttfamily \#include $<$shape.\+h$>$}
+
+Inheritance diagram for oomph\+::Shape\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.462428cm]{classoomph_1_1Shape}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Shape_aedb62dd7998071721057eab955ecc1f9}{Shape}} (const unsigned \&N)
+\begin{DoxyCompactList}\small\item\em Constructor for a single-\/index set of shape functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Shape_ad892f46ca3265ba654bb4df164890505}{Shape}} (const unsigned \&N, const unsigned \&M)
+\begin{DoxyCompactList}\small\item\em Constructor for a two-\/index set of shape functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Shape_aef6de818ca2298d6a7db1b2175bb94fa}{Shape}} (const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Shape_af6d7a3572de5743ca382d275711a814e}{Shape}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1Shape_aa9d3d4203abf1e39fc3db2732355c801}{operator=}} (const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)
+\item 
+void \mbox{\hyperlink{classoomph_1_1Shape_ae56db76f6d0b46acb57869896dc9be20}{operator=}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$const \&shape\+\_\+pt)
+\item 
+\mbox{\hyperlink{classoomph_1_1Shape_af6e38eb7b8c072b0acac31c61f11cc27}{$\sim$\+Shape}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, clear up the memory allocated by the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Shape_a701caf3197248f0e4f598ede06f0d4ec}{resize}} (const unsigned \&N, const unsigned \&M=1)
+\begin{DoxyCompactList}\small\item\em Change the size of the storage. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1Shape_ad8ec7c6b2575de50c32ed7c15f38d52f}{operator\mbox{[}$\,$\mbox{]}}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Overload the bracket operator to provide access to values. \end{DoxyCompactList}\item 
+const double \& \mbox{\hyperlink{classoomph_1_1Shape_a08939245bc26cbb5d833fbebecfc8958}{operator\mbox{[}$\,$\mbox{]}}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Overload the bracket operator (const version) \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1Shape_ab056b07f2926608b77536a15a2b3ffaf}{operator()}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Overload the round bracket operator to provide access to values. \end{DoxyCompactList}\item 
+const double \& \mbox{\hyperlink{classoomph_1_1Shape_a317e00ba233add451d36b8208d12087b}{operator()}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Overload the round bracket operator (const version) \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1Shape_ab95188f5eed67514d5bf577bfacda57e}{operator()}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Overload the round bracket operator, allowing for two indices. \end{DoxyCompactList}\item 
+const double \& \mbox{\hyperlink{classoomph_1_1Shape_aca2aaf2e793bced412831a26d3b8e8c7}{operator()}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Overload the round bracket operator, allowing for two indices (const version) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Shape_a374bd15fa30336247543459231f82af0}{nindex1}} () const
+\begin{DoxyCompactList}\small\item\em Return the range of index 1 of the shape function object. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Shape_ae5be285b7233935366b561646a085463}{nindex2}} () const
+\begin{DoxyCompactList}\small\item\em Return the range of index 2 of the shape function object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1Shape_af24aed6aba597ff8cd52d201be5a414a}{range\+\_\+check}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Private function that checks whether the index is in range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1Shape_ae045962e578d675877663404b177d301}{Psi}}
+\begin{DoxyCompactList}\small\item\em Pointer that addresses the storage that will be used to read and set the shape functions. The shape functions are packed into a flat array of doubles. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1Shape_a32c202fd82d361e354d7cf19615f162f}{Allocated\+\_\+storage}}
+\begin{DoxyCompactList}\small\item\em Pointer that addresses the storage allocated by the object on construction. This will be the same as Psi if the object is not copied. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Shape_a63638007c6e3b84b57a023432c43ceb1}{Index1}}
+\begin{DoxyCompactList}\small\item\em Size of the first index of the shape function. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Shape_aae154e349eaa0a2f4b415c2bdaef0708}{Index2}}
+\begin{DoxyCompactList}\small\item\em Size of the second index of the shape function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A Class for shape functions. In simple cases, the shape functions have only one index that can be thought of as corresponding to the nodal points. In general, however, when quantities and their gradients are interpolated separately, the shape function have two indices\+: one corresponding to the nodal points, and the other to the \char`\"{}type\char`\"{} of quantity being interpolated\+: function, derivative, \&c The second index can also represent the vector coordinate for vector-\/valued (Nedelec) shape functions.
+
+The implementation of \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions is designed to permit fast copying of entire sets of values by resetting the internal pointer to the data, Psi; functionality that is required, for example, when setting the test functions in Galerkin elements and when reading pre-\/computed values of the shape functions. In general, we cannot know at construction time whether the pointer to the values will be reset or not and, therefore, whether the storage for values should be allocated by the object. We choose to allocate storage on construction and store an additional pointer Allocated\+\_\+data that {\bfseries{always}} addresses the storage allocated by the object. If the Psi pointer is reset then this storage will be \char`\"{}wasted\char`\"{}, but only for the lifetime of the object. The cost for non-\/copied \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions is one additional pointer. 
+
+Definition at line 77 of file shape.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1Shape_aedb62dd7998071721057eab955ecc1f9}\label{classoomph_1_1Shape_aedb62dd7998071721057eab955ecc1f9}} 
+\index{oomph::Shape@{oomph::Shape}!Shape@{Shape}}
+\index{Shape@{Shape}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{Shape()}{Shape()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Shape\+::\+Shape (\begin{DoxyParamCaption}\item[{const unsigned \&}]{N }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for a single-\/index set of shape functions. 
+
+
+
+Definition at line 124 of file shape.\+h.
+
+
+
+References Allocated\+\_\+storage, oomph\+::\+Quad\+Tree\+Names\+::N, and Psi.
+
+\mbox{\Hypertarget{classoomph_1_1Shape_ad892f46ca3265ba654bb4df164890505}\label{classoomph_1_1Shape_ad892f46ca3265ba654bb4df164890505}} 
+\index{oomph::Shape@{oomph::Shape}!Shape@{Shape}}
+\index{Shape@{Shape}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{Shape()}{Shape()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Shape\+::\+Shape (\begin{DoxyParamCaption}\item[{const unsigned \&}]{N,  }\item[{const unsigned \&}]{M }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for a two-\/index set of shape functions. 
+
+
+
+Definition at line 128 of file shape.\+h.
+
+
+
+References Allocated\+\_\+storage, oomph\+::\+Quad\+Tree\+Names\+::N, and Psi.
+
+\mbox{\Hypertarget{classoomph_1_1Shape_aef6de818ca2298d6a7db1b2175bb94fa}\label{classoomph_1_1Shape_aef6de818ca2298d6a7db1b2175bb94fa}} 
+\index{oomph::Shape@{oomph::Shape}!Shape@{Shape}}
+\index{Shape@{Shape}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{Shape()}{Shape()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Shape\+::\+Shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 132 of file shape.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_af6d7a3572de5743ca382d275711a814e}\label{classoomph_1_1Shape_af6d7a3572de5743ca382d275711a814e}} 
+\index{oomph::Shape@{oomph::Shape}!Shape@{Shape}}
+\index{Shape@{Shape}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{Shape()}{Shape()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Shape\+::\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Default constructor -\/ just assigns a null pointers and zero index sizes. 
+
+Definition at line 136 of file shape.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Shape_af6e38eb7b8c072b0acac31c61f11cc27}\label{classoomph_1_1Shape_af6e38eb7b8c072b0acac31c61f11cc27}} 
+\index{oomph::Shape@{oomph::Shape}!````~Shape@{$\sim$Shape}}
+\index{````~Shape@{$\sim$Shape}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{$\sim$Shape()}{~Shape()}}
+{\footnotesize\ttfamily oomph\+::\+Shape\+::$\sim$\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor, clear up the memory allocated by the object. 
+
+
+
+Definition at line 186 of file shape.\+h.
+
+
+
+References Allocated\+\_\+storage.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1Shape_a374bd15fa30336247543459231f82af0}\label{classoomph_1_1Shape_a374bd15fa30336247543459231f82af0}} 
+\index{oomph::Shape@{oomph::Shape}!nindex1@{nindex1}}
+\index{nindex1@{nindex1}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{nindex1()}{nindex1()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Shape\+::nindex1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 1 of the shape function object. 
+
+
+
+Definition at line 258 of file shape.\+h.
+
+
+
+References Index1.
+
+
+
+Referenced by oomph\+::\+Line\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives(), oomph\+::\+Axisymmetric\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives(), oomph\+::\+Surface\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives(), oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::dshape\+\_\+local(), and oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_ae5be285b7233935366b561646a085463}\label{classoomph_1_1Shape_ae5be285b7233935366b561646a085463}} 
+\index{oomph::Shape@{oomph::Shape}!nindex2@{nindex2}}
+\index{nindex2@{nindex2}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{nindex2()}{nindex2()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Shape\+::nindex2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 2 of the shape function object. 
+
+
+
+Definition at line 261 of file shape.\+h.
+
+
+
+References Index2.
+
+
+
+Referenced by oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::dshape\+\_\+local(), oomph\+::\+T\+Raviart\+Thomas\+Darcy\+Element$<$ O\+R\+D\+E\+R $>$\+::scale\+\_\+basis(), oomph\+::\+T\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::scale\+\_\+basis(), oomph\+::\+T\+Axisymmetric\+Poroelasticity\+Element$<$ O\+R\+D\+E\+R $>$\+::scale\+\_\+basis(), and oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_ab056b07f2926608b77536a15a2b3ffaf}\label{classoomph_1_1Shape_ab056b07f2926608b77536a15a2b3ffaf}} 
+\index{oomph::Shape@{oomph::Shape}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Shape\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the round bracket operator to provide access to values. 
+
+
+
+Definition at line 221 of file shape.\+h.
+
+
+
+References i, Index2, Psi, and range\+\_\+check().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_a317e00ba233add451d36b8208d12087b}\label{classoomph_1_1Shape_a317e00ba233add451d36b8208d12087b}} 
+\index{oomph::Shape@{oomph::Shape}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Shape\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the round bracket operator (const version) 
+
+
+
+Definition at line 230 of file shape.\+h.
+
+
+
+References i, Index2, Psi, and range\+\_\+check().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_ab95188f5eed67514d5bf577bfacda57e}\label{classoomph_1_1Shape_ab95188f5eed67514d5bf577bfacda57e}} 
+\index{oomph::Shape@{oomph::Shape}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Shape\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the round bracket operator, allowing for two indices. 
+
+
+
+Definition at line 239 of file shape.\+h.
+
+
+
+References i, Index2, Psi, and range\+\_\+check().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_aca2aaf2e793bced412831a26d3b8e8c7}\label{classoomph_1_1Shape_aca2aaf2e793bced412831a26d3b8e8c7}} 
+\index{oomph::Shape@{oomph::Shape}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Shape\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the round bracket operator, allowing for two indices (const version) 
+
+
+
+Definition at line 249 of file shape.\+h.
+
+
+
+References i, Index2, Psi, and range\+\_\+check().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_aa9d3d4203abf1e39fc3db2732355c801}\label{classoomph_1_1Shape_aa9d3d4203abf1e39fc3db2732355c801}} 
+\index{oomph::Shape@{oomph::Shape}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Shape\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The assignment operator does a shallow copy (resets the pointer to the data) 
+
+Definition at line 140 of file shape.\+h.
+
+
+
+References Index1, Index2, Psi, and oomph\+::\+One\+Dim\+Hermite\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_ae56db76f6d0b46acb57869896dc9be20}\label{classoomph_1_1Shape_ae56db76f6d0b46acb57869896dc9be20}} 
+\index{oomph::Shape@{oomph::Shape}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Shape\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} $\ast$const \&}]{shape\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The assignment operator does a shallow copy (resets the pointer to the data) 
+
+Definition at line 163 of file shape.\+h.
+
+
+
+References Index1, Index2, and Psi.
+
+\mbox{\Hypertarget{classoomph_1_1Shape_ad8ec7c6b2575de50c32ed7c15f38d52f}\label{classoomph_1_1Shape_ad8ec7c6b2575de50c32ed7c15f38d52f}} 
+\index{oomph::Shape@{oomph::Shape}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Shape\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the bracket operator to provide access to values. 
+
+
+
+Definition at line 203 of file shape.\+h.
+
+
+
+References i, Index2, Psi, and range\+\_\+check().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_a08939245bc26cbb5d833fbebecfc8958}\label{classoomph_1_1Shape_a08939245bc26cbb5d833fbebecfc8958}} 
+\index{oomph::Shape@{oomph::Shape}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Shape\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the bracket operator (const version) 
+
+
+
+Definition at line 212 of file shape.\+h.
+
+
+
+References i, Index2, Psi, and range\+\_\+check().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_af24aed6aba597ff8cd52d201be5a414a}\label{classoomph_1_1Shape_af24aed6aba597ff8cd52d201be5a414a}} 
+\index{oomph::Shape@{oomph::Shape}!range\_check@{range\_check}}
+\index{range\_check@{range\_check}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{range\_check()}{range\_check()}}
+{\footnotesize\ttfamily void oomph\+::\+Shape\+::range\+\_\+check (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Private function that checks whether the index is in range. 
+
+
+
+Definition at line 98 of file shape.\+h.
+
+
+
+References i, Index1, and Index2.
+
+
+
+Referenced by operator()(), and operator\mbox{[}$\,$\mbox{]}().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_a701caf3197248f0e4f598ede06f0d4ec}\label{classoomph_1_1Shape_a701caf3197248f0e4f598ede06f0d4ec}} 
+\index{oomph::Shape@{oomph::Shape}!resize@{resize}}
+\index{resize@{resize}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void oomph\+::\+Shape\+::resize (\begin{DoxyParamCaption}\item[{const unsigned \&}]{N,  }\item[{const unsigned \&}]{M = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Change the size of the storage. 
+
+
+
+Definition at line 189 of file shape.\+h.
+
+
+
+References Allocated\+\_\+storage, Index1, Index2, oomph\+::\+Quad\+Tree\+Names\+::N, and Psi.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1Shape_a32c202fd82d361e354d7cf19615f162f}\label{classoomph_1_1Shape_a32c202fd82d361e354d7cf19615f162f}} 
+\index{oomph::Shape@{oomph::Shape}!Allocated\_storage@{Allocated\_storage}}
+\index{Allocated\_storage@{Allocated\_storage}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{Allocated\_storage}{Allocated\_storage}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Shape\+::\+Allocated\+\_\+storage\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer that addresses the storage allocated by the object on construction. This will be the same as Psi if the object is not copied. 
+
+
+
+Definition at line 89 of file shape.\+h.
+
+
+
+Referenced by resize(), Shape(), $\sim$\+Shape(), and oomph\+::\+Shape\+With\+Deep\+Copy\+::$\sim$\+Shape\+With\+Deep\+Copy().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_a63638007c6e3b84b57a023432c43ceb1}\label{classoomph_1_1Shape_a63638007c6e3b84b57a023432c43ceb1}} 
+\index{oomph::Shape@{oomph::Shape}!Index1@{Index1}}
+\index{Index1@{Index1}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{Index1}{Index1}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Shape\+::\+Index1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Size of the first index of the shape function. 
+
+
+
+Definition at line 92 of file shape.\+h.
+
+
+
+Referenced by nindex1(), operator=(), range\+\_\+check(), resize(), and oomph\+::\+Shape\+With\+Deep\+Copy\+::\+Shape\+With\+Deep\+Copy().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_aae154e349eaa0a2f4b415c2bdaef0708}\label{classoomph_1_1Shape_aae154e349eaa0a2f4b415c2bdaef0708}} 
+\index{oomph::Shape@{oomph::Shape}!Index2@{Index2}}
+\index{Index2@{Index2}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{Index2}{Index2}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Shape\+::\+Index2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Size of the second index of the shape function. 
+
+
+
+Definition at line 95 of file shape.\+h.
+
+
+
+Referenced by nindex2(), operator()(), operator=(), operator\mbox{[}$\,$\mbox{]}(), range\+\_\+check(), resize(), and oomph\+::\+Shape\+With\+Deep\+Copy\+::\+Shape\+With\+Deep\+Copy().
+
+\mbox{\Hypertarget{classoomph_1_1Shape_ae045962e578d675877663404b177d301}\label{classoomph_1_1Shape_ae045962e578d675877663404b177d301}} 
+\index{oomph::Shape@{oomph::Shape}!Psi@{Psi}}
+\index{Psi@{Psi}!oomph::Shape@{oomph::Shape}}
+\doxysubsubsection{\texorpdfstring{Psi}{Psi}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Shape\+::\+Psi\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer that addresses the storage that will be used to read and set the shape functions. The shape functions are packed into a flat array of doubles. 
+
+
+
+Definition at line 84 of file shape.\+h.
+
+
+
+Referenced by operator()(), operator=(), operator\mbox{[}$\,$\mbox{]}(), resize(), Shape(), and oomph\+::\+Shape\+With\+Deep\+Copy\+::\+Shape\+With\+Deep\+Copy().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{shape_8h}{shape.\+h}}\end{DoxyCompactItemize}

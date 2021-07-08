@@ -1,0 +1,679 @@
+/**
+
+\mainpage Change log
+
+
+This document provides an overview of the major changes
+between different "official" releases of \c oomph-lib.
+
+As of 2016 (i.e. > the 1.0.* release) we include the svn revision number
+as part of the release identifier since this makes it easier for us
+to publish incremental updates to the library (and to do so more
+frequently than we used to!). Whenever such a
+new release is made available we automatically update the
+snapshot of the corresponding svn log which contains the commit messages of 
+all changes made since "day one":
+
+
+<center>
+<a href="../../svn_log.txt">
+svn log [Note that this link will not work from a local installation 
+of oomph-lib.]</a>
+</center>
+
+
+[For historical reasons we also provide access to 
+the <a href="../final_svn_log.txt">complete log 
+from our previous (non-public) svn repository</a>. This covers
+all changes from the initial release of the library (svn revision
+132) up to the move to the new public repository.]
+
+
+You may also want to consult the entries in our (sadly rather
+under-used) bugzilla-based bug-and-feature-tracking system, 
+accessible online at
+
+<CENTER> 
+<a href="http://oomph-lib.maths.man.ac.uk/bugzilla">
+http://oomph-lib.maths.man.ac.uk/bugzilla</a>
+</CENTER> 
+
+
+for known bugs and their resolution.
+
+The remainder of this document covers the following issues:
+
+- \ref interface_changes
+- \ref zero_point_nine_to_one_point_zero 
+  - \ref new_functionality_one_point_zero
+- \ref zero_point_eight_five_to_zero_point_nine
+  - \ref new_functionality_zero_point_nine
+  - \ref major_interface_changes_zero_point_nine 
+  .
+- \ref zero_point_eight_to_zero_point_five
+  - \ref new_functionality_zero_point_five
+  - \ref major_interface_changes_zero_point_five 
+  .
+.
+
+<hr>
+<hr>
+
+
+\section interface_changes Policy on interface changes
+
+We obviously try to avoid interface changes as much
+as possible as they may force users to adjust their code
+when upgrading to a new version. We will only change interfaces
+(names of objects and/or member functions, or the number or
+order of their arguments) if
+-# The previously chosen name turned out to be too ambiguous. 
+   For instance, the change from 
+   \code 
+   Problem::actions_before_solve() 
+  \endcode
+   to 
+   \code 
+   Problem::actions_before_newton_solve()
+   \endcode
+   became necessary
+   because of the addition of further nonlinear (but non-Newton) solvers 
+   (e.g. the segregated FSI solver). Since such solvers may call the Newton
+   solver themselves, a more fine-grained control over what we 
+   mean by "solving" was required. \n\n
+-# The previously chosen name violated our own 
+   <a href="../../coding_conventions/html/index.html">
+   coding conventions.</a> For instance, 
+   \code 
+   FiniteElement::n_nodal_position_type()
+   \endcode
+   had to be
+   changed to  
+   \code 
+   FiniteElement::nnodal_position_type()
+   \endcode 
+   because we do not want underscores after the leading "n" in an access
+   function that returns the number of certain objects. \n\n
+-# The order of the function arguments violated our own coding
+   conventions. For instance, 
+   \code 
+   FiniteElement::get_x(Vector<double>& s, const unsigned& t,...) 
+   \endcode
+   had to be changed to 
+   \code 
+   FiniteElement::get_x(const unsigned& t, Vector<double>& s,...) 
+   \endcode
+   because the discrete "time" argument always comes first.
+   \n\n
+.
+Changes to function or object names are easy to detect because
+the compiler will not find the old version when linking
+against a new version of the library, encouraging the user 
+to consult this list to (hopefully) find the appropriate
+replacement.
+
+ Changes to the order of function arguments can be very dangerous: if the order
+of two arguments of the same type is exchanged the compiler cannot
+detect the change to the interface but the code is likely to compute 
+different results. To facilitate the detection of such changes, the
+new version of such functions contains an explicit warnings that can
+be enabled by compiling the library with the macro \c 
+WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES. (For a gcc compiler this
+is done with the compiler flag 
+\c -DWARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES).
+
+Here is an example of a function in which the order of the two
+unsigned arguments was changed. If compiled with \c 
+WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES, the code will issue
+an appropriate warning every time this function is called.
+
+\code
+
+// Function of two unsigned arguments whose order has changed
+// since the previous release
+void SomeClass::some_function(const unsigned& t, const unsigned& i)
+{
+
+  [...]
+
+ #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
+
+   // Throw an oomph-lib warning to alert the user to the change
+   // in the order of the arguments
+   OomphLibWarning("Warning: Order of interfaces has changed",
+                   "SomeClass::some_function(...)",
+                   OOMPH_EXCEPTION_LOCATION);
+
+ #endif
+
+  [...]
+
+}
+
+\endcode
+
+Obviously, you should only compile the library with 
+\c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter
+problems after upgrading to a new version. 
+
+
+
+<HR>
+
+
+\subsection zero_point_nine_to_one_point_zero Changes between version 0.9 and 1.0.*
+
+\subsubsection new_functionality_one_point_zero Major new functionality
+- Provided the capability to solve the Helmholtz equation (with
+  various ways of implementing the
+  Sommerfeld radiation condition), the time-harmonic equations of linear
+  elasticity, and the interaction between these two systems of
+  equations in time-harmonic acoustic fluid structure
+  interaction problems. All equations are implemented in cartesian and
+  cylindrical polar coordinates (in the latter case, using an azimuthal Fourier 
+  decomposition for the solution).
+  \n\n
+- Provided block preconditioners for the solution of
+  large-displacement fluid-structure interaction problems, based the 
+  coupling of full
+  nonlinear 2D/3D elasticity and the Navier-Stokes equations.
+  \n\n
+- Implemented the linearised Navier-Stokes equations (with the option to study
+  their solutions as perturbations relative to a base state that is itself
+  governed by the full Navier-Stokes equations).
+  \n\n
+- Provided elements for the solution of the axisymmetric equations of 
+  linear elasticity. \n\n
+- Finished what is hopefully the final rewrite of the (parallel) block
+  preconditioning framework and its extensive tutorial.
+  \n\n
+- Provided elements for the solution of the Foeppl-von-Karman
+  equations in various formulations (using either an Airy-stress 
+  function or the in-plane displacements) and in various coordinate
+  systems.
+  \n\n
+- Provided elements for Darcy porous media flow and Biot-type
+  poro-elasticity, including the ability to use the latter elements
+  in fluid-structure interaction problems which are governed by the equations
+  of poro-elasticity coupled to the Navier-Stokes equations.
+  \n\n
+- Implemented the ability adapt unstructured meshes in 2D
+  (in serial and in parallel) and (in a parallel setting) to 
+  distribute such meshes over multiple processors, and to perform
+  load balancing in spatially adaptive simulations.
+  \n\n
+- Provided elements for the solution of elements for the solution
+  of the Navier-Stokes equations with generalised Newtonian
+  constitutive equations (i.e. non-Newtonian behaviour in which
+  the viscosity depends on the invariants of the rate-of-strain 
+  tensor).\n\n
+- Provided machinery to output paraview (vtu and vtp) files directly
+  (implemented for selected elements; broken virtual functions
+  in base classes provide instructions what to do for others). \n\n
+- Provided machinery to establish what the equations/unknowns in 
+  a fully-built problem represent. Calling <code>Problem::describe_dofs()</code>
+  trawls recursively through the oomph-lib object hierarchy to
+  describe what each degree of freedom represents (from the Problem's,
+  Meshes' and Nodes' point of view). Very useful for debugging (e.g. 
+  "Why are all the entries in the n-th row/column in the Jacobian 
+   zero?" or "The n-th residual is enormous -- which equation does it
+   correspond to?", etc.)
+  \n\n
+- Provided machinery for hp adaptivity and p-type spectral elements
+  with mortar constraints in 2D and 3D.\n\n
+- Added interfaces to the Trilinos ANASAZI eigensolver to allow
+  parallel solution of eigenproblems. \n\n
+- Basic implementation of discontinuous Galerkin methods for general
+  flux transport problems.\n\n
+- Many new detailed tutorials explaining:\n\n
+  - How to use \t oomph-lib in parallel and how to (optionally) distribute 
+    problems over multiple processors and to perform load balancing when
+    performing spatially-adaptive, distributed simulations. 
+    \n\n
+  - How to use oomph-lib's block preconditioning framework. 
+    \n\n
+  - How to solve large-displacement fluid-structure interaction
+    problems, based the coupling of full nonlinear 2D/3D elasticity 
+    and the Navier-Stokes equations, incl. the use of preconditioners
+    and spatial adaptivity. \n\n
+  - How to generate unstructured 2D meshes whose curvlinear boundaries are
+    described my \c GeomObjects; these boundaries are respected under
+    mesh refinement, i.e. the mesh converges to the exact domain geometry, 
+    rather than using the geometry defined by the initial, coarse
+    discretisation. \n\n
+  - How to simulate steady and unsteady free-surface flows in various 
+    geometries. \n\n
+  - How to simulate the transport of immersed solid particles in
+    viscous flow. \n\n
+  - How to implement and solve surface transport equations, such
+    as insoluble and soluble surfactant problems. \n\n
+  - How to solve the Helmholtz equations in a variety of coordinate
+    systems and how to apply the Sommerfeld radiation condition by
+    ABCs, DTNs, or PMLs. \n\n
+  - How to solve time-harmonic acoustic fluid-structure interaction
+    problems in a variety of coordinate systems. \n\n
+  - ...\n\n
+. 
+Have a look through the <a href="../../example_code_list/html/index.html">
+extensive list of example codes</a> to see what else is available.
+.   
+
+\subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9
+
+
+\subsubsection new_functionality_zero_point_nine Major new functionality
+- Significantly extended \c oomph-lib's parallel processing
+  capabilities. The library's solver and (block) preconditioning framework is
+  now fully parallelised; the parallel assembly of the Jacobian
+  and residual vector has been optimised, and problems can be 
+  now distributed by domain decomposition techniques. 
+  <a href="../../mpi/general_mpi/html/index.html">A new tutorial</a>
+  and various <a href="../../example_code_list/html/index.html#parallel">
+  new demo driver codes</a> demo driver codes 
+  provide an overview of these capabilities.
+  \n\n
+- Completed the documentation of \c oomph-lib's solid
+  mechanics (large-displacement elasticity) capabilities. We provide 
+  an overview of the
+  <a href="../../solid/solid_theory/html/index.html">theory and 
+  implementation</a>, as well as
+  <a href="../../example_code_list/html/index.html#solid">numerous 
+  tutorials</a> discussing the solution of steady and unsteady, 
+  2D and 3D problems with compressible and incompressible
+  materials on structured and unstructured meshes.
+  \n\n
+- Developed a <a href="../../meshes/mesh_from_vmtk/html/index.html">
+  tutorial</a> that shows how to use the 
+  <a href="http://www.vmtk.org">Vascular 
+  Modeling Toolkit (VMTK)</a> to generate \c oomph-lib meshes
+  from medical images. The methodology is used in the following driver codes:
+  \n\n
+  - <a href="../../solid/vmtk_solid/html/index.html">The inflation of a 
+    blood vessel.</a>
+    \n\n
+  - <a href="../../navier_stokes/vmtk_fluid/html/index.html">
+    Finite Reynolds number flow through a (rigid) iliac bifurcation.</a>
+    \n\n
+  - <a href="../../interaction/vmtk_fsi/html/index.html">
+    Finite Reynolds number flow through an elastic iliac bifurcation.</a>
+  .
+  \n\n
+- Extended FSI capabilities so that such problems can be solved
+  on unstructured meshes. We provide new tutorials
+  that demonstrate this capability for 
+  <a href="../../interaction/unstructured_fsi/html/index.html">2D</a> and
+  <a href="../../interaction/unstructured_three_d_fsi/html/index.html">3D</a> 
+  problems.
+  \n\n
+- Introduced \c ElementWithExternalElement as base class for 
+  multi-physics elements in which elements in different meshes/
+  domains interact via source/load functions (e.g. in 
+  fluid-structure interaction or thermal convection problems).
+  See the new tutorials discussing the 
+  <a href="../../multi_physics/multi_domain_ref_b_convect/html/index.html">
+  serial</a> and
+  <a href="../../mpi/boussinesq_convection/html/index.html">parallel</a>
+  solution of multi-physics problems by multi-domain approaches.
+  \n\n
+- Parallelised and optimised the \c MeshAsGeomObject class to use
+  bin structures to accelerate the search in \c locate_zeta(...).
+  \n\n
+- \c FiniteElements are now \c GeomObjects within which their local
+  coordinates act as their intrinsic coordinates.
+  \n\n
+- Extended the \c Z2ErrorEstimator so that the elemental error estimate can be
+  based on the maximum of various distinct fluxes -- useful for
+  multi-field problems such as Boussinesq convection. See the
+  <a href="../../multi_physics/refine_b_convect/html/index.html#comments">
+  tutorial</a> for details.
+  \n\n
+- Added a structured, domain-based mesh for the discretisation of 
+  tube-like domains. See the <a href="../../meshes/mesh_list/html/index.html">
+  list of structured meshes</a> for details. 
+  \n\n
+- Provided a new Lagrange-multiplier-based element, that allows the
+  imposition of parallel in- or outflow from boundaries that are not
+  aligned with coordinate planes. This is discussed in a
+  <a href="../../navier_stokes/vmtk_fluid/html/index.html">
+  separate tutorial.</a>
+  \n\n
+- Provided a new mechanism that allows multiple \c FaceElements to be
+  attached to same node, while providing the ability to distinguish
+  between different Lagrange multipliers stored at the same node. 
+  This is discussed
+  in a <a href="../../interaction/vmtk_fsi/html/index.html">
+  separate tutorial.</a>
+  \n\n
+- Significantly extended oomph-lib's bifurcation tracking routines
+  (no tutorials yet, though).
+  \n\n
+- Provided general framework and driver codes for discontinuous
+  Galerkin methods and explicit timesteppers (no tutorials yet, though).
+  \n\n
+.
+
+
+<HR>
+
+\subsubsection major_interface_changes_zero_point_nine Major interface changes
+
+- \code SolidFiniteElement::add_jacobian_for_solid_ic() \endcode becomes 
+  \code SolidFiniteElement::fill_in_jacobian_for_solid_ic()\endcode 
+  \n\n
+- \code SolidFiniteElement::add_residuals_for_ic()\endcode  becomes 
+  \code SolidFiniteElement::fill_in_residuals_for_solid_ic()\endcode 
+  \n\n
+- \code SolidFiniteElement::get_residuals_for_ic()\endcode  becomes 
+  \code SolidFiniteElement::fill_in_residuals_for_solid_ic()\endcode 
+  \n\n
+- Changed order of arguments in \c PVDEquationsBase::BodyForceFctPt 
+  so that time goes first (as it should!).
+  \n\n
+- Not exactly an interface change but important: 
+  \c AlgebraicMeshes and  \c MacroElementNodeUpdateMeshes \b should now 
+  specify the \c GeomObjects involved in their node update functions. 
+  (This \b must be done if such meshes are to be used in parallel 
+  computations involving domain decomposition). The declaration of
+  the \c GeomObjects should use the functions
+  \c  AlgebraicMesh::add_geom_object_list_pt(...) and
+  \c MacroElementNodeUpdateMesh::set_geom_object_vector_pt(...),
+  respectively.
+  \n\n
+- Added integration point arguments to all get_source-type functions in
+  elements to allow for overloading in multi-domain calculations.
+  For example, 
+  \n\n
+  \code
+  NavierStokesEquations<DIM>::get_body_force_nst(const double& time,
+                                                 const Vector<double> &s,
+                                                 const Vector<double> &x,
+                                                 Vector<double> &result)
+  \endcode                                                  
+  \n\n
+  has been changed to
+  \n\n
+  \code 
+  NavierStokesEquations<DIM>::get_body_force_nst(const double& time,
+                                                 const unsigned& ipt,
+                                                 const Vector<double> &s,
+                                                 const Vector<double> &x,
+                                                 Vector<double> &result)
+  \endcode
+  \n\n
+- \c GeomObject::drdt(...) is now \c GeomObject::dposition_dt(...)
+  to make it consistent with all other functions of that type. 
+  \n\n
+- \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) now
+  requires a pointer to the \c Problem to be specified as the first argument. 
+  \n\n
+- Specification of wall and fluid meshes in \c FSIPreconditioner
+  changed from read/write access functions 
+  \c FSIPreconditioner::navier_stokes_mesh_pt() and 
+  \c FSIPreconditioner::wall_mesh_pt() to
+  \c FSIPreconditioner::set_navier_stokes_mesh(...) and 
+  \c FSIPreconditioner::set_wall_mesh(...), respectively.
+  \n\n
+- Specification of fluid mesh in \c NavierStokesLSCPreconditioner
+  changed from read/write access function 
+  \c FSIPreconditioner::navier_stokes_mesh_pt()
+  to 
+  \c FSIPreconditioner::set_navier_stokes_mesh(...).
+  \n\n
+- Removed all explicit references to \c MPI_COMM_WORLD and the parameters
+  \c MPI_Helpers::Nproc \c MPI_Helpers::My_rank. The total number of
+  processors and the rank of each processor should be obtained from 
+  the appropriate \c OomphCommunicator.
+  \n\n
+- Replaced \c MPI_Helpers::setup(...) with \c MPI_Helpers::init(...)
+  and added \c MPI_Helpers::finalize(). These should be called instead
+  of MPI's own \c init() and \c finalize() functions. 
+  \n\n
+- Introduced \c DoubleVector -- a distributable vector storing double
+  precision numbers.
+  \n\n
+- Merged \c CRDoubleMatrix and \c DistributableCRDoubleMatrix 
+  into \c CRDoubleMatrix. (Note: \c CRDoubleMatrix is the only 
+  distributable matrix within \c oomph-lib.)
+  \n\n
+- Merged \c SuperLU and \c SuperLU_dist into \c SuperLUSolver.
+  If \c oomph-lib is compiled with MPI support, the parallel version
+  of the (exact) preconditioner is used automatically. This behaviour
+  can be over-ruled with the member function
+  \code
+  SuperLUSolver::set_solver_type(...)
+  \endcode
+  whose argument must be one of the three options listed in the enumeration 
+  \c SuperLUSolver::Type. This allows the serial version of the solver to be
+  used even if \c oomph-lib is compiled with MPI support.
+  \n\n
+- Merged \c SuperLUPreconditioner and \c SuperLUDistPreconditioner 
+  into \c SuperLUPreconditioner.
+  If \c oomph-lib is compiled with MPI support, the parallel version
+  of the solver is used automatically.
+  \n\n
+- Updated all solvers/preconditioners to handle new \c CRDoubleMatrix and 
+  \c DoubleVector.
+  \n\n
+- In \c NavierStokesLSCPreconditioner \n\n
+  \code
+  void set_f_preconditioner(Preconditioner& new_f_preconditioner)
+  \endcode
+  and \n\n
+  \code
+  void set_p_preconditioner(Preconditioner& new_f_preconditioner)
+  \endcode
+  \n\n
+  were changed to 
+  \n\n
+  \code 
+  void set_f_preconditioner(Preconditioner* new_f_preconditioner_pt)
+  \endcode
+  \n\n
+  and
+  \n\n
+  \code 
+  void set_p_preconditioner(Preconditioner* new_f_preconditioner_pt)
+  \endcode
+  \n\n
+  respectively, to make them consistent with the rest of the code.
+  \n\n
+- Changed 
+  \code
+  FiniteElement::get_block_numbers_for_unknowns(...)
+  \endcode 
+  to 
+  \code
+  FiniteElement::get_dof_numbers_for_unknowns(...)
+  \endcode
+  and 
+  \code
+  FiniteElement::nblock_types()
+  \endcode
+  to 
+  \code
+  FiniteElement::ndof_types()
+  \endcode
+  \n\n
+- Nearly an interface change:  We now provide the option to exclude/wipe the 
+  validata from the distribution (during \c make \c dist). To make sure that
+  the self-test procedure doesn't break if there's
+  no validata, configure now assesses the
+  availability of validata by checking the existence
+  of 
+  \code
+  demo_drivers/poisson/one_d_poisson/validata/one_d_poisson_results.dat.gz
+  \endcode
+  If this is not found, we'll assume that there's
+  no validata anywhere. In that case, "make check" will still
+  compile and run the demo drivers but not use
+  fpdiff.py to compare them against the validata.
+  The behaviour is thus similar to what's done if
+  we don't have python. We therefore modified the 
+  "no_python" argument that used to be passed
+  to all validate.sh scripts to suppress the
+  execution of fpdiff.py and replaced it by
+  "no_fpdiff". As a result all validate.sh scripts
+  had to be changed. MAKE SURE YOU UPDATE ANY NEW ONES BEFORE 
+  ADDING THEM TO THE DISTRIBUTION!
+  \n\n
+  To reflect the fact that the fpdiff-ing can now
+  be suppressed for multiple reasons, we renamed
+  \code
+  bin/validate_no_python.sh
+  \endcode
+  to
+  \code
+  bin/dummy_validate.sh
+  \endcode
+  \n\n
+- All the bools in calls to the various 
+  \c node_update(...) functions were changed to 
+  \c const \c bool& (rather than \c bool).
+  \n\n
+- The constructors for all constitutive 
+  equations now take pointers to constitutive parameters
+  rather than the parameters themselves. (With the
+  previous approach, changing Young's modulus, say,
+  required the construction of a new constitutive 
+  equation object that then had to be passed to 
+  all elements again etc.)
+  \n\n
+- Got rid of all other instances where
+  time argument was passed by copy rather than by
+  constant reference -- as long as grep-ing for the
+  pattern '(double t' detected it. In practice this
+  involved various Navier-Stokes traction, body force
+  and source functions. 
+.
+
+
+
+<HR>
+<HR>
+
+\subsection zero_point_eight_to_zero_point_five Changes between version 0.8 and 0.85
+
+
+\subsubsection new_functionality_zero_point_five Major new functionality
+
+- Added a variety of iterative linear solvers and general-purpose
+  preconditioners.
+  \n\n
+- Added wrappers to the powerful serial and parallel iterative
+  solvers/preconditioners from the  Hyre and Trilinos libraries.
+  \n\n
+- Developed a general block preconditioning framework and used it
+  implement problem-specific preconditioners for Navier-Stokes
+  and fluid-structure-interaction problems. 
+  \n\n
+  - <a href="../../preconditioners/lsc_navier_stokes/html/index.html">
+    Using \c oomph-lib's Least-Squares-Commutator Navier-Stokes 
+    preconditioner.</a>
+    \n\n
+  - <a href="../../preconditioners/fsi/html/index.html">
+    Using \c oomph-lib's FSI preconditioner.</a>
+  .
+  \n\n
+- Provided segregated solver capabilities for fluid-structure 
+  interaction.
+  \n\n
+- Added a number of additional tutorials/demo codes illustrating
+  \c oomph-lib's fluid-structure interaction capabilities:
+  \n\n
+  - <a href="../../interaction/turek_flag/html/index.html">
+    Turek & Hron's FSI benchmark problem of flow past a "flag".</a>
+    \n\n
+  - <a href="../../interaction/fsi_channel_with_leaflet/html/index.html">
+    Flow in a channel with an elastic leaflet.</a>
+    \n\n
+  - <a href="../../interaction/fsi_channel_segregated_solver/html/index.html">
+    Using \c oomph-lib's segregated solvers for
+    fluid-structure-interaction  problems.</a>
+    \n\n
+  - <a href="../../preconditioners/fsi/html/index.html">
+    Using \c oomph-lib's FSI preconditioner.</a>
+  .
+  \n\n
+- MPI capability is now fully integrated into the library (rather
+  than being kept in a separate mpi directory/sub-library) but not yet
+  complete (or documented). Segments of code that involve
+  MPI calls are surrounded by \c \#ifdef \c OOMPH_HAS_MPI \c [...] \c \#endif.
+  They are only compiled if the \c --enable-MPI flag is specified
+  at the configure stage.  
+  \n\n
+- Assuming you have \c pdflatex installed on your machine, 
+  the documentation is now not only built in html format
+  (pretty but hard to print) but we also create associated
+  pdf files. These are accessible via the link at the 
+  bottom of relevant html page.
+  \n\n
+- \c oomph-lib's build script, \c autogen.\c sh now allows for
+  parallel compilation. This can lead to considerable speedups
+  on multicore processors that are now widely available. To 
+  build \c oomph-lib in parallel, using up four threads
+  run  \c autogen.\c sh as follows
+  \code
+  ./autogen.sh --jobs=4 
+  \endcode
+  or (if you are re-building) 
+  \code
+  ./autogen.sh --jobs=4 --rebuild
+  \endcode
+  \n\n
+- Angelo 
+  Simone has written a python script that converts \c oomph-lib's
+  output to the vtu format that can be read by 
+  <a href="http://www.paraview.org">paraview</a>,
+  an open-source 3D plotting package. This is discussed in 
+  <a href="../../paraview/html/index.html"> separate tutorial.</a>
+  \n\n
+- ...and much more (eigenproblems, bifurcation tracking, 
+  advection-diffusion-reaction equations, displacement-based linear
+  elasticity, impedance-type outflow boundary
+  conditions for Navier-Stokes problems, Lagrange-multiplier-based
+  \c FaceElements to apply non-trivial boundaries to beams and shells, ...).
+  Feel free to have a look around the distribution.
+  You're welcome to use it all, but please remember
+  that you use any functionality for which no documentation
+  is available at your own risk; while we reserve the
+  right to change interfaces for all objects in the library, 
+  such changes are almost certain to happen for objects that are not
+  yet documented (in the form of tutorials). 
+  \n\n
+.  
+
+
+<HR>
+
+\subsubsection major_interface_changes_zero_point_five Major interface changes
+
+- \c Problem::actions_before_solve() becomes 
+  \c Problem::actions_before_newton_solve()
+  \n\n
+- \c Problem::actions_after_solve() 
+  becomes \c Problem::actions_after_newton_solve()
+  \n\n
+- \c TCrouzeixRaviartElement<DIM>
+  becomes \c TCrouzeixRaviartElement<DIM>
+  \n\n
+- \c QCrouzeixRaviartElement<DIM>
+  becomes \c QCrouzeixRaviartElement<DIM>
+  \n\n
+- \c RefineableQCrouzeixRaviartElement<DIM>
+  becomes \c RefineableQCrouzeixRaviartElement<DIM>
+  \n\n
+- Fixed various violations of our naming conventions; see 
+  \ref interface_changes.
+  \n\n
+- Changed the interface of to the \c FaceElements so that the faces 
+  are represented by an integer \c face_index, rather than the
+  combination \c s_fixed_index and \c s_limit which was not 
+  sufficiently general. 
+.
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

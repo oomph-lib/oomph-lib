@@ -1,0 +1,154 @@
+\hypertarget{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{}\doxysection{oomph\+::Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control Class Reference}
+\label{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}\index{oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}}
+
+
+{\ttfamily \#include $<$womersley\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a395d5cf74e6e8c4dc581b52048963f38}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$flux\+\_\+control\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement}{Navier\+Stokes\+Womersley\+Pressure\+Control\+Element}} $\ast$pressure\+\_\+control\+\_\+element\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor takes the mesh of ~\newline
+ \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase}{Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base}} which impose the pressure to controls the flux, plus a pointer to the Pressure\+Control\+Element whoes internal data is the prescribed flux. ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a6b7c6f8529d0194db68ae1202c9fa100}{$\sim$\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} ()
+\begin{DoxyCompactList}\small\item\em Empty Destructor -\/ \mbox{\hyperlink{classoomph_1_1Data}{Data}} gets deleted automatically. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a0c105f9f6451a881079e3198b51a5593}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} (const \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a499dc308316bda2ce079d89773562418}{operator=}} (const \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a538b22e5aceecf140d03e400a8848a33}{ndof\+\_\+types}} () const
+\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into -\/ set to 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a63f6761cad384044fae2c8339422c9df}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A class for an element to control net fluid flux across a boundary by imposing an applied pressure to the Navier-\/\+Stokes equations. This element is used with a mesh of Navier\+Stokes\+Flux\+Control\+Elements attached to the boundary. The flux imposed by this element is given by a \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement}{Navier\+Stokes\+Womersley\+Pressure\+Control\+Element}}. Note\+: \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a7b7d3a32fcad5b06fe6a49f05f2c01a9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}} does not calculate any Jacobian contributions for this element as they are calculated by Navier\+Stokes\+Flux\+Control\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...) and \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement}{Navier\+Stokes\+Womersley\+Pressure\+Control\+Element}}\+:\+: \mbox{\hyperlink{the__data__structure_8txt_af81c63b6a6a317202ae084901ea01119}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)}} 
+
+Definition at line 2809 of file womersley\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a395d5cf74e6e8c4dc581b52048963f38}\label{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a395d5cf74e6e8c4dc581b52048963f38}} 
+\index{oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}!NetFluxControlElementForWomersleyPressureControl@{NetFluxControlElementForWomersleyPressureControl}}
+\index{NetFluxControlElementForWomersleyPressureControl@{NetFluxControlElementForWomersleyPressureControl}!oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}}
+\doxysubsubsection{\texorpdfstring{NetFluxControlElementForWomersleyPressureControl()}{NetFluxControlElementForWomersleyPressureControl()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{flux\+\_\+control\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement}{Navier\+Stokes\+Womersley\+Pressure\+Control\+Element}} $\ast$}]{pressure\+\_\+control\+\_\+element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor takes the mesh of ~\newline
+ \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase}{Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base}} which impose the pressure to controls the flux, plus a pointer to the Pressure\+Control\+Element whoes internal data is the prescribed flux. ~\newline
+ 
+
+
+
+Definition at line 2819 of file womersley\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Navier\+Stokes\+Womersley\+Pressure\+Control\+Element\+::add\+\_\+pressure\+\_\+data().
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a6b7c6f8529d0194db68ae1202c9fa100}\label{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a6b7c6f8529d0194db68ae1202c9fa100}} 
+\index{oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}!````~NetFluxControlElementForWomersleyPressureControl@{$\sim$NetFluxControlElementForWomersleyPressureControl}}
+\index{````~NetFluxControlElementForWomersleyPressureControl@{$\sim$NetFluxControlElementForWomersleyPressureControl}!oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}}
+\doxysubsubsection{\texorpdfstring{$\sim$NetFluxControlElementForWomersleyPressureControl()}{~NetFluxControlElementForWomersleyPressureControl()}}
+{\footnotesize\ttfamily oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control\+::$\sim$\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Destructor -\/ \mbox{\hyperlink{classoomph_1_1Data}{Data}} gets deleted automatically. 
+
+
+
+Definition at line 2837 of file womersley\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a0c105f9f6451a881079e3198b51a5593}\label{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a0c105f9f6451a881079e3198b51a5593}} 
+\index{oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}!NetFluxControlElementForWomersleyPressureControl@{NetFluxControlElementForWomersleyPressureControl}}
+\index{NetFluxControlElementForWomersleyPressureControl@{NetFluxControlElementForWomersleyPressureControl}!oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}}
+\doxysubsubsection{\texorpdfstring{NetFluxControlElementForWomersleyPressureControl()}{NetFluxControlElementForWomersleyPressureControl()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 2840 of file womersley\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a63f6761cad384044fae2c8339422c9df}\label{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a63f6761cad384044fae2c8339422c9df}} 
+\index{oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
+\index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}}
+\doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
+{\footnotesize\ttfamily void oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_ac4eedd635a016d29fd9e6da5ae0f8707}{oomph\+::\+Net\+Flux\+Control\+Element}}.
+
+
+
+Definition at line 2870 of file womersley\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a538b22e5aceecf140d03e400a8848a33}\label{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a538b22e5aceecf140d03e400a8848a33}} 
+\index{oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}!ndof\_types@{ndof\_types}}
+\index{ndof\_types@{ndof\_types}!oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}}
+\doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into -\/ set to 1. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a16809a8ad123ba41f826d9e920aba9e0}{oomph\+::\+Net\+Flux\+Control\+Element}}.
+
+
+
+Definition at line 2859 of file womersley\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a499dc308316bda2ce079d89773562418}\label{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a499dc308316bda2ce079d89773562418}} 
+\index{oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::NetFluxControlElementForWomersleyPressureControl@{oomph::NetFluxControlElementForWomersleyPressureControl}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 2850 of file womersley\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{womersley__elements_8h}{womersley\+\_\+elements.\+h}}\end{DoxyCompactItemize}

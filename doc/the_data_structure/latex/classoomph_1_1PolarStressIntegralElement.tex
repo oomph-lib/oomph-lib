@@ -1,0 +1,463 @@
+\hypertarget{classoomph_1_1PolarStressIntegralElement}{}\doxysection{oomph\+::Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1PolarStressIntegralElement}\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.522522cm]{classoomph_1_1PolarStressIntegralElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const double \& \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a1a8b2e072b3dbfbfe755e6a6f1d5e051}{alpha}} () const
+\begin{DoxyCompactList}\small\item\em Alpha. \end{DoxyCompactList}\item 
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a8b0c1571618a9eb746769089d37c2b10}{alpha\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to Alpha. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_ad4e54b0d4f9c77c45554d16d4ec79f15}{boundary}} () const
+\begin{DoxyCompactList}\small\item\em Boundary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_abf394e9cc6979cc711a27b66bb64a3de}{set\+\_\+boundary}} (int bound)
+\begin{DoxyCompactList}\small\item\em Function to set boundary. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_ae52aa0de04a32c399c59d66154739e3f}{get\+\_\+shear\+\_\+stress}} ()
+\begin{DoxyCompactList}\small\item\em Function to calculate the shear stress along boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_af36f7ba5ec7250370e99f378f183ba89}{Polar\+Stress\+Integral\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\item 
+\mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a4463b248acefefe8287450d9deef50cf}{$\sim$\+Polar\+Stress\+Integral\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Destructor should not delete anything. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a15e709f5a2763bbc865f9c3060aebca0}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em This function returns just the residuals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a6d69d508578b03a2f219e49089f5323c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em This function returns the residuals and the jacobian. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a2e8896b4e1e698caa3460dd41da55cb8}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix Plus the mass matrix especially for eigenvalue problems. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a02bac6dcd43010bafb383d420502af8d}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_ab142fd67c65361764d9496e6ec0363a1}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a2440239bc1944834403dc8a898c71672}{u}} (const unsigned \&l, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em local velocities \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_accc1886b4e4d60b19046e11484e5d09d}{x}} (const unsigned \&l, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em local position \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual int \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_adbf12bebeb0ffb79b5ab4157fa89a6a9}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a3b78e948b5aec7e6397bb7f2770f6396}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a0e3f523dbdcda0f50f4436f6cd590b94}{Alpha\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the angle alpha. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a76f229a58be2858c8c61200a470f410f}{Boundary}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_a481b846bd88c323325eb64cc9b77eaa1}{Traction\+\_\+fct\+\_\+pt}} )(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_accc1886b4e4d60b19046e11484e5d09d}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Pointer to an imposed traction function. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_ae38e4f55fe5517c9a4e7480456b99e46}{Dim}}
+\begin{DoxyCompactList}\small\item\em The highest dimension of the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+A class for elements that allow the imposition of an applied traction to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometery$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class 
+
+Definition at line 52 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_af36f7ba5ec7250370e99f378f183ba89}\label{classoomph_1_1PolarStressIntegralElement_af36f7ba5ec7250370e99f378f183ba89}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!PolarStressIntegralElement@{PolarStressIntegralElement}}
+\index{PolarStressIntegralElement@{PolarStressIntegralElement}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PolarStressIntegralElement()}{PolarStressIntegralElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{Polar\+Stress\+Integral\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
+
+Definition at line 120 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a4463b248acefefe8287450d9deef50cf}\label{classoomph_1_1PolarStressIntegralElement_a4463b248acefefe8287450d9deef50cf}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!````~PolarStressIntegralElement@{$\sim$PolarStressIntegralElement}}
+\index{````~PolarStressIntegralElement@{$\sim$PolarStressIntegralElement}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$PolarStressIntegralElement()}{~PolarStressIntegralElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{Polar\+Stress\+Integral\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor should not delete anything. 
+
+
+
+Definition at line 158 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a1a8b2e072b3dbfbfe755e6a6f1d5e051}\label{classoomph_1_1PolarStressIntegralElement_a1a8b2e072b3dbfbfe755e6a6f1d5e051}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!alpha@{alpha}}
+\index{alpha@{alpha}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{alpha()}{alpha()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+const double\& \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Alpha. 
+
+
+
+Definition at line 104 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Alpha\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a8b0c1571618a9eb746769089d37c2b10}\label{classoomph_1_1PolarStressIntegralElement_a8b0c1571618a9eb746769089d37c2b10}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!alpha\_pt@{alpha\_pt}}
+\index{alpha\_pt@{alpha\_pt}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double$\ast$ \& \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to Alpha. 
+
+
+
+Definition at line 107 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Alpha\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_ad4e54b0d4f9c77c45554d16d4ec79f15}\label{classoomph_1_1PolarStressIntegralElement_ad4e54b0d4f9c77c45554d16d4ec79f15}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!boundary@{boundary}}
+\index{boundary@{boundary}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{boundary()}{boundary()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+const int \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Boundary. 
+
+
+
+Definition at line 110 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary.
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a6d69d508578b03a2f219e49089f5323c}\label{classoomph_1_1PolarStressIntegralElement_a6d69d508578b03a2f219e49089f5323c}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This function returns the residuals and the jacobian. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 167 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a2e8896b4e1e698caa3460dd41da55cb8}\label{classoomph_1_1PolarStressIntegralElement_a2e8896b4e1e698caa3460dd41da55cb8}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
+\index{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute the element\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and the jacobian matrix Plus the mass matrix especially for eigenvalue problems. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730647cf865da94f2531466f8}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 175 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a15e709f5a2763bbc865f9c3060aebca0}\label{classoomph_1_1PolarStressIntegralElement_a15e709f5a2763bbc865f9c3060aebca0}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This function returns just the residuals. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 161 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_ae52aa0de04a32c399c59d66154739e3f}\label{classoomph_1_1PolarStressIntegralElement_ae52aa0de04a32c399c59d66154739e3f}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!get\_shear\_stress@{get\_shear\_stress}}
+\index{get\_shear\_stress@{get\_shear\_stress}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_shear\_stress()}{get\_shear\_stress()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+shear\+\_\+stress}
+
+
+
+Function to calculate the shear stress along boundary. 
+
+Function that returns the shear stress. 
+
+Definition at line 204 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, i, and oomph\+::\+Quad\+Tree\+Names\+::W.
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a02bac6dcd43010bafb383d420502af8d}\label{classoomph_1_1PolarStressIntegralElement_a02bac6dcd43010bafb383d420502af8d}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 183 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_ab142fd67c65361764d9496e6ec0363a1}\label{classoomph_1_1PolarStressIntegralElement_ab142fd67c65361764d9496e6ec0363a1}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 186 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_abf394e9cc6979cc711a27b66bb64a3de}\label{classoomph_1_1PolarStressIntegralElement_abf394e9cc6979cc711a27b66bb64a3de}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!set\_boundary@{set\_boundary}}
+\index{set\_boundary@{set\_boundary}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_boundary()}{set\_boundary()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+boundary (\begin{DoxyParamCaption}\item[{int}]{bound }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set boundary. 
+
+
+
+Definition at line 113 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary.
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a3b78e948b5aec7e6397bb7f2770f6396}\label{classoomph_1_1PolarStressIntegralElement_a3b78e948b5aec7e6397bb7f2770f6396}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
+\index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape and test functions and to return the Jacobian of mapping ~\newline
+ 
+
+
+
+Definition at line 78 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a2440239bc1944834403dc8a898c71672}\label{classoomph_1_1PolarStressIntegralElement_a2440239bc1944834403dc8a898c71672}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!u@{u}}
+\index{u@{u}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{u()}{u()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+local velocities 
+
+
+
+Definition at line 190 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References i, and oomph\+::\+Finite\+Element\+::nodal\+\_\+value().
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_adbf12bebeb0ffb79b5ab4157fa89a6a9}\label{classoomph_1_1PolarStressIntegralElement_adbf12bebeb0ffb79b5ab4157fa89a6a9}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!u\_local\_eqn@{u\_local\_eqn}}
+\index{u\_local\_eqn@{u\_local\_eqn}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{u\_local\_eqn()}{u\_local\_eqn()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual int \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
+
+
+
+Definition at line 73 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_accc1886b4e4d60b19046e11484e5d09d}\label{classoomph_1_1PolarStressIntegralElement_accc1886b4e4d60b19046e11484e5d09d}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!x@{x}}
+\index{x@{x}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{x()}{x()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::x (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+local position 
+
+
+
+Definition at line 194 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+References i, and oomph\+::\+Finite\+Element\+::nodal\+\_\+position().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a0e3f523dbdcda0f50f4436f6cd590b94}\label{classoomph_1_1PolarStressIntegralElement_a0e3f523dbdcda0f50f4436f6cd590b94}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!Alpha\_pt@{Alpha\_pt}}
+\index{Alpha\_pt@{Alpha\_pt}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Alpha\_pt}{Alpha\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the angle alpha. 
+
+
+
+Definition at line 93 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::alpha(), and oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::alpha\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a76f229a58be2858c8c61200a470f410f}\label{classoomph_1_1PolarStressIntegralElement_a76f229a58be2858c8c61200a470f410f}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!Boundary@{Boundary}}
+\index{Boundary@{Boundary}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Boundary}{Boundary}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Boundary\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 99 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::boundary(), and oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_ae38e4f55fe5517c9a4e7480456b99e46}\label{classoomph_1_1PolarStressIntegralElement_ae38e4f55fe5517c9a4e7480456b99e46}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!Dim@{Dim}}
+\index{Dim@{Dim}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Dim}{Dim}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Dim\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The highest dimension of the problem. 
+
+
+
+Definition at line 63 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Polar\+Stress\+Integral\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Polar\+Stress\+Integral\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1PolarStressIntegralElement_a481b846bd88c323325eb64cc9b77eaa1}\label{classoomph_1_1PolarStressIntegralElement_a481b846bd88c323325eb64cc9b77eaa1}} 
+\index{oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
+\index{Traction\_fct\_pt@{Traction\_fct\_pt}!oomph::PolarStressIntegralElement$<$ ELEMENT $>$@{oomph::PolarStressIntegralElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traction\_fct\_pt}{Traction\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void($\ast$ \mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement}{oomph\+::\+Polar\+Stress\+Integral\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Traction\+\_\+fct\+\_\+pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1PolarStressIntegralElement_accc1886b4e4d60b19046e11484e5d09d}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to an imposed traction function. 
+
+
+
+Definition at line 59 of file polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{polar__stress__integral__elements_8h}{polar\+\_\+stress\+\_\+integral\+\_\+elements.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Large-displacement post-buckling of a pressure-loaded thin-walled elastic ring &ndash; displacement-control techniques</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Large-displacement post-buckling of a pressure-loaded thin-walled elastic ring &ndash; displacement-control techniques </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we study a more challenging beam problem: The non-axisymmetric buckling of a thin-walled elastic ring, loaded by a spatially-constant external pressure, <img class="formulaInl" alt="$ p_{ext}$" src="form_0.png"/> . For sufficiently small positive (or arbitrarily large negative) values of <img class="formulaInl" alt="$ p_{ext}$" src="form_0.png"/> the ring deforms axisymmetrically and in this mode it is very stiff, implying that large changes in pressure are required to change its radius. However, if <img class="formulaInl" alt="$ p_{ext}$" src="form_0.png"/> exceeds a critical threshold, the axisymmetric configuration becomes unstable, causing the ring to buckle non-axisymmetrically. Once buckled, the ring is much more flexible and small changes in <img class="formulaInl" alt="$ p_{ext}$" src="form_0.png"/> are sufficient to induce dramatic changes in its shape.</p>
+<p>The rapid change in stiffness following the buckling makes it difficult to compute strongly buckled solutions by continuation methods as the solution computed for a certain value of <img class="formulaInl" alt="$ p_{ext}$" src="form_0.png"/> may represent a poor approximation of the solution at a slightly larger pressure. In extreme cases, this can cause the Newton method (whose convergence relies on the provision of good initial guesses for the unknowns) to diverge.</p>
+<p>We will demonstrate the use of so-called "displacement control" techniques to overcome these problems. Displacement-control techniques are useful in problems in which some <em>a-priori</em> knowledge about the expected displacement field allows us to re-formulate the problem. Rather than prescribing the load on the elastic solid and computing the displacement field, we prescribe the displacement of a carefully-selected material "control" point and regard the load required to achieve this displacement as an unknown.</p>
+<center> <table class="doxtable">
+<tr>
+<td><p class="starttd"><br  />
+</p><center> <b>Non-axisymmetric buckling of a pressure-loaded, thin-walled elastic ring</b> </center><p class="intertd">We wish to compute the deformation of a linearly-elastic, circular ring of undeformed radius <img class="formulaInl" alt="$ R_0 $" src="form_1.png"/> and wall thickness <img class="formulaInl" alt="$ h^* $" src="form_2.png"/>, subject to a spatially-constant external pressure <img class="formulaInl" alt="$ p_{ext}^* $" src="form_3.png"/>. We choose the undeformed radius <img class="formulaInl" alt="$ R_0 $" src="form_1.png"/> as the lengthscale for the non-dimensionalisation of the problem and assume that <img class="formulaInl" alt="$ h = h^*/R_0 \ll 1 $" src="form_4.png"/> , justifying the use of beam theory. As discussed in <a href="../../tensioned_string/html/index.html">the previous example</a> we scale the pressure on the ring's effective Young's modulus, <img class="formulaInl" alt="$ p_{ext} = p_{ext}^*/E_{eff} $" src="form_5.png"/> , where <img class="formulaInl" alt="$ E_{eff} = E/(1-\nu^2) $" src="form_6.png"/> . We use the non-dimensional arclength <img class="formulaInl" alt="$ \xi \in [0,2\pi] $" src="form_7.png"/> along the ring's undeformed centreline as the Lagrangian coordinate and parametrise the position vector to the ring's undeformed centreline as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf r}_w(\xi) = \left( \begin{array}{c} \cos(\xi) \\ \sin(\xi) \end{array} \right). \]" src="form_8.png"/>
+</p>
+<p> We wish to compute the position vector <img class="formulaInl" alt="$ {\bf R}_w(\xi) $" src="form_9.png"/> to the deformed ring's centreline.</p>
+<p class="intertd">Here is a sketch of the problem:</p>
+<div class="image">
+<img src="ring_sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the buckling ring. </div></div>
+ <p class="intertd">Note that we have chosen the Eulerian coordinate axes so that they coincide with the ring's lines of symmetry.</p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<br  />
+ </center><p> <br  />
+</p>
+<hr  />
+<h1><a class="anchor" id="theory"></a>
+The expected deformation and the displacement-control formulation of the problem</h1>
+<p>Standard linear stability analysis [see, e.g., G.J. Simitses "An introduction to the elastic stability of 
+structures", Prentice-Hall, (1976)] predicts the ring to become unstable to non-axisymmetric perturbations with an azimuthal wavenumber of <img class="formulaInl" alt="$ N=2 $" src="form_10.png"/> at a pressure of </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ p_{ext}^{[buckl]} = 3 \times \frac{1}{12} h^3. \]" src="form_11.png"/>
+</p>
+<p> For <img class="formulaInl" alt="$ p_{ext} &gt; p_{ext}^{[buckl]} $" src="form_12.png"/> we therefore expect the ring to deform into a shape similar to the one indicated by the dashed line in the above sketch. As the ring buckles non-axisymmetrically, the material point on the vertical symmetry line (i.e. the material point with Lagrangian coordinate <img class="formulaInl" alt="$ \xi=\pi/2$" src="form_13.png"/> ) moves radially inwards. This makes it an excellent control point for this problem as we can "sweep" through the entire range of the ring's post-buckling deformation by varying its <img class="formulaInl" alt="$ x_2 $" src="form_14.png"/> &ndash; coordinate from <img class="formulaInl" alt="$ R_{ctrl} =1 $" src="form_15.png"/> (corresponding to the undeformed, axisymmetric configuration) to <img class="formulaInl" alt="$ R_{ctrl} = 0 $" src="form_16.png"/> (corresponding to a configuration in which the ring is collapsed to the point of opposite wall contact). We note that Flaherty, Keller &amp; Rubinow's analysis [SIAM J. Appl. Math <b>23</b>, 446&ndash;455 (1972)], based on an inextensible beam model, predicts opposite wall contact to occur at an external pressure of </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ p_{ext}^{[owc]} = 5.22 \times \frac{1}{12} h^3. \]" src="form_17.png"/>
+</p>
+<p>To apply displacement control we change the formulation of the problem from </p><center> <table class="doxtable">
+<tr>
+<td><p class="starttd"></p>
+<center> <b> Original formulation of the problem</b> </center><p class="endtd">Determine the position vector to the centreline of the deformed ring, <img class="formulaInl" alt="$ {\bf R}_w(\xi) $" src="form_9.png"/> , in terms of the Lagragian coordinate <img class="formulaInl" alt="$ \xi \in [0,2\pi] $" src="form_7.png"/> , for a given value of the external pressure <img class="formulaInl" alt="$ p_{ext} \in [0, 5.22 \times h^3/12] $" src="form_18.png"/> . <br  />
+  </p>
+</td></tr>
+</table>
+<br  />
+ </center><p> <br  />
+</p>
+<p>to</p>
+<center> <table class="doxtable">
+<tr>
+<td><p class="starttd"></p>
+<center> <b> Displacement-control formulation of the problem</b> </center><p class="intertd">Determine the position vector to the centreline of the deformed ring, <img class="formulaInl" alt="$ {\bf R}_w(\xi) $" src="form_9.png"/> , in terms of the Lagragian coordinate <img class="formulaInl" alt="$ \xi \in [0,2\pi] $" src="form_7.png"/> , for an external pressure <img class="formulaInl" alt="$ p_{ext} $" src="form_19.png"/> that is such that the vertical coordinate of the control point is equal to <img class="formulaInl" alt="$ R_{ctrl} $" src="form_20.png"/>, i.e. </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf R}_w(\xi=\pi/2) \cdot {\bf e}_2 = R_{ctrl}, \]" src="form_21.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ R_{ctrl} \in [0,1] $" src="form_22.png"/> is given.</p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<br  />
+ </center><p> <br  />
+</p>
+<hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figure below shows computed ring shapes for <img class="formulaInl" alt="$ h^*/R_0 = 1/20 $" src="form_23.png"/>. They were obtained in two phases: During the first phase of the computation we subjected the ring to a load of the form </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf f} = \bigg( p_{ext} - p_{cos} \cos(2 \xi) \bigg) \, {\bf N} \]" src="form_24.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ {\bf N} $" src="form_25.png"/> is the outer unit normal on the deformed ring and <img class="formulaInl" alt="$ p_{cos} \ll 1 $" src="form_26.png"/> is a small cosinusoidal perturbation to the external pressure which forces the ring to buckle "in the right direction". The undeformed configuration was used as the initial guess for an initial computation with <img class="formulaInl" alt="$ p_{ext} = 0$" src="form_27.png"/> [or, in the case of displacement control, <img class="formulaInl" alt="$ R_{ctrl} = 1$" src="form_28.png"/> ]. Subsequently we increased <img class="formulaInl" alt="$ p_{ext} $" src="form_19.png"/> [or decreased <img class="formulaInl" alt="$ R_{ctrl}$" src="form_29.png"/> ] in small steps, using the previously computed solutions for the displacement field [and <img class="formulaInl" alt="$ p_{ext} $" src="form_19.png"/> ] as initial guesses for the unknowns. This procedure was continued until the ring was collapsed up to the point of opposite wall contact. During the second phase, we set <img class="formulaInl" alt="$ p_{cos} = 0$" src="form_30.png"/> and reversed the procedure to re-trace the deformation to the axisymmetric state.</p>
+<div class="image">
+<img src="ring.gif" alt=""/>
+<div class="caption">
+Computed ring shapes. </div></div>
+ <p>The figure below illustrates the load/displacement characteristics computed by this procedure. The graph shows the radii of two material points on the ring: The green line shows the radius <img class="formulaInl" alt="$ R_1 = R_{ctrl} $" src="form_31.png"/> of the control point; the red line the radius <img class="formulaInl" alt="$ R_2 $" src="form_32.png"/> of the material point located at <img class="formulaInl" alt="$ \xi = 0$" src="form_33.png"/>, i.e. the material point located on the ring's second line of symmetry. (Because of the symmetry of the buckling pattern this line may also be interpreted as the load-displacement curve for the control point when the ring buckles in the "opposite" direction). The dash-dotted blue line shows the load/displacement curve when the ring deforms axisymmetrically. In this mode, the radii of the two material points are obviously identical. Finally, the dashed lines shows the load/displacement path when the ring is subjected to a non-zero perturbation pressure, <img class="formulaInl" alt="$ p_{cos} \ne 0$" src="form_34.png"/> , which deforms it non-axisymmetrically so that <img class="formulaInl" alt="$ R_1 \ne R_2 $" src="form_35.png"/> even for <img class="formulaInl" alt="$ p_{ext} &lt; p_{ext}^{[buckl]}$" src="form_36.png"/> .</p>
+<div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Bifurcation diagram for a buckling ring. </div></div>
+ <p>The diagram clearly illustrates the enormous change in stiffness when the ring changes from the axisymmetric to the non-axisymmetric regime. The non-axisymmetric regime emanates from the axisymmetric state (via a supercritical bifurcation at a pressure of <img class="formulaInl" alt="$ p_{ext} = 3.0 \times h^3/12 $" src="form_37.png"/> , as predicted by the linear stability analysis) and opposite wall contact occurs at <img class="formulaInl" alt="$ p_{ext} = 5.22 \times h^3/12 $" src="form_38.png"/> , in perfect agreement with Flaherty, Keller &amp; Rubinow's theoretical analysis.</p>
+<hr  />
+<h1><a class="anchor" id="displ_control"></a>
+Applying displacement control in oomph-lib</h1>
+<p>To facilitate the solution of solid mechanics problems with displacement-control techniques, <code>oomph-lib</code> provides a <code>DisplacementControlElement</code>, which may be used to add the displacement control constraint to the global system of equations that is solved by Newton's method. Applying displacement control in a solid mechanics problem involves the following straightforward steps:</p><ol type="1">
+<li><b>Formulate the solid mechanics problems in its "standard
+   form":</b> <br  />
+<br  />
+ In this formulation the (scalar) load level is prescribed and the displacements are regarded as unknowns. <br  />
+<br  />
+</li>
+<li><b>Change the representation of the (scalar) load level to allow it to be an unknown in the Problem:</b> <br  />
+<br  />
+ In the original formulation, the load level is likely to have been represented by a double precision number. To allow the load level to be regarded as an unknown, it must be represented by a value in a <code>Data</code> object. Currently, <code>oomph-lib's</code> <code>DisplacementControlElement</code> expects the load level to be the one-and-only value in the load <code>Data</code> object. We note that computations with a prescribed load are still possible and simply require pinning of the value that represents the load. <br  />
+<br  />
+</li>
+<li><b>"Tell" the solid mechanics elements that the load level is a (potential) unknown:</b> <br  />
+<br  />
+ Since the load on the solid mechanics elements affects their residuals, their elemental Jacobian matrices (which contain the derivatives of the entries in the elemental residual vector with respect to <em>all</em> unknowns that affect it) must take the dependence on the (potentially) unknown load level into account. This may be achieved by adding the <code>Data</code> object that stores the load level to the element's external <code>Data</code> (i.e. <code>Data</code> whose values <em>affect</em> the element's residual vector, but whose values are not determined <em>by</em> the element). External <code>Data</code> is automatically included in an element's equation numbering procedure. Furthermore, since the elemental Jacobian matrices of <code>SolidFiniteElements</code> are generated by finite-differencing, the derivatives of the element's residual vector with respect to the load level are computed automatically. Consequently, the application of displacement control does not require a re-implementation of the solid mechanics elements. <br  />
+<br  />
+</li>
+<li><b>Identify a material point in the solid that can serve as a "control point":</b> <br  />
+ <br  />
+ Ideally, this control point should move monotonically along one of the (Eulerian) coordinate directions as the deformation of the solid body increases. <br  />
+<br  />
+</li>
+<li><b>Create a <code>DisplacementControlElement</code> and add it to the <code>Mesh</code>.</b> <br  />
+<br  />
+ The <code>DisplacementControlElement</code> adds the displacement constraint to the global system of equations and thus provides the additional equation required to determine the unknown load level. We note that the <code>DisplacementControlElement</code> has two constructors: <br  />
+<br  />
+<ul>
+<li>The first version expects a pointer to the <code>Data</code> object whose one-and-only value contains the unknown load level. This version of the constructor is appropriate in cases where the load <code>Data</code> has already been created elsewhere (as described above). <br  />
+<br  />
+</li>
+<li>The second version of the constructor creates the required load <code>Data</code> object internally and provides access to it via a pointer-based access function. <br  />
+<br  />
+</li>
+</ul>
+The section <a class="el" href="index.html#global_data">"Internal" and "external" Data in elements and "global" Data in Problems</a> provides a more detailed discussion of when to use which version of the constructor. <br  />
+<br  />
+</li>
+<li><b>Done!</b> <br  />
+<br  />
+ Set the desired value of the control displacement and solve the problem. <br  />
+<br  />
+</li>
+</ol>
+<p>The driver code discussed below illustrates these steps.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>The namespace <code><a class="el" href="namespaceGlobal__Physical__Variables.html" title="Namespace for physical parameters.">Global_Physical_Variables</a></code>, used to define the problem parameters and the load function, is very similar to that used in <a href="../../tensioned_string/html/index.html">the previous example</a> without displacement control. They main difference is that the adjustable load (the external pressure <img class="formulaInl" alt="$ p_{ext}$" src="form_0.png"/> ) is now defined as a <code>Data</code> value, rather than a double precision number. This allows it to become an unknown in the problem when displacement control is used.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_namespace=========================</span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Nondim thickness </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">H</a>=0.05;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Prescribed position (only used for displacement control)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a1c774c9cb221df909201e81e84b15f40">Xprescr</a> = 1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Perturbation pressure</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab55734aaa66260cd9d4bf68a4ecafdd5">Pcos</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Pointer to pressure load (stored in Data so it can </span></div>
+<div class="line"><span class="comment"> /// become an unknown in the problem when displacement control is used</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a>* <a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Pext_data_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Load function: Constant external pressure with cos variation to</span></div>
+<div class="line"><span class="comment"> /// induce buckling in n=2 mode</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a86fd8f502cb8c4c7939ffae742f023eb">press_load</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; <a class="code" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a>,</div>
+<div class="line">                 <span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                 <span class="keyword">const</span> Vector&lt;double&gt;&amp; N,</div>
+<div class="line">                 Vector&lt;double&gt;&amp; load)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++) </div>
+<div class="line">   {</div>
+<div class="line">    load[i] = (<a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Pext_data_pt</a>-&gt;value(0)-<a class="code" href="namespaceGlobal__Physical__Variables.html#ab55734aaa66260cd9d4bf68a4ecafdd5">Pcos</a>*<a class="code" href="steady__ring_8txt.html#a33298df64564d35290d4b62eb7d5db4b">cos</a>(2.0*<a class="code" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a>[0]))*N[i];</div>
+<div class="line">   }</div>
+<div class="line"> }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Return a reference to the external pressure </span></div>
+<div class="line"><span class="comment"> /// load on the elastic ring.</span></div>
+<div class="line"><span class="comment"> /// A reference is obtained by de-referencing the pointer to the</span></div>
+<div class="line"><span class="comment"> /// data value that contains the external load</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a8c25ac6a672ea50d1b709292d1f4837b">external_pressure</a>() </div>
+<div class="line">  {<span class="keywordflow">return</span> *<a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Pext_data_pt</a>-&gt;value_pt(0);}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The main function builds two different versions of the problem, demonstrating the use of displacement control in the cases when the <code>Data</code> object that contains the adjustable load already exists, or has to be created by the <code>DisplacementControlElement</code>, respectively. The two versions only differ in the <a class="el" href="index.html#constructor">The constructor</a>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_main=================================================</span></div>
+<div class="line"><span class="comment">/// Driver for ring test problem </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="steady__ring_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Number of elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = 13;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Displacement control?</span></div>
+<div class="line"> <span class="keywordtype">bool</span> displ_control=<span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Label for output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Demonstrate how to use displacement control with already existing load Data</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">bool</span> load_data_already_exists=<span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Set up the problem</span></div>
+<div class="line">  <a class="code" href="classElasticRingProblem.html">ElasticRingProblem&lt;HermiteBeamElement&gt;</a> </div>
+<div class="line">   <a class="code" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>(n_element,displ_control,load_data_already_exists);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Output directory</span></div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_global&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Do static run</span></div>
+<div class="line">  <a class="code" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.parameter_study(doc_info);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Demonstrate how to use displacement control without existing load Data</span></div>
+<div class="line"> <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">bool</span> load_data_already_exists=<span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Set up the problem</span></div>
+<div class="line">  <a class="code" href="classElasticRingProblem.html">ElasticRingProblem&lt;HermiteBeamElement&gt;</a> </div>
+<div class="line">   <a class="code" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>(n_element,displ_control,load_data_already_exists);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Output directory</span></div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_no_global&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Reset counter</span></div>
+<div class="line">  doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Do static run</span></div>
+<div class="line">  <a class="code" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.parameter_study(doc_info);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="problem_class"></a>
+The problem class</h1>
+<p>The problem class is very similar to the one used <br  />
+ in <a href="../../tensioned_string/html/index.html">the previous example</a> without displacement control. Here we store the number of solid mechanics elements in the Problem's private member data since we will add the <code>DisplacementControlElement</code> to the mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//========start_of_problem_class========================================</span></div>
+<div class="line"><span class="comment">/// Ring problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classElasticRingProblem.html">ElasticRingProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Number of elements and flags for displ control</span></div>
+<div class="line"><span class="comment"> /// and displacement control with existing data respectively.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classElasticRingProblem.html#a46779ff320754561750e22216f7605e3">ElasticRingProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;n_element,</div>
+<div class="line">                    <span class="keywordtype">bool</span>&amp; displ_control,</div>
+<div class="line">                    <span class="keywordtype">bool</span>&amp; load_data_already_exists);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access function for the specific mesh</span></div>
+<div class="line"><span class="comment"></span> OneDLagrangianMesh&lt;ELEMENT&gt;* <a class="code" href="classElasticRingProblem.html#a7e956ca937741ce71cf400eb492825b3">mesh_pt</a>() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>OneDLagrangianMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function is empty </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#a58c2889fd4db8c17f4a4d964a5a7a90d">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function is empty </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#a6d084ac04c73a116f5ece449935a31d3">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#ab644c5fd57310f2d4c858f64d8c5a223">doc_solution</a>(DocInfo&amp; doc_info, ofstream&amp; trace_file);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Perform the parameter study</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#afed9c0948c535c315c3e22e92e3266d3">parameter_study</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Use displacement control?</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classElasticRingProblem.html#a919d11c9d2167d909c4d4563e9ca83b6">Displ_control</a>; </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to geometric object that represents the undeformed shape</span></div>
+<div class="line"><span class="comment"></span> GeomObject* <a class="code" href="classElasticRingProblem.html#a08e4afcece28aee2d1ee2e6c54394be8">Undef_geom_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Number of elements in the beam mesh</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classElasticRingProblem.html#aa57e3dd4e9a5187ef7394b019e68b1ca">Nbeam_element</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="constructor"></a>
+The constructor</h1>
+<p>The first half of the constructor is similar to the one used in <a href="../../tensioned_string/html/index.html">the previous example</a> without displacement control. We create a <code>GeomObject</code> (an <code>Ellipse</code> with unit half axes) to define the ring's undeformed geometry, and build the 1D Lagrangian mesh. Note that, because of the symmetry of the buckling pattern, we only discretise one quarter of the domain.</p>
+ <div class="fragment"><div class="line"><span class="comment">//======start_of_constructor============================================</span></div>
+<div class="line"><span class="comment">/// Constructor for elastic ring problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classElasticRingProblem.html#a46779ff320754561750e22216f7605e3">ElasticRingProblem&lt;ELEMENT&gt;::ElasticRingProblem</a></div>
+<div class="line">(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; n_element, <span class="keywordtype">bool</span>&amp; displ_control, <span class="keywordtype">bool</span>&amp; load_data_already_exists) : </div>
+<div class="line"> Displ_control(displ_control),Nbeam_element(n_element)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Undeformed beam is an elliptical ring </span></div>
+<div class="line"> Undef_geom_pt=<span class="keyword">new</span> Ellipse(1.0,1.0); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Length of the doamin (in terms of the Lagrangian coordinates)</span></div>
+<div class="line"> <span class="keywordtype">double</span> length=2.0*atan(1.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the (Lagrangian!) mesh</span></div>
+<div class="line"> Problem::mesh_pt() = </div>
+<div class="line">  <span class="keyword">new</span> OneDLagrangianMesh&lt;ELEMENT&gt;(n_element,length,Undef_geom_pt); </div>
+</div><!-- fragment --><p>Next we apply the symmetry boundary conditions: Zero vertical [horizontal] displacements and infinite [zero] slope at <img class="formulaInl" alt="$ \xi =0 $" src="form_39.png"/> [at <img class="formulaInl" alt="$ \xi =\pi/2 $" src="form_40.png"/> ]. (See <a href="../../tensioned_string/html/index.html">the previous example</a> for a more detailed discussion of the boundary conditions for beam elements.)</p>
+<div class="fragment"><div class="line"> <span class="comment">// Boundary condition: </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Bottom: </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=0;</div>
+<div class="line"> <span class="comment">// No vertical displacement</span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(1); </div>
+<div class="line"> <span class="comment">// Infinite slope: Pin type 1 (slope) dof for displacement direction 0 </span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(1,0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Top: </span></div>
+<div class="line"> ibound=1;</div>
+<div class="line">  <span class="comment">// No horizontal displacement</span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(0); </div>
+<div class="line"> <span class="comment">// Zero slope: Pin type 1 (slope) dof for displacement direction 1</span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(1,1);</div>
+</div><!-- fragment --><p>We now distinguish between the cases with and without displacement control:</p>
+<ul>
+<li><b>Case 1: No displacement control</b> <br  />
+<br  />
+ If we don't use displacement control, we create the <code>Data</code> object whose one-and-only value stores the adjustable load level (the external pressure), and store the pointer to the newly created <code>Data</code> object in <code><a class="el" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2" title="Pointer to pressure load (stored in Data so it can become an unknown in the problem when displacement...">Global_Physical_Variables::Pext_data_pt</a></code>. Since the value of the external pressure is prescribed (i.e. not an unknown in the problem), we pin the value. <br  />
+<br  />
+ <div class="fragment"><div class="line"> <span class="comment">// Normal load incrementation</span></div>
+<div class="line"> <span class="comment">//===========================</span></div>
+<div class="line"> <span class="keywordflow">if</span> (!Displ_control) </div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Create Data object whose one-and-only value contains the</span></div>
+<div class="line">   <span class="comment">// (in principle) adjustable load</span></div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a>=<span class="keyword">new</span> <a class="code" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a>(1);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Pin the external pressure because it isn&#39;t actually adjustable.</span></div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a>-&gt;pin(0);</div>
+</div><!-- fragment --> <br  />
+<br  />
+</li>
+<li><b>Case 2: Displacement control</b> <br  />
+<br  />
+ If displacement control is used, we identify the control point (the material point at the "end" of the last element in the mesh) and the (Eulerian) coordinate direction (the vertical coordinate) in which its position is to be controlled:<br  />
+<br  />
+ <div class="fragment"><div class="line"> <span class="comment">// Displacement control</span></div>
+<div class="line"> <span class="comment">//=====================</span></div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Choose element in which displacement control is applied: the last one</span></div>
+<div class="line">   SolidFiniteElement* controlled_element_pt=</div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(Nbeam_element-1));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Fix the displacement in the vertical (1) direction...</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> controlled_direction=1;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//... at right end of the control element</span></div>
+<div class="line">   Vector&lt;double&gt; s_displ_control(1);</div>
+<div class="line">   s_displ_control[0]=1.0;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Pointer to displacement control element</span></div>
+<div class="line">   DisplacementControlElement* displ_control_el_pt;</div>
+</div><!-- fragment --> <br  />
+<br  />
+<ul>
+<li><b>Case 2a: Load <code>Data</code> does not yet exist</b> <br  />
+<br  />
+ We can now call the constructor for the <code>DisplacementControlElement:</code> <br  />
+<br  />
+ <div class="fragment"><div class="line">     <span class="comment">// Build displacement control element</span></div>
+<div class="line">     displ_control_el_pt=</div>
+<div class="line">      <span class="keyword">new</span> DisplacementControlElement(controlled_element_pt,</div>
+<div class="line">                                     s_displ_control,</div>
+<div class="line">                                     controlled_direction,</div>
+<div class="line">                                     &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a1c774c9cb221df909201e81e84b15f40">Global_Physical_Variables::Xprescr</a>);</div>
+</div><!-- fragment --> <br  />
+<br  />
+ This version of the constructor creates the load <code>Data</code> object whose one-and-only value stores the adjustable load. We obtain a pointer to the newly-created <code>Data</code> object from the access function <code>DisplacementControlElement::displacement_control_load_pt()</code> and store it in <code><a class="el" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2" title="Pointer to pressure load (stored in Data so it can become an unknown in the problem when displacement...">Global_Physical_Variables::Pext_data_pt</a></code> to make it accessible to the load function <code>Global_Physical_Variables::press_load(...)</code> <br  />
+<br  />
+ <div class="fragment"><div class="line">     <span class="comment">// The constructor of the  DisplacementControlElement has created</span></div>
+</div><!-- fragment --> <br  />
+ <div class="fragment"><div class="line">     <span class="comment">// a new Data object whose one-and-only value contains the</span></div>
+<div class="line">     <span class="comment">// adjustable load: Use this Data object in the load function:</span></div>
+<div class="line">     <a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a>=displ_control_el_pt-&gt;</div>
+<div class="line">      displacement_control_load_pt();</div>
+</div><!-- fragment --> <br  />
+<br  />
+</li>
+<li><b>Case 2b: The load <code>Data</code> already exists</b> <br  />
+<br  />
+ In some applications, the <code>Data</code> object that specifies the adjustable load level might already have been created elsewhere in the <code>Problem</code>. For such cases, <code>oomph-lib</code> provides an alternative constructor whose argument list includes the pointer to the already-existing load <code>Data</code> object. To demonstrate its use we create a suitable <code>Data</code> object and store it in the <code>Problem's</code> "global" <code>Data</code> (see <a class="el" href="index.html#global_data">"Internal" and "external" Data in elements and "global" Data in Problems</a> for a more detailed discussion of this step) and pass it to the constructor: <br  />
+<br  />
+ <div class="fragment"><div class="line">   <span class="comment">// Demonstrate use of displacement control with some existing data </span></div>
+<div class="line">   <span class="comment">//----------------------------------------------------------------</span></div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Create Data object whose one-and-only value contains the</span></div>
+<div class="line">     <span class="comment">// adjustable load</span></div>
+<div class="line">     <a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a>=<span class="keyword">new</span> <a class="code" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a>(1);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Currently, nobody&#39;s &quot;in charge of&quot; this Data so it won&#39;t</span></div>
+<div class="line">     <span class="comment">// get included in any equation numbering schemes etc.</span></div>
+<div class="line">     <span class="comment">// --&gt; declare it to be &quot;global Data&quot; for the Problem</span></div>
+<div class="line">     <span class="comment">// so the Problem is in charge and will perform such tasks.</span></div>
+<div class="line">     add_global_data(<a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a>);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Build displacement control element and pass pointer to the</span></div>
+<div class="line">     <span class="comment">// already existing adjustable load Data. </span></div>
+<div class="line">     displ_control_el_pt=</div>
+<div class="line">      <span class="keyword">new</span>  DisplacementControlElement(controlled_element_pt,</div>
+<div class="line">                                      s_displ_control,</div>
+<div class="line">                                      controlled_direction,</div>
+<div class="line">                                      &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a1c774c9cb221df909201e81e84b15f40">Global_Physical_Variables::Xprescr</a>,</div>
+<div class="line">                                      <a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --></li>
+</ul>
+<br  />
+<br  />
+ In both cases, we add the newly created <code>DisplacementControlElement</code> to the mesh to ensure that it is included in the <code>Problem</code>. <br  />
+<br  />
+ <div class="fragment"><div class="line">   <span class="comment">// Add the displacement-control element to the mesh</span></div>
+<div class="line">   mesh_pt()-&gt;add_element_pt(displ_control_el_pt); </div>
+<div class="line">  }</div>
+</div><!-- fragment --></li>
+</ul>
+<p>Next, we execute the usual loop over the elements to pass the pointers to the problem's non-dimensional parameters the elements. If displacement control is used, we also pass the pointer to the load <code>Data</code> object to the elements' external <code>Data</code> to indicate that the element's residual vectors depends on the unknown load. Finally, we set up the equation numbering scheme.</p>
+<div class="fragment"><div class="line"> <span class="comment">//Loop over the elements to set physical parameters etc.</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;Nbeam_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to proper element type</span></div>
+<div class="line">   ELEMENT *elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set wall thickness</span></div>
+<div class="line">   elem_pt-&gt;h_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">Global_Physical_Variables::H</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Function that specifies load Vector</span></div>
+<div class="line">   elem_pt-&gt;load_vector_fct_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a86fd8f502cb8c4c7939ffae742f023eb">Global_Physical_Variables::press_load</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Assign the undeformed beam shape</span></div>
+<div class="line">   elem_pt-&gt;undeformed_beam_pt() = Undef_geom_pt;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Displacement control? If so, the load on *all* elements</span></div>
+<div class="line">   <span class="comment">// is affected by an unknown -- the external pressure, stored</span></div>
+<div class="line">   <span class="comment">// as the one-and-only value in a Data object: Add it to the</span></div>
+<div class="line">   <span class="comment">// elements&#39; external Data.</span></div>
+<div class="line">   <span class="keywordflow">if</span> (Displ_control)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//The external pressure is external data for all elements</span></div>
+<div class="line">     elem_pt-&gt;add_external_data(<a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a>);</div>
+<div class="line">    }</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do equation numbering</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;# of dofs &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The post-processing function documents the ring shapes and adds the load/displacement characteristics of the two material points on the ring's symmetry lines to the trace file. </p><div class="fragment"><div class="line"><span class="comment">//=======start_of_doc=====================================================</span></div>
+<div class="line"><span class="comment">/// Document solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#ab644c5fd57310f2d4c858f64d8c5a223">ElasticRingProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info,</div>
+<div class="line">                                               ofstream&amp; trace_file)</div>
+<div class="line">{ </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/ring%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Local coordinates of plot points at left and right end of domain</span></div>
+<div class="line"> Vector&lt;double&gt; s_left(1);</div>
+<div class="line"> s_left[0]=-1.0;</div>
+<div class="line"> Vector&lt;double&gt; s_right(1);</div>
+<div class="line"> s_right[0]=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write trace file: Pressure, two radii</span></div>
+<div class="line"> trace_file </div>
+<div class="line">  &lt;&lt; <a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a>-&gt;value(0)/</div>
+<div class="line">  (pow(<a class="code" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">Global_Physical_Variables::H</a>,3)/12.0)  </div>
+<div class="line">  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">  &lt;&lt; <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;</div>
+<div class="line">                            element_pt(0))-&gt;interpolated_x(s_left,0)</div>
+<div class="line">  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">  &lt;&lt; <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span></div>
+<div class="line">  (mesh_pt()-&gt;element_pt(Nbeam_element-1))-&gt;interpolated_x(s_right,1)</div>
+<div class="line">  &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">  </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="parameter"></a>
+The parameter study</h1>
+<p>We start by opening a trace file to record the load/displacement characteristics, and output the initial configuration.</p>
+<div class="fragment"><div class="line"><span class="comment">//========start_of_run=====================================================</span></div>
+<div class="line"><span class="comment">/// Solver loop to perform parameter study</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classElasticRingProblem.html#afed9c0948c535c315c3e22e92e3266d3">ElasticRingProblem&lt;ELEMENT&gt;::parameter_study</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Open a trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> ofstream trace_file(filename);</div>
+<div class="line"> trace_file &lt;&lt; <span class="stringliteral">&quot;VARIABLES=\&quot;p_e_x_t\&quot;,\&quot;R_1\&quot;,\&quot;R_2\&quot;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> trace_file &lt;&lt; <span class="stringliteral">&quot;ZONE&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output initial data</span></div>
+<div class="line"> doc_solution(doc_info,trace_file);</div>
+</div><!-- fragment --><p>Next we set up the increment of the control parameter, choosing the displacement or load increments such that the ring's deformation is increased from the axisymmetric initial state to total collapse with opposite wall contact in 11 steps.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Number of steps</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep= 11; <span class="comment">//51;</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increments</span></div>
+<div class="line"> <span class="keywordtype">double</span> displ_increment=1.0/double(nstep-1);</div>
+<div class="line"> <span class="keywordtype">double</span> p_buckl=3.00*pow(<a class="code" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">Global_Physical_Variables::H</a>,3)/12.0;</div>
+<div class="line"> <span class="keywordtype">double</span> p_owc  =5.22*pow(<a class="code" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">Global_Physical_Variables::H</a>,3)/12.0;</div>
+<div class="line"> <span class="keywordtype">double</span> pext_increment=(p_owc-p_buckl)/<span class="keywordtype">double</span>(nstep-1); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set initial values for parameters that are to be incremented</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a1c774c9cb221df909201e81e84b15f40">Global_Physical_Variables::Xprescr</a>=1.0+displ_increment;</div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a>-&gt;set_value(0,p_buckl-pext_increment);</div>
+</div><!-- fragment --><p>Without displacement-control the Newton method can require a large number of iterations, therefore we increment the maximum number of iterations.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Without displacement control the Newton method converges very slowly</span></div>
+<div class="line"> <span class="comment">// as we approach the axisymmetric state: Allow more iterations before</span></div>
+<div class="line"> <span class="comment">// calling it a day...</span></div>
+<div class="line"> <span class="keywordflow">if</span> (Displ_control)</div>
+<div class="line">  {</div>
+<div class="line">   Max_newton_iterations=100;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>We start the parameter study by increasing the ring's compression (either by increasing the external pressure or by reducing the <img class="formulaInl" alt="$ x_2$" src="form_41.png"/> - coordinate of the control point) with <img class="formulaInl" alt="$ p_{cos} &gt; 0 $" src="form_42.png"/> to induce buckling in the desired direction.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Downward loop over parameter incrementation with pcos&gt;0 </span></div>
+<div class="line"> <span class="comment">//--------------------------------------------------------</span></div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Perturbation pressure</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab55734aaa66260cd9d4bf68a4ecafdd5">Global_Physical_Variables::Pcos</a>=1.0e-5; </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Downward loop over parameter incrementation</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=1;i&lt;=nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Displacement control?</span></div>
+<div class="line">   <span class="keywordflow">if</span> (!Displ_control) </div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Increment pressure</span></div>
+<div class="line">     <a class="code" href="namespaceGlobal__Physical__Variables.html#a8c25ac6a672ea50d1b709292d1f4837b">Global_Physical_Variables::external_pressure</a>() += pext_increment;</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Increment control displacement</span></div>
+<div class="line">     <a class="code" href="namespaceGlobal__Physical__Variables.html#a1c774c9cb221df909201e81e84b15f40">Global_Physical_Variables::Xprescr</a>-=displ_increment;</div>
+<div class="line">    } </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Solve</span></div>
+<div class="line">   newton_solve();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">   doc_solution(doc_info,trace_file);</div>
+<div class="line">   </div>
+<div class="line">  } <span class="comment">// end of downward loop</span></div>
+</div><!-- fragment --><p>Then we reset the perturbation pressure to zero and reduce the ring's collapse by decreasing the external pressure (or by increasing the <img class="formulaInl" alt="$ x_2$" src="form_41.png"/> - coordinate of the control point).</p>
+<div class="fragment"><div class="line"> <span class="comment">// Reset perturbation pressure</span></div>
+<div class="line"> <span class="comment">//----------------------------</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab55734aaa66260cd9d4bf68a4ecafdd5">Global_Physical_Variables::Pcos</a>=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set initial values for parameters that are to be incremented</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a1c774c9cb221df909201e81e84b15f40">Global_Physical_Variables::Xprescr</a>-=displ_increment;</div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a8c25ac6a672ea50d1b709292d1f4837b">Global_Physical_Variables::external_pressure</a>() += pext_increment;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Start new zone for tecplot</span></div>
+<div class="line"> trace_file &lt;&lt; <span class="stringliteral">&quot;ZONE&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Upward loop over parameter incrementation</span></div>
+<div class="line"> <span class="comment">//------------------------------------------</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=nstep;i&lt;2*nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Displacement control?</span></div>
+<div class="line">   <span class="keywordflow">if</span> (!Displ_control) </div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Increment pressure</span></div>
+<div class="line">     <a class="code" href="namespaceGlobal__Physical__Variables.html#a8c25ac6a672ea50d1b709292d1f4837b">Global_Physical_Variables::external_pressure</a>() -= pext_increment;</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Increment control displacement</span></div>
+<div class="line">     <a class="code" href="namespaceGlobal__Physical__Variables.html#a1c774c9cb221df909201e81e84b15f40">Global_Physical_Variables::Xprescr</a>+=displ_increment;</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Solve</span></div>
+<div class="line">   newton_solve();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">   doc_solution(doc_info,trace_file);</div>
+<div class="line">   </div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of run</span></div>
+</div><!-- fragment --><p>Done!</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="further"></a>
+Further comments and Exercises</h1>
+<h2><a class="anchor" id="global_data"></a>
+"Internal" and "external" Data in elements and "global" Data in Problems</h2>
+<p>In the section <a class="el" href="index.html#constructor">The constructor</a> we encountered two different constructors for the <code>DisplacementControlElement</code>.</p><ul>
+<li>The first version (in which the <code>Data</code> object that contains the unknown load value is created by the constructor) is most natural for the problem considered here as the load <code>Data</code> is created specifically for the purpose of allowing displacement control to be applied. It therefore natural to regard the <code>DisplacementControlElement</code> as being "in charge of" the load <code>Data</code> , and storing it in the element's "internal Data". (<a href="../../../the_data_structure/html/index.html">Recall</a> that once <code>Data</code> is stored in an element's internal <code>Data</code>, the element becomes responsible for performing tasks such as equation numbering, timestepping, etc. that must be performed exactly once for each <code>Data</code> value in the <code>Problem</code>.) <br  />
+<br  />
+</li>
+<li>The second version of the constructor is appropriate for problems in which the load <code>Data</code> has already been created by another element, implying that the other element is already "in charge" of the <code>Data</code> object and performs the equation numbering, timestepping etc. for its values. In that case, the load <code>Data</code> is regarded as "external Data" for the <code>DisplacementControlElement</code>.</li>
+</ul>
+<p>In our example code, we simulated the second scenario by creating the load <code>Data</code> object before calling the second version of the constructor. While this ensures that the load <em>can</em> be regarded as an unknown in the problem, the <code>Problem</code> remains "unaware" of the additional unknown, as none of the elements in the <code>Problem's</code> mesh is "in charge" of it. While this is clearly a somewhat artificial scenario, <code>oomph-lib</code> provides a mechanism for handling such cases: Adding a <code>Data</code> object to the <code>Problem's</code> "global Data" by calling</p>
+<div class="fragment"><div class="line">Problem::add_global_data(...)</div>
+</div><!-- fragment --><p>puts the <code>Problem</code> itself "in charge" of this <code>Data</code>.</p>
+<hr  />
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ol type="1">
+<li>Run the code without displacement control (e.g. by setting the boolean flag <code>displ_control</code> in the main function to <code>false</code>) and confirm that a non-zero perturbation pressure, <img class="formulaInl" alt="$ p_{cos} \ne 0$" src="form_34.png"/> is required to induce the ring's non-axisymmetric collapse This shows that the numerical model is not as sensitive to non-axisymmetric perturbations as the theory suggests &ndash; roundoff error alone is not sufficient to initiate non-axisymmetric buckling. Use this version of the code to compute the load-displacement characteristics of the ring in its axisymmetric state, i.e. the dash-dotted blue line in the bifurcation diagram shown at the beginning of this document. <br  />
+<br  />
+</li>
+<li>Run the code without displacement control and explain why during the second phase of the parameter study (when <img class="formulaInl" alt="$ p_{cos} = 0 $" src="form_43.png"/> ), the Newton method converges very slowly and provides very inaccurate results when <img class="formulaInl" alt="$ p_{ext} = 3$" src="form_44.png"/> .<br  />
+<br  />
+</li>
+<li>We claimed that the load/displacement curves for the post-buckling regime emanate from the axisymmetric branch at <img class="formulaInl" alt="$ p_{ext} = 3 $" src="form_45.png"/> , yet closer inspection of the bifurcation diagram shows a small kink in the post-buckling curves near the bifurcation. Explain what causes this kink and why it is practically impossible to avoid its occurrence. [Hint: The load/displacement curves contain individual data points, each one of which corresponds to a solution of the governing equations. The solutions were obtained by Newton's method which tends to converge to a solution in which the unknowns are "close" to their values at the beginning of the iteration. Is it obvious that an initial guess that corresponds to a non-axisymmetric configuration is necessarily "closer" to another non-axisymmetric solution than to a nearby axisymmetric solution?] <br  />
+<br  />
+</li>
+<li>The computation shown above was performed with the default non-dimensional wall thickness of <img class="formulaInl" alt="$ h^*/R_0 = 1/20 $" src="form_23.png"/> . Repeat the computation with smaller wall-thicknesses (the <a href="../../tensioned_string/html/index.html">previous example</a> shows how to change the default value) and confirm the theoretical predictions for the dependence of <img class="formulaInl" alt="$ p_{ext}^{[buckl]} $" src="form_46.png"/> and <img class="formulaInl" alt="$ p_{ext}^{[owc]} $" src="form_47.png"/> on <img class="formulaInl" alt="$ h^*/R_0 $" src="form_48.png"/>. <br  />
+<br  />
+</li>
+<li>Comment out the command that stores the load <code>Data</code> as global <code>Data</code> and explain why the code fails with a segmentation fault. Use the <code>Problem::self_test()</code> function to identify the problem. [Hint: What is the default value for a <code>Data</code> object's global equation numbers? What happens if this default is not overwritten? Why is the default assignment not overwritten?]</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="
+../../../../
+demo_drivers/beam/steady_ring/
+">demo_drivers/beam/steady_ring/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="
+../../../../
+demo_drivers/beam/steady_ring/steady_ring.cc
+">demo_drivers/beam/steady_ring/steady_ring.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassElasticRingProblem_html_a08e4afcece28aee2d1ee2e6c54394be8"><div class="ttname"><a href="classElasticRingProblem.html#a08e4afcece28aee2d1ee2e6c54394be8">ElasticRingProblem::Undef_geom_pt</a></div><div class="ttdeci">GeomObject * Undef_geom_pt</div><div class="ttdoc">Pointer to geometric object that represents the undeformed shape.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00132">steady_ring.cc:132</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_a6fd111ba8588ca6fa58a49b3f42739d9"><div class="ttname"><a href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a></div><div class="ttdeci">n n This version of the constructor creates the load c Data object whose one and only value stores the adjustable load We obtain a pointer to the newly created c Data object from the access function c DisplacementControlElement::displacement_control_load_pt() and store it in \c Global_Physical_Variables n n&lt; B &gt; the c Data object that specifies the adjustable load level might already have been created elsewhere in the c Problem For such c oomph lib provides an alternative constructor whose argument list includes the pointer to the already existing load c Data object To demonstrate its use we create a suitable c Data object and store it in the c Problem s global c Data(see \ref global_data for a more detailed discussion of this step) and pass it to the const ructor</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00406">steady_ring.txt:406</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html"><div class="ttname"><a href="classElasticRingProblem.html">ElasticRingProblem</a></div><div class="ttdoc">Ring problem.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00097">steady_ring.cc:97</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a46779ff320754561750e22216f7605e3"><div class="ttname"><a href="classElasticRingProblem.html#a46779ff320754561750e22216f7605e3">ElasticRingProblem::ElasticRingProblem</a></div><div class="ttdeci">ElasticRingProblem(const unsigned &amp;n_element, bool &amp;displ_control, bool &amp;load_data_already_exists)</div><div class="ttdoc">Constructor for elastic ring problem.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00150">steady_ring.cc:150</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_aa57e3dd4e9a5187ef7394b019e68b1ca"><div class="ttname"><a href="classElasticRingProblem.html#aa57e3dd4e9a5187ef7394b019e68b1ca">ElasticRingProblem::Nbeam_element</a></div><div class="ttdeci">unsigned Nbeam_element</div><div class="ttdoc">Number of elements in the beam mesh.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00135">steady_ring.cc:135</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a7e956ca937741ce71cf400eb492825b3"><div class="ttname"><a href="classElasticRingProblem.html#a7e956ca937741ce71cf400eb492825b3">ElasticRingProblem::mesh_pt</a></div><div class="ttdeci">OneDLagrangianMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Access function for the specific mesh.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00109">steady_ring.cc:109</a></div></div>
+<div class="ttc" id="asteady__ring_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="steady__ring_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver for ring test problem.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00456">steady_ring.cc:456</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00005">steady_ring.txt:5</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab55734aaa66260cd9d4bf68a4ecafdd5"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab55734aaa66260cd9d4bf68a4ecafdd5">Global_Physical_Variables::Pcos</a></div><div class="ttdeci">double Pcos</div><div class="ttdoc">Perturbation pressure.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00056">steady_ring.cc:56</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a919d11c9d2167d909c4d4563e9ca83b6"><div class="ttname"><a href="classElasticRingProblem.html#a919d11c9d2167d909c4d4563e9ca83b6">ElasticRingProblem::Displ_control</a></div><div class="ttdeci">bool Displ_control</div><div class="ttdoc">Use displacement control?</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00129">steady_ring.cc:129</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a6d084ac04c73a116f5ece449935a31d3"><div class="ttname"><a href="classElasticRingProblem.html#a6d084ac04c73a116f5ece449935a31d3">ElasticRingProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function is empty.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00118">steady_ring.cc:118</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_ab644c5fd57310f2d4c858f64d8c5a223"><div class="ttname"><a href="classElasticRingProblem.html#ab644c5fd57310f2d4c858f64d8c5a223">ElasticRingProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info, ofstream &amp;trace_file)</div><div class="ttdoc">Doc solution.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00294">steady_ring.cc:294</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a1c774c9cb221df909201e81e84b15f40"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a1c774c9cb221df909201e81e84b15f40">Global_Physical_Variables::Xprescr</a></div><div class="ttdeci">double Xprescr</div><div class="ttdoc">Prescribed position (only used for displacement control)</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00053">steady_ring.cc:53</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a86fd8f502cb8c4c7939ffae742f023eb"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a86fd8f502cb8c4c7939ffae742f023eb">Global_Physical_Variables::press_load</a></div><div class="ttdeci">void press_load(const Vector&lt; double &gt; &amp;xi, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;N, Vector&lt; double &gt; &amp;load)</div><div class="ttdoc">Load function: Constant external pressure with cos variation to induce buckling in n=2 mode.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00064">steady_ring.cc:64</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a8c25ac6a672ea50d1b709292d1f4837b"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a8c25ac6a672ea50d1b709292d1f4837b">Global_Physical_Variables::external_pressure</a></div><div class="ttdeci">double &amp; external_pressure()</div><div class="ttdoc">Return a reference to the external pressure load on the elastic ring. A reference is obtained by de-r...</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00079">steady_ring.cc:79</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a58c2889fd4db8c17f4a4d964a5a7a90d"><div class="ttname"><a href="classElasticRingProblem.html#a58c2889fd4db8c17f4a4d964a5a7a90d">ElasticRingProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function is empty.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00115">steady_ring.cc:115</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_a33298df64564d35290d4b62eb7d5db4b"><div class="ttname"><a href="steady__ring_8txt.html#a33298df64564d35290d4b62eb7d5db4b">cos</a></div><div class="ttdeci">0\f$ and reversed the procedure to re-trace the deformation to the axisymmetric state. @I w 0.75\textwidth ring &quot;Computed ring shapes. &quot; The figure below illustrates the load/displacement characteristics computed by this procedure. The graph shows the radii of two material points on the ring:The green line shows the radius \f$ R_1=R_{ctrl} \f$ of the control point cos</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00189">steady_ring.txt:189</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_af6e07423e22c0991084d9a2f43727805"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">Global_Physical_Variables::H</a></div><div class="ttdeci">double H</div><div class="ttdoc">Nondim thickness.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00050">steady_ring.cc:50</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00046">steady_ring.cc:46</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_ad491714529f007b47396d009f24f18ac"><div class="ttname"><a href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a></div><div class="ttdeci">the red line the radius f R_2 f of the material point located at f xi</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00190">steady_ring.txt:190</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_afed9c0948c535c315c3e22e92e3266d3"><div class="ttname"><a href="classElasticRingProblem.html#afed9c0948c535c315c3e22e92e3266d3">ElasticRingProblem::parameter_study</a></div><div class="ttdeci">void parameter_study(DocInfo &amp;doc_info)</div><div class="ttdoc">Perform the parameter study.</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00337">steady_ring.cc:337</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a9d598320fb3d7ecf94101088e8f376d2"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a9d598320fb3d7ecf94101088e8f376d2">Global_Physical_Variables::Pext_data_pt</a></div><div class="ttdeci">Data * Pext_data_pt</div><div class="ttdoc">Pointer to pressure load (stored in Data so it can become an unknown in the problem when displacement...</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8cc_source.html#l00060">steady_ring.cc:60</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:14:22
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::DoubleVectorWithHaloEntries Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1DoubleVectorWithHaloEntries-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::DoubleVectorWithHaloEntries Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::DoubleVectorWithHaloEntries:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1DoubleVectorWithHaloEntries.png" usemap="#oomph::DoubleVectorWithHaloEntries_map" alt=""/>
+  <map id="oomph::DoubleVectorWithHaloEntries_map" name="oomph::DoubleVectorWithHaloEntries_map">
+<area href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications...." alt="oomph::DoubleVector" shape="rect" coords="0,56,243,80"/>
+<area href="classoomph_1_1DistributableLinearAlgebraObject.html" title="Base class for any linear algebra object that is distributable. Just contains storage for the LinearA..." alt="oomph::DistributableLinearAlgebraObject" shape="rect" coords="0,0,243,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a023d72d2bd81de0e62c5c860edbca5d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a023d72d2bd81de0e62c5c860edbca5d5">DoubleVectorWithHaloEntries</a> ()</td></tr>
+<tr class="memdesc:a023d72d2bd81de0e62c5c860edbca5d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for an uninitialized <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a>.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a023d72d2bd81de0e62c5c860edbca5d5">More...</a><br /></td></tr>
+<tr class="separator:a023d72d2bd81de0e62c5c860edbca5d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11d1cd58eeb7f5d125f76537f49a1c42"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a11d1cd58eeb7f5d125f76537f49a1c42">DoubleVectorWithHaloEntries</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const &amp;dist_pt, <a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *const &amp;<a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a233cb55111ceb501a7a76c434801be4c">halo_scheme_pt</a>=0, const double &amp;v=0.0)</td></tr>
+<tr class="memdesc:a11d1cd58eeb7f5d125f76537f49a1c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0).  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a11d1cd58eeb7f5d125f76537f49a1c42">More...</a><br /></td></tr>
+<tr class="separator:a11d1cd58eeb7f5d125f76537f49a1c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28df73429d7ab3f349849c33a610df8c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a28df73429d7ab3f349849c33a610df8c">DoubleVectorWithHaloEntries</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;dist, <a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *const &amp;<a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a233cb55111ceb501a7a76c434801be4c">halo_scheme_pt</a>=0, const double &amp;v=0.0)</td></tr>
+<tr class="memdesc:a28df73429d7ab3f349849c33a610df8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0).  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a28df73429d7ab3f349849c33a610df8c">More...</a><br /></td></tr>
+<tr class="separator:a28df73429d7ab3f349849c33a610df8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff20c271cfabd18132df864d24ad5cbf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#aff20c271cfabd18132df864d24ad5cbf">~DoubleVectorWithHaloEntries</a> ()</td></tr>
+<tr class="memdesc:aff20c271cfabd18132df864d24ad5cbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#aff20c271cfabd18132df864d24ad5cbf">More...</a><br /></td></tr>
+<tr class="separator:aff20c271cfabd18132df864d24ad5cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bef4c069e52aa1aa394e8b0b75d3367"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a9bef4c069e52aa1aa394e8b0b75d3367">DoubleVectorWithHaloEntries</a> (const <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> &amp;new_vector)</td></tr>
+<tr class="memdesc:a9bef4c069e52aa1aa394e8b0b75d3367"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor from any <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a9bef4c069e52aa1aa394e8b0b75d3367">More...</a><br /></td></tr>
+<tr class="separator:a9bef4c069e52aa1aa394e8b0b75d3367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4af6e4f6038ea0071b7b19d4f4c1a859"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a4af6e4f6038ea0071b7b19d4f4c1a859">DoubleVectorWithHaloEntries</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;new_vector, <a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *const &amp;<a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a233cb55111ceb501a7a76c434801be4c">halo_scheme_pt</a>=0)</td></tr>
+<tr class="memdesc:a4af6e4f6038ea0071b7b19d4f4c1a859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor from any <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a4af6e4f6038ea0071b7b19d4f4c1a859">More...</a><br /></td></tr>
+<tr class="separator:a4af6e4f6038ea0071b7b19d4f4c1a859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac1e401b12a149b56fe0d6211487d30c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#aac1e401b12a149b56fe0d6211487d30c">operator=</a> (const <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> &amp;old_vector)</td></tr>
+<tr class="memdesc:aac1e401b12a149b56fe0d6211487d30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment operator  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#aac1e401b12a149b56fe0d6211487d30c">More...</a><br /></td></tr>
+<tr class="separator:aac1e401b12a149b56fe0d6211487d30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8891ed97a65045e43f906237b109dad2"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a8891ed97a65045e43f906237b109dad2">global_value</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a8891ed97a65045e43f906237b109dad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direct access to global entry.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a8891ed97a65045e43f906237b109dad2">More...</a><br /></td></tr>
+<tr class="separator:a8891ed97a65045e43f906237b109dad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a78785cedfe5bac2367f956b72f302b"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a5a78785cedfe5bac2367f956b72f302b">global_value</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a5a78785cedfe5bac2367f956b72f302b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direct access to the global entry (const version)  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a5a78785cedfe5bac2367f956b72f302b">More...</a><br /></td></tr>
+<tr class="separator:a5a78785cedfe5bac2367f956b72f302b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d5b6e2c1c80d4fb468c851030d62492"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a6d5b6e2c1c80d4fb468c851030d62492">synchronise</a> ()</td></tr>
+<tr class="memdesc:a6d5b6e2c1c80d4fb468c851030d62492"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronise the halo data.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a6d5b6e2c1c80d4fb468c851030d62492">More...</a><br /></td></tr>
+<tr class="separator:a6d5b6e2c1c80d4fb468c851030d62492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7165745d3397b6ea9d87f123cc97e5c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a7165745d3397b6ea9d87f123cc97e5c9">sum_all_halo_and_haloed_values</a> ()</td></tr>
+<tr class="separator:a7165745d3397b6ea9d87f123cc97e5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a233cb55111ceb501a7a76c434801be4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a233cb55111ceb501a7a76c434801be4c">halo_scheme_pt</a> ()</td></tr>
+<tr class="memdesc:a233cb55111ceb501a7a76c434801be4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for halo scheme.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a233cb55111ceb501a7a76c434801be4c">More...</a><br /></td></tr>
+<tr class="separator:a233cb55111ceb501a7a76c434801be4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00fb9417d4d928c3359592caf14bfd72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a00fb9417d4d928c3359592caf14bfd72">halo_scheme_pt</a> () const</td></tr>
+<tr class="memdesc:a00fb9417d4d928c3359592caf14bfd72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for halo scheme (const version)  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a00fb9417d4d928c3359592caf14bfd72">More...</a><br /></td></tr>
+<tr class="separator:a00fb9417d4d928c3359592caf14bfd72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aab1a84c6a82a755fdc3c6b27ce49d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a1aab1a84c6a82a755fdc3c6b27ce49d7">build_halo_scheme</a> (<a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *const &amp;<a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a233cb55111ceb501a7a76c434801be4c">halo_scheme_pt</a>)</td></tr>
+<tr class="memdesc:a1aab1a84c6a82a755fdc3c6b27ce49d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the halo scheme and storage for the halo data.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a1aab1a84c6a82a755fdc3c6b27ce49d7">More...</a><br /></td></tr>
+<tr class="separator:a1aab1a84c6a82a755fdc3c6b27ce49d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DoubleVector"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DoubleVector')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DoubleVector.html">oomph::DoubleVector</a></td></tr>
+<tr class="memitem:a786d26f4034f2ae10c9d26542642661f inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a786d26f4034f2ae10c9d26542642661f">DoubleVector</a> ()</td></tr>
+<tr class="memdesc:a786d26f4034f2ae10c9d26542642661f inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for an uninitialized <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>.  <a href="classoomph_1_1DoubleVector.html#a786d26f4034f2ae10c9d26542642661f">More...</a><br /></td></tr>
+<tr class="separator:a786d26f4034f2ae10c9d26542642661f inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21f824524cd7bc779af3cbdbfe1d3ef8 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a21f824524cd7bc779af3cbdbfe1d3ef8">DoubleVector</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const &amp;dist_pt, const double &amp;v=0.0)</td></tr>
+<tr class="memdesc:a21f824524cd7bc779af3cbdbfe1d3ef8 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0).  <a href="classoomph_1_1DoubleVector.html#a21f824524cd7bc779af3cbdbfe1d3ef8">More...</a><br /></td></tr>
+<tr class="separator:a21f824524cd7bc779af3cbdbfe1d3ef8 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29d22a13eeaa61d5467d5cfa37e1f38f inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a29d22a13eeaa61d5467d5cfa37e1f38f">DoubleVector</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;dist, const double &amp;v=0.0)</td></tr>
+<tr class="memdesc:a29d22a13eeaa61d5467d5cfa37e1f38f inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0).  <a href="classoomph_1_1DoubleVector.html#a29d22a13eeaa61d5467d5cfa37e1f38f">More...</a><br /></td></tr>
+<tr class="separator:a29d22a13eeaa61d5467d5cfa37e1f38f inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53441aa63f3acfa65dc4556ffa0b5573 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a53441aa63f3acfa65dc4556ffa0b5573">~DoubleVector</a> ()</td></tr>
+<tr class="memdesc:a53441aa63f3acfa65dc4556ffa0b5573 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor - just calls this-&gt;<a class="el" href="classoomph_1_1DoubleVector.html#af1677445056759263b1b076966e7bfae" title="wipes the DoubleVector">clear()</a> to delete the distribution and data.  <a href="classoomph_1_1DoubleVector.html#a53441aa63f3acfa65dc4556ffa0b5573">More...</a><br /></td></tr>
+<tr class="separator:a53441aa63f3acfa65dc4556ffa0b5573 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af547ee3b90c4a5598b655ed57ed78b2f inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#af547ee3b90c4a5598b655ed57ed78b2f">DoubleVector</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;new_vector)</td></tr>
+<tr class="memdesc:af547ee3b90c4a5598b655ed57ed78b2f inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classoomph_1_1DoubleVector.html#af547ee3b90c4a5598b655ed57ed78b2f">More...</a><br /></td></tr>
+<tr class="separator:af547ee3b90c4a5598b655ed57ed78b2f inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5f56f41d86a18bba358912b1c4f2dac inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#ab5f56f41d86a18bba358912b1c4f2dac">operator=</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;old_vector)</td></tr>
+<tr class="memdesc:ab5f56f41d86a18bba358912b1c4f2dac inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment operator  <a href="classoomph_1_1DoubleVector.html#ab5f56f41d86a18bba358912b1c4f2dac">More...</a><br /></td></tr>
+<tr class="separator:ab5f56f41d86a18bba358912b1c4f2dac inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bcc94c157d6853a0f0502e8a76ed380 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a7bcc94c157d6853a0f0502e8a76ed380">build</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;old_vector)</td></tr>
+<tr class="memdesc:a7bcc94c157d6853a0f0502e8a76ed380 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Just copys the argument <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>.  <a href="classoomph_1_1DoubleVector.html#a7bcc94c157d6853a0f0502e8a76ed380">More...</a><br /></td></tr>
+<tr class="separator:a7bcc94c157d6853a0f0502e8a76ed380 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad22d075ba35995e26f40209de1b25746 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#ad22d075ba35995e26f40209de1b25746">build</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;dist, const double &amp;v)</td></tr>
+<tr class="memdesc:ad22d075ba35995e26f40209de1b25746 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles a <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> with distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.0.  <a href="classoomph_1_1DoubleVector.html#ad22d075ba35995e26f40209de1b25746">More...</a><br /></td></tr>
+<tr class="separator:ad22d075ba35995e26f40209de1b25746 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84d5a0b2335fb1af865c84f8f25421e9 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a84d5a0b2335fb1af865c84f8f25421e9">build</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const &amp;dist_pt, const double &amp;v)</td></tr>
+<tr class="memdesc:a84d5a0b2335fb1af865c84f8f25421e9 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles a <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> with distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.0.  <a href="classoomph_1_1DoubleVector.html#a84d5a0b2335fb1af865c84f8f25421e9">More...</a><br /></td></tr>
+<tr class="separator:a84d5a0b2335fb1af865c84f8f25421e9 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73332fc4a200a32d7281ceb548375d8a inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a73332fc4a200a32d7281ceb548375d8a">build</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;dist, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;v)</td></tr>
+<tr class="memdesc:a73332fc4a200a32d7281ceb548375d8a inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles a <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> with a distribution dist and coefficients taken from the vector v. Note. The vector v MUST be of length <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee" title="access function to the number of global rows.">nrow()</a>  <a href="classoomph_1_1DoubleVector.html#a73332fc4a200a32d7281ceb548375d8a">More...</a><br /></td></tr>
+<tr class="separator:a73332fc4a200a32d7281ceb548375d8a inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e6219936d6b23265b46dd3a25acb7c8 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a4e6219936d6b23265b46dd3a25acb7c8">build</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const &amp;dist_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;v)</td></tr>
+<tr class="memdesc:a4e6219936d6b23265b46dd3a25acb7c8 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles a <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> with a distribution dist and coefficients taken from the vector v. Note. The vector v MUST be of length <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee" title="access function to the number of global rows.">nrow()</a>  <a href="classoomph_1_1DoubleVector.html#a4e6219936d6b23265b46dd3a25acb7c8">More...</a><br /></td></tr>
+<tr class="separator:a4e6219936d6b23265b46dd3a25acb7c8 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a180c1057a29f4ed721da46040a619ecd inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a180c1057a29f4ed721da46040a619ecd">initialise</a> (const double &amp;v)</td></tr>
+<tr class="memdesc:a180c1057a29f4ed721da46040a619ecd inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise the whole vector with value v  <a href="classoomph_1_1DoubleVector.html#a180c1057a29f4ed721da46040a619ecd">More...</a><br /></td></tr>
+<tr class="separator:a180c1057a29f4ed721da46040a619ecd inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3ce2b88e72d8b084e9be8e9af10c487 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#ae3ce2b88e72d8b084e9be8e9af10c487">initialise</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; v)</td></tr>
+<tr class="memdesc:ae3ce2b88e72d8b084e9be8e9af10c487 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise the vector with coefficient from the vector v. Note: The vector v must be of length <br  />
+  <a href="classoomph_1_1DoubleVector.html#ae3ce2b88e72d8b084e9be8e9af10c487">More...</a><br /></td></tr>
+<tr class="separator:ae3ce2b88e72d8b084e9be8e9af10c487 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1677445056759263b1b076966e7bfae inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#af1677445056759263b1b076966e7bfae">clear</a> ()</td></tr>
+<tr class="memdesc:af1677445056759263b1b076966e7bfae inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">wipes the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>  <a href="classoomph_1_1DoubleVector.html#af1677445056759263b1b076966e7bfae">More...</a><br /></td></tr>
+<tr class="separator:af1677445056759263b1b076966e7bfae inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae402d422ec4344a4a45cdb7659b7161 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#aae402d422ec4344a4a45cdb7659b7161">built</a> () const</td></tr>
+<tr class="separator:aae402d422ec4344a4a45cdb7659b7161 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4715c8cf47f9fc56d95889343d1a3b82 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a4715c8cf47f9fc56d95889343d1a3b82">set_external_values</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const &amp;dist_pt, double *external_values, bool delete_external_values)</td></tr>
+<tr class="memdesc:a4715c8cf47f9fc56d95889343d1a3b82 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows are external data to be used by this vector. WARNING: The size of the external data must correspond to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> dist_pt argument.  <a href="classoomph_1_1DoubleVector.html#a4715c8cf47f9fc56d95889343d1a3b82">More...</a><br /></td></tr>
+<tr class="separator:a4715c8cf47f9fc56d95889343d1a3b82 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0626a448c259a12bd2b7d50f92da91e3 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a0626a448c259a12bd2b7d50f92da91e3">set_external_values</a> (double *external_values, bool delete_external_values)</td></tr>
+<tr class="memdesc:a0626a448c259a12bd2b7d50f92da91e3 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows are external data to be used by this vector. WARNING: The size of the external data must correspond to the distribution of this vector.  <a href="classoomph_1_1DoubleVector.html#a0626a448c259a12bd2b7d50f92da91e3">More...</a><br /></td></tr>
+<tr class="separator:a0626a448c259a12bd2b7d50f92da91e3 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9396b861977c16606d8eca39056976c8 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a9396b861977c16606d8eca39056976c8">redistribute</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const &amp;dist_pt)</td></tr>
+<tr class="memdesc:a9396b861977c16606d8eca39056976c8 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">The contents of the vector are redistributed to match the new distribution. In a non-MPI rebuild this method works, but does nothing. <b>NOTE</b> 1: The current distribution and the new distribution must have the same number of global rows. <b>NOTE</b> 2: The current distribution and the new distribution must have the same Communicator.  <a href="classoomph_1_1DoubleVector.html#a9396b861977c16606d8eca39056976c8">More...</a><br /></td></tr>
+<tr class="separator:a9396b861977c16606d8eca39056976c8 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acea3779324129da50076341bf6644d25 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#acea3779324129da50076341bf6644d25">operator[]</a> (int <a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:acea3779324129da50076341bf6644d25 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">[] access function to the (local) values of this vector  <a href="classoomph_1_1DoubleVector.html#acea3779324129da50076341bf6644d25">More...</a><br /></td></tr>
+<tr class="separator:acea3779324129da50076341bf6644d25 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da2f710fccabe5a5349d8a5238b36cc inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a4da2f710fccabe5a5349d8a5238b36cc">operator==</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v)</td></tr>
+<tr class="memdesc:a4da2f710fccabe5a5349d8a5238b36cc inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">== operator  <a href="classoomph_1_1DoubleVector.html#a4da2f710fccabe5a5349d8a5238b36cc">More...</a><br /></td></tr>
+<tr class="separator:a4da2f710fccabe5a5349d8a5238b36cc inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2724cce5d107b7e6535d9ae071d6d603 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a2724cce5d107b7e6535d9ae071d6d603">operator+=</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v)</td></tr>
+<tr class="memdesc:a2724cce5d107b7e6535d9ae071d6d603 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">+= operator with another vector  <a href="classoomph_1_1DoubleVector.html#a2724cce5d107b7e6535d9ae071d6d603">More...</a><br /></td></tr>
+<tr class="separator:a2724cce5d107b7e6535d9ae071d6d603 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb013d502cff3ee0b7e036945ece1ea inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#aaeb013d502cff3ee0b7e036945ece1ea">operator-=</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;v)</td></tr>
+<tr class="memdesc:aaeb013d502cff3ee0b7e036945ece1ea inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">-= operator with another vector  <a href="classoomph_1_1DoubleVector.html#aaeb013d502cff3ee0b7e036945ece1ea">More...</a><br /></td></tr>
+<tr class="separator:aaeb013d502cff3ee0b7e036945ece1ea inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a691d884622e4221e61436f2bc457c6e2 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a691d884622e4221e61436f2bc457c6e2">operator*=</a> (const double &amp;d)</td></tr>
+<tr class="memdesc:a691d884622e4221e61436f2bc457c6e2 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">multiply by a double  <a href="classoomph_1_1DoubleVector.html#a691d884622e4221e61436f2bc457c6e2">More...</a><br /></td></tr>
+<tr class="separator:a691d884622e4221e61436f2bc457c6e2 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3cb62619709401a0e8f4bc4bee9dff3 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#ab3cb62619709401a0e8f4bc4bee9dff3">operator/=</a> (const double &amp;d)</td></tr>
+<tr class="memdesc:ab3cb62619709401a0e8f4bc4bee9dff3 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">divide by a double  <a href="classoomph_1_1DoubleVector.html#ab3cb62619709401a0e8f4bc4bee9dff3">More...</a><br /></td></tr>
+<tr class="separator:ab3cb62619709401a0e8f4bc4bee9dff3 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54cec3cc3e28f6781c28c0dbcfcffa3e inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a54cec3cc3e28f6781c28c0dbcfcffa3e">operator[]</a> (int <a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a54cec3cc3e28f6781c28c0dbcfcffa3e inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">[] access function to the (local) values of this vector  <a href="classoomph_1_1DoubleVector.html#a54cec3cc3e28f6781c28c0dbcfcffa3e">More...</a><br /></td></tr>
+<tr class="separator:a54cec3cc3e28f6781c28c0dbcfcffa3e inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c176b562f503701d65882a930d5b8f5 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a4c176b562f503701d65882a930d5b8f5">max</a> () const</td></tr>
+<tr class="memdesc:a4c176b562f503701d65882a930d5b8f5 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the maximum coefficient  <a href="classoomph_1_1DoubleVector.html#a4c176b562f503701d65882a930d5b8f5">More...</a><br /></td></tr>
+<tr class="separator:a4c176b562f503701d65882a930d5b8f5 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c3dcdf8a602a1f266bbe72d98fde2e7 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a8c3dcdf8a602a1f266bbe72d98fde2e7">values_pt</a> ()</td></tr>
+<tr class="memdesc:a8c3dcdf8a602a1f266bbe72d98fde2e7 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the underlying values  <a href="classoomph_1_1DoubleVector.html#a8c3dcdf8a602a1f266bbe72d98fde2e7">More...</a><br /></td></tr>
+<tr class="separator:a8c3dcdf8a602a1f266bbe72d98fde2e7 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab88fb798be9cc01d3f3fb64db2c8c9f6 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#ab88fb798be9cc01d3f3fb64db2c8c9f6">values_pt</a> () const</td></tr>
+<tr class="memdesc:ab88fb798be9cc01d3f3fb64db2c8c9f6 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the underlying values (const version)  <a href="classoomph_1_1DoubleVector.html#ab88fb798be9cc01d3f3fb64db2c8c9f6">More...</a><br /></td></tr>
+<tr class="separator:ab88fb798be9cc01d3f3fb64db2c8c9f6 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa258eab026007d7f02847b6e5ef3d1dc inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#aa258eab026007d7f02847b6e5ef3d1dc">output</a> (std::ostream &amp;outfile, const int &amp;output_precision=-1) const</td></tr>
+<tr class="memdesc:aa258eab026007d7f02847b6e5ef3d1dc inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the global contents of the vector  <a href="classoomph_1_1DoubleVector.html#aa258eab026007d7f02847b6e5ef3d1dc">More...</a><br /></td></tr>
+<tr class="separator:aa258eab026007d7f02847b6e5ef3d1dc inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab236e5a906d16e8c7edc6b9acafa23e4 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#ab236e5a906d16e8c7edc6b9acafa23e4">output</a> (std::string filename, const int &amp;output_precision=-1) const</td></tr>
+<tr class="memdesc:ab236e5a906d16e8c7edc6b9acafa23e4 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the global contents of the vector  <a href="classoomph_1_1DoubleVector.html#ab236e5a906d16e8c7edc6b9acafa23e4">More...</a><br /></td></tr>
+<tr class="separator:ab236e5a906d16e8c7edc6b9acafa23e4 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cdcd660a9a90868ba1f837095403649 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a2cdcd660a9a90868ba1f837095403649">output_local_values</a> (std::ostream &amp;outfile, const int &amp;output_precision=-1) const</td></tr>
+<tr class="memdesc:a2cdcd660a9a90868ba1f837095403649 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the local contents of the vector  <a href="classoomph_1_1DoubleVector.html#a2cdcd660a9a90868ba1f837095403649">More...</a><br /></td></tr>
+<tr class="separator:a2cdcd660a9a90868ba1f837095403649 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cbc454999c271e7cb476f7c5c76ce72 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a1cbc454999c271e7cb476f7c5c76ce72">output_local_values</a> (std::string filename, const int &amp;output_precision=-1) const</td></tr>
+<tr class="memdesc:a1cbc454999c271e7cb476f7c5c76ce72 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the local contents of the vector  <a href="classoomph_1_1DoubleVector.html#a1cbc454999c271e7cb476f7c5c76ce72">More...</a><br /></td></tr>
+<tr class="separator:a1cbc454999c271e7cb476f7c5c76ce72 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc5d6ab2c9ba7a0f307cc419a331df70 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#afc5d6ab2c9ba7a0f307cc419a331df70">output_local_values_with_offset</a> (std::ostream &amp;outfile, const int &amp;output_precision=-1) const</td></tr>
+<tr class="memdesc:afc5d6ab2c9ba7a0f307cc419a331df70 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the local contents of the vector  <a href="classoomph_1_1DoubleVector.html#afc5d6ab2c9ba7a0f307cc419a331df70">More...</a><br /></td></tr>
+<tr class="separator:afc5d6ab2c9ba7a0f307cc419a331df70 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9f03b47d00fe70e4f5e4f2474b48bf4 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#aa9f03b47d00fe70e4f5e4f2474b48bf4">output_local_values_with_offset</a> (std::string filename, const int &amp;output_precision=-1) const</td></tr>
+<tr class="memdesc:aa9f03b47d00fe70e4f5e4f2474b48bf4 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the local contents of the vector  <a href="classoomph_1_1DoubleVector.html#aa9f03b47d00fe70e4f5e4f2474b48bf4">More...</a><br /></td></tr>
+<tr class="separator:aa9f03b47d00fe70e4f5e4f2474b48bf4 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd20e2e394c8e08749ed34c7228c8506 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#abd20e2e394c8e08749ed34c7228c8506">dot</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;vec) const</td></tr>
+<tr class="memdesc:abd20e2e394c8e08749ed34c7228c8506 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute the dot product of this vector with the vector vec.  <a href="classoomph_1_1DoubleVector.html#abd20e2e394c8e08749ed34c7228c8506">More...</a><br /></td></tr>
+<tr class="separator:abd20e2e394c8e08749ed34c7228c8506 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac9245cac87ddcdb70cfcd697553a55 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#a9ac9245cac87ddcdb70cfcd697553a55">norm</a> () const</td></tr>
+<tr class="memdesc:a9ac9245cac87ddcdb70cfcd697553a55 inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute the 2 norm of this vector  <a href="classoomph_1_1DoubleVector.html#a9ac9245cac87ddcdb70cfcd697553a55">More...</a><br /></td></tr>
+<tr class="separator:a9ac9245cac87ddcdb70cfcd697553a55 inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe25ba0bd83ba1e963103c4ad95328cc inherit pub_methods_classoomph_1_1DoubleVector"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVector.html#abe25ba0bd83ba1e963103c4ad95328cc">norm</a> (const <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *matrix_pt) const</td></tr>
+<tr class="memdesc:abe25ba0bd83ba1e963103c4ad95328cc inherit pub_methods_classoomph_1_1DoubleVector"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute the A-norm using the matrix at matrix_pt  <a href="classoomph_1_1DoubleVector.html#abe25ba0bd83ba1e963103c4ad95328cc">More...</a><br /></td></tr>
+<tr class="separator:abe25ba0bd83ba1e963103c4ad95328cc inherit pub_methods_classoomph_1_1DoubleVector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor - create a distribution.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">More...</a><br /></td></tr>
+<tr class="separator:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e24b4ce887a2e2da4dc60808f53f91 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e24b4ce887a2e2da4dc60808f53f91">DistributableLinearAlgebraObject</a> (const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;matrix)</td></tr>
+<tr class="memdesc:a21e24b4ce887a2e2da4dc60808f53f91 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e24b4ce887a2e2da4dc60808f53f91">More...</a><br /></td></tr>
+<tr class="separator:a21e24b4ce887a2e2da4dc60808f53f91 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d60098e4938b78dd3e2724551a4c7c9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a0d60098e4938b78dd3e2724551a4c7c9">operator=</a> (const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;)</td></tr>
+<tr class="memdesc:a0d60098e4938b78dd3e2724551a4c7c9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a0d60098e4938b78dd3e2724551a4c7c9">More...</a><br /></td></tr>
+<tr class="separator:a0d60098e4938b78dd3e2724551a4c7c9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">~DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">More...</a><br /></td></tr>
+<tr class="separator:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a603105384d60c9a3710378af39f538b9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a> () const</td></tr>
+<tr class="memdesc:a603105384d60c9a3710378af39f538b9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a>  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">More...</a><br /></td></tr>
+<tr class="separator:a603105384d60c9a3710378af39f538b9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a> () const</td></tr>
+<tr class="memdesc:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the number of global rows.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">More...</a><br /></td></tr>
+<tr class="separator:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> () const</td></tr>
+<tr class="memdesc:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">More...</a><br /></td></tr>
+<tr class="separator:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">nrow_local</a> (const unsigned &amp;p) const</td></tr>
+<tr class="memdesc:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">More...</a><br /></td></tr>
+<tr class="separator:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> () const</td></tr>
+<tr class="memdesc:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">More...</a><br /></td></tr>
+<tr class="separator:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">first_row</a> (const unsigned &amp;p) const</td></tr>
+<tr class="memdesc:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">More...</a><br /></td></tr>
+<tr class="separator:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a> () const</td></tr>
+<tr class="memdesc:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">distribution is serial or distributed  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">More...</a><br /></td></tr>
+<tr class="separator:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a8c35baa65e335043f62954c92c090a5a">distribution_built</a> () const</td></tr>
+<tr class="separator:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const dist_pt)</td></tr>
+<tr class="memdesc:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">More...</a><br /></td></tr>
+<tr class="separator:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">build_distribution</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;dist)</td></tr>
+<tr class="memdesc:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">More...</a><br /></td></tr>
+<tr class="separator:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a59c62401e999f683365a34151362e328"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a59c62401e999f683365a34151362e328">Halo_scheme_pt</a></td></tr>
+<tr class="memdesc:a59c62401e999f683365a34151362e328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the lookup scheme that stores information about on which processor the required information is haloed.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#a59c62401e999f683365a34151362e328">More...</a><br /></td></tr>
+<tr class="separator:a59c62401e999f683365a34151362e328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2b04ca1db09db85401e0d59a225856b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#ac2b04ca1db09db85401e0d59a225856b">Halo_value</a></td></tr>
+<tr class="memdesc:ac2b04ca1db09db85401e0d59a225856b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of the halo values.  <a href="classoomph_1_1DoubleVectorWithHaloEntries.html#ac2b04ca1db09db85401e0d59a225856b">More...</a><br /></td></tr>
+<tr class="separator:ac2b04ca1db09db85401e0d59a225856b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">clear_distribution</a> ()</td></tr>
+<tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">More...</a><br /></td></tr>
+<tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>===================================================================== An extension of <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> that allows access to certain global entries that are not stored locally. Synchronisation of these values must be performed manually by calling the <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html#a6d5b6e2c1c80d4fb468c851030d62492" title="Synchronise the halo data.">synchronise()</a> function. Synchronisation can only be from the haloed to the halo, but the local halo entries can all be summed and stored in the </p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+haloed value.</h1>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00143">143</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a023d72d2bd81de0e62c5c860edbca5d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a023d72d2bd81de0e62c5c860edbca5d5">&#9670;&nbsp;</a></span>DoubleVectorWithHaloEntries() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleVectorWithHaloEntries::DoubleVectorWithHaloEntries </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for an uninitialized <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00155">155</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+</div>
+</div>
+<a id="a11d1cd58eeb7f5d125f76537f49a1c42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11d1cd58eeb7f5d125f76537f49a1c42">&#9670;&nbsp;</a></span>DoubleVectorWithHaloEntries() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleVectorWithHaloEntries::DoubleVectorWithHaloEntries </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>dist_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>halo_scheme_pt</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>v</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0). </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00161">161</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">build_halo_scheme()</a>, and <a class="el" href="double__vector__with__halo_8h_source.html#l00317">halo_scheme_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a28df73429d7ab3f349849c33a610df8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28df73429d7ab3f349849c33a610df8c">&#9670;&nbsp;</a></span>DoubleVectorWithHaloEntries() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleVectorWithHaloEntries::DoubleVectorWithHaloEntries </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>halo_scheme_pt</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>v</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0). </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00175">175</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">build_halo_scheme()</a>, and <a class="el" href="double__vector__with__halo_8h_source.html#l00317">halo_scheme_pt()</a>.</p>
+
+</div>
+</div>
+<a id="aff20c271cfabd18132df864d24ad5cbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff20c271cfabd18132df864d24ad5cbf">&#9670;&nbsp;</a></span>~DoubleVectorWithHaloEntries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleVectorWithHaloEntries::~DoubleVectorWithHaloEntries </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00186">186</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+</div>
+</div>
+<a id="a9bef4c069e52aa1aa394e8b0b75d3367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bef4c069e52aa1aa394e8b0b75d3367">&#9670;&nbsp;</a></span>DoubleVectorWithHaloEntries() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleVectorWithHaloEntries::DoubleVectorWithHaloEntries </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> &amp;&#160;</td>
+          <td class="paramname"><em>new_vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor from any <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00190">190</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">build_halo_scheme()</a>, and <a class="el" href="double__vector__with__halo_8h_source.html#l00317">halo_scheme_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a4af6e4f6038ea0071b7b19d4f4c1a859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af6e4f6038ea0071b7b19d4f4c1a859">&#9670;&nbsp;</a></span>DoubleVectorWithHaloEntries() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleVectorWithHaloEntries::DoubleVectorWithHaloEntries </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>new_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>halo_scheme_pt</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor from any <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00198">198</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">build_halo_scheme()</a>, and <a class="el" href="double__vector__with__halo_8h_source.html#l00317">halo_scheme_pt()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1aab1a84c6a82a755fdc3c6b27ce49d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aab1a84c6a82a755fdc3c6b27ce49d7">&#9670;&nbsp;</a></span>build_halo_scheme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DoubleVectorWithHaloEntries::build_halo_scheme </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>halo_scheme_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct the halo scheme and storage for the halo data. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">339</a> of file <a class="el" href="double__vector__with__halo_8cc_source.html">double_vector_with_halo.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector__with__halo_8h_source.html#l00147">Halo_scheme_pt</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00317">halo_scheme_pt()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00150">Halo_value</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00059">oomph::DoubleVectorHaloScheme::Local_index</a>, and <a class="el" href="double__vector__with__halo_8cc_source.html#l00249">synchronise()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__vector__with__halo_8h_source.html#l00161">DoubleVectorWithHaloEntries()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00207">operator=()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02535">oomph::PitchForkHandler::PitchForkHandler()</a>, and <a class="el" href="problem_8cc_source.html#l00221">oomph::Problem::setup_element_count_per_dof()</a>.</p>
+
+</div>
+</div>
+<a id="a8891ed97a65045e43f906237b109dad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8891ed97a65045e43f906237b109dad2">&#9670;&nbsp;</a></span>global_value() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::DoubleVectorWithHaloEntries::global_value </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Direct access to global entry. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00215">215</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00494">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00147">Halo_scheme_pt</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00150">Halo_value</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00113">oomph::DoubleVectorHaloScheme::local_index()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00482">oomph::DistributableLinearAlgebraObject::nrow_local()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l03174">oomph::PitchForkHandler::get_dresiduals_dparameter()</a>, <a class="el" href="problem_8cc_source.html#l07970">oomph::Problem::get_hessian_vector_products()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02991">oomph::PitchForkHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02887">oomph::PitchForkHandler::get_residuals()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02535">oomph::PitchForkHandler::PitchForkHandler()</a>, and <a class="el" href="problem_8cc_source.html#l00221">oomph::Problem::setup_element_count_per_dof()</a>.</p>
+
+</div>
+</div>
+<a id="a5a78785cedfe5bac2367f956b72f302b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a78785cedfe5bac2367f956b72f302b">&#9670;&nbsp;</a></span>global_value() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double&amp; oomph::DoubleVectorWithHaloEntries::global_value </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Direct access to the global entry (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00262">262</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00494">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00147">Halo_scheme_pt</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00150">Halo_value</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00113">oomph::DoubleVectorHaloScheme::local_index()</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00482">oomph::DistributableLinearAlgebraObject::nrow_local()</a>.</p>
+
+</div>
+</div>
+<a id="a233cb55111ceb501a7a76c434801be4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a233cb55111ceb501a7a76c434801be4c">&#9670;&nbsp;</a></span>halo_scheme_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a>* &amp; oomph::DoubleVectorWithHaloEntries::halo_scheme_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for halo scheme. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00317">317</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector__with__halo_8h_source.html#l00147">Halo_scheme_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">build_halo_scheme()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00161">DoubleVectorWithHaloEntries()</a>, and <a class="el" href="double__vector__with__halo_8h_source.html#l00207">operator=()</a>.</p>
+
+</div>
+</div>
+<a id="a00fb9417d4d928c3359592caf14bfd72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00fb9417d4d928c3359592caf14bfd72">&#9670;&nbsp;</a></span>halo_scheme_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a>* const &amp; oomph::DoubleVectorWithHaloEntries::halo_scheme_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for halo scheme (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00320">320</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector__with__halo_8h_source.html#l00147">Halo_scheme_pt</a>.</p>
+
+</div>
+</div>
+<a id="aac1e401b12a149b56fe0d6211487d30c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac1e401b12a149b56fe0d6211487d30c">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DoubleVectorWithHaloEntries::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>assignment operator </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00207">207</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">build_halo_scheme()</a>, and <a class="el" href="double__vector__with__halo_8h_source.html#l00317">halo_scheme_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a7165745d3397b6ea9d87f123cc97e5c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7165745d3397b6ea9d87f123cc97e5c9">&#9670;&nbsp;</a></span>sum_all_halo_and_haloed_values()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DoubleVectorWithHaloEntries::sum_all_halo_and_haloed_values </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sum all the data, store in the master (haloed) data and then synchronise</p>
+<p>Gather all ther data from multiple processors and sum the result which will be stored in the master copy and then synchronised to all copies. This requires two "all to all" communications </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8cc_source.html#l00293">293</a> of file <a class="el" href="double__vector__with__halo_8cc_source.html">double_vector_with_halo.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00084">oomph::DoubleVectorHaloScheme::Halo_displacement</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00076">oomph::DoubleVectorHaloScheme::Halo_eqns</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00080">oomph::DoubleVectorHaloScheme::Halo_n</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00147">Halo_scheme_pt</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00150">Halo_value</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00071">oomph::DoubleVectorHaloScheme::Haloed_displacement</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00063">oomph::DoubleVectorHaloScheme::Haloed_eqns</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00067">oomph::DoubleVectorHaloScheme::Haloed_n</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="double__vector__with__halo_8cc_source.html#l00249">synchronise()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l02535">oomph::PitchForkHandler::PitchForkHandler()</a>, and <a class="el" href="problem_8cc_source.html#l00221">oomph::Problem::setup_element_count_per_dof()</a>.</p>
+
+</div>
+</div>
+<a id="a6d5b6e2c1c80d4fb468c851030d62492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d5b6e2c1c80d4fb468c851030d62492">&#9670;&nbsp;</a></span>synchronise()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DoubleVectorWithHaloEntries::synchronise </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Synchronise the halo data. </p>
+<p>Synchronise the halo data within the vector. This requires one "all to all" communnication. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8cc_source.html#l00249">249</a> of file <a class="el" href="double__vector__with__halo_8cc_source.html">double_vector_with_halo.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00084">oomph::DoubleVectorHaloScheme::Halo_displacement</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00076">oomph::DoubleVectorHaloScheme::Halo_eqns</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00080">oomph::DoubleVectorHaloScheme::Halo_n</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00147">Halo_scheme_pt</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00150">Halo_value</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00071">oomph::DoubleVectorHaloScheme::Haloed_displacement</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00063">oomph::DoubleVectorHaloScheme::Haloed_eqns</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00067">oomph::DoubleVectorHaloScheme::Haloed_n</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">build_halo_scheme()</a>, <a class="el" href="double__vector__with__halo_8cc_source.html#l00293">sum_all_halo_and_haloed_values()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l03309">oomph::PitchForkHandler::synchronise()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a59c62401e999f683365a34151362e328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59c62401e999f683365a34151362e328">&#9670;&nbsp;</a></span>Halo_scheme_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1DoubleVectorHaloScheme.html">DoubleVectorHaloScheme</a>* oomph::DoubleVectorWithHaloEntries::Halo_scheme_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the lookup scheme that stores information about on which processor the required information is haloed. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00147">147</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">build_halo_scheme()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00215">global_value()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00317">halo_scheme_pt()</a>, <a class="el" href="double__vector__with__halo_8cc_source.html#l00293">sum_all_halo_and_haloed_values()</a>, and <a class="el" href="double__vector__with__halo_8cc_source.html#l00249">synchronise()</a>.</p>
+
+</div>
+</div>
+<a id="ac2b04ca1db09db85401e0d59a225856b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2b04ca1db09db85401e0d59a225856b">&#9670;&nbsp;</a></span>Halo_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;double&gt; oomph::DoubleVectorWithHaloEntries::Halo_value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Vector.html">Vector</a> of the halo values. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__vector__with__halo_8h_source.html#l00150">150</a> of file <a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__vector__with__halo_8cc_source.html#l00339">build_halo_scheme()</a>, <a class="el" href="double__vector__with__halo_8h_source.html#l00215">global_value()</a>, <a class="el" href="double__vector__with__halo_8cc_source.html#l00293">sum_all_halo_and_haloed_values()</a>, and <a class="el" href="double__vector__with__halo_8cc_source.html#l00249">synchronise()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="double__vector__with__halo_8h_source.html">double_vector_with_halo.h</a></li>
+<li><a class="el" href="double__vector__with__halo_8cc_source.html">double_vector_with_halo.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:31
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

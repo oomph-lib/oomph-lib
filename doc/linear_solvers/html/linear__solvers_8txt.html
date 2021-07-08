@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: linear_solvers.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">linear_solvers.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a48b51185c1aafe91ac3ea57bf24915f9"><td class="memItemLeft" align="right" valign="top">The actual preconditioning methodology to be used by the c HyprePreconditioner is again selected via enumerated i e skipline <a class="el" href="linear__solvers_8txt.html#a603c7efd1d7772457a5d74feae1f6a6c">hypre_preconditioner_pt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__solvers_8txt.html#a48b51185c1aafe91ac3ea57bf24915f9">hypre_method</a> ()</td></tr>
+<tr class="separator:a48b51185c1aafe91ac3ea57bf24915f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a77768164658dda2a69a29e14655fc20e"><td class="memItemLeft" align="right" valign="top">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt; HR &gt;&lt; HR &gt; section overview Overview As discussed in the&lt; a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__solvers_8txt.html#a77768164658dda2a69a29e14655fc20e">structure&lt;/a &gt;</a></td></tr>
+<tr class="separator:a77768164658dda2a69a29e14655fc20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a860028602e2117cce6271977d9df25f5"><td class="memItemLeft" align="right" valign="top">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton solver ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt; HR &gt;&lt; HR &gt; section overview Overview As discussed in the&lt; a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data by default c oomph lib s Newton&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a></td></tr>
+<tr class="separator:a860028602e2117cce6271977d9df25f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0e238e1f37bba5256f920af211eda9d"><td class="memItemLeft" align="right" valign="top">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt; HR &gt;&lt; HR &gt; section overview Overview As discussed in the&lt; a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data by default c oomph lib s Newton c&lt; a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt;&lt; CODE &gt; SuperLUSolver&lt;/CODE &gt;&lt;/a &gt; a wrapper to&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__solvers_8txt.html#ad0e238e1f37bba5256f920af211eda9d">Demmel</a></td></tr>
+<tr class="separator:ad0e238e1f37bba5256f920af211eda9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54b07dfbbce2dee6991d1cd41c1f28b7"><td class="memItemLeft" align="right" valign="top">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt; HR &gt;&lt; HR &gt; section overview Overview As discussed in the&lt; a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data by default c oomph lib s Newton c&lt; a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt;&lt; CODE &gt; SuperLUSolver&lt;/CODE &gt;&lt;/a &gt; a wrapper to&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__solvers_8txt.html#a54b07dfbbce2dee6991d1cd41c1f28b7">Eistenstat</a></td></tr>
+<tr class="separator:a54b07dfbbce2dee6991d1cd41c1f28b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbda604d1f4851b0b4f0b86c4934d6ce"><td class="memItemLeft" align="right" valign="top">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt; HR &gt;&lt; HR &gt; section overview Overview As discussed in the&lt; a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data by default c oomph lib s Newton c&lt; a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt;&lt; CODE &gt; SuperLUSolver&lt;/CODE &gt;&lt;/a &gt; a wrapper to&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__solvers_8txt.html#adbda604d1f4851b0b4f0b86c4934d6ce">Gilbert</a></td></tr>
+<tr class="separator:adbda604d1f4851b0b4f0b86c4934d6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5921c76b9a989506b6ece7a10b54765"><td class="memItemLeft" align="right" valign="top">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt; HR &gt;&lt; HR &gt; section overview Overview As discussed in the&lt; a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data by default c oomph lib s Newton c&lt; a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt;&lt; CODE &gt; SuperLUSolver&lt;/CODE &gt;&lt;/a &gt; a wrapper to Li &amp;Liu s sparse direct <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>&lt; A HREF=&quot;http:\c oomph-lib provides a large number of alternative linear solversthat may be used instead. All linear solvers within the libraryare derived from the base class &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1LinearSolver.html&quot;&gt;&lt;CODE&gt;LinearSolver&lt;/CODE&gt;&lt;/a&gt; which contains a single pure virtual function\dontinclude linear_solver.h\skipline virtual void solve(Problem* const &amp;problem_pt, DoubleVector &amp;result)=0;whose task it is to compute the solution \f$ \delta {\bf x} \f$ (returnedin the vector \c result) of the linear system\f[{\cal J} \delta {\bf x} = -{\bf r}\f]where \f$ {\bf r} \f$ and \f$ {\cal J} \f$ are the global Jacobian and the residual vector, computed by the \c Problem pointedto by \c problem_pt. The &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1LinearSolver.html&quot;&gt;&lt;CODE&gt;LinearSolver&lt;/CODE&gt;&lt;/a&gt; class also defines linear-algebra-typeinterfaces that allow the solution of linear systems with matricesother than the \c Problem's Jacobian matrix. However, these methods may not be implemented for all linear solvers. &lt;HR&gt;&lt;HR&gt;\section available_solvers List of available linear solvers\c oomph-lib's linear solvers can be sub-divided into serial and parallel, and direct and iterative linear solvers.Here is a quick overview of the available linear solvers. If youare viewing this document online, the links take you directly tothe solvers' class references which explain any <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>-specific memberfunctions.- &lt;B&gt;Serial solvers: &lt;/B&gt; \n\n - &lt;B&gt;Direct solvers:&lt;/B&gt; \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt; &lt;CODE&gt;SuperLUSolver&lt;/CODE&gt;&lt;/a&gt;: \c oomph-lib's default linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, a wrapper to <a class="el" href="linear__solvers_8txt.html#ad0e238e1f37bba5256f920af211eda9d">Demmel</a>, <a class="el" href="linear__solvers_8txt.html#a54b07dfbbce2dee6991d1cd41c1f28b7">Eistenstat</a>, <a class="el" href="linear__solvers_8txt.html#adbda604d1f4851b0b4f0b86c4934d6ce">Gilbert</a>, Li &amp; Liu's sparse direct <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> &lt;A HREF=&quot;http:-&lt; a href=&quot;../../the_data_structure/html/classoomph_1_1HSL__MA42.html&quot;&gt;&lt; CODE &gt;HSL_MA42&lt;/CODE &gt;&lt;/a &gt;:A wrapper to the frontal <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> MA42 from the&lt; a href=&quot;http: library.&lt;/a&gt; This <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> is available free-of-charge for UK academics. The source code can be dropped into the \c oomph-lib distribution; see the instructions in the dummy code\n\n &lt;center&gt; &lt;a href=&quot;../../../external_src/oomph_hsl/dummy_frontal.f&quot;&gt; external_src/oomph_hsl/dummy_frontal.f&lt;/a&gt;\n\n &lt;/center&gt; - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1DenseLU.html&quot;&gt;&lt;CODE&gt;DenseLU&lt;/CODE&gt;&lt;/a&gt;: A direct <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, based on the LU decomposition of the Jacobian matrix which is stored as a dense matrix. Given that the Jacobian matrices arising from most problems are sparse, this is likely to be a very inefficient solver. It is mainly used by the derived (and even more inefficient!) <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1FD__LU.html&quot;&gt;&lt;CODE&gt;FD_LU&lt;/CODE&gt;&lt;/a&gt;.\n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1FD__LU.html&quot;&gt;&lt;CODE&gt;FD_LU&lt;/CODE&gt;&lt;/a&gt;: Almost certainly the world's most inefficient solver. It computes the Jacobian matrix by finite differencing the global residual vector, without taking any sparsity into account. Mainly used by developers as a last-resort sanity check. \n\n . - &lt;b&gt;Iterative solvers:&lt;/b&gt; \n\n - \c oomph-lib provides its own implementations of various standard iterative linear solvers. They are derived from the base class &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html&quot;&gt;&lt;CODE&gt;IterativeLinearSolver&lt;/CODE&gt;&lt;/a&gt; and are typically templated by the matrix type used store the Jacobian matrix. In most cases you will want to set the template argument \c MATRIX to \c CRDoubleMatrix: \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1GMRES.html&quot;&gt;&lt;CODE&gt;GMRES&lt;/CODE&gt;&lt;/a&gt;: A Krylov subspace <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> for symmetric and non-symmetric linear systems. The memory usage increases with each iteration but the iteration can be restarted. \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1BiCGStab.html&quot;&gt;&lt;CODE&gt;BiCGStab&lt;/CODE&gt;&lt;/a&gt;: A Krylov subspace method for symmetric and non-symmetric linear systems. The memory requirement remains constant throughout the iteration.\n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1CG.html&quot;&gt;&lt;CODE&gt;CG&lt;/CODE&gt;&lt;/a&gt;: The classical conjugate gradient method for symmetric positive definite matrices. The memory requirement remains constant throughout the iteration. \n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1GS.html&quot;&gt;&lt;CODE&gt;GS&lt;/CODE&gt;&lt;/a&gt;: Gauss-Seidel -- a stationary iterative solver. \n\n . - \c oomph-lib also provides wrappers to third-party iterative linear solvers. These tend to provide their own implementations of \c GMRES, \c BiCGStab, \c CG, etc. but are not necessarily derived from \c oomph-lib's own &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html&quot;&gt;&lt;CODE&gt;IterativeLinearSolver&lt;/CODE&gt;&lt;/a&gt; base class. \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1HypreSolver.html&quot;&gt;&lt;CODE&gt;HypreSolver&lt;/CODE&gt;&lt;/a&gt;: A wrapper to the high-performance linear solvers/preconditioners from the &lt;a href=&quot;https:-&lt; a href=&quot;../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html&quot;&gt;&lt; CODE &gt;TrilinosAztecOOSolver&lt;/CODE &gt;&lt;/a &gt;:A wrapper to the linear solvers from the&lt; a href=&quot;http: . . .- &lt;b&gt;Parallel solvers:&lt;/b&gt; \n\n - &lt;B&gt;Direct solvers:&lt;/B&gt; \n\n - When \c oomph-lib is compiled with MPI support, its default linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt; &lt;CODE&gt;SuperLUSolver&lt;/CODE&gt;&lt;/a&gt; becomes a wrapper to <a class="el" href="linear__solvers_8txt.html#ad0e238e1f37bba5256f920af211eda9d">Demmel</a>, <a class="el" href="linear__solvers_8txt.html#a54b07dfbbce2dee6991d1cd41c1f28b7">Eistenstat</a>, <a class="el" href="linear__solvers_8txt.html#adbda604d1f4851b0b4f0b86c4934d6ce">Gilbert</a>, Li &amp; Liu's parallel sparse direct <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> &lt;A HREF=&quot;http:SuperLU_DIST.&lt;/A &gt; This behaviour can be over-ruled with the member function \code SuperLUSolver::set_solver_type(...) \endcode whose argument must specify one of the three options listed in the enumeration \c SuperLUSolver::Type. This allows the serial <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>&lt; A HREF=&quot;http: SuperLU&lt;/A&gt; to be used even if \c oomph-lib is compiled with MPI support. \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1MumpsSolver.html&quot;&gt; &lt;CODE&gt; MumpsSolver &lt;/CODE&gt;&lt;/a&gt;: is a wrapper to the &lt;a href=&quot;http:multifrontal <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> that is available when \c oomph-lib is compiled with MPI support and support for MUMPS. . -&lt; B &gt;Iterative solvers:&lt;/B &gt; \n\n -&lt; a href=&quot;../../the_data_structure/html/classoomph_1_1HypreSolver.html&quot;&gt;&lt; CODE &gt;HypreSolver&lt;/CODE &gt;&lt;/a &gt;:A wrapper to the high-performance linear solvers/preconditioners from the&lt; a href=&quot;https: - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html&quot;&gt;&lt;CODE&gt;TrilinosAztecOOSolver&lt;/CODE&gt;&lt;/a&gt;: A wrapper to the linear solvers from the &lt;a href=&quot;http:..&lt; HR &gt;&lt; HR &gt; \section how_to_change_linear_solver How to change the LinearSolver\subsection direct Direct solversChanging \c oomph-lib 's linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> is straightforward. Forinstance, to change the linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> to \c oomph-lib 's \c DenseLUsolver, simply create an instance of this <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> and pass a pointerto it to the \c Problem. This most easily done in the \c Problemconstructor:\dontinclude two_d_poisson_dense_lu.cc\skipline Change <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> to\until new DenseLU;In any subsequent calls to \c oomph-lib 's Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, \c DenseLUwill now be used to solve the linear systems arising during theNewton iteration.&lt; HR &gt;&lt; HR &gt;\subsection iterative_linear_solvers Iterative linear solvers and preconditionersThe specification of an iterative linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> is just as easy:Forinstance, to specify \c oomph-lib 's conjugate gradient <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> \c CG(storing the Jacobian matrix in compressed row format) as the linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, add \dontinclude two_d_poisson_cg.cc\skipline Change <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> to\until linear_solver_pt()=solver_pt;to the problem constructor.We note that, by default, \c oomph-lib 's \cIterativeLinearSolvers perform the preconditioning using the trivial &quot;identity preconditioner&quot;. Most Krylov subspace solvers performvery poorly without some sort of preconditioning. Specific preconditioners may be implemented by deriving from the\c Preconditioner base class, by implementing its two pure virtual functions\dontinclude preconditioner.h\skipline Apply the preconditioner\until=0;and\dontinclude preconditioner.h\skipline Setup the preconditioner. Pure virtual generic\until=0;Note that, by default, \c oomph-lib 's \c IterativeLinearSolvers employ left preconditioning.\c oomph-lib provides fully-functional implementations of several general-purpose preconditioners. For instance, the zero-fill-inincomplete LU factorisation preconditioner ILU(0) may be employedby adding the lines\dontinclude two_d_poisson_cg.cc\skipline Specify preconditioner\until ILUto the \c Problem constructor.Of particular interest is the availability of an &quot;exact preconditioner&quot;&lt; a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUPreconditioner.html&quot;&gt;&lt; CODE &gt;SuperLUPreconditioner&lt;/CODE &gt;&lt;/a &gt;whose use guarantees the convergence of any iterative <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> withina single iteration -- useful for code development.&lt; HR &gt;&lt; HR &gt;\subsection third_party_iterative_linear_solvers Third-party iterative linear solvers and preconditioners\c oomph-lib provides wrappers to various third-party iterativelinear solvers and preconditioners. We stress that these solvers are not necessarily implemented as \c oomph-lib \c IterativeLinearSolvers since their interfaces for the specification of preconditioners, etcmay differ from those employed by \c oomph-lib. Furthermore, unlike \c SuperLUSolver these solvers are notdistributed as part of \c oomph-lib so you have to build/install themseparately before installing \c oomph-lib(\c oomph-lib 's build machinery can do this for you if you wish;see&lt; a href=&quot;../../the_distribution/html/index.html#external_dist&quot;&gt;installation instructions&lt;/a &gt; for details). Once this is done, they maybe used like any other linear solver.&lt; HR &gt;\subsubsection trilinos Trilinos\c oomph-lib provides wrappers to the iterative linear solvers/preconditionersfrom the&lt; a href=&quot;http:The demo code &lt;a href=&quot;../../../demo_drivers/linear_solvers/TrilinosSolver_test.cc&quot;&gt;TrilinosSolver_test.cc&lt;/a&gt; demonstrates how use various combinationsof solvers/preconditioners. Here is a brief overview:&lt;b&gt;Trilinos solvers&lt;/b&gt;The wrappers to Trilinos' Krylov subspace solvers are implementedas \c oomph-lib \c IterativeLinearSolvers, allowing them to be usedvia the standard interfaces described above. For instance, to use\c oomph-lib's wrapper to \c Trilinos' Aztec <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, using\c Trilinos' \c ML multilevel preconditioner, set the solversand preconditioners as usual:\dontinclude TrilinosSolver_test.cc\skipline \until problem.linear_solver_pt() = linear_solver_pt;The actual Krylov subspace <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> used by the \c Trilinos <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> is specified by passing an enumerated flag (defined as static member data in the \c TrilinosAztecOOSolver class) to the solver. Forinstance, \c Trilinos' CG, GMRES and BiCGStab solvers are selected with\dontinclude TrilinosSolver_test.cc\skipline linear_solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::CG;or \skipline linear_solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::GMRES;or \skipline linear_solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::BiCGStab;respectively.&lt;b&gt;Trilinos preconditioners&lt;/b&gt;\c oomph-lib provides wrappers to \c Trilinos' ML and IFPACK preconditioners that allows them to be used as \c oomph-lib \c Preconditioners that may be used with \c oomph-lib'sown \c IterativeLinearSolvers. Here is an example that shows howto build an instance of \c oomph-lib's \c GMRES, preconditionedwith its wrapper to \c Trilinos' \c IFPACK preconditioner:\dontinclude TrilinosSolver_test.cc\skipline Create oomph-lib linear solver\until linear_solver_pt-&gt;preconditioner_pt()=preconditioner_pt;&lt;HR&gt;&lt;HR&gt;\subsubsection hypre Hypre\c oomph-lib provides wrappers to the high-performance linearsolvers/preconditioners from the &lt;a href=&quot;https:Scalable Linear Solvers Project.&lt;/A &gt; The demo code&lt; a href=&quot;../../../demo_drivers/linear_solvers/HypreSolver_test.cc&quot;&gt;HypreSolver_test.cc&lt;/a &gt; demonstrates how use various combinationsof solvers/preconditioners. Here is a brief overview:&lt; b &gt;Hypre solvers&lt;/b &gt;The wrappers to Hypre 's Krylov subspace and AMG solvers are implementedas \c oomph-lib \c LinearSolvers(not \c IterativeLinearSolvers!) so the interfaces for the specification of preconditioners etc.differ from those for \c oomph-lib 's own \c IterativeLinearSolvers.The \c HypreSolver is set like any other \c LinearSolver:\dontinclude HypreSolver_test.cc\skipline \until problem.linear_solver_pt()=hypre_linear_solver_pt;The actual <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> used by the \c HypreSolver is specified by passing an enumerated flag(defined as static member data in the \c HypreSolver class) to the solver. Forinstance, \c Hypre 's AMG, CG, GMRES and BiCGStab solvers are selected with\dontinclude HypreSolver_test.cc\skipline hypre_linear_solver_pt-&gt;<a class="el" href="linear__solvers_8txt.html#a48b51185c1aafe91ac3ea57bf24915f9">hypre_method</a>()=HypreSolver::BoomerAMG;or \skipline hypre_linear_solver_pt-&gt;<a class="el" href="linear__solvers_8txt.html#a48b51185c1aafe91ac3ea57bf24915f9">hypre_method</a>()=HypreSolver::CG;or \skipline hypre_linear_solver_pt-&gt;<a class="el" href="linear__solvers_8txt.html#a48b51185c1aafe91ac3ea57bf24915f9">hypre_method</a>()=HypreSolver::GMRES;or \skipline hypre_linear_solver_pt-&gt;<a class="el" href="linear__solvers_8txt.html#a48b51185c1aafe91ac3ea57bf24915f9">hypre_method</a>()=HypreSolver::BiCGStab;respectively.These Krylov subspace methods may then be preconditioned by\c Hypre 's own(internal) preconditioners, again by specifying themethod via an enumerated flag. So, to use no preconditioning, or to precondition with \c BoomerAMG(and AMG-based preconditioner), \c Euclid(an ILU preconditioner) or \c ParaSails(a sparse approximateinverse preconditioner), set:\skipline hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::None;or \skipline hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::Boomeror \skipline hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::Euclor \skipline hypre_linear_solver_pt-&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__solvers_8txt.html#ad5921c76b9a989506b6ece7a10b54765">internal_preconditioner</a> ()</td></tr>
+<tr class="separator:ad5921c76b9a989506b6ece7a10b54765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a603c7efd1d7772457a5d74feae1f6a6c"><td class="memItemLeft" align="right" valign="top">Now we build an instance of a c HyprePreconditioner dontinclude HypreSolver_test cc skipline until HyprePreconditioner *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__solvers_8txt.html#a603c7efd1d7772457a5d74feae1f6a6c">hypre_preconditioner_pt</a> = new HyprePreconditioner</td></tr>
+<tr class="separator:a603c7efd1d7772457a5d74feae1f6a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a928af980e34ad7b793176aa0b2b01344"><td class="memItemLeft" align="right" valign="top">The actual preconditioning methodology to be used by the c HyprePreconditioner is again selected via enumerated&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linear__solvers_8txt.html#a928af980e34ad7b793176aa0b2b01344">flags</a></td></tr>
+<tr class="separator:a928af980e34ad7b793176aa0b2b01344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a48b51185c1aafe91ac3ea57bf24915f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48b51185c1aafe91ac3ea57bf24915f9">&#9670;&nbsp;</a></span>hypre_method()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The actual preconditioning methodology to be used by the c HyprePreconditioner is again selected via enumerated i e skipline <a class="el" href="linear__solvers_8txt.html#a603c7efd1d7772457a5d74feae1f6a6c">hypre_preconditioner_pt</a> hypre_method </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ad0e238e1f37bba5256f920af211eda9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0e238e1f37bba5256f920af211eda9d">&#9670;&nbsp;</a></span>Demmel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt;HR&gt;&lt;HR&gt; section overview Overview As discussed in the&lt;a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data by default c oomph lib s Newton c&lt;a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt;&lt;CODE&gt; SuperLUSolver&lt;/CODE&gt;&lt;/a&gt; a wrapper to Demmel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="linear__solvers_8txt_source.html#l00026">26</a> of file <a class="el" href="linear__solvers_8txt_source.html">linear_solvers.txt</a>.</p>
+
+</div>
+</div>
+<a id="a54b07dfbbce2dee6991d1cd41c1f28b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54b07dfbbce2dee6991d1cd41c1f28b7">&#9670;&nbsp;</a></span>Eistenstat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt;HR&gt;&lt;HR&gt; section overview Overview As discussed in the&lt;a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data by default c oomph lib s Newton c&lt;a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt;&lt;CODE&gt; SuperLUSolver&lt;/CODE&gt;&lt;/a&gt; a wrapper to Eistenstat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="linear__solvers_8txt_source.html#l00026">26</a> of file <a class="el" href="linear__solvers_8txt_source.html">linear_solvers.txt</a>.</p>
+
+</div>
+</div>
+<a id="a928af980e34ad7b793176aa0b2b01344"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a928af980e34ad7b793176aa0b2b01344">&#9670;&nbsp;</a></span>flags</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The actual preconditioning methodology to be used by the c HyprePreconditioner is again selected via enumerated flags</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="linear__solvers_8txt_source.html#l00413">413</a> of file <a class="el" href="linear__solvers_8txt_source.html">linear_solvers.txt</a>.</p>
+
+</div>
+</div>
+<a id="adbda604d1f4851b0b4f0b86c4934d6ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbda604d1f4851b0b4f0b86c4934d6ce">&#9670;&nbsp;</a></span>Gilbert</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt;HR&gt;&lt;HR&gt; section overview Overview As discussed in the&lt;a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data by default c oomph lib s Newton c&lt;a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt;&lt;CODE&gt; SuperLUSolver&lt;/CODE&gt;&lt;/a&gt; a wrapper to Gilbert</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="linear__solvers_8txt_source.html#l00026">26</a> of file <a class="el" href="linear__solvers_8txt_source.html">linear_solvers.txt</a>.</p>
+
+</div>
+</div>
+<a id="a603c7efd1d7772457a5d74feae1f6a6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a603c7efd1d7772457a5d74feae1f6a6c">&#9670;&nbsp;</a></span>hypre_preconditioner_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Now we build an instance of a c HyprePreconditioner dontinclude HypreSolver_test cc skipline until HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="linear__solvers_8txt_source.html#l00405">405</a> of file <a class="el" href="linear__solvers_8txt_source.html">linear_solvers.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad5921c76b9a989506b6ece7a10b54765"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5921c76b9a989506b6ece7a10b54765">&#9670;&nbsp;</a></span>internal_preconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt;HR&gt;&lt;HR&gt; section overview Overview As discussed in the&lt;a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data by default c oomph lib s Newton c&lt;a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt;&lt;CODE&gt; SuperLUSolver&lt;/CODE&gt;&lt;/a&gt; a wrapper to Li&amp; Liu s sparse direct <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>&lt;A HREF=&quot;http:\c oomph-lib provides a large number of alternative linear solversthat may be used instead. All linear solvers within the libraryare derived from the base class &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1LinearSolver.html&quot;&gt;&lt;CODE&gt;LinearSolver&lt;/CODE&gt;&lt;/a&gt; which contains a single pure virtual function\dontinclude linear_solver.h\skipline virtual void solve(Problem* const &amp;problem_pt, DoubleVector &amp;result)=0;whose task it is to compute the solution \f$ \delta {\bf x} \f$ (returnedin the vector \c result) of the linear system\f[{\cal J} \delta {\bf x} = -{\bf r}\f]where \f$ {\bf r} \f$ and \f$ {\cal J} \f$ are the global Jacobian and the residual vector, computed by the \c Problem pointedto by \c problem_pt. The &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1LinearSolver.html&quot;&gt;&lt;CODE&gt;LinearSolver&lt;/CODE&gt;&lt;/a&gt; class also defines linear-algebra-typeinterfaces that allow the solution of linear systems with matricesother than the \c Problem's Jacobian matrix. However, these methods may not be implemented for all linear solvers. &lt;HR&gt;&lt;HR&gt;\section available_solvers List of available linear solvers\c oomph-lib's linear solvers can be sub-divided into serial and parallel, and direct and iterative linear solvers.Here is a quick overview of the available linear solvers. If youare viewing this document online, the links take you directly tothe solvers' class references which explain any <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>-specific memberfunctions.- &lt;B&gt;Serial solvers: &lt;/B&gt; \n\n - &lt;B&gt;Direct solvers:&lt;/B&gt; \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt; &lt;CODE&gt;SuperLUSolver&lt;/CODE&gt;&lt;/a&gt;: \c oomph-lib's default linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, a wrapper to <a class="el" href="linear__solvers_8txt.html#ad0e238e1f37bba5256f920af211eda9d">Demmel</a>, <a class="el" href="linear__solvers_8txt.html#a54b07dfbbce2dee6991d1cd41c1f28b7">Eistenstat</a>, <a class="el" href="linear__solvers_8txt.html#adbda604d1f4851b0b4f0b86c4934d6ce">Gilbert</a>, Li &amp; Liu's sparse direct <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> &lt;A HREF=&quot;http: - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1HSL__MA42.html&quot;&gt;&lt;CODE&gt;HSL_MA42&lt;/CODE&gt;&lt;/a&gt;: A wrapper to the frontal <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> MA42 from the &lt;a href=&quot;http: library.&lt;/a&gt; This <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> is available free-of-charge for UK academics. The source code can be dropped into the \c oomph-lib distribution; see the instructions in the dummy code\n\n &lt;center&gt; &lt;a href=&quot;../../../external_src/oomph_hsl/dummy_frontal.f&quot;&gt; external_src/oomph_hsl/dummy_frontal.f&lt;/a&gt;\n\n &lt;/center&gt; - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1DenseLU.html&quot;&gt;&lt;CODE&gt;DenseLU&lt;/CODE&gt;&lt;/a&gt;: A direct <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, based on the LU decomposition of the Jacobian matrix which is stored as a dense matrix. Given that the Jacobian matrices arising from most problems are sparse, this is likely to be a very inefficient solver. It is mainly used by the derived (and even more inefficient!) <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1FD__LU.html&quot;&gt;&lt;CODE&gt;FD_LU&lt;/CODE&gt;&lt;/a&gt;.\n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1FD__LU.html&quot;&gt;&lt;CODE&gt;FD_LU&lt;/CODE&gt;&lt;/a&gt;: Almost certainly the world's most inefficient solver. It computes the Jacobian matrix by finite differencing the global residual vector, without taking any sparsity into account. Mainly used by developers as a last-resort sanity check. \n\n . - &lt;b&gt;Iterative solvers:&lt;/b&gt; \n\n - \c oomph-lib provides its own implementations of various standard iterative linear solvers. They are derived from the base class &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html&quot;&gt;&lt;CODE&gt;IterativeLinearSolver&lt;/CODE&gt;&lt;/a&gt; and are typically templated by the matrix type used store the Jacobian matrix. In most cases you will want to set the template argument \c MATRIX to \c CRDoubleMatrix: \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1GMRES.html&quot;&gt;&lt;CODE&gt;GMRES&lt;/CODE&gt;&lt;/a&gt;: A Krylov subspace <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> for symmetric and non-symmetric linear systems. The memory usage increases with each iteration but the iteration can be restarted. \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1BiCGStab.html&quot;&gt;&lt;CODE&gt;BiCGStab&lt;/CODE&gt;&lt;/a&gt;: A Krylov subspace method for symmetric and non-symmetric linear systems. The memory requirement remains constant throughout the iteration.\n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1CG.html&quot;&gt;&lt;CODE&gt;CG&lt;/CODE&gt;&lt;/a&gt;: The classical conjugate gradient method for symmetric positive definite matrices. The memory requirement remains constant throughout the iteration. \n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1GS.html&quot;&gt;&lt;CODE&gt;GS&lt;/CODE&gt;&lt;/a&gt;: Gauss-Seidel -- a stationary iterative solver. \n\n . - \c oomph-lib also provides wrappers to third-party iterative linear solvers. These tend to provide their own implementations of \c GMRES, \c BiCGStab, \c CG, etc. but are not necessarily derived from \c oomph-lib's own &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html&quot;&gt;&lt;CODE&gt;IterativeLinearSolver&lt;/CODE&gt;&lt;/a&gt; base class. \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1HypreSolver.html&quot;&gt;&lt;CODE&gt;HypreSolver&lt;/CODE&gt;&lt;/a&gt;: A wrapper to the high-performance linear solvers/preconditioners from the &lt;a href=&quot;https: - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html&quot;&gt;&lt;CODE&gt;TrilinosAztecOOSolver&lt;/CODE&gt;&lt;/a&gt;: A wrapper to the linear solvers from the &lt;a href=&quot;http: . . .- &lt;b&gt;Parallel solvers:&lt;/b&gt; \n\n - &lt;B&gt;Direct solvers:&lt;/B&gt; \n\n - When \c oomph-lib is compiled with MPI support, its default linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUSolver.html&quot;&gt; &lt;CODE&gt;SuperLUSolver&lt;/CODE&gt;&lt;/a&gt; becomes a wrapper to <a class="el" href="linear__solvers_8txt.html#ad0e238e1f37bba5256f920af211eda9d">Demmel</a>, <a class="el" href="linear__solvers_8txt.html#a54b07dfbbce2dee6991d1cd41c1f28b7">Eistenstat</a>, <a class="el" href="linear__solvers_8txt.html#adbda604d1f4851b0b4f0b86c4934d6ce">Gilbert</a>, Li &amp; Liu's parallel sparse direct <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> &lt;A HREF=&quot;http: SuperLU_DIST.&lt;/A&gt; This behaviour can be over-ruled with the member function \code SuperLUSolver::set_solver_type(...) \endcode whose argument must specify one of the three options listed in the enumeration \c SuperLUSolver::Type. This allows the serial <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> &lt;A HREF=&quot;http: SuperLU&lt;/A&gt; to be used even if \c oomph-lib is compiled with MPI support. \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1MumpsSolver.html&quot;&gt; &lt;CODE&gt; MumpsSolver &lt;/CODE&gt;&lt;/a&gt;: is a wrapper to the &lt;a href=&quot;http: multifrontal <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> that is available when \c oomph-lib is compiled with MPI support and support for MUMPS. . - &lt;B&gt;Iterative solvers:&lt;/B&gt; \n\n - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1HypreSolver.html&quot;&gt;&lt;CODE&gt;HypreSolver&lt;/CODE&gt;&lt;/a&gt;: A wrapper to the high-performance linear solvers/preconditioners from the &lt;a href=&quot;https: - &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html&quot;&gt;&lt;CODE&gt;TrilinosAztecOOSolver&lt;/CODE&gt;&lt;/a&gt;: A wrapper to the linear solvers from the &lt;a href=&quot;http: ..&lt;HR&gt;&lt;HR&gt; \section how_to_change_linear_solver How to change the LinearSolver\subsection direct Direct solversChanging \c oomph-lib's linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> is straightforward. Forinstance, to change the linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> to \c oomph-lib's \c DenseLUsolver, simply create an instance of this <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> and pass a pointerto it to the \c Problem. This most easily done in the \c Problemconstructor:\dontinclude two_d_poisson_dense_lu.cc\skipline Change <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> to\until new DenseLU;In any subsequent calls to \c oomph-lib's Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, \c DenseLUwill now be used to solve the linear systems arising during theNewton iteration.&lt;HR&gt;&lt;HR&gt;\subsection iterative_linear_solvers Iterative linear solvers and preconditionersThe specification of an iterative linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> is just as easy: Forinstance, to specify \c oomph-lib's conjugate gradient <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> \c CG(storing the Jacobian matrix in compressed row format) as the linear <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, add \dontinclude two_d_poisson_cg.cc\skipline Change <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> to\until linear_solver_pt()=solver_pt;to the problem constructor.We note that, by default, \c oomph-lib's \cIterativeLinearSolvers perform the preconditioning using the trivial &quot;identity preconditioner&quot;. Most Krylov subspace solvers performvery poorly without some sort of preconditioning. Specific preconditioners may be implemented by deriving from the\c Preconditioner base class, by implementing its two pure virtual functions\dontinclude preconditioner.h\skipline Apply the preconditioner\until = 0;and\dontinclude preconditioner.h\skipline Setup the preconditioner. Pure virtual generic\until = 0;Note that, by default, \c oomph-lib's \c IterativeLinearSolvers employ left preconditioning.\c oomph-lib provides fully-functional implementations of several general-purpose preconditioners. For instance, the zero-fill-inincomplete LU factorisation preconditioner ILU(0) may be employedby adding the lines\dontinclude two_d_poisson_cg.cc\skipline Specify preconditioner\until ILUto the \c Problem constructor.Of particular interest is the availability of an &quot;exact preconditioner&quot; &lt;a href=&quot;../../the_data_structure/html/classoomph_1_1SuperLUPreconditioner.html&quot;&gt;&lt;CODE&gt;SuperLUPreconditioner&lt;/CODE&gt;&lt;/a&gt;whose use guarantees the convergence of any iterative <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> withina single iteration -- useful for code development.&lt;HR&gt;&lt;HR&gt;\subsection third_party_iterative_linear_solvers Third-party iterative linear solvers and preconditioners\c oomph-lib provides wrappers to various third-party iterativelinear solvers and preconditioners. We stress that these solvers are not necessarily implemented as \c oomph-lib \c IterativeLinearSolvers since their interfaces for the specification of preconditioners, etcmay differ from those employed by \c oomph-lib. Furthermore,unlike \c SuperLUSolver these solvers are notdistributed as part of \c oomph-lib so you have to build/install themseparately before installing \c oomph-lib (\c oomph-lib's build machinery can do this for you if you wish;see &lt;a href=&quot;../../the_distribution/html/index.html#external_dist&quot;&gt;installation instructions&lt;/a&gt; for details). Once this is done, they maybe used like any other linear solver.&lt;HR&gt;\subsubsection trilinos Trilinos\c oomph-lib provides wrappers to the iterative linear solvers/preconditionersfrom the &lt;a href=&quot;http:The demo code &lt;a href=&quot;../../../demo_drivers/linear_solvers/TrilinosSolver_test.cc&quot;&gt;TrilinosSolver_test.cc&lt;/a&gt; demonstrates how use various combinationsof solvers/preconditioners. Here is a brief overview:&lt;b&gt;Trilinos solvers&lt;/b&gt;The wrappers to Trilinos' Krylov subspace solvers are implementedas \c oomph-lib \c IterativeLinearSolvers, allowing them to be usedvia the standard interfaces described above. For instance, to use\c oomph-lib's wrapper to \c Trilinos' Aztec <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a>, using\c Trilinos' \c ML multilevel preconditioner, set the solversand preconditioners as usual:\dontinclude TrilinosSolver_test.cc\skipline \until problem.linear_solver_pt() = linear_solver_pt;The actual Krylov subspace <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> used by the \c Trilinos <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> is specified by passing an enumerated flag (defined as static member data in the \c TrilinosAztecOOSolver class) to the solver. Forinstance, \c Trilinos' CG, GMRES and BiCGStab solvers are selected with\dontinclude TrilinosSolver_test.cc\skipline linear_solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::CG;or \skipline linear_solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::GMRES;or \skipline linear_solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::BiCGStab;respectively.&lt;b&gt;Trilinos preconditioners&lt;/b&gt;\c oomph-lib provides wrappers to \c Trilinos' ML and IFPACK preconditioners that allows them to be used as \c oomph-lib \c Preconditioners that may be used with \c oomph-lib'sown \c IterativeLinearSolvers. Here is an example that shows howto build an instance of \c oomph-lib's \c GMRES, preconditionedwith its wrapper to \c Trilinos' \c IFPACK preconditioner:\dontinclude TrilinosSolver_test.cc\skipline Create oomph-lib linear solver\until linear_solver_pt-&gt;preconditioner_pt()=preconditioner_pt;&lt;HR&gt;&lt;HR&gt;\subsubsection hypre Hypre\c oomph-lib provides wrappers to the high-performance linearsolvers/preconditioners from the &lt;a href=&quot;https:Scalable Linear Solvers Project.&lt;/A&gt; The demo code &lt;a href=&quot;../../../demo_drivers/linear_solvers/HypreSolver_test.cc&quot;&gt;HypreSolver_test.cc&lt;/a&gt; demonstrates how use various combinationsof solvers/preconditioners. Here is a brief overview:&lt;b&gt;Hypre solvers&lt;/b&gt;The wrappers to Hypre's Krylov subspace and AMG solvers are implementedas \c oomph-lib \c LinearSolvers (not \c IterativeLinearSolvers!) so the interfaces for the specification of preconditioners etc.differ from those for \c oomph-lib's own \c IterativeLinearSolvers.The \c HypreSolver is set like any other \c LinearSolver:\dontinclude HypreSolver_test.cc\skipline \until problem.linear_solver_pt() = hypre_linear_solver_pt;The actual <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> used by the \c HypreSolver is specified by passing an enumerated flag (defined as static member data in the \c HypreSolver class) to the solver. Forinstance, \c Hypre's AMG, CG, GMRES and BiCGStab solvers are selected with\dontinclude HypreSolver_test.cc\skipline hypre_linear_solver_pt-&gt;<a class="el" href="linear__solvers_8txt.html#a48b51185c1aafe91ac3ea57bf24915f9">hypre_method</a>() = HypreSolver::BoomerAMG;or \skipline hypre_linear_solver_pt-&gt;<a class="el" href="linear__solvers_8txt.html#a48b51185c1aafe91ac3ea57bf24915f9">hypre_method</a>() = HypreSolver::CG;or \skipline hypre_linear_solver_pt-&gt;<a class="el" href="linear__solvers_8txt.html#a48b51185c1aafe91ac3ea57bf24915f9">hypre_method</a>() = HypreSolver::GMRES;or \skipline hypre_linear_solver_pt-&gt;<a class="el" href="linear__solvers_8txt.html#a48b51185c1aafe91ac3ea57bf24915f9">hypre_method</a>() = HypreSolver::BiCGStab;respectively.These Krylov subspace methods may then be preconditioned by\c Hypre's own (internal) preconditioners, again by specifying themethod via an enumerated flag. So, to use no preconditioning,or to precondition with \c BoomerAMG (and AMG-based preconditioner), \c Euclid (an ILU preconditioner) or \c ParaSails (a sparse approximateinverse preconditioner), set:\skipline hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::None;or \skipline hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::Boomeror \skipline hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::Euclor \skipline hypre_linear_solver_pt-&gt; internal_preconditioner()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=HypreSolver::ParaS</div>
+<div class="line"> </div>
+<div class="line">respectively.</div>
+<div class="line"> </div>
+<div class="line">&lt;b&gt;Hypre preconditioners&lt;/b&gt;</div>
+<div class="line"> </div>
+<div class="line">\c oomph-lib provides wrappers to \c Hypre<span class="stringliteral">&#39;s </span></div>
+<div class="line"><span class="stringliteral">preconditioners that allows them to be used as \c oomph-lib </span></div>
+<div class="line"><span class="stringliteral">\c Preconditioners that may be used with  \c oomph-lib&#39;</span>s</div>
+<div class="line">own \c IterativeLinearSolvers. Here is an example that shows how</div>
+<div class="line">to build an instance of \c oomph-lib<span class="stringliteral">&#39;s \c BiCGStab and to use</span></div>
+<div class="line"><span class="stringliteral">the \c HyprePreconditioner as the preconditioner:</span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">\dontinclude HypreSolver_test.cc</span></div>
+<div class="line"><span class="stringliteral">\skipline  Build and instance of BiCGStab and pass it to the problem</span></div>
+<div class="line"><span class="stringliteral">\until  problem.linear_solver_pt() = oomph_linear_solver_pt</span></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="linear__solvers_8txt_source.html#l00384">384</a> of file <a class="el" href="linear__solvers_8txt_source.html">linear_solvers.txt</a>.</p>
+
+</div>
+</div>
+<a id="a860028602e2117cce6271977d9df25f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a860028602e2117cce6271977d9df25f5">&#9670;&nbsp;</a></span>solver</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and set it as the c Preconditioner for c oomph lib s c BiCGStab solver</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="linear__solvers_8txt_source.html#l00022">22</a> of file <a class="el" href="linear__solvers_8txt_source.html">linear_solvers.txt</a>.</p>
+
+</div>
+</div>
+<a id="a77768164658dda2a69a29e14655fc20e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77768164658dda2a69a29e14655fc20e">&#9670;&nbsp;</a></span>structure&lt;/a &gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Linear solvers The purpose of this tutorial is to show how to specify different linear solvers for c oomph lib s Newton <a class="el" href="linear__solvers_8txt.html#a860028602e2117cce6271977d9df25f5">solver</a> ref overview ref available_solvers ref how_to_change_linear_solver ref direct ref iterative_linear_solvers ref third_party_iterative_linear_solvers ref specific_precond&lt;HR&gt;&lt;HR&gt; section overview Overview As discussed in the&lt;a href=&quot;../../the_data_structure/html/index.html&quot;&gt; bottom up discussion of c oomph lib s data structure&lt;/a &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="linear__solvers_8txt_source.html#l00021">21</a> of file <a class="el" href="linear__solvers_8txt_source.html">linear_solvers.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:23:04
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

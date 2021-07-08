@@ -1,0 +1,157 @@
+\hypertarget{classoomph_1_1NicosConstitutiveEquation}{}\doxysection{oomph\+::Nicos\+Constitutive\+Equation$<$ D\+IM $>$ Class Template Reference}
+\label{classoomph_1_1NicosConstitutiveEquation}\index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
+
+
+{\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h$>$}
+
+Inheritance diagram for oomph\+::Nicos\+Constitutive\+Equation$<$ D\+IM $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1NicosConstitutiveEquation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a5fcbd52036d1d075ce4e9a0515276a29}{Nicos\+Constitutive\+Equation}} (double $\ast$mu\+\_\+inf\+\_\+pt, double $\ast$mu\+\_\+0\+\_\+pt, double $\ast$alpha\+\_\+pt)
+\item 
+double \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a69afbe7d614474de9441a4ad3805ea05}{viscosity}} (const double \&second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor)
+\item 
+double \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a470905abb0522dd441e1e32fbaabb9c3}{dviscosity\+\_\+dinvariant}} (const double \&second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_ab74dee7f73e8b290c4ba251f72d17468}{Mu\+\_\+inf\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em high shear rate viscosity \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a47ddb3294d11f24f639796b1d8e60eac}{Mu\+\_\+0\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em zero shear rate viscosity \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_aa9b410ec3ce0abdc60a86b13da0f7e95}{Alpha\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em parameter that controls the steepness of the curve \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned D\+IM$>$\newline
+class oomph\+::\+Nicos\+Constitutive\+Equation$<$ D\+I\+M $>$}
+
+A \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation}} class defining an arbitrary shear-\/thinning fluid ~\newline
+ 
+
+Definition at line 1078 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a5fcbd52036d1d075ce4e9a0515276a29}\label{classoomph_1_1NicosConstitutiveEquation_a5fcbd52036d1d075ce4e9a0515276a29}} 
+\index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!NicosConstitutiveEquation@{NicosConstitutiveEquation}}
+\index{NicosConstitutiveEquation@{NicosConstitutiveEquation}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{NicosConstitutiveEquation()}{NicosConstitutiveEquation()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{Nicos\+Constitutive\+Equation}} (\begin{DoxyParamCaption}\item[{double $\ast$}]{mu\+\_\+inf\+\_\+pt,  }\item[{double $\ast$}]{mu\+\_\+0\+\_\+pt,  }\item[{double $\ast$}]{alpha\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1096 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a470905abb0522dd441e1e32fbaabb9c3}\label{classoomph_1_1NicosConstitutiveEquation_a470905abb0522dd441e1e32fbaabb9c3}} 
+\index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!dviscosity\_dinvariant@{dviscosity\_dinvariant}}
+\index{dviscosity\_dinvariant@{dviscosity\_dinvariant}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dviscosity\_dinvariant()}{dviscosity\_dinvariant()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ D\+IM $>$\+::dviscosity\+\_\+dinvariant (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Function returning the derivative of the viscosity w.\+r.\+t. the second invariant of the rate of strain tensor For Newtonian behaviour this returns 0.\+0 
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_ad0164e6ca57cc986048346e12c4d353a}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1108 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+References oomph\+::\+Nicos\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Alpha\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a69afbe7d614474de9441a4ad3805ea05}\label{classoomph_1_1NicosConstitutiveEquation_a69afbe7d614474de9441a4ad3805ea05}} 
+\index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!viscosity@{viscosity}}
+\index{viscosity@{viscosity}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{viscosity()}{viscosity()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ D\+IM $>$\+::viscosity (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Function implementing the constitutive model Input\+: second invariant of the rate of strain Output\+: the viscosity For Newtonian behaviour this returns 1 
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a3e6d811786e39ca3c3a9b1c46249442f}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1100 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+References oomph\+::\+Nicos\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Alpha\+\_\+pt, and oomph\+::\+Nicos\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Mu\+\_\+inf\+\_\+pt.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_aa9b410ec3ce0abdc60a86b13da0f7e95}\label{classoomph_1_1NicosConstitutiveEquation_aa9b410ec3ce0abdc60a86b13da0f7e95}} 
+\index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!Alpha\_pt@{Alpha\_pt}}
+\index{Alpha\_pt@{Alpha\_pt}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Alpha\_pt}{Alpha\_pt}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ D\+IM $>$\+::Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+parameter that controls the steepness of the curve 
+
+
+
+Definition at line 1090 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+Referenced by oomph\+::\+Nicos\+Constitutive\+Equation$<$ D\+I\+M $>$\+::dviscosity\+\_\+dinvariant(), and oomph\+::\+Nicos\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+
+\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a47ddb3294d11f24f639796b1d8e60eac}\label{classoomph_1_1NicosConstitutiveEquation_a47ddb3294d11f24f639796b1d8e60eac}} 
+\index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!Mu\_0\_pt@{Mu\_0\_pt}}
+\index{Mu\_0\_pt@{Mu\_0\_pt}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Mu\_0\_pt}{Mu\_0\_pt}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ D\+IM $>$\+::Mu\+\_\+0\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+zero shear rate viscosity 
+
+
+
+Definition at line 1087 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_ab74dee7f73e8b290c4ba251f72d17468}\label{classoomph_1_1NicosConstitutiveEquation_ab74dee7f73e8b290c4ba251f72d17468}} 
+\index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!Mu\_inf\_pt@{Mu\_inf\_pt}}
+\index{Mu\_inf\_pt@{Mu\_inf\_pt}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Mu\_inf\_pt}{Mu\_inf\_pt}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ D\+IM $>$\+::Mu\+\_\+inf\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+high shear rate viscosity 
+
+
+
+Definition at line 1084 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+Referenced by oomph\+::\+Nicos\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalised__newtonian__constitutive__models_8h}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,469 @@
+\hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement}{}\doxysection{oomph\+::Refineable\+Q\+Spherical\+Taylor\+Hood\+Element Class Reference}
+\label{classoomph_1_1RefineableQSphericalTaylorHoodElement}\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+
+
+{\ttfamily \#include $<$refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.928690cm]{classoomph_1_1RefineableQSphericalTaylorHoodElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_ae5d1a4f1c2aa7b1322afcb91b0661ae3}{Refineable\+Q\+Spherical\+Taylor\+Hood\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_af98a332a45e09b9746cd371c5f9cc109}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+\begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at node n. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a613dbf83fb63f7a6cfee3bee9336b99d}{ncont\+\_\+interpolated\+\_\+values}} () const
+\begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: 4 (3 velocities + 1 pressure) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a52c98dc0cc33e2e756ca2873639d641b}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Rebuild from sons\+: empty. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_ae08d92d00ba848f4c6f14ad83433334e}{nrecovery\+\_\+order}} ()
+\begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9b9f57dd6068133cf6b90ff478e96ac5}{nvertex\+\_\+node}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9075467fb311c04ce1dfec15946e7162}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9adcf7a49431c6435eb3decb22ea90d2}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+\begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a3ba40964e7d5153a3b5074ff215fe116}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+\begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a2a183774e0992f6464b39b525552b985}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
+\begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. The pressures are stored at the 3rd location in each node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9c7304678e11298ff3a1d9ead5ea9675}{interpolating\+\_\+node\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const int \&n\+\_\+value)
+\begin{DoxyCompactList}\small\item\em The velocities are isoparametric and so the \char`\"{}nodes\char`\"{} interpolating the velocities are the geometric nodes. The pressure \char`\"{}nodes\char`\"{} are a subset of the nodes, so when n\+\_\+value==3, the n-\/th pressure node is returned. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_aadbbd7d1a8aa8170490d81b6f9602ed0}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (const unsigned \&n1d, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&n\+\_\+value)
+\begin{DoxyCompactList}\small\item\em The pressure nodes are the corner nodes, so when n\+\_\+value==D\+IM, the fraction is the same as the 1d node number, 0 or 1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a0308ea44ae80a2e6bbb2453ee12482a2}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const int \&n\+\_\+value)
+\begin{DoxyCompactList}\small\item\em The velocity nodes are the same as the geometric nodes. The pressure nodes must be calculated by using the same methods as the geometric nodes, but by recalling that there are only two pressure nodes per edge. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_aa722413e544ba7dc9fcd8c42ceb2060d}{ninterpolating\+\_\+node\+\_\+1d}} (const int \&n\+\_\+value)
+\begin{DoxyCompactList}\small\item\em The number of 1d pressure nodes is 2, the number of 1d velocity nodes is the same as the number of 1d geometric nodes. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a91dfb940844c5bf3ba6af5ed10d683f2}{ninterpolating\+\_\+node}} (const int \&n\+\_\+value)
+\begin{DoxyCompactList}\small\item\em The number of pressure nodes is 4. The number of velocity nodes is the same as the number of geometric nodes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a3d72f67b7cb920fb9d006b440fd02922}{interpolating\+\_\+basis}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, const int \&n\+\_\+value) const
+\begin{DoxyCompactList}\small\item\em The basis interpolating the pressure is given by pshape(). / The basis interpolating the velocity is \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape()}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a41a9632ac4bafa843dd8e3cf291ab390}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
+\begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_af90c9272d1d4ba4983141effe918d135}{unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs}} ()
+\begin{DoxyCompactList}\small\item\em Unpin all pressure dofs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableQSphericalTaylorHoodElement_a0aa5d5880b277ae6f4711b54e4b28203}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs}} ()
+\begin{DoxyCompactList}\small\item\em Unpin the proper nodal pressure dofs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Refineable version of Spherical Quad Taylor Hood elements. (note that unlike the cartesian version this is not scale-\/able to higher dimensions!) 
+
+Definition at line 220 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_ae5d1a4f1c2aa7b1322afcb91b0661ae3}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_ae5d1a4f1c2aa7b1322afcb91b0661ae3}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!RefineableQSphericalTaylorHoodElement@{RefineableQSphericalTaylorHoodElement}}
+\index{RefineableQSphericalTaylorHoodElement@{RefineableQSphericalTaylorHoodElement}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{RefineableQSphericalTaylorHoodElement()}{RefineableQSphericalTaylorHoodElement()}}
+{\footnotesize\ttfamily oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: 
+
+
+
+Definition at line 261 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a2a183774e0992f6464b39b525552b985}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a2a183774e0992f6464b39b525552b985}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
+\index{further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{further\_setup\_hanging\_nodes()}{further\_setup\_hanging\_nodes()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Perform additional hanging node procedures for variables that are not interpolated by all nodes. The pressures are stored at the 3rd location in each node. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb063dd2c98ebb42d87959ca6b88}{oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$}}.
+
+
+
+Definition at line 347 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::setup\+\_\+hang\+\_\+for\+\_\+value().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a3ba40964e7d5153a3b5074ff215fe116}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a3ba40964e7d5153a3b5074ff215fe116}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!get\_interpolated\_values@{get\_interpolated\_values}}
+\index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2829ce01d45bfc}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 312 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+spherical\+\_\+nst(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), t, oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+nst(), and values.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9adcf7a49431c6435eb3decb22ea90d2}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9adcf7a49431c6435eb3decb22ea90d2}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!get\_interpolated\_values@{get\_interpolated\_values}}
+\index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f92880668a2373326d8306365c43}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 296 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+spherical\+\_\+nst(), oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+spherical\+\_\+nst(), s, and values.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a0308ea44ae80a2e6bbb2453ee12482a2}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a0308ea44ae80a2e6bbb2453ee12482a2}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}}
+\index{get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{get\_interpolating\_node\_at\_local\_coordinate()}{get\_interpolating\_node\_at\_local\_coordinate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The velocity nodes are the same as the geometric nodes. The pressure nodes must be calculated by using the same methods as the geometric nodes, but by recalling that there are only two pressure nodes per edge. 
+
+Construct the general pressure index from the components.
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad920e66c00888c450f926f08c7793f78}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 388 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), i, oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::\+Pconv, and s.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a3d72f67b7cb920fb9d006b440fd02922}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a3d72f67b7cb920fb9d006b440fd02922}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!interpolating\_basis@{interpolating\_basis}}
+\index{interpolating\_basis@{interpolating\_basis}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{interpolating\_basis()}{interpolating\_basis()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::interpolating\+\_\+basis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The basis interpolating the pressure is given by pshape(). / The basis interpolating the velocity is \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape()}}. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8ca420443c28708e5c6315a80f520137}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 465 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::pshape\+\_\+spherical\+\_\+nst(), and oomph\+::\+Finite\+Element\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9c7304678e11298ff3a1d9ead5ea9675}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9c7304678e11298ff3a1d9ead5ea9675}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!interpolating\_node\_pt@{interpolating\_node\_pt}}
+\index{interpolating\_node\_pt@{interpolating\_node\_pt}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{interpolating\_node\_pt()}{interpolating\_node\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The velocities are isoparametric and so the \char`\"{}nodes\char`\"{} interpolating the velocities are the geometric nodes. The pressure \char`\"{}nodes\char`\"{} are a subset of the nodes, so when n\+\_\+value==3, the n-\/th pressure node is returned. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ab27986fc2f6033a4758662cde78a7b76}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 356 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::\+Pconv.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_aadbbd7d1a8aa8170490d81b6f9602ed0}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_aadbbd7d1a8aa8170490d81b6f9602ed0}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}}
+\index{local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{local\_one\_d\_fraction\_of\_interpolating\_node()}{local\_one\_d\_fraction\_of\_interpolating\_node()}}
+{\footnotesize\ttfamily double oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n1d,  }\item[{const unsigned \&}]{i,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The pressure nodes are the corner nodes, so when n\+\_\+value==D\+IM, the fraction is the same as the 1d node number, 0 or 1. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ac4e4ae5374154855ae9b072c6269f76e}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 368 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, and oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a613dbf83fb63f7a6cfee3bee9336b99d}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a613dbf83fb63f7a6cfee3bee9336b99d}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
+\index{ncont\_interpolated\_values@{ncont\_interpolated\_values}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{ncont\_interpolated\_values()}{ncont\_interpolated\_values()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of continuously interpolated values\+: 4 (3 velocities + 1 pressure) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 273 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a91dfb940844c5bf3ba6af5ed10d683f2}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a91dfb940844c5bf3ba6af5ed10d683f2}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!ninterpolating\_node@{ninterpolating\_node}}
+\index{ninterpolating\_node@{ninterpolating\_node}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{ninterpolating\_node()}{ninterpolating\_node()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::ninterpolating\+\_\+node (\begin{DoxyParamCaption}\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The number of pressure nodes is 4. The number of velocity nodes is the same as the number of geometric nodes. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8b1b5031b55141567ba24913a21534f4}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 457 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nnode().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_aa722413e544ba7dc9fcd8c42ceb2060d}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_aa722413e544ba7dc9fcd8c42ceb2060d}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!ninterpolating\_node\_1d@{ninterpolating\_node\_1d}}
+\index{ninterpolating\_node\_1d@{ninterpolating\_node\_1d}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{ninterpolating\_node\_1d()}{ninterpolating\_node\_1d()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::ninterpolating\+\_\+node\+\_\+1d (\begin{DoxyParamCaption}\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The number of 1d pressure nodes is 2, the number of 1d velocity nodes is the same as the number of 1d geometric nodes. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a850180084aaf164550b4f4978b42cda7}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 449 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nnode\+\_\+1d().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_ae08d92d00ba848f4c6f14ad83433334e}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_ae08d92d00ba848f4c6f14ad83433334e}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!nrecovery\_order@{nrecovery\_order}}
+\index{nrecovery\_order@{nrecovery\_order}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835bd3e0f6b2f4f7a9a4044798}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 280 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9b9f57dd6068133cf6b90ff478e96ac5}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9b9f57dd6068133cf6b90ff478e96ac5}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!nvertex\_node@{nvertex\_node}}
+\index{nvertex\_node@{nvertex\_node}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertex nodes in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e77ef4ff35f15fdf7913b4077}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 283 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nvertex\+\_\+node().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a0aa5d5880b277ae6f4711b54e4b28203}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a0aa5d5880b277ae6f4711b54e4b28203}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
+\index{pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{pin\_elemental\_redundant\_nodal\_pressure\_dofs()}{pin\_elemental\_redundant\_nodal\_pressure\_dofs()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Unpin the proper nodal pressure dofs. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a0041d52514b3020466b88bc63a5f749a}{oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 241 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Node\+::is\+\_\+hanging(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::npres\+\_\+spherical\+\_\+nst(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::\+Pconv, oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::unpin().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a41a9632ac4bafa843dd8e3cf291ab390}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a41a9632ac4bafa843dd8e3cf291ab390}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!pressure\_node\_pt@{pressure\_node\_pt}}
+\index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to n\+\_\+p-\/th pressure node. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a1daddea2d11bb46db3e6aef3843b288d}{oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 228 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::\+Pconv.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a52c98dc0cc33e2e756ca2873639d641b}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a52c98dc0cc33e2e756ca2873639d641b}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!rebuild\_from\_sons@{rebuild\_from\_sons}}
+\index{rebuild\_from\_sons@{rebuild\_from\_sons}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{rebuild\_from\_sons()}{rebuild\_from\_sons()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::rebuild\+\_\+from\+\_\+sons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Rebuild from sons\+: empty. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b78279d17158215fa}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 276 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_af98a332a45e09b9746cd371c5f9cc109}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_af98a332a45e09b9746cd371c5f9cc109}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!required\_nvalue@{required\_nvalue}}
+\index{required\_nvalue@{required\_nvalue}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of values (pinned or dofs) required at node n. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a900be4fc6f5710905e8f562ca5a76c3d}{oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element}}.
+
+
+
+Definition at line 270 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_af90c9272d1d4ba4983141effe918d135}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_af90c9272d1d4ba4983141effe918d135}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!unpin\_elemental\_pressure\_dofs@{unpin\_elemental\_pressure\_dofs}}
+\index{unpin\_elemental\_pressure\_dofs@{unpin\_elemental\_pressure\_dofs}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{unpin\_elemental\_pressure\_dofs()}{unpin\_elemental\_pressure\_dofs()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Unpin all pressure dofs. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableSphericalNavierStokesEquations_a6d4b7f91dc9139367408a3b9f067920d}{oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 232 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element\+::p\+\_\+nodal\+\_\+index\+\_\+spherical\+\_\+nst(), and oomph\+::\+Data\+::unpin().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9075467fb311c04ce1dfec15946e7162}\label{classoomph_1_1RefineableQSphericalTaylorHoodElement_a9075467fb311c04ce1dfec15946e7162}} 
+\index{oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}!vertex\_node\_pt@{vertex\_node\_pt}}
+\index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableQSphericalTaylorHoodElement@{oomph::RefineableQSphericalTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Refineable\+Q\+Spherical\+Taylor\+Hood\+Element\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to the j-\/th vertex node in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 287 of file refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__spherical__navier__stokes__elements_8h}{refineable\+\_\+spherical\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}\end{DoxyCompactItemize}

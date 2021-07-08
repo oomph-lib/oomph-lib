@@ -1,0 +1,98 @@
+/**
+
+\mainpage Example problem: Solving the Helmholtz equation on an unstructured mesh
+
+In this document we revisit the solution of the Helmholtz equation
+and demonstrate how to simulate the scattering of a
+planar wave from a circular cylinder using an unstructured mesh.
+
+<HR>
+<HR>
+
+\section scattering A specific example: Scattering of an acoustic wave from a sound-hard obstacle. 
+ 
+We revisit the problem considered in 
+<a href="../../scattering/html/index.html">another tutorial</a>:
+the scattering of a planar sound wave impacting on a rigid, impermeable
+obstacle as shown in this sketch:
+
+\image html scattering.gif "Scattering of an incoming wave from a sound-hard obstacle -- the scatterer. " 
+\image latex scattering.eps "Scattering of an incoming wave from a sound-hard obstacle -- the scatterer. " width=0.6\textwidth
+
+
+<HR>
+<HR>
+
+\section results Results
+The figure below shows plots of the real and imaginary parts of the
+fluid's displacement potential \f$ \phi \f$ (a measure of the
+fluid pressure). The red and green lines correspond to the
+computed and exact analytical solutions, respectively.
+(We refer to <a href="../../scattering/html/index.html">another
+tutorial</a>
+for details.)
+
+\image html re.gif "Real part of the displacement potential (red: computed; green: exact). " 
+\image latex re.eps "Real part of the displacement potential (red: computed; green: exact). " width=0.8\textwidth
+
+\image html im.gif "Imaginary part of the displacement potential (red: computed; green: exact). " 
+\image latex im.eps "Imaginary part of the displacement potential (red: computed; green: exact). " width=0.8\textwidth
+
+
+
+<HR>
+<HR>
+
+\section num The numerical solution
+The driver code for this problem is very similar to the one discussed in
+<a href=../../scattering/html/index.html>another tutorial</a>.
+Running \c sdiff on the two driver codes
+<CENTER>
+<A HREF="../../../../demo_drivers/helmholtz/scattering/scattering.cc">
+demo_drivers/helmholtz/scattering/scattering.cc
+</A>
+</CENTER>
+and
+<CENTER>
+<A HREF="../../../../demo_drivers/helmholtz/scattering/unstructured_scattering.cc">
+demo_drivers/helmholtz/scattering/unstructured_scattering.cc
+</A>
+</CENTER>
+shows you the differences, the most important of which are:
+- the setup of the unstructured mesh, ensuring that mesh adaptation
+  respects the curvilinear boundaries.
+  \n\n
+- the re-assignment of element properties following any
+  mesh adaptation -- we refer to 
+  <a href="../../../meshes/mesh_from_inline_triangle/html/index.html">
+  another tutorial</a> for a more detailed discussion of why
+  this is necessary.
+. 
+That's all!
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/helmholtz/scattering">
+  demo_drivers/helmholtz/scattering/
+  </A>
+  </CENTER>\n
+- The driver code is: \n\n 
+  <CENTER>
+  <A HREF="../../../../demo_drivers/helmholtz/scattering/unstructured_scattering.cc">
+  demo_drivers/helmholtz/scattering/unstructured_scattering.cc
+  </A>
+  </CENTER>
+.
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

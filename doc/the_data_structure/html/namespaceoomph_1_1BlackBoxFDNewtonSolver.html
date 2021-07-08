@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::BlackBoxFDNewtonSolver Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html">BlackBoxFDNewtonSolver</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::BlackBoxFDNewtonSolver Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace for black-box FD Newton solver.  
+<a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a0b45d0bd1b7ae8ff5c24715b6118d1fd"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;)</td></tr>
+<tr class="memdesc:a0b45d0bd1b7ae8ff5c24715b6118d1fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for residual function: Parameters, unknowns, residuals.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">More...</a><br /></td></tr>
+<tr class="separator:a0b45d0bd1b7ae8ff5c24715b6118d1fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad3ba3031554be43788d296a7a4dddd67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ad3ba3031554be43788d296a7a4dddd67">black_box_fd_newton_solve</a> (<a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a> residual_fct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;params, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;unknowns)</td></tr>
+<tr class="memdesc:ad3ba3031554be43788d296a7a4dddd67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Black-box FD Newton solver: Calling sequence for residual function is.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ad3ba3031554be43788d296a7a4dddd67">More...</a><br /></td></tr>
+<tr class="separator:ad3ba3031554be43788d296a7a4dddd67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a1361a9b08163b59fe82b3042b0f887"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a4a1361a9b08163b59fe82b3042b0f887">line_search</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x_old, const double half_residual_squared_old, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;gradient, <a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a> residual_fct, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;params, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;newton_dir, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, double &amp;half_residual_squared, const double &amp;stpmax)</td></tr>
+<tr class="memdesc:a4a1361a9b08163b59fe82b3042b0f887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Line search helper for globally convergent Newton method.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a4a1361a9b08163b59fe82b3042b0f887">More...</a><br /></td></tr>
+<tr class="separator:a4a1361a9b08163b59fe82b3042b0f887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a20ac8568daf0d63afa3945a817ff3e2d"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a20ac8568daf0d63afa3945a817ff3e2d">Max_iter</a> =20</td></tr>
+<tr class="memdesc:a20ac8568daf0d63afa3945a817ff3e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. # of Newton iterations.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a20ac8568daf0d63afa3945a817ff3e2d">More...</a><br /></td></tr>
+<tr class="separator:a20ac8568daf0d63afa3945a817ff3e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3067ba88fad991fdb619eae7533028bd"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a3067ba88fad991fdb619eae7533028bd">N_iter_taken</a> =0</td></tr>
+<tr class="memdesc:a3067ba88fad991fdb619eae7533028bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Newton iterations taken in most recent invocation.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a3067ba88fad991fdb619eae7533028bd">More...</a><br /></td></tr>
+<tr class="separator:a3067ba88fad991fdb619eae7533028bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2603699f47446716ca5a818f46a7f17"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ac2603699f47446716ca5a818f46a7f17">Doc_Progress</a> =false</td></tr>
+<tr class="memdesc:ac2603699f47446716ca5a818f46a7f17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to indicate if progress of Newton iteration is to be documented (defaults to false)  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#ac2603699f47446716ca5a818f46a7f17">More...</a><br /></td></tr>
+<tr class="separator:ac2603699f47446716ca5a818f46a7f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f0d2ceb4451e66bb7ef4ab4fdb62bcf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a6f0d2ceb4451e66bb7ef4ab4fdb62bcf">FD_step</a> =1.0e-8</td></tr>
+<tr class="memdesc:a6f0d2ceb4451e66bb7ef4ab4fdb62bcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">FD step.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a6f0d2ceb4451e66bb7ef4ab4fdb62bcf">More...</a><br /></td></tr>
+<tr class="separator:a6f0d2ceb4451e66bb7ef4ab4fdb62bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bacc59c8e1194e553f698530e9e945e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a4bacc59c8e1194e553f698530e9e945e">Tol</a> =1.0e-8</td></tr>
+<tr class="memdesc:a4bacc59c8e1194e553f698530e9e945e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tolerance.  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a4bacc59c8e1194e553f698530e9e945e">More...</a><br /></td></tr>
+<tr class="separator:a4bacc59c8e1194e553f698530e9e945e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd90cb451fb7ae5a8e30cab0a1884568"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#afd90cb451fb7ae5a8e30cab0a1884568">Use_step_length_control</a> =false</td></tr>
+<tr class="memdesc:afd90cb451fb7ae5a8e30cab0a1884568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use steplength control do make globally convergent (default false)  <a href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#afd90cb451fb7ae5a8e30cab0a1884568">More...</a><br /></td></tr>
+<tr class="separator:afd90cb451fb7ae5a8e30cab0a1884568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace for black-box FD Newton solver. </p>
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a0b45d0bd1b7ae8ff5c24715b6118d1fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b45d0bd1b7ae8ff5c24715b6118d1fd">&#9670;&nbsp;</a></span>ResidualFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* oomph::BlackBoxFDNewtonSolver::ResidualFctPt)(const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;parameters, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;unknowns, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function pointer for residual function: Parameters, unknowns, residuals. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00305">305</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad3ba3031554be43788d296a7a4dddd67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3ba3031554be43788d296a7a4dddd67">&#9670;&nbsp;</a></span>black_box_fd_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::BlackBoxFDNewtonSolver::black_box_fd_newton_solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a>&#160;</td>
+          <td class="paramname"><em>residual_fct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>unknowns</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Black-box FD Newton solver: Calling sequence for residual function is. </p>
+<div class="fragment"><div class="line">residual_fct(parameters,unknowns,<a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>) </div>
+</div><!-- fragment --><p> where all arguments are double Vectors. unknowns.size() = residuals.size() </p>
+<p>Reset number of Newton iterations taken in most recent invocation</p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00333">333</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00317">Doc_Progress</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00320">FD_step</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00500">line_search()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00310">Max_iter</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00313">N_iter_taken</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="matrices_8cc_source.html#l00051">oomph::DoubleMatrixBase::solve()</a>, <a class="el" href="oomph__definitions_8h_source.html#l00469">oomph::OomphInfo::stream_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00323">Tol</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00326">Use_step_length_control</a>.</p>
+
+</div>
+</div>
+<a id="a4a1361a9b08163b59fe82b3042b0f887"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a1361a9b08163b59fe82b3042b0f887">&#9670;&nbsp;</a></span>line_search()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::BlackBoxFDNewtonSolver::line_search </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x_old</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>half_residual_squared_old</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>gradient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceoomph_1_1BlackBoxFDNewtonSolver.html#a0b45d0bd1b7ae8ff5c24715b6118d1fd">ResidualFctPt</a>&#160;</td>
+          <td class="paramname"><em>residual_fct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>newton_dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>half_residual_squared</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>stpmax</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Line search helper for globally convergent Newton method. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00500">500</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ac2603699f47446716ca5a818f46a7f17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2603699f47446716ca5a818f46a7f17">&#9670;&nbsp;</a></span>Doc_Progress</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::BlackBoxFDNewtonSolver::Doc_Progress =false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flag to indicate if progress of Newton iteration is to be documented (defaults to false) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00317">317</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a6f0d2ceb4451e66bb7ef4ab4fdb62bcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f0d2ceb4451e66bb7ef4ab4fdb62bcf">&#9670;&nbsp;</a></span>FD_step</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::BlackBoxFDNewtonSolver::FD_step =1.0e-8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>FD step. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00320">320</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>, <a class="el" href="problem_8cc_source.html#l07871">oomph::Problem::get_derivative_wrt_global_parameter()</a>, <a class="el" href="problem_8cc_source.html#l07807">oomph::Problem::get_fd_jacobian()</a>, <a class="el" href="problem_8cc_source.html#l07970">oomph::Problem::get_hessian_vector_products()</a>, <a class="el" href="assembly__handler_8cc_source.html#l01185">oomph::FoldHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02991">oomph::PitchForkHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04566">oomph::HopfHandler::get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00634">oomph::AugmentedBlockFoldLinearSolver::resolve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02376">oomph::AugmentedBlockPitchForkLinearSolver::resolve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l00383">oomph::AugmentedBlockFoldLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l02160">oomph::AugmentedBlockPitchForkLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>.</p>
+
+</div>
+</div>
+<a id="a20ac8568daf0d63afa3945a817ff3e2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20ac8568daf0d63afa3945a817ff3e2d">&#9670;&nbsp;</a></span>Max_iter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::BlackBoxFDNewtonSolver::Max_iter =20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Max. # of Newton iterations. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00310">310</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>, <a class="el" href="complex__smoother_8h_source.html#l00546">oomph::ComplexDampedJacobi&lt; MATRIX &gt;::complex_solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l01275">oomph::ComplexGMRES&lt; MATRIX &gt;::complex_solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00621">oomph::CG&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l00181">oomph::BiCGStab&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01190">oomph::GS&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01947">oomph::DampedJacobi&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02268">oomph::GMRES&lt; MATRIX &gt;::solve_helper()</a>, <a class="el" href="complex__smoother_8h_source.html#l02535">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::solve_helper()</a>, and <a class="el" href="complex__smoother_8h_source.html#l03628">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::solve_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a3067ba88fad991fdb619eae7533028bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3067ba88fad991fdb619eae7533028bd">&#9670;&nbsp;</a></span>N_iter_taken</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::BlackBoxFDNewtonSolver::N_iter_taken =0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of Newton iterations taken in most recent invocation. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00313">313</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a4bacc59c8e1194e553f698530e9e945e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bacc59c8e1194e553f698530e9e945e">&#9670;&nbsp;</a></span>Tol</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::BlackBoxFDNewtonSolver::Tol =1.0e-8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tolerance. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00323">323</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+
+</div>
+</div>
+<a id="afd90cb451fb7ae5a8e30cab0a1884568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd90cb451fb7ae5a8e30cab0a1884568">&#9670;&nbsp;</a></span>Use_step_length_control</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::BlackBoxFDNewtonSolver::Use_step_length_control =false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use steplength control do make globally convergent (default false) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00326">326</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00333">black_box_fd_newton_solve()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="athe__data__structure_8txt_html_a1400a973def57b85051cfe1070be1810"><div class="ttname"><a href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a></div><div class="ttdeci">endcode The default implementation of c the simplest possible implementation of a new element requires only the specification of c we need to know which c Data affects the residuals(and hence the Jacobian matrix). For a \c GeneralisedElement such \c Data exists in two forms</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

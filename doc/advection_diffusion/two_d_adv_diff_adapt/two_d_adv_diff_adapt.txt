@@ -1,0 +1,240 @@
+\mainpage Example problem: Adaptive solution of the 2D advection diffusion equation
+
+In this example we discuss the adaptive solution of the 2D
+advection-diffusion problem
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>Two-dimensional advection-diffusion problem in a 
+rectangular domain</B>
+</CENTER> 
+Solve
+\f[
+\mbox{Pe}\ \sum_{i=1}^2 w_i \left(x_1,x_2\right) \frac{\partial u}{\partial
+x_i} = \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} + f(x_1,x_2), 
+ \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@
+\f]
+in the rectangular domain \f$D =\left\{ (x_1,x_2) \in 
+[0,1] \times [0,2]\right\}\f$, 
+with Dirichlet boundary conditions
+\f[
+\left. u\right|_{\partial D}=u_0,
+\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@
+\f]
+
+where the \e Peclet \e number, \f$ \mbox{Pe} \f$ the boundary values, 
+\f$ u_0\f$, the source function \f$ f(x_1,x_2),\f$  
+and the components of the  "wind" \f$ w_i(x_1,x_2) \ (i=1,2)\f$ are given. 
+</TD>
+</TR>
+</TABLE>  
+</CENTER>  
+
+We  choose the forcing function and the boundary conditions
+such that 
+\f[
+u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\ \ \ \ \ \ \ \ \  @E[ExactSoln]@
+\f]
+is the exact solution of the problem.
+For large values of \f$ \alpha, \f$ 
+the exact solution approaches a step, oriented at an angle
+\f$\Phi\f$ against the \f$x_1-\f$axis.
+
+
+ In the computations we will impose the "wind"
+\f[
+\mathbf{w}\left(x_1,x_2 \right) = 
+\left(
+\begin{array}{c}
+\sin(6x_2) \\
+ \cos(6x_1)
+\end{array}
+\right),
+\ \ \ \ \ \ \ \ \  @E[WindFct]@
+\f]
+illustrated in this vector plot:
+
+@I w 0.75\textwidth wind "Plot of the wind. "
+
+
+The graph below shows a plot of the solution, computed at various
+levels of mesh adaptation, for \f$\Phi=45^\circ, \ \alpha=50 \f$ 
+and a Peclet number of \f$ Pe = 200.\f$
+
+@I w 0.75\textwidth step_soln "Plot of the forced solution at different levels of mesh refinement. "
+
+More interesting is the following plot which shows the solution for
+the same parameter values and boundary conditions, but for a zero
+forcing function, \f$ f\equiv 0. \f$
+
+@I w 0.75\textwidth unforced_soln "Plot of the unforced solution at different levels of mesh refinement. "
+
+The plot nicely illustrates the physical effects represented by the
+(unforced) advection diffusion equation. If \f$ u(x_1,x_2) \f$ represents the
+concentration of a chemical that is advected by the velocity field
+\f$ {\bf w}\f$, while being dispersed by molecular
+diffusion, the advection-diffusion equation describes the
+steady-state concentration of this chemical. In this context
+the Peclet number is a measure of the relative importance of 
+advective and diffusive effects. For very small Peclet number, 
+the concentration is determined predominantly by diffusive 
+effects -- as \f$ \mbox{Pe} \to 0\f$, the advection
+diffusion equation approaches the Poisson equation. 
+Conversely, at large values of the Peclet number, the concentration is 
+determined predominantly by advective effects. The chemical 
+is "swept along" by the flow and diffusive effects are only important
+in thin "boundary" or "shear" layers in which the concentration 
+varies over short lengthscales. These can be seen clearly in the 
+most finely resolved solution above.
+
+
+
+
+
+<HR>
+<HR>
+
+\section main The driver code
+
+Overall, the structure of the driver code is very similar to 
+that in the <A HREF="../../../poisson/two_d_poisson/html/index.html">
+corresponding Poisson example</a>. The only difference 
+is that we have to specify function pointers to the source and the
+"wind" functions, which are passed to the problem constructor.
+ We create the problem, perform a self-test, set the global parameters
+that affect the solution and solve the problem using 
+\c oomph-lib's "black-box" adaptive Newton solver. 
+
+\dontinclude two_d_adv_diff_adapt.cc
+\skipline start_of_main
+\until end of main
+
+
+<HR>   
+<HR>
+
+\section global Global parameters and functions
+The specification of the source function and the exact solution
+in the namespace \c TanhSolnForAdvectionDiffusion is similar to that
+for the <A HREF="../../../poisson/two_d_poisson/html/index.html#global">
+Poisson examples.</A> The only difference is the inclusion of the
+Peclet number and the "wind" function. 
+  
+\dontinclude two_d_adv_diff_adapt.cc
+\skipline start_of_namespace
+\until end of namespace
+
+<HR>
+<HR>
+
+\section problem The problem class
+The problem class is very similar to those used in the corresponding 
+<A HREF="../../../poisson/two_d_poisson/html/index.html#problem"> Poisson
+examples.</A> The only change is that we use the function 
+\c Problem::actions_before_adapt() to document the progress of the
+automatic spatial adaptation. For this purpose, we store a \c DocInfo 
+as private member data in the \c Problem. This allows us to increment 
+the counter that labels the output files, accessible 
+from \c DocInfo::number(), whenever a new solution has been
+documented.
+
+\dontinclude two_d_adv_diff_adapt.cc
+\skipline start_of_problem_class
+\until end of problem class
+
+
+<HR>
+<HR>
+
+\section constructor The Problem constructor
+The constructor is practically identical to the constructors used
+in the various 
+<A HREF="../../../poisson/two_d_poisson/html/index.html#constructor"> Poisson
+examples.</A> We specify the output directory in the \c Problem's
+\c DocInfo object, create the mesh and an error estimator, and apply
+the boundary conditions by pinning the nodal values on the Dirichlet
+boundaries.
+
+\skipline start_of_constructor
+\until end loop over boundaries
+
+We complete the problem setup by passing the function
+pointers to the source and wind functions, and the pointer to the Peclet
+number to the elements. Finally, we set up the equation numbering scheme.
+
+\skipline Complete the build of all elements so they are fully functional
+\until end of constructor
+
+<HR>
+<HR>
+
+\section actions_before Actions before solve
+As before, we use the \c Problem::actions_before_newton_solve() function to
+set/update the boundary conditions.
+
+\skipline start_of_actions_before_newton_solve
+\until end of actions before solve
+
+<HR>
+<HR>
+
+\section doc Post-processing
+The function \c doc_solution(...) is identical to that in the
+<A HREF="../../../poisson/two_d_poisson/html/index.html#doc"> Poisson
+example.</A> We output the solution, the exact solution and the 
+error.
+
+\skipline start_of_doc
+\until end of doc
+
+<HR>
+<HR>
+
+\section com Comments and Exercises
+-# Explore the change in the character of the solution of the 
+   unforced problem when the Peclet number is slowly increased from 0 to 200,
+   say. Note how at small Peclet number, strong diffusive effects
+   smooth out the rapid spatial variations imposed by the boundary conditions.
+   Conversely, at large values of the Peclet number, the behaviour is
+   dominated by advective effects. As a result, in regions where 
+   the "wind" is directed into the domain, the value of \f$ u \f$ 
+   set by the Dirichlet boundary conditions is "swept" into the domain. 
+   In regions where the "wind" is directed out of the domain, 
+   the value of \f$ u \f$ "swept along" by the flow
+   in the interior "clashes" with the value prescribed by the boundary
+   conditions and the solution adjusts itself over a very short length
+   scale, leading to the development of thin "boundary layers".
+-# Explore the character of the solution on coarse meshes at large
+   and small Peclet numbers. Note how at large Peclet numbers 
+   the solution on the coarse meshes displays strong "wiggles"
+   throughout the domain. These
+   only disappear once the mesh adaptation fully resolves the regions
+   of rapid variation. We will explore this issue further in 
+   <A HREF="../../two_d_adv_diff_SUPG/html/index.html">
+   another example.</A> 
+
+ 
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/advection_diffusion/two_d_adv_diff_adapt/">
+demo_drivers/advection_diffusion/two_d_adv_diff_adapt/
+</A>
+</CENTER>
+- The driver code is: 
+<CENTER>
+<A HREF="../../../../demo_drivers/advection_diffusion/two_d_adv_diff_adapt/two_d_adv_diff_adapt.cc">
+demo_drivers/advection_diffusion/two_d_adv_diff_adapt/two_d_adv_diff_adapt.cc
+</A>
+</CENTER>
+.

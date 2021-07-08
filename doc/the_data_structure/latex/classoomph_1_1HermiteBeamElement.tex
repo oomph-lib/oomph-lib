@@ -1,0 +1,200 @@
+\hypertarget{classoomph_1_1HermiteBeamElement}{}\doxysection{oomph\+::Hermite\+Beam\+Element Class Reference}
+\label{classoomph_1_1HermiteBeamElement}\index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
+
+
+Hermite Kirchhoff Love beam. Implements \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations}{Kirchhoff\+Love\+Beam\+Equations}} using 2-\/node Hermite elements as the underlying geometrical elements.  
+
+
+
+
+{\ttfamily \#include $<$beam\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Hermite\+Beam\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.274854cm]{classoomph_1_1HermiteBeamElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HermiteBeamElement_a6671722e3e47b8ff355794f986642811}{Hermite\+Beam\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_a4e17bcc85c99e50a676998555151168a}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_a57da5131fb8e21c6b4774f634492cbbf}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function with specified number of plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_aa86c489ad41bc0fb5d9ac3268883c826}{output}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, std\+::ostream \&outfile, const unsigned \&n\+\_\+plot) const
+\begin{DoxyCompactList}\small\item\em Output at previous time (t=0\+: present; t$>$0\+: previous) with specified number of plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_ae47002ab30c8283faa9aebb4af9dc7f3}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_a1507819b449418c5e27bb94a7fa08930}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function with specified number of plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HermiteBeamElement_afc92c0d3a0b5ca4bbd4c6232e6858a8a}{output}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot) const
+\begin{DoxyCompactList}\small\item\em C-\/style output at previous time (t=0\+: present; t$>$0\+: previous) with specified number of plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Hermite Kirchhoff Love beam. Implements \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations}{Kirchhoff\+Love\+Beam\+Equations}} using 2-\/node Hermite elements as the underlying geometrical elements. 
+
+Definition at line 309 of file beam\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_a6671722e3e47b8ff355794f986642811}\label{classoomph_1_1HermiteBeamElement_a6671722e3e47b8ff355794f986642811}} 
+\index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!HermiteBeamElement@{HermiteBeamElement}}
+\index{HermiteBeamElement@{HermiteBeamElement}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
+\doxysubsubsection{\texorpdfstring{HermiteBeamElement()}{HermiteBeamElement()}}
+{\footnotesize\ttfamily oomph\+::\+Hermite\+Beam\+Element\+::\+Hermite\+Beam\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor (empty) 
+
+
+
+Definition at line 315 of file beam\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_afc92c0d3a0b5ca4bbd4c6232e6858a8a}\label{classoomph_1_1HermiteBeamElement_afc92c0d3a0b5ca4bbd4c6232e6858a8a}} 
+\index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
+\index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption}) const}
+
+
+
+C-\/style output at previous time (t=0\+: present; t$>$0\+: previous) with specified number of plot points. 
+
+C-\/style output position at previous time (t=0\+: present; t$>$0\+: previous) with specified number of plot points. 
+
+Definition at line 920 of file beam\+\_\+elements.\+cc.
+
+
+
+References i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), s, and t.
+
+\mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_aa86c489ad41bc0fb5d9ac3268883c826}\label{classoomph_1_1HermiteBeamElement_aa86c489ad41bc0fb5d9ac3268883c826}} 
+\index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
+\index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output at previous time (t=0\+: present; t$>$0\+: previous) with specified number of plot points. 
+
+Output position at previous time (t=0\+: present; t$>$0\+: previous) with specified number of plot points. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a04d2985868c25a1a9eff3ad6fd459071}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 763 of file beam\+\_\+elements.\+cc.
+
+
+
+References i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), s, and t.
+
+\mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_ae47002ab30c8283faa9aebb4af9dc7f3}\label{classoomph_1_1HermiteBeamElement_ae47002ab30c8283faa9aebb4af9dc7f3}} 
+\index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
+\index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+C-\/style output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 1075 of file beam\+\_\+elements.\+cc.
+
+
+
+References output().
+
+\mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_a1507819b449418c5e27bb94a7fa08930}\label{classoomph_1_1HermiteBeamElement_a1507819b449418c5e27bb94a7fa08930}} 
+\index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
+\index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+C-\/style output function with specified number of plot points. 
+
+Output function. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 962 of file beam\+\_\+elements.\+cc.
+
+
+
+References i, oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Geom\+Object\+::nlagrangian(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt(), oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen(), s, oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$\+::shape(), and oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Undeformed\+\_\+beam\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_a4e17bcc85c99e50a676998555151168a}\label{classoomph_1_1HermiteBeamElement_a4e17bcc85c99e50a676998555151168a}} 
+\index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
+\index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 906 of file beam\+\_\+elements.\+cc.
+
+
+
+Referenced by output().
+
+\mbox{\Hypertarget{classoomph_1_1HermiteBeamElement_a57da5131fb8e21c6b4774f634492cbbf}\label{classoomph_1_1HermiteBeamElement_a57da5131fb8e21c6b4774f634492cbbf}} 
+\index{oomph::HermiteBeamElement@{oomph::HermiteBeamElement}!output@{output}}
+\index{output@{output}!oomph::HermiteBeamElement@{oomph::HermiteBeamElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Beam\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output function with specified number of plot points. 
+
+Output function. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 802 of file beam\+\_\+elements.\+cc.
+
+
+
+References i, oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Geom\+Object\+::nlagrangian(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt(), oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen(), s, oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$\+::shape(), and oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::\+Undeformed\+\_\+beam\+\_\+pt.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{beam__elements_8h}{beam\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{beam__elements_8cc}{beam\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

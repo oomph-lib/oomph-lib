@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Spatially adaptive solution of the 2D unsteady heat equation with flux boundary conditions in a moving domain: ALE methods.</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: Spatially adaptive solution of the 2D unsteady heat equation with flux boundary conditions in a moving domain: ALE methods. </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we consider the solution of the unsteady heat equation in a domain with moving boundaries. We demonstrate that the presence of moving boundaries only requires trivial changes to driver codes for corresponding fixed-mesh computations.</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>The two-dimensional unsteady heat equation with flux boundary conditions in a moving domain.</b> </center> Solve <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial t} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_0.png"/>
+</p>
+ in the domain <img class="formulaInl" alt="$ D $" src="form_1.png"/> , bounded by the coordinate axes and the time-dependent ellipse <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathbf{r}_{ellipse}(\xi,t) = \left( \begin{array}{c} \big( a+\hat{a}\sin(2\pi t/\hat{T}) \big) \cos(\xi) \\ \big( b+\hat{b}\sin(2\pi t/\hat{T}) \big) \sin(\xi) \end{array} \right), \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_2.png"/>
+</p>
+ subject to Neumann boundary conditions, <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}= - \left. \frac{\partial u}{\partial x_2}\right|_{\partial D_{Neumann}}= g_0, \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_3.png"/>
+</p>
+ along the horizontal domain boundary <img class="formulaInl" alt="$ \partial D_{Neumann} = \{ (x_1,x_2) | x_1 \in [0,1], x_2=0 \} $" src="form_4.png"/> , and to Dirichlet boundary conditions, <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. u\right|_{\partial D_{Dirichlet}}=h_0, \ \ \ \ \ \ \ \ \ \ (4) \]" src="form_5.png"/>
+</p>
+ elsewhere. <div class="image">
+<img src="domain.gif" alt=""/>
+<div class="caption">
+Sketch of the time-dependent domain and the boundary conditions. </div></div>
+  The initial conditions are given by <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u(x_1,x_2,t=0)=k_0(x_1,x_2), \ \ \ \ \ \ \ \ \ \ (5) \]" src="form_6.png"/>
+</p>
+ where the functions <img class="formulaInl" alt="$ f, g_0, \ h_0 $" src="form_7.png"/> and <img class="formulaInl" alt="$ k_0 $" src="form_8.png"/> are given.   </td></tr>
+</table>
+<br  />
+ </center><p>We choose the functions <img class="formulaInl" alt="$ f, g_0, \ h_0 $" src="form_7.png"/> and <img class="formulaInl" alt="$ k_0 $" src="form_8.png"/> so that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_0(x_1,x_2,t) = \tanh\bigg[ 1-\alpha\bigg( \tan\Phi \big(x_1-\beta\tanh[ \gamma\cos\left(2\pi t\right)]\big)- x_2\bigg)\bigg] \ \ \ \ \ \ \ \ \ \ (6) \]" src="form_9.png"/>
+</p>
+<p> is the exact solution.</p>
+<p>The solution represents the "usual" tanh profile, whose steepness is controlled by the parameter <img class="formulaInl" alt="$ \alpha $" src="form_10.png"/> so that for <img class="formulaInl" alt="$ \alpha \gg 1 $" src="form_11.png"/> the solution approaches a step. The step is oriented at an angle <img class="formulaInl" alt="$ \Phi $" src="form_12.png"/> against the <img class="formulaInl" alt="$ x_1- $" src="form_13.png"/> axis and its position varies periodically. The parameter <img class="formulaInl" alt="$ \beta $" src="form_14.png"/> controls the amplitude of the step's lateral displacement, while <img class="formulaInl" alt="$ \gamma $" src="form_15.png"/> determines the rate at which its position changes. For <img class="formulaInl" alt="$ \gamma \gg 1 $" src="form_16.png"/> , the step remains stationary for most of the period and then translates rapidly parallel to the <img class="formulaInl" alt="$ x_1- $" src="form_13.png"/> axis, making this a very challenging problem.</p>
+<p>The figure below shows a snapshot of the <a href="../figures/step_soln.avi">animated solution</a>, obtained from the spatially adaptive simulation discussed below, for the parameter values <img class="formulaInl" alt="$ \alpha=10, \ \Phi=45^o, \ \beta=-0.3, \ \gamma=5. $" src="form_17.png"/></p>
+<div class="image">
+<img src="step_soln.gif" alt=""/>
+<div class="caption">
+Snapshot of the solution. </div></div>
+ <p>The mesh adaptation in response to the translation of the step can be seen more clearly in this contour plot, taken from <a href="../figures/unsteady_heat_contour.avi">another animation of the solution</a>.</p>
+<div class="image">
+<img src="unsteady_heat_contour.gif" alt=""/>
+<div class="caption">
+Contour plot of the solution. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="ale"></a>
+Background: ALE methods and the evaluation of time-derivatives in moving domains</h1>
+<p><code>oomph-lib's</code> <code>UnsteadyHeatEquations</code>, the equation class that forms the basis for the isoparametric <code>QUnsteadyHeatElements</code>, is based on the Arbitrary Lagrangian Eulerian (ALE) formulation of the weak form of the governing PDE, (1). Within each element, the solution is represented by interpolation between the element's <img class="formulaInl" alt="$ N_{node}^{(E)} $" src="form_18.png"/> nodal values <img class="formulaInl" alt="$ U_j^{(E)}(t) \ (i=1,..., N_{node}^{(E)})$" src="form_19.png"/> , i.e. </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u = \sum_{j=1}^{N_{node}^{(E)}} U_j^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ \ \ \ \ \ \ (7) \]" src="form_20.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ s_1 $" src="form_21.png"/> and <img class="formulaInl" alt="$ s_2 $" src="form_22.png"/> are the element's two local coordinates. The mapping between the local and global (Eulerian) coordinates is based on the interpolation between the nodal coordinates, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_i(s_1,s_2) = \sum_{j=1}^{N_{node}^{(E)}} X_{ij}^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ (i=1,2) \ \ \ \ \ \ (8) \]" src="form_23.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ X_{ij}^{(E)}(t) $" src="form_24.png"/> is the i-th global (Eulerian) coordinate of node j in the element. In moving-domain problems, where the nodal positions vary as function of time, the time-derivative of the nodal value, <img class="formulaInl" alt="$ dU_j(t)/dt $" src="form_25.png"/> , represents the rate-of-change of <img class="formulaInl" alt="$ u $" src="form_26.png"/> at the moving node, rather than the time-derivative of <img class="formulaInl" alt="$ u $" src="form_26.png"/> at a fixed Eulerian position, <br  />
+ <img class="formulaInl" alt="$ \partial u/\partial t, $" src="form_27.png"/> the quantity required in the PDE, (1).</p>
+<p>The rate of change of <img class="formulaInl" alt="$ u $" src="form_26.png"/> at a moving node, <img class="formulaInl" alt="$ dU_j(t)/dt $" src="form_25.png"/> , may also be expressed by the material derivative, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. \frac{D u}{Dt}\right|_{\mbox{\small node} \ j} = \frac{\partial u}{\partial t} + \sum_{i=1}^2 v_{ij} \ \frac{\partial u}{\partial x_i} \]" src="form_28.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ v_{ij} = \frac{dX_{ij}^{(E)}}{dt} \]" src="form_29.png"/>
+</p>
+<p> is the i-th velocity component of node j, often referred to as the "mesh velocity". The rate of change of <img class="formulaInl" alt="$ u $" src="form_26.png"/> , experienced at the (fixed) spatial position that coincides with the current position of node j is therefore given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u}{\partial t} = \frac{d U_j^{(E)}}{dt} - \sum_{i=1}^2 \left( \frac{dX_{ij}^{(E)}}{dt} \ \sum_{k=1}^{N_{node}^{(E)}} U_k^{(E)} \ \frac{\partial \psi_{k}}{\partial x_i} \right) . \]" src="form_30.png"/>
+</p>
+<p> This is the form in which the time-derivative in (1) is implemented in <code>oomph-lib's</code> unsteady heat elements. The mesh velocity is determined automatically, using the <code>Node's</code> positional <code>TimeStepper</code> and the history values of the nodal positions. [By default, the positional <code>TimeStepper</code> is the same as the <code>TimeStepper</code> used for the evaluation of the time-derivatives of the nodal values; a different one may be assigned with the access function <code>Node::position_time_stepper_pt()</code>.] This is why it is important to initialise the "previous nodal positions" in computations on fixed meshes, as demonstrated in the <a href="../../two_d_unsteady_heat/html/index.html">exercise in our earlier example:</a> The previous nodal positions are initialised to zero when a <code>Node</code> is first created. Therefore, if the previous positions are not overwritten with the actual nodal positions, the positional <code>TimeStepper</code> would compute non-zero mesh velocities, even though the <code>Nodes</code> are stationary.</p>
+<p><code>oomph-lib's</code> unsteady Newton solvers automatically advance the time-history of the nodal positions when computing a new timestep. Performing computations on moving meshes is therefore extremely straightforward: The only task to be performed by the "user" is to update the nodal positions before a new timestep is taken. This is best done in the function <code>Problem::actions_before_implicit_timestep()</code>.</p>
+<p>The update of the nodal positions may be performed "manually", by assigning new nodal positions directly, using the function <code>Node::x(...)</code>. However, in most cases, the deformation of the domain will be driven by the motion of its boundaries. We discussed in an <a href="../../../poisson/fish_poisson2/html/index.html">earlier example,</a> that in <code>oomph-lib</code> curvilinear, moving boundaries are typically represented by (time-dependent) <code>GeomObjects</code> which define the <code>MacroElement</code> boundaries of the <code>Domain</code> object associated with the <code>Mesh</code>. In this case, the update of the nodal positions may be performed by updating the parameters that control the shape of the <code>GeomObject</code> and calling the <code>Mesh's</code> node-update function <code>Mesh::node_update()</code>, as illustrated in the <a href="../../../poisson/fish_poisson2/html/index.html">earlier example.</a></p>
+<p>It is also possible (and, in fact, much easier) to include the time-dependence of the domain boundaries into the definition of the <code>GeomObject</code>, by making its shape, described by <code>GeomObject::position(...)</code>, a function of time. In that case, the update of the nodal positions in response to the boundary motion merely requires a call to <code>Mesh::node_update()</code> in <code>Problem::actions_before_implicit_timestep()</code>. This is the approach we take in the present problem.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>As usual, we store the problem parameters in a namespace, <code><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html">TanhSolnForUnsteadyHeat</a></code>, in which we also specify the source function, the prescribed flux along the Neumann boundary and the exact solution. The namespace is identical to that used in <a href="../../two_d_unsteady_heat/html/index.html">the fixed domain example.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="ellipse"></a>
+Representing the moving curvilinear domain boundary by a time-dependent GeomObject</h1>
+<p>As discussed above, we will incorporate the time-dependence of the moving curvilinear boundary into the specification of the <code>GeomObject</code> that defines that boundary. For this purpose we represent the elliptical boundary by the <code>GeomObject</code> <code><a class="el" href="classMyEllipse.html" title="Oscillating ellipse.">MyEllipse</a></code>. Its constructor stores the geometric parameters (the mean values of the ellipse's half axes, <img class="formulaInl" alt="$ a $" src="form_31.png"/> and <img class="formulaInl" alt="$ b $" src="form_32.png"/> , the amplitude of their temporal variations <img class="formulaInl" alt="$ \hat{a} $" src="form_33.png"/> and <img class="formulaInl" alt="$ \hat{b} $" src="form_34.png"/> , and the period of the oscillation, <img class="formulaInl" alt="$ \hat{T} $" src="form_35.png"/> , in its private member data. We also store a pointer to a <code>Time</code> object to give the <code>GeomObject</code> access to the "current" and "previous" values of the "continuous time". The destructor can remain empty.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_MyEllipse===========================================</span></div>
+<div class="line"><span class="comment">/// \short Oscillating ellipse</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ x = (a + \widehat{a} \sin(2\Pi t/T)) \cos(\xi)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ y = (b + \widehat{b} \sin(2\Pi t/T)) \sin(\xi)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classMyEllipse.html">MyEllipse</a> : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor:  Pass half axes, amplitudes of their variation, period</span></div>
+<div class="line"><span class="comment"> /// of oscillation and pointer to time object.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classMyEllipse.html#aaa00984813af171e611e420eb3433653">MyEllipse</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; b, </div>
+<div class="line">           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a_hat, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; b_hat, </div>
+<div class="line">           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; period, Time* time_pt) : </div>
+<div class="line">  GeomObject(1,2), <a class="code" href="classMyEllipse.html#aa2a0efd0a39f9d4fc307a6ff011682ed">A</a>(a), <a class="code" href="classMyEllipse.html#a8f991996b9040fe94b942eab7e51f0af">B</a>(b), <a class="code" href="classMyEllipse.html#a653e71cf296cdc86cc595d16f18004dd">A_hat</a>(a_hat), <a class="code" href="classMyEllipse.html#a39d06488447d80f16b80ed8915edf3e3">B_hat</a>(b_hat), </div>
+<div class="line">  <a class="code" href="classMyEllipse.html#ab098069ab23bbbd8f30b0da3523dc87f">T</a>(period), <a class="code" href="classMyEllipse.html#abc1c4c863a599ce87bdff1abb9971953">Time_pt</a>(time_pt) {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor: Empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classMyEllipse.html#ac2f2d3fb269c57fb26b4db6d9a0c7c05">~MyEllipse</a>() {}</div>
+</div><!-- fragment --><p>The "steady" version of the <code>position(...)</code> function must return the position vector to the point on the <code>GeomObject</code>, identified by its intrinsic coordinate <code>xi</code>, and evaluated at the current value of the continuous time, which we extract from <code>Time::time()</code>: </p><div class="fragment"><div class="line"> <span class="comment">/// \short Current position vector to material point at </span></div>
+<div class="line"><span class="comment"> /// Lagrangian coordinate xi </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a21a4f557c68498245dc3903df5e96ce7">position</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Get current time:</span></div>
+<div class="line">   <span class="keywordtype">double</span> <a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a>=Time_pt-&gt;time();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Position vector</span></div>
+<div class="line">   r[0] = (A+A_hat*sin(2.0*MathematicalConstants::Pi*<a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a>/T))*cos(xi[0]);</div>
+<div class="line">   r[1] = (B+B_hat*sin(2.0*MathematicalConstants::Pi*<a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a>/T))*sin(xi[0]);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of position(...)</span></div>
+</div><!-- fragment --><p>The "time-dependent" version of the <code>position(...)</code> function must return the position vector to the <code>GeomObject</code>, evaluated at the <code>t</code> - th previous timestep. The value of the continuous time at that timestep is available from from <code>Time::time(t)</code>: </p><div class="fragment"><div class="line"> <span class="comment">/// \short Parametrised position on object: r(xi). Evaluated at</span></div>
+<div class="line"><span class="comment"> /// previous time level. t=0: current time; t&gt;0: previous</span></div>
+<div class="line"><span class="comment"></span><span class="comment"> /// time level.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a21a4f557c68498245dc3903df5e96ce7">position</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a0527fcb3ba8324da07731acfafdaa797">t</a>, <span class="keyword">const</span> Vector&lt;double&gt;&amp; xi,</div>
+<div class="line">               Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Get current time:</span></div>
+<div class="line">   <span class="keywordtype">double</span> <a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a>=Time_pt-&gt;time(<a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a0527fcb3ba8324da07731acfafdaa797">t</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Position vector</span></div>
+<div class="line">   r[0] = (A+A_hat*sin(2.0*MathematicalConstants::Pi*<a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a>/T))*cos(xi[0]);</div>
+<div class="line">   r[1] = (B+B_hat*sin(2.0*MathematicalConstants::Pi*<a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a>/T))*sin(xi[0]);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of position(...)</span></div>
+</div><!-- fragment --><p>We omit the code that defines the private member data.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The main function</h1>
+<p>Since the deformation of the domain and the update of the nodal positions will be handled automatically by adding a call to <code>Mesh::node_update()</code> to <code>Problem::actions_before_implicit_timestep()</code>, the driver code for this problem is exactly the same as that in the <a href="../../two_d_unsteady_heat_adapt/html/index.html">previous example in a fixed domain. </a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem_class"></a>
+The Problem class</h1>
+<p>The <code>Problem</code> class and most of its member functions are exactly the same as in the <a href="../../two_d_unsteady_heat/html/index.html">previous example.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>The <code>Problem</code> constructor is identical to the fixed-mesh version in the <a href="../../two_d_unsteady_heat/html/index.html">previous example,</a> apart from the fact that we use the <code><a class="el" href="classMyEllipse.html" title="Oscillating ellipse.">MyEllipse</a></code> <code>GeomObject</code> to define the curvilinear <code>Mesh</code> boundary. Here is the relevant code fragment:</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> <span class="comment">//-----------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build geometric object that forms the curvilinear domain boundary:</span></div>
+<div class="line"> <span class="comment">// an oscillating ellipse</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Half axes</span></div>
+<div class="line"> <span class="keywordtype">double</span> a=1.0;</div>
+<div class="line"> <span class="keywordtype">double</span> b=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Variations of half axes</span></div>
+<div class="line"> <span class="keywordtype">double</span> a_hat= 0.1;</div>
+<div class="line"> <span class="keywordtype">double</span> b_hat=-0.1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Period of the oscillation</span></div>
+<div class="line"> <span class="keywordtype">double</span> period=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create GeomObject</span></div>
+<div class="line"> Boundary_pt=<span class="keyword">new</span> <a class="code" href="classMyEllipse.html">MyEllipse</a>(a,b,a_hat,b_hat,period,Problem::time_pt()); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Start and end coordinates of curvilinear domain boundary on ellipse</span></div>
+<div class="line"> <span class="keywordtype">double</span> xi_lo=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> xi_hi=MathematicalConstants::Pi/2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now create the bulk mesh. Separating line between the two </span></div>
+<div class="line"> <span class="comment">// elements next to the curvilinear boundary is located half-way</span></div>
+<div class="line"> <span class="comment">// along the boundary.</span></div>
+<div class="line"> <span class="keywordtype">double</span> fract_mid=0.5;</div>
+<div class="line"> Bulk_mesh_pt = <span class="keyword">new</span> RefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;(</div>
+<div class="line">  Boundary_pt,xi_lo,fract_mid,xi_hi,time_stepper_pt());</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="actions_before_implicit_timestep"></a>
+Actions before timestep</h1>
+<p>As discussed above, the addition of a single line to <code>Problem::actions_before_implicit_timestep()</code> suffices to update the nodal positions in response to the changes in the domain boundary.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=========start of actions_before_implicit_timestep===============================</span></div>
+<div class="line"><span class="comment">/// \short Actions before timestep: Update the domain shape, then set the </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// boundary conditions for the current time.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classRefineableUnsteadyHeatProblem.html#ac754f1313cd6d684c149443beb5bcf9e">RefineableUnsteadyHeatProblem&lt;ELEMENT&gt;::actions_before_implicit_timestep</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Update the domain shape</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;node_update();</div>
+</div><!-- fragment --><p>The rest of this function is identical to the that in the <a href="../../two_d_unsteady_heat/html/index.html">fixed-domain version</a> and updates the nodal values on the Dirichlet boundaries according to the values given by the exact solution.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="set_init"></a>
+Setting the initial condition</h1>
+<p>The only other change to the code occurs in the assignment of the initial conditions. The <code>Nodes'</code> positional history values are given by the positions at which the <code>Nodes</code> would have been at previous timesteps. Similarly, the history values themselves must be computed by evaluating the exact solution at the position at which the <code>Nodes</code> would have been at those timesteps.</p>
+<p>This is achieved with a few minor changes to the previous version of this function. We loop over the previous timesteps, reconstruct the value of the continuous time at that timestep, and temporarily over-write the value of the continuous time stored in <code>Time::time()</code>. This ensures that the call to <code>MyEllipse::position(...)</code> during the node update operation returns the position vector to the domain boundary at that timestep. Following the update of the nodal positions (which moves them into the position they would have occupied at the previous timestep) we copy their positions and the value of the exact solution into the appropriate history values. Here is the relevant code fragment from the <code>set_initial_condition()</code> function:</p>
+<div class="fragment"><div class="line">   <span class="comment">// Loop over current &amp; previous timesteps (in outer loop because</span></div>
+<div class="line">   <span class="comment">// the mesh also moves!)</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> itime=nprev_steps;itime&gt;=0;itime--)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">double</span> <a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a>=prev_time[itime];</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Set global time (because this is how the geometric object refers </span></div>
+<div class="line">     <span class="comment">// to continous time </span></div>
+<div class="line">     time_pt()-&gt;time()=<a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a>;</div>
+<div class="line">     </div>
+<div class="line">     cout &lt;&lt; <span class="stringliteral">&quot;setting IC at time =&quot;</span> &lt;&lt; <a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a> &lt;&lt; std::endl;</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Update the mesh for this value of the continuous time</span></div>
+<div class="line">     <span class="comment">// (The wall object reads the continous time from the same</span></div>
+<div class="line">     <span class="comment">// global time object)</span></div>
+<div class="line">     Bulk_mesh_pt-&gt;node_update(); </div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Loop over the nodes to set initial guess everywhere</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> jnod=0;jnod&lt;num_nod;jnod++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// Get nodal coordinates</span></div>
+<div class="line">       x[0]=Bulk_mesh_pt-&gt;node_pt(jnod)-&gt;x(0);</div>
+<div class="line">       x[1]=Bulk_mesh_pt-&gt;node_pt(jnod)-&gt;x(1);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Get intial solution</span></div>
+<div class="line">       <a class="code" href="namespaceTanhSolnForUnsteadyHeat.html#a36857bbdec45f44018772de70558db7d">TanhSolnForUnsteadyHeat::get_exact_u</a>(<a class="code" href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a>,x,soln);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Assign solution</span></div>
+<div class="line">       Bulk_mesh_pt-&gt;node_pt(jnod)-&gt;set_value(itime,0,soln[0]);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Loop over coordinate directions</span></div>
+<div class="line">       <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">        {</div>
+<div class="line">         Bulk_mesh_pt-&gt;node_pt(jnod)-&gt;x(itime,i)=x[i];</div>
+<div class="line">        }</div>
+<div class="line">      } </div>
+<div class="line">    } <span class="comment">// end of loop over previous timesteps</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comm"></a>
+Comments and Exercises</h1>
+<p>While the spatial adaptivity resolves the rapid spatial variations in the solution, the time-integration with a fixed timestep introduces errors during the phases when the solution undergoes rapid temporal variations. The <a href="../figures/step_soln.avi">animations</a> of the exact and computed solutions show clearly that the computed solution lags behind the exact one during these phases. In the <a href="../../two_d_unsteady_heat_2adapt/html/index.html">next example</a> we will therefore demonstrate how to combine temporal and spatial adaptivity.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/">demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/two_d_unsteady_heat_ALE.cc">demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/two_d_unsteady_heat_ALE.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_ac754f1313cd6d684c149443beb5bcf9e"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#ac754f1313cd6d684c149443beb5bcf9e">RefineableUnsteadyHeatProblem::actions_before_implicit_timestep</a></div><div class="ttdeci">void actions_before_implicit_timestep()</div><div class="ttdoc">Update the problem specs before next timestep: Set Dirchlet boundary conditions from exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00489">two_d_unsteady_heat_ALE.cc:489</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat__ALE_8txt_html_a0527fcb3ba8324da07731acfafdaa797"><div class="ttname"><a href="two__d__unsteady__heat__ALE_8txt.html#a0527fcb3ba8324da07731acfafdaa797">t</a></div><div class="ttdeci">mainpage Example t E[2DHeat] f in the domain f D bounded by the coordinate axes and the time dependent ellipse f[\mathbf{r}_{ellipse}(\xi, t)=\left(\begin{array}{c}\big(a+\hat{a}\sin(2\pi t/\hat{T}) \big) \cos(\xi) \\\big(b+\hat{b}\sin(2\pi t/\hat{T}) \big) \sin(\xi)\end{array}\right), \ \ \ \ \ \ \ \ \ \ @E[Domain]@\f] subject to Neumann boundary f[\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}=- \left. \frac{\partial u}{\partial x_2}\right|_{\partial D_{Neumann}}=g_0, \ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC2]@\f] along the horizontal domain boundary f partial and to Dirichlet boundary f[\left. u\right|_{\partial D_{Dirichlet}}=h_0, \ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\f] elsewhere I w textwidth domain Sketch of the time dependent domain and the boundary conditions The initial conditions are given by f[u(x_1, x_2, t=0)=k_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\f] where the functions f h_0 f and f k_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; We choose the functions f h_0 f and f k_0 f so that f[u_0(x_1, x_2, t)=\tanh\bigg[1-\alpha\bigg(\tan\Phi\big(x_1-\beta\tanh[\gamma\cos\left(2\pit\right)]\big) - x_2\bigg)\bigg] \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@\f] is the exact solution The solution represents the usual tanh whose steepness is controlled by the parameter f alpha f so that for f alpha gg f the solution approaches a step The step is oriented at an angle f Phi f against the f x_1 f axis and its position varies periodically The parameter f beta f controls the amplitude of the step s lateral while f gamma f determines the rate at which its position changes For f gamma gg the step remains stationary for most of the period and then translates rapidly parallel to the f x_1 f making this a very challenging problem The figure below shows a snapshot of the&lt; A HREF=&quot;../figures/step_soln.avi&quot;&gt; animated obtained from the spatially adaptive simulation discussed for the parameter values f taken from&lt; A HREF=&quot;../figures/unsteady_heat_contour.avi&quot;&gt; another animation of the solution&lt;/A &gt; I w textwidth unsteady_heat_contour Contour plot of the solution&lt; HR &gt;&lt; HR &gt; section ale the equation class that forms the basis for the isoparametric c QUnsteadyHeatElements is based on the Arbitrary Lagrangian R[2DHeat] Within each the solution is represented by interpolation between the element s f i e f[u=\sum_{j=1}^{N_{node}^{(E)}} U_j^{(E)}(t) \ \psi_{j}(s_1, s_2),\ \ \ \ \ \ \ \ \ \ @E[fe_exp]@\f] where f s_1 f and f s_2 f are the element s two coordinates The mapping between the and f[x_i(s_1, s_2)=\sum_{j=1}^{N_{node}^{(E)}} X_{ij}^{(E)}(t) \ \psi_{j}(s_1, s_2),\ \ \ \(i=1, 2) \ \ \ \ \ \ @E[x_fe_exp]@\f] where f where the nodal positions vary as function of the time derivative of the nodal f represents the rate of change of f u f at the moving rather than the time derivative of f u f at a fixed Eulerian f partial u partial t</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8txt_source.html#l00132">two_d_unsteady_heat_ALE.txt:132</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_ab098069ab23bbbd8f30b0da3523dc87f"><div class="ttname"><a href="classMyEllipse.html#ab098069ab23bbbd8f30b0da3523dc87f">MyEllipse::T</a></div><div class="ttdeci">double T</div><div class="ttdoc">Period of oscillation.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00111">two_d_unsteady_heat_ALE.cc:111</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_ac2f2d3fb269c57fb26b4db6d9a0c7c05"><div class="ttname"><a href="classMyEllipse.html#ac2f2d3fb269c57fb26b4db6d9a0c7c05">MyEllipse::~MyEllipse</a></div><div class="ttdeci">virtual ~MyEllipse()</div><div class="ttdoc">Destructor: Empty.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00063">two_d_unsteady_heat_ALE.cc:63</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForUnsteadyHeat_html_a36857bbdec45f44018772de70558db7d"><div class="ttname"><a href="namespaceTanhSolnForUnsteadyHeat.html#a36857bbdec45f44018772de70558db7d">TanhSolnForUnsteadyHeat::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const double &amp;time, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00149">two_d_unsteady_heat_ALE.cc:149</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat__ALE_8txt_html_a6f5f4e911ccd3d58a269b0744cc88e05"><div class="ttname"><a href="two__d__unsteady__heat__ALE_8txt.html#a6f5f4e911ccd3d58a269b0744cc88e05">time</a></div><div class="ttdeci">mainpage Example t E[2DHeat] f in the domain f D bounded by the coordinate axes and the time dependent ellipse f[\mathbf{r}_{ellipse}(\xi, t)=\left(\begin{array}{c}\big(a+\hat{a}\sin(2\pi t/\hat{T}) \big) \cos(\xi) \\\big(b+\hat{b}\sin(2\pi t/\hat{T}) \big) \sin(\xi)\end{array}\right), \ \ \ \ \ \ \ \ \ \ @E[Domain]@\f] subject to Neumann boundary f[\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}=- \left. \frac{\partial u}{\partial x_2}\right|_{\partial D_{Neumann}}=g_0, \ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC2]@\f] along the horizontal domain boundary f partial and to Dirichlet boundary f[\left. u\right|_{\partial D_{Dirichlet}}=h_0, \ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\f] elsewhere I w textwidth domain Sketch of the time dependent domain and the boundary conditions The initial conditions are given by f[u(x_1, x_2, t=0)=k_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\f] where the functions f h_0 f and f k_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; We choose the functions f h_0 f and f k_0 f so that f[u_0(x_1, x_2, t)=\tanh\bigg[1-\alpha\bigg(\tan\Phi\big(x_1-\beta\tanh[\gamma\cos\left(2\pit\right)]\big) - x_2\bigg)\bigg] \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@\f] is the exact solution The solution represents the usual tanh whose steepness is controlled by the parameter f alpha f so that for f alpha gg f the solution approaches a step The step is oriented at an angle f Phi f against the f x_1 f axis and its position varies periodically The parameter f beta f controls the amplitude of the step s lateral while f gamma f determines the rate at which its position changes For f gamma gg the step remains stationary for most of the period and then translates rapidly parallel to the f x_1 f making this a very challenging problem The figure below shows a snapshot of the&lt; A HREF=&quot;../figures/step_soln.avi&quot;&gt; animated obtained from the spatially adaptive simulation discussed for the parameter values f taken from&lt; A HREF=&quot;../figures/unsteady_heat_contour.avi&quot;&gt; another animation of the solution&lt;/A &gt; I w textwidth unsteady_heat_contour Contour plot of the solution&lt; HR &gt;&lt; HR &gt; section ale the equation class that forms the basis for the isoparametric c QUnsteadyHeatElements is based on the Arbitrary Lagrangian R[2DHeat] Within each the solution is represented by interpolation between the element s f i e f[u=\sum_{j=1}^{N_{node}^{(E)}} U_j^{(E)}(t) \ \psi_{j}(s_1, s_2),\ \ \ \ \ \ \ \ \ \ @E[fe_exp]@\f] where f s_1 f and f s_2 f are the element s two coordinates The mapping between the and f[x_i(s_1, s_2)=\sum_{j=1}^{N_{node}^{(E)}} X_{ij}^{(E)}(t) \ \psi_{j}(s_1, s_2),\ \ \ \(i=1, 2) \ \ \ \ \ \ @E[x_fe_exp]@\f] where f where the nodal positions vary as function of time</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8txt_source.html#l00128">two_d_unsteady_heat_ALE.txt:128</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat__ALE_8txt_html_a21a4f557c68498245dc3903df5e96ce7"><div class="ttname"><a href="two__d__unsteady__heat__ALE_8txt.html#a21a4f557c68498245dc3903df5e96ce7">position</a></div><div class="ttdeci">mainpage Example t E[2DHeat] f in the domain f D bounded by the coordinate axes and the time dependent ellipse f[\mathbf{r}_{ellipse}(\xi, t)=\left(\begin{array}{c}\big(a+\hat{a}\sin(2\pi t/\hat{T}) \big) \cos(\xi) \\\big(b+\hat{b}\sin(2\pi t/\hat{T}) \big) \sin(\xi)\end{array}\right), \ \ \ \ \ \ \ \ \ \ @E[Domain]@\f] subject to Neumann boundary f[\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}=- \left. \frac{\partial u}{\partial x_2}\right|_{\partial D_{Neumann}}=g_0, \ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC2]@\f] along the horizontal domain boundary f partial and to Dirichlet boundary f[\left. u\right|_{\partial D_{Dirichlet}}=h_0, \ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\f] elsewhere I w textwidth domain Sketch of the time dependent domain and the boundary conditions The initial conditions are given by f[u(x_1, x_2, t=0)=k_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\f] where the functions f h_0 f and f k_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; We choose the functions f h_0 f and f k_0 f so that f[u_0(x_1, x_2, t)=\tanh\bigg[1-\alpha\bigg(\tan\Phi\big(x_1-\beta\tanh[\gamma\cos\left(2\pit\right)]\big) - x_2\bigg)\bigg] \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@\f] is the exact solution The solution represents the usual tanh whose steepness is controlled by the parameter f alpha f so that for f alpha gg f the solution approaches a step The step is oriented at an angle f Phi f against the f x_1 f axis and its position varies periodically The parameter f beta f controls the amplitude of the step s lateral while f gamma f determines the rate at which its position changes For f gamma gg the step remains stationary for most of the period and then translates rapidly parallel to the f x_1 f making this a very challenging problem The figure below shows a snapshot of the&lt; A HREF=&quot;../figures/step_soln.avi&quot;&gt; animated obtained from the spatially adaptive simulation discussed for the parameter values f taken from&lt; A HREF=&quot;../figures/unsteady_heat_contour.avi&quot;&gt; another animation of the solution&lt;/A &gt; I w textwidth unsteady_heat_contour Contour plot of the solution&lt; HR &gt;&lt; HR &gt; section ale the equation class that forms the basis for the isoparametric c QUnsteadyHeatElements is based on the Arbitrary Lagrangian R[2DHeat] Within each the solution is represented by interpolation between the element s f i e f[u=\sum_{j=1}^{N_{node}^{(E)}} U_j^{(E)}(t) \ \psi_{j}(s_1, s_2),\ \ \ \ \ \ \ \ \ \ @E[fe_exp]@\f] where f s_1 f and f s_2 f are the element s two coordinates The mapping between the and f[x_i(s_1, s_2)=\sum_{j=1}^{N_{node}^{(E)}} X_{ij}^{(E)}(t) \ \psi_{j}(s_1, s_2),\ \ \ \(i=1, 2) \ \ \ \ \ \ @E[x_fe_exp]@\f] where f where the nodal positions vary as function of the time derivative of the nodal f represents the rate of change of f u f at the moving rather than the time derivative of f u f at a fixed Eulerian position</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8txt_source.html#l00131">two_d_unsteady_heat_ALE.txt:131</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_a39d06488447d80f16b80ed8915edf3e3"><div class="ttname"><a href="classMyEllipse.html#a39d06488447d80f16b80ed8915edf3e3">MyEllipse::B_hat</a></div><div class="ttdeci">double B_hat</div><div class="ttdoc">Amplitude of variation in y-half axis.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00108">two_d_unsteady_heat_ALE.cc:108</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_aaa00984813af171e611e420eb3433653"><div class="ttname"><a href="classMyEllipse.html#aaa00984813af171e611e420eb3433653">MyEllipse::MyEllipse</a></div><div class="ttdeci">MyEllipse(const double &amp;a, const double &amp;b, const double &amp;a_hat, const double &amp;b_hat, const double &amp;period, Time *time_pt)</div><div class="ttdoc">Constructor: Pass half axes, amplitudes of their variation, period of oscillation and pointer to time...</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00056">two_d_unsteady_heat_ALE.cc:56</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_a8f991996b9040fe94b942eab7e51f0af"><div class="ttname"><a href="classMyEllipse.html#a8f991996b9040fe94b942eab7e51f0af">MyEllipse::B</a></div><div class="ttdeci">double B</div><div class="ttdoc">y-half axis</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00102">two_d_unsteady_heat_ALE.cc:102</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html"><div class="ttname"><a href="classMyEllipse.html">MyEllipse</a></div><div class="ttdoc">Oscillating ellipse.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00049">two_d_unsteady_heat_ALE.cc:49</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_a653e71cf296cdc86cc595d16f18004dd"><div class="ttname"><a href="classMyEllipse.html#a653e71cf296cdc86cc595d16f18004dd">MyEllipse::A_hat</a></div><div class="ttdeci">double A_hat</div><div class="ttdoc">Amplitude of variation in x-half axis.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00105">two_d_unsteady_heat_ALE.cc:105</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_aa2a0efd0a39f9d4fc307a6ff011682ed"><div class="ttname"><a href="classMyEllipse.html#aa2a0efd0a39f9d4fc307a6ff011682ed">MyEllipse::A</a></div><div class="ttdeci">double A</div><div class="ttdoc">x-half axis</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00099">two_d_unsteady_heat_ALE.cc:99</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_abc1c4c863a599ce87bdff1abb9971953"><div class="ttname"><a href="classMyEllipse.html#abc1c4c863a599ce87bdff1abb9971953">MyEllipse::Time_pt</a></div><div class="ttdeci">Time * Time_pt</div><div class="ttdoc">Pointer to time object.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat__ALE_8cc_source.html#l00114">two_d_unsteady_heat_ALE.cc:114</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:05:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

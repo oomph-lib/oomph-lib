@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ExplicitTimeStepper Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1ExplicitTimeStepper-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::ExplicitTimeStepper Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>A Base class for explicit timesteppers.  
+ <a href="classoomph_1_1ExplicitTimeStepper.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::ExplicitTimeStepper:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1ExplicitTimeStepper.png" usemap="#oomph::ExplicitTimeStepper_map" alt=""/>
+  <map id="oomph::ExplicitTimeStepper_map" name="oomph::ExplicitTimeStepper_map">
+<area href="classoomph_1_1EBDF3.html" alt="oomph::EBDF3" shape="rect" coords="0,56,253,80"/>
+<area href="classoomph_1_1Euler.html" alt="oomph::Euler" shape="rect" coords="263,56,516,80"/>
+<area href="classoomph_1_1LowStorageRungeKutta.html" alt="oomph::LowStorageRungeKutta&lt; ORDER &gt;" shape="rect" coords="526,56,779,80"/>
+<area href="classoomph_1_1RungeKutta.html" alt="oomph::RungeKutta&lt; ORDER &gt;" shape="rect" coords="789,56,1042,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4b54826f4098eae55da1ee7fd51b634d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html#a4b54826f4098eae55da1ee7fd51b634d">ExplicitTimeStepper</a> ()</td></tr>
+<tr class="memdesc:a4b54826f4098eae55da1ee7fd51b634d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Constructor.  <a href="classoomph_1_1ExplicitTimeStepper.html#a4b54826f4098eae55da1ee7fd51b634d">More...</a><br /></td></tr>
+<tr class="separator:a4b54826f4098eae55da1ee7fd51b634d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2c6e0a9f8e620f7b3847ad46d297ad2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html#ab2c6e0a9f8e620f7b3847ad46d297ad2">ExplicitTimeStepper</a> (const <a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> &amp;)</td></tr>
+<tr class="memdesc:ab2c6e0a9f8e620f7b3847ad46d297ad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1ExplicitTimeStepper.html#ab2c6e0a9f8e620f7b3847ad46d297ad2">More...</a><br /></td></tr>
+<tr class="separator:ab2c6e0a9f8e620f7b3847ad46d297ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abed621c80844df126c29b8862092cb97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html#abed621c80844df126c29b8862092cb97">operator=</a> (const <a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> &amp;)</td></tr>
+<tr class="memdesc:abed621c80844df126c29b8862092cb97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1ExplicitTimeStepper.html#abed621c80844df126c29b8862092cb97">More...</a><br /></td></tr>
+<tr class="separator:abed621c80844df126c29b8862092cb97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51f659328a57063563b7344c8b9d7737"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html#a51f659328a57063563b7344c8b9d7737">~ExplicitTimeStepper</a> ()</td></tr>
+<tr class="memdesc:a51f659328a57063563b7344c8b9d7737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor &mdash; no memory is allocated in this class.  <a href="classoomph_1_1ExplicitTimeStepper.html#a51f659328a57063563b7344c8b9d7737">More...</a><br /></td></tr>
+<tr class="separator:a51f659328a57063563b7344c8b9d7737"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab43bbab17960d0f50b8842e996f5c765"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html#ab43bbab17960d0f50b8842e996f5c765">timestep</a> (<a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html">ExplicitTimeSteppableObject</a> *const &amp;object_pt, const double &amp;dt)=0</td></tr>
+<tr class="memdesc:ab43bbab17960d0f50b8842e996f5c765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function that is used to advance time in the object.  <a href="classoomph_1_1ExplicitTimeStepper.html#ab43bbab17960d0f50b8842e996f5c765">More...</a><br /></td></tr>
+<tr class="separator:ab43bbab17960d0f50b8842e996f5c765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aa923e120e84dc7cec56d2a50f5b33421"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html#aa923e120e84dc7cec56d2a50f5b33421">Type</a></td></tr>
+<tr class="memdesc:aa923e120e84dc7cec56d2a50f5b33421"><td class="mdescLeft">&#160;</td><td class="mdescRight">String that indicates the type of the timestepper (e.g. "RungeKutta", etc.)  <a href="classoomph_1_1ExplicitTimeStepper.html#aa923e120e84dc7cec56d2a50f5b33421">More...</a><br /></td></tr>
+<tr class="separator:aa923e120e84dc7cec56d2a50f5b33421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A Base class for explicit timesteppers. </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00138">138</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4b54826f4098eae55da1ee7fd51b634d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b54826f4098eae55da1ee7fd51b634d">&#9670;&nbsp;</a></span>ExplicitTimeStepper() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ExplicitTimeStepper::ExplicitTimeStepper </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00149">149</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+</div>
+</div>
+<a id="ab2c6e0a9f8e620f7b3847ad46d297ad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2c6e0a9f8e620f7b3847ad46d297ad2">&#9670;&nbsp;</a></span>ExplicitTimeStepper() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ExplicitTimeStepper::ExplicitTimeStepper </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00152">152</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="a51f659328a57063563b7344c8b9d7737"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f659328a57063563b7344c8b9d7737">&#9670;&nbsp;</a></span>~ExplicitTimeStepper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::ExplicitTimeStepper::~ExplicitTimeStepper </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty virtual destructor &mdash; no memory is allocated in this class. </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00164">164</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="abed621c80844df126c29b8862092cb97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abed621c80844df126c29b8862092cb97">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ExplicitTimeStepper::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00158">158</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="ab43bbab17960d0f50b8842e996f5c765"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab43bbab17960d0f50b8842e996f5c765">&#9670;&nbsp;</a></span>timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void oomph::ExplicitTimeStepper::timestep </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html">ExplicitTimeSteppableObject</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>object_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pure virtual function that is used to advance time in the object. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1LowStorageRungeKutta.html#a484ad67f8f62971ebede692738174b95">oomph::LowStorageRungeKutta&lt; ORDER &gt;</a>, <a class="el" href="classoomph_1_1EBDF3.html#a273b7eaa19d2e95d6392e6d8dc2970d9">oomph::EBDF3</a>, <a class="el" href="classoomph_1_1RungeKutta.html#ac989c64573eb79b5d064f7af9bf1ffd2">oomph::RungeKutta&lt; ORDER &gt;</a>, <a class="el" href="classoomph_1_1LowStorageRungeKutta.html#afc3d30c130b3a6ab111a89f0b0f884d6">oomph::LowStorageRungeKutta&lt; ORDER &gt;</a>, <a class="el" href="classoomph_1_1RungeKutta.html#a53a492b4190ccd3dfc0b4af35b2c240f">oomph::RungeKutta&lt; ORDER &gt;</a>, <a class="el" href="classoomph_1_1RungeKutta.html#a22ceced74a6c8d7725c915ba8ff8a736">oomph::RungeKutta&lt; ORDER &gt;</a>, and <a class="el" href="classoomph_1_1Euler.html#adeea8e3567a50fb3873fab05a7ca928a">oomph::Euler</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="problem_8cc_source.html#l10817">oomph::Problem::explicit_timestep()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa923e120e84dc7cec56d2a50f5b33421"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa923e120e84dc7cec56d2a50f5b33421">&#9670;&nbsp;</a></span>Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::ExplicitTimeStepper::Type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>String that indicates the type of the timestepper (e.g. "RungeKutta", etc.) </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00144">144</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8h_source.html#l00182">oomph::Euler::Euler()</a>, and <a class="el" href="explicit__timesteppers_8h_source.html#l00211">oomph::RungeKutta&lt; ORDER &gt;::RungeKutta()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:38
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

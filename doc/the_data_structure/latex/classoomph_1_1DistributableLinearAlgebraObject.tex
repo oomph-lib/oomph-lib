@@ -1,0 +1,395 @@
+\hypertarget{classoomph_1_1DistributableLinearAlgebraObject}{}\doxysection{oomph\+::Distributable\+Linear\+Algebra\+Object Class Reference}
+\label{classoomph_1_1DistributableLinearAlgebraObject}\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+
+
+Base class for any linear algebra object that is distributable. Just contains storage for the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} object and access functions.  
+
+
+
+
+{\ttfamily \#include $<$linear\+\_\+algebra\+\_\+distribution.\+h$>$}
+
+Inheritance diagram for oomph\+::Distributable\+Linear\+Algebra\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.524529cm]{classoomph_1_1DistributableLinearAlgebraObject}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e24b4ce887a2e2da4dc60808f53f91}{Distributable\+Linear\+Algebra\+Object}} (const \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&matrix)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a0d60098e4938b78dd3e2724551a4c7c9}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{$\sim$\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a603105384d60c9a3710378af39f538b9}{distribution\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em access to the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () const
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () const
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (const unsigned \&p) const
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () const
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (const unsigned \&p) const
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () const
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () const
+\item 
+void \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$const dist\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&dist)
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a94280ec477823427098dc46b20e29f5a}{Distribution\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for any linear algebra object that is distributable. Just contains storage for the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} object and access functions. 
+
+Definition at line 439 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}\label{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!DistributableLinearAlgebraObject@{DistributableLinearAlgebraObject}}
+\index{DistributableLinearAlgebraObject@{DistributableLinearAlgebraObject}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{DistributableLinearAlgebraObject()}{DistributableLinearAlgebraObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::\+Distributable\+Linear\+Algebra\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor -\/ create a distribution. 
+
+
+
+Definition at line 445 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Distribution\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a21e24b4ce887a2e2da4dc60808f53f91}\label{classoomph_1_1DistributableLinearAlgebraObject_a21e24b4ce887a2e2da4dc60808f53f91}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!DistributableLinearAlgebraObject@{DistributableLinearAlgebraObject}}
+\index{DistributableLinearAlgebraObject@{DistributableLinearAlgebraObject}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{DistributableLinearAlgebraObject()}{DistributableLinearAlgebraObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::\+Distributable\+Linear\+Algebra\+Object (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 452 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}\label{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!````~DistributableLinearAlgebraObject@{$\sim$DistributableLinearAlgebraObject}}
+\index{````~DistributableLinearAlgebraObject@{$\sim$DistributableLinearAlgebraObject}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{$\sim$DistributableLinearAlgebraObject()}{~DistributableLinearAlgebraObject()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::$\sim$\+Distributable\+Linear\+Algebra\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 464 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Distribution\+\_\+pt.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}\label{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!build\_distribution@{build\_distribution}}
+\index{build\_distribution@{build\_distribution}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{build\_distribution()}{build\_distribution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{dist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+setup the distribution of this distributable linear algebra object 
+
+
+
+Definition at line 527 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), and Distribution\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}\label{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!build\_distribution@{build\_distribution}}
+\index{build\_distribution@{build\_distribution}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{build\_distribution()}{build\_distribution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$const}]{dist\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+setup the distribution of this distributable linear algebra object 
+
+
+
+Definition at line 520 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), and Distribution\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Multi\+Vector\+::build(), oomph\+::\+C\+R\+Double\+Matrix\+::build(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Double\+Vector\+::set\+\_\+external\+\_\+values(), oomph\+::\+Super\+L\+U\+Preconditioner\+::setup(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup(), oomph\+::\+Matrix\+Vector\+Product\+::setup(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup(), oomph\+::\+Identity\+Preconditioner\+::setup(), oomph\+::\+New\+Mumps\+Preconditioner\+::setup(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+C\+Double\+Matrix $>$\+::setup(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::setup(), oomph\+::\+Inner\+Iteration\+Preconditioner$<$ S\+O\+L\+V\+E\+R, P\+R\+E\+C\+O\+N\+D\+I\+T\+I\+O\+N\+E\+R $>$\+::setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+Double\+Multi\+Vector\+::shallow\+\_\+build(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+A\+R\+P\+A\+C\+K\+::solve\+\_\+eigenproblem(), oomph\+::\+L\+A\+P\+A\+C\+K\+\_\+\+Q\+Z\+::solve\+\_\+eigenproblem(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose(), and oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solver\+\_\+setup().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}\label{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!clear\_distribution@{clear\_distribution}}
+\index{clear\_distribution@{clear\_distribution}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{clear\_distribution()}{clear\_distribution()}}
+{\footnotesize\ttfamily void oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+clear the distribution of this distributable linear algebra object 
+
+
+
+Definition at line 536 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References oomph\+::\+Linear\+Algebra\+Distribution\+::clear(), and Distribution\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Dense\+L\+U\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Super\+L\+U\+Solver\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Double\+Vector\+::clear(), oomph\+::\+Double\+Multi\+Vector\+::clear(), oomph\+::\+C\+R\+Double\+Matrix\+::clear(), and oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}\label{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!distributed@{distributed}}
+\index{distributed@{distributed}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{distributed()}{distributed()}}
+{\footnotesize\ttfamily bool oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+distribution is serial or distributed 
+
+
+
+Definition at line 506 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), and Distribution\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Helmholtz\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+Double\+Vector\+::dot(), oomph\+::\+Double\+Multi\+Vector\+::dot(), oomph\+::\+C\+R\+Double\+Matrix\+::entries\+\_\+are\+\_\+sorted(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+serial(), oomph\+::\+C\+R\+Double\+Matrix\+::get\+\_\+matrix\+\_\+transpose(), oomph\+::\+C\+R\+Double\+Matrix\+::global\+\_\+matrix(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value(), oomph\+::\+C\+R\+Double\+Matrix\+::inf\+\_\+norm(), oomph\+::\+Double\+Vector\+::max(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv(), oomph\+::\+Double\+Vector\+::norm(), oomph\+::\+Double\+Multi\+Vector\+::norm(), oomph\+::\+Double\+Vector\+::output(), oomph\+::\+Double\+Multi\+Vector\+::output(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+C\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::setup(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+F\+D\+\_\+\+L\+U\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+C\+R\+Double\+Matrix\+::sort\+\_\+entries(), oomph\+::\+Double\+Vector\+Helpers\+::split(), oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values(), and oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}\label{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!distribution\_built@{distribution\_built}}
+\index{distribution\_built@{distribution\_built}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{distribution\_built()}{distribution\_built()}}
+{\footnotesize\ttfamily bool oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true 
+
+Definition at line 513 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References oomph\+::\+Linear\+Algebra\+Distribution\+::built(), and Distribution\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed(), oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Multi\+Vector\+::build(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+C\+R\+Double\+Matrix\+::inf\+\_\+norm(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+Double\+Vector\+::operator$\ast$=(), oomph\+::\+Double\+Multi\+Vector\+::operator$\ast$=(), oomph\+::\+Double\+Vector\+::operator-\/=(), oomph\+::\+Double\+Multi\+Vector\+::operator-\/=(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::resolve(), oomph\+::\+Double\+Vector\+::set\+\_\+external\+\_\+values(), oomph\+::\+Double\+Multi\+Vector\+::shallow\+\_\+build(), and oomph\+::\+Dense\+L\+U\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a603105384d60c9a3710378af39f538b9}\label{classoomph_1_1DistributableLinearAlgebraObject_a603105384d60c9a3710378af39f538b9}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!distribution\_pt@{distribution\_pt}}
+\index{distribution\_pt@{distribution\_pt}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{distribution\_pt()}{distribution\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}$\ast$ oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access to the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} 
+
+
+
+Definition at line 470 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Distribution\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+C\+R\+Double\+Matrix\+::add(), oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::apply\+\_\+schur\+\_\+complement\+\_\+preconditioner(), oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::augmented\+\_\+matrix\+\_\+multiply(), oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+serial(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose\+\_\+serial(), oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Multi\+Vector\+::build(), oomph\+::\+Helmholtz\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Super\+L\+U\+Solver\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Helmholtz\+Smoother\+::complex\+\_\+matrix\+\_\+multiplication(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+matrix\+\_\+multiplication(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::deep\+\_\+copy(), oomph\+::\+Double\+Vector\+::dot(), oomph\+::\+Double\+Multi\+Vector\+::dot(), oomph\+::\+Double\+Multi\+Vector\+::\+Double\+Multi\+Vector(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block\+\_\+vector(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+C\+R\+Double\+Matrix\+::get\+\_\+matrix\+\_\+transpose(), oomph\+::\+C\+R\+Double\+Matrix\+::global\+\_\+matrix(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+C\+R\+Double\+Matrix\+::inf\+\_\+norm(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+dof\+\_\+number(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+return\+\_\+block\+\_\+vectors(), oomph\+::\+C\+R\+Double\+Matrix\+::lubksub(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::master\+\_\+distribution\+\_\+pt(), oomph\+::\+Double\+Vector\+::max(), oomph\+::\+Matrix\+Vector\+Product\+::multiply(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose(), oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv(), oomph\+::\+Double\+Vector\+::norm(), oomph\+::\+Double\+Multi\+Vector\+::norm(), oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator(), oomph\+::\+Double\+Vector\+::operator+=(), oomph\+::\+Double\+Multi\+Vector\+::operator+=(), oomph\+::\+Double\+Vector\+::operator-\/=(), oomph\+::\+Double\+Multi\+Vector\+::operator-\/=(), oomph\+::\+Double\+Vector\+::output(), oomph\+::\+Double\+Multi\+Vector\+::output(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Identity\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+C\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Triangular\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Mumps\+Solver\+::resolve(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::resolve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Hypre\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+concatenated\+\_\+block\+\_\+vector(), oomph\+::\+Super\+L\+U\+Preconditioner\+::setup(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup(), oomph\+::\+Matrix\+Vector\+Product\+::setup(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::setup(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup(), oomph\+::\+Identity\+Preconditioner\+::setup(), oomph\+::\+New\+Mumps\+Preconditioner\+::setup(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::setup(), oomph\+::\+Inner\+Iteration\+Preconditioner$<$ S\+O\+L\+V\+E\+R, P\+R\+E\+C\+O\+N\+D\+I\+T\+I\+O\+N\+E\+R $>$\+::setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+Double\+Multi\+Vector\+::setup\+\_\+doublevector\+\_\+representation(), oomph\+::\+Double\+Multi\+Vector\+::shallow\+\_\+build(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+A\+R\+P\+A\+C\+K\+::solve\+\_\+eigenproblem(), oomph\+::\+L\+A\+P\+A\+C\+K\+\_\+\+Q\+Z\+::solve\+\_\+eigenproblem(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solver\+\_\+setup(), oomph\+::\+C\+R\+Double\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset(), oomph\+::\+Double\+Vector\+Helpers\+::split(), oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication(), oomph\+::\+Low\+Storage\+Runge\+Kutta$<$ O\+R\+D\+E\+R $>$\+::timestep(), oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::update(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::update(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::update(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::update(), and oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::update().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}\label{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!first\_row@{first\_row}}
+\index{first\_row@{first\_row}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{first\_row()}{first\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the first row on this processor 
+
+
+
+Definition at line 494 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Distribution\+\_\+pt, and oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row().
+
+
+
+Referenced by oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+C\+R\+Double\+Matrix\+::diagonal\+\_\+entries(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+C\+R\+Double\+Matrix\+::global\+\_\+matrix(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value(), oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+dof\+\_\+number(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+Double\+Vector\+::output(), oomph\+::\+Double\+Multi\+Vector\+::output(), oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Preconditioner\+Old\+::setup(), oomph\+::\+C\+R\+Double\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset(), and oomph\+::\+Double\+Vector\+Helpers\+::split().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}\label{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!first\_row@{first\_row}}
+\index{first\_row@{first\_row}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{first\_row()}{first\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the first row on this processor 
+
+
+
+Definition at line 500 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Distribution\+\_\+pt, and oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}\label{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function to the number of global rows. 
+
+
+
+Definition at line 476 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Distribution\+\_\+pt, and oomph\+::\+Linear\+Algebra\+Distribution\+::nrow().
+
+
+
+Referenced by oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::actions\+\_\+after\+\_\+timestep(), oomph\+::\+Problem\+::add\+\_\+eigenvector\+\_\+to\+\_\+dofs(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Problem\+::assign\+\_\+eigenvector\+\_\+to\+\_\+dofs(), oomph\+::\+Dense\+L\+U\+::backsub(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+serial(), oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose\+\_\+serial(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+matrix\+\_\+test(), oomph\+::\+Helmholtz\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+setup(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Get\+Vec\+Length(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::interpolation\+\_\+matrix\+\_\+set(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::interpolation\+\_\+matrix\+\_\+set(), oomph\+::\+Double\+Vector\+::max(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+R\+Double\+Matrix\+::nrow(), oomph\+::\+Double\+Vector\+::output(), oomph\+::\+Double\+Multi\+Vector\+::output(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+C\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+H\+S\+L\+\_\+\+M\+A42\+::resolve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::resolve(), oomph\+::\+Super\+L\+U\+Solver\+::resolve(), oomph\+::\+Super\+L\+U\+Solver\+::resolve\+\_\+transpose(), oomph\+::\+Problem\+::set\+\_\+dofs(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup(), oomph\+::\+Inner\+Iteration\+Preconditioner$<$ S\+O\+L\+V\+E\+R, P\+R\+E\+C\+O\+N\+D\+I\+T\+I\+O\+N\+E\+R $>$\+::setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+F\+G\+M\+R\+E\+S\+M\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose(), oomph\+::\+Double\+Vector\+Helpers\+::split(), oomph\+::\+Low\+Storage\+Runge\+Kutta$<$ O\+R\+D\+E\+R $>$\+::timestep(), oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::update(), oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::update(), and oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::update().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}\label{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!nrow\_local@{nrow\_local}}
+\index{nrow\_local@{nrow\_local}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{nrow\_local()}{nrow\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the num of local rows on this processor. 
+
+
+
+Definition at line 482 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Distribution\+\_\+pt, and oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local().
+
+
+
+Referenced by oomph\+::\+C\+R\+Double\+Matrix\+::add(), oomph\+::\+Problem\+::add\+\_\+eigenvector\+\_\+to\+\_\+dofs(), oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Problem\+::assign\+\_\+eigenvector\+\_\+to\+\_\+dofs(), oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Multi\+Vector\+::build(), oomph\+::\+C\+R\+Double\+Matrix\+::build(), oomph\+::\+C\+R\+Double\+Matrix\+::build\+\_\+without\+\_\+copy(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+C\+R\+Double\+Matrix\+Helpers\+::deep\+\_\+copy(), oomph\+::\+C\+R\+Double\+Matrix\+::diagonal\+\_\+entries(), oomph\+::\+Double\+Vector\+::dot(), oomph\+::\+Double\+Multi\+Vector\+::dot(), oomph\+::\+Double\+Multi\+Vector\+::\+Double\+Multi\+Vector(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter(), oomph\+::\+C\+R\+Double\+Matrix\+::global\+\_\+matrix(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value(), oomph\+::\+C\+R\+Double\+Matrix\+::inf\+\_\+norm(), oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Double\+Multi\+Vector\+::initialise(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+dof\+\_\+number(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve(), oomph\+::\+C\+R\+Double\+Matrix\+::matrix\+\_\+reduction(), oomph\+::\+Double\+Vector\+::max(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Add\+Mv(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Random(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Scale(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Times\+Mat\+Add\+Mv(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv(), oomph\+::\+Double\+Vector\+::norm(), oomph\+::\+Double\+Multi\+Vector\+::norm(), oomph\+::\+Double\+Multi\+Vector\+::operator()(), oomph\+::\+Double\+Vector\+::operator$\ast$=(), oomph\+::\+Double\+Multi\+Vector\+::operator$\ast$=(), oomph\+::\+Double\+Vector\+::operator+=(), oomph\+::\+Double\+Multi\+Vector\+::operator+=(), oomph\+::\+Double\+Vector\+::operator-\/=(), oomph\+::\+Double\+Multi\+Vector\+::operator-\/=(), oomph\+::\+Double\+Vector\+::operator==(), oomph\+::\+Double\+Multi\+Vector\+::operator==(), oomph\+::\+Double\+Vector\+::operator\mbox{[}$\,$\mbox{]}(), oomph\+::\+Double\+Vector\+::output(), oomph\+::\+Double\+Multi\+Vector\+::output(), oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values(), oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Double\+Multi\+Vector\+::redistribute(), oomph\+::\+C\+R\+Double\+Matrix\+::redistribute(), oomph\+::\+Double\+Matrix\+Base\+::residual(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Set\+Block(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ oomph\+::\+C\+R\+Double\+Matrix $>$\+::setup(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Preconditioner\+Old\+::setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::solve\+\_\+eigenproblem(), oomph\+::\+C\+R\+Double\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset(), and oomph\+::\+Double\+Vector\+Helpers\+::split().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}\label{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!nrow\_local@{nrow\_local}}
+\index{nrow\_local@{nrow\_local}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{nrow\_local()}{nrow\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the num of local rows on this processor. 
+
+
+
+Definition at line 488 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References Distribution\+\_\+pt, and oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local().
+
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a0d60098e4938b78dd3e2724551a4c7c9}\label{classoomph_1_1DistributableLinearAlgebraObject_a0d60098e4938b78dd3e2724551a4c7c9}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 458 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a94280ec477823427098dc46b20e29f5a}\label{classoomph_1_1DistributableLinearAlgebraObject_a94280ec477823427098dc46b20e29f5a}} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!Distribution\_pt@{Distribution\_pt}}
+\index{Distribution\_pt@{Distribution\_pt}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{Distribution\_pt}{Distribution\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}$\ast$ oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::\+Distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} object 
+
+
+
+Definition at line 544 of file linear\+\_\+algebra\+\_\+distribution.\+h.
+
+
+
+Referenced by build\+\_\+distribution(), clear\+\_\+distribution(), Distributable\+Linear\+Algebra\+Object(), distributed(), distribution\+\_\+built(), distribution\+\_\+pt(), first\+\_\+row(), nrow(), nrow\+\_\+local(), and $\sim$\+Distributable\+Linear\+Algebra\+Object().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{linear__algebra__distribution_8h}{linear\+\_\+algebra\+\_\+distribution.\+h}}\end{DoxyCompactItemize}

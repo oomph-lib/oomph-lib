@@ -1,0 +1,401 @@
+\hypertarget{classoomph_1_1CCDoubleMatrix}{}\doxysection{oomph\+::C\+C\+Double\+Matrix Class Reference}
+\label{classoomph_1_1CCDoubleMatrix}\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+
+
+A class for compressed column matrices that store doubles.  
+
+
+
+
+{\ttfamily \#include $<$matrices.\+h$>$}
+
+Inheritance diagram for oomph\+::C\+C\+Double\+Matrix\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.456790cm]{classoomph_1_1CCDoubleMatrix}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_abc80ef8ffa3a961daf6759bb2c574239}{C\+C\+Double\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ad98b162e3cc1aac48e9f5e1e06e262a5}{C\+C\+Double\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a3e382ff145082821a6b0b3e63b6aed5d}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&row\+\_\+index\+\_\+, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&column\+\_\+start\+\_\+, const unsigned long \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned long \&m)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a98d894f76da33c507c6d7368b13a4fb6}{C\+C\+Double\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&matrix)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ad21e909c73b8336792afd20de783e7c7}{operator=}} (const \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a89019bdd7b9a64a2f32cd4efa07fe45c}{$\sim$\+C\+C\+Double\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Kill the LU factors if they have been setup. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ab541153fa5ab2c1bc18e5339bacadfb9}{nrow}} () const
+\begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_aa38cc544ab30f9318161763e13c20957}{ncol}} () const
+\begin{DoxyCompactList}\small\item\em Return the number of columns of the matrix. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a2fd1f3dfa66ed45be1ced60d2835634c}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
+\begin{DoxyCompactList}\small\item\em Overload the round-\/bracket access operator to provide read-\/only (const) access to the data. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_acb7c9b4e04b877b3ef40be905829eb41}{ludecompose}} ()
+\begin{DoxyCompactList}\small\item\em LU decomposition using Super\+LU. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a59fbc30e6a856794cd2678856c8aea6d}{lubksub}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs)
+\begin{DoxyCompactList}\small\item\em LU back solve for given R\+HS. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{multiply}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const
+\begin{DoxyCompactList}\small\item\em Multiply the matrix by the vector x\+: soln=Ax. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const
+\begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ae6834fcfc28dca27243ec53ea48d34be}{multiply}} (const \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&matrix\+\_\+in, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&result)
+\begin{DoxyCompactList}\small\item\em Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} matrix\+\_\+in The multiplication method used can be selected using the flag Matrix\+\_\+matrix\+\_\+multiply\+\_\+method. By default Method 2 is used. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a600a58c92baf401a534598cedcfd3415}{matrix\+\_\+reduction}} (const double \&alpha, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&reduced\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ac30e2e7873bf639f36494ab1b03e26d7}{matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_afb1660974c8f6218c2a000c2d6c6d267}{Matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}
+\begin{DoxyCompactList}\small\item\em Flag to determine which matrix-\/matrix multiplication method is used. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A class for compressed column matrices that store doubles. 
+
+Definition at line 2569 of file matrices.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_abc80ef8ffa3a961daf6759bb2c574239}\label{classoomph_1_1CCDoubleMatrix_abc80ef8ffa3a961daf6759bb2c574239}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!CCDoubleMatrix@{CCDoubleMatrix}}
+\index{CCDoubleMatrix@{CCDoubleMatrix}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{CCDoubleMatrix()}{CCDoubleMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+C\+C\+Double\+Matrix\+::\+C\+C\+Double\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+Default constructor, set the default linear solver and matrix-\/matrix multiplication method. 
+
+Definition at line 582 of file matrices.\+cc.
+
+
+
+References oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt, oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt, and Matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_ad98b162e3cc1aac48e9f5e1e06e262a5}\label{classoomph_1_1CCDoubleMatrix_ad98b162e3cc1aac48e9f5e1e06e262a5}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!CCDoubleMatrix@{CCDoubleMatrix}}
+\index{CCDoubleMatrix@{CCDoubleMatrix}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{CCDoubleMatrix()}{CCDoubleMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+C\+C\+Double\+Matrix\+::\+C\+C\+Double\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{value,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{row\+\_\+index\+\_\+,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{column\+\_\+start\+\_\+,  }\item[{const unsigned long \&}]{n,  }\item[{const unsigned long \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. 
+
+
+
+Definition at line 595 of file matrices.\+cc.
+
+
+
+References oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt, oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt, and Matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_a98d894f76da33c507c6d7368b13a4fb6}\label{classoomph_1_1CCDoubleMatrix_a98d894f76da33c507c6d7368b13a4fb6}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!CCDoubleMatrix@{CCDoubleMatrix}}
+\index{CCDoubleMatrix@{CCDoubleMatrix}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{CCDoubleMatrix()}{CCDoubleMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+C\+C\+Double\+Matrix\+::\+C\+C\+Double\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 2590 of file matrices.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_a89019bdd7b9a64a2f32cd4efa07fe45c}\label{classoomph_1_1CCDoubleMatrix_a89019bdd7b9a64a2f32cd4efa07fe45c}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!````~CCDoubleMatrix@{$\sim$CCDoubleMatrix}}
+\index{````~CCDoubleMatrix@{$\sim$CCDoubleMatrix}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{$\sim$CCDoubleMatrix()}{~CCDoubleMatrix()}}
+{\footnotesize\ttfamily oomph\+::\+C\+C\+Double\+Matrix\+::$\sim$\+C\+C\+Double\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor\+: Kill the LU factors if they have been setup. 
+
+Destructor\+: delete the default linear solver. 
+
+Definition at line 607 of file matrices.\+cc.
+
+
+
+References oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_a59fbc30e6a856794cd2678856c8aea6d}\label{classoomph_1_1CCDoubleMatrix_a59fbc30e6a856794cd2678856c8aea6d}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!lubksub@{lubksub}}
+\index{lubksub@{lubksub}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{lubksub()}{lubksub()}}
+{\footnotesize\ttfamily void oomph\+::\+C\+C\+Double\+Matrix\+::lubksub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+LU back solve for given R\+HS. 
+
+Do the backsubstitution. 
+
+Definition at line 621 of file matrices.\+cc.
+
+
+
+References oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_acb7c9b4e04b877b3ef40be905829eb41}\label{classoomph_1_1CCDoubleMatrix_acb7c9b4e04b877b3ef40be905829eb41}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!ludecompose@{ludecompose}}
+\index{ludecompose@{ludecompose}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{ludecompose()}{ludecompose()}}
+{\footnotesize\ttfamily void oomph\+::\+C\+C\+Double\+Matrix\+::ludecompose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+LU decomposition using Super\+LU. 
+
+Perform LU decomposition. Return the sign of the determinant. 
+
+Definition at line 613 of file matrices.\+cc.
+
+
+
+References oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_ac30e2e7873bf639f36494ab1b03e26d7}\label{classoomph_1_1CCDoubleMatrix_ac30e2e7873bf639f36494ab1b03e26d7}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!matrix\_matrix\_multiply\_method@{matrix\_matrix\_multiply\_method}}
+\index{matrix\_matrix\_multiply\_method@{matrix\_matrix\_multiply\_method}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{matrix\_matrix\_multiply\_method()}{matrix\_matrix\_multiply\_method()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+C\+C\+Double\+Matrix\+::matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... 
+
+
+
+Definition at line 2667 of file matrices.\+h.
+
+
+
+References Matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_a600a58c92baf401a534598cedcfd3415}\label{classoomph_1_1CCDoubleMatrix_a600a58c92baf401a534598cedcfd3415}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!matrix\_reduction@{matrix\_reduction}}
+\index{matrix\_reduction@{matrix\_reduction}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{matrix\_reduction()}{matrix\_reduction()}}
+{\footnotesize\ttfamily void oomph\+::\+C\+C\+Double\+Matrix\+::matrix\+\_\+reduction (\begin{DoxyParamCaption}\item[{const double \&}]{alpha,  }\item[{\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&}]{reduced\+\_\+matrix }\end{DoxyParamCaption})}
+
+
+
+For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
+ 
+
+For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. ~\newline
+ 
+
+Definition at line 1167 of file matrices.\+cc.
+
+
+
+References oomph\+::\+C\+C\+Matrix$<$ double $>$\+::build(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::\+Column\+\_\+start, i, ncol(), nrow(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::\+Row\+\_\+index, and oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::\+Value.
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_ae6834fcfc28dca27243ec53ea48d34be}\label{classoomph_1_1CCDoubleMatrix_ae6834fcfc28dca27243ec53ea48d34be}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!multiply@{multiply}}
+\index{multiply@{multiply}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+C\+C\+Double\+Matrix\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&}]{matrix\+\_\+in,  }\item[{\mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&}]{result }\end{DoxyParamCaption})}
+
+
+
+Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} matrix\+\_\+in The multiplication method used can be selected using the flag Matrix\+\_\+matrix\+\_\+multiply\+\_\+method. By default Method 2 is used. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... 
+
+Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} matrix\+\_\+in The multiplication method used can be selected using the flag Matrix\+\_\+matrix\+\_\+multiply\+\_\+method. By default Method 2 is used. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... 
+
+Definition at line 835 of file matrices.\+cc.
+
+
+
+References oomph\+::\+C\+C\+Matrix$<$ T $>$\+::build\+\_\+without\+\_\+copy(), oomph\+::\+C\+C\+Matrix$<$ T $>$\+::column\+\_\+start(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::column\+\_\+start(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::\+Column\+\_\+start, i, oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::M, Matrix\+\_\+matrix\+\_\+multiply\+\_\+method, oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::N, ncol(), oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::\+Nnz, nrow(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::row\+\_\+index(), oomph\+::\+C\+C\+Matrix$<$ T $>$\+::row\+\_\+index(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::\+Row\+\_\+index, oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::\+Value, oomph\+::\+Sparse\+Matrix$<$ T, M\+A\+T\+R\+I\+X\+\_\+\+T\+Y\+P\+E $>$\+::value(), and oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::value().
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}\label{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!multiply@{multiply}}
+\index{multiply@{multiply}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+C\+C\+Double\+Matrix\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{soln }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Multiply the matrix by the vector x\+: soln=Ax. 
+
+Multiply the matrix by the vector x. 
+
+Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{oomph\+::\+Double\+Matrix\+Base}}.
+
+
+
+Definition at line 629 of file matrices.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::\+Column\+\_\+start, oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::N, ncol(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::\+Row\+\_\+index, oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::\+Value, and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}\label{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!multiply\_transpose@{multiply\_transpose}}
+\index{multiply\_transpose@{multiply\_transpose}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{multiply\_transpose()}{multiply\_transpose()}}
+{\footnotesize\ttfamily void oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{soln }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}{oomph\+::\+Double\+Matrix\+Base}}.
+
+
+
+Definition at line 725 of file matrices.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::\+Column\+\_\+start, oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::N, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), nrow(), oomph\+::\+C\+C\+Matrix$<$ double $>$\+::\+Row\+\_\+index, oomph\+::\+Sparse\+Matrix$<$ double, C\+C\+Matrix$<$ double $>$ $>$\+::\+Value, and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+
+
+
+Referenced by oomph\+::\+Super\+L\+U\+Solver\+::solve(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_aa38cc544ab30f9318161763e13c20957}\label{classoomph_1_1CCDoubleMatrix_aa38cc544ab30f9318161763e13c20957}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!ncol@{ncol}}
+\index{ncol@{ncol}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+C\+C\+Double\+Matrix\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of columns of the matrix. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base}}.
+
+
+
+Definition at line 2609 of file matrices.\+h.
+
+
+
+References oomph\+::\+Sparse\+Matrix$<$ T, C\+C\+Matrix$<$ T $>$ $>$\+::ncol().
+
+
+
+Referenced by matrix\+\_\+reduction(), and multiply().
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_ab541153fa5ab2c1bc18e5339bacadfb9}\label{classoomph_1_1CCDoubleMatrix_ab541153fa5ab2c1bc18e5339bacadfb9}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+C\+C\+Double\+Matrix\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of rows of the matrix. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base}}.
+
+
+
+Definition at line 2606 of file matrices.\+h.
+
+
+
+References oomph\+::\+Sparse\+Matrix$<$ T, C\+C\+Matrix$<$ T $>$ $>$\+::nrow().
+
+
+
+Referenced by oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), matrix\+\_\+reduction(), multiply(), multiply\+\_\+transpose(), and oomph\+::\+I\+L\+U\+Zero\+Preconditioner$<$ C\+C\+Double\+Matrix $>$\+::setup().
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_a2fd1f3dfa66ed45be1ced60d2835634c}\label{classoomph_1_1CCDoubleMatrix_a2fd1f3dfa66ed45be1ced60d2835634c}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily double oomph\+::\+C\+C\+Double\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the round-\/bracket access operator to provide read-\/only (const) access to the data. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f0846fede2d77}{oomph\+::\+Double\+Matrix\+Base}}.
+
+
+
+Definition at line 2613 of file matrices.\+h.
+
+
+
+References oomph\+::\+C\+C\+Matrix$<$ T $>$\+::get\+\_\+entry(), and i.
+
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_ad21e909c73b8336792afd20de783e7c7}\label{classoomph_1_1CCDoubleMatrix_ad21e909c73b8336792afd20de783e7c7}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+C\+C\+Double\+Matrix\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 2597 of file matrices.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1CCDoubleMatrix_afb1660974c8f6218c2a000c2d6c6d267}\label{classoomph_1_1CCDoubleMatrix_afb1660974c8f6218c2a000c2d6c6d267}} 
+\index{oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}!Matrix\_matrix\_multiply\_method@{Matrix\_matrix\_multiply\_method}}
+\index{Matrix\_matrix\_multiply\_method@{Matrix\_matrix\_multiply\_method}!oomph::CCDoubleMatrix@{oomph::CCDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{Matrix\_matrix\_multiply\_method}{Matrix\_matrix\_multiply\_method}}
+{\footnotesize\ttfamily unsigned oomph\+::\+C\+C\+Double\+Matrix\+::\+Matrix\+\_\+matrix\+\_\+multiply\+\_\+method\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to determine which matrix-\/matrix multiplication method is used. 
+
+
+
+Definition at line 2675 of file matrices.\+h.
+
+
+
+Referenced by C\+C\+Double\+Matrix(), matrix\+\_\+matrix\+\_\+multiply\+\_\+method(), and multiply().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{matrices_8h}{matrices.\+h}}\item 
+\mbox{\hyperlink{matrices_8cc}{matrices.\+cc}}\end{DoxyCompactItemize}

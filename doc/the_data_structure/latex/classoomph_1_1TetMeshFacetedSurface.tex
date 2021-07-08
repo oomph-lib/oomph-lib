@@ -1,0 +1,602 @@
+\hypertarget{classoomph_1_1TetMeshFacetedSurface}{}\doxysection{oomph\+::Tet\+Mesh\+Faceted\+Surface Class Reference}
+\label{classoomph_1_1TetMeshFacetedSurface}\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+
+
+{\ttfamily \#include $<$tet\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Tet\+Mesh\+Faceted\+Surface\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1TetMeshFacetedSurface}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_ab11f1e6e44a264849600909929c2067f}{Tet\+Mesh\+Faceted\+Surface}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_addb5688daf76ee730092f428162f9056}{$\sim$\+Tet\+Mesh\+Faceted\+Surface}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aae77dfb3a856e3840564e21716f4c3b1}{nvertex}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertices. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6036f2a5e11bea9d72f9bba9a89faec7}{nfacet}} () const
+\begin{DoxyCompactList}\small\item\em Number of facets. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a86b099447be23301fdfd4abdeee75560}{one\+\_\+based\+\_\+facet\+\_\+boundary\+\_\+id}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em One-\/based boundary id of j-\/th facet. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_afa2552d4a9b397c635a8c427333c4bf5}{one\+\_\+based\+\_\+vertex\+\_\+boundary\+\_\+id}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em First (of possibly multiple) one-\/based boundary id of j-\/th vertex. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aad7ab6940be9b8ed2e73d80c238c5128}{vertex\+\_\+coordinate}} (const unsigned \&j, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em i-\/th coordinate of j-\/th vertex \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a03f007362dac8406ad9b7337f1887c9d}{nvertex\+\_\+on\+\_\+facet}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Number of vertices defining the j-\/th facet. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a7f324fe118cd60222d64c5485c74f2a1}{boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen}} ()
+\begin{DoxyCompactList}\small\item\em Test whether boundary can be split in tetgen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aa4f46a7206332d355efb1de439bc08af}{enable\+\_\+boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen}} ()
+\begin{DoxyCompactList}\small\item\em Test whether boundaries can be split in tetgen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a4dde957835b3b2410f629cd72119a5af}{disable\+\_\+boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen}} ()
+\begin{DoxyCompactList}\small\item\em Test whether boundaries can be split in tetgen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} $\ast$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a901cc7080454c9b93ceccce863e08a4c}{facet\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to j-\/th facet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}} $\ast$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_accfd3cbc4b919518746db4a6a64f3344}{vertex\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to j-\/th vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}} $\ast$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aef8f755bcf97e239a5c4c987e9ab9bc2}{geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} with boundaries associated with this surface (Null if there isn\textquotesingle{}t one!) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_ad8d350cfdd9f7c4dde06749a5387b13e}{output}} (std\+::ostream \&outfile) const
+\begin{DoxyCompactList}\small\item\em Output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_ac10b05cafa5f6b6cee9cd47b3be9e033}{output}} (const std\+::string \&filename) const
+\begin{DoxyCompactList}\small\item\em Output. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5882667d66ad8460782b9fa36f39f485}{boundary\+\_\+zeta01}} (const unsigned \&facet\+\_\+id, const double \&zeta\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta)
+\begin{DoxyCompactList}\small\item\em Virtual function that specifies the variation of the zeta coordinates in the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} along the boundary connecting vertices 0 and 1 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 0; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 1. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a7dd49826326e9926d92fc773853a9afb}{boundary\+\_\+zeta12}} (const unsigned \&facet\+\_\+id, const double \&zeta\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta)
+\begin{DoxyCompactList}\small\item\em Virtual function that specifies the variation of the zeta coordinates in the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} along the boundary connecting vertices 1 and 2 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 1; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 2. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aa9c92e3c5ba628cdcc91086c9cb38c22}{boundary\+\_\+zeta20}} (const unsigned \&facet\+\_\+id, const double \&zeta\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta)
+\begin{DoxyCompactList}\small\item\em Virtual function that specifies the variation of the zeta coordinates in the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} along the boundary connecting vertices 2 and 0 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 2; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a931ad8f6d1da646d06341e1c09a3d242}{vertex\+\_\+index\+\_\+in\+\_\+tetgen}} (const unsigned \&f)
+\begin{DoxyCompactList}\small\item\em Facet connectivity\+: vertex\+\_\+index\mbox{[}j\mbox{]} is the index of the j-\/th vertex (in the Vertex\+\_\+pt vector) in facet f. Bit of an obscure functionality that\textquotesingle{}s only needed for setup tetgen\+\_\+io. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}{Vertex\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} pointers to vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to facets. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a0d42b95b2097482d25a727a0f6fd7605}{Boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether extra vertices can be added on the boundary in tetgen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\+\_\+vertex\+\_\+index\+\_\+in\+\_\+tetgen}}
+\begin{DoxyCompactList}\small\item\em Facet connectivity\+: Facet\+\_\+vertex\+\_\+index\mbox{[}f\mbox{]}\mbox{[}j\mbox{]} is the index of the j-\/th vertex (in the Vertex\+\_\+pt vector) in facet f. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}} $\ast$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6d5836261116c9fc17afa725fcd63bd1}{Geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} with boundaries associated with this surface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aad0696eb07125a0847587b356ebaf735}{setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen}} ()
+\begin{DoxyCompactList}\small\item\em Setup facet connectivity for tetgen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for tet mesh boundary defined by polygonal planar facets 
+
+Definition at line 322 of file tet\+\_\+mesh.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_ab11f1e6e44a264849600909929c2067f}\label{classoomph_1_1TetMeshFacetedSurface_ab11f1e6e44a264849600909929c2067f}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!TetMeshFacetedSurface@{TetMeshFacetedSurface}}
+\index{TetMeshFacetedSurface@{TetMeshFacetedSurface}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{TetMeshFacetedSurface()}{TetMeshFacetedSurface()}}
+{\footnotesize\ttfamily oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Tet\+Mesh\+Faceted\+Surface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: 
+
+
+
+Definition at line 327 of file tet\+\_\+mesh.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_addb5688daf76ee730092f428162f9056}\label{classoomph_1_1TetMeshFacetedSurface_addb5688daf76ee730092f428162f9056}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!````~TetMeshFacetedSurface@{$\sim$TetMeshFacetedSurface}}
+\index{````~TetMeshFacetedSurface@{$\sim$TetMeshFacetedSurface}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{$\sim$TetMeshFacetedSurface()}{~TetMeshFacetedSurface()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::$\sim$\+Tet\+Mesh\+Faceted\+Surface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 332 of file tet\+\_\+mesh.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a7f324fe118cd60222d64c5485c74f2a1}\label{classoomph_1_1TetMeshFacetedSurface_a7f324fe118cd60222d64c5485c74f2a1}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!boundaries\_can\_be\_split\_in\_tetgen@{boundaries\_can\_be\_split\_in\_tetgen}}
+\index{boundaries\_can\_be\_split\_in\_tetgen@{boundaries\_can\_be\_split\_in\_tetgen}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{boundaries\_can\_be\_split\_in\_tetgen()}{boundaries\_can\_be\_split\_in\_tetgen()}}
+{\footnotesize\ttfamily bool oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether boundary can be split in tetgen. 
+
+
+
+Definition at line 371 of file tet\+\_\+mesh.\+h.
+
+
+
+References Boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen.
+
+
+
+Referenced by oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Tetgen\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a5882667d66ad8460782b9fa36f39f485}\label{classoomph_1_1TetMeshFacetedSurface_a5882667d66ad8460782b9fa36f39f485}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!boundary\_zeta01@{boundary\_zeta01}}
+\index{boundary\_zeta01@{boundary\_zeta01}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{boundary\_zeta01()}{boundary\_zeta01()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::boundary\+\_\+zeta01 (\begin{DoxyParamCaption}\item[{const unsigned \&}]{facet\+\_\+id,  }\item[{const double \&}]{zeta\+\_\+boundary,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual function that specifies the variation of the zeta coordinates in the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} along the boundary connecting vertices 0 and 1 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 0; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 1. 
+
+
+
+Definition at line 433 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a7dd49826326e9926d92fc773853a9afb}\label{classoomph_1_1TetMeshFacetedSurface_a7dd49826326e9926d92fc773853a9afb}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!boundary\_zeta12@{boundary\_zeta12}}
+\index{boundary\_zeta12@{boundary\_zeta12}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{boundary\_zeta12()}{boundary\_zeta12()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::boundary\+\_\+zeta12 (\begin{DoxyParamCaption}\item[{const unsigned \&}]{facet\+\_\+id,  }\item[{const double \&}]{zeta\+\_\+boundary,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual function that specifies the variation of the zeta coordinates in the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} along the boundary connecting vertices 1 and 2 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 1; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 2. 
+
+
+
+Definition at line 450 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_aa9c92e3c5ba628cdcc91086c9cb38c22}\label{classoomph_1_1TetMeshFacetedSurface_aa9c92e3c5ba628cdcc91086c9cb38c22}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!boundary\_zeta20@{boundary\_zeta20}}
+\index{boundary\_zeta20@{boundary\_zeta20}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{boundary\_zeta20()}{boundary\_zeta20()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::boundary\+\_\+zeta20 (\begin{DoxyParamCaption}\item[{const unsigned \&}]{facet\+\_\+id,  }\item[{const double \&}]{zeta\+\_\+boundary,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual function that specifies the variation of the zeta coordinates in the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} along the boundary connecting vertices 2 and 0 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 2; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 0. 
+
+
+
+Definition at line 467 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a4dde957835b3b2410f629cd72119a5af}\label{classoomph_1_1TetMeshFacetedSurface_a4dde957835b3b2410f629cd72119a5af}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!disable\_boundaries\_can\_be\_split\_in\_tetgen@{disable\_boundaries\_can\_be\_split\_in\_tetgen}}
+\index{disable\_boundaries\_can\_be\_split\_in\_tetgen@{disable\_boundaries\_can\_be\_split\_in\_tetgen}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{disable\_boundaries\_can\_be\_split\_in\_tetgen()}{disable\_boundaries\_can\_be\_split\_in\_tetgen()}}
+{\footnotesize\ttfamily void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::disable\+\_\+boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether boundaries can be split in tetgen. 
+
+
+
+Definition at line 383 of file tet\+\_\+mesh.\+h.
+
+
+
+References Boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen.
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_aa4f46a7206332d355efb1de439bc08af}\label{classoomph_1_1TetMeshFacetedSurface_aa4f46a7206332d355efb1de439bc08af}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!enable\_boundaries\_can\_be\_split\_in\_tetgen@{enable\_boundaries\_can\_be\_split\_in\_tetgen}}
+\index{enable\_boundaries\_can\_be\_split\_in\_tetgen@{enable\_boundaries\_can\_be\_split\_in\_tetgen}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{enable\_boundaries\_can\_be\_split\_in\_tetgen()}{enable\_boundaries\_can\_be\_split\_in\_tetgen()}}
+{\footnotesize\ttfamily void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::enable\+\_\+boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether boundaries can be split in tetgen. 
+
+
+
+Definition at line 377 of file tet\+\_\+mesh.\+h.
+
+
+
+References Boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen.
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a901cc7080454c9b93ceccce863e08a4c}\label{classoomph_1_1TetMeshFacetedSurface_a901cc7080454c9b93ceccce863e08a4c}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!facet\_pt@{facet\_pt}}
+\index{facet\_pt@{facet\_pt}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{facet\_pt()}{facet\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}}$\ast$ oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::facet\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to j-\/th facet. 
+
+
+
+Definition at line 389 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+reverse\+\_\+lookup\+\_\+schemes\+\_\+for\+\_\+faceted\+\_\+surface(), and oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_aef8f755bcf97e239a5c4c987e9ab9bc2}\label{classoomph_1_1TetMeshFacetedSurface_aef8f755bcf97e239a5c4c987e9ab9bc2}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!geom\_object\_with\_boundaries\_pt@{geom\_object\_with\_boundaries\_pt}}
+\index{geom\_object\_with\_boundaries\_pt@{geom\_object\_with\_boundaries\_pt}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{geom\_object\_with\_boundaries\_pt()}{geom\_object\_with\_boundaries\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}}$\ast$ oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} with boundaries associated with this surface (Null if there isn\textquotesingle{}t one!) 
+
+
+
+Definition at line 402 of file tet\+\_\+mesh.\+h.
+
+
+
+References Geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a6036f2a5e11bea9d72f9bba9a89faec7}\label{classoomph_1_1TetMeshFacetedSurface_a6036f2a5e11bea9d72f9bba9a89faec7}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!nfacet@{nfacet}}
+\index{nfacet@{nfacet}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{nfacet()}{nfacet()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::nfacet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of facets. 
+
+
+
+Definition at line 341 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Gmsh\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+it(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+tetgenio(), setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+reverse\+\_\+lookup\+\_\+schemes\+\_\+for\+\_\+faceted\+\_\+surface(), oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+faceted\+\_\+surface\+\_\+using\+\_\+face\+\_\+mesh(), vertex\+\_\+index\+\_\+in\+\_\+tetgen(), oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file(), and oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::$\sim$\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_aae77dfb3a856e3840564e21716f4c3b1}\label{classoomph_1_1TetMeshFacetedSurface_aae77dfb3a856e3840564e21716f4c3b1}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!nvertex@{nvertex}}
+\index{nvertex@{nvertex}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{nvertex()}{nvertex()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::nvertex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of vertices. 
+
+
+
+Definition at line 335 of file tet\+\_\+mesh.\+h.
+
+
+
+References Vertex\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+tetgenio(), oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file(), and oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::$\sim$\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a03f007362dac8406ad9b7337f1887c9d}\label{classoomph_1_1TetMeshFacetedSurface_a03f007362dac8406ad9b7337f1887c9d}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!nvertex\_on\_facet@{nvertex\_on\_facet}}
+\index{nvertex\_on\_facet@{nvertex\_on\_facet}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{nvertex\_on\_facet()}{nvertex\_on\_facet()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::nvertex\+\_\+on\+\_\+facet (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of vertices defining the j-\/th facet. 
+
+
+
+Definition at line 365 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a86b099447be23301fdfd4abdeee75560}\label{classoomph_1_1TetMeshFacetedSurface_a86b099447be23301fdfd4abdeee75560}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!one\_based\_facet\_boundary\_id@{one\_based\_facet\_boundary\_id}}
+\index{one\_based\_facet\_boundary\_id@{one\_based\_facet\_boundary\_id}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{one\_based\_facet\_boundary\_id()}{one\_based\_facet\_boundary\_id()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::one\+\_\+based\+\_\+facet\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+One-\/based boundary id of j-\/th facet. 
+
+
+
+Definition at line 347 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+tetgenio(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+reverse\+\_\+lookup\+\_\+schemes\+\_\+for\+\_\+faceted\+\_\+surface(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+faceted\+\_\+surface\+\_\+using\+\_\+face\+\_\+mesh(), and oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_afa2552d4a9b397c635a8c427333c4bf5}\label{classoomph_1_1TetMeshFacetedSurface_afa2552d4a9b397c635a8c427333c4bf5}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!one\_based\_vertex\_boundary\_id@{one\_based\_vertex\_boundary\_id}}
+\index{one\_based\_vertex\_boundary\_id@{one\_based\_vertex\_boundary\_id}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{one\_based\_vertex\_boundary\_id()}{one\_based\_vertex\_boundary\_id()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::one\+\_\+based\+\_\+vertex\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+First (of possibly multiple) one-\/based boundary id of j-\/th vertex. 
+
+
+
+Definition at line 353 of file tet\+\_\+mesh.\+h.
+
+
+
+References Vertex\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+tetgenio().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_ac10b05cafa5f6b6cee9cd47b3be9e033}\label{classoomph_1_1TetMeshFacetedSurface_ac10b05cafa5f6b6cee9cd47b3be9e033}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!output@{output}}
+\index{output@{output}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::output (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output. 
+
+
+
+Definition at line 419 of file tet\+\_\+mesh.\+h.
+
+
+
+References output().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_ad8d350cfdd9f7c4dde06749a5387b13e}\label{classoomph_1_1TetMeshFacetedSurface_ad8d350cfdd9f7c4dde06749a5387b13e}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!output@{output}}
+\index{output@{output}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output. 
+
+
+
+Definition at line 408 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt, and n.
+
+
+
+Referenced by output().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_aad0696eb07125a0847587b356ebaf735}\label{classoomph_1_1TetMeshFacetedSurface_aad0696eb07125a0847587b356ebaf735}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!setup\_facet\_connectivity\_for\_tetgen@{setup\_facet\_connectivity\_for\_tetgen}}
+\index{setup\_facet\_connectivity\_for\_tetgen@{setup\_facet\_connectivity\_for\_tetgen}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{setup\_facet\_connectivity\_for\_tetgen()}{setup\_facet\_connectivity\_for\_tetgen()}}
+{\footnotesize\ttfamily void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Setup facet connectivity for tetgen. 
+
+
+
+Definition at line 515 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt, Facet\+\_\+vertex\+\_\+index\+\_\+in\+\_\+tetgen, nfacet(), and Vertex\+\_\+pt.
+
+
+
+Referenced by vertex\+\_\+index\+\_\+in\+\_\+tetgen().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_aad7ab6940be9b8ed2e73d80c238c5128}\label{classoomph_1_1TetMeshFacetedSurface_aad7ab6940be9b8ed2e73d80c238c5128}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!vertex\_coordinate@{vertex\_coordinate}}
+\index{vertex\_coordinate@{vertex\_coordinate}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{vertex\_coordinate()}{vertex\_coordinate()}}
+{\footnotesize\ttfamily double oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::vertex\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+i-\/th coordinate of j-\/th vertex 
+
+
+
+Definition at line 359 of file tet\+\_\+mesh.\+h.
+
+
+
+References i, and Vertex\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+tetgenio().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a931ad8f6d1da646d06341e1c09a3d242}\label{classoomph_1_1TetMeshFacetedSurface_a931ad8f6d1da646d06341e1c09a3d242}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!vertex\_index\_in\_tetgen@{vertex\_index\_in\_tetgen}}
+\index{vertex\_index\_in\_tetgen@{vertex\_index\_in\_tetgen}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{vertex\_index\_in\_tetgen()}{vertex\_index\_in\_tetgen()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::vertex\+\_\+index\+\_\+in\+\_\+tetgen (\begin{DoxyParamCaption}\item[{const unsigned \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Facet connectivity\+: vertex\+\_\+index\mbox{[}j\mbox{]} is the index of the j-\/th vertex (in the Vertex\+\_\+pt vector) in facet f. Bit of an obscure functionality that\textquotesingle{}s only needed for setup tetgen\+\_\+io. 
+
+
+
+Definition at line 482 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+vertex\+\_\+index\+\_\+in\+\_\+tetgen, nfacet(), and setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen().
+
+
+
+Referenced by oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+tetgenio().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_accfd3cbc4b919518746db4a6a64f3344}\label{classoomph_1_1TetMeshFacetedSurface_accfd3cbc4b919518746db4a6a64f3344}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!vertex\_pt@{vertex\_pt}}
+\index{vertex\_pt@{vertex\_pt}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{vertex\_pt()}{vertex\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}}$\ast$ oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::vertex\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to j-\/th vertex. 
+
+
+
+Definition at line 395 of file tet\+\_\+mesh.\+h.
+
+
+
+References Vertex\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a0d42b95b2097482d25a727a0f6fd7605}\label{classoomph_1_1TetMeshFacetedSurface_a0d42b95b2097482d25a727a0f6fd7605}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!Boundaries\_can\_be\_split\_in\_tetgen@{Boundaries\_can\_be\_split\_in\_tetgen}}
+\index{Boundaries\_can\_be\_split\_in\_tetgen@{Boundaries\_can\_be\_split\_in\_tetgen}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{Boundaries\_can\_be\_split\_in\_tetgen}{Boundaries\_can\_be\_split\_in\_tetgen}}
+{\footnotesize\ttfamily bool oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean to indicate whether extra vertices can be added on the boundary in tetgen. 
+
+
+
+Definition at line 501 of file tet\+\_\+mesh.\+h.
+
+
+
+Referenced by boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen(), disable\+\_\+boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen(), and enable\+\_\+boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}\label{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!Facet\_pt@{Facet\_pt}}
+\index{Facet\_pt@{Facet\_pt}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{Facet\_pt}{Facet\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}}$\ast$$>$ oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Facet\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to facets. 
+
+
+
+Definition at line 497 of file tet\+\_\+mesh.\+h.
+
+
+
+Referenced by boundary\+\_\+zeta01(), boundary\+\_\+zeta12(), boundary\+\_\+zeta20(), facet\+\_\+pt(), nfacet(), nvertex\+\_\+on\+\_\+facet(), one\+\_\+based\+\_\+facet\+\_\+boundary\+\_\+id(), output(), setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen(), oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh(), and oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::$\sim$\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}\label{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!Facet\_vertex\_index\_in\_tetgen@{Facet\_vertex\_index\_in\_tetgen}}
+\index{Facet\_vertex\_index\_in\_tetgen@{Facet\_vertex\_index\_in\_tetgen}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{Facet\_vertex\_index\_in\_tetgen}{Facet\_vertex\_index\_in\_tetgen}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ $>$ oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Facet\+\_\+vertex\+\_\+index\+\_\+in\+\_\+tetgen\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Facet connectivity\+: Facet\+\_\+vertex\+\_\+index\mbox{[}f\mbox{]}\mbox{[}j\mbox{]} is the index of the j-\/th vertex (in the Vertex\+\_\+pt vector) in facet f. 
+
+
+
+Definition at line 505 of file tet\+\_\+mesh.\+h.
+
+
+
+Referenced by setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen(), and vertex\+\_\+index\+\_\+in\+\_\+tetgen().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a6d5836261116c9fc17afa725fcd63bd1}\label{classoomph_1_1TetMeshFacetedSurface_a6d5836261116c9fc17afa725fcd63bd1}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!Geom\_object\_with\_boundaries\_pt@{Geom\_object\_with\_boundaries\_pt}}
+\index{Geom\_object\_with\_boundaries\_pt@{Geom\_object\_with\_boundaries\_pt}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{Geom\_object\_with\_boundaries\_pt}{Geom\_object\_with\_boundaries\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}}$\ast$ oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} with boundaries associated with this surface. 
+
+
+
+Definition at line 508 of file tet\+\_\+mesh.\+h.
+
+
+
+Referenced by geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}\label{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!Vertex\_pt@{Vertex\_pt}}
+\index{Vertex\_pt@{Vertex\_pt}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{Vertex\_pt}{Vertex\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}}$\ast$$>$ oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Vertex\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} pointers to vertices. 
+
+
+
+Definition at line 494 of file tet\+\_\+mesh.\+h.
+
+
+
+Referenced by nvertex(), one\+\_\+based\+\_\+vertex\+\_\+boundary\+\_\+id(), setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen(), oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh(), vertex\+\_\+coordinate(), vertex\+\_\+pt(), and oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::$\sim$\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tet__mesh_8h}{tet\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,160 @@
+\hypertarget{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}{}\doxysection{oomph\+::Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+IM $>$ Class Template Reference}
+\label{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}\index{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}}
+
+
+{\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h$>$}
+
+Inheritance diagram for oomph\+::Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+IM $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_a35b80c3dca1702270e8346a63689adf5}{Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation}} (double $\ast$yield\+\_\+stress\+\_\+pt, double $\ast$flow\+\_\+index\+\_\+pt, double $\ast$regularisation\+\_\+parameter\+\_\+pt)
+\item 
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_aa56ae7a2ef80789048d81925d9c9e9db}{viscosity}} (const double \&second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor)
+\item 
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_ac02f227a7ca7fcd65fe0f9c0baff417d}{dviscosity\+\_\+dinvariant}} (const double \&second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_a34fcbd9d7a01ec046749e3b2ca4ef0b8}{Yield\+\_\+stress\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em yield stress tau\+\_\+y \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_aa4aae1728d199137b187fc075d2e203d}{Flow\+\_\+index\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em power law index n \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_aaaf787351aa31ee08246b7c4edcca066}{Regularisation\+\_\+parameter\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em regularisation parameter e $<$$<$ 1 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned D\+IM$>$\newline
+class oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$}
+
+A \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation}} class defining a Herschel-\/\+Bulkley fluid using Bercovier and Engelman\textquotesingle{}s (1980) regularisation 
+
+Definition at line 160 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_a35b80c3dca1702270e8346a63689adf5}\label{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_a35b80c3dca1702270e8346a63689adf5}} 
+\index{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}!HerschelBulkleyBerEngRegConstitutiveEquation@{HerschelBulkleyBerEngRegConstitutiveEquation}}
+\index{HerschelBulkleyBerEngRegConstitutiveEquation@{HerschelBulkleyBerEngRegConstitutiveEquation}!oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{HerschelBulkleyBerEngRegConstitutiveEquation()}{HerschelBulkleyBerEngRegConstitutiveEquation()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}{Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation}} (\begin{DoxyParamCaption}\item[{double $\ast$}]{yield\+\_\+stress\+\_\+pt,  }\item[{double $\ast$}]{flow\+\_\+index\+\_\+pt,  }\item[{double $\ast$}]{regularisation\+\_\+parameter\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 178 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_ac02f227a7ca7fcd65fe0f9c0baff417d}\label{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_ac02f227a7ca7fcd65fe0f9c0baff417d}} 
+\index{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}!dviscosity\_dinvariant@{dviscosity\_dinvariant}}
+\index{dviscosity\_dinvariant@{dviscosity\_dinvariant}!oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dviscosity\_dinvariant()}{dviscosity\_dinvariant()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ D\+IM $>$\+::dviscosity\+\_\+dinvariant (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Function returning the derivative of the viscosity w.\+r.\+t. the second invariant of the rate of strain tensor For Newtonian behaviour this returns 0.\+0 
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_ad0164e6ca57cc986048346e12c4d353a}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 207 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+References oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Flow\+\_\+index\+\_\+pt, and oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Regularisation\+\_\+parameter\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_aa56ae7a2ef80789048d81925d9c9e9db}\label{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_aa56ae7a2ef80789048d81925d9c9e9db}} 
+\index{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}!viscosity@{viscosity}}
+\index{viscosity@{viscosity}!oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{viscosity()}{viscosity()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ D\+IM $>$\+::viscosity (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Function implementing the constitutive model Input\+: second invariant of the rate of strain Output\+: the viscosity For Newtonian behaviour this returns 1 
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a3e6d811786e39ca3c3a9b1c46249442f}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 184 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+References oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Flow\+\_\+index\+\_\+pt, oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Regularisation\+\_\+parameter\+\_\+pt, and oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Yield\+\_\+stress\+\_\+pt.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_aa4aae1728d199137b187fc075d2e203d}\label{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_aa4aae1728d199137b187fc075d2e203d}} 
+\index{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}!Flow\_index\_pt@{Flow\_index\_pt}}
+\index{Flow\_index\_pt@{Flow\_index\_pt}!oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Flow\_index\_pt}{Flow\_index\_pt}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ D\+IM $>$\+::Flow\+\_\+index\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+power law index n 
+
+
+
+Definition at line 169 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+Referenced by oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::dviscosity\+\_\+dinvariant(), and oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+
+\mbox{\Hypertarget{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_aaaf787351aa31ee08246b7c4edcca066}\label{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_aaaf787351aa31ee08246b7c4edcca066}} 
+\index{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}!Regularisation\_parameter\_pt@{Regularisation\_parameter\_pt}}
+\index{Regularisation\_parameter\_pt@{Regularisation\_parameter\_pt}!oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Regularisation\_parameter\_pt}{Regularisation\_parameter\_pt}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ D\+IM $>$\+::Regularisation\+\_\+parameter\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+regularisation parameter e $<$$<$ 1 
+
+
+
+Definition at line 172 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+Referenced by oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::dviscosity\+\_\+dinvariant(), and oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+
+\mbox{\Hypertarget{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_a34fcbd9d7a01ec046749e3b2ca4ef0b8}\label{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation_a34fcbd9d7a01ec046749e3b2ca4ef0b8}} 
+\index{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}!Yield\_stress\_pt@{Yield\_stress\_pt}}
+\index{Yield\_stress\_pt@{Yield\_stress\_pt}!oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Yield\_stress\_pt}{Yield\_stress\_pt}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyBerEngRegConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ D\+IM $>$\+::Yield\+\_\+stress\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+yield stress tau\+\_\+y 
+
+
+
+Definition at line 166 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+
+Referenced by oomph\+::\+Herschel\+Bulkley\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalised__newtonian__constitutive__models_8h}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: coding_conventions.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">coding_conventions.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNavierStokesEquations.html">NavierStokesEquations&lt; DIM &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae2354be5cf2b6fd97ded218f0282e485"><td class="memItemLeft" align="right" valign="top">Node *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#ae2354be5cf2b6fd97ded218f0282e485">boundary_node_pt</a> ()</td></tr>
+<tr class="memdesc:ae2354be5cf2b6fd97ded218f0282e485"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to boundary node.  <a href="coding__conventions_8txt.html#ae2354be5cf2b6fd97ded218f0282e485">More...</a><br /></td></tr>
+<tr class="separator:ae2354be5cf2b6fd97ded218f0282e485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad228c9a01fb88e2b9ade79d5db1723c9"><td class="memItemLeft" align="right" valign="top">endcode b as shown in the previous examples subsection numbering Access functions to containers Many classes have <a class="el" href="coding__conventions_8txt.html#a6cf26f9901e81810dd320ff3daf86a39">member</a> functions that provide access to data in private&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#ad228c9a01fb88e2b9ade79d5db1723c9">containers</a> (e.g. vectors)</td></tr>
+<tr class="separator:ad228c9a01fb88e2b9ade79d5db1723c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae11c23d019f158839e6002c47913bb4a"><td class="memItemLeft" align="right" valign="top">they are usually accompanied by a <a class="el" href="coding__conventions_8txt.html#a6cf26f9901e81810dd320ff3daf86a39">member</a> function that returns the number of entries in that container Naming i e code FiniteElement *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#ae11c23d019f158839e6002c47913bb4a">element_pt</a> (const unsigned &amp;e)</td></tr>
+<tr class="memdesc:ae11c23d019f158839e6002c47913bb4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to e-th element.  <a href="coding__conventions_8txt.html#ae11c23d019f158839e6002c47913bb4a">More...</a><br /></td></tr>
+<tr class="separator:ae11c23d019f158839e6002c47913bb4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab59e60957ba7a4692ded05fe49a956d6"><td class="memItemLeft" align="right" valign="top">endcode rather than c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#ab59e60957ba7a4692ded05fe49a956d6">elements_pt</a> (...) - Use a prefix `\c n' for the access function for the number of entries in the container</td></tr>
+<tr class="separator:ab59e60957ba7a4692ded05fe49a956d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b8627ed669d599b2fcbf99832ef334f"><td class="memItemLeft" align="right" valign="top">endcode rather than c i e code unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a7b8627ed669d599b2fcbf99832ef334f">nelement</a> ()</td></tr>
+<tr class="memdesc:a7b8627ed669d599b2fcbf99832ef334f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of elements.  <a href="coding__conventions_8txt.html#a7b8627ed669d599b2fcbf99832ef334f">More...</a><br /></td></tr>
+<tr class="separator:a7b8627ed669d599b2fcbf99832ef334f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a43c36c47c8b8c113fd79b2344859f"><td class="memItemLeft" align="right" valign="top">endcode subsection verbose Use descriptive function variable names Make sure you choose descriptive names for functions and even if the names become long&lt; HR &gt;&lt; HR &gt; section layout Layout etc subsection include_files Position of include statements Place include statements at the beginning of each file subsection layout_blocks Layout of blocks Braces on separate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a09a43c36c47c8b8c113fd79b2344859f">lines</a> (unless the content is extremely short) \code for(unsigned i=0</td></tr>
+<tr class="separator:a09a43c36c47c8b8c113fd79b2344859f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a14576eb3354ebb3317d2e12c20b38c33"><td class="memItemLeft" align="right" valign="top">mainpage Coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> and C style This document provides an overview of the general coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> that are used throughout c oomph lib Knowledge of these <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt; HR &gt;&lt; HR &gt; section naming Naming <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> subsection filenames File names All C source files end with the standard extensions *h and *<a class="el" href="coding__conventions_8txt.html#af310393eab9babd7f72a54469dd6cfd3">cc</a> c *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a14576eb3354ebb3317d2e12c20b38c33">h</a></td></tr>
+<tr class="separator:a14576eb3354ebb3317d2e12c20b38c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af310393eab9babd7f72a54469dd6cfd3"><td class="memItemLeft" align="right" valign="top">mainpage Coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> and C style This document provides an overview of the general coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> that are used throughout c oomph lib Knowledge of these <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt; HR &gt;&lt; HR &gt; section naming Naming <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> subsection filenames File names All C source files end with the standard extensions *<a class="el" href="coding__conventions_8txt.html#a14576eb3354ebb3317d2e12c20b38c33">h</a> and *cc c and c *template&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#af310393eab9babd7f72a54469dd6cfd3">cc</a></td></tr>
+<tr class="separator:af310393eab9babd7f72a54469dd6cfd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41e6f2201ebe48314e9c49eae86cd350"><td class="memItemLeft" align="right" valign="top">mainpage Coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> and C style This document provides an overview of the general coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> that are used throughout c oomph lib Knowledge of these <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt; HR &gt;&lt; HR &gt; section naming Naming <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> subsection filenames File names All C source files end with the standard extensions *<a class="el" href="coding__conventions_8txt.html#a14576eb3354ebb3317d2e12c20b38c33">h</a> and *<a class="el" href="coding__conventions_8txt.html#af310393eab9babd7f72a54469dd6cfd3">cc</a> c and c *template most specific c Mesh classes are templated by the element type and the mesh writer can obviously not predict which element types his her specific mesh is going to be used with subsection <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> General <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> General <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> are all lowercase Variables that contain multiple words contain underscores to separate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a41e6f2201ebe48314e9c49eae86cd350">them</a></td></tr>
+<tr class="separator:a41e6f2201ebe48314e9c49eae86cd350"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdf54a843c828adc77dc76b43eed4a00"><td class="memItemLeft" align="right" valign="top">mainpage Coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> and C style This document provides an overview of the general coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> that are used throughout c oomph lib Knowledge of these <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt; HR &gt;&lt; HR &gt; section naming Naming <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> subsection filenames File names All C source files end with the standard extensions *<a class="el" href="coding__conventions_8txt.html#a14576eb3354ebb3317d2e12c20b38c33">h</a> and *<a class="el" href="coding__conventions_8txt.html#af310393eab9babd7f72a54469dd6cfd3">cc</a> c and c *template most specific c Mesh classes are templated by the element type and the mesh writer can obviously not predict which element types his her specific mesh is going to be used with subsection <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> General <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> General <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> are all lowercase Variables that contain multiple words contain underscores to separate e g code FiniteElement *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#abdf54a843c828adc77dc76b43eed4a00">surface_element_pt</a></td></tr>
+<tr class="separator:abdf54a843c828adc77dc76b43eed4a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8806f294af84eeaa921bb47d161bb5d4"><td class="memItemLeft" align="right" valign="top">endcode subsection classes Classes Classes start with capital&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a8806f294af84eeaa921bb47d161bb5d4">letter</a></td></tr>
+<tr class="separator:a8806f294af84eeaa921bb47d161bb5d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cf26f9901e81810dd320ff3daf86a39"><td class="memItemLeft" align="right" valign="top">endcode Here are two public access functions to the private data&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a6cf26f9901e81810dd320ff3daf86a39">member</a></td></tr>
+<tr class="memdesc:a6cf26f9901e81810dd320ff3daf86a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to boundary node.  <a href="coding__conventions_8txt.html#a6cf26f9901e81810dd320ff3daf86a39">More...</a><br /></td></tr>
+<tr class="separator:a6cf26f9901e81810dd320ff3daf86a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c93071f13e5c708727716fb4cd94407"><td class="memItemLeft" align="right" valign="top">endcode b&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a6c93071f13e5c708727716fb4cd94407">Note</a></td></tr>
+<tr class="separator:a6c93071f13e5c708727716fb4cd94407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dec1d19e6158715fa967dd8992f4d4e"><td class="memItemLeft" align="right" valign="top">they are usually accompanied by a <a class="el" href="coding__conventions_8txt.html#a6cf26f9901e81810dd320ff3daf86a39">member</a> function that returns the number of entries in that container Naming&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a></td></tr>
+<tr class="separator:a1dec1d19e6158715fa967dd8992f4d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a953f6ff2cfcf7f211e295ea3fbdc9f92"><td class="memItemLeft" align="right" valign="top">endcode b&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a953f6ff2cfcf7f211e295ea3fbdc9f92">Notes</a></td></tr>
+<tr class="separator:a953f6ff2cfcf7f211e295ea3fbdc9f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a553f14ecf5ad10c648433bd27e72221f"><td class="memItemLeft" align="right" valign="top">endcode subsection verbose Use descriptive function variable names Make sure you choose descriptive names for functions and&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a></td></tr>
+<tr class="separator:a553f14ecf5ad10c648433bd27e72221f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ae2354be5cf2b6fd97ded218f0282e485"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2354be5cf2b6fd97ded218f0282e485">&#9670;&nbsp;</a></span>boundary_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node*&amp; boundary_node_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Access to boundary node. </p>
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00076">76</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad228c9a01fb88e2b9ade79d5db1723c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad228c9a01fb88e2b9ade79d5db1723c9">&#9670;&nbsp;</a></span>containers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode b as shown in the previous examples subsection numbering Access functions to containers Many classes have <a class="el" href="coding__conventions_8txt.html#a6cf26f9901e81810dd320ff3daf86a39">member</a> functions that provide access to data in private containers </td>
+          <td>(</td>
+          <td class="paramtype">e.g.&#160;</td>
+          <td class="paramname"><em>vectors</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae11c23d019f158839e6002c47913bb4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae11c23d019f158839e6002c47913bb4a">&#9670;&nbsp;</a></span>element_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">they are usually accompanied by a <a class="el" href="coding__conventions_8txt.html#a6cf26f9901e81810dd320ff3daf86a39">member</a> function that returns the number of entries in that container Naming i e code FiniteElement* element_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return pointer to e-th element. </p>
+
+</div>
+</div>
+<a id="ab59e60957ba7a4692ded05fe49a956d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab59e60957ba7a4692ded05fe49a956d6">&#9670;&nbsp;</a></span>elements_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode rather than c elements_pt </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a09a43c36c47c8b8c113fd79b2344859f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09a43c36c47c8b8c113fd79b2344859f">&#9670;&nbsp;</a></span>lines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode subsection verbose Use descriptive function variable names Make sure you choose descriptive names for functions and even if the names become long&lt;HR&gt;&lt;HR&gt; section layout Layout etc subsection include_files Position of include statements Place include statements at the beginning of each file subsection layout_blocks Layout of blocks Braces on separate lines </td>
+          <td>(</td>
+          <td class="paramtype">unless the content is extremely short&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b8627ed669d599b2fcbf99832ef334f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b8627ed669d599b2fcbf99832ef334f">&#9670;&nbsp;</a></span>nelement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode rather than c i e code unsigned nelement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Total number of elements. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="af310393eab9babd7f72a54469dd6cfd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af310393eab9babd7f72a54469dd6cfd3">&#9670;&nbsp;</a></span>cc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> and C style This document provides an overview of the general coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> that are used throughout c oomph lib Knowledge of these <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt;HR&gt;&lt;HR&gt; section naming Naming <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> subsection filenames File names All C source files end with the standard extensions* <a class="el" href="coding__conventions_8txt.html#a14576eb3354ebb3317d2e12c20b38c33">h</a> and* cc c and c* template cc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00026">26</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1dec1d19e6158715fa967dd8992f4d4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dec1d19e6158715fa967dd8992f4d4e">&#9670;&nbsp;</a></span>conventions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">they are usually accompanied by a <a class="el" href="coding__conventions_8txt.html#a6cf26f9901e81810dd320ff3daf86a39">member</a> function that returns the number of entries in that container Naming conventions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00096">96</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a14576eb3354ebb3317d2e12c20b38c33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14576eb3354ebb3317d2e12c20b38c33">&#9670;&nbsp;</a></span>h</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> and C style This document provides an overview of the general coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> that are used throughout c oomph lib Knowledge of these <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt;HR&gt;&lt;HR&gt; section naming Naming <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> subsection filenames File names All C source files end with the standard extensions* h and* <a class="el" href="coding__conventions_8txt.html#af310393eab9babd7f72a54469dd6cfd3">cc</a> c* h</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00026">26</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8806f294af84eeaa921bb47d161bb5d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8806f294af84eeaa921bb47d161bb5d4">&#9670;&nbsp;</a></span>letter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode subsection classes Classes Classes start with capital letter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00048">48</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6cf26f9901e81810dd320ff3daf86a39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cf26f9901e81810dd320ff3daf86a39">&#9670;&nbsp;</a></span>member</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode Here are two public access functions to the private data member</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to boundary node. </p>
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00049">49</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6c93071f13e5c708727716fb4cd94407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c93071f13e5c708727716fb4cd94407">&#9670;&nbsp;</a></span>Note</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode b Note</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00087">87</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a953f6ff2cfcf7f211e295ea3fbdc9f92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a953f6ff2cfcf7f211e295ea3fbdc9f92">&#9670;&nbsp;</a></span>Notes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode b Notes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00113">113</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="abdf54a843c828adc77dc76b43eed4a00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdf54a843c828adc77dc76b43eed4a00">&#9670;&nbsp;</a></span>surface_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> and C style This document provides an overview of the general coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> that are used throughout c oomph lib Knowledge of these <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt;HR&gt;&lt;HR&gt; section naming Naming <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> subsection filenames File names All C source files end with the standard extensions* <a class="el" href="coding__conventions_8txt.html#a14576eb3354ebb3317d2e12c20b38c33">h</a> and* <a class="el" href="coding__conventions_8txt.html#af310393eab9babd7f72a54469dd6cfd3">cc</a> c and c* template most specific c Mesh classes are templated by the element type and the mesh writer can obviously not predict which element types his her specific mesh is going to be used with subsection <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> General <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> General <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> are all lowercase Variables that contain multiple words contain underscores to separate e g code FiniteElement* surface_element_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00043">43</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a41e6f2201ebe48314e9c49eae86cd350"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41e6f2201ebe48314e9c49eae86cd350">&#9670;&nbsp;</a></span>them</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> and C style This document provides an overview of the general coding <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> that are used throughout c oomph lib Knowledge of these <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt;HR&gt;&lt;HR&gt; section naming Naming <a class="el" href="coding__conventions_8txt.html#a1dec1d19e6158715fa967dd8992f4d4e">conventions</a> subsection filenames File names All C source files end with the standard extensions* <a class="el" href="coding__conventions_8txt.html#a14576eb3354ebb3317d2e12c20b38c33">h</a> and* <a class="el" href="coding__conventions_8txt.html#af310393eab9babd7f72a54469dd6cfd3">cc</a> c and c* template most specific c Mesh classes are templated by the element type and the mesh writer can obviously not predict which element types his her specific mesh is going to be used with subsection <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> General <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> General <a class="el" href="coding__conventions_8txt.html#a553f14ecf5ad10c648433bd27e72221f">variables</a> are all lowercase Variables that contain multiple words contain underscores to separate them</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00042">42</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a553f14ecf5ad10c648433bd27e72221f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a553f14ecf5ad10c648433bd27e72221f">&#9670;&nbsp;</a></span>variables</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode subsection verbose Use descriptive function variable names Make sure you choose descriptive names for functions and variables</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="coding__conventions_8txt_source.html#l00128">128</a> of file <a class="el" href="coding__conventions_8txt_source.html">coding_conventions.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:52:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

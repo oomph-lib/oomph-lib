@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TetgenMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1TetgenMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::TetgenMesh&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Unstructured tet mesh based on output from Tetgen: <a href="http://wias-berlin.de/software/tetgen/">http://wias-berlin.de/software/tetgen/</a>.  
+ <a href="classoomph_1_1TetgenMesh.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::TetgenMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1TetgenMesh.png" usemap="#oomph::TetgenMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::TetgenMesh_3C_20ELEMENT_20_3E_map" name="oomph::TetgenMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1RefineableTetgenMesh.html" alt="oomph::RefineableTetgenMesh&lt; ELEMENT &gt;" shape="rect" coords="0,112,294,136"/>
+<area href="classoomph_1_1SolidTetgenMesh.html" alt="oomph::SolidTetgenMesh&lt; ELEMENT &gt;" shape="rect" coords="304,112,598,136"/>
+<area href="classoomph_1_1RefineableSolidTetgenMesh.html" alt="oomph::RefineableSolidTetgenMesh&lt; ELEMENT &gt;" shape="rect" coords="0,168,294,192"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2d2c7796e578f9fed1faf17569893531"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a2d2c7796e578f9fed1faf17569893531">TetgenMesh</a> ()</td></tr>
+<tr class="memdesc:a2d2c7796e578f9fed1faf17569893531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="classoomph_1_1TetgenMesh.html#a2d2c7796e578f9fed1faf17569893531">More...</a><br /></td></tr>
+<tr class="separator:a2d2c7796e578f9fed1faf17569893531"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10976b817c361f04da4ce996bd019c02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a10976b817c361f04da4ce996bd019c02">TetgenMesh</a> (const std::string &amp;node_file_name, const std::string &amp;element_file_name, const std::string &amp;face_file_name, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:a10976b817c361f04da4ce996bd019c02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with the input files.  <a href="classoomph_1_1TetgenMesh.html#a10976b817c361f04da4ce996bd019c02">More...</a><br /></td></tr>
+<tr class="separator:a10976b817c361f04da4ce996bd019c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace863f736d0dfa0a059b28959fced51d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ace863f736d0dfa0a059b28959fced51d">TetgenMesh</a> (tetgenio &amp;tetgen_data, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:ace863f736d0dfa0a059b28959fced51d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with tetgenio data structure.  <a href="classoomph_1_1TetgenMesh.html#ace863f736d0dfa0a059b28959fced51d">More...</a><br /></td></tr>
+<tr class="separator:ace863f736d0dfa0a059b28959fced51d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867b3f70bd0f5063901720d04f28e95e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a867b3f70bd0f5063901720d04f28e95e">TetgenMesh</a> (const std::string &amp;node_file_name, const std::string &amp;element_file_name, const std::string &amp;face_file_name, const bool &amp;split_corner_elements, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:a867b3f70bd0f5063901720d04f28e95e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with the input files. Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
+  <a href="classoomph_1_1TetgenMesh.html#a867b3f70bd0f5063901720d04f28e95e">More...</a><br /></td></tr>
+<tr class="separator:a867b3f70bd0f5063901720d04f28e95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa783641ea515a942941425c468df01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a0fa783641ea515a942941425c468df01">TetgenMesh</a> (tetgenio &amp;tetgen_data, const bool &amp;split_corner_elements, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false)</td></tr>
+<tr class="memdesc:a0fa783641ea515a942941425c468df01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with tetgen data structure Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
+  <a href="classoomph_1_1TetgenMesh.html#a0fa783641ea515a942941425c468df01">More...</a><br /></td></tr>
+<tr class="separator:a0fa783641ea515a942941425c468df01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eb01196bfadb426bb926f34f50261d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a5eb01196bfadb426bb926f34f50261d6">TetgenMesh</a> (TetMeshFacetedClosedSurface *const &amp;outer_boundary_pt, Vector&lt; TetMeshFacetedSurface * &gt; &amp;internal_surface_pt, const double &amp;element_volume, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper, const bool &amp;use_attributes=false, const bool &amp;split_corner_elements=false)</td></tr>
+<tr class="memdesc:a5eb01196bfadb426bb926f34f50261d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh, based on a TetgenMeshFactedClosedSurface that specifies the outer boundary of the domain and any number of internal boundaries, specified by TetMeshFacetedSurfaces. Also specify target size for uniform element size.  <a href="classoomph_1_1TetgenMesh.html#a5eb01196bfadb426bb926f34f50261d6">More...</a><br /></td></tr>
+<tr class="separator:a5eb01196bfadb426bb926f34f50261d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab730bd5c3d87754b679c284fd37733ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ab730bd5c3d87754b679c284fd37733ff">build_tetgenio</a> (TetMeshFacetedSurface *const &amp;outer_boundary_pt, Vector&lt; TetMeshFacetedSurface * &gt; &amp;internal_surface_pt, tetgenio &amp;tetgen_io)</td></tr>
+<tr class="memdesc:ab730bd5c3d87754b679c284fd37733ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build tetgenio object from the TetMeshFacetedSurfaces.  <a href="classoomph_1_1TetgenMesh.html#ab730bd5c3d87754b679c284fd37733ff">More...</a><br /></td></tr>
+<tr class="separator:ab730bd5c3d87754b679c284fd37733ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a83c64b6481463161f6eb87f347ee9e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a9a83c64b6481463161f6eb87f347ee9e">~TetgenMesh</a> ()</td></tr>
+<tr class="memdesc:a9a83c64b6481463161f6eb87f347ee9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <a href="classoomph_1_1TetgenMesh.html#a9a83c64b6481463161f6eb87f347ee9e">More...</a><br /></td></tr>
+<tr class="separator:a9a83c64b6481463161f6eb87f347ee9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c0441ea7404e7ea404979955ffbb5dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a9c0441ea7404e7ea404979955ffbb5dd">set_mesh_level_time_stepper</a> (TimeStepper *const &amp;time_stepper_pt, const bool &amp;preserve_existing_data)</td></tr>
+<tr class="memdesc:a9c0441ea7404e7ea404979955ffbb5dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload set_mesh_level_time_stepper so that the stored time stepper now corresponds to the new timestepper.  <a href="classoomph_1_1TetgenMesh.html#a9c0441ea7404e7ea404979955ffbb5dd">More...</a><br /></td></tr>
+<tr class="separator:a9c0441ea7404e7ea404979955ffbb5dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab19209f141e65511a52f195d89d6ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#aeab19209f141e65511a52f195d89d6ac">tetgenio_exists</a> () const</td></tr>
+<tr class="memdesc:aeab19209f141e65511a52f195d89d6ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolen defining whether tetgenio object has been built or not.  <a href="classoomph_1_1TetgenMesh.html#aeab19209f141e65511a52f195d89d6ac">More...</a><br /></td></tr>
+<tr class="separator:aeab19209f141e65511a52f195d89d6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47071bb8a8c0df965a5e013f0a8fb1ba"><td class="memItemLeft" align="right" valign="top">tetgenio *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a47071bb8a8c0df965a5e013f0a8fb1ba">tetgenio_pt</a> ()</td></tr>
+<tr class="memdesc:a47071bb8a8c0df965a5e013f0a8fb1ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the triangulateio representation of the mesh.  <a href="classoomph_1_1TetgenMesh.html#a47071bb8a8c0df965a5e013f0a8fb1ba">More...</a><br /></td></tr>
+<tr class="separator:a47071bb8a8c0df965a5e013f0a8fb1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8758320eb646d20b578414c35145f0d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a8758320eb646d20b578414c35145f0d7">set_deep_copy_tetgenio_pt</a> (tetgenio *const &amp;<a class="el" href="classoomph_1_1TetgenMesh.html#a47071bb8a8c0df965a5e013f0a8fb1ba">tetgenio_pt</a>)</td></tr>
+<tr class="memdesc:a8758320eb646d20b578414c35145f0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the tetgen pointer by a deep copy.  <a href="classoomph_1_1TetgenMesh.html#a8758320eb646d20b578414c35145f0d7">More...</a><br /></td></tr>
+<tr class="separator:a8758320eb646d20b578414c35145f0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93e764a63a21a93d4a2548058eb1a7c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a93e764a63a21a93d4a2548058eb1a7c4">deep_copy_of_tetgenio</a> (tetgenio *const &amp;input_pt, tetgenio *&amp;output_pt)</td></tr>
+<tr class="separator:a93e764a63a21a93d4a2548058eb1a7c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a3b0d214cb14243f7ecc2c82e6641930b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a3b0d214cb14243f7ecc2c82e6641930b">build_from_scaffold</a> (TimeStepper *time_stepper_pt, const bool &amp;use_attributes)</td></tr>
+<tr class="memdesc:a3b0d214cb14243f7ecc2c82e6641930b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh from scaffold.  <a href="classoomph_1_1TetgenMesh.html#a3b0d214cb14243f7ecc2c82e6641930b">More...</a><br /></td></tr>
+<tr class="separator:a3b0d214cb14243f7ecc2c82e6641930b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a685e57d2adeb2a378ffc7e244e38c910"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a685e57d2adeb2a378ffc7e244e38c910">setup_reverse_lookup_schemes_for_faceted_surface</a> (TetMeshFacetedSurface *const &amp;faceted_surface_pt)</td></tr>
+<tr class="memdesc:a685e57d2adeb2a378ffc7e244e38c910"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to setup the reverse look-up schemes.  <a href="classoomph_1_1TetgenMesh.html#a685e57d2adeb2a378ffc7e244e38c910">More...</a><br /></td></tr>
+<tr class="separator:a685e57d2adeb2a378ffc7e244e38c910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ac11e90fcf927bbf8317800db7723bad2"><td class="memItemLeft" align="right" valign="top">TetgenScaffoldMesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ac11e90fcf927bbf8317800db7723bad2">Tmp_mesh_pt</a></td></tr>
+<tr class="memdesc:ac11e90fcf927bbf8317800db7723bad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary scaffold mesh.  <a href="classoomph_1_1TetgenMesh.html#ac11e90fcf927bbf8317800db7723bad2">More...</a><br /></td></tr>
+<tr class="separator:ac11e90fcf927bbf8317800db7723bad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9aa31216620790d084d133b8781be37"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ab9aa31216620790d084d133b8781be37">Tetgenio_exists</a></td></tr>
+<tr class="memdesc:ab9aa31216620790d084d133b8781be37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether a tetgenio representation of the mesh exists.  <a href="classoomph_1_1TetgenMesh.html#ab9aa31216620790d084d133b8781be37">More...</a><br /></td></tr>
+<tr class="separator:ab9aa31216620790d084d133b8781be37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508672e33aa773da58c834a526cb5c59"><td class="memItemLeft" align="right" valign="top">tetgenio *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a508672e33aa773da58c834a526cb5c59">Tetgenio_pt</a></td></tr>
+<tr class="memdesc:a508672e33aa773da58c834a526cb5c59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tetgen representation of mesh.  <a href="classoomph_1_1TetgenMesh.html#a508672e33aa773da58c834a526cb5c59">More...</a><br /></td></tr>
+<tr class="separator:a508672e33aa773da58c834a526cb5c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94c4ac3940ecfdd87679167d300ce75d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a94c4ac3940ecfdd87679167d300ce75d">Use_attributes</a></td></tr>
+<tr class="memdesc:a94c4ac3940ecfdd87679167d300ce75d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to indicate whether to use attributes or not (required for multidomain meshes)  <a href="classoomph_1_1TetgenMesh.html#a94c4ac3940ecfdd87679167d300ce75d">More...</a><br /></td></tr>
+<tr class="separator:a94c4ac3940ecfdd87679167d300ce75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::TetgenMesh&lt; ELEMENT &gt;</h3>
+
+<p>Unstructured tet mesh based on output from Tetgen: <a href="http://wias-berlin.de/software/tetgen/">http://wias-berlin.de/software/tetgen/</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00052">52</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2d2c7796e578f9fed1faf17569893531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d2c7796e578f9fed1faf17569893531">&#9670;&nbsp;</a></span>TetgenMesh() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00058">58</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a10976b817c361f04da4ce996bd019c02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10976b817c361f04da4ce996bd019c02">&#9670;&nbsp;</a></span>TetgenMesh() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>node_file_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>element_file_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>face_file_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with the input files. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00065">65</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+
+</div>
+</div>
+<a id="ace863f736d0dfa0a059b28959fced51d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace863f736d0dfa0a059b28959fced51d">&#9670;&nbsp;</a></span>TetgenMesh() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">tetgenio &amp;&#160;</td>
+          <td class="paramname"><em>tetgen_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with tetgenio data structure. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00105">105</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+
+</div>
+</div>
+<a id="a867b3f70bd0f5063901720d04f28e95e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a867b3f70bd0f5063901720d04f28e95e">&#9670;&nbsp;</a></span>TetgenMesh() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>node_file_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>element_file_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>face_file_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>split_corner_elements</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with the input files. Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00154">154</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+
+</div>
+</div>
+<a id="a0fa783641ea515a942941425c468df01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fa783641ea515a942941425c468df01">&#9670;&nbsp;</a></span>TetgenMesh() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">tetgenio &amp;&#160;</td>
+          <td class="paramname"><em>tetgen_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>split_corner_elements</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with tetgen data structure Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00211">211</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+
+</div>
+</div>
+<a id="a5eb01196bfadb426bb926f34f50261d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eb01196bfadb426bb926f34f50261d6">&#9670;&nbsp;</a></span>TetgenMesh() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">TetMeshFacetedClosedSurface *const &amp;&#160;</td>
+          <td class="paramname"><em>outer_boundary_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; TetMeshFacetedSurface * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>internal_surface_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>element_volume</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>split_corner_elements</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build mesh, based on a TetgenMeshFactedClosedSurface that specifies the outer boundary of the domain and any number of internal boundaries, specified by TetMeshFacetedSurfaces. Also specify target size for uniform element size. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00261">261</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00388">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>, <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00833">oomph::TetgenMesh&lt; ELEMENT &gt;::setup_reverse_lookup_schemes_for_faceted_surface()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">oomph::TetgenMesh&lt; ELEMENT &gt;::Use_attributes</a>.</p>
+
+</div>
+</div>
+<a id="a9a83c64b6481463161f6eb87f347ee9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a83c64b6481463161f6eb87f347ee9e">&#9670;&nbsp;</a></span>~TetgenMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::~<a class="el" href="classoomph_1_1TetgenMesh.html">TetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00628">628</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3b0d214cb14243f7ecc2c82e6641930b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b0d214cb14243f7ecc2c82e6641930b">&#9670;&nbsp;</a></span>build_from_scaffold()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::build_from_scaffold </td>
+          <td>(</td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build mesh from scaffold. </p>
+<p>Build unstructured tet mesh based on output from scaffold. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00053">53</a> of file <a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00065">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+
+</div>
+</div>
+<a id="ab730bd5c3d87754b679c284fd37733ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab730bd5c3d87754b679c284fd37733ff">&#9670;&nbsp;</a></span>build_tetgenio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::build_tetgenio </td>
+          <td>(</td>
+          <td class="paramtype">TetMeshFacetedSurface *const &amp;&#160;</td>
+          <td class="paramname"><em>outer_boundary_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; TetMeshFacetedSurface * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>internal_surface_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">tetgenio &amp;&#160;</td>
+          <td class="paramname"><em>tetgen_io</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build tetgenio object from the TetMeshFacetedSurfaces. </p>
+<p>ALH: This may not be needed</p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00388">388</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00261">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a93e764a63a21a93d4a2548058eb1a7c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93e764a63a21a93d4a2548058eb1a7c4">&#9670;&nbsp;</a></span>deep_copy_of_tetgenio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::deep_copy_of_tetgenio </td>
+          <td>(</td>
+          <td class="paramtype">tetgenio *const &amp;&#160;</td>
+          <td class="paramname"><em>input_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">tetgenio *&amp;&#160;</td>
+          <td class="paramname"><em>output_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Transfer tetgenio data from the input to the output The output is assumed to have been constructed and "empty" </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00871">871</a> of file <a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00653">oomph::TetgenMesh&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a8758320eb646d20b578414c35145f0d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8758320eb646d20b578414c35145f0d7">&#9670;&nbsp;</a></span>set_deep_copy_tetgenio_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt </td>
+          <td>(</td>
+          <td class="paramtype">tetgenio *const &amp;&#160;</td>
+          <td class="paramname"><em>tetgenio_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the tetgen pointer by a deep copy. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00653">653</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00871">oomph::TetgenMesh&lt; ELEMENT &gt;::deep_copy_of_tetgenio()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>.</p>
+
+</div>
+</div>
+<a id="a9c0441ea7404e7ea404979955ffbb5dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c0441ea7404e7ea404979955ffbb5dd">&#9670;&nbsp;</a></span>set_mesh_level_time_stepper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::set_mesh_level_time_stepper </td>
+          <td>(</td>
+          <td class="paramtype">TimeStepper *const &amp;&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>preserve_existing_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload set_mesh_level_time_stepper so that the stored time stepper now corresponds to the new timestepper. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00639">639</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a685e57d2adeb2a378ffc7e244e38c910"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a685e57d2adeb2a378ffc7e244e38c910">&#9670;&nbsp;</a></span>setup_reverse_lookup_schemes_for_faceted_surface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::setup_reverse_lookup_schemes_for_faceted_surface </td>
+          <td>(</td>
+          <td class="paramtype">TetMeshFacetedSurface *const &amp;&#160;</td>
+          <td class="paramname"><em>faceted_surface_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to setup the reverse look-up schemes. </p>
+<p>Helper function to set up the reverse look up scheme for facets. This is used to set up boundary coordinates. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00833">833</a> of file <a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00261">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aeab19209f141e65511a52f195d89d6ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeab19209f141e65511a52f195d89d6ac">&#9670;&nbsp;</a></span>tetgenio_exists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::tetgenio_exists </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolen defining whether tetgenio object has been built or not. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00646">646</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>.</p>
+
+</div>
+</div>
+<a id="a47071bb8a8c0df965a5e013f0a8fb1ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47071bb8a8c0df965a5e013f0a8fb1ba">&#9670;&nbsp;</a></span>tetgenio_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tetgenio* &amp; <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::tetgenio_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to the triangulateio representation of the mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00650">650</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00444">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::adapt()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab9aa31216620790d084d133b8781be37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9aa31216620790d084d133b8781be37">&#9670;&nbsp;</a></span>Tetgenio_exists</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::Tetgenio_exists</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean to indicate whether a tetgenio representation of the mesh exists. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00686">686</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00653">oomph::TetgenMesh&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00646">oomph::TetgenMesh&lt; ELEMENT &gt;::tetgenio_exists()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00105">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00628">oomph::TetgenMesh&lt; ELEMENT &gt;::~TetgenMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a508672e33aa773da58c834a526cb5c59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a508672e33aa773da58c834a526cb5c59">&#9670;&nbsp;</a></span>Tetgenio_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tetgenio* <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::Tetgenio_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tetgen representation of mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00689">689</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00653">oomph::TetgenMesh&lt; ELEMENT &gt;::set_deep_copy_tetgenio_pt()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00650">oomph::TetgenMesh&lt; ELEMENT &gt;::tetgenio_pt()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00105">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00628">oomph::TetgenMesh&lt; ELEMENT &gt;::~TetgenMesh()</a>.</p>
+
+</div>
+</div>
+<a id="ac11e90fcf927bbf8317800db7723bad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac11e90fcf927bbf8317800db7723bad2">&#9670;&nbsp;</a></span>Tmp_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TetgenScaffoldMesh* <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::Tmp_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Temporary scaffold mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00682">682</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8template_8h_source.html#l00085">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="tetgen__mesh_8template_8h_source.html#l00065">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a94c4ac3940ecfdd87679167d300ce75d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94c4ac3940ecfdd87679167d300ce75d">&#9670;&nbsp;</a></span>Use_attributes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a>&lt; ELEMENT &gt;::Use_attributes</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) </p>
+
+<p class="definition">Definition at line <a class="el" href="tetgen__mesh_8template_8h_source.html#l00693">693</a> of file <a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00065">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="tetgen__mesh_8template_8h_source.html">tetgen_mesh.template.h</a></li>
+<li><a class="el" href="tetgen__mesh_8template_8cc_source.html">tetgen_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:53:57
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

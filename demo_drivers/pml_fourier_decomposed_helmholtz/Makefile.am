@@ -1,0 +1,2 @@
+SUBDIRS = \
+oscillating_sphere

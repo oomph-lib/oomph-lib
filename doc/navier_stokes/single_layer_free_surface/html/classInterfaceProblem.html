@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classInterfaceProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classInterfaceProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a83023535d663a2a6558959f36bf6e1e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a83023535d663a2a6558959f36bf6e1e7">InterfaceProblem</a> (const unsigned &amp;n_x, const unsigned &amp;n_y, const double &amp;l_x, const double &amp;h)</td></tr>
+<tr class="memdesc:a83023535d663a2a6558959f36bf6e1e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for single fluid free surface problem.  <a href="classInterfaceProblem.html#a83023535d663a2a6558959f36bf6e1e7">More...</a><br /></td></tr>
+<tr class="separator:a83023535d663a2a6558959f36bf6e1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90c191f8046069099b199743e7ce7111"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a90c191f8046069099b199743e7ce7111">~InterfaceProblem</a> ()</td></tr>
+<tr class="memdesc:a90c191f8046069099b199743e7ce7111"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classInterfaceProblem.html#a90c191f8046069099b199743e7ce7111">More...</a><br /></td></tr>
+<tr class="separator:a90c191f8046069099b199743e7ce7111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d3af8378c4f0a6e38636be958c300d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">set_initial_condition</a> ()</td></tr>
+<tr class="memdesc:a0d3af8378c4f0a6e38636be958c300d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set initial conditions.  <a href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">More...</a><br /></td></tr>
+<tr class="separator:a0d3af8378c4f0a6e38636be958c300d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">set_boundary_conditions</a> ()</td></tr>
+<tr class="memdesc:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set boundary conditions.  <a href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">More...</a><br /></td></tr>
+<tr class="separator:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49714e35e94f7d2af0b6ddd22b851f52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a49714e35e94f7d2af0b6ddd22b851f52">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a49714e35e94f7d2af0b6ddd22b851f52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Document the solution.  <a href="classInterfaceProblem.html#a49714e35e94f7d2af0b6ddd22b851f52">More...</a><br /></td></tr>
+<tr class="separator:a49714e35e94f7d2af0b6ddd22b851f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf1f4e43d10939e4323e0e315b711085"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">unsteady_run</a> (const double &amp;t_max, const double &amp;dt)</td></tr>
+<tr class="memdesc:adf1f4e43d10939e4323e0e315b711085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do unsteady run up to maximum time t_max with given timestep dt.  <a href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">More...</a><br /></td></tr>
+<tr class="separator:adf1f4e43d10939e4323e0e315b711085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83023535d663a2a6558959f36bf6e1e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a83023535d663a2a6558959f36bf6e1e7">InterfaceProblem</a> (const unsigned &amp;n_x, const unsigned &amp;n_y, const double &amp;l_x, const double &amp;h)</td></tr>
+<tr class="separator:a83023535d663a2a6558959f36bf6e1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90c191f8046069099b199743e7ce7111"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a90c191f8046069099b199743e7ce7111">~InterfaceProblem</a> ()</td></tr>
+<tr class="memdesc:a90c191f8046069099b199743e7ce7111"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classInterfaceProblem.html#a90c191f8046069099b199743e7ce7111">More...</a><br /></td></tr>
+<tr class="separator:a90c191f8046069099b199743e7ce7111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d3af8378c4f0a6e38636be958c300d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">set_initial_condition</a> ()</td></tr>
+<tr class="memdesc:a0d3af8378c4f0a6e38636be958c300d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set initial conditions.  <a href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">More...</a><br /></td></tr>
+<tr class="separator:a0d3af8378c4f0a6e38636be958c300d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">set_boundary_conditions</a> ()</td></tr>
+<tr class="memdesc:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set boundary conditions.  <a href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">More...</a><br /></td></tr>
+<tr class="separator:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49714e35e94f7d2af0b6ddd22b851f52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a49714e35e94f7d2af0b6ddd22b851f52">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a49714e35e94f7d2af0b6ddd22b851f52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <a href="classInterfaceProblem.html#a49714e35e94f7d2af0b6ddd22b851f52">More...</a><br /></td></tr>
+<tr class="separator:a49714e35e94f7d2af0b6ddd22b851f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf1f4e43d10939e4323e0e315b711085"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">unsteady_run</a> (const double &amp;t_max, const double &amp;dt)</td></tr>
+<tr class="memdesc:adf1f4e43d10939e4323e0e315b711085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do unsteady run up to maximum time t_max with given timestep dt.  <a href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">More...</a><br /></td></tr>
+<tr class="separator:adf1f4e43d10939e4323e0e315b711085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a3e9ad7667f6f978a1e7c4c55e8e69e6d"><td class="memItemLeft" align="right" valign="top">SingleLayerSpineMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a3e9ad7667f6f978a1e7c4c55e8e69e6d">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:a3e9ad7667f6f978a1e7c4c55e8e69e6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The bulk fluid mesh, complete with spines and update information.  <a href="classInterfaceProblem.html#a3e9ad7667f6f978a1e7c4c55e8e69e6d">More...</a><br /></td></tr>
+<tr class="separator:a3e9ad7667f6f978a1e7c4c55e8e69e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ade63c8a74f666edf530460b989968b4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ade63c8a74f666edf530460b989968b4f">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ade63c8a74f666edf530460b989968b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">No actions required before solve step.  <a href="classInterfaceProblem.html#ade63c8a74f666edf530460b989968b4f">More...</a><br /></td></tr>
+<tr class="separator:ade63c8a74f666edf530460b989968b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#aedc2e58b3d2f5f8c898a21ba2d245cee">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">No actions required after solve step.  <a href="classInterfaceProblem.html#aedc2e58b3d2f5f8c898a21ba2d245cee">More...</a><br /></td></tr>
+<tr class="separator:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3ec75fcc8ccca97207dc7eca23b1cce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ae3ec75fcc8ccca97207dc7eca23b1cce">actions_before_implicit_timestep</a> ()</td></tr>
+<tr class="memdesc:ae3ec75fcc8ccca97207dc7eca23b1cce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before the timestep: For maximum stability, reset the current nodal positions to be the "stress-free" ones.  <a href="classInterfaceProblem.html#ae3ec75fcc8ccca97207dc7eca23b1cce">More...</a><br /></td></tr>
+<tr class="separator:ae3ec75fcc8ccca97207dc7eca23b1cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2319232b08d9df1ab473f6cbd40939d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a2319232b08d9df1ab473f6cbd40939d5">deform_free_surface</a> (const double &amp;epsilon, const unsigned &amp;n_periods)</td></tr>
+<tr class="memdesc:a2319232b08d9df1ab473f6cbd40939d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deform the mesh/free surface to a prescribed function.  <a href="classInterfaceProblem.html#a2319232b08d9df1ab473f6cbd40939d5">More...</a><br /></td></tr>
+<tr class="separator:a2319232b08d9df1ab473f6cbd40939d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4193771472aefce4cd67261491cc344"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ab4193771472aefce4cd67261491cc344">actions_before_newton_convergence_check</a> ()</td></tr>
+<tr class="memdesc:ab4193771472aefce4cd67261491cc344"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here.  <a href="classInterfaceProblem.html#ab4193771472aefce4cd67261491cc344">More...</a><br /></td></tr>
+<tr class="separator:ab4193771472aefce4cd67261491cc344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade63c8a74f666edf530460b989968b4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ade63c8a74f666edf530460b989968b4f">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ade63c8a74f666edf530460b989968b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">No actions required before solve step.  <a href="classInterfaceProblem.html#ade63c8a74f666edf530460b989968b4f">More...</a><br /></td></tr>
+<tr class="separator:ade63c8a74f666edf530460b989968b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#aedc2e58b3d2f5f8c898a21ba2d245cee">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update after solve can remain empty, because the update is performed automatically after every Newton step.  <a href="classInterfaceProblem.html#aedc2e58b3d2f5f8c898a21ba2d245cee">More...</a><br /></td></tr>
+<tr class="separator:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2319232b08d9df1ab473f6cbd40939d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a2319232b08d9df1ab473f6cbd40939d5">deform_free_surface</a> (const double &amp;epsilon, const unsigned &amp;n_periods)</td></tr>
+<tr class="memdesc:a2319232b08d9df1ab473f6cbd40939d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deform the mesh/free surface to a prescribed function.  <a href="classInterfaceProblem.html#a2319232b08d9df1ab473f6cbd40939d5">More...</a><br /></td></tr>
+<tr class="separator:a2319232b08d9df1ab473f6cbd40939d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:af580057bd9cc1d05a67401c9e5e178c2"><td class="memItemLeft" align="right" valign="top">ElasticRectangularQuadMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#af580057bd9cc1d05a67401c9e5e178c2">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:af580057bd9cc1d05a67401c9e5e178c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the (specific) "bulk" mesh.  <a href="classInterfaceProblem.html#af580057bd9cc1d05a67401c9e5e178c2">More...</a><br /></td></tr>
+<tr class="separator:af580057bd9cc1d05a67401c9e5e178c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a011c7b4f2307ff909f64dc158e8fc674"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a011c7b4f2307ff909f64dc158e8fc674">Surface_mesh_pt</a></td></tr>
+<tr class="memdesc:a011c7b4f2307ff909f64dc158e8fc674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "surface" mesh.  <a href="classInterfaceProblem.html#a011c7b4f2307ff909f64dc158e8fc674">More...</a><br /></td></tr>
+<tr class="separator:a011c7b4f2307ff909f64dc158e8fc674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bf645cbdbf7775ab6438be324caf3c3"><td class="memItemLeft" align="right" valign="top">ConstitutiveLaw *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a5bf645cbdbf7775ab6438be324caf3c3">Constitutive_law_pt</a></td></tr>
+<tr class="separator:a5bf645cbdbf7775ab6438be324caf3c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b5070b479a79546b983bd7027917e93"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a9b5070b479a79546b983bd7027917e93">Lx</a></td></tr>
+<tr class="memdesc:a9b5070b479a79546b983bd7027917e93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Width of domain.  <a href="classInterfaceProblem.html#a9b5070b479a79546b983bd7027917e93">More...</a><br /></td></tr>
+<tr class="separator:a9b5070b479a79546b983bd7027917e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45e3bf3b44bcbeefab21a3598bef6179"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a45e3bf3b44bcbeefab21a3598bef6179">Trace_file</a></td></tr>
+<tr class="memdesc:a45e3bf3b44bcbeefab21a3598bef6179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace file.  <a href="classInterfaceProblem.html#a45e3bf3b44bcbeefab21a3598bef6179">More...</a><br /></td></tr>
+<tr class="separator:a45e3bf3b44bcbeefab21a3598bef6179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT, class TIMESTEPPER&gt;<br />
+class InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;</h3>
+
+<p>Single fluid free surface problem in a rectangular domain which is periodic in the x direction </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00092">92</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a83023535d663a2a6558959f36bf6e1e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83023535d663a2a6558959f36bf6e1e7">&#9670;&nbsp;</a></span>InterfaceProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::<a class="el" href="classInterfaceProblem.html">InterfaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>l_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor for single fluid free surface problem. </p>
+<p>Constructor: Pass the number of elements and the lengths of the domain in the x and y directions (h is the height of the fluid layer i.e. the length of the domain in the y direction) </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00160">160</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__single__layer_8cc_source.html#l00137">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::Bulk_mesh_pt</a>, <a class="el" href="elastic__single__layer_8cc_source.html#l00071">Global_Physical_Variables::Ca</a>, <a class="el" href="elastic__single__layer_8cc_source.html#l00143">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::Constitutive_law_pt</a>, <a class="el" href="namespaceGlobal__Physical__Variables.html#a37a6f46efcb35b4bd12c73f19d741020">Global_Physical_Variables::G()</a>, <a class="el" href="elastic__single__layer_8cc_source.html#l00077">Global_Physical_Variables::Nu</a>, <a class="el" href="elastic__single__layer_8cc_source.html#l00059">Global_Physical_Variables::Re</a>, <a class="el" href="elastic__single__layer_8cc_source.html#l00068">Global_Physical_Variables::ReInvFr</a>, <a class="el" href="elastic__single__layer_8cc_source.html#l00065">Global_Physical_Variables::ReSt</a>, <a class="el" href="elastic__single__layer_8cc_source.html#l00366">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::set_boundary_conditions()</a>, <a class="el" href="elastic__single__layer_8cc_source.html#l00062">Global_Physical_Variables::St</a>, and <a class="el" href="elastic__single__layer_8cc_source.html#l00140">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::Surface_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="a90c191f8046069099b199743e7ce7111"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90c191f8046069099b199743e7ce7111">&#9670;&nbsp;</a></span>~InterfaceProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::~<a class="el" href="classInterfaceProblem.html">InterfaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00104">104</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="a83023535d663a2a6558959f36bf6e1e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83023535d663a2a6558959f36bf6e1e7">&#9670;&nbsp;</a></span>InterfaceProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::<a class="el" href="classInterfaceProblem.html">InterfaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>l_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Constructor: Pass the number of elements and the lengths of the domain in the x and y directions (h is the height of the fluid layer i.e. the length of the domain in the y direction) </p>
+
+</div>
+</div>
+<a id="a90c191f8046069099b199743e7ce7111"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90c191f8046069099b199743e7ce7111">&#9670;&nbsp;</a></span>~InterfaceProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::~<a class="el" href="classInterfaceProblem.html">InterfaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__single__layer_8cc_source.html#l00095">95</a> of file <a class="el" href="spine__single__layer_8cc_source.html">spine_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aedc2e58b3d2f5f8c898a21ba2d245cee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedc2e58b3d2f5f8c898a21ba2d245cee">&#9670;&nbsp;</a></span>actions_after_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>No actions required after solve step. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00124">124</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="aedc2e58b3d2f5f8c898a21ba2d245cee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedc2e58b3d2f5f8c898a21ba2d245cee">&#9670;&nbsp;</a></span>actions_after_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update after solve can remain empty, because the update is performed automatically after every Newton step. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__single__layer_8cc_source.html#l00131">131</a> of file <a class="el" href="spine__single__layer_8cc_source.html">spine_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae3ec75fcc8ccca97207dc7eca23b1cce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3ec75fcc8ccca97207dc7eca23b1cce">&#9670;&nbsp;</a></span>actions_before_implicit_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::actions_before_implicit_timestep </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before the timestep: For maximum stability, reset the current nodal positions to be the "stress-free" ones. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00128">128</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab4193771472aefce4cd67261491cc344"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4193771472aefce4cd67261491cc344">&#9670;&nbsp;</a></span>actions_before_newton_convergence_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::actions_before_newton_convergence_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__single__layer_8cc_source.html#l00121">121</a> of file <a class="el" href="spine__single__layer_8cc_source.html">spine_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="ade63c8a74f666edf530460b989968b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade63c8a74f666edf530460b989968b4f">&#9670;&nbsp;</a></span>actions_before_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>No actions required before solve step. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00121">121</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="ade63c8a74f666edf530460b989968b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade63c8a74f666edf530460b989968b4f">&#9670;&nbsp;</a></span>actions_before_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>No actions required before solve step. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__single__layer_8cc_source.html#l00127">127</a> of file <a class="el" href="spine__single__layer_8cc_source.html">spine_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2319232b08d9df1ab473f6cbd40939d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2319232b08d9df1ab473f6cbd40939d5">&#9670;&nbsp;</a></span>deform_free_surface() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::deform_free_surface </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>epsilon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_periods</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deform the mesh/free surface to a prescribed function. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00404">404</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2319232b08d9df1ab473f6cbd40939d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2319232b08d9df1ab473f6cbd40939d5">&#9670;&nbsp;</a></span>deform_free_surface() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::deform_free_surface </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>epsilon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_periods</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deform the mesh/free surface to a prescribed function. </p>
+
+</div>
+</div>
+<a id="a49714e35e94f7d2af0b6ddd22b851f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49714e35e94f7d2af0b6ddd22b851f52">&#9670;&nbsp;</a></span>doc_solution() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+</div>
+</div>
+<a id="a49714e35e94f7d2af0b6ddd22b851f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49714e35e94f7d2af0b6ddd22b851f52">&#9670;&nbsp;</a></span>doc_solution() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Document the solution. </p>
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00432">432</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="a844445832ad7a32aa9f5d03ffdb40ebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844445832ad7a32aa9f5d03ffdb40ebb">&#9670;&nbsp;</a></span>set_boundary_conditions() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::set_boundary_conditions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set boundary conditions. </p>
+
+</div>
+</div>
+<a id="a844445832ad7a32aa9f5d03ffdb40ebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844445832ad7a32aa9f5d03ffdb40ebb">&#9670;&nbsp;</a></span>set_boundary_conditions() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::set_boundary_conditions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set boundary conditions. </p>
+<p>Set boundary conditions: Set both velocity components to zero on the bottom (solid) wall and the horizontal component only to zero on the side (periodic) boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00366">366</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a0d3af8378c4f0a6e38636be958c300d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d3af8378c4f0a6e38636be958c300d5">&#9670;&nbsp;</a></span>set_initial_condition() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::set_initial_condition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set initial conditions. </p>
+
+</div>
+</div>
+<a id="a0d3af8378c4f0a6e38636be958c300d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d3af8378c4f0a6e38636be958c300d5">&#9670;&nbsp;</a></span>set_initial_condition() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::set_initial_condition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set initial conditions. </p>
+<p>Set initial conditions: Set all nodal velocities to zero and initialise the previous velocities and nodal positions to correspond to an impulsive start. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00336">336</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="adf1f4e43d10939e4323e0e315b711085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf1f4e43d10939e4323e0e315b711085">&#9670;&nbsp;</a></span>unsteady_run() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::unsteady_run </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>t_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Do unsteady run up to maximum time t_max with given timestep dt. </p>
+
+</div>
+</div>
+<a id="adf1f4e43d10939e4323e0e315b711085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf1f4e43d10939e4323e0e315b711085">&#9670;&nbsp;</a></span>unsteady_run() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::unsteady_run </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>t_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Do unsteady run up to maximum time t_max with given timestep dt. </p>
+<p>Perform run up to specified time t_max with given timestep dt. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00485">485</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a3e9ad7667f6f978a1e7c4c55e8e69e6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9ad7667f6f978a1e7c4c55e8e69e6d">&#9670;&nbsp;</a></span>Bulk_mesh_pt <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SingleLayerSpineMesh&lt;ELEMENT&gt;* <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The bulk fluid mesh, complete with spines and update information. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__single__layer_8cc_source.html#l00110">110</a> of file <a class="el" href="spine__single__layer_8cc_source.html">spine_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="af580057bd9cc1d05a67401c9e5e178c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af580057bd9cc1d05a67401c9e5e178c2">&#9670;&nbsp;</a></span>Bulk_mesh_pt <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ElasticRectangularQuadMesh&lt;ELEMENT&gt;* <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the (specific) "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00137">137</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a5bf645cbdbf7775ab6438be324caf3c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bf645cbdbf7775ab6438be324caf3c3">&#9670;&nbsp;</a></span>Constitutive_law_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ConstitutiveLaw* <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::Constitutive_law_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00143">143</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a9b5070b479a79546b983bd7027917e93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b5070b479a79546b983bd7027917e93">&#9670;&nbsp;</a></span>Lx</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::Lx</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Width of domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00146">146</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<a id="a011c7b4f2307ff909f64dc158e8fc674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a011c7b4f2307ff909f64dc158e8fc674">&#9670;&nbsp;</a></span>Surface_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::Surface_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "surface" mesh. </p>
+<p>The mesh that contains the free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00140">140</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a45e3bf3b44bcbeefab21a3598bef6179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45e3bf3b44bcbeefab21a3598bef6179">&#9670;&nbsp;</a></span>Trace_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::Trace_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Trace file. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00149">149</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a></li>
+<li><a class="el" href="spine__single__layer_8cc_source.html">spine_single_layer.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:08:30
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

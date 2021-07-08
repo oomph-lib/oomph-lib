@@ -1,0 +1,84 @@
+\hypertarget{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}{}\doxysection{oomph\+::Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element\+Base Class Reference}
+\label{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}\index{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}}
+
+
+{\ttfamily \#include $<$mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.128491cm]{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase_a5cd740452f0378d44a6610e3eee0df73}{Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase_a3af98ca33fc50d93b1d0f9be7e59b222}{$\sim$\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase_acafe1510d8ba6798665f0bb5a9600ccf}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&compute\+\_\+jacobian\+\_\+flag)=0
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. If compute\+\_\+jacobian\+\_\+flag=1 (or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Helper class for elements that impose Robin boundary conditions on pressure advection diffusion problem required by Fp preconditioner (class used to get around some templating issues) 
+
+Definition at line 49 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase_a5cd740452f0378d44a6610e3eee0df73}\label{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase_a5cd740452f0378d44a6610e3eee0df73}} 
+\index{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}!FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}}
+\index{FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}!oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}}
+\doxysubsubsection{\texorpdfstring{FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase()}{FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase()}}
+{\footnotesize\ttfamily oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element\+Base\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 54 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase_a3af98ca33fc50d93b1d0f9be7e59b222}\label{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase_a3af98ca33fc50d93b1d0f9be7e59b222}} 
+\index{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}!````~FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{$\sim$FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}}
+\index{````~FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{$\sim$FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}!oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}}
+\doxysubsubsection{\texorpdfstring{$\sim$FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase()}{~FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element\+Base\+::$\sim$\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line 57 of file mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase_acafe1510d8ba6798665f0bb5a9600ccf}\label{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase_acafe1510d8ba6798665f0bb5a9600ccf}} 
+\index{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}!fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc@{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc}}
+\index{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc@{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc}!oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase@{oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElementBase}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc()}{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element\+Base\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{compute\+\_\+jacobian\+\_\+flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+This function returns the residuals for the traction function. If compute\+\_\+jacobian\+\_\+flag=1 (or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
+ 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElement_a85b76f48d302da92f9e7350d65135d94}{oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableFpPressureAdvDiffRobinBCMixedOrderSpaceTimeElement_afd5adb0940060948eb1ec01a4c2bb768}{oomph\+::\+Refineable\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Mixed\+Order\+Space\+Time\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h}{mixed\+\_\+order\+\_\+petrov\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}\end{DoxyCompactItemize}

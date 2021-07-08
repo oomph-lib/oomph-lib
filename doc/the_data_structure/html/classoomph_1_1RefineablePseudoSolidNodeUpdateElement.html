@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">RefineablePseudoSolidNodeUpdateElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Refineable version of the PseudoSolidNodeUpdateELement.  
+ <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a5d066a14376949c5a0d598ad2edbf179"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a5d066a14376949c5a0d598ad2edbf179">RefineablePseudoSolidNodeUpdateElement</a> ()</td></tr>
+<tr class="memdesc:a5d066a14376949c5a0d598ad2edbf179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, call the BASIC and SOLID elements' constructors and set the "density" parameter for solid element to zero.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a5d066a14376949c5a0d598ad2edbf179">More...</a><br /></td></tr>
+<tr class="separator:a5d066a14376949c5a0d598ad2edbf179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8d1530df547c5d697c640d45cb6c941"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ae8d1530df547c5d697c640d45cb6c941">describe_local_dofs</a> (std::ostream &amp;out, const std::string &amp;current_string) const</td></tr>
+<tr class="memdesc:ae8d1530df547c5d697c640d45cb6c941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data::describe_dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem::describe_dofs(...)  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ae8d1530df547c5d697c640d45cb6c941">More...</a><br /></td></tr>
+<tr class="separator:ae8d1530df547c5d697c640d45cb6c941"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1d5e0fb32d61d553eba93b705ec0052"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#af1d5e0fb32d61d553eba93b705ec0052">required_nvalue</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
+<tr class="memdesc:af1d5e0fb32d61d553eba93b705ec0052"><td class="mdescLeft">&#160;</td><td class="mdescRight">The required number of values is the sum of the two.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#af1d5e0fb32d61d553eba93b705ec0052">More...</a><br /></td></tr>
+<tr class="separator:af1d5e0fb32d61d553eba93b705ec0052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4384a23bbf41dd44ccc2c64579cdd03b"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a4384a23bbf41dd44ccc2c64579cdd03b">ncont_interpolated_values</a> () const</td></tr>
+<tr class="memdesc:a4384a23bbf41dd44ccc2c64579cdd03b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of continuously interpolated values is the sum of the SOLID and BASIC values.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a4384a23bbf41dd44ccc2c64579cdd03b">More...</a><br /></td></tr>
+<tr class="separator:a4384a23bbf41dd44ccc2c64579cdd03b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a511ebac2f17e098f4a01949d9d42be2d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a511ebac2f17e098f4a01949d9d42be2d">solid_p_nodal_index</a> () const</td></tr>
+<tr class="memdesc:a511ebac2f17e098f4a01949d9d42be2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">We assume that the solid stuff is stored at the end of the nodes, i.e. its index is the number of continuously interplated values in the BASIC equations.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a511ebac2f17e098f4a01949d9d42be2d">More...</a><br /></td></tr>
+<tr class="separator:a511ebac2f17e098f4a01949d9d42be2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36add3ef201fc05954ab982a67840cb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a36add3ef201fc05954ab982a67840cb3">fill_in_contribution_to_residuals</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td></tr>
+<tr class="memdesc:a36add3ef201fc05954ab982a67840cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final override for residuals function: adds contributions from both underlying element types.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a36add3ef201fc05954ab982a67840cb3">More...</a><br /></td></tr>
+<tr class="separator:a36add3ef201fc05954ab982a67840cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56a4edc264874dc8673dccd92672b608"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a56a4edc264874dc8673dccd92672b608">fill_in_contribution_to_jacobian</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a56a4edc264874dc8673dccd92672b608"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final override for jacobian function: Calls get_jacobian() for both of the underlying element types.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a56a4edc264874dc8673dccd92672b608">More...</a><br /></td></tr>
+<tr class="separator:a56a4edc264874dc8673dccd92672b608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac165866aa2c717fb47df9ea1883d32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a7ac165866aa2c717fb47df9ea1883d32">fill_in_contribution_to_jacobian_and_mass_matrix</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="memdesc:a7ac165866aa2c717fb47df9ea1883d32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final override for mass matrix function: contributions are included from both the underlying element types.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a7ac165866aa2c717fb47df9ea1883d32">More...</a><br /></td></tr>
+<tr class="separator:a7ac165866aa2c717fb47df9ea1883d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7a9338e59678df2d5e9fcf838bd95d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ac7a9338e59678df2d5e9fcf838bd95d1">fill_in_shape_derivatives_by_fd</a> (<a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:ac7a9338e59678df2d5e9fcf838bd95d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the derivatives of the BASIC equations w.r.t. to the solid position dofs, taking hanging nodes into account.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ac7a9338e59678df2d5e9fcf838bd95d1">More...</a><br /></td></tr>
+<tr class="separator:ac7a9338e59678df2d5e9fcf838bd95d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdc1206bfdc44d22d3ef1d7d1bb943e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#afdc1206bfdc44d22d3ef1d7d1bb943e9">identify_geometric_data</a> (std::set&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> * &gt; &amp;geometric_data_pt)</td></tr>
+<tr class="memdesc:afdc1206bfdc44d22d3ef1d7d1bb943e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that affects the geometry of the element by adding the position <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> to the set that's passed in. (This functionality is required in FSI problems; set is used to avoid double counting). Refineable version includes hanging nodes.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#afdc1206bfdc44d22d3ef1d7d1bb943e9">More...</a><br /></td></tr>
+<tr class="separator:afdc1206bfdc44d22d3ef1d7d1bb943e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6056e3f49ad76050543b1b11475d95f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#aa6056e3f49ad76050543b1b11475d95f">assign_additional_local_eqn_numbers</a> ()</td></tr>
+<tr class="memdesc:aa6056e3f49ad76050543b1b11475d95f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final override for the assign__additional_local_eqn_numbers(): Call the version for the BASIC element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#aa6056e3f49ad76050543b1b11475d95f">More...</a><br /></td></tr>
+<tr class="separator:aa6056e3f49ad76050543b1b11475d95f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac653ab28abf52506f54b1306272390ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ac653ab28abf52506f54b1306272390ce">rebuild_from_sons</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt)</td></tr>
+<tr class="memdesc:ac653ab28abf52506f54b1306272390ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ac653ab28abf52506f54b1306272390ce" title="Call rebuild_from_sons() for both of the underlying element types.">rebuild_from_sons()</a> for both of the underlying element types.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ac653ab28abf52506f54b1306272390ce">More...</a><br /></td></tr>
+<tr class="separator:ac653ab28abf52506f54b1306272390ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d92d0ec7145da660fdbf5f2a46814fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a0d92d0ec7145da660fdbf5f2a46814fd">get_interpolated_values</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a0666fd57a269ed17fd3cc7a808bd31ec">values</a>)</td></tr>
+<tr class="memdesc:a0d92d0ec7145da660fdbf5f2a46814fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call get_interpolated_values(...) for both of the underlying element types.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a0d92d0ec7145da660fdbf5f2a46814fd">More...</a><br /></td></tr>
+<tr class="separator:a0d92d0ec7145da660fdbf5f2a46814fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a031d296b43e300b84278e93757741735"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a031d296b43e300b84278e93757741735">get_interpolated_values</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a0666fd57a269ed17fd3cc7a808bd31ec">values</a>)</td></tr>
+<tr class="memdesc:a031d296b43e300b84278e93757741735"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call get_interpolated_values(...) for both of the underlying element types.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a031d296b43e300b84278e93757741735">More...</a><br /></td></tr>
+<tr class="separator:a031d296b43e300b84278e93757741735"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f46fe5667a761f7a68ede0b40ef4f4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a1f46fe5667a761f7a68ede0b40ef4f4a">interpolating_node_pt</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const int &amp;value_id)</td></tr>
+<tr class="memdesc:a1f46fe5667a761f7a68ede0b40ef4f4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">We must compose the underlying interpolating nodes from the BASIC and SOLID equations, the BASIC ones are first.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a1f46fe5667a761f7a68ede0b40ef4f4a">More...</a><br /></td></tr>
+<tr class="separator:a1f46fe5667a761f7a68ede0b40ef4f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e1c7e4695dec50813227ceafa340ada"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a8e1c7e4695dec50813227ceafa340ada">local_one_d_fraction_of_interpolating_node</a> (const unsigned &amp;n1d, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const int &amp;value_id)</td></tr>
+<tr class="memdesc:a8e1c7e4695dec50813227ceafa340ada"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pressure nodes are the corner nodes, so when value_id==0, the fraction is the same as the 1d node number, 0 or 1.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a8e1c7e4695dec50813227ceafa340ada">More...</a><br /></td></tr>
+<tr class="separator:a8e1c7e4695dec50813227ceafa340ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17c7b3e0ac02b9d03f285b42b998a794"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a17c7b3e0ac02b9d03f285b42b998a794">get_interpolating_node_at_local_coordinate</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, const int &amp;value_id)</td></tr>
+<tr class="memdesc:a17c7b3e0ac02b9d03f285b42b998a794"><td class="mdescLeft">&#160;</td><td class="mdescRight">The velocity nodes are the same as the geometric nodes. The pressure nodes must be calculated by using the same methods as the geometric nodes, but by recalling that there are only two pressure nodes per edge.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a17c7b3e0ac02b9d03f285b42b998a794">More...</a><br /></td></tr>
+<tr class="separator:a17c7b3e0ac02b9d03f285b42b998a794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65f9d660a500017d25fc2e2375049274"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a65f9d660a500017d25fc2e2375049274">ninterpolating_node_1d</a> (const int &amp;value_id)</td></tr>
+<tr class="memdesc:a65f9d660a500017d25fc2e2375049274"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of 1d pressure nodes is 2, otherwise we have the positional nodes.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a65f9d660a500017d25fc2e2375049274">More...</a><br /></td></tr>
+<tr class="separator:a65f9d660a500017d25fc2e2375049274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab73207cdcfb40fbd04de408d4f9cc10d"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ab73207cdcfb40fbd04de408d4f9cc10d">ninterpolating_node</a> (const int &amp;value_id)</td></tr>
+<tr class="memdesc:ab73207cdcfb40fbd04de408d4f9cc10d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of pressure nodes is 2^DIM. The number of velocity nodes is the same as the number of geometric nodes.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ab73207cdcfb40fbd04de408d4f9cc10d">More...</a><br /></td></tr>
+<tr class="separator:ab73207cdcfb40fbd04de408d4f9cc10d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53c2c8918665b7bb190634cdefa5ea1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a53c2c8918665b7bb190634cdefa5ea1c">interpolating_basis</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Shape.html">Shape</a> &amp;psi, const int &amp;value_id) const</td></tr>
+<tr class="memdesc:a53c2c8918665b7bb190634cdefa5ea1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The basis interpolating the pressure is given by pshape(). / The basis interpolating the velocity is <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a117f8b892dc89989ecdad99ff261e120" title="Definition for 1D Lagrange shape functions. The value of all the shape functions at the local coordin...">shape()</a>.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a53c2c8918665b7bb190634cdefa5ea1c">More...</a><br /></td></tr>
+<tr class="separator:a53c2c8918665b7bb190634cdefa5ea1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a577241e74df25b8548f475bf4a9fffa7"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a577241e74df25b8548f475bf4a9fffa7">num_Z2_flux_terms</a> ()</td></tr>
+<tr class="memdesc:a577241e74df25b8548f475bf4a9fffa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of 'flux' terms for Z2 error estimation: Error estimation is based on error in BASIC element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a577241e74df25b8548f475bf4a9fffa7">More...</a><br /></td></tr>
+<tr class="separator:a577241e74df25b8548f475bf4a9fffa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbe1e5ee654278e79ccc9bfa25ab7891"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#acbe1e5ee654278e79ccc9bfa25ab7891">get_Z2_flux</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;flux)</td></tr>
+<tr class="separator:acbe1e5ee654278e79ccc9bfa25ab7891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f2375e2097699d5a175db3bc9f6b868"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a7f2375e2097699d5a175db3bc9f6b868">further_setup_hanging_nodes</a> ()</td></tr>
+<tr class="memdesc:a7f2375e2097699d5a175db3bc9f6b868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform additional hanging node procedures for variables that are not interpolated by all nodes. Done for both of the underlying element types.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a7f2375e2097699d5a175db3bc9f6b868">More...</a><br /></td></tr>
+<tr class="separator:a7f2375e2097699d5a175db3bc9f6b868"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9997600d809a1fb258ca8958d2f43f15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a9997600d809a1fb258ca8958d2f43f15">build</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;new_node_pt, bool &amp;was_already_built, std::ofstream &amp;new_nodes_file)</td></tr>
+<tr class="memdesc:a9997600d809a1fb258ca8958d2f43f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build function: Call the one for the SOLID element since it calls the one basic build function automatically.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a9997600d809a1fb258ca8958d2f43f15">More...</a><br /></td></tr>
+<tr class="separator:a9997600d809a1fb258ca8958d2f43f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639b081f80df731cb5047401cfd41d40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a639b081f80df731cb5047401cfd41d40">build</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;new_node_pt, bool &amp;was_already_built)</td></tr>
+<tr class="memdesc:a639b081f80df731cb5047401cfd41d40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build function: Call the one for the SOLID element since it calls the one basic build function automatically.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a639b081f80df731cb5047401cfd41d40">More...</a><br /></td></tr>
+<tr class="separator:a639b081f80df731cb5047401cfd41d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19e2a578e4d8a0e08041e2a0cf33d06f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a19e2a578e4d8a0e08041e2a0cf33d06f">further_build</a> ()</td></tr>
+<tr class="separator:a19e2a578e4d8a0e08041e2a0cf33d06f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d8820cdbca56cf4c913b8d1baab7102"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a2d8820cdbca56cf4c913b8d1baab7102">nvertex_node</a> () const</td></tr>
+<tr class="memdesc:a2d8820cdbca56cf4c913b8d1baab7102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertex nodes in the element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a2d8820cdbca56cf4c913b8d1baab7102">More...</a><br /></td></tr>
+<tr class="separator:a2d8820cdbca56cf4c913b8d1baab7102"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08a6bc7ea3ae1419a268b06b83f33fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ac08a6bc7ea3ae1419a268b06b83f33fa">vertex_node_pt</a> (const unsigned &amp;j) const</td></tr>
+<tr class="memdesc:ac08a6bc7ea3ae1419a268b06b83f33fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the j-th vertex node in the element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ac08a6bc7ea3ae1419a268b06b83f33fa">More...</a><br /></td></tr>
+<tr class="separator:ac08a6bc7ea3ae1419a268b06b83f33fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a7fb32ce6b9b442f7b328d382ff017a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a2a7fb32ce6b9b442f7b328d382ff017a">compute_norm</a> (double &amp;norm)</td></tr>
+<tr class="memdesc:a2a7fb32ce6b9b442f7b328d382ff017a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute norm of solution. Use version in BASIC element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a2a7fb32ce6b9b442f7b328d382ff017a">More...</a><br /></td></tr>
+<tr class="separator:a2a7fb32ce6b9b442f7b328d382ff017a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a566d35b215a97e63ce6ebba0e94631b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a566d35b215a97e63ce6ebba0e94631b9">compute_exact_Z2_error</a> (std::ostream &amp;outfile, <a class="el" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> exact_flux_pt, double &amp;error, double &amp;norm)</td></tr>
+<tr class="memdesc:a566d35b215a97e63ce6ebba0e94631b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plot the error when compared against a given exact flux. Also calculates the norm of the error and that of the exact flux. Use version in BASIC element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a566d35b215a97e63ce6ebba0e94631b9">More...</a><br /></td></tr>
+<tr class="separator:a566d35b215a97e63ce6ebba0e94631b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3947be55246e7cbaa127057db8881858"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a3947be55246e7cbaa127057db8881858">nrecovery_order</a> ()</td></tr>
+<tr class="memdesc:a3947be55246e7cbaa127057db8881858"><td class="mdescLeft">&#160;</td><td class="mdescRight">Order of recovery shape functions for Z2 error estimation: Done for BASIC element since it determines the refinement.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a3947be55246e7cbaa127057db8881858">More...</a><br /></td></tr>
+<tr class="separator:a3947be55246e7cbaa127057db8881858"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88f2bf6d044bc9b768afaba1368c0c18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a88f2bf6d044bc9b768afaba1368c0c18">output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:a88f2bf6d044bc9b768afaba1368c0c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the output function: Use that of the BASIC element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a88f2bf6d044bc9b768afaba1368c0c18">More...</a><br /></td></tr>
+<tr class="separator:a88f2bf6d044bc9b768afaba1368c0c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41c401315754cb1d5f3f8b827215eaf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a41c401315754cb1d5f3f8b827215eaf4">output</a> (std::ostream &amp;outfile, const unsigned &amp;n_p)</td></tr>
+<tr class="memdesc:a41c401315754cb1d5f3f8b827215eaf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function, plotting at n_p points: Use that of the BASIC element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a41c401315754cb1d5f3f8b827215eaf4">More...</a><br /></td></tr>
+<tr class="separator:a41c401315754cb1d5f3f8b827215eaf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc357bd2adafd81683163f42e2dfd61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a1fc357bd2adafd81683163f42e2dfd61">output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:a1fc357bd2adafd81683163f42e2dfd61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the output function: Use that of the BASIC element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a1fc357bd2adafd81683163f42e2dfd61">More...</a><br /></td></tr>
+<tr class="separator:a1fc357bd2adafd81683163f42e2dfd61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9393711c3d4c4cf5a7142b9dd99d3baa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a9393711c3d4c4cf5a7142b9dd99d3baa">output</a> (FILE *file_pt, const unsigned &amp;n_p)</td></tr>
+<tr class="memdesc:a9393711c3d4c4cf5a7142b9dd99d3baa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function: Use that of the BASIC element.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a9393711c3d4c4cf5a7142b9dd99d3baa">More...</a><br /></td></tr>
+<tr class="separator:a9393711c3d4c4cf5a7142b9dd99d3baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04cbdc63d7d79c04ed80b7a0903e8199"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a04cbdc63d7d79c04ed80b7a0903e8199">ndof_types</a> () const</td></tr>
+<tr class="memdesc:a04cbdc63d7d79c04ed80b7a0903e8199"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of "DOF types" that degrees of freedom in this element are sub-divided into.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a04cbdc63d7d79c04ed80b7a0903e8199">More...</a><br /></td></tr>
+<tr class="separator:a04cbdc63d7d79c04ed80b7a0903e8199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a029f632bdb246c67eb49b7803fd40ab1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a029f632bdb246c67eb49b7803fd40ab1">nbasic_dof_types</a> () const</td></tr>
+<tr class="memdesc:a029f632bdb246c67eb49b7803fd40ab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the number of DOF types associated with the BASIC elements in this combined element  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a029f632bdb246c67eb49b7803fd40ab1">More...</a><br /></td></tr>
+<tr class="separator:a029f632bdb246c67eb49b7803fd40ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5361a31f5a74d4779dbf1e074e08a4f2"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a5361a31f5a74d4779dbf1e074e08a4f2">nsolid_dof_types</a> () const</td></tr>
+<tr class="memdesc:a5361a31f5a74d4779dbf1e074e08a4f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the number of DOF types associated with the SOLID elements in this combined element  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a5361a31f5a74d4779dbf1e074e08a4f2">More...</a><br /></td></tr>
+<tr class="separator:a5361a31f5a74d4779dbf1e074e08a4f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b59bb716a54bc8d174d68f2ed70e151"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a4b59bb716a54bc8d174d68f2ed70e151">get_dof_numbers_for_unknowns</a> (std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;dof_lookup_list) const</td></tr>
+<tr class="memdesc:a4b59bb716a54bc8d174d68f2ed70e151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF type" that this unknown is associated with. This method combines the get_dof_numbers_for_unknowns(...) method for the BASIC and SOLID elements. The basic elements retain their DOF type numbering and the SOLID elements DOF type numbers are incremented by <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a029f632bdb246c67eb49b7803fd40ab1" title="return the number of DOF types associated with the BASIC elements in this combined element">nbasic_dof_types()</a>.  <a href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a4b59bb716a54bc8d174d68f2ed70e151">More...</a><br /></td></tr>
+<tr class="separator:a4b59bb716a54bc8d174d68f2ed70e151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class BASIC, class SOLID&gt;<br />
+class oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;</h3>
+
+<p>Refineable version of the PseudoSolidNodeUpdateELement. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00554">554</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5d066a14376949c5a0d598ad2edbf179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d066a14376949c5a0d598ad2edbf179">&#9670;&nbsp;</a></span>RefineablePseudoSolidNodeUpdateElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::<a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">RefineablePseudoSolidNodeUpdateElement</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor, call the BASIC and SOLID elements' constructors and set the "density" parameter for solid element to zero. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00562">562</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8cc_source.html#l00039">oomph::PseudoSolidHelper::Zero</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa6056e3f49ad76050543b1b11475d95f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6056e3f49ad76050543b1b11475d95f">&#9670;&nbsp;</a></span>assign_additional_local_eqn_numbers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::assign_additional_local_eqn_numbers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Final override for the assign__additional_local_eqn_numbers(): Call the version for the BASIC element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01042">1042</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a0da96ee19f5f052118b3538e2a5e043a">assign_additional_local_eqn_numbers()</a>.</p>
+
+</div>
+</div>
+<a id="a639b081f80df731cb5047401cfd41d40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639b081f80df731cb5047401cfd41d40">&#9670;&nbsp;</a></span>build() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>new_node_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>was_already_built</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build function: Call the one for the SOLID element since it calls the one basic build function automatically. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01259">1259</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a9997600d809a1fb258ca8958d2f43f15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9997600d809a1fb258ca8958d2f43f15">&#9670;&nbsp;</a></span>build() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>new_node_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>was_already_built</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>new_nodes_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build function: Call the one for the SOLID element since it calls the one basic build function automatically. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01248">1248</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a566d35b215a97e63ce6ebba0e94631b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a566d35b215a97e63ce6ebba0e94631b9">&#9670;&nbsp;</a></span>compute_exact_Z2_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::compute_exact_Z2_error </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a>&#160;</td>
+          <td class="paramname"><em>exact_flux_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>norm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Plot the error when compared against a given exact flux. Also calculates the norm of the error and that of the exact flux. Use version in BASIC element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01291">1291</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a7fb32ce6b9b442f7b328d382ff017a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a7fb32ce6b9b442f7b328d382ff017a">&#9670;&nbsp;</a></span>compute_norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::compute_norm </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>norm</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute norm of solution. Use version in BASIC element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01283">1283</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ae8d1530df547c5d697c640d45cb6c941"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8d1530df547c5d697c640d45cb6c941">&#9670;&nbsp;</a></span>describe_local_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::describe_local_dofs </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>current_string</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data::describe_dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem::describe_dofs(...) </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00577">577</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a56a4edc264874dc8673dccd92672b608"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56a4edc264874dc8673dccd92672b608">&#9670;&nbsp;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Final override for jacobian function: Calls get_jacobian() for both of the underlying element types. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00621">621</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#af81c63b6a6a317202ae084901ea01119">fill_in_contribution_to_jacobian()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00656">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives_by_fd()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a7ac165866aa2c717fb47df9ea1883d32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ac165866aa2c717fb47df9ea1883d32">&#9670;&nbsp;</a></span>fill_in_contribution_to_jacobian_and_mass_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::fill_in_contribution_to_jacobian_and_mass_matrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mass_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Final override for mass matrix function: contributions are included from both the underlying element types. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00636">636</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00490">oomph::fill_in_contribution_to_jacobian_and_mass_matrix()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00656">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives_by_fd()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a36add3ef201fc05954ab982a67840cb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36add3ef201fc05954ab982a67840cb3">&#9670;&nbsp;</a></span>fill_in_contribution_to_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::fill_in_contribution_to_residuals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Final override for residuals function: adds contributions from both underlying element types. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00611">611</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a74a99b2ddb5919974c6edd5550b6d953">fill_in_contribution_to_residuals()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
+
+</div>
+</div>
+<a id="ac7a9338e59678df2d5e9fcf838bd95d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7a9338e59678df2d5e9fcf838bd95d1">&#9670;&nbsp;</a></span>fill_in_shape_derivatives_by_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives_by_fd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill in the derivatives of the BASIC equations w.r.t. to the solid position dofs, taking hanging nodes into account. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00656">656</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a74a99b2ddb5919974c6edd5550b6d953">fill_in_contribution_to_residuals()</a>, <a class="el" href="nodes_8h_source.html#l01143">oomph::Node::hanging_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01202">oomph::Node::is_hanging()</a>, <a class="el" href="nodes_8h_source.html#l00731">oomph::HangInfo::master_node_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="nodes_8h_source.html#l00728">oomph::HangInfo::nmaster()</a>, <a class="el" href="nodes_8h_source.html#l01505">oomph::Node::perform_auxiliary_node_update_fct()</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00597">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::solid_p_nodal_index()</a>, and <a class="el" href="nodes_8h_source.html#l01050">oomph::Node::x_gen()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00621">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00636">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_contribution_to_jacobian_and_mass_matrix()</a>.</p>
+
+</div>
+</div>
+<a id="a19e2a578e4d8a0e08041e2a0cf33d06f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19e2a578e4d8a0e08041e2a0cf33d06f">&#9670;&nbsp;</a></span>further_build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::further_build </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Further build: Done for both of the underlying element types. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01267">1267</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a7f2375e2097699d5a175db3bc9f6b868"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f2375e2097699d5a175db3bc9f6b868">&#9670;&nbsp;</a></span>further_setup_hanging_nodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::further_setup_hanging_nodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Perform additional hanging node procedures for variables that are not interpolated by all nodes. Done for both of the underlying element types. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01239">1239</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a4b59bb716a54bc8d174d68f2ed70e151"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b59bb716a54bc8d174d68f2ed70e151">&#9670;&nbsp;</a></span>get_dof_numbers_for_unknowns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::get_dof_numbers_for_unknowns </td>
+          <td>(</td>
+          <td class="paramtype">std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_lookup_list</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "DOF type" that this unknown is associated with. This method combines the get_dof_numbers_for_unknowns(...) method for the BASIC and SOLID elements. The basic elements retain their DOF type numbering and the SOLID elements DOF type numbers are incremented by <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#a029f632bdb246c67eb49b7803fd40ab1" title="return the number of DOF types associated with the BASIC elements in this combined element">nbasic_dof_types()</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01347">1347</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01327">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::nbasic_dof_types()</a>.</p>
+
+</div>
+</div>
+<a id="a0d92d0ec7145da660fdbf5f2a46814fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d92d0ec7145da660fdbf5f2a46814fd">&#9670;&nbsp;</a></span>get_interpolated_values() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::get_interpolated_values </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call get_interpolated_values(...) for both of the underlying element types. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01056">1056</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00580">values</a>.</p>
+
+</div>
+</div>
+<a id="a031d296b43e300b84278e93757741735"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a031d296b43e300b84278e93757741735">&#9670;&nbsp;</a></span>get_interpolated_values() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::get_interpolated_values </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call get_interpolated_values(...) for both of the underlying element types. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01080">1080</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00580">values</a>.</p>
+
+</div>
+</div>
+<a id="a17c7b3e0ac02b9d03f285b42b998a794"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17c7b3e0ac02b9d03f285b42b998a794">&#9670;&nbsp;</a></span>get_interpolating_node_at_local_coordinate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a>* <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::get_interpolating_node_at_local_coordinate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>value_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The velocity nodes are the same as the geometric nodes. The pressure nodes must be calculated by using the same methods as the geometric nodes, but by recalling that there are only two pressure nodes per edge. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01145">1145</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+</div>
+</div>
+<a id="acbe1e5ee654278e79ccc9bfa25ab7891"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbe1e5ee654278e79ccc9bfa25ab7891">&#9670;&nbsp;</a></span>get_Z2_flux()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::get_Z2_flux </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>flux</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>'Flux' vector for Z2 error estimation: Error estimation is based on error in BASIC element </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01231">1231</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+</div>
+</div>
+<a id="afdc1206bfdc44d22d3ef1d7d1bb943e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdc1206bfdc44d22d3ef1d7d1bb943e9">&#9670;&nbsp;</a></span>identify_geometric_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::identify_geometric_data </td>
+          <td>(</td>
+          <td class="paramtype">std::set&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>geometric_data_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Specify <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that affects the geometry of the element by adding the position <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> to the set that's passed in. (This functionality is required in FSI problems; set is used to avoid double counting). Refineable version includes hanging nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01001">1001</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00731">oomph::HangInfo::master_node_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00728">oomph::HangInfo::nmaster()</a>.</p>
+
+</div>
+</div>
+<a id="a53c2c8918665b7bb190634cdefa5ea1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53c2c8918665b7bb190634cdefa5ea1c">&#9670;&nbsp;</a></span>interpolating_basis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::interpolating_basis </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Shape.html">Shape</a> &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>value_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The basis interpolating the pressure is given by pshape(). / The basis interpolating the velocity is <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a117f8b892dc89989ecdad99ff261e120" title="Definition for 1D Lagrange shape functions. The value of all the shape functions at the local coordin...">shape()</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01205">1205</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+</div>
+</div>
+<a id="a1f46fe5667a761f7a68ede0b40ef4f4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f46fe5667a761f7a68ede0b40ef4f4a">&#9670;&nbsp;</a></span>interpolating_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a>* <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::interpolating_node_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>value_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>We must compose the underlying interpolating nodes from the BASIC and SOLID equations, the BASIC ones are first. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01103">1103</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>.</p>
+
+</div>
+</div>
+<a id="a8e1c7e4695dec50813227ceafa340ada"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e1c7e4695dec50813227ceafa340ada">&#9670;&nbsp;</a></span>local_one_d_fraction_of_interpolating_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::local_one_d_fraction_of_interpolating_node </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n1d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>value_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The pressure nodes are the corner nodes, so when value_id==0, the fraction is the same as the 1d node number, 0 or 1. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01119">1119</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="a029f632bdb246c67eb49b7803fd40ab1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a029f632bdb246c67eb49b7803fd40ab1">&#9670;&nbsp;</a></span>nbasic_dof_types()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::nbasic_dof_types </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>return the number of DOF types associated with the BASIC elements in this combined element </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01327">1327</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01347">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::get_dof_numbers_for_unknowns()</a>.</p>
+
+</div>
+</div>
+<a id="a4384a23bbf41dd44ccc2c64579cdd03b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4384a23bbf41dd44ccc2c64579cdd03b">&#9670;&nbsp;</a></span>ncont_interpolated_values()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::ncont_interpolated_values </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of continuously interpolated values is the sum of the SOLID and BASIC values. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00590">590</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a04cbdc63d7d79c04ed80b7a0903e8199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04cbdc63d7d79c04ed80b7a0903e8199">&#9670;&nbsp;</a></span>ndof_types()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::ndof_types </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of "DOF types" that degrees of freedom in this element are sub-divided into. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01320">1320</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ab73207cdcfb40fbd04de408d4f9cc10d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab73207cdcfb40fbd04de408d4f9cc10d">&#9670;&nbsp;</a></span>ninterpolating_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::ninterpolating_node </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>value_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of pressure nodes is 2^DIM. The number of velocity nodes is the same as the number of geometric nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01186">1186</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a65f9d660a500017d25fc2e2375049274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65f9d660a500017d25fc2e2375049274">&#9670;&nbsp;</a></span>ninterpolating_node_1d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::ninterpolating_node_1d </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>value_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of 1d pressure nodes is 2, otherwise we have the positional nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01167">1167</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a3947be55246e7cbaa127057db8881858"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3947be55246e7cbaa127057db8881858">&#9670;&nbsp;</a></span>nrecovery_order()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::nrecovery_order </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Order of recovery shape functions for Z2 error estimation: Done for BASIC element since it determines the refinement. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01302">1302</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a5361a31f5a74d4779dbf1e074e08a4f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5361a31f5a74d4779dbf1e074e08a4f2">&#9670;&nbsp;</a></span>nsolid_dof_types()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::nsolid_dof_types </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>return the number of DOF types associated with the SOLID elements in this combined element </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01334">1334</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a577241e74df25b8548f475bf4a9fffa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a577241e74df25b8548f475bf4a9fffa7">&#9670;&nbsp;</a></span>num_Z2_flux_terms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::num_Z2_flux_terms </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of 'flux' terms for Z2 error estimation: Error estimation is based on error in BASIC element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01227">1227</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a2d8820cdbca56cf4c913b8d1baab7102"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d8820cdbca56cf4c913b8d1baab7102">&#9670;&nbsp;</a></span>nvertex_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::nvertex_node </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertex nodes in the element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01275">1275</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a1fc357bd2adafd81683163f42e2dfd61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fc357bd2adafd81683163f42e2dfd61">&#9670;&nbsp;</a></span>output() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the output function: Use that of the BASIC element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01312">1312</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00160">oomph::output()</a>.</p>
+
+</div>
+</div>
+<a id="a9393711c3d4c4cf5a7142b9dd99d3baa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9393711c3d4c4cf5a7142b9dd99d3baa">&#9670;&nbsp;</a></span>output() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function: Use that of the BASIC element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01315">1315</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00160">oomph::output()</a>.</p>
+
+</div>
+</div>
+<a id="a88f2bf6d044bc9b768afaba1368c0c18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88f2bf6d044bc9b768afaba1368c0c18">&#9670;&nbsp;</a></span>output() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the output function: Use that of the BASIC element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01305">1305</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00160">oomph::output()</a>.</p>
+
+</div>
+</div>
+<a id="a41c401315754cb1d5f3f8b827215eaf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41c401315754cb1d5f3f8b827215eaf4">&#9670;&nbsp;</a></span>output() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function, plotting at n_p points: Use that of the BASIC element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01308">1308</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00160">oomph::output()</a>.</p>
+
+</div>
+</div>
+<a id="ac653ab28abf52506f54b1306272390ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac653ab28abf52506f54b1306272390ce">&#9670;&nbsp;</a></span>rebuild_from_sons()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::rebuild_from_sons </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html#ac653ab28abf52506f54b1306272390ce" title="Call rebuild_from_sons() for both of the underlying element types.">rebuild_from_sons()</a> for both of the underlying element types. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01049">1049</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="af1d5e0fb32d61d553eba93b705ec0052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1d5e0fb32d61d553eba93b705ec0052">&#9670;&nbsp;</a></span>required_nvalue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::required_nvalue </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The required number of values is the sum of the two. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00585">585</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>.</p>
+
+</div>
+</div>
+<a id="a511ebac2f17e098f4a01949d9d42be2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a511ebac2f17e098f4a01949d9d42be2d">&#9670;&nbsp;</a></span>solid_p_nodal_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::solid_p_nodal_index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>We assume that the solid stuff is stored at the end of the nodes, i.e. its index is the number of continuously interplated values in the BASIC equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00597">597</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l00656">oomph::RefineablePseudoSolidNodeUpdateElement&lt; BASIC, SOLID &gt;::fill_in_shape_derivatives_by_fd()</a>.</p>
+
+</div>
+</div>
+<a id="ac08a6bc7ea3ae1419a268b06b83f33fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac08a6bc7ea3ae1419a268b06b83f33fa">&#9670;&nbsp;</a></span>vertex_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class BASIC , class SOLID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a>* <a class="el" href="classoomph_1_1RefineablePseudoSolidNodeUpdateElement.html">oomph::RefineablePseudoSolidNodeUpdateElement</a>&lt; BASIC, SOLID &gt;::vertex_node_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the j-th vertex node in the element. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudosolid__node__update__elements_8h_source.html#l01279">1279</a> of file <a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="pseudosolid__node__update__elements_8h_source.html">pseudosolid_node_update_elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:52
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

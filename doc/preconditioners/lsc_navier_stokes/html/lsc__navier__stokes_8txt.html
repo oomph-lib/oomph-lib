@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: lsc_navier_stokes.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">lsc_navier_stokes.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a5d36b587f2aea858300916def4397b9c"><td class="memItemLeft" align="right" valign="top">mainpage The Least Squares&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a5d36b587f2aea858300916def4397b9c">Commutator</a> (LSC) Navier-Stokes <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> The purpose of this tutorial is to show how to use \c oomph-lib 's Least Squares Commutator(LSC) Navier-Stokes preconditioner.&lt; HR &gt;&lt; HR &gt; \section theory Theory \c oomph-lib currently provides two types of(LBB-stable) Navier-Stokes elements</td></tr>
+<tr class="separator:a5d36b587f2aea858300916def4397b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0efeae7a91f07d97257f9f23b9329b9"><td class="memItemLeft" align="right" valign="top">this is the default or by any other c Preconditioner(interpreted as an &quot;inexact solver&quot;) specified via the access functions \code NavierStokesSchurComplementPreconditioner n n IterativeLinearSolver&lt;/b &gt; n n skipline Set <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> until Solver_pt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#ab0efeae7a91f07d97257f9f23b9329b9">preconditioner_pt</a> ()</td></tr>
+<tr class="separator:ab0efeae7a91f07d97257f9f23b9329b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99eb52766bf362bc3b530e315900b339"><td class="memItemLeft" align="right" valign="top">n n The behaviour of many preconditioners can be fine tuned for specific applications The c NavierStokesLSCPreconditioner provides the option to perform the linear solves involving the rather than with the exact <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> c SuperLUPreconditioner Since the matrix it may be solved efficiently with algebraic&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> (AMG) -- at least for elements that employ a continuous pressure approximation</td></tr>
+<tr class="separator:a99eb52766bf362bc3b530e315900b339"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf1021aac58de3324ec57f9713f60eb3"><td class="memItemLeft" align="right" valign="top">see ref comm_ex In these cases an efficient inexact solver is obtained by performing just a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle n n Assuming that&lt; a href=&quot;https: &lt;code&gt;Hypre&lt;/code&gt;&lt;/a&gt; is available, we therefore provide the option to use the \c Hypre AMG solver to solve the linear systems involving the \f$ {\bf P} \f$ matrix. \n\n \dontinclude driven_cavity.cc \skipline OOMPH_HAS_HYPRE \until new HyprePreconditioner; \n We set the various solver flags to values that are appropriate for 2D Poisson problems. This is most easily done by calling a helper function, defined in the namespace \c Hypre_default_settings: \n\n \skipline Set parameters \until static_cast&lt;HyprePreconditioner*&gt;P_matrix_preconditioner_pt)); \n Next we specify the \c Preconditioner as the inexact solver for the \f$ {\bf P} \f$ matrix, \n\n \until set_p_preconditioner \n and suppress the on-screen output from Hypre. \n\n \until } \n For modest Reynolds numbers, performing a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle also provides a good approximate solver for linear systems involving the momentum <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a>, \f$ {\bf F}, \f$ so we repeat the steps just listed, using the solver flags assigned in another helper function in the namespace \c Hypre_default_settings: \n\n \skipline F_matrix_preconditioner_pt = new HyprePreconditioner; \until Prec_pt-&gt; set_f_preconditioner The driver code contains various other preconditioning options which you should explore yourself&lt;HR&gt;&lt;HR&gt; section comm_ex Further comments and exercises Use the driver code&lt;A HREF=&quot;../../../../demo_drivers/linear_solvers/driven_cavity.cc&quot;&gt; demo_drivers linear_solvers driven_cavity cc&lt;/a&gt; to explore the behaviour of the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> for the driven cavity problem The driver code uses command line flags to specify various solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations performs extremely i e the solve time increases approximately linearly with the number of degrees of freedom n n of the AMG solver for the pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> leads to a very poor performance n n and show that for Taylor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#acf1021aac58de3324ec57f9713f60eb3">Hood</a> (Q2Q1) elements</td></tr>
+<tr class="separator:acf1021aac58de3324ec57f9713f60eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2f0c59a068fabe41979bec02f2bc917"><td class="memItemLeft" align="right" valign="top">see ref comm_ex In these cases an efficient inexact solver is obtained by performing just a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle n n Assuming that&lt; a href=&quot;https: &lt;code&gt;Hypre&lt;/code&gt;&lt;/a&gt; is available, we therefore provide the option to use the \c Hypre AMG solver to solve the linear systems involving the \f$ {\bf P} \f$ matrix. \n\n \dontinclude driven_cavity.cc \skipline OOMPH_HAS_HYPRE \until new HyprePreconditioner; \n We set the various solver flags to values that are appropriate for 2D Poisson problems. This is most easily done by calling a helper function, defined in the namespace \c Hypre_default_settings: \n\n \skipline Set parameters \until static_cast&lt;HyprePreconditioner*&gt;P_matrix_preconditioner_pt)); \n Next we specify the \c Preconditioner as the inexact solver for the \f$ {\bf P} \f$ matrix, \n\n \until set_p_preconditioner \n and suppress the on-screen output from Hypre. \n\n \until } \n For modest Reynolds numbers, performing a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle also provides a good approximate solver for linear systems involving the momentum <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a>, \f$ {\bf F}, \f$ so we repeat the steps just listed, using the solver flags assigned in another helper function in the namespace \c Hypre_default_settings: \n\n \skipline F_matrix_preconditioner_pt = new HyprePreconditioner; \until Prec_pt-&gt; set_f_preconditioner The driver code contains various other preconditioning options which you should explore yourself&lt;HR&gt;&lt;HR&gt; section comm_ex Further comments and exercises Use the driver code&lt;A HREF=&quot;../../../../demo_drivers/linear_solvers/driven_cavity.cc&quot;&gt; demo_drivers linear_solvers driven_cavity cc&lt;/a&gt; to explore the behaviour of the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> for the driven cavity problem The driver code uses command line flags to specify various solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations performs extremely i e the solve time increases approximately linearly with the number of degrees of freedom n n of the AMG solver for the pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> leads to a very poor performance n n and show that for Taylor the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> leads to near optimal behaviour in the sense that the CPU times increase approximately linearly with the number of unknowns Determine the break even point in the CPU times for the solution by direct and iterative solvers b here are a few&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#aa2f0c59a068fabe41979bec02f2bc917">timings</a> (total time in seconds for the Newton solver) obtained from runs at a Reynolds number of \f$ Re</td></tr>
+<tr class="separator:aa2f0c59a068fabe41979bec02f2bc917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:adda4a50d416acd1476a2cc3d506ed8e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a></td></tr>
+<tr class="separator:adda4a50d416acd1476a2cc3d506ed8e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae70944f4910e5d3db6a8296313731cce"><td class="memItemLeft" align="right" valign="top">f is the momentum&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a></td></tr>
+<tr class="separator:ae70944f4910e5d3db6a8296313731cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a1cd221878fb9adfd9b694452e24988"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a5a1cd221878fb9adfd9b694452e24988">would</a></td></tr>
+<tr class="separator:a5a1cd221878fb9adfd9b694452e24988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a529439aee3f3385c7fb637dbd4bcea5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a529439aee3f3385c7fb637dbd4bcea5d">course</a></td></tr>
+<tr class="separator:a529439aee3f3385c7fb637dbd4bcea5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac07cb3fe8e2084217afe1dbfd8fb277f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[\left(\begin{array}{cc}{\bf F} &amp;{\bf G} \\ {\bf 0} &amp;-{\bf M}_s \end{array} \right) \left(\begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right)=\left(\begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a> )</td></tr>
+<tr class="separator:ac07cb3fe8e2084217afe1dbfd8fb277f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a168024df31711c6ac6fa53fe9183d7f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[\left(\begin{array}{cc}{\bf F} &amp;{\bf G} \\ {\bf 0} &amp;-{\bf M}_s \end{array} \right) \left(\begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right)=\left(\begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a168024df31711c6ac6fa53fe9183d7f3">Silvester</a> )</td></tr>
+<tr class="separator:a168024df31711c6ac6fa53fe9183d7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e1d577c5c113f62c8b5dc29b97cba27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[\left(\begin{array}{cc}{\bf F} &amp;{\bf G} \\ {\bf 0} &amp;-{\bf M}_s \end{array} \right) \left(\begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right)=\left(\begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David J and Andrew&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a0e1d577c5c113f62c8b5dc29b97cba27">Wathen</a> )</td></tr>
+<tr class="separator:a0e1d577c5c113f62c8b5dc29b97cba27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9b8200742371424ddc4592dbdae8327"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[\left(\begin{array}{cc}{\bf F} &amp;{\bf G} \\ {\bf 0} &amp;-{\bf M}_s \end{array} \right) \left(\begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right)=\left(\begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David J and Andrew J published by Oxford Universit&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#ac9b8200742371424ddc4592dbdae8327">Press</a> )</td></tr>
+<tr class="separator:ac9b8200742371424ddc4592dbdae8327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a644ebc72073374f2bafb92cbdf504725"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a preconditioner of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT preconditioner replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[\left(\begin{array}{cc}{\bf F} &amp;{\bf G} \\ {\bf 0} &amp;-{\bf M}_s \end{array} \right) \left(\begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right)=\left(\begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David J and Andrew J published by Oxford University n n In our implementation of th&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> )</td></tr>
+<tr class="separator:a644ebc72073374f2bafb92cbdf504725"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba08d0300caab87b63e321afcb2f9790"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be exactly as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[\left(\begin{array}{cc}{\bf F} &amp;{\bf G} \\ {\bf 0} &amp;-{\bf M}_s \end{array} \right) \left(\begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right)=\left(\begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[{\bf z}_p=- \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David J and Andrew J published by Oxford University n n In our implementation of the the linear systems can either be solve&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> )</td></tr>
+<tr class="separator:aba08d0300caab87b63e321afcb2f9790"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b808f9e3e9de4910e4a5d5626e79e57"><td class="memItemLeft" align="right" valign="top">see ref comm_ex In these cases an efficient inexact solver is obtained by performing just a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle n n Assuming that&lt; a href=&quot;https: &lt;code&gt;Hypre&lt;/code&gt;&lt;/a&gt; is available, we therefore provide the option to use the \c Hypre AMG solver to solve the linear systems involving the \f$ {\bf P} \f$ matrix. \n\n \dontinclude driven_cavity.cc \skipline OOMPH_HAS_HYPRE \until new HyprePreconditioner; \n We set the various solver flags to values that are appropriate for 2D Poisson problems. This is most easily done by calling a helper function, defined in the namespace \c Hypre_default_settings: \n\n \skipline Set parameters \until static_cast&lt;HyprePreconditioner*&gt;P_matrix_preconditioner_pt)); \n Next we specify the \c Preconditioner as the inexact solver for the \f$ {\bf P} \f$ matrix, \n\n \until set_p_preconditioner \n and suppress the on-screen output from Hypre. \n\n \until } \n For modest Reynolds numbers, performing a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle also provides a good approximate solver for linear systems involving the momentum <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a>, \f$ {\bf F}, \f$ so we repeat the steps just listed, using the solver flags assigned in another helper function in the namespace \c Hypre_default_settings: \n\n \skipline F_matrix_preconditioner_pt = new HyprePreconditioner; \until Prec_pt-&gt; set_f_preconditioner The driver code contains various other preconditioning options which you should explore yourself&lt;HR&gt;&lt;HR&gt; section comm_ex Further comments and exercises Use the driver code&lt;A HREF=&quot;../../../../demo_drivers/linear_solvers/driven_cavity.cc&quot;&gt; demo_drivers linear_solvers driven_cavity cc&lt;/a&gt; to explore the behaviour of the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> for the driven cavity problem The driver code uses command line flags to specify various solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations performs extremely&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a8b808f9e3e9de4910e4a5d5626e79e57">well</a></td></tr>
+<tr class="separator:a8b808f9e3e9de4910e4a5d5626e79e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1613ff05ffdc4bc3059e0132140efeaf"><td class="memItemLeft" align="right" valign="top">see ref comm_ex In these cases an efficient inexact solver is obtained by performing just a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle n n Assuming that&lt; a href=&quot;https: &lt;code&gt;Hypre&lt;/code&gt;&lt;/a&gt; is available, we therefore provide the option to use the \c Hypre AMG solver to solve the linear systems involving the \f$ {\bf P} \f$ matrix. \n\n \dontinclude driven_cavity.cc \skipline OOMPH_HAS_HYPRE \until new HyprePreconditioner; \n We set the various solver flags to values that are appropriate for 2D Poisson problems. This is most easily done by calling a helper function, defined in the namespace \c Hypre_default_settings: \n\n \skipline Set parameters \until static_cast&lt;HyprePreconditioner*&gt;P_matrix_preconditioner_pt)); \n Next we specify the \c Preconditioner as the inexact solver for the \f$ {\bf P} \f$ matrix, \n\n \until set_p_preconditioner \n and suppress the on-screen output from Hypre. \n\n \until } \n For modest Reynolds numbers, performing a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle also provides a good approximate solver for linear systems involving the momentum <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a>, \f$ {\bf F}, \f$ so we repeat the steps just listed, using the solver flags assigned in another helper function in the namespace \c Hypre_default_settings: \n\n \skipline F_matrix_preconditioner_pt = new HyprePreconditioner; \until Prec_pt-&gt; set_f_preconditioner The driver code contains various other preconditioning options which you should explore yourself&lt;HR&gt;&lt;HR&gt; section comm_ex Further comments and exercises Use the driver code&lt;A HREF=&quot;../../../../demo_drivers/linear_solvers/driven_cavity.cc&quot;&gt; demo_drivers linear_solvers driven_cavity cc&lt;/a&gt; to explore the behaviour of the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> for the driven cavity problem The driver code uses command line flags to specify various solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations performs extremely i e the solve time increases approximately linearly with the number of degrees of freedom n n of the AMG solver for the pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> leads to a very poor performance n n and show that for Taylor the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> leads to near optimal behaviour in the sense that the CPU times increase approximately linearly with the number of unknowns Determine the break even point in the CPU times for the solution by direct and iterative solvers b&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a1613ff05ffdc4bc3059e0132140efeaf">Hint</a></td></tr>
+<tr class="separator:a1613ff05ffdc4bc3059e0132140efeaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d1c1b37c581dc4db58b24b5a2aa65bc"><td class="memItemLeft" align="right" valign="top">the subsequent columns show the solve times for different solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations For&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lsc__navier__stokes_8txt.html#a1d1c1b37c581dc4db58b24b5a2aa65bc">instance</a></td></tr>
+<tr class="separator:a1d1c1b37c581dc4db58b24b5a2aa65bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a5d36b587f2aea858300916def4397b9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d36b587f2aea858300916def4397b9c">&#9670;&nbsp;</a></span>Commutator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Least Squares Commutator </td>
+          <td>(</td>
+          <td class="paramtype">LSC&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00001">1</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="acf1021aac58de3324ec57f9713f60eb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf1021aac58de3324ec57f9713f60eb3">&#9670;&nbsp;</a></span>Hood()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref comm_ex In these cases an efficient inexact solver is obtained by performing just a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle n n Assuming that&lt;a href=&quot;https: &lt;code&gt;Hypre&lt;/code&gt;&lt;/a&gt; is available, we therefore provide the option to use the \c Hypre AMG solver to solve the linear systems involving the \f$ {\bf P} \f$ matrix. \n\n \dontinclude driven_cavity.cc \skipline OOMPH_HAS_HYPRE \until new HyprePreconditioner; \n We set the various solver flags to values that are appropriate for 2D Poisson problems. This is most easily done by calling a helper function, defined in the namespace \c Hypre_default_settings: \n\n \skipline Set parameters \until static_cast&lt;HyprePreconditioner*&gt;P_matrix_preconditioner_pt)); \n Next we specify the \c Preconditioner as the inexact solver for the \f$ {\bf P} \f$ matrix, \n\n \until set_p_preconditioner \n and suppress the on-screen output from Hypre. \n\n \until } \n For modest Reynolds numbers, performing a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle also provides a good approximate solver for linear systems involving the momentum <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a>, \f$ {\bf F}, \f$ so we repeat the steps just listed, using the solver flags assigned in another helper function in the namespace \c Hypre_default_settings: \n\n \skipline F_matrix_preconditioner_pt = new HyprePreconditioner; \until Prec_pt-&gt; set_f_preconditioner The driver code contains various other preconditioning options which you should explore yourself&lt;HR&gt;&lt;HR&gt; section comm_ex Further comments and exercises Use the driver code&lt;A HREF=&quot;../../../../demo_drivers/linear_solvers/driven_cavity.cc&quot;&gt; demo_drivers linear_solvers driven_cavity cc&lt;/a&gt; to explore the behaviour of the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> for the driven cavity problem The driver code uses command line flags to specify various solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations performs extremely i e the solve time increases approximately linearly with the number of degrees of freedom n n of the AMG solver for the pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> leads to a very poor performance n n and show that for Taylor Hood </td>
+          <td>(</td>
+          <td class="paramtype">Q2Q1&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99eb52766bf362bc3b530e315900b339"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99eb52766bf362bc3b530e315900b339">&#9670;&nbsp;</a></span>multigrid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">n n The behaviour of many preconditioners can be fine tuned for specific applications The c NavierStokesLSCPreconditioner provides the option to perform the linear solves involving the rather than with the exact <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> c SuperLUPreconditioner Since the matrix it may be solved efficiently with algebraic multigrid </td>
+          <td>(</td>
+          <td class="paramtype">AMG&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab0efeae7a91f07d97257f9f23b9329b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0efeae7a91f07d97257f9f23b9329b9">&#9670;&nbsp;</a></span>preconditioner_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">this is the default or by any other c Preconditioner (interpreted as an &quot;inexact solver&quot;) specified via the access functions \code NavierStokesSchurComplementPreconditioner n n IterativeLinearSolver&lt;/b&gt; n n skipline Set <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> until Solver_pt preconditioner_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2f0c59a068fabe41979bec02f2bc917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2f0c59a068fabe41979bec02f2bc917">&#9670;&nbsp;</a></span>timings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref comm_ex In these cases an efficient inexact solver is obtained by performing just a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle n n Assuming that&lt;a href=&quot;https: &lt;code&gt;Hypre&lt;/code&gt;&lt;/a&gt; is available, we therefore provide the option to use the \c Hypre AMG solver to solve the linear systems involving the \f$ {\bf P} \f$ matrix. \n\n \dontinclude driven_cavity.cc \skipline OOMPH_HAS_HYPRE \until new HyprePreconditioner; \n We set the various solver flags to values that are appropriate for 2D Poisson problems. This is most easily done by calling a helper function, defined in the namespace \c Hypre_default_settings: \n\n \skipline Set parameters \until static_cast&lt;HyprePreconditioner*&gt;P_matrix_preconditioner_pt)); \n Next we specify the \c Preconditioner as the inexact solver for the \f$ {\bf P} \f$ matrix, \n\n \until set_p_preconditioner \n and suppress the on-screen output from Hypre. \n\n \until } \n For modest Reynolds numbers, performing a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle also provides a good approximate solver for linear systems involving the momentum <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a>, \f$ {\bf F}, \f$ so we repeat the steps just listed, using the solver flags assigned in another helper function in the namespace \c Hypre_default_settings: \n\n \skipline F_matrix_preconditioner_pt = new HyprePreconditioner; \until Prec_pt-&gt; set_f_preconditioner The driver code contains various other preconditioning options which you should explore yourself&lt;HR&gt;&lt;HR&gt; section comm_ex Further comments and exercises Use the driver code&lt;A HREF=&quot;../../../../demo_drivers/linear_solvers/driven_cavity.cc&quot;&gt; demo_drivers linear_solvers driven_cavity cc&lt;/a&gt; to explore the behaviour of the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> for the driven cavity problem The driver code uses command line flags to specify various solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations performs extremely i e the solve time increases approximately linearly with the number of degrees of freedom n n of the AMG solver for the pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> leads to a very poor performance n n and show that for Taylor the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> leads to near optimal behaviour in the sense that the CPU times increase approximately linearly with the number of unknowns Determine the break even point in the CPU times for the solution by direct and iterative solvers b here are a few timings </td>
+          <td>(</td>
+          <td class="paramtype">total time in seconds for the Newton&#160;</td>
+          <td class="paramname"><em>solver</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="adda4a50d416acd1476a2cc3d506ed8e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adda4a50d416acd1476a2cc3d506ed8e3">&#9670;&nbsp;</a></span>block</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum block</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00043">43</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="a529439aee3f3385c7fb637dbd4bcea5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a529439aee3f3385c7fb637dbd4bcea5d">&#9670;&nbsp;</a></span>course</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of course</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00052">52</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="aba08d0300caab87b63e321afcb2f9790"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba08d0300caab87b63e321afcb2f9790">&#9670;&nbsp;</a></span>exactly</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be exactly as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [\left( \begin{array}{cc}{\bf F} &amp; {\bf G} \\ {\bf 0} &amp; -{\bf M}_s \end{array} \right) \left( \begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right) =\left( \begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David J and Andrew J published by Oxford University n n In our implementation of the the linear systems can either be solve exactly) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00116">116</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae70944f4910e5d3db6a8296313731cce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae70944f4910e5d3db6a8296313731cce">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">n n The behaviour of many preconditioners can be fine tuned for specific applications The c NavierStokesLSCPreconditioner provides the option to perform the linear solves involving the rather than with the exact <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> c SuperLUPreconditioner Since the matrix f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{\bf G} <a class="code" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">\f</a>$ the</div>
+<div class="line">discrete gradient <span class="keyword">operator</span></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00043">43</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1613ff05ffdc4bc3059e0132140efeaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1613ff05ffdc4bc3059e0132140efeaf">&#9670;&nbsp;</a></span>Hint</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref comm_ex In these cases an efficient inexact solver is obtained by performing just a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle n n Assuming that&lt;a href=&quot;https: &lt;code&gt;Hypre&lt;/code&gt;&lt;/a&gt; is available, we therefore provide the option to use the \c Hypre AMG solver to solve the linear systems involving the \f$ {\bf P} \f$ matrix. \n\n \dontinclude driven_cavity.cc \skipline OOMPH_HAS_HYPRE \until new HyprePreconditioner; \n We set the various solver flags to values that are appropriate for 2D Poisson problems. This is most easily done by calling a helper function, defined in the namespace \c Hypre_default_settings: \n\n \skipline Set parameters \until static_cast&lt;HyprePreconditioner*&gt;P_matrix_preconditioner_pt)); \n Next we specify the \c Preconditioner as the inexact solver for the \f$ {\bf P} \f$ matrix, \n\n \until set_p_preconditioner \n and suppress the on-screen output from Hypre. \n\n \until } \n For modest Reynolds numbers, performing a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle also provides a good approximate solver for linear systems involving the momentum <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a>, \f$ {\bf F}, \f$ so we repeat the steps just listed, using the solver flags assigned in another helper function in the namespace \c Hypre_default_settings: \n\n \skipline F_matrix_preconditioner_pt = new HyprePreconditioner; \until Prec_pt-&gt; set_f_preconditioner The driver code contains various other preconditioning options which you should explore yourself&lt;HR&gt;&lt;HR&gt; section comm_ex Further comments and exercises Use the driver code&lt;A HREF=&quot;../../../../demo_drivers/linear_solvers/driven_cavity.cc&quot;&gt; demo_drivers linear_solvers driven_cavity cc&lt;/a&gt; to explore the behaviour of the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> for the driven cavity problem The driver code uses command line flags to specify various solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations performs extremely i e the solve time increases approximately linearly with the number of degrees of freedom n n of the AMG solver for the pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> leads to a very poor performance n n and show that for Taylor the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> leads to near optimal behaviour in the sense that the CPU times increase approximately linearly with the number of unknowns Determine the break even point in the CPU times for the solution by direct and iterative solvers b Hint</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00249">249</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1d1c1b37c581dc4db58b24b5a2aa65bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d1c1b37c581dc4db58b24b5a2aa65bc">&#9670;&nbsp;</a></span>instance</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the subsequent columns show the solve times for different solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations For instance</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00254">254</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="a644ebc72073374f2bafb92cbdf504725"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a644ebc72073374f2bafb92cbdf504725">&#9670;&nbsp;</a></span>preconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a preconditioner of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT preconditioner replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [\left( \begin{array}{cc}{\bf F} &amp; {\bf G} \\ {\bf 0} &amp; -{\bf M}_s \end{array} \right) \left( \begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right) =\left( \begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David J and Andrew J published by Oxford University n n In our implementation of th preconditioner) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00115">115</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac9b8200742371424ddc4592dbdae8327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9b8200742371424ddc4592dbdae8327">&#9670;&nbsp;</a></span>Press</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [\left( \begin{array}{cc}{\bf F} &amp; {\bf G} \\ {\bf 0} &amp; -{\bf M}_s \end{array} \right) \left( \begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right) =\left( \begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David J and Andrew J published by Oxford Universit Press) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00112">112</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="a168024df31711c6ac6fa53fe9183d7f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a168024df31711c6ac6fa53fe9183d7f3">&#9670;&nbsp;</a></span>Silvester</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [\left( \begin{array}{cc}{\bf F} &amp; {\bf G} \\ {\bf 0} &amp; -{\bf M}_s \end{array} \right) \left( \begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right) =\left( \begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David Silvester) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00111">111</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0e1d577c5c113f62c8b5dc29b97cba27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e1d577c5c113f62c8b5dc29b97cba27">&#9670;&nbsp;</a></span>Wathen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [\left( \begin{array}{cc}{\bf F} &amp; {\bf G} \\ {\bf 0} &amp; -{\bf M}_s \end{array} \right) \left( \begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right) =\left( \begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf F} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \<a class="el" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a>{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> David J and Andrew Wathen) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00111">111</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8b808f9e3e9de4910e4a5d5626e79e57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b808f9e3e9de4910e4a5d5626e79e57">&#9670;&nbsp;</a></span>well</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref comm_ex In these cases an efficient inexact solver is obtained by performing just a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle n n Assuming that&lt;a href=&quot;https: &lt;code&gt;Hypre&lt;/code&gt;&lt;/a&gt; is available, we therefore provide the option to use the \c Hypre AMG solver to solve the linear systems involving the \f$ {\bf P} \f$ matrix. \n\n \dontinclude driven_cavity.cc \skipline OOMPH_HAS_HYPRE \until new HyprePreconditioner; \n We set the various solver flags to values that are appropriate for 2D Poisson problems. This is most easily done by calling a helper function, defined in the namespace \c Hypre_default_settings: \n\n \skipline Set parameters \until static_cast&lt;HyprePreconditioner*&gt;P_matrix_preconditioner_pt)); \n Next we specify the \c Preconditioner as the inexact solver for the \f$ {\bf P} \f$ matrix, \n\n \until set_p_preconditioner \n and suppress the on-screen output from Hypre. \n\n \until } \n For modest Reynolds numbers, performing a single <a class="el" href="lsc__navier__stokes_8txt.html#a99eb52766bf362bc3b530e315900b339">multigrid</a> cycle also provides a good approximate solver for linear systems involving the momentum <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a>, \f$ {\bf F}, \f$ so we repeat the steps just listed, using the solver flags assigned in another helper function in the namespace \c Hypre_default_settings: \n\n \skipline F_matrix_preconditioner_pt = new HyprePreconditioner; \until Prec_pt-&gt; set_f_preconditioner The driver code contains various other preconditioning options which you should explore yourself&lt;HR&gt;&lt;HR&gt; section comm_ex Further comments and exercises Use the driver code&lt;A HREF=&quot;../../../../demo_drivers/linear_solvers/driven_cavity.cc&quot;&gt; demo_drivers linear_solvers driven_cavity cc&lt;/a&gt; to explore the behaviour of the <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> for the driven cavity problem The driver code uses command line flags to specify various solver <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> combinations performs extremely well</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00227">227</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac07cb3fe8e2084217afe1dbfd8fb277f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac07cb3fe8e2084217afe1dbfd8fb277f">&#9670;&nbsp;</a></span>widehat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> of be <a class="el" href="lsc__navier__stokes_8txt.html#aba08d0300caab87b63e321afcb2f9790">exactly</a> as expensive as a direct solve The LSC BFBT <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> replaces the exact Jacobian by a <a class="el" href="lsc__navier__stokes_8txt.html#adda4a50d416acd1476a2cc3d506ed8e3">block</a> triangular approximation <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [\left( \begin{array}{cc}{\bf F} &amp; {\bf G} \\ {\bf 0} &amp; -{\bf M}_s \end{array} \right) \left( \begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right) =\left( \begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where solve the first row for the action of the inverse pressure Schur complement <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - {\bf M}_s^{-1} {\bf r}<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">_p\f</a>] is approximated by <a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> [{\bf z}_p = - \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\<a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>] where widehat) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{\bf Q} <a class="code" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">\f</a>$ is the diagonal of the velocity</div>
+<div class="line">mass matrix. The evaluation of <span class="keyword">this</span> expression involves</div>
+<div class="line">two linear solves involving the <a class="code" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">matrix</a></div>
+<div class="line"><a class="code" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">\f</a>[</div>
+<div class="line">{\bf P} = \big({\bf D} <a class="code" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">\widehat</a>{\bf Q}^{-1}{\bf G} \big)</div>
+<div class="line">\<a class="code" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>]</div>
+<div class="line">which has the character of a matrix arising from the discretisation </div>
+<div class="line">of a Poisson problem on the pressure space. We also have</div>
+<div class="line">to evaluate matrix-vector products with the matrix </div>
+<div class="line">\<a class="code" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a>[</div>
+<div class="line">{\bf E}={\bf D}<a class="code" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">\widehat</a>{\bf Q}^{-1}{\bf F}<a class="code" href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">\widehat</a>{\bf Q}^{-1}{\bf G}</div>
+<div class="line"><a class="code" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">\f</a>]</div>
+<div class="line">Details of the theory can be found in <span class="stringliteral">&quot;Finite Elements and </span></div>
+<div class="line"><span class="stringliteral">Fast Iterative Solvers with Applications in Incompressible Fluid </span></div>
+<div class="line"><span class="stringliteral">Dynamics&quot;</span> by Howard C. Elman</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00097">97</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+<a id="a5a1cd221878fb9adfd9b694452e24988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a1cd221878fb9adfd9b694452e24988">&#9670;&nbsp;</a></span>would</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a> is the momentum and the application of such a <a class="el" href="lsc__navier__stokes_8txt.html#a644ebc72073374f2bafb92cbdf504725">preconditioner</a> would</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lsc__navier__stokes_8txt_source.html#l00052">52</a> of file <a class="el" href="lsc__navier__stokes_8txt_source.html">lsc_navier_stokes.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="alsc__navier__stokes_8txt_html_ac07cb3fe8e2084217afe1dbfd8fb277f"><div class="ttname"><a href="lsc__navier__stokes_8txt.html#ac07cb3fe8e2084217afe1dbfd8fb277f">widehat</a></div><div class="ttdeci">f is the momentum and the application of such a preconditioner of be exactly as expensive as a direct solve The LSC BFBT preconditioner replaces the exact Jacobian by a block triangular approximation f[\left(\begin{array}{cc}{\bf F} &amp;{\bf G} \\ {\bf 0} &amp;-{\bf M}_s \end{array} \right) \left(\begin{array}{c}{\bf z}_u \\ {\bf z}_p\end{array} \right)=\left(\begin{array}{c}{\bf r}_u \\ {\bf r}_p\end{array} \right),\f] where solve the first row for the action of the inverse pressure Schur complement f[{\bf z}_p=- {\bf M}_s^{-1} {\bf r}_p\f] is approximated by f[{\bf z}_p=- \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}\big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}{\bf r}_p,\f] where widehat)</div><div class="ttdef"><b>Definition:</b> <a href="lsc__navier__stokes_8txt_source.html#l00097">lsc_navier_stokes.txt:97</a></div></div>
+<div class="ttc" id="alsc__navier__stokes_8txt_html_ae70944f4910e5d3db6a8296313731cce"><div class="ttname"><a href="lsc__navier__stokes_8txt.html#ae70944f4910e5d3db6a8296313731cce">f</a></div><div class="ttdeci">f is the momentum f</div><div class="ttdef"><b>Definition:</b> <a href="lsc__navier__stokes_8txt_source.html#l00043">lsc_navier_stokes.txt:43</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:25:28
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

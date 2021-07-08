@@ -1,0 +1,150 @@
+\hypertarget{classoomph_1_1PointIntegral}{}\doxysection{oomph\+::Point\+Integral Class Reference}
+\label{classoomph_1_1PointIntegral}\index{oomph::PointIntegral@{oomph::PointIntegral}}
+
+
+{\ttfamily \#include $<$integral.\+h$>$}
+
+Inheritance diagram for oomph\+::Point\+Integral\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1PointIntegral}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PointIntegral_aa8a362528e1277b2a4f01081f3b26a51}{Point\+Integral}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PointIntegral_a68ec55f1353da24494a66fa827192b1d}{Point\+Integral}} (const \mbox{\hyperlink{classoomph_1_1PointIntegral}{Point\+Integral}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PointIntegral_afcfb6e758b53260c11ba7d2f40f017c5}{operator=}} (const \mbox{\hyperlink{classoomph_1_1PointIntegral}{Point\+Integral}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1PointIntegral_a198be650fefe8cd6bdf50bb848c3896e}{nweight}} () const
+\begin{DoxyCompactList}\small\item\em Number of integration points of the scheme. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PointIntegral_a0500dd69b4cfdd2539e2cefb82acb7cf}{knot}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Return coordinate s\mbox{[}j\mbox{]} (j=0) of integration point i -- deliberately broken! \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PointIntegral_a80fc2a944504d8630f68df99aae624ab}{weight}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return weight of integration point i. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Broken pseudo-\/integration scheme for points elements\+: Iit\textquotesingle{}s not clear in general what this integration scheme is supposed to. It probably ought to evaluate integrals to zero but we\textquotesingle{}re not sure in what context this may be used. Replace by your own integration scheme that does what you want! ~\newline
+ 
+
+Definition at line 103 of file integral.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PointIntegral_aa8a362528e1277b2a4f01081f3b26a51}\label{classoomph_1_1PointIntegral_aa8a362528e1277b2a4f01081f3b26a51}} 
+\index{oomph::PointIntegral@{oomph::PointIntegral}!PointIntegral@{PointIntegral}}
+\index{PointIntegral@{PointIntegral}!oomph::PointIntegral@{oomph::PointIntegral}}
+\doxysubsubsection{\texorpdfstring{PointIntegral()}{PointIntegral()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Point\+Integral\+::\+Point\+Integral (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor (empty) 
+
+
+
+Definition at line 109 of file integral.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PointIntegral_a68ec55f1353da24494a66fa827192b1d}\label{classoomph_1_1PointIntegral_a68ec55f1353da24494a66fa827192b1d}} 
+\index{oomph::PointIntegral@{oomph::PointIntegral}!PointIntegral@{PointIntegral}}
+\index{PointIntegral@{PointIntegral}!oomph::PointIntegral@{oomph::PointIntegral}}
+\doxysubsubsection{\texorpdfstring{PointIntegral()}{PointIntegral()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Point\+Integral\+::\+Point\+Integral (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PointIntegral}{Point\+Integral}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 112 of file integral.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PointIntegral_a0500dd69b4cfdd2539e2cefb82acb7cf}\label{classoomph_1_1PointIntegral_a0500dd69b4cfdd2539e2cefb82acb7cf}} 
+\index{oomph::PointIntegral@{oomph::PointIntegral}!knot@{knot}}
+\index{knot@{knot}!oomph::PointIntegral@{oomph::PointIntegral}}
+\doxysubsubsection{\texorpdfstring{knot()}{knot()}}
+{\footnotesize\ttfamily double oomph\+::\+Point\+Integral\+::knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return coordinate s\mbox{[}j\mbox{]} (j=0) of integration point i -- deliberately broken! 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral}}.
+
+
+
+Definition at line 128 of file integral.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PointIntegral_a198be650fefe8cd6bdf50bb848c3896e}\label{classoomph_1_1PointIntegral_a198be650fefe8cd6bdf50bb848c3896e}} 
+\index{oomph::PointIntegral@{oomph::PointIntegral}!nweight@{nweight}}
+\index{nweight@{nweight}!oomph::PointIntegral@{oomph::PointIntegral}}
+\doxysubsubsection{\texorpdfstring{nweight()}{nweight()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Point\+Integral\+::nweight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of integration points of the scheme. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral}}.
+
+
+
+Definition at line 124 of file integral.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PointIntegral_afcfb6e758b53260c11ba7d2f40f017c5}\label{classoomph_1_1PointIntegral_afcfb6e758b53260c11ba7d2f40f017c5}} 
+\index{oomph::PointIntegral@{oomph::PointIntegral}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::PointIntegral@{oomph::PointIntegral}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Point\+Integral\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PointIntegral}{Point\+Integral}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 118 of file integral.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1PointIntegral_a80fc2a944504d8630f68df99aae624ab}\label{classoomph_1_1PointIntegral_a80fc2a944504d8630f68df99aae624ab}} 
+\index{oomph::PointIntegral@{oomph::PointIntegral}!weight@{weight}}
+\index{weight@{weight}!oomph::PointIntegral@{oomph::PointIntegral}}
+\doxysubsubsection{\texorpdfstring{weight()}{weight()}}
+{\footnotesize\ttfamily double oomph\+::\+Point\+Integral\+::weight (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return weight of integration point i. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral}}.
+
+
+
+Definition at line 139 of file integral.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{integral_8h}{integral.\+h}}\end{DoxyCompactItemize}

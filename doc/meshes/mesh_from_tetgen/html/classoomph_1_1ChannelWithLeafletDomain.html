@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ChannelWithLeafletDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html">ChannelWithLeafletDomain</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1ChannelWithLeafletDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::ChannelWithLeafletDomain Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::ChannelWithLeafletDomain:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1ChannelWithLeafletDomain.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6cca7d06136de0c76facec2a92b0939e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a6cca7d06136de0c76facec2a92b0939e">ChannelWithLeafletDomain</a> (GeomObject *<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a91d7d8d2f564c5e9d2ee07449b2653c9">leaflet_pt</a>, const double &amp;<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a5538092062970dbd2f02218a05639d49">lleft</a>, const double &amp;<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aee74846110e70cd5538386e1ccb0ce7c">lright</a>, const double &amp;<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#af70ada72d505ebea468d1000b04c20e1">hleaflet</a>, const double &amp;<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aaf195c688423473ed97af61f8a1467ab">htot</a>, const unsigned &amp;nleft, const unsigned &amp;nright, const unsigned &amp;ny1, const unsigned &amp;ny2)</td></tr>
+<tr class="memdesc:a6cca7d06136de0c76facec2a92b0939e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to GeomObject that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a6cca7d06136de0c76facec2a92b0939e">More...</a><br /></td></tr>
+<tr class="separator:a6cca7d06136de0c76facec2a92b0939e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f00e3d9ed53ca70519671446fe60510"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a7f00e3d9ed53ca70519671446fe60510">~ChannelWithLeafletDomain</a> ()</td></tr>
+<tr class="memdesc:a7f00e3d9ed53ca70519671446fe60510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Empty; cleanup done in base class.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a7f00e3d9ed53ca70519671446fe60510">More...</a><br /></td></tr>
+<tr class="separator:a7f00e3d9ed53ca70519671446fe60510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf195c688423473ed97af61f8a1467ab"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aaf195c688423473ed97af61f8a1467ab">htot</a> ()</td></tr>
+<tr class="memdesc:aaf195c688423473ed97af61f8a1467ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total height of domain (width of channel)  <a href="classoomph_1_1ChannelWithLeafletDomain.html#aaf195c688423473ed97af61f8a1467ab">More...</a><br /></td></tr>
+<tr class="separator:aaf195c688423473ed97af61f8a1467ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af70ada72d505ebea468d1000b04c20e1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#af70ada72d505ebea468d1000b04c20e1">hleaflet</a> ()</td></tr>
+<tr class="memdesc:af70ada72d505ebea468d1000b04c20e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Height of leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#af70ada72d505ebea468d1000b04c20e1">More...</a><br /></td></tr>
+<tr class="separator:af70ada72d505ebea468d1000b04c20e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5538092062970dbd2f02218a05639d49"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a5538092062970dbd2f02218a05639d49">lleft</a> ()</td></tr>
+<tr class="memdesc:a5538092062970dbd2f02218a05639d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of domain to the left of leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a5538092062970dbd2f02218a05639d49">More...</a><br /></td></tr>
+<tr class="separator:a5538092062970dbd2f02218a05639d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee74846110e70cd5538386e1ccb0ce7c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aee74846110e70cd5538386e1ccb0ce7c">lright</a> ()</td></tr>
+<tr class="memdesc:aee74846110e70cd5538386e1ccb0ce7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of domain to the right of leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#aee74846110e70cd5538386e1ccb0ce7c">More...</a><br /></td></tr>
+<tr class="separator:aee74846110e70cd5538386e1ccb0ce7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91d7d8d2f564c5e9d2ee07449b2653c9"><td class="memItemLeft" align="right" valign="top">GeomObject *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a91d7d8d2f564c5e9d2ee07449b2653c9">leaflet_pt</a> ()</td></tr>
+<tr class="memdesc:a91d7d8d2f564c5e9d2ee07449b2653c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the wall.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a91d7d8d2f564c5e9d2ee07449b2653c9">More...</a><br /></td></tr>
+<tr class="separator:a91d7d8d2f564c5e9d2ee07449b2653c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b123847f4ab6e242a0409d72fe5cbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ae4b123847f4ab6e242a0409d72fe5cbd">macro_element_boundary</a> (const unsigned &amp;t, const unsigned &amp;imacro, const unsigned &amp;idirect, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r)</td></tr>
+<tr class="memdesc:ae4b123847f4ab6e242a0409d72fe5cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrisation of macro element boundaries.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#ae4b123847f4ab6e242a0409d72fe5cbd">More...</a><br /></td></tr>
+<tr class="separator:ae4b123847f4ab6e242a0409d72fe5cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a08d97680e95f42a385a869d5c384e610"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a08d97680e95f42a385a869d5c384e610">macro_bound_I_N</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a08d97680e95f42a385a869d5c384e610"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a08d97680e95f42a385a869d5c384e610">More...</a><br /></td></tr>
+<tr class="separator:a08d97680e95f42a385a869d5c384e610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20898c8b6747cf01e3e92e4a5c6ff5e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a20898c8b6747cf01e3e92e4a5c6ff5e4">macro_bound_I_S</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a20898c8b6747cf01e3e92e4a5c6ff5e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a20898c8b6747cf01e3e92e4a5c6ff5e4">More...</a><br /></td></tr>
+<tr class="separator:a20898c8b6747cf01e3e92e4a5c6ff5e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15e43fe342a04c8466a43112e3a48ff3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a15e43fe342a04c8466a43112e3a48ff3">macro_bound_I_W</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a15e43fe342a04c8466a43112e3a48ff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a15e43fe342a04c8466a43112e3a48ff3">More...</a><br /></td></tr>
+<tr class="separator:a15e43fe342a04c8466a43112e3a48ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0bc6edb7d09bfdb310de99f846f5093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ac0bc6edb7d09bfdb310de99f846f5093">macro_bound_I_E</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:ac0bc6edb7d09bfdb310de99f846f5093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function <br  />
+  <a href="classoomph_1_1ChannelWithLeafletDomain.html#ac0bc6edb7d09bfdb310de99f846f5093">More...</a><br /></td></tr>
+<tr class="separator:ac0bc6edb7d09bfdb310de99f846f5093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1402c0d3fe42a8ffd6c9fb1d6df9d460"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a1402c0d3fe42a8ffd6c9fb1d6df9d460">macro_bound_II_N</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a1402c0d3fe42a8ffd6c9fb1d6df9d460"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a1402c0d3fe42a8ffd6c9fb1d6df9d460">More...</a><br /></td></tr>
+<tr class="separator:a1402c0d3fe42a8ffd6c9fb1d6df9d460"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a565166bede89908189cc8e426a898859"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a565166bede89908189cc8e426a898859">macro_bound_II_S</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a565166bede89908189cc8e426a898859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a565166bede89908189cc8e426a898859">More...</a><br /></td></tr>
+<tr class="separator:a565166bede89908189cc8e426a898859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa35af75e7a60d3e5d4adf6a8097825e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#afa35af75e7a60d3e5d4adf6a8097825e">macro_bound_II_W</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:afa35af75e7a60d3e5d4adf6a8097825e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#afa35af75e7a60d3e5d4adf6a8097825e">More...</a><br /></td></tr>
+<tr class="separator:afa35af75e7a60d3e5d4adf6a8097825e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9083a5ac562feb1cd33d78e6cc18b257"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a9083a5ac562feb1cd33d78e6cc18b257">macro_bound_II_E</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a9083a5ac562feb1cd33d78e6cc18b257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a9083a5ac562feb1cd33d78e6cc18b257">More...</a><br /></td></tr>
+<tr class="separator:a9083a5ac562feb1cd33d78e6cc18b257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7f88fb218ceb09f0fde09ba22cd5b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a8b7f88fb218ceb09f0fde09ba22cd5b9">macro_bound_III_N</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a8b7f88fb218ceb09f0fde09ba22cd5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a8b7f88fb218ceb09f0fde09ba22cd5b9">More...</a><br /></td></tr>
+<tr class="separator:a8b7f88fb218ceb09f0fde09ba22cd5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacdeafe878caadb3e6d0cf98a87df25a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aacdeafe878caadb3e6d0cf98a87df25a">macro_bound_III_S</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:aacdeafe878caadb3e6d0cf98a87df25a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#aacdeafe878caadb3e6d0cf98a87df25a">More...</a><br /></td></tr>
+<tr class="separator:aacdeafe878caadb3e6d0cf98a87df25a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06ccb5b6d160c3a31acf80174381a834"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a06ccb5b6d160c3a31acf80174381a834">macro_bound_III_W</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a06ccb5b6d160c3a31acf80174381a834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a06ccb5b6d160c3a31acf80174381a834">More...</a><br /></td></tr>
+<tr class="separator:a06ccb5b6d160c3a31acf80174381a834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af17451c66c723d841aa6f16505c51be3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#af17451c66c723d841aa6f16505c51be3">macro_bound_III_E</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:af17451c66c723d841aa6f16505c51be3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#af17451c66c723d841aa6f16505c51be3">More...</a><br /></td></tr>
+<tr class="separator:af17451c66c723d841aa6f16505c51be3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8d9410d270e27677cb89c5dfe9cc136"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ae8d9410d270e27677cb89c5dfe9cc136">macro_bound_IV_N</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:ae8d9410d270e27677cb89c5dfe9cc136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#ae8d9410d270e27677cb89c5dfe9cc136">More...</a><br /></td></tr>
+<tr class="separator:ae8d9410d270e27677cb89c5dfe9cc136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a038eba8447f4d1643cd44642294bf43f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a038eba8447f4d1643cd44642294bf43f">macro_bound_IV_S</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a038eba8447f4d1643cd44642294bf43f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a038eba8447f4d1643cd44642294bf43f">More...</a><br /></td></tr>
+<tr class="separator:a038eba8447f4d1643cd44642294bf43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9da487d185f947a30e03b43d0fc0c9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ab9da487d185f947a30e03b43d0fc0c9b">macro_bound_IV_W</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:ab9da487d185f947a30e03b43d0fc0c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#ab9da487d185f947a30e03b43d0fc0c9b">More...</a><br /></td></tr>
+<tr class="separator:ab9da487d185f947a30e03b43d0fc0c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16c8d718f5da2e6d9d73fe0455bacc0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a16c8d718f5da2e6d9d73fe0455bacc0c">macro_bound_IV_E</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, const unsigned &amp;i, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:a16c8d718f5da2e6d9d73fe0455bacc0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a16c8d718f5da2e6d9d73fe0455bacc0c">More...</a><br /></td></tr>
+<tr class="separator:a16c8d718f5da2e6d9d73fe0455bacc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaca0af9c2a638c80bd8af783b9972599"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aaca0af9c2a638c80bd8af783b9972599">slanted_bound_up</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r)</td></tr>
+<tr class="memdesc:aaca0af9c2a638c80bd8af783b9972599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#aaca0af9c2a638c80bd8af783b9972599">More...</a><br /></td></tr>
+<tr class="separator:aaca0af9c2a638c80bd8af783b9972599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a6c1a799bbedc5f0ff08f38088eaedc68"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a6c1a799bbedc5f0ff08f38088eaedc68">Lright</a></td></tr>
+<tr class="memdesc:a6c1a799bbedc5f0ff08f38088eaedc68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the domain to the right of the leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a6c1a799bbedc5f0ff08f38088eaedc68">More...</a><br /></td></tr>
+<tr class="separator:a6c1a799bbedc5f0ff08f38088eaedc68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a50a8a7b274fb1dfc6d18c79ca884cd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a0a50a8a7b274fb1dfc6d18c79ca884cd">Lleft</a></td></tr>
+<tr class="memdesc:a0a50a8a7b274fb1dfc6d18c79ca884cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the domain to the left of the leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a0a50a8a7b274fb1dfc6d18c79ca884cd">More...</a><br /></td></tr>
+<tr class="separator:a0a50a8a7b274fb1dfc6d18c79ca884cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75ce3248efae5c33a9c9989b2f310139"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a75ce3248efae5c33a9c9989b2f310139">Hleaflet</a></td></tr>
+<tr class="memdesc:a75ce3248efae5c33a9c9989b2f310139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lagrangian coordinate at end of leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a75ce3248efae5c33a9c9989b2f310139">More...</a><br /></td></tr>
+<tr class="separator:a75ce3248efae5c33a9c9989b2f310139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad32b0daa71b42d34aec81c7e3d25cb98"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ad32b0daa71b42d34aec81c7e3d25cb98">Htot</a></td></tr>
+<tr class="memdesc:ad32b0daa71b42d34aec81c7e3d25cb98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total width of the channel.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#ad32b0daa71b42d34aec81c7e3d25cb98">More...</a><br /></td></tr>
+<tr class="separator:ad32b0daa71b42d34aec81c7e3d25cb98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11aac62965f9bcb7d4c0043669b28f15"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a11aac62965f9bcb7d4c0043669b28f15">Nright</a></td></tr>
+<tr class="memdesc:a11aac62965f9bcb7d4c0043669b28f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro element columnns to the right of the leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a11aac62965f9bcb7d4c0043669b28f15">More...</a><br /></td></tr>
+<tr class="separator:a11aac62965f9bcb7d4c0043669b28f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0abd8837f9f0924b801d2fb78c69532"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ad0abd8837f9f0924b801d2fb78c69532">Nleft</a></td></tr>
+<tr class="memdesc:ad0abd8837f9f0924b801d2fb78c69532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro element columns to the left of the leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#ad0abd8837f9f0924b801d2fb78c69532">More...</a><br /></td></tr>
+<tr class="separator:ad0abd8837f9f0924b801d2fb78c69532"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c6393ef6e626d7a2f2a8ea70c8addbe"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a3c6393ef6e626d7a2f2a8ea70c8addbe">Ny1</a></td></tr>
+<tr class="memdesc:a3c6393ef6e626d7a2f2a8ea70c8addbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro element rows up to the end of the leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a3c6393ef6e626d7a2f2a8ea70c8addbe">More...</a><br /></td></tr>
+<tr class="separator:a3c6393ef6e626d7a2f2a8ea70c8addbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1596a538b4263b42d20f9c098c5f2752"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a1596a538b4263b42d20f9c098c5f2752">Ny2</a></td></tr>
+<tr class="memdesc:a1596a538b4263b42d20f9c098c5f2752"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro element rows above the leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a1596a538b4263b42d20f9c098c5f2752">More...</a><br /></td></tr>
+<tr class="separator:a1596a538b4263b42d20f9c098c5f2752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a165703af81538c28bbbd780d65bbb333"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a165703af81538c28bbbd780d65bbb333">X_0</a></td></tr>
+<tr class="memdesc:a165703af81538c28bbbd780d65bbb333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Center of the domain : origin of the leaflet, extracted from GeomObject and stored for fast access.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a165703af81538c28bbbd780d65bbb333">More...</a><br /></td></tr>
+<tr class="separator:a165703af81538c28bbbd780d65bbb333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08a8eb7078cdc788dc7643e09e7405fb"><td class="memItemLeft" align="right" valign="top">GeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a08a8eb7078cdc788dc7643e09e7405fb">Leaflet_pt</a></td></tr>
+<tr class="memdesc:a08a8eb7078cdc788dc7643e09e7405fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to leaflet.  <a href="classoomph_1_1ChannelWithLeafletDomain.html#a08a8eb7078cdc788dc7643e09e7405fb">More...</a><br /></td></tr>
+<tr class="separator:a08a8eb7078cdc788dc7643e09e7405fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Rectangular domain with a leaflet blocking the lower half </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00042">42</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6cca7d06136de0c76facec2a92b0939e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cca7d06136de0c76facec2a92b0939e">&#9670;&nbsp;</a></span>ChannelWithLeafletDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ChannelWithLeafletDomain::ChannelWithLeafletDomain </td>
+          <td>(</td>
+          <td class="paramtype">GeomObject *&#160;</td>
+          <td class="paramname"><em>leaflet_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lleft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lright</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>hleaflet</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>htot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nleft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nright</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to GeomObject that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">54</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00096">hleaflet()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00093">htot()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00203">Htot</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00105">leaflet_pt()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00222">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00099">lleft()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00197">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00102">lright()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00194">Lright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00209">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00206">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00212">Ny1</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00215">Ny2</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+</div>
+</div>
+<a id="a7f00e3d9ed53ca70519671446fe60510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f00e3d9ed53ca70519671446fe60510">&#9670;&nbsp;</a></span>~ChannelWithLeafletDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ChannelWithLeafletDomain::~ChannelWithLeafletDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Empty; cleanup done in base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00090">90</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af70ada72d505ebea468d1000b04c20e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af70ada72d505ebea468d1000b04c20e1">&#9670;&nbsp;</a></span>hleaflet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::ChannelWithLeafletDomain::hleaflet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Height of leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00096">96</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="aaf195c688423473ed97af61f8a1467ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf195c688423473ed97af61f8a1467ab">&#9670;&nbsp;</a></span>htot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::ChannelWithLeafletDomain::htot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Total height of domain (width of channel) </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00093">93</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00203">Htot</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a91d7d8d2f564c5e9d2ee07449b2653c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91d7d8d2f564c5e9d2ee07449b2653c9">&#9670;&nbsp;</a></span>leaflet_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObject*&amp; oomph::ChannelWithLeafletDomain::leaflet_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00105">105</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00222">Leaflet_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a5538092062970dbd2f02218a05639d49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5538092062970dbd2f02218a05639d49">&#9670;&nbsp;</a></span>lleft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::ChannelWithLeafletDomain::lleft </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of domain to the left of leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00099">99</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00197">Lleft</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="aee74846110e70cd5538386e1ccb0ce7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee74846110e70cd5538386e1ccb0ce7c">&#9670;&nbsp;</a></span>lright()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::ChannelWithLeafletDomain::lright </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of domain to the right of leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00102">102</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00194">Lright</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="ac0bc6edb7d09bfdb310de99f846f5093"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0bc6edb7d09bfdb310de99f846f5093">&#9670;&nbsp;</a></span>macro_bound_I_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_I_E </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function <br  />
+ </p>
+<p>Helper function for eastern boundary in lower left region. </p>
+<p>Final expression of r</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">364</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00222">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00197">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00209">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00212">Ny1</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00477">macro_bound_I_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a08d97680e95f42a385a869d5c384e610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08d97680e95f42a385a869d5c384e610">&#9670;&nbsp;</a></span>macro_bound_I_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_I_N </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for northern boundary in lower left region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">453</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">macro_bound_I_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">macro_bound_I_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a20898c8b6747cf01e3e92e4a5c6ff5e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20898c8b6747cf01e3e92e4a5c6ff5e4">&#9670;&nbsp;</a></span>macro_bound_I_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_I_S </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for southern boundary in lower left region. </p>
+<p>Find the coordinates of the two corners of the south boundary</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00477">477</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">macro_bound_I_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">macro_bound_I_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a15e43fe342a04c8466a43112e3a48ff3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15e43fe342a04c8466a43112e3a48ff3">&#9670;&nbsp;</a></span>macro_bound_I_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_I_W </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for western boundary in lower left region. </p>
+<p>Final expression of r</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">408</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00222">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00197">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00209">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00212">Ny1</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00477">macro_bound_I_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a9083a5ac562feb1cd33d78e6cc18b257"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9083a5ac562feb1cd33d78e6cc18b257">&#9670;&nbsp;</a></span>macro_bound_II_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_II_E </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for eastern boundary in lower right region. </p>
+<p>Final expression of r</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">512</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00222">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00194">Lright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00206">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00212">Ny1</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00605">macro_bound_II_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00630">macro_bound_II_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a1402c0d3fe42a8ffd6c9fb1d6df9d460"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1402c0d3fe42a8ffd6c9fb1d6df9d460">&#9670;&nbsp;</a></span>macro_bound_II_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_II_N </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for northern boundary in lower right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00605">605</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">macro_bound_II_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">macro_bound_II_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a565166bede89908189cc8e426a898859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a565166bede89908189cc8e426a898859">&#9670;&nbsp;</a></span>macro_bound_II_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_II_S </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for southern boundary in lower right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00630">630</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">macro_bound_II_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">macro_bound_II_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="afa35af75e7a60d3e5d4adf6a8097825e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa35af75e7a60d3e5d4adf6a8097825e">&#9670;&nbsp;</a></span>macro_bound_II_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_II_W </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for western boundary in lower right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">558</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00222">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00194">Lright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00206">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00212">Ny1</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00605">macro_bound_II_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00630">macro_bound_II_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="af17451c66c723d841aa6f16505c51be3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af17451c66c723d841aa6f16505c51be3">&#9670;&nbsp;</a></span>macro_bound_III_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_III_E </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for eastern boundary in upper left region. </p>
+<p>Final expression of r</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">689</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00203">Htot</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00197">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00209">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00215">Ny2</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00667">slanted_bound_up()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00781">macro_bound_III_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00805">macro_bound_III_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a8b7f88fb218ceb09f0fde09ba22cd5b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b7f88fb218ceb09f0fde09ba22cd5b9">&#9670;&nbsp;</a></span>macro_bound_III_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_III_N </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for northern boundary in upper left region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00781">781</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aacdeafe878caadb3e6d0cf98a87df25a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacdeafe878caadb3e6d0cf98a87df25a">&#9670;&nbsp;</a></span>macro_bound_III_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_III_S </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for southern boundary in upper left region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00805">805</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a06ccb5b6d160c3a31acf80174381a834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06ccb5b6d160c3a31acf80174381a834">&#9670;&nbsp;</a></span>macro_bound_III_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_III_W </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for western boundary in upper left region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">735</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00203">Htot</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00197">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00209">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00215">Ny2</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00667">slanted_bound_up()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00781">macro_bound_III_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00805">macro_bound_III_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a16c8d718f5da2e6d9d73fe0455bacc0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c8d718f5da2e6d9d73fe0455bacc0c">&#9670;&nbsp;</a></span>macro_bound_IV_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_IV_E </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for eastern boundary in upper right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">840</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00203">Htot</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00194">Lright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00206">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00215">Ny2</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00667">slanted_bound_up()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00930">macro_bound_IV_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00954">macro_bound_IV_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ae8d9410d270e27677cb89c5dfe9cc136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8d9410d270e27677cb89c5dfe9cc136">&#9670;&nbsp;</a></span>macro_bound_IV_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_IV_N </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for northern boundary in upper right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00930">930</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a038eba8447f4d1643cd44642294bf43f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a038eba8447f4d1643cd44642294bf43f">&#9670;&nbsp;</a></span>macro_bound_IV_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_IV_S </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for southern boundary in upper right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00954">954</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ab9da487d185f947a30e03b43d0fc0c9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9da487d185f947a30e03b43d0fc0c9b">&#9670;&nbsp;</a></span>macro_bound_IV_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_bound_IV_W </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for western boundary in upper right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">885</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00203">Htot</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00194">Lright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00206">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00215">Ny2</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00667">slanted_bound_up()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00930">macro_bound_IV_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00954">macro_bound_IV_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ae4b123847f4ab6e242a0409d72fe5cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4b123847f4ab6e242a0409d72fe5cbd">&#9670;&nbsp;</a></span>macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>idirect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parametrisation of macro element boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">231</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00477">macro_bound_I_S()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00605">macro_bound_II_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00630">macro_bound_II_S()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00781">macro_bound_III_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00805">macro_bound_III_S()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00930">macro_bound_IV_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00954">macro_bound_IV_S()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00209">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00206">Nright</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00212">Ny1</a>.</p>
+
+</div>
+</div>
+<a id="aaca0af9c2a638c80bd8af783b9972599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaca0af9c2a638c80bd8af783b9972599">&#9670;&nbsp;</a></span>slanted_bound_up()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ChannelWithLeafletDomain::slanted_bound_up </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Describe the line between the boundary north of the domain (at x=X_0) and the top of the wall, when zeta goes from 0 to 1. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00667">667</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00203">Htot</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00222">Leaflet_pt</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a75ce3248efae5c33a9c9989b2f310139"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75ce3248efae5c33a9c9989b2f310139">&#9670;&nbsp;</a></span>Hleaflet</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::ChannelWithLeafletDomain::Hleaflet</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lagrangian coordinate at end of leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00200">200</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00096">hleaflet()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00667">slanted_bound_up()</a>.</p>
+
+</div>
+</div>
+<a id="ad32b0daa71b42d34aec81c7e3d25cb98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad32b0daa71b42d34aec81c7e3d25cb98">&#9670;&nbsp;</a></span>Htot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::ChannelWithLeafletDomain::Htot</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Total width of the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00203">203</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00093">htot()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00667">slanted_bound_up()</a>.</p>
+
+</div>
+</div>
+<a id="a08a8eb7078cdc788dc7643e09e7405fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08a8eb7078cdc788dc7643e09e7405fb">&#9670;&nbsp;</a></span>Leaflet_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObject* oomph::ChannelWithLeafletDomain::Leaflet_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00222">222</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00105">leaflet_pt()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">macro_bound_II_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00667">slanted_bound_up()</a>.</p>
+
+</div>
+</div>
+<a id="a0a50a8a7b274fb1dfc6d18c79ca884cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a50a8a7b274fb1dfc6d18c79ca884cd">&#9670;&nbsp;</a></span>Lleft</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::ChannelWithLeafletDomain::Lleft</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of the domain to the left of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00197">197</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00099">lleft()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>.</p>
+
+</div>
+</div>
+<a id="a6c1a799bbedc5f0ff08f38088eaedc68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c1a799bbedc5f0ff08f38088eaedc68">&#9670;&nbsp;</a></span>Lright</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::ChannelWithLeafletDomain::Lright</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of the domain to the right of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00194">194</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00102">lright()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>.</p>
+
+</div>
+</div>
+<a id="ad0abd8837f9f0924b801d2fb78c69532"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0abd8837f9f0924b801d2fb78c69532">&#9670;&nbsp;</a></span>Nleft</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ChannelWithLeafletDomain::Nleft</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro element columns to the left of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00209">209</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a11aac62965f9bcb7d4c0043669b28f15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11aac62965f9bcb7d4c0043669b28f15">&#9670;&nbsp;</a></span>Nright</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ChannelWithLeafletDomain::Nright</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro element columnns to the right of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00206">206</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a3c6393ef6e626d7a2f2a8ea70c8addbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c6393ef6e626d7a2f2a8ea70c8addbe">&#9670;&nbsp;</a></span>Ny1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ChannelWithLeafletDomain::Ny1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro element rows up to the end of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00212">212</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">macro_bound_II_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00231">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a1596a538b4263b42d20f9c098c5f2752"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1596a538b4263b42d20f9c098c5f2752">&#9670;&nbsp;</a></span>Ny2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ChannelWithLeafletDomain::Ny2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro element rows above the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00215">215</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>.</p>
+
+</div>
+</div>
+<a id="a165703af81538c28bbbd780d65bbb333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a165703af81538c28bbbd780d65bbb333">&#9670;&nbsp;</a></span>X_0</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::ChannelWithLeafletDomain::X_0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Center of the domain : origin of the leaflet, extracted from GeomObject and stored for fast access. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00219">219</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00054">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00364">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00408">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00512">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00558">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00689">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00735">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00840">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00885">macro_bound_IV_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00667">slanted_bound_up()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:57:15
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

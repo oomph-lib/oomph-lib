@@ -1,0 +1,659 @@
+/**
+
+\mainpage Propagation of a bubble in a channel - mesh generation and adaptation for free surface problems
+
+In this tutorial we demonstrate the adaptive solution of free surface
+problems on unstructured meshes, using the example of a bubble
+propagating along a straight channel. We also demonstrate how to
+impose volume constraints on enclosed regions within the fluid.
+  
+<HR> <HR> 
+
+\section example The example problem 
+We illustrate the solution
+of the unsteady 2D Navier-Stokes equations by considering the
+propagation of a single bubble along a straight channel as shown in
+the sketch below. We non-dimensionalise all lengths on the channel
+width, \f$ \mathcal{L}=H \f$, velocities on the maximum (prescribed) 
+inflow velocity, \f$ \mathcal{U} \f$, and time on the intrinsic timescale, 
+\f$ \mathcal{T}=\mathcal{L}/\mathcal{U} \f$ , which corresponds to a
+Strouhal number \f$ St=1.0 \f$ .
+
+\image html problem.gif "The problem setup. " 
+\image latex problem.eps "The problem setup. " width=0.9\textwidth
+
+The problem is then governed by the following equations.
+
+ 
+Solve 
+
+\f[ 
+Re\Big(St\frac{\partial u_i}{\partial t}+u_j\frac{\partial
+u_i}{\partial x_j} \Big) = - \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left( \frac{\partial u_i}{\partial
+x_j} + \frac{\partial u_j}{\partial x_i} \right), \ \ \ \ \ \ \ \ \ \
+(1) 
+\f]
+
+and 
+
+\f[ 
+\frac{\partial u_i}{\partial x_i} = 0, 
+\f] 
+
+in the rectangular
+domain \f$ D = \left\{x_1 \in [0,1]; x_2 \in [0,L] \right\} \f$ ,
+subject to the Dirichlet boundary conditions 
+
+\f[ 
+u_1=0, \ \ \ \ \ \ \ \ \ \ (2) 
+\f] 
+
+on the top and bottom boundaries and
+
+\f[ 
+u_2=0, \ \ \ \ \ \ \ \ \ \ (3) 
+\f] 
+
+on all boundaries.  The inflow on the left boundary is described by a
+Poiseuille flow profile 
+
+\f[ 
+u_1(x_2)=4 x_2 (1-x_2).  \ \ \ \ \ \ \ \ \ \ (4) 
+\f] 
+
+The free surface is defined by the position
+vector \f$ \mathbf{R} \f$, which is subject to the kinematic condition
+
+\f[ 
+\Big(u_i-St \frac{\partial R_i}{\partial t} \Big) n_i =0, \ \ \ \
+\ \ \ \ \ \ (5) 
+\f] 
+
+and the dynamic condition 
+
+\f[
+\tau_{ij} n_j=- \Big( \frac{1}{Ca} \kappa+p_{bubble} \Big) n_i, \ \ \
+\ \ \ \ \ \ \ (6) 
+\f] 
+
+where the stress tensor is defined
+as 
+
+\f[ 
+\tau_{ij}=-p \delta_{ij}+\Big( \frac{\partial u_i}{\partial
+x_j} + \frac{\partial u_j}{\partial x_i} \Big).  \ \ \ \ \ \ \ \ \ \
+(7) 
+\f] 
+
+The initial position of the interface, for a
+bubble initially located in the centre of the channel, is given by 
+
+\f[
+\mathbf{R}(\zeta)=\Big( \frac{L}{2}+ a \frac{1-\zeta^2}{1+\zeta^2},
+\frac{1}{2} + a \frac{2\zeta}{1+\zeta^2} \Big), \ \ \ \ \ \ \ \ \ \
+(8) 
+\f] 
+
+where \f$ a \f$ is the initial
+non-dimensional bubble radius and \f$ \zeta=[0,2\pi] \f$.
+
+
+
+<HR>
+
+The problem is subject to the constraint that the bubble volume, 
+\f$ V_{bubble} \f$, remains constant which is achieved by adjusting, 
+the bubble pressure, \f$ p_{bubble} \f$ . We formulate the 
+volume constraint by making use
+of Gauss` theorem, which states that for any vector \f$ \mathbf{b} \f$
+
+\f[ 
+\int \nabla . \mathbf{b} dV = \oint \mathbf{b}. \mathbf{n} dS.  \
+ \ \ \ \ \ \ \ \ \ (9) 
+\f]
+
+Choosing \f$ \mathbf{b}=\mathbf{x} \f$ we note that the divergence of
+\f$\mathbf{x}\f$ gives the spatial dimension \f$ D \f$ and the
+integral \f$\int dV\f$ is the enclosed volume \f$V_{bubble}\f$. Hence,
+the volume constraint can be written as
+
+\f[ 
+V_{bubble}-\frac{1}{D} \oint \mathbf{R}.\mathbf{n} dS=0.  \ \ \ \
+ \ \ \ \ \ \ (10) 
+\f] 
+
+This is the equation that determines the unknown bubble pressure 
+\f$ p_{bubble} \f$ .
+
+
+
+<HR> <HR>
+
+\section implementation Implementation
+
+We solve the governing equations using an ALE-based finite-element
+method, discretising the fluid domain with triangular Taylor-Hood 
+elements, and updating the mesh with 
+<a href="../../single_layer_free_surface/html/index.html#kinematic_condition_implementation">a pseudo-elastic
+node-update procedure</a>.  
+As usual, we impose the kinematic and dynamic boundary conditions
+with \c FaceElements. The volume constraint is imposed in a similar
+way: We attach \c LineVolumeConstraintBoundingSolidElements to the 
+bubble surface to compute the line integrals in equation
+(10), and create an additional \c VolumeConstraintElement
+which adds \f$ V_{bubble} \f$ to this equation and is also "in
+charge" of the unknown bubble pressure. 
+
+
+<HR> <HR>
+
+\section results Results
+We perform the simulation in a two-stage procedure. We start by 
+performing a steady solve with the inflow switched off. This
+deforms the bubble into its steady state (approximately) circular
+configuration with the required volume. The actual time-dependent 
+simulation is then performed with an impulsive
+start from this configuration. 
+
+
+The figure below shows a contour plot of the pressure
+distribution with overlaid streamlines. This is a snapshot of 
+<A HREF="../figures/bubble.avi">an animation of the flow field</A>, 
+for the parameters \f$ Re=ReSt=0.0 \f$ and \f$ Ca=0.05 \f$ .
+
+\image html tutorial.gif "Snapshot of the flow field (streamlines and pressure contours) for a propagating bubble. " 
+\image latex tutorial.eps "Snapshot of the flow field (streamlines and pressure contours) for a propagating bubble. " width=0.7\textwidth
+
+
+
+
+<HR> <HR>
+
+
+\section parameters Global parameters
+
+As usual, we create a namespace where we define the dimensionless 
+parameters \f$ Re \f$, \f$ Ca \f$ and the non-dimensional channel 
+length \f$ L \f$. As discussed in 
+<a href="../../driven_cavity/html/index.html#params">another tutorial</A>, the
+Strouhal number defaults to one, so that we do not have to set it in
+this case. We also store the initial bubble radius and the bubble
+volume, as well as a scaling factor for the inflow
+velocity (this allows us to "switch off" the inflow when
+computing the initial steady solution). Finally we define 
+the Poisson ratio for the generalised
+Hookean constitutive law that is used by pseudo-elastic mesh update.
+
+
+\dontinclude adaptive_bubble_in_channel.cc
+\skipline start_of_namespace
+\until end_of_namespace
+
+
+<HR> <HR>
+
+\section main The driver code 
+We start by processing the command line
+arguments and create the generalised Hookean constitutive equations
+for the pseudo-elastic node-update. We then open various output files
+and build the problem.
+
+\skipline start_of_main
+\until BubbleInChannelProblem
+
+We start by performing a steady solve (with the inflow switched off)
+to compute the initial configuration, a circular bubble in stationary
+fluid.
+
+\skipline Before starting
+\until problem.doc_solution()
+
+Next, the timestepper is initialised and an impulsive start
+performed. The inflow is switched on and the first few unsteady Newton
+solves are performed without adaptation. 
+
+\skipline Initialise timestepper
+\until // done solution on fixed mesh
+ 
+
+To limit the distortion of the elements we allow then mesh adaptation 
+(which involves the re-generation of the entire mesh) every few timesteps. 
+
+\skipline // Now do a proper
+\until End of main
+
+<HR> <HR>
+
+\section problem The problem class
+
+As usual, we template the Problem class by the element type
+
+\dontinclude adaptive_bubble_in_channel.cc
+\skipline start_of_problem_class
+\until ~BubbleInChannelProblem()
+
+The \c FaceElements are deleted and re-attached before and after
+each adaptation. Also, as discussed in 
+<A HREF="../../../meshes/mesh_from_inline_triangle/html/index.html#overview">
+another tutorial</A>, we re-apply the boundary conditions and complete the
+build of all elements after each adaptation, using the helper function
+\c complete_problem_setup() (discussed below).
+ 
+\skipline /// Actions before adapt
+\until void complete_problem_setup()
+
+We define the post-processing functions to document the solution and
+to compute the error estimates.
+
+\skipline Doc the solution
+\until compute_error_estimate(double& max_err
+
+We also provide helper functions to delete and create face elements
+adjacent to the bubble boundary.
+ 
+\skipline private
+\until end of delete_volume_constraint_elements
+
+The private data includes pointers to the fluid mesh, and 
+the two face meshes which impose the kinematic and dynamic 
+boundary conditions, and the volume constraint, respectively.
+We also store pointers to the Data that stores the unknown bubble
+pressure and to the \c VolumeConstraintElement that imposes the 
+volume constraint and is "in charge of" the bubble pressure.
+
+\skipline Pointers to mesh of free surface elements
+\until end_of_problem_class
+
+
+<HR> <HR>
+
+
+
+\section constructor The problem constructor 
+We allocate the timestepper and build the \c VolumeConstraintElement that 
+imposes the volume constraint. The element stores the volume that is to be
+conserved as well as the bubble pressure, which is determined from the
+volume constraint. The initial guess for the bubble pressure, \f$
+p_{bubble}=Ca/a \f$, is appropriate for a static bubble in stationary
+fluid.
+
+\skipline start_constructor
+\until // and the index
+ 
+\skipline // Build element and create
+\until set_value(index
+
+Next the outer boundary, consisting of four separate polylines, is
+built. Each polyline is defined by a start and an end point and is
+stored in a vector. This vector is then used to create the closed
+polygon required by \c Triangle.
+
+\skipline Build the boundary segments
+\until Outer_boundary_polyline_pt
+
+Next the polygon representing the bubble in the initial setup is
+generated. 
+(<A HREF="../../../meshes/mesh_from_inline_triangle/html/index.html#polygonal">
+Recall</A> that closed polygons must be subdivided into at least two 
+distinct polylines.)
+
+\skipline Now define initial shape
+\until bubble_center)
+
+Once the boundary representation in form of polygons is completed the
+mesh is generated using \c Triangle. We specify the error estimator
+and set targets for the spatial adaptivity, and output the initial mesh.
+
+
+\skipline Now build the mesh,
+\until output("mesh.dat")
+
+We complete the problem setup, create the various surface meshes that
+impose the dynamic and kinematic boundary conditions and the volume
+constraint. We then combine the submeshes into a global mesh.
+
+\skipline Set boundary condition
+\until end_of_constructor
+ 
+
+<HR> <HR>
+
+\section problem_setup Problem setup 
+During the problem setup the position of all boundary nodes in the 
+pseudo-elastic fluid mesh, apart from those on the bubble boundary, are pinned.
+
+\dontinclude adaptive_bubble_in_channel.cc
+\skipline start_of_complete_problem_setup
+\until // points on bubble 
+
+We pin both velocity components on the inflow, top and bottom
+boundaries and the vertical velocity component at the outflow.
+ 
+\skipline Re-set the boundary conditions
+\until end loop over boundaries
+
+Next, the bulk elements are made fully functional. For every element
+the pointers to the time, Reynolds number, Womersley number and the
+constitutive law for the mesh deformation are set.
+
+\skipline Complete the build of all elements 
+\until } 
+
+Finally, we (re-)assign the velocity boundary values by imposing no
+slip on the channel walls, parallel outflow, and a Poiseuille profile
+at the inlet.
+
+\skipline Re-apply boundary values on Dirichlet
+\until end of complete_problem_setup
+
+<HR> <HR>
+
+
+\section face_elements Generation of face elements 
+
+As usual we impose
+the kinematic and dynamic boundary condition at the free surface by
+attaching \c FaceElements to the relevant boundaries of the bulk
+elements. We specify pointers to the Capillary number \f$ Ca \f$ and
+the bubble pressure \f$ p_{bubble} \f$. The pointer to the Strouhal
+number \f$ St \f$ does not need to be set, since it already defaults
+to a value of 1.0.
+ 
+\dontinclude adaptive_bubble_in_channel.cc
+\skipline start_of_create_free_surface_elements 
+\until end of create_free_surface_elements
+ 
+The volume constraint elements are created in a similar way. Recall
+that the \c LineVolumeConstraintBoundingSolidElements compute the 
+line integrals
+in equation (10) while the \c VolumeConstraintElement
+adds \f$ V_{bubble} \f$ to this equation.
+ 
+\skipline start_of_create_volume_constraint_elements
+\until end of create_volume_constraint_elements
+
+<HR> <HR>
+
+\section doc Post-processing 
+This member function documents the
+computed solution after every Newton solve.
+
+\skipline start_of_doc_solution
+\until end_of_doc_solution
+
+<HR> <HR>
+
+\section comments Comments and Exercises
+ 
+\subsection adapt Mesh adaptation for problems with 'closed' free boundaries
+
+We described 
+<A HREF="../../../meshes/mesh_from_inline_triangle/html/index.html">in 
+another tutorial</A> how \c oomph-lib
+employs a two-stage process for the (re-)generation of unstructured
+meshes in domains whose curvilinear boundaries are represented by \c
+GeomObjects: we initially sample the \c GeomObject at a user-specified
+number of points (equally spaced along the relevant section of the 
+\c GeomObject) to create the vertices for an initial polygonal
+representation of the curvilinear boundary. This polygonal boundary
+representation is used to generate a new mesh with \c Triangle. The
+nodes on the domain boundaries are then "snapped" onto the curvilinear
+boundaries where required.
+
+ 
+
+In principle, the same methodology can be (and is) employed for the
+mesh regeneration in free-surface problems. However, in a free-surface
+problem the curvilinear boundary evolves freely as part of the
+solution and is therefore not described by a user-specified 
+\c GeomObject. When re-generating the mesh we therefore create a
+temporary \c GeomObject by attaching \c FaceElements to the relevant
+mesh boundaries of the existing mesh. We
+then use the vertices of the face elements to create a polyline
+representation of the boundary. This is illustrated in the figure below
+which shows part of the original mesh (the nodes and triangular elements 
+adjacent to the boundary) in black. The blue lines represent the 
+\c FaceElements that are erected on the current curvilinear domain boundary
+(as defined by the boundaries of the "bulk" elements). The vertices 
+of these \c FaceElements (red hollow circles) provide the vertices 
+for the polyline representation of the boundary (red line).
+
+\image html remesh_1.gif "Sketch illustrating the generation of a polyline along the curvilinear domain boundary. " 
+\image latex remesh_1.eps "Sketch illustrating the generation of a polyline along the curvilinear domain boundary. " width=0.8\textwidth
+
+Using this polyline representation of the boundary, a new mesh is built using 
+\c Triangle. Depending on the target areas specified by the spatial error
+estimator, \c Triangle may erect multiple elements along each polyline
+segment. For instance in the figure below three elements have been
+created along the polyline segment created from \c FaceElement 3 in
+the original mesh.
+
+\image html remesh_2.gif "Sketch showing the new mesh generated by Triangle, using (i) the polygonal representation of the boundary and (ii) the area targets provided by the spatial error estimator. " 
+\image latex remesh_2.eps "Sketch showing the new mesh generated by Triangle, using (i) the polygonal representation of the boundary and (ii) the area targets provided by the spatial error estimator. " width=0.6\textwidth
+
+Next, the boundary coordinates are set up and the nodes are snapped
+onto the curvilinear boundary that is still defined by the 
+\c FaceElements that were attached to the original mesh, as shown below.
+
+\image html remesh_3.gif "Sketch showing the mesh following the snapping of nodes to the curvilinear boundary. " 
+\image latex remesh_3.eps "Sketch showing the mesh following the snapping of nodes to the curvilinear boundary. " width=0.6\textwidth
+
+
+
+<BR>
+<BR>
+<BR>
+<CENTER>
+<TABLE BORDER=1, WIDTH=500px>
+<TR>
+<TD bgcolor="cornsilk">
+<CENTER>
+\b IMPORTANT: 
+\n
+Note that the initial shape of moving free boundaries 
+\b must \b not be described by \c TriangleMeshCurviLines. While the
+use of  \c TriangleMeshCurviLines would ensure that the nodes are 
+initially located exactly on the curvilinear boundary described by 
+the associated \c GeomObject without having to "snap" them to their desired
+position, a problem arises when the mesh is adapted. When
+this happens, nodes on curvilinear boundaries that are described by
+\c TriangleMeshCurviLines are placed
+on the (presumably unchanged) geometry defined by the associated
+\c GeomObject rather than being placed on the deformed boundary
+as described above -- the free surface therefore keeps jumping
+back to its initial position whenever the mesh is adapted 
+which is unlikely to be desired!
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+
+\subsection issues Modifications to the basic mesh re-generation procedure
+The procedure described above is very robust and works satisfactorily 
+in the example problem discussed in this tutorial. Below we discuss a
+a few optional modifications to the mesh regeneration procedure that
+are helpful to deal with complications that can arise in certain 
+circumstances:
+
+\subsubsection unrefinement Unrefinement of polylines 
+
+As discussed above, \c Triangle generates a new mesh, based on (i) the
+polygonal representation of the boundary and (ii) the area targets
+provided by the spatial error estimator for the bulk elements.
+The polygonal boundary representation defines the minimum 
+number of bulk elements that are generated next to the boundary --
+we showed above how multiple elements can be erected on a given
+boundary segment. However, since \c Triangle  never merges any
+boundary segments this procedure can result in unnecessarily fine meshes
+near the boundary: once the bulk mesh has been refined to a certain
+level, the polygonal boundary representation cannot be coarsened,
+even if the spatial error estimator would allow much larger 
+elements to be created at a later stage of the simulation.
+
+We therefore provide the option to coarsen the polygonal boundary
+representation following its creation from the \c FaceElements
+that are attached to the current mesh. This is done by
+assessing if the (geometrical) boundary representation is unnecessarily
+fine, judged by how close any three adjacent vertices
+are to a straight line. This is illustrated in the sketch below:
+To assess if the middle vertex can be deleted, we determine the height 
+of a circular segment connecting the three vertices. If the ratio of
+this height, \f$ d \f$ , to the distance \f$ l \f$ between the two 
+outer vertices is less than a user-defined tolerance (i.e. if the
+local  curvature is so small that the middle vertex is not required to 
+represent the boundary sufficiently accurately), the middle vertex
+is deleted. 
+
+\image html unrefinement.gif "Sketch illustrating the criterion for the unrefinement of polylines. " 
+\image latex unrefinement.eps "Sketch illustrating the criterion for the unrefinement of polylines. " width=0.7\textwidth
+
+The tolerance for the unrefinement of polygons is set by the function 
+
+\code
+TriangleMesh::set_polyline_unrefinement_tolerance(...)
+\endcode
+
+By default we allow polyline unrefinement (with a default tolerance of 0.04).
+Polyline unrefinement can be disabled by calling
+
+\code
+TriangleMesh::disable_polyline_unrefinement()
+\endcode
+
+where \c TriangleMesh is a base for the \c TriangleMeshClosedCurve
+class.
+
+\subsubsection refinement Refinement of polylines 
+
+It is also possible that the free surface deforms in such a way
+that the polyline representation of the domain boundary
+becomes too inaccurate, e.g. because the representation of the
+solution only requires fairly large elements. Even though large
+elements may be sufficient to represent the solution, the mesh-regeneration
+tends to fail when "snapping" the nodes onto the highly-curved 
+curvilinear boundary (typically because elements near the boundary 
+become highly distorted or even inverted).
+
+We therefore provide the option to refine the polygonal representation
+of the boundary employing a criterion similar to the one used for
+unrefinement discussed above. To assess the need for a boundary
+refinement we consider each boundary segment and compute the
+distance  from segment's mid-point to its counterpart on the
+curvilinear boundary. If the ratio of the distance between these 
+points, \f$ d \f$,  to the length of the segment connecting
+the vertices, \f$ l \f$, is larger than a user-specifiable tolerance,
+the  point on the curvilinear boundary becomes an additional 
+vertex of the polyline and the original segment is split into
+two as illustrated in the figure below:
+
+\image html refinement.gif "Sketch illustrating the criterion for the refinement of polylines. " 
+\image latex refinement.eps "Sketch illustrating the criterion for the refinement of polylines. " width=0.7\textwidth
+
+The tolerance for the refinement of polygons is set by the function 
+
+\code
+TriangleMesh::set_polyline_refinement_tolerance(...)
+\endcode
+
+By default we allow polyline refinement (with a default tolerance of 0.08).
+Polyline refinement can be disabled by calling
+
+\code
+TriangleMesh::disable_polyline_refinement()
+\endcode
+
+\subsubsection redistribution Redistribution of segments between polylines 
+The kinematic boundary condition (5) determines only the normal
+displacement of the boundary, hence the tangential displacement of 
+nodes on the boundary is not controlled directly. It is therefore
+possible that nodes move along the perimeter of the curvilinear 
+boundary and, as a result, one polyline may become much
+shorter than the others, as illustrated in the transition from a) to b) 
+in the figure below. This is clearly undesirable and can be
+avoided by redistributing the vertices/segment between the
+polygon's constituent polylines such that each polyline spans
+an approximately equal fraction of the polygon's overall perimeter.
+This process is illustrated in b) and c) in the figure below.
+Note that the redistribution of segments does not change the 
+shape of the polygonal boundary but merely the way in which it
+is represented in terms of polylines.
+
+
+\image html redistribution.gif "Sketch illustrating the optional redistribution of polyline segments. " 
+\image latex redistribution.eps "Sketch illustrating the optional redistribution of polyline segments. " width=0.7\textwidth
+
+We provide the option to perform this step immediately after the generation 
+of the updated polyline representation for the curvilinear boundary
+(and before the boundary refinement/unrefinement discussed above).
+Given that each polyline represents a distinct mesh boundary, the
+redistribution of segments between different polylines moves nodes
+from one boundary to another and, in general, this is clearly
+undesirable. Therefore, the redistribution of segments is
+is deactivated by default and must be activated by calling the function 
+
+\code
+TriangleMeshPolygon::enable_redistribution_of_segments_between_polylines()
+\endcode
+
+Note that the redistribution of segments is not possible/sensible for
+\c TriangleMeshClosedCurve formed by \c TriangleMeshCurviLines since 
+such boundaries are associated with a specific, continuous 
+\c GeomObject with specific start/end coordinates. 
+
+
+<HR>
+
+\subsection exercises Exercises
+
+-# As discussed above, we start the simulation by performing an
+   initial steady Newton solve during which we deform the 
+   polygonal boundary that represents the air-liquid interface
+   into its static equilibrium shape -- a circle enclosing the
+   required volume. This may seem like a rather costly way of
+   creating a circular interface. Why not simply move the
+   nodes on that boundary manually to their "correct" positions
+   by adjusting their radial positions after returning from the
+   mesh constructor? To explore this question, snap the required nodes
+   manually onto the circular boundary and call the steady Newton
+   solver.  Why is the initial residual not equal to zero, even though
+   we have manually assigned the correct solution as an initial guess?  
+-# Comment out \c create_volume_constraint_elements()
+   and \c delete_volume_constraint_elements() throughout the code and
+   explain what happens. 
+-# Experiment with the refinement/unrefinement of polylines and explore
+   the option to re-distribute segments between the polylines
+   that define the boundaries of the bubble. Specifically, change
+   the initial polygonal representation the bubble surface such that
+   the first \c TriangleMeshPolyLine only represents 1/4 of the
+   perimeter while the second one represents the remaining 3/4. 
+   Confirm that, following the mesh adaptation, the bubble boundaries
+   are adjusted such that each boundary occupies approximately 1/2 of
+   the bubble surface when the redistribution of polylines is enabled.
+.
+
+<HR> <HR>
+
+
+\section sources Source files for this tutorial 
+- The source files for
+  this tutorial are located in the directory:
+  <CENTER> 
+  <A HREF="../../../../demo_drivers/navier_stokes/unstructured_adaptive_fs/">
+  demo_drivers/navier_stokes/unstructured_adaptive_fs/ </A> 
+  </CENTER>
+- The driver code is:
+  <CENTER> 
+  <A HREF="../../../../demo_drivers/navier_stokes/unstructured_adaptive_fs/adaptive_bubble_in_channel.cc">
+   demo_drivers/navier_stokes/unstructured_adaptive_fs/adaptive_bubble_in_channel.cc</A> 
+  </CENTER> .
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

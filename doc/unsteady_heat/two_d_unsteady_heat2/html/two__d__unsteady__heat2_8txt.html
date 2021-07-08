@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: two_d_unsteady_heat2.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">two_d_unsteady_heat2.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a7db09e50f04a54496d12ea041f5864b2"><td class="memItemLeft" align="right" valign="top">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the restart file We try to open the file and if successful pass the input stream to the c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> (...) <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a></td></tr>
+<tr class="separator:a7db09e50f04a54496d12ea041f5864b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af39003811eefdbd2d5b4564c02a4decf"><td class="memItemLeft" align="right" valign="top">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt; The only difference is that in the current version of the we moved the specification and initialisation of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a62f61b9e09467e104d78d31afe85f74c">timestep</a> from the c <a class="el" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> into c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#af39003811eefdbd2d5b4564c02a4decf">set_initial_condition</a> (). This is because in a <a class="el" href="two__d__unsteady__heat2_8txt.html#af9b691f352becf166d45985f6e27743a">restarted</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a></td></tr>
+<tr class="separator:af39003811eefdbd2d5b4564c02a4decf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c33f390f5dc2186b59cece9f9017efa"><td class="memItemLeft" align="right" valign="top">otherwise we have to perform the initialisation ourselves skipline start_of_set_initial_condition until end of <a class="el" href="two__d__unsteady__heat2_8txt.html#af39003811eefdbd2d5b4564c02a4decf">set_initial_condition</a>&lt; HR &gt;&lt; HR &gt; section doc Post processing The <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> member <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a8c33f390f5dc2186b59cece9f9017efa">doc_solution</a> (...) is identical to that in the&lt; A HREF</td></tr>
+<tr class="separator:a8c33f390f5dc2186b59cece9f9017efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a23b281df1ce97bf86f6e777c703c7780"><td class="memItemLeft" align="right" valign="top">mainpage Example&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a23b281df1ce97bf86f6e777c703c7780">problem</a></td></tr>
+<tr class="separator:a23b281df1ce97bf86f6e777c703c7780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e5bb1e45274fcc92a839a879b4ae6d3"><td class="memItemLeft" align="right" valign="top">mainpage Example e g to continue a run after a system&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a3e5bb1e45274fcc92a839a879b4ae6d3">crash</a></td></tr>
+<tr class="separator:a3e5bb1e45274fcc92a839a879b4ae6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78567464fb2a399ebab2eedacee86b9d"><td class="memItemLeft" align="right" valign="top">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a> = \{x_i \in [0,1]; i=1,2 \} \f$</td></tr>
+<tr class="separator:a78567464fb2a399ebab2eedacee86b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d0b1564b443624e10612d99ead968b"><td class="memItemLeft" align="right" valign="top">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[u(x_1, x_2, <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; As&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#ac2d0b1564b443624e10612d99ead968b">before</a></td></tr>
+<tr class="separator:ac2d0b1564b443624e10612d99ead968b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0ba8a85ef1ec9304eeb9b197f992f3e"><td class="memItemLeft" align="right" valign="top">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[u(x_1, x_2, <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; As we consider the unforced&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#af0ba8a85ef1ec9304eeb9b197f992f3e">case</a></td></tr>
+<tr class="separator:af0ba8a85ef1ec9304eeb9b197f992f3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16804cca049bcf5218aafab0e5c18250"><td class="memItemLeft" align="right" valign="top">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve f[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\f] in the square domain f subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> f[\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\f] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> f[u(x_1, x_2, <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\f] where the functions f g_0 f and f h_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; As we consider the unforced f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> =0 \f$</td></tr>
+<tr class="separator:a16804cca049bcf5218aafab0e5c18250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9f850e1db7937ab7dedb55ff50a5a4c"><td class="memItemLeft" align="right" valign="top">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[u(x_1, x_2, <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; As we consider the unforced <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and choose boundary and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> that are consistent with the exact solution <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[u_0(x_1, x_2, <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>)=e^{-Kt}\sin\left(\sqrt{K} \left(x_1 \cos \Phi+x_2 \sin\Phi\right)\right), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> K <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> Phi <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#ab9f850e1db7937ab7dedb55ff50a5a4c">constants</a></td></tr>
+<tr class="separator:ab9f850e1db7937ab7dedb55ff50a5a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6551fb3992a7fccaad2655cfc5b32c28"><td class="memItemLeft" align="right" valign="top">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[u(x_1, x_2, <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; As we consider the unforced <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and choose boundary and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> that are consistent with the exact solution <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[u_0(x_1, x_2, <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>)=e^{-Kt}\sin\left(\sqrt{K} \left(x_1 \cos \Phi+x_2 \sin\Phi\right)\right), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> K <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> Phi <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are controlling the decay rate of the solution and its spatial&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a6551fb3992a7fccaad2655cfc5b32c28">orientation</a></td></tr>
+<tr class="separator:a6551fb3992a7fccaad2655cfc5b32c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63a7536226dfe6334a9dd4dbd78d2bce"><td class="memItemLeft" align="right" valign="top">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[u(x_1, x_2, <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; As we consider the unforced <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and choose boundary and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> that are consistent with the exact solution <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>[u_0(x_1, x_2, <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>)=e^{-Kt}\sin\left(\sqrt{K} \left(x_1 \cos \Phi+x_2 \sin\Phi\right)\right), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> K <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> Phi <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are controlling the decay rate of the solution and its spatial respectively The figure below shows a plot of computed and exact solution at a control <a class="el" href="two__d__unsteady__heat2_8txt.html#a4d080e44c89dcb37e972ecf14410f5c4">node</a> as a <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> of time The solid <a class="el" href="two__d__unsteady__heat2_8txt.html#a0631f8e9dd7a037c76c51e64fb7b9eab">lines</a> represent quantities computed during the original&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a></td></tr>
+<tr class="separator:a63a7536226dfe6334a9dd4dbd78d2bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d080e44c89dcb37e972ecf14410f5c4"><td class="memItemLeft" align="right" valign="top">the dashed line shows the corresponding data from a second <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> that was <a class="el" href="two__d__unsteady__heat2_8txt.html#af9b691f352becf166d45985f6e27743a">restarted</a> with the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file generated at <a class="el" href="two__d__unsteady__heat2_8txt.html#a62f61b9e09467e104d78d31afe85f74c">timestep</a> of the original <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> I w textwidth trace Time evolution of the computed and exact solutions at a control&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a4d080e44c89dcb37e972ecf14410f5c4">node</a></td></tr>
+<tr class="separator:a4d080e44c89dcb37e972ecf14410f5c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0631f8e9dd7a037c76c51e64fb7b9eab"><td class="memItemLeft" align="right" valign="top">the dashed line shows the corresponding data from a second <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> that was <a class="el" href="two__d__unsteady__heat2_8txt.html#af9b691f352becf166d45985f6e27743a">restarted</a> with the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file generated at <a class="el" href="two__d__unsteady__heat2_8txt.html#a62f61b9e09467e104d78d31afe85f74c">timestep</a> of the original <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> I w textwidth trace Time evolution of the computed and exact solutions at a control the global error norm and the norm of the solution Solid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a0631f8e9dd7a037c76c51e64fb7b9eab">lines</a></td></tr>
+<tr class="separator:a0631f8e9dd7a037c76c51e64fb7b9eab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace212d0baccb6fc4524f6fe1a1c585c4"><td class="memItemLeft" align="right" valign="top">dashed&lt;/A &gt; therefore we only discuss the modifications required to enable the dump and <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#ace212d0baccb6fc4524f6fe1a1c585c4">operations</a></td></tr>
+<tr class="separator:ace212d0baccb6fc4524f6fe1a1c585c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe9a9796f4c9667bdf98f4296331a7c1"><td class="memItemLeft" align="right" valign="top">dashed&lt;/A &gt; therefore we only discuss the modifications required to enable the dump and <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> we start the <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> at time <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a></td></tr>
+<tr class="separator:abe9a9796f4c9667bdf98f4296331a7c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad18e5ff8f11ec24a9b65e61da06136fe"><td class="memItemLeft" align="right" valign="top">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#ad18e5ff8f11ec24a9b65e61da06136fe">specified</a></td></tr>
+<tr class="separator:ad18e5ff8f11ec24a9b65e61da06136fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31ef27c03ae0740796ab3929a4fadec2"><td class="memItemLeft" align="right" valign="top">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a></td></tr>
+<tr class="separator:a31ef27c03ae0740796ab3929a4fadec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73236bbb6813d9d1fd18b9c406eac7a6"><td class="memItemLeft" align="right" valign="top">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt; The only difference is that in the current version of the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a73236bbb6813d9d1fd18b9c406eac7a6">code</a></td></tr>
+<tr class="separator:a73236bbb6813d9d1fd18b9c406eac7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9b691f352becf166d45985f6e27743a"><td class="memItemLeft" align="right" valign="top">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt; The only difference is that in the current version of the we moved the specification and initialisation of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a62f61b9e09467e104d78d31afe85f74c">timestep</a> from the c <a class="el" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> into c the value of c <a class="el" href="two__d__unsteady__heat2_8txt.html#a8d9b1de956335a98b4b70f8c32b2c130">dt</a> must be consistent with that used in the original <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> If the <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> is&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#af9b691f352becf166d45985f6e27743a">restarted</a></td></tr>
+<tr class="separator:af9b691f352becf166d45985f6e27743a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62f61b9e09467e104d78d31afe85f74c"><td class="memItemLeft" align="right" valign="top">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt; The only difference is that in the current version of the we moved the specification and initialisation of the timestep from the c <a class="el" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> into c the value of c <a class="el" href="two__d__unsteady__heat2_8txt.html#a8d9b1de956335a98b4b70f8c32b2c130">dt</a> must be consistent with that used in the original <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> If the <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> is the generic c called by c automatically initialises the previous&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a62f61b9e09467e104d78d31afe85f74c">timestep</a></td></tr>
+<tr class="separator:a62f61b9e09467e104d78d31afe85f74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d4fdf96c485823f65b45440272f1dba"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section dump Dumping the solution The c if&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a8d4fdf96c485823f65b45440272f1dba">necessary</a></td></tr>
+<tr class="separator:a8d4fdf96c485823f65b45440272f1dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1efbc542a126983806210a2e7fb804fa"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section dump Dumping the solution The c if manipulated <a class="el" href="two__d__unsteady__heat2_8txt.html#ac2d0b1564b443624e10612d99ead968b">before</a> a <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a1efbc542a126983806210a2e7fb804fa">However</a></td></tr>
+<tr class="separator:a1efbc542a126983806210a2e7fb804fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a2604285e6d47eab09c6e0022169c94"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section dump Dumping the solution The c if manipulated <a class="el" href="two__d__unsteady__heat2_8txt.html#ac2d0b1564b443624e10612d99ead968b">before</a> a <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> the specific content of the file is generally of little interest it is written in a format that can be read by the corresponding <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> c the dump file&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a7a2604285e6d47eab09c6e0022169c94">contains</a></td></tr>
+<tr class="separator:a7a2604285e6d47eab09c6e0022169c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82664a70747de92ecd18c5517938284e"><td class="memItemLeft" align="right" valign="top">The number of previous&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a82664a70747de92ecd18c5517938284e">timesteps</a></td></tr>
+<tr class="separator:a82664a70747de92ecd18c5517938284e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9b1de956335a98b4b70f8c32b2c130"><td class="memItemLeft" align="right" valign="top">The number of previous c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a8d9b1de956335a98b4b70f8c32b2c130">dt</a></td></tr>
+<tr class="separator:a8d9b1de956335a98b4b70f8c32b2c130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63cad0055231f0bffe1b58d16de769ad"><td class="memItemLeft" align="right" valign="top">The number of previous c stored in the c <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> s c Time&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a63cad0055231f0bffe1b58d16de769ad">object</a></td></tr>
+<tr class="separator:a63cad0055231f0bffe1b58d16de769ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54fa6ac9bf4f959cb77fdbeb29cbf67e"><td class="memItemLeft" align="right" valign="top">The number of previous c stored in the c Problem s c Time and their values The values and history values for all c Data objects in the c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a></td></tr>
+<tr class="separator:a54fa6ac9bf4f959cb77fdbeb29cbf67e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac32f9756397f5ec7b244640399dbedc1"><td class="memItemLeft" align="right" valign="top">The number of previous c stored in the c <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> s c Time and their values The values and history values for all c Data objects in the c as well as the present and previous coordinates of all c Nodes The raw data is augmented by brief comments that facilitate the identification of individual entries In the present the generic c therefore no additional information needs to be added to the dump file The section ref comments below <a class="el" href="two__d__unsteady__heat2_8txt.html#a7a2604285e6d47eab09c6e0022169c94">contains</a> an exercise that illustrates how to customise the dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> to record additional&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#ac32f9756397f5ec7b244640399dbedc1">parameters</a></td></tr>
+<tr class="separator:ac32f9756397f5ec7b244640399dbedc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2597ecdbc7dd261da98cff494df71f9"><td class="memItemLeft" align="right" valign="top">the&lt; A HREF=&quot;../../two_d_unsteady_heat_ALE/html/index.html&quot;&gt; demo <a class="el" href="two__d__unsteady__heat2_8txt.html#a73236bbb6813d9d1fd18b9c406eac7a6">code</a> with spatial adaptivity&lt;/A &gt; provides another example of a customised dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> skipline start_of_dump_it until end of dump_it&lt; HR &gt;&lt; HR &gt; section read Reading a solution from disk Since the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file was written by the generic c it can be read back with the generic c additional read statements could be added&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#ab2597ecdbc7dd261da98cff494df71f9">here</a></td></tr>
+<tr class="separator:ab2597ecdbc7dd261da98cff494df71f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a698650bba68085cb0034f8bcfe57ae04"><td class="memItemLeft" align="right" valign="top">see ref comments skipline start_of_restart until end of <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a>&lt; HR &gt;&lt; HR &gt; section comments Comments and Exercises The c Problem::dump(...) and \c <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> just make sure you do it in the same order in both functions&lt; B &gt; ii&lt;/B &gt; The easiest way to make the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a698650bba68085cb0034f8bcfe57ae04">label</a></td></tr>
+<tr class="separator:a698650bba68085cb0034f8bcfe57ae04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2740d2bcf26c788968d97ee96c61b2c2"><td class="memItemLeft" align="right" valign="top">see ref comments skipline start_of_restart until end of <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a>&lt; HR &gt;&lt; HR &gt; section comments Comments and Exercises The c Problem::dump(...) and \c <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> just make sure you do it in the same order in both functions&lt; B &gt; ii&lt;/B &gt; The easiest way to make the currently stored in the c DocInfo <a class="el" href="two__d__unsteady__heat2_8txt.html#a63cad0055231f0bffe1b58d16de769ad">object</a> in the c <a class="el" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a></td></tr>
+<tr class="separator:a2740d2bcf26c788968d97ee96c61b2c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a8c33f390f5dc2186b59cece9f9017efa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c33f390f5dc2186b59cece9f9017efa">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">otherwise we have to perform the initialisation ourselves skipline start_of_set_initial_condition until end of <a class="el" href="two__d__unsteady__heat2_8txt.html#af39003811eefdbd2d5b4564c02a4decf">set_initial_condition</a>&lt;HR&gt;&lt;HR&gt; section doc Post processing The <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> member <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> c doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7db09e50f04a54496d12ea041f5864b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7db09e50f04a54496d12ea041f5864b2">&#9670;&nbsp;</a></span>restart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the restart file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt; The only difference is that in the current version of the we moved the specification and initialisation of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a62f61b9e09467e104d78d31afe85f74c">timestep</a> from the c <a class="el" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> into c the value of c <a class="el" href="two__d__unsteady__heat2_8txt.html#a8d9b1de956335a98b4b70f8c32b2c130">dt</a> must be consistent with that used in the original <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> If the <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> is the generic c called by c restart </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af39003811eefdbd2d5b4564c02a4decf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af39003811eefdbd2d5b4564c02a4decf">&#9670;&nbsp;</a></span>set_initial_condition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt; The only difference is that in the current version of the we moved the specification and initialisation of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a62f61b9e09467e104d78d31afe85f74c">timestep</a> from the c <a class="el" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> into c set_initial_condition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ac2d0b1564b443624e10612d99ead968b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2d0b1564b443624e10612d99ead968b">&#9670;&nbsp;</a></span>before</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt;&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; The two dimensional unsteady heat equation in a square domain&lt;/B&gt;&lt;/CENTER&gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [u(x_1,x_2,<a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1,x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; As before</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00040">40</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="af0ba8a85ef1ec9304eeb9b197f992f3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0ba8a85ef1ec9304eeb9b197f992f3e">&#9670;&nbsp;</a></span>case</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt;&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; The two dimensional unsteady heat equation in a square domain&lt;/B&gt;&lt;/CENTER&gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [u(x_1,x_2,<a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1,x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; As we consider the unforced case</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00040">40</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a73236bbb6813d9d1fd18b9c406eac7a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73236bbb6813d9d1fd18b9c406eac7a6">&#9670;&nbsp;</a></span>code</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt; The only difference is that in the current version of the code</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00153">153</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a31ef27c03ae0740796ab3929a4fadec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31ef27c03ae0740796ab3929a4fadec2">&#9670;&nbsp;</a></span>conditions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial conditions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00150">150</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab9f850e1db7937ab7dedb55ff50a5a4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9f850e1db7937ab7dedb55ff50a5a4c">&#9670;&nbsp;</a></span>constants</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt;&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; The two dimensional unsteady heat equation in a square domain&lt;/B&gt;&lt;/CENTER&gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [u(x_1,x_2,<a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1,x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; As we consider the unforced <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and choose boundary and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> that are consistent with the exact solution <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [u_0(x_1,x_2,<a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>) = e^{-Kt}\sin\left( \sqrt{K} \left( x_1 \cos \Phi + x_2 \sin\Phi\right)\right), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> K <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> Phi <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are constants</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00047">47</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7a2604285e6d47eab09c6e0022169c94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a2604285e6d47eab09c6e0022169c94">&#9670;&nbsp;</a></span>contains</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section dump Dumping the solution The c if manipulated <a class="el" href="two__d__unsteady__heat2_8txt.html#ac2d0b1564b443624e10612d99ead968b">before</a> a <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> the specific content of the file is generally of little interest it is written in a format that can be read by the corresponding <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> c the dump file contains</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00196">196</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3e5bb1e45274fcc92a839a879b4ae6d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e5bb1e45274fcc92a839a879b4ae6d3">&#9670;&nbsp;</a></span>crash</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example e g to continue a run after a system crash</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00005">5</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a78567464fb2a399ebab2eedacee86b9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78567464fb2a399ebab2eedacee86b9d">&#9670;&nbsp;</a></span>D</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt;&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; The two dimensional unsteady heat equation in a square domain&lt;/B&gt;&lt;/CENTER&gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> D = \{x_i \in [0,1]; i=1,2 \} \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00023">23</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8d9b1de956335a98b4b70f8c32b2c130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d9b1de956335a98b4b70f8c32b2c130">&#9670;&nbsp;</a></span>dt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The number of previous c dt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00198">198</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat_8cc_source.html#l00414">main()</a>.</p>
+
+</div>
+</div>
+<a id="a16804cca049bcf5218aafab0e5c18250"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16804cca049bcf5218aafab0e5c18250">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt;&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; The two dimensional unsteady heat equation in a square domain&lt;/B&gt;&lt;/CENTER&gt; Solve f [\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\f] in the square domain f subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> f [\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\f] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> f [u(x_1,x_2,<a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1,x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\f] where the functions f g_0 f and f h_0 f are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; As we consider the unforced f f =0 \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00040">40</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2740d2bcf26c788968d97ee96c61b2c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2740d2bcf26c788968d97ee96c61b2c2">&#9670;&nbsp;</a></span>function</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref comments skipline start_of_restart until end of <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a>&lt;HR&gt;&lt;HR&gt; section comments Comments and Exercises The c Problem::dump (...) and \c <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> just make sure you do it in the same order in both functions&lt;B&gt; ii&lt;/B&gt; The easiest way to make the currently stored in the c DocInfo <a class="el" href="two__d__unsteady__heat2_8txt.html#a63cad0055231f0bffe1b58d16de769ad">object</a> in the c <a class="el" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> function</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00272">272</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab2597ecdbc7dd261da98cff494df71f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2597ecdbc7dd261da98cff494df71f9">&#9670;&nbsp;</a></span>here</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the&lt;A HREF=&quot;../../two_d_unsteady_heat_ALE/html/index.html&quot;&gt; demo <a class="el" href="two__d__unsteady__heat2_8txt.html#a73236bbb6813d9d1fd18b9c406eac7a6">code</a> with spatial adaptivity&lt;/A&gt; provides another example of a customised dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> skipline start_of_dump_it until end of dump_it&lt;HR&gt;&lt;HR&gt; section read Reading a solution from disk Since the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file was written by the generic c it can be read back with the generic c additional read statements could be added here</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00230">230</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1efbc542a126983806210a2e7fb804fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1efbc542a126983806210a2e7fb804fa">&#9670;&nbsp;</a></span>However</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section dump Dumping the solution The c if manipulated <a class="el" href="two__d__unsteady__heat2_8txt.html#ac2d0b1564b443624e10612d99ead968b">before</a> a <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> However</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00189">189</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a698650bba68085cb0034f8bcfe57ae04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a698650bba68085cb0034f8bcfe57ae04">&#9670;&nbsp;</a></span>label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref comments skipline start_of_restart until end of <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a>&lt;HR&gt;&lt;HR&gt; section comments Comments and Exercises The c Problem::dump (...) and \c <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> just make sure you do it in the same order in both functions&lt;B&gt; ii&lt;/B&gt; The easiest way to make the label</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00240">240</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0631f8e9dd7a037c76c51e64fb7b9eab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0631f8e9dd7a037c76c51e64fb7b9eab">&#9670;&nbsp;</a></span>lines</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">dashed lines</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00058">58</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8d4fdf96c485823f65b45440272f1dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d4fdf96c485823f65b45440272f1dba">&#9670;&nbsp;</a></span>necessary</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section dump Dumping the solution The c if necessary</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00188">188</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4d080e44c89dcb37e972ecf14410f5c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d080e44c89dcb37e972ecf14410f5c4">&#9670;&nbsp;</a></span>node</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the dashed line shows the corresponding data from a second <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> that was <a class="el" href="two__d__unsteady__heat2_8txt.html#af9b691f352becf166d45985f6e27743a">restarted</a> with the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file generated at <a class="el" href="two__d__unsteady__heat2_8txt.html#a62f61b9e09467e104d78d31afe85f74c">timestep</a> of the original <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> I w textwidth trace Time evolution of the computed and exact solutions at a control node</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00058">58</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a63cad0055231f0bffe1b58d16de769ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63cad0055231f0bffe1b58d16de769ad">&#9670;&nbsp;</a></span>object</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The number of previous c stored in the c <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> s c Time object</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00199">199</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ace212d0baccb6fc4524f6fe1a1c585c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace212d0baccb6fc4524f6fe1a1c585c4">&#9670;&nbsp;</a></span>operations</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">dashed&lt;/A&gt; therefore we only discuss the modifications required to enable the dump and <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> operations</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00068">68</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6551fb3992a7fccaad2655cfc5b32c28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6551fb3992a7fccaad2655cfc5b32c28">&#9670;&nbsp;</a></span>orientation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt;&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; The two dimensional unsteady heat equation in a square domain&lt;/B&gt;&lt;/CENTER&gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [u(x_1,x_2,<a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1,x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; As we consider the unforced <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and choose boundary and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> that are consistent with the exact solution <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [u_0(x_1,x_2,<a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>) = e^{-Kt}\sin\left( \sqrt{K} \left( x_1 \cos \Phi + x_2 \sin\Phi\right)\right), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> K <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> Phi <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are controlling the decay rate of the solution and its spatial orientation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00048">48</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac32f9756397f5ec7b244640399dbedc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac32f9756397f5ec7b244640399dbedc1">&#9670;&nbsp;</a></span>parameters</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The number of previous c stored in the c <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> s c Time and their values The values and history values for all c Data objects in the c as well as the present and previous coordinates of all c Nodes The raw data is augmented by brief comments that facilitate the identification of individual entries In the present the generic c therefore no additional information needs to be added to the dump file The section ref comments below <a class="el" href="two__d__unsteady__heat2_8txt.html#a7a2604285e6d47eab09c6e0022169c94">contains</a> an exercise that illustrates how to customise the dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> to record additional parameters</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00212">212</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a23b281df1ce97bf86f6e777c703c7780"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23b281df1ce97bf86f6e777c703c7780">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The number of previous c stored in the c <a class="el" href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a> s c Time and their values The values and history values for all c Data objects in the c as well as the present and previous coordinates of all c Nodes The raw data is augmented by brief comments that facilitate the identification of individual entries In the present problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00004">4</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat_8cc_source.html#l00414">main()</a>.</p>
+
+</div>
+</div>
+<a id="a54fa6ac9bf4f959cb77fdbeb29cbf67e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54fa6ac9bf4f959cb77fdbeb29cbf67e">&#9670;&nbsp;</a></span>Problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The number of previous c stored in the c Problem s c Time and their values The values and history values for all c Data objects in the c Problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00201">201</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="af9b691f352becf166d45985f6e27743a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9b691f352becf166d45985f6e27743a">&#9670;&nbsp;</a></span>restarted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt; The only difference is that in the current version of the we moved the specification and initialisation of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a62f61b9e09467e104d78d31afe85f74c">timestep</a> from the c <a class="el" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> into c the value of c <a class="el" href="two__d__unsteady__heat2_8txt.html#a8d9b1de956335a98b4b70f8c32b2c130">dt</a> must be consistent with that used in the original <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> If the <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> is restarted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00158">158</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a63a7536226dfe6334a9dd4dbd78d2bce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63a7536226dfe6334a9dd4dbd78d2bce">&#9670;&nbsp;</a></span>simulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> capabilities by re visiting the unsteady heat equation discussed in a&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt;&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; The two dimensional unsteady heat equation in a square domain&lt;/B&gt;&lt;/CENTER&gt; Solve <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] in the square domain <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> subject to the Dirichlet boundary <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [\left. u\right|_{\partial <a class="el" href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [u(x_1,x_2,<a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>=0)=h_0(x_1,x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where the functions <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> g_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> h_0 <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; As we consider the unforced <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and choose boundary and initial <a class="el" href="two__d__unsteady__heat2_8txt.html#a31ef27c03ae0740796ab3929a4fadec2">conditions</a> that are consistent with the exact solution <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> [u_0(x_1,x_2,<a class="el" href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a>) = e^{-Kt}\sin\left( \sqrt{K} \left( x_1 \cos \Phi + x_2 \sin\Phi\right)\right), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a>] where <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> K <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> and <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> Phi <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> are controlling the decay rate of the solution and its spatial respectively The figure below shows a plot of computed and exact solution at a control <a class="el" href="two__d__unsteady__heat2_8txt.html#a4d080e44c89dcb37e972ecf14410f5c4">node</a> as a <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> of time The solid <a class="el" href="two__d__unsteady__heat2_8txt.html#a0631f8e9dd7a037c76c51e64fb7b9eab">lines</a> represent quantities computed during the original simulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00052">52</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad18e5ff8f11ec24a9b65e61da06136fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad18e5ff8f11ec24a9b65e61da06136fe">&#9670;&nbsp;</a></span>specified</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are specified</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00150">150</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="abe9a9796f4c9667bdf98f4296331a7c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe9a9796f4c9667bdf98f4296331a7c1">&#9670;&nbsp;</a></span>t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">dashed&lt;/A&gt; therefore we only discuss the modifications required to enable the dump and <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> we start the <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> at time <a class="el" href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a> t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00069">69</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat_8cc_source.html#l00261">UnsteadyHeatProblem&lt; ELEMENT &gt;::set_initial_condition()</a>.</p>
+
+</div>
+</div>
+<a id="a62f61b9e09467e104d78d31afe85f74c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62f61b9e09467e104d78d31afe85f74c">&#9670;&nbsp;</a></span>timestep</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the <a class="el" href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a> file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A&gt; The only difference is that in the current version of the we moved the specification and initialisation of the timestep from the c <a class="el" href="two__d__unsteady__heat__restarted_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> <a class="el" href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a> into c the value of c <a class="el" href="two__d__unsteady__heat2_8txt.html#a8d9b1de956335a98b4b70f8c32b2c130">dt</a> must be consistent with that used in the original <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> If the <a class="el" href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a> is the generic c called by c automatically initialises the previous timestep</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00160">160</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a82664a70747de92ecd18c5517938284e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82664a70747de92ecd18c5517938284e">&#9670;&nbsp;</a></span>timesteps</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">The number of previous timesteps</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat2_8txt_source.html#l00198">198</a> of file <a class="el" href="two__d__unsteady__heat2_8txt_source.html">two_d_unsteady_heat2.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:05:15
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

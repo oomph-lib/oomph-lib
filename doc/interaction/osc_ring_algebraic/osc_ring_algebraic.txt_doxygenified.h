@@ -1,0 +1,21 @@
+/**
+
+\mainpage A simple fluid-structure interaction problem revisited: Finite Reynolds number flow, driven by an oscillating ring -- mesh update done by AlgebraicElements. 
+
+
+We re-visit the simple fluid-structure interaction problem
+considered in the <A HREF="../../osc_ring_macro/html/index.html">
+earlier example</A>.This time we perform the update of the
+nodal positions with \c AlgebraicElements.
+
+
+
+
+\include osc_ring_alg.cc
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

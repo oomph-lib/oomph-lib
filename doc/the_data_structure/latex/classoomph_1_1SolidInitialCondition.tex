@@ -1,0 +1,182 @@
+\hypertarget{classoomph_1_1SolidInitialCondition}{}\doxysection{oomph\+::Solid\+Initial\+Condition Class Reference}
+\label{classoomph_1_1SolidInitialCondition}\index{oomph::SolidInitialCondition@{oomph::SolidInitialCondition}}
+
+
+A class to specify the initial conditions for a solid body. Solid bodies are often discretised with Hermite-\/type elements, for which the assignment of the generalised nodal values is nontrivial since they represent derivatives w.\+r.\+t. to the local coordinates. A \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object specifies initial position (i.\+e. shape), velocity and acceleration of the structure with a geometric object. An integer specifies which time-\/derivative derivative is currently assigned. See example codes for a demonstration of its use.  
+
+
+
+
+{\ttfamily \#include $<$elements.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SolidInitialCondition_acbadca9acd23896ac9a83a122784f451}{Solid\+Initial\+Condition}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\mbox{\hyperlink{classoomph_1_1SolidInitialCondition_a441ecb1f0511a77b14d11e1225484a46}{geom\+\_\+object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass geometric object; initialise time deriv to 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SolidInitialCondition_aac6769fc4973ea1862c50df8a4ca6536}{Solid\+Initial\+Condition}} (const \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidInitialCondition_ab746fd596b28c65865a9349b08ca5d6b}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SolidInitialCondition_a441ecb1f0511a77b14d11e1225484a46}{geom\+\_\+object\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em (Reference to) pointer to geom object that specifies the initial condition \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1SolidInitialCondition_ad1fcd02e1af7c0d22f871e5f968ee5e0}{ic\+\_\+time\+\_\+deriv}} ()
+\begin{DoxyCompactList}\small\item\em Which time derivative are we currently assigning? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ \mbox{\hyperlink{classoomph_1_1SolidInitialCondition_ab88fd7c7d57d8d340a012b277a12128f}{Geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the initial condition (shape, veloc and accel) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1SolidInitialCondition_aae8a896ccc0c0565922cb60f4f7ebd15}{I\+C\+\_\+time\+\_\+deriv}}
+\begin{DoxyCompactList}\small\item\em Which time derivative (0,1,2) are we currently assigning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to specify the initial conditions for a solid body. Solid bodies are often discretised with Hermite-\/type elements, for which the assignment of the generalised nodal values is nontrivial since they represent derivatives w.\+r.\+t. to the local coordinates. A \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object specifies initial position (i.\+e. shape), velocity and acceleration of the structure with a geometric object. An integer specifies which time-\/derivative derivative is currently assigned. See example codes for a demonstration of its use. 
+
+Definition at line 3370 of file elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidInitialCondition_acbadca9acd23896ac9a83a122784f451}\label{classoomph_1_1SolidInitialCondition_acbadca9acd23896ac9a83a122784f451}} 
+\index{oomph::SolidInitialCondition@{oomph::SolidInitialCondition}!SolidInitialCondition@{SolidInitialCondition}}
+\index{SolidInitialCondition@{SolidInitialCondition}!oomph::SolidInitialCondition@{oomph::SolidInitialCondition}}
+\doxysubsubsection{\texorpdfstring{SolidInitialCondition()}{SolidInitialCondition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Solid\+Initial\+Condition\+::\+Solid\+Initial\+Condition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$}]{geom\+\_\+object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass geometric object; initialise time deriv to 0. 
+
+
+
+Definition at line 3376 of file elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SolidInitialCondition_aac6769fc4973ea1862c50df8a4ca6536}\label{classoomph_1_1SolidInitialCondition_aac6769fc4973ea1862c50df8a4ca6536}} 
+\index{oomph::SolidInitialCondition@{oomph::SolidInitialCondition}!SolidInitialCondition@{SolidInitialCondition}}
+\index{SolidInitialCondition@{SolidInitialCondition}!oomph::SolidInitialCondition@{oomph::SolidInitialCondition}}
+\doxysubsubsection{\texorpdfstring{SolidInitialCondition()}{SolidInitialCondition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Solid\+Initial\+Condition\+::\+Solid\+Initial\+Condition (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 3382 of file elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidInitialCondition_a441ecb1f0511a77b14d11e1225484a46}\label{classoomph_1_1SolidInitialCondition_a441ecb1f0511a77b14d11e1225484a46}} 
+\index{oomph::SolidInitialCondition@{oomph::SolidInitialCondition}!geom\_object\_pt@{geom\_object\_pt}}
+\index{geom\_object\_pt@{geom\_object\_pt}!oomph::SolidInitialCondition@{oomph::SolidInitialCondition}}
+\doxysubsubsection{\texorpdfstring{geom\_object\_pt()}{geom\_object\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$\& oomph\+::\+Solid\+Initial\+Condition\+::geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Reference to) pointer to geom object that specifies the initial condition 
+
+
+
+Definition at line 3395 of file elements.\+h.
+
+
+
+References Geom\+\_\+object\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+jacobian\+\_\+for\+\_\+solid\+\_\+ic(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+directly(), and oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+static\+\_\+initial\+\_\+condition().
+
+\mbox{\Hypertarget{classoomph_1_1SolidInitialCondition_ad1fcd02e1af7c0d22f871e5f968ee5e0}\label{classoomph_1_1SolidInitialCondition_ad1fcd02e1af7c0d22f871e5f968ee5e0}} 
+\index{oomph::SolidInitialCondition@{oomph::SolidInitialCondition}!ic\_time\_deriv@{ic\_time\_deriv}}
+\index{ic\_time\_deriv@{ic\_time\_deriv}!oomph::SolidInitialCondition@{oomph::SolidInitialCondition}}
+\doxysubsubsection{\texorpdfstring{ic\_time\_deriv()}{ic\_time\_deriv()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Solid\+Initial\+Condition\+::ic\+\_\+time\+\_\+deriv (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Which time derivative are we currently assigning? 
+
+
+
+Definition at line 3401 of file elements.\+h.
+
+
+
+References I\+C\+\_\+time\+\_\+deriv.
+
+
+
+Referenced by oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+jacobian\+\_\+for\+\_\+solid\+\_\+ic(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+directly(), and oomph\+::\+Solid\+I\+C\+Problem\+::set\+\_\+static\+\_\+initial\+\_\+condition().
+
+\mbox{\Hypertarget{classoomph_1_1SolidInitialCondition_ab746fd596b28c65865a9349b08ca5d6b}\label{classoomph_1_1SolidInitialCondition_ab746fd596b28c65865a9349b08ca5d6b}} 
+\index{oomph::SolidInitialCondition@{oomph::SolidInitialCondition}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::SolidInitialCondition@{oomph::SolidInitialCondition}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Solid\+Initial\+Condition\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 3388 of file elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidInitialCondition_ab88fd7c7d57d8d340a012b277a12128f}\label{classoomph_1_1SolidInitialCondition_ab88fd7c7d57d8d340a012b277a12128f}} 
+\index{oomph::SolidInitialCondition@{oomph::SolidInitialCondition}!Geom\_object\_pt@{Geom\_object\_pt}}
+\index{Geom\_object\_pt@{Geom\_object\_pt}!oomph::SolidInitialCondition@{oomph::SolidInitialCondition}}
+\doxysubsubsection{\texorpdfstring{Geom\_object\_pt}{Geom\_object\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ oomph\+::\+Solid\+Initial\+Condition\+::\+Geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the initial condition (shape, veloc and accel) 
+
+
+
+Definition at line 3411 of file elements.\+h.
+
+
+
+Referenced by geom\+\_\+object\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1SolidInitialCondition_aae8a896ccc0c0565922cb60f4f7ebd15}\label{classoomph_1_1SolidInitialCondition_aae8a896ccc0c0565922cb60f4f7ebd15}} 
+\index{oomph::SolidInitialCondition@{oomph::SolidInitialCondition}!IC\_time\_deriv@{IC\_time\_deriv}}
+\index{IC\_time\_deriv@{IC\_time\_deriv}!oomph::SolidInitialCondition@{oomph::SolidInitialCondition}}
+\doxysubsubsection{\texorpdfstring{IC\_time\_deriv}{IC\_time\_deriv}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Solid\+Initial\+Condition\+::\+I\+C\+\_\+time\+\_\+deriv\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Which time derivative (0,1,2) are we currently assigning. 
+
+
+
+Definition at line 3414 of file elements.\+h.
+
+
+
+Referenced by ic\+\_\+time\+\_\+deriv().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elements_8h}{elements.\+h}}\end{DoxyCompactItemize}

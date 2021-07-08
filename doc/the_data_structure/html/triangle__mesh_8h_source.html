@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: triangle_mesh.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4075b182e53a3873a42d885f4e1e98c4.html">generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">triangle_mesh.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="triangle__mesh_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Common base class for all Triangle Meshes</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#ifndef OOMPH_TRIMESH_HEADER</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define OOMPH_TRIMESH_HEADER</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// Config header generated by autoconfig</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;oomph-lib-config.h&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// Oomph-lib includes</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Vector_8h.html">Vector.h</a>&quot;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nodes_8h.html">nodes.h</a>&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="matrices_8h.html">matrices.h</a>&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mesh_8h.html">mesh.h</a>&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="unstructured__two__d__mesh__geometry__base_8h.html">unstructured_two_d_mesh_geometry_base.h</a>&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/// Base class for triangle meshes (meshes made of 2D triangle elements).</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/// Note: we choose to template TriangleMeshBase here because certain</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/// functions in UnstructuredTwoDMeshGeometryBase need template parameters</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/// and it&#39;s much cleaner simply to template the entire class</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html">   51</a></span>&#160; <span class="keyword">class </span><a class="code" href="classoomph_1_1TriangleMeshBase.html">TriangleMeshBase</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1UnstructuredTwoDMeshGeometryBase.html">UnstructuredTwoDMeshGeometryBase</a>,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                          <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1Mesh.html">Mesh</a></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> /// Constructor </span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#afdfa2e68988d225301a9a262883ddf62">   58</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#afdfa2e68988d225301a9a262883ddf62">TriangleMeshBase</a>() </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#ifdef OOMPH_HAS_TRIANGLE_LIB</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   <span class="comment">//Initialise the TriangulateIO Data structure</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;   <a class="code" href="namespaceoomph_1_1TriangleHelper.html#a884345fd8d03dda0fa3499d2c63a4f5c">TriangleHelper::initialise_triangulateio</a>(<a class="code" href="classoomph_1_1TriangleMeshBase.html#a488453de96eadbe320ea97c63a34d748">Triangulateio</a>);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   <span class="comment">// Enable triangulateio specific parts for dump/restart by default.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;   <a class="code" href="classoomph_1_1TriangleMeshBase.html#a503839a1350bee25717570fbf504a2e1">Use_triangulateio_restart</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> /// Broken copy constructor</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a598613709db807336487fbe2657e905e">   70</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a598613709db807336487fbe2657e905e">TriangleMeshBase</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html">TriangleMeshBase</a>&amp; <a class="code" href="the__data__structure_8txt.html#ae56499a02d89f315ab025070e7a0058f">node</a>) </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  { </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;TriangleMeshBase&quot;</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  } </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> /// Broken assignment operator</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span><span class="comment">//Commented out broken assignment operator because this can lead to a conflict warning</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">//when used in the virtual inheritence hierarchy. Essentially the compiler doesn&#39;t</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">//realise that two separate implementations of the broken function are the same and so,</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">//quite rightly, it shouts.</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; <span class="comment">/*void operator=(const TriangleMeshBase&amp;) </span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">  {</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">   BrokenCopy::broken_assign(&quot;TriangleMeshBase&quot;);</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">   }*/</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#af827bac0e7a180b179a835c4db2a8228">   86</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#af827bac0e7a180b179a835c4db2a8228">~TriangleMeshBase</a>()</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#ifdef OOMPH_HAS_TRIANGLE_LIB  </span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;   <span class="comment">// Clear the triangulate data structure </span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;   <a class="code" href="namespaceoomph_1_1TriangleHelper.html#adb064d7ba88f96c699c26d21b42bca7a">TriangleHelper::clear_triangulateio</a>(<a class="code" href="classoomph_1_1TriangleMeshBase.html#a488453de96eadbe320ea97c63a34d748">Triangulateio</a>);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> /// Setup lookup schemes which establish whic elements are located</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> /// next to mesh&#39;s boundaries (wrapper to suppress doc).</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#aa78fe0d750c842df53e1fa2237205e51">   96</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#aa78fe0d750c842df53e1fa2237205e51">setup_boundary_element_info</a>()</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;   std::ofstream outfile;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;   <a class="code" href="classoomph_1_1TriangleMeshBase.html#aa78fe0d750c842df53e1fa2237205e51">setup_boundary_element_info</a>(outfile);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"> /// \short Setup lookup schemes which establish which elements are located</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> /// next to mesh&#39;s boundaries. Doc in outfile (if it&#39;s open).</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#aa78fe0d750c842df53e1fa2237205e51">setup_boundary_element_info</a>(std::ostream &amp;outfile);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#ifdef OOMPH_HAS_TRIANGLE_LIB</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"> /// \short const access for Use_triangulateio_restart.</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a69a2fe3d5e77ec39b9df4b3174b58c47">  108</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a69a2fe3d5e77ec39b9df4b3174b58c47">use_triangulateio_restart</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a503839a1350bee25717570fbf504a2e1">Use_triangulateio_restart</a>;}</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"> /// \short write access for Use_triangulateio_restart.</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#ad3f02167046a1f96481b87dc48b09032">  111</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#ad3f02167046a1f96481b87dc48b09032">enable_triangulateio_restart</a>() {<a class="code" href="classoomph_1_1TriangleMeshBase.html#a503839a1350bee25717570fbf504a2e1">Use_triangulateio_restart</a> = <span class="keyword">true</span>;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"> /// \short write access for Use_triangulateio_restart.</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a8f34ac9d3a8b7ee39a1134eadc47ff23">  114</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a8f34ac9d3a8b7ee39a1134eadc47ff23">disable_triangulateio_restart</a>() {<a class="code" href="classoomph_1_1TriangleMeshBase.html#a503839a1350bee25717570fbf504a2e1">Use_triangulateio_restart</a> = <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> /// Access to the triangulateio representation of the mesh</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a1cd134700f02b81239a7de630a496dcf">  117</a></span>&#160;<span class="comment"></span> <a class="code" href="structoomph_1_1TriangulateIO.html">TriangulateIO</a>&amp; <a class="code" href="classoomph_1_1TriangleMeshBase.html#a1cd134700f02b81239a7de630a496dcf">triangulateio_representation</a>() {<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a488453de96eadbe320ea97c63a34d748">Triangulateio</a>;}</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"> /// \short Helper function. Write a TriangulateIO object file with all the </span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"> /// triangulateio fields. String s is add to assign a different value for</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"> /// the input and/or output structure</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#ac6bf9ce6546b2e853c3c84cd44837c31">write_triangulateio</a>(<a class="code" href="structoomph_1_1TriangulateIO.html">TriangulateIO</a>&amp; triangulate_io, <a class="code" href="namespaceoomph_1_1Global__string__for__annotation.html#ac5379de2fa7fe44f2cb31785fc208135">std::string</a>&amp; <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"> /// \short Helper function. Clean up the memory associated with the</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"> /// TriangulateIO object. This should really only be used to save</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"> /// memory in extremely tight situations.</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a5108f2cdaf673454bbab831da4fbacd5">  127</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a5108f2cdaf673454bbab831da4fbacd5">clear_triangulateio</a>()</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  {<a class="code" href="namespaceoomph_1_1TriangleHelper.html#adb064d7ba88f96c699c26d21b42bca7a">TriangleHelper::clear_triangulateio</a>(<a class="code" href="classoomph_1_1TriangleMeshBase.html#a488453de96eadbe320ea97c63a34d748">Triangulateio</a>);}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"> /// \short Dump the triangulateio structure to a dump file and</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment"> /// record boundary coordinates of boundary nodes</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a3b27444232702a4bbbeb95aa9c963c07">dump_triangulateio</a>(std::ostream &amp;dump_file);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#ifdef OOMPH_HAS_MPI</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment"> /// Virtual function that is used to dump info. related with</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment"></span><span class="comment"> /// distributed triangle meshes</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#ad8e275d5f2528d9958964438086be8f4">  137</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#ad8e275d5f2528d9958964438086be8f4">dump_distributed_info_for_restart</a>(std::ostream &amp;dump_file)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;   std::ostringstream error_stream;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;Empty default dump disributed info. method called.\n&quot;</span>;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;This should be overloaded in a specific TriangleMesh\n&quot;</span>;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;   <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_stream.str(),</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                       <span class="stringliteral">&quot;TriangleMeshBase::dump_distributed_info_for_restart()&quot;</span>,</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment"> /// Virtual function that is used to dump info. related with</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment"> /// distributed triangle meshes</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a4254c01acfaf43213d96491902334148">  149</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a4254c01acfaf43213d96491902334148">dump_info_to_reset_halo_haloed_scheme</a>(std::ostream &amp;dump_file)</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;   std::ostringstream error_stream;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;Empty default dump info. to reset halo haloed scheme.\n&quot;</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;This should be overloaded in a specific TriangleMesh\n&quot;</span>;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;   <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_stream.str(),</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                       <span class="stringliteral">&quot;TriangleMeshBase::dump_info_to_reset_halo_haloed_scheme()&quot;</span>,</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment"> /// Virtual function that is used to read info. related with</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment"> /// distributed triangle meshes</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a56273b6d7b690d37f07632c7028adcf8">  161</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a56273b6d7b690d37f07632c7028adcf8">read_distributed_info_for_restart</a>(std::istream &amp;restart_file)</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;   std::ostringstream error_stream;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;Empty default read disributed info. method called.\n&quot;</span>;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;This should be overloaded in a specific TriangleMesh\n&quot;</span>;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;   <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_stream.str(),</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                       <span class="stringliteral">&quot;TriangleMeshBase::read_distributed_info_for_restart()&quot;</span>,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  }</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment"> /// Virtual function used to re-establish any additional info. related with</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment"> /// the distribution after a re-starting for triangle meshes</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#ae37b5239c84808e3e66aa0eac4396a2c">  173</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#ae37b5239c84808e3e66aa0eac4396a2c">reestablish_distribution_info_for_restart</a>(</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <a class="code" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a>* comm_pt, std::istream &amp;restart_file)</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;   std::ostringstream error_stream;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;Empty default reestablish disributed info method &quot;</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;called.\n&quot;</span>;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;This should be overloaded in a specific &quot;</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;RefineableTriangleMesh\n&quot;</span>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;   <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_stream.str(),</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                       <span class="stringliteral">&quot;TriangleMeshBase::reestablish_distribution_info_for_restart()&quot;</span>,</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  }</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"> /// Virtual function used to update the polylines representation after </span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"> /// restart</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#ae822f78ce56d1ff9a3c06d7ec8bc2563">  189</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#ae822f78ce56d1ff9a3c06d7ec8bc2563">update_polyline_representation_from_restart</a>()</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  {</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;   std::ostringstream error_stream;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;Empty default update polylines representation from &quot;</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;restart method called.\n&quot;</span>;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;This should be overloaded in a specific &quot;</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;RefineableTriangleMesh\n&quot;</span>;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;   <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_stream.str(),</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                       <span class="stringliteral">&quot;TriangleMeshBase::update_polyline_representation_from_restart()&quot;</span>,</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  }</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment"> /// \short Regenerate the mesh from a dumped triangulateio file</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment"> /// and dumped boundary coordinates of boundary nodes</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a8e8d7354b213cba989b661f0b748d8b5">remesh_from_triangulateio</a>(std::istream &amp;restart_file);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"> ///Virtual function that is used for specific remeshing from the triangulateio</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a2e7f54673e522b9be0543f0256afd04b">  206</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a2e7f54673e522b9be0543f0256afd04b">remesh_from_internal_triangulateio</a>() </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;   std::ostringstream error_stream;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;Empty default remesh function called.\n&quot;</span>;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;   error_stream &lt;&lt; <span class="stringliteral">&quot;This should be overloaded in a specific TriangleMesh\n&quot;</span>;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;   <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_stream.str(),</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  }</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="preprocessor">#endif // #ifdef OOMPH_HAS_TRIANGLE_LIB</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment"> /// Virtual function to perform the load balance rutines</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#ad6e2c45db7c67e5a6fd063f0ea9bbfe7">  219</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#ad6e2c45db7c67e5a6fd063f0ea9bbfe7">load_balance</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a>&amp; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                           target_domain_for_local_non_halo_element)</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  std::ostringstream error_stream;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  error_stream &lt;&lt; <span class="stringliteral">&quot;Empty default load balancing function called.\n&quot;</span>;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  error_stream &lt;&lt; <span class="stringliteral">&quot;This should be overloaded in a specific TriangleMesh\n&quot;</span>;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_stream.str(),</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                      <span class="stringliteral">&quot;TriangleMeshBase::load_balance()&quot;</span>,</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                      OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment"> /// Virtual function to perform the reset boundary elements info rutines</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#adbb7621302c427dfc55dbc1ee2b7e77b">  231</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#adbb7621302c427dfc55dbc1ee2b7e77b">reset_boundary_element_info</a>(</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> &amp;ntmp_boundary_elements,</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="code" href="classoomph_1_1Vector.html">Vector&lt;unsigned&gt;</a> &gt; &amp;ntmp_boundary_elements_in_region,</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;FiniteElement*&gt;</a> &amp;deleted_elements)</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; {</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  std::ostringstream error_stream;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  error_stream &lt;&lt; <span class="stringliteral">&quot;Empty default reset boundary element info function&quot;</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;               &lt;&lt; <span class="stringliteral">&quot;called.\n&quot;</span>;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  error_stream &lt;&lt; <span class="stringliteral">&quot;This should be overloaded in a specific &quot;</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;               &lt;&lt; <span class="stringliteral">&quot;TriangleMesh\n&quot;</span>;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(error_stream.str(),</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                      <span class="stringliteral">&quot;TriangleMeshBase::reset_boundary_element_info()&quot;</span>,</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                      OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; }</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor">#ifdef OOMPH_HAS_TRIANGLE_LIB</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"> ///\short TriangulateIO representation of the mesh</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a488453de96eadbe320ea97c63a34d748">  251</a></span>&#160;<span class="comment"></span> <a class="code" href="structoomph_1_1TriangulateIO.html">TriangulateIO</a> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a488453de96eadbe320ea97c63a34d748">Triangulateio</a>;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment"> /// Should we use triangulateio specific parts for dump/restart? (Doesn&#39;t</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment"> /// work with some elements and isn&#39;t needed if not using adaptivity).</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="classoomph_1_1TriangleMeshBase.html#a503839a1350bee25717570fbf504a2e1">  255</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1TriangleMeshBase.html#a503839a1350bee25717570fbf504a2e1">Use_triangulateio_restart</a>;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="preprocessor">#endif // OOMPH_HAS_TRIANGLE</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;};</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;}</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_ae37b5239c84808e3e66aa0eac4396a2c"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#ae37b5239c84808e3e66aa0eac4396a2c">oomph::TriangleMeshBase::reestablish_distribution_info_for_restart</a></div><div class="ttdeci">virtual void reestablish_distribution_info_for_restart(OomphCommunicator *comm_pt, std::istream &amp;restart_file)</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00173">triangle_mesh.h:173</a></div></div>
+<div class="ttc" id="aVector_8h_html"><div class="ttname"><a href="Vector_8h.html">Vector.h</a></div></div>
+<div class="ttc" id="athe__data__structure_8txt_html_ae56499a02d89f315ab025070e7a0058f"><div class="ttname"><a href="the__data__structure_8txt.html#ae56499a02d89f315ab025070e7a0058f">node</a></div><div class="ttdeci">c Data can also store a certain number of c Data stores a pointer to a c TimeStepper whose member functions relate the history values to the values time derivatives pointer based read write access to the c Data values is provided by the functions code and by code Data::value_pt(t, i) \endcode which returns a pointer to the \c t -th history value associated with value \c i. Read-only access is also provided by the functions \code Data and its time dependent counterpart code whereas the values associated with t correspond to history values In many but this is not guaranteed See the section ref timestepping for further details subsection nodes Nodes In FE all c Nodes in a finite element mesh have c Data associated with them c Nodes are therefore derived from c but also store a spatial specified by a certain number of spatial(Eulerian) coordinates. The nodal positions are accessed by the member function \code Node note that the history values are not necessarily positions at previous timesteps subsubsection advanced_features_of_nodes Advanced we must evaluate mesh which requires the storage of the nodal position at a number of previous timesteps Storage for the positional history values is allocated by the c Node constructor A different c TimeStepper may be used to represent time derivatives of nodal so c Nodes store a separate pointer to a positional c TimeStepper[Note:By default, we allocate the same amount of storage for the history of the nodal positions as we do for the history of the nodal values;e.g. if a \c BDF&lt; 2 &gt; scheme is used to evaluate the time-derivatives of the fluid velocities, we assume that the same timestepping scheme is used(and the same amount of storage required) to determine the mesh velocities from the nodal positions.] For finite elements in which the global position of a point in an element is determined by interpolation from the position of the element s c we need only store the spatial position of the c Nodes In many other the interpolation of the geometry requires additional e g the derivative of the mapping between and global coordinates we allow the storage of additional positional variables at each c so in every c Node has a number of e generalised coordinates for each spatial coordinate direction For for nodes in Hermite the nodal coordinate of type stores the global position at the node</div><div class="ttdef"><b>Definition:</b> <a href="the__data__structure_8txt_source.html#l00190">the_data_structure.txt:190</a></div></div>
+<div class="ttc" id="aclassoomph_1_1OomphCommunicator_html"><div class="ttname"><a href="classoomph_1_1OomphCommunicator.html">oomph::OomphCommunicator</a></div><div class="ttdoc">An oomph-lib wrapper to the MPI_Comm communicator object. Just contains an MPI_Comm object (which is ...</div><div class="ttdef"><b>Definition:</b> <a href="communicator_8h_source.html#l00053">communicator.h:53</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a488453de96eadbe320ea97c63a34d748"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a488453de96eadbe320ea97c63a34d748">oomph::TriangleMeshBase::Triangulateio</a></div><div class="ttdeci">TriangulateIO Triangulateio</div><div class="ttdoc">TriangulateIO representation of the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00251">triangle_mesh.h:251</a></div></div>
+<div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00225">oomph_definitions.h:225</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_afdfa2e68988d225301a9a262883ddf62"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#afdfa2e68988d225301a9a262883ddf62">oomph::TriangleMeshBase::TriangleMeshBase</a></div><div class="ttdeci">TriangleMeshBase()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00058">triangle_mesh.h:58</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a503839a1350bee25717570fbf504a2e1"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a503839a1350bee25717570fbf504a2e1">oomph::TriangleMeshBase::Use_triangulateio_restart</a></div><div class="ttdeci">bool Use_triangulateio_restart</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00255">triangle_mesh.h:255</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_ad6e2c45db7c67e5a6fd063f0ea9bbfe7"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#ad6e2c45db7c67e5a6fd063f0ea9bbfe7">oomph::TriangleMeshBase::load_balance</a></div><div class="ttdeci">virtual void load_balance(const Vector&lt; unsigned &gt; &amp;target_domain_for_local_non_halo_element)</div><div class="ttdoc">Virtual function to perform the load balance rutines.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00219">triangle_mesh.h:219</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_af827bac0e7a180b179a835c4db2a8228"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#af827bac0e7a180b179a835c4db2a8228">oomph::TriangleMeshBase::~TriangleMeshBase</a></div><div class="ttdeci">virtual ~TriangleMeshBase()</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00086">triangle_mesh.h:86</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Mesh_html"><div class="ttname"><a href="classoomph_1_1Mesh.html">oomph::Mesh</a></div><div class="ttdoc">A general mesh class.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8h_source.html#l00070">mesh.h:70</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a2e7f54673e522b9be0543f0256afd04b"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a2e7f54673e522b9be0543f0256afd04b">oomph::TriangleMeshBase::remesh_from_internal_triangulateio</a></div><div class="ttdeci">virtual void remesh_from_internal_triangulateio()</div><div class="ttdoc">Virtual function that is used for specific remeshing from the triangulateio.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00206">triangle_mesh.h:206</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_aa78fe0d750c842df53e1fa2237205e51"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#aa78fe0d750c842df53e1fa2237205e51">oomph::TriangleMeshBase::setup_boundary_element_info</a></div><div class="ttdeci">void setup_boundary_element_info()</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00096">triangle_mesh.h:96</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_adbb7621302c427dfc55dbc1ee2b7e77b"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#adbb7621302c427dfc55dbc1ee2b7e77b">oomph::TriangleMeshBase::reset_boundary_element_info</a></div><div class="ttdeci">virtual void reset_boundary_element_info(Vector&lt; unsigned &gt; &amp;ntmp_boundary_elements, Vector&lt; Vector&lt; unsigned &gt; &gt; &amp;ntmp_boundary_elements_in_region, Vector&lt; FiniteElement * &gt; &amp;deleted_elements)</div><div class="ttdoc">Virtual function to perform the reset boundary elements info rutines.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00231">triangle_mesh.h:231</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_ae822f78ce56d1ff9a3c06d7ec8bc2563"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#ae822f78ce56d1ff9a3c06d7ec8bc2563">oomph::TriangleMeshBase::update_polyline_representation_from_restart</a></div><div class="ttdeci">virtual void update_polyline_representation_from_restart()</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00189">triangle_mesh.h:189</a></div></div>
+<div class="ttc" id="astructoomph_1_1TriangulateIO_html"><div class="ttname"><a href="structoomph_1_1TriangulateIO.html">oomph::TriangulateIO</a></div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00061">unstructured_two_d_mesh_geometry_base.h:61</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1BrokenCopy_html_a7e5cd7fda8b8c790003151bee77a84ac"><div class="ttname"><a href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">oomph::BrokenCopy::broken_copy</a></div><div class="ttdeci">void broken_copy(const std::string &amp;class_name)</div><div class="ttdoc">Issue error message and terminate execution.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l00214">oomph_utilities.cc:214</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_ad8e275d5f2528d9958964438086be8f4"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#ad8e275d5f2528d9958964438086be8f4">oomph::TriangleMeshBase::dump_distributed_info_for_restart</a></div><div class="ttdeci">virtual void dump_distributed_info_for_restart(std::ostream &amp;dump_file)</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00137">triangle_mesh.h:137</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a4254c01acfaf43213d96491902334148"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a4254c01acfaf43213d96491902334148">oomph::TriangleMeshBase::dump_info_to_reset_halo_haloed_scheme</a></div><div class="ttdeci">virtual void dump_info_to_reset_halo_haloed_scheme(std::ostream &amp;dump_file)</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00149">triangle_mesh.h:149</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a1cd134700f02b81239a7de630a496dcf"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a1cd134700f02b81239a7de630a496dcf">oomph::TriangleMeshBase::triangulateio_representation</a></div><div class="ttdeci">TriangulateIO &amp; triangulateio_representation()</div><div class="ttdoc">Access to the triangulateio representation of the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00117">triangle_mesh.h:117</a></div></div>
+<div class="ttc" id="amesh_8h_html"><div class="ttname"><a href="mesh_8h.html">mesh.h</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1TriangleHelper_html_a884345fd8d03dda0fa3499d2c63a4f5c"><div class="ttname"><a href="namespaceoomph_1_1TriangleHelper.html#a884345fd8d03dda0fa3499d2c63a4f5c">oomph::TriangleHelper::initialise_triangulateio</a></div><div class="ttdeci">void initialise_triangulateio(TriangulateIO &amp;triangle_io)</div><div class="ttdoc">Initialise TriangulateIO structure.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l00089">unstructured_two_d_mesh_geometry_base.cc:89</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a56273b6d7b690d37f07632c7028adcf8"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a56273b6d7b690d37f07632c7028adcf8">oomph::TriangleMeshBase::read_distributed_info_for_restart</a></div><div class="ttdeci">virtual void read_distributed_info_for_restart(std::istream &amp;restart_file)</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00161">triangle_mesh.h:161</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_ac6bf9ce6546b2e853c3c84cd44837c31"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#ac6bf9ce6546b2e853c3c84cd44837c31">oomph::TriangleMeshBase::write_triangulateio</a></div><div class="ttdeci">void write_triangulateio(TriangulateIO &amp;triangulate_io, std::string &amp;s)</div><div class="ttdoc">Helper function. Write a TriangulateIO object file with all the triangulateio fields....</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8cc_source.html#l00233">triangle_mesh.cc:233</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; unsigned &gt;</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a69a2fe3d5e77ec39b9df4b3174b58c47"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a69a2fe3d5e77ec39b9df4b3174b58c47">oomph::TriangleMeshBase::use_triangulateio_restart</a></div><div class="ttdeci">bool use_triangulateio_restart() const</div><div class="ttdoc">const access for Use_triangulateio_restart.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00108">triangle_mesh.h:108</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_ad3f02167046a1f96481b87dc48b09032"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#ad3f02167046a1f96481b87dc48b09032">oomph::TriangleMeshBase::enable_triangulateio_restart</a></div><div class="ttdeci">void enable_triangulateio_restart()</div><div class="ttdoc">write access for Use_triangulateio_restart.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00111">triangle_mesh.h:111</a></div></div>
+<div class="ttc" id="anodes_8h_html"><div class="ttname"><a href="nodes_8h.html">nodes.h</a></div></div>
+<div class="ttc" id="amatrices_8h_html"><div class="ttname"><a href="matrices_8h.html">matrices.h</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a598613709db807336487fbe2657e905e"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a598613709db807336487fbe2657e905e">oomph::TriangleMeshBase::TriangleMeshBase</a></div><div class="ttdeci">TriangleMeshBase(const TriangleMeshBase &amp;node)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00070">triangle_mesh.h:70</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a8f34ac9d3a8b7ee39a1134eadc47ff23"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a8f34ac9d3a8b7ee39a1134eadc47ff23">oomph::TriangleMeshBase::disable_triangulateio_restart</a></div><div class="ttdeci">void disable_triangulateio_restart()</div><div class="ttdoc">write access for Use_triangulateio_restart.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00114">triangle_mesh.h:114</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a5108f2cdaf673454bbab831da4fbacd5"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a5108f2cdaf673454bbab831da4fbacd5">oomph::TriangleMeshBase::clear_triangulateio</a></div><div class="ttdeci">void clear_triangulateio()</div><div class="ttdoc">Helper function. Clean up the memory associated with the TriangulateIO object. This should really onl...</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00127">triangle_mesh.h:127</a></div></div>
+<div class="ttc" id="aunstructured__two__d__mesh__geometry__base_8h_html"><div class="ttname"><a href="unstructured__two__d__mesh__geometry__base_8h.html">unstructured_two_d_mesh_geometry_base.h</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1TriangleHelper_html_adb064d7ba88f96c699c26d21b42bca7a"><div class="ttname"><a href="namespaceoomph_1_1TriangleHelper.html#adb064d7ba88f96c699c26d21b42bca7a">oomph::TriangleHelper::clear_triangulateio</a></div><div class="ttdeci">void clear_triangulateio(TriangulateIO &amp;triangulate_io, const bool &amp;clear_hole_data)</div><div class="ttdoc">Clear TriangulateIO structure.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l00045">unstructured_two_d_mesh_geometry_base.cc:45</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a8e8d7354b213cba989b661f0b748d8b5"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a8e8d7354b213cba989b661f0b748d8b5">oomph::TriangleMeshBase::remesh_from_triangulateio</a></div><div class="ttdeci">void remesh_from_triangulateio(std::istream &amp;restart_file)</div><div class="ttdoc">Regenerate the mesh from a dumped triangulateio file and dumped boundary coordinates of boundary node...</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8cc_source.html#l00089">triangle_mesh.cc:89</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html_a3b27444232702a4bbbeb95aa9c963c07"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html#a3b27444232702a4bbbeb95aa9c963c07">oomph::TriangleMeshBase::dump_triangulateio</a></div><div class="ttdeci">void dump_triangulateio(std::ostream &amp;dump_file)</div><div class="ttdoc">Dump the triangulateio structure to a dump file and record boundary coordinates of boundary nodes.</div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8cc_source.html#l00040">triangle_mesh.cc:40</a></div></div>
+<div class="ttc" id="aclassoomph_1_1UnstructuredTwoDMeshGeometryBase_html"><div class="ttname"><a href="classoomph_1_1UnstructuredTwoDMeshGeometryBase.html">oomph::UnstructuredTwoDMeshGeometryBase</a></div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__mesh__geometry__base_8h_source.html#l01605">unstructured_two_d_mesh_geometry_base.h:1605</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TriangleMeshBase_html"><div class="ttname"><a href="classoomph_1_1TriangleMeshBase.html">oomph::TriangleMeshBase</a></div><div class="ttdef"><b>Definition:</b> <a href="triangle__mesh_8h_source.html#l00051">triangle_mesh.h:51</a></div></div>
+<div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1Global__string__for__annotation_html_ac5379de2fa7fe44f2cb31785fc208135"><div class="ttname"><a href="namespaceoomph_1_1Global__string__for__annotation.html#ac5379de2fa7fe44f2cb31785fc208135">oomph::Global_string_for_annotation::string</a></div><div class="ttdeci">std::string string(const unsigned &amp;i)</div><div class="ttdoc">Return the i-th string or &quot;&quot; if the relevant string hasn't been defined.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8cc_source.html#l00289">oomph_definitions.cc:289</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:00
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

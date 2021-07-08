@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: File Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all file members with links to the files they belong to:</div>
+
+<h3><a id="index__5F"></a>- _ -</h3><ul>
+<li>_
+: <a class="el" href="contact__angle_8txt.html#a99dbc0cdc09dcffd5db4c4e43097955f">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>Acknowledgement
+: <a class="el" href="contact__angle_8txt.html#a9b2364430fac2e5db377e9b237a3166e">contact_angle.txt</a>
+</li>
+<li>actions_before_adapt()
+: <a class="el" href="contact__angle_8txt.html#ad1c3b5a5aba86a7883b7915e8bdd7c21">contact_angle.txt</a>
+</li>
+<li>additional
+: <a class="el" href="contact__angle_8txt.html#a802f8e271de9fb1ab9bea27c08406a45">contact_angle.txt</a>
+</li>
+<li>and
+: <a class="el" href="contact__angle_8txt.html#a65f0eb70d5423dbcc17eb94e608dc1e4">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_b"></a>- b -</h3><ul>
+<li>build_global_mesh()
+: <a class="el" href="contact__angle_8txt.html#a770d352b78a60074a229f760bc2e0179">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>coordinates
+: <a class="el" href="contact__angle_8txt.html#aaa42563ef08c5f0665126884a22dd60b">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_d"></a>- d -</h3><ul>
+<li>D
+: <a class="el" href="contact__angle_8txt.html#ae2786609a8386ecceef72059fb575617">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_f"></a>- f -</h3><ul>
+<li>f
+: <a class="el" href="contact__angle_8txt.html#a1fb0af87944088494d613bb5065d161e">contact_angle.txt</a>
+</li>
+<li>Finally
+: <a class="el" href="contact__angle_8txt.html#ad929b1cb755dfec91450fd4b3154900e">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_l"></a>- l -</h3><ul>
+<li>line
+: <a class="el" href="contact__angle_8txt.html#a161949e9805c6e0a3505a37f2e2d7950">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>main()
+: <a class="el" href="barrel_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">barrel.cc</a>
+, <a class="el" href="refineable__t__junction_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">refineable_t_junction.cc</a>
+, <a class="el" href="young__laplace_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">young_laplace.cc</a>
+, <a class="el" href="refineable__young__laplace_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">refineable_young_laplace.cc</a>
+, <a class="el" href="spherical__cap__in__cylinder_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">spherical_cap_in_cylinder.cc</a>
+</li>
+<li>meniscus()
+: <a class="el" href="contact__angle_8txt.html#aea098d41c137bea6b6c09aeeec487c98">contact_angle.txt</a>
+</li>
+<li>method
+: <a class="el" href="contact__angle_8txt.html#a8ead20b6901ec2be04162b161f72c27d">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_n"></a>- n -</h3><ul>
+<li>number()
+: <a class="el" href="contact__angle_8txt.html#ab024b49a3ba20ca1915b695ef9987be2">contact_angle.txt</a>
+</li>
+<li>numbers
+: <a class="el" href="contact__angle_8txt.html#ace692f6893febbf94f3492bfe5d5abee">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_o"></a>- o -</h3><ul>
+<li>one
+: <a class="el" href="contact__angle_8txt.html#ad6446204c8469ca2c2afc71ea3d37161">contact_angle.txt</a>
+</li>
+<li>others
+: <a class="el" href="contact__angle_8txt.html#acad066401c8859b1100bda2363c73ca5">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>Paris
+: <a class="el" href="contact__angle_8txt.html#a0dca5b672cf8d7005ba5aead13a49b02">contact_angle.txt</a>
+</li>
+<li>problem()
+: <a class="el" href="contact__angle_8txt.html#a5089c322adb2c2f53ad8679f6703ca61">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_r"></a>- r -</h3><ul>
+<li>reduced
+: <a class="el" href="contact__angle_8txt.html#ac5ebdd64750809ad044f7b102ab5a45f">contact_angle.txt</a>
+</li>
+<li>result
+: <a class="el" href="contact__angle_8txt.html#a149f6c219caa11cbda5b163177eb28a6">contact_angle.txt</a>
+</li>
+<li>run_it()
+: <a class="el" href="refineable__young__laplace_8cc.html#ae164cec5b3a54dd85b4b4f36ad5cb1e2">refineable_young_laplace.cc</a>
+, <a class="el" href="young__laplace_8cc.html#ae164cec5b3a54dd85b4b4f36ad5cb1e2">young_laplace.cc</a>
+</li>
+</ul>
+
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>section()
+: <a class="el" href="contact__angle_8txt.html#a702b17a2fe60fde7205a2ed1a0e0aaeb">contact_angle.txt</a>
+</li>
+<li>shape
+: <a class="el" href="contact__angle_8txt.html#a33627a065364ea8dd322b8fb6b115cea">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_t"></a>- t -</h3><ul>
+<li>the()
+: <a class="el" href="contact__angle_8txt.html#a7f1bd96b0bc99332494bd18ff2911a66">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_u"></a>- u -</h3><ul>
+<li>usual
+: <a class="el" href="contact__angle_8txt.html#afe1463a794a507ff713e1d4421c8ab32">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_w"></a>- w -</h3><ul>
+<li>widehat
+: <a class="el" href="contact__angle_8txt.html#acba41ca01e3e7043c5237b77d0e412c9">contact_angle.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_z"></a>- z -</h3><ul>
+<li>zeta_1
+: <a class="el" href="contact__angle_8txt.html#a89176c66757d666599a5b244526ae379">contact_angle.txt</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:27:11
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

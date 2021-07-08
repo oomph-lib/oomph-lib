@@ -1,0 +1,76 @@
+\hypertarget{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}{}\doxysection{oomph\+::Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}\index{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.751843cm]{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_abd6a587e192e137abcee3fee9e7bd0ac}{Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1QuadMeshBase}{Quad\+Mesh\+Base}} $\ast$quad\+\_\+mesh\+\_\+pt, const unsigned \&\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a9b41f4d8f41711e5e0d68abd1ef42f7a}{nz}}, const double \&lz, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding length in this direction. Assumes that the back lower left corner is located at (0,0,0). Timestepper defaults to the \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_a380730c77deb4ff40cfa3d06f0cfe168}{Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1QuadMeshBase}{Quad\+Mesh\+Base}} $\ast$quad\+\_\+mesh\+\_\+pt, const unsigned \&\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a9b41f4d8f41711e5e0d68abd1ef42f7a}{nz}}, const double \&zmin, const double \&zmax, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding minimum and maximum z-\/value of the mesh. Again, timestepper defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} class that takes a 2D mesh, \char`\"{}extrudes\char`\"{} it in the z-\/direction and also makes the resulting mesh refineable. 
+
+Definition at line 227 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_abd6a587e192e137abcee3fee9e7bd0ac}\label{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_abd6a587e192e137abcee3fee9e7bd0ac}} 
+\index{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!RefineableExtrudedCubeMeshFromQuadMesh@{RefineableExtrudedCubeMeshFromQuadMesh}}
+\index{RefineableExtrudedCubeMeshFromQuadMesh@{RefineableExtrudedCubeMeshFromQuadMesh}!oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableExtrudedCubeMeshFromQuadMesh()}{RefineableExtrudedCubeMeshFromQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}{Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1QuadMeshBase}{Quad\+Mesh\+Base}} $\ast$}]{quad\+\_\+mesh\+\_\+pt,  }\item[{const unsigned \&}]{nz,  }\item[{const double \&}]{lz,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding length in this direction. Assumes that the back lower left corner is located at (0,0,0). Timestepper defaults to the \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} timestepper. 
+
+
+
+Definition at line 238 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+References oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_a380730c77deb4ff40cfa3d06f0cfe168}\label{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_a380730c77deb4ff40cfa3d06f0cfe168}} 
+\index{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!RefineableExtrudedCubeMeshFromQuadMesh@{RefineableExtrudedCubeMeshFromQuadMesh}}
+\index{RefineableExtrudedCubeMeshFromQuadMesh@{RefineableExtrudedCubeMeshFromQuadMesh}!oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableExtrudedCubeMeshFromQuadMesh()}{RefineableExtrudedCubeMeshFromQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}{Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1QuadMeshBase}{Quad\+Mesh\+Base}} $\ast$}]{quad\+\_\+mesh\+\_\+pt,  }\item[{const unsigned \&}]{nz,  }\item[{const double \&}]{zmin,  }\item[{const double \&}]{zmax,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding minimum and maximum z-\/value of the mesh. Again, timestepper defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}. 
+
+
+
+Definition at line 255 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+References oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8h}{extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h}}\end{DoxyCompactItemize}

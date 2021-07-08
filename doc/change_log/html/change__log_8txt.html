@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: change_log.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">change_log.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a0e44a62a3694e146e8fd717fa5a6e321"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#a0e44a62a3694e146e8fd717fa5a6e321">href</a> = &quot;../../example_code_list/html/index.html&quot;&gt; extensive list <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> example codes&lt;/a &gt; to see what else is available. . \subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9 \subsubsection new_functionality_zero_point_nine Major new functionality - Significantly extended \c oomph-lib 's parallel processing capabilities. The library 's solver and(block) preconditioning framework is now fully parallelised</td></tr>
+<tr class="separator:a0e44a62a3694e146e8fd717fa5a6e321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a8db46894b447fd0d99eb3e2821ace326"><td class="memItemLeft" align="right" valign="top">mainpage Change log This document provides an overview of the major changes between different official releases of c oomph lib As&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> (i.e. &gt; the 1.0.*release) we include the svn revision number as part of the release identifier since this makes it easier for us to publish incremental updates to the library(and to do so more frequently than we used to!). Whenever such a new release is made available we automatically update the snapshot of the corresponding svn log which contains the commit messages of all changes made since &quot;day one&quot;</td></tr>
+<tr class="separator:a8db46894b447fd0d99eb3e2821ace326"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae266028b655dc7a29f3a1b0a67095b7b"><td class="memItemLeft" align="right" valign="top">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#ae266028b655dc7a29f3a1b0a67095b7b">equation</a> (with various ways <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> implementing the Sommerfeld radiation condition)</td></tr>
+<tr class="separator:ae266028b655dc7a29f3a1b0a67095b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6c21708dffdf30a0409842a9a2f1f5e"><td class="memItemLeft" align="right" valign="top">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear and the interaction between these two systems <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> time harmonic acoustic fluid structure interaction problems All <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> are implemented <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> cartesian and cylindrical polar&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#ac6c21708dffdf30a0409842a9a2f1f5e">coordinates</a> (<a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the latter case, using an azimuthal Fourier decomposition for the solution). \n\n - Provided block preconditioners for the solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> large-displacement fluid-structure interaction problems</td></tr>
+<tr class="separator:ac6c21708dffdf30a0409842a9a2f1f5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39a3084e3761923a893451b0bd89f079"><td class="memItemLeft" align="right" valign="top">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic equations <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear and the interaction between these two systems <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> equations <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> time harmonic acoustic fluid structure interaction problems All equations are implemented <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> cartesian and cylindrical polar based the coupling <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> full nonlinear <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> and the Navier Stokes equations n n Implemented the linearised Navier Stokes&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#a39a3084e3761923a893451b0bd89f079">equations</a> (with the option to study their solutions as perturbations relative to a base state that is itself governed by the full Navier-Stokes equations). \n\n - Provided elements for the solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> the axisymmetric equations <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear elasticity. \n\n - Finished what is hopefully the final rewrite <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> the(parallel) block preconditioning framework and its extensive tutorial. \n\n - Provided elements for the solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> the Foeppl-von-Karman equations <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> various formulations(using either an Airy-stress function or the <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a>-plane displacements) and <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> various coordinate systems. \n\n - Provided elements for Darcy porous media flow and Biot-type poro-<a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a></td></tr>
+<tr class="separator:a39a3084e3761923a893451b0bd89f079"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab80e0574672a2c45ae0b542b77d789e1"><td class="memItemLeft" align="right" valign="top">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear and the interaction between these two systems <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> in time harmonic acoustic fluid structure interaction problems All <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> are implemented in cartesian and cylindrical polar based the coupling <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> full nonlinear <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> and the Navier Stokes <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> n n Implemented the linearised Navier Stokes including the ability to use the latter elements in fluid structure interaction problems which are governed by the <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> poro <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> coupled to the Navier Stokes <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> n n Implemented the ability adapt unstructured meshes&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> (in serial and in parallel) and(in a parallel setting) to distribute such meshes over multiple processors</td></tr>
+<tr class="separator:ab80e0574672a2c45ae0b542b77d789e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ffed00e1a9a523f061d19dd55351781"><td class="memItemLeft" align="right" valign="top">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic equations <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear and the interaction between these two systems <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> equations <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> time harmonic acoustic fluid structure interaction problems All equations are implemented <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> cartesian and cylindrical polar based the coupling <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> full nonlinear <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> and the Navier Stokes equations n n Implemented the linearised Navier Stokes including the ability to use the latter elements <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> fluid structure interaction problems which are governed by the equations <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> poro <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> coupled to the Navier Stokes equations n n Implemented the ability adapt unstructured meshes and to perform load balancing <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> spatially adaptive simulations n n Provided elements for the solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> elements for the solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> the Navier Stokes equations with generalised Newtonian constitutive&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> (i.e. non-Newtonian behaviour <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> which the viscosity depends on the invariants <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> the rate-<a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a>-strain tensor).\n\n - Provided machinery to output paraview(vtu and vtp) files directly(implemented for selected elements</td></tr>
+<tr class="separator:a0ffed00e1a9a523f061d19dd55351781"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a56a3e7e628870a6fbaf6c27fd357a892"><td class="memItemLeft" align="right" valign="top">endcode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#a56a3e7e628870a6fbaf6c27fd357a892">Obviously</a></td></tr>
+<tr class="separator:a56a3e7e628870a6fbaf6c27fd357a892"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac82edaa3cc6fd26ef171eaf0955f27e6"><td class="memItemLeft" align="right" valign="top">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a></td></tr>
+<tr class="separator:ac82edaa3cc6fd26ef171eaf0955f27e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ed0a0fcf4412460d8f77641d5cfb0d2"><td class="memItemLeft" align="right" valign="top">virtual broken functions <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> base classes provide instructions what to do for others n n Provided machinery to establish what the <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> unknowns <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> a fully built problem represent Calling&lt; code &gt; Meshes and Nodes point <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> view Very useful for debugging(e.g. &quot;Why are all the entries <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the n-th row/column <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the Jacobian zero?&quot; or &quot;The n-th residual is enormous -- which <a class="el" href="change__log_8txt.html#ae266028b655dc7a29f3a1b0a67095b7b">equation</a> does it correspond to?&quot;, etc.) \n\n - Provided machinery for hp adaptivity and p-type spectral elements with mortar const raints <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> 2D and 3D.\n\n - Added interfaces to the Trilinos ANASAZI eigensolver to allow parallel solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> eigenproblems. \n\n - Basic implementation <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> discontinuous Galerkin methods for general flux transport problems.\n\n - Many new detailed tutorials explaining these boundaries are respected under mesh&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#a2ed0a0fcf4412460d8f77641d5cfb0d2">refinement</a></td></tr>
+<tr class="separator:a2ed0a0fcf4412460d8f77641d5cfb0d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeb16f0c9840edbbb5b82bf10abe73b9"><td class="memItemLeft" align="right" valign="top">virtual broken functions <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> base classes provide instructions what to do for others n n Provided machinery to establish what the <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> unknowns <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> a fully built problem represent Calling&lt; code &gt; Meshes and Nodes point <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> view Very useful for debugging(e.g. &quot;Why are all the entries <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the n-th row/column <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the Jacobian zero?&quot; or &quot;The n-th residual is enormous -- which <a class="el" href="change__log_8txt.html#ae266028b655dc7a29f3a1b0a67095b7b">equation</a> does it correspond to?&quot;, etc.) \n\n - Provided machinery for hp adaptivity and p-type spectral elements with mortar const raints <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> 2D and 3D.\n\n - Added interfaces to the Trilinos ANASAZI eigensolver to allow parallel solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> eigenproblems. \n\n - Basic implementation <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> discontinuous Galerkin methods for general flux transport problems.\n\n - Many new detailed tutorials explaining these boundaries are respected under mesh i e the mesh converges to the exact domain&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#abeb16f0c9840edbbb5b82bf10abe73b9">geometry</a></td></tr>
+<tr class="separator:abeb16f0c9840edbbb5b82bf10abe73b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e0878d92a40b210ef9c6c6fc73a5d5e"><td class="memItemLeft" align="right" valign="top">the parallel assembly <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> the Jacobian and residual vector has been&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="change__log_8txt.html#a0e0878d92a40b210ef9c6c6fc73a5d5e">optimised</a></td></tr>
+<tr class="separator:a0e0878d92a40b210ef9c6c6fc73a5d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a0e44a62a3694e146e8fd717fa5a6e321"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e44a62a3694e146e8fd717fa5a6e321">&#9670;&nbsp;</a></span>href</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="change__log_8txt.html#a0e44a62a3694e146e8fd717fa5a6e321">href</a> =  &quot;../../example_code_list/html/index.html&quot;&gt; extensive list <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> example codes&lt;/a&gt; to see what else is available. . \subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9 \subsubsection new_functionality_zero_point_nine Major new functionality - Significantly extended \c oomph-lib's parallel processing capabilities. The library's solver and (block) preconditioning framework is now fully parallelised</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="change__log_8txt_source.html#l00265">265</a> of file <a class="el" href="change__log_8txt_source.html">change_log.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ac6c21708dffdf30a0409842a9a2f1f5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6c21708dffdf30a0409842a9a2f1f5e">&#9670;&nbsp;</a></span>coordinates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt;HR&gt; subsection zero_point_nine_to_one_point_zero Changes between version and* subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear and the interaction between these two systems <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> time harmonic acoustic fluid structure interaction problems All <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> are implemented <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> cartesian and cylindrical polar coordinates </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the latter&#160;</td>
+          <td class="paramname"><em>case</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">using an azimuthal Fourier decomposition for the&#160;</td>
+          <td class="paramname"><em>solution</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae266028b655dc7a29f3a1b0a67095b7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae266028b655dc7a29f3a1b0a67095b7b">&#9670;&nbsp;</a></span>equation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt;HR&gt; subsection zero_point_nine_to_one_point_zero Changes between version and* subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz equation </td>
+          <td>(</td>
+          <td class="paramtype">with various ways <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> implementing the Sommerfeld radiation&#160;</td>
+          <td class="paramname"><em>condition</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ffed00e1a9a523f061d19dd55351781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ffed00e1a9a523f061d19dd55351781">&#9670;&nbsp;</a></span>equations() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt;HR&gt; subsection zero_point_nine_to_one_point_zero Changes between version and* subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic equations <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear and the interaction between these two systems <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> equations <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> time harmonic acoustic fluid structure interaction problems All equations are implemented <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> cartesian and cylindrical polar based the coupling <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> full nonlinear <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> and the Navier Stokes equations n n Implemented the linearised Navier Stokes including the ability to use the latter elements <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> fluid structure interaction problems which are governed by the equations <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> poro <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> coupled to the Navier Stokes equations n n Implemented the ability adapt unstructured meshes and to perform load balancing <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> spatially adaptive simulations n n Provided elements for the solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> elements for the solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> the Navier Stokes equations with generalised Newtonian constitutive equations </td>
+          <td>(</td>
+          <td class="paramtype">i.e. non-Newtonian behaviour <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> which the viscosity depends on the invariants <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> the rate-<a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a>-strain&#160;</td>
+          <td class="paramname"><em>tensor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39a3084e3761923a893451b0bd89f079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39a3084e3761923a893451b0bd89f079">&#9670;&nbsp;</a></span>equations() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt;HR&gt; subsection zero_point_nine_to_one_point_zero Changes between version and* subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic equations <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear and the interaction between these two systems <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> equations <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> time harmonic acoustic fluid structure interaction problems All equations are implemented <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> cartesian and cylindrical polar based the coupling <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> full nonlinear <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> and the Navier Stokes equations n n Implemented the linearised Navier Stokes equations </td>
+          <td>(</td>
+          <td class="paramtype">with the option to study their solutions as perturbations relative to a base state that is itself governed by the full Navier-Stokes&#160;</td>
+          <td class="paramname"><em>equations</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab80e0574672a2c45ae0b542b77d789e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab80e0574672a2c45ae0b542b77d789e1">&#9670;&nbsp;</a></span>in()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt;HR&gt; subsection zero_point_nine_to_one_point_zero Changes between version and* subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear and the interaction between these two systems <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> in time harmonic acoustic fluid structure interaction problems All <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> are implemented in cartesian and cylindrical polar based the coupling <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> full nonlinear <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> and the Navier Stokes <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> n n Implemented the linearised Navier Stokes including the ability to use the latter elements in fluid structure interaction problems which are governed by the <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> poro <a class="el" href="change__log_8txt.html#ac82edaa3cc6fd26ef171eaf0955f27e6">elasticity</a> coupled to the Navier Stokes <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> n n Implemented the ability adapt unstructured meshes in </td>
+          <td>(</td>
+          <td class="paramtype">in serial and in&#160;</td>
+          <td class="paramname"><em>parallel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8db46894b447fd0d99eb3e2821ace326"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8db46894b447fd0d99eb3e2821ace326">&#9670;&nbsp;</a></span>of()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Change log This document provides an overview of the major changes between different official releases of c oomph lib As of </td>
+          <td>(</td>
+          <td class="paramtype">i.&#160;</td>
+          <td class="paramname"><em>e.</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">the 1.0.*&#160;</td>
+          <td class="paramname"><em>release</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">new</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="change__log_8txt_source.html#l00007">7</a> of file <a class="el" href="change__log_8txt_source.html">change_log.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ac82edaa3cc6fd26ef171eaf0955f27e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac82edaa3cc6fd26ef171eaf0955f27e6">&#9670;&nbsp;</a></span>elasticity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt;HR&gt; subsection zero_point_nine_to_one_point_zero Changes between version and* subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> linear elasticity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="change__log_8txt_source.html#l00168">168</a> of file <a class="el" href="change__log_8txt_source.html">change_log.txt</a>.</p>
+
+</div>
+</div>
+<a id="abeb16f0c9840edbbb5b82bf10abe73b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeb16f0c9840edbbb5b82bf10abe73b9">&#9670;&nbsp;</a></span>geometry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual broken functions <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> base classes provide instructions what to do for others n n Provided machinery to establish what the <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> unknowns <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> a fully built problem represent Calling&lt;code&gt; Meshes and Nodes point <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> view Very useful for debugging (e.g. &quot;Why are all the entries <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the n-th row/column <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the Jacobian zero?&quot; or &quot;The n-th residual is enormous -- which <a class="el" href="change__log_8txt.html#ae266028b655dc7a29f3a1b0a67095b7b">equation</a> does it correspond to?&quot;, etc.) \n\n - Provided machinery for hp adaptivity and p-type spectral elements with mortar const raints <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> 2D and 3D.\n\n - Added interfaces to the Trilinos ANASAZI eigensolver to allow parallel solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> eigenproblems. \n\n - Basic implementation <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> discontinuous Galerkin methods for general flux transport problems.\n\n - Many new detailed tutorials explaining these boundaries are respected under mesh i e the mesh converges to the exact domain geometry</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="change__log_8txt_source.html#l00239">239</a> of file <a class="el" href="change__log_8txt_source.html">change_log.txt</a>.</p>
+
+</div>
+</div>
+<a id="a56a3e7e628870a6fbaf6c27fd357a892"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56a3e7e628870a6fbaf6c27fd357a892">&#9670;&nbsp;</a></span>Obviously</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode Obviously</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="change__log_8txt_source.html#l00153">153</a> of file <a class="el" href="change__log_8txt_source.html">change_log.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0e0878d92a40b210ef9c6c6fc73a5d5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e0878d92a40b210ef9c6c6fc73a5d5e">&#9670;&nbsp;</a></span>optimised</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the parallel assembly <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> the Jacobian and residual vector has been optimised</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="change__log_8txt_source.html#l00266">266</a> of file <a class="el" href="change__log_8txt_source.html">change_log.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2ed0a0fcf4412460d8f77641d5cfb0d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ed0a0fcf4412460d8f77641d5cfb0d2">&#9670;&nbsp;</a></span>refinement</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual broken functions <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> base classes provide instructions what to do for others n n Provided machinery to establish what the <a class="el" href="change__log_8txt.html#a0ffed00e1a9a523f061d19dd55351781">equations</a> unknowns <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> a fully built problem represent Calling&lt;code&gt; Meshes and Nodes point <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> view Very useful for debugging (e.g. &quot;Why are all the entries <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the n-th row/column <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> the Jacobian zero?&quot; or &quot;The n-th residual is enormous -- which <a class="el" href="change__log_8txt.html#ae266028b655dc7a29f3a1b0a67095b7b">equation</a> does it correspond to?&quot;, etc.) \n\n - Provided machinery for hp adaptivity and p-type spectral elements with mortar const raints <a class="el" href="change__log_8txt.html#ab80e0574672a2c45ae0b542b77d789e1">in</a> 2D and 3D.\n\n - Added interfaces to the Trilinos ANASAZI eigensolver to allow parallel solution <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> eigenproblems. \n\n - Basic implementation <a class="el" href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a> discontinuous Galerkin methods for general flux transport problems.\n\n - Many new detailed tutorials explaining these boundaries are respected under mesh refinement</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">new</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="change__log_8txt_source.html#l00215">215</a> of file <a class="el" href="change__log_8txt_source.html">change_log.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="afinal__svn__log_8txt_html_a14acf85415a535b6695a36c9f8292a8b"><div class="ttname"><a href="final__svn__log_8txt.html#a14acf85415a535b6695a36c9f8292a8b">work</a></div><div class="ttdeci">nothing else would work</div><div class="ttdef"><b>Definition:</b> <a href="final__svn__log_8txt_source.html#l00775">final_svn_log.txt:775</a></div></div>
+<div class="ttc" id="afinal__svn__log_8txt_html_af93f02615df7f59881c317dba0752a6c"><div class="ttname"><a href="final__svn__log_8txt.html#af93f02615df7f59881c317dba0752a6c">dimensions</a></div><div class="ttdeci">should probably removed at some point Cleaned up(and de-leaked) helper fcts in MPI_Helpers.(This still needs some tidying(lots of commented- out -- Tidy-up in mpi subdirectories is on-going. There 's a comment in mpi_problem.h another detail to be filled but it does not happen in the test case I can will fix it later v Added two additional demos which tests the line tension terms that must be added at boundaries of free surfaces in three dimensions</div><div class="ttdef"><b>Definition:</b> <a href="final__svn__log_8txt_source.html#l00753">final_svn_log.txt:753</a></div></div>
+<div class="ttc" id="afinal__svn__log_8txt_html_a0a1e6b0adf7a0311760596edd4ef4011"><div class="ttname"><a href="final__svn__log_8txt.html#a0a1e6b0adf7a0311760596edd4ef4011">mheil</a></div><div class="ttdeci">r207 Jun lines A few final cofiguration tweaks and additions to the documentation about subversion and the distribution Removed one configure option whose name was over the magic characters Modified the intel configuration file so that the fortran compiler is ifort r206 mheil</div><div class="ttdef"><b>Definition:</b> <a href="final__svn__log_8txt_source.html#l00013">final_svn_log.txt:13</a></div></div>
+<div class="ttc" id="afinal__svn__log_8txt_html_a9865b2882fc937d2f569f1742e8ae1e5"><div class="ttname"><a href="final__svn__log_8txt.html#a9865b2882fc937d2f569f1742e8ae1e5">ahazel</a></div><div class="ttdeci">r207 ahazel</div><div class="ttdef"><b>Definition:</b> <a href="final__svn__log_8txt_source.html#l00002">final_svn_log.txt:2</a></div></div>
+<div class="ttc" id="achange__log_8txt_html_a8db46894b447fd0d99eb3e2821ace326"><div class="ttname"><a href="change__log_8txt.html#a8db46894b447fd0d99eb3e2821ace326">of</a></div><div class="ttdeci">mainpage Change log This document provides an overview of the major changes between different official releases of c oomph lib As of(i.e. &gt; the 1.0.*release) we include the svn revision number as part of the release identifier since this makes it easier for us to publish incremental updates to the library(and to do so more frequently than we used to!). Whenever such a new release is made available we automatically update the snapshot of the corresponding svn log which contains the commit messages of all changes made since &quot;day one&quot;</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00007">change_log.txt:7</a></div></div>
+<div class="ttc" id="afinal__svn__log_8txt_html_a64dc183d424aa96f7e656fbf2baf801d"><div class="ttname"><a href="final__svn__log_8txt.html#a64dc183d424aa96f7e656fbf2baf801d">tests</a></div><div class="ttdeci">should probably removed at some point Cleaned up(and de-leaked) helper fcts in MPI_Helpers.(This still needs some tidying(lots of commented- out -- Tidy-up in mpi subdirectories is on-going. There 's a comment in mpi_problem.h another detail to be filled but it does not happen in the test case I can will fix it later v Added two additional demos tests</div><div class="ttdef"><b>Definition:</b> <a href="final__svn__log_8txt_source.html#l00751">final_svn_log.txt:751</a></div></div>
+<div class="ttc" id="afinal__svn__log_8txt_html_aedb16d17a522c8335e9261bd48984e2a"><div class="ttname"><a href="final__svn__log_8txt.html#aedb16d17a522c8335e9261bd48984e2a">in</a></div><div class="ttdeci">should probably removed at some point Cleaned up(and de-leaked) helper fcts in MPI_Helpers.(This still needs some tidying(lots of commented- out -- Tidy-up in mpi subdirectories is on-going. There 's a comment in mpi_problem.h another detail to be filled in</div><div class="ttdef"><b>Definition:</b> <a href="final__svn__log_8txt_source.html#l00666">final_svn_log.txt:666</a></div></div>
+<div class="ttc" id="achange__log_8txt_html_a39a3084e3761923a893451b0bd89f079"><div class="ttname"><a href="change__log_8txt.html#a39a3084e3761923a893451b0bd89f079">equations</a></div><div class="ttdeci">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic equations of linear and the interaction between these two systems of equations in time harmonic acoustic fluid structure interaction problems All equations are implemented in cartesian and cylindrical polar based the coupling of full nonlinear elasticity and the Navier Stokes equations n n Implemented the linearised Navier Stokes equations(with the option to study their solutions as perturbations relative to a base state that is itself governed by the full Navier-Stokes equations). \n\n - Provided elements for the solution of the axisymmetric equations of linear elasticity. \n\n - Finished what is hopefully the final rewrite of the(parallel) block preconditioning framework and its extensive tutorial. \n\n - Provided elements for the solution of the Foeppl-von-Karman equations in various formulations(using either an Airy-stress function or the in-plane displacements) and in various coordinate systems. \n\n - Provided elements for Darcy porous media flow and Biot-type poro-elasticity</div></div>
+<div class="ttc" id="achange__log_8txt_html_ae266028b655dc7a29f3a1b0a67095b7b"><div class="ttname"><a href="change__log_8txt.html#ae266028b655dc7a29f3a1b0a67095b7b">equation</a></div><div class="ttdeci">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz equation(with various ways of implementing the Sommerfeld radiation condition)</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:23:03
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

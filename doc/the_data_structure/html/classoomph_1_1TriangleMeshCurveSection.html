@@ -1,0 +1,2727 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TriangleMeshCurveSection Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html">TriangleMeshCurveSection</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1TriangleMeshCurveSection-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::TriangleMeshCurveSection Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::TriangleMeshCurveSection:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1TriangleMeshCurveSection.png" usemap="#oomph::TriangleMeshCurveSection_map" alt=""/>
+  <map id="oomph::TriangleMeshCurveSection_map" name="oomph::TriangleMeshCurveSection_map">
+<area href="classoomph_1_1TriangleMeshCurviLine.html" alt="oomph::TriangleMeshCurviLine" shape="rect" coords="0,56,209,80"/>
+<area href="classoomph_1_1TriangleMeshPolyLine.html" title="Class defining a polyline for use in Triangle Mesh generation." alt="oomph::TriangleMeshPolyLine" shape="rect" coords="219,56,428,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7ea6757c0c67d0b225f33f137cf4c98d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a7ea6757c0c67d0b225f33f137cf4c98d">TriangleMeshCurveSection</a> ()</td></tr>
+<tr class="memdesc:a7ea6757c0c67d0b225f33f137cf4c98d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor. Initialises the curve section as non connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a7ea6757c0c67d0b225f33f137cf4c98d">More...</a><br /></td></tr>
+<tr class="separator:a7ea6757c0c67d0b225f33f137cf4c98d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d723c6ea8d102f865e26d8362e9ad92"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a4d723c6ea8d102f865e26d8362e9ad92">~TriangleMeshCurveSection</a> ()</td></tr>
+<tr class="memdesc:a4d723c6ea8d102f865e26d8362e9ad92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a4d723c6ea8d102f865e26d8362e9ad92">More...</a><br /></td></tr>
+<tr class="separator:a4d723c6ea8d102f865e26d8362e9ad92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52af59a9a4f1b6adb35e5645ab8feb45"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a52af59a9a4f1b6adb35e5645ab8feb45">nsegment</a> () const =0</td></tr>
+<tr class="memdesc:a52af59a9a4f1b6adb35e5645ab8feb45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of segments that this part of the boundary is to be represented by. This corresponds to the number of straight-line segments in triangle representation.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a52af59a9a4f1b6adb35e5645ab8feb45">More...</a><br /></td></tr>
+<tr class="separator:a52af59a9a4f1b6adb35e5645ab8feb45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e6d22017ce7abe7e84e3f16360f5444"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a2e6d22017ce7abe7e84e3f16360f5444">boundary_id</a> () const =0</td></tr>
+<tr class="memdesc:a2e6d22017ce7abe7e84e3f16360f5444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary id.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a2e6d22017ce7abe7e84e3f16360f5444">More...</a><br /></td></tr>
+<tr class="separator:a2e6d22017ce7abe7e84e3f16360f5444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a106d1f0e203e8e17c8296419be284c16"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a106d1f0e203e8e17c8296419be284c16">boundary_chunk</a> () const =0</td></tr>
+<tr class="separator:a106d1f0e203e8e17c8296419be284c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a491d849e8147152c10d55c8ca6c3d63d"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a491d849e8147152c10d55c8ca6c3d63d">nvertex</a> () const =0</td></tr>
+<tr class="memdesc:a491d849e8147152c10d55c8ca6c3d63d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertices.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a491d849e8147152c10d55c8ca6c3d63d">More...</a><br /></td></tr>
+<tr class="separator:a491d849e8147152c10d55c8ca6c3d63d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a140b0bb85d7bf85cc025e19e996d5c53"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a140b0bb85d7bf85cc025e19e996d5c53">output</a> (std::ostream &amp;outfile, const unsigned &amp;n_sample=50)=0</td></tr>
+<tr class="memdesc:a140b0bb85d7bf85cc025e19e996d5c53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the curve_section.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a140b0bb85d7bf85cc025e19e996d5c53">More...</a><br /></td></tr>
+<tr class="separator:a140b0bb85d7bf85cc025e19e996d5c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab16b55ff3346ea87b00a49ead7562cc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#ab16b55ff3346ea87b00a49ead7562cc2">enable_refinement_tolerance</a> (const double &amp;tolerance=0.08)</td></tr>
+<tr class="memdesc:ab16b55ff3346ea87b00a49ead7562cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable refinement of curve section to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the refinement tolerance. It defaults to 0.08 and the smaller the number the finer the surface representation.  <a href="classoomph_1_1TriangleMeshCurveSection.html#ab16b55ff3346ea87b00a49ead7562cc2">More...</a><br /></td></tr>
+<tr class="separator:ab16b55ff3346ea87b00a49ead7562cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ebe8f25753aefe11af4aa8081644462"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a3ebe8f25753aefe11af4aa8081644462">set_refinement_tolerance</a> (const double &amp;tolerance)</td></tr>
+<tr class="memdesc:a3ebe8f25753aefe11af4aa8081644462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tolerance for refinement of curve sections to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the refinement tolerance. (The smaller the number the finer the surface representation). If set to a negative value, we're switching off refinement &ndash; equivalent to calling disable_polyline_refinement()  <a href="classoomph_1_1TriangleMeshCurveSection.html#a3ebe8f25753aefe11af4aa8081644462">More...</a><br /></td></tr>
+<tr class="separator:a3ebe8f25753aefe11af4aa8081644462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77470b1ea748cef82a3ffebfd568fe7d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a77470b1ea748cef82a3ffebfd568fe7d">refinement_tolerance</a> ()</td></tr>
+<tr class="memdesc:a77470b1ea748cef82a3ffebfd568fe7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tolerance for refinement of curve sections to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation. If it's negative refinement is disabled.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a77470b1ea748cef82a3ffebfd568fe7d">More...</a><br /></td></tr>
+<tr class="separator:a77470b1ea748cef82a3ffebfd568fe7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88a139cf580b5cd694dd2a69ef372a0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a88a139cf580b5cd694dd2a69ef372a0d">disable_refinement_tolerance</a> ()</td></tr>
+<tr class="memdesc:a88a139cf580b5cd694dd2a69ef372a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable refinement of curve section.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a88a139cf580b5cd694dd2a69ef372a0d">More...</a><br /></td></tr>
+<tr class="separator:a88a139cf580b5cd694dd2a69ef372a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac01b9768242eee89888b3cf1960ab226"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#ac01b9768242eee89888b3cf1960ab226">enable_unrefinement_tolerance</a> (const double &amp;tolerance=0.04)</td></tr>
+<tr class="memdesc:ac01b9768242eee89888b3cf1960ab226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable unrefinement of curve sections to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines.  <a href="classoomph_1_1TriangleMeshCurveSection.html#ac01b9768242eee89888b3cf1960ab226">More...</a><br /></td></tr>
+<tr class="separator:ac01b9768242eee89888b3cf1960ab226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e586bbd0adf5f5f9b5cb4ed4300614a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a2e586bbd0adf5f5f9b5cb4ed4300614a">set_unrefinement_tolerance</a> (const double &amp;tolerance)</td></tr>
+<tr class="memdesc:a2e586bbd0adf5f5f9b5cb4ed4300614a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tolerance for unrefinement of curve sections to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines. If set to a negative value, we're switching off unrefinement &ndash; equivalent to calling disable_curve_section_unrefinement()  <a href="classoomph_1_1TriangleMeshCurveSection.html#a2e586bbd0adf5f5f9b5cb4ed4300614a">More...</a><br /></td></tr>
+<tr class="separator:a2e586bbd0adf5f5f9b5cb4ed4300614a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15fbe0b2d7ed1ed7a8e8f0ae10669e26"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a15fbe0b2d7ed1ed7a8e8f0ae10669e26">unrefinement_tolerance</a> ()</td></tr>
+<tr class="memdesc:a15fbe0b2d7ed1ed7a8e8f0ae10669e26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tolerance for unrefinement of curve section to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation. If it's negative unrefinement is disabled.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a15fbe0b2d7ed1ed7a8e8f0ae10669e26">More...</a><br /></td></tr>
+<tr class="separator:a15fbe0b2d7ed1ed7a8e8f0ae10669e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b79446585f07f7c375c64874f847287"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a9b79446585f07f7c375c64874f847287">disable_unrefinement_tolerance</a> ()</td></tr>
+<tr class="memdesc:a9b79446585f07f7c375c64874f847287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable unrefinement of curve sections.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a9b79446585f07f7c375c64874f847287">More...</a><br /></td></tr>
+<tr class="separator:a9b79446585f07f7c375c64874f847287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bb05bb4547fd20b4cfc1c0c5253bc0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a5bb05bb4547fd20b4cfc1c0c5253bc0f">set_maximum_length</a> (const double &amp;<a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#aee6ab6dbfd4e2f63da41bb8f66a43f53">maximum_length</a>)</td></tr>
+<tr class="memdesc:a5bb05bb4547fd20b4cfc1c0c5253bc0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to specify the maximum distance between two vertices that define the associated polyline of the curve section, it only takes effect on the unrefinement and refinement steps.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a5bb05bb4547fd20b4cfc1c0c5253bc0f">More...</a><br /></td></tr>
+<tr class="separator:a5bb05bb4547fd20b4cfc1c0c5253bc0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcf00be8498fb9b47a69b18d20fca6a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#afcf00be8498fb9b47a69b18d20fca6a1">disable_use_maximum_length</a> ()</td></tr>
+<tr class="memdesc:afcf00be8498fb9b47a69b18d20fca6a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the use of the maximum length criteria on the unrefinement or refinement steps.  <a href="classoomph_1_1TriangleMeshCurveSection.html#afcf00be8498fb9b47a69b18d20fca6a1">More...</a><br /></td></tr>
+<tr class="separator:afcf00be8498fb9b47a69b18d20fca6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee6ab6dbfd4e2f63da41bb8f66a43f53"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#aee6ab6dbfd4e2f63da41bb8f66a43f53">maximum_length</a> ()</td></tr>
+<tr class="memdesc:aee6ab6dbfd4e2f63da41bb8f66a43f53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets access to the maximum length variable.  <a href="classoomph_1_1TriangleMeshCurveSection.html#aee6ab6dbfd4e2f63da41bb8f66a43f53">More...</a><br /></td></tr>
+<tr class="separator:aee6ab6dbfd4e2f63da41bb8f66a43f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c60883b595a52280c486badf8a4210"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a08c60883b595a52280c486badf8a4210">initial_vertex_coordinate</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;vertex)=0</td></tr>
+<tr class="memdesc:a08c60883b595a52280c486badf8a4210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get first vertex coordinates.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a08c60883b595a52280c486badf8a4210">More...</a><br /></td></tr>
+<tr class="separator:a08c60883b595a52280c486badf8a4210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5bbea1d7c1157f25d3b93101ac4b80f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#aa5bbea1d7c1157f25d3b93101ac4b80f">final_vertex_coordinate</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;vertex)=0</td></tr>
+<tr class="memdesc:aa5bbea1d7c1157f25d3b93101ac4b80f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get last vertex coordinates.  <a href="classoomph_1_1TriangleMeshCurveSection.html#aa5bbea1d7c1157f25d3b93101ac4b80f">More...</a><br /></td></tr>
+<tr class="separator:aa5bbea1d7c1157f25d3b93101ac4b80f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32e53dc2a830784397230e92f73f6191"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a32e53dc2a830784397230e92f73f6191">connect_initial_vertex_to_polyline</a> (<a class="el" href="classoomph_1_1TriangleMeshPolyLine.html">TriangleMeshPolyLine</a> *polyline_pt, const unsigned &amp;vertex_number, const double &amp;tolerance_for_connection=1.0e-14)</td></tr>
+<tr class="memdesc:a32e53dc2a830784397230e92f73f6191"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects the initial vertex of the curve section to a desired target polyline by specifying the vertex number. There is a checking which verifies that the initial vertex is close enough to the destination vertex on the target polyline by no more than the specified tolerance.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a32e53dc2a830784397230e92f73f6191">More...</a><br /></td></tr>
+<tr class="separator:a32e53dc2a830784397230e92f73f6191"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55d06c515fd1e7f6a3729b2efda06c38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a55d06c515fd1e7f6a3729b2efda06c38">connect_final_vertex_to_polyline</a> (<a class="el" href="classoomph_1_1TriangleMeshPolyLine.html">TriangleMeshPolyLine</a> *polyline_pt, const unsigned &amp;vertex_number, const double &amp;tolerance_for_connection=1.0e-14)</td></tr>
+<tr class="memdesc:a55d06c515fd1e7f6a3729b2efda06c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects the final vertex of the curve section to a desired target polyline by specifying the vertex number. There is a checking which verifies that the final vertex is close enough to the destination vertex on the target polyline by no more than the specified tolerance.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a55d06c515fd1e7f6a3729b2efda06c38">More...</a><br /></td></tr>
+<tr class="separator:a55d06c515fd1e7f6a3729b2efda06c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda559ecf86d962ed1d1594e3588a87c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#acda559ecf86d962ed1d1594e3588a87c">connect_initial_vertex_to_curviline</a> (<a class="el" href="classoomph_1_1TriangleMeshCurviLine.html">TriangleMeshCurviLine</a> *curviline_pt, const double &amp;s_value, const double &amp;tolerance_for_connection=1.0e-14)</td></tr>
+<tr class="memdesc:acda559ecf86d962ed1d1594e3588a87c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects the initial vertex of the curve section to a desired target curviline by specifying the s value (intrinsic value on the geometric object of the curviline) where to connect on the target curviline. There is a checking which verifies that the initial vertex and the coordinates on the given s value are close enough by no more than the given tolerance.  <a href="classoomph_1_1TriangleMeshCurveSection.html#acda559ecf86d962ed1d1594e3588a87c">More...</a><br /></td></tr>
+<tr class="separator:acda559ecf86d962ed1d1594e3588a87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af052734eb3a34089c6ba2c9cfb937bf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#af052734eb3a34089c6ba2c9cfb937bf3">connect_final_vertex_to_curviline</a> (<a class="el" href="classoomph_1_1TriangleMeshCurviLine.html">TriangleMeshCurviLine</a> *curviline_pt, const double &amp;s_value, const double &amp;tolerance_for_connection=1.0e-14)</td></tr>
+<tr class="memdesc:af052734eb3a34089c6ba2c9cfb937bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects the final vertex of the curve section to a desired target curviline by specifying the s value (intrinsic value on the geometric object of the curviline) where to connect on the target curviline. There is a checking which verifies that the final vertex and the coordinates on the given s value are close enough by no more than the given tolerance.  <a href="classoomph_1_1TriangleMeshCurveSection.html#af052734eb3a34089c6ba2c9cfb937bf3">More...</a><br /></td></tr>
+<tr class="separator:af052734eb3a34089c6ba2c9cfb937bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaab51c1395c75a85bf761e09ddcd1b28"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#aaab51c1395c75a85bf761e09ddcd1b28">is_initial_vertex_connected</a> () const</td></tr>
+<tr class="memdesc:aaab51c1395c75a85bf761e09ddcd1b28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether initial vertex is connected or not.  <a href="classoomph_1_1TriangleMeshCurveSection.html#aaab51c1395c75a85bf761e09ddcd1b28">More...</a><br /></td></tr>
+<tr class="separator:aaab51c1395c75a85bf761e09ddcd1b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3294da2b5f14d38e19f2b64684f3074"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#ab3294da2b5f14d38e19f2b64684f3074">set_initial_vertex_connected</a> ()</td></tr>
+<tr class="memdesc:ab3294da2b5f14d38e19f2b64684f3074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the initial vertex as connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#ab3294da2b5f14d38e19f2b64684f3074">More...</a><br /></td></tr>
+<tr class="separator:ab3294da2b5f14d38e19f2b64684f3074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6175f89dbb33a53d596e9374857cbefb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a6175f89dbb33a53d596e9374857cbefb">unset_initial_vertex_connected</a> ()</td></tr>
+<tr class="memdesc:a6175f89dbb33a53d596e9374857cbefb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the initial vertex as non connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a6175f89dbb33a53d596e9374857cbefb">More...</a><br /></td></tr>
+<tr class="separator:a6175f89dbb33a53d596e9374857cbefb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade6528a99d26583c05a5fd44e21d1ec4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#ade6528a99d26583c05a5fd44e21d1ec4">suspend_initial_vertex_connected</a> ()</td></tr>
+<tr class="separator:ade6528a99d26583c05a5fd44e21d1ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34923cad75967b4efa95ad6e1ea3c72e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a34923cad75967b4efa95ad6e1ea3c72e">resume_initial_vertex_connected</a> ()</td></tr>
+<tr class="separator:a34923cad75967b4efa95ad6e1ea3c72e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a937df77a1a0d3bf60f0a52ab3c0e268d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a937df77a1a0d3bf60f0a52ab3c0e268d">is_final_vertex_connected</a> () const</td></tr>
+<tr class="memdesc:a937df77a1a0d3bf60f0a52ab3c0e268d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether final vertex is connected or not.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a937df77a1a0d3bf60f0a52ab3c0e268d">More...</a><br /></td></tr>
+<tr class="separator:a937df77a1a0d3bf60f0a52ab3c0e268d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcdf60aacf4153498fe4dfa0821691d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#abcdf60aacf4153498fe4dfa0821691d7">set_final_vertex_connected</a> ()</td></tr>
+<tr class="memdesc:abcdf60aacf4153498fe4dfa0821691d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the final vertex as connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#abcdf60aacf4153498fe4dfa0821691d7">More...</a><br /></td></tr>
+<tr class="separator:abcdf60aacf4153498fe4dfa0821691d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac44effdfc3a04ba90668e7f3f54b248a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#ac44effdfc3a04ba90668e7f3f54b248a">unset_final_vertex_connected</a> ()</td></tr>
+<tr class="memdesc:ac44effdfc3a04ba90668e7f3f54b248a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the final vertex as non connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#ac44effdfc3a04ba90668e7f3f54b248a">More...</a><br /></td></tr>
+<tr class="separator:ac44effdfc3a04ba90668e7f3f54b248a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a379677086ad13d5cd7d0c5c669a37e2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a379677086ad13d5cd7d0c5c669a37e2f">suspend_final_vertex_connected</a> ()</td></tr>
+<tr class="separator:a379677086ad13d5cd7d0c5c669a37e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c6277b6c1a1c6a5a6a7d234c4afc101"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a3c6277b6c1a1c6a5a6a7d234c4afc101">resume_final_vertex_connected</a> ()</td></tr>
+<tr class="separator:a3c6277b6c1a1c6a5a6a7d234c4afc101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa20f1e54ff6f0f1ef0c550e0a2d119bb"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#aa20f1e54ff6f0f1ef0c550e0a2d119bb">initial_vertex_connected_bnd_id</a> () const</td></tr>
+<tr class="memdesc:aa20f1e54ff6f0f1ef0c550e0a2d119bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the id to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#aa20f1e54ff6f0f1ef0c550e0a2d119bb">More...</a><br /></td></tr>
+<tr class="separator:aa20f1e54ff6f0f1ef0c550e0a2d119bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e3e75c39655428e893ea740b6af30a7"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a9e3e75c39655428e893ea740b6af30a7">initial_vertex_connected_bnd_id</a> ()</td></tr>
+<tr class="memdesc:a9e3e75c39655428e893ea740b6af30a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the id to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a9e3e75c39655428e893ea740b6af30a7">More...</a><br /></td></tr>
+<tr class="separator:a9e3e75c39655428e893ea740b6af30a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c379a3eca49b36ece255290afea43fb"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a3c379a3eca49b36ece255290afea43fb">initial_vertex_connected_n_vertex</a> () const</td></tr>
+<tr class="memdesc:a3c379a3eca49b36ece255290afea43fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the vertex number to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a3c379a3eca49b36ece255290afea43fb">More...</a><br /></td></tr>
+<tr class="separator:a3c379a3eca49b36ece255290afea43fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad718b449cea9bf93535cec6ca5b65a1a"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#ad718b449cea9bf93535cec6ca5b65a1a">initial_vertex_connected_n_vertex</a> ()</td></tr>
+<tr class="memdesc:ad718b449cea9bf93535cec6ca5b65a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the vertex number to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#ad718b449cea9bf93535cec6ca5b65a1a">More...</a><br /></td></tr>
+<tr class="separator:ad718b449cea9bf93535cec6ca5b65a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2c3f9b3c2e2594bea76360c99805790"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#ae2c3f9b3c2e2594bea76360c99805790">initial_vertex_connected_n_chunk</a> () const</td></tr>
+<tr class="memdesc:ae2c3f9b3c2e2594bea76360c99805790"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the boundary chunk to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#ae2c3f9b3c2e2594bea76360c99805790">More...</a><br /></td></tr>
+<tr class="separator:ae2c3f9b3c2e2594bea76360c99805790"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dd1f7bcd31629354a6c59fd0479b189"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a9dd1f7bcd31629354a6c59fd0479b189">initial_vertex_connected_n_chunk</a> ()</td></tr>
+<tr class="memdesc:a9dd1f7bcd31629354a6c59fd0479b189"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the boundary chunk to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a9dd1f7bcd31629354a6c59fd0479b189">More...</a><br /></td></tr>
+<tr class="separator:a9dd1f7bcd31629354a6c59fd0479b189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1acd60f443c9ef93df9994587ebfcad"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#af1acd60f443c9ef93df9994587ebfcad">final_vertex_connected_bnd_id</a> () const</td></tr>
+<tr class="memdesc:af1acd60f443c9ef93df9994587ebfcad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the id to which the final end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#af1acd60f443c9ef93df9994587ebfcad">More...</a><br /></td></tr>
+<tr class="separator:af1acd60f443c9ef93df9994587ebfcad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e75e110f491d19310afa66140e3cd1a"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a2e75e110f491d19310afa66140e3cd1a">final_vertex_connected_bnd_id</a> ()</td></tr>
+<tr class="memdesc:a2e75e110f491d19310afa66140e3cd1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the id to which the final end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a2e75e110f491d19310afa66140e3cd1a">More...</a><br /></td></tr>
+<tr class="separator:a2e75e110f491d19310afa66140e3cd1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fa5fb8407dfe3f0d6624ceb0ac822a5"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a6fa5fb8407dfe3f0d6624ceb0ac822a5">final_vertex_connected_n_vertex</a> () const</td></tr>
+<tr class="memdesc:a6fa5fb8407dfe3f0d6624ceb0ac822a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the vertex number to which the final end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a6fa5fb8407dfe3f0d6624ceb0ac822a5">More...</a><br /></td></tr>
+<tr class="separator:a6fa5fb8407dfe3f0d6624ceb0ac822a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29571c3c921d5bd8118d9e0b15f4a6e3"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a29571c3c921d5bd8118d9e0b15f4a6e3">final_vertex_connected_n_vertex</a> ()</td></tr>
+<tr class="memdesc:a29571c3c921d5bd8118d9e0b15f4a6e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the vertex number to which the final end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a29571c3c921d5bd8118d9e0b15f4a6e3">More...</a><br /></td></tr>
+<tr class="separator:a29571c3c921d5bd8118d9e0b15f4a6e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a313270409b3ea9abde6ed7c6c65568"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a5a313270409b3ea9abde6ed7c6c65568">final_vertex_connected_n_chunk</a> () const</td></tr>
+<tr class="memdesc:a5a313270409b3ea9abde6ed7c6c65568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the boundary chunk to which the final end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a5a313270409b3ea9abde6ed7c6c65568">More...</a><br /></td></tr>
+<tr class="separator:a5a313270409b3ea9abde6ed7c6c65568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7762be2ff2f975f38365c6dc50719664"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a7762be2ff2f975f38365c6dc50719664">final_vertex_connected_n_chunk</a> ()</td></tr>
+<tr class="memdesc:a7762be2ff2f975f38365c6dc50719664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the boundary chunk to which the final end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a7762be2ff2f975f38365c6dc50719664">More...</a><br /></td></tr>
+<tr class="separator:a7762be2ff2f975f38365c6dc50719664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ab0172007e3e875ff0875a30de76dac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a0ab0172007e3e875ff0875a30de76dac">is_initial_vertex_connected_to_curviline</a> () const</td></tr>
+<tr class="memdesc:a0ab0172007e3e875ff0875a30de76dac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether the initial vertex is connected to a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a0ab0172007e3e875ff0875a30de76dac">More...</a><br /></td></tr>
+<tr class="separator:a0ab0172007e3e875ff0875a30de76dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad594045d620e693b982612987e417092"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#ad594045d620e693b982612987e417092">set_initial_vertex_connected_to_curviline</a> ()</td></tr>
+<tr class="memdesc:ad594045d620e693b982612987e417092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the initial vertex as connected to a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#ad594045d620e693b982612987e417092">More...</a><br /></td></tr>
+<tr class="separator:ad594045d620e693b982612987e417092"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe70e0361f462012910e958253fdcb91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#afe70e0361f462012910e958253fdcb91">unset_initial_vertex_connected_to_curviline</a> ()</td></tr>
+<tr class="memdesc:afe70e0361f462012910e958253fdcb91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the initial vertex as non connected to a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#afe70e0361f462012910e958253fdcb91">More...</a><br /></td></tr>
+<tr class="separator:afe70e0361f462012910e958253fdcb91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c02d1fa4b159f23cb76b3ec98cb4c69"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a8c02d1fa4b159f23cb76b3ec98cb4c69">is_final_vertex_connected_to_curviline</a> () const</td></tr>
+<tr class="memdesc:a8c02d1fa4b159f23cb76b3ec98cb4c69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether the final vertex is connected to a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a8c02d1fa4b159f23cb76b3ec98cb4c69">More...</a><br /></td></tr>
+<tr class="separator:a8c02d1fa4b159f23cb76b3ec98cb4c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af14d50cd734c6dc02c7fa0314dfadf68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#af14d50cd734c6dc02c7fa0314dfadf68">set_final_vertex_connected_to_curviline</a> ()</td></tr>
+<tr class="memdesc:af14d50cd734c6dc02c7fa0314dfadf68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the final vertex as connected to a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#af14d50cd734c6dc02c7fa0314dfadf68">More...</a><br /></td></tr>
+<tr class="separator:af14d50cd734c6dc02c7fa0314dfadf68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a169b20e7458f2ca0a7d64f35e475cecf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a169b20e7458f2ca0a7d64f35e475cecf">unset_final_vertex_connected_to_curviline</a> ()</td></tr>
+<tr class="memdesc:a169b20e7458f2ca0a7d64f35e475cecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the final vertex as non connected to a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a169b20e7458f2ca0a7d64f35e475cecf">More...</a><br /></td></tr>
+<tr class="separator:a169b20e7458f2ca0a7d64f35e475cecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adca140a1a261a98649d1af4a5d3e6cb8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#adca140a1a261a98649d1af4a5d3e6cb8">initial_s_connection_value</a> () const</td></tr>
+<tr class="memdesc:adca140a1a261a98649d1af4a5d3e6cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the s value to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#adca140a1a261a98649d1af4a5d3e6cb8">More...</a><br /></td></tr>
+<tr class="separator:adca140a1a261a98649d1af4a5d3e6cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80b972314a676c61e4fe5ed7fed005c8"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a80b972314a676c61e4fe5ed7fed005c8">initial_s_connection_value</a> ()</td></tr>
+<tr class="memdesc:a80b972314a676c61e4fe5ed7fed005c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the s value to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a80b972314a676c61e4fe5ed7fed005c8">More...</a><br /></td></tr>
+<tr class="separator:a80b972314a676c61e4fe5ed7fed005c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221faf0fec4d8b67dede9a90ce15fc41"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a221faf0fec4d8b67dede9a90ce15fc41">final_s_connection_value</a> () const</td></tr>
+<tr class="memdesc:a221faf0fec4d8b67dede9a90ce15fc41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the s value to which the final end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a221faf0fec4d8b67dede9a90ce15fc41">More...</a><br /></td></tr>
+<tr class="separator:a221faf0fec4d8b67dede9a90ce15fc41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab6d3e6a3ce99d3ea8da762b75df3c6c"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#aab6d3e6a3ce99d3ea8da762b75df3c6c">final_s_connection_value</a> ()</td></tr>
+<tr class="memdesc:aab6d3e6a3ce99d3ea8da762b75df3c6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the s value to which the final end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#aab6d3e6a3ce99d3ea8da762b75df3c6c">More...</a><br /></td></tr>
+<tr class="separator:aab6d3e6a3ce99d3ea8da762b75df3c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a353eb1cc152ccc922c92c584b0bbe1bc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a353eb1cc152ccc922c92c584b0bbe1bc">tolerance_for_s_connection</a> () const</td></tr>
+<tr class="memdesc:a353eb1cc152ccc922c92c584b0bbe1bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the tolerance value for connections among curvilines.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a353eb1cc152ccc922c92c584b0bbe1bc">More...</a><br /></td></tr>
+<tr class="separator:a353eb1cc152ccc922c92c584b0bbe1bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32eb375e9044332d16ad44178b5c6b02"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a32eb375e9044332d16ad44178b5c6b02">tolerance_for_s_connection</a> ()</td></tr>
+<tr class="memdesc:a32eb375e9044332d16ad44178b5c6b02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the tolerance value for connections among curvilines.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a32eb375e9044332d16ad44178b5c6b02">More...</a><br /></td></tr>
+<tr class="separator:a32eb375e9044332d16ad44178b5c6b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a6f831c694ed3f3e64259c2aef6833fe1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a6f831c694ed3f3e64259c2aef6833fe1">Initial_vertex_connected</a></td></tr>
+<tr class="memdesc:a6f831c694ed3f3e64259c2aef6833fe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for stating if the initial end is connected to another boundary.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a6f831c694ed3f3e64259c2aef6833fe1">More...</a><br /></td></tr>
+<tr class="separator:a6f831c694ed3f3e64259c2aef6833fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1569f7a60d4f68916a13b177e746a58d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a1569f7a60d4f68916a13b177e746a58d">Final_vertex_connected</a></td></tr>
+<tr class="memdesc:a1569f7a60d4f68916a13b177e746a58d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for stating if the final end is connected to another boundary.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a1569f7a60d4f68916a13b177e746a58d">More...</a><br /></td></tr>
+<tr class="separator:a1569f7a60d4f68916a13b177e746a58d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7daa8be52f85035581f4f7a7a3653457"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a7daa8be52f85035581f4f7a7a3653457">Initial_vertex_connected_suspended</a></td></tr>
+<tr class="memdesc:a7daa8be52f85035581f4f7a7a3653457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if the connection is suspended because the boundary to connect is no longer part of the domain (only used in a distributed context)  <a href="classoomph_1_1TriangleMeshCurveSection.html#a7daa8be52f85035581f4f7a7a3653457">More...</a><br /></td></tr>
+<tr class="separator:a7daa8be52f85035581f4f7a7a3653457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0732c70f8c0516c4019cc231fc5be050"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a0732c70f8c0516c4019cc231fc5be050">Final_vertex_connected_suspended</a></td></tr>
+<tr class="memdesc:a0732c70f8c0516c4019cc231fc5be050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if the connection is suspended because the boundary to connect is no longer part of the domain (only used in a distributed context)  <a href="classoomph_1_1TriangleMeshCurveSection.html#a0732c70f8c0516c4019cc231fc5be050">More...</a><br /></td></tr>
+<tr class="separator:a0732c70f8c0516c4019cc231fc5be050"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb52c283347f6032971b1eb34be7c1cf"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#afb52c283347f6032971b1eb34be7c1cf">Initial_vertex_connected_bnd_id</a></td></tr>
+<tr class="memdesc:afb52c283347f6032971b1eb34be7c1cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the id to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#afb52c283347f6032971b1eb34be7c1cf">More...</a><br /></td></tr>
+<tr class="separator:afb52c283347f6032971b1eb34be7c1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a9bd3a85377bd49b2bd6588d6d4f128"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a7a9bd3a85377bd49b2bd6588d6d4f128">Initial_vertex_connected_n_vertex</a></td></tr>
+<tr class="memdesc:a7a9bd3a85377bd49b2bd6588d6d4f128"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the vertex number used for connection with the initial end.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a7a9bd3a85377bd49b2bd6588d6d4f128">More...</a><br /></td></tr>
+<tr class="separator:a7a9bd3a85377bd49b2bd6588d6d4f128"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b4ca3434467d9890d03633fada52ecf"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a3b4ca3434467d9890d03633fada52ecf">Initial_vertex_connected_n_chunk</a></td></tr>
+<tr class="memdesc:a3b4ca3434467d9890d03633fada52ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the chunk number of the boundary to which is connected th initial end.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a3b4ca3434467d9890d03633fada52ecf">More...</a><br /></td></tr>
+<tr class="separator:a3b4ca3434467d9890d03633fada52ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3679139caa6192ae3dddcb242ea00fe9"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a3679139caa6192ae3dddcb242ea00fe9">Final_vertex_connected_bnd_id</a></td></tr>
+<tr class="memdesc:a3679139caa6192ae3dddcb242ea00fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the id to which the initial end is connected.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a3679139caa6192ae3dddcb242ea00fe9">More...</a><br /></td></tr>
+<tr class="separator:a3679139caa6192ae3dddcb242ea00fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21d4f42b1f294a237d34302bfecdf63a"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a21d4f42b1f294a237d34302bfecdf63a">Final_vertex_connected_n_vertex</a></td></tr>
+<tr class="memdesc:a21d4f42b1f294a237d34302bfecdf63a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the vertex number used for connection with the final end.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a21d4f42b1f294a237d34302bfecdf63a">More...</a><br /></td></tr>
+<tr class="separator:a21d4f42b1f294a237d34302bfecdf63a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbac30e1ecc538c1af17f40184cfe681"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#abbac30e1ecc538c1af17f40184cfe681">Final_vertex_connected_n_chunk</a></td></tr>
+<tr class="memdesc:abbac30e1ecc538c1af17f40184cfe681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the chunk number of the boundary to which is connected th initial end.  <a href="classoomph_1_1TriangleMeshCurveSection.html#abbac30e1ecc538c1af17f40184cfe681">More...</a><br /></td></tr>
+<tr class="separator:abbac30e1ecc538c1af17f40184cfe681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a079f9af667c7cb344b53e6a2dcb95f95"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a079f9af667c7cb344b53e6a2dcb95f95">Initial_vertex_connected_to_curviline</a></td></tr>
+<tr class="memdesc:a079f9af667c7cb344b53e6a2dcb95f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">States if the initial vertex is connected to a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a079f9af667c7cb344b53e6a2dcb95f95">More...</a><br /></td></tr>
+<tr class="separator:a079f9af667c7cb344b53e6a2dcb95f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a3fa2e4744437410d3a0df32a6d533b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a2a3fa2e4744437410d3a0df32a6d533b">Final_vertex_connected_to_curviline</a></td></tr>
+<tr class="memdesc:a2a3fa2e4744437410d3a0df32a6d533b"><td class="mdescLeft">&#160;</td><td class="mdescRight">States if the final vertex is connected to a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a2a3fa2e4744437410d3a0df32a6d533b">More...</a><br /></td></tr>
+<tr class="separator:a2a3fa2e4744437410d3a0df32a6d533b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b32da41a8d74257d372e7ebb720d384"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a2b32da41a8d74257d372e7ebb720d384">Initial_s_connection_value</a></td></tr>
+<tr class="memdesc:a2b32da41a8d74257d372e7ebb720d384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the s value used for connecting the initial end with a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a2b32da41a8d74257d372e7ebb720d384">More...</a><br /></td></tr>
+<tr class="separator:a2b32da41a8d74257d372e7ebb720d384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a353c5ea574d6dbceaec36eb541325236"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a353c5ea574d6dbceaec36eb541325236">Final_s_connection_value</a></td></tr>
+<tr class="memdesc:a353c5ea574d6dbceaec36eb541325236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the s value used for connecting the final end with a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a353c5ea574d6dbceaec36eb541325236">More...</a><br /></td></tr>
+<tr class="separator:a353c5ea574d6dbceaec36eb541325236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9776c1484d720242d6293a7a6aa57eda"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a9776c1484d720242d6293a7a6aa57eda">Tolerance_for_s_connection</a></td></tr>
+<tr class="memdesc:a9776c1484d720242d6293a7a6aa57eda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tolerance used for connecting the ends to a curviline.  <a href="classoomph_1_1TriangleMeshCurveSection.html#a9776c1484d720242d6293a7a6aa57eda">More...</a><br /></td></tr>
+<tr class="separator:a9776c1484d720242d6293a7a6aa57eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3e8dad0254ccbc33232d86d4488ab475"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a3e8dad0254ccbc33232d86d4488ab475">Refinement_tolerance</a></td></tr>
+<tr class="separator:a3e8dad0254ccbc33232d86d4488ab475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27532c6686f1c29c6ac47a84ce561895"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a27532c6686f1c29c6ac47a84ce561895">Unrefinement_tolerance</a></td></tr>
+<tr class="separator:a27532c6686f1c29c6ac47a84ce561895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5449b283a0b07ef923253b5fc9e9d024"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a5449b283a0b07ef923253b5fc9e9d024">Maximum_length</a></td></tr>
+<tr class="separator:a5449b283a0b07ef923253b5fc9e9d024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for defining a triangle mesh boundary, this class has the methods that allow to connect the initial and final ends to other triangle mesh boundaries </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00168">168</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7ea6757c0c67d0b225f33f137cf4c98d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ea6757c0c67d0b225f33f137cf4c98d">&#9670;&nbsp;</a></span>TriangleMeshCurveSection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TriangleMeshCurveSection::TriangleMeshCurveSection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty constructor. Initialises the curve section as non connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00174">174</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a4d723c6ea8d102f865e26d8362e9ad92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d723c6ea8d102f865e26d8362e9ad92">&#9670;&nbsp;</a></span>~TriangleMeshCurveSection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::TriangleMeshCurveSection::~TriangleMeshCurveSection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00187">187</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a106d1f0e203e8e17c8296419be284c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a106d1f0e203e8e17c8296419be284c16">&#9670;&nbsp;</a></span>boundary_chunk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::TriangleMeshCurveSection::boundary_chunk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Boundary chunk (Used when a boundary is represented by more than one polyline </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshPolyLine.html#a4535773043c6b9516b81df42468294c1">oomph::TriangleMeshPolyLine</a>, and <a class="el" href="classoomph_1_1TriangleMeshCurviLine.html#a42b8ef1fb0ad0078413d0fedc87af679">oomph::TriangleMeshCurviLine</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a2e6d22017ce7abe7e84e3f16360f5444"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e6d22017ce7abe7e84e3f16360f5444">&#9670;&nbsp;</a></span>boundary_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::TriangleMeshCurveSection::boundary_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary id. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshPolyLine.html#af4fa1e14f3e2f8d16e085da928272872">oomph::TriangleMeshPolyLine</a>, and <a class="el" href="classoomph_1_1TriangleMeshCurviLine.html#acb7ae5fdae67480a0e797da29d518aee">oomph::TriangleMeshCurviLine</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01344">connect_final_vertex_to_curviline()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01190">connect_final_vertex_to_polyline()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01261">connect_initial_vertex_to_curviline()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01120">connect_initial_vertex_to_polyline()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l36171">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::get_face_mesh_representation()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03505">oomph::UnstructuredTwoDMeshGeometryBase::set_geom_objects_and_coordinate_limits_for_close_curve()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l40977">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="af052734eb3a34089c6ba2c9cfb937bf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af052734eb3a34089c6ba2c9cfb937bf3">&#9670;&nbsp;</a></span>connect_final_vertex_to_curviline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::connect_final_vertex_to_curviline </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TriangleMeshCurviLine.html">TriangleMeshCurviLine</a> *&#160;</td>
+          <td class="paramname"><em>curviline_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance_for_connection</em> = <code>1.0e-14</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Connects the final vertex of the curve section to a desired target curviline by specifying the s value (intrinsic value on the geometric object of the curviline) where to connect on the target curviline. There is a checking which verifies that the final vertex and the coordinates on the given s value are close enough by no more than the given tolerance. </p>
+<p>target curviline by specifying the s value (intrinsic value on the geometric object of the curviline) where to connect on the target curviline. There is a checking which verifies that the final vertex and the coordinates on the given s value are close enough by no more than the given tolerance </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01344">1344</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html">unstructured_two_d_mesh_geometry_base.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00718">oomph::TriangleMeshCurviLine::add_connection_point()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00665">oomph::TriangleMeshCurviLine::boundary_chunk()</a>, <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a2e6d22017ce7abe7e84e3f16360f5444">boundary_id()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00661">oomph::TriangleMeshCurviLine::boundary_id()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00579">Final_s_connection_value</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00533">Final_vertex_connected</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00557">Final_vertex_connected_bnd_id</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00565">Final_vertex_connected_n_chunk</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00571">Final_vertex_connected_to_curviline</a>, <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#aa5bbea1d7c1157f25d3b93101ac4b80f">final_vertex_coordinate()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00643">oomph::TriangleMeshCurviLine::geom_object_pt()</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00582">Tolerance_for_s_connection</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00649">oomph::TriangleMeshCurviLine::zeta_end()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00646">oomph::TriangleMeshCurviLine::zeta_start()</a>.</p>
+
+</div>
+</div>
+<a id="a55d06c515fd1e7f6a3729b2efda06c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55d06c515fd1e7f6a3729b2efda06c38">&#9670;&nbsp;</a></span>connect_final_vertex_to_polyline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::connect_final_vertex_to_polyline </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TriangleMeshPolyLine.html">TriangleMeshPolyLine</a> *&#160;</td>
+          <td class="paramname"><em>polyline_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>vertex_number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance_for_connection</em> = <code>1.0e-14</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Connects the final vertex of the curve section to a desired target polyline by specifying the vertex number. There is a checking which verifies that the final vertex is close enough to the destination vertex on the target polyline by no more than the specified tolerance. </p>
+<p>target polyline by specifying the vertex number. There is a checking which verifies that the final vertex is close enough to the destination vertex on the target polyline by no more than the specified tolerance </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01190">1190</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html">unstructured_two_d_mesh_geometry_base.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00837">oomph::TriangleMeshPolyLine::boundary_chunk()</a>, <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a2e6d22017ce7abe7e84e3f16360f5444">boundary_id()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00833">oomph::TriangleMeshPolyLine::boundary_id()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00533">Final_vertex_connected</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00557">Final_vertex_connected_bnd_id</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00565">Final_vertex_connected_n_chunk</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00561">Final_vertex_connected_n_vertex</a>, <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#aa5bbea1d7c1157f25d3b93101ac4b80f">final_vertex_coordinate()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00827">oomph::TriangleMeshPolyLine::nvertex()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00840">oomph::TriangleMeshPolyLine::vertex_coordinate()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l09384">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polylines_connections()</a>.</p>
+
+</div>
+</div>
+<a id="acda559ecf86d962ed1d1594e3588a87c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acda559ecf86d962ed1d1594e3588a87c">&#9670;&nbsp;</a></span>connect_initial_vertex_to_curviline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::connect_initial_vertex_to_curviline </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TriangleMeshCurviLine.html">TriangleMeshCurviLine</a> *&#160;</td>
+          <td class="paramname"><em>curviline_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance_for_connection</em> = <code>1.0e-14</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Connects the initial vertex of the curve section to a desired target curviline by specifying the s value (intrinsic value on the geometric object of the curviline) where to connect on the target curviline. There is a checking which verifies that the initial vertex and the coordinates on the given s value are close enough by no more than the given tolerance. </p>
+<p>target curviline by specifying the s value (intrinsic value on the geometric object of the curviline) where to connect on the target curviline. There is a checking which verifies that the initial vertex and the coordinates on the given s value are close enough by no more than the given tolerance </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01261">1261</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html">unstructured_two_d_mesh_geometry_base.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00718">oomph::TriangleMeshCurviLine::add_connection_point()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00665">oomph::TriangleMeshCurviLine::boundary_chunk()</a>, <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a2e6d22017ce7abe7e84e3f16360f5444">boundary_id()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00661">oomph::TriangleMeshCurviLine::boundary_id()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00643">oomph::TriangleMeshCurviLine::geom_object_pt()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00575">Initial_s_connection_value</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00529">Initial_vertex_connected</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00546">Initial_vertex_connected_bnd_id</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00554">Initial_vertex_connected_n_chunk</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00568">Initial_vertex_connected_to_curviline</a>, <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a08c60883b595a52280c486badf8a4210">initial_vertex_coordinate()</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00582">Tolerance_for_s_connection</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00649">oomph::TriangleMeshCurviLine::zeta_end()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00646">oomph::TriangleMeshCurviLine::zeta_start()</a>.</p>
+
+</div>
+</div>
+<a id="a32e53dc2a830784397230e92f73f6191"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32e53dc2a830784397230e92f73f6191">&#9670;&nbsp;</a></span>connect_initial_vertex_to_polyline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::connect_initial_vertex_to_polyline </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TriangleMeshPolyLine.html">TriangleMeshPolyLine</a> *&#160;</td>
+          <td class="paramname"><em>polyline_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>vertex_number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance_for_connection</em> = <code>1.0e-14</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Connects the initial vertex of the curve section to a desired target polyline by specifying the vertex number. There is a checking which verifies that the initial vertex is close enough to the destination vertex on the target polyline by no more than the specified tolerance. </p>
+<p>target polyline by specifying the vertex number. There is a checking which verifies that the initial vertex is close enough to the destination vertex on the target polyline by no more than the specified tolerance </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01120">1120</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html">unstructured_two_d_mesh_geometry_base.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00837">oomph::TriangleMeshPolyLine::boundary_chunk()</a>, <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a2e6d22017ce7abe7e84e3f16360f5444">boundary_id()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00833">oomph::TriangleMeshPolyLine::boundary_id()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00529">Initial_vertex_connected</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00546">Initial_vertex_connected_bnd_id</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00554">Initial_vertex_connected_n_chunk</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00550">Initial_vertex_connected_n_vertex</a>, <a class="el" href="classoomph_1_1TriangleMeshCurveSection.html#a08c60883b595a52280c486badf8a4210">initial_vertex_coordinate()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00827">oomph::TriangleMeshPolyLine::nvertex()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00840">oomph::TriangleMeshPolyLine::vertex_coordinate()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l09384">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polylines_connections()</a>.</p>
+
+</div>
+</div>
+<a id="a88a139cf580b5cd694dd2a69ef372a0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88a139cf580b5cd694dd2a69ef372a0d">&#9670;&nbsp;</a></span>disable_refinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::disable_refinement_tolerance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable refinement of curve section. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00241">241</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a9b79446585f07f7c375c64874f847287"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b79446585f07f7c375c64874f847287">&#9670;&nbsp;</a></span>disable_unrefinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::disable_unrefinement_tolerance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable unrefinement of curve sections. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00283">283</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="afcf00be8498fb9b47a69b18d20fca6a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcf00be8498fb9b47a69b18d20fca6a1">&#9670;&nbsp;</a></span>disable_use_maximum_length()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::disable_use_maximum_length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables the use of the maximum length criteria on the unrefinement or refinement steps. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00296">296</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="ab16b55ff3346ea87b00a49ead7562cc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab16b55ff3346ea87b00a49ead7562cc2">&#9670;&nbsp;</a></span>enable_refinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::enable_refinement_tolerance </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance</em> = <code>0.08</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable refinement of curve section to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the refinement tolerance. It defaults to 0.08 and the smaller the number the finer the surface representation. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00214">214</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="ac01b9768242eee89888b3cf1960ab226"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac01b9768242eee89888b3cf1960ab226">&#9670;&nbsp;</a></span>enable_unrefinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::enable_unrefinement_tolerance </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance</em> = <code>0.04</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable unrefinement of curve sections to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00253">253</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="aab6d3e6a3ce99d3ea8da762b75df3c6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab6d3e6a3ce99d3ea8da762b75df3c6c">&#9670;&nbsp;</a></span>final_s_connection_value() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::TriangleMeshCurveSection::final_s_connection_value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the s value to which the final end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00512">512</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a221faf0fec4d8b67dede9a90ce15fc41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a221faf0fec4d8b67dede9a90ce15fc41">&#9670;&nbsp;</a></span>final_s_connection_value() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::final_s_connection_value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the s value to which the final end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00508">508</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>.</p>
+
+</div>
+</div>
+<a id="a2e75e110f491d19310afa66140e3cd1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e75e110f491d19310afa66140e3cd1a">&#9670;&nbsp;</a></span>final_vertex_connected_bnd_id() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::TriangleMeshCurveSection::final_vertex_connected_bnd_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the id to which the final end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00456">456</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="af1acd60f443c9ef93df9994587ebfcad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1acd60f443c9ef93df9994587ebfcad">&#9670;&nbsp;</a></span>final_vertex_connected_bnd_id() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::final_vertex_connected_bnd_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the id to which the final end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00452">452</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l03458">oomph::UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l31598">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::add_vertices_for_non_deletion()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l22462">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::create_new_shared_boundaries()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l14444">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polyline()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l09384">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polylines_connections()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a7762be2ff2f975f38365c6dc50719664"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7762be2ff2f975f38365c6dc50719664">&#9670;&nbsp;</a></span>final_vertex_connected_n_chunk() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::TriangleMeshCurveSection::final_vertex_connected_n_chunk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the boundary chunk to which the final end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00472">472</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a5a313270409b3ea9abde6ed7c6c65568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a313270409b3ea9abde6ed7c6c65568">&#9670;&nbsp;</a></span>final_vertex_connected_n_chunk() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::final_vertex_connected_n_chunk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the boundary chunk to which the final end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00468">468</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l03458">oomph::UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l31598">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::add_vertices_for_non_deletion()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l22462">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::create_new_shared_boundaries()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l14444">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polyline()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a29571c3c921d5bd8118d9e0b15f4a6e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29571c3c921d5bd8118d9e0b15f4a6e3">&#9670;&nbsp;</a></span>final_vertex_connected_n_vertex() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::TriangleMeshCurveSection::final_vertex_connected_n_vertex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the vertex number to which the final end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00464">464</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a6fa5fb8407dfe3f0d6624ceb0ac822a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fa5fb8407dfe3f0d6624ceb0ac822a5">&#9670;&nbsp;</a></span>final_vertex_connected_n_vertex() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::final_vertex_connected_n_vertex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the vertex number to which the final end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00460">460</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l03458">oomph::UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="aa5bbea1d7c1157f25d3b93101ac4b80f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5bbea1d7c1157f25d3b93101ac4b80f">&#9670;&nbsp;</a></span>final_vertex_coordinate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void oomph::TriangleMeshCurveSection::final_vertex_coordinate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vertex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get last vertex coordinates. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshPolyLine.html#a6a110bac1436632fc4206eec2a96f8f4">oomph::TriangleMeshPolyLine</a>, and <a class="el" href="classoomph_1_1TriangleMeshCurviLine.html#a6a2437a4fb8c17ccc02a82311d477ca0">oomph::TriangleMeshCurviLine</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01344">connect_final_vertex_to_curviline()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01190">connect_final_vertex_to_polyline()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01430">oomph::TriangleMeshClosedCurve::TriangleMeshClosedCurve()</a>.</p>
+
+</div>
+</div>
+<a id="a80b972314a676c61e4fe5ed7fed005c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80b972314a676c61e4fe5ed7fed005c8">&#9670;&nbsp;</a></span>initial_s_connection_value() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::TriangleMeshCurveSection::initial_s_connection_value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the s value to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00504">504</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="adca140a1a261a98649d1af4a5d3e6cb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adca140a1a261a98649d1af4a5d3e6cb8">&#9670;&nbsp;</a></span>initial_s_connection_value() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::initial_s_connection_value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the s value to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00500">500</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>.</p>
+
+</div>
+</div>
+<a id="a9e3e75c39655428e893ea740b6af30a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e3e75c39655428e893ea740b6af30a7">&#9670;&nbsp;</a></span>initial_vertex_connected_bnd_id() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::TriangleMeshCurveSection::initial_vertex_connected_bnd_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the id to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00432">432</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="aa20f1e54ff6f0f1ef0c550e0a2d119bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa20f1e54ff6f0f1ef0c550e0a2d119bb">&#9670;&nbsp;</a></span>initial_vertex_connected_bnd_id() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::initial_vertex_connected_bnd_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the id to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00428">428</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l03458">oomph::UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l31598">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::add_vertices_for_non_deletion()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l22462">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::create_new_shared_boundaries()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l14444">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polyline()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l09384">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polylines_connections()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a9dd1f7bcd31629354a6c59fd0479b189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dd1f7bcd31629354a6c59fd0479b189">&#9670;&nbsp;</a></span>initial_vertex_connected_n_chunk() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::TriangleMeshCurveSection::initial_vertex_connected_n_chunk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the boundary chunk to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00448">448</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="ae2c3f9b3c2e2594bea76360c99805790"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2c3f9b3c2e2594bea76360c99805790">&#9670;&nbsp;</a></span>initial_vertex_connected_n_chunk() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::initial_vertex_connected_n_chunk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the boundary chunk to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00444">444</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l03458">oomph::UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l31598">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::add_vertices_for_non_deletion()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l22462">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::create_new_shared_boundaries()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l14444">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polyline()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="ad718b449cea9bf93535cec6ca5b65a1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad718b449cea9bf93535cec6ca5b65a1a">&#9670;&nbsp;</a></span>initial_vertex_connected_n_vertex() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::TriangleMeshCurveSection::initial_vertex_connected_n_vertex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the vertex number to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00440">440</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a3c379a3eca49b36ece255290afea43fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c379a3eca49b36ece255290afea43fb">&#9670;&nbsp;</a></span>initial_vertex_connected_n_vertex() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::initial_vertex_connected_n_vertex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the vertex number to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00436">436</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l03458">oomph::UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a08c60883b595a52280c486badf8a4210"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c60883b595a52280c486badf8a4210">&#9670;&nbsp;</a></span>initial_vertex_coordinate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void oomph::TriangleMeshCurveSection::initial_vertex_coordinate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vertex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get first vertex coordinates. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshPolyLine.html#ac5970458ab4954408d512495c003e5f0">oomph::TriangleMeshPolyLine</a>, and <a class="el" href="classoomph_1_1TriangleMeshCurviLine.html#a164a96e8cce279bce6cb3f01f5bf6170">oomph::TriangleMeshCurviLine</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01261">connect_initial_vertex_to_curviline()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01120">connect_initial_vertex_to_polyline()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01430">oomph::TriangleMeshClosedCurve::TriangleMeshClosedCurve()</a>.</p>
+
+</div>
+</div>
+<a id="a937df77a1a0d3bf60f0a52ab3c0e268d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a937df77a1a0d3bf60f0a52ab3c0e268d">&#9670;&nbsp;</a></span>is_final_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::is_final_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Test whether final vertex is connected or not. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00390">390</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l03458">oomph::UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l31598">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::add_vertices_for_non_deletion()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l09384">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polylines_connections()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a8c02d1fa4b159f23cb76b3ec98cb4c69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c02d1fa4b159f23cb76b3ec98cb4c69">&#9670;&nbsp;</a></span>is_final_vertex_connected_to_curviline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::is_final_vertex_connected_to_curviline </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Test whether the final vertex is connected to a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00488">488</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>.</p>
+
+</div>
+</div>
+<a id="aaab51c1395c75a85bf761e09ddcd1b28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaab51c1395c75a85bf761e09ddcd1b28">&#9670;&nbsp;</a></span>is_initial_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::is_initial_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Test whether initial vertex is connected or not. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00352">352</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l03458">oomph::UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l31598">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::add_vertices_for_non_deletion()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l09384">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polylines_connections()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a0ab0172007e3e875ff0875a30de76dac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ab0172007e3e875ff0875a30de76dac">&#9670;&nbsp;</a></span>is_initial_vertex_connected_to_curviline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::is_initial_vertex_connected_to_curviline </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Test whether the initial vertex is connected to a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00476">476</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>.</p>
+
+</div>
+</div>
+<a id="aee6ab6dbfd4e2f63da41bb8f66a43f53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee6ab6dbfd4e2f63da41bb8f66a43f53">&#9670;&nbsp;</a></span>maximum_length()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::maximum_length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets access to the maximum length variable. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00300">300</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03216">oomph::UnstructuredTwoDMeshGeometryBase::closed_curve_to_polygon_helper()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03369">oomph::UnstructuredTwoDMeshGeometryBase::create_open_curve_with_polyline_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l40977">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a52af59a9a4f1b6adb35e5645ab8feb45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52af59a9a4f1b6adb35e5645ab8feb45">&#9670;&nbsp;</a></span>nsegment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::TriangleMeshCurveSection::nsegment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of segments that this part of the boundary is to be represented by. This corresponds to the number of straight-line segments in triangle representation. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshPolyLine.html#a51af74c24abbae9b2cc881946d8f2170">oomph::TriangleMeshPolyLine</a>, and <a class="el" href="classoomph_1_1TriangleMeshCurviLine.html#af5ee48a8cb78c2c2954a14241b5b1489">oomph::TriangleMeshCurviLine</a>.</p>
+
+</div>
+</div>
+<a id="a491d849e8147152c10d55c8ca6c3d63d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a491d849e8147152c10d55c8ca6c3d63d">&#9670;&nbsp;</a></span>nvertex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::TriangleMeshCurveSection::nvertex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertices. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshPolyLine.html#a7b6ab13f61cb9f4435dc4fc4fe1fa50d">oomph::TriangleMeshPolyLine</a>, and <a class="el" href="classoomph_1_1TriangleMeshCurviLine.html#a4a60d6fadfae8165ed9fde9987ef4f0d">oomph::TriangleMeshCurviLine</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l40977">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a140b0bb85d7bf85cc025e19e996d5c53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a140b0bb85d7bf85cc025e19e996d5c53">&#9670;&nbsp;</a></span>output()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void oomph::TriangleMeshCurveSection::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_sample</em> = <code>50</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output the curve_section. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1TriangleMeshPolyLine.html#a8306f0768e83e29aac7d0d2f9fb3c175">oomph::TriangleMeshPolyLine</a>, and <a class="el" href="classoomph_1_1TriangleMeshCurviLine.html#a4432e3848032cc78bc3282149c4d6cff">oomph::TriangleMeshCurviLine</a>.</p>
+
+</div>
+</div>
+<a id="a77470b1ea748cef82a3ffebfd568fe7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77470b1ea748cef82a3ffebfd568fe7d">&#9670;&nbsp;</a></span>refinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::refinement_tolerance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get tolerance for refinement of curve sections to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation. If it's negative refinement is disabled. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00235">235</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03216">oomph::UnstructuredTwoDMeshGeometryBase::closed_curve_to_polygon_helper()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03369">oomph::UnstructuredTwoDMeshGeometryBase::create_open_curve_with_polyline_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l40977">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a3c6277b6c1a1c6a5a6a7d234c4afc101"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c6277b6c1a1c6a5a6a7d234c4afc101">&#9670;&nbsp;</a></span>resume_final_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::resume_final_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Resumes the final vertex connection, it may be that after load balancing the boundary to which the connection was suspended be part of the domain </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00418">418</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l33774">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::resume_boundary_connections()</a>.</p>
+
+</div>
+</div>
+<a id="a34923cad75967b4efa95ad6e1ea3c72e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34923cad75967b4efa95ad6e1ea3c72e">&#9670;&nbsp;</a></span>resume_initial_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::resume_initial_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Resumes the initial vertex connection, it may be that after load balancing the boundary to which the connection was suspended be part of the domain </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00380">380</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l33774">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::resume_boundary_connections()</a>.</p>
+
+</div>
+</div>
+<a id="abcdf60aacf4153498fe4dfa0821691d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcdf60aacf4153498fe4dfa0821691d7">&#9670;&nbsp;</a></span>set_final_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::set_final_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the final vertex as connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00394">394</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l22462">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::create_new_shared_boundaries()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l14444">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="af14d50cd734c6dc02c7fa0314dfadf68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af14d50cd734c6dc02c7fa0314dfadf68">&#9670;&nbsp;</a></span>set_final_vertex_connected_to_curviline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::set_final_vertex_connected_to_curviline </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the final vertex as connected to a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00492">492</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="ab3294da2b5f14d38e19f2b64684f3074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3294da2b5f14d38e19f2b64684f3074">&#9670;&nbsp;</a></span>set_initial_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::set_initial_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the initial vertex as connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00356">356</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l22462">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::create_new_shared_boundaries()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l14444">oomph::TriangleMesh&lt; ELEMENT &gt;::create_shared_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="ad594045d620e693b982612987e417092"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad594045d620e693b982612987e417092">&#9670;&nbsp;</a></span>set_initial_vertex_connected_to_curviline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::set_initial_vertex_connected_to_curviline </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the initial vertex as connected to a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00480">480</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a5bb05bb4547fd20b4cfc1c0c5253bc0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bb05bb4547fd20b4cfc1c0c5253bc0f">&#9670;&nbsp;</a></span>set_maximum_length()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::set_maximum_length </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>maximum_length</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allows to specify the maximum distance between two vertices that define the associated polyline of the curve section, it only takes effect on the unrefinement and refinement steps. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00291">291</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l40977">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a3ebe8f25753aefe11af4aa8081644462"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ebe8f25753aefe11af4aa8081644462">&#9670;&nbsp;</a></span>set_refinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::set_refinement_tolerance </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set tolerance for refinement of curve sections to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the refinement tolerance. (The smaller the number the finer the surface representation). If set to a negative value, we're switching off refinement &ndash; equivalent to calling disable_polyline_refinement() </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00226">226</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l40977">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a2e586bbd0adf5f5f9b5cb4ed4300614a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e586bbd0adf5f5f9b5cb4ed4300614a">&#9670;&nbsp;</a></span>set_unrefinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::set_unrefinement_tolerance </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>tolerance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set tolerance for unrefinement of curve sections to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines. If set to a negative value, we're switching off unrefinement &ndash; equivalent to calling disable_curve_section_unrefinement() </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00268">268</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l40977">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a379677086ad13d5cd7d0c5c669a37e2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a379677086ad13d5cd7d0c5c669a37e2f">&#9670;&nbsp;</a></span>suspend_final_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::suspend_final_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the final vertex connection as suspended, it will be resumed when the method to resume the connections is called This method is only used in a distributed context, when the boundary to connect is no longer part of the domain in the processor </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00406">406</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="ade6528a99d26583c05a5fd44e21d1ec4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade6528a99d26583c05a5fd44e21d1ec4">&#9670;&nbsp;</a></span>suspend_initial_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::suspend_initial_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the initial vertex connection as suspended, it will be resumed when the method to resume the connections is called This method is only used in a distributed context, when the boundary to connect is no longer part of the domain in the processor </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00368">368</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triangle__mesh_8template_8cc_source.html#l33008">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::restore_polyline_connections_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a32eb375e9044332d16ad44178b5c6b02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32eb375e9044332d16ad44178b5c6b02">&#9670;&nbsp;</a></span>tolerance_for_s_connection() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::TriangleMeshCurveSection::tolerance_for_s_connection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the tolerance value for connections among curvilines. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00522">522</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a353eb1cc152ccc922c92c584b0bbe1bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a353eb1cc152ccc922c92c584b0bbe1bc">&#9670;&nbsp;</a></span>tolerance_for_s_connection() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::tolerance_for_s_connection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the tolerance value for connections among curvilines. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00517">517</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>.</p>
+
+</div>
+</div>
+<a id="a15fbe0b2d7ed1ed7a8e8f0ae10669e26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15fbe0b2d7ed1ed7a8e8f0ae10669e26">&#9670;&nbsp;</a></span>unrefinement_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::unrefinement_tolerance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get tolerance for unrefinement of curve section to create a better representation of curvilinear boundaries (e.g. in free-surface problems). See tutorial for interpretation. If it's negative unrefinement is disabled. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00277">277</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03216">oomph::UnstructuredTwoDMeshGeometryBase::closed_curve_to_polygon_helper()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03369">oomph::UnstructuredTwoDMeshGeometryBase::create_open_curve_with_polyline_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l41731">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l38363">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_elements_area()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l34362">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_open_curve_using_face_mesh()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l40977">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_after_restart()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l37421">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_elements_area()</a>, and <a class="el" href="triangle__mesh_8template_8cc_source.html#l33876">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::update_polygon_using_face_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="ac44effdfc3a04ba90668e7f3f54b248a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac44effdfc3a04ba90668e7f3f54b248a">&#9670;&nbsp;</a></span>unset_final_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::unset_final_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the final vertex as non connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00398">398</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a169b20e7458f2ca0a7d64f35e475cecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a169b20e7458f2ca0a7d64f35e475cecf">&#9670;&nbsp;</a></span>unset_final_vertex_connected_to_curviline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::unset_final_vertex_connected_to_curviline </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the final vertex as non connected to a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00496">496</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>.</p>
+
+</div>
+</div>
+<a id="a6175f89dbb33a53d596e9374857cbefb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6175f89dbb33a53d596e9374857cbefb">&#9670;&nbsp;</a></span>unset_initial_vertex_connected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::unset_initial_vertex_connected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the initial vertex as non connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00360">360</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="afe70e0361f462012910e958253fdcb91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe70e0361f462012910e958253fdcb91">&#9670;&nbsp;</a></span>unset_initial_vertex_connected_to_curviline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TriangleMeshCurveSection::unset_initial_vertex_connected_to_curviline </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the initial vertex as non connected to a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00484">484</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04199">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04476">oomph::UnstructuredTwoDMeshGeometryBase::copy_connection_information_to_sub_polylines()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a353c5ea574d6dbceaec36eb541325236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a353c5ea574d6dbceaec36eb541325236">&#9670;&nbsp;</a></span>Final_s_connection_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::Final_s_connection_value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the s value used for connecting the final end with a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00579">579</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01344">connect_final_vertex_to_curviline()</a>.</p>
+
+</div>
+</div>
+<a id="a1569f7a60d4f68916a13b177e746a58d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1569f7a60d4f68916a13b177e746a58d">&#9670;&nbsp;</a></span>Final_vertex_connected</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::Final_vertex_connected</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used for stating if the final end is connected to another boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00533">533</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01344">connect_final_vertex_to_curviline()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01190">connect_final_vertex_to_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="a3679139caa6192ae3dddcb242ea00fe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3679139caa6192ae3dddcb242ea00fe9">&#9670;&nbsp;</a></span>Final_vertex_connected_bnd_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::Final_vertex_connected_bnd_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the id to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00557">557</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01344">connect_final_vertex_to_curviline()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01190">connect_final_vertex_to_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="abbac30e1ecc538c1af17f40184cfe681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbac30e1ecc538c1af17f40184cfe681">&#9670;&nbsp;</a></span>Final_vertex_connected_n_chunk</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::Final_vertex_connected_n_chunk</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the chunk number of the boundary to which is connected th initial end. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00565">565</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01344">connect_final_vertex_to_curviline()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01190">connect_final_vertex_to_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="a21d4f42b1f294a237d34302bfecdf63a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21d4f42b1f294a237d34302bfecdf63a">&#9670;&nbsp;</a></span>Final_vertex_connected_n_vertex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::Final_vertex_connected_n_vertex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the vertex number used for connection with the final end. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00561">561</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01190">connect_final_vertex_to_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="a0732c70f8c0516c4019cc231fc5be050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0732c70f8c0516c4019cc231fc5be050">&#9670;&nbsp;</a></span>Final_vertex_connected_suspended</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::Final_vertex_connected_suspended</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indicates if the connection is suspended because the boundary to connect is no longer part of the domain (only used in a distributed context) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00543">543</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a3fa2e4744437410d3a0df32a6d533b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a3fa2e4744437410d3a0df32a6d533b">&#9670;&nbsp;</a></span>Final_vertex_connected_to_curviline</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::Final_vertex_connected_to_curviline</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>States if the final vertex is connected to a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00571">571</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01344">connect_final_vertex_to_curviline()</a>.</p>
+
+</div>
+</div>
+<a id="a2b32da41a8d74257d372e7ebb720d384"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b32da41a8d74257d372e7ebb720d384">&#9670;&nbsp;</a></span>Initial_s_connection_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::Initial_s_connection_value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the s value used for connecting the initial end with a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00575">575</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01261">connect_initial_vertex_to_curviline()</a>.</p>
+
+</div>
+</div>
+<a id="a6f831c694ed3f3e64259c2aef6833fe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f831c694ed3f3e64259c2aef6833fe1">&#9670;&nbsp;</a></span>Initial_vertex_connected</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::Initial_vertex_connected</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used for stating if the initial end is connected to another boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00529">529</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01261">connect_initial_vertex_to_curviline()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01120">connect_initial_vertex_to_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="afb52c283347f6032971b1eb34be7c1cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb52c283347f6032971b1eb34be7c1cf">&#9670;&nbsp;</a></span>Initial_vertex_connected_bnd_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::Initial_vertex_connected_bnd_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the id to which the initial end is connected. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00546">546</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01261">connect_initial_vertex_to_curviline()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01120">connect_initial_vertex_to_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="a3b4ca3434467d9890d03633fada52ecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b4ca3434467d9890d03633fada52ecf">&#9670;&nbsp;</a></span>Initial_vertex_connected_n_chunk</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::Initial_vertex_connected_n_chunk</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the chunk number of the boundary to which is connected th initial end. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00554">554</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01261">connect_initial_vertex_to_curviline()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01120">connect_initial_vertex_to_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="a7a9bd3a85377bd49b2bd6588d6d4f128"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a9bd3a85377bd49b2bd6588d6d4f128">&#9670;&nbsp;</a></span>Initial_vertex_connected_n_vertex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::TriangleMeshCurveSection::Initial_vertex_connected_n_vertex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the vertex number used for connection with the initial end. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00550">550</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01120">connect_initial_vertex_to_polyline()</a>.</p>
+
+</div>
+</div>
+<a id="a7daa8be52f85035581f4f7a7a3653457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7daa8be52f85035581f4f7a7a3653457">&#9670;&nbsp;</a></span>Initial_vertex_connected_suspended</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::Initial_vertex_connected_suspended</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indicates if the connection is suspended because the boundary to connect is no longer part of the domain (only used in a distributed context) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00538">538</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a079f9af667c7cb344b53e6a2dcb95f95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a079f9af667c7cb344b53e6a2dcb95f95">&#9670;&nbsp;</a></span>Initial_vertex_connected_to_curviline</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::TriangleMeshCurveSection::Initial_vertex_connected_to_curviline</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>States if the initial vertex is connected to a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00568">568</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01261">connect_initial_vertex_to_curviline()</a>.</p>
+
+</div>
+</div>
+<a id="a5449b283a0b07ef923253b5fc9e9d024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5449b283a0b07ef923253b5fc9e9d024">&#9670;&nbsp;</a></span>Maximum_length</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::Maximum_length</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Maximum allowed distance between two vertices on the polyline representation of the curve section </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00596">596</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a3e8dad0254ccbc33232d86d4488ab475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e8dad0254ccbc33232d86d4488ab475">&#9670;&nbsp;</a></span>Refinement_tolerance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::Refinement_tolerance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Tolerance for refinement of curve sections (neg if refinement is disabled) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00588">588</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<a id="a9776c1484d720242d6293a7a6aa57eda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9776c1484d720242d6293a7a6aa57eda">&#9670;&nbsp;</a></span>Tolerance_for_s_connection</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::Tolerance_for_s_connection</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tolerance used for connecting the ends to a curviline. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00582">582</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01344">connect_final_vertex_to_curviline()</a>, and <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l01261">connect_initial_vertex_to_curviline()</a>.</p>
+
+</div>
+</div>
+<a id="a27532c6686f1c29c6ac47a84ce561895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27532c6686f1c29c6ac47a84ce561895">&#9670;&nbsp;</a></span>Unrefinement_tolerance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::TriangleMeshCurveSection::Unrefinement_tolerance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Tolerance for unrefinement of curve sections (neg if refinement is disabled) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00592">592</a> of file <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html">unstructured_two_d_mesh_geometry_base.h</a></li>
+<li><a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html">unstructured_two_d_mesh_geometry_base.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:40
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

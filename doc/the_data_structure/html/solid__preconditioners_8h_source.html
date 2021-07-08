@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: solid_preconditioners.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_761f70f58691b540e426a7a4851ac521.html">solid</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">solid_preconditioners.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="solid__preconditioners_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#ifndef OOMPH_SOLID_PRECONDITIONERS_HEADER</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define OOMPH_SOLID_PRECONDITIONERS_HEADER</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// Config header generated by autoconfig</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">  #include &lt;oomph-lib-config.h&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// oomphlib headers</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;../generic/matrices.h&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;../generic/assembly_handler.h&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;../generic/problem.h&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;../generic/block_preconditioner.h&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;../generic/preconditioner.h&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;../generic/SuperLU_preconditioner.h&quot;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;../generic/matrix_vector_product.h&quot;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">//===========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/// \short The least-squares commutator (LSC; formerly BFBT) </span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/// preconditioner. It uses blocks corresponding to the displacement/position </span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/// and pressure unknowns, i.e. there are a total of 2x2 blocks, </span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/// and all displacement/position components are treated as a </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/// single block of unknowns.</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/// </span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/// Here are the details: An &quot;ideal&quot; preconditioner</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/// would solve the saddle point system</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/// \f[</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/// \left( </span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/// \begin{array}{cc}</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/// {\bf F} &amp; {\bf G} \\ {\bf D} &amp; {\bf 0} </span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">/// \end{array} </span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/// \right)</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/// \left( </span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/// \begin{array}{c}</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/// {\bf z}_u \\ {\bf z}_p</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">/// \end{array} </span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/// \right) =</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/// \left( </span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">/// \begin{array}{c}</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/// {\bf r}_u \\ {\bf r}_p</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/// \end{array} </span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">/// \right)</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/// \f]</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">/// where \f$ {\bf F}\f$,  \f$ {\bf G} \f$, and \f$ {\bf D}\f$ are </span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/// the blocks that arise in the Jacobian of the pressure-based</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">/// equations of linear and nonlinear elasticity (with dofs in order</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">/// of displacement/position and pressure).</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/// The use of this preconditioner would ensure the convergence</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/// of any iterative linear solver in a single iteration but its</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">/// application is, of course, exactly as expensive as a direct solve.</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/// The LSC/BFBT preconditioner replaces the exact Jacobian by </span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">/// a block-triangular approximation</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">/// \f[</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">/// \left( </span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">/// \begin{array}{cc}</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">/// {\bf F} &amp; {\bf G} \\ {\bf 0} &amp; -{\bf M}_s </span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">/// \end{array} </span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">/// \right) </span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">/// \left( </span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">/// \begin{array}{c}</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">/// {\bf z}_u \\ {\bf z}_p</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">/// \end{array} </span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">/// \right) =</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/// \left( </span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">/// \begin{array}{c}</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">/// {\bf r}_u \\ {\bf r}_p</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">/// \end{array} </span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">/// \right),</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">/// \f]</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">/// where \f${\bf M}_s\f$ is an approximation to the pressure </span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">/// Schur-complement \f$ {\bf S} = {\bf D} {\bf F}^{-1}{\bf G}. \f$</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">/// This system can be solved in two steps:</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">/// -# Solve the second row for \f$ {\bf z}_p\f$ via</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">///    \f[ </span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">///    {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">///    \f]</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">/// -# Given \f$ {\bf z}_p \f$ , solve the first row for \f$ {\bf z}_u\f$ via</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">///    \f[ </span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">///    {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big)</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">///    \f]</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">/// .</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">/// In the LSC/BFBT preconditioner, the action of the inverse pressure</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">/// Schur complement </span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">/// \f[</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">/// {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">/// \f]</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">/// is approximated by</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">/// \f[</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">/// {\bf z}_p = - </span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">/// \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">/// \big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) </span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">/// \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">/// {\bf r}_p,</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">/// \f]</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">/// where  \f$ \widehat{\bf Q} \f$ is the diagonal of the displacement/position</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">/// mass matrix. The evaluation of this expression involves</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">/// two linear solves involving the matrix</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">/// \f[</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">/// {\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">/// \f]</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">/// which has the character of a matrix arising from the discretisation </span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">/// of a Poisson problem on the pressure space. We also have</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">/// to evaluate matrix-vector products with the matrix </span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">/// \f[</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">/// {\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G}</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">/// \f]</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">/// Details of the theory can be found in &quot;Finite Elements and </span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">/// Fast Iterative Solvers with Applications in Incompressible Fluid </span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">/// Dynamics&quot; by Howard C. Elman, David J. Silvester, and Andrew J. Wathen,</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">/// published by Oxford University Press, 2006.</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">/// </span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">/// In our implementation of the preconditioner, the linear systems</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">/// can either be solved &quot;exactly&quot;, using SuperLU (in its incarnation</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">/// as an exact preconditioner; this is the default) or by any </span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">/// other Preconditioner (inexact solver) specified via the access functions</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">/// \code</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">/// PressureBasedSolidLSCPreconditioner::set_f_preconditioner(...)</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">/// \endcode</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">/// or </span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">/// \code</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">/// PressureBasedSolidLSCPreconditioner::set_p_preconditioner(...)</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">/// \endcode</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment"></span><span class="comment">//===========================================================================</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html">  157</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html">PressureBasedSolidLSCPreconditioner</a> :</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keyword">public</span> <a class="code" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt;CRDoubleMatrix&gt;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;   </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;   public :</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="comment"></span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">    /// Constructor - sets defaults for control flags</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a31b7034fb267b830594671d06b86f01a">  164</a></span>&#160;<span class="comment"></span>    <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a31b7034fb267b830594671d06b86f01a">PressureBasedSolidLSCPreconditioner</a>() : <a class="code" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt;<a class="code" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a>&gt;()</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;     <span class="comment">// Flag to indicate that the preconditioner has been setup</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;     <span class="comment">// previously -- if setup() is called again, data can</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;     <span class="comment">// be wiped.</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a36040d15eba392db2f29c503644a6ed2">Preconditioner_has_been_setup</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;     <span class="comment">// By default we use SuperLU for both p and f blocks</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aca759bb66884df54c3ed5447357468e7">Using_default_p_preconditioner</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad873e64fad712e74972d6dbc95b2eeb0">Using_default_f_preconditioner</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;     <span class="comment">// resize the mesh pt</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;     <span class="comment">// note: meaningless if subsidiary preconditioner</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;     this-&gt;<a class="code" href="classoomph_1_1BlockPreconditioner.html#ae055f998f6145656352aacac22e545ad">set_nmesh</a>(1);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa14db4490d9ce73788e22bc3d465489b">Solid_mesh_pt</a> = 0;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;     <span class="comment">// Set default preconditioners (inexact solvers) -- they are </span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;     <span class="comment">// members of this class!</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af72af32deaca30259e86eba2e04f16ed">P_preconditioner_pt</a> = 0;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a48598668a75faf5d983872f191288eb8">F_preconditioner_pt</a> = 0;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;     <span class="comment">// Flag to determine if mass matrix diagonal Q^{-1}</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;     <span class="comment">// is used for scaling.</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af92907711de209fa924eeef614d48c4e">P_matrix_using_scaling</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;     <span class="comment">// set Doc_time to false</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a6bb97a362c82d3a363ffaaceb7a643a8">Doc_time</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;     <span class="comment">// null the off diagonal Block matrix pt</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac71c3f992d9790ca2e25e9c360eed635">Bt_mat_vec_pt</a> = 0;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;     <span class="comment">// null the F matrix vector product helper</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad1ce11b9dc16c14f5eaf72eb841c08ef">F_mat_vec_pt</a> = 0;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;     <span class="comment">// null the QBt matrix vector product pt</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a03338487e35713fc408e83b12f9ba8ac">QBt_mat_vec_pt</a> = 0;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;     <span class="comment">// null the E matrix vector product helper</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a5c6f62a80349652aeff75140ec9c54f1">E_mat_vec_pt</a> = 0;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;     <span class="comment">// by default we do not form the E matrix (BQFQBt)</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a216ed50190c2fa031c222b309e573f09">Form_BFBt_product</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    }</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">   /// Destructor</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a2ed209babe751dcd64085d75b5ab9593">  209</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a2ed209babe751dcd64085d75b5ab9593">~PressureBasedSolidLSCPreconditioner</a>()</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad83eb2ddd12350bcba2cb8db074de2bd">clean_up_memory</a>();</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    }</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">   /// Broken copy constructor</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a29d5b33a278a9ac3d868646553db949a">  215</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a29d5b33a278a9ac3d868646553db949a">PressureBasedSolidLSCPreconditioner</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html">PressureBasedSolidLSCPreconditioner</a>&amp;)</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    {</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;     <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;PressureBasedSolidLSCPreconditioner&quot;</span>);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    }</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">   /// Broken assignment operator</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment"></span><span class="comment">//Commented out broken assignment operator because this can lead to a conflict warning</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">//when used in the virtual inheritence hierarchy. Essentially the compiler doesn&#39;t</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">//realise that two separate implementations of the broken function are the same and so,</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">//quite rightly, it shouts.</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;   <span class="comment">/*void operator=(const PressureBasedSolidLSCPreconditioner&amp;)</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">     BrokenCopy::broken_assign(&quot;PressureBasedSolidLSCPreconditioner&quot;);</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">     }*/</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">   /// Setup the preconditioner</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aba594f38c2d36775115adbc90bcd0025">setup</a>();</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">   /// Apply preconditioner to Vector r</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ab81479f6e6a91ecb048f8c8d7e050744">preconditioner_solve</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a>&amp;r, <a class="code" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;z);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;   <span class="comment"></span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">   /// specify the mesh containing the mesh containing the </span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">   /// block-preconditionable solid elements. The dimension of the</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">   /// problem must also be specified.</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad432b40acc45b0f8f065c96154f64240">  239</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad432b40acc45b0f8f065c96154f64240">set_solid_mesh</a>(<a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="code" href="classoomph_1_1BlockPreconditioner.html#a3c0e92cb77c3e3179007fe9fd99b6428">mesh_pt</a>)</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    { </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;     <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa14db4490d9ce73788e22bc3d465489b">Solid_mesh_pt</a> = <a class="code" href="classoomph_1_1BlockPreconditioner.html#a3c0e92cb77c3e3179007fe9fd99b6428">mesh_pt</a>;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">   /// \short Enable mass matrix diagonal scaling in the </span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">   /// Schur complement approximation</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aeb7e9109194f8a468a2c6ffec13e3c9f">  246</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aeb7e9109194f8a468a2c6ffec13e3c9f">enable_p_matrix_scaling</a>() {<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af92907711de209fa924eeef614d48c4e">P_matrix_using_scaling</a>=<span class="keyword">true</span>;}</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">    /// \short Enable mass matrix diagonal scaling in the </span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">   /// Schur complement approximation</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa1b8a157c96f347dcb5f23b14c88765f">  250</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa1b8a157c96f347dcb5f23b14c88765f">disable_p_matrix_scaling</a>() {<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af92907711de209fa924eeef614d48c4e">P_matrix_using_scaling</a>=<span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">   /// \short Return whether the mass matrix is using diagonal</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">   /// scaling or not</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#abefd3cc7c97fbdaad40c0231663c680f">  254</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#abefd3cc7c97fbdaad40c0231663c680f">is_p_matrix_using_scaling</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af92907711de209fa924eeef614d48c4e">P_matrix_using_scaling</a>;}</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">   /// Function to set a new pressure matrix preconditioner (inexact solver)</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a921f36ec8af49017b799a3832d7f688f">  257</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a921f36ec8af49017b799a3832d7f688f">set_p_preconditioner</a>(<a class="code" href="classoomph_1_1Preconditioner.html">Preconditioner</a>* new_p_preconditioner_pt)</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;   {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="comment">// If the default preconditioner has been used</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="comment">// clean it up now...</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aca759bb66884df54c3ed5447357468e7">Using_default_p_preconditioner</a>)</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;     {</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;      <span class="keyword">delete</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af72af32deaca30259e86eba2e04f16ed">P_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;     }</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af72af32deaca30259e86eba2e04f16ed">P_preconditioner_pt</a> = new_p_preconditioner_pt;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aca759bb66884df54c3ed5447357468e7">Using_default_p_preconditioner</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;   }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">   /// \short Function to (re-)set pressure matrix preconditioner  (inexact </span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">   /// solver) to SuperLU</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ae138780720a5c540f13ecf793cc753bd">  271</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ae138780720a5c540f13ecf793cc753bd">set_p_superlu_preconditioner</a>()</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;   {</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aca759bb66884df54c3ed5447357468e7">Using_default_p_preconditioner</a>)</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;     {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;      <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af72af32deaca30259e86eba2e04f16ed">P_preconditioner_pt</a> = <span class="keyword">new</span> <a class="code" href="classoomph_1_1SuperLUPreconditioner.html">SuperLUPreconditioner</a>;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;      <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aca759bb66884df54c3ed5447357468e7">Using_default_p_preconditioner</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;     }</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;   }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">   /// Function to set a new momentum matrix preconditioner (inexact solver)</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac62a1112a99ae9503b97bd1c26f086f2">  281</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac62a1112a99ae9503b97bd1c26f086f2">set_f_preconditioner</a>(<a class="code" href="classoomph_1_1Preconditioner.html">Preconditioner</a>* new_f_preconditioner_pt)</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;   {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="comment">// If the default preconditioner has been used</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="comment">// clean it up now...</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad873e64fad712e74972d6dbc95b2eeb0">Using_default_f_preconditioner</a>)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;     {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      <span class="keyword">delete</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a48598668a75faf5d983872f191288eb8">F_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;     }</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a48598668a75faf5d983872f191288eb8">F_preconditioner_pt</a> = new_f_preconditioner_pt;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad873e64fad712e74972d6dbc95b2eeb0">Using_default_f_preconditioner</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;   }</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">   ///\short Function to (re-)set momentum matrix preconditioner (inexact </span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">   /// solver) to SuperLU</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#afd0606b3f743c14d4a0d96477906cd47">  295</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#afd0606b3f743c14d4a0d96477906cd47">set_f_superlu_preconditioner</a>()</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;   {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad873e64fad712e74972d6dbc95b2eeb0">Using_default_f_preconditioner</a>)</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;     {</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;      <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a48598668a75faf5d983872f191288eb8">F_preconditioner_pt</a> = <span class="keyword">new</span> <a class="code" href="classoomph_1_1SuperLUPreconditioner.html">SuperLUPreconditioner</a>;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;      <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad873e64fad712e74972d6dbc95b2eeb0">Using_default_f_preconditioner</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;     }</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;   }</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">   ///Enable documentation of time</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a1bfac76fb2b7451f009d2cb2fea5d07d">  306</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a1bfac76fb2b7451f009d2cb2fea5d07d">enable_doc_time</a>() {<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a6bb97a362c82d3a363ffaaceb7a643a8">Doc_time</a> = <span class="keyword">true</span>;}</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">   ///Disable documentation of time</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a6828b0336e94e6acaaef7623f6425792">  309</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a6828b0336e94e6acaaef7623f6425792">disable_doc_time</a>() {<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a6bb97a362c82d3a363ffaaceb7a643a8">Doc_time</a> = <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">   /// \short If this function is called then:</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">   /// in setup(...) : BFBt is computed.</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">   /// in preconditioner_solve(...) : a single matrix vector product with </span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">   /// BFBt is performed.</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a302edf88e0ec3fa457022a9a3886cdf9">  315</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a302edf88e0ec3fa457022a9a3886cdf9">enable_form_BFBt_product</a>() {<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a216ed50190c2fa031c222b309e573f09">Form_BFBt_product</a> = <span class="keyword">true</span>; }</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">   /// \short if this function is called  then:</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">   /// in setup(...) : the matrices B, F are assembled and stored </span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">   /// (the default behaviour) .</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">   /// in preconditioner_solve(...) : a sequence of matrix vector products</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">   /// with B, F, and Bt is performed.</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">   /// (Note: in this discussion no scaling was considered but B and Bt </span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">   ///  are replaced with BQ and QBt with scaling)</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aeb2296a7bc2ba3de7c332506a768c4c4">  324</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aeb2296a7bc2ba3de7c332506a768c4c4">disable_form_BFBt_product</a>() {<a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a216ed50190c2fa031c222b309e573f09">Form_BFBt_product</a> = <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">   /// \short Helper function to delete preconditioner data.</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad83eb2ddd12350bcba2cb8db074de2bd">clean_up_memory</a>();</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;   <span class="comment">// oomph-lib objects</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;   <span class="comment">// -----------------</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;   <span class="comment">// Pointers to preconditioner (=inexact solver) objects</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;   <span class="comment">// -----------------------------------------------------</span><span class="comment"></span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">   /// Pointer to the &#39;preconditioner&#39; for the pressure matrix</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af72af32deaca30259e86eba2e04f16ed">  337</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1Preconditioner.html">Preconditioner</a>* <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af72af32deaca30259e86eba2e04f16ed">P_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">   /// Pointer to the &#39;preconditioner&#39; for the F matrix</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a48598668a75faf5d983872f191288eb8">  340</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1Preconditioner.html">Preconditioner</a>* <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a48598668a75faf5d983872f191288eb8">F_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">   /// flag indicating whether the default F preconditioner is used</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad873e64fad712e74972d6dbc95b2eeb0">  343</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad873e64fad712e74972d6dbc95b2eeb0">Using_default_f_preconditioner</a>;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">   /// flag indicating whether the default P preconditioner is used</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aca759bb66884df54c3ed5447357468e7">  346</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aca759bb66884df54c3ed5447357468e7">Using_default_p_preconditioner</a>;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">   /// \short Control flag is true if the preconditioner has been setup</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">   /// (used so we can wipe the data when the preconditioner is</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">   /// called again)</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a36040d15eba392db2f29c503644a6ed2">  351</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a36040d15eba392db2f29c503644a6ed2">Preconditioner_has_been_setup</a>;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">   /// \short Control flag is true if mass matrix diagonal scaling</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">   /// is used in the Schur complement approximation</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af92907711de209fa924eeef614d48c4e">  355</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af92907711de209fa924eeef614d48c4e">P_matrix_using_scaling</a>;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">   /// Helper function to assemble the diagonal of the </span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">   /// mass matrix from the elemental contributions defined in</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">   /// PressureBasedSolidEquations&lt;DIM&gt;::get_mass_matrix_diagonal(...).</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a>* <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a2b32d66080ccfb3a464245d16bea6168">assemble_mass_matrix_diagonal</a>();</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">   /// \short Boolean indicating whether the momentum system preconditioner </span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">   /// is a block preconditioner</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa430d3786009f7ad9fd8009d5bc9430a">  364</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa430d3786009f7ad9fd8009d5bc9430a">F_preconditioner_is_block_preconditioner</a>;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">   /// Set Doc_time to true for outputting results of timings</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a6bb97a362c82d3a363ffaaceb7a643a8">  367</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a6bb97a362c82d3a363ffaaceb7a643a8">Doc_time</a>;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">   /// MatrixVectorProduct operator for F if BFBt is not to be formed.</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad1ce11b9dc16c14f5eaf72eb841c08ef">  370</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a>* <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad1ce11b9dc16c14f5eaf72eb841c08ef">F_mat_vec_pt</a>;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">   /// MatrixVectorProduct operator for QBt if BFBt is not to be formed.</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a03338487e35713fc408e83b12f9ba8ac">  373</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a>* <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a03338487e35713fc408e83b12f9ba8ac">QBt_mat_vec_pt</a>;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment">   /// MatrixVectorProduct operator for Bt;</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac71c3f992d9790ca2e25e9c360eed635">  376</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a>* <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac71c3f992d9790ca2e25e9c360eed635">Bt_mat_vec_pt</a>;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">   /// MatrixVectorProduct operator for E (BFBt) if BFBt is to be formed.</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a5c6f62a80349652aeff75140ec9c54f1">  379</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a>* <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a5c6f62a80349652aeff75140ec9c54f1">E_mat_vec_pt</a>;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">   /// \short indicates whether BFBt should be formed or the component matrices</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">   /// should be retained.</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">   /// If true then:</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">   /// in setup(...) : BFBt is computed.</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">   /// in preconditioner_solve(...) : a single matrix vector product with </span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">   /// BFBt is performed.</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">   /// if false then:</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">   /// in setup(...) : the matrices B, F are assembled and stored.</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">   /// in preconditioner_solve(...) : a sequence of matrix vector products</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">   /// with B, F, and Bt is performed.</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">   /// (Note: in this discussion no scaling was considered but B and Bt </span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">   ///  are replaced with BQ and QBt with scaling)</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a216ed50190c2fa031c222b309e573f09">  393</a></span>&#160;<span class="comment"></span>   <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a216ed50190c2fa031c222b309e573f09">Form_BFBt_product</a>;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">   /// \short the pointer to the mesh of block preconditionable solid</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">   /// elements.</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa14db4490d9ce73788e22bc3d465489b">  397</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1Mesh.html">Mesh</a>* <a class="code" href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa14db4490d9ce73788e22bc3d465489b">Solid_mesh_pt</a>;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;  };</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160; </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">//============================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">/// \short The exact solid preconditioner. This extracts 2x2 blocks</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">/// (corresponding to the displacement/position and pressure unknowns) </span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">/// and uses these to</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">/// build a single preconditioner matrix for testing purposes.</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">/// Iterative solvers should converge in a single step if this is used.</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">/// If it doesn&#39;t something is wrong in the setup of the block matrices.</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment"></span><span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; <span class="keyword">template</span>&lt;<span class="keyword">typename</span> MATRIX&gt;</div>
+<div class="line"><a name="l00417"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html">  417</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html">PressureBasedSolidExactPreconditioner</a> : <span class="keyword">public</span> <a class="code" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt;MATRIX&gt;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  {</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;   public :</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;     <span class="comment"></span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">    /// Constructor - do nothing</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#a073924e293fc44655b5d2d11fbe18c56">  423</a></span>&#160;<span class="comment"></span>    <a class="code" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#a073924e293fc44655b5d2d11fbe18c56">PressureBasedSolidExactPreconditioner</a>() : <a class="code" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt;MATRIX&gt;(){}</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;   </div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;   <span class="comment"></span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">   /// Destructor - do nothing</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#a2d505f2b8f06846bd191552ee63c40a1">  427</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#a2d505f2b8f06846bd191552ee63c40a1">~PressureBasedSolidExactPreconditioner</a>(){}</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;   <span class="comment"></span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">   /// Broken copy constructor</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#ae4b0de5a28bb44588d7186a911314c5a">  431</a></span>&#160;<span class="comment"></span>   <a class="code" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#ae4b0de5a28bb44588d7186a911314c5a">PressureBasedSolidExactPreconditioner</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html">PressureBasedSolidExactPreconditioner</a>&amp;)</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    {</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;     <a class="code" href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">BrokenCopy::broken_copy</a>(<span class="stringliteral">&quot;PressureBasedSolidExactPreconditioner&quot;</span>);</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    }</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;   </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">   /// Broken assignment operator   </span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment"></span>   <span class="comment">/*void operator=(const PressureBasedSolidExactPreconditioner&amp;)</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">     BrokenCopy::broken_assign(&quot;PressureBasedSolidExactPreconditioner&quot;);</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">     }*/</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;   </div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;   <span class="comment"></span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">   /// Setup the preconditioner</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#ab9bdbcabd0ba8e9debfbec6679e66b08">setup</a>();</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;   <span class="comment"></span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">   /// Apply preconditioner to r</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment"></span>   <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#ae7fce5484d8c480111a3a0929adcfaf4">preconditioner_solve</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp;r,</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;                             <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;z);</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;   protected :</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <span class="comment"></span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">    /// Preconditioner matrix</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno"><a class="line" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#a4fc2a6a063affff56ae040896cedbb2b">  454</a></span>&#160;<span class="comment"></span>    MATRIX <a class="code" href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#a4fc2a6a063affff56ae040896cedbb2b">P_matrix</a>;</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;  };</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;}</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a03338487e35713fc408e83b12f9ba8ac"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a03338487e35713fc408e83b12f9ba8ac">oomph::PressureBasedSolidLSCPreconditioner::QBt_mat_vec_pt</a></div><div class="ttdeci">MatrixVectorProduct * QBt_mat_vec_pt</div><div class="ttdoc">MatrixVectorProduct operator for QBt if BFBt is not to be formed.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00373">solid_preconditioners.h:373</a></div></div>
+<div class="ttc" id="aclassoomph_1_1MatrixVectorProduct_html"><div class="ttname"><a href="classoomph_1_1MatrixVectorProduct.html">oomph::MatrixVectorProduct</a></div><div class="ttdoc">Matrix vector product helper class - primarily a wrapper to Trilinos's Epetra matrix vector product m...</div><div class="ttdef"><b>Definition:</b> <a href="matrix__vector__product_8h_source.html#l00051">matrix_vector_product.h:51</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_aa430d3786009f7ad9fd8009d5bc9430a"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa430d3786009f7ad9fd8009d5bc9430a">oomph::PressureBasedSolidLSCPreconditioner::F_preconditioner_is_block_preconditioner</a></div><div class="ttdeci">bool F_preconditioner_is_block_preconditioner</div><div class="ttdoc">Boolean indicating whether the momentum system preconditioner is a block preconditioner.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00364">solid_preconditioners.h:364</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a5c6f62a80349652aeff75140ec9c54f1"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a5c6f62a80349652aeff75140ec9c54f1">oomph::PressureBasedSolidLSCPreconditioner::E_mat_vec_pt</a></div><div class="ttdeci">MatrixVectorProduct * E_mat_vec_pt</div><div class="ttdoc">MatrixVectorProduct operator for E (BFBt) if BFBt is to be formed.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00379">solid_preconditioners.h:379</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidExactPreconditioner_html_a2d505f2b8f06846bd191552ee63c40a1"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#a2d505f2b8f06846bd191552ee63c40a1">oomph::PressureBasedSolidExactPreconditioner::~PressureBasedSolidExactPreconditioner</a></div><div class="ttdeci">~PressureBasedSolidExactPreconditioner()</div><div class="ttdoc">Destructor - do nothing.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00427">solid_preconditioners.h:427</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a216ed50190c2fa031c222b309e573f09"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a216ed50190c2fa031c222b309e573f09">oomph::PressureBasedSolidLSCPreconditioner::Form_BFBt_product</a></div><div class="ttdeci">bool Form_BFBt_product</div><div class="ttdoc">indicates whether BFBt should be formed or the component matrices should be retained....</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00393">solid_preconditioners.h:393</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidExactPreconditioner_html_ae7fce5484d8c480111a3a0929adcfaf4"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#ae7fce5484d8c480111a3a0929adcfaf4">oomph::PressureBasedSolidExactPreconditioner::preconditioner_solve</a></div><div class="ttdeci">void preconditioner_solve(const Vector&lt; double &gt; &amp;r, Vector&lt; double &gt; &amp;z)</div><div class="ttdoc">Apply preconditioner to r.</div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ae138780720a5c540f13ecf793cc753bd"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ae138780720a5c540f13ecf793cc753bd">oomph::PressureBasedSolidLSCPreconditioner::set_p_superlu_preconditioner</a></div><div class="ttdeci">void set_p_superlu_preconditioner()</div><div class="ttdoc">Function to (re-)set pressure matrix preconditioner (inexact solver) to SuperLU.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00271">solid_preconditioners.h:271</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BlockPreconditioner_html_ae055f998f6145656352aacac22e545ad"><div class="ttname"><a href="classoomph_1_1BlockPreconditioner.html#ae055f998f6145656352aacac22e545ad">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::set_nmesh</a></div><div class="ttdeci">void set_nmesh(const unsigned &amp;n)</div><div class="ttdoc">Specify the number of meshes required by this block preconditioner. Note: elements in different meshe...</div><div class="ttdef"><b>Definition:</b> <a href="block__preconditioner_8h_source.html#l02884">block_preconditioner.h:2884</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BlockPreconditioner_html_a3c0e92cb77c3e3179007fe9fd99b6428"><div class="ttname"><a href="classoomph_1_1BlockPreconditioner.html#a3c0e92cb77c3e3179007fe9fd99b6428">oomph::BlockPreconditioner&lt; CRDoubleMatrix &gt;::mesh_pt</a></div><div class="ttdeci">const Mesh * mesh_pt(const unsigned &amp;i) const</div><div class="ttdoc">Access to i-th mesh (of the various meshes that contain block preconditionable elements of the same n...</div><div class="ttdef"><b>Definition:</b> <a href="block__preconditioner_8h_source.html#l01801">block_preconditioner.h:1801</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a6828b0336e94e6acaaef7623f6425792"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a6828b0336e94e6acaaef7623f6425792">oomph::PressureBasedSolidLSCPreconditioner::disable_doc_time</a></div><div class="ttdeci">void disable_doc_time()</div><div class="ttdoc">Disable documentation of time.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00309">solid_preconditioners.h:309</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a1bfac76fb2b7451f009d2cb2fea5d07d"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a1bfac76fb2b7451f009d2cb2fea5d07d">oomph::PressureBasedSolidLSCPreconditioner::enable_doc_time</a></div><div class="ttdeci">void enable_doc_time()</div><div class="ttdoc">Enable documentation of time.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00306">solid_preconditioners.h:306</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_abefd3cc7c97fbdaad40c0231663c680f"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#abefd3cc7c97fbdaad40c0231663c680f">oomph::PressureBasedSolidLSCPreconditioner::is_p_matrix_using_scaling</a></div><div class="ttdeci">bool is_p_matrix_using_scaling() const</div><div class="ttdoc">Return whether the mass matrix is using diagonal scaling or not.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00254">solid_preconditioners.h:254</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_aa1b8a157c96f347dcb5f23b14c88765f"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa1b8a157c96f347dcb5f23b14c88765f">oomph::PressureBasedSolidLSCPreconditioner::disable_p_matrix_scaling</a></div><div class="ttdeci">void disable_p_matrix_scaling()</div><div class="ttdoc">Enable mass matrix diagonal scaling in the</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00250">solid_preconditioners.h:250</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_aca759bb66884df54c3ed5447357468e7"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aca759bb66884df54c3ed5447357468e7">oomph::PressureBasedSolidLSCPreconditioner::Using_default_p_preconditioner</a></div><div class="ttdeci">bool Using_default_p_preconditioner</div><div class="ttdoc">flag indicating whether the default P preconditioner is used</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00346">solid_preconditioners.h:346</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Mesh_html"><div class="ttname"><a href="classoomph_1_1Mesh.html">oomph::Mesh</a></div><div class="ttdoc">A general mesh class.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8h_source.html#l00070">mesh.h:70</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a36040d15eba392db2f29c503644a6ed2"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a36040d15eba392db2f29c503644a6ed2">oomph::PressureBasedSolidLSCPreconditioner::Preconditioner_has_been_setup</a></div><div class="ttdeci">bool Preconditioner_has_been_setup</div><div class="ttdoc">Control flag is true if the preconditioner has been setup (used so we can wipe the data when the prec...</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00351">solid_preconditioners.h:351</a></div></div>
+<div class="ttc" id="aclassoomph_1_1CRDoubleMatrix_html"><div class="ttname"><a href="classoomph_1_1CRDoubleMatrix.html">oomph::CRDoubleMatrix</a></div><div class="ttdoc">A class for compressed row matrices. This is a distributable object.</div><div class="ttdef"><b>Definition:</b> <a href="matrices_8h_source.html#l00868">matrices.h:868</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html">oomph::PressureBasedSolidLSCPreconditioner</a></div><div class="ttdoc">The least-squares commutator (LSC; formerly BFBT) preconditioner. It uses blocks corresponding to the...</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00157">solid_preconditioners.h:157</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a921f36ec8af49017b799a3832d7f688f"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a921f36ec8af49017b799a3832d7f688f">oomph::PressureBasedSolidLSCPreconditioner::set_p_preconditioner</a></div><div class="ttdeci">void set_p_preconditioner(Preconditioner *new_p_preconditioner_pt)</div><div class="ttdoc">Function to set a new pressure matrix preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00257">solid_preconditioners.h:257</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_af92907711de209fa924eeef614d48c4e"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af92907711de209fa924eeef614d48c4e">oomph::PressureBasedSolidLSCPreconditioner::P_matrix_using_scaling</a></div><div class="ttdeci">bool P_matrix_using_scaling</div><div class="ttdoc">Control flag is true if mass matrix diagonal scaling is used in the Schur complement approximation.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00355">solid_preconditioners.h:355</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a29d5b33a278a9ac3d868646553db949a"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a29d5b33a278a9ac3d868646553db949a">oomph::PressureBasedSolidLSCPreconditioner::PressureBasedSolidLSCPreconditioner</a></div><div class="ttdeci">PressureBasedSolidLSCPreconditioner(const PressureBasedSolidLSCPreconditioner &amp;)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00215">solid_preconditioners.h:215</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ad83eb2ddd12350bcba2cb8db074de2bd"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad83eb2ddd12350bcba2cb8db074de2bd">oomph::PressureBasedSolidLSCPreconditioner::clean_up_memory</a></div><div class="ttdeci">void clean_up_memory()</div><div class="ttdoc">Helper function to delete preconditioner data.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8cc_source.html#l01393">solid_preconditioners.cc:1393</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_af72af32deaca30259e86eba2e04f16ed"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#af72af32deaca30259e86eba2e04f16ed">oomph::PressureBasedSolidLSCPreconditioner::P_preconditioner_pt</a></div><div class="ttdeci">Preconditioner * P_preconditioner_pt</div><div class="ttdoc">Pointer to the 'preconditioner' for the pressure matrix.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00337">solid_preconditioners.h:337</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ad432b40acc45b0f8f065c96154f64240"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad432b40acc45b0f8f065c96154f64240">oomph::PressureBasedSolidLSCPreconditioner::set_solid_mesh</a></div><div class="ttdeci">void set_solid_mesh(Mesh *mesh_pt)</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00239">solid_preconditioners.h:239</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1BrokenCopy_html_a7e5cd7fda8b8c790003151bee77a84ac"><div class="ttname"><a href="namespaceoomph_1_1BrokenCopy.html#a7e5cd7fda8b8c790003151bee77a84ac">oomph::BrokenCopy::broken_copy</a></div><div class="ttdeci">void broken_copy(const std::string &amp;class_name)</div><div class="ttdoc">Issue error message and terminate execution.</div><div class="ttdef"><b>Definition:</b> <a href="oomph__utilities_8cc_source.html#l00214">oomph_utilities.cc:214</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidExactPreconditioner_html_a073924e293fc44655b5d2d11fbe18c56"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#a073924e293fc44655b5d2d11fbe18c56">oomph::PressureBasedSolidExactPreconditioner::PressureBasedSolidExactPreconditioner</a></div><div class="ttdeci">PressureBasedSolidExactPreconditioner()</div><div class="ttdoc">Constructor - do nothing.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00423">solid_preconditioners.h:423</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidExactPreconditioner_html"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidExactPreconditioner.html">oomph::PressureBasedSolidExactPreconditioner</a></div><div class="ttdoc">The exact solid preconditioner. This extracts 2x2 blocks (corresponding to the displacement/position ...</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00417">solid_preconditioners.h:417</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_afd0606b3f743c14d4a0d96477906cd47"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#afd0606b3f743c14d4a0d96477906cd47">oomph::PressureBasedSolidLSCPreconditioner::set_f_superlu_preconditioner</a></div><div class="ttdeci">void set_f_superlu_preconditioner()</div><div class="ttdoc">Function to (re-)set momentum matrix preconditioner (inexact solver) to SuperLU.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00295">solid_preconditioners.h:295</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a48598668a75faf5d983872f191288eb8"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a48598668a75faf5d983872f191288eb8">oomph::PressureBasedSolidLSCPreconditioner::F_preconditioner_pt</a></div><div class="ttdeci">Preconditioner * F_preconditioner_pt</div><div class="ttdoc">Pointer to the 'preconditioner' for the F matrix.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00340">solid_preconditioners.h:340</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidExactPreconditioner_html_ae4b0de5a28bb44588d7186a911314c5a"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#ae4b0de5a28bb44588d7186a911314c5a">oomph::PressureBasedSolidExactPreconditioner::PressureBasedSolidExactPreconditioner</a></div><div class="ttdeci">PressureBasedSolidExactPreconditioner(const PressureBasedSolidExactPreconditioner &amp;)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00431">solid_preconditioners.h:431</a></div></div>
+<div class="ttc" id="aclassoomph_1_1BlockPreconditioner_html"><div class="ttname"><a href="classoomph_1_1BlockPreconditioner.html">oomph::BlockPreconditioner</a></div><div class="ttdef"><b>Definition:</b> <a href="block__preconditioner_8h_source.html#l00424">block_preconditioner.h:424</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ac71c3f992d9790ca2e25e9c360eed635"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac71c3f992d9790ca2e25e9c360eed635">oomph::PressureBasedSolidLSCPreconditioner::Bt_mat_vec_pt</a></div><div class="ttdeci">MatrixVectorProduct * Bt_mat_vec_pt</div><div class="ttdoc">MatrixVectorProduct operator for Bt;.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00376">solid_preconditioners.h:376</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a2b32d66080ccfb3a464245d16bea6168"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a2b32d66080ccfb3a464245d16bea6168">oomph::PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal</a></div><div class="ttdeci">CRDoubleMatrix * assemble_mass_matrix_diagonal()</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8cc_source.html#l00726">solid_preconditioners.cc:726</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ac62a1112a99ae9503b97bd1c26f086f2"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ac62a1112a99ae9503b97bd1c26f086f2">oomph::PressureBasedSolidLSCPreconditioner::set_f_preconditioner</a></div><div class="ttdeci">void set_f_preconditioner(Preconditioner *new_f_preconditioner_pt)</div><div class="ttdoc">Function to set a new momentum matrix preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00281">solid_preconditioners.h:281</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidExactPreconditioner_html_ab9bdbcabd0ba8e9debfbec6679e66b08"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#ab9bdbcabd0ba8e9debfbec6679e66b08">oomph::PressureBasedSolidExactPreconditioner::setup</a></div><div class="ttdeci">void setup()</div><div class="ttdoc">Broken assignment operator</div></div>
+<div class="ttc" id="aclassoomph_1_1SuperLUPreconditioner_html"><div class="ttname"><a href="classoomph_1_1SuperLUPreconditioner.html">oomph::SuperLUPreconditioner</a></div><div class="ttdoc">An interface to allow SuperLU to be used as an (exact) Preconditioner.</div><div class="ttdef"><b>Definition:</b> <a href="SuperLU__preconditioner_8h_source.html#l00040">SuperLU_preconditioner.h:40</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_aa14db4490d9ce73788e22bc3d465489b"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aa14db4490d9ce73788e22bc3d465489b">oomph::PressureBasedSolidLSCPreconditioner::Solid_mesh_pt</a></div><div class="ttdeci">Mesh * Solid_mesh_pt</div><div class="ttdoc">the pointer to the mesh of block preconditionable solid elements.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00397">solid_preconditioners.h:397</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a2ed209babe751dcd64085d75b5ab9593"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a2ed209babe751dcd64085d75b5ab9593">oomph::PressureBasedSolidLSCPreconditioner::~PressureBasedSolidLSCPreconditioner</a></div><div class="ttdeci">~PressureBasedSolidLSCPreconditioner()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00209">solid_preconditioners.h:209</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a31b7034fb267b830594671d06b86f01a"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a31b7034fb267b830594671d06b86f01a">oomph::PressureBasedSolidLSCPreconditioner::PressureBasedSolidLSCPreconditioner</a></div><div class="ttdeci">PressureBasedSolidLSCPreconditioner()</div><div class="ttdoc">Constructor - sets defaults for control flags.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00164">solid_preconditioners.h:164</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ad1ce11b9dc16c14f5eaf72eb841c08ef"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad1ce11b9dc16c14f5eaf72eb841c08ef">oomph::PressureBasedSolidLSCPreconditioner::F_mat_vec_pt</a></div><div class="ttdeci">MatrixVectorProduct * F_mat_vec_pt</div><div class="ttdoc">MatrixVectorProduct operator for F if BFBt is not to be formed.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00370">solid_preconditioners.h:370</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a302edf88e0ec3fa457022a9a3886cdf9"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a302edf88e0ec3fa457022a9a3886cdf9">oomph::PressureBasedSolidLSCPreconditioner::enable_form_BFBt_product</a></div><div class="ttdeci">void enable_form_BFBt_product()</div><div class="ttdoc">If this function is called then: in setup(...) : BFBt is computed. in preconditioner_solve(....</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00315">solid_preconditioners.h:315</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ad873e64fad712e74972d6dbc95b2eeb0"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ad873e64fad712e74972d6dbc95b2eeb0">oomph::PressureBasedSolidLSCPreconditioner::Using_default_f_preconditioner</a></div><div class="ttdeci">bool Using_default_f_preconditioner</div><div class="ttdoc">flag indicating whether the default F preconditioner is used</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00343">solid_preconditioners.h:343</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_aeb2296a7bc2ba3de7c332506a768c4c4"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aeb2296a7bc2ba3de7c332506a768c4c4">oomph::PressureBasedSolidLSCPreconditioner::disable_form_BFBt_product</a></div><div class="ttdeci">void disable_form_BFBt_product()</div><div class="ttdoc">if this function is called then: in setup(...) : the matrices B, F are assembled and stored (the defa...</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00324">solid_preconditioners.h:324</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_a6bb97a362c82d3a363ffaaceb7a643a8"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#a6bb97a362c82d3a363ffaaceb7a643a8">oomph::PressureBasedSolidLSCPreconditioner::Doc_time</a></div><div class="ttdeci">bool Doc_time</div><div class="ttdoc">Set Doc_time to true for outputting results of timings.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00367">solid_preconditioners.h:367</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_ab81479f6e6a91ecb048f8c8d7e050744"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#ab81479f6e6a91ecb048f8c8d7e050744">oomph::PressureBasedSolidLSCPreconditioner::preconditioner_solve</a></div><div class="ttdeci">void preconditioner_solve(const DoubleVector &amp;r, DoubleVector &amp;z)</div><div class="ttdoc">Apply preconditioner to Vector r.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8cc_source.html#l00506">solid_preconditioners.cc:506</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidExactPreconditioner_html_a4fc2a6a063affff56ae040896cedbb2b"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidExactPreconditioner.html#a4fc2a6a063affff56ae040896cedbb2b">oomph::PressureBasedSolidExactPreconditioner::P_matrix</a></div><div class="ttdeci">MATRIX P_matrix</div><div class="ttdoc">Preconditioner matrix.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00454">solid_preconditioners.h:454</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DoubleVector_html"><div class="ttname"><a href="classoomph_1_1DoubleVector.html">oomph::DoubleVector</a></div><div class="ttdoc">A vector in the mathematical sense, initially developed for linear algebra type applications....</div><div class="ttdef"><b>Definition:</b> <a href="double__vector_8h_source.html#l00057">double_vector.h:57</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Preconditioner_html"><div class="ttname"><a href="classoomph_1_1Preconditioner.html">oomph::Preconditioner</a></div><div class="ttdoc">Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...</div><div class="ttdef"><b>Definition:</b> <a href="preconditioner_8h_source.html#l00054">preconditioner.h:54</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_aba594f38c2d36775115adbc90bcd0025"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aba594f38c2d36775115adbc90bcd0025">oomph::PressureBasedSolidLSCPreconditioner::setup</a></div><div class="ttdeci">void setup()</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8cc_source.html#l00043">solid_preconditioners.cc:43</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PressureBasedSolidLSCPreconditioner_html_aeb7e9109194f8a468a2c6ffec13e3c9f"><div class="ttname"><a href="classoomph_1_1PressureBasedSolidLSCPreconditioner.html#aeb7e9109194f8a468a2c6ffec13e3c9f">oomph::PressureBasedSolidLSCPreconditioner::enable_p_matrix_scaling</a></div><div class="ttdeci">void enable_p_matrix_scaling()</div><div class="ttdoc">Enable mass matrix diagonal scaling in the Schur complement approximation.</div><div class="ttdef"><b>Definition:</b> <a href="solid__preconditioners_8h_source.html#l00246">solid_preconditioners.h:246</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:57:58
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

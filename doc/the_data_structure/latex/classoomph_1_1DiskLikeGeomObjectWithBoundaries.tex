@@ -1,0 +1,411 @@
+\hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{}\doxysection{oomph\+::Disk\+Like\+Geom\+Object\+With\+Boundaries Class Reference}
+\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries}\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+
+
+{\ttfamily \#include $<$geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h$>$}
+
+Inheritance diagram for oomph\+::Disk\+Like\+Geom\+Object\+With\+Boundaries\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1DiskLikeGeomObjectWithBoundaries}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aa37a5bca3024c20545eeba724c22053c}{Disk\+Like\+Geom\+Object\+With\+Boundaries}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_abc85fcf43c0bb0874c092431ec12209e}{nboundary}} () const
+\begin{DoxyCompactList}\small\item\em How many boundaries do we have? \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a45dd0a30f2265f97e65f1b1c4b336b2e}{position\+\_\+on\+\_\+boundary}} (const unsigned \&b, const double \&zeta\+\_\+bound, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Compute 3D vector of Eulerian coordinates at 1D boundary coordinate zeta\+\_\+bound on boundary b\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_abed6833ebbafddb809ae8d209808c904}{zeta\+\_\+on\+\_\+boundary}} (const unsigned \&b, const double \&zeta\+\_\+bound, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta) const
+\begin{DoxyCompactList}\small\item\em Compute 2D vector of intrinsic coordinates at 1D boundary coordinate zeta\+\_\+bound on boundary b\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a0eae8667d3d71154c6f740e3d7dac0b9}{boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}} (const unsigned \&b) const
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object$<$1,2$>$ that parametrises intrinisc coordinates along boundary b. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aea863d508553cc984ba04a8a3b0fed0e}{zeta\+\_\+boundary\+\_\+start}} (const unsigned \&b) const
+\begin{DoxyCompactList}\small\item\em Initial value of 1D boundary coordinate zeta\+\_\+bound on boundary b\+: \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aace3c0d4f66e771bf006d3ff78ae82e5}{zeta\+\_\+boundary\+\_\+end}} (const unsigned \&b) const
+\begin{DoxyCompactList}\small\item\em Final value of 1D boundary coordinate zeta\+\_\+bound on boundary b\+: \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aafe14f8fb055a10b33da4e730f457308}{boundary\+\_\+triad}} (const unsigned \&b, const double \&zeta\+\_\+bound, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&tangent, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&normal, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&binormal)
+\begin{DoxyCompactList}\small\item\em Boundary triad on boundary b at boundary coordinate zeta\+\_\+bound. Broken virtual. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_ad083be3c9cf9b9b493bc3e38ad809fc8}{output\+\_\+boundaries}} (const unsigned \&nplot, std\+::ofstream \&two\+\_\+d\+\_\+boundaries\+\_\+file, std\+::ofstream \&three\+\_\+d\+\_\+boundaries\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Output boundaries at nplot plot points. Streams\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a5817503e1416b8ec99de7c25dff0213c}{output\+\_\+boundaries\+\_\+and\+\_\+triads}} (const unsigned \&nplot, std\+::ofstream \&two\+\_\+d\+\_\+boundaries\+\_\+file, std\+::ofstream \&three\+\_\+d\+\_\+boundaries\+\_\+file, std\+::ofstream \&boundaries\+\_\+tangent\+\_\+file, std\+::ofstream \&boundaries\+\_\+normal\+\_\+file, std\+::ofstream \&boundaries\+\_\+binormal\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Output boundaries and triad at nplot plot points. Streams\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a09b4f5e8e2a47cfb5159d4656e440359}{add\+\_\+region\+\_\+coordinates}} (const unsigned \&r, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a5573c14a4a2faeb62b4710c799397604}{zeta\+\_\+in\+\_\+region}})
+\begin{DoxyCompactList}\small\item\em Specify intrinsic coordinates of a point within a specified region -- region ID, r, should be positive. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a5573c14a4a2faeb62b4710c799397604}{zeta\+\_\+in\+\_\+region}} () const
+\begin{DoxyCompactList}\small\item\em Return map that stores zeta coordinates of points that identify regions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a2d999734b8e0ddc2789ac1a9d18f5b68}{Zeta\+\_\+boundary\+\_\+start}}
+\begin{DoxyCompactList}\small\item\em Storage for initial value of 1D boundary coordinate on boundary b\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_af8de15d74e41b124f488fc1c3823ba7f}{Zeta\+\_\+boundary\+\_\+end}}
+\begin{DoxyCompactList}\small\item\em Storage for final value of 1D boundary coordinate on boundary b\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aa1de5b0b7af8d20c3675ae9b4b6f2e12}{Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object$<$1,2$>$ that parametrises intrinisc coordinates along boundary b; essentially provides a wrapper to zeta\+\_\+on\+\_\+boundary(...) \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a915c63839a2156913cfcbcd59a0cd251}{Zeta\+\_\+in\+\_\+region}}
+\begin{DoxyCompactList}\small\item\em Map to store zeta coordinates of points that identify regions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for upgraded disk-\/like \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (i.\+e. 2D surface in 3D space) with specification of boundaries. The \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}\textquotesingle{}s position(...) function computes the 3D (Eulerian) position vector r as a function of the 2D intrinsic (Lagrangian) coordinates, zeta, without reference to any boundaries. This class specifies the boundaries by specifying a mapping from a 1D intrinsic boundary coordinate, zeta\+\_\+bound, to the 2D intrinsic (Lagrangian) coordinates, zeta.
+
+The class is made functional by provision (in the derived class!) of\+:
+\begin{DoxyItemize}
+\item a pointer to a Geom\+Object$<$1,2$>$ that parametrises the 2D intrinisic coordinates zeta along boundary b in terms of the 1D boundary coordinate, zeta\+\_\+bound,
+\item the initial value of the 1D boundary coordinate zeta\+\_\+bound on boundary b,
+\item the final value of the 1D boundary coordinate zeta\+\_\+bound on boundary b
+\end{DoxyItemize}for each of these boundaries. All three containers for these must be resized (consistently) and populated in the derived class. Number of boundaries is inferred from their size.
+
+Class also provides broken virtual function to specify boundary triads, and various output functions. 
+
+Definition at line 67 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aa37a5bca3024c20545eeba724c22053c}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aa37a5bca3024c20545eeba724c22053c}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!DiskLikeGeomObjectWithBoundaries@{DiskLikeGeomObjectWithBoundaries}}
+\index{DiskLikeGeomObjectWithBoundaries@{DiskLikeGeomObjectWithBoundaries}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{DiskLikeGeomObjectWithBoundaries()}{DiskLikeGeomObjectWithBoundaries()}}
+{\footnotesize\ttfamily oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 73 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a09b4f5e8e2a47cfb5159d4656e440359}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a09b4f5e8e2a47cfb5159d4656e440359}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!add\_region\_coordinates@{add\_region\_coordinates}}
+\index{add\_region\_coordinates@{add\_region\_coordinates}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{add\_region\_coordinates()}{add\_region\_coordinates()}}
+{\footnotesize\ttfamily void oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::add\+\_\+region\+\_\+coordinates (\begin{DoxyParamCaption}\item[{const unsigned \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta\+\_\+in\+\_\+region }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Specify intrinsic coordinates of a point within a specified region -- region ID, r, should be positive. 
+
+
+
+Definition at line 290 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References n, zeta\+\_\+in\+\_\+region(), and Zeta\+\_\+in\+\_\+region.
+
+
+
+Referenced by oomph\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a0eae8667d3d71154c6f740e3d7dac0b9}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a0eae8667d3d71154c6f740e3d7dac0b9}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!boundary\_parametrising\_geom\_object\_pt@{boundary\_parametrising\_geom\_object\_pt}}
+\index{boundary\_parametrising\_geom\_object\_pt@{boundary\_parametrising\_geom\_object\_pt}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{boundary\_parametrising\_geom\_object\_pt()}{boundary\_parametrising\_geom\_object\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to Geom\+Object$<$1,2$>$ that parametrises intrinisc coordinates along boundary b. 
+
+
+
+Definition at line 144 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aafe14f8fb055a10b33da4e730f457308}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aafe14f8fb055a10b33da4e730f457308}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!boundary\_triad@{boundary\_triad}}
+\index{boundary\_triad@{boundary\_triad}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{boundary\_triad()}{boundary\_triad()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::boundary\+\_\+triad (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const double \&}]{zeta\+\_\+bound,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{tangent,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{normal,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{binormal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Boundary triad on boundary b at boundary coordinate zeta\+\_\+bound. Broken virtual. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_aa24472806fff65e4950d71dd9536965f}{oomph\+::\+Warped\+Circular\+Disk}}.
+
+
+
+Definition at line 167 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+Referenced by output\+\_\+boundaries\+\_\+and\+\_\+triads().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_abc85fcf43c0bb0874c092431ec12209e}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_abc85fcf43c0bb0874c092431ec12209e}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!nboundary@{nboundary}}
+\index{nboundary@{nboundary}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{nboundary()}{nboundary()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::nboundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+How many boundaries do we have? 
+
+
+
+Definition at line 77 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt.
+
+
+
+Referenced by output\+\_\+boundaries\+\_\+and\+\_\+triads(), and oomph\+::\+Warped\+Circular\+Disk\+::$\sim$\+Warped\+Circular\+Disk().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_ad083be3c9cf9b9b493bc3e38ad809fc8}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_ad083be3c9cf9b9b493bc3e38ad809fc8}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!output\_boundaries@{output\_boundaries}}
+\index{output\_boundaries@{output\_boundaries}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{output\_boundaries()}{output\_boundaries()}}
+{\footnotesize\ttfamily void oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::output\+\_\+boundaries (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nplot,  }\item[{std\+::ofstream \&}]{two\+\_\+d\+\_\+boundaries\+\_\+file,  }\item[{std\+::ofstream \&}]{three\+\_\+d\+\_\+boundaries\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output boundaries at nplot plot points. Streams\+: 
+
+
+\begin{DoxyItemize}
+\item two\+\_\+d\+\_\+boundaries\+\_\+file\+: zeta\+\_\+0, zeta\+\_\+1, zeta\+\_\+bound
+\item three\+\_\+d\+\_\+boundaries\+\_\+file \+: x, y, z, zeta\+\_\+0, zeta\+\_\+1, zeta\+\_\+bound 
+\end{DoxyItemize}
+
+Definition at line 187 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References output\+\_\+boundaries\+\_\+and\+\_\+triads().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a5817503e1416b8ec99de7c25dff0213c}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a5817503e1416b8ec99de7c25dff0213c}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!output\_boundaries\_and\_triads@{output\_boundaries\_and\_triads}}
+\index{output\_boundaries\_and\_triads@{output\_boundaries\_and\_triads}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{output\_boundaries\_and\_triads()}{output\_boundaries\_and\_triads()}}
+{\footnotesize\ttfamily void oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::output\+\_\+boundaries\+\_\+and\+\_\+triads (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nplot,  }\item[{std\+::ofstream \&}]{two\+\_\+d\+\_\+boundaries\+\_\+file,  }\item[{std\+::ofstream \&}]{three\+\_\+d\+\_\+boundaries\+\_\+file,  }\item[{std\+::ofstream \&}]{boundaries\+\_\+tangent\+\_\+file,  }\item[{std\+::ofstream \&}]{boundaries\+\_\+normal\+\_\+file,  }\item[{std\+::ofstream \&}]{boundaries\+\_\+binormal\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output boundaries and triad at nplot plot points. Streams\+: 
+
+
+\begin{DoxyItemize}
+\item two\+\_\+d\+\_\+boundaries\+\_\+file\+: zeta\+\_\+0, zeta\+\_\+1, zeta\+\_\+bound
+\item three\+\_\+d\+\_\+boundaries\+\_\+file \+: x, y, z, zeta\+\_\+0, zeta\+\_\+1, zeta\+\_\+bound
+\item boundaries\+\_\+tangent\+\_\+file \+: x, y, z, t\+\_\+x, t\+\_\+y, t\+\_\+z
+\item boundaries\+\_\+normal\+\_\+file \+: x, y, z, n\+\_\+x, n\+\_\+y, n\+\_\+z
+\item boundaries\+\_\+binormal\+\_\+file\+: x, y, z, N\+\_\+x, N\+\_\+y, N\+\_\+z 
+\end{DoxyItemize}
+
+Definition at line 209 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References boundary\+\_\+triad(), i, n, nboundary(), position\+\_\+on\+\_\+boundary(), zeta\+\_\+boundary\+\_\+end(), zeta\+\_\+boundary\+\_\+start(), and zeta\+\_\+on\+\_\+boundary().
+
+
+
+Referenced by output\+\_\+boundaries().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a45dd0a30f2265f97e65f1b1c4b336b2e}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a45dd0a30f2265f97e65f1b1c4b336b2e}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!position\_on\_boundary@{position\_on\_boundary}}
+\index{position\_on\_boundary@{position\_on\_boundary}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{position\_on\_boundary()}{position\_on\_boundary()}}
+{\footnotesize\ttfamily void oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::position\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const double \&}]{zeta\+\_\+bound,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute 3D vector of Eulerian coordinates at 1D boundary coordinate zeta\+\_\+bound on boundary b\+: 
+
+
+
+Definition at line 84 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References oomph\+::\+Geom\+Object\+::position(), and zeta\+\_\+on\+\_\+boundary().
+
+
+
+Referenced by output\+\_\+boundaries\+\_\+and\+\_\+triads().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aace3c0d4f66e771bf006d3ff78ae82e5}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aace3c0d4f66e771bf006d3ff78ae82e5}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!zeta\_boundary\_end@{zeta\_boundary\_end}}
+\index{zeta\_boundary\_end@{zeta\_boundary\_end}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{zeta\_boundary\_end()}{zeta\_boundary\_end()}}
+{\footnotesize\ttfamily double oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::zeta\+\_\+boundary\+\_\+end (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Final value of 1D boundary coordinate zeta\+\_\+bound on boundary b\+: 
+
+
+
+Definition at line 158 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References Zeta\+\_\+boundary\+\_\+end.
+
+
+
+Referenced by output\+\_\+boundaries\+\_\+and\+\_\+triads().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aea863d508553cc984ba04a8a3b0fed0e}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aea863d508553cc984ba04a8a3b0fed0e}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!zeta\_boundary\_start@{zeta\_boundary\_start}}
+\index{zeta\_boundary\_start@{zeta\_boundary\_start}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{zeta\_boundary\_start()}{zeta\_boundary\_start()}}
+{\footnotesize\ttfamily double oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::zeta\+\_\+boundary\+\_\+start (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initial value of 1D boundary coordinate zeta\+\_\+bound on boundary b\+: 
+
+
+
+Definition at line 151 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References Zeta\+\_\+boundary\+\_\+start.
+
+
+
+Referenced by output\+\_\+boundaries\+\_\+and\+\_\+triads().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a5573c14a4a2faeb62b4710c799397604}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a5573c14a4a2faeb62b4710c799397604}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!zeta\_in\_region@{zeta\_in\_region}}
+\index{zeta\_in\_region@{zeta\_in\_region}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{zeta\_in\_region()}{zeta\_in\_region()}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::zeta\+\_\+in\+\_\+region (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return map that stores zeta coordinates of points that identify regions. 
+
+
+
+Definition at line 340 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References Zeta\+\_\+in\+\_\+region.
+
+
+
+Referenced by add\+\_\+region\+\_\+coordinates(), and oomph\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_abed6833ebbafddb809ae8d209808c904}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_abed6833ebbafddb809ae8d209808c904}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!zeta\_on\_boundary@{zeta\_on\_boundary}}
+\index{zeta\_on\_boundary@{zeta\_on\_boundary}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{zeta\_on\_boundary()}{zeta\_on\_boundary()}}
+{\footnotesize\ttfamily void oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::zeta\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const double \&}]{zeta\+\_\+bound,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{zeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute 2D vector of intrinsic coordinates at 1D boundary coordinate zeta\+\_\+bound on boundary b\+: 
+
+
+
+Definition at line 95 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+References Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt, oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Geom\+Object\+::nlagrangian(), and oomph\+::\+Geom\+Object\+::position().
+
+
+
+Referenced by output\+\_\+boundaries\+\_\+and\+\_\+triads(), and position\+\_\+on\+\_\+boundary().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aa1de5b0b7af8d20c3675ae9b4b6f2e12}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aa1de5b0b7af8d20c3675ae9b4b6f2e12}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!Boundary\_parametrising\_geom\_object\_pt@{Boundary\_parametrising\_geom\_object\_pt}}
+\index{Boundary\_parametrising\_geom\_object\_pt@{Boundary\_parametrising\_geom\_object\_pt}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{Boundary\_parametrising\_geom\_object\_pt}{Boundary\_parametrising\_geom\_object\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$>$ oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to Geom\+Object$<$1,2$>$ that parametrises intrinisc coordinates along boundary b; essentially provides a wrapper to zeta\+\_\+on\+\_\+boundary(...) 
+
+
+
+Definition at line 357 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+Referenced by boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt(), nboundary(), oomph\+::\+Warped\+Circular\+Disk\+::\+Warped\+Circular\+Disk(), oomph\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary(), zeta\+\_\+on\+\_\+boundary(), and oomph\+::\+Warped\+Circular\+Disk\+::$\sim$\+Warped\+Circular\+Disk().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_af8de15d74e41b124f488fc1c3823ba7f}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_af8de15d74e41b124f488fc1c3823ba7f}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!Zeta\_boundary\_end@{Zeta\_boundary\_end}}
+\index{Zeta\_boundary\_end@{Zeta\_boundary\_end}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{Zeta\_boundary\_end}{Zeta\_boundary\_end}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+end\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storage for final value of 1D boundary coordinate on boundary b\+: 
+
+
+
+Definition at line 353 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+Referenced by oomph\+::\+Warped\+Circular\+Disk\+::\+Warped\+Circular\+Disk(), oomph\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary(), and zeta\+\_\+boundary\+\_\+end().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a2d999734b8e0ddc2789ac1a9d18f5b68}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a2d999734b8e0ddc2789ac1a9d18f5b68}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!Zeta\_boundary\_start@{Zeta\_boundary\_start}}
+\index{Zeta\_boundary\_start@{Zeta\_boundary\_start}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{Zeta\_boundary\_start}{Zeta\_boundary\_start}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+start\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storage for initial value of 1D boundary coordinate on boundary b\+: 
+
+
+
+Definition at line 349 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+Referenced by oomph\+::\+Warped\+Circular\+Disk\+::\+Warped\+Circular\+Disk(), oomph\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary(), and zeta\+\_\+boundary\+\_\+start().
+
+\mbox{\Hypertarget{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a915c63839a2156913cfcbcd59a0cd251}\label{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a915c63839a2156913cfcbcd59a0cd251}} 
+\index{oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}!Zeta\_in\_region@{Zeta\_in\_region}}
+\index{Zeta\_in\_region@{Zeta\_in\_region}!oomph::DiskLikeGeomObjectWithBoundaries@{oomph::DiskLikeGeomObjectWithBoundaries}}
+\doxysubsubsection{\texorpdfstring{Zeta\_in\_region}{Zeta\_in\_region}}
+{\footnotesize\ttfamily std\+::map$<$unsigned, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+in\+\_\+region\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Map to store zeta coordinates of points that identify regions. 
+
+
+
+Definition at line 360 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+
+Referenced by add\+\_\+region\+\_\+coordinates(), and zeta\+\_\+in\+\_\+region().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{geom__obj__with__boundary_8h}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}\end{DoxyCompactItemize}

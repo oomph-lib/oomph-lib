@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: GeomObjectAsGeneralisedElementProblem Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classGeomObjectAsGeneralisedElementProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">GeomObjectAsGeneralisedElementProblem Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for GeomObjectAsGeneralisedElementProblem:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classGeomObjectAsGeneralisedElementProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad1f15fcb6c055c58d1f71b522f1f7bd6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeomObjectAsGeneralisedElementProblem.html#ad1f15fcb6c055c58d1f71b522f1f7bd6">GeomObjectAsGeneralisedElementProblem</a> ()</td></tr>
+<tr class="memdesc:ad1f15fcb6c055c58d1f71b522f1f7bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classGeomObjectAsGeneralisedElementProblem.html#ad1f15fcb6c055c58d1f71b522f1f7bd6">More...</a><br /></td></tr>
+<tr class="separator:ad1f15fcb6c055c58d1f71b522f1f7bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af396d1789e2552c43e0c68561d88d473"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeomObjectAsGeneralisedElementProblem.html#af396d1789e2552c43e0c68561d88d473">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:af396d1789e2552c43e0c68561d88d473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs after solve (empty)  <a href="classGeomObjectAsGeneralisedElementProblem.html#af396d1789e2552c43e0c68561d88d473">More...</a><br /></td></tr>
+<tr class="separator:af396d1789e2552c43e0c68561d88d473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ae01862ddbbeeacca1ce7a444e28931"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeomObjectAsGeneralisedElementProblem.html#a4ae01862ddbbeeacca1ce7a444e28931">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a4ae01862ddbbeeacca1ce7a444e28931"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve (empty)  <a href="classGeomObjectAsGeneralisedElementProblem.html#a4ae01862ddbbeeacca1ce7a444e28931">More...</a><br /></td></tr>
+<tr class="separator:a4ae01862ddbbeeacca1ce7a444e28931"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5092be8e6172d6c9147115bdd485db35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeomObjectAsGeneralisedElementProblem.html#a5092be8e6172d6c9147115bdd485db35">doc_solution</a> ()</td></tr>
+<tr class="memdesc:a5092be8e6172d6c9147115bdd485db35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <a href="classGeomObjectAsGeneralisedElementProblem.html#a5092be8e6172d6c9147115bdd485db35">More...</a><br /></td></tr>
+<tr class="separator:a5092be8e6172d6c9147115bdd485db35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ae799de23742e4c8fa54ee7ae32e679"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeomObjectAsGeneralisedElementProblem.html#a5ae799de23742e4c8fa54ee7ae32e679">load</a> ()</td></tr>
+<tr class="memdesc:a5ae799de23742e4c8fa54ee7ae32e679"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return value of the "load" on the elastically supported ring.  <a href="classGeomObjectAsGeneralisedElementProblem.html#a5ae799de23742e4c8fa54ee7ae32e679">More...</a><br /></td></tr>
+<tr class="separator:a5ae799de23742e4c8fa54ee7ae32e679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4be869d81c0df187d4239a590826f139"><td class="memItemLeft" align="right" valign="top">DocInfo &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeomObjectAsGeneralisedElementProblem.html#a4be869d81c0df187d4239a590826f139">doc_info</a> ()</td></tr>
+<tr class="memdesc:a4be869d81c0df187d4239a590826f139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to DocInfo object.  <a href="classGeomObjectAsGeneralisedElementProblem.html#a4be869d81c0df187d4239a590826f139">More...</a><br /></td></tr>
+<tr class="separator:a4be869d81c0df187d4239a590826f139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad6261e556a52596ba8904ee902ea6d70"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeomObjectAsGeneralisedElementProblem.html#ad6261e556a52596ba8904ee902ea6d70">Trace_file</a></td></tr>
+<tr class="memdesc:ad6261e556a52596ba8904ee902ea6d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace file.  <a href="classGeomObjectAsGeneralisedElementProblem.html#ad6261e556a52596ba8904ee902ea6d70">More...</a><br /></td></tr>
+<tr class="separator:ad6261e556a52596ba8904ee902ea6d70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac04469b2dbce010fff3f5b2cf5591bcd"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeomObjectAsGeneralisedElementProblem.html#ac04469b2dbce010fff3f5b2cf5591bcd">Load_pt</a></td></tr>
+<tr class="memdesc:ac04469b2dbce010fff3f5b2cf5591bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to data item that stores the "load" on the ring.  <a href="classGeomObjectAsGeneralisedElementProblem.html#ac04469b2dbce010fff3f5b2cf5591bcd">More...</a><br /></td></tr>
+<tr class="separator:ac04469b2dbce010fff3f5b2cf5591bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89a7f5fa555839193166f802d6ff6be2"><td class="memItemLeft" align="right" valign="top">DocInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGeomObjectAsGeneralisedElementProblem.html#a89a7f5fa555839193166f802d6ff6be2">Doc_info</a></td></tr>
+<tr class="memdesc:a89a7f5fa555839193166f802d6ff6be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc info object.  <a href="classGeomObjectAsGeneralisedElementProblem.html#a89a7f5fa555839193166f802d6ff6be2">More...</a><br /></td></tr>
+<tr class="separator:a89a7f5fa555839193166f802d6ff6be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Problem to demonstrate the use of a GeomObject as a GeneralisedElement: A geometric object (a Circle) is "upgraded" to a GeneralisedElement. The position of the Circle is determined by a balance of forces, assuming that the Circle is mounted on an elastic spring of specified stiffness and loaded by a vertical "load". <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00052">52</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad1f15fcb6c055c58d1f71b522f1f7bd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1f15fcb6c055c58d1f71b522f1f7bd6">&#9670;&nbsp;</a></span>GeomObjectAsGeneralisedElementProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObjectAsGeneralisedElementProblem::GeomObjectAsGeneralisedElementProblem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00098">98</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="circle__as__generalised__element_8h_source.html#l00144">oomph::ElasticallySupportedRingElement::k_stiff()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00098">oomph::ElasticallySupportedRingElement::set_load_pt()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af396d1789e2552c43e0c68561d88d473"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af396d1789e2552c43e0c68561d88d473">&#9670;&nbsp;</a></span>actions_after_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GeomObjectAsGeneralisedElementProblem::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00061">61</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4ae01862ddbbeeacca1ce7a444e28931"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ae01862ddbbeeacca1ce7a444e28931">&#9670;&nbsp;</a></span>actions_before_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GeomObjectAsGeneralisedElementProblem::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00064">64</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4be869d81c0df187d4239a590826f139"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4be869d81c0df187d4239a590826f139">&#9670;&nbsp;</a></span>doc_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DocInfo&amp; GeomObjectAsGeneralisedElementProblem::doc_info </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to DocInfo object. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00076">76</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="geom__object__element_8cc_source.html#l00208">main()</a>.</p>
+
+</div>
+</div>
+<a id="a5092be8e6172d6c9147115bdd485db35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5092be8e6172d6c9147115bdd485db35">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GeomObjectAsGeneralisedElementProblem::doc_solution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+<p>Doc the solution in tecplot format. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00151">151</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="geom__object__element_8cc_source.html#l00208">main()</a>.</p>
+
+</div>
+</div>
+<a id="a5ae799de23742e4c8fa54ee7ae32e679"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae799de23742e4c8fa54ee7ae32e679">&#9670;&nbsp;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; GeomObjectAsGeneralisedElementProblem::load </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return value of the "load" on the elastically supported ring. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00070">70</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="geom__object__element_8cc_source.html#l00208">main()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a89a7f5fa555839193166f802d6ff6be2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89a7f5fa555839193166f802d6ff6be2">&#9670;&nbsp;</a></span>Doc_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DocInfo GeomObjectAsGeneralisedElementProblem::Doc_info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Doc info object. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00087">87</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac04469b2dbce010fff3f5b2cf5591bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac04469b2dbce010fff3f5b2cf5591bcd">&#9670;&nbsp;</a></span>Load_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* GeomObjectAsGeneralisedElementProblem::Load_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to data item that stores the "load" on the ring. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00084">84</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+
+</div>
+</div>
+<a id="ad6261e556a52596ba8904ee902ea6d70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6261e556a52596ba8904ee902ea6d70">&#9670;&nbsp;</a></span>Trace_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream GeomObjectAsGeneralisedElementProblem::Trace_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Trace file. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__object__element_8cc_source.html#l00081">81</a> of file <a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="geom__object__element_8cc_source.html">geom_object_element.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:17:58
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

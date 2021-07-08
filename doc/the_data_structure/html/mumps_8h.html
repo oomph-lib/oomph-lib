@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: mumps.h File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4075b182e53a3873a42d885f4e1e98c4.html">generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">mumps.h File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="mumps_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a85b119d035735c8c1f6661c34b50eed4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#a85b119d035735c8c1f6661c34b50eed4">PROTOCCALLSFSUB1</a> (MUMPS_SETUP_SOLVER_POOL, mumps_setup_solver_pool, <a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>) <a class="el" href="mumps_8h.html#a319f30661a915d1558463251cb9ac2ea">PROTOCCALLSFSUB2</a>(MUMPS_SETUP</td></tr>
+<tr class="separator:a85b119d035735c8c1f6661c34b50eed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a319f30661a915d1558463251cb9ac2ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#a319f30661a915d1558463251cb9ac2ea">PROTOCCALLSFSUB2</a> (MUMPS_SET_WORKSPACE_SCALING_FACTOR, mumps_set_workspace_scaling_factor, <a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>) <a class="el" href="mumps_8h.html#a893da1c9717ac5b625078598d8f2ee84">PROTOCCALLSFSUB1</a>(MUMPS_SWITCH_ON_DOC</td></tr>
+<tr class="separator:a319f30661a915d1558463251cb9ac2ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bd0dac1f4ee89fb136d65042cb59746"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#a7bd0dac1f4ee89fb136d65042cb59746">PROTOCCALLSFSUB1</a> (MUMPS_SWITCH_OFF_DOC, mumps_switch_off_doc, <a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>) PROTOCCALLSFSUB6(MUMPS_FACTORISE</td></tr>
+<tr class="separator:a7bd0dac1f4ee89fb136d65042cb59746"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb3a71a02a45a77419f20e8562f638d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#abb3a71a02a45a77419f20e8562f638d7">PROTOCCALLSFSUB7</a> (MUMPS_SOLVE, mumps_solve, <a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="mumps_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="mumps_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="lapack__qz_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>, <a class="el" href="lapack__qz_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>) <a class="el" href="frontal_8h.html#ac5fa63f703da950b52ddf1a64131e691">PROTOCCALLSFSUB3</a>(MUMPS_BACKSUB</td></tr>
+<tr class="separator:abb3a71a02a45a77419f20e8562f638d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a893da1c9717ac5b625078598d8f2ee84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#a893da1c9717ac5b625078598d8f2ee84">PROTOCCALLSFSUB1</a> (MUMPS_CLEANUP_MEMORY, mumps_cleanup_memory, <a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>) PROTOCCALLSFSUB1(MUMPS_SHUTDOWN</td></tr>
+<tr class="separator:a893da1c9717ac5b625078598d8f2ee84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a059465e6d09fcaa028fa8c3bd813466c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#a059465e6d09fcaa028fa8c3bd813466c">mumps_setup</a></td></tr>
+<tr class="separator:a059465e6d09fcaa028fa8c3bd813466c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cf9af43a95c45c3d469658098dfbe1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a></td></tr>
+<tr class="separator:a4cf9af43a95c45c3d469658098dfbe1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a122a198f6deac1b343afd6b325160e05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#a122a198f6deac1b343afd6b325160e05">mumps_switch_on_doc</a></td></tr>
+<tr class="separator:a122a198f6deac1b343afd6b325160e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abac3d13e84d3bab480e38172d9832d0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#abac3d13e84d3bab480e38172d9832d0e">mumps_factorise</a></td></tr>
+<tr class="separator:abac3d13e84d3bab480e38172d9832d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe41f5e30c598530e46fc079718e8f83"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a></td></tr>
+<tr class="separator:abe41f5e30c598530e46fc079718e8f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a454fe1c735e29910b3eea8093a154c80"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#a454fe1c735e29910b3eea8093a154c80">mumps_backsub</a></td></tr>
+<tr class="separator:a454fe1c735e29910b3eea8093a154c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab20f4e8fc9653efcccdb1334d6e6e4c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mumps_8h.html#ab20f4e8fc9653efcccdb1334d6e6e4c2">mumps_shutdown</a></td></tr>
+<tr class="separator:ab20f4e8fc9653efcccdb1334d6e6e4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a893da1c9717ac5b625078598d8f2ee84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a893da1c9717ac5b625078598d8f2ee84">&#9670;&nbsp;</a></span>PROTOCCALLSFSUB1() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROTOCCALLSFSUB1 </td>
+          <td>(</td>
+          <td class="paramtype">MUMPS_CLEANUP_MEMORY&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mumps_cleanup_memory&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a85b119d035735c8c1f6661c34b50eed4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85b119d035735c8c1f6661c34b50eed4">&#9670;&nbsp;</a></span>PROTOCCALLSFSUB1() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROTOCCALLSFSUB1 </td>
+          <td>(</td>
+          <td class="paramtype">MUMPS_SETUP_SOLVER_POOL&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mumps_setup_solver_pool&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7bd0dac1f4ee89fb136d65042cb59746"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bd0dac1f4ee89fb136d65042cb59746">&#9670;&nbsp;</a></span>PROTOCCALLSFSUB1() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROTOCCALLSFSUB1 </td>
+          <td>(</td>
+          <td class="paramtype">MUMPS_SWITCH_OFF_DOC&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mumps_switch_off_doc&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a319f30661a915d1558463251cb9ac2ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a319f30661a915d1558463251cb9ac2ea">&#9670;&nbsp;</a></span>PROTOCCALLSFSUB2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROTOCCALLSFSUB2 </td>
+          <td>(</td>
+          <td class="paramtype">MUMPS_SET_WORKSPACE_SCALING_FACTOR&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mumps_set_workspace_scaling_factor&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb3a71a02a45a77419f20e8562f638d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb3a71a02a45a77419f20e8562f638d7">&#9670;&nbsp;</a></span>PROTOCCALLSFSUB7()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROTOCCALLSFSUB7 </td>
+          <td>(</td>
+          <td class="paramtype">MUMPS_SOLVE&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mumps_solve&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mumps_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lapack__qz_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lapack__qz_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a4cf9af43a95c45c3d469658098dfbe1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cf9af43a95c45c3d469658098dfbe1a">&#9670;&nbsp;</a></span>INT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mumps_8h_source.html#l00033">33</a> of file <a class="el" href="mumps_8h_source.html">mumps.h</a>.</p>
+
+</div>
+</div>
+<a id="abe41f5e30c598530e46fc079718e8f83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe41f5e30c598530e46fc079718e8f83">&#9670;&nbsp;</a></span>INTV</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INTV</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mumps_8h_source.html#l00049">49</a> of file <a class="el" href="mumps_8h_source.html">mumps.h</a>.</p>
+
+</div>
+</div>
+<a id="a454fe1c735e29910b3eea8093a154c80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a454fe1c735e29910b3eea8093a154c80">&#9670;&nbsp;</a></span>mumps_backsub</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mumps_backsub</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mumps_8h_source.html#l00056">56</a> of file <a class="el" href="mumps_8h_source.html">mumps.h</a>.</p>
+
+</div>
+</div>
+<a id="abac3d13e84d3bab480e38172d9832d0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abac3d13e84d3bab480e38172d9832d0e">&#9670;&nbsp;</a></span>mumps_factorise</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mumps_factorise</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mumps_8h_source.html#l00049">49</a> of file <a class="el" href="mumps_8h_source.html">mumps.h</a>.</p>
+
+</div>
+</div>
+<a id="a059465e6d09fcaa028fa8c3bd813466c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a059465e6d09fcaa028fa8c3bd813466c">&#9670;&nbsp;</a></span>mumps_setup</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mumps_setup</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mumps_8h_source.html#l00033">33</a> of file <a class="el" href="mumps_8h_source.html">mumps.h</a>.</p>
+
+</div>
+</div>
+<a id="ab20f4e8fc9653efcccdb1334d6e6e4c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab20f4e8fc9653efcccdb1334d6e6e4c2">&#9670;&nbsp;</a></span>mumps_shutdown</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mumps_shutdown</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mumps_8h_source.html#l00064">64</a> of file <a class="el" href="mumps_8h_source.html">mumps.h</a>.</p>
+
+</div>
+</div>
+<a id="a122a198f6deac1b343afd6b325160e05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a122a198f6deac1b343afd6b325160e05">&#9670;&nbsp;</a></span>mumps_switch_on_doc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mumps_switch_on_doc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mumps_8h_source.html#l00041">41</a> of file <a class="el" href="mumps_8h_source.html">mumps.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

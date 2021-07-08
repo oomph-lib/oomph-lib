@@ -1,0 +1,126 @@
+\hypertarget{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement}{}\doxysection{Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Multi\+Domain\+Element Class Reference}
+\label{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement}\index{LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}}
+
+
+{\ttfamily \#include $<$multi\+\_\+domain\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
+
+Inheritance diagram for Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Multi\+Domain\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.046783cm]{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a8701f82f9da337ea29066af244c8922f}{Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Multi\+Domain\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: call the underlying constructors. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a4e583d2145c56f10d26fdc8527128b54}{get\+\_\+base\+\_\+flow\+\_\+u}} (const double \&time, const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) const
+\begin{DoxyCompactList}\small\item\em Overload get\+\_\+base\+\_\+flow\+\_\+u(...) to return the external element\textquotesingle{}s velocity components at the integration point. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a88bdf14ec298be7083e97d0312d7e968}{get\+\_\+base\+\_\+flow\+\_\+dudx}} (const double \&time, const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&result) const
+\begin{DoxyCompactList}\small\item\em Overload get\+\_\+base\+\_\+flow\+\_\+dudx(...) to return the derivatives of the external element\textquotesingle{}s velocity components w.\+r.\+t. global coordinates at the integration point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_adc20fbe7a713cb4b1d80c750698416ed}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual vector and the Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Build a Linearised\+Axisymmetric\+Q\+Taylor\+Hood element that inherits from Element\+With\+External\+Element so that it can \char`\"{}communicate\char`\"{} with an axisymmetric Navier-\/\+Stokes element that provides the base flow velocities and their derivatives w.\+r.\+t. global coordinates (r and z) 
+
+Definition at line 53 of file multi\+\_\+domain\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a8701f82f9da337ea29066af244c8922f}\label{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a8701f82f9da337ea29066af244c8922f}} 
+\index{LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}!LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}}
+\index{LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}!LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}}
+\doxysubsubsection{\texorpdfstring{LinearisedAxisymmetricQTaylorHoodMultiDomainElement()}{LinearisedAxisymmetricQTaylorHoodMultiDomainElement()}}
+{\footnotesize\ttfamily Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Multi\+Domain\+Element\+::\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Multi\+Domain\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: call the underlying constructors. 
+
+Do not include any external geometric data when computing the element\textquotesingle{}s Jacobian.
+
+Definition at line 60 of file multi\+\_\+domain\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Element\+With\+External\+Element\+::ignore\+\_\+external\+\_\+geometric\+\_\+data(), and oomph\+::\+Element\+With\+External\+Element\+::ignore\+\_\+external\+\_\+interaction\+\_\+data().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_adc20fbe7a713cb4b1d80c750698416ed}\label{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_adc20fbe7a713cb4b1d80c750698416ed}} 
+\index{LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily void Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Multi\+Domain\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute the element\textquotesingle{}s residual vector and the Jacobian matrix. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae5fb09552a8271e891438f8d058ca1b8}{oomph\+::\+Element\+With\+External\+Element}}.
+
+
+
+Definition at line 151 of file multi\+\_\+domain\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and residuals().
+
+\mbox{\Hypertarget{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a88bdf14ec298be7083e97d0312d7e968}\label{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a88bdf14ec298be7083e97d0312d7e968}} 
+\index{LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}!get\_base\_flow\_dudx@{get\_base\_flow\_dudx}}
+\index{get\_base\_flow\_dudx@{get\_base\_flow\_dudx}!LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}}
+\doxysubsubsection{\texorpdfstring{get\_base\_flow\_dudx()}{get\_base\_flow\_dudx()}}
+{\footnotesize\ttfamily virtual void Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload get\+\_\+base\+\_\+flow\+\_\+dudx(...) to return the derivatives of the external element\textquotesingle{}s velocity components w.\+r.\+t. global coordinates at the integration point. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_aa3924125dde70779c180b84408271422}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 112 of file multi\+\_\+domain\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, and oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+dudx\+\_\+axi\+\_\+nst().
+
+\mbox{\Hypertarget{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a4e583d2145c56f10d26fdc8527128b54}\label{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a4e583d2145c56f10d26fdc8527128b54}} 
+\index{LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}!get\_base\_flow\_u@{get\_base\_flow\_u}}
+\index{get\_base\_flow\_u@{get\_base\_flow\_u}!LinearisedAxisymmetricQTaylorHoodMultiDomainElement@{LinearisedAxisymmetricQTaylorHoodMultiDomainElement}}
+\doxysubsubsection{\texorpdfstring{get\_base\_flow\_u()}{get\_base\_flow\_u()}}
+{\footnotesize\ttfamily virtual void Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload get\+\_\+base\+\_\+flow\+\_\+u(...) to return the external element\textquotesingle{}s velocity components at the integration point. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_a74c8399c96e4870f831dcc01986a72cd}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 79 of file multi\+\_\+domain\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, and oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+axi\+\_\+nst().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h}{multi\+\_\+domain\+\_\+linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}\end{DoxyCompactItemize}

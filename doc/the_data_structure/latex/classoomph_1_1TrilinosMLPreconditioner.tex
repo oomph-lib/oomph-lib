@@ -1,0 +1,387 @@
+\hypertarget{classoomph_1_1TrilinosMLPreconditioner}{}\doxysection{oomph\+::Trilinos\+M\+L\+Preconditioner Class Reference}
+\label{classoomph_1_1TrilinosMLPreconditioner}\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+
+
+An interface to the Trilinos ML class -\/ provides a function to construct a serial ML object, and functions to modify some of the ML paramaters.  
+
+
+
+
+{\ttfamily \#include $<$trilinos\+\_\+preconditioners.\+h$>$}
+
+Inheritance diagram for oomph\+::Trilinos\+M\+L\+Preconditioner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1TrilinosMLPreconditioner}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_a98c9e7ce547973570a53b138912ea20a}{Trilinos\+M\+L\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. Build with Smooth Aggretation (SA) default settings, but our own default number of V cycles (initialised to 1 to replicate Trilinos\+ML\textquotesingle{}s own behaviour). \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_a230cf9de1fd411e617d84e32359e8713}{$\sim$\+Trilinos\+M\+L\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor empty -- clean up is done in base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_a2138392fdc682b540eb00ba346f6dcf1}{Trilinos\+M\+L\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner}{Trilinos\+M\+L\+Preconditioner}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_aa52463ce0cef9095c44dfaa08afd53bd}{set\+\_\+\+N\+S\+S\+A\+\_\+default\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_aeb180c16b994e172649e7bafd1818bcb}{set\+\_\+\+D\+D\+\_\+default\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Set control flags to values for classical smoothed aggregation-\/ based 2-\/level domain decomposition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_ac34c8a71081f1d7b50e478d541939e2c}{set\+\_\+\+D\+D\+M\+L\+\_\+default\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Set control flags to values 3-\/level algebraic domain decomposition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_ae5eae67f55f43c4b5be04635e5c844af}{set\+\_\+\+S\+A\+\_\+default\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Set control flags to values for classical smoothed aggregation preconditioning. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_a1f3c1aa0c8397df016e9eca960b51708}{set\+\_\+max\+\_\+levels}} (int max\+\_\+levels)
+\begin{DoxyCompactList}\small\item\em Function to set maximum number of levels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_a4124512fc8fe6295243b563995f2a53e}{set\+\_\+n\+\_\+cycles}} (int n\+\_\+cycles)
+\begin{DoxyCompactList}\small\item\em Function to set the number of cycles used. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_ad50d31b7fba64341e5b6000ee92663cc}{set\+\_\+smoother\+\_\+damping}} (double smoother\+\_\+damping)
+\begin{DoxyCompactList}\small\item\em Function to set Smoother\+\_\+damping. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_a1479a57d840c6a3474de020bd0ed81ad}{set\+\_\+smoother\+\_\+sweeps}} (int smoother\+\_\+sweeps)
+\begin{DoxyCompactList}\small\item\em Function to set Smoother\+\_\+sweeps. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_af3bf505781afe83648c6204064803265}{set\+\_\+smoother\+\_\+jacobi}} ()
+\begin{DoxyCompactList}\small\item\em Function to set smoother type to \char`\"{}\+Jacobi\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_a1482ae05644babd794e5a5079708ed79}{set\+\_\+smoother\+\_\+gauss\+\_\+seidel}} ()
+\begin{DoxyCompactList}\small\item\em Function to set smoother type to \char`\"{}symmetric Gauss-\/\+Seidel\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_ae368c529ccddfe884ff0dd7a00401602}{set\+\_\+output}} (int \mbox{\hyperlink{namespaceoomph_a2473930e2634d673e2a3bed63b6851f0}{output}})
+\begin{DoxyCompactList}\small\item\em Function to set output -\/ controls level of information output by ML. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_a638b49c98a6afa2a4133038b42d6dea7}{Default\+\_\+n\+\_\+cycles}} =1
+\begin{DoxyCompactList}\small\item\em Default number of V cycles (one to be consistent with previous default) (It\textquotesingle{}s an int because Trilinos wants it to be!) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_af3042313db1f0a5565bcd33ef36d2c6a}{setup\+\_\+trilinos\+\_\+preconditioner}} (Epetra\+\_\+\+Crs\+Matrix $\ast$epetra\+\_\+matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Function to set up the ML preconditioner. It is assumed Trilinos\+\_\+matrix\+\_\+pt points to a suitable matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Teuchos\+::\+Parameter\+List \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_aa324e487780da0351288965209253e74}{M\+L\+\_\+parameters}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An interface to the Trilinos ML class -\/ provides a function to construct a serial ML object, and functions to modify some of the ML paramaters. 
+
+Definition at line 161 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_a98c9e7ce547973570a53b138912ea20a}\label{classoomph_1_1TrilinosMLPreconditioner_a98c9e7ce547973570a53b138912ea20a}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!TrilinosMLPreconditioner@{TrilinosMLPreconditioner}}
+\index{TrilinosMLPreconditioner@{TrilinosMLPreconditioner}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{TrilinosMLPreconditioner()}{TrilinosMLPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::\+Trilinos\+M\+L\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Build with Smooth Aggretation (SA) default settings, but our own default number of V cycles (initialised to 1 to replicate Trilinos\+ML\textquotesingle{}s own behaviour). 
+
+
+
+Definition at line 168 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References Default\+\_\+n\+\_\+cycles, and M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_a230cf9de1fd411e617d84e32359e8713}\label{classoomph_1_1TrilinosMLPreconditioner_a230cf9de1fd411e617d84e32359e8713}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!````~TrilinosMLPreconditioner@{$\sim$TrilinosMLPreconditioner}}
+\index{````~TrilinosMLPreconditioner@{$\sim$TrilinosMLPreconditioner}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{$\sim$TrilinosMLPreconditioner()}{~TrilinosMLPreconditioner()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::$\sim$\+Trilinos\+M\+L\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor empty -- clean up is done in base class. 
+
+
+
+Definition at line 178 of file trilinos\+\_\+preconditioners.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_a2138392fdc682b540eb00ba346f6dcf1}\label{classoomph_1_1TrilinosMLPreconditioner_a2138392fdc682b540eb00ba346f6dcf1}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!TrilinosMLPreconditioner@{TrilinosMLPreconditioner}}
+\index{TrilinosMLPreconditioner@{TrilinosMLPreconditioner}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{TrilinosMLPreconditioner()}{TrilinosMLPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::\+Trilinos\+M\+L\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner}{Trilinos\+M\+L\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 181 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_aeb180c16b994e172649e7bafd1818bcb}\label{classoomph_1_1TrilinosMLPreconditioner_aeb180c16b994e172649e7bafd1818bcb}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_DD\_default\_values@{set\_DD\_default\_values}}
+\index{set\_DD\_default\_values@{set\_DD\_default\_values}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_DD\_default\_values()}{set\_DD\_default\_values()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+\+D\+D\+\_\+default\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set control flags to values for classical smoothed aggregation-\/ based 2-\/level domain decomposition. 
+
+
+
+Definition at line 202 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_ac34c8a71081f1d7b50e478d541939e2c}\label{classoomph_1_1TrilinosMLPreconditioner_ac34c8a71081f1d7b50e478d541939e2c}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_DDML\_default\_values@{set\_DDML\_default\_values}}
+\index{set\_DDML\_default\_values@{set\_DDML\_default\_values}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_DDML\_default\_values()}{set\_DDML\_default\_values()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+\+D\+D\+M\+L\+\_\+default\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set control flags to values 3-\/level algebraic domain decomposition. 
+
+
+
+Definition at line 209 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_a1f3c1aa0c8397df016e9eca960b51708}\label{classoomph_1_1TrilinosMLPreconditioner_a1f3c1aa0c8397df016e9eca960b51708}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_max\_levels@{set\_max\_levels}}
+\index{set\_max\_levels@{set\_max\_levels}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_max\_levels()}{set\_max\_levels()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+max\+\_\+levels (\begin{DoxyParamCaption}\item[{int}]{max\+\_\+levels }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set maximum number of levels. 
+
+
+
+Definition at line 222 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_a4124512fc8fe6295243b563995f2a53e}\label{classoomph_1_1TrilinosMLPreconditioner_a4124512fc8fe6295243b563995f2a53e}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_n\_cycles@{set\_n\_cycles}}
+\index{set\_n\_cycles@{set\_n\_cycles}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_n\_cycles()}{set\_n\_cycles()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+n\+\_\+cycles (\begin{DoxyParamCaption}\item[{int}]{n\+\_\+cycles }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set the number of cycles used. 
+
+
+
+Definition at line 228 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_aa52463ce0cef9095c44dfaa08afd53bd}\label{classoomph_1_1TrilinosMLPreconditioner_aa52463ce0cef9095c44dfaa08afd53bd}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_NSSA\_default\_values@{set\_NSSA\_default\_values}}
+\index{set\_NSSA\_default\_values@{set\_NSSA\_default\_values}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_NSSA\_default\_values()}{set\_NSSA\_default\_values()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+\+N\+S\+S\+A\+\_\+default\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Set control flags to values for Petrov-\/\+Galerkin preconditioning -\/ for non symmetric systems 
+
+Definition at line 194 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_ae368c529ccddfe884ff0dd7a00401602}\label{classoomph_1_1TrilinosMLPreconditioner_ae368c529ccddfe884ff0dd7a00401602}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_output@{set\_output}}
+\index{set\_output@{set\_output}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_output()}{set\_output()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+output (\begin{DoxyParamCaption}\item[{int}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set output -\/ controls level of information output by ML. 
+
+
+
+Definition at line 258 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters, and oomph\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_ae5eae67f55f43c4b5be04635e5c844af}\label{classoomph_1_1TrilinosMLPreconditioner_ae5eae67f55f43c4b5be04635e5c844af}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_SA\_default\_values@{set\_SA\_default\_values}}
+\index{set\_SA\_default\_values@{set\_SA\_default\_values}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_SA\_default\_values()}{set\_SA\_default\_values()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+\+S\+A\+\_\+default\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set control flags to values for classical smoothed aggregation preconditioning. 
+
+
+
+Definition at line 216 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_ad50d31b7fba64341e5b6000ee92663cc}\label{classoomph_1_1TrilinosMLPreconditioner_ad50d31b7fba64341e5b6000ee92663cc}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_smoother\_damping@{set\_smoother\_damping}}
+\index{set\_smoother\_damping@{set\_smoother\_damping}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_smoother\_damping()}{set\_smoother\_damping()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+smoother\+\_\+damping (\begin{DoxyParamCaption}\item[{double}]{smoother\+\_\+damping }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set Smoother\+\_\+damping. 
+
+
+
+Definition at line 234 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_a1482ae05644babd794e5a5079708ed79}\label{classoomph_1_1TrilinosMLPreconditioner_a1482ae05644babd794e5a5079708ed79}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_smoother\_gauss\_seidel@{set\_smoother\_gauss\_seidel}}
+\index{set\_smoother\_gauss\_seidel@{set\_smoother\_gauss\_seidel}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_smoother\_gauss\_seidel()}{set\_smoother\_gauss\_seidel()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+smoother\+\_\+gauss\+\_\+seidel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set smoother type to \char`\"{}symmetric Gauss-\/\+Seidel\char`\"{}. 
+
+
+
+Definition at line 252 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_af3bf505781afe83648c6204064803265}\label{classoomph_1_1TrilinosMLPreconditioner_af3bf505781afe83648c6204064803265}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_smoother\_jacobi@{set\_smoother\_jacobi}}
+\index{set\_smoother\_jacobi@{set\_smoother\_jacobi}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_smoother\_jacobi()}{set\_smoother\_jacobi()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+smoother\+\_\+jacobi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set smoother type to \char`\"{}\+Jacobi\char`\"{}. 
+
+
+
+Definition at line 246 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_a1479a57d840c6a3474de020bd0ed81ad}\label{classoomph_1_1TrilinosMLPreconditioner_a1479a57d840c6a3474de020bd0ed81ad}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!set\_smoother\_sweeps@{set\_smoother\_sweeps}}
+\index{set\_smoother\_sweeps@{set\_smoother\_sweeps}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_smoother\_sweeps()}{set\_smoother\_sweeps()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::set\+\_\+smoother\+\_\+sweeps (\begin{DoxyParamCaption}\item[{int}]{smoother\+\_\+sweeps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set Smoother\+\_\+sweeps. 
+
+
+
+Definition at line 240 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+References M\+L\+\_\+parameters.
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_af3042313db1f0a5565bcd33ef36d2c6a}\label{classoomph_1_1TrilinosMLPreconditioner_af3042313db1f0a5565bcd33ef36d2c6a}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!setup\_trilinos\_preconditioner@{setup\_trilinos\_preconditioner}}
+\index{setup\_trilinos\_preconditioner@{setup\_trilinos\_preconditioner}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup\_trilinos\_preconditioner()}{setup\_trilinos\_preconditioner()}}
+{\footnotesize\ttfamily void oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::setup\+\_\+trilinos\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{Epetra\+\_\+\+Crs\+Matrix $\ast$}]{epetra\+\_\+matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Function to set up the ML preconditioner. It is assumed Trilinos\+\_\+matrix\+\_\+pt points to a suitable matrix. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_aeb2b1cee61617fd68a8beb911ddc4a62}{oomph\+::\+Trilinos\+Preconditioner\+Base}}.
+
+
+
+Definition at line 205 of file trilinos\+\_\+preconditioners.\+cc.
+
+
+
+References oomph\+::\+Trilinos\+Preconditioner\+Base\+::\+Epetra\+\_\+preconditioner\+\_\+pt, M\+L\+\_\+parameters, oomph\+::oomph\+\_\+info, and oomph\+::\+Timing\+Helpers\+::timer().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_a638b49c98a6afa2a4133038b42d6dea7}\label{classoomph_1_1TrilinosMLPreconditioner_a638b49c98a6afa2a4133038b42d6dea7}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!Default\_n\_cycles@{Default\_n\_cycles}}
+\index{Default\_n\_cycles@{Default\_n\_cycles}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Default\_n\_cycles}{Default\_n\_cycles}}
+{\footnotesize\ttfamily int oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::\+Default\+\_\+n\+\_\+cycles =1\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Default number of V cycles (one to be consistent with previous default) (It\textquotesingle{}s an int because Trilinos wants it to be!) 
+
+(Static) default number of V cycles (one to be consistent with previous default). (It\textquotesingle{}s an int because Trilinos wants it to be!) 
+
+Definition at line 266 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+Referenced by Trilinos\+M\+L\+Preconditioner().
+
+\mbox{\Hypertarget{classoomph_1_1TrilinosMLPreconditioner_aa324e487780da0351288965209253e74}\label{classoomph_1_1TrilinosMLPreconditioner_aa324e487780da0351288965209253e74}} 
+\index{oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}!ML\_parameters@{ML\_parameters}}
+\index{ML\_parameters@{ML\_parameters}!oomph::TrilinosMLPreconditioner@{oomph::TrilinosMLPreconditioner}}
+\doxysubsubsection{\texorpdfstring{ML\_parameters}{ML\_parameters}}
+{\footnotesize\ttfamily Teuchos\+::\+Parameter\+List oomph\+::\+Trilinos\+M\+L\+Preconditioner\+::\+M\+L\+\_\+parameters\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 275 of file trilinos\+\_\+preconditioners.\+h.
+
+
+
+Referenced by set\+\_\+\+D\+D\+\_\+default\+\_\+values(), set\+\_\+\+D\+D\+M\+L\+\_\+default\+\_\+values(), set\+\_\+max\+\_\+levels(), set\+\_\+n\+\_\+cycles(), set\+\_\+\+N\+S\+S\+A\+\_\+default\+\_\+values(), set\+\_\+output(), set\+\_\+\+S\+A\+\_\+default\+\_\+values(), set\+\_\+smoother\+\_\+damping(), set\+\_\+smoother\+\_\+gauss\+\_\+seidel(), set\+\_\+smoother\+\_\+jacobi(), set\+\_\+smoother\+\_\+sweeps(), setup\+\_\+trilinos\+\_\+preconditioner(), and Trilinos\+M\+L\+Preconditioner().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{trilinos__preconditioners_8h}{trilinos\+\_\+preconditioners.\+h}}\item 
+\mbox{\hyperlink{trilinos__preconditioners_8cc}{trilinos\+\_\+preconditioners.\+cc}}\end{DoxyCompactItemize}

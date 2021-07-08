@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::CommandLineArgs Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html">CommandLineArgs</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::CommandLineArgs Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace for command line arguments.  
+<a href="namespaceoomph_1_1CommandLineArgs.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure to store information on a command line argument.  <a href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a02666c3d933af7c70da94bb0e87ebeb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a02666c3d933af7c70da94bb0e87ebeb0">setup</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a02666c3d933af7c70da94bb0e87ebeb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set values.  <a href="namespaceoomph_1_1CommandLineArgs.html#a02666c3d933af7c70da94bb0e87ebeb0">More...</a><br /></td></tr>
+<tr class="separator:a02666c3d933af7c70da94bb0e87ebeb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca07d359a96b9c7b566142112604ea87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#aca07d359a96b9c7b566142112604ea87">output</a> ()</td></tr>
+<tr class="memdesc:aca07d359a96b9c7b566142112604ea87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the command line arguments.  <a href="namespaceoomph_1_1CommandLineArgs.html#aca07d359a96b9c7b566142112604ea87">More...</a><br /></td></tr>
+<tr class="separator:aca07d359a96b9c7b566142112604ea87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b0153b45b4b4e026b2fe767194d8088"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a4b0153b45b4b4e026b2fe767194d8088">specify_command_line_flag</a> (const std::string &amp;command_line_flag, const std::string &amp;doc)</td></tr>
+<tr class="memdesc:a4b0153b45b4b4e026b2fe767194d8088"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify possible argument-free command line flag.  <a href="namespaceoomph_1_1CommandLineArgs.html#a4b0153b45b4b4e026b2fe767194d8088">More...</a><br /></td></tr>
+<tr class="separator:a4b0153b45b4b4e026b2fe767194d8088"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ddbea55361272d5b057bd76ca9550f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a1ddbea55361272d5b057bd76ca9550f0">specify_command_line_flag</a> (const std::string &amp;command_line_flag, double *arg_pt, const std::string &amp;doc)</td></tr>
+<tr class="memdesc:a1ddbea55361272d5b057bd76ca9550f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify possible command line flag that specifies a double, accessed via pointer.  <a href="namespaceoomph_1_1CommandLineArgs.html#a1ddbea55361272d5b057bd76ca9550f0">More...</a><br /></td></tr>
+<tr class="separator:a1ddbea55361272d5b057bd76ca9550f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f5c63f51f006503cf75dd6fccaf971c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a4f5c63f51f006503cf75dd6fccaf971c">specify_command_line_flag</a> (const std::string &amp;command_line_flag, int *arg_pt, const std::string &amp;doc)</td></tr>
+<tr class="memdesc:a4f5c63f51f006503cf75dd6fccaf971c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify possible command line flag that specifies an int, accessed via pointer.  <a href="namespaceoomph_1_1CommandLineArgs.html#a4f5c63f51f006503cf75dd6fccaf971c">More...</a><br /></td></tr>
+<tr class="separator:a4f5c63f51f006503cf75dd6fccaf971c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5aa20da06e63203c96ae8c78928d405"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#aa5aa20da06e63203c96ae8c78928d405">specify_command_line_flag</a> (const std::string &amp;command_line_flag, unsigned *arg_pt, const std::string &amp;doc)</td></tr>
+<tr class="memdesc:aa5aa20da06e63203c96ae8c78928d405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify possible command line flag that specifies an unsigned, accessed via pointer.  <a href="namespaceoomph_1_1CommandLineArgs.html#aa5aa20da06e63203c96ae8c78928d405">More...</a><br /></td></tr>
+<tr class="separator:aa5aa20da06e63203c96ae8c78928d405"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5204d492af173835b5f178dcf1fffca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#aa5204d492af173835b5f178dcf1fffca">specify_command_line_flag</a> (const std::string &amp;command_line_flag, std::string *arg_pt, const std::string &amp;doc)</td></tr>
+<tr class="memdesc:aa5204d492af173835b5f178dcf1fffca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify possible command line flag that specifies a string, accessed via pointer.  <a href="namespaceoomph_1_1CommandLineArgs.html#aa5204d492af173835b5f178dcf1fffca">More...</a><br /></td></tr>
+<tr class="separator:aa5204d492af173835b5f178dcf1fffca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4127f6d5354aa20af7e5ff55c14a4419"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a4127f6d5354aa20af7e5ff55c14a4419">command_line_flag_has_been_set</a> (const std::string &amp;flag)</td></tr>
+<tr class="memdesc:a4127f6d5354aa20af7e5ff55c14a4419"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if command line flag has been set (value will have been assigned directly).  <a href="namespaceoomph_1_1CommandLineArgs.html#a4127f6d5354aa20af7e5ff55c14a4419">More...</a><br /></td></tr>
+<tr class="separator:a4127f6d5354aa20af7e5ff55c14a4419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b126e4b3314fd7971ed876b89fc0d94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a5b126e4b3314fd7971ed876b89fc0d94">doc_all_flags</a> (std::ostream &amp;outstream)</td></tr>
+<tr class="memdesc:a5b126e4b3314fd7971ed876b89fc0d94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Document the values of all flags (specified or not).  <a href="namespaceoomph_1_1CommandLineArgs.html#a5b126e4b3314fd7971ed876b89fc0d94">More...</a><br /></td></tr>
+<tr class="separator:a5b126e4b3314fd7971ed876b89fc0d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1a5dba4897b1fa9e9860e457079d988"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#af1a5dba4897b1fa9e9860e457079d988">doc_specified_flags</a> ()</td></tr>
+<tr class="memdesc:af1a5dba4897b1fa9e9860e457079d988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Document specified command line flags.  <a href="namespaceoomph_1_1CommandLineArgs.html#af1a5dba4897b1fa9e9860e457079d988">More...</a><br /></td></tr>
+<tr class="separator:af1a5dba4897b1fa9e9860e457079d988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17dcadc5a258d8ea6e72c5527961a6eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a17dcadc5a258d8ea6e72c5527961a6eb">doc_available_flags</a> ()</td></tr>
+<tr class="memdesc:a17dcadc5a258d8ea6e72c5527961a6eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Document available command line flags.  <a href="namespaceoomph_1_1CommandLineArgs.html#a17dcadc5a258d8ea6e72c5527961a6eb">More...</a><br /></td></tr>
+<tr class="separator:a17dcadc5a258d8ea6e72c5527961a6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f5296cb47ecd076ecb7467d58c38084"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a4f5296cb47ecd076ecb7467d58c38084">check_arg_index</a> (const int &amp;argc, const int &amp;arg_index)</td></tr>
+<tr class="memdesc:a4f5296cb47ecd076ecb7467d58c38084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to check if command line index is legal.  <a href="namespaceoomph_1_1CommandLineArgs.html#a4f5296cb47ecd076ecb7467d58c38084">More...</a><br /></td></tr>
+<tr class="separator:a4f5296cb47ecd076ecb7467d58c38084"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fee7d9c4bee7cec9121075c1a0dc341"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a8fee7d9c4bee7cec9121075c1a0dc341">parse_and_assign</a> (int argc, char *argv[], const bool &amp;throw_on_unrecognised_args)</td></tr>
+<tr class="memdesc:a8fee7d9c4bee7cec9121075c1a0dc341"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse command line, check for recognised flags and assign associated values.  <a href="namespaceoomph_1_1CommandLineArgs.html#a8fee7d9c4bee7cec9121075c1a0dc341">More...</a><br /></td></tr>
+<tr class="separator:a8fee7d9c4bee7cec9121075c1a0dc341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a541bf74c755c9d3f885d075151367e95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a541bf74c755c9d3f885d075151367e95">parse_and_assign</a> (const bool &amp;throw_on_unrecognised_args)</td></tr>
+<tr class="memdesc:a541bf74c755c9d3f885d075151367e95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse previously specified command line, check for recognised flags and assign associated values.  <a href="namespaceoomph_1_1CommandLineArgs.html#a541bf74c755c9d3f885d075151367e95">More...</a><br /></td></tr>
+<tr class="separator:a541bf74c755c9d3f885d075151367e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab0f9a1024bd371139a86ee7db3ddfe83"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#ab0f9a1024bd371139a86ee7db3ddfe83">Argc</a></td></tr>
+<tr class="memdesc:ab0f9a1024bd371139a86ee7db3ddfe83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of arguments + 1.  <a href="namespaceoomph_1_1CommandLineArgs.html#ab0f9a1024bd371139a86ee7db3ddfe83">More...</a><br /></td></tr>
+<tr class="separator:ab0f9a1024bd371139a86ee7db3ddfe83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b51290f4dc7018bba2e46bfc6f8bedc"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a3b51290f4dc7018bba2e46bfc6f8bedc">Argv</a></td></tr>
+<tr class="memdesc:a3b51290f4dc7018bba2e46bfc6f8bedc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arguments themselves.  <a href="namespaceoomph_1_1CommandLineArgs.html#a3b51290f4dc7018bba2e46bfc6f8bedc">More...</a><br /></td></tr>
+<tr class="separator:a3b51290f4dc7018bba2e46bfc6f8bedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26248b14a69e0839c647c5c9540a09b3"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; bool &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a26248b14a69e0839c647c5c9540a09b3">Specified_command_line_flag</a></td></tr>
+<tr class="memdesc:a26248b14a69e0839c647c5c9540a09b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map to indicate an input flag as having been set.  <a href="namespaceoomph_1_1CommandLineArgs.html#a26248b14a69e0839c647c5c9540a09b3">More...</a><br /></td></tr>
+<tr class="separator:a26248b14a69e0839c647c5c9540a09b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4decec3dde9efd1b7e2e447fe656f41"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#aa4decec3dde9efd1b7e2e447fe656f41">Specified_command_line_double_pt</a></td></tr>
+<tr class="memdesc:aa4decec3dde9efd1b7e2e447fe656f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map to associate an input flag with a double &ndash; specified via pointer.  <a href="namespaceoomph_1_1CommandLineArgs.html#aa4decec3dde9efd1b7e2e447fe656f41">More...</a><br /></td></tr>
+<tr class="separator:aa4decec3dde9efd1b7e2e447fe656f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a872a9f3ad510078d12dc24f19dd54f88"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a872a9f3ad510078d12dc24f19dd54f88">Specified_command_line_int_pt</a></td></tr>
+<tr class="memdesc:a872a9f3ad510078d12dc24f19dd54f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map to associate an input flag with an int &ndash; specified via pointer.  <a href="namespaceoomph_1_1CommandLineArgs.html#a872a9f3ad510078d12dc24f19dd54f88">More...</a><br /></td></tr>
+<tr class="separator:a872a9f3ad510078d12dc24f19dd54f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae489c2891e5e891242ed788b2a64d477"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#ae489c2891e5e891242ed788b2a64d477">Specified_command_line_unsigned_pt</a></td></tr>
+<tr class="memdesc:ae489c2891e5e891242ed788b2a64d477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map to associate an input flag with an unsigned &ndash; specified via pointer.  <a href="namespaceoomph_1_1CommandLineArgs.html#ae489c2891e5e891242ed788b2a64d477">More...</a><br /></td></tr>
+<tr class="separator:ae489c2891e5e891242ed788b2a64d477"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6801e3bd896891e4c5b40399c56df332"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CommandLineArgs.html#a6801e3bd896891e4c5b40399c56df332">Specified_command_line_string_pt</a></td></tr>
+<tr class="memdesc:a6801e3bd896891e4c5b40399c56df332"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map to associate an input flag with a string &ndash; specified via pointer.  <a href="namespaceoomph_1_1CommandLineArgs.html#a6801e3bd896891e4c5b40399c56df332">More...</a><br /></td></tr>
+<tr class="separator:a6801e3bd896891e4c5b40399c56df332"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace for command line arguments. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a4f5296cb47ecd076ecb7467d58c38084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f5296cb47ecd076ecb7467d58c38084">&#9670;&nbsp;</a></span>check_arg_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::check_arg_index </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>arg_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to check if command line index is legal. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01068">1068</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01011">doc_available_flags()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00774">output()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01093">parse_and_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a4127f6d5354aa20af7e5ff55c14a4419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4127f6d5354aa20af7e5ff55c14a4419">&#9670;&nbsp;</a></span>command_line_flag_has_been_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::CommandLineArgs::command_line_flag_has_been_set </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if command line flag has been set (value will have been assigned directly). </p>
+<p>Check if specified flag has been set (the associated value will have been assigned directly) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00839">839</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00752">Specified_command_line_double_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00748">Specified_command_line_flag</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00756">Specified_command_line_int_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00764">Specified_command_line_string_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00760">Specified_command_line_unsigned_pt</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+
+</div>
+</div>
+<a id="a5b126e4b3314fd7971ed876b89fc0d94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b126e4b3314fd7971ed876b89fc0d94">&#9670;&nbsp;</a></span>doc_all_flags()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::doc_all_flags </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outstream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Document the values of all flags (specified or not). </p>
+<p>Document the values of all flags (specified or not) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00895">895</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00752">Specified_command_line_double_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00748">Specified_command_line_flag</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00756">Specified_command_line_int_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00764">Specified_command_line_string_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00760">Specified_command_line_unsigned_pt</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+
+</div>
+</div>
+<a id="a17dcadc5a258d8ea6e72c5527961a6eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17dcadc5a258d8ea6e72c5527961a6eb">&#9670;&nbsp;</a></span>doc_available_flags()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::doc_available_flags </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Document available command line flags. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01011">1011</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00752">Specified_command_line_double_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00748">Specified_command_line_flag</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00756">Specified_command_line_int_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00764">Specified_command_line_string_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00760">Specified_command_line_unsigned_pt</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01068">check_arg_index()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01093">parse_and_assign()</a>.</p>
+
+</div>
+</div>
+<a id="af1a5dba4897b1fa9e9860e457079d988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1a5dba4897b1fa9e9860e457079d988">&#9670;&nbsp;</a></span>doc_specified_flags()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::doc_specified_flags </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Document specified command line flags. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00942">942</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00752">Specified_command_line_double_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00748">Specified_command_line_flag</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00756">Specified_command_line_int_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00764">Specified_command_line_string_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00760">Specified_command_line_unsigned_pt</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+
+</div>
+</div>
+<a id="aca07d359a96b9c7b566142112604ea87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca07d359a96b9c7b566142112604ea87">&#9670;&nbsp;</a></span>output()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::output </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the command line arguments. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00774">774</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00742">Argc</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00745">Argv</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01068">check_arg_index()</a>.</p>
+
+</div>
+</div>
+<a id="a541bf74c755c9d3f885d075151367e95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a541bf74c755c9d3f885d075151367e95">&#9670;&nbsp;</a></span>parse_and_assign() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::parse_and_assign </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>throw_on_unrecognised_args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse previously specified command line, check for recognised flags and assign associated values. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01266">1266</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00742">Argc</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00745">Argv</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01093">parse_and_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a8fee7d9c4bee7cec9121075c1a0dc341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fee7d9c4bee7cec9121075c1a0dc341">&#9670;&nbsp;</a></span>parse_and_assign() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::parse_and_assign </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>argv</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>throw_on_unrecognised_args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse command line, check for recognised flags and assign associated values. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01093">1093</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01068">check_arg_index()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01011">doc_available_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01361">oomph::MPI_Helpers::finalize()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00752">Specified_command_line_double_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00748">Specified_command_line_flag</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00756">Specified_command_line_int_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00764">Specified_command_line_string_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00760">Specified_command_line_unsigned_pt</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01266">parse_and_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a02666c3d933af7c70da94bb0e87ebeb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02666c3d933af7c70da94bb0e87ebeb0">&#9670;&nbsp;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::setup </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set values. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00767">767</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00742">Argc</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00745">Argv</a>.</p>
+
+</div>
+</div>
+<a id="a4b0153b45b4b4e026b2fe767194d8088"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b0153b45b4b4e026b2fe767194d8088">&#9670;&nbsp;</a></span>specify_command_line_flag() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::specify_command_line_flag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>command_line_flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>doc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Specify possible argument-free command line flag. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00789">789</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01547">oomph::LeakCheckNames::doc()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00748">Specified_command_line_flag</a>.</p>
+
+</div>
+</div>
+<a id="a1ddbea55361272d5b057bd76ca9550f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ddbea55361272d5b057bd76ca9550f0">&#9670;&nbsp;</a></span>specify_command_line_flag() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::specify_command_line_flag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>command_line_flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>arg_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>doc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Specify possible command line flag that specifies a double, accessed via pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00798">798</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01547">oomph::LeakCheckNames::doc()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00752">Specified_command_line_double_pt</a>.</p>
+
+</div>
+</div>
+<a id="a4f5c63f51f006503cf75dd6fccaf971c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f5c63f51f006503cf75dd6fccaf971c">&#9670;&nbsp;</a></span>specify_command_line_flag() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::specify_command_line_flag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>command_line_flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>arg_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>doc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Specify possible command line flag that specifies an int, accessed via pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00808">808</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01547">oomph::LeakCheckNames::doc()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00756">Specified_command_line_int_pt</a>.</p>
+
+</div>
+</div>
+<a id="aa5204d492af173835b5f178dcf1fffca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5204d492af173835b5f178dcf1fffca">&#9670;&nbsp;</a></span>specify_command_line_flag() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::specify_command_line_flag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>command_line_flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string *&#160;</td>
+          <td class="paramname"><em>arg_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>doc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Specify possible command line flag that specifies a string, accessed via pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00828">828</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01547">oomph::LeakCheckNames::doc()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00764">Specified_command_line_string_pt</a>.</p>
+
+</div>
+</div>
+<a id="aa5aa20da06e63203c96ae8c78928d405"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5aa20da06e63203c96ae8c78928d405">&#9670;&nbsp;</a></span>specify_command_line_flag() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CommandLineArgs::specify_command_line_flag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>command_line_flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned *&#160;</td>
+          <td class="paramname"><em>arg_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>doc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Specify possible command line flag that specifies an unsigned, accessed via pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00818">818</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01547">oomph::LeakCheckNames::doc()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00760">Specified_command_line_unsigned_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ab0f9a1024bd371139a86ee7db3ddfe83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0f9a1024bd371139a86ee7db3ddfe83">&#9670;&nbsp;</a></span>Argc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::CommandLineArgs::Argc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of arguments + 1. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00742">742</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00774">output()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01266">parse_and_assign()</a>, <a class="el" href="stacktrace_8h_source.html#l00047">print_stacktrace()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00767">setup()</a>.</p>
+
+</div>
+</div>
+<a id="a3b51290f4dc7018bba2e46bfc6f8bedc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b51290f4dc7018bba2e46bfc6f8bedc">&#9670;&nbsp;</a></span>Argv</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char ** oomph::CommandLineArgs::Argv</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Arguments themselves. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00745">745</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00774">output()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01266">parse_and_assign()</a>, <a class="el" href="stacktrace_8h_source.html#l00047">print_stacktrace()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00767">setup()</a>.</p>
+
+</div>
+</div>
+<a id="aa4decec3dde9efd1b7e2e447fe656f41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4decec3dde9efd1b7e2e447fe656f41">&#9670;&nbsp;</a></span>Specified_command_line_double_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; double &gt; &gt; oomph::CommandLineArgs::Specified_command_line_double_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Map to associate an input flag with a double &ndash; specified via pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00752">752</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00839">command_line_flag_has_been_set()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00895">doc_all_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01011">doc_available_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00942">doc_specified_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01093">parse_and_assign()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00798">specify_command_line_flag()</a>.</p>
+
+</div>
+</div>
+<a id="a26248b14a69e0839c647c5c9540a09b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26248b14a69e0839c647c5c9540a09b3">&#9670;&nbsp;</a></span>Specified_command_line_flag</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; bool &gt; &gt; oomph::CommandLineArgs::Specified_command_line_flag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Map to indicate an input flag as having been set. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00748">748</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00839">command_line_flag_has_been_set()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00895">doc_all_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01011">doc_available_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00942">doc_specified_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01093">parse_and_assign()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00789">specify_command_line_flag()</a>.</p>
+
+</div>
+</div>
+<a id="a872a9f3ad510078d12dc24f19dd54f88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a872a9f3ad510078d12dc24f19dd54f88">&#9670;&nbsp;</a></span>Specified_command_line_int_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; int &gt; &gt; oomph::CommandLineArgs::Specified_command_line_int_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Map to associate an input flag with an int &ndash; specified via pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00756">756</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00839">command_line_flag_has_been_set()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00895">doc_all_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01011">doc_available_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00942">doc_specified_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01093">parse_and_assign()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00808">specify_command_line_flag()</a>.</p>
+
+</div>
+</div>
+<a id="a6801e3bd896891e4c5b40399c56df332"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6801e3bd896891e4c5b40399c56df332">&#9670;&nbsp;</a></span>Specified_command_line_string_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; std::string &gt; &gt; oomph::CommandLineArgs::Specified_command_line_string_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Map to associate an input flag with a string &ndash; specified via pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00764">764</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00839">command_line_flag_has_been_set()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00895">doc_all_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01011">doc_available_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00942">doc_specified_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01093">parse_and_assign()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00828">specify_command_line_flag()</a>.</p>
+
+</div>
+</div>
+<a id="ae489c2891e5e891242ed788b2a64d477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae489c2891e5e891242ed788b2a64d477">&#9670;&nbsp;</a></span>Specified_command_line_unsigned_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, <a class="el" href="structoomph_1_1CommandLineArgs_1_1ArgInfo.html">ArgInfo</a>&lt; unsigned &gt; &gt; oomph::CommandLineArgs::Specified_command_line_unsigned_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Map to associate an input flag with an unsigned &ndash; specified via pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00760">760</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00839">command_line_flag_has_been_set()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00895">doc_all_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01011">doc_available_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00942">doc_specified_flags()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01093">parse_and_assign()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00818">specify_command_line_flag()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

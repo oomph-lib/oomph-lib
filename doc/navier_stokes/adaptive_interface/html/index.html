@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: A rigid cylinder rotating in a viscous fluid beneath a free surface.</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: A rigid cylinder rotating in a viscous fluid beneath a free surface. </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Detailed documentation to be written. Here's the driver code...</p>
+<p>(This problem is solved using spatially adaptive elements with a pseudo-elastic remesh strategy)</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">//A driver program to solve the problem of a cylinder rotating near a free</span></div>
+<div class="line"><span class="comment">//surface</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;navier_stokes.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;solid.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;fluid_interface.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>oomph;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=start_of_namespace================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pseudo-solid Poisson ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a>=0.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Direction of the wall normal vector</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;double&gt; <a class="code" href="namespaceGlobal__Physical__Variables.html#a5feb3df21fc4a0adefadecb8a8ed98d7">Wall_normal</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Function that specifies the wall unit normal</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a0d48e8726fa485de2b2df2d5031ec41b">wall_unit_normal_fct</a>(<span class="keyword">const</span> Vector&lt;double&gt; &amp;x, </div>
+<div class="line">                      Vector&lt;double&gt; &amp;normal)</div>
+<div class="line"> {</div>
+<div class="line">  normal=<a class="code" href="namespaceGlobal__Physical__Variables.html#a5feb3df21fc4a0adefadecb8a8ed98d7">Wall_normal</a>;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_namespace</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//My own Ellipse class</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classGeneralEllipse.html">GeneralEllipse</a> : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment">//Internal data to store the centre and semi-axes</span></div>
+<div class="line"> <span class="keywordtype">double</span> *centre_x_pt, *centre_y_pt, *a_pt, *b_pt;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Constructor</span></div>
+<div class="line"> <a class="code" href="classGeneralEllipse.html">GeneralEllipse</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;centre_x, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;centre_y,</div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;a, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;b)</div>
+<div class="line">  : GeomObject(1,2), centre_x_pt(0), centre_y_pt(0), a_pt(0), b_pt(0)</div>
+<div class="line">  {</div>
+<div class="line">   centre_x_pt = <span class="keyword">new</span> double(centre_x);</div>
+<div class="line">   centre_y_pt = <span class="keyword">new</span> double(centre_y);</div>
+<div class="line">   a_pt = <span class="keyword">new</span> double(a);</div>
+<div class="line">   b_pt = <span class="keyword">new</span> double(b);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Destructor</span></div>
+<div class="line"> ~<a class="code" href="classGeneralEllipse.html">GeneralEllipse</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keyword">delete</span> centre_x_pt;</div>
+<div class="line">   <span class="keyword">delete</span> centre_y_pt;</div>
+<div class="line">   <span class="keyword">delete</span> a_pt;</div>
+<div class="line">   <span class="keyword">delete</span> b_pt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Return the position</span></div>
+<div class="line"> <span class="keywordtype">void</span> position(<span class="keyword">const</span> Vector&lt;double&gt; &amp;xi, Vector&lt;double&gt; &amp;r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   r[0] = *centre_x_pt + *a_pt*cos(xi[0]);</div>
+<div class="line">   r[1] = *centre_y_pt + *b_pt*sin(xi[0]);</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//A Domain</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classCylinderAndInterfaceDomain.html">CylinderAndInterfaceDomain</a> : <span class="keyword">public</span> Domain</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> <span class="keywordtype">double</span> centre_x, centre_y;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">double</span> Lower_left[2], Lower_right[2], Lower_mid_left[2], Lower_mid_right[2];</div>
+<div class="line"> <span class="keywordtype">double</span> Upper_left[2], Upper_right[2], Upper_mid_left[2], Upper_mid_right[2];</div>
+<div class="line"> <span class="keywordtype">double</span> Lower_centre_left[2], Lower_centre_right[2];</div>
+<div class="line"> <span class="keywordtype">double</span> Upper_centre_left[2], Upper_centre_right[2];</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Geometric object that represents the rotating cylinder</span></div>
+<div class="line"><span class="comment"></span> GeomObject* Cylinder_pt;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Constructor, pass the length and height of the domain</span></div>
+<div class="line"> <a class="code" href="classCylinderAndInterfaceDomain.html">CylinderAndInterfaceDomain</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;Length, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;Height)</div>
+<div class="line">  {   </div>
+<div class="line"> </div>
+<div class="line">   centre_x = Length/2.0;</div>
+<div class="line">   centre_y = Height/2.0; <span class="comment">//3.0*Height/4.0;</span></div>
+<div class="line">  <span class="comment">//Create a new ellipse object to represent the rotating cylinder</span></div>
+<div class="line">   Cylinder_pt = <span class="keyword">new</span> <a class="code" href="classGeneralEllipse.html">GeneralEllipse</a>(centre_x,centre_y,0.2*Height,0.2*Height);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set some basic coordinates</span></div>
+<div class="line"> </div>
+<div class="line">   Lower_left[0] = 0.0;</div>
+<div class="line">   Lower_left[1] = 0.0;</div>
+<div class="line">   </div>
+<div class="line">   Upper_left[0] = 0.0;</div>
+<div class="line">   Upper_left[1] = Height;</div>
+<div class="line"> </div>
+<div class="line">   Lower_right[0] = Length;</div>
+<div class="line">   Lower_right[1] = 0.0;</div>
+<div class="line">   </div>
+<div class="line">   Upper_right[0] = Length;</div>
+<div class="line">   Upper_right[1] = Height;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Let&#39;s just do some mid coordinates</span></div>
+<div class="line">   Lower_mid_left[0] = Length/10.0;</div>
+<div class="line">   Lower_mid_left[1] = 0.0;</div>
+<div class="line"> </div>
+<div class="line">   Upper_mid_left[0] = Length/10.0;</div>
+<div class="line">   Upper_mid_left[1] = Height;</div>
+<div class="line"> </div>
+<div class="line">   Vector&lt;double&gt; xi(1), f(2);</div>
+<div class="line">   xi[0] = -3.0*atan(1.0);</div>
+<div class="line">   Cylinder_pt-&gt;position(xi,f);</div>
+<div class="line"> </div>
+<div class="line">   Lower_centre_left[0] = f[0];</div>
+<div class="line">   Lower_centre_left[1] = f[1];</div>
+<div class="line">   </div>
+<div class="line">   xi[0] = 3.0*atan(1.0);</div>
+<div class="line">   Cylinder_pt-&gt;position(xi,f);</div>
+<div class="line"> </div>
+<div class="line">   Upper_centre_left[0] = f[0];</div>
+<div class="line">   Upper_centre_left[1] = f[1];</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">   Lower_mid_right[0] = 9.0*Length/10.0;</div>
+<div class="line">   Lower_mid_right[1] = 0.0;</div>
+<div class="line"> </div>
+<div class="line">   Upper_mid_right[0] = 9.0*Length/10.0;</div>
+<div class="line">   Upper_mid_right[1] = Height;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">   xi[0] = -1.0*atan(1.0);</div>
+<div class="line">   Cylinder_pt-&gt;position(xi,f);</div>
+<div class="line"> </div>
+<div class="line">   Lower_centre_right[0] = f[0];</div>
+<div class="line">   Lower_centre_right[1] = f[1];</div>
+<div class="line">   </div>
+<div class="line">   xi[0] = 1.0*atan(1.0);</div>
+<div class="line">   Cylinder_pt-&gt;position(xi,f);</div>
+<div class="line"> </div>
+<div class="line">   Upper_centre_right[0] = f[0];</div>
+<div class="line">   Upper_centre_right[1] = f[1];</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//There are six macro elements</span></div>
+<div class="line">   Macro_element_pt.resize(6); </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Build the macro elements</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;6;i++)</div>
+<div class="line">    {Macro_element_pt[i]= <span class="keyword">new</span> QMacroElement&lt;2&gt;(<span class="keyword">this</span>,i);}</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Destructor: Empty; cleanup done in base class</span></div>
+<div class="line"> ~<a class="code" href="classCylinderAndInterfaceDomain.html">CylinderAndInterfaceDomain</a>() {}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Private little interpolation problem</span></div>
+<div class="line"> <span class="keywordtype">void</span> linear_interpolate(<span class="keywordtype">double</span> Left[2], <span class="keywordtype">double</span> Right[2],</div>
+<div class="line">                         <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;s, Vector&lt;double&gt; &amp;f)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">    {</div>
+<div class="line">     f[i] = Left[i] + (Right[i] - Left[i])*0.5*(s+1.0);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">   </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Sort out the vector representation of the i-th macro element</span></div>
+<div class="line"> <span class="keywordtype">void</span> macro_element_boundary(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;time,</div>
+<div class="line">                             <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;m,</div>
+<div class="line">                             <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;direction,</div>
+<div class="line">                             <span class="keyword">const</span> Vector&lt;double&gt; &amp;s,</div>
+<div class="line">                             Vector&lt;double&gt;&amp; f)</div>
+<div class="line"> {</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">using namespace </span>QuadTreeNames;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES</span></div>
+<div class="line">   <span class="comment">// Warn about time argument being moved to the front</span></div>
+<div class="line">   OomphLibWarning(</div>
+<div class="line">    <span class="stringliteral">&quot;Order of function arguments has changed between versions 0.8 and 0.85&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;CylinderAndInterfaceDomain::macro_element_boundary(...)&quot;</span>,</div>
+<div class="line">    OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">  Vector&lt;double&gt; xi(1);  </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Switch on the macro element</span></div>
+<div class="line">  <span class="keywordflow">switch</span>(m)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">//Macro element 0, is the left-hand film</span></div>
+<div class="line">   <span class="keywordflow">case</span> 0:</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">switch</span>(direction)</div>
+<div class="line">     {</div>
+<div class="line">     <span class="keywordflow">case</span> N:</div>
+<div class="line">      linear_interpolate(Upper_left,Upper_mid_left,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> S:  </div>
+<div class="line">       linear_interpolate(Lower_left,Lower_mid_left,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> W:</div>
+<div class="line">       linear_interpolate(Lower_left,Upper_left,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> E:</div>
+<div class="line">       linear_interpolate(Lower_mid_left,Upper_mid_left,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">default</span>:</div>
+<div class="line">      std::ostringstream error_stream;</div>
+<div class="line">      error_stream &lt;&lt; <span class="stringliteral">&quot;Direction is incorrect: &quot;</span> &lt;&lt; direction &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">     }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">break</span>;</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">//Macro element 1, is immediately left of the cylinder</span></div>
+<div class="line">   <span class="keywordflow">case</span> 1:</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">switch</span>(direction)</div>
+<div class="line">     {</div>
+<div class="line">     <span class="keywordflow">case</span> N:</div>
+<div class="line">       linear_interpolate(Upper_mid_left,Upper_centre_left,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> S:  </div>
+<div class="line">       linear_interpolate(Lower_mid_left,Lower_centre_left,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> W:</div>
+<div class="line">       linear_interpolate(Lower_mid_left,Upper_mid_left,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> E:</div>
+<div class="line">      xi[0] = 5.0*atan(1.0) - 2.0*atan(1.0)*0.5*(1.0+s[0]);</div>
+<div class="line">      Cylinder_pt-&gt;position(xi,f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">default</span>:</div>
+<div class="line">      std::ostringstream error_stream;</div>
+<div class="line">      error_stream &lt;&lt; <span class="stringliteral">&quot;Direction is incorrect: &quot;</span> &lt;&lt; direction &lt;&lt; std::endl;</div>
+<div class="line">      </div>
+<div class="line">      <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">     }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Macro element 2, is immediately above the cylinder</span></div>
+<div class="line">   <span class="keywordflow">case</span> 2:</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">switch</span>(direction)</div>
+<div class="line">     {</div>
+<div class="line">     <span class="keywordflow">case</span> N:</div>
+<div class="line">       linear_interpolate(Upper_mid_left,Upper_mid_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line">      </div>
+<div class="line">     <span class="keywordflow">case</span> S:  </div>
+<div class="line">      xi[0] = 3.0*atan(1.0) - 2.0*atan(1.0)*0.5*(1.0+s[0]);</div>
+<div class="line">      Cylinder_pt-&gt;position(xi,f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> W:</div>
+<div class="line">       linear_interpolate(Upper_centre_left,Upper_mid_left,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> E:</div>
+<div class="line">       linear_interpolate(Upper_centre_right,Upper_mid_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">default</span>:</div>
+<div class="line">      std::ostringstream error_stream;</div>
+<div class="line">      error_stream &lt;&lt; <span class="stringliteral">&quot;Direction is incorrect: &quot;</span> &lt;&lt; direction &lt;&lt; std::endl;</div>
+<div class="line">      </div>
+<div class="line">      <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">     }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//Macro element 3, is immediately right of the cylinder</span></div>
+<div class="line">   <span class="keywordflow">case</span> 3:</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">switch</span>(direction)</div>
+<div class="line">     {</div>
+<div class="line">     <span class="keywordflow">case</span> N:</div>
+<div class="line">       linear_interpolate(Upper_centre_right,Upper_mid_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line">      </div>
+<div class="line">     <span class="keywordflow">case</span> S:  </div>
+<div class="line">       linear_interpolate(Lower_centre_right,Lower_mid_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> W:</div>
+<div class="line">      xi[0] = -atan(1.0) + 2.0*atan(1.0)*0.5*(1.0+s[0]);</div>
+<div class="line">      Cylinder_pt-&gt;position(xi,f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> E:</div>
+<div class="line">       linear_interpolate(Lower_mid_right,Upper_mid_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">default</span>:</div>
+<div class="line">      std::ostringstream error_stream;</div>
+<div class="line">      error_stream &lt;&lt; <span class="stringliteral">&quot;Direction is incorrect: &quot;</span> &lt;&lt; direction &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">     }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">break</span>;</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">//Macro element 4, is immediately below cylinder</span></div>
+<div class="line">   <span class="keywordflow">case</span> 4:</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">switch</span>(direction)</div>
+<div class="line">     {</div>
+<div class="line">     <span class="keywordflow">case</span> N:</div>
+<div class="line">      <span class="comment">//linear_interpolate(Lower_centre_left,Lower_centre_right,s[0],f);</span></div>
+<div class="line">      xi[0] = -3.0*atan(1.0) + 2.0*atan(1.0)*0.5*(1.0+s[0]);</div>
+<div class="line">      Cylinder_pt-&gt;position(xi,f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line">      </div>
+<div class="line">     <span class="keywordflow">case</span> S:  </div>
+<div class="line">       linear_interpolate(Lower_mid_left,Lower_mid_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> W:</div>
+<div class="line">       linear_interpolate(Lower_mid_left,Lower_centre_left,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> E:</div>
+<div class="line">       linear_interpolate(Lower_mid_right,Lower_centre_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">default</span>:</div>
+<div class="line">      std::ostringstream error_stream;</div>
+<div class="line">      error_stream &lt;&lt; <span class="stringliteral">&quot;Direction is incorrect: &quot;</span> &lt;&lt; direction &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">     }  </div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//Macro element 5, is right film</span></div>
+<div class="line">   <span class="keywordflow">case</span> 5:</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">switch</span>(direction)</div>
+<div class="line">     {</div>
+<div class="line">     <span class="keywordflow">case</span> N:</div>
+<div class="line">       linear_interpolate(Upper_mid_right,Upper_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line">      </div>
+<div class="line">     <span class="keywordflow">case</span> S:  </div>
+<div class="line">       linear_interpolate(Lower_mid_right,Lower_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> W:</div>
+<div class="line">       linear_interpolate(Lower_mid_right,Upper_mid_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">case</span> E:</div>
+<div class="line">       linear_interpolate(Lower_right,Upper_right,s[0],f);</div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">default</span>:</div>
+<div class="line">      std::ostringstream error_stream;</div>
+<div class="line">      error_stream &lt;&lt; <span class="stringliteral">&quot;Direction is incorrect: &quot;</span> &lt;&lt; direction &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">     }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">break</span>;</div>
+<div class="line">    </div>
+<div class="line">   <span class="keywordflow">default</span>:</div>
+<div class="line">    std::ostringstream error_stream;</div>
+<div class="line">      error_stream &lt;&lt; <span class="stringliteral">&quot;Wrong domain number: &quot;</span> &lt;&lt; m&lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">   }</div>
+<div class="line"> </div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Now I need to actually create a Mesh</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classCylinderAndInterfaceMesh.html">CylinderAndInterfaceMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh</div>
+<div class="line">{</div>
+<div class="line"> <span class="keywordtype">double</span> Height;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line"> <span class="comment">//Pointer to the domain</span></div>
+<div class="line"> <a class="code" href="classCylinderAndInterfaceDomain.html">CylinderAndInterfaceDomain</a>* Domain_pt;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Access function to the domain</span></div>
+<div class="line"> <a class="code" href="classCylinderAndInterfaceDomain.html">CylinderAndInterfaceDomain</a>* domain_pt() {<span class="keywordflow">return</span> Domain_pt;}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Constructor, </span></div>
+<div class="line"> <a class="code" href="classCylinderAndInterfaceMesh.html">CylinderAndInterfaceMesh</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;length, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;height,</div>
+<div class="line">                            TimeStepper* time_stepper_pt) : Height(height)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Create the domain</span></div>
+<div class="line">   Domain_pt = <span class="keyword">new</span> <a class="code" href="classCylinderAndInterfaceDomain.html">CylinderAndInterfaceDomain</a>(length,height);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Initialise the node counter</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> node_count=0;</div>
+<div class="line">   <span class="comment">//Vectors Used to get data from domains</span></div>
+<div class="line">   Vector&lt;double&gt; s(2), r(2);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Setup temporary storage for the Node</span></div>
+<div class="line">   Vector&lt;Node *&gt; Tmp_node_pt;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Now blindly loop over the macro elements and associate and finite</span></div>
+<div class="line">   <span class="comment">//element with each</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> Nmacro_element = Domain_pt-&gt;nmacro_element();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;Nmacro_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Create the FiniteElement and add to the Element_pt Vector</span></div>
+<div class="line">     Element_pt.push_back(<span class="keyword">new</span> ELEMENT);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Read out the number of linear points in the element</span></div>
+<div class="line">     <span class="keywordtype">unsigned</span> Np = </div>
+<div class="line">      <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(finite_element_pt(e))-&gt;nnode_1d();</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Loop over nodes in the column</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l1=0;l1&lt;Np;l1++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">//Loop over the nodes in the row</span></div>
+<div class="line">       <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l2=0;l2&lt;Np;l2++)</div>
+<div class="line">        {</div>
+<div class="line">         <span class="comment">//Allocate the memory for the node</span></div>
+<div class="line">         Tmp_node_pt.push_back(finite_element_pt(e)-&gt;</div>
+<div class="line">                           construct_node(l1*Np+l2,time_stepper_pt));</div>
+<div class="line">         </div>
+<div class="line">         <span class="comment">//Read out the position of the node from the macro element</span></div>
+<div class="line">         s[0] = -1.0 + 2.0*(double)l2/(<span class="keywordtype">double</span>)(Np-1);</div>
+<div class="line">         s[1] = -1.0 + 2.0*(double)l1/(<span class="keywordtype">double</span>)(Np-1);</div>
+<div class="line">         Domain_pt-&gt;macro_element_pt(e)-&gt;macro_map(s,r);</div>
+<div class="line">         </div>
+<div class="line">         <span class="comment">//Set the position of the node</span></div>
+<div class="line">         Tmp_node_pt[node_count]-&gt;x(0) = r[0];</div>
+<div class="line">         Tmp_node_pt[node_count]-&gt;x(1) = r[1];</div>
+<div class="line">         </div>
+<div class="line">         <span class="comment">//Increment the node number</span></div>
+<div class="line">         node_count++;</div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="comment">//End of loop over macro elements</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Now the elements have been created, but there will be nodes in </span></div>
+<div class="line">   <span class="comment">//common, need to loop over the common edges and sort it, by reassigning</span></div>
+<div class="line">   <span class="comment">//pointers and the deleting excess nodes</span></div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Read out the number of linear points in the element</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> Np = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(finite_element_pt(0))-&gt;nnode_1d();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//DelaunayEdge between Elements 0 and 1</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Np;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Set the nodes in element 1 to be the same as in element 0</span></div>
+<div class="line">     finite_element_pt(1)-&gt;node_pt(Np*n)</div>
+<div class="line">      = finite_element_pt(0)-&gt;node_pt(n*Np+Np-1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Remove the nodes in element 1 from the temporaray node list</span></div>
+<div class="line">     <span class="keyword">delete</span> Tmp_node_pt[Np*Np + Np*n];</div>
+<div class="line">     Tmp_node_pt[Np*Np + Np*n] = 0;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//DelaunayEdge between Elements 1 and 2</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Np;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Set the nodes in element 2 to be the same as in element 1</span></div>
+<div class="line">     finite_element_pt(2)-&gt;node_pt(n*Np)</div>
+<div class="line">      = finite_element_pt(1)-&gt;node_pt((Np-1)*Np+Np-1-n);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Remove the nodes in element 2 from the temporaray node list</span></div>
+<div class="line">     <span class="keyword">delete</span> Tmp_node_pt[2*Np*Np + n*Np];</div>
+<div class="line">     Tmp_node_pt[2*Np*Np + n*Np] = 0;</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//DelaunayEdge between Elements 1 and 4</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Np;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Set the nodes in element 4 to be the same as in element 1</span></div>
+<div class="line">     finite_element_pt(4)-&gt;node_pt(n*Np)</div>
+<div class="line">      = finite_element_pt(1)-&gt;node_pt(n);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Remove the nodes in element 2 from the temporaray node list</span></div>
+<div class="line">     <span class="keyword">delete</span> Tmp_node_pt[4*Np*Np + n*Np];</div>
+<div class="line">     Tmp_node_pt[4*Np*Np + n*Np] = 0;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//DelaunayEdge between Element 2 and 3</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Np;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Set the nodes in element 3 to be the same as in element 2</span></div>
+<div class="line">     finite_element_pt(3)-&gt;node_pt(Np*(Np-1)+n)</div>
+<div class="line">      = finite_element_pt(2)-&gt;node_pt(Np*n+Np-1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Remove the nodes in element 3 from the temporaray node list</span></div>
+<div class="line">     <span class="keyword">delete</span> Tmp_node_pt[3*Np*Np + Np*(Np-1)+n];</div>
+<div class="line">     Tmp_node_pt[3*Np*Np + Np*(Np-1)+n] = 0;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//DelaunayEdge between Element 4 and 3</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Np;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Set the nodes in element 3 to be the same as in element 4</span></div>
+<div class="line">     finite_element_pt(3)-&gt;node_pt(n)</div>
+<div class="line">      = finite_element_pt(4)-&gt;node_pt(Np*(Np-n-1)+Np-1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Remove the nodes in element 3 from the temporaray node list</span></div>
+<div class="line">     <span class="keyword">delete</span> Tmp_node_pt[3*Np*Np + n];</div>
+<div class="line">     Tmp_node_pt[3*Np*Np + n] = 0;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//DelaunayEdge between Element 3 and 5</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Np;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Set the nodes in element 5 to be the same as in element 3</span></div>
+<div class="line">     finite_element_pt(5)-&gt;node_pt(n*Np)</div>
+<div class="line">      = finite_element_pt(3)-&gt;node_pt(Np*n+Np-1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Remove the nodes in element 5 from the temporaray node list</span></div>
+<div class="line">     <span class="keyword">delete</span> Tmp_node_pt[5*Np*Np + n*Np];</div>
+<div class="line">     Tmp_node_pt[5*Np*Np + n*Np] = 0;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Now set the actual true nodes</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;node_count;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">if</span>(Tmp_node_pt[n]!=0) {Node_pt.push_back(Tmp_node_pt[n]);}</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Finally set the nodes on the boundaries</span></div>
+<div class="line">   set_nboundary(5);</div>
+<div class="line">   </div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Np;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Left hand side</span></div>
+<div class="line">     Node* temp_node_pt = finite_element_pt(0)-&gt;node_pt(n*Np);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(3,temp_node_pt);</div>
+<div class="line">     </div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Right hand side</span></div>
+<div class="line">     temp_node_pt = finite_element_pt(5)-&gt;node_pt(n*Np+Np-1);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(1,temp_node_pt);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//LH part of lower boundary</span></div>
+<div class="line">     temp_node_pt = finite_element_pt(0)-&gt;node_pt(n);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(0,temp_node_pt);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//First part of upper boundary</span></div>
+<div class="line">     temp_node_pt = finite_element_pt(0)-&gt;node_pt(Np*(Np-1)+n);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(2,temp_node_pt);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//First part of hole boundary</span></div>
+<div class="line">     temp_node_pt = finite_element_pt(4)-&gt;node_pt(Np*(Np-1)+n);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(4,temp_node_pt);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=1;n&lt;Np;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Middle of lower boundary</span></div>
+<div class="line">     Node* temp_node_pt = finite_element_pt(4)-&gt;node_pt(n);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(0,temp_node_pt);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Middle of upper boundary                                </span></div>
+<div class="line">     temp_node_pt = finite_element_pt(2)-&gt;node_pt(Np*(Np-1)+n);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(2,temp_node_pt);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Next part of hole</span></div>
+<div class="line">     temp_node_pt = finite_element_pt(3)-&gt;node_pt(n*Np);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(4,temp_node_pt);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=1;n&lt;Np;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Final part of lower boundary</span></div>
+<div class="line">     Node* temp_node_pt = finite_element_pt(5)-&gt;node_pt(n);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(0,temp_node_pt);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Middle of upper boundary                                </span></div>
+<div class="line">     temp_node_pt = finite_element_pt(5)-&gt;node_pt(Np*(Np-1)+n);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(2,temp_node_pt);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Next part of hole</span></div>
+<div class="line">     temp_node_pt = finite_element_pt(2)-&gt;node_pt(Np-n-1);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(4,temp_node_pt);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=1;n&lt;Np-1;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Final part of hole</span></div>
+<div class="line">     Node* temp_node_pt = finite_element_pt(1)-&gt;node_pt(Np*(Np-n-1)+Np-1);</div>
+<div class="line">     this-&gt;convert_to_boundary_node(temp_node_pt);</div>
+<div class="line">     add_boundary_node(4,temp_node_pt);</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Now loop over all the nodes and set their Lagrangian coordinates</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> Nnode = nnode();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Nnode;n++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">//Cast node to an elastic node</span></div>
+<div class="line">    SolidNode* temp_pt = <span class="keyword">static_cast&lt;</span>SolidNode*<span class="keyword">&gt;</span>(Node_pt[n]);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">     {temp_pt-&gt;xi(i) = temp_pt-&gt;x(i);}</div>
+<div class="line">   }</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Now let&#39;s do the adaptive mesh</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classRefineableCylinderAndInterfaceMesh.html">RefineableCylinderAndInterfaceMesh</a> :</div>
+<div class="line"> <span class="keyword">public</span> <a class="code" href="classCylinderAndInterfaceMesh.html">CylinderAndInterfaceMesh</a>&lt;ELEMENT&gt;, <span class="keyword">public</span> RefineableQuadMesh&lt;ELEMENT&gt;</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>: </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Constructor</span></div>
+<div class="line"> <a class="code" href="classRefineableCylinderAndInterfaceMesh.html">RefineableCylinderAndInterfaceMesh</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;length, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;height,</div>
+<div class="line">                                    TimeStepper* time_stepper_pt) :</div>
+<div class="line">  <a class="code" href="classCylinderAndInterfaceMesh.html">CylinderAndInterfaceMesh</a>&lt;ELEMENT&gt;(length,height,time_stepper_pt) </div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Nodal positions etc. were created in constructor for</span></div>
+<div class="line">   <span class="comment">// Cylinder...&lt;...&gt;. Need to setup adaptive information.</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over all elements and set macro element pointer</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;6;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(this-&gt;element_pt(e))-&gt;</div>
+<div class="line">      set_macro_elem_pt(this-&gt;Domain_pt-&gt;macro_element_pt(e));</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Setup quadtree forest for mesh refinement</span></div>
+<div class="line">   this-&gt;setup_quadtree_forest();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Setup the boundary element info</span></div>
+<div class="line">   this-&gt;setup_boundary_element_info();</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Destructor: Empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> ~<a class="code" href="classRefineableCylinderAndInterfaceMesh.html">RefineableCylinderAndInterfaceMesh</a>() {}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classRefineableRotatingCylinderProblem.html">RefineableRotatingCylinderProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="keywordtype">double</span> Length, Height;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Constitutive law used to determine the mesh deformation</span></div>
+<div class="line"> ConstitutiveLaw *Constitutive_law_pt;</div>
+<div class="line"> </div>
+<div class="line"> Data* Traded_pressure_data_pt;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">double</span> Re, Ca, ReInvFr, Bo;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">double</span> Omega;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">double</span> Volume;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">double</span> Angle;</div>
+<div class="line"> </div>
+<div class="line"> Vector&lt;double&gt; G;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass flag to indicate if you want</span></div>
+<div class="line"><span class="comment"> /// a constant source function or the tanh profile.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classRefineableRotatingCylinderProblem.html">RefineableRotatingCylinderProblem</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;length, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;height);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_newton_solve() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve: </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve() {set_boundary_conditions();}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Strip off the interface before adaptation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_adapt() </div>
+<div class="line">  {</div>
+<div class="line">   this-&gt;delete_volume_constraint_elements();</div>
+<div class="line">   this-&gt;delete_free_surface_elements();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">void</span> actions_after_adapt() {finish_problem_setup(); this-&gt;rebuild_global_mesh();}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Complete problem setup: Setup element-specific things </span></div>
+<div class="line"><span class="comment"> /// (source fct pointers etc.)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> finish_problem_setup();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Access function for the mesh</span></div>
+<div class="line"> <a class="code" href="classRefineableCylinderAndInterfaceMesh.html">RefineableCylinderAndInterfaceMesh&lt;ELEMENT&gt;</a>* Bulk_mesh_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Access function for surface mesh</span></div>
+<div class="line"> Mesh* Surface_mesh_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Access function for point mesh</span></div>
+<div class="line"> Mesh* Point_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The volume constraint mesh </span></div>
+<div class="line"><span class="comment"></span> Mesh* Volume_constraint_mesh_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">void</span> set_boundary_conditions();</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">void</span> solve();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create the volume constraint elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> create_volume_constraint_elements()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//The single volume constraint element</span></div>
+<div class="line">   VolumeConstraintElement* vol_constraint_element = </div>
+<div class="line">    <span class="keyword">new</span> VolumeConstraintElement(&amp;Volume,Traded_pressure_data_pt,0);</div>
+<div class="line">   Volume_constraint_mesh_pt-&gt;add_element_pt(vol_constraint_element);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Loop over all boundaries (or just 1 and 2 why?)</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;4;b++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// How many bulk fluid elements are adjacent to boundary b?</span></div>
+<div class="line">     <span class="keywordtype">unsigned</span> n_element = Bulk_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Loop over the bulk fluid elements adjacent to boundary b?</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// Get pointer to the bulk fluid element that is </span></div>
+<div class="line">       <span class="comment">// adjacent to boundary b</span></div>
+<div class="line">       ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">        Bulk_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">//Find the index of the face of element e along boundary b</span></div>
+<div class="line">       <span class="keywordtype">int</span> face_index = Bulk_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Create new element</span></div>
+<div class="line">       ElasticLineVolumeConstraintBoundingElement&lt;ELEMENT&gt;* el_pt =</div>
+<div class="line">        <span class="keyword">new</span> ElasticLineVolumeConstraintBoundingElement&lt;ELEMENT&gt;(</div>
+<div class="line">         bulk_elem_pt,face_index);   </div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">//Set the &quot;master&quot; volume control element</span></div>
+<div class="line">       el_pt-&gt;set_volume_constraint_element(vol_constraint_element);</div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Add it to the mesh</span></div>
+<div class="line">       Volume_constraint_mesh_pt-&gt;add_element_pt(el_pt);     </div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">void</span> delete_volume_constraint_elements()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = Volume_constraint_mesh_pt-&gt;nelement();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keyword">delete</span> Volume_constraint_mesh_pt-&gt;element_pt(e);</div>
+<div class="line">    }</div>
+<div class="line">   Volume_constraint_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">void</span> create_free_surface_elements()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Find number of elements adjacent to upper boundary</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_boundary_element = Bulk_mesh_pt-&gt;nboundary_element(2);</div>
+<div class="line">   <span class="comment">//The boundary elements do no necessarily come in order, so we will</span></div>
+<div class="line">   <span class="comment">//need to detect the element adjacent to boundary 1.</span></div>
+<div class="line">   <span class="comment">//The index of that element in our array will be stored in this variable</span></div>
+<div class="line">   <span class="comment">//(initialised to a negative and therefore invalid number)</span></div>
+<div class="line">   <span class="keywordtype">int</span> final_element_index=-1;</div>
+<div class="line">   <span class="comment">//Loop over the elements adjacent to the boundary</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_boundary_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Create the free surface element (on face 2)</span></div>
+<div class="line">     FiniteElement *free_surface_element_pt </div>
+<div class="line">      = <span class="keyword">new</span> ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;</div>
+<div class="line">      (Bulk_mesh_pt-&gt;boundary_element_pt(2,e),</div>
+<div class="line">       Bulk_mesh_pt-&gt;face_index_at_boundary(2,e));</div>
+<div class="line">     <span class="comment">//Push it back onto the stack</span></div>
+<div class="line">     Surface_mesh_pt-&gt;add_element_pt(free_surface_element_pt);       </div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">//Check whether the element is on the boundary 1</span></div>
+<div class="line">      <span class="keywordtype">unsigned</span> n_node = free_surface_element_pt-&gt;nnode();</div>
+<div class="line">      <span class="comment">//Only need to check the end nodes</span></div>
+<div class="line">      <span class="keywordflow">if</span>((free_surface_element_pt-&gt;node_pt(0)-&gt;is_on_boundary(1)) ||</div>
+<div class="line">         (free_surface_element_pt-&gt;node_pt(n_node-1)-&gt;is_on_boundary(1)))</div>
+<div class="line">       {</div>
+<div class="line">          final_element_index=e;</div>
+<div class="line">       }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordtype">unsigned</span> Nfree = Surface_mesh_pt-&gt;nelement();</div>
+<div class="line">   oomph_info &lt;&lt; Nfree &lt;&lt; <span class="stringliteral">&quot; free surface elements assigned&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span>(final_element_index == -1)</div>
+<div class="line">     {</div>
+<div class="line">      <span class="keywordflow">throw</span> OomphLibError(<span class="stringliteral">&quot;No Surface Element adjacent to boundary 1\n&quot;</span>,</div>
+<div class="line">                          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">     }</div>
+<div class="line">   </div>
+<div class="line">    <span class="comment">//Make the edge point</span></div>
+<div class="line">    FiniteElement* point_element_pt= </div>
+<div class="line">     <span class="keyword">dynamic_cast&lt;</span>ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line">     (Surface_mesh_pt-&gt;element_pt(final_element_index))</div>
+<div class="line">     -&gt;make_bounding_element(1);</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">//Add it to the stack</span></div>
+<div class="line">    Point_mesh_pt-&gt;add_element_pt(point_element_pt);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Function to delete the free surface elements</span></div>
+<div class="line"> <span class="keywordtype">void</span> delete_free_surface_elements()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Find the number of traction elements</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> Nfree_surface = Surface_mesh_pt-&gt;nelement();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//The traction elements are ALWAYS? stored at the end</span></div>
+<div class="line">   <span class="comment">//So delete and remove them, add one to get rid of the constraint</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;Nfree_surface;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keyword">delete</span> Surface_mesh_pt-&gt;element_pt(e);</div>
+<div class="line">    }</div>
+<div class="line">   Surface_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line"> </div>
+<div class="line">   <span class="keyword">delete</span> Point_mesh_pt-&gt;element_pt(0);</div>
+<div class="line">   Point_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor for adaptive Poisson problem in deformable fish-shaped</span></div>
+<div class="line"><span class="comment">/// domain. Pass bool to indicate if we want a constant source</span></div>
+<div class="line"><span class="comment">/// function or the one that produces a tanh step.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classRefineableRotatingCylinderProblem.html#aa597c4240ce9affbd7540998167c8f21">RefineableRotatingCylinderProblem&lt;ELEMENT&gt;::RefineableRotatingCylinderProblem</a>(</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;length, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;height) : Length(length), Height(height),</div>
+<div class="line">                                               Re(0.0), Ca(0.001), </div>
+<div class="line">                                               ReInvFr(0.0),</div>
+<div class="line">                                               Bo(0.0), Omega(1.0), </div>
+<div class="line">                                               Volume(12.0),</div>
+<div class="line">                                               Angle(1.57)</div>
+<div class="line">{ </div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a5feb3df21fc4a0adefadecb8a8ed98d7">Global_Physical_Variables::Wall_normal</a>.resize(2);</div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a5feb3df21fc4a0adefadecb8a8ed98d7">Global_Physical_Variables::Wall_normal</a>[0] = 1.0; </div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a5feb3df21fc4a0adefadecb8a8ed98d7">Global_Physical_Variables::Wall_normal</a>[1] = 0.0;</div>
+<div class="line"> </div>
+<div class="line"> G.resize(2);</div>
+<div class="line"> G[0] = 0.0; G[1] = -1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Set the initial value of the ReInvFr = Bo/Ca</span></div>
+<div class="line"><span class="comment"></span> ReInvFr = Bo/Ca;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Build a linear solver: Use HSL&#39;s MA42 frontal solver</span></div>
+<div class="line"><span class="comment"></span> <span class="comment">//linear_solver_pt() = new HSL_MA42;</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set the constituive law</span></div>
+<div class="line"> Constitutive_law_pt = <span class="keyword">new</span> GeneralisedHookean(&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Switch off full doc for frontal solver</span></div>
+<div class="line"><span class="comment"></span> <span class="comment">//static_cast&lt;HSL_MA42*&gt;(linear_solver_pt())-&gt;disable_doc_stats();</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Allocate the timestepper (no timedependence)</span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> Steady&lt;0&gt;);</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Build mesh</span></div>
+<div class="line"> Bulk_mesh_pt= </div>
+<div class="line">  <span class="keyword">new</span> <a class="code" href="classRefineableCylinderAndInterfaceMesh.html">RefineableCylinderAndInterfaceMesh&lt;ELEMENT&gt;</a>(length,height,</div>
+<div class="line">                                                  Problem::time_stepper_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator</span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> Bulk_mesh_pt-&gt;spatial_error_estimator_pt()=error_estimator_pt;</div>
+<div class="line">  </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Refine the problem a couple of times</span></div>
+<div class="line"> <span class="keywordtype">bool</span> update_all_solid_nodes=<span class="keyword">true</span>;</div>
+<div class="line"> Bulk_mesh_pt-&gt;refine_uniformly();</div>
+<div class="line"> Bulk_mesh_pt-&gt;node_update(update_all_solid_nodes);</div>
+<div class="line"> Bulk_mesh_pt-&gt;refine_uniformly();</div>
+<div class="line"> Bulk_mesh_pt-&gt;node_update(update_all_solid_nodes);</div>
+<div class="line"> <span class="comment">//Bulk_mesh_pt-&gt;refine_uniformly();</span></div>
+<div class="line"> <span class="comment">//refine_uniformly();</span></div>
+<div class="line"> <span class="comment">//refine_uniformly();</span></div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Loop over all elements and unset macro element pointer</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> Nelement = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;Nelement;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(e))-&gt;</div>
+<div class="line">    set_macro_elem_pt(0);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//The external pressure is a piece of global data</span></div>
+<div class="line"> Traded_pressure_data_pt = <span class="keyword">new</span> Data(1);</div>
+<div class="line"> this-&gt;add_global_data(Traded_pressure_data_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> </div>
+<div class="line"> Surface_mesh_pt = <span class="keyword">new</span> Mesh;</div>
+<div class="line"> Point_mesh_pt = <span class="keyword">new</span> Mesh;</div>
+<div class="line"> Volume_constraint_mesh_pt = <span class="keyword">new</span> Mesh;</div>
+<div class="line"> </div>
+<div class="line"> finish_problem_setup();</div>
+<div class="line">  </div>
+<div class="line"> this-&gt;add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"> this-&gt;add_sub_mesh(Surface_mesh_pt);</div>
+<div class="line"> this-&gt;add_sub_mesh(Point_mesh_pt);</div>
+<div class="line"> this-&gt;add_sub_mesh(Volume_constraint_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> this-&gt;build_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Attach the boundary conditions to the mesh</span></div>
+<div class="line"> oomph_info &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// \short Complete build of Poisson problem:</span></div>
+<div class="line"><span class="comment">/// Loop over elements and setup pointers to source function</span></div>
+<div class="line"><span class="comment">///</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classRefineableRotatingCylinderProblem.html#a417d18c2584ed1ea38daefe5dd68b4a4">RefineableRotatingCylinderProblem&lt;ELEMENT&gt;::finish_problem_setup</a>()</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">//Now sort out the free surface</span></div>
+<div class="line"> this-&gt;create_free_surface_elements();</div>
+<div class="line"> <span class="comment">//Create the volume constraint elements</span></div>
+<div class="line"> this-&gt;create_volume_constraint_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here. </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Pin bottom and cylinder</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> num_bound = Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound+=4)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="keywordtype">unsigned</span> num_nod= Bulk_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">     {</div>
+<div class="line">      Bulk_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0);</div>
+<div class="line">      Bulk_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1);</div>
+<div class="line">     }</div>
+<div class="line">   }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Pin u and v on LHS</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= Bulk_mesh_pt-&gt;nboundary_node(3);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     Bulk_mesh_pt-&gt;boundary_node_pt(3,inod)-&gt;pin(0);</div>
+<div class="line">     <span class="comment">//Bulk_mesh_pt-&gt;boundary_node_pt(3,inod)-&gt;pin(1);</span></div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Pin u and v on RHS</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= Bulk_mesh_pt-&gt;nboundary_node(1);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     Bulk_mesh_pt-&gt;boundary_node_pt(1,inod)-&gt;pin(0);</div>
+<div class="line">     Bulk_mesh_pt-&gt;boundary_node_pt(1,inod)-&gt;pin(1);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  </div>
+<div class="line">  <span class="keyword">dynamic_cast&lt;</span>FluidInterfaceBoundingElement*<span class="keyword">&gt;</span></div>
+<div class="line">   (Point_mesh_pt-&gt;element_pt(0))-&gt;set_contact_angle(&amp;Angle);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">dynamic_cast&lt;</span>FluidInterfaceBoundingElement*<span class="keyword">&gt;</span></div>
+<div class="line">   (Point_mesh_pt-&gt;element_pt(0))-&gt;ca_pt() = &amp;Ca;</div>
+<div class="line"> </div>
+<div class="line">  </div>
+<div class="line">  <span class="keyword">dynamic_cast&lt;</span>FluidInterfaceBoundingElement*<span class="keyword">&gt;</span></div>
+<div class="line">   (Point_mesh_pt-&gt;element_pt(0))-&gt;</div>
+<div class="line">   wall_unit_normal_fct_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a0d48e8726fa485de2b2df2d5031ec41b">Global_Physical_Variables::wall_unit_normal_fct</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Pin one pressure</span></div>
+<div class="line">  <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(0))-&gt;fix_pressure(0,0.0);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Loop over the lower boundary and pin nodal positions in both directions</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> num_nod= Bulk_mesh_pt-&gt;nboundary_node(0);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">   {</div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_node_pt(0,inod)-&gt;pin_position(0);</div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_node_pt(0,inod)-&gt;pin_position(1);</div>
+<div class="line">   }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Loop over the RHS side and pin in x and y</span></div>
+<div class="line">  num_nod= Bulk_mesh_pt-&gt;nboundary_node(1);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">   {</div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_node_pt(1,inod)-&gt;pin_position(0);</div>
+<div class="line">    <span class="comment">//Bulk_mesh_pt-&gt;boundary_node_pt(1,inod)-&gt;pin_position(1);</span></div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">//Loop over the LHS side and pin in x</span></div>
+<div class="line">  num_nod= Bulk_mesh_pt-&gt;nboundary_node(3);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">  {</div>
+<div class="line">   Bulk_mesh_pt-&gt;boundary_node_pt(3,inod)-&gt;pin_position(0);</div>
+<div class="line">   <span class="comment">//Bulk_mesh_pt-&gt;boundary_node_pt(3,inod)-&gt;pin_position(1);</span></div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the cylinder and pin nodal positions in both directions</span></div>
+<div class="line"> num_nod= Bulk_mesh_pt-&gt;nboundary_node(4);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">  {</div>
+<div class="line">   Bulk_mesh_pt-&gt;boundary_node_pt(4,inod)-&gt;pin_position(0);</div>
+<div class="line">   Bulk_mesh_pt-&gt;boundary_node_pt(4,inod)-&gt;pin_position(1);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> Nfluid = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="comment">//Find the number of free surface elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> Nfree = Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line">    <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;Nfluid;i++)</div>
+<div class="line">     {</div>
+<div class="line">      <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">      ELEMENT *temp_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">//Set the source function pointer</span></div>
+<div class="line">      temp_pt-&gt;re_pt() = &amp;Re;</div>
+<div class="line">      temp_pt-&gt;re_invfr_pt() = &amp;ReInvFr;</div>
+<div class="line">      temp_pt-&gt;g_pt() = &amp;G;</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">//Assign the mesh deformation constitutive law</span></div>
+<div class="line">      temp_pt-&gt;constitutive_law_pt() = Constitutive_law_pt;</div>
+<div class="line">      </div>
+<div class="line">     }</div>
+<div class="line">    </div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line">    PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures(</div>
+<div class="line">     Bulk_mesh_pt-&gt;element_pt());</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">//Loop over the free surface elements</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;Nfree;i++)</div>
+<div class="line">     {</div>
+<div class="line">      <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">      ElasticLineFluidInterfaceElement&lt;ELEMENT&gt; *temp_pt = </div>
+<div class="line">       <span class="keyword">dynamic_cast&lt;</span>ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line">       (Surface_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">      <span class="comment">//Set the Capillary number</span></div>
+<div class="line">      temp_pt-&gt;ca_pt() = &amp;Ca;</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">//Pass the Data item that contains the external pressure</span></div>
+<div class="line">      temp_pt-&gt;set_external_pressure_data(this-&gt;global_data_pt(0));</div>
+<div class="line">     }</div>
+<div class="line">   </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classRefineableRotatingCylinderProblem.html#acd510f2c06fa3f38d2911781656dbf20">RefineableRotatingCylinderProblem&lt;ELEMENT&gt;::set_boundary_conditions</a>()</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">//Only bother to set non-zero velocity on the cylinder</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> Nnode = Bulk_mesh_pt-&gt;nboundary_node(4);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Nnode;n++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Get x and y</span></div>
+<div class="line">   <span class="keywordtype">double</span> x = Bulk_mesh_pt-&gt;boundary_node_pt(4,n)-&gt;x(0);</div>
+<div class="line">   <span class="keywordtype">double</span> y = Bulk_mesh_pt-&gt;boundary_node_pt(4,n)-&gt;x(1);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Now find the vector distance to the centre</span></div>
+<div class="line">   <span class="keywordtype">double</span> len_x = x - Bulk_mesh_pt-&gt;<a class="code" href="classCylinderAndInterfaceMesh.html#a924b3538d9f6c8b8524c317c5e2aa380">domain_pt</a>()-&gt;<a class="code" href="classCylinderAndInterfaceDomain.html#a0b5aefe768267a1dff936ab491bee938">centre_x</a>;</div>
+<div class="line">   <span class="keywordtype">double</span> len_y = y - Bulk_mesh_pt-&gt;<a class="code" href="classCylinderAndInterfaceMesh.html#a924b3538d9f6c8b8524c317c5e2aa380">domain_pt</a>()-&gt;<a class="code" href="classCylinderAndInterfaceDomain.html#ac461297e0b08287a1909f245569c77f0">centre_y</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Calculate the angle and radius</span></div>
+<div class="line">   <span class="keywordtype">double</span> r = sqrt(len_x*len_x + len_y*len_y);</div>
+<div class="line">   <span class="keywordtype">double</span> theta = atan2(len_y,len_x);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Now set the velocities</span></div>
+<div class="line">   Bulk_mesh_pt-&gt;boundary_node_pt(4,n)-&gt;set_value(0,-Omega*r*sin(theta));</div>
+<div class="line">   Bulk_mesh_pt-&gt;boundary_node_pt(4,n)-&gt;set_value(1, Omega*r*cos(theta));</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classRefineableRotatingCylinderProblem.html#a664bfd373351a401619b06c3494fdcdc">RefineableRotatingCylinderProblem&lt;ELEMENT&gt;::solve</a>()</div>
+<div class="line">{ </div>
+<div class="line"> Newton_solver_tolerance = 1.0e-8;</div>
+<div class="line"> <span class="comment">//Document the solution</span></div>
+<div class="line"> std::ofstream filenamee(<span class="stringliteral">&quot;input.dat&quot;</span>);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(filenamee,5);</div>
+<div class="line"> Surface_mesh_pt-&gt;output(filenamee,5);</div>
+<div class="line"> <span class="comment">//Point_mesh_pt-&gt;output(filenamee,5);</span></div>
+<div class="line"> filenamee.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Solve the initial value problem</span></div>
+<div class="line"> newton_solve();</div>
+<div class="line"> </div>
+<div class="line"> std::ofstream filename(<span class="stringliteral">&quot;first.dat&quot;</span>); </div>
+<div class="line"> Bulk_mesh_pt-&gt;output(filename,5); </div>
+<div class="line"> Surface_mesh_pt-&gt;output(filename,5); </div>
+<div class="line"> <span class="comment">//Point_mesh_pt-&gt;output(filename,5);</span></div>
+<div class="line"> filename.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Initialise the value of the arc-length</span></div>
+<div class="line"> <span class="keywordtype">double</span> ds=0.001;</div>
+<div class="line"> </div>
+<div class="line"> std::ofstream trace(<span class="stringliteral">&quot;trace.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> trace &lt;&lt; Ca &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; ReInvFr &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">       &lt;&lt; Bulk_mesh_pt-&gt;boundary_node_pt(2,0)-&gt;x(1) &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// bool flag=true, fflag=true;</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">if</span>(i&lt;5)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Decrease the contact angle</span></div>
+<div class="line">     Angle -= 0.1;</div>
+<div class="line">     newton_solve(2);</div>
+<div class="line">     <span class="comment">//newton_solve();</span></div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//do an arc-length continuation step in Ca</span></div>
+<div class="line">     ds = arc_length_step_solve(&amp;Ca,ds);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//  if(flag)</span></div>
+<div class="line"><span class="comment">//     {</span></div>
+<div class="line"><span class="comment">//      //Do an arc-length continuation step in ReInvFr</span></div>
+<div class="line"><span class="comment">//      ds = arc_length_step_solve(&amp;ReInvFr,ds);</span></div>
+<div class="line"><span class="comment">//     }</span></div>
+<div class="line"><span class="comment">//    else</span></div>
+<div class="line"><span class="comment">//     {</span></div>
+<div class="line"><span class="comment">//      //Reset arc-length parameters</span></div>
+<div class="line"><span class="comment">//      if(fflag) {reset_arc_length_parameters(); fflag=false;}</span></div>
+<div class="line"><span class="comment">//      ds = 0.001;</span></div>
+<div class="line"><span class="comment">//      //Now do it in Ca</span></div>
+<div class="line"><span class="comment">//      ds = arc_length_step_solve(&amp;Ca,ds);</span></div>
+<div class="line"><span class="comment">//     }</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//    if(Bulk_mesh_pt-&gt;boundary_node_pt(2,0)-&gt;x(1) &lt; 4.0)</span></div>
+<div class="line"><span class="comment">//     {flag=false;}</span></div>
+<div class="line"> </div>
+<div class="line">   trace &lt;&lt; Ca &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; ReInvFr &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Angle &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">         &lt;&lt; Bulk_mesh_pt-&gt;boundary_node_pt(2,0)-&gt;x(1) &lt;&lt; std::endl;   </div>
+<div class="line">   </div>
+<div class="line">   <span class="keywordtype">char</span> file[100];</div>
+<div class="line">   sprintf(file,<span class="stringliteral">&quot;step%i.dat&quot;</span>,i);</div>
+<div class="line">   filename.open(file);</div>
+<div class="line">   Bulk_mesh_pt-&gt;output(filename,5);</div>
+<div class="line">   Surface_mesh_pt-&gt;output(filename,5);</div>
+<div class="line">   <span class="comment">//Point_mesh_pt-&gt;output(filename,5);</span></div>
+<div class="line">   filename.close();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Now reset the values of the lagrange multipliers and the xi&#39;s</span></div>
+<div class="line">   <span class="comment">//An updated lagrangian approach</span></div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Now loop over all the nodes and set their Lagrangian coordinates</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> Nnode = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Nnode;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Cast node to an elastic node</span></div>
+<div class="line">     SolidNode* temp_pt = <span class="keyword">static_cast&lt;</span>SolidNode*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;node_pt(n));</div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> j=0;j&lt;2;j++) {temp_pt-&gt;xi(j) = temp_pt-&gt;x(j);}</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Find the number of free surface elements</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> Nfree = Surface_mesh_pt-&gt;nelement();</div>
+<div class="line">   <span class="comment">//Loop over the free surface elements</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;Nfree;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">     ElasticLineFluidInterfaceElement&lt;ELEMENT&gt; *temp_pt = </div>
+<div class="line">      <span class="keyword">dynamic_cast&lt;</span>ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line">      (Surface_mesh_pt-&gt;element_pt(n));</div>
+<div class="line">     <span class="keywordtype">unsigned</span> Nnode = temp_pt-&gt;nnode();</div>
+<div class="line">     <span class="comment">//Reset the lagrange multipliers</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> j=0;j&lt;Nnode;j++) {temp_pt-&gt;lagrange(j) = 0.0;}</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Document the solution</span></div>
+<div class="line"> <span class="comment">//filename.open(&quot;output.dat&quot;);</span></div>
+<div class="line"> <span class="comment">//Bulk_mesh_pt-&gt;output(filename,5);</span></div>
+<div class="line"> <span class="comment">//filename.close();</span></div>
+<div class="line"> trace.close();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">int</span> <a class="code" href="adaptive__interface_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <a class="code" href="classRefineableRotatingCylinderProblem.html">RefineableRotatingCylinderProblem</a></div>
+<div class="line">    &lt;RefineablePseudoSolidNodeUpdateElement&lt;RefineableQCrouzeixRaviartElement&lt;2&gt;,</div>
+<div class="line">    RefineableQPVDElementWithContinuousPressure&lt;2&gt; &gt; &gt; problem(3.0,4.0);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//ofstream filename(&quot;mesh.dat&quot;);</span></div>
+<div class="line">   <span class="comment">//problem.Bulk_mesh_pt-&gt;output(filename,5);</span></div>
+<div class="line"> </div>
+<div class="line">   problem.solve();</div>
+<div class="line">  }</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a0d48e8726fa485de2b2df2d5031ec41b"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a0d48e8726fa485de2b2df2d5031ec41b">Global_Physical_Variables::wall_unit_normal_fct</a></div><div class="ttdeci">void wall_unit_normal_fct(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;normal)</div><div class="ttdoc">Function that specifies the wall unit normal.</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00050">adaptive_interface.cc:50</a></div></div>
+<div class="ttc" id="aclassCylinderAndInterfaceDomain_html_a0b5aefe768267a1dff936ab491bee938"><div class="ttname"><a href="classCylinderAndInterfaceDomain.html#a0b5aefe768267a1dff936ab491bee938">CylinderAndInterfaceDomain::centre_x</a></div><div class="ttdeci">double centre_x</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00101">adaptive_interface.cc:101</a></div></div>
+<div class="ttc" id="aclassRefineableRotatingCylinderProblem_html_aa597c4240ce9affbd7540998167c8f21"><div class="ttname"><a href="classRefineableRotatingCylinderProblem.html#aa597c4240ce9affbd7540998167c8f21">RefineableRotatingCylinderProblem::RefineableRotatingCylinderProblem</a></div><div class="ttdeci">RefineableRotatingCylinderProblem(const double &amp;length, const double &amp;height)</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00910">adaptive_interface.cc:910</a></div></div>
+<div class="ttc" id="aclassRefineableCylinderAndInterfaceMesh_html"><div class="ttname"><a href="classRefineableCylinderAndInterfaceMesh.html">RefineableCylinderAndInterfaceMesh</a></div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00685">adaptive_interface.cc:685</a></div></div>
+<div class="ttc" id="aadaptive__interface_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="adaptive__interface_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l01274">adaptive_interface.cc:1274</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a5feb3df21fc4a0adefadecb8a8ed98d7"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a5feb3df21fc4a0adefadecb8a8ed98d7">Global_Physical_Variables::Wall_normal</a></div><div class="ttdeci">Vector&lt; double &gt; Wall_normal</div><div class="ttdoc">Direction of the wall normal vector.</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00047">adaptive_interface.cc:47</a></div></div>
+<div class="ttc" id="aclassRefineableRotatingCylinderProblem_html"><div class="ttname"><a href="classRefineableRotatingCylinderProblem.html">RefineableRotatingCylinderProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00722">adaptive_interface.cc:722</a></div></div>
+<div class="ttc" id="aclassCylinderAndInterfaceDomain_html"><div class="ttname"><a href="classCylinderAndInterfaceDomain.html">CylinderAndInterfaceDomain</a></div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00098">adaptive_interface.cc:98</a></div></div>
+<div class="ttc" id="aclassRefineableRotatingCylinderProblem_html_acd510f2c06fa3f38d2911781656dbf20"><div class="ttname"><a href="classRefineableRotatingCylinderProblem.html#acd510f2c06fa3f38d2911781656dbf20">RefineableRotatingCylinderProblem::set_boundary_conditions</a></div><div class="ttdeci">void set_boundary_conditions()</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l01137">adaptive_interface.cc:1137</a></div></div>
+<div class="ttc" id="aclassCylinderAndInterfaceMesh_html"><div class="ttname"><a href="classCylinderAndInterfaceMesh.html">CylinderAndInterfaceMesh</a></div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00438">adaptive_interface.cc:438</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Pseudo-solid Poisson ratio.</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00044">adaptive_interface.cc:44</a></div></div>
+<div class="ttc" id="aclassCylinderAndInterfaceMesh_html_a924b3538d9f6c8b8524c317c5e2aa380"><div class="ttname"><a href="classCylinderAndInterfaceMesh.html#a924b3538d9f6c8b8524c317c5e2aa380">CylinderAndInterfaceMesh::domain_pt</a></div><div class="ttdeci">CylinderAndInterfaceDomain * domain_pt()</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00449">adaptive_interface.cc:449</a></div></div>
+<div class="ttc" id="aclassRefineableRotatingCylinderProblem_html_a664bfd373351a401619b06c3494fdcdc"><div class="ttname"><a href="classRefineableRotatingCylinderProblem.html#a664bfd373351a401619b06c3494fdcdc">RefineableRotatingCylinderProblem::solve</a></div><div class="ttdeci">void solve()</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l01162">adaptive_interface.cc:1162</a></div></div>
+<div class="ttc" id="aclassRefineableRotatingCylinderProblem_html_a417d18c2584ed1ea38daefe5dd68b4a4"><div class="ttname"><a href="classRefineableRotatingCylinderProblem.html#a417d18c2584ed1ea38daefe5dd68b4a4">RefineableRotatingCylinderProblem::finish_problem_setup</a></div><div class="ttdeci">void finish_problem_setup()</div><div class="ttdoc">Complete problem setup: Setup element-specific things (source fct pointers etc.)</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l01001">adaptive_interface.cc:1001</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00040">adaptive_interface.cc:40</a></div></div>
+<div class="ttc" id="aclassGeneralEllipse_html"><div class="ttname"><a href="classGeneralEllipse.html">GeneralEllipse</a></div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00060">adaptive_interface.cc:60</a></div></div>
+<div class="ttc" id="aclassCylinderAndInterfaceDomain_html_ac461297e0b08287a1909f245569c77f0"><div class="ttname"><a href="classCylinderAndInterfaceDomain.html#ac461297e0b08287a1909f245569c77f0">CylinderAndInterfaceDomain::centre_y</a></div><div class="ttdeci">double centre_y</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__interface_8cc_source.html#l00101">adaptive_interface.cc:101</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:09:26
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

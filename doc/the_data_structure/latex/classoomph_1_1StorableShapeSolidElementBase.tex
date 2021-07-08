@@ -1,0 +1,579 @@
+\hypertarget{classoomph_1_1StorableShapeSolidElementBase}{}\doxysection{oomph\+::Storable\+Shape\+Solid\+Element\+Base Class Reference}
+\label{classoomph_1_1StorableShapeSolidElementBase}\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+
+
+{\ttfamily \#include $<$stored\+\_\+shape\+\_\+function\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Storable\+Shape\+Solid\+Element\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.333333cm]{classoomph_1_1StorableShapeSolidElementBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a9e4afdd429dbaa37a9b20422250bc368}{Storable\+Shape\+Solid\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Set defaults\+: Nothing is stored. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a30f3e2a847663a6ef4338b4a3770554a}{$\sim$\+Storable\+Shape\+Solid\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Destructor to clean up any allocated memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a4fc88feb5411e582a2640268ec733ad7}{Storable\+Shape\+Solid\+Element\+Base}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase}{Storable\+Shape\+Solid\+Element\+Base}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a39120d36ee55497f58f4d31aebe2f0c9}{operator=}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase}{Storable\+Shape\+Solid\+Element\+Base}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_ad5854362861320a83be19c6a5eebe3a5}{delete\+\_\+all\+\_\+dshape\+\_\+lagrangian\+\_\+stored}} ()
+\begin{DoxyCompactList}\small\item\em Delete all the objects stored in the \mbox{[}...\mbox{]}\+\_\+lagrangian\+\_\+stored\+\_\+pt vectors and delete the vectors themselves. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_ae96e6b54024149a8673671f1c418eb06}{delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored}} ()
+\begin{DoxyCompactList}\small\item\em Delete all the objects stored in the Lagrangian\+\_\+stored vectors ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_ac91c1ee2d7543ba8d944a0d8d4f6c10c}{delete\+\_\+d2shape\+\_\+lagrangian\+\_\+stored}} ()
+\begin{DoxyCompactList}\small\item\em Delete stored second derivatives of shape functions w.\+r.\+t. Lagrangian coordinates. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a7e3086e795309d9992853eaf716e1ef6}{delete\+\_\+\+J\+\_\+lagrangian\+\_\+stored}} ()
+\begin{DoxyCompactList}\small\item\em Delete stored Jaocbian of mapping between local and Lagrangian coordinates. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_acca94924abe9b0a0572ed0a73efb600a}{set\+\_\+integration\+\_\+scheme}} (\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1FiniteElement_a79f1710873332823c47023d370f0596b}{integral\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Overload the set\+\_\+integration\+\_\+scheme to recompute any stored derivatives w.\+r.\+t. Lagrangian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_ace2ecd55ee9e6912c34dda8751c50e34}{dshape\+\_\+lagrangian\+\_\+stored\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a6856fec818c676569c865eff43b80db6}{dshape\+\_\+lagrangian\+\_\+stored\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a7b8adfda8200cdd3a7ecbb7d01c14605}{d2shape\+\_\+lagrangian\+\_\+stored\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a3c2e9c5ee010f34f9f1dc9f4dd89c914}{d2shape\+\_\+lagrangian\+\_\+stored\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) ~\newline
+ coordinates (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a7a852f45981f5406f6e2f49a2f9c8fc2}{jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of Jacobians of the mapping between the local and global (eulerian) coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$const \& \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_aff2cba1205b0fefacdc435dd298fb219}{jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return a pointer to the vector of Jacobians of the mapping between the local and global (eulerian) coordinates (const version) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a501f9f5b1d42e75de4bf6efaa86cf14a}{pre\+\_\+compute\+\_\+dshape\+\_\+lagrangian\+\_\+at\+\_\+knots}} ()
+\begin{DoxyCompactList}\small\item\em Calculate the first derivatives of the shape functions w.\+r.\+t Lagrangian coordinates at the integration points and store the results internally. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a69eefa335919d8d4b5143bb11b40c2df}{dshape\+\_\+lagrangian\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidxi) const
+\begin{DoxyCompactList}\small\item\em Return the geometric shape functions and also first derivatives w.\+r.\+t. Lagrangian coordinates at ipt-\/th integration point. If the values of the shape function and derivatives have been pre-\/computed, they will be used. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a3f1b400868aa398cedc57e01d1eb1a24}{pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots}} ()
+\begin{DoxyCompactList}\small\item\em Calculate the first and second derivatives of the shape functions w.\+r.\+t Lagrangian coordinates at the integration points and store the results internally. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a55f3ab1f51572cf77e374e4917f47f2b}{d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidxi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psidxi) const
+\begin{DoxyCompactList}\small\item\em Return the geometric shape functions and also first and second derivatives w.\+r.\+t. Lagrangian coordinates at the ipt-\/th integration point. If the values have been pre-\/computed, they will be used. Returns Jacobian of mapping from Lagrangian to local coordinates. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_af28a213163e0b5dfb7d9597783dfec3f}{set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase}{Storable\+Shape\+Solid\+Element\+Base}} $\ast$const \&element\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Set the derivatives of stored shape functions with respect to the lagrangian coordinates to be the same as those pointed to by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} element\+\_\+pt. Note that this function also calls set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element(element\+\_\+pt). so that the local derivatives are also stored. Calling this function only makes sense for uniformly-\/spaced meshes with elements of equal sizes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_aea43da502d9ec0f38f5018a9f73039af}{D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to storage for the pointers to the derivatives of the shape functions w.\+r.\+t. Lagrangian coordinates at integration points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a5b70ba5dbc22fa3d5741b1cf0791f84b}{D2\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to storage for the pointers to the second derivatives of the shape functions w.\+r.\+t. Lagrangian coordinates at integration points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a0817df47c8e2d67c75407a03744504e8}{Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to storage for the Jacobian of the mapping between the local and the global Lagrangian coordinates ~\newline
+ \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_acacb2dca4af0a7f55c63ddc8a4d952f8}{Can\+\_\+delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored}}
+\begin{DoxyCompactList}\small\item\em Boolean to determine whether the element can delete the stored shape function derivatives w.\+r.\+t. the Lagrangian coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Base class for solid elements that allow storage of precomputed shape functions and their derivatives w.\+r.\+t to the local and global (Lagrangian) coordinates at the element\textquotesingle{}s integration points. 
+
+Definition at line 347 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a9e4afdd429dbaa37a9b20422250bc368}\label{classoomph_1_1StorableShapeSolidElementBase_a9e4afdd429dbaa37a9b20422250bc368}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!StorableShapeSolidElementBase@{StorableShapeSolidElementBase}}
+\index{StorableShapeSolidElementBase@{StorableShapeSolidElementBase}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{StorableShapeSolidElementBase()}{StorableShapeSolidElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::\+Storable\+Shape\+Solid\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Set defaults\+: Nothing is stored. 
+
+
+
+Definition at line 371 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a30f3e2a847663a6ef4338b4a3770554a}\label{classoomph_1_1StorableShapeSolidElementBase_a30f3e2a847663a6ef4338b4a3770554a}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!````~StorableShapeSolidElementBase@{$\sim$StorableShapeSolidElementBase}}
+\index{````~StorableShapeSolidElementBase@{$\sim$StorableShapeSolidElementBase}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{$\sim$StorableShapeSolidElementBase()}{~StorableShapeSolidElementBase()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::$\sim$\+Storable\+Shape\+Solid\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor to clean up any allocated memory. 
+
+
+
+Definition at line 379 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References delete\+\_\+all\+\_\+dshape\+\_\+lagrangian\+\_\+stored().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a4fc88feb5411e582a2640268ec733ad7}\label{classoomph_1_1StorableShapeSolidElementBase_a4fc88feb5411e582a2640268ec733ad7}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!StorableShapeSolidElementBase@{StorableShapeSolidElementBase}}
+\index{StorableShapeSolidElementBase@{StorableShapeSolidElementBase}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{StorableShapeSolidElementBase()}{StorableShapeSolidElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::\+Storable\+Shape\+Solid\+Element\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase}{Storable\+Shape\+Solid\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 383 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a55f3ab1f51572cf77e374e4917f47f2b}\label{classoomph_1_1StorableShapeSolidElementBase_a55f3ab1f51572cf77e374e4917f47f2b}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!d2shape\_lagrangian\_at\_knot@{d2shape\_lagrangian\_at\_knot}}
+\index{d2shape\_lagrangian\_at\_knot@{d2shape\_lagrangian\_at\_knot}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{d2shape\_lagrangian\_at\_knot()}{d2shape\_lagrangian\_at\_knot()}}
+{\footnotesize\ttfamily double oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidxi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{d2psidxi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return the geometric shape functions and also first and second derivatives w.\+r.\+t. Lagrangian coordinates at the ipt-\/th integration point. If the values have been pre-\/computed, they will be used. Returns Jacobian of mapping from Lagrangian to local coordinates. 
+
+Compute the geometric shape functions, first and second derivatives w.\+r.\+t Lagrangian coordinates at the ipt-\/th integration point. If the values have already been computed, return the stored values. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a69d17ec5fa308adae42e2f3171649bfe}{oomph\+::\+Solid\+Finite\+Element}}.
+
+
+
+Definition at line 1122 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot(), D2\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt, Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt, and oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a7b8adfda8200cdd3a7ecbb7d01c14605}\label{classoomph_1_1StorableShapeSolidElementBase_a7b8adfda8200cdd3a7ecbb7d01c14605}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!d2shape\_lagrangian\_stored\_pt@{d2shape\_lagrangian\_stored\_pt}}
+\index{d2shape\_lagrangian\_stored\_pt@{d2shape\_lagrangian\_stored\_pt}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{d2shape\_lagrangian\_stored\_pt()}{d2shape\_lagrangian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ \& oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::d2shape\+\_\+lagrangian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates ~\newline
+ 
+
+
+
+Definition at line 443 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References D2\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt.
+
+
+
+Referenced by set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a3c2e9c5ee010f34f9f1dc9f4dd89c914}\label{classoomph_1_1StorableShapeSolidElementBase_a3c2e9c5ee010f34f9f1dc9f4dd89c914}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!d2shape\_lagrangian\_stored\_pt@{d2shape\_lagrangian\_stored\_pt}}
+\index{d2shape\_lagrangian\_stored\_pt@{d2shape\_lagrangian\_stored\_pt}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{d2shape\_lagrangian\_stored\_pt()}{d2shape\_lagrangian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const \& oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::d2shape\+\_\+lagrangian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the vector of pointers to the stored second derivatives of the shape functions w.\+r.\+t the global (eulerian) ~\newline
+ coordinates (const version) 
+
+
+
+Definition at line 449 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References D2\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_ad5854362861320a83be19c6a5eebe3a5}\label{classoomph_1_1StorableShapeSolidElementBase_ad5854362861320a83be19c6a5eebe3a5}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!delete\_all\_dshape\_lagrangian\_stored@{delete\_all\_dshape\_lagrangian\_stored}}
+\index{delete\_all\_dshape\_lagrangian\_stored@{delete\_all\_dshape\_lagrangian\_stored}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_dshape\_lagrangian\_stored()}{delete\_all\_dshape\_lagrangian\_stored()}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::delete\+\_\+all\+\_\+dshape\+\_\+lagrangian\+\_\+stored (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Delete all the objects stored in the \mbox{[}...\mbox{]}\+\_\+lagrangian\+\_\+stored\+\_\+pt vectors and delete the vectors themselves. 
+
+Delete all the objects and storage associated with stored derivatives of shape functions with respect to Lagrangian coordinates 
+
+Definition at line 872 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+
+
+
+References delete\+\_\+d2shape\+\_\+lagrangian\+\_\+stored(), delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored(), and delete\+\_\+\+J\+\_\+lagrangian\+\_\+stored().
+
+
+
+Referenced by set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element(), and $\sim$\+Storable\+Shape\+Solid\+Element\+Base().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_ac91c1ee2d7543ba8d944a0d8d4f6c10c}\label{classoomph_1_1StorableShapeSolidElementBase_ac91c1ee2d7543ba8d944a0d8d4f6c10c}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!delete\_d2shape\_lagrangian\_stored@{delete\_d2shape\_lagrangian\_stored}}
+\index{delete\_d2shape\_lagrangian\_stored@{delete\_d2shape\_lagrangian\_stored}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{delete\_d2shape\_lagrangian\_stored()}{delete\_d2shape\_lagrangian\_stored()}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::delete\+\_\+d2shape\+\_\+lagrangian\+\_\+stored (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Delete stored second derivatives of shape functions w.\+r.\+t. Lagrangian coordinates. 
+
+Delete all the objects stored in the vectors\+: D2\+Shape\+\_\+lagrangian\+\_\+stored 
+
+Definition at line 909 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+
+
+
+References Can\+\_\+delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored, and D2\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt.
+
+
+
+Referenced by delete\+\_\+all\+\_\+dshape\+\_\+lagrangian\+\_\+stored(), and pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_ae96e6b54024149a8673671f1c418eb06}\label{classoomph_1_1StorableShapeSolidElementBase_ae96e6b54024149a8673671f1c418eb06}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!delete\_dshape\_lagrangian\_stored@{delete\_dshape\_lagrangian\_stored}}
+\index{delete\_dshape\_lagrangian\_stored@{delete\_dshape\_lagrangian\_stored}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{delete\_dshape\_lagrangian\_stored()}{delete\_dshape\_lagrangian\_stored()}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Delete all the objects stored in the Lagrangian\+\_\+stored vectors ~\newline
+ 
+
+Delete all the objects stored in the vectors\+: D\+Shape\+\_\+lagrangian\+\_\+stored 
+
+Definition at line 884 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+
+
+
+References Can\+\_\+delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored, and D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt.
+
+
+
+Referenced by delete\+\_\+all\+\_\+dshape\+\_\+lagrangian\+\_\+stored(), pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots(), and pre\+\_\+compute\+\_\+dshape\+\_\+lagrangian\+\_\+at\+\_\+knots().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a7e3086e795309d9992853eaf716e1ef6}\label{classoomph_1_1StorableShapeSolidElementBase_a7e3086e795309d9992853eaf716e1ef6}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!delete\_J\_lagrangian\_stored@{delete\_J\_lagrangian\_stored}}
+\index{delete\_J\_lagrangian\_stored@{delete\_J\_lagrangian\_stored}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{delete\_J\_lagrangian\_stored()}{delete\_J\_lagrangian\_stored()}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::delete\+\_\+\+J\+\_\+lagrangian\+\_\+stored (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Delete stored Jaocbian of mapping between local and Lagrangian coordinates. 
+
+Delete the stored Jacobian of the mapping between the Lagrangian and local coordinates. 
+
+Definition at line 933 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+
+
+
+References Can\+\_\+delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored, and Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt.
+
+
+
+Referenced by delete\+\_\+all\+\_\+dshape\+\_\+lagrangian\+\_\+stored(), pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots(), and pre\+\_\+compute\+\_\+dshape\+\_\+lagrangian\+\_\+at\+\_\+knots().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a69eefa335919d8d4b5143bb11b40c2df}\label{classoomph_1_1StorableShapeSolidElementBase_a69eefa335919d8d4b5143bb11b40c2df}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!dshape\_lagrangian\_at\_knot@{dshape\_lagrangian\_at\_knot}}
+\index{dshape\_lagrangian\_at\_knot@{dshape\_lagrangian\_at\_knot}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{dshape\_lagrangian\_at\_knot()}{dshape\_lagrangian\_at\_knot()}}
+{\footnotesize\ttfamily double oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidxi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return the geometric shape functions and also first derivatives w.\+r.\+t. Lagrangian coordinates at ipt-\/th integration point. If the values of the shape function and derivatives have been pre-\/computed, they will be used. 
+
+Compute the geometric shape functions, and derivatives w.\+r.\+t Lagrangian coordinates at the ipt-\/th integration point. If the values have already been computed, return the stored values. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_aa48b4880f69bb28d267ff27e7b1967e7}{oomph\+::\+Solid\+Finite\+Element}}.
+
+
+
+Definition at line 1097 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot(), D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt, Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt, and oomph\+::\+Storable\+Shape\+Element\+Base\+::shape\+\_\+stored\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_ace2ecd55ee9e6912c34dda8751c50e34}\label{classoomph_1_1StorableShapeSolidElementBase_ace2ecd55ee9e6912c34dda8751c50e34}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!dshape\_lagrangian\_stored\_pt@{dshape\_lagrangian\_stored\_pt}}
+\index{dshape\_lagrangian\_stored\_pt@{dshape\_lagrangian\_stored\_pt}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{dshape\_lagrangian\_stored\_pt()}{dshape\_lagrangian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ \& oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::dshape\+\_\+lagrangian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates ~\newline
+ 
+
+
+
+Definition at line 431 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt.
+
+
+
+Referenced by set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a6856fec818c676569c865eff43b80db6}\label{classoomph_1_1StorableShapeSolidElementBase_a6856fec818c676569c865eff43b80db6}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!dshape\_lagrangian\_stored\_pt@{dshape\_lagrangian\_stored\_pt}}
+\index{dshape\_lagrangian\_stored\_pt@{dshape\_lagrangian\_stored\_pt}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{dshape\_lagrangian\_stored\_pt()}{dshape\_lagrangian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ const \& oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::dshape\+\_\+lagrangian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the vector of pointers to the stored first derivatives of the shape functions w.\+r.\+t the global (eulerian) coordinates (const version) 
+
+
+
+Definition at line 437 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a7a852f45981f5406f6e2f49a2f9c8fc2}\label{classoomph_1_1StorableShapeSolidElementBase_a7a852f45981f5406f6e2f49a2f9c8fc2}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!jacobian\_lagrangian\_stored\_pt@{jacobian\_lagrangian\_stored\_pt}}
+\index{jacobian\_lagrangian\_stored\_pt@{jacobian\_lagrangian\_stored\_pt}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{jacobian\_lagrangian\_stored\_pt()}{jacobian\_lagrangian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$ \& oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the vector of Jacobians of the mapping between the local and global (eulerian) coordinates. 
+
+
+
+Definition at line 454 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt.
+
+
+
+Referenced by set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_aff2cba1205b0fefacdc435dd298fb219}\label{classoomph_1_1StorableShapeSolidElementBase_aff2cba1205b0fefacdc435dd298fb219}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!jacobian\_lagrangian\_stored\_pt@{jacobian\_lagrangian\_stored\_pt}}
+\index{jacobian\_lagrangian\_stored\_pt@{jacobian\_lagrangian\_stored\_pt}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{jacobian\_lagrangian\_stored\_pt()}{jacobian\_lagrangian\_stored\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$ const \& oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the vector of Jacobians of the mapping between the local and global (eulerian) coordinates (const version) 
+
+
+
+Definition at line 460 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a39120d36ee55497f58f4d31aebe2f0c9}\label{classoomph_1_1StorableShapeSolidElementBase_a39120d36ee55497f58f4d31aebe2f0c9}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase}{Storable\+Shape\+Solid\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 389 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a3f1b400868aa398cedc57e01d1eb1a24}\label{classoomph_1_1StorableShapeSolidElementBase_a3f1b400868aa398cedc57e01d1eb1a24}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!pre\_compute\_d2shape\_lagrangian\_at\_knots@{pre\_compute\_d2shape\_lagrangian\_at\_knots}}
+\index{pre\_compute\_d2shape\_lagrangian\_at\_knots@{pre\_compute\_d2shape\_lagrangian\_at\_knots}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{pre\_compute\_d2shape\_lagrangian\_at\_knots()}{pre\_compute\_d2shape\_lagrangian\_at\_knots()}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculate the first and second derivatives of the shape functions w.\+r.\+t Lagrangian coordinates at the integration points and store the results internally. 
+
+Calculate the values of the first and second derivatives of the shape functions at the integration points and store in the internal storage of the element 
+
+Definition at line 1011 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+
+
+
+References Can\+\_\+delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored, oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot(), D2\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt, delete\+\_\+d2shape\+\_\+lagrangian\+\_\+stored(), delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored(), delete\+\_\+\+J\+\_\+lagrangian\+\_\+stored(), D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt, i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt, oomph\+::\+Geom\+Object\+::nlagrangian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, and oomph\+::\+Storable\+Shape\+Element\+Base\+::pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots().
+
+
+
+Referenced by set\+\_\+integration\+\_\+scheme().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a501f9f5b1d42e75de4bf6efaa86cf14a}\label{classoomph_1_1StorableShapeSolidElementBase_a501f9f5b1d42e75de4bf6efaa86cf14a}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!pre\_compute\_dshape\_lagrangian\_at\_knots@{pre\_compute\_dshape\_lagrangian\_at\_knots}}
+\index{pre\_compute\_dshape\_lagrangian\_at\_knots@{pre\_compute\_dshape\_lagrangian\_at\_knots}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{pre\_compute\_dshape\_lagrangian\_at\_knots()}{pre\_compute\_dshape\_lagrangian\_at\_knots()}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::pre\+\_\+compute\+\_\+dshape\+\_\+lagrangian\+\_\+at\+\_\+knots (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculate the first derivatives of the shape functions w.\+r.\+t Lagrangian coordinates at the integration points and store the results internally. 
+
+Calculate the values of the derivatives of the shape functions at the integration points and store in the internal storage of the element 
+
+Definition at line 949 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+
+
+
+References Can\+\_\+delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored, delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored(), delete\+\_\+\+J\+\_\+lagrangian\+\_\+stored(), oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot(), D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt, i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt, oomph\+::\+Geom\+Object\+::nlagrangian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), and oomph\+::\+Storable\+Shape\+Element\+Base\+::pre\+\_\+compute\+\_\+shape\+\_\+at\+\_\+knots().
+
+
+
+Referenced by set\+\_\+integration\+\_\+scheme().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_af28a213163e0b5dfb7d9597783dfec3f}\label{classoomph_1_1StorableShapeSolidElementBase_af28a213163e0b5dfb7d9597783dfec3f}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!set\_dshape\_lagrangian\_stored\_from\_element@{set\_dshape\_lagrangian\_stored\_from\_element}}
+\index{set\_dshape\_lagrangian\_stored\_from\_element@{set\_dshape\_lagrangian\_stored\_from\_element}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{set\_dshape\_lagrangian\_stored\_from\_element()}{set\_dshape\_lagrangian\_stored\_from\_element()}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase}{Storable\+Shape\+Solid\+Element\+Base}} $\ast$const \&}]{element\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Set the derivatives of stored shape functions with respect to the lagrangian coordinates to be the same as those pointed to by the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} element\+\_\+pt. Note that this function also calls set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element(element\+\_\+pt). so that the local derivatives are also stored. Calling this function only makes sense for uniformly-\/spaced meshes with elements of equal sizes. 
+
+Set the stored derivatives of shape functions w.\+r.\+t Lagrangian coordinates to be those stored in the \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase}{Storable\+Shape\+Element\+Base}} pointed to by element\+\_\+pt. Using this function will allow a saving in the storage required for integration schemes in the (most common) case when a large number of elements have the same integration scheme 
+
+Definition at line 1153 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc.
+
+
+
+References Can\+\_\+delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored, D2\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt, d2shape\+\_\+lagrangian\+\_\+stored\+\_\+pt(), delete\+\_\+all\+\_\+dshape\+\_\+lagrangian\+\_\+stored(), D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt, dshape\+\_\+lagrangian\+\_\+stored\+\_\+pt(), Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt, jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt(), and oomph\+::\+Storable\+Shape\+Element\+Base\+::set\+\_\+shape\+\_\+local\+\_\+stored\+\_\+from\+\_\+element().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_acca94924abe9b0a0572ed0a73efb600a}\label{classoomph_1_1StorableShapeSolidElementBase_acca94924abe9b0a0572ed0a73efb600a}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!set\_integration\_scheme@{set\_integration\_scheme}}
+\index{set\_integration\_scheme@{set\_integration\_scheme}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{set\_integration\_scheme()}{set\_integration\_scheme()}}
+{\footnotesize\ttfamily void oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::set\+\_\+integration\+\_\+scheme (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$const \&}]{integral\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the set\+\_\+integration\+\_\+scheme to recompute any stored derivatives w.\+r.\+t. Lagrangian coordinates. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1StorableShapeElementBase_a1c20f4028654ec94f57037a3e3dc6582}{oomph\+::\+Storable\+Shape\+Element\+Base}}.
+
+
+
+Definition at line 412 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References D2\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt, D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots(), pre\+\_\+compute\+\_\+dshape\+\_\+lagrangian\+\_\+at\+\_\+knots(), and oomph\+::\+Storable\+Shape\+Element\+Base\+::set\+\_\+integration\+\_\+scheme().
+
+
+
+Referenced by oomph\+::\+Storable\+Shape\+Solid\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Storable\+Shape\+Solid\+Element().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_acacb2dca4af0a7f55c63ddc8a4d952f8}\label{classoomph_1_1StorableShapeSolidElementBase_acacb2dca4af0a7f55c63ddc8a4d952f8}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!Can\_delete\_dshape\_lagrangian\_stored@{Can\_delete\_dshape\_lagrangian\_stored}}
+\index{Can\_delete\_dshape\_lagrangian\_stored@{Can\_delete\_dshape\_lagrangian\_stored}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{Can\_delete\_dshape\_lagrangian\_stored}{Can\_delete\_dshape\_lagrangian\_stored}}
+{\footnotesize\ttfamily bool oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::\+Can\+\_\+delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean to determine whether the element can delete the stored shape function derivatives w.\+r.\+t. the Lagrangian coordinate. 
+
+
+
+Definition at line 366 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+Referenced by delete\+\_\+d2shape\+\_\+lagrangian\+\_\+stored(), delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored(), delete\+\_\+\+J\+\_\+lagrangian\+\_\+stored(), pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots(), pre\+\_\+compute\+\_\+dshape\+\_\+lagrangian\+\_\+at\+\_\+knots(), and set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a5b70ba5dbc22fa3d5741b1cf0791f84b}\label{classoomph_1_1StorableShapeSolidElementBase_a5b70ba5dbc22fa3d5741b1cf0791f84b}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!D2Shape\_lagrangian\_stored\_pt@{D2Shape\_lagrangian\_stored\_pt}}
+\index{D2Shape\_lagrangian\_stored\_pt@{D2Shape\_lagrangian\_stored\_pt}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{D2Shape\_lagrangian\_stored\_pt}{D2Shape\_lagrangian\_stored\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::\+D2\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to storage for the pointers to the second derivatives of the shape functions w.\+r.\+t. Lagrangian coordinates at integration points. 
+
+
+
+Definition at line 358 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+Referenced by d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot(), d2shape\+\_\+lagrangian\+\_\+stored\+\_\+pt(), delete\+\_\+d2shape\+\_\+lagrangian\+\_\+stored(), pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots(), set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element(), and set\+\_\+integration\+\_\+scheme().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_aea43da502d9ec0f38f5018a9f73039af}\label{classoomph_1_1StorableShapeSolidElementBase_aea43da502d9ec0f38f5018a9f73039af}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!DShape\_lagrangian\_stored\_pt@{DShape\_lagrangian\_stored\_pt}}
+\index{DShape\_lagrangian\_stored\_pt@{DShape\_lagrangian\_stored\_pt}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{DShape\_lagrangian\_stored\_pt}{DShape\_lagrangian\_stored\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}}$\ast$$>$$\ast$ oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::\+D\+Shape\+\_\+lagrangian\+\_\+stored\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to storage for the pointers to the derivatives of the shape functions w.\+r.\+t. Lagrangian coordinates at integration points. 
+
+
+
+Definition at line 354 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+Referenced by delete\+\_\+dshape\+\_\+lagrangian\+\_\+stored(), dshape\+\_\+lagrangian\+\_\+at\+\_\+knot(), dshape\+\_\+lagrangian\+\_\+stored\+\_\+pt(), pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots(), pre\+\_\+compute\+\_\+dshape\+\_\+lagrangian\+\_\+at\+\_\+knots(), set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element(), and set\+\_\+integration\+\_\+scheme().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeSolidElementBase_a0817df47c8e2d67c75407a03744504e8}\label{classoomph_1_1StorableShapeSolidElementBase_a0817df47c8e2d67c75407a03744504e8}} 
+\index{oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}!Jacobian\_lagrangian\_stored\_pt@{Jacobian\_lagrangian\_stored\_pt}}
+\index{Jacobian\_lagrangian\_stored\_pt@{Jacobian\_lagrangian\_stored\_pt}!oomph::StorableShapeSolidElementBase@{oomph::StorableShapeSolidElementBase}}
+\doxysubsubsection{\texorpdfstring{Jacobian\_lagrangian\_stored\_pt}{Jacobian\_lagrangian\_stored\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$ oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::\+Jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to storage for the Jacobian of the mapping between the local and the global Lagrangian coordinates ~\newline
+ 
+
+
+
+Definition at line 362 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+Referenced by d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot(), delete\+\_\+\+J\+\_\+lagrangian\+\_\+stored(), dshape\+\_\+lagrangian\+\_\+at\+\_\+knot(), jacobian\+\_\+lagrangian\+\_\+stored\+\_\+pt(), pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots(), pre\+\_\+compute\+\_\+dshape\+\_\+lagrangian\+\_\+at\+\_\+knots(), and set\+\_\+dshape\+\_\+lagrangian\+\_\+stored\+\_\+from\+\_\+element().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{stored__shape__function__elements_8h}{stored\+\_\+shape\+\_\+function\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{stored__shape__function__elements_8cc}{stored\+\_\+shape\+\_\+function\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

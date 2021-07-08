@@ -1,0 +1,884 @@
+\hypertarget{classoomph_1_1MumpsSolver}{}\doxysection{oomph\+::Mumps\+Solver Class Reference}
+\label{classoomph_1_1MumpsSolver}\index{oomph::MumpsSolver@{oomph::MumpsSolver}}
+
+
+Wrapper to Mumps solver.  
+
+
+
+
+{\ttfamily \#include $<$mumps\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Mumps\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1MumpsSolver}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MumpsSolver_ac3f965da46774f48a9b756610f81140e}{Mumps\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call setup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MumpsSolver_a0f70542a7e29c3e2dce02a8516e796f6}{Mumps\+Solver}} (const \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_aabd9e13bf639979489557b9af141eb5d}{operator=}} (const \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MumpsSolver_a20e6116da9911337fb80486bcfaf7eb4}{$\sim$\+Mumps\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Cleanup. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_aba2b1c844e190da45c8adbd6dfc0f344}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Overload disable resolve so that it cleans up memory too. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a0f7ea8c453b2ff106ce42a11c8182cf5}{enable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD}} ()
+\begin{DoxyCompactList}\small\item\em Set boolean to suppress warning about communicator not equal to M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_ade6f5dff6fddd0eeef6ef051ab5dfbc1}{disable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t suppress warning about communicator not equal to M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a9be151628e1d8b488441ce2455f888e1}{enable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Set boolean to suppress info being printed to screen during M\+U\+M\+PS solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad75c9ff36be18867a88e0a68fac68f7c}{disable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t suppress info being printed to screen during M\+U\+M\+PS solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_ae0346a464f3ed74bfcca4063bdeed3ad}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a3995dcf46675fc443b4d373d348a0fdf}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a849d13cac2177452446c2ec387a0260f}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Resolve the system defined by the last assembled Jacobian and the specified rhs vector if resolve has been enabled. Note\+: returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a25426798eb831cf552bdc17c0307ff25}{enable\+\_\+doc\+\_\+stats}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of statistics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a8f64fcf52cb7cbf89b75da1d794dee5f}{disable\+\_\+doc\+\_\+stats}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of statistics. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1MumpsSolver_aea9e3eead627f8f8963f7b5c70b669f7}{jacobian\+\_\+setup\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Returns the time taken to assemble the Jacobian matrix and residual vector. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1MumpsSolver_a52e765662a0e2cbd81dc5dc280905604}{linear\+\_\+solver\+\_\+solution\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Return the time taken to solve the linear system (needs to be overloaded for each linear solver) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_ab5d49803e13ef6e6026e470a9933613e}{enable\+\_\+suppress\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Set the flag to avoid solution of the system, so just assemble the Jacobian and the rhs. (Used only for timing runs, obviously) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a34346022a010acc09dc0ab1ce59d90a7}{disable\+\_\+suppress\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Unset the flag so that the system is actually solved again This is the default (obviously) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_afbab47dbf3effebd34f3d3ba1634f7d3}{enable\+\_\+delete\+\_\+matrix\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Set Delete\+\_\+matrix\+\_\+data flag. \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a52b3fbf9407cb8284f1c80600b11869f}{disable\+\_\+delete\+\_\+matrix\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Unset Delete\+\_\+matrix\+\_\+data flag. \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_aeab520bd25edb0f4e88feaedec689333}{factorise}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a92ab601b671c2b7eea44a470aa5ec4f3}{backsub}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Do the backsubstitution for mumps solver Note\+: returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Clean up the memory allocated by the mumps solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_ab0656b67b21335203eb7fbce8c7c7535}{Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve}} =false
+\begin{DoxyCompactList}\small\item\em Static flag that determines whether the warning about incorrect distribution of R\+H\+Ss will be printed or not. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad6bd1660c9c62b039b9cdd8074169a25}{Default\+\_\+workspace\+\_\+scaling\+\_\+factor}} =5
+\begin{DoxyCompactList}\small\item\em Default factor for workspace -- static so it can be overwritten globally. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_ae5e186152100c7d5f045d3df2a115c72}{initialise\+\_\+mumps}} ()
+\begin{DoxyCompactList}\small\item\em Initialise instance of mumps data structure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MumpsSolver_a5cf1f5e02e905d39e1b324dc921568f6}{shutdown\+\_\+mumps}} ()
+\begin{DoxyCompactList}\small\item\em Shutdown mumps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1MumpsSolver_a0608ee6d4a166c35a5d2d3756f119780}{Jacobian\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Jacobian setup time. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1MumpsSolver_a6a5a305985a4215cc3456df54f531900}{Solution\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Solution time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_a851b95821f3adce5545e7abe238b3cce}{Suppress\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em Suppress solve? \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_a8dc51b4b7e2b121773aea1ed7820ea16}{Doc\+\_\+stats}}
+\begin{DoxyCompactList}\small\item\em Set to true for \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} to output statistics (false by default). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_a4a770886867c62d2eff6afe4b091fabd}{Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD}}
+\begin{DoxyCompactList}\small\item\em Boolean to suppress warning about communicator not equal to M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_acfc51e1ed214d9d2dc5a83b04a08d1f7}{Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em Boolean to suppress info being printed to screen during M\+U\+M\+PS solve. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_a3512c04b1bfcf11064c0da453ba34806}{Mumps\+\_\+is\+\_\+initialised}}
+\begin{DoxyCompactList}\small\item\em Has mumps been initialised? \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1MumpsSolver_a78d0283ea0263a5b31b7662d7abdfcb8}{Workspace\+\_\+scaling\+\_\+factor}}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1MumpsSolver_a88430ee69fb2015c48ec123b26e019e9}{Delete\+\_\+matrix\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Delete\+\_\+matrix\+\_\+data flag. \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1MumpsSolver_a969c7e01bcce31a946e01f03953e0745}{Irn\+\_\+loc}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} for row numbers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1MumpsSolver_a593d7783708440445e09b6d595168cce}{Jcn\+\_\+loc}}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1MumpsSolver_a5b40d6e4d26ada5edef87bc1fa511d06}{A\+\_\+loc}}
+\item 
+D\+M\+U\+M\+P\+S\+\_\+\+S\+T\+R\+U\+C\+\_\+C $\ast$ \mbox{\hyperlink{classoomph_1_1MumpsSolver_a0cf148106cf3cc86e238ae4f289be0f8}{Mumps\+\_\+struc\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to M\+U\+M\+PS struct that contains the solver data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Wrapper to Mumps solver. 
+
+Definition at line 56 of file mumps\+\_\+solver.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_ac3f965da46774f48a9b756610f81140e}\label{classoomph_1_1MumpsSolver_ac3f965da46774f48a9b756610f81140e}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!MumpsSolver@{MumpsSolver}}
+\index{MumpsSolver@{MumpsSolver}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{MumpsSolver()}{MumpsSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Mumps\+Solver\+::\+Mumps\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Call setup. 
+
+
+
+Definition at line 73 of file mumps\+\_\+solver.\+cc.
+
+
+
+References Default\+\_\+workspace\+\_\+scaling\+\_\+factor, Delete\+\_\+matrix\+\_\+data, Doc\+\_\+stats, Mumps\+\_\+is\+\_\+initialised, Mumps\+\_\+struc\+\_\+pt, Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve, Suppress\+\_\+solve, Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD, and Workspace\+\_\+scaling\+\_\+factor.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a0f70542a7e29c3e2dce02a8516e796f6}\label{classoomph_1_1MumpsSolver_a0f70542a7e29c3e2dce02a8516e796f6}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!MumpsSolver@{MumpsSolver}}
+\index{MumpsSolver@{MumpsSolver}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{MumpsSolver()}{MumpsSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Mumps\+Solver\+::\+Mumps\+Solver (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 69 of file mumps\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a20e6116da9911337fb80486bcfaf7eb4}\label{classoomph_1_1MumpsSolver_a20e6116da9911337fb80486bcfaf7eb4}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!````~MumpsSolver@{$\sim$MumpsSolver}}
+\index{````~MumpsSolver@{$\sim$MumpsSolver}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{$\sim$MumpsSolver()}{~MumpsSolver()}}
+{\footnotesize\ttfamily oomph\+::\+Mumps\+Solver\+::$\sim$\+Mumps\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor\+: Cleanup. 
+
+Destructor\+: Shutdown mumps. 
+
+Definition at line 170 of file mumps\+\_\+solver.\+cc.
+
+
+
+References shutdown\+\_\+mumps().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a92ab601b671c2b7eea44a470aa5ec4f3}\label{classoomph_1_1MumpsSolver_a92ab601b671c2b7eea44a470aa5ec4f3}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!backsub@{backsub}}
+\index{backsub@{backsub}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{backsub()}{backsub()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::backsub (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})}
+
+
+
+Do the backsubstitution for mumps solver Note\+: returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
+Do the backsubstitution for mumps solver. This does not make any assumption about the distribution of the vectors 
+
+Definition at line 483 of file mumps\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Doc\+\_\+stats, oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, Mumps\+\_\+is\+\_\+initialised, Mumps\+\_\+struc\+\_\+pt, n, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), oomph\+::oomph\+\_\+info, oomph\+::\+Double\+Vector\+::redistribute(), Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve, Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD, and oomph\+::\+Timing\+Helpers\+::timer().
+
+
+
+Referenced by resolve(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}\label{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up the memory allocated by the mumps solver. 
+
+Clean up the memory allocated for the \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} solver. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 659 of file mumps\+\_\+solver.\+cc.
+
+
+
+References shutdown\+\_\+mumps().
+
+
+
+Referenced by oomph\+::\+New\+Mumps\+Preconditioner\+::clean\+\_\+up\+\_\+memory(), disable\+\_\+resolve(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a52b3fbf9407cb8284f1c80600b11869f}\label{classoomph_1_1MumpsSolver_a52b3fbf9407cb8284f1c80600b11869f}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_delete\_matrix\_data@{disable\_delete\_matrix\_data}}
+\index{disable\_delete\_matrix\_data@{disable\_delete\_matrix\_data}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_delete\_matrix\_data()}{disable\_delete\_matrix\_data()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::disable\+\_\+delete\+\_\+matrix\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unset Delete\+\_\+matrix\+\_\+data flag. \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. 
+
+
+
+Definition at line 170 of file mumps\+\_\+solver.\+h.
+
+
+
+References Delete\+\_\+matrix\+\_\+data.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a8f64fcf52cb7cbf89b75da1d794dee5f}\label{classoomph_1_1MumpsSolver_a8f64fcf52cb7cbf89b75da1d794dee5f}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_doc\_stats@{disable\_doc\_stats}}
+\index{disable\_doc\_stats@{disable\_doc\_stats}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_doc\_stats()}{disable\_doc\_stats()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable documentation of statistics. 
+
+
+
+Definition at line 131 of file mumps\+\_\+solver.\+h.
+
+
+
+References Doc\+\_\+stats.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_aba2b1c844e190da45c8adbd6dfc0f344}\label{classoomph_1_1MumpsSolver_aba2b1c844e190da45c8adbd6dfc0f344}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_resolve@{disable\_resolve}}
+\index{disable\_resolve@{disable\_resolve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_resolve()}{disable\_resolve()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload disable resolve so that it cleans up memory too. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 84 of file mumps\+\_\+solver.\+h.
+
+
+
+References clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_ad75c9ff36be18867a88e0a68fac68f7c}\label{classoomph_1_1MumpsSolver_ad75c9ff36be18867a88e0a68fac68f7c}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_suppress\_mumps\_info\_during\_solve@{disable\_suppress\_mumps\_info\_during\_solve}}
+\index{disable\_suppress\_mumps\_info\_during\_solve@{disable\_suppress\_mumps\_info\_during\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_suppress\_mumps\_info\_during\_solve()}{disable\_suppress\_mumps\_info\_during\_solve()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::disable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Don\textquotesingle{}t suppress info being printed to screen during M\+U\+M\+PS solve. 
+
+
+
+Definition at line 105 of file mumps\+\_\+solver.\+h.
+
+
+
+References Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a34346022a010acc09dc0ab1ce59d90a7}\label{classoomph_1_1MumpsSolver_a34346022a010acc09dc0ab1ce59d90a7}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_suppress\_solve@{disable\_suppress\_solve}}
+\index{disable\_suppress\_solve@{disable\_suppress\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_suppress\_solve()}{disable\_suppress\_solve()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::disable\+\_\+suppress\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unset the flag so that the system is actually solved again This is the default (obviously) 
+
+
+
+Definition at line 154 of file mumps\+\_\+solver.\+h.
+
+
+
+References Suppress\+\_\+solve.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_ade6f5dff6fddd0eeef6ef051ab5dfbc1}\label{classoomph_1_1MumpsSolver_ade6f5dff6fddd0eeef6ef051ab5dfbc1}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD@{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD}}
+\index{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD@{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD()}{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::disable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Don\textquotesingle{}t suppress warning about communicator not equal to M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD. 
+
+
+
+Definition at line 96 of file mumps\+\_\+solver.\+h.
+
+
+
+References Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_afbab47dbf3effebd34f3d3ba1634f7d3}\label{classoomph_1_1MumpsSolver_afbab47dbf3effebd34f3d3ba1634f7d3}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_delete\_matrix\_data@{enable\_delete\_matrix\_data}}
+\index{enable\_delete\_matrix\_data@{enable\_delete\_matrix\_data}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_delete\_matrix\_data()}{enable\_delete\_matrix\_data()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::enable\+\_\+delete\+\_\+matrix\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set Delete\+\_\+matrix\+\_\+data flag. \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. 
+
+
+
+Definition at line 162 of file mumps\+\_\+solver.\+h.
+
+
+
+References Delete\+\_\+matrix\+\_\+data.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a25426798eb831cf552bdc17c0307ff25}\label{classoomph_1_1MumpsSolver_a25426798eb831cf552bdc17c0307ff25}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_doc\_stats@{enable\_doc\_stats}}
+\index{enable\_doc\_stats@{enable\_doc\_stats}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_stats()}{enable\_doc\_stats()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable documentation of statistics. 
+
+
+
+Definition at line 128 of file mumps\+\_\+solver.\+h.
+
+
+
+References Doc\+\_\+stats.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a9be151628e1d8b488441ce2455f888e1}\label{classoomph_1_1MumpsSolver_a9be151628e1d8b488441ce2455f888e1}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_suppress\_mumps\_info\_during\_solve@{enable\_suppress\_mumps\_info\_during\_solve}}
+\index{enable\_suppress\_mumps\_info\_during\_solve@{enable\_suppress\_mumps\_info\_during\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_suppress\_mumps\_info\_during\_solve()}{enable\_suppress\_mumps\_info\_during\_solve()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::enable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set boolean to suppress info being printed to screen during M\+U\+M\+PS solve. 
+
+
+
+Definition at line 101 of file mumps\+\_\+solver.\+h.
+
+
+
+References Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_ab5d49803e13ef6e6026e470a9933613e}\label{classoomph_1_1MumpsSolver_ab5d49803e13ef6e6026e470a9933613e}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_suppress\_solve@{enable\_suppress\_solve}}
+\index{enable\_suppress\_solve@{enable\_suppress\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_suppress\_solve()}{enable\_suppress\_solve()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::enable\+\_\+suppress\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the flag to avoid solution of the system, so just assemble the Jacobian and the rhs. (Used only for timing runs, obviously) 
+
+
+
+Definition at line 150 of file mumps\+\_\+solver.\+h.
+
+
+
+References Suppress\+\_\+solve.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a0f7ea8c453b2ff106ce42a11c8182cf5}\label{classoomph_1_1MumpsSolver_a0f7ea8c453b2ff106ce42a11c8182cf5}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD@{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD}}
+\index{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD@{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD()}{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::enable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set boolean to suppress warning about communicator not equal to M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD. 
+
+
+
+Definition at line 92 of file mumps\+\_\+solver.\+h.
+
+
+
+References Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_aeab520bd25edb0f4e88feaedec689333}\label{classoomph_1_1MumpsSolver_aeab520bd25edb0f4e88feaedec689333}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!factorise@{factorise}}
+\index{factorise@{factorise}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{factorise()}{factorise()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::factorise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
+
+LU decompose the matrix addressed by matrix\+\_\+pt using mumps. The resulting matrix factors are stored internally. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
+
+Definition at line 182 of file mumps\+\_\+solver.\+cc.
+
+
+
+References A\+\_\+loc, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+C\+R\+Double\+Matrix\+::built(), oomph\+::\+C\+R\+Double\+Matrix\+::clear(), oomph\+::\+C\+R\+Double\+Matrix\+::column\+\_\+index(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), Delete\+\_\+matrix\+\_\+data, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Doc\+\_\+stats, oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), initialise\+\_\+mumps(), Irn\+\_\+loc, Jcn\+\_\+loc, Mumps\+\_\+is\+\_\+initialised, Mumps\+\_\+struc\+\_\+pt, n, oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+C\+R\+Double\+Matrix\+::nnz(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::oomph\+\_\+info, oomph\+::\+C\+R\+Double\+Matrix\+::row\+\_\+start(), shutdown\+\_\+mumps(), Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve, Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD, oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+C\+R\+Double\+Matrix\+::value(), and Workspace\+\_\+scaling\+\_\+factor.
+
+
+
+Referenced by oomph\+::\+New\+Mumps\+Preconditioner\+::setup(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_ae5e186152100c7d5f045d3df2a115c72}\label{classoomph_1_1MumpsSolver_ae5e186152100c7d5f045d3df2a115c72}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!initialise\_mumps@{initialise\_mumps}}
+\index{initialise\_mumps@{initialise\_mumps}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{initialise\_mumps()}{initialise\_mumps()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::initialise\+\_\+mumps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initialise instance of mumps data structure. 
+
+
+
+Definition at line 89 of file mumps\+\_\+solver.\+cc.
+
+
+
+References Mumps\+\_\+is\+\_\+initialised, and Mumps\+\_\+struc\+\_\+pt.
+
+
+
+Referenced by factorise().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_aea9e3eead627f8f8963f7b5c70b669f7}\label{classoomph_1_1MumpsSolver_aea9e3eead627f8f8963f7b5c70b669f7}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!jacobian\_setup\_time@{jacobian\_setup\_time}}
+\index{jacobian\_setup\_time@{jacobian\_setup\_time}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{jacobian\_setup\_time()}{jacobian\_setup\_time()}}
+{\footnotesize\ttfamily double oomph\+::\+Mumps\+Solver\+::jacobian\+\_\+setup\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the time taken to assemble the Jacobian matrix and residual vector. 
+
+
+
+Definition at line 135 of file mumps\+\_\+solver.\+h.
+
+
+
+References Jacobian\+\_\+setup\+\_\+time.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a52e765662a0e2cbd81dc5dc280905604}\label{classoomph_1_1MumpsSolver_a52e765662a0e2cbd81dc5dc280905604}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!linear\_solver\_solution\_time@{linear\_solver\_solution\_time}}
+\index{linear\_solver\_solution\_time@{linear\_solver\_solution\_time}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_solution\_time()}{linear\_solver\_solution\_time()}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Mumps\+Solver\+::linear\+\_\+solver\+\_\+solution\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the time taken to solve the linear system (needs to be overloaded for each linear solver) 
+
+
+
+Definition at line 142 of file mumps\+\_\+solver.\+h.
+
+
+
+References Solution\+\_\+time.
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_aabd9e13bf639979489557b9af141eb5d}\label{classoomph_1_1MumpsSolver_aabd9e13bf639979489557b9af141eb5d}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 75 of file mumps\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a849d13cac2177452446c2ec387a0260f}\label{classoomph_1_1MumpsSolver_a849d13cac2177452446c2ec387a0260f}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!resolve@{resolve}}
+\index{resolve@{resolve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::resolve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Resolve the system defined by the last assembled Jacobian and the specified rhs vector if resolve has been enabled. Note\+: returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
+Resolve the system defined by the last assembled jacobian and the specified rhs vector if resolve has been enabled. Note\+: returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 946 of file mumps\+\_\+solver.\+cc.
+
+
+
+References backsub(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Doc\+\_\+stats, oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, Mumps\+\_\+struc\+\_\+pt, oomph\+::oomph\+\_\+info, Solution\+\_\+time, Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD, and oomph\+::\+Timing\+Helpers\+::timer().
+
+
+
+Referenced by oomph\+::\+New\+Mumps\+Preconditioner\+::preconditioner\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a5cf1f5e02e905d39e1b324dc921568f6}\label{classoomph_1_1MumpsSolver_a5cf1f5e02e905d39e1b324dc921568f6}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!shutdown\_mumps@{shutdown\_mumps}}
+\index{shutdown\_mumps@{shutdown\_mumps}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{shutdown\_mumps()}{shutdown\_mumps()}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::shutdown\+\_\+mumps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Shutdown mumps. 
+
+
+
+Definition at line 141 of file mumps\+\_\+solver.\+cc.
+
+
+
+References A\+\_\+loc, Irn\+\_\+loc, Jcn\+\_\+loc, Mumps\+\_\+is\+\_\+initialised, and Mumps\+\_\+struc\+\_\+pt.
+
+
+
+Referenced by clean\+\_\+up\+\_\+memory(), factorise(), and $\sim$\+Mumps\+Solver().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a3995dcf46675fc443b4d373d348a0fdf}\label{classoomph_1_1MumpsSolver_a3995dcf46675fc443b4d373d348a0fdf}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} pointer defaults to N\+U\+LL and can be omitted. The function returns the global result vector. \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} must be \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 673 of file mumps\+\_\+solver.\+cc.
+
+
+
+References backsub(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, factorise(), Mumps\+\_\+struc\+\_\+pt, oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::oomph\+\_\+info, Solution\+\_\+time, Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD, and oomph\+::\+Timing\+Helpers\+::timer().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_ae0346a464f3ed74bfcca4063bdeed3ad}\label{classoomph_1_1MumpsSolver_ae0346a464f3ed74bfcca4063bdeed3ad}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Mumps\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
+Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 841 of file mumps\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Delete\+\_\+matrix\+\_\+data, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Problem\+::get\+\_\+jacobian(), Jacobian\+\_\+setup\+\_\+time, oomph\+::\+Problem\+::ndof(), oomph\+::oomph\+\_\+info, oomph\+::\+Double\+Vector\+::redistribute(), residuals(), Suppress\+\_\+solve, Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD, and oomph\+::\+Timing\+Helpers\+::timer().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a5b40d6e4d26ada5edef87bc1fa511d06}\label{classoomph_1_1MumpsSolver_a5b40d6e4d26ada5edef87bc1fa511d06}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!A\_loc@{A\_loc}}
+\index{A\_loc@{A\_loc}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{A\_loc}{A\_loc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Mumps\+Solver\+::\+A\+\_\+loc\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 236 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by factorise(), and shutdown\+\_\+mumps().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_ad6bd1660c9c62b039b9cdd8074169a25}\label{classoomph_1_1MumpsSolver_ad6bd1660c9c62b039b9cdd8074169a25}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Default\_workspace\_scaling\_factor@{Default\_workspace\_scaling\_factor}}
+\index{Default\_workspace\_scaling\_factor@{Default\_workspace\_scaling\_factor}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Default\_workspace\_scaling\_factor}{Default\_workspace\_scaling\_factor}}
+{\footnotesize\ttfamily int oomph\+::\+Mumps\+Solver\+::\+Default\+\_\+workspace\+\_\+scaling\+\_\+factor =5\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Default factor for workspace -- static so it can be overwritten globally. 
+
+
+
+Definition at line 187 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by Mumps\+Solver().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a88430ee69fb2015c48ec123b26e019e9}\label{classoomph_1_1MumpsSolver_a88430ee69fb2015c48ec123b26e019e9}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Delete\_matrix\_data@{Delete\_matrix\_data}}
+\index{Delete\_matrix\_data@{Delete\_matrix\_data}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Delete\_matrix\_data}{Delete\_matrix\_data}}
+{\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Delete\+\_\+matrix\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Delete\+\_\+matrix\+\_\+data flag. \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. 
+
+
+
+Definition at line 227 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by disable\+\_\+delete\+\_\+matrix\+\_\+data(), enable\+\_\+delete\+\_\+matrix\+\_\+data(), factorise(), Mumps\+Solver(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a8dc51b4b7e2b121773aea1ed7820ea16}\label{classoomph_1_1MumpsSolver_a8dc51b4b7e2b121773aea1ed7820ea16}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Doc\_stats@{Doc\_stats}}
+\index{Doc\_stats@{Doc\_stats}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Doc\_stats}{Doc\_stats}}
+{\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Doc\+\_\+stats\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set to true for \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} to output statistics (false by default). 
+
+
+
+Definition at line 207 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by backsub(), disable\+\_\+doc\+\_\+stats(), enable\+\_\+doc\+\_\+stats(), factorise(), Mumps\+Solver(), and resolve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a969c7e01bcce31a946e01f03953e0745}\label{classoomph_1_1MumpsSolver_a969c7e01bcce31a946e01f03953e0745}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Irn\_loc@{Irn\_loc}}
+\index{Irn\_loc@{Irn\_loc}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Irn\_loc}{Irn\_loc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$int$>$ oomph\+::\+Mumps\+Solver\+::\+Irn\+\_\+loc\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} for row numbers. 
+
+
+
+Definition at line 230 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by factorise(), and shutdown\+\_\+mumps().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a0608ee6d4a166c35a5d2d3756f119780}\label{classoomph_1_1MumpsSolver_a0608ee6d4a166c35a5d2d3756f119780}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Jacobian\_setup\_time@{Jacobian\_setup\_time}}
+\index{Jacobian\_setup\_time@{Jacobian\_setup\_time}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Jacobian\_setup\_time}{Jacobian\_setup\_time}}
+{\footnotesize\ttfamily double oomph\+::\+Mumps\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Jacobian setup time. 
+
+
+
+Definition at line 198 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by jacobian\+\_\+setup\+\_\+time(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a593d7783708440445e09b6d595168cce}\label{classoomph_1_1MumpsSolver_a593d7783708440445e09b6d595168cce}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Jcn\_loc@{Jcn\_loc}}
+\index{Jcn\_loc@{Jcn\_loc}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Jcn\_loc}{Jcn\_loc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$int$>$ oomph\+::\+Mumps\+Solver\+::\+Jcn\+\_\+loc\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 233 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by factorise(), and shutdown\+\_\+mumps().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a3512c04b1bfcf11064c0da453ba34806}\label{classoomph_1_1MumpsSolver_a3512c04b1bfcf11064c0da453ba34806}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Mumps\_is\_initialised@{Mumps\_is\_initialised}}
+\index{Mumps\_is\_initialised@{Mumps\_is\_initialised}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Mumps\_is\_initialised}{Mumps\_is\_initialised}}
+{\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Mumps\+\_\+is\+\_\+initialised\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Has mumps been initialised? 
+
+
+
+Definition at line 216 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by backsub(), factorise(), initialise\+\_\+mumps(), Mumps\+Solver(), and shutdown\+\_\+mumps().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a0cf148106cf3cc86e238ae4f289be0f8}\label{classoomph_1_1MumpsSolver_a0cf148106cf3cc86e238ae4f289be0f8}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Mumps\_struc\_pt@{Mumps\_struc\_pt}}
+\index{Mumps\_struc\_pt@{Mumps\_struc\_pt}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Mumps\_struc\_pt}{Mumps\_struc\_pt}}
+{\footnotesize\ttfamily D\+M\+U\+M\+P\+S\+\_\+\+S\+T\+R\+U\+C\+\_\+C$\ast$ oomph\+::\+Mumps\+Solver\+::\+Mumps\+\_\+struc\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to M\+U\+M\+PS struct that contains the solver data. 
+
+
+
+Definition at line 239 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by backsub(), factorise(), initialise\+\_\+mumps(), Mumps\+Solver(), resolve(), shutdown\+\_\+mumps(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a6a5a305985a4215cc3456df54f531900}\label{classoomph_1_1MumpsSolver_a6a5a305985a4215cc3456df54f531900}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Solution\_time@{Solution\_time}}
+\index{Solution\_time@{Solution\_time}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Solution\_time}{Solution\_time}}
+{\footnotesize\ttfamily double oomph\+::\+Mumps\+Solver\+::\+Solution\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Solution time. 
+
+
+
+Definition at line 201 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by linear\+\_\+solver\+\_\+solution\+\_\+time(), resolve(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_ab0656b67b21335203eb7fbce8c7c7535}\label{classoomph_1_1MumpsSolver_ab0656b67b21335203eb7fbce8c7c7535}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
+\index{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
+{\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve =false\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static flag that determines whether the warning about incorrect distribution of R\+H\+Ss will be printed or not. 
+
+Static warning to suppress warnings about incorrect distribution of R\+HS vector. Default is false 
+
+Definition at line 63 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by backsub().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_acfc51e1ed214d9d2dc5a83b04a08d1f7}\label{classoomph_1_1MumpsSolver_acfc51e1ed214d9d2dc5a83b04a08d1f7}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Suppress\_mumps\_info\_during\_solve@{Suppress\_mumps\_info\_during\_solve}}
+\index{Suppress\_mumps\_info\_during\_solve@{Suppress\_mumps\_info\_during\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Suppress\_mumps\_info\_during\_solve}{Suppress\_mumps\_info\_during\_solve}}
+{\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean to suppress info being printed to screen during M\+U\+M\+PS solve. 
+
+
+
+Definition at line 213 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by disable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve(), enable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve(), factorise(), and Mumps\+Solver().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a851b95821f3adce5545e7abe238b3cce}\label{classoomph_1_1MumpsSolver_a851b95821f3adce5545e7abe238b3cce}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Suppress\_solve@{Suppress\_solve}}
+\index{Suppress\_solve@{Suppress\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Suppress\_solve}{Suppress\_solve}}
+{\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+solve\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Suppress solve? 
+
+
+
+Definition at line 204 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by disable\+\_\+suppress\+\_\+solve(), enable\+\_\+suppress\+\_\+solve(), Mumps\+Solver(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a4a770886867c62d2eff6afe4b091fabd}\label{classoomph_1_1MumpsSolver_a4a770886867c62d2eff6afe4b091fabd}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Suppress\_warning\_about\_MPI\_COMM\_WORLD@{Suppress\_warning\_about\_MPI\_COMM\_WORLD}}
+\index{Suppress\_warning\_about\_MPI\_COMM\_WORLD@{Suppress\_warning\_about\_MPI\_COMM\_WORLD}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Suppress\_warning\_about\_MPI\_COMM\_WORLD}{Suppress\_warning\_about\_MPI\_COMM\_WORLD}}
+{\footnotesize\ttfamily bool oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean to suppress warning about communicator not equal to M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD. 
+
+
+
+Definition at line 210 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by backsub(), disable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+L\+D(), enable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+L\+D(), factorise(), Mumps\+Solver(), resolve(), and solve().
+
+\mbox{\Hypertarget{classoomph_1_1MumpsSolver_a78d0283ea0263a5b31b7662d7abdfcb8}\label{classoomph_1_1MumpsSolver_a78d0283ea0263a5b31b7662d7abdfcb8}} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Workspace\_scaling\_factor@{Workspace\_scaling\_factor}}
+\index{Workspace\_scaling\_factor@{Workspace\_scaling\_factor}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Workspace\_scaling\_factor}{Workspace\_scaling\_factor}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Mumps\+Solver\+::\+Workspace\+\_\+scaling\+\_\+factor\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 219 of file mumps\+\_\+solver.\+h.
+
+
+
+Referenced by factorise(), and Mumps\+Solver().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mumps__solver_8h}{mumps\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{mumps__solver_8cc}{mumps\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

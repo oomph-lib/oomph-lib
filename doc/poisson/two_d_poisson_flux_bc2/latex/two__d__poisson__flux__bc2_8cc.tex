@@ -1,0 +1,47 @@
+\hypertarget{two__d__poisson__flux__bc2_8cc}{}\doxysection{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc File Reference}
+\label{two__d__poisson__flux__bc2_8cc}\index{two\_d\_poisson\_flux\_bc2.cc@{two\_d\_poisson\_flux\_bc2.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em Namespace for exact solution for Poisson equation with \char`\"{}sharp step\char`\"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e251}{Tanh\+Soln\+For\+Poisson\+::source\+\_\+function}} (const Vector$<$ double $>$ \&x, double \&source)
+\begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_a0e99ccf27df36f28f091de6d57484172}{Tanh\+Soln\+For\+Poisson\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+x\+\_\+boundary}} (const Vector$<$ double $>$ \&x, double \&flux)
+\begin{DoxyCompactList}\small\item\em Flux required by the exact solution on a boundary on which x is fixed. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Tanh\+Soln\+For\+Poisson\+::\+Alpha}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of \char`\"{}step\char`\"{}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for angle Phi of \char`\"{}step\char`\"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{two__d__poisson__flux__bc2_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{two__d__poisson__flux__bc2_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{two\_d\_poisson\_flux\_bc2.cc@{two\_d\_poisson\_flux\_bc2.cc}!main@{main}}
+\index{main@{main}!two\_d\_poisson\_flux\_bc2.cc@{two\_d\_poisson\_flux\_bc2.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Demonstrate how to solve 2D Poisson problem with flux boundary conditions, using two meshes. 
+
+Definition at line 365 of file two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc.
+
+
+
+References Tanh\+Soln\+For\+Poisson\+::\+Alpha, problem, Tanh\+Soln\+For\+Poisson\+::source\+\_\+function(), and Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi.
+

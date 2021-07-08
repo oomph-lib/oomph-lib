@@ -1,0 +1,705 @@
+\mainpage Boussinesq Convection: Combining the Navier--Stokes and Advection--Diffusion equations
+
+@I w 0.75\textwidth symm_broken "Steady Convection Rolls: contours of temperature and the vector velocity field for a two-dimensional domain heated from below at Ra = 1800 " 
+
+ We study convection of an
+ incompressible Newtonian fluid heated from below in a
+ two-dimensional domain of height \f$ H \f$:
+ the B&eacute;nard problem. The lower wall is maintained at a
+ temperature \f$ \theta_{bottom} \f$ and the upper wall is maintained at
+ a temperature \f$ \theta_{top} \f$, where \f$ \theta_{bottom} >
+ \theta_{top} \f$ .
+ The governing
+ equations are the (2D) Navier--Stokes equations 
+ under the Boussinesq
+ approximation, in which all variations in
+ physical properties with temperature are neglected, apart 
+ from that of the density
+ in the gravitational-body-force term in the momentum equations. 
+ This "buoyancy" term is given by
+ \f[ \Delta\rho G^{*}_{i}, \f] where \f$ \Delta\rho \f$ is the variation
+ in density and \f$ G^{*}_{i} \f$ is the \f$ i \f$ -th component of 
+ the gravitational body force. Under the additional assumption that
+ variations in temperature are small, we can use the linear
+ relationship
+ \f[ \Delta\rho = -\alpha\rho_{0}(\theta^{*} - \theta_{0}), \f]
+ where \f$ \alpha \f$ is the coefficient of thermal expansion of the
+ fluid, \f$ \theta^{*} \f$ is the (dimensional) temperature and
+ \f$ \rho_{0} \f$ is the density at the reference temperature 
+ \f$ \theta_{0} \f$ .
+
+ The equations governing the fluid motion are thus the
+ Navier--Stokes equations with the inclusion of the additional
+ buoyancy term. In Cartesian coordinates, we have
+<center>
+\f[ \rho_{0} \left (\frac{\partial u^{*}_i}{\partial t^{*}} + 
+u^{*}_j \frac{\partial u^{*}_i}{\partial x^{*}_j} \right) =
+- \frac{\partial p^{*}}{\partial x^{*}_i} +  \left[\rho_{0} - 
+  \alpha\rho_{0}(\theta^{*}
+ - \theta_{0})\right] G^{*}_i + \mu_{0}
+\frac{\partial }{\partial x^{*}_j} \left[
+\frac{\partial u^{*}_i}{\partial x^{*}_j} +  
+\frac{\partial u^{*}_j}{\partial x^{*}_i} \right],
+\f]
+</center>
+and
+<center>
+\f[
+\frac{\partial u^{*}_i}{\partial x^{*}_i} = 0.
+\f]
+</center>
+Here, \f$ u^{*}_{i} \f$ is the \f$ i \f$ -th (dimensional) 
+velocity component and
+\f$ x^{*}_{i} \f$ is the position in the \f$i\f$-th coordinate
+direction; \f$ \mu_{0} \f$ is the dynamic viscosity of the
+fluid at the reference temperature and \f$ t^{*} \f$ is the 
+dimensional time.
+
+The equation that governs the evolution of the temperature field is the
+advection-diffusion equation where the "wind" is the fluid
+velocity. Thus,
+<center>
+\f[ \frac{\partial \theta^{*}}{\partial t^{*}} +
+u^{*}_{j}\frac{\partial \theta^{*}}{\partial x^{*}_{j}} = 
+\kappa\frac{\partial}{\partial x^{*}_{j}}\left(\frac{\partial
+\theta^{*}}{\partial
+x^{*}_{j}}\right),\f]
+</center>
+where \f$ \kappa \f$ is the (constant) thermal diffusivity of the fluid.
+
+We choose the height of the domain, \f$ H \f$, as the length scale and
+let the characteristic thermal diffusion speed over that length,
+\f$ \kappa/H \f$, be
+the velocity scale, so that the P&eacute;clet number, \f$ Pe =
+UH/\kappa = 1 \f$ . The fluid pressure is
+non-dimensionalised on the viscous scale, \f$ \mu_{0} \kappa/H^{2} \f$ , 
+and the hydrostatic pressure gradient is included explicitly, 
+so that we work with the dimensionless excess pressure.
+The temperature is non-dimensionalised so that it is -0.5 at the upper
+(cooled) wall and 0.5 at the bottom (heated) wall and the
+reference temperature is then \f$ \theta_{0} = (\theta_{top} +
+\theta_{bottom})/2 \f$. Finally, the
+timescale is chosen to be the thermal diffusion timescale,
+\f$ \kappa/H^{2} \f$ . Hence
+\f[ x^{*}_{i} = x_{i} H, \quad u^{*}_{i} =  u_{i} \kappa/H, \quad
+    p^{*} = -\rho_{0} g H x_{2} + \frac{\mu_{0}\kappa}{H^{2}}p,\quad
+    \theta^{*} = \theta_{0} 
+   + \theta(\theta_{bottom} - \theta_{top}),
+    \quad t^{*} = \frac{\kappa}{H^{2}}t. \f]
+
+The governing equations become
+<center>
+\f[ Pr^{-1}\left(\frac{\partial u_i}{\partial t} + 
+ u_j \frac{\partial u_i}{\partial x_j} \right) =
+- \frac{\partial p}{\partial x_i}  - Ra \theta G_i +
+\frac{\partial }{\partial x_j} \left[
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right],
+\f]
+\f[
+\frac{\partial u_i}{\partial x_i} = 0,
+\f]
+and
+\f[ \frac{\partial \theta}{\partial t} +
+u_{j}\frac{\partial \theta}{\partial x_{j}} = 
+\frac{\partial}{\partial x_{j}}\left(\frac{\partial \theta}{\partial
+x_{j}}\right),\f].
+</center>
+The appropriate dimensionless numbers are the Prandtl number 
+\f$ Pr = \frac{\nu}{\kappa} \f$, and the Rayleigh number, 
+\f$ Ra = \frac{\alpha (\theta_{bottom} - \theta_{top})g
+H^{3}}{\nu\kappa} \f$ ; \f$ g \f$ is the acceleration due to gravity and
+\f$ \nu = \mu_{0}/\rho_{0} \f$ is the kinematic viscosity of the
+fluid.
+
+ We consider the solution of this coupled set of equations in a
+ two-dimensional domain \f$ 0 \leq x_{1} \leq 3 \f$ , \f$ 0 \leq x_{2} \leq
+ 1 \f$ . The boundary
+ conditions are no-slip at the top and bottom walls
+ \f[ u_{1} = u_{2} = 0 \quad\mbox{on } x_{2} = 0, 1; \f]
+ constant temperature at the top and bottom walls (heated from below)
+ \f[ \theta = 0.5 \quad\mbox{on } x_{2}=0 \quad\mbox{and}\quad
+     \theta = -0.5 \quad\mbox{on } x_{2} = 1; \f]
+ and symmetry boundary conditions at the sides:
+ \f[ u_{1} = 0,\quad \frac{\partial u_{2}}{\partial x_{1}} = 0,
+ \quad  \mbox{ and }
+    \frac{\partial \theta}{\partial x_{1}} = 0 \quad\mbox{on } x_{1} =
+ 0,3. \f]
+ We assume that gravity acts vertically downward so that \f$ G_{1} =
+ 0 \f$ and \f$ G_{2} = -1 \f$ .
+
+ There is a trivial steady-state solution that consists of a
+ linearly-varying temperature field balanced by a quadratic pressure
+ field:
+ \f[ u_{1} = u_{2} = 0, \quad \theta = 0.5 - x_2, \quad p = P_{0} + 0.5
+ \ Ra
+ \ x_{2} \left(1 - x_{2}\right). \f]
+ 
+@I w 0.75\textwidth base_flow "The base flow: no flow and a linear temperature distribution "
+
+A linear stability analysis shows that this solution becomes unstable
+via an up-down, symmetry-breaking, pitchfork bifurcation 
+at a critical Rayleigh number of \f$ Ra_{crit} \approx 1708 \f$ with a
+critical wavenumber of \f$ k \approx 3.11, \f$  see for example Hydrodynamic
+and Hydromagnetic Stability by S. Chandrasekhar OUP (1961). 
+Thus, for \f$ Ra > 1708 \f$ there are three possible steady
+solutions, the (unstable) trivial steady state and two (stable)
+symmetry-broken states. In principle, all three states can be
+computed directly by solving the steady equations. However, we
+typically find that if the steady computation is started with a zero
+initial guess for the velocity and temperature, the Newton method
+converges to the trivial state. In order to demonstrate that 
+this state is indeed unstable we therefore apply a time-dependent, 
+mass-conserving  perturbation to the vertical velocity at the upper 
+wall and time-march the system while rapidly reducing the size of the 
+perturbation. The system then evolves towards the nontrivial steady state
+as shown in the <a href="../figures/convect.avi">animation</a> from
+which the plots shown above were extracted. (In the 
+<A HREF="../../refine_b_convect/html/index.html"> 
+next tutorial where we discuss 
+the adaptive solution of this problem</A> we shall demonstrate an alternative
+technique for obtaining this solutions).
+
+ Note that by choosing our domain of a particular size and applying
+ symmetry conditions at the sidewalls we are only able to realise a
+ discrete set of wavelengths (those that exactly fit into the box). At
+ the chosen Rayleigh number, 1800, only one of these modes is unstable;
+ that of wavelength 2.
+
+<HR>
+<HR>
+
+
+\section namespace Global parameters and functions
+The problem contains three global parameters, the P&eacute;clet number,
+the Prandtl number and the Rayleigh number
+which we define in a namespace, as usual. In fact, \f$ 1/Pr \f$ is the
+natural dimensionless grouping, and so we use the
+inverse Prandtl number as our variable.
+\dontinclude boussinesq_convection.cc
+\skipline start_of_namespace
+\until end_of_namespace
+
+<HR>
+<HR>
+
+\section main The driver code
+In the driver code we set the direction of gravity and construct 
+our problem, using the new
+\ref element "BuoyantQCrouzeixRaviartElement", a multi-physics
+element, created by combining the \c QCrouzeixRaviart Navier-Stokes
+elements with the \c QAdvectionDiffusion elements via
+multiple inheritance. (Details of the element's 
+implementation are discussed in the section \ref element below.)
+
+\dontinclude boussinesq_convection.cc
+\skipline start_of_main
+\until problem;
+
+We assign the boundary conditions at the time \f$ t=0 \f$ and
+initially perform a single steady solve to obtain the trivial
+(and temporally unstable) trivial solution; see the section 
+\ref comments for a more detailed discussion of the 
+\c Problem::steady_newton_solve() function.
+
+\skipline Apply
+\until doc_solution
+  
+The result of this calculation is the trivial symmetric base flow. We
+next timestep the system using the (unstable) steady solution as the
+initial condition. As time increases, the flow evolves to one of the 
+stable asymmetric solutions, as shown in the 
+<a href="../figures/convect.avi"> animation of the results.</a> 
+As usual, we only perform a few timesteps when the code is used as a self-test,
+i.e. if any command-line parameters are passed to the driver code.
+
+\skipline Set the
+\until end of main
+
+<HR>
+<HR>
+
+\section problem The problem class
+The problem class contains five non-trivial functions:
+the constructor, the \c fix_pressure(...) function,
+as well as the functions \c set_boundary_conditions(...),
+\c actions_before_implicit_timestep(...) and 
+\c doc_solution(...), all discussed below.
+
+
+<HR>
+<HR>
+
+\subsection const The constructor
+
+We pass the element type as a
+template parameter to the problem constructor, which has no
+arguments. The constructor creates a \c BFD<2> timestepper and builds a
+\c RectangularQuadMesh of \f$ 8\times 8 \f$ elements.
+
+\dontinclude boussinesq_convection.cc
+\skipline start_of_constructor
+\until RectangularQuadMesh
+
+Next, the boundary constraints are imposed. We pin all velocities and
+the temperature on the top and bottom walls and pin only the horizontal
+velocity on the sidewalls. Since the domain is enclosed, the pressure
+is only determined up the an arbitrary constant. We resolve this
+ambiguity by pinning a single pressure value, using the 
+\c fix_pressure(...) function.
+
+\skipline Set the boundary
+\until fix_pressure(
+
+We complete the build of the elements by setting the pointers 
+to the physical parameters and finally assign the equation numbers
+
+\skipline unsigned n_element
+\until end of constructor
+
+
+<HR>
+<HR>
+ 
+\subsection set_bound The function set_boundary_conditions(...)
+In order to examine the stability of the symmetric state, we impose a
+time-dependent boundary condition that transiently perturbs 
+the vertical velocity field at the upper boundary. Our boundary
+condition is 
+\f[ u_{2}\big|_{x_2=1} = \epsilon \ t \ \mbox{e}^{-t} \sin(2\pi x_{1}/3), \f]
+where \f$ \epsilon \ll 1 \f$ . The perturbation is zero at
+\f$ t=0 \f$ , tends to zero as \f$ t\to\infty \f$ , and is mass conserving.
+This is implemented in the  function below
+ 
+\dontinclude boussinesq_convection.cc
+\skipline start_of_set_bound
+\until end_of_set_bound
+
+
+
+<HR>
+<HR>
+
+\subsection fix_p The function fix_pressure(...)
+This function is a simple wrapper to the element's \c
+fix_pressure(...) function.
+
+\dontinclude boussinesq_convection.cc
+\skipline Fix pressure
+\until end_of_fix_pressure 
+
+<HR> 
+<HR>
+
+\subsection actions_bef  The function actions_before_implicit_timestep()
+This function is used to ensure that the time-dependent boundary conditions 
+are set to the correct value before solving the problem at the next
+time level.
+\dontinclude boussinesq_convection.cc
+\skipline Actions before the timestep
+\until }
+
+<HR>
+<HR>
+
+\subsection doc The function doc_solution(...)
+ This function writes the complete velocity, pressure and temperature
+ fields to a file in the output directory.
+
+\dontinclude boussinesq_convection.cc
+\skipline start_doc_solution
+\until }
+
+<HR>
+<HR>
+
+ \section element Creating the new BuoyantQCrouzeixRaviartElement class
+
+The sketch below illustrates how the new multi-physics 
+\c BuoyantQCrouzeixRaviartElement is constructed by multiple 
+inheritance from the two existing single-physics elements: 
+
+@I w 0.75\textwidth multi_physics "Sketch illustrating the construction of the BuoyantQCrouzeixRaviartElement by multiple inheritance. " 
+
+- The nine-noded two-dimensional \c QCrouzeixRaviartElement 
+  is based on a nine-node quadrilateral geometric \c FiniteElement from
+  the \c QElement family. All of its \c Nodes store two values,
+  the horizontal and vertical velocity, respectively. The element also
+  stores internal \c Data which represents the (discontinuous) pressure
+  degrees of freedom; in the sketch this \c Data is represented by the
+  dashed box. \n\n
+- The two-dimensional \c QAdvectionDiffusionElement is based on the 
+  same geometric \c FiniteElement and stores one value 
+  (the temperature, \f$ \theta \f$ ) at each \c Node. 
+.
+Both elements are fully-functional and provide their contributions
+to the global system of nonlinear algebraic equations that is solved
+by Newton's method via the two member functions 
+\c fill_in_contribution_to_residuals(...) and  
+\c fill_in_contribution_to_jacobian(...).
+- The \c QAdvectionDiffusionElement's member function
+  \c fill_in_contribution_to_residuals(...) computes the element's
+  contribution to the global residual vector for a given 
+  "wind".  The "wind" is specified by its virtual member function 
+  \c get_wind_adv_diff(...) and in the 
+  <A HREF="../../../advection_diffusion/two_d_adv_diff_adapt/html/index.html">
+  single-physics advection diffusion problems studied so far</A>, the
+  "wind" tended to specified \e a \e priori by the user. The element's  
+  member function \c fill_in_contribution_to_jacobian(...) computes
+  the elemental Jacobian matrix, i.e. the derivatives of the elemental 
+  residual vector with respect to its unknown nodal values (the
+  temperatures). \n\n
+- Similarly, the \c QCrouzeixRaviartElement's member function
+  \c fill_in_contribution_to_residuals(...) computes the element's
+  contribution to the global residual vector for a given 
+  body force.  The body force is specified by its virtual member function 
+  \c get_body_force_nst(...) and in the 
+  <A HREF="../../../navier_stokes/circular_driven_cavity/html/index.html">
+  single-physics Navier-Stokes problems studied so far</A>, the
+  body force tended to specified \e a \e priori by the user. The element's 
+  member function \c fill_in_contribution_to_jacobian(...) computes
+  the elemental Jacobian matrix, i.e. the derivatives of the elemental 
+  residual vector with respect to its unknown nodal and internal 
+  values (the velocities and the pressure).
+.
+
+
+
+When combining the two single-physics elements to a multi-physics
+element, we have to take the interaction between the constituent 
+equations into account: In the coupled problem
+the "wind" in the advection-diffusion equations is given by
+the Navier-Stokes velocities, while the body force
+in the Navier-Stokes equations is a function of the
+temperature. When implementing these interactions we 
+wish to recycle as much of the elements' existing functionality as 
+possible. This may be achieved by the following straightforward steps:
+-# Construct the combined multi-physics element by multiple inheritance. \n\n
+-# Overload the \c FiniteElement::required_nvalue(...) function
+   to ensure that each \c Node provides a sufficient amount of 
+   storage for the (larger) number of nodal values required in
+   the multi-physics problem. \n\n
+-# Overload the constituent element's member functions that 
+   indicate which nodal value corresponds to which type of
+   degree of freedom. For instance, in the single-physics 
+   advection-diffusion problem, the temperature is stored at the
+   zero-th nodal value whereas in the combined multi-physics element,
+   the temperature is stored as the second value, as shown in the
+   above sketch. \n\n
+-# Provide a final overload for the element's 
+   \c fill_in_contribution_to_residuals(...)
+   and \c fill_in_contribution_to_jacobian(...) functions.  
+   The former simply concatenates the residual vectors computed 
+   by the constituent single-physics elements.  The latter function
+   is easiest to implement by finite differencing the
+   combined element's residual vector. [A more efficient
+   approach (in terms of cpu time, not necessarily terms of 
+   development time!) is to recycle the diagonal blocks computed 
+   by the constituent elements's \c fill_in_contribution_to_jacobian(...) 
+   functions and to use finite-differencing only for the off-diagonal
+   (interaction) blocks; see the section \ref comments a more detailed
+   discussion of this technique.]
+   \n\n
+.
+That's all! Here is the implementation:
+
+\dontinclude boussinesq_elements.h
+\skipline class definition
+\until virtual QCrouzeixRaviart
+
+The class contains a single new physical parameter, the Rayleigh number, as
+usual referenced  by a pointer to a double precision datum,
+
+\dontinclude boussinesq_elements.h
+\skipline Rayleigh
+\until Ra_pt
+
+with suitable access functions.
+
+\dontinclude boussinesq_elements.h
+\skipline Access
+\until ra_pt
+
+The constructor calls the constructors of the component classes
+(\c QCrouzeixRaviartElement and \c QAdvectionDiffusionElement) and initialises
+the value of the Rayleigh number to zero, via a static default
+parameter value.
+
+\dontinclude boussinesq_elements.h
+\skipline Constructor
+\until } 
+
+We must overload the function \c FiniteElement::required_nvalue()
+because the new element will store \c DIM+1 unknowns at each node: \c
+DIM fluid velocity components and the value of the temperature,
+as shown in the sketch above.
+
+\dontinclude boussinesq_elements.h
+\skipline The required
+\until QCrouzeix 
+
+In the standard single-physics advection-diffusion elements the temperature
+is the only value stored at the nodes and is stored as \c
+value(0). Similarly, in the single-physics Navier--Stokes elements,
+the fluid velocities are stored in the first \c DIM nodal values.
+In our new multi-physics element, we must decide where to
+store the different variables and then inform the single-physics elements
+of our choice. As indicated in the above sketch, we choose to store 
+the temperature \b after the
+fluid velocities, so that it is \c value(DIM). The recommended
+mechanism for communicating the location of the variables to the
+single-physics elements is to use an index function. Hence, 
+single-physics elements that are to be the components of multi-physics 
+elements must have an index function for their variables. For
+instance, the function
+\c u_index_adv_diff(...) is used in the \c AdvectionDiffusionEquations
+class to read out the position (index) at which the advected variable
+(the temperature) is stored. That function is now overloaded in our 
+multi-physics element:
+
+\dontinclude boussinesq_elements.h
+\skipline Overload the index
+\until }
+
+We need not overload the index function for the fluid velocities 
+because they remain stored in the first \c DIM positions at the node.
+
+The coupling between the two sets of single-physics equations is
+achieved by overloading the two functions \c get_wind_adv_diff(), used
+in the advection-diffusion equations and \c get_body_force_nst(), used in
+the Navier--Stokes equations
+ 
+\dontinclude boussinesq_elements.h
+\skipline Overload the wind
+\until }
+
+\dontinclude boussinesq_elements.h
+\skipline Overload the body force
+\until }
+
+The elemental residual vector is composed of the residuals from the
+two single-physics elements and we simply call the underlying
+functions for each element in turn.
+
+\dontinclude boussinesq_elements.h
+\skipline Calculate the element
+\until }
+
+Finally, we compute the Jacobian matrix by finite-differencing
+the element's combined residual vector, using the 
+default implementation of the \c fill_in_contribution_to_jacobian(...)
+function in the \c FiniteElement base class:
+
+\dontinclude boussinesq_elements.h
+\skipline Compute the element's residual vector and the Jacobian matrix
+\until }
+
+Finally, we overload the output function to print the fluid
+velocities, the fluid pressure and the temperature.
+
+\dontinclude boussinesq_elements.h
+\skipline Start of output function
+\until End of output function
+
+<hr>
+<hr>
+\section comm_and_ex Comments and Exercises
+\subsection comments Comments
+- <STRONG>The <CODE>steady_newton_solve()</CODE>function:</STRONG>
+  \n\n
+  In most previous examples we have encountered two
+  main interfaces to \c oomph-lib's Newton solver: \n\n
+  - The function \c Problem::newton_solve() employs Newton's method to
+    solve the system of nonlinear algebraic equations arising from the 
+    \c Problem's discretisation. The current \c Data values are used as
+    the initial guess for the Newton iteration. On return from this function,
+    all unknown \c Data values will have been assigned their correct values
+    so that the solution of the problem may be plotted by calls
+    to the elements' \c output functions. We tended to use this function
+    to solve steady problems.
+    \n\n
+  - Given the solution at time \f$ t = t_{\mbox{orig}} \f$ , the unsteady 
+    Newton solver <code> Problem::unsteady_newton_solve(dt,...) </code>
+    increments time by \c dt, shifts the "history" values and then
+    computes the solution at the advanced time, \f$ t =
+    t_{\mbox{orig}} \f$ + \c dt.
+    On return from this function, all unknown \c Data values (and
+    the corresponding "history" values) will have been assigned their 
+    correct values so that the solution at time \f$ t =
+    t_{\mbox{orig}} \f$ + \c dt  may be plotted by calls
+    to the elements' \c output functions. We tended to use this function
+    for unsteady problems. 
+    \n\n
+  .
+  Inspection of the 
+  \c Problem::unsteady_newton_solve(...) function shows 
+  that this function is, in fact, a wrapper around \c
+  Problem::newton_solve(), and that the latter function solves the 
+  discretised equations <EM>including any terms that arise from an 
+  implicit time-discretisation</EM>. The only purpose of the wrapper
+  function is to shift the history values before taking the next timestep.
+  This raises the question how to compute steady solutions
+  (i.e. solutions obtained by setting the time-derivatives in the 
+  governing equation to zero) of a \c Problem that was discretised
+  in a form that allows for timestepping, as in the problem studied
+  here. This is the role of the function 
+  \c Problem::steady_newton_solve(): The function performs
+  the following steps:
+  \n\n
+  -# Disable all  \c TimeSteppers in the \c Problem
+     by calling their \c TimeStepper::make_steady() member function.
+     \n\n
+  -# Call the \c Problem::newton_solve() function to compute
+     the solution of the discretised problem with all
+     time-derivatives set to zero.
+     \n\n
+  -# Re-activate all \c TimeSteppers (unless they were already in 
+     "steady" mode when the function was called).
+     \n\n
+  -# Call the function \c Problem::assign_initial_values_impulsive()
+     to ensure that the "history" values used by the (now re-activated)
+     \c TimeSteppers are consistent with an impulsive start from
+     the steady solution just computed.
+     \n\n
+  . 
+  On return from this function, all unknown \c Data values (and
+  the corresponding "history" values) will have been assigned their 
+  correct values so that the solution just computed is
+  a steady solution to the full unsteady equations.
+  \n\n
+- <STRONG> \anchor opt Optimising the implementation of multi-physics
+  interactions:</STRONG>
+  \n\n
+  The combined multi-physics element discussed above was implemented
+  with just a few straightforward lines of code. The ease of 
+  implementation comes at a price, however, and more efficient
+  implementations (in terms of CPU time) are possible: \n\n
+  -# <STRONG>Using finite-differencing only for the off-diagonal terms
+     in the Jacobian matrix:</STRONG> \n\n
+     While the use of finite-differencing in the setup of the
+     Jacobian matrix is convenient, it does not exploit the fact
+     that the constituent single-physics elements already provide
+     analytical (and hence cheaper-to-compute) expressions for the
+     two diagonal blocks in the coupled Jacobian matrix (i.e. the
+     derivatives of the fluid residuals with respect to
+     the fluid variables, and the derivatives of the advection
+     diffusion residuals with respect to the temperature degrees of
+     freedom). It is possible to recycle these entries and to use
+     finite-differencing only to compute the off-diagonal interaction
+     blocks (i.e. the derivatives of the Navier-Stokes residuals with 
+     respect to the temperature degrees of freedom, and the
+     derivatives of the advection-diffusion residuals with respect
+     to the velocities). In fact, the source code for the
+     \c BuoyantQCrouzeixRaviartElement includes such an
+     implementation. The full finite-difference-based computation 
+     discussed above 
+     is used if the code is compiled with the compiler flag 
+     \c USE_FD_JACOBIAN_FOR_BUOYANT_Q_ELEMENT. 
+     Finite-differences are used for the off-diagonal blocks only when the
+     compiler flag \c
+     USE_OFF_DIAGONAL_FD_JACOBIAN_FOR_BUOYANT_Q_ELEMENT
+     is passed.
+     When comparing the two versions of the code, we found the
+     run times for the full finite-difference-based version to be
+     approximately 3-7% higher, depending on the spatial 
+     resolution used. The implementation of the more efficient version
+     is still straightforward and can be found in the
+     source code
+     <A HREF="../../../../demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc">boussinesq_convection.cc.
+     </A> 
+     \n\n
+  -# <STRONG>Using an analytic Jacobian matrix:</STRONG> \n\n
+     As discussed above, the re-use of the analytic expressions
+     for the diagonal blocks of the coupled Jacobian matrix is
+     straightforward. For a yet more efficient computation 
+     we can assemble analytic expressions for 
+     the off-diagonal interaction blocks; 
+     although this does require
+     knowledge of precisely how the governing equations were
+     implemented in the single-physics elements. Once again,
+     the source code for the
+     \c BuoyantQCrouzeixRaviartElement includes such an implementation 
+     and, moreover, it is the default behaviour. We found the assembly
+     time for the analytic coupled Jacobian to be approximately 15\%
+     of the finite-difference based versions. The implementation 
+     is reasonably straightforward and can be found in the
+     source code
+     <A HREF="../../../../demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc">boussinesq_convection.cc.
+     </A> 
+     \n\n
+  -# <STRONG>Complete re-implementation of the coupled
+     element:</STRONG> \n\n
+     Although recycling the analytically computed diagonal blocks in the
+     Jacobian matrix leads to a modest speedup, and the use of
+     analytic off-diagonal blocks to a further speedup, the
+     computation of the coupled residual vector and Jacobian matrix
+     are still somewhat inefficient. This is because the contributions
+     from the Navier-Stokes and advection-diffusion equations are 
+     computed in two separate integration loops; and, if computed, the
+     assembly of the analytic off-diagonal terms requires a third
+     integration loop. The only solution to this
+     problem would be to fully merge the source codes for two elements
+     to create a customised element. In the present problem this would
+     not be too difficult, particularly since the derivatives of the Navier-Stokes
+     residuals with respect to the temperature, and the derivatives of
+     the advection-diffusion residuals with respect to the velocities
+     are easy to calculate. However, a reimplementation in this form would break the
+     modularity of the library as any subsequent changes/improvements to the
+     Navier-Stokes elements, say, would have to be added manually to
+     the coupled element. If maximum speed is absolutely essential
+     in your application, you may still wish to choose this option. The
+     existing Navier-Stokes and advection diffusion elements provide
+     the required building blocks for your custom-written coupled element.
+     \n\n
+  .
+.
+
+<HR>
+
+\subsection exercises Exercises
+-# Confirm that the system is stable, i.e. returns to the trivial state,
+   when \f$ Ra = 1700 \f$ .
+-# How does the time-evolution of the system change when no-slip
+   boundary conditions for the fluid velocity are applied on the side
+   boundaries (a rigid box model)?
+-# Re-write the multi-physics elements so that the temperature is
+   stored \b before the fluid velocities. Confirm that the solution is
+   unchanged in this case.
+-# Assess the computational cost of the finite-difference based
+   setup of the elements' Jacobian matrices by comparing the
+   run times of the two versions of the code.
+-# Try using \c QTaylorHoodElements as the "fluid" element part of the
+   multi-physics elements. N.B. in this case, the temperature \b must be
+   stored as the first variable at the nodes because we assume that it is
+   always stored at the same location in every node. 
+.
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/multi_physics/boussinesq_convection/
+">
+demo_drivers/multi_physics/boussinesq_convection/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc
+">
+demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc
+</A>
+</CENTER>
+\n
+- The source code for the elements is in: \n\n
+<CENTER>
+<A HREF="../../../../src/multi_physics/boussinesq_elements.h">
+src/multi_physics/boussinesq_elements.h</A>
+</CENTER>
+.
+

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: The 2D Driven Cavity Problem</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: The 2D Driven Cavity Problem </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This is our first Navier-Stokes example problem. We discuss the non-dimensionalisation of the equations and their implementation in <code>oomph-lib</code>, and demonstrate the solution of the 2D driven cavity problem.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="equation"></a>
+The Navier-Stokes equations</h1>
+<p>In dimensional form the 2D [3D] Navier-Stokes equations (in cartesian coordinates <img class="formulaInl" alt="$ x_i^*; \ i=1,2 [,3] $" src="form_0.png"/>) are given by the momentum equations </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \rho\left(\frac{\partial u_i^*}{\partial t^*} + u_j^*\frac{\partial u_i^*}{\partial x_j^*}\right) = - \frac{\partial p^*}{\partial x_i^*} + B_i^*(x_j^*,t^*) + \rho \, G^*_i + \frac{\partial }{\partial x_j^*} \left[ \mu\left( \frac{\partial u_i^*}{\partial x_j^*} + \frac{\partial u_j^*}{\partial x_i^*} \right) \right], \]" src="form_1.png"/>
+</p>
+ </center><p> and the continuity equation </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u_i^*}{\partial x_i^*} = Q^*, \]" src="form_2.png"/>
+</p>
+ </center><p> where we have used index notation and the summation convention.</p>
+<p>Here, the velocity components are denoted by <img class="formulaInl" alt="$ u_i^* $" src="form_3.png"/>, the pressure by <img class="formulaInl" alt="$ p^* $" src="form_4.png"/>, and time by <img class="formulaInl" alt="$ t^* $" src="form_5.png"/>, and we have split the body force into two components: A constant vector <img class="formulaInl" alt="$ \rho \, G_i^* $" src="form_6.png"/> which typically represents gravitational forces; and a variable body force, <img class="formulaInl" alt="$ B_i^*(x^*_j,t^*) $" src="form_7.png"/>. <img class="formulaInl" alt="$ Q^*(x^*_j,t^*) $" src="form_8.png"/> is a volumetric source term for the continuity equation and is typically equal to zero.</p>
+<p>We non-dimensionalise the equations, using problem-specific reference quantities for the velocity, <img class="formulaInl" alt="$ {\cal U},$" src="form_9.png"/> length, <img class="formulaInl" alt="$ {\cal L}, $" src="form_10.png"/> and time, <img class="formulaInl" alt="${\cal T},$" src="form_11.png"/> and scale the constant body force vector on the gravitational acceleration, <img class="formulaInl" alt="$g, $" src="form_12.png"/> so that </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_i^* = {\cal U} \, u_i, \qquad x_i^* = {\cal L}\, x_i, \qquad t^* = {\cal T}\, t, \qquad G_i^* = g \, G_i, \]" src="form_13.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ p^* = \frac{\mu_{ref} {\cal U}}{{\cal L}} \, p, \qquad B_i^* = \frac{{\cal U}\mu_{ref}}{{\cal L}^2} \, B_i, \qquad Q^* = \frac{{\cal U}}{{\cal L}}\, Q, \qquad \]" src="form_14.png"/>
+</p>
+ </center><p> where we note that the pressure and the variable body force have been non-dimensionalised on the viscous scale. <img class="formulaInl" alt="$ \mu_{ref} $" src="form_15.png"/> and <img class="formulaInl" alt="$ \rho_{ref} $" src="form_16.png"/> (used below) are reference values for the fluid viscosity and density, respectively. In single-fluid problems, they are identical to the viscosity <img class="formulaInl" alt="$ \mu $" src="form_17.png"/> and density <img class="formulaInl" alt="$ \rho $" src="form_18.png"/> of the (one and only) fluid in the problem.</p>
+<p>The non-dimensional form of the Navier-Stokes equations is then given by </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R_\rho Re \left( St \frac{\partial u_i}{\partial t} + u_j \frac{\partial u_i}{\partial x_j} \right) = - \frac{\partial p}{\partial x_i} + B_i(x_j,t) + R_\rho \frac{Re}{Fr} G_i + \frac{\partial }{\partial x_j} \left[ R_\mu \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) \right], \]" src="form_19.png"/>
+</p>
+ </center><p> and </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u_i}{\partial x_i} = Q, \]" src="form_20.png"/>
+</p>
+ </center><p> where the dimensionless parameters </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re = \frac{{\cal U}{\cal L}\rho_{ref}}{\mu_{ref}}, \qquad St = \frac{{\cal L}}{{\cal U}{\cal T}}, \qquad Fr = \frac{{\cal U}^2}{g{\cal L}}, \]" src="form_21.png"/>
+</p>
+ </center><p> are the Reynolds number, Strouhal number and Froude number respectively. <img class="formulaInl" alt="$ R_\rho=\rho/\rho_{ref} $" src="form_22.png"/> and <img class="formulaInl" alt="$ R_\mu =\mu/\mu_{ref}$" src="form_23.png"/> represent the ratios of the fluid's density and its dynamic viscosity, relative to the density and viscosity values used to form the non-dimensional parameters (By default, <img class="formulaInl" alt="$ R_\rho = R_\mu = 1 $" src="form_24.png"/>; other values tend to be used in problems involving multiple fluids).</p>
+<p>The above equations are typically augmented by Dirichlet boundary conditions for (some of) the velocity components. On boundaries where no velocity boundary conditions are applied, the flow satisfies the "traction free" natural boundary condition <img class="formulaInl" alt="$ t_i = -p \, n_i + R_\mu (\partial u_i/\partial x_j + \partial u_j/\partial x_i ) \, n_j = 0. $" src="form_25.png"/> (We refer to <a href="../../rayleigh_traction_channel/html/index.html">another example </a> for an illustration of how to apply traction boundary conditions for the Navier-Stokes equations.)</p>
+<p>If the velocity is prescribed along the entire domain boundary, the fluid pressure <img class="formulaInl" alt="$ p $" src="form_26.png"/> is only determined up to an arbitrary constant. This indeterminacy may be overcome by prescribing the value of the pressure at a single point in the domain (see <a href="#exercises">exercise</a>). </p><hr  />
+ <hr  />
+<h1><a class="anchor" id="element_types"></a>
+Implementation</h1>
+<hr  />
+<h2><a class="anchor" id="el"></a>
+The elements</h2>
+<p><code>oomph-lib</code> provides two LBB-stable isoparametric Navier-Stokes elements that are based on the <code>QElement&lt;DIM,3&gt;</code> family of geometric finite elements. They are nine-node quadrilateral (for <code>DIM=2</code>), and 27-node brick (for <code>DIM=3</code>) elements in which the mapping between local and global (Eulerian) coordinates is given by </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad i=1,2\quad [\mbox{and }3]. \]" src="form_27.png"/>
+</p>
+ </center><p> Here <img class="formulaInl" alt="$ N^{(E)} = 3^{DIM}$" src="form_28.png"/> is the number of nodes in the element, <img class="formulaInl" alt="$ X^{(E)}_{ij} $" src="form_29.png"/> is the <img class="formulaInl" alt="$ i $" src="form_30.png"/>-th global (Eulerian) coordinate of the <img class="formulaInl" alt="$ j $" src="form_31.png"/>-th <code>Node</code> in the element, and the <img class="formulaInl" alt="$ \psi_j $" src="form_32.png"/> are the element's geometric shape functions, defined in the <code>QElement&lt;DIM,3&gt;</code> class.</p>
+<p>In both elements the velocity components <img class="formulaInl" alt="$ u_1, $" src="form_33.png"/> <img class="formulaInl" alt="$ u_2, $" src="form_34.png"/> [and <img class="formulaInl" alt="$ u_3 $" src="form_35.png"/>] are stored as nodal values and the geometric shape functions are used to interpolate the velocities inside the element, </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_i = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad i=1,2\quad [\mbox{and }3], \]" src="form_36.png"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ U^{(E)}_{ij} $" src="form_37.png"/> is the <img class="formulaInl" alt="$ i $" src="form_30.png"/>-th velocity component at <img class="formulaInl" alt="$ j $" src="form_31.png"/>-th <code>Node</code> in the element. Nodal values of the velocity components are accessible via the access function</p>
+<div class="fragment"><div class="line">NavierStokesEquations&lt;DIM&gt;::u(<a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>,j)</div>
+</div><!-- fragment --><p>which returns the <code>i-th</code> velocity component stored at the element's <code>j-th</code> <code>Node</code>.</p>
+<p>The two elements differ in the way in which the pressure is represented:</p>
+<hr  />
+<h3><a class="anchor" id="CR"></a>
+Crouzeix-Raviart elements</h3>
+<p>In <code>oomph-lib's</code> <code>QCrouzeixRaviartElements</code> the pressure is represented by, </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ p = P_0^{(E)} + P_1^{(E)} \, s_1 + P_2^{(E)} \, s_2 \quad \left[+ P_3^{(E)} \, s_3\right], \]" src="form_38.png"/>
+</p>
+ </center><p> where the <img class="formulaInl" alt="$ s_i \in [-1,1]$" src="form_39.png"/> are the element's local coordinates. This provides a discontinuous, piecewise bi-[tri-]linear representation of the pressure in terms of 3 [4] pressure degrees of freedom per element. Crouzeix-Raviart elements ensure that the continuity equation is satisfied within each element.</p>
+<p>The pressure degrees of freedom are local to the element and are stored in the element's internal <code>Data</code>. They are accessible via the member function</p>
+<div class="fragment"><div class="line">QCrouzeixRaviartElement&lt;DIM&gt;::p(j)</div>
+</div><!-- fragment --><p>which returns the value of the <code>j-th</code> pressure degree of freedom in this element.</p>
+<p>Each <code>Node</code> in a 2D [3D] Crouzeix-Raviart element stores 2 [3] nodal values, representing the two [three] velocity components at that <code>Node</code>.</p>
+<hr  />
+<h3><a class="anchor" id="TH"></a>
+Taylor-Hood elements</h3>
+<p>In <code>oomph-lib's</code> <code>QTaylorHoodElements</code> the pressure is represented by a globally-continuous, piecewise bi-[tri-]linear interpolation between the pressure values <img class="formulaInl" alt="$ P_j^{(E)} $" src="form_40.png"/> that are stored at the elements' <img class="formulaInl" alt="$ N_p^{(E)} = 2^{DIM}$" src="form_41.png"/> corner/vertex nodes, </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ p = \sum_{j=1}^{N_p^{(E)}} P_j^{(E)} \, \psi_j^{(p)}, \]" src="form_42.png"/>
+</p>
+ </center><p> where the <img class="formulaInl" alt="$\psi_j^{(p)}$" src="form_43.png"/> are the bi-[tri-]linear pressure shape functions.</p>
+<p>The first 2 [3] values of each <code>Node</code> in a 2D [3D] Taylor-Hood element store the two [three] velocity components at that <code>Node</code>. The corner [vertex] nodes store an additional value which represents the pressure at that <code>Node</code>. The access function </p><div class="fragment"><div class="line">QTaylorHoodElement&lt;DIM&gt;::p(j)</div>
+</div><!-- fragment --><p> returns the nodal pressure value at the element's <code>j-th</code> corner [vertex] <code>Node</code>.</p>
+<p>In sufficiently fine meshes, Taylor-Hood elements generate a much smaller number of pressure degrees of freedom than the corresponding Crouzeix-Raviart elements. However, Taylor-Hood elements do not conserve mass locally.</p>
+<hr  />
+<h1><a class="anchor" id="params"></a>
+Non-dimensional parameters and their default values</h1>
+<p>The Reynolds number, Strouhal number, inverse-Froude number, density ratio and viscosity ratio are assumed to be constant within each element. Their values are accessed via pointers which are accessible via the member functions <code><a class="el" href="driven__cavity_8txt.html#a25257c692cb45036772f593eb0284b78">re_pt()</a></code> for <img class="formulaInl" alt="$ Re, $" src="form_44.png"/> <code><a class="el" href="driven__cavity_8txt.html#adc1a074e08505d277036878c9aedc811">re_st_pt()</a></code> for <img class="formulaInl" alt="$ Re \ St, $" src="form_45.png"/> <code><a class="el" href="driven__cavity_8txt.html#ae99117aed97ea6b876d159aa1c14240b">re_invfr_pt()</a></code> for <img class="formulaInl" alt="$ Re/Fr, $" src="form_46.png"/> <code><a class="el" href="driven__cavity_8txt.html#aab4f1d8c4747c7d7ff52692f739c7956">density_ratio_pt()</a></code> for <img class="formulaInl" alt="$ R_\rho $" src="form_47.png"/> and <code>viscosity_ratio_pt()</code> for <img class="formulaInl" alt="$ R_\mu $" src="form_48.png"/>.</p>
+<p>By default the pointers point to default values (implemented as static member data in the <code>NavierStokesEquations</code> class), therefore they only need to be over-written if the default values are not appropriate. The default values are:</p><ul>
+<li>Default Reynolds number: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re = 0 \mbox{\ \ \ \ (Stokes flow)} \]" src="form_49.png"/>
+</p>
+</li>
+<li>Default Womersley number (product of Reynolds and Strouhal number): <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re St = 0 \mbox{\ \ \ \ (steady flow)} \]" src="form_50.png"/>
+</p>
+</li>
+<li>Default product of Reynolds and inverse Froude number (a measure of gravity on the viscous scale) <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re/Fr = 0 \mbox{\ \ \ \ (no gravity)} \]" src="form_51.png"/>
+</p>
+</li>
+<li>Default viscosity ratio: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R_\mu = 1 \mbox{\ \ \ \ (viscosity = viscosity used in the definition of $Re$)} \]" src="form_52.png"/>
+</p>
+</li>
+<li>Default density ratio: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R_\rho = 1 \mbox{\ \ \ \ (density = density used in the definition of $Re$)} \]" src="form_53.png"/>
+</p>
+</li>
+</ul>
+<p>We use the same approach for the specification of the body force vector <img class="formulaInl" alt="$ G_i $" src="form_54.png"/>, accessible via the function <code>g_pt</code> (), the variable body force <img class="formulaInl" alt="$ B_i $" src="form_55.png"/>, accessible via the function pointer <code><a class="el" href="driven__cavity_8txt.html#a277632e2445c22857bf8d91868e029d9">body_force_fct_pt()</a></code>, and the volumetric source function <img class="formulaInl" alt="$ Q $" src="form_56.png"/>, accessible via the function pointer <code><a class="el" href="driven__cavity_8txt.html#af9c2b28e5079228a74d221480c78b0b9">source_fct_pt(time,x)</a></code>. By default the (function) pointers are set such that</p><ul>
+<li>Default gravity vector: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ G_i = 0 \mbox{\ \ \ \ (no gravity)} \]" src="form_57.png"/>
+</p>
+</li>
+<li>Default body force function: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ B_i(x_j,t) = 0 \mbox{\ \ \ \ (no body force)} \]" src="form_58.png"/>
+</p>
+</li>
+<li>Default volumetric source function <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Q(x_j,t) = 0 \mbox{\ \ \ \ (flow is divergence free)} \]" src="form_59.png"/>
+</p>
+</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+The example problem</h1>
+<p>We will illustrate the solution of the steady 2D Navier-Stokes equations using the well-known example of the driven cavity.</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>The 2D steady driven-cavity problem in a square domain.</b> </center> Solve <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re\phantom{i}u_j\frac{\partial u_i}{\partial x_j} = - \frac{\partial p}{\partial x_i} + \frac{\partial }{\partial x_j} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_60.png"/>
+</p>
+ and <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u_i}{\partial x_i} = 0, \]" src="form_61.png"/>
+</p>
+ in the square domain <img class="formulaInl" alt="$ D = \{x_i \in [0,1]; i=1,2 \} $" src="form_62.png"/>, subject to the Dirichlet boundary conditions: <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. \mathbf{u}\right|_{\partial D}=(0,0), \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_63.png"/>
+</p>
+ on the right, top and left boundaries and <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. \mathbf{u}\right|_{\partial D}=(1,0), \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_64.png"/>
+</p>
+ on the bottom boundary, <img class="formulaInl" alt="$ x_2=0.$" src="form_65.png"/>   </td></tr>
+</table>
+<br  />
+ </center><hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<h2><a class="anchor" id="results_CR"></a>
+Crouzeix-Raviart elements</h2>
+<p>The figure below shows "carpet plots" of the velocity and pressure fields as well as a contour plot of the pressure distribution with superimposed streamlines. The velocity vanishes along the entire domain boundary, apart from the bottom boundary <img class="formulaInl" alt="$ (x_2=0) $" src="form_66.png"/> where the moving "lid" imposes a unit tangential velocity which drives a large vortex, centred at <img class="formulaInl" alt="$ (x_1,x_2) \approx (0.62,0.26)$" src="form_67.png"/>. The discontinuity in the velocity boundary conditions creates pressure singularities at <img class="formulaInl" alt="$ (x_1,x_2) = (0,0)$" src="form_68.png"/> and <img class="formulaInl" alt="$ (x_1,x_2) = (1,0)$" src="form_69.png"/>. The rapidly varying pressure in the vicinity of these points clearly shows the discontinuous pressure interpolation employed by the Crouzeix-Raviart elements.</p>
+<div class="image">
+<img src="CrouzeixRaviart.gif" alt=""/>
+<div class="caption">
+Plot of the velocity and pressure fields for Re=100 computed with Crouzeix-Raviart (Q2P-1) elements. </div></div>
+ <h2><a class="anchor" id="results_TH"></a>
+Taylor-Hood elements</h2>
+<p>The next figure shows the corresponding results obtained from a computation with <code>QTaylorHoodElements</code>. The pressure plot illustrates how the interpolation between the corner nodes creates a globally continuous representation of the pressure.</p>
+<div class="image">
+<img src="TaylorHood.gif" alt=""/>
+<div class="caption">
+Plot of the velocity and pressure fields for Re=100 computed with Taylor-Hood (Q2Q1) elements. </div></div>
+ <p>Note that in both simulations, the flow field is clearly under-resolved near the ends of the "lid". In <a href="../../adaptive_driven_cavity/html/index.html">another example</a> we will demonstrate the use of spatial adaptivity to obtain much better solutions for this problem.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>The Reynolds number is the only non-dimensional parameter needed in this problem. As usual, we define it in a namespace:</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_namespace==============================</span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a>=100;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>We start by creating a <code>DocInfo</code> object to store the output directory and the label for the output files.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_main======================================================</span></div>
+<div class="line"><span class="comment">/// Driver for RectangularDrivenCavity test problem -- test drive</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// with two different types of element.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="driven__cavity_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up doc info</span></div>
+<div class="line"> <span class="comment">// ---------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Label for output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Step number</span></div>
+<div class="line"> doc_info.number()=0;</div>
+</div><!-- fragment --><p>We build the problem using <code>QCrouzeixRaviartElements</code>, solve using the <code>Problem::newton_solve()</code> function, and document the result before incrementing the label for the output files.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Doing QCrouzeixRaviartElements</span></div>
+<div class="line"> {</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Build the problem with QCrouzeixRaviartElements</span></div>
+<div class="line">  <a class="code" href="classRectangularDrivenCavityProblem.html">RectangularDrivenCavityProblem&lt;QCrouzeixRaviartElement&lt;2&gt;</a> &gt; <a class="code" href="driven__cavity_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>;</div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot;Doing QCrouzeixRaviartElement&lt;2&gt;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem</span></div>
+<div class="line">  <a class="code" href="driven__cavity_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Outpt the solution</span></div>
+<div class="line">  <a class="code" href="driven__cavity_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Step number</span></div>
+<div class="line">  doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line"> } <span class="comment">// end of QCrouzeixRaviartElements</span></div>
+</div><!-- fragment --><p>Finally, we repeat the process with <code>QTaylorHoodElements</code>.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Doing QTaylorHoodElements</span></div>
+<div class="line"> {</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Build the problem with QTaylorHoodElements</span></div>
+<div class="line">  <a class="code" href="classRectangularDrivenCavityProblem.html">RectangularDrivenCavityProblem&lt;QTaylorHoodElement&lt;2&gt;</a> &gt; <a class="code" href="driven__cavity_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>;</div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot;Doing QTaylorHoodElement&lt;2&gt;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem</span></div>
+<div class="line">  <a class="code" href="driven__cavity_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Outpt the solution</span></div>
+<div class="line">  <a class="code" href="driven__cavity_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Step number</span></div>
+<div class="line">  doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line"> } <span class="comment">// end of QTaylorHoodElements</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The <code>Problem</code> class for our steady Navier-Stokes problem is very similar to those used for the steady scalar problems (Poisson and advection-diffusion) that we considered in previous examples. We provide a helper function <code>fix_pressure(...)</code> which pins a pressure value in a specified element and assigns a specific value.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_problem_class============================================</span></div>
+<div class="line"><span class="comment">/// Driven cavity problem in rectangular domain</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classRectangularDrivenCavityProblem.html">RectangularDrivenCavityProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classRectangularDrivenCavityProblem.html#ad7382f68a780f86ea5f0e9b7d4d119ec">RectangularDrivenCavityProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classRectangularDrivenCavityProblem.html#a0233981e33e2bd9db424b19e51a0faef">~RectangularDrivenCavityProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Fix pressure in element e at pressure dof pdof and set to pvalue</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRectangularDrivenCavityProblem.html#ac02d80f5241eeb04571577ce3b9f35a3">fix_pressure</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;e, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;pdof, </div>
+<div class="line">                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;pvalue)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to full element type and fix the pressure at that element</span></div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(<a class="code" href="classRectangularDrivenCavityProblem.html#a408035d1f224641db75a2f48074e9593">mesh_pt</a>()-&gt;element_pt(e))-&gt;</div>
+<div class="line">                          <a class="code" href="classRectangularDrivenCavityProblem.html#ac02d80f5241eeb04571577ce3b9f35a3">fix_pressure</a>(pdof,pvalue);</div>
+<div class="line">  } <span class="comment">// end of fix_pressure</span></div>
+</div><!-- fragment --><p>No actions are performed after the solution is found, since the solution is documented in <code>main</code>. However, before solving, the boundary conditions must be set.</p>
+<div class="fragment"><div class="line"> <span class="comment">/// Update the after solve (empty)</span></div>
+<div class="line"> <span class="keywordtype">void</span> actions_after_newton_solve(){}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve. </span></div>
+<div class="line"><span class="comment"> /// Re-set velocity boundary conditions just to be on the safe side...</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve()</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Setup tangential flow along boundary 0:</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> ibound=0; </div>
+<div class="line">  <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">// Tangential flow</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>=0;</div>
+<div class="line">    mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(<a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>,1.0);</div>
+<div class="line">    <span class="comment">// No penetration</span></div>
+<div class="line">    <a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>=1;</div>
+<div class="line">    mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(<a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>,0.0);</div>
+<div class="line">   }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Overwrite with no flow along the other boundaries</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=1;ibound&lt;num_bound;ibound++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">     {</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>=0;<a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>&lt;2;<a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>++)</div>
+<div class="line">       {</div>
+<div class="line">        mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(<a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>,0.0);</div>
+<div class="line">       }</div>
+<div class="line">     }</div>
+<div class="line">   }</div>
+<div class="line"> } <span class="comment">// end_of_actions_before_newton_solve</span></div>
+</div><!-- fragment --><p>Finally, we provide an access function to the specific mesh and define the post-processing function <code>doc_solution(...)</code>.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Access function for the specific mesh</span></div>
+<div class="line"> SimpleRectangularQuadMesh&lt;ELEMENT&gt;* mesh_pt() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from pointer to the Mesh base class to the specific </span></div>
+<div class="line">   <span class="comment">// element type that we&#39;re using here.</span></div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>SimpleRectangularQuadMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end_of_problem_class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>Since this is a steady problem, the constructor is quite simple. We begin by building the mesh and pin the velocities on the boundaries.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_constructor==================================================</span></div>
+<div class="line"><span class="comment">/// Constructor for RectangularDrivenCavity problem </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classRectangularDrivenCavityProblem.html#ad7382f68a780f86ea5f0e9b7d4d119ec">RectangularDrivenCavityProblem&lt;ELEMENT&gt;::RectangularDrivenCavityProblem</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_x=10;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_y=10;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in x-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_x=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_y=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build and assign mesh</span></div>
+<div class="line"> Problem::mesh_pt() = <span class="keyword">new</span> SimpleRectangularQuadMesh&lt;ELEMENT&gt;(n_x,n_y,l_x,l_y);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here. </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Loop over values (u and v velocities)</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>=0;<a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>&lt;2;<a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>++)</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(<a class="code" href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a>); </div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+</div><!-- fragment --><p>Next we pass a pointer to the Reynolds number (stored in <code><a class="el" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9" title="Reynolds number.">Global_Physical_Variables::Re</a></code>) to all elements.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   ELEMENT* el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the Reynolds number</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">  } <span class="comment">// end loop over elements</span></div>
+</div><!-- fragment --><p>Since Dirichlet conditions are applied to both velocity components on all boundaries, the pressure is only determined up to an arbitrary constant. We use the <code>fix_pressure(...)</code> function to pin the first pressure value in the first element and set its value to zero.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Now set the first pressure value in element 0 to 0.0</span></div>
+<div class="line"> fix_pressure(0,0,0.0);</div>
+</div><!-- fragment --><p>Finally, the equation numbering scheme is set up, using the function <code>assign_eqn_numbers()</code>.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line">} <span class="comment">// end_of_constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>As expected, this member function documents the computed solution.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_doc_solution=================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classRectangularDrivenCavityProblem.html#ab9540b4f539b7d62a1165cc42b4190ea">RectangularDrivenCavityProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line">} <span class="comment">// end_of_doc_solution</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="stress_divergence"></a>
+The stress-divergence form</h2>
+<p>As discussed in the introduction, by default <code>oomph-lib's</code> Navier-Stokes elements use the stress-divergence form of the momentum equations, </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R_\rho Re \left( St \frac{\partial u_i}{\partial t} + u_j \frac{\partial u_i}{\partial x_j} \right) = - \frac{\partial p}{\partial x_i} + B_i(x_j) + R_\rho \frac{Re}{Fr} G_i + \frac{\partial }{\partial x_j} \left[ R_\mu \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) \right], \]" src="form_70.png"/>
+</p>
+ </center><p> as this form is required in problems with free surfaces or problems in which traction boundary conditions are applied.</p>
+<p>If the flow is divergence free ( <img class="formulaInl" alt="$ Q = 0 \Longrightarrow \partial u_i/\partial x_i =0$" src="form_71.png"/>), the viscous term may be simplified to </p><center> <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R_\rho Re \left( St \frac{\partial u_i}{\partial t} + u_j \frac{\partial u_i}{\partial x_j} \right) = - \frac{\partial p}{\partial x_i} + B_i(x_j) + R_\rho \frac{Re}{Fr} G_i + R_\mu \frac{\partial^2 u_i }{\partial x_j^2}, \]" src="form_72.png"/>
+</p>
+ </center><p> assuming that the viscosity ratio <img class="formulaInl" alt="$ R_\mu $" src="form_48.png"/> remains constant</p>
+<p>This simpler form of the equations can be used to solve problems that do not incorporate traction boundaries or free surfaces. We illustrate the use of these equations in <a href="../../circular_driven_cavity/html/index.html">another example.</a></p>
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ol type="1">
+<li>Compare the pressure distributions obtained with Taylor-Hood elements to that computed with Crouzeix-Raviart elements. Why do they differ? [Hint: Consider how the pressure is represented in the two elements.]</li>
+<li>Confirm that the velocities stored at boundary nodes must be pinned. Investigate what happens if you do not apply <em>any</em> velocity boundary conditions [Hint: You should still be able to <br  />
+ compute a solution &ndash; what does this solution represent?]</li>
+<li>Investigate what happens when no pressure value is fixed.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/navier_stokes/driven_cavity/">demo_drivers/navier_stokes/driven_cavity/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/navier_stokes/driven_cavity/driven_cavity.cc">demo_drivers/navier_stokes/driven_cavity/driven_cavity.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassRectangularDrivenCavityProblem_html_a408035d1f224641db75a2f48074e9593"><div class="ttname"><a href="classRectangularDrivenCavityProblem.html#a408035d1f224641db75a2f48074e9593">RectangularDrivenCavityProblem::mesh_pt</a></div><div class="ttdeci">SimpleRectangularQuadMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8cc_source.html#l00122">driven_cavity.cc:122</a></div></div>
+<div class="ttc" id="aclassRectangularDrivenCavityProblem_html_ad7382f68a780f86ea5f0e9b7d4d119ec"><div class="ttname"><a href="classRectangularDrivenCavityProblem.html#ad7382f68a780f86ea5f0e9b7d4d119ec">RectangularDrivenCavityProblem::RectangularDrivenCavityProblem</a></div><div class="ttdeci">RectangularDrivenCavityProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8cc_source.html#l00141">driven_cavity.cc:141</a></div></div>
+<div class="ttc" id="aclassRectangularDrivenCavityProblem_html_ab9540b4f539b7d62a1165cc42b4190ea"><div class="ttname"><a href="classRectangularDrivenCavityProblem.html#ab9540b4f539b7d62a1165cc42b4190ea">RectangularDrivenCavityProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8cc_source.html#l00207">driven_cavity.cc:207</a></div></div>
+<div class="ttc" id="aclassRectangularDrivenCavityProblem_html_a0233981e33e2bd9db424b19e51a0faef"><div class="ttname"><a href="classRectangularDrivenCavityProblem.html#a0233981e33e2bd9db424b19e51a0faef">RectangularDrivenCavityProblem::~RectangularDrivenCavityProblem</a></div><div class="ttdeci">~RectangularDrivenCavityProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8cc_source.html#l00073">driven_cavity.cc:73</a></div></div>
+<div class="ttc" id="adriven__cavity_8txt_html_a3999228f16bf26800d15356372c52411"><div class="ttname"><a href="driven__cavity_8txt.html#a3999228f16bf26800d15356372c52411">i</a></div><div class="ttdeci">other values tend to be used in problems involving multiple fluids The above equations are typically augmented by Dirichlet boundary conditions the flow satisfies the traction free natural boundary condition f n_i R_ the fluid pressure f p f is only determined up to an arbitrary constant This indeterminacy may be overcome by prescribing the value of the pressure at a single point in the family of geometric finite elements They are nine node and node qquad i</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8txt_source.html#l00138">driven_cavity.txt:138</a></div></div>
+<div class="ttc" id="aclassRectangularDrivenCavityProblem_html"><div class="ttname"><a href="classRectangularDrivenCavityProblem.html">RectangularDrivenCavityProblem</a></div><div class="ttdoc">Driven cavity problem in rectangular domain.</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8cc_source.html#l00063">driven_cavity.cc:63</a></div></div>
+<div class="ttc" id="adriven__cavity_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="driven__cavity_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8cc_source.html#l00242">driven_cavity.cc:242</a></div></div>
+<div class="ttc" id="adriven__cavity_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="driven__cavity_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8txt_source.html#l00005">driven_cavity.txt:5</a></div></div>
+<div class="ttc" id="aclassRectangularDrivenCavityProblem_html_ac02d80f5241eeb04571577ce3b9f35a3"><div class="ttname"><a href="classRectangularDrivenCavityProblem.html#ac02d80f5241eeb04571577ce3b9f35a3">RectangularDrivenCavityProblem::fix_pressure</a></div><div class="ttdeci">void fix_pressure(const unsigned &amp;e, const unsigned &amp;pdof, const double &amp;pvalue)</div><div class="ttdoc">Fix pressure in element e at pressure dof pdof and set to pvalue.</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8cc_source.html#l00076">driven_cavity.cc:76</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8cc_source.html#l00043">driven_cavity.cc:43</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition:</b> <a href="driven__cavity_8cc_source.html#l00047">driven_cavity.cc:47</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:07:21
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

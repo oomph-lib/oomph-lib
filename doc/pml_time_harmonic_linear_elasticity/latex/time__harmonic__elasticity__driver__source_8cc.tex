@@ -1,0 +1,46 @@
+\hypertarget{time__harmonic__elasticity__driver__source_8cc}{}\doxysection{time\+\_\+harmonic\+\_\+elasticity\+\_\+driver\+\_\+source.\+cc File Reference}
+\label{time__harmonic__elasticity__driver__source_8cc}\index{time\_harmonic\_elasticity\_driver\_source.cc@{time\_harmonic\_elasticity\_driver\_source.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticAnnulusProblem}{Elastic\+Annulus\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}
+\begin{DoxyCompactList}\small\item\em Annular disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a1db5d755b9fc9faa6cd74f4747264acc}{Global\+\_\+\+Parameters\+::body\+\_\+force}} (const Vector$<$ double $>$ \&x, Vector$<$ std\+::complex$<$ double $>$ $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Body force. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_aafb6ae2e2642a42a7c8ce999837d18b1}{Global\+\_\+\+Parameters\+::compute\+\_\+dependent\+\_\+parameters}} ()
+\begin{DoxyCompactList}\small\item\em Function to compute dependent parameters. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{time__harmonic__elasticity__driver__source_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Driver for annular disk loaded by pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{time__harmonic__elasticity__driver__source_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{time__harmonic__elasticity__driver__source_8cc_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{time\_harmonic\_elasticity\_driver\_source.cc@{time\_harmonic\_elasticity\_driver\_source.cc}!main@{main}}
+\index{main@{main}!time\_harmonic\_elasticity\_driver\_source.cc@{time\_harmonic\_elasticity\_driver\_source.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver for annular disk loaded by pressure. 
+
+Number of elements for each layer
+
+Thickness of each layer
+
+Update dependent parameters
+
+Definition at line 592 of file time\+\_\+harmonic\+\_\+elasticity\+\_\+driver\+\_\+source.\+cc.
+
+
+
+References Global\+\_\+\+Parameters\+::compute\+\_\+dependent\+\_\+parameters(), Global\+\_\+\+Parameters\+::\+Directory, Elastic\+Annulus\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), Global\+\_\+\+Parameters\+::\+E\+\_\+pt, Global\+\_\+\+Parameters\+::\+L\+\_\+pml\+\_\+multiplier, Global\+\_\+\+Parameters\+::\+N\+\_\+pml\+\_\+multiplier, Global\+\_\+\+Parameters\+::\+N\+\_\+x\+\_\+left\+\_\+pml, Global\+\_\+\+Parameters\+::\+N\+\_\+x\+\_\+right\+\_\+pml, Global\+\_\+\+Parameters\+::\+N\+\_\+y\+\_\+bottom\+\_\+pml, Global\+\_\+\+Parameters\+::\+N\+\_\+y\+\_\+top\+\_\+pml, Global\+\_\+\+Parameters\+::\+Nu, Global\+\_\+\+Parameters\+::\+T\+\_\+end, Global\+\_\+\+Parameters\+::\+T\+\_\+start, Global\+\_\+\+Parameters\+::\+Width\+\_\+x\+\_\+left\+\_\+pml, Global\+\_\+\+Parameters\+::\+Width\+\_\+x\+\_\+right\+\_\+pml, Global\+\_\+\+Parameters\+::\+Width\+\_\+y\+\_\+bottom\+\_\+pml, and Global\+\_\+\+Parameters\+::\+Width\+\_\+y\+\_\+top\+\_\+pml.
+

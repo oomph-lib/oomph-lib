@@ -1,0 +1,507 @@
+\hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{}\doxysection{oomph\+::T\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+
+
+{\ttfamily \#include $<$Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::T\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.336516cm]{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a076673af7606f66f5e2da7a8ffa80949}{T\+Displacement\+Based\+Foepplvon\+Karman\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and Foeppl von Karman equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a4ea3b406605215c3254b9cfbcdbdbba8}{T\+Displacement\+Based\+Foepplvon\+Karman\+Element}} (const \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a79316486291f8ab93115411901fe49a4}{operator=}} (const \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a85ccfc34138dd1d839ad18eb17ca0e4c}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+\begin{DoxyCompactList}\small\item\em Access function for Nvalue\+: \# of `values' (pinned or dofs) at node n (always returns the same value at every node, 4) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a860284d46ca7b85c519464ec2a6666ec}{ndof\+\_\+types}} () const
+\begin{DoxyCompactList}\small\item\em The number of dof types that degrees of freedom in this element are sub-\/divided into. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_ad029c2562317f83814272ad57d8f7582}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the dof type that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Dof\+\_\+types 0,1\+: Laplacian; 2\+: Bending w 3\+: Displacements Ux and Uy The indexing of the dofs in the element is like below. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a1c3ad1317dc48f704d6d012a9c50724e}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,w. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_aa763fb490c43b132ea3322cad5f1662f}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,w at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a5558c5bd6365deda6a93d6eae19f22d0}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,w. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a18dfb77359aae414020e12c4025534ab}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,w at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a93812c3e443269fa8b272249bdce6b5e}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,w\+\_\+exact. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_ade2f7fd74d6db0275a9e8bb255d7e495}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,y,w\+\_\+exact (calls the steady version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a1df4d4f099c7a710a1c43004266e4ea7}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+fvk}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_ad690f5dcab636d760f70779bdb60bd4e}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+fvk}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_afe81136b4a28e8e61210af5d880fcf72}{nrecovery\+\_\+order}} ()
+\begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a19b93ec7635583382906d2911996ddfd}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
+\begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a921610ebc718302d9e9fbb84e6f142f3}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from FvK equations. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a8d0654116b55993bf68b640f74d4e4a4}{nvertex\+\_\+node}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_abc04483e26179e84bc8bc0034a533a74}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a2bec0ef510b12d4e1ad23e3e8d966306}{Initial\+\_\+\+Nvalue}} = 4
+\begin{DoxyCompactList}\small\item\em Static unsigned that holds the (same) number of variables at every node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
+class oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}
+
+T\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are isoparametric triangular 2-\/dimensional Foeppl von Karman elements with N\+N\+O\+D\+E\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations}{Displacement\+Based\+Foepplvon\+Karman\+Equations}} 
+
+Definition at line 68 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a076673af7606f66f5e2da7a8ffa80949}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a076673af7606f66f5e2da7a8ffa80949}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!TDisplacementBasedFoepplvonKarmanElement@{TDisplacementBasedFoepplvonKarmanElement}}
+\index{TDisplacementBasedFoepplvonKarmanElement@{TDisplacementBasedFoepplvonKarmanElement}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{TDisplacementBasedFoepplvonKarmanElement()}{TDisplacementBasedFoepplvonKarmanElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{T\+Displacement\+Based\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and Foeppl von Karman equations. 
+
+
+
+Definition at line 77 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a4ea3b406605215c3254b9cfbcdbdbba8}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a4ea3b406605215c3254b9cfbcdbdbba8}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!TDisplacementBasedFoepplvonKarmanElement@{TDisplacementBasedFoepplvonKarmanElement}}
+\index{TDisplacementBasedFoepplvonKarmanElement@{TDisplacementBasedFoepplvonKarmanElement}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{TDisplacementBasedFoepplvonKarmanElement()}{TDisplacementBasedFoepplvonKarmanElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{T\+Displacement\+Based\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 83 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_ad690f5dcab636d760f70779bdb60bd4e}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_ad690f5dcab636d760f70779bdb60bd4e}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_fvk}}
+\index{dshape\_and\_dtest\_eulerian\_at\_knot\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_fvk}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_fvk()}{dshape\_and\_dtest\_eulerian\_at\_knot\_fvk()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+fvk (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+
+Galerkin\+: Test functions = shape functions 
+
+Implements \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a93b089c7109311817e2fbd7dfcdca1f2}{oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations}}.
+
+
+
+Definition at line 376 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a1df4d4f099c7a710a1c43004266e4ea7}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a1df4d4f099c7a710a1c43004266e4ea7}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_fvk@{dshape\_and\_dtest\_eulerian\_fvk}}
+\index{dshape\_and\_dtest\_eulerian\_fvk@{dshape\_and\_dtest\_eulerian\_fvk}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_fvk()}{dshape\_and\_dtest\_eulerian\_fvk()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+fvk (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+
+Galerkin\+: Test functions = shape functions 
+
+Implements \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a91d0e65a45461295c271b6f2e9604f67}{oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations}}.
+
+
+
+Definition at line 341 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References i, and s.
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_ad029c2562317f83814272ad57d8f7582}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_ad029c2562317f83814272ad57d8f7582}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
+\index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the dof type that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Dof\+\_\+types 0,1\+: Laplacian; 2\+: Bending w 3\+: Displacements Ux and Uy The indexing of the dofs in the element is like below. 
+
+\mbox{[}1\mbox{]}\+: laplacian w 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 127 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a921610ebc718302d9e9fbb84e6f142f3}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a921610ebc718302d9e9fbb84e6f142f3}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
+\index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from FvK equations. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 309 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::get\+\_\+gradient\+\_\+of\+\_\+deflection().
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a860284d46ca7b85c519464ec2a6666ec}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a860284d46ca7b85c519464ec2a6666ec}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!ndof\_types@{ndof\_types}}
+\index{ndof\_types@{ndof\_types}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The number of dof types that degrees of freedom in this element are sub-\/divided into. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870597b35dcf1c780710b9a56}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 101 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_afe81136b4a28e8e61210af5d880fcf72}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_afe81136b4a28e8e61210af5d880fcf72}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
+\index{nrecovery\_order@{nrecovery\_order}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835bd3e0f6b2f4f7a9a4044798}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 303 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a19b93ec7635583382906d2911996ddfd}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a19b93ec7635583382906d2911996ddfd}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
+\index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c5728902e13da31be19c390fc28e3}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 306 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a8d0654116b55993bf68b640f74d4e4a4}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a8d0654116b55993bf68b640f74d4e4a4}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
+\index{nvertex\_node@{nvertex\_node}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertex nodes in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e77ef4ff35f15fdf7913b4077}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 313 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a79316486291f8ab93115411901fe49a4}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a79316486291f8ab93115411901fe49a4}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 89 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a5558c5bd6365deda6a93d6eae19f22d0}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a5558c5bd6365deda6a93d6eae19f22d0}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function\+: x,y,w. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ac969427e1333e212f74e5d2833d1c1b7}{oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations}}.
+
+
+
+Definition at line 252 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a18dfb77359aae414020e12c4025534ab}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a18dfb77359aae414020e12c4025534ab}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function\+: x,y,w at n\+\_\+plot$^\wedge$2 plot points. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ad5c7fa0d55e2eb85d1f305b05be86a97}{oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations}}.
+
+
+
+Definition at line 260 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a1c3ad1317dc48f704d6d012a9c50724e}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a1c3ad1317dc48f704d6d012a9c50724e}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function\+: x,y,w. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a7e806927a451e21dc0b2f10cf98a5941}{oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations}}.
+
+
+
+Definition at line 237 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_aa763fb490c43b132ea3322cad5f1662f}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_aa763fb490c43b132ea3322cad5f1662f}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function\+: x,y,w at n\+\_\+plot$^\wedge$2 plot points. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a675597ddd788e92dd6fb8d3bfed01c5b}{oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations}}.
+
+
+
+Definition at line 244 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_ade2f7fd74d6db0275a9e8bb255d7e495}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_ade2f7fd74d6db0275a9e8bb255d7e495}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output\_fct@{output\_fct}}
+\index{output\_fct@{output\_fct}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function for a time-\/dependent exact solution. x,y,w\+\_\+exact (calls the steady version) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a55cc825e8aedbc958617b03dea2afe29}{oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations}}.
+
+
+
+Definition at line 277 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct().
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a93812c3e443269fa8b272249bdce6b5e}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a93812c3e443269fa8b272249bdce6b5e}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output\_fct@{output\_fct}}
+\index{output\_fct@{output\_fct}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function for an exact solution\+: x,y,w\+\_\+exact. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a43085c764ddc4c1b4676b3e89754f87a}{oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations}}.
+
+
+
+Definition at line 268 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct().
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a85ccfc34138dd1d839ad18eb17ca0e4c}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a85ccfc34138dd1d839ad18eb17ca0e4c}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
+\index{required\_nvalue@{required\_nvalue}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Access function for Nvalue\+: \# of `values' (pinned or dofs) at node n (always returns the same value at every node, 4) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 96 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue.
+
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_abc04483e26179e84bc8bc0034a533a74}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_abc04483e26179e84bc8bc0034a533a74}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
+\index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to the j-\/th vertex node in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 317 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a2bec0ef510b12d4e1ad23e3e8d966306}\label{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a2bec0ef510b12d4e1ad23e3e8d966306}} 
+\index{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
+\index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::TDisplacementBasedFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+const unsigned \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement}{oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue = 4\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Static unsigned that holds the (same) number of variables at every node. 
+
+
+
+Definition at line 323 of file Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+T\+Displacement\+Based\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::required\+\_\+nvalue().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Tdisplacement__based__foeppl__von__karman__elements_8h}{Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{Tdisplacement__based__foeppl__von__karman__elements_8cc}{Tdisplacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

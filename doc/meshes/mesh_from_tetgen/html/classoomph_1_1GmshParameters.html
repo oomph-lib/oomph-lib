@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::GmshParameters Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1GmshParameters.html">GmshParameters</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1GmshParameters-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::GmshParameters Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class to collate parameters for Gmsh mesh generation.  
+ <a href="classoomph_1_1GmshParameters.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6a4e43f09a5de3155dee5b3d5c1a206b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a6a4e43f09a5de3155dee5b3d5c1a206b">GmshParameters</a> (TetMeshFacetedClosedSurface *const &amp;<a class="el" href="classoomph_1_1GmshParameters.html#abdd71edac9d5fd08a6a9c978d2673a2e">outer_boundary_pt</a>, const std::string &amp;<a class="el" href="classoomph_1_1GmshParameters.html#aaf19a5b331893637974f5a5be8da048c">gmsh_command_line_invocation</a>)</td></tr>
+<tr class="memdesc:a6a4e43f09a5de3155dee5b3d5c1a206b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify outer boundary of domain to be meshed. Other parameters get default values and can be set via member functions.  <a href="classoomph_1_1GmshParameters.html#a6a4e43f09a5de3155dee5b3d5c1a206b">More...</a><br /></td></tr>
+<tr class="separator:a6a4e43f09a5de3155dee5b3d5c1a206b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdd71edac9d5fd08a6a9c978d2673a2e"><td class="memItemLeft" align="right" valign="top">TetMeshFacetedClosedSurface *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#abdd71edac9d5fd08a6a9c978d2673a2e">outer_boundary_pt</a> ()</td></tr>
+<tr class="memdesc:abdd71edac9d5fd08a6a9c978d2673a2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outer boundary.  <a href="classoomph_1_1GmshParameters.html#abdd71edac9d5fd08a6a9c978d2673a2e">More...</a><br /></td></tr>
+<tr class="separator:abdd71edac9d5fd08a6a9c978d2673a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10f845ea8fb16bf617f5c6ca05e21bf9"><td class="memItemLeft" align="right" valign="top">Vector&lt; TetMeshFacetedSurface * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a10f845ea8fb16bf617f5c6ca05e21bf9">internal_surface_pt</a> ()</td></tr>
+<tr class="memdesc:a10f845ea8fb16bf617f5c6ca05e21bf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal boundaries.  <a href="classoomph_1_1GmshParameters.html#a10f845ea8fb16bf617f5c6ca05e21bf9">More...</a><br /></td></tr>
+<tr class="separator:a10f845ea8fb16bf617f5c6ca05e21bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c085fa1661d1a27ee95461d275b686f"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a4c085fa1661d1a27ee95461d275b686f">element_volume</a> ()</td></tr>
+<tr class="memdesc:a4c085fa1661d1a27ee95461d275b686f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uniform target element volume.  <a href="classoomph_1_1GmshParameters.html#a4c085fa1661d1a27ee95461d275b686f">More...</a><br /></td></tr>
+<tr class="separator:a4c085fa1661d1a27ee95461d275b686f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c7ff40c1dd70b20b0ae22d30fe5c8a"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a89c7ff40c1dd70b20b0ae22d30fe5c8a">target_size_file_name</a> ()</td></tr>
+<tr class="memdesc:a89c7ff40c1dd70b20b0ae22d30fe5c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filename for target volumes (for system-call based transfer to gmsh during mesh adaptation). Default: .gmsh_target_size_for_adaptation.dat.  <a href="classoomph_1_1GmshParameters.html#a89c7ff40c1dd70b20b0ae22d30fe5c8a">More...</a><br /></td></tr>
+<tr class="separator:a89c7ff40c1dd70b20b0ae22d30fe5c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf19a5b331893637974f5a5be8da048c"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#aaf19a5b331893637974f5a5be8da048c">gmsh_command_line_invocation</a> ()</td></tr>
+<tr class="memdesc:aaf19a5b331893637974f5a5be8da048c"><td class="mdescLeft">&#160;</td><td class="mdescRight">String to be issued via system command to activate gmsh.  <a href="classoomph_1_1GmshParameters.html#aaf19a5b331893637974f5a5be8da048c">More...</a><br /></td></tr>
+<tr class="separator:aaf19a5b331893637974f5a5be8da048c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9ae54d3d474392b5aefcf2a12aae1a8"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#ab9ae54d3d474392b5aefcf2a12aae1a8">geo_and_msh_file_stem</a> ()</td></tr>
+<tr class="memdesc:ab9ae54d3d474392b5aefcf2a12aae1a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stem for geo and msh files (input/output to command-line gmsh invocation)  <a href="classoomph_1_1GmshParameters.html#ab9ae54d3d474392b5aefcf2a12aae1a8">More...</a><br /></td></tr>
+<tr class="separator:ab9ae54d3d474392b5aefcf2a12aae1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd08195fd9f804b7ced23728b6a63e15"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#afd08195fd9f804b7ced23728b6a63e15">max_element_size</a> ()</td></tr>
+<tr class="memdesc:afd08195fd9f804b7ced23728b6a63e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. element size during refinement.  <a href="classoomph_1_1GmshParameters.html#afd08195fd9f804b7ced23728b6a63e15">More...</a><br /></td></tr>
+<tr class="separator:afd08195fd9f804b7ced23728b6a63e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4afd4f1f72b1f45b3ca51b186737f264"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a4afd4f1f72b1f45b3ca51b186737f264">min_element_size</a> ()</td></tr>
+<tr class="memdesc:a4afd4f1f72b1f45b3ca51b186737f264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Min. element size during refinement.  <a href="classoomph_1_1GmshParameters.html#a4afd4f1f72b1f45b3ca51b186737f264">More...</a><br /></td></tr>
+<tr class="separator:a4afd4f1f72b1f45b3ca51b186737f264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe2deda55a1eb76d4f782aab9a58089c"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#afe2deda55a1eb76d4f782aab9a58089c">max_permitted_edge_ratio</a> ()</td></tr>
+<tr class="memdesc:afe2deda55a1eb76d4f782aab9a58089c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. permitted edge ratio.  <a href="classoomph_1_1GmshParameters.html#afe2deda55a1eb76d4f782aab9a58089c">More...</a><br /></td></tr>
+<tr class="separator:afe2deda55a1eb76d4f782aab9a58089c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5db3c2aca27f73ee53e32178255130d"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#ae5db3c2aca27f73ee53e32178255130d">dx_for_target_size_transfer</a> ()</td></tr>
+<tr class="memdesc:ae5db3c2aca27f73ee53e32178255130d"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Isotropic) grid spacing for target size transfer  <a href="classoomph_1_1GmshParameters.html#ae5db3c2aca27f73ee53e32178255130d">More...</a><br /></td></tr>
+<tr class="separator:ae5db3c2aca27f73ee53e32178255130d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b7dfff74a8e3183858ecd42b8f1a049"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a7b7dfff74a8e3183858ecd42b8f1a049">max_sample_points_for_limited_locate_zeta_during_target_size_transfer</a> ()</td></tr>
+<tr class="memdesc:a7b7dfff74a8e3183858ecd42b8f1a049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Target size is transferred onto regular grid (for gmsh) by locate zeta. We try to find the exact point in the existing mesh but if we fail to converge from the nearest specified number of sample points we use the nearest of those.  <a href="classoomph_1_1GmshParameters.html#a7b7dfff74a8e3183858ecd42b8f1a049">More...</a><br /></td></tr>
+<tr class="separator:a7b7dfff74a8e3183858ecd42b8f1a049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6006bbce01fab0e48e474f077fc926e7"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a6006bbce01fab0e48e474f077fc926e7">stem_for_filename_gmsh_size_transfer</a> ()</td></tr>
+<tr class="memdesc:a6006bbce01fab0e48e474f077fc926e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stem for filename used to doc target element sizes on gmsh grid. No doc if stem is equal to empty string (or counter is negative)  <a href="classoomph_1_1GmshParameters.html#a6006bbce01fab0e48e474f077fc926e7">More...</a><br /></td></tr>
+<tr class="separator:a6006bbce01fab0e48e474f077fc926e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf8155883aab25f0fc13c1eab7c03e9c"><td class="memItemLeft" align="right" valign="top">int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#acf8155883aab25f0fc13c1eab7c03e9c">counter_for_filename_gmsh_size_transfer</a> ()</td></tr>
+<tr class="memdesc:acf8155883aab25f0fc13c1eab7c03e9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter for filename used to doc target element sizes on gmsh grid. No doc if stem is equal to empty string (or counter is negative)  <a href="classoomph_1_1GmshParameters.html#acf8155883aab25f0fc13c1eab7c03e9c">More...</a><br /></td></tr>
+<tr class="separator:acf8155883aab25f0fc13c1eab7c03e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b37d79ebc135382c2320c3ba405a3f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#ac8b37d79ebc135382c2320c3ba405a3f">projection_is_disabled</a> ()</td></tr>
+<tr class="memdesc:ac8b37d79ebc135382c2320c3ba405a3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is projection of old solution onto new mesh disabled?  <a href="classoomph_1_1GmshParameters.html#ac8b37d79ebc135382c2320c3ba405a3f">More...</a><br /></td></tr>
+<tr class="separator:ac8b37d79ebc135382c2320c3ba405a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c1ebc0ae01551b7899364a1cf25f19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#ad9c1ebc0ae01551b7899364a1cf25f19">disable_projection</a> ()</td></tr>
+<tr class="memdesc:ad9c1ebc0ae01551b7899364a1cf25f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable projection of old solution onto new mesh.  <a href="classoomph_1_1GmshParameters.html#ad9c1ebc0ae01551b7899364a1cf25f19">More...</a><br /></td></tr>
+<tr class="separator:ad9c1ebc0ae01551b7899364a1cf25f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa3a44a5a06632733efa49912a272865"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#afa3a44a5a06632733efa49912a272865">enable_projection</a> ()</td></tr>
+<tr class="memdesc:afa3a44a5a06632733efa49912a272865"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable projection of old solution onto new mesh.  <a href="classoomph_1_1GmshParameters.html#afa3a44a5a06632733efa49912a272865">More...</a><br /></td></tr>
+<tr class="separator:afa3a44a5a06632733efa49912a272865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac712c282aec129e50646e6cf07a7a92e"><td class="memItemLeft" align="right" valign="top">std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#ac712c282aec129e50646e6cf07a7a92e">gmsh_onscreen_output_file_name</a> ()</td></tr>
+<tr class="memdesc:ac712c282aec129e50646e6cf07a7a92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output filename for gmsh on-screen output.  <a href="classoomph_1_1GmshParameters.html#ac712c282aec129e50646e6cf07a7a92e">More...</a><br /></td></tr>
+<tr class="separator:ac712c282aec129e50646e6cf07a7a92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde31eadaa2ca1862837624f68ea8d34"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#afde31eadaa2ca1862837624f68ea8d34">gmsh_onscreen_output_counter</a> ()</td></tr>
+<tr class="memdesc:afde31eadaa2ca1862837624f68ea8d34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter for marker that indicates where we are in gmsh on-screen output.  <a href="classoomph_1_1GmshParameters.html#afde31eadaa2ca1862837624f68ea8d34">More...</a><br /></td></tr>
+<tr class="separator:afde31eadaa2ca1862837624f68ea8d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a310ecaffe67e67b334aafaca82c4d50a"><td class="memItemLeft" align="right" valign="top">TetMeshFacetedClosedSurface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a310ecaffe67e67b334aafaca82c4d50a">Outer_boundary_pt</a></td></tr>
+<tr class="memdesc:a310ecaffe67e67b334aafaca82c4d50a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to outer boundary.  <a href="classoomph_1_1GmshParameters.html#a310ecaffe67e67b334aafaca82c4d50a">More...</a><br /></td></tr>
+<tr class="separator:a310ecaffe67e67b334aafaca82c4d50a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa4afdde73a7fc67d5c2ba2976235381"><td class="memItemLeft" align="right" valign="top">Vector&lt; TetMeshFacetedSurface * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#aaa4afdde73a7fc67d5c2ba2976235381">Internal_surface_pt</a></td></tr>
+<tr class="memdesc:aaa4afdde73a7fc67d5c2ba2976235381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal boundaries.  <a href="classoomph_1_1GmshParameters.html#aaa4afdde73a7fc67d5c2ba2976235381">More...</a><br /></td></tr>
+<tr class="separator:aaa4afdde73a7fc67d5c2ba2976235381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7993da33a0468681e5f661ac5b00bfb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#aa7993da33a0468681e5f661ac5b00bfb">Element_volume</a></td></tr>
+<tr class="memdesc:aa7993da33a0468681e5f661ac5b00bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uniform element volume.  <a href="classoomph_1_1GmshParameters.html#aa7993da33a0468681e5f661ac5b00bfb">More...</a><br /></td></tr>
+<tr class="separator:aa7993da33a0468681e5f661ac5b00bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2f3eabe211e22c18df2bf7b093bbdfb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#ae2f3eabe211e22c18df2bf7b093bbdfb">Target_size_file_name</a></td></tr>
+<tr class="memdesc:ae2f3eabe211e22c18df2bf7b093bbdfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filename for target volume (for system-call based transfer to gmsh during mesh adaptation)  <a href="classoomph_1_1GmshParameters.html#ae2f3eabe211e22c18df2bf7b093bbdfb">More...</a><br /></td></tr>
+<tr class="separator:ae2f3eabe211e22c18df2bf7b093bbdfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a478a41ae94e177f02d38db90ea27d582"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a478a41ae94e177f02d38db90ea27d582">Geo_and_msh_file_stem</a></td></tr>
+<tr class="memdesc:a478a41ae94e177f02d38db90ea27d582"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stem for geo and msh files (input/output to command-line gmsh invocation)  <a href="classoomph_1_1GmshParameters.html#a478a41ae94e177f02d38db90ea27d582">More...</a><br /></td></tr>
+<tr class="separator:a478a41ae94e177f02d38db90ea27d582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5605a771916b353925ad55b6a6e914cb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a5605a771916b353925ad55b6a6e914cb">Gmsh_command_line_invocation</a></td></tr>
+<tr class="memdesc:a5605a771916b353925ad55b6a6e914cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gmsh command line invocation string.  <a href="classoomph_1_1GmshParameters.html#a5605a771916b353925ad55b6a6e914cb">More...</a><br /></td></tr>
+<tr class="separator:a5605a771916b353925ad55b6a6e914cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65bd88591891ff4284fb4e03d6f49c14"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a65bd88591891ff4284fb4e03d6f49c14">Max_element_size</a></td></tr>
+<tr class="memdesc:a65bd88591891ff4284fb4e03d6f49c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. element size during refinement.  <a href="classoomph_1_1GmshParameters.html#a65bd88591891ff4284fb4e03d6f49c14">More...</a><br /></td></tr>
+<tr class="separator:a65bd88591891ff4284fb4e03d6f49c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8efec35bdf92a73cf71f25cff41520b7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a8efec35bdf92a73cf71f25cff41520b7">Min_element_size</a></td></tr>
+<tr class="memdesc:a8efec35bdf92a73cf71f25cff41520b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Min. element size during refinement.  <a href="classoomph_1_1GmshParameters.html#a8efec35bdf92a73cf71f25cff41520b7">More...</a><br /></td></tr>
+<tr class="separator:a8efec35bdf92a73cf71f25cff41520b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac62bbb70b5a1bd650f7b0b7c8fbe1d8f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#ac62bbb70b5a1bd650f7b0b7c8fbe1d8f">Max_permitted_edge_ratio</a></td></tr>
+<tr class="memdesc:ac62bbb70b5a1bd650f7b0b7c8fbe1d8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max edge ratio before remesh gets triggered.  <a href="classoomph_1_1GmshParameters.html#ac62bbb70b5a1bd650f7b0b7c8fbe1d8f">More...</a><br /></td></tr>
+<tr class="separator:ac62bbb70b5a1bd650f7b0b7c8fbe1d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c4d7e327d44f9514eb0ac0894f6f9d9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a0c4d7e327d44f9514eb0ac0894f6f9d9">Dx_for_target_size_transfer</a></td></tr>
+<tr class="memdesc:a0c4d7e327d44f9514eb0ac0894f6f9d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Isotropic) grid spacing for target size transfer  <a href="classoomph_1_1GmshParameters.html#a0c4d7e327d44f9514eb0ac0894f6f9d9">More...</a><br /></td></tr>
+<tr class="separator:a0c4d7e327d44f9514eb0ac0894f6f9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a75351daca7e20f9dcb95919691d863"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#a7a75351daca7e20f9dcb95919691d863">Max_sample_points_for_limited_locate_zeta_during_target_size_transfer</a></td></tr>
+<tr class="memdesc:a7a75351daca7e20f9dcb95919691d863"><td class="mdescLeft">&#160;</td><td class="mdescRight">Target size is transferred onto regular grid (for gmsh) by locate zeta. We try to find the exact point in the existing mesh but if we fail to converge from the nearest specified number of sample points we use the nearest of those.  <a href="classoomph_1_1GmshParameters.html#a7a75351daca7e20f9dcb95919691d863">More...</a><br /></td></tr>
+<tr class="separator:a7a75351daca7e20f9dcb95919691d863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0151a908bc36fee2d955551b1da4016"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#ad0151a908bc36fee2d955551b1da4016">Stem_for_filename_gmsh_size_transfer</a></td></tr>
+<tr class="memdesc:ad0151a908bc36fee2d955551b1da4016"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stem for filename used to doc target element sizes on gmsh grid. No doc if stem is equal to empty string (or counter is negative)  <a href="classoomph_1_1GmshParameters.html#ad0151a908bc36fee2d955551b1da4016">More...</a><br /></td></tr>
+<tr class="separator:ad0151a908bc36fee2d955551b1da4016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6ca2a71d6aae3f8c51e9b4ad53b787a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#af6ca2a71d6aae3f8c51e9b4ad53b787a">Counter_for_filename_gmsh_size_transfer</a></td></tr>
+<tr class="memdesc:af6ca2a71d6aae3f8c51e9b4ad53b787a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter for filename used to doc target element sizes on gmsh grid. No doc if stem is equal to empty string (or counter is negative)  <a href="classoomph_1_1GmshParameters.html#af6ca2a71d6aae3f8c51e9b4ad53b787a">More...</a><br /></td></tr>
+<tr class="separator:af6ca2a71d6aae3f8c51e9b4ad53b787a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebabc7ca82ac23e87e164655b6dc9bb4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#aebabc7ca82ac23e87e164655b6dc9bb4">Projection_is_disabled</a></td></tr>
+<tr class="memdesc:aebabc7ca82ac23e87e164655b6dc9bb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is projection of old solution onto new mesh disabled?  <a href="classoomph_1_1GmshParameters.html#aebabc7ca82ac23e87e164655b6dc9bb4">More...</a><br /></td></tr>
+<tr class="separator:aebabc7ca82ac23e87e164655b6dc9bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2da0d4c57e32c06c70a6aa25d1461ac"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#af2da0d4c57e32c06c70a6aa25d1461ac">Gmsh_onscreen_output_file_name</a></td></tr>
+<tr class="memdesc:af2da0d4c57e32c06c70a6aa25d1461ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output filename for gmsh on-screen output.  <a href="classoomph_1_1GmshParameters.html#af2da0d4c57e32c06c70a6aa25d1461ac">More...</a><br /></td></tr>
+<tr class="separator:af2da0d4c57e32c06c70a6aa25d1461ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3648c8847da428cddca41e676042e33"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GmshParameters.html#ab3648c8847da428cddca41e676042e33">Gmsh_onscreen_output_counter</a></td></tr>
+<tr class="memdesc:ab3648c8847da428cddca41e676042e33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter for marker that indicates where we are in gmsh on-screen output.  <a href="classoomph_1_1GmshParameters.html#ab3648c8847da428cddca41e676042e33">More...</a><br /></td></tr>
+<tr class="separator:ab3648c8847da428cddca41e676042e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class to collate parameters for Gmsh mesh generation. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00052">52</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6a4e43f09a5de3155dee5b3d5c1a206b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a4e43f09a5de3155dee5b3d5c1a206b">&#9670;&nbsp;</a></span>GmshParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GmshParameters::GmshParameters </td>
+          <td>(</td>
+          <td class="paramtype">TetMeshFacetedClosedSurface *const &amp;&#160;</td>
+          <td class="paramname"><em>outer_boundary_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>gmsh_command_line_invocation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Specify outer boundary of domain to be meshed. Other parameters get default values and can be set via member functions. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00060">60</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="acf8155883aab25f0fc13c1eab7c03e9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf8155883aab25f0fc13c1eab7c03e9c">&#9670;&nbsp;</a></span>counter_for_filename_gmsh_size_transfer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int&amp; oomph::GmshParameters::counter_for_filename_gmsh_size_transfer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Counter for filename used to doc target element sizes on gmsh grid. No doc if stem is equal to empty string (or counter is negative) </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00160">160</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00244">Counter_for_filename_gmsh_size_transfer</a>.</p>
+
+</div>
+</div>
+<a id="ad9c1ebc0ae01551b7899364a1cf25f19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9c1ebc0ae01551b7899364a1cf25f19">&#9670;&nbsp;</a></span>disable_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::GmshParameters::disable_projection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable projection of old solution onto new mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00172">172</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00247">Projection_is_disabled</a>.</p>
+
+</div>
+</div>
+<a id="ae5db3c2aca27f73ee53e32178255130d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5db3c2aca27f73ee53e32178255130d">&#9670;&nbsp;</a></span>dx_for_target_size_transfer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::GmshParameters::dx_for_target_size_transfer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>(Isotropic) grid spacing for target size transfer </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00135">135</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00228">Dx_for_target_size_transfer</a>.</p>
+
+</div>
+</div>
+<a id="a4c085fa1661d1a27ee95461d275b686f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c085fa1661d1a27ee95461d275b686f">&#9670;&nbsp;</a></span>element_volume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::GmshParameters::element_volume </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Uniform target element volume. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00090">90</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00205">Element_volume</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01030">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
+
+</div>
+</div>
+<a id="afa3a44a5a06632733efa49912a272865"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa3a44a5a06632733efa49912a272865">&#9670;&nbsp;</a></span>enable_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::GmshParameters::enable_projection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable projection of old solution onto new mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00178">178</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00247">Projection_is_disabled</a>.</p>
+
+</div>
+</div>
+<a id="ab9ae54d3d474392b5aefcf2a12aae1a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9ae54d3d474392b5aefcf2a12aae1a8">&#9670;&nbsp;</a></span>geo_and_msh_file_stem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string&amp; oomph::GmshParameters::geo_and_msh_file_stem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stem for geo and msh files (input/output to command-line gmsh invocation) </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00110">110</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00213">Geo_and_msh_file_stem</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00386">oomph::GmshTetScaffoldMesh::GmshTetScaffoldMesh()</a>, and <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01030">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
+
+</div>
+</div>
+<a id="aaf19a5b331893637974f5a5be8da048c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf19a5b331893637974f5a5be8da048c">&#9670;&nbsp;</a></span>gmsh_command_line_invocation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string&amp; oomph::GmshParameters::gmsh_command_line_invocation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>String to be issued via system command to activate gmsh. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00103">103</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00216">Gmsh_command_line_invocation</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00386">oomph::GmshTetScaffoldMesh::GmshTetScaffoldMesh()</a>.</p>
+
+</div>
+</div>
+<a id="afde31eadaa2ca1862837624f68ea8d34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afde31eadaa2ca1862837624f68ea8d34">&#9670;&nbsp;</a></span>gmsh_onscreen_output_counter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::GmshParameters::gmsh_onscreen_output_counter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Counter for marker that indicates where we are in gmsh on-screen output. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00191">191</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00254">Gmsh_onscreen_output_counter</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00386">oomph::GmshTetScaffoldMesh::GmshTetScaffoldMesh()</a>.</p>
+
+</div>
+</div>
+<a id="ac712c282aec129e50646e6cf07a7a92e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac712c282aec129e50646e6cf07a7a92e">&#9670;&nbsp;</a></span>gmsh_onscreen_output_file_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string&amp; oomph::GmshParameters::gmsh_onscreen_output_file_name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output filename for gmsh on-screen output. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00184">184</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00250">Gmsh_onscreen_output_file_name</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00386">oomph::GmshTetScaffoldMesh::GmshTetScaffoldMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a10f845ea8fb16bf617f5c6ca05e21bf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10f845ea8fb16bf617f5c6ca05e21bf9">&#9670;&nbsp;</a></span>internal_surface_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;TetMeshFacetedSurface*&gt;&amp; oomph::GmshParameters::internal_surface_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00084">84</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00202">Internal_surface_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01719">oomph::GmshTetMesh&lt; ELEMENT &gt;::build_it()</a>, and <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01030">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
+
+</div>
+</div>
+<a id="afd08195fd9f804b7ced23728b6a63e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd08195fd9f804b7ced23728b6a63e15">&#9670;&nbsp;</a></span>max_element_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::GmshParameters::max_element_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max. element size during refinement. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00117">117</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00219">Max_element_size</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l02370">oomph::RefineableGmshTetMesh&lt; ELEMENT &gt;::initialise_adaptation_data()</a>.</p>
+
+</div>
+</div>
+<a id="afe2deda55a1eb76d4f782aab9a58089c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe2deda55a1eb76d4f782aab9a58089c">&#9670;&nbsp;</a></span>max_permitted_edge_ratio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::GmshParameters::max_permitted_edge_ratio </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max. permitted edge ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00129">129</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00225">Max_permitted_edge_ratio</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l02370">oomph::RefineableGmshTetMesh&lt; ELEMENT &gt;::initialise_adaptation_data()</a>.</p>
+
+</div>
+</div>
+<a id="a7b7dfff74a8e3183858ecd42b8f1a049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7dfff74a8e3183858ecd42b8f1a049">&#9670;&nbsp;</a></span>max_sample_points_for_limited_locate_zeta_during_target_size_transfer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::GmshParameters::max_sample_points_for_limited_locate_zeta_during_target_size_transfer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Target size is transferred onto regular grid (for gmsh) by locate zeta. We try to find the exact point in the existing mesh but if we fail to converge from the nearest specified number of sample points we use the nearest of those. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00144">144</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00234">Max_sample_points_for_limited_locate_zeta_during_target_size_transfer</a>.</p>
+
+</div>
+</div>
+<a id="a4afd4f1f72b1f45b3ca51b186737f264"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4afd4f1f72b1f45b3ca51b186737f264">&#9670;&nbsp;</a></span>min_element_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::GmshParameters::min_element_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Min. element size during refinement. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00123">123</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00222">Min_element_size</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l02370">oomph::RefineableGmshTetMesh&lt; ELEMENT &gt;::initialise_adaptation_data()</a>.</p>
+
+</div>
+</div>
+<a id="abdd71edac9d5fd08a6a9c978d2673a2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdd71edac9d5fd08a6a9c978d2673a2e">&#9670;&nbsp;</a></span>outer_boundary_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TetMeshFacetedClosedSurface*&amp; oomph::GmshParameters::outer_boundary_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Outer boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00078">78</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00199">Outer_boundary_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01719">oomph::GmshTetMesh&lt; ELEMENT &gt;::build_it()</a>, and <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01030">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
+
+</div>
+</div>
+<a id="ac8b37d79ebc135382c2320c3ba405a3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8b37d79ebc135382c2320c3ba405a3f">&#9670;&nbsp;</a></span>projection_is_disabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::GmshParameters::projection_is_disabled </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is projection of old solution onto new mesh disabled? </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00166">166</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00247">Projection_is_disabled</a>.</p>
+
+</div>
+</div>
+<a id="a6006bbce01fab0e48e474f077fc926e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6006bbce01fab0e48e474f077fc926e7">&#9670;&nbsp;</a></span>stem_for_filename_gmsh_size_transfer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string&amp; oomph::GmshParameters::stem_for_filename_gmsh_size_transfer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stem for filename used to doc target element sizes on gmsh grid. No doc if stem is equal to empty string (or counter is negative) </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00152">152</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00239">Stem_for_filename_gmsh_size_transfer</a>.</p>
+
+</div>
+</div>
+<a id="a89c7ff40c1dd70b20b0ae22d30fe5c8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89c7ff40c1dd70b20b0ae22d30fe5c8a">&#9670;&nbsp;</a></span>target_size_file_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string&amp; oomph::GmshParameters::target_size_file_name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Filename for target volumes (for system-call based transfer to gmsh during mesh adaptation). Default: .gmsh_target_size_for_adaptation.dat. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00097">97</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00209">Target_size_file_name</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01030">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="af6ca2a71d6aae3f8c51e9b4ad53b787a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6ca2a71d6aae3f8c51e9b4ad53b787a">&#9670;&nbsp;</a></span>Counter_for_filename_gmsh_size_transfer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::GmshParameters::Counter_for_filename_gmsh_size_transfer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Counter for filename used to doc target element sizes on gmsh grid. No doc if stem is equal to empty string (or counter is negative) </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00244">244</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00160">counter_for_filename_gmsh_size_transfer()</a>.</p>
+
+</div>
+</div>
+<a id="a0c4d7e327d44f9514eb0ac0894f6f9d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c4d7e327d44f9514eb0ac0894f6f9d9">&#9670;&nbsp;</a></span>Dx_for_target_size_transfer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::GmshParameters::Dx_for_target_size_transfer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>(Isotropic) grid spacing for target size transfer </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00228">228</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00135">dx_for_target_size_transfer()</a>.</p>
+
+</div>
+</div>
+<a id="aa7993da33a0468681e5f661ac5b00bfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7993da33a0468681e5f661ac5b00bfb">&#9670;&nbsp;</a></span>Element_volume</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::GmshParameters::Element_volume</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Uniform element volume. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00205">205</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00090">element_volume()</a>.</p>
+
+</div>
+</div>
+<a id="a478a41ae94e177f02d38db90ea27d582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a478a41ae94e177f02d38db90ea27d582">&#9670;&nbsp;</a></span>Geo_and_msh_file_stem</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::GmshParameters::Geo_and_msh_file_stem</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stem for geo and msh files (input/output to command-line gmsh invocation) </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00213">213</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00110">geo_and_msh_file_stem()</a>.</p>
+
+</div>
+</div>
+<a id="a5605a771916b353925ad55b6a6e914cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5605a771916b353925ad55b6a6e914cb">&#9670;&nbsp;</a></span>Gmsh_command_line_invocation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::GmshParameters::Gmsh_command_line_invocation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gmsh command line invocation string. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00216">216</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00103">gmsh_command_line_invocation()</a>.</p>
+
+</div>
+</div>
+<a id="ab3648c8847da428cddca41e676042e33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3648c8847da428cddca41e676042e33">&#9670;&nbsp;</a></span>Gmsh_onscreen_output_counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::GmshParameters::Gmsh_onscreen_output_counter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Counter for marker that indicates where we are in gmsh on-screen output. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00254">254</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00191">gmsh_onscreen_output_counter()</a>.</p>
+
+</div>
+</div>
+<a id="af2da0d4c57e32c06c70a6aa25d1461ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2da0d4c57e32c06c70a6aa25d1461ac">&#9670;&nbsp;</a></span>Gmsh_onscreen_output_file_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::GmshParameters::Gmsh_onscreen_output_file_name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output filename for gmsh on-screen output. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00250">250</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00184">gmsh_onscreen_output_file_name()</a>.</p>
+
+</div>
+</div>
+<a id="aaa4afdde73a7fc67d5c2ba2976235381"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa4afdde73a7fc67d5c2ba2976235381">&#9670;&nbsp;</a></span>Internal_surface_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;TetMeshFacetedSurface*&gt; oomph::GmshParameters::Internal_surface_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00202">202</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00084">internal_surface_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a65bd88591891ff4284fb4e03d6f49c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65bd88591891ff4284fb4e03d6f49c14">&#9670;&nbsp;</a></span>Max_element_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::GmshParameters::Max_element_size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max. element size during refinement. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00219">219</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00117">max_element_size()</a>.</p>
+
+</div>
+</div>
+<a id="ac62bbb70b5a1bd650f7b0b7c8fbe1d8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac62bbb70b5a1bd650f7b0b7c8fbe1d8f">&#9670;&nbsp;</a></span>Max_permitted_edge_ratio</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::GmshParameters::Max_permitted_edge_ratio</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max edge ratio before remesh gets triggered. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00225">225</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00129">max_permitted_edge_ratio()</a>.</p>
+
+</div>
+</div>
+<a id="a7a75351daca7e20f9dcb95919691d863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a75351daca7e20f9dcb95919691d863">&#9670;&nbsp;</a></span>Max_sample_points_for_limited_locate_zeta_during_target_size_transfer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::GmshParameters::Max_sample_points_for_limited_locate_zeta_during_target_size_transfer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Target size is transferred onto regular grid (for gmsh) by locate zeta. We try to find the exact point in the existing mesh but if we fail to converge from the nearest specified number of sample points we use the nearest of those. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00234">234</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00144">max_sample_points_for_limited_locate_zeta_during_target_size_transfer()</a>.</p>
+
+</div>
+</div>
+<a id="a8efec35bdf92a73cf71f25cff41520b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8efec35bdf92a73cf71f25cff41520b7">&#9670;&nbsp;</a></span>Min_element_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::GmshParameters::Min_element_size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Min. element size during refinement. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00222">222</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00123">min_element_size()</a>.</p>
+
+</div>
+</div>
+<a id="a310ecaffe67e67b334aafaca82c4d50a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a310ecaffe67e67b334aafaca82c4d50a">&#9670;&nbsp;</a></span>Outer_boundary_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TetMeshFacetedClosedSurface* oomph::GmshParameters::Outer_boundary_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to outer boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00199">199</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00078">outer_boundary_pt()</a>.</p>
+
+</div>
+</div>
+<a id="aebabc7ca82ac23e87e164655b6dc9bb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebabc7ca82ac23e87e164655b6dc9bb4">&#9670;&nbsp;</a></span>Projection_is_disabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::GmshParameters::Projection_is_disabled</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is projection of old solution onto new mesh disabled? </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00247">247</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00172">disable_projection()</a>, <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00178">enable_projection()</a>, and <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00166">projection_is_disabled()</a>.</p>
+
+</div>
+</div>
+<a id="ad0151a908bc36fee2d955551b1da4016"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0151a908bc36fee2d955551b1da4016">&#9670;&nbsp;</a></span>Stem_for_filename_gmsh_size_transfer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::GmshParameters::Stem_for_filename_gmsh_size_transfer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stem for filename used to doc target element sizes on gmsh grid. No doc if stem is equal to empty string (or counter is negative) </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00239">239</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00152">stem_for_filename_gmsh_size_transfer()</a>.</p>
+
+</div>
+</div>
+<a id="ae2f3eabe211e22c18df2bf7b093bbdfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2f3eabe211e22c18df2bf7b093bbdfb">&#9670;&nbsp;</a></span>Target_size_file_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::GmshParameters::Target_size_file_name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Filename for target volume (for system-call based transfer to gmsh during mesh adaptation) </p>
+
+<p class="definition">Definition at line <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00209">209</a> of file <a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l00097">target_size_file_name()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="gmsh__tet__mesh_8template_8h_source.html">gmsh_tet_mesh.template.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:57:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

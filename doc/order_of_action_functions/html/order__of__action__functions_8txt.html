@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: order_of_action_functions.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">order_of_action_functions.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a0fadd1160b1b37b723b5e9ad350097e6"><td class="memItemLeft" align="right" valign="top">problem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a0fadd1160b1b37b723b5e9ad350097e6">newton_solve</a> ()</td></tr>
+<tr class="separator:a0fadd1160b1b37b723b5e9ad350097e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d549479a96c415327e320bb50556a1c"><td class="memItemLeft" align="right" valign="top">endcode&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; else go to&lt; B &gt; <a class="el" href="order__of__action__functions_8txt.html#a1eafe298ea9b26967a9e9cfdbaa2a34c">Step</a>&lt;/B &gt;&lt;/TD &gt;&lt; TD &gt; f[\<a class="el" href="order__of__action__functions_8txt.html#a4cd3b1e04f8c2c22b8397733e0acffb9">mbox</a>{If $\max_i|{\cal R}_i|&lt; {\tt tol} \Longrightarrow $converged.}\f]&lt;/TD &gt;&lt; TD &gt; code&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a7d549479a96c415327e320bb50556a1c">if</a> (<a class="el" href="order__of__action__functions_8txt.html#afeb93d7b09cde7e6a7eab7f9fba91cc3">max_res</a>&lt; Problem::Newton_solver_tolerance)</td></tr>
+<tr class="separator:a7d549479a96c415327e320bb50556a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bcdf368ad0ddab2240d910a62605d52"><td class="memItemLeft" align="right" valign="top">c Problem::actions_after_newton_solve() may be used to automatically perform any post-processing when a solution has been obtained. The function \c Problem endcode&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; according to control flag&lt;/TD &gt;&lt; TD &gt; f[\left. . \hspace{6cm} \right.\f]&lt;/TD &gt;&lt; TD &gt; code&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a3bcdf368ad0ddab2240d910a62605d52">if</a> (shift_values)</td></tr>
+<tr class="separator:a3bcdf368ad0ddab2240d910a62605d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace10831d73c381bdf9e042170367d445"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#ace10831d73c381bdf9e042170367d445">time_pt</a> () -&gt; dt()=dt</td></tr>
+<tr class="separator:ace10831d73c381bdf9e042170367d445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a94b9ac17a302976810875590f0b75628"><td class="memItemLeft" align="right" valign="top">mainpage Action functions in oomph lib s black box Newton solver c oomph lib s c Problem class provides a black box Newton solver c which allows the driver code to be as compact as&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a94b9ac17a302976810875590f0b75628">this</a></td></tr>
+<tr class="separator:a94b9ac17a302976810875590f0b75628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26150833f08a324cf909ddfebea7da10"><td class="memItemLeft" align="right" valign="top">endcode While the availability of a black box Newton solver is&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a26150833f08a324cf909ddfebea7da10">helpful</a></td></tr>
+<tr class="separator:a26150833f08a324cf909ddfebea7da10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a204cdb53582ffea8e79b3e7f776d5219"><td class="memItemLeft" align="right" valign="top">endcode While the availability of a black box Newton solver is it is sometimes necessary to interact with the solution&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a204cdb53582ffea8e79b3e7f776d5219">process</a></td></tr>
+<tr class="separator:a204cdb53582ffea8e79b3e7f776d5219"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60636d2fbf1021531f74a431b30a7648"><td class="memItemLeft" align="right" valign="top">endcode While the availability of a black box Newton solver is it is sometimes necessary to interact with the solution e g to perform certain additional tasks during the Newton&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a60636d2fbf1021531f74a431b30a7648">iteration</a></td></tr>
+<tr class="separator:a60636d2fbf1021531f74a431b30a7648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eafe298ea9b26967a9e9cfdbaa2a34c"><td class="memItemLeft" align="right" valign="top">endcode While the availability of a black box Newton solver is it is sometimes necessary to interact with the solution e g to perform certain additional tasks during the Newton or to analyse the convergence(or divergence!) of the <a class="el" href="order__of__action__functions_8txt.html#a60636d2fbf1021531f74a431b30a7648">iteration</a> in more detail. For <a class="el" href="order__of__action__functions_8txt.html#a94b9ac17a302976810875590f0b75628">this</a> purpose \c oomph-lib 's \c Problem class has a number of empty virtual member functions that are executed at key stages of the Newton iteration. Two of these functions(\c Problem endcode&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a1eafe298ea9b26967a9e9cfdbaa2a34c">Step</a></td></tr>
+<tr class="separator:a1eafe298ea9b26967a9e9cfdbaa2a34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9faa226e1dacbbfacda9de6a5b107bc0"><td class="memItemLeft" align="right" valign="top">endcode&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD COLSPAN=3 &gt;&lt; CENTER &gt;&lt; B &gt; Only during the first Newton&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a9faa226e1dacbbfacda9de6a5b107bc0">step</a></td></tr>
+<tr class="separator:a9faa226e1dacbbfacda9de6a5b107bc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbc2876d06a758117c788ebdd6e98cc9"><td class="memItemLeft" align="right" valign="top">border&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#afbc2876d06a758117c788ebdd6e98cc9">left</a></td></tr>
+<tr class="separator:afbc2876d06a758117c788ebdd6e98cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25e0e531505c2d7dd1c4171e925889eb"><td class="memItemLeft" align="right" valign="top">endcode&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD style=&quot;padding-left: 30px; border-left: 3px solid grey;&quot;&gt;&lt; B &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a25e0e531505c2d7dd1c4171e925889eb">U_</a></td></tr>
+<tr class="separator:a25e0e531505c2d7dd1c4171e925889eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeb93d7b09cde7e6a7eab7f9fba91cc3"><td class="memItemLeft" align="right" valign="top">&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#afeb93d7b09cde7e6a7eab7f9fba91cc3">max_res</a></td></tr>
+<tr class="separator:afeb93d7b09cde7e6a7eab7f9fba91cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cd3b1e04f8c2c22b8397733e0acffb9"><td class="memItemLeft" align="right" valign="top">endcode&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; N&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="order__of__action__functions_8txt.html#a4cd3b1e04f8c2c22b8397733e0acffb9">mbox</a></td></tr>
+<tr class="separator:a4cd3b1e04f8c2c22b8397733e0acffb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a7d549479a96c415327e320bb50556a1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d549479a96c415327e320bb50556a1c">&#9670;&nbsp;</a></span>if() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt;&lt;B&gt; else go to&lt;B&gt; <a class="el" href="order__of__action__functions_8txt.html#a1eafe298ea9b26967a9e9cfdbaa2a34c">Step</a>&lt;/B&gt;&lt;/TD&gt;&lt;TD&gt; f [\<a class="el" href="order__of__action__functions_8txt.html#a4cd3b1e04f8c2c22b8397733e0acffb9">mbox</a>{If $\max_i |{\cal R}_i| &lt; {\tt tol} \Longrightarrow$converged.}\f]&lt;/TD&gt;&lt;TD&gt; code if </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00433">433</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3bcdf368ad0ddab2240d910a62605d52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bcdf368ad0ddab2240d910a62605d52">&#9670;&nbsp;</a></span>if() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">c Problem::actions_after_newton_solve () may be used to automatically perform any post-processing when a solution has been obtained. The function \c Problem endcode&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt;&lt;B&gt; according to control flag&lt;/TD&gt;&lt;TD&gt; f [\left. . \hspace{6cm} \right.\f]&lt;/TD&gt;&lt;TD&gt; code if </td>
+          <td>(</td>
+          <td class="paramtype">shift_values&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00590">590</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0fadd1160b1b37b723b5e9ad350097e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fadd1160b1b37b723b5e9ad350097e6">&#9670;&nbsp;</a></span>newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Action functions in oomph lib s black box Newton solver c oomph lib s c Problem class provides a black box Newton solver c Problem::newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace10831d73c381bdf9e042170367d445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace10831d73c381bdf9e042170367d445">&#9670;&nbsp;</a></span>time_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">time_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  dt()=dt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a26150833f08a324cf909ddfebea7da10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26150833f08a324cf909ddfebea7da10">&#9670;&nbsp;</a></span>helpful</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode While the availability of a black box Newton solver is helpful</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00017">17</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a60636d2fbf1021531f74a431b30a7648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60636d2fbf1021531f74a431b30a7648">&#9670;&nbsp;</a></span>iteration</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode While the availability of a black box Newton solver is it is sometimes necessary to interact with the solution e g to perform certain additional tasks during the Newton iteration</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00020">20</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="afbc2876d06a758117c788ebdd6e98cc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbc2876d06a758117c788ebdd6e98cc9">&#9670;&nbsp;</a></span>left</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">border left</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00143">143</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="afeb93d7b09cde7e6a7eab7f9fba91cc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeb93d7b09cde7e6a7eab7f9fba91cc3">&#9670;&nbsp;</a></span>max_res</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt;&lt;B&gt; max_res</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00254">254</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4cd3b1e04f8c2c22b8397733e0acffb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cd3b1e04f8c2c22b8397733e0acffb9">&#9670;&nbsp;</a></span>mbox</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt;&lt;B&gt; N mbox</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00281">281</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a204cdb53582ffea8e79b3e7f776d5219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a204cdb53582ffea8e79b3e7f776d5219">&#9670;&nbsp;</a></span>process</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode While the availability of a black box Newton solver is it is sometimes necessary to interact with the solution process</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00019">19</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1eafe298ea9b26967a9e9cfdbaa2a34c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eafe298ea9b26967a9e9cfdbaa2a34c">&#9670;&nbsp;</a></span>Step</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; Step</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00021">21</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9faa226e1dacbbfacda9de6a5b107bc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9faa226e1dacbbfacda9de6a5b107bc0">&#9670;&nbsp;</a></span>step</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD COLSPAN=3&gt;&lt;CENTER&gt;&lt;B&gt; Only during the first Newton step</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00142">142</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a94b9ac17a302976810875590f0b75628"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94b9ac17a302976810875590f0b75628">&#9670;&nbsp;</a></span>this</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Action functions in oomph lib s black box Newton solver c oomph lib s c Problem class provides a black box Newton solver c which allows the driver code to be as compact as this</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00010">10</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+<a id="a25e0e531505c2d7dd1c4171e925889eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25e0e531505c2d7dd1c4171e925889eb">&#9670;&nbsp;</a></span>U_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; U_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{N}\right) </div>
+<div class="line">\<a class="code" href="order__of__action__functions_8txt.html#a4cd3b1e04f8c2c22b8397733e0acffb9">mbox</a>{\ \ \ \  for $i=1,...,N$}</div>
+<div class="line">\f]</div>
+<div class="line">&lt;/TD&gt;</div>
+<div class="line"><span class="preprocessor">#--------------------------------------------------------</span></div>
+<div class="line">&lt;TD&gt;</div>
+<div class="line">\code </div>
+<div class="line">Vector&lt;double&gt; residuals</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="order__of__action__functions_8txt_source.html#l00172">172</a> of file <a class="el" href="order__of__action__functions_8txt_source.html">order_of_action_functions.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aorder__of__action__functions_8txt_html_a4cd3b1e04f8c2c22b8397733e0acffb9"><div class="ttname"><a href="order__of__action__functions_8txt.html#a4cd3b1e04f8c2c22b8397733e0acffb9">mbox</a></div><div class="ttdeci">endcode&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; N mbox</div><div class="ttdef"><b>Definition:</b> <a href="order__of__action__functions_8txt_source.html#l00281">order_of_action_functions.txt:281</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:23:00
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oscillating_sphere.cc File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_ddb094a380b94394dbbcf95a63b535e6.html">demo_drivers</a></li><li class="navelem"><a class="el" href="dir_1055d9866dd5c76fd98c030b97eee1b2.html">pml_fourier_decomposed_helmholtz</a></li><li class="navelem"><a class="el" href="dir_b5abd18fadaf80dc4b015580fc0a1ee8.html">oscillating_sphere</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">oscillating_sphere.cc File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="oscillating__sphere_8cc_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLHelmholtzPointSourceElement.html">oomph::PMLHelmholtzPointSourceElement&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class to impose point source to (wrapped) Helmholtz element.  <a href="classoomph_1_1PMLHelmholtzPointSourceElement.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01PMLHelmholtzPointSourceElement_3_01ELEMENT_01_4_01_4.html">oomph::FaceGeometry&lt; PMLHelmholtzPointSourceElement&lt; ELEMENT &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01PMLHelmholtzPointSourceElement_3_01ELEMENT_01_4_01_4_01_4.html">oomph::FaceGeometry&lt; FaceGeometry&lt; PMLHelmholtzPointSourceElement&lt; ELEMENT &gt; &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLLayerElement_3_01PMLHelmholtzPointSourceElement_3_01ELEMENT_01_4_01_4.html">oomph::PMLLayerElement&lt; PMLHelmholtzPointSourceElement&lt; ELEMENT &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PMLLayerElement_3_01ProjectablePMLFourierDecomposedHelmholtzElement_3_01PMLHelmhol501eda982a3f215f8f7e3f1aeb4ca527.html">oomph::PMLLayerElement&lt; ProjectablePMLFourierDecomposedHelmholtzElement&lt; PMLHelmholtzPointSourceElement&lt; ELEMENT &gt; &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLFourierDecomposedHelmholtzProblem.html">PMLFourierDecomposedHelmholtzProblem&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Problem class.  <a href="classPMLFourierDecomposedHelmholtzProblem.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceProblemParameters"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html">ProblemParameters</a></td></tr>
+<tr class="memdesc:namespaceProblemParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Namespace for the Fourier decomposed Helmholtz problem parameters. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceoomph"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html">oomph</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a20cc9776e745842f6126f4cd17659d19"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#a20cc9776e745842f6126f4cd17659d19">ProblemParameters::Coeff</a> (N_terms, 1.0)</td></tr>
+<tr class="memdesc:a20cc9776e745842f6126f4cd17659d19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coefficients in the exact solution.  <a href="namespaceProblemParameters.html#a20cc9776e745842f6126f4cd17659d19">More...</a><br /></td></tr>
+<tr class="separator:a20cc9776e745842f6126f4cd17659d19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a869b19d379dd66b387c675ca07c6a049"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#a869b19d379dd66b387c675ca07c6a049">ProblemParameters::I</a> (0.0, 1.0)</td></tr>
+<tr class="memdesc:a869b19d379dd66b387c675ca07c6a049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imaginary unit.  <a href="namespaceProblemParameters.html#a869b19d379dd66b387c675ca07c6a049">More...</a><br /></td></tr>
+<tr class="separator:a869b19d379dd66b387c675ca07c6a049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af750b29069b29bd38b5220ecf534e7f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">ProblemParameters::get_exact_u</a> (const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</td></tr>
+<tr class="memdesc:af750b29069b29bd38b5220ecf534e7f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exact solution as a Vector of size 2, containing real and imag parts.  <a href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">More...</a><br /></td></tr>
+<tr class="separator:af750b29069b29bd38b5220ecf534e7f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa544d1f3e384d3283f7113512931ea8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#aa544d1f3e384d3283f7113512931ea8f">ProblemParameters::exact_minus_dudr</a> (const Vector&lt; double &gt; &amp;x, std::complex&lt; double &gt; &amp;flux)</td></tr>
+<tr class="memdesc:aa544d1f3e384d3283f7113512931ea8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get -du/dr (spherical r) for exact solution. Equal to prescribed flux on inner boundary.  <a href="namespaceProblemParameters.html#aa544d1f3e384d3283f7113512931ea8f">More...</a><br /></td></tr>
+<tr class="separator:aa544d1f3e384d3283f7113512931ea8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdaa2237a50d2ccf2b58be59c944953d"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#acdaa2237a50d2ccf2b58be59c944953d">ProblemParameters::Magnitude</a> (100.0, 100.0)</td></tr>
+<tr class="memdesc:acdaa2237a50d2ccf2b58be59c944953d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Point source magnitude (Complex)  <a href="namespaceProblemParameters.html#acdaa2237a50d2ccf2b58be59c944953d">More...</a><br /></td></tr>
+<tr class="separator:acdaa2237a50d2ccf2b58be59c944953d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oscillating__sphere_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Driver code for Pml Fourier decomposed Helmholtz problem.  <a href="oscillating__sphere_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a9df0f1728e8e7e53dcca84385ae9a031"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#a9df0f1728e8e7e53dcca84385ae9a031">ProblemParameters::Directory</a> =&quot;RESLT&quot;</td></tr>
+<tr class="memdesc:a9df0f1728e8e7e53dcca84385ae9a031"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output directory.  <a href="namespaceProblemParameters.html#a9df0f1728e8e7e53dcca84385ae9a031">More...</a><br /></td></tr>
+<tr class="separator:a9df0f1728e8e7e53dcca84385ae9a031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5362de1af9e257fde4317c367158a93"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a> = 10.0</td></tr>
+<tr class="memdesc:aa5362de1af9e257fde4317c367158a93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frequency.  <a href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">More...</a><br /></td></tr>
+<tr class="separator:aa5362de1af9e257fde4317c367158a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad56d4d5946cbe68de28413e4f8aa4d42"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#ad56d4d5946cbe68de28413e4f8aa4d42">ProblemParameters::PML_thickness</a> =4.0</td></tr>
+<tr class="memdesc:ad56d4d5946cbe68de28413e4f8aa4d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default physical PML thickness.  <a href="namespaceProblemParameters.html#ad56d4d5946cbe68de28413e4f8aa4d42">More...</a><br /></td></tr>
+<tr class="separator:ad56d4d5946cbe68de28413e4f8aa4d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef2e7cb819b8c5012a0f2db03892ee87"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#aef2e7cb819b8c5012a0f2db03892ee87">ProblemParameters::Nel_pml</a> =15</td></tr>
+<tr class="memdesc:aef2e7cb819b8c5012a0f2db03892ee87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default number of elements within PMLs.  <a href="namespaceProblemParameters.html#aef2e7cb819b8c5012a0f2db03892ee87">More...</a><br /></td></tr>
+<tr class="separator:aef2e7cb819b8c5012a0f2db03892ee87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe26abadfce87800a6a4676f0476956"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#aafe26abadfce87800a6a4676f0476956">ProblemParameters::Element_area</a> = 0.1</td></tr>
+<tr class="memdesc:aafe26abadfce87800a6a4676f0476956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Target area for initial mesh.  <a href="namespaceProblemParameters.html#aafe26abadfce87800a6a4676f0476956">More...</a><br /></td></tr>
+<tr class="separator:aafe26abadfce87800a6a4676f0476956"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa674958a1ca6ee0b99de3377288c93f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a> =0</td></tr>
+<tr class="memdesc:aaa674958a1ca6ee0b99de3377288c93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default Fourier wave number.  <a href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">More...</a><br /></td></tr>
+<tr class="separator:aaa674958a1ca6ee0b99de3377288c93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6361f0f1c4a120e62d28db64baa84b40"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#a6361f0f1c4a120e62d28db64baa84b40">ProblemParameters::N_terms</a> =6</td></tr>
+<tr class="memdesc:a6361f0f1c4a120e62d28db64baa84b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of terms in the exact solution.  <a href="namespaceProblemParameters.html#a6361f0f1c4a120e62d28db64baa84b40">More...</a><br /></td></tr>
+<tr class="separator:a6361f0f1c4a120e62d28db64baa84b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42c148c7f3bed95827acf8d86c2c6089"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#a42c148c7f3bed95827acf8d86c2c6089">ProblemParameters::R_source</a> = 2.0</td></tr>
+<tr class="memdesc:a42c148c7f3bed95827acf8d86c2c6089"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radial position of point source.  <a href="namespaceProblemParameters.html#a42c148c7f3bed95827acf8d86c2c6089">More...</a><br /></td></tr>
+<tr class="separator:a42c148c7f3bed95827acf8d86c2c6089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a346993de7a274e1828af3f8fc8ca8b13"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblemParameters.html#a346993de7a274e1828af3f8fc8ca8b13">ProblemParameters::Z_source</a> = 2.0</td></tr>
+<tr class="memdesc:a346993de7a274e1828af3f8fc8ca8b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Axial position of point source.  <a href="namespaceProblemParameters.html#a346993de7a274e1828af3f8fc8ca8b13">More...</a><br /></td></tr>
+<tr class="separator:a346993de7a274e1828af3f8fc8ca8b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Driver code for Pml Fourier decomposed Helmholtz problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="oscillating__sphere_8cc_source.html#l01184">1184</a> of file <a class="el" href="oscillating__sphere_8cc_source.html">oscillating_sphere.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oscillating__sphere_8cc_source.html#l00059">ProblemParameters::Directory</a>, <a class="el" href="oscillating__sphere_8cc_source.html#l00071">ProblemParameters::Element_area</a>, <a class="el" href="oscillating__sphere_8cc_source.html#l00062">ProblemParameters::K_squared</a>, <a class="el" href="oscillating__sphere_8cc_source.html#l00074">ProblemParameters::N_fourier</a>, <a class="el" href="oscillating__sphere_8cc_source.html#l00068">ProblemParameters::Nel_pml</a>, <a class="el" href="oscillating__sphere_8cc_source.html#l00065">ProblemParameters::PML_thickness</a>, and <a class="el" href="oscillating__sphere_8txt_source.html#l00004">problem</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:30:33
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

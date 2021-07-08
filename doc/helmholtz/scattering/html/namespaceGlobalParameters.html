@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: GlobalParameters Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">GlobalParameters Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace for "global" problem parameters.  
+<a href="namespaceGlobalParameters.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:adde04e4243b82e3d4bd2f82d37a2d6bf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#adde04e4243b82e3d4bd2f82d37a2d6bf">Cases</a> { <a class="el" href="namespaceGlobalParameters.html#adde04e4243b82e3d4bd2f82d37a2d6bfac08080f634c714da38f1122301eafda7">Spherical_cap_in_cylinder_pinned</a>, 
+<a class="el" href="namespaceGlobalParameters.html#adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558">All_pinned</a>, 
+<a class="el" href="namespaceGlobalParameters.html#adde04e4243b82e3d4bd2f82d37a2d6bfa1e6d2261f2fa0541d57b5a0a8c044ddc">Barrel_shape</a>, 
+<a class="el" href="namespaceGlobalParameters.html#adde04e4243b82e3d4bd2f82d37a2d6bfa89cfbba408c0774e0b9024baa187dfb8">T_junction_with_nonzero_contact_angle</a>
+ }</td></tr>
+<tr class="memdesc:adde04e4243b82e3d4bd2f82d37a2d6bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for the possible cases.  <a href="namespaceGlobalParameters.html#adde04e4243b82e3d4bd2f82d37a2d6bf">More...</a><br /></td></tr>
+<tr class="separator:adde04e4243b82e3d4bd2f82d37a2d6bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4571d41514b16946dd31d075d44c5593"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a4571d41514b16946dd31d075d44c5593">get_exact_kappa</a> ()</td></tr>
+<tr class="memdesc:a4571d41514b16946dd31d075d44c5593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exact kappa.  <a href="namespaceGlobalParameters.html#a4571d41514b16946dd31d075d44c5593">More...</a><br /></td></tr>
+<tr class="separator:a4571d41514b16946dd31d075d44c5593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac81daf87f8d3f075d9fd108427e70c4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#ac81daf87f8d3f075d9fd108427e70c4f">spine_base_function</a> (const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;spine_B, Vector&lt; Vector&lt; double &gt; &gt; &amp;dspine_B)</td></tr>
+<tr class="memdesc:ac81daf87f8d3f075d9fd108427e70c4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spine basis: The position vector to the basis of the spine as a function of the two coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates. dspine_B[i][j] = d spine_B[j] / dx_i Spines start in the (x_1,x_2) plane at (x_1,x_2).  <a href="namespaceGlobalParameters.html#ac81daf87f8d3f075d9fd108427e70c4f">More...</a><br /></td></tr>
+<tr class="separator:ac81daf87f8d3f075d9fd108427e70c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82df8c67f58e78a236fb6a0cc8bf8284"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a82df8c67f58e78a236fb6a0cc8bf8284">spine_function</a> (const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;spine, Vector&lt; Vector&lt; double &gt; &gt; &amp;dspine)</td></tr>
+<tr class="memdesc:a82df8c67f58e78a236fb6a0cc8bf8284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spine: The spine vector field as a function of the two coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates: dspine[i][j] = d spine[j] / dx_i.  <a href="namespaceGlobalParameters.html#a82df8c67f58e78a236fb6a0cc8bf8284">More...</a><br /></td></tr>
+<tr class="separator:a82df8c67f58e78a236fb6a0cc8bf8284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedbc21f2c81d445634badfc5cdd77436"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#aedbc21f2c81d445634badfc5cdd77436">setup_dependent_parameters_and_sanity_check</a> ()</td></tr>
+<tr class="memdesc:aedbc21f2c81d445634badfc5cdd77436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup dependent parameters and perform sanity check.  <a href="namespaceGlobalParameters.html#aedbc21f2c81d445634badfc5cdd77436">More...</a><br /></td></tr>
+<tr class="separator:aedbc21f2c81d445634badfc5cdd77436"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7642bd7303d39de0d680340586b7df60"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a7642bd7303d39de0d680340586b7df60">I</a> (0.0, 1.0)</td></tr>
+<tr class="memdesc:a7642bd7303d39de0d680340586b7df60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imaginary unit.  <a href="namespaceGlobalParameters.html#a7642bd7303d39de0d680340586b7df60">More...</a><br /></td></tr>
+<tr class="separator:a7642bd7303d39de0d680340586b7df60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2320da6053f5527b2af5ebb362a8a07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#ae2320da6053f5527b2af5ebb362a8a07">get_exact_u</a> (const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;<a class="el" href="scattering_8txt.html#a8c816198c8bd9c7829d875346c691800">u</a>)</td></tr>
+<tr class="memdesc:ae2320da6053f5527b2af5ebb362a8a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exact solution for scattered field (vector returns real and impaginary parts).  <a href="namespaceGlobalParameters.html#ae2320da6053f5527b2af5ebb362a8a07">More...</a><br /></td></tr>
+<tr class="separator:ae2320da6053f5527b2af5ebb362a8a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5183de63b992338ee60bb4da78a45039"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a5183de63b992338ee60bb4da78a45039">prescribed_incoming_flux</a> (const Vector&lt; double &gt; &amp;x, complex&lt; double &gt; &amp;<a class="el" href="scattering_8txt.html#a6e2308ba2b055a80cdd4c2a0469b7d60">flux</a>)</td></tr>
+<tr class="memdesc:a5183de63b992338ee60bb4da78a45039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flux (normal derivative) on the unit disk for a planar incoming wave.  <a href="namespaceGlobalParameters.html#a5183de63b992338ee60bb4da78a45039">More...</a><br /></td></tr>
+<tr class="separator:a5183de63b992338ee60bb4da78a45039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a3731f24a02ce4f306d65a9a488f85c96"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a3731f24a02ce4f306d65a9a488f85c96">Controlled_height</a> = 0.0</td></tr>
+<tr class="memdesc:a3731f24a02ce4f306d65a9a488f85c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Height control value.  <a href="namespaceGlobalParameters.html#a3731f24a02ce4f306d65a9a488f85c96">More...</a><br /></td></tr>
+<tr class="separator:a3731f24a02ce4f306d65a9a488f85c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8fa7610a34b7a2a8223eade99a5c22f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#ae8fa7610a34b7a2a8223eade99a5c22f">Alpha_min</a> = MathematicalConstants::Pi/2.0*1.5</td></tr>
+<tr class="memdesc:ae8fa7610a34b7a2a8223eade99a5c22f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Min. spine angle against horizontal plane.  <a href="namespaceGlobalParameters.html#ae8fa7610a34b7a2a8223eade99a5c22f">More...</a><br /></td></tr>
+<tr class="separator:ae8fa7610a34b7a2a8223eade99a5c22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19d04a02b0b5ef5c72e9c30d822e4dc7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a19d04a02b0b5ef5c72e9c30d822e4dc7">Alpha_max</a> = MathematicalConstants::Pi/2.0*0.5</td></tr>
+<tr class="memdesc:a19d04a02b0b5ef5c72e9c30d822e4dc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. spine angle against horizontal plane.  <a href="namespaceGlobalParameters.html#a19d04a02b0b5ef5c72e9c30d822e4dc7">More...</a><br /></td></tr>
+<tr class="separator:a19d04a02b0b5ef5c72e9c30d822e4dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cd7766fae9d0ca421d7e24677be3131"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a7cd7766fae9d0ca421d7e24677be3131">Use_spines</a> = true</td></tr>
+<tr class="memdesc:a7cd7766fae9d0ca421d7e24677be3131"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use spines (true) or not (false)  <a href="namespaceGlobalParameters.html#a7cd7766fae9d0ca421d7e24677be3131">More...</a><br /></td></tr>
+<tr class="separator:a7cd7766fae9d0ca421d7e24677be3131"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a624713d35bc418b2d5fa79f4d385a27a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a624713d35bc418b2d5fa79f4d385a27a">Use_height_control</a> = true</td></tr>
+<tr class="memdesc:a624713d35bc418b2d5fa79f4d385a27a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use height control (true) or not (false)?  <a href="namespaceGlobalParameters.html#a624713d35bc418b2d5fa79f4d385a27a">More...</a><br /></td></tr>
+<tr class="separator:a624713d35bc418b2d5fa79f4d385a27a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb4257eec7a4c5a92e2b88e93248a201"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#aeb4257eec7a4c5a92e2b88e93248a201">Case</a> = <a class="el" href="namespaceGlobalParameters.html#adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558">All_pinned</a></td></tr>
+<tr class="memdesc:aeb4257eec7a4c5a92e2b88e93248a201"><td class="mdescLeft">&#160;</td><td class="mdescRight">What case are we considering: Choose one from the enumeration Cases.  <a href="namespaceGlobalParameters.html#aeb4257eec7a4c5a92e2b88e93248a201">More...</a><br /></td></tr>
+<tr class="separator:aeb4257eec7a4c5a92e2b88e93248a201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb0a994119055242fcc762cac5edc317"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#adb0a994119055242fcc762cac5edc317">Gamma</a> = MathematicalConstants::Pi/4.0</td></tr>
+<tr class="memdesc:adb0a994119055242fcc762cac5edc317"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contact angle and its cos (dependent parameter &ndash; is reassigned)  <a href="namespaceGlobalParameters.html#adb0a994119055242fcc762cac5edc317">More...</a><br /></td></tr>
+<tr class="separator:adb0a994119055242fcc762cac5edc317"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae982fcb894e82c683d07d3c2fbbead3d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#ae982fcb894e82c683d07d3c2fbbead3d">Cos_gamma</a> =cos(<a class="el" href="namespaceGlobalParameters.html#adb0a994119055242fcc762cac5edc317">Gamma</a>)</td></tr>
+<tr class="memdesc:ae982fcb894e82c683d07d3c2fbbead3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cos of contact angle.  <a href="namespaceGlobalParameters.html#ae982fcb894e82c683d07d3c2fbbead3d">More...</a><br /></td></tr>
+<tr class="separator:ae982fcb894e82c683d07d3c2fbbead3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6234184cce40ab2c6bec92b37e4ae41"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#ac6234184cce40ab2c6bec92b37e4ae41">Kappa_pt</a> = 0</td></tr>
+<tr class="memdesc:ac6234184cce40ab2c6bec92b37e4ae41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Data object that stores the prescribed curvature.  <a href="namespaceGlobalParameters.html#ac6234184cce40ab2c6bec92b37e4ae41">More...</a><br /></td></tr>
+<tr class="separator:ac6234184cce40ab2c6bec92b37e4ae41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7651e73d3f8346da9fcfdbb149bc22e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#ae7651e73d3f8346da9fcfdbb149bc22e">Kappa_initial</a> = 0.0</td></tr>
+<tr class="memdesc:ae7651e73d3f8346da9fcfdbb149bc22e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial value for kappa.  <a href="namespaceGlobalParameters.html#ae7651e73d3f8346da9fcfdbb149bc22e">More...</a><br /></td></tr>
+<tr class="separator:ae7651e73d3f8346da9fcfdbb149bc22e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb81cc1c282502497ef6df576559b650"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#aeb81cc1c282502497ef6df576559b650">Step_sign</a> = 1</td></tr>
+<tr class="memdesc:aeb81cc1c282502497ef6df576559b650"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase or decrease the value of the control parameters?  <a href="namespaceGlobalParameters.html#aeb81cc1c282502497ef6df576559b650">More...</a><br /></td></tr>
+<tr class="separator:aeb81cc1c282502497ef6df576559b650"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6c94936d7c81286bb747e14a90d7ba0"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#aa6c94936d7c81286bb747e14a90d7ba0">Nsteps</a> = 5</td></tr>
+<tr class="memdesc:aa6c94936d7c81286bb747e14a90d7ba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of steps.  <a href="namespaceGlobalParameters.html#aa6c94936d7c81286bb747e14a90d7ba0">More...</a><br /></td></tr>
+<tr class="separator:aa6c94936d7c81286bb747e14a90d7ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74cc88d6dc206cd556fb12e7e3101032"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a74cc88d6dc206cd556fb12e7e3101032">Kappa_increment</a> = -0.05</td></tr>
+<tr class="memdesc:a74cc88d6dc206cd556fb12e7e3101032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment for prescribed curvature.  <a href="namespaceGlobalParameters.html#a74cc88d6dc206cd556fb12e7e3101032">More...</a><br /></td></tr>
+<tr class="separator:a74cc88d6dc206cd556fb12e7e3101032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65fe7fd6c6c54d7ba89fab47cd4a9141"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a65fe7fd6c6c54d7ba89fab47cd4a9141">Controlled_height_increment</a> = 0.1</td></tr>
+<tr class="memdesc:a65fe7fd6c6c54d7ba89fab47cd4a9141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment for height control.  <a href="namespaceGlobalParameters.html#a65fe7fd6c6c54d7ba89fab47cd4a9141">More...</a><br /></td></tr>
+<tr class="separator:a65fe7fd6c6c54d7ba89fab47cd4a9141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a90a762edbce6d2a95456df26e85cea"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a3a90a762edbce6d2a95456df26e85cea">Control_element</a> = 0</td></tr>
+<tr class="separator:a3a90a762edbce6d2a95456df26e85cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36ebf514fdd1e78fff69907b39e25af6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a36ebf514fdd1e78fff69907b39e25af6">L_x</a> = 1.0</td></tr>
+<tr class="memdesc:a36ebf514fdd1e78fff69907b39e25af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length and width of the domain.  <a href="namespaceGlobalParameters.html#a36ebf514fdd1e78fff69907b39e25af6">More...</a><br /></td></tr>
+<tr class="separator:a36ebf514fdd1e78fff69907b39e25af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8774b3418c4551091d64ec72c169b2e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#ac8774b3418c4551091d64ec72c169b2e">L_y</a> = 1.0</td></tr>
+<tr class="memdesc:ac8774b3418c4551091d64ec72c169b2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Width of domain.  <a href="namespaceGlobalParameters.html#ac8774b3418c4551091d64ec72c169b2e">More...</a><br /></td></tr>
+<tr class="separator:ac8774b3418c4551091d64ec72c169b2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab020cb50fa321b26e8d2127d2cff23b9"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#ab020cb50fa321b26e8d2127d2cff23b9">N_x</a> = 8</td></tr>
+<tr class="memdesc:ab020cb50fa321b26e8d2127d2cff23b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in the mesh.  <a href="namespaceGlobalParameters.html#ab020cb50fa321b26e8d2127d2cff23b9">More...</a><br /></td></tr>
+<tr class="separator:ab020cb50fa321b26e8d2127d2cff23b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a711d6f05552ddaac30bd245ae8bdf878"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a711d6f05552ddaac30bd245ae8bdf878">N_y</a> = 8</td></tr>
+<tr class="separator:a711d6f05552ddaac30bd245ae8bdf878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb7f1ae574be563e0b603662c6fff5aa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#aeb7f1ae574be563e0b603662c6fff5aa">Beta_min</a> = MathematicalConstants::Pi/2.0</td></tr>
+<tr class="memdesc:aeb7f1ae574be563e0b603662c6fff5aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Min. second spine angle against horizontal plane.  <a href="namespaceGlobalParameters.html#aeb7f1ae574be563e0b603662c6fff5aa">More...</a><br /></td></tr>
+<tr class="separator:aeb7f1ae574be563e0b603662c6fff5aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa34aff6eb29a2a1245e9ffc2fac42caa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#aa34aff6eb29a2a1245e9ffc2fac42caa">Beta_max</a> = MathematicalConstants::Pi/2.0</td></tr>
+<tr class="memdesc:aa34aff6eb29a2a1245e9ffc2fac42caa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. second pine angle against horizontal plane.  <a href="namespaceGlobalParameters.html#aa34aff6eb29a2a1245e9ffc2fac42caa">More...</a><br /></td></tr>
+<tr class="separator:aa34aff6eb29a2a1245e9ffc2fac42caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69a238365a4fef33b1abdae287185f3e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a69a238365a4fef33b1abdae287185f3e">Rotate_spines_in_both_directions</a> = true</td></tr>
+<tr class="memdesc:a69a238365a4fef33b1abdae287185f3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should the spines rotate in the x and y directions (true)?  <a href="namespaceGlobalParameters.html#a69a238365a4fef33b1abdae287185f3e">More...</a><br /></td></tr>
+<tr class="separator:a69a238365a4fef33b1abdae287185f3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae73cb63b27d51a87845c3392cd944eb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#aae73cb63b27d51a87845c3392cd944eb">K_squared</a> =10.0</td></tr>
+<tr class="memdesc:aae73cb63b27d51a87845c3392cd944eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of the wavenumber.  <a href="namespaceGlobalParameters.html#aae73cb63b27d51a87845c3392cd944eb">More...</a><br /></td></tr>
+<tr class="separator:aae73cb63b27d51a87845c3392cd944eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4df03bf0ffa55b741ac846ca7b6c155"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#ae4df03bf0ffa55b741ac846ca7b6c155">N_fourier</a> =10</td></tr>
+<tr class="memdesc:ae4df03bf0ffa55b741ac846ca7b6c155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of terms used in the computation of the exact solution.  <a href="namespaceGlobalParameters.html#ae4df03bf0ffa55b741ac846ca7b6c155">More...</a><br /></td></tr>
+<tr class="separator:ae4df03bf0ffa55b741ac846ca7b6c155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e2bba1769e86a5d3db88e2c7062bc63"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a6e2bba1769e86a5d3db88e2c7062bc63">DtN_BC</a> =false</td></tr>
+<tr class="memdesc:a6e2bba1769e86a5d3db88e2c7062bc63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to choose the Dirichlet to Neumann BC or ABC BC.  <a href="namespaceGlobalParameters.html#a6e2bba1769e86a5d3db88e2c7062bc63">More...</a><br /></td></tr>
+<tr class="separator:a6e2bba1769e86a5d3db88e2c7062bc63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a552eed3548a269715a95161ad3c4b96a"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a552eed3548a269715a95161ad3c4b96a">ABC_order</a> =3</td></tr>
+<tr class="memdesc:a552eed3548a269715a95161ad3c4b96a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to choose wich order to use.  <a href="namespaceGlobalParameters.html#a552eed3548a269715a95161ad3c4b96a">More...</a><br /></td></tr>
+<tr class="separator:a552eed3548a269715a95161ad3c4b96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61b086072a6b8fd38af1a85f1dd1674a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobalParameters.html#a61b086072a6b8fd38af1a85f1dd1674a">Outer_radius</a> =1.5</td></tr>
+<tr class="memdesc:a61b086072a6b8fd38af1a85f1dd1674a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radius of outer boundary (must be a circle!)  <a href="namespaceGlobalParameters.html#a61b086072a6b8fd38af1a85f1dd1674a">More...</a><br /></td></tr>
+<tr class="separator:a61b086072a6b8fd38af1a85f1dd1674a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace for "global" problem parameters. </p>
+<p>Namespace for the Helmholtz problem parameters. </p>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="adde04e4243b82e3d4bd2f82d37a2d6bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adde04e4243b82e3d4bd2f82d37a2d6bf">&#9670;&nbsp;</a></span>Cases</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespaceGlobalParameters.html#adde04e4243b82e3d4bd2f82d37a2d6bf">GlobalParameters::Cases</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumeration for the possible cases. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adde04e4243b82e3d4bd2f82d37a2d6bfac08080f634c714da38f1122301eafda7"></a>Spherical_cap_in_cylinder_pinned&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558"></a>All_pinned&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="adde04e4243b82e3d4bd2f82d37a2d6bfa1e6d2261f2fa0541d57b5a0a8c044ddc"></a>Barrel_shape&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="adde04e4243b82e3d4bd2f82d37a2d6bfa89cfbba408c0774e0b9024baa187dfb8"></a>T_junction_with_nonzero_contact_angle&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00046">46</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a4571d41514b16946dd31d075d44c5593"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4571d41514b16946dd31d075d44c5593">&#9670;&nbsp;</a></span>get_exact_kappa()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::get_exact_kappa </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exact kappa. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00054">54</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="barrel_8cc_source.html#l00051">Controlled_height</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="barrel_8cc_source.html#l00291">YoungLaplaceProblem&lt; ELEMENT &gt;::doc_solution()</a>.</p>
+
+</div>
+</div>
+<a id="ae2320da6053f5527b2af5ebb362a8a07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2320da6053f5527b2af5ebb362a8a07">&#9670;&nbsp;</a></span>get_exact_u()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GlobalParameters::get_exact_u </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exact solution for scattered field (vector returns real and impaginary parts). </p>
+
+<p class="definition">Definition at line <a class="el" href="scattering_8cc_source.html#l00086">86</a> of file <a class="el" href="scattering_8cc_source.html">scattering.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceGlobalParameters.html#a7642bd7303d39de0d680340586b7df60">I()</a>, <a class="el" href="scattering_8cc_source.html#l00064">K_squared</a>, <a class="el" href="scattering_8cc_source.html#l00068">N_fourier</a>, and <a class="el" href="scattering_8txt_source.html#l00150">u</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="scattering_8cc_source.html#l00516">ScatteringProblem&lt; ELEMENT &gt;::doc_solution()</a>.</p>
+
+</div>
+</div>
+<a id="a7642bd7303d39de0d680340586b7df60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7642bd7303d39de0d680340586b7df60">&#9670;&nbsp;</a></span>I()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt; double &gt; GlobalParameters::I </td>
+          <td>(</td>
+          <td class="paramtype">0.&#160;</td>
+          <td class="paramname"><em>0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">1.&#160;</td>
+          <td class="paramname"><em>0</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Imaginary unit. </p>
+
+<p class="reference">Referenced by <a class="el" href="scattering_8cc_source.html#l00086">get_exact_u()</a>, and <a class="el" href="scattering_8cc_source.html#l00156">prescribed_incoming_flux()</a>.</p>
+
+</div>
+</div>
+<a id="a5183de63b992338ee60bb4da78a45039"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5183de63b992338ee60bb4da78a45039">&#9670;&nbsp;</a></span>prescribed_incoming_flux()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GlobalParameters::prescribed_incoming_flux </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">complex&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>flux</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flux (normal derivative) on the unit disk for a planar incoming wave. </p>
+
+<p class="definition">Definition at line <a class="el" href="scattering_8cc_source.html#l00156">156</a> of file <a class="el" href="scattering_8cc_source.html">scattering.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="scattering_8txt.html#a6e2308ba2b055a80cdd4c2a0469b7d60">flux()</a>, <a class="el" href="namespaceGlobalParameters.html#a7642bd7303d39de0d680340586b7df60">I()</a>, <a class="el" href="scattering_8cc_source.html#l00064">K_squared</a>, and <a class="el" href="scattering_8cc_source.html#l00068">N_fourier</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="scattering_8cc_source.html#l00493">ScatteringProblem&lt; ELEMENT &gt;::set_prescribed_incoming_flux_pt()</a>.</p>
+
+</div>
+</div>
+<a id="aedbc21f2c81d445634badfc5cdd77436"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedbc21f2c81d445634badfc5cdd77436">&#9670;&nbsp;</a></span>setup_dependent_parameters_and_sanity_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GlobalParameters::setup_dependent_parameters_and_sanity_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Setup dependent parameters and perform sanity check. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">126</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">References <a class="el" href="common__young__laplace__stuff_8h_source.html#l00047">All_pinned</a>, <a class="el" href="barrel_8cc_source.html#l00099">Alpha_max</a>, <a class="el" href="barrel_8cc_source.html#l00096">Alpha_min</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00048">Barrel_shape</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00053">Case</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00090">Control_element</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00061">Cos_gamma</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00060">Gamma</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00067">Kappa_initial</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00096">L_x</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00097">L_y</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00100">N_x</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00101">N_y</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00119">Rotate_spines_in_both_directions</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00046">Spherical_cap_in_cylinder_pinned</a>, and <a class="el" href="common__young__laplace__stuff_8h_source.html#l00049">T_junction_with_nonzero_contact_angle</a>.</p>
+
+</div>
+</div>
+<a id="ac81daf87f8d3f075d9fd108427e70c4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac81daf87f8d3f075d9fd108427e70c4f">&#9670;&nbsp;</a></span>spine_base_function()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GlobalParameters::spine_base_function </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>spine_B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; Vector&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dspine_B</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Spine basis: The position vector to the basis of the spine as a function of the two coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates. dspine_B[i][j] = d spine_B[j] / dx_i Spines start in the (x_1,x_2) plane at (x_1,x_2). </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00072">72</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__t__junction_8cc_source.html#l00226">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::RefineableYoungLaplaceProblem()</a>, and <a class="el" href="barrel_8cc_source.html#l00180">YoungLaplaceProblem&lt; ELEMENT &gt;::YoungLaplaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a82df8c67f58e78a236fb6a0cc8bf8284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82df8c67f58e78a236fb6a0cc8bf8284">&#9670;&nbsp;</a></span>spine_function()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GlobalParameters::spine_function </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>spine</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; Vector&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dspine</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Spine: The spine vector field as a function of the two coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates: dspine[i][j] = d spine[j] / dx_i. </p>
+<p>Spines (and derivatives) are independent of x[0] and rotate in the x[1]-direction</p>
+<p>Spines (and derivatives) are independent of x[0] and rotate in the x[1]-direction</p>
+<p>Spines are dependent of x[0] AND x[1] and rotate in both directions</p>
+<p>Spines (and derivatives) are independent of x[0] and rotate in the x[1]-direction</p>
+<p>Spines (and derivatives) are independent of x[0] and rotate in the x[1]-direction</p>
+<p>Spines are dependent of x[0] AND x[1] and rotate in both directions</p>
+<p>Spines (and derivatives) are independent of x[0] and rotate in the x[1]-direction</p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00104">104</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="barrel_8cc_source.html#l00099">Alpha_max</a>, and <a class="el" href="barrel_8cc_source.html#l00096">Alpha_min</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__t__junction_8cc_source.html#l00226">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::RefineableYoungLaplaceProblem()</a>, and <a class="el" href="barrel_8cc_source.html#l00180">YoungLaplaceProblem&lt; ELEMENT &gt;::YoungLaplaceProblem()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a552eed3548a269715a95161ad3c4b96a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a552eed3548a269715a95161ad3c4b96a">&#9670;&nbsp;</a></span>ABC_order</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned GlobalParameters::ABC_order =3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flag to choose wich order to use. </p>
+
+<p class="definition">Definition at line <a class="el" href="scattering_8cc_source.html#l00076">76</a> of file <a class="el" href="scattering_8cc_source.html">scattering.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="scattering_8cc_source.html#l00709">main()</a>, and <a class="el" href="scattering_8cc_source.html#l00451">ScatteringProblem&lt; ELEMENT &gt;::setup_outer_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a19d04a02b0b5ef5c72e9c30d822e4dc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19d04a02b0b5ef5c72e9c30d822e4dc7">&#9670;&nbsp;</a></span>Alpha_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Alpha_max = MathematicalConstants::Pi/2.0*0.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Max. spine angle against horizontal plane. </p>
+<p>Max. first spine angle against horizontal plane. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00099">99</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>, and <a class="el" href="barrel_8cc_source.html#l00104">spine_function()</a>.</p>
+
+</div>
+</div>
+<a id="ae8fa7610a34b7a2a8223eade99a5c22f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8fa7610a34b7a2a8223eade99a5c22f">&#9670;&nbsp;</a></span>Alpha_min</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Alpha_min = MathematicalConstants::Pi/2.0*1.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Min. spine angle against horizontal plane. </p>
+<p>Min. first spine angle against horizontal plane. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00096">96</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>, and <a class="el" href="barrel_8cc_source.html#l00104">spine_function()</a>.</p>
+
+</div>
+</div>
+<a id="aa34aff6eb29a2a1245e9ffc2fac42caa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa34aff6eb29a2a1245e9ffc2fac42caa">&#9670;&nbsp;</a></span>Beta_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Beta_max = MathematicalConstants::Pi/2.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Max. second pine angle against horizontal plane. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00116">116</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+</div>
+</div>
+<a id="aeb7f1ae574be563e0b603662c6fff5aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb7f1ae574be563e0b603662c6fff5aa">&#9670;&nbsp;</a></span>Beta_min</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Beta_min = MathematicalConstants::Pi/2.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Min. second spine angle against horizontal plane. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00113">113</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+</div>
+</div>
+<a id="aeb4257eec7a4c5a92e2b88e93248a201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb4257eec7a4c5a92e2b88e93248a201">&#9670;&nbsp;</a></span>Case</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GlobalParameters::Case = <a class="el" href="namespaceGlobalParameters.html#adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558">All_pinned</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>What case are we considering: Choose one from the enumeration Cases. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00053">53</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__young__laplace_8cc_source.html#l00079">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::actions_after_adapt()</a>, <a class="el" href="refineable__young__laplace_8cc_source.html#l00616">main()</a>, and <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="a3a90a762edbce6d2a95456df26e85cea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a90a762edbce6d2a95456df26e85cea">&#9670;&nbsp;</a></span>Control_element</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned GlobalParameters::Control_element = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Number of element in bulk mesh at which height control is applied. Initialise to 0 &ndash; will be overwritte in <a class="el" href="namespaceGlobalParameters.html#aedbc21f2c81d445634badfc5cdd77436" title="Setup dependent parameters and perform sanity check.">setup_dependent_parameters_and_sanity_check()</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00090">90</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="a3731f24a02ce4f306d65a9a488f85c96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3731f24a02ce4f306d65a9a488f85c96">&#9670;&nbsp;</a></span>Controlled_height</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Controlled_height = 0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Height control value. </p>
+<p>Height control value for displacement control. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00051">51</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="barrel_8cc_source.html#l00054">get_exact_kappa()</a>, <a class="el" href="refineable__young__laplace_8cc_source.html#l00391">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::increment_parameters()</a>, <a class="el" href="barrel_8cc_source.html#l00321">main()</a>, <a class="el" href="refineable__t__junction_8cc_source.html#l00226">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::RefineableYoungLaplaceProblem()</a>, and <a class="el" href="barrel_8cc_source.html#l00180">YoungLaplaceProblem&lt; ELEMENT &gt;::YoungLaplaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a65fe7fd6c6c54d7ba89fab47cd4a9141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65fe7fd6c6c54d7ba89fab47cd4a9141">&#9670;&nbsp;</a></span>Controlled_height_increment</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Controlled_height_increment = 0.1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Increment for height control. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00085">85</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__young__laplace_8cc_source.html#l00391">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::increment_parameters()</a>, and <a class="el" href="refineable__young__laplace_8cc_source.html#l00616">main()</a>.</p>
+
+</div>
+</div>
+<a id="ae982fcb894e82c683d07d3c2fbbead3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae982fcb894e82c683d07d3c2fbbead3d">&#9670;&nbsp;</a></span>Cos_gamma</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Cos_gamma =cos(<a class="el" href="namespaceGlobalParameters.html#adb0a994119055242fcc762cac5edc317">Gamma</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cos of contact angle. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00061">61</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__t__junction_8cc_source.html#l00167">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::actions_after_adapt()</a>, <a class="el" href="refineable__t__junction_8cc_source.html#l00226">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::RefineableYoungLaplaceProblem()</a>, and <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="a6e2bba1769e86a5d3db88e2c7062bc63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e2bba1769e86a5d3db88e2c7062bc63">&#9670;&nbsp;</a></span>DtN_BC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GlobalParameters::DtN_BC =false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flag to choose the Dirichlet to Neumann BC or ABC BC. </p>
+
+<p class="definition">Definition at line <a class="el" href="scattering_8cc_source.html#l00072">72</a> of file <a class="el" href="scattering_8cc_source.html">scattering.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="scattering_8cc_source.html#l00244">ScatteringProblem&lt; ELEMENT &gt;::actions_before_newton_convergence_check()</a>, <a class="el" href="scattering_8cc_source.html#l00645">ScatteringProblem&lt; ELEMENT &gt;::create_outer_bc_elements()</a>, <a class="el" href="scattering_8cc_source.html#l00709">main()</a>, and <a class="el" href="scattering_8cc_source.html#l00451">ScatteringProblem&lt; ELEMENT &gt;::setup_outer_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="adb0a994119055242fcc762cac5edc317"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb0a994119055242fcc762cac5edc317">&#9670;&nbsp;</a></span>Gamma</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Gamma = MathematicalConstants::Pi/4.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Contact angle and its cos (dependent parameter &ndash; is reassigned) </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00060">60</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__young__laplace_8cc_source.html#l00616">main()</a>, and <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="aae73cb63b27d51a87845c3392cd944eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae73cb63b27d51a87845c3392cd944eb">&#9670;&nbsp;</a></span>K_squared</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::K_squared =10.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Square of the wavenumber. </p>
+
+<p class="definition">Definition at line <a class="el" href="scattering_8cc_source.html#l00064">64</a> of file <a class="el" href="scattering_8cc_source.html">scattering.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="scattering_8cc_source.html#l00086">get_exact_u()</a>, <a class="el" href="scattering_8cc_source.html#l00156">prescribed_incoming_flux()</a>, and <a class="el" href="scattering_8cc_source.html#l00308">ScatteringProblem&lt; ELEMENT &gt;::ScatteringProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a74cc88d6dc206cd556fb12e7e3101032"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74cc88d6dc206cd556fb12e7e3101032">&#9670;&nbsp;</a></span>Kappa_increment</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Kappa_increment = -0.05</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Increment for prescribed curvature. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00082">82</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__young__laplace_8cc_source.html#l00391">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::increment_parameters()</a>.</p>
+
+</div>
+</div>
+<a id="ae7651e73d3f8346da9fcfdbb149bc22e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7651e73d3f8346da9fcfdbb149bc22e">&#9670;&nbsp;</a></span>Kappa_initial</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Kappa_initial = 0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initial value for kappa. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00067">67</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="ac6234184cce40ab2c6bec92b37e4ae41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6234184cce40ab2c6bec92b37e4ae41">&#9670;&nbsp;</a></span>Kappa_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* GlobalParameters::Kappa_pt = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to Data object that stores the prescribed curvature. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00064">64</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="barrel_8cc_source.html#l00151">YoungLaplaceProblem&lt; ELEMENT &gt;::actions_before_newton_solve()</a>, <a class="el" href="barrel_8cc_source.html#l00291">YoungLaplaceProblem&lt; ELEMENT &gt;::doc_solution()</a>, <a class="el" href="refineable__t__junction_8cc_source.html#l00430">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::doc_solution()</a>, <a class="el" href="refineable__young__laplace_8cc_source.html#l00391">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::increment_parameters()</a>, <a class="el" href="refineable__t__junction_8cc_source.html#l00226">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::RefineableYoungLaplaceProblem()</a>, and <a class="el" href="barrel_8cc_source.html#l00180">YoungLaplaceProblem&lt; ELEMENT &gt;::YoungLaplaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a36ebf514fdd1e78fff69907b39e25af6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36ebf514fdd1e78fff69907b39e25af6">&#9670;&nbsp;</a></span>L_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::L_x = 1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Length and width of the domain. </p>
+<p>Length of domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00096">96</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__young__laplace_8cc_source.html#l00616">main()</a>, <a class="el" href="refineable__t__junction_8cc_source.html#l00226">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::RefineableYoungLaplaceProblem()</a>, and <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="ac8774b3418c4551091d64ec72c169b2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8774b3418c4551091d64ec72c169b2e">&#9670;&nbsp;</a></span>L_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::L_y = 1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Width of domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00097">97</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__young__laplace_8cc_source.html#l00616">main()</a>, <a class="el" href="refineable__t__junction_8cc_source.html#l00226">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::RefineableYoungLaplaceProblem()</a>, and <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="ae4df03bf0ffa55b741ac846ca7b6c155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4df03bf0ffa55b741ac846ca7b6c155">&#9670;&nbsp;</a></span>N_fourier</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned GlobalParameters::N_fourier =10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of terms used in the computation of the exact solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="scattering_8cc_source.html#l00068">68</a> of file <a class="el" href="scattering_8cc_source.html">scattering.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="scattering_8cc_source.html#l00086">get_exact_u()</a>, <a class="el" href="scattering_8cc_source.html#l00156">prescribed_incoming_flux()</a>, and <a class="el" href="scattering_8cc_source.html#l00308">ScatteringProblem&lt; ELEMENT &gt;::ScatteringProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ab020cb50fa321b26e8d2127d2cff23b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab020cb50fa321b26e8d2127d2cff23b9">&#9670;&nbsp;</a></span>N_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned GlobalParameters::N_x = 8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of elements in the mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00100">100</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="a711d6f05552ddaac30bd245ae8bdf878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a711d6f05552ddaac30bd245ae8bdf878">&#9670;&nbsp;</a></span>N_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned GlobalParameters::N_y = 8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00101">101</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="aa6c94936d7c81286bb747e14a90d7ba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6c94936d7c81286bb747e14a90d7ba0">&#9670;&nbsp;</a></span>Nsteps</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned GlobalParameters::Nsteps = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of steps. </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00079">79</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__young__laplace_8cc_source.html#l00616">main()</a>, and <a class="el" href="refineable__young__laplace_8cc_source.html#l00541">run_it()</a>.</p>
+
+</div>
+</div>
+<a id="a61b086072a6b8fd38af1a85f1dd1674a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61b086072a6b8fd38af1a85f1dd1674a">&#9670;&nbsp;</a></span>Outer_radius</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GlobalParameters::Outer_radius =1.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Radius of outer boundary (must be a circle!) </p>
+
+<p class="definition">Definition at line <a class="el" href="scattering_8cc_source.html#l00079">79</a> of file <a class="el" href="scattering_8cc_source.html">scattering.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="scattering_8cc_source.html#l00308">ScatteringProblem&lt; ELEMENT &gt;::ScatteringProblem()</a>, and <a class="el" href="scattering_8cc_source.html#l00451">ScatteringProblem&lt; ELEMENT &gt;::setup_outer_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a69a238365a4fef33b1abdae287185f3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69a238365a4fef33b1abdae287185f3e">&#9670;&nbsp;</a></span>Rotate_spines_in_both_directions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GlobalParameters::Rotate_spines_in_both_directions = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Should the spines rotate in the x and y directions (true)? </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00119">119</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="common__young__laplace__stuff_8h_source.html#l00126">setup_dependent_parameters_and_sanity_check()</a>.</p>
+
+</div>
+</div>
+<a id="aeb81cc1c282502497ef6df576559b650"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb81cc1c282502497ef6df576559b650">&#9670;&nbsp;</a></span>Step_sign</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GlobalParameters::Step_sign = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Increase or decrease the value of the control parameters? </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00076">76</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+</div>
+</div>
+<a id="a624713d35bc418b2d5fa79f4d385a27a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a624713d35bc418b2d5fa79f4d385a27a">&#9670;&nbsp;</a></span>Use_height_control</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GlobalParameters::Use_height_control = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use height control (true) or not (false)? </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00043">43</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__young__laplace_8cc_source.html#l00391">RefineableYoungLaplaceProblem&lt; ELEMENT &gt;::increment_parameters()</a>.</p>
+
+</div>
+</div>
+<a id="a7cd7766fae9d0ca421d7e24677be3131"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cd7766fae9d0ca421d7e24677be3131">&#9670;&nbsp;</a></span>Use_spines</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GlobalParameters::Use_spines = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use spines (true) or not (false) </p>
+
+<p class="definition">Definition at line <a class="el" href="common__young__laplace__stuff_8h_source.html#l00040">40</a> of file <a class="el" href="common__young__laplace__stuff_8h_source.html">common_young_laplace_stuff.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__young__laplace_8cc_source.html#l00616">main()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:06:25
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

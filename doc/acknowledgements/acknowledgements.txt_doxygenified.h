@@ -1,0 +1,42 @@
+/**
+
+\mainpage Acknowledgements
+
+
+We wish to acknowledge the direct and indirect support from the
+following people and organisations:
+- The <A HREF="http://www.epsrc.ac.uk">EPSRC</A> (the UK Engineering
+  and Physical Sciences Research Council) for their financial
+  support.\n\n
+- <A HREF="http://www.mims.manchester.ac.uk/">MIMS</A>, the 
+  <A HREF="http://www.mims.manchester.ac.uk/">Manchester Institute for
+  Mathematical Sciences</A>  and the 
+  <A HREF="http://www.maths.manchester.ac.uk/">School of
+  Mathematics</A> at <A HREF="http://www.manchester.ac.uk/">The University of
+  Manchester</A> for their financial support. \n\n
+- Dimitry van Heesch for his brilliant 
+  <A HREF="http://www.doxygen.org">doxygen</A> package which we used
+  to produce the documentation. \n\n
+- <A HREF="http://crd.lbl.gov/~xiaoye/">Xiaoye Sherry Li</A> and
+  colleagues for developing the sparse direct solver 
+  <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</A> -- 
+  \c oomph-lib's default linear solver. \n\n
+- <A HREF="http://www.maths.man.ac.uk/~chris">Chris Paul</A>, Head of
+  Computing at <A HREF="http://www.manchester.ac.uk/">Manchester</A>'s
+  <A HREF="http://www.maths.man.ac.uk/">
+  School of Mathematics</A> for keeping the machines running! \n\n
+- The <A HREF="http://www.cs.man.ac.uk/cnc/">Manchester Centre for
+  Novel Computing</A>, for giving us access to their Silicon Graphics 
+  Origin 2000, for the early development of \c oomph-lib's 
+  MPI routines.\n\n
+- <A HREF="http://www.math.wayne.edu/~yang/">Daoqi Yang</A> for his
+  brilliant book 
+  <A HREF="http://www.springeronline.com/sgw/cda/frontpage/0,11855,4-40007-22-2105335-0,00.html?changeHeader=true"> C++ and Object-Oriented Numeric 
+  Computing for Scientists and Engineers.</A> \n\n
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

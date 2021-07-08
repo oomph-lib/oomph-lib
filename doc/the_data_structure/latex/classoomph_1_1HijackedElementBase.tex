@@ -1,0 +1,270 @@
+\hypertarget{classoomph_1_1HijackedElementBase}{}\doxysection{oomph\+::Hijacked\+Element\+Base Class Reference}
+\label{classoomph_1_1HijackedElementBase}\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+
+
+{\ttfamily \#include $<$hijacked\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Hijacked\+Element\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.191489cm]{classoomph_1_1HijackedElementBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HijackedElementBase_ad062d9c27f6fd3d613a86b32980fa71e}{Hijacked\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, initialise the pointer to the equation numbers for the storage to zero. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1HijackedElementBase_af3393a98fc80a2f7761046920b4a3040}{$\sim$\+Hijacked\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, destroy the storage for the equation numbers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad}{unhijack\+\_\+all\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Reset the hijacked data pt, so that none of the equations in the element are hijacked. \end{DoxyCompactList}\item 
+const double \& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a79740641b6ac5b5a966d072bd10ab66a}{residual\+\_\+multiplier}} () const
+\begin{DoxyCompactList}\small\item\em Return the value of the residual multiplier. \end{DoxyCompactList}\item 
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_affdb1888fb6b2de051bc0345e6f5d934}{residual\+\_\+multiplier\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return the pointer to the residual multiplier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1HijackedElementBase_ac518df71f978c2b80cd25a1283353ab5}{hijack\+\_\+global\+\_\+eqn}} (long $\ast$const \&global\+\_\+eqn\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Mark the global equation, addressed by global\+\_\+eqn\+\_\+pt, as hijacked by this element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HijackedElementBase_aa94e2c93374151302879645f4c354c3f}{unhijack\+\_\+global\+\_\+eqn}} (long $\ast$const \&global\+\_\+eqn\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em The global equation, addressed by global\+\_\+eqn\+\_\+pt, is no longer hijacked by this element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::set$<$ long $\ast$ $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a9c3a9a4e39ee5e3af0f5594c31f532c5}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1HijackedElementBase_ae604da2f744f328f3866a2cefa3aa80c}{Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a vector of integers containing the local equation numbers of any hijacked variables in the element. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a283509b7af09479e7a1cb8c0e05a8c16}{Residual\+\_\+multiplier\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a double that multiplies the contribution to the residuals from the original element. This is usually used as a homotopy parameter to permit a smooth transition between different types of boundary conditions, rather than switching them on or off abruptly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classoomph_1_1HijackedElementBase_afd87cc7c33c2b846c5f7a373c352f13a}{Default\+\_\+residual\+\_\+multiplier}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Static default value for the double that multiplies the original residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hijacked\+Element base class that provides storage and access funcitons for pointers to the global equation numbers that are hijacked by the Hijacked\+Element. A default residuals multiplier is also provided. 
+
+Definition at line 45 of file hijacked\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_ad062d9c27f6fd3d613a86b32980fa71e}\label{classoomph_1_1HijackedElementBase_ad062d9c27f6fd3d613a86b32980fa71e}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!HijackedElementBase@{HijackedElementBase}}
+\index{HijackedElementBase@{HijackedElementBase}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{HijackedElementBase()}{HijackedElementBase()}}
+{\footnotesize\ttfamily oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, initialise the pointer to the equation numbers for the storage to zero. 
+
+
+
+Definition at line 51 of file hijacked\+\_\+elements.\+h.
+
+
+
+References Default\+\_\+residual\+\_\+multiplier, and Residual\+\_\+multiplier\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_af3393a98fc80a2f7761046920b4a3040}\label{classoomph_1_1HijackedElementBase_af3393a98fc80a2f7761046920b4a3040}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!````~HijackedElementBase@{$\sim$HijackedElementBase}}
+\index{````~HijackedElementBase@{$\sim$HijackedElementBase}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{$\sim$HijackedElementBase()}{~HijackedElementBase()}}
+{\footnotesize\ttfamily oomph\+::\+Hijacked\+Element\+Base\+::$\sim$\+Hijacked\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor, destroy the storage for the equation numbers. 
+
+Destructor that cleans up any memory allocated by the class. 
+
+Definition at line 42 of file hijacked\+\_\+elements.\+cc.
+
+
+
+References Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt, and Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_ac518df71f978c2b80cd25a1283353ab5}\label{classoomph_1_1HijackedElementBase_ac518df71f978c2b80cd25a1283353ab5}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!hijack\_global\_eqn@{hijack\_global\_eqn}}
+\index{hijack\_global\_eqn@{hijack\_global\_eqn}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{hijack\_global\_eqn()}{hijack\_global\_eqn()}}
+{\footnotesize\ttfamily void oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn (\begin{DoxyParamCaption}\item[{long $\ast$const \&}]{global\+\_\+eqn\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Mark the global equation, addressed by global\+\_\+eqn\+\_\+pt, as hijacked by this element. 
+
+Mark the global equation, addressed by global\+\_\+eqn\+\_\+pt, as hijacked by this element. 
+
+Definition at line 59 of file hijacked\+\_\+elements.\+cc.
+
+
+
+References Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::hijack\+\_\+external\+\_\+value(), oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::hijack\+\_\+internal\+\_\+value(), oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::hijack\+\_\+nodal\+\_\+position\+\_\+value(), oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::hijack\+\_\+nodal\+\_\+spine\+\_\+value(), and oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::hijack\+\_\+nodal\+\_\+value().
+
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a79740641b6ac5b5a966d072bd10ab66a}\label{classoomph_1_1HijackedElementBase_a79740641b6ac5b5a966d072bd10ab66a}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!residual\_multiplier@{residual\_multiplier}}
+\index{residual\_multiplier@{residual\_multiplier}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{residual\_multiplier()}{residual\_multiplier()}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the value of the residual multiplier. 
+
+
+
+Definition at line 69 of file hijacked\+\_\+elements.\+h.
+
+
+
+References Residual\+\_\+multiplier\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::get\+\_\+jacobian(), and oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::get\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_affdb1888fb6b2de051bc0345e6f5d934}\label{classoomph_1_1HijackedElementBase_affdb1888fb6b2de051bc0345e6f5d934}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!residual\_multiplier\_pt@{residual\_multiplier\_pt}}
+\index{residual\_multiplier\_pt@{residual\_multiplier\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{residual\_multiplier\_pt()}{residual\_multiplier\_pt()}}
+{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the residual multiplier. 
+
+
+
+Definition at line 73 of file hijacked\+\_\+elements.\+h.
+
+
+
+References Residual\+\_\+multiplier\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad}\label{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!unhijack\_all\_data@{unhijack\_all\_data}}
+\index{unhijack\_all\_data@{unhijack\_all\_data}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{unhijack\_all\_data()}{unhijack\_all\_data()}}
+{\footnotesize\ttfamily void oomph\+::\+Hijacked\+Element\+Base\+::unhijack\+\_\+all\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset the hijacked data pt, so that none of the equations in the element are hijacked. 
+
+
+
+Definition at line 66 of file hijacked\+\_\+elements.\+h.
+
+
+
+References Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_aa94e2c93374151302879645f4c354c3f}\label{classoomph_1_1HijackedElementBase_aa94e2c93374151302879645f4c354c3f}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!unhijack\_global\_eqn@{unhijack\_global\_eqn}}
+\index{unhijack\_global\_eqn@{unhijack\_global\_eqn}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{unhijack\_global\_eqn()}{unhijack\_global\_eqn()}}
+{\footnotesize\ttfamily void oomph\+::\+Hijacked\+Element\+Base\+::unhijack\+\_\+global\+\_\+eqn (\begin{DoxyParamCaption}\item[{long $\ast$const \&}]{global\+\_\+eqn\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The global equation, addressed by global\+\_\+eqn\+\_\+pt, is no longer hijacked by this element. 
+
+The global equation, addressed by global\+\_\+eqn\+\_\+pt, is no longer hijacked by this element. 
+
+Definition at line 76 of file hijacked\+\_\+elements.\+cc.
+
+
+
+References Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_afd87cc7c33c2b846c5f7a373c352f13a}\label{classoomph_1_1HijackedElementBase_afd87cc7c33c2b846c5f7a373c352f13a}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Default\_residual\_multiplier@{Default\_residual\_multiplier}}
+\index{Default\_residual\_multiplier@{Default\_residual\_multiplier}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{Default\_residual\_multiplier}{Default\_residual\_multiplier}}
+{\footnotesize\ttfamily double oomph\+::\+Hijacked\+Element\+Base\+::\+Default\+\_\+residual\+\_\+multiplier =0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Static default value for the double that multiplies the original residuals. 
+
+Static default value of the multiplier for the original residuals The contribution to the total residuals is the product of the multiplier and the original value of the residuals 
+
+Definition at line 96 of file hijacked\+\_\+elements.\+h.
+
+
+
+Referenced by Hijacked\+Element\+Base().
+
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a9c3a9a4e39ee5e3af0f5594c31f532c5}\label{classoomph_1_1HijackedElementBase_a9c3a9a4e39ee5e3af0f5594c31f532c5}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Hijacked\_global\_eqn\_number\_pt@{Hijacked\_global\_eqn\_number\_pt}}
+\index{Hijacked\_global\_eqn\_number\_pt@{Hijacked\_global\_eqn\_number\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{Hijacked\_global\_eqn\_number\_pt}{Hijacked\_global\_eqn\_number\_pt}}
+{\footnotesize\ttfamily std\+::set$<$long$\ast$$>$$\ast$ oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+Pointer to a Set of pointers to the equation numbers that will be hijacked by this element. Note that these M\+U\+ST be pointers because hijacking information is set B\+E\+F\+O\+RE global equation numbers have been assigned. 
+
+Definition at line 81 of file hijacked\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), hijack\+\_\+global\+\_\+eqn(), unhijack\+\_\+all\+\_\+data(), unhijack\+\_\+global\+\_\+eqn(), and $\sim$\+Hijacked\+Element\+Base().
+
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_ae604da2f744f328f3866a2cefa3aa80c}\label{classoomph_1_1HijackedElementBase_ae604da2f744f328f3866a2cefa3aa80c}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Hijacked\_local\_eqn\_number\_pt@{Hijacked\_local\_eqn\_number\_pt}}
+\index{Hijacked\_local\_eqn\_number\_pt@{Hijacked\_local\_eqn\_number\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{Hijacked\_local\_eqn\_number\_pt}{Hijacked\_local\_eqn\_number\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$int$>$$\ast$ oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to a vector of integers containing the local equation numbers of any hijacked variables in the element. 
+
+
+
+Definition at line 86 of file hijacked\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::get\+\_\+jacobian(), oomph\+::\+Hijacked$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$\+::get\+\_\+residuals(), and $\sim$\+Hijacked\+Element\+Base().
+
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a283509b7af09479e7a1cb8c0e05a8c16}\label{classoomph_1_1HijackedElementBase_a283509b7af09479e7a1cb8c0e05a8c16}} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Residual\_multiplier\_pt@{Residual\_multiplier\_pt}}
+\index{Residual\_multiplier\_pt@{Residual\_multiplier\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{Residual\_multiplier\_pt}{Residual\_multiplier\_pt}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Hijacked\+Element\+Base\+::\+Residual\+\_\+multiplier\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to a double that multiplies the contribution to the residuals from the original element. This is usually used as a homotopy parameter to permit a smooth transition between different types of boundary conditions, rather than switching them on or off abruptly. 
+
+
+
+Definition at line 93 of file hijacked\+\_\+elements.\+h.
+
+
+
+Referenced by Hijacked\+Element\+Base(), residual\+\_\+multiplier(), and residual\+\_\+multiplier\+\_\+pt().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{hijacked__elements_8h}{hijacked\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{hijacked__elements_8cc}{hijacked\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,374 @@
+\hypertarget{classoomph_1_1PicardConvergenceData}{}\doxysection{oomph\+::Picard\+Convergence\+Data Class Reference}
+\label{classoomph_1_1PicardConvergenceData}\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+
+
+Object that collates convergence data of Picard iteration.  
+
+
+
+
+{\ttfamily \#include $<$segregated\+\_\+fsi\+\_\+solver.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a48c244adc14b7d4d741f9083f277f779}{Picard\+Convergence\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Constructor initialises all data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a875840ce0db8db0409dd4356319f0c06}{$\sim$\+Picard\+Convergence\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a24be0531f3c97ca7daf7d482ce1a99f9}{niter}} ()
+\begin{DoxyCompactList}\small\item\em Number of iterations performed. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_af1a46967e1e469e08b059a814dac9bf5}{cpu\+\_\+total}} ()
+\begin{DoxyCompactList}\small\item\em Total C\+PU time for segregated solve. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_abb555813a3773fe0afb86b5097428545}{essential\+\_\+cpu\+\_\+total}} ()
+\begin{DoxyCompactList}\small\item\em Total essential C\+PU time for segregated solve (excluding any actions that merely doc the progress of the iteration, etc.) \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a2e2266352cabc2b30682e0db8bf6aeb3}{cpu\+\_\+for\+\_\+global\+\_\+residual}} ()
+\begin{DoxyCompactList}\small\item\em C\+PU time for computation of global residual vectors Note\+: This time is contained in Total\+\_\+\+C\+PU and is only used if convergence is based on the residual of the fully coupled system. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a2e7b01bbd823fc1fd4feafb30fe31b42}{tol\+\_\+achieved}} ()
+\begin{DoxyCompactList}\small\item\em Final tolerance achieved by the iteration. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_aa575a19693f4f00f2981e418d2176310}{has\+\_\+converged}} () const
+\begin{DoxyCompactList}\small\item\em Flag to indicate if the solver has converged. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a181a6b365fb045cd70e30f193542d087}{set\+\_\+solver\+\_\+converged}} ()
+\begin{DoxyCompactList}\small\item\em Set the flag to indicate that the solver has converged. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a1fcaf97b61a9afa18b569a8ca43b1454}{set\+\_\+solver\+\_\+not\+\_\+converged}} ()
+\begin{DoxyCompactList}\small\item\em Set the flag to indicate that the solver has not converged. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_ac288000c0ccc529a43cf98dd9a6ef85c}{Niter}}
+\begin{DoxyCompactList}\small\item\em Number of iterations performed. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_ae2fe34d1dc2f889d89fd75a8f0805e21}{C\+P\+U\+\_\+total}}
+\begin{DoxyCompactList}\small\item\em Total C\+PU time for segregated solve. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_aa79f69879023de7cd55d7343a504b3b6}{Essential\+\_\+cpu\+\_\+total}}
+\begin{DoxyCompactList}\small\item\em Total essential C\+PU time for segregated solve (excluding any actions that merely doc the progress of the iteration, etc.) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_ae67b27988776ac7e138b8a1513e2da5e}{C\+P\+U\+\_\+for\+\_\+global\+\_\+residual}}
+\begin{DoxyCompactList}\small\item\em C\+PU time for computation of global residual vectors Note\+: This time is contained in Total\+\_\+\+C\+PU and is only used if convergence is based on the residual of the fully coupled system. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_af2fad7cea38c640c90f1784491695684}{Tol\+\_\+achieved}}
+\begin{DoxyCompactList}\small\item\em Final tolerance achieved by the iteration. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a9f8602cce0f1e001f94f125e9278cc78}{Has\+\_\+converged}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate if the solver has converged. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Object that collates convergence data of Picard iteration. 
+
+Definition at line 41 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_a48c244adc14b7d4d741f9083f277f779}\label{classoomph_1_1PicardConvergenceData_a48c244adc14b7d4d741f9083f277f779}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!PicardConvergenceData@{PicardConvergenceData}}
+\index{PicardConvergenceData@{PicardConvergenceData}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{PicardConvergenceData()}{PicardConvergenceData()}}
+{\footnotesize\ttfamily oomph\+::\+Picard\+Convergence\+Data\+::\+Picard\+Convergence\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor initialises all data. 
+
+
+
+Definition at line 47 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_a875840ce0db8db0409dd4356319f0c06}\label{classoomph_1_1PicardConvergenceData_a875840ce0db8db0409dd4356319f0c06}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!````~PicardConvergenceData@{$\sim$PicardConvergenceData}}
+\index{````~PicardConvergenceData@{$\sim$PicardConvergenceData}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{$\sim$PicardConvergenceData()}{~PicardConvergenceData()}}
+{\footnotesize\ttfamily oomph\+::\+Picard\+Convergence\+Data\+::$\sim$\+Picard\+Convergence\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 53 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_a2e2266352cabc2b30682e0db8bf6aeb3}\label{classoomph_1_1PicardConvergenceData_a2e2266352cabc2b30682e0db8bf6aeb3}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!cpu\_for\_global\_residual@{cpu\_for\_global\_residual}}
+\index{cpu\_for\_global\_residual@{cpu\_for\_global\_residual}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{cpu\_for\_global\_residual()}{cpu\_for\_global\_residual()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Picard\+Convergence\+Data\+::cpu\+\_\+for\+\_\+global\+\_\+residual (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C\+PU time for computation of global residual vectors Note\+: This time is contained in Total\+\_\+\+C\+PU and is only used if convergence is based on the residual of the fully coupled system. 
+
+
+
+Definition at line 70 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+References C\+P\+U\+\_\+for\+\_\+global\+\_\+residual.
+
+
+
+Referenced by oomph\+::\+Segregatable\+F\+S\+I\+Problem\+::segregated\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_af1a46967e1e469e08b059a814dac9bf5}\label{classoomph_1_1PicardConvergenceData_af1a46967e1e469e08b059a814dac9bf5}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!cpu\_total@{cpu\_total}}
+\index{cpu\_total@{cpu\_total}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{cpu\_total()}{cpu\_total()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Picard\+Convergence\+Data\+::cpu\+\_\+total (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Total C\+PU time for segregated solve. 
+
+
+
+Definition at line 59 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+References C\+P\+U\+\_\+total.
+
+
+
+Referenced by oomph\+::\+Segregatable\+F\+S\+I\+Problem\+::segregated\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_abb555813a3773fe0afb86b5097428545}\label{classoomph_1_1PicardConvergenceData_abb555813a3773fe0afb86b5097428545}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!essential\_cpu\_total@{essential\_cpu\_total}}
+\index{essential\_cpu\_total@{essential\_cpu\_total}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{essential\_cpu\_total()}{essential\_cpu\_total()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Picard\+Convergence\+Data\+::essential\+\_\+cpu\+\_\+total (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Total essential C\+PU time for segregated solve (excluding any actions that merely doc the progress of the iteration, etc.) 
+
+
+
+Definition at line 64 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+References Essential\+\_\+cpu\+\_\+total.
+
+
+
+Referenced by oomph\+::\+Segregatable\+F\+S\+I\+Problem\+::segregated\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_aa575a19693f4f00f2981e418d2176310}\label{classoomph_1_1PicardConvergenceData_aa575a19693f4f00f2981e418d2176310}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!has\_converged@{has\_converged}}
+\index{has\_converged@{has\_converged}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{has\_converged()}{has\_converged()}}
+{\footnotesize\ttfamily bool oomph\+::\+Picard\+Convergence\+Data\+::has\+\_\+converged (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Flag to indicate if the solver has converged. 
+
+
+
+Definition at line 76 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+References Has\+\_\+converged.
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_a24be0531f3c97ca7daf7d482ce1a99f9}\label{classoomph_1_1PicardConvergenceData_a24be0531f3c97ca7daf7d482ce1a99f9}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!niter@{niter}}
+\index{niter@{niter}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{niter()}{niter()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Picard\+Convergence\+Data\+::niter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of iterations performed. 
+
+
+
+Definition at line 56 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+References Niter.
+
+
+
+Referenced by oomph\+::\+Segregatable\+F\+S\+I\+Problem\+::segregated\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_a181a6b365fb045cd70e30f193542d087}\label{classoomph_1_1PicardConvergenceData_a181a6b365fb045cd70e30f193542d087}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!set\_solver\_converged@{set\_solver\_converged}}
+\index{set\_solver\_converged@{set\_solver\_converged}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{set\_solver\_converged()}{set\_solver\_converged()}}
+{\footnotesize\ttfamily void oomph\+::\+Picard\+Convergence\+Data\+::set\+\_\+solver\+\_\+converged (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the flag to indicate that the solver has converged. 
+
+
+
+Definition at line 79 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+References Has\+\_\+converged.
+
+
+
+Referenced by oomph\+::\+Segregatable\+F\+S\+I\+Problem\+::segregated\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_a1fcaf97b61a9afa18b569a8ca43b1454}\label{classoomph_1_1PicardConvergenceData_a1fcaf97b61a9afa18b569a8ca43b1454}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!set\_solver\_not\_converged@{set\_solver\_not\_converged}}
+\index{set\_solver\_not\_converged@{set\_solver\_not\_converged}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{set\_solver\_not\_converged()}{set\_solver\_not\_converged()}}
+{\footnotesize\ttfamily void oomph\+::\+Picard\+Convergence\+Data\+::set\+\_\+solver\+\_\+not\+\_\+converged (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the flag to indicate that the solver has not converged. 
+
+
+
+Definition at line 82 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+References Has\+\_\+converged.
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_a2e7b01bbd823fc1fd4feafb30fe31b42}\label{classoomph_1_1PicardConvergenceData_a2e7b01bbd823fc1fd4feafb30fe31b42}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!tol\_achieved@{tol\_achieved}}
+\index{tol\_achieved@{tol\_achieved}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{tol\_achieved()}{tol\_achieved()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Picard\+Convergence\+Data\+::tol\+\_\+achieved (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Final tolerance achieved by the iteration. 
+
+
+
+Definition at line 73 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+References Tol\+\_\+achieved.
+
+
+
+Referenced by oomph\+::\+Segregatable\+F\+S\+I\+Problem\+::segregated\+\_\+solve().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_ae67b27988776ac7e138b8a1513e2da5e}\label{classoomph_1_1PicardConvergenceData_ae67b27988776ac7e138b8a1513e2da5e}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!CPU\_for\_global\_residual@{CPU\_for\_global\_residual}}
+\index{CPU\_for\_global\_residual@{CPU\_for\_global\_residual}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{CPU\_for\_global\_residual}{CPU\_for\_global\_residual}}
+{\footnotesize\ttfamily double oomph\+::\+Picard\+Convergence\+Data\+::\+C\+P\+U\+\_\+for\+\_\+global\+\_\+residual\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+C\+PU time for computation of global residual vectors Note\+: This time is contained in Total\+\_\+\+C\+PU and is only used if convergence is based on the residual of the fully coupled system. 
+
+
+
+Definition at line 101 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+Referenced by cpu\+\_\+for\+\_\+global\+\_\+residual().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_ae2fe34d1dc2f889d89fd75a8f0805e21}\label{classoomph_1_1PicardConvergenceData_ae2fe34d1dc2f889d89fd75a8f0805e21}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!CPU\_total@{CPU\_total}}
+\index{CPU\_total@{CPU\_total}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{CPU\_total}{CPU\_total}}
+{\footnotesize\ttfamily double oomph\+::\+Picard\+Convergence\+Data\+::\+C\+P\+U\+\_\+total\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Total C\+PU time for segregated solve. 
+
+
+
+Definition at line 90 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+Referenced by cpu\+\_\+total().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_aa79f69879023de7cd55d7343a504b3b6}\label{classoomph_1_1PicardConvergenceData_aa79f69879023de7cd55d7343a504b3b6}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!Essential\_cpu\_total@{Essential\_cpu\_total}}
+\index{Essential\_cpu\_total@{Essential\_cpu\_total}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{Essential\_cpu\_total}{Essential\_cpu\_total}}
+{\footnotesize\ttfamily double oomph\+::\+Picard\+Convergence\+Data\+::\+Essential\+\_\+cpu\+\_\+total\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Total essential C\+PU time for segregated solve (excluding any actions that merely doc the progress of the iteration, etc.) 
+
+
+
+Definition at line 95 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+Referenced by essential\+\_\+cpu\+\_\+total().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_a9f8602cce0f1e001f94f125e9278cc78}\label{classoomph_1_1PicardConvergenceData_a9f8602cce0f1e001f94f125e9278cc78}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!Has\_converged@{Has\_converged}}
+\index{Has\_converged@{Has\_converged}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{Has\_converged}{Has\_converged}}
+{\footnotesize\ttfamily bool oomph\+::\+Picard\+Convergence\+Data\+::\+Has\+\_\+converged\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to indicate if the solver has converged. 
+
+
+
+Definition at line 107 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+Referenced by has\+\_\+converged(), set\+\_\+solver\+\_\+converged(), and set\+\_\+solver\+\_\+not\+\_\+converged().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_ac288000c0ccc529a43cf98dd9a6ef85c}\label{classoomph_1_1PicardConvergenceData_ac288000c0ccc529a43cf98dd9a6ef85c}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!Niter@{Niter}}
+\index{Niter@{Niter}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{Niter}{Niter}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Picard\+Convergence\+Data\+::\+Niter\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of iterations performed. 
+
+
+
+Definition at line 87 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+Referenced by niter().
+
+\mbox{\Hypertarget{classoomph_1_1PicardConvergenceData_af2fad7cea38c640c90f1784491695684}\label{classoomph_1_1PicardConvergenceData_af2fad7cea38c640c90f1784491695684}} 
+\index{oomph::PicardConvergenceData@{oomph::PicardConvergenceData}!Tol\_achieved@{Tol\_achieved}}
+\index{Tol\_achieved@{Tol\_achieved}!oomph::PicardConvergenceData@{oomph::PicardConvergenceData}}
+\doxysubsubsection{\texorpdfstring{Tol\_achieved}{Tol\_achieved}}
+{\footnotesize\ttfamily double oomph\+::\+Picard\+Convergence\+Data\+::\+Tol\+\_\+achieved\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Final tolerance achieved by the iteration. 
+
+
+
+Definition at line 104 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+
+
+
+Referenced by tol\+\_\+achieved().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{segregated__fsi__solver_8h}{segregated\+\_\+fsi\+\_\+solver.\+h}}\end{DoxyCompactItemize}

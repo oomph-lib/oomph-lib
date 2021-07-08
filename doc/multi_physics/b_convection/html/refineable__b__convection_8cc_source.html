@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: refineable_b_convection.cc Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_ddb094a380b94394dbbcf95a63b535e6.html">demo_drivers</a></li><li class="navelem"><a class="el" href="dir_7da5dbffa6769dc9eed5368d3005526a.html">multi_physics</a></li><li class="navelem"><a class="el" href="dir_c9530d51a4a83a4386be6c813903ac0c.html">boussinesq_convection</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">refineable_b_convection.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="refineable__b__convection_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//Driver for a multi-physics problem that couples the Navier--Stokes</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//equations to the advection diffusion equations, </span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//giving Boussinesq convection</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//Oomph-lib headers, we require the generic, advection-diffusion</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//and navier-stokes elements.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;advection_diffusion.h&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;navier_stokes.h&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;multi_physics.h&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// The mesh is our standard rectangular quadmesh</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;meshes/rectangular_quadmesh.h&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// Use the oomph and std namespaces </span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceoomph.html">oomph</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">//======start_of_namespace============================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/// Namespace for the physical parameters in the problem</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> /// Peclet number (identically one from our non-dimensionalisation)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ad4cdf142ba50635d62ac4c614f445af7">Peclet</a>=1.0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> /// 1/Prandtl number</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a87796c9f402e6f90c07cf5ba0db4367e">Inverse_Prandtl</a>=1.0;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> /// \short Rayleigh number, set to be greater than </span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> /// the threshold for linear instability</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a637fd2a6a7c5b34ed3288300d8bf84b7">Rayleigh</a> = 1800.0;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> /// Gravity vector</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span> Vector&lt;double&gt; <a class="code" href="namespaceGlobal__Physical__Variables.html#a42f4a0aee37dbb36186267931c614053">Direction_of_gravity</a>(2);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;} <span class="comment">// end_of_namespace</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">//=======start_of_problem_class=======================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">/// 2D Convection  problem on rectangular domain, discretised </span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">/// with refineable elements. The specific type</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/// of element is specified via the template parameter.</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">class </span><a class="code" href="classRefineableConvectionProblem.html">RefineableConvectionProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> ///Constructor</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"></span> <a class="code" href="classRefineableConvectionProblem.html">RefineableConvectionProblem</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> /// Destructor. Empty</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classRefineableConvectionProblem.html#a43fc2693230601928578d5b0c6380943">   93</a></span>&#160;<span class="comment"></span> <a class="code" href="classRefineableConvectionProblem.html#a43fc2693230601928578d5b0c6380943">~RefineableConvectionProblem</a>() {}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> /// \short Update the problem specs before solve:</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"> /// Update the problem after solve (empty)</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classRefineableConvectionProblem.html#a13bda5e5e75928efa88433902ccab7ee">   99</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableConvectionProblem.html#a13bda5e5e75928efa88433902ccab7ee">actions_after_newton_solve</a>(){}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"> /// \short Overloaded version of the problem&#39;s access function to </span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"> /// the mesh. Recasts the pointer to the base Mesh object to </span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> /// the actual mesh type.</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classRefineableConvectionProblem.html#a837d2412cee6996c78a2d2c5adf720f3">  104</a></span>&#160;<span class="comment"></span> RectangularQuadMesh&lt;ELEMENT&gt;* <a class="code" href="classRefineableConvectionProblem.html#a837d2412cee6996c78a2d2c5adf720f3">mesh_pt</a>() </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>RectangularQuadMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    Problem::mesh_pt());</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  } <span class="comment">//end of access function to specic mesh</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"> /// Actions before adapt:(empty)</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classRefineableConvectionProblem.html#a962499683ada1233e20055e46b15fdb0">  111</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableConvectionProblem.html#a962499683ada1233e20055e46b15fdb0">actions_before_adapt</a>() {}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"> /// \short Actions after adaptation,</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"> /// Re-pin a single pressure degree of freedom</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classRefineableConvectionProblem.html#a9baa484155212df5ad2137dd5a348def">  115</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableConvectionProblem.html#a9baa484155212df5ad2137dd5a348def">actions_after_adapt</a>()</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;   <span class="comment">//Unpin all the pressures to avoid pinning two pressures</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;   RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    unpin_all_pressure_dofs(mesh_pt()-&gt;element_pt());</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;   <span class="comment">//Pin the zero-th pressure dof in the zero-th element and set</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;   <span class="comment">// its value to zero</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;   fix_pressure(0,0,0.0);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"> ///Fix pressure in element e at pressure dof pdof and set to pvalue</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classRefineableConvectionProblem.html#a3432fe8f8e4ba54d5e4c1ca7b3b233e2">  127</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableConvectionProblem.html#a3432fe8f8e4ba54d5e4c1ca7b3b233e2">fix_pressure</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;e, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;pdof, </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;pvalue)</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;   <span class="comment">//Cast to specific element and fix pressure</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e))-&gt;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    fix_pressure(pdof,pvalue);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  } <span class="comment">// end_of_fix_pressure</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment"> /// \short Set the</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment"> /// boundary condition on the upper wall to be perturbed slightly</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment"> /// to force the solution into the symmetry broken state.</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="classRefineableConvectionProblem.html#aa97926281f88014ad45f43972184a77c">  138</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableConvectionProblem.html#aa97926281f88014ad45f43972184a77c">enable_imperfection</a>() {Imperfect = <span class="keyword">true</span>;}</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment"> /// \short Set the</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment"> /// boundary condition on the upper wall to be unperturbed.</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="classRefineableConvectionProblem.html#a816f49163ff3ceb71aec4236aac10d84">  142</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableConvectionProblem.html#a816f49163ff3ceb71aec4236aac10d84">disable_imperfection</a>() {Imperfect = <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment"> /// \short Doc the solution.</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> doc_solution();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment"> /// DocInfo object</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment"></span> DocInfo Doc_info;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"> /// Is the boundary condition imperfect or not</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> Imperfect;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}; <span class="comment">// end of problem class</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">//=======start_of_constructor=============================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">/// Constructor for adaptive thermal convection problem</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<a class="code" href="classRefineableConvectionProblem.html#a97e661986093402bf55fb6c32b782ddc">RefineableConvectionProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<a class="code" href="classRefineableConvectionProblem.html#a97e661986093402bf55fb6c32b782ddc">RefineableConvectionProblem</a>() : Imperfect(false)</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;{ </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; <span class="comment">// Set output directory</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; <a class="code" href="classRefineableConvectionProblem.html#acf0b222e2ae8efc508536e578c3a359e">Doc_info</a>.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; <span class="comment">// # of elements in x-direction</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; <span class="keywordtype">unsigned</span> n_x=9;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; <span class="keywordtype">unsigned</span> n_y=8;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; <span class="comment">// Domain length in x-direction</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; <span class="keywordtype">double</span> l_x=3.0;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; <span class="keywordtype">double</span> l_y=1.0;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; <span class="comment">// Build the mesh</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; RefineableRectangularQuadMesh&lt;ELEMENT&gt;* cast_mesh_pt =</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="keyword">new</span> RefineableRectangularQuadMesh&lt;ELEMENT&gt;(n_x,n_y,l_x,l_y);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; <span class="comment">//Set the problem&#39;s mesh pointer</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; Problem::mesh_pt() = cast_mesh_pt;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; <span class="comment">// Create/set error estimator</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; cast_mesh_pt-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; <span class="comment">// Set error targets for adaptive refinement</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; cast_mesh_pt-&gt;max_permitted_error()=0.5e-3; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; cast_mesh_pt-&gt;min_permitted_error()=0.5e-4; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; <span class="comment">// free by default -- only need to pin the ones that have Dirichlet </span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; <span class="comment">// conditions here</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; <span class="comment">//Loop over the boundaries</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; <span class="keywordtype">unsigned</span> num_bound = <a class="code" href="classRefineableConvectionProblem.html#a837d2412cee6996c78a2d2c5adf720f3">mesh_pt</a>()-&gt;nboundary();</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  {</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;   <span class="comment">//Set the maximum index to be pinned (all values by default)</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;   <span class="keywordtype">unsigned</span> val_max=3;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;   <span class="comment">//If we are on the side-walls, the v-velocity and temperature</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;   <span class="comment">//satisfy natural boundary conditions, so we only pin the</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;   <span class="comment">//first value</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;   <span class="keywordflow">if</span>((ibound==1) || (ibound==3)) {val_max=1;}</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;   <span class="comment">//Loop over the number of nodes on the boundry</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;   <span class="keywordtype">unsigned</span> num_nod= <a class="code" href="classRefineableConvectionProblem.html#a837d2412cee6996c78a2d2c5adf720f3">mesh_pt</a>()-&gt;nboundary_node(ibound);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    {</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;     <span class="comment">//Loop over the desired values stored at the nodes and pin</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> j=0;j&lt;val_max;j++)</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;      {</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;       <a class="code" href="classRefineableConvectionProblem.html#a837d2412cee6996c78a2d2c5adf720f3">mesh_pt</a>()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(j);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;      }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    }</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  }</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; <span class="comment">// Pin the zero-th pressure value in the zero-th element and</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; <span class="comment">// set its value to zero.</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; <a class="code" href="classRefineableConvectionProblem.html#a3432fe8f8e4ba54d5e4c1ca7b3b233e2">fix_pressure</a>(0,0,0.0);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; <span class="comment">// Complete the build of all elements so they are fully functional </span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; <span class="comment">// things that cannot be handled by the (argument-free!) ELEMENT </span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; <span class="comment">// constructor.</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; <span class="keywordtype">unsigned</span> n_element = <a class="code" href="classRefineableConvectionProblem.html#a837d2412cee6996c78a2d2c5adf720f3">mesh_pt</a>()-&gt;nelement();</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  {</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;   <span class="comment">// Upcast from GeneralsedElement to the present element</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(<a class="code" href="classRefineableConvectionProblem.html#a837d2412cee6996c78a2d2c5adf720f3">mesh_pt</a>()-&gt;element_pt(i));</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;   <span class="comment">// Set the Peclet number</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;   el_pt-&gt;pe_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ad4cdf142ba50635d62ac4c614f445af7">Global_Physical_Variables::Peclet</a>;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;   <span class="comment">// Set the Peclet Strouhal number</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;   el_pt-&gt;pe_st_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ad4cdf142ba50635d62ac4c614f445af7">Global_Physical_Variables::Peclet</a>;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;   <span class="comment">// Set the Reynolds number (1/Pr in our non-dimensionalisation)</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;   el_pt-&gt;re_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a87796c9f402e6f90c07cf5ba0db4367e">Global_Physical_Variables::Inverse_Prandtl</a>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;   <span class="comment">// Set ReSt (also 1/Pr in our non-dimensionalisation)</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;   el_pt-&gt;re_st_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a87796c9f402e6f90c07cf5ba0db4367e">Global_Physical_Variables::Inverse_Prandtl</a>;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;   <span class="comment">// Set the Rayleigh number</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;   el_pt-&gt;ra_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a637fd2a6a7c5b34ed3288300d8bf84b7">Global_Physical_Variables::Rayleigh</a>;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;   <span class="comment">//Set Gravity vector</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;   el_pt-&gt;g_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a42f4a0aee37dbb36186267931c614053">Global_Physical_Variables::Direction_of_gravity</a>;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; endl; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;} <span class="comment">// end of constructor</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">//===================start_actions_before_newton_solve===========================</span><span class="comment"></span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">/// Update the problem specs before solve: (Re-)set boundary conditions</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">/// to include an imperfection (or not) depending on the control flag.</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classRefineableConvectionProblem.html#a694f0be87fe09a30d94e92acfce85eee">RefineableConvectionProblem&lt;ELEMENT&gt;::actions_before_newton_solve</a>()</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;{</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; <span class="comment">// Loop over the boundaries</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  {</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;   <span class="comment">// Loop over the nodes on boundary </span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    {</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;     <span class="comment">// Get pointer to node</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;     Node* nod_pt=mesh_pt()-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;     <span class="comment">//Set the number of velocity components</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;     <span class="keywordtype">unsigned</span> vel_max=2;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;     <span class="comment">//If we are on the side walls we only pin the x-velocity.</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;     <span class="keywordflow">if</span>((ibound==1) || (ibound==3)) {vel_max = 1;}</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;     <span class="comment">//Set the pinned velocities to zero</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> j=0;j&lt;vel_max;j++) {nod_pt-&gt;set_value(j,0.0);}</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;     <span class="comment">//If we are on the top boundary</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;     <span class="keywordflow">if</span>(ibound==2) </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;      {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;       <span class="comment">//Set the temperature to -0.5 (cooled)</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;       nod_pt-&gt;set_value(2,-0.5);</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;       <span class="comment">//Add small velocity imperfection if desired</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;       <span class="keywordflow">if</span>(Imperfect)</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        {</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;         <span class="comment">//Read out the x position</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;         <span class="keywordtype">double</span> x = nod_pt-&gt;x(0);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;         <span class="comment">//Set a sinusoidal perturbation in the vertical velocity</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;         <span class="comment">//This perturbation is mass conserving</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;         <span class="keywordtype">double</span> <a class="code" href="b__convection_8txt.html#a2f3f74f086b1c9b68fd5f85f88059466">value</a> = sin(2.0*3.141592654*x/3.0);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;         nod_pt-&gt;set_value(1,<a class="code" href="b__convection_8txt.html#a2f3f74f086b1c9b68fd5f85f88059466">value</a>);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        }</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;      }</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;     <span class="comment">//If we are on the bottom boundary, set the temperature</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;     <span class="comment">//to 0.5 (heated)</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;     <span class="keywordflow">if</span>(ibound==0) {nod_pt-&gt;set_value(2,0.5);}</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  }</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;}  <span class="comment">// end of actions before solve</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">//====================start_of_doc_solution===============================</span><span class="comment"></span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">/// Doc the solution</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classRefineableConvectionProblem.html#a47efcb3467931e13e12687303135e38b">RefineableConvectionProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;{ </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; <span class="comment">//Declare an output stream and filename</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; ofstream some_file;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; <span class="comment">// Number of plot points: npts x npts</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; <span class="comment">// Output solution </span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; <span class="comment">//-----------------</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;         Doc_info.number());</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; some_file.open(filename);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; some_file.close();</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; Doc_info.number()++;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;} <span class="comment">// end of doc</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">//===============start_of_main========================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">/// Driver code for 2D Boussinesq convection problem with </span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">/// adaptivity.</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno"><a class="line" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">  344</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;{</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; <span class="comment">// Set the direction of gravity</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; <a class="code" href="namespaceGlobal__Physical__Variables.html#a42f4a0aee37dbb36186267931c614053">Global_Physical_Variables::Direction_of_gravity</a>[0] = 0.0;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; <a class="code" href="namespaceGlobal__Physical__Variables.html#a42f4a0aee37dbb36186267931c614053">Global_Physical_Variables::Direction_of_gravity</a>[1] = -1.0;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; <span class="comment">// Create the problem with 2D nine-node refineable elements.</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; <a class="code" href="classRefineableConvectionProblem.html">RefineableConvectionProblem</a>&lt;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  <a class="code" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">RefineableBuoyantQCrouzeixRaviartElement&lt;2&gt;</a> &gt; problem;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; <span class="comment">// Apply a perturbation to the upper boundary condition to</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; <span class="comment">// force the solution into the symmetry-broken state.</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; problem.enable_imperfection();</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; <span class="comment">//Solve the problem with (up to) two levels of adaptation</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; problem.newton_solve(2);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; <span class="comment">//Document the solution</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; problem.doc_solution();</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; <span class="comment">// Make the boundary conditions perfect and solve again. </span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; <span class="comment">// Now the slightly perturbed symmetry broken state computed</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; <span class="comment">// above is used as the initial condition and the Newton solver</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; <span class="comment">// converges to the symmetry broken solution, even without</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; <span class="comment">// the perturbation</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; problem.disable_imperfection();</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; problem.newton_solve(2);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; problem.doc_solution();</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;} <span class="comment">// end of main</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a637fd2a6a7c5b34ed3288300d8bf84b7"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a637fd2a6a7c5b34ed3288300d8bf84b7">Global_Physical_Variables::Rayleigh</a></div><div class="ttdeci">double Rayleigh</div><div class="ttdoc">Rayleigh number, set to be greater than the threshold for linear instability.</div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__convection_8cc_source.html#l00058">boussinesq_convection.cc:58</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a97e661986093402bf55fb6c32b782ddc"><div class="ttname"><a href="classRefineableConvectionProblem.html#a97e661986093402bf55fb6c32b782ddc">RefineableConvectionProblem::RefineableConvectionProblem</a></div><div class="ttdeci">RefineableConvectionProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="multi__domain__ref__b__convection_8cc_source.html#l00187">multi_domain_ref_b_convection.cc:187</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_aa97926281f88014ad45f43972184a77c"><div class="ttname"><a href="classRefineableConvectionProblem.html#aa97926281f88014ad45f43972184a77c">RefineableConvectionProblem::enable_imperfection</a></div><div class="ttdeci">void enable_imperfection()</div><div class="ttdoc">Set the boundary condition on the upper wall to be perturbed slightly to force the solution into the ...</div><div class="ttdef"><b>Definition:</b> <a href="refineable__b__convection_8cc_source.html#l00138">refineable_b_convection.cc:138</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a962499683ada1233e20055e46b15fdb0"><div class="ttname"><a href="classRefineableConvectionProblem.html#a962499683ada1233e20055e46b15fdb0">RefineableConvectionProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt:(empty)</div><div class="ttdef"><b>Definition:</b> <a href="refineable__b__convection_8cc_source.html#l00111">refineable_b_convection.cc:111</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a837d2412cee6996c78a2d2c5adf720f3"><div class="ttname"><a href="classRefineableConvectionProblem.html#a837d2412cee6996c78a2d2c5adf720f3">RefineableConvectionProblem::mesh_pt</a></div><div class="ttdeci">RectangularQuadMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Overloaded version of the problem's access function to the mesh. Recasts the pointer to the base Mesh...</div><div class="ttdef"><b>Definition:</b> <a href="refineable__b__convection_8cc_source.html#l00104">refineable_b_convection.cc:104</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_acf0b222e2ae8efc508536e578c3a359e"><div class="ttname"><a href="classRefineableConvectionProblem.html#acf0b222e2ae8efc508536e578c3a359e">RefineableConvectionProblem::Doc_info</a></div><div class="ttdeci">DocInfo Doc_info</div><div class="ttdoc">DocInfo object.</div><div class="ttdef"><b>Definition:</b> <a href="multi__domain__ref__b__convection_8cc_source.html#l00166">multi_domain_ref_b_convection.cc:166</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a43fc2693230601928578d5b0c6380943"><div class="ttname"><a href="classRefineableConvectionProblem.html#a43fc2693230601928578d5b0c6380943">RefineableConvectionProblem::~RefineableConvectionProblem</a></div><div class="ttdeci">~RefineableConvectionProblem()</div><div class="ttdoc">Destructor. Empty.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__b__convection_8cc_source.html#l00093">refineable_b_convection.cc:93</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a694f0be87fe09a30d94e92acfce85eee"><div class="ttname"><a href="classRefineableConvectionProblem.html#a694f0be87fe09a30d94e92acfce85eee">RefineableConvectionProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve:</div><div class="ttdef"><b>Definition:</b> <a href="multi__domain__ref__b__convection_8cc_source.html#l00364">multi_domain_ref_b_convection.cc:364</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a816f49163ff3ceb71aec4236aac10d84"><div class="ttname"><a href="classRefineableConvectionProblem.html#a816f49163ff3ceb71aec4236aac10d84">RefineableConvectionProblem::disable_imperfection</a></div><div class="ttdeci">void disable_imperfection()</div><div class="ttdoc">Set the boundary condition on the upper wall to be unperturbed.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__b__convection_8cc_source.html#l00142">refineable_b_convection.cc:142</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a87796c9f402e6f90c07cf5ba0db4367e"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a87796c9f402e6f90c07cf5ba0db4367e">Global_Physical_Variables::Inverse_Prandtl</a></div><div class="ttdeci">double Inverse_Prandtl</div><div class="ttdoc">1/Prandtl number</div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__convection_8cc_source.html#l00054">boussinesq_convection.cc:54</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html"><div class="ttname"><a href="classRefineableConvectionProblem.html">RefineableConvectionProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="multi__domain__ref__b__convection_8cc_source.html#l00080">multi_domain_ref_b_convection.cc:80</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a9baa484155212df5ad2137dd5a348def"><div class="ttname"><a href="classRefineableConvectionProblem.html#a9baa484155212df5ad2137dd5a348def">RefineableConvectionProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adaptation, Re-pin a single pressure degree of freedom.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__b__convection_8cc_source.html#l00115">refineable_b_convection.cc:115</a></div></div>
+<div class="ttc" id="arefineable__b__convection_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="refineable__b__convection_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="refineable__b__convection_8cc_source.html#l00344">refineable_b_convection.cc:344</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_html"><div class="ttname"><a href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a></div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__elements_8h_source.html#l00755">boussinesq_elements.h:755</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ad4cdf142ba50635d62ac4c614f445af7"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ad4cdf142ba50635d62ac4c614f445af7">Global_Physical_Variables::Peclet</a></div><div class="ttdeci">double Peclet</div><div class="ttdoc">Peclet number (identically one from our non-dimensionalisation)</div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__convection_8cc_source.html#l00051">boussinesq_convection.cc:51</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__elements_8h_source.html#l00041">boussinesq_elements.h:41</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a3432fe8f8e4ba54d5e4c1ca7b3b233e2"><div class="ttname"><a href="classRefineableConvectionProblem.html#a3432fe8f8e4ba54d5e4c1ca7b3b233e2">RefineableConvectionProblem::fix_pressure</a></div><div class="ttdeci">void fix_pressure(const unsigned &amp;e, const unsigned &amp;pdof, const double &amp;pvalue)</div><div class="ttdoc">Fix pressure in element e at pressure dof pdof and set to pvalue.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__b__convection_8cc_source.html#l00127">refineable_b_convection.cc:127</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for the physical parameters in the problem.</div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__convection_8cc_source.html#l00048">boussinesq_convection.cc:48</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a13bda5e5e75928efa88433902ccab7ee"><div class="ttname"><a href="classRefineableConvectionProblem.html#a13bda5e5e75928efa88433902ccab7ee">RefineableConvectionProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="refineable__b__convection_8cc_source.html#l00099">refineable_b_convection.cc:99</a></div></div>
+<div class="ttc" id="aclassRefineableConvectionProblem_html_a47efcb3467931e13e12687303135e38b"><div class="ttname"><a href="classRefineableConvectionProblem.html#a47efcb3467931e13e12687303135e38b">RefineableConvectionProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="multi__domain__ref__b__convection_8cc_source.html#l00432">multi_domain_ref_b_convection.cc:432</a></div></div>
+<div class="ttc" id="ab__convection_8txt_html_a2f3f74f086b1c9b68fd5f85f88059466"><div class="ttname"><a href="b__convection_8txt.html#a2f3f74f086b1c9b68fd5f85f88059466">value</a></div><div class="ttdeci">in the sketch this c Data is represented by the dashed box n n The two dimensional c QAdvectionDiffusionElement is based on the same geometric c FiniteElement and stores one value(the temperature, \f$ \theta \f$) at each \c Node. . Both elements are fully-functional and provide their contributions to the global system of nonlinear algebraic equations that is solved by Newton 's method via the two member functions \c fill_in_contribution_to_residuals(...) and \c fill_in_contribution_to_jacobian(...). - The \c QAdvectionDiffusionElement 's member function \c fill_in_contribution_to_residuals(...) computes the element 's contribution to the global residual vector for a given &quot;wind&quot;. The &quot;wind&quot; is specified by its virtual member function \c get_wind_adv_diff(...) and in the&lt; A HREF</div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a42f4a0aee37dbb36186267931c614053"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a42f4a0aee37dbb36186267931c614053">Global_Physical_Variables::Direction_of_gravity</a></div><div class="ttdeci">Vector&lt; double &gt; Direction_of_gravity(2)</div><div class="ttdoc">Gravity vector.</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:21:45
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

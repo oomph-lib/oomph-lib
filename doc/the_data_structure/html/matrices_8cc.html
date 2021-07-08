@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: matrices.cc File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4075b182e53a3873a42d885f4e1e98c4.html">generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">matrices.cc File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="matrices_8cc_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceoomph"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html">oomph</a></td></tr>
+<tr class="memdesc:namespaceoomph"><td class="mdescLeft">&#160;</td><td class="mdescRight">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceoomph_1_1CRDoubleMatrixHelpers"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html">oomph::CRDoubleMatrixHelpers</a></td></tr>
+<tr class="memdesc:namespaceoomph_1_1CRDoubleMatrixHelpers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Namespace for helper functions for CRDoubleMatrices. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae3c10e59d5857457c7e34be8e9262035"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ae3c10e59d5857457c7e34be8e9262035">oomph::CRDoubleMatrixHelpers::create_uniformly_distributed_matrix</a> (const unsigned &amp;nrow, const unsigned &amp;ncol, const OomphCommunicator *const comm_pt, const Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a0666fd57a269ed17fd3cc7a808bd31ec">values</a>, const Vector&lt; int &gt; &amp;column_indices, const Vector&lt; int &gt; &amp;row_start, CRDoubleMatrix &amp;matrix_out)</td></tr>
+<tr class="memdesc:ae3c10e59d5857457c7e34be8e9262035"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a uniformly distributed matrix. A locally replicated matrix is constructed then redistributed using OOMPH-LIB's default uniform row distribution. This is memory intensive thus should be used for testing or small problems only.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ae3c10e59d5857457c7e34be8e9262035">More...</a><br /></td></tr>
+<tr class="separator:ae3c10e59d5857457c7e34be8e9262035"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17222c9461096e3d5b8cf6250524644"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ab17222c9461096e3d5b8cf6250524644">oomph::CRDoubleMatrixHelpers::inf_norm</a> (const DenseMatrix&lt; CRDoubleMatrix * &gt; &amp;matrix_pt)</td></tr>
+<tr class="memdesc:ab17222c9461096e3d5b8cf6250524644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute infinity (maximum) norm of sub blocks as if it was one matrix.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ab17222c9461096e3d5b8cf6250524644">More...</a><br /></td></tr>
+<tr class="separator:ab17222c9461096e3d5b8cf6250524644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b5962dbe2bbfb93f54b668100afffc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a02b5962dbe2bbfb93f54b668100afffc">oomph::CRDoubleMatrixHelpers::gershgorin_eigenvalue_estimate</a> (const DenseMatrix&lt; CRDoubleMatrix * &gt; &amp;matrix_pt)</td></tr>
+<tr class="memdesc:a02b5962dbe2bbfb93f54b668100afffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the largest Gershgorin disc whilst preserving the sign. Let A be an n by n matrix, with entries aij. For <img class="formulaInl" alt="$ i \in \{ 1,...,n \} $" src="form_317.png"/> let <img class="formulaInl" alt="$ R_i = \sum_{i\neq j} |a_{ij}| $" src="form_318.png"/> be the sum of the absolute values of the non-diagonal entries in the i-th row. Let <img class="formulaInl" alt="$ D(a_{ii},R_i) $" src="form_319.png"/> be the closed disc centered at <img class="formulaInl" alt="$ a_{ii} $" src="form_320.png"/> with radius <img class="formulaInl" alt="$ R_i $" src="form_321.png"/>, such a disc is called a Gershgorin disc.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a02b5962dbe2bbfb93f54b668100afffc">More...</a><br /></td></tr>
+<tr class="separator:a02b5962dbe2bbfb93f54b668100afffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e3ac344aa644292a143a3917a03e65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ab7e3ac344aa644292a143a3917a03e65">oomph::CRDoubleMatrixHelpers::concatenate</a> (const DenseMatrix&lt; CRDoubleMatrix * &gt; &amp;matrix_pt, CRDoubleMatrix &amp;result_matrix)</td></tr>
+<tr class="memdesc:ab7e3ac344aa644292a143a3917a03e65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> matrices. The in matrices are concatenated such that the block structure of the in matrices are preserved in the result matrix. Communication between processors is required. If the block structure of the sub matrices does not need to be preserved, consider using CRDoubleMatrixHelpers::concatenate_without_communication(...).  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ab7e3ac344aa644292a143a3917a03e65">More...</a><br /></td></tr>
+<tr class="separator:ab7e3ac344aa644292a143a3917a03e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a996568831ca0db90f080560dd400b3d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a996568831ca0db90f080560dd400b3d6">oomph::CRDoubleMatrixHelpers::concatenate_without_communication</a> (const Vector&lt; LinearAlgebraDistribution * &gt; &amp;row_distribution_pt, const Vector&lt; LinearAlgebraDistribution * &gt; &amp;col_distribution_pt, const DenseMatrix&lt; CRDoubleMatrix * &gt; &amp;matrix_pt, CRDoubleMatrix &amp;result_matrix)</td></tr>
+<tr class="memdesc:a996568831ca0db90f080560dd400b3d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> matrices.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#a996568831ca0db90f080560dd400b3d6">More...</a><br /></td></tr>
+<tr class="separator:a996568831ca0db90f080560dd400b3d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac04e094c973da752da4b76071ad09f44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ac04e094c973da752da4b76071ad09f44">oomph::CRDoubleMatrixHelpers::concatenate_without_communication</a> (const Vector&lt; LinearAlgebraDistribution * &gt; &amp;block_distribution_pt, const DenseMatrix&lt; CRDoubleMatrix * &gt; &amp;matrix_pt, CRDoubleMatrix &amp;result_matrix)</td></tr>
+<tr class="memdesc:ac04e094c973da752da4b76071ad09f44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> matrices. This calls the other concatenate_without_communication(...) function, passing block_distribution_pt as both the row_distribution_pt and col_distribution_pt. This should only be called for block square matrices.  <a href="namespaceoomph_1_1CRDoubleMatrixHelpers.html#ac04e094c973da752da4b76071ad09f44">More...</a><br /></td></tr>
+<tr class="separator:ac04e094c973da752da4b76071ad09f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,563 @@
+\hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4}{}\doxysection{oomph\+::Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4}\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+
+
+General \mbox{\hyperlink{classoomph_1_1QSpectralElement}{Q\+Spectral\+Element}} class specialised to one spatial dimension.  
+
+
+
+
+{\ttfamily \#include $<$Qspectral\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.037422cm]{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a747bf14338887c74303f56febdfba957}{Q\+Spectral\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a32d567a3c558e28710aed1e8fd83c4ae}{s\+\_\+min}} () const
+\begin{DoxyCompactList}\small\item\em Min. value of local coordinate. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_ae69c91dbf1b80e9fef73ada0f899b8c8}{s\+\_\+max}} () const
+\begin{DoxyCompactList}\small\item\em Max. value of local coordinate. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_afbc5b62a126b6fcce8fffcd0a4b37b86}{nvertex\+\_\+node}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a6106b1fc74eeab6848f3b03dba512f09}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a7ef460d4eecb38fb0fa33b331965265c}{local\+\_\+coordinate\+\_\+of\+\_\+node}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
+\begin{DoxyCompactList}\small\item\em Get local coordinates of node j in the element; vector sets its own size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_ad79b4f92e47f6dd7ce5793d26e26bb43}{local\+\_\+fraction\+\_\+of\+\_\+node}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+fraction)
+\begin{DoxyCompactList}\small\item\em Get the local fractino of node j in the element. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a4cf9d2148361eff47a8f72d7753104c1}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node}} (const unsigned \&n1d, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em The local one-\/d fraction is the same. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a20a70f397d718449bcb16e6e60ea74a1}{shape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+\begin{DoxyCompactList}\small\item\em Calculate the geometric shape functions at local coordinate s. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9118f192015bc057bf90eb0f741d5c27}{dshape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids) const
+\begin{DoxyCompactList}\small\item\em Compute the geometric shape functions and derivatives w.\+r.\+t. local coordinates at local coordinate s. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a1d7445c2348d96ac5349023edb150fe5}{d2shape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psids) const
+\begin{DoxyCompactList}\small\item\em Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t. local coordinates at local coordinate s d2psids(i,0) = $ d^2 \psi_j / d s^2 $. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a0b5a8d5092c514611704fd4aa259fbfc}{invert\+\_\+jacobian\+\_\+mapping}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inverse\+\_\+jacobian) const
+\begin{DoxyCompactList}\small\item\em Overload the template-\/free interface for the calculation of inverse jacobian matrix. This is a one-\/dimensional element, so use the 1D version. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_acb59fdd515326ef46eca9a065c5f6bcd}{nnode\+\_\+1d}} () const
+\begin{DoxyCompactList}\small\item\em Number of nodes along each element edge. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9f8defda0dbde54edfb84353c6f3f794}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_ae4debc9ccd8ac671dabca7bafc657683}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C\+\_\+style output at n\+\_\+plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a20b741c9b2523979612d2b63b3b05006}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a8951704e35bc73c46e22554c75821803}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output at n\+\_\+plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_aea5a330832dea0920a948660745e6f01}{get\+\_\+s\+\_\+plot}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const bool \&use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points=false) const
+\begin{DoxyCompactList}\small\item\em Get cector of local coordinates of plot point i (when plotting ~\newline
+ \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a250b5613ab76f43d9cd67dc01b8eb8fe}{tecplot\+\_\+zone\+\_\+string}} (const unsigned \&nplot) const
+\begin{DoxyCompactList}\small\item\em Return string for tecplot zone header (when plotting nplot points in each "coordinate direction) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a5f590bfd5cc59a282f970a8853ad0008}{nplot\+\_\+points}} (const unsigned \&nplot) const
+\begin{DoxyCompactList}\small\item\em Return total number of plot points (when plotting nplot points in each "coordinate direction) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a76bd974ec87daaecdb4b629b6de7beb3}{build\+\_\+face\+\_\+element}} (const int \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$face\+\_\+element\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} (an element of type Q\+Spectral\+Element$<$0,\+N\+N\+O\+D\+E\+\_\+1\+D$>$). The face index takes two values corresponding to the two possible faces\+: -\/1 (Left) s\mbox{[}0\mbox{]} = -\/1.\+0 +1 (Right) s\mbox{[}0\mbox{]} = 1.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{Gauss\+Lobatto\+Legendre}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$ \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a0e7111fe24ec8864f7de58997ec74f03}{integral}}
+\begin{DoxyCompactList}\small\item\em Default integration rule\+: Gaussian integration of same \textquotesingle{}order\textquotesingle{} as the element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
+class oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+
+General \mbox{\hyperlink{classoomph_1_1QSpectralElement}{Q\+Spectral\+Element}} class specialised to one spatial dimension. 
+
+Definition at line 360 of file Qspectral\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a747bf14338887c74303f56febdfba957}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a747bf14338887c74303f56febdfba957}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!QSpectralElement@{QSpectralElement}}
+\index{QSpectralElement@{QSpectralElement}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{QSpectralElement()}{QSpectralElement()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QSpectralElement}{Q\+Spectral\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 374 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::calculate\+\_\+nodal\+\_\+positions().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a76bd974ec87daaecdb4b629b6de7beb3}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a76bd974ec87daaecdb4b629b6de7beb3}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!build\_face\_element@{build\_face\_element}}
+\index{build\_face\_element@{build\_face\_element}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{build\_face\_element()}{build\_face\_element()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} (an element of type Q\+Spectral\+Element$<$0,\+N\+N\+O\+D\+E\+\_\+1\+D$>$). The face index takes two values corresponding to the two possible faces\+: -\/1 (Left) s\mbox{[}0\mbox{]} = -\/1.\+0 +1 (Right) s\mbox{[}0\mbox{]} = 1.\+0. 
+
+Function to setup geometrical information for lower-\/dimensional Face\+Elements (which are of type Q\+Spectral\+Element$<$0,1$>$). 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 122 of file Qspectral\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Face\+Element\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt(), oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number(), oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number\+\_\+resize(), oomph\+::\+Q\+Element1\+Face\+To\+Bulk\+Coordinates\+::face0(), oomph\+::\+Q\+Element1\+Face\+To\+Bulk\+Coordinates\+::face1(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Face\+Element\+::face\+\_\+to\+\_\+bulk\+\_\+coordinate\+\_\+fct\+\_\+pt(), oomph\+::\+Q\+Element1\+Bulk\+Coordinate\+Derivatives\+::faces0(), oomph\+::\+Face\+Element\+::nbulk\+\_\+value(), oomph\+::\+Face\+Element\+::nbulk\+\_\+value\+\_\+resize(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Face\+Element\+::normal\+\_\+sign(), oomph\+::\+Generalised\+Element\+::set\+\_\+halo(), and oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension().
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a1d7445c2348d96ac5349023edb150fe5}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a1d7445c2348d96ac5349023edb150fe5}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!d2shape\_local@{d2shape\_local}}
+\index{d2shape\_local@{d2shape\_local}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{d2shape\_local()}{d2shape\_local()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::d2shape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{d2psids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t. local coordinates at local coordinate s d2psids(i,0) = $ d^2 \psi_j / d s^2 $. 
+
+Second derivatives of shape functions for specific \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a747bf14338887c74303f56febdfba957}{Q\+Spectral\+Element$<$1,..$>$}} d2psids(i,0) = $ d^2 \psi_j / d s^2 $ 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da07b9d35da9debd0cd7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 584 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9118f192015bc057bf90eb0f741d5c27}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9118f192015bc057bf90eb0f741d5c27}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!dshape\_local@{dshape\_local}}
+\index{dshape\_local@{dshape\_local}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_local()}{dshape\_local()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute the geometric shape functions and derivatives w.\+r.\+t. local coordinates at local coordinate s. 
+
+Derivatives of shape functions for specific \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a747bf14338887c74303f56febdfba957}{Q\+Spectral\+Element$<$1,..$>$}} 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c21a991ac9fedf4b0c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 560 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_aea5a330832dea0920a948660745e6f01}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_aea5a330832dea0920a948660745e6f01}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!get\_s\_plot@{get\_s\_plot}}
+\index{get\_s\_plot@{get\_s\_plot}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_s\_plot()}{get\_s\_plot()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+s\+\_\+plot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const bool \&}]{use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points = {\ttfamily false} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get cector of local coordinates of plot point i (when plotting ~\newline
+ 
+
+nplot points in each "coordinate direction). 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 487 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References i, and s.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a0b5a8d5092c514611704fd4aa259fbfc}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a0b5a8d5092c514611704fd4aa259fbfc}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!invert\_jacobian\_mapping@{invert\_jacobian\_mapping}}
+\index{invert\_jacobian\_mapping@{invert\_jacobian\_mapping}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{invert\_jacobian\_mapping()}{invert\_jacobian\_mapping()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::invert\+\_\+jacobian\+\_\+mapping (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inverse\+\_\+jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the template-\/free interface for the calculation of inverse jacobian matrix. This is a one-\/dimensional element, so use the 1D version. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a42c86a7628fee00d3a9d35b935b29e48}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 463 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a7ef460d4eecb38fb0fa33b331965265c}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a7ef460d4eecb38fb0fa33b331965265c}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
+\index{local\_coordinate\_of\_node@{local\_coordinate\_of\_node}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{local\_coordinate\_of\_node()}{local\_coordinate\_of\_node()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get local coordinates of node j in the element; vector sets its own size. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22bc4ee35e4f948d8d7fba18c7b4f4c4}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 425 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References n, oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::nodal\+\_\+position(), and s.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_ad79b4f92e47f6dd7ce5793d26e26bb43}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_ad79b4f92e47f6dd7ce5793d26e26bb43}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!local\_fraction\_of\_node@{local\_fraction\_of\_node}}
+\index{local\_fraction\_of\_node@{local\_fraction\_of\_node}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{local\_fraction\_of\_node()}{local\_fraction\_of\_node()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::local\+\_\+fraction\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+fraction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the local fractino of node j in the element. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f6461cd8ebb8218502b07}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 432 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References n.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a4cf9d2148361eff47a8f72d7753104c1}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a4cf9d2148361eff47a8f72d7753104c1}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!local\_one\_d\_fraction\_of\_node@{local\_one\_d\_fraction\_of\_node}}
+\index{local\_one\_d\_fraction\_of\_node@{local\_one\_d\_fraction\_of\_node}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{local\_one\_d\_fraction\_of\_node()}{local\_one\_d\_fraction\_of\_node()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n1d,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The local one-\/d fraction is the same. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adb8ec7d2ceda37528c2d4542d572edf4}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 440 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::nodal\+\_\+position().
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_acb59fdd515326ef46eca9a065c5f6bcd}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_acb59fdd515326ef46eca9a065c5f6bcd}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!nnode\_1d@{nnode\_1d}}
+\index{nnode\_1d@{nnode\_1d}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nnode\_1d()}{nnode\_1d()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::nnode\+\_\+1d (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of nodes along each element edge. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab65c7a94dda80c1876a09ac12be4e39c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 469 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a5f590bfd5cc59a282f970a8853ad0008}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a5f590bfd5cc59a282f970a8853ad0008}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!nplot\_points@{nplot\_points}}
+\index{nplot\_points@{nplot\_points}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nplot\_points()}{nplot\_points()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::nplot\+\_\+points (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return total number of plot points (when plotting nplot points in each "coordinate direction) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 521 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_afbc5b62a126b6fcce8fffcd0a4b37b86}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_afbc5b62a126b6fcce8fffcd0a4b37b86}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
+\index{nvertex\_node@{nvertex\_node}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertex nodes in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LineElementBase_ad80307523c850d58bca7b925df15e46d}{oomph\+::\+Line\+Element\+Base}}.
+
+
+
+Definition at line 396 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9f8defda0dbde54edfb84353c6f3f794}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a9f8defda0dbde54edfb84353c6f3f794}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 472 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_ae4debc9ccd8ac671dabca7bafc657683}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_ae4debc9ccd8ac671dabca7bafc657683}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C\+\_\+style output at n\+\_\+plot points. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 476 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a20b741c9b2523979612d2b63b3b05006}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a20b741c9b2523979612d2b63b3b05006}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output. 
+
+The output function for general 1D Q\+Spectral\+Elements. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 52 of file Qspectral\+\_\+elements.\+cc.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a8951704e35bc73c46e22554c75821803}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a8951704e35bc73c46e22554c75821803}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output at n\+\_\+plot points. 
+
+The output function for nplot points in each coordinate direction. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 84 of file Qspectral\+\_\+elements.\+cc.
+
+
+
+References i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_ae69c91dbf1b80e9fef73ada0f899b8c8}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_ae69c91dbf1b80e9fef73ada0f899b8c8}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!s\_max@{s\_max}}
+\index{s\_max@{s\_max}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{s\_max()}{s\_max()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::s\+\_\+max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Max. value of local coordinate. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a64adbe9356927133686ab53f00341ea8}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 393 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a32d567a3c558e28710aed1e8fd83c4ae}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a32d567a3c558e28710aed1e8fd83c4ae}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!s\_min@{s\_min}}
+\index{s\_min@{s\_min}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{s\_min()}{s\_min()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::s\+\_\+min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Min. value of local coordinate. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a35f0803115b68bd162c07de04eeb6c5c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 390 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a20a70f397d718449bcb16e6e60ea74a1}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a20a70f397d718449bcb16e6e60ea74a1}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!shape@{shape}}
+\index{shape@{shape}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Calculate the geometric shape functions at local coordinate s. 
+
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} function for specific \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a747bf14338887c74303f56febdfba957}{Q\+Spectral\+Element$<$1,..$>$}} 
+
+Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 544 of file Qspectral\+\_\+elements.\+h.
+
+
+
+References i, and s.
+
+
+
+Referenced by oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+interpolated\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a250b5613ab76f43d9cd67dc01b8eb8fe}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a250b5613ab76f43d9cd67dc01b8eb8fe}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!tecplot\_zone\_string@{tecplot\_zone\_string}}
+\index{tecplot\_zone\_string@{tecplot\_zone\_string}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{tecplot\_zone\_string()}{tecplot\_zone\_string()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+std\+::string \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::tecplot\+\_\+zone\+\_\+string (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return string for tecplot zone header (when plotting nplot points in each "coordinate direction) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 512 of file Qspectral\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a6106b1fc74eeab6848f3b03dba512f09}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a6106b1fc74eeab6848f3b03dba512f09}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
+\index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to the j-\/th vertex node in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LineElementBase_ab878e4c4276da4cefa4302cff8a7e6f8}{oomph\+::\+Line\+Element\+Base}}.
+
+
+
+Definition at line 400 of file Qspectral\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a0e7111fe24ec8864f7de58997ec74f03}\label{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a0e7111fe24ec8864f7de58997ec74f03}} 
+\index{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}!integral@{integral}}
+\index{integral@{integral}!oomph::QSpectralElement$<$ 1, NNODE\_1D $>$@{oomph::QSpectralElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{integral}{integral}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{Gauss\+Lobatto\+Legendre}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$ \mbox{\hyperlink{classoomph_1_1QSpectralElement}{oomph\+::\+Q\+Spectral\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::integral\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default integration rule\+: Gaussian integration of same \textquotesingle{}order\textquotesingle{} as the element. 
+
+1D Q\+Legendre\+Elements
+
+Assign the static integral 
+
+Definition at line 369 of file Qspectral\+\_\+elements.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Qspectral__elements_8h}{Qspectral\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{Qspectral__elements_8cc}{Qspectral\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

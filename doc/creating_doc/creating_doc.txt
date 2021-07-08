@@ -1,0 +1,238 @@
+\mainpage Creating documentation
+
+This document provides an overview of how to prepare documentation for
+inclusion within \c oomph-lib.
+
+<HR>
+<HR>
+
+\section setup Setting up the documentation
+
+\subsection makefiles Makefiles
+
+-# Within an appropriate subdirectory of the \c doc directory,
+   create a directory for your documentation, e.g.
+   \code
+   cd doc/axisym_navier_stokes/
+   mkdir spin_up
+   \endcode
+-# Add this new directory to the parent directory's \c Makefile.am
+-# Add the entry \c doc/axisym_navier_stokes/spin_up to the file \c
+   config/configure. \c ac_scripts/doc.\c dir_list
+-# Create a new \c *.\c txt file with the same name as the
+   newly-created directory, e.g.
+   \code
+   touch spin_up.txt
+   \endcode
+   This is the "source" file from which the documentation will be
+   generated. 
+-# From an existing documentation directory, copy across the following
+   files into the newly created directory:
+   - \c Makefile.am
+   - \c Doxyfile
+-# In \c Makefile.am after \c "docfile =", add the stem of the \c *.\c
+   txt file created in step 4, e.g.
+   \code
+   docfile = spin_up
+   \endcode
+-# In \c Doxyfile update the (relative) path to the demo-driver directory. Two
+   entries must be updated, one following \c "INPUT" and the other
+   following \c "EXAMPLE_PATH". To find these, search for
+   \c "../..".
+-# Return to \c oomph-lib's top-level directory and re-run
+   \c autogen.\c sh:
+   \code
+   ./autogen.sh 
+   \endcode
+
+\subsection figures_setup Figures
+
+If your documentation is to contain figures or animations, the
+   following subdirectories must be created within your documentation
+   directory:
+   - \c figures
+     - This must contain all figures used in the documentation in both
+   \c *.\c gif and \c *.\c eps formats (\c *.\c gif is used for the \c html
+   documentation whilst \c *.\c eps is used for \c LaTeX).
+   - \c non_distfigures
+     - This contains any additional files (etc.) used to create or 
+   maintain the documentation. It is good practise to always keep any
+   \c *.\c lay and \c *.\c lpk files that were used to create
+   figures, along with any macro (\c *.\c mcr) files.
+
+<HR>
+
+\section write Writing the documentation
+
+The "source" of the documentation is contained in the \c *.\c txt file (a
+mixture of \c html/doxygen markup). The title must follow the tag
+\c \\mainpage and be all on one line, e.g.
+\code
+\mainpage Demo problem: Spin-up of a viscous fluid
+\endcode
+The main body of the text just follows as in a \c LaTeX document, with
+line spacings indicating paragraph breaks.
+
+\subsection html HTML
+
+Any standard html tags can be used (for example, \c \<hr\> inserts a
+horizontal line). Hyperlinks are inserted in the following way:
+\code
+This is illustrated in an <A HREF="../figures/my_movie.avi">animation</A>.
+\endcode
+Note that the \c ".." is present in the path above because during the
+build process the documentation is created in subdirectories of the
+directory in which the source file is located. See the section \ref
+generate below for more details.
+
+To link to the documentation of another demo driver, \c
+poisson/one_d_poisson for example, hyperlink to the \c index.html file
+within the \c html directory of that demo driver's documentation. Note
+that because the processed (\c html) version of the documentation you are
+working on will live in its own \c html subdirectory, it is necessary
+to go up three directories in order to be in \c oomph-lib's \c doc directory.
+\code
+...see <A HREF="../../../poisson/one_d_poisson/html/index.html">the
+Poisson tutorial</A>.
+\endcode
+
+\subsection sections Sections
+
+Sections are created as follows:
+\code
+\section section_label This is the title of my section
+\endcode
+
+Likewise, subsections are created in the following way:
+\code
+\subsection subsection_label This is the title of my subsection
+\endcode
+
+Any \c LaTeX section types can be used in this way. To link to a
+section within a document, use the syntax \c \\ref \c section_label,
+as in this example:
+\code
+...can be found in the section \ref theory below.
+\endcode
+
+\subsection equations Equations
+
+Equations are generated as in \c LaTeX except \c \\f must be added
+before \c \$ or \c [, \c ].
+- E.g. inline maths:
+  \code
+  ...is given by \f$ \sin(x) \f$
+  \endcode
+- E.g. equation environment:
+  \code
+  \f[
+  \sin(x)
+  \f]
+  \endcode
+
+To label equations, the normal \c LaTeX system cannot be used. Instead,
+mark an equation with the tag \c \@E\c [LABEL\c ]\@ and refer to it later
+using \c \@R\c [LABEL\c ]\@, e.g.
+
+@I w 0.71\textwidth labelling_example " "
+
+and then later on...
+\code
+...is given by equation (@R[eqn:cont]@).
+\endcode
+
+\subsection lists Lists
+
+To create bullet point lists, precede each item with a \c -, e.g.
+\code
+- First item
+- Second item
+\endcode
+To create enumerated lists, precede each item with a \c -#, e.g.
+\code
+-# First item
+-# Second item
+\endcode
+
+\subsection figures Figures
+
+A figure with the filename \c my_figure.\c * is inserted in the
+following way:
+
+@I w 0.71\textwidth insert_figures " "
+
+Note the space between the last character in the caption and the
+quotation marks. Like the equation labelling, this line is processed
+by the \c txt2h.sh script (which is run automatically as part of the
+\c make process) and replaced with the necessary commands that tell
+\c doxygen
+to use the \c *.\c gif files for the html documentation and the \c *.\c
+eps files for the \c LaTeX documentation.
+
+\subsection code Code
+
+To insert single words of code into prose, precede the word with a
+\c \\c, e.g.
+\code
+The function \c FiniteElement::output(...) is used to...
+\endcode
+
+To include blocks of code such as the one immediately above this line
+of text, use the \c \\code environment, e.g.
+
+@I w 0.71\textwidth code_environment " "
+
+To include sections of the demo code which you are documenting,
+e.g. the main function of \c spin_up.\c cc, use the following syntax:
+\code
+\dontinclude spin_up.cc
+\skipline start_of_main
+\until end of main
+\endcode
+This only works if \c start_of_main exists somewhere in \c spin_up.\c cc
+file, but any word(s) can be used as a start/endpoint. However, <B>do
+not use dashes as targets</B> because more recent versions of doxygen
+get very confused by this, so <b>don't</b> do
+\code
+\skipline ----
+\endcode
+say.
+
+
+\subsection misc Miscellaneous
+
+- To tell \c doxygen to ignore everything in the source file below a
+  certain point, denote this point with \c \@\@END\@\@.
+- To tell \c doxygen that a certain section of the source file is only
+  to be included in the \c html version of the documentation and
+  omitted in the \c LaTeX version, enclose this section within \c
+  \c \\htmlonly and \c \\endhtmlonly tags. CAREFUL: With recent
+  version of doxygen, this has caused problems with certain commands
+  not being interpreted correctly. Best not to use this... The
+  following item is a work-around:
+- Add the variable \c suppress_latex_in_this_directory to the
+  Makefile.am and set it to 1 to bypass the generation of latex-based
+  documentation for a specific directory (which may contain difficult
+  to render tables etc. and therefore cause latex to hang...). Here's
+  an example of a Makefile.am from the directory
+  \c doc/order_of_action_functions:
+  \include Makefile.am 
+- To tell \c doxygen that a certain section of the source file is only
+  to be included in the \c LaTeX version of the documentation and
+  omitted in the \c html version, enclose this section within \c
+  \c \\latexonly and \c \\endlatexonly tags.
+.
+<HR>
+
+\section generate Generating the documentation
+
+Once the source file has been written, simply type \c make in the
+documentation directory to build the \c html and \c LaTeX versions,
+e.g.
+\code
+cd doc/axisym_navier_stokes/spin_up
+make
+\endcode
+Two subdirectories, \c html and \c latex, are now created containing
+the two versions of the documentation. A \c *.\c pdf file of the
+\c LaTeX version is also placed in the current directory.

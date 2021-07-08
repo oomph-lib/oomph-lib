@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: rayleigh_instability_surfactant.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">rayleigh_instability_surfactant.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a233bc0f68bb272cabbcf16fe45048a6a"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo &amp;F A&lt; em &gt; Int J Multiphase&lt;/em &gt; vol&lt; b &gt;&lt;/b &gt; Our is different from their approach as described in detail in our&lt; a href=&quot;../../../navier_stokes/surface_theory/html/index.html&quot;&gt; free surface theory document&lt;/a &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The unsteady axisymmetric free surface Navier Stokes equations with insoluble surfactant&lt;/B &gt;&lt;/CENTER &gt; Solve f[Re \left[St \frac{\partial u_r}{\partial t}+u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r}+u_z \frac{\partial u_r}{\partial z}\right]=-\frac{\partial p}{\partial r}+\left[\frac{\partial^2 u_r}{\partial r^2}+\frac{1}{r}\frac{\partial u_r}{\partial r} - \frac{u_r}{r^2}+\frac{\partial^2 u_r}{\partial z^2}\right],\f] f[Re \left[St \frac{\partial u_\theta}{\partial t}+u_r \frac{\partial u_\theta}{\partial r}+\frac{u_r u_\theta}{r}+u_z \frac{\partial u_\theta}{\partial z}\right]=+\left[\frac{\partial^2 u_\theta}{\partial r^2}+\frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2}+\frac{\partial^2 u_\theta}{\partial z^2}\right],\f] f[Re \left[St \frac{\partial u_z}{\partial t}+u_r \frac{\partial u_z}{\partial r}+u_z \frac{\partial u_z}{\partial z}\right]=-\frac{\partial p}{\partial z}+\left[\frac{\partial^2 u_z}{\partial r^2}+\frac{1}{r}\frac{\partial u_z}{\partial r}+\frac{\partial^2 u_z}{\partial z^2}\right],\f] and f[\frac{\partial u_r}{\partial r}+\frac{u_r}{r}+\frac{\partial u_z}{\partial z}=0\ \ \ \ \ \ \ \ \ \ @E[eqn:NSlower]@\f] in the bulk fluid The governing equations are subject to the no slip boundary conditions f[u_r=u_\theta=u_z=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@\f] on the outer solid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#a233bc0f68bb272cabbcf16fe45048a6a">boundary</a> (\f$ r=1.0 \f$) and the symmetry boundary conditions \f[u_z</td></tr>
+<tr class="separator:a233bc0f68bb272cabbcf16fe45048a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af415b55476c0111c1b30cab7de5fd53a"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#af415b55476c0111c1b30cab7de5fd53a">domain</a></td></tr>
+<tr class="separator:af415b55476c0111c1b30cab7de5fd53a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02737f78705484be13c882d6cec1f6e8"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this tutorial we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a></td></tr>
+<tr class="separator:a02737f78705484be13c882d6cec1f6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0768da85a4223a569ed72e9b3e9897"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#a2b0768da85a4223a569ed72e9b3e9897">interface</a></td></tr>
+<tr class="separator:a2b0768da85a4223a569ed72e9b3e9897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6a8622d4d6128a74e0b30f9106c7902"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#ab6a8622d4d6128a74e0b30f9106c7902">Campana</a></td></tr>
+<tr class="separator:ab6a8622d4d6128a74e0b30f9106c7902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5da5fdd1ba4f43318476915a717bf7d7"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo &amp;F A&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#a5da5fdd1ba4f43318476915a717bf7d7">Saita</a></td></tr>
+<tr class="separator:a5da5fdd1ba4f43318476915a717bf7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80766481bbea0115170fbcdc99054639"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo &amp;F A&lt; em &gt; Int J Multiphase&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#a80766481bbea0115170fbcdc99054639">Flow</a></td></tr>
+<tr class="separator:a80766481bbea0115170fbcdc99054639"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16362a0b4a19fa581c27df058ba36dbb"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo &amp;F A&lt; em &gt; Int J Multiphase&lt;/em &gt; vol&lt; b &gt;&lt;/b &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#a16362a0b4a19fa581c27df058ba36dbb">pp</a></td></tr>
+<tr class="separator:a16362a0b4a19fa581c27df058ba36dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7620b3c5eb48bae0c739020bba122bb3"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo &amp;F A&lt; em &gt; Int J Multiphase&lt;/em &gt; vol&lt; b &gt;&lt;/b &gt; Our&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#a7620b3c5eb48bae0c739020bba122bb3">formulation</a></td></tr>
+<tr class="separator:a7620b3c5eb48bae0c739020bba122bb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fef11679a60bc7037b6e2b859781ad9"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo &amp;F A&lt; em &gt; Int J Multiphase&lt;/em &gt; vol&lt; b &gt;&lt;/b &gt; Our&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#a5fef11679a60bc7037b6e2b859781ad9">however</a></td></tr>
+<tr class="separator:a5fef11679a60bc7037b6e2b859781ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56933c4e69e45788991a5fdc8ba11a1d"><td class="memItemLeft" align="right" valign="top">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo &amp;F A&lt; em &gt; Int J Multiphase&lt;/em &gt; vol&lt; b &gt;&lt;/b &gt; Our is different from their approach as described in detail in our&lt; a href=&quot;../../../navier_stokes/surface_theory/html/index.html&quot;&gt; free surface theory document&lt;/a &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The unsteady axisymmetric free surface Navier Stokes equations with insoluble surfactant&lt;/B &gt;&lt;/CENTER &gt; Solve f[Re \left[St \frac{\partial u_r}{\partial t}+u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r}+u_z \frac{\partial u_r}{\partial z}\right]=-\frac{\partial p}{\partial r}+\left[\frac{\partial^2 u_r}{\partial r^2}+\frac{1}{r}\frac{\partial u_r}{\partial r} - \frac{u_r}{r^2}+\frac{\partial^2 u_r}{\partial z^2}\right],\f] f[Re \left[St \frac{\partial u_\theta}{\partial t}+u_r \frac{\partial u_\theta}{\partial r}+\frac{u_r u_\theta}{r}+u_z \frac{\partial u_\theta}{\partial z}\right]=+\left[\frac{\partial^2 u_\theta}{\partial r^2}+\frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2}+\frac{\partial^2 u_\theta}{\partial z^2}\right],\f] f[Re \left[St \frac{\partial u_z}{\partial t}+u_r \frac{\partial u_z}{\partial r}+u_z \frac{\partial u_z}{\partial z}\right]=-\frac{\partial p}{\partial z}+\left[\frac{\partial^2 u_z}{\partial r^2}+\frac{1}{r}\frac{\partial u_z}{\partial r}+\frac{\partial^2 u_z}{\partial z^2}\right],\f] and f[\frac{\partial u_r}{\partial r}+\frac{u_r}{r}+\frac{\partial u_z}{\partial z}=0\ \ \ \ \ \ \ \ \ \ @E[eqn:NSlower]@\f] in the bulk fluid The governing equations are subject to the no slip <a class="el" href="rayleigh__instability__surfactant_8txt.html#a233bc0f68bb272cabbcf16fe45048a6a">boundary</a> conditions f[u_r=u_\theta=u_z=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@\f] on the outer solid E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]}n_j=\tau_{ij}^{[1]}n_j+\frac{1}{Ca}\left(\sigma \kappa n_i+\frac{\partial \sigma}{\partial s} t_{i} \right).\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] where f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rayleigh__instability__surfactant_8txt.html#a56933c4e69e45788991a5fdc8ba11a1d">sigma</a></td></tr>
+<tr class="separator:a56933c4e69e45788991a5fdc8ba11a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a233bc0f68bb272cabbcf16fe45048a6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a233bc0f68bb272cabbcf16fe45048a6a">&#9670;&nbsp;</a></span>boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt;HR&gt;&lt;HR&gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo&amp; F A&lt;em&gt; Int J Multiphase&lt;/em&gt; vol&lt;b&gt;&lt;/b&gt; Our is different from their approach as described in detail in our&lt;a href=&quot;../../../navier_stokes/surface_theory/html/index.html&quot;&gt; free surface theory document&lt;/a&gt;&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; The unsteady axisymmetric free surface Navier Stokes equations with insoluble surfactant&lt;/B&gt;&lt;/CENTER&gt; Solve f [Re \left[ St \frac{\partial u_r}{\partial t} + u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r} + u_z \frac{\partial u_r}{\partial z}\right] = -\frac{\partial p}{\partial r}+ \left[ \frac{\partial^2 u_r}{\partial r^2} + \frac{1}{r}\frac{\partial u_r}{\partial r} - \frac{u_r}{r^2} + \frac{\partial^2 u_r}{\partial z^2}\right],\f] f [Re \left[ St \frac{\partial u_\theta}{\partial t} + u_r \frac{\partial u_\theta}{\partial r} + \frac{u_r u_\theta}{r} + u_z \frac{\partial u_\theta}{\partial z}\right]= + \left[ \frac{\partial^2 u_\theta}{\partial r^2} + \frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2} + \frac{\partial^2 u_\theta}{\partial z^2}\right],\f] f [Re \left[ St \frac{\partial u_z}{\partial t} + u_r \frac{\partial u_z}{\partial r} + u_z \frac{\partial u_z}{\partial z}\right] = -\frac{\partial p}{\partial z}+ \left[ \frac{\partial^2 u_z}{\partial r^2} + \frac{1}{r}\frac{\partial u_z}{\partial r} + \frac{\partial^2 u_z}{\partial z^2}\right],\f] and f [\frac{\partial u_r}{\partial r}+ \frac{u_r}{r}+ \frac{\partial u_z}{\partial z} = 0\ \ \ \ \ \ \ \ \ \ @E[eqn:NSlower]@\f] in the bulk fluid The governing equations are subject to the no slip boundary conditions f [u_r = u_\theta = u_z = 0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@\f] on the outer solid boundary </td>
+          <td>(</td>
+          <td class="paramtype">\f$&#160;</td>
+          <td class="paramname"><em>r</em> = <code>1.0&#160;\f$</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ab6a8622d4d6128a74e0b30f9106c7902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6a8622d4d6128a74e0b30f9106c7902">&#9670;&nbsp;</a></span>Campana</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt;HR&gt;&lt;HR&gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D Campana</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00024">24</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+</div>
+</div>
+<a id="af415b55476c0111c1b30cab7de5fd53a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af415b55476c0111c1b30cab7de5fd53a">&#9670;&nbsp;</a></span>domain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi domain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00004">4</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+</div>
+</div>
+<a id="a80766481bbea0115170fbcdc99054639"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80766481bbea0115170fbcdc99054639">&#9670;&nbsp;</a></span>Flow</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt;HR&gt;&lt;HR&gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo&amp; F A&lt;em&gt; Int J Multiphase Flow</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00024">24</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7620b3c5eb48bae0c739020bba122bb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7620b3c5eb48bae0c739020bba122bb3">&#9670;&nbsp;</a></span>formulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt;HR&gt;&lt;HR&gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo&amp; F A&lt;em&gt; Int J Multiphase&lt;/em&gt; vol&lt;b&gt;&lt;/b&gt; Our formulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00025">25</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+</div>
+</div>
+<a id="a5fef11679a60bc7037b6e2b859781ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fef11679a60bc7037b6e2b859781ad9">&#9670;&nbsp;</a></span>however</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt;HR&gt;&lt;HR&gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo&amp; F A&lt;em&gt; Int J Multiphase&lt;/em&gt; vol&lt;b&gt;&lt;/b&gt; Our however</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00025">25</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2b0768da85a4223a569ed72e9b3e9897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b0768da85a4223a569ed72e9b3e9897">&#9670;&nbsp;</a></span>interface</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt;HR&gt;&lt;HR&gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the interface</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00022">22</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+</div>
+</div>
+<a id="a16362a0b4a19fa581c27df058ba36dbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16362a0b4a19fa581c27df058ba36dbb">&#9670;&nbsp;</a></span>pp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt;HR&gt;&lt;HR&gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo&amp; F A&lt;em&gt; Int J Multiphase&lt;/em&gt; vol&lt;b&gt;&lt;/b&gt; pp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00025">25</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+</div>
+</div>
+<a id="a5da5fdd1ba4f43318476915a717bf7d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5da5fdd1ba4f43318476915a717bf7d7">&#9670;&nbsp;</a></span>Saita</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt;HR&gt;&lt;HR&gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo&amp; F A Saita</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00024">24</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+</div>
+</div>
+<a id="a56933c4e69e45788991a5fdc8ba11a1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56933c4e69e45788991a5fdc8ba11a1d">&#9670;&nbsp;</a></span>sigma</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this <a class="el" href="rayleigh__instability__surfactant_8txt.html#a02737f78705484be13c882d6cec1f6e8">tutorial</a> we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt;HR&gt;&lt;HR&gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo&amp; F A&lt;em&gt; Int J Multiphase&lt;/em&gt; vol&lt;b&gt;&lt;/b&gt; Our is different from their approach as described in detail in our&lt;a href=&quot;../../../navier_stokes/surface_theory/html/index.html&quot;&gt; free surface theory document&lt;/a&gt;&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; The unsteady axisymmetric free surface Navier Stokes equations with insoluble surfactant&lt;/B&gt;&lt;/CENTER&gt; Solve f [Re \left[ St \frac{\partial u_r}{\partial t} + u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r} + u_z \frac{\partial u_r}{\partial z}\right] = -\frac{\partial p}{\partial r}+ \left[ \frac{\partial^2 u_r}{\partial r^2} + \frac{1}{r}\frac{\partial u_r}{\partial r} - \frac{u_r}{r^2} + \frac{\partial^2 u_r}{\partial z^2}\right],\f] f [Re \left[ St \frac{\partial u_\theta}{\partial t} + u_r \frac{\partial u_\theta}{\partial r} + \frac{u_r u_\theta}{r} + u_z \frac{\partial u_\theta}{\partial z}\right]= + \left[ \frac{\partial^2 u_\theta}{\partial r^2} + \frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2} + \frac{\partial^2 u_\theta}{\partial z^2}\right],\f] f [Re \left[ St \frac{\partial u_z}{\partial t} + u_r \frac{\partial u_z}{\partial r} + u_z \frac{\partial u_z}{\partial z}\right] = -\frac{\partial p}{\partial z}+ \left[ \frac{\partial^2 u_z}{\partial r^2} + \frac{1}{r}\frac{\partial u_z}{\partial r} + \frac{\partial^2 u_z}{\partial z^2}\right],\f] and f [\frac{\partial u_r}{\partial r}+ \frac{u_r}{r}+ \frac{\partial u_z}{\partial z} = 0\ \ \ \ \ \ \ \ \ \ @E[eqn:NSlower]@\f] in the bulk fluid The governing equations are subject to the no slip <a class="el" href="rayleigh__instability__surfactant_8txt.html#a233bc0f68bb272cabbcf16fe45048a6a">boundary</a> conditions f [u_r = u_\theta = u_z = 0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@\f] on the outer solid E [eqn:kinematicBC] f and the dynamic condition f [\tau_{ij}^{[2]}n_j = \tau_{ij}^{[1]}n_j+\frac{1}{Ca}\left (\sigma \kappa n_i+ \frac{\partial \sigma}{\partial s} t_{i} \right).\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] where f sigma</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <a class="code" href="rayleigh__instability__surfactant_8txt.html#a56933c4e69e45788991a5fdc8ba11a1d">\sigma</a>^{*} / \sigma_{ref} \f$ is the dimensionless</div>
+<div class="line">surface tension relative to a reference value.</div>
+<div class="line"> </div>
+<div class="line">An insoluble surfactant of surface concentration \f$ \Gamma^{*}\f$ is</div>
+<div class="line"> non-dimensionalised with respect to a reference value \f$ \Gamma =</div>
+<div class="line"> \Gamma^{*}/\Gamma_{ref} \f$ and obeys the surface transport equation</div>
+<div class="line"> \f[ St \left(\frac{\partial \Gamma}{\partial t} -</div>
+<div class="line">   \dot{\mbox{\boldmath$R$}} \mbox{\boldmath$\cdot$} </div>
+<div class="line">   \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right) +</div>
+<div class="line">   \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} </div>
+<div class="line">   \left(\Gamma \mbox{\boldmath$U$}\right) =</div>
+<div class="line">   \frac{1}{Pe_{s}}</div>
+<div class="line"> \mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$}</div>
+<div class="line"> \mbox{\boldmath$\nabla$}_{\!\!_{S}}</div>
+<div class="line">   \Gamma  \f]</div>
+<div class="line">on the <a class="code" href="rayleigh__instability__surfactant_8txt.html#a2b0768da85a4223a569ed72e9b3e9897">interface</a>.</div>
+<div class="line"> </div>
+<div class="line">The surface tension is a <span class="keyword">function</span> of the surfactant concentration \f$</div>
+<div class="line"><a class="code" href="rayleigh__instability__surfactant_8txt.html#a56933c4e69e45788991a5fdc8ba11a1d">\sigma</a>(\Gamma)\f$ and a linear equation of state is chosen </div>
+<div class="line">\f[ <a class="code" href="rayleigh__instability__surfactant_8txt.html#a56933c4e69e45788991a5fdc8ba11a1d">\sigma</a> = 1 - \beta (\Gamma - 1).</div>
+<div class="line"> \f]</div>
+<div class="line"> </div>
+<div class="line">The symmetry <a class="code" href="rayleigh__instability__surfactant_8txt.html#a233bc0f68bb272cabbcf16fe45048a6a">boundary</a> conditions on the bottom (\f$ z = 0.0 \f$) and</div>
+<div class="line">top (\f$ z = \pi / \alpha \f$) boundaries are</div>
+<div class="line"> \f[ \frac{\partial \Gamma}{\partial z} = 0. \f]</div>
+<div class="line"> </div>
+<div class="line">Initially</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00114">114</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="interface__elements_8cc_source.html#l00088">oomph::PointFluidInterfaceBoundingElement::fill_in_generic_residual_contribution_interface_boundary()</a>, <a class="el" href="interface__elements_8cc_source.html#l00234">oomph::LineFluidInterfaceBoundingElement::fill_in_generic_residual_contribution_interface_boundary()</a>, <a class="el" href="rayleigh__instability__soluble__surfactant_8cc_source.html#l00355">ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement&lt; ELEMENT &gt;::output()</a>, and <a class="el" href="rayleigh__instability__insoluble__surfactant_8cc_source.html#l00575">oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement&lt; ELEMENT &gt;::output()</a>.</p>
+
+</div>
+</div>
+<a id="a02737f78705484be13c882d6cec1f6e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02737f78705484be13c882d6cec1f6e8">&#9670;&nbsp;</a></span>tutorial</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this tutorial we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this tutorial</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rayleigh__instability__surfactant_8txt_source.html#l00010">10</a> of file <a class="el" href="rayleigh__instability__surfactant_8txt_source.html">rayleigh_instability_surfactant.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="arayleigh__instability__surfactant_8txt_html_a2b0768da85a4223a569ed72e9b3e9897"><div class="ttname"><a href="rayleigh__instability__surfactant_8txt.html#a2b0768da85a4223a569ed72e9b3e9897">interface</a></div><div class="ttdeci">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this tutorial we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the interface</div><div class="ttdef"><b>Definition:</b> <a href="rayleigh__instability__surfactant_8txt_source.html#l00022">rayleigh_instability_surfactant.txt:22</a></div></div>
+<div class="ttc" id="arayleigh__instability__surfactant_8txt_html_a233bc0f68bb272cabbcf16fe45048a6a"><div class="ttname"><a href="rayleigh__instability__surfactant_8txt.html#a233bc0f68bb272cabbcf16fe45048a6a">boundary</a></div><div class="ttdeci">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this tutorial we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo &amp;F A&lt; em &gt; Int J Multiphase&lt;/em &gt; vol&lt; b &gt;&lt;/b &gt; Our is different from their approach as described in detail in our&lt; a href=&quot;../../../navier_stokes/surface_theory/html/index.html&quot;&gt; free surface theory document&lt;/a &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The unsteady axisymmetric free surface Navier Stokes equations with insoluble surfactant&lt;/B &gt;&lt;/CENTER &gt; Solve f[Re \left[St \frac{\partial u_r}{\partial t}+u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r}+u_z \frac{\partial u_r}{\partial z}\right]=-\frac{\partial p}{\partial r}+\left[\frac{\partial^2 u_r}{\partial r^2}+\frac{1}{r}\frac{\partial u_r}{\partial r} - \frac{u_r}{r^2}+\frac{\partial^2 u_r}{\partial z^2}\right],\f] f[Re \left[St \frac{\partial u_\theta}{\partial t}+u_r \frac{\partial u_\theta}{\partial r}+\frac{u_r u_\theta}{r}+u_z \frac{\partial u_\theta}{\partial z}\right]=+\left[\frac{\partial^2 u_\theta}{\partial r^2}+\frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2}+\frac{\partial^2 u_\theta}{\partial z^2}\right],\f] f[Re \left[St \frac{\partial u_z}{\partial t}+u_r \frac{\partial u_z}{\partial r}+u_z \frac{\partial u_z}{\partial z}\right]=-\frac{\partial p}{\partial z}+\left[\frac{\partial^2 u_z}{\partial r^2}+\frac{1}{r}\frac{\partial u_z}{\partial r}+\frac{\partial^2 u_z}{\partial z^2}\right],\f] and f[\frac{\partial u_r}{\partial r}+\frac{u_r}{r}+\frac{\partial u_z}{\partial z}=0\ \ \ \ \ \ \ \ \ \ @E[eqn:NSlower]@\f] in the bulk fluid The governing equations are subject to the no slip boundary conditions f[u_r=u_\theta=u_z=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@\f] on the outer solid boundary(\f$ r=1.0 \f$) and the symmetry boundary conditions \f[u_z</div></div>
+<div class="ttc" id="arayleigh__instability__surfactant_8txt_html_a56933c4e69e45788991a5fdc8ba11a1d"><div class="ttname"><a href="rayleigh__instability__surfactant_8txt.html#a56933c4e69e45788991a5fdc8ba11a1d">sigma</a></div><div class="ttdeci">mainpage The Rayleigh Plateau instability in the presence of an insoluble surfactant In this tutorial we present an example of surface transport equations in a free surface Navier Stokes problem This is a multi multi physics problem because there is a coupling between the equations on the surface and those in the bulk The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension In this we describe how to use the existing framework to create surface transport equations and how to include them in a free surface problem&lt; HR &gt;&lt; HR &gt; section example_problem The example problem The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the we reproduce some of the results given in A D model of Rayleigh instability in capillary tubes surfactant effects by D J Di Paolo &amp;F A&lt; em &gt; Int J Multiphase&lt;/em &gt; vol&lt; b &gt;&lt;/b &gt; Our is different from their approach as described in detail in our&lt; a href=&quot;../../../navier_stokes/surface_theory/html/index.html&quot;&gt; free surface theory document&lt;/a &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The unsteady axisymmetric free surface Navier Stokes equations with insoluble surfactant&lt;/B &gt;&lt;/CENTER &gt; Solve f[Re \left[St \frac{\partial u_r}{\partial t}+u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r}+u_z \frac{\partial u_r}{\partial z}\right]=-\frac{\partial p}{\partial r}+\left[\frac{\partial^2 u_r}{\partial r^2}+\frac{1}{r}\frac{\partial u_r}{\partial r} - \frac{u_r}{r^2}+\frac{\partial^2 u_r}{\partial z^2}\right],\f] f[Re \left[St \frac{\partial u_\theta}{\partial t}+u_r \frac{\partial u_\theta}{\partial r}+\frac{u_r u_\theta}{r}+u_z \frac{\partial u_\theta}{\partial z}\right]=+\left[\frac{\partial^2 u_\theta}{\partial r^2}+\frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2}+\frac{\partial^2 u_\theta}{\partial z^2}\right],\f] f[Re \left[St \frac{\partial u_z}{\partial t}+u_r \frac{\partial u_z}{\partial r}+u_z \frac{\partial u_z}{\partial z}\right]=-\frac{\partial p}{\partial z}+\left[\frac{\partial^2 u_z}{\partial r^2}+\frac{1}{r}\frac{\partial u_z}{\partial r}+\frac{\partial^2 u_z}{\partial z^2}\right],\f] and f[\frac{\partial u_r}{\partial r}+\frac{u_r}{r}+\frac{\partial u_z}{\partial z}=0\ \ \ \ \ \ \ \ \ \ @E[eqn:NSlower]@\f] in the bulk fluid The governing equations are subject to the no slip boundary conditions f[u_r=u_\theta=u_z=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@\f] on the outer solid E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]}n_j=\tau_{ij}^{[1]}n_j+\frac{1}{Ca}\left(\sigma \kappa n_i+\frac{\partial \sigma}{\partial s} t_{i} \right).\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] where f sigma</div><div class="ttdef"><b>Definition:</b> <a href="rayleigh__instability__surfactant_8txt_source.html#l00114">rayleigh_instability_surfactant.txt:114</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:30
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+\hypertarget{unstructured__two__d__solid_8cc}{}\doxysection{unstructured\+\_\+two\+\_\+d\+\_\+solid.\+cc File Reference}
+\label{unstructured__two__d__solid_8cc}\index{unstructured\_two\_d\_solid.cc@{unstructured\_two\_d\_solid.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticTriangleMesh}{Elastic\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\begin{DoxyCompactList}\small\item\em Triangle-\/based mesh upgraded to become a solid mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\begin{DoxyCompactList}\small\item\em Unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{Global\+\_\+\+Physical\+\_\+\+Variables\+::gravity}} (const double \&time, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
+\begin{DoxyCompactList}\small\item\em Constant pressure load. The arguments to this function are imposed on us by the Solid\+Traction\+Elements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{unstructured__two__d__solid_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve an unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{unstructured__two__d__solid_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{unstructured__two__d__solid_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{unstructured\_two\_d\_solid.cc@{unstructured\_two\_d\_solid.cc}!main@{main}}
+\index{main@{main}!unstructured\_two\_d\_solid.cc@{unstructured\_two\_d\_solid.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve an unstructured solid problem. 
+
+
+
+Definition at line 328 of file unstructured\+\_\+two\+\_\+d\+\_\+solid.\+cc.
+
+
+
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu, Global\+\_\+\+Physical\+\_\+\+Variables\+::P, and problem.
+

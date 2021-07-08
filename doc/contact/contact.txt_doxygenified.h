@@ -1,0 +1,53 @@
+/**
+
+\mainpage Contact/Get Involved
+
+We welcome any feedback (such as bug reports, suggestions for improvement and
+other constructive criticism) and would particularly 
+love to hear from you if the library has helped you to solve 
+any of your problems. 
+
+We also welcome contributions to the library itself, in the form
+of
+- Additional demo codes/tutorials
+- Code that provides additional functionality to the library. 
+. 
+The \c oomph-lib developers can be contacted at
+<CENTER> 
+
+\htmlonly
+<p>oomph-lib@<span style="display:none;">null</span>maths.<span style="display:none;"> hello </span>man.<span style="display:none;">nonsense</span>ac.uk</p>
+\endhtmlonly
+</CENTER> 
+
+or via snail mail to:
+
+
+
+
+<tt>
+Matthias Heil and Andrew Hazel
+\n
+School of Mathematics
+\n
+Oxford Road
+\n
+University of Manchester
+\n
+Oxford Road
+\n
+Manchester M13 9PL
+\n
+UK
+ </tt>
+
+
+
+ 
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

@@ -1,0 +1,186 @@
+\hypertarget{classoomph_1_1StrainEnergyFunction}{}\doxysection{oomph\+::Strain\+Energy\+Function Class Reference}
+\label{classoomph_1_1StrainEnergyFunction}\index{oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}}
+
+
+Base class for strain energy functions to be used in solid mechanics computations.  
+
+
+
+
+{\ttfamily \#include $<$constitutive\+\_\+laws.\+h$>$}
+
+Inheritance diagram for oomph\+::Strain\+Energy\+Function\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1StrainEnergyFunction}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a027b9babcedcefb3fd06a6deace8f6b6}{Strain\+Energy\+Function}} ()
+\begin{DoxyCompactList}\small\item\em Constructor takes no arguments. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a755d306f96fc59147c6cb148456e364e}{$\sim$\+Strain\+Energy\+Function}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a76cadaefaa89b93793c893f1302bd68a}{W}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&gamma)
+\begin{DoxyCompactList}\small\item\em Return the strain energy in terms of the strain tensor. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a99df34610d4542568f65c568ae3a908f}{W}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&I)
+\begin{DoxyCompactList}\small\item\em Return the strain energy in terms of the strain invariants. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a467a3b01986940aba8c8aff2715bf086}{derivative}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&gamma, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&d\+Wdgamma)
+\begin{DoxyCompactList}\small\item\em Return the derivatives of the strain energy function with respect to the components of the strain tensor (default is to use finite differences). \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a81ca7bb14cce217ffac9d308dba39756}{derivatives}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&I, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&d\+WdI)
+\begin{DoxyCompactList}\small\item\em Return the derivatives of the strain energy function with respect to the strain invariants. Default version is to use finite differences. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a312fe03c070f5c45a99ae4e186936147}{requires\+\_\+incompressibility\+\_\+constraint}} ()=0
+\begin{DoxyCompactList}\small\item\em Pure virtual function in which the user must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in P\+A\+R\+A\+N\+O\+ID mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for strain energy functions to be used in solid mechanics computations. 
+
+Definition at line 48 of file constitutive\+\_\+laws.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1StrainEnergyFunction_a027b9babcedcefb3fd06a6deace8f6b6}\label{classoomph_1_1StrainEnergyFunction_a027b9babcedcefb3fd06a6deace8f6b6}} 
+\index{oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}!StrainEnergyFunction@{StrainEnergyFunction}}
+\index{StrainEnergyFunction@{StrainEnergyFunction}!oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}}
+\doxysubsubsection{\texorpdfstring{StrainEnergyFunction()}{StrainEnergyFunction()}}
+{\footnotesize\ttfamily oomph\+::\+Strain\+Energy\+Function\+::\+Strain\+Energy\+Function (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor takes no arguments. 
+
+
+
+Definition at line 53 of file constitutive\+\_\+laws.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1StrainEnergyFunction_a755d306f96fc59147c6cb148456e364e}\label{classoomph_1_1StrainEnergyFunction_a755d306f96fc59147c6cb148456e364e}} 
+\index{oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}!````~StrainEnergyFunction@{$\sim$StrainEnergyFunction}}
+\index{````~StrainEnergyFunction@{$\sim$StrainEnergyFunction}!oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}}
+\doxysubsubsection{\texorpdfstring{$\sim$StrainEnergyFunction()}{~StrainEnergyFunction()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Strain\+Energy\+Function\+::$\sim$\+Strain\+Energy\+Function (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line 56 of file constitutive\+\_\+laws.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1StrainEnergyFunction_a467a3b01986940aba8c8aff2715bf086}\label{classoomph_1_1StrainEnergyFunction_a467a3b01986940aba8c8aff2715bf086}} 
+\index{oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}!derivative@{derivative}}
+\index{derivative@{derivative}!oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}}
+\doxysubsubsection{\texorpdfstring{derivative()}{derivative()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Strain\+Energy\+Function\+::derivative (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{gamma,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{d\+Wdgamma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the derivatives of the strain energy function with respect to the components of the strain tensor (default is to use finite differences). 
+
+
+
+Definition at line 93 of file constitutive\+\_\+laws.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1StrainEnergyFunction_a81ca7bb14cce217ffac9d308dba39756}\label{classoomph_1_1StrainEnergyFunction_a81ca7bb14cce217ffac9d308dba39756}} 
+\index{oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}!derivatives@{derivatives}}
+\index{derivatives@{derivatives}!oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}}
+\doxysubsubsection{\texorpdfstring{derivatives()}{derivatives()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Strain\+Energy\+Function\+::derivatives (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{I,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{d\+WdI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the derivatives of the strain energy function with respect to the strain invariants. Default version is to use finite differences. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1GeneralisedMooneyRivlin_aa0ca6d085deb4758119ff68222a27a8b}{oomph\+::\+Generalised\+Mooney\+Rivlin}}, and \mbox{\hyperlink{classoomph_1_1MooneyRivlin_a01ff4e87c76813d6a9e528bd896a2bae}{oomph\+::\+Mooney\+Rivlin}}.
+
+
+
+Definition at line 106 of file constitutive\+\_\+laws.\+h.
+
+
+
+References oomph\+::\+Mathematical\+Constants\+::\+I(), i, and W().
+
+
+
+Referenced by oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress().
+
+\mbox{\Hypertarget{classoomph_1_1StrainEnergyFunction_a312fe03c070f5c45a99ae4e186936147}\label{classoomph_1_1StrainEnergyFunction_a312fe03c070f5c45a99ae4e186936147}} 
+\index{oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}!requires\_incompressibility\_constraint@{requires\_incompressibility\_constraint}}
+\index{requires\_incompressibility\_constraint@{requires\_incompressibility\_constraint}!oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}}
+\doxysubsubsection{\texorpdfstring{requires\_incompressibility\_constraint()}{requires\_incompressibility\_constraint()}}
+{\footnotesize\ttfamily virtual bool oomph\+::\+Strain\+Energy\+Function\+::requires\+\_\+incompressibility\+\_\+constraint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pure virtual function in which the user must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in P\+A\+R\+A\+N\+O\+ID mode. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1GeneralisedMooneyRivlin_a2b41a132a90707ee2901787d398f45f8}{oomph\+::\+Generalised\+Mooney\+Rivlin}}, and \mbox{\hyperlink{classoomph_1_1MooneyRivlin_ad5cd489e1bc8f4cfe1f147135ffe21af}{oomph\+::\+Mooney\+Rivlin}}.
+
+
+
+Referenced by oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::requires\+\_\+incompressibility\+\_\+constraint().
+
+\mbox{\Hypertarget{classoomph_1_1StrainEnergyFunction_a76cadaefaa89b93793c893f1302bd68a}\label{classoomph_1_1StrainEnergyFunction_a76cadaefaa89b93793c893f1302bd68a}} 
+\index{oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}!W@{W}}
+\index{W@{W}!oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}}
+\doxysubsubsection{\texorpdfstring{W()}{W()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Strain\+Energy\+Function\+::W (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{gamma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the strain energy in terms of the strain tensor. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1GeneralisedMooneyRivlin_a91ff4fa7c19304c98f9a0017c22747a9}{oomph\+::\+Generalised\+Mooney\+Rivlin}}, and \mbox{\hyperlink{classoomph_1_1MooneyRivlin_a9411c5fbb920d071e83a9e52fb8b60d1}{oomph\+::\+Mooney\+Rivlin}}.
+
+
+
+Definition at line 60 of file constitutive\+\_\+laws.\+h.
+
+
+
+References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+
+
+Referenced by derivatives(), oomph\+::\+Mooney\+Rivlin\+::\+W(), and oomph\+::\+Generalised\+Mooney\+Rivlin\+::\+W().
+
+\mbox{\Hypertarget{classoomph_1_1StrainEnergyFunction_a99df34610d4542568f65c568ae3a908f}\label{classoomph_1_1StrainEnergyFunction_a99df34610d4542568f65c568ae3a908f}} 
+\index{oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}!W@{W}}
+\index{W@{W}!oomph::StrainEnergyFunction@{oomph::StrainEnergyFunction}}
+\doxysubsubsection{\texorpdfstring{W()}{W()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Strain\+Energy\+Function\+::W (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{I }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the strain energy in terms of the strain invariants. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1GeneralisedMooneyRivlin_a2edff387e97632febd90938b27a30a14}{oomph\+::\+Generalised\+Mooney\+Rivlin}}, and \mbox{\hyperlink{classoomph_1_1MooneyRivlin_aa610beb4e7b06dc3aa57bbc552ca0b80}{oomph\+::\+Mooney\+Rivlin}}.
+
+
+
+Definition at line 75 of file constitutive\+\_\+laws.\+h.
+
+
+
+References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{constitutive__laws_8h}{constitutive\+\_\+laws.\+h}}\end{DoxyCompactItemize}

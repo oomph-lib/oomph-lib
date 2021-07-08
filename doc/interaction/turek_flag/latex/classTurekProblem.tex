@@ -1,0 +1,425 @@
+\hypertarget{classTurekProblem}{}\doxysection{Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classTurekProblem}\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+
+
+Problem class.  
+
+
+Inheritance diagram for Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTurekProblem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTurekProblem_a69f6624fd854393f0c0e5303603ec749}{Turek\+Problem}} (const double \&length, const double \&height)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass length and height of domain. \end{DoxyCompactList}\item 
+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classTurekProblem_a0fc23b86efec256cb7f4450a928f7999}{fluid\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the fluid mesh. \end{DoxyCompactList}\item 
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ $\ast$\& \mbox{\hyperlink{classTurekProblem_a89430ae6d87a85a83e23e14e0b0d72b7}{solid\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the solid mesh. \end{DoxyCompactList}\item 
+Solid\+Mesh $\ast$\& \mbox{\hyperlink{classTurekProblem_a93a4b3d4e598a499631e00cfa701ee3c}{traction\+\_\+mesh\+\_\+pt}} (const unsigned \&i)
+\begin{DoxyCompactList}\small\item\em Access function for the i-\/th mesh of F\+SI traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekProblem_a39df0332d7606a5befe89bb0e581184b}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adapt\+: Re-\/setup the fsi lookup scheme. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekProblem_a2cf0eb1610b4c3a7cdbd3c7948cdd46e}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info, ofstream \&trace\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekProblem_ae97d3bad44e12274168e883c966b3983}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekProblem_a889518fdaf0c4215e21981afbfc669bd}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekProblem_aa896171b1a817ca35cba9b723bb15ed2}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}} ()
+\begin{DoxyCompactList}\small\item\em Update the (dependent) fluid node positions following the update of the solid variables before performing Newton convergence check. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekProblem_a4ad226ceec27cb3c3ea4d1ecfd4e573f}{actions\+\_\+before\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Update the time-\/dependent influx. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classTurekProblem_ad460a2e860c9425297cf70ee125de10b}{create\+\_\+fsi\+\_\+traction\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create F\+SI traction elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classTurekProblem_a1a449088ae3cc96ade1c58979294afed}{Solid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to solid mesh. \end{DoxyCompactList}\item 
+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classTurekProblem_a18a0daace5dc50db4b93879e4a600e6a}{Fluid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to fluid mesh. \end{DoxyCompactList}\item 
+Vector$<$ Solid\+Mesh $\ast$ $>$ \mbox{\hyperlink{classTurekProblem_a0b8588d0f133ffb9a281c5747786f95f}{Traction\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to mesh of F\+SI traction elements. \end{DoxyCompactList}\item 
+Solid\+Mesh $\ast$ \mbox{\hyperlink{classTurekProblem_ac61477b19dfaaba6fb2c7a5c72240ac6}{Combined\+\_\+traction\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Combined mesh of traction elements -- only used for documentation. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classTurekProblem_a24d68af05e815f7164e30f53ce7357ce}{Domain\+\_\+height}}
+\begin{DoxyCompactList}\small\item\em Overall height of domain. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classTurekProblem_aff485942ff327ccfcafd3608910ef635}{Domain\+\_\+length}}
+\begin{DoxyCompactList}\small\item\em Overall length of domain. \end{DoxyCompactList}\item 
+Node $\ast$ \mbox{\hyperlink{classTurekProblem_ad65b9a2f833ed9bae3520980c76d1f2f}{Solid\+\_\+control\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to solid control node. \end{DoxyCompactList}\item 
+Node $\ast$ \mbox{\hyperlink{classTurekProblem_a3d297a52fffd79bb7083fd57c2574fff}{Fluid\+\_\+control\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to fluid control node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT$>$\newline
+class Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}
+
+Problem class. 
+
+Definition at line 370 of file turek\+\_\+flag.\+cc.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTurekProblem_a69f6624fd854393f0c0e5303603ec749}\label{classTurekProblem_a69f6624fd854393f0c0e5303603ec749}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!TurekProblem@{TurekProblem}}
+\index{TurekProblem@{TurekProblem}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TurekProblem()}{TurekProblem()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classTurekProblem}{Turek\+Problem}} (\begin{DoxyParamCaption}\item[{const double \&}]{length,  }\item[{const double \&}]{height }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass length and height of domain. 
+
+Left point on centreline of flag so that the top and bottom vertices merge with the cylinder.
+
+Definition at line 447 of file turek\+\_\+flag.\+cc.
+
+
+
+References build\+\_\+global\+\_\+mesh(), Global\+\_\+\+Parameters\+::\+Centre\+\_\+x, Global\+\_\+\+Parameters\+::\+Centre\+\_\+y, Global\+\_\+\+Parameters\+::\+Constitutive\+\_\+law\+\_\+pt, Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::create\+\_\+fsi\+\_\+traction\+\_\+elements(), Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+height, flag\+\_\+time\+\_\+stepper\+\_\+pt, Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Fluid\+\_\+control\+\_\+node\+\_\+pt, Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::fluid\+\_\+mesh\+\_\+pt(), Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Fluid\+\_\+mesh\+\_\+pt, Global\+\_\+\+Parameters\+::flux(), Global\+\_\+\+Parameters\+::gravity(), Global\+\_\+\+Parameters\+::H, Global\+\_\+\+Parameters\+::\+Ignore\+\_\+fluid\+\_\+loading, l\+\_\+x, l\+\_\+y, Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq, n\+\_\+x, n\+\_\+y, origin, Global\+\_\+\+Parameters\+::Q, Global\+\_\+\+Parameters\+::\+Radius, Global\+\_\+\+Parameters\+::\+Re, Global\+\_\+\+Parameters\+::\+Re\+St, Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Solid\+\_\+control\+\_\+node\+\_\+pt, Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::solid\+\_\+mesh\+\_\+pt(), Global\+\_\+\+Parameters\+::\+St, t, Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::traction\+\_\+mesh\+\_\+pt(), and Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+mesh\+\_\+pt.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTurekProblem_a39df0332d7606a5befe89bb0e581184b}\label{classTurekProblem_a39df0332d7606a5befe89bb0e581184b}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+adapt}
+
+
+
+Actions after adapt\+: Re-\/setup the fsi lookup scheme. 
+
+Actions after adapt\+: Re-\/setup F\+SI. 
+
+Definition at line 895 of file turek\+\_\+flag.\+cc.
+
+
+
+References Global\+\_\+\+Parameters\+::\+Ignore\+\_\+fluid\+\_\+loading, and solid\+\_\+mesh\+\_\+pt().
+
+\mbox{\Hypertarget{classTurekProblem_ae97d3bad44e12274168e883c966b3983}\label{classTurekProblem_ae97d3bad44e12274168e883c966b3983}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line 397 of file turek\+\_\+flag.\+cc.
+
+\mbox{\Hypertarget{classTurekProblem_a4ad226ceec27cb3c3ea4d1ecfd4e573f}\label{classTurekProblem_a4ad226ceec27cb3c3ea4d1ecfd4e573f}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
+\index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep}
+
+
+
+Update the time-\/dependent influx. 
+
+Actions before implicit timestep\+: Update inflow profile. 
+
+Definition at line 869 of file turek\+\_\+flag.\+cc.
+
+
+
+References Global\+\_\+\+Parameters\+::flux(), and t.
+
+\mbox{\Hypertarget{classTurekProblem_aa896171b1a817ca35cba9b723bb15ed2}\label{classTurekProblem_aa896171b1a817ca35cba9b723bb15ed2}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
+\index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}
+
+
+
+Update the (dependent) fluid node positions following the update of the solid variables before performing Newton convergence check. 
+
+Update the (dependent) fluid node positions following the update of the solid variables 
+
+Definition at line 857 of file turek\+\_\+flag.\+cc.
+
+\mbox{\Hypertarget{classTurekProblem_a889518fdaf0c4215e21981afbfc669bd}\label{classTurekProblem_a889518fdaf0c4215e21981afbfc669bd}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line 400 of file turek\+\_\+flag.\+cc.
+
+\mbox{\Hypertarget{classTurekProblem_ad460a2e860c9425297cf70ee125de10b}\label{classTurekProblem_ad460a2e860c9425297cf70ee125de10b}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!create\_fsi\_traction\_elements@{create\_fsi\_traction\_elements}}
+\index{create\_fsi\_traction\_elements@{create\_fsi\_traction\_elements}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_fsi\_traction\_elements()}{create\_fsi\_traction\_elements()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+fsi\+\_\+traction\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create F\+SI traction elements. 
+
+
+
+Definition at line 953 of file turek\+\_\+flag.\+cc.
+
+
+
+References solid\+\_\+mesh\+\_\+pt().
+
+
+
+Referenced by Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Turek\+Problem().
+
+\mbox{\Hypertarget{classTurekProblem_a2cf0eb1610b4c3a7cdbd3c7948cdd46e}\label{classTurekProblem_a2cf0eb1610b4c3a7cdbd3c7948cdd46e}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line 1008 of file turek\+\_\+flag.\+cc.
+
+
+
+References Global\+\_\+\+Parameters\+::flux(), and solid\+\_\+mesh\+\_\+pt().
+
+\mbox{\Hypertarget{classTurekProblem_a0fc23b86efec256cb7f4450a928f7999}\label{classTurekProblem_a0fc23b86efec256cb7f4450a928f7999}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!fluid\_mesh\_pt@{fluid\_mesh\_pt}}
+\index{fluid\_mesh\_pt@{fluid\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fluid\_mesh\_pt()}{fluid\_mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::fluid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the fluid mesh. 
+
+
+
+Definition at line 379 of file turek\+\_\+flag.\+cc.
+
+
+
+Referenced by Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Turek\+Problem().
+
+\mbox{\Hypertarget{classTurekProblem_a89430ae6d87a85a83e23e14e0b0d72b7}\label{classTurekProblem_a89430ae6d87a85a83e23e14e0b0d72b7}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!solid\_mesh\_pt@{solid\_mesh\_pt}}
+\index{solid\_mesh\_pt@{solid\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{solid\_mesh\_pt()}{solid\_mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT$>$$\ast$\& \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the solid mesh. 
+
+
+
+Definition at line 383 of file turek\+\_\+flag.\+cc.
+
+
+
+Referenced by Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Turek\+Problem().
+
+\mbox{\Hypertarget{classTurekProblem_a93a4b3d4e598a499631e00cfa701ee3c}\label{classTurekProblem_a93a4b3d4e598a499631e00cfa701ee3c}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!traction\_mesh\_pt@{traction\_mesh\_pt}}
+\index{traction\_mesh\_pt@{traction\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{traction\_mesh\_pt()}{traction\_mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Solid\+Mesh$\ast$\& \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::traction\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the i-\/th mesh of F\+SI traction elements. 
+
+
+
+Definition at line 387 of file turek\+\_\+flag.\+cc.
+
+
+
+Referenced by Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Turek\+Problem().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTurekProblem_ac61477b19dfaaba6fb2c7a5c72240ac6}\label{classTurekProblem_ac61477b19dfaaba6fb2c7a5c72240ac6}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Combined\_traction\_mesh\_pt@{Combined\_traction\_mesh\_pt}}
+\index{Combined\_traction\_mesh\_pt@{Combined\_traction\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Combined\_traction\_mesh\_pt}{Combined\_traction\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Solid\+Mesh$\ast$ \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Combined\+\_\+traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Combined mesh of traction elements -- only used for documentation. 
+
+
+
+Definition at line 425 of file turek\+\_\+flag.\+cc.
+
+\mbox{\Hypertarget{classTurekProblem_a24d68af05e815f7164e30f53ce7357ce}\label{classTurekProblem_a24d68af05e815f7164e30f53ce7357ce}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Domain\_height@{Domain\_height}}
+\index{Domain\_height@{Domain\_height}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Domain\_height}{Domain\_height}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Domain\+\_\+height\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Overall height of domain. 
+
+
+
+Definition at line 428 of file turek\+\_\+flag.\+cc.
+
+
+
+Referenced by Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Turek\+Problem().
+
+\mbox{\Hypertarget{classTurekProblem_aff485942ff327ccfcafd3608910ef635}\label{classTurekProblem_aff485942ff327ccfcafd3608910ef635}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Domain\_length@{Domain\_length}}
+\index{Domain\_length@{Domain\_length}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Domain\_length}{Domain\_length}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Domain\+\_\+length\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Overall length of domain. 
+
+
+
+Definition at line 431 of file turek\+\_\+flag.\+cc.
+
+\mbox{\Hypertarget{classTurekProblem_a3d297a52fffd79bb7083fd57c2574fff}\label{classTurekProblem_a3d297a52fffd79bb7083fd57c2574fff}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Fluid\_control\_node\_pt@{Fluid\_control\_node\_pt}}
+\index{Fluid\_control\_node\_pt@{Fluid\_control\_node\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Fluid\_control\_node\_pt}{Fluid\_control\_node\_pt}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Node$\ast$ \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Fluid\+\_\+control\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to fluid control node. 
+
+
+
+Definition at line 437 of file turek\+\_\+flag.\+cc.
+
+
+
+Referenced by Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Turek\+Problem().
+
+\mbox{\Hypertarget{classTurekProblem_a18a0daace5dc50db4b93879e4a600e6a}\label{classTurekProblem_a18a0daace5dc50db4b93879e4a600e6a}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Fluid\_mesh\_pt@{Fluid\_mesh\_pt}}
+\index{Fluid\_mesh\_pt@{Fluid\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Fluid\_mesh\_pt}{Fluid\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Fluid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to fluid mesh. 
+
+
+
+Definition at line 419 of file turek\+\_\+flag.\+cc.
+
+
+
+Referenced by Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Turek\+Problem().
+
+\mbox{\Hypertarget{classTurekProblem_ad65b9a2f833ed9bae3520980c76d1f2f}\label{classTurekProblem_ad65b9a2f833ed9bae3520980c76d1f2f}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Solid\_control\_node\_pt@{Solid\_control\_node\_pt}}
+\index{Solid\_control\_node\_pt@{Solid\_control\_node\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Solid\_control\_node\_pt}{Solid\_control\_node\_pt}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Node$\ast$ \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Solid\+\_\+control\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to solid control node. 
+
+
+
+Definition at line 434 of file turek\+\_\+flag.\+cc.
+
+
+
+Referenced by Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Turek\+Problem().
+
+\mbox{\Hypertarget{classTurekProblem_a1a449088ae3cc96ade1c58979294afed}\label{classTurekProblem_a1a449088ae3cc96ade1c58979294afed}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
+\index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to solid mesh. 
+
+
+
+Definition at line 416 of file turek\+\_\+flag.\+cc.
+
+\mbox{\Hypertarget{classTurekProblem_a0b8588d0f133ffb9a281c5747786f95f}\label{classTurekProblem_a0b8588d0f133ffb9a281c5747786f95f}} 
+\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Traction\_mesh\_pt@{Traction\_mesh\_pt}}
+\index{Traction\_mesh\_pt@{Traction\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traction\_mesh\_pt}{Traction\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT , class S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+Vector$<$Solid\+Mesh$\ast$$>$ \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vector of pointers to mesh of F\+SI traction elements. 
+
+
+
+Definition at line 422 of file turek\+\_\+flag.\+cc.
+
+
+
+Referenced by Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Turek\+Problem().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{turek__flag_8cc}{turek\+\_\+flag.\+cc}}\end{DoxyCompactItemize}

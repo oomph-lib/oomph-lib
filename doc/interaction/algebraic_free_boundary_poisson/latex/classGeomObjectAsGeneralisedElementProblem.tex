@@ -1,0 +1,196 @@
+\hypertarget{classGeomObjectAsGeneralisedElementProblem}{}\doxysection{Geom\+Object\+As\+Generalised\+Element\+Problem Class Reference}
+\label{classGeomObjectAsGeneralisedElementProblem}\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+Inheritance diagram for Geom\+Object\+As\+Generalised\+Element\+Problem\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classGeomObjectAsGeneralisedElementProblem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_ad1f15fcb6c055c58d1f71b522f1f7bd6}{Geom\+Object\+As\+Generalised\+Element\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_af396d1789e2552c43e0c68561d88d473}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a4ae01862ddbbeeacca1ce7a444e28931}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5092be8e6172d6c9147115bdd485db35}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5ae799de23742e4c8fa54ee7ae32e679}{load}} ()
+\begin{DoxyCompactList}\small\item\em Return value of the \char`\"{}load\char`\"{} on the elastically supported ring. \end{DoxyCompactList}\item 
+Doc\+Info \& \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a4be869d81c0df187d4239a590826f139}{doc\+\_\+info}} ()
+\begin{DoxyCompactList}\small\item\em Access to Doc\+Info object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ofstream \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_ad6261e556a52596ba8904ee902ea6d70}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+Data $\ast$ \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_ac04469b2dbce010fff3f5b2cf5591bcd}{Load\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to data item that stores the \char`\"{}load\char`\"{} on the ring. \end{DoxyCompactList}\item 
+Doc\+Info \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a89a7f5fa555839193166f802d6ff6be2}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc info object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Problem to demonstrate the use of a Geom\+Object as a Generalised\+Element\+: A geometric object (a Circle) is \char`\"{}upgraded\char`\"{} to a Generalised\+Element. The position of the Circle is determined by a balance of forces, assuming that the Circle is mounted on an elastic spring of specified stiffness and loaded by a vertical \char`\"{}load\char`\"{}. ~\newline
+ 
+
+Definition at line 52 of file geom\+\_\+object\+\_\+element.\+cc.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGeomObjectAsGeneralisedElementProblem_ad1f15fcb6c055c58d1f71b522f1f7bd6}\label{classGeomObjectAsGeneralisedElementProblem_ad1f15fcb6c055c58d1f71b522f1f7bd6}} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{GeomObjectAsGeneralisedElementProblem()}{GeomObjectAsGeneralisedElementProblem()}}
+{\footnotesize\ttfamily Geom\+Object\+As\+Generalised\+Element\+Problem\+::\+Geom\+Object\+As\+Generalised\+Element\+Problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 98 of file geom\+\_\+object\+\_\+element.\+cc.
+
+
+
+References oomph\+::\+Elastically\+Supported\+Ring\+Element\+::k\+\_\+stiff(), and oomph\+::\+Elastically\+Supported\+Ring\+Element\+::set\+\_\+load\+\_\+pt().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGeomObjectAsGeneralisedElementProblem_af396d1789e2552c43e0c68561d88d473}\label{classGeomObjectAsGeneralisedElementProblem_af396d1789e2552c43e0c68561d88d473}} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily void Geom\+Object\+As\+Generalised\+Element\+Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after solve (empty) 
+
+
+
+Definition at line 61 of file geom\+\_\+object\+\_\+element.\+cc.
+
+\mbox{\Hypertarget{classGeomObjectAsGeneralisedElementProblem_a4ae01862ddbbeeacca1ce7a444e28931}\label{classGeomObjectAsGeneralisedElementProblem_a4ae01862ddbbeeacca1ce7a444e28931}} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily void Geom\+Object\+As\+Generalised\+Element\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve (empty) 
+
+
+
+Definition at line 64 of file geom\+\_\+object\+\_\+element.\+cc.
+
+\mbox{\Hypertarget{classGeomObjectAsGeneralisedElementProblem_a4be869d81c0df187d4239a590826f139}\label{classGeomObjectAsGeneralisedElementProblem_a4be869d81c0df187d4239a590826f139}} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!doc\_info@{doc\_info}}
+\index{doc\_info@{doc\_info}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{doc\_info()}{doc\_info()}}
+{\footnotesize\ttfamily Doc\+Info\& Geom\+Object\+As\+Generalised\+Element\+Problem\+::doc\+\_\+info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to Doc\+Info object. 
+
+
+
+Definition at line 76 of file geom\+\_\+object\+\_\+element.\+cc.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{classGeomObjectAsGeneralisedElementProblem_a5092be8e6172d6c9147115bdd485db35}\label{classGeomObjectAsGeneralisedElementProblem_a5092be8e6172d6c9147115bdd485db35}} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily void Geom\+Object\+As\+Generalised\+Element\+Problem\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+Doc the solution in tecplot format. 
+
+Definition at line 151 of file geom\+\_\+object\+\_\+element.\+cc.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{classGeomObjectAsGeneralisedElementProblem_a5ae799de23742e4c8fa54ee7ae32e679}\label{classGeomObjectAsGeneralisedElementProblem_a5ae799de23742e4c8fa54ee7ae32e679}} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!load@{load}}
+\index{load@{load}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily double\& Geom\+Object\+As\+Generalised\+Element\+Problem\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return value of the \char`\"{}load\char`\"{} on the elastically supported ring. 
+
+
+
+Definition at line 70 of file geom\+\_\+object\+\_\+element.\+cc.
+
+
+
+Referenced by main().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classGeomObjectAsGeneralisedElementProblem_a89a7f5fa555839193166f802d6ff6be2}\label{classGeomObjectAsGeneralisedElementProblem_a89a7f5fa555839193166f802d6ff6be2}} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily Doc\+Info Geom\+Object\+As\+Generalised\+Element\+Problem\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc info object. 
+
+
+
+Definition at line 87 of file geom\+\_\+object\+\_\+element.\+cc.
+
+\mbox{\Hypertarget{classGeomObjectAsGeneralisedElementProblem_ac04469b2dbce010fff3f5b2cf5591bcd}\label{classGeomObjectAsGeneralisedElementProblem_ac04469b2dbce010fff3f5b2cf5591bcd}} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!Load\_pt@{Load\_pt}}
+\index{Load\_pt@{Load\_pt}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{Load\_pt}{Load\_pt}}
+{\footnotesize\ttfamily Data$\ast$ Geom\+Object\+As\+Generalised\+Element\+Problem\+::\+Load\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to data item that stores the \char`\"{}load\char`\"{} on the ring. 
+
+
+
+Definition at line 84 of file geom\+\_\+object\+\_\+element.\+cc.
+
+\mbox{\Hypertarget{classGeomObjectAsGeneralisedElementProblem_ad6261e556a52596ba8904ee902ea6d70}\label{classGeomObjectAsGeneralisedElementProblem_ad6261e556a52596ba8904ee902ea6d70}} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily ofstream Geom\+Object\+As\+Generalised\+Element\+Problem\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line 81 of file geom\+\_\+object\+\_\+element.\+cc.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{geom__object__element_8cc}{geom\+\_\+object\+\_\+element.\+cc}}\end{DoxyCompactItemize}

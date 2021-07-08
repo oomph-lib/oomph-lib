@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: RefineableBin Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classRefineableBin-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">RefineableBin Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab840fa275927998ba2f51ec7ef46235c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#ab840fa275927998ba2f51ec7ef46235c">RefineableBin</a> (<a class="el" href="classRefineableBinArray.html">RefineableBinArray</a> *bin_array_pt, const unsigned &amp;bin_index_in_bin_array)</td></tr>
+<tr class="memdesc:ab840fa275927998ba2f51ec7ef46235c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Pass pointer to bin array that contains this bin and the index of the newly created bin in that <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a>.  <a href="classRefineableBin.html#ab840fa275927998ba2f51ec7ef46235c">More...</a><br /></td></tr>
+<tr class="separator:ab840fa275927998ba2f51ec7ef46235c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41875de39485fe116c5e22dcea65f3ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a41875de39485fe116c5e22dcea65f3ab">RefineableBin</a> (const <a class="el" href="classRefineableBin.html">RefineableBin</a> &amp;data)</td></tr>
+<tr class="memdesc:a41875de39485fe116c5e22dcea65f3ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classRefineableBin.html#a41875de39485fe116c5e22dcea65f3ab">More...</a><br /></td></tr>
+<tr class="separator:a41875de39485fe116c5e22dcea65f3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22fae65a9869b4222a2ff1c8afe43661"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a22fae65a9869b4222a2ff1c8afe43661">operator=</a> (const <a class="el" href="classRefineableBin.html">RefineableBin</a> &amp;)</td></tr>
+<tr class="memdesc:a22fae65a9869b4222a2ff1c8afe43661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classRefineableBin.html#a22fae65a9869b4222a2ff1c8afe43661">More...</a><br /></td></tr>
+<tr class="separator:a22fae65a9869b4222a2ff1c8afe43661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844cf253cd0a1c9a348bc93e0d96fda4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a844cf253cd0a1c9a348bc93e0d96fda4">~RefineableBin</a> ()</td></tr>
+<tr class="memdesc:a844cf253cd0a1c9a348bc93e0d96fda4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classRefineableBin.html#a844cf253cd0a1c9a348bc93e0d96fda4">More...</a><br /></td></tr>
+<tr class="separator:a844cf253cd0a1c9a348bc93e0d96fda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73cb9b1ac53b5337f2bb2476e2084bb9"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a73cb9b1ac53b5337f2bb2476e2084bb9">total_number_of_sample_points_computed_recursively</a> () const</td></tr>
+<tr class="memdesc:a73cb9b1ac53b5337f2bb2476e2084bb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute total number of sample points recursively.  <a href="classRefineableBin.html#a73cb9b1ac53b5337f2bb2476e2084bb9">More...</a><br /></td></tr>
+<tr class="separator:a73cb9b1ac53b5337f2bb2476e2084bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55737725c556d80d6695549550b52df5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a55737725c556d80d6695549550b52df5">add_sample_point</a> (<a class="el" href="classSamplePoint.html">SamplePoint</a> *new_sample_point_pt, const Vector&lt; double &gt; &amp;zeta_coordinates)</td></tr>
+<tr class="memdesc:a55737725c556d80d6695549550b52df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new sample point to <a class="el" href="classRefineableBin.html">RefineableBin</a>.  <a href="classRefineableBin.html#a55737725c556d80d6695549550b52df5">More...</a><br /></td></tr>
+<tr class="separator:a55737725c556d80d6695549550b52df5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92d871f784877d48ae46d363419b5e52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a92d871f784877d48ae46d363419b5e52">locate_zeta</a> (const Vector&lt; double &gt; &amp;zeta, GeomObject *&amp;sub_geom_object_pt, Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>)</td></tr>
+<tr class="memdesc:a92d871f784877d48ae46d363419b5e52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find sub-GeomObject (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub_geom_object_pt=0 if point can't be found.  <a href="classRefineableBin.html#a92d871f784877d48ae46d363419b5e52">More...</a><br /></td></tr>
+<tr class="separator:a92d871f784877d48ae46d363419b5e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52d935cc69527220005ecee7cfb2b5e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a52d935cc69527220005ecee7cfb2b5e8">output</a> (std::ofstream &amp;outfile, const bool &amp;don_t_recurse=false)</td></tr>
+<tr class="memdesc:a52d935cc69527220005ecee7cfb2b5e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output bin; x,[y,[z]],n_sample_points.  <a href="classRefineableBin.html#a52d935cc69527220005ecee7cfb2b5e8">More...</a><br /></td></tr>
+<tr class="separator:a52d935cc69527220005ecee7cfb2b5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c3428cc5e30d0a29c13e2ce8eb3076f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a0c3428cc5e30d0a29c13e2ce8eb3076f">output_bins</a> (std::ofstream &amp;outfile)</td></tr>
+<tr class="memdesc:a0c3428cc5e30d0a29c13e2ce8eb3076f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output bin vertices (allowing display of bins as zones).  <a href="classRefineableBin.html#a0c3428cc5e30d0a29c13e2ce8eb3076f">More...</a><br /></td></tr>
+<tr class="separator:a0c3428cc5e30d0a29c13e2ce8eb3076f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ceb55788e4d4f39986c138349a22f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a71ceb55788e4d4f39986c138349a22f7">output_bin_vertices</a> (std::ofstream &amp;outfile)</td></tr>
+<tr class="memdesc:a71ceb55788e4d4f39986c138349a22f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output bin vertices (allowing display of bins as zones).  <a href="classRefineableBin.html#a71ceb55788e4d4f39986c138349a22f7">More...</a><br /></td></tr>
+<tr class="separator:a71ceb55788e4d4f39986c138349a22f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a377f1b457facf99566aab772af7260db"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a377f1b457facf99566aab772af7260db">nsample_points_in_bin</a> ()</td></tr>
+<tr class="memdesc:a377f1b457facf99566aab772af7260db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of sample points stored in bin.  <a href="classRefineableBin.html#a377f1b457facf99566aab772af7260db">More...</a><br /></td></tr>
+<tr class="separator:a377f1b457facf99566aab772af7260db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a39cc753a17e800ef388c4cb1352ff0cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a39cc753a17e800ef388c4cb1352ff0cf">make_sub_bin_array</a> (const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;min_and_max_coordinates)</td></tr>
+<tr class="memdesc:a39cc753a17e800ef388c4cb1352ff0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for building a new subbin_array (called when the Bin size is greater than the Max_number_of_sample_point_per_bin (and the Bin is recursive). Pass in the extremal coordinates of the bin which is being subdivided. Redistributes all existing sample points to newly made sub-bin-array and empties its own storage. Pass Max./min. coordinates of new bin array for efficiency.  <a href="classRefineableBin.html#a39cc753a17e800ef388c4cb1352ff0cf">More...</a><br /></td></tr>
+<tr class="separator:a39cc753a17e800ef388c4cb1352ff0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a495380328c638a224ca8c13b1b38d952"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a495380328c638a224ca8c13b1b38d952">get_bin_boundaries</a> (Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;min_and_max_coordinates)</td></tr>
+<tr class="memdesc:a495380328c638a224ca8c13b1b38d952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundaries of bin in each coordinate direction. *.first = min; *.second = max.  <a href="classRefineableBin.html#a495380328c638a224ca8c13b1b38d952">More...</a><br /></td></tr>
+<tr class="separator:a495380328c638a224ca8c13b1b38d952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a9d0241fb089b4bb2e50e0ab435ebd6ba"><td class="memItemLeft" align="right" valign="top">Vector&lt; <a class="el" href="classSamplePoint.html">SamplePoint</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a9d0241fb089b4bb2e50e0ab435ebd6ba">Sample_point_pt</a></td></tr>
+<tr class="memdesc:a9d0241fb089b4bb2e50e0ab435ebd6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Container of SamplePoints. Pointer to vector because it's shorter than an empty vector! (Not all RefineableBins have sample points &ndash; the ones that are subdivided don't!) <br  />
+  <a href="classRefineableBin.html#a9d0241fb089b4bb2e50e0ab435ebd6ba">More...</a><br /></td></tr>
+<tr class="separator:a9d0241fb089b4bb2e50e0ab435ebd6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef2b185fee14608f5adc423b266e1f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a6ef2b185fee14608f5adc423b266e1f7">Sub_bin_array_pt</a></td></tr>
+<tr class="memdesc:a6ef2b185fee14608f5adc423b266e1f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a possible sub-BinArray. Null by default.  <a href="classRefineableBin.html#a6ef2b185fee14608f5adc423b266e1f7">More...</a><br /></td></tr>
+<tr class="separator:a6ef2b185fee14608f5adc423b266e1f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad79b9df93c7be0cd54933f182037db20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#ad79b9df93c7be0cd54933f182037db20">Bin_array_pt</a></td></tr>
+<tr class="memdesc:ad79b9df93c7be0cd54933f182037db20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the bin array which "owns" this <a class="el" href="classRefineableBin.html">RefineableBin</a>.  <a href="classRefineableBin.html#ad79b9df93c7be0cd54933f182037db20">More...</a><br /></td></tr>
+<tr class="separator:ad79b9df93c7be0cd54933f182037db20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7714484b072bdc7466d3d24024588f1f"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableBin.html#a7714484b072bdc7466d3d24024588f1f">Bin_index_in_bin_array</a></td></tr>
+<tr class="memdesc:a7714484b072bdc7466d3d24024588f1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of bin in its bin array.  <a href="classRefineableBin.html#a7714484b072bdc7466d3d24024588f1f">More...</a><br /></td></tr>
+<tr class="separator:a7714484b072bdc7466d3d24024588f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classRefineableBin.html">RefineableBin</a> class. Contains sample points and is embedded in a <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a>. May itself be represented by a <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a> to make it recursive. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00109">109</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab840fa275927998ba2f51ec7ef46235c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab840fa275927998ba2f51ec7ef46235c">&#9670;&nbsp;</a></span>RefineableBin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableBin::RefineableBin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a> *&#160;</td>
+          <td class="paramname"><em>bin_array_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>bin_index_in_bin_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Pass pointer to bin array that contains this bin and the index of the newly created bin in that <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00116">116</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+</div>
+</div>
+<a id="a41875de39485fe116c5e22dcea65f3ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41875de39485fe116c5e22dcea65f3ab">&#9670;&nbsp;</a></span>RefineableBin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableBin::RefineableBin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classRefineableBin.html">RefineableBin</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00126">126</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="a844cf253cd0a1c9a348bc93e0d96fda4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844cf253cd0a1c9a348bc93e0d96fda4">&#9670;&nbsp;</a></span>~RefineableBin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableBin::~RefineableBin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00044">44</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a55737725c556d80d6695549550b52df5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55737725c556d80d6695549550b52df5">&#9670;&nbsp;</a></span>add_sample_point()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RefineableBin::add_sample_point </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSamplePoint.html">SamplePoint</a> *&#160;</td>
+          <td class="paramname"><em>new_sample_point_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta_coordinates</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a new sample point to <a class="el" href="classRefineableBin.html">RefineableBin</a>. </p>
+<p>Add a SamplePoint* to a <a class="el" href="classRefineableBin.html">RefineableBin</a> object. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00400">400</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+</div>
+</div>
+<a id="a495380328c638a224ca8c13b1b38d952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a495380328c638a224ca8c13b1b38d952">&#9670;&nbsp;</a></span>get_bin_boundaries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RefineableBin::get_bin_boundaries </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>min_and_max_coordinates</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundaries of bin in each coordinate direction. *.first = min; *.second = max. </p>
+<p>Boundaries of bin in each coordinate direction. *.first = min; *.second = max. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00607">607</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#aaa5287b1cf3ca06b3f413cb95bd1ec60">u()</a>.</p>
+
+</div>
+</div>
+<a id="a92d871f784877d48ae46d363419b5e52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92d871f784877d48ae46d363419b5e52">&#9670;&nbsp;</a></span>locate_zeta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RefineableBin::locate_zeta </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GeomObject *&amp;&#160;</td>
+          <td class="paramname"><em>sub_geom_object_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Find sub-GeomObject (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub_geom_object_pt=0 if point can't be found. </p>
+<p>Find sub-GeomObject (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub_geom_object_pt=0 if point can't be found. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00445">445</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00355">SamplePointContainer::Always_fail_elemental_locate_zeta</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="sample__point__container_8h_source.html#l00359">SamplePointContainer::Use_equally_spaced_interior_sample_points</a>, and <a class="el" href="sample__point__container_8h_source.html#l00351">SamplePointContainer::Visited_sample_points_file</a>.</p>
+
+</div>
+</div>
+<a id="a39cc753a17e800ef388c4cb1352ff0cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39cc753a17e800ef388c4cb1352ff0cf">&#9670;&nbsp;</a></span>make_sub_bin_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RefineableBin::make_sub_bin_array </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>min_and_max_coordinates</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method for building a new subbin_array (called when the Bin size is greater than the Max_number_of_sample_point_per_bin (and the Bin is recursive). Pass in the extremal coordinates of the bin which is being subdivided. Redistributes all existing sample points to newly made sub-bin-array and empties its own storage. Pass Max./min. coordinates of new bin array for efficiency. </p>
+<p>Function called for making a sub bin array in a given <a class="el" href="classRefineableBin.html">RefineableBin</a>. Pass the vector of min and max coordinates of the NEW bin array. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00093">93</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+</div>
+</div>
+<a id="a377f1b457facf99566aab772af7260db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a377f1b457facf99566aab772af7260db">&#9670;&nbsp;</a></span>nsample_points_in_bin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned RefineableBin::nsample_points_in_bin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of sample points stored in bin. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00164">164</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00181">Sample_point_pt</a>.</p>
+
+</div>
+</div>
+<a id="a22fae65a9869b4222a2ff1c8afe43661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22fae65a9869b4222a2ff1c8afe43661">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RefineableBin::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classRefineableBin.html">RefineableBin</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00132">132</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a52d935cc69527220005ecee7cfb2b5e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52d935cc69527220005ecee7cfb2b5e8">&#9670;&nbsp;</a></span>output()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RefineableBin::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>don_t_recurse</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Output bin; x,[y,[z]],n_sample_points. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00183">183</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>.</p>
+
+</div>
+</div>
+<a id="a71ceb55788e4d4f39986c138349a22f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71ceb55788e4d4f39986c138349a22f7">&#9670;&nbsp;</a></span>output_bin_vertices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RefineableBin::output_bin_vertices </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Output bin vertices (allowing display of bins as zones). </p>
+<p>Output bin; x,[y,[z]]. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00295">295</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>.</p>
+
+</div>
+</div>
+<a id="a0c3428cc5e30d0a29c13e2ce8eb3076f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c3428cc5e30d0a29c13e2ce8eb3076f">&#9670;&nbsp;</a></span>output_bins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RefineableBin::output_bins </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Output bin vertices (allowing display of bins as zones). </p>
+
+</div>
+</div>
+<a id="a73cb9b1ac53b5337f2bb2476e2084bb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73cb9b1ac53b5337f2bb2476e2084bb9">&#9670;&nbsp;</a></span>total_number_of_sample_points_computed_recursively()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned RefineableBin::total_number_of_sample_points_computed_recursively </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute total number of sample points recursively. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00067">67</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad79b9df93c7be0cd54933f182037db20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad79b9df93c7be0cd54933f182037db20">&#9670;&nbsp;</a></span>Bin_array_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a>* RefineableBin::Bin_array_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the bin array which "owns" this <a class="el" href="classRefineableBin.html">RefineableBin</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00187">187</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+</div>
+</div>
+<a id="a7714484b072bdc7466d3d24024588f1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7714484b072bdc7466d3d24024588f1f">&#9670;&nbsp;</a></span>Bin_index_in_bin_array</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned RefineableBin::Bin_index_in_bin_array</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index of bin in its bin array. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00190">190</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+</div>
+</div>
+<a id="a9d0241fb089b4bb2e50e0ab435ebd6ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d0241fb089b4bb2e50e0ab435ebd6ba">&#9670;&nbsp;</a></span>Sample_point_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;<a class="el" href="classSamplePoint.html">SamplePoint</a>*&gt;* RefineableBin::Sample_point_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Container of SamplePoints. Pointer to vector because it's shorter than an empty vector! (Not all RefineableBins have sample points &ndash; the ones that are subdivided don't!) <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00181">181</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8h_source.html#l00164">nsample_points_in_bin()</a>.</p>
+
+</div>
+</div>
+<a id="a6ef2b185fee14608f5adc423b266e1f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ef2b185fee14608f5adc423b266e1f7">&#9670;&nbsp;</a></span>Sub_bin_array_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a>* RefineableBin::Sub_bin_array_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to a possible sub-BinArray. Null by default. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00184">184</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a></li>
+<li><a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:04
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

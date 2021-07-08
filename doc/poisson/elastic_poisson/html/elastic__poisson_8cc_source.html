@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: elastic_poisson.cc Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_ddb094a380b94394dbbcf95a63b535e6.html">demo_drivers</a></li><li class="navelem"><a class="el" href="dir_5e95af49491505dfde4ba94a1a4cc2d9.html">poisson</a></li><li class="navelem"><a class="el" href="dir_3cc867ac55347f40fd30bb81e3238ea4.html">elastic_poisson</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">elastic_poisson.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="elastic__poisson_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Driver for solution of 2D Poisson equation in fish-shaped domain with</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// adaptivity</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Generic oomph-lib headers</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// The Poisson equations</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;poisson.h&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// The fish mesh </span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;meshes/fish_mesh.h&quot;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">using namespace </span>oomph;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">//====================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/// Namespace for const source term in Poisson equation</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="namespaceConstSourceForPoisson.html">   51</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceConstSourceForPoisson.html">ConstSourceForPoisson</a></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> /// Strength of source function: default value 1.0</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="namespaceConstSourceForPoisson.html#add351c5acab2561d68d1fc9ec3d5fc5e">   54</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceConstSourceForPoisson.html#add351c5acab2561d68d1fc9ec3d5fc5e">Strength</a>=1.0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/// Const source function</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">   57</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">get_source</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; source)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  source = -<a class="code" href="namespaceConstSourceForPoisson.html#add351c5acab2561d68d1fc9ec3d5fc5e">Strength</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/// \short Fish back as a GeneralisedElement: Circular ring whose </span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/// position is given by</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">/// \f[ x = X_c + R \cos(\xi)  \f]</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/// \f[ y = Y_c + R \sin(\xi)  \f]</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">/// The ring&#39;s vertical position \f$ Y_c \f$ is</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/// determined by &quot;pseudo elasticity&quot;:</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">/// \f[</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">/// 0 = Y_c \ k_{stiff} - f_{load}</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/// \f]</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/// This simulates the case where the centre of the ring is mounted on </span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">/// an elastic spring of stiffness \f$ k_{stiff} \f$ and loaded by </span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/// the force \f$ f_{load}. \f$ The &quot;load&quot; is specified by the </span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">/// Data object \c load_pt(). </span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html">   87</a></span>&#160;<span class="keyword">class </span><a class="code" href="classElasticFishBackElement.html">ElasticFishBackElement</a> : <span class="keyword">public</span> GeneralisedElement, <span class="keyword">public</span> Circle</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> /// \short Constructor: Build  ring from doubles that describe </span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> /// the geometry: x and y positions of centre and the radius.</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> /// Initialise stiffness to 1.0.</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#a0411850f03db9f6eeb10562be778dacb">   95</a></span>&#160;<span class="comment"></span> <a class="code" href="classElasticFishBackElement.html#a0411850f03db9f6eeb10562be778dacb">ElasticFishBackElement</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; x_c, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; y_c, </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                        <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; r) : Circle(x_c,y_c,r), K_stiff(1.0)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;   <span class="comment">// Geometric Data for the GeomObject has been setup (and pinned) in</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;   <span class="comment">// constructor for geometric object. Now free the y-position </span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;   <span class="comment">// of the centre because we want to determine it as an unknown</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;   Geom_data_pt[0]-&gt;unpin(1);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;     </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;   <span class="comment">// The geometric data is internal to the element -- we copy the pointers</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;   <span class="comment">// to the element&#39;s internal data to ensure that any unknown values </span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;   <span class="comment">// of geometric data are given global equation numbers.</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;   <span class="keywordtype">unsigned</span> n_geom_data=Geom_data_pt.size();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;n_geom_data;i++)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    {add_internal_data(Geom_data_pt[i]);}</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;   </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;   <span class="comment">// Change cleanup responsibilities: The GeomData will now be killed</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;   <span class="comment">// by the GeneralisedElement when it wipes its internal Data</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;   Must_clean_up=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> /// Destructor: </span></div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#a3889028a8375ef126ec207f73ca18adc">  117</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classElasticFishBackElement.html#a3889028a8375ef126ec207f73ca18adc">~ElasticFishBackElement</a>()</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;   <span class="comment">// The GeomObject&#39;s GeomData is mirrored in the element&#39;s</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;   <span class="comment">// Internal Data and therefore gets wiped in the</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;   <span class="comment">// destructor of GeneralisedElement --&gt; No need to kill it here</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"> /// &quot;Stiffness&quot; of the ring</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#af0e376da1420c97403549b3a48f8b356">  125</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span>&amp; <a class="code" href="classElasticFishBackElement.html#af0e376da1420c97403549b3a48f8b356">k_stiff</a>() {<span class="keywordflow">return</span> K_stiff;}</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"> /// &quot;Load&quot; acting on the ring</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#afe29dde5bd5ff5763bcb1ded94adf826">  128</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span>&amp; <a class="code" href="classElasticFishBackElement.html#afe29dde5bd5ff5763bcb1ded94adf826">load</a>() {<span class="keywordflow">return</span> *(external_data_pt(0)-&gt;value_pt(0));}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"> /// Compute element residual vector (wrapper)</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#aed5858c2ae86823017713d0894cc4052">  131</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticFishBackElement.html#aed5858c2ae86823017713d0894cc4052">get_residuals</a>(Vector&lt;double&gt; &amp;residuals)</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;   <span class="comment">//Zero the residuals vector</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;   residuals.initialise(0.0);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;   <span class="comment">//Create a dummy matrix</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;   DenseMatrix&lt;double&gt; dummy(1);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;   </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;   <span class="comment">//Call the generic residuals function with flag set to 0</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;   fill_in_generic_residual_contribution(residuals,dummy,0);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;   }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment"> /// Compute element residual Vector and element Jacobian matrix (wrapper)</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#a48729984910b86d7210ed218bcb821bd">  144</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticFishBackElement.html#a48729984910b86d7210ed218bcb821bd">get_jacobian</a>(Vector&lt;double&gt; &amp;residuals,</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                           DenseMatrix&lt;double&gt; &amp;jacobian)</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;   <span class="comment">//Zero the residuals vector</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;   residuals.initialise(0.0);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;   <span class="comment">//Zero the jacobian matrix</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;   jacobian.initialise(0.0);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;   <span class="comment">//Call the generic routine with the flag set to 1</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;   fill_in_generic_residual_contribution(residuals,jacobian,1);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment"> /// \short Set pointer to Data object that specifies the &quot;load&quot;</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment"> /// on the fish back</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#a14397b102dbefc87a7e8f6a6782ec730">  157</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticFishBackElement.html#a14397b102dbefc87a7e8f6a6782ec730">set_load_pt</a>(Data* load_pt)</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;   <span class="keywordflow">if</span> (load_pt-&gt;nvalue()!=1)</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    {</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;     std::ostringstream error_stream;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;     error_stream &lt;&lt; <span class="stringliteral">&quot;The data object that stores the load on the fish back&#39;s&quot;</span> </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                  &lt;&lt; std::endl</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot;should only contain a single data value\n&quot;</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                  &lt;&lt; <span class="stringliteral">&quot;This one contains &quot;</span> &lt;&lt; load_pt-&gt;nvalue() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;     <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;   <span class="comment">// Vector has been created (and its one and only entry initialised to</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;   <span class="comment">// NULL) in the constructor</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;   External_load_index = add_external_data(load_pt);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">/// \short Compute element residual Vector (only if flag=0) and also</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">/// the element Jacobian matrix (if flag=1)</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#a03865180362294a36322523ff2a880ad">  185</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticFishBackElement.html#a03865180362294a36322523ff2a880ad">fill_in_generic_residual_contribution</a>(Vector&lt;double&gt; &amp;residuals,</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                                            DenseMatrix&lt;double&gt; &amp;jacobian,</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                                            <span class="keywordtype">unsigned</span> flag)</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  {</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;   <span class="comment">//Find out how may dofs there are in the element</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;   <span class="keywordtype">unsigned</span> n_dof = ndof();</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;   <span class="comment">//If there are no freedoms then return immediately</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;   <span class="keywordflow">if</span> (n_dof==0) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;   <span class="comment">// Pseudo-elastic force balance to determine the position of the</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;   <span class="comment">// ring&#39;s centre for a given load.</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;   residuals[0]=load()-K_stiff*y_c();</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;   <span class="comment">// Work out Jacobian: </span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;   <span class="keywordflow">if</span> (flag)</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    {</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;     <span class="comment">// Derivative of residual w.r.t. the internal dof, i.e. the vertical</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;     <span class="comment">// position of the ring&#39;s centre: d residual[0]/d y_c</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;     jacobian(0,0) = -K_stiff;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;     </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;     </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;     <span class="comment">// Derivative with respect to external dof, i.e. the applied </span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;     <span class="comment">// load: d residual[0]/d load -- but only if the load is an unknown</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;     <span class="keywordflow">if</span> (n_dof==2)</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;      {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;       jacobian(0,1) = 1.0;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;      }</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    }</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment"> /// Stiffness of the ring&#39;s &quot;elastic&quot; support</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#abb0ba4fd55ef0c0b48634eded475e5c7">  219</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classElasticFishBackElement.html#abb0ba4fd55ef0c0b48634eded475e5c7">K_stiff</a>;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment"> /// External index of the load object</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="classElasticFishBackElement.html#a721b1c81283045f36467355e77b90fea">  222</a></span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code" href="classElasticFishBackElement.html#a721b1c81283045f36467355e77b90fea">External_load_index</a>;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;};</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">//====================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">/// Refineable Poisson problem in deformable fish-shaped domain.</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">/// Template parameter identify the elements.</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html">  243</a></span>&#160;<span class="keyword">class </span><a class="code" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;{</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment"> /// \short  Constructor: Bool flag specifies if position of fish back is</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment"> /// prescribed or computed from the coupled problem. String specifies</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"> /// output directory</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment"></span> <a class="code" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; fix_position, <span class="keywordtype">string</span> directory_name);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment"> /// Destructor</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> ~<a class="code" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem</a>();</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment"> /// \short Update after Newton step: Update mesh in response </span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment"> /// to possible changes in the wall shape</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a8d8fb7ef1c571c57c02073edab4a7759">  258</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableFishPoissonProblem.html#a8d8fb7ef1c571c57c02073edab4a7759">actions_before_newton_convergence_check</a>()</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;   fish_mesh_pt()-&gt;node_update();</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  }</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a7f6c356f7c8bd0130de957297e999f40">  264</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableFishPoissonProblem.html#a7f6c356f7c8bd0130de957297e999f40">actions_after_newton_solve</a>(){}</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"> /// Update the problem specs before solve: Update mesh</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a58098181f3b88c2fc65f24fb15c1a529">  267</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classRefineableFishPoissonProblem.html#a58098181f3b88c2fc65f24fb15c1a529">actions_before_newton_solve</a>() </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;   fish_mesh_pt()-&gt;node_update();</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  }</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; <span class="comment">//Access function for the fish mesh</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">  273</a></span>&#160; AlgebraicRefineableFishMesh&lt;ELEMENT&gt;* <a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>() </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;   <span class="keywordflow">return</span> Fish_mesh_pt;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  }</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment"> /// Return value of the &quot;load&quot; on the elastically supported ring</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a20702e8945d442c9597348b550da14e4">  279</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span>&amp; <a class="code" href="classRefineableFishPoissonProblem.html#a20702e8945d442c9597348b550da14e4">load</a>()</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  {</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;   <span class="keywordflow">return</span> *Load_pt-&gt;value_pt(0);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  }</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment"> /// Doc the solution</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> doc_solution();</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment"> /// Access to DocInfo object</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a093f5963e63746843c33ca444a205333">  288</a></span>&#160;<span class="comment"></span> DocInfo&amp; <a class="code" href="classRefineableFishPoissonProblem.html#a093f5963e63746843c33ca444a205333">doc_info</a>() {<span class="keywordflow">return</span> Doc_info;}</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment"> /// Node at which the solution of the Poisson equation is documented</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#afa7a846c34391fdfbc1a7cefe268152c">  293</a></span>&#160;<span class="comment"></span> Node* <a class="code" href="classRefineableFishPoissonProblem.html#afa7a846c34391fdfbc1a7cefe268152c">Doc_node_pt</a>;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment"> /// Trace file</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#aa358e2b0fa91780bdca32ae4676717ff">  296</a></span>&#160;<span class="comment"></span> ofstream <a class="code" href="classRefineableFishPoissonProblem.html#aa358e2b0fa91780bdca32ae4676717ff">Trace_file</a>;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment"> /// Pointer to fish mesh</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#af915f09b6e4ae2f4ded2ad1a25ed7f01">  299</a></span>&#160;<span class="comment"></span> AlgebraicRefineableFishMesh&lt;ELEMENT&gt;* <a class="code" href="classRefineableFishPoissonProblem.html#af915f09b6e4ae2f4ded2ad1a25ed7f01">Fish_mesh_pt</a>;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment"> /// Pointer to single-element mesh that stores the GeneralisedElement</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment"> /// that represents the fish back</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#adcb3831cd9c21ec454ca787ced5d9db6">  303</a></span>&#160;<span class="comment"></span> Mesh* <a class="code" href="classRefineableFishPoissonProblem.html#adcb3831cd9c21ec454ca787ced5d9db6">Fish_back_mesh_pt</a>;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment"> /// \short Pointer to data item that stores the &quot;load&quot; on the fish back</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#ae4a4e592320bbe9bfbee52be7dfecfaa">  306</a></span>&#160;<span class="comment"></span> Data* <a class="code" href="classRefineableFishPoissonProblem.html#ae4a4e592320bbe9bfbee52be7dfecfaa">Load_pt</a>;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment"> /// \short Is the position of the fish back prescribed?</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a51c10ea7cbf4ab61fd953f011f72a1c4">  309</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classRefineableFishPoissonProblem.html#a51c10ea7cbf4ab61fd953f011f72a1c4">Fix_position</a>;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"> /// Doc info object</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#ad6d382f1d38425323627f34e0559b28f">  312</a></span>&#160;<span class="comment"></span> DocInfo <a class="code" href="classRefineableFishPoissonProblem.html#ad6d382f1d38425323627f34e0559b28f">Doc_info</a>;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;};</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">/// Constructor for adaptive Poisson problem in deformable fish-shaped</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">/// domain. Pass flag if position of fish back is fixed, and the output</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">/// directory. </span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00326"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a39da6bc93041c731bb3dc96b1d74c857">  326</a></span>&#160;<a class="code" href="classRefineableFishPoissonProblem.html#a39da6bc93041c731bb3dc96b1d74c857">RefineableFishPoissonProblem&lt;ELEMENT&gt;::RefineableFishPoissonProblem</a>(</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; fix_position, <span class="keywordtype">string</span> directory_name) : Fix_position(fix_position)</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;{ </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; <span class="comment">// Set output directory</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html#ad6d382f1d38425323627f34e0559b28f">Doc_info</a>.set_directory(directory_name); </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; <span class="comment">// Initialise step number</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html#ad6d382f1d38425323627f34e0559b28f">Doc_info</a>.number()=0;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; <span class="comment">// Open trace file</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,directory_name.c_str());</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html#aa358e2b0fa91780bdca32ae4676717ff">Trace_file</a>.open(filename);</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html#aa358e2b0fa91780bdca32ae4676717ff">Trace_file</a> </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;  &lt;&lt; <span class="stringliteral">&quot;VARIABLES=\&quot;load\&quot;,\&quot;y&lt;sub&gt;circle&lt;/sub&gt;\&quot;,\&quot;u&lt;sub&gt;control&lt;/sub&gt;\&quot;&quot;</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;  &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; <span class="comment">// Set coordinates and radius for the circle that will become the fish back</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; <span class="keywordtype">double</span> x_c=0.5;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; <span class="keywordtype">double</span> y_c=0.0;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; <span class="keywordtype">double</span> r_back=1.0;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; <span class="comment">// Build geometric element that will become the fish back</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; GeomObject* fish_back_pt=<span class="keyword">new</span> <a class="code" href="classElasticFishBackElement.html">ElasticFishBackElement</a>(x_c,y_c,r_back);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; <span class="comment">// Build fish mesh with geometric object that specifies the fish back </span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html#af915f09b6e4ae2f4ded2ad1a25ed7f01">Fish_mesh_pt</a>=<span class="keyword">new</span> AlgebraicRefineableFishMesh&lt;ELEMENT&gt;(fish_back_pt);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; <span class="comment">// Add the fish mesh to the problem&#39;s collection of submeshes:</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; add_sub_mesh(<a class="code" href="classRefineableFishPoissonProblem.html#af915f09b6e4ae2f4ded2ad1a25ed7f01">Fish_mesh_pt</a>);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; <span class="comment">// Build mesh that will store only the geometric wall element</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html#adcb3831cd9c21ec454ca787ced5d9db6">Fish_back_mesh_pt</a>=<span class="keyword">new</span> Mesh;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; <span class="comment">// So far, the mesh is completely empty. Let&#39;s add the </span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; <span class="comment">// one (and only!) GeneralisedElement which represents the shape</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; <span class="comment">// of the fish&#39;s back to it:</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html#adcb3831cd9c21ec454ca787ced5d9db6">Fish_back_mesh_pt</a>-&gt;add_element_pt(<span class="keyword">dynamic_cast&lt;</span>GeneralisedElement*<span class="keyword">&gt;</span>(</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                                    <a class="code" href="classRefineableFishPoissonProblem.html#af915f09b6e4ae2f4ded2ad1a25ed7f01">Fish_mesh_pt</a>-&gt;fish_back_pt()));</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; <span class="comment">// Add the fish back mesh to the problem&#39;s collection of submeshes:</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; add_sub_mesh(<a class="code" href="classRefineableFishPoissonProblem.html#adcb3831cd9c21ec454ca787ced5d9db6">Fish_back_mesh_pt</a>);</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; <span class="comment">// Now build global mesh from the submeshes</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; build_global_mesh();</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; <span class="comment">// Create/set error estimator</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;  </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; <span class="comment">// Choose a node at which the solution is documented: Choose</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; <span class="comment">// the central node that is shared by all four elements in</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; <span class="comment">// the base mesh because it exists at all refinement levels.</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; <span class="comment">// How many nodes does element 0 have?</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; <span class="keywordtype">unsigned</span> nnod=<a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;finite_element_pt(0)-&gt;nnode();</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; <span class="comment">// The central node is the last node in element 0:</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html#afa7a846c34391fdfbc1a7cefe268152c">Doc_node_pt</a>=<a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;finite_element_pt(0)-&gt;node_pt(nnod-1);</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; <span class="comment">// Doc</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; cout &lt;&lt; std::endl &lt;&lt;  <span class="stringliteral">&quot;Control node is located at: &quot;</span> </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;      &lt;&lt; <a class="code" href="classRefineableFishPoissonProblem.html#afa7a846c34391fdfbc1a7cefe268152c">Doc_node_pt</a>-&gt;x(0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code" href="classRefineableFishPoissonProblem.html#afa7a846c34391fdfbc1a7cefe268152c">Doc_node_pt</a>-&gt;x(1) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; <span class="comment">// Position of fish back is prescribed</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; <span class="keywordflow">if</span> (<a class="code" href="classRefineableFishPoissonProblem.html#a51c10ea7cbf4ab61fd953f011f72a1c4">Fix_position</a>)</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;  {</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;   <span class="comment">// Create the prescribed position data</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;   <a class="code" href="classRefineableFishPoissonProblem.html#ae4a4e592320bbe9bfbee52be7dfecfaa">Load_pt</a>=<span class="keyword">new</span> Data(1);</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;   </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;   <span class="comment">// Pin the prescribed position</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;   <a class="code" href="classRefineableFishPoissonProblem.html#ae4a4e592320bbe9bfbee52be7dfecfaa">Load_pt</a>-&gt;pin(0);</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;  }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; <span class="comment">// Coupled problem: The position of the fish back is determined</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; <span class="comment">// via the solution of the Poisson equation: The solution at</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; <span class="comment">// the control node acts as the load for the displacement of the</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; <span class="comment">// fish back</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;  {   </div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;   <span class="comment">// Use the solution (value 0) at the control node as the load</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;   <span class="comment">// that acts on the ring. [Note: Node == Data by inheritance]</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;   <a class="code" href="classRefineableFishPoissonProblem.html#ae4a4e592320bbe9bfbee52be7dfecfaa">Load_pt</a>=<a class="code" href="classRefineableFishPoissonProblem.html#afa7a846c34391fdfbc1a7cefe268152c">Doc_node_pt</a>;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;  }</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; <span class="comment">// Set the pointer to the Data object that specifies the </span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; <span class="comment">// load on the fish&#39;s back</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160; <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classElasticFishBackElement.html">ElasticFishBackElement</a>*<span class="keyword">&gt;</span>(<a class="code" href="classRefineableFishPoissonProblem.html#af915f09b6e4ae2f4ded2ad1a25ed7f01">Fish_mesh_pt</a>-&gt;fish_back_pt())-&gt;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  set_load_pt(<a class="code" href="classRefineableFishPoissonProblem.html#ae4a4e592320bbe9bfbee52be7dfecfaa">Load_pt</a>);</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; <span class="comment">// here. </span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; <span class="keywordtype">unsigned</span> num_bound = <a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;nboundary();</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;  {</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;   <span class="keywordtype">unsigned</span> num_nod= <a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;nboundary_node(ibound);</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    {</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;     <a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0); </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    }</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;  }</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; <span class="comment">// Set homogeneous boundary conditions on all boundaries </span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;  {</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;   <span class="comment">// Loop over the nodes on boundary</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;   <span class="keywordtype">unsigned</span> num_nod=<a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;nboundary_node(ibound);</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    {</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;     <a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(0,0.0);</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    }</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;  }</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment"> /// Loop over elements and set pointers to source function</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment"></span> <span class="keywordtype">unsigned</span> n_element = <a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;nelement();</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;  {</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;   <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(<a class="code" href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">fish_mesh_pt</a>()-&gt;element_pt(i));</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;   </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;   <span class="comment">//Set the source function pointer</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;   el_pt-&gt;source_fct_pt() = &amp;<a class="code" href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">ConstSourceForPoisson::get_source</a>;</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;  }</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; <span class="comment">//Attach the boundary conditions to the mesh</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;}</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160; </div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160; </div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="comment">/// Destructor for Poisson problem in deformable fish-shaped domain.</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00468"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a7039a3409520850908940927b91af9ab">  468</a></span>&#160;<a class="code" href="classRefineableFishPoissonProblem.html#a7039a3409520850908940927b91af9ab">RefineableFishPoissonProblem&lt;ELEMENT&gt;::~RefineableFishPoissonProblem</a>()</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;{ </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; <span class="comment">// Close trace file</span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; Trace_file.close();</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;}</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; </div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160; </div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">/// Doc the solution in tecplot format.</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00481"></a><span class="lineno"><a class="line" href="classRefineableFishPoissonProblem.html#a6db25ff0bd3014aa531d9f0e8b385beb">  481</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classRefineableFishPoissonProblem.html#a6db25ff0bd3014aa531d9f0e8b385beb">RefineableFishPoissonProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;{ </div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160; ofstream some_file;</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160; <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; </div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160; <span class="comment">// Number of plot points in each coordinate direction.</span></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160; npts=5; </div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160; </div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; <span class="comment">// Output solution </span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160; sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;         Doc_info.number());</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160; some_file.open(filename);</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160; fish_mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; some_file.close();</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160; </div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160; <span class="comment">// Write &quot;load&quot;, vertical position of the fish back, and solution at </span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160; <span class="comment">// control node to trace file</span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160; Trace_file </div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;  &lt;&lt; <span class="keyword">static_cast&lt;</span><a class="code" href="classElasticFishBackElement.html">ElasticFishBackElement</a>*<span class="keyword">&gt;</span>(fish_mesh_pt()-&gt;</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;                                          fish_back_pt())-&gt;load()</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;  &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;  &lt;&lt; <span class="keyword">static_cast&lt;</span><a class="code" href="classElasticFishBackElement.html">ElasticFishBackElement</a>*<span class="keyword">&gt;</span>(fish_mesh_pt()-&gt;</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;                                          fish_back_pt())-&gt;y_c()</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Doc_node_pt-&gt;value(0) &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;}</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160; </div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160; </div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160; </div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160; </div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160; </div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160; </div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160; </div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160; </div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160; </div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160; </div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;<span class="comment">/// Demonstrate how to solve 2D Poisson problem in deformable</span></div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="comment">/// fish-shaped domain with mesh adaptation.</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00529"></a><span class="lineno"><a class="line" href="elastic__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">  529</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="elastic__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">demo_fish_poisson</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; directory_name)</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;{</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160; </div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160; <span class="comment">// Set up the problem with prescribed displacement of fish back</span></div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160; <span class="keywordtype">bool</span> fix_position=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem&lt;ELEMENT&gt;</a> <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>(fix_position,directory_name);  </div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160; </div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160; <span class="comment">// Doc refinement targets</span></div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.fish_mesh_pt()-&gt;doc_adaptivity_targets(cout);</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;  </div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160; <span class="comment">// Do some uniform mesh refinement first</span></div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; <span class="comment">//--------------------------------------</span></div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.refine_uniformly();</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.refine_uniformly(); </div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160; </div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160; <span class="comment">// Initial value for the load on the fish back </span></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.load()=-0.3;</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160; </div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160; <span class="comment">// Loop for different fish shapes</span></div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160; <span class="comment">//-------------------------------</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160; </div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160; <span class="comment">// Number of steps</span></div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160; <span class="keywordtype">unsigned</span> nstep=5;</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160; <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1) nstep=1;</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160; </div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160; <span class="comment">// Increment in load</span></div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160; <span class="keywordtype">double</span> dp=0.6/double(nstep-1);</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160; </div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160; <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;  {    </div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;   <span class="comment">// Solve/doc</span></div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;   <span class="keywordtype">unsigned</span> max_solve=2; </div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;   <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.newton_solve(max_solve);</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;   <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.doc_solution();</div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;   </div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;   <span class="comment">//Increment counter for solutions </span></div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;   <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.doc_info().number()++;    </div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;   </div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;   <span class="comment">// Change load on ring</span></div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;   <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.load()+=dp;</div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;  } </div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;}</div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160; </div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160; </div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="comment">/// Demonstrate how to solve &quot;elastic&quot; 2D Poisson problem in deformable</span></div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="comment">/// fish-shaped domain with mesh adaptation.</span></div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00578"></a><span class="lineno"><a class="line" href="elastic__poisson_8cc.html#a28565f965d7ffb7f92f3773a6333023b">  578</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="elastic__poisson_8cc.html#a28565f965d7ffb7f92f3773a6333023b">demo_elastic_fish_poisson</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; directory_name)</div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;{</div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160; </div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;  <span class="comment">//Set up the problem with &quot;elastic&quot; fish back</span></div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160; <span class="keywordtype">bool</span> fix_position=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160; <a class="code" href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem&lt;ELEMENT&gt;</a> <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>(fix_position,directory_name);</div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;  </div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160; <span class="comment">// Doc refinement targets</span></div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.fish_mesh_pt()-&gt;doc_adaptivity_targets(cout);</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;  </div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160; <span class="comment">// Do some uniform mesh refinement first</span></div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160; <span class="comment">//--------------------------------------</span></div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.refine_uniformly();</div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.refine_uniformly();</div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160; </div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160; </div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160; <span class="comment">// Initial value for load on fish back</span></div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.load()=0.0;</div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160; </div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160; <span class="comment">// Solve/doc</span></div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160; <span class="keywordtype">unsigned</span> max_solve=2; </div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.newton_solve(max_solve);</div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160; <a class="code" href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a>.doc_solution();</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160; </div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;}</div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160; </div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160; </div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160; </div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160; </div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160; </div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="comment">/// Driver for &quot;elastic&quot; fish poisson solver with adaptation.</span></div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="comment">/// If there are any command line arguments, we regard this as a </span></div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="comment">/// validation run and perform only a single step.</span></div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00613"></a><span class="lineno"><a class="line" href="elastic__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">  613</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="elastic__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) </div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;{</div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160; <span class="comment">// Store command line arguments</span></div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160; CommandLineArgs::setup(argc,argv);</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160; </div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160; <span class="comment">// Shorthand for element type</span></div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;  <span class="keyword">typedef</span> AlgebraicElement&lt;RefineableQPoissonElement&lt;2,3&gt; &gt; ELEMENT;</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160; </div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;  <span class="comment">// Compute solution of Poisson equation in various domains</span></div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;  demo_fish_poisson&lt;ELEMENT&gt;(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160; </div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;  <span class="comment">// Compute &quot;elastic&quot; coupled solution directly</span></div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;  demo_elastic_fish_poisson&lt;ELEMENT&gt;(<span class="stringliteral">&quot;RESLT_elastic&quot;</span>);</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160; </div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160; </div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;}</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160; </div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a58098181f3b88c2fc65f24fb15c1a529"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a58098181f3b88c2fc65f24fb15c1a529">RefineableFishPoissonProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve: Update mesh.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00267">elastic_poisson.cc:267</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_a3889028a8375ef126ec207f73ca18adc"><div class="ttname"><a href="classElasticFishBackElement.html#a3889028a8375ef126ec207f73ca18adc">ElasticFishBackElement::~ElasticFishBackElement</a></div><div class="ttdeci">virtual ~ElasticFishBackElement()</div><div class="ttdoc">Destructor:</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00117">elastic_poisson.cc:117</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_aa358e2b0fa91780bdca32ae4676717ff"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#aa358e2b0fa91780bdca32ae4676717ff">RefineableFishPoissonProblem::Trace_file</a></div><div class="ttdeci">ofstream Trace_file</div><div class="ttdoc">Trace file.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00296">elastic_poisson.cc:296</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a20702e8945d442c9597348b550da14e4"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a20702e8945d442c9597348b550da14e4">RefineableFishPoissonProblem::load</a></div><div class="ttdeci">double &amp; load()</div><div class="ttdoc">Return value of the &quot;load&quot; on the elastically supported ring.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00279">elastic_poisson.cc:279</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_a721b1c81283045f36467355e77b90fea"><div class="ttname"><a href="classElasticFishBackElement.html#a721b1c81283045f36467355e77b90fea">ElasticFishBackElement::External_load_index</a></div><div class="ttdeci">unsigned External_load_index</div><div class="ttdoc">External index of the load object.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00222">elastic_poisson.cc:222</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html"><div class="ttname"><a href="classRefineableFishPoissonProblem.html">RefineableFishPoissonProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00243">elastic_poisson.cc:243</a></div></div>
+<div class="ttc" id="anamespaceConstSourceForPoisson_html"><div class="ttname"><a href="namespaceConstSourceForPoisson.html">ConstSourceForPoisson</a></div><div class="ttdoc">Namespace for const source term in Poisson equation.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00051">elastic_poisson.cc:51</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a6db25ff0bd3014aa531d9f0e8b385beb"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a6db25ff0bd3014aa531d9f0e8b385beb">RefineableFishPoissonProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00481">elastic_poisson.cc:481</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_ad6d382f1d38425323627f34e0559b28f"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#ad6d382f1d38425323627f34e0559b28f">RefineableFishPoissonProblem::Doc_info</a></div><div class="ttdeci">DocInfo Doc_info</div><div class="ttdoc">Doc info object.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00312">elastic_poisson.cc:312</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a51c10ea7cbf4ab61fd953f011f72a1c4"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a51c10ea7cbf4ab61fd953f011f72a1c4">RefineableFishPoissonProblem::Fix_position</a></div><div class="ttdeci">bool Fix_position</div><div class="ttdoc">Is the position of the fish back prescribed?</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00309">elastic_poisson.cc:309</a></div></div>
+<div class="ttc" id="aelastic__poisson_8cc_html_a28565f965d7ffb7f92f3773a6333023b"><div class="ttname"><a href="elastic__poisson_8cc.html#a28565f965d7ffb7f92f3773a6333023b">demo_elastic_fish_poisson</a></div><div class="ttdeci">void demo_elastic_fish_poisson(const string &amp;directory_name)</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00578">elastic_poisson.cc:578</a></div></div>
+<div class="ttc" id="aelastic__poisson_8txt_html_afb579f8a629fcc14bd8f7635af4c3866"><div class="ttname"><a href="elastic__poisson_8txt.html#afb579f8a629fcc14bd8f7635af4c3866">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8txt_source.html#l00017">elastic_poisson.txt:17</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_af915f09b6e4ae2f4ded2ad1a25ed7f01"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#af915f09b6e4ae2f4ded2ad1a25ed7f01">RefineableFishPoissonProblem::Fish_mesh_pt</a></div><div class="ttdeci">AlgebraicRefineableFishMesh&lt; ELEMENT &gt; * Fish_mesh_pt</div><div class="ttdoc">Pointer to fish mesh.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00299">elastic_poisson.cc:299</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_ae4a4e592320bbe9bfbee52be7dfecfaa"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#ae4a4e592320bbe9bfbee52be7dfecfaa">RefineableFishPoissonProblem::Load_pt</a></div><div class="ttdeci">Data * Load_pt</div><div class="ttdoc">Pointer to data item that stores the &quot;load&quot; on the fish back.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00306">elastic_poisson.cc:306</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_a0411850f03db9f6eeb10562be778dacb"><div class="ttname"><a href="classElasticFishBackElement.html#a0411850f03db9f6eeb10562be778dacb">ElasticFishBackElement::ElasticFishBackElement</a></div><div class="ttdeci">ElasticFishBackElement(const double &amp;x_c, const double &amp;y_c, const double &amp;r)</div><div class="ttdoc">Constructor: Build ring from doubles that describe the geometry: x and y positions of centre and the ...</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00095">elastic_poisson.cc:95</a></div></div>
+<div class="ttc" id="anamespaceConstSourceForPoisson_html_add351c5acab2561d68d1fc9ec3d5fc5e"><div class="ttname"><a href="namespaceConstSourceForPoisson.html#add351c5acab2561d68d1fc9ec3d5fc5e">ConstSourceForPoisson::Strength</a></div><div class="ttdeci">double Strength</div><div class="ttdoc">Strength of source function: default value 1.0.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00054">elastic_poisson.cc:54</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_aed5858c2ae86823017713d0894cc4052"><div class="ttname"><a href="classElasticFishBackElement.html#aed5858c2ae86823017713d0894cc4052">ElasticFishBackElement::get_residuals</a></div><div class="ttdeci">void get_residuals(Vector&lt; double &gt; &amp;residuals)</div><div class="ttdoc">Compute element residual vector (wrapper)</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00131">elastic_poisson.cc:131</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_a48729984910b86d7210ed218bcb821bd"><div class="ttname"><a href="classElasticFishBackElement.html#a48729984910b86d7210ed218bcb821bd">ElasticFishBackElement::get_jacobian</a></div><div class="ttdeci">void get_jacobian(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</div><div class="ttdoc">Compute element residual Vector and element Jacobian matrix (wrapper)</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00144">elastic_poisson.cc:144</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_a03865180362294a36322523ff2a880ad"><div class="ttname"><a href="classElasticFishBackElement.html#a03865180362294a36322523ff2a880ad">ElasticFishBackElement::fill_in_generic_residual_contribution</a></div><div class="ttdeci">void fill_in_generic_residual_contribution(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, unsigned flag)</div><div class="ttdoc">Compute element residual Vector (only if flag=0) and also the element Jacobian matrix (if flag=1)</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00185">elastic_poisson.cc:185</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a7f6c356f7c8bd0130de957297e999f40"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a7f6c356f7c8bd0130de957297e999f40">RefineableFishPoissonProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00264">elastic_poisson.cc:264</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_a14397b102dbefc87a7e8f6a6782ec730"><div class="ttname"><a href="classElasticFishBackElement.html#a14397b102dbefc87a7e8f6a6782ec730">ElasticFishBackElement::set_load_pt</a></div><div class="ttdeci">void set_load_pt(Data *load_pt)</div><div class="ttdoc">Set pointer to Data object that specifies the &quot;load&quot; on the fish back.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00157">elastic_poisson.cc:157</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a39da6bc93041c731bb3dc96b1d74c857"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a39da6bc93041c731bb3dc96b1d74c857">RefineableFishPoissonProblem::RefineableFishPoissonProblem</a></div><div class="ttdeci">RefineableFishPoissonProblem(const bool &amp;fix_position, string directory_name)</div><div class="ttdoc">Constructor: Bool flag specifies if position of fish back is prescribed or computed from the coupled ...</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00326">elastic_poisson.cc:326</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html"><div class="ttname"><a href="classElasticFishBackElement.html">ElasticFishBackElement</a></div><div class="ttdoc">Fish back as a GeneralisedElement: Circular ring whose position is given by.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00087">elastic_poisson.cc:87</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_afe29dde5bd5ff5763bcb1ded94adf826"><div class="ttname"><a href="classElasticFishBackElement.html#afe29dde5bd5ff5763bcb1ded94adf826">ElasticFishBackElement::load</a></div><div class="ttdeci">double &amp; load()</div><div class="ttdoc">&quot;Load&quot; acting on the ring</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00128">elastic_poisson.cc:128</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_af0e376da1420c97403549b3a48f8b356"><div class="ttname"><a href="classElasticFishBackElement.html#af0e376da1420c97403549b3a48f8b356">ElasticFishBackElement::k_stiff</a></div><div class="ttdeci">double &amp; k_stiff()</div><div class="ttdoc">&quot;Stiffness&quot; of the ring</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00125">elastic_poisson.cc:125</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_adcb3831cd9c21ec454ca787ced5d9db6"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#adcb3831cd9c21ec454ca787ced5d9db6">RefineableFishPoissonProblem::Fish_back_mesh_pt</a></div><div class="ttdeci">Mesh * Fish_back_mesh_pt</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00303">elastic_poisson.cc:303</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a093f5963e63746843c33ca444a205333"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a093f5963e63746843c33ca444a205333">RefineableFishPoissonProblem::doc_info</a></div><div class="ttdeci">DocInfo &amp; doc_info()</div><div class="ttdoc">Access to DocInfo object.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00288">elastic_poisson.cc:288</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a7039a3409520850908940927b91af9ab"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a7039a3409520850908940927b91af9ab">RefineableFishPoissonProblem::~RefineableFishPoissonProblem</a></div><div class="ttdeci">virtual ~RefineableFishPoissonProblem()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00468">elastic_poisson.cc:468</a></div></div>
+<div class="ttc" id="aelastic__poisson_8cc_html_abb923e967929c29b3a4fa1693604952a"><div class="ttname"><a href="elastic__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">demo_fish_poisson</a></div><div class="ttdeci">void demo_fish_poisson(const string &amp;directory_name)</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00529">elastic_poisson.cc:529</a></div></div>
+<div class="ttc" id="aclassElasticFishBackElement_html_abb0ba4fd55ef0c0b48634eded475e5c7"><div class="ttname"><a href="classElasticFishBackElement.html#abb0ba4fd55ef0c0b48634eded475e5c7">ElasticFishBackElement::K_stiff</a></div><div class="ttdeci">double K_stiff</div><div class="ttdoc">Stiffness of the ring's &quot;elastic&quot; support.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00219">elastic_poisson.cc:219</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a6f25d5110e5262e66e2900da051567a6"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a6f25d5110e5262e66e2900da051567a6">RefineableFishPoissonProblem::fish_mesh_pt</a></div><div class="ttdeci">AlgebraicRefineableFishMesh&lt; ELEMENT &gt; * fish_mesh_pt()</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00273">elastic_poisson.cc:273</a></div></div>
+<div class="ttc" id="aelastic__poisson_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="elastic__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00613">elastic_poisson.cc:613</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_afa7a846c34391fdfbc1a7cefe268152c"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#afa7a846c34391fdfbc1a7cefe268152c">RefineableFishPoissonProblem::Doc_node_pt</a></div><div class="ttdeci">Node * Doc_node_pt</div><div class="ttdoc">Node at which the solution of the Poisson equation is documented.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00293">elastic_poisson.cc:293</a></div></div>
+<div class="ttc" id="aclassRefineableFishPoissonProblem_html_a8d8fb7ef1c571c57c02073edab4a7759"><div class="ttname"><a href="classRefineableFishPoissonProblem.html#a8d8fb7ef1c571c57c02073edab4a7759">RefineableFishPoissonProblem::actions_before_newton_convergence_check</a></div><div class="ttdeci">void actions_before_newton_convergence_check()</div><div class="ttdoc">Update after Newton step: Update mesh in response to possible changes in the wall shape.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00258">elastic_poisson.cc:258</a></div></div>
+<div class="ttc" id="anamespaceConstSourceForPoisson_html_a40ef79083874b58ed42b4df2ca0f4c10"><div class="ttname"><a href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">ConstSourceForPoisson::get_source</a></div><div class="ttdeci">void get_source(const Vector&lt; double &gt; &amp;x, double &amp;source)</div><div class="ttdoc">Const source function.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__poisson_8cc_source.html#l00057">elastic_poisson.cc:57</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:04:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

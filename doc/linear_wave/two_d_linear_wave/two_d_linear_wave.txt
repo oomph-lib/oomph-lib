@@ -1,0 +1,411 @@
+\mainpage Demo problem: Solution of the 2D linear wave equation
+
+In this example we demonstrate the solution of the 2D linear
+wave equation -- a hyperbolic PDE that involves second time-derivatives.
+Timestepping of such problems may be performed with timesteppers
+from the \c Newmark family. We demonstrate their use and 
+illustrate how to assign the initial conditions. 
+
+<HR>
+<HR>
+
+\section example_problem The example problem
+
+We shall illustrate the timestepping procedures for hyperbolic
+problems by considering the solution of the 2D linear wave 
+equation in a rectangular domain:
+
+<CENTER>
+<TABLE>
+<TR>
+<TD>
+<CENTER>
+<B>The two-dimensional linear wave equation in a rectangular domain.</B>
+</CENTER> 
+Solve
+\f[
+\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}
+= \frac{\partial^2 u}{\partial t^2} + f\left(x_1,x_2,t\right),
+ \ \ \ \ \ \ \ \ \ \ @E[2DLinearWave]@
+\f]
+in the rectangular domain \f$ D = 
+\left\{ (x_1,x_2) \ \bigg| \ x_1 \in [0,1],\ x_2 \in [0,2] \right\} \f$,
+subject to the Dirichlet boundary conditions
+\f[
+\left. u\right|_{\partial D}=g_0
+\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@
+\f]
+and the initial conditions
+\f[
+u(x_1,x_2,t=0)=h_0(x_1,x_2),
+\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@
+\f]
+and
+\f[
+\left. \frac{\partial u}{\partial t}\right|_{t=0}=k_0(x_1,x_2),
+\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@
+\f]
+where the functions \f$ g_0, h_0\f$ and  \f$ k_0 \f$ are given.
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+Here we consider the unforced case, \f$ f=0 \f$, and choose boundary
+and initial conditions that are consistent with the exact, 
+travelling-wave solution
+\f[
+u_0(x_1,x_2,t) = \tanh\left(1-\alpha\left(\zeta-t\right)\right),
+ \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@
+\f]
+where 
+\f[
+\zeta=\cos\left(\phi\right)x_1+\sin\left(\phi\right)x_2,
+ \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@
+\f]
+is the travelling-wave coordinate. The solution represents a tanh
+step profile that propagates with unit speed through the domain.
+The parameter \f$ \alpha \f$ controls the steepness of the
+step while \f$ \phi \f$ controls the orientation of the step in
+the \f$ (x_1,x_2) \f$ - plane.
+
+The figure below shows a plot of computed and exact solutions at
+time \f$ t = 0.25 \f$, for a steepness parameter \f$ \alpha=4 \f$, 
+and an angle \f$ \phi=\pi/6 \f$ . The plot is a snapshot,
+taken from the <A HREF="../figures/wave_sol.avi"> animation of the
+solution</A>.
+
+@I w 0.75\textwidth wave_sol "Snapshot of the exact and computed solutions. "
+
+<HR>
+<HR>
+
+\section namespace Global parameters and functions
+
+As usual, we store the problem parameters in a namespace. Note that
+we define not only the exact solution but also its first and second
+time-derivatives, as both are needed to assign the initial conditions
+for the Newmark timestepper; see \ref IC for details. 
+
+
+\dontinclude two_d_linear_wave.cc
+\skipline start_of_tanh_solution
+\until end of tanh solution
+
+<HR>
+<HR>
+
+\section main The driver code
+As in most previous time-dependent example codes, we use the
+command line arguments as flags that indicate if the code is
+run in validation mode -- if command line arguments are specified,
+the code will only perform a small number of timesteps. 
+
+\skipline start_of_main
+\until CommandLineArgs::
+
+We build the problem with 2D bi-quadratic \c QLinearWaveElements
+and a  \c Newmark<1> timestepper (see \ref IC for an explanation of the
+template argument), passing the number of elements, and the pointer
+to the source function to the constructor, and run the time 
+time-dependent simulation. We solve the problem twice, once
+with an impulsive start and once a with "smooth" start from the 
+travelling-wave solution (@R[ExactSoln1]@).
+
+\until end of main
+
+<HR>
+<HR>
+
+\section problem The problem class 
+The problem class is practically identical to that used for
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat/html/index.html">
+the corresponding unsteady heat problem</A>. No actions are required
+before or after the solve but the time-dependent boundary conditions
+must be updated before every timestep.
+
+\dontinclude two_d_linear_wave.cc
+\skipline start_of_problem_class
+\until end of problem class
+
+<HR>
+<HR>
+
+\section constructor The problem constructor
+The problem constructor is also fairly standard: We start by creating
+the timestepper (of the type specified by the template argument), 
+pass it to the Problem's collection of timesteppers, and
+initialise the parameters for the exact solution.
+
+\skipline start_of_constructor
+\until TanhSolnForLinearWave::Phi
+
+Next, we build the mesh and pin the nodal values on the Dirichlet
+boundaries (i.e. at all boundary nodes). 
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat/html/index.html">
+Recall</A> that the pointer to the timestepper must be 
+passed the mesh constructor to allow the creation of \c Nodes that 
+provide sufficient storage for the "history values" 
+required by the timestepper. 
+
+\until  //end of boundary conditions 
+
+
+Finally, we complete the 
+build of the elements by passing the pointer to the source
+function to the elements, and 
+set up the equation numbering scheme.
+
+
+\until end of constructor
+
+<HR>
+<HR>
+
+\section IC Setting the initial conditions for Newmark timesteppers
+Most of the code discussed so far was (and most of what follows is)
+practically identical to that in 
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat/html/index.html"> 
+the corresponding unsteady heat example</A>. The main difference
+between the two example codes is the way in which the initial conditions
+are applied. This is closely related to the different role of the
+"history values" in \c BDF and \c Newmark timestepping schemes:
+
+<HR>
+
+\subsection BDFvsNewmark The interpretation of history values in BDF and Newmark timesteppers
+
+In problems in which first time-derivatives are 
+discretised by \c BDF timesteppers, the "history values" represent the 
+values of the solution at previous timesteps, i.e. 
+for a \c Data object that is associated with a timestepper from the
+\c BDF family, \c Data::value(t,i) returns the i-th value stored
+in the \c Data object, at the t-th previous timestep. We recall that
+when assigning
+initial conditions  for computations with higher-order timesteppers 
+from the \c BDF family, the number of (mathematical) initial conditions 
+(the solution at the intial time, \f$ t=t_0 \f$ , say) 
+is \e smaller than the number of "history values" required by the
+timestepper. For instance, a computation with a \c BDF<2> timestepper and
+a timestep \c dt not only requires  the solution at \f$ t=t_0
+\f$ but also the solution at \f$ t=t_0- {\tt dt} \f$ . 
+In most of our examples, this did not cause any problems. We 
+either started the simulation with an "impulsive start" by setting 
+\e all history values to the solution at \f$ t=t_0 \f$ , or we assigned 
+the history values from an explicitly-given function (usually 
+an exact solution of the governing equations), in which case 
+the evaluation of the history values at previous timesteps was trivial. 
+
+Timesteppers from the \c Newmark family compute second-order accurate
+approximations for the first and second time-derivatives of 
+the values stored in an associated \c Data object. \c Newmark timesteppers are
+implicit, single-step schemes since the approximation of the time-derivatives
+only involves quantities evaluated at the current time (where the solution is
+unknown) and at a single previous timestep. To facilitate their 
+application in multiphysics problems where parts of a \c Problem 
+might be discretised by  timesteppers from the \c BDF family, say, 
+\c Newmark timesteppers can allocate additional storage for the solution at 
+the previous \c NSTEPS timesteps. These history values are 
+stored in the \c Data objects and are updated by the timestepper
+when the solution is advanced to the next time level, but they 
+are not used in the computation of the time-derivatives.
+
+For a \c Data object that is associated with a \c Newmark<NSTEPS>
+timestepper, the history value obtained from \c Data::value(t,i)
+may be interpreted as follows:
+- t=0:  The i-th value at at present time, \c Time_pt->time()
+- t=1:  The i-th value at the previous timestep, \c Time_pt->time()-dt
+- ...
+- t=NSTEPS: The i-th value at the NSTEPS-th previous timestep, 
+  i.e. at \c Time_pt->time()-NSTEPS*dt if the timestep dt was
+  kept constant.
+- t=NSTEPS+1: The 1st time derivative (= "the velocity") of the i-th value
+  at the previous timestep, \c Time_pt->time()-dt
+- t=NSTEPS+2: The 2nd time derivative (= "the acceleration") of the i-th value
+  at the previous timestep, \c Time_pt->time()-dt. 
+.
+The \c Newmark<1> timestepper is equivalent to the classical Newmark scheme. 
+
+<HR>
+
+\subsection ic_for_newmark Assigning the history values for Newmark timesteppers
+
+The \c Newmark timestepper provides a number of helper functions that
+facilitate the assignment of "history values". 
+-# <B>Impulsive starts: </B> \n\n 
+   Given a pointer, \c data_pt, to a \c Data object, the function
+   \c Newmark<NSTEPS>::assign_initial_values_impulsive(data_pt)
+   assigns history values that are consistent with an impulsive start
+   from the \c Data object's current values.
+-# <B>"Smooth" starts from explicitly given time-histories: </B> \n\n 
+   If the solution \f$ u \f$ and its first \e and second time-derivatives 
+   are available analytically for \f$ t \le t_0\f$, the
+   function \c Newmark<NSTEPS>::assign_initial_data_values(...)
+   may be used to assign history values that are consistent     
+   with this time history. Note that, as in the case of the 
+   higher-order \c BDF timesteppers, we require more information
+   than is provided by the (mathematical) initial conditions
+   which only provide the value and the first time-derivative
+   of the unknown function at the initial time. 
+.
+
+<HR>
+
+\subsection implement_ic Implementation in the demo code
+
+The function \c set_initial_condition() demonstrates the
+use of these functions in our example problem. The assignment 
+of the "history values" for 
+the nodal \c Data is handled by the timestepper, a pointer to
+which can be obtained from the \c Problem:
+
+\skipline start_of_set_initial_condition
+\until dynamic_cast
+
+To start the simulation with an impulsive start from the
+travelling-wave solution, defined in the namespace \c TanhSolnForLinearWave, 
+we loop over all nodes and determine their positions. We then
+compute the value of the exact solution at that point and
+assign it to the current nodal value. "History values" that correspond 
+to an impulsive start from this value are then assigned by 
+calling \c Newmark<NSTEPS>::assign_initial_values_impulsive(...).
+
+\until end impulsive start
+
+To start the simulation with a "smooth" start from the travelling-wave
+solution we have to pass function pointers to the functions that 
+specify the function and its first and second time-derivatives to 
+\c Newmark<NSTEPS>::assign_initial_data_values(...). As usual, 
+the required form of the function pointer is defined as a public
+\c typedef in the Newmark class. Since \c Data objects can 
+store multiple values, each of which will generally have a
+different time-history, \c Newmark<NSTEPS>::assign_initial_data_values(...)
+expects a vector of function pointers. In the current example 
+where each node only stores a single value, these vectors only have 
+a single entry.
+
+\until initial_accel_fct[0]=&TanhSolnForLinearWave::exact_d2udt2;
+
+Now we loop over all nodes and pass the vectors of function pointers  
+to \c Newmark<NSTEPS>::assign_initial_data_values(...) to assign the
+required history values.
+
+\until end of smooth start
+
+To check/demonstrate that the assignment of the initial condition
+was successful, we compare the Newmark approximation for the
+zero-th, first and second time-derivatives of the nodal values
+against the exact solution and document the maximum discrepancy. 
+
+\until end of set initial condition
+
+<HR>
+<HR>
+
+\section doc Post processing
+The post-processing routine is practically identical to that in the
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat/html/index.html">
+corresponding unsteady heat example</A>. We output the solution,
+and compare the computed and exact solutions. 
+
+\until end of doc solution
+
+<HR>
+<HR>
+
+\section unsteady_run The timestepping loop
+Timestepping the linear wave equation involves exactly the same steps as in the
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat/html/index.html">
+unsteady heat example:</A> We start by creating a \c
+DocInfo object to specify the output directories and open 
+the trace file in which we record  the time-evolution of the error. 
+
+\skipline start_of_unsteady_run
+\until open(filename);
+
+We then initialise the time, set the initial condition and output the
+initial solution.
+
+\until ++;
+
+Next we set up the number of timesteps to be performed. If the code is
+run in validation mode, indicated by a non-zero number of command line
+arguments, we only perform two timesteps.  
+
+\until }
+
+Finally, we loop over the timesteps, solve the equations at each time level
+and document the results. 
+
+\until end of unsteady run
+
+<HR>
+<HR>
+
+\section comments Comments and Exercises
+
+\subsection default Default parameters for the linear wave equations
+The linear wave equation does not contain any parameters, therefore
+the \c Problem constructor only passed the pointer to
+the pointer to the source function to the elements.
+Passing the pointer to the source function is optional -- if no
+source function pointer is specified, the linear-wave elements will
+use the default \f$ f(x_1,x_2,t)=0 \f$ , so that the unforced
+linear wave equation is solved. You should confirm
+this by commenting out the assignment of the source function pointer
+in the Problem constructor -- the code should (and does!) still compute the
+correct results. This is because the travelling-wave solution (@R[ExactSoln1]@)
+is in fact a solution of the \e unforced wave equation -- the source function 
+defined in the namespace \c TanhSolnForLinearWave implements
+\f$ f(x_1,x_2,t)=0 \f$ .
+
+
+\subsection imp_soln The errors induced by an impulsive start
+
+-# View <A HREF="../figures/impulsive_wave_solution.avi">
+   the animation of the results obtained from the simulation that was
+   started impulsively </A> and explain how the
+   differences to the exact solution arise. 
+-# Does the error induced by the impulsive start decay with time?
+   Contrast this with the behaviour in the
+   <A HREF="../../../unsteady_heat/two_d_unsteady_heat/html/index.html">
+   unsteady heat example. </A>
+.
+
+\subsection flux The use of Neumann boundary conditions.
+Neumann ("flux") boundary conditions for the linear wave equation
+can be applied by attaching elements of type 
+\c LinearWaveFluxElement<BULK_LINEAR_WAVE_ELEMENT> 
+to the boundary in exactly the same way as in the
+<A HREF="../../../poisson/two_d_poisson_flux_bc2/html/index.html">
+Poisson </A> and 
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">
+unsteady heat </A> examples. We will therefore not discuss this
+case in detail but simply refer to the listing of the
+(well-documented) 
+<A HREF="../../../../demo_drivers/linear_wave/two_d_linear_wave/two_d_linear_wave_flux.cc">
+driver code two_d_linear_wave_flux.cc</A>
+
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/linear_wave/two_d_linear_wave/">
+demo_drivers/linear_wave/two_d_linear_wave/
+</A>
+</CENTER>
+- The driver code is:
+<CENTER>
+<A HREF="../../../../demo_drivers/linear_wave/two_d_linear_wave/two_d_linear_wave.cc">
+demo_drivers/linear_wave/two_d_linear_wave/two_d_linear_wave.cc
+</A>
+</CENTER>
+.
+
+
+

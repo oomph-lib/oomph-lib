@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: fsi_preconditioners.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ebd3099103469c928cedb80a33c9753f.html">multi_physics</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">fsi_preconditioners.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="fsi__preconditioners_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#ifndef OOMPH_FSI_PRECONDITIONERS_HEADER</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define OOMPH_FSI_PRECONDITIONERS_HEADER</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;../navier_stokes/navier_stokes_preconditioners.h&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//============================================================================ </span><span class="comment"></span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">/// \short FSI preconditioner. This extracts upper/lower triangular</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/// blocks in the 3x3 overall block matrix structure arising from</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/// the monolithic discretisation of FSI problems with algebraic</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/// node updates. Dofs are decomposed into fluid velocity, pressure </span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/// and solid unknowns. NavierStokesSchurComplementPreconditioner is used</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/// as the inexact solver for the fluid block; SuperLU (in </span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/// its incarnation as an &quot;exact&quot; preconditioner) is used for</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/// the solid block. By default we retain the fluid on solid off</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/// diagonal blocks. </span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span><span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html">   54</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1FSIPreconditioner.html">FSIPreconditioner</a> : <span class="keyword">public</span> BlockPreconditioner&lt;CRDoubleMatrix&gt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;public :</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> /// \short Constructor: By default use block triangular form with retained</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> /// fluid on solid terms. A problem pointer is required for the underlying</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> /// NavierStokesSchurComplementPreconditioner.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#aee06474cc9aabbde2dacb2cff1317a78">   62</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#aee06474cc9aabbde2dacb2cff1317a78">FSIPreconditioner</a>(Problem* problem_pt)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   <span class="comment">// set the mesh pointers</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;   this-&gt;set_nmesh(2);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a201e3fcf3e13bd19b3871e9d3a734a1d">Navier_stokes_mesh_pt</a> = 0;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#ae86cf988796524f905c8d6edc942816a">Wall_mesh_pt</a> = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;   <span class="comment">// Initially assume that there are no multiple element types in the meshes.</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a4c015d18092bf2bfc1db075c74006e80">Allow_multiple_element_type_in_navier_stokes_mesh</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a87e5a1cb279243414b1b0c2a5834efb5">Allow_multiple_element_type_in_wall_mesh</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;   <span class="comment">// Default setting: Fluid onto solid as it this was shown to be</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;   <span class="comment">// marginally faster than solid onto fluid; see Heil CMAME 193 (2004)</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#acecba46494b0aa6f2035020f53be634c">Retain_solid_onto_fluid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#ada9ff0aa8a1b15dea196a6d753ec740e">Retain_fluid_onto_solid_terms</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;   <span class="comment">// Create the Navier Stokes Schur complement preconditioner</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">Navier_stokes_preconditioner_pt</a> = </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">new</span> NavierStokesSchurComplementPreconditioner(problem_pt);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;   <span class="comment">// Create the Solid preconditioner</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a> = <span class="keyword">new</span> SuperLUPreconditioner;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;   <span class="comment">// Preconditioner hasn&#39;t been set up yet.</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#ad8d4b031c62a4ec74fad432a6bf27346">Preconditioner_has_been_setup</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;   <span class="comment">// Create the matrix vector product operators</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a595acfea83abd9fd907c208f3b487f57">Matrix_vector_product_0_1_pt</a> = <span class="keyword">new</span> MatrixVectorProduct;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a8b4161c521cb4160ae07bb0096eaca1c">Matrix_vector_product_1_0_pt</a> = <span class="keyword">new</span> MatrixVectorProduct;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;   <span class="comment">// set Doc_time to false</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a405ccaf05553b1bf7702cb2f25df57e9">Doc_time</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"> /// Destructor: Clean up.</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a787995de6ec09a9113b1b9a8b7c4f9cc">   98</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a787995de6ec09a9113b1b9a8b7c4f9cc">~FSIPreconditioner</a>()</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;   <span class="comment">//Delete the Navier-Stokes preconditioner (inexact solver)</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;   <span class="keyword">delete</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">Navier_stokes_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;   <span class="comment">//Delete the solid preconditioner (inexact solver)</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;   <span class="keyword">delete</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;   <span class="comment">// delete the matrix vector product operators</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;   <span class="keyword">delete</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a595acfea83abd9fd907c208f3b487f57">Matrix_vector_product_0_1_pt</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;   <span class="keyword">delete</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a8b4161c521cb4160ae07bb0096eaca1c">Matrix_vector_product_1_0_pt</a>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"> /// Broken copy constructor</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a499de26b5f215957727155cf5f950019">  113</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a499de26b5f215957727155cf5f950019">FSIPreconditioner</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html">FSIPreconditioner</a>&amp;)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;   BrokenCopy::broken_copy(<span class="stringliteral">&quot;FSIPreconditioner&quot;</span>);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"> /// Broken assignment operator</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"></span><span class="comment">//Commented out broken assignment operator because this can lead to a conflict warning</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">//when used in the virtual inheritence hierarchy. Essentially the compiler doesn&#39;t</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">//realise that two separate implementations of the broken function are the same and so,</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">//quite rightly, it shouts.</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; <span class="comment">/*void operator=(const FSIPreconditioner&amp;)</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">  {</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">   BrokenCopy::broken_assign(&quot;FSIPreconditioner&quot;);</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">   }*/</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">/// Set solid preconditioner (deletes existing one)</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a0f21e38e18521e0946c3f3ec98a85baa">  130</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a0f21e38e18521e0946c3f3ec98a85baa">set_solid_preconditioner_pt</a>(Preconditioner* <a class="code" href="classoomph_1_1FSIPreconditioner.html#abc97d84c4d0e7a280947855b7f33c34c">solid_preconditioner_pt</a>)</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="comment">// Kill existing one</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a>!=0)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;   {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">delete</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;   }</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a>=<a class="code" href="classoomph_1_1FSIPreconditioner.html#abc97d84c4d0e7a280947855b7f33c34c">solid_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment"> /// Read-only access to solid preconditoner (use set_... to set it)</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#abc97d84c4d0e7a280947855b7f33c34c">  141</a></span>&#160;<span class="comment"></span> Preconditioner* <a class="code" href="classoomph_1_1FSIPreconditioner.html#abc97d84c4d0e7a280947855b7f33c34c">solid_preconditioner_pt</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="keyword"> </span>{</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; }</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment"> /// Switch to block-diagonal preconditioner</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a8cdc0304cf22456a8b27ef95f5560e0b">  148</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a8cdc0304cf22456a8b27ef95f5560e0b">use_block_diagonal_version</a>()</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#acecba46494b0aa6f2035020f53be634c">Retain_solid_onto_fluid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#ada9ff0aa8a1b15dea196a6d753ec740e">Retain_fluid_onto_solid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"> /// \short Switch to block-triangular preconditioner in which</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment"> /// action of fluid dofs onto solid equations is retained</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#ad6e461da68c8e7f87b86f38fcd67ec69">  156</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#ad6e461da68c8e7f87b86f38fcd67ec69">use_block_triangular_version_with_fluid_on_solid</a>()</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#acecba46494b0aa6f2035020f53be634c">Retain_solid_onto_fluid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#ada9ff0aa8a1b15dea196a6d753ec740e">Retain_fluid_onto_solid_terms</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment"> /// \short Switch to block-triangular preconditioner in which</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment"> /// action of solid dofs onto fluid equations is retained</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a193bbf986401ecb843e71581460004ad">  164</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a193bbf986401ecb843e71581460004ad">use_block_triangular_version_with_solid_on_fluid</a>()</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#acecba46494b0aa6f2035020f53be634c">Retain_solid_onto_fluid_terms</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#ada9ff0aa8a1b15dea196a6d753ec740e">Retain_fluid_onto_solid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  } </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment"> /// \short Setter function for the mesh containing the block-preconditionable</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment"> /// Navier-Stokes elements. The optional argument indicates if there are more</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment"> /// than one type of elements in same mesh.</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a5d70612246bd08bec6c7b373da5e9c80">set_navier_stokes_mesh</a></div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a5d70612246bd08bec6c7b373da5e9c80">  174</a></span>&#160;   (Mesh* mesh_pt, </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; allow_multiple_element_type_in_navier_stokes_mesh = <span class="keyword">false</span>) </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;   <span class="comment">// Store the mesh pointer.</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a201e3fcf3e13bd19b3871e9d3a734a1d">Navier_stokes_mesh_pt</a> = mesh_pt;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;   </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;   <span class="comment">// Are there multiple element types in the Navier-Stokes mesh?</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a4c015d18092bf2bfc1db075c74006e80">Allow_multiple_element_type_in_navier_stokes_mesh</a> </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;     = allow_multiple_element_type_in_navier_stokes_mesh;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  }</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment"> /// \short Setter function for the mesh containing the block-preconditionable</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment"> /// FSI solid elements. The optional argument indicates if there are more</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"> /// than one type of elements in the same mesh.</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a61d583e9d3a1596efe22b11950fb47a5">  188</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a61d583e9d3a1596efe22b11950fb47a5">set_wall_mesh</a>(</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;   Mesh* mesh_pt, <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; allow_multiple_element_type_in_wall_mesh = <span class="keyword">false</span>)</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  {</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;   <span class="comment">// Store the mesh pointer</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#ae86cf988796524f905c8d6edc942816a">Wall_mesh_pt</a> = mesh_pt;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;   <span class="comment">// Are there multiple element types in the wall mesh?</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a87e5a1cb279243414b1b0c2a5834efb5">Allow_multiple_element_type_in_wall_mesh</a> </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;     = allow_multiple_element_type_in_wall_mesh;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment"> /// \short Setup the preconditioner</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#adadfe9f4332af610b00f1f45d1ad432e">setup</a>();</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment"> /// \short Apply preconditioner to r</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a31c84c3ca19c31488acd0bf2fe333a6b">preconditioner_solve</a>(<span class="keyword">const</span> DoubleVector &amp;r,</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                           DoubleVector &amp;z);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment"> /// Access function to the Navier Stokes preconditioner (inexact solver)</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment"></span> NavierStokesSchurComplementPreconditioner* </div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a8cd1be6bffd5014090350064177c0283">  208</a></span>&#160;  <a class="code" href="classoomph_1_1FSIPreconditioner.html#a8cd1be6bffd5014090350064177c0283">navier_stokes_preconditioner_pt</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">Navier_stokes_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  }</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment"> ///Enable documentation of time</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a2836b05d6eb81b807bd53b50dad7d3a0">  214</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a2836b05d6eb81b807bd53b50dad7d3a0">enable_doc_time</a>() {<a class="code" href="classoomph_1_1FSIPreconditioner.html#a405ccaf05553b1bf7702cb2f25df57e9">Doc_time</a> = <span class="keyword">true</span>;}</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment"> ///Disable documentation of time</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a932cb1cf6a20503a5cbb43a6b67f2340">  217</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a932cb1cf6a20503a5cbb43a6b67f2340">disable_doc_time</a>() {<a class="code" href="classoomph_1_1FSIPreconditioner.html#a405ccaf05553b1bf7702cb2f25df57e9">Doc_time</a> = <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"> /// Pointer the Navier Stokes preconditioner (inexact solver)</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">  223</a></span>&#160;<span class="comment"></span> NavierStokesSchurComplementPreconditioner* <a class="code" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">Navier_stokes_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment"> /// Pointer to the solid preconditioner  (inexact solver)</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">  226</a></span>&#160;<span class="comment"></span> Preconditioner* <a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a>;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment"> /// Pointer to fluid/solid interaction matrix</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a595acfea83abd9fd907c208f3b487f57">  229</a></span>&#160;<span class="comment"></span> MatrixVectorProduct* <a class="code" href="classoomph_1_1FSIPreconditioner.html#a595acfea83abd9fd907c208f3b487f57">Matrix_vector_product_0_1_pt</a>;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"> /// Pointer to solid/fluid solid interaction matrix</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a8b4161c521cb4160ae07bb0096eaca1c">  232</a></span>&#160;<span class="comment"></span> MatrixVectorProduct* <a class="code" href="classoomph_1_1FSIPreconditioner.html#a8b4161c521cb4160ae07bb0096eaca1c">Matrix_vector_product_1_0_pt</a>;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"> /// Boolean indicating the preconditioner has been set up </span></div>
+<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#ad8d4b031c62a4ec74fad432a6bf27346">  235</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#ad8d4b031c62a4ec74fad432a6bf27346">Preconditioner_has_been_setup</a>;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"> /// \short Boolean flag used to indicate that the solid onto fluid</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"> /// interaction terms are to be retained</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#acecba46494b0aa6f2035020f53be634c">  239</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#acecba46494b0aa6f2035020f53be634c">Retain_solid_onto_fluid_terms</a>;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment"> /// \short Boolean flag used to indicate that the fluid onto solid</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"> /// interaction terms are to be retained</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#ada9ff0aa8a1b15dea196a6d753ec740e">  243</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#ada9ff0aa8a1b15dea196a6d753ec740e">Retain_fluid_onto_solid_terms</a>;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment"> /// Set Doc_time to true for outputting results of timings</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a405ccaf05553b1bf7702cb2f25df57e9">  246</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a405ccaf05553b1bf7702cb2f25df57e9">Doc_time</a>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment"> /// Pointer to the navier stokes mesh</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a201e3fcf3e13bd19b3871e9d3a734a1d">  249</a></span>&#160;<span class="comment"></span> Mesh* <a class="code" href="classoomph_1_1FSIPreconditioner.html#a201e3fcf3e13bd19b3871e9d3a734a1d">Navier_stokes_mesh_pt</a>;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment"> /// pointer to the solid mesh</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#ae86cf988796524f905c8d6edc942816a">  252</a></span>&#160;<span class="comment"></span> Mesh* <a class="code" href="classoomph_1_1FSIPreconditioner.html#ae86cf988796524f905c8d6edc942816a">Wall_mesh_pt</a>;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment"> /// Flag to indicate if there are multiple element types in the Navier-Stokes</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment"> /// mesh.</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a4c015d18092bf2bfc1db075c74006e80">  256</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a4c015d18092bf2bfc1db075c74006e80">Allow_multiple_element_type_in_navier_stokes_mesh</a>;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; <span class="comment">// Flag to indicate if there are multiple element types in the Wall mesh.</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a87e5a1cb279243414b1b0c2a5834efb5">  259</a></span>&#160; <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a87e5a1cb279243414b1b0c2a5834efb5">Allow_multiple_element_type_in_wall_mesh</a>;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; };</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment"></span><span class="comment">// FSI preconditioner member functions</span><span class="comment"></span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">//=============================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">/// Setup the preconditioner. Note: Matrix must be a CRDoubleMatrix.</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment"></span><span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#adadfe9f4332af610b00f1f45d1ad432e">  275</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#adadfe9f4332af610b00f1f45d1ad432e">FSIPreconditioner::setup</a>()</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;{</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  <span class="comment">// check the meshes have been set</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1FSIPreconditioner.html#a201e3fcf3e13bd19b3871e9d3a734a1d">Navier_stokes_mesh_pt</a>==0)</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  {</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    std::ostringstream error_message;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    error_message &lt;&lt; <span class="stringliteral">&quot;Pointer to fluid mesh hasn&#39;t been set!\n&quot;</span>;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">throw</span> OomphLibError(error_message.str(),</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  }</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1FSIPreconditioner.html#ae86cf988796524f905c8d6edc942816a">Wall_mesh_pt</a>==0)</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;  {</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    std::ostringstream error_message;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    error_message &lt;&lt; <span class="stringliteral">&quot;Pointer to solid mesh hasn&#39;t been set!\n&quot;</span>;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="keywordflow">throw</span> OomphLibError(error_message.str(),</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;  }</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  <span class="comment">// setup the meshes</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  this-&gt;set_mesh(0,<a class="code" href="classoomph_1_1FSIPreconditioner.html#a201e3fcf3e13bd19b3871e9d3a734a1d">Navier_stokes_mesh_pt</a>,</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;      <a class="code" href="classoomph_1_1FSIPreconditioner.html#a4c015d18092bf2bfc1db075c74006e80">Allow_multiple_element_type_in_navier_stokes_mesh</a>);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  this-&gt;set_mesh(1,<a class="code" href="classoomph_1_1FSIPreconditioner.html#ae86cf988796524f905c8d6edc942816a">Wall_mesh_pt</a>,<a class="code" href="classoomph_1_1FSIPreconditioner.html#a87e5a1cb279243414b1b0c2a5834efb5">Allow_multiple_element_type_in_wall_mesh</a>);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;  <span class="comment">// get the number of fluid dofs from teh first element in the mesh</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  <span class="keywordtype">unsigned</span> n_fluid_dof = this-&gt;ndof_types_in_mesh(0);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  <span class="keywordtype">unsigned</span> n_dof = n_fluid_dof + this-&gt;ndof_types_in_mesh(1);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  <span class="comment">// this fsi preconditioner has two types of DOF fluid dofs and solid dofs</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;  Vector&lt;unsigned&gt; dof_to_block_map(n_dof,0);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = n_fluid_dof; i &lt; n_dof; i++)</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    dof_to_block_map[i] = 1;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  }</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  <span class="comment">// Call block setup for this preconditioner</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  this-&gt;block_setup(dof_to_block_map);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  <span class="comment">// Block mapping for the subsidiary Navier Stokes preconditioner:</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;  <span class="comment">// blocks 0 and 1 in the FSI preconditioner are also blocks 0 and 1</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  <span class="comment">// in the subsidiary Navier Stokes one.</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  Vector&lt;unsigned&gt; ns_dof_lookup(n_fluid_dof);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; n_fluid_dof; i++)</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  {</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    ns_dof_lookup[i] = i;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;  }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  <span class="comment">// Turn the Navier Stokes Schur complement preconditioner into a </span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="comment">// subsidiary preconditioner of this preconditioner</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;  <a class="code" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">Navier_stokes_preconditioner_pt</a>-&gt;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    turn_into_subsidiary_block_preconditioner(<span class="keyword">this</span>,ns_dof_lookup);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <span class="comment">// Setup the navier stokes preconditioner: Tell it about the</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  <span class="comment">// Navier Stokes mesh and set it up.</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  <a class="code" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">Navier_stokes_preconditioner_pt</a>-&gt;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <a class="code" href="classoomph_1_1FSIPreconditioner.html#a5d70612246bd08bec6c7b373da5e9c80">set_navier_stokes_mesh</a>(<a class="code" href="classoomph_1_1FSIPreconditioner.html#a201e3fcf3e13bd19b3871e9d3a734a1d">Navier_stokes_mesh_pt</a>);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  <a class="code" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">Navier_stokes_preconditioner_pt</a>-&gt;setup(matrix_pt());</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;  <span class="comment">// Extract the additional blocks we need for FSI:</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;  <span class="comment">// Solid tangent stiffness matrix</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  CRDoubleMatrix block_matrix_1_1;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;  this-&gt;get_block(1,1,block_matrix_1_1);</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;  <span class="comment">// Setup the solid preconditioner (inexact solver)</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  <span class="keywordtype">double</span> t_start = TimingHelpers::timer();</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;  <a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a>-&gt;setup(&amp;block_matrix_1_1);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;  <span class="keywordtype">double</span> t_end = TimingHelpers::timer();</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;  block_matrix_1_1.clear();</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;  <span class="keywordtype">double</span> setup_time= t_end-t_start;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;  <span class="comment">// Solid on fluid terms (if needed)</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1FSIPreconditioner.html#acecba46494b0aa6f2035020f53be634c">Retain_solid_onto_fluid_terms</a>)</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  {</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    CRDoubleMatrix block_matrix_0_1 = get_block(0,1);</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    this-&gt;setup_matrix_vector_product(<a class="code" href="classoomph_1_1FSIPreconditioner.html#a595acfea83abd9fd907c208f3b487f57">Matrix_vector_product_0_1_pt</a>,</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        &amp;block_matrix_0_1,1);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;  }</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;  <span class="comment">// Fluid on solid terms (if needed)</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1FSIPreconditioner.html#ada9ff0aa8a1b15dea196a6d753ec740e">Retain_fluid_onto_solid_terms</a>)</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;  {</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    CRDoubleMatrix block_matrix_1_0 = get_block(1,0);</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    this-&gt;setup_matrix_vector_product(<a class="code" href="classoomph_1_1FSIPreconditioner.html#a8b4161c521cb4160ae07bb0096eaca1c">Matrix_vector_product_1_0_pt</a>,</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        &amp;block_matrix_1_0,0);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  }</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  <span class="comment">// Output times</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classoomph_1_1FSIPreconditioner.html#a405ccaf05553b1bf7702cb2f25df57e9">Doc_time</a>)</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  {</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    oomph_info &lt;&lt; <span class="stringliteral">&quot;Solid sub-preconditioner setup time [sec]: &quot;</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;      &lt;&lt; setup_time &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;  }</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  <span class="comment">// We&#39;re done (and we stored some data)</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;  <a class="code" href="classoomph_1_1FSIPreconditioner.html#ad8d4b031c62a4ec74fad432a6bf27346">Preconditioner_has_been_setup</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;}</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">/// Apply preconditioner to Vector r</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno"><a class="line" href="classoomph_1_1FSIPreconditioner.html#a31c84c3ca19c31488acd0bf2fe333a6b">  381</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1FSIPreconditioner.html#a31c84c3ca19c31488acd0bf2fe333a6b">FSIPreconditioner::preconditioner_solve</a>(<span class="keyword">const</span> DoubleVector &amp;r, </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                                             DoubleVector &amp;z)</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;{</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  <span class="comment">// if z is not setup then give it the same distribution</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;  <span class="keywordflow">if</span> (!z.built())</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;   {</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    z.build(r.distribution_pt(),0.0);</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;   }</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; <span class="comment">// Make copy of residual vector (to overcome const-ness</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; DoubleVector res(r);</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; <span class="comment">// Retain off-diagonals that represent effect of solid on fluid</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; <span class="comment">//-------------------------------------------------------------</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1FSIPreconditioner.html#acecba46494b0aa6f2035020f53be634c">Retain_solid_onto_fluid_terms</a>)</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;  {</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;   <span class="comment">// Working vectors</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;   DoubleVector temp_solid_vec;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;   DoubleVector temp_fluid_vec;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160; </div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;   <span class="comment">// Copy solid values from residual to temp_vec:</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;   <span class="comment">// Loop over all entries in the global vector (this one </span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;   <span class="comment">// includes solid, velocity and pressure dofs in some random fashion)</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;   get_block_vector(1,res,temp_solid_vec);</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    </div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;   <span class="comment">// Solve solid system by back-substitution</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;   <span class="comment">// with LU-decomposed stiffness matrix   </span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;   DoubleVector temp_solid_vec2;</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a>-&gt;preconditioner_solve(temp_solid_vec,</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;                                                 temp_solid_vec2);</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;   this-&gt;return_block_vector(1,temp_solid_vec2,z);</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;   </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;   <span class="comment">// NOTE: temp_solid_vec now contains z_s = S^{-1} r_s</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; </div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;   <span class="comment">// Multiply C_{us} by z_s</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a595acfea83abd9fd907c208f3b487f57">Matrix_vector_product_0_1_pt</a>-&gt;multiply(temp_solid_vec2,temp_fluid_vec);</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;   temp_solid_vec.clear();</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;      </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;   <span class="comment">// Subtract from fluid residual vector for fluid solve</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;   DoubleVector another_temp_vec;</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;   this-&gt;get_block_vector(0,res,another_temp_vec);</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;   another_temp_vec -= temp_fluid_vec;</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;   this-&gt;return_block_vector(0,another_temp_vec,res);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;   <span class="comment">// now apply the navier stokes lsc preconditioner</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">Navier_stokes_preconditioner_pt</a>-&gt;preconditioner_solve(res,z);</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;  }</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; <span class="comment">// Retain off-diagonals that represent effect of fluid on solid</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160; <span class="comment">//-------------------------------------------------------------</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; <span class="comment">// (or diagonal preconditioner)</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; <span class="comment">//-----------------------------</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;  {</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;   <span class="comment">// Call fluid preconditioner for fluid block</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">Navier_stokes_preconditioner_pt</a>-&gt;preconditioner_solve(res,z);</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160; </div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;   <span class="comment">// Working vectors</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;   DoubleVector temp_solid_vec;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;  </div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;   <span class="comment">// get the solid vector</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;   get_block_vector(1,res,temp_solid_vec);</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160; </div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;   <span class="comment">// Do matrix vector products with fluid onto solid coupling matrices:</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;   <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1FSIPreconditioner.html#ada9ff0aa8a1b15dea196a6d753ec740e">Retain_fluid_onto_solid_terms</a>)</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    {</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;     DoubleVector temp_fluid_vec;</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;     get_block_vector(0,z,temp_fluid_vec);</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;     <span class="comment">// Auxiliary vector to hold the matrix vector product of the</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;     <span class="comment">// fluid-onto-solid coupling matrices with the fluid solutions:</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;     DoubleVector aux_vec;</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;     </div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;     <span class="comment">// Multiply C_{su} by z_u</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;     <a class="code" href="classoomph_1_1FSIPreconditioner.html#a8b4161c521cb4160ae07bb0096eaca1c">Matrix_vector_product_1_0_pt</a>-&gt;multiply(temp_fluid_vec, aux_vec);</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;     </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;     <span class="comment">// ...and subtract from r_s:</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;     temp_solid_vec-=aux_vec;</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    }</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;      </div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;   <span class="comment">// Solve solid system by back-substitution</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;   <span class="comment">// with LU-decomposed stiffness matrix   </span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;   DoubleVector temp_solid_vec2;</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;   <a class="code" href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">Solid_preconditioner_pt</a>-&gt;preconditioner_solve(temp_solid_vec,</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;                                                 temp_solid_vec2);</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;   <span class="comment">// Now copy result_vec (i.e. z_s) back into the global vector z.</span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;   <span class="comment">// Loop over all entries in the global results vector z:</span></div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;   return_block_vector(1,temp_solid_vec2,z);   </div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;  }</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;}</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; </div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment">//============================================================================ </span><span class="comment"></span></div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment">/// \short FSI preconditioner. This extracts upper/lower triangular</span></div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="comment">/// blocks in the 3x3 overall block matrix structure arising from</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment">/// the monolithic discretisation of FSI problems with algebraic</span></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment">/// node updates. Dofs are decomposed into fluid velocity, pressure </span></div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment">/// and solid unknowns. Blocks are then re-assembled into one global</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment">/// matrix and solved with a direct solver (SuperLU in its incarnation</span></div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment">/// as an exact preconditioner). By default we retain the fluid on solid off</span></div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment">/// diagonal blocks. </span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment"></span><span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> MATRIX&gt;</div>
+<div class="line"><a name="l00495"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html">  495</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html">SimpleFSIPreconditioner</a> : <span class="keyword">public</span> BlockPreconditioner&lt;MATRIX&gt;</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;{</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; </div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;public :</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment"> /// Constructor. </span></div>
+<div class="line"><a name="l00501"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a597c5d3292b1e5e9001f8a738f186a73">  501</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a597c5d3292b1e5e9001f8a738f186a73">SimpleFSIPreconditioner</a>() : BlockPreconditioner&lt;MATRIX&gt;()</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;  {</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;   <span class="comment">// set the mesh pointers</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a957b57dc5d05df008c15aec8f3c2ea0f">Navier_stokes_mesh_pt</a> = 0;</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a3ad28ce867dc02b67f674ff8e159bff8">Wall_mesh_pt</a> = 0;</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;   this-&gt;set_nmesh(2);</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160; </div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;   <span class="comment">// Default setting: Retain fluid on solid</span></div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a62e9e620ecb6022d20aa09b493f6950d">Retain_solid_onto_fluid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a0bc8bfc84237a096d6687d902edcf33b">Retain_fluid_onto_solid_terms</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160; </div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;   <span class="comment">// Null the preconditioner pointer (inexact solver)</span></div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#aa08cfa51beb62ce3d72f47b8e75ce9f3">Preconditioner_pt</a> = 0;</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160; </div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;   <span class="comment">// Initially assume that there are no multiple element types in </span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;   <span class="comment">// the same mesh.</span></div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a9e1ceded449890704546b3f281bedecb">Allow_multiple_element_type_in_navier_stokes_mesh</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a70094cbfae8c30e11647906cdd7e38c3">Allow_multiple_element_type_in_wall_mesh</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;  }</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160; </div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="comment"> /// Destructor: Clean up</span></div>
+<div class="line"><a name="l00523"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a86515bb32fe8a2cdffda1d185751109d">  523</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a86515bb32fe8a2cdffda1d185751109d">~SimpleFSIPreconditioner</a>()</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;  {</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;   <span class="comment">// Wiping preconditioner (inexact solver) wipes the stored </span></div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;   <span class="comment">// LU decompositon</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;   <span class="keywordflow">if</span> (<a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#aa08cfa51beb62ce3d72f47b8e75ce9f3">Preconditioner_pt</a> != 0)</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    {</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;     <span class="keyword">delete</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#aa08cfa51beb62ce3d72f47b8e75ce9f3">Preconditioner_pt</a>;</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;     <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#aa08cfa51beb62ce3d72f47b8e75ce9f3">Preconditioner_pt</a> = 0;</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    }</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;  }</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160; </div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="comment"> /// Broken copy constructor</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a427e372b3153e9a26aa97c76d69e28a4">  536</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a427e372b3153e9a26aa97c76d69e28a4">SimpleFSIPreconditioner</a>(<span class="keyword">const</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html">SimpleFSIPreconditioner</a>&amp;)</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;  {</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;   BrokenCopy::broken_copy(<span class="stringliteral">&quot;SimpleFSIPreconditioner&quot;</span>);</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;  }</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; </div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="comment"> /// Broken assignment operator</span></div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="comment"></span> <span class="comment">/*void operator=(const SimpleFSIPreconditioner&amp;)</span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment">  {</span></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment">   BrokenCopy::broken_assign(&quot;SimpleFSIPreconditioner&quot;);</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment">   }*/</span></div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="comment"> /// \short Setter function for the mesh containing the block-preconditionable</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="comment"> /// Navier-Stokes elements. </span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#ab9c5875d7186cfb5c55cecb72bed50b3">set_navier_stokes_mesh</a></div>
+<div class="line"><a name="l00551"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#ab9c5875d7186cfb5c55cecb72bed50b3">  551</a></span>&#160;   (Mesh* mesh_pt, </div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; allow_multiple_element_type_in_navier_stokes_mesh = <span class="keyword">false</span>) </div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;  {</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;   <span class="comment">// Store the mesh pointer.</span></div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a957b57dc5d05df008c15aec8f3c2ea0f">Navier_stokes_mesh_pt</a> = mesh_pt;</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160; </div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;   <span class="comment">// Are there multiple elements in this mesh?</span></div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a9e1ceded449890704546b3f281bedecb">Allow_multiple_element_type_in_navier_stokes_mesh</a> </div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;     = allow_multiple_element_type_in_navier_stokes_mesh;</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;  }</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="comment"> /// \short Setter function for the mesh containing the block-preconditionable</span></div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<span class="comment"> /// FSI solid elements. </span></div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a324b53aaedfc8f0a2cc3da921ef94686">set_wall_mesh</a></div>
+<div class="line"><a name="l00565"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a324b53aaedfc8f0a2cc3da921ef94686">  565</a></span>&#160;   (Mesh* mesh_pt, </div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; allow_multiple_element_type_in_wall_mesh = <span class="keyword">false</span>) </div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;  {</div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;   <span class="comment">// Store the mesh pointer</span></div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a3ad28ce867dc02b67f674ff8e159bff8">Wall_mesh_pt</a> = mesh_pt;</div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160; </div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;   <span class="comment">// Are the multiple elements in this mesh?</span></div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a70094cbfae8c30e11647906cdd7e38c3">Allow_multiple_element_type_in_wall_mesh</a> </div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;     = allow_multiple_element_type_in_wall_mesh;</div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;  }</div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="comment"> /// \short Setup the preconditioner</span></div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#aaf19c0c3f19f6d8ef4f36a1581829230">setup</a>();</div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;  <span class="comment"></span></div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="comment"> /// \short Apply preconditioner to r</span></div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a31684c26aa10a782189c32304d9d0824">preconditioner_solve</a>(<span class="keyword">const</span> DoubleVector &amp;r,</div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;                           DoubleVector &amp;z);</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="comment"> /// Switch to block-diagonal preconditioner</span></div>
+<div class="line"><a name="l00584"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a9e4313b890f586d4e1fb406a1b9d3948">  584</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a9e4313b890f586d4e1fb406a1b9d3948">use_block_diagonal_version</a>()</div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;  {</div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a62e9e620ecb6022d20aa09b493f6950d">Retain_solid_onto_fluid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a0bc8bfc84237a096d6687d902edcf33b">Retain_fluid_onto_solid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;  }</div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;<span class="comment"> /// \short Switch to block-triangular preconditioner in which</span></div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="comment"> /// action of fluid dofs onto solid equations is retained</span></div>
+<div class="line"><a name="l00592"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#ae996d56f6e94d88967e8aad4e664ee74">  592</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#ae996d56f6e94d88967e8aad4e664ee74">use_block_triangular_version_with_fluid_on_solid</a>()</div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;  {</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a62e9e620ecb6022d20aa09b493f6950d">Retain_solid_onto_fluid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a0bc8bfc84237a096d6687d902edcf33b">Retain_fluid_onto_solid_terms</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;  }</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="comment"> /// \short Switch to block-triangular preconditioner in which</span></div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;<span class="comment"> /// action of solid dofs onto fluid equations is retained</span></div>
+<div class="line"><a name="l00600"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a888de44acd9583fe7cce949a461dfc56">  600</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a888de44acd9583fe7cce949a461dfc56">use_block_triangular_version_with_solid_on_fluid</a>()</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;  {</div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a62e9e620ecb6022d20aa09b493f6950d">Retain_solid_onto_fluid_terms</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;   <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a0bc8bfc84237a096d6687d902edcf33b">Retain_fluid_onto_solid_terms</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;  }</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160; </div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;<span class="comment"> /// \short Preconditioner (inexact solver)</span></div>
+<div class="line"><a name="l00609"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#aa08cfa51beb62ce3d72f47b8e75ce9f3">  609</a></span>&#160;<span class="comment"></span> Preconditioner* <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#aa08cfa51beb62ce3d72f47b8e75ce9f3">Preconditioner_pt</a>;</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="comment"> /// \short Boolean flag used to indicate that the solid onto fluid</span></div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="comment"> /// interaction terms are to be retained</span></div>
+<div class="line"><a name="l00613"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a62e9e620ecb6022d20aa09b493f6950d">  613</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a62e9e620ecb6022d20aa09b493f6950d">Retain_solid_onto_fluid_terms</a>;</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="comment"> /// \short Boolean flag used to indicate that the fluid onto solid</span></div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="comment"> /// interaction terms are to be retained</span></div>
+<div class="line"><a name="l00617"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a0bc8bfc84237a096d6687d902edcf33b">  617</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a0bc8bfc84237a096d6687d902edcf33b">Retain_fluid_onto_solid_terms</a>;</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="comment"> /// \short Identify the required blocks: Here we only need </span></div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;<span class="comment"> /// the momentum, gradient and divergence blocks of the</span></div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;<span class="comment"> /// 2x2 block-structured fluid matrix, the 1x1 solid block</span></div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="comment"> /// and the selected FSI-off diagonals.</span></div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#abaf505c05ec128f4c3c6ff5036fb3db1">identify_required_blocks</a>(DenseMatrix&lt;bool&gt;&amp; required_blocks);</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160; <span class="comment"></span></div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="comment"> /// Pointer to the navier stokes mesh</span></div>
+<div class="line"><a name="l00626"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a957b57dc5d05df008c15aec8f3c2ea0f">  626</a></span>&#160;<span class="comment"></span> Mesh* <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a957b57dc5d05df008c15aec8f3c2ea0f">Navier_stokes_mesh_pt</a>;</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;<span class="comment"> /// pointer to the solid mesh</span></div>
+<div class="line"><a name="l00629"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a3ad28ce867dc02b67f674ff8e159bff8">  629</a></span>&#160;<span class="comment"></span> Mesh* <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a3ad28ce867dc02b67f674ff8e159bff8">Wall_mesh_pt</a>;</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;<span class="comment"> /// Flag for multiple element types in the Navier-Stokes mesh.</span></div>
+<div class="line"><a name="l00632"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a9e1ceded449890704546b3f281bedecb">  632</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a9e1ceded449890704546b3f281bedecb">Allow_multiple_element_type_in_navier_stokes_mesh</a>;</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<span class="comment"> /// Flag for multiple element types in the Wall mesh</span></div>
+<div class="line"><a name="l00635"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a70094cbfae8c30e11647906cdd7e38c3">  635</a></span>&#160;<span class="comment"></span> <span class="keywordtype">bool</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a70094cbfae8c30e11647906cdd7e38c3">Allow_multiple_element_type_in_wall_mesh</a>;</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;};</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160; </div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="comment"></span><span class="comment">// FSI preconditioner member functions</span><span class="comment"></span></div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160; </div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160; </div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;<span class="comment">//===========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="comment">/// Identify the required blocks: Here we only need</span></div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="comment">/// the momentum, gradient and divergence blocks of the</span></div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;<span class="comment">/// 2x2 block-structured fluid matrix, the 1x1 solid block</span></div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="comment">/// and the selected FSI-off diagonals.</span></div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="comment"></span><span class="comment">//===========================================================================</span></div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> MATRIX&gt;</div>
+<div class="line"><a name="l00654"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#abaf505c05ec128f4c3c6ff5036fb3db1">  654</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#abaf505c05ec128f4c3c6ff5036fb3db1">SimpleFSIPreconditioner&lt;MATRIX&gt;::identify_required_blocks</a>(</div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;  DenseMatrix&lt;bool&gt;&amp; required_blocks)</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;{</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160; </div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160; <span class="comment">// find number of block types</span></div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160; <span class="keywordtype">unsigned</span> n_dof = this-&gt;nblock_types();</div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160; </div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160; <span class="comment">// Initialise all blocks to false</span></div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160; <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;n_dof;i++)</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;  {</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;n_dof;j++)</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;    {</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;     required_blocks(i,j)=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;    }</div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;  }</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160; </div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160; <span class="comment">// Fluid: Only need momentum, gradient and divergence blocks</span></div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160; required_blocks(0,0) = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160; required_blocks(1,0) = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160; required_blocks(0,1) = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;  </div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160; <span class="comment">// Always retain the solid block</span></div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160; required_blocks(2,2) = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160; </div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160; <span class="comment">// Switch on the required off-diagonals</span></div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160; <span class="keywordflow">if</span> (Retain_solid_onto_fluid_terms)</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;  {</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;   required_blocks(0,2)=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;   required_blocks(1,2)=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;  }</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160; <span class="keywordflow">if</span> (Retain_fluid_onto_solid_terms)</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;  {</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;   required_blocks(2,0)=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;   required_blocks(2,1)=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;   <span class="keywordflow">if</span> (Retain_solid_onto_fluid_terms)</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    {</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;     std::ostringstream error_message;</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;     error_message &lt;&lt; <span class="stringliteral">&quot;Can&#39;t retain all off-diagonal blocks!\n&quot;</span>;</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;     <span class="keywordflow">throw</span> OomphLibError(error_message.str(),</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    }</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;  }</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160; </div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;}</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160; </div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160; </div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="comment">//=============================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="comment">/// Setup the preconditioner: Copy the upper/lower triangular </span></div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="comment">/// block matrices back into a big matrix (with the entries </span></div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="comment">/// re-ordered relative to the original Jacobian matrix). </span></div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="comment"></span><span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160; <span class="keyword">template</span>&lt;<span class="keyword">typename</span> MATRIX&gt;</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160; <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#aaf19c0c3f19f6d8ef4f36a1581829230">SimpleFSIPreconditioner&lt;MATRIX&gt;::</a></div>
+<div class="line"><a name="l00708"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#aaf19c0c3f19f6d8ef4f36a1581829230">  708</a></span>&#160;<a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#aaf19c0c3f19f6d8ef4f36a1581829230"> setup</a>()</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160; {</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160; </div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;  <span class="comment">// Clean up memory</span></div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;  <span class="keywordflow">if</span> (Preconditioner_pt != 0)</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;   {</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    <span class="keyword">delete</span> Preconditioner_pt;</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;    Preconditioner_pt = 0;</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;   }</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="preprocessor">   #ifdef PARANOID</span></div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;  <span class="keywordflow">if</span> (Navier_stokes_mesh_pt==0)</div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;   {</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;    std::ostringstream error_message;</div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;    error_message &lt;&lt; <span class="stringliteral">&quot;Pointer to fluid mesh hasn&#39;t been set!\n&quot;</span>;</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;    <span class="keywordflow">throw</span> OomphLibError(error_message.str(),</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;                        OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;                        OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;   }</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;  <span class="keywordflow">if</span> (Wall_mesh_pt==0)</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;   {</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;    std::ostringstream error_message;</div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;    error_message &lt;&lt; <span class="stringliteral">&quot;Pointer to solid mesh hasn&#39;t been set!\n&quot;</span>;</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;    <span class="keywordflow">throw</span> OomphLibError(error_message.str(),</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;                        OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;                        OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;   }</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160; </div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;  <span class="comment">// setup the meshes</span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;  this-&gt;set_mesh(0,Navier_stokes_mesh_pt,</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;                 Allow_multiple_element_type_in_navier_stokes_mesh);</div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;  this-&gt;set_mesh(1,Wall_mesh_pt,Allow_multiple_element_type_in_wall_mesh);</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160; </div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;  <span class="comment">// get the number of fluid dofs from the first element in the mesh</span></div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;  <span class="keywordtype">unsigned</span> n_fluid_dof = this-&gt;ndof_types_in_mesh(0);</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;  <span class="keywordtype">unsigned</span> n_dof = n_fluid_dof + this-&gt;ndof_types_in_mesh(1);</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160; </div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;  <span class="comment">// this fsi preconditioner has two types of DOF fluid dofs and solid dofs</span></div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;  Vector&lt;unsigned&gt; dof_to_block_map(n_dof,0);</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;  dof_to_block_map[n_fluid_dof-1]=1; <span class="comment">// pressure</span></div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = n_fluid_dof; i &lt; n_dof; i++) <span class="comment">//solid</span></div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;   {</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;    dof_to_block_map[i] = 2;</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;   }</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160; </div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;  <span class="comment">// Set up the blocks look up schemes</span></div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;  this-&gt;block_setup(dof_to_block_map);</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160; </div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;  <span class="comment">// find number of block types</span></div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;  n_dof = this-&gt;nblock_types();</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160; </div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;  <span class="comment">// Create matrix that indicates which blocks are required</span></div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;  DenseMatrix&lt;bool&gt; required_blocks(n_dof,n_dof);</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160; </div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;  <span class="comment">// Identify required blocks</span></div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;  identify_required_blocks(required_blocks);</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160; </div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;  VectorMatrix&lt;BlockSelector&gt; selected_blocks(n_dof,n_dof);</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160; </div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> dof_i = 0; dof_i &lt; n_dof; dof_i++) </div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;  {</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> dof_j = 0; dof_j &lt; n_dof; dof_j++) </div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;    {</div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;      selected_blocks[dof_i][dof_j].select_block(dof_i,dof_j,<span class="keyword">false</span>,0);</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160; </div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;      <span class="keywordflow">if</span>(required_blocks(dof_i,dof_j))</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;      {</div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;        selected_blocks[dof_i][dof_j].want_block();</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;      }</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    }</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;  }</div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160; </div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;  CRDoubleMatrix P_matrix = this-&gt;get_concatenated_block(selected_blocks);</div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;  </div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;  <span class="comment">// Setup preconditioner (i.e. inexact solver) -- does the LU decomposition</span></div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;  Preconditioner_pt = <span class="keyword">new</span> SuperLUPreconditioner;</div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;  Preconditioner_pt-&gt;setup(&amp;P_matrix);</div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160; }</div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160; </div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160; </div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;<span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;<span class="comment">/// Apply preconditioner to Vector r</span></div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> MATRIX&gt;</div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a31684c26aa10a782189c32304d9d0824">SimpleFSIPreconditioner&lt;MATRIX&gt;::</a></div>
+<div class="line"><a name="l00793"></a><span class="lineno"><a class="line" href="classoomph_1_1SimpleFSIPreconditioner.html#a31684c26aa10a782189c32304d9d0824">  793</a></span>&#160;<a class="code" href="classoomph_1_1SimpleFSIPreconditioner.html#a31684c26aa10a782189c32304d9d0824">preconditioner_solve</a>(<span class="keyword">const</span> DoubleVector &amp;r, DoubleVector &amp;z)</div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;{ </div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160; <span class="comment">// create a temporary vector to hold the result of preconditioning</span></div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160; DoubleVector temp_vec;</div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;   </div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160; <span class="comment">// get the reordered vector</span></div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160; this-&gt;get_block_ordered_preconditioner_vector(r,temp_vec);</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160; </div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160; <span class="comment">// apply preconditioner to z and store in r</span></div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160; Preconditioner_pt-&gt;preconditioner_solve(temp_vec,temp_vec);</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160; </div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160; <span class="comment">// copy the solution back</span></div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160; this-&gt;return_block_ordered_preconditioner_vector(temp_vec,z);</div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;}</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160; </div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160; </div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160; </div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;}</div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160; </div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a5d70612246bd08bec6c7b373da5e9c80"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a5d70612246bd08bec6c7b373da5e9c80">oomph::FSIPreconditioner::set_navier_stokes_mesh</a></div><div class="ttdeci">void set_navier_stokes_mesh(Mesh *mesh_pt, const bool &amp;allow_multiple_element_type_in_navier_stokes_mesh=false)</div><div class="ttdoc">Setter function for the mesh containing the block-preconditionable Navier-Stokes elements....</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00174">fsi_preconditioners.h:174</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_ad8d4b031c62a4ec74fad432a6bf27346"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#ad8d4b031c62a4ec74fad432a6bf27346">oomph::FSIPreconditioner::Preconditioner_has_been_setup</a></div><div class="ttdeci">bool Preconditioner_has_been_setup</div><div class="ttdoc">Boolean indicating the preconditioner has been set up.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00235">fsi_preconditioners.h:235</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_ae86cf988796524f905c8d6edc942816a"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#ae86cf988796524f905c8d6edc942816a">oomph::FSIPreconditioner::Wall_mesh_pt</a></div><div class="ttdeci">Mesh * Wall_mesh_pt</div><div class="ttdoc">pointer to the solid mesh</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00252">fsi_preconditioners.h:252</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a3ad28ce867dc02b67f674ff8e159bff8"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a3ad28ce867dc02b67f674ff8e159bff8">oomph::SimpleFSIPreconditioner::Wall_mesh_pt</a></div><div class="ttdeci">Mesh * Wall_mesh_pt</div><div class="ttdoc">pointer to the solid mesh</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00629">fsi_preconditioners.h:629</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a787995de6ec09a9113b1b9a8b7c4f9cc"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a787995de6ec09a9113b1b9a8b7c4f9cc">oomph::FSIPreconditioner::~FSIPreconditioner</a></div><div class="ttdeci">~FSIPreconditioner()</div><div class="ttdoc">Destructor: Clean up.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00098">fsi_preconditioners.h:98</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a2836b05d6eb81b807bd53b50dad7d3a0"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a2836b05d6eb81b807bd53b50dad7d3a0">oomph::FSIPreconditioner::enable_doc_time</a></div><div class="ttdeci">void enable_doc_time()</div><div class="ttdoc">Enable documentation of time.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00214">fsi_preconditioners.h:214</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a8cdc0304cf22456a8b27ef95f5560e0b"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a8cdc0304cf22456a8b27ef95f5560e0b">oomph::FSIPreconditioner::use_block_diagonal_version</a></div><div class="ttdeci">void use_block_diagonal_version()</div><div class="ttdoc">Switch to block-diagonal preconditioner.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00148">fsi_preconditioners.h:148</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_ae996d56f6e94d88967e8aad4e664ee74"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#ae996d56f6e94d88967e8aad4e664ee74">oomph::SimpleFSIPreconditioner::use_block_triangular_version_with_fluid_on_solid</a></div><div class="ttdeci">void use_block_triangular_version_with_fluid_on_solid()</div><div class="ttdoc">Switch to block-triangular preconditioner in which action of fluid dofs onto solid equations is retai...</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00592">fsi_preconditioners.h:592</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_adc98903b78d0bc97c40eb733eaf6e498"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#adc98903b78d0bc97c40eb733eaf6e498">oomph::FSIPreconditioner::Navier_stokes_preconditioner_pt</a></div><div class="ttdeci">NavierStokesSchurComplementPreconditioner * Navier_stokes_preconditioner_pt</div><div class="ttdoc">Pointer the Navier Stokes preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00223">fsi_preconditioners.h:223</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a70094cbfae8c30e11647906cdd7e38c3"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a70094cbfae8c30e11647906cdd7e38c3">oomph::SimpleFSIPreconditioner::Allow_multiple_element_type_in_wall_mesh</a></div><div class="ttdeci">bool Allow_multiple_element_type_in_wall_mesh</div><div class="ttdoc">Flag for multiple element types in the Wall mesh.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00635">fsi_preconditioners.h:635</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a31684c26aa10a782189c32304d9d0824"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a31684c26aa10a782189c32304d9d0824">oomph::SimpleFSIPreconditioner::preconditioner_solve</a></div><div class="ttdeci">void preconditioner_solve(const DoubleVector &amp;r, DoubleVector &amp;z)</div><div class="ttdoc">Apply preconditioner to r.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00793">fsi_preconditioners.h:793</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a405ccaf05553b1bf7702cb2f25df57e9"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a405ccaf05553b1bf7702cb2f25df57e9">oomph::FSIPreconditioner::Doc_time</a></div><div class="ttdeci">bool Doc_time</div><div class="ttdoc">Set Doc_time to true for outputting results of timings.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00246">fsi_preconditioners.h:246</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_aee06474cc9aabbde2dacb2cff1317a78"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#aee06474cc9aabbde2dacb2cff1317a78">oomph::FSIPreconditioner::FSIPreconditioner</a></div><div class="ttdeci">FSIPreconditioner(Problem *problem_pt)</div><div class="ttdoc">Constructor: By default use block triangular form with retained fluid on solid terms....</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00062">fsi_preconditioners.h:62</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a499de26b5f215957727155cf5f950019"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a499de26b5f215957727155cf5f950019">oomph::FSIPreconditioner::FSIPreconditioner</a></div><div class="ttdeci">FSIPreconditioner(const FSIPreconditioner &amp;)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00113">fsi_preconditioners.h:113</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_abc97d84c4d0e7a280947855b7f33c34c"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#abc97d84c4d0e7a280947855b7f33c34c">oomph::FSIPreconditioner::solid_preconditioner_pt</a></div><div class="ttdeci">Preconditioner * solid_preconditioner_pt() const</div><div class="ttdoc">Read-only access to solid preconditoner (use set_... to set it)</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00141">fsi_preconditioners.h:141</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a9e1ceded449890704546b3f281bedecb"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a9e1ceded449890704546b3f281bedecb">oomph::SimpleFSIPreconditioner::Allow_multiple_element_type_in_navier_stokes_mesh</a></div><div class="ttdeci">bool Allow_multiple_element_type_in_navier_stokes_mesh</div><div class="ttdoc">Flag for multiple element types in the Navier-Stokes mesh.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00632">fsi_preconditioners.h:632</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a0bc8bfc84237a096d6687d902edcf33b"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a0bc8bfc84237a096d6687d902edcf33b">oomph::SimpleFSIPreconditioner::Retain_fluid_onto_solid_terms</a></div><div class="ttdeci">bool Retain_fluid_onto_solid_terms</div><div class="ttdoc">Boolean flag used to indicate that the fluid onto solid interaction terms are to be retained.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00617">fsi_preconditioners.h:617</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_ab9c5875d7186cfb5c55cecb72bed50b3"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#ab9c5875d7186cfb5c55cecb72bed50b3">oomph::SimpleFSIPreconditioner::set_navier_stokes_mesh</a></div><div class="ttdeci">void set_navier_stokes_mesh(Mesh *mesh_pt, const bool &amp;allow_multiple_element_type_in_navier_stokes_mesh=false)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00551">fsi_preconditioners.h:551</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a9e4313b890f586d4e1fb406a1b9d3948"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a9e4313b890f586d4e1fb406a1b9d3948">oomph::SimpleFSIPreconditioner::use_block_diagonal_version</a></div><div class="ttdeci">void use_block_diagonal_version()</div><div class="ttdoc">Switch to block-diagonal preconditioner.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00584">fsi_preconditioners.h:584</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a595acfea83abd9fd907c208f3b487f57"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a595acfea83abd9fd907c208f3b487f57">oomph::FSIPreconditioner::Matrix_vector_product_0_1_pt</a></div><div class="ttdeci">MatrixVectorProduct * Matrix_vector_product_0_1_pt</div><div class="ttdoc">Pointer to fluid/solid interaction matrix.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00229">fsi_preconditioners.h:229</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_ada9ff0aa8a1b15dea196a6d753ec740e"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#ada9ff0aa8a1b15dea196a6d753ec740e">oomph::FSIPreconditioner::Retain_fluid_onto_solid_terms</a></div><div class="ttdeci">bool Retain_fluid_onto_solid_terms</div><div class="ttdoc">Boolean flag used to indicate that the fluid onto solid interaction terms are to be retained.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00243">fsi_preconditioners.h:243</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a61d583e9d3a1596efe22b11950fb47a5"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a61d583e9d3a1596efe22b11950fb47a5">oomph::FSIPreconditioner::set_wall_mesh</a></div><div class="ttdeci">void set_wall_mesh(Mesh *mesh_pt, const bool &amp;allow_multiple_element_type_in_wall_mesh=false)</div><div class="ttdoc">Setter function for the mesh containing the block-preconditionable FSI solid elements....</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00188">fsi_preconditioners.h:188</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_ad6e461da68c8e7f87b86f38fcd67ec69"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#ad6e461da68c8e7f87b86f38fcd67ec69">oomph::FSIPreconditioner::use_block_triangular_version_with_fluid_on_solid</a></div><div class="ttdeci">void use_block_triangular_version_with_fluid_on_solid()</div><div class="ttdoc">Switch to block-triangular preconditioner in which action of fluid dofs onto solid equations is retai...</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00156">fsi_preconditioners.h:156</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a932cb1cf6a20503a5cbb43a6b67f2340"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a932cb1cf6a20503a5cbb43a6b67f2340">oomph::FSIPreconditioner::disable_doc_time</a></div><div class="ttdeci">void disable_doc_time()</div><div class="ttdoc">Disable documentation of time.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00217">fsi_preconditioners.h:217</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a957b57dc5d05df008c15aec8f3c2ea0f"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a957b57dc5d05df008c15aec8f3c2ea0f">oomph::SimpleFSIPreconditioner::Navier_stokes_mesh_pt</a></div><div class="ttdeci">Mesh * Navier_stokes_mesh_pt</div><div class="ttdoc">Pointer to the navier stokes mesh.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00626">fsi_preconditioners.h:626</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_adadfe9f4332af610b00f1f45d1ad432e"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#adadfe9f4332af610b00f1f45d1ad432e">oomph::FSIPreconditioner::setup</a></div><div class="ttdeci">void setup()</div><div class="ttdoc">Setup the preconditioner.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00275">fsi_preconditioners.h:275</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a888de44acd9583fe7cce949a461dfc56"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a888de44acd9583fe7cce949a461dfc56">oomph::SimpleFSIPreconditioner::use_block_triangular_version_with_solid_on_fluid</a></div><div class="ttdeci">void use_block_triangular_version_with_solid_on_fluid()</div><div class="ttdoc">Switch to block-triangular preconditioner in which action of solid dofs onto fluid equations is retai...</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00600">fsi_preconditioners.h:600</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_acecba46494b0aa6f2035020f53be634c"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#acecba46494b0aa6f2035020f53be634c">oomph::FSIPreconditioner::Retain_solid_onto_fluid_terms</a></div><div class="ttdeci">bool Retain_solid_onto_fluid_terms</div><div class="ttdoc">Boolean flag used to indicate that the solid onto fluid interaction terms are to be retained.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00239">fsi_preconditioners.h:239</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a86515bb32fe8a2cdffda1d185751109d"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a86515bb32fe8a2cdffda1d185751109d">oomph::SimpleFSIPreconditioner::~SimpleFSIPreconditioner</a></div><div class="ttdeci">~SimpleFSIPreconditioner()</div><div class="ttdoc">Destructor: Clean up.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00523">fsi_preconditioners.h:523</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a4c015d18092bf2bfc1db075c74006e80"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a4c015d18092bf2bfc1db075c74006e80">oomph::FSIPreconditioner::Allow_multiple_element_type_in_navier_stokes_mesh</a></div><div class="ttdeci">bool Allow_multiple_element_type_in_navier_stokes_mesh</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00256">fsi_preconditioners.h:256</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__elements_8h_source.html#l00041">boussinesq_elements.h:41</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a324b53aaedfc8f0a2cc3da921ef94686"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a324b53aaedfc8f0a2cc3da921ef94686">oomph::SimpleFSIPreconditioner::set_wall_mesh</a></div><div class="ttdeci">void set_wall_mesh(Mesh *mesh_pt, const bool &amp;allow_multiple_element_type_in_wall_mesh=false)</div><div class="ttdoc">Setter function for the mesh containing the block-preconditionable FSI solid elements.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00565">fsi_preconditioners.h:565</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_aa08cfa51beb62ce3d72f47b8e75ce9f3"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#aa08cfa51beb62ce3d72f47b8e75ce9f3">oomph::SimpleFSIPreconditioner::Preconditioner_pt</a></div><div class="ttdeci">Preconditioner * Preconditioner_pt</div><div class="ttdoc">Preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00609">fsi_preconditioners.h:609</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a8b4161c521cb4160ae07bb0096eaca1c"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a8b4161c521cb4160ae07bb0096eaca1c">oomph::FSIPreconditioner::Matrix_vector_product_1_0_pt</a></div><div class="ttdeci">MatrixVectorProduct * Matrix_vector_product_1_0_pt</div><div class="ttdoc">Pointer to solid/fluid solid interaction matrix.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00232">fsi_preconditioners.h:232</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a193bbf986401ecb843e71581460004ad"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a193bbf986401ecb843e71581460004ad">oomph::FSIPreconditioner::use_block_triangular_version_with_solid_on_fluid</a></div><div class="ttdeci">void use_block_triangular_version_with_solid_on_fluid()</div><div class="ttdoc">Switch to block-triangular preconditioner in which action of solid dofs onto fluid equations is retai...</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00164">fsi_preconditioners.h:164</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a9a6616d03bd67e2c1c406bcb6d332893"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a9a6616d03bd67e2c1c406bcb6d332893">oomph::FSIPreconditioner::Solid_preconditioner_pt</a></div><div class="ttdeci">Preconditioner * Solid_preconditioner_pt</div><div class="ttdoc">Pointer to the solid preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00226">fsi_preconditioners.h:226</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_abaf505c05ec128f4c3c6ff5036fb3db1"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#abaf505c05ec128f4c3c6ff5036fb3db1">oomph::SimpleFSIPreconditioner::identify_required_blocks</a></div><div class="ttdeci">virtual void identify_required_blocks(DenseMatrix&lt; bool &gt; &amp;required_blocks)</div><div class="ttdoc">Identify the required blocks: Here we only need the momentum, gradient and divergence blocks of the 2...</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00654">fsi_preconditioners.h:654</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a87e5a1cb279243414b1b0c2a5834efb5"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a87e5a1cb279243414b1b0c2a5834efb5">oomph::FSIPreconditioner::Allow_multiple_element_type_in_wall_mesh</a></div><div class="ttdeci">bool Allow_multiple_element_type_in_wall_mesh</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00259">fsi_preconditioners.h:259</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a427e372b3153e9a26aa97c76d69e28a4"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a427e372b3153e9a26aa97c76d69e28a4">oomph::SimpleFSIPreconditioner::SimpleFSIPreconditioner</a></div><div class="ttdeci">SimpleFSIPreconditioner(const SimpleFSIPreconditioner &amp;)</div><div class="ttdoc">Broken copy constructor.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00536">fsi_preconditioners.h:536</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html">oomph::SimpleFSIPreconditioner</a></div><div class="ttdoc">FSI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix struc...</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00495">fsi_preconditioners.h:495</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a201e3fcf3e13bd19b3871e9d3a734a1d"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a201e3fcf3e13bd19b3871e9d3a734a1d">oomph::FSIPreconditioner::Navier_stokes_mesh_pt</a></div><div class="ttdeci">Mesh * Navier_stokes_mesh_pt</div><div class="ttdoc">Pointer to the navier stokes mesh.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00249">fsi_preconditioners.h:249</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html">oomph::FSIPreconditioner</a></div><div class="ttdoc">FSI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix struc...</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00054">fsi_preconditioners.h:54</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a31c84c3ca19c31488acd0bf2fe333a6b"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a31c84c3ca19c31488acd0bf2fe333a6b">oomph::FSIPreconditioner::preconditioner_solve</a></div><div class="ttdeci">void preconditioner_solve(const DoubleVector &amp;r, DoubleVector &amp;z)</div><div class="ttdoc">Apply preconditioner to r.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00381">fsi_preconditioners.h:381</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_aaf19c0c3f19f6d8ef4f36a1581829230"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#aaf19c0c3f19f6d8ef4f36a1581829230">oomph::SimpleFSIPreconditioner::setup</a></div><div class="ttdeci">void setup()</div><div class="ttdoc">Setup the preconditioner.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00708">fsi_preconditioners.h:708</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a597c5d3292b1e5e9001f8a738f186a73"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a597c5d3292b1e5e9001f8a738f186a73">oomph::SimpleFSIPreconditioner::SimpleFSIPreconditioner</a></div><div class="ttdeci">SimpleFSIPreconditioner()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00501">fsi_preconditioners.h:501</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a8cd1be6bffd5014090350064177c0283"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a8cd1be6bffd5014090350064177c0283">oomph::FSIPreconditioner::navier_stokes_preconditioner_pt</a></div><div class="ttdeci">NavierStokesSchurComplementPreconditioner * navier_stokes_preconditioner_pt() const</div><div class="ttdoc">Access function to the Navier Stokes preconditioner (inexact solver)</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00208">fsi_preconditioners.h:208</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FSIPreconditioner_html_a0f21e38e18521e0946c3f3ec98a85baa"><div class="ttname"><a href="classoomph_1_1FSIPreconditioner.html#a0f21e38e18521e0946c3f3ec98a85baa">oomph::FSIPreconditioner::set_solid_preconditioner_pt</a></div><div class="ttdeci">void set_solid_preconditioner_pt(Preconditioner *solid_preconditioner_pt)</div><div class="ttdoc">Broken assignment operator.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00130">fsi_preconditioners.h:130</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SimpleFSIPreconditioner_html_a62e9e620ecb6022d20aa09b493f6950d"><div class="ttname"><a href="classoomph_1_1SimpleFSIPreconditioner.html#a62e9e620ecb6022d20aa09b493f6950d">oomph::SimpleFSIPreconditioner::Retain_solid_onto_fluid_terms</a></div><div class="ttdeci">bool Retain_solid_onto_fluid_terms</div><div class="ttdoc">Boolean flag used to indicate that the solid onto fluid interaction terms are to be retained.</div><div class="ttdef"><b>Definition:</b> <a href="fsi__preconditioners_8h_source.html#l00613">fsi_preconditioners.h:613</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:21:45
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

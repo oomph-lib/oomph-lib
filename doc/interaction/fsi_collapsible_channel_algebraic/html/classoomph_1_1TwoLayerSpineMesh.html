@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TwoLayerSpineMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">TwoLayerSpineMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1TwoLayerSpineMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1TwoLayerSpineMesh.png" usemap="#oomph::TwoLayerSpineMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::TwoLayerSpineMesh_3C_20ELEMENT_20_3E_map" name="oomph::TwoLayerSpineMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1RectangularQuadMesh.html" alt="oomph::RectangularQuadMesh&lt; ELEMENT &gt;" shape="rect" coords="0,56,267,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0c41a93e9ccaaa34956215e64611be2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a0c41a93e9ccaaa34956215e64611be2a">TwoLayerSpineMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;ny1, const unsigned &amp;ny2, const double &amp;lx, const double &amp;h1, const double &amp;h2, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a0c41a93e9ccaaa34956215e64611be2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in x-direction, number of elements in y-direction in bottom and top layer, respectively, axial length and height of top and bottom layers and pointer to timestepper (defaults to Steady timestepper)  <a href="classoomph_1_1TwoLayerSpineMesh.html#a0c41a93e9ccaaa34956215e64611be2a">More...</a><br /></td></tr>
+<tr class="separator:a0c41a93e9ccaaa34956215e64611be2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8787a305ee929d001542464529e23787"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a8787a305ee929d001542464529e23787">TwoLayerSpineMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;ny1, const unsigned &amp;ny2, const double &amp;lx, const double &amp;h1, const double &amp;h2, const bool &amp;periodic_in_x, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a8787a305ee929d001542464529e23787"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in x-direction, number of elements in y-direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-direction, and pointer to timestepper (defaults to Steady timestepper)  <a href="classoomph_1_1TwoLayerSpineMesh.html#a8787a305ee929d001542464529e23787">More...</a><br /></td></tr>
+<tr class="separator:a8787a305ee929d001542464529e23787"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a374454978976c3873a89bedc688b983f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a374454978976c3873a89bedc688b983f">TwoLayerSpineMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;ny1, const unsigned &amp;ny2, const double &amp;lx, const double &amp;h1, const double &amp;h2, const bool &amp;periodic_in_x, const bool &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#afa579b413a2d8120e8228d840cb3582c">build_mesh</a>, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a374454978976c3873a89bedc688b983f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in x-direction, number of elements in y-direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-direction, a boolean flag to specify whether or not to call the "build_two_layer_mesh" function, and pointer to timestepper (defaults to Steady timestepper)  <a href="classoomph_1_1TwoLayerSpineMesh.html#a374454978976c3873a89bedc688b983f">More...</a><br /></td></tr>
+<tr class="separator:a374454978976c3873a89bedc688b983f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36680574d0c8f023206ce8ffe1a99b06"><td class="memItemLeft" align="right" valign="top">FiniteElement *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a36680574d0c8f023206ce8ffe1a99b06">upper_layer_element_pt</a> (const unsigned long &amp;i)</td></tr>
+<tr class="memdesc:a36680574d0c8f023206ce8ffe1a99b06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access functions for pointers to elements in upper layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a36680574d0c8f023206ce8ffe1a99b06">More...</a><br /></td></tr>
+<tr class="separator:a36680574d0c8f023206ce8ffe1a99b06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37e08f5f396767bdad632d9b8022655a"><td class="memItemLeft" align="right" valign="top">FiniteElement *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a37e08f5f396767bdad632d9b8022655a">lower_layer_element_pt</a> (const unsigned long &amp;i)</td></tr>
+<tr class="memdesc:a37e08f5f396767bdad632d9b8022655a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access functions for pointers to elements in bottom layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a37e08f5f396767bdad632d9b8022655a">More...</a><br /></td></tr>
+<tr class="separator:a37e08f5f396767bdad632d9b8022655a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d92e162c4fd6e70627982f761d1a66c"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a7d92e162c4fd6e70627982f761d1a66c">nupper</a> () const</td></tr>
+<tr class="memdesc:a7d92e162c4fd6e70627982f761d1a66c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in upper layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a7d92e162c4fd6e70627982f761d1a66c">More...</a><br /></td></tr>
+<tr class="separator:a7d92e162c4fd6e70627982f761d1a66c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc617bc2ae9ee4c5084c8fb004a0b1a4"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#acc617bc2ae9ee4c5084c8fb004a0b1a4">nlower</a> () const</td></tr>
+<tr class="memdesc:acc617bc2ae9ee4c5084c8fb004a0b1a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in top layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#acc617bc2ae9ee4c5084c8fb004a0b1a4">More...</a><br /></td></tr>
+<tr class="separator:acc617bc2ae9ee4c5084c8fb004a0b1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35411cf1e85ed2681e8b91f42a205150"><td class="memItemLeft" align="right" valign="top">FiniteElement *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a35411cf1e85ed2681e8b91f42a205150">interface_upper_boundary_element_pt</a> (const unsigned long &amp;i)</td></tr>
+<tr class="memdesc:a35411cf1e85ed2681e8b91f42a205150"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access functions for pointers to elements in upper layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a35411cf1e85ed2681e8b91f42a205150">More...</a><br /></td></tr>
+<tr class="separator:a35411cf1e85ed2681e8b91f42a205150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a190b41082ad3d8c25c5d3d07040b8933"><td class="memItemLeft" align="right" valign="top">FiniteElement *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a190b41082ad3d8c25c5d3d07040b8933">interface_lower_boundary_element_pt</a> (const unsigned long &amp;i)</td></tr>
+<tr class="memdesc:a190b41082ad3d8c25c5d3d07040b8933"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access functions for pointers to elements in bottom layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a190b41082ad3d8c25c5d3d07040b8933">More...</a><br /></td></tr>
+<tr class="separator:a190b41082ad3d8c25c5d3d07040b8933"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb5035599cf78ba65e53f7183c98e115"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#adb5035599cf78ba65e53f7183c98e115">ninterface_upper</a> () const</td></tr>
+<tr class="memdesc:adb5035599cf78ba65e53f7183c98e115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in upper layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#adb5035599cf78ba65e53f7183c98e115">More...</a><br /></td></tr>
+<tr class="separator:adb5035599cf78ba65e53f7183c98e115"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ad10a9a2022a32e2a5f311f789fae51"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a5ad10a9a2022a32e2a5f311f789fae51">ninterface_lower</a> () const</td></tr>
+<tr class="memdesc:a5ad10a9a2022a32e2a5f311f789fae51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in top layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a5ad10a9a2022a32e2a5f311f789fae51">More...</a><br /></td></tr>
+<tr class="separator:a5ad10a9a2022a32e2a5f311f789fae51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f31c7c1ad05803e296545a0a4210164"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a2f31c7c1ad05803e296545a0a4210164">interface_upper_face_index_at_boundary</a> (const unsigned &amp;e)</td></tr>
+<tr class="memdesc:a2f31c7c1ad05803e296545a0a4210164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the face of the elements next to the interface in the upper region (always -2)  <a href="classoomph_1_1TwoLayerSpineMesh.html#a2f31c7c1ad05803e296545a0a4210164">More...</a><br /></td></tr>
+<tr class="separator:a2f31c7c1ad05803e296545a0a4210164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a441e4c3a46f0ba2210130a59be471e09"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a441e4c3a46f0ba2210130a59be471e09">interface_lower_face_index_at_boundary</a> (const unsigned &amp;e)</td></tr>
+<tr class="memdesc:a441e4c3a46f0ba2210130a59be471e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the face of the elements next to the interface in the lower region (always 2)  <a href="classoomph_1_1TwoLayerSpineMesh.html#a441e4c3a46f0ba2210130a59be471e09">More...</a><br /></td></tr>
+<tr class="separator:a441e4c3a46f0ba2210130a59be471e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9b80ae7e34be72ca03f6d1bc6062de4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#ad9b80ae7e34be72ca03f6d1bc6062de4">spine_node_update</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:ad9b80ae7e34be72ca03f6d1bc6062de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">General node update function implements pure virtual function defined in SpineMesh base class and performs specific update actions, depending on the node update fct id stored for each node.  <a href="classoomph_1_1TwoLayerSpineMesh.html#ad9b80ae7e34be72ca03f6d1bc6062de4">More...</a><br /></td></tr>
+<tr class="separator:ad9b80ae7e34be72ca03f6d1bc6062de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1f906bca42da3d44765382013667e40d">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to Steady)  <a href="classoomph_1_1RectangularQuadMesh.html#a1f906bca42da3d44765382013667e40d">More...</a><br /></td></tr>
+<tr class="separator:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aea506679674e4fc5c43b62a53798d0be">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates.  <a href="classoomph_1_1RectangularQuadMesh.html#aea506679674e4fc5c43b62a53798d0be">More...</a><br /></td></tr>
+<tr class="separator:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a40f120e00d682026e54593ca0f823535">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;lx, const double &amp;ly, const bool &amp;periodic_in_x, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-direction. Also pass pointer to timestepper (defaults to Steady)  <a href="classoomph_1_1RectangularQuadMesh.html#a40f120e00d682026e54593ca0f823535">More...</a><br /></td></tr>
+<tr class="separator:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ac36869a7d72ec7524b18272657cb6167">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, const bool &amp;periodic_in_x, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#ac36869a7d72ec7524b18272657cb6167">More...</a><br /></td></tr>
+<tr class="separator:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfef93d6322886cdce14a437186e4821 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a> () const</td></tr>
+<tr class="memdesc:abfef93d6322886cdce14a437186e4821 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of elements in x direction.  <a href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">More...</a><br /></td></tr>
+<tr class="separator:abfef93d6322886cdce14a437186e4821 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86d76a55eb7c4e8bca9b74d23c8b0412 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a> () const</td></tr>
+<tr class="memdesc:a86d76a55eb7c4e8bca9b74d23c8b0412 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of elements in y direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">More...</a><br /></td></tr>
+<tr class="separator:a86d76a55eb7c4e8bca9b74d23c8b0412 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab311c3bec7f9f721bae1f93e0798ab2c">x_min</a> () const</td></tr>
+<tr class="memdesc:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ab311c3bec7f9f721bae1f93e0798ab2c">More...</a><br /></td></tr>
+<tr class="separator:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a3449b36a5e4fc4728e517bd38d7b0cc6">x_max</a> () const</td></tr>
+<tr class="memdesc:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#a3449b36a5e4fc4728e517bd38d7b0cc6">More...</a><br /></td></tr>
+<tr class="separator:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1c493af1dae35746bed7a31e61b46c5b">y_min</a> () const</td></tr>
+<tr class="memdesc:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#a1c493af1dae35746bed7a31e61b46c5b">More...</a><br /></td></tr>
+<tr class="separator:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a7d4a00a545efc20451b00a9b8ad1e17d">y_max</a> () const</td></tr>
+<tr class="memdesc:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#a7d4a00a545efc20451b00a9b8ad1e17d">More...</a><br /></td></tr>
+<tr class="separator:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae1e1d67808d4efb6e16a3835162a4504">element_reorder</a> ()</td></tr>
+<tr class="memdesc:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder the elements: By default they are ordered in "horizontal" layers (increasing in x, then in y). This function changes this to an ordering in the vertical direction (y first, then x). This is more efficient if a frontal solver is used and the mesh has more elements in the x than the y direction. Can be overloaded in specific derived meshes.  <a href="classoomph_1_1RectangularQuadMesh.html#ae1e1d67808d4efb6e16a3835162a4504">More...</a><br /></td></tr>
+<tr class="separator:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a5fd9eae27ba19788e0b397936f0c5ead"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a5fd9eae27ba19788e0b397936f0c5ead">x_spacing_function</a> (unsigned xelement, unsigned xnode, unsigned yelement, unsigned ynode)</td></tr>
+<tr class="memdesc:a5fd9eae27ba19788e0b397936f0c5ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">The spacing function for the x co-ordinates with two regions.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a5fd9eae27ba19788e0b397936f0c5ead">More...</a><br /></td></tr>
+<tr class="separator:a5fd9eae27ba19788e0b397936f0c5ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d05d5228e3831021ab48dd429ada890"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a2d05d5228e3831021ab48dd429ada890">y_spacing_function</a> (unsigned xelement, unsigned xnode, unsigned yelement, unsigned ynode)</td></tr>
+<tr class="memdesc:a2d05d5228e3831021ab48dd429ada890"><td class="mdescLeft">&#160;</td><td class="mdescRight">The spacing function for the y co-ordinates with three regions in each fluid.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a2d05d5228e3831021ab48dd429ada890">More...</a><br /></td></tr>
+<tr class="separator:a2d05d5228e3831021ab48dd429ada890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7973ed642b9adff26bf531c76dade747"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a7973ed642b9adff26bf531c76dade747">spine_node_update_lower</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:a7973ed642b9adff26bf531c76dade747"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for the lower part of the domain.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a7973ed642b9adff26bf531c76dade747">More...</a><br /></td></tr>
+<tr class="separator:a7973ed642b9adff26bf531c76dade747"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc173b7505ec801a4aa688f97ffe55e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#adc173b7505ec801a4aa688f97ffe55e0">spine_node_update_upper</a> (SpineNode *spine_node_pt)</td></tr>
+<tr class="memdesc:adc173b7505ec801a4aa688f97ffe55e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for the upper part of the domain.  <a href="classoomph_1_1TwoLayerSpineMesh.html#adc173b7505ec801a4aa688f97ffe55e0">More...</a><br /></td></tr>
+<tr class="separator:adc173b7505ec801a4aa688f97ffe55e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada5471a89c3ac91a606b3e5dcc1325cd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#ada5471a89c3ac91a606b3e5dcc1325cd">build_two_layer_mesh</a> (TimeStepper *time_stepper_pt)</td></tr>
+<tr class="memdesc:ada5471a89c3ac91a606b3e5dcc1325cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to actually build the two-layer spine mesh (called from various constructors)  <a href="classoomph_1_1TwoLayerSpineMesh.html#ada5471a89c3ac91a606b3e5dcc1325cd">More...</a><br /></td></tr>
+<tr class="separator:ada5471a89c3ac91a606b3e5dcc1325cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#afa579b413a2d8120e8228d840cb3582c">build_mesh</a> (TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic mesh construction function: contains all the hard work.  <a href="classoomph_1_1RectangularQuadMesh.html#afa579b413a2d8120e8228d840cb3582c">More...</a><br /></td></tr>
+<tr class="separator:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aeda49fb3896e9e3aec328391b196a6bf">RectangularQuadMesh</a> (const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#abfef93d6322886cdce14a437186e4821">nx</a>, const unsigned &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a86d76a55eb7c4e8bca9b74d23c8b0412">ny</a>, const double &amp;xmin, const double &amp;xmax, const double &amp;ymin, const double &amp;ymax, const bool &amp;periodic_in_x, const bool &amp;build, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!!  <a href="classoomph_1_1RectangularQuadMesh.html#aeda49fb3896e9e3aec328391b196a6bf">More...</a><br /></td></tr>
+<tr class="separator:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a614e800b8c5ba2963254e7e41bcfc9e2"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a614e800b8c5ba2963254e7e41bcfc9e2">Ny1</a></td></tr>
+<tr class="memdesc:a614e800b8c5ba2963254e7e41bcfc9e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in lower layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a614e800b8c5ba2963254e7e41bcfc9e2">More...</a><br /></td></tr>
+<tr class="separator:a614e800b8c5ba2963254e7e41bcfc9e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48a69edc318571675eed16c9154235e3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a48a69edc318571675eed16c9154235e3">Ny2</a></td></tr>
+<tr class="memdesc:a48a69edc318571675eed16c9154235e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in upper layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a48a69edc318571675eed16c9154235e3">More...</a><br /></td></tr>
+<tr class="separator:a48a69edc318571675eed16c9154235e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad98f7a291c592042279f0498ea3ec5c9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#ad98f7a291c592042279f0498ea3ec5c9">H1</a></td></tr>
+<tr class="memdesc:ad98f7a291c592042279f0498ea3ec5c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Height of the lower layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#ad98f7a291c592042279f0498ea3ec5c9">More...</a><br /></td></tr>
+<tr class="separator:ad98f7a291c592042279f0498ea3ec5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a7e5f7297ad653440d7d833c89d1b44"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a0a7e5f7297ad653440d7d833c89d1b44">H2</a></td></tr>
+<tr class="memdesc:a0a7e5f7297ad653440d7d833c89d1b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Height of the upper layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a0a7e5f7297ad653440d7d833c89d1b44">More...</a><br /></td></tr>
+<tr class="separator:a0a7e5f7297ad653440d7d833c89d1b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaadaab14aab4d597dab78758a1a93ad8"><td class="memItemLeft" align="right" valign="top">Vector&lt; FiniteElement * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#aaadaab14aab4d597dab78758a1a93ad8">Lower_layer_element_pt</a></td></tr>
+<tr class="memdesc:aaadaab14aab4d597dab78758a1a93ad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to element in the upper layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#aaadaab14aab4d597dab78758a1a93ad8">More...</a><br /></td></tr>
+<tr class="separator:aaadaab14aab4d597dab78758a1a93ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ea2169026ec75ecf1d727f022311b65"><td class="memItemLeft" align="right" valign="top">Vector&lt; FiniteElement * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a7ea2169026ec75ecf1d727f022311b65">Upper_layer_element_pt</a></td></tr>
+<tr class="memdesc:a7ea2169026ec75ecf1d727f022311b65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to element in the lower layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a7ea2169026ec75ecf1d727f022311b65">More...</a><br /></td></tr>
+<tr class="separator:a7ea2169026ec75ecf1d727f022311b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa5c2ad2f61cd7637b12573265b42bd7"><td class="memItemLeft" align="right" valign="top">Vector&lt; FiniteElement * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#aaa5c2ad2f61cd7637b12573265b42bd7">Interface_lower_boundary_element_pt</a></td></tr>
+<tr class="memdesc:aaa5c2ad2f61cd7637b12573265b42bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to the elements adjacent to the interface on the lower layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#aaa5c2ad2f61cd7637b12573265b42bd7">More...</a><br /></td></tr>
+<tr class="separator:aaa5c2ad2f61cd7637b12573265b42bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c2202c3169f9fe8c9342b5d95c1a9d"><td class="memItemLeft" align="right" valign="top">Vector&lt; FiniteElement * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a81c2202c3169f9fe8c9342b5d95c1a9d">Interface_upper_boundary_element_pt</a></td></tr>
+<tr class="memdesc:a81c2202c3169f9fe8c9342b5d95c1a9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to the element adjacent to the interface on the upper layer.  <a href="classoomph_1_1TwoLayerSpineMesh.html#a81c2202c3169f9fe8c9342b5d95c1a9d">More...</a><br /></td></tr>
+<tr class="separator:a81c2202c3169f9fe8c9342b5d95c1a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1b2c0a2d1f8399713033953c72d399ee">Nx</a></td></tr>
+<tr class="memdesc:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nx: number of elements in x-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a1b2c0a2d1f8399713033953c72d399ee">More...</a><br /></td></tr>
+<tr class="separator:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">Ny</a></td></tr>
+<tr class="memdesc:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ny: number of elements in y-direction.  <a href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">More...</a><br /></td></tr>
+<tr class="separator:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a92502c7536a6644ebffd806841cd4d98">Np</a></td></tr>
+<tr class="memdesc:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Np: number of (linear) points in the element.  <a href="classoomph_1_1RectangularQuadMesh.html#a92502c7536a6644ebffd806841cd4d98">More...</a><br /></td></tr>
+<tr class="separator:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#af3aab508d077460545031e758396514a">Xmin</a></td></tr>
+<tr class="memdesc:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#af3aab508d077460545031e758396514a">More...</a><br /></td></tr>
+<tr class="separator:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab8e4ddba0ce8315cf480cdd1f3447684">Xmax</a></td></tr>
+<tr class="memdesc:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of x coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ab8e4ddba0ce8315cf480cdd1f3447684">More...</a><br /></td></tr>
+<tr class="separator:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ade53fec7446044418ccba9f55d692adb">Ymin</a></td></tr>
+<tr class="memdesc:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#ade53fec7446044418ccba9f55d692adb">More...</a><br /></td></tr>
+<tr class="separator:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">Ymax</a></td></tr>
+<tr class="memdesc:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of y coordinate.  <a href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">More...</a><br /></td></tr>
+<tr class="separator:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">Xperiodic</a></td></tr>
+<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction <br  />
+  <a href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">More...</a><br /></td></tr>
+<tr class="separator:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;</h3>
+
+<p>Two-layer spine mesh class derived from standard 2D mesh. The mesh contains two layers of spinified fluid elements (of type ELEMENT; e.g SpineElement&lt;QCrouzeixRaviartElement&lt;2&gt;).</p>
+<p>This mesh paritions the elements into those above and below a notional interface and relabels boundaries so that the mesh is as follows </p>
+<h2><a class="anchor" id="autotoc_md5"></a>
+3</h2>
+<p>| | 4 | | 2 </p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+|                 6                   |</h2>
+<p>| | 5 | | 1 </p>
+<h2><a class="anchor" id="autotoc_md7"></a>
+|                                     |</h2>
+<p>0 Update information for the nodes in response to changes in spine length is given, but additional equations must be specified in order to completely specify the problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00061">61</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0c41a93e9ccaaa34956215e64611be2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c41a93e9ccaaa34956215e64611be2a">&#9670;&nbsp;</a></span>TwoLayerSpineMesh() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">TwoLayerSpineMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>h1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>h2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass number of elements in x-direction, number of elements in y-direction in bottom and top layer, respectively, axial length and height of top and bottom layers and pointer to timestepper (defaults to Steady timestepper) </p>
+<p>Constuctor for spine 2D mesh: Pass number of elements in x-direction, number of elements in y-direction in bottom and top layer, respectively, axial length and height of top and bottom layers, and pointer to timestepper (defaults to Static timestepper).</p>
+<p>The mesh contains two layers of elements (of type ELEMENT; e.g SpineElement&lt;QCrouzeixRaviartElement&lt;2&gt;) and an interfacial layer of corresponding Spine interface elements of type INTERFACE_ELEMENT, e.g. SpineLineFluidInterfaceElement&lt;ELEMENT&gt; for 2D planar problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00051">51</a> of file <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html">two_layer_spine_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00246">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::build_two_layer_mesh()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00191">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::H1</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00194">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::H2</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00185">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Ny1</a>, and <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00188">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Ny2</a>.</p>
+
+</div>
+</div>
+<a id="a8787a305ee929d001542464529e23787"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8787a305ee929d001542464529e23787">&#9670;&nbsp;</a></span>TwoLayerSpineMesh() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">TwoLayerSpineMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>h1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>h2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>periodic_in_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass number of elements in x-direction, number of elements in y-direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-direction, and pointer to timestepper (defaults to Steady timestepper) </p>
+<p>Constuctor for spine 2D mesh: Pass number of elements in x-direction, number of elements in y-direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-direction, and pointer to timestepper (defaults to Static timestepper).</p>
+<p>The mesh contains two layers of elements (of type ELEMENT; e.g SpineElement&lt;QCrouzeixRaviartElement&lt;2&gt;) and an interfacial layer of corresponding Spine interface elements of type INTERFACE_ELEMENT, e.g. SpineLineFluidInterfaceElement&lt;ELEMENT&gt; for 2D planar problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00100">100</a> of file <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html">two_layer_spine_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00246">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::build_two_layer_mesh()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00191">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::H1</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00194">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::H2</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00185">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Ny1</a>, and <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00188">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Ny2</a>.</p>
+
+</div>
+</div>
+<a id="a374454978976c3873a89bedc688b983f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a374454978976c3873a89bedc688b983f">&#9670;&nbsp;</a></span>TwoLayerSpineMesh() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">TwoLayerSpineMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>h1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>h2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>periodic_in_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>build_mesh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass number of elements in x-direction, number of elements in y-direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-direction, a boolean flag to specify whether or not to call the "build_two_layer_mesh" function, and pointer to timestepper (defaults to Steady timestepper) </p>
+<p>Constuctor for spine 2D mesh: Pass number of elements in x-direction, number of elements in y-direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-direction, a boolean flag to specify whether or not to call the "build_two_layer_mesh" function, and pointer to timestepper (defaults to Static timestepper).</p>
+<p>The mesh contains two layers of elements (of type ELEMENT; e.g SpineElement&lt;QCrouzeixRaviartElement&lt;2&gt;) and an interfacial layer of corresponding Spine interface elements of type INTERFACE_ELEMENT, e.g. SpineLineFluidInterfaceElement&lt;ELEMENT&gt; for 2D planar problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00150">150</a> of file <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html">two_layer_spine_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00044">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00246">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::build_two_layer_mesh()</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00191">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::H1</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00194">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::H2</a>, <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00185">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Ny1</a>, and <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00188">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Ny2</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ada5471a89c3ac91a606b3e5dcc1325cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada5471a89c3ac91a606b3e5dcc1325cd">&#9670;&nbsp;</a></span>build_two_layer_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::build_two_layer_mesh </td>
+          <td>(</td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to actually build the two-layer spine mesh (called from various constructors) </p>
+<p>Helper function that actually builds the two-layer spine mesh based on the parameters set in the various constructors </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00246">246</a> of file <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html">two_layer_spine_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00044">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00051">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::TwoLayerSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a190b41082ad3d8c25c5d3d07040b8933"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a190b41082ad3d8c25c5d3d07040b8933">&#9670;&nbsp;</a></span>interface_lower_boundary_element_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FiniteElement* &amp; <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::interface_lower_boundary_element_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access functions for pointers to elements in bottom layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00133">133</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00204">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Interface_lower_boundary_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="a441e4c3a46f0ba2210130a59be471e09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a441e4c3a46f0ba2210130a59be471e09">&#9670;&nbsp;</a></span>interface_lower_face_index_at_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::interface_lower_face_index_at_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index of the face of the elements next to the interface in the lower region (always 2) </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00151">151</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a35411cf1e85ed2681e8b91f42a205150"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35411cf1e85ed2681e8b91f42a205150">&#9670;&nbsp;</a></span>interface_upper_boundary_element_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FiniteElement* &amp; <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::interface_upper_boundary_element_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access functions for pointers to elements in upper layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00129">129</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00208">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Interface_upper_boundary_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="a2f31c7c1ad05803e296545a0a4210164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f31c7c1ad05803e296545a0a4210164">&#9670;&nbsp;</a></span>interface_upper_face_index_at_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::interface_upper_face_index_at_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index of the face of the elements next to the interface in the upper region (always -2) </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00146">146</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<a id="a37e08f5f396767bdad632d9b8022655a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37e08f5f396767bdad632d9b8022655a">&#9670;&nbsp;</a></span>lower_layer_element_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FiniteElement* &amp; <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::lower_layer_element_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access functions for pointers to elements in bottom layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00119">119</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00197">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Lower_layer_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="a5ad10a9a2022a32e2a5f311f789fae51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ad10a9a2022a32e2a5f311f789fae51">&#9670;&nbsp;</a></span>ninterface_lower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::ninterface_lower </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in top layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00141">141</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00204">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Interface_lower_boundary_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="adb5035599cf78ba65e53f7183c98e115"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb5035599cf78ba65e53f7183c98e115">&#9670;&nbsp;</a></span>ninterface_upper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::ninterface_upper </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in upper layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00137">137</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00208">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Interface_upper_boundary_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="acc617bc2ae9ee4c5084c8fb004a0b1a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc617bc2ae9ee4c5084c8fb004a0b1a4">&#9670;&nbsp;</a></span>nlower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::nlower </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in top layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00126">126</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00197">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Lower_layer_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="a7d92e162c4fd6e70627982f761d1a66c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d92e162c4fd6e70627982f761d1a66c">&#9670;&nbsp;</a></span>nupper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::nupper </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in upper layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00123">123</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00200">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Upper_layer_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="ad9b80ae7e34be72ca03f6d1bc6062de4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9b80ae7e34be72ca03f6d1bc6062de4">&#9670;&nbsp;</a></span>spine_node_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::spine_node_update </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>General node update function implements pure virtual function defined in SpineMesh base class and performs specific update actions, depending on the node update fct id stored for each node. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00157">157</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00222">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_lower()</a>, and <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00234">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update_upper()</a>.</p>
+
+</div>
+</div>
+<a id="a7973ed642b9adff26bf531c76dade747"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7973ed642b9adff26bf531c76dade747">&#9670;&nbsp;</a></span>spine_node_update_lower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::spine_node_update_lower </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function for the lower part of the domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00222">222</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00198">Global_Physical_Variables::H</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00076">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00157">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="adc173b7505ec801a4aa688f97ffe55e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc173b7505ec801a4aa688f97ffe55e0">&#9670;&nbsp;</a></span>spine_node_update_upper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::spine_node_update_upper </td>
+          <td>(</td>
+          <td class="paramtype">SpineNode *&#160;</td>
+          <td class="paramname"><em>spine_node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function for the upper part of the domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00234">234</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__collapsible__channel_8cc_source.html#l00198">Global_Physical_Variables::H</a>, <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00078">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymax</a>, and <a class="el" href="rectangular__quadmesh_8template_8h_source.html#l00076">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::Ymin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00157">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::spine_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a36680574d0c8f023206ce8ffe1a99b06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36680574d0c8f023206ce8ffe1a99b06">&#9670;&nbsp;</a></span>upper_layer_element_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FiniteElement* &amp; <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::upper_layer_element_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access functions for pointers to elements in upper layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00115">115</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00200">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::Upper_layer_element_pt</a>.</p>
+
+</div>
+</div>
+<a id="a5fd9eae27ba19788e0b397936f0c5ead"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fd9eae27ba19788e0b397936f0c5ead">&#9670;&nbsp;</a></span>x_spacing_function()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::x_spacing_function </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>xelement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>xnode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>yelement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>ynode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The spacing function for the x co-ordinates with two regions. </p>
+<p>The spacing function for the x co-ordinate, which is the same as the default function. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1RectangularQuadMesh.html#ad4c2f349cf201cb3107f0a4e5447c16f">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00193">193</a> of file <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html">two_layer_spine_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2d05d5228e3831021ab48dd429ada890"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d05d5228e3831021ab48dd429ada890">&#9670;&nbsp;</a></span>y_spacing_function()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::y_spacing_function </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>xelement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>xnode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>yelement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>ynode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The spacing function for the y co-ordinates with three regions in each fluid. </p>
+<p>The spacing function for the y co-ordinates, which splits the region into two regions (1 and 2), according to the heights H1 and H2, with Ny1 and Ny2 elements respectively. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae78204de1f176cdf2e819673bd34e78a">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00208">208</a> of file <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html">two_layer_spine_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad98f7a291c592042279f0498ea3ec5c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad98f7a291c592042279f0498ea3ec5c9">&#9670;&nbsp;</a></span>H1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::H1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Height of the lower layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00191">191</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00051">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::TwoLayerSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a0a7e5f7297ad653440d7d833c89d1b44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a7e5f7297ad653440d7d833c89d1b44">&#9670;&nbsp;</a></span>H2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::H2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Height of the upper layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00194">194</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00051">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::TwoLayerSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aaa5c2ad2f61cd7637b12573265b42bd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa5c2ad2f61cd7637b12573265b42bd7">&#9670;&nbsp;</a></span>Interface_lower_boundary_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;FiniteElement*&gt; <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::Interface_lower_boundary_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of pointers to the elements adjacent to the interface on the lower layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00204">204</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00133">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::interface_lower_boundary_element_pt()</a>, and <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00141">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::ninterface_lower()</a>.</p>
+
+</div>
+</div>
+<a id="a81c2202c3169f9fe8c9342b5d95c1a9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c2202c3169f9fe8c9342b5d95c1a9d">&#9670;&nbsp;</a></span>Interface_upper_boundary_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;FiniteElement *&gt; <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::Interface_upper_boundary_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of pointers to the element adjacent to the interface on the upper layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00208">208</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00129">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::interface_upper_boundary_element_pt()</a>, and <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00137">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::ninterface_upper()</a>.</p>
+
+</div>
+</div>
+<a id="aaadaab14aab4d597dab78758a1a93ad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaadaab14aab4d597dab78758a1a93ad8">&#9670;&nbsp;</a></span>Lower_layer_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;FiniteElement *&gt; <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::Lower_layer_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of pointers to element in the upper layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00197">197</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00119">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::lower_layer_element_pt()</a>, and <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00126">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::nlower()</a>.</p>
+
+</div>
+</div>
+<a id="a614e800b8c5ba2963254e7e41bcfc9e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a614e800b8c5ba2963254e7e41bcfc9e2">&#9670;&nbsp;</a></span>Ny1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::Ny1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in lower layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00185">185</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00051">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::TwoLayerSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a48a69edc318571675eed16c9154235e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48a69edc318571675eed16c9154235e3">&#9670;&nbsp;</a></span>Ny2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::Ny2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in upper layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00188">188</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00051">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::TwoLayerSpineMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a7ea2169026ec75ecf1d727f022311b65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ea2169026ec75ecf1d727f022311b65">&#9670;&nbsp;</a></span>Upper_layer_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;FiniteElement *&gt; <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html">oomph::TwoLayerSpineMesh</a>&lt; ELEMENT &gt;::Upper_layer_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of pointers to element in the lower layer. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00200">200</a> of file <a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00123">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::nupper()</a>, and <a class="el" href="two__layer__spine__mesh_8template_8h_source.html#l00115">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::upper_layer_element_pt()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="two__layer__spine__mesh_8template_8h_source.html">two_layer_spine_mesh.template.h</a></li>
+<li><a class="el" href="two__layer__spine__mesh_8template_8cc_source.html">two_layer_spine_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:19:07
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

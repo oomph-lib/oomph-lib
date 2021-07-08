@@ -1,0 +1,459 @@
+\hypertarget{classoomph_1_1AdvectionDiffusionFluxElement}{}\doxysection{oomph\+::Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1AdvectionDiffusionFluxElement}\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+
+
+A class for elements that allow the imposition of an applied flux on the boundaries of Advection Diffusion elements. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class.  
+
+
+
+
+{\ttfamily \#include $<$advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.333333cm]{classoomph_1_1AdvectionDiffusionFluxElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)
+\begin{DoxyCompactList}\small\item\em Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector! ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acdb4a523d9680f6f42128044591c73e0}{Advection\+Diffusion\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_af91991cc6e255d038f0f8443e0339643}{Advection\+Diffusion\+Flux\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a187a597274ed7d129da3b1cd89196f44}{Advection\+Diffusion\+Flux\+Element}} (const \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_ad14ac8c65798fc1ed5e28ec2d969f147}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a8d78c95241fe2615ea63040e4072627d}{flux\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the prescribed-\/flux function pointer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a7448e4359840f5090f879bc82b2319f8}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a5c8e409a31f90858e556fe359b996b9d}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aaf962dc2e0fccdafa7210bbaaf2fbbd6}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a23efe876b380f81188dcb506ac24266b}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a6a080d1e107612072d9069f909a2b5b0}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a735b7f2134a85a1f856582f52ad773b1}{shape\+\_\+and\+\_\+test}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a32af9be97192954538f40cba54facd83}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)
+\begin{DoxyCompactList}\small\item\em Function to calculate the prescribed flux at a given spatial position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acbc0c8e1e486601c0f09f7ecbb1995c4}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a7c0b0eda4c03c14b18963c59b2c80a67}{Flux\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to the (global) prescribed-\/flux function. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a9418de31c96e89d011b6627cb5756e1e}{Dim}}
+\begin{DoxyCompactList}\small\item\em The spatial dimension of the problem. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}{U\+\_\+index\+\_\+adv\+\_\+diff}}
+\begin{DoxyCompactList}\small\item\em The index at which the unknown is stored at the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+A class for elements that allow the imposition of an applied flux on the boundaries of Advection Diffusion elements. The element geometry is obtained from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ policy class. 
+
+Definition at line 56 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}\label{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!AdvectionDiffusionPrescribedFluxFctPt@{AdvectionDiffusionPrescribedFluxFctPt}}
+\index{AdvectionDiffusionPrescribedFluxFctPt@{AdvectionDiffusionPrescribedFluxFctPt}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AdvectionDiffusionPrescribedFluxFctPt}{AdvectionDiffusionPrescribedFluxFctPt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&flux)}
+
+
+
+Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector! ~\newline
+ 
+
+
+
+Definition at line 66 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_acdb4a523d9680f6f42128044591c73e0}\label{classoomph_1_1AdvectionDiffusionFluxElement_acdb4a523d9680f6f42128044591c73e0}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}}
+\index{AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AdvectionDiffusionFluxElement()}{AdvectionDiffusionFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. 
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created ~\newline
+ 
+
+Definition at line 236 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Flux\+\_\+fct\+\_\+pt, oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff(), and oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+adv\+\_\+diff.
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_af91991cc6e255d038f0f8443e0339643}\label{classoomph_1_1AdvectionDiffusionFluxElement_af91991cc6e255d038f0f8443e0339643}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}}
+\index{AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AdvectionDiffusionFluxElement()}{AdvectionDiffusionFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken empty constructor. 
+
+
+
+Definition at line 76 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a187a597274ed7d129da3b1cd89196f44}\label{classoomph_1_1AdvectionDiffusionFluxElement_a187a597274ed7d129da3b1cd89196f44}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}}
+\index{AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AdvectionDiffusionFluxElement()}{AdvectionDiffusionFluxElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 85 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a5c8e409a31f90858e556fe359b996b9d}\label{classoomph_1_1AdvectionDiffusionFluxElement_a5c8e409a31f90858e556fe359b996b9d}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d68e4309ac1b03583d252845}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 112 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a7448e4359840f5090f879bc82b2319f8}\label{classoomph_1_1AdvectionDiffusionFluxElement_a7448e4359840f5090f879bc82b2319f8}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 101 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_acbc0c8e1e486601c0f09f7ecbb1995c4}\label{classoomph_1_1AdvectionDiffusionFluxElement_acbc0c8e1e486601c0f09f7ecbb1995c4}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux@{fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux}}
+\index{fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux@{fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux()}{fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. ~\newline
+ 
+
+Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
+
+Definition at line 396 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, oomph\+::get\+\_\+flux(), i, residuals(), s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+
+
+
+Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a8d78c95241fe2615ea63040e4072627d}\label{classoomph_1_1AdvectionDiffusionFluxElement_a8d78c95241fe2615ea63040e4072627d}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!flux\_fct\_pt@{flux\_fct\_pt}}
+\index{flux\_fct\_pt@{flux\_fct\_pt}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{flux\_fct\_pt()}{flux\_fct\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the prescribed-\/flux function pointer. 
+
+
+
+Definition at line 97 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Flux\+\_\+fct\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}\label{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!get\_flux@{get\_flux}}
+\index{get\_flux@{get\_flux}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_flux()}{get\_flux()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to calculate the prescribed flux at a given spatial position. 
+
+
+
+Definition at line 184 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Flux\+\_\+fct\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_ad14ac8c65798fc1ed5e28ec2d969f147}\label{classoomph_1_1AdvectionDiffusionFluxElement_ad14ac8c65798fc1ed5e28ec2d969f147}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 91 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a23efe876b380f81188dcb506ac24266b}\label{classoomph_1_1AdvectionDiffusionFluxElement_a23efe876b380f81188dcb506ac24266b}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 130 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a6a080d1e107612072d9069f909a2b5b0}\label{classoomph_1_1AdvectionDiffusionFluxElement_a6a080d1e107612072d9069f909a2b5b0}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 134 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a735b7f2134a85a1f856582f52ad773b1}\label{classoomph_1_1AdvectionDiffusionFluxElement_a735b7f2134a85a1f856582f52ad773b1}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
+\index{shape\_and\_test@{shape\_and\_test}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_and\_test()}{shape\_and\_test()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
+
+
+
+Definition at line 143 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a32af9be97192954538f40cba54facd83}\label{classoomph_1_1AdvectionDiffusionFluxElement_a32af9be97192954538f40cba54facd83}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
+\index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
+
+
+
+Definition at line 163 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_aaf962dc2e0fccdafa7210bbaaf2fbbd6}\label{classoomph_1_1AdvectionDiffusionFluxElement_aaf962dc2e0fccdafa7210bbaaf2fbbd6}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) 
+
+Specify the value of nodal zeta from the face geometry 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07dc49d2dc6cca68559}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 124 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a9418de31c96e89d011b6627cb5756e1e}\label{classoomph_1_1AdvectionDiffusionFluxElement_a9418de31c96e89d011b6627cb5756e1e}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!Dim@{Dim}}
+\index{Dim@{Dim}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Dim}{Dim}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Dim\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The spatial dimension of the problem. 
+
+
+
+Definition at line 212 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Advection\+Diffusion\+Flux\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a7c0b0eda4c03c14b18963c59b2c80a67}\label{classoomph_1_1AdvectionDiffusionFluxElement_a7c0b0eda4c03c14b18963c59b2c80a67}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!Flux\_fct\_pt@{Flux\_fct\_pt}}
+\index{Flux\_fct\_pt@{Flux\_fct\_pt}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Flux\_fct\_pt}{Flux\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Flux\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to the (global) prescribed-\/flux function. 
+
+
+
+Definition at line 209 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Advection\+Diffusion\+Flux\+Element(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::flux\+\_\+fct\+\_\+pt(), and oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+flux().
+
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}\label{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}} 
+\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!U\_index\_adv\_diff@{U\_index\_adv\_diff}}
+\index{U\_index\_adv\_diff@{U\_index\_adv\_diff}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{U\_index\_adv\_diff}{U\_index\_adv\_diff}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::U\+\_\+index\+\_\+adv\+\_\+diff\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The index at which the unknown is stored at the nodes. 
+
+
+
+Definition at line 215 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Advection\+Diffusion\+Flux\+Element().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{advection__diffusion__flux__elements_8h}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}\end{DoxyCompactItemize}

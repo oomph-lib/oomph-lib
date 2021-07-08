@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: A preconditioner for the solution of Navier-Stokes equations with weakly imposed boundary conditions via Lagrange multipliers</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: A preconditioner for the solution of Navier-Stokes equations with weakly imposed boundary conditions via Lagrange multipliers </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>The purpose of this tutorial is to show how to use <code>oomph-lib's</code> Lagrange Enforced Flow Navier-Stokes preconditioner. Similarly to the problem considered in the <a href="../../../navier_stokes/vmtk_fluid/html/index.html">Steady finite-Reynolds-number flow through an iliac bifurcation</a> tutorial, the outflow boundary of the demo problem (discussed below) are not aligned with any coordinate planes. Parallel outflow is therefore enforced by a Lagrange multiplier method, implemented using <code>oomph-lib's</code> <code>FaceElement</code> framework.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="model"></a>
+The model problem, theory and preconditioner</h1>
+<p>We will demonstrate the development and application of the preconditioner using the Poiseuille flow through a unit square domain <img class="formulaInl" alt="$\Omega^{[\alpha]} \in \mathbb{R}^2$" src="form_0.png"/> rotated by an arbitrary angle <img class="formulaInl" alt="$\alpha$" src="form_1.png"/> (see the figure below). The domain <img class="formulaInl" alt="$\Omega^{[\alpha]}$" src="form_2.png"/> is obtained by rotating the discrete points <img class="formulaInl" alt="$(x_1,x_2)$" src="form_3.png"/> in the unit square <img class="formulaInl" alt="$\Omega = [0,1]^2$" src="form_4.png"/> by the following transformation </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R(\alpha)= \left( \begin{array}{cc} {\cos(\alpha)} &amp; {-\sin(\alpha)} \\ {\sin(\alpha)} &amp; {\cos(\alpha)} \end{array} \right), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_5.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$\alpha$" src="form_1.png"/> is the angle of rotation. The figure below show the flow field (velocity vectors and pressure contours) for a unit square domain rotated by an angle of <img class="formulaInl" alt="$\alpha=30^\circ $" src="form_6.png"/> and a Reynolds number of <img class="formulaInl" alt="$ Re = 100 $" src="form_7.png"/>. The flow is driven by a prescribed parabolic boundary condition.</p>
+<div class="image">
+<img src="SimAng30Rey100Noel4.gif" alt=""/>
+<div class="caption">
+Velocity field and pressure </div></div>
+ <p>For convenience, we present the boundary conditions for the non-rotated unit square <img class="formulaInl" alt="$\alpha = 0^{\circ}$" src="form_8.png"/>. In order to obtain the boundary conditions for <img class="formulaInl" alt="$\alpha \ne 0^\circ$" src="form_9.png"/>, we only have to apply the rotation (1). The flow is driven by imposing a parabolic velocity profile along the inflow boundary <img class="formulaInl" alt="$\Omega_I$" src="form_10.png"/>. Along the characteristic boundary, <img class="formulaInl" alt="$\Omega_C$" src="form_11.png"/>, the no-slip condition <img class="formulaInl" alt="$u_i = 0$" src="form_12.png"/>, <img class="formulaInl" alt="$i = 1,2$" src="form_13.png"/>, is prescribed. We impose &lsquo;parallel outflow&rsquo; along the outlet <img class="formulaInl" alt="$\Omega_O$" src="form_14.png"/> by insisting that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf u}\cdot {\bf t}_{} = 0 \mbox{\ \ \ \ on $\Omega_{O}$,} \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_15.png"/>
+</p>
+<p> <br  />
+ where <img class="formulaInl" alt="$ {\bf t}$" src="form_16.png"/> is the tangent vector at each discrete point on the boundary <img class="formulaInl" alt="$ \Omega_{O}$" src="form_17.png"/>. We weakly enforce the flow constraint by augmenting the Navier-Stokes momentum residual equation (introduced in the <a href="../../../navier_stokes/rayleigh_traction_channel/html/index.html">Unsteady flow in a 2D channel, driven by an applied traction</a> tutorial) with a Lagrange multiplier term so that it becomes </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{il}^{u} = \int_\Omega \left[ Re \left( St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j} \right) \psi_l + \tau_{ij}\frac{\partial \psi_l}{\partial x_j} \right] d\Omega - \int_{\partial\Omega} \tau_{ij} n_j\psi_l dS + \delta \Pi_{constraint} = 0, \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_18.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \Pi_{constraint} = \int_{\partial \Omega} \lambda u_i t_i dS, \ \ \ \ \ \ \ \ \ \ (4) \]" src="form_19.png"/>
+</p>
+<p> and <img class="formulaInl" alt="$\lambda$" src="form_20.png"/> is the Lagrange multiplier. Upon taking the first variation of the constraint with respect to the unknown velocity and the Lagrange multiplier, the residual form of the constrained momentum equation is </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{il}^{u} = \int_\Omega \left[ Re \left( St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j} \right) \psi_l + \tau_{ij}\frac{\partial \psi_l}{\partial x_j} \right] d\Omega - \int_{\partial\Omega} \tau_{ij} n_j\psi_l dS + \int_{\partial\Omega} \lambda\psi_l t_i = 0. \ \ \ \ \ \ \ \ \ \ (5) \]" src="form_21.png"/>
+</p>
+<p> The weak formulation of (2) is simply </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_{l}^{\lambda} = \int_\Omega u_i t_i \psi^\lambda dS = 0, \ \ \ \ \ \ \ \ \ \ (6) \]" src="form_22.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$\psi^\lambda$" src="form_23.png"/> is a suitable basis function. Equation (5) reveals that the Lagrange multipliers act as the (negative) tangential traction <img class="formulaInl" alt="$(\lambda = -{\mathbf{n}}^T{\mathbf{\tau}}{\mathbf{t}})$" src="form_24.png"/> that enforce the parallel flow across the boundary <img class="formulaInl" alt="$\partial\Omega_{O}$" src="form_25.png"/>. We discretise this constraint by attaching <code>ImposeParallelOutflowElements</code> to the boundaries of the "bulk" Navier-Stokes elements that are adjacent to <img class="formulaInl" alt="$ \partial \Omega_O $" src="form_26.png"/> as shown in the <a href="../../../navier_stokes/vmtk_fluid/html/index.html">Steady finite-Reynolds-number flow through an iliac bifurcation</a> tutorial, also see the <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">Deformation of a solid by a prescribed boundary motion </a> tutorial which employs a similar technique used to enforce prescribed boundary displacements in solid mechanics problems. We discretise the Navier-Stokes equations using <code>oomph-lib's</code> <code>QTaylorHoodElements</code>, see the <a href="../../../navier_stokes/driven_cavity/html/index.html">2D Driven Cavity Problem</a> tutorial for more information.</p>
+<p>The discretised problem therefore contains the following types of discrete unknowns:</p><ul>
+<li>The fluid degrees of freedom (velocity and pressure).<br  />
+<br  />
+</li>
+<li>The nodal values representing the components of the (vector-valued) Lagrange multipliers. These only exist for the nodes on <img class="formulaInl" alt="$ \partial \Omega_O$" src="form_27.png"/>. (The nodes are re-sized to accommodate the additional unknowns when the <code>ImposeParallelOutflowElements</code> are attached to the bulk elements.)</li>
+</ul>
+<p>The preconditioner requires a further sub-division of these degrees of freedom into the following categories:</p><ul>
+<li>the unconstrained velocity in the x-direction</li>
+<li>the unconstrained velocity in the y-direction</li>
+<li>[the unconstrained velocity in the z-direction (only in 3D)]</li>
+<li>the constrained velocity in the x-direction</li>
+<li>the constrained velocity in the y-direction</li>
+<li>[the constrained velocity in the z-direction (only in 3D)]</li>
+<li>the Lagrange multiplier at the constrained nodes</li>
+<li>[the other Lagrange multiplier at the constrained nodes (only in 3D)].</li>
+</ul>
+<p>For a 2D problem, the linear system to be solved in the course of the Newton iteration can then be (formally) re-ordered into the following block structure:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left[ \begin{array}{ccccc|c} { F_{\rm xx}}&amp;{ F_{\rm x\bar{\rm x}}}&amp;{ F_{\rm xy}}&amp;{ F_{\rm x\bar{\rm y}}}&amp;{ B_{\rm x}^{T}}&amp;\\ { F_{\bar{\rm x}\rm x}}&amp;{ F_{\bar{\rm x}\bar{\rm x}}}&amp;{ F_{\bar{\rm x}\rm y}}&amp;{ F_{\bar{\rm x}\bar{\rm y}}}&amp;{ B_{\bar{\rm x}}^{T}}&amp;{ M_{\rm x}}\\ { F_{\rm yx}}&amp;{ F_{\rm y\bar{\rm x}}}&amp;{ F_{\rm yy}}&amp;{ F_{\rm y\bar{\rm y}}}&amp;{ B_{\rm y}^{T}}&amp;\\ { F_{\bar{\rm y}\rm x}}&amp;{ F_{\bar{\rm y}\bar{\rm x}}}&amp;{ F_{\bar{\rm y}\rm y}}&amp;{ F_{\bar{\rm y}\bar{\rm y}}}&amp;{ B_{\bar{\rm y}}^{T}}&amp;{ M_{\rm y}}\\ { B_{\rm x}}&amp;{ B_{\bar{\rm x}}}&amp;{ B_{\rm y}}&amp;{ B_{\bar{\rm y}}}&amp;\\ \hline &amp;{ M_{\rm x}}&amp;&amp;{ M_{\rm y}}&amp;&amp; \end{array} \right] \left[ \begin{array}{c} \Delta \mathbf{U}_{\rm x}\\ \Delta \mathbf{\overline{U}}_{\rm x}\\ \Delta \mathbf{U}_{\rm y}\\ \Delta \mathbf{\overline{U}}_{\rm y}\\ \Delta \mathbf{P}\\ \Delta \mathbf{\Lambda} \end{array} \right] = - \left[ \begin{array}{c} \mathbf{r}_{\rm x}\\ \mathbf{r}_{\bar{\rm x}}\\ \mathbf{r}_{\rm y}\\ \mathbf{r}_{\bar{\rm y}}\\ \mathbf{r}_{\rm p}\\ \mathbf{r}_{\rm \Lambda} \end{array} \right]. \ \ \ \ \ \ (7) \]" src="form_28.png"/>
+</p>
+<p> Here the vectors <img class="formulaInl" alt="${\bf U}_{\rm x}$" src="form_29.png"/>, <img class="formulaInl" alt="${\bf U}_{\rm y}$" src="form_30.png"/>, <img class="formulaInl" alt="${\bf P}$" src="form_31.png"/> and <img class="formulaInl" alt="${\bf \Lambda}$" src="form_32.png"/> contain the <img class="formulaInl" alt="$x$" src="form_33.png"/> and <img class="formulaInl" alt="$y$" src="form_34.png"/> components of the velocity unknowns, the pressure unknowns and Lagrange multipliers unknowns, respectively. The overbars identify the unknown nodal positions that are constrained by the Lagrange multiplier. The matrices <img class="formulaInl" alt="$M_{\rm x}$" src="form_35.png"/> and <img class="formulaInl" alt="$M_{\rm y}$" src="form_36.png"/> are mass-like matrices whose entries are formed from products of the basis functions multiplied by a component of the tangent vector at each discrete point on <img class="formulaInl" alt="$\partial\Omega_{O}$" src="form_25.png"/>, for example, <img class="formulaInl" alt="$[M_{{\rm x}}]_{ij} = \int_{\partial \Omega_{O}} t_x {\psi_i} \ {\psi_j} \ dS $" src="form_37.png"/>. Denote </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J_{\rm NS} = \left[ \begin{array}{ccccc} { F_{\rm xx}}&amp;{ F_{\rm x\bar{\rm x}}}&amp;{ F_{\rm xy}}&amp;{ F_{\rm x\bar{\rm y}}}&amp;{ B_{\rm x}^{T}}\\ { F_{\bar{\rm x}\rm x}}&amp;{ F_{\bar{\rm x}\bar{\rm x}}}&amp;{ F_{\bar{\rm x}\rm y}}&amp;{ F_{\bar{\rm x}\bar{\rm y}}}&amp;{ B_{\bar{\rm x}}^{T}}\\ { F_{\rm yx}}&amp;{ F_{\rm y\bar{\rm x}}}&amp;{ F_{\rm yy}}&amp;{ F_{\rm y\bar{\rm y}}}&amp;{ B_{\rm y}^{T}}\\ { F_{\bar{\rm y}\rm x}}&amp;{ F_{\bar{\rm y}\bar{\rm x}}}&amp;{ F_{\bar{\rm y}\rm y}}&amp;{ F_{\bar{\rm y}\bar{\rm y}}}&amp;{ B_{\bar{\rm y}}^{T}}\\ { B_{\rm x}}&amp;{ B_{\bar{\rm x}}}&amp;{ B_{\rm y}}&amp;{ B_{\bar{\rm y}}} \end{array} \right], \ \ \ L = \left[ \begin{array}{ccccc} &amp;{M_{\rm x}}&amp; &amp;{ M_{\rm x}} &amp; \end{array} \right], \ \ \ \Delta \mathbf{X}_{\rm NS} = \left[ \begin{array}{c} \Delta \mathbf{U}_{\rm x}\\ \Delta \mathbf{\overline{U}}_{\rm x}\\ \Delta \mathbf{U}_{\rm y}\\ \Delta \mathbf{\overline{U}}_{\rm y}\\ \Delta \mathbf{P} \end{array} \right],\mbox{\ \ \ \ and } \ \ \ \mathbf{r}_{\rm NS} = \left[ \begin{array}{c} \mathbf{r}_{\rm x}\\ \mathbf{r}_{\bar{\rm x}}\\ \mathbf{r}_{\rm y}\\ \mathbf{r}_{\bar{\rm y}}\\ \mathbf{r}_{\rm p} \end{array} \right]. \]" src="form_38.png"/>
+</p>
+<p> Then we can re-write (7) as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left[ \begin{array}{cc} { J_{\rm NS}}&amp;L^{T}\\ L&amp; \end{array} \right] \left[ \begin{array}{c} \Delta \mathbf{X}_{\rm NS}\\ \Delta \mathbf{\Lambda} \end{array} \right] = - \left[ \begin{array}{c} \mathbf{r}_{\rm NS}\\ \mathbf{r}_{\rm \Lambda} \end{array} \right]. \ \ \ \ \ \ (8) \]" src="form_39.png"/>
+</p>
+<p> We have shown that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ P= \left[ \begin{array}{cc} { J_{\rm NS}} + L^{T}W^{-1} L&amp; \\ &amp; W \end{array} \right], \ \ \ \ \ \ (9) \]" src="form_40.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$W = \frac{1}{\sigma}LL^{T}$" src="form_41.png"/> is an optimal preconditioner for the linear system (8) if we set <img class="formulaInl" alt="$ \sigma=\|F\|_{\infty} $" src="form_42.png"/> where <img class="formulaInl" alt="$F$" src="form_43.png"/> is the compound <img class="formulaInl" alt="$4\times 4$" src="form_44.png"/> top-left block </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ F = \left[ \begin{array}{ccccc} { F_{\rm xx}}&amp;{ F_{\rm x\bar{\rm x}}}&amp;{ F_{\rm xy}}&amp;{ F_{\rm x\bar{\rm y}}}\\ { F_{\bar{\rm x}\rm x}}&amp;{ F_{\bar{\rm x}\bar{\rm x}}}&amp;{ F_{\bar{\rm x}\rm y}}&amp;{ F_{\bar{\rm x}\bar{\rm y}}}\\ { F_{\rm yx}}&amp;{ F_{\rm y\bar{\rm x}}}&amp;{ F_{\rm yy}}&amp;{ F_{\rm y\bar{\rm y}}}\\ { F_{\bar{\rm y}\rm x}}&amp;{ F_{\bar{\rm y}\bar{\rm x}}}&amp;{ F_{\bar{\rm y}\rm y}}&amp;{ F_{\bar{\rm y}\bar{\rm y}}} \end{array} \right] \]" src="form_45.png"/>
+</p>
+<p> in the Jacobian matrix. Application of the preconditioner <img class="formulaInl" alt="$P$" src="form_46.png"/> requires the repeated solution of linear systems involving the diagonal blocks <img class="formulaInl" alt="${J_{\rm NS}} + L^{T}W^{-1} L$" src="form_47.png"/> and <img class="formulaInl" alt="$W$" src="form_48.png"/>. The matrix <img class="formulaInl" alt="$W^{-1} = \sigma (LL^{T})^{-1} = \sigma ({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}$" src="form_49.png"/> is dense and will cause the addition of dense sub-matrices to the Jacobian matrix: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sigma L^{T}(LL^{T})^{-1}L = \sigma \left[ \begin{array}{ccccc} \cal O &amp;\cal O &amp;\cal O &amp;\cal O &amp;\cal O \\ \cal O&amp;{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&amp;\cal O &amp;{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}&amp;\cal O \\ \cal O&amp;\cal O &amp;\cal O &amp;\cal O &amp;\cal O \\ \cal O&amp;{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&amp;\cal O &amp;{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}&amp; \cal O\\ \cal O&amp;\cal O &amp;\cal O &amp;\cal O &amp;\cal O \end{array} \right]. \]" src="form_50.png"/>
+</p>
+<p> Numerical experiments show that an efficient implementation can be obtained by replacing <img class="formulaInl" alt="$W$" src="form_48.png"/> by its diagonal approximation <img class="formulaInl" alt="$\widehat{W} = \mbox{diag}(M_{\rm x}^{2}+M_{\rm y}^{2})$" src="form_51.png"/>. Then the inversion of <img class="formulaInl" alt="$W$" src="form_48.png"/> is straight forward and the addition of <img class="formulaInl" alt="$L^{T}{\widehat{W}}^{-1}L$" src="form_52.png"/> to the Jacobian does not significantly increase the number of non-zero entries in the matrix <img class="formulaInl" alt="$J_{\rm NS}$" src="form_53.png"/>. Denote the efficient implementation by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tilde{P} = \left[ \begin{array}{cc} { \tilde{J}_{\rm NS}}&amp; \\ &amp; \widehat{W} \end{array} \right], \ \ \ \ \ \ (10) \]" src="form_54.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$\tilde{J}_{\rm NS} =J_{\rm NS}+ L^{T}{\widehat{W}}^{-1}L$" src="form_55.png"/> is the augmented Navier-Stokes Jacobian matrix. In our implementation of the preconditioner, the linear system involving <img class="formulaInl" alt="$\tilde{J}_{\rm NS}$" src="form_56.png"/> can either be solved "exactly", using <code>SuperLU</code> (in its incarnation as an exact preconditioner; this is the default) or by any other <code>Preconditioner</code> (interpreted as an "inexact solver") specified via the access function </p><div class="fragment"><div class="line">LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(...)</div>
+</div><!-- fragment --><p> Numerical experiments show that a nearly optimal preconditioner is obtained by replacing the solution of the linear system involving the augmented Navier-Stokes Jacobian <img class="formulaInl" alt="$ \tilde{J}_{\rm NS} $" src="form_57.png"/> by an application of Elman, Silvester and Wathen's <a href="../../lsc_navier_stokes/html/index.html">Least-Squares Commutator (LSC) preconditioner</a>, and by replacing the remaining block-solves within these preconditioners by a small number of AMG cycles.</p>
+<p>With these approximations, the computational cost of one application of <img class="formulaInl" alt="$\tilde P$" src="form_58.png"/> is linear in the number of unknowns. The optimality of the preconditioner can therefore be assessed by demonstrating that the number of GMRES iterations remains constant under mesh refinement.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+Demo driver and use of the preconditioner</h1>
+<p>To demonstrate how to use the preconditioner, here are the relevant extracts from the driver code <a href="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc">two_d_tilted_square.cc</a> which solves the model problem described above. As explained in the <a href="../../../linear_solvers/html/index.html">Linear Solvers Tutorial</a> switching to an iterative linear solver is typically performed in the <code>Problem</code> constructor and involves a few straightforward steps:</p>
+<ol type="1">
+<li><b>Create an instance of the IterativeLinearSolver and pass it to the Problem</b> <br  />
+<br  />
+ In our problem, we choose right preconditioned <code>GMRES</code> as the linear solver: <br  />
+<br  />
+  <div class="fragment"><div class="line">    <span class="comment">// Create oomph-lib iterative linear solver.</span></div>
+<div class="line">    IterativeLinearSolver* solver_pt = <span class="keyword">new</span> GMRES&lt;CRDoubleMatrix&gt;;</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// We use RHS preconditioning. Note that by default,</span></div>
+<div class="line">    <span class="comment">// left hand preconditioning is used.</span></div>
+<div class="line">    <span class="keyword">static_cast&lt;</span>GMRES&lt;CRDoubleMatrix&gt;*<span class="keyword">&gt;</span>(solver_pt)</div>
+<div class="line">      -&gt;set_preconditioner_RHS();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Store the solver pointer.</span></div>
+<div class="line">    Solver_pt = solver_pt;</div>
+</div><!-- fragment --> <br  />
+<br  />
+</li>
+<li><b>Create an instance of the Preconditioner and give it access to the meshes</b> <br  />
+<br  />
+ The <code>LagrangeEnforceFlowPreconditioner</code> takes a pointer of meshes. It is important that the bulk mesh is in position <code>0</code> : <div class="fragment"><div class="line">  <span class="comment">// Create the preconditioner</span></div>
+<div class="line">  LagrangeEnforcedFlowPreconditioner* lgr_prec_pt</div>
+<div class="line">    = <span class="keyword">new</span> LagrangeEnforcedFlowPreconditioner;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create the vector of mesh pointers!</span></div>
+<div class="line">  Vector&lt;Mesh*&gt; mesh_pt;</div>
+<div class="line">  mesh_pt.resize(2,0);</div>
+<div class="line">  mesh_pt[0] = Bulk_mesh_pt;</div>
+<div class="line">  mesh_pt[1] = Surface_mesh_P_pt;</div>
+<div class="line"> </div>
+<div class="line">  lgr_prec_pt-&gt;set_meshes(mesh_pt);</div>
+</div><!-- fragment --> By default, <code>SuperLUPreconditioner</code> is used for all subsidiary block solves. To use the LSC preconditioner to approximately solve the sub-block system involving the momentum block, we invoke the following: <div class="fragment"><div class="line">    <span class="comment">// Create the NS LSC preconditioner.</span></div>
+<div class="line">    lsc_prec_pt = <span class="keyword">new</span> NavierStokesSchurComplementPreconditioner(<span class="keyword">this</span>);</div>
+<div class="line">    lsc_prec_pt-&gt;set_navier_stokes_mesh(Bulk_mesh_pt);</div>
+<div class="line">    lsc_prec_pt-&gt;use_lsc();</div>
+<div class="line">    lgr_prec_pt-&gt;set_navier_stokes_preconditioner(lsc_prec_pt);</div>
+</div><!-- fragment --> The LSC preconditioner is discussed in <a href="../../lsc_navier_stokes/html/index.html">another tutorial</a>. <br  />
+<br  />
+</li>
+<li><b>Pass the preconditioner to the solver, and the solver to the problem </b> <br  />
+<br  />
+ <div class="fragment"><div class="line">  <span class="comment">// Pass the preconditioner to the solver.</span></div>
+<div class="line">  Solver_pt-&gt;preconditioner_pt() = lgr_prec_pt;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Pass the solver to the problem.</span></div>
+<div class="line">  this-&gt;<a class="code" href="lgr__navier__stokes_8txt.html#a1edfdbc47106d414eebfac6ad6e696d0">linear_solver_pt</a>() = Solver_pt;</div>
+</div><!-- fragment --> <br  />
+<br  />
+</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner">demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc">demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="algr__navier__stokes_8txt_html_a1edfdbc47106d414eebfac6ad6e696d0"><div class="ttname"><a href="lgr__navier__stokes_8txt.html#a1edfdbc47106d414eebfac6ad6e696d0">linear_solver_pt</a></div><div class="ttdeci">The LSC preconditioner is discussed in&lt; a href=&quot;../../lsc_navier_stokes/html/index.html&quot;&gt; another tutorial&lt;/A &gt; n n&lt;/b &gt; n n skipline Pass the preconditioner to the solver until linear_solver_pt()</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:25:45
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

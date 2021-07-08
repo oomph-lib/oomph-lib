@@ -1,0 +1,313 @@
+\hypertarget{classoomph_1_1IsotropicElasticityTensor}{}\doxysection{oomph\+::Isotropic\+Elasticity\+Tensor Class Reference}
+\label{classoomph_1_1IsotropicElasticityTensor}\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+
+
+{\ttfamily \#include $<$elasticity\+\_\+tensor.\+h$>$}
+
+Inheritance diagram for oomph\+::Isotropic\+Elasticity\+Tensor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1IsotropicElasticityTensor}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a022f9a6cb2339393a2cbc8eee81717e5}{Isotropic\+Elasticity\+Tensor}} (const double \&nu, const double \&E)
+\begin{DoxyCompactList}\small\item\em Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a61cc521701ca584ca74477aab86865f6}{Isotropic\+Elasticity\+Tensor}} (const double \&nu)
+\begin{DoxyCompactList}\small\item\em Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stresses and tractions in the governing equations are assumed to have been non-\/dimensionalised on Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a0f4785c975f317f98864f28bb977a516}{Isotropic\+Elasticity\+Tensor}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&lame)
+\begin{DoxyCompactList}\small\item\em Constructur. Passing in the values of the two lame coefficients directly (interpreted as the ratios of these quantities to a reference stiffness used to non-\/dimensionalised. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a980736a39c91e69b4ab7d2f62b740da2}{update\+\_\+constitutive\+\_\+parameters}} (const double \&nu, const double \&E=1.\+0)
+\begin{DoxyCompactList}\small\item\em Update parameters\+: Specify values of the Poisson\textquotesingle{}s ratio and (optionally) Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a6b4a91ef7585590886cd191a7c03827d}{independent\+\_\+component}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Overload the independent coefficient function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a022f9a6cb2339393a2cbc8eee81717e5}{Isotropic\+Elasticity\+Tensor}} (const double \&nu, const double \&E)
+\begin{DoxyCompactList}\small\item\em Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a61cc521701ca584ca74477aab86865f6}{Isotropic\+Elasticity\+Tensor}} (const double \&nu)
+\begin{DoxyCompactList}\small\item\em Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stresses and tractions in the governing equations are assumed to have been non-\/dimensionalised on Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a0f4785c975f317f98864f28bb977a516}{Isotropic\+Elasticity\+Tensor}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&lame)
+\begin{DoxyCompactList}\small\item\em Constructur. Passing in the values of the two lame coefficients directly (interpreted as the ratios of these quantities to a reference stiffness used to non-\/dimensionalised. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a6b4a91ef7585590886cd191a7c03827d}{independent\+\_\+component}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Overload the independent coefficient function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a3e1d58b606d9ae2883403f24db1bb5b3}{set\+\_\+lame\+\_\+coefficients}} (const double \&lambda, const double \&mu)
+\item 
+void \mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a3e1d58b606d9ae2883403f24db1bb5b3}{set\+\_\+lame\+\_\+coefficients}} (const double \&lambda, const double \&mu)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_a7189e7c72bcf36be75a4ba42f0675aff}{C}} \mbox{[}4\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const unsigned \mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor_aa100bfbbb893872dcb54c7090800d701}{Static\+Index}} \mbox{[}21\mbox{]}
+\begin{DoxyCompactList}\small\item\em Translation scheme for the isotropic elasticity tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+An isotropic elasticity tensor defined in terms of Young\textquotesingle{}s modulus and Poisson\textquotesingle{}s ratio. The elasticity tensor is assumed to be non-\/dimensionalised on some reference value for Young\textquotesingle{}s modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus used to non-\/dimensionalise the stresses/tractions in the governing equations. 
+
+Definition at line 156 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a022f9a6cb2339393a2cbc8eee81717e5}\label{classoomph_1_1IsotropicElasticityTensor_a022f9a6cb2339393a2cbc8eee81717e5}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!IsotropicElasticityTensor@{IsotropicElasticityTensor}}
+\index{IsotropicElasticityTensor@{IsotropicElasticityTensor}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{IsotropicElasticityTensor()}{IsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily oomph\+::\+Isotropic\+Elasticity\+Tensor\+::\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{const double \&}]{nu,  }\item[{const double \&}]{E }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). 
+
+
+
+Definition at line 172 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, and set\+\_\+lame\+\_\+coefficients().
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a61cc521701ca584ca74477aab86865f6}\label{classoomph_1_1IsotropicElasticityTensor_a61cc521701ca584ca74477aab86865f6}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!IsotropicElasticityTensor@{IsotropicElasticityTensor}}
+\index{IsotropicElasticityTensor@{IsotropicElasticityTensor}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{IsotropicElasticityTensor()}{IsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily oomph\+::\+Isotropic\+Elasticity\+Tensor\+::\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{const double \&}]{nu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stresses and tractions in the governing equations are assumed to have been non-\/dimensionalised on Young\textquotesingle{}s modulus. 
+
+
+
+Definition at line 185 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, and set\+\_\+lame\+\_\+coefficients().
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a0f4785c975f317f98864f28bb977a516}\label{classoomph_1_1IsotropicElasticityTensor_a0f4785c975f317f98864f28bb977a516}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!IsotropicElasticityTensor@{IsotropicElasticityTensor}}
+\index{IsotropicElasticityTensor@{IsotropicElasticityTensor}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{IsotropicElasticityTensor()}{IsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily oomph\+::\+Isotropic\+Elasticity\+Tensor\+::\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{lame }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructur. Passing in the values of the two lame coefficients directly (interpreted as the ratios of these quantities to a reference stiffness used to non-\/dimensionalised. 
+
+
+
+Definition at line 200 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, and set\+\_\+lame\+\_\+coefficients().
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a022f9a6cb2339393a2cbc8eee81717e5}\label{classoomph_1_1IsotropicElasticityTensor_a022f9a6cb2339393a2cbc8eee81717e5}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!IsotropicElasticityTensor@{IsotropicElasticityTensor}}
+\index{IsotropicElasticityTensor@{IsotropicElasticityTensor}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{IsotropicElasticityTensor()}{IsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily oomph\+::\+Isotropic\+Elasticity\+Tensor\+::\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{const double \&}]{nu,  }\item[{const double \&}]{E }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). 
+
+
+
+Definition at line 159 of file poroelasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, and set\+\_\+lame\+\_\+coefficients().
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a61cc521701ca584ca74477aab86865f6}\label{classoomph_1_1IsotropicElasticityTensor_a61cc521701ca584ca74477aab86865f6}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!IsotropicElasticityTensor@{IsotropicElasticityTensor}}
+\index{IsotropicElasticityTensor@{IsotropicElasticityTensor}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{IsotropicElasticityTensor()}{IsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily oomph\+::\+Isotropic\+Elasticity\+Tensor\+::\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{const double \&}]{nu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stresses and tractions in the governing equations are assumed to have been non-\/dimensionalised on Young\textquotesingle{}s modulus. 
+
+
+
+Definition at line 172 of file poroelasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, and set\+\_\+lame\+\_\+coefficients().
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a0f4785c975f317f98864f28bb977a516}\label{classoomph_1_1IsotropicElasticityTensor_a0f4785c975f317f98864f28bb977a516}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!IsotropicElasticityTensor@{IsotropicElasticityTensor}}
+\index{IsotropicElasticityTensor@{IsotropicElasticityTensor}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{IsotropicElasticityTensor()}{IsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily oomph\+::\+Isotropic\+Elasticity\+Tensor\+::\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{lame }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructur. Passing in the values of the two lame coefficients directly (interpreted as the ratios of these quantities to a reference stiffness used to non-\/dimensionalised. 
+
+
+
+Definition at line 187 of file poroelasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, and set\+\_\+lame\+\_\+coefficients().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a6b4a91ef7585590886cd191a7c03827d}\label{classoomph_1_1IsotropicElasticityTensor_a6b4a91ef7585590886cd191a7c03827d}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!independent\_component@{independent\_component}}
+\index{independent\_component@{independent\_component}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{independent\_component()}{independent\_component()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double oomph\+::\+Isotropic\+Elasticity\+Tensor\+::independent\+\_\+component (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the independent coefficient function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a84b2a9b7a447cf88b2d6b98b5e6e7bd5}{oomph\+::\+Elasticity\+Tensor}}.
+
+
+
+Definition at line 196 of file poroelasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, i, and Static\+Index.
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a6b4a91ef7585590886cd191a7c03827d}\label{classoomph_1_1IsotropicElasticityTensor_a6b4a91ef7585590886cd191a7c03827d}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!independent\_component@{independent\_component}}
+\index{independent\_component@{independent\_component}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{independent\_component()}{independent\_component()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double oomph\+::\+Isotropic\+Elasticity\+Tensor\+::independent\+\_\+component (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the independent coefficient function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a84b2a9b7a447cf88b2d6b98b5e6e7bd5}{oomph\+::\+Elasticity\+Tensor}}.
+
+
+
+Definition at line 224 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, i, and Static\+Index.
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a3e1d58b606d9ae2883403f24db1bb5b3}\label{classoomph_1_1IsotropicElasticityTensor_a3e1d58b606d9ae2883403f24db1bb5b3}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!set\_lame\_coefficients@{set\_lame\_coefficients}}
+\index{set\_lame\_coefficients@{set\_lame\_coefficients}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{set\_lame\_coefficients()}{set\_lame\_coefficients()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Isotropic\+Elasticity\+Tensor\+::set\+\_\+lame\+\_\+coefficients (\begin{DoxyParamCaption}\item[{const double \&}]{lambda,  }\item[{const double \&}]{mu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 203 of file poroelasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C.
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a3e1d58b606d9ae2883403f24db1bb5b3}\label{classoomph_1_1IsotropicElasticityTensor_a3e1d58b606d9ae2883403f24db1bb5b3}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!set\_lame\_coefficients@{set\_lame\_coefficients}}
+\index{set\_lame\_coefficients@{set\_lame\_coefficients}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{set\_lame\_coefficients()}{set\_lame\_coefficients()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Isotropic\+Elasticity\+Tensor\+::set\+\_\+lame\+\_\+coefficients (\begin{DoxyParamCaption}\item[{const double \&}]{lambda,  }\item[{const double \&}]{mu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 231 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C.
+
+
+
+Referenced by Isotropic\+Elasticity\+Tensor(), and update\+\_\+constitutive\+\_\+parameters().
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a980736a39c91e69b4ab7d2f62b740da2}\label{classoomph_1_1IsotropicElasticityTensor_a980736a39c91e69b4ab7d2f62b740da2}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!update\_constitutive\_parameters@{update\_constitutive\_parameters}}
+\index{update\_constitutive\_parameters@{update\_constitutive\_parameters}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{update\_constitutive\_parameters()}{update\_constitutive\_parameters()}}
+{\footnotesize\ttfamily void oomph\+::\+Isotropic\+Elasticity\+Tensor\+::update\+\_\+constitutive\+\_\+parameters (\begin{DoxyParamCaption}\item[{const double \&}]{nu,  }\item[{const double \&}]{E = {\ttfamily 1.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update parameters\+: Specify values of the Poisson\textquotesingle{}s ratio and (optionally) Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). 
+
+
+
+Definition at line 212 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, and set\+\_\+lame\+\_\+coefficients().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_a7189e7c72bcf36be75a4ba42f0675aff}\label{classoomph_1_1IsotropicElasticityTensor_a7189e7c72bcf36be75a4ba42f0675aff}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!C@{C}}
+\index{C@{C}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{C}{C}}
+{\footnotesize\ttfamily double oomph\+::\+Isotropic\+Elasticity\+Tensor\+::C\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 159 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+Referenced by independent\+\_\+component(), Isotropic\+Elasticity\+Tensor(), set\+\_\+lame\+\_\+coefficients(), and update\+\_\+constitutive\+\_\+parameters().
+
+\mbox{\Hypertarget{classoomph_1_1IsotropicElasticityTensor_aa100bfbbb893872dcb54c7090800d701}\label{classoomph_1_1IsotropicElasticityTensor_aa100bfbbb893872dcb54c7090800d701}} 
+\index{oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}!StaticIndex@{StaticIndex}}
+\index{StaticIndex@{StaticIndex}!oomph::IsotropicElasticityTensor@{oomph::IsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{StaticIndex}{StaticIndex}}
+{\footnotesize\ttfamily static const unsigned oomph\+::\+Isotropic\+Elasticity\+Tensor\+::\+Static\+Index\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{ \{1,0,2,3,0,1,0,0,2,0,0,0,3,0,0,0,0,2,3,0,1\}}
+
+\end{DoxyCode}
+
+
+Translation scheme for the isotropic elasticity tensor. 
+
+
+
+Definition at line 163 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+Referenced by independent\+\_\+component().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{linear__elasticity_2elasticity__tensor_8h}{linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h}}\item 
+\mbox{\hyperlink{linear__elasticity_2elasticity__tensor_8cc}{linear\+\_\+elasticity/elasticity\+\_\+tensor.\+cc}}\end{DoxyCompactItemize}

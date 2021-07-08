@@ -1,0 +1,474 @@
+\hypertarget{classoomph_1_1ComplexGMRES}{}\doxysection{oomph\+::Complex\+G\+M\+R\+ES$<$ M\+A\+T\+R\+IX $>$ Class Template Reference}
+\label{classoomph_1_1ComplexGMRES}\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+
+
+The \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} method rewritten for complex matrices.  
+
+
+
+
+{\ttfamily \#include $<$complex\+\_\+smoother.\+h$>$}
+
+Inheritance diagram for oomph\+::Complex\+G\+M\+R\+ES$<$ M\+A\+T\+R\+IX $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classoomph_1_1ComplexGMRES}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ComplexGMRES_a8d0bfc83e16222c1eee97d8118505bae}{Complex\+G\+M\+R\+ES}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ComplexGMRES_ade91020000a1b6bf316ff9753ac6498b}{$\sim$\+Complex\+G\+M\+R\+ES}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ComplexGMRES_a834e97a93d141ece73e4f3aac2e8cd00}{Complex\+G\+M\+R\+ES}} (const \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{Complex\+G\+M\+R\+ES}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a1b42167d4635b2ca294ed7aa843e9de5}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{Complex\+G\+M\+R\+ES}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a07db774f0aca4e71579c7c071e25a451}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Overload disable resolve so that it cleans up memory too. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a76987ec784cd80e6605c63ef8d0ec6b7}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a9dd1695e8d907d57151df79a6e3e3968}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a10760c61c62771773e2adc57055717aa}{iterations}} () const
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a1c8ff4f7c1a14f195942ba3e33e73b49}{complex\+\_\+smoother\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ helmholtz\+\_\+matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Setup\+: Pass pointer to the matrix and store in cast form. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a874520bc44cd8127497d972373938df9}{complex\+\_\+smoother\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&solution)
+\begin{DoxyCompactList}\small\item\em The smoother\+\_\+solve function performs fixed number of iterations on the system A$\ast$result=rhs. The number of (smoothing) iterations is the same as the max. number of iterations in the underlying \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a946b88bc1392180c56909b739bfa7b3c}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a848721022a08fde4b2182a143f287ded}{complex\+\_\+solve\+\_\+helper}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&solution)
+\begin{DoxyCompactList}\small\item\em This is where the actual work is done. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a0c6df8b6c50a0ccd344a62654b1411d0}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&hessenberg, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&v, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Helper function to update the result vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a07183636586d7d30fcde380ef88e5fe6}{generate\+\_\+plane\+\_\+rotation}} (std\+::complex$<$ double $>$ \&dx, std\+::complex$<$ double $>$ \&dy, std\+::complex$<$ double $>$ \&cs, std\+::complex$<$ double $>$ \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a8aa80ff477c4b131f8c1a4c74f872df1}{apply\+\_\+plane\+\_\+rotation}} (std\+::complex$<$ double $>$ \&dx, std\+::complex$<$ double $>$ \&dy, std\+::complex$<$ double $>$ \&cs, std\+::complex$<$ double $>$ \&sn)
+\begin{DoxyCompactList}\small\item\em Helper function\+: Apply plane rotation. This is done using the update\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a208aaa9528d6b08afa5324f77ac70581}{Iterations}}
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ComplexGMRES_adfd862b611a335b5d6872a9eb37aa193}{Matrices\+\_\+storage\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the real and imaginary part of the system matrix. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a2694315efaf2aa353ad4d67f316b1597}{Resolving}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setup of matrix and preconditioner. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1ComplexGMRES_aa38fa18230fc30f271d59481ccee3b55}{Matrix\+\_\+can\+\_\+be\+\_\+deleted}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the real and imaginary system matrices can be deleted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename M\+A\+T\+R\+IX$>$\newline
+class oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}
+
+The \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} method rewritten for complex matrices. 
+
+Definition at line 869 of file complex\+\_\+smoother.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a8d0bfc83e16222c1eee97d8118505bae}\label{classoomph_1_1ComplexGMRES_a8d0bfc83e16222c1eee97d8118505bae}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!ComplexGMRES@{ComplexGMRES}}
+\index{ComplexGMRES@{ComplexGMRES}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{ComplexGMRES()}{ComplexGMRES()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1ComplexGMRES}{Complex\+G\+M\+R\+ES}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 875 of file complex\+\_\+smoother.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_ade91020000a1b6bf316ff9753ac6498b}\label{classoomph_1_1ComplexGMRES_ade91020000a1b6bf316ff9753ac6498b}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!````~ComplexGMRES@{$\sim$ComplexGMRES}}
+\index{````~ComplexGMRES@{$\sim$ComplexGMRES}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$ComplexGMRES()}{~ComplexGMRES()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1ComplexGMRES}{Complex\+G\+M\+R\+ES}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 883 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a834e97a93d141ece73e4f3aac2e8cd00}\label{classoomph_1_1ComplexGMRES_a834e97a93d141ece73e4f3aac2e8cd00}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!ComplexGMRES@{ComplexGMRES}}
+\index{ComplexGMRES@{ComplexGMRES}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{ComplexGMRES()}{ComplexGMRES()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1ComplexGMRES}{Complex\+G\+M\+R\+ES}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 890 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a8aa80ff477c4b131f8c1a4c74f872df1}\label{classoomph_1_1ComplexGMRES_a8aa80ff477c4b131f8c1a4c74f872df1}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!apply\_plane\_rotation@{apply\_plane\_rotation}}
+\index{apply\_plane\_rotation@{apply\_plane\_rotation}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_plane\_rotation()}{apply\_plane\_rotation()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::apply\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$ \&}]{dx,  }\item[{std\+::complex$<$ double $>$ \&}]{dy,  }\item[{std\+::complex$<$ double $>$ \&}]{cs,  }\item[{std\+::complex$<$ double $>$ \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function\+: Apply plane rotation. This is done using the update\+: 
+
+\[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. 
+
+Definition at line 1240 of file complex\+\_\+smoother.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a946b88bc1392180c56909b739bfa7b3c}\label{classoomph_1_1ComplexGMRES_a946b88bc1392180c56909b739bfa7b3c}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 1023 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrices\+\_\+storage\+\_\+pt, and oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted.
+
+
+
+Referenced by oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::disable\+\_\+resolve(), and oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::$\sim$\+Complex\+G\+M\+R\+E\+S().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a1c8ff4f7c1a14f195942ba3e33e73b49}\label{classoomph_1_1ComplexGMRES_a1c8ff4f7c1a14f195942ba3e33e73b49}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!complex\_smoother\_setup@{complex\_smoother\_setup}}
+\index{complex\_smoother\_setup@{complex\_smoother\_setup}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{complex\_smoother\_setup()}{complex\_smoother\_setup()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::complex\+\_\+smoother\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$}]{helmholtz\+\_\+matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Setup\+: Pass pointer to the matrix and store in cast form. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a7c46336fdc3b386b0bab6111a3c55d44}{oomph\+::\+Helmholtz\+Smoother}}.
+
+
+
+Definition at line 948 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrices\+\_\+storage\+\_\+pt, oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted, and oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a874520bc44cd8127497d972373938df9}\label{classoomph_1_1ComplexGMRES_a874520bc44cd8127497d972373938df9}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!complex\_smoother\_solve@{complex\_smoother\_solve}}
+\index{complex\_smoother\_solve@{complex\_smoother\_solve}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{complex\_smoother\_solve()}{complex\_smoother\_solve()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::complex\+\_\+smoother\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The smoother\+\_\+solve function performs fixed number of iterations on the system A$\ast$result=rhs. The number of (smoothing) iterations is the same as the max. number of iterations in the underlying \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a8ec748270df3e1199f19ef267d5b8e85}{oomph\+::\+Helmholtz\+Smoother}}.
+
+
+
+Definition at line 1010 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+solve\+\_\+helper(), and oomph\+::\+Helmholtz\+Smoother\+::\+Use\+\_\+as\+\_\+smoother.
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a848721022a08fde4b2182a143f287ded}\label{classoomph_1_1ComplexGMRES_a848721022a08fde4b2182a143f287ded}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!complex\_solve\_helper@{complex\_solve\_helper}}
+\index{complex\_solve\_helper@{complex\_solve\_helper}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{complex\_solve\_helper()}{complex\_solve\_helper()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::complex\+\_\+solve\+\_\+helper (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+This is where the actual work is done. 
+
+
+
+Definition at line 1275 of file complex\+\_\+smoother.\+h.
+
+
+
+References i, oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise(), oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Max\+\_\+iter, oomph\+::oomph\+\_\+info, s, and oomph\+::\+Timing\+Helpers\+::timer().
+
+
+
+Referenced by oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a07db774f0aca4e71579c7c071e25a451}\label{classoomph_1_1ComplexGMRES_a07db774f0aca4e71579c7c071e25a451}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!disable\_resolve@{disable\_resolve}}
+\index{disable\_resolve@{disable\_resolve}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_resolve()}{disable\_resolve()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload disable resolve so that it cleans up memory too. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 902 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a07183636586d7d30fcde380ef88e5fe6}\label{classoomph_1_1ComplexGMRES_a07183636586d7d30fcde380ef88e5fe6}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!generate\_plane\_rotation@{generate\_plane\_rotation}}
+\index{generate\_plane\_rotation@{generate\_plane\_rotation}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{generate\_plane\_rotation()}{generate\_plane\_rotation()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::generate\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$ \&}]{dx,  }\item[{std\+::complex$<$ double $>$ \&}]{dy,  }\item[{std\+::complex$<$ double $>$ \&}]{cs,  }\item[{std\+::complex$<$ double $>$ \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function\+: Generate a plane rotation. This is done by finding the value of $ \cos(\theta) $ (i.\+e. cs) and the value of $ \sin(\theta) $ (i.\+e. sn) such that\+: 
+
+\[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \cr -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \] where $ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} $. The values of a and b are given by\+: The values of dx and dy are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+193. We also check to see that sn is always a real (nonnegative) number. See pp.\+193-\/194 for an explanation. 
+
+Definition at line 1148 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Iterative\+Linear\+Solver\+::tolerance().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a10760c61c62771773e2adc57055717aa}\label{classoomph_1_1ComplexGMRES_a10760c61c62771773e2adc57055717aa}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46}{oomph\+::\+Iterative\+Linear\+Solver}}.
+
+
+
+Definition at line 941 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::\+Iterations.
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a1b42167d4635b2ca294ed7aa843e9de5}\label{classoomph_1_1ComplexGMRES_a1b42167d4635b2ca294ed7aa843e9de5}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 896 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a9dd1695e8d907d57151df79a6e3e3968}\label{classoomph_1_1ComplexGMRES_a9dd1695e8d907d57151df79a6e3e3968}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 933 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Linear\+Solver\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a76987ec784cd80e6605c63ef8d0ec6b7}\label{classoomph_1_1ComplexGMRES_a76987ec784cd80e6605c63ef8d0ec6b7}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 914 of file complex\+\_\+smoother.\+h.
+
+
+
+References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a0c6df8b6c50a0ccd344a62654b1411d0}\label{classoomph_1_1ComplexGMRES_a0c6df8b6c50a0ccd344a62654b1411d0}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!update@{update}}
+\index{update@{update}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ $>$ \&}]{hessenberg,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to update the result vector. 
+
+
+
+Definition at line 1053 of file complex\+\_\+smoother.\+h.
+
+
+
+References i, and s.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a208aaa9528d6b08afa5324f77ac70581}\label{classoomph_1_1ComplexGMRES_a208aaa9528d6b08afa5324f77ac70581}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!Iterations@{Iterations}}
+\index{Iterations@{Iterations}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::Iterations\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Definition at line 1256 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::iterations().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_adfd862b611a335b5d6872a9eb37aa193}\label{classoomph_1_1ComplexGMRES_adfd862b611a335b5d6872a9eb37aa193}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!Matrices\_storage\_pt@{Matrices\_storage\_pt}}
+\index{Matrices\_storage\_pt@{Matrices\_storage\_pt}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrices\_storage\_pt}{Matrices\_storage\_pt}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::Matrices\+\_\+storage\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the real and imaginary part of the system matrix. 
+
+
+
+Definition at line 1259 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+setup().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_aa38fa18230fc30f271d59481ccee3b55}\label{classoomph_1_1ComplexGMRES_aa38fa18230fc30f271d59481ccee3b55}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}}
+\index{Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_can\_be\_deleted}{Matrix\_can\_be\_deleted}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+can\+\_\+be\+\_\+deleted\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate if the real and imaginary system matrices can be deleted. 
+
+
+
+Definition at line 1267 of file complex\+\_\+smoother.\+h.
+
+
+
+Referenced by oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+setup().
+
+\mbox{\Hypertarget{classoomph_1_1ComplexGMRES_a2694315efaf2aa353ad4d67f316b1597}\label{classoomph_1_1ComplexGMRES_a2694315efaf2aa353ad4d67f316b1597}} 
+\index{oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}!Resolving@{Resolving}}
+\index{Resolving@{Resolving}!oomph::ComplexGMRES$<$ MATRIX $>$@{oomph::ComplexGMRES$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Resolving}{Resolving}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+G\+M\+R\+ES}}$<$ M\+A\+T\+R\+IX $>$\+::Resolving\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setup of matrix and preconditioner. 
+
+
+
+Definition at line 1263 of file complex\+\_\+smoother.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{complex__smoother_8h}{complex\+\_\+smoother.\+h}}\end{DoxyCompactItemize}

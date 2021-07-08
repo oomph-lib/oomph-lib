@@ -1,0 +1,66 @@
+\hypertarget{old__for__doc_8cc}{}\doxysection{old\+\_\+for\+\_\+doc.\+cc File Reference}
+\label{old__for__doc_8cc}\index{old\_for\_doc.cc@{old\_for\_doc.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\+Source\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em Namespace for const source term in Poisson equation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceConstSourceForPoisson_a40ef79083874b58ed42b4df2ca0f4c10}{Const\+Source\+For\+Poisson\+::get\+\_\+source}} (const Vector$<$ double $>$ \&x, double \&source)
+\begin{DoxyCompactList}\small\item\em Const source function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{old__for__doc_8cc_abb923e967929c29b3a4fa1693604952a}{demo\+\_\+fish\+\_\+poisson}} (const string \&directory\+\_\+name)
+\item 
+{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{old__for__doc_8cc_a28565f965d7ffb7f92f3773a6333023b}{demo\+\_\+elastic\+\_\+fish\+\_\+poisson}} (const string \&directory\+\_\+name)
+\item 
+int \mbox{\hyperlink{old__for__doc_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{old__for__doc_8cc_a28565f965d7ffb7f92f3773a6333023b}\label{old__for__doc_8cc_a28565f965d7ffb7f92f3773a6333023b}} 
+\index{old\_for\_doc.cc@{old\_for\_doc.cc}!demo\_elastic\_fish\_poisson@{demo\_elastic\_fish\_poisson}}
+\index{demo\_elastic\_fish\_poisson@{demo\_elastic\_fish\_poisson}!old\_for\_doc.cc@{old\_for\_doc.cc}}
+\doxysubsubsection{\texorpdfstring{demo\_elastic\_fish\_poisson()}{demo\_elastic\_fish\_poisson()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void demo\+\_\+elastic\+\_\+fish\+\_\+poisson (\begin{DoxyParamCaption}\item[{const string \&}]{directory\+\_\+name }\end{DoxyParamCaption})}
+
+Demonstrate how to solve coupled \char`\"{}elastic\char`\"{} 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. 
+
+Definition at line 446 of file old\+\_\+for\+\_\+doc.\+cc.
+
+
+
+References Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fish\+\_\+mesh\+\_\+pt(), and Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::load().
+
+\mbox{\Hypertarget{old__for__doc_8cc_abb923e967929c29b3a4fa1693604952a}\label{old__for__doc_8cc_abb923e967929c29b3a4fa1693604952a}} 
+\index{old\_for\_doc.cc@{old\_for\_doc.cc}!demo\_fish\_poisson@{demo\_fish\_poisson}}
+\index{demo\_fish\_poisson@{demo\_fish\_poisson}!old\_for\_doc.cc@{old\_for\_doc.cc}}
+\doxysubsubsection{\texorpdfstring{demo\_fish\_poisson()}{demo\_fish\_poisson()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void demo\+\_\+fish\+\_\+poisson (\begin{DoxyParamCaption}\item[{const string \&}]{directory\+\_\+name }\end{DoxyParamCaption})}
+
+Demonstrate how to solve 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. 
+
+Definition at line 383 of file old\+\_\+for\+\_\+doc.\+cc.
+
+
+
+References Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+info(), Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fish\+\_\+mesh\+\_\+pt(), and Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+c().
+
+\mbox{\Hypertarget{old__for__doc_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{old__for__doc_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{old\_for\_doc.cc@{old\_for\_doc.cc}!main@{main}}
+\index{main@{main}!old\_for\_doc.cc@{old\_for\_doc.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Driver for \char`\"{}elastic\char`\"{} fish poisson solver with adaptation. If there are any command line arguments, we regard this as a validation run and reduce the targets for the mesh adaptation. 
+
+Definition at line 485 of file old\+\_\+for\+\_\+doc.\+cc.
+

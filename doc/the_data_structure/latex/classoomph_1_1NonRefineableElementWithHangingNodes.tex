@@ -1,0 +1,131 @@
+\hypertarget{classoomph_1_1NonRefineableElementWithHangingNodes}{}\doxysection{oomph\+::Non\+Refineable\+Element\+With\+Hanging\+Nodes Class Reference}
+\label{classoomph_1_1NonRefineableElementWithHangingNodes}\index{oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}}
+
+
+{\ttfamily \#include $<$refineable\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Non\+Refineable\+Element\+With\+Hanging\+Nodes\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.298874cm]{classoomph_1_1NonRefineableElementWithHangingNodes}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_aeac85433ef824ba827bb25bbece5dd2d}{build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&new\+\_\+node\+\_\+pt, bool \&was\+\_\+already\+\_\+built, std\+::ofstream \&new\+\_\+nodes\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Broken build function -- shouldn\textquotesingle{}t really be needed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_a0e25496a8ffacdef5fb93a934874b7ef}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+\begin{DoxyCompactList}\small\item\em Broken function -- this shouldn\textquotesingle{}t really be needed. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_a864c5d93b38c49401561db85bb545e27}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+\begin{DoxyCompactList}\small\item\em Broken function -- this shouldn\textquotesingle{}t really be needed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_a68766070804623a8575bc4be86325fa3}{check\+\_\+integrity}} (double \&max\+\_\+error)
+\begin{DoxyCompactList}\small\item\em Broken function -- this shouldn\textquotesingle{}t really be needed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes_a702ff8da8744c6fc139c25fa83f4605c}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Broken function -- this shouldn\textquotesingle{}t really be needed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A base class for elements that can have hanging nodes but are not refineable as such. This class is usually used as a base class for Face\+Elements that are attached to refineable bulk elements (and stripped out before adapting the bulk mesh, so they don\textquotesingle{}t participate in the refimenent process itself). We therefore simply break the pure virtual functions that don\textquotesingle{}t make any sense for such elements 
+
+Definition at line 690 of file refineable\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1NonRefineableElementWithHangingNodes_aeac85433ef824ba827bb25bbece5dd2d}\label{classoomph_1_1NonRefineableElementWithHangingNodes_aeac85433ef824ba827bb25bbece5dd2d}} 
+\index{oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}!build@{build}}
+\index{build@{build}!oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt,  }\item[{bool \&}]{was\+\_\+already\+\_\+built,  }\item[{std\+::ofstream \&}]{new\+\_\+nodes\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken build function -- shouldn\textquotesingle{}t really be needed. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a1e24734937a96abfb4ae35a2ccb647f4}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 697 of file refineable\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NonRefineableElementWithHangingNodes_a68766070804623a8575bc4be86325fa3}\label{classoomph_1_1NonRefineableElementWithHangingNodes_a68766070804623a8575bc4be86325fa3}} 
+\index{oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}!check\_integrity@{check\_integrity}}
+\index{check\_integrity@{check\_integrity}!oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}}
+\doxysubsubsection{\texorpdfstring{check\_integrity()}{check\_integrity()}}
+{\footnotesize\ttfamily void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::check\+\_\+integrity (\begin{DoxyParamCaption}\item[{double \&}]{max\+\_\+error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken function -- this shouldn\textquotesingle{}t really be needed. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ae665f2d2eb0b6410ddcb101caa80922a}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 739 of file refineable\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NonRefineableElementWithHangingNodes_a864c5d93b38c49401561db85bb545e27}\label{classoomph_1_1NonRefineableElementWithHangingNodes_a864c5d93b38c49401561db85bb545e27}} 
+\index{oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}!get\_interpolated\_values@{get\_interpolated\_values}}
+\index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}}
+\doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken function -- this shouldn\textquotesingle{}t really be needed. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2829ce01d45bfc}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 724 of file refineable\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NonRefineableElementWithHangingNodes_a0e25496a8ffacdef5fb93a934874b7ef}\label{classoomph_1_1NonRefineableElementWithHangingNodes_a0e25496a8ffacdef5fb93a934874b7ef}} 
+\index{oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}!get\_interpolated\_values@{get\_interpolated\_values}}
+\index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}}
+\doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken function -- this shouldn\textquotesingle{}t really be needed. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f92880668a2373326d8306365c43}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 711 of file refineable\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NonRefineableElementWithHangingNodes_a702ff8da8744c6fc139c25fa83f4605c}\label{classoomph_1_1NonRefineableElementWithHangingNodes_a702ff8da8744c6fc139c25fa83f4605c}} 
+\index{oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}!rebuild\_from\_sons@{rebuild\_from\_sons}}
+\index{rebuild\_from\_sons@{rebuild\_from\_sons}!oomph::NonRefineableElementWithHangingNodes@{oomph::NonRefineableElementWithHangingNodes}}
+\doxysubsubsection{\texorpdfstring{rebuild\_from\_sons()}{rebuild\_from\_sons()}}
+{\footnotesize\ttfamily void oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes\+::rebuild\+\_\+from\+\_\+sons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken function -- this shouldn\textquotesingle{}t really be needed. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b78279d17158215fa}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 751 of file refineable\+\_\+elements.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__elements_8h}{refineable\+\_\+elements.\+h}}\end{DoxyCompactItemize}

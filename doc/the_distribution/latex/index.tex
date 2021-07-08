@@ -1,0 +1,675 @@
+
+
+See the \href{../../change_log/html/index.html}{\texttt{ change log page}} for an overview of the changes made since the previous release.\hypertarget{index_instructions}{}\doxysection{The download/install process, step by step}\label{index_instructions}
+
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{index_download}{Get the distribution}}
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{index_tar_file}{Option 1\+: Get a tar file}}
+\item \mbox{\hyperlink{index_subversion}{Option 2\+: Get the distribution from the subversion repository}}
+\end{DoxyEnumerate}
+\item \mbox{\hyperlink{index_install}{Install the distribution}}
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{index_manual_install}{Manual installation}}
+\item \mbox{\hyperlink{index_standard_install}{Option 1\+: Standard installation}}
+\item \mbox{\hyperlink{index_custom_install}{Configuration options}}
+\end{DoxyEnumerate}
+\item \mbox{\hyperlink{index_nav}{Finding your way through the distribution}}
+\item \mbox{\hyperlink{index_external}{External (third-\/party) libraries}}
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{index_external_src}{External (third-\/party) libraries that are distributed with oomph-\/lib}}
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{index_blas}{Specifying an existing, local copy of the blas library}}
+\item \mbox{\hyperlink{index_lapack}{Specifying an existing, local copy of the lapack library}}
+\end{DoxyEnumerate}
+\item \mbox{\hyperlink{index_external_dist_cgal_etc}{External (third-\/party) libraries whose tar files are distributed with oomph-\/lib}}
+\item \mbox{\hyperlink{index_external_dist}{External (third-\/party) libraries that are not distributed with oomph-\/lib}}
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{index_hypre}{Hypre}}
+\item \mbox{\hyperlink{index_trilinos}{Trilinos}}
+\item \mbox{\hyperlink{index_mumps}{M\+U\+M\+PS and Sca\+L\+A\+P\+A\+CK}}
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}
+\item \mbox{\hyperlink{index_own}{How to write your own code and link it against oomph-\/lib\textquotesingle{}s library/libraries}}
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{index_have_auto_tools}{Writing/linking your own driver codes under autotools control}}
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{index_add_driver}{Adding your own driver codes}}
+\item \mbox{\hyperlink{index_add_src}{Adding new libraries and linking against them from driver codes}}
+\end{DoxyEnumerate}
+\item \mbox{\hyperlink{index_dont_have_auto_tools}{Writing/linking user code without autotools}}
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_download}{}\doxysection{Get the distribution}\label{index_download}
+\hypertarget{index_tar_file}{}\doxysubsection{Option 1\+: Get a tar file}\label{index_tar_file}
+You can download a tar file of the latest distribution from the \href{../../download/html/index.html}{\texttt{ oomph-\/lib download page}}.
+
+Once you have downloaded the tar file unpack it\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{tar xvfz oomph-\/lib-\/*.tar.gz}
+\end{DoxyCode}
+
+
+The entire distribution will now be contained in the sub-\/directory {\ttfamily oomph-\/lib-\/$\ast$} where the \char`\"{}$\ast$\char`\"{} indicates the version/revision number (the same as in the tar file).\hypertarget{index_subversion}{}\doxysubsection{Option 2\+: Get the distribution from the subversion repository}\label{index_subversion}
+You can also get hold of the library from our \href{http://www.subversion.tigris.org}{\texttt{ subversion}}-\/based repository. The procedure for checking out from the repository is explained in \href{../../subversion/html/index.html}{\texttt{ another tutorial.}} When checking out from the repository, you can specify where the distribution is placed. By default subversion will place it into a directory called {\ttfamily trunk}.
+
+\DoxyHorRuler{0}
+\hypertarget{index_install}{}\doxysection{Install the distribution}\label{index_install}
+\hypertarget{index_standard_install}{}\doxysubsection{Option 1\+: Standard installation}\label{index_standard_install}
+Change into the {\ttfamily oomph-\/lib} directory and run the {\ttfamily autogen.\+sh} build script\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd oomph-\/lib-\/*}
+\DoxyCodeLine{./autogen.sh}
+\end{DoxyCode}
+
+
+This build script will ask a few questions, e.\+g. to verify that the default build directory ({\ttfamily build }, relative to the oomph-\/lib home directory) is appropriate before starting the build.
+
+By default, {\ttfamily autogen}.{\ttfamily sh} will build the library and the demo codes with certain default settings (using the gcc compilers with full optimisation, no debugging, no P\+A\+R\+A\+N\+O\+IA, and fully installed header files rather than symbolic links). These are appropriate if you wish to install the library once-\/and-\/for-\/all and do not anticipate any changes to their sources. The section \mbox{\hyperlink{index_custom_install}{Configuration options}} provides more details on the various options). {\ttfamily autogen.\+sh} will display the configure options and ask for confirmation that they are appropriate. If you are unsure if they are, simply hit return -- the default will be fine.
+
+The following flags for {\ttfamily autogen.\+sh} may be of interest\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily -\/-\/jobs=n}\+: Run the build process using {\ttfamily n} cores. This can greatly speed up build times and is strongly recommended if you have a multicore machine.
+\item {\ttfamily -\/-\/rebuild}\+: Rebuild the configuration files from scratch. This is useful if you believe you may have somehow broken the build process, but should not be necessary normally.
+\end{DoxyItemize}
+
+Under the hood {\ttfamily autogen.\+sh} simply collects settings in a question and answer manner then calls a non-\/interactive script {\ttfamily non\+\_\+interactive\+\_\+autogen.\+sh} (yes, really!) with the appropriate flags. If you prefer you can simply call {\ttfamily non\+\_\+interactive\+\_\+autogen.\+sh} directly.
+
+The self-\/tests can be initiated outside of {\ttfamily autogen.\+sh} using {\ttfamily make check -\/k} (to run on a single core) or {\ttfamily ./bin/parallel\+\_\+self\+\_\+test.py} (to run on all available cores). These commands will compile and run all the demo codes and verify their output. This is an optional step and can be very time consuming, especially if run on a small number of cores.\hypertarget{index_manual_install}{}\doxysubsection{Manual installation}\label{index_manual_install}
+If you\textquotesingle{}re an experienced linux/unix user, you may prefer to control the build/install process manually, using the standard {\ttfamily configure}; {\ttfamily make}; {\ttfamily make} {\ttfamily install}; {\ttfamily make} {\ttfamily check}; sequence. Note that this will {\itshape only} work when building the tar file version (i.\+e. not the version from svn which still requires the configure script to be generated). In this case, the library will be compiled with G\+NU\textquotesingle{}s default compiler options (\char`\"{}-\/\+O3 -\/g\char`\"{}) and the libraries and include files will be installed in {\ttfamily /usr/local/} unless you specify a different directory with the {\ttfamily --prefix} argument to the {\ttfamily configure} command. Here\textquotesingle{}s an example of a manual installation
+
+
+\begin{DoxyItemize}
+\item Unpack the distribution (you may have to replace the \char`\"{}$\ast$\char`\"{} with the actual revision number) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{tar xvfz oomph-\/lib-\/*.tar.gz}
+\end{DoxyCode}
+
+\item Change into the oomph-\/lib home directory (again, you may have to replace the \char`\"{}$\ast$\char`\"{} with the actual revision information) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd oomph-\/lib-\/*}
+\end{DoxyCode}
+
+\item Store the oomph-\/lib home directory in shell variable -- in a bash shell this is done like this\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{OOMPH\_HOME=`pwd`}
+\end{DoxyCode}
+
+\item Create the build directory -- specify your own here! 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir \$OOMPH\_HOME/build}
+\end{DoxyCode}
+
+\item Configure the distribution -- prefix specifies the build directory 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./configure -\/-\/prefix \$OOMPH\_HOME/build}
+\end{DoxyCode}
+
+\item Make and install the library 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}}; \mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}} \mbox{\hyperlink{the__distribution_8txt_a450df5a275b46b68f1cc00515f04aefa}{install}}}
+\end{DoxyCode}
+
+\item Done! Check if we can make and run the user codes 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd \$OOMPH\_HOME/user\_drivers/joe\_cool}
+\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}}}
+\DoxyCodeLine{./joes\_poisson\_code}
+\end{DoxyCode}
+
+\item Run the self-\/tests 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd \$OOMPH\_HOME}
+\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}} \mbox{\hyperlink{the__distribution_8txt_ae663bd6cf76ba6ed02e28b120477cf7c}{check}} -\/k}
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_custom_install}{}\doxysubsection{Configuration options}\label{index_custom_install}
+The build scripts allow you to specify a file of configure options. For instance, you may wish to specify another compiler, change the optimisation level, allow for debugging or range checking, etc. Previously used sets of options are stored in various files in the sub-\/directory {\ttfamily config/configure\+\_\+options/}. The default settings are in {\ttfamily default}; the currently used ones are in {\ttfamily current}.
+
+What options are there? You can get a complete list by typing \begin{DoxyVerb}./configure --help
+\end{DoxyVerb}
+
+
+in {\ttfamily oomph-\/lib}\textquotesingle{}s top level directory. Here are some options that we use frequently\+:\hypertarget{index_no_doc}{}\doxysubsubsection{Suppressing the build of the documentation\+:}\label{index_no_doc}
+Building the online documentation locally is time consuming and requires a significant amount of disk space. Since the documentation is also available from the \href{http://www.oomph-lib.org}{\texttt{ oomph-\/lib homepage}} you may wish to suppress this step. To achieve this, specify the configure option \begin{DoxyVerb}--enable-suppress-doc
+\end{DoxyVerb}
+\hypertarget{index_no_doc}{}\doxysubsubsection{Suppressing the build of the documentation\+:}\label{index_no_doc}
+By default the tutorials are built as html files (which are best accessed by starting from the local copy of the {\ttfamily oomph-\/lib} homepage, which is in {\ttfamily doc/html/index.\+html}) and as pdf files (which are accessible via a link at the bottom of the relevant html-\/based tutorial). In the past we have sometimes had problems with {\ttfamily doxygen} (and hence the entire build process!) hanging while the pdf files are generated. To avoid this (by not even attempting to create the pdf files) specify the configure option \begin{DoxyVerb}--enable-suppress-pdf-doc
+\end{DoxyVerb}
+
+
+(or better\+: update to a more recent version of {\ttfamily doxygen} -- for instance version 1.\+8.\+6 works).\hypertarget{index_sym_links}{}\doxysubsubsection{Replace library headers by symbolic links to the sources}\label{index_sym_links}
+During the build process {\ttfamily oomph-\/lib\textquotesingle{}s} various libraries are installed in the subdirectory {\ttfamily build/lib} (or in whatever other directory you may have specified when asked to confirm their location) and the associated header files are copied to {\ttfamily build/include}. This is a sensible default for libraries that are only installed once and then never again tinkered with. Here the situation is slightly different\+: If you ever decide to add your own \char`\"{}user libraries\char`\"{} to {\ttfamily oomph-\/lib} (and you are encouraged to do so!), their header files will also be copied to {\ttfamily build/include}. If during code development, any of your header files contain syntax errors, the compiler will complain about the syntax errors in the copied file in {\ttfamily build/include} rather than the one in your source directory. This will encourage you to edit the copied file rather than the original -- clearly a recipe for disaster! To avoid it we provide the configure option \begin{DoxyVerb} --enable-symbolic-links-for-headers
+\end{DoxyVerb}
+
+
+In this mode, the copies of the header files in {\ttfamily build/include} are replaced by symbolic links to the actual sources in {\ttfamily src} or {\ttfamily user\+\_\+src}.\hypertarget{index_paranoia}{}\doxysubsubsection{P\+A\+R\+A\+N\+O\+IA}\label{index_paranoia}
+{\ttfamily oomph-\/lib} provides an extensive range of optional run-\/time self-\/tests. The self-\/tests issue diagnostic error messages if any inconsistencies are detected at run-\/time and then terminate the code execution (semi-\/)gracefully by throwing an exception which (if not caught) aborts. This allows backtracking of the call sequence in a debugger during code development. Obviously, the self-\/tests introduce a slight run-\/time overhead and are therefore only performed if the C++ code is compiled with a special compiler flag, {\ttfamily P\+A\+R\+A\+N\+O\+ID}. For gcc (and most other compilers we know) this is done by passing the flag {\ttfamily -\/D\+P\+A\+R\+A\+N\+O\+ID} to the C++ compiler. This is achieved by adding 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{CXXFLAGS=\textcolor{stringliteral}{"-\/DPARANOID"}}
+\end{DoxyCode}
+ to the configure options. As discussed, during code development, this is most useful if debugging is also enabled, so the combination 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{CXXFLAGS=\textcolor{stringliteral}{"-\/g -\/DPARANOID"}}
+\end{DoxyCode}
+ is common.\hypertarget{index_bounds}{}\doxysubsubsection{Range checking}\label{index_bounds}
+Most of the containers used in {\ttfamily oomph-\/lib} allow for optional (and very costly!) range checking which is enabled by specifying the C++ compiler flag {\ttfamily R\+A\+N\+G\+E\+\_\+\+C\+H\+E\+C\+K\+I\+NG}. You are advised to recompile the code (yes, all of it!) if (and only if) you encounter some mysterious segmentation fault. Again, this is most useful if used together with debugging, 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{CXXFLAGS=\textcolor{stringliteral}{"-\/g -\/DRANGE\_CHECKING"}}
+\end{DoxyCode}
+ (Without the {\ttfamily -\/g} flag you will only find out that an illegal index has been specified, not where this happened...)
+
+\DoxyHorRuler{0}
+\hypertarget{index_nav}{}\doxysection{Finding your way through the distribution}\label{index_nav}
+The {\ttfamily oomph-\/lib} distribution has several main sub-\/directories\+:\hypertarget{index_src}{}\doxysubsection{The src directory}\label{index_src}
+The {\ttfamily src} sub-\/directory contains the source code for the various sub-\/libraries that make up {\ttfamily oomph-\/lib}. The most important one is the {\ttfamily generic} library which is built from the sources in the sub-\/directory {\ttfamily src/generic}. This library defines the fundamental {\ttfamily oomph-\/lib} objects (nodes, elements, meshes, timesteppers, linear and nonlinear solvers, mesh-\/adaptation routines, etc.)
+
+The other libraries ({\ttfamily poisson}, {\ttfamily navier-\/stokes},...) define elements for the solution of specific systems of P\+D\+Es.
+
+Finally, the {\ttfamily src/meshes} subdirectory contains several fully functional {\ttfamily Meshes} (and, where appropriate, the associated {\ttfamily Domains}) that are used in the demo codes. All {\ttfamily Meshes} in this directory are templated by the type of element they contain. Since the element type can only be specified in the driver codes, the meshes cannot be compiled into libraries -- the sources are always included as header-\/like files. Our \href{../../example_code_list/html/index.html}{\texttt{ list of example codes}} contains an \href{../../poisson/two_d_poisson/html/index.html\#precompile_mesh}{\texttt{ example}} that explains this in more detail.\hypertarget{index_ext_src}{}\doxysubsection{The external\+\_\+src directory}\label{index_ext_src}
+The {\ttfamily external\+\_\+src} directory contains \char`\"{}frozen\char`\"{} versions of various external libraries (e.\+g. ~\newline
+ \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU}}). Inclusion of these libraries into the distribution facilitates the overall build process\+: You only have to download and install a single distribution. This is much easier than finding out (typically halfway through the install process), that library A depends on library B which invariably turns out to depend on library C, etc.) Often the sources in the {\ttfamily external\+\_\+src} subdirectories are sub-\/sets of the full libraries. For instance, we only include the double precision sources for \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU}} as neither the complex nor the single-\/precision versions are required within {\ttfamily oomph-\/lib}.\hypertarget{index_ext_dist}{}\doxysubsection{The external\+\_\+distributions directory}\label{index_ext_dist}
+{\ttfamily oomph-\/lib} provides interfaces to various third-\/party libraries which have their own build machinery. Some of these libraries are built by default in the course of the oomph-\/lib installation, using tar files that are distributed with {\ttfamily oomph-\/lib}; others will only be built if the user places the relevant tar files into the approproriate location within the {\ttfamily oomph-\/lib} directory structure.\hypertarget{index_cgal}{}\doxysubsubsection{External distributions that are built by default}\label{index_cgal}
+By default {\ttfamily oomph-\/lib} builds C\+G\+AL, the Computational Geometry Algorithms Library, \href{http://www.cgal.org}{\texttt{ http\+://www.\+cgal.\+org}}. This library requires three other libraries which we also install\+:
+\begin{DoxyItemize}
+\item The G\+NU Multiple Precision Arithmetic Library (G\+MP), \href{https://gmplib.org}{\texttt{ https\+://gmplib.\+org}}.
+\item The G\+NU M\+P\+FR Library \href{http://www.mpfr.org}{\texttt{ https\+://gmplib.\+org}}.
+\item The Boost library, \href{http://www.boost.org}{\texttt{ http\+://www.\+boost.\+org}}.
+\end{DoxyItemize}Note that the installation of these libraries is not quick. We therefore provide the option to (i) suppress their installation (in which case {\ttfamily oomph-\/lib} will employ a sub-\/optimal \char`\"{}locate\+\_\+zeta\char`\"{} algorithm in its multi-\/domain algorithms) or to (ii) link against already existing installations of the libraries; see \mbox{\hyperlink{index_external_dist_cgal_etc}{External (third-\/party) libraries whose tar files are distributed with oomph-\/lib}} for details.\hypertarget{index_trilinos_hypre_external}{}\doxysubsubsection{External distributions that are not built by default}\label{index_trilinos_hypre_external}
+{\ttfamily oomph-\/lib} provides interfaces to various optional third-\/party libraries whose sources we deemed to be too big to be included in the {\ttfamily oomph-\/lib} distribution. If you wish to use these we expect you to install them yourself. To facilitate this task, we provide the option to let the {\ttfamily oomph-\/lib} build machinery perform the installation for you. If you place a copy of the tar file into the appropriate sub-\/directory in {\ttfamily external\+\_\+distributions}, {\ttfamily oomph-\/lib} will build and install the library for you; see \mbox{\hyperlink{index_external_dist}{External (third-\/party) libraries that are not distributed with oomph-\/lib}} for details. (Note that {\ttfamily oomph-\/lib} is fully functional without these libraries -- if the libraries are not available the build process ignores any {\ttfamily oomph-\/lib} code that depends on them.)\hypertarget{index_demo_drivers}{}\doxysubsection{The demo\+\_\+drivers directory}\label{index_demo_drivers}
+The {\ttfamily demo\+\_\+drivers} directory contains a large number of demo codes. They are arranged in sub-\/directories, based on the type of the problem that is being solved. For instance, the {\ttfamily demo\+\_\+drivers/poisson} subdirectory contains a number of demo problems involving the Poisson equation.
+
+All sub-\/directories in {\ttfamily demo\+\_\+drivers} contain shell scripts that validate the output from the demo codes by comparing the computed results against the reference results stored in the {\ttfamily validata} sub-\/directories. The comparison is performed with the {\ttfamily python} script {\ttfamily bin/fpdiff}.{\ttfamily py} which tolerates slight differences due to the unavoidable variations in roundoff error on different platforms and/or at different optimisation levels. The validation scripts can either be executed individually in each sub-\/directory or for all sub-\/directories by issuing the command {\ttfamily make} {\ttfamily check}.
+
+If the self-\/test is run at the top-\/level, a summary of the self-\/tests is stored in {\ttfamily self\+\_\+test/analyse\+\_\+self\+\_\+tests/validation}.{\ttfamily log} \hypertarget{index_doc}{}\doxysubsection{The doc directory}\label{index_doc}
+The structure of the {\ttfamily doc} directory (approximately) mirrors that of {\ttfamily demo\+\_\+drivers} and contains the source code for the {\ttfamily doxygen} -\/ based detailed explanation of the demo codes. If {\ttfamily configure} locates a sufficiently up-\/to-\/date version of {\ttfamily doxygen} on your system, the entire {\ttfamily oomph-\/lib} documentation will be built locally and can be navigated from the homepage in {\ttfamily doc/html/index}.{\ttfamily html} -- a copy of the {\ttfamily oomph-\/lib} homepage.\hypertarget{index_user}{}\doxysubsection{The user\+\_\+src and user\+\_\+drivers directories}\label{index_user}
+The {\ttfamily configure} script and the associated {\ttfamily Makefiles} that build and install the {\ttfamily oomph-\/lib} libraries and demo codes are generated by \href{http://www.gnu.org/software/autoconf/}{\texttt{ autoconf}} and \href{http://www.gnu.org/software/automake/}{\texttt{ automake}}. If these powerful tools are installed on your machine, you can include your own libraries and driver codes into the fully-\/automated {\ttfamily oomph-\/lib} build process. Store your code in suitably named sub-\/directories in {\ttfamily user\+\_\+src} and {\ttfamily user\+\_\+drivers}. See \mbox{\hyperlink{index_own}{How to write your own code and link it against oomph-\/lib\textquotesingle{}s library/libraries}} for more details.
+
+\DoxyHorRuler{0}
+\hypertarget{index_external}{}\doxysection{External (third-\/party) libraries}\label{index_external}
+{\ttfamily oomph-\/lib} provides interfaces to a number of third-\/party libraries. Those libraries that are essential for {\ttfamily oomph-\/lib} are distributed with the library to ensure that the user does not have to install these separately. We also provide interfaces to a number of third-\/party libraries that are not distributed with {\ttfamily oomph-\/lib}, typically because they are too big and/or take (too?) long to build. {\ttfamily oomph-\/lib} will only build the interfaces to these libraries if they are available and their location is specified during the configuration stage (or if the appropriate tar file is dropped into the required directory in which case {\ttfamily oomph-\/lib\textquotesingle{}s} build process will build and install the library for you). In the latter case, the compiler flags used to build {\ttfamily oomph-\/lib} will be passed directly to the third-\/party libraries, so you may wish to compile the libraries separately if you wish to specify different compiler flags, e.\+g. no debugging information.\hypertarget{index_external_src}{}\doxysubsection{External (third-\/party) libraries that are distributed with oomph-\/lib}\label{index_external_src}
+{\ttfamily oomph-\/lib} provides local copies of the following third-\/party libraries\+:
+\begin{DoxyItemize}
+\item \href{http://netlib.org/blas}{\texttt{ B\+L\+AS}}
+\item \href{http://netlib.org/lapack}{\texttt{ L\+A\+P\+A\+CK}}
+\item \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU}}
+\item \href{http://www-users.cs.umn.edu/~karypis/metis/}{\texttt{ M\+E\+T\+IS}}
+\end{DoxyItemize}By default {\ttfamily oomph-\/lib} automatically builds and links against these.\hypertarget{index_blas}{}\doxysubsubsection{Specifying an existing, local copy of the blas library}\label{index_blas}
+If a local, possibly optimised version of the \href{http://netlib.org/blas}{\texttt{ blas library}} already exists on your machine you can force {\ttfamily oomph-\/lib} to link against it and avoid the compilation of {\ttfamily oomph-\/lib\textquotesingle{}s} own copy.
+
+If your local copy of the \href{http://netlib.org/blas}{\texttt{ blas library}} is located at 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/home/mheil/local/lib/blas/blas.a}
+\end{DoxyCode}
+ say, you can link against it by specifying the configure option 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/with-\/blas=/home/mheil/local/lib/blas/blas.a}
+\end{DoxyCode}
+\hypertarget{index_lapack}{}\doxysubsubsection{Specifying an existing, local copy of the lapack library}\label{index_lapack}
+If a local, possibly optimised version of the \href{http://netlib.org/lapack}{\texttt{ lapack library}} already exists on your machine you can force {\ttfamily oomph-\/lib} to link against it and avoid the compilation of {\ttfamily oomph-\/lib\textquotesingle{}s} own copy.
+
+For instance, if your local copy of the \href{http://netlib.org/lapack}{\texttt{ lapack library}} is located at 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/home/mheil/local/lib/lapack/lapack.a}
+\end{DoxyCode}
+ you can link against it by specifying the configure option 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/with-\/lapack=/home/mheil/local/lib/lapack/lapack.a}
+\end{DoxyCode}
+\hypertarget{index_external_dist_cgal_etc}{}\doxysubsection{External (third-\/party) libraries whose tar files are distributed with oomph-\/lib}\label{index_external_dist_cgal_etc}
+By default {\ttfamily oomph-\/lib} builds C\+G\+AL, the Computational Geometry Algorithms Library, \href{http://www.cgal.org}{\texttt{ http\+://www.\+cgal.\+org}}. This library requires three other libraries which we also install\+:
+\begin{DoxyItemize}
+\item The G\+NU Multiple Precision Arithmetic Library (G\+MP), \href{https://gmplib.org}{\texttt{ https\+://gmplib.\+org}}.
+\item The G\+NU M\+P\+FR Library \href{http://www.mpfr.org}{\texttt{ https\+://gmplib.\+org}}.
+\item The Boost library, \href{http://www.boost.org}{\texttt{ http\+://www.\+boost.\+org}}.
+\end{DoxyItemize}These four libraries are built from tar files that we downloaded from the relevant webpages and then included into the {\ttfamily oomph-\/lib} distribution. We adopted this procedure to ensure that the versions of the libraries are consistent with each other.\hypertarget{index_cgal_default_install}{}\doxysubsubsection{Default C\+G\+A\+L installation.}\label{index_cgal_default_install}
+By default the four libraries are installed within {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily external\+\_\+distributions} directory, and the paths to the relevant {\ttfamily lib} and {\ttfamily include} directories are propagated to {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Makefile} s. The installations are deleted by \char`\"{}make clean\char`\"{} or \char`\"{}make distclean\char`\"{}, i.\+e. they are treated like any other {\ttfamily oomph-\/lib} code.\hypertarget{index_cgal_permanent_install}{}\doxysubsubsection{Installing C\+G\+A\+L in a permanent location}\label{index_cgal_permanent_install}
+Given that the installation of the libraries takes a fair amount of time, we also provide the option to install them in a permanent location outside the {\ttfamily oomph-\/lib} directory structure. This is done by specifying the configure flag\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/with-\/cgal-\/permanent-\/installation-\/dir=ABSOLUTE\_PATH\_TO\_PERMAMENT\_INSTALL\_DIRECTORY}
+\end{DoxyCode}
+ where {\ttfamily A\+B\+S\+O\+L\+U\+T\+E\+\_\+\+P\+A\+T\+H\+\_\+\+T\+O\+\_\+\+P\+E\+R\+M\+A\+M\+E\+N\+T\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY} specifies what it says. So, for instance, specifying 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/with-\/cgal-\/permanent-\/installation-\/dir=/home/mheil/junk\_default\_installation}
+\end{DoxyCode}
+ installs the libraries in {\ttfamily /home/mheil/junk\+\_\+default\+\_\+installation}. In subsequent rebuilds of {\ttfamily oomph-\/lib} it is then possible to specify the location of these libraries using configure options. Following an {\ttfamily oomph-\/lib} installation with {\ttfamily --with-\/cgal-\/permanent-\/installation-\/dir} these configure options are displayed at the end of the {\ttfamily oomph-\/lib} build procedure. (They are also contained in the file ~\newline
+ {\ttfamily external\+\_\+distributions/cgal\+\_\+configure\+\_\+flags.\+txt}.) For instance, if the libraries have been installed in {\ttfamily /home/mheil/junk\+\_\+default\+\_\+installation} the relevant, the configure options are\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/with-\/boost=/home/mheil/junk\_default\_installation/boost\_default\_installation}
+\DoxyCodeLine{-\/-\/with-\/gmp=/home/mheil/junk\_default\_installation/gmp\_default\_installation}
+\DoxyCodeLine{-\/-\/with-\/mpfr=/home/mheil/junk\_default\_installation/mpfr\_default\_installation}
+\DoxyCodeLine{-\/-\/with-\/cgal=/home/mheil/junk\_default\_installation/cgal\_default\_installation}
+\end{DoxyCode}
+
+
+hierher auto?\hypertarget{index_cgal_no_install}{}\doxysubsubsection{Suppressing the C\+G\+A\+L installation}\label{index_cgal_no_install}
+Finally, it is possible to suppress the installation of C\+G\+AL (and the related libraries) using the configure option 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/enable-\/suppress-\/cgal-\/build}
+\end{DoxyCode}
+ In this case {\ttfamily oomph-\/lib} will employ a sub-\/optimal \char`\"{}locate\+\_\+zeta\char`\"{} algorithm in its multi-\/domain algorithms.\hypertarget{index_external_dist}{}\doxysubsection{External (third-\/party) libraries that are not distributed with oomph-\/lib}\label{index_external_dist}
+\hypertarget{index_hypre}{}\doxysubsubsection{Hypre}\label{index_hypre}
+{\ttfamily oomph-\/lib} provides wrappers to the powerful solvers and preconditioners from the \href{https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html}{\texttt{ Scalable Linear Solvers Project}}. The wrappers are only built if {\ttfamily Hypre} is available on your machine. If your local ~\newline
+ copy of the {\ttfamily Hypre} library installed in 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/home/mheil/local/hypre}
+\end{DoxyCode}
+ i.\+e. if this directory contains {\ttfamily Hypre\textquotesingle{}s} lib and include directories\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{biowulf:\string~ 10:44:22\$ ll /home/mheil/local/hypre}
+\DoxyCodeLine{total 8}
+\DoxyCodeLine{drwxr-\/xr-\/x    2 mheil    users        4096 Nov  3  2007 include}
+\DoxyCodeLine{drwxr-\/xr-\/x    2 mheil    users        4096 Nov  3  2007 lib}
+\end{DoxyCode}
+ you can get {\ttfamily oomph-\/lib} to link against it (and to compile {\ttfamily oomph-\/lib\textquotesingle{}s} wrappers to {\ttfamily Hypre\textquotesingle{}s} solvers and preconditioners) by specifying the configure option 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/with-\/hypre=/home/mheil/local/hypre}
+\end{DoxyCode}
+
+
+{\bfseries{Note\+:}} {\ttfamily oomph-\/lib} works with version 2.\+0.\+0 of the library. If this version of {\ttfamily Hypre} is not available on your machine download the tar file from the our own website\+:
+
+\begin{center} \href{../../../../oomph-lib_external_distfiles/hypre-2.0.0.tar.gz}{\texttt{ hypre-\/2.\+0.\+0.\+tar.\+gz}} \end{center} 
+
+You can either build the library yourself or get {\ttfamily oomph-\/lib} to build it for you. To do this simply place a copy of the tar file into the directory 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{external\_distributions/hypre}
+\end{DoxyCode}
+ and (re-\/)run {\ttfamily autogen.\+sh}. The installation procedure will detect the tar file, unpack it, and install the library in 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{external\_distributions/hypre/hypre\_default\_installation}
+\end{DoxyCode}
+ Unless you explicitly specified a library location using the {\ttfamily --with-\/hypre} flag, {\ttfamily oomph-\/lib} will then link against this newly created version of the library. However, we strongly recommend moving the newly created library to another place (outside the {\ttfamily oomph-\/lib} distribution) to preserve it for future use. Once this is done you simply specify the (new) location of the library with the {\ttfamily --with-\/hypre} flag, as discussed above. (Also make sure to delete the tar file from {\ttfamily external\+\_\+distributions/hypre}, otherwise the library will be re-\/built.) Note that {\ttfamily make} {\ttfamily clean} will delete the unpacked {\ttfamily Hypre} sources but not the tar file and the library itself.\hypertarget{index_trilinos}{}\doxysubsubsection{Trilinos}\label{index_trilinos}
+{\ttfamily oomph-\/lib} provides wrappers to the powerful solvers and preconditioners from the \href{http://trilinos.sandia.gov/}{\texttt{ Trilinos Project}}. The wrappers are only built if {\ttfamily Trilinos} is available on your machine. If your local ~\newline
+ copy of the {\ttfamily Trilinos} library installed in 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/home/mheil/local/trilinos}
+\end{DoxyCode}
+ i.\+e. if this directory contains {\ttfamily Trilinos\textquotesingle{}s} lib and include directories\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{biowulf:\string~ 10:44:31\$ ll /home/mheil/local/trilinos}
+\DoxyCodeLine{total 24}
+\DoxyCodeLine{drwxr-\/xr-\/x    2 mheil    users        4096 Dec 20 15:34 bin}
+\DoxyCodeLine{drwxr-\/xr-\/x    2 mheil    users       16384 Dec 20 15:35 include}
+\DoxyCodeLine{drwxr-\/xr-\/x    2 mheil    users        4096 Dec 20 15:35 lib}
+\end{DoxyCode}
+ you can get {\ttfamily oomph-\/lib} to link against it (and to compile {\ttfamily oomph-\/lib\textquotesingle{}s} wrappers to {\ttfamily Trilinos\textquotesingle{}s} solvers and preconditioners) by specifying the configure option 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/with-\/trilinos=/home/mheil/local/trilinos}
+\end{DoxyCode}
+
+
+{\bfseries{Note\+:}} {\ttfamily oomph-\/lib} should work with major version numbers 9, 10 and 11 of the Trilinos library, and for revision numbers from 11 onwards you will need to have {\ttfamily cmake} installed on your machine. If these versions of {\ttfamily Trilinos} are not available on your machine you can get the latest version from the \href{http://trilinos.sandia.gov/}{\texttt{ Trilinos web site }} or download a copy of the relevant tar file from our own website\+:
+
+\begin{center} \href{../../../../oomph-lib_external_distfiles/trilinos-11.8.1-Source.tar.gz}{\texttt{ trilinos-\/11.\+8.\+1-\/\+Source.\+tar.\+gz}} \end{center} 
+
+You can either build the library yourself or get {\ttfamily oomph-\/lib} to build it for you. To do this simply place a copy of the tar file into the directory 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{external\_distributions/trilinos}
+\end{DoxyCode}
+ and (re-\/)run {\ttfamily autogen.\+sh}. The build process is somewhat different for major version numbers 9 and 10, but oomph-\/lib will detect this automatically, provided that the source file is called trilinos-\/N.$\ast$.tar.\+gz, where N is the major version number. The installation procedure will then detect the tar file, unpack it, and install the library in 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{external\_distributions/trilinos/trilinos\_default\_installation}
+\end{DoxyCode}
+ Unless you explicitly specified a library location using the {\ttfamily --with-\/trilinos} flag, {\ttfamily oomph-\/lib} will then link against this newly created version of the library. However, we strongly recommend moving the newly created library to another place (outside the {\ttfamily oomph-\/lib} distribution) to preserve it for future use. Once this is done you simply specify the (new) location of the library with the {\ttfamily --with-\/trilinos} flag, as discussed above. (Also make sure to delete the tar file from {\ttfamily external\+\_\+distributions/trilinos}, otherwise the library will be re-\/built.) Note that {\ttfamily make} {\ttfamily clean} will delete the unpacked {\ttfamily Trilinos} sources but not the tar file and the library itself.
+
+\DoxyHorRuler{0}
+\hypertarget{index_mumps}{}\doxysubsubsection{M\+U\+M\+P\+S and Sca\+L\+A\+P\+A\+CK}\label{index_mumps}
+{\ttfamily oomph-\/lib} also provides wrappers to the \href{http://graal.ens-lyon.fr/MUMPS/}{\texttt{ M\+U\+M\+PS }} multifrontal solver, if it is available on your system. {\ttfamily M\+U\+M\+PS} needs the linear algebra library \href{http://www.netlib.org/scalapack/}{\texttt{ Sca\+L\+A\+P\+A\+CK }} which must also be installed on your system. The configure options 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/with-\/mumps=/opt/mumps}
+\DoxyCodeLine{-\/-\/with-\/scalapack=/opt/scalapack}
+\end{DoxyCode}
+ will compile {\ttfamily oomph-\/lib\textquotesingle{}s} wrappers and link against the {\ttfamily M\+U\+M\+PS} solver provided that {\ttfamily M\+U\+M\+PS} and Sca\+L\+A\+P\+A\+CK  are installed in the directories 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/opt/mumps}
+\DoxyCodeLine{/opt/scalapack}
+\end{DoxyCode}
+ i.\+e. these directories contain the {\ttfamily lib} and {\ttfamily include} directories that result from successful installations of {\ttfamily M\+U\+M\+PS} and {\ttfamily Sca\+L\+A\+P\+A\+CK}, respectively.
+
+If you do not have {\ttfamily M\+U\+M\+PS} available you can download the latest version \href{http://graal.ens-lyon.fr/MUMPS/index.php?page=dwnld}{\texttt{ here. }} You can build and install the library yourself, or get {\ttfamily oomph-\/lib} to build it during part of its own build process. Simply place a copy of the tar file {\ttfamily M\+U\+M\+P\+S\+\_\+4.\+10.\+0.\+tar.\+gz} in the directory 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{external\_distributions/mumps\_and\_scalapack}
+\end{DoxyCode}
+ You will also need to download the {\ttfamily scalapack\+\_\+installer.\+tgz} from \href{http://www.netlib.org/scalapack/\#_scalapack_installer_for_linux}{\texttt{ here, }} and place a copy in the same directory 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{external\_distributions/mumps\_and\_scalapack}
+\end{DoxyCode}
+
+
+You can also download both files from our own website\+: \begin{center} \href{../../../../oomph-lib_external_distfiles/MUMPS_4.10.0.tar.gz}{\texttt{ M\+U\+M\+P\+S\+\_\+4.\+10.\+0.\+tar.\+gz}} \end{center}  \begin{center} \href{../../../../oomph-lib_external_distfiles/scalapack_installer.tgz}{\texttt{ scalapack\+\_\+installer.\+tgz}} \end{center} 
+
+Note that the configure option 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/with-\/mpi-\/include-\/\mbox{\hyperlink{the__distribution_8txt_ad3083ce9e1c95654db5f3fef75b58f52}{directory}}=/usr/lib/openmpi/include}
+\end{DoxyCode}
+ {\bfseries{ must }} be specified in order to build {\ttfamily M\+U\+M\+PS}, where {\ttfamily /usr/lib/openmpi/include} is the directory that contains the file {\ttfamily mpi.\+h}. \mbox{[}You can use {\ttfamily locate mpi.\+h}, to, well, locate that directory.\mbox{]}
+
+Once the files have been placed in the {\ttfamily external\+\_\+distributions/mumps\+\_\+and\+\_\+scalapack} directory, simply (re-\/)run {\ttfamily autogen.\+sh}, which will detect and build the libraries and install then in directory 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{external\_distributions/mumps\_and\_scalapack/mumps\_and\_scalapack\_default\_installation}
+\end{DoxyCode}
+
+
+Note that the installation of {\ttfamily Sca\+L\+A\+P\+A\+CK} requires an active Internet connection because it automatically downloads additional files.
+
+Unless you explicitly specified a library location using the {\ttfamily --with-\/mumps} and {\ttfamily --with-\/scalapack} flags, {\ttfamily oomph-\/lib} will then link against the newly created versions of the libraries. However, we strongly recommend moving the libraries outside the {\ttfamily oomph-\/lib} distribution to preserve them for future use. Once this is done you simply specify the (new) location of the library with the {\ttfamily --with-\/mumps} and {\ttfamily --with-\/scalapack} flags, as discussed above. (Also make sure to delete the tar files from {\ttfamily external\+\_\+distributions/mumps\+\_\+and\+\_\+scalapack}, otherwise the libraries will be built again.) Note that {\ttfamily make} {\ttfamily clean} will delete the unpacked sources but not the tar files nor the installed libraries.
+
+\DoxyHorRuler{0}
+\hypertarget{index_own}{}\doxysection{How to write your own code and link it against oomph-\/lib\textquotesingle{}s library/libraries}\label{index_own}
+If you followed the instructions so far, you will be able to install {\ttfamily oomph-\/lib} and run the demo codes that are provided in the {\ttfamily demo\+\_\+drivers} directory. Great! Now on to the next step\+: How do you write your own codes and link them against {\ttfamily oomph-\/lib}? There are two options, depending on whether you have (or are willing to install) the gnu autotools \href{http://www.gnu.org/software/autoconf/}{\texttt{ autoconf}}, \href{http://www.gnu.org/software/automake/}{\texttt{ automake}} and \href{http://www.gnu.org/software/libtool/}{\texttt{ libtool}} on your machine.\hypertarget{index_have_auto_tools}{}\doxysubsection{Writing/linking your own driver codes under autotools control}\label{index_have_auto_tools}
+\hypertarget{index_add_driver}{}\doxysubsubsection{Adding your own driver codes}\label{index_add_driver}
+Let\textquotesingle{}s start with the straightforward case\+: You want to use {\ttfamily oomph-\/lib} to solve one of your own problems. To do this within {\ttfamily oomph-\/lib\textquotesingle{}s} autotools framework, simply create a new directory in {\ttfamily user\+\_\+drivers} and write your driver code. To facilitate these steps, the {\ttfamily user\+\_\+drivers} directory already contains a sample directory {\ttfamily joe\+\_\+cool} for which all these steps have been performed. If you don\textquotesingle{}t object to the directory name (or if your name is Joe Cool) you can simply work in that directory. If not, we suggest the following sequence of steps\+:
+\begin{DoxyEnumerate}
+\item Go to the {\ttfamily user\+\_\+drivers} directory and create a new directory, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd user\_drivers}
+\DoxyCodeLine{mkdir josephine\_cool}
+\end{DoxyCode}
+
+\item Copy the {\ttfamily Makefile.\+am} and the driver code {\ttfamily joes\+\_\+poisson\+\_\+code.\+cc} from {\ttfamily user\+\_\+drivers/joe\+\_\+cool} to {\ttfamily user\+\_\+drivers/josephine\+\_\+cool}.
+\item Return to {\ttfamily oomph-\/lib\textquotesingle{}s} top-\/level directory and re-\/run {\ttfamily ./autogen.sh} to generate the required Makefile etc. in your own directory.
+\item You may now return to your own directory in {\ttfamily user\+\_\+drivers} and make your own driver code\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd user\_drivers/josephine\_cool}
+\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}}}
+\end{DoxyCode}
+ This will create the required executable. ~\newline
+~\newline
+
+\item Unfortunately, the driver code (copied from Joe Cool\textquotesingle{}s directory!) is unlikely to be the one you want but you can now rename it, edit it, or add further driver codes to your directory. In general we suggest that you have a look at the \href{../../example_code_list/html/index.html}{\texttt{ list of example codes}} and try to identify a problem that is similar to the one you want to solve. The associated driver code will be a good starting point for your own. Note that whenever you add new driver codes or rename existing ones you will have to update the local {\ttfamily Makefile}.{\ttfamily am}, though it is not necessary to re-\/run {\ttfamily autogen}.{\ttfamily sh}. The sample {\ttfamily Makefile}.{\ttfamily am} copied from Joe Cool\textquotesingle{}s directory is well annotated and gives clear instructions how to adapt its contents\+: ~\newline
+~\newline
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\# Name of executables: The prefix "noinst" means the executables don't}
+\DoxyCodeLine{\# have to be installed anywhere.}
+\DoxyCodeLine{noinst\_PROGRAMS= joes\_poisson\_code}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Local sources that Joe's Poisson code depends on:}
+\DoxyCodeLine{joes\_poisson\_code\_SOURCES = joes\_poisson\_code.cc}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Required libraries: Only the "generic" and "poisson" libraries, }
+\DoxyCodeLine{\# which are accessible via the general library directory which }
+\DoxyCodeLine{\# we specify with -\/L. The generic sources also require the "external" libraries}
+\DoxyCodeLine{\# that are shipped with oomph-\/lib. The Fortran libraries, \$(FLIBS), get }
+\DoxyCodeLine{\# included just in case we decide to use a solver that involves Fortran }
+\DoxyCodeLine{\# sources. }
+\DoxyCodeLine{\# NOTE: The order in which libraries are specified is important! }
+\DoxyCodeLine{\#       The most specific ones (that might involve references to other}
+\DoxyCodeLine{\#       libraries) need to be listed first, the more basic ones }
+\DoxyCodeLine{\#       later. In this example we have (from right to left, i.e. from}
+\DoxyCodeLine{\#       general to specific):}
+\DoxyCodeLine{\#       -\/-\/ The fortran libraries: They  are compiler specific and}
+\DoxyCodeLine{\#          obviously can't depend on any code that we (or others)}
+\DoxyCodeLine{\#          have written. \$(FLIBS) is a variable that automake will translate}
+\DoxyCodeLine{\#          to the actual fortran libraries.}
+\DoxyCodeLine{\#       -\/-\/ The external (third party) libraries: They cannot depend on }
+\DoxyCodeLine{\#          any of our code. The variable \$(EXTERNAL\_LIBS) is defined}
+\DoxyCodeLine{\#          in the machine-\/generated file configure.ac in oomph-\/lib's }
+\DoxyCodeLine{\#          home directory. }
+\DoxyCodeLine{\#       -\/-\/ Oomph-\/lib's generic library contains oomph-\/lib's fundamental }
+\DoxyCodeLine{\#          objects which do not depend on any specific system of PDEs }
+\DoxyCodeLine{\#          or element types.}
+\DoxyCodeLine{\#       -\/-\/ Finally, oomph-\/lib's poisson library contains oomph-\/lib's }
+\DoxyCodeLine{\#          Poisson elements which refer to objects from the generic}
+\DoxyCodeLine{\#          library. }
+\DoxyCodeLine{joes\_poisson\_code\_LDADD = -\/L@libdir@ -\/lpoisson -\/lgeneric \$(EXTERNAL\_LIBS) \$(FLIBS)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Include path for library headers: All library headers live in }
+\DoxyCodeLine{\# the include directory which we specify with -\/I}
+\DoxyCodeLine{\# Automake will replace the variable @includedir@ with the actual}
+\DoxyCodeLine{\# include directory.}
+\DoxyCodeLine{AM\_CPPFLAGS += -\/I@includedir@  }
+\end{DoxyCodeInclude}
+ ~\newline
+~\newline
+ Note the following points\+: ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item Lines that start with a \char`\"{}\#\char`\"{} are comments. ~\newline
+~\newline
+
+\item The first (non-\/comment) line in the above file specifies the name(s) of the executable(s) that will be created by make. These names must be the same as those in the {\ttfamily $\ast$\+\_\+\+S\+O\+U\+R\+C\+ES} and {\ttfamily $\ast$\+\_\+\+L\+D\+A\+DD} variables. ~\newline
+~\newline
+
+\item The {\ttfamily joes\+\_\+poisson\+\_\+code\+\_\+\+S\+O\+U\+R\+C\+ES} variable declares which (local) sources your executable depends on. In the current example there is only a single file, the driver code, {\ttfamily joes\+\_\+poisson\+\_\+code}. {\ttfamily cc}, itself. ~\newline
+~\newline
+
+\item The {\ttfamily joes\+\_\+poisson\+\_\+code\+\_\+\+L\+D\+A\+DD} variable declares\+:
+\begin{DoxyItemize}
+\item the location of the library directory (automake will convert the macro {\ttfamily -\/L@libdir@} into the actual directory -- you don\textquotesingle{}t have to change this!).
+\item the libraries ({\ttfamily oomph-\/lib} or otherwise) that you wish to link against. This is done with the usual {\ttfamily -\/l} flag that you will be familiar with from your compiler. Have a look at the comments regarding the order of the libraries! ~\newline
+~\newline
+
+\end{DoxyItemize}
+\item The {\ttfamily I\+N\+C\+L\+U\+D\+ES} variable specifies where to find the include header files. This line is again completely generic -- automake will convert the macro {\ttfamily -\/I@includedir@} into the actual location. ~\newline
+~\newline
+
+\item If you have multiple driver codes, add the name of all executables to the {\ttfamily noinst\+\_\+\+P\+R\+O\+G\+R\+A\+MS} variable, and specify the {\ttfamily $\ast$\+\_\+\+S\+O\+U\+R\+C\+ES} and {\ttfamily $\ast$\+\_\+\+L\+D\+A\+DD} variables for each one. ~\newline
+~\newline
+
+\item The {\ttfamily I\+N\+C\+L\+U\+D\+ES} variable should only be specified once.
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{index_add_src}{}\doxysubsubsection{Adding new libraries and linking against them from driver codes}\label{index_add_src}
+The above instructions should be sufficient to get you started. You can create multiple sub-\/directories for different projects and each sub-\/directory may, of course, contain multiple files, separated into header and source files. {\ttfamily automake} will ensure that only those files that have been changed will be recompiled when you issue the {\ttfamily make} command. However, at some point you may wish to package some of your sources into your own library and maybe even offer it for permanent inclusion into {\ttfamily oomph-\/lib}. For this purpose the {\ttfamily oomph-\/lib} distribution provides the sub-\/directory {\ttfamily user\+\_\+src} which closely mirrors that of the {\ttfamily src} and {\ttfamily external\+\_\+src} directories discussed earlier. During the build process, each sub-\/directory in {\ttfamily user\+\_\+src} is compiled into its own library and installed in the standard location.
+
+The steps required to include your own library into the {\ttfamily oomph-\/lib} build process are very similar to those required to add additional user drivers. As before, the {\ttfamily user\+\_\+src} directory already contains a sample directory {\ttfamily jack\+\_\+cool}, to facilitate the procedure. We therefore suggest the following sequence of steps\+:
+\begin{DoxyEnumerate}
+\item Go to the {\ttfamily user\+\_\+src} directory and create a new directory, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd user\_src}
+\DoxyCodeLine{mkdir jacqueline\_cool}
+\end{DoxyCode}
+ ~\newline
+~\newline
+
+\item Copy the {\ttfamily Makefile.\+am} and the codes {\ttfamily hello\+\_\+world.\+cc} and {\ttfamily hello\+\_\+world.\+h} from {\ttfamily user\+\_\+src/jack\+\_\+cool} to {\ttfamily user\+\_\+src/jacqueline\+\_\+cool}. ~\newline
+~\newline
+
+\item Return to the top-\/level {\ttfamily oomph-\/lib} directory and re-\/run {\ttfamily autogen.\+sh}.
+\item You may now return to your own directory in {\ttfamily user\+\_\+src} and make and install our own library 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd user\_src/jacqueline\_cool}
+\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}}}
+\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}} \mbox{\hyperlink{the__distribution_8txt_a450df5a275b46b68f1cc00515f04aefa}{install}}}
+\end{DoxyCode}
+ This will create the library and install it in {\ttfamily build/lib} ~\newline
+~\newline
+ The {\ttfamily Makefile}.{\ttfamily am} for libraries is slightly more complicated (though reasonably well documented) so -- for now -- we\textquotesingle{}ll just list it here and hope that the changes required to include additional sources are obvious. If you really can\textquotesingle{}t figure it out, send us an email and prompt us to complete this bit of the documentation.... ~\newline
+~\newline
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\# A few file definitions}
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Define the sources}
+\DoxyCodeLine{sources =  \(\backslash\)}
+\DoxyCodeLine{hello\_world.cc}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Define the headers}
+\DoxyCodeLine{headers =  \(\backslash\)}
+\DoxyCodeLine{hello\_world.h}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Define name of library}
+\DoxyCodeLine{libname = jack\_cool}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Combine headers and sources}
+\DoxyCodeLine{headers\_and\_sources = \$(headers) \$(sources)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Define the library that gets placed in lib directory}
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{lib\_LTLIBRARIES = libjack\_cool.la}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Sources that the library depends on: }
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{libjack\_cool\_la\_SOURCES = \$(headers\_and\_sources)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# The library's include headers:}
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\# Headers that are to be included in the \$(includedir) directory:}
+\DoxyCodeLine{\# This is the combined header which contains "\#include<...>" commands}
+\DoxyCodeLine{\# for the real headers in the subdirectory below \$(includedir)}
+\DoxyCodeLine{include\_HEADERS = \$(libname).h }
+\DoxyCodeLine{}
+\DoxyCodeLine{\#Here's the subdirectory where the actual header files are placed}
+\DoxyCodeLine{library\_includedir=\$(includedir)/jack\_cool}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#These are the header files that are to be placed in subdirectory}
+\DoxyCodeLine{library\_include\_HEADERS=\$(headers) }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Required libraries -\/-\/ [assuming that we want to link against stuff in generic}
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/     add other oomph-\/lib libraries if you need them....]}
+\DoxyCodeLine{\# Include path for library headers -\/-\/ need to refer to include files}
+\DoxyCodeLine{\# in their respective source directories as they will not have been }
+\DoxyCodeLine{\# installed yet! }
+\DoxyCodeLine{AM\_CPPFLAGS += -\/I\$(top\_builddir)/src/generic}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Combined header file}
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\# Rule for building combined header (dummy target never gets made so}
+\DoxyCodeLine{\# the combined header is remade every time)}
+\DoxyCodeLine{\$(libname).h: dummy\_\$(libname).h}
+\DoxyCodeLine{}
+\DoxyCodeLine{dummy\_\$(libname).h:  \$(headers)}
+\DoxyCodeLine{        echo  \$(libname) \$(headers) > all\_\$(libname).aux}
+\DoxyCodeLine{        \$(AWK) -\/f \$(top\_builddir)/bin/headers.awk < \(\backslash\)}
+\DoxyCodeLine{               all\_\$(libname).aux > \$(libname).h}
+\DoxyCodeLine{        rm all\_\$(libname).aux}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Extra hook for install: Optionally replace headers by symbolic links}
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{if SYMBOLIC\_LINKS\_FOR\_HEADERS}
+\DoxyCodeLine{install-\/data-\/hook: }
+\DoxyCodeLine{        (cd \$(library\_includedir) \&\& rm -\/f \$(headers) )}
+\DoxyCodeLine{        (echo "\$(headers)" > include\_files.list )}
+\DoxyCodeLine{        (\$(top\_builddir)/bin/change\_headers\_to\_links.sh `pwd`)}
+\DoxyCodeLine{        (\$(LN\_S) `cat include\_files.list.aux` \$(library\_includedir) )}
+\DoxyCodeLine{        (rm -\/r include\_files.list.aux include\_files.list ) }
+\DoxyCodeLine{else}
+\DoxyCodeLine{install-\/data-\/hook: }
+\DoxyCodeLine{endif}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Tidy up}
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{clean-\/local:}
+\DoxyCodeLine{        rm -\/f \$(libname).h}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+
+\end{DoxyEnumerate}
+
+Note that the directory {\ttfamily user\+\_\+drivers/jack\+\_\+cool} contains an example of a user driver code ({\ttfamily jacks\+\_\+own\+\_\+code} {\ttfamily }.cc) that uses a user library.\hypertarget{index_dont_have_auto_tools}{}\doxysubsection{Writing/linking user code without autotools}\label{index_dont_have_auto_tools}
+Linking directly against {\ttfamily oomph-\/lib\textquotesingle{}s} (sub-\/)libraries is slightly complicated by cross-\/compilation issues arising from the fact that the {\ttfamily oomph-\/lib} distribution includes a few C and Fortran sources. When linking is done (by the C++ compiler) one usually has to explicitly specify a few compiler-\/specific Fortran libraries. The beauty of the {\ttfamily autotools} approach described above is that these libraries (and any other flags that need to be passed to the compiler/linker) are determined and specified automatically. Doing this manually is no fun! Have a look at Mike Gerdts\textquotesingle{}s excellent document \href{https://sites.google.com/site/mgerdts/whatgccreallydoes}{\texttt{ \char`\"{}\+How gcc really works\char`\"{}}} for details.
+
+The good news is that {\ttfamily oomph-\/lib\textquotesingle{}s} installation procedure automatically generates a sample {\ttfamily Makefile} that contains all the relevant information. Once the installation is complete, the sample makefile is located at 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{demo\_drivers/linking/makefile.sample}
+\end{DoxyCode}
+ Here is the version that was generated one of our machines\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\DoxyCodeLine{\# Automatically-\/generated sample makefile to illustrate how to  }
+\DoxyCodeLine{\# link against oomph-\/lib from outside the automake/autoconf}
+\DoxyCodeLine{\# framework. Do not edit this -\/-\/ make a copy first}
+\DoxyCodeLine{\# }
+\DoxyCodeLine{\# When customising this makefile, you should only have to change}
+\DoxyCodeLine{\# }
+\DoxyCodeLine{\# -\/ the variable OOMPH-\/LIB\_LIBS:}
+\DoxyCodeLine{\#         Add any additional oomph-\/lib sub-\/libraries that }
+\DoxyCodeLine{\#         you may wish to use in your code. }
+\DoxyCodeLine{\# }
+\DoxyCodeLine{\# -\/ the specific dependencies for your driver code: }
+\DoxyCodeLine{\#         Include any additional local dependencies such as }
+\DoxyCodeLine{\#         your own header files etc.}
+\DoxyCodeLine{\# }
+\DoxyCodeLine{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# Installation-\/specific information -\/-\/ don't change any of this! }
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# Flags for C pre-\/processor }
+\DoxyCodeLine{AM\_CPPFLAGS=-\/DHAVE\_CONFIG\_H -\/I. -\/I../..  -\/DOOMPH\_HAS\_MPI -\/I/home/mheil/version\_for\_release/build/include}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# Library include directory: This is where all the header files live}
+\DoxyCodeLine{OOMPH-\/LIB\_INCLUDE\_DIR=/home/mheil/version\_for\_release/build/include}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# Library directory: This is where all of oomph-\/lib's sub-\/libraries live}
+\DoxyCodeLine{OOMPH-\/LIB\_LIB\_DIR=/home/mheil/version\_for\_release/build/lib}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# These are the external (3rd party) libraries that are distributed}
+\DoxyCodeLine{\# with oomph-\/lib and that we always link against}
+\DoxyCodeLine{OOMPH-\/LIB\_EXTERNAL\_LIBS=-\/loomph\_hsl -\/loomph\_superlu\_3.0 -\/loomph\_metis\_4.0 -\/loomph\_arpack -\/loomph\_superlu\_dist\_2.0 /home/mheil/local/lib/lapack/lapack.a /home/mheil/local/lib/blas/blas.a}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# This specifies where libraries built from third party }
+\DoxyCodeLine{\# distributions can be found}
+\DoxyCodeLine{EXTERNAL\_DIST\_LIBRARIES=}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# This is additional machine-\/specific linking information that }
+\DoxyCodeLine{\# allows mixed-\/language compilation/linking}
+\DoxyCodeLine{FLIBS=-\/L/usr/lib/lam/lib -\/L/usr/lib/gcc/i486-\/linux-\/gnu/4.3.3 -\/L/usr/lib/gcc/i486-\/linux-\/gnu/4.3.3/../../../../lib -\/L/lib/../lib -\/L/usr/lib/../lib -\/L/usr/lib/gcc/i486-\/linux-\/gnu/4.3.3/../../.. -\/llammpio -\/llamf77mpi -\/lmpi -\/llam -\/lutil -\/ldl -\/lgfortranbegin -\/lgfortran -\/lm -\/lpthread}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# Flags required for the use of shared libraries }
+\DoxyCodeLine{SHARED\_LIBRARY\_FLAGS=-\/Wl,-\/-\/rpath -\/Wl,/home/mheil/version\_for\_release/build/lib}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\#Mac OSX: Replace the above line with the following}
+\DoxyCodeLine{\#SHARED\_LIBRARY\_FLAGS= -\/-\/rpath=/home/mheil/version\_for\_release/build/lib}
+\DoxyCodeLine{\# Problem-\/specific information -\/-\/ edit this for your driver code }
+\DoxyCodeLine{ }
+\DoxyCodeLine{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\# These are the specific oomph-\/lib sub-\/libraries that we have to link against}
+\DoxyCodeLine{\# for this driver code -\/-\/ edit this according to your requirements}
+\DoxyCodeLine{\# but remember that the order of the libraries matters: List the}
+\DoxyCodeLine{\# the more specific ones before the more general ones!}
+\DoxyCodeLine{OOMPH-\/LIB\_LIBS=-\/lpoisson -\/lgeneric}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# Dependencies for this driver code and compile instructions: }
+\DoxyCodeLine{\# Which local source (usually *.cc or *.h) files does the}
+\DoxyCodeLine{\# driver code depend on?}
+\DoxyCodeLine{my\_demo\_code.o: demo\_code.cc}
+\DoxyCodeLine{         mpic++ \$(AM\_CPPFLAGS) -\/c demo\_code.cc -\/o my\_demo\_code.o \(\backslash\)}
+\DoxyCodeLine{               -\/I\$(OOMPH-\/LIB\_INCLUDE\_DIR)  }
+\DoxyCodeLine{ }
+\DoxyCodeLine{\# Linking instructions: Just declare the target (i.e. the name of the executable)}
+\DoxyCodeLine{\# and the dependencies (i.e. the object files created above). The rest }
+\DoxyCodeLine{\# should not have to be changed. }
+\DoxyCodeLine{my\_demo\_code: my\_demo\_code.o}
+\DoxyCodeLine{         mpic++ \$(SHARED\_LIBRARY\_FLAGS) \$< -\/o \$@ \(\backslash\)}
+\DoxyCodeLine{               -\/L\$(OOMPH-\/LIB\_LIB\_DIR) \$(EXTERNAL\_DIST\_LIBRARIES) \$(OOMPH-\/LIB\_LIBS) \(\backslash\)}
+\DoxyCodeLine{                \$(OOMPH-\/LIB\_EXTERNAL\_LIBS) \$(FLIBS)}
+\end{DoxyCodeInclude}
+
+
+The version that is generated during the build process on your machine provides template for your own customised Makefiles. When modifying the sample to different driver codes, you should not (have to) edit any of the \char`\"{}installation specific\char`\"{} variables. Simply specify the {\ttfamily oomph-\/lib} (sub-\/)libraries that you wish to link against in the {\ttfamily O\+O\+M\+P\+H\+\_\+\+L\+I\+B-\/\+L\+I\+BS} variable (in the example shown above, we are linking against the {\ttfamily generic} and {\ttfamily poisson} libraries), and specify the dependencies for your own driver code, following the usual {\ttfamily Makefile} syntax. The executable may then be created by the usual 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}} -\/f makefile.sample my\_demo\_code}
+\end{DoxyCode}
+
+
+\label{_apple_linking}%
+ {\bfseries{Note/\+Disclaimer\+:}} The sample {\ttfamily Makefile} generated during {\ttfamily oomph-\/lib\textquotesingle{}s} installation should work for most (if not all) linux machines, though it may require slight tweaks for Darwin (the B\+S\+D-\/derived U\+N\+IX core of Apple\textquotesingle{}s O\+SX operating system). Problems are most likely to arise from the {\ttfamily S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+F\+L\+A\+GS} variable. As mentioned in the comment in the sample {\ttfamily Makefile}, on such machines the fragment {\ttfamily -\/Wl,--rpath -\/Wl,} should be deleted from the {\ttfamily S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+F\+L\+A\+GS} variable.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

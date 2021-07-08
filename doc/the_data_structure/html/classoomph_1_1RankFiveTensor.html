@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RankFiveTensor&lt; T &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1RankFiveTensor-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::RankFiveTensor&lt; T &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>A Rank 5 Tensor class.  
+ <a href="classoomph_1_1RankFiveTensor.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="matrices_8h_source.html">matrices.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a388a9f191189d174e521d422e3bc44cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a388a9f191189d174e521d422e3bc44cd">RankFiveTensor</a> ()</td></tr>
+<tr class="memdesc:a388a9f191189d174e521d422e3bc44cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="classoomph_1_1RankFiveTensor.html#a388a9f191189d174e521d422e3bc44cd">More...</a><br /></td></tr>
+<tr class="separator:a388a9f191189d174e521d422e3bc44cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17aa636c6c8b4aa80ff4e168bca1881b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a17aa636c6c8b4aa80ff4e168bca1881b">RankFiveTensor</a> (const <a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> &amp;source_tensor)</td></tr>
+<tr class="memdesc:a17aa636c6c8b4aa80ff4e168bca1881b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor: Deep copy.  <a href="classoomph_1_1RankFiveTensor.html#a17aa636c6c8b4aa80ff4e168bca1881b">More...</a><br /></td></tr>
+<tr class="separator:a17aa636c6c8b4aa80ff4e168bca1881b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3972e47b50ce31ec0317862ce1e18884"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a3972e47b50ce31ec0317862ce1e18884">operator=</a> (const <a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> &amp;source_tensor)</td></tr>
+<tr class="memdesc:a3972e47b50ce31ec0317862ce1e18884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignement.  <a href="classoomph_1_1RankFiveTensor.html#a3972e47b50ce31ec0317862ce1e18884">More...</a><br /></td></tr>
+<tr class="separator:a3972e47b50ce31ec0317862ce1e18884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb5f83bfa8237882705e16ca1fbd04b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a2fb5f83bfa8237882705e16ca1fbd04b">RankFiveTensor</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
+<tr class="memdesc:a2fb5f83bfa8237882705e16ca1fbd04b"><td class="mdescLeft">&#160;</td><td class="mdescRight">One parameter constructor produces a nxnxnxnxn tensor.  <a href="classoomph_1_1RankFiveTensor.html#a2fb5f83bfa8237882705e16ca1fbd04b">More...</a><br /></td></tr>
+<tr class="separator:a2fb5f83bfa8237882705e16ca1fbd04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7e765aecc61bca8ad9742e07822c54f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#af7e765aecc61bca8ad9742e07822c54f">RankFiveTensor</a> (const unsigned long &amp;n_index1, const unsigned long &amp;n_index2, const unsigned long &amp;n_index3, const unsigned long &amp;n_index4, const unsigned long &amp;n_index5)</td></tr>
+<tr class="memdesc:af7e765aecc61bca8ad9742e07822c54f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Four parameter constructor, general non-square tensor.  <a href="classoomph_1_1RankFiveTensor.html#af7e765aecc61bca8ad9742e07822c54f">More...</a><br /></td></tr>
+<tr class="separator:af7e765aecc61bca8ad9742e07822c54f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79ebab81e4e9f7fdd193f59a4858930c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a79ebab81e4e9f7fdd193f59a4858930c">RankFiveTensor</a> (const unsigned long &amp;n_index1, const unsigned long &amp;n_index2, const unsigned long &amp;n_index3, const unsigned long &amp;n_index4, const unsigned long &amp;n_index5, const T &amp;initial_val)</td></tr>
+<tr class="memdesc:a79ebab81e4e9f7fdd193f59a4858930c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Four parameter constructor, general non-square tensor.  <a href="classoomph_1_1RankFiveTensor.html#a79ebab81e4e9f7fdd193f59a4858930c">More...</a><br /></td></tr>
+<tr class="separator:a79ebab81e4e9f7fdd193f59a4858930c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee507ed9367b053bcf538b3eaaf62d03"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#aee507ed9367b053bcf538b3eaaf62d03">~RankFiveTensor</a> ()</td></tr>
+<tr class="memdesc:aee507ed9367b053bcf538b3eaaf62d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: delete the pointers.  <a href="classoomph_1_1RankFiveTensor.html#aee507ed9367b053bcf538b3eaaf62d03">More...</a><br /></td></tr>
+<tr class="separator:aee507ed9367b053bcf538b3eaaf62d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d0f38a3627c9d07dbf1106a26f61578"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a8d0f38a3627c9d07dbf1106a26f61578">resize</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
+<tr class="memdesc:a8d0f38a3627c9d07dbf1106a26f61578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a square nxnxnxn tensor.  <a href="classoomph_1_1RankFiveTensor.html#a8d0f38a3627c9d07dbf1106a26f61578">More...</a><br /></td></tr>
+<tr class="separator:a8d0f38a3627c9d07dbf1106a26f61578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdd04cd2a29fb7b8c41f5300200813e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#afdd04cd2a29fb7b8c41f5300200813e1">resize</a> (const unsigned long &amp;n_index1, const unsigned long &amp;n_index2, const unsigned long &amp;n_index3, const unsigned long &amp;n_index4, const unsigned long &amp;n_index5)</td></tr>
+<tr class="memdesc:afdd04cd2a29fb7b8c41f5300200813e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a general tensor.  <a href="classoomph_1_1RankFiveTensor.html#afdd04cd2a29fb7b8c41f5300200813e1">More...</a><br /></td></tr>
+<tr class="separator:afdd04cd2a29fb7b8c41f5300200813e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80eeaef66e9252fa5d1d7031e4ec402c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a80eeaef66e9252fa5d1d7031e4ec402c">resize</a> (const unsigned long &amp;n_index1, const unsigned long &amp;n_index2, const unsigned long &amp;n_index3, const unsigned long &amp;n_index4, const unsigned long &amp;n_index5, const T &amp;initial_value)</td></tr>
+<tr class="memdesc:a80eeaef66e9252fa5d1d7031e4ec402c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a general tensor.  <a href="classoomph_1_1RankFiveTensor.html#a80eeaef66e9252fa5d1d7031e4ec402c">More...</a><br /></td></tr>
+<tr class="separator:a80eeaef66e9252fa5d1d7031e4ec402c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3fbc9fc71b68eec0fa4c00d9ad663b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ad3fbc9fc71b68eec0fa4c00d9ad663b6">initialise</a> (const T &amp;val)</td></tr>
+<tr class="memdesc:ad3fbc9fc71b68eec0fa4c00d9ad663b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise all values in the tensor to val.  <a href="classoomph_1_1RankFiveTensor.html#ad3fbc9fc71b68eec0fa4c00d9ad663b6">More...</a><br /></td></tr>
+<tr class="separator:ad3fbc9fc71b68eec0fa4c00d9ad663b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9f5651447193b2c7e669beff9146cc9"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ad9f5651447193b2c7e669beff9146cc9">nindex1</a> () const</td></tr>
+<tr class="memdesc:ad9f5651447193b2c7e669beff9146cc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 1 of the tensor.  <a href="classoomph_1_1RankFiveTensor.html#ad9f5651447193b2c7e669beff9146cc9">More...</a><br /></td></tr>
+<tr class="separator:ad9f5651447193b2c7e669beff9146cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92d2a0f9ffc41e75cf5fffa9cfd601fd"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a92d2a0f9ffc41e75cf5fffa9cfd601fd">nindex2</a> () const</td></tr>
+<tr class="memdesc:a92d2a0f9ffc41e75cf5fffa9cfd601fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 2 of the tensor.  <a href="classoomph_1_1RankFiveTensor.html#a92d2a0f9ffc41e75cf5fffa9cfd601fd">More...</a><br /></td></tr>
+<tr class="separator:a92d2a0f9ffc41e75cf5fffa9cfd601fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a720c024bccf0b33f2f3bd6367611a4fa"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a720c024bccf0b33f2f3bd6367611a4fa">nindex3</a> () const</td></tr>
+<tr class="memdesc:a720c024bccf0b33f2f3bd6367611a4fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 3 of the tensor.  <a href="classoomph_1_1RankFiveTensor.html#a720c024bccf0b33f2f3bd6367611a4fa">More...</a><br /></td></tr>
+<tr class="separator:a720c024bccf0b33f2f3bd6367611a4fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f59dd13534545f9e2641dafee86bc27"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a2f59dd13534545f9e2641dafee86bc27">nindex4</a> () const</td></tr>
+<tr class="memdesc:a2f59dd13534545f9e2641dafee86bc27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 4 of the tensor.  <a href="classoomph_1_1RankFiveTensor.html#a2f59dd13534545f9e2641dafee86bc27">More...</a><br /></td></tr>
+<tr class="separator:a2f59dd13534545f9e2641dafee86bc27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa880f750e9d2e2bf5ec5c41ad3241568"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#aa880f750e9d2e2bf5ec5c41ad3241568">nindex5</a> () const</td></tr>
+<tr class="memdesc:aa880f750e9d2e2bf5ec5c41ad3241568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 5 of the tensor.  <a href="classoomph_1_1RankFiveTensor.html#aa880f750e9d2e2bf5ec5c41ad3241568">More...</a><br /></td></tr>
+<tr class="separator:aa880f750e9d2e2bf5ec5c41ad3241568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b326990dff5d065648c223cf9bcfb5a"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a3b326990dff5d065648c223cf9bcfb5a">operator()</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j, const unsigned long &amp;k, const unsigned long &amp;l, const unsigned long &amp;m)</td></tr>
+<tr class="memdesc:a3b326990dff5d065648c223cf9bcfb5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the round brackets to give access as a(i,j,k,l,m)  <a href="classoomph_1_1RankFiveTensor.html#a3b326990dff5d065648c223cf9bcfb5a">More...</a><br /></td></tr>
+<tr class="separator:a3b326990dff5d065648c223cf9bcfb5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d2ef9d9bcc8103b2d60f768ffa60532"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a0d2ef9d9bcc8103b2d60f768ffa60532">operator()</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j, const unsigned long &amp;k, const unsigned long &amp;l, const unsigned long &amp;m) const</td></tr>
+<tr class="memdesc:a0d2ef9d9bcc8103b2d60f768ffa60532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload a const version for read-only access as a(i,j,k,l,m)  <a href="classoomph_1_1RankFiveTensor.html#a0d2ef9d9bcc8103b2d60f768ffa60532">More...</a><br /></td></tr>
+<tr class="separator:a0d2ef9d9bcc8103b2d60f768ffa60532"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa349a95c9ee9aa66950f1ed88532498c"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#aa349a95c9ee9aa66950f1ed88532498c">raw_direct_access</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:aa349a95c9ee9aa66950f1ed88532498c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direct access to internal storage of data in flat-packed C-style column-major format. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems.  <a href="classoomph_1_1RankFiveTensor.html#aa349a95c9ee9aa66950f1ed88532498c">More...</a><br /></td></tr>
+<tr class="separator:aa349a95c9ee9aa66950f1ed88532498c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15c5e1c7dee4142962716be02accb1a0"><td class="memItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a15c5e1c7dee4142962716be02accb1a0">raw_direct_access</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a15c5e1c7dee4142962716be02accb1a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direct access to internal storage of data in flat-packed C-style column-major format. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems.  <a href="classoomph_1_1RankFiveTensor.html#a15c5e1c7dee4142962716be02accb1a0">More...</a><br /></td></tr>
+<tr class="separator:a15c5e1c7dee4142962716be02accb1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3bd11afa49e36ff28c1d4968796f5a3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ab3bd11afa49e36ff28c1d4968796f5a3">offset</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j, const unsigned long &amp;k) const</td></tr>
+<tr class="memdesc:ab3bd11afa49e36ff28c1d4968796f5a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caculate the offset in flat-packed Cy-style, column-major format, required for a given i,j,k. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems.  <a href="classoomph_1_1RankFiveTensor.html#ab3bd11afa49e36ff28c1d4968796f5a3">More...</a><br /></td></tr>
+<tr class="separator:ab3bd11afa49e36ff28c1d4968796f5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a8fce9375f99c153e3d5b91193996dad8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a8fce9375f99c153e3d5b91193996dad8">range_check</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j, const unsigned long &amp;k, const unsigned long &amp;l, const unsigned long &amp;m) const</td></tr>
+<tr class="memdesc:a8fce9375f99c153e3d5b91193996dad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an <code><a class="el" href="classoomph_1_1OomphLibError.html">OomphLibError</a></code>.  <a href="classoomph_1_1RankFiveTensor.html#a8fce9375f99c153e3d5b91193996dad8">More...</a><br /></td></tr>
+<tr class="separator:a8fce9375f99c153e3d5b91193996dad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ae93e781da0ba64c2c5403099dc75dd3d"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ae93e781da0ba64c2c5403099dc75dd3d">Tensordata</a></td></tr>
+<tr class="memdesc:ae93e781da0ba64c2c5403099dc75dd3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private internal representation as pointer to data.  <a href="classoomph_1_1RankFiveTensor.html#ae93e781da0ba64c2c5403099dc75dd3d">More...</a><br /></td></tr>
+<tr class="separator:ae93e781da0ba64c2c5403099dc75dd3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeea12f3e80605e2c7b6b4a8ec47bf91c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#aeea12f3e80605e2c7b6b4a8ec47bf91c">N</a></td></tr>
+<tr class="memdesc:aeea12f3e80605e2c7b6b4a8ec47bf91c"><td class="mdescLeft">&#160;</td><td class="mdescRight">1st Tensor dimension  <a href="classoomph_1_1RankFiveTensor.html#aeea12f3e80605e2c7b6b4a8ec47bf91c">More...</a><br /></td></tr>
+<tr class="separator:aeea12f3e80605e2c7b6b4a8ec47bf91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a240c4e62ffa0dd3e5dfc3b0063f94c7f"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a240c4e62ffa0dd3e5dfc3b0063f94c7f">M</a></td></tr>
+<tr class="memdesc:a240c4e62ffa0dd3e5dfc3b0063f94c7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">2nd Tensor dimension  <a href="classoomph_1_1RankFiveTensor.html#a240c4e62ffa0dd3e5dfc3b0063f94c7f">More...</a><br /></td></tr>
+<tr class="separator:a240c4e62ffa0dd3e5dfc3b0063f94c7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab23d40bd6af9279e1e35362249c32855"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ab23d40bd6af9279e1e35362249c32855">P</a></td></tr>
+<tr class="memdesc:ab23d40bd6af9279e1e35362249c32855"><td class="mdescLeft">&#160;</td><td class="mdescRight">3rd Tensor dimension  <a href="classoomph_1_1RankFiveTensor.html#ab23d40bd6af9279e1e35362249c32855">More...</a><br /></td></tr>
+<tr class="separator:ab23d40bd6af9279e1e35362249c32855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68d3c3387b64dc8124cb0800ab4814a5"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a68d3c3387b64dc8124cb0800ab4814a5">Q</a></td></tr>
+<tr class="memdesc:a68d3c3387b64dc8124cb0800ab4814a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">4th Tensor dimension  <a href="classoomph_1_1RankFiveTensor.html#a68d3c3387b64dc8124cb0800ab4814a5">More...</a><br /></td></tr>
+<tr class="separator:a68d3c3387b64dc8124cb0800ab4814a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c348e8860783caf59103dd86f38d1a6"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a0c348e8860783caf59103dd86f38d1a6">R</a></td></tr>
+<tr class="memdesc:a0c348e8860783caf59103dd86f38d1a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">5th Tensor dimension  <a href="classoomph_1_1RankFiveTensor.html#a0c348e8860783caf59103dd86f38d1a6">More...</a><br /></td></tr>
+<tr class="separator:a0c348e8860783caf59103dd86f38d1a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class T&gt;<br />
+class oomph::RankFiveTensor&lt; T &gt;</h3>
+
+<p>A Rank 5 Tensor class. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01972">1972</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a388a9f191189d174e521d422e3bc44cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a388a9f191189d174e521d422e3bc44cd">&#9670;&nbsp;</a></span>RankFiveTensor() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::<a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02058">2058</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="a17aa636c6c8b4aa80ff4e168bca1881b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17aa636c6c8b4aa80ff4e168bca1881b">&#9670;&nbsp;</a></span>RankFiveTensor() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::<a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source_tensor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor: Deep copy. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02061">2061</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02293">oomph::RankFiveTensor&lt; T &gt;::nindex1()</a>, <a class="el" href="matrices_8h_source.html#l02296">oomph::RankFiveTensor&lt; T &gt;::nindex2()</a>, <a class="el" href="matrices_8h_source.html#l02299">oomph::RankFiveTensor&lt; T &gt;::nindex3()</a>, <a class="el" href="matrices_8h_source.html#l02302">oomph::RankFiveTensor&lt; T &gt;::nindex4()</a>, <a class="el" href="matrices_8h_source.html#l02305">oomph::RankFiveTensor&lt; T &gt;::nindex5()</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="elements_8h_source.html#l01219">oomph::ElementGeometry::T</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a2fb5f83bfa8237882705e16ca1fbd04b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fb5f83bfa8237882705e16ca1fbd04b">&#9670;&nbsp;</a></span>RankFiveTensor() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::<a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>One parameter constructor produces a nxnxnxnxn tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02131">2131</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="elements_8h_source.html#l01219">oomph::ElementGeometry::T</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="af7e765aecc61bca8ad9742e07822c54f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7e765aecc61bca8ad9742e07822c54f">&#9670;&nbsp;</a></span>RankFiveTensor() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::<a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index5</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Four parameter constructor, general non-square tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02144">2144</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="elements_8h_source.html#l01219">oomph::ElementGeometry::T</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a79ebab81e4e9f7fdd193f59a4858930c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79ebab81e4e9f7fdd193f59a4858930c">&#9670;&nbsp;</a></span>RankFiveTensor() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::<a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index5</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>initial_val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Four parameter constructor, general non-square tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02160">2160</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="elements_8h_source.html#l01219">oomph::ElementGeometry::T</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="aee507ed9367b053bcf538b3eaaf62d03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee507ed9367b053bcf538b3eaaf62d03">&#9670;&nbsp;</a></span>~RankFiveTensor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::~<a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: delete the pointers. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02173">2173</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad3fbc9fc71b68eec0fa4c00d9ad663b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3fbc9fc71b68eec0fa4c00d9ad663b6">&#9670;&nbsp;</a></span>initialise()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::initialise </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialise all values in the tensor to val. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02289">2289</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, and <a class="el" href="matrices_8h_source.html#l02179">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="ad9f5651447193b2c7e669beff9146cc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f5651447193b2c7e669beff9146cc9">&#9670;&nbsp;</a></span>nindex1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex1 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 1 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02293">2293</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, and <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>.</p>
+
+</div>
+</div>
+<a id="a92d2a0f9ffc41e75cf5fffa9cfd601fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92d2a0f9ffc41e75cf5fffa9cfd601fd">&#9670;&nbsp;</a></span>nindex2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex2 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 2 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02296">2296</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, and <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>.</p>
+
+</div>
+</div>
+<a id="a720c024bccf0b33f2f3bd6367611a4fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a720c024bccf0b33f2f3bd6367611a4fa">&#9670;&nbsp;</a></span>nindex3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex3 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 3 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02299">2299</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, and <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>.</p>
+
+</div>
+</div>
+<a id="a2f59dd13534545f9e2641dafee86bc27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f59dd13534545f9e2641dafee86bc27">&#9670;&nbsp;</a></span>nindex4()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex4 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 4 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02302">2302</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, and <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>.</p>
+
+</div>
+</div>
+<a id="aa880f750e9d2e2bf5ec5c41ad3241568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa880f750e9d2e2bf5ec5c41ad3241568">&#9670;&nbsp;</a></span>nindex5()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex5 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 5 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02305">2305</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, and <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>.</p>
+
+</div>
+</div>
+<a id="ab3bd11afa49e36ff28c1d4968796f5a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3bd11afa49e36ff28c1d4968796f5a3">&#9670;&nbsp;</a></span>offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::offset </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Caculate the offset in flat-packed Cy-style, column-major format, required for a given i,j,k. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02350">2350</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, and <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__solid__elements_8cc_source.html#l00040">oomph::RefineablePVDEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_pvd()</a>, <a class="el" href="solid__elements_8cc_source.html#l00172">oomph::PVDEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_pvd()</a>, <a class="el" href="refineable__solid__elements_8cc_source.html#l00674">oomph::RefineablePVDEquationsWithPressure&lt; DIM &gt;::fill_in_generic_residual_contribution_pvd_with_pressure()</a>, and <a class="el" href="solid__elements_8cc_source.html#l01235">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_generic_residual_contribution_pvd_with_pressure()</a>.</p>
+
+</div>
+</div>
+<a id="a3b326990dff5d065648c223cf9bcfb5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b326990dff5d065648c223cf9bcfb5a">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T&amp; <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the round brackets to give access as a(i,j,k,l,m) </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02308">2308</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="matrices_8h_source.html#l01997">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a0d2ef9d9bcc8103b2d60f768ffa60532"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d2ef9d9bcc8103b2d60f768ffa60532">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload a const version for read-only access as a(i,j,k,l,m) </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02319">2319</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="matrices_8h_source.html#l01997">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a3972e47b50ce31ec0317862ce1e18884"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3972e47b50ce31ec0317862ce1e18884">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a>&amp; <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source_tensor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy assignement. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02093">2093</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02293">oomph::RankFiveTensor&lt; T &gt;::nindex1()</a>, <a class="el" href="matrices_8h_source.html#l02296">oomph::RankFiveTensor&lt; T &gt;::nindex2()</a>, <a class="el" href="matrices_8h_source.html#l02299">oomph::RankFiveTensor&lt; T &gt;::nindex3()</a>, <a class="el" href="matrices_8h_source.html#l02302">oomph::RankFiveTensor&lt; T &gt;::nindex4()</a>, <a class="el" href="matrices_8h_source.html#l02305">oomph::RankFiveTensor&lt; T &gt;::nindex5()</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l02176">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="a8fce9375f99c153e3d5b91193996dad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fce9375f99c153e3d5b91193996dad8">&#9670;&nbsp;</a></span>range_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::range_check </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an <code><a class="el" href="classoomph_1_1OomphLibError.html">OomphLibError</a></code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01997">1997</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, and <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02308">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>.</p>
+
+</div>
+</div>
+<a id="aa349a95c9ee9aa66950f1ed88532498c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa349a95c9ee9aa66950f1ed88532498c">&#9670;&nbsp;</a></span>raw_direct_access() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T&amp; <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::raw_direct_access </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Direct access to internal storage of data in flat-packed C-style column-major format. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02335">2335</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__solid__elements_8cc_source.html#l00040">oomph::RefineablePVDEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_pvd()</a>, <a class="el" href="solid__elements_8cc_source.html#l00172">oomph::PVDEquations&lt; DIM &gt;::fill_in_generic_contribution_to_residuals_pvd()</a>, <a class="el" href="refineable__solid__elements_8cc_source.html#l00674">oomph::RefineablePVDEquationsWithPressure&lt; DIM &gt;::fill_in_generic_residual_contribution_pvd_with_pressure()</a>, and <a class="el" href="solid__elements_8cc_source.html#l01235">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_generic_residual_contribution_pvd_with_pressure()</a>.</p>
+
+</div>
+</div>
+<a id="a15c5e1c7dee4142962716be02accb1a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15c5e1c7dee4142962716be02accb1a0">&#9670;&nbsp;</a></span>raw_direct_access() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T&amp; <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::raw_direct_access </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Direct access to internal storage of data in flat-packed C-style column-major format. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02343">2343</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a8d0f38a3627c9d07dbf1106a26f61578"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d0f38a3627c9d07dbf1106a26f61578">&#9670;&nbsp;</a></span>resize() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::resize </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize to a square nxnxnxn tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02176">2176</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, and <a class="el" href="matrices_8h_source.html#l02176">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, and <a class="el" href="matrices_8h_source.html#l02176">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="afdd04cd2a29fb7b8c41f5300200813e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdd04cd2a29fb7b8c41f5300200813e1">&#9670;&nbsp;</a></span>resize() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::resize </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index5</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize to a general tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02179">2179</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="elements_8h_source.html#l01219">oomph::ElementGeometry::T</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a80eeaef66e9252fa5d1d7031e4ec402c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80eeaef66e9252fa5d1d7031e4ec402c">&#9670;&nbsp;</a></span>resize() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::resize </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n_index5</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>initial_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize to a general tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02234">2234</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l01984">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l01981">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l01987">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l01990">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l01993">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="elements_8h_source.html#l01219">oomph::ElementGeometry::T</a>, and <a class="el" href="matrices_8h_source.html#l01978">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a240c4e62ffa0dd3e5dfc3b0063f94c7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a240c4e62ffa0dd3e5dfc3b0063f94c7f">&#9670;&nbsp;</a></span>M</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::M</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>2nd Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01984">1984</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02296">oomph::RankFiveTensor&lt; T &gt;::nindex2()</a>, <a class="el" href="matrices_8h_source.html#l02350">oomph::RankFiveTensor&lt; T &gt;::offset()</a>, <a class="el" href="matrices_8h_source.html#l02308">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l01997">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, and <a class="el" href="matrices_8h_source.html#l02179">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="aeea12f3e80605e2c7b6b4a8ec47bf91c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeea12f3e80605e2c7b6b4a8ec47bf91c">&#9670;&nbsp;</a></span>N</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::N</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>1st Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01981">1981</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02293">oomph::RankFiveTensor&lt; T &gt;::nindex1()</a>, <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l01997">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, and <a class="el" href="matrices_8h_source.html#l02179">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="ab23d40bd6af9279e1e35362249c32855"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab23d40bd6af9279e1e35362249c32855">&#9670;&nbsp;</a></span>P</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::P</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>3rd Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01987">1987</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02299">oomph::RankFiveTensor&lt; T &gt;::nindex3()</a>, <a class="el" href="matrices_8h_source.html#l02350">oomph::RankFiveTensor&lt; T &gt;::offset()</a>, <a class="el" href="matrices_8h_source.html#l02308">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l01997">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, and <a class="el" href="matrices_8h_source.html#l02179">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="a68d3c3387b64dc8124cb0800ab4814a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68d3c3387b64dc8124cb0800ab4814a5">&#9670;&nbsp;</a></span>Q</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::Q</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>4th Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01990">1990</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02302">oomph::RankFiveTensor&lt; T &gt;::nindex4()</a>, <a class="el" href="matrices_8h_source.html#l02350">oomph::RankFiveTensor&lt; T &gt;::offset()</a>, <a class="el" href="matrices_8h_source.html#l02308">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l01997">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, and <a class="el" href="matrices_8h_source.html#l02179">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="a0c348e8860783caf59103dd86f38d1a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c348e8860783caf59103dd86f38d1a6">&#9670;&nbsp;</a></span>R</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::R</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>5th Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01993">1993</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02305">oomph::RankFiveTensor&lt; T &gt;::nindex5()</a>, <a class="el" href="matrices_8h_source.html#l02350">oomph::RankFiveTensor&lt; T &gt;::offset()</a>, <a class="el" href="matrices_8h_source.html#l02308">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02093">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l01997">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, and <a class="el" href="matrices_8h_source.html#l02179">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="ae93e781da0ba64c2c5403099dc75dd3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae93e781da0ba64c2c5403099dc75dd3d">&#9670;&nbsp;</a></span>Tensordata</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T* <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::Tensordata</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Private internal representation as pointer to data. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01978">1978</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02308">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02061">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02335">oomph::RankFiveTensor&lt; T &gt;::raw_direct_access()</a>, <a class="el" href="matrices_8h_source.html#l02179">oomph::RankFiveTensor&lt; T &gt;::resize()</a>, and <a class="el" href="matrices_8h_source.html#l02173">oomph::RankFiveTensor&lt; T &gt;::~RankFiveTensor()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="matrices_8h_source.html">matrices.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:38
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

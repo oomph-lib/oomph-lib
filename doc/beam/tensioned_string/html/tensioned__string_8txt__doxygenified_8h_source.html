@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: tensioned_string.txt_doxygenified.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">tensioned_string.txt_doxygenified.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="tensioned__string_8txt__doxygenified_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">\mainpage Demo problem: Deformation of a string under tension, using Kirchhoff-Love Beam elements.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">In this document, we discuss the solution of a simple one-dimensional</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">solid mechanics problem, using \c oomph-lib&#39;s Kirchhoff-Love beam elements:</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">&lt;TABLE&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">&lt;TR&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">&lt;TD&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">&lt;B&gt;One-dimensional beam problem&lt;/B&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">&lt;/CENTER&gt; </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">Determine the deformation of a pre-stressed, pressure-loaded elastic </span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">beam of length \f$ L^*</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">\f$ and wall thickness \f$ h^* \f$ . In its undeformed configuration,</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">the beam is subject to an axial (2nd Piola-Kirchhoff) pre-stress of </span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">size \f$ \sigma^*_0 \f$ . We wish to compute its deformation when it</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">is loaded by a spatially uniform pressure of size \f$ p^*_{ext} \f$ .</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">\image html string_sketch.gif &quot;A pre-stressed elastic beam under constant pressure loading. &quot; </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">\image latex string_sketch.eps &quot;A pre-stressed elastic beam under constant pressure loading. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">&lt;/TD&gt; </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">&lt;/TR&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">&lt;/TABLE&gt;  </span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">&lt;/CENTER&gt;  </span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">\section non_dim Theory and non-dimensionalisation</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">\c oomph-lib&#39;s beam elements are based on geometrically </span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">nonlinear Kirchhoff-Love beam theory with incrementally linear </span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">constitutive equations (Young&#39;s modulus \f$ E \f$ and Poisson&#39;s ratio </span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">\f$ \nu \f$). The equations are implemented in non-dimensional form,</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">obtained by non-dimensionalising all length on some lengthscale </span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">\f$ {\cal L} \f$, by scaling the stresses and the applied traction on the</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">beam&#39;s effective Young&#39;s modulus \f$ E_{eff} = E/(1-\nu^2) \f$</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">and by non-dimensionalising time on some timescale \f$ {\cal T} \f$ so that</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">the dimensional (identified by an asterisk) and non-dimensional </span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">variables are related by</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">L^* = {\cal L} \ L,</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">h^* = {\cal L} \ h,</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">t^* = {\cal T} \ t,</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">p_{ext}^* = E_{eff} \ p_{ext},</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">and </span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">\sigma_0^* = E_{eff} \ \sigma_0.</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">The beam&#39;s undeformed shape is parametrised by a non-dimensional Lagrangian </span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">coordinate \f$ \xi = \xi^*/</span>{\cal L} <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ so that <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> non-dimensional </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;position <a class="code" href="tensioned__string_8txt.html#a1bf68f458caf71e4a2940409ad61a65f">vector</a> to a material particle on <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a><span class="stringliteral">&#39;s centreline in the </span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="stringliteral">undeformed </span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral">configuration is given by \f$ {\bf r}_w(\xi) \f$ . We denote the</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="stringliteral">unit normal to the beam&#39;</span>s undeformed <a class="code" href="tensioned__string_8txt.html#a4cee0bd9a5db5d4e23638cfe522cc8c4">centreline</a> <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">by \f</a>$ {\bf <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">n</a>} <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$. </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;The applied <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">traction \f</a>$ {\bf <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>} = {\bf <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>}^*/E_{<a class="code" href="tensioned__string_8txt.html#ad2c47dfb0025ed5149f4965debce212d">eff</a>} <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;(a force per unit deformed length of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a>) deforms <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a>, </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;causing its material particles to be displaced to their </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">new</span> positions \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ {\bf R}<a class="code" href="tensioned__string_8txt.html#a37f3397602a9f7c40bdac12121d50880">_w</a>(\xi) <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$; <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> unit</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;normal to <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a><span class="stringliteral">&#39;s deformed centreline is \f$ {\bf N} \f$.</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="stringliteral">The non-dimensional form of the principle of virtual displacements</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="stringliteral">that governs the beams deformation is then given by</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral">\f[</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="stringliteral">\int_0^{L}   \left[ </span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="stringliteral">(\sigma_0 + \gamma) \ \delta  </span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="stringliteral">\gamma +  </span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="stringliteral">\frac{1}{12} h^2 \kappa </span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="stringliteral"> \ \delta \kappa   - </span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="stringliteral">\left(\frac{1}{h} \sqrt{\frac{A}{a}} \   {\bf f} - \Lambda^2 </span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="stringliteral">\frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot  </span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="stringliteral">\delta {\bf R}_w </span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="stringliteral"> \right] \ \sqrt{a} \ d\xi  = 0,</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="stringliteral">\ \ \ \ \ \ \ \ \  (1)</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="stringliteral">\f]</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="stringliteral">where </span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="stringliteral">\f[</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="stringliteral">a =   \frac{\partial {\bf r}_w}{\partial \xi}</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="stringliteral">\cdot \frac{\partial {\bf r}_w}{\partial \xi},</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="stringliteral">\f]</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="stringliteral">and</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="stringliteral">\f[</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="stringliteral">A =   \frac{\partial {\bf R}_w}{\partial \xi}</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="stringliteral">\cdot \frac{\partial {\bf R}_w}{\partial \xi},</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="stringliteral">\f]</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="stringliteral">represent the squares of the lengths of infinitesimal material line elements</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="stringliteral">in the undeformed and the deformed configurations, respectively.</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="stringliteral">\f[</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="stringliteral">ds = \sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS = \sqrt{A} \ d\xi.</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="stringliteral">\f]</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="stringliteral">\f$ A \f$ and  \f$ a \f$  may be interpreted as the &quot;1x1 metric</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="stringliteral">tensors&quot; of the beam&#39;</span>s <a class="code" href="tensioned__string_8txt.html#a4cee0bd9a5db5d4e23638cfe522cc8c4">centreline</a>, in <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> deformed and undeformed</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<a class="code" href="tensioned__string_8txt.html#ab18bc7fd76c74495c8b1c17a11f5136f">configurations</a>, respectively. The <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">ratio \f</a>$ <a class="code" href="tensioned__string_8txt.html#a68e71459c2cad1f6181ad3ca7fe51f4b">\sqrt</a>{A/a} <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ represents</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <span class="stringliteral">&quot;extension ratio&quot;</span> <a class="code" href="tensioned__string_8txt.html#ad80a9a67a4d42a19a3949c35290a5f4e">or</a> <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <span class="stringliteral">&quot;stretch&quot;</span> of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a><span class="stringliteral">&#39;s centreline. </span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="stringliteral"> We represent the curvature of the beam&#39;</span>s <a class="code" href="tensioned__string_8txt.html#a4cee0bd9a5db5d4e23638cfe522cc8c4">centreline</a> before and </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;after <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> deformation <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">by</a></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>[</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;b = {\bf <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">n</a>} \cdot \frac{\partial^2 {\bf</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;r}<a class="code" href="tensioned__string_8txt.html#a37f3397602a9f7c40bdac12121d50880">_w</a>}{d\xi^2}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>]</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">and</a></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>[</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;B = {\bf N} \cdot \frac{\partial^2 {\bf</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;R}<a class="code" href="tensioned__string_8txt.html#a37f3397602a9f7c40bdac12121d50880">_w</a>}{d\xi^2}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>]</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;respectively. The (<span class="stringliteral">&quot;1x1&quot;</span>) strain and and bending &quot;tensors&quot; \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ \gamma \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ and</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;\<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ \kappa \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ are then given by</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;\<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>[</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;\gamma = \frac{1}{2}\left(A-a\right)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;\mbox{\ \ \  and  \ \ \ }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;\kappa = - \left( B-b  \right).</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;\f]</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;Finally,</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>[</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<a class="code" href="tensioned__string_8txt.html#a0d7e6de900a8d08285f6fad1ebd8569f">\Lambda</a> = \frac{{\cal L}}{{\cal T}} <a class="code" href="tensioned__string_8txt.html#a68e71459c2cad1f6181ad3ca7fe51f4b">\sqrt</a>{\frac{\rho}{E_{<a class="code" href="tensioned__string_8txt.html#ad2c47dfb0025ed5149f4965debce212d">eff</a>}}}</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>] </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;is <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> ratio of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> natural timescale of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a><span class="stringliteral">&#39;s in-plane</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="stringliteral">extensional oscillations,</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="stringliteral">\f[</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="stringliteral">{\cal T}_{natural} = {\cal L} \sqrt{\frac{\rho}{E_{eff}}},</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="stringliteral">\f] </span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="stringliteral">to the timescale \f$ {\cal T}\f$ used in the non-dimensionalisation of the</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="stringliteral">equations. \f$ \Lambda^2 \f$ may be interpreted as</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="stringliteral">the non-dimensional wall density, therefore \f$ \Lambda=0 \f$</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="stringliteral">corresponds to the case without wall inertia. </span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="stringliteral">\anchor hermite</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="stringliteral">\c oomph-lib&#39;</span>s \c HermiteBeamElement provides a discretisation of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;variational <a class="code" href="tensioned__string_8txt.html#aaeafd114cb7858c4cef354c486e4c5a2">principle</a>  (1) with one-dimensional, <a class="code" href="tensioned__string_8txt.html#adeac6c155d592d3d850dd9934814dc0a">isoparametric</a>, </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;two-node Hermite solid mechanics <a class="code" href="tensioned__string_8txt.html#addfe39c2be6b23e31150f755bbf37240">elements</a>. In these <a class="code" href="tensioned__string_8txt.html#addfe39c2be6b23e31150f755bbf37240">elements</a>, <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> Eulerian</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;positions of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a3b1c37186e7ba1d9817ed8ad37ba1e2a">nodes</a>, accessible via \c Node::x(...), are regarded </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;as <a class="code" href="tensioned__string_8txt.html#a635adf0d73b4154af9b2340a7d8e8201">unknowns</a>, and Hermite interpolation is used to interpolate </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> position between <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a3b1c37186e7ba1d9817ed8ad37ba1e2a">nodes</a>, so that <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> Eulerian position of material</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;points within an element is given by</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;\<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>[</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;x_i(s) =  \sum_{j=1}^2  \sum_{k=1}^2 X_{ijk} \ <a class="code" href="tensioned__string_8txt.html#affb44333067fec7b02c9ee86ec83eeca">\psi_</a>{jk}(s) </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;\mbox{\ \ \ for $i=1,2$}, </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;\ \ \ \ \ \ \ \ (2)</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;\<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>]</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;where \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ s \in [-1,1] \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ is <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> element<span class="stringliteral">&#39;s 1D local coordinate.</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="stringliteral">The functions \f$ \psi_{jk}(s) \f$ are the one-dimensional</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="stringliteral">Hermite shape functions</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="stringliteral">\f[ \psi_{11}(s) =  \frac{1}{4}\left(s^3 - 3s + 2\right), \f]</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="stringliteral">\f[ \psi_{12}(s) =  \frac{1}{4}\left(s^3 - s^2 - s +1 \right), \f]</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="stringliteral">\f[ \psi_{21}(s) =  \frac{1}{4}\left(2 + 3 s - s^3\right), \f]</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="stringliteral">\f[ \psi_{22}(s) =  \frac{1}{4}\left(s^3 + s^2 -s -1 \right). \f]</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="stringliteral">They have the property that </span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="stringliteral">- \f$ \psi_{j1} = 1 \f$ at node \f$ j \f$ and  \f$ \psi_{j1} = 0 \f$ </span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="stringliteral">  at the other node. Furthermore,  \f$ d\psi_{j1}/ds = 0 \f$ at </span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="stringliteral">  both nodes.</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="stringliteral">- \f$ d\psi_{j2}/ds = 1 \f$ at node \f$ j \f$ and  \f$ d\psi_{j2}/ds = 0 \f$ </span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="stringliteral">  at the other node. Furthermore,  \f$ \psi_{j2} = 0 \f$ at </span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="stringliteral">  both nodes.</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="stringliteral">.</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="stringliteral">The mapping (2) therefore provide an</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="stringliteral">independent interpolation for the position and its derivative</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="stringliteral">with respect to the local coordinate \f$ s \f$. As a result</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="stringliteral">we have two types of (generalised) nodal coordinates:</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="stringliteral">-  \f$ X_{ij1} \f$ represents the \f$ i \f$-th coordinate of the element&#39;</span>s</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;   local node \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ j \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$. </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;-  \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ X_{ij2} <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ represents <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> derivative <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">of \f</a>$ <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">i \f</a>$-th coordinate </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;   with respect to <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> local <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">coordinate \f</a>$ <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">s \f</a>$, evaluated</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;   at <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> element<span class="stringliteral">&#39;s local node \f$ j \f$. </span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="stringliteral">.</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="stringliteral">This representation ensures the</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="stringliteral">\f$ C^1 \f$ continuity of the wall shape, required by</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="stringliteral">the variational principle (1) which contains second derivatives</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="stringliteral">of \f$ {\bf R}_w \f$. Physically, the inter-element continuity </span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="stringliteral">of the slope is enforced by the beam&#39;</span>s nonzero bending stiffness. </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;\anchor solid_bound</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;The two <span class="stringliteral">&quot;types&quot;</span> of <span class="stringliteral">&quot;generalised&quot;</span> positional degrees of freedom</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;are accessible via <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> function \c Node::x_gen(k,i), where</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;\c Node::x_gen(0,i) <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\equiv \f</a>$ \c Node::x(i). </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;The two types of positional degrees of freedom correspond to </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> two types of boundary conditions (pinned and clamped) that can be applied</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;at <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> ends of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a>. Mathematically, <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> number of boundary</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;conditions reflects <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> fact that <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> Euler-Lagrange equations </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> variational <a class="code" href="tensioned__string_8txt.html#aaeafd114cb7858c4cef354c486e4c5a2">principle</a> are of fourth-order.</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;The <a class="code" href="tensioned__string_8txt.html#a3b1c37186e7ba1d9817ed8ad37ba1e2a">nodes</a> of solid mechanics <a class="code" href="tensioned__string_8txt.html#addfe39c2be6b23e31150f755bbf37240">elements</a> are \c SolidNodes,</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;a generalisation of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> basic \c Node <span class="keyword">class </span>that allows</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> nodal positions to be treated as <a class="code" href="tensioned__string_8txt.html#a635adf0d73b4154af9b2340a7d8e8201">unknowns</a>. Its member </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;function \c SolidNode::pin_position(...) allows <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> application</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;of boundary conditions for <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> (generalised) nodal positions. The</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;table below lists several common boundary conditions and their application:</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;&lt;TABLE BORDER=1&gt;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;&lt;TR&gt;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;Boundary condition</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;Mathematical condition</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;Implementation</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;&lt;/TR&gt;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;&lt;TR&gt;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;&lt;B&gt;<a class="code" href="tensioned__string_8txt.html#af4e9ddd0f3f0297e68deb6c0b9ded916">Pinned</a>:&lt;/B&gt;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;&lt;img src=&quot;../figures/pinned.gif&quot;&gt;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ {\bf R}<a class="code" href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">_w \cdot</a> {\bf e}_x = <span class="keyword">const</span>. <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\n</a></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ {\bf R}<a class="code" href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">_w \cdot</a> {\bf e}_y = <span class="keyword">const</span>. <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;\c SolidNode::pin_position(0);\n </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;\c SolidNode::pin_position(1); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n \n</a></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<a class="code" href="tensioned__string_8txt.html#ad80a9a67a4d42a19a3949c35290a5f4e">or</a>, <a class="code" href="tensioned__string_8txt.html#a5a9db24101be6a5dd36584d22fba1631">equivalently</a>, \n \n</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;\c SolidNode::pin_position(0,0);\n </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;\c SolidNode::pin_position(0,1); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n</a></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;&lt;/TR&gt;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;&lt;TR&gt;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;&lt;B&gt;<a class="code" href="tensioned__string_8txt.html#af4e9ddd0f3f0297e68deb6c0b9ded916">Pinned</a>, sliding in <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> x-<a class="code" href="tensioned__string_8txt.html#abcd458936aee30179de1df2080c36de0">direction</a>:&lt;/B&gt;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;&lt;img src=<span class="stringliteral">&quot;../figures/pinned_sliding_x.gif&quot;</span>&gt;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ {\bf R}<a class="code" href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">_w \cdot</a> {\bf e}_y = <span class="keyword">const</span>. <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;\c SolidNode::pin_position(1); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n \n</a></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<a class="code" href="tensioned__string_8txt.html#ad80a9a67a4d42a19a3949c35290a5f4e">or</a>, <a class="code" href="tensioned__string_8txt.html#a5a9db24101be6a5dd36584d22fba1631">equivalently</a>, \n \n</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;\c SolidNode::pin_position(0,1); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n</a></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;&lt;/TR&gt;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;&lt;TR&gt;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;&lt;B&gt;<a class="code" href="tensioned__string_8txt.html#af4e9ddd0f3f0297e68deb6c0b9ded916">Pinned</a>, sliding in <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> y-<a class="code" href="tensioned__string_8txt.html#abcd458936aee30179de1df2080c36de0">direction</a>:&lt;/B&gt;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;&lt;img src=<span class="stringliteral">&quot;../figures/pinned_sliding_y.gif&quot;</span>&gt;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ {\bf R}<a class="code" href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">_w \cdot</a> {\bf e}_x = <span class="keyword">const</span>. <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;\c SolidNode::pin_position(0); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n \n</a></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<a class="code" href="tensioned__string_8txt.html#ad80a9a67a4d42a19a3949c35290a5f4e">or</a>, <a class="code" href="tensioned__string_8txt.html#a5a9db24101be6a5dd36584d22fba1631">equivalently</a>, \n \n</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;\c SolidNode::pin_position(0,0); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n</a></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;&lt;/TR&gt;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;&lt;TR&gt;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;&lt;B&gt;<a class="code" href="tensioned__string_8txt.html#aeebef62f3fd065eb3590b1417520402c">Clamped</a>:&lt;/B&gt;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;&lt;img src=<span class="stringliteral">&quot;../figures/clamped.gif&quot;</span>&gt;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ {\bf R}<a class="code" href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">_w \cdot</a> {\bf e}_x = <span class="keyword">const</span>. <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\n</a></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ {\bf R}<a class="code" href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">_w \cdot</a> {\bf e}_y = <span class="keyword">const</span>. <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\n</a></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ d({\bf R}<a class="code" href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">_w \cdot</a> {\bf e}_y)/d\xi = 0. \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;\c SolidNode::pin_position(0); \n </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;\c SolidNode::pin_position(1); \n </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;\c SolidNode::pin_position(1,1); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n \n</a></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<a class="code" href="tensioned__string_8txt.html#ad80a9a67a4d42a19a3949c35290a5f4e">or</a>, <a class="code" href="tensioned__string_8txt.html#a5a9db24101be6a5dd36584d22fba1631">equivalently</a>, \n \n</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;\c SolidNode::pin_position(0,0); \n </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;\c SolidNode::pin_position(0,1); \n </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;\c SolidNode::pin_position(1,1); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n</a></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;&lt;/TR&gt;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;&lt;TR&gt;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;&lt;B&gt;<a class="code" href="tensioned__string_8txt.html#aeebef62f3fd065eb3590b1417520402c">Clamped</a>, sliding in <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> y-<a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">direction\n</a></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;(symmetry boundary condition!)&lt;/B&gt;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;&lt;img src=<span class="stringliteral">&quot;../figures/clamped_sliding_y.gif&quot;</span>&gt;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ {\bf R}<a class="code" href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">_w \cdot</a> {\bf e}_x = <span class="keyword">const</span>. <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\n</a></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ d({\bf R}<a class="code" href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">_w \cdot</a> {\bf e}_y)/d\xi = 0. \<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>$ </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;&lt;TD&gt;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;\c SolidNode::pin_position(0); \n </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;\c SolidNode::pin_position(1,1); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n \n</a></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<a class="code" href="tensioned__string_8txt.html#ad80a9a67a4d42a19a3949c35290a5f4e">or</a>, <a class="code" href="tensioned__string_8txt.html#a5a9db24101be6a5dd36584d22fba1631">equivalently</a>, \n \n</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;\c SolidNode::pin_position(0,0); \n </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;\c SolidNode::pin_position(1,1); <a class="code" href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">\n</a></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;&lt;/TD&gt;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;&lt;/TR&gt;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;&lt;/TABLE&gt; </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;The \c HermiteBeamElement provides <span class="keywordflow">default</span> values <span class="keywordflow">for</span> all</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;non-dimensional physical <a class="code" href="tensioned__string_8txt.html#aac2a679edac5469fc120f8a583a840d9">parameters</a>:</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;- <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> non-dimensional 2nd Piola Kirchhoff pre-<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">stress \f</a>$ <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\sigma_0 \f</a>$ is zero.</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;- <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> non-dimensional <a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a> <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">thickness \f</a>$ <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">h \f</a>$ is 1/20.</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;- <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> timescale <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">ratio \f</a>$ <a class="code" href="tensioned__string_8txt.html#a0d7e6de900a8d08285f6fad1ebd8569f">\Lambda</a>^2 <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ is 1.</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;- <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> non-dimensional traction <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">vector \f</a>$ {\bf <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>} <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ evaluates to zero.</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;.</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;These values can be over-written via suitable access functions. </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;[Time-dependent <a class="code" href="tensioned__string_8txt.html#ac7f7c69bca7d195d26622a04e370dbda">computations</a> also require <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> specification of</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;a timestepper <span class="keywordflow">for</span> <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#addfe39c2be6b23e31150f755bbf37240">elements</a>. This is demonstrated in </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;&lt;a href=<span class="stringliteral">&quot;../../../beam/unsteady_ring/html/index.html&quot;</span>&gt; another example.&lt;/a&gt;]</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;The <span class="stringliteral">&quot;user&quot;</span> must specify:</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;- <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> undeformed wall <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">shape \f</a>$ {\bf r}<a class="code" href="tensioned__string_8txt.html#a37f3397602a9f7c40bdac12121d50880">_w</a>(\xi) <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>$ as a \c GeomObject</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  -- see <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> &lt;a href=<span class="stringliteral">&quot;../../../poisson/fish_poisson2/html/index.html&quot;</span>&gt;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  earlier example&lt;/a&gt; <span class="keywordflow">for</span> a discussion of \c oomph-lib<span class="stringliteral">&#39;s geometric</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="stringliteral">  objects.</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="stringliteral">.</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="stringliteral">\section results Results</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="stringliteral">The animation shown below illustrates the deformation of the beam</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="stringliteral">under increasing pressure. An increase in pressure initially deflects </span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="stringliteral">the beam vertically downwards. The pressure acts as a &quot;follower</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="stringliteral">load&quot; since it always acts in the direction normal to the deformed</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="stringliteral">beam. This causes the beam to deform into an approximately circular shape </span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="stringliteral">whose radius increases rapidly. </span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="stringliteral">\image html string_animation.gif &quot;Deformation of a pre-stressed elastic beam under constant pressure loading. &quot; </span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="stringliteral">\image latex string_animation.eps &quot;Deformation of a pre-stressed elastic beam under constant pressure loading. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="stringliteral">\section approx An approximate analytical solution</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="stringliteral">Before discussing the details of the numerical solution, we will derive an</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="stringliteral">approximate analytical solution of the problem. The analytical solution</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="stringliteral">will be useful to validate the computational results, and the derivation</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="stringliteral">will allow us to discuss certain aspects of the theory in more detail.</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="stringliteral">We start by parametrising the beam&#39;</span>s undeformed <a class="code" href="tensioned__string_8txt.html#a5154d8d3d243ddba07d8d55b2b720f47">shape</a> <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">as</a></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>[</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;{\bf r}<a class="code" href="tensioned__string_8txt.html#a37f3397602a9f7c40bdac12121d50880">_w</a>(\xi) = </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;\left(</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;\begin{array}{c}</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;\xi \\</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;0</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;\end{array}</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;\right)</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;\mbox{ \ \ \ \ where $\xi  \in [0,L].$}</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>]</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;The 1x1 <span class="stringliteral">&quot;metric tensor&quot;</span> associated with <span class="keyword">this</span> parametrisation is given <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">by</a></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>[</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;a = \frac{{\bf r}<a class="code" href="tensioned__string_8txt.html#a37f3397602a9f7c40bdac12121d50880">_w</a>(\xi)}{d\xi} \cdot \frac{{\bf r}<a class="code" href="tensioned__string_8txt.html#a37f3397602a9f7c40bdac12121d50880">_w</a>(\xi)}{d\xi} = 1,</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>]</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;consistent with <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> fact that <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> Lagrangian <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">coordinate \f</a>$ <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\xi \f</a>$ </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;is <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> arclength along <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> <a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a><span class="stringliteral">&#39;s undeformed centreline.</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="stringliteral">If the beam is thin (so that \f$ h \ll 1 \f$) bending effects</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="stringliteral">will be confined to thin boundary layers near its</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="stringliteral">ends. The beam will therefore behave (approximately)</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="stringliteral">like a &quot;string under tension&quot; and its deformed shape will</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="stringliteral">be an arc of a circle. All material line elements will be stretched</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="stringliteral">by the same amount so that the tension is spatially uniform. The position </span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="stringliteral">vector to the material particles on the beam&#39;</span>s deformed <a class="code" href="tensioned__string_8txt.html#a4cee0bd9a5db5d4e23638cfe522cc8c4">centreline</a> is </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;therefore given <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">by</a></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>[</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;{\bf R}<a class="code" href="tensioned__string_8txt.html#a37f3397602a9f7c40bdac12121d50880">_w</a>(\xi) = </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;\left(</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;\begin{array}{c}</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;\frac{1}{2}\left(1+\frac{\sin(-\alpha/2+\alpha\xi/L)}</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;{\sin(\alpha/2)}\right)  \\</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;\frac{\cos(-\alpha/2+\alpha\xi/L)-\cos(\alpha/2)}</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;{2\sin(\alpha/2)}</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;\end{array}</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;\right)</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;\mbox{ \ \ \ \ where $\xi  \in [0,L].$}</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;\ \ \ \ \ \ \ \ \  (3)</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;\<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>]</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;(See <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> \ref comments <span class="keywordflow">for</span> a more detailed discussion of <span class="keyword">this</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;analytical <a class="code" href="tensioned__string_8txt.html#a81a899e73e4ebbd2f441c5b403c79237">solution</a>.) <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">Here \f</a>$ <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\alpha \f</a>$ is <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> opening angle </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;of <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> circular <a class="code" href="tensioned__string_8txt.html#aeb50e87d7fda68f97d3932121b4ff7e7">arc</a> as shown in <span class="keyword">this</span> sketch:</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;\image html <span class="keywordtype">string</span>.gif <span class="stringliteral">&quot;Sketch illustrating the approximate analytical solution for the problem. &quot;</span> </div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;\image latex <span class="keywordtype">string</span>.eps <span class="stringliteral">&quot;Sketch illustrating the approximate analytical solution for the problem. &quot;</span> width=0.75\textwidth</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;This deformation generates a uniform stretch <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">of</a></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>[</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;\frac{dS}{ds} = <a class="code" href="tensioned__string_8txt.html#a68e71459c2cad1f6181ad3ca7fe51f4b">\sqrt</a>{\frac{A}{a}} = \frac{1}{2} \frac{\alpha}{\sin(\alpha/2)},</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>]</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;corresponding to a uniform <a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">strain </a></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">\f</a>[</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;\gamma = \frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)}</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;- 1 \right).</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;\<a class="code" href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a>]</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;The incremental Hooke<span class="stringliteral">&#39;s law predicts a linear relation between</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="stringliteral">the (2nd Piola Kirchhoff) stress, \f$ \sigma \f$, and the</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="stringliteral">(Green) strain, \f$ \gamma \f$, so that</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="stringliteral">\f[</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="stringliteral">\sigma = \sigma_0 + \gamma,</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="stringliteral">\f]  </span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="stringliteral">where \f$ \sigma_0 \f$ is the axial pre-stress that acts in the undeformed</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="stringliteral">configuration.</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="stringliteral">An elementary force balance shows that the pressure </span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="stringliteral">\f$ p_{ext} \f$ required to deform the beam into the</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="stringliteral">shape specified by (3), is given by &quot;Laplace&#39;</span>s law<span class="stringliteral">&quot;  </span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="stringliteral">\f[ </span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="stringliteral">p_{ext} =\frac{{\tt T}}{R} </span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="stringliteral">\f]</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="stringliteral">where </span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="stringliteral">\f[ </span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="stringliteral">R = \frac{L}{2 \sin(\alpha/2)}</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="stringliteral">\f] </span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="stringliteral">is the radius of the circular arc,</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="stringliteral">and the axial tension \f$ {\tt T} \f$ is given by</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="stringliteral">\f[</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="stringliteral">{\tt T} = h \ (\sigma_0 + \gamma) \ \left|\frac{d{\bf R}_w}{d\xi}\right| </span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="stringliteral">= h \ (\sigma_0 + \gamma) \ \sqrt{A}.</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="stringliteral">\f]</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="stringliteral">In this expression we have used the fact that the 2nd Piola Kirchhoff </span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="stringliteral">stress \f$ \sigma \f$ decomposes the (physical) stress vector into the</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="stringliteral">vector \f$ d{\bf R}_w/d\xi \f$. This vector is tangent to the </span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="stringliteral">deformed centreline but not necessarily a unit vector.</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="stringliteral"> </span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="stringliteral">The pressure required to deform the beam into a circular arc </span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="stringliteral">with opening angle \f$ \alpha \f$ is therefore given by</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="stringliteral">\f[ </span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="stringliteral">p_{ext} =</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="stringliteral"> \frac{\alpha h}{L}</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="stringliteral"> \ \left(\sigma_0 + </span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="stringliteral">\frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)} - 1</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="stringliteral">\right) </span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="stringliteral">\right).</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="stringliteral">\f]</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="stringliteral">To facilitate comparisons with the numerical solutions, we determine</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="stringliteral">the opening angle \f$ \alpha \f$ as a function of the vertical </span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="stringliteral">displacement \f$ d \f$ of the beam&#39;s midpoint by determining the</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="stringliteral">auxiliary angle \f$ \beta \f$ from </span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="stringliteral"> \f[</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="stringliteral">\tan\beta = \frac{2d}{L}.</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="stringliteral">\f]</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="stringliteral">The opening angle then follows from</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="stringliteral">\f[</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="stringliteral">\tan\left(\frac{\alpha}{2}\right) = \tan(\pi -</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="stringliteral"> 2\beta) = - \tan 2\beta = \frac{2\tan\beta}{\tan^{2}\beta -1}.</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="stringliteral">\f]</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="stringliteral">Here is a comparison between the computed and analytically predicted</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="stringliteral">values for the pressure \f$ p_{ext} \f$, required to deflect</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="stringliteral">the beam&#39;s midpoint by the specified displacement, \f$ d \f$.</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="stringliteral"> </span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="stringliteral">\image html trace.gif &quot;</span>Comparison between <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> computed and analytical solutions. <span class="stringliteral">&quot; </span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="stringliteral">\image latex trace.eps &quot;</span>Comparison between <a class="code" href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a> computed and analytical solutions. <span class="stringliteral">&quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="stringliteral">&lt;TABLE&gt;</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="stringliteral">&lt;TR&gt;</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="stringliteral">&lt;TD bgcolor=&quot;</span>cornsilk<span class="stringliteral">&quot;&gt;</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="stringliteral">&lt;CENTER&gt;&lt;B&gt;Comment: Geometric and constitutive nonlinearities&lt;/B&gt;&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="stringliteral">The comparison between the computational results and the analytical </span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="stringliteral">predictions is very satisfying but is important to realise that</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="stringliteral">the agreement only validates the numerical solution, not the</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="stringliteral">physical model. \c oomph-lib&#39;s \c HermiteBeamElement is based on a \b geometrically </span></div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="stringliteral">\b  nonlinear theory, implying that the kinematics of the deformation</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="stringliteral">are captured exactly for arbitrarily large displacements and</span></div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="stringliteral">rotations. However, the use of \b incrementally \b linear \b constitutive </span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="stringliteral">\b equations in the variational principle</span></div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="stringliteral">(1) can only be justified if the strain is small. This</span></div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="stringliteral">is clearly not the case for the deformations shown above. The</span></div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="stringliteral">combination of geometric nonlinearity with linear constitutive</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="stringliteral">equations can, however, be justified in applications in which the beam </span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="stringliteral">undergoes large displacements with little extension of its centreline.</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="stringliteral">This typically occurs in stability problems, such as the</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="stringliteral">&lt;a href=&quot;</span>../../steady_ring/html/index.html<span class="stringliteral">&quot;&gt;</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="stringliteral">buckling of a circular ring under external pressure&lt;/a&gt;, considered</span></div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="stringliteral">in &lt;a href=&quot;</span>../../steady_ring/html/index.html<span class="stringliteral">&quot;&gt;another example&lt;/a&gt;.</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="stringliteral">&lt;/TD&gt; </span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="stringliteral">&lt;/TR&gt;</span></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="stringliteral">&lt;/TABLE&gt;</span></div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="stringliteral">&lt;HR&gt;   </span></div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="stringliteral">\section global Global parameters and functions</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="stringliteral">The namespace \c Global_Physical_Variables contains the dimensionless beam</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="stringliteral">thickness, \f$ h \f$, the dimensionless pre-stress,</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="stringliteral">\f$ \sigma_{0} \f$, and the pressure load, \f$ p_{ext} \f$, as well as</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="stringliteral">the function \c Global_Physical_Variables::load() </span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="stringliteral">which computes the load vector in the form required by </span></div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="stringliteral">the \c HermiteBeamElements. (The function&#39;s arguments allow the load vector</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="stringliteral">to be a function of the Lagrangian and Eulerian coordinates, and</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="stringliteral">the unit normal to the deformed beam, \f$ {\bf N} \f$.)</span></div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="stringliteral"> </span></div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="stringliteral">\dontinclude tensioned_string.cc</span></div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="stringliteral">\skipline start_of_namespace</span></div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="stringliteral">\until end of namespace</span></div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="stringliteral">\section main The driver code</span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="stringliteral">The main code is very short. The physical parameters</span></div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="stringliteral">\f$ h \f$, \f$ \sigma_{0} \f$ and \f$ L \f$ are initialised and the</span></div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="stringliteral">problem is constructed using 10 elements. Following the usual</span></div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="stringliteral">self-test, we call the function ElasticBeamProblem::parameter_study()</span></div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="stringliteral">to compute the deformation of the beam for a range of external</span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="stringliteral">pressures.</span></div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;<span class="stringliteral">\dontinclude tensioned_string.cc</span></div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="stringliteral">\skipline start_of_main</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="stringliteral">\until end of main</span></div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;<span class="stringliteral">\section problem The problem class</span></div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="stringliteral">The problem class has five member functions, only two of which are</span></div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="stringliteral">non-trivial:</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;<span class="stringliteral"> - the problem constructor, \c ElasticBeamProblem(...), whose</span></div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="stringliteral">   arguments specify the number of elements and the beam&#39;s</span></div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;<span class="stringliteral">   undeformed length.</span></div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;<span class="stringliteral"> - the function \c parameter_study(), which computes the beam&#39;s</span></div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="stringliteral">   deformation for a range of external pressures.</span></div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="stringliteral">.</span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="stringliteral"> In the present problem, the functions </span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="stringliteral">\c Problem::actions_before_newton_solve() and \c</span></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="stringliteral">Problem::actions_after_newton_solve() are not required, so remain</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="stringliteral">empty. The function </span></div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="stringliteral">\c ElasticBeamProblem::mesh_pt() overloads the</span></div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="stringliteral">(virtual) function \c Problem::mesh_pt() to return a pointer</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="stringliteral">to the specific mesh used in this problem. This avoids explicit re-casts</span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="stringliteral">when member functions of the specific mesh need to be accessed.</span></div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="stringliteral"> The class also includes three private data members which store</span></div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="stringliteral">a pointer to a node at which the displacement is documented,</span></div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="stringliteral">the length of the domain, and a pointer to the geometric object</span></div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;<span class="stringliteral">that specifies the beam&#39;s undeformed shape.</span></div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;<span class="stringliteral">\dontinclude tensioned_string.cc</span></div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;<span class="stringliteral">\skipline start_of_problem_class</span></div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;<span class="stringliteral">\until end of problem class</span></div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;<span class="stringliteral"> </span></div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="stringliteral">\section constructor The Problem constructor</span></div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="stringliteral">We start by creating the undeformed centreline of the beam as a</span></div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="stringliteral">\c StraightLine, one of \c oomph-lib&#39;s standard geometric objects. </span></div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="stringliteral">\skipline start_of_constructor   </span></div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="stringliteral">\until Undef_beam_pt</span></div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="stringliteral"> We then construct the a one-dimensional Lagrangian mesh in</span></div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="stringliteral"> two-dimensional space, using the previously-constructed geometric</span></div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="stringliteral"> object to set the initial positions of the nodes. </span></div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="stringliteral"> \skipline Create</span></div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="stringliteral"> \until OneDLagrangianMesh</span></div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="stringliteral">The \c OneDLagrangianMesh is a \c SolidMesh whose constituent nodes are</span></div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="stringliteral">\c SolidNodes. These nodes store not only their (variable) 2D Eulerian </span></div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="stringliteral">position, accessible via \c SolidNode::x(...), but also their (fixed) </span></div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="stringliteral">1D Lagrangian coordinates, accessible via \c SolidNode::xi(...).</span></div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="stringliteral">The  \c OneDLagrangianMesh constructor assigns the nodes&#39; Lagrangian</span></div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="stringliteral">coordinate, \f$ \xi \f$, by spacing them evenly in the</span></div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="stringliteral">range \f$ \xi \in [0,L] \f$. The \c GeomObject pointed to by</span></div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="stringliteral">\c Undef_beam_pt, provides a parametrisation of the beam&#39;s</span></div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;<span class="stringliteral"> undeformed shape in the form \f$ {\bf r}(\xi) \f$, and this is used</span></div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="stringliteral">to determine the nodes&#39;s initial Eulerian position.</span></div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="stringliteral"> Next we pin the nodal positions on both boundaries</span></div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;<span class="stringliteral">\skipline Set the </span></div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;<span class="stringliteral">\until }</span></div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;<span class="stringliteral"> We then loop over the elements and set the pointers to the</span></div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;<span class="stringliteral">physical parameters (the pre-stress and the thickness), the </span></div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="stringliteral">function pointer to the load vector, and the pointer to the </span></div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;<span class="stringliteral">geometric object that specifies the undeformed beam shape.</span></div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;<span class="stringliteral"> \skipline Loop</span></div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="stringliteral"> \until end of loop over elements</span></div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;<span class="stringliteral"> We choose a node near the centre of the beam to monitor the</span></div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;<span class="stringliteral">displacements. (If the total number of nodes is even, the control</span></div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;<span class="stringliteral">node will not be located at the beam&#39;s exact centre; its vertical </span></div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="stringliteral">displacement will therefore differ from the analytical solution</span></div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;<span class="stringliteral">that we output in \c doc_solution(...) -- in this case we issue a </span></div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;<span class="stringliteral">suitable warning.)</span></div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="stringliteral"> \skipline Choose</span></div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="stringliteral"> \until n_nod+1</span></div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="stringliteral"> Finally, we assign the equation numbers</span></div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;<span class="stringliteral"> \skipline Assign</span></div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;<span class="stringliteral"> \until end of</span></div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;<span class="stringliteral">\section param The Parameter Study</span></div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="stringliteral"> The function ElasticBeamProblem::parameter_study() is used to perform a</span></div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="stringliteral">parameter study, computing the beam&#39;s deformation for a range</span></div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<span class="stringliteral">of external pressures. During the solution of this</span></div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="stringliteral">particular problem, the maximum residual in the Newton iteration</span></div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;<span class="stringliteral">can be greater than the default maximum value of 10.0. </span></div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;<span class="stringliteral">We increase the default value by assigning a (much) larger value to</span></div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;<span class="stringliteral">\c Problem::Max_residuals.</span></div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;<span class="stringliteral">Next, we choose the increment in the control parameter (the external pressure),</span></div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;<span class="stringliteral">set its initial value and open an output file that will contain</span></div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;<span class="stringliteral">the value of the external pressure, the mid-point displacement and</span></div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;<span class="stringliteral">external pressure computed from the analytical solution. </span></div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<span class="stringliteral">We also create an output stream and a string </span></div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="stringliteral">that will be used to write the complete solution for each value of the </span></div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;<span class="stringliteral">external pressure.</span></div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="stringliteral"> In the loop, we increment the external pressure \f$ P_{ext} \f$, </span></div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;<span class="stringliteral">solve the problem, calculate the analytical prediction for the</span></div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="stringliteral">pressure that is required to achieve the computed deformation, plot </span></div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="stringliteral">the solution and write the pressure, the displacement and exact </span></div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;<span class="stringliteral">pressure to the trace file.</span></div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="stringliteral"> \skipline start_of_parameter</span></div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="stringliteral"> \until end of parameter</span></div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="stringliteral">  </span></div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="stringliteral">\section comments Exercises and Comments</span></div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="stringliteral">-# Modify the code so that one end of the beam is no longer fixed in</span></div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="stringliteral">   space. What happens? Why? </span></div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="stringliteral">-# Increase the bending effects by increasing the beam&#39;s</span></div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="stringliteral">   thickness to \f$ h=0.1 \f$, say, and by &quot;</span>clamping<span class="stringliteral">&quot; its ends,</span></div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="stringliteral">   so that \f$ d({\bf R}_w(\xi)\cdot {\bf e}_y)/d\xi = 0 \f$ at \f$ \xi=0 \f$</span></div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="stringliteral">   and \f$ \xi=L \f$. This condition can be enforced by pinning the</span></div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="stringliteral">   &quot;</span>type 1<span class="stringliteral">&quot; (slope) positional degree of freedom in the vertical</span></div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="stringliteral">   (1) direction at both ends; this requires the insertion of the statement</span></div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="stringliteral">   \code</span></div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="stringliteral">   mesh_pt()-&gt;boundary_node_pt(b,0)-&gt;pin_position(1,1); </span></div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="stringliteral">   \endcode</span></div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="stringliteral">   in the loop in the \c Problem constructor.</span></div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="stringliteral">   You will have to adjust the number of elements</span></div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="stringliteral">   to fully resolve the bending boundary layers. </span></div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="stringliteral">-# \c oomph-lib&#39;s default \anchor newton_cust nonlinear solver, \c</span></div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="stringliteral">   Problem::newton_solve(...), provides an implementation of</span></div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="stringliteral">   the Newton method, which has the attractive feature</span></div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="stringliteral">   that it converges quadratically -- provided </span></div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="stringliteral">   a good initial guess for the solution is available. Good initial guesses </span></div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="stringliteral">   can often (usually?) be generated by computing the solution via a </span></div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="stringliteral">   sequence of substeps, as in the above example where we started with</span></div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="stringliteral">   a known solution (the undeformed beam -- the exact solution </span></div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="stringliteral">   for \f$ p_{ext} = p_{ext}^{(0)} =0 \f$ ) and used it as the</span></div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="stringliteral">   initial guess for the solution at a small external</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="stringliteral">   pressure, \f$ p_{ext}^{(1)} \f$. When the Newton method converged,</span></div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="stringliteral">   we used the computed</span></div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="stringliteral">   solution as the initial guess for the solution at a</span></div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="stringliteral">   slightly larger pressure, \f$ p_{ext}^{(2)} \f$, etc. </span></div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="stringliteral">   If the increase in the load (or some other control parameter) is</span></div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="stringliteral">   too large, the Newton method will diverge. To avoid unnecessary</span></div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="stringliteral">   computations, the Newton iteration is terminated if:</span></div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="stringliteral">   - the number of iterations exceeds \c</span></div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="stringliteral">     Problem::Max_newton_iterations (which has a default value of 10)</span></div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="stringliteral">   - the residual exceeds \c Problem::Max_residuals (which has a </span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="stringliteral">     default value of 10.0)</span></div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="stringliteral">   .</span></div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="stringliteral">   The Newton method continues until the maximum residual</span></div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="stringliteral">   has been reduced to  \c Problem::Newton_solver_tolerance, which has</span></div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="stringliteral">   a default value of \f$ 10^{-8} \f$.</span></div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="stringliteral">   \n\n</span></div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="stringliteral">   All three values are protected data members of the \c Problem base class</span></div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="stringliteral">   and can therefore be changed in any specific \c Problem. For</span></div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="stringliteral">   instance, in the problem considered above, the undeformed beam</span></div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="stringliteral">   provides a poor approximation of its equilibrium shape at the </span></div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="stringliteral">   first pressure value.</span></div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="stringliteral">   The Newton method still converges (very slowly initially, then</span></div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="stringliteral">   quadratically as it approaches the exact solution), even though</span></div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="stringliteral">   the initial maximum residual has a relatively large value of </span></div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="stringliteral">   19.6. Here are some exercises that explore the convergence</span></div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="stringliteral">   characteristics of the Newton method:</span></div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="stringliteral">   -# Experiment with the Newton solver and find the largest</span></div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="stringliteral">      value for the load increment, \c pext_increment, for which</span></div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="stringliteral">      the Newton method still converges.</span></div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="stringliteral">   -# Explain why the Newton method converges </span></div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="stringliteral">      very slowly for small values of \f$ p_{ext} \f$ and much more rapidly</span></div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="stringliteral">      at larger values, even though the load increment, \c</span></div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="stringliteral">      pext_increment, remains constant.</span></div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="stringliteral">   -# Compare the solutions for different values of </span></div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="stringliteral">      \c Problem::Newton_solver_tolerance. Is the default value  </span></div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="stringliteral">      \f$ 10^{-8} \f$ adequate? Reduce it to  \f$ 10^{-12} \f$ and</span></div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="stringliteral">      \f$ 10^{-18} \f$. What do you observe?  </span></div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="stringliteral">\section sources Source files for this tutorial</span></div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="stringliteral">- The source files for this tutorial are located in the directory:</span></div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="stringliteral">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="stringliteral">&lt;A HREF=&quot;</span></div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;../../../../</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;demo_drivers/<a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a>/tensioned_string/</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="stringliteral">&quot;&gt;</span></div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="stringliteral">demo_drivers/beam/tensioned_string/</span></div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="stringliteral">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="stringliteral">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="stringliteral">- The driver code is: </span></div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="stringliteral">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="stringliteral">&lt;A HREF=&quot;</span></div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;../../../../</div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;demo_drivers/<a class="code" href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a>/tensioned_string/tensioned_string.cc</div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="stringliteral">&quot;&gt;</span></div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="stringliteral">demo_drivers/beam/tensioned_string/tensioned_string.cc</span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="stringliteral">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="stringliteral">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="stringliteral">.</span></div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="stringliteral">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="stringliteral">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="stringliteral">\section pdf PDF file</span></div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="stringliteral">A &lt;a href=&quot;</span>../latex/refman.pdf<span class="stringliteral">&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="stringliteral">**/</span></div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;<span class="stringliteral"></span> </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="atensioned__string_8txt_html_a210227db599134648a62985e20ab4926"><div class="ttname"><a href="tensioned__string_8txt.html#a210227db599134648a62985e20ab4926">beam</a></div><div class="ttdeci">and the pressure f as well as the function c and the unit normal to the deformed beam</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00505">tensioned_string.txt:505</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a7fe461682bc07ea1c6dcbcf178e85022"><div class="ttname"><a href="tensioned__string_8txt.html#a7fe461682bc07ea1c6dcbcf178e85022">oscillations</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed respectively The ratio f f[\Lambda=\frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}}\f] is the ratio of the natural timescale of the beam s in plane extensional oscillations</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00127">tensioned_string.txt:127</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a3ce9132b2accc26a8e67d561a46891e5"><div class="ttname"><a href="tensioned__string_8txt.html#a3ce9132b2accc26a8e67d561a46891e5">Undef_beam_pt</a></div><div class="ttdeci">and the pressure f as well as the function c and the unit normal to the deformed L f The c GeomObject pointed to by c Undef_beam_pt</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00586">tensioned_string.txt:586</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a81a899e73e4ebbd2f441c5b403c79237"><div class="ttname"><a href="tensioned__string_8txt.html#a81a899e73e4ebbd2f441c5b403c79237">solution</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton which has the attractive feature that it converges quadratically provided a good initial guess for the solution is available Good initial guesses can as in the above example where we started with a known solution(the undeformed beam -- the exact solution for \f$ p_{ext}=p_{ext}^{(0)}=0 \f$) and used it as the initial guess for the solution at a small external pressure</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a0d7e6de900a8d08285f6fad1ebd8569f"><div class="ttname"><a href="tensioned__string_8txt.html#a0d7e6de900a8d08285f6fad1ebd8569f">Lambda</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed respectively The ratio f f[\Lambda=\frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}}\f] is the ratio of the natural timescale of the beam s in plane extensional f[{\cal T}_{natural}={\cal L} \sqrt{\frac{\rho}{E_{eff}}},\f] to the timescale therefore f Lambda</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00133">tensioned_string.txt:133</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a0c2d0d7da19e135a21f1e7d2393f0e8f"><div class="ttname"><a href="tensioned__string_8txt.html#a0c2d0d7da19e135a21f1e7d2393f0e8f">displacement</a></div><div class="ttdeci">f corresponding to a uniform strain f[\gamma=\frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)}- 1 \right).\f] The incremental Hooke s law predicts a linear relation between f sigma and f gamma so that f displacement[\sigma=\sigma_0+\gamma,\f] where f sigma_0 f is the axial pre stress that acts in the undeformed configuration An elementary force balance shows that the pressure f is given by Laplace s law f[p_{ext}=\frac{{\tt T}}{R} \f] where f[R=\frac{L}{2 \sin(\alpha/2)}\f] is the radius of the circular and the axial tension we determine the opening angle f alpha f as a function of the vertical displacement f d f of the beam s midpoint by determining the auxiliary angle f beta f from f[\tan\beta=\frac{2d}{L}.\f] The opening angle then follows from f[\tan\left(\frac{\alpha}{2}\right)=\tan(\pi - 2\beta)=- \tan 2\beta=\frac{2\tan\beta}{\tan^{2}\beta -1}.\f] Here is a comparison between the computed and analytically predicted values for the pressure f required to deflect the beam s midpoint by the specified</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00456">tensioned_string.txt:456</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_adeac6c155d592d3d850dd9934814dc0a"><div class="ttname"><a href="tensioned__string_8txt.html#adeac6c155d592d3d850dd9934814dc0a">isoparametric</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed respectively The ratio f f[\Lambda=\frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}}\f] is the ratio of the natural timescale of the beam s in plane extensional f[{\cal T}_{natural}={\cal L} \sqrt{\frac{\rho}{E_{eff}}},\f] to the timescale therefore f isoparametric</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00139">tensioned_string.txt:139</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a4cee0bd9a5db5d4e23638cfe522cc8c4"><div class="ttname"><a href="tensioned__string_8txt.html#a4cee0bd9a5db5d4e23638cfe522cc8c4">centreline</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s centreline</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00100">tensioned_string.txt:100</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_affb44333067fec7b02c9ee86ec83eeca"><div class="ttname"><a href="tensioned__string_8txt.html#affb44333067fec7b02c9ee86ec83eeca">psi_</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed respectively The ratio f f[\Lambda=\frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}}\f] is the ratio of the natural timescale of the beam s in plane extensional f[{\cal T}_{natural}={\cal L} \sqrt{\frac{\rho}{E_{eff}}},\f] to the timescale therefore f two node Hermite solid mechanics elements In these the Eulerian positions of the accessible via c are regarded as and Hermite interpolation is used to interpolate the position between the so that the Eulerian position of material points within an element is given by f[x_i(s)=\sum_{j=1}^2 \sum_{k=1}^2 X_{ijk} \ \psi_{jk}(s) \mbox{\ \ \ for $i=1, 2$}, \ \ \ \ \ \ \ \ @E[Hermite]@\f] where f s in[-1, 1] f is the element s coordinate The functions f psi_</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00151">tensioned_string.txt:151</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a455976bc7a1db60339d3128b3f226894"><div class="ttname"><a href="tensioned__string_8txt.html#a455976bc7a1db60339d3128b3f226894">method</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton method</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00671">tensioned_string.txt:671</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_ad80a9a67a4d42a19a3949c35290a5f4e"><div class="ttname"><a href="tensioned__string_8txt.html#ad80a9a67a4d42a19a3949c35290a5f4e">or</a></div><div class="ttdeci">n n or</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00224">tensioned_string.txt:224</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a73f7b7b87fc90c60011b5834d777fb22"><div class="ttname"><a href="tensioned__string_8txt.html#a73f7b7b87fc90c60011b5834d777fb22">above</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton which has the attractive feature that it converges quadratically provided a good initial guess for the solution is available Good initial guesses can as in the above example where we started with a known f we used the computed solution as the initial guess for the solution at a slightly larger f etc If the increase in the the Newton method will diverge To avoid unnecessary the Newton iteration is terminated which has a default value of in the problem considered above</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00697">tensioned_string.txt:697</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a3b1c37186e7ba1d9817ed8ad37ba1e2a"><div class="ttname"><a href="tensioned__string_8txt.html#a3b1c37186e7ba1d9817ed8ad37ba1e2a">nodes</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed respectively The ratio f f[\Lambda=\frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}}\f] is the ratio of the natural timescale of the beam s in plane extensional f[{\cal T}_{natural}={\cal L} \sqrt{\frac{\rho}{E_{eff}}},\f] to the timescale therefore f two node Hermite solid mechanics elements In these the Eulerian positions of the nodes</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00141">tensioned_string.txt:141</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a1bf68f458caf71e4a2940409ad61a65f"><div class="ttname"><a href="tensioned__string_8txt.html#a1bf68f458caf71e4a2940409ad61a65f">vector</a></div><div class="ttdeci">and the pressure f as well as the function c and the unit normal to the deformed L f The c GeomObject pointed to by c provides a parametrisation of the beam s undeformed shape in the form and this is used to determine the nodes s initial Eulerian position Next we pin the nodal positions on both boundaries skipline Set the until We then loop over the elements and set the pointers to the physical the function pointer to the load vector</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00599">tensioned_string.txt:599</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a5a9db24101be6a5dd36584d22fba1631"><div class="ttname"><a href="tensioned__string_8txt.html#a5a9db24101be6a5dd36584d22fba1631">equivalently</a></div><div class="ttdeci">n n equivalently</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00224">tensioned_string.txt:224</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html"><div class="ttname"><a href="classElasticBeamProblem.html">ElasticBeamProblem</a></div><div class="ttdoc">Beam problem object.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00063">tensioned_string.cc:63</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html_a2da3cb02ce953da67fb27742e20774a5"><div class="ttname"><a href="classElasticBeamProblem.html#a2da3cb02ce953da67fb27742e20774a5">ElasticBeamProblem::parameter_study</a></div><div class="ttdeci">void parameter_study()</div><div class="ttdoc">Conduct a parameter study.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00172">tensioned_string.cc:172</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_aeb50e87d7fda68f97d3932121b4ff7e7"><div class="ttname"><a href="tensioned__string_8txt.html#aeb50e87d7fda68f97d3932121b4ff7e7">arc</a></div><div class="ttdeci">f corresponding to a uniform strain f[\gamma=\frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)}- 1 \right).\f] The incremental Hooke s law predicts a linear relation between f sigma and f gamma so that f arc[\sigma=\sigma_0+\gamma,\f] where f sigma_0 f is the axial pre stress that acts in the undeformed configuration An elementary force balance shows that the pressure f is given by Laplace s law f[p_{ext}=\frac{{\tt T}}{R} \f] where f[R=\frac{L}{2 \sin(\alpha/2)}\f] is the radius of the circular</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00418">tensioned_string.txt:418</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a049896ccea91c4609d6c261ddd1c2945"><div class="ttname"><a href="tensioned__string_8txt.html#a049896ccea91c4609d6c261ddd1c2945">Comment</a></div><div class="ttdeci">f corresponding to a uniform strain f[\gamma=\frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)}- 1 \right).\f] The incremental Hooke s law predicts a linear relation between f sigma and f gamma so that f Comment[\sigma=\sigma_0+\gamma,\f] where f sigma_0 f is the axial pre stress that acts in the undeformed configuration An elementary force balance shows that the pressure f is given by Laplace s law f[p_{ext}=\frac{{\tt T}}{R} \f] where f[R=\frac{L}{2 \sin(\alpha/2)}\f] is the radius of the circular and the axial tension we determine the opening angle f alpha f as a function of the vertical displacement f d f of the beam s midpoint by determining the auxiliary angle f beta f from f[\tan\beta=\frac{2d}{L}.\f] The opening angle then follows from f[\tan\left(\frac{\alpha}{2}\right)=\tan(\pi - 2\beta)=- \tan 2\beta=\frac{2\tan\beta}{\tan^{2}\beta -1}.\f] Here is a comparison between the computed and analytically predicted values for the pressure f required to deflect the beam s midpoint by the specified f d f I w textwidth trace Comparison between the computed and analytical solutions&lt; TABLE &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt;</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00467">tensioned_string.txt:467</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a5154d8d3d243ddba07d8d55b2b720f47"><div class="ttname"><a href="tensioned__string_8txt.html#a5154d8d3d243ddba07d8d55b2b720f47">shape</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed respectively The ratio f f[\Lambda=\frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}}\f] is the ratio of the natural timescale of the beam s in plane extensional f[{\cal T}_{natural}={\cal L} \sqrt{\frac{\rho}{E_{eff}}},\f] to the timescale therefore f two node Hermite solid mechanics elements In these the Eulerian positions of the accessible via c are regarded as and Hermite interpolation is used to interpolate the position between the so that the Eulerian position of material points within an element is given by f[x_i(s)=\sum_{j=1}^2 \sum_{k=1}^2 X_{ijk} \ \psi_{jk}(s) \mbox{\ \ \ for $i=1, 2$}, \ \ \ \ \ \ \ \ @E[Hermite]@\f] where f s in[-1, 1] f is the element s coordinate The functions f f d f evaluated at the element s node f j f This representation ensures the f C f continuity of the wall shape</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00176">tensioned_string.txt:176</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a68e71459c2cad1f6181ad3ca7fe51f4b"><div class="ttname"><a href="tensioned__string_8txt.html#a68e71459c2cad1f6181ad3ca7fe51f4b">sqrt</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed respectively The ratio f sqrt</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00101">tensioned_string.txt:101</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a0545fb0333258c9afc73f0260a6f80ad"><div class="ttname"><a href="tensioned__string_8txt.html#a0545fb0333258c9afc73f0260a6f80ad">the</a></div><div class="ttdeci">f corresponding to a uniform strain f[\gamma=\frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)}- 1 \right).\f] The incremental Hooke s law predicts a linear relation betwee the)(2nd Piola Kirchhoff) stress</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a74a2fbb237b08e5ff6a382e8822d47d7"><div class="ttname"><a href="tensioned__string_8txt.html#a74a2fbb237b08e5ff6a382e8822d47d7">n</a></div><div class="ttdeci">n&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; sliding in the y direction n(symmetry boundary condition!)&lt;/B &gt;&lt; img src</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a5e3a85d492797b3d2899c74c9fd3df56"><div class="ttname"><a href="tensioned__string_8txt.html#a5e3a85d492797b3d2899c74c9fd3df56">theory</a></div><div class="ttdeci">f corresponding to a uniform strain f[\gamma=\frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)}- 1 \right).\f] The incremental Hooke s law predicts a linear relation between f sigma and f gamma so that f theory[\sigma=\sigma_0+\gamma,\f] where f sigma_0 f is the axial pre stress that acts in the undeformed configuration An elementary force balance shows that the pressure f is given by Laplace s law f[p_{ext}=\frac{{\tt T}}{R} \f] where f[R=\frac{L}{2 \sin(\alpha/2)}\f] is the radius of the circular and the axial tension we determine the opening angle f alpha f as a function of the vertical displacement f d f of the beam s midpoint by determining the auxiliary angle f beta f from f[\tan\beta=\frac{2d}{L}.\f] The opening angle then follows from f[\tan\left(\frac{\alpha}{2}\right)=\tan(\pi - 2\beta)=- \tan 2\beta=\frac{2\tan\beta}{\tan^{2}\beta -1}.\f] Here is a comparison between the computed and analytically predicted values for the pressure f required to deflect the beam s midpoint by the specified f d f I w textwidth trace Comparison between the computed and analytical solutions&lt; TABLE &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt; not the physical model c oomph lib s c HermiteBeamElement is based on a b geometrically b nonlinear</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00469">tensioned_string.txt:469</a></div></div>
+<div class="ttc" id="atensioned__string_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="tensioned__string_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver for beam (string under tension) test problem.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00257">tensioned_string.cc:257</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_ad9c9b7d4090e3fc2be2b21456fd69117"><div class="ttname"><a href="tensioned__string_8txt.html#ad9c9b7d4090e3fc2be2b21456fd69117">often</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton which has the attractive feature that it converges quadratically provided a good initial guess for the solution is available Good initial guesses can often(usually?) be generated by computing the solution via a sequence of substeps</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_ad2c47dfb0025ed5149f4965debce212d"><div class="ttname"><a href="tensioned__string_8txt.html#ad2c47dfb0025ed5149f4965debce212d">eff</a></div><div class="ttdeci">E/(1-\nu^2) \f$ and by non-dimensionalising time on some timescale \f$ {\cal T} \f$ so that the dimensional(identified by an asterisk) and non-dimensional variables are related by \f[L^ *={\cal L} \ L, \f] \f[h^ *={\cal L} \ h, \f] \f[t^ *={\cal T} \ t, \f] \f[p_{ext}^ *=E_{eff} \ p_{ext}, \f] and \f[\sigma_0^ *=E_{eff} \ \sigma_0. \f] The beam 's undeformed shape is parametrised by a non-dimensional Lagrangian coordinate \f$ \xi=\xi^ */{\cal L} \f$ so that the non-dimensional position vector to a material particle on the beam 's centreline in the undeformed configuration is given by \f$ {\bf r}_w(\xi) \f$ . We denote the unit normal to the beam 's undeformed centreline by \f$ {\bf n} \f$. The applied traction \f$ {\bf f}={\bf f}^ */E_{eff} \f$(a force per unit deformed length of the beam) deforms the beam, causing its material particles to be displaced to their new positions \f$ {\bf R}_w(\xi) \f$ eff</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00066">tensioned_string.txt:66</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a1ce091cd301555b09a13f3432beaf2fd"><div class="ttname"><a href="tensioned__string_8txt.html#a1ce091cd301555b09a13f3432beaf2fd">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00001">tensioned_string.txt:1</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a5c02d1b02e7b042490b3056b66f74505"><div class="ttname"><a href="tensioned__string_8txt.html#a5c02d1b02e7b042490b3056b66f74505">p_</a></div><div class="ttdeci">f corresponding to a uniform strain f[\gamma=\frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)}- 1 \right).\f] The incremental Hooke s law predicts a linear relation between f sigma and f gamma so that f p_[\sigma=\sigma_0+\gamma,\f] where f sigma_0 f is the axial pre stress that acts in the undeformed configuration An elementary force balance shows that the pressure f</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00409">tensioned_string.txt:409</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_ac7f7c69bca7d195d26622a04e370dbda"><div class="ttname"><a href="tensioned__string_8txt.html#ac7f7c69bca7d195d26622a04e370dbda">computations</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton which has the attractive feature that it converges quadratically provided a good initial guess for the solution is available Good initial guesses can as in the above example where we started with a known f we used the computed solution as the initial guess for the solution at a slightly larger f etc If the increase in the the Newton method will diverge To avoid unnecessary computations</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00685">tensioned_string.txt:685</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_ab18bc7fd76c74495c8b1c17a11f5136f"><div class="ttname"><a href="tensioned__string_8txt.html#ab18bc7fd76c74495c8b1c17a11f5136f">configurations</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed configurations</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00101">tensioned_string.txt:101</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a7730fd3fd10a8f0571c5355a59624cb6"><div class="ttname"><a href="tensioned__string_8txt.html#a7730fd3fd10a8f0571c5355a59624cb6">load</a></div><div class="ttdeci">and the pressure load</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00500">tensioned_string.txt:500</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a529812dcfb24ba0129ca5b1b3830ff54"><div class="ttname"><a href="tensioned__string_8txt.html#a529812dcfb24ba0129ca5b1b3830ff54">thin</a></div><div class="ttdeci">n&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt; The c HermiteBeamElement provides default values for all non dimensional physical we will derive an approximate analytical solution of the problem The analytical solution will be useful to validate the computational and the derivation will allow us to discuss certain aspects of the theory in more detail We start by parametrising the beam s undeformed shape as f[{\bf r}_w(\xi)=\left(\begin{array}{c}\xi \\0\end{array}\right)\mbox{ \ \ \ \ where $\xi \in[0, L].$}\f] The metric tensor associated with this parametrisation is given by f[a=\frac{{\bf r}_w(\xi)}{d\xi} \cdot \frac{{\bf r}_w(\xi)}{d\xi}=1,\f] consistent with the fact that the Lagrangian coordinate f xi f is the arclength along the beam s undeformed centreline If the beam is thin(so that \f$ h \ll 1 \f$) bending effects will be confined to thin boundary layers near its ends. The beam will therefore behave(approximately) like a &quot;string under tension&quot; and its deformed shape will be an arc of a circle. All material line elements will be stretched by the same amount so that the tension is spatially uniform. The position vector to the material particles on the beam 's deformed centreline is therefore given by \f[</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00362">tensioned_string.txt:362</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a635adf0d73b4154af9b2340a7d8e8201"><div class="ttname"><a href="tensioned__string_8txt.html#a635adf0d73b4154af9b2340a7d8e8201">unknowns</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed respectively The ratio f f[\Lambda=\frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}}\f] is the ratio of the natural timescale of the beam s in plane extensional f[{\cal T}_{natural}={\cal L} \sqrt{\frac{\rho}{E_{eff}}},\f] to the timescale therefore f two node Hermite solid mechanics elements In these the Eulerian positions of the accessible via c are regarded as unknowns</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00142">tensioned_string.txt:142</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a243cb371920cbeb56b0be7dcec99886b"><div class="ttname"><a href="tensioned__string_8txt.html#a243cb371920cbeb56b0be7dcec99886b">pressure</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton which has the attractive feature that it converges quadratically provided a good initial guess for the solution is available Good initial guesses can as in the above example where we started with a known f we used the computed solution as the initial guess for the solution at a slightly larger pressure</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00682">tensioned_string.txt:682</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_aaeafd114cb7858c4cef354c486e4c5a2"><div class="ttname"><a href="tensioned__string_8txt.html#aaeafd114cb7858c4cef354c486e4c5a2">principle</a></div><div class="ttdeci">f corresponding to a uniform strain f[\gamma=\frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)}- 1 \right).\f] The incremental Hooke s law predicts a linear relation between f sigma and f gamma so that f principle[\sigma=\sigma_0+\gamma,\f] where f sigma_0 f is the axial pre stress that acts in the undeformed configuration An elementary force balance shows that the pressure f is given by Laplace s law f[p_{ext}=\frac{{\tt T}}{R} \f] where f[R=\frac{L}{2 \sin(\alpha/2)}\f] is the radius of the circular and the axial tension we determine the opening angle f alpha f as a function of the vertical displacement f d f of the beam s midpoint by determining the auxiliary angle f beta f from f[\tan\beta=\frac{2d}{L}.\f] The opening angle then follows from f[\tan\left(\frac{\alpha}{2}\right)=\tan(\pi - 2\beta)=- \tan 2\beta=\frac{2\tan\beta}{\tan^{2}\beta -1}.\f] Here is a comparison between the computed and analytically predicted values for the pressure f required to deflect the beam s midpoint by the specified f d f I w textwidth trace Comparison between the computed and analytical solutions&lt; TABLE &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt; not the physical model c oomph lib s c HermiteBeamElement is based on a b geometrically b nonlinear implying that the kinematics of the deformation are captured exactly for arbitrarily large displacements and rotations the use of b incrementally b linear b constitutive b equations in the variational(@R[pvd]@) can only be justified if the strain is small. This is clearly not the case for the deformations shown above. The combination of geometric nonlinearity with linear const itutive equations can</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_af4e9ddd0f3f0297e68deb6c0b9ded916"><div class="ttname"><a href="tensioned__string_8txt.html#af4e9ddd0f3f0297e68deb6c0b9ded916">Pinned</a></div><div class="ttdeci">n&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; Pinned</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00232">tensioned_string.txt:232</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a37f3397602a9f7c40bdac12121d50880"><div class="ttname"><a href="tensioned__string_8txt.html#a37f3397602a9f7c40bdac12121d50880">_w</a></div><div class="ttdeci">_w(\xi)</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_aeebef62f3fd065eb3590b1417520402c"><div class="ttname"><a href="tensioned__string_8txt.html#aeebef62f3fd065eb3590b1417520402c">Clamped</a></div><div class="ttdeci">n&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; Clamped</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00271">tensioned_string.txt:271</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_aac2a679edac5469fc120f8a583a840d9"><div class="ttname"><a href="tensioned__string_8txt.html#aac2a679edac5469fc120f8a583a840d9">parameters</a></div><div class="ttdeci">n&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt; The c HermiteBeamElement provides default values for all non dimensional physical parameters</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00338">tensioned_string.txt:338</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a0f5aaa7d7eab4fbec16d94c64db068d1"><div class="ttname"><a href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">mesh_pt</a></div><div class="ttdeci">and the pressure f as well as the function c and the unit normal to the deformed L f The c GeomObject pointed to by c provides a parametrisation of the beam s undeformed shape in the form and this is used to determine the nodes s initial Eulerian position Next we pin the nodal positions on both boundaries skipline Set the until We then loop over the elements and set the pointers to the physical the function pointer to the load and the pointer to the geometric object that specifies the undeformed beam shape skipline Loop until end of loop over elements We choose a node near the centre of the beam to monitor the we assign the equation numbers skipline Assign until end of&lt; HR &gt;&lt; HR &gt; section param The Parameter Study The function computing the beam s deformation for a range of external pressures During the solution of this particular the maximum residual in the Newton iteration can be greater than the default maximum value of We increase the default value by assigning a(much) larger value to \c Problem this requires the insertion of the statement code mesh_pt() -&gt; boundary_node_pt(b, 0) -&gt;pin_position(1, 1)</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a1219e0ba7845b921602146d72700a783"><div class="ttname"><a href="tensioned__string_8txt.html#a1219e0ba7845b921602146d72700a783">displacements</a></div><div class="ttdeci">and the pressure f as well as the function c and the unit normal to the deformed L f The c GeomObject pointed to by c provides a parametrisation of the beam s undeformed shape in the form and this is used to determine the nodes s initial Eulerian position Next we pin the nodal positions on both boundaries skipline Set the until We then loop over the elements and set the pointers to the physical the function pointer to the load and the pointer to the geometric object that specifies the undeformed beam shape skipline Loop until end of loop over elements We choose a node near the centre of the beam to monitor the displacements(If the total number of nodes is even, the control node will not be located at the beam 's exact centre;its vertical displacement will therefore differ from the analytical solution that we output in \c doc_solution(...) -- in this case we issue a suitable warning.) \skipline Choose \until n_nod+1 Finally</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a7cf04bcca51c3cfd9e74200fb6c25b1d"><div class="ttname"><a href="tensioned__string_8txt.html#a7cf04bcca51c3cfd9e74200fb6c25b1d">pext_increment</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton which has the attractive feature that it converges quadratically provided a good initial guess for the solution is available Good initial guesses can as in the above example where we started with a known f we used the computed solution as the initial guess for the solution at a slightly larger f etc If the increase in the the Newton method will diverge To avoid unnecessary the Newton iteration is terminated which has a default value of in the problem considered the undeformed beam provides a poor approximation of its equilibrium shape at the first pressure value The Newton method still even though the initial maximum residual has a relatively large value of Here are some exercises that explore the convergence characteristics of the Newton c pext_increment</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00706">tensioned_string.txt:706</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a2343e7093a1e80323e4acac462c13b91"><div class="ttname"><a href="tensioned__string_8txt.html#a2343e7093a1e80323e4acac462c13b91">results</a></div><div class="ttdeci">n&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt; The c HermiteBeamElement provides default values for all non dimensional physical we will derive an approximate analytical solution of the problem The analytical solution will be useful to validate the computational results</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00340">tensioned_string.txt:340</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a647ed9c012e332c5b4fa956419439b58"><div class="ttname"><a href="tensioned__string_8txt.html#a647ed9c012e332c5b4fa956419439b58">Physically</a></div><div class="ttdeci">_w f Physically</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00178">tensioned_string.txt:178</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_addfe39c2be6b23e31150f755bbf37240"><div class="ttname"><a href="tensioned__string_8txt.html#addfe39c2be6b23e31150f755bbf37240">elements</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is respectively f[ds=\sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS=\sqrt{A} \ d\xi.\f] f A f and f a f may be interpreted as the metric tensors of the beam s in the deformed and undeformed respectively The ratio f f[\Lambda=\frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}}\f] is the ratio of the natural timescale of the beam s in plane extensional f[{\cal T}_{natural}={\cal L} \sqrt{\frac{\rho}{E_{eff}}},\f] to the timescale therefore f two node Hermite solid mechanics elements In these elements</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00140">tensioned_string.txt:140</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_af87bade4a64ce5d757a3284470765f20"><div class="ttname"><a href="tensioned__string_8txt.html#af87bade4a64ce5d757a3284470765f20">cdot</a></div><div class="ttdeci">_w cdot</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00218">tensioned_string.txt:218</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a2a2500d49ec2ae1dbe557e6771d25a88"><div class="ttname"><a href="tensioned__string_8txt.html#a2a2500d49ec2ae1dbe557e6771d25a88">converges</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton which has the attractive feature that it converges quadratically provided a good initial guess for the solution is available Good initial guesses can as in the above example where we started with a known f we used the computed solution as the initial guess for the solution at a slightly larger f etc If the increase in the the Newton method will diverge To avoid unnecessary the Newton iteration is terminated which has a default value of in the problem considered the undeformed beam provides a poor approximation of its equilibrium shape at the first pressure value The Newton method still converges(very slowly initially, then quadratically as it approaches the exact solution)</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_af32a3afbc853dbd2f974fbd42b5215cf"><div class="ttname"><a href="tensioned__string_8txt.html#af32a3afbc853dbd2f974fbd42b5215cf">f</a></div><div class="ttdeci">the unit normal to the beam s deformed centreline is f</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00067">tensioned_string.txt:67</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_abcd458936aee30179de1df2080c36de0"><div class="ttname"><a href="tensioned__string_8txt.html#abcd458936aee30179de1df2080c36de0">direction</a></div><div class="ttdeci">n&lt;/TD &gt;&lt;/TR &gt;&lt; TR &gt;&lt; TD &gt;&lt; B &gt; sliding in the x direction</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00239">tensioned_string.txt:239</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_ac652458fe609632788562b22a69c9f9b"><div class="ttname"><a href="tensioned__string_8txt.html#ac652458fe609632788562b22a69c9f9b">increment</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton which has the attractive feature that it converges quadratically provided a good initial guess for the solution is available Good initial guesses can as in the above example where we started with a known f we used the computed solution as the initial guess for the solution at a slightly larger f etc If the increase in the the Newton method will diverge To avoid unnecessary the Newton iteration is terminated which has a default value of in the problem considered the undeformed beam provides a poor approximation of its equilibrium shape at the first pressure value The Newton method still even though the initial maximum residual has a relatively large value of Here are some exercises that explore the convergence characteristics of the Newton c for which the Newton method still converges very slowly for small values of f even though the load increment</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00710">tensioned_string.txt:710</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:13:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

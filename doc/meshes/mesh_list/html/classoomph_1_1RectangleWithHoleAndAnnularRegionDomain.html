@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RectangleWithHoleAndAnnularRegionDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html">RectangleWithHoleAndAnnularRegionDomain</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::RectangleWithHoleAndAnnularRegionDomain Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::RectangleWithHoleAndAnnularRegionDomain:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:afa3d6b3517063d8267806fb8ff9e4b76"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#afa3d6b3517063d8267806fb8ff9e4b76">RectangleWithHoleAndAnnularRegionDomain</a> (GeomObject *cylinder_pt, const double &amp;annular_region_radius, const double &amp;length)</td></tr>
+<tr class="separator:afa3d6b3517063d8267806fb8ff9e4b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b49b3005ce115f161c3abc7e66e1fdf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a6b49b3005ce115f161c3abc7e66e1fdf">~RectangleWithHoleAndAnnularRegionDomain</a> ()</td></tr>
+<tr class="memdesc:a6b49b3005ce115f161c3abc7e66e1fdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Empty; macro elements are deleted in base class destructor.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a6b49b3005ce115f161c3abc7e66e1fdf">More...</a><br /></td></tr>
+<tr class="separator:a6b49b3005ce115f161c3abc7e66e1fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73e91d2b01cd584a03f450b3064fa892"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a73e91d2b01cd584a03f450b3064fa892">project_point_on_cylinder_to_annular_boundary</a> (const unsigned &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;r)</td></tr>
+<tr class="memdesc:a73e91d2b01cd584a03f450b3064fa892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that, given the Lagrangian coordinate, xi, (associated with a point on the cylinder), returns the corresponding point on the outer boundary of the annular region (where the inner boundary is prescribed by the boundary of the cylinder)  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a73e91d2b01cd584a03f450b3064fa892">More...</a><br /></td></tr>
+<tr class="separator:a73e91d2b01cd584a03f450b3064fa892"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f1d242a7111fbb3cfafc76edb2bc9d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a7f1d242a7111fbb3cfafc76edb2bc9d1">project_point_on_cylinder_to_annular_boundary</a> (const double &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;r)</td></tr>
+<tr class="memdesc:a7f1d242a7111fbb3cfafc76edb2bc9d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that, given the Lagrangian coordinate, xi, (associated with a point on the cylinder), returns the corresponding point on the outer boundary of the annular region (where the inner boundary is prescribed by the boundary of the cylinder)  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a7f1d242a7111fbb3cfafc76edb2bc9d1">More...</a><br /></td></tr>
+<tr class="separator:a7f1d242a7111fbb3cfafc76edb2bc9d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2730470eda2dee9ffda25e12d8dc1885"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a2730470eda2dee9ffda25e12d8dc1885">linear_interpolate</a> (const Vector&lt; double &gt; &amp;left, const Vector&lt; double &gt; &amp;right, const double &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a2730470eda2dee9ffda25e12d8dc1885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to interpolate linearly between the "right" and "left" points; <img class="formulaInl" alt="$ s \in [-1,1] $" src="form_3.png"/>.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a2730470eda2dee9ffda25e12d8dc1885">More...</a><br /></td></tr>
+<tr class="separator:a2730470eda2dee9ffda25e12d8dc1885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6993f80b22b9418c93254ba6791dd2a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a6993f80b22b9418c93254ba6791dd2a5">macro_element_boundary</a> (const double &amp;time, const unsigned &amp;m, const unsigned &amp;direction, const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a6993f80b22b9418c93254ba6791dd2a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrisation of macro element boundaries: f(s) is the position vector to macro-element m's boundary in the specified direction [N/S/E/W] at the specified discrete time level (time=0: present; time&gt;0: previous)  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a6993f80b22b9418c93254ba6791dd2a5">More...</a><br /></td></tr>
+<tr class="separator:a6993f80b22b9418c93254ba6791dd2a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad36aee594ee03f7947c2bcd4e2198284"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ad36aee594ee03f7947c2bcd4e2198284">macro_element_boundary</a> (const unsigned &amp;time, const unsigned &amp;m, const unsigned &amp;direction, const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:ad36aee594ee03f7947c2bcd4e2198284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrisation of macro element boundaries: f(s) is the position vector to macro-element m's boundary in the specified direction [N/S/E/W] at the specified discrete time level (time=0: present; time&gt;0: previous)  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ad36aee594ee03f7947c2bcd4e2198284">More...</a><br /></td></tr>
+<tr class="separator:ad36aee594ee03f7947c2bcd4e2198284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ace56101c4efff9944ead9188eafc82fd"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ace56101c4efff9944ead9188eafc82fd">Lower_left</a></td></tr>
+<tr class="memdesc:ace56101c4efff9944ead9188eafc82fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower left corner of rectangle.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ace56101c4efff9944ead9188eafc82fd">More...</a><br /></td></tr>
+<tr class="separator:ace56101c4efff9944ead9188eafc82fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28b7e5bf185627a0b655657dddb82c65"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a28b7e5bf185627a0b655657dddb82c65">Lower_right</a></td></tr>
+<tr class="memdesc:a28b7e5bf185627a0b655657dddb82c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower right corner of rectangle.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a28b7e5bf185627a0b655657dddb82c65">More...</a><br /></td></tr>
+<tr class="separator:a28b7e5bf185627a0b655657dddb82c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78feaead73cad22e0ca9e876abff38ce"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a78feaead73cad22e0ca9e876abff38ce">Lower_mid_left</a></td></tr>
+<tr class="memdesc:a78feaead73cad22e0ca9e876abff38ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the "radial" line from circle meets lower boundary on left.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a78feaead73cad22e0ca9e876abff38ce">More...</a><br /></td></tr>
+<tr class="separator:a78feaead73cad22e0ca9e876abff38ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1eadbe97ac2de76175c8027f22a59f2"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ab1eadbe97ac2de76175c8027f22a59f2">Lower_mid_right</a></td></tr>
+<tr class="memdesc:ab1eadbe97ac2de76175c8027f22a59f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the "radial" line from circle meets lower boundary on right.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ab1eadbe97ac2de76175c8027f22a59f2">More...</a><br /></td></tr>
+<tr class="separator:ab1eadbe97ac2de76175c8027f22a59f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8ff6dd36c3fe374ed93610a5788e13a"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#af8ff6dd36c3fe374ed93610a5788e13a">Upper_left</a></td></tr>
+<tr class="memdesc:af8ff6dd36c3fe374ed93610a5788e13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upper left corner of rectangle.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#af8ff6dd36c3fe374ed93610a5788e13a">More...</a><br /></td></tr>
+<tr class="separator:af8ff6dd36c3fe374ed93610a5788e13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ce5207044a7aedfb2500316d6b70051"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a5ce5207044a7aedfb2500316d6b70051">Upper_right</a></td></tr>
+<tr class="memdesc:a5ce5207044a7aedfb2500316d6b70051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upper right corner of rectangle.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a5ce5207044a7aedfb2500316d6b70051">More...</a><br /></td></tr>
+<tr class="separator:a5ce5207044a7aedfb2500316d6b70051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c8efccc34e87842539c3306ceb10e15"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a1c8efccc34e87842539c3306ceb10e15">Upper_mid_left</a></td></tr>
+<tr class="memdesc:a1c8efccc34e87842539c3306ceb10e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the "radial" line from circle meets upper boundary on left.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a1c8efccc34e87842539c3306ceb10e15">More...</a><br /></td></tr>
+<tr class="separator:a1c8efccc34e87842539c3306ceb10e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb5b883a6900b5a19be524e8c1144888"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#abb5b883a6900b5a19be524e8c1144888">Upper_mid_right</a></td></tr>
+<tr class="memdesc:abb5b883a6900b5a19be524e8c1144888"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the "radial" line from circle meets upper boundary on right.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#abb5b883a6900b5a19be524e8c1144888">More...</a><br /></td></tr>
+<tr class="separator:abb5b883a6900b5a19be524e8c1144888"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bcc36773dacee43cead3191c948a14a"><td class="memItemLeft" align="right" valign="top">GeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a6bcc36773dacee43cead3191c948a14a">Cylinder_pt</a></td></tr>
+<tr class="memdesc:a6bcc36773dacee43cead3191c948a14a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to geometric object that represents the central cylinder.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#a6bcc36773dacee43cead3191c948a14a">More...</a><br /></td></tr>
+<tr class="separator:a6bcc36773dacee43cead3191c948a14a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45578f5ddf64e3af24be6afda3170c3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ab45578f5ddf64e3af24be6afda3170c3">Annular_region_radius</a></td></tr>
+<tr class="memdesc:ab45578f5ddf64e3af24be6afda3170c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radius of the outer boundary of the annular region whose inner boundary is described by Cylinder_pt and outer boundary is a circle with radius lying between half the length of the bounding box and the radius cylinder.  <a href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html#ab45578f5ddf64e3af24be6afda3170c3">More...</a><br /></td></tr>
+<tr class="separator:ab45578f5ddf64e3af24be6afda3170c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Rectangular domain with circular whole DRAIG: This looks like a redefinition of the <a class="el" href="classoomph_1_1RectangleWithHoleAndAnnularRegionDomain.html">RectangleWithHoleAndAnnularRegionDomain</a> in src/meshes but it creates 8 macro-elements instead of 4 macro-elements and creates an annular region around the cylinder. It's probably a good idea to rename this class to avoid ambiguity and a name clash... </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00052">52</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="afa3d6b3517063d8267806fb8ff9e4b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa3d6b3517063d8267806fb8ff9e4b76">&#9670;&nbsp;</a></span>RectangleWithHoleAndAnnularRegionDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::RectangleWithHoleAndAnnularRegionDomain::RectangleWithHoleAndAnnularRegionDomain </td>
+          <td>(</td>
+          <td class="paramtype">GeomObject *&#160;</td>
+          <td class="paramname"><em>cylinder_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>annular_region_radius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Constructor. Pass pointer to geometric object that represents the cylinder, the length of the (square) domain. The GeomObject must be parametrised such that <img class="formulaInl" alt="$\zeta \in [0,2\pi]$" src="form_19.png"/> sweeps around the circumference in anticlockwise direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">60</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00174">Lower_left</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00180">Lower_mid_left</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00183">Lower_mid_right</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00177">Lower_right</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00186">Upper_left</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00192">Upper_mid_left</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00195">Upper_mid_right</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00189">Upper_right</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00865">oomph::RectangleWithHoleAndAnnularRegionMesh&lt; ELEMENT &gt;::RectangleWithHoleAndAnnularRegionMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a6b49b3005ce115f161c3abc7e66e1fdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b49b3005ce115f161c3abc7e66e1fdf">&#9670;&nbsp;</a></span>~RectangleWithHoleAndAnnularRegionDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::RectangleWithHoleAndAnnularRegionDomain::~RectangleWithHoleAndAnnularRegionDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Empty; macro elements are deleted in base class destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00117">117</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2730470eda2dee9ffda25e12d8dc1885"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2730470eda2dee9ffda25e12d8dc1885">&#9670;&nbsp;</a></span>linear_interpolate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::RectangleWithHoleAndAnnularRegionDomain::linear_interpolate </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>right</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to interpolate linearly between the "right" and "left" points; <img class="formulaInl" alt="$ s \in [-1,1] $" src="form_3.png"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00139">139</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00127">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a6993f80b22b9418c93254ba6791dd2a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6993f80b22b9418c93254ba6791dd2a5">&#9670;&nbsp;</a></span>macro_element_boundary() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::RectangleWithHoleAndAnnularRegionDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parametrisation of macro element boundaries: f(s) is the position vector to macro-element m's boundary in the specified direction [N/S/E/W] at the specified discrete time level (time=0: present; time&gt;0: previous) </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00127">127</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html">rectangle_with_moving_cylinder_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00198">Cylinder_pt</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00139">linear_interpolate()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00180">Lower_mid_left</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00183">Lower_mid_right</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00039">project_point_on_cylinder_to_annular_boundary()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00192">Upper_mid_left</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00195">Upper_mid_right</a>.</p>
+
+</div>
+</div>
+<a id="ad36aee594ee03f7947c2bcd4e2198284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad36aee594ee03f7947c2bcd4e2198284">&#9670;&nbsp;</a></span>macro_element_boundary() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::RectangleWithHoleAndAnnularRegionDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parametrisation of macro element boundaries: f(s) is the position vector to macro-element m's boundary in the specified direction [N/S/E/W] at the specified discrete time level (time=0: present; time&gt;0: previous) </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00493">493</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html">rectangle_with_moving_cylinder_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00198">Cylinder_pt</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00139">linear_interpolate()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00180">Lower_mid_left</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00183">Lower_mid_right</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00039">project_point_on_cylinder_to_annular_boundary()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00192">Upper_mid_left</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00195">Upper_mid_right</a>.</p>
+
+</div>
+</div>
+<a id="a7f1d242a7111fbb3cfafc76edb2bc9d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f1d242a7111fbb3cfafc76edb2bc9d1">&#9670;&nbsp;</a></span>project_point_on_cylinder_to_annular_boundary() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::RectangleWithHoleAndAnnularRegionDomain::project_point_on_cylinder_to_annular_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that, given the Lagrangian coordinate, xi, (associated with a point on the cylinder), returns the corresponding point on the outer boundary of the annular region (where the inner boundary is prescribed by the boundary of the cylinder) </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00084">84</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html">rectangle_with_moving_cylinder_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00204">Annular_region_radius</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00198">Cylinder_pt</a>.</p>
+
+</div>
+</div>
+<a id="a73e91d2b01cd584a03f450b3064fa892"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73e91d2b01cd584a03f450b3064fa892">&#9670;&nbsp;</a></span>project_point_on_cylinder_to_annular_boundary() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::RectangleWithHoleAndAnnularRegionDomain::project_point_on_cylinder_to_annular_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that, given the Lagrangian coordinate, xi, (associated with a point on the cylinder), returns the corresponding point on the outer boundary of the annular region (where the inner boundary is prescribed by the boundary of the cylinder) </p>
+<p>Rectangular domain with circular whole. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00039">39</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html">rectangle_with_moving_cylinder_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00204">Annular_region_radius</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00198">Cylinder_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00127">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab45578f5ddf64e3af24be6afda3170c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab45578f5ddf64e3af24be6afda3170c3">&#9670;&nbsp;</a></span>Annular_region_radius</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::RectangleWithHoleAndAnnularRegionDomain::Annular_region_radius</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The radius of the outer boundary of the annular region whose inner boundary is described by Cylinder_pt and outer boundary is a circle with radius lying between half the length of the bounding box and the radius cylinder. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00204">204</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00039">project_point_on_cylinder_to_annular_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a6bcc36773dacee43cead3191c948a14a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bcc36773dacee43cead3191c948a14a">&#9670;&nbsp;</a></span>Cylinder_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObject* oomph::RectangleWithHoleAndAnnularRegionDomain::Cylinder_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to geometric object that represents the central cylinder. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00198">198</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00127">macro_element_boundary()</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00039">project_point_on_cylinder_to_annular_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ace56101c4efff9944ead9188eafc82fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace56101c4efff9944ead9188eafc82fd">&#9670;&nbsp;</a></span>Lower_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::RectangleWithHoleAndAnnularRegionDomain::Lower_left</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lower left corner of rectangle. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00174">174</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">RectangleWithHoleAndAnnularRegionDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a78feaead73cad22e0ca9e876abff38ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78feaead73cad22e0ca9e876abff38ce">&#9670;&nbsp;</a></span>Lower_mid_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::RectangleWithHoleAndAnnularRegionDomain::Lower_mid_left</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Where the "radial" line from circle meets lower boundary on left. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00180">180</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00127">macro_element_boundary()</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">RectangleWithHoleAndAnnularRegionDomain()</a>.</p>
+
+</div>
+</div>
+<a id="ab1eadbe97ac2de76175c8027f22a59f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1eadbe97ac2de76175c8027f22a59f2">&#9670;&nbsp;</a></span>Lower_mid_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::RectangleWithHoleAndAnnularRegionDomain::Lower_mid_right</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Where the "radial" line from circle meets lower boundary on right. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00183">183</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00127">macro_element_boundary()</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">RectangleWithHoleAndAnnularRegionDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a28b7e5bf185627a0b655657dddb82c65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28b7e5bf185627a0b655657dddb82c65">&#9670;&nbsp;</a></span>Lower_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::RectangleWithHoleAndAnnularRegionDomain::Lower_right</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lower right corner of rectangle. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00177">177</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">RectangleWithHoleAndAnnularRegionDomain()</a>.</p>
+
+</div>
+</div>
+<a id="af8ff6dd36c3fe374ed93610a5788e13a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8ff6dd36c3fe374ed93610a5788e13a">&#9670;&nbsp;</a></span>Upper_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::RectangleWithHoleAndAnnularRegionDomain::Upper_left</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Upper left corner of rectangle. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00186">186</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">RectangleWithHoleAndAnnularRegionDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a1c8efccc34e87842539c3306ceb10e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c8efccc34e87842539c3306ceb10e15">&#9670;&nbsp;</a></span>Upper_mid_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::RectangleWithHoleAndAnnularRegionDomain::Upper_mid_left</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Where the "radial" line from circle meets upper boundary on left. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00192">192</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00127">macro_element_boundary()</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">RectangleWithHoleAndAnnularRegionDomain()</a>.</p>
+
+</div>
+</div>
+<a id="abb5b883a6900b5a19be524e8c1144888"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb5b883a6900b5a19be524e8c1144888">&#9670;&nbsp;</a></span>Upper_mid_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::RectangleWithHoleAndAnnularRegionDomain::Upper_mid_right</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Where the "radial" line from circle meets upper boundary on right. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00195">195</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00127">macro_element_boundary()</a>, and <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">RectangleWithHoleAndAnnularRegionDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a5ce5207044a7aedfb2500316d6b70051"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ce5207044a7aedfb2500316d6b70051">&#9670;&nbsp;</a></span>Upper_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::RectangleWithHoleAndAnnularRegionDomain::Upper_right</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Upper right corner of rectangle. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00189">189</a> of file <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html#l00060">RectangleWithHoleAndAnnularRegionDomain()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8h_source.html">rectangle_with_moving_cylinder_mesh.template.h</a></li>
+<li><a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html">rectangle_with_moving_cylinder_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:53:51
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

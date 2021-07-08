@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Solution of a &quot;free-boundary&quot; Poisson problem &ndash; a simple model for &quot;fluid&quot;-structure interaction.</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Solution of a "free-boundary" Poisson problem &ndash; a simple model for "fluid"-structure interaction. </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we shall consider our first (toy!) interaction problem. The problem combines two single-physics problems, studied in earlier examples, and combines them into a coupled free-boundary problem.</p>
+<ul>
+<li>In <a href="../../../poisson/fish_poisson/html/index.html">one of our first examples</a> we demonstrated the solution of Poisson's equation in a fish-shaped domain, <img class="formulaInl" alt="$ D_{fish} $" src="form_0.png"/>, in which the curvilinear upper and lower boundaries of the fish's body were given by circular arcs which we represented by <code>GeomObjects</code>. Given the position of the two circular arcs, whose centres are located at <img class="formulaInl" alt="$ (X_c, \pm Y_c) $" src="form_1.png"/>, the single-physics Poisson code computes the solution of Poisson's equation in the corresponding domain. <br  />
+ <a href="../../../poisson/fish_poisson2/html/index.html#com">We have already demonstrated</a> how <code>oomph-lib's</code> <code>MacroElement</code> / <code>Domain</code> representation of <img class="formulaInl" alt="$ D_{fish} $" src="form_0.png"/> allows an update of the nodal positions in response to changes in the domain boundary by a simple call to <code>Mesh::node_update()</code>. The example code therefore allowed us to compute the solution at a control node, <img class="formulaInl" alt="$ u_{ctrl}$" src="form_2.png"/>, as a function of the "height" of the domain, characterised by <img class="formulaInl" alt="$ Y_c $" src="form_3.png"/>. <br  />
+<br  />
+</li>
+<li>In <a href="../../../interaction/circle_as_element/html/index.html">another example</a>, we demonstrated how to solve a (trivial) solid mechanics problem: The vertical displacement of a circular ring (represented by a <code>GeomObject</code>) that is mounted on an elastic foundation of spring stiffness <img class="formulaInl" alt="$ k $" src="form_4.png"/>. The example code allowed us to compute the displacement of the ring, characterised by <img class="formulaInl" alt="$ Y_c $" src="form_3.png"/>, as a function of the load <img class="formulaInl" alt="$ f $" src="form_5.png"/> acting on it. <br  />
+</li>
+</ul>
+<p>We will now consider the coupled problem obtained by using the solution of Poisson's equation at the control node, <img class="formulaInl" alt="$ u_{ctrl} $" src="form_6.png"/>, as the "load", <img class="formulaInl" alt="$ f $" src="form_5.png"/>, that acts on the two circular arcs that define the curvilinear boundaries of <img class="formulaInl" alt="$ D_{fish} $" src="form_0.png"/>. The resulting coupled problem is sketched in the figure below. While this problem is obviously somewhat artificial, it has many of the key features that arise in genuine fluid-structure interaction problems. In particular, the displacement of the domain boundary is driven by the solution of the "bulk" (Poisson) equations, just as the deformation of an elastic structure in an FSI problem is driven by the fluid pressure and shear stresses, i.e. quantities that are derived from the solution of the Navier-Stokes equations in the "bulk" domain.</p>
+<div class="image">
+<img src="fish_fsi_sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the two individual single-physics problems (top) and the coupled problem (bottom). </div></div>
+ <p>The two single-physics problems involve two uncoupled sets of equations and unknowns:</p><ul>
+<li>The residual vector of the Poisson elements in the single-physics Poisson problem depends on the nodal values in the "bulk" mesh. These nodal values are the only unknowns in the problem since the position of the domain boundary, and hence the position of the nodes are fixed. An update of the nodal positions in response to any changes in the domain boundary is a mere pre-processing step, to be performed just once, before computing the solution.</li>
+<li>The residual vector of the <code>ElasticallySupportedRingElement</code> depends on the position of ring's centre, <img class="formulaInl" alt="$ Y_c $" src="form_3.png"/>, which is the only unknown in the problem as the load on the ring is fixed.</li>
+</ul>
+<p>The coupling between the two single-physics problem introduces additional dependencies:</p><ul>
+<li>The residuals of the Poisson elements also depend on the nodal positions which in turn depend (via the <code>MacroElement/Domain</code> - based node-update function) on the the position of the domain boundary. The boundary position is controlled by the <code>ElasticallySupportedRingElement's</code> geometric <code>Data</code>, which stores the value of <img class="formulaInl" alt="$ Y_c $" src="form_3.png"/>.</li>
+<li>The residual vector of the <code>ElasticallySupportedRingElement</code> also depends on the load, which is now given by the unknown nodal value at a control node in the "bulk" mesh.</li>
+</ul>
+<p>We note that most of the methodology required to solve this coupled problem is already available:</p><ul>
+<li>The <code>MacroElement/Domain</code> representation of the Mesh makes it possible to update the nodal positions in the bulk mesh in response to changes in the shape/position of the curvilinear domain boundary.</li>
+<li>Multiple inheritance allows the <code>ElasticallySupportedRingElement</code> to act as a <code>GeomObject</code> (a role in which it can be used to parametrise the unknown curvilinear domain boundary) and as a <code>GeneralisedElement</code> (a role in which its unknown geometric <code>Data</code> value, <img class="formulaInl" alt="$ Y_c $" src="form_3.png"/>, can be determined as part of the overall solution).</li>
+<li>The load <img class="formulaInl" alt="$ f $" src="form_5.png"/> on the <code>ElasticallySupportedRingElement</code> is stored in the element's external <code>Data</code>, and derivatives of the element's residual vector with respect to <img class="formulaInl" alt="$ f $" src="form_5.png"/> are automatically taken into account when the element's Jacobian matrix is computed.</li>
+</ul>
+<p>The only interaction that still has to be incorporated into the problem formulation is the dependence of the Poisson element's residual vectors on the geometric <code>Data</code> in the <code>ElasticallySupportedRingElement</code>. This interaction arises through the <code>MacroElement/Domain</code> - based node-update function which translates changes in the <code>GeomObject's</code> geometric <code>Data</code> into changes in the nodal positions. Such dependencies may be added to <em>any</em> existing element by "wrapping" the element into the templated wrapper class <code>MacroElementNodeUpdateElement</code> which has the following inheritance structure:</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span>MacroElementNodeUpdateElement : <span class="keyword">public</span> <span class="keyword">virtual</span> ELEMENT, </div>
+<div class="line">                                      <span class="keyword">public</span> <span class="keyword">virtual</span> MacroElementNodeUpdateElementBase</div>
+</div><!-- fragment --><p>An element of type <code>MacroElementNodeUpdateElement&lt;ELEMENT&gt;</code> is an element of type <code>ELEMENT</code>, and inherits the additional functionality provided by the <code>MacroElementNodeUpdateElementBase</code> base class. The most important additional functionality provided by this class is the ability to add the values stored in the geometric <code>Data</code> of associated <code>GeomObjects</code> to the element's list of unknowns. Once added, the derivatives of the element's residual vector with respect to these additional unknowns are automatically included into the element's Jacobian matrix. This is achieved by overloading the <code>ELEMENT::get_jacobian(...)</code> function and evaluating the additional derivatives by finite differencing. See <a class="el" href="index.html#comments">Comments</a> for details on the implementation.</p>
+<p>The solution of the coupled problem therefore only requires a few trivial changes to the single-physics (Poisson) code:</p><ol type="1">
+<li>The element type used for the solution of the "bulk" equations must be changed to its "wrapped" counterpart, as discussed above. For instance, if the single-physics code used a nine-node refineable Poisson element of type <code>RefineableQPoissonElement&lt;2,3&gt;</code>, the coupled problem must be discretised by elements of type <code>MacroElementNodeUpdateElement&lt;RefineableQPoissonElement&lt;2,3&gt;</code> &gt; (Yes, it's a bit of a mouthful...).</li>
+<li>The "bulk" mesh must be "upgraded" (again via multiple inheritance) to a Mesh that is derived from the <code>MacroElementNodeUpdateMesh</code> base class.</li>
+<li>A vector of pointers to those <code>GeomObjects</code> that are involved in an element's <code>MacroElement/Domain</code> - based node update operation must be passed to the elements. (This is done most easily in the constructor of the "upgraded" mesh.) The geometric <code>Data</code> contained in these <code>GeomObjects</code> is then automatically included in the elements' list of unknowns.</li>
+<li>The Mesh's <code>node_update()</code> function must be executed whenever the Newton method has changed the values of the unknowns: This is because changing a value that is stored in a <code>GeomObject's</code> geometric <code>Data</code> does not automatically update the positions of any dependent nodes. This is done most easily be including the <code>node_update()</code> function into the <code>Problem::actions_before_newton_convergence_check()</code> function; we refer to <a href="../../../order_of_action_functions/html/index.html">another document</a> for a more detailed discussion of the order in which the various "action" functions are called by <code>oomph-lib's</code> Newton solver.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The animation below shows the results of a spatially-adaptive solution of Poisson's equations in the fish-shaped domain, for a variety of domain "heights". This animation was produced with the <a href="../../../poisson/fish_poisson/html/index.html">single-physics Poisson solver discussed in an earlier example</a>.</p>
+<div class="image">
+<img src="elastic_fish.gif" alt=""/>
+<div class="caption">
+Spatially adaptive solution of Poisson's equation in a fish-shaped domain for various `widths' of the domain. </div></div>
+ <p>An increase in the height of the domain increases the amplitude of the solution. This is reflected by the red line in the figure below which shows a plot of <img class="formulaInl" alt="$ u_{ctrl} $" src="form_6.png"/> as a function of <img class="formulaInl" alt="$ Y_c $" src="form_3.png"/>. The green marker shows the solution of the coupled problem for a spring stiffness of <img class="formulaInl" alt="$ k=1 $" src="form_7.png"/>. For this value of the spring stiffness, the solution of the coupled problem should be (and indeed is) located at the intersection of the curve <img class="formulaInl" alt="$ u_{ctrl}(Y_c) $" src="form_8.png"/> with the diagonal, <img class="formulaInl" alt="$ u_{ctrl} = Y_c $" src="form_9.png"/>, shown by the dashed blue line.</p>
+<div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Solution of Poisson's equation at a control node as a function of the `height' of the domain. </div></div>
+ <hr  />
+<p> <br  />
+ </p><hr  />
+<h1><a class="anchor" id="impl"></a>
+Implementation in oomph-lib</h1>
+<p>The sections below provide the usual annotated listing of the driver code. We stress that only a few trivial changes are required to incorporate the presence of the free boundary into the existing single-physics code:</p><ul>
+<li><a class="el" href="index.html#mesh">The Mesh</a> : Upgrading the <code>RefineableFishMesh</code> via multiple inheritance.</li>
+<li><a class="el" href="index.html#main">The driver code</a> : Changing the element type for the solution of the Poisson equation. <br  />
+</li>
+<li><a class="el" href="index.html#constructor">The Problem constructor</a> : Storing the element that represents the free boundary in a (sub-)mesh.</li>
+<li><a class="el" href="index.html#problem">The problem class</a> : Implementing the function <code>Problem::actions_before_newton_convergence_check()</code> to update the nodal positions after each Newton step.</li>
+</ul>
+<hr  />
+<p> <br  />
+ </p><hr  />
+<h1><a class="anchor" id="global"></a>
+Global parameters and functions</h1>
+<p>The namespace <code><a class="el" href="namespaceConstSourceForPoisson.html" title="Namespace for const source term in Poisson equation.">ConstSourceForPoisson</a></code> defines the constant source function, exactly as in the <a href="../../../poisson/fish_poisson/html/index.html#global">corresponding single-physics code.</a></p>
+ <div class="fragment"><div class="line"><span class="comment">//=============start_of_namespace=====================================</span></div>
+<div class="line"><span class="comment">/// Namespace for const source term in Poisson equation</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceConstSourceForPoisson.html">ConstSourceForPoisson</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/// Const source function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">get_source</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; source)</div>
+<div class="line"> {</div>
+<div class="line">  source = -1.0;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="mesh"></a>
+The Mesh</h1>
+<p>Meshes that are to be used with <code>MacroElementNodeUpdateElements</code> should be derived (typically by multiple inheritance) from the <br  />
+ <code>MacroElementNodeUpdateMesh</code> class. This class overloads the generic <code>Mesh::node_update()</code> function and ensures that the node update is performed by calling the <code>node_update()</code> function of the <code>Mesh's</code> constituent nodes, rather than simply updating their positions, using the <code>FiniteElement::get_x(...)</code> function. The overloaded version is not only more efficient but also ensures that any auxiliary node update functions (e.g. functions that update the no-slip condition on a moving fluid node on a solid boundary) are performed too.</p>
+<p>In our driver code we add the additional functionality provided by the <code>MacroElementNodeUpdateMesh</code> class to the <code>RefineableFishMesh</code> class used in the <a href="../../../poisson/fish_poisson/html/index.html">single-physics Poisson problem considered earlier</a>.</p>
+<div class="fragment"><div class="line"><span class="comment">//==========start_of_mesh=================================================</span></div>
+<div class="line"><span class="comment">/// Refineable, fish-shaped mesh with MacroElement-based node update.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classMyMacroElementNodeUpdateRefineableFishMesh.html">MyMacroElementNodeUpdateRefineableFishMesh</a> : </div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> RefineableFishMesh&lt;ELEMENT&gt;,</div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> MacroElementNodeUpdateMesh</div>
+<div class="line">{</div>
+</div><!-- fragment --><p>The constructor calls the constructors of the underlying <code>RefineableFishMesh</code>. [Note the explicit call to the <code>FishMesh</code> constructor prior to calling the constructor of the <code>RefineableFishMesh</code>. Without this call, only the default (argument-free) constructor of the <code>FishMesh</code> would be called! Consult your favourite C++ book to check on constructors for derived classes if you don't understand this. We recommend <a href="http://www.math.wayne.edu/~yang/">Daoqi Yang's</a> brilliant book <a href="http://www.springeronline.com/sgw/cda/frontpage/0,11855,4-40007-22-2105335-0,00.html?changeHeader=true">C++ and Object-Oriented Numeric Computing for Scientists and Engineers.</a>)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keyword">public</span>: </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor: Pass pointer to GeomObject that defines</span></div>
+<div class="line"><span class="comment"> /// the fish&#39;s back and pointer to timestepper</span></div>
+<div class="line"><span class="comment"> /// (defaults to (Steady) default timestepper defined in the Mesh</span></div>
+<div class="line"><span class="comment"> /// base class).</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classMyMacroElementNodeUpdateRefineableFishMesh.html">MyMacroElementNodeUpdateRefineableFishMesh</a>(GeomObject* back_pt, </div>
+<div class="line">                   TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper) :  </div>
+<div class="line">  FishMesh&lt;ELEMENT&gt;(back_pt,time_stepper_pt),</div>
+<div class="line">  RefineableFishMesh&lt;ELEMENT&gt;(time_stepper_pt)</div>
+<div class="line">  {</div>
+</div><!-- fragment --><p>To activate the <code>MacroElementNodeUpdateElement's</code> ability to automatically compute the derivatives of the residual vectors with respect to the geometric <code>Data</code> that determines its nodal positions, we must pass the pointers to the <code>GeomObjects</code> that are involved in the element's <code>MacroElement</code> - based node-update to the elements. In general, an element's node-update will be affected by multiple <code>GeomObjects</code> therefore the <code>set_node_update_info(...)</code> function expects a vector of pointers to <code>GeomObjects</code>. In the present example, only a single <code>GeomObject</code> (the <code>GeomObject</code> that represents the fish's curved "back") determines the nodal position of all elements:</p>
+<div class="fragment"><div class="line">   <span class="comment">// Set up all the information that&#39;s required for MacroElement-based</span></div>
+<div class="line">   <span class="comment">// node update: Tell the elements that their geometry depends on the</span></div>
+<div class="line">   <span class="comment">// fishback geometric object. </span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = this-&gt;nelement();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">     ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(this-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// There&#39;s just one GeomObject</span></div>
+<div class="line">     Vector&lt;GeomObject*&gt; geom_object_pt(1);</div>
+<div class="line">     geom_object_pt[0] = back_pt;</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Tell the element which geom objects its macro-element-based</span></div>
+<div class="line">     <span class="comment">// node update depends on     </span></div>
+<div class="line">     el_pt-&gt;set_node_update_info(geom_object_pt);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">//end of constructor</span></div>
+</div><!-- fragment --><p>The destructor can remain empty but we provide a final overload for the <code>Mesh's</code> <code>node_update()</code> function to avoid any ambiguities as to which one is to be used. </p><div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Destructor: empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> ~<a class="code" href="classMyMacroElementNodeUpdateRefineableFishMesh.html">MyMacroElementNodeUpdateRefineableFishMesh</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Resolve mesh update: Node update current nodal</span></div>
+<div class="line"><span class="comment"> /// positions via sparse MacroElement-based update.</span></div>
+<div class="line"><span class="comment"></span> <span class="comment">//void node_update()</span></div>
+<div class="line"> <span class="comment">// {</span></div>
+<div class="line"> <span class="comment">//  MacroElementNodeUpdateMesh::node_update();</span></div>
+<div class="line"> <span class="comment">// }</span></div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of mesh class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The driver code is very simple: We build the problem with the "wrapped" version of the refineable quadrilateral nine-node Poisson element. Since the initial mesh is very coarse we perform two uniform mesh refinements before solving the problem with automatic spatial adaptivity, allowing for up to two further mesh adaptations.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==================start_of_main=========================================</span></div>
+<div class="line"><span class="comment">/// Driver for &quot;free-boundary&quot; fish poisson solver with adaptation.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="macro__element__free__boundary__poisson_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Shorthand for element type</span></div>
+<div class="line"> <span class="keyword">typedef</span> MacroElementNodeUpdateElement&lt;RefineableQPoissonElement&lt;2,3&gt; &gt; </div>
+<div class="line">  ELEMENT;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build problem</span></div>
+<div class="line"> <a class="code" href="classFreeBoundaryPoissonProblem.html">FreeBoundaryPoissonProblem&lt;ELEMENT&gt;</a> <a class="code" href="macro__poisson_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do some uniform mesh refinement first</span></div>
+<div class="line"> <a class="code" href="macro__poisson_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.refine_uniformly();</div>
+<div class="line"> <a class="code" href="macro__poisson_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.refine_uniformly();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve/doc fully coupled problem, allowing for up to two spatial</span></div>
+<div class="line"> <span class="comment">// adaptations. </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_solve=2; </div>
+<div class="line"> <a class="code" href="macro__poisson_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.newton_solve(max_solve);</div>
+<div class="line"> <a class="code" href="macro__poisson_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>Apart from a few trivial additions, the problem class is virtually identical to that used in the <a href="../../../poisson/fish_poisson/html/index.html">single-physics Poisson problem</a>. The most important addition to the single-physics problem class is the function <code>Problem::actions_before_newton_convergence_check()</code> which updates the nodal positions in the "bulk" Poisson mesh following an update of the geometric <code>Data</code> that controls the position of the curvilinear domain boundary; we refer to <a href="../../../order_of_action_functions/html/index.html">another document</a> for a more detailed discussion of the order in which the various "action" functions are called by <code>oomph-lib's</code> Newton solver.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==========start_of_problem_class====================================</span></div>
+<div class="line"><span class="comment">/// Refineable &quot;free-boundary&quot; Poisson problem in deformable </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// fish-shaped domain. Template parameter identifies the element.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classFreeBoundaryPoissonProblem.html">FreeBoundaryPoissonProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short  Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classFreeBoundaryPoissonProblem.html#a0efe7c342eea790fc0240830bc3c4ebc">FreeBoundaryPoissonProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classFreeBoundaryPoissonProblem.html#a5b75b8553f3dfed4e9a8996c1b13edf3">~FreeBoundaryPoissonProblem</a>(){};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classFreeBoundaryPoissonProblem.html#aeef57bd5dc79b6aba9eeadcd0c01a2e0">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classFreeBoundaryPoissonProblem.html#aa18df6c9a9287f67ae1bff0f67aaa625">actions_after_newton_solve</a>(){}</div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Access function for the fish mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classMyMacroElementNodeUpdateRefineableFishMesh.html">MyMacroElementNodeUpdateRefineableFishMesh&lt;ELEMENT&gt;</a>* <a class="code" href="classFreeBoundaryPoissonProblem.html#adccab51afed9228783120934b6be37c9">fish_mesh_pt</a>() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <a class="code" href="classFreeBoundaryPoissonProblem.html#ae81a7e22c2c61854696b80a94053a663">Fish_mesh_pt</a>;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classFreeBoundaryPoissonProblem.html#a2282d8ac1d5753771a9a3cfc0417f6b6">doc_solution</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Before checking the new residuals in Newton&#39;s method</span></div>
+<div class="line"><span class="comment"> /// we have to update nodal positions in response to possible </span></div>
+<div class="line"><span class="comment"> /// changes in the position of the domain boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classFreeBoundaryPoissonProblem.html#a885a6e3a4efd1f02314806dced566569">actions_before_newton_convergence_check</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code" href="classFreeBoundaryPoissonProblem.html#adccab51afed9228783120934b6be37c9">fish_mesh_pt</a>()-&gt;node_update();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to fish mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classMyMacroElementNodeUpdateRefineableFishMesh.html">MyMacroElementNodeUpdateRefineableFishMesh&lt;ELEMENT&gt;</a>* <a class="code" href="classFreeBoundaryPoissonProblem.html#ae81a7e22c2c61854696b80a94053a663">Fish_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to single-element mesh that stores the GeneralisedElement</span></div>
+<div class="line"><span class="comment"> /// that represents the fish&#39;s back</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code" href="classFreeBoundaryPoissonProblem.html#aaa45902e79f963060b4b6820c5383cfc">Fish_back_mesh_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>We start by creating the <code>GeomObject/GeneralisedElement</code> that will represent the unknown curvilinear domain boundary and pass it (in its role as a <code>GeomObject</code>) to the constructor of the bulk mesh. We then add the pointer to the bulk mesh to the <code>Problem's</code> collection of submeshes and create an error estimator for the adaptive solution of the Poisson equation.</p>
+<div class="fragment"><div class="line"><span class="comment">//=========start_of_constructor===========================================</span></div>
+</div><!-- fragment --><p> <br  />
+ </p><div class="fragment"><div class="line"><span class="comment">/// Constructor for adaptive free-boundary Poisson problem in </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// deformable fish-shaped domain. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classFreeBoundaryPoissonProblem.html#a0efe7c342eea790fc0240830bc3c4ebc">FreeBoundaryPoissonProblem&lt;ELEMENT&gt;::FreeBoundaryPoissonProblem</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set coordinates and radius for the circle that will become the fish back</span></div>
+<div class="line"> <span class="keywordtype">double</span> x_c=0.5;</div>
+<div class="line"> <span class="keywordtype">double</span> y_c=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> r_back=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build geometric object that will become the fish back</span></div>
+<div class="line"> ElasticallySupportedRingElement* fish_back_pt=</div>
+<div class="line">  <span class="keyword">new</span> ElasticallySupportedRingElement(x_c,y_c,r_back);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build fish mesh with geometric object that specifies the fish back </span></div>
+<div class="line"> Fish_mesh_pt=<span class="keyword">new</span> </div>
+<div class="line">  <a class="code" href="classMyMacroElementNodeUpdateRefineableFishMesh.html">MyMacroElementNodeUpdateRefineableFishMesh&lt;ELEMENT&gt;</a>(fish_back_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the fish mesh to the problem&#39;s collection of submeshes:</span></div>
+<div class="line"> add_sub_mesh(Fish_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create/set error estimator for the fish mesh</span></div>
+<div class="line"> fish_mesh_pt()-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+</div><!-- fragment --><p>Next we store the pointer to the <code>ElasticallySupportedRingElement</code> in its own Mesh and add it to the <code>Problem's</code> collection of submeshes before building the <code>Problem's</code> global <code>Mesh</code> from its two submeshes:</p>
+<div class="fragment"><div class="line"> <span class="comment">// Build mesh that will store only the geometric wall element</span></div>
+<div class="line"> Fish_back_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// So far, the mesh is completely empty. Let&#39;s add the </span></div>
+<div class="line"> <span class="comment">// GeneralisedElement that represents the shape</span></div>
+<div class="line"> <span class="comment">// of the fish&#39;s back to it:</span></div>
+<div class="line"> Fish_back_mesh_pt-&gt;add_element_pt(fish_back_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the fish back mesh to the problem&#39;s collection of submeshes:</span></div>
+<div class="line"> add_sub_mesh(Fish_back_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now build global mesh from the submeshes</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p>We choose the central node in the Poisson mesh as the control node and use it (in its role as <code>Data</code>) as the "load" for the <code>ElasticallySupportedRingElement</code>.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Choose a control node: We&#39;ll use the</span></div>
+<div class="line"> <span class="comment">// central node that is shared by all four elements in</span></div>
+<div class="line"> <span class="comment">// the base mesh because it exists at all refinement levels.</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// How many nodes does element 0 have?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nnod=fish_mesh_pt()-&gt;finite_element_pt(0)-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The central node is the last node in element 0:</span></div>
+<div class="line"> Node* control_node_pt=fish_mesh_pt()-&gt;finite_element_pt(0)-&gt;node_pt(nnod-1);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use the solution (value 0) at the control node as the load</span></div>
+<div class="line"> <span class="comment">// that acts on the ring. [Note: Node == Data by inheritance]</span></div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>ElasticallySupportedRingElement*<span class="keyword">&gt;</span>(Fish_mesh_pt-&gt;fish_back_pt())-&gt;</div>
+<div class="line">  set_load_pt(control_node_pt);</div>
+</div><!-- fragment --><p>Finally, we pin the nodal values on all boundaries, apply the homogeneous Dirichlet boundary conditions, pass the pointer to the source function to the elements, and set up the equation numbering scheme.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here.  Set homogeneous boundary conditions everywhere</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = fish_mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= fish_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     fish_mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0); </div>
+<div class="line">     fish_mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(0,0.0);</div>
+<div class="line"> </div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Loop over elements and set pointers to source function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> n_element = fish_mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(fish_mesh_pt()-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   el_pt-&gt;source_fct_pt() = &amp;<a class="code" href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">ConstSourceForPoisson::get_source</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do equation numbering</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The post-processing routine writes the computed result to an output file.</p>
+<div class="fragment"><div class="line"><span class="comment">//============start_of_doc================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution in tecplot format.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classFreeBoundaryPoissonProblem.html#a2282d8ac1d5753771a9a3cfc0417f6b6">FreeBoundaryPoissonProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points in each coordinate direction.</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> ofstream some_file(<span class="stringliteral">&quot;RESLT/soln0.dat&quot;</span>);</div>
+<div class="line"> fish_mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments</h1>
+<p>A more detailed description of the theory and the implementation can be found in the paper</p><ul>
+<li>Heil, M. &amp; Hazel, A. L. "<code>oomph-lib</code> &ndash; An <em>O</em>bject-<em>O</em>riented <em>M</em>ulti-<em>Ph</em>ysics Finite-Element <em>Lib</em>rary". In: <em>Fluid-Structure Interaction</em>, Editors: M. Schafer and H.-J. Bungartz. Springer (Lecture Notes on Computational Science and Engineering 53, 2006), (32 pages) <a href="http://www.maths.man.ac.uk/~mheil/MATTHIAS/ABSTRACTS/HeilHazelOomph2006.html">(abstract)</a> <a href="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/oomph_for_www.pdf">(pdf preprint)</a>.</li>
+</ul>
+<p>and in this talk:</p><ul>
+<li>Heil, M. &amp; Hazel, A. L. "An object-oriented approach to the evaluation of the &lsquo;shape derivatives&rsquo; in monolithic fluid-structure interaction solvers". 7th World Congress on Computational Mechanics, LA, July 2006. <a href="http://www.maths.man.ac.uk/~mheil/oomph_lib_additional_material/LA_talk_2006/LA_talk.pdf">(pdf)</a>.</li>
+</ul>
+<p>The following subsections provide a brief description of the main features.</p>
+<hr  />
+<h2><a class="anchor" id="sparse_node_updates"></a>
+Sparse node updates</h2>
+<p>The key feature of our implementation which allows the efficient computation of the "shape derivatives" is the ability of <code>MacroElementNodeUpdateNodes</code> (discussed in more detail below) to "update their own position" in response to changes in shape/position of the domain boundary. This capability is demonstrated in the following simple example code.</p>
+<p>We start by building the Mesh as before</p>
+ <div class="fragment"><div class="line"><span class="comment">//==================start_of_main=========================================</span></div>
+<div class="line"><span class="comment">/// Driver to document sparse MacroElement-based node update.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="doc__sparse__macro__node__update_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Shorthand for element type</span></div>
+<div class="line"> <span class="keyword">typedef</span> MacroElementNodeUpdateElement&lt;RefineableQPoissonElement&lt;2,3&gt; &gt; </div>
+<div class="line">  ELEMENT;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set coordinates and radius for the circle that will become the fish back</span></div>
+<div class="line"> <span class="keywordtype">double</span> x_c=0.5;</div>
+<div class="line"> <span class="keywordtype">double</span> y_c=-0.2;</div>
+<div class="line"> <span class="keywordtype">double</span> r_back=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build geometric object that will become the fish back</span></div>
+<div class="line">  ElasticallySupportedRingElement* Fish_back_pt=</div>
+<div class="line">   <span class="keyword">new</span> ElasticallySupportedRingElement(x_c,y_c,r_back);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build fish mesh with geometric object that specifies the fish back </span></div>
+<div class="line"> MacroElementNodeUpdateRefineableFishMesh&lt;ELEMENT&gt;* Fish_mesh_pt=<span class="keyword">new</span> </div>
+<div class="line">  MacroElementNodeUpdateRefineableFishMesh&lt;ELEMENT&gt;(Fish_back_pt);</div>
+</div><!-- fragment --><p>and document the mesh (i.e. the shape of its constituent finite elements and the nodal positions):</p>
+<div class="fragment"><div class="line"> <span class="comment">// Number of plot points in each coordinate direction.</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=11; </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output initial mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> count=0;</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;RESLT/soln%i.dat&quot;</span>,count);</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Fish_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> count++; </div>
+</div><!-- fragment --><p>Next, we "manually" increment <img class="formulaInl" alt="$ Y_c $" src="form_3.png"/>, i.e. the y-coordinate of the centre of the circular arc that defines the upper curvilinear boundary of the fish mesh.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Increment y_c</span></div>
+<div class="line"> Fish_back_pt-&gt;y_c()+=0.2;</div>
+</div><!-- fragment --><p>This step mimics the incrementation of one of the <code>Problems's</code> unknowns (recall that in the free-boundary problem considered above, <img class="formulaInl" alt="$ Y_c $" src="form_3.png"/> has to be determined as part of the solution!) during the finite-difference based computation of the shape derivatives.</p>
+<p>For meshes that are not derived from the <code>MacroElementNodeUpdateMeshBase</code> class, the only way to update the nodal positions in response to a change in the boundary position, is to call the <code>Mesh::node_update()</code> function. This updates the position of <em>all</em> nodes in the mesh &ndash; a very costly operation.</p>
+<p>Meshes that are derived from the <code>MacroElementNodeUpdateMeshBase</code> class contain <code>MacroElementNodeUpdateNodes</code> which can update their own position, as shown here:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Adjust each node in turn and doc</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nnod=Fish_mesh_pt-&gt;nnode();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;nnod;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Update individual nodal position</span></div>
+<div class="line">   Fish_mesh_pt-&gt;node_pt(i)-&gt;node_update();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc mesh</span></div>
+<div class="line">   sprintf(filename,<span class="stringliteral">&quot;RESLT/soln%i.dat&quot;</span>,count);</div>
+<div class="line">   some_file.open(filename);</div>
+<div class="line">   Fish_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line">   some_file.close();</div>
+<div class="line">   count++; </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+</div><!-- fragment --><p>We note that the <code>Node::node_update()</code> function is defined as an empty virtual function in the <code>Node</code> base class, indicating that "normal" <code>Nodes</code> cannot "update their own position". The function is overloaded in the <code>MacroElementNodeUpdateNode</code> class, details of which are given below. Overloaded versions of this function also exist in various other derived <code>Node</code> classes (such as as the <code>AlgebraicNodes</code> and the <code>SpineNodes</code>) for which algebraic node update operations are defined.</p>
+<p>Here is an animation that illustrates how the successive update of the individual nodal positions in response to the change in the boundary position gradually updates the entire mesh.</p>
+<div class="image">
+<img src="sparse_node_update.gif" alt=""/>
+<div class="caption">
+Illustration of the sparse node-update procedure. </div></div>
+ <hr  />
+<h2><a class="anchor" id="how_it_works"></a>
+How it works</h2>
+<p>The implementation employs three key components:</p><ul>
+<li><b><code>MacroElementNodeUpdateNodes</code></b> are derived from the <code>Node</code> base class. Their main purpose is to provide the <code>MacroElementNodeUpdateNodes::node_update()</code> function which updates the nodal position in response to changes in the domain boundary. This capability was demonstrated above and is achieved by allowing the <code>MacroElementNodeUpdateNodes</code> to store a pointer to the <code>MacroElementNodeUpdateElement</code> that determines its position (using its own <code>MacroElement</code> - based representation) and its local coordinates in that element. <br  />
+<br  />
+ <code>MacroElementNodeUpdateNodes</code> also store a function pointer to an auxiliary node update function that allows additional tasks to be performed whenever a node update is performed. This is useful, e.g. in unsteady fluid-structure interaction problems in which a change in the position of nodes that are located on a no-slip boundary also requires an update of the fluid velocities at that node. By default, the function pointer is initialised to NULL, indicating that no auxiliary node update functions have to be executed. <br  />
+<br  />
+ Finally, the <code>MacroElementNodeUpdateNodes</code> store pointers to the <code>GeomObjects</code> that affect their node update. While this information is not required by the node update function itself, it must be available to correctly set up the equation numbering scheme in the presence of hanging nodes. (Details are too messy to explain here but it's true!). <br  />
+<br  />
+</li>
+<li>The <b><code>MacroElementNodeUpdateElement&lt;ELEMENT&gt;</code></b> class was already discussed in the main part of this document. These elements "wrap around" the element specified by the template argument, <code>ELEMENT</code>, overload some of its member functions and add some new ones. <br  />
+ <br  />
+ Overloaded functions include: <br  />
+<br  />
+<ul>
+<li>The <code>FiniteElement::construct_node(...)</code> functions create an element's local <code>Nodes</code>. This is overloaded by a version that creates <code>MacroElementNodeUpdateNodes</code> instead. <br  />
+<br  />
+</li>
+<li>The functions <code>GeneralisedElement::get_jacobian(...)</code> and <code>GeneralisedElement::fill_in_contribution_to_jacobian(...)</code> are overloaded by versions that add the shape derivatives to the Jacobian matrices computed by the underlying ELEMENT. <br  />
+<br  />
+</li>
+<li>Similarly, the function <code>FiniteElement::assign_all_generic_local_eqn_numbers()</code> is overloaded to add the unknowns associated with the node update functions into the element's equation numbering scheme. <br  />
+<br  />
+</li>
+</ul>
+Additional member functions are provided to specify (and access) the <code>GeomObjects</code> that affect an element's <code>MacroElement</code> - based node update. Full details may be found in the <a href="../../../the_data_structure/html/index.html">"bottom
+  up"</a> discussion of <code>oomph-lib's</code> data structure. <br  />
+<br  />
+</li>
+<li>Finally, the <b><code>MacroElementNodeUpdateMeshBase</code></b> class overloads the <code>Mesh::node_update()</code> function to ensure that node updates are performed node-by-node, using the <code>MacroElementNodeUpdateNode::node_update()</code> function. This ensures that the node update not only updates the nodal positions but also executes any auxiliary update functions.</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="fsi"></a>
+The method also works for non-"toy" problems!</h2>
+<p>The above example demonstrated how easy it is to "upgrade" a driver code for the solution of a single-physics problem to a fluid-structure-interaction-like free-boundary problem. It is important to stress that the methodology employed in our "toy" free-boundary problem can also be used for genuine fluid-structure interaction problems. For instance, the driver code for the simulation of <a href="../../../navier_stokes/collapsible_channel/html/index.html">2D unsteady finite-Reynolds number flow in a channel with an oscillating wall whose motion is prescribed</a> can easily be extended to a driver code for the corresponding <a href="../../../interaction/fsi_collapsible_channel/html/index.html">fluid-structure interaction problem in which the wall is replaced by a flexible membrane that is loaded by the fluid traction.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/interaction/free_boundary_poisson/">demo_drivers/interaction/free_boundary_poisson/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/interaction/free_boundary_poisson/macro_element_free_boundary_poisson.cc">demo_drivers/interaction/free_boundary_poisson/macro_element_free_boundary_poisson.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html">FreeBoundaryPoissonProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00146">macro_element_free_boundary_poisson.cc:146</a></div></div>
+<div class="ttc" id="anamespaceConstSourceForPoisson_html"><div class="ttname"><a href="namespaceConstSourceForPoisson.html">ConstSourceForPoisson</a></div><div class="ttdoc">Namespace for const source term in Poisson equation.</div><div class="ttdef"><b>Definition:</b> <a href="algebraic__free__boundary__poisson_8cc_source.html#l00055">algebraic_free_boundary_poisson.cc:55</a></div></div>
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html_adccab51afed9228783120934b6be37c9"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html#adccab51afed9228783120934b6be37c9">FreeBoundaryPoissonProblem::fish_mesh_pt</a></div><div class="ttdeci">MyMacroElementNodeUpdateRefineableFishMesh&lt; ELEMENT &gt; * fish_mesh_pt()</div><div class="ttdoc">Access function for the fish mesh.</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00164">macro_element_free_boundary_poisson.cc:164</a></div></div>
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html_aaa45902e79f963060b4b6820c5383cfc"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html#aaa45902e79f963060b4b6820c5383cfc">FreeBoundaryPoissonProblem::Fish_back_mesh_pt</a></div><div class="ttdeci">Mesh * Fish_back_mesh_pt</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00187">macro_element_free_boundary_poisson.cc:187</a></div></div>
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html_a0efe7c342eea790fc0240830bc3c4ebc"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html#a0efe7c342eea790fc0240830bc3c4ebc">FreeBoundaryPoissonProblem::FreeBoundaryPoissonProblem</a></div><div class="ttdeci">FreeBoundaryPoissonProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00199">macro_element_free_boundary_poisson.cc:199</a></div></div>
+<div class="ttc" id="amacro__element__free__boundary__poisson_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="macro__element__free__boundary__poisson_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver for &quot;free-boundary&quot; fish poisson solver with adaptation.</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00308">macro_element_free_boundary_poisson.cc:308</a></div></div>
+<div class="ttc" id="aclassMyMacroElementNodeUpdateRefineableFishMesh_html"><div class="ttname"><a href="classMyMacroElementNodeUpdateRefineableFishMesh.html">MyMacroElementNodeUpdateRefineableFishMesh</a></div><div class="ttdoc">Refineable, fish-shaped mesh with MacroElement-based node update.</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00085">macro_element_free_boundary_poisson.cc:85</a></div></div>
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html_a2282d8ac1d5753771a9a3cfc0417f6b6"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html#a2282d8ac1d5753771a9a3cfc0417f6b6">FreeBoundaryPoissonProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00288">macro_element_free_boundary_poisson.cc:288</a></div></div>
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html_aa18df6c9a9287f67ae1bff0f67aaa625"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html#aa18df6c9a9287f67ae1bff0f67aaa625">FreeBoundaryPoissonProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00161">macro_element_free_boundary_poisson.cc:161</a></div></div>
+<div class="ttc" id="amacro__poisson_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="macro__poisson_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="macro__poisson_8txt_source.html#l00004">macro_poisson.txt:4</a></div></div>
+<div class="ttc" id="adoc__sparse__macro__node__update_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="doc__sparse__macro__node__update_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver to document sparse MacroElement-based node update.</div><div class="ttdef"><b>Definition:</b> <a href="doc__sparse__macro__node__update_8cc_source.html#l00048">doc_sparse_macro_node_update.cc:48</a></div></div>
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html_a5b75b8553f3dfed4e9a8996c1b13edf3"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html#a5b75b8553f3dfed4e9a8996c1b13edf3">FreeBoundaryPoissonProblem::~FreeBoundaryPoissonProblem</a></div><div class="ttdeci">virtual ~FreeBoundaryPoissonProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00155">macro_element_free_boundary_poisson.cc:155</a></div></div>
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html_ae81a7e22c2c61854696b80a94053a663"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html#ae81a7e22c2c61854696b80a94053a663">FreeBoundaryPoissonProblem::Fish_mesh_pt</a></div><div class="ttdeci">MyMacroElementNodeUpdateRefineableFishMesh&lt; ELEMENT &gt; * Fish_mesh_pt</div><div class="ttdoc">Pointer to fish mesh.</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00183">macro_element_free_boundary_poisson.cc:183</a></div></div>
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html_a885a6e3a4efd1f02314806dced566569"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html#a885a6e3a4efd1f02314806dced566569">FreeBoundaryPoissonProblem::actions_before_newton_convergence_check</a></div><div class="ttdeci">void actions_before_newton_convergence_check()</div><div class="ttdoc">Before checking the new residuals in Newton's method we have to update nodal positions in response to...</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00175">macro_element_free_boundary_poisson.cc:175</a></div></div>
+<div class="ttc" id="aclassFreeBoundaryPoissonProblem_html_aeef57bd5dc79b6aba9eeadcd0c01a2e0"><div class="ttname"><a href="classFreeBoundaryPoissonProblem.html#aeef57bd5dc79b6aba9eeadcd0c01a2e0">FreeBoundaryPoissonProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="macro__element__free__boundary__poisson_8cc_source.html#l00158">macro_element_free_boundary_poisson.cc:158</a></div></div>
+<div class="ttc" id="anamespaceConstSourceForPoisson_html_a40ef79083874b58ed42b4df2ca0f4c10"><div class="ttname"><a href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">ConstSourceForPoisson::get_source</a></div><div class="ttdeci">void get_source(const Vector&lt; double &gt; &amp;x, double &amp;source)</div><div class="ttdoc">Const source function.</div><div class="ttdef"><b>Definition:</b> <a href="algebraic__free__boundary__poisson_8cc_source.html#l00061">algebraic_free_boundary_poisson.cc:61</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:18:13
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

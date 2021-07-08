@@ -1,0 +1,170 @@
+\hypertarget{classoomph_1_1FD__LU}{}\doxysection{oomph\+::F\+D\+\_\+\+LU Class Reference}
+\label{classoomph_1_1FD__LU}\index{oomph::FD\_LU@{oomph::FD\_LU}}
+
+
+Dense LU decomposition-\/based solve of linear system assembled via finite differencing of the residuals \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Even more inefficient than \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} but excellent sanity check!  
+
+
+
+
+{\ttfamily \#include $<$linear\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::F\+D\+\_\+\+LU\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1FD__LU}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FD__LU_a146eb52770fe0c6c2f828bb55c9be862}{F\+D\+\_\+\+LU}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FD__LU_ad45be3df2a071c29cef9a9555bbd28f8}{F\+D\+\_\+\+LU}} (const \mbox{\hyperlink{classoomph_1_1FD__LU}{F\+D\+\_\+\+LU}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FD__LU_a972f0332d47cf89719ab28f3feeb36d5}{operator=}} (const \mbox{\hyperlink{classoomph_1_1FD__LU}{F\+D\+\_\+\+LU}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FD__LU_a6fd251bef9cdb7efbed4927f005eda2f}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (Jacobian computed by FD approx.) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FD__LU_ab8c9d6006352d0ea61a721b9c58cd523}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc80da9eba1}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Dense LU decomposition-\/based solve of linear system assembled via finite differencing of the residuals \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Even more inefficient than \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} but excellent sanity check! 
+
+Definition at line 422 of file linear\+\_\+solver.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1FD__LU_a146eb52770fe0c6c2f828bb55c9be862}\label{classoomph_1_1FD__LU_a146eb52770fe0c6c2f828bb55c9be862}} 
+\index{oomph::FD\_LU@{oomph::FD\_LU}!FD\_LU@{FD\_LU}}
+\index{FD\_LU@{FD\_LU}!oomph::FD\_LU@{oomph::FD\_LU}}
+\doxysubsubsection{\texorpdfstring{FD\_LU()}{FD\_LU()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+F\+D\+\_\+\+L\+U\+::\+F\+D\+\_\+\+LU (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: empty. 
+
+
+
+Definition at line 427 of file linear\+\_\+solver.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FD__LU_ad45be3df2a071c29cef9a9555bbd28f8}\label{classoomph_1_1FD__LU_ad45be3df2a071c29cef9a9555bbd28f8}} 
+\index{oomph::FD\_LU@{oomph::FD\_LU}!FD\_LU@{FD\_LU}}
+\index{FD\_LU@{FD\_LU}!oomph::FD\_LU@{oomph::FD\_LU}}
+\doxysubsubsection{\texorpdfstring{FD\_LU()}{FD\_LU()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+F\+D\+\_\+\+L\+U\+::\+F\+D\+\_\+\+LU (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FD__LU}{F\+D\+\_\+\+LU}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 430 of file linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1FD__LU_a972f0332d47cf89719ab28f3feeb36d5}\label{classoomph_1_1FD__LU_a972f0332d47cf89719ab28f3feeb36d5}} 
+\index{oomph::FD\_LU@{oomph::FD\_LU}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::FD\_LU@{oomph::FD\_LU}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+F\+D\+\_\+\+L\+U\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FD__LU}{F\+D\+\_\+\+LU}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 436 of file linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1FD__LU_ab8c9d6006352d0ea61a721b9c58cd523}\label{classoomph_1_1FD__LU_ab8c9d6006352d0ea61a721b9c58cd523}} 
+\index{oomph::FD\_LU@{oomph::FD\_LU}!solve@{solve}}
+\index{solve@{solve}!oomph::FD\_LU@{oomph::FD\_LU}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void oomph\+::\+F\+D\+\_\+\+L\+U\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DenseLU_ae82e044bb5a1173b8105b6fedd904801}{oomph\+::\+Dense\+LU}}.
+
+
+
+Definition at line 448 of file linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Dense\+L\+U\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc80da9eba1}\label{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc80da9eba1}} 
+\index{oomph::FD\_LU@{oomph::FD\_LU}!solve@{solve}}
+\index{solve@{solve}!oomph::FD\_LU@{oomph::FD\_LU}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void oomph\+::\+F\+D\+\_\+\+L\+U\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DenseLU_a1d79cf13a269733d655e3e90c447f84d}{oomph\+::\+Dense\+LU}}.
+
+
+
+Definition at line 457 of file linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Linear\+Solver\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1FD__LU_a6fd251bef9cdb7efbed4927f005eda2f}\label{classoomph_1_1FD__LU_a6fd251bef9cdb7efbed4927f005eda2f}} 
+\index{oomph::FD\_LU@{oomph::FD\_LU}!solve@{solve}}
+\index{solve@{solve}!oomph::FD\_LU@{oomph::FD\_LU}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void oomph\+::\+F\+D\+\_\+\+L\+U\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (Jacobian computed by FD approx.) 
+
+Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. (Jacobian assembled by FD). 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DenseLU_ac354b224819146618ce8a1396f8f980e}{oomph\+::\+Dense\+LU}}.
+
+
+
+Definition at line 554 of file linear\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Problem\+::get\+\_\+fd\+\_\+jacobian(), oomph\+::\+Dense\+L\+U\+::\+Jacobian\+\_\+setup\+\_\+time, oomph\+::\+Problem\+::ndof(), oomph\+::oomph\+\_\+info, residuals(), oomph\+::\+Dense\+L\+U\+::\+Sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix, and oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{linear__solver_8h}{linear\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{linear__solver_8cc}{linear\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

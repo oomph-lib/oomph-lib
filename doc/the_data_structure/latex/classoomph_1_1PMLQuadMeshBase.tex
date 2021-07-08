@@ -1,0 +1,84 @@
+\hypertarget{classoomph_1_1PMLQuadMeshBase}{}\doxysection{oomph\+::P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1PMLQuadMeshBase}\index{oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}}
+
+
+P\+ML mesh class. Policy class for 2D P\+ML meshes.  
+
+
+
+
+{\ttfamily \#include $<$pml\+\_\+meshes.\+h$>$}
+
+Inheritance diagram for oomph\+::P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classoomph_1_1PMLQuadMeshBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_aff4042f75a253b56f06cb321605c2afe}{P\+M\+L\+Quad\+Mesh\+Base}} (const unsigned \&n\+\_\+pml\+\_\+x, const unsigned \&n\+\_\+pml\+\_\+y, const double \&x\+\_\+pml\+\_\+start, const double \&x\+\_\+pml\+\_\+end, const double \&y\+\_\+pml\+\_\+start, const double \&y\+\_\+pml\+\_\+end, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Create the underlying rectangular quad mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_a8054b13b65a898e1364ca30eace6c1e8}{pml\+\_\+locate\+\_\+zeta}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\&coarse\+\_\+mesh\+\_\+el\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Overloaded function to allow the user to locate an element in mesh given the (Eulerian) position of a point. Note, the result may be nonunique if the given point lies on the boundary of two elements in the mesh. Additionally, we assume that the P\+ML mesh is axis aligned when deciding if the given point lies inside the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+P\+ML mesh class. Policy class for 2D P\+ML meshes. 
+
+Definition at line 188 of file pml\+\_\+meshes.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PMLQuadMeshBase_aff4042f75a253b56f06cb321605c2afe}\label{classoomph_1_1PMLQuadMeshBase_aff4042f75a253b56f06cb321605c2afe}} 
+\index{oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}!PMLQuadMeshBase@{PMLQuadMeshBase}}
+\index{PMLQuadMeshBase@{PMLQuadMeshBase}!oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PMLQuadMeshBase()}{PMLQuadMeshBase()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase}{oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase}{P\+M\+L\+Quad\+Mesh\+Base}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+pml\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+y,  }\item[{const double \&}]{x\+\_\+pml\+\_\+start,  }\item[{const double \&}]{x\+\_\+pml\+\_\+end,  }\item[{const double \&}]{y\+\_\+pml\+\_\+start,  }\item[{const double \&}]{y\+\_\+pml\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Create the underlying rectangular quad mesh. 
+
+
+
+Definition at line 194 of file pml\+\_\+meshes.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PMLQuadMeshBase_a8054b13b65a898e1364ca30eace6c1e8}\label{classoomph_1_1PMLQuadMeshBase_a8054b13b65a898e1364ca30eace6c1e8}} 
+\index{oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}!pml\_locate\_zeta@{pml\_locate\_zeta}}
+\index{pml\_locate\_zeta@{pml\_locate\_zeta}!oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{pml\_locate\_zeta()}{pml\_locate\_zeta()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase}{oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::pml\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\&}]{coarse\+\_\+mesh\+\_\+el\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overloaded function to allow the user to locate an element in mesh given the (Eulerian) position of a point. Note, the result may be nonunique if the given point lies on the boundary of two elements in the mesh. Additionally, we assume that the P\+ML mesh is axis aligned when deciding if the given point lies inside the mesh. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}{oomph\+::\+P\+M\+L\+Mesh\+Base}}.
+
+
+
+Definition at line 209 of file pml\+\_\+meshes.\+h.
+
+
+
+References oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nx(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ny(), oomph\+::\+Node\+::x(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+max(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+min(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+max(), and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+min().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pml__meshes_8h}{pml\+\_\+meshes.\+h}}\end{DoxyCompactItemize}

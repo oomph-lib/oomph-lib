@@ -1,0 +1,1011 @@
+\hypertarget{classoomph_1_1Tree}{}\doxysection{oomph\+::Tree Class Reference}
+\label{classoomph_1_1Tree}\index{oomph::Tree@{oomph::Tree}}
+
+
+{\ttfamily \#include $<$tree.\+h$>$}
+
+Inheritance diagram for oomph\+::Tree\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.854305cm]{classoomph_1_1Tree}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(Tree\+::$\ast$ \mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Void\+Member\+Fct\+Pt}}) ()
+\begin{DoxyCompactList}\small\item\em Function pointer to argument-\/free void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function. \end{DoxyCompactList}\item 
+typedef void(Tree\+::$\ast$ \mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classoomph_1_1Tree_ace0b4169cf94a040c280af8e14f6a283}{$\sim$\+Tree}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Note\+: Deleting a tree also deletes the objects associated with its non-\/leave nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree_af14116bedf82f96556877c475c73c6e3}{Tree}} (const \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_a931f95671b788bbba03a7908bb205e5e}{operator=}} (const \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return the pointer to the object (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}) represented by the tree. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_a96a95bd9942e906fde87194845a1868c}{flush\+\_\+object}} ()
+\begin{DoxyCompactList}\small\item\em Flush the object represented by the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1Tree_ab2ca6416d7a368e29da6a6a998f460c7}{son\+\_\+pt}} (const int \&son\+\_\+index) const
+\begin{DoxyCompactList}\small\item\em Return pointer to the son for a given index. Note that to aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_ab7026d14ead1a8d91ce417dfd0cd9478}{set\+\_\+son\+\_\+pt}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1Tree_ab2ca6416d7a368e29da6a6a998f460c7}{son\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Tree_a31e4123b40f6fb52d180a154c9123e85}{nsons}} () const
+\begin{DoxyCompactList}\small\item\em Return number of sons (zero if it\textquotesingle{}s a leaf node) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_a34df656d2f298dbbdf60e7890a3dff2f}{flush\+\_\+sons}} ()
+\begin{DoxyCompactList}\small\item\em Flush the sons. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$\& \mbox{\hyperlink{classoomph_1_1Tree_ae48479dc463d2a8f10400b4b00643a27}{root\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return pointer to root of the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$ \mbox{\hyperlink{classoomph_1_1Tree_a3e4dee01da0a463c4a3a5be574943632}{root\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return pointer to root of the tree (const version) \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{classoomph_1_1Tree_a975ccfd63ffa14a04f14a37b3d2ff931}{split\+\_\+if\+\_\+required}} ()
+\begin{DoxyCompactList}\small\item\em If required, split the leaf and create its sons -- criterion\+: bool \mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt()}}-\/$>$ to\+\_\+be\+\_\+refined() = true. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{classoomph_1_1Tree_a6502324233a86eeeadba7f46505656af}{p\+\_\+refine\+\_\+if\+\_\+required}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em If required, p-\/refine the leaf -- criterion\+: bool \mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt()}}-\/$>$ to\+\_\+be\+\_\+p\+\_\+refined() = true or bool \mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt()}}-\/$>$ to\+\_\+be\+\_\+p\+\_\+unrefined() = true. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_af4f977931ece6b719a9e616037bb2481}{merge\+\_\+sons\+\_\+if\+\_\+required}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em If required, merge the four sons for unrefinement -- criterion\+: bool \mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt()}}-\/$>$ sons\+\_\+to\+\_\+be\+\_\+unrefined() = true. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_aea17489589a1872db51f2b142da4c1fb}{deactivate\+\_\+object}} ()
+\begin{DoxyCompactList}\small\item\em Call the \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}\textquotesingle{}s deactivate\+\_\+element() function. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1Tree_a5eb29718044b1bc56403ee9bd15a60b6}{construct\+\_\+son}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})=0
+\begin{DoxyCompactList}\small\item\em A function that constructs a specific type of tree. This M\+U\+ST be overloaded for each specific tree type. The use of such a function allows the generic implementation of \mbox{\hyperlink{classoomph_1_1Tree_a975ccfd63ffa14a04f14a37b3d2ff931}{split\+\_\+if\+\_\+required()}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_a3caab39c8bee6fb65bbafed523aa6d3d}{traverse\+\_\+all}} (\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}} member\+\_\+function)
+\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function member\+\_\+function() at all its \char`\"{}nodes\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_af5c67186ca9c87eef9ce7eaa0af41057}{traverse\+\_\+all}} (\mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Tree\+::\+Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}} member\+\_\+function, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Traverse the tree and excute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes a pointer to a mesh as an argument. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_aef175445b09edb47624c4b88c6d548bc}{traverse\+\_\+all\+\_\+but\+\_\+leaves}} (\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}} member\+\_\+function)
+\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_a22e0e3695dd8986e439927b7657ff741}{traverse\+\_\+leaves}} (\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}} member\+\_\+function)
+\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function member\+\_\+function() only at its leaves. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_a914e74ef473b7e82299ea9337d37830d}{traverse\+\_\+leaves}} (\mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Tree\+::\+Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}} member\+\_\+function, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes a pointer to a mesh as an argument only at its leaves. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_accfbeb9178ce92a8a51e3a15293a86d1}{stick\+\_\+leaves\+\_\+into\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ \&)
+\begin{DoxyCompactList}\small\item\em Traverse tree and stick pointers to leaf \char`\"{}nodes\char`\"{} (only) into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_a2c84b4e4700a825ef0a6ca533b9ae895}{stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ \&)
+\begin{DoxyCompactList}\small\item\em Traverse and stick pointers to all \char`\"{}nodes\char`\"{} into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}} () const
+\begin{DoxyCompactList}\small\item\em Return son type. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1Tree_a72000456c76880e3f78f8f8fb43d49d8}{is\+\_\+leaf}} ()
+\begin{DoxyCompactList}\small\item\em Return true if the tree is a leaf node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return pointer to father\+: N\+U\+LL if it\textquotesingle{}s a root node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Tree_ac0cf27d3116db0f8d2f18b3faf09ec15}{set\+\_\+father\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the father. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1Tree_ab3eba84432fcc595684ac7eb8331b8ee}{level}} () const
+\begin{DoxyCompactList}\small\item\em Return the level of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} (root=0) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \& \mbox{\hyperlink{classoomph_1_1Tree_affbae3271da943dfc23645ade966aef9}{max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int \mbox{\hyperlink{classoomph_1_1Tree_a9e532196340dcd859ff8207eea2ddbbc}{O\+M\+E\+GA}} =26
+\begin{DoxyCompactList}\small\item\em Default value for an unassigned neighbour. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Tree_ada92f1aa44ee6ef5b52ec5ad0af00359}{Tree}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree_a6e78c3a130add917de182ab5f1674531}{Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree_a9d611dde1f429500330f28e56ee71883}{Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
+\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$ \mbox{\hyperlink{classoomph_1_1Tree_a61782afd668561ad7ab324f658ffeb6a}{Root\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the root of the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1Tree_a001ce5515a3d76cdad248695e149504b}{Father\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the Father of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1Tree_ac6b9069f345b296654421604c5569af6}{Son\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the sons of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1Tree_a9ac30decb7a63027906880620f8b98ee}{Level}}
+\begin{DoxyCompactList}\small\item\em Level of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} (level 0 = root) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1Tree_a83fe7895af25c9f60062c081fc51967c}{Son\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Son type (e.\+g. S\+W/\+S\+E/\+N\+W/\+NE in a quadtree) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1Tree_a61ee20b575da510512d0e108cf7b06c6}{Object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the object represented by the tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}} =1.\+0e-\/14
+\begin{DoxyCompactList}\small\item\em Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A generalised tree base class that abstracts the common functionality between the quad-\/ and octrees used in mesh adaptation in two and three dimensions, respectively.
+
+The tree can also be part of a forest. If that is the case, the root of the tree will have pointers to the roots of neighbouring trees.
+
+The objects contained in the tree must be Refineable\+Elements.
+
+The tree can be traversed and actions performed at all its \char`\"{}nodes\char`\"{} or only at the leaf \char`\"{}nodes\char`\"{} (\char`\"{}nodes\char`\"{} without sons).
+
+Finally, the leaf \char`\"{}nodes\char`\"{} can be split depending on a criteria defined by the object.
+
+Note that Trees are only generated by splitting existing Trees. Therefore, the constructors are protected. The only \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} that \char`\"{}\+Joe User\char`\"{} can create is the (derived) class \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}. 
+
+Definition at line 75 of file tree.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}\label{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}} 
+\index{oomph::Tree@{oomph::Tree}!VoidMemberFctPt@{VoidMemberFctPt}}
+\index{VoidMemberFctPt@{VoidMemberFctPt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{VoidMemberFctPt}{VoidMemberFctPt}}
+{\footnotesize\ttfamily typedef void(Tree\+::$\ast$ oomph\+::\+Tree\+::\+Void\+Member\+Fct\+Pt) ()}
+
+
+
+Function pointer to argument-\/free void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function. 
+
+
+
+Definition at line 169 of file tree.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}\label{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}} 
+\index{oomph::Tree@{oomph::Tree}!VoidMeshPtArgumentMemberFctPt@{VoidMeshPtArgumentMemberFctPt}}
+\index{VoidMeshPtArgumentMemberFctPt@{VoidMeshPtArgumentMemberFctPt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{VoidMeshPtArgumentMemberFctPt}{VoidMeshPtArgumentMemberFctPt}}
+{\footnotesize\ttfamily typedef void(Tree\+::$\ast$ oomph\+::\+Tree\+::\+Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)}
+
+Function pointer to a void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes a pointer to a mesh as its argument 
+
+Definition at line 173 of file tree.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1Tree_ace0b4169cf94a040c280af8e14f6a283}\label{classoomph_1_1Tree_ace0b4169cf94a040c280af8e14f6a283}} 
+\index{oomph::Tree@{oomph::Tree}!````~Tree@{$\sim$Tree}}
+\index{````~Tree@{$\sim$Tree}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{$\sim$Tree()}{~Tree()}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+::$\sim$\+Tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. Note\+: Deleting a tree also deletes the objects associated with its non-\/leave nodes. 
+
+Destructor for \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Recursively kill all sons and the associated objects of the non-\/leaf nodes. However, the objects of the leaf nodes are not destroyed. Their destruction is handled by the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} destructor. ~\newline
+ 
+
+Definition at line 124 of file tree.\+cc.
+
+
+
+References i, nsons(), Object\+\_\+pt, and Son\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1Tree_af14116bedf82f96556877c475c73c6e3}\label{classoomph_1_1Tree_af14116bedf82f96556877c475c73c6e3}} 
+\index{oomph::Tree@{oomph::Tree}!Tree@{Tree}}
+\index{Tree@{Tree}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Tree()}{Tree()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+::\+Tree (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 85 of file tree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_ada92f1aa44ee6ef5b52ec5ad0af00359}\label{classoomph_1_1Tree_ada92f1aa44ee6ef5b52ec5ad0af00359}} 
+\index{oomph::Tree@{oomph::Tree}!Tree@{Tree}}
+\index{Tree@{Tree}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Tree()}{Tree()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+::\+Tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Default constructor (empty and broken) 
+
+
+
+Definition at line 242 of file tree.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a6e78c3a130add917de182ab5f1674531}\label{classoomph_1_1Tree_a6e78c3a130add917de182ab5f1674531}} 
+\index{oomph::Tree@{oomph::Tree}!Tree@{Tree}}
+\index{Tree@{Tree}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Tree()}{Tree()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+::\+Tree (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. ~\newline
+ 
+
+Constructor for empty (root) \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: No father, no sons. Pass pointer to the object that this tree (root) contains. Protected because Trees can only be created internally, during the split operation. ~\newline
+ 
+
+Definition at line 65 of file tree.\+cc.
+
+
+
+References Father\+\_\+pt, Level, object\+\_\+pt(), O\+M\+E\+GA, Root\+\_\+pt, oomph\+::\+Refineable\+Element\+::set\+\_\+tree\+\_\+pt(), Son\+\_\+pt, and Son\+\_\+type.
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a9d611dde1f429500330f28e56ee71883}\label{classoomph_1_1Tree_a9d611dde1f429500330f28e56ee71883}} 
+\index{oomph::Tree@{oomph::Tree}!Tree@{Tree}}
+\index{Tree@{Tree}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Tree()}{Tree()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+::\+Tree (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&}]{father\+\_\+pt,  }\item[{const int \&}]{son\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. ~\newline
+ 
+
+Constructor for \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: This one has a father and is a son of a certain type, but has no sons of its own (just yet), so it\textquotesingle{}s a leaf node. Protected because Trees can only be created internally, during the split operation. 
+
+Definition at line 95 of file tree.\+cc.
+
+
+
+References father\+\_\+pt(), Father\+\_\+pt, Level, object\+\_\+pt(), Root\+\_\+pt, oomph\+::\+Refineable\+Element\+::set\+\_\+tree\+\_\+pt(), Son\+\_\+pt, son\+\_\+type(), and Son\+\_\+type.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1Tree_a5eb29718044b1bc56403ee9bd15a60b6}\label{classoomph_1_1Tree_a5eb29718044b1bc56403ee9bd15a60b6}} 
+\index{oomph::Tree@{oomph::Tree}!construct\_son@{construct\_son}}
+\index{construct\_son@{construct\_son}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{construct\_son()}{construct\_son()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}$\ast$ oomph\+::\+Tree\+::construct\+\_\+son (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&}]{father\+\_\+pt,  }\item[{const int \&}]{son\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+A function that constructs a specific type of tree. This M\+U\+ST be overloaded for each specific tree type. The use of such a function allows the generic implementation of \mbox{\hyperlink{classoomph_1_1Tree_a975ccfd63ffa14a04f14a37b3d2ff931}{split\+\_\+if\+\_\+required()}}. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1OcTree_a2f894bab3cbde60d810de0ee43a9f023}{oomph\+::\+Oc\+Tree}}, \mbox{\hyperlink{classoomph_1_1QuadTree_aa05756df125b508ca55f30cf4c4a11e9}{oomph\+::\+Quad\+Tree}}, and \mbox{\hyperlink{classoomph_1_1BinaryTree_adeb5fdb3cc2b86827622586c42afba37}{oomph\+::\+Binary\+Tree}}.
+
+
+
+Referenced by split\+\_\+if\+\_\+required().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_aea17489589a1872db51f2b142da4c1fb}\label{classoomph_1_1Tree_aea17489589a1872db51f2b142da4c1fb}} 
+\index{oomph::Tree@{oomph::Tree}!deactivate\_object@{deactivate\_object}}
+\index{deactivate\_object@{deactivate\_object}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{deactivate\_object()}{deactivate\_object()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::deactivate\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Call the \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}\textquotesingle{}s deactivate\+\_\+element() function. 
+
+Call the \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}\textquotesingle{}s deactivate\+\_\+element() function that is used to perform any final changes to internal data storage of deactivated objects. 
+
+Definition at line 334 of file tree.\+cc.
+
+
+
+References oomph\+::\+Refineable\+Element\+::deactivate\+\_\+element(), and object\+\_\+pt().
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}\label{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}} 
+\index{oomph::Tree@{oomph::Tree}!father\_pt@{father\_pt}}
+\index{father\_pt@{father\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{father\_pt()}{father\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}$\ast$ oomph\+::\+Tree\+::father\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to father\+: N\+U\+LL if it\textquotesingle{}s a root node. 
+
+
+
+Definition at line 217 of file tree.\+h.
+
+
+
+References Father\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt(), oomph\+::\+Binary\+Tree\+::construct\+\_\+son(), oomph\+::\+Quad\+Tree\+::construct\+\_\+son(), oomph\+::\+Oc\+Tree\+::construct\+\_\+son(), oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Element\+::get\+\_\+father\+\_\+at\+\_\+refinement\+\_\+level(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh(), set\+\_\+father\+\_\+pt(), split\+\_\+if\+\_\+required(), and Tree().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a96a95bd9942e906fde87194845a1868c}\label{classoomph_1_1Tree_a96a95bd9942e906fde87194845a1868c}} 
+\index{oomph::Tree@{oomph::Tree}!flush\_object@{flush\_object}}
+\index{flush\_object@{flush\_object}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{flush\_object()}{flush\_object()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::flush\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Flush the object represented by the tree. 
+
+
+
+Definition at line 101 of file tree.\+h.
+
+
+
+References Object\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Mesh\+::distribute(), and oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a34df656d2f298dbbdf60e7890a3dff2f}\label{classoomph_1_1Tree_a34df656d2f298dbbdf60e7890a3dff2f}} 
+\index{oomph::Tree@{oomph::Tree}!flush\_sons@{flush\_sons}}
+\index{flush\_sons@{flush\_sons}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{flush\_sons()}{flush\_sons()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::flush\+\_\+sons (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Flush the sons. 
+
+
+
+Definition at line 133 of file tree.\+h.
+
+
+
+References Son\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a72000456c76880e3f78f8f8fb43d49d8}\label{classoomph_1_1Tree_a72000456c76880e3f78f8f8fb43d49d8}} 
+\index{oomph::Tree@{oomph::Tree}!is\_leaf@{is\_leaf}}
+\index{is\_leaf@{is\_leaf}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{is\_leaf()}{is\_leaf()}}
+{\footnotesize\ttfamily bool oomph\+::\+Tree\+::is\+\_\+leaf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return true if the tree is a leaf node. 
+
+
+
+Definition at line 208 of file tree.\+h.
+
+
+
+References Son\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution(), oomph\+::\+Oc\+Tree\+::doc\+\_\+true\+\_\+edge\+\_\+neighbours(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_ab3eba84432fcc595684ac7eb8331b8ee}\label{classoomph_1_1Tree_ab3eba84432fcc595684ac7eb8331b8ee}} 
+\index{oomph::Tree@{oomph::Tree}!level@{level}}
+\index{level@{level}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{level()}{level()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Tree\+::level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the level of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} (root=0) 
+
+
+
+Definition at line 226 of file tree.\+h.
+
+
+
+References Level.
+
+\mbox{\Hypertarget{classoomph_1_1Tree_affbae3271da943dfc23645ade966aef9}\label{classoomph_1_1Tree_affbae3271da943dfc23645ade966aef9}} 
+\index{oomph::Tree@{oomph::Tree}!max\_neighbour\_finding\_tolerance@{max\_neighbour\_finding\_tolerance}}
+\index{max\_neighbour\_finding\_tolerance@{max\_neighbour\_finding\_tolerance}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{max\_neighbour\_finding\_tolerance()}{max\_neighbour\_finding\_tolerance()}}
+{\footnotesize\ttfamily static double\& oomph\+::\+Tree\+::max\+\_\+neighbour\+\_\+finding\+\_\+tolerance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements) 
+
+
+
+Definition at line 231 of file tree.\+h.
+
+
+
+References Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance.
+
+
+
+Referenced by oomph\+::\+Binary\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Quad\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Binary\+Tree\+Forest\+::self\+\_\+test(), oomph\+::\+Quad\+Tree\+Forest\+::self\+\_\+test(), and oomph\+::\+Oc\+Tree\+Forest\+::self\+\_\+test().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_af4f977931ece6b719a9e616037bb2481}\label{classoomph_1_1Tree_af4f977931ece6b719a9e616037bb2481}} 
+\index{oomph::Tree@{oomph::Tree}!merge\_sons\_if\_required@{merge\_sons\_if\_required}}
+\index{merge\_sons\_if\_required@{merge\_sons\_if\_required}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{merge\_sons\_if\_required()}{merge\_sons\_if\_required()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::merge\+\_\+sons\+\_\+if\+\_\+required (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+If required, merge the four sons for unrefinement -- criterion\+: bool \mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt()}}-\/$>$ sons\+\_\+to\+\_\+be\+\_\+unrefined() = true. 
+
+If required, kill the sons to perform unrefinement.
+
+Unrefinement is performed if \begin{DoxyVerb} object_pt()->sons_to_be_unrefined()
+\end{DoxyVerb}
+
+
+returns true. ~\newline
+ 
+
+Definition at line 295 of file tree.\+cc.
+
+
+
+References oomph\+::\+Refineable\+Element\+::deselect\+\_\+sons\+\_\+for\+\_\+unrefinement(), nsons(), object\+\_\+pt(), Object\+\_\+pt, oomph\+::\+Refineable\+Element\+::rebuild\+\_\+from\+\_\+sons(), son\+\_\+pt(), Son\+\_\+pt, oomph\+::\+Refineable\+Element\+::sons\+\_\+to\+\_\+be\+\_\+unrefined(), and oomph\+::\+Refineable\+Element\+::unbuild().
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a31e4123b40f6fb52d180a154c9123e85}\label{classoomph_1_1Tree_a31e4123b40f6fb52d180a154c9123e85}} 
+\index{oomph::Tree@{oomph::Tree}!nsons@{nsons}}
+\index{nsons@{nsons}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{nsons()}{nsons()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Tree\+::nsons (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return number of sons (zero if it\textquotesingle{}s a leaf node) 
+
+
+
+Definition at line 130 of file tree.\+h.
+
+
+
+References Son\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), merge\+\_\+sons\+\_\+if\+\_\+required(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest(), oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector(), and $\sim$\+Tree().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}\label{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}} 
+\index{oomph::Tree@{oomph::Tree}!object\_pt@{object\_pt}}
+\index{object\_pt@{object\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{object\_pt()}{object\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}$\ast$ oomph\+::\+Tree\+::object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the object (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}) represented by the tree. 
+
+
+
+Definition at line 98 of file tree.\+h.
+
+
+
+References Object\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), oomph\+::\+Binary\+Tree\+::construct\+\_\+son(), oomph\+::\+Quad\+Tree\+::construct\+\_\+son(), oomph\+::\+Oc\+Tree\+::construct\+\_\+son(), oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents(), deactivate\+\_\+object(), oomph\+::\+Oc\+Tree\+::doc\+\_\+face\+\_\+neighbours(), oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Quad\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+::doc\+\_\+true\+\_\+edge\+\_\+neighbours(), oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Element\+::get\+\_\+father\+\_\+at\+\_\+refinement\+\_\+level(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 1, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::initial\+\_\+setup(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::initial\+\_\+setup(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::initial\+\_\+setup(), merge\+\_\+sons\+\_\+if\+\_\+required(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper(), p\+\_\+refine\+\_\+if\+\_\+required(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Problem\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::quad\+\_\+hang\+\_\+helper(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Element\+::root\+\_\+element\+\_\+pt(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest(), split\+\_\+if\+\_\+required(), and Tree().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a931f95671b788bbba03a7908bb205e5e}\label{classoomph_1_1Tree_a931f95671b788bbba03a7908bb205e5e}} 
+\index{oomph::Tree@{oomph::Tree}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 91 of file tree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a6502324233a86eeeadba7f46505656af}\label{classoomph_1_1Tree_a6502324233a86eeeadba7f46505656af}} 
+\index{oomph::Tree@{oomph::Tree}!p\_refine\_if\_required@{p\_refine\_if\_required}}
+\index{p\_refine\_if\_required@{p\_refine\_if\_required}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{p\_refine\_if\_required()}{p\_refine\_if\_required()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void oomph\+::\+Tree\+::p\+\_\+refine\+\_\+if\+\_\+required (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+If required, p-\/refine the leaf -- criterion\+: bool \mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt()}}-\/$>$ to\+\_\+be\+\_\+p\+\_\+refined() = true or bool \mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt()}}-\/$>$ to\+\_\+be\+\_\+p\+\_\+unrefined() = true. 
+
+If required, p-\/refine/unrefine the leaf element
+
+p-\/refinement is performed if \begin{DoxyVerb} object_pt()->to_be_p_refined()
+\end{DoxyVerb}
+
+
+returns true. p-\/unrefinement is performed if \begin{DoxyVerb} object_pt()->to_be_p_unrefined()
+\end{DoxyVerb}
+
+
+returns true.
+
+If this is the case, then we execute \begin{DoxyVerb} object_pt()->p_refine(+/-1,mesh_pt,clone_pt) 
+\end{DoxyVerb}
+
+
+to p-\/refine the element, where mesh\+\_\+pt is a pointer to the mesh that the element lives in, and clone\+\_\+pt is a pointer to a \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} that has all the information that would be needed from the father element during h-\/refinement. 
+
+Definition at line 155 of file tree.\+template.\+cc.
+
+
+
+References Father\+\_\+pt, i, n, oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), object\+\_\+pt(), Object\+\_\+pt, oomph\+::\+P\+Refineable\+Element\+::p\+\_\+refine(), Son\+\_\+pt, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+P\+Refineable\+Element\+::to\+\_\+be\+\_\+p\+\_\+refined(), oomph\+::\+P\+Refineable\+Element\+::to\+\_\+be\+\_\+p\+\_\+unrefined(), and oomph\+::\+Node\+::x().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_ae48479dc463d2a8f10400b4b00643a27}\label{classoomph_1_1Tree_ae48479dc463d2a8f10400b4b00643a27}} 
+\index{oomph::Tree@{oomph::Tree}!root\_pt@{root\_pt}}
+\index{root\_pt@{root\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{root\_pt()}{root\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$\& oomph\+::\+Tree\+::root\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to root of the tree. 
+
+
+
+Definition at line 139 of file tree.\+h.
+
+
+
+References Root\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), oomph\+::\+Oc\+Tree\+::doc\+\_\+face\+\_\+neighbours(), oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Quad\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+::doc\+\_\+true\+\_\+edge\+\_\+neighbours(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Problem\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Refineable\+Element\+::root\+\_\+element\+\_\+pt(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a3e4dee01da0a463c4a3a5be574943632}\label{classoomph_1_1Tree_a3e4dee01da0a463c4a3a5be574943632}} 
+\index{oomph::Tree@{oomph::Tree}!root\_pt@{root\_pt}}
+\index{root\_pt@{root\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{root\_pt()}{root\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$ oomph\+::\+Tree\+::root\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to root of the tree (const version) 
+
+
+
+Definition at line 142 of file tree.\+h.
+
+
+
+References Root\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1Tree_ac0cf27d3116db0f8d2f18b3faf09ec15}\label{classoomph_1_1Tree_ac0cf27d3116db0f8d2f18b3faf09ec15}} 
+\index{oomph::Tree@{oomph::Tree}!set\_father\_pt@{set\_father\_pt}}
+\index{set\_father\_pt@{set\_father\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{set\_father\_pt()}{set\_father\_pt()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::set\+\_\+father\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&}]{father\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the father. 
+
+
+
+Definition at line 220 of file tree.\+h.
+
+
+
+References father\+\_\+pt(), and Father\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_ab7026d14ead1a8d91ce417dfd0cd9478}\label{classoomph_1_1Tree_ab7026d14ead1a8d91ce417dfd0cd9478}} 
+\index{oomph::Tree@{oomph::Tree}!set\_son\_pt@{set\_son\_pt}}
+\index{set\_son\_pt@{set\_son\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{set\_son\_pt()}{set\_son\_pt()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::set\+\_\+son\+\_\+pt (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ \&}]{son\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). ~\newline
+ 
+
+
+
+Definition at line 124 of file tree.\+h.
+
+
+
+References son\+\_\+pt(), and Son\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_ab2ca6416d7a368e29da6a6a998f460c7}\label{classoomph_1_1Tree_ab2ca6416d7a368e29da6a6a998f460c7}} 
+\index{oomph::Tree@{oomph::Tree}!son\_pt@{son\_pt}}
+\index{son\_pt@{son\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{son\_pt()}{son\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}$\ast$ oomph\+::\+Tree\+::son\+\_\+pt (\begin{DoxyParamCaption}\item[{const int \&}]{son\+\_\+index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to the son for a given index. Note that to aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here. 
+
+
+
+Definition at line 110 of file tree.\+h.
+
+
+
+References Son\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt(), merge\+\_\+sons\+\_\+if\+\_\+required(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh(), set\+\_\+son\+\_\+pt(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest(), oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), and oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}\label{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}} 
+\index{oomph::Tree@{oomph::Tree}!son\_type@{son\_type}}
+\index{son\_type@{son\_type}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{son\_type()}{son\_type()}}
+{\footnotesize\ttfamily int oomph\+::\+Tree\+::son\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return son type. 
+
+
+
+Definition at line 205 of file tree.\+h.
+
+
+
+References Son\+\_\+type.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Binary\+Tree\+::construct\+\_\+son(), oomph\+::\+Quad\+Tree\+::construct\+\_\+son(), oomph\+::\+Oc\+Tree\+::construct\+\_\+son(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Linearised\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Q\+Spherical\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::pre\+\_\+build(), and Tree().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a975ccfd63ffa14a04f14a37b3d2ff931}\label{classoomph_1_1Tree_a975ccfd63ffa14a04f14a37b3d2ff931}} 
+\index{oomph::Tree@{oomph::Tree}!split\_if\_required@{split\_if\_required}}
+\index{split\_if\_required@{split\_if\_required}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{split\_if\_required()}{split\_if\_required()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void oomph\+::\+Tree\+::split\+\_\+if\+\_\+required}
+
+
+
+If required, split the leaf and create its sons -- criterion\+: bool \mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt()}}-\/$>$ to\+\_\+be\+\_\+refined() = true. 
+
+If required, split the leaf element and create its sons
+
+Split is performed if \begin{DoxyVerb} object_pt()->to_be_refined()
+\end{DoxyVerb}
+
+
+returns true.
+
+If this is the case, then we execute \begin{DoxyVerb} object_pt()->split(new_elements_pt) 
+\end{DoxyVerb}
+
+
+to create the sons. Pointers to the son objects are then inserted into the son pointers of the present element. This turns the present element into a \char`\"{}grey\char`\"{} (=non-\/leaf) node. 
+
+Definition at line 63 of file tree.\+template.\+cc.
+
+
+
+References construct\+\_\+son(), father\+\_\+pt(), Father\+\_\+pt, i, n, oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), object\+\_\+pt(), Object\+\_\+pt, Son\+\_\+pt, oomph\+::\+Refineable\+Element\+::split(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Refineable\+Element\+::to\+\_\+be\+\_\+refined(), and oomph\+::\+Node\+::x().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a2c84b4e4700a825ef0a6ca533b9ae895}\label{classoomph_1_1Tree_a2c84b4e4700a825ef0a6ca533b9ae895}} 
+\index{oomph::Tree@{oomph::Tree}!stick\_all\_tree\_nodes\_into\_vector@{stick\_all\_tree\_nodes\_into\_vector}}
+\index{stick\_all\_tree\_nodes\_into\_vector@{stick\_all\_tree\_nodes\_into\_vector}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{stick\_all\_tree\_nodes\_into\_vector()}{stick\_all\_tree\_nodes\_into\_vector()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ \&}]{all\+\_\+tree\+\_\+nodes }\end{DoxyParamCaption})}
+
+
+
+Traverse and stick pointers to all \char`\"{}nodes\char`\"{} into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
+Traverse \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Preorder traverse and stick pointer to all nodes (incl. \char`\"{}grey\char`\"{}=non-\/leaf ones) into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} 
+
+Definition at line 272 of file tree.\+cc.
+
+
+
+References i, and Son\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Problem\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Binary\+Tree\+::self\+\_\+test(), oomph\+::\+Quad\+Tree\+::self\+\_\+test(), oomph\+::\+Oc\+Tree\+::self\+\_\+test(), oomph\+::\+Refineable\+Brick\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+octree\+\_\+forest(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_accfbeb9178ce92a8a51e3a15293a86d1}\label{classoomph_1_1Tree_accfbeb9178ce92a8a51e3a15293a86d1}} 
+\index{oomph::Tree@{oomph::Tree}!stick\_leaves\_into\_vector@{stick\_leaves\_into\_vector}}
+\index{stick\_leaves\_into\_vector@{stick\_leaves\_into\_vector}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{stick\_leaves\_into\_vector()}{stick\_leaves\_into\_vector()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::stick\+\_\+leaves\+\_\+into\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ $>$ \&}]{tree\+\_\+nodes }\end{DoxyParamCaption})}
+
+
+
+Traverse tree and stick pointers to leaf \char`\"{}nodes\char`\"{} (only) into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
+Traverse \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}\+: Preorder traverse and stick pointers to leaf nodes (only) into \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} 
+
+Definition at line 251 of file tree.\+cc.
+
+
+
+References i, and Son\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Mesh\+::get\+\_\+all\+\_\+halo\+\_\+data(), oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt(), and oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a3caab39c8bee6fb65bbafed523aa6d3d}\label{classoomph_1_1Tree_a3caab39c8bee6fb65bbafed523aa6d3d}} 
+\index{oomph::Tree@{oomph::Tree}!traverse\_all@{traverse\_all}}
+\index{traverse\_all@{traverse\_all}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{traverse\_all()}{traverse\_all()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::traverse\+\_\+all (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}}}]{member\+\_\+function }\end{DoxyParamCaption})}
+
+
+
+Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function member\+\_\+function() at all its \char`\"{}nodes\char`\"{}. 
+
+Preorder traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function at all nodes 
+
+Definition at line 147 of file tree.\+cc.
+
+
+
+References i, and Son\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_af5c67186ca9c87eef9ce7eaa0af41057}\label{classoomph_1_1Tree_af5c67186ca9c87eef9ce7eaa0af41057}} 
+\index{oomph::Tree@{oomph::Tree}!traverse\_all@{traverse\_all}}
+\index{traverse\_all@{traverse\_all}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{traverse\_all()}{traverse\_all()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::traverse\+\_\+all (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Tree\+::\+Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}}}]{member\+\_\+function,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Traverse the tree and excute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes a pointer to a mesh as an argument. 
+
+Preorder traverse the tree and execute a void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes one argument at all nodes. 
+
+Definition at line 166 of file tree.\+cc.
+
+
+
+References i, and Son\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1Tree_aef175445b09edb47624c4b88c6d548bc}\label{classoomph_1_1Tree_aef175445b09edb47624c4b88c6d548bc}} 
+\index{oomph::Tree@{oomph::Tree}!traverse\_all\_but\_leaves@{traverse\_all\_but\_leaves}}
+\index{traverse\_all\_but\_leaves@{traverse\_all\_but\_leaves}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{traverse\_all\_but\_leaves()}{traverse\_all\_but\_leaves()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::traverse\+\_\+all\+\_\+but\+\_\+leaves (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}}}]{member\+\_\+function }\end{DoxyParamCaption})}
+
+
+
+Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function ~\newline
+ 
+
+member\+\_\+function() at all its \char`\"{}nodes\char`\"{} aparat from the leaves
+
+Preorder traverse the tree and execute a void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function for all elements that are not leaf elements. ~\newline
+ 
+
+Definition at line 184 of file tree.\+cc.
+
+
+
+References i, and Son\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a22e0e3695dd8986e439927b7657ff741}\label{classoomph_1_1Tree_a22e0e3695dd8986e439927b7657ff741}} 
+\index{oomph::Tree@{oomph::Tree}!traverse\_leaves@{traverse\_leaves}}
+\index{traverse\_leaves@{traverse\_leaves}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{traverse\_leaves()}{traverse\_leaves()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::traverse\+\_\+leaves (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}}}]{member\+\_\+function }\end{DoxyParamCaption})}
+
+
+
+Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function member\+\_\+function() only at its leaves. 
+
+Preorder traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function at the leaves only (ignore \char`\"{}grey\char`\"{} = non-\/leaf nodes) 
+
+Definition at line 207 of file tree.\+cc.
+
+
+
+References i, and Son\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a914e74ef473b7e82299ea9337d37830d}\label{classoomph_1_1Tree_a914e74ef473b7e82299ea9337d37830d}} 
+\index{oomph::Tree@{oomph::Tree}!traverse\_leaves@{traverse\_leaves}}
+\index{traverse\_leaves@{traverse\_leaves}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{traverse\_leaves()}{traverse\_leaves()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+::traverse\+\_\+leaves (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Tree\+::\+Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}}}]{member\+\_\+function,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes a pointer to a mesh as an argument only at its leaves. 
+
+Preorder traverse the tree and execute void \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} member function that takes one argument at the leaves only (ignore \char`\"{}grey\char`\"{} = non-\/leaf nodes) 
+
+Definition at line 229 of file tree.\+cc.
+
+
+
+References i, and Son\+\_\+pt.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1Tree_a001ce5515a3d76cdad248695e149504b}\label{classoomph_1_1Tree_a001ce5515a3d76cdad248695e149504b}} 
+\index{oomph::Tree@{oomph::Tree}!Father\_pt@{Father\_pt}}
+\index{Father\_pt@{Father\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Father\_pt}{Father\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}$\ast$ oomph\+::\+Tree\+::\+Father\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the Father of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}. 
+
+
+
+Definition at line 271 of file tree.\+h.
+
+
+
+Referenced by father\+\_\+pt(), oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), p\+\_\+refine\+\_\+if\+\_\+required(), set\+\_\+father\+\_\+pt(), split\+\_\+if\+\_\+required(), and Tree().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a9ac30decb7a63027906880620f8b98ee}\label{classoomph_1_1Tree_a9ac30decb7a63027906880620f8b98ee}} 
+\index{oomph::Tree@{oomph::Tree}!Level@{Level}}
+\index{Level@{Level}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Level}{Level}}
+{\footnotesize\ttfamily int oomph\+::\+Tree\+::\+Level\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Level of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} (level 0 = root) 
+
+
+
+Definition at line 277 of file tree.\+h.
+
+
+
+Referenced by oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), level(), and Tree().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}\label{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}} 
+\index{oomph::Tree@{oomph::Tree}!Max\_neighbour\_finding\_tolerance@{Max\_neighbour\_finding\_tolerance}}
+\index{Max\_neighbour\_finding\_tolerance@{Max\_neighbour\_finding\_tolerance}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Max\_neighbour\_finding\_tolerance}{Max\_neighbour\_finding\_tolerance}}
+{\footnotesize\ttfamily double oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance =1.\+0e-\/14\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements) 
+
+Maximum tolerance for neighbour finding (distance between points when identified from the two neighbours) 
+
+Definition at line 288 of file tree.\+h.
+
+
+
+Referenced by oomph\+::\+Oc\+Tree\+::doc\+\_\+face\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+::doc\+\_\+true\+\_\+edge\+\_\+neighbours(), max\+\_\+neighbour\+\_\+finding\+\_\+tolerance(), oomph\+::\+Binary\+Tree\+::self\+\_\+test(), oomph\+::\+Quad\+Tree\+::self\+\_\+test(), and oomph\+::\+Oc\+Tree\+::self\+\_\+test().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a61ee20b575da510512d0e108cf7b06c6}\label{classoomph_1_1Tree_a61ee20b575da510512d0e108cf7b06c6}} 
+\index{oomph::Tree@{oomph::Tree}!Object\_pt@{Object\_pt}}
+\index{Object\_pt@{Object\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Object\_pt}{Object\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}$\ast$ oomph\+::\+Tree\+::\+Object\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the object represented by the tree. 
+
+
+
+Definition at line 283 of file tree.\+h.
+
+
+
+Referenced by flush\+\_\+object(), merge\+\_\+sons\+\_\+if\+\_\+required(), object\+\_\+pt(), p\+\_\+refine\+\_\+if\+\_\+required(), split\+\_\+if\+\_\+required(), and $\sim$\+Tree().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a9e532196340dcd859ff8207eea2ddbbc}\label{classoomph_1_1Tree_a9e532196340dcd859ff8207eea2ddbbc}} 
+\index{oomph::Tree@{oomph::Tree}!OMEGA@{OMEGA}}
+\index{OMEGA@{OMEGA}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{OMEGA}{OMEGA}}
+{\footnotesize\ttfamily const int oomph\+::\+Tree\+::\+O\+M\+E\+GA =26\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Default value for an unassigned neighbour. 
+
+Static value used to represent unassigned quantities. This has to remain consistent with the enumerations in the Octree and Quadtree namespaces! 
+
+Definition at line 237 of file tree.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::build(), oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents(), oomph\+::\+Binary\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::doc\+\_\+face\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+::doc\+\_\+true\+\_\+edge\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::level\+\_\+up\+\_\+local\+\_\+coord\+\_\+of\+\_\+node(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::level\+\_\+up\+\_\+local\+\_\+coord\+\_\+of\+\_\+node(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::p\+\_\+refine(), oomph\+::\+Refineable\+Q\+Spectral\+Element$<$ 2 $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Refineable\+Q\+Spectral\+Element$<$ 3 $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 3, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons(), oomph\+::\+Oc\+Tree\+Root\+::right\+\_\+equivalent(), oomph\+::\+Refineable\+Q\+Element$<$ 1 $>$\+::setup\+\_\+father\+\_\+bounds(), oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::setup\+\_\+father\+\_\+bounds(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::setup\+\_\+father\+\_\+bounds(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices(), oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+interpolation\+\_\+matrices(), oomph\+::\+Binary\+Tree\+::setup\+\_\+static\+\_\+data(), oomph\+::\+Quad\+Tree\+::setup\+\_\+static\+\_\+data(), oomph\+::\+Oc\+Tree\+::setup\+\_\+static\+\_\+data(), Tree(), and oomph\+::\+Oc\+Tree\+Root\+::up\+\_\+equivalent().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a61782afd668561ad7ab324f658ffeb6a}\label{classoomph_1_1Tree_a61782afd668561ad7ab324f658ffeb6a}} 
+\index{oomph::Tree@{oomph::Tree}!Root\_pt@{Root\_pt}}
+\index{Root\_pt@{Root\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Root\_pt}{Root\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$ oomph\+::\+Tree\+::\+Root\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the root of the tree. 
+
+
+
+Definition at line 266 of file tree.\+h.
+
+
+
+Referenced by oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), root\+\_\+pt(), Tree(), and oomph\+::\+Tree\+Root\+::\+Tree\+Root().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_ac6b9069f345b296654421604c5569af6}\label{classoomph_1_1Tree_ac6b9069f345b296654421604c5569af6}} 
+\index{oomph::Tree@{oomph::Tree}!Son\_pt@{Son\_pt}}
+\index{Son\_pt@{Son\_pt}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Son\_pt}{Son\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Tree}{Tree}}$\ast$$>$ oomph\+::\+Tree\+::\+Son\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the sons of the \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}. 
+
+
+
+Definition at line 274 of file tree.\+h.
+
+
+
+Referenced by flush\+\_\+sons(), oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), is\+\_\+leaf(), merge\+\_\+sons\+\_\+if\+\_\+required(), nsons(), p\+\_\+refine\+\_\+if\+\_\+required(), set\+\_\+son\+\_\+pt(), son\+\_\+pt(), split\+\_\+if\+\_\+required(), stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), stick\+\_\+leaves\+\_\+into\+\_\+vector(), oomph\+::\+Quad\+Tree\+::stick\+\_\+neighbouring\+\_\+leaves\+\_\+into\+\_\+vector(), traverse\+\_\+all(), traverse\+\_\+all\+\_\+but\+\_\+leaves(), traverse\+\_\+leaves(), Tree(), and $\sim$\+Tree().
+
+\mbox{\Hypertarget{classoomph_1_1Tree_a83fe7895af25c9f60062c081fc51967c}\label{classoomph_1_1Tree_a83fe7895af25c9f60062c081fc51967c}} 
+\index{oomph::Tree@{oomph::Tree}!Son\_type@{Son\_type}}
+\index{Son\_type@{Son\_type}!oomph::Tree@{oomph::Tree}}
+\doxysubsubsection{\texorpdfstring{Son\_type}{Son\_type}}
+{\footnotesize\ttfamily int oomph\+::\+Tree\+::\+Son\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Son type (e.\+g. S\+W/\+S\+E/\+N\+W/\+NE in a quadtree) 
+
+
+
+Definition at line 280 of file tree.\+h.
+
+
+
+Referenced by oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), son\+\_\+type(), and Tree().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tree_8h}{tree.\+h}}\item 
+\mbox{\hyperlink{tree_8cc}{tree.\+cc}}\item 
+\mbox{\hyperlink{tree_8template_8cc}{tree.\+template.\+cc}}\end{DoxyCompactItemize}

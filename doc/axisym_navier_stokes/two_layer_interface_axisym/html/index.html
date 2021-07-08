@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Relaxation oscillations of an interface between two viscous fluids in an axisymmetric domain</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Relaxation oscillations of an interface between two viscous fluids in an axisymmetric domain </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In an <a href="../../../navier_stokes/two_layer_interface/html/index.html">earlier example</a> we considered a free surface Navier&ndash;Stokes problem in which the interface between two viscous fluids was deformed to a prescribed shape and then allowed to relax. This example considers a similar problem in which the two fluids occupy a cylindrical domain which is orientated such that its axis of symmetry is normal to the equilibrium position of the interface. The problem is assumed to be axisymmetric and so the computational domain is rectangular as before, with the difference here that the governing equations are the axisymmetric Navier&ndash;Stokes equations as opposed to the two-dimensional Cartesian Navier&ndash;Stokes equations employed by the <a href="../../../navier_stokes/two_layer_interface/html/index.html">other example</a>. These equations are discussed in detail in <a href="../../../axisym_navier_stokes/spin_up/html/index.html">another tutorial</a>. Otherwise, the same overall strategy is employed. Since the implementation of the Navier&ndash;Stokes elements in <code>oomph-lib</code> is based on the Arbitrary Lagrangian Eulerian form of the equations, we can discretise the computational domain using a boundary-fitted mesh which deforms in response to the change in position of the interface. The positions of the nodes in the &lsquo;bulk&rsquo; of the mesh are determined by treating the interior of the mesh as a fictitious elastic solid and solving a solid mechanics problem, a technique which we refer to as a &lsquo;pseudo-solid node update strategy&rsquo;. The deformation of the free surface boundary itself is imposed by solving the kinematic boundary condition for a field of Lagrange multipliers at the interface, and this condition is discretised by attaching <code>FaceElements</code> to those &lsquo;bulk&rsquo; elements in the &lsquo;lower&rsquo; of the two fluids which have boundaries adjacent to the interface.</p>
+<h1><a class="anchor" id="interface_def"></a>
+Choosing an appropriate interface deformation</h1>
+<p>The <a href="../../../navier_stokes/two_layer_interface/html/index.html">two-dimensional problem</a> was started impulsively from a set of initial conditions such that the fluid was at rest and the interface was prescribed to be a cosine curve. Since this was an eigenmode of the system, the shape of the interface remained &lsquo;in mode&rsquo; throughout the simulation. Choosing a single eigenmode as an initial condition allowed the results of the simulation to be compared with an analytical solution, and as we wish to do the same thing here we choose a zeroth-order Bessel function of the first kind, <img class="formulaInl" alt="$ J_0(kr) $" src="form_0.png"/>, where <img class="formulaInl" alt="$ k $" src="form_1.png"/> is a wavenumber and <img class="formulaInl" alt="$ r $" src="form_2.png"/> is the radial spatial coordinate. This function has the property that its derivative with respect to <img class="formulaInl" alt="$ r $" src="form_2.png"/> evaluated at <img class="formulaInl" alt="$ r=0 $" src="form_3.png"/> is zero, which must be the case if the interface is to be smooth at the symmetry boundary (the central axis of the cylinder).</p>
+<p>A further consideration is that we want the equilibrium state of the system to be such that the interface is a flat line at <img class="formulaInl" alt="$ z=0 $" src="form_4.png"/>, where <img class="formulaInl" alt="$ z $" src="form_5.png"/> is the axial coordinate. This state can only be reached if we choose an initial deformation <img class="formulaInl" alt="$ z=h(r) $" src="form_6.png"/> which is volume conserving, and we therefore require </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_{r=0}^{r=a} h(r) r dr = 0 \]" src="form_7.png"/>
+</p>
+<p> to be satisfied, where <img class="formulaInl" alt="$ a $" src="form_8.png"/> is the radius of the cylindrical container (or the width of the computational domain). Since in our case <img class="formulaInl" alt="$ h(r) = J_0(kr) $" src="form_9.png"/>, and we will choose a computational domain of width <img class="formulaInl" alt="$ a=1 $" src="form_10.png"/>, our initial condition must therefore satisfy </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_0^1 r \, J_0(kr) \, dr = 0. \]" src="form_11.png"/>
+</p>
+<p> Using the properties of Bessel functions we find that this condition is met if <img class="formulaInl" alt="$ J_1(k) = 0 $" src="form_12.png"/>, and hence the values of <img class="formulaInl" alt="$ k $" src="form_1.png"/> are constrained to be zeroes of <img class="formulaInl" alt="$ J_1(k) $" src="form_13.png"/>.</p>
+<p>Furthermore, the properties of Bessel functions are such that the derivative of <img class="formulaInl" alt="$ J_0(kr) $" src="form_0.png"/> with respect to <img class="formulaInl" alt="$ r $" src="form_2.png"/>, evaluated at any point along the <img class="formulaInl" alt="$ r $" src="form_2.png"/>-axis which corresponds to a zero of <img class="formulaInl" alt="$ J_1(kr) $" src="form_14.png"/>, is itself zero. The velocity boundary condition in the axial direction is therefore the traction-free condition <img class="formulaInl" alt="$ \partial u_z / \partial r = 0 $" src="form_15.png"/>. This could be physically realised by having a &lsquo;slippery&rsquo; outer wall where the contact line can move but the contact angle is fixed at <img class="formulaInl" alt="$ 90^o $" src="form_16.png"/>, and is in fact an identical condition to the symmetry boundary condition prescribed at the axis of symmetry ( <img class="formulaInl" alt="$ r=0 $" src="form_3.png"/>).</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example_problem"></a>
+The example problem</h1>
+<p>We will illustrate the solution of the unsteady axisymmetric Navier&ndash;Stokes equations using the example of a distorted interface between two viscous fluids which is allowed to relax. The domain is symmetric about the line <img class="formulaInl" alt="$ r=0 $" src="form_3.png"/>, which corresponds to the axis of the cylindrical container.</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b> The unsteady axisymmetric Navier&ndash;Stokes equations either side of a distorted interface.</b> </center><p> Solve </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re \left[ St \frac{\partial u_r}{\partial t} + u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r} + u_z \frac{\partial u_r}{\partial z} \right] = -\frac{\partial p}{\partial r} + \frac{Re}{Fr} G_r + \left[ \frac{\partial^2 u_r}{\partial r^2} + \frac{1}{r}\frac{\partial u_r}{\partial r} - \frac{u_r}{r^2} + \frac{\partial^2 u_r}{\partial z^2} \right], \]" src="form_17.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re \left[ St \frac{\partial u_\theta}{\partial t} + u_r \frac{\partial u_\theta}{\partial r} + \frac{u_r u_\theta}{r} + u_z \frac{\partial u_\theta}{\partial z} \right] = \frac{Re}{Fr} G_\theta + \left[ \frac{\partial^2 u_\theta}{\partial r^2} + \frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2} + \frac{\partial^2 u_\theta}{\partial z^2} \right], \]" src="form_18.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re \left[ St \frac{\partial u_z}{\partial t} + u_r \frac{\partial u_z}{\partial r} + u_z \frac{\partial u_z}{\partial z} \right] = -\frac{\partial p}{\partial z} + \frac{Re}{Fr} G_z + \left[ \frac{\partial^2 u_z}{\partial r^2} + \frac{1}{r}\frac{\partial u_z}{\partial r} + \frac{\partial^2 u_z}{\partial z^2} \right], \]" src="form_19.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u_r}{\partial r} + \frac{u_r}{r} + \frac{\partial u_z}{\partial z} = 0 \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_20.png"/>
+</p>
+<p> in the &lsquo;lower&rsquo; fluid, and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R_\rho Re \left[ St \frac{\partial u_r}{\partial t} + u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r} + u_z \frac{\partial u_r}{\partial z} \right] = -\frac{\partial p}{\partial r} + R_\rho \frac{Re}{Fr} G_r + R_\mu \left[ \frac{\partial^2 u_r}{\partial r^2} + \frac{1}{r}\frac{\partial u_r}{\partial r} - \frac{u_r}{r^2} + \frac{\partial^2 u_r}{\partial z^2} \right], \]" src="form_21.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R_\rho Re \left[ St \frac{\partial u_\theta}{\partial t} + u_r \frac{\partial u_\theta}{\partial r} + \frac{u_r u_\theta}{r} + u_z \frac{\partial u_\theta}{\partial z} \right] = R_\rho \frac{Re}{Fr} G_\theta + R_\mu \left[ \frac{\partial^2 u_\theta}{\partial r^2} + \frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2} + \frac{\partial^2 u_\theta}{\partial z^2} \right], \]" src="form_22.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R_\rho Re \left[ St \frac{\partial u_z}{\partial t} + u_r \frac{\partial u_z}{\partial r} + u_z \frac{\partial u_z}{\partial z} \right] = -\frac{\partial p}{\partial z} + R_\rho \frac{Re}{Fr} G_z + R_\mu \left[ \frac{\partial^2 u_z}{\partial r^2} + \frac{1}{r}\frac{\partial u_z}{\partial r} + \frac{\partial^2 u_z}{\partial z^2} \right], \]" src="form_23.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u_r}{\partial r} + \frac{u_r}{r} + \frac{\partial u_z}{\partial z} = 0 \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_24.png"/>
+</p>
+<p> in the &lsquo;upper&rsquo; fluid. Gravity acts in the negative <img class="formulaInl" alt="$ z $" src="form_5.png"/> direction and so <img class="formulaInl" alt="$ G_r = G_\theta = 0 $" src="form_25.png"/> and <img class="formulaInl" alt="$ G_z = 1 $" src="form_26.png"/>. The governing equations are subject to the no slip boundary conditions </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_r = u_\theta = u_z = 0 \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_27.png"/>
+</p>
+<p> on the top ( <img class="formulaInl" alt="$ z = 2.0 $" src="form_28.png"/>) and bottom ( <img class="formulaInl" alt="$ z = 0.0 $" src="form_29.png"/>) solid boundaries and the symmetry boundary conditions </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_r = u_\theta = 0 \ \ \ \ \ \ \ \ \ \ (4) \]" src="form_30.png"/>
+</p>
+<p> on the left ( <img class="formulaInl" alt="$ r = 0.0 $" src="form_31.png"/>) and right ( <img class="formulaInl" alt="$ r = 1.0 $" src="form_32.png"/>) boundaries.</p>
+<p class="endtd">We denote the position vector to the interface between the two fluids by <img class="formulaInl" alt="$ \mathbf{R} $" src="form_33.png"/>, which is subject to the kinematic condition </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left(u_i - St\, \frac{\partial R_i}{\partial t}\right) n_i = 0, \ \ \ \ \ \ \ \ \ \ (5) \]" src="form_34.png"/>
+</p>
+<p> and the dynamic condition </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tau_{ij}^{[2]}n_j = \tau_{ij}^{[1]}n_j+\frac{1}{Ca}\kappa n_i. \ \ \ \ \ \ \ \ \ \ (6) \]" src="form_35.png"/>
+</p>
+   </td></tr>
+</table>
+<br  />
+ </center><center> <table class="doxtable">
+<tr>
+<td><p class="starttd">The non-dimensional, symmetric stress tensor in the &lsquo;lower&rsquo; fluid is defined as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tau_{rr} = -p + 2\frac{\partial u_r}{\partial r}, \qquad \tau_{\theta\theta} = -p + 2\frac{u_r}{r}, \ \ \ \ \ \ \ \ \ \ \]" src="form_36.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tau_{zz} = -p + 2\frac{\partial u_z}{\partial z}, \qquad \tau_{rz} = \frac{\partial u_r}{\partial z} + \frac{\partial u_z}{\partial r}, \ \ \ \ \ \ \ \ \ \ (7) \]" src="form_37.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tau_{\theta r} = r \frac{\partial}{\partial r}\left(\frac{u_{\theta}}{r}\right), \qquad \tau_{\theta z} = \frac{\partial u_{\theta}}{\partial z}, \ \ \ \ \ \ \ \ \ \ \]" src="form_38.png"/>
+</p>
+<p> and that in the &lsquo;upper&rsquo; fluid is defined as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tau_{rr} = -p + 2R_\mu \frac{\partial u_r}{\partial r}, \qquad \tau_{\theta\theta} = -p + 2R_\mu \frac{u_r}{r}, \ \ \ \ \ \ \ \ \ \ \]" src="form_39.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tau_{zz} = -p + 2R_\mu \frac{\partial u_z}{\partial z}, \qquad \tau_{rz} = R_\mu \left(\frac{\partial u_r}{\partial z} + \frac{\partial u_z}{\partial r}\right), \ \ \ \ \ \ \ \ \ \ (8) \]" src="form_40.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tau_{\theta r} = R_\mu r \frac{\partial}{\partial r}\left(\frac{u_{\theta}}{r}\right), \qquad \tau_{\theta z} = R_\mu \frac{\partial u_{\theta}}{\partial z}. \ \ \ \ \ \ \ \ \ \ \]" src="form_41.png"/>
+</p>
+<p class="endtd">The initial shape of the interface is defined by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathbf{R} = r \, \mathbf{e}_r + \left[ 1.0 + \epsilon J_0(kr) \right] \, \mathbf{e}_z, \ \ \ \ \ \ \ \ \ \ (9) \]" src="form_42.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \epsilon $" src="form_43.png"/> is the amplitude of the initial deflection, <img class="formulaInl" alt="$ k $" src="form_1.png"/> is a wavenumber and <img class="formulaInl" alt="$ J_0(kr) $" src="form_0.png"/> is a zeroth-order Bessel function of the first kind.   </p>
+</td></tr>
+</table>
+<br  />
+ </center><hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figure below shows a contour plot of the pressure distribution taken from <a href="../figures/two_layer_interface_axisym.avi">an animation of the flow field</a>, for the parameters <img class="formulaInl" alt="$ Re = Re \, St = Re/Fr = 5.0 $" src="form_44.png"/>, <img class="formulaInl" alt="$ R_\rho = 0.5 $" src="form_45.png"/>, <img class="formulaInl" alt="$ R_\mu = 0.1 $" src="form_46.png"/> and <img class="formulaInl" alt="$ Ca = 0.01 $" src="form_47.png"/>.</p>
+<div class="image">
+<img src="two_layer_interface_axisym.gif" alt=""/>
+<div class="caption">
+Pressure contour plot for the axisymmetric relaxing interface problem. </div></div>
+ <p>The restoring forces of surface tension and gravitational acceleration act to revert the interface to its undeformed flat state. The interface oscillates up and down, but the motion is damped as the energy in the system is dissipated through viscous forces. Eventually the interface settles down to its equilibrium position, as can be seen in the following time-trace of the height of the interface at the left-hand edge of the domain ( <img class="formulaInl" alt="$ r=0 $" src="form_3.png"/>).</p>
+<div class="image">
+<img src="two_layer_interface_axisym_trace.gif" alt=""/>
+<div class="caption">
+Time-trace of the height of the interface at the symmetry axis (r=0). </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="validation"></a>
+Validation</h1>
+<p>The free surface boundary conditions for the axisymmetric Navier&ndash;Stokes equations have been validated against an analytical test case, and we present the results in the figure below. For sufficiently small amplitudes, <img class="formulaInl" alt="$ \epsilon \ll 1 $" src="form_48.png"/>, we can linearise the governing equations and obtain a dispersion relation <img class="formulaInl" alt="$ \lambda(k) $" src="form_49.png"/>. In the <a href="../../../navier_stokes/single_layer_free_surface/html/index.html#validation">two-dimensional single-layer example</a> we discussed the derivation of such a dispersion relation, and the technique used for this problem is very similar. The major difference is that the proposed separable solution for the linearised equations is of the form </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \hat{h}(r,t) = H e^{\lambda t} J_0(kr), \]" src="form_50.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \hat{u}_r(r,z,t) = U_r(z) e^{\lambda t} J_1(kr), \]" src="form_51.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \hat{u}_z(r,z,t) = U_z(z) e^{\lambda t} J_0(kr), \]" src="form_52.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \hat{p}(r,z,t) = P(z) e^{\lambda t} J_0(kr). \]" src="form_53.png"/>
+</p>
+<p> As in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#validation">two-dimensional two-layer example</a>, we will have a linear system containing nine unknowns, rather than the five unknowns that arise from a single-fluid problem. The real and imaginary parts of <img class="formulaInl" alt="$ \lambda $" src="form_54.png"/> correspond to the growth rate and the frequency of the oscillating interface respectively, and can be compared to numerical results computed for given values of the wavenumber <img class="formulaInl" alt="$ k $" src="form_1.png"/>. We choose an initial deflection amplitude of <img class="formulaInl" alt="$ \epsilon = 0.01 $" src="form_55.png"/> and determine the growth rate and frequency of the oscillation from a time-trace of the left-hand edge of the interface.</p>
+<div class="image">
+<img src="two_layer_interface_axisym_code_validation.gif" alt=""/>
+<div class="caption">
+Validation of the code (points) by comparison with an analytical dispersion relation (lines). </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>As in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#namespace">earlier example</a>, we use a namespace to define the dimensionless parameters <img class="formulaInl" alt="$ Re $" src="form_56.png"/>, <img class="formulaInl" alt="$ St $" src="form_57.png"/>, <img class="formulaInl" alt="$ Re/Fr $" src="form_58.png"/> and <img class="formulaInl" alt="$ Ca $" src="form_59.png"/>. Since we are solving for the unknown bulk nodal positions by treating the interior of the mesh as a fictitious elastic solid, we also need to define the Poisson ratio for this &lsquo;pseudo-solid's&rsquo; generalised Hookean constitutive law, <img class="formulaInl" alt="$ \nu $" src="form_60.png"/>. As before, we define the density and viscosity ratios of the top fluid to the bottom fluid and a unit vector <img class="formulaInl" alt="$ G $" src="form_61.png"/> which points in the direction of gravity. The only difference from <a href="../../../navier_stokes/two_layer_interface/html/index.html#namespace">before</a> is that in this case <img class="formulaInl" alt="$ G $" src="form_61.png"/> must have three dimensions since this is an axisymmetric problem.</p>
+ <div class="fragment"><div class="line"> <span class="comment">/// Direction of gravity</span></div>
+<div class="line"> Vector&lt;double&gt; <a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">G</a>(3);</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The first section of the driver code is identical to that of the <a href="../../../navier_stokes/two_layer_interface/html/index.html#main">earlier example</a>. We define a command line flag which allows us to run a &lsquo;validation&rsquo; version of the code (for <code>oomph-lib's</code> self-testing routines) and check that the non-dimensional quantities provided in the <code><a class="el" href="namespaceGlobal__Physical__Variables.html" title="Namespace for physical parameters.">Global_Physical_Variables</a></code> namespace are self-consistent. Next we specify the duration of the simulation and the size of the timestep. If we are running the code as a validation, we set the length of the simulation such that only two timesteps are taken. The direction in which gravity acts is defined to be vertically downwards.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set direction of gravity (vertically downwards)</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a>[0] = 0.0;</div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a>[1] = -1.0;</div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a>[2] = 0.0;</div>
+</div><!-- fragment --><p>Finally, we build the problem using the &lsquo;pseudo-solid&rsquo; version of <code>RefineableAxisymmetricQCrouzeixRaviartElements</code> and the <code>BDF&lt;2&gt;</code> timestepper, before calling <code>unsteady_run(...)</code>. This function solves the system at each timestep using the <code>Problem::unsteady_newton_solve(...)</code> function before documenting the result.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set up the elastic test problem with AxisymmetricQCrouzeixRaviartElements,</span></div>
+<div class="line"> <span class="comment">// using the BDF&lt;2&gt; timestepper</span></div>
+<div class="line"> <a class="code" href="classInterfaceProblem.html">InterfaceProblem</a>&lt;RefineablePseudoSolidNodeUpdateElement&lt;</div>
+<div class="line"> RefineableAxisymmetricQCrouzeixRaviartElement,</div>
+<div class="line">  RefineableQPVDElement&lt;2,3&gt; &gt;,BDF&lt;2&gt; &gt; <a class="code" href="two__layer__interface__axisym_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Run the unsteady simulation</span></div>
+<div class="line"> <a class="code" href="two__layer__interface__axisym_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.unsteady_run(t_max,dt);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="mesh"></a>
+The mesh class</h1>
+<p>The mesh class is almost identical to that in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#mesh">two-dimensional problem</a>. The only difference is that, given that this (specific) mesh is to be used in an axisymmetric problem, it does not make sense to allow the mesh to be periodic in the horizontal direction.</p>
+<h1><a class="anchor" id="problem_class"></a>
+The problem class</h1>
+<p>The problem class is almost identical to the <a href="../../../navier_stokes/two_layer_interface/html/index.html#problem_class">two-dimensional problem</a>. The only modification arises in the arguments of <code>deform_free_surface(...)</code>, as the initial shape of the interface is a Bessel function <img class="formulaInl" alt="$ J_0(kr) $" src="form_0.png"/> as opposed to a cosine curve.</p>
+ <div class="fragment"><div class="line"> <span class="comment">/// Deform the mesh/free surface to a prescribed function</span></div>
+<div class="line"> <span class="keywordtype">void</span> deform_free_surface(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;epsilon, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;k);</div>
+</div><!-- fragment --><h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>The constructor starts by building the timestepper and setting the dimensions of the mesh. The number of elements in the <img class="formulaInl" alt="$ r $" src="form_2.png"/> and <img class="formulaInl" alt="$ z $" src="form_5.png"/> directions in both fluid layers are specified. The next section of the constructor is exactly as <a href="../../../navier_stokes/two_layer_interface/html/index.html#constructor">before</a>. We build the bulk mesh, create an error estimator and set the maximum refinement level. An empty surface mesh is created and populated with a call to <code>create_interface_elements</code>, before the two meshes are combined to form the global mesh. Next we define the boundary conditions. On the top and bottom boundaries ( <img class="formulaInl" alt="$ z = 2.0 $" src="form_28.png"/> and <img class="formulaInl" alt="$ z = 0.0 $" src="form_29.png"/>) we apply the no-slip condition by pinning all three velocity components. On the outer (solid) wall ( <img class="formulaInl" alt="$ r = 1.0 $" src="form_32.png"/>) we pin the radial (no penetration) and azimuthal (no slip) components but not the axial component. This simulates the "slippery" outer wall. These conditions are also applied at the symmetry boundary ( <img class="formulaInl" alt="$ r = 0.0 $" src="form_31.png"/>). The vertical position of the nodes on the top and bottom boundaries are also pinned.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set the boundary conditions for this problem</span></div>
+<div class="line"> <span class="comment">// --------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// All nodes are free by default -- just pin the ones that have</span></div>
+<div class="line"> <span class="comment">// Dirichlet conditions here</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Determine number of mesh boundaries</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_boundary = Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over mesh boundaries</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;n_boundary;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Determine number of nodes on boundary b</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over nodes on boundary b</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Fluid boundary conditions:</span></div>
+<div class="line">     <span class="comment">// --------------------------</span></div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Pin radial and azimuthal velocities (no slip/penetration)</span></div>
+<div class="line">     <span class="comment">// on all boundaries other than the interface (b=4)</span></div>
+<div class="line">     <span class="keywordflow">if</span>(b!=4)</div>
+<div class="line">      {</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin(0);</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin(2);</div>
+<div class="line">      }</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Pin axial velocity on top (b=2) and bottom (b=0) boundaries</span></div>
+<div class="line">     <span class="comment">// (no penetration). Because we have a slippery outer wall we do</span></div>
+<div class="line">     <span class="comment">// NOT pin the axial velocity on this boundary (b=1); similarly,</span></div>
+<div class="line">     <span class="comment">// we do not pin the axial velocity on the symmetry boundary (b=3).</span></div>
+<div class="line">     <span class="keywordflow">if</span>(b==0 || b==2) { Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin(1); }</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Solid boundary conditions:</span></div>
+<div class="line">     <span class="comment">// --------------------------</span></div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Pin vertical displacement on solid boundaries</span></div>
+<div class="line">     <span class="keywordflow">if</span>(b==0 || b==2) { Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin_position(1); }</div>
+<div class="line"> </div>
+<div class="line">    } <span class="comment">// End of loop over nodes on boundary b</span></div>
+<div class="line">  } <span class="comment">// End of loop over mesh boundaries</span></div>
+</div><!-- fragment --><p>We pin the horizontal position of all nodes in the mesh as well as the azimuthal velocity components throughout the bulk of the domain (since in an axisymmetric problem these should remain zero always).</p>
+<div class="fragment"><div class="line"> <span class="comment">// Loop over all nodes in mesh</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Pin horizontal displacement of all nodes</span></div>
+<div class="line">   Bulk_mesh_pt-&gt;node_pt(n)-&gt;pin_position(0);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Pin all azimuthal velocities throughout the bulk of the domain</span></div>
+<div class="line">   Bulk_mesh_pt-&gt;node_pt(n)-&gt;pin(2);</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>The remainder of the problem constructor is identical to that of the <a href="../../../navier_stokes/two_layer_interface/html/index.html#constructor">two-dimensional problem</a>. We create a generalised Hookean constitutive equation for the pseudo-solid mesh before looping over all elements in the bulk mesh and assigning pointers to the Reynolds and Womersley numbers, <img class="formulaInl" alt="$ Re $" src="form_56.png"/> and <img class="formulaInl" alt="$ Re\, St $" src="form_62.png"/>, the product of the Reynolds number and the inverse of the Froude number, <img class="formulaInl" alt="$ Re/Fr $" src="form_58.png"/>, the direction of gravity, <img class="formulaInl" alt="$ G $" src="form_61.png"/>, the constitutive law and the global time object. For those elements which correspond to the upper fluid layer, we also assign pointers for the viscosity and density ratios, <img class="formulaInl" alt="$ R_\mu $" src="form_63.png"/> and <img class="formulaInl" alt="$ R_\rho $" src="form_64.png"/>. We pin one degree of freedom and call the function which assigns the boundary conditions, before finally setting up the equation numbering scheme.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="set_initial_condition"></a>
+Initial conditions</h1>
+<p>The <code>set_initial_conditions()</code> function is very similar to that in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#set_initial_condition">two-dimensional problem</a>. We loop over all nodes in the mesh and set all three velocity components to zero, before calling <code>Problem::assign_initial_values_impulsive()</code>. This function copies the current nodal values and positions into the required number of history values for the timestepper in question, simulating an impulsive start.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_set_initial_condition========================================</span></div>
+<div class="line"><span class="comment">/// \short Set initial conditions: Set all nodal velocities to zero and</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// initialise the previous velocities and nodal positions to correspond</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// to an impulsive start</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::set_initial_condition</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Determine number of nodes in mesh</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over all nodes in mesh</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Loop over the three velocity components</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;3;i++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Set velocity component i of node n to zero</span></div>
+<div class="line">     Bulk_mesh_pt-&gt;node_pt(n)-&gt;set_value(i,0.0);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise the previous velocity values and nodal positions</span></div>
+<div class="line"> <span class="comment">// for timestepping corresponding to an impulsive start</span></div>
+<div class="line"> assign_initial_values_impulsive();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of set_initial_condition</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="set_boundary_conditions"></a>
+Boundary conditions</h1>
+<p>The <code>set_boundary_conditions()</code> function is very similar to that in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#set_boundary_conditions">two-dimensional problem</a>.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_set_boundary_conditions======================================</span></div>
+<div class="line"><span class="comment">/// \short Set boundary conditions: Set all velocity components to zero</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// on the top and bottom (solid) walls and the radial and azimuthal</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// components only to zero on the side boundaries</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::set_boundary_conditions</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Determine number of mesh boundaries</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_boundary = Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over mesh boundaries</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;n_boundary;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Determine number of nodes on boundary b</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over nodes on boundary b</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Set radial component of the velocity to zero on all boundaries</span></div>
+<div class="line">     <span class="comment">// other than the interface (b=4)</span></div>
+<div class="line">     <span class="keywordflow">if</span>(b!=4) { Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;set_value(0,0.0); }</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Set azimuthal component of the velocity to zero on all boundaries</span></div>
+<div class="line">     <span class="comment">// other than the interface (b=4)</span></div>
+<div class="line">     <span class="keywordflow">if</span>(b!=4) { Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;set_value(2,0.0); }</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Set axial component of the velocity to zero on solid boundaries</span></div>
+<div class="line">     <span class="keywordflow">if</span>(b==0 || b==2)</div>
+<div class="line">      {</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;set_value(1,0.0);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// End of set_boundary_conditions</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="before_after_adapt"></a>
+Actions before and after adaptation</h1>
+<p>These functions follow exactly the same structure as those in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#before_adapt">two-dimensional problem</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="create_interface_elements"></a>
+Create interface elements</h1>
+<p>This function is identical to that in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#create_interface_elements">two-dimensional problem</a>, with the exception that instead of creating interface elements of the type</p>
+<div class="fragment"><div class="line">ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;,</div>
+</div><!-- fragment --><p>we are creating interface elements of the type</p>
+<div class="fragment"><div class="line">ElasticAxisymFluidInterfaceElement&lt;ELEMENT&gt;,</div>
+</div><!-- fragment --><p>where <code>ELEMENT</code> is the templated bulk element type.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="delete_interface_elements"></a>
+Delete interface elements</h1>
+<p>This function is identical to that in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#delete_interface_elements">two-dimensional problem</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="deform_free_surface"></a>
+Prescribing the initial free surface position</h1>
+<p>At the beginning of the simulation the interface is deformed by a prescribed function (9), implemented in the function <code>deform_free_surface(...)</code>, which cycles through the bulk mesh's <code>Nodes</code> and modifies their positions such that the nodes on the free surface follow the prescribed interface shape and the bulk nodes retain their fractional position between the solid boundaries and the (now deformed) interface.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_deform_free_surface==========================================</span></div>
+<div class="line"><span class="comment">/// Deform the mesh/free surface to a prescribed function</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classInterfaceProblem.html#aa93d492461ac53f0d9f88516bce322dc">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::</a></div>
+<div class="line"><a class="code" href="classInterfaceProblem.html#aa93d492461ac53f0d9f88516bce322dc">deform_free_surface</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;epsilon,<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;k)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Initialise Bessel functions (only need the first!)</span></div>
+<div class="line"> <span class="keywordtype">double</span> j0, j1, y0, y1, j0p, j1p, y0p, y1p;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Determine number of nodes in the &quot;bulk&quot; mesh</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over all nodes in mesh</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Determine eulerian position of node</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">double</span> current_r_pos = Bulk_mesh_pt-&gt;node_pt(n)-&gt;x(0);</div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">double</span> current_z_pos = Bulk_mesh_pt-&gt;node_pt(n)-&gt;x(1);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Compute Bessel functions</span></div>
+<div class="line">   CRBond_Bessel::bessjy01a(k*current_r_pos,j0,j1,y0,y1,j0p,j1p,y0p,y1p);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Determine new vertical position of node</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">double</span> new_z_pos = current_z_pos</div>
+<div class="line">    + (1.0-fabs(1.0-current_z_pos))*epsilon*j0;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set new position</span></div>
+<div class="line">   Bulk_mesh_pt-&gt;node_pt(n)-&gt;x(1) = new_z_pos;</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// End of deform_free_surface</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>This function follows an identical structure to that in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#doc">two-dimensional problem</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="unsteady_run"></a>
+The timestepping loop</h1>
+<p>The function <code>unsteady_run(...)</code> is used to perform the timestepping procedure, and is very similar to that in the <a href="../../../navier_stokes/two_layer_interface/html/index.html#unsteady_run">two-dimensional problem</a>. The only difference arises from the fact that the initial interface deformation is a Bessel function rather than a cosine curve.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set value of epsilon</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> epsilon = 0.1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set value of k in Bessel function J_0(kr)</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> k_bessel = 3.8317;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Deform the mesh/free surface</span></div>
+<div class="line"> deform_free_surface(epsilon,k_bessel);</div>
+</div><!-- fragment --><p>The rest of the function is identical to <a href="../../../navier_stokes/two_layer_interface/html/index.html#unsteady_run">before</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/axisym_navier_stokes/two_layer_interface_axisym/">demo_drivers/axisym_navier_stokes/two_layer_interface_axisym/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/axisym_navier_stokes/two_layer_interface_axisym/elastic_two_layer_interface_axisym.cc">demo_drivers/axisym_navier_stokes/two_layer_interface_axisym/elastic_two_layer_interface_axisym.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassInterfaceProblem_html_aa93d492461ac53f0d9f88516bce322dc"><div class="ttname"><a href="classInterfaceProblem.html#aa93d492461ac53f0d9f88516bce322dc">InterfaceProblem::deform_free_surface</a></div><div class="ttdeci">void deform_free_surface(const double &amp;epsilon, const double &amp;k)</div><div class="ttdoc">Deform the mesh/free surface to a prescribed function.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00662">elastic_two_layer_interface_axisym.cc:662</a></div></div>
+<div class="ttc" id="atwo__layer__interface__axisym_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="two__layer__interface__axisym_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface__axisym_8txt_source.html#l00010">two_layer_interface_axisym.txt:10</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a0d3af8378c4f0a6e38636be958c300d5"><div class="ttname"><a href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">InterfaceProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set initial conditions.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00454">elastic_two_layer_interface_axisym.cc:454</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_af5ae275cf339105b9a54821c034df470"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G</a></div><div class="ttdeci">Vector&lt; double &gt; G(3)</div><div class="ttdoc">Direction of gravity.</div></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a844445832ad7a32aa9f5d03ffdb40ebb"><div class="ttname"><a href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">InterfaceProblem::set_boundary_conditions</a></div><div class="ttdeci">void set_boundary_conditions()</div><div class="ttdoc">Set boundary conditions.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00484">elastic_two_layer_interface_axisym.cc:484</a></div></div>
+<div class="ttc" id="aclassInterfaceProblem_html"><div class="ttname"><a href="classInterfaceProblem.html">InterfaceProblem</a></div><div class="ttdoc">Axisymmetric two fluid interface problem in a rectangular domain.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface__axisym_8cc_source.html#l00173">elastic_two_layer_interface_axisym.cc:173</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:13:15
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

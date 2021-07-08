@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: fish_poisson2.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">fish_poisson2.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacef"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacef.html">f</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a04763e696f9abee872a515865c843251"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a> = 1}^2 \frac{\partial^2u}{\partial x_i^2}=-1, \ \ \ \ \ \ \ \ \ \ @<a class="el" href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a>[2DPoisson]@ \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>] in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish-shaped domain \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> $<a class="el" href="fish__poisson2_8txt.html#adc8dfcb80486292f301bea1d18a8f58e">D_</a>{fish} \f$ with homogeneous Dirichlet <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> conditions \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>[\left. u\right|_{\partial <a class="el" href="fish__poisson2_8txt.html#adc8dfcb80486292f301bea1d18a8f58e">D_</a>{fish}}=0. \ \ \ \ \ \ \ \ \ \ @<a class="el" href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a>[2DPoisson_BC]@ \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; In Part 1 of this document we shall explain how \c oomph-lib 's mesh adaptation procedures employ <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> objects to adapt meshes in domains with curvilinear boundaries. In Part 2, we demonstrate how to create new \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> objects.&lt; HR &gt; \section adapt Part 1:Mesh adaptation in domains with curvilinear <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a>, using <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> objects The plot below shows <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> domain \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> $<a class="el" href="fish__poisson2_8txt.html#adc8dfcb80486292f301bea1d18a8f58e">D_</a>{fish} \f$, represented by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> multi-coloured, shaded region and its(extremely coarse) discretisation with four four-node quad elements. The elements' edges and nodes are shown in black. @I w 0.75\textwidth coarse_fish_mesh_and_domain &quot;The fish-shaped domain and its discretisation with four four-node quad elements &quot; Obviously, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> curvilinear <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish-shaped domain(arcs of circles) are very poorly resolved by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> elements' straight edges. Simple mesh adaptation, based on <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> techniques described in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_adapt/html/index.html&quot;&gt; earlier example&lt;/A &gt; will not result in convergence to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> exact solution since <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> refined mesh never approaches <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> exact domain geometry:@I w 0.75\textwidth fish_poisson_soln_no_macro &quot;Plot of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh adaptation without MacroElements &quot; To overcome this <a class="el" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh adaptation routines must be given access to an exact, analytical representation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> actual domain. This is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> purpose of \c oomph-lib 's \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> object. A \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> provides an analytical description of a mathematical domain, by decomposing it into a number of so-called \c MacroElements. Each \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> provides a mapping between a set of local and global coordinates \f$ {\bf r}_{macro}({\bf s})\f$ -- similar to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mapping between <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> local and global coordinates in a finite element. The key difference between <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> two types of <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> is that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> mapping resolves curvilinear domain <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> exactly, whereas <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> finite <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> mapping interpolates <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> global coordinates between <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinates of its nodes. The topology of \c MacroElements mirrors that of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> associated(geometric) finite elements:For instance, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c QMacroElement family is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> counterpart of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c QElement family of geometric finite elements. Both are templated by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> spatial dimension, and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> local coordinates(in their right-handed local coordinate <a class="el" href="fish__poisson2_8txt.html#a17d0392f435f19774bad77a5798f61fe">systems</a>) are in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> range between -1 and+1. The different-coloured, shaded regions in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> above <a class="el" href="fish__poisson2_8txt.html#a53d54d0ed5ad7eb738a9ec1d1ee6230a">sketch</a> represent <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four two-dimensional \c QMacroElements by which <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> represents <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish-shaped domain \f$ <a class="el" href="fish__poisson2_8txt.html#adc8dfcb80486292f301bea1d18a8f58e">D_</a>{fish} \f$. For instance, \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> 0(shown in orange) represents <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> lower half of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish 's body</td></tr>
+<tr class="separator:a04763e696f9abee872a515865c843251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a441512b1c378bcc3e5484b08c91a1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a> = &quot;../../../../demo_drivers/poisson/fish_poisson2/fish_poisson_adapt.cc&quot;&gt; fish_poisson_adapt.cc&lt;/A &gt; -- a simple modification of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> code&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../demo_drivers/poisson/fish_poisson/fish_poisson.cc&quot;&gt; fish_poisson.cc&lt;/A &gt; that we used in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/fish_poisson/html/index.html&quot;&gt; earlier example&lt;/A &gt;. The only difference between <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> two codes is that in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> present example, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> is discretised with four-node rather than nine-node \c RefineableQPoissonElements to highlight <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> inadequacy of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> basic mesh <a class="el" href="fish__poisson2_8txt.html#a726d8b64175aea9f546e00402ad8110f">refinement</a> process. Note that, as a result of lower accuracy of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four-node elements, we require a much finer discretisation in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> interior of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> domain.&lt; HR &gt; \section domain Part 2:How to represent domains with curvilinear <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> by <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> objects The above example demonstrated that &quot;upgrading&quot; existing meshes to \c RefineableMeshes that can be used with \c oomph-lib 's mesh adaptation procedures, can be achieved in two trivial steps:-# Associate each \c RefineableQElement with a \c QuadTree -- this can done completely automatically by calling <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> function \c RefineableQuadMesh::setup_quadtree_forest(). -# If <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> 's domain has curvilinear <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a>, associate each \c RefineableQElement with a \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> -- defined in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> object that provides an analytical representation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> domain. . While this looks(and indeed is) impressively simple, we still have to explain how to create \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> objects. We start by introducing yet another useful \c oomph-lib class, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c GeomObject. \subsection geom_object The geometric object, <a class="el" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a> As <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> name suggests, \c GeomObjects are \c oomph-lib objects that provide an analytical description/parametrisation of geometric objects. Mathematically, \c GeomObjects define a mapping from a set of &quot;Lagrangian&quot;(intrinsic) coordinates to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> global &quot;Eulerian&quot; coordinates of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> object. The number of Lagrangian and Eulerian coordinates can differ. For instance, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> unit circle, centred at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> origin may be parametrised by a single coordinate, \f$ \<a class="el" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a> \f$(representing <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> polar angle), as \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>[{\bf r}_{circle}=\left(\begin{array}{c} \cos \<a class="el" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a> \\ \sin \<a class="el" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a> \end{array} \right), \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>] while a 2D disk may be parametrised by two coordinates \f$ \xi_1 \f$ and \f$ \xi_2 \f$(representing <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> radius and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> polar angle, respectively) as \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>[{\bf r}_{disk}=\xi_1 \left(\begin{array}{c} \cos \xi_2 \\ \sin \xi_2 \end{array} \right). \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>] All specific \c GeomObjects must implement <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pure virtual function \c GeomObject::position(...) which computes <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Eulerian position vector \f$ {\bf r}\f$ as a function of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>(vector of) Lagrangian coordinates \f$ {\bf \<a class="el" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a>}\f$.(The \c <a class="el" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a> base class also provides interfaces for a multitude of other functions, such as functions that compute <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> spatial and temporal derivatives of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position vector. These functions are implemented as &quot;broken&quot; virtual functions and their implementation is <a class="el" href="fish__poisson2_8txt.html#aabaa549287079204cdb454cac455c10c">optional</a></td></tr>
+<tr class="separator:a20a441512b1c378bcc3e5484b08c91a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a86cf432decbfd3c70a9ceb327534c5b8"><td class="memItemLeft" align="right" valign="top">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a86cf432decbfd3c70a9ceb327534c5b8">fragment</a> (from&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../src/meshes/fish_mesh.template.cc&quot;&gt;fish_mesh.template.cc&lt;/A &gt;) demonstrates how <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> const ructor of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> original</td></tr>
+<tr class="separator:a86cf432decbfd3c70a9ceb327534c5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3d54b406107e87f7697ff2c7b545c79"><td class="memItemLeft" align="right" valign="top">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#ad3d54b406107e87f7697ff2c7b545c79">f</a> (s_0, s_1)\f$(in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> finite <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> 's local coordinate system) from <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> corresponding \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> mapping</td></tr>
+<tr class="separator:ad3d54b406107e87f7697ff2c7b545c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b16caae8d131a4a93c768404bbca53c"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A &gt; for a discussion of virtual broken functions Here is a complete example of a specific c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s body in f as shown in this centred at&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> (x_0, x_1)</td></tr>
+<tr class="separator:a6b16caae8d131a4a93c768404bbca53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2230505c3c31d1cc0748621135727a72"><td class="memItemLeft" align="right" valign="top">endcode we pass&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a> (pointer to the) \c Circle object to the const ructor of the \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a></td></tr>
+<tr class="separator:a2230505c3c31d1cc0748621135727a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99e2aa635b080dbb0c8093c7ab7584d0"><td class="memItemLeft" align="right" valign="top">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a99e2aa635b080dbb0c8093c7ab7584d0">geometry</a> (<a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mouth is located at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> origin;<a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fin is a vertical line at \f$ x=1.7\f$, ranging from \f$ y=-0.9\f$ to \f$ y=+0.9\f$). Finally</td></tr>
+<tr class="separator:a99e2aa635b080dbb0c8093c7ab7584d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9fa64d0d6279eb210b6f9518ea5855f"><td class="memItemLeft" align="right" valign="top">zeta <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> to the c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> Here <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> zeta in[-1, 1] <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> is the coordinate along the <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> aligned with the direction of the c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s coordinates <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>(s_0, s_1) \f$ as indicated in this <a class="el" href="fish__poisson2_8txt.html#a53d54d0ed5ad7eb738a9ec1d1ee6230a">sketch</a> if c t it computes the shape at the c t th previous timestep(&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html&quot;&gt; Another example&lt;/A &gt; in which we solve the unsteady heat equation in a moving domain, provides a a more detailed discussion of this aspect.) Here is the full interface for the \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> The implementation of this function is the only tedious task that needs to be performed by the mesh writer Once c the c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> s constituent c MacroElements can refer to this function to establish the positions of their <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a>(recall that we passed the pointer to the \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and the \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> 's number in the \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> to the \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a>). The \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> endcode which allows the mesh writer to store&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> (vector of) <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates that a given(\c Boundary)\c Node is located at. The argument \c <a class="el" href="fish__poisson2_8txt.html#a7ac19cf035a3f378028c7167eb0ec0bf">b</a> specifies the number of the mesh <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a></td></tr>
+<tr class="separator:aa9fa64d0d6279eb210b6f9518ea5855f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad787fe505e26650164ed6dc4986df653"><td class="memItemLeft" align="right" valign="top">within this c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a></td></tr>
+<tr class="separator:ad787fe505e26650164ed6dc4986df653"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad51b9368b9f3d83f4952266f9befa933"><td class="memItemLeft" align="right" valign="top">within this c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> curved belly is represented by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> line&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#ad51b9368b9f3d83f4952266f9befa933">f</a> {\bf r}_{macro}(s_0,s_1=-1)\f$ for \f$s_0\in[-1,1]\f$</td></tr>
+<tr class="separator:ad51b9368b9f3d83f4952266f9befa933"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c5b1b2d1878b33b32cd5ad783098f1d"><td class="memItemLeft" align="right" valign="top">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a3c5b1b2d1878b33b32cd5ad783098f1d">Domains</a></td></tr>
+<tr class="separator:a3c5b1b2d1878b33b32cd5ad783098f1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17d0392f435f19774bad77a5798f61fe"><td class="memItemLeft" align="right" valign="top">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a17d0392f435f19774bad77a5798f61fe">systems</a></td></tr>
+<tr class="separator:a17d0392f435f19774bad77a5798f61fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae724a895a1aeadad0ae816fc44d5f190"><td class="memItemLeft" align="right" valign="top">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at each c FiniteElement provides storage for a pointer to an associated c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> By&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#ae724a895a1aeadad0ae816fc44d5f190">default</a></td></tr>
+<tr class="separator:ae724a895a1aeadad0ae816fc44d5f190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89fdd2b4b3c4b954a1fc0a6fe79d2896"><td class="memItemLeft" align="right" valign="top">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at each c FiniteElement provides storage for a pointer to an associated c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> By <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> pointer is set to c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a89fdd2b4b3c4b954a1fc0a6fe79d2896">NULL</a></td></tr>
+<tr class="separator:a89fdd2b4b3c4b954a1fc0a6fe79d2896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d45d7ac8599f0f7bc3258d6404a5293"><td class="memItemLeft" align="right" valign="top">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at each c FiniteElement provides storage for a pointer to an associated c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> By <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> pointer is set to c indicating that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> is not associated with a c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> In that&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a0d45d7ac8599f0f7bc3258d6404a5293">case</a></td></tr>
+<tr class="separator:a0d45d7ac8599f0f7bc3258d6404a5293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c64ac93016b2a9d654b00373385da79"><td class="memItemLeft" align="right" valign="top">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at each c FiniteElement provides storage for a pointer to an associated c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> By <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> pointer is set to c indicating that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> element is not associated with a c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> In that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinates of newly created nodes are determined by interpolation from <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> father&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a></td></tr>
+<tr class="separator:a2c64ac93016b2a9d654b00373385da79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad53df09f59155e1a8570e458b6123ca8"><td class="memItemLeft" align="right" valign="top">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at each c FiniteElement provides storage for a pointer to an associated c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> By <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> pointer is set to c indicating that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> is not associated with a c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> In that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinates of newly created nodes are determined by interpolation from <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> father as discussed above If <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> pointer is non c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a726d8b64175aea9f546e00402ad8110f">refinement</a> process refers to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> s c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> representation to determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> new nodal positions To enable <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh adaptation process to respect <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> domain s curvilinear&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a></td></tr>
+<tr class="separator:ad53df09f59155e1a8570e458b6123ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21f866477909132765bd833a91c16259"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A &gt; for a discussion of virtual broken functions Here is a complete example of a specific c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a></td></tr>
+<tr class="separator:a21f866477909132765bd833a91c16259"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc8dfcb80486292f301bea1d18a8f58e"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A &gt; for a discussion of virtual broken functions Here is a complete example of a specific c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s body in <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#adc8dfcb80486292f301bea1d18a8f58e">D_</a></td></tr>
+<tr class="separator:adc8dfcb80486292f301bea1d18a8f58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53d54d0ed5ad7eb738a9ec1d1ee6230a"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A &gt; for a discussion of virtual broken functions Here is a complete example of a specific c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s body in <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> as shown in this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a53d54d0ed5ad7eb738a9ec1d1ee6230a">sketch</a></td></tr>
+<tr class="separator:a53d54d0ed5ad7eb738a9ec1d1ee6230a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac46afde3a6f32c8134c97743ab0222da"><td class="memItemLeft" align="right" valign="top">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A &gt; for a discussion of virtual broken functions Here is a complete example of a specific c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s body in <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> as shown in this centred at passing <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> appropriate <a class="el" href="fish__poisson2_8txt.html#a9127800e9d85ec4f62139d98b22f7bdb">parameters</a> to its&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a></td></tr>
+<tr class="separator:ac46afde3a6f32c8134c97743ab0222da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a824e389b6c88d0ae12c1e97b08712cd3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a824e389b6c88d0ae12c1e97b08712cd3">y_c</a> =0.0</td></tr>
+<tr class="separator:a824e389b6c88d0ae12c1e97b08712cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f499ba251dff6813d20832f9f36834a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a> =1.0</td></tr>
+<tr class="separator:a4f499ba251dff6813d20832f9f36834a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68a3f92caf63697dc8a7fa23dcd50d53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a> =new Circle(x_c,<a class="el" href="fish__poisson2_8txt.html#a824e389b6c88d0ae12c1e97b08712cd3">y_c</a>,<a class="el" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>)</td></tr>
+<tr class="separator:a68a3f92caf63697dc8a7fa23dcd50d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58e51ab235154a1195588ccaa1f44dd1"><td class="memItemLeft" align="right" valign="top">endcode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a></td></tr>
+<tr class="separator:a58e51ab235154a1195588ccaa1f44dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296cf8991ee09d7e9a1beeb8ad3da837"><td class="memItemLeft" align="right" valign="top">endcode we pass locating <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nose end of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s <a class="el" href="fish__poisson2_8txt.html#ad6c9b76277ee4bc964faf35b369dd767">back</a> at <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a></td></tr>
+<tr class="separator:a296cf8991ee09d7e9a1beeb8ad3da837"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44a04c4143efa1228ac3cd5add2a1917"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a> =0.4</td></tr>
+<tr class="separator:a44a04c4143efa1228ac3cd5add2a1917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5f8290ba6539fcd5dd8fb6357487caa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#af5f8290ba6539fcd5dd8fb6357487caa">domain_pt</a> =new <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a>(<a class="el" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>,xi_nose,<a class="el" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>)</td></tr>
+<tr class="separator:af5f8290ba6539fcd5dd8fb6357487caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e7ce95515d72473114961d16a2985c7"><td class="memItemLeft" align="right" valign="top">endcode To see how this works&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a6e7ce95515d72473114961d16a2985c7">internally</a></td></tr>
+<tr class="separator:a6e7ce95515d72473114961d16a2985c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6c9b76277ee4bc964faf35b369dd767"><td class="memItemLeft" align="right" valign="top">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#ad6c9b76277ee4bc964faf35b369dd767">back</a></td></tr>
+<tr class="separator:ad6c9b76277ee4bc964faf35b369dd767"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abecec0ffd252d5c008335db6e6a529b4"><td class="memItemLeft" align="right" valign="top">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#abecec0ffd252d5c008335db6e6a529b4">Back_pt</a></td></tr>
+<tr class="separator:abecec0ffd252d5c008335db6e6a529b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9127800e9d85ec4f62139d98b22f7bdb"><td class="memItemLeft" align="right" valign="top">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a9127800e9d85ec4f62139d98b22f7bdb">parameters</a></td></tr>
+<tr class="separator:a9127800e9d85ec4f62139d98b22f7bdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36182deccc274d25f67a270c999c54c3"><td class="memItemLeft" align="right" valign="top">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a></td></tr>
+<tr class="separator:a36182deccc274d25f67a270c999c54c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42536cd36f5f484d09e2343c570769c0"><td class="memItemLeft" align="right" valign="top">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c FishDomain <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s number within that c dontinclude fish_domain h skipline Destructor for&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a></td></tr>
+<tr class="separator:a42536cd36f5f484d09e2343c570769c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff5c7f5413186755d84d595d45239926"><td class="memItemLeft" align="right" valign="top">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s number within that c dontinclude fish_domain h skipline Destructor for etc we will not list these explicitly All <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> real work is done in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> implementation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> virtual pure function c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#aff5c7f5413186755d84d595d45239926">S</a> [outh]</td></tr>
+<tr class="separator:aff5c7f5413186755d84d595d45239926"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a493a882b1dd7b4a37614521db1740c2e"><td class="memItemLeft" align="right" valign="top">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s number within that c dontinclude fish_domain h skipline Destructor for etc we will not list these explicitly All <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> real work is done in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> implementation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> virtual pure function c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a> [ast]</td></tr>
+<tr class="separator:a493a882b1dd7b4a37614521db1740c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3bf412369a3982586f54f0e04d60630"><td class="memItemLeft" align="right" valign="top">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s number within that c dontinclude fish_domain h skipline Destructor for etc we will not list these explicitly All <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> real work is done in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> implementation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> virtual pure function c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#af3bf412369a3982586f54f0e04d60630">W</a> [est]</td></tr>
+<tr class="separator:af3bf412369a3982586f54f0e04d60630"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dd57e71f0a03a149fc08b4d09197ca0"><td class="memItemLeft" align="right" valign="top">zeta <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s boundary Here <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> zeta in[-1, 1] <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinate along <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a></td></tr>
+<tr class="separator:a1dd57e71f0a03a149fc08b4d09197ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabaa549287079204cdb454cac455c10c"><td class="memItemLeft" align="right" valign="top">zeta <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> Here <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> zeta in[-1, 1] <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinate along <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> aligned with <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> direction of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s coordinates <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>(s_0, s_1) \f$ as indicated in this <a class="el" href="fish__poisson2_8txt.html#a53d54d0ed5ad7eb738a9ec1d1ee6230a">sketch</a> if c t it computes <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> shape at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c t th previous timestep(&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html&quot;&gt; Another example&lt;/A &gt; in which we solve <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> unsteady heat equation in a moving domain, provides a a more detailed discussion of this aspect.) Here is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> full interface for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> The implementation of this function is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> only tedious task that needs to be performed by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh writer Once c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> s constituent c MacroElements can refer to this function to establish <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> positions of their <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a>(recall that we passed <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> 's number in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a>). The \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> endcode which allows <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh writer to store reflecting <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fact that nodes may be located on multiple domain each of which is likely to have a different set of surface coordinates[\<a class="el" href="fish__poisson2_8txt.html#a7ac19cf035a3f378028c7167eb0ec0bf">b</a> Note:The function isimplemented as a broken virtual function in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c Node base class.The actual functionality to store <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates is onlyprovided in(and required by) <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> derived \c BoundaryNode class.] Since <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> storage of <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates is&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#aabaa549287079204cdb454cac455c10c">optional</a></td></tr>
+<tr class="separator:aabaa549287079204cdb454cac455c10c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac377fb796c46b4781247c0e7c9ac214a"><td class="memItemLeft" align="right" valign="top">endcode that indicates if <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates have been stored for all c Nodes on a specific mesh <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> This vector is resized and its entries are initialised to c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#ac377fb796c46b4781247c0e7c9ac214a">false</a></td></tr>
+<tr class="separator:ac377fb796c46b4781247c0e7c9ac214a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a726d8b64175aea9f546e00402ad8110f"><td class="memItemLeft" align="right" valign="top">endcode that indicates if <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates have been stored for all c Nodes on a specific mesh <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> This vector is resized and its entries are initialised to c when <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> number of mesh <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> is declared with a call to c during mesh&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a726d8b64175aea9f546e00402ad8110f">refinement</a></td></tr>
+<tr class="separator:a726d8b64175aea9f546e00402ad8110f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac19cf035a3f378028c7167eb0ec0bf"><td class="memItemLeft" align="right" valign="top">endcode that indicates if <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates have been stored for all c Nodes on a specific mesh <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> This vector is resized and its entries are initialised to c when <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> number of mesh <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> is declared with a call to c during mesh a new c BoundaryNode is created on <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh s <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fish__poisson2_8txt.html#a7ac19cf035a3f378028c7167eb0ec0bf">b</a></td></tr>
+<tr class="separator:a7ac19cf035a3f378028c7167eb0ec0bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a20a441512b1c378bcc3e5484b08c91a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a441512b1c378bcc3e5484b08c91a1">&#9670;&nbsp;</a></span>HREF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a> =  &quot;../../../../demo_drivers/poisson/fish_poisson2/fish_poisson_adapt.cc&quot;&gt; fish_poisson_adapt.cc&lt;/A&gt; -- a simple modification of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> code &lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../demo_drivers/poisson/fish_poisson/fish_poisson.cc&quot;&gt; fish_poisson.cc&lt;/A&gt; that we used in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> &lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/fish_poisson/html/index.html&quot;&gt; earlier example&lt;/A&gt;. The only difference between <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> two codes is that in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> present example, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> is discretised with four-node rather than nine-node \c RefineableQPoissonElements to highlight <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> inadequacy of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> basic mesh <a class="el" href="fish__poisson2_8txt.html#a726d8b64175aea9f546e00402ad8110f">refinement</a> process. Note that, as a result of lower accuracy of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four-node elements, we require a much finer discretisation in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> interior of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> domain. &lt;HR&gt; \section domain Part 2: How to represent domains with curvilinear <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> by <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> objects The above example demonstrated that &quot;upgrading&quot; existing meshes to \c RefineableMeshes that can be used with \c oomph-lib's mesh adaptation procedures, can be achieved in two trivial steps: -# Associate each \c RefineableQElement with a \c QuadTree -- this can done completely automatically by calling <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> function \c RefineableQuadMesh::setup_quadtree_forest(). -# If <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>'s domain has curvilinear <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a>, associate each \c RefineableQElement with a \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> -- defined in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> object that provides an analytical representation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> domain. . While this looks (and indeed is) impressively simple, we still have to explain how to create \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> objects. We start by introducing yet another useful \c oomph-lib class, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c GeomObject. \subsection geom_object The geometric object, <a class="el" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a> As <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> name suggests, \c GeomObjects are \c oomph-lib objects that provide an analytical description/parametrisation of geometric objects. Mathematically, \c GeomObjects define a mapping from a set of &quot;Lagrangian&quot; (intrinsic) coordinates to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> global &quot;Eulerian&quot; coordinates of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> object. The number of Lagrangian and Eulerian coordinates can differ. For instance, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> unit circle, centred at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> origin may be parametrised by a single coordinate, \f$ \<a class="el" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a> \f$ (representing <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> polar angle), as \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>[ {\bf r}_{circle} = \left( \begin{array}{c} \cos \<a class="el" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a> \\ \sin \<a class="el" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a> \end{array} \right), \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>] while a 2D disk may be parametrised by two coordinates \f$ \xi_1 \f$ and \f$ \xi_2 \f$ (representing <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> radius and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> polar angle, respectively) as \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>[ {\bf r}_{disk} = \xi_1 \left( \begin{array}{c} \cos \xi_2 \\ \sin \xi_2 \end{array} \right). \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>] All specific \c GeomObjects must implement <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pure virtual function \c GeomObject::position(...) which computes <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Eulerian position vector \f$ {\bf r}\f$ as a function of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> (vector of) Lagrangian coordinates \f$ {\bf \<a class="el" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a>}\f$. (The \c <a class="el" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a> base class also provides interfaces for a multitude of other functions, such as functions that compute <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> spatial and temporal derivatives of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position vector. These functions are implemented as &quot;broken&quot; virtual functions and their implementation is <a class="el" href="fish__poisson2_8txt.html#aabaa549287079204cdb454cac455c10c">optional</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00231">231</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a04763e696f9abee872a515865c843251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04763e696f9abee872a515865c843251">&#9670;&nbsp;</a></span>i</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="fish__poisson2_8txt.html#a04763e696f9abee872a515865c843251">i</a> =  1}^2 \frac{\partial^2u}{\partial x_i^2} = -1, \ \ \ \ \ \ \ \ \ \ @<a class="el" href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a>[2DPoisson]@ \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>] in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish-shaped domain \f$D_{fish} \f$ with homogeneous Dirichlet <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> conditions \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>[ \left. u\right|_{\partial <a class="el" href="fish__poisson2_8txt.html#adc8dfcb80486292f301bea1d18a8f58e">D_</a>{fish}}=0. \ \ \ \ \ \ \ \ \ \ @<a class="el" href="fish__poisson2_8txt.html#a493a882b1dd7b4a37614521db1740c2e">E</a>[2DPoisson_BC]@ \<a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a>] &lt;/TD&gt; &lt;/TR&gt; &lt;/TABLE&gt; &lt;/CENTER&gt; In Part 1 of this document we shall explain how \c oomph-lib's mesh adaptation procedures employ <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> objects to adapt meshes in domains with curvilinear boundaries. In Part 2, we demonstrate how to create new \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> objects. &lt;HR&gt; \section adapt Part 1: Mesh adaptation in domains with curvilinear <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a>, using <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> objects The plot below shows <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> domain \f$D_{fish} \f$, represented by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> multi-coloured, shaded region and its (extremely coarse) discretisation with four four-node quad elements. The elements' edges and nodes are shown in black. @I w 0.75\textwidth coarse_fish_mesh_and_domain &quot;The fish-shaped domain and its discretisation with four four-node quad elements &quot; Obviously, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> curvilinear <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish-shaped domain (arcs of circles) are very poorly resolved by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> elements' straight edges. Simple mesh adaptation, based on <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> techniques described in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> &lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_adapt/html/index.html&quot;&gt; earlier example&lt;/A&gt; will not result in convergence to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> exact solution since <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> refined mesh never approaches <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> exact domain geometry: @I w 0.75\textwidth fish_poisson_soln_no_macro &quot;Plot of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh adaptation without MacroElements &quot; To overcome this <a class="el" href="fish__poisson2_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh adaptation routines must be given access to an exact, analytical representation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> actual domain. This is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> purpose of \c oomph-lib's \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> object. A \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> provides an analytical description of a mathematical domain, by decomposing it into a number of so-called \c MacroElements. Each \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> provides a mapping between a set of local and global coordinates \f$ {\bf r}_{macro}({\bf s})\f$ -- similar to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mapping between <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> local and global coordinates in a finite element. The key difference between <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> two types of <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> is that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> mapping resolves curvilinear domain <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> exactly, whereas <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> finite <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> mapping interpolates <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> global coordinates between <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinates of its nodes. The topology of \c MacroElements mirrors that of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> associated (geometric) finite elements: For instance, <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c QMacroElement family is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> counterpart of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c QElement family of geometric finite elements. Both are templated by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> spatial dimension, and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> local coordinates (in their right-handed local coordinate <a class="el" href="fish__poisson2_8txt.html#a17d0392f435f19774bad77a5798f61fe">systems</a>) are in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> range between -1 and +1. The different-coloured, shaded regions in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> above <a class="el" href="fish__poisson2_8txt.html#a53d54d0ed5ad7eb738a9ec1d1ee6230a">sketch</a> represent <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four two-dimensional \c QMacroElements by which <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> represents <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish-shaped domain \f$ <a class="el" href="fish__poisson2_8txt.html#adc8dfcb80486292f301bea1d18a8f58e">D_</a>{fish} \f$. For instance, \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> 0 (shown in orange) represents <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> lower half of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish's body</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00106">106</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad3d54b406107e87f7697ff2c7b545c79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3d54b406107e87f7697ff2c7b545c79">&#9670;&nbsp;</a></span>f() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at f </td>
+          <td>(</td>
+          <td class="paramtype">s_0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">s_1&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b16caae8d131a4a93c768404bbca53c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b16caae8d131a4a93c768404bbca53c">&#9670;&nbsp;</a></span>f() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A&gt; for a discussion of virtual broken functions Here is a complete example of a specific c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s body in f as shown in this centred at f </td>
+          <td>(</td>
+          <td class="paramtype">x_0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">x_1&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a86cf432decbfd3c70a9ceb327534c5b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86cf432decbfd3c70a9ceb327534c5b8">&#9670;&nbsp;</a></span>fragment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code fragment </td>
+          <td>(</td>
+          <td class="paramtype">from&lt; A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../src/meshes/fish_mesh.template.cc&quot;&gt;fish_mesh.template.cc&lt;/A &gt;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99e2aa635b080dbb0c8093c7ab7584d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99e2aa635b080dbb0c8093c7ab7584d0">&#9670;&nbsp;</a></span>geometry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> geometry </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mouth is located at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> origin;<a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fin is a vertical line at \f$&#160;</td>
+          <td class="paramname"><em>x</em> = <code>1.7\f$</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ranging from \f$&#160;</td>
+          <td class="paramname"><em>y</em> = <code>-0.9\f$&#160;to&#160;\f$&#160;y=+0.9\f$</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2230505c3c31d1cc0748621135727a72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2230505c3c31d1cc0748621135727a72">&#9670;&nbsp;</a></span>the() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode we pass the </td>
+          <td>(</td>
+          <td class="paramtype">pointer to&#160;</td>
+          <td class="paramname"><em>the</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9fa64d0d6279eb210b6f9518ea5855f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9fa64d0d6279eb210b6f9518ea5855f">&#9670;&nbsp;</a></span>the() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">zeta <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> to the c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> Here <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> zeta in [-1,1] <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> is the coordinate along the <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> aligned with the direction of the c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s coordinates <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> (s_0,s_1) \f$ as indicated in this <a class="el" href="fish__poisson2_8txt.html#a53d54d0ed5ad7eb738a9ec1d1ee6230a">sketch</a> if c t it computes the shape at the c t th previous timestep (&lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html&quot;&gt; Another example&lt;/A&gt; in which we solve the unsteady heat equation in a moving domain, provides a a more detailed discussion of this aspect.) Here is the full interface for the \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> The implementation of this function is the only tedious task that needs to be performed by the mesh writer Once c the c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> s constituent c MacroElements can refer to this function to establish the positions of their <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> (recall that we passed the pointer to the \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and the \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a>'s number in the \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> to the \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a>). The \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> endcode which allows the mesh writer to store the </td>
+          <td>(</td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>of</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a7ac19cf035a3f378028c7167eb0ec0bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ac19cf035a3f378028c7167eb0ec0bf">&#9670;&nbsp;</a></span>b</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode that indicates if <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates have been stored for all c Nodes on a specific mesh <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> This vector is resized and its entries are initialised to c when <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> number of mesh <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> is declared with a call to c during mesh a new c BoundaryNode is created on <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh s <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> c b</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00513">513</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad6c9b76277ee4bc964faf35b369dd767"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6c9b76277ee4bc964faf35b369dd767">&#9670;&nbsp;</a></span>back</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s back</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00295">295</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a68a3f92caf63697dc8a7fa23dcd50d53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68a3f92caf63697dc8a7fa23dcd50d53">&#9670;&nbsp;</a></span>back_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a>* back_pt =new Circle(x_c,<a class="el" href="fish__poisson2_8txt.html#a824e389b6c88d0ae12c1e97b08712cd3">y_c</a>,<a class="el" href="fish__poisson2_8txt.html#a4f499ba251dff6813d20832f9f36834a">r_back</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00275">275</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8cc_source.html#l00088">main()</a>.</p>
+
+</div>
+</div>
+<a id="abecec0ffd252d5c008335db6e6a529b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abecec0ffd252d5c008335db6e6a529b4">&#9670;&nbsp;</a></span>Back_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c Back_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00296">296</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad53df09f59155e1a8570e458b6123ca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad53df09f59155e1a8570e458b6123ca8">&#9670;&nbsp;</a></span>boundaries</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">zeta <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> Here <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> zeta in [-1,1] <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinate along <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> aligned with <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> direction of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s coordinates <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> (s_0,s_1) \f$ as indicated in this <a class="el" href="fish__poisson2_8txt.html#a53d54d0ed5ad7eb738a9ec1d1ee6230a">sketch</a> if c t it computes <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> shape at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c t th previous timestep (&lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html&quot;&gt; Another example&lt;/A&gt; in which we solve <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> unsteady heat equation in a moving domain, provides a a more detailed discussion of this aspect.) Here is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> full interface for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> The implementation of this function is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> only tedious task that needs to be performed by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh writer Once c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> s constituent c MacroElements can refer to this function to establish <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> positions of their boundaries (recall that we passed <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a>'s number in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a>). The \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> endcode which allows <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh writer to store reflecting <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fact that nodes may be located on multiple domain boundaries</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00143">143</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1dd57e71f0a03a149fc08b4d09197ca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dd57e71f0a03a149fc08b4d09197ca0">&#9670;&nbsp;</a></span>boundary</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">zeta <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s boundary Here <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> zeta in [-1,1] <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinate along <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> boundary</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00328">328</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0d45d7ac8599f0f7bc3258d6404a5293"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d45d7ac8599f0f7bc3258d6404a5293">&#9670;&nbsp;</a></span>case</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at each c FiniteElement provides storage for a pointer to an associated c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> By <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> pointer is set to c indicating that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> is not associated with a c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> In that case</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00136">136</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac46afde3a6f32c8134c97743ab0222da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac46afde3a6f32c8134c97743ab0222da">&#9670;&nbsp;</a></span>constructor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A&gt; for a discussion of virtual broken functions Here is a complete example of a specific c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s body in <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> as shown in this centred at passing <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> appropriate <a class="el" href="fish__poisson2_8txt.html#a9127800e9d85ec4f62139d98b22f7bdb">parameters</a> to its constructor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00272">272</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="adc8dfcb80486292f301bea1d18a8f58e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc8dfcb80486292f301bea1d18a8f58e">&#9670;&nbsp;</a></span>D_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A&gt; for a discussion of virtual broken functions Here is a complete example of a specific c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s body in <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> D_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{fish}<a class="code" href="fish__poisson2_8txt.html#ad51b9368b9f3d83f4952266f9befa933">\f</a>$ is bounded by two circular arcs. These may be</div>
+<div class="line">represented by \c GeomObjects of type \c Circle -- a slight generalisation</div>
+<div class="line">of the \c <a class="code" href="classUnitCircle.html">UnitCircle</a> <span class="keyword">class </span>shown above. The \c <a class="code" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="code" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a></div>
+<div class="line">therefore takes a pointer to a 2D \c <a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a> and <a class="code" href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a> &quot;start&quot; </div>
+<div class="line">and &quot;end&quot; values of <a class="code" href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a> Lagrangian coordinate along this object. </div>
+<div class="line">The \c <a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a> represents <a class="code" href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a> curvilinear <a class="code" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> </div>
+<div class="line">of <a class="code" href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a> fish&#39;s  (upper) body and <a class="code" href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a> two coordinates represent <a class="code" href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a> </div>
+<div class="line">Lagrangian coordinates of <a class="code" href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a> &quot;nose&quot; and <a class="code" href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a> &quot;tail&quot; </div>
+<div class="line">on this \c <a class="code" href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00250">250</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae724a895a1aeadad0ae816fc44d5f190"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae724a895a1aeadad0ae816fc44d5f190">&#9670;&nbsp;</a></span>default</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at each c FiniteElement provides storage for a pointer to an associated c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> By default</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00134">134</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a36182deccc274d25f67a270c999c54c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36182deccc274d25f67a270c999c54c3">&#9670;&nbsp;</a></span>Domain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s number within that c Domain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00302">302</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8cc_source.html#l00088">main()</a>.</p>
+
+</div>
+</div>
+<a id="af5f8290ba6539fcd5dd8fb6357487caa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5f8290ba6539fcd5dd8fb6357487caa">&#9670;&nbsp;</a></span>domain_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a>* domain_pt =new <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a>(<a class="el" href="fish__poisson2_8txt.html#a68a3f92caf63697dc8a7fa23dcd50d53">back_pt</a>,xi_nose,<a class="el" href="fish__poisson2_8txt.html#a44a04c4143efa1228ac3cd5add2a1917">xi_tail</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00288">288</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8cc_source.html#l00088">main()</a>.</p>
+
+</div>
+</div>
+<a id="a3c5b1b2d1878b33b32cd5ad783098f1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c5b1b2d1878b33b32cd5ad783098f1d">&#9670;&nbsp;</a></span>Domains</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c Domains</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00112">112</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a493a882b1dd7b4a37614521db1740c2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a493a882b1dd7b4a37614521db1740c2e">&#9670;&nbsp;</a></span>E</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s number within that c dontinclude fish_domain h skipline Destructor for etc we will not list these explicitly All <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> real work is done in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> implementation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> virtual pure function c E[ast]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00322">322</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2c64ac93016b2a9d654b00373385da79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c64ac93016b2a9d654b00373385da79">&#9670;&nbsp;</a></span>element</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode that indicates if <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates have been stored for all c Nodes on a specific mesh <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> This vector is resized and its entries are initialised to c when <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> number of mesh <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> is declared with a call to c during mesh a new c BoundaryNode is created on <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh s <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> c its <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates are computed by interpolation from <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> corresponding values at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodes in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> father element</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00137">137</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad51b9368b9f3d83f4952266f9befa933"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad51b9368b9f3d83f4952266f9befa933">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at f {\bf r}_{macro}(s_0,s_1=-1)\f$ for \f$s_0\in[-1,1]\f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00108">108</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac377fb796c46b4781247c0e7c9ac214a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac377fb796c46b4781247c0e7c9ac214a">&#9670;&nbsp;</a></span>false</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode that indicates if <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates have been stored for all c Nodes on a specific mesh <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> This vector is resized and its entries are initialised to c false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00504">504</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a42536cd36f5f484d09e2343c570769c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42536cd36f5f484d09e2343c570769c0">&#9670;&nbsp;</a></span>FishDomain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c FishDomain <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s number within that c dontinclude fish_domain h skipline Destructor for FishDomain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00318">318</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8cc_source.html#l00088">main()</a>.</p>
+
+</div>
+</div>
+<a id="a21f866477909132765bd833a91c16259"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21f866477909132765bd833a91c16259">&#9670;&nbsp;</a></span>GeomObject</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A&gt; for a discussion of virtual broken functions Here is a complete example of a specific c GeomObject</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00249">249</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8cc_source.html#l00088">main()</a>.</p>
+
+</div>
+</div>
+<a id="a6e7ce95515d72473114961d16a2985c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e7ce95515d72473114961d16a2985c7">&#9670;&nbsp;</a></span>internally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works internally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00293">293</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad787fe505e26650164ed6dc4986df653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad787fe505e26650164ed6dc4986df653">&#9670;&nbsp;</a></span>MacroElement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at each c FiniteElement provides storage for a pointer to an associated c MacroElement By <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c MacroElement pointer is set to c indicating that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> is not associated with a c MacroElement In that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinates of newly created nodes are determined by interpolation from <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> father as discussed above If <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c MacroElement pointer is non c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a726d8b64175aea9f546e00402ad8110f">refinement</a> process refers to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> s c MacroElement representation to determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> new nodal positions To enable <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh adaptation process to respect <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> domain s curvilinear each <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coarse base mesh must therefore be given a pointer to its associated c MacroElement</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00107">107</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a58e51ab235154a1195588ccaa1f44dd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58e51ab235154a1195588ccaa1f44dd1">&#9670;&nbsp;</a></span>Next</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode Next</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00279">279</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a89fdd2b4b3c4b954a1fc0a6fe79d2896"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89fdd2b4b3c4b954a1fc0a6fe79d2896">&#9670;&nbsp;</a></span>NULL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate we determine <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> position of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> node that is located at each c FiniteElement provides storage for a pointer to an associated c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> By <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> pointer is set to c indicating that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> is not associated with a c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> In that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinates of newly created nodes are determined by interpolation from <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> father as discussed above If <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> pointer is non c NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00135">135</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="aabaa549287079204cdb454cac455c10c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabaa549287079204cdb454cac455c10c">&#9670;&nbsp;</a></span>optional</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">zeta <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> Here <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> zeta in [-1,1] <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> coordinate along <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a2c64ac93016b2a9d654b00373385da79">element</a> aligned with <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> direction of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s coordinates <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> (s_0,s_1) \f$ as indicated in this <a class="el" href="fish__poisson2_8txt.html#a53d54d0ed5ad7eb738a9ec1d1ee6230a">sketch</a> if c t it computes <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> shape at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c t th previous timestep (&lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html&quot;&gt; Another example&lt;/A&gt; in which we solve <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> unsteady heat equation in a moving domain, provides a a more detailed discussion of this aspect.) Here is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> full interface for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> The implementation of this function is <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> only tedious task that needs to be performed by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh writer Once c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> s constituent c MacroElements can refer to this function to establish <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> positions of their <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> (recall that we passed <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a>'s number in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#a36182deccc274d25f67a270c999c54c3">Domain</a> to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a>). The \c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> endcode which allows <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh writer to store reflecting <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fact that nodes may be located on multiple domain each of which is likely to have a different set of surface coordinates [\<a class="el" href="fish__poisson2_8txt.html#a7ac19cf035a3f378028c7167eb0ec0bf">b</a> Note: The function isimplemented as a broken virtual function in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> \c Node base class.The actual functionality to store <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates is onlyprovided in (and required by) <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> derived \c BoundaryNode class.] Since <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> storage of <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates is optional</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00503">503</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9127800e9d85ec4f62139d98b22f7bdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9127800e9d85ec4f62139d98b22f7bdb">&#9670;&nbsp;</a></span>parameters</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional parameters</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00297">297</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00012">12</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__poisson__no__adapt_8cc_source.html#l00183">main()</a>, and <a class="el" href="fish__poisson__adapt_8cc_source.html#l00190">solve_with_incremental_adaptation()</a>.</p>
+
+</div>
+</div>
+<a id="a4f499ba251dff6813d20832f9f36834a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f499ba251dff6813d20832f9f36834a">&#9670;&nbsp;</a></span>r_back</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double r_back =1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00274">274</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8cc_source.html#l00088">main()</a>.</p>
+
+</div>
+</div>
+<a id="a726d8b64175aea9f546e00402ad8110f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a726d8b64175aea9f546e00402ad8110f">&#9670;&nbsp;</a></span>refinement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode that indicates if <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> coordinates have been stored for all c Nodes on a specific mesh <a class="el" href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a> This vector is resized and its entries are initialised to c when <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> number of mesh <a class="el" href="fish__poisson2_8txt.html#ad53df09f59155e1a8570e458b6123ca8">boundaries</a> is declared with a call to c during mesh refinement</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00512">512</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="aff5c7f5413186755d84d595d45239926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff5c7f5413186755d84d595d45239926">&#9670;&nbsp;</a></span>S</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s number within that c dontinclude fish_domain h skipline Destructor for etc we will not list these explicitly All <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> real work is done in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> implementation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> virtual pure function c S[outh]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00322">322</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a53d54d0ed5ad7eb738a9ec1d1ee6230a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53d54d0ed5ad7eb738a9ec1d1ee6230a">&#9670;&nbsp;</a></span>sketch</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a>&lt;A <a class="el" href="fish__poisson2_8txt.html#a20a441512b1c378bcc3e5484b08c91a1">HREF</a>=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A&gt; for a discussion of virtual broken functions Here is a complete example of a specific c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s body in <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> as shown in this sketch</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00265">265</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a17d0392f435f19774bad77a5798f61fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17d0392f435f19774bad77a5798f61fe">&#9670;&nbsp;</a></span>systems</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etc To illustrate <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> use of c MacroElements c <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> following code non refineable c FishMesh assigns <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nodal positions Each of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> s four c QMacroElements is associated with one of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four finite elements in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> mesh Since both types of elements are parametrised by <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> same coordinate systems</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00120">120</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="af3bf412369a3982586f54f0e04d60630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3bf412369a3982586f54f0e04d60630">&#9670;&nbsp;</a></span>W</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode To see how this works let us have a look at <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> The <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> stores <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> start and end values of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> Lagrangian coordinates in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> private data members c c Xi_nose and c Xi_tail <a class="el" href="fish__poisson2_8txt.html#a58e51ab235154a1195588ccaa1f44dd1">Next</a> we set some additional that define <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> we allocate storage for <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> four c MacroElements and build them Note that <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> <a class="el" href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a> of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> takes a pointer to <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> and <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> c <a class="el" href="fish__poisson2_8txt.html#ad787fe505e26650164ed6dc4986df653">MacroElement</a> s number within that c dontinclude fish_domain h skipline Destructor for etc we will not list these explicitly All <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> real work is done in <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> implementation of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> virtual pure function c W[est]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00322">322</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a296cf8991ee09d7e9a1beeb8ad3da837"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a296cf8991ee09d7e9a1beeb8ad3da837">&#9670;&nbsp;</a></span>xi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode we pass locating <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> nose end of <a class="el" href="fish__poisson2_8txt.html#aa9fa64d0d6279eb210b6f9518ea5855f">the</a> fish s <a class="el" href="fish__poisson2_8txt.html#ad6c9b76277ee4bc964faf35b369dd767">back</a> at <a class="el" href="fish__poisson2_8txt.html#a6b16caae8d131a4a93c768404bbca53c">f</a> xi</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=2.4\f$ </div>
+<div class="line">and  its <span class="stringliteral">&quot;tail end&quot;</span> <a class="code" href="fish__poisson2_8txt.html#ad51b9368b9f3d83f4952266f9befa933">at \f</a>$<a class="code" href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">\xi</a>=0.4\f$:</div>
+<div class="line"> </div>
+<div class="line">\code</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">double</span> xi_nose=2.6</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00281">281</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8cc_source.html#l00058">UnitCircle::position()</a>.</p>
+
+</div>
+</div>
+<a id="a44a04c4143efa1228ac3cd5add2a1917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44a04c4143efa1228ac3cd5add2a1917">&#9670;&nbsp;</a></span>xi_tail</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double xi_tail =0.4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00287">287</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+</div>
+</div>
+<a id="a824e389b6c88d0ae12c1e97b08712cd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a824e389b6c88d0ae12c1e97b08712cd3">&#9670;&nbsp;</a></span>y_c</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double y_c =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fish__poisson2_8txt_source.html#l00273">273</a> of file <a class="el" href="fish__poisson2_8txt_source.html">fish_poisson2.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8cc_source.html#l00088">main()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aclassUnitCircle_html"><div class="ttname"><a href="classUnitCircle.html">UnitCircle</a></div><div class="ttdef"><b>Definition:</b> <a href="fish__domain_8cc_source.html#l00043">fish_domain.cc:43</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a42536cd36f5f484d09e2343c570769c0"><div class="ttname"><a href="fish__poisson2_8txt.html#a42536cd36f5f484d09e2343c570769c0">FishDomain</a></div><div class="ttdeci">endcode To see how this works let us have a look at the c FishDomain constructor The constructor stores the pointer to the fish s and the start and end values of the Lagrangian coordinates in the private data members c c Xi_nose and c Xi_tail Next we set some additional that define the we allocate storage for the four c MacroElements and build them Note that the constructor of the c MacroElement takes a pointer to the and the c MacroElement s number within that c dontinclude fish_domain h skipline Destructor for FishDomain</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00318">fish_poisson2.txt:318</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a1dd57e71f0a03a149fc08b4d09197ca0"><div class="ttname"><a href="fish__poisson2_8txt.html#a1dd57e71f0a03a149fc08b4d09197ca0">boundary</a></div><div class="ttdeci">zeta f to the c MacroElement s boundary Here f zeta in[-1, 1] f is the coordinate along the element boundary</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00328">fish_poisson2.txt:328</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_ad51b9368b9f3d83f4952266f9befa933"><div class="ttname"><a href="fish__poisson2_8txt.html#ad51b9368b9f3d83f4952266f9befa933">f</a></div><div class="ttdeci">within this c the curved belly is represented by the line f</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00108">fish_poisson2.txt:108</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a296cf8991ee09d7e9a1beeb8ad3da837"><div class="ttname"><a href="fish__poisson2_8txt.html#a296cf8991ee09d7e9a1beeb8ad3da837">xi</a></div><div class="ttdeci">endcode we pass locating the nose end of the fish s back at f xi</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00281">fish_poisson2.txt:281</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a2230505c3c31d1cc0748621135727a72"><div class="ttname"><a href="fish__poisson2_8txt.html#a2230505c3c31d1cc0748621135727a72">the</a></div><div class="ttdeci">endcode we pass the(pointer to the) \c Circle object to the const ructor of the \c FishDomain</div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_ac46afde3a6f32c8134c97743ab0222da"><div class="ttname"><a href="fish__poisson2_8txt.html#ac46afde3a6f32c8134c97743ab0222da">constructor</a></div><div class="ttdeci">see the&lt; A HREF=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A &gt; for a discussion of virtual broken functions Here is a complete example of a specific c the fish s body in f as shown in this centred at passing the appropriate parameters to its constructor</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00272">fish_poisson2.txt:272</a></div></div>
+<div class="ttc" id="afish__poisson2_8txt_html_a21f866477909132765bd833a91c16259"><div class="ttname"><a href="fish__poisson2_8txt.html#a21f866477909132765bd833a91c16259">GeomObject</a></div><div class="ttdeci">see the&lt; A HREF=&quot;../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; earlier example&lt;/A &gt; for a discussion of virtual broken functions Here is a complete example of a specific c GeomObject</div><div class="ttdef"><b>Definition:</b> <a href="fish__poisson2_8txt_source.html#l00249">fish_poisson2.txt:249</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:04:37
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

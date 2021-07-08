@@ -1,0 +1,216 @@
+\hypertarget{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{}\doxysection{oomph\+::Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\label{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}\index{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
+
+
+Refineable version of \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{Q\+Axisym\+Advection\+Diffusion\+Element}}. Inherit from the standard \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{Q\+Axisym\+Advection\+Diffusion\+Element}} and the appropriate refineable geometric element and the refineable equations. ~\newline
+  
+
+
+
+
+{\ttfamily \#include $<$refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.673077cm]{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_aca3e1f38566c1838116d7c6a874db39e}{Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a35993de6ade8d5d4165e5f28ca8f749c}{Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}} (const \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a6882fc29a65017f8971fcc1785556aad}{ncont\+\_\+interpolated\+\_\+values}} () const
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a33f8787ec034fe65cd2b2bb00cfbf9dc}{nvertex\+\_\+node}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_ae9d0316ec7fa1f54500e067852e4c259}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a076995e66fdcc001c2b664309a6f7b46}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Rebuild from sons\+: empty. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a2e76935da40425bf2a099f1f25e51f1c}{nrecovery\+\_\+order}} ()
+\begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a876b090aa3813d3837218a5aecb64404}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
+\begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. Empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
+class oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}
+
+Refineable version of \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{Q\+Axisym\+Advection\+Diffusion\+Element}}. Inherit from the standard \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{Q\+Axisym\+Advection\+Diffusion\+Element}} and the appropriate refineable geometric element and the refineable equations. ~\newline
+ 
+
+Definition at line 355 of file refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_aca3e1f38566c1838116d7c6a874db39e}\label{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_aca3e1f38566c1838116d7c6a874db39e}} 
+\index{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!RefineableQAxisymAdvectionDiffusionElement@{RefineableQAxisymAdvectionDiffusionElement}}
+\index{RefineableQAxisymAdvectionDiffusionElement@{RefineableQAxisymAdvectionDiffusionElement}!oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableQAxisymAdvectionDiffusionElement()}{RefineableQAxisymAdvectionDiffusionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Constructor\+: 
+
+
+
+Definition at line 363 of file refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a35993de6ade8d5d4165e5f28ca8f749c}\label{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a35993de6ade8d5d4165e5f28ca8f749c}} 
+\index{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!RefineableQAxisymAdvectionDiffusionElement@{RefineableQAxisymAdvectionDiffusionElement}}
+\index{RefineableQAxisymAdvectionDiffusionElement@{RefineableQAxisymAdvectionDiffusionElement}!oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableQAxisymAdvectionDiffusionElement()}{RefineableQAxisymAdvectionDiffusionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 372 of file refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a876b090aa3813d3837218a5aecb64404}\label{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a876b090aa3813d3837218a5aecb64404}} 
+\index{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
+\index{further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}!oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{further\_setup\_hanging\_nodes()}{further\_setup\_hanging\_nodes()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Perform additional hanging node procedures for variables that are not interpolated by all nodes. Empty. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb063dd2c98ebb42d87959ca6b88}{oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$}}.
+
+
+
+Definition at line 406 of file refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a6882fc29a65017f8971fcc1785556aad}\label{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a6882fc29a65017f8971fcc1785556aad}} 
+\index{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
+\index{ncont\_interpolated\_values@{ncont\_interpolated\_values}!oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{ncont\_interpolated\_values()}{ncont\_interpolated\_values()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Number of continuously interpolated values\+: 1 
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db90a6876516a073}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 387 of file refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a2e76935da40425bf2a099f1f25e51f1c}\label{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a2e76935da40425bf2a099f1f25e51f1c}} 
+\index{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
+\index{nrecovery\_order@{nrecovery\_order}!oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835bd3e0f6b2f4f7a9a4044798}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 402 of file refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a33f8787ec034fe65cd2b2bb00cfbf9dc}\label{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a33f8787ec034fe65cd2b2bb00cfbf9dc}} 
+\index{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
+\index{nvertex\_node@{nvertex\_node}!oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertex nodes in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e77ef4ff35f15fdf7913b4077}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 390 of file refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Q\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::nvertex\+\_\+node().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a076995e66fdcc001c2b664309a6f7b46}\label{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_a076995e66fdcc001c2b664309a6f7b46}} 
+\index{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!rebuild\_from\_sons@{rebuild\_from\_sons}}
+\index{rebuild\_from\_sons@{rebuild\_from\_sons}!oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{rebuild\_from\_sons()}{rebuild\_from\_sons()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::rebuild\+\_\+from\+\_\+sons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Rebuild from sons\+: empty. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b78279d17158215fa}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 398 of file refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_ae9d0316ec7fa1f54500e067852e4c259}\label{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement_ae9d0316ec7fa1f54500e067852e4c259}} 
+\index{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
+\index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$@{oomph::RefineableQAxisymAdvectionDiffusionElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{oomph\+::\+Refineable\+Q\+Axisym\+Advection\+Diffusion\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to the j-\/th vertex node in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 394 of file refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Q\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::vertex\+\_\+node\+\_\+pt().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__axisym__advection__diffusion__elements_8h}{refineable\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}\end{DoxyCompactItemize}

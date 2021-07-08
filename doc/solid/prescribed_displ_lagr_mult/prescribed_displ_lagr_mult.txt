@@ -1,0 +1,458 @@
+\mainpage Demo problem: Deformation of a solid by a prescribed boundary motion
+
+The purpose of this tutorial is to demonstrate how to impose the deformation 
+of domain boundaries using Lagrange multipliers. This
+functionality is required, e.g. when using (pseudo-)solid mechanics
+to update the shape of the fluid mesh in fluid-structure interaction
+problems, say. (See \ref comm_and_ex for a discussion of
+an alternative, somewhat easier method for imposing boundary
+displacements in single-physics solid mechanics problems). 
+
+
+<HR> 
+<HR>
+
+\section model The model problem
+Here is a sketch of the model problem. A unit square is parametrised
+by two Lagrangian coordinates \f$ (\xi^1,\xi^2) \f$. Three of the four
+boundaries are held in a fixed position while
+the square's upper boundary \f$ \partial D_{prescr}\f$ 
+(which is parametrised by the boundary coordinate
+\f$ \zeta\f$) is displaced to a new position given by 
+\f$ {\bf R}_{prescr}(\zeta) \f$:
+
+   
+@I w 0.75\textwidth sketch "Sketch of the problem. "
+
+<HR>
+<HR>
+
+\section theory Theory and implementation
+We identify the upper boundary by writing the Lagrangian coordinates 
+of points on \f$ \partial D_{prescr} \f$ as
+\f[
+\left. \big( \xi^1, \xi^2\big)\right|_{\partial D_{prescr}} = 
+\big( \xi^1_{\partial D_{prescr}}(\zeta), 
+      \xi^2_{\partial D_{prescr}}(\zeta) \big)
+\f]
+which allows us to write the displacement constraint as
+\f[
+{\bf R}(\xi^1_{\partial D_{prescr}}(\zeta),\xi^2_{\partial
+D_{prescr}}(\zeta)) = {\bf R}_{prescr}(\zeta).
+\f]
+We enforce this constraint by augmenting the principle of
+virtual displacements, discussed in 
+<a href="../../solid_theory/html/index.html#equilibrium">
+the solid mechanics theory tutorial</a>, by a Lagrange multiplier term
+so that it becomes
+\f[
+\int \left\{ \sigma^{ij}  \ \delta \gamma_{ij} -  \left( {\bf f} - 
+\Lambda^2 \frac{\partial^2 {\bf R}}{\partial t^2} \right) \cdot 
+\delta {\bf R} \right\} \ dv -
+\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA
+\ + \ \delta \Pi_{constraint} = 0
+\ \ \ \ \ \ \ \ @E[continuous_pdv]@
+\f]
+where 
+\f[
+ \Pi_{constraint} = \int_{\partial D} 
+\bigg( {\bf R}(\xi^1(\zeta),\xi^2(\zeta)) - {\bf R}_{prescr}(\zeta) \bigg)
+\cdot {\bf \Lambda} \ dS.
+\f]
+Here
+\f[ 
+dS = \left| \frac{d {\bf R}(\xi^1(\zeta),\xi^2(\zeta))}{d \zeta}
+\right| d\zeta 
+\f] 
+is the differential of the arclength along the domain boundary
+and the vector \f$ {\bf \Lambda} \f$ (not to be confused with the
+scalar \f$ \Lambda^2 \f$ which represents the non-dimensional
+density in (@R[continuous_pdv]@)!) is the Lagrange multiplier -- the
+surface traction to be applied to \f$ \partial D_{prescr} \f$
+to deform the boundary into the required shape.
+
+We discretise this constraint by attaching \c FaceElements to
+the boundaries of the "bulk" solid elements that are adjacent to 
+\f$ \partial D_{prescr} \f$. We denote the number of nodes in 
+these \c FaceElements by \f$ N \f$ and write the \f$ i \f$-th component 
+of the discrete Lagrange multiplier stored at node \f$ j \f$ as 
+\f$ L_{ij} \f$. Thus the \f$ i \f$ -th component of the Lagrange
+multiplier at local coordinate \f$ s \f$ in the element is given by
+\f[
+\Lambda_i = \sum_{j=1}^{N} L_{ij} \psi_j(s)
+\f] 
+where \f$ \psi_j(s) \f$ is the shape function associated with node 
+\f$ j \f$.
+
+Upon taking the variations of the discretised constraint
+with respect to the unknown nodal positions and the discrete
+Lagrange multipliers we obtain <b>(i)</b> additional contributions to the
+residuals of the "bulk" solid mechanics equations (these
+may be interpreted as the virtual work done by the boundary
+tractions required to impose the prescribed boundary displacement)
+and  <b>(ii)</b> the equations that impose the displacement
+constraints in weak form.
+
+ The actual implementation of this approach in \c oomph-lib is best
+thought of as a generalisation of the \c SolidTractionElements that
+are used to impose a prescribed traction to the boundary of a solid domain. 
+The main difference is that in the 
+\c ImposeDisplacementByLagrangeMultiplierElement, the imposed
+traction is one of the unknowns in the problem and must be 
+determined via the displacement constraint, using the approach
+described above. The element introduces additional unknowns (the nodal
+values of the Lagrange multiplier) into the problem, therefore 
+the \c ImposeDisplacementByLagrangeMultiplierElement resizes
+(increases) the number of values stored at the node from the value
+that was originally assigned by the "bulk" solid element it is
+attached to. (If the elements are used in a single-physics
+solid mechanics problem the discrete Lagrange multipliers are the 
+only nodal values in the problem since the unknown nodal positions
+are stored in a separate \c Data item; cf. 
+<A HREF="../../solid_theory/html/index.html#solid_node"> 
+"Solid mechanics: Theory and implementation"</A> for more details). 
+The prescribed boundary shape \f$ {\bf R}_{prescr}(\zeta) \f$
+is provided by a \c GeomObject.
+
+
+<HR>
+<HR>
+ 
+\section results Results
+
+The animation below shows the domain deformation in response to a
+prescribed boundary displacement given by
+
+\f[
+{\bf R}_{prescr}(\zeta)=
+\left(
+\begin{array}{c}
+\zeta \\
+1
+\end{array}
+\right)
++ A
+\left(
+\begin{array}{c}
+5 \zeta\ (\zeta-1) \ (\zeta-0.7) \\
+\frac{1}{2}\left(1-\cos\left(2\pi\zeta\right)\right)  
+\end{array}
+\right)
+\f]
+
+With this choice the upper boundary remains flat (i.e. at \f$ x_2=1 \f$)
+when \f$ A=0 \f$. As \f$ A \f$ increases, the boundary is pulled
+upwards into a  sinusoidal shape while simultaneously being pushed
+to the right. The vectors in the animation represent the Lagrange
+multipliers (i.e. the physical surface tractions) required to deform
+the domain into the required shape. Note how the automatic mesh
+adaptation refines the mesh in regions where the solid is strongly
+deformed.
+
+@I w 0.75\textwidth lagr_distort "Domain deformation in response to the prescribed boundary displacement. "
+
+
+
+<HR>
+<HR>
+
+
+\section prescribed_boundary Describing the prescribed boundary motion with a GeomObject
+
+Here is the implementation of the prescribed boundary shape as the 
+\c WarpedLine, a two-dimensional \c GeomObject whose shape is parametrised
+by a single intrinsic coordinate. 
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline Start_of_warped_line
+\until };
+
+
+<HR>
+<HR>
+
+
+
+\section namespace Global parameters
+As usual we define the problem parameters in a global namespace.
+We provide an instantiation of the \c GeomObject that defines
+the deformed boundary shape (setting its initial displacement 
+amplitude to zero), and create an instance of \c oomph-lib's 
+generalised Hookean constitutive equation with a Poisson ratio of
+0.3 (recall that the use of the single-argument constructor for this
+constitutive equation implies that all stresses are non-dimensionalised
+on Young's modulus \f$ E \f$; see 
+<a href="../../solid_theory/html/index.html#non-dim_solid">
+the solid mechanics theory tutorial</a> for details).
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline start_namespace
+\until end namespace
+
+
+
+<HR>
+<HR>
+
+
+
+\section driver The driver code
+We build an instantiation of the \c Problem class (described below), 
+using nine-noded, two-dimensional \c RefineableQPVDElements
+to discretise the domain, and document the initial 
+domain shape.
+
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline start_of_main
+\until doc_solution
+
+
+We perform a parameter study, increasing the amplitude of the 
+prescribed boundary  deflection in small increments, while allowing 
+one mesh adaptation per solution.   
+ 
+
+\until doc_solution
+
+ Since the main use of the methodology demonstrated here is in 
+free-boundary problems where the solution of the solid problem
+merely serves to update the nodal positions in response to the
+prescribed boundary motion, we re-set the nodes' Lagrangian
+coordinates to their Eulerian positions after every solve. 
+This makes the deformed configuration stress-free and tends to 
+stabilise the computation, allowing larger domain deformations
+to be computed. We stress, however, that this renders the 
+computed solutions physically meaningless in the sense that
+the domain shapes no longer represent the solution of the
+original elasticity problem for which the stress-free, undeformed
+configuration remains unchanged throughout the body's deformation.
+
+\until end of main
+
+<HR>
+<HR>
+
+\section problem The Problem class
+
+The definition of the \c Problem class follows the usual pattern.
+We provide an access functions to the bulk mesh, as well
+as a few private helper functions that attach and detach
+the \c ImposeDisplacementByLagrangeMultiplierElements from the
+bulk mesh before and after the mesh adaptation. 
+
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline begin_problem
+\until };
+
+<HR>
+<HR>
+
+\section constructor The Problem constructor
+
+We start by creating the "bulk" mesh, discretising the domain with 
+5x5 elements of the type specified by the class's template argument.
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline start_of_constructor
+\until l_x,l_y);
+
+Next we specify the error estimator, pass the pointer to the constitutive
+equation to the elements and perform one uniform mesh refinement:
+
+\until refine_uniformly();
+
+We now create a new \c SolidMesh in which we store the elements
+that apply the displacement constraint. These elements are built (and
+added to the newly created \c SolidMesh) in the helper function
+\c create_lagrange_multiplier_elements(). Both meshes are then combined
+to the \c Problem's global mesh. 
+
+\until build_global_mesh();
+
+We pin the position of the nodes on all domain boundaries apart from the
+top boundary (boundary 2) and pin any redundant pressure degrees of freedom.
+(This is not strictly necessary in the present driver code
+since the displacement-based \c RefineableQPVDElements do not have 
+any pressure degrees of freedom. However, it is good practice to 
+do this anyway to guard against unpleasant surprises when the
+element type is changed at some point).
+
+\until solid_mesh_pt()->element_pt());
+
+Finally, we assign the equation numbers and specify the output
+directory. 
+
+\until end of constructor
+
+<HR>
+<HR>
+
+
+\section actions_before_adapt Actions before mesh adaptation
+
+As usual, we remove the \c FaceElements that apply the displacement
+constraints before the bulk mesh is adapted.
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline start_of_actions_before_adapt
+\until  end of actions_before_adapt
+
+<HR>
+<HR>
+
+\section actions_after_adapt Actions after mesh adaptation
+
+We re-attach the \c FaceElements that apply the displacement
+constraints once the bulk mesh has been adapted. Since the 
+hanging status of nodes in the bulk mesh can change during
+the mesh adaptation it is again good practice to pin any
+nodal solid pressure values that may have become redundant.
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline start_of_actions_after_adapt
+\until  end of actions_after_adapt
+
+<HR>
+<HR>
+
+
+\section lagr_elements Creating the Lagrange multiplier elements that impose the displacement constraint
+
+The creation of the Lagrange multiplier elements that impose the 
+displacement constraint follows the usual pattern. We loop over
+the "bulk" solid elements that are adjacent to mesh boundary 2
+and attach \c ImposeDisplacementByLagrangeMultiplierElements
+to the appropriate faces. 
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline start_of_create_lagrange_multiplier_elements
+\until }
+
+Next we loop over the newly-created  
+\c ImposeDisplacementByLagrangeMultiplierElements and specify  the 
+\c GeomObject that defines the imposed boundary displacements.
+We also specify which boundary of the bulk mesh
+the \c ImposeDisplacementByLagrangeMultiplierElements are located
+on. This is required to enable the \c
+ImposeDisplacementByLagrangeMultiplierElements to extract the
+appropriate boundary coordinate from its constituent nodes.
+(We discussed 
+<a href="../../../poisson/fish_poisson2/html/index.html#boundary_coords">
+elsewhere</a> that boundary coordinates are usually defined (and 
+passed to the nodes) when the nodes are first created, typically 
+during the construction of the bulk mesh. Since nodes can be 
+located on multiple domain boundaries, each boundary coordinate
+is associated with a particular boundary number. Passing this number
+to the \c ImposeDisplacementByLagrangeMultiplierElements allows
+them to obtain the correct boundary coordinate from the node.) 
+
+\until &Global_Physical_Variables::Boundary_geom_object,b);
+
+
+Finally, we impose boundary conditions for the Lagrange multipliers.
+Their values must be pinned (and set to zero) at the left and right ends
+of the upper mesh boundary (boundary 2), since the displacement of the
+nodes at these points is already enforced by the boundary conditions imposed 
+at the left and right vertical boundaries (boundaries 1 and 3).
+
+<a name="bcs_for_lagrange_multipliers">
+We</a> discussed above that the discrete Lagrange multipliers
+are added to any already existing nodal degrees of freedom when the
+\c ImposeDisplacementByLagrangeMultiplierElements are attached
+to the faces of the "bulk" solid elements. The number of nodal values 
+that were stored at an element's \c j -th node before the 
+additional nodal values were added, can be obtained from the 
+function \c nbulk_value(j), defined in the \c FaceElement base class.
+We pin the Lagrange multipliers at the "corner nodes" by
+looping over all nodes in the \c ImposeDisplacementByLagrangeMultiplierElements
+and pinning the additional nodal values of any nodes that are 
+located on mesh boundaries 1 or 3. 
+
+\until end of create_lagrange_multiplier_elements
+ 
+<HR>
+<HR>
+
+
+\section kill_lagr_elements Deleting the Lagrange multiplier elements that impose the displacement constraint
+
+The function \c delete_lagrange_multiplier_elements() deletes the
+Lagrange multiplier elements that impose the displacement constraint
+and flushes the associated mesh. 
+
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline start_of_delete_lagrange_multiplier_elements
+\until end of delete_lagrange_multiplier_elements
+
+<HR>
+<HR>
+
+
+\section doc Post-processing
+
+The function \c doc_solution() outputs the shape of the deformed body
+and the Lagrange multiplier along the upper boundary.
+
+\dontinclude prescribed_displ_lagr_mult.cc
+\skipline start_doc
+\until end doc
+
+<HR>
+<HR>
+
+
+\section comm_and_ex Comments and Exercises
+
+\subsection comm Comments
+As mentioned in the introduction, there is an alternative, much
+simpler way of imposing prescribed boundary motions which 
+does not require Lagrange multipliers: Pin the nodal positions of 
+all nodes on \f$ \partial D_{prescr} \f$ and update their 
+positions manually before calling the Newton solver, e.g.
+by changing the \c actions_before_newton_solve() function to
+
+\dontinclude prescribed_displ_lagr_mult2.cc
+\skipline Update boundary position directly
+\until end actions_before_newton_solve
+
+This approach is implemented in the alternative driver
+code 
+<a href="../../../../demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult2.cc">prescribed_displ_lagr_mult2.cc</a>.   
+
+\subsection ex Exercises
+
+-# In order to familiarise yourself with the details of how \c FaceElements 
+   add additional nodal values to the nodes they are attached
+   to, output the values of \c n_bulk_value and \c nval
+   in the loop that pins the Lagrange multipliers in 
+   \c create_lagrange_multiplier_elements(). Explain why, for the
+   \c RefineableQPVDElement<2,3> used here, we have 
+   \c n_bulk_value = 0. What happens if you use elements of type
+   \c RefineableQPVDElementWithContinousPressure<2> instead?
+   \n\n
+-# Comment out the call to \c set_lagrangian_nodal_coordinates() after 
+   the solve and compare the robustness of the computation and 
+   the resulting domain shapes. [Hint: You will have to reduce the increment
+   for the amplitude of the prescribed boundary deflection to
+   0.025 or less, otherwise the Newton iteration will diverge
+   very rapidly.]
+   \n\n
+-# Explore the performance of the alternative driver code (without the use
+   of Lagrange multipliers) 
+   <a href="../../../../demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult2.cc">prescribed_displ_lagr_mult2.cc</a>
+   and explain why it is less robust than the version with Lagrange 
+   multipliers (in the sense that the increment in the amplitude of 
+   the prescribed boundary displacement
+   has to be reduced significantly to keep the Newton method from
+   diverging). Hint: Compare the domain shapes before the 
+   call to the Newton solver.
+   \n\n
+-# Omit the specification of the boundary number in the bulk
+   mesh by commenting out the call to \c
+   set_boundary_number_in_bulk_mesh(...) in the function
+   \c create_lagrange_multiplier_elements(). Check what happens
+   when the code is compiled with and without the \c PARANOID flag.
+.

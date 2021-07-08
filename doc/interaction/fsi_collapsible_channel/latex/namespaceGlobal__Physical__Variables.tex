@@ -1,0 +1,244 @@
+\hypertarget{namespaceGlobal__Physical__Variables}{}\doxysection{Global\+\_\+\+Physical\+\_\+\+Variables Namespace Reference}
+\label{namespaceGlobal__Physical__Variables}\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+
+
+Namespace for phyical parameters.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}{prescribed\+\_\+traction}} (const double \&t, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
+\begin{DoxyCompactList}\small\item\em Traction applied on the fluid at the left (inflow) boundary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{load}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a1ba69e044238a99bd109e3158404a5bb}{xi}}, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
+\begin{DoxyCompactList}\small\item\em Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by F\+S\+I\+Wall\+Element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}} =50.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Re\+St}} =50.\+0
+\begin{DoxyCompactList}\small\item\em Womersley = Reynolds times Strouhal. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae1a493695b7f4619af32f405b0b28861}{P\+\_\+up}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Default pressure on the left boundary. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{H}} =1.\+0e-\/2
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional wall thickness. As in Jensen \& Heil (2003) paper. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}{Sigma0}} =1.\+0e3
+\begin{DoxyCompactList}\small\item\em 2nd Piola Kirchhoff pre-\/stress. As in Jensen \& Heil (2003) paper. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{P\+\_\+ext}} =0.\+0
+\begin{DoxyCompactList}\small\item\em External pressure. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}} =1.\+0e-\/5
+\begin{DoxyCompactList}\small\item\em Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. ~\newline
+ \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Lambda\+\_\+sq}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid mass density. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}} =0.\+1
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for phyical parameters. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}\label{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!load@{load}}
+\index{load@{load}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Physical\+\_\+\+Variables\+::load (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{const Vector$<$ double $>$ \&}]{N,  }\item[{Vector$<$ double $>$ \&}]{load }\end{DoxyParamCaption})}
+
+
+
+Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by F\+S\+I\+Wall\+Element. 
+
+
+
+Definition at line 209 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+
+
+
+References P\+\_\+ext.
+
+
+
+Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}\label{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!prescribed\_traction@{prescribed\_traction}}
+\index{prescribed\_traction@{prescribed\_traction}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{prescribed\_traction()}{prescribed\_traction()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Physical\+\_\+\+Variables\+::prescribed\+\_\+traction (\begin{DoxyParamCaption}\item[{const double \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{const Vector$<$ double $>$ \&}]{n,  }\item[{Vector$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})}
+
+
+
+Traction applied on the fluid at the left (inflow) boundary. 
+
+
+
+Definition at line 186 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+
+
+
+References P\+\_\+up.
+
+
+
+Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+after\+\_\+adapt(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}\label{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!H@{H}}
+\index{H@{H}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::H =1.\+0e-\/2}
+
+
+
+Non-\/dimensional wall thickness. As in Jensen \& Heil (2003) paper. 
+
+
+
+Definition at line 198 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+
+
+
+Referenced by Undeformed\+Wall\+::d2position(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem(), Undeformed\+Wall\+::position(), and Undeformed\+Wall\+::\+Undeformed\+Wall().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}\label{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Lambda\_sq@{Lambda\_sq}}
+\index{Lambda\_sq@{Lambda\_sq}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Lambda\_sq}{Lambda\_sq}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq =0.\+0}
+
+
+
+Pseudo-\/solid mass density. 
+
+
+
+Definition at line 225 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc.
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}\label{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Nu@{Nu}}
+\index{Nu@{Nu}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu =0.\+1}
+
+
+
+Pseudo-\/solid Poisson ratio. 
+
+
+
+Definition at line 228 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc.
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}\label{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!P\_ext@{P\_ext}}
+\index{P\_ext@{P\_ext}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{P\_ext}{P\_ext}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext =0.\+0}
+
+
+
+External pressure. 
+
+
+
+Definition at line 204 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+
+
+
+Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), load(), and main().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ae1a493695b7f4619af32f405b0b28861}\label{namespaceGlobal__Physical__Variables_ae1a493695b7f4619af32f405b0b28861}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!P\_up@{P\_up}}
+\index{P\_up@{P\_up}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{P\_up}{P\_up}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+up =0.\+0}
+
+
+
+Default pressure on the left boundary. 
+
+
+
+Definition at line 183 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+
+
+
+Referenced by main(), and prescribed\+\_\+traction().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}\label{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Q@{Q}}
+\index{Q@{Q}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Q}{Q}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::Q =1.\+0e-\/5}
+
+
+
+Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. ~\newline
+ 
+
+
+
+Definition at line 221 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+
+
+
+Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}\label{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Re@{Re}}
+\index{Re@{Re}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Re}{Re}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re =50.\+0}
+
+
+
+Reynolds number. 
+
+
+
+Definition at line 177 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+
+
+
+Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}\label{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!ReSt@{ReSt}}
+\index{ReSt@{ReSt}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{ReSt}{ReSt}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St =50.\+0}
+
+
+
+Womersley = Reynolds times Strouhal. 
+
+
+
+Definition at line 180 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+
+
+
+Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+
+\mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}\label{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Sigma0@{Sigma0}}
+\index{Sigma0@{Sigma0}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Sigma0}{Sigma0}}
+{\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Sigma0 =1.\+0e3}
+
+
+
+2nd Piola Kirchhoff pre-\/stress. As in Jensen \& Heil (2003) paper. 
+
+
+
+Definition at line 201 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+
+
+
+Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+

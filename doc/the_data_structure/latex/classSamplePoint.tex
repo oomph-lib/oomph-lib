@@ -1,0 +1,182 @@
+\hypertarget{classSamplePoint}{}\doxysection{Sample\+Point Class Reference}
+\label{classSamplePoint}\index{SamplePoint@{SamplePoint}}
+
+
+Class for containing sample points\+: Number of finite element in its mesh and index of sample point within that element.  
+
+
+
+
+{\ttfamily \#include $<$sample\+\_\+point\+\_\+container.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSamplePoint_a19d7c1b8e810ea533765acabcea312b5}{Sample\+Point}} (const unsigned \&\mbox{\hyperlink{classSamplePoint_a57f59cddbb9ef2e3100588cf2eacba5c}{element\+\_\+index\+\_\+in\+\_\+mesh}}, const unsigned \&\mbox{\hyperlink{classSamplePoint_ad0d3ebd068a502dcd4d2940449560fb0}{sample\+\_\+point\+\_\+index\+\_\+in\+\_\+element}})
+\begin{DoxyCompactList}\small\item\em Construct \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} object from number of finite element in its mesh, and index of sample point within that element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSamplePoint_a69b61d9a3a217af33a58a703a295d1da}{Sample\+Point}} (const \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \&data)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSamplePoint_aa91f365695d1f4567723770d880e60b2}{operator=}} (const \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classSamplePoint_a57f59cddbb9ef2e3100588cf2eacba5c}{element\+\_\+index\+\_\+in\+\_\+mesh}} () const
+\begin{DoxyCompactList}\small\item\em Access function to the index of finite element in its mesh. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classSamplePoint_ad0d3ebd068a502dcd4d2940449560fb0}{sample\+\_\+point\+\_\+index\+\_\+in\+\_\+element}} () const
+\begin{DoxyCompactList}\small\item\em Index of sample point within element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classSamplePoint_ac2fcd449feb15e9fdf348b946b60ae37}{Element\+\_\+index\+\_\+in\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em Index of finite element in its mesh. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classSamplePoint_a7901c8c1880e5a7ff4e03507dce3b728}{Sample\+\_\+point\+\_\+index\+\_\+in\+\_\+element}}
+\begin{DoxyCompactList}\small\item\em Index of the sample point within element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for containing sample points\+: Number of finite element in its mesh and index of sample point within that element. 
+
+Definition at line 53 of file sample\+\_\+point\+\_\+container.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSamplePoint_a19d7c1b8e810ea533765acabcea312b5}\label{classSamplePoint_a19d7c1b8e810ea533765acabcea312b5}} 
+\index{SamplePoint@{SamplePoint}!SamplePoint@{SamplePoint}}
+\index{SamplePoint@{SamplePoint}!SamplePoint@{SamplePoint}}
+\doxysubsubsection{\texorpdfstring{SamplePoint()}{SamplePoint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Sample\+Point\+::\+Sample\+Point (\begin{DoxyParamCaption}\item[{const unsigned \&}]{element\+\_\+index\+\_\+in\+\_\+mesh,  }\item[{const unsigned \&}]{sample\+\_\+point\+\_\+index\+\_\+in\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} object from number of finite element in its mesh, and index of sample point within that element. 
+
+
+
+Definition at line 60 of file sample\+\_\+point\+\_\+container.\+h.
+
+\mbox{\Hypertarget{classSamplePoint_a69b61d9a3a217af33a58a703a295d1da}\label{classSamplePoint_a69b61d9a3a217af33a58a703a295d1da}} 
+\index{SamplePoint@{SamplePoint}!SamplePoint@{SamplePoint}}
+\index{SamplePoint@{SamplePoint}!SamplePoint@{SamplePoint}}
+\doxysubsubsection{\texorpdfstring{SamplePoint()}{SamplePoint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Sample\+Point\+::\+Sample\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 67 of file sample\+\_\+point\+\_\+container.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSamplePoint_a57f59cddbb9ef2e3100588cf2eacba5c}\label{classSamplePoint_a57f59cddbb9ef2e3100588cf2eacba5c}} 
+\index{SamplePoint@{SamplePoint}!element\_index\_in\_mesh@{element\_index\_in\_mesh}}
+\index{element\_index\_in\_mesh@{element\_index\_in\_mesh}!SamplePoint@{SamplePoint}}
+\doxysubsubsection{\texorpdfstring{element\_index\_in\_mesh()}{element\_index\_in\_mesh()}}
+{\footnotesize\ttfamily unsigned Sample\+Point\+::element\+\_\+index\+\_\+in\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the index of finite element in its mesh. 
+
+
+
+Definition at line 73 of file sample\+\_\+point\+\_\+container.\+h.
+
+
+
+References Element\+\_\+index\+\_\+in\+\_\+mesh.
+
+
+
+Referenced by C\+G\+A\+L\+Sample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), and C\+G\+A\+L\+Sample\+Point\+Container\+::locate\+\_\+zeta().
+
+\mbox{\Hypertarget{classSamplePoint_aa91f365695d1f4567723770d880e60b2}\label{classSamplePoint_aa91f365695d1f4567723770d880e60b2}} 
+\index{SamplePoint@{SamplePoint}!operator=@{operator=}}
+\index{operator=@{operator=}!SamplePoint@{SamplePoint}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void Sample\+Point\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 70 of file sample\+\_\+point\+\_\+container.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classSamplePoint_ad0d3ebd068a502dcd4d2940449560fb0}\label{classSamplePoint_ad0d3ebd068a502dcd4d2940449560fb0}} 
+\index{SamplePoint@{SamplePoint}!sample\_point\_index\_in\_element@{sample\_point\_index\_in\_element}}
+\index{sample\_point\_index\_in\_element@{sample\_point\_index\_in\_element}!SamplePoint@{SamplePoint}}
+\doxysubsubsection{\texorpdfstring{sample\_point\_index\_in\_element()}{sample\_point\_index\_in\_element()}}
+{\footnotesize\ttfamily unsigned Sample\+Point\+::sample\+\_\+point\+\_\+index\+\_\+in\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Index of sample point within element. 
+
+
+
+Definition at line 79 of file sample\+\_\+point\+\_\+container.\+h.
+
+
+
+References Sample\+\_\+point\+\_\+index\+\_\+in\+\_\+element.
+
+
+
+Referenced by C\+G\+A\+L\+Sample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), and C\+G\+A\+L\+Sample\+Point\+Container\+::locate\+\_\+zeta().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSamplePoint_ac2fcd449feb15e9fdf348b946b60ae37}\label{classSamplePoint_ac2fcd449feb15e9fdf348b946b60ae37}} 
+\index{SamplePoint@{SamplePoint}!Element\_index\_in\_mesh@{Element\_index\_in\_mesh}}
+\index{Element\_index\_in\_mesh@{Element\_index\_in\_mesh}!SamplePoint@{SamplePoint}}
+\doxysubsubsection{\texorpdfstring{Element\_index\_in\_mesh}{Element\_index\_in\_mesh}}
+{\footnotesize\ttfamily unsigned Sample\+Point\+::\+Element\+\_\+index\+\_\+in\+\_\+mesh\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Index of finite element in its mesh. 
+
+
+
+Definition at line 88 of file sample\+\_\+point\+\_\+container.\+h.
+
+
+
+Referenced by element\+\_\+index\+\_\+in\+\_\+mesh().
+
+\mbox{\Hypertarget{classSamplePoint_a7901c8c1880e5a7ff4e03507dce3b728}\label{classSamplePoint_a7901c8c1880e5a7ff4e03507dce3b728}} 
+\index{SamplePoint@{SamplePoint}!Sample\_point\_index\_in\_element@{Sample\_point\_index\_in\_element}}
+\index{Sample\_point\_index\_in\_element@{Sample\_point\_index\_in\_element}!SamplePoint@{SamplePoint}}
+\doxysubsubsection{\texorpdfstring{Sample\_point\_index\_in\_element}{Sample\_point\_index\_in\_element}}
+{\footnotesize\ttfamily unsigned Sample\+Point\+::\+Sample\+\_\+point\+\_\+index\+\_\+in\+\_\+element\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Index of the sample point within element. 
+
+
+
+Definition at line 91 of file sample\+\_\+point\+\_\+container.\+h.
+
+
+
+Referenced by sample\+\_\+point\+\_\+index\+\_\+in\+\_\+element().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{sample__point__container_8h}{sample\+\_\+point\+\_\+container.\+h}}\end{DoxyCompactItemize}

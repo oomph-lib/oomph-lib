@@ -1,0 +1,412 @@
+/**
+
+\mainpage oomph-lib's fluid-structure-interaction (FSI) preconditioner
+
+The purpose of this tutorial is to show how to use
+\c oomph-lib's FSI preconditioner for the efficient monolithic
+solution of fluid-structure interaction problems.
+We illustrate the use of the preconditioner for the
+collapsible channel problem described in the 
+<a href="../../../interaction/fsi_channel_segregated_solver/html/index.html">
+tutorial demonstrating the use of \c oomph-lib's segregated FSI solver.</a>
+The test problem used is discussed in detail in 
+<CENTER>
+<a href="http://www.springerlink.com/content/m3r6318701g338g4/">Heil,
+M., Hazel, A.L. & Boyle, J. (2008): Solvers for large-displacement 
+fluid-structure interaction problems: Segregated vs. monolithic
+approaches. Computational Mechanics.</a>
+</CENTER>
+\n
+where we contrast the relative performance of segregated and
+monolithic solvers.
+
+<HR>
+<HR>
+
+\section theory Theory
+
+The monolithic discretisation of fluid-structure interaction problems
+in which the fluid node-update in response to changes in the
+wall shape is performed by one of \c oomph-lib's algebraic
+node update techniques (such as the ones implemented in the <code>
+<a href="../../../the_data_structure/html/classoomph_1_1AlgebraicMesh.html">
+AlgebraicMesh </a></code> and
+<code>
+<a href="../../../the_data_structure/html/classoomph_1_1MacroElementNodeUpdateMesh.html">
+MacroElementNodeUpdateMesh</a></code> classes;
+see the relevant tutorials for a discussion of the
+<a href="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">algebraic</a> and <a href="../../../interaction/macro_element_free_boundary_poisson/html/index.html">macro-element-based</a> 
+node update techniques) leads to Jacobian
+matrices that contain three types of degree of freedom,
+namely the fluid velocities, the fluid pressures, and the solid
+mechanics degrees of freedom.
+
+\c oomph-lib's FSI preconditioner employs the library's 
+<a  href="../../../mpi/block_preconditioners/html/index.html">
+block-preconditioning framework</a> to (formally) re-order the 
+linear system to be solved during the Newton iteration into 3x3 
+blocks. We note that all fluid velocity components and all solid
+degrees of freedom are treated as single blocks of unknowns. The linear system
+therefore has the following block structure
+
+\f[
+\left(
+\begin{array}{cc|c}
+{\bf F} & {\bf G} & {\bf  C}_{us} \\
+{\bf D} & {\bf 0} & {\bf  C}_{ps} \\
+\hline
+{\bf C}_{su} & {\bf C}_{sp} & {\bf S} 
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+\delta {\bf u} \\
+\delta {\bf p} \\
+\hline
+\delta {\bf s}
+\end{array}
+\right)
+= 
+- \left(
+\begin{array}{c}
+{\bf r}_{u} \\
+{\bf r}_{p} \\
+\hline
+{\bf r}_{s}
+\end{array}
+\right)
+\f]
+Here the on-diagonal block matrices
+\f[
+\left( 
+\begin{array}{cc}
+{\bf F} & {\bf G} \\ {\bf D} & {\bf 0} 
+\end{array} 
+\right)
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\f]
+and
+\f[
+\big( {\bf S} \big)
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2)
+\f]
+are the Jacobian matrices from the corresponding single-physics
+(fluid and solid) problems. The off-diagonal matrix blocks
+\f${\bf C}_{**}\f$ arise from the interaction between fluid and solid
+equations: \f$ {\bf C}_{us}\f$ and \f$ {\bf C}_{ps}\f$ contain 
+the so-called ``shape
+derivatives'' --- the derivatives of the Navier--Stokes residuals
+with respect to the solid displacements that affect the nodal
+positions in the fluid mesh. Similarly, \f${\bf C}_{su}\f$ and 
+\f${\bf C}_{sp}\f$
+contain the derivatives of the solid residuals with respect to the 
+fluid variables; this interaction arises through the fluid
+loading on the wall. \c oomph-lib's algebraic
+node-update strategy ensures that the interaction matrices are 
+very sparse. The maximum fill level for the examples presented in
+<a href="http://www.springerlink.com/content/m3r6318701g338g4/"> Heil,
+ Hazel \& Boyle's (2008) paper </a>
+is about 3% and such (relatively) large values only arose 
+in computations with very coarse meshes; the much finer meshes used
+in typical production runs resulted in much sparser matrices.
+
+We showed in an earlier paper [
+<a href="http://www.sciencedirect.com/science?_ob=ArticleURL&_udi=B6V29-4B5C1C6-1&_user=494590&_rdoc=1&_fmt=&_orig=search&_sort=d&view=c&_acct=C000024058&_version=1&_urlVersion=0&_userid=494590&md5=1ed12ccb0a1535610fb2d11dca48a4e3">Heil, M. "An efficient solver
+for the fully-coupled solution of large-displacement fluid-structure
+interaction problems". Computer Methods in Applied Mechanics and
+Engineering \b 193, 1-23, (2004)</a>] that the use of block-triangular 
+approximations to the global Jacobian matrix, obtained by neglecting 
+the fluid-solid or solid-fluid interaction blocks,
+\f[
+{\cal P}_1 = 
+\left(
+\begin{array}{cc|c}
+{\bf F} & {\bf G} & {\bf 0} \\
+{\bf D} & {\bf 0} & {\bf 0} \\
+\hline
+{\bf C}_{su} & {\bf C}_{sp} & {\bf S} 
+\end{array}
+\right)
+\mbox{\ \ and \ \ } 
+{\cal  P}_2 = 
+\left(
+\begin{array}{cc|c}
+{\bf F} & {\bf G} & {\bf C}_{us} \\
+{\bf D} & {\bf 0} & {\bf C}_{ps} \\
+\hline
+{\bf 0} & {\bf 0} & {\bf S} 
+\end{array}
+\right)
+\mbox{\ \ and \ \ } 
+{\cal  P}_3 = 
+\left(
+\begin{array}{cc|c}
+{\bf F} & {\bf G} & {\bf 0} \\
+{\bf D} & {\bf 0} & {\bf 0} \\
+\hline
+{\bf 0} & {\bf 0} & {\bf S} 
+\end{array}
+\right)
+\f]
+in the Newton method seriously degrades its performance, resulting
+in the loss of its quadratic convergence and thus one of its the most
+attractive features. However, the block-triangular approximations were 
+shown to be excellent preconditioners for the solution of the linear system
+by Krylov subspace methods. Because
+of their block-triangular structure, each application of the
+preconditioners involves linear solves with each of the two
+single-physics systems (1) and (2), and 
+matrix-vector products with the retained interaction matrices.
+
+ The current implementation of the FSI preconditioner within \c
+oomph-lib employs Elman, Silvester \& Wathen's ``least squares
+commutator'' (LSC) preconditioner, 
+<a  href="../../lsc_navier_stokes/html/index.html">discussed in 
+another tutorial</a> to approximately solve the linear
+system involving the fluid matrix (1).
+
+
+
+<HR>
+<HR>
+
+\section example An example
+
+To demonstrate how to use the preconditioner, here are
+the relevant extracts from the 
+<A HREF="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_precond_driver.cc">
+driver code <code>fsi_chan_precond_driver.cc</code></A>
+which solves the collapsible channel problem discussed in
+<a href="../../../interaction/fsi_channel_segregated_solver/html/index.html">
+another tutorial.</a> As explained in the 
+<a href="../../../linear_solvers/html/index.html">Linear
+Solvers Tutorial</A> switching to an iterative linear solver
+is typically performed in the \c Problem constructor and involves
+a few straightforward steps:
+
+-# <b>Create an instance of the IterativeLinearSolver and pass it to the
+   Problem</b> \n\n
+   We create an instance of \c GMRES, 
+   \n\n
+   \dontinclude fsi_chan_precond_driver.cc
+   \skipline Build 
+   \until new GMRES
+   \n
+   set the maximum number of iterations to 100, and increase
+   the GMRES convergence tolerance to \f$ 10^{-6} \f$ as 
+   experiments showed this to give the fastest overall solve times;
+   see \ref comm_ex.
+   \n\n
+   \until iterative_linear_solver_pt->tolerance()
+   \n
+   Finally, we pass the pointer to the iterative linear solver
+   to the problem.\n\n
+   \skipline this->linear_solver
+   \n\n 
+-# <b>Create an instance of the Preconditioner and pass it to the
+   IterativeLinearSolver</b> \n\n
+   We start by creating an instance of the FSI preconditioner.
+   \n\n
+   \skipline // Create an instance of the FSI preconditioner
+   \until  FSIPreconditioner* prec_pt=new FSIPreconditioner(this);
+   \n
+   Next we identify the meshes that contain the fluid and solid
+   elements -- this information is required by \c oomph-lib's
+   block-preconditioning framework to identify 
+   the types of the various degrees of freedom in the Jacobian matrix.
+   Identifying the fluid elements is straightforward as they
+   are already contained in a distinct (sub-)mesh, accessible
+   via the member function \c bulk_mesh_pt():
+   \n\n
+   \until this->bulk_mesh
+   \n
+   The \c FSIHermiteBeamElement elements used for the discretisation
+   of the flexible channel wall are also contained in their own 
+   (sub-)mesh, accessible via the member function \c wall_mesh_pt().
+   If displacement control is used, the 
+   \c DisplacementControlElement introduces a further unknown
+   into the problem: the adjustable external pressure;
+   see the brief discussion of this in <a href="../../../interaction/fsi_channel_segregated_solver/html/index.html">another tutorial</a>.
+   We classify the  external pressure as a solid mechanics degree of freedom
+   and therefore add the \c DisplacementControlElement to a 
+   combined solid mesh (constructed from a vector of pointers to
+   its constituent sub-meshes): 
+   \n\n
+   \skipline Build a compound mesh
+   \until Mesh* combined_solid_mesh_pt
+   \n
+   Finally, we pass the pointer to the combined solid mesh to the FSI
+   preconditioner to identify the solid degrees of freedom
+   (the optional boolean flag indicates that we allow the mesh to
+   contain multiple element types):
+   \n\n
+   \until (combined_solid_mesh_pt,true);
+   \n
+   The preconditioner is now fully functional and we pass       
+   a pointer to it to the preconditioner:
+   \n\n 
+   \skipline // Pass preconditioner to iterative linear solver
+   \until iterative_linear_solver_pt->preconditioner_pt()= prec_pt;
+   \n
+-# <b>Customise the Preconditioner (if required)</b> \n\n
+   The \c FSIPreconditioner allows preconditioning to be performed 
+   with either one of the three block-triangular approximations 
+   to the Jacobian:
+   \n\n
+   -# The lower-triangular block preconditioner \f$ {\cal P}_1 \f$
+      which retains
+      the interaction matrices \f$ {\bf C}_{s*} \f$ that represent
+      the effect of the fluid onto the solid:
+      \n\n
+      \dontinclude fsi_chan_precond_driver.cc
+      \skipline Choose preconditioner that retains fluid on solid terms
+      \until prec_pt->use_block_triangular_version_with_fluid_on_solid();
+      \n
+   -# The upper-triangular block preconditioner \f$ {\cal P}_2 \f$
+      which retains
+      the interaction matrices \f$ {\bf C}_{*s} \f$ that represent
+      the effect of the solid onto the fluid:
+      \n\n
+      \dontinclude fsi_chan_precond_driver.cc
+      \skipline // Choose preconditioner that retains solid on fluid terms
+      \until  prec_pt->use_block_triangular_version_with_solid_on_fluid();
+      \n
+   -# The block-diagonal block preconditioner \f$ {\cal P}_3 \f$
+      which suppresses all the interaction matrices:
+      \n\n
+      \dontinclude fsi_chan_precond_driver.cc
+      \skipline Use block-diagonal preconditioner
+      \until prec_pt->use_block_diagonal_version();
+      \n
+   .
+   The linear systems involving the fluid block are solved 
+   (approximately) by \c oomph-lib's Least-Squares-Commutator Navier-Stokes
+   preconditioner \c NavierStokesLSCPreconditioner,
+   discussed in <a href="../../lsc_navier_stokes/html/index.html">
+   another tutorial.</a> The behaviour of this (sub-)preconditioner
+   may be customised too. For instance, to employ the \c Hypre
+   AMG solver to solve the linear systems involving the pressure
+   Schur complement matrix \f$ {\bf P}
+   \f$ in the \c NavierStokesLSCPreconditioner, we use the
+   procedure discussed <a href="../../lsc_navier_stokes/html/index.html">
+   earlier</a>:
+   \n\n
+  \dontinclude fsi_chan_precond_driver.cc
+  \skipline #ifdef OOMPH_HAS_HYPRE
+  \until endif for we have hypre
+.
+ 
+<HR>
+<HR>
+
+\section comm_ex Further comments and exercises
+-# <b>The convergence tolerance for the iterative linear solver</b>\n\n
+   Since the iterative linear solver operates within an "outer"
+   (Newton) iteration it has occasionally been suggested to
+   adjust the convergence tolerance for the iterative linear
+   solver, depending on the progress of the "outer" (Newton) iteration:
+   The idea is that there is little point in "over-solving" the linear system
+   (i.e. solving it to very high precision) if the Newton 
+   method is still "far" from converged. (Only) during the
+   final stages of the Newton iteration is an accurate solution of
+   linear systems essential, otherwise the Newton iteration
+   stagnates. This idea can be made rigorous 
+   (see, e.g., R.S. Dembo, S.C. Eisenstat and T. Steilhaug 
+   "Inexact Newton methods" SIAM J. Numer. Anal. \b 19 (1982),
+   400-408). 
+   \n\n 
+   In practice we found that the method does not
+   offer particularly great savings in CPU time; see e.g. <a href="http://www.sciencedirect.com/science?_ob=ArticleURL&_udi=B6V29-4B5C1C6-1&_user=494590&_rdoc=1&_fmt=&_orig=search&_sort=d&view=c&_acct=C000024058&_version=1&_urlVersion=0&_userid=494590&md5=1ed12ccb0a1535610fb2d11dca48a4e3">Heil (2004).</a>
+   This is because the Newton method tends
+   to converge in very few steps. Hence the need to
+   perform the occasional additional Newton step (because
+   the convergence tolerance of the "inner" iterative linear solver     
+   was "just" not tight enough) is hardly ever compensated for by        
+   the reduced number of iterations in the iterative linear solver.
+   \n\n 
+   The GMRES convergence tolerance of \f$ 10^{-6} \f$
+   chosen here was found (by trial and error) to give optimal overall
+   solve times, but this choice is problem-dependent and 
+   unless you are willing to perform systematic preliminary
+   investigations, we recommend using the default
+   convergence tolerance of  \f$ 10^{-8} \f$, as defined
+   in the \c IterativeLinearSolver base class.
+   \n\n
+-# <b>Explore the behaviour of preconditioner(s)</b> \n\n
+   The shell script <A HREF="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/steady_precond.bash">
+   steady_precond.bash</a> may be
+   used to explore the performance of the various FSI preconditioners.
+   It solves the monolithically-discretised, steady fluid-structure
+   interaction problem described in  <a href="http://www.springerlink.com/content/m3r6318701g338g4/"> Heil,
+   Hazel \& Boyle's (2008) paper </a> with a variety of solver/preconditioner
+   combinations: \n\n
+   -# The direct solver, \c SuperLUSolver.
+      \n\n
+   -# \c GMRES, with the three FSI preconditioners 
+      \f$ {\cal P}_1, {\cal P}_2 \f$ or 
+      \f$ {\cal P}_3 \f$, discussed above, using
+      various (sub-)solver combinations (\c SuperLUSolver or (if available)
+      \c Hypre) for the solution of linear (sub-)systems.
+      \n\n
+   -# GMRES with various "sanity-check" preconditioners:
+      \n\n
+      - The \c ExactFSIPreconditioner: A preconditioner
+        formed from the full Jacobian matrix by 
+        re-arranging the entries into the appropriate 
+        block structure. This is an exact preconditioner
+        (and its application is therefore just as costly as a 
+        direct solve) and leads to GMRES convergence in a single
+        iteration.
+        \n\n
+      - The \c SimpleFSIPreconditioner: A preconditioner that
+        uses the block-triangular matrices 
+        \f$ {\cal P}_1, {\cal P}_2 \f$ or 
+        \f$ {\cal P}_3 \f$, stored as full matrices
+        (i.e. without performing any block elimination).
+        \n\n
+      .
+   .
+   There is a second shell script <A HREF="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/unsteady_precond.bash">
+   unsteady_precond.bash</a> that
+   can be used to perform similar parameter studies for the
+   corresponding unsteady 
+   problem discussed in 
+   <a href="http://www.springerlink.com/content/m3r6318701g338g4/"> Heil,
+   Hazel \& Boyle's (2008) paper.</a> \n\n
+-# <b>Explore the FSI preconditioner in other problems</b> \n\n
+   The FSI preconditioner is also used in the driver codes for
+   other demo problems:\n\n
+   - <a href="../../../interaction/turek_flag/html/index.html"> Hron &
+     Turek's FSI benchmark of flow past a flag.</a>\n\n
+   - <a href="../../../interaction/fsi_channel_with_leaflet/html/index.html"> 
+     The problem of flow in a channel that is partially obstructed by 
+     an elastic leaflet.</a>\n\n
+   - Your own? If so, <a href="../../../contact/html/index.html">let
+      us know how</a> it works.
+   .
+.
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/">
+demo_drivers/interaction/fsi_channel_seg_and_precond
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_precond_driver.cc">
+demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_precond_driver.cc
+</A>
+</CENTER>
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

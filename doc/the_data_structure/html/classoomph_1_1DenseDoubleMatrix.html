@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::DenseDoubleMatrix Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1DenseDoubleMatrix-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::DenseDoubleMatrix Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class of matrices containing doubles, and stored as a <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a>, but with solving functionality inherited from the abstract DoubleMatrix class. <br  />
+  
+ <a href="classoomph_1_1DenseDoubleMatrix.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="matrices_8h_source.html">matrices.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::DenseDoubleMatrix:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1DenseDoubleMatrix.png" usemap="#oomph::DenseDoubleMatrix_map" alt=""/>
+  <map id="oomph::DenseDoubleMatrix_map" name="oomph::DenseDoubleMatrix_map">
+<area href="classoomph_1_1DoubleMatrixBase.html" title="Abstract base class for matrices of doubles – adds abstract interfaces for solving,..." alt="oomph::DoubleMatrixBase" shape="rect" coords="0,0,188,24"/>
+<area href="classoomph_1_1DenseMatrix.html" alt="oomph::DenseMatrix&lt; double &gt;" shape="rect" coords="198,0,386,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a3f4448fda5506f6f8080228c3f8c7e06"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a3f4448fda5506f6f8080228c3f8c7e06">DenseDoubleMatrix</a> ()</td></tr>
+<tr class="memdesc:a3f4448fda5506f6f8080228c3f8c7e06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, set the default linear solver.  <a href="classoomph_1_1DenseDoubleMatrix.html#a3f4448fda5506f6f8080228c3f8c7e06">More...</a><br /></td></tr>
+<tr class="separator:a3f4448fda5506f6f8080228c3f8c7e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50b8a6f60661c30b3875212f67c83a04"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a50b8a6f60661c30b3875212f67c83a04">DenseDoubleMatrix</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
+<tr class="memdesc:a50b8a6f60661c30b3875212f67c83a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a square n by n matrix.  <a href="classoomph_1_1DenseDoubleMatrix.html#a50b8a6f60661c30b3875212f67c83a04">More...</a><br /></td></tr>
+<tr class="separator:a50b8a6f60661c30b3875212f67c83a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab810633bd06c5d09b6b05d8173083e1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#ab810633bd06c5d09b6b05d8173083e1e">DenseDoubleMatrix</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m)</td></tr>
+<tr class="memdesc:ab810633bd06c5d09b6b05d8173083e1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a matrix with n rows and m columns.  <a href="classoomph_1_1DenseDoubleMatrix.html#ab810633bd06c5d09b6b05d8173083e1e">More...</a><br /></td></tr>
+<tr class="separator:ab810633bd06c5d09b6b05d8173083e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b964715b2e8fa266d3676fc965296b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a8b964715b2e8fa266d3676fc965296b0">DenseDoubleMatrix</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m, const double &amp;initial_val)</td></tr>
+<tr class="memdesc:a8b964715b2e8fa266d3676fc965296b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a matrix with n rows and m columns, with initial value initial_val.  <a href="classoomph_1_1DenseDoubleMatrix.html#a8b964715b2e8fa266d3676fc965296b0">More...</a><br /></td></tr>
+<tr class="separator:a8b964715b2e8fa266d3676fc965296b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a846bc6a2ec6b84d59591f3e9396b8493"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a846bc6a2ec6b84d59591f3e9396b8493">DenseDoubleMatrix</a> (const <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;matrix)</td></tr>
+<tr class="memdesc:a846bc6a2ec6b84d59591f3e9396b8493"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1DenseDoubleMatrix.html#a846bc6a2ec6b84d59591f3e9396b8493">More...</a><br /></td></tr>
+<tr class="separator:a846bc6a2ec6b84d59591f3e9396b8493"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68af8c2bf36da97d198e20f3a9cb466d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a68af8c2bf36da97d198e20f3a9cb466d">operator=</a> (const <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;)</td></tr>
+<tr class="memdesc:a68af8c2bf36da97d198e20f3a9cb466d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1DenseDoubleMatrix.html#a68af8c2bf36da97d198e20f3a9cb466d">More...</a><br /></td></tr>
+<tr class="separator:a68af8c2bf36da97d198e20f3a9cb466d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab67993d1a41ca5ddf05c8210673723f0"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#ab67993d1a41ca5ddf05c8210673723f0">nrow</a> () const</td></tr>
+<tr class="memdesc:ab67993d1a41ca5ddf05c8210673723f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of rows of the matrix.  <a href="classoomph_1_1DenseDoubleMatrix.html#ab67993d1a41ca5ddf05c8210673723f0">More...</a><br /></td></tr>
+<tr class="separator:ab67993d1a41ca5ddf05c8210673723f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec36d12984999f29f5fc21feea55df1d"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#aec36d12984999f29f5fc21feea55df1d">ncol</a> () const</td></tr>
+<tr class="memdesc:aec36d12984999f29f5fc21feea55df1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of columns of the matrix.  <a href="classoomph_1_1DenseDoubleMatrix.html#aec36d12984999f29f5fc21feea55df1d">More...</a><br /></td></tr>
+<tr class="separator:aec36d12984999f29f5fc21feea55df1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae41c14d2d7e4b5b568a9b371e7e53fbd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#ae41c14d2d7e4b5b568a9b371e7e53fbd">operator()</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j) const</td></tr>
+<tr class="memdesc:ae41c14d2d7e4b5b568a9b371e7e53fbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the const version of the round-bracket access operator for read-only access.  <a href="classoomph_1_1DenseDoubleMatrix.html#ae41c14d2d7e4b5b568a9b371e7e53fbd">More...</a><br /></td></tr>
+<tr class="separator:ae41c14d2d7e4b5b568a9b371e7e53fbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7314543c82d096181957979f2c16127c"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a7314543c82d096181957979f2c16127c">operator()</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j)</td></tr>
+<tr class="memdesc:a7314543c82d096181957979f2c16127c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the non-const version of the round-bracket access operator for read-write access.  <a href="classoomph_1_1DenseDoubleMatrix.html#a7314543c82d096181957979f2c16127c">More...</a><br /></td></tr>
+<tr class="separator:a7314543c82d096181957979f2c16127c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b68ac6eb31db9b0221d0dd724bcc3a6"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a5b68ac6eb31db9b0221d0dd724bcc3a6">~DenseDoubleMatrix</a> ()</td></tr>
+<tr class="memdesc:a5b68ac6eb31db9b0221d0dd724bcc3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classoomph_1_1DenseDoubleMatrix.html#a5b68ac6eb31db9b0221d0dd724bcc3a6">More...</a><br /></td></tr>
+<tr class="separator:a5b68ac6eb31db9b0221d0dd724bcc3a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a741d54dbea2a16e6e3f10bbd2d9d726e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a741d54dbea2a16e6e3f10bbd2d9d726e">ludecompose</a> ()</td></tr>
+<tr class="memdesc:a741d54dbea2a16e6e3f10bbd2d9d726e"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU decomposition using <a class="el" href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il...">DenseLU</a> (default linea solver)  <a href="classoomph_1_1DenseDoubleMatrix.html#a741d54dbea2a16e6e3f10bbd2d9d726e">More...</a><br /></td></tr>
+<tr class="separator:a741d54dbea2a16e6e3f10bbd2d9d726e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52515653ab5b792388258ca04e9dcbcc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a52515653ab5b792388258ca04e9dcbcc">lubksub</a> (<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a52515653ab5b792388258ca04e9dcbcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU backsubstitution.  <a href="classoomph_1_1DenseDoubleMatrix.html#a52515653ab5b792388258ca04e9dcbcc">More...</a><br /></td></tr>
+<tr class="separator:a52515653ab5b792388258ca04e9dcbcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0abbfbf61337d53ad1b239ba4431a47c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a0abbfbf61337d53ad1b239ba4431a47c">lubksub</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a0abbfbf61337d53ad1b239ba4431a47c"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU backsubstitution.  <a href="classoomph_1_1DenseDoubleMatrix.html#a0abbfbf61337d53ad1b239ba4431a47c">More...</a><br /></td></tr>
+<tr class="separator:a0abbfbf61337d53ad1b239ba4431a47c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef56ba05f1ba190c3461cf27d57abd9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#aef56ba05f1ba190c3461cf27d57abd9d">eigenvalues_by_jacobi</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;eigen_val, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;eigen_vect) const</td></tr>
+<tr class="memdesc:aef56ba05f1ba190c3461cf27d57abd9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine eigenvalues and eigenvectors, using Jacobi rotations. Only for symmetric matrices. Nothing gets overwritten!  <a href="classoomph_1_1DenseDoubleMatrix.html#aef56ba05f1ba190c3461cf27d57abd9d">More...</a><br /></td></tr>
+<tr class="separator:aef56ba05f1ba190c3461cf27d57abd9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab575dfefa0bdd8f495453baa5575a4a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#ab575dfefa0bdd8f495453baa5575a4a0">multiply</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;soln) const</td></tr>
+<tr class="memdesc:ab575dfefa0bdd8f495453baa5575a4a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the matrix by the vector x: soln=Ax.  <a href="classoomph_1_1DenseDoubleMatrix.html#ab575dfefa0bdd8f495453baa5575a4a0">More...</a><br /></td></tr>
+<tr class="separator:ab575dfefa0bdd8f495453baa5575a4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cc35997d87b4ee7b77fcaaf85eeeaec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a7cc35997d87b4ee7b77fcaaf85eeeaec">multiply_transpose</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;soln) const</td></tr>
+<tr class="memdesc:a7cc35997d87b4ee7b77fcaaf85eeeaec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the transposed matrix by the vector x: soln=A^T x.  <a href="classoomph_1_1DenseDoubleMatrix.html#a7cc35997d87b4ee7b77fcaaf85eeeaec">More...</a><br /></td></tr>
+<tr class="separator:a7cc35997d87b4ee7b77fcaaf85eeeaec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64b81a329f8e9204e50b75ea367a77d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#a64b81a329f8e9204e50b75ea367a77d4">matrix_reduction</a> (const double &amp;alpha, <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;reduced_matrix)</td></tr>
+<tr class="memdesc:a64b81a329f8e9204e50b75ea367a77d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced_matrix. Note: Diagonal entries are retained regardless of their size. <br  />
+  <a href="classoomph_1_1DenseDoubleMatrix.html#a64b81a329f8e9204e50b75ea367a77d4">More...</a><br /></td></tr>
+<tr class="separator:a64b81a329f8e9204e50b75ea367a77d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab687b1136f0265434ada2684aa1b0a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html#aab687b1136f0265434ada2684aa1b0a4">multiply</a> (const <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;matrix_in, <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;result)</td></tr>
+<tr class="memdesc:aab687b1136f0265434ada2684aa1b0a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to multiply this matrix by a <a class="el" href="classoomph_1_1DenseDoubleMatrix.html" title="Class of matrices containing doubles, and stored as a DenseMatrix&lt;double&gt;, but with solving functiona...">DenseDoubleMatrix</a> matrix_in.  <a href="classoomph_1_1DenseDoubleMatrix.html#aab687b1136f0265434ada2684aa1b0a4">More...</a><br /></td></tr>
+<tr class="separator:aab687b1136f0265434ada2684aa1b0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DoubleMatrixBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DoubleMatrixBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DoubleMatrixBase.html">oomph::DoubleMatrixBase</a></td></tr>
+<tr class="memitem:a9ab2dcaf990403cd43d4b952f7dbaa1c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a9ab2dcaf990403cd43d4b952f7dbaa1c">DoubleMatrixBase</a> ()</td></tr>
+<tr class="memdesc:a9ab2dcaf990403cd43d4b952f7dbaa1c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) constructor.  <a href="classoomph_1_1DoubleMatrixBase.html#a9ab2dcaf990403cd43d4b952f7dbaa1c">More...</a><br /></td></tr>
+<tr class="separator:a9ab2dcaf990403cd43d4b952f7dbaa1c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac04a27de856720ef6478df71b1505a inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a9ac04a27de856720ef6478df71b1505a">DoubleMatrixBase</a> (const <a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> &amp;matrix)</td></tr>
+<tr class="memdesc:a9ac04a27de856720ef6478df71b1505a inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1DoubleMatrixBase.html#a9ac04a27de856720ef6478df71b1505a">More...</a><br /></td></tr>
+<tr class="separator:a9ac04a27de856720ef6478df71b1505a inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a107b48a28db1ab8696e794e3d398a02e inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a107b48a28db1ab8696e794e3d398a02e">operator=</a> (const <a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> &amp;)</td></tr>
+<tr class="memdesc:a107b48a28db1ab8696e794e3d398a02e inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1DoubleMatrixBase.html#a107b48a28db1ab8696e794e3d398a02e">More...</a><br /></td></tr>
+<tr class="separator:a107b48a28db1ab8696e794e3d398a02e inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82ece2e3cfc355bb68ba78a2ed9dae9f inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a82ece2e3cfc355bb68ba78a2ed9dae9f">~DoubleMatrixBase</a> ()</td></tr>
+<tr class="memdesc:a82ece2e3cfc355bb68ba78a2ed9dae9f inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual (empty) destructor  <a href="classoomph_1_1DoubleMatrixBase.html#a82ece2e3cfc355bb68ba78a2ed9dae9f">More...</a><br /></td></tr>
+<tr class="separator:a82ece2e3cfc355bb68ba78a2ed9dae9f inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0469ef03089f7f216931940305c38194 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a0469ef03089f7f216931940305c38194">linear_solver_pt</a> ()</td></tr>
+<tr class="memdesc:a0469ef03089f7f216931940305c38194 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the linear solver object.  <a href="classoomph_1_1DoubleMatrixBase.html#a0469ef03089f7f216931940305c38194">More...</a><br /></td></tr>
+<tr class="separator:a0469ef03089f7f216931940305c38194 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52387f4765c958b9b37dbb8991b5f048 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a52387f4765c958b9b37dbb8991b5f048">linear_solver_pt</a> () const</td></tr>
+<tr class="memdesc:a52387f4765c958b9b37dbb8991b5f048 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the linear solver object (const version)  <a href="classoomph_1_1DoubleMatrixBase.html#a52387f4765c958b9b37dbb8991b5f048">More...</a><br /></td></tr>
+<tr class="separator:a52387f4765c958b9b37dbb8991b5f048 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d445c4a1204da569f40ec1bdace9ef3 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a4d445c4a1204da569f40ec1bdace9ef3">solve</a> (<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a4d445c4a1204da569f40ec1bdace9ef3 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <a href="classoomph_1_1DoubleMatrixBase.html#a4d445c4a1204da569f40ec1bdace9ef3">More...</a><br /></td></tr>
+<tr class="separator:a4d445c4a1204da569f40ec1bdace9ef3 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac35083cf8225822363c25b921b4ca1ce inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#ac35083cf8225822363c25b921b4ca1ce">solve</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;soln)</td></tr>
+<tr class="memdesc:ac35083cf8225822363c25b921b4ca1ce inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <a href="classoomph_1_1DoubleMatrixBase.html#ac35083cf8225822363c25b921b4ca1ce">More...</a><br /></td></tr>
+<tr class="separator:ac35083cf8225822363c25b921b4ca1ce inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9098f3e129833a6b1cb5fe6ebdd9835 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#ae9098f3e129833a6b1cb5fe6ebdd9835">solve</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ae9098f3e129833a6b1cb5fe6ebdd9835 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <a href="classoomph_1_1DoubleMatrixBase.html#ae9098f3e129833a6b1cb5fe6ebdd9835">More...</a><br /></td></tr>
+<tr class="separator:ae9098f3e129833a6b1cb5fe6ebdd9835 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9fb5fddec05a0b6e35cff23c79255c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a8d9fb5fddec05a0b6e35cff23c79255c">solve</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;soln)</td></tr>
+<tr class="memdesc:a8d9fb5fddec05a0b6e35cff23c79255c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <a href="classoomph_1_1DoubleMatrixBase.html#a8d9fb5fddec05a0b6e35cff23c79255c">More...</a><br /></td></tr>
+<tr class="separator:a8d9fb5fddec05a0b6e35cff23c79255c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a971bdc2d9297fc582af8467178f4e00e inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a971bdc2d9297fc582af8467178f4e00e">residual</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;b, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;residual_)</td></tr>
+<tr class="memdesc:a971bdc2d9297fc582af8467178f4e00e inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the residual, i.e. r=b-Ax the residual.  <a href="classoomph_1_1DoubleMatrixBase.html#a971bdc2d9297fc582af8467178f4e00e">More...</a><br /></td></tr>
+<tr class="separator:a971bdc2d9297fc582af8467178f4e00e inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69a001b704e1d67277170ff7c0e4f6af inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a69a001b704e1d67277170ff7c0e4f6af">max_residual</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a69a001b704e1d67277170ff7c0e4f6af inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum residual r=b-Ax &ndash; generic version, can be overloaded for specific derived classes where the max. can be determined "on the fly".  <a href="classoomph_1_1DoubleMatrixBase.html#a69a001b704e1d67277170ff7c0e4f6af">More...</a><br /></td></tr>
+<tr class="separator:a69a001b704e1d67277170ff7c0e4f6af inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DenseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DenseMatrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; double &gt;</a></td></tr>
+<tr class="memitem:aecfca835918b50b607e080fc706b6fcf inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aecfca835918b50b607e080fc706b6fcf">DenseMatrix</a> ()</td></tr>
+<tr class="memdesc:aecfca835918b50b607e080fc706b6fcf inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor, simply assign the lengths N and M to 0.  <a href="classoomph_1_1DenseMatrix.html#aecfca835918b50b607e080fc706b6fcf">More...</a><br /></td></tr>
+<tr class="separator:aecfca835918b50b607e080fc706b6fcf inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d8bf7ffb6cc91b882be17b25ff6d452 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a1d8bf7ffb6cc91b882be17b25ff6d452">DenseMatrix</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a> &amp;source_matrix)</td></tr>
+<tr class="memdesc:a1d8bf7ffb6cc91b882be17b25ff6d452 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor: Deep copy!  <a href="classoomph_1_1DenseMatrix.html#a1d8bf7ffb6cc91b882be17b25ff6d452">More...</a><br /></td></tr>
+<tr class="separator:a1d8bf7ffb6cc91b882be17b25ff6d452 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2291404def276dcee1a6099d054d44d6 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a2291404def276dcee1a6099d054d44d6">DenseMatrix</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
+<tr class="memdesc:a2291404def276dcee1a6099d054d44d6 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a square n by n matrix.  <a href="classoomph_1_1DenseMatrix.html#a2291404def276dcee1a6099d054d44d6">More...</a><br /></td></tr>
+<tr class="separator:a2291404def276dcee1a6099d054d44d6 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5afcfd56a9720541e67a6e8d002016d4 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a5afcfd56a9720541e67a6e8d002016d4">DenseMatrix</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m)</td></tr>
+<tr class="memdesc:a5afcfd56a9720541e67a6e8d002016d4 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a matrix with n rows and m columns.  <a href="classoomph_1_1DenseMatrix.html#a5afcfd56a9720541e67a6e8d002016d4">More...</a><br /></td></tr>
+<tr class="separator:a5afcfd56a9720541e67a6e8d002016d4 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b599610bd78a7818b2e4d0835b27e3a inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a7b599610bd78a7818b2e4d0835b27e3a">DenseMatrix</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m, const double &amp;initial_val)</td></tr>
+<tr class="memdesc:a7b599610bd78a7818b2e4d0835b27e3a inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a matrix with n rows and m columns, with initial value initial_val.  <a href="classoomph_1_1DenseMatrix.html#a7b599610bd78a7818b2e4d0835b27e3a">More...</a><br /></td></tr>
+<tr class="separator:a7b599610bd78a7818b2e4d0835b27e3a inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01cb48599a5ecdfca9fd02bcdd43bf88 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a01cb48599a5ecdfca9fd02bcdd43bf88">operator=</a> (const <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a> &amp;source_matrix)</td></tr>
+<tr class="memdesc:a01cb48599a5ecdfca9fd02bcdd43bf88 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <a href="classoomph_1_1DenseMatrix.html#a01cb48599a5ecdfca9fd02bcdd43bf88">More...</a><br /></td></tr>
+<tr class="separator:a01cb48599a5ecdfca9fd02bcdd43bf88 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0260bf942b1ca7d05515bda03acfe8ec inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a0260bf942b1ca7d05515bda03acfe8ec">entry</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j)</td></tr>
+<tr class="memdesc:a0260bf942b1ca7d05515bda03acfe8ec inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">The access function that will be called by the read-write round-bracket operator.  <a href="classoomph_1_1DenseMatrix.html#a0260bf942b1ca7d05515bda03acfe8ec">More...</a><br /></td></tr>
+<tr class="separator:a0260bf942b1ca7d05515bda03acfe8ec inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b03682b4c7d8f820599bd2681a01ee0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a0b03682b4c7d8f820599bd2681a01ee0">get_entry</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j) const</td></tr>
+<tr class="memdesc:a0b03682b4c7d8f820599bd2681a01ee0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">The access function the will be called by the read-only (const version) round-bracket operator.  <a href="classoomph_1_1DenseMatrix.html#a0b03682b4c7d8f820599bd2681a01ee0">More...</a><br /></td></tr>
+<tr class="separator:a0b03682b4c7d8f820599bd2681a01ee0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a673e04c72174ec084e56ad5f53ba51da inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a673e04c72174ec084e56ad5f53ba51da">~DenseMatrix</a> ()</td></tr>
+<tr class="memdesc:a673e04c72174ec084e56ad5f53ba51da inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, clean up the matrix data.  <a href="classoomph_1_1DenseMatrix.html#a673e04c72174ec084e56ad5f53ba51da">More...</a><br /></td></tr>
+<tr class="separator:a673e04c72174ec084e56ad5f53ba51da inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b425094510d833ffe91920747a0a962 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a1b425094510d833ffe91920747a0a962">nrow</a> () const</td></tr>
+<tr class="memdesc:a1b425094510d833ffe91920747a0a962 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of rows of the matrix.  <a href="classoomph_1_1DenseMatrix.html#a1b425094510d833ffe91920747a0a962">More...</a><br /></td></tr>
+<tr class="separator:a1b425094510d833ffe91920747a0a962 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9937181f1cb4cfaed7aaf3b483c42456 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a9937181f1cb4cfaed7aaf3b483c42456">ncol</a> () const</td></tr>
+<tr class="memdesc:a9937181f1cb4cfaed7aaf3b483c42456 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of columns of the matrix.  <a href="classoomph_1_1DenseMatrix.html#a9937181f1cb4cfaed7aaf3b483c42456">More...</a><br /></td></tr>
+<tr class="separator:a9937181f1cb4cfaed7aaf3b483c42456 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adec1ef741b1c5048a12ba9a540c2719c inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#adec1ef741b1c5048a12ba9a540c2719c">resize</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)</td></tr>
+<tr class="separator:adec1ef741b1c5048a12ba9a540c2719c inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f01dd97b1c71868371f93259efc26b0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a0f01dd97b1c71868371f93259efc26b0">resize</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m)</td></tr>
+<tr class="memdesc:a0f01dd97b1c71868371f93259efc26b0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a non-square n x m matrix; any values already present will be transfered.  <a href="classoomph_1_1DenseMatrix.html#a0f01dd97b1c71868371f93259efc26b0">More...</a><br /></td></tr>
+<tr class="separator:a0f01dd97b1c71868371f93259efc26b0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6daf6539fee8d3d6f7a81306798b10 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aeb6daf6539fee8d3d6f7a81306798b10">resize</a> (const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m, const double &amp;initial_value)</td></tr>
+<tr class="memdesc:aeb6daf6539fee8d3d6f7a81306798b10 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a non-square n x m matrix and initialize the new values to initial_value.  <a href="classoomph_1_1DenseMatrix.html#aeb6daf6539fee8d3d6f7a81306798b10">More...</a><br /></td></tr>
+<tr class="separator:aeb6daf6539fee8d3d6f7a81306798b10 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafcfbb0309fdcbd84f8654fe1b5601fd inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aafcfbb0309fdcbd84f8654fe1b5601fd">initialise</a> (const double &amp;val)</td></tr>
+<tr class="memdesc:aafcfbb0309fdcbd84f8654fe1b5601fd inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize all values in the matrix to val.  <a href="classoomph_1_1DenseMatrix.html#aafcfbb0309fdcbd84f8654fe1b5601fd">More...</a><br /></td></tr>
+<tr class="separator:aafcfbb0309fdcbd84f8654fe1b5601fd inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e20626e889a1ab4582614f55784165 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a03e20626e889a1ab4582614f55784165">output</a> (std::ostream &amp;outfile) const</td></tr>
+<tr class="memdesc:a03e20626e889a1ab4582614f55784165 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function to print a matrix row-by-row to the stream outfile.  <a href="classoomph_1_1DenseMatrix.html#a03e20626e889a1ab4582614f55784165">More...</a><br /></td></tr>
+<tr class="separator:a03e20626e889a1ab4582614f55784165 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ab60b1e7db98bcb5b75b080266e452e inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a4ab60b1e7db98bcb5b75b080266e452e">output</a> (std::string filename) const</td></tr>
+<tr class="memdesc:a4ab60b1e7db98bcb5b75b080266e452e inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function to print a matrix row-by-row to a file. Specify filename.  <a href="classoomph_1_1DenseMatrix.html#a4ab60b1e7db98bcb5b75b080266e452e">More...</a><br /></td></tr>
+<tr class="separator:a4ab60b1e7db98bcb5b75b080266e452e inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a440b549690cfc07c85f395eb06951321 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a440b549690cfc07c85f395eb06951321">indexed_output</a> (std::ostream &amp;outfile) const</td></tr>
+<tr class="memdesc:a440b549690cfc07c85f395eb06951321 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j)  <a href="classoomph_1_1DenseMatrix.html#a440b549690cfc07c85f395eb06951321">More...</a><br /></td></tr>
+<tr class="separator:a440b549690cfc07c85f395eb06951321 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5730d359fa98ea501ab7115147a4bd87 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a5730d359fa98ea501ab7115147a4bd87">indexed_output</a> (std::string filename) const</td></tr>
+<tr class="memdesc:a5730d359fa98ea501ab7115147a4bd87 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to a file as i,j,a(i,j). Specify filename.  <a href="classoomph_1_1DenseMatrix.html#a5730d359fa98ea501ab7115147a4bd87">More...</a><br /></td></tr>
+<tr class="separator:a5730d359fa98ea501ab7115147a4bd87 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02dc7c9b2f4e1cc1204cc8281f030f9 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aa02dc7c9b2f4e1cc1204cc8281f030f9">output_bottom_right_zero_helper</a> (std::ostream &amp;outfile) const</td></tr>
+<tr class="memdesc:aa02dc7c9b2f4e1cc1204cc8281f030f9 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <a href="classoomph_1_1DenseMatrix.html#aa02dc7c9b2f4e1cc1204cc8281f030f9">More...</a><br /></td></tr>
+<tr class="separator:aa02dc7c9b2f4e1cc1204cc8281f030f9 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e9084acc11e036d4c5f7e5322d12034 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a6e9084acc11e036d4c5f7e5322d12034">sparse_indexed_output_helper</a> (std::ostream &amp;outfile) const</td></tr>
+<tr class="memdesc:a6e9084acc11e036d4c5f7e5322d12034 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only.  <a href="classoomph_1_1DenseMatrix.html#a6e9084acc11e036d4c5f7e5322d12034">More...</a><br /></td></tr>
+<tr class="separator:a6e9084acc11e036d4c5f7e5322d12034 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1DoubleMatrixBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1DoubleMatrixBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1DoubleMatrixBase.html">oomph::DoubleMatrixBase</a></td></tr>
+<tr class="memitem:a86f0315e581cd5b41b75867383aa3760 inherit pro_attribs_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a86f0315e581cd5b41b75867383aa3760">Linear_solver_pt</a></td></tr>
+<tr class="separator:a86f0315e581cd5b41b75867383aa3760 inherit pro_attribs_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef2e36e4e5907af2738934f131e8dcf inherit pro_attribs_classoomph_1_1DoubleMatrixBase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a6ef2e36e4e5907af2738934f131e8dcf">Default_linear_solver_pt</a></td></tr>
+<tr class="separator:a6ef2e36e4e5907af2738934f131e8dcf inherit pro_attribs_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1DenseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1DenseMatrix')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; double &gt;</a></td></tr>
+<tr class="memitem:a92a2eea603a42e22fd4d3ea0a258e6f8 inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a92a2eea603a42e22fd4d3ea0a258e6f8">Matrixdata</a></td></tr>
+<tr class="memdesc:a92a2eea603a42e22fd4d3ea0a258e6f8 inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal representation of matrix as a pointer to data.  <a href="classoomph_1_1DenseMatrix.html#a92a2eea603a42e22fd4d3ea0a258e6f8">More...</a><br /></td></tr>
+<tr class="separator:a92a2eea603a42e22fd4d3ea0a258e6f8 inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23cb539be0b4ef0381b9f18e8e50f75e inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a23cb539be0b4ef0381b9f18e8e50f75e">N</a></td></tr>
+<tr class="memdesc:a23cb539be0b4ef0381b9f18e8e50f75e inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of rows.  <a href="classoomph_1_1DenseMatrix.html#a23cb539be0b4ef0381b9f18e8e50f75e">More...</a><br /></td></tr>
+<tr class="separator:a23cb539be0b4ef0381b9f18e8e50f75e inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa36631ee95fe55afe697377b03d05d6a inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aa36631ee95fe55afe697377b03d05d6a">M</a></td></tr>
+<tr class="memdesc:aa36631ee95fe55afe697377b03d05d6a inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of columns.  <a href="classoomph_1_1DenseMatrix.html#aa36631ee95fe55afe697377b03d05d6a">More...</a><br /></td></tr>
+<tr class="separator:aa36631ee95fe55afe697377b03d05d6a inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class of matrices containing doubles, and stored as a <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a>, but with solving functionality inherited from the abstract DoubleMatrix class. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01230">1230</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3f4448fda5506f6f8080228c3f8c7e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f4448fda5506f6f8080228c3f8c7e06">&#9670;&nbsp;</a></span>DenseDoubleMatrix() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseDoubleMatrix::DenseDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor, set the default linear solver. </p>
+<p>Constructor, set the default linear solver to be the <a class="el" href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il...">DenseLU</a> solver </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00142">142</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00279">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>, and <a class="el" href="matrices_8h_source.html#l00276">oomph::DoubleMatrixBase::Linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<a id="a50b8a6f60661c30b3875212f67c83a04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50b8a6f60661c30b3875212f67c83a04">&#9670;&nbsp;</a></span>DenseDoubleMatrix() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseDoubleMatrix::DenseDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor to build a square n by n matrix. </p>
+<p>Constructor to build a square n by n matrix. Set the default linear solver to be <a class="el" href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il...">DenseLU</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00151">151</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00279">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>, and <a class="el" href="matrices_8h_source.html#l00276">oomph::DoubleMatrixBase::Linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<a id="ab810633bd06c5d09b6b05d8173083e1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab810633bd06c5d09b6b05d8173083e1e">&#9670;&nbsp;</a></span>DenseDoubleMatrix() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseDoubleMatrix::DenseDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor to build a matrix with n rows and m columns. </p>
+<p>Constructor to build a matrix with n rows and m columns. Set the default linear solver to be <a class="el" href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il...">DenseLU</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00162">162</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00279">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>, and <a class="el" href="matrices_8h_source.html#l00276">oomph::DoubleMatrixBase::Linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<a id="a8b964715b2e8fa266d3676fc965296b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b964715b2e8fa266d3676fc965296b0">&#9670;&nbsp;</a></span>DenseDoubleMatrix() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseDoubleMatrix::DenseDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>initial_val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor to build a matrix with n rows and m columns, with initial value initial_val. </p>
+<p>Constructor to build a matrix with n rows and m columns, with initial value initial_val Set the default linear solver to be <a class="el" href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il...">DenseLU</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00174">174</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00279">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>, and <a class="el" href="matrices_8h_source.html#l00276">oomph::DoubleMatrixBase::Linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<a id="a846bc6a2ec6b84d59591f3e9396b8493"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a846bc6a2ec6b84d59591f3e9396b8493">&#9670;&nbsp;</a></span>DenseDoubleMatrix() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseDoubleMatrix::DenseDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01251">1251</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="a5b68ac6eb31db9b0221d0dd724bcc3a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b68ac6eb31db9b0221d0dd724bcc3a6">&#9670;&nbsp;</a></span>~DenseDoubleMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseDoubleMatrix::~DenseDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+<p>Destructor delete the default linear solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00185">185</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00279">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aef56ba05f1ba190c3461cf27d57abd9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef56ba05f1ba190c3461cf27d57abd9d">&#9670;&nbsp;</a></span>eigenvalues_by_jacobi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseDoubleMatrix::eigenvalues_by_jacobi </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>eigen_vals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>eigen_vect</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determine eigenvalues and eigenvectors, using Jacobi rotations. Only for symmetric matrices. Nothing gets overwritten! </p>
+<ul>
+<li><code>eigen_vect(i,j)</code> = j-th component of i-th eigenvector.</li>
+<li><code>eigen_val(i)</code> is the i-th eigenvalue; same ordering as in eigenvectors</li>
+</ul>
+<p>Determine eigenvalues and eigenvectors, using Jacobi rotations. Only for symmetric matrices. Nothing gets overwritten!</p><ul>
+<li><code>eigen_vect(i,j)</code> = j-th component of i-th eigenvector.</li>
+<li><code>eigen_val</code>[i] is the i-th eigenvalue; same ordering as in eigenvectors </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00227">227</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00413">oomph::DenseMatrix&lt; double &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; double &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l00410">oomph::DenseMatrix&lt; double &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l00503">oomph::DenseMatrix&lt; T &gt;::ncol()</a>, <a class="el" href="matrices_8h_source.html#l00500">oomph::DenseMatrix&lt; T &gt;::nrow()</a>, and <a class="el" href="matrices_8h_source.html#l00507">oomph::DenseMatrix&lt; T &gt;::resize()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="solid__elements_8cc_source.html#l01038">oomph::PVDEquationsBase&lt; DIM &gt;::get_principal_stress()</a>.</p>
+
+</div>
+</div>
+<a id="a52515653ab5b792388258ca04e9dcbcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52515653ab5b792388258ca04e9dcbcc">&#9670;&nbsp;</a></span>lubksub() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseDoubleMatrix::lubksub </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>LU backsubstitution. </p>
+<p>Back substitute an LU decomposed matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00205">205</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00279">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="dg__elements_8cc_source.html#l00585">oomph::DGElement::get_inverse_mass_matrix_times_residuals()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00614">oomph::Z2ErrorEstimator::get_recovered_flux_in_patch()</a>.</p>
+
+</div>
+</div>
+<a id="a0abbfbf61337d53ad1b239ba4431a47c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0abbfbf61337d53ad1b239ba4431a47c">&#9670;&nbsp;</a></span>lubksub() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseDoubleMatrix::lubksub </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>LU backsubstitution. </p>
+<p>Back substitute an LU decomposed matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00214">214</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00279">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<a id="a741d54dbea2a16e6e3f10bbd2d9d726e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a741d54dbea2a16e6e3f10bbd2d9d726e">&#9670;&nbsp;</a></span>ludecompose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseDoubleMatrix::ludecompose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>LU decomposition using <a class="el" href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il...">DenseLU</a> (default linea solver) </p>
+<p>LU decompose a matrix, by using the default linear solver (<a class="el" href="classoomph_1_1DenseLU.html" title="Dense LU decomposition-based solve of full assembled linear system. VERY inefficient but useful to il...">DenseLU</a>) </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00195">195</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00279">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="dg__elements_8cc_source.html#l00585">oomph::DGElement::get_inverse_mass_matrix_times_residuals()</a>, <a class="el" href="error__estimator_8cc_source.html#l00614">oomph::Z2ErrorEstimator::get_recovered_flux_in_patch()</a>, and <a class="el" href="dg__elements_8cc_source.html#l00551">oomph::DGElement::pre_compute_mass_matrix()</a>.</p>
+
+</div>
+</div>
+<a id="a64b81a329f8e9204e50b75ea367a77d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64b81a329f8e9204e50b75ea367a77d4">&#9670;&nbsp;</a></span>matrix_reduction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseDoubleMatrix::matrix_reduction </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>reduced_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced_matrix. Note: Diagonal entries are retained regardless of their size. <br  />
+ </p>
+<p>For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced_matrix. Note: Diagonal entries are retained regardless of their size. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00487">487</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00413">oomph::DenseMatrix&lt; double &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; double &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l00410">oomph::DenseMatrix&lt; double &gt;::N</a>, and <a class="el" href="matrices_8h_source.html#l00507">oomph::DenseMatrix&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="aab687b1136f0265434ada2684aa1b0a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab687b1136f0265434ada2684aa1b0a4">&#9670;&nbsp;</a></span>multiply() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseDoubleMatrix::multiply </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to multiply this matrix by a <a class="el" href="classoomph_1_1DenseDoubleMatrix.html" title="Class of matrices containing doubles, and stored as a DenseMatrix&lt;double&gt;, but with solving functiona...">DenseDoubleMatrix</a> matrix_in. </p>
+<p>Function to multiply this matrix by the <a class="el" href="classoomph_1_1DenseDoubleMatrix.html" title="Class of matrices containing doubles, and stored as a DenseMatrix&lt;double&gt;, but with solving functiona...">DenseDoubleMatrix</a> matrix_in. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00529">529</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; double &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l01268">ncol()</a>, <a class="el" href="matrices_8h_source.html#l01265">nrow()</a>, and <a class="el" href="matrices_8h_source.html#l00507">oomph::DenseMatrix&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="ab575dfefa0bdd8f495453baa5575a4a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab575dfefa0bdd8f495453baa5575a4a0">&#9670;&nbsp;</a></span>multiply() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseDoubleMatrix::multiply </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>soln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply the matrix by the vector x: soln=Ax. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a78204eab557e0dc99618e41a28a5c092">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00299">299</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="double__vector_8cc_source.html#l00116">oomph::DoubleVector::initialise()</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::N</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, and <a class="el" href="double__vector_8h_source.html#l00255">oomph::DoubleVector::values_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a7cc35997d87b4ee7b77fcaaf85eeeaec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cc35997d87b4ee7b77fcaaf85eeeaec">&#9670;&nbsp;</a></span>multiply_transpose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseDoubleMatrix::multiply_transpose </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>soln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply the transposed matrix by the vector x: soln=A^T x. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a843d44405b70da1d96b43218a21e6ffc">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00389">389</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00036">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00158">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00339">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00506">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00470">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="double__vector_8cc_source.html#l00116">oomph::DoubleVector::initialise()</a>, <a class="el" href="matrices_8h_source.html#l00413">oomph::DenseMatrix&lt; double &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00407">oomph::DenseMatrix&lt; double &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l00410">oomph::DenseMatrix&lt; double &gt;::N</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00476">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="matrices_8h_source.html#l01265">nrow()</a>, and <a class="el" href="double__vector_8h_source.html#l00255">oomph::DoubleVector::values_pt()</a>.</p>
+
+</div>
+</div>
+<a id="aec36d12984999f29f5fc21feea55df1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec36d12984999f29f5fc21feea55df1d">&#9670;&nbsp;</a></span>ncol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long oomph::DenseDoubleMatrix::ncol </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of columns of the matrix. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01268">1268</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00503">oomph::DenseMatrix&lt; T &gt;::ncol()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8cc_source.html#l00529">multiply()</a>.</p>
+
+</div>
+</div>
+<a id="ab67993d1a41ca5ddf05c8210673723f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab67993d1a41ca5ddf05c8210673723f0">&#9670;&nbsp;</a></span>nrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long oomph::DenseDoubleMatrix::nrow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of rows of the matrix. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01265">1265</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00500">oomph::DenseMatrix&lt; T &gt;::nrow()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8cc_source.html#l00529">multiply()</a>, and <a class="el" href="matrices_8cc_source.html#l00389">multiply_transpose()</a>.</p>
+
+</div>
+</div>
+<a id="a7314543c82d096181957979f2c16127c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7314543c82d096181957979f2c16127c">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::DenseDoubleMatrix::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the non-const version of the round-bracket access operator for read-write access. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01278">1278</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00466">oomph::DenseMatrix&lt; T &gt;::entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="ae41c14d2d7e4b5b568a9b371e7e53fbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae41c14d2d7e4b5b568a9b371e7e53fbd">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::DenseDoubleMatrix::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the const version of the round-bracket access operator for read-only access. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a20b85f0286f80464f42f0846fede2d77">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01272">1272</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00476">oomph::DenseMatrix&lt; T &gt;::get_entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="a68af8c2bf36da97d198e20f3a9cb466d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68af8c2bf36da97d198e20f3a9cb466d">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::DenseDoubleMatrix::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DenseDoubleMatrix.html">DenseDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l01258">1258</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="matrices_8h_source.html">matrices.h</a></li>
+<li><a class="el" href="matrices_8cc_source.html">matrices.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:27
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

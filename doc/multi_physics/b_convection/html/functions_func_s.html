@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members - Functions</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>s_inf_norm()
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditionerScalingHelperOld.html#a4774c6db30bd4f7d054e438add48f7eb">oomph::PseudoElasticPreconditionerScalingHelperOld</a>
+</li>
+<li>scalar_name_paraview()
+: <a class="el" href="classoomph_1_1BuoyantQCrouzeixRaviartElement.html#a26f8112d2ba9c77087e534145a2477c9">oomph::BuoyantQCrouzeixRaviartElement&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#ae9b9687a5a15a0089431ad1b143356e5">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;</a>
+</li>
+<li>scalar_value_paraview()
+: <a class="el" href="classoomph_1_1BuoyantQCrouzeixRaviartElement.html#a33130eacdbdee41536fce76166c4a769">oomph::BuoyantQCrouzeixRaviartElement&lt; DIM &gt;</a>
+, <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a9a8ee12b27daa327e97fbacc89c341c6">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;</a>
+</li>
+<li>scaling()
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld.html#ad6cb2301227704660e2f621f9de504cf">oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerSubsidiaryPreconditionerOld.html#a38a9cf93e354ea1fbb76f8d8fa1df0ab">oomph::PseudoElasticPreconditionerSubsidiaryPreconditionerOld</a>
+</li>
+<li>SegregatableFSIProblem()
+: <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#aabbe220c15e7a348a28d54be805ca8d8">oomph::SegregatableFSIProblem</a>
+</li>
+<li>segregated_solve()
+: <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a87a69561674c1e596bb205e0fc4a387f">oomph::SegregatableFSIProblem</a>
+</li>
+<li>SegregatedSolverError()
+: <a class="el" href="classoomph_1_1SegregatedSolverError.html#a047930f506d1060fef2f6746755248b7">oomph::SegregatedSolverError</a>
+</li>
+<li>set_boundary_conditions()
+: <a class="el" href="classConvectionProblem.html#a605543718d51f7a77f75a46b48b543d7">ConvectionProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>set_elastic_mesh()
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#ae115b58574a36c2c8fecb2524afa54f1">oomph::PseudoElasticPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerOld.html#a96464001afad81606a6d298f4045de70">oomph::PseudoElasticPreconditionerOld</a>
+</li>
+<li>set_elastic_subsidiary_preconditioner()
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a8c75fe5786d64a042056df16a062c055">oomph::PseudoElasticPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerOld.html#aae1c5f984fee69fca7cd9719ed2222a4">oomph::PseudoElasticPreconditionerOld</a>
+</li>
+<li>set_fluid_and_pseudo_elastic_mesh_pt()
+: <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html#a8d0b7212ad06c4f5942fed253c680010">oomph::PseudoElasticFSIPreconditioner</a>
+</li>
+<li>set_lagrange_multiplier_mesh()
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a6030c2461383ee1a0b8ac6ed56b0daf6">oomph::PseudoElasticPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerOld.html#a432b5e0501644ae3fa6a9dadd8f52c60">oomph::PseudoElasticPreconditionerOld</a>
+</li>
+<li>set_lagrange_multiplier_mesh_pt()
+: <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html#ad30185179d7c2bc6c725e550c48a0c90">oomph::PseudoElasticFSIPreconditioner</a>
+</li>
+<li>set_lagrange_multiplier_subsidiary_preconditioner()
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a64865a85f35ae9385f9f8d68e75595e0">oomph::PseudoElasticPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerOld.html#ab0f5cd103d172fcb33be52c17bb741d3">oomph::PseudoElasticPreconditionerOld</a>
+</li>
+<li>set_navier_stokes_mesh()
+: <a class="el" href="classoomph_1_1FSIPreconditioner.html#a5d70612246bd08bec6c7b373da5e9c80">oomph::FSIPreconditioner</a>
+, <a class="el" href="classoomph_1_1SimpleFSIPreconditioner.html#ab9c5875d7186cfb5c55cecb72bed50b3">oomph::SimpleFSIPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>set_solid_mesh_pt()
+: <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html#af2c1fc8d2dd795c5a4a2ae266ad32d18">oomph::PseudoElasticFSIPreconditioner</a>
+</li>
+<li>set_solid_preconditioner()
+: <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html#a92e59f83606d77e7407a4ace534546f2">oomph::PseudoElasticFSIPreconditioner</a>
+</li>
+<li>set_solid_preconditioner_pt()
+: <a class="el" href="classoomph_1_1FSIPreconditioner.html#a0f21e38e18521e0946c3f3ec98a85baa">oomph::FSIPreconditioner</a>
+</li>
+<li>set_solver_converged()
+: <a class="el" href="classoomph_1_1PicardConvergenceData.html#a181a6b365fb045cd70e30f193542d087">oomph::PicardConvergenceData</a>
+</li>
+<li>set_solver_not_converged()
+: <a class="el" href="classoomph_1_1PicardConvergenceData.html#a1fcaf97b61a9afa18b569a8ca43b1454">oomph::PicardConvergenceData</a>
+</li>
+<li>set_subsidiary_preconditioner_function()
+: <a class="el" href="classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld.html#a6c238d4e402413fe20061d5735acb40c">oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerSubsidiaryPreconditionerOld.html#a6fd50251d78370846929956b3eabf310">oomph::PseudoElasticPreconditionerSubsidiaryPreconditionerOld</a>
+</li>
+<li>set_wall_mesh()
+: <a class="el" href="classoomph_1_1FSIPreconditioner.html#a61d583e9d3a1596efe22b11950fb47a5">oomph::FSIPreconditioner</a>
+, <a class="el" href="classoomph_1_1SimpleFSIPreconditioner.html#a324b53aaedfc8f0a2cc3da921ef94686">oomph::SimpleFSIPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>setup()
+: <a class="el" href="classoomph_1_1FSIPreconditioner.html#adadfe9f4332af610b00f1f45d1ad432e">oomph::FSIPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html#a460ad5eea59f4c07dfde8b11696fabb1">oomph::PseudoElasticFSIPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a69909eef3e1530ca7faf48c653ec7327">oomph::PseudoElasticPreconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerOld.html#a25d542a5b98d70be1aa1dd6000402978">oomph::PseudoElasticPreconditionerOld</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerScalingHelperOld.html#a42dca15c6f3678880f3b84ccb91513c7">oomph::PseudoElasticPreconditionerScalingHelperOld</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld.html#a4477e968641690ab5c66c8155aef8a99">oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditionerSubsidiaryPreconditionerOld.html#a532201f17edc43b3b475fff2d2744b8b">oomph::PseudoElasticPreconditionerSubsidiaryPreconditionerOld</a>
+, <a class="el" href="classoomph_1_1SimpleFSIPreconditioner.html#aaf19c0c3f19f6d8ef4f36a1581829230">oomph::SimpleFSIPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>setup_segregated_solver()
+: <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a12e662227e5daf656244a531f40022f9">oomph::SegregatableFSIProblem</a>
+</li>
+<li>shape_and_test()
+: <a class="el" href="classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement.html#ae9aa741774cfc14e95ff9113844119f5">oomph::FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a91ee0e36a8c127d83269a08d6740dfb2">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement.html#a4e6b686d2905fc642cb735d611830be4">oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;</a>
+</li>
+<li>shape_and_test_at_knot()
+: <a class="el" href="classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement.html#ab9f53637a61bc8a089170011596e5184">oomph::FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ad3a879cf569b317c086f07872164f9f8">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;</a>
+, <a class="el" href="classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement.html#ac0c13560b5e8dba19dc11f44f455bf97">oomph::PMLHelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;</a>
+</li>
+<li>SimpleFSIPreconditioner()
+: <a class="el" href="classoomph_1_1SimpleFSIPreconditioner.html#a427e372b3153e9a26aa97c76d69e28a4">oomph::SimpleFSIPreconditioner&lt; MATRIX &gt;</a>
+</li>
+<li>solid_preconditioner_pt()
+: <a class="el" href="classoomph_1_1FSIPreconditioner.html#abc97d84c4d0e7a280947855b7f33c34c">oomph::FSIPreconditioner</a>
+</li>
+<li>steady_segregated_solve()
+: <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a8f8145df86358916df505e2b513caf6a">oomph::SegregatableFSIProblem</a>
+</li>
+<li>store_solid_dofs()
+: <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#af6a9e7b6f13b86bf86b65cfb7c4f966f">oomph::SegregatableFSIProblem</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:06
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

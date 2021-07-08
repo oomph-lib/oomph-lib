@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">RefineableNavierStokesBoussinesqElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1RefineableNavierStokesBoussinesqElement-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1RefineableNavierStokesBoussinesqElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af9fd72e50fb7d6aaf43bd982ce3de295"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#af9fd72e50fb7d6aaf43bd982ce3de295">RefineableNavierStokesBoussinesqElement</a> ()</td></tr>
+<tr class="memdesc:af9fd72e50fb7d6aaf43bd982ce3de295"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: call the underlying constructors and initialise the pointer to the Rayleigh number to point to the default value of 0.0.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#af9fd72e50fb7d6aaf43bd982ce3de295">More...</a><br /></td></tr>
+<tr class="separator:af9fd72e50fb7d6aaf43bd982ce3de295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18350ad83634633acea59b60123d3c0"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#ae18350ad83634633acea59b60123d3c0">ra</a> () const</td></tr>
+<tr class="memdesc:ae18350ad83634633acea59b60123d3c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the Rayleigh number (const version)  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#ae18350ad83634633acea59b60123d3c0">More...</a><br /></td></tr>
+<tr class="separator:ae18350ad83634633acea59b60123d3c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f3ff1714a6859b151da46109eda0ae"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#ac2f3ff1714a6859b151da46109eda0ae">ra_pt</a> ()</td></tr>
+<tr class="memdesc:ac2f3ff1714a6859b151da46109eda0ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to the Rayleigh number.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#ac2f3ff1714a6859b151da46109eda0ae">More...</a><br /></td></tr>
+<tr class="separator:ac2f3ff1714a6859b151da46109eda0ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7b18f473b0fa9c4127de305e5a6ccc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a8b7b18f473b0fa9c4127de305e5a6ccc">further_build</a> ()</td></tr>
+<tr class="memdesc:a8b7b18f473b0fa9c4127de305e5a6ccc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the underlying single-physics element's <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a8b7b18f473b0fa9c4127de305e5a6ccc" title="Call the underlying single-physics element&#39;s further_build() functions and make sure that the pointer...">further_build()</a> functions and make sure that the pointer to the Rayleigh number is passed to the sons. Also make sure that if the external geometric Data was ignored in the father it's also ignored in the sons.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a8b7b18f473b0fa9c4127de305e5a6ccc">More...</a><br /></td></tr>
+<tr class="separator:a8b7b18f473b0fa9c4127de305e5a6ccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c422f8666f9acef4d26f187a4dc4e28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a7c422f8666f9acef4d26f187a4dc4e28">get_body_force_nst</a> (const double &amp;time, const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;s, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;body_force)</td></tr>
+<tr class="memdesc:a7c422f8666f9acef4d26f187a4dc4e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a7c422f8666f9acef4d26f187a4dc4e28" title="Overload get_body_force_nst() to return the temperature-dependent buoyancy force, using the temperatu...">get_body_force_nst()</a> to return the temperature-dependent buoyancy force, using the temperature computed by the "external" advection diffusion element associated with integration point <code>ipt</code>.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a7c422f8666f9acef4d26f187a4dc4e28">More...</a><br /></td></tr>
+<tr class="separator:a7c422f8666f9acef4d26f187a4dc4e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab6bae7d0704ab7e3e121ee594ac887a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#aab6bae7d0704ab7e3e121ee594ac887a">fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:aab6bae7d0704ab7e3e121ee594ac887a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the element's residual vector and the Jacobian matrix.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#aab6bae7d0704ab7e3e121ee594ac887a">More...</a><br /></td></tr>
+<tr class="separator:aab6bae7d0704ab7e3e121ee594ac887a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e9c7f347aa1c6defbcb20049fc8985"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a02e9c7f347aa1c6defbcb20049fc8985">fill_in_contribution_to_jacobian_and_mass_matrix</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, DenseMatrix&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="separator:a02e9c7f347aa1c6defbcb20049fc8985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4450f88be1c003160b9fa99df70a923b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a4450f88be1c003160b9fa99df70a923b">get_dbody_force_nst_dexternal_element_data</a> (const unsigned &amp;ipt, DenseMatrix&lt; double &gt; &amp;result, Vector&lt; unsigned &gt; &amp;global_eqn_number)</td></tr>
+<tr class="memdesc:a4450f88be1c003160b9fa99df70a923b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the derivatives of the body force with respect to the external unknowns.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a4450f88be1c003160b9fa99df70a923b">More...</a><br /></td></tr>
+<tr class="separator:a4450f88be1c003160b9fa99df70a923b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9609dc454ef3d29b1e256fa32fb2c665"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a9609dc454ef3d29b1e256fa32fb2c665">fill_in_off_diagonal_block_analytic</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a9609dc454ef3d29b1e256fa32fb2c665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the contribution of the external degrees of freedom (temperatures) on the Navier-Stokes equations.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a9609dc454ef3d29b1e256fa32fb2c665">More...</a><br /></td></tr>
+<tr class="separator:a9609dc454ef3d29b1e256fa32fb2c665"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab581709145cc3e9a4da5c5417d1c50f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#aab581709145cc3e9a4da5c5417d1c50f">get_dof_numbers_for_unknowns</a> (std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;dof_lookup_list) const</td></tr>
+<tr class="memdesc:aab581709145cc3e9a4da5c5417d1c50f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Classify dof numbers as in underlying element.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#aab581709145cc3e9a4da5c5417d1c50f">More...</a><br /></td></tr>
+<tr class="separator:aab581709145cc3e9a4da5c5417d1c50f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e494f3887499d79d8c30c7434494b47"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a8e494f3887499d79d8c30c7434494b47">ndof_types</a> () const</td></tr>
+<tr class="memdesc:a8e494f3887499d79d8c30c7434494b47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of dof types from underlying element.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a8e494f3887499d79d8c30c7434494b47">More...</a><br /></td></tr>
+<tr class="separator:a8e494f3887499d79d8c30c7434494b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a4ea4706d0f735b1986287038191ee4e9"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a4ea4706d0f735b1986287038191ee4e9">Ra_pt</a></td></tr>
+<tr class="memdesc:a4ea4706d0f735b1986287038191ee4e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a private data member, the Rayleigh number.  <a href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a4ea4706d0f735b1986287038191ee4e9">More...</a><br /></td></tr>
+<tr class="separator:a4ea4706d0f735b1986287038191ee4e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class NST_ELEMENT, class AD_ELEMENT&gt;<br />
+class oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;</h3>
+
+<p>Build a refineable Navier Stokes element that inherits from ElementWithExternalElement so that it can "communicate" with an advection diffusion element that provides the temperature in the body force term. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00066">66</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af9fd72e50fb7d6aaf43bd982ce3de295"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9fd72e50fb7d6aaf43bd982ce3de295">&#9670;&nbsp;</a></span>RefineableNavierStokesBoussinesqElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::<a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">RefineableNavierStokesBoussinesqElement</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: call the underlying constructors and initialise the pointer to the Rayleigh number to point to the default value of 0.0. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00075">75</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00051">oomph::MultiDomainBoussinesqHelper::Default_Physical_Constant_Value</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00358">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aab6bae7d0704ab7e3e121ee594ac887a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab6bae7d0704ab7e3e121ee594ac887a">&#9670;&nbsp;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the element's residual vector and the Jacobian matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00155">155</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="refine__b__convect_8txt.html#afb1ff8cf837bf38120135bebec006cd4">fill_in_contribution_to_jacobian()</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00201">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
+
+</div>
+</div>
+<a id="a02e9c7f347aa1c6defbcb20049fc8985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02e9c7f347aa1c6defbcb20049fc8985">&#9670;&nbsp;</a></span>fill_in_contribution_to_jacobian_and_mass_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_contribution_to_jacobian_and_mass_matrix </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mass_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Add the element's contribution to its residuals vector, jacobian matrix and mass matrix </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00180">180</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a9609dc454ef3d29b1e256fa32fb2c665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9609dc454ef3d29b1e256fa32fb2c665">&#9670;&nbsp;</a></span>fill_in_off_diagonal_block_analytic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the contribution of the external degrees of freedom (temperatures) on the Navier-Stokes equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00201">201</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01400">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::get_dbody_force_nst_dexternal_element_data()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00155">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a8b7b18f473b0fa9c4127de305e5a6ccc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b7b18f473b0fa9c4127de305e5a6ccc">&#9670;&nbsp;</a></span>further_build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::further_build </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call the underlying single-physics element's <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a8b7b18f473b0fa9c4127de305e5a6ccc" title="Call the underlying single-physics element&#39;s further_build() functions and make sure that the pointer...">further_build()</a> functions and make sure that the pointer to the Rayleigh number is passed to the sons. Also make sure that if the external geometric Data was ignored in the father it's also ignored in the sons. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00095">95</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00089">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra_pt()</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00358">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
+
+</div>
+</div>
+<a id="a7c422f8666f9acef4d26f187a4dc4e28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c422f8666f9acef4d26f187a4dc4e28">&#9670;&nbsp;</a></span>get_body_force_nst()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::get_body_force_nst </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>body_force</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html#a7c422f8666f9acef4d26f187a4dc4e28" title="Overload get_body_force_nst() to return the temperature-dependent buoyancy force, using the temperatu...">get_body_force_nst()</a> to return the temperature-dependent buoyancy force, using the temperature computed by the "external" advection diffusion element associated with integration point <code>ipt</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00123">123</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00086">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra()</a>.</p>
+
+</div>
+</div>
+<a id="a4450f88be1c003160b9fa99df70a923b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4450f88be1c003160b9fa99df70a923b">&#9670;&nbsp;</a></span>get_dbody_force_nst_dexternal_element_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::get_dbody_force_nst_dexternal_element_data </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>global_eqn_number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fill in the derivatives of the body force with respect to the external unknowns. </p>
+<p>Fill in the derivatives of the body force with respect to the external unknowns in the Navier&ndash;Stokes equations </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01400">1400</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00201">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
+
+</div>
+</div>
+<a id="aab581709145cc3e9a4da5c5417d1c50f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab581709145cc3e9a4da5c5417d1c50f">&#9670;&nbsp;</a></span>get_dof_numbers_for_unknowns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::get_dof_numbers_for_unknowns </td>
+          <td>(</td>
+          <td class="paramtype">std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dof_lookup_list</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Classify dof numbers as in underlying element. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00342">342</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a8e494f3887499d79d8c30c7434494b47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e494f3887499d79d8c30c7434494b47">&#9670;&nbsp;</a></span>ndof_types()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::ndof_types </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get number of dof types from underlying element. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00350">350</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ae18350ad83634633acea59b60123d3c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae18350ad83634633acea59b60123d3c0">&#9670;&nbsp;</a></span>ra()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double&amp; <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the Rayleigh number (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00086">86</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00358">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00123">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::get_body_force_nst()</a>.</p>
+
+</div>
+</div>
+<a id="ac2f3ff1714a6859b151da46109eda0ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2f3ff1714a6859b151da46109eda0ae">&#9670;&nbsp;</a></span>ra_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* &amp; <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the pointer to the Rayleigh number. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00089">89</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00358">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00095">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::further_build()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4ea4706d0f735b1986287038191ee4e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ea4706d0f735b1986287038191ee4e9">&#9670;&nbsp;</a></span>Ra_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NST_ELEMENT , class AD_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classoomph_1_1RefineableNavierStokesBoussinesqElement.html">oomph::RefineableNavierStokesBoussinesqElement</a>&lt; NST_ELEMENT, AD_ELEMENT &gt;::Ra_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to a private data member, the Rayleigh number. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00358">358</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00095">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::further_build()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00086">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra()</a>, <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00089">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::ra_pt()</a>, and <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l00075">oomph::RefineableNavierStokesBoussinesqElement&lt; NST_ELEMENT, AD_ELEMENT &gt;::RefineableNavierStokesBoussinesqElement()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:10
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

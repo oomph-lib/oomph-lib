@@ -1,0 +1,1298 @@
+Detailed documentation to be written. Here\textquotesingle{}s the driver code...
+
+(This problem is solved using spatially adaptive elements with a pseudo-\/elastic remesh strategy)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC// ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// This file forms part of oomph-\/lib, the object-\/oriented, }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//A driver program to solve the problem of a cylinder rotating near a free}}
+\DoxyCodeLine{\textcolor{comment}{//surface}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "navier\_stokes.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "solid.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "fluid\_interface.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using namespace }oomph;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=start\_of\_namespace================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pseudo-\/solid Poisson ratio}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ ///Direction of the wall normal vector}}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Function that specifies the wall unit normal}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0d48e8726fa485de2b2df2d5031ec41b}{wall\_unit\_normal\_fct}}(\textcolor{keyword}{const} Vector<double> \&x, }
+\DoxyCodeLine{                      Vector<double> \&normal)}
+\DoxyCodeLine{ \{}
+\DoxyCodeLine{  normal=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
+\DoxyCodeLine{ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\} \textcolor{comment}{// end\_of\_namespace}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//My own Ellipse class}}
+\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}} : \textcolor{keyword}{public} GeomObject}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{ \textcolor{comment}{//Internal data to store the centre and semi-\/axes}}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} *centre\_x\_pt, *centre\_y\_pt, *a\_pt, *b\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//Constructor}}
+\DoxyCodeLine{ \mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&centre\_x, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&centre\_y,}
+\DoxyCodeLine{                \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&a, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&b)}
+\DoxyCodeLine{  : GeomObject(1,2), centre\_x\_pt(0), centre\_y\_pt(0), a\_pt(0), b\_pt(0)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   centre\_x\_pt = \textcolor{keyword}{new} double(centre\_x);}
+\DoxyCodeLine{   centre\_y\_pt = \textcolor{keyword}{new} double(centre\_y);}
+\DoxyCodeLine{   a\_pt = \textcolor{keyword}{new} double(a);}
+\DoxyCodeLine{   b\_pt = \textcolor{keyword}{new} double(b);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Destructor}}
+\DoxyCodeLine{ \string~\mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}}()}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keyword}{delete} centre\_x\_pt;}
+\DoxyCodeLine{   \textcolor{keyword}{delete} centre\_y\_pt;}
+\DoxyCodeLine{   \textcolor{keyword}{delete} a\_pt;}
+\DoxyCodeLine{   \textcolor{keyword}{delete} b\_pt;}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Return the position}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} Vector<double> \&xi, Vector<double> \&r)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keyword}{  }\{}
+\DoxyCodeLine{   r[0] = *centre\_x\_pt + *a\_pt*cos(xi[0]);}
+\DoxyCodeLine{   r[1] = *centre\_y\_pt + *b\_pt*sin(xi[0]);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//A Domain}}
+\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}} : \textcolor{keyword}{public} Domain}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} centre\_x, centre\_y;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Lower\_left[2], Lower\_right[2], Lower\_mid\_left[2], Lower\_mid\_right[2];}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Upper\_left[2], Upper\_right[2], Upper\_mid\_left[2], Upper\_mid\_right[2];}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Lower\_centre\_left[2], Lower\_centre\_right[2];}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Upper\_centre\_left[2], Upper\_centre\_right[2];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Geometric object that represents the rotating cylinder}}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* Cylinder\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Constructor, pass the length and height of the domain}}
+\DoxyCodeLine{ \mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&Length, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&Height)}
+\DoxyCodeLine{  \{   }
+\DoxyCodeLine{}
+\DoxyCodeLine{   centre\_x = Length/2.0;}
+\DoxyCodeLine{   centre\_y = Height/2.0; \textcolor{comment}{//3.0*Height/4.0;}}
+\DoxyCodeLine{  \textcolor{comment}{//Create a new ellipse object to represent the rotating cylinder}}
+\DoxyCodeLine{   Cylinder\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}}(centre\_x,centre\_y,0.2*Height,0.2*Height);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Set some basic coordinates}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Lower\_left[0] = 0.0;}
+\DoxyCodeLine{   Lower\_left[1] = 0.0;}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   Upper\_left[0] = 0.0;}
+\DoxyCodeLine{   Upper\_left[1] = Height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Lower\_right[0] = Length;}
+\DoxyCodeLine{   Lower\_right[1] = 0.0;}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   Upper\_right[0] = Length;}
+\DoxyCodeLine{   Upper\_right[1] = Height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Let's just do some mid coordinates}}
+\DoxyCodeLine{   Lower\_mid\_left[0] = Length/10.0;}
+\DoxyCodeLine{   Lower\_mid\_left[1] = 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Upper\_mid\_left[0] = Length/10.0;}
+\DoxyCodeLine{   Upper\_mid\_left[1] = Height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Vector<double> xi(1), f(2);}
+\DoxyCodeLine{   xi[0] = -\/3.0*atan(1.0);}
+\DoxyCodeLine{   Cylinder\_pt-\/>position(xi,f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Lower\_centre\_left[0] = f[0];}
+\DoxyCodeLine{   Lower\_centre\_left[1] = f[1];}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   xi[0] = 3.0*atan(1.0);}
+\DoxyCodeLine{   Cylinder\_pt-\/>position(xi,f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Upper\_centre\_left[0] = f[0];}
+\DoxyCodeLine{   Upper\_centre\_left[1] = f[1];}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Lower\_mid\_right[0] = 9.0*Length/10.0;}
+\DoxyCodeLine{   Lower\_mid\_right[1] = 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Upper\_mid\_right[0] = 9.0*Length/10.0;}
+\DoxyCodeLine{   Upper\_mid\_right[1] = Height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{   xi[0] = -\/1.0*atan(1.0);}
+\DoxyCodeLine{   Cylinder\_pt-\/>position(xi,f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Lower\_centre\_right[0] = f[0];}
+\DoxyCodeLine{   Lower\_centre\_right[1] = f[1];}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   xi[0] = 1.0*atan(1.0);}
+\DoxyCodeLine{   Cylinder\_pt-\/>position(xi,f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   Upper\_centre\_right[0] = f[0];}
+\DoxyCodeLine{   Upper\_centre\_right[1] = f[1];}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//There are six macro elements}}
+\DoxyCodeLine{   Macro\_element\_pt.resize(6); }
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Build the macro elements}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<6;i++)}
+\DoxyCodeLine{    \{Macro\_element\_pt[i]= \textcolor{keyword}{new} QMacroElement<2>(\textcolor{keyword}{this},i);\}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Destructor: Empty; cleanup done in base class}}
+\DoxyCodeLine{ \string~\mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}() \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Private little interpolation problem}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} linear\_interpolate(\textcolor{keywordtype}{double} Left[2], \textcolor{keywordtype}{double} Right[2],}
+\DoxyCodeLine{                         \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&s, Vector<double> \&f)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     f[i] = Left[i] + (Right[i] -\/ Left[i])*0.5*(s+1.0);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Sort out the vector representation of the i-\/th macro element}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} macro\_element\_boundary(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&time,}
+\DoxyCodeLine{                             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&m,}
+\DoxyCodeLine{                             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&direction,}
+\DoxyCodeLine{                             \textcolor{keyword}{const} Vector<double> \&s,}
+\DoxyCodeLine{                             Vector<double>\& f)}
+\DoxyCodeLine{ \{}
+\DoxyCodeLine{ }
+\DoxyCodeLine{  \textcolor{keyword}{using namespace }QuadTreeNames;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef WARN\_ABOUT\_SUBTLY\_CHANGED\_OOMPH\_INTERFACES}}
+\DoxyCodeLine{   \textcolor{comment}{// Warn about time argument being moved to the front}}
+\DoxyCodeLine{   OomphLibWarning(}
+\DoxyCodeLine{    \textcolor{stringliteral}{"Order of function arguments has changed between versions 0.8 and 0.85"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"CylinderAndInterfaceDomain::macro\_element\_boundary(...)"},}
+\DoxyCodeLine{    OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  Vector<double> xi(1);  }
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{comment}{//Switch on the macro element}}
+\DoxyCodeLine{  \textcolor{keywordflow}{switch}(m)}
+\DoxyCodeLine{   \{}
+\DoxyCodeLine{    \textcolor{comment}{//Macro element 0, is the left-\/hand film}}
+\DoxyCodeLine{   \textcolor{keywordflow}{case} 0:}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{keywordflow}{switch}(direction)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} N:}
+\DoxyCodeLine{      linear\_interpolate(Upper\_left,Upper\_mid\_left,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} S:  }
+\DoxyCodeLine{       linear\_interpolate(Lower\_left,Lower\_mid\_left,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} W:}
+\DoxyCodeLine{       linear\_interpolate(Lower\_left,Upper\_left,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} E:}
+\DoxyCodeLine{       linear\_interpolate(Lower\_mid\_left,Upper\_mid\_left,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{      std::ostringstream error\_stream;}
+\DoxyCodeLine{      error\_stream << \textcolor{stringliteral}{"Direction is incorrect: "} << direction << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
+\DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{keywordflow}{break};}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{comment}{//Macro element 1, is immediately left of the cylinder}}
+\DoxyCodeLine{   \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{keywordflow}{switch}(direction)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} N:}
+\DoxyCodeLine{       linear\_interpolate(Upper\_mid\_left,Upper\_centre\_left,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} S:  }
+\DoxyCodeLine{       linear\_interpolate(Lower\_mid\_left,Lower\_centre\_left,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} W:}
+\DoxyCodeLine{       linear\_interpolate(Lower\_mid\_left,Upper\_mid\_left,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} E:}
+\DoxyCodeLine{      xi[0] = 5.0*atan(1.0) -\/ 2.0*atan(1.0)*0.5*(1.0+s[0]);}
+\DoxyCodeLine{      Cylinder\_pt-\/>position(xi,f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{      std::ostringstream error\_stream;}
+\DoxyCodeLine{      error\_stream << \textcolor{stringliteral}{"Direction is incorrect: "} << direction << std::endl;}
+\DoxyCodeLine{      }
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
+\DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Macro element 2, is immediately above the cylinder}}
+\DoxyCodeLine{   \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{keywordflow}{switch}(direction)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} N:}
+\DoxyCodeLine{       linear\_interpolate(Upper\_mid\_left,Upper\_mid\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{      }
+\DoxyCodeLine{     \textcolor{keywordflow}{case} S:  }
+\DoxyCodeLine{      xi[0] = 3.0*atan(1.0) -\/ 2.0*atan(1.0)*0.5*(1.0+s[0]);}
+\DoxyCodeLine{      Cylinder\_pt-\/>position(xi,f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} W:}
+\DoxyCodeLine{       linear\_interpolate(Upper\_centre\_left,Upper\_mid\_left,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} E:}
+\DoxyCodeLine{       linear\_interpolate(Upper\_centre\_right,Upper\_mid\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{      std::ostringstream error\_stream;}
+\DoxyCodeLine{      error\_stream << \textcolor{stringliteral}{"Direction is incorrect: "} << direction << std::endl;}
+\DoxyCodeLine{      }
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
+\DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{//Macro element 3, is immediately right of the cylinder}}
+\DoxyCodeLine{   \textcolor{keywordflow}{case} 3:}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{switch}(direction)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} N:}
+\DoxyCodeLine{       linear\_interpolate(Upper\_centre\_right,Upper\_mid\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{      }
+\DoxyCodeLine{     \textcolor{keywordflow}{case} S:  }
+\DoxyCodeLine{       linear\_interpolate(Lower\_centre\_right,Lower\_mid\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} W:}
+\DoxyCodeLine{      xi[0] = -\/atan(1.0) + 2.0*atan(1.0)*0.5*(1.0+s[0]);}
+\DoxyCodeLine{      Cylinder\_pt-\/>position(xi,f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} E:}
+\DoxyCodeLine{       linear\_interpolate(Lower\_mid\_right,Upper\_mid\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{      std::ostringstream error\_stream;}
+\DoxyCodeLine{      error\_stream << \textcolor{stringliteral}{"Direction is incorrect: "} << direction << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
+\DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{break};}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{comment}{//Macro element 4, is immediately below cylinder}}
+\DoxyCodeLine{   \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{keywordflow}{switch}(direction)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} N:}
+\DoxyCodeLine{      \textcolor{comment}{//linear\_interpolate(Lower\_centre\_left,Lower\_centre\_right,s[0],f);}}
+\DoxyCodeLine{      xi[0] = -\/3.0*atan(1.0) + 2.0*atan(1.0)*0.5*(1.0+s[0]);}
+\DoxyCodeLine{      Cylinder\_pt-\/>position(xi,f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{      }
+\DoxyCodeLine{     \textcolor{keywordflow}{case} S:  }
+\DoxyCodeLine{       linear\_interpolate(Lower\_mid\_left,Lower\_mid\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} W:}
+\DoxyCodeLine{       linear\_interpolate(Lower\_mid\_left,Lower\_centre\_left,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} E:}
+\DoxyCodeLine{       linear\_interpolate(Lower\_mid\_right,Lower\_centre\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{      std::ostringstream error\_stream;}
+\DoxyCodeLine{      error\_stream << \textcolor{stringliteral}{"Direction is incorrect: "} << direction << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
+\DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{     \}  }
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{//Macro element 5, is right film}}
+\DoxyCodeLine{   \textcolor{keywordflow}{case} 5:}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{keywordflow}{switch}(direction)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} N:}
+\DoxyCodeLine{       linear\_interpolate(Upper\_mid\_right,Upper\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{      }
+\DoxyCodeLine{     \textcolor{keywordflow}{case} S:  }
+\DoxyCodeLine{       linear\_interpolate(Lower\_mid\_right,Lower\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} W:}
+\DoxyCodeLine{       linear\_interpolate(Lower\_mid\_right,Upper\_mid\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{case} E:}
+\DoxyCodeLine{       linear\_interpolate(Lower\_right,Upper\_right,s[0],f);}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{      std::ostringstream error\_stream;}
+\DoxyCodeLine{      error\_stream << \textcolor{stringliteral}{"Direction is incorrect: "} << direction << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
+\DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{break};}
+\DoxyCodeLine{    }
+\DoxyCodeLine{   \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{    std::ostringstream error\_stream;}
+\DoxyCodeLine{      error\_stream << \textcolor{stringliteral}{"Wrong domain number: "} << m<< std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
+\DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{   \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Now I need to actually create a Mesh}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classCylinderAndInterfaceMesh}{CylinderAndInterfaceMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{protected}:}
+\DoxyCodeLine{ \textcolor{comment}{//Pointer to the domain}}
+\DoxyCodeLine{ \mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}* Domain\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Access function to the domain}}
+\DoxyCodeLine{ \mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}* domain\_pt() \{\textcolor{keywordflow}{return} Domain\_pt;\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Constructor, }}
+\DoxyCodeLine{ \mbox{\hyperlink{classCylinderAndInterfaceMesh}{CylinderAndInterfaceMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&height,}
+\DoxyCodeLine{                            TimeStepper* time\_stepper\_pt) : Height(height)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//Create the domain}}
+\DoxyCodeLine{   Domain\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}(length,height);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Initialise the node counter}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} node\_count=0;}
+\DoxyCodeLine{   \textcolor{comment}{//Vectors Used to get data from domains}}
+\DoxyCodeLine{   Vector<double> s(2), r(2);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Setup temporary storage for the Node}}
+\DoxyCodeLine{   Vector<Node *> Tmp\_node\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Now blindly loop over the macro elements and associate and finite}}
+\DoxyCodeLine{   \textcolor{comment}{//element with each}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} Nmacro\_element = Domain\_pt-\/>nmacro\_element();}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<Nmacro\_element;e++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Create the FiniteElement and add to the Element\_pt Vector}}
+\DoxyCodeLine{     Element\_pt.push\_back(\textcolor{keyword}{new} ELEMENT);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Read out the number of linear points in the element}}
+\DoxyCodeLine{     \textcolor{keywordtype}{unsigned} Np = }
+\DoxyCodeLine{      \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(finite\_element\_pt(e))-\/>nnode\_1d();}
+\DoxyCodeLine{     }
+\DoxyCodeLine{     \textcolor{comment}{//Loop over nodes in the column}}
+\DoxyCodeLine{     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} l1=0;l1<Np;l1++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{       \textcolor{comment}{//Loop over the nodes in the row}}
+\DoxyCodeLine{       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} l2=0;l2<Np;l2++)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{         \textcolor{comment}{//Allocate the memory for the node}}
+\DoxyCodeLine{         Tmp\_node\_pt.push\_back(finite\_element\_pt(e)-\/>}
+\DoxyCodeLine{                           construct\_node(l1*Np+l2,time\_stepper\_pt));}
+\DoxyCodeLine{         }
+\DoxyCodeLine{         \textcolor{comment}{//Read out the position of the node from the macro element}}
+\DoxyCodeLine{         s[0] = -\/1.0 + 2.0*(double)l2/(\textcolor{keywordtype}{double})(Np-\/1);}
+\DoxyCodeLine{         s[1] = -\/1.0 + 2.0*(double)l1/(\textcolor{keywordtype}{double})(Np-\/1);}
+\DoxyCodeLine{         Domain\_pt-\/>macro\_element\_pt(e)-\/>macro\_map(s,r);}
+\DoxyCodeLine{         }
+\DoxyCodeLine{         \textcolor{comment}{//Set the position of the node}}
+\DoxyCodeLine{         Tmp\_node\_pt[node\_count]-\/>x(0) = r[0];}
+\DoxyCodeLine{         Tmp\_node\_pt[node\_count]-\/>x(1) = r[1];}
+\DoxyCodeLine{         }
+\DoxyCodeLine{         \textcolor{comment}{//Increment the node number}}
+\DoxyCodeLine{         node\_count++;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{    \} \textcolor{comment}{//End of loop over macro elements}}
+\DoxyCodeLine{ }
+\DoxyCodeLine{   \textcolor{comment}{//Now the elements have been created, but there will be nodes in }}
+\DoxyCodeLine{   \textcolor{comment}{//common, need to loop over the common edges and sort it, by reassigning}}
+\DoxyCodeLine{   \textcolor{comment}{//pointers and the deleting excess nodes}}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Read out the number of linear points in the element}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} Np = }
+\DoxyCodeLine{    \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(finite\_element\_pt(0))-\/>nnode\_1d();}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//DelaunayEdge between Elements 0 and 1}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Np;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Set the nodes in element 1 to be the same as in element 0}}
+\DoxyCodeLine{     finite\_element\_pt(1)-\/>node\_pt(Np*n)}
+\DoxyCodeLine{      = finite\_element\_pt(0)-\/>node\_pt(n*Np+Np-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Remove the nodes in element 1 from the temporaray node list}}
+\DoxyCodeLine{     \textcolor{keyword}{delete} Tmp\_node\_pt[Np*Np + Np*n];}
+\DoxyCodeLine{     Tmp\_node\_pt[Np*Np + Np*n] = 0;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//DelaunayEdge between Elements 1 and 2}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Np;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Set the nodes in element 2 to be the same as in element 1}}
+\DoxyCodeLine{     finite\_element\_pt(2)-\/>node\_pt(n*Np)}
+\DoxyCodeLine{      = finite\_element\_pt(1)-\/>node\_pt((Np-\/1)*Np+Np-\/1-\/n);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Remove the nodes in element 2 from the temporaray node list}}
+\DoxyCodeLine{     \textcolor{keyword}{delete} Tmp\_node\_pt[2*Np*Np + n*Np];}
+\DoxyCodeLine{     Tmp\_node\_pt[2*Np*Np + n*Np] = 0;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//DelaunayEdge between Elements 1 and 4}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Np;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Set the nodes in element 4 to be the same as in element 1}}
+\DoxyCodeLine{     finite\_element\_pt(4)-\/>node\_pt(n*Np)}
+\DoxyCodeLine{      = finite\_element\_pt(1)-\/>node\_pt(n);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Remove the nodes in element 2 from the temporaray node list}}
+\DoxyCodeLine{     \textcolor{keyword}{delete} Tmp\_node\_pt[4*Np*Np + n*Np];}
+\DoxyCodeLine{     Tmp\_node\_pt[4*Np*Np + n*Np] = 0;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//DelaunayEdge between Element 2 and 3}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Np;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Set the nodes in element 3 to be the same as in element 2}}
+\DoxyCodeLine{     finite\_element\_pt(3)-\/>node\_pt(Np*(Np-\/1)+n)}
+\DoxyCodeLine{      = finite\_element\_pt(2)-\/>node\_pt(Np*n+Np-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Remove the nodes in element 3 from the temporaray node list}}
+\DoxyCodeLine{     \textcolor{keyword}{delete} Tmp\_node\_pt[3*Np*Np + Np*(Np-\/1)+n];}
+\DoxyCodeLine{     Tmp\_node\_pt[3*Np*Np + Np*(Np-\/1)+n] = 0;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//DelaunayEdge between Element 4 and 3}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Np;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Set the nodes in element 3 to be the same as in element 4}}
+\DoxyCodeLine{     finite\_element\_pt(3)-\/>node\_pt(n)}
+\DoxyCodeLine{      = finite\_element\_pt(4)-\/>node\_pt(Np*(Np-\/n-\/1)+Np-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Remove the nodes in element 3 from the temporaray node list}}
+\DoxyCodeLine{     \textcolor{keyword}{delete} Tmp\_node\_pt[3*Np*Np + n];}
+\DoxyCodeLine{     Tmp\_node\_pt[3*Np*Np + n] = 0;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//DelaunayEdge between Element 3 and 5}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Np;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Set the nodes in element 5 to be the same as in element 3}}
+\DoxyCodeLine{     finite\_element\_pt(5)-\/>node\_pt(n*Np)}
+\DoxyCodeLine{      = finite\_element\_pt(3)-\/>node\_pt(Np*n+Np-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Remove the nodes in element 5 from the temporaray node list}}
+\DoxyCodeLine{     \textcolor{keyword}{delete} Tmp\_node\_pt[5*Np*Np + n*Np];}
+\DoxyCodeLine{     Tmp\_node\_pt[5*Np*Np + n*Np] = 0;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Now set the actual true nodes}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<node\_count;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{keywordflow}{if}(Tmp\_node\_pt[n]!=0) \{Node\_pt.push\_back(Tmp\_node\_pt[n]);\}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ }
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Finally set the nodes on the boundaries}}
+\DoxyCodeLine{   set\_nboundary(5);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Np;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Left hand side}}
+\DoxyCodeLine{     Node* temp\_node\_pt = finite\_element\_pt(0)-\/>node\_pt(n*Np);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(3,temp\_node\_pt);}
+\DoxyCodeLine{     }
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Right hand side}}
+\DoxyCodeLine{     temp\_node\_pt = finite\_element\_pt(5)-\/>node\_pt(n*Np+Np-\/1);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(1,temp\_node\_pt);}
+\DoxyCodeLine{     }
+\DoxyCodeLine{     \textcolor{comment}{//LH part of lower boundary}}
+\DoxyCodeLine{     temp\_node\_pt = finite\_element\_pt(0)-\/>node\_pt(n);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(0,temp\_node\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//First part of upper boundary}}
+\DoxyCodeLine{     temp\_node\_pt = finite\_element\_pt(0)-\/>node\_pt(Np*(Np-\/1)+n);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(2,temp\_node\_pt);}
+\DoxyCodeLine{     }
+\DoxyCodeLine{     \textcolor{comment}{//First part of hole boundary}}
+\DoxyCodeLine{     temp\_node\_pt = finite\_element\_pt(4)-\/>node\_pt(Np*(Np-\/1)+n);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(4,temp\_node\_pt);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=1;n<Np;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Middle of lower boundary}}
+\DoxyCodeLine{     Node* temp\_node\_pt = finite\_element\_pt(4)-\/>node\_pt(n);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(0,temp\_node\_pt);}
+\DoxyCodeLine{     }
+\DoxyCodeLine{     \textcolor{comment}{//Middle of upper boundary                                }}
+\DoxyCodeLine{     temp\_node\_pt = finite\_element\_pt(2)-\/>node\_pt(Np*(Np-\/1)+n);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(2,temp\_node\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{     \textcolor{comment}{//Next part of hole}}
+\DoxyCodeLine{     temp\_node\_pt = finite\_element\_pt(3)-\/>node\_pt(n*Np);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(4,temp\_node\_pt);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=1;n<Np;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Final part of lower boundary}}
+\DoxyCodeLine{     Node* temp\_node\_pt = finite\_element\_pt(5)-\/>node\_pt(n);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(0,temp\_node\_pt);}
+\DoxyCodeLine{     }
+\DoxyCodeLine{     \textcolor{comment}{//Middle of upper boundary                                }}
+\DoxyCodeLine{     temp\_node\_pt = finite\_element\_pt(5)-\/>node\_pt(Np*(Np-\/1)+n);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(2,temp\_node\_pt);}
+\DoxyCodeLine{     }
+\DoxyCodeLine{     \textcolor{comment}{//Next part of hole}}
+\DoxyCodeLine{     temp\_node\_pt = finite\_element\_pt(2)-\/>node\_pt(Np-\/n-\/1);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(4,temp\_node\_pt);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=1;n<Np-\/1;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Final part of hole}}
+\DoxyCodeLine{     Node* temp\_node\_pt = finite\_element\_pt(1)-\/>node\_pt(Np*(Np-\/n-\/1)+Np-\/1);}
+\DoxyCodeLine{     this-\/>convert\_to\_boundary\_node(temp\_node\_pt);}
+\DoxyCodeLine{     add\_boundary\_node(4,temp\_node\_pt);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Now loop over all the nodes and set their Lagrangian coordinates}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} Nnode = nnode();}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Nnode;n++)}
+\DoxyCodeLine{   \{}
+\DoxyCodeLine{    \textcolor{comment}{//Cast node to an elastic node}}
+\DoxyCodeLine{    SolidNode* temp\_pt = \textcolor{keyword}{static\_cast<}SolidNode*\textcolor{keyword}{>}(Node\_pt[n]);}
+\DoxyCodeLine{    \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
+\DoxyCodeLine{     \{temp\_pt-\/>xi(i) = temp\_pt-\/>x(i);\}}
+\DoxyCodeLine{   \}}
+\DoxyCodeLine{ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Now let's do the adaptive mesh}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableCylinderAndInterfaceMesh}} :}
+\DoxyCodeLine{ \textcolor{keyword}{public} \mbox{\hyperlink{classCylinderAndInterfaceMesh}{CylinderAndInterfaceMesh}}<ELEMENT>, \textcolor{keyword}{public} RefineableQuadMesh<ELEMENT>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}: }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Constructor}}
+\DoxyCodeLine{ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableCylinderAndInterfaceMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&height,}
+\DoxyCodeLine{                                    TimeStepper* time\_stepper\_pt) :}
+\DoxyCodeLine{  \mbox{\hyperlink{classCylinderAndInterfaceMesh}{CylinderAndInterfaceMesh}}<ELEMENT>(length,height,time\_stepper\_pt) }
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Nodal positions etc. were created in constructor for}}
+\DoxyCodeLine{   \textcolor{comment}{// Cylinder...<...>. Need to setup adaptive information.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Loop over all elements and set macro element pointer}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<6;e++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(this-\/>element\_pt(e))-\/>}
+\DoxyCodeLine{      set\_macro\_elem\_pt(this-\/>Domain\_pt-\/>macro\_element\_pt(e));}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Setup quadtree forest for mesh refinement}}
+\DoxyCodeLine{   this-\/>setup\_quadtree\_forest();}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{// Setup the boundary element info}}
+\DoxyCodeLine{   this-\/>setup\_boundary\_element\_info();}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Destructor: Empty}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableCylinderAndInterfaceMesh}}() \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableRotatingCylinderProblem}{RefineableRotatingCylinderProblem}} : \textcolor{keyword}{public} Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Length, Height;}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//Constitutive law used to determine the mesh deformation}}
+\DoxyCodeLine{ ConstitutiveLaw *Constitutive\_law\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ Data* Traded\_pressure\_data\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Re, Ca, ReInvFr, Bo;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Omega;}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Volume;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Angle;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ Vector<double> G;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass flag to indicate if you want}}
+\DoxyCodeLine{\textcolor{comment}{ /// a constant source function or the tanh profile.}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRefineableRotatingCylinderProblem}{RefineableRotatingCylinderProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&height);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve: }}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{set\_boundary\_conditions();\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Strip off the interface before adaptation}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_adapt() }
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   this-\/>delete\_volume\_constraint\_elements();}
+\DoxyCodeLine{   this-\/>delete\_free\_surface\_elements();}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt() \{finish\_problem\_setup(); this-\/>rebuild\_global\_mesh();\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Complete problem setup: Setup element-\/specific things }}
+\DoxyCodeLine{\textcolor{comment}{ /// (source fct pointers etc.)}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} finish\_problem\_setup();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Access function for the mesh}}
+\DoxyCodeLine{ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableCylinderAndInterfaceMesh<ELEMENT>}}* Bulk\_mesh\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Access function for surface mesh}}
+\DoxyCodeLine{ Mesh* Surface\_mesh\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Access function for point mesh}}
+\DoxyCodeLine{ Mesh* Point\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// The volume constraint mesh }}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Volume\_constraint\_mesh\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} set\_boundary\_conditions();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} solve();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create the volume constraint elements}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_volume\_constraint\_elements()}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//The single volume constraint element}}
+\DoxyCodeLine{   VolumeConstraintElement* vol\_constraint\_element = }
+\DoxyCodeLine{    \textcolor{keyword}{new} VolumeConstraintElement(\&Volume,Traded\_pressure\_data\_pt,0);}
+\DoxyCodeLine{   Volume\_constraint\_mesh\_pt-\/>add\_element\_pt(vol\_constraint\_element);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Loop over all boundaries (or just 1 and 2 why?)}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} b=0;b<4;b++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{// How many bulk fluid elements are adjacent to boundary b?}}
+\DoxyCodeLine{     \textcolor{keywordtype}{unsigned} n\_element = Bulk\_mesh\_pt-\/>nboundary\_element(b);}
+\DoxyCodeLine{     }
+\DoxyCodeLine{     \textcolor{comment}{// Loop over the bulk fluid elements adjacent to boundary b?}}
+\DoxyCodeLine{     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{       \textcolor{comment}{// Get pointer to the bulk fluid element that is }}
+\DoxyCodeLine{       \textcolor{comment}{// adjacent to boundary b}}
+\DoxyCodeLine{       ELEMENT* bulk\_elem\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{        Bulk\_mesh\_pt-\/>boundary\_element\_pt(b,e));}
+\DoxyCodeLine{       }
+\DoxyCodeLine{       \textcolor{comment}{//Find the index of the face of element e along boundary b}}
+\DoxyCodeLine{       \textcolor{keywordtype}{int} face\_index = Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(b,e);}
+\DoxyCodeLine{       }
+\DoxyCodeLine{       \textcolor{comment}{// Create new element}}
+\DoxyCodeLine{       ElasticLineVolumeConstraintBoundingElement<ELEMENT>* el\_pt =}
+\DoxyCodeLine{        \textcolor{keyword}{new} ElasticLineVolumeConstraintBoundingElement<ELEMENT>(}
+\DoxyCodeLine{         bulk\_elem\_pt,face\_index);   }
+\DoxyCodeLine{       }
+\DoxyCodeLine{       \textcolor{comment}{//Set the "master" volume control element}}
+\DoxyCodeLine{       el\_pt-\/>set\_volume\_constraint\_element(vol\_constraint\_element);}
+\DoxyCodeLine{       }
+\DoxyCodeLine{       \textcolor{comment}{// Add it to the mesh}}
+\DoxyCodeLine{       Volume\_constraint\_mesh\_pt-\/>add\_element\_pt(el\_pt);     }
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} delete\_volume\_constraint\_elements()}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_element = Volume\_constraint\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{keyword}{delete} Volume\_constraint\_mesh\_pt-\/>element\_pt(e);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{   Volume\_constraint\_mesh\_pt-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{keywordtype}{void} create\_free\_surface\_elements()}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//Find number of elements adjacent to upper boundary}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_boundary\_element = Bulk\_mesh\_pt-\/>nboundary\_element(2);}
+\DoxyCodeLine{   \textcolor{comment}{//The boundary elements do no necessarily come in order, so we will}}
+\DoxyCodeLine{   \textcolor{comment}{//need to detect the element adjacent to boundary 1.}}
+\DoxyCodeLine{   \textcolor{comment}{//The index of that element in our array will be stored in this variable}}
+\DoxyCodeLine{   \textcolor{comment}{//(initialised to a negative and therefore invalid number)}}
+\DoxyCodeLine{   \textcolor{keywordtype}{int} final\_element\_index=-\/1;}
+\DoxyCodeLine{   \textcolor{comment}{//Loop over the elements adjacent to the boundary}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<n\_boundary\_element;e++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Create the free surface element (on face 2)}}
+\DoxyCodeLine{     FiniteElement *free\_surface\_element\_pt }
+\DoxyCodeLine{      = \textcolor{keyword}{new} ElasticLineFluidInterfaceElement<ELEMENT>}
+\DoxyCodeLine{      (Bulk\_mesh\_pt-\/>boundary\_element\_pt(2,e),}
+\DoxyCodeLine{       Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(2,e));}
+\DoxyCodeLine{     \textcolor{comment}{//Push it back onto the stack}}
+\DoxyCodeLine{     Surface\_mesh\_pt-\/>add\_element\_pt(free\_surface\_element\_pt);       }
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{//Check whether the element is on the boundary 1}}
+\DoxyCodeLine{      \textcolor{keywordtype}{unsigned} n\_node = free\_surface\_element\_pt-\/>nnode();}
+\DoxyCodeLine{      \textcolor{comment}{//Only need to check the end nodes}}
+\DoxyCodeLine{      \textcolor{keywordflow}{if}((free\_surface\_element\_pt-\/>node\_pt(0)-\/>is\_on\_boundary(1)) ||}
+\DoxyCodeLine{         (free\_surface\_element\_pt-\/>node\_pt(n\_node-\/1)-\/>is\_on\_boundary(1)))}
+\DoxyCodeLine{       \{}
+\DoxyCodeLine{          final\_element\_index=e;}
+\DoxyCodeLine{       \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} Nfree = Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{   oomph\_info << Nfree << \textcolor{stringliteral}{" free surface elements assigned"} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if}(final\_element\_index == -\/1)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"No Surface Element adjacent to boundary 1\(\backslash\)n"},}
+\DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{   }
+\DoxyCodeLine{    \textcolor{comment}{//Make the edge point}}
+\DoxyCodeLine{    FiniteElement* point\_element\_pt= }
+\DoxyCodeLine{     \textcolor{keyword}{dynamic\_cast<}ElasticLineFluidInterfaceElement<ELEMENT>*\textcolor{keyword}{>}}
+\DoxyCodeLine{     (Surface\_mesh\_pt-\/>element\_pt(final\_element\_index))}
+\DoxyCodeLine{     -\/>make\_bounding\_element(1);}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{comment}{//Add it to the stack}}
+\DoxyCodeLine{    Point\_mesh\_pt-\/>add\_element\_pt(point\_element\_pt);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Function to delete the free surface elements}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} delete\_free\_surface\_elements()}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//Find the number of traction elements}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} Nfree\_surface = Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//The traction elements are ALWAYS? stored at the end}}
+\DoxyCodeLine{   \textcolor{comment}{//So delete and remove them, add one to get rid of the constraint}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<Nfree\_surface;e++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{keyword}{delete} Surface\_mesh\_pt-\/>element\_pt(e);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{   Surface\_mesh\_pt-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{keyword}{delete} Point\_mesh\_pt-\/>element\_pt(0);}
+\DoxyCodeLine{   Point\_mesh\_pt-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for adaptive Poisson problem in deformable fish-\/shaped}}
+\DoxyCodeLine{\textcolor{comment}{/// domain. Pass bool to indicate if we want a constant source}}
+\DoxyCodeLine{\textcolor{comment}{/// function or the one that produces a tanh step.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classRefineableRotatingCylinderProblem_aa597c4240ce9affbd7540998167c8f21}{RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem}}(}
+\DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&height) : Length(length), Height(height),}
+\DoxyCodeLine{                                               Re(0.0), Ca(0.001), }
+\DoxyCodeLine{                                               ReInvFr(0.0),}
+\DoxyCodeLine{                                               Bo(0.0), Omega(1.0), }
+\DoxyCodeLine{                                               Volume(12.0),}
+\DoxyCodeLine{                                               Angle(1.57)}
+\DoxyCodeLine{\{ }
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Global\_Physical\_Variables::Wall\_normal}}.resize(2);}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Global\_Physical\_Variables::Wall\_normal}}[0] = 1.0; }
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Global\_Physical\_Variables::Wall\_normal}}[1] = 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ G.resize(2);}
+\DoxyCodeLine{ G[0] = 0.0; G[1] = -\/1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ ///Set the initial value of the ReInvFr = Bo/Ca}}
+\DoxyCodeLine{\textcolor{comment}{} ReInvFr = Bo/Ca;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Build a linear solver: Use HSL's MA42 frontal solver}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{comment}{//linear\_solver\_pt() = new HSL\_MA42;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Set the constituive law}}
+\DoxyCodeLine{ Constitutive\_law\_pt = \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Switch off full doc for frontal solver}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{comment}{//static\_cast<HSL\_MA42*>(linear\_solver\_pt())-\/>disable\_doc\_stats();}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Allocate the timestepper (no timedependence)}}
+\DoxyCodeLine{ add\_time\_stepper\_pt(\textcolor{keyword}{new} Steady<0>);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{ \textcolor{comment}{// Build mesh}}
+\DoxyCodeLine{ Bulk\_mesh\_pt= }
+\DoxyCodeLine{  \textcolor{keyword}{new} \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableCylinderAndInterfaceMesh<ELEMENT>}}(length,height,}
+\DoxyCodeLine{                                                  Problem::time\_stepper\_pt());}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Set error estimator}}
+\DoxyCodeLine{ Z2ErrorEstimator* error\_estimator\_pt=\textcolor{keyword}{new} Z2ErrorEstimator;}
+\DoxyCodeLine{ Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
+\DoxyCodeLine{  }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Refine the problem a couple of times}}
+\DoxyCodeLine{ \textcolor{keywordtype}{bool} update\_all\_solid\_nodes=\textcolor{keyword}{true};}
+\DoxyCodeLine{ Bulk\_mesh\_pt-\/>refine\_uniformly();}
+\DoxyCodeLine{ Bulk\_mesh\_pt-\/>node\_update(update\_all\_solid\_nodes);}
+\DoxyCodeLine{ Bulk\_mesh\_pt-\/>refine\_uniformly();}
+\DoxyCodeLine{ Bulk\_mesh\_pt-\/>node\_update(update\_all\_solid\_nodes);}
+\DoxyCodeLine{ \textcolor{comment}{//Bulk\_mesh\_pt-\/>refine\_uniformly();}}
+\DoxyCodeLine{ \textcolor{comment}{//refine\_uniformly();}}
+\DoxyCodeLine{ \textcolor{comment}{//refine\_uniformly();}}
+\DoxyCodeLine{  }
+\DoxyCodeLine{ \textcolor{comment}{// Loop over all elements and unset macro element pointer}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} Nelement = Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<Nelement;e++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(e))-\/>}
+\DoxyCodeLine{    set\_macro\_elem\_pt(0);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//The external pressure is a piece of global data}}
+\DoxyCodeLine{ Traded\_pressure\_data\_pt = \textcolor{keyword}{new} Data(1);}
+\DoxyCodeLine{ this-\/>add\_global\_data(Traded\_pressure\_data\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Complete the build of all elements so they are fully functional}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ Surface\_mesh\_pt = \textcolor{keyword}{new} Mesh;}
+\DoxyCodeLine{ Point\_mesh\_pt = \textcolor{keyword}{new} Mesh;}
+\DoxyCodeLine{ Volume\_constraint\_mesh\_pt = \textcolor{keyword}{new} Mesh;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ finish\_problem\_setup();}
+\DoxyCodeLine{  }
+\DoxyCodeLine{ this-\/>add\_sub\_mesh(Bulk\_mesh\_pt);}
+\DoxyCodeLine{ this-\/>add\_sub\_mesh(Surface\_mesh\_pt);}
+\DoxyCodeLine{ this-\/>add\_sub\_mesh(Point\_mesh\_pt);}
+\DoxyCodeLine{ this-\/>add\_sub\_mesh(Volume\_constraint\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ this-\/>build\_global\_mesh();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Attach the boundary conditions to the mesh}}
+\DoxyCodeLine{ oomph\_info <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Complete build of Poisson problem:}}
+\DoxyCodeLine{\textcolor{comment}{/// Loop over elements and setup pointers to source function}}
+\DoxyCodeLine{\textcolor{comment}{///}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a417d18c2584ed1ea38daefe5dd68b4a4}{RefineableRotatingCylinderProblem<ELEMENT>::finish\_problem\_setup}}()}
+\DoxyCodeLine{\{ }
+\DoxyCodeLine{ \textcolor{comment}{//Now sort out the free surface}}
+\DoxyCodeLine{ this-\/>create\_free\_surface\_elements();}
+\DoxyCodeLine{ \textcolor{comment}{//Create the volume constraint elements}}
+\DoxyCodeLine{ this-\/>create\_volume\_constraint\_elements();}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Set the boundary conditions for this problem: All nodes are}}
+\DoxyCodeLine{ \textcolor{comment}{// free by default -\/-\/ just pin the ones that have Dirichlet conditions}}
+\DoxyCodeLine{ \textcolor{comment}{// here. }}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Pin bottom and cylinder}}
+\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} num\_bound = Bulk\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} ibound=0;ibound<num\_bound;ibound+=4)}
+\DoxyCodeLine{   \{}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod= Bulk\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{      Bulk\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0);}
+\DoxyCodeLine{      Bulk\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{   \}}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{comment}{//Pin u and v on LHS}}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= Bulk\_mesh\_pt-\/>nboundary\_node(3);}
+\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,inod)-\/>pin(0);}
+\DoxyCodeLine{     \textcolor{comment}{//Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,inod)-\/>pin(1);}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{comment}{//Pin u and v on RHS}}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= Bulk\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,inod)-\/>pin(0);}
+\DoxyCodeLine{     Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,inod)-\/>pin(1);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{keyword}{dynamic\_cast<}FluidInterfaceBoundingElement*\textcolor{keyword}{>}}
+\DoxyCodeLine{   (Point\_mesh\_pt-\/>element\_pt(0))-\/>set\_contact\_angle(\&Angle);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{dynamic\_cast<}FluidInterfaceBoundingElement*\textcolor{keyword}{>}}
+\DoxyCodeLine{   (Point\_mesh\_pt-\/>element\_pt(0))-\/>ca\_pt() = \&Ca;}
+\DoxyCodeLine{}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{keyword}{dynamic\_cast<}FluidInterfaceBoundingElement*\textcolor{keyword}{>}}
+\DoxyCodeLine{   (Point\_mesh\_pt-\/>element\_pt(0))-\/>}
+\DoxyCodeLine{   wall\_unit\_normal\_fct\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0d48e8726fa485de2b2df2d5031ec41b}{Global\_Physical\_Variables::wall\_unit\_normal\_fct}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{comment}{//Pin one pressure}}
+\DoxyCodeLine{  \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(0))-\/>fix\_pressure(0,0.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{comment}{//Loop over the lower boundary and pin nodal positions in both directions}}
+\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} num\_nod= Bulk\_mesh\_pt-\/>nboundary\_node(0);}
+\DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{   \{}
+\DoxyCodeLine{    Bulk\_mesh\_pt-\/>boundary\_node\_pt(0,inod)-\/>pin\_position(0);}
+\DoxyCodeLine{    Bulk\_mesh\_pt-\/>boundary\_node\_pt(0,inod)-\/>pin\_position(1);}
+\DoxyCodeLine{   \}}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{comment}{//Loop over the RHS side and pin in x and y}}
+\DoxyCodeLine{  num\_nod= Bulk\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{   \{}
+\DoxyCodeLine{    Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,inod)-\/>pin\_position(0);}
+\DoxyCodeLine{    \textcolor{comment}{//Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,inod)-\/>pin\_position(1);}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  }
+\DoxyCodeLine{ \textcolor{comment}{//Loop over the LHS side and pin in x}}
+\DoxyCodeLine{  num\_nod= Bulk\_mesh\_pt-\/>nboundary\_node(3);}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,inod)-\/>pin\_position(0);}
+\DoxyCodeLine{   \textcolor{comment}{//Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,inod)-\/>pin\_position(1);}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//Loop over the cylinder and pin nodal positions in both directions}}
+\DoxyCodeLine{ num\_nod= Bulk\_mesh\_pt-\/>nboundary\_node(4);}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,inod)-\/>pin\_position(0);}
+\DoxyCodeLine{   Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,inod)-\/>pin\_position(1);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Find number of elements in mesh}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} Nfluid = Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{ \textcolor{comment}{//Find the number of free surface elements}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} Nfree = Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Loop over the elements to set up element-\/specific }}
+\DoxyCodeLine{    \textcolor{comment}{// things that cannot be handled by constructor}}
+\DoxyCodeLine{    \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<Nfluid;i++)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{      \textcolor{comment}{// Upcast from FiniteElement to the present element}}
+\DoxyCodeLine{      ELEMENT *temp\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(i));}
+\DoxyCodeLine{      }
+\DoxyCodeLine{      \textcolor{comment}{//Set the source function pointer}}
+\DoxyCodeLine{      temp\_pt-\/>re\_pt() = \&Re;}
+\DoxyCodeLine{      temp\_pt-\/>re\_invfr\_pt() = \&ReInvFr;}
+\DoxyCodeLine{      temp\_pt-\/>g\_pt() = \&G;}
+\DoxyCodeLine{      }
+\DoxyCodeLine{      \textcolor{comment}{//Assign the mesh deformation constitutive law}}
+\DoxyCodeLine{      temp\_pt-\/>constitutive\_law\_pt() = Constitutive\_law\_pt;}
+\DoxyCodeLine{      }
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{comment}{// Pin the redundant solid pressures (if any)}}
+\DoxyCodeLine{    PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures(}
+\DoxyCodeLine{     Bulk\_mesh\_pt-\/>element\_pt());}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{comment}{//Loop over the free surface elements}}
+\DoxyCodeLine{    \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<Nfree;i++)}
+\DoxyCodeLine{     \{}
+\DoxyCodeLine{      \textcolor{comment}{// Upcast from FiniteElement to the present element}}
+\DoxyCodeLine{      ElasticLineFluidInterfaceElement<ELEMENT> *temp\_pt = }
+\DoxyCodeLine{       \textcolor{keyword}{dynamic\_cast<}ElasticLineFluidInterfaceElement<ELEMENT>*\textcolor{keyword}{>}}
+\DoxyCodeLine{       (Surface\_mesh\_pt-\/>element\_pt(i));}
+\DoxyCodeLine{      \textcolor{comment}{//Set the Capillary number}}
+\DoxyCodeLine{      temp\_pt-\/>ca\_pt() = \&Ca;}
+\DoxyCodeLine{      }
+\DoxyCodeLine{      \textcolor{comment}{//Pass the Data item that contains the external pressure}}
+\DoxyCodeLine{      temp\_pt-\/>set\_external\_pressure\_data(this-\/>global\_data\_pt(0));}
+\DoxyCodeLine{     \}}
+\DoxyCodeLine{   }
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableRotatingCylinderProblem_acd510f2c06fa3f38d2911781656dbf20}{RefineableRotatingCylinderProblem<ELEMENT>::set\_boundary\_conditions}}()}
+\DoxyCodeLine{\{ }
+\DoxyCodeLine{ \textcolor{comment}{//Only bother to set non-\/zero velocity on the cylinder}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} Nnode = Bulk\_mesh\_pt-\/>nboundary\_node(4);}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Nnode;n++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{//Get x and y}}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} x = Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,n)-\/>x(0);}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} y = Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,n)-\/>x(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Now find the vector distance to the centre}}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} len\_x = x -\/ Bulk\_mesh\_pt-\/>\mbox{\hyperlink{classCylinderAndInterfaceMesh_a924b3538d9f6c8b8524c317c5e2aa380}{domain\_pt}}()-\/>\mbox{\hyperlink{classCylinderAndInterfaceDomain_a0b5aefe768267a1dff936ab491bee938}{centre\_x}};}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} len\_y = y -\/ Bulk\_mesh\_pt-\/>\mbox{\hyperlink{classCylinderAndInterfaceMesh_a924b3538d9f6c8b8524c317c5e2aa380}{domain\_pt}}()-\/>\mbox{\hyperlink{classCylinderAndInterfaceDomain_ac461297e0b08287a1909f245569c77f0}{centre\_y}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Calculate the angle and radius}}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} r = sqrt(len\_x*len\_x + len\_y*len\_y);}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} theta = atan2(len\_y,len\_x);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Now set the velocities}}
+\DoxyCodeLine{   Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,n)-\/>set\_value(0,-\/Omega*r*sin(theta));}
+\DoxyCodeLine{   Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,n)-\/>set\_value(1, Omega*r*cos(theta));}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a664bfd373351a401619b06c3494fdcdc}{RefineableRotatingCylinderProblem<ELEMENT>::solve}}()}
+\DoxyCodeLine{\{ }
+\DoxyCodeLine{ Newton\_solver\_tolerance = 1.0e-\/8;}
+\DoxyCodeLine{ \textcolor{comment}{//Document the solution}}
+\DoxyCodeLine{ std::ofstream filenamee(\textcolor{stringliteral}{"input.dat"});}
+\DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(filenamee,5);}
+\DoxyCodeLine{ Surface\_mesh\_pt-\/>output(filenamee,5);}
+\DoxyCodeLine{ \textcolor{comment}{//Point\_mesh\_pt-\/>output(filenamee,5);}}
+\DoxyCodeLine{ filenamee.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Solve the initial value problem}}
+\DoxyCodeLine{ newton\_solve();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ std::ofstream filename(\textcolor{stringliteral}{"first.dat"}); }
+\DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(filename,5); }
+\DoxyCodeLine{ Surface\_mesh\_pt-\/>output(filename,5); }
+\DoxyCodeLine{ \textcolor{comment}{//Point\_mesh\_pt-\/>output(filename,5);}}
+\DoxyCodeLine{ filename.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Initialise the value of the arc-\/length}}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} ds=0.001;}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ std::ofstream trace(\textcolor{stringliteral}{"trace.dat"});}
+\DoxyCodeLine{}
+\DoxyCodeLine{ trace << Ca << \textcolor{stringliteral}{" "} << ReInvFr << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{       << Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>x(1) << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// bool flag=true, fflag=true;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordflow}{if}(i<5)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Decrease the contact angle}}
+\DoxyCodeLine{     Angle -\/= 0.1;}
+\DoxyCodeLine{     newton\_solve(2);}
+\DoxyCodeLine{     \textcolor{comment}{//newton\_solve();}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//do an arc-\/length continuation step in Ca}}
+\DoxyCodeLine{     ds = arc\_length\_step\_solve(\&Ca,ds);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{comment}{//  if(flag)}}
+\DoxyCodeLine{\textcolor{comment}{//     \{}}
+\DoxyCodeLine{\textcolor{comment}{//      //Do an arc-\/length continuation step in ReInvFr}}
+\DoxyCodeLine{\textcolor{comment}{//      ds = arc\_length\_step\_solve(\&ReInvFr,ds);}}
+\DoxyCodeLine{\textcolor{comment}{//     \}}}
+\DoxyCodeLine{\textcolor{comment}{//    else}}
+\DoxyCodeLine{\textcolor{comment}{//     \{}}
+\DoxyCodeLine{\textcolor{comment}{//      //Reset arc-\/length parameters}}
+\DoxyCodeLine{\textcolor{comment}{//      if(fflag) \{reset\_arc\_length\_parameters(); fflag=false;\}}}
+\DoxyCodeLine{\textcolor{comment}{//      ds = 0.001;}}
+\DoxyCodeLine{\textcolor{comment}{//      //Now do it in Ca}}
+\DoxyCodeLine{\textcolor{comment}{//      ds = arc\_length\_step\_solve(\&Ca,ds);}}
+\DoxyCodeLine{\textcolor{comment}{//     \}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//    if(Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>x(1) < 4.0)}}
+\DoxyCodeLine{\textcolor{comment}{//     \{flag=false;\}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   trace << Ca << \textcolor{stringliteral}{" "} << ReInvFr << \textcolor{stringliteral}{" "} << Angle << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{         << Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>x(1) << std::endl;   }
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{keywordtype}{char} file[100];}
+\DoxyCodeLine{   sprintf(file,\textcolor{stringliteral}{"step\%i.dat"},i);}
+\DoxyCodeLine{   filename.open(file);}
+\DoxyCodeLine{   Bulk\_mesh\_pt-\/>output(filename,5);}
+\DoxyCodeLine{   Surface\_mesh\_pt-\/>output(filename,5);}
+\DoxyCodeLine{   \textcolor{comment}{//Point\_mesh\_pt-\/>output(filename,5);}}
+\DoxyCodeLine{   filename.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Now reset the values of the lagrange multipliers and the xi's}}
+\DoxyCodeLine{   \textcolor{comment}{//An updated lagrangian approach}}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//Now loop over all the nodes and set their Lagrangian coordinates}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} Nnode = Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Nnode;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{//Cast node to an elastic node}}
+\DoxyCodeLine{     SolidNode* temp\_pt = \textcolor{keyword}{static\_cast<}SolidNode*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>node\_pt(n));}
+\DoxyCodeLine{     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} j=0;j<2;j++) \{temp\_pt-\/>xi(j) = temp\_pt-\/>x(j);\}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{//Find the number of free surface elements}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} Nfree = Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{   \textcolor{comment}{//Loop over the free surface elements}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<Nfree;n++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{// Upcast from FiniteElement to the present element}}
+\DoxyCodeLine{     ElasticLineFluidInterfaceElement<ELEMENT> *temp\_pt = }
+\DoxyCodeLine{      \textcolor{keyword}{dynamic\_cast<}ElasticLineFluidInterfaceElement<ELEMENT>*\textcolor{keyword}{>}}
+\DoxyCodeLine{      (Surface\_mesh\_pt-\/>element\_pt(n));}
+\DoxyCodeLine{     \textcolor{keywordtype}{unsigned} Nnode = temp\_pt-\/>nnode();}
+\DoxyCodeLine{     \textcolor{comment}{//Reset the lagrange multipliers}}
+\DoxyCodeLine{     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} j=0;j<Nnode;j++) \{temp\_pt-\/>lagrange(j) = 0.0;\}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{//Document the solution}}
+\DoxyCodeLine{ \textcolor{comment}{//filename.open("output.dat");}}
+\DoxyCodeLine{ \textcolor{comment}{//Bulk\_mesh\_pt-\/>output(filename,5);}}
+\DoxyCodeLine{ \textcolor{comment}{//filename.close();}}
+\DoxyCodeLine{ trace.close();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordtype}{int} \mbox{\hyperlink{adaptive__interface_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \mbox{\hyperlink{classRefineableRotatingCylinderProblem}{RefineableRotatingCylinderProblem}}}
+\DoxyCodeLine{    <RefineablePseudoSolidNodeUpdateElement<RefineableQCrouzeixRaviartElement<2>,}
+\DoxyCodeLine{    RefineableQPVDElementWithContinuousPressure<2> > > problem(3.0,4.0);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{//ofstream filename("mesh.dat");}}
+\DoxyCodeLine{   \textcolor{comment}{//problem.Bulk\_mesh\_pt-\/>output(filename,5);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   problem.solve();}
+\DoxyCodeLine{  \}}
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

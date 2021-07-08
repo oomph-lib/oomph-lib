@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: unsteady_ring.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">unsteady_ring.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ed5ef1f3336cf84dc37273f4873bc9c"><td class="memItemLeft" align="right" valign="top">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#a7ed5ef1f3336cf84dc37273f4873bc9c">elements</a></td></tr>
+<tr class="separator:a7ed5ef1f3336cf84dc37273f4873bc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab65193da39abe478da2d959e95454d97"><td class="memItemLeft" align="right" valign="top">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a></td></tr>
+<tr class="separator:ab65193da39abe478da2d959e95454d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad27c9ecabae7ca3582181043a164cbda"><td class="memItemLeft" align="right" valign="top">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#ad27c9ecabae7ca3582181043a164cbda">energy</a></td></tr>
+<tr class="separator:ad27c9ecabae7ca3582181043a164cbda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a146d39d24cd358a4e2a9b8da3eb93900"><td class="memItemLeft" align="right" valign="top">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Large amplitude oscillations of a thin walled elastic beam&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the large amplitude oscillations of a linearly&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a></td></tr>
+<tr class="separator:a146d39d24cd358a4e2a9b8da3eb93900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecef8c99bc77e4535c34a042748f8d45"><td class="memItemLeft" align="right" valign="top">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius f R_0 f and wall thickness f h *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a></td></tr>
+<tr class="separator:aecef8c99bc77e4535c34a042748f8d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a1a499974c27d005bf55f03c9d97f77"><td class="memItemLeft" align="right" valign="top">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> R_0 <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> and wall thickness <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> h subject to a transient pressure load <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>[p_{ext}\left(\xi,<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a> \right)=\left\{ \begin{array}{ll}-P_{cos}\cos\left(2\xi\right) &amp;\mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&lt; T_{kick}$} \\0 &amp;\mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a> &gt;T_{kick}$} \end{array}\right.\mbox{\ \ \ \ \ \ \ \ \ \ @E[load]@ }\<a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>] which initiates an oscillation in which the ring deforms into a non axisymmetric&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#a0a1a499974c27d005bf55f03c9d97f77">mode</a></td></tr>
+<tr class="separator:a0a1a499974c27d005bf55f03c9d97f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21f1b600cfd9d1a37250e4c6c1b1100c"><td class="memItemLeft" align="right" valign="top">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> R_0 <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> and wall thickness <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> h subject to a transient pressure load <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>[p_{ext}\left(\xi,<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a> \right)=\left\{ \begin{array}{ll}-P_{cos}\cos\left(2\xi\right) &amp;\mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&lt; T_{kick}$} \\0 &amp;\mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a> &gt;T_{kick}$} \end{array}\right.\mbox{\ \ \ \ \ \ \ \ \ \ @E[load]@ }\<a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>] which initiates an oscillation in which the ring deforms into a non axisymmetric as indicated in the sketch&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#a21f1b600cfd9d1a37250e4c6c1b1100c">below</a></td></tr>
+<tr class="separator:a21f1b600cfd9d1a37250e4c6c1b1100c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a0eb570c0549e9c0d2d326ff26344f0"><td class="memItemLeft" align="right" valign="top">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> R_0 <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> and wall thickness <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> h subject to a transient pressure load <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>[p_{ext}\left(\xi,t \right)=\left\{ \begin{array}{ll}-P_{cos}\cos\left(2\xi\right) &amp;\mbox{for $t&lt; T_{kick}$} \\0 &amp;\mbox{for $t &gt;T_{kick}$} \end{array}\right.\mbox{\ \ \ \ \ \ \ \ \ \ @E[load]@ }\<a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>] which initiates an oscillation in which the ring deforms into a non axisymmetric as indicated in the sketch&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a></td></tr>
+<tr class="separator:a7a0eb570c0549e9c0d2d326ff26344f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01f45c05bc87820b753209de3bdfd0ff"><td class="memItemLeft" align="right" valign="top">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> R_0 <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> and wall thickness <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> h subject to a transient pressure load <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>[p_{ext}\left(\xi,<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a> \right)=\left\{ \begin{array}{ll}-P_{cos}\cos\left(2\xi\right) &amp;\mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&lt; T_{kick}$} \\0 &amp;\mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a> &gt;T_{kick}$} \end{array}\right.\mbox{\ \ \ \ \ \ \ \ \ \ @E[load]@ }\<a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>] which initiates an oscillation in which the ring deforms into a non axisymmetric as indicated in the sketch <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> where <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsteady__ring_8txt.html#a01f45c05bc87820b753209de3bdfd0ff">mathbf</a></td></tr>
+<tr class="separator:a01f45c05bc87820b753209de3bdfd0ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a21f1b600cfd9d1a37250e4c6c1b1100c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21f1b600cfd9d1a37250e4c6c1b1100c">&#9670;&nbsp;</a></span>below</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> R_0 <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> and wall thickness <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> h subject to a transient pressure load <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> [p_{ext}\left(\xi ,<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a> \right) = \left\{ \begin{array}{ll}-P_{cos}\cos\left(2\xi\right) &amp; \mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&lt;T_{kick}$} \\0 &amp; \mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&gt;T_{kick}$} \end{array}\right.\mbox{\ \ \ \ \ \ \ \ \ \ @E[load]@ }\<a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>] which initiates an oscillation in which the ring deforms into a non axisymmetric as indicated in the sketch below</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00048">48</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a146d39d24cd358a4e2a9b8da3eb93900"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a146d39d24cd358a4e2a9b8da3eb93900">&#9670;&nbsp;</a></span>elastic</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; Large amplitude oscillations of a thin walled elastic beam&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the large amplitude oscillations of a linearly elastic</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00025">25</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7ed5ef1f3336cf84dc37273f4873bc9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ed5ef1f3336cf84dc37273f4873bc9c">&#9670;&nbsp;</a></span>elements</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00009">9</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad27c9ecabae7ca3582181043a164cbda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad27c9ecabae7ca3582181043a164cbda">&#9670;&nbsp;</a></span>energy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve energy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00012">12</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="aecef8c99bc77e4535c34a042748f8d45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecef8c99bc77e4535c34a042748f8d45">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius f R_0 f and wall thickness f h* f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00026">26</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a01f45c05bc87820b753209de3bdfd0ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01f45c05bc87820b753209de3bdfd0ff">&#9670;&nbsp;</a></span>mathbf</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> R_0 <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> and wall thickness <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> h subject to a transient pressure load <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> [p_{ext}\left(\xi ,<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a> \right) = \left\{ \begin{array}{ll}-P_{cos}\cos\left(2\xi\right) &amp; \mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&lt;T_{kick}$} \\0 &amp; \mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&gt;T_{kick}$} \end{array}\right.\mbox{\ \ \ \ \ \ \ \ \ \ @E[load]@ }\<a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>] which initiates an oscillation in which the ring deforms into a non axisymmetric as indicated in the sketch <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> where <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> mathbf</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{N} <a class="code" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">\f</a>$ is the outer unit normal to the ring<span class="stringliteral">&#39;s</span></div>
+<div class="line"><span class="stringliteral">deformed centreline. </span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">\dontinclude unsteady_ring.cc</span></div>
+<div class="line"><span class="stringliteral">\skipline start_of_namespace</span></div>
+<div class="line"><span class="stringliteral">\until end of load</span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">We also define the non-dimensional wall thickness \f$ h \f$ and the timescale</span></div>
+<div class="line"><span class="stringliteral">ratio \f$ \Lambda^2 \f$. These are multiplied by powers </span></div>
+<div class="line"><span class="stringliteral">of a scaling factor whose role will become apparent in the \ref </span></div>
+<div class="line"><span class="stringliteral">exercises. (By default, the scaling factor is set to 1.0 and does </span></div>
+<div class="line"><span class="stringliteral">not play any role.)</span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">\until end of namespace</span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><span class="stringliteral">&lt;HR&gt;</span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">\section main The driver code</span></div>
+<div class="line"><span class="stringliteral">The main function is very simple. We store the (up to) two optional </span></div>
+<div class="line"><span class="stringliteral">command line arguments which (if present) specify (i) a flag that indicates </span></div>
+<div class="line"><span class="stringliteral">if the code is run in validation mode</span></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00127">127</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0a1a499974c27d005bf55f03c9d97f77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a1a499974c27d005bf55f03c9d97f77">&#9670;&nbsp;</a></span>mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> R_0 <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> and wall thickness <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> h subject to a transient pressure load <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> [p_{ext}\left(\xi ,<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a> \right) = \left\{ \begin{array}{ll}-P_{cos}\cos\left(2\xi\right) &amp; \mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&lt;T_{kick}$} \\0 &amp; \mbox{for $<a class="el" href="unsteady__ring_8txt.html#a7a0eb570c0549e9c0d2d326ff26344f0">t</a>&gt;T_{kick}$} \end{array}\right.\mbox{\ \ \ \ \ \ \ \ \ \ @E[load]@ }\<a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>] which initiates an oscillation in which the ring deforms into a non axisymmetric mode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00039">39</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00007">7</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="lin__unsteady__ring_8cc_source.html#l00412">main()</a>.</p>
+
+</div>
+</div>
+<a id="a7a0eb570c0549e9c0d2d326ff26344f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a0eb570c0549e9c0d2d326ff26344f0">&#9670;&nbsp;</a></span>t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous <a class="el" href="unsteady__ring_8txt.html#ab65193da39abe478da2d959e95454d97">timesteps</a>&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; Large amplitude oscillations of a thin walled <a class="el" href="unsteady__ring_8txt.html#a146d39d24cd358a4e2a9b8da3eb93900">elastic</a> beam&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> R_0 <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> and wall thickness <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> h subject to a transient pressure load <a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a> [p_{ext}\left(\xi ,t \right) = \left\{ \begin{array}{ll}-P_{cos}\cos\left(2\xi\right) &amp; \mbox{for $t&lt;T_{kick}$} \\0 &amp; \mbox{for $t&gt;T_{kick}$} \end{array}\right.\mbox{\ \ \ \ \ \ \ \ \ \ @E[load]@ }\<a class="el" href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a>] which initiates an oscillation in which the ring deforms into a non axisymmetric as indicated in the sketch t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00048">48</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="lin__unsteady__ring_8cc_source.html#l00213">ElasticRingProblem&lt; ELEMENT, TIMESTEPPER &gt;::doc_solution()</a>.</p>
+
+</div>
+</div>
+<a id="ab65193da39abe478da2d959e95454d97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab65193da39abe478da2d959e95454d97">&#9670;&nbsp;</a></span>timesteps</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable timesteps</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="unsteady__ring_8txt_source.html#l00011">11</a> of file <a class="el" href="unsteady__ring_8txt_source.html">unsteady_ring.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aunsteady__ring_8txt_html_aecef8c99bc77e4535c34a042748f8d45"><div class="ttname"><a href="unsteady__ring_8txt.html#aecef8c99bc77e4535c34a042748f8d45">f</a></div><div class="ttdeci">mainpage Demo demonstrate how to use the c dump restart functions for c KirchhoffLoveBeam show that timesteppers from the c Newmark family can be used with variable conserve can allocate and maintain storage for the solution at previous timesteps&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Large amplitude oscillations of a thin walled elastic beam&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the large amplitude oscillations of a linearly circular ring of undeformed radius f R_0 f and wall thickness f h * f</div><div class="ttdef"><b>Definition:</b> <a href="unsteady__ring_8txt_source.html#l00026">unsteady_ring.txt:26</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:14:25
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

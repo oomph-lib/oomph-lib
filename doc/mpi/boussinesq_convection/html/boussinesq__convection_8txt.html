@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: boussinesq_convection.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">boussinesq_convection.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a90bde6107ef4c4dc27aaa2627e22a2ac"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a> = &quot;../../../multi_physics/refine_b_convect/html/index.html&quot;&gt;single-domain&lt;/a &gt; and&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../multi_physics/multi_domain_ref_b_convect/html/index.html&quot;&gt;multi-domain&lt;/a &gt; approaches. It is part of a&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../example_code_list/html/index.html#<a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a>&quot;&gt; series of tutorials&lt;/a &gt; that discuss how to modify existing serial driver codes so that the \c Problem object can be <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> across multiple processors. Part <a class="el" href="boussinesq__convection_8txt.html#a96523c0123a943b4d4c5b5d298ee8faa">II</a> provides a more detailed discussion of the serial and parallel implementation of the various helper functions that may be used to set up multi-domain interactions.&lt; HR &gt;&lt; HR &gt; \section boussinesq Part I:Distributing the Boussinesq convection <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> For the single-domain discretisation of the Boussinesq convection <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a>, in which the Navier--Stokes and advection-diffusion equations <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> combined using a single element, the procedure required to distribute the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is exactly the same as that described in the&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../adaptive_driven_cavity/html/index.html&quot;&gt;adaptive driven cavity tutorial&lt;/a &gt;. We therefore omit a detailed discussion of the changes to the driver code but encourage you to compare the serial driver codes,&lt; center &gt;&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../../demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc&quot;&gt;&lt; code &gt;demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc&lt;/code &gt;&lt;/a &gt;&lt;/center &gt; and&lt; center &gt;&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../../demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.cc&quot;&gt;&lt; code &gt;demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.cc&lt;/code &gt;&lt;/a &gt;&lt;/center &gt; with <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> counterparts,&lt; center &gt;&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_boussinesq_convection.cc&quot;&gt;&lt; code &gt;demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_boussinesq_convection.cc&lt;/code &gt;&lt;/a &gt;&lt;/center &gt; and&lt; center &gt;&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_b_convection.cc&quot;&gt;&lt; code &gt;demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_convection.cc&lt;/code &gt;&lt;/a &gt;.&lt;/center &gt; The parallelisation of the&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../multi_physics/multi_domain_ref_b_convect/html/index.html&quot;&gt; multi-domain driver code&lt;/a &gt; is also quite straightforward. The key <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is that the interaction between the <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> must be set up again after the <a class="el" href="boussinesq__convection_8txt.html#acc34b8841d1c42cceb1770cc872fd126">distribution</a> of the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> because, on each processor, some of the &quot;external elements&quot; will have been deleted during the distribution. The required changes to the serial driver code <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> described below. \subsection main_body The main function The main function begins and ends with the usual calls to \c MPI_Helpers::init() and \c MPI_Helpers::finalize()</td></tr>
+<tr class="separator:a90bde6107ef4c4dc27aaa2627e22a2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a472f479ab997a5a2d889405dce0b7c39"><td class="memItemLeft" align="right" valign="top">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> with a simple call to c apart from the addition of the c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute</a> () function</td></tr>
+<tr class="separator:a472f479ab997a5a2d889405dce0b7c39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cb7bc96a2ec61fe51b7b81e7ca542df"><td class="memItemLeft" align="right" valign="top">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> with a simple call to c apart from the addition of the c discussed below&lt; HR &gt; subsection actions_after_adapt Actions after adaptation The boundary conditions <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> such that a single pressure degree of freedom must be pinned after the adaptation Once the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> has been pinning the first pressure freedom in the first element no longer works because the first element will be different on each processor The required modifications mirror those in the&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../adaptive_driven_cavity/html/index.html&quot;&gt; adaptive driven cavity <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a>&lt;/a &gt; and ensure that the pressure is only pinned in the first element in the mesh by testing the Eulerian position of the element The remainder of the function is the same as in the serial driver code dontinclude multi_domain_ref_b_convection cc skipline Actions after adaptation until&lt; HR &gt; subsection <a class="el" href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute</a> Actions after <a class="el" href="boussinesq__convection_8txt.html#acc34b8841d1c42cceb1770cc872fd126">distribution</a> After the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> the multi domain interactions must be set up again because some of the external elements may now only exist on other processors Such elements <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> re created locally as external halo elements when c the c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a8cb7bc96a2ec61fe51b7b81e7ca542df">doc_solution</a> () function is modified by adding the processor ID to each output file</td></tr>
+<tr class="separator:a8cb7bc96a2ec61fe51b7b81e7ca542df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e32fc8f467783c204660c69fca90951"><td class="memItemLeft" align="right" valign="top">namespace also provides functions that can be used for problems in which the interacting <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> meet at a lower dimensional interface&lt; em &gt; e g&lt;/em &gt; in fluid structure interaction problems The functions have a sensible default behaviour and can be used as block box routines We provide a brief overview of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> (serial and parallel) implementation</td></tr>
+<tr class="separator:a2e32fc8f467783c204660c69fca90951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fd838e673976f66edb6467367d128e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> (note the singular) sets up a one-way interaction in which the mesh pointed to by \c external_mesh_pt provides the &quot;external elements&quot;(of type \c EXT_ELEMENT) for the \c ElementWithExternalElements stored in \c mesh_pt</td></tr>
+<tr class="separator:a3fd838e673976f66edb6467367d128e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15a095909692c48e1e31dac9df3387a3"><td class="memItemLeft" align="right" valign="top">but not vice versa In the two way interaction described above is performed by two successive calls to this function code&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a15a095909692c48e1e31dac9df3387a3">setup_multi_domain_interaction&lt; ELEMENT_1 &gt;</a> (problem_pt, <a class="el" href="boussinesq__convection_8txt.html#a707b60a792e911d3fa7d844de3c21d8a">first_mesh_pt</a>, <a class="el" href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a>)</td></tr>
+<tr class="separator:a15a095909692c48e1e31dac9df3387a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0de0d1da8264c20e566a642a54e36a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#ad0de0d1da8264c20e566a642a54e36a5">setup_multi_domain_interaction&lt; ELEMENT_0 &gt;</a> (problem_pt, <a class="el" href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a>, <a class="el" href="boussinesq__convection_8txt.html#a707b60a792e911d3fa7d844de3c21d8a">first_mesh_pt</a>)</td></tr>
+<tr class="separator:ad0de0d1da8264c20e566a642a54e36a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9fc119ad80e517a5177a09808e399af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> may be used to set up multi domain interactions for problems in which the interaction occurs across the boundaries of adjacent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> (&lt; em &gt; e.g.&lt;/em &gt; in FSI problems where the fluid and solid domains meet along a lower-dimensional interface). We do not anticipate that users will have to call this function directly</td></tr>
+<tr class="separator:aa9fc119ad80e517a5177a09808e399af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb00508eab2699b3a51cb4082385eaf"><td class="memItemLeft" align="right" valign="top">it is called internally by the function c the helper functions convert the mesh containing the external elements into a c MeshAsGeomObject a compound c GeomObject in which the constituent finite elements act as sub c GeomObjects Given the Eulerian coordinates of a target the function c calling c FiniteElement::locate_zeta(...) until the required <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is located. The function \c FiniteElement the efficiency gains <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> achieved by choosing a sensible search order so that the element containing the <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is found quickly&lt; hr &gt; subsection impl&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#afcb00508eab2699b3a51cb4082385eaf">Basic</a> (serial) implementation To make the search process efficient</td></tr>
+<tr class="separator:afcb00508eab2699b3a51cb4082385eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad682b707a17e76aa2dbaafda5eb1ea91"><td class="memItemLeft" align="right" valign="top">the sampling points in the same as the element s plot points and <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> number may be obtained from the c even if the target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is contained in the element Increasing the number of sampling points ensures that more of them <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to the target thus improving the chances that the Newton method will converge An increase in the number of sampling points can lead to a significant increase in the multi domain setup however In the present the elements <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> only stretched in the coordinate directions so a small number of sample points per element the setup of the multi domain interactions tends to be relatively&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#ad682b707a17e76aa2dbaafda5eb1ea91">cheap</a> (compared to other phases of a typical computation) so in most cases the default settings for above parameters <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> perfectly adequate.&lt; HR &gt;&lt; HR &gt; \section sources Source files for this tutorial The full parallel driver code for the <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a></td></tr>
+<tr class="separator:ad682b707a17e76aa2dbaafda5eb1ea91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a52ec8020ca2d5d6942dd26588deddbd5"><td class="memItemLeft" align="right" valign="top">mainpage Parallel solution of the Boussinesq convection problem Part I of this document provides an overview of how to distribute the Boussinesq convection&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a></td></tr>
+<tr class="separator:a52ec8020ca2d5d6942dd26588deddbd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9256625e8cf9ab7d8142b1eecf964d81"><td class="memItemLeft" align="right" valign="top">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is distributed with a simple call to c apart from the addition of the c discussed below&lt; HR &gt; subsection actions_after_adapt Actions after adaptation The boundary conditions <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> such that a single pressure degree of freedom must be pinned after the adaptation Once the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> has been&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a></td></tr>
+<tr class="separator:a9256625e8cf9ab7d8142b1eecf964d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc34b8841d1c42cceb1770cc872fd126"><td class="memItemLeft" align="right" valign="top">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> with a simple call to c apart from the addition of the c discussed below&lt; HR &gt; subsection actions_after_adapt Actions after adaptation The boundary conditions <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> such that a single pressure degree of freedom must be pinned after the adaptation Once the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> has been pinning the first pressure freedom in the first element no longer works because the first element will be different on each processor The required modifications mirror those in the&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../adaptive_driven_cavity/html/index.html&quot;&gt; adaptive driven cavity <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a>&lt;/a &gt; and ensure that the pressure is only pinned in the first element in the mesh by testing the Eulerian position of the element The remainder of the function is the same as in the serial driver code dontinclude multi_domain_ref_b_convection cc skipline Actions after adaptation until&lt; HR &gt; subsection <a class="el" href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute</a> Actions after distribution After the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#acc34b8841d1c42cceb1770cc872fd126">distribution</a></td></tr>
+<tr class="separator:acc34b8841d1c42cceb1770cc872fd126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96523c0123a943b4d4c5b5d298ee8faa"><td class="memItemLeft" align="right" valign="top">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> with a simple call to c apart from the addition of the c discussed below&lt; HR &gt; subsection actions_after_adapt Actions after adaptation The boundary conditions <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> such that a single pressure degree of freedom must be pinned after the adaptation Once the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> has been pinning the first pressure freedom in the first element no longer works because the first element will be different on each processor The required modifications mirror those in the&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../adaptive_driven_cavity/html/index.html&quot;&gt; adaptive driven cavity <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a>&lt;/a &gt; and ensure that the pressure is only pinned in the first element in the mesh by testing the Eulerian position of the element The remainder of the function is the same as in the serial driver code dontinclude multi_domain_ref_b_convection cc skipline Actions after adaptation until&lt; HR &gt; subsection <a class="el" href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute</a> Actions after <a class="el" href="boussinesq__convection_8txt.html#acc34b8841d1c42cceb1770cc872fd126">distribution</a> After the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> the multi domain interactions must be set up again because some of the external elements may now only exist on other processors Such elements <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> re created locally as external halo elements when c the c ensuring that output from one processor does not overwrite that from another&lt; HR &gt; The remainder of the driver code is identical to the&lt; a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../multi_physics/multi_domain_ref_b_convect/html/index.html&quot;&gt; serial version&lt;/a &gt;&lt; HR &gt;&lt; HR &gt; section multi_domain Part&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a96523c0123a943b4d4c5b5d298ee8faa">II</a></td></tr>
+<tr class="separator:a96523c0123a943b4d4c5b5d298ee8faa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a707b60a792e911d3fa7d844de3c21d8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> sets up a two way interaction between two <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> of the same spatial dimension represented by c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a707b60a792e911d3fa7d844de3c21d8a">first_mesh_pt</a></td></tr>
+<tr class="separator:a707b60a792e911d3fa7d844de3c21d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac99f9c2c12c1f839d9e86af1b927ca3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> sets up a two way interaction between two <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> of the same spatial dimension represented by c a mesh of elements of type c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#ac99f9c2c12c1f839d9e86af1b927ca3a">ELEMENT_0</a></td></tr>
+<tr class="separator:ac99f9c2c12c1f839d9e86af1b927ca3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae55dc27b6a9169b989fbdb65e21a2e98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> sets up a two way interaction between two <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> of the same spatial dimension represented by c a mesh of elements of type c and c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a></td></tr>
+<tr class="separator:ae55dc27b6a9169b989fbdb65e21a2e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb4d2c18c1a61d70a43f645f925a9f9a"><td class="memItemLeft" align="right" valign="top">but not vice versa In&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#acb4d2c18c1a61d70a43f645f925a9f9a">fact</a></td></tr>
+<tr class="separator:acb4d2c18c1a61d70a43f645f925a9f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad241ac225845f23822dafee8cce67441"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#ad241ac225845f23822dafee8cce67441">Finally</a></td></tr>
+<tr class="separator:ad241ac225845f23822dafee8cce67441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3bb27d416acc05f4d256fc778ca4c79"><td class="memItemLeft" align="right" valign="top">it is called internally by the function c the helper functions convert the mesh containing the external elements into a c MeshAsGeomObject a compound c GeomObject in which the constituent finite elements act as sub c GeomObjects Given the Eulerian coordinates of a target&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a></td></tr>
+<tr class="separator:ae3bb27d416acc05f4d256fc778ca4c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31ddf705989d1e2674d2ff85f7166a89"><td class="memItemLeft" align="right" valign="top">it is called internally by the function c the helper functions convert the mesh containing the external elements into a c MeshAsGeomObject a compound c GeomObject in which the constituent finite elements act as sub c GeomObjects Given the Eulerian coordinates of a target the function c calling c FiniteElement::locate_zeta(...) until the required <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is located. The function \c FiniteElement the efficiency gains <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> achieved by choosing a sensible search order so that the element containing the <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is found quickly&lt; hr &gt; subsection impl the constructor of the c MeshAsGeomObject automatically creates a bin structure that aids the identification of elements that <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to a given target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> The setup of the bin structure is performed as&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a31ddf705989d1e2674d2ff85f7166a89">follows</a></td></tr>
+<tr class="separator:a31ddf705989d1e2674d2ff85f7166a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208ac0b754fef0fba769b755935790d1"><td class="memItemLeft" align="right" valign="top">it is called internally by the function c the helper functions convert the mesh containing the external elements into a c MeshAsGeomObject a compound c GeomObject in which the constituent finite elements act as sub c GeomObjects Given the Eulerian coordinates of a target the function c calling c FiniteElement::locate_zeta(...) until the required <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is located. The function \c FiniteElement the efficiency gains <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> achieved by choosing a sensible search order so that the element containing the <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is found quickly&lt; hr &gt; subsection impl the constructor of the c MeshAsGeomObject automatically creates a bin structure that aids the identification of elements that <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to a given target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> The setup of the bin structure is performed as plus a small margin for&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a208ac0b754fef0fba769b755935790d1">safety</a></td></tr>
+<tr class="separator:a208ac0b754fef0fba769b755935790d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf55cd080e279c6a35847655b0746c86"><td class="memItemLeft" align="right" valign="top">the sampling points&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a></td></tr>
+<tr class="separator:aaf55cd080e279c6a35847655b0746c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b2e8175b36ee8f31144378819b372c0"><td class="memItemLeft" align="right" valign="top">the sampling points in the same as the element s plot points and <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> number may be obtained from the c even if the target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is contained in the element Increasing the number of sampling points ensures that more of them <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to the target thus improving the chances that the Newton method will converge An increase in the number of sampling points can lead to a significant increase in the multi domain setup&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#a9b2e8175b36ee8f31144378819b372c0">times</a></td></tr>
+<tr class="separator:a9b2e8175b36ee8f31144378819b372c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae02b9922a98c0abea6b360f394f66eec"><td class="memItemLeft" align="right" valign="top">the sampling points in the same as the element s plot points and <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> number may be obtained from the c even if the target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is contained in the element Increasing the number of sampling points ensures that more of them <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to the target thus improving the chances that the Newton method will converge An increase in the number of sampling points can lead to a significant increase in the multi domain setup however In the present the elements <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> only stretched in the coordinate directions so a small number of sample points per element&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boussinesq__convection_8txt.html#ae02b9922a98c0abea6b360f394f66eec">suffices</a></td></tr>
+<tr class="separator:ae02b9922a98c0abea6b360f394f66eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a90bde6107ef4c4dc27aaa2627e22a2ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90bde6107ef4c4dc27aaa2627e22a2ac">&#9670;&nbsp;</a></span>href</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a> =  &quot;../../../multi_physics/refine_b_convect/html/index.html&quot;&gt;single-domain&lt;/a&gt; and &lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../multi_physics/multi_domain_ref_b_convect/html/index.html&quot;&gt;multi-domain&lt;/a&gt; approaches. It is part of a &lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../example_code_list/html/index.html#<a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a>&quot;&gt; series of tutorials&lt;/a&gt; that discuss how to modify existing serial driver codes so that the \c Problem object can be <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> across multiple processors. Part <a class="el" href="boussinesq__convection_8txt.html#a96523c0123a943b4d4c5b5d298ee8faa">II</a> provides a more detailed discussion of the serial and parallel implementation of the various helper functions that may be used to set up multi-domain interactions. &lt;HR&gt; &lt;HR&gt; \section boussinesq Part I: Distributing the Boussinesq convection <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> For the single-domain discretisation of the Boussinesq convection <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a>, in which the Navier--Stokes and advection-diffusion equations <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> combined using a single element, the procedure required to distribute the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is exactly the same as that described in the &lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../adaptive_driven_cavity/html/index.html&quot;&gt;adaptive driven cavity tutorial&lt;/a&gt;. We therefore omit a detailed discussion of the changes to the driver code but encourage you to compare the serial driver codes, &lt;center&gt; &lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../../demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc&quot;&gt;&lt;code&gt;demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc&lt;/code&gt;&lt;/a&gt; &lt;/center&gt; and &lt;center&gt; &lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../../demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.cc&quot;&gt;&lt;code&gt;demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.cc&lt;/code&gt;&lt;/a&gt; &lt;/center&gt; with <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> counterparts, &lt;center&gt; &lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_boussinesq_convection.cc&quot;&gt;&lt;code&gt;demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_boussinesq_convection.cc&lt;/code&gt;&lt;/a&gt; &lt;/center&gt; and &lt;center&gt; &lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_b_convection.cc&quot;&gt;&lt;code&gt;demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_convection.cc&lt;/code&gt;&lt;/a&gt;. &lt;/center&gt; The parallelisation of the &lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../multi_physics/multi_domain_ref_b_convect/html/index.html&quot;&gt; multi-domain driver code &lt;/a&gt; is also quite straightforward. The key <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is that the interaction between the <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> must be set up again after the <a class="el" href="boussinesq__convection_8txt.html#acc34b8841d1c42cceb1770cc872fd126">distribution</a> of the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> because, on each processor, some of the &quot;external elements&quot; will have been deleted during the distribution. The required changes to the serial driver code <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> described below. \subsection main_body The main function The main function begins and ends with the usual calls to \c MPI_Helpers::init() and \c MPI_Helpers::finalize()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00065">65</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a472f479ab997a5a2d889405dce0b7c39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a472f479ab997a5a2d889405dce0b7c39">&#9670;&nbsp;</a></span>actions_after_distribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> with a simple call to c apart from the addition of the c actions_after_distribute </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afcb00508eab2699b3a51cb4082385eaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcb00508eab2699b3a51cb4082385eaf">&#9670;&nbsp;</a></span>Basic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">it is called internally by the function c the helper functions convert the mesh containing the external elements into a c MeshAsGeomObject a compound c GeomObject in which the constituent finite elements act as sub c GeomObjects Given the Eulerian coordinates of a target the function c calling c FiniteElement::locate_zeta (...) until the required <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is located. The function \c FiniteElement the efficiency gains <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> achieved by choosing a sensible search order so that the element containing the <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is found quickly&lt;hr&gt; subsection impl Basic </td>
+          <td>(</td>
+          <td class="paramtype">serial&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad682b707a17e76aa2dbaafda5eb1ea91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad682b707a17e76aa2dbaafda5eb1ea91">&#9670;&nbsp;</a></span>cheap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the sampling points in the same as the element s plot points and <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> number may be obtained from the c even if the target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is contained in the element Increasing the number of sampling points ensures that more of them <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to the target thus improving the chances that the Newton method will converge An increase in the number of sampling points can lead to a significant increase in the multi domain setup however In the present the elements <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> only stretched in the coordinate directions so a small number of sample points per element the setup of the multi domain interactions tends to be relatively cheap </td>
+          <td>(</td>
+          <td class="paramtype">compared to other phases of a typical&#160;</td>
+          <td class="paramname"><em>computation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8cb7bc96a2ec61fe51b7b81e7ca542df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cb7bc96a2ec61fe51b7b81e7ca542df">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> with a simple call to c apart from the addition of the c discussed below&lt;HR&gt; subsection actions_after_adapt Actions after adaptation The boundary conditions <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> such that a single pressure degree of freedom must be pinned after the adaptation Once the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> has been pinning the first pressure freedom in the first element no longer works because the first element will be different on each processor The required modifications mirror those in the&lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../adaptive_driven_cavity/html/index.html&quot;&gt; adaptive driven cavity <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a>&lt;/a&gt; and ensure that the pressure is only pinned in the first element in the mesh by testing the Eulerian position of the element The remainder of the function is the same as in the serial driver code dontinclude multi_domain_ref_b_convection cc skipline Actions after adaptation until&lt;HR&gt; subsection <a class="el" href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute</a> Actions after <a class="el" href="boussinesq__convection_8txt.html#acc34b8841d1c42cceb1770cc872fd126">distribution</a> After the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> the multi domain interactions must be set up again because some of the external elements may now only exist on other processors Such elements <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> re created locally as external halo elements when c the c doc_solution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9fc119ad80e517a5177a09808e399af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9fc119ad80e517a5177a09808e399af">&#9670;&nbsp;</a></span>domains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> may be used to set up multi domain interactions for problems in which the interaction occurs across the boundaries of adjacent domains </td>
+          <td>(</td>
+          <td class="paramtype">&lt; em &gt; e.g.&lt;/em &gt; in FSI problems where the fluid and solid domains meet along a lower-dimensional&#160;</td>
+          <td class="paramname"><em>interface</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3fd838e673976f66edb6467367d128e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fd838e673976f66edb6467367d128e7">&#9670;&nbsp;</a></span>endcode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode </td>
+          <td>(</td>
+          <td class="paramtype">note the&#160;</td>
+          <td class="paramname"><em>singular</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0de0d1da8264c20e566a642a54e36a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0de0d1da8264c20e566a642a54e36a5">&#9670;&nbsp;</a></span>setup_multi_domain_interaction&lt; ELEMENT_0 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">setup_multi_domain_interaction&lt; <a class="el" href="boussinesq__convection_8txt.html#ac99f9c2c12c1f839d9e86af1b927ca3a">ELEMENT_0</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">problem_pt&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="boussinesq__convection_8txt.html#a707b60a792e911d3fa7d844de3c21d8a">first_mesh_pt</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a15a095909692c48e1e31dac9df3387a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15a095909692c48e1e31dac9df3387a3">&#9670;&nbsp;</a></span>setup_multi_domain_interaction&lt; ELEMENT_1 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">but not vice versa In the two way interaction described above is performed by two successive calls to this function code setup_multi_domain_interaction&lt; ELEMENT_1 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">problem_pt&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="boussinesq__convection_8txt.html#a707b60a792e911d3fa7d844de3c21d8a">first_mesh_pt</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2e32fc8f467783c204660c69fca90951"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e32fc8f467783c204660c69fca90951">&#9670;&nbsp;</a></span>their()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace also provides functions that can be used for problems in which the interacting <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> meet at a lower dimensional interface&lt;em&gt; e g&lt;/em&gt; in fluid structure interaction problems The functions have a sensible default behaviour and can be used as block box routines We provide a brief overview of their </td>
+          <td>(</td>
+          <td class="paramtype">serial and&#160;</td>
+          <td class="paramname"><em>parallel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aaf55cd080e279c6a35847655b0746c86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf55cd080e279c6a35847655b0746c86">&#9670;&nbsp;</a></span>are</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the sampling points are</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00486">486</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9256625e8cf9ab7d8142b1eecf964d81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9256625e8cf9ab7d8142b1eecf964d81">&#9670;&nbsp;</a></span>distributed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is distributed with a simple call to c apart from the addition of the c discussed below&lt;HR&gt; subsection actions_after_adapt Actions after adaptation The boundary conditions <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> such that a single pressure degree of freedom must be pinned after the adaptation Once the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> has been distributed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00081">81</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="acc34b8841d1c42cceb1770cc872fd126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc34b8841d1c42cceb1770cc872fd126">&#9670;&nbsp;</a></span>distribution</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> with a simple call to c apart from the addition of the c discussed below&lt;HR&gt; subsection actions_after_adapt Actions after adaptation The boundary conditions <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> such that a single pressure degree of freedom must be pinned after the adaptation Once the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> has been pinning the first pressure freedom in the first element no longer works because the first element will be different on each processor The required modifications mirror those in the&lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../adaptive_driven_cavity/html/index.html&quot;&gt; adaptive driven cavity <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a>&lt;/a&gt; and ensure that the pressure is only pinned in the first element in the mesh by testing the Eulerian position of the element The remainder of the function is the same as in the serial driver code dontinclude multi_domain_ref_b_convection cc skipline Actions after adaptation until&lt;HR&gt; subsection <a class="el" href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute</a> Actions after distribution After the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> distribution</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00100">100</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac99f9c2c12c1f839d9e86af1b927ca3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac99f9c2c12c1f839d9e86af1b927ca3a">&#9670;&nbsp;</a></span>ELEMENT_0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> sets up a two way interaction between two <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> of the same spatial dimension represented by c a mesh of elements of type c ELEMENT_0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00157">157</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="acb4d2c18c1a61d70a43f645f925a9f9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb4d2c18c1a61d70a43f645f925a9f9a">&#9670;&nbsp;</a></span>fact</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the sampling points in fact</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00184">184</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad241ac225845f23822dafee8cce67441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad241ac225845f23822dafee8cce67441">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00197">197</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="a707b60a792e911d3fa7d844de3c21d8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a707b60a792e911d3fa7d844de3c21d8a">&#9670;&nbsp;</a></span>first_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> sets up a two way interaction between two <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> of the same spatial dimension represented by c a mesh of elements of type c and c a mesh of elements of type c ELEMENT_1 Both c <a class="el" href="boussinesq__convection_8txt.html#ac99f9c2c12c1f839d9e86af1b927ca3a">ELEMENT_0</a> and c ELEMENT_1 must inherit from c ElementWithExternalElements The function loops over the integration points of all the elements in c first_mesh_pt and establishes which external element in c <a class="el" href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a> covers the same spatial position as the integration <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> A pointer to this external element and the appropriate coordinate <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> stored in the element in the c first_mesh_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00156">156</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="a31ddf705989d1e2674d2ff85f7166a89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31ddf705989d1e2674d2ff85f7166a89">&#9670;&nbsp;</a></span>follows</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">it is called internally by the function c the helper functions convert the mesh containing the external elements into a c MeshAsGeomObject a compound c GeomObject in which the constituent finite elements act as sub c GeomObjects Given the Eulerian coordinates of a target the function c calling c FiniteElement::locate_zeta (...) until the required <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is located. The function \c FiniteElement the efficiency gains <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> achieved by choosing a sensible search order so that the element containing the <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is found quickly&lt;hr&gt; subsection impl the constructor of the c MeshAsGeomObject automatically creates a bin structure that aids the identification of elements that <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to a given target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> The setup of the bin structure is performed as follows</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00273">273</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="a96523c0123a943b4d4c5b5d298ee8faa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96523c0123a943b4d4c5b5d298ee8faa">&#9670;&nbsp;</a></span>II</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> is <a class="el" href="boussinesq__convection_8txt.html#a9256625e8cf9ab7d8142b1eecf964d81">distributed</a> with a simple call to c apart from the addition of the c discussed below&lt;HR&gt; subsection actions_after_adapt Actions after adaptation The boundary conditions <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> such that a single pressure degree of freedom must be pinned after the adaptation Once the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> has been pinning the first pressure freedom in the first element no longer works because the first element will be different on each processor The required modifications mirror those in the&lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../adaptive_driven_cavity/html/index.html&quot;&gt; adaptive driven cavity <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a>&lt;/a&gt; and ensure that the pressure is only pinned in the first element in the mesh by testing the Eulerian position of the element The remainder of the function is the same as in the serial driver code dontinclude multi_domain_ref_b_convection cc skipline Actions after adaptation until&lt;HR&gt; subsection <a class="el" href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute</a> Actions after <a class="el" href="boussinesq__convection_8txt.html#acc34b8841d1c42cceb1770cc872fd126">distribution</a> After the <a class="el" href="boussinesq__convection_8txt.html#a52ec8020ca2d5d6942dd26588deddbd5">problem</a> the multi domain interactions must be set up again because some of the external elements may now only exist on other processors Such elements <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> re created locally as external halo elements when c the c ensuring that output from one processor does not overwrite that from another&lt;HR&gt; The remainder of the driver code is identical to the&lt;a <a class="el" href="boussinesq__convection_8txt.html#a90bde6107ef4c4dc27aaa2627e22a2ac">href</a>=&quot;../../../multi_physics/multi_domain_ref_b_convect/html/index.html&quot;&gt; serial version&lt;/a&gt;&lt;HR&gt;&lt;HR&gt; section multi_domain Part II</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00133">133</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae3bb27d416acc05f4d256fc778ca4c79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3bb27d416acc05f4d256fc778ca4c79">&#9670;&nbsp;</a></span>point</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the sampling points in the same as the element s plot points and <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> number may be obtained from the c even if the target point is contained in the element Increasing the number of sampling points ensures that more of them <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to the target point</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00225">225</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="a52ec8020ca2d5d6942dd26588deddbd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52ec8020ca2d5d6942dd26588deddbd5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the sampling points in the same as the element s plot points and <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> number may be obtained from the c even if the target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is contained in the element Increasing the number of sampling points ensures that more of them <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to the target thus improving the chances that the Newton method will converge An increase in the number of sampling points can lead to a significant increase in the multi domain setup however In the present problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00004">4</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="a208ac0b754fef0fba769b755935790d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a208ac0b754fef0fba769b755935790d1">&#9670;&nbsp;</a></span>safety</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">it is called internally by the function c the helper functions convert the mesh containing the external elements into a c MeshAsGeomObject a compound c GeomObject in which the constituent finite elements act as sub c GeomObjects Given the Eulerian coordinates of a target the function c calling c FiniteElement::locate_zeta (...) until the required <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is located. The function \c FiniteElement the efficiency gains <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> achieved by choosing a sensible search order so that the element containing the <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is found quickly&lt;hr&gt; subsection impl the constructor of the c MeshAsGeomObject automatically creates a bin structure that aids the identification of elements that <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to a given target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> The setup of the bin structure is performed as plus a small margin for safety</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00273">273</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae55dc27b6a9169b989fbdb65e21a2e98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae55dc27b6a9169b989fbdb65e21a2e98">&#9670;&nbsp;</a></span>second_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="boussinesq__convection_8txt.html#a3fd838e673976f66edb6467367d128e7">endcode</a> sets up a two way interaction between two <a class="el" href="boussinesq__convection_8txt.html#aa9fc119ad80e517a5177a09808e399af">domains</a> of the same spatial dimension represented by c a mesh of elements of type c and c second_mesh_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00157">157</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae02b9922a98c0abea6b360f394f66eec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae02b9922a98c0abea6b360f394f66eec">&#9670;&nbsp;</a></span>suffices</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the sampling points in the same as the element s plot points and <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> number may be obtained from the c even if the target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is contained in the element Increasing the number of sampling points ensures that more of them <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to the target thus improving the chances that the Newton method will converge An increase in the number of sampling points can lead to a significant increase in the multi domain setup however In the present the elements <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> only stretched in the coordinate directions so a small number of sample points per element suffices</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00510">510</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9b2e8175b36ee8f31144378819b372c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b2e8175b36ee8f31144378819b372c0">&#9670;&nbsp;</a></span>times</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the sampling points in the same as the element s plot points and <a class="el" href="boussinesq__convection_8txt.html#a2e32fc8f467783c204660c69fca90951">their</a> number may be obtained from the c even if the target <a class="el" href="boussinesq__convection_8txt.html#ae3bb27d416acc05f4d256fc778ca4c79">point</a> is contained in the element Increasing the number of sampling points ensures that more of them <a class="el" href="boussinesq__convection_8txt.html#aaf55cd080e279c6a35847655b0746c86">are</a> close to the target thus improving the chances that the Newton method will converge An increase in the number of sampling points can lead to a significant increase in the multi domain setup times</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__convection_8txt_source.html#l00499">499</a> of file <a class="el" href="boussinesq__convection_8txt_source.html">boussinesq_convection.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:27:19
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

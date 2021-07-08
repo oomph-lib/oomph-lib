@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::Z2ErrorEstimator Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html">Z2ErrorEstimator</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1Z2ErrorEstimator-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::Z2ErrorEstimator Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::Z2ErrorEstimator:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1Z2ErrorEstimator.png" usemap="#oomph::Z2ErrorEstimator_map" alt=""/>
+  <map id="oomph::Z2ErrorEstimator_map" name="oomph::Z2ErrorEstimator_map">
+<area href="classoomph_1_1ErrorEstimator.html" title="Base class for spatial error estimators." alt="oomph::ErrorEstimator" shape="rect" coords="0,0,152,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a75ef55e67b21ec49ed1a37d095cfa9f9"><td class="memItemLeft" align="right" valign="top">typedef double(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a75ef55e67b21ec49ed1a37d095cfa9f9">CombinedErrorEstimateFctPt</a>) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;errors)</td></tr>
+<tr class="memdesc:a75ef55e67b21ec49ed1a37d095cfa9f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to combined error estimator function.  <a href="classoomph_1_1Z2ErrorEstimator.html#a75ef55e67b21ec49ed1a37d095cfa9f9">More...</a><br /></td></tr>
+<tr class="separator:a75ef55e67b21ec49ed1a37d095cfa9f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a1cb0328af843a8bebf5333045cea4553"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a1cb0328af843a8bebf5333045cea4553">Z2ErrorEstimator</a> (const unsigned &amp;<a class="el" href="classoomph_1_1Z2ErrorEstimator.html#af7a3a28cfc05b291b438b80e87c7f5cc">recovery_order</a>)</td></tr>
+<tr class="memdesc:a1cb0328af843a8bebf5333045cea4553"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Set order of recovery shape functions.  <a href="classoomph_1_1Z2ErrorEstimator.html#a1cb0328af843a8bebf5333045cea4553">More...</a><br /></td></tr>
+<tr class="separator:a1cb0328af843a8bebf5333045cea4553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35186eeb792bf2b948239d19b2697ca0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a35186eeb792bf2b948239d19b2697ca0">Z2ErrorEstimator</a> ()</td></tr>
+<tr class="memdesc:a35186eeb792bf2b948239d19b2697ca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Leave order of recovery shape functions open for now &ndash; they will be read out from first element of the mesh when the error estimator is applied.  <a href="classoomph_1_1Z2ErrorEstimator.html#a35186eeb792bf2b948239d19b2697ca0">More...</a><br /></td></tr>
+<tr class="separator:a35186eeb792bf2b948239d19b2697ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eb88b73062ae5dd42c597569179aeae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a4eb88b73062ae5dd42c597569179aeae">Z2ErrorEstimator</a> (const <a class="el" href="classoomph_1_1Z2ErrorEstimator.html">Z2ErrorEstimator</a> &amp;)</td></tr>
+<tr class="memdesc:a4eb88b73062ae5dd42c597569179aeae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1Z2ErrorEstimator.html#a4eb88b73062ae5dd42c597569179aeae">More...</a><br /></td></tr>
+<tr class="separator:a4eb88b73062ae5dd42c597569179aeae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a192eb7456b2174118b377bb74951dddf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a192eb7456b2174118b377bb74951dddf">operator=</a> (const <a class="el" href="classoomph_1_1Z2ErrorEstimator.html">Z2ErrorEstimator</a> &amp;)</td></tr>
+<tr class="memdesc:a192eb7456b2174118b377bb74951dddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1Z2ErrorEstimator.html#a192eb7456b2174118b377bb74951dddf">More...</a><br /></td></tr>
+<tr class="separator:a192eb7456b2174118b377bb74951dddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d1e540fe046f1c55d59690932d4095d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a3d1e540fe046f1c55d59690932d4095d">~Z2ErrorEstimator</a> ()</td></tr>
+<tr class="memdesc:a3d1e540fe046f1c55d59690932d4095d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1Z2ErrorEstimator.html#a3d1e540fe046f1c55d59690932d4095d">More...</a><br /></td></tr>
+<tr class="separator:a3d1e540fe046f1c55d59690932d4095d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38b3ecfbb223a91bfe049d4722af6d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#aa38b3ecfbb223a91bfe049d4722af6d3">get_element_errors</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;elemental_error)</td></tr>
+<tr class="memdesc:aa38b3ecfbb223a91bfe049d4722af6d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the elemental error measures for a given mesh and store them in a vector. <br  />
+  <a href="classoomph_1_1Z2ErrorEstimator.html#aa38b3ecfbb223a91bfe049d4722af6d3">More...</a><br /></td></tr>
+<tr class="separator:aa38b3ecfbb223a91bfe049d4722af6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0fd03123c518ed340bb534c2f6b8cc4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#ae0fd03123c518ed340bb534c2f6b8cc4">get_element_errors</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;elemental_error, <a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;doc_info)</td></tr>
+<tr class="memdesc:ae0fd03123c518ed340bb534c2f6b8cc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the elemental error measures for a given mesh and store them in a vector. <br  />
+ If doc_info.enable_doc(), doc FE and recovered fluxes in.  <a href="classoomph_1_1Z2ErrorEstimator.html#ae0fd03123c518ed340bb534c2f6b8cc4">More...</a><br /></td></tr>
+<tr class="separator:ae0fd03123c518ed340bb534c2f6b8cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7a3a28cfc05b291b438b80e87c7f5cc"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#af7a3a28cfc05b291b438b80e87c7f5cc">recovery_order</a> ()</td></tr>
+<tr class="memdesc:af7a3a28cfc05b291b438b80e87c7f5cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for order of recovery polynomials.  <a href="classoomph_1_1Z2ErrorEstimator.html#af7a3a28cfc05b291b438b80e87c7f5cc">More...</a><br /></td></tr>
+<tr class="separator:af7a3a28cfc05b291b438b80e87c7f5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad463b5c01e6bb5b9e4ec9b3a02f9fb4a"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#ad463b5c01e6bb5b9e4ec9b3a02f9fb4a">recovery_order</a> () const</td></tr>
+<tr class="memdesc:ad463b5c01e6bb5b9e4ec9b3a02f9fb4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for order of recovery polynomials (const version)  <a href="classoomph_1_1Z2ErrorEstimator.html#ad463b5c01e6bb5b9e4ec9b3a02f9fb4a">More...</a><br /></td></tr>
+<tr class="separator:ad463b5c01e6bb5b9e4ec9b3a02f9fb4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1719ff79e67f2f0b2b8194a91f52d3d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a75ef55e67b21ec49ed1a37d095cfa9f9">CombinedErrorEstimateFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a1719ff79e67f2f0b2b8194a91f52d3d2">combined_error_fct_pt</a> ()</td></tr>
+<tr class="memdesc:a1719ff79e67f2f0b2b8194a91f52d3d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to combined error estimate function.  <a href="classoomph_1_1Z2ErrorEstimator.html#a1719ff79e67f2f0b2b8194a91f52d3d2">More...</a><br /></td></tr>
+<tr class="separator:a1719ff79e67f2f0b2b8194a91f52d3d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa961268bfdb517d9a59a68eb159042c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a75ef55e67b21ec49ed1a37d095cfa9f9">CombinedErrorEstimateFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#aa961268bfdb517d9a59a68eb159042c9">combined_error_fct_pt</a> () const</td></tr>
+<tr class="memdesc:aa961268bfdb517d9a59a68eb159042c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to combined error estimate function. Const version.  <a href="classoomph_1_1Z2ErrorEstimator.html#aa961268bfdb517d9a59a68eb159042c9">More...</a><br /></td></tr>
+<tr class="separator:aa961268bfdb517d9a59a68eb159042c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c8a3d6e46d9b9ba31c768cb5b026bba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a5c8a3d6e46d9b9ba31c768cb5b026bba">setup_patches</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt, std::map&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> *, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a> * &gt; * &gt; &amp;adjacent_elements_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;vertex_node_pt)</td></tr>
+<tr class="memdesc:a5c8a3d6e46d9b9ba31c768cb5b026bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup patches: For each vertex node pointed to by nod_pt, adjacent_elements_pt[nod_pt] contains the pointer to the vector that contains the pointers to the elements that the node is part of.  <a href="classoomph_1_1Z2ErrorEstimator.html#a5c8a3d6e46d9b9ba31c768cb5b026bba">More...</a><br /></td></tr>
+<tr class="separator:a5c8a3d6e46d9b9ba31c768cb5b026bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a997dc6ba0b546a0f7363949a8d33d133"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a997dc6ba0b546a0f7363949a8d33d133">reference_flux_norm</a> ()</td></tr>
+<tr class="memdesc:a997dc6ba0b546a0f7363949a8d33d133"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for prescribed reference flux norm <br  />
+  <a href="classoomph_1_1Z2ErrorEstimator.html#a997dc6ba0b546a0f7363949a8d33d133">More...</a><br /></td></tr>
+<tr class="separator:a997dc6ba0b546a0f7363949a8d33d133"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a7902d3e80dc64406e1f367c02ec4e3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a4a7902d3e80dc64406e1f367c02ec4e3">reference_flux_norm</a> () const</td></tr>
+<tr class="memdesc:a4a7902d3e80dc64406e1f367c02ec4e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for prescribed reference flux norm (const. version)  <a href="classoomph_1_1Z2ErrorEstimator.html#a4a7902d3e80dc64406e1f367c02ec4e3">More...</a><br /></td></tr>
+<tr class="separator:a4a7902d3e80dc64406e1f367c02ec4e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53d7a1ac66dd41b39d6794e1d00080fc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a53d7a1ac66dd41b39d6794e1d00080fc">get_combined_error_estimate</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;compound_error)</td></tr>
+<tr class="memdesc:a53d7a1ac66dd41b39d6794e1d00080fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a combined error estimate from all compound errors.  <a href="classoomph_1_1Z2ErrorEstimator.html#a53d7a1ac66dd41b39d6794e1d00080fc">More...</a><br /></td></tr>
+<tr class="separator:a53d7a1ac66dd41b39d6794e1d00080fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1ErrorEstimator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1ErrorEstimator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1ErrorEstimator.html">oomph::ErrorEstimator</a></td></tr>
+<tr class="memitem:a43b3800b6695fe3fd13241b0530a0d0c inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ErrorEstimator.html#a43b3800b6695fe3fd13241b0530a0d0c">ErrorEstimator</a> ()</td></tr>
+<tr class="memdesc:a43b3800b6695fe3fd13241b0530a0d0c inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default empty constructor.  <a href="classoomph_1_1ErrorEstimator.html#a43b3800b6695fe3fd13241b0530a0d0c">More...</a><br /></td></tr>
+<tr class="separator:a43b3800b6695fe3fd13241b0530a0d0c inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a264c3159d8f4a07459d08d263d340bf8 inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ErrorEstimator.html#a264c3159d8f4a07459d08d263d340bf8">ErrorEstimator</a> (const <a class="el" href="classoomph_1_1ErrorEstimator.html">ErrorEstimator</a> &amp;)</td></tr>
+<tr class="memdesc:a264c3159d8f4a07459d08d263d340bf8 inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1ErrorEstimator.html#a264c3159d8f4a07459d08d263d340bf8">More...</a><br /></td></tr>
+<tr class="separator:a264c3159d8f4a07459d08d263d340bf8 inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abebe636e6ad890ee2cea23366f9ac719 inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ErrorEstimator.html#abebe636e6ad890ee2cea23366f9ac719">operator=</a> (const <a class="el" href="classoomph_1_1ErrorEstimator.html">ErrorEstimator</a> &amp;)</td></tr>
+<tr class="memdesc:abebe636e6ad890ee2cea23366f9ac719 inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1ErrorEstimator.html#abebe636e6ad890ee2cea23366f9ac719">More...</a><br /></td></tr>
+<tr class="separator:abebe636e6ad890ee2cea23366f9ac719 inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57ddd866184d95a75f024353ca936b5b inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ErrorEstimator.html#a57ddd866184d95a75f024353ca936b5b">~ErrorEstimator</a> ()</td></tr>
+<tr class="memdesc:a57ddd866184d95a75f024353ca936b5b inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1ErrorEstimator.html#a57ddd866184d95a75f024353ca936b5b">More...</a><br /></td></tr>
+<tr class="separator:a57ddd866184d95a75f024353ca936b5b inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b12c5d2579360a08b6b6298cea8b142 inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ErrorEstimator.html#a3b12c5d2579360a08b6b6298cea8b142">get_element_errors</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;elemental_error)</td></tr>
+<tr class="memdesc:a3b12c5d2579360a08b6b6298cea8b142 inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the elemental error-measures for a given mesh and store them in a vector.  <a href="classoomph_1_1ErrorEstimator.html#a3b12c5d2579360a08b6b6298cea8b142">More...</a><br /></td></tr>
+<tr class="separator:a3b12c5d2579360a08b6b6298cea8b142 inherit pub_methods_classoomph_1_1ErrorEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0384127746b7eea7fcf0d08f2d34c647"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a0384127746b7eea7fcf0d08f2d34c647">get_recovered_flux_in_patch</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a> * &gt; &amp;patch_el_pt, const unsigned &amp;num_recovery_terms, const unsigned &amp;num_flux_terms, const unsigned &amp;dim, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; *&amp;recovered_flux_coefficient_pt)</td></tr>
+<tr class="memdesc:a0384127746b7eea7fcf0d08f2d34c647"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the vector of elements that make up a patch, the number of recovery and flux terms, and the spatial dimension of the problem, compute the matrix of recovered flux coefficients and return a pointer to it.  <a href="classoomph_1_1Z2ErrorEstimator.html#a0384127746b7eea7fcf0d08f2d34c647">More...</a><br /></td></tr>
+<tr class="separator:a0384127746b7eea7fcf0d08f2d34c647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1782984fa64738f9a8e7ca40d585597a"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a1782984fa64738f9a8e7ca40d585597a">nrecovery_terms</a> (const unsigned &amp;dim)</td></tr>
+<tr class="memdesc:a1782984fa64738f9a8e7ca40d585597a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of coefficients for expansion of recovered fluxes for given spatial dimension of elements. (We use complete polynomials of the specified given order.)  <a href="classoomph_1_1Z2ErrorEstimator.html#a1782984fa64738f9a8e7ca40d585597a">More...</a><br /></td></tr>
+<tr class="separator:a1782984fa64738f9a8e7ca40d585597a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab57514ecde88f7ae970439fd4900996a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#ab57514ecde88f7ae970439fd4900996a">shape_rec</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;x, const unsigned &amp;dim, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;psi_r)</td></tr>
+<tr class="memdesc:ab57514ecde88f7ae970439fd4900996a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recovery shape functions as functions of the global, Eulerian coordinate x of dimension dim. The recovery shape functions are complete polynomials of the order specified by Recovery_order.  <a href="classoomph_1_1Z2ErrorEstimator.html#ab57514ecde88f7ae970439fd4900996a">More...</a><br /></td></tr>
+<tr class="separator:ab57514ecde88f7ae970439fd4900996a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac53b6d73d9e73140c92302c2aa70203a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Integral.html">Integral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#ac53b6d73d9e73140c92302c2aa70203a">integral_rec</a> (const unsigned &amp;dim, const bool &amp;is_q_mesh)</td></tr>
+<tr class="memdesc:ac53b6d73d9e73140c92302c2aa70203a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integation scheme associated with the recovery shape functions must be of sufficiently high order to integrate the mass matrix associated with the recovery shape functions.  <a href="classoomph_1_1Z2ErrorEstimator.html#ac53b6d73d9e73140c92302c2aa70203a">More...</a><br /></td></tr>
+<tr class="separator:ac53b6d73d9e73140c92302c2aa70203a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad84f3b903d0508093d6e2a905198b438"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#ad84f3b903d0508093d6e2a905198b438">doc_flux</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *mesh_pt, const unsigned &amp;num_flux_terms, <a class="el" href="classoomph_1_1MapMatrixMixed.html">MapMatrixMixed</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> *, int, double &gt; &amp;rec_flux_map, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;elemental_error, <a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;doc_info)</td></tr>
+<tr class="memdesc:ad84f3b903d0508093d6e2a905198b438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc flux and recovered flux.  <a href="classoomph_1_1Z2ErrorEstimator.html#ad84f3b903d0508093d6e2a905198b438">More...</a><br /></td></tr>
+<tr class="separator:ad84f3b903d0508093d6e2a905198b438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a9aafff3d80518811ba7d9bb12a240a7c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a9aafff3d80518811ba7d9bb12a240a7c">Recovery_order</a></td></tr>
+<tr class="memdesc:a9aafff3d80518811ba7d9bb12a240a7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Order of recovery polynomials.  <a href="classoomph_1_1Z2ErrorEstimator.html#a9aafff3d80518811ba7d9bb12a240a7c">More...</a><br /></td></tr>
+<tr class="separator:a9aafff3d80518811ba7d9bb12a240a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa024a307366bb987b1c9ba379b837e8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#afa024a307366bb987b1c9ba379b837e8">Recovery_order_from_first_element</a></td></tr>
+<tr class="separator:afa024a307366bb987b1c9ba379b837e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa170691c5d84fbf0eb6dc5f480bbb187"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#aa170691c5d84fbf0eb6dc5f480bbb187">Reference_flux_norm</a></td></tr>
+<tr class="memdesc:aa170691c5d84fbf0eb6dc5f480bbb187"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prescribed reference flux norm.  <a href="classoomph_1_1Z2ErrorEstimator.html#aa170691c5d84fbf0eb6dc5f480bbb187">More...</a><br /></td></tr>
+<tr class="separator:aa170691c5d84fbf0eb6dc5f480bbb187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34a013732989e82f50cb7e72f25632a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a75ef55e67b21ec49ed1a37d095cfa9f9">CombinedErrorEstimateFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a34a013732989e82f50cb7e72f25632a7">Combined_error_fct_pt</a></td></tr>
+<tr class="memdesc:a34a013732989e82f50cb7e72f25632a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to combined error estimator function.  <a href="classoomph_1_1Z2ErrorEstimator.html#a34a013732989e82f50cb7e72f25632a7">More...</a><br /></td></tr>
+<tr class="separator:a34a013732989e82f50cb7e72f25632a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Z2-error-estimator: Elements that can be used with Z2 error estimation should be derived from the base class <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html" title="Base class for finite elements that can compute the quantities that are required for the Z2 error est...">ElementWithZ2ErrorEstimator</a> and implement its pure virtual member functions to provide the following functionality:</p><ul>
+<li>pointer-based access to the vertex nodes in the element (this is required to facilitate setup of element patches).</li>
+<li>the computation of a suitable "flux vector" which represents a quantity whose FE representation is discontinuous across element boundaries but would become continuous under infinite mesh refinement.</li>
+</ul>
+<p>As an example consider the finite element solution of the Laplace problem, <img class="formulaInl" alt="$ \partial^2 u/\partial x_i^2 = 0 $" src="form_252.png"/>. If we approximate the unknown <img class="formulaInl" alt="$ u $" src="form_1.png"/> on a finite element mesh with <img class="formulaInl" alt="$ N $" src="form_238.png"/> nodes as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u^{[FE]}(x_k) = \sum_{j=1}^{N} U_j \ \psi_j(x_k), \]" src="form_253.png"/>
+</p>
+<p> where the <img class="formulaInl" alt="$ \psi_j(x_k) $" src="form_254.png"/> are the (global) <img class="formulaInl" alt="$ C^0 $" src="form_255.png"/> basis functions, the finite-element representation of the flux, <img class="formulaInl" alt="$ f_i = \partial u/\partial x_i $" src="form_256.png"/>, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ f_i^{[FE]} = \sum_{j=1}^{N} U_j \ \frac{\partial \psi_j}{\partial x_i} \]" src="form_257.png"/>
+</p>
+<p> is discontinuous between elements but the magnitude of the jump decreases under mesh refinement. We denote the number of flux terms by <img class="formulaInl" alt="$N_{flux}$" src="form_258.png"/>, so for a 2D (3D) Laplace problem, <img class="formulaInl" alt="$N_{flux}=2 \ (3).$" src="form_259.png"/></p>
+<p>The idea behind Z2 error estimation is to compute an approximation for the flux that is more accurate than the value <img class="formulaInl" alt="$ f_i^{[FE]} $" src="form_260.png"/> obtained directly from the finite element solution. We refer to the improved approximation for the flux as the "recovered flux" and denote it by <img class="formulaInl" alt="$ f_i^{[rec]} $" src="form_261.png"/>. Since <img class="formulaInl" alt="$ f_i^{[rec]} $" src="form_261.png"/> is more accurate than <img class="formulaInl" alt="$ f_i^{[FE]} $" src="form_260.png"/>, the difference between the two provides a measure of the error. In Z2 error estimation, the "recovered flux" is determined by projecting the discontinuous, FE-based flux <img class="formulaInl" alt="$ f_i^{[FE]} $" src="form_260.png"/> onto a set of continuous basis functions, known as the "recovery shape
+functions". In principle, one could use the finite element shape functions <img class="formulaInl" alt="$ \psi_j(x_k) $" src="form_254.png"/> as the recovery shape functions but then the determination of the recovered flux would involve the solution of a linear system that is as big as the original problem. To avoid this, the projection is performed over small patches of elements within which low-order polynomials (defined in terms of the global, Eulerian coordinates) are used as the recovery shape functions.</p>
+<p>Z2 error estimation is known to be "optimal" for many self-adjoint problems. See, e.g., Zienkiewicz &amp; Zhu's original papers "The superconvergent patch recovery and a posteriori error estimates." International Journal for Numerical Methods in Engineering <b>33</b> (1992) Part I: 1331-1364; Part II: 1365-1382. In non-self adjoint problems, the error estimator only analyses the "self-adjoint part" of the differential operator. However, in many cases, this still produces good error indicators since the error estimator detects under-resolved, sharp gradients in the solution.</p>
+<p>Z2 error estimation works as follows:</p><ol type="1">
+<li>We combine the elements in the mesh into a number of "patches", which consist of all elements that share a common vertex node. Most elements will therefore be members of multiple patches.</li>
+<li><p class="startli">Within each patch <img class="formulaInl" alt="$p$" src="form_262.png"/>, we expand the "recovered flux" as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ f^{[rec](p)}_i(x_k) = \sum_{j=1}^{N_{rec}} F^{(p)}_{ij} \ \psi^{[rec]}_j(x_k) \mbox{ \ \ \ for $i=1,...,N_{flux}$,} \]" src="form_263.png"/>
+</p>
+<p> where the functions <img class="formulaInl" alt="$ \psi^{[rec]}_j(x_k)$" src="form_264.png"/> are the recovery shape functions, which are functions of the global, Eulerian coordinates. Typically, these are chosen to be low-order polynomials. For instance, in 2D, a bilinear representation of <img class="formulaInl" alt="$ f^{(p)}_i(x_0,x_1) $" src="form_265.png"/> involves the <img class="formulaInl" alt="$N_{rec}=3$" src="form_266.png"/> recovery shape functions <img class="formulaInl" alt="$ \psi^{[rec]}_0(x_0,x_1)=1, \ \psi^{[rec]}_1(x_0,x_1)=x_0 $" src="form_267.png"/> and <img class="formulaInl" alt="$ \psi^{[rec]}_2(x_0,x_1)=x_1$" src="form_268.png"/>.</p>
+<p class="startli">We determine the coefficients <img class="formulaInl" alt="$ F^{(p)}_{ij} $" src="form_269.png"/> by enforcing <img class="formulaInl" alt="$ f^{(p)}_i(x_k) = f^{[FE]}_i(x_k)$" src="form_270.png"/> in its weak form: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_{\mbox{Patch $p$}} \left( f^{[FE]}_i(x_k) - \sum_{j=1}^{N_{rec}} F^{(p)}_{ij} \ \psi^{[rec]}_j(x_k) \right) \psi^{[rec]}_l(x_k)\ dv = 0 \mbox{ \ \ \ \ for $l=1,...,N_{rec}$ and $i=1,...,N_{flux}$}. \]" src="form_271.png"/>
+</p>
+<p> Once the <img class="formulaInl" alt="$ F^{(p)}_{ij} $" src="form_269.png"/> are determined in a given patch, we determine the values of the recovered flux at all nodes that are part of the patch. We denote the value of the recovered flux at node <img class="formulaInl" alt="$ k $" src="form_272.png"/> by <img class="formulaInl" alt="$ {\cal F}^{(p)}_{ik}$" src="form_273.png"/>.</p>
+<p class="startli">We repeat this procedure for every patch. For nodes that are part of multiple patches, the procedure will provide multiple, slightly different nodal values for the recovered flux. We average these values via </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal F}_{ij} = \frac{1}{N_p(j)} \sum_{\mbox{Node $j \in $ patch $p$}} {\cal F}^{(p)}_{ij}, \]" src="form_274.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$N_p(j)$" src="form_275.png"/> denotes the number of patches that node <img class="formulaInl" alt="$ j$" src="form_276.png"/> is a member of. This allows us to obtain a globally-continuous, finite-element based representation of the recovered flux as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ f_i^{[rec]} = \sum_{j=1}^{N} {\cal F}_{ij}\ \psi_j, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_277.png"/>
+</p>
+<p> where the <img class="formulaInl" alt="$ \psi_j $" src="form_211.png"/> are the (global) finite element shape functions.</p>
+</li>
+<li>Since the recovered flux in (1), is based on nodal values, we can evaluate it locally within each of the <img class="formulaInl" alt="$ N_e$" src="form_278.png"/> elements in the mesh to obtain a normalised elemental error estimate via <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ E_{e} = \sqrt{ \frac{ \int_{\mbox{$e$}} \left( f_i^{[rec]} - f_i^{[FE]} \right)^2 dv} {\sum_{e'=1}^{N_e} \int_{\mbox{$e'$}} \left( f_i^{[rec]} \right)^2 dv} } \mbox{\ \ \ for $e=1,...,N_e$.} \]" src="form_279.png"/>
+</p>
+ In this (default) form, mesh refinement, based on this error estimate will lead to an equidistribution of the error across all elements. Usually, this is the desired behaviour. However, there are cases in which the solution evolves towards a state in which <br  />
+ the flux tends to zero while the solution itself becomes so simple that it can be represented exactly on any finite element mesh (e.g. in spin-up problems in which the fluid motion approaches a rigid body rotation). In that case the mesh adaptation tries to equidistribute any small roundoff errors in the solution, causing strong, spatially uniform mesh refinement throughout the domain, even though the solution is already fully converged. For such cases, it is possible to replace the denominator in the above expression by a prescribed reference flux, which may be specified via the access function <div class="fragment"><div class="line"><a class="code" href="classoomph_1_1Z2ErrorEstimator.html#a997dc6ba0b546a0f7363949a8d33d133">reference_flux_norm</a>()</div>
+</div><!-- fragment --> </li>
+</ol>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00309">309</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a75ef55e67b21ec49ed1a37d095cfa9f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75ef55e67b21ec49ed1a37d095cfa9f9">&#9670;&nbsp;</a></span>CombinedErrorEstimateFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef double(* oomph::Z2ErrorEstimator::CombinedErrorEstimateFctPt) (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;errors)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function pointer to combined error estimator function. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00315">315</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1cb0328af843a8bebf5333045cea4553"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cb0328af843a8bebf5333045cea4553">&#9670;&nbsp;</a></span>Z2ErrorEstimator() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Z2ErrorEstimator::Z2ErrorEstimator </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>recovery_order</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Set order of recovery shape functions. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00318">318</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+</div>
+</div>
+<a id="a35186eeb792bf2b948239d19b2697ca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35186eeb792bf2b948239d19b2697ca0">&#9670;&nbsp;</a></span>Z2ErrorEstimator() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Z2ErrorEstimator::Z2ErrorEstimator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Leave order of recovery shape functions open for now &ndash; they will be read out from first element of the mesh when the error estimator is applied. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00327">327</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+</div>
+</div>
+<a id="a4eb88b73062ae5dd42c597569179aeae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eb88b73062ae5dd42c597569179aeae">&#9670;&nbsp;</a></span>Z2ErrorEstimator() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Z2ErrorEstimator::Z2ErrorEstimator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Z2ErrorEstimator.html">Z2ErrorEstimator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00333">333</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="a3d1e540fe046f1c55d59690932d4095d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d1e540fe046f1c55d59690932d4095d">&#9670;&nbsp;</a></span>~Z2ErrorEstimator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::Z2ErrorEstimator::~Z2ErrorEstimator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00345">345</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1719ff79e67f2f0b2b8194a91f52d3d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1719ff79e67f2f0b2b8194a91f52d3d2">&#9670;&nbsp;</a></span>combined_error_fct_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a75ef55e67b21ec49ed1a37d095cfa9f9">CombinedErrorEstimateFctPt</a>&amp; oomph::Z2ErrorEstimator::combined_error_fct_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function: Pointer to combined error estimate function. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00375">375</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00452">Combined_error_fct_pt</a>.</p>
+
+</div>
+</div>
+<a id="aa961268bfdb517d9a59a68eb159042c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa961268bfdb517d9a59a68eb159042c9">&#9670;&nbsp;</a></span>combined_error_fct_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a75ef55e67b21ec49ed1a37d095cfa9f9">CombinedErrorEstimateFctPt</a> oomph::Z2ErrorEstimator::combined_error_fct_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function: Pointer to combined error estimate function. Const version. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00380">380</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00452">Combined_error_fct_pt</a>.</p>
+
+</div>
+</div>
+<a id="ad84f3b903d0508093d6e2a905198b438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad84f3b903d0508093d6e2a905198b438">&#9670;&nbsp;</a></span>doc_flux()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Z2ErrorEstimator::doc_flux </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>num_flux_terms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MapMatrixMixed.html">MapMatrixMixed</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> *, int, double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rec_flux_map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>elemental_error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Doc flux and recovered flux. </p>
+<p>Doc FE and recovered flux. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l01735">1735</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01375">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="mesh_8h_source.html#l01548">oomph::Mesh::communicator_pt()</a>, <a class="el" href="elements_8h_source.html#l02495">oomph::FiniteElement::dim()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00577">oomph::DocInfo::directory()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="elements_8h_source.html#l03006">oomph::FiniteElement::get_s_plot()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">oomph::ElementWithZ2ErrorEstimator::get_Z2_flux()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l03877">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="elements_8h_source.html#l03045">oomph::FiniteElement::nplot_points()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00595">oomph::DocInfo::number()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="elements_8h_source.html#l03018">oomph::FiniteElement::tecplot_zone_string()</a>, and <a class="el" href="elements_8h_source.html#l03031">oomph::FiniteElement::write_tecplot_zone_footer()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>.</p>
+
+</div>
+</div>
+<a id="a53d7a1ac66dd41b39d6794e1d00080fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53d7a1ac66dd41b39d6794e1d00080fc">&#9670;&nbsp;</a></span>get_combined_error_estimate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::Z2ErrorEstimator::get_combined_error_estimate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>compound_error</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return a combined error estimate from all compound errors. </p>
+<p>Return a combined error estimate from all compound flux errors The default is to return the maximum of the compound flux errors which will always force refinment if any field is above the single mesh error threshold and unrefinement if both are below the lower limit. Any other fancy combinations can be selected by specifying a user-defined combined estimate by setting a function pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00418">418</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00452">Combined_error_fct_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>.</p>
+
+</div>
+</div>
+<a id="aa38b3ecfbb223a91bfe049d4722af6d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa38b3ecfbb223a91bfe049d4722af6d3">&#9670;&nbsp;</a></span>get_element_errors() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Z2ErrorEstimator::get_element_errors </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>elemental_error</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the elemental error measures for a given mesh and store them in a vector. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00349">349</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00589">oomph::DocInfo::disable_doc()</a>.</p>
+
+</div>
+</div>
+<a id="ae0fd03123c518ed340bb534c2f6b8cc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0fd03123c518ed340bb534c2f6b8cc4">&#9670;&nbsp;</a></span>get_element_errors() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Z2ErrorEstimator::get_element_errors </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>elemental_error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the elemental error measures for a given mesh and store them in a vector. <br  />
+ If doc_info.enable_doc(), doc FE and recovered fluxes in. </p>
+<ul>
+<li>flux_fe*.dat</li>
+<li>flux_rec*.dat <br  />
+</li>
+</ul>
+<p>Get <a class="el" href="classoomph_1_1Vector.html">Vector</a> of Z2-based error estimates for all elements in mesh. If doc_info.is_doc_enabled()=true, doc FE and recovered fluxes in</p><ul>
+<li>flux_fe*.dat</li>
+<li>flux_rec*.dat <br  />
+ </li>
+</ul>
+
+<p>Implements <a class="el" href="classoomph_1_1ErrorEstimator.html#a77e85262d309d6e7da0ca71e98b7afff">oomph::ErrorEstimator</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00897">897</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01375">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="mesh_8h_source.html#l01548">oomph::Mesh::communicator_pt()</a>, <a class="el" href="elements_8h_source.html#l02495">oomph::FiniteElement::dim()</a>, <a class="el" href="error__estimator_8cc_source.html#l01735">doc_flux()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00188">elements</a>, <a class="el" href="error__estimator_8h_source.html#l00160">oomph::ElementWithZ2ErrorEstimator::geometric_jacobian()</a>, <a class="el" href="error__estimator_8cc_source.html#l00418">get_combined_error_estimate()</a>, <a class="el" href="error__estimator_8cc_source.html#l00614">get_recovered_flux_in_patch()</a>, <a class="el" href="error__estimator_8h_source.html#l00145">oomph::ElementWithZ2ErrorEstimator::get_Z2_compound_flux_indices()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">oomph::ElementWithZ2ErrorEstimator::get_Z2_flux()</a>, <a class="el" href="mesh_8h_source.html#l01715">oomph::Mesh::haloed_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01921">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8cc_source.html#l03877">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00592">oomph::DocInfo::is_doc_enabled()</a>, <a class="el" href="elements_8h_source.html#l01154">oomph::GeneralisedElement::is_halo()</a>, <a class="el" href="mesh_8h_source.html#l01536">oomph::Mesh::is_mesh_distributed()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00540">oomph::FiniteElement::J_eulerian()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00879">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="error__estimator_8h_source.html#l00121">oomph::ElementWithZ2ErrorEstimator::ncompound_fluxes()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="mesh_8h_source.html#l00586">oomph::Mesh::nnode()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00452">oomph::Mesh::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#af39480835bd3e0f6b2f4f7a9a4044798">oomph::ElementWithZ2ErrorEstimator::nrecovery_order()</a>, <a class="el" href="error__estimator_8cc_source.html#l00758">nrecovery_terms()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#ae82c5728902e13da31be19c390fc28e3">oomph::ElementWithZ2ErrorEstimator::num_Z2_flux_terms()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="error__estimator_8h_source.html#l00369">recovery_order()</a>, <a class="el" href="error__estimator_8h_source.html#l00435">Recovery_order</a>, <a class="el" href="error__estimator_8h_source.html#l00439">Recovery_order_from_first_element</a>, <a class="el" href="error__estimator_8h_source.html#l00449">Reference_flux_norm</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="error__estimator_8cc_source.html#l00459">setup_patches()</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="error__estimator_8cc_source.html#l00046">shape_rec()</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::W</a>, <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>, and <a class="el" href="nodes_8h_source.html#l00990">oomph::Node::x()</a>.</p>
+
+</div>
+</div>
+<a id="a0384127746b7eea7fcf0d08f2d34c647"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0384127746b7eea7fcf0d08f2d34c647">&#9670;&nbsp;</a></span>get_recovered_flux_in_patch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Z2ErrorEstimator::get_recovered_flux_in_patch </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>patch_el_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>num_recovery_terms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>num_flux_terms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>dim</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; *&amp;&#160;</td>
+          <td class="paramname"><em>recovered_flux_coefficient_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Given the vector of elements that make up a patch, the number of recovery and flux terms, and the spatial dimension of the problem, compute the matrix of recovered flux coefficients and return a pointer to it. </p>
+<p>Given the vector of elements that make up a patch, the number of recovery and flux terms, and the spatial dimension of the problem, compute the matrix of recovered flux coefficients and return a pointer to it. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00614">614</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="error__estimator_8h_source.html#l00160">oomph::ElementWithZ2ErrorEstimator::geometric_jacobian()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">oomph::ElementWithZ2ErrorEstimator::get_Z2_flux()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="error__estimator_8cc_source.html#l00252">integral_rec()</a>, <a class="el" href="elements_8cc_source.html#l03877">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00540">oomph::FiniteElement::J_eulerian()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="matrices_8cc_source.html#l00205">oomph::DenseDoubleMatrix::lubksub()</a>, <a class="el" href="matrices_8cc_source.html#l00195">oomph::DenseDoubleMatrix::ludecompose()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="error__estimator_8cc_source.html#l00046">shape_rec()</a>, <a class="el" href="quadtree_8h_source.html#l00056">oomph::QuadTreeNames::W</a>, and <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>.</p>
+
+</div>
+</div>
+<a id="ac53b6d73d9e73140c92302c2aa70203a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac53b6d73d9e73140c92302c2aa70203a">&#9670;&nbsp;</a></span>integral_rec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Integral.html">Integral</a> * oomph::Z2ErrorEstimator::integral_rec </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>dim</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>is_q_mesh</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Integation scheme associated with the recovery shape functions must be of sufficiently high order to integrate the mass matrix associated with the recovery shape functions. </p>
+<p>Integation scheme associated with the recovery shape functions must be of sufficiently high order to integrate the mass matrix associated with the recovery shape functions. The argument is the dimension of the elements. The integration is performed locally over the elements, so the integration scheme does depend on the geometry of the element. The type of element is specified by the boolean which is true if elements in the patch are QElements and false if they are TElements (will need change if we ever have other element types) </p>
+<p>Which spatial dimension are we dealing with?</p>
+<p>Find order of recovery shape functions</p>
+<p>Find order of recovery shape functions</p>
+<p>Find order of recovery shape functions</p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00252">252</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00369">recovery_order()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00614">get_recovered_flux_in_patch()</a>.</p>
+
+</div>
+</div>
+<a id="a1782984fa64738f9a8e7ca40d585597a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1782984fa64738f9a8e7ca40d585597a">&#9670;&nbsp;</a></span>nrecovery_terms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::Z2ErrorEstimator::nrecovery_terms </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>dim</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return number of coefficients for expansion of recovered fluxes for given spatial dimension of elements. (We use complete polynomials of the specified given order.) </p>
+<p>Number of coefficients for expansion of recovered fluxes for given spatial dimension of elements. Use complete polynomial of given order for recovery </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00758">758</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00435">Recovery_order</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00289">oomph::Global_string_for_annotation::string()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>.</p>
+
+</div>
+</div>
+<a id="a192eb7456b2174118b377bb74951dddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a192eb7456b2174118b377bb74951dddf">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Z2ErrorEstimator::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Z2ErrorEstimator.html">Z2ErrorEstimator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00339">339</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="af7a3a28cfc05b291b438b80e87c7f5cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7a3a28cfc05b291b438b80e87c7f5cc">&#9670;&nbsp;</a></span>recovery_order() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::Z2ErrorEstimator::recovery_order </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for order of recovery polynomials. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00369">369</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00435">Recovery_order</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>, <a class="el" href="error__estimator_8cc_source.html#l00252">integral_rec()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00046">shape_rec()</a>.</p>
+
+</div>
+</div>
+<a id="ad463b5c01e6bb5b9e4ec9b3a02f9fb4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad463b5c01e6bb5b9e4ec9b3a02f9fb4a">&#9670;&nbsp;</a></span>recovery_order() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::Z2ErrorEstimator::recovery_order </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for order of recovery polynomials (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00372">372</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00435">Recovery_order</a>.</p>
+
+</div>
+</div>
+<a id="a997dc6ba0b546a0f7363949a8d33d133"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a997dc6ba0b546a0f7363949a8d33d133">&#9670;&nbsp;</a></span>reference_flux_norm() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::Z2ErrorEstimator::reference_flux_norm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for prescribed reference flux norm <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00393">393</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00449">Reference_flux_norm</a>.</p>
+
+</div>
+</div>
+<a id="a4a7902d3e80dc64406e1f367c02ec4e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a7902d3e80dc64406e1f367c02ec4e3">&#9670;&nbsp;</a></span>reference_flux_norm() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::Z2ErrorEstimator::reference_flux_norm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for prescribed reference flux norm (const. version) </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00396">396</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00449">Reference_flux_norm</a>.</p>
+
+</div>
+</div>
+<a id="a5c8a3d6e46d9b9ba31c768cb5b026bba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c8a3d6e46d9b9ba31c768cb5b026bba">&#9670;&nbsp;</a></span>setup_patches()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Z2ErrorEstimator::setup_patches </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> *, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a> * &gt; * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>adjacent_elements_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vertex_node_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Setup patches: For each vertex node pointed to by nod_pt, adjacent_elements_pt[nod_pt] contains the pointer to the vector that contains the pointers to the elements that the node is part of. </p>
+<p>Setup patches: For each vertex node pointed to by nod_pt, adjacent_elements_pt[nod_pt] contains the pointer to the vector that contains the pointers to the elements that the node is part of. Also returns a <a class="el" href="classoomph_1_1Vector.html">Vector</a> of vertex nodes for use in get_element_errors. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00459">459</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02159">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02122">oomph::FiniteElement::node_pt()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#af39480835bd3e0f6b2f4f7a9a4044798">oomph::ElementWithZ2ErrorEstimator::nrecovery_order()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a19495a0e77ef4ff35f15fdf7913b4077">oomph::ElementWithZ2ErrorEstimator::nvertex_node()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, and <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a0eedccc33519f852c5dc2055ddf2774b">oomph::ElementWithZ2ErrorEstimator::vertex_node_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>.</p>
+
+</div>
+</div>
+<a id="ab57514ecde88f7ae970439fd4900996a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab57514ecde88f7ae970439fd4900996a">&#9670;&nbsp;</a></span>shape_rec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::Z2ErrorEstimator::shape_rec </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>dim</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>psi_r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recovery shape functions as functions of the global, Eulerian coordinate x of dimension dim. The recovery shape functions are complete polynomials of the order specified by Recovery_order. </p>
+<p>Recovery shape functions as functions of the global, Eulerian coordinate x of dimension dim. The recovery shape functions are complete polynomials of the order specified by Recovery_order. </p>
+<p>Which spatial dimension are we dealing with?</p>
+<p>Find order of recovery shape functions</p>
+<p>Find order of recovery shape functions</p>
+<p>Find order of recovery shape functions</p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00046">46</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00369">recovery_order()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00614">get_recovered_flux_in_patch()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a34a013732989e82f50cb7e72f25632a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34a013732989e82f50cb7e72f25632a7">&#9670;&nbsp;</a></span>Combined_error_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Z2ErrorEstimator.html#a75ef55e67b21ec49ed1a37d095cfa9f9">CombinedErrorEstimateFctPt</a> oomph::Z2ErrorEstimator::Combined_error_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to combined error estimator function. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00452">452</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00375">combined_error_fct_pt()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00418">get_combined_error_estimate()</a>.</p>
+
+</div>
+</div>
+<a id="a9aafff3d80518811ba7d9bb12a240a7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aafff3d80518811ba7d9bb12a240a7c">&#9670;&nbsp;</a></span>Recovery_order</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::Z2ErrorEstimator::Recovery_order</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Order of recovery polynomials. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00435">435</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>, <a class="el" href="error__estimator_8cc_source.html#l00758">nrecovery_terms()</a>, and <a class="el" href="error__estimator_8h_source.html#l00369">recovery_order()</a>.</p>
+
+</div>
+</div>
+<a id="afa024a307366bb987b1c9ba379b837e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa024a307366bb987b1c9ba379b837e8">&#9670;&nbsp;</a></span>Recovery_order_from_first_element</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::Z2ErrorEstimator::Recovery_order_from_first_element</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Bool to indicate if recovery order is to be read out from first element in mesh or set globally </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00439">439</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>.</p>
+
+</div>
+</div>
+<a id="aa170691c5d84fbf0eb6dc5f480bbb187"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa170691c5d84fbf0eb6dc5f480bbb187">&#9670;&nbsp;</a></span>Reference_flux_norm</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::Z2ErrorEstimator::Reference_flux_norm</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prescribed reference flux norm. </p>
+
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00449">449</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00897">get_element_errors()</a>, and <a class="el" href="error__estimator_8h_source.html#l00393">reference_flux_norm()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="error__estimator_8h_source.html">error_estimator.h</a></li>
+<li><a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a></li>
+</ul>
+</div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1Z2ErrorEstimator_html_a997dc6ba0b546a0f7363949a8d33d133"><div class="ttname"><a href="classoomph_1_1Z2ErrorEstimator.html#a997dc6ba0b546a0f7363949a8d33d133">oomph::Z2ErrorEstimator::reference_flux_norm</a></div><div class="ttdeci">double &amp; reference_flux_norm()</div><div class="ttdoc">Access function for prescribed reference flux norm</div><div class="ttdef"><b>Definition:</b> <a href="error__estimator_8h_source.html#l00393">error_estimator.h:393</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

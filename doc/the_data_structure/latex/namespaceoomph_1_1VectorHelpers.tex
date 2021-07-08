@@ -1,0 +1,156 @@
+\hypertarget{namespaceoomph_1_1VectorHelpers}{}\doxysection{oomph\+::Vector\+Helpers Namespace Reference}
+\label{namespaceoomph_1_1VectorHelpers}\index{oomph::VectorHelpers@{oomph::VectorHelpers}}
+
+
+Namespace for helper functions for \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$double$>$}}  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}{check\+\_\+lengths\+\_\+match}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Check the lengths if two Vectors are the same length. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Probably not always best/fastest because not optimised for dimension but useful... \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}{magnitude}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}})
+\begin{DoxyCompactList}\small\item\em Get the magnitude of a vector. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}{angle}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Get the angle between two vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}{cross}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&A, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&B, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&C)
+\begin{DoxyCompactList}\small\item\em Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok nowadays). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_aa016aa8f2db73ad16bf65c218e5e0da2}{cross}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&A, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&B)
+\begin{DoxyCompactList}\small\item\em Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok This calls the other cross(...) function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for helper functions for \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$double$>$}} 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}\label{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}} 
+\index{oomph::VectorHelpers@{oomph::VectorHelpers}!angle@{angle}}
+\index{angle@{angle}!oomph::VectorHelpers@{oomph::VectorHelpers}}
+\doxysubsubsection{\texorpdfstring{angle()}{angle()}}
+{\footnotesize\ttfamily double oomph\+::\+Vector\+Helpers\+::angle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{a,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the angle between two vector. 
+
+
+
+Definition at line 303 of file Vector.\+h.
+
+
+
+References a(), and dot().
+
+
+
+Referenced by oomph\+::\+Oc\+Tree\+::construct\+\_\+rotation\+\_\+matrix(), and oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal().
+
+\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}\label{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}} 
+\index{oomph::VectorHelpers@{oomph::VectorHelpers}!check\_lengths\_match@{check\_lengths\_match}}
+\index{check\_lengths\_match@{check\_lengths\_match}!oomph::VectorHelpers@{oomph::VectorHelpers}}
+\doxysubsubsection{\texorpdfstring{check\_lengths\_match()}{check\_lengths\_match()}}
+{\footnotesize\ttfamily void oomph\+::\+Vector\+Helpers\+::check\+\_\+lengths\+\_\+match (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{a,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check the lengths if two Vectors are the same length. 
+
+
+
+Definition at line 265 of file Vector.\+h.
+
+
+
+References a().
+
+
+
+Referenced by dot().
+
+\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_aa016aa8f2db73ad16bf65c218e5e0da2}\label{namespaceoomph_1_1VectorHelpers_aa016aa8f2db73ad16bf65c218e5e0da2}} 
+\index{oomph::VectorHelpers@{oomph::VectorHelpers}!cross@{cross}}
+\index{cross@{cross}!oomph::VectorHelpers@{oomph::VectorHelpers}}
+\doxysubsubsection{\texorpdfstring{cross()}{cross()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Vector\+Helpers\+::cross (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{B }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok This calls the other cross(...) function. 
+
+
+
+Definition at line 337 of file Vector.\+h.
+
+
+
+References oomph\+::\+Oc\+Tree\+Names\+::B, cross(), and oomph\+::output().
+
+\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}\label{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}} 
+\index{oomph::VectorHelpers@{oomph::VectorHelpers}!cross@{cross}}
+\index{cross@{cross}!oomph::VectorHelpers@{oomph::VectorHelpers}}
+\doxysubsubsection{\texorpdfstring{cross()}{cross()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Vector\+Helpers\+::cross (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{B,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{C }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok nowadays). 
+
+
+
+Definition at line 313 of file Vector.\+h.
+
+
+
+References oomph\+::\+Oc\+Tree\+Names\+::B.
+
+
+
+Referenced by oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), cross(), and oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal().
+
+\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}\label{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}} 
+\index{oomph::VectorHelpers@{oomph::VectorHelpers}!dot@{dot}}
+\index{dot@{dot}!oomph::VectorHelpers@{oomph::VectorHelpers}}
+\doxysubsubsection{\texorpdfstring{dot()}{dot()}}
+{\footnotesize\ttfamily double oomph\+::\+Vector\+Helpers\+::dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{a,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Probably not always best/fastest because not optimised for dimension but useful... 
+
+
+
+Definition at line 285 of file Vector.\+h.
+
+
+
+References a(), check\+\_\+lengths\+\_\+match(), and i.
+
+
+
+Referenced by angle(), oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+B\+J\+S\+\_\+\+F\+S\+I\+Element$<$ F\+L\+U\+I\+D\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T, P\+O\+R\+O\+E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+B\+U\+L\+K\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+volume\+\_\+flux(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Surface\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+D\+G\+Euler\+Face\+Reflection\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::interpolated\+\_\+u(), magnitude(), and oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::numerical\+\_\+flux().
+
+\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}\label{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}} 
+\index{oomph::VectorHelpers@{oomph::VectorHelpers}!magnitude@{magnitude}}
+\index{magnitude@{magnitude}!oomph::VectorHelpers@{oomph::VectorHelpers}}
+\doxysubsubsection{\texorpdfstring{magnitude()}{magnitude()}}
+{\footnotesize\ttfamily double oomph\+::\+Vector\+Helpers\+::magnitude (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the magnitude of a vector. 
+
+
+
+Definition at line 297 of file Vector.\+h.
+
+
+
+References a(), and dot().
+
+
+
+Referenced by oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), and oomph\+::\+C1\+Curved\+Element\+Shape$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::set\+\_\+of\+\_\+value().
+

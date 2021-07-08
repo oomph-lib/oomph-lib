@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: The static free surface bounding a layer of viscous fluid.</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: The static free surface bounding a layer of viscous fluid. </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="overview"></a>
+Overview of the problem</h1>
+<p>We consider an open rectangular container of unit width containing a still viscous fluid of prescribed volume <img class="formulaInl" alt="$ \mathcal{V} $" src="form_0.png"/> that meets the wall of the container at a contact angle <img class="formulaInl" alt="$ \theta_{c} $" src="form_1.png"/>. The external fluid is assumed to be inviscid and massless and acts only through an external pressure, <img class="formulaInl" alt="$ P_{\mbox{ext}} $" src="form_2.png"/>, at the bounding (free) surface of the viscous fluid. In the absence of any body forces or external forcing, a static solution is obtained in which the velocity field is zero, the fluid pressure is a constant, <img class="formulaInl" alt="$ P_{\mbox{fluid}} $" src="form_3.png"/>, and free surface is of constant curvature (an arc of a circle in two-dimensions), set by the contact angle and the geometry of the domain. From simple geometry, the mean curvature of the interface in the present problem is <img class="formulaInl" alt="$ \kappa = 1/r = 2\cos\theta_{c} $" src="form_4.png"/>, see the figure below. The pressure difference across the interface, <img class="formulaInl" alt="$ \Delta P = P_{\mbox{ext}} - P_{\mbox{fluid}} $" src="form_5.png"/>, then follows from the dynamic boundary condition.</p>
+<div class="image">
+<img src="sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the problem: the static interface curvature is set by the geometry </div></div>
+ <p>The governing equations are the Navier&ndash;Stokes equations together with the free surface boundary conditions at the upper surface, see <a href="../../single_layer_free_surface/html/index.html">another tutorial </a> for further details. As in that tutorial, we also compute the deformation of the internal fluid mesh by using a pseudo-solid node-update strategy.</p>
+<p>For simplicity, we assume symmetry of the domain about the vertical centreline of the container, which we choose to be the <img class="formulaInl" alt="$ x_{2} $" src="form_6.png"/>-axis; hence, the initial computational domain is <img class="formulaInl" alt="$ x_{1} \in [0,0.5],\ x_{2} \in [0,1] $" src="form_7.png"/>. The fluid boundary conditions are no slip, <img class="formulaInl" alt="$ u_{i} = 0 $" src="form_8.png"/>, on the container boundaries at <img class="formulaInl" alt="$ x_{2} =0 $" src="form_9.png"/> and <img class="formulaInl" alt="$ x_{1} = 0.5; $" src="form_10.png"/> and a symmetry condition at <img class="formulaInl" alt="$ x_{1} = 0 $" src="form_11.png"/>. Under the standard non-dimensionalisation the pressure difference over the interface is <img class="formulaInl" alt="$ \Delta P = 2\cos\theta_{c}/Ca $" src="form_12.png"/>, where <img class="formulaInl" alt="$ Ca $" src="form_13.png"/> is the capillary number, also defined in the other tutorial. In the present (static) example, the capillary number is a simple multiplicative factor that sets the pressure scale.</p>
+<p>There remain the two additional constraints that must be enforced:</p><ol type="1">
+<li>The fluid volume must be <img class="formulaInl" alt="$ \mathcal{V} $" src="form_0.png"/>.</li>
+<li>The contact angle where the fluid meets the container wall at <img class="formulaInl" alt="$ x_{1} = 0.5 $" src="form_14.png"/> must be <img class="formulaInl" alt="$ \theta_{c}. $" src="form_15.png"/></li>
+</ol>
+<h1><a class="anchor" id="vol_const"></a>
+Enforcing the volume constraint</h1>
+<p>For capillary-static problems, the fluid velocity field is zero and the continuity equation <img class="formulaInl" alt="$ \mbox{\boldmath$\nabla\cdot u$} = \mbox{\boldmath$0$} $" src="form_16.png"/> is trivially satisfied. Thus, conservation of mass is not guaranteed without an additional constraint. Mathematically speaking, the system is underdetermined and the equation associated with a pressure degree of freedom (either a fluid pressure or the external pressure) can be replaced by the additional volume constraint, specified by the equation:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{1}{2} \oint \mbox{\boldmath$x\cdot n$} \mbox{d} s = \frac{1}{2} \int \hspace{-0.25cm} \int \mbox{\boldmath$\nabla\cdot x$} \mbox{d} A = \int \hspace{-0.25cm} \int \mbox{d} A = \mathcal{V}. \]" src="form_17.png"/>
+</p>
+<p>MATTHIAS, see also the droplet/bubble problems.</p>
+<p>Perhaps the most natural implementation in the present problem is to fix a reference pressure value within the fluid and then to treat the external pressure as a degree of freedom with the volume constraint as the associated equation. Alternatively, the external pressure can be fixed at a reference pressure and an internal fluid pressure degree of freedom is then associated with the volume constraint. We shall demonstrate both methods in the driver code below.</p>
+<p>Computation of the above equation associated with the volume constraint is performed by specialised <code>LineVolumeConstraintBoundingElements</code> that must be attached to all boundaries that enclose the fluid.</p>
+<h1><a class="anchor" id="contact_angle"></a>
+Enforcing the contact angle constraint</h1>
+<p>Here the `&lsquo;natural&rsquo;' contact-angle boundary condition arises from the weak form of the dynamic boundary condition after integration using the surface divergence theorem. This leads to a term of the form</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{1}{Ca} \left[m_{i}\psi\right]_{\mbox{\boldmath$x$}_l}^{\mbox{\boldmath$x$}_{r}} \]" src="form_18.png"/>
+</p>
+<p> <br  />
+</p>
+<p>in the momentum equations associated with the boundaries of the free surface, where <img class="formulaInl" alt="$ \mbox{\boldmath$m$} $" src="form_19.png"/> is a unit vector tangential to the free surface at those boundaries.</p>
+<p>At the (left-hand) symmetry boundary, <img class="formulaInl" alt="$ \mbox{\boldmath$x$}_{l} $" src="form_20.png"/>, we neglect this additional term in the momentum equation associated with the tangential direction, which ensures that the interface is (weakly) normal to the symmetry boundary. At the (right-hand) container boundary, <img class="formulaInl" alt="$ \mbox{\boldmath$x$}_{r} $" src="form_21.png"/>, the contact angle could be enforced by adding a boundary term with prescribed <img class="formulaInl" alt="$ \mbox{\boldmath$m$} $" src="form_19.png"/>. In general, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{\boldmath$m$} = \cos\theta_{c} \mbox{\boldmath$n$}_{w} + \sin\theta_{c} \mbox{\boldmath$t$}_{w}, \]" src="form_22.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \mbox{\boldmath$n$}_{w} $" src="form_23.png"/> is the normal vector to the bounding wall directed out of the fluid and <img class="formulaInl" alt="$ \mbox{\boldmath$t$}_{w} $" src="form_24.png"/> is the tangent vector to the wall. In the present example, <img class="formulaInl" alt="$ \mbox{\boldmath$n$}_{w} = (1,0) $" src="form_25.png"/> and <img class="formulaInl" alt="$ \mbox{\boldmath$t$}_{w} = (0,1) $" src="form_26.png"/>, which gives <img class="formulaInl" alt="$ \mbox{\boldmath$m$} = (\cos\theta_{c}, \sin\theta_{c}) $" src="form_27.png"/>.</p>
+<p>Unfortunately, the no-slip boundary condition at the wall means that the momentum equation is not assembled at the interface boundaries. If we wanted to use this method of (weak) enforcement of the contact angle condition, the velocity degrees of freedom at the node on the right-hand end of the free surface must be unpinned, but the no-slip condition will then not be imposed. In fact, this problem is deeper than it might appear and is a manifestation of the failure of the continuum hypothesis to treat dynamic (moving) contact lines. The correct (mathematical) treatment of that problem is still unresolved, but in this static problem, there is an alternative treatment.</p>
+<p>Here, we can make use of the fact that the kinematic condition is also trivially satisfied because the velocity field is zero. Thus, we replace the kinematic condition associated with the right-most node on the interface by the (strong) condition that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \cos\theta_{c} = \mbox{\boldmath$n\cdot n$}_{w}, \]" src="form_28.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \mbox{\boldmath$n$} $" src="form_29.png"/> is the outer unit normal to the free surface and <img class="formulaInl" alt="$ \mbox{\boldmath$n$}_{w} $" src="form_23.png"/> is the unit normal to the bounding wall directed out of the fluid, as before.</p>
+<p>The imposition of the contact angle condition is implemented within <code>FluidInterfaceBoundingElements</code> that are <code>FaceElements</code> of the <code>FluidInterfaceElements</code>; in other words, they are elements that are two spatial dimensions lower than the bulk elements. In two-dimensional problems, the <code>FluidInterfaceBoundingElement's</code> are <code>PointElements</code>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="global"></a>
+Problem Parameters</h1>
+<p>We use a namespace to define the parameters for the pseudo-solid mesh constitutive law used in the problem and a function that defines the outer unit normal to the container boundary which is <img class="formulaInl" alt="$ (1,0) $" src="form_30.png"/>. The other problem parameters: the contact angle, prescribed volume and capillary number, are specified as member data of the problem class, see below, so that they will be re-initialised when different instances of the class are constructed.</p>
+ <div class="fragment"><div class="line"><span class="comment">//====start_of_namespace=================================</span></div>
+<div class="line"><span class="comment">/// Namespace for phyical parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pseudo-solid Poisson ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a>=0.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Direction of the wall normal vector</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;double&gt; <a class="code" href="namespaceGlobal__Physical__Variables.html#af3a3b98f9f5b354d01228884e49c5bf0">Wall_normal</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Function that specifies the wall unit normal</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a0d48e8726fa485de2b2df2d5031ec41b">wall_unit_normal_fct</a>(<span class="keyword">const</span> Vector&lt;double&gt; &amp;x, </div>
+<div class="line">                      Vector&lt;double&gt; &amp;normal)</div>
+<div class="line"> {</div>
+<div class="line">  normal=<a class="code" href="namespaceGlobal__Physical__Variables.html#af3a3b98f9f5b354d01228884e49c5bf0">Wall_normal</a>;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_namespace</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="driver"></a>
+The driver code</h1>
+<p>We shall solve the problem twice, once using the external pressure as the degree of freedom associated with the volume constraint and once using an internal fluid pressure degree of freedom instead. The choice of which degree of freedom to use is determined by the boolean flag passed to the problem constructor. The driver consists of a simple loop to cover both possibilities, construction of the problem and then a call to run the parameter study with different output directories in each case.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_main=======================================================</span></div>
+<div class="line"><span class="comment">///Main driver: Build problem and initiate parameter study</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="static__single__layer_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Solve the pseudosolid problem twice, once hijacking an internal, once</span></div>
+<div class="line"> <span class="comment">// hijacking the external pressure</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">bool</span> hijack_internal=<span class="keyword">false</span>;</div>
+<div class="line">   <span class="keywordflow">if</span> (i==1) hijack_internal=<span class="keyword">true</span>;</div>
+<div class="line">   <span class="comment">//Construct the problem</span></div>
+<div class="line">   <a class="code" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt;Hijacked&lt;</div>
+<div class="line">     PseudoSolidNodeUpdateElement&lt;QCrouzeixRaviartElement&lt;2&gt;,</div>
+<div class="line">    QPVDElementWithPressure&lt;2&gt; &gt; &gt; &gt;  <a class="code" href="static__single__layer_8txt.html#ad5a3a79ccd456b86a8784d9f501d4588">problem</a>(hijack_internal);</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordtype">string</span> dir_name=<span class="stringliteral">&quot;RESLT_elastic_hijacked_external&quot;</span>;</div>
+<div class="line">   <span class="keywordflow">if</span> (i==1) dir_name=<span class="stringliteral">&quot;RESLT_elastic_hijacked_internal&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Do parameter study</span></div>
+<div class="line">   <a class="code" href="static__single__layer_8txt.html#ad5a3a79ccd456b86a8784d9f501d4588">problem</a>.parameter_study(dir_name);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_main</span></div>
+</div><!-- fragment --><p>The elements are <code>Hijacked</code> <code>PseudoSolidNodeUpdate</code> <code>QCrouzeixRaviart</code> type elements, where the <code>Hijacked</code> actually required only in the case when an internal pressure degree of freedom is to be used to enforce the volume constraint, see below.</p>
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class consists of a constructor that takes the aforementioned boolean flag to determine which pressure degree of freedom to use for the volume constraint; a destructor to clean up all memory allocated during the problem construction; a function that performs a parameter study, decreasing the contact angle from <img class="formulaInl" alt="$ \theta_{c} = 90^{\circ} $" src="form_31.png"/> in steps of <img class="formulaInl" alt="$ 5^{\circ} $" src="form_32.png"/>; and a function that documents the solution.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===========start_of_pseudo_elastic_class====================================</span></div>
+<div class="line"><span class="comment">///\short A class that solves the Navier--Stokes equations</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///to compute the shape of a static interface in a rectangular container</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///with imposed contact angle at the boundary.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//============================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Constructor: Boolean flag indicates if volume constraint is</span></div>
+<div class="line"><span class="comment"> ///applied by hijacking internal or external pressure</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classPseudoSolidCapProblem.html#a4ac05a07dd55950bb67f7f79cb9fbb77">PseudoSolidCapProblem</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; hijack_internal);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor: clean up memory allocated by the object</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classPseudoSolidCapProblem.html#aec2a79e44dfd785b2978419210b053b8">~PseudoSolidCapProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Peform a parameter study: Solve problem for a range of contact angles</span></div>
+<div class="line"><span class="comment"> /// Pass name of output directory as a string</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPseudoSolidCapProblem.html#ae86ecaf62fa0920f5d14bf82a7f83b0e">parameter_study</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; dir_name);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPseudoSolidCapProblem.html#a2fb98a37bde5742cbdf3c91cb1f5eb2f">doc_solution</a>(DocInfo&amp; doc_info);</div>
+</div><!-- fragment --><p>There are also three helper functions that are used to create the <code>FaceElements</code> used to enforce the additional boundary conditions and constraints. The function <code>create_free_surface_elements()</code> adds <code>ElasticLineFluidInterfaceElements</code> to the upper boundary (boundary 2) of the mesh, exactly as in <a href="../../single_layer_free_surface/html/index.html">another tutorial </a>. The function <code>create_volume_constraint_elements()</code> constructs the elements required to enforce the volume constraint. Finally, the function <code>create_contact_angle_element()</code> constructs the <code>PointElement</code> that enforces the contact angle condition at the solid wall of the container.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Create the free surface elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> create_free_surface_elements();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create the volume constraint elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> create_volume_constraint_elements();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create the contact angle element</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> create_contact_angle_element();</div>
+</div><!-- fragment --><p>Finally, the class has member data corresponding to the physical variables of the problem and provides permanent storage for pointers to the data that stores the external pressure and the data for the pressure degree of freedom that will be "traded" for the volume constraint. In additional, an output stream and pointers to the different meshes that will be assembled in the problem are also included.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The Capillary number </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Ca;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The prescribed volume of the fluid</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Volume;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The external pressure</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Pext;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The contact angle</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Angle;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constitutive law used to determine the mesh deformation</span></div>
+<div class="line"><span class="comment"></span> ConstitutiveLaw *Constitutive_law_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Data object whose single value stores the external pressure</span></div>
+<div class="line"><span class="comment"></span> Data* External_pressure_data_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pointer to the (single valued) Data item that</span></div>
+<div class="line"> <span class="comment">// will contain the pressure value that we&#39;re</span></div>
+<div class="line"> <span class="comment">// trading for the volume constraint</span></div>
+<div class="line"> Data* Traded_pressure_data_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream Trace_file;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Storage for the bulk mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* Bulk_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Storage for the free surface mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* Free_surface_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Storage for the element bounding the free surface</span></div>
+<div class="line"><span class="comment"></span> Mesh* Free_surface_bounding_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Storage for the elements that compute the enclosed volume</span></div>
+<div class="line"><span class="comment"></span> Mesh* Volume_computation_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Storage for the volume constraint</span></div>
+<div class="line"><span class="comment"></span> Mesh* Volume_constraint_mesh_pt;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">//end_of_pseudo_solid_problem_class</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>The constructor first initialises the member data and sets the outer unit normal to the wall to be <img class="formulaInl" alt="$ (1,0) $" src="form_30.png"/>. The initial contact angle is set to be <img class="formulaInl" alt="$ 90^{\circ} $" src="form_33.png"/>, so that the interface will be horizontal.</p>
+<div class="fragment"><div class="line"><span class="comment">//============start_of_constructor=====================================</span></div>
+<div class="line"><span class="comment">/// Constructor: Pass boolean flag to indicate if the volume</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// constraint is applied by hijacking an internal pressure</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// or the external pressure</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classPseudoSolidCapProblem.html#a4ac05a07dd55950bb67f7f79cb9fbb77">PseudoSolidCapProblem&lt;ELEMENT&gt;::PseudoSolidCapProblem</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; hijack_internal) :</div>
+<div class="line"> Ca(2.1),       <span class="comment">//Initialise value of Ca to some random value</span></div>
+<div class="line"> Volume(0.5),   <span class="comment">//Initialise the value of the volume </span></div>
+<div class="line"> Pext(1.23),    <span class="comment">//Initialise the external pressure to some random value</span></div>
+<div class="line"> Angle(0.5*MathematicalConstants::Pi) <span class="comment">//Initialise the contact angle</span></div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Set the wall normal</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#af3a3b98f9f5b354d01228884e49c5bf0">Global_Physical_Variables::Wall_normal</a>.resize(2);</div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#af3a3b98f9f5b354d01228884e49c5bf0">Global_Physical_Variables::Wall_normal</a>[0] = 1.0; </div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#af3a3b98f9f5b354d01228884e49c5bf0">Global_Physical_Variables::Wall_normal</a>[1] = 0.0;</div>
+</div><!-- fragment --><p>Next, a <img class="formulaInl" alt="$ 4 \times 4 $" src="form_34.png"/> element rectangular mesh is constructed on the undeformed domain.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in the horizontal direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nx=4;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in the vertical direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nh=4;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Halfwidth of domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> half_width=0.5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Construct mesh</span></div>
+<div class="line"> Bulk_mesh_pt = <span class="keyword">new</span> ElasticRectangularQuadMesh&lt;ELEMENT&gt;(nx,nh,half_width,1.0);</div>
+</div><!-- fragment --><p>A <code>Data</code> object containing a single value is constructed to store the external pressure and the initial value is set.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Create a Data object whose single value stores the</span></div>
+<div class="line"> <span class="comment">//external pressure</span></div>
+<div class="line"> External_pressure_data_pt = <span class="keyword">new</span> Data(1);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set external pressure</span></div>
+<div class="line"> External_pressure_data_pt-&gt;set_value(0,Pext);</div>
+</div><!-- fragment --><p><a class="anchor" id="hijack"></a> We next setup the reference pressure and traded pressure. If we are using the external pressure as the reference pressure, then we pin it and set an internal pressure degree of freedom as the "traded" pressure. In order to use an internal pressure degree of freedom as the "traded" pressure, we must ensure that the original associated (continuity) equation is not assembled, but that the degree of freedom is still treated a fluid pressure variable when assembling the other residuals within the element. In addition, we will also need direct access to the data and its global equation number. The appropriate machinery is provided by the <code>Hijacked</code> wrapper class which allows variables within an underlying element to be "hijacked". The bulk elements are of <code>QCrouzeixRaviart</code> type, which means that the pressure variables are internal data and we hijack the first of these in the first element (although any would do). The function <code>hijack_internal_value</code>(..) instructs the bulk element to null out any contributions to the residuals and Jacobian matrix associated with that global equation number and returns a "custom" <code>Data</code> object that consists of a single value corresponding to the "hijacked" value and its global equation number. The "custom" <code>Data</code> object can then be used as external data in other elements that assemble the new residuals. It is important that any hijacked degrees of freedom must have residual contributions provided by another element otherwise the system Jacobian matrix will be singular. For more details about "hijacking" see <a href="../../../hijacking/html/index.html">this document. </a></p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Which pressure are we trading for the volume constraint: We </span></div>
+<div class="line"> <span class="comment">// can either hijack an internal pressure or use the external pressure.</span></div>
+<div class="line"> <span class="keywordflow">if</span> (hijack_internal)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// The external pressure is pinned -- the external pressure</span></div>
+<div class="line">   <span class="comment">// sets the pressure throughout the domain -- we do not have</span></div>
+<div class="line">   <span class="comment">// the liberty to fix another pressure value!</span></div>
+<div class="line">   External_pressure_data_pt-&gt;pin(0);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Hijack one of the pressure values in the fluid and use it </span></div>
+<div class="line">   <span class="comment">//as the pressure whose value is determined by the volume constraint.</span></div>
+<div class="line">   <span class="comment">//(Its value will affect the residual of that element but it will not</span></div>
+<div class="line">   <span class="comment">//be determined by it, i.e. it&#39;s hijacked).</span></div>
+<div class="line">   Traded_pressure_data_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Bulk_mesh_pt-&gt;element_pt(0))-&gt;hijack_internal_value(0,0);</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>If we are using an internal pressure as the reference pressure then the external pressure is a degree of freedom and must be added as global data of the problem. The "traded" pressure is the external pressure and an internal fluid pressure is fixed to have the value zero.</p>
+<div class="fragment"><div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Regard the external pressure is an unknown and add</span></div>
+<div class="line">   <span class="comment">// it to the problem&#39;s global data so it gets included</span></div>
+<div class="line">   <span class="comment">// in the equation numbering. Note that, at the moment,</span></div>
+<div class="line">   <span class="comment">// there&#39;s no equation that determines its value!</span></div>
+<div class="line">   add_global_data(External_pressure_data_pt);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Declare the external pressure to be the pressure determined</span></div>
+<div class="line">   <span class="comment">// by the volume constraint, i.e. the pressure that&#39;s &quot;traded&quot;:</span></div>
+<div class="line">   Traded_pressure_data_pt = External_pressure_data_pt;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Since the external pressure is &quot;traded&quot; for the volume constraint,</span></div>
+<div class="line">   <span class="comment">// it no longer sets the overall pressure, and we </span></div>
+<div class="line">   <span class="comment">// can add an arbitrary constant to all pressures. To make </span></div>
+<div class="line">   <span class="comment">// the solution unique, we pin a single pressure value in the bulk: </span></div>
+<div class="line">   <span class="comment">// We arbitrarily set the pressure dof 0 in element 0 to zero.</span></div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(0))-&gt;fix_pressure(0,0.0);</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>We then build the constitutive law that determines the fluid mesh motion and assign it to the bulk elements.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Set the constituive law</span></div>
+<div class="line"> Constitutive_law_pt = </div>
+<div class="line">  <span class="keyword">new</span> GeneralisedHookean(&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the elements to set the consitutive law and jacobian</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_bulk = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_bulk;e++)</div>
+<div class="line">  {</div>
+<div class="line">   ELEMENT* el_pt = </div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   el_pt-&gt;constitutive_law_pt() = Constitutive_law_pt;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>We next set the fluid boundary conditions by pinning both velocity components on the base and side of the container (boundaries 0 and 1) and the horizontal velocity only on the symmetry line (boundary 3). The upper free surface (boundary 2) remains free.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Set the boundary conditions</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Fluid velocity conditions</span></div>
+<div class="line"> <span class="comment">//Pin the velocities on all boundaries apart from the free surface</span></div>
+<div class="line"> <span class="comment">//(boundary 2) where all velocities are free, and apart from the symmetry</span></div>
+<div class="line"> <span class="comment">//line (boundary 3) where only the horizontal velocity is pinned</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_bound=Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> b=0;b&lt;n_bound;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">if</span> (b!=2)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Find the number of nodes on the boundary</span></div>
+<div class="line">     <span class="keywordtype">unsigned</span> n_boundary_node = Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line">     <span class="comment">//Loop over the nodes on the boundary</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_boundary_node;n++)</div>
+<div class="line">      {</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin(0);</div>
+<div class="line">       <span class="keywordflow">if</span> (b!=3)</div>
+<div class="line">        {</div>
+<div class="line">         Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin(1);</div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">//end_of_fluid_boundary_conditions</span></div>
+</div><!-- fragment --><p>The boundary conditions for the pseudo-solid mesh have a certain amount of ambiguity. We choose the least restrictive boundary conditions and enforce that the nodes cannot move away from the container boundaries, but can slide tangentially. Thus the vertical displacement is pinned on boundary 0 and the horizontal displacement is pinned on boundaries 1 and 3.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//PesudoSolid boundary conditions</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> b=0;b&lt;n_bound;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">if</span> (b!=2)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Find the number of nodes on the boundary</span></div>
+<div class="line">     <span class="keywordtype">unsigned</span> n_boundary_node = Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line">     <span class="comment">//Loop over the nodes on the boundary</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_boundary_node;n++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">//Pin vertical displacement on the bottom</span></div>
+<div class="line">       <span class="keywordflow">if</span>(b==0)</div>
+<div class="line">        {</div>
+<div class="line">         <span class="keyword">static_cast&lt;</span>SolidNode*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;boundary_node_pt(b,n))</div>
+<div class="line">          -&gt;pin_position(1);</div>
+<div class="line">        }</div>
+<div class="line">       <span class="keywordflow">if</span>((b==1) || (b==3))</div>
+<div class="line">        {</div>
+<div class="line">         <span class="comment">//Pin horizontal displacement on the sizes</span></div>
+<div class="line">         <span class="keyword">static_cast&lt;</span>SolidNode*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;boundary_node_pt(b,n))</div>
+<div class="line">          -&gt;pin_position(0);</div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="comment">//end_of_solid_boundary_conditions</span></div>
+</div><!-- fragment --><p>In order to reduce the number of degrees of freedom we further constrain the nodes to move only in the vertical direction by pinning all horizontal displacements.</p>
+<div class="fragment"><div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Constrain all nodes only to move vertically (not horizontally)</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="keyword">static_cast&lt;</span>SolidNode*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;node_pt(n))-&gt;pin_position(0);</div>
+<div class="line">   }</div>
+<div class="line"> } <span class="comment">//end_of_constraint</span></div>
+</div><!-- fragment --><p>Finally, we call the helper functions to construct the additional elements, add all sub meshes to the problem, build the global mesh and assign equation numbers.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Create the free surface elements</span></div>
+<div class="line"> create_free_surface_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Create the volume constraint elements</span></div>
+<div class="line"> create_volume_constraint_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Need to make the bounding element</span></div>
+<div class="line"> create_contact_angle_element();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now need to add all the meshes</span></div>
+<div class="line"> this-&gt;add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"> this-&gt;add_sub_mesh(Free_surface_mesh_pt);</div>
+<div class="line"> this-&gt;add_sub_mesh(Volume_computation_mesh_pt);</div>
+<div class="line"> this-&gt;add_sub_mesh(Volume_constraint_mesh_pt);</div>
+<div class="line"> this-&gt;add_sub_mesh(Free_surface_bounding_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//and build the global mesh</span></div>
+<div class="line"> this-&gt;build_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Setup all the equation numbering and look-up schemes </span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Number of unknowns: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_constructor</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="elements"></a>
+Creating the additional elements</h1>
+<h2><a class="anchor" id="free"></a>
+Free surface elements</h2>
+<p>The free surface elements are created in exactly the same way as in <a href="../../single_layer_free_surface/html/index.html">another tutorial </a>. The only difference is that the construction takes place within the function <code>create_free_surface_elements()</code> rather than within the constructor directly.</p>
+<h2><a class="anchor" id="vol"></a>
+Volume constraint elements</h2>
+<p>The volume constraint condition is enforced by two different types of element. A single <code>GeneralisedElement</code> that stores the prescribed volume and the <code>Data</code> that is traded for the volume constraint. We first create this <code>VolumeConstraintElement</code> and add it to the <code>Mesh</code> addressed by the <code>Volume_constraint_mesh_pt</code>.</p>
+<div class="fragment"><div class="line"><span class="comment">//============start_of_create_volume_constraint_elements==================</span></div>
+<div class="line"><span class="comment">/// Create the volume constraint elements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPseudoSolidCapProblem.html#a0289801610e2bc864c67d4d8557d56b1">PseudoSolidCapProblem&lt;ELEMENT&gt;::create_volume_constraint_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Build the single volume constraint element</span></div>
+<div class="line"> Volume_constraint_mesh_pt = <span class="keyword">new</span> Mesh;</div>
+<div class="line"> VolumeConstraintElement* vol_constraint_element = </div>
+<div class="line">  <span class="keyword">new</span> VolumeConstraintElement(&amp;Volume,Traded_pressure_data_pt,0);</div>
+<div class="line"> Volume_constraint_mesh_pt-&gt;add_element_pt(vol_constraint_element);</div>
+</div><!-- fragment --><p>We next build and attach <code>ElasticLineVolumeConstraintBoundingElements</code> to all the boundaries of the domain. These elements compute the contribution to the boundary integral with integrand <img class="formulaInl" alt="$ \mbox{\boldmath$x\cdot n$} $" src="form_35.png"/>, described above. The sign convention is chosen so that these element will return a positive volume. The "master" <code>VolumeConstraintElement</code> must be passed to each <code>FaceElement</code> so that the <code>Data</code> traded for the volume constraint is consistent between all elements.</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line">  <span class="comment">//Now create the volume computation elements</span></div>
+<div class="line">  Volume_computation_mesh_pt = <span class="keyword">new</span> Mesh;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Loop over all boundaries</span></div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;4;b++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">// How many bulk fluid elements are adjacent to boundary b?</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> n_element = Bulk_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Loop over the bulk fluid elements adjacent to boundary b?</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">     {</div>
+<div class="line">      <span class="comment">// Get pointer to the bulk fluid element that is </span></div>
+<div class="line">      <span class="comment">// adjacent to boundary b</span></div>
+<div class="line">      ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">//Find the index of the face of element e along boundary b</span></div>
+<div class="line">      <span class="keywordtype">int</span> face_index = Bulk_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// Create new element</span></div>
+<div class="line">      ElasticLineVolumeConstraintBoundingElement&lt;ELEMENT&gt;* el_pt =</div>
+<div class="line">       <span class="keyword">new</span> ElasticLineVolumeConstraintBoundingElement&lt;ELEMENT&gt;(</div>
+<div class="line">        bulk_elem_pt,face_index);   </div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">//Set the &quot;master&quot; volume control element</span></div>
+<div class="line">      el_pt-&gt;set_volume_constraint_element(vol_constraint_element);</div>
+<div class="line">     </div>
+<div class="line">      <span class="comment">// Add it to the mesh</span></div>
+<div class="line">      Volume_computation_mesh_pt-&gt;add_element_pt(el_pt);     </div>
+<div class="line">     }</div>
+<div class="line">   }</div>
+<div class="line">} <span class="comment">//end_of_create_volume_constraint_elements</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="contact"></a>
+Contact angle elements</h2>
+<p>The single contact angle (point) element is constructed from the free surface element via the function <code>make_bounding_element</code>(..) which takes an integer specifying which face to use. In this problem, the right-hand-side (face 1) of the final free surface element is the contact point. The contact angle, capillary number and wall normal must be passed to the element which is then added to the appropriate <code>Mesh</code>. In general the wall normal can very with position, so it is passed as a function pointer.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment">//==========start_of_create_contact_angle_elements========================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Create the contact angle element</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPseudoSolidCapProblem.html#a8f28ebf09bc66142725139291b4e21a0">PseudoSolidCapProblem&lt;ELEMENT&gt;::create_contact_angle_element</a>()</div>
+<div class="line">{</div>
+<div class="line"> Free_surface_bounding_mesh_pt = <span class="keyword">new</span> Mesh;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find the element at the end of the free surface</span></div>
+<div class="line"> <span class="comment">//The elements are assigned in order of increasing x coordinate</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_free_surface = Free_surface_mesh_pt-&gt;nelement();</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">//Make the bounding element for the contact angle constraint</span></div>
+<div class="line"> <span class="comment">//which works because the order of elements in the mesh is known</span></div>
+<div class="line"> FluidInterfaceBoundingElement* el_pt = </div>
+<div class="line">  <span class="keyword">dynamic_cast&lt;</span>ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span> </div>
+<div class="line">  (Free_surface_mesh_pt-&gt;element_pt(n_free_surface-1))-&gt;</div>
+<div class="line">  make_bounding_element(1);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set the contact angle (strong imposition)</span></div>
+<div class="line"> el_pt-&gt;set_contact_angle(&amp;Angle);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set the capillary number</span></div>
+<div class="line"> el_pt-&gt;ca_pt() = &amp;Ca;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set the wall normal of the external boundary</span></div>
+<div class="line"> el_pt-&gt;wall_unit_normal_fct_pt() </div>
+<div class="line">  =  &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a0d48e8726fa485de2b2df2d5031ec41b">Global_Physical_Variables::wall_unit_normal_fct</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Add the element to the mesh</span></div>
+<div class="line"> Free_surface_bounding_mesh_pt-&gt;add_element_pt(el_pt);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_create_contact_angle_element</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="parameter"></a>
+The parameter study</h1>
+<p>The <code>parameter_study</code>(..) function creates a <code>DocInfo</code> object and opens a filestream for the trace file using the directory name specified by the input string argument.</p>
+<div class="fragment"><div class="line"><span class="comment">//================start_of_parameter_study===========================</span></div>
+<div class="line"><span class="comment">/// Perform a parameter study. Pass name of output directory as </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// a string</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPseudoSolidCapProblem.html#ae86ecaf62fa0920f5d14bf82a7f83b0e">PseudoSolidCapProblem&lt;ELEMENT&gt;::parameter_study</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; dir_name)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Create DocInfo object (allows checking if output directory exists)</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> doc_info.set_directory(dir_name);</div>
+<div class="line"> doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];   </div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+</div><!-- fragment --><p>We then solve the problem six times, decreasing the contact angle between each solution and documenting the solution after each solve.</p>
+<div class="fragment"><div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;6;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Solve the problem</span></div>
+<div class="line">   steady_newton_solve();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Output result</span></div>
+<div class="line">   doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Bump up counter</span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Decrease the contact angle</span></div>
+<div class="line">   Angle -= 5.0*MathematicalConstants::Pi/180.0;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The <code>doc_solution</code> function writes the bulk fluid mesh into an output file and then writes data into the trace file. The final two entries in the trace file are the computed pressure drop across the interface and the corresponding analytic prediction. Thus, comparison of these two entries determines the accuracy of the computation.</p>
+<div class="fragment"><div class="line"><span class="comment">//==============start_of_doc_solution=====================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPseudoSolidCapProblem.html#a2fb98a37bde5742cbdf3c91cb1f5eb2f">PseudoSolidCapProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">//Output stream</span></div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output domain</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of interface elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ninterface=Free_surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="comment">//Find number of nodes in the last interface element</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> np = Free_surface_mesh_pt-&gt;finite_element_pt(ninterface-1)-&gt;nnode();</div>
+<div class="line"> <span class="comment">// Document the contact angle (in degrees), the height of the interface at </span></div>
+<div class="line"> <span class="comment">// the centre of the container, the height at the wall, the computed </span></div>
+<div class="line"> <span class="comment">// pressure drop across the interface and </span></div>
+<div class="line"> <span class="comment">// the analytic prediction of the pressure drop.</span></div>
+<div class="line"> Trace_file &lt;&lt; Angle*180.0/MathematicalConstants::Pi;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot; &quot;</span>  &lt;&lt; Free_surface_mesh_pt-&gt;finite_element_pt(0)</div>
+<div class="line">  -&gt;node_pt(0)-&gt;x(1)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; Free_surface_mesh_pt-&gt;finite_element_pt(ninterface-1)</div>
+<div class="line">  -&gt;node_pt(np-1)-&gt;x(1);</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(0))-&gt;p_nst(0)-</div>
+<div class="line">               External_pressure_data_pt-&gt;value(0);</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; -2.0*cos(Angle)/Ca;</div>
+<div class="line"> Trace_file &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_doc_solution</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="com"></a>
+Comments</h2>
+<ul>
+<li>The driver code also contains an alternative formulation in which <code>SpineElements</code> are used to determine the deformation of the fluid mesh. The formulation is somewhat more cumbersome because the permitted deformation must be specified for each different problem and is specifically tied to a given domain geometry. The overall approach is exactly the same and large sections of the code are identical. The advantage of using <code>SpineElements</code> is that fewer degrees of freedom are required to update the position of the fluid mesh.</li>
+<li>The weak imposition of the contact angle condition is enabled by passing an optional boolean flag when setting the contact angle <div class="fragment"><div class="line">el_pt-&gt;set_contact_angle(&amp;Angle,<span class="keyword">false</span>);</div>
+</div><!-- fragment --> If a contact angle is not set then the <code>FluidInterfaceBoundingElement</code> will construct and add the appropriate boundary term to the momentum equation which may be required if another equation is used to prescribe the contact angle indirectly.</li>
+<li>An equivalent problem using <a href="../../../axisym_navier_stokes/axi_static_cap/html/index.html">an axisymmetric formulation </a> of the governing equations is also included within the library. The only physical difference is that the pressure drop in the axisymmetric problem is twice that of the two-dimensional problem because the mean curvature of the sphere is twice that of a circle of equivalent radius.</li>
+</ul>
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ol type="1">
+<li>Confirm that the computed pressure differences agree with the analytic expression. Verify that the interface shape is unaffected by the capillary number, but that the pressure difference across the interface changes in inverse proportion to it. Check that the pressure difference is unaffected by the choice of reference pressure.<br  />
+<br  />
+</li>
+<li>Relax the constraint that the nodes can only move vertically. What happens to the mesh? Explain your result.<br  />
+<br  />
+</li>
+<li>Investigate what happens when the volume constraint is not imposed.<br  />
+<br  />
+</li>
+<li>Try to impose the contact angle condition weakly by unpinning the fluid velocities at the contact point. Is there any difference between the cases when internal and external pressure degrees of freedom are traded for the volume constraint? <br  />
+<br  />
+</li>
+<li>Modify the problem so that the bounding wall lies at a fixed nonzero angle to the vertical. Determine the interface curvature in this case and confirm that the computation agrees with your modified analytic prediction.<br  />
+<br  />
+</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/navier_stokes/static_cap/">demo_drivers/navier_stokes/static_cap/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/navier_stokes/static_cap/static_single_layer.cc">demo_drivers/navier_stokes/static_cap/static_single_layer.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a0d48e8726fa485de2b2df2d5031ec41b"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a0d48e8726fa485de2b2df2d5031ec41b">Global_Physical_Variables::wall_unit_normal_fct</a></div><div class="ttdeci">void wall_unit_normal_fct(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;normal)</div><div class="ttdoc">Function that specifies the wall unit normal.</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00062">static_single_layer.cc:62</a></div></div>
+<div class="ttc" id="aclassPseudoSolidCapProblem_html_ae86ecaf62fa0920f5d14bf82a7f83b0e"><div class="ttname"><a href="classPseudoSolidCapProblem.html#ae86ecaf62fa0920f5d14bf82a7f83b0e">PseudoSolidCapProblem::parameter_study</a></div><div class="ttdeci">void parameter_study(const string &amp;dir_name)</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00925">static_single_layer.cc:925</a></div></div>
+<div class="ttc" id="aclassPseudoSolidCapProblem_html_a2fb98a37bde5742cbdf3c91cb1f5eb2f"><div class="ttname"><a href="classPseudoSolidCapProblem.html#a2fb98a37bde5742cbdf3c91cb1f5eb2f">PseudoSolidCapProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00967">static_single_layer.cc:967</a></div></div>
+<div class="ttc" id="astatic__single__layer_8txt_html_ad5a3a79ccd456b86a8784d9f501d4588"><div class="ttname"><a href="static__single__layer_8txt.html#ad5a3a79ccd456b86a8784d9f501d4588">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8txt_source.html#l00010">static_single_layer.txt:10</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_af3a3b98f9f5b354d01228884e49c5bf0"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#af3a3b98f9f5b354d01228884e49c5bf0">Global_Physical_Variables::Wall_normal</a></div><div class="ttdeci">Vector&lt; double &gt; Wall_normal</div><div class="ttdoc">Direction of the wall normal vector.</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00059">static_single_layer.cc:59</a></div></div>
+<div class="ttc" id="aclassPseudoSolidCapProblem_html_a0289801610e2bc864c67d4d8557d56b1"><div class="ttname"><a href="classPseudoSolidCapProblem.html#a0289801610e2bc864c67d4d8557d56b1">PseudoSolidCapProblem::create_volume_constraint_elements</a></div><div class="ttdeci">void create_volume_constraint_elements()</div><div class="ttdoc">Create the volume constraint elements.</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00842">static_single_layer.cc:842</a></div></div>
+<div class="ttc" id="aclassPseudoSolidCapProblem_html_aec2a79e44dfd785b2978419210b053b8"><div class="ttname"><a href="classPseudoSolidCapProblem.html#aec2a79e44dfd785b2978419210b053b8">PseudoSolidCapProblem::~PseudoSolidCapProblem</a></div><div class="ttdeci">~PseudoSolidCapProblem()</div><div class="ttdoc">Destructor: clean up memory allocated by the object.</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00754">static_single_layer.cc:754</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Pseudo-solid Poisson ratio.</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00056">static_single_layer.cc:56</a></div></div>
+<div class="ttc" id="astatic__single__layer_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="static__single__layer_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Main driver: Build problem and initiate parameter study.</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l01012">static_single_layer.cc:1012</a></div></div>
+<div class="ttc" id="aclassPseudoSolidCapProblem_html"><div class="ttname"><a href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a></div><div class="ttdoc">A class that solves the Navier–Stokes equations to compute the shape of a static interface in a recta...</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00504">static_single_layer.cc:504</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for phyical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00052">static_single_layer.cc:52</a></div></div>
+<div class="ttc" id="aclassPseudoSolidCapProblem_html_a4ac05a07dd55950bb67f7f79cb9fbb77"><div class="ttname"><a href="classPseudoSolidCapProblem.html#a4ac05a07dd55950bb67f7f79cb9fbb77">PseudoSolidCapProblem::PseudoSolidCapProblem</a></div><div class="ttdeci">PseudoSolidCapProblem(const bool &amp;hijack_internal)</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00584">static_single_layer.cc:584</a></div></div>
+<div class="ttc" id="aclassPseudoSolidCapProblem_html_a8f28ebf09bc66142725139291b4e21a0"><div class="ttname"><a href="classPseudoSolidCapProblem.html#a8f28ebf09bc66142725139291b4e21a0">PseudoSolidCapProblem::create_contact_angle_element</a></div><div class="ttdeci">void create_contact_angle_element()</div><div class="ttdoc">Create the contact angle element.</div><div class="ttdef"><b>Definition:</b> <a href="static__single__layer_8cc_source.html#l00888">static_single_layer.cc:888</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:09:34
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

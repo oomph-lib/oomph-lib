@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::Hijacked&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1Hijacked.html">Hijacked</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1Hijacked-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::Hijacked&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classoomph_1_1Hijacked.html" title="Hijacked elements are elements in which one or more Data values that affect the element&#39;s residuals,...">Hijacked</a> elements are elements in which one or more <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> values that affect the element's residuals, are determined by another element &ndash; the data values are then said to have been hijacked by another element. The main functionality added by the <a class="el" href="classoomph_1_1Hijacked.html" title="Hijacked elements are elements in which one or more Data values that affect the element&#39;s residuals,...">Hijacked</a> element class is that it wipes out those entries in the element's residual vector and those rows in the element's Jacobian matrix that are determined by the "other" elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a "homotopy parameter". The value of this parameter can be set by assigning <a class="el" href="classoomph_1_1HijackedElementBase.html#affdb1888fb6b2de051bc0345e6f5d934" title="Return the pointer to the residual multiplier.">residual_multiplier_pt()</a> which has a default value of zero. Note: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required?  
+ <a href="classoomph_1_1Hijacked.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::Hijacked&lt; ELEMENT &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1Hijacked.png" usemap="#oomph::Hijacked_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::Hijacked_3C_20ELEMENT_20_3E_map" name="oomph::Hijacked_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1HijackedElementBase.html" alt="oomph::HijackedElementBase" shape="rect" coords="196,0,382,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aaf792ec7672bf812fdc5b3e74c31f807"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#aaf792ec7672bf812fdc5b3e74c31f807">Hijacked</a> ()</td></tr>
+<tr class="memdesc:aaf792ec7672bf812fdc5b3e74c31f807"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, call the constructors of the base elements.  <a href="classoomph_1_1Hijacked.html#aaf792ec7672bf812fdc5b3e74c31f807">More...</a><br /></td></tr>
+<tr class="separator:aaf792ec7672bf812fdc5b3e74c31f807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e4aa47011d8141757f9ecbd8f787811"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#a5e4aa47011d8141757f9ecbd8f787811">Hijacked</a> (<a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *const &amp;element_pt, const int &amp;face_index)</td></tr>
+<tr class="memdesc:a5e4aa47011d8141757f9ecbd8f787811"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor used for hijacking face elements.  <a href="classoomph_1_1Hijacked.html#a5e4aa47011d8141757f9ecbd8f787811">More...</a><br /></td></tr>
+<tr class="separator:a5e4aa47011d8141757f9ecbd8f787811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac03d9be9ce8252556d41ef643b3658be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#ac03d9be9ce8252556d41ef643b3658be">Hijacked</a> (<a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *const &amp;element_pt, const int &amp;face_index, const unsigned &amp;id=0)</td></tr>
+<tr class="memdesc:ac03d9be9ce8252556d41ef643b3658be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor used for hijacking face elements with specification of ID of additional variables.  <a href="classoomph_1_1Hijacked.html#ac03d9be9ce8252556d41ef643b3658be">More...</a><br /></td></tr>
+<tr class="separator:ac03d9be9ce8252556d41ef643b3658be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a835ce930b91c2c138f3b4de12aeba216"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#a835ce930b91c2c138f3b4de12aeba216">hijack_internal_value</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const bool &amp;return_data=true)</td></tr>
+<tr class="memdesc:a835ce930b91c2c138f3b4de12aeba216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hijack the i-th value stored at internal data n. Optionally return a custom-made (copied) data object that contains only the hijacked value. This can be used as the input to other elements. Note that the calling program assumes responsibility for this data object and must clean it up. The default is that the data object is returned.  <a href="classoomph_1_1Hijacked.html#a835ce930b91c2c138f3b4de12aeba216">More...</a><br /></td></tr>
+<tr class="separator:a835ce930b91c2c138f3b4de12aeba216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e11fa249f667b130e93af9379322182"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#a9e11fa249f667b130e93af9379322182">hijack_external_value</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const bool &amp;return_data=true)</td></tr>
+<tr class="memdesc:a9e11fa249f667b130e93af9379322182"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hijack the i-th value stored at external data n. Optionally return a custom-made (copied) data object that contains only the hijacked value. Note that the calling program assumes responsibility for this data object and must clean it up. The default is that the data object is returned.  <a href="classoomph_1_1Hijacked.html#a9e11fa249f667b130e93af9379322182">More...</a><br /></td></tr>
+<tr class="separator:a9e11fa249f667b130e93af9379322182"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd1255b8d3783d0bce222095f9f78aa2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#acd1255b8d3783d0bce222095f9f78aa2">hijack_nodal_value</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const bool &amp;return_data=true)</td></tr>
+<tr class="memdesc:acd1255b8d3783d0bce222095f9f78aa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hijack the i-th value stored at node n. Optionally return a custom-made (copied) data object that contains only the hijacked value. Once again, the calling program must clean up the allocated <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object. The default is that the data object is returned.  <a href="classoomph_1_1Hijacked.html#acd1255b8d3783d0bce222095f9f78aa2">More...</a><br /></td></tr>
+<tr class="separator:acd1255b8d3783d0bce222095f9f78aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c4a0ed281996d74c30f5d4af9a5a324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#a3c4a0ed281996d74c30f5d4af9a5a324">hijack_nodal_position_value</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const bool &amp;return_data=true)</td></tr>
+<tr class="memdesc:a3c4a0ed281996d74c30f5d4af9a5a324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hijack the i-th positional value stored at node n. Optionaly return a custom-made (copied) data object that contains only the hijacked value. Again, responsibility for the memory allocated lies with the calling function. The default is that the data object is returned.  <a href="classoomph_1_1Hijacked.html#a3c4a0ed281996d74c30f5d4af9a5a324">More...</a><br /></td></tr>
+<tr class="separator:a3c4a0ed281996d74c30f5d4af9a5a324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d4f055a9ade75b19d69d8aa7eb26417"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#a3d4f055a9ade75b19d69d8aa7eb26417">hijack_nodal_spine_value</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const bool &amp;return_data=true)</td></tr>
+<tr class="memdesc:a3d4f055a9ade75b19d69d8aa7eb26417"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hijack the i-th value stored at the spine that affects local node n. Optionally return a custom-made (copied) data object that contains only the hijacked value. Deletion must be handled at the higher level The default is that the data object is returned.  <a href="classoomph_1_1Hijacked.html#a3d4f055a9ade75b19d69d8aa7eb26417">More...</a><br /></td></tr>
+<tr class="separator:a3d4f055a9ade75b19d69d8aa7eb26417"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd4a5578291487aa37b0931dab845701"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#afd4a5578291487aa37b0931dab845701">assign_local_eqn_numbers</a> (const bool &amp;store_local_dof_pt)</td></tr>
+<tr class="memdesc:afd4a5578291487aa37b0931dab845701"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the local equation numbers for the underlying element, then set up the local arrays to hold the hijacked variables. If the boolean argument is true then pointers to the associated degrees of freedom are stored in the array Dof_pt.  <a href="classoomph_1_1Hijacked.html#afd4a5578291487aa37b0931dab845701">More...</a><br /></td></tr>
+<tr class="separator:afd4a5578291487aa37b0931dab845701"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb1760705326df86f6289cc3774d37b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#adb1760705326df86f6289cc3774d37b9">get_residuals</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td></tr>
+<tr class="memdesc:adb1760705326df86f6289cc3774d37b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the residuals from the underlying element, but then wipe the entries in the residual vector that correspond to hijacked values &ndash; they will be computed by other elements.  <a href="classoomph_1_1Hijacked.html#adb1760705326df86f6289cc3774d37b9">More...</a><br /></td></tr>
+<tr class="separator:adb1760705326df86f6289cc3774d37b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35778dccc9cf036c37ee569efe5b5f7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Hijacked.html#a35778dccc9cf036c37ee569efe5b5f7c">get_jacobian</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a35778dccc9cf036c37ee569efe5b5f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the residuals and Jacobian matrix from the underlying element, but then wipe the entries in the residual vector and the rows in the Jacobian matrix that correspond to hijacked values &ndash; they will be computed by other elements.  <a href="classoomph_1_1Hijacked.html#a35778dccc9cf036c37ee569efe5b5f7c">More...</a><br /></td></tr>
+<tr class="separator:a35778dccc9cf036c37ee569efe5b5f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1HijackedElementBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1HijackedElementBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1HijackedElementBase.html">oomph::HijackedElementBase</a></td></tr>
+<tr class="memitem:ad062d9c27f6fd3d613a86b32980fa71e inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#ad062d9c27f6fd3d613a86b32980fa71e">HijackedElementBase</a> ()</td></tr>
+<tr class="memdesc:ad062d9c27f6fd3d613a86b32980fa71e inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, initialise the pointer to the equation numbers for the storage to zero.  <a href="classoomph_1_1HijackedElementBase.html#ad062d9c27f6fd3d613a86b32980fa71e">More...</a><br /></td></tr>
+<tr class="separator:ad062d9c27f6fd3d613a86b32980fa71e inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3393a98fc80a2f7761046920b4a3040 inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#af3393a98fc80a2f7761046920b4a3040">~HijackedElementBase</a> ()</td></tr>
+<tr class="memdesc:af3393a98fc80a2f7761046920b4a3040 inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, destroy the storage for the equation numbers.  <a href="classoomph_1_1HijackedElementBase.html#af3393a98fc80a2f7761046920b4a3040">More...</a><br /></td></tr>
+<tr class="separator:af3393a98fc80a2f7761046920b4a3040 inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a373a87d121205b9cc0fd54ea41f4ad inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#a0a373a87d121205b9cc0fd54ea41f4ad">unhijack_all_data</a> ()</td></tr>
+<tr class="memdesc:a0a373a87d121205b9cc0fd54ea41f4ad inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the hijacked data pt, so that none of the equations in the element are hijacked.  <a href="classoomph_1_1HijackedElementBase.html#a0a373a87d121205b9cc0fd54ea41f4ad">More...</a><br /></td></tr>
+<tr class="separator:a0a373a87d121205b9cc0fd54ea41f4ad inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79740641b6ac5b5a966d072bd10ab66a inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#a79740641b6ac5b5a966d072bd10ab66a">residual_multiplier</a> () const</td></tr>
+<tr class="memdesc:a79740641b6ac5b5a966d072bd10ab66a inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the residual multiplier.  <a href="classoomph_1_1HijackedElementBase.html#a79740641b6ac5b5a966d072bd10ab66a">More...</a><br /></td></tr>
+<tr class="separator:a79740641b6ac5b5a966d072bd10ab66a inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affdb1888fb6b2de051bc0345e6f5d934 inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#affdb1888fb6b2de051bc0345e6f5d934">residual_multiplier_pt</a> ()</td></tr>
+<tr class="memdesc:affdb1888fb6b2de051bc0345e6f5d934 inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the residual multiplier.  <a href="classoomph_1_1HijackedElementBase.html#affdb1888fb6b2de051bc0345e6f5d934">More...</a><br /></td></tr>
+<tr class="separator:affdb1888fb6b2de051bc0345e6f5d934 inherit pub_methods_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1HijackedElementBase"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1HijackedElementBase')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1HijackedElementBase.html">oomph::HijackedElementBase</a></td></tr>
+<tr class="memitem:ac518df71f978c2b80cd25a1283353ab5 inherit pro_methods_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#ac518df71f978c2b80cd25a1283353ab5">hijack_global_eqn</a> (long *const &amp;global_eqn_pt)</td></tr>
+<tr class="memdesc:ac518df71f978c2b80cd25a1283353ab5 inherit pro_methods_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mark the global equation, addressed by global_eqn_pt, as hijacked by this element.  <a href="classoomph_1_1HijackedElementBase.html#ac518df71f978c2b80cd25a1283353ab5">More...</a><br /></td></tr>
+<tr class="separator:ac518df71f978c2b80cd25a1283353ab5 inherit pro_methods_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa94e2c93374151302879645f4c354c3f inherit pro_methods_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#aa94e2c93374151302879645f4c354c3f">unhijack_global_eqn</a> (long *const &amp;global_eqn_pt)</td></tr>
+<tr class="memdesc:aa94e2c93374151302879645f4c354c3f inherit pro_methods_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">The global equation, addressed by global_eqn_pt, is no longer hijacked by this element.  <a href="classoomph_1_1HijackedElementBase.html#aa94e2c93374151302879645f4c354c3f">More...</a><br /></td></tr>
+<tr class="separator:aa94e2c93374151302879645f4c354c3f inherit pro_methods_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1HijackedElementBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1HijackedElementBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1HijackedElementBase.html">oomph::HijackedElementBase</a></td></tr>
+<tr class="memitem:a9c3a9a4e39ee5e3af0f5594c31f532c5 inherit pro_attribs_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">std::set&lt; long * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#a9c3a9a4e39ee5e3af0f5594c31f532c5">Hijacked_global_eqn_number_pt</a></td></tr>
+<tr class="separator:a9c3a9a4e39ee5e3af0f5594c31f532c5 inherit pro_attribs_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae604da2f744f328f3866a2cefa3aa80c inherit pro_attribs_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#ae604da2f744f328f3866a2cefa3aa80c">Hijacked_local_eqn_number_pt</a></td></tr>
+<tr class="memdesc:ae604da2f744f328f3866a2cefa3aa80c inherit pro_attribs_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a vector of integers containing the local equation numbers of any hijacked variables in the element.  <a href="classoomph_1_1HijackedElementBase.html#ae604da2f744f328f3866a2cefa3aa80c">More...</a><br /></td></tr>
+<tr class="separator:ae604da2f744f328f3866a2cefa3aa80c inherit pro_attribs_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283509b7af09479e7a1cb8c0e05a8c16 inherit pro_attribs_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#a283509b7af09479e7a1cb8c0e05a8c16">Residual_multiplier_pt</a></td></tr>
+<tr class="memdesc:a283509b7af09479e7a1cb8c0e05a8c16 inherit pro_attribs_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a double that multiplies the contribution to the residuals from the original element. This is usually used as a homotopy parameter to permit a smooth transition between different types of boundary conditions, rather than switching them on or off abruptly.  <a href="classoomph_1_1HijackedElementBase.html#a283509b7af09479e7a1cb8c0e05a8c16">More...</a><br /></td></tr>
+<tr class="separator:a283509b7af09479e7a1cb8c0e05a8c16 inherit pro_attribs_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_attribs_classoomph_1_1HijackedElementBase"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1HijackedElementBase')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1HijackedElementBase.html">oomph::HijackedElementBase</a></td></tr>
+<tr class="memitem:afd87cc7c33c2b846c5f7a373c352f13a inherit pro_static_attribs_classoomph_1_1HijackedElementBase"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HijackedElementBase.html#afd87cc7c33c2b846c5f7a373c352f13a">Default_residual_multiplier</a> =0.0</td></tr>
+<tr class="memdesc:afd87cc7c33c2b846c5f7a373c352f13a inherit pro_static_attribs_classoomph_1_1HijackedElementBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static default value for the double that multiplies the original residuals.  <a href="classoomph_1_1HijackedElementBase.html#afd87cc7c33c2b846c5f7a373c352f13a">More...</a><br /></td></tr>
+<tr class="separator:afd87cc7c33c2b846c5f7a373c352f13a inherit pro_static_attribs_classoomph_1_1HijackedElementBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::Hijacked&lt; ELEMENT &gt;</h3>
+
+<p><a class="el" href="classoomph_1_1Hijacked.html" title="Hijacked elements are elements in which one or more Data values that affect the element&#39;s residuals,...">Hijacked</a> elements are elements in which one or more <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> values that affect the element's residuals, are determined by another element &ndash; the data values are then said to have been hijacked by another element. The main functionality added by the <a class="el" href="classoomph_1_1Hijacked.html" title="Hijacked elements are elements in which one or more Data values that affect the element&#39;s residuals,...">Hijacked</a> element class is that it wipes out those entries in the element's residual vector and those rows in the element's Jacobian matrix that are determined by the "other" elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a "homotopy parameter". The value of this parameter can be set by assigning <a class="el" href="classoomph_1_1HijackedElementBase.html#affdb1888fb6b2de051bc0345e6f5d934" title="Return the pointer to the residual multiplier.">residual_multiplier_pt()</a> which has a default value of zero. Note: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required? </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00126">126</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aaf792ec7672bf812fdc5b3e74c31f807"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf792ec7672bf812fdc5b3e74c31f807">&#9670;&nbsp;</a></span>Hijacked() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1Hijacked.html">Hijacked</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor, call the constructors of the base elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00132">132</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a5e4aa47011d8141757f9ecbd8f787811"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e4aa47011d8141757f9ecbd8f787811">&#9670;&nbsp;</a></span>Hijacked() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1Hijacked.html">Hijacked</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>element_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>face_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor used for hijacking face elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00135">135</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ac03d9be9ce8252556d41ef643b3658be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac03d9be9ce8252556d41ef643b3658be">&#9670;&nbsp;</a></span>Hijacked() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1Hijacked.html">Hijacked</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>element_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>face_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>id</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor used for hijacking face elements with specification of ID of additional variables. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00142">142</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="afd4a5578291487aa37b0931dab845701"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd4a5578291487aa37b0931dab845701">&#9670;&nbsp;</a></span>assign_local_eqn_numbers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::assign_local_eqn_numbers </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>store_local_dof_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set up the local equation numbers for the underlying element, then set up the local arrays to hold the hijacked variables. If the boolean argument is true then pointers to the associated degrees of freedom are stored in the array Dof_pt. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00299">299</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a35778dccc9cf036c37ee569efe5b5f7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35778dccc9cf036c37ee569efe5b5f7c">&#9670;&nbsp;</a></span>get_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::get_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the residuals and Jacobian matrix from the underlying element, but then wipe the entries in the residual vector and the rows in the Jacobian matrix that correspond to hijacked values &ndash; they will be computed by other elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00371">371</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="adb1760705326df86f6289cc3774d37b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb1760705326df86f6289cc3774d37b9">&#9670;&nbsp;</a></span>get_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::get_residuals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the residuals from the underlying element, but then wipe the entries in the residual vector that correspond to hijacked values &ndash; they will be computed by other elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00353">353</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a9e11fa249f667b130e93af9379322182"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e11fa249f667b130e93af9379322182">&#9670;&nbsp;</a></span>hijack_external_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Data.html">Data</a>* <a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::hijack_external_value </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>return_data</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hijack the i-th value stored at external data n. Optionally return a custom-made (copied) data object that contains only the hijacked value. Note that the calling program assumes responsibility for this data object and must clean it up. The default is that the data object is returned. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00179">179</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a835ce930b91c2c138f3b4de12aeba216"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a835ce930b91c2c138f3b4de12aeba216">&#9670;&nbsp;</a></span>hijack_internal_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Data.html">Data</a>* <a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::hijack_internal_value </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>return_data</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hijack the i-th value stored at internal data n. Optionally return a custom-made (copied) data object that contains only the hijacked value. This can be used as the input to other elements. Note that the calling program assumes responsibility for this data object and must clean it up. The default is that the data object is returned. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00155">155</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a3c4a0ed281996d74c30f5d4af9a5a324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c4a0ed281996d74c30f5d4af9a5a324">&#9670;&nbsp;</a></span>hijack_nodal_position_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Data.html">Data</a>* <a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::hijack_nodal_position_value </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>return_data</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hijack the i-th positional value stored at node n. Optionaly return a custom-made (copied) data object that contains only the hijacked value. Again, responsibility for the memory allocated lies with the calling function. The default is that the data object is returned. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00223">223</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a3d4f055a9ade75b19d69d8aa7eb26417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d4f055a9ade75b19d69d8aa7eb26417">&#9670;&nbsp;</a></span>hijack_nodal_spine_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Data.html">Data</a>* <a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::hijack_nodal_spine_value </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>return_data</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hijack the i-th value stored at the spine that affects local node n. Optionally return a custom-made (copied) data object that contains only the hijacked value. Deletion must be handled at the higher level The default is that the data object is returned. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00260">260</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="acd1255b8d3783d0bce222095f9f78aa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd1255b8d3783d0bce222095f9f78aa2">&#9670;&nbsp;</a></span>hijack_nodal_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Data.html">Data</a>* <a class="el" href="classoomph_1_1Hijacked.html">oomph::Hijacked</a>&lt; ELEMENT &gt;::hijack_nodal_value </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>return_data</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hijack the i-th value stored at node n. Optionally return a custom-made (copied) data object that contains only the hijacked value. Once again, the calling program must clean up the allocated <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object. The default is that the data object is returned. </p>
+
+<p class="definition">Definition at line <a class="el" href="hijacked__elements_8h_source.html#l00201">201</a> of file <a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="biharmonic__problem_8cc_source.html#l00506">oomph::BiharmonicFluidProblem&lt; DIM &gt;::impose_traction_free_edge()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="hijacked__elements_8h_source.html">hijacked_elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

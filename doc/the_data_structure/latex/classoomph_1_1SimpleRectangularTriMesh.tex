@@ -1,0 +1,206 @@
+\hypertarget{classoomph_1_1SimpleRectangularTriMesh}{}\doxysection{oomph\+::Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1SimpleRectangularTriMesh}\index{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}}
+
+
+Simple 2D triangular mesh for T\+Elements.  
+
+
+
+
+{\ttfamily \#include $<$simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.783784cm]{classoomph_1_1SimpleRectangularTriMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh_a4a4e728bd6245b820d4698de28ee7d38}{Simple\+Rectangular\+Tri\+Mesh}} (const unsigned \&n\+\_\+x, const unsigned \&n\+\_\+y, const double \&l\+\_\+x, const double \&l\+\_\+y, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em Constructor n\+\_\+x \+: number of elements in the x direction; n\+\_\+y \+: number of elements in the y direction; l\+\_\+x \+: length in the x direction l\+\_\+y \+: length in the y direction Ordering of elements\+: \textquotesingle{}lower left\textquotesingle{} to \textquotesingle{}lower right\textquotesingle{} then \textquotesingle{}upwards\textquotesingle{}. \end{DoxyCompactList}\item 
+const unsigned \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh_ac8fcc898b00209b300684dd8addd9b4f}{nx}} () const
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in x directions. \end{DoxyCompactList}\item 
+const unsigned \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh_a39f3713497e6c9fef258d5f239ad5d3b}{ny}} () const
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in y directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh_ad997a3ce1ed243b79cd49eb5a0687844}{Nx}}
+\begin{DoxyCompactList}\small\item\em Number of elements in x direction. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh_ac180c4ab5947c4417d912bc75621fc7e}{Ny}}
+\begin{DoxyCompactList}\small\item\em Number of elements in y directions. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh_a85d3446550324f92540d389dfb4d063b}{Lx}}
+\begin{DoxyCompactList}\small\item\em Length of mesh in x-\/direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh_adc35409d2a480d6de11d8df4ec23d1cf}{Ly}}
+\begin{DoxyCompactList}\small\item\em Length of mesh in y-\/direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Simple 2D triangular mesh for T\+Elements. 
+
+Definition at line 49 of file simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SimpleRectangularTriMesh_a4a4e728bd6245b820d4698de28ee7d38}\label{classoomph_1_1SimpleRectangularTriMesh_a4a4e728bd6245b820d4698de28ee7d38}} 
+\index{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}!SimpleRectangularTriMesh@{SimpleRectangularTriMesh}}
+\index{SimpleRectangularTriMesh@{SimpleRectangularTriMesh}!oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SimpleRectangularTriMesh()}{SimpleRectangularTriMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh}{oomph\+::\+Simple\+Rectangular\+Tri\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh}{Simple\+Rectangular\+Tri\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+y,  }\item[{const double \&}]{l\+\_\+x,  }\item[{const double \&}]{l\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
+
+Constructor n\+\_\+x \+: number of elements in the x direction; n\+\_\+y \+: number of elements in the y direction; l\+\_\+x \+: length in the x direction l\+\_\+y \+: length in the y direction Ordering of elements\+: \textquotesingle{}lower left\textquotesingle{} to \textquotesingle{}lower right\textquotesingle{} then \textquotesingle{}upwards\textquotesingle{}. 
+
+Constructor for simple 2D triangular mesh class\+:
+
+n\+\_\+x \+: number of elements in the x direction
+
+n\+\_\+y \+: number of elements in the y direction
+
+l\+\_\+x \+: length in the x direction
+
+l\+\_\+y \+: length in the y direction
+
+Ordering of elements\+: \textquotesingle{}lower left\textquotesingle{} to \textquotesingle{}lower right\textquotesingle{} then \textquotesingle{}upwards\textquotesingle{} 
+
+Definition at line 57 of file simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+cc.
+
+
+
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Mesh\+::convert\+\_\+to\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Lx, oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ly, oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Mesh\+::\+Node\+\_\+pt, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Nx, oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny, and oomph\+::\+Mesh\+::set\+\_\+nboundary().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SimpleRectangularTriMesh_ac8fcc898b00209b300684dd8addd9b4f}\label{classoomph_1_1SimpleRectangularTriMesh_ac8fcc898b00209b300684dd8addd9b4f}} 
+\index{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}!nx@{nx}}
+\index{nx@{nx}!oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nx()}{nx()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+const unsigned\& \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh}{oomph\+::\+Simple\+Rectangular\+Tri\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for number of elements in x directions. 
+
+
+
+Definition at line 65 of file simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Nx.
+
+\mbox{\Hypertarget{classoomph_1_1SimpleRectangularTriMesh_a39f3713497e6c9fef258d5f239ad5d3b}\label{classoomph_1_1SimpleRectangularTriMesh_a39f3713497e6c9fef258d5f239ad5d3b}} 
+\index{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}!ny@{ny}}
+\index{ny@{ny}!oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ny()}{ny()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+const unsigned\& \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh}{oomph\+::\+Simple\+Rectangular\+Tri\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::ny (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for number of elements in y directions. 
+
+
+
+Definition at line 68 of file simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1SimpleRectangularTriMesh_a85d3446550324f92540d389dfb4d063b}\label{classoomph_1_1SimpleRectangularTriMesh_a85d3446550324f92540d389dfb4d063b}} 
+\index{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}!Lx@{Lx}}
+\index{Lx@{Lx}!oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lx}{Lx}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh}{oomph\+::\+Simple\+Rectangular\+Tri\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Lx\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Length of mesh in x-\/direction. 
+
+
+
+Definition at line 79 of file simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Simple\+Rectangular\+Tri\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1SimpleRectangularTriMesh_adc35409d2a480d6de11d8df4ec23d1cf}\label{classoomph_1_1SimpleRectangularTriMesh_adc35409d2a480d6de11d8df4ec23d1cf}} 
+\index{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}!Ly@{Ly}}
+\index{Ly@{Ly}!oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Ly}{Ly}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh}{oomph\+::\+Simple\+Rectangular\+Tri\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ly\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Length of mesh in y-\/direction. 
+
+
+
+Definition at line 82 of file simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Simple\+Rectangular\+Tri\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1SimpleRectangularTriMesh_ad997a3ce1ed243b79cd49eb5a0687844}\label{classoomph_1_1SimpleRectangularTriMesh_ad997a3ce1ed243b79cd49eb5a0687844}} 
+\index{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}!Nx@{Nx}}
+\index{Nx@{Nx}!oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nx}{Nx}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh}{oomph\+::\+Simple\+Rectangular\+Tri\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Nx\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of elements in x direction. 
+
+
+
+Definition at line 73 of file simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nx(), and oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Simple\+Rectangular\+Tri\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1SimpleRectangularTriMesh_ac180c4ab5947c4417d912bc75621fc7e}\label{classoomph_1_1SimpleRectangularTriMesh_ac180c4ab5947c4417d912bc75621fc7e}} 
+\index{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}!Ny@{Ny}}
+\index{Ny@{Ny}!oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularTriMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Ny}{Ny}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1SimpleRectangularTriMesh}{oomph\+::\+Simple\+Rectangular\+Tri\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ny\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of elements in y directions. 
+
+
+
+Definition at line 76 of file simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ny(), and oomph\+::\+Simple\+Rectangular\+Tri\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Simple\+Rectangular\+Tri\+Mesh().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{simple__rectangular__tri__mesh_8template_8h}{simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+h}}\item 
+\mbox{\hyperlink{simple__rectangular__tri__mesh_8template_8cc}{simple\+\_\+rectangular\+\_\+tri\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

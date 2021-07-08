@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Optimisation</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Optimisation </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>One of the main challenges in the development of a general-purpose scientific computing library is the potential conflict between the desire for robustness and generality on the one hand, and code optimisation (in terms of speed and memory requirements) on the other.</p>
+<p>One of <code>oomph-lib's</code> main design principles is that</p>
+<center> <em><b>Robustness/correctness is more important than "raw speed",</b></em> </center><p>implying that <em>by</em> <em>default</em>, all methods should reliably produce the <em>correct</em> results. Possible optimisations that may lead to incorrect results even for a small subset of cases, must be activated explicitly by the "knowledgeable" user, who then takes the responsibility for any resulting errors.</p>
+<p>Here are some examples for possible optimisations that you may wish to activate for your problem.</p><ul>
+<li><a class="el" href="index.html#linear_vs_nonlinear">Linear vs. nonlinear problems</a></li>
+<li><a class="el" href="index.html#store_shape">Storing the shape functions</a></li>
+<li><a class="el" href="index.html#full_integration">Full vs. reduced integration</a></li>
+<li><a class="el" href="index.html#ale">Disabling the ALE formulation of unsteady equations</a></li>
+<li><a class="el" href="index.html#C_style_output">C vs. C++-style output</a></li>
+<li><a class="el" href="index.html#assembly">Different sparse assembly techniques and the STL memory pool</a></li>
+</ul>
+<p>All tend to lead to faster run times (by how much depends on your machine and your compiler &ndash; experiment!), but there are caveats that you must be aware of:</p><ul>
+<li>Some techniques may incur significant memory overheads (e.g. storing the shape functions).</li>
+<li>Some techniques may produce the wrong results for your problem (for instance, declaring a problem to be linear when it isn't will lead to a very significant speedup. However, the results will be wrong!)</li>
+<li>Some techniques will make the code less robust (e.g. using C-style output).</li>
+</ul>
+<p>You choose!</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="linear_vs_nonlinear"></a>
+Linear vs. nonlinear problems</h1>
+<p>By default, <code>oomph-lib</code> treats all problems as nonlinear and uses Newton's method to solve the system of nonlinear algebraic equations that result from the problem's discretisation. With this approach, linear problems are special cases for which Newton's method converges in one step. However, if a problem is known to be linear, several (costly) steps in Newton's method are superfluous and may be omitted, leading to a significant speedup. For instance, in a linear problem it is not necessary to re-compute the residuals of the nonlinear algebraic equations after the (single) Newton step, as we already know that they will have been reduced to zero (modulo roundoff errors). We refer to the document <a href="../../order_of_action_functions/html/index.html">"Action" functions in oomph-lib's black-box Newton solver</a> for a more detailed discussion.</p>
+<p>The user may declare a problem to be linear by setting the flag </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> Problem::Problem_is_nonlinear</div>
+</div><!-- fragment --><p> which is initialised to <code>true</code> in the constructor of the <code>Problem</code> base class, to <code>false</code>.</p>
+<p>Experiment with the demo code <a href="../../../demo_drivers/optimisation/linear_vs_nonlinear/two_d_poisson.cc">two_d_poisson.cc</a> to examine the speedup achievable by declaring a (linear!) Problem to be linear.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="store_shape"></a>
+Storing the shape functions</h1>
+<p>If a problem is to be solved repeatedly (e.g. in a time-dependent simulation, or during a parameter study) it may be beneficial to avoid the re-computation of the shape function and their derivatives with respect to the local and global coordinates at the elements' integration points by storing their values.</p>
+<p>However, there are two problems with this approach:</p><ol type="1">
+<li>It introduces significant memory overheads. For instance, to store just the shape functions in a 3D problem discretised by <img class="formulaInl" alt="$ N_{elem}$" src="form_0.png"/> 27-node brick elements with a 27-point Gauss rule, storage for <img class="formulaInl" alt="$ 27 \times 27 \times N_{elem} $" src="form_1.png"/> doubles is required. Storage of the (much more costly to compute) shape function derivatives requires six times that storage.</li>
+<li>The most costly-to-compute quantities are the derivatives of the shape functions with respect to the global coordinates, so it is most tempting to store these. However, in free-boundary problems in which the nodal positions are determined as part of the solution, the derivatives of the shape functions with respect to the global coordinates depend on the solution and <b>must</b> be recomputed.</li>
+</ol>
+<p>To ensure correctness/robustness and to minimise the memory overheads, <code>oomph-lib's</code> existing finite elements represent the shape functions and their derivatives as <code>StorableShapeFunction</code> objects. These allow their values to be stored at the integration points, but the capability is not activated, unless an element (of type <code>ELEMENT</code>, say) is used in its "wrapped" form, as <code>StorableShapeElement&lt;ELEMENT&gt;</code>.</p>
+<p>The detailed documentation for this is yet to be written but you may consult the well-documented demo code <a href="../../../demo_drivers/optimisation/stored_shape_fcts/two_d_poisson_stored_shape_fcts.cc">two_d_poisson_stored_shape_fcts.cc</a>, and the discussion in the <a href="../../quick_guide/html/index.html#pre_compute_psi">(Not-So-)Quick Guide.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="full_integration"></a>
+Full vs. reduced integration</h1>
+<p>To maximise the potential for code reuse, all existing finite elements in <code>oomph-lib</code> are composed (via multiple inheritance) from (i) "geometric" finite elements (e.g. line, quad, brick, triangle and tet elements), and (ii) separate equations classes. A default (spatial) integration scheme is defined for each geometric element. This default integration scheme is chosen to provide "full integration" for this element. This implies that for an undeformed element the products of any two shape functions are integrated exactly. For time-dependent problems (e.g. in problems involving the unsteady heat equation) where products of shape functions arise in the "mass matrix", "full integration" is required to ensure that the numerical solution converges to the exact solution under mesh refinement. In some applications (e.g. in problems involving the Poisson equation) a lower-order (and therefore cheaper) "reduced integration" scheme may be sufficient to maintain the asymptotic convergence rate.</p>
+<p>In this case, the user can over-write the default spatial integration scheme, using the function <code>FiniteElement::set_integration_scheme(...)</code>, as illustrated here. </p><div class="fragment"><div class="line"> <span class="comment">// Create an instance of a lower-order integration scheme</span></div>
+<div class="line"> Gauss&lt;2,2&gt;* <a class="code" href="optimisation_8txt.html#a14cb177259090edfc37678f58089ad82">int_pt</a>=<span class="keyword">new</span> Gauss&lt;2,2&gt;;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Find number of elements in mesh</span></div>
+<div class="line"><span class="keywordtype">unsigned</span> <a class="code" href="optimisation_8txt.html#aa34e0d1dbc3b594b42ed453dd728fa24">n_element</a> = problem.mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Loop over the elements </span></div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;<a class="code" href="optimisation_8txt.html#aa34e0d1dbc3b594b42ed453dd728fa24">n_element</a>;i++)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Set the a different integration scheme</span></div>
+<div class="line">  problem.mesh_pt()-&gt;finite_element_pt(i)-&gt;set_integration_scheme(<a class="code" href="optimisation_8txt.html#a14cb177259090edfc37678f58089ad82">int_pt</a>); </div>
+<div class="line"> }</div>
+</div><!-- fragment --><p>Driver codes that may be used to experiment with reduced integration and to assess the asymptotic convergence behaviour can be found in the directory <a href="../../../self_test/poisson/convergence_tests">self_test/poisson/convergence_tests/</a> </p><hr  />
+ <hr  />
+<h1><a class="anchor" id="ale"></a>
+Disabling the ALE formulation of unsteady equations</h1>
+<p>Most existing finite elements for unsteady problems are formulated in the "Arbitrary Lagrangian Eulerian (ALE)" form by implementing the Eulerian time-derivative <img class="formulaInl" alt="$ \partial u /\partial t$" src="form_2.png"/> (to be evaluated at a fixed Eulerian position) as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. \frac{\partial u}{\partial t} \right|_{\mbox{fixed Eulerian position}} = \left. \frac{\partial u}{\partial t} \right|_{\mbox{fixed local coordinate}} - \sum_{i=1}^{DIM} v_i^{\mbox{[Mesh]}} \ \frac{\partial u}{\partial x_i} \]" src="form_3.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ v_i^{\mbox{[Mesh]}} \ \ (i=1,...,DIM)$" src="form_4.png"/> is the mesh velocity. This formulation ensures that the time-derivatives are computed correctly if the element is used in a free-boundary value problem. However, the computation of the mesh velocities introduces an additional cost which is avoidable if the mesh is, in fact, stationary. The user may disable the computation of the ALE terms by calling the function </p><div class="fragment"><div class="line">FiniteElement::disable_ALE()</div>
+</div><!-- fragment --><p> (This function is implemented as a virtual function in the <code>FiniteElement</code> base class. If called, it simply issues a warning message to announce that it has not been overloaded in a derived class &ndash; usually an indication that the element in question does not involve any ALE terms). The ALE capability may be re-enabled by calling the corresponding function </p><div class="fragment"><div class="line">FiniteElement::enable_ALE()</div>
+</div><!-- fragment --><p>Experiment with the driver codes in the directory <a href="../../../demo_drivers/optimisation/disable_ALE">demo_drivers/optimisation/disable_ALE</a> to examine the speedup achievable by ignoring the ALE terms in the <a href="../../../demo_drivers/optimisation/disable_ALE/unsteady_heat">unsteady heat</a> and <a href="../../../demo_drivers/optimisation/disable_ALE/navier_stokes">Navier-Stokes</a> equations.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="C_style_output"></a>
+C vs. C++-style output</h1>
+<p>In most <a href="../../example_code_list/html/index.html">demo driver codes</a> post-processing is performed by passing a C++-stream to a high-level output function, as in this code segment </p><div class="fragment"><div class="line"><span class="preprocessor">#include&lt;ofstream&gt;</span></div>
+<div class="line"> </div>
+<div class="line">[...]</div>
+<div class="line"> </div>
+<div class="line">ofstream output_stream(<span class="stringliteral">&quot;solution.dat&quot;</span>);</div>
+<div class="line"><a class="code" href="optimisation_8txt.html#a692941378f809f62418f43da15fbc2dc">mesh_pt</a>()-&gt;output(output_stream);</div>
+<div class="line">output_stream.close();</div>
+<div class="line"> </div>
+<div class="line">[...]</div>
+</div><!-- fragment --><p>While C++-streams are very convenient, they can be expensive &ndash; so much so that in extreme cases a computation can become dominated by the cost of the post-processing operations. There is no obvious reason why I/O with C++ streams should be so much slower than I/O in fortran or C, say. In fact, it is not supposed to be! (Google will lead you to numerous heated discussions on this topic.) However, we (and, it seems, many others) have found C++-output to be consistently slower than C-style output. Since the latter is available from C++ we have started to provide alternative output routines that employ C-style I/O, using the FILE type. If your computation involves lots of I/O, it may be helpful to replace the above statements by</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include&lt;stdio.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line">[...]</div>
+<div class="line"> </div>
+<div class="line">FILE* <a class="code" href="optimisation_8txt.html#ada49fa1d057ae8d583d1bef8c0c0e740">file_pt</a> = fopen(<span class="stringliteral">&quot;solution.dat&quot;</span>,<span class="stringliteral">&quot;w&quot;</span>);</div>
+<div class="line"><a class="code" href="optimisation_8txt.html#a692941378f809f62418f43da15fbc2dc">mesh_pt</a>()-&gt;output(<a class="code" href="optimisation_8txt.html#ada49fa1d057ae8d583d1bef8c0c0e740">file_pt</a>);</div>
+<div class="line"><a class="code" href="optimisation_8txt.html#af3006296a5de68031c177e9c4bb0a83f">fclose</a>(<a class="code" href="optimisation_8txt.html#ada49fa1d057ae8d583d1bef8c0c0e740">file_pt</a>);</div>
+<div class="line"> </div>
+<div class="line">[...]</div>
+</div><!-- fragment --><p>Depending on the application, we typically find that C-style output is about 2 to 6 times faster than its C++ equivalent. Run the demo code <a href="../../../demo_drivers/optimisation/C_style_output/c_style_output.cc">c_style_output.cc</a> to explore the relative performance of the two methods on your machine. However, C-style output is not as "bullet-proof" as its C++-counterpart. For instance, if an output directory does not exist, trying to write to it with C-style output tends to cause a segmentation fault, whereas C++-output handles this more gracefully (no output is produced but the code execution continues).</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="assembly"></a>
+Different sparse assembly techniques and the STL memory pool</h1>
+<h2><a class="anchor" id="assembly_methods"></a>
+The different sparse assembly methods and how to compare their relative performance</h2>
+<p><code>oomph-lib's</code> black-box nonlinear solver <code>Problem::newton_solve()</code> employs Newton's method to solve the system of nonlinear algebraic equations arising from the discretisation of the problem. By default, the linear systems that determine the corrections to the unknowns during the Newton iterations are solved with <code>SuperLUSolver</code>, <code>oomph-lib's</code> default <code>LinearSolver</code>. Within this framework the two most computationally expensive steps (both in terms of memory usage and CPU time) are the assembly of the linear system (comprising the Jacobian matrix and the residual vector) and its solution. [Not all of <code>oomph-lib's</code> <code>LinearSolvers</code> require the assembly of the Jacobian matrix (for instance the frontal solver <code>HSL_MA42</code> avoids the assembly of the linear system and computes its LU decomposition "on the fly") but most of them do.]</p>
+<p>The assembly of the Jacobian matrix (in compressed-row or compressed-column storage) is typically performed by the function</p>
+<div class="fragment"><div class="line">Problem::sparse_assemble_row_or_column_compressed(...)</div>
+</div><!-- fragment --><p>This function performs the assembly, using one of five different assembly methods, selected by the protected member data</p>
+<div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> Problem::Sparse_assembly_method</div>
+</div><!-- fragment --><p>in the <code>Problem</code> class. This flag can take any of the values defined in the enumeration <code>Problem::Assembly_method</code>.</p>
+<p>Each of the five different methods has its own advantages and disadvantages in terms of speed and/or memory requirements. By default, we use the "assembly using vectors of pairs" as it tends to be optimal in both respects &ndash; at least when the library is compiled with full optimisation. If the library is compiled without optimisation and/or in <code>PARANOID</code> mode, the map-based assembly tends to be faster, if significantly more expensive in terms of memory requirements.</p>
+<p>You should explore the performance of the various methods on your machine, using the the driver code <a href="../../../demo_drivers/optimisation/sparse_assemble/sparse_assemble_test.cc">sparse_assemble_test.cc</a> in the directory</p>
+<center> <a href="../../../demo_drivers/optimisation/sparse_assemble/">demo_drivers/optimisation/sparse_assemble</a> </center><p>The shell script <a href="../../../demo_drivers/optimisation/sparse_assemble/compare.bash">compare.bash</a> in the same directory may be used to systematically explore the performance of the different methods for various problem sizes.</p>
+<p>While the test code automatically documents the CPU times required for the matrix assembly, the automatic assessment of its memory usage is a somewhat nontrivial task. We provide a quick-and-dirty solution to this problem: If the protected member data</p>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> Problem::Pause_at_end_of_sparse_assembly</div>
+</div><!-- fragment --><p>is set to true, the assembly process is halted when it has reached its most memory-intensive phase. The user can then use <code>top</code> (or some other external tool) to assess the memory usage of the code. (Typing "M" in <code>top</code> sorts the entries by memory usage rather than by cpu usage).</p>
+<hr  />
+<h2><a class="anchor" id="STL_pool"></a>
+The STL memory pool</h2>
+<p>When analysing the code's memory usage, you may notice that, following the assembly of the Jacobian matrix, not all memory is returned to the system, particularly, if maps or lists are used for the assembly. This does <b>not</b> indicate the presence of a memory leak but is a result of the internal memory management performed by the STL allocator which retains some (and in some cases a lot) of the initially allocated memory in its own "memory pool" in order to speed up the subsequent memory allocation for other STL objects. <a href="http://www.google.com">Google</a> for "STL memory pool" to find out more about this issue. The executive summary is: "Memory pools are good for you", even though they have the slightly annoying side-effect of making it virtually impossible to monitor the <em>actual</em> memory usage of the code.</p>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aoptimisation_8txt_html_a14cb177259090edfc37678f58089ad82"><div class="ttname"><a href="optimisation_8txt.html#a14cb177259090edfc37678f58089ad82">int_pt</a></div><div class="ttdeci">mainpage Optimisation One of the main challenges in the development of a general purpose scientific computing library is the potential conflict between the desire for robustness and generality on the one and code&lt;/B &gt;&lt;/EM &gt;&lt;/center &gt; implying that e by e all methods should reliably produce the e correct results Possible optimisations that may lead to incorrect results even for a small subset of must be activated explicitly by the knowledgeable who then takes the responsibility for any resulting errors Here are some examples for possible optimisations that you may wish to activate for your problem ref linear_vs_nonlinear ref store_shape ref full_integration ref ale ref C_style_output ref assembly All tend to lead to faster run but there are caveats that you must be aware declaring a problem to be linear when it isn t will lead to a very significant speedup the results will be wrong Some techniques will make the code less c oomph lib treats all problems as nonlinear and uses Newton s method to solve the system of nonlinear algebraic equations that result from the problem s discretisation With this linear problems are special cases for which Newton s method converges in one step if a problem is known to be leading to a significant speedup For in a linear problem it is not necessary to re compute the residuals of the nonlinear algebraic equations after as we already know that they will have been reduced to * int_pt</div><div class="ttdef"><b>Definition:</b> <a href="optimisation_8txt_source.html#l00149">optimisation.txt:149</a></div></div>
+<div class="ttc" id="aoptimisation_8txt_html_a692941378f809f62418f43da15fbc2dc"><div class="ttname"><a href="optimisation_8txt.html#a692941378f809f62418f43da15fbc2dc">mesh_pt</a></div><div class="ttdeci">mesh_pt() -&gt; output(output_stream)</div></div>
+<div class="ttc" id="aoptimisation_8txt_html_ada49fa1d057ae8d583d1bef8c0c0e740"><div class="ttname"><a href="optimisation_8txt.html#ada49fa1d057ae8d583d1bef8c0c0e740">file_pt</a></div><div class="ttdeci">fopen(&quot;solution.dat&quot;,&quot;w&quot;) file_pt</div><div class="ttdef"><b>Definition:</b> <a href="optimisation_8txt_source.html#l00249">optimisation.txt:249</a></div></div>
+<div class="ttc" id="aoptimisation_8txt_html_aa34e0d1dbc3b594b42ed453dd728fa24"><div class="ttname"><a href="optimisation_8txt.html#aa34e0d1dbc3b594b42ed453dd728fa24">n_element</a></div><div class="ttdeci">unsigned n_element</div><div class="ttdef"><b>Definition:</b> <a href="optimisation_8txt_source.html#l00152">optimisation.txt:152</a></div></div>
+<div class="ttc" id="aoptimisation_8txt_html_af3006296a5de68031c177e9c4bb0a83f"><div class="ttname"><a href="optimisation_8txt.html#af3006296a5de68031c177e9c4bb0a83f">fclose</a></div><div class="ttdeci">fclose(file_pt)</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:52:16
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

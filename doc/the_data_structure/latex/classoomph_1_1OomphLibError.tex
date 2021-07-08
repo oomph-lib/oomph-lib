@@ -1,0 +1,124 @@
+\hypertarget{classoomph_1_1OomphLibError}{}\doxysection{oomph\+::Oomph\+Lib\+Error Class Reference}
+\label{classoomph_1_1OomphLibError}\index{oomph::OomphLibError@{oomph::OomphLibError}}
+
+
+{\ttfamily \#include $<$oomph\+\_\+definitions.\+h$>$}
+
+Inheritance diagram for oomph\+::Oomph\+Lib\+Error\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1OomphLibError}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibError_a2706846fffe8d60e13918daec455e780}{Oomph\+Lib\+Error}} (const std\+::string \&error\+\_\+description, const std\+::string \&function\+\_\+name, const char $\ast$location)
+\begin{DoxyCompactList}\small\item\em Constructor requires the error description and the function in which the error occured and the location provided by the O\+O\+M\+P\+H\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+L\+O\+C\+A\+T\+I\+ON macro. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classoomph_1_1OomphLibError_a64f1bfd5eaaafdef448c9a9f47be85cb}{set\+\_\+stream\+\_\+pt}} (std\+::ostream $\ast$const \&stream\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Static member function used to specify the error stream, which must be passed as a pointer because streams cannot be copied. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classoomph_1_1OomphLibError_a9c1f4842949a5938f2646428cb390124}{set\+\_\+output\+\_\+width}} (const unsigned \&output\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Static member function used to specify the width (in characters) of the error stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::ostream $\ast$ \mbox{\hyperlink{classoomph_1_1OomphLibError_a8a2076201ede98a0c72b94a713052b46}{Stream\+\_\+pt}} = \&std\+::cerr
+\begin{DoxyCompactList}\small\item\em Output stream that is used to write the errors. \end{DoxyCompactList}\item 
+static unsigned \mbox{\hyperlink{classoomph_1_1OomphLibError_a4f0a51dc7d73673d9cb17f3f4f9cd904}{Output\+\_\+width}} = 70
+\begin{DoxyCompactList}\small\item\em Width in characters of the output report. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+An \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}} object which should be thrown when an run-\/time error is encountered. The error stream and stream width can be specified. The default is cerr with a width of 70 characters. 
+
+Definition at line 225 of file oomph\+\_\+definitions.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1OomphLibError_a2706846fffe8d60e13918daec455e780}\label{classoomph_1_1OomphLibError_a2706846fffe8d60e13918daec455e780}} 
+\index{oomph::OomphLibError@{oomph::OomphLibError}!OomphLibError@{OomphLibError}}
+\index{OomphLibError@{OomphLibError}!oomph::OomphLibError@{oomph::OomphLibError}}
+\doxysubsubsection{\texorpdfstring{OomphLibError()}{OomphLibError()}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Lib\+Error\+::\+Oomph\+Lib\+Error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{error\+\_\+description,  }\item[{const std\+::string \&}]{function\+\_\+name,  }\item[{const char $\ast$}]{location }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor requires the error description and the function in which the error occured and the location provided by the O\+O\+M\+P\+H\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+L\+O\+C\+A\+T\+I\+ON macro. 
+
+
+
+Definition at line 238 of file oomph\+\_\+definitions.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1OomphLibError_a9c1f4842949a5938f2646428cb390124}\label{classoomph_1_1OomphLibError_a9c1f4842949a5938f2646428cb390124}} 
+\index{oomph::OomphLibError@{oomph::OomphLibError}!set\_output\_width@{set\_output\_width}}
+\index{set\_output\_width@{set\_output\_width}!oomph::OomphLibError@{oomph::OomphLibError}}
+\doxysubsubsection{\texorpdfstring{set\_output\_width()}{set\_output\_width()}}
+{\footnotesize\ttfamily static void oomph\+::\+Oomph\+Lib\+Error\+::set\+\_\+output\+\_\+width (\begin{DoxyParamCaption}\item[{const unsigned \&}]{output\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Static member function used to specify the width (in characters) of the error stream. 
+
+
+
+Definition at line 252 of file oomph\+\_\+definitions.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1OomphLibError_a64f1bfd5eaaafdef448c9a9f47be85cb}\label{classoomph_1_1OomphLibError_a64f1bfd5eaaafdef448c9a9f47be85cb}} 
+\index{oomph::OomphLibError@{oomph::OomphLibError}!set\_stream\_pt@{set\_stream\_pt}}
+\index{set\_stream\_pt@{set\_stream\_pt}!oomph::OomphLibError@{oomph::OomphLibError}}
+\doxysubsubsection{\texorpdfstring{set\_stream\_pt()}{set\_stream\_pt()}}
+{\footnotesize\ttfamily static void oomph\+::\+Oomph\+Lib\+Error\+::set\+\_\+stream\+\_\+pt (\begin{DoxyParamCaption}\item[{std\+::ostream $\ast$const \&}]{stream\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Static member function used to specify the error stream, which must be passed as a pointer because streams cannot be copied. 
+
+
+
+Definition at line 247 of file oomph\+\_\+definitions.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1OomphLibError_a4f0a51dc7d73673d9cb17f3f4f9cd904}\label{classoomph_1_1OomphLibError_a4f0a51dc7d73673d9cb17f3f4f9cd904}} 
+\index{oomph::OomphLibError@{oomph::OomphLibError}!Output\_width@{Output\_width}}
+\index{Output\_width@{Output\_width}!oomph::OomphLibError@{oomph::OomphLibError}}
+\doxysubsubsection{\texorpdfstring{Output\_width}{Output\_width}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Oomph\+Lib\+Error\+::\+Output\+\_\+width = 70\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Width in characters of the output report. 
+
+Default output width for Oomph\+Lib\+Errors (70) 
+
+Definition at line 231 of file oomph\+\_\+definitions.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1OomphLibError_a8a2076201ede98a0c72b94a713052b46}\label{classoomph_1_1OomphLibError_a8a2076201ede98a0c72b94a713052b46}} 
+\index{oomph::OomphLibError@{oomph::OomphLibError}!Stream\_pt@{Stream\_pt}}
+\index{Stream\_pt@{Stream\_pt}!oomph::OomphLibError@{oomph::OomphLibError}}
+\doxysubsubsection{\texorpdfstring{Stream\_pt}{Stream\_pt}}
+{\footnotesize\ttfamily std\+::ostream $\ast$ oomph\+::\+Oomph\+Lib\+Error\+::\+Stream\+\_\+pt = \&std\+::cerr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Output stream that is used to write the errors. 
+
+Default output stream for Oomph\+Lib\+Erorrs (cerr) 
+
+Definition at line 228 of file oomph\+\_\+definitions.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__definitions_8h}{oomph\+\_\+definitions.\+h}}\item 
+\mbox{\hyperlink{oomph__definitions_8cc}{oomph\+\_\+definitions.\+cc}}\end{DoxyCompactItemize}

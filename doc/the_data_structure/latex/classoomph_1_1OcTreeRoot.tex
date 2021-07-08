@@ -1,0 +1,366 @@
+\hypertarget{classoomph_1_1OcTreeRoot}{}\doxysection{oomph\+::Oc\+Tree\+Root Class Reference}
+\label{classoomph_1_1OcTreeRoot}\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+
+
+{\ttfamily \#include $<$octree.\+h$>$}
+
+Inheritance diagram for oomph\+::Oc\+Tree\+Root\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1OcTreeRoot}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OcTreeRoot_a594278fd254e72415e1523b1b8e7273d}{Oc\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor for the root octree\+: Pass pointer to the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OcTreeRoot_aa32ff5989a11da4c0a6f884f81833ef9}{Oc\+Tree\+Root}} (const \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a9301f0c4839b8e277822ab0d860f4d11}{operator=}} (const \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_acef513b8401e5fd32d1311bdebe86f45}{edge\+\_\+neighbour\+\_\+pt}} (const unsigned \&edge\+\_\+direction)
+\begin{DoxyCompactList}\small\item\em Return vector of pointers to the edge-\/neighbouring Tree\+Roots in the (enumerated) (edge) direction. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1OcTreeRoot_add3c1de4903d2db75d19274719912ea3}{nedge\+\_\+neighbour}} (const unsigned \&edge\+\_\+direction)
+\begin{DoxyCompactList}\small\item\em Return number of edge-\/neighbouring \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} in the (enumerated) (edge) direction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a92ccf3b396de331440c5dcba2e024317}{add\+\_\+edge\+\_\+neighbour\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$oc\+\_\+tree\+\_\+root\+\_\+pt, const unsigned \&edge\+\_\+direction)
+\begin{DoxyCompactList}\small\item\em Add pointer to the edge-\/neighbouring \mbox{[}Oc\mbox{]}\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} in the (enumerated) (edge) direction -- maintains uniqueness. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a961a28583236f1b92bc35de064d2dba6}{up\+\_\+equivalent}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$tree\+\_\+root\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Return up equivalent of the neighbours specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: \char`\"{}in my
+neighbour, my Up is its Up\char`\"{}). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-\/front axis) say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: \char`\"{}in my 
+neighbour, my Up is its Down\char`\"{}); etc. Returns O\+M\+E\+GA if the Octree specified by the pointer argument is not a neighbour. ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a91210b8fab8bb9f092518303551e0c33}{set\+\_\+up\+\_\+equivalent}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$tree\+\_\+root\+\_\+pt, const int \&dir)
+\begin{DoxyCompactList}\small\item\em Set up equivalent of the neighbours specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: \char`\"{}in my
+neighbour, my Up is its Up\char`\"{}). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-\/front axis) say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: \char`\"{}in my 
+neighbour, my Up is its Down\char`\"{}); etc. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a497950cb0812be6a95be8af658a03fb6}{right\+\_\+equivalent}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$tree\+\_\+root\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed from the current octree neighbour, our right direction is the neighbour\textquotesingle{}s Right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. Returns O\+M\+E\+GA if the Octree specified by the pointer argument is not a neighbour. ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1OcTreeRoot_aa462fe159838307aee0870ad089836f5}{set\+\_\+right\+\_\+equivalent}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$tree\+\_\+root\+\_\+pt, const int \&dir)
+\begin{DoxyCompactList}\small\item\em The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed from the current octree neighbour, our right direction is the neighbour\textquotesingle{}s Right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a6b6730957601b05b991ffc9972d31f8b}{direction\+\_\+of\+\_\+neighbour}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$octree\+\_\+root\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em If octree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}faces L/\+R/\+F/\+B/\+U/D or edges D\+B/\+U\+P/...\mbox{]} in which it is found, otherwise return O\+M\+E\+GA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_afa562a1888008194b352be57f2c3d9a9}{Edge\+\_\+neighbour\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Map of pointers to the edge-\/neighbouring \mbox{[}Oc\mbox{]}Tree\+Roots\+: Edge\+\_\+neighbour\+\_\+pt\mbox{[}direction\mbox{]} is \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to the pointers to the \mbox{[}Oc\mbox{]}\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}\textquotesingle{}s edge neighbours in the (enumerated) (edge) direction. \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$, int $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_af35e1f7300551c1c8d9ad828d3ebccd9}{Up\+\_\+equivalent}}
+\begin{DoxyCompactList}\small\item\em Map giving the Up equivalent of the neighbour specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: \char`\"{}in my
+neighbour, my Up is its Up\char`\"{}). If the neighbour is rotated by 180 degrees relative to the current octree(around the back-\/front axis), say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: \char`\"{}in my 
+neighbour, my Up is its Down\char`\"{}); etc. \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$, int $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a400dfaf6af4fe47b061faafddfb14680}{Right\+\_\+equivalent}}
+\begin{DoxyCompactList}\small\item\em Map giving the Right equivalent of the neighbour specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our right direction is the neighbour\textquotesingle{}s right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Right\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=R (read as\+: \char`\"{}in my
+neighbour, my Right is its Right\char`\"{}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} is a \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} that forms the root of a (recursive) octree. The \char`\"{}root node\char`\"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \mbox{\hyperlink{classoomph_1_1OcTreeForest}{Oc\+Tree\+Forest}}). 
+
+Definition at line 598 of file octree.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a594278fd254e72415e1523b1b8e7273d}\label{classoomph_1_1OcTreeRoot_a594278fd254e72415e1523b1b8e7273d}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!OcTreeRoot@{OcTreeRoot}}
+\index{OcTreeRoot@{OcTreeRoot}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{OcTreeRoot()}{OcTreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oc\+Tree\+Root\+::\+Oc\+Tree\+Root (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the root octree\+: Pass pointer to the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+Q\+Element$<$3$>$}} that is represented by the \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}}. 
+
+
+
+Definition at line 631 of file octree.\+h.
+
+
+
+References oomph\+::\+Oc\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_aa32ff5989a11da4c0a6f884f81833ef9}\label{classoomph_1_1OcTreeRoot_aa32ff5989a11da4c0a6f884f81833ef9}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!OcTreeRoot@{OcTreeRoot}}
+\index{OcTreeRoot@{OcTreeRoot}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{OcTreeRoot()}{OcTreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oc\+Tree\+Root\+::\+Oc\+Tree\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 654 of file octree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a92ccf3b396de331440c5dcba2e024317}\label{classoomph_1_1OcTreeRoot_a92ccf3b396de331440c5dcba2e024317}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!add\_edge\_neighbour\_pt@{add\_edge\_neighbour\_pt}}
+\index{add\_edge\_neighbour\_pt@{add\_edge\_neighbour\_pt}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{add\_edge\_neighbour\_pt()}{add\_edge\_neighbour\_pt()}}
+{\footnotesize\ttfamily void oomph\+::\+Oc\+Tree\+Root\+::add\+\_\+edge\+\_\+neighbour\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$}]{oc\+\_\+tree\+\_\+root\+\_\+pt,  }\item[{const unsigned \&}]{edge\+\_\+direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add pointer to the edge-\/neighbouring \mbox{[}Oc\mbox{]}\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} in the (enumerated) (edge) direction -- maintains uniqueness. 
+
+
+
+Definition at line 720 of file octree.\+h.
+
+
+
+References oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string, Edge\+\_\+neighbour\+\_\+pt, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
+
+
+
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::find\+\_\+neighbours().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a6b6730957601b05b991ffc9972d31f8b}\label{classoomph_1_1OcTreeRoot_a6b6730957601b05b991ffc9972d31f8b}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!direction\_of\_neighbour@{direction\_of\_neighbour}}
+\index{direction\_of\_neighbour@{direction\_of\_neighbour}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{direction\_of\_neighbour()}{direction\_of\_neighbour()}}
+{\footnotesize\ttfamily int oomph\+::\+Oc\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$}]{octree\+\_\+root\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+If octree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}faces L/\+R/\+F/\+B/\+U/D or edges D\+B/\+U\+P/...\mbox{]} in which it is found, otherwise return O\+M\+E\+GA. 
+
+
+
+Definition at line 819 of file octree.\+h.
+
+
+
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, e, edge\+\_\+neighbour\+\_\+pt(), oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Oc\+Tree\+Names\+::L, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt, oomph\+::\+Tree\+::\+O\+M\+E\+GA, oomph\+::\+Oc\+Tree\+Names\+::R, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::U, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
+
+
+
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents(), right\+\_\+equivalent(), and up\+\_\+equivalent().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_acef513b8401e5fd32d1311bdebe86f45}\label{classoomph_1_1OcTreeRoot_acef513b8401e5fd32d1311bdebe86f45}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!edge\_neighbour\_pt@{edge\_neighbour\_pt}}
+\index{edge\_neighbour\_pt@{edge\_neighbour\_pt}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{edge\_neighbour\_pt()}{edge\_neighbour\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$$>$ oomph\+::\+Oc\+Tree\+Root\+::edge\+\_\+neighbour\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge\+\_\+direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of pointers to the edge-\/neighbouring Tree\+Roots in the (enumerated) (edge) direction. 
+
+
+
+Definition at line 668 of file octree.\+h.
+
+
+
+References oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string, Edge\+\_\+neighbour\+\_\+pt, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
+
+
+
+Referenced by direction\+\_\+of\+\_\+neighbour(), and oomph\+::\+Oc\+Tree\+Forest\+::oc\+\_\+edge\+\_\+neigh\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_add3c1de4903d2db75d19274719912ea3}\label{classoomph_1_1OcTreeRoot_add3c1de4903d2db75d19274719912ea3}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!nedge\_neighbour@{nedge\_neighbour}}
+\index{nedge\_neighbour@{nedge\_neighbour}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{nedge\_neighbour()}{nedge\_neighbour()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Oc\+Tree\+Root\+::nedge\+\_\+neighbour (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge\+\_\+direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return number of edge-\/neighbouring \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} in the (enumerated) (edge) direction. 
+
+
+
+Definition at line 695 of file octree.\+h.
+
+
+
+References oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string, Edge\+\_\+neighbour\+\_\+pt, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a9301f0c4839b8e277822ab0d860f4d11}\label{classoomph_1_1OcTreeRoot_a9301f0c4839b8e277822ab0d860f4d11}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Oc\+Tree\+Root\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 660 of file octree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a497950cb0812be6a95be8af658a03fb6}\label{classoomph_1_1OcTreeRoot_a497950cb0812be6a95be8af658a03fb6}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!right\_equivalent@{right\_equivalent}}
+\index{right\_equivalent@{right\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{right\_equivalent()}{right\_equivalent()}}
+{\footnotesize\ttfamily int oomph\+::\+Oc\+Tree\+Root\+::right\+\_\+equivalent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$}]{tree\+\_\+root\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed from the current octree neighbour, our right direction is the neighbour\textquotesingle{}s Right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. Returns O\+M\+E\+GA if the Octree specified by the pointer argument is not a neighbour. ~\newline
+ 
+
+
+
+Definition at line 795 of file octree.\+h.
+
+
+
+References direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, and Right\+\_\+equivalent.
+
+
+
+Referenced by oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), and oomph\+::\+Oc\+Tree\+::gteq\+\_\+true\+\_\+edge\+\_\+neighbour().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_aa462fe159838307aee0870ad089836f5}\label{classoomph_1_1OcTreeRoot_aa462fe159838307aee0870ad089836f5}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!set\_right\_equivalent@{set\_right\_equivalent}}
+\index{set\_right\_equivalent@{set\_right\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{set\_right\_equivalent()}{set\_right\_equivalent()}}
+{\footnotesize\ttfamily void oomph\+::\+Oc\+Tree\+Root\+::set\+\_\+right\+\_\+equivalent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$}]{tree\+\_\+root\+\_\+pt,  }\item[{const int \&}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed from the current octree neighbour, our right direction is the neighbour\textquotesingle{}s Right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. 
+
+
+
+Definition at line 811 of file octree.\+h.
+
+
+
+References Right\+\_\+equivalent.
+
+
+
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a91210b8fab8bb9f092518303551e0c33}\label{classoomph_1_1OcTreeRoot_a91210b8fab8bb9f092518303551e0c33}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!set\_up\_equivalent@{set\_up\_equivalent}}
+\index{set\_up\_equivalent@{set\_up\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{set\_up\_equivalent()}{set\_up\_equivalent()}}
+{\footnotesize\ttfamily void oomph\+::\+Oc\+Tree\+Root\+::set\+\_\+up\+\_\+equivalent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$}]{tree\+\_\+root\+\_\+pt,  }\item[{const int \&}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set up equivalent of the neighbours specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: \char`\"{}in my
+neighbour, my Up is its Up\char`\"{}). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-\/front axis) say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: \char`\"{}in my 
+neighbour, my Up is its Down\char`\"{}); etc. 
+
+
+
+Definition at line 784 of file octree.\+h.
+
+
+
+References Up\+\_\+equivalent.
+
+
+
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a961a28583236f1b92bc35de064d2dba6}\label{classoomph_1_1OcTreeRoot_a961a28583236f1b92bc35de064d2dba6}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!up\_equivalent@{up\_equivalent}}
+\index{up\_equivalent@{up\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{up\_equivalent()}{up\_equivalent()}}
+{\footnotesize\ttfamily int oomph\+::\+Oc\+Tree\+Root\+::up\+\_\+equivalent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$}]{tree\+\_\+root\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return up equivalent of the neighbours specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: \char`\"{}in my
+neighbour, my Up is its Up\char`\"{}). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-\/front axis) say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: \char`\"{}in my 
+neighbour, my Up is its Down\char`\"{}); etc. Returns O\+M\+E\+GA if the Octree specified by the pointer argument is not a neighbour. ~\newline
+ 
+
+
+
+Definition at line 762 of file octree.\+h.
+
+
+
+References direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Tree\+::\+O\+M\+E\+GA, and Up\+\_\+equivalent.
+
+
+
+Referenced by oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), and oomph\+::\+Oc\+Tree\+::gteq\+\_\+true\+\_\+edge\+\_\+neighbour().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_afa562a1888008194b352be57f2c3d9a9}\label{classoomph_1_1OcTreeRoot_afa562a1888008194b352be57f2c3d9a9}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!Edge\_neighbour\_pt@{Edge\_neighbour\_pt}}
+\index{Edge\_neighbour\_pt@{Edge\_neighbour\_pt}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{Edge\_neighbour\_pt}{Edge\_neighbour\_pt}}
+{\footnotesize\ttfamily std\+::map$<$int,\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$$>$ $>$ oomph\+::\+Oc\+Tree\+Root\+::\+Edge\+\_\+neighbour\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Map of pointers to the edge-\/neighbouring \mbox{[}Oc\mbox{]}Tree\+Roots\+: Edge\+\_\+neighbour\+\_\+pt\mbox{[}direction\mbox{]} is \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to the pointers to the \mbox{[}Oc\mbox{]}\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}\textquotesingle{}s edge neighbours in the (enumerated) (edge) direction. 
+
+
+
+Definition at line 605 of file octree.\+h.
+
+
+
+Referenced by add\+\_\+edge\+\_\+neighbour\+\_\+pt(), edge\+\_\+neighbour\+\_\+pt(), and nedge\+\_\+neighbour().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a400dfaf6af4fe47b061faafddfb14680}\label{classoomph_1_1OcTreeRoot_a400dfaf6af4fe47b061faafddfb14680}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!Right\_equivalent@{Right\_equivalent}}
+\index{Right\_equivalent@{Right\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{Right\_equivalent}{Right\_equivalent}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$,int$>$ oomph\+::\+Oc\+Tree\+Root\+::\+Right\+\_\+equivalent\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Map giving the Right equivalent of the neighbour specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our right direction is the neighbour\textquotesingle{}s right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Right\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=R (read as\+: \char`\"{}in my
+neighbour, my Right is its Right\char`\"{}). 
+
+
+
+Definition at line 624 of file octree.\+h.
+
+
+
+Referenced by right\+\_\+equivalent(), and set\+\_\+right\+\_\+equivalent().
+
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_af35e1f7300551c1c8d9ad828d3ebccd9}\label{classoomph_1_1OcTreeRoot_af35e1f7300551c1c8d9ad828d3ebccd9}} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!Up\_equivalent@{Up\_equivalent}}
+\index{Up\_equivalent@{Up\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{Up\_equivalent}{Up\_equivalent}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$,int$>$ oomph\+::\+Oc\+Tree\+Root\+::\+Up\+\_\+equivalent\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Map giving the Up equivalent of the neighbour specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: \char`\"{}in my
+neighbour, my Up is its Up\char`\"{}). If the neighbour is rotated by 180 degrees relative to the current octree(around the back-\/front axis), say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: \char`\"{}in my 
+neighbour, my Up is its Down\char`\"{}); etc. 
+
+
+
+Definition at line 616 of file octree.\+h.
+
+
+
+Referenced by set\+\_\+up\+\_\+equivalent(), and up\+\_\+equivalent().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{octree_8h}{octree.\+h}}\end{DoxyCompactItemize}

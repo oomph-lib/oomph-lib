@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: spine_channel.txt_doxygenified.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">spine_channel.txt_doxygenified.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="spine__channel_8txt__doxygenified_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">\mainpage Example problem: Steady 2D finite-Reynolds-number flow in a channel of non-uniform width -- An introduction to Spine meshes.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">Many previous examples demonstrated \c oomph-lib&#39;s ability to solve</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">problems on domains with moving, curvilinear boundaries. These</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">examples had the following common features: </span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">- The motion of the curvilinear domain boundaries was prescribed.</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">- The domain was discretised by \c Domain / \c MacroElement - based</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  meshes. Recall that in such meshes</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  the function \c Mesh::node_update() updates the position of</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  \e all of its constituent nodes in response to changes in the</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  shape/position of the geometric objects that define its curvilinear</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  boundaries. The update of the nodal positions is performed on an </span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  element-by-element basis and each element determines the new </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">  positions of its nodes by referring to the \c MacroElement </span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">  representation of the domain. </span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">- The governing equations were implemented in their Arbitrary </span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">  Eulerian Lagrangian (ALE) form, in which the mesh velocity is</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  determined from the &quot;history values&quot; of the nodal positions. </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">We will now consider problems in which the position of the domain</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">boundary is unknown and has to be determined as part of the overall</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">solution. This situation arises, e.g., in free-surface fluid flow</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">problems and in fluid-structure interaction problems. We shall explain</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">why \c Domain / \c MacroElement - based node update strategies </span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">are unlikely to be efficient for such problems and then introduce</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">the &quot;Method of Spines&quot; as one of a number of sparse (and therefore more</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">efficient) node-update strategies available in \c oomph-lib.</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">\section why_sparse Why we need sparse node updates</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">The sketch below shows a free-surface fluids problem in which</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">the &quot;height&quot; of the fluid domain (parametrised by the scalar function</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">\f$ x_2 = h(x_1) \f$) is unknown. The lower half of the sketch shows</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">a body-fitted finite-element mesh (the nodes and elements are shown in</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">dark blue) that discretises the fluid domain.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">\image html film_sketch.gif &quot;Sketch of a free-surface fluid problem. &quot; </span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">\image latex film_sketch.eps &quot;Sketch of a free-surface fluid problem. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> Assume now that we have some discrete representation of the unknown</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">free surface so that \f$ h(x_1) \f$ is approximated by</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">a function that involves a finite number of discrete unknowns </span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">\f$ H_i \  (i=1,...,N_H)\f$ . In principle, this allows us to </span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">represent the unknown boundary by a \c GeomObject in which the </span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">unknowns \f$ H_i \  (i=1,...,N_H)\f$ play the role of &quot;geometric</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">\c Data&quot;, i.e. \c Data whose values determine the shape of the</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">geometric object. Once the curvilinear</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">boundary is represented by a \c GeomObject, the update of the</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">nodal positions in the &quot;bulk&quot; mesh could be performed </span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">by the  \c Domain / \c MacroElement - based methods referred to above.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">How exactly the unknowns \f$ H_i \  (i=1,...,N_H)\f$ are </span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">determined is irrelevant for the purpose of this discussion (</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">in free surface flow problems, the relevant equation is the</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">kinematic free-surface condition discussed in </span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">&lt;a href=&quot;../../../navier_stokes/single_layer_free_surface/html/index.html#kinematic_condition_theory&quot;&gt;another tutorial&lt;/a&gt;) -- we simply assume that there \e are some equations</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">that determine their values. The feature we wish to focus on here is</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">that the solution of the problem by Newton&#39;s method requires the</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">computation of the derivatives of \e all discrete residuals with </span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">respect to \e all unknowns in the problem. \c oomph-lib&#39;s</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">Navier-Stokes elements compute the element residual vectors </span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">(the residuals of the discretised momentum and continuity equations, </span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">evaluated for the current values of the unknowns), and the derivatives of these</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">residuals with respect to the elements&#39; velocity and pressure</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">degrees of freedom. Clearly, the entries in the element&#39;s residual</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">vector also depend on the position of the element&#39;s constituent</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">nodes, which, in a free-boundary problem, are determined (via the</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">node update function) by the unknowns \f$ H_i \  (i=1,...,N_H)\f$</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">that discretise the position of the free surface. </span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> The main purpose of this example is to demonstrate the use (and the</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> creation) of so-called &quot;spine meshes&quot;. Such meshes</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">are similar to the \c MacroElement / \c Domain - based meshes employed</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">in many previous examples, in that they allow the nodal positions to be updated</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">in response to changes in the shape of their (curvilinear) domain boundaries. </span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">The key feature of &quot;spine meshes&quot; is that the node update can be</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">performed on a node-by-node basis -- this an important requirement for the</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">efficient solution of free-boundary and fluid-structure</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">interaction problems in which the position of the nodes in the &quot;bulk</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">mesh&quot; is determined by the (unknown) position of the domain boundary. </span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">The efficient evaluation of the so-called &quot;shape derivatives&quot;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">(the derivatives of the residuals of the equations discretised by</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">the elements in the &quot;bulk mesh&quot; with respect to the unknowns</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">that determine the position of the domain boundary) </span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">The idea behind spine-based node updates is illustrated in the sketch</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">below. Assume that the position of the domain boundary is parametrised</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">by a scalar function, so that, for instance, \f$ x_2 = h(x_1)\f$, </span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">where \f$ h(x_1)\f$ may have to be determined as part of the solution </span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">(e.g. in free-surface fluids problems -- the origin of the </span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">&quot;Method of Spines&quot;).</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">\image html spine_sketch.gif &quot;Sketch of the Method of Spines. &quot; </span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">\image latex spine_sketch.eps &quot;Sketch of the Method of Spines. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">Further, assume that the mesh topology is such that the</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">mesh&#39;s \f$ N_{node} \f$ nodes are distributed along \f$ N_{spine} \f$ </span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">lines that are (topologically) orthogonal to the free boundary. </span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">We refer to these lines as the &quot;spines&quot; and denote</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">the &quot;height&quot; of the domain, measured along spine \f$ s \f$ by</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">\f$ H_s \ (s=1,...,N_{spine}) \f$. We associate each node with </span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">a particular spine (so that node \f$ j \f$ is located on spine</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">\f$ s_j\f$)  and locate it along a fixed fraction </span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">\f$ \omega_j \f$ along &quot;its&quot; spine. The position of node \f$ j \f$</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">may therefore be written as</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">{\bf x}_j =  {\bf B}_{s_j} + \omega_j \, H_{s_j}  \, </span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">{\bf S}_{s_j} \ \ \ \ \ \ \ \ \ \ \ \ \  (1) </span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">where \f$ {\bf B}_s \f$ is the vector to the &quot;base&quot; of spine \f$ s \f$,</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">and \f$ {\bf S}_s \f$ the unit vector along that spine. </span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">A key feature of this method is that </span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">Determining the nodal positions via the &quot;Method of Spines&quot; </span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">equation (1)</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">Spine-based node updates </span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">This document has two main parts:</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">- In \ref part1 we demonstrate how to use a \c SpineMesh</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">- In \ref part2 we explain the general &quot;philosophy&quot; behind</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">  spine-based node-updates and demonstrate their implementation.</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">\section part1 Part 1: Flow through a channel of non-uniform width</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">\subsection example The example problem</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">We shall illustrate the use of \c SpineMeshes by considering </span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">the problem of steady 2D flow through a channel of non-uniform width.</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">&lt;TABLE&gt;</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">&lt;TR&gt; </span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">&lt;TD&gt;</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">&lt;B&gt;The steady 2D Navier-Stokes equations in a channel of non-uniform width.&lt;/B&gt;</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">&lt;/CENTER&gt; </span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">Solve</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">Re \ u_j\frac{\partial u_i}{\partial x_j} </span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">= - \frac{\partial p}{\partial x_i} +</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">\frac{\partial }{\partial x_j} \left(</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">\frac{\partial u_i}{\partial x_j} +  </span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">\frac{\partial u_j}{\partial x_i} \right),</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">and</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">\frac{\partial u_i}{\partial x_i} = 0,</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">in the region \f$ D = \left\{(x_1,x_2) \ \bigg| \ x_1 \in [0,L], </span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">x_2 \in [0,h(x_1)] \right\} \f$,</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">where</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">h(x_1) = \left\{</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">\begin{array}{cl}</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">H &amp; 0 \leq x_1 \leq L_1 \\</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">H + A\sin\left(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">H &amp; L_2 \leq x_1 \leq L</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">\end{array} \right.</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">shown in this sketch</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">\image html channel_sketch.gif &quot;Sketch of the problem. &quot; </span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">\image latex channel_sketch.eps &quot;Sketch of the problem. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">subject to the no-slip Dirichlet boundary conditions on the top and bottom rigid walls</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">\left. \mathbf{u}\right|_{\partial D_{wall}}=(0,0),</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">parallel, parabolic inflow on the left inflow boundary, </span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">\f$ \partial D_{inflow} = \{ (x_1,x_2) \ |  \ x_1=0 \}\f$ ,</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">\left. \mathbf{u}\right|_{\partial D_{inflow}}</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">=\left(x_2\left(H-x_2\right),0\right),</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">and axially traction-free,</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">parallel outflow on the outflow boundary, </span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">\f$ \partial D_{outflow} = \{ (x_1,x_2) \ | \ x_1=L \}\f$ ,</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">\left. u_2\right|_{\partial D_{outflow}}=0.</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">&lt;/TD&gt;</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">&lt;/TR&gt;</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">&lt;/TABLE&gt;  </span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">\section results Results</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">The figures below show the results (carpet plots of the two </span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">velocity components and the pressure, and a contour plot of the</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">pressure distribution with superimposed streamlines), </span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">obtained from computations with Taylor-Hood and Crouzeix-Raviart </span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">elements for a channel of length \f$ L = 2.7\f$ , height \f$ H=1.0 \f$ , with </span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">deflection amplitude \f$ A = 0.4 \f$, and a Reynolds number of </span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">\f$ Re=100\f$.</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">\image html TH.gif &quot;Plot of results computed with 2D Taylor-Hood elements. &quot; </span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">\image latex TH.eps &quot;Plot of results computed with 2D Taylor-Hood elements. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">\image html CR.gif &quot;Plot of results computed with 2D Crouzeix-Raviart elements. &quot; </span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">\image latex CR.eps &quot;Plot of results computed with 2D Crouzeix-Raviart elements. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">\section namespace Global parameters</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">The Reynolds number is the only parameter in </span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">this problem. As usual, we define and initialise it in a namespace:</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">\dontinclude spine_channel.cc</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">\skipline start_of_namespace</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">\until end_of_namespace</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">\section main The driver code</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">We start by creating a \c DocInfo object to define the output </span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">directory.</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">\skipline start_of_main</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">\until doc_info.number()=0</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">When using spines, we must use elements augmented by the \c</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">SpineElement&lt;ELEMENT&gt; class. This class, adds the functionality to be</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">updated using the method of spines (i.e storing a vector of pointers</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">to the spines and allocating equations numbers associated with the</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">spines degrees of freedom). We build the problem using \c</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">SpineElement&lt;TayloorHoodElement&lt;2&gt;&gt;.</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">We now build and solve the problem with Spine-Taylor-Hood elements,</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">then repeat for Spine-Crouzeix-Raviart elements.</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">\skipline Solve problem with Taylor Hood elements</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">\until end_of_main</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">\section problem The problem class </span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">The problem class for this example is very similar to our previous</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">&lt;A HREF=&quot;../../driven_cavity/html/index.html#problem&quot;&gt; steady</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">Navier-Stokes examples &lt;/A&gt;. We store the</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">height of the channel as private data, this is because we need it to</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">set the inflow boundary condition.</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">\dontinclude spine_channel.cc</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">\skipline start_of_problem_class</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">\until end_of_problem_class</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">Note that the absence of boundary conditions on the right boundary</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">(1), causes a zero traction condition to be applied there. This</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">implies that we should not fix a pressure degree of freedom.</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">\section constructor The problem constructor</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">We begin by setting all the mesh parameters, and building it.</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">\skipline start_of_constructor</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">\until UpperWall);</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">We then pin the velocities on the left, top and bottom boundaries (3,2</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">and 0).</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">\until end loop over boundaries</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">Finally, we pass a pointer to the Reynolds number to each element and</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">assign the equation numbers.</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">\until end_of_constructor</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">\section part2 Part 2: How to create a SpineMesh</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">Spine-based meshes have their origin </span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">in free-surface fluid-mechanics problems where they were first (?)</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">introduced by Kistler &amp; Scriven in their paper </span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">&lt;center&gt;</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment"> Kistler, S.F. &amp; Scriven, L.E. ``Coating Flows.&#39;&#39; In:</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">``Computational Analysis of Polymer Processing,&#39;&#39; Pearson, J.R.A. &amp;</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">Richardson, S.M. (eds.); Applied Science Publishers, London (1983).</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">&lt;/center&gt;</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">\c oomph-lib&#39;s</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment"> SpineMeshes provide a generalisation of their node-update</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">techniques.</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">In the past when solving a problem in a domain with curved boundaries,</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">we have made a specific Mesh for the domain, and use a geometric object to</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">define its curved wall(s).</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">\image html mesh.gif &quot;Diagram of a ChannelSpineMesh, going through the process of updating its central nodes, where the heights have been changed. &quot; </span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">\image latex mesh.eps &quot;Diagram of a ChannelSpineMesh, going through the process of updating its central nodes, where the heights have been changed. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">To generalise this approach \c oomph-lib makes use of spines. </span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">- A \c Spine is most easily visualised a line of a certain height, in</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">  one coordinate direction.</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">- A \c SpineNode is a \c Node located at a certain fraction along a \c</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">  Spine. </span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">- A \c SpineMesh is a \c Mesh which will update using spines.</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">- A \c SpineElement&lt;ELEMENT&gt; takes a &quot;normal&quot; element and adds the</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">  functionality to work with spines.</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">The creation of a \c SpineMesh is discussed in detail below \ref</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">spine_mesh. While the picture above demonstrates the ability of</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">SpineNode to individually update using the function \c</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">spine_node_update(spine_node_pt).</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">\subsection spine_mesh Making a SpineMesh </span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">In this example we use a \c SpineMesh to model the domain. This mesh</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">constitutes three regions: left (0), centre (1) and right (2), the</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">left and right regions have a constant height, while in the centre</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">region the height varies. These heights are defined by two</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">geometric objects, a </span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../the_data_structure/html/classoomph_1_1StraightLine.html&quot;&gt; </span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">straight</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">line &lt;/A&gt; and a deflected line respectively. </span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">We will discuss the necessary steps taken to create</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">this mesh (the complete documentation for this specific mesh can be</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">found &lt;A HREF=&quot;../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html&quot;&gt;</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">here &lt;/A&gt;).</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">To begin, we create a new class templated by a element and inheriting</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">from \c RectangularQuadMesh&lt;ELEMENT&gt; and \c SpineMesh. The latter adds</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">the functionality needed for using Spines.</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">\dontinclude channel_spine_mesh.template.h</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">\skipline template &lt;</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">\until public SpineMesh</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">All SpineMeshs must include a function \c spine_node_update(SpineNode*</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">spine_node_pt), this will describe the operations performed when</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment">updating every SpineNode in the mesh. First we find the SpineNodes</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">fraction along the spine.</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">\skipline virtual void spine_node_update</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">\until fraction()</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">We then get the local coordinate on the geometric object that defines the</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">upper wall.</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">\until geom_parameter(0)</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">Finally we use the use the local coordinate to get the position of the</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">geometric object and set the first coordinate value of the node.</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">We store the number of elements in the x direction in each region, the</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">number of elements in the y direction, the lengths of each region and</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">the height of the uniform boundary, as well as pointers to the two</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">geometric objects.</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">\skipline Number of elements in the left region</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">\until Straight_wall_pt;</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">All these details are passed to the constructor, except for the</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">pointer to the geometric object for the uniform wall. The constructor calls</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">the empty constructor for \c RectangularQuadMesh&lt;ELEMENT&gt;, copies</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">these values to their storage in the mesh.</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">\dontinclude channel_spine_mesh.template.cc</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">\skipline template&lt;class ELEMENT&gt;</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">\until Wall_pt</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">We then assign all the parameters for the \c</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">RectangularQuadMesh&lt;ELEMENT&gt;, create the geometric object for the uniform</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">wall and call the function \c build_channel_spine_mesh(...)</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">When we call the function \c build_channel_spine_mesh(...), it calls</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">its counterpart in the \c RectangularQuadMesh&lt;ELEMENT&gt;, then store the</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">numbers of elements in each direction in each region (and all at once).</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">\dontinclude channel_spine_mesh.template.cc</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">\skipline ::build_channel_spine_mesh</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">\until n_x2</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">We then allocate memory for the elements and spines in each region in</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">each region.</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">\until end Allocating memory</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">Now we allocate storage for the parameters used to build the spines.</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">\until n_prev_elements=0;</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">Now we create the first Spine with unit length, pin the height (since</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">it is not a degree of freedom in this mesh) and push the spine back</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">onto the \c Spine_pt.</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">\until push_back(new_spine_pt)</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">We then set the \c spine_pt() of the first node to the Spine we just</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">created, assign the nodes \c fraction() to zero and define the node as</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">part of this mesh.</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">\until nod_pt-&gt;spine_mesh_pt() = this;</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">We then mark the node as part of the left (0) region.</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">\until node_update_fct_id()=0;</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">When we built the Spine, we set its height to 1.0. We now need to</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">assign its height from the \c Straight_wall_pt and assign all the</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">information needed to update the mesh to the Spine.</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">First we set the value of \f$\zeta\f$ and get the geometric object and the</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">local coordinate.</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">\until locate_zeta</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">Then we store these geometric parameters in the Spine.</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">\until nod_pt</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">We then set the height of the Spine according to the geometric object.</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">\until height()</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment">Finally we set the Spines&#39; pointer to the geometric object.</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">Now we loop vertically along the spine, adding a pointer to the spine</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">to each element, and assigning the fraction for each node on this</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="comment">spine, define each node as part of this mesh, and mark it as part of</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="comment">the left region.</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="comment">\until end loop over elements</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="comment">We then loop over the remaining spines in the left region repeating</span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="comment">this process, except that the first spine in each element (except the</span></div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="comment">first) is copied from the last spine in the previous element.</span></div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="comment">We then repeat this process for the centre and right regions, using</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="comment">the correct geometric objects to define the upper wall, which can be</span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="comment">examined in detail </span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html&quot;&gt;</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">here &lt;/A&gt;.</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="comment">\subsection exercises Exercises</span></div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment">-# Investigate what happens when a pressure degree of freedom is fixed. </span></div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="comment">-# Try creating a new geometric object, which creates a triangular</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment">   indentation in the central region of the upper wall as shown.</span></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment">\image html Exercise.gif &quot;Plot of the solution to the problem specified in the above exercise computed with 3x3 Taylor-Hood elements and Re=100. &quot; </span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment">\image latex Exercise.eps &quot;Plot of the solution to the problem specified in the above exercise computed with 3x3 Taylor-Hood elements and Re=100. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment">   </span></div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aspine__channel_8txt_html_a86801174b4287733386905e7543911a0"><div class="ttname"><a href="spine__channel_8txt.html#a86801174b4287733386905e7543911a0">mesh</a></div><div class="ttdeci">When we built the we set its height to We now need to assign its height from the c Straight_wall_pt and assign all the information needed to update the mesh to the Spine First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the Spine until nod_pt We then set the height of the Spine according to the geometric object until adding a pointer to the spine to each and assigning the fraction for each node on this define each node as part of this mesh</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00457">spine_channel.txt:457</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_aa65a3698923f42762308375c13258dd9"><div class="ttname"><a href="spine__channel_8txt.html#aa65a3698923f42762308375c13258dd9">fraction</a></div><div class="ttdeci">All these details are passed to the except for the pointer to the geometric object for the uniform wall The constructor calls the empty constructor for c copies these values to their storage in the mesh dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform wall and call the function c it calls its counterpart in the c then store the numbers of elements in each direction in each region(and all at once). \dontinclude channel_spine_mesh.template.cc \skipline Now we create the first Spine with unit pin the assign the nodes c fraction() to zero and define the node as part of this mesh. \until nod_pt -&gt; spine_mesh_pt()=this</div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a6278222265b62552409f8aac35d11539"><div class="ttname"><a href="spine__channel_8txt.html#a6278222265b62552409f8aac35d11539">A</a></div><div class="ttdeci">mainpage Example curvilinear boundaries These examples had the following common in which the mesh velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the domain boundary is unknown and has to be determined as part of the overall solution This situation e in free surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}H &amp;0 \leq x_1 \leq L_1 \\H+A\sin\left(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\H &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the problem subject to the no slip Dirichlet boundary conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial D_{wall}}=(0, 0),\f] parabolic inflow on the left inflow f partial f[\left. \mathbf{u}\right|_{\partial D_{inflow}}=\left(x_2\left(H-x_2\right), 0\right),\f] and axially traction parallel outflow on the outflow f partial f[\left. u_2\right|_{\partial D_{outflow}}=0.\f]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figures below show the obtained from computations with Taylor Hood and Crouzeix Raviart elements for a channel of length f height f with deflection amplitude f A</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00215">spine_channel.txt:215</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_abbc0c723055298f44890e720b0ca907a"><div class="ttname"><a href="spine__channel_8txt.html#abbc0c723055298f44890e720b0ca907a">element</a></div><div class="ttdeci">When we built the we set its height to We now need to assign its height from the c Straight_wall_pt and assign all the information needed to update the mesh to the Spine First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the Spine until nod_pt We then set the height of the Spine according to the geometric object until adding a pointer to the spine to each element</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00456">spine_channel.txt:456</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_ab6c081592e5a43c3ddd306db5c520563"><div class="ttname"><a href="spine__channel_8txt.html#ab6c081592e5a43c3ddd306db5c520563">wall</a></div><div class="ttdeci">Applied Science we have made a specific Mesh for the and use a geometric object to define its curved wall(s). @I w 0.75\textwidth mesh &quot;Diagram of a ChannelSpineMesh</div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a22904b46a6976c37a810223b89a2f79b"><div class="ttname"><a href="spine__channel_8txt.html#a22904b46a6976c37a810223b89a2f79b">boundary</a></div><div class="ttdeci">mainpage Example curvilinear boundaries These examples had the following common in which the mesh velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the domain boundary is unknown and has to be determined as part of the overall solution This situation e in free surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}H &amp;0 \leq x_1 \leq L_1 \\H+A\sin\left(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\H &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the problem subject to the no slip Dirichlet boundary conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial D_{wall}}=(0, 0),\f] parabolic inflow on the left inflow boundary</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00188">spine_channel.txt:188</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a1690af29534a7ce8bc01ccb42785c809"><div class="ttname"><a href="spine__channel_8txt.html#a1690af29534a7ce8bc01ccb42785c809">process</a></div><div class="ttdeci">When we built the we set its height to We now need to assign its height from the c Straight_wall_pt and assign all the information needed to update the mesh to the Spine First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the Spine until nod_pt We then set the height of the Spine according to the geometric object until adding a pointer to the spine to each and assigning the fraction for each node on this define each node as part of this and mark it as part of the left region until end loop over elements We then loop over the remaining spines in the left region repeating this process</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00463">spine_channel.txt:463</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_afb5370399480f2ac0266d7183b126dc0"><div class="ttname"><a href="spine__channel_8txt.html#afb5370399480f2ac0266d7183b126dc0">length</a></div><div class="ttdeci">All these details are passed to the except for the pointer to the geometric object for the uniform wall The constructor calls the empty constructor for c copies these values to their storage in the mesh dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform wall and call the function c it calls its counterpart in the c then store the numbers of elements in each direction in each region(and all at once). \dontinclude channel_spine_mesh.template.cc \skipline Now we create the first Spine with unit length</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00403">spine_channel.txt:403</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a76a2ded169eb3947a11ec8e4f871575c"><div class="ttname"><a href="spine__channel_8txt.html#a76a2ded169eb3947a11ec8e4f871575c">spine</a></div><div class="ttdeci">When we built the we set its height to We now need to assign its height from the c Straight_wall_pt and assign all the information needed to update the mesh to the Spine First we set the value of f zeta f and get the geometric object and the coordinate until locate_zeta Then we store these geometric parameters in the Spine until nod_pt We then set the height of the Spine according to the geometric object until adding a pointer to the spine to each and assigning the fraction for each node on this spine</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00457">spine_channel.txt:457</a></div></div>
+<div class="ttc" id="asimple__spine__channel_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="simple__spine__channel_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver for channel flow problem with spine mesh.</div><div class="ttdef"><b>Definition:</b> <a href="simple__spine__channel_8cc_source.html#l00654">simple_spine_channel.cc:654</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_acdf7daf64e28672c5d683cb3854397ad"><div class="ttname"><a href="spine__channel_8txt.html#acdf7daf64e28672c5d683cb3854397ad">domain</a></div><div class="ttdeci">Applied Science we have made a specific Mesh for the domain</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00316">spine_channel.txt:316</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_ac2308c2feca8c5de7195c2ecf7eb28b9"><div class="ttname"><a href="spine__channel_8txt.html#ac2308c2feca8c5de7195c2ecf7eb28b9">HREF</a></div><div class="ttdeci">&quot;../../../the_data_structure/html/classoomph_1_1StraightLine.html&quot;&gt; straight line&lt;/A &gt; and a deflected line respectively. We will discuss the necessary steps taken to create this mesh(the complete documentation for this specific mesh can be found&lt; A HREF=&quot;../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html&quot;&gt; here&lt;/A &gt;). To begin, we create a new class templated by a element and inheriting from \c RectangularQuadMesh&lt; ELEMENT &gt; and \c SpineMesh. The latter adds the functionality needed for using Spines. \dontinclude channel_spine_mesh.template.h \skipline template&lt; \until public SpineMesh All SpineMeshs must include a function \c spine_node_update(SpineNode *spine_node_pt), this will describe the operations performed when updating every SpineNode in the mesh. First we find the SpineNodes fraction along the spine. \skipline virtual void spine_node_update \until fraction() We then get the local coordinate on the geometric object that defines the upper wall. \until geom_parameter(0) Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node. \until } We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects. \skipline Number of elements in the left region \until Straight_wall_pt HREF</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00384">spine_channel.txt:384</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a2e4f1f822bcd78487c7ad3fa51e3b6db"><div class="ttname"><a href="spine__channel_8txt.html#a2e4f1f822bcd78487c7ad3fa51e3b6db">boundaries</a></div><div class="ttdeci">We then pin the velocities on the top and bottom boundaries(3, 2 and 0). \until end loop over boundaries Finally</div></div>
+<div class="ttc" id="aspine__channel_8txt_html_ad99851325287fd3b9ba0fecb212475f1"><div class="ttname"><a href="spine__channel_8txt.html#ad99851325287fd3b9ba0fecb212475f1">free</a></div><div class="ttdeci">mainpage Example curvilinear boundaries These examples had the following common in which the mesh velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the domain boundary is unknown and has to be determined as part of the overall solution This situation e in free surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f where f[h(x_1)=\left\{\begin{array}{cl}H &amp;0 \leq x_1 \leq L_1 \\H+A\sin\left(\frac{x_1-L_1}{L_2-L_1}\right) &amp;L_1 \leq x_1 \leq L_2 \\H &amp;L_2 \leq x_1 \leq L\end{array} \right.\f] shown in this sketch I w textwidth channel_sketch Sketch of the problem subject to the no slip Dirichlet boundary conditions on the top and bottom rigid walls f[\left. \mathbf{u}\right|_{\partial D_{wall}}=(0, 0),\f] parabolic inflow on the left inflow f partial f[\left. \mathbf{u}\right|_{\partial D_{inflow}}=\left(x_2\left(H-x_2\right), 0\right),\f] and axially traction free</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00194">spine_channel.txt:194</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a914410aeeaf61a0d6c75c43ec26ecbaa"><div class="ttname"><a href="spine__channel_8txt.html#a914410aeeaf61a0d6c75c43ec26ecbaa">Spine</a></div><div class="ttdeci">When we built the Spine</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00434">spine_channel.txt:434</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="spine__channel_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00006">spine_channel.txt:6</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_ab80d25533169892e647daf0111a089cc"><div class="ttname"><a href="spine__channel_8txt.html#ab80d25533169892e647daf0111a089cc">nodes</a></div><div class="ttdeci">Applied Science we have made a specific Mesh for the and use a geometric object to define its curved going through the process of updating its central nodes</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00319">spine_channel.txt:319</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_af6dd20913b6f4c7abd5a0823c3ad7134"><div class="ttname"><a href="spine__channel_8txt.html#af6dd20913b6f4c7abd5a0823c3ad7134">build_channel_spine_mesh</a></div><div class="ttdeci">All these details are passed to the except for the pointer to the geometric object for the uniform wall The constructor calls the empty constructor for c copies these values to their storage in the mesh dontinclude channel_spine_mesh template cc skipline until Wall_pt We then assign all the parameters for the c create the geometric object for the uniform wall and call the function c build_channel_spine_mesh(...) \until } When we call the function \c build_channel_spine_mesh(...)</div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a06f5769f33c8965172112c7d78aa981a"><div class="ttname"><a href="spine__channel_8txt.html#a06f5769f33c8965172112c7d78aa981a">height</a></div><div class="ttdeci">Applied Science we have made a specific Mesh for the and use a geometric object to define its curved going through the process of updating its central where the heights have been changed To generalise this approach c oomph lib makes use of spines A c Spine is most easily visualised a line of a certain height</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00322">spine_channel.txt:322</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a97ce5b34818c1076205a77cb8a4c6cf2"><div class="ttname"><a href="spine__channel_8txt.html#a97ce5b34818c1076205a77cb8a4c6cf2">left</a></div><div class="ttdeci">We then pin the velocities on the left</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00227">spine_channel.txt:227</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_aead112d29fec022ef7d0ce50d8d19706"><div class="ttname"><a href="spine__channel_8txt.html#aead112d29fec022ef7d0ce50d8d19706">In</a></div><div class="ttdeci">We then pin the velocities on the top and bottom we pass a pointer to the Reynolds number to each element and assign the equation numbers until end_of_constructor&lt; HR &gt;&lt; HR &gt; section part2 S F L E Coating Flows In</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00307">spine_channel.txt:307</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_acaa50e6ec6292e982f24e14f22450448"><div class="ttname"><a href="spine__channel_8txt.html#acaa50e6ec6292e982f24e14f22450448">constructor</a></div><div class="ttdeci">All these details are passed to the constructor</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00386">spine_channel.txt:386</a></div></div>
+<div class="ttc" id="aspine__channel_8txt_html_a3ef05fdddfba8360dccba11956b40d79"><div class="ttname"><a href="spine__channel_8txt.html#a3ef05fdddfba8360dccba11956b40d79">D</a></div><div class="ttdeci">mainpage Example curvilinear boundaries These examples had the following common in which the mesh velocity is determined from the history values of the nodal positions We will now consider problems in which the position of the domain boundary is unknown and has to be determined as part of the overall solution This situation e in free surface fluid flow problems and in fluid structure interaction problems We shall explain why c Domain c MacroElement based node update strategies are unlikely to be efficient for such problems and then introduce the Method of Spines as one of a number of f and f[\frac{\partial u_i}{\partial x_i}=0,\f] in the region f D</div><div class="ttdef"><b>Definition:</b> <a href="spine__channel_8txt_source.html#l00170">spine_channel.txt:170</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:10:07
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

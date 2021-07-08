@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: poroelasticity_face_elements.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0a53a29945550ce2ca853010815de2cd.html">poroelasticity</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">poroelasticity_face_elements.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="poroelasticity__face__elements_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Header file for elements that are used to apply surface loads to</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// the Darcy equations</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#ifndef OOMPH_POROELASITICTY_FACE_ELEMENTS_HEADER</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define OOMPH_POROELASITICTY_FACE_ELEMENTS_HEADER</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// Config header generated by autoconfig</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">  #include &lt;oomph-lib-config.h&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// OOMPH-LIB headers</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Qelements_8h.html">generic/Qelements.h</a>&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">//=======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/// Namespace containing the zero pressure function for Darcy pressure</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/// elements</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="namespaceoomph_1_1PoroelasticityFaceElementHelper.html">   50</a></span>&#160;<span class="keyword">namespace </span>PoroelasticityFaceElementHelper</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">//=======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">  /// Default load function (zero traction)</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span>  <span class="comment">//=======================================================================</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="namespaceoomph_1_1PoroelasticityFaceElementHelper.html#a488acda61b46c3a3fe9e18339160c745">   56</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="namespaceoomph_1_1PoroelasticityFaceElementHelper.html#a488acda61b46c3a3fe9e18339160c745">Zero_traction_fct</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                         <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;x,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                         <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a">N</a>,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                         <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; load)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;   {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">unsigned</span> n_dim=load.size();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;n_dim;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++) {load[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>]=0.0;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;   }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="comment">//=======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">  /// Default load function (zero pressure)</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span>  <span class="comment">//=======================================================================</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="namespaceoomph_1_1PoroelasticityFaceElementHelper.html#a48a53a85499ac3c4a176a44c1edc397d">   68</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="namespaceoomph_1_1PoroelasticityFaceElementHelper.html#a48a53a85499ac3c4a176a44c1edc397d">Zero_pressure_fct</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                         <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;x,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                         <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a">N</a>,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                         <span class="keywordtype">double</span> &amp;load)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    load=0.0;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;   }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">/// A class for elements that allow the imposition of an applied pressure</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/// in the Darcy equations.</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/// The geometrical information can be read from the FaceGeometry&lt;ELEMENT&gt;</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">/// class and and thus, we can be generic enough without the need to have</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/// a separate equations class.</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html">   87</a></span>&#160;<span class="keyword">class </span><a class="code" href="classoomph_1_1PoroelasticityFaceElement.html">PoroelasticityFaceElement</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1FaceGeometry.html">FaceGeometry</a>&lt;ELEMENT&gt;,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classoomph_1_1FaceElement.html">FaceElement</a></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> /// pointer to the bulk element this face element is attached to</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#abc3e4d3ab29b19432676b25962b7994d">   93</a></span>&#160;<span class="comment"></span> ELEMENT *<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#abc3e4d3ab29b19432676b25962b7994d">Element_pt</a>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> /// \short Pointer to an imposed traction function. Arguments:</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"> /// Eulerian coordinate; outer unit normal; applied traction.</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"> /// (Not all of the input arguments will be required for all specific load</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"> /// functions but the list should cover all cases)</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#a5b6babb5cb6ced6a3928617730eafb83">   99</a></span>&#160;<span class="comment"></span> void (*<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a5b6babb5cb6ced6a3928617730eafb83">Traction_fct_pt</a>)(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                         <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;x,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                         <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                         <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;result);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"> /// \short Pointer to an imposed pressure function. Arguments:</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"> /// Eulerian coordinate; outer unit normal; applied pressure.</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"> /// (Not all of the input arguments will be required for all specific load</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"> /// functions but the list should cover all cases)</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#afbc70ad45cf51317cee1134237daf962">  108</a></span>&#160;<span class="comment"></span> void (*<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#afbc70ad45cf51317cee1134237daf962">Pressure_fct_pt</a>)(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                         <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;x,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                         <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                         <span class="keywordtype">double</span> &amp;result);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"> /// \short Get the traction vector: Pass number of integration point (dummy),</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"> /// Eulerlian coordinate and normal vector and return the pressure</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> /// (not all of the input arguments will be required for all specific load</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"> /// functions but the list should cover all cases). This function is virtual</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"> /// so it can be overloaded for FSI.</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#ada36786b5d21bf6c024a8f5344bae84e">  119</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#ada36786b5d21bf6c024a8f5344bae84e">get_traction</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                           <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; intpt,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                           <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; x,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                           <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                           <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a1e82041ba48cda7bc31aa65165cf8208">traction</a>)</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; {</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a5b6babb5cb6ced6a3928617730eafb83">Traction_fct_pt</a>(time,x,<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>,<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a1e82041ba48cda7bc31aa65165cf8208">traction</a>);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment"> /// \short Get the pressure value: Pass number of integration point (dummy),</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"> /// Eulerlian coordinate and normal vector and return the pressure</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"> /// (not all of the input arguments will be required for all specific load</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment"> /// functions but the list should cover all cases). This function is virtual</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"> /// so it can be overloaded for FSI.</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#adac5f074dfe38b1aa402601507f940b4">  133</a></span>&#160;<span class="comment"></span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#adac5f074dfe38b1aa402601507f940b4">get_pressure</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                           <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; intpt,</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                           <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; x,</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                           <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>,</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                           <span class="keywordtype">double</span> &amp;<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#af0ecc8b5c372d479f9ba46892a21e955">pressure</a>)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#afbc70ad45cf51317cee1134237daf962">Pressure_fct_pt</a>(time,x,<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>,<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#af0ecc8b5c372d479f9ba46892a21e955">pressure</a>);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment"> /// \short Helper function that actually calculates the residuals</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment"></span> <span class="comment">// This small level of indirection is required to avoid calling</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; <span class="comment">// fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; <span class="comment">// which causes all kinds of pain if overloading later on</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#ac399e61815a50cd59aaee283464fcc09">fill_in_contribution_to_residuals_darcy_face</a>(</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;   <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;<a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"> /// \short Constructor, which takes a &quot;bulk&quot; element and the value of the</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"> /// index and its limit</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#a1eb47446a15ae0a5762685ea34757362">  155</a></span>&#160;<span class="comment"></span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a1eb47446a15ae0a5762685ea34757362">PoroelasticityFaceElement</a>(<a class="code" href="classoomph_1_1FiniteElement.html">FiniteElement</a>* <span class="keyword">const</span> &amp;element_pt,</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                  <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;<a class="code" href="classoomph_1_1FaceElement.html#a478d577ac6db67ecc80f1f02ae3ab170">face_index</a>) :</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <a class="code" href="classoomph_1_1FaceGeometry.html">FaceGeometry</a>&lt;ELEMENT&gt;(), <a class="code" href="classoomph_1_1FaceElement.html">FaceElement</a>()</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;   {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="comment">// Check that the element is not a refineable 3d element</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    ELEMENT* elem_pt = <span class="keyword">new</span> ELEMENT;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="comment">// If it&#39;s three-d</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">if</span>(elem_pt-&gt;dim()==3)</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;     {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;      <span class="comment">// Is it refineable</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;      <span class="keywordflow">if</span>(<span class="keyword">dynamic_cast&lt;</span><a class="code" href="classoomph_1_1RefineableElement.html">RefineableElement</a>*<span class="keyword">&gt;</span>(elem_pt))</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;       {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="comment">// Issue a warning</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <a class="code" href="classoomph_1_1OomphLibWarning.html">OomphLibWarning</a>(</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;          <span class="stringliteral">&quot;This flux element will not work correctly if nodes are hanging\n&quot;</span>,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;       }</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;     }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;   }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="comment">// Set the pointer to the bulk element</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#abc3e4d3ab29b19432676b25962b7994d">Element_pt</a>=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(element_pt);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="comment">// Attach the geometrical information to the element. N.B. This function</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="comment">// also assigns nbulk_value from the required_nvalue of the bulk element</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  element_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#aaf7bead5b462cfd5401d97b3dbdc7af7">build_face_element</a>(<a class="code" href="classoomph_1_1FaceElement.html#a478d577ac6db67ecc80f1f02ae3ab170">face_index</a>,<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="comment">// Zero traction</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a5b6babb5cb6ced6a3928617730eafb83">Traction_fct_pt</a>=&amp;<a class="code" href="namespaceoomph_1_1PoroelasticityFaceElementHelper.html#a488acda61b46c3a3fe9e18339160c745">PoroelasticityFaceElementHelper::Zero_traction_fct</a>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="comment">// Zero pressure</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#afbc70ad45cf51317cee1134237daf962">Pressure_fct_pt</a>=&amp;<a class="code" href="namespaceoomph_1_1PoroelasticityFaceElementHelper.html#a48a53a85499ac3c4a176a44c1edc397d">PoroelasticityFaceElementHelper::Zero_pressure_fct</a>;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment"> /// Reference to the traction function pointer</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#a50f847881ebe385a49e7e31bf2e84985">  195</a></span>&#160;<span class="comment"></span> void (* &amp;<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a50f847881ebe385a49e7e31bf2e84985">traction_fct_pt</a>())(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                             <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; x,</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                             <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>,</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                             <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a1e82041ba48cda7bc31aa65165cf8208">traction</a>)</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  {<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a5b6babb5cb6ced6a3928617730eafb83">Traction_fct_pt</a>;}</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment"> /// Reference to the pressure function pointer</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#af2e65648f0bd2ebcdef444d47bad6861">  202</a></span>&#160;<span class="comment"></span> void (* &amp;<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#af2e65648f0bd2ebcdef444d47bad6861">pressure_fct_pt</a>())(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                             <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; x,</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                             <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>,</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                             <span class="keywordtype">double</span> &amp;<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#af0ecc8b5c372d479f9ba46892a21e955">pressure</a>)</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  {<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#afbc70ad45cf51317cee1134237daf962">Pressure_fct_pt</a>;}</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"> /// Return the residuals</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#a4396aa8d950dca2c1eba4bfb9e8d608c">  210</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a4396aa8d950dca2c1eba4bfb9e8d608c">fill_in_contribution_to_residuals</a>(<a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;<a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; {</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#ac399e61815a50cd59aaee283464fcc09">fill_in_contribution_to_residuals_darcy_face</a>(<a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment"> /// Fill in contribution from Jacobian</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#a14cbf11e9cf001563087f15f8f9806b7">  218</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a14cbf11e9cf001563087f15f8f9806b7">fill_in_contribution_to_jacobian</a>(<a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;<a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>,</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                                       <a class="code" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a> &amp;jacobian)</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="comment">// Call the residuals</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#ac399e61815a50cd59aaee283464fcc09">fill_in_contribution_to_residuals_darcy_face</a>(<a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment"> /// Specify the value of nodal zeta from the face geometry</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment"> /// \short The &quot;global&quot; intrinsic coordinate of the element when</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"> /// viewed as part of a geometric object should be given by</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment"> /// the FaceElement representation, by default (needed to break</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment"> /// indeterminacy if bulk element is SolidElement)</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#af8381ad4d2c26cbc397d571ff56bc85f">  230</a></span>&#160;<span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#af8381ad4d2c26cbc397d571ff56bc85f">zeta_nodal</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;k,</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                          <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="keyword">  </span>{<span class="keywordflow">return</span> <a class="code" href="classoomph_1_1FaceElement.html#a58c9f93705c7741f76c8487d152e68a6">FaceElement::zeta_nodal</a>(<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>,k,<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);}</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"> /// \short Output function</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#a9a9f13d76e62d8d7035af1a96804170f">  235</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a9a9f13d76e62d8d7035af1a96804170f">output</a>(std::ostream &amp;outfile)</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; {<a class="code" href="classoomph_1_1FiniteElement.html#a2ad98a3d2ef4999f1bef62c0ff13f2a7">FiniteElement::output</a>(outfile);}</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"> /// \short Output function</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#af3fd2b11f51ab4c5824e31d0658fd30b">  239</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#af3fd2b11f51ab4c5824e31d0658fd30b">output</a>(std::ostream &amp;outfile, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;n_plot)</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; {<a class="code" href="classoomph_1_1FiniteElement.html#a2ad98a3d2ef4999f1bef62c0ff13f2a7">FiniteElement::output</a>(outfile,n_plot);}</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"> /// \short C_style output function</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#ad996cd2d792e1d74d4d80950493facf8">  243</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#ad996cd2d792e1d74d4d80950493facf8">output</a>(FILE* file_pt)</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; {<a class="code" href="classoomph_1_1FiniteElement.html#a2ad98a3d2ef4999f1bef62c0ff13f2a7">FiniteElement::output</a>(file_pt);}</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment"> /// \short C-style output function</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#a27547d8d4f375ad212f6108bf1d818f8">  247</a></span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a27547d8d4f375ad212f6108bf1d818f8">output</a>(FILE* file_pt, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;n_plot)</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; {<a class="code" href="classoomph_1_1FiniteElement.html#a2ad98a3d2ef4999f1bef62c0ff13f2a7">FiniteElement::output</a>(file_pt,n_plot);}</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment"> /// \short Compute traction vector at specified local coordinate</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment"> /// Should only be used for post-processing; ignores dependence</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment"> /// on integration point!</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a1e82041ba48cda7bc31aa65165cf8208">traction</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;               <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;               <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a1e82041ba48cda7bc31aa65165cf8208">traction</a>);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment"> /// \short Compute pressure value at specified local coordinate</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment"> /// Should only be used for post-processing; ignores dependence</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment"> /// on integration point!</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#af0ecc8b5c372d479f9ba46892a21e955">pressure</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;               <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;               <span class="keywordtype">double</span> &amp;<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#af0ecc8b5c372d479f9ba46892a21e955">pressure</a>);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;};</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">//=====================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">/// Compute traction vector at specified local coordinate</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">/// Should only be used for post-processing; ignores dependence</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">/// on integration point!</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#a1e82041ba48cda7bc31aa65165cf8208">  277</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#a1e82041ba48cda7bc31aa65165cf8208">PoroelasticityFaceElement&lt;ELEMENT&gt;::traction</a>(</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time, <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;traction)</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; {</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <span class="keywordtype">unsigned</span> n_dim = this-&gt;nodal_dimension();</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  <span class="comment">// Position vector</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(n_dim);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  interpolated_x(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,x);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  <span class="comment">// Outer unit normal</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> unit_normal(n_dim);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  outer_unit_normal(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,unit_normal);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  <span class="comment">// Dummy</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  <span class="keywordtype">unsigned</span> ipt=0;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;  <span class="comment">// Pressure value</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  get_traction(time,ipt,x,unit_normal,traction);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">//=====================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">/// Compute pressure value at specified local coordinate</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">/// Should only be used for post-processing; ignores dependence</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">/// on integration point!</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#af0ecc8b5c372d479f9ba46892a21e955">  303</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#af0ecc8b5c372d479f9ba46892a21e955">PoroelasticityFaceElement&lt;ELEMENT&gt;::pressure</a>(</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time, <span class="keyword">const</span> <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a>&amp; <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <span class="keywordtype">double</span> &amp;pressure)</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; {</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;  <span class="keywordtype">unsigned</span> n_dim = this-&gt;nodal_dimension();</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;  <span class="comment">// Position vector</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(n_dim);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  interpolated_x(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,x);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <span class="comment">// Outer unit normal</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> unit_normal(n_dim);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  outer_unit_normal(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>,unit_normal);</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  <span class="comment">// Dummy</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  <span class="keywordtype">unsigned</span> ipt=0;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  <span class="comment">// Pressure value</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  get_pressure(time,ipt,x,unit_normal,pressure);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; }</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">//=====================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">/// Return the residuals for the PoroelasticityFaceElement equations</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#ac399e61815a50cd59aaee283464fcc09">PoroelasticityFaceElement&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a name="l00330"></a><span class="lineno"><a class="line" href="classoomph_1_1PoroelasticityFaceElement.html#ac399e61815a50cd59aaee283464fcc09">  330</a></span>&#160;<a class="code" href="classoomph_1_1PoroelasticityFaceElement.html#ac399e61815a50cd59aaee283464fcc09"> fill_in_contribution_to_residuals_darcy_face</a>(</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> &amp;<a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  <span class="comment">// Find out how many nodes there are</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  <span class="keywordtype">unsigned</span> n_node = nnode();</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;  <span class="comment">// Get continuous time from timestepper of first node</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;  <span class="keywordtype">double</span> time=node_pt(0)-&gt;time_stepper_pt()-&gt;time_pt()-&gt;time();</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="preprocessor"> #ifdef PARANOID</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;  <span class="comment">// Find out how many positional dofs there are</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;  <span class="keywordtype">unsigned</span> n_position_type = this-&gt;nnodal_position_type();</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;  <span class="keywordflow">if</span>(n_position_type != 1)</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;   {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keywordflow">throw</span> <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;     <span class="stringliteral">&quot;Poroelasticity equations are not yet implemented for more than one position type&quot;</span>,</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;     OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;     OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;   }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  <span class="comment">// Find out the dimension of the node</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  <span class="keywordtype">unsigned</span> n_dim = this-&gt;nodal_dimension();</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  <span class="keywordtype">unsigned</span> n_q_basis = Element_pt-&gt;nq_basis();</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;  <span class="keywordtype">unsigned</span> n_q_basis_edge = Element_pt-&gt;nq_basis_edge();</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;  <span class="comment">// Integer to hold the local equation number</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;  <span class="keywordtype">int</span> local_eqn=0;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  <span class="comment">// Set up memory for the shape functions</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  <span class="comment">// Note that in this case, the number of lagrangian coordinates is always</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;  <span class="comment">// equal to the dimension of the nodes</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  <a class="code" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  <a class="code" href="classoomph_1_1DShape.html">DShape</a> dpsids(n_node,n_dim-1);</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;  <a class="code" href="classoomph_1_1Shape.html">Shape</a> q_basis(n_q_basis,n_dim);</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  <span class="comment">// Set the value of n_intpt</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;  <span class="keywordtype">unsigned</span> n_intpt = integral_pt()-&gt;nweight();</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  <span class="comment">// Storage for the local coordinates</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> s_face(n_dim-1,0.0), s_bulk(n_dim,0.0);</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;  <span class="comment">//mjr TODO enable if/when eta is added to Poroelasticity elements</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;  <span class="comment">/*double eta = Element_pt-&gt;eta();*/</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;  <span class="comment">// Loop over the integration points</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ipt=0;ipt&lt;n_intpt;ipt++)</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;   {</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="comment">// Get the integral weight</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordtype">double</span> w = integral_pt()-&gt;weight(ipt);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="comment">// Only need to call the local derivatives</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    dshape_local_at_knot(ipt,psi,dpsids);</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="comment">// Assign values of s in FaceElement and local coordinates in bulk element</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;n_dim-1;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;     {</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;      s_face[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = integral_pt()-&gt;knot(ipt,<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;     }</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    s_bulk=local_coordinate_in_bulk(s_face);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <span class="comment">// Get the q basis at bulk local coordinate s_bulk, corresponding to face local</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="comment">// coordinate s_face</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    Element_pt-&gt;get_q_basis(s_bulk,q_basis);</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="comment">// Calculate the Eulerian and Lagrangian coordinates</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> interpolated_x(n_dim,0.0);</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160; </div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <span class="comment">// Also calculate the surface Vectors (derivatives wrt local coordinates)</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <a class="code" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a> interpolated_A(n_dim-1,n_dim,0.0);</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <span class="comment">// Calculate displacements and derivatives</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l=0;l&lt;n_node;l++)</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;     {</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;      <span class="comment">// Loop over directions</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;      <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;n_dim;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;       {</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        <span class="comment">// Calculate the Eulerian coords</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> x_local = nodal_position(l,<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        interpolated_x[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] += x_local*psi(l);</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        <span class="comment">// Loop over LOCAL derivative directions, to calculate the tangent(s)</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> j=0;j&lt;n_dim-1;j++)</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;         {</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;          interpolated_A(j,<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) += x_local*dpsids(l,j);</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;         }</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;       }</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;     }</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    <span class="comment">// Now find the local metric tensor from the tangent vectors</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <a class="code" href="classoomph_1_1DenseMatrix.html">DenseMatrix&lt;double&gt;</a> A(n_dim-1);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;n_dim-1;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;     {</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;      <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> j=0;j&lt;n_dim-1;j++)</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;       {</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        <span class="comment">// Initialise surface metric tensor to zero</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        A(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>,j) = 0.0;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        <span class="comment">// Take the dot product</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> k=0;k&lt;n_dim;k++)</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;         {</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;          A(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>,j) += interpolated_A(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>,k)*interpolated_A(j,k);</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;         }</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;       }</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;     }</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    <span class="comment">// Get the outer unit normal</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> interpolated_normal(n_dim);</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    outer_unit_normal(ipt,interpolated_normal);</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    <span class="comment">// Find the determinant of the metric tensor</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    <span class="keywordtype">double</span> Adet =0.0;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keywordflow">switch</span>(n_dim)</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;     {</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;     <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;      Adet = A(0,0);</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;     <span class="keywordflow">case</span> 3:</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;      Adet = A(0,0)*A(1,1) - A(0,1)*A(1,0);</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;     <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;      <span class="keywordflow">throw</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;       <a class="code" href="classoomph_1_1OomphLibError.html">OomphLibError</a>(</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        <span class="stringliteral">&quot;Wrong dimension in PoroelasticityFaceElement&quot;</span>,</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;        OOMPH_CURRENT_FUNCTION,</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;        OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;     }</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160; </div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    <span class="comment">// Premultiply the weights and the square-root of the determinant of</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="comment">// the metric tensor</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a> = w*sqrt(Adet);</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160; </div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    <span class="comment">//Now calculate the traction load</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> traction(n_dim);</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    get_traction(time,</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;                 ipt,</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;                 interpolated_x,</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;                 interpolated_normal,</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;                 traction);</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; </div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    <span class="comment">// Now calculate the load</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;    <span class="keywordtype">double</span> pressure;</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;    get_pressure(time,</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;                 ipt,</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;                 interpolated_x,</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;                 interpolated_normal,</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;                 pressure);</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; </div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;    <span class="comment">//Loop over the test functions, nodes of the element</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l=0;l&lt;n_node;l++)</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;     {</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;      <span class="comment">//Loop over the displacement components</span></div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;      <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;n_dim;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;       {</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;        local_eqn = this-&gt;nodal_local_eqn(l,Element_pt-&gt;u_index(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>));</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;        <span class="comment">/*IF it&#39;s not a boundary condition*/</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;        <span class="keywordflow">if</span>(local_eqn &gt;= 0)</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;         {</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;          <span class="comment">//Add the traction loading terms to the residuals</span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;          <a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>[local_eqn] -= traction[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>]*psi(l)*<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;         } <span class="comment">//End of if not boundary condition</span></div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;       }</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;     } <span class="comment">//End of loop over shape functions</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; </div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;    <span class="comment">// Loop over the q edge test functions only (internal basis functions</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    <span class="comment">// have zero normal component on the boundary)</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l=0;l&lt;n_q_basis_edge;l++)</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;     {</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;      local_eqn = this-&gt;nodal_local_eqn(1,Element_pt-&gt;q_edge_index(l));</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160; </div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;      <span class="comment">/*IF it&#39;s not a boundary condition*/</span></div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;      <span class="keywordflow">if</span>(local_eqn &gt;= 0)</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;       {</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;        <span class="comment">// Loop over the displacement components</span></div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;n_dim;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;         {</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;          <span class="comment">// Add the loading terms to the residuals</span></div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;          <a class="code" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>[local_eqn] +=</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;           pressure*q_basis(l,<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)*interpolated_normal[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>]*<a class="code" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">W</a>;</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;         }</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;       } <span class="comment">// End of if not boundary condition</span></div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;     } <span class="comment">//End of loop over shape functions</span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;   } <span class="comment">//End of loop over integration points</span></div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160; }</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160; </div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;}</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160; </div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_a50f847881ebe385a49e7e31bf2e84985"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#a50f847881ebe385a49e7e31bf2e84985">oomph::PoroelasticityFaceElement::traction_fct_pt</a></div><div class="ttdeci">void(*&amp;)(const double &amp;time, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction) traction_fct_pt()</div><div class="ttdoc">Reference to the traction function pointer.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00195">poroelasticity_face_elements.h:195</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_afbc70ad45cf51317cee1134237daf962"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#afbc70ad45cf51317cee1134237daf962">oomph::PoroelasticityFaceElement::Pressure_fct_pt</a></div><div class="ttdeci">void(* Pressure_fct_pt)(const double &amp;time, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, double &amp;result)</div><div class="ttdoc">Pointer to an imposed pressure function. Arguments: Eulerian coordinate; outer unit normal; applied p...</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00108">poroelasticity_face_elements.h:108</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FaceElement_html_a58c9f93705c7741f76c8487d152e68a6"><div class="ttname"><a href="classoomph_1_1FaceElement.html#a58c9f93705c7741f76c8487d152e68a6">oomph::FaceElement::zeta_nodal</a></div><div class="ttdeci">double zeta_nodal(const unsigned &amp;n, const unsigned &amp;k, const unsigned &amp;i) const</div><div class="ttdoc">In a FaceElement, the &quot;global&quot; intrinsic coordinate of the element along the boundary,...</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l04377">elements.h:4377</a></div></div>
+<div class="ttc" id="athe__data__structure_8txt_html_a1400a973def57b85051cfe1070be1810"><div class="ttname"><a href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a></div><div class="ttdeci">endcode The default implementation of c the simplest possible implementation of a new element requires only the specification of c we need to know which c Data affects the residuals(and hence the Jacobian matrix). For a \c GeneralisedElement such \c Data exists in two forms</div></div>
+<div class="ttc" id="aclassoomph_1_1FaceElement_html_a478d577ac6db67ecc80f1f02ae3ab170"><div class="ttname"><a href="classoomph_1_1FaceElement.html#a478d577ac6db67ecc80f1f02ae3ab170">oomph::FaceElement::face_index</a></div><div class="ttdeci">int &amp; face_index()</div><div class="ttdoc">Index of the face (a number that uniquely identifies the face in the element)</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l04497">elements.h:4497</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html">oomph::PoroelasticityFaceElement</a></div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00087">poroelasticity_face_elements.h:87</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_aaf7bead5b462cfd5401d97b3dbdc7af7"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#aaf7bead5b462cfd5401d97b3dbdc7af7">oomph::FiniteElement::build_face_element</a></div><div class="ttdeci">virtual void build_face_element(const int &amp;face_index, FaceElement *face_element_pt)</div><div class="ttdoc">Function for building a lower dimensional FaceElement on the specified face of the FiniteElement....</div><div class="ttdef"><b>Definition:</b> <a href="elements_8cc_source.html#l05001">elements.cc:5001</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html"><div class="ttname"><a href="classoomph_1_1FiniteElement.html">oomph::FiniteElement</a></div><div class="ttdoc">A general Finite Element class.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l01287">elements.h:1287</a></div></div>
+<div class="ttc" id="aclassoomph_1_1OomphLibError_html"><div class="ttname"><a href="classoomph_1_1OomphLibError.html">oomph::OomphLibError</a></div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00225">oomph_definitions.h:225</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_adac5f074dfe38b1aa402601507f940b4"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#adac5f074dfe38b1aa402601507f940b4">oomph::PoroelasticityFaceElement::get_pressure</a></div><div class="ttdeci">virtual void get_pressure(const double &amp;time, const unsigned &amp;intpt, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, double &amp;pressure)</div><div class="ttdoc">Get the pressure value: Pass number of integration point (dummy), Eulerlian coordinate and normal vec...</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00133">poroelasticity_face_elements.h:133</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_af8381ad4d2c26cbc397d571ff56bc85f"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#af8381ad4d2c26cbc397d571ff56bc85f">oomph::PoroelasticityFaceElement::zeta_nodal</a></div><div class="ttdeci">double zeta_nodal(const unsigned &amp;n, const unsigned &amp;k, const unsigned &amp;i) const</div><div class="ttdoc">The &quot;global&quot; intrinsic coordinate of the element when viewed as part of a geometric object should be ...</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00230">poroelasticity_face_elements.h:230</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1PoroelasticityFaceElementHelper_html_a48a53a85499ac3c4a176a44c1edc397d"><div class="ttname"><a href="namespaceoomph_1_1PoroelasticityFaceElementHelper.html#a48a53a85499ac3c4a176a44c1edc397d">oomph::PoroelasticityFaceElementHelper::Zero_pressure_fct</a></div><div class="ttdeci">void Zero_pressure_fct(const double &amp;time, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;N, double &amp;load)</div><div class="ttdoc">Default load function (zero pressure)</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00068">poroelasticity_face_elements.h:68</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_a5b6babb5cb6ced6a3928617730eafb83"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#a5b6babb5cb6ced6a3928617730eafb83">oomph::PoroelasticityFaceElement::Traction_fct_pt</a></div><div class="ttdeci">void(* Traction_fct_pt)(const double &amp;time, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;result)</div><div class="ttdoc">Pointer to an imposed traction function. Arguments: Eulerian coordinate; outer unit normal; applied t...</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00099">poroelasticity_face_elements.h:99</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_a1e82041ba48cda7bc31aa65165cf8208"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#a1e82041ba48cda7bc31aa65165cf8208">oomph::PoroelasticityFaceElement::traction</a></div><div class="ttdeci">void traction(const double &amp;time, const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;traction)</div><div class="ttdoc">Compute traction vector at specified local coordinate Should only be used for post-processing; ignore...</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00277">poroelasticity_face_elements.h:277</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_a27547d8d4f375ad212f6108bf1d818f8"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#a27547d8d4f375ad212f6108bf1d818f8">oomph::PoroelasticityFaceElement::output</a></div><div class="ttdeci">void output(FILE *file_pt, const unsigned &amp;n_plot)</div><div class="ttdoc">C-style output function.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00247">poroelasticity_face_elements.h:247</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_ac399e61815a50cd59aaee283464fcc09"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#ac399e61815a50cd59aaee283464fcc09">oomph::PoroelasticityFaceElement::fill_in_contribution_to_residuals_darcy_face</a></div><div class="ttdeci">void fill_in_contribution_to_residuals_darcy_face(Vector&lt; double &gt; &amp;residuals)</div><div class="ttdoc">Helper function that actually calculates the residuals.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00330">poroelasticity_face_elements.h:330</a></div></div>
+<div class="ttc" id="aQelements_8h_html"><div class="ttname"><a href="Qelements_8h.html">Qelements.h</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_ad996cd2d792e1d74d4d80950493facf8"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#ad996cd2d792e1d74d4d80950493facf8">oomph::PoroelasticityFaceElement::output</a></div><div class="ttdeci">void output(FILE *file_pt)</div><div class="ttdoc">C_style output function.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00243">poroelasticity_face_elements.h:243</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DenseMatrix_html"><div class="ttname"><a href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; double &gt;</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableElement_html"><div class="ttname"><a href="classoomph_1_1RefineableElement.html">oomph::RefineableElement</a></div><div class="ttdef"><b>Definition:</b> <a href="refineable__elements_8h_source.html#l00097">refineable_elements.h:97</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_a1eb47446a15ae0a5762685ea34757362"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#a1eb47446a15ae0a5762685ea34757362">oomph::PoroelasticityFaceElement::PoroelasticityFaceElement</a></div><div class="ttdeci">PoroelasticityFaceElement(FiniteElement *const &amp;element_pt, const int &amp;face_index)</div><div class="ttdoc">Constructor, which takes a &quot;bulk&quot; element and the value of the index and its limit.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00155">poroelasticity_face_elements.h:155</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1PoroelasticityFaceElementHelper_html_a488acda61b46c3a3fe9e18339160c745"><div class="ttname"><a href="namespaceoomph_1_1PoroelasticityFaceElementHelper.html#a488acda61b46c3a3fe9e18339160c745">oomph::PoroelasticityFaceElementHelper::Zero_traction_fct</a></div><div class="ttdeci">void Zero_traction_fct(const double &amp;time, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;N, Vector&lt; double &gt; &amp;load)</div><div class="ttdoc">Default load function (zero traction)</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00056">poroelasticity_face_elements.h:56</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_a9a9f13d76e62d8d7035af1a96804170f"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#a9a9f13d76e62d8d7035af1a96804170f">oomph::PoroelasticityFaceElement::output</a></div><div class="ttdeci">void output(std::ostream &amp;outfile)</div><div class="ttdoc">Output function.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00235">poroelasticity_face_elements.h:235</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">oomph::QuadTreeNames::W</a></div><div class="ttdeci">@ W</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00056">quadtree.h:56</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_a14cbf11e9cf001563087f15f8f9806b7"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#a14cbf11e9cf001563087f15f8f9806b7">oomph::PoroelasticityFaceElement::fill_in_contribution_to_jacobian</a></div><div class="ttdeci">void fill_in_contribution_to_jacobian(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</div><div class="ttdoc">Fill in contribution from Jacobian.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00218">poroelasticity_face_elements.h:218</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_abc3e4d3ab29b19432676b25962b7994d"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#abc3e4d3ab29b19432676b25962b7994d">oomph::PoroelasticityFaceElement::Element_pt</a></div><div class="ttdeci">ELEMENT * Element_pt</div><div class="ttdoc">pointer to the bulk element this face element is attached to</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00093">poroelasticity_face_elements.h:93</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Vector_html"><div class="ttname"><a href="classoomph_1_1Vector.html">oomph::Vector&lt; double &gt;</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_af0ecc8b5c372d479f9ba46892a21e955"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#af0ecc8b5c372d479f9ba46892a21e955">oomph::PoroelasticityFaceElement::pressure</a></div><div class="ttdeci">void pressure(const double &amp;time, const Vector&lt; double &gt; &amp;s, double &amp;pressure)</div><div class="ttdoc">Compute pressure value at specified local coordinate Should only be used for post-processing; ignores...</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00303">poroelasticity_face_elements.h:303</a></div></div>
+<div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
+<div class="ttc" id="anamespaceoomph_1_1QuadTreeNames_html_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a"><div class="ttname"><a href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a">oomph::QuadTreeNames::N</a></div><div class="ttdeci">@ N</div><div class="ttdef"><b>Definition:</b> <a href="quadtree_8h_source.html#l00056">quadtree.h:56</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DShape_html"><div class="ttname"><a href="classoomph_1_1DShape.html">oomph::DShape</a></div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00271">shape.h:271</a></div></div>
+<div class="ttc" id="athe__data__structure_8txt_html_af88b2d950fae19ab641bd1690e08445c"><div class="ttname"><a href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a></div><div class="ttdeci">endcode We introduce wrapper functions to access function so that we can formulate The Maths in generic terms Rather than referring to the pressure at node c n</div><div class="ttdef"><b>Definition:</b> <a href="the__data__structure_8txt_source.html#l00582">the_data_structure.txt:582</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_a4396aa8d950dca2c1eba4bfb9e8d608c"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#a4396aa8d950dca2c1eba4bfb9e8d608c">oomph::PoroelasticityFaceElement::fill_in_contribution_to_residuals</a></div><div class="ttdeci">void fill_in_contribution_to_residuals(Vector&lt; double &gt; &amp;residuals)</div><div class="ttdoc">Return the residuals.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00210">poroelasticity_face_elements.h:210</a></div></div>
+<div class="ttc" id="aclassoomph_1_1OomphLibWarning_html"><div class="ttname"><a href="classoomph_1_1OomphLibWarning.html">oomph::OomphLibWarning</a></div><div class="ttdef"><b>Definition:</b> <a href="oomph__definitions_8h_source.html#l00262">oomph_definitions.h:262</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_af3fd2b11f51ab4c5824e31d0658fd30b"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#af3fd2b11f51ab4c5824e31d0658fd30b">oomph::PoroelasticityFaceElement::output</a></div><div class="ttdeci">void output(std::ostream &amp;outfile, const unsigned &amp;n_plot)</div><div class="ttdoc">Output function.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00239">poroelasticity_face_elements.h:239</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_ada36786b5d21bf6c024a8f5344bae84e"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#ada36786b5d21bf6c024a8f5344bae84e">oomph::PoroelasticityFaceElement::get_traction</a></div><div class="ttdeci">virtual void get_traction(const double &amp;time, const unsigned &amp;intpt, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction)</div><div class="ttdoc">Get the traction vector: Pass number of integration point (dummy), Eulerlian coordinate and normal ve...</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00119">poroelasticity_face_elements.h:119</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FaceElement_html"><div class="ttname"><a href="classoomph_1_1FaceElement.html">oomph::FaceElement</a></div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l04215">elements.h:4215</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a2ad98a3d2ef4999f1bef62c0ff13f2a7"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a2ad98a3d2ef4999f1bef62c0ff13f2a7">oomph::FiniteElement::output</a></div><div class="ttdeci">virtual void output(std::ostream &amp;outfile)</div><div class="ttdoc">Output the element data — typically the values at the nodes in a format suitable for post-processing.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02912">elements.h:2912</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdef"><b>Definition:</b> <a href="shape_8h_source.html#l00077">shape.h:77</a></div></div>
+<div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FaceGeometry_html"><div class="ttname"><a href="classoomph_1_1FaceGeometry.html">oomph::FaceGeometry</a></div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l04837">elements.h:4837</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PoroelasticityFaceElement_html_af2e65648f0bd2ebcdef444d47bad6861"><div class="ttname"><a href="classoomph_1_1PoroelasticityFaceElement.html#af2e65648f0bd2ebcdef444d47bad6861">oomph::PoroelasticityFaceElement::pressure_fct_pt</a></div><div class="ttdeci">void(*&amp;)(const double &amp;time, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, double &amp;pressure) pressure_fct_pt()</div><div class="ttdoc">Reference to the pressure function pointer.</div><div class="ttdef"><b>Definition:</b> <a href="poroelasticity__face__elements_8h_source.html#l00202">poroelasticity_face_elements.h:202</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:57:55
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

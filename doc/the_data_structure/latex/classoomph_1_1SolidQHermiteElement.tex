@@ -1,0 +1,284 @@
+\hypertarget{classoomph_1_1SolidQHermiteElement}{}\doxysection{oomph\+::Solid\+Q\+Hermite\+Element$<$ D\+IM $>$ Class Template Reference}
+\label{classoomph_1_1SolidQHermiteElement}\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+
+
+{\ttfamily \#include $<$hermite\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Solid\+Q\+Hermite\+Element$<$ D\+IM $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.888252cm]{classoomph_1_1SolidQHermiteElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a9987624a5136fc97791ca0a6f168fc2d}{Solid\+Q\+Hermite\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6005fefebf60c25f28d7fff7722cca83}{Solid\+Q\+Hermite\+Element}} (const \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ad346e3c85d0b563531d7562e0436352c}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b585ae575d779f58f70bae46}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output at n\+\_\+plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca932301e92e1b897cec6f0459}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C\+\_\+style output at n\+\_\+plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a4e81780865998f59277d7424217ec7c1}{build\+\_\+face\+\_\+element}} (const int \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$face\+\_\+element\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} of the type \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element}}$<$D\+I\+M-\/1$>$. The face index takes a value that correponds to the possible faces\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+p)
+\begin{DoxyCompactList}\small\item\em The output function for any number of points per element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em The C-\/style output function for any number of points per element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned D\+IM$>$\newline
+class oomph\+::\+Solid\+Q\+Hermite\+Element$<$ D\+I\+M $>$}
+
+\mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element}} elements are Hermite elements whose Jacobian matrices include derivatives w.\+r.\+t. the Eulerian positions of their nodes. They are the basis for elasticity elements. No assumptions are made about alignment of local and global coordinates. 
+
+Definition at line 516 of file hermite\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_a9987624a5136fc97791ca0a6f168fc2d}\label{classoomph_1_1SolidQHermiteElement_a9987624a5136fc97791ca0a6f168fc2d}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!SolidQHermiteElement@{SolidQHermiteElement}}
+\index{SolidQHermiteElement@{SolidQHermiteElement}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{SolidQHermiteElement()}{SolidQHermiteElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 522 of file hermite\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_a6005fefebf60c25f28d7fff7722cca83}\label{classoomph_1_1SolidQHermiteElement_a6005fefebf60c25f28d7fff7722cca83}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!SolidQHermiteElement@{SolidQHermiteElement}}
+\index{SolidQHermiteElement@{SolidQHermiteElement}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{SolidQHermiteElement()}{SolidQHermiteElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 533 of file hermite\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_a4e81780865998f59277d7424217ec7c1}\label{classoomph_1_1SolidQHermiteElement_a4e81780865998f59277d7424217ec7c1}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!build\_face\_element@{build\_face\_element}}
+\index{build\_face\_element@{build\_face\_element}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{build\_face\_element()}{build\_face\_element()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} of the type \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element}}$<$D\+I\+M-\/1$>$. The face index takes a value that correponds to the possible faces\+: 
+
+In 1D\+: -\/1 (Left) s\mbox{[}0\mbox{]} = -\/1.\+0 +1 (Right) s\mbox{[}0\mbox{]} = 1.\+0
+
+In 2D\+: -\/1 (West) s\mbox{[}0\mbox{]} = -\/1.\+0 +1 (East) s\mbox{[}0\mbox{]} = 1.\+0 -\/2 (South) s\mbox{[}1\mbox{]} = -\/1.\+0 +2 (North) s\mbox{[}1\mbox{]} = 1.\+0
+
+In 3D\+: -\/1 (Left) s\mbox{[}0\mbox{]} = -\/1.\+0 +1 (Right) s\mbox{[}0\mbox{]} = 1.\+0 -\/2 (Down) s\mbox{[}1\mbox{]} = -\/1.\+0 +2 (Up) s\mbox{[}1\mbox{]} = 1.\+0 -\/3 (Back) s\mbox{[}2\mbox{]} = -\/1.\+0 +3 (Front) s\mbox{[}2\mbox{]} = 1.\+0
+
+Function to setup geometrical information for lower-\/dimensional Face\+Elements for the solid hermite elements. We need to construct the basic element and then sort out the Lagrangian coordinates 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_a796c8d180b039c5e753b373ba7aa720a}{oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1294 of file hermite\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_ad346e3c85d0b563531d7562e0436352c}\label{classoomph_1_1SolidQHermiteElement_ad346e3c85d0b563531d7562e0436352c}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 539 of file hermite\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_ae4f251ca932301e92e1b897cec6f0459}\label{classoomph_1_1SolidQHermiteElement_ae4f251ca932301e92e1b897cec6f0459}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+C-\/style output. 
+
+Overload the C-\/style output function. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_ae69bd9e9d2e2e90ff3116995483b87dd}{oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HermitePVDElement_a5567656681b134890e6940972a2461d5}{oomph\+::\+Hermite\+P\+V\+D\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1147 of file hermite\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}\label{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+C\+\_\+style output at n\+\_\+plot points. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_a12a4346480e45d82cbfca1f324cd4878}{oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HermitePVDElement_a4a8edf00d8c8b4fe61676fead8413ab9}{oomph\+::\+Hermite\+P\+V\+D\+Element$<$ D\+I\+M $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}\label{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ 1 $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+The C-\/style output function for n\+\_\+plot points in each coordinate direction for the 1D element 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_a12a4346480e45d82cbfca1f324cd4878}{oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1156 of file hermite\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}\label{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ 2 $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The C-\/style output function for any number of points per element. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_a12a4346480e45d82cbfca1f324cd4878}{oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1245 of file hermite\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_a6459f239b585ae575d779f58f70bae46}\label{classoomph_1_1SolidQHermiteElement_a6459f239b585ae575d779f58f70bae46}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Overload the output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_aed2b691a0b8effb35840561b5112a3af}{oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HermitePVDElement_aa0e10a14a3b005e07d74c9fa99e47d48}{oomph\+::\+Hermite\+P\+V\+D\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1097 of file hermite\+\_\+elements.\+cc.
+
+
+
+Referenced by oomph\+::\+Hermite\+Shell\+Element\+::output(), and oomph\+::\+Hermite\+P\+V\+D\+Element$<$ D\+I\+M $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}\label{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ 2 $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The output function for any number of points per element. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_a8053b3b58ea769a5e7be72982d594c0d}{oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1201 of file hermite\+\_\+elements.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}\label{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output at n\+\_\+plot points. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_a8053b3b58ea769a5e7be72982d594c0d}{oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HermitePVDElement_a9de8d6a3b4e844189a97eb19e7b034c1}{oomph\+::\+Hermite\+P\+V\+D\+Element$<$ D\+I\+M $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}\label{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}} 
+\index{oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQHermiteElement$<$ DIM $>$@{oomph::SolidQHermiteElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+Q\+Hermite\+Element}}$<$ 1 $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+The output function for n\+\_\+plot points in each coordinate direction for the 1D element 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QHermiteElement_a8053b3b58ea769a5e7be72982d594c0d}{oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 1106 of file hermite\+\_\+elements.\+cc.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{hermite__elements_8h}{hermite\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{hermite__elements_8cc}{hermite\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

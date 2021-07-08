@@ -1,0 +1,242 @@
+# How to build the combined meshes 
+#----------------------------------
+one_d_mesh.h:  one_d_mesh.dummy
+one_d_mesh.dummy:  one_d_mesh.template.h   one_d_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > one_d_mesh.h
+	 echo "#include \"one_d_mesh.template.h\" " >> one_d_mesh.h 
+	 echo "#include \"one_d_mesh.template.cc\" " >> one_d_mesh.h 
+ 
+simple_rectangular_quadmesh.h:  simple_rectangular_quadmesh.dummy
+simple_rectangular_quadmesh.dummy:  simple_rectangular_quadmesh.template.h   simple_rectangular_quadmesh.template.cc
+	 echo "// Automatically generated, combined header file" > simple_rectangular_quadmesh.h
+	 echo "#include \"simple_rectangular_quadmesh.template.h\" " >> simple_rectangular_quadmesh.h 
+	 echo "#include \"simple_rectangular_quadmesh.template.cc\" " >> simple_rectangular_quadmesh.h 
+ 
+rectangular_quadmesh.h:  rectangular_quadmesh.dummy
+rectangular_quadmesh.dummy:  rectangular_quadmesh.template.h   rectangular_quadmesh.template.cc
+	 echo "// Automatically generated, combined header file" > rectangular_quadmesh.h
+	 echo "#include \"rectangular_quadmesh.template.h\" " >> rectangular_quadmesh.h 
+	 echo "#include \"rectangular_quadmesh.template.cc\" " >> rectangular_quadmesh.h 
+ 
+quarter_circle_sector_mesh.h:  quarter_circle_sector_mesh.dummy
+quarter_circle_sector_mesh.dummy:  quarter_circle_sector_mesh.template.h   quarter_circle_sector_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > quarter_circle_sector_mesh.h
+	 echo "#include \"quarter_circle_sector_mesh.template.h\" " >> quarter_circle_sector_mesh.h 
+	 echo "#include \"quarter_circle_sector_mesh.template.cc\" " >> quarter_circle_sector_mesh.h 
+ 
+fish_mesh.h:  fish_mesh.dummy
+fish_mesh.dummy:  fish_mesh.template.h   fish_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > fish_mesh.h
+	 echo "#include \"fish_mesh.template.h\" " >> fish_mesh.h 
+	 echo "#include \"fish_mesh.template.cc\" " >> fish_mesh.h 
+ 
+one_d_lagrangian_mesh.h:  one_d_lagrangian_mesh.dummy
+one_d_lagrangian_mesh.dummy:  one_d_lagrangian_mesh.template.h   one_d_lagrangian_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > one_d_lagrangian_mesh.h
+	 echo "#include \"one_d_lagrangian_mesh.template.h\" " >> one_d_lagrangian_mesh.h 
+	 echo "#include \"one_d_lagrangian_mesh.template.cc\" " >> one_d_lagrangian_mesh.h 
+ 
+two_layer_spine_mesh.h:  two_layer_spine_mesh.dummy
+two_layer_spine_mesh.dummy:  two_layer_spine_mesh.template.h   two_layer_spine_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > two_layer_spine_mesh.h
+	 echo "#include \"two_layer_spine_mesh.template.h\" " >> two_layer_spine_mesh.h 
+	 echo "#include \"two_layer_spine_mesh.template.cc\" " >> two_layer_spine_mesh.h 
+ 
+single_layer_spine_mesh.h:  single_layer_spine_mesh.dummy
+single_layer_spine_mesh.dummy:  single_layer_spine_mesh.template.h   single_layer_spine_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > single_layer_spine_mesh.h
+	 echo "#include \"single_layer_spine_mesh.template.h\" " >> single_layer_spine_mesh.h 
+	 echo "#include \"single_layer_spine_mesh.template.cc\" " >> single_layer_spine_mesh.h 
+ 
+bretherton_spine_mesh.h:  bretherton_spine_mesh.dummy
+bretherton_spine_mesh.dummy:  bretherton_spine_mesh.template.h   bretherton_spine_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > bretherton_spine_mesh.h
+	 echo "#include \"bretherton_spine_mesh.template.h\" " >> bretherton_spine_mesh.h 
+	 echo "#include \"bretherton_spine_mesh.template.cc\" " >> bretherton_spine_mesh.h 
+ 
+quarter_tube_mesh.h:  quarter_tube_mesh.dummy
+quarter_tube_mesh.dummy:  quarter_tube_mesh.template.h   quarter_tube_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > quarter_tube_mesh.h
+	 echo "#include \"quarter_tube_mesh.template.h\" " >> quarter_tube_mesh.h 
+	 echo "#include \"quarter_tube_mesh.template.cc\" " >> quarter_tube_mesh.h 
+ 
+eighth_sphere_mesh.h:  eighth_sphere_mesh.dummy
+eighth_sphere_mesh.dummy:  eighth_sphere_mesh.template.h   eighth_sphere_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > eighth_sphere_mesh.h
+	 echo "#include \"eighth_sphere_mesh.template.h\" " >> eighth_sphere_mesh.h 
+	 echo "#include \"eighth_sphere_mesh.template.cc\" " >> eighth_sphere_mesh.h 
+ 
+channel_spine_mesh.h:  channel_spine_mesh.dummy
+channel_spine_mesh.dummy:  channel_spine_mesh.template.h   channel_spine_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > channel_spine_mesh.h
+	 echo "#include \"channel_spine_mesh.template.h\" " >> channel_spine_mesh.h 
+	 echo "#include \"channel_spine_mesh.template.cc\" " >> channel_spine_mesh.h 
+ 
+collapsible_channel_mesh.h:  collapsible_channel_mesh.dummy
+collapsible_channel_mesh.dummy:  collapsible_channel_mesh.template.h   collapsible_channel_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > collapsible_channel_mesh.h
+	 echo "#include \"collapsible_channel_mesh.template.h\" " >> collapsible_channel_mesh.h 
+	 echo "#include \"collapsible_channel_mesh.template.cc\" " >> collapsible_channel_mesh.h 
+ 
+triangle_mesh.h:  triangle_mesh.dummy
+triangle_mesh.dummy:  triangle_mesh.template.h   triangle_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > triangle_mesh.h
+	 echo "#include \"triangle_mesh.template.h\" " >> triangle_mesh.h 
+	 echo "#include \"triangle_mesh.template.cc\" " >> triangle_mesh.h 
+ 
+geompack_mesh.h:  geompack_mesh.dummy
+geompack_mesh.dummy:  geompack_mesh.template.h   geompack_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > geompack_mesh.h
+	 echo "#include \"geompack_mesh.template.h\" " >> geompack_mesh.h 
+	 echo "#include \"geompack_mesh.template.cc\" " >> geompack_mesh.h 
+ 
+tetgen_mesh.h:  tetgen_mesh.dummy
+tetgen_mesh.dummy:  tetgen_mesh.template.h   tetgen_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > tetgen_mesh.h
+	 echo "#include \"tetgen_mesh.template.h\" " >> tetgen_mesh.h 
+	 echo "#include \"tetgen_mesh.template.cc\" " >> tetgen_mesh.h 
+ 
+simple_rectangular_tri_mesh.h:  simple_rectangular_tri_mesh.dummy
+simple_rectangular_tri_mesh.dummy:  simple_rectangular_tri_mesh.template.h   simple_rectangular_tri_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > simple_rectangular_tri_mesh.h
+	 echo "#include \"simple_rectangular_tri_mesh.template.h\" " >> simple_rectangular_tri_mesh.h 
+	 echo "#include \"simple_rectangular_tri_mesh.template.cc\" " >> simple_rectangular_tri_mesh.h 
+ 
+simple_cubic_tet_mesh.h:  simple_cubic_tet_mesh.dummy
+simple_cubic_tet_mesh.dummy:  simple_cubic_tet_mesh.template.h   simple_cubic_tet_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > simple_cubic_tet_mesh.h
+	 echo "#include \"simple_cubic_tet_mesh.template.h\" " >> simple_cubic_tet_mesh.h 
+	 echo "#include \"simple_cubic_tet_mesh.template.cc\" " >> simple_cubic_tet_mesh.h 
+ 
+simple_cubic_mesh.h:  simple_cubic_mesh.dummy
+simple_cubic_mesh.dummy:  simple_cubic_mesh.template.h   simple_cubic_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > simple_cubic_mesh.h
+	 echo "#include \"simple_cubic_mesh.template.h\" " >> simple_cubic_mesh.h 
+	 echo "#include \"simple_cubic_mesh.template.cc\" " >> simple_cubic_mesh.h 
+ 
+single_layer_cubic_spine_mesh.h:  single_layer_cubic_spine_mesh.dummy
+single_layer_cubic_spine_mesh.dummy:  single_layer_cubic_spine_mesh.template.h   single_layer_cubic_spine_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > single_layer_cubic_spine_mesh.h
+	 echo "#include \"single_layer_cubic_spine_mesh.template.h\" " >> single_layer_cubic_spine_mesh.h 
+	 echo "#include \"single_layer_cubic_spine_mesh.template.cc\" " >> single_layer_cubic_spine_mesh.h 
+ 
+channel_with_leaflet_mesh.h:  channel_with_leaflet_mesh.dummy
+channel_with_leaflet_mesh.dummy:  channel_with_leaflet_mesh.template.h   channel_with_leaflet_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > channel_with_leaflet_mesh.h
+	 echo "#include \"channel_with_leaflet_mesh.template.h\" " >> channel_with_leaflet_mesh.h 
+	 echo "#include \"channel_with_leaflet_mesh.template.cc\" " >> channel_with_leaflet_mesh.h 
+ 
+cylinder_with_flag_mesh.h:  cylinder_with_flag_mesh.dummy
+cylinder_with_flag_mesh.dummy:  cylinder_with_flag_mesh.template.h   cylinder_with_flag_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > cylinder_with_flag_mesh.h
+	 echo "#include \"cylinder_with_flag_mesh.template.h\" " >> cylinder_with_flag_mesh.h 
+	 echo "#include \"cylinder_with_flag_mesh.template.cc\" " >> cylinder_with_flag_mesh.h 
+ 
+fsi_driven_cavity_mesh.h:  fsi_driven_cavity_mesh.dummy
+fsi_driven_cavity_mesh.dummy:  fsi_driven_cavity_mesh.template.h   fsi_driven_cavity_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > fsi_driven_cavity_mesh.h
+	 echo "#include \"fsi_driven_cavity_mesh.template.h\" " >> fsi_driven_cavity_mesh.h 
+	 echo "#include \"fsi_driven_cavity_mesh.template.cc\" " >> fsi_driven_cavity_mesh.h 
+ 
+hermite_element_quad_mesh.h:  hermite_element_quad_mesh.dummy
+hermite_element_quad_mesh.dummy:  hermite_element_quad_mesh.template.h   hermite_element_quad_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > hermite_element_quad_mesh.h
+	 echo "#include \"hermite_element_quad_mesh.template.h\" " >> hermite_element_quad_mesh.h 
+	 echo "#include \"hermite_element_quad_mesh.template.cc\" " >> hermite_element_quad_mesh.h 
+ 
+circular_shell_mesh.h:  circular_shell_mesh.dummy
+circular_shell_mesh.dummy:  circular_shell_mesh.template.h   circular_shell_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > circular_shell_mesh.h
+	 echo "#include \"circular_shell_mesh.template.h\" " >> circular_shell_mesh.h 
+	 echo "#include \"circular_shell_mesh.template.cc\" " >> circular_shell_mesh.h 
+ 
+tube_mesh.h:  tube_mesh.dummy
+tube_mesh.dummy:  tube_mesh.template.h   tube_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > tube_mesh.h
+	 echo "#include \"tube_mesh.template.h\" " >> tube_mesh.h 
+	 echo "#include \"tube_mesh.template.cc\" " >> tube_mesh.h 
+ 
+backward_step_mesh.h:  backward_step_mesh.dummy
+backward_step_mesh.dummy:  backward_step_mesh.template.h   backward_step_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > backward_step_mesh.h
+	 echo "#include \"backward_step_mesh.template.h\" " >> backward_step_mesh.h 
+	 echo "#include \"backward_step_mesh.template.cc\" " >> backward_step_mesh.h 
+ 
+full_circle_mesh.h:  full_circle_mesh.dummy
+full_circle_mesh.dummy:  full_circle_mesh.template.h   full_circle_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > full_circle_mesh.h
+	 echo "#include \"full_circle_mesh.template.h\" " >> full_circle_mesh.h 
+	 echo "#include \"full_circle_mesh.template.cc\" " >> full_circle_mesh.h 
+ 
+horizontal_single_layer_spine_mesh.h:  horizontal_single_layer_spine_mesh.dummy
+horizontal_single_layer_spine_mesh.dummy:  horizontal_single_layer_spine_mesh.template.h   horizontal_single_layer_spine_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > horizontal_single_layer_spine_mesh.h
+	 echo "#include \"horizontal_single_layer_spine_mesh.template.h\" " >> horizontal_single_layer_spine_mesh.h 
+	 echo "#include \"horizontal_single_layer_spine_mesh.template.cc\" " >> horizontal_single_layer_spine_mesh.h 
+ 
+xda_tet_mesh.h:  xda_tet_mesh.dummy
+xda_tet_mesh.dummy:  xda_tet_mesh.template.h   xda_tet_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > xda_tet_mesh.h
+	 echo "#include \"xda_tet_mesh.template.h\" " >> xda_tet_mesh.h 
+	 echo "#include \"xda_tet_mesh.template.cc\" " >> xda_tet_mesh.h 
+ 
+thin_layer_brick_on_tet_mesh.h:  thin_layer_brick_on_tet_mesh.dummy
+thin_layer_brick_on_tet_mesh.dummy:  thin_layer_brick_on_tet_mesh.template.h   thin_layer_brick_on_tet_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > thin_layer_brick_on_tet_mesh.h
+	 echo "#include \"thin_layer_brick_on_tet_mesh.template.h\" " >> thin_layer_brick_on_tet_mesh.h 
+	 echo "#include \"thin_layer_brick_on_tet_mesh.template.cc\" " >> thin_layer_brick_on_tet_mesh.h 
+ 
+brick_from_tet_mesh.h:  brick_from_tet_mesh.dummy
+brick_from_tet_mesh.dummy:  brick_from_tet_mesh.template.h   brick_from_tet_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > brick_from_tet_mesh.h
+	 echo "#include \"brick_from_tet_mesh.template.h\" " >> brick_from_tet_mesh.h 
+	 echo "#include \"brick_from_tet_mesh.template.cc\" " >> brick_from_tet_mesh.h 
+ 
+quarter_pipe_mesh.h:  quarter_pipe_mesh.dummy
+quarter_pipe_mesh.dummy:  quarter_pipe_mesh.template.h   quarter_pipe_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > quarter_pipe_mesh.h
+	 echo "#include \"quarter_pipe_mesh.template.h\" " >> quarter_pipe_mesh.h 
+	 echo "#include \"quarter_pipe_mesh.template.cc\" " >> quarter_pipe_mesh.h 
+ 
+annular_mesh.h:  annular_mesh.dummy
+annular_mesh.dummy:  annular_mesh.template.h   annular_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > annular_mesh.h
+	 echo "#include \"annular_mesh.template.h\" " >> annular_mesh.h 
+	 echo "#include \"annular_mesh.template.cc\" " >> annular_mesh.h 
+ 
+rectangle_with_hole_mesh.h:  rectangle_with_hole_mesh.dummy
+rectangle_with_hole_mesh.dummy:  rectangle_with_hole_mesh.template.h   rectangle_with_hole_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > rectangle_with_hole_mesh.h
+	 echo "#include \"rectangle_with_hole_mesh.template.h\" " >> rectangle_with_hole_mesh.h 
+	 echo "#include \"rectangle_with_hole_mesh.template.cc\" " >> rectangle_with_hole_mesh.h 
+ 
+quad_from_triangle_mesh.h:  quad_from_triangle_mesh.dummy
+quad_from_triangle_mesh.dummy:  quad_from_triangle_mesh.template.h   quad_from_triangle_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > quad_from_triangle_mesh.h
+	 echo "#include \"quad_from_triangle_mesh.template.h\" " >> quad_from_triangle_mesh.h 
+	 echo "#include \"quad_from_triangle_mesh.template.cc\" " >> quad_from_triangle_mesh.h 
+ 
+refineable_tetgen_mesh.h:  refineable_tetgen_mesh.dummy
+refineable_tetgen_mesh.dummy:  refineable_tetgen_mesh.template.h   refineable_tetgen_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > refineable_tetgen_mesh.h
+	 echo "#include \"refineable_tetgen_mesh.template.h\" " >> refineable_tetgen_mesh.h 
+	 echo "#include \"refineable_tetgen_mesh.template.cc\" " >> refineable_tetgen_mesh.h 
+ 
+gmsh_tet_mesh.h:  gmsh_tet_mesh.dummy
+gmsh_tet_mesh.dummy:  gmsh_tet_mesh.template.h   gmsh_tet_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > gmsh_tet_mesh.h
+	 echo "#include \"gmsh_tet_mesh.template.h\" " >> gmsh_tet_mesh.h 
+	 echo "#include \"gmsh_tet_mesh.template.cc\" " >> gmsh_tet_mesh.h 
+ 
+rectangle_with_moving_cylinder_mesh.h:  rectangle_with_moving_cylinder_mesh.dummy
+rectangle_with_moving_cylinder_mesh.dummy:  rectangle_with_moving_cylinder_mesh.template.h   rectangle_with_moving_cylinder_mesh.template.cc
+	 echo "// Automatically generated, combined header file" > rectangle_with_moving_cylinder_mesh.h
+	 echo "#include \"rectangle_with_moving_cylinder_mesh.template.h\" " >> rectangle_with_moving_cylinder_mesh.h 
+	 echo "#include \"rectangle_with_moving_cylinder_mesh.template.cc\" " >> rectangle_with_moving_cylinder_mesh.h 
+ 
+extruded_cube_mesh_from_quad_mesh_with_macro_elements.h:  extruded_cube_mesh_from_quad_mesh_with_macro_elements.dummy
+extruded_cube_mesh_from_quad_mesh_with_macro_elements.dummy:  extruded_cube_mesh_from_quad_mesh_with_macro_elements.template.h   extruded_cube_mesh_from_quad_mesh_with_macro_elements.template.cc
+	 echo "// Automatically generated, combined header file" > extruded_cube_mesh_from_quad_mesh_with_macro_elements.h
+	 echo "#include \"extruded_cube_mesh_from_quad_mesh_with_macro_elements.template.h\" " >> extruded_cube_mesh_from_quad_mesh_with_macro_elements.h 
+	 echo "#include \"extruded_cube_mesh_from_quad_mesh_with_macro_elements.template.cc\" " >> extruded_cube_mesh_from_quad_mesh_with_macro_elements.h 
+ 

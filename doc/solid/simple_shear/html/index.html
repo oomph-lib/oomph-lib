@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Large-amplitude shear deformation of a 3D elastic solid</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Large-amplitude shear deformation of a 3D elastic solid </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Detailed documentation to be written. Here's the already fairly well documented driver code...</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">// Driver for elastic deformation of a cuboidal domain</span></div>
+<div class="line"><span class="comment">// The deformation is a simple shear in the x-z plane driven by</span></div>
+<div class="line"><span class="comment">// motion of the top boundary, for exact solution see Green &amp; Zerna</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Generic oomph-lib headers</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Solid mechanics</span></div>
+<div class="line"><span class="preprocessor">#include &quot;solid.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The mesh </span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/simple_cubic_mesh.template.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>oomph;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Simple cubic mesh upgraded to become a solid mesh</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classElasticCubicMesh.html">ElasticCubicMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> SimpleCubicMesh&lt;ELEMENT&gt;, </div>
+<div class="line">                         <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor: </span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classElasticCubicMesh.html">ElasticCubicMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nz,</div>
+<div class="line">                  <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;a, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;b, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;c,</div>
+<div class="line">                  TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper) :</div>
+<div class="line">  SimpleCubicMesh&lt;ELEMENT&gt;(nx,ny,nz,-a,a,-b,b,-c,c,time_stepper_pt)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Assign the initial lagrangian coordinates</span></div>
+<div class="line">   set_lagrangian_nodal_coordinates();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Empty Destructor</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> ~<a class="code" href="classElasticCubicMesh.html">ElasticCubicMesh</a>() { }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to strain energy function</span></div>
+<div class="line"><span class="comment"></span> StrainEnergyFunction* <a class="code" href="namespaceGlobal__Physical__Variables.html#af6838abf46c7850f1ee0b3452d6d2498">Strain_energy_function_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to constitutive law</span></div>
+<div class="line"><span class="comment"></span> ConstitutiveLaw* <a class="code" href="namespaceGlobal__Physical__Variables.html#a5d5f19442938130d36ee7476ae25049c">Constitutive_law_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Elastic modulus</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">E</a>=1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a>=0.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// &quot;Mooney Rivlin&quot; coefficient for generalised Mooney Rivlin law</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">C1</a>=1.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Body force</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a8b80d3e8d63b8d0a0ed435a2dd7fe2ad">Gravity</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Body force vector: Vertically downwards with magnitude Gravity</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a055c27a8d2375f73e74970a8ea1dee21">body_force</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; xi,</div>
+<div class="line">                 <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; t,</div>
+<div class="line">                 Vector&lt;double&gt;&amp; b)</div>
+<div class="line"> {</div>
+<div class="line">  b[0]=0.0;</div>
+<div class="line">  b[1]=-<a class="code" href="namespaceGlobal__Physical__Variables.html#a8b80d3e8d63b8d0a0ed435a2dd7fe2ad">Gravity</a>;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Boundary-driven elastic deformation of fish-shaped domain.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classSimpleShearProblem.html">SimpleShearProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> <span class="keywordtype">double</span> Shear;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">void</span> set_incompressible(ELEMENT *el_pt,<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;incompressible);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classSimpleShearProblem.html">SimpleShearProblem</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;incompressible);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Run simulation.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> run(<span class="keyword">const</span> std::string &amp;dirname);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Access function for the mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classElasticCubicMesh.html">ElasticCubicMesh&lt;ELEMENT&gt;</a>* mesh_pt() </div>
+<div class="line">  {<span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classElasticCubicMesh.html">ElasticCubicMesh&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span>(Problem::mesh_pt());} </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_newton_solve() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update before solve: We&#39;re dealing with a static problem so</span></div>
+<div class="line"><span class="comment"> /// the nodal positions before the next solve merely serve as</span></div>
+<div class="line"><span class="comment"> /// initial conditions. For meshes that are very strongly refined</span></div>
+<div class="line"><span class="comment"> /// near the boundary, the update of the displacement boundary</span></div>
+<div class="line"><span class="comment"> /// conditions (which only moves the SolidNodes *on* the boundary),</span></div>
+<div class="line"><span class="comment"> /// can lead to strongly distorted meshes. This can cause the</span></div>
+<div class="line"><span class="comment"> /// Newton method to fail --&gt; the overall method is actually more robust</span></div>
+<div class="line"><span class="comment"> /// if we use the nodal positions as determined by the Domain/MacroElement-</span></div>
+<div class="line"><span class="comment"> /// based mesh update as initial guesses. </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve()</div>
+<div class="line">  { </div>
+<div class="line">   apply_boundary_conditions();</div>
+<div class="line">   <span class="keywordtype">bool</span> update_all_solid_nodes=<span class="keyword">true</span>;</div>
+<div class="line">   mesh_pt()-&gt;node_update(update_all_solid_nodes);</div>
+<div class="line">  }   </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Shear the top</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> apply_boundary_conditions()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> ibound = 5;</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     SolidNode *solid_nod_pt = <span class="keyword">static_cast&lt;</span>SolidNode*<span class="keyword">&gt;</span>(</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod));</div>
+<div class="line"> </div>
+<div class="line">     solid_nod_pt-&gt;x(0) = solid_nod_pt-&gt;xi(0) + Shear*</div>
+<div class="line">      solid_nod_pt-&gt;xi(2);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor: </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classSimpleShearProblem.html#ada0881781b3332f88362528be39613d2">SimpleShearProblem&lt;ELEMENT&gt;::SimpleShearProblem</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;incompressible) </div>
+<div class="line"> : Shear(0.0)</div>
+<div class="line">{</div>
+<div class="line"> <span class="keywordtype">double</span> a = 1.0, b = 1.0, c = 1.0;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nx = 5, ny = 5, nz = 5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build mesh</span></div>
+<div class="line"> Problem::mesh_pt()=<span class="keyword">new</span> <a class="code" href="classElasticCubicMesh.html">ElasticCubicMesh&lt;ELEMENT&gt;</a>(nx,ny,nz,a,b,c);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over all boundaries</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;6;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Loop over nodes in the boundary</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_node = mesh_pt()-&gt;nboundary_node(b);</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Pin all nodes in the y and z directions to keep the motion in plane</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=1;i&lt;3;i++)</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(b,n)-&gt;pin_position(i); </div>
+<div class="line">      }</div>
+<div class="line">     <span class="comment">//On the top and bottom pin the positions in x</span></div>
+<div class="line">     <span class="keywordflow">if</span>((b==0) || (b==5))</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(b,n)-&gt;pin_position(0);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the elements in the mesh to set parameters/function pointers</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span>  n_element =mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   el_pt-&gt;constitutive_law_pt() =</div>
+<div class="line">    <a class="code" href="namespaceGlobal__Physical__Variables.html#a5d5f19442938130d36ee7476ae25049c">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">   set_incompressible(el_pt,incompressible);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the body force</span></div>
+<div class="line">   <span class="comment">//el_pt-&gt;body_force_fct_pt()=Global_Physical_Variables::body_force;</span></div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line"> <span class="comment">//PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures(</span></div>
+<div class="line"> <span class="comment">// mesh_pt()-&gt;element_pt());</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Attach the boundary conditions to the mesh</span></div>
+<div class="line"> cout &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line">} </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classSimpleShearProblem.html#a24c087d9ea194229930bcf9f889a048e">SimpleShearProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts = 5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output shape of deformed body</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/stress%i.dat&quot;</span>, doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> <span class="comment">//Output the appropriate stress at the centre of each element</span></div>
+<div class="line"> Vector&lt;double&gt; s(3,0.0);</div>
+<div class="line"> Vector&lt;double&gt; x(3);</div>
+<div class="line"> DenseMatrix&lt;double&gt; sigma(3,3);</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   ELEMENT* el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e));</div>
+<div class="line">   el_pt-&gt;interpolated_x(s,x);</div>
+<div class="line">   el_pt-&gt;get_stress(s,sigma);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Output</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;3;i++)</div>
+<div class="line">    {</div>
+<div class="line">     some_file &lt;&lt; x[i] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;3;i++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> j=0;j&lt;3;j++)</div>
+<div class="line">      {</div>
+<div class="line">       some_file &lt;&lt; sigma(i,j) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">   some_file &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Run the problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classSimpleShearProblem.html#ac1746a2634e310571d40d70719d509c0">SimpleShearProblem&lt;ELEMENT&gt;::run</a>(<span class="keyword">const</span> std::string &amp;dirname)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(dirname);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Step number</span></div>
+<div class="line"> doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial parameter values</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Gravity:</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a8b80d3e8d63b8d0a0ed435a2dd7fe2ad">Global_Physical_Variables::Gravity</a>=0.1; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Parameter incrementation</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=2; </div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Solve the problem with Newton&#39;s method, allowing for up to 5 </span></div>
+<div class="line">   <span class="comment">//rounds of adaptation</span></div>
+<div class="line">   newton_solve();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   doc_solution(doc_info);</div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">   <span class="comment">//Increase the shear</span></div>
+<div class="line">   Shear += 0.5;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classSimpleShearProblem.html">SimpleShearProblem&lt;QPVDElement&lt;3,3&gt;</a> &gt;::set_incompressible(</div>
+<div class="line"> QPVDElement&lt;3,3&gt; *el_pt, <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;incompressible)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Does nothing</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classSimpleShearProblem.html">SimpleShearProblem&lt;QPVDElementWithPressure&lt;3&gt;</a> &gt;::set_incompressible(</div>
+<div class="line"> QPVDElementWithPressure&lt;3&gt; *el_pt, <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;incompressible)</div>
+<div class="line">{</div>
+<div class="line"> <span class="keywordflow">if</span>(incompressible) {el_pt-&gt;<a class="code" href="classSimpleShearProblem.html#a3e5d5f57fc041531ee683f50395536f0">set_incompressible</a>();}</div>
+<div class="line"> <span class="keywordflow">else</span> {el_pt-&gt;set_compressible();}</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classSimpleShearProblem.html">SimpleShearProblem&lt;QPVDElementWithContinuousPressure&lt;3&gt;</a> &gt;::</div>
+<div class="line">set_incompressible(</div>
+<div class="line"> QPVDElementWithContinuousPressure&lt;3&gt; *el_pt, <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;incompressible)</div>
+<div class="line">{</div>
+<div class="line"> <span class="keywordflow">if</span>(incompressible) {el_pt-&gt;<a class="code" href="classSimpleShearProblem.html#a3e5d5f57fc041531ee683f50395536f0">set_incompressible</a>();}</div>
+<div class="line"> <span class="keywordflow">else</span> {el_pt-&gt;set_compressible();}</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver for simple elastic problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="refineable__simple__shear_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Initialise physical parameters</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">Global_Physical_Variables::E</a>  = 2.1; </div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a> = 0.4; </div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">Global_Physical_Variables::C1</a> = 1.3; </div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define a strain energy function: Generalised Mooney Rivlin</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#af6838abf46c7850f1ee0b3452d6d2498">Global_Physical_Variables::Strain_energy_function_pt</a> = </div>
+<div class="line">  <span class="keyword">new</span> GeneralisedMooneyRivlin(&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>,</div>
+<div class="line">                              &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">Global_Physical_Variables::C1</a>,</div>
+<div class="line">                              &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">Global_Physical_Variables::E</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define a constitutive law (based on strain energy function)</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a5d5f19442938130d36ee7476ae25049c">Global_Physical_Variables::Constitutive_law_pt</a> = </div>
+<div class="line">  <span class="keyword">new</span> IsotropicStrainEnergyFunctionConstitutiveLaw(</div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#af6838abf46c7850f1ee0b3452d6d2498">Global_Physical_Variables::Strain_energy_function_pt</a>);</div>
+<div class="line"> </div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Set up the problem with pure displacement formulation</span></div>
+<div class="line">  <a class="code" href="classSimpleShearProblem.html">SimpleShearProblem&lt;QPVDElement&lt;3,3&gt;</a> &gt; problem(<span class="keyword">false</span>);</div>
+<div class="line">  problem.run(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Discontinuous pressure</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Set up the problem with pure displacement formulation</span></div>
+<div class="line">  <a class="code" href="classSimpleShearProblem.html">SimpleShearProblem&lt;QPVDElementWithPressure&lt;3&gt;</a> &gt; problem(<span class="keyword">false</span>);</div>
+<div class="line">  problem.run(<span class="stringliteral">&quot;RESLT_pres&quot;</span>);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">/*{</span></div>
+<div class="line"><span class="comment">  //Set up the problem with pure displacement formulation</span></div>
+<div class="line"><span class="comment">  SimpleShearProblem&lt;QPVDElementWithPressure&lt;3&gt; &gt; problem(true);</span></div>
+<div class="line"><span class="comment">  problem.run(&quot;RESLT_pres_incomp&quot;);</span></div>
+<div class="line"><span class="comment">  }*/</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Set up the problem with pure displacement formulation</span></div>
+<div class="line">  <a class="code" href="classSimpleShearProblem.html">SimpleShearProblem&lt;QPVDElementWithContinuousPressure&lt;3&gt;</a> &gt; problem(<span class="keyword">false</span>);</div>
+<div class="line">  problem.run(<span class="stringliteral">&quot;RESLT_cont_pres&quot;</span>);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">/*{</span></div>
+<div class="line"><span class="comment">  //Set up the problem with pure displacement formulation</span></div>
+<div class="line"><span class="comment">  SimpleShearProblem&lt;QPVDElementWithContinuousPressure&lt;3&gt; &gt; problem(true);</span></div>
+<div class="line"><span class="comment">  problem.run(&quot;RESLT_cont_pres_incomp&quot;);</span></div>
+<div class="line"><span class="comment">  }*/</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+</div><!-- fragment --><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassSimpleShearProblem_html"><div class="ttname"><a href="classSimpleShearProblem.html">SimpleShearProblem</a></div><div class="ttdoc">Boundary-driven elastic deformation of fish-shaped domain.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00137">refineable_simple_shear.cc:137</a></div></div>
+<div class="ttc" id="aclassSimpleShearProblem_html_ac1746a2634e310571d40d70719d509c0"><div class="ttname"><a href="classSimpleShearProblem.html#ac1746a2634e310571d40d70719d509c0">SimpleShearProblem::run</a></div><div class="ttdeci">void run(const std::string &amp;dirname)</div><div class="ttdoc">Run simulation.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00335">refineable_simple_shear.cc:335</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a5d5f19442938130d36ee7476ae25049c"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a5d5f19442938130d36ee7476ae25049c">Global_Physical_Variables::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">Pointer to constitutive law.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00101">refineable_simple_shear.cc:101</a></div></div>
+<div class="ttc" id="aclassElasticCubicMesh_html"><div class="ttname"><a href="classElasticCubicMesh.html">ElasticCubicMesh</a></div><div class="ttdoc">Simple cubic mesh upgraded to become a solid mesh.</div><div class="ttdef"><b>Definition:</b> <a href="simple__shear_8cc_source.html#l00052">simple_shear.cc:52</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a09a019474b7405b35da2437f7779bc7e"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">Global_Physical_Variables::E</a></div><div class="ttdeci">double E</div><div class="ttdoc">Elastic modulus.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00104">refineable_simple_shear.cc:104</a></div></div>
+<div class="ttc" id="aclassSimpleShearProblem_html_ada0881781b3332f88362528be39613d2"><div class="ttname"><a href="classSimpleShearProblem.html#ada0881781b3332f88362528be39613d2">SimpleShearProblem::SimpleShearProblem</a></div><div class="ttdeci">SimpleShearProblem(const bool &amp;incompressible)</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00240">refineable_simple_shear.cc:240</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a8b80d3e8d63b8d0a0ed435a2dd7fe2ad">Global_Physical_Variables::Gravity</a></div><div class="ttdeci">double Gravity</div><div class="ttdoc">Body force.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00113">refineable_simple_shear.cc:113</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_af6838abf46c7850f1ee0b3452d6d2498"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#af6838abf46c7850f1ee0b3452d6d2498">Global_Physical_Variables::Strain_energy_function_pt</a></div><div class="ttdeci">StrainEnergyFunction * Strain_energy_function_pt</div><div class="ttdoc">Pointer to strain energy function.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00098">refineable_simple_shear.cc:98</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a055c27a8d2375f73e74970a8ea1dee21"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a055c27a8d2375f73e74970a8ea1dee21">Global_Physical_Variables::body_force</a></div><div class="ttdeci">void body_force(const Vector&lt; double &gt; &amp;xi, const double &amp;t, Vector&lt; double &gt; &amp;b)</div><div class="ttdoc">Body force vector: Vertically downwards with magnitude Gravity.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00116">refineable_simple_shear.cc:116</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson's ratio.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00107">refineable_simple_shear.cc:107</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a849754fa7155c1a31481674ce4845658"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">Global_Physical_Variables::C1</a></div><div class="ttdeci">double C1</div><div class="ttdoc">&quot;Mooney Rivlin&quot; coefficient for generalised Mooney Rivlin law</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00110">refineable_simple_shear.cc:110</a></div></div>
+<div class="ttc" id="aclassSimpleShearProblem_html_a3e5d5f57fc041531ee683f50395536f0"><div class="ttname"><a href="classSimpleShearProblem.html#a3e5d5f57fc041531ee683f50395536f0">SimpleShearProblem::set_incompressible</a></div><div class="ttdeci">void set_incompressible(ELEMENT *el_pt, const bool &amp;incompressible)</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00379">refineable_simple_shear.cc:379</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00095">refineable_simple_shear.cc:95</a></div></div>
+<div class="ttc" id="aclassSimpleShearProblem_html_a24c087d9ea194229930bcf9f889a048e"><div class="ttname"><a href="classSimpleShearProblem.html#a24c087d9ea194229930bcf9f889a048e">SimpleShearProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00281">refineable_simple_shear.cc:281</a></div></div>
+<div class="ttc" id="arefineable__simple__shear_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="refineable__simple__shear_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver for simple elastic problem.</div><div class="ttdef"><b>Definition:</b> <a href="refineable__simple__shear_8cc_source.html#l00407">refineable_simple_shear.cc:407</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:17:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

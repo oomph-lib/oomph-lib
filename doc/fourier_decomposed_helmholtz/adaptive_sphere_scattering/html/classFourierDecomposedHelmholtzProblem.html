@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: FourierDecomposedHelmholtzProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classFourierDecomposedHelmholtzProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">FourierDecomposedHelmholtzProblem&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Problem class.  
+ <a href="classFourierDecomposedHelmholtzProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for FourierDecomposedHelmholtzProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classFourierDecomposedHelmholtzProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab368ed8fe04d4e3db67d13bab9e7b52e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">FourierDecomposedHelmholtzProblem</a> ()</td></tr>
+<tr class="memdesc:ab368ed8fe04d4e3db67d13bab9e7b52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">More...</a><br /></td></tr>
+<tr class="separator:ab368ed8fe04d4e3db67d13bab9e7b52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03174fa5a35b7c38f08f91bcd2a80c20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a03174fa5a35b7c38f08f91bcd2a80c20">~FourierDecomposedHelmholtzProblem</a> ()</td></tr>
+<tr class="memdesc:a03174fa5a35b7c38f08f91bcd2a80c20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classFourierDecomposedHelmholtzProblem.html#a03174fa5a35b7c38f08f91bcd2a80c20">More...</a><br /></td></tr>
+<tr class="separator:a03174fa5a35b7c38f08f91bcd2a80c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82ef5a969f4404fc1acb35c38c800ce6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a82ef5a969f4404fc1acb35c38c800ce6">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a82ef5a969f4404fc1acb35c38c800ce6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve (empty)  <a href="classFourierDecomposedHelmholtzProblem.html#a82ef5a969f4404fc1acb35c38c800ce6">More...</a><br /></td></tr>
+<tr class="separator:a82ef5a969f4404fc1acb35c38c800ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a37ba3fcf8563764f80108c9a657929"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a5a37ba3fcf8563764f80108c9a657929">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a5a37ba3fcf8563764f80108c9a657929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve (empty)  <a href="classFourierDecomposedHelmholtzProblem.html#a5a37ba3fcf8563764f80108c9a657929">More...</a><br /></td></tr>
+<tr class="separator:a5a37ba3fcf8563764f80108c9a657929"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a893efb01f8f1d254315201121766d882"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a893efb01f8f1d254315201121766d882">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a893efb01f8f1d254315201121766d882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.  <a href="classFourierDecomposedHelmholtzProblem.html#a893efb01f8f1d254315201121766d882">More...</a><br /></td></tr>
+<tr class="separator:a893efb01f8f1d254315201121766d882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae80673ef299e4935ddcac177ed919da3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#ae80673ef299e4935ddcac177ed919da3">actions_before_newton_convergence_check</a> ()</td></tr>
+<tr class="memdesc:ae80673ef299e4935ddcac177ed919da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recompute gamma integral before checking Newton residuals.  <a href="classFourierDecomposedHelmholtzProblem.html#ae80673ef299e4935ddcac177ed919da3">More...</a><br /></td></tr>
+<tr class="separator:ae80673ef299e4935ddcac177ed919da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4f3f737660b11e8762a61bca999eb0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#ac4f3f737660b11e8762a61bca999eb0f">check_gamma</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:ac4f3f737660b11e8762a61bca999eb0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check gamma computation.  <a href="classFourierDecomposedHelmholtzProblem.html#ac4f3f737660b11e8762a61bca999eb0f">More...</a><br /></td></tr>
+<tr class="separator:ac4f3f737660b11e8762a61bca999eb0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab368ed8fe04d4e3db67d13bab9e7b52e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">FourierDecomposedHelmholtzProblem</a> ()</td></tr>
+<tr class="memdesc:ab368ed8fe04d4e3db67d13bab9e7b52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">More...</a><br /></td></tr>
+<tr class="separator:ab368ed8fe04d4e3db67d13bab9e7b52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03174fa5a35b7c38f08f91bcd2a80c20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a03174fa5a35b7c38f08f91bcd2a80c20">~FourierDecomposedHelmholtzProblem</a> ()</td></tr>
+<tr class="memdesc:a03174fa5a35b7c38f08f91bcd2a80c20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classFourierDecomposedHelmholtzProblem.html#a03174fa5a35b7c38f08f91bcd2a80c20">More...</a><br /></td></tr>
+<tr class="separator:a03174fa5a35b7c38f08f91bcd2a80c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82ef5a969f4404fc1acb35c38c800ce6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a82ef5a969f4404fc1acb35c38c800ce6">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a82ef5a969f4404fc1acb35c38c800ce6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve (empty)  <a href="classFourierDecomposedHelmholtzProblem.html#a82ef5a969f4404fc1acb35c38c800ce6">More...</a><br /></td></tr>
+<tr class="separator:a82ef5a969f4404fc1acb35c38c800ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a37ba3fcf8563764f80108c9a657929"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a5a37ba3fcf8563764f80108c9a657929">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a5a37ba3fcf8563764f80108c9a657929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve (empty)  <a href="classFourierDecomposedHelmholtzProblem.html#a5a37ba3fcf8563764f80108c9a657929">More...</a><br /></td></tr>
+<tr class="separator:a5a37ba3fcf8563764f80108c9a657929"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a893efb01f8f1d254315201121766d882"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a893efb01f8f1d254315201121766d882">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a893efb01f8f1d254315201121766d882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.  <a href="classFourierDecomposedHelmholtzProblem.html#a893efb01f8f1d254315201121766d882">More...</a><br /></td></tr>
+<tr class="separator:a893efb01f8f1d254315201121766d882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae80673ef299e4935ddcac177ed919da3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#ae80673ef299e4935ddcac177ed919da3">actions_before_newton_convergence_check</a> ()</td></tr>
+<tr class="memdesc:ae80673ef299e4935ddcac177ed919da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recompute gamma integral before checking Newton residuals.  <a href="classFourierDecomposedHelmholtzProblem.html#ae80673ef299e4935ddcac177ed919da3">More...</a><br /></td></tr>
+<tr class="separator:ae80673ef299e4935ddcac177ed919da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbc6f3c692463e5a098ccec7fe9029c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#acbc6f3c692463e5a098ccec7fe9029c1">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:acbc6f3c692463e5a098ccec7fe9029c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the mesh of prescribed flux elements.  <a href="classFourierDecomposedHelmholtzProblem.html#acbc6f3c692463e5a098ccec7fe9029c1">More...</a><br /></td></tr>
+<tr class="separator:acbc6f3c692463e5a098ccec7fe9029c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3258e3817d8747aac0409eca1a24d14b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a3258e3817d8747aac0409eca1a24d14b">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:a3258e3817d8747aac0409eca1a24d14b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Rebuild the mesh of prescribed flux elements.  <a href="classFourierDecomposedHelmholtzProblem.html#a3258e3817d8747aac0409eca1a24d14b">More...</a><br /></td></tr>
+<tr class="separator:a3258e3817d8747aac0409eca1a24d14b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4f3f737660b11e8762a61bca999eb0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#ac4f3f737660b11e8762a61bca999eb0f">check_gamma</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:ac4f3f737660b11e8762a61bca999eb0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check gamma computation.  <a href="classFourierDecomposedHelmholtzProblem.html#ac4f3f737660b11e8762a61bca999eb0f">More...</a><br /></td></tr>
+<tr class="separator:ac4f3f737660b11e8762a61bca999eb0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a359d402bb4aed7d83973248d82085efb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a359d402bb4aed7d83973248d82085efb">create_outer_bc_elements</a> ()</td></tr>
+<tr class="memdesc:a359d402bb4aed7d83973248d82085efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create BC elements on outer boundary.  <a href="classFourierDecomposedHelmholtzProblem.html#a359d402bb4aed7d83973248d82085efb">More...</a><br /></td></tr>
+<tr class="separator:a359d402bb4aed7d83973248d82085efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81d64611f2de2492cec6b0621d8124b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a81d64611f2de2492cec6b0621d8124b0">create_flux_elements_on_inner_boundary</a> ()</td></tr>
+<tr class="memdesc:a81d64611f2de2492cec6b0621d8124b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create flux elements on inner boundary.  <a href="classFourierDecomposedHelmholtzProblem.html#a81d64611f2de2492cec6b0621d8124b0">More...</a><br /></td></tr>
+<tr class="separator:a81d64611f2de2492cec6b0621d8124b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a359d402bb4aed7d83973248d82085efb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a359d402bb4aed7d83973248d82085efb">create_outer_bc_elements</a> ()</td></tr>
+<tr class="memdesc:a359d402bb4aed7d83973248d82085efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create BC elements on outer boundary.  <a href="classFourierDecomposedHelmholtzProblem.html#a359d402bb4aed7d83973248d82085efb">More...</a><br /></td></tr>
+<tr class="separator:a359d402bb4aed7d83973248d82085efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81d64611f2de2492cec6b0621d8124b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a81d64611f2de2492cec6b0621d8124b0">create_flux_elements_on_inner_boundary</a> ()</td></tr>
+<tr class="memdesc:a81d64611f2de2492cec6b0621d8124b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create flux elements on inner boundary.  <a href="classFourierDecomposedHelmholtzProblem.html#a81d64611f2de2492cec6b0621d8124b0">More...</a><br /></td></tr>
+<tr class="separator:a81d64611f2de2492cec6b0621d8124b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c19a495d042fbeca1e226e2ff73080"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#aa2c19a495d042fbeca1e226e2ff73080">delete_face_elements</a> (Mesh *const &amp;boundary_mesh_pt)</td></tr>
+<tr class="memdesc:aa2c19a495d042fbeca1e226e2ff73080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete boundary face elements and wipe the surface mesh.  <a href="classFourierDecomposedHelmholtzProblem.html#aa2c19a495d042fbeca1e226e2ff73080">More...</a><br /></td></tr>
+<tr class="separator:aa2c19a495d042fbeca1e226e2ff73080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad5927e4a2156e96c55ebce044c6f9653"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAnnularQuadMesh.html">AnnularQuadMesh</a>&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#ad5927e4a2156e96c55ebce044c6f9653">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:ad5927e4a2156e96c55ebce044c6f9653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to bulk mesh.  <a href="classFourierDecomposedHelmholtzProblem.html#ad5927e4a2156e96c55ebce044c6f9653">More...</a><br /></td></tr>
+<tr class="separator:ad5927e4a2156e96c55ebce044c6f9653"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7aafa9c0ab982d9e1fdc31d802d309b"><td class="memItemLeft" align="right" valign="top">FourierDecomposedHelmholtzDtNMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#ab7aafa9c0ab982d9e1fdc31d802d309b">Helmholtz_outer_boundary_mesh_pt</a></td></tr>
+<tr class="memdesc:ab7aafa9c0ab982d9e1fdc31d802d309b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh containing the DtN boundary condition elements.  <a href="classFourierDecomposedHelmholtzProblem.html#ab7aafa9c0ab982d9e1fdc31d802d309b">More...</a><br /></td></tr>
+<tr class="separator:ab7aafa9c0ab982d9e1fdc31d802d309b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ecc5a3fc3407de8985ed9a61402f2f0"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a3ecc5a3fc3407de8985ed9a61402f2f0">Helmholtz_inner_boundary_mesh_pt</a></td></tr>
+<tr class="memdesc:a3ecc5a3fc3407de8985ed9a61402f2f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh of face elements that apply the prescribed flux on the inner boundary.  <a href="classFourierDecomposedHelmholtzProblem.html#a3ecc5a3fc3407de8985ed9a61402f2f0">More...</a><br /></td></tr>
+<tr class="separator:a3ecc5a3fc3407de8985ed9a61402f2f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48a453a291906bbc152c21e2151bcb0c"><td class="memItemLeft" align="right" valign="top">RefineableTriangleMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#a48a453a291906bbc152c21e2151bcb0c">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:a48a453a291906bbc152c21e2151bcb0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "bulk" mesh.  <a href="classFourierDecomposedHelmholtzProblem.html#a48a453a291906bbc152c21e2151bcb0c">More...</a><br /></td></tr>
+<tr class="separator:a48a453a291906bbc152c21e2151bcb0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7ce7dc89eae3e8a753d3b8f0d71dbc4"><td class="memItemLeft" align="right" valign="top">TriangleMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#aa7ce7dc89eae3e8a753d3b8f0d71dbc4">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:aa7ce7dc89eae3e8a753d3b8f0d71dbc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "bulk" mesh.  <a href="classFourierDecomposedHelmholtzProblem.html#aa7ce7dc89eae3e8a753d3b8f0d71dbc4">More...</a><br /></td></tr>
+<tr class="separator:aa7ce7dc89eae3e8a753d3b8f0d71dbc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9786130005c43637f8b305c2becc555"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFourierDecomposedHelmholtzProblem.html#ab9786130005c43637f8b305c2becc555">Trace_file</a></td></tr>
+<tr class="memdesc:ab9786130005c43637f8b305c2becc555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace file.  <a href="classFourierDecomposedHelmholtzProblem.html#ab9786130005c43637f8b305c2becc555">More...</a><br /></td></tr>
+<tr class="separator:ab9786130005c43637f8b305c2becc555"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class FourierDecomposedHelmholtzProblem&lt; ELEMENT &gt;</h3>
+
+<p>Problem class. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00379">379</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab368ed8fe04d4e3db67d13bab9e7b52e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab368ed8fe04d4e3db67d13bab9e7b52e">&#9670;&nbsp;</a></span>FourierDecomposedHelmholtzProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Constructor for Fourier-decomposed Helmholtz problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00437">437</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sphere__scattering_8cc_source.html#l00363">ProblemParameters::El_multiplier</a>, <a class="el" href="sphere__scattering_8cc_source.html#l00225">ProblemParameters::K_squared</a>, <a class="el" href="sphere__scattering_8cc_source.html#l00228">ProblemParameters::N_fourier</a>, and <a class="el" href="sphere__scattering_8cc_source.html#l00231">ProblemParameters::Nterms_for_DtN</a>.</p>
+
+</div>
+</div>
+<a id="a03174fa5a35b7c38f08f91bcd2a80c20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03174fa5a35b7c38f08f91bcd2a80c20">&#9670;&nbsp;</a></span>~FourierDecomposedHelmholtzProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00388">388</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab368ed8fe04d4e3db67d13bab9e7b52e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab368ed8fe04d4e3db67d13bab9e7b52e">&#9670;&nbsp;</a></span>FourierDecomposedHelmholtzProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+</div>
+</div>
+<a id="a03174fa5a35b7c38f08f91bcd2a80c20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03174fa5a35b7c38f08f91bcd2a80c20">&#9670;&nbsp;</a></span>~FourierDecomposedHelmholtzProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00333">333</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3258e3817d8747aac0409eca1a24d14b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3258e3817d8747aac0409eca1a24d14b">&#9670;&nbsp;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::actions_after_adapt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Rebuild the mesh of prescribed flux elements. </p>
+<p>Actions after adapt: Rebuild the face element meshes. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00437">437</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sphere__scattering_8cc_source.html#l00225">ProblemParameters::K_squared</a>, and <a class="el" href="sphere__scattering_8cc_source.html#l00228">ProblemParameters::N_fourier</a>.</p>
+
+</div>
+</div>
+<a id="a5a37ba3fcf8563764f80108c9a657929"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a37ba3fcf8563764f80108c9a657929">&#9670;&nbsp;</a></span>actions_after_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00339">339</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="a5a37ba3fcf8563764f80108c9a657929"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a37ba3fcf8563764f80108c9a657929">&#9670;&nbsp;</a></span>actions_after_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00394">394</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="acbc6f3c692463e5a098ccec7fe9029c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbc6f3c692463e5a098ccec7fe9029c1">&#9670;&nbsp;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::actions_before_adapt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the mesh of prescribed flux elements. </p>
+<p>Actions before adapt: Wipe the mesh of face elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00418">418</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae80673ef299e4935ddcac177ed919da3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae80673ef299e4935ddcac177ed919da3">&#9670;&nbsp;</a></span>actions_before_newton_convergence_check() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::actions_before_newton_convergence_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recompute gamma integral before checking Newton residuals. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00346">346</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae80673ef299e4935ddcac177ed919da3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae80673ef299e4935ddcac177ed919da3">&#9670;&nbsp;</a></span>actions_before_newton_convergence_check() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::actions_before_newton_convergence_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recompute gamma integral before checking Newton residuals. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00401">401</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="a82ef5a969f4404fc1acb35c38c800ce6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82ef5a969f4404fc1acb35c38c800ce6">&#9670;&nbsp;</a></span>actions_before_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00336">336</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="a82ef5a969f4404fc1acb35c38c800ce6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82ef5a969f4404fc1acb35c38c800ce6">&#9670;&nbsp;</a></span>actions_before_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00391">391</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac4f3f737660b11e8762a61bca999eb0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4f3f737660b11e8762a61bca999eb0f">&#9670;&nbsp;</a></span>check_gamma() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::check_gamma </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check gamma computation. </p>
+
+</div>
+</div>
+<a id="ac4f3f737660b11e8762a61bca999eb0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4f3f737660b11e8762a61bca999eb0f">&#9670;&nbsp;</a></span>check_gamma() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::check_gamma </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check gamma computation. </p>
+<p>Check gamma computation: <img class="formulaInl" alt="$ \gamma = -du/dn $" src="form_9.png"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00505">505</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sphere__scattering_8cc_source.html#l00302">ProblemParameters::exact_minus_dudr()</a>.</p>
+
+</div>
+</div>
+<a id="a81d64611f2de2492cec6b0621d8124b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81d64611f2de2492cec6b0621d8124b0">&#9670;&nbsp;</a></span>create_flux_elements_on_inner_boundary() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::create_flux_elements_on_inner_boundary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create flux elements on inner boundary. </p>
+
+</div>
+</div>
+<a id="a81d64611f2de2492cec6b0621d8124b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81d64611f2de2492cec6b0621d8124b0">&#9670;&nbsp;</a></span>create_flux_elements_on_inner_boundary() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::create_flux_elements_on_inner_boundary</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create flux elements on inner boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00697">697</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sphere__scattering_8cc_source.html#l00302">ProblemParameters::exact_minus_dudr()</a>.</p>
+
+</div>
+</div>
+<a id="a359d402bb4aed7d83973248d82085efb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a359d402bb4aed7d83973248d82085efb">&#9670;&nbsp;</a></span>create_outer_bc_elements() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::create_outer_bc_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create BC elements on outer boundary. </p>
+
+</div>
+</div>
+<a id="a359d402bb4aed7d83973248d82085efb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a359d402bb4aed7d83973248d82085efb">&#9670;&nbsp;</a></span>create_outer_bc_elements() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::create_outer_bc_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create BC elements on outer boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00658">658</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa2c19a495d042fbeca1e226e2ff73080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2c19a495d042fbeca1e226e2ff73080">&#9670;&nbsp;</a></span>delete_face_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::delete_face_elements </td>
+          <td>(</td>
+          <td class="paramtype">Mesh *const &amp;&#160;</td>
+          <td class="paramname"><em>boundary_mesh_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete boundary face elements and wipe the surface mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00373">373</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="a893efb01f8f1d254315201121766d882"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a893efb01f8f1d254315201121766d882">&#9670;&nbsp;</a></span>doc_solution() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to. </p>
+
+</div>
+</div>
+<a id="a893efb01f8f1d254315201121766d882"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a893efb01f8f1d254315201121766d882">&#9670;&nbsp;</a></span>doc_solution() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to. </p>
+<p>Doc the solution: doc_info contains labels/output directory etc. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00574">574</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sphere__scattering_8cc_source.html#l00243">ProblemParameters::get_exact_u()</a>, <a class="el" href="sphere__scattering_8cc_source.html#l00225">ProblemParameters::K_squared</a>, and <a class="el" href="sphere__scattering_8cc_source.html#l00228">ProblemParameters::N_fourier</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a48a453a291906bbc152c21e2151bcb0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48a453a291906bbc152c21e2151bcb0c">&#9670;&nbsp;</a></span>Bulk_mesh_pt <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableTriangleMesh&lt;ELEMENT&gt;* <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00391">391</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa7ce7dc89eae3e8a753d3b8f0d71dbc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7ce7dc89eae3e8a753d3b8f0d71dbc4">&#9670;&nbsp;</a></span>Bulk_mesh_pt <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TriangleMesh&lt;ELEMENT&gt;* <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00396">396</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="ad5927e4a2156e96c55ebce044c6f9653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5927e4a2156e96c55ebce044c6f9653">&#9670;&nbsp;</a></span>Bulk_mesh_pt <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classAnnularQuadMesh.html">AnnularQuadMesh</a>&lt;ELEMENT&gt;* <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to bulk mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00418">418</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3ecc5a3fc3407de8985ed9a61402f2f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ecc5a3fc3407de8985ed9a61402f2f0">&#9670;&nbsp;</a></span>Helmholtz_inner_boundary_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::Helmholtz_inner_boundary_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mesh of face elements that apply the prescribed flux on the inner boundary. </p>
+<p>on the inner boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00426">426</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab7aafa9c0ab982d9e1fdc31d802d309b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7aafa9c0ab982d9e1fdc31d802d309b">&#9670;&nbsp;</a></span>Helmholtz_outer_boundary_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FourierDecomposedHelmholtzDtNMesh&lt; ELEMENT &gt; * <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::Helmholtz_outer_boundary_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to mesh containing the DtN boundary condition elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphere__scattering_8cc_source.html#l00422">422</a> of file <a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab9786130005c43637f8b305c2becc555"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9786130005c43637f8b305c2becc555">&#9670;&nbsp;</a></span>Trace_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream <a class="el" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a>&lt; ELEMENT &gt;::Trace_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Trace file. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__sphere__scattering_8cc_source.html#l00408">408</a> of file <a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="sphere__scattering_8cc_source.html">sphere_scattering.cc</a></li>
+<li><a class="el" href="unstructured__sphere__scattering_8cc_source.html">unstructured_sphere_scattering.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:29:01
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

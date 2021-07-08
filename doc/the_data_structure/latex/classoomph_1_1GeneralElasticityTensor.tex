@@ -1,0 +1,124 @@
+\hypertarget{classoomph_1_1GeneralElasticityTensor}{}\doxysection{oomph\+::General\+Elasticity\+Tensor Class Reference}
+\label{classoomph_1_1GeneralElasticityTensor}\index{oomph::GeneralElasticityTensor@{oomph::GeneralElasticityTensor}}
+
+
+{\ttfamily \#include $<$elasticity\+\_\+tensor.\+h$>$}
+
+Inheritance diagram for oomph\+::General\+Elasticity\+Tensor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1GeneralElasticityTensor}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeneralElasticityTensor_a6b22a3888a575e622693268bc80ab504}{General\+Elasticity\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empy Constructor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1GeneralElasticityTensor_a01443522709af3e2f1af63411be4f0e6}{independent\+\_\+component}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Overload the independent coefficient function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GeneralElasticityTensor_aa8dee57c5a1315f790401628ece5ec26}{set\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, const unsigned \&k, const unsigned \&l, const double \&\mbox{\hyperlink{the__data__structure_8txt_a3b0d20781021ec2f0e788713f8b0fec8}{value}})
+\begin{DoxyCompactList}\small\item\em Allow the values to be set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1GeneralElasticityTensor_afc3c4afaaa1eef1c57913e1e20c0d483}{C}} \mbox{[}21\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A general elasticity tensor that provides storage for all 21 independent components 
+
+Definition at line 246 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1GeneralElasticityTensor_a6b22a3888a575e622693268bc80ab504}\label{classoomph_1_1GeneralElasticityTensor_a6b22a3888a575e622693268bc80ab504}} 
+\index{oomph::GeneralElasticityTensor@{oomph::GeneralElasticityTensor}!GeneralElasticityTensor@{GeneralElasticityTensor}}
+\index{GeneralElasticityTensor@{GeneralElasticityTensor}!oomph::GeneralElasticityTensor@{oomph::GeneralElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{GeneralElasticityTensor()}{GeneralElasticityTensor()}}
+{\footnotesize\ttfamily oomph\+::\+General\+Elasticity\+Tensor\+::\+General\+Elasticity\+Tensor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empy Constructor. 
+
+
+
+Definition at line 254 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, and i.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1GeneralElasticityTensor_a01443522709af3e2f1af63411be4f0e6}\label{classoomph_1_1GeneralElasticityTensor_a01443522709af3e2f1af63411be4f0e6}} 
+\index{oomph::GeneralElasticityTensor@{oomph::GeneralElasticityTensor}!independent\_component@{independent\_component}}
+\index{independent\_component@{independent\_component}!oomph::GeneralElasticityTensor@{oomph::GeneralElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{independent\_component()}{independent\_component()}}
+{\footnotesize\ttfamily double oomph\+::\+General\+Elasticity\+Tensor\+::independent\+\_\+component (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the independent coefficient function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a84b2a9b7a447cf88b2d6b98b5e6e7bd5}{oomph\+::\+Elasticity\+Tensor}}.
+
+
+
+Definition at line 261 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, and i.
+
+\mbox{\Hypertarget{classoomph_1_1GeneralElasticityTensor_aa8dee57c5a1315f790401628ece5ec26}\label{classoomph_1_1GeneralElasticityTensor_aa8dee57c5a1315f790401628ece5ec26}} 
+\index{oomph::GeneralElasticityTensor@{oomph::GeneralElasticityTensor}!set\_value@{set\_value}}
+\index{set\_value@{set\_value}!oomph::GeneralElasticityTensor@{oomph::GeneralElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{set\_value()}{set\_value()}}
+{\footnotesize\ttfamily void oomph\+::\+General\+Elasticity\+Tensor\+::set\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{l,  }\item[{const double \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Allow the values to be set. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElasticityTensor_ab68e4386f02f9e39095d879e4ec96df5}{oomph\+::\+Elasticity\+Tensor}}.
+
+
+
+Definition at line 265 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+References C, i, oomph\+::\+Elasticity\+Tensor\+::\+Index, and value.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1GeneralElasticityTensor_afc3c4afaaa1eef1c57913e1e20c0d483}\label{classoomph_1_1GeneralElasticityTensor_afc3c4afaaa1eef1c57913e1e20c0d483}} 
+\index{oomph::GeneralElasticityTensor@{oomph::GeneralElasticityTensor}!C@{C}}
+\index{C@{C}!oomph::GeneralElasticityTensor@{oomph::GeneralElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{C}{C}}
+{\footnotesize\ttfamily double oomph\+::\+General\+Elasticity\+Tensor\+::C\mbox{[}21\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 249 of file linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h.
+
+
+
+Referenced by General\+Elasticity\+Tensor(), independent\+\_\+component(), and set\+\_\+value().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{linear__elasticity_2elasticity__tensor_8h}{linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h}}\end{DoxyCompactItemize}

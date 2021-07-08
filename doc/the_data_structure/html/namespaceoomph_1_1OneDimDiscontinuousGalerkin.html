@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::OneDimDiscontinuousGalerkin Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html">OneDimDiscontinuousGalerkin</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::OneDimDiscontinuousGalerkin Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae1c6ebc64829c1a52280adc14194ef88"><td class="memTemplParams" colspan="2">template&lt;unsigned NNODE_1D&gt; </td></tr>
+<tr class="memitem:ae1c6ebc64829c1a52280adc14194ef88"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#ae1c6ebc64829c1a52280adc14194ef88">shape</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *Psi)</td></tr>
+<tr class="memdesc:ae1c6ebc64829c1a52280adc14194ef88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for 1D Lagrange shape functions. The value of all the shape functions at the local coordinate s are returned in the array Psi.  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#ae1c6ebc64829c1a52280adc14194ef88">More...</a><br /></td></tr>
+<tr class="separator:ae1c6ebc64829c1a52280adc14194ef88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ab7ea5be0335c76321f5f5ceca1421"><td class="memTemplParams" colspan="2">template&lt;unsigned NNODE_1D&gt; </td></tr>
+<tr class="memitem:a76ab7ea5be0335c76321f5f5ceca1421"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a76ab7ea5be0335c76321f5f5ceca1421">dshape</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *DPsi)</td></tr>
+<tr class="memdesc:a76ab7ea5be0335c76321f5f5ceca1421"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi.  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a76ab7ea5be0335c76321f5f5ceca1421">More...</a><br /></td></tr>
+<tr class="separator:a76ab7ea5be0335c76321f5f5ceca1421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d0cb075ea3e52ec7af3f4f15a38de3a"><td class="memTemplParams" colspan="2">template&lt;unsigned NNODE_1D&gt; </td></tr>
+<tr class="memitem:a8d0cb075ea3e52ec7af3f4f15a38de3a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a8d0cb075ea3e52ec7af3f4f15a38de3a">d2shape</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *DPsi)</td></tr>
+<tr class="memdesc:a8d0cb075ea3e52ec7af3f4f15a38de3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for second derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi.  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a8d0cb075ea3e52ec7af3f4f15a38de3a">More...</a><br /></td></tr>
+<tr class="separator:a8d0cb075ea3e52ec7af3f4f15a38de3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a4f1a50762b23b751c9f472c71d0cc8"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a8a4f1a50762b23b751c9f472c71d0cc8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a8a4f1a50762b23b751c9f472c71d0cc8">shape&lt; 2 &gt;</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *Psi)</td></tr>
+<tr class="memdesc:a8a4f1a50762b23b751c9f472c71d0cc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">1D shape functions specialised to linear order (2 Nodes)  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a8a4f1a50762b23b751c9f472c71d0cc8">More...</a><br /></td></tr>
+<tr class="separator:a8a4f1a50762b23b751c9f472c71d0cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a803a65d1f666e96763071e2045725a8f"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a803a65d1f666e96763071e2045725a8f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a803a65d1f666e96763071e2045725a8f">dshape&lt; 2 &gt;</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *DPsi)</td></tr>
+<tr class="memdesc:a803a65d1f666e96763071e2045725a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivatives of 1D shape functions specialised to linear order (2 Nodes)  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a803a65d1f666e96763071e2045725a8f">More...</a><br /></td></tr>
+<tr class="separator:a803a65d1f666e96763071e2045725a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9f78717b37b71f2e829586dac62b0bd"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:ae9f78717b37b71f2e829586dac62b0bd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#ae9f78717b37b71f2e829586dac62b0bd">d2shape&lt; 2 &gt;</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *DPsi)</td></tr>
+<tr class="memdesc:ae9f78717b37b71f2e829586dac62b0bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second Derivatives of 1D shape functions, specialised to linear order (2 Nodes)  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#ae9f78717b37b71f2e829586dac62b0bd">More...</a><br /></td></tr>
+<tr class="separator:ae9f78717b37b71f2e829586dac62b0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6df0c47696f1111a24b546fb08c882c4"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a6df0c47696f1111a24b546fb08c882c4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a6df0c47696f1111a24b546fb08c882c4">shape&lt; 3 &gt;</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *Psi)</td></tr>
+<tr class="memdesc:a6df0c47696f1111a24b546fb08c882c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">1D shape functions specialised to quadratic order (3 Nodes)  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a6df0c47696f1111a24b546fb08c882c4">More...</a><br /></td></tr>
+<tr class="separator:a6df0c47696f1111a24b546fb08c882c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a242195348f3ba440a5c106f17fe2951d"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a242195348f3ba440a5c106f17fe2951d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a242195348f3ba440a5c106f17fe2951d">dshape&lt; 3 &gt;</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *DPsi)</td></tr>
+<tr class="memdesc:a242195348f3ba440a5c106f17fe2951d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivatives of 1D shape functions specialised to quadratic order (3 Nodes)  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a242195348f3ba440a5c106f17fe2951d">More...</a><br /></td></tr>
+<tr class="separator:a242195348f3ba440a5c106f17fe2951d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b3b9a5a3d33f8db7630ca56f5c2d6cc"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a7b3b9a5a3d33f8db7630ca56f5c2d6cc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a7b3b9a5a3d33f8db7630ca56f5c2d6cc">d2shape&lt; 3 &gt;</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *DPsi)</td></tr>
+<tr class="separator:a7b3b9a5a3d33f8db7630ca56f5c2d6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa365262493b48bfac3b1adfe0ed0b01f"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:aa365262493b48bfac3b1adfe0ed0b01f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#aa365262493b48bfac3b1adfe0ed0b01f">shape&lt; 4 &gt;</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *Psi)</td></tr>
+<tr class="memdesc:aa365262493b48bfac3b1adfe0ed0b01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">1D shape functions specialised to cubic order (4 Nodes)  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#aa365262493b48bfac3b1adfe0ed0b01f">More...</a><br /></td></tr>
+<tr class="separator:aa365262493b48bfac3b1adfe0ed0b01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b1dc67809b1f5ac136148922dcd5b3a"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a5b1dc67809b1f5ac136148922dcd5b3a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a5b1dc67809b1f5ac136148922dcd5b3a">dshape&lt; 4 &gt;</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *DPsi)</td></tr>
+<tr class="memdesc:a5b1dc67809b1f5ac136148922dcd5b3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivatives of 1D shape functions specialised to cubic order (4 Nodes)  <a href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a5b1dc67809b1f5ac136148922dcd5b3a">More...</a><br /></td></tr>
+<tr class="separator:a5b1dc67809b1f5ac136148922dcd5b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd621560a697d643b76584eec46763c6"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:acd621560a697d643b76584eec46763c6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#acd621560a697d643b76584eec46763c6">d2shape&lt; 4 &gt;</a> (const double &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, double *DPsi)</td></tr>
+<tr class="separator:acd621560a697d643b76584eec46763c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>One dimensional shape functions and derivatives. Empty &ndash; simply establishes the template parameters. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a8d0cb075ea3e52ec7af3f4f15a38de3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d0cb075ea3e52ec7af3f4f15a38de3a">&#9670;&nbsp;</a></span>d2shape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::OneDimDiscontinuousGalerkin::d2shape </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition for second derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00748">748</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="ae9f78717b37b71f2e829586dac62b0bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9f78717b37b71f2e829586dac62b0bd">&#9670;&nbsp;</a></span>d2shape&lt; 2 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a8d0cb075ea3e52ec7af3f4f15a38de3a">oomph::OneDimDiscontinuousGalerkin::d2shape</a>&lt; 2 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Second Derivatives of 1D shape functions, specialised to linear order (2 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00786">786</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a7b3b9a5a3d33f8db7630ca56f5c2d6cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b3b9a5a3d33f8db7630ca56f5c2d6cc">&#9670;&nbsp;</a></span>d2shape&lt; 3 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a8d0cb075ea3e52ec7af3f4f15a38de3a">oomph::OneDimDiscontinuousGalerkin::d2shape</a>&lt; 3 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Second Derivatives of 1D shape functions, specialised to quadratic order (3 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00815">815</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="acd621560a697d643b76584eec46763c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd621560a697d643b76584eec46763c6">&#9670;&nbsp;</a></span>d2shape&lt; 4 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a8d0cb075ea3e52ec7af3f4f15a38de3a">oomph::OneDimDiscontinuousGalerkin::d2shape</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Second derivatives of 1D shape functions specialised to cubic order (4 nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00846">846</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a76ab7ea5be0335c76321f5f5ceca1421"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76ab7ea5be0335c76321f5f5ceca1421">&#9670;&nbsp;</a></span>dshape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::OneDimDiscontinuousGalerkin::dshape </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition for derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00727">727</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a803a65d1f666e96763071e2045725a8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a803a65d1f666e96763071e2045725a8f">&#9670;&nbsp;</a></span>dshape&lt; 2 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a76ab7ea5be0335c76321f5f5ceca1421">oomph::OneDimDiscontinuousGalerkin::dshape</a>&lt; 2 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Derivatives of 1D shape functions specialised to linear order (2 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00777">777</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a242195348f3ba440a5c106f17fe2951d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a242195348f3ba440a5c106f17fe2951d">&#9670;&nbsp;</a></span>dshape&lt; 3 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a76ab7ea5be0335c76321f5f5ceca1421">oomph::OneDimDiscontinuousGalerkin::dshape</a>&lt; 3 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Derivatives of 1D shape functions specialised to quadratic order (3 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00805">805</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l02334">oomph::QTaylorHoodSpaceTimeElement&lt; 2 &gt;::dshape_and_dtest_eulerian_nst()</a>.</p>
+
+</div>
+</div>
+<a id="a5b1dc67809b1f5ac136148922dcd5b3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b1dc67809b1f5ac136148922dcd5b3a">&#9670;&nbsp;</a></span>dshape&lt; 4 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#a76ab7ea5be0335c76321f5f5ceca1421">oomph::OneDimDiscontinuousGalerkin::dshape</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Derivatives of 1D shape functions specialised to cubic order (4 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00835">835</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+</div>
+</div>
+<a id="ae1c6ebc64829c1a52280adc14194ef88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1c6ebc64829c1a52280adc14194ef88">&#9670;&nbsp;</a></span>shape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned NNODE_1D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::OneDimDiscontinuousGalerkin::shape </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>Psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition for 1D Lagrange shape functions. The value of all the shape functions at the local coordinate s are returned in the array Psi. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00707">707</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a8a4f1a50762b23b751c9f472c71d0cc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a4f1a50762b23b751c9f472c71d0cc8">&#9670;&nbsp;</a></span>shape&lt; 2 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#ae1c6ebc64829c1a52280adc14194ef88">oomph::OneDimDiscontinuousGalerkin::shape</a>&lt; 2 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>Psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>1D shape functions specialised to linear order (2 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00769">769</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a6df0c47696f1111a24b546fb08c882c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6df0c47696f1111a24b546fb08c882c4">&#9670;&nbsp;</a></span>shape&lt; 3 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#ae1c6ebc64829c1a52280adc14194ef88">oomph::OneDimDiscontinuousGalerkin::shape</a>&lt; 3 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>Psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>1D shape functions specialised to quadratic order (3 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00796">796</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source.html#l02334">oomph::QTaylorHoodSpaceTimeElement&lt; 2 &gt;::dshape_and_dtest_eulerian_nst()</a>, and <a class="el" href="discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source.html#l00201">oomph::NavierStokesSpaceTimeTractionElement&lt; ELEMENT &gt;::shape_and_test_at_knot()</a>.</p>
+
+</div>
+</div>
+<a id="aa365262493b48bfac3b1adfe0ed0b01f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa365262493b48bfac3b1adfe0ed0b01f">&#9670;&nbsp;</a></span>shape&lt; 4 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceoomph_1_1OneDimDiscontinuousGalerkin.html#ae1c6ebc64829c1a52280adc14194ef88">oomph::OneDimDiscontinuousGalerkin::shape</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>Psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>1D shape functions specialised to cubic order (4 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00824">824</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:01:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

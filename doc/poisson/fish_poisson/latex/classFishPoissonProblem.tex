@@ -1,0 +1,146 @@
+\hypertarget{classFishPoissonProblem}{}\doxysection{Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classFishPoissonProblem}\index{FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}}
+Inheritance diagram for Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classFishPoissonProblem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFishPoissonProblem_ab283ed2dc6985c2871afb09d96b0cff0}{Fish\+Poisson\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classFishPoissonProblem_ad4e0b221af80c3bcc77badc40657a385}{$\sim$\+Fish\+Poisson\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classFishPoissonProblem_a76f4ada436ceaa1d0ba96289503d99aa}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classFishPoissonProblem_a4f3ddd6ae8117d36cace040a2cad68a3}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve (empty) \end{DoxyCompactList}\item 
+Fish\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classFishPoissonProblem_a084fca53b2a82803d07326ba27af75ec}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Overloaded version of the problem\textquotesingle{}s access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classFishPoissonProblem_a728ae67316d80029132b98b6a4e5ffe5}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. Output directory and labels are specified by Doc\+Info object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Poisson problem in fish-\/shaped domain. Template parameter identifies the element type. 
+
+Definition at line 67 of file fish\+\_\+poisson\+\_\+no\+\_\+adapt.\+cc.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classFishPoissonProblem_ab283ed2dc6985c2871afb09d96b0cff0}\label{classFishPoissonProblem_ab283ed2dc6985c2871afb09d96b0cff0}} 
+\index{FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}!FishPoissonProblem@{FishPoissonProblem}}
+\index{FishPoissonProblem@{FishPoissonProblem}!FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{FishPoissonProblem()}{FishPoissonProblem()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classFishPoissonProblem}{Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classFishPoissonProblem}{Fish\+Poisson\+Problem}}}
+
+
+
+Constructor. 
+
+Constructor for Poisson problem in fish-\/shaped domain. 
+
+Definition at line 107 of file fish\+\_\+poisson\+\_\+no\+\_\+adapt.\+cc.
+
+
+
+References mesh\+\_\+pt(), and Const\+Source\+For\+Poisson\+::source\+\_\+function().
+
+\mbox{\Hypertarget{classFishPoissonProblem_ad4e0b221af80c3bcc77badc40657a385}\label{classFishPoissonProblem_ad4e0b221af80c3bcc77badc40657a385}} 
+\index{FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}!````~FishPoissonProblem@{$\sim$FishPoissonProblem}}
+\index{````~FishPoissonProblem@{$\sim$FishPoissonProblem}!FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$FishPoissonProblem()}{~FishPoissonProblem()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classFishPoissonProblem}{Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classFishPoissonProblem}{Fish\+Poisson\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: Empty. 
+
+
+
+Definition at line 76 of file fish\+\_\+poisson\+\_\+no\+\_\+adapt.\+cc.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classFishPoissonProblem_a76f4ada436ceaa1d0ba96289503d99aa}\label{classFishPoissonProblem_a76f4ada436ceaa1d0ba96289503d99aa}} 
+\index{FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classFishPoissonProblem}{Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after solve (empty) 
+
+
+
+Definition at line 79 of file fish\+\_\+poisson\+\_\+no\+\_\+adapt.\+cc.
+
+\mbox{\Hypertarget{classFishPoissonProblem_a4f3ddd6ae8117d36cace040a2cad68a3}\label{classFishPoissonProblem_a4f3ddd6ae8117d36cace040a2cad68a3}} 
+\index{FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classFishPoissonProblem}{Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve (empty) 
+
+
+
+Definition at line 82 of file fish\+\_\+poisson\+\_\+no\+\_\+adapt.\+cc.
+
+\mbox{\Hypertarget{classFishPoissonProblem_a728ae67316d80029132b98b6a4e5ffe5}\label{classFishPoissonProblem_a728ae67316d80029132b98b6a4e5ffe5}} 
+\index{FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classFishPoissonProblem}{Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. Output directory and labels are specified by Doc\+Info object. 
+
+Doc the solution in tecplot format. 
+
+Definition at line 156 of file fish\+\_\+poisson\+\_\+no\+\_\+adapt.\+cc.
+
+
+
+References mesh\+\_\+pt().
+
+\mbox{\Hypertarget{classFishPoissonProblem_a084fca53b2a82803d07326ba27af75ec}\label{classFishPoissonProblem_a084fca53b2a82803d07326ba27af75ec}} 
+\index{FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!FishPoissonProblem$<$ ELEMENT $>$@{FishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Fish\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classFishPoissonProblem}{Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overloaded version of the problem\textquotesingle{}s access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. 
+
+
+
+Definition at line 87 of file fish\+\_\+poisson\+\_\+no\+\_\+adapt.\+cc.
+
+
+
+References mesh\+\_\+pt().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fish__poisson__no__adapt_8cc}{fish\+\_\+poisson\+\_\+no\+\_\+adapt.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: SUPG-stabilised solution of the 2D advection diffusion equation</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: SUPG-stabilised solution of the 2D advection diffusion equation </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we discuss the SUPG-stabilised solution of the 2D advection-diffusion problem</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>Two-dimensional advection-diffusion problem in a rectangular domain</b> </center><p> Solve </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mbox{Pe}\ \sum_{i=1}^2 w_i \left(x_1,x_2\right) \frac{\partial u}{\partial x_i} = \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} + f(x_1,x_2), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_0.png"/>
+</p>
+<p> in the rectangular domain <img class="formulaInl" alt="$D =\left\{ (x_1,x_2) \in [0,1] \times [0,2]\right\}$" src="form_1.png"/>, with Dirichlet boundary conditions </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. u\right|_{\partial D}=u_0, \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_2.png"/>
+</p>
+<p class="endtd">where the <em>Peclet</em> <em>number</em>, <img class="formulaInl" alt="$ \mbox{Pe} $" src="form_3.png"/> the boundary values, <img class="formulaInl" alt="$ u_0$" src="form_4.png"/>, the source function <img class="formulaInl" alt="$ f(x_1,x_2),$" src="form_5.png"/> <br  />
+ and the components of the "wind" <img class="formulaInl" alt="$ w_i(x_1,x_2) \ (i=1,2)$" src="form_6.png"/> are given.   </p>
+</td></tr>
+</table>
+<br  />
+ </center><p> <br  />
+</p>
+<p>We set <img class="formulaInl" alt="$ f(x_1,x_2)=0$" src="form_7.png"/> and assign the boundary conditions such that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)), \ \ \ \ \ \ \ \ \ (3) \]" src="form_8.png"/>
+</p>
+<p> For large values of <img class="formulaInl" alt="$ \alpha, $" src="form_9.png"/> this boundary data approaches a step, oriented at an angle <img class="formulaInl" alt="$\Phi$" src="form_10.png"/> against the <img class="formulaInl" alt="$x_1-$" src="form_11.png"/>axis.</p>
+<p>In the computations we will impose the "wind" </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathbf{w}\left(x_1,x_2 \right) = \left( \begin{array}{c} \sin(6x_2) \\ \cos(6x_1) \end{array} \right), \ \ \ \ \ \ \ \ \ (4) \]" src="form_12.png"/>
+</p>
+<p> illustrated in this vector plot:</p>
+<div class="image">
+<img src="wind.gif" alt=""/>
+<div class="caption">
+Plot of the wind. </div></div>
+ <p>The figures below show plots of the solution for <img class="formulaInl" alt="$\Phi=45^\circ, \ \alpha=50 $" src="form_13.png"/> and a Peclet number of <img class="formulaInl" alt="$ Pe = 200$" src="form_14.png"/>, with and without SUPG stabilisation. The wire-mesh plot shows the solution computed on a 10x10 mesh, the shaded surface represents the solution obtained from an unstabilised solution on a 150x150 mesh. Note how SUPG stabilisation "suppresses the wiggles" on the relatively coarse mesh.</p>
+<div class="image">
+<img src="stab.gif" alt=""/>
+<div class="caption">
+Plot of the SUPG-stabilised solution at different levels of mesh refinement. </div></div>
+ <div class="image">
+<img src="unstab.gif" alt=""/>
+<div class="caption">
+Plot of the unstabilised solution at different levels of mesh refinement. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>Overall, the structure of the driver code is very similar to that used for the <a href="../../../advection_diffusion/two_d_adv_diff_adapt/html/index.html">problem without stabilisation</a>.</p>
+<h2><a class="anchor" id="todo"></a>
+To be written:</h2>
+<ul>
+<li>Discuss SUPG theory.</li>
+<li>Implementation and the role of basis, shape and test functions (our equations are isoparametric)</li>
+</ul>
+<p>Until we get around to completing this example, here's the driver code. Fairly self-explanatory, isn't it?</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">//Driver for a simple 2D adv diff problem with SUPG stabilisation</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Generic routines</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The Poisson equations</span></div>
+<div class="line"><span class="preprocessor">#include &quot;advection_diffusion.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The mesh </span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/rectangular_quadmesh.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>oomph;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======start_of_namespace============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace for global parameters: Unforced problem with</span></div>
+<div class="line"><span class="comment">/// boundary values corresponding to a steep tanh step profile</span></div>
+<div class="line"><span class="comment">/// oriented at 45 degrees across the domain.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobalPhysicalParameters.html">GlobalPhysicalParameters</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Peclet number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobalPhysicalParameters.html#ab7011a8f93f2cbd3d45af00151aee3b2">Peclet</a>=200.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Parameter for steepness of step in boundary values</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobalPhysicalParameters.html#aec7a344b74b10d835b331ef0dc6601da">Alpha</a>=50.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Parameter for angle of step in boundary values: 45 degrees</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobalPhysicalParameters.html#af9a5a947d725f1f088db6a6423f2f3ef">TanPhi</a>=1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Some &quot;solution&quot; for assignment of boundary values</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobalPhysicalParameters.html#a6e1db5726436a705e9d400fedf914cef">get_boundary_values</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  u[0]=tanh(1.0-<a class="code" href="namespaceGlobalPhysicalParameters.html#aec7a344b74b10d835b331ef0dc6601da">Alpha</a>*(<a class="code" href="namespaceGlobalPhysicalParameters.html#af9a5a947d725f1f088db6a6423f2f3ef">TanPhi</a>*x[0]-x[1]));</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Zero source function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobalPhysicalParameters.html#aa84986d4d50cb043cc8fced56feab45f">source_function</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x_vect, <span class="keywordtype">double</span>&amp; source)</div>
+<div class="line"> {</div>
+<div class="line">  source=0.0;</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Wind</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobalPhysicalParameters.html#a3a17e62bc0096244627f5f1a7f53c859">wind_function</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; wind)</div>
+<div class="line"> {</div>
+<div class="line">  wind[0]=sin(6.0*x[1]);</div>
+<div class="line">  wind[1]=cos(6.0*x[0]);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====== start_of_problem_class=======================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// 2D AdvectionDiffusion problem on rectangular domain, discretised </span></div>
+<div class="line"><span class="comment">/// with refineable 2D QAdvectionDiffusion elements. The specific type</span></div>
+<div class="line"><span class="comment">/// of element is specified via the template parameter.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classSUPGAdvectionDiffusionProblem.html">SUPGAdvectionDiffusionProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor: Pass pointer to source and wind functions, and</span></div>
+<div class="line"><span class="comment"> /// flag to indicate if stabilisation is to be used.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classSUPGAdvectionDiffusionProblem.html">SUPGAdvectionDiffusionProblem</a>(</div>
+<div class="line">  AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionSourceFctPt source_fct_pt,</div>
+<div class="line">  AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionWindFctPt wind_fct_pt,</div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; use_stabilisation);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor. Empty</span></div>
+<div class="line"><span class="comment"></span> ~<a class="code" href="classSUPGAdvectionDiffusionProblem.html">SUPGAdvectionDiffusionProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve: Reset boundary conditions</span></div>
+<div class="line"><span class="comment"> /// to the values from the tanh solution and compute stabilisation</span></div>
+<div class="line"><span class="comment"> /// parameter.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_newton_solve(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Doc the solution.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Overloaded version of the problem&#39;s access function to </span></div>
+<div class="line"><span class="comment"> /// the mesh. Recasts the pointer to the base Mesh object to </span></div>
+<div class="line"><span class="comment"> /// the actual mesh type.</span></div>
+<div class="line"><span class="comment"></span> RectangularQuadMesh&lt;ELEMENT&gt;* mesh_pt() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>RectangularQuadMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// DocInfo object</span></div>
+<div class="line"><span class="comment"></span> DocInfo Doc_info;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to source function</span></div>
+<div class="line"><span class="comment"></span> AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionSourceFctPt Source_fct_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to wind function</span></div>
+<div class="line"><span class="comment"></span> AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionWindFctPt Wind_fct_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Flag to indicate if stabilisation is to be used</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">bool</span> Use_stabilisation;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=====start_of_constructor===============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// \short Constructor for AdvectionDiffusion problem: Pass pointer to </span></div>
+<div class="line"><span class="comment">/// source function and wind functions and flag to indicate </span></div>
+<div class="line"><span class="comment">/// if stabilisation is to be used.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classSUPGAdvectionDiffusionProblem.html#a95aa4192c1b42327b12cdbb75295d192">SUPGAdvectionDiffusionProblem&lt;ELEMENT&gt;::SUPGAdvectionDiffusionProblem</a>(</div>
+<div class="line"> AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionSourceFctPt source_fct_pt,</div>
+<div class="line"> AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionWindFctPt wind_fct_pt,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; use_stabilisation)</div>
+<div class="line"> :  Source_fct_pt(source_fct_pt), Wind_fct_pt(wind_fct_pt), </div>
+<div class="line">    Use_stabilisation(use_stabilisation)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> <span class="keywordflow">if</span> (use_stabilisation)</div>
+<div class="line">  {</div>
+<div class="line">   Doc_info.set_directory(<span class="stringliteral">&quot;RESLT_stabilised&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   Doc_info.set_directory(<span class="stringliteral">&quot;RESLT_unstabilised&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_x=40;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_y=40;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in x-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_x=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> l_y=2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build and assign mesh</span></div>
+<div class="line"> Problem::mesh_pt() = </div>
+<div class="line">  <span class="keyword">new</span> RectangularQuadMesh&lt;ELEMENT&gt;(n_x,n_y,l_x,l_y);</div>
+<div class="line"> </div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- only need to pin the ones that have Dirichlet </span></div>
+<div class="line"> <span class="comment">// conditions here</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0); </div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by the (argument-free!) ELEMENT </span></div>
+<div class="line"> <span class="comment">// constructor: Pass pointer to source function</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralsedElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   el_pt-&gt;source_fct_pt() = Source_fct_pt;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the wind function pointer</span></div>
+<div class="line">   el_pt-&gt;wind_fct_pt() = Wind_fct_pt;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the Peclet number</span></div>
+<div class="line">   el_pt-&gt;pe_pt() = &amp;<a class="code" href="namespaceGlobalPhysicalParameters.html#ab7011a8f93f2cbd3d45af00151aee3b2">GlobalPhysicalParameters::Peclet</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================start_of_actions_before_newton_solve===</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Update the problem specs before solve: (Re-)set boundary conditions</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classSUPGAdvectionDiffusionProblem.html#affa45863033de517e1fba088aaae7eb5">SUPGAdvectionDiffusionProblem&lt;ELEMENT&gt;::actions_before_newton_solve</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many boundaries are there?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the boundaries</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// How many nodes are there on this boundary?</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over the nodes on boundary</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to node</span></div>
+<div class="line">     Node* nod_pt=mesh_pt()-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Extract nodal coordinates from node:</span></div>
+<div class="line">     Vector&lt;double&gt; x(2);</div>
+<div class="line">     x[0]=nod_pt-&gt;x(0);</div>
+<div class="line">     x[1]=nod_pt-&gt;x(1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Get boundary value</span></div>
+<div class="line">     Vector&lt;double&gt; u(1);</div>
+<div class="line">     <a class="code" href="namespaceGlobalPhysicalParameters.html#a6e1db5726436a705e9d400fedf914cef">GlobalPhysicalParameters::get_boundary_values</a>(x,u);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Assign the value to the one (and only) nodal value at this node</span></div>
+<div class="line">     nod_pt-&gt;set_value(0,u[0]);</div>
+<div class="line">    }</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now loop over all elements and set the stabilisation parameter</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralsedElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Use stabilisation?</span></div>
+<div class="line">   <span class="keywordflow">if</span> (Use_stabilisation)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Compute stabilisation parameter</span></div>
+<div class="line">     el_pt-&gt;compute_stabilisation_parameter();</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Compute stabilisation parameter</span></div>
+<div class="line">     el_pt-&gt;switch_off_stabilisation();</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// end of actions before solve</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===============start_of_doc=============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classSUPGAdvectionDiffusionProblem.html#a3133ba26f0917f5d210d69ea0ddcb1fe">SUPGAdvectionDiffusionProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points: npts x npts</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===== start_of_main=====================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver code for 2D AdvectionDiffusion problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="two__d__adv__diff__SUPG_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem with stabilisation</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">bool</span> use_stabilisation=<span class="keyword">true</span>;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Create the problem with 2D nine-node elements from the</span></div>
+<div class="line">  <span class="comment">// QAdvectionDiffusionElement family. Pass pointer to </span></div>
+<div class="line">  <span class="comment">// source and wind function. </span></div>
+<div class="line">  <a class="code" href="classSUPGAdvectionDiffusionProblem.html">SUPGAdvectionDiffusionProblem&lt;QSUPGAdvectionDiffusionElement&lt;2,3&gt;</a> &gt; </div>
+<div class="line">   <a class="code" href="two__d__adv__diff__SUPG_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>(&amp;<a class="code" href="namespaceGlobalPhysicalParameters.html#aa84986d4d50cb043cc8fced56feab45f">GlobalPhysicalParameters::source_function</a>,</div>
+<div class="line">           &amp;<a class="code" href="namespaceGlobalPhysicalParameters.html#a3a17e62bc0096244627f5f1a7f53c859">GlobalPhysicalParameters::wind_function</a>,</div>
+<div class="line">           use_stabilisation);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem</span></div>
+<div class="line">  <a class="code" href="two__d__adv__diff__SUPG_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Output the solution</span></div>
+<div class="line">  <a class="code" href="two__d__adv__diff__SUPG_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution();</div>
+<div class="line">  </div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem without stabilisation</span></div>
+<div class="line"> {</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordtype">bool</span> use_stabilisation=<span class="keyword">false</span>;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Create the problem with 2D nine-node elements from the</span></div>
+<div class="line">  <span class="comment">// QAdvectionDiffusionElement family. Pass pointer to </span></div>
+<div class="line">  <span class="comment">// source and wind function. </span></div>
+<div class="line">  <a class="code" href="classSUPGAdvectionDiffusionProblem.html">SUPGAdvectionDiffusionProblem&lt;QSUPGAdvectionDiffusionElement&lt;2,3&gt;</a> &gt; </div>
+<div class="line">   <a class="code" href="two__d__adv__diff__SUPG_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>(&amp;<a class="code" href="namespaceGlobalPhysicalParameters.html#aa84986d4d50cb043cc8fced56feab45f">GlobalPhysicalParameters::source_function</a>,</div>
+<div class="line">           &amp;<a class="code" href="namespaceGlobalPhysicalParameters.html#a3a17e62bc0096244627f5f1a7f53c859">GlobalPhysicalParameters::wind_function</a>,</div>
+<div class="line">           use_stabilisation);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem</span></div>
+<div class="line">  <a class="code" href="two__d__adv__diff__SUPG_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Output the solution</span></div>
+<div class="line">  <a class="code" href="two__d__adv__diff__SUPG_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution();</div>
+<div class="line">  </div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="
+../../../../
+
+demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/
+">demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/ </a> </center></li>
+<li>The driver code is: <center> <a href="
+../../../../
+demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/two_d_adv_diff_SUPG.cc
+">demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/two_d_adv_diff_SUPG.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="anamespaceGlobalPhysicalParameters_html_a6e1db5726436a705e9d400fedf914cef"><div class="ttname"><a href="namespaceGlobalPhysicalParameters.html#a6e1db5726436a705e9d400fedf914cef">GlobalPhysicalParameters::get_boundary_values</a></div><div class="ttdeci">void get_boundary_values(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Some &quot;solution&quot; for assignment of boundary values.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00061">two_d_adv_diff_SUPG.cc:61</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalParameters_html"><div class="ttname"><a href="namespaceGlobalPhysicalParameters.html">GlobalPhysicalParameters</a></div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00048">two_d_adv_diff_SUPG.cc:48</a></div></div>
+<div class="ttc" id="aclassSUPGAdvectionDiffusionProblem_html_affa45863033de517e1fba088aaae7eb5"><div class="ttname"><a href="classSUPGAdvectionDiffusionProblem.html#affa45863033de517e1fba088aaae7eb5">SUPGAdvectionDiffusionProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve: Reset boundary conditions to the values from the tanh solution...</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00233">two_d_adv_diff_SUPG.cc:233</a></div></div>
+<div class="ttc" id="aclassSUPGAdvectionDiffusionProblem_html_a3133ba26f0917f5d210d69ea0ddcb1fe"><div class="ttname"><a href="classSUPGAdvectionDiffusionProblem.html#a3133ba26f0917f5d210d69ea0ddcb1fe">SUPGAdvectionDiffusionProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00294">two_d_adv_diff_SUPG.cc:294</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalParameters_html_aa84986d4d50cb043cc8fced56feab45f"><div class="ttname"><a href="namespaceGlobalPhysicalParameters.html#aa84986d4d50cb043cc8fced56feab45f">GlobalPhysicalParameters::source_function</a></div><div class="ttdeci">void source_function(const Vector&lt; double &gt; &amp;x_vect, double &amp;source)</div><div class="ttdoc">Zero source function.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00067">two_d_adv_diff_SUPG.cc:67</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalParameters_html_aec7a344b74b10d835b331ef0dc6601da"><div class="ttname"><a href="namespaceGlobalPhysicalParameters.html#aec7a344b74b10d835b331ef0dc6601da">GlobalPhysicalParameters::Alpha</a></div><div class="ttdeci">double Alpha</div><div class="ttdoc">Parameter for steepness of step in boundary values.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00055">two_d_adv_diff_SUPG.cc:55</a></div></div>
+<div class="ttc" id="aclassSUPGAdvectionDiffusionProblem_html"><div class="ttname"><a href="classSUPGAdvectionDiffusionProblem.html">SUPGAdvectionDiffusionProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00093">two_d_adv_diff_SUPG.cc:93</a></div></div>
+<div class="ttc" id="atwo__d__adv__diff__SUPG_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="two__d__adv__diff__SUPG_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver code for 2D AdvectionDiffusion problem.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00317">two_d_adv_diff_SUPG.cc:317</a></div></div>
+<div class="ttc" id="aclassSUPGAdvectionDiffusionProblem_html_a95aa4192c1b42327b12cdbb75295d192"><div class="ttname"><a href="classSUPGAdvectionDiffusionProblem.html#a95aa4192c1b42327b12cdbb75295d192">SUPGAdvectionDiffusionProblem::SUPGAdvectionDiffusionProblem</a></div><div class="ttdeci">SUPGAdvectionDiffusionProblem(AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt source_fct_pt, AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt wind_fct_pt, const bool &amp;use_stabilisation)</div><div class="ttdoc">Constructor: Pass pointer to source and wind functions, and flag to indicate if stabilisation is to b...</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00152">two_d_adv_diff_SUPG.cc:152</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalParameters_html_a3a17e62bc0096244627f5f1a7f53c859"><div class="ttname"><a href="namespaceGlobalPhysicalParameters.html#a3a17e62bc0096244627f5f1a7f53c859">GlobalPhysicalParameters::wind_function</a></div><div class="ttdeci">void wind_function(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;wind)</div><div class="ttdoc">Wind.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00073">two_d_adv_diff_SUPG.cc:73</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalParameters_html_af9a5a947d725f1f088db6a6423f2f3ef"><div class="ttname"><a href="namespaceGlobalPhysicalParameters.html#af9a5a947d725f1f088db6a6423f2f3ef">GlobalPhysicalParameters::TanPhi</a></div><div class="ttdeci">double TanPhi</div><div class="ttdoc">Parameter for angle of step in boundary values: 45 degrees.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00058">two_d_adv_diff_SUPG.cc:58</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalParameters_html_ab7011a8f93f2cbd3d45af00151aee3b2"><div class="ttname"><a href="namespaceGlobalPhysicalParameters.html#ab7011a8f93f2cbd3d45af00151aee3b2">GlobalPhysicalParameters::Peclet</a></div><div class="ttdeci">double Peclet</div><div class="ttdoc">Peclet number.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8cc_source.html#l00052">two_d_adv_diff_SUPG.cc:52</a></div></div>
+<div class="ttc" id="atwo__d__adv__diff__SUPG_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="two__d__adv__diff__SUPG_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="two__d__adv__diff__SUPG_8txt_source.html#l00016">two_d_adv_diff_SUPG.txt:16</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:13:43
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

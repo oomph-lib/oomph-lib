@@ -1,0 +1,347 @@
+\hypertarget{classoomph_1_1NewmarkBDF}{}\doxysection{oomph\+::Newmark\+B\+DF$<$ N\+S\+T\+E\+PS $>$ Class Template Reference}
+\label{classoomph_1_1NewmarkBDF}\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+
+
+\mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} scheme for second time deriv with first derivatives calculated using \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}}. . Stored data represents.  
+
+
+
+
+{\ttfamily \#include $<$timesteppers.\+h$>$}
+
+Inheritance diagram for oomph\+::Newmark\+B\+DF$<$ N\+S\+T\+E\+PS $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1NewmarkBDF}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NewmarkBDF_aa816cebef30ae6149297a9d325946649}{Newmark\+B\+DF}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to global time. We set up a timestepping scheme with N\+S\+T\+E\+P\+S+2 doubles to represent the history and the highest deriv is 2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NewmarkBDF_aaefae5c777535c3cbd8daab7549a54e5}{Newmark\+B\+DF}} (const \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{Newmark\+B\+DF}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a94d898ccf3bcae3987009d72c26e7496}{operator=}} (const \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{Newmark\+B\+DF}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a338055c11a633d2d22e5fd3b378910b2}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Set weights. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a4726c0ea901167bc2124c63bf6e5f692}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em This function updates the \mbox{\hyperlink{classoomph_1_1Data}{Data}}\textquotesingle{}s time history so that we can advance to the next timestep. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a86ac259d50e62295d13790a5fe49010d}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em This function updates a nodal time history so that we can advance to the next timestep. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_ae86538697fa6188d8fd14fe87312e078}{enable\+\_\+degrade\+\_\+first\+\_\+derivatives\+\_\+to\+\_\+bdf1}} ()
+\begin{DoxyCompactList}\small\item\em Degrade scheme to first order \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}} (for first derivs/veloc); usually for start-\/up. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a377f4f3fd695a29024eb27d6748c689b}{disable\+\_\+degrade\+\_\+first\+\_\+derivatives\+\_\+to\+\_\+bdf1}} ()
+\begin{DoxyCompactList}\small\item\em Disable degradation to first order \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a1ab5b94c81436aa79066ba23a9e2b957}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Set weights. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a4026ae40b728d9558d565874437fdb6f}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Set weights. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_af559fe2ed59f9b2787f4c2741ba5c534}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Set weights. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF_adbe18fc7de8512a7d335832515ed34bb}{set\+\_\+newmark\+\_\+veloc\+\_\+weights}} (const double \&dt)
+\begin{DoxyCompactList}\small\item\em Set original \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} weights for velocities (needed when shifting history values -- they\textquotesingle{}re used when updating the previous accelerations and doing this with bdf can make the scheme unstable... \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a772c06965e20fdbe72520024c845131a}{Degrade\+\_\+to\+\_\+bdf1\+\_\+for\+\_\+first\+\_\+derivs}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate degradation of scheme to first order \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}} (for first derivs/veloc); usually for start-\/up. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1NewmarkBDF_ac6032c3a2bd0f7c64f51ad3c84c3ca16}{Newmark\+\_\+veloc\+\_\+weight}}
+\begin{DoxyCompactList}\small\item\em Original \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} weights for velocities (needed when shifting history values -- they\textquotesingle{}re used when updating the previous accelerations and doing this with bdf can make the scheme unstable... \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned N\+S\+T\+E\+PS$>$\newline
+class oomph\+::\+Newmark\+B\+D\+F$<$ N\+S\+T\+E\+P\+S $>$}
+
+\mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} scheme for second time deriv with first derivatives calculated using \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}}. . Stored data represents. 
+
+
+\begin{DoxyItemize}
+\item t=0\+: value at at present time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}
+\item t=1\+: value at previous time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}-\/dt
+\item ...
+\item t=N\+S\+T\+E\+PS\+: value at previous time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}-\/N\+S\+T\+E\+P\+S$\ast$dt
+\item t=N\+S\+T\+E\+P\+S+1\+: 1st time deriv (= \char`\"{}velocity\char`\"{}) at previous time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}-\/dt
+\item t=N\+S\+T\+E\+P\+S+2\+: 2nd time deriv (= \char`\"{}acceleration\char`\"{}) at previous time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}-\/dt
+\end{DoxyItemize}
+
+N\+S\+T\+E\+PS=1 gives normal \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}}. 
+
+Definition at line 1035 of file timesteppers.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_aa816cebef30ae6149297a9d325946649}\label{classoomph_1_1NewmarkBDF_aa816cebef30ae6149297a9d325946649}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!NewmarkBDF@{NewmarkBDF}}
+\index{NewmarkBDF@{NewmarkBDF}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{NewmarkBDF()}{NewmarkBDF()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+\mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::\mbox{\hyperlink{classoomph_1_1NewmarkBDF}{Newmark\+B\+DF}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to global time. We set up a timestepping scheme with N\+S\+T\+E\+P\+S+2 doubles to represent the history and the highest deriv is 2. 
+
+
+
+Definition at line 1042 of file timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_aaefae5c777535c3cbd8daab7549a54e5}\label{classoomph_1_1NewmarkBDF_aaefae5c777535c3cbd8daab7549a54e5}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!NewmarkBDF@{NewmarkBDF}}
+\index{NewmarkBDF@{NewmarkBDF}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{NewmarkBDF()}{NewmarkBDF()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+\mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::\mbox{\hyperlink{classoomph_1_1NewmarkBDF}{Newmark\+B\+DF}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 1050 of file timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a377f4f3fd695a29024eb27d6748c689b}\label{classoomph_1_1NewmarkBDF_a377f4f3fd695a29024eb27d6748c689b}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!disable\_degrade\_first\_derivatives\_to\_bdf1@{disable\_degrade\_first\_derivatives\_to\_bdf1}}
+\index{disable\_degrade\_first\_derivatives\_to\_bdf1@{disable\_degrade\_first\_derivatives\_to\_bdf1}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_degrade\_first\_derivatives\_to\_bdf1()}{disable\_degrade\_first\_derivatives\_to\_bdf1()}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::disable\+\_\+degrade\+\_\+first\+\_\+derivatives\+\_\+to\+\_\+bdf1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable degradation to first order \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}}. 
+
+
+
+Definition at line 1081 of file timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_ae86538697fa6188d8fd14fe87312e078}\label{classoomph_1_1NewmarkBDF_ae86538697fa6188d8fd14fe87312e078}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!enable\_degrade\_first\_derivatives\_to\_bdf1@{enable\_degrade\_first\_derivatives\_to\_bdf1}}
+\index{enable\_degrade\_first\_derivatives\_to\_bdf1@{enable\_degrade\_first\_derivatives\_to\_bdf1}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_degrade\_first\_derivatives\_to\_bdf1()}{enable\_degrade\_first\_derivatives\_to\_bdf1()}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::enable\+\_\+degrade\+\_\+first\+\_\+derivatives\+\_\+to\+\_\+bdf1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Degrade scheme to first order \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}} (for first derivs/veloc); usually for start-\/up. 
+
+
+
+Definition at line 1074 of file timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a94d898ccf3bcae3987009d72c26e7496}\label{classoomph_1_1NewmarkBDF_a94d898ccf3bcae3987009d72c26e7496}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 1056 of file timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_adbe18fc7de8512a7d335832515ed34bb}\label{classoomph_1_1NewmarkBDF_adbe18fc7de8512a7d335832515ed34bb}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!set\_newmark\_veloc\_weights@{set\_newmark\_veloc\_weights}}
+\index{set\_newmark\_veloc\_weights@{set\_newmark\_veloc\_weights}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_newmark\_veloc\_weights()}{set\_newmark\_veloc\_weights()}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::set\+\_\+newmark\+\_\+veloc\+\_\+weights (\begin{DoxyParamCaption}\item[{const double \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set original \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} weights for velocities (needed when shifting history values -- they\textquotesingle{}re used when updating the previous accelerations and doing this with bdf can make the scheme unstable... 
+
+
+
+Definition at line 1093 of file timesteppers.\+h.
+
+
+
+References oomph\+::\+Time\+::dt(), and t.
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a338055c11a633d2d22e5fd3b378910b2}\label{classoomph_1_1NewmarkBDF_a338055c11a633d2d22e5fd3b378910b2}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set weights. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_ad175de47f064359fa319a11088b759aa}{oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a1ab5b94c81436aa79066ba23a9e2b957}\label{classoomph_1_1NewmarkBDF_a1ab5b94c81436aa79066ba23a9e2b957}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ 1 $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set weights. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_ad175de47f064359fa319a11088b759aa}{oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$}}.
+
+
+
+Definition at line 1202 of file timesteppers.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a4026ae40b728d9558d565874437fdb6f}\label{classoomph_1_1NewmarkBDF_a4026ae40b728d9558d565874437fdb6f}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ 2 $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set weights. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_ad175de47f064359fa319a11088b759aa}{oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$}}.
+
+
+
+Definition at line 1225 of file timesteppers.\+cc.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_af559fe2ed59f9b2787f4c2741ba5c534}\label{classoomph_1_1NewmarkBDF_af559fe2ed59f9b2787f4c2741ba5c534}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ 4 $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set weights. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_ad175de47f064359fa319a11088b759aa}{oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$}}.
+
+
+
+Definition at line 1264 of file timesteppers.\+cc.
+
+
+
+References i.
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a86ac259d50e62295d13790a5fe49010d}\label{classoomph_1_1NewmarkBDF_a86ac259d50e62295d13790a5fe49010d}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!shift\_time\_positions@{shift\_time\_positions}}
+\index{shift\_time\_positions@{shift\_time\_positions}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{shift\_time\_positions()}{shift\_time\_positions()}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+This function updates a nodal time history so that we can advance to the next timestep. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_af56a2965f66e9a181b336e11cc613b21}{oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$}}.
+
+
+
+Definition at line 1145 of file timesteppers.\+cc.
+
+
+
+References i, oomph\+::\+Node\+::ndim(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy(), t, and oomph\+::\+Node\+::x\+\_\+gen().
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a4726c0ea901167bc2124c63bf6e5f692}\label{classoomph_1_1NewmarkBDF_a4726c0ea901167bc2124c63bf6e5f692}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!shift\_time\_values@{shift\_time\_values}}
+\index{shift\_time\_values@{shift\_time\_values}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{shift\_time\_values()}{shift\_time\_values()}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::shift\+\_\+time\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+This function updates the \mbox{\hyperlink{classoomph_1_1Data}{Data}}\textquotesingle{}s time history so that we can advance to the next timestep. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_a3f8606d569f947669006b9b079ac4c82}{oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$}}.
+
+
+
+Definition at line 1099 of file timesteppers.\+cc.
+
+
+
+References i, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), t, and oomph\+::\+Data\+::value().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a772c06965e20fdbe72520024c845131a}\label{classoomph_1_1NewmarkBDF_a772c06965e20fdbe72520024c845131a}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!Degrade\_to\_bdf1\_for\_first\_derivs@{Degrade\_to\_bdf1\_for\_first\_derivs}}
+\index{Degrade\_to\_bdf1\_for\_first\_derivs@{Degrade\_to\_bdf1\_for\_first\_derivs}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{Degrade\_to\_bdf1\_for\_first\_derivs}{Degrade\_to\_bdf1\_for\_first\_derivs}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+bool \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::Degrade\+\_\+to\+\_\+bdf1\+\_\+for\+\_\+first\+\_\+derivs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate degradation of scheme to first order \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}} (for first derivs/veloc); usually for start-\/up. 
+
+
+
+Definition at line 1109 of file timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NewmarkBDF_ac6032c3a2bd0f7c64f51ad3c84c3ca16}\label{classoomph_1_1NewmarkBDF_ac6032c3a2bd0f7c64f51ad3c84c3ca16}} 
+\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!Newmark\_veloc\_weight@{Newmark\_veloc\_weight}}
+\index{Newmark\_veloc\_weight@{Newmark\_veloc\_weight}!oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{Newmark\_veloc\_weight}{Newmark\_veloc\_weight}}
+{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+B\+DF}}$<$ N\+S\+T\+E\+PS $>$\+::Newmark\+\_\+veloc\+\_\+weight\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Original \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} weights for velocities (needed when shifting history values -- they\textquotesingle{}re used when updating the previous accelerations and doing this with bdf can make the scheme unstable... 
+
+
+
+Definition at line 1115 of file timesteppers.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{timesteppers_8h}{timesteppers.\+h}}\item 
+\mbox{\hyperlink{timesteppers_8cc}{timesteppers.\+cc}}\end{DoxyCompactItemize}

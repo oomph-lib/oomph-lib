@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: File Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+&#160;<ul>
+<li>$p
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#ab3977a461717251b9928585dc6ecd2a5">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>$p_
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#ac847d15eb2e53f80330bafb195443047">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>addition
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a06ddf1b001dbdeae00049aa83fb43fe0">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>channel
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#afe724ac76eb9f76a47cbd0402978eb5d">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>control
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a5967923829621a5d2d7f0769a6b8d487">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>difficulty
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a1716064f79d5444ca3baebe1cee1998b">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>example
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a02a84d311ebeed16748eccc7c8bb5c8e">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>Finally
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#acf242660f2af6ed822656edb6d591b18">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>fluid_mesh_pt
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a82a0bb94ec85811cb7be74852c922714">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>functions
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a1a9529f8e22158a53f06a1210153464e">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>however
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a17742e7ce03db8ce80f9968cb821255c">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>interaction
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#ab9075af55920bbfaa2d36773fee2ed2d">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>Irons
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a3f27776ffb0dcf7a3e89cadb5370f3aa">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>literature
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#af7e2e936c14d7adb6be7954aa881c9a7">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>moreover
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a7e945050d8d734d82a68147da4b5e371">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>Next
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a5c871638656892928cef5fb7843e4078">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>Overview
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#ab1be17fa9a8852607536c8a8751f323b">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>problems
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#aba3a25e5cc2dca2ede374cedf066fd70">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>satisfied
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a8b1e1f063b42b7f6569f4137e8d10e66">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>solid_data_pt
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a47a833f5612182bfbef339f78a1f71b3">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>solid_mesh_pt
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a37d0fc0ef332d4eae72596e277d5acdd">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>solves
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a07fab572efb5ba0eb86a03f22c1706c0">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>that
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a1adccd034878436b05f108292b156d1f">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>therefore
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a7c24af57ec0f05f3db6ea2b2e859d4e6">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>Tuck
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a3b7e1d867a6f79c798cd148027335673">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>Wall_mesh_pt
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#af56fc5dfdc55bac88cd99d6ffa02f618">fsi_channel_segregated_solver.txt</a>
+</li>
+<li>x_2
+: <a class="el" href="fsi__channel__segregated__solver_8txt.html#a62c5bf7558d27923b7b3dbc15b709cb4">fsi_channel_segregated_solver.txt</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:20:01
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

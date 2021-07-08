@@ -1,0 +1,132 @@
+\hypertarget{classoomph_1_1OneDLagrangianMesh}{}\doxysection{oomph\+::One\+D\+Lagrangian\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1OneDLagrangianMesh}\index{oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$one\+\_\+d\+\_\+lagrangian\+\_\+mesh.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::One\+D\+Lagrangian\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1OneDLagrangianMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh_a7061998be3fb4131c6b58c4943595d49}{One\+D\+Lagrangian\+Mesh}} (const unsigned \&n\+\_\+element, const double \&length, Geom\+Object $\ast$undef\+\_\+eulerian\+\_\+posn\+\_\+pt, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, length, pointer to Geom\+Object that defines the undeformed Eulerian position, and the timestepper -- defaults to (Steady) default timestepper defined in the Mesh base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh_a20e1ab05b023f65bea5503938cd70385}{One\+D\+Lagrangian\+Mesh}} (const unsigned \&n\+\_\+element, const double \&xmin, const double \&xmax, Geom\+Object $\ast$undef\+\_\+eulerian\+\_\+posn\+\_\+pt, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, xmin, xmax pointer to Geom\+Object that defines the undeformed Eulerian position, and the timestepper -- defaults to (Steady) default timestepper defined in the Mesh base class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh_a1eebb0eddd75a7c2847615c05b5fb4d8}{assign\+\_\+undeformed\+\_\+positions}} ()
+\begin{DoxyCompactList}\small\item\em Assign the undeformed Eulerian positions to the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh_a7a4eabf4901a90b3015d2620fc70f648}{assign\+\_\+default\+\_\+element\+\_\+gradients}} ()
+\begin{DoxyCompactList}\small\item\em Set the default gradients of the elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Geom\+Object $\ast$ \mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh_af9b27f687d7ec160a01d6ed8c07570ed}{Undef\+\_\+eulerian\+\_\+posn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Undeformed Eulerian shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+One\+D\+Lagrangian\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+1D mesh parametrised in terms of a 1D Lagrangian coordinate. The Eulerian positions of the nodes are determined by the Geom\+Object. 
+
+Definition at line 46 of file one\+\_\+d\+\_\+lagrangian\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1OneDLagrangianMesh_a7061998be3fb4131c6b58c4943595d49}\label{classoomph_1_1OneDLagrangianMesh_a7061998be3fb4131c6b58c4943595d49}} 
+\index{oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}!OneDLagrangianMesh@{OneDLagrangianMesh}}
+\index{OneDLagrangianMesh@{OneDLagrangianMesh}!oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{OneDLagrangianMesh()}{OneDLagrangianMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh}{oomph\+::\+One\+D\+Lagrangian\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh}{One\+D\+Lagrangian\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+element,  }\item[{const double \&}]{length,  }\item[{Geom\+Object $\ast$}]{undef\+\_\+eulerian\+\_\+posn\+\_\+pt,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements, length, pointer to Geom\+Object that defines the undeformed Eulerian position, and the timestepper -- defaults to (Steady) default timestepper defined in the Mesh base class. 
+
+Constructor for 1D mesh\+: n\+\_\+element \+: number of elements length \+: length of domain undef\+\_\+eulerian\+\_\+posn\+\_\+pt\+: pointer to geom object that describes the initial Eulerian position of the mesh. time\+\_\+stepper\+\_\+pt \+: timestepper 
+
+Definition at line 51 of file one\+\_\+d\+\_\+lagrangian\+\_\+mesh.\+template.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1OneDLagrangianMesh_a20e1ab05b023f65bea5503938cd70385}\label{classoomph_1_1OneDLagrangianMesh_a20e1ab05b023f65bea5503938cd70385}} 
+\index{oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}!OneDLagrangianMesh@{OneDLagrangianMesh}}
+\index{OneDLagrangianMesh@{OneDLagrangianMesh}!oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{OneDLagrangianMesh()}{OneDLagrangianMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh}{oomph\+::\+One\+D\+Lagrangian\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh}{One\+D\+Lagrangian\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+element,  }\item[{const double \&}]{xmin,  }\item[{const double \&}]{xmax,  }\item[{Geom\+Object $\ast$}]{undef\+\_\+eulerian\+\_\+posn\+\_\+pt,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements, xmin, xmax pointer to Geom\+Object that defines the undeformed Eulerian position, and the timestepper -- defaults to (Steady) default timestepper defined in the Mesh base class. 
+
+Constructor for 1D mesh\+: n\+\_\+element \+: number of elements xmin \+: minimum coordinate value (LH end) xmax \+: maximum coordinate value (RH end) undef\+\_\+eulerian\+\_\+posn\+\_\+pt\+: pointer to geom object that describes the initial Eulerian position of the mesh. time\+\_\+stepper\+\_\+pt \+: timestepper 
+
+Definition at line 82 of file one\+\_\+d\+\_\+lagrangian\+\_\+mesh.\+template.\+cc.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1OneDLagrangianMesh_a7a4eabf4901a90b3015d2620fc70f648}\label{classoomph_1_1OneDLagrangianMesh_a7a4eabf4901a90b3015d2620fc70f648}} 
+\index{oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}!assign\_default\_element\_gradients@{assign\_default\_element\_gradients}}
+\index{assign\_default\_element\_gradients@{assign\_default\_element\_gradients}!oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_default\_element\_gradients()}{assign\_default\_element\_gradients()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh}{oomph\+::\+One\+D\+Lagrangian\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::assign\+\_\+default\+\_\+element\+\_\+gradients\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set the default gradients of the elements. 
+
+Set the default (initial) gradients within each element, which are merely the distances between the nodes, scaled by 0.\+5 because the elements have length 2 in local coordinates. N.\+B. This only works for Q\+Hermite\+Elements at the moment 
+
+Definition at line 112 of file one\+\_\+d\+\_\+lagrangian\+\_\+mesh.\+template.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1OneDLagrangianMesh_a1eebb0eddd75a7c2847615c05b5fb4d8}\label{classoomph_1_1OneDLagrangianMesh_a1eebb0eddd75a7c2847615c05b5fb4d8}} 
+\index{oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}!assign\_undeformed\_positions@{assign\_undeformed\_positions}}
+\index{assign\_undeformed\_positions@{assign\_undeformed\_positions}!oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_undeformed\_positions()}{assign\_undeformed\_positions()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh}{oomph\+::\+One\+D\+Lagrangian\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::assign\+\_\+undeformed\+\_\+positions}
+
+
+
+Assign the undeformed Eulerian positions to the nodes. 
+
+Set the initial (2D Eulerian!) positions of the nodes. 
+
+Definition at line 139 of file one\+\_\+d\+\_\+lagrangian\+\_\+mesh.\+template.\+cc.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1OneDLagrangianMesh_af9b27f687d7ec160a01d6ed8c07570ed}\label{classoomph_1_1OneDLagrangianMesh_af9b27f687d7ec160a01d6ed8c07570ed}} 
+\index{oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}!Undef\_eulerian\_posn\_pt@{Undef\_eulerian\_posn\_pt}}
+\index{Undef\_eulerian\_posn\_pt@{Undef\_eulerian\_posn\_pt}!oomph::OneDLagrangianMesh$<$ ELEMENT $>$@{oomph::OneDLagrangianMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Undef\_eulerian\_posn\_pt}{Undef\_eulerian\_posn\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Geom\+Object$\ast$ \mbox{\hyperlink{classoomph_1_1OneDLagrangianMesh}{oomph\+::\+One\+D\+Lagrangian\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Undef\+\_\+eulerian\+\_\+posn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Undeformed Eulerian shape. 
+
+
+
+Definition at line 52 of file one\+\_\+d\+\_\+lagrangian\+\_\+mesh.\+template.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{one__d__lagrangian__mesh_8template_8h}{one\+\_\+d\+\_\+lagrangian\+\_\+mesh.\+template.\+h}}\item 
+\mbox{\hyperlink{one__d__lagrangian__mesh_8template_8cc}{one\+\_\+d\+\_\+lagrangian\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

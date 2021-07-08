@@ -1,0 +1,186 @@
+\hypertarget{namespaceGlobal__Parameters}{}\doxysection{Global\+\_\+\+Parameters Namespace Reference}
+\label{namespaceGlobal__Parameters}\index{Global\_Parameters@{Global\_Parameters}}
+
+
+Namespace for global parameters.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Isotropic\+Elasticity\+Tensor \mbox{\hyperlink{namespaceGlobal__Parameters_a397f48e074d2589259ed5c6e4d89f948}{E}} (\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})
+\begin{DoxyCompactList}\small\item\em The elasticity tensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{exact\+\_\+solution}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em The exact solution for infinite depth case. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a003c4c942a4c8b88b417f139fc5c637c}{periodic\+\_\+traction}} (const double \&time, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The traction function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}{Amplitude}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Amplitude of traction applied. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobal__Parameters_a3a5d4759509036a2650d5efde8e15d56}{Finite}} =false
+\begin{DoxyCompactList}\small\item\em Specify problem to be solved (boundary conditons for finite or infinite domain). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}} = 0.\+3
+\begin{DoxyCompactList}\small\item\em Define Poisson coefficient Nu. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Lx}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Length of domain in x direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Ly}} = 2.\+0
+\begin{DoxyCompactList}\small\item\em Length of domain in y direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for global parameters. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceGlobal__Parameters_a397f48e074d2589259ed5c6e4d89f948}\label{namespaceGlobal__Parameters_a397f48e074d2589259ed5c6e4d89f948}} 
+\index{Global\_Parameters@{Global\_Parameters}!E@{E}}
+\index{E@{E}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{E()}{E()}}
+{\footnotesize\ttfamily Isotropic\+Elasticity\+Tensor Global\+\_\+\+Parameters\+::E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}}]{ }\end{DoxyParamCaption})}
+
+
+
+The elasticity tensor. 
+
+
+
+Referenced by Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Periodic\+Load\+Problem(), and Refineable\+Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Periodic\+Load\+Problem().
+
+\mbox{\Hypertarget{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}\label{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}} 
+\index{Global\_Parameters@{Global\_Parameters}!exact\_solution@{exact\_solution}}
+\index{exact\_solution@{exact\_solution}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{exact\_solution()}{exact\_solution()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Parameters\+::exact\+\_\+solution (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{u }\end{DoxyParamCaption})}
+
+
+
+The exact solution for infinite depth case. 
+
+
+
+Definition at line 64 of file periodic\+\_\+load.\+cc.
+
+
+
+References Amplitude, Lx, Ly, and Nu.
+
+
+
+Referenced by Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), Refineable\+Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Periodic\+Load\+Problem(), and Refineable\+Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Periodic\+Load\+Problem().
+
+\mbox{\Hypertarget{namespaceGlobal__Parameters_a003c4c942a4c8b88b417f139fc5c637c}\label{namespaceGlobal__Parameters_a003c4c942a4c8b88b417f139fc5c637c}} 
+\index{Global\_Parameters@{Global\_Parameters}!periodic\_traction@{periodic\_traction}}
+\index{periodic\_traction@{periodic\_traction}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{periodic\_traction()}{periodic\_traction()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Parameters\+::periodic\+\_\+traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{const Vector$<$ double $>$ \&}]{n,  }\item[{Vector$<$ double $>$ \&}]{result }\end{DoxyParamCaption})}
+
+
+
+The traction function. 
+
+
+
+Definition at line 76 of file periodic\+\_\+load.\+cc.
+
+
+
+References Amplitude, and Lx.
+
+
+
+Referenced by Refineable\+Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::assign\+\_\+traction\+\_\+elements(), and Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Periodic\+Load\+Problem().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}\label{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}} 
+\index{Global\_Parameters@{Global\_Parameters}!Amplitude@{Amplitude}}
+\index{Amplitude@{Amplitude}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Amplitude}{Amplitude}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Amplitude = 1.\+0}
+
+
+
+Amplitude of traction applied. 
+
+
+
+Definition at line 45 of file periodic\+\_\+load.\+cc.
+
+
+
+Referenced by exact\+\_\+solution(), and periodic\+\_\+traction().
+
+\mbox{\Hypertarget{namespaceGlobal__Parameters_a3a5d4759509036a2650d5efde8e15d56}\label{namespaceGlobal__Parameters_a3a5d4759509036a2650d5efde8e15d56}} 
+\index{Global\_Parameters@{Global\_Parameters}!Finite@{Finite}}
+\index{Finite@{Finite}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Finite}{Finite}}
+{\footnotesize\ttfamily bool Global\+\_\+\+Parameters\+::\+Finite =false}
+
+
+
+Specify problem to be solved (boundary conditons for finite or infinite domain). 
+
+Specify problem to be solved (boundary conditons for finite or infinite domain). 
+
+Definition at line 49 of file periodic\+\_\+load.\+cc.
+
+
+
+Referenced by Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Periodic\+Load\+Problem(), and Refineable\+Periodic\+Load\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Periodic\+Load\+Problem().
+
+\mbox{\Hypertarget{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}\label{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}} 
+\index{Global\_Parameters@{Global\_Parameters}!Lx@{Lx}}
+\index{Lx@{Lx}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Lx}{Lx}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Lx = 1.\+0}
+
+
+
+Length of domain in x direction. 
+
+
+
+Definition at line 55 of file periodic\+\_\+load.\+cc.
+
+
+
+Referenced by exact\+\_\+solution(), main(), and periodic\+\_\+traction().
+
+\mbox{\Hypertarget{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}\label{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}} 
+\index{Global\_Parameters@{Global\_Parameters}!Ly@{Ly}}
+\index{Ly@{Ly}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Ly}{Ly}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Ly = 2.\+0}
+
+
+
+Length of domain in y direction. 
+
+
+
+Definition at line 58 of file periodic\+\_\+load.\+cc.
+
+
+
+Referenced by exact\+\_\+solution(), and main().
+
+\mbox{\Hypertarget{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}\label{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}} 
+\index{Global\_Parameters@{Global\_Parameters}!Nu@{Nu}}
+\index{Nu@{Nu}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Nu = 0.\+3}
+
+
+
+Define Poisson coefficient Nu. 
+
+
+
+Definition at line 52 of file periodic\+\_\+load.\+cc.
+
+
+
+Referenced by exact\+\_\+solution().
+

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
+
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>actions_before_newton_convergence_check()
+: <a class="el" href="classCapProblem.html#ac852570b51489f4bf744b6063fbfa01a">CapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>Angle
+: <a class="el" href="classCapProblem.html#a7a57e45e3f1b7d30ae9d99bff56e8f5d">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#a51dfbd14a2cca78dc0efe6740337a22b">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_b"></a>- b -</h3><ul>
+<li>Bulk_mesh_pt
+: <a class="el" href="classCapProblem.html#a6d74594a707d89fc3fd5b87bf1c26a5b">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#a24ee2e5afd19ab0febf85306d45c8385">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>Ca
+: <a class="el" href="classCapProblem.html#ad856df0aa70d881a2b2bc81ad4e2e251">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#ad29a43062d88106c495d407abeddd88d">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>CapProblem()
+: <a class="el" href="classCapProblem.html#a7b3e0784884fa8bf9d151139b00951c7">CapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>Constitutive_law_pt
+: <a class="el" href="classPseudoSolidCapProblem.html#a9eb1383956f3448a8c2e163aa2db72d7">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>create_contact_angle_element()
+: <a class="el" href="classPseudoSolidCapProblem.html#a8f28ebf09bc66142725139291b4e21a0">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>create_free_surface_elements()
+: <a class="el" href="classPseudoSolidCapProblem.html#ac0219ed64385dc20c4fc3c6cc217fd67">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>create_volume_constraint_elements()
+: <a class="el" href="classCapProblem.html#aa3a891fe6f5fc5fb5829e3bf636eda2c">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#a0289801610e2bc864c67d4d8557d56b1">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_d"></a>- d -</h3><ul>
+<li>doc_solution()
+: <a class="el" href="classCapProblem.html#a8549ca722d2d151ebf3ef7b35b925fbb">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#a2fb98a37bde5742cbdf3c91cb1f5eb2f">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_e"></a>- e -</h3><ul>
+<li>ElasticTwoLayerMesh()
+: <a class="el" href="classElasticTwoLayerMesh.html#a720be7cd7b0f44df04dcb0d09a2795a7">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>External_pressure_data_pt
+: <a class="el" href="classCapProblem.html#a3990e9e6a2e4545a470e84ff1fead5eb">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#a51ac066b9117f30679fef658ff66d981">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_f"></a>- f -</h3><ul>
+<li>finish_problem_setup()
+: <a class="el" href="classCapProblem.html#a5dab5b1ae1d41cb23ac2bcb08fb3dc22">CapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>Free_surface_bounding_mesh_pt
+: <a class="el" href="classPseudoSolidCapProblem.html#ab0e178700d6f9d2b6a86ae58483d6e2e">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>Free_surface_mesh_pt
+: <a class="el" href="classPseudoSolidCapProblem.html#ac1de72bb2e35d6fbd76ef0ea6c19dc48">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_i"></a>- i -</h3><ul>
+<li>Interface_lower_boundary_element_pt
+: <a class="el" href="classElasticTwoLayerMesh.html#abc8751d632399afe56df6c32e1001582">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>interface_lower_boundary_element_pt()
+: <a class="el" href="classElasticTwoLayerMesh.html#a748ff5229092301a18a193a846d2ebdd">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>interface_lower_face_index_at_boundary()
+: <a class="el" href="classElasticTwoLayerMesh.html#a100b3b26d4a2b97f67b0bef4e4b42e64">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Interface_upper_boundary_element_pt
+: <a class="el" href="classElasticTwoLayerMesh.html#af8218bd023535d3dbf4af3cf7bc1c12d">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>interface_upper_boundary_element_pt()
+: <a class="el" href="classElasticTwoLayerMesh.html#a5170e0a70ad0d4eb3ec01c32d3db2c72">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>interface_upper_face_index_at_boundary()
+: <a class="el" href="classElasticTwoLayerMesh.html#a074aafe34f7dd56566c1a9ff934505d5">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_l"></a>- l -</h3><ul>
+<li>lower_layer_element_pt()
+: <a class="el" href="classElasticTwoLayerMesh.html#a4e6d9b26eecc0487d7b2684ad27b7669">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>Lower_layer_element_pt
+: <a class="el" href="classElasticTwoLayerMesh.html#a4f8c33eaaa185e8c8710883ee9b5811f">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_n"></a>- n -</h3><ul>
+<li>ninterface_lower()
+: <a class="el" href="classElasticTwoLayerMesh.html#ae5db5553497593905fd227bfc5b34b50">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>ninterface_upper()
+: <a class="el" href="classElasticTwoLayerMesh.html#a6e813329601844d3d900d78a60892134">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>nlower()
+: <a class="el" href="classElasticTwoLayerMesh.html#a144f4d44005a25bb301955625a79c9ef">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>nupper()
+: <a class="el" href="classElasticTwoLayerMesh.html#ae5c586ecab2ac275174427a94ccfc0c7">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>parameter_study()
+: <a class="el" href="classCapProblem.html#af54251f12b42b85c6caf88e5214f45da">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#ae86ecaf62fa0920f5d14bf82a7f83b0e">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>Pext
+: <a class="el" href="classCapProblem.html#a6fcc40a7331c00739923b49c167b396f">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#afbcfe3a5a05d191c44815681e4b621d0">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>Point_mesh_pt
+: <a class="el" href="classCapProblem.html#ac889ff4b3a1297ee3848ee78d549e914">CapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>PseudoSolidCapProblem()
+: <a class="el" href="classPseudoSolidCapProblem.html#a4e8963d64b50a96902169838cc195903">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>Surface_mesh_pt
+: <a class="el" href="classCapProblem.html#a1ebf7016d766c5de59d2a479e0733c69">CapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_t"></a>- t -</h3><ul>
+<li>Trace_file
+: <a class="el" href="classCapProblem.html#a46ba6cbe3e82a36db8831fdd53d9f3a9">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#a81d2d9915ba7d9a9a691ca2f2080b6b4">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>Traded_pressure_data_pt
+: <a class="el" href="classCapProblem.html#a1ad1a124cb5aa9c1724cbef89e47a35b">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#a55491b1b87f858b8d711a362f4c70838">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_u"></a>- u -</h3><ul>
+<li>Upper_layer_element_pt
+: <a class="el" href="classElasticTwoLayerMesh.html#ae46d4ef2bb95a6c023bd0dc1e367ccfb">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+<li>upper_layer_element_pt()
+: <a class="el" href="classElasticTwoLayerMesh.html#ab5b2682b701b796c14431f8e126457fd">ElasticTwoLayerMesh&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_v"></a>- v -</h3><ul>
+<li>Volume
+: <a class="el" href="classCapProblem.html#ab1f403fd3be7648c3a52a66684a78f7e">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#a49945d8e5740977a72c63e333a65293f">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>Volume_computation_mesh_pt
+: <a class="el" href="classPseudoSolidCapProblem.html#a173d08853c11d0692a4e922bc3fcf53f">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>Volume_constraint_mesh_pt
+: <a class="el" href="classCapProblem.html#a0a115f38ca8ff18937619dd918a38bb1">CapProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classPseudoSolidCapProblem.html#a65b3318c82437c510f23ee0ae898ff6c">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index__7E"></a>- ~ -</h3><ul>
+<li>~CapProblem()
+: <a class="el" href="classCapProblem.html#ad2b434212ecb33467359aef1071bc964">CapProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>~PseudoSolidCapProblem()
+: <a class="el" href="classPseudoSolidCapProblem.html#aec2a79e44dfd785b2978419210b053b8">PseudoSolidCapProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:09:34
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

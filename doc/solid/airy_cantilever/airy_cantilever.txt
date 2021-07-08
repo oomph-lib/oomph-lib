@@ -1,0 +1,433 @@
+\mainpage Demo problem: Bending of a cantilever beam
+
+In this example we solve a classical solid mechanics problem, 
+the bending of a cantilever beam, subject to a 
+pressure loading on its upper face and/or gravity.
+We assume that the material behaves like a generalised Hookean
+solid with elastic modulus \f$ E^* \f$ and Poisson's ratio \f$ \nu \f$ 
+Here is a sketch:
+
+@I w 0.75\textwidth airy_cantilever_sketch "Sketch of the problem. "
+
+This problem is interesting because it has an
+(approximate) St. Venant solution for the stress field which may be
+constructed in terms of an Airy stress function (see, e.g.
+H. Eschenauer & W. Schnell "Elastizitaetstheorie I", BI
+Wissenschaftsverlag, 2nd edition, 1986). 
+
+
+<HR>   
+<HR>
+
+
+\section results Results
+
+The following figure shows an animation of beam's deformation in 
+response to an increase in the uniform pressure, \f$ P \f$, at
+zero gravity, \f$ g=0 \f$. The colour contours represent the magnitude of
+the "horizontal" component of the 2nd Piola-Kirchhoff stress tensor,
+\f$ \sigma_{11} \f$ . Its approximately linear variation across the beam's
+thickness indicates a bending-type stress distribution with the
+stress being positive (tensile) at the top and negative
+(compressive) at the bottom.
+
+@I w 0.75\textwidth beam_animation "Animation of the beam's deformation with contours of its `horizontal' stress component.  "
+
+The next figure shows a comparison of the computational predictions for
+\f$ \sigma_{11} \f$ (in green), and the approximate analytical solution 
+(in red).
+
+
+@I w 0.75\textwidth stress_comparison "Comparison of the computed distribution of the `horizontal' stress (in green) against the approximate analytical solution (in red). "
+
+The agreement between the two solutions is excellent over most of the
+domain, apart from two small regions near the
+left end of the beam where stress singularities develop at
+the vertices of the domain. The singularities arise because
+the zero-tangential stress boundary condition on the top and
+bottom faces is inconsistent with the zero-displacement
+boundary condition on the left face. The singularities are not
+captured by the approximate analytical solution. \c oomph-lib's
+automatic mesh adaptation refines the mesh in an attempt to capture 
+the rapid variations of the stresses in these regions.
+
+<HR>   
+<HR>
+
+
+\section global Global parameters and functions
+As usual, we define a namespace, \c Global_Physical_Variables,
+to define the problem parameters: the dimensions of the cantilever
+beam, (a pointer to) a constitutive equation, and its parameters
+\f$ E \f$ and \f$ \nu \f$. 
+
+\dontinclude airy_cantilever.cc
+\skipline start_namespace
+\until Nu
+
+
+We refer to the document <A HREF="../../solid_theory/html/index.html">
+"Solid mechanics: Theory and implementation"</A> for a detailed 
+discussion of the
+non-dimensionalisation and merely recall that by setting 
+\f$ E = 1\f$, we imply that
+all stresses are non-dimensionalised with the structure's dimensional 
+Young's modulus \f$ E^* \f$. Similarly, by setting the half-thickness
+of the beam to 0.5, we imply that the beam's dimensional 
+thickness, \f$ 2H^*\f$ is used to non-dimensionalise all lengths. 
+
+Next, we define a function that defines the constant pressure load
+on the upper face of the cantilever,
+
+\skipline Uniform pressure 
+\until end traction
+ 
+and a gravitational body force, acting in the negative \f$ x_2 \f$
+-direction,
+
+\skipline Non-dim gravity
+\until end namespace
+
+
+<HR>
+<HR>
+
+
+\section main The driver code
+The driver code is very short. We start by building a \c
+GeneralisedHookean constitutive equation object and store a pointer
+to it in the namespace \c Global_Physical_Variables. Next we construct
+the problem object, using (a wrapped version of) \c oomph-lib's
+\c RefineableQPVDElement<2,3> -- a nine-node quadrilateral
+displacement-based solid mechanics element. (The wrapper is used
+to change the element's output function; see \ref com for details). 
+
+ 
+\dontinclude airy_cantilever.cc
+\skipline start_of_main
+\until CantileverProblem
+
+The subsequent lines may be uncommented to experiment with
+different element types as suggested in the \ref ex.
+
+\until RefineableQPVDElementWithPressure
+
+We initialise the load parameters and perform a parameter study
+in which we increment the pressure load in small steps. The
+gravitational body force remains switched off to allow the
+comparison with the analytical solution which only applies to
+the case with zero body force.
+
+\until end of main
+
+
+<HR>
+<HR>
+
+\section class The problem class
+
+The problem class contains the usual member functions, including
+separate access functions to the two sub-meshes: The "bulk" mesh that
+contains the 2D solid elements, and a separate mesh in which we store
+the 1D \c SolidTractionElements that apply the 
+traction boundary condition on the beam's upper face.
+As usual, we remove these elements before adapting the bulk mesh
+and re-attach them afterwards, using the functions
+\c Problem::actions_before_adapt() and 
+\c Problem::actions_after_adapt().
+
+
+\dontinclude airy_cantilever.cc
+\skipline begin_problem
+\until doc_solution()
+
+The creation/deletion of the  \c SolidTractionElements is performed
+by private helper functions. We also store a pointer to a node on the
+tip of the beam and will record its displacement as a function of the
+applied load in a trace file. 
+
+\until };
+
+<HR>
+<HR>
+
+\section constructor The problem constructor
+
+The constructor builds the bulk mesh (the standard 
+\c RefineableRectangularQuadMesh that we already used in many previous
+examples, upgraded to a \c SolidMesh, via the procedure discussed in 
+the document <A HREF="../../solid_theory/html/index.html#solid_mesh">
+Solid mechanics: Theory and implementation</A>), 
+using the element type specified by the template parameter and the
+dimensions specified in the namespace \c Global_Physical_Variables.
+
+\dontinclude airy_cantilever.cc
+\skipline start_of_constructor
+\until l_x,l_y,origin);
+
+We employ the \c Z2ErrorEstimator to assess the accuracy of the
+computed solution and to control the adaptive mesh refinement.
+When used with the \c RefineableQPVDElements, the \c Z2ErrorEstimator
+uses the components of Green's strain tensor as "fluxes" in its
+"flux recovery procedure". 
+
+\skipline Set error
+\until Z2
+
+Next, we pass the constitutive equations and the gravitational
+body force to the elements, select a control node, 
+and perform one uniform mesh refinement.
+
+\until refine_uniformly();
+
+We create a new mesh for the \c SolidTractionElements and 
+build the elements using the helper function \c
+create_traction_elements() before adding both submeshes to the
+problem and combining them into a global mesh. 
+
+\until build_global_mesh();
+
+We pin the position of all nodes on the left boundary (boundary 3)
+of the bulk mesh. The subsequent call to 
+\c PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures()
+is unnecessary (but harmless) for the solid elements used in
+this driver code since \c RefineableQPVDElements do not contain
+pressure degrees of freedom. It is a good idea to include 
+this call anyway since our problem class is templated by the element type
+and may therefore also be used with other elements (see \ref ex ; we
+refer to 
+<A HREF="../../../navier_stokes/adaptive_driven_cavity/html/index.html">
+another tutorial</A> for a detailed discussion of the need to pin "redundant"
+pressure degrees of freedom in computations with spatial adaptivity.)
+
+\until ->element_pt()
+
+Finally, we assign the equation numbers, create a \c DocInfo object
+and open a trace file in which we shall record the beam's load/displacement
+characteristics. 
+
+\until end of constructor
+
+
+<HR>
+<HR> 
+
+\section before_adapt Actions before adaptation
+
+Following our usual procedure, we delete the \c SolidTractionElements
+before adapting the bulk mesh:
+
+\dontinclude airy_cantilever.cc
+\skipline start_of_actions_before_adapt
+\until end of actions_before_adapt
+
+
+
+<HR>
+<HR> 
+
+\section after_adapt Actions after adaptation
+
+
+The \c SolidTractionElements are re-attached after the 
+mesh adaptation. Again, the call to 
+\c PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures()
+is not strictly necessary for the elements used in the present
+driver code but is included "for safety".
+
+\dontinclude airy_cantilever.cc
+\skipline start_of_actions_after_adapt
+\until end of actions_after_adapt
+
+
+<HR>
+<HR> 
+
+\section set_traction Setting the pointer to the traction function
+
+The helper function \c set_traction_pt() is used to 
+pass the pointer to the traction function to the 
+\c SolidTractionElements.
+
+\dontinclude airy_cantilever.cc
+\skipline start_of_set_traction_pt
+\until end of set traction pt
+
+<HR>
+<HR> 
+
+\section create_traction Creating the traction elements
+
+The helper function \c create_traction_elements() is used to 
+create the \c SolidTractionElements and to store them 
+in the appropriate sub-mesh.
+
+\dontinclude airy_cantilever.cc
+\skipline start_of_create_traction
+\until end of create_traction_elements
+
+<HR>
+<HR> 
+
+\section delete_traction Deleting the traction elements
+
+The helper function \c delete_traction_elements() is used to 
+delete the \c SolidTractionElements.
+
+\dontinclude airy_cantilever.cc
+\skipline start_of_delete_traction
+\until end of delete_traction_elements
+
+<HR>
+<HR> 
+
+\section doc Post-processing
+
+The post-processing function \c doc_solution() outputs the
+finite-element solution, using the modified output function
+defined in the wrapper class \c MySolidElement, discussed below. 
+
+\dontinclude airy_cantilever.cc
+\skipline start_doc
+\until some_file.close();
+
+Next we output the approximate St. Venant solution at the same
+plot points and write the load/displacement characteristics to the
+trace file.
+
+\until end doc
+
+
+
+
+
+<HR>
+<HR>
+
+
+\section exercises Comments and exercises
+
+\subsection ex Exercises
+
+-# Modify the driver code so that the cantilever beam is loaded by
+   gravity rather than a pressure load.
+   Consult the document <A HREF="../../solid_theory/html/index.html">
+   "Solid mechanics: Theory and implementation"</A> for details on 
+   the non-dimensionalisation of the body force. Verify that for modest
+   deflections and for sufficiently thin beams, the macroscopic
+   deformation due to a gravitational load is identical to that
+   induced by an equivalent pressure load, equivalent meaning that
+   the total force on the beam is the same for both cases. 
+   \n \n
+-# Change the element type to a \c RefineableQPVDElementWithPressure<2>
+   and \c RefineableQPVDElementWithContinuousPressure<2> and compare
+   the results. Both of these two elements are based on a
+   pressure-displacement formulation, the former employing 
+   a discontinuous pressure representation (as in Crouzeix-Raviart 
+   Navier-Stokes elements), the 
+   latter employing a continuous pressure representation (as in 
+   Taylor-Hood elements). Confirm that calls to \c
+   PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures()
+   are essential if a continuous pressure representation is used.
+   Explain the code's behaviour when you comment out the calls 
+   to this function.
+   \n \n
+-# Repeat the computation without adaptivity, by using the
+   non-refineable versions of the various solid mechanics elements
+   discussed above, namely the \c QPVDElement<2>, \c QPVDElementWithPressure<2>
+   and \c QPVDElementWithContinuousPressure<2>. This will require
+   various changes to the code:
+   -# You will have to create a solid mechanics version of the
+      (non-refineable) \c RectangularQuadMesh. This is necessary
+      because non-refineable elements cannot be used with refineable 
+      meshes. Try it to find out why! [Note: You could, of course, use 
+      the existing driver code with its refineable mesh and the
+      refineable elements and simply not use the adaptive
+      capabilities by omitting the \c max_adapt argument when calling 
+      the Newton solver. However, the main point of this exercise is to force
+      you to understand how to upgrade an existing \c Mesh to
+      a \c SolidMesh. It's easy: Simply follow the steps used to 
+      create a refineable \c SolidMesh from the 
+      \c RefineableRectangularQuadMesh, in 
+      <A HREF="../../../../src/meshes/rectangular_quadmesh.template.h">
+       src/meshes/rectangular_quadmesh.template.h</A>. 
+      Instead of inheriting the mesh from the \c RefineableRectangularQuadMesh
+      and the \c SolidMesh classes, inherit from the non-refineable 
+      \c RectangularQuadMesh and the \c SolidMesh.]
+   -# You must not pass the pointer to the error estimator to the
+      non-refineable mesh -- it has no use for it.
+   -# You cannot call the adaptive Newton solver.
+   .
+.
+
+<HR>
+
+
+\subsection com Comment: Customising an element's output function
+
+In the driver code discussed above
+we used the "wrapper" class \c MySolidElement to customise the
+solid elements' output function so that each element outputs its
+shape and the three independent components of the
+second Piola Kirchhoff stress, \f$ \sigma_{11},  \sigma_{12} \f$
+and \f$ \sigma_{22}. \f$
+
+Here is the implementation: The "wrapping" element inherits from
+the element type specified by the template parameter and calls its
+constructor (recall that element constructors are always
+argument-free!).
+
+\dontinclude airy_cantilever.cc
+\skipline start_wrapper
+\until ELEMENT()
+
+We then overload the (virtual) output function so that
+the element outputs its shape, i.e. the \f$ x \f$ and \f$ y \f$ 
+coordinates of its plot points, and the three independent components of the
+second Piola Kirchhoff stress at those points. Other than that, the element
+behaves exactly as the underlying "wrapped" element. 
+
+
+\until };
+
+[\b Note: Since this element is only defined and used in a 2D driver
+code, there is little point in implementing the output for 1D or 
+3D elements. However, paranoid as we are, we check the
+dimension of the element and throw an error if it is wrong.]
+
+
+Finally we declare that the \c FaceGeometry of the "wrapped"
+element is the same as that of the underlying element. This step
+is required to allow the automatic construction of
+\c SolidTractionElements in \c create_traction_elements().
+
+\dontinclude airy_cantilever.cc
+\skipline start_face_geometry 
+\until };
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial 
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/solid/airy_cantilever/
+">
+demo_drivers/solid/airy_cantilever/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/solid/airy_cantilever/airy_cantilever.cc
+">
+demo_drivers/solid/airy_cantilever/airy_cantilever.cc
+</A>
+</CENTER>
+.
+

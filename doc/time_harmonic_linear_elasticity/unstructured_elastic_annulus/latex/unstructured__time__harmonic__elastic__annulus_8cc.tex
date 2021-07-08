@@ -1,0 +1,51 @@
+\hypertarget{unstructured__time__harmonic__elastic__annulus_8cc}{}\doxysection{unstructured\+\_\+time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc File Reference}
+\label{unstructured__time__harmonic__elastic__annulus_8cc}\index{unstructured\_time\_harmonic\_elastic\_annulus.cc@{unstructured\_time\_harmonic\_elastic\_annulus.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classMyStraightLine}{My\+Straight\+Line}}
+\begin{DoxyCompactList}\small\item\em Straight 1D line in 2D space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classRingWithTRibProblem}{Ring\+With\+T\+Rib\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}
+\begin{DoxyCompactList}\small\item\em Annular disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a58a76124a7c047adf58388cc12e84f23}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq\+\_\+region}} (2, Omega\+\_\+sq)
+\begin{DoxyCompactList}\small\item\em Square of non-\/dim frequency for the two regions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f}{Global\+\_\+\+Parameters\+::pressure\+\_\+load}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&traction)
+\begin{DoxyCompactList}\small\item\em Constant pressure load (real and imag part) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{unstructured__time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Driver for annular disk loaded by pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ Time\+Harmonic\+Isotropic\+Elasticity\+Tensor $\ast$ $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{Global\+\_\+\+Parameters\+::\+E\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em The elasticity tensors for the two regions. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731}{Global\+\_\+\+Parameters\+::\+Alpha}} =200.\+0
+\begin{DoxyCompactList}\small\item\em Peakiness parameter for pressure load. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{unstructured__time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{unstructured__time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{unstructured\_time\_harmonic\_elastic\_annulus.cc@{unstructured\_time\_harmonic\_elastic\_annulus.cc}!main@{main}}
+\index{main@{main}!unstructured\_time\_harmonic\_elastic\_annulus.cc@{unstructured\_time\_harmonic\_elastic\_annulus.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver for annular disk loaded by pressure. 
+
+
+
+Definition at line 820 of file unstructured\+\_\+time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+
+
+
+References Global\+\_\+\+Parameters\+::\+Alpha, Global\+\_\+\+Parameters\+::\+E\+\_\+pt, Global\+\_\+\+Parameters\+::\+Nu, Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq\+\_\+region(), Global\+\_\+\+Parameters\+::P, and problem.
+

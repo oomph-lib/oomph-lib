@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: adaptive_driven_cavity.txt_doxygenified.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">adaptive_driven_cavity.txt_doxygenified.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="adaptive__driven__cavity_8txt__doxygenified_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">\mainpage Example problem: Adaptive solution of the 2D driven cavity problem</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">In a &lt;A HREF=&quot;../../driven_cavity/html/index.html&quot;&gt;previous example&lt;/A&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">we demonstrated the solution of the 2D driven cavity problem</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">using \c oomph-lib&#39;s 2D Taylor-Hood and Crouzeix-Raviart Navier-Stokes</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">elements on a uniform mesh. The computed solution was clearly</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">under-resolved near the corners of the domain where the discontinuity</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">in the velocity boundary conditions creates pressure singularities. </span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">In this example we shall re-solve the driven cavity problem with</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">the refineable versions of \c oomph-lib&#39;s quadrilateral </span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">Navier-Stokes elements -- the \c RefineableQTaylorHoodElement&lt;2&gt; and the \c </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">RefineableQCrouzeixRaviartElement&lt;2&gt;. Enabling spatial adaptivity for </span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">this problem involves the same straightforward </span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">steps as for a scalar problem:</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">- The domain must be discretised with a refineable mesh, i.e. a mesh</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">  that is derived from the \c RefineableMesh class.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">- An \c ErrorEstimator object must be specified.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">. </span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">Two additional steps tend to be required during the adaptive solution of </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">Navier-Stokes problems:</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">- Recall that in Navier-Stokes problems in which the velocity is </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  prescribed along </span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">  the entire domain boundary, the pressure is only determined up an </span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  arbitrary constant, making it necessary to &quot;pin&quot; one pressure value. </span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  If the &quot;pinned&quot; pressure degree of freedom is associated with an element</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">  that is unrefined during the mesh adaptation, the</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  &quot;pinned &quot; degree of freedom may no longer exist in the adapted problem. </span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  To ensure that exactly one pressure degree of freedom is pinned</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  when re-solving the adapted problem, we recommend using the </span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  function \c Problem::actions_after_adapt() to</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">  -# unpin all pressure values, e.g. using the function</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     \code</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     NavierStokesEquations&lt;DIM&gt;::unpin_all_pressure_dofs(...)</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     \endcode</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">  -# pin a pressure degree of</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     freedom that is known to exist (e.g. the first pressure degree of</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     freedom in the first element of the mesh -- whichever element this </span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     may be), e.g. using the function </span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     \code</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     NavierStokesEquations&lt;DIM&gt;::fix_pressure(...)</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     \endcode</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">  . </span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">- The possible presence of hanging nodes in an adapted mesh</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">  requires special treatment for elements (e.g. Taylor-Hood elements)</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">  in which the pressure is represented by a low-order interpolation </span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">  between a subset of the element&#39;s nodal values. The required tasks</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">  are performed by the function </span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">  \code </span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">  NavierStokesEquations&lt;DIM&gt;::pin_redundant_nodal_pressures(...)</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">  which should be called </span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">  -# before assigning the equation numbers for the first time, and </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">  -# after every mesh adaptation. </span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">  .</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">  [If the user &quot;forgets&quot; to call this function, a warning is issued </span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">   if the library is compiled with the PARANOID flag.] </span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">The driver code discussed below illustrates the use of these functions.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">The section \ref  comments provides a more detailed discussion of the </span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">technical details involved in their implementation.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">\section example The example problem</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">We shall illustrate the spatially adaptive solution of the steady </span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">2D Navier-Stokes equations by re-considering the </span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">2D steady driven cavity problem:</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">&lt;TABLE&gt;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">&lt;TR&gt; </span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">&lt;TD&gt;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">&lt;B&gt;The 2D steady driven cavity problem in a square domain.&lt;/B&gt;</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">&lt;/CENTER&gt; </span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">Solve</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">Re\phantom{i}u_j\frac{\partial u_i}{\partial x_j} =</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">- \frac{\partial p}{\partial x_i} +</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">\frac{\partial }{\partial x_j} \left(</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">\frac{\partial u_i}{\partial x_j} +  </span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">\frac{\partial u_j}{\partial x_i} \right),</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (1)</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">and</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">\frac{\partial u_i}{\partial x_i} = 0,</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">in the square domain \f$ D = \left\{x_i \in [0,1]; i=1,2 \right\} \f$,</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">subject to the Dirichlet boundary conditions</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">\left. \mathbf{u}\right|_{\partial D}=(0,0),</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (2)</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">on right, top and left boundaries and </span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">\left. \mathbf{u}\right|_{\partial D}=(1,0),</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (3)</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">on the bottom boundary, \f$ x_2 = 0 \f$ .</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">&lt;/TD&gt;</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">&lt;/TR&gt;</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">&lt;/TABLE&gt;  </span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">\subsection CR Solution with Crouzeix-Raviart elements</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">The figure below shows &quot;carpet plots&quot; of the velocity and pressure</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">fields as well as a contour plot of the pressure distribution with</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">superimposed streamlines for a Reynolds number of \f$ Re=100\f$. </span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">The velocity vanishes along the entire</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">domain boundary, apart from the bottom boundary \f$ (x_2 = 0) \f$</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">where the moving &quot;lid&quot; imposes a unit tangential velocity which drives</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">a large vortex, centred at \f$ (x_1,x_2) \approx (0.62,0.26)\f$. The</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">pressure singularities created by the velocity discontinuities at \f$</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">(x_1,x_2)=(0,0) \f$ and \f$ (x_1,x_2)=(1,0) \f$ are now much better</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">resolved.</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">\image html adaptive_driven_cavity_CR.gif &quot;Plot of the velocity and pressure fields computed with adaptive Crouzeix-Raviart elements for Re=100. &quot; </span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">\image latex adaptive_driven_cavity_CR.eps &quot;Plot of the velocity and pressure fields computed with adaptive Crouzeix-Raviart elements for Re=100. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">\subsection TH Solution with Taylor-Hood elements</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">The next figure shows the corresponding results obtained from a</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">computation with adaptive Taylor-Hood elements. </span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">\image html adaptive_driven_cavity_TH.gif &quot;Plot of the velocity and pressure fields computed with adaptive Taylor-Hood elements for Re=100. &quot; </span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">\image latex adaptive_driven_cavity_TH.eps &quot;Plot of the velocity and pressure fields computed with adaptive Taylor-Hood elements for Re=100. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">\section namespace Global parameters and functions</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">The global namespace used to define the problem parameters is </span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">identical to the one in the </span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">&lt;A HREF=&quot;../../driven_cavity/html/index.html#namespace&quot;&gt; </span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">non-adaptive version&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">\dontinclude adaptive_driven_cavity.cc </span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">\skipline start_of_namespace</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">\until end_of_namespace</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">\section main The driver code</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">The main driver code is virtually identical to that in the </span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">&lt;A HREF=&quot;../../driven_cavity/html/index.html#main&quot;&gt; non-adaptive</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">version&lt;/A&gt;. We specify the appropriate refineable element types and</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">use the black-box adaptive Newton solver, allowing for up to three</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">levels of spatial adaptivity. </span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">\skipline start_of_main</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">\until end_of_main</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">\section problem The problem class </span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">Most of the problem class is identical to that in the </span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment"> &lt;A HREF=&quot;../../driven_cavity/html/index.html#problem&quot;&gt; non-adaptive</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment"> version of the code &lt;/A&gt;: We provide a constructor and destructor and</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment"> use the function \c Problem::actions_before_newton_solve() to (re-)assign</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">the boundary conditions. </span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">\dontinclude adaptive_driven_cavity.cc </span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">\skipline start_of_problem_class</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">\until end_of_actions_before_newton_solve</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">As discussed in the introduction, we use the function</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">\c Problem::actions_after_adapt() to ensure that, regardless of the</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">mesh adaptation pattern, exactly one pressure degree of freedom is</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">pinned. We start by unpinning all pressure degrees of freedom:</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">\skipline After adaptation</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">\until unpin_all_pressure_dofs</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">[Note that this function (implemented as a static member function of</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">the \c NavierStokesEquations&lt;DIM&gt; class) unpins the pressure degrees</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">of freedom in all elements that are specified by the input argument </span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">(a vector of pointers to the these elements). This implementation </span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">allows certain elements in a mesh to be excluded from the procedure;</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">this is required in problems where a mesh contains multiple element</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">types. In the present problem, the mesh contains only Navier-Stokes</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">elements, so we pass a vector of pointers to all elements in the</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">mesh (returned by the function \c Mesh::element_pt()] to</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">the function.]</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">Following the mesh adaptation any redundant nodal pressures must be </span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">pinned, so that hanging pressure degrees of freedom are treated </span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">correctly. We note that calling this function is essential </span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">for Taylor-Hood elements. The function may be executed without any </span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">adverse effect for all other Navier-Stokes elements; see </span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">\ref comments for more details on the implementation.</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">\until pin_redundant</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">Finally, we pin a single pressure degree of freedom (the first</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">pressure value in the first element in the mesh) and set its</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">value to zero.</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">The remainder of the problem class remains as </span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">&lt;A HREF=&quot;../../driven_cavity/html/index.html#problem&quot;&gt; before&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">\until end_of_problem_class</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">\section constructor The problem constructor</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">The constructor remains largely as </span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">&lt;A HREF=&quot;../../driven_cavity/html/index.html#constructor&quot;&gt; before&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">We create an adaptive mesh, build and assign an</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">error estimator and pin the redundant nodal pressure degrees of</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">freedom. </span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">\skipline start_of_constructor</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">\until end_of_constructor</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">\section doc Post-processing</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">The post-processing function is identical to that in the </span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">&lt;A HREF=&quot;../../driven_cavity/html/index.html#doc&quot;&gt;non-adaptive</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">version of the code&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">\skipline start_of_doc_solution</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">\until end_of_doc_solution</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">\section comments Comments and Exercises</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">\subsection hang_vector Hanging nodes in problems with vector-valued unknowns </span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">We discussed in an earlier example for a scalar </span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">(&lt;A HREF=&quot;../../../poisson/two_d_poisson_adapt/html/index.html&quot;&gt; </span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">Poisson&lt;/A&gt;) problem how</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">\c oomph-lib&#39;s mesh adaptation routines  create hanging nodes and how</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">the values that are stored at such nodes are automatically constrained</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">to ensure the inter-element continuity of the solution. The</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">methodology employed for scalar problems is easily generalised to</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">problems with vector-valued unknowns, provided that all unknowns are</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">represented by the same isoparametric interpolation between the elements&#39; nodal</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">values. In such problems, the unknown nodal values at the hanging</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">nodes are constrained to be linear combination of the corresponding</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">values at their &quot;master nodes&quot;. The list of &quot;master nodes&quot; and the</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">corresponding &quot;hanging weights&quot; (contained in a \c HangInfo object)</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">are the same for all unknowns.</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment"> To allow the use spatial adaptivity for elements </span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">in which different unknowns are represented by different interpolation</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">schemes (e.g. in 2D quadrilateral Taylor-Hood elements where the two velocity</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">components are represented by bi-quadratic interpolation between the</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">values stored at the element&#39;s 3x3 nodes, whereas the pressure is</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">represented by bi-linear interpolation between the pressure values </span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">stored at the element&#39;s 2x2 corner nodes) \c oomph-lib allows </span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">the different nodal values to have their own list of &quot;master nodes&quot; </span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">and &quot;hanging weights&quot;. This is achieved as follows;</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">- By default, all nodes are assumed to be non-hanging. This status</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">  is indicated by the fact that a \c Node&#39;s pointer to its </span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">  \c HangInfo object, accessible via its member </span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">  function \c Node::hanging_pt(), is \c NULL.</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">- Mesh adaptation may turn a node into a hanging node. </span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">  A node&#39;s &quot;hanging status&quot; is primarily a</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">  geometrical/topological property. </span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">  If a \c Node is found to be hanging, \c oomph-lib&#39;s mesh adaptation </span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">  procedures create a \c HangInfo object that stores the list of</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">  the hanging node&#39;s &quot;master nodes&quot; and their respective weights.</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">  A pointer to the \c HangInfo object is then passed to the \c Node.</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">  The list of master nodes and weights, stored in this \c HangInfo</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">  object is then used by the function \c Node::position() to </span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">  determine the \c Node&#39;s (constrained) position.</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">- Nodes also provide storage for separate pointers to \c HangInfo </span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">  objects for each of their nodal values. These are accessible via </span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">  the member function \c Node::hanging_pt(i) which returns the pointer to the </span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">  \c HangInfo object associated with the node&#39;s i-th nodal value. </span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">  By default, these pointers point to the &quot;geometric&quot; \c HangInfo </span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">  object, accessible via the argument-free version of this function.</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">  This default behaviour is appropriate for isoparametric elements</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">  in which all unknowns are represented by interpolation between the</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">  elements&#39; nodes, using its geometric shape functions as basis functions.</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">- For elements that use different interpolation schemes for </span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">  different nodal values (e.g. in Taylor-Hood elements), the default</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">  assignment for the pointers to the \c HangInfo objects may be</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">  over-written. This is task is typically performed by re-implementing</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">  (and thus over-writing) the empty virtual function</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">  RefineableElement::further_setup_hanging_nodes()</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">  for such elements. This function is called automatically during</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">  at the end of \c oomph-lib&#39;s mesh adaptation procedures.  </span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">.       </span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">\subsection refining_TH Adaptivity for Taylor-Hood elements</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">\subsubsection issues The issues</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">In non-adaptive 2D [3D] Taylor-Hood elements, every node stores </span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">(at least) two [three] nodal values which represent the two [three]</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">velocity components. The four corner [eight vertex] nodes store</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">an additional third [fourth] value which represents the pressure.</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">If the mesh is subjected to non-uniform refinement, some of the </span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">mid-side nodes in large elements also act as corner nodes </span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">for adjacent smaller elements, as illustrated in the figure below. </span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">\image html pressure_hang.gif &quot;An adapted mesh, with nodes storing a pressure value denoted by circles, and velocity nodes by squares. &quot; </span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">\image latex pressure_hang.eps &quot;An adapted mesh, with nodes storing a pressure value denoted by circles, and velocity nodes by squares. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">The figure illustrates that the &quot;hanging status&quot; of the various </span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">degrees of freedom can be become fairly involved. For instance</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">- Node 7 is geometrically hanging, with master nodes 6, 8 and 12. It</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">  is not a pressure node. </span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">- Node 8 is geometrically non-hanging, but it is a hanging node for</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">  the pressure interpolation. Its pressure master nodes are 6 and 12.</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">- Node 10 is geometrically hanging, and its geometric master nodes are</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">  6, 8 and 12, while its pressure master nodes are 6 and 12.</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">. </span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">To illustrate that \c oomph-lib&#39;s automatic mesh adaptation procedures</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">are able to deal with these cases, the figure below shows </span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">a &quot;carpet plot&quot; of the pressure distribution, \f$ p(x_1,x_2) \f$, </span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">obtained from a (strongly under-resolved) driven-cavity </span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">computation on the mesh shown above. The figure illustrates</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">that the hanging node constraints ensure the inter-element continuity </span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">of the pressure throughout the domain, and, in particular, along </span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">the &quot;right&quot; boundary of the largest element.</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">\image html hanging_pressure.gif &quot;The under-resolved pressure distribution for the driven cavity problem, using the above mesh and computed with Taylor-Hood elements. &quot; </span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">\image latex hanging_pressure.eps &quot;The under-resolved pressure distribution for the driven cavity problem, using the above mesh and computed with Taylor-Hood elements. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">\subsubsection implementation Details of the implementation</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">To facilitate the book-keeping for such problems, \e all nodes in the </span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">refineable </span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">Taylor-Hood elements store three [four] nodal values, even though,</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">depending on the mesh&#39;s refinement pattern some of the pressure</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">values will not be used. To eliminate the &quot;redundant&quot; pressure degrees</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">of freedom from the problem, we provide the function</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">\code</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">NavierStokesEquations&lt;DIM&gt;::pin_redundant_nodal_pressures(...)</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">\endcode</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">which pins the &quot;redundant&quot; pressure degrees of freedom</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">in all elements specified by the input argument (a vector of pointers</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">to the Navier-Stokes elements). This function must be called </span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">after the initial mesh has been created, and after each mesh adaptation.</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">The function first pins \e all nodal pressure values, using the</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">function</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">\code</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment">NavierStokesEquations&lt;DIM&gt;::pin_all_nodal_pressure_dofs()</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">\endcode</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment">and then unpins the nodal pressure values at the elements&#39; corner</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">[vertex] nodes, using the function</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">\code</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">NavierStokesEquations&lt;DIM&gt;::unpin_proper_nodal_pressure_dofs()</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment">\endcode</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">These functions are implemented as empty virtual functions</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">in the \c NavierStokesEquations&lt;DIM&gt; class which provides a base</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">class for all Navier-Stokes elements. The empty functions </span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment">are overwritten for \c QTaylorHoodElement&lt;DIM&gt; and remain empty for</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">all other Navier-Stokes elements, therefore they can be called</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">for any element type.</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">\subsection refining_CR Adaptivity for Crouzeix-Raviart elements</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">As discussed in the &lt;A HREF=&quot;../../driven_cavity/html/index.html#CR&quot;&gt;</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">previous example&lt;/A&gt;, \c oomph-lib&#39;s isoparametric 2D [3D]</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">Crouzeix-Raviart elements employ a piecewise bi- [tri-]linear, globally</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">discontinuous pressure representation. In each element, the pressure</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">is represented by bi-[tri-]linear basis functions, multiplied by 3 [4]</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">pressure values which are stored in the element&#39;s internal \c</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">Data. Since the pressure representation is discontinuous, the pressure</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">values do not have to be subjected to any constraints to ensure</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">inter-element continuity. Each \c Node stores two [three] velocity</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">degrees of freedom. Since the velocity representation is</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">isoparametric, the default assignment for the nodal values&#39; \c</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">HangInfo pointer is appropriate and no further action is required.</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">\subsection exercises Exercises</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">-# Confirm that a warning message is issued if the function </span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">   \c NavierStokesEquations&lt;DIM&gt;::pin_all_nodal_pressure_dofs()</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">   is not called following the mesh adaptation.</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">-# Investigate how the pressure distribution changes with each</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">   adaptation. [Hint: You can call \c doc_solution(...) from \c</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">   actions_after_newton_solve() to document the progress of the mesh adaptation.]</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">\section sources Source files for this tutorial</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">- The source files for this tutorial are located in the directory:</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/adaptive_driven_cavity/&quot;&gt;</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">demo_drivers/navier_stokes/adaptive_driven_cavity/</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">- The driver code is:</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/adaptive_driven_cavity/adaptive_driven_cavity.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">demo_drivers/navier_stokes/adaptive_driven_cavity/adaptive_driven_cavity.cc</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aadaptive__driven__cavity_8txt_html_ad33e7a067be743fefe8daa13c77b3861"><div class="ttname"><a href="adaptive__driven__cavity_8txt.html#ad33e7a067be743fefe8daa13c77b3861">x_2</a></div><div class="ttdeci">right subject to the Dirichlet boundary conditions f[\left. \mathbf{u}\right|_{\partial D}=(0, 0),\ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes_BC1]@\f] on top and left boundaries and f[\left. \mathbf{u}\right|_{\partial D}=(1, 0),\ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes_BC2]@\f] on the bottom f x_2</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__driven__cavity_8txt_source.html#l00102">adaptive_driven_cavity.txt:102</a></div></div>
+<div class="ttc" id="aadaptive__driven__cavity_8txt_html_a4afa3ed181dfedfd63a5a5e32727461d"><div class="ttname"><a href="adaptive__driven__cavity_8txt.html#a4afa3ed181dfedfd63a5a5e32727461d">boundary</a></div><div class="ttdeci">right subject to the Dirichlet boundary conditions f[\left. \mathbf{u}\right|_{\partial D}=(0, 0),\ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes_BC1]@\f] on top and left boundaries and f[\left. \mathbf{u}\right|_{\partial D}=(1, 0),\ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes_BC2]@\f] on the bottom boundary</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__driven__cavity_8txt_source.html#l00102">adaptive_driven_cavity.txt:102</a></div></div>
+<div class="ttc" id="aadaptive__driven__cavity_8txt_html_a3ce5a19be660a2cb18baa0cb56f5338a"><div class="ttname"><a href="adaptive__driven__cavity_8txt.html#a3ce5a19be660a2cb18baa0cb56f5338a">adaptation</a></div><div class="ttdeci">mainpage Example i e a mesh that is derived from the c RefineableMesh class An c ErrorEstimator object must be specified Two additional steps tend to be required during the adaptive solution of Navier Stokes the pressure is only determined up an arbitrary making it necessary to pin one pressure value If the pinned pressure degree of freedom is associated with an element that is unrefined during the mesh adaptation</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__driven__cavity_8txt_source.html#l00027">adaptive_driven_cavity.txt:27</a></div></div>
+<div class="ttc" id="aadaptive__driven__cavity_8txt_html_a7e98b8a17c0aad30ba64d47b74e2a6c1"><div class="ttname"><a href="adaptive__driven__cavity_8txt.html#a7e98b8a17c0aad30ba64d47b74e2a6c1">i</a></div><div class="ttdeci">i</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__driven__cavity_8txt_source.html#l00091">adaptive_driven_cavity.txt:91</a></div></div>
+<div class="ttc" id="aadaptive__driven__cavity_8txt_html_a10bd72da240e0b89c69e602ae14ebe6f"><div class="ttname"><a href="adaptive__driven__cavity_8txt.html#a10bd72da240e0b89c69e602ae14ebe6f">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__driven__cavity_8txt_source.html#l00016">adaptive_driven_cavity.txt:16</a></div></div>
+<div class="ttc" id="aadaptive__driven__cavity_8txt_html_ad99d3a8f11432df7a9ce9d267cf411bd"><div class="ttname"><a href="adaptive__driven__cavity_8txt.html#ad99d3a8f11432df7a9ce9d267cf411bd">elements</a></div><div class="ttdeci">this is required in problems where a mesh contains multiple element types In the present the mesh contains only Navier Stokes elements</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__driven__cavity_8txt_source.html#l00188">adaptive_driven_cavity.txt:188</a></div></div>
+<div class="ttc" id="aadaptive__driven__cavity_8txt_html_a0063b2e4a00edfb88588630ca06fdea6"><div class="ttname"><a href="adaptive__driven__cavity_8txt.html#a0063b2e4a00edfb88588630ca06fdea6">constant</a></div><div class="ttdeci">mainpage Example i e a mesh that is derived from the c RefineableMesh class An c ErrorEstimator object must be specified Two additional steps tend to be required during the adaptive solution of Navier Stokes the pressure is only determined up an arbitrary constant</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__driven__cavity_8txt_source.html#l00025">adaptive_driven_cavity.txt:25</a></div></div>
+<div class="ttc" id="aadaptive__driven__cavity_8txt_html_a87ad33c097db28088c9645d461948489"><div class="ttname"><a href="adaptive__driven__cavity_8txt.html#a87ad33c097db28088c9645d461948489">problems</a></div><div class="ttdeci">mainpage Example i e a mesh that is derived from the c RefineableMesh class An c ErrorEstimator object must be specified Two additional steps tend to be required during the adaptive solution of Navier Stokes problems</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__driven__cavity_8txt_source.html#l00024">adaptive_driven_cavity.txt:24</a></div></div>
+<div class="ttc" id="aadaptive__driven__cavity_8txt_html_aa38184d590f6983c27f7d12e7ef2a162"><div class="ttname"><a href="adaptive__driven__cavity_8txt.html#aa38184d590f6983c27f7d12e7ef2a162">f</a></div><div class="ttdeci">right f</div><div class="ttdef"><b>Definition:</b> <a href="adaptive__driven__cavity_8txt_source.html#l00091">adaptive_driven_cavity.txt:91</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:07:25
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

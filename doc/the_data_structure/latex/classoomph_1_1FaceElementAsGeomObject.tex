@@ -1,0 +1,225 @@
+\hypertarget{classoomph_1_1FaceElementAsGeomObject}{}\doxysection{oomph\+::Face\+Element\+As\+Geom\+Object$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1FaceElementAsGeomObject}\index{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h$>$}
+
+Inheritance diagram for oomph\+::Face\+Element\+As\+Geom\+Object$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.483444cm]{classoomph_1_1FaceElementAsGeomObject}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_ab93ac80cc645460ee51ba86823a883fe}{Face\+Element\+As\+Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor which takes a pointer to a \char`\"{}bulk\char`\"{} element, to which this element is attached. The face index, indicates the face (of the bulk element) that is to be constructed. Note that this element tends to be constructed ~\newline
+ by the doubly templated \mbox{\hyperlink{classoomph_1_1Mesh_a93e1758501aeea3328291571ce501029}{Mesh\+::build\+\_\+face\+\_\+mesh()}} and therefore has to have the same interface as the the generic \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} constructor. Hence the boundary number (within the mesh) on which this element is located must be setup afterwards! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_a86d211baa7a5bfa590c7467e863c6d07}{Face\+Element\+As\+Geom\+Object}} (const \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{Face\+Element\+As\+Geom\+Object}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_aa5971a8b6d24780bfc3c05be7a88852d}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_aa4c65d845266c0fc60bbd0d75d2951bb}{ngeom\+\_\+data}} () const
+\begin{DoxyCompactList}\small\item\em How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? None! We\textquotesingle{}re dealing with a pure geometric Finite\+Element! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_ac086288f59f368278b08894a00e990fa}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. Object doesn\textquotesingle{}t depend on any geom \mbox{\hyperlink{classoomph_1_1Data}{Data}} so we die if this gets called. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_a2835ee6ef417ec603c39a1f0f4e356f0}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Override fill in contribution to jacobian, nothing should be done. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_a13703c5fac7edda661a3c5cd1f22b9fd}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
+\begin{DoxyCompactList}\small\item\em Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_a744885ae07ad0e4091d43dd349aa699a}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers}} (const bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Unique final overrider needed for assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Class that is used to create \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} from bulk elements and to provide these \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} with a geometric object representation. The local coordinates of the Face\+Elements are used as the intrinisic coordinates for its \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} representation.
+
+These elements are used primarily to set up the interaction terms in F\+SI problems and are expected to be created from meshes so that they lie on a particular boundary of the mesh. 
+
+Definition at line 60 of file face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1FaceElementAsGeomObject_ab93ac80cc645460ee51ba86823a883fe}\label{classoomph_1_1FaceElementAsGeomObject_ab93ac80cc645460ee51ba86823a883fe}} 
+\index{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}!FaceElementAsGeomObject@{FaceElementAsGeomObject}}
+\index{FaceElementAsGeomObject@{FaceElementAsGeomObject}!oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{FaceElementAsGeomObject()}{FaceElementAsGeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{oomph\+::\+Face\+Element\+As\+Geom\+Object}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{Face\+Element\+As\+Geom\+Object}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor which takes a pointer to a \char`\"{}bulk\char`\"{} element, to which this element is attached. The face index, indicates the face (of the bulk element) that is to be constructed. Note that this element tends to be constructed ~\newline
+ by the doubly templated \mbox{\hyperlink{classoomph_1_1Mesh_a93e1758501aeea3328291571ce501029}{Mesh\+::build\+\_\+face\+\_\+mesh()}} and therefore has to have the same interface as the the generic \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} constructor. Hence the boundary number (within the mesh) on which this element is located must be setup afterwards! 
+
+
+
+Definition at line 74 of file face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), and oomph\+::\+Geom\+Object\+::set\+\_\+nlagrangian\+\_\+and\+\_\+ndim().
+
+\mbox{\Hypertarget{classoomph_1_1FaceElementAsGeomObject_a86d211baa7a5bfa590c7467e863c6d07}\label{classoomph_1_1FaceElementAsGeomObject_a86d211baa7a5bfa590c7467e863c6d07}} 
+\index{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}!FaceElementAsGeomObject@{FaceElementAsGeomObject}}
+\index{FaceElementAsGeomObject@{FaceElementAsGeomObject}!oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{FaceElementAsGeomObject()}{FaceElementAsGeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{oomph\+::\+Face\+Element\+As\+Geom\+Object}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{Face\+Element\+As\+Geom\+Object}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{Face\+Element\+As\+Geom\+Object}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 92 of file face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1FaceElementAsGeomObject_a744885ae07ad0e4091d43dd349aa699a}\label{classoomph_1_1FaceElementAsGeomObject_a744885ae07ad0e4091d43dd349aa699a}} 
+\index{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}!assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}}
+\index{assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}!oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_all\_generic\_local\_eqn\_numbers()}{assign\_all\_generic\_local\_eqn\_numbers()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{oomph\+::\+Face\+Element\+As\+Geom\+Object}}$<$ E\+L\+E\+M\+E\+NT $>$\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{const bool \&}]{store\+\_\+local\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Unique final overrider needed for assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a564ba080f68132762510b1ec9465b05d}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 171 of file face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers().
+
+\mbox{\Hypertarget{classoomph_1_1FaceElementAsGeomObject_a13703c5fac7edda661a3c5cd1f22b9fd}\label{classoomph_1_1FaceElementAsGeomObject_a13703c5fac7edda661a3c5cd1f22b9fd}} 
+\index{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}!describe\_local\_dofs@{describe\_local\_dofs}}
+\index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{oomph\+::\+Face\+Element\+As\+Geom\+Object}}$<$ E\+L\+E\+M\+E\+NT $>$\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a2a1753bed2e822d399aa3525f1bdac4b}{oomph\+::\+Element\+With\+External\+Element}}.
+
+
+
+Definition at line 163 of file face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h.
+
+
+
+References oomph\+::\+Element\+With\+External\+Element\+::describe\+\_\+local\+\_\+dofs().
+
+\mbox{\Hypertarget{classoomph_1_1FaceElementAsGeomObject_a2835ee6ef417ec603c39a1f0f4e356f0}\label{classoomph_1_1FaceElementAsGeomObject_a2835ee6ef417ec603c39a1f0f4e356f0}} 
+\index{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{oomph\+::\+Face\+Element\+As\+Geom\+Object}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Override fill in contribution to jacobian, nothing should be done. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae5fb09552a8271e891438f8d058ca1b8}{oomph\+::\+Element\+With\+External\+Element}}.
+
+
+
+Definition at line 136 of file face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FaceElementAsGeomObject_ac086288f59f368278b08894a00e990fa}\label{classoomph_1_1FaceElementAsGeomObject_ac086288f59f368278b08894a00e990fa}} 
+\index{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}!geom\_data\_pt@{geom\_data\_pt}}
+\index{geom\_data\_pt@{geom\_data\_pt}!oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{geom\_data\_pt()}{geom\_data\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{oomph\+::\+Face\+Element\+As\+Geom\+Object}}$<$ E\+L\+E\+M\+E\+NT $>$\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. Object doesn\textquotesingle{}t depend on any geom \mbox{\hyperlink{classoomph_1_1Data}{Data}} so we die if this gets called. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa119a9aaad3d2ebb54ff085726c3708d}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 122 of file face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FaceElementAsGeomObject_aa4c65d845266c0fc60bbd0d75d2951bb}\label{classoomph_1_1FaceElementAsGeomObject_aa4c65d845266c0fc60bbd0d75d2951bb}} 
+\index{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}!ngeom\_data@{ngeom\_data}}
+\index{ngeom\_data@{ngeom\_data}!oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ngeom\_data()}{ngeom\_data()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{oomph\+::\+Face\+Element\+As\+Geom\+Object}}$<$ E\+L\+E\+M\+E\+NT $>$\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? None! We\textquotesingle{}re dealing with a pure geometric Finite\+Element! 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ae09e3e0c01b6143d511f2626d2ee535c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 117 of file face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FaceElementAsGeomObject_aa5971a8b6d24780bfc3c05be7a88852d}\label{classoomph_1_1FaceElementAsGeomObject_aa5971a8b6d24780bfc3c05be7a88852d}} 
+\index{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::FaceElementAsGeomObject$<$ ELEMENT $>$@{oomph::FaceElementAsGeomObject$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject}{oomph\+::\+Face\+Element\+As\+Geom\+Object}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f76c8487d152e68a6}{oomph\+::\+Face\+Element}}.
+
+
+
+Definition at line 110 of file face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h.
+
+
+
+References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+Referenced by oomph\+::\+Compare\+Boundary\+Coordinate$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{face__element__as__geometric__object_8h}{face\+\_\+element\+\_\+as\+\_\+geometric\+\_\+object.\+h}}\end{DoxyCompactItemize}

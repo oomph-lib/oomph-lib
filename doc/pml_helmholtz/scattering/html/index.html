@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: The Helmholtz equation with perfectly matched layers</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: The Helmholtz equation with perfectly matched layers </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we discuss the finite-element-based solution of the Helmholtz equation with the Summerfeld boundary condition, an elliptic PDE that describes time-harmonic wave propagation problems. Compared to the "standard form" of the Helmholtz equation, discussed in <a href="../../../helmholtz/scattering/html/index.html">another tutorial,</a> the formulation used here allows the imposition of the Sommerfeld radiation condition by means of so-called "perfectly matched layers" (PMLs) as an alternative to classical absorbing/approximate boundary conditions or DtN maps.</p>
+<p>We start by reviewing the relevant theory and then present the solution of a simple model problem &ndash; the outward propagation of waves from the surface of a cylinder. </p><center> <table border="0">
+<tr>
+<td><center class="panel panel-default"> <div class="panel-heading"> <b>Acknowledgement</b></div><div class="panel-body"> This tutorial and the associated driver codes were developed jointly with <a href="http://imperial.academia.edu/RaduCimpeanu">Radu Cimpeanu</a> (Imperial College London) </div> </center>   </td></tr>
+</table>
+</center><h1><a class="anchor" id="theory"></a>
+Theory: The Helmholtz equation for time-harmonic scattering problems</h1>
+<p>The Helmholtz equation governs time-harmonic solutions of problems governed by the linear wave equation </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \nabla( c^2 \nabla U(x,y,t)) = \frac{\partial^2 U(x,y,t)}{\partial t^2}, \ \ \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_0.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ c $" src="form_1.png"/> is the wavespeed. Assuming that <img class="formulaInl" alt="$ U(x,y,t) $" src="form_2.png"/> is time-harmonic, with frequency <img class="formulaInl" alt="$ \omega $" src="form_3.png"/>, we write the real function <img class="formulaInl" alt="$ U(x,y,t) $" src="form_2.png"/> as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ U(x,y,t) =Re (u(x,y) \ e^{-i \omega t}) \]" src="form_4.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ u(x,y) $" src="form_5.png"/> is complex-valued. If the wavespeed is constant this transforms (1) into the <a href="../../../helmholtz/scattering/html/index.html">standard form of the Helmholtz equation</a> </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \nabla^2 u(x,y) + k^2 u(x,y) = 0 \ \ \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_6.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ k = \frac{\omega}{c} \ \ \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_7.png"/>
+</p>
+<p> is the wave number. Like other elliptic PDEs the Helmholtz equation admits Dirichlet, Neumann (flux) and Robin boundary conditions.</p>
+<p>If the equation is solved in an infinite domain (e.g. in scattering problems) the solution must satisfy the so-called <a href="http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition">Sommerfeld radiation condition</a> which in 2D has the form </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \lim_{r\to \infty} \sqrt{r} \left(\frac{\partial u}{\partial r} - iku \right) =0. \]" src="form_8.png"/>
+</p>
+<p> Mathematically, this condition is required to ensure the uniqueness of the solution (and hence the well-posedness of the problem). In a physical context, such as a scattering problem, the condition ensures that scattering of an incoming wave only produces outgoing not incoming waves from infinity.</p>
+<h1><a class="anchor" id="discr"></a>
+Discretisation by finite elements</h1>
+<p>We provide separate storage for the real and imaginary parts of the solution &ndash; each <code>Node</code> therefore stores two unknowns values. By default, the real and imaginary parts are stored as values 0 and 1, respectively; see the section <a class="el" href="index.html#numbering">The enumeration of the unknowns</a> for details.</p>
+<p>The application of Dirichlet and Neumann boundary conditions is straightforward:</p><ul>
+<li>Dirichlet conditions are imposed by pinning the relevant nodal values and setting them to the appropriate prescribed values.</li>
+<li>Neumann (flux) boundary conditions are imposed via <code>FaceElements</code> (here the <code>PMLHelmholtzFluxElements</code>). <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">As usual</a> we attach these to the faces of the "bulk" elements that are subject to the Neumann boundary conditions.</li>
+</ul>
+<p>The imposition of the Sommerfeld radiation condition for problems in infinite domains is slightly more complicated. <a href="../../../helmholtz/scattering/html/index.html">Another tutorial</a> shows how to impose this condition by means of absorbing/approximate boundary conditions or DtN maps. In the next section we will discuss an alternative approach to this problem by means of perfectly matched layers.</p>
+<h2><a class="anchor" id="pml"></a>
+Perfectly matched layers</h2>
+<p>The idea behind perfectly matched layers is illustrated in the figure below. The actual physical/mathematical problem has to be solved in the infinite domain <img class="formulaInl" alt="$ D $" src="form_9.png"/> (shown on the left), with the Sommerfeld radiation condition ensuring the suitable decay of the solution at large distances from the region of interest (the vicinity of the scatterer, say).</p>
+<p>If computations are performed in a finite computational domain, <img class="formulaInl" alt="$ D_c $" src="form_10.png"/> , (shown in the middle), spurious wave reflections are likely to be generated at the artificial boundary <img class="formulaInl" alt="$ \partial D_c $" src="form_11.png"/> of the computational domain.</p>
+<p>The idea behind PML methods is to surround the actual computational domain <img class="formulaInl" alt="$ D_c $" src="form_10.png"/> with a layer of "absorbing" material whose properties are chosen such that the outgoing waves are absorbed within it, without creating any artificial reflected waves at the interface between the PML layer and the computational domain.</p>
+<div class="image">
+<img src="pml.gif" alt=""/>
+<div class="caption">
+Sketch illustrating the idea behind perfectly matched layers. </div></div>
+ <p>Our implementation of the perfectly matched layers follows the development in <a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">A. Bermudez, L. Hervella-Nieto, A. Prieto, and R. Rodriguez "An optimal perfectly matched layer with unbounded 
+absorbing function for time-harmonic acoustic scattering problems" Journal of Computational Physics <b>223</b> 469-488 (2007)</a> and we assume the boundaries of the computational domain to be aligned with the coordinate axes, as shown in the sketch above.</p>
+<p>The method requires a slight further generalisation of the equations, achieved by introducing the complex coordinate mapping </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial}{\partial x_j} \to \frac{1}{\gamma_j} \frac{\partial}{\partial x_j} \ \ \ \ \ \ \ \ \ \ \ \ (4) \]" src="form_12.png"/>
+</p>
+<p> within the perfectly matched layers. This makes the problem anisotropic and in 2D we have </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \nabla ^ 2 u = \frac{1}{\gamma_x}\frac{\partial}{\partial x} \left( \frac{1}{\gamma_x}\frac{\partial u}{\partial x} \right) + \frac{1}{\gamma_y}\frac{\partial}{\partial y}\left( \frac{1}{\gamma_y}\frac{\partial u}{\partial y}\right) \ \ \ \ \ \ \ \ \ \ \ \ (5) \]" src="form_13.png"/>
+</p>
+<p>The choice of <img class="formulaInl" alt="$ \gamma_x $" src="form_14.png"/> and <img class="formulaInl" alt="$ \gamma_y $" src="form_15.png"/> depends on the orientation of the PML layer. Since we are restricting ourselves to axis-aligned mesh boundaries we need to distinguish three different cases, as shown in the sketch below:</p>
+<div class="image">
+<img src="pml_meshes.gif" alt=""/>
+<div class="caption">
+Sketch illustrating the geometry of the perfectly matched layers. </div></div>
+ <ul>
+<li>For layers that are aligned with the y axis (such as the left and right PML layers in the sketch) we set <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \gamma_{x}(x) = 1 +\frac{i}{k}\ \sigma_{x}(x) \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ } \sigma_{x}(x) = \frac{1}{|X_{PML}-x|}, \ \ \ \ \ (6) \]" src="form_16.png"/>
+</p>
+ where <img class="formulaInl" alt="$ X_{PML} $" src="form_17.png"/> is the x-coordinate of the outer boundary of the PML layer, and <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \gamma_y = 1. \]" src="form_18.png"/>
+</p>
+</li>
+<li>For layers that are aligned with the x axis (such as the top and bottom PML layers in the sketch) we set <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \gamma_x = 1, \]" src="form_19.png"/>
+</p>
+ and <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \gamma_{y}(y) = 1+\frac{i}{k} \ \sigma_{y}(y) \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ } \sigma_{y}(y) = \frac{1}{|Y_{PML}-y|}, \ \ \ \ \ (7) \]" src="form_20.png"/>
+</p>
+ where <img class="formulaInl" alt="$ Y_{PML} $" src="form_21.png"/> is the y-coordinate of the outer boundary of the PML layer.</li>
+<li>In corner regions that are bounded by two axis-aligned PML layers (with outer coordinates <img class="formulaInl" alt="$ X_{PML} $" src="form_17.png"/> and <br  />
+ <img class="formulaInl" alt="$ Y_{PML} $" src="form_21.png"/>) we set <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \gamma_{x}(x) = 1 +\frac{i}{k}\ \sigma_{x}(x) \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ } \sigma_{x}(x) = \frac{1}{|X_{PML}-x|} \ \ \ \ \ (8) \]" src="form_22.png"/>
+</p>
+ and <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \gamma_{y}(y) = 1+\frac{i}{k} \ \sigma_{y}(y) \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ } \sigma_{y}(y) = \frac{1}{|Y_{PML}-y|}. \ \ \ \ \ (9) \]" src="form_23.png"/>
+</p>
+</li>
+<li>Finally, in the actual computational domain (outside the PML layers) we set <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \gamma_{x}(x) = \gamma_{y}(y) = 1. \]" src="form_24.png"/>
+</p>
+</li>
+</ul>
+<h2><a class="anchor" id="impl"></a>
+Implementation of the perfectly matched layers within oomph-lib</h2>
+<p>The finite-element-discretised equations (2) (modified by the PML terms discussed above) are implemented in the <code>PMLHelmholtzEquations&lt;DIM&gt;</code> class which is templated by the spatial dimension, <code>DIM</code>. As usual, we provide fully functional elements by combining these with geometric finite elements (from the Q and T families &ndash; corresponding (in 2D) to triangles and quad elements). By default, the PML modifications are disabled, i.e. <img class="formulaInl" alt="$ \gamma_{x}(x) $" src="form_25.png"/> and <img class="formulaInl" alt="$ \gamma_{y}(y) $" src="form_26.png"/> are both set to 1.</p>
+<p>The generation of suitable 2D PML meshes along the axis-aligned boundaries of a given bulk mesh is facilitated by helper functions which automatically erect layers of (quadrilateral) PML elements. The layers are built from <code>QPMLHelmholtzElement&lt;2,NNODE_1D&gt;</code> elements and the parameter <code>NNODE_1D</code> is automatically chosen to match that of the elements in the bulk mesh. The bulk mesh can contain quads or triangles (as shown in the specific example presented below).</p>
+<p>For instance, to erect a PML layer (of width <code>width</code>, with <code>n_pml</code> elements across the width of the layer) on the "right" boundary (with boundary ID <code>b_bulk</code>) of the bulk mesh pointed to by <code>bulk_mesh_pt</code>, a call to </p><div class="fragment"><div class="line">PMLHelper::create_right_pml_mesh(bulk_mesh_pt, b_bulk, n_pml, width);</div>
+</div><!-- fragment --><p> returns a pointer to a newly-created mesh that contains the PML elements which are automatically attached to the boundary of the bulk mesh (i.e. the <code>Nodes</code> on the outer boundary of the bulk mesh are shared (pointed to), rather than duplicated, by the elements in the PML mesh). The PML-ness of the elements is automatically enabled, i.e. the functions <img class="formulaInl" alt="$ \gamma_x(x) $" src="form_27.png"/> and <img class="formulaInl" alt="$ \gamma_y(y) $" src="form_28.png"/> are set as described above. Finally, zero Dirichlet boundary conditions are applied to the real and imaginary parts of the solution on the outer boundary of the PML layer.</p>
+<p>Similar helper functions exist for PML layers on other axis-aligned boundaries, and for corner PML meshes; see the code listings provided below. Currently, we only provide this functionality for convex 2D computational domains, but the generalisation to non-convex boundaries and 3D is straightforward (if tedious) to implement (Any volunteers?).</p>
+<h1><a class="anchor" id="scattering"></a>
+A specific example: Outward propagation of acoustic waves from the surface of a cylindrical object</h1>
+<p>We will now demonstrate the methodology for a specific example: the propagation of axisymmetric waves from the surface of a circular disk. This is a good test case because any deviations from the axisymmetry of the (exact) solution by spurious reflections from the boundaries of the computational domain are easy to detect visually.</p>
+<p>The specific domain used in this case can be seen in the figure below. We create an unstructured mesh of six-noded <code>TPMLHelmholtzElements</code> to create the finite computational domain surrounding a circular disk. This is surrounded by four axis-aligned PML layers and four corner meshes (each made of nine-noded <code>QPMLHelmholtzElements</code>).</p>
+<div class="image">
+<img src="Mesh.gif" alt=""/>
+<div class="caption">
+The computational domain used in the example problem. </div></div>
+ <h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figures below show the real part of the solution <img class="formulaInl" alt="$ Re(u(x,y,t)) $" src="form_29.png"/> radiating from a circular disk with a radius of <img class="formulaInl" alt="$ r=0.1 $" src="form_30.png"/> for the case when the non-zero Dirichlet boundary conditions are imposed only on the real part of <img class="formulaInl" alt="$ u $" src="form_31.png"/> by setting </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re(u(x,y))\bigg|_{\partial D} = 0.1 \ \ \ \ \ and \ \ \ \ Im(u(x,y))\bigg|_{\partial D} = 0. \]" src="form_32.png"/>
+</p>
+<div class="image">
+<img src="Soln2D.gif" alt=""/>
+<div class="caption">
+Sample solution with activated perfectly matched layers. </div></div>
+ <div class="image">
+<img src="SolnHeight.gif" alt=""/>
+<div class="caption">
+Sample solution with activated perfectly matched layers -- height view. </div></div>
+ <p>From the two images, one can notice the clean circular solution across the domain. Had the perfectly matched layers not been effective, numerical artifacts would have been observed throughout the domain.</p>
+<p>This is demonstrated by the following two figures which show the solution obtained without the PML layers (and "do-nothing" (zero-flux) boundary conditions on the outer boundaries of the computational domain). The spurious reflections from the boundaries completely dominate the solution which bears no resemblance to the exact solution.</p>
+<div class="image">
+<img src="ZeroFlux2D.gif" alt=""/>
+<div class="caption">
+The solution with zero flux boundary conditions. </div></div>
+ <div class="image">
+<img src="ZeroFluxHeight.gif" alt=""/>
+<div class="caption">
+The solution with zero flux boundary conditions -- height view. </div></div>
+ <h1><a class="anchor" id="num_soln"></a>
+The numerical solution</h1>
+<h2><a class="anchor" id="namespace"></a>
+The global namespace</h2>
+<p>As usual, we define the problem parameters in a global namespace. After non-dimensionalisation, the only parameter is wavenumber, <img class="formulaInl" alt="$ k $" src="form_33.png"/>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===== start_of_namespace=============================================</span></div>
+<div class="line"><span class="comment">/// Namespace for the Helmholtz problem parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobalParameters.html">GlobalParameters</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Wavenumber (also known as k), k=omega/c</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobalParameters.html#a571b847702904d4cf646ac7ff17a7d2c">Wavenumber</a> = sqrt(50.0);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Square of the wavenumber (also known as k^2)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobalParameters.html#aae73cb63b27d51a87845c3392cd944eb">K_squared</a> = <a class="code" href="namespaceGlobalParameters.html#a571b847702904d4cf646ac7ff17a7d2c">Wavenumber</a> * <a class="code" href="namespaceGlobalParameters.html#a571b847702904d4cf646ac7ff17a7d2c">Wavenumber</a>;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="main"></a>
+The driver code</h2>
+<p>The driver code is very straightforward. We start by building the <code>Problem</code> object, using six-noded triangular generalised Helmholtz elements:</p>
+ <div class="fragment"><div class="line"><span class="comment">//==========start_of_main=================================================</span></div>
+<div class="line"><span class="comment">/// Solve 2D Helmholtz problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="unstructured__two__d__helmholtz_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Set up the problem with 2D six-node elements from the</span></div>
+<div class="line"> <span class="comment">// TPMLHelmholtzElement family.</span></div>
+<div class="line"> <a class="code" href="classPMLProblem.html">PMLProblem&lt;TPMLHelmholtzElement&lt;2,3&gt;</a> &gt;  <a class="code" href="scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>;</div>
+</div><!-- fragment --><p>Next we define the output directory.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Create label for output</span></div>
+<div class="line"> <span class="comment">//------------------------</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+</div><!-- fragment --><p>Finally, we solve the problem and document the results.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Solve the problem with Newton&#39;s method</span></div>
+<div class="line"> <a class="code" href="scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve();</div>
+<div class="line"> <span class="comment">//Output solution</span></div>
+<div class="line"> <a class="code" href="scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of main</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="class"></a>
+The problem class</h2>
+<p>The problem class is very similar to that employed for the <a href="../../../helmholtz/scattering/html/index.html">solution of the 2D Helmholtz equation with flux boundary conditions.</a> We provide helper functions to create the PML meshes and to apply the boundary conditions (mainly because these tasks have to be performed repeatedly in the spatially adaptive version this code which is not discussed explicitly here; but see <a class="el" href="index.html#comm_ex">Comments and Exercises</a> ).</p>
+ <div class="fragment"><div class="line"><span class="comment">//========= start_of_problem_class=====================================</span></div>
+<div class="line"><span class="comment">/// Problem class to demonstrate use of perfectly matched layers</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// for Helmholtz problems.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classPMLProblem.html">PMLProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classPMLProblem.html#ae6cc833e2485ad6d37d6dd14105bf407">PMLProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classPMLProblem.html#a4922fc5b0ef4cf43c41ee9149712adb1">~PMLProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPMLProblem.html#a13feb001d09f64dcfe44bbe3c6fe3d97">actions_before_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPMLProblem.html#ac171a6a2ff881984b3e057036cbbc414">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Doc the solution. DocInfo object stores flags/labels for where the</span></div>
+<div class="line"><span class="comment"> /// output gets written to</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPMLProblem.html#ae04985b020a9e0526ab829ca316adb26">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create PML meshes</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classPMLProblem.html#aa111bfe53d52cf6b2e1bb3b079c16d43">create_pml_meshes</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Apply boundary conditions</span></div>
+<div class="line"> <span class="keywordtype">void</span> <a class="code" href="classPMLProblem.html#a2d2cdf5c1e99a7600d91353fd0584d5c">apply_boundary_conditions</a>();</div>
+</div><!-- fragment --><p>The private member data includes pointers the bulk mesh</p>
+<div class="fragment"><div class="line"> <span class="comment">/// Pointer to the &quot;bulk&quot; mesh</span></div>
+<div class="line"> TriangleMesh&lt;ELEMENT&gt;* Bulk_mesh_pt;</div>
+</div><!-- fragment --><p>and to the various PML sub-meshes</p>
+<div class="fragment"><div class="line"> <span class="comment">/// Pointer to the right PML mesh</span></div>
+<div class="line"> Mesh* PML_right_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the top PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_top_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the left PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_left_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the bottom PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_bottom_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the top right corner PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_top_right_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the top left corner PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_top_left_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the bottom right corner PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_bottom_right_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the bottom left corner PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_bottom_left_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream Trace_file;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="constr"></a>
+The problem constructor</h2>
+<p>We start by creating the <code>Circle</code> object that defines the inner boundary of the domain.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_constructor=============================================</span></div>
+<div class="line"><span class="comment">/// Constructor for Helmholtz problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classPMLProblem.html#ae6cc833e2485ad6d37d6dd14105bf407">PMLProblem&lt;ELEMENT&gt;::PMLProblem</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> Trace_file.open(<span class="stringliteral">&quot;RESLT/trace.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create circle representing inner boundary</span></div>
+<div class="line"> <span class="keywordtype">double</span> a=0.2;</div>
+<div class="line"> <span class="keywordtype">double</span> x_c=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> y_c=0.0;</div>
+<div class="line"> Circle* inner_circle_pt=<span class="keyword">new</span> Circle(x_c,y_c,a);</div>
+</div><!-- fragment --><p>and define the polygonal outer boundary of the computational domain.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Outer boundary</span></div>
+<div class="line"> <span class="comment">//---------------</span></div>
+<div class="line"> TriangleMeshClosedCurve* outer_boundary_pt=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_segments = 20;</div>
+<div class="line"> Vector&lt;TriangleMeshCurveSection*&gt; outer_boundary_line_pt(4);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Each polyline only has three vertices, provide storage for their</span></div>
+<div class="line"> <span class="comment">// coordinates</span></div>
+<div class="line"> Vector&lt;Vector&lt;double&gt; &gt; vertex_coord(2);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">  {</div>
+<div class="line">   vertex_coord[i].resize(2);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// First polyline</span></div>
+<div class="line"> vertex_coord[0][0]=-2.0;</div>
+<div class="line"> vertex_coord[0][1]=-2.0;</div>
+<div class="line"> vertex_coord[1][0]=-2.0;</div>
+<div class="line"> vertex_coord[1][1]=2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 1st boundary polyline</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> boundary_id=2;</div>
+<div class="line"> outer_boundary_line_pt[0] = <span class="keyword">new</span> TriangleMeshPolyLine(vertex_coord,</div>
+<div class="line">                                                      boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Second boundary polyline</span></div>
+<div class="line"> vertex_coord[0][0]=-2.0;</div>
+<div class="line"> vertex_coord[0][1]=2.0;</div>
+<div class="line"> vertex_coord[1][0]=2.0;</div>
+<div class="line"> vertex_coord[1][1]=2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 2nd boundary polyline</span></div>
+<div class="line"> boundary_id=3;</div>
+<div class="line"> outer_boundary_line_pt[1] = <span class="keyword">new</span> TriangleMeshPolyLine(vertex_coord,</div>
+<div class="line">                                                      boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Third boundary polyline</span></div>
+<div class="line"> vertex_coord[0][0]=2.0;</div>
+<div class="line"> vertex_coord[0][1]=2.0;</div>
+<div class="line"> vertex_coord[1][0]=2.0;</div>
+<div class="line"> vertex_coord[1][1]=-2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 3rd boundary polyline</span></div>
+<div class="line"> boundary_id=4;</div>
+<div class="line"> outer_boundary_line_pt[2] = <span class="keyword">new</span> TriangleMeshPolyLine(vertex_coord,</div>
+<div class="line">                                                      boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fourth boundary polyline</span></div>
+<div class="line"> vertex_coord[0][0]=2.0;</div>
+<div class="line"> vertex_coord[0][1]=-2.0;</div>
+<div class="line"> vertex_coord[1][0]=-2.0;</div>
+<div class="line"> vertex_coord[1][1]=-2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 4th boundary polyline</span></div>
+<div class="line"> boundary_id=5;</div>
+<div class="line"> outer_boundary_line_pt[3] = <span class="keyword">new</span> TriangleMeshPolyLine(vertex_coord,</div>
+<div class="line">                                                      boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create the triangle mesh polygon for outer boundary</span></div>
+<div class="line"> outer_boundary_pt = <span class="keyword">new</span> TriangleMeshPolygon(outer_boundary_line_pt);</div>
+</div><!-- fragment --><p>Next we define the curvilinear inner boundary in terms of two <code>TriangleMeshCurviLines</code> which define the hole in the domain:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Inner circular boundary</span></div>
+<div class="line"> <span class="comment">//------------------------</span></div>
+<div class="line"> Vector&lt;TriangleMeshCurveSection*&gt; inner_boundary_line_pt(2);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The intrinsic coordinates for the beginning and end of the curve</span></div>
+<div class="line"> <span class="keywordtype">double</span> s_start = 0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> s_end   = MathematicalConstants::Pi;</div>
+<div class="line"> boundary_id = 0;</div>
+<div class="line"> inner_boundary_line_pt[0]=</div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshCurviLine(inner_circle_pt,</div>
+<div class="line">                            s_start,</div>
+<div class="line">                            s_end,</div>
+<div class="line">                            n_segments,</div>
+<div class="line">                            boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The intrinsic coordinates for the beginning and end of the curve</span></div>
+<div class="line"> s_start = MathematicalConstants::Pi;</div>
+<div class="line"> s_end   = 2.0*MathematicalConstants::Pi;</div>
+<div class="line"> boundary_id = 1;</div>
+<div class="line"> inner_boundary_line_pt[1]=</div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshCurviLine(inner_circle_pt,</div>
+<div class="line">                            s_start,</div>
+<div class="line">                            s_end,</div>
+<div class="line">                            n_segments,</div>
+<div class="line">                            boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Combine to hole</span></div>
+<div class="line"> <span class="comment">//----------------</span></div>
+<div class="line"> Vector&lt;TriangleMeshClosedCurve*&gt; hole_pt(1);</div>
+<div class="line"> Vector&lt;double&gt; hole_coords(2);</div>
+<div class="line"> hole_coords[0]=0.0;</div>
+<div class="line"> hole_coords[1]=0.0;</div>
+<div class="line"> hole_pt[0]=<span class="keyword">new</span> TriangleMeshClosedCurve(inner_boundary_line_pt,</div>
+<div class="line">                                        hole_coords);</div>
+</div><!-- fragment --><p>We specify the mesh parameters (including a target element size)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use the TriangleMeshParameters object for helping on the manage</span></div>
+<div class="line"> <span class="comment">// of the TriangleMesh parameters. The only parameter that needs to take</span></div>
+<div class="line"> <span class="comment">// is the outer boundary.</span></div>
+<div class="line"> TriangleMeshParameters triangle_mesh_parameters(outer_boundary_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify the closed curve using the TriangleMeshParameters object</span></div>
+<div class="line"> triangle_mesh_parameters.internal_closed_curve_pt() = hole_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Target element size in bulk mesh</span></div>
+<div class="line"> triangle_mesh_parameters.element_area() = 0.1;</div>
+</div><!-- fragment --><p>and build the bulk mesh</p>
+<div class="fragment"><div class="line"> <span class="comment">// Build &quot;bulk&quot; mesh</span></div>
+<div class="line"> Bulk_mesh_pt=<span class="keyword">new</span> TriangleMesh&lt;ELEMENT&gt;(triangle_mesh_parameters);</div>
+</div><!-- fragment --><p>We create the PML meshes and add them (and the bulk mesh) to the Problem's collection of sub-meshes and build the global mesh.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Create the main triangular mesh</span></div>
+<div class="line"> add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create PML meshes and add them to the global mesh</span></div>
+<div class="line"> create_pml_meshes();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the entire mesh from its submeshes</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p>Next we pass the problem parameters to all elements (remember that even the elements in the PML layers need to be told about these since they adjust the <img class="formulaInl" alt="$ \gamma_x $" src="form_14.png"/> and <img class="formulaInl" alt="$ \gamma_y $" src="form_15.png"/> functions in terms of these parameters), apply the boundary conditions and assign the equation numbers:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Let&#39;s have a look where the boundaries are</span></div>
+<div class="line"> this-&gt;mesh_pt()-&gt;output(<span class="stringliteral">&quot;global_mesh.dat&quot;</span>);</div>
+<div class="line"> this-&gt;mesh_pt()-&gt;output_boundaries(<span class="stringliteral">&quot;global_mesh_boundary.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = this-&gt;mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to Helmholtz bulk element</span></div>
+<div class="line">   PMLHelmholtzEquations&lt;2&gt; *el_pt =</div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>PMLHelmholtzEquations&lt;2&gt;*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the k_squared double pointer</span></div>
+<div class="line">   el_pt-&gt;k_squared_pt() = &amp;<a class="code" href="namespaceGlobalParameters.html#aae73cb63b27d51a87845c3392cd944eb">GlobalParameters::K_squared</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Apply boundary conditions</span></div>
+<div class="line"> apply_boundary_conditions();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><p>The problem is now ready to be solved.</p>
+<h2><a class="anchor" id="apply_bc"></a>
+Applying the boundary conditions</h2>
+<p>We pin both nodal values (representing the real and imaginary part of the solutions) on the inner boundaries (boundaries 0 and 1; see enumeration of the boundaries in the constructor) and assign the desired boundary values.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==================start_of_apply_boundary_conditions====================</span></div>
+<div class="line"><span class="comment">/// Apply boundary conditions</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPMLProblem.html#a2d2cdf5c1e99a7600d91353fd0584d5c">PMLProblem&lt;ELEMENT&gt;::apply_boundary_conditions</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Boundary conditions are set on the surface of the circle</span></div>
+<div class="line"> <span class="comment">// as a constant nonzero Dirichlet boundary condition</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_bound = Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;n_bound;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">if</span> ((b==0) || (b==1))</div>
+<div class="line">      {</div>
+<div class="line">       Node* nod_pt=Bulk_mesh_pt-&gt;boundary_node_pt(b,n);</div>
+<div class="line">       nod_pt-&gt;pin(0);</div>
+<div class="line">       nod_pt-&gt;pin(1);</div>
+<div class="line"> </div>
+<div class="line">       nod_pt-&gt;set_value(0,0.1);</div>
+<div class="line">       nod_pt-&gt;set_value(1,0.0);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end of apply_boundary_conditions</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="doc"></a>
+Post-processing</h2>
+<p>The post-processing function <code>doc_solution(...)</code> simply outputs the computed solution.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====================start_of_doc=======================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution: doc_info contains labels/output directory etc.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classPMLProblem.html#ae04985b020a9e0526ab829ca316adb26">PMLProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file,some_file2;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution</span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+</div><!-- fragment --><h1><a class="anchor" id="comm_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="numbering"></a>
+The enumeration of the unknowns</h2>
+<p>As discussed in the introduction, most practically relevant solutions of the Helmholtz equation are complex valued. Since <code>oomph-lib's</code> solvers only deal with real (double precision) unknowns, the equations are separated into their real and imaginary parts. In the implementation of the Helmholtz elements, we store the real and imaginary parts of the solution as two separate values at each node. By default, the real and imaginary parts are accessible via <code>Node::value(0)</code> and <code>Node::value(1)</code>. However, to facilitate the use of the elements in multi-physics problems we avoid accessing the unknowns directly in this manner but provide the virtual function </p><div class="fragment"><div class="line">std::complex&lt;unsigned&gt; HelmholtzEquations&lt;DIM&gt;::u_index_helmholtz()</div>
+</div><!-- fragment --><p> which returns a complex number made of the two unsigneds that indicate which nodal value represents the real and imaginary parts of the solution. This function may be overloaded in combined multi-physics elements in which a Helmholtz element is combined (by multiple inheritance) with another element, using the strategy described in <a href="../../../multi_physics/b_convection/html/index.html">the Boussinesq convection tutorial</a>.</p>
+<h2><a class="anchor" id="dampingfct"></a>
+PML damping functions</h2>
+<p>The choice for the absorbing functions in our implementation of the PMLs is not unique. There are alternatives varying in both order and continuity properties. The current form is the result of several feasibility studies and comparisons found in both <a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">Bermudez et al.</a> and in the relevant papers on <a href="http://imperial.academia.edu/RaduCimpeanu/Papers">Radu Cimpeanu's webpage</a>. These damping functions produce an acceptable result in most practical situations without further modifications. For very specific applications, alternatives may need to be used and can easily be implemented within the existing framework.</p>
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<h3><a class="anchor" id="pmlsize"></a>
+Changing perfectly matched layer parameters</h3>
+<p>Confirm that only a very small number of PML elements (across the thickness of the PML layer) is required to effectively damp the outgoing waves. Furthermore, show that (and try to explain why) PMLs with too many elements may not perform as expected.</p>
+<p>A second parameter that can be adjusted is the geometrical thickness of the perfectly matched layers. Relative thin layers layer tend to perform better than thick layers with few elements across their width. Confirm this and try to find an explanation for the phenomenon, given the form of the absorbing functions used in the complex coordinate transformation.</p>
+<h3><a class="anchor" id="large_k"></a>
+Large wavenumbers</h3>
+<p>For Helmholtz problems in general, ill-conditioning appears as the wavenumber becomes very large. By altering wavespeed and/or frequency, explore the limitations of both the mesh and the solver in terms of this parameter. Try adjusting the target element size in order to alleviate resolution-related effects. Assess the effectiveness of the perfectly matched layers in high wavenumber problems.</p>
+<h3><a class="anchor" id="adaptivity"></a>
+Spatial adaptivity</h3>
+<p>The driver code discussed above already contains the straightforward modifications required to enable spatial adaptivity. Explore this (by recompiling the code with -DADAPTIVE) and explain why spatial adaptivity is not particularly helpful for the test problem discussed above.</p>
+<h3><a class="anchor" id="diff_order"></a>
+Linear and cubic finite elements</h3>
+<p>The driver code also contains (commented out) modifications that allow the simulation to be performed with three-node (linear) and ten-node (cubic) triangles. Explore the performance of these elements and confirm that the helper functions correctly create matching (four-node and sixteen-node) quad elements in the PML layers.</p>
+<h3><a class="anchor" id="default"></a>
+Default values for problem parameters</h3>
+<p>Following our usual convention, we provide default values for problem parameters where this is sensible. For instance, the PML mapping function defaults to the one proposed by Bermudez et al. as this appears to be optimal. Some parameters, such as the wavenumber squared <img class="formulaInl" alt="$ k^2 $" src="form_34.png"/> do need to be set since there are no obvious defaults. If <code>oomph-lib</code> is compiled in <code>PARANOID</code> mode, an error is thrown if the relevant pointers haven't been set. Without paranoia, you get a segmentation fault...</p>
+<p>Confirm that this is the case by commenting out the relevant assignments.</p>
+<h3><a class="anchor" id="non_convex"></a>
+Non-convex PML boundaries</h3>
+<p>As discussed above, we currently provide helper functions to attach PML layers to axis-aligned boundaries of 2D meshes with convex outer boundaries. Essentially, this restricts us to rectangular computational domains. Extend this capability by developing methodologies to</p><ul>
+<li>deal with non-convex domain boundaries. We suggest you create PML meshes for the non-convex corners first, then create the axis-aligned meshes (note that these have to share nodes with the already-created elements that occupy the non-convex corners), and then create the corner meshes for the convex corners (as before). When you're done, let us know &ndash; this would be a really useful addition to oomph-lib's machinery. We're happy to help!</li>
+<li>Repeat the same exercise in 3D &ndash; somewhat less trivial (so we're even keener for somebody to have a go!)</li>
+</ul>
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/pml_helmholtz/scattering">demo_drivers/pml_helmholtz/scattering/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/pml_helmholtz/scattering/unstructured_two_d_helmholtz.cc">demo_drivers/pml_helmholtz/scattering/unstructured_two_d_helmholtz.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassPMLProblem_html"><div class="ttname"><a href="classPMLProblem.html">PMLProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00075">unstructured_two_d_helmholtz.cc:75</a></div></div>
+<div class="ttc" id="aclassPMLProblem_html_a4922fc5b0ef4cf43c41ee9149712adb1"><div class="ttname"><a href="classPMLProblem.html#a4922fc5b0ef4cf43c41ee9149712adb1">PMLProblem::~PMLProblem</a></div><div class="ttdeci">~PMLProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00084">unstructured_two_d_helmholtz.cc:84</a></div></div>
+<div class="ttc" id="ascattering_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="scattering_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="scattering_8txt_source.html#l00006">scattering.txt:6</a></div></div>
+<div class="ttc" id="anamespaceGlobalParameters_html"><div class="ttname"><a href="namespaceGlobalParameters.html">GlobalParameters</a></div><div class="ttdoc">Namespace for the Helmholtz problem parameters.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00054">unstructured_two_d_helmholtz.cc:54</a></div></div>
+<div class="ttc" id="aunstructured__two__d__helmholtz_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="unstructured__two__d__helmholtz_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Solve 2D Helmholtz problem.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00631">unstructured_two_d_helmholtz.cc:631</a></div></div>
+<div class="ttc" id="anamespaceGlobalParameters_html_aae73cb63b27d51a87845c3392cd944eb"><div class="ttname"><a href="namespaceGlobalParameters.html#aae73cb63b27d51a87845c3392cd944eb">GlobalParameters::K_squared</a></div><div class="ttdeci">double K_squared</div><div class="ttdoc">Square of the wavenumber (also known as k^2)</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00061">unstructured_two_d_helmholtz.cc:61</a></div></div>
+<div class="ttc" id="aclassPMLProblem_html_ae04985b020a9e0526ab829ca316adb26"><div class="ttname"><a href="classPMLProblem.html#ae04985b020a9e0526ab829ca316adb26">PMLProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00453">unstructured_two_d_helmholtz.cc:453</a></div></div>
+<div class="ttc" id="aclassPMLProblem_html_ac171a6a2ff881984b3e057036cbbc414"><div class="ttname"><a href="classPMLProblem.html#ac171a6a2ff881984b3e057036cbbc414">PMLProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00090">unstructured_two_d_helmholtz.cc:90</a></div></div>
+<div class="ttc" id="aclassPMLProblem_html_a2d2cdf5c1e99a7600d91353fd0584d5c"><div class="ttname"><a href="classPMLProblem.html#a2d2cdf5c1e99a7600d91353fd0584d5c">PMLProblem::apply_boundary_conditions</a></div><div class="ttdeci">void apply_boundary_conditions()</div><div class="ttdoc">Apply boundary conditions.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00422">unstructured_two_d_helmholtz.cc:422</a></div></div>
+<div class="ttc" id="aclassPMLProblem_html_a13feb001d09f64dcfe44bbe3c6fe3d97"><div class="ttname"><a href="classPMLProblem.html#a13feb001d09f64dcfe44bbe3c6fe3d97">PMLProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00087">unstructured_two_d_helmholtz.cc:87</a></div></div>
+<div class="ttc" id="aclassPMLProblem_html_aa111bfe53d52cf6b2e1bb3b079c16d43"><div class="ttname"><a href="classPMLProblem.html#aa111bfe53d52cf6b2e1bb3b079c16d43">PMLProblem::create_pml_meshes</a></div><div class="ttdeci">void create_pml_meshes()</div><div class="ttdoc">Create PML meshes.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00530">unstructured_two_d_helmholtz.cc:530</a></div></div>
+<div class="ttc" id="anamespaceGlobalParameters_html_a571b847702904d4cf646ac7ff17a7d2c"><div class="ttname"><a href="namespaceGlobalParameters.html#a571b847702904d4cf646ac7ff17a7d2c">GlobalParameters::Wavenumber</a></div><div class="ttdeci">double Wavenumber</div><div class="ttdoc">Wavenumber (also known as k), k=omega/c.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00058">unstructured_two_d_helmholtz.cc:58</a></div></div>
+<div class="ttc" id="aclassPMLProblem_html_ae6cc833e2485ad6d37d6dd14105bf407"><div class="ttname"><a href="classPMLProblem.html#ae6cc833e2485ad6d37d6dd14105bf407">PMLProblem::PMLProblem</a></div><div class="ttdeci">PMLProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__two__d__helmholtz_8cc_source.html#l00165">unstructured_two_d_helmholtz.cc:165</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:31:09
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

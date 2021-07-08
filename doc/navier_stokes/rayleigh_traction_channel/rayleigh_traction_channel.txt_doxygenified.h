@@ -1,0 +1,456 @@
+/**
+
+\mainpage Example problem: Unsteady flow in a 2D channel, driven by an applied traction
+
+In this example we consider a variation of the unsteady 2D channel
+flow problem considered elsewhere. In the 
+<A HREF="../../rayleigh_channel/html/index.html">previous example</A>
+the flow was driven by the imposed wall motion. Here we shall consider 
+the case in which the flow is driven by an applied traction 
+\f$ {\bf t}^{[prescribed]}\f$ which balances the fluid stress so that
+\f[
+t_i^{[prescribed]} = \tau_{ij} \ n_j = 
+\left( -p\ \delta_{ij} + 
+\left(\frac{\partial u_i}{\partial x_j} + 
+\frac{\partial u_j}{\partial x_i}\right)\right) n_j
+ \ \ \ \ \ \ \ \ \ \ (1)
+\f]
+along the upper, horizontal boundary of the channel.
+Here \f$ n_j \f$ is the outward unit normal, \f$ \delta_{ij} \f$
+is the Kronecker delta and \f$ \tau_{ij} \f$ the stress tensor. \c
+oomph-lib provides traction elements that can be applied along a
+domain boundary to (weakly) impose the above boundary condition. 
+The traction elements are used in the same way as flux-elements in the 
+<A HREF="../../../poisson/two_d_poisson_flux_bc/html/index.html">
+Poisson </A> and 
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">
+unsteady heat</A> examples. The section \ref comments at the end
+of this documents provides more detail on the underlying theory and 
+its implementation in \c oomph-lib.
+
+<HR>
+<HR>
+
+\section example The example problem
+We consider the unsteady finite-Reynolds-number flow in a 2D channel
+that is driven by an applied traction along its upper boundary.
+
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>Unsteady flow in a 2D channel, driven by an applied traction.</B>
+</CENTER> 
+Here is a sketch of the problem:
+
+\image html rayleigh_traction_channel.gif "Sketch of the problem. " 
+\image latex rayleigh_traction_channel.eps "Sketch of the problem. " width=0.75\textwidth
+
+The flow is governed by the 2D unsteady Navier-Stokes equations,
+
+\f[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right),
+ \ \ \ \ \ \ \ \ \ \ (2)
+\f]
+and
+\f[
+\frac{\partial u_i}{\partial x_i} = 0,
+\f]
+in the square domain 
+\f[
+D = \bigg\{(x_1,x_2) \ | \ x_1 \in [0,1], \ x_2 \in [0,1] \bigg\}.
+\f]
+We apply the Dirichlet (no-slip) boundary condition
+\f[
+\left. \mathbf{u}\right|_{\partial D_{lower}}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (3)
+\f]
+on the lower, stationary wall, \f$ \partial D_{lower} = 
+\big\{(x_1,x_2) \ | \ x_2=0 \big\} \f$ and
+the traction
+\f[
+\mathbf{t}^{[prescribed]}= (\tau(t), 0)
+\ \ \ \ \ \ \ \ \ \ (4)
+\f]
+where \f$ \tau(t)\f$ is a given function, on the upper boundary, 
+\f$ \partial D_{upper} = \big\{(x_1,x_2) \ | \ x_2=1 \big\} \f$ .
+As in the 
+<A HREF="../../rayleigh_channel/html/index.html">previous example</A>
+we apply periodic boundary conditions on the "left" and "right" boundaries:
+\f[
+\left.\mathbf{u}\right|_{x_1=0} = \left.\mathbf{u}\right|_{x_1=1}.
+\ \ \ \ \ \ \ \ \ \ (5)
+\f]
+Initial conditions for the velocities are given by
+\f[
+{\bf u}(x_1,x_2,t=0) = {\bf u}_{IC}(x_1,x_2),
+\f]
+where \f$ {\bf u}_{IC}(x_1,x_2)\f$ is given.
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+
+\subsection solution An exact, parallel-flow solution
+
+We choose the prescribed traction \f$ {\bf t}^{[prescribed]} =
+(\tau(t), 0) \f$ such
+that the parallel-flow solution 
+\f[
+{\bf u}_{exact}(x_1,x_2,t) = U(x_2,t) \ {\bf e}_1 \mbox{ \ \ \ \ \ and
+\ \ \ \ }
+p_{exact}(x_1,x_2,t) = 0,
+\f]
+derived in the 
+<A HREF="../../rayleigh_channel/html/index.html">previous example</A>
+remains valid. For this purpose we set
+\f[
+\tau(t) = \left. \frac{\partial U(x_2,t)}{\partial x_2}\right|_{x_2=1},
+\f]
+where 
+\f[
+U(x_2,t) = Re\left\{\frac{e^{i\omega
+t}}{e^{i\lambda}-e^{-i\lambda}}\left(e^{i\lambda y}-e^{-i\lambda y}
+\right)\right\}
+\f]
+and
+\f[
+\lambda = i\sqrt{i\omega Re\, St}.
+\f]
+<HR>
+
+\section results Results
+The two animations below show the computed solutions obtained from
+a spatial discretisation with Taylor-Hood and Crouzeix-Raviart
+elements, respectively. In both cases we set \f$ \omega=2\pi, \ Re =
+ReSt = 10 \f$ and specified the exact, time-periodic solution as the
+initial condition, i.e. \f$ {\bf u}_{IC}(x_1,x_2) = {\bf
+u}_{exact}(x_1,x_2,t=0)\f$ . The computed solutions agree extremely
+well with the exact solution throughout the simulation.
+
+\image html velocity_vectors_CR.gif "Plot of the velocity field computed with 2D Crouzeix-Raviart elements, starting from the exact, time-periodic solution. " 
+\image latex velocity_vectors_CR.eps "Plot of the velocity field computed with 2D Crouzeix-Raviart elements, starting from the exact, time-periodic solution. " width=0.75\textwidth
+
+\image html velocity_vectors_TH.gif "Plot of the velocity field computed with 2D Taylor-Hood elements, starting from the exact, time-periodic solution. " 
+\image latex velocity_vectors_TH.eps "Plot of the velocity field computed with 2D Taylor-Hood elements, starting from the exact, time-periodic solution. " width=0.75\textwidth
+
+<HR>
+<HR>
+
+\section namespace The global parameters
+
+As usual, we use a namespace to define the problem parameters, the
+Reynolds number, \f$ Re\f$, and the Womersley number, \f$ Re\, St\f$ .
+We also provide two flags that indicate the length of the run 
+(to allow a short run to be performed when the code is run as a self-test),
+and the initial condition (allowing a start from \f$ {\bf u}_{exact}\f$ or 
+an impulsive start in which the fluid is initially at rest).
+ 
+\dontinclude rayleigh_traction_channel.cc
+\skipline start_of_namespace
+\until end of namespace
+
+<HR> 
+<HR>
+
+\section exact The exact solution
+We use a second namespace to define the time-periodic, parallel flow 
+\f$ {\bf u}_{exact}\f$, and the traction \f$ {\bf t}^{[prescribed]}\f$ 
+required to make  \f$ {\bf u}_{exact}\f$ a solution of the problem. 
+
+\dontinclude rayleigh_traction_channel.cc
+\skipline start_of_exact_solution
+\until // end of exact_solution
+
+<HR>
+<HR>
+
+\section main The driver code
+
+
+As in the 
+<A HREF="../../rayleigh_channel/html/index.html">previous example</A>
+we use optional command line arguments to specify which mode
+the code is run in: Either as a short or a long run (indicated by
+the first command line argument being 0 or 1, respectively), and with
+initial conditions corresponding to an impulsive start or a start
+from the time-periodic exact solution (indicated by the second command 
+line argument being 1 or 0, respectively). If no command line arguments are
+specified the code is run in the default mode, specified by
+parameter values assigned in the namespace \c Global_Parameters.
+
+\skipline main
+\until Global_Parameters::Impulsive_start_flag << std::endl;
+
+Next we set the physical and mesh parameters.
+
+\until ny=
+
+Finally we set up \c DocInfo objects and solve for both Taylor-Hood
+elements and Crouzeix-Raviart elements.
+
+\until end of main
+
+<HR>
+<HR>
+
+\section problem The problem class 
+The problem class remains similar to that in the 
+<A HREF="../../rayleigh_channel/html/index.html"> previous
+example</A>. Since we are no longer driving the flow by prescribing
+a time-periodic tangential velocity at the upper wall, the
+function \c actions_before_implicit_timestep() can remain empty.
+
+\dontinclude rayleigh_traction_channel.cc
+\skipline start_of_problem_class
+\until set_initial_condition
+
+The function \c create_traction_elements(...) (discussed in
+more detail below) creates the traction elements and "attaches"
+them to the specified boundary of the "bulk" mesh.
+
+\until surface_mesh_pt);
+
+The traction boundary condition sets the pressure so 
+the function \c fix_pressure(...)  used in the 
+<A HREF="../../rayleigh_channel/html/index.html"> previous
+example</A> is no longer required. The problem's private
+member data contains pointers to the bulk and surface meshes
+and the output stream that we use to record the time-trace
+of the solution.
+
+\until end of problem_class 
+
+<HR>
+<HR>
+
+\section constructor The problem constructor
+We start by building the timestepper, determining its type from the
+class's second template argument, and pass a pointer to it to 
+the Problem, using the function \c Problem::add_time_stepper_pt(...).
+
+\skipline start_of_constructor
+\until add_time_stepper_pt
+
+Next we build the periodic bulk mesh,
+
+\until time_stepper_pt()
+
+and the surface mesh,
+
+\until new Mesh;
+
+and use the function \c create_traction_elements(...) to populate it 
+with traction elements that attach themselves to the specified 
+boundary (2) of the bulk mesh.
+
+\until create
+
+ We add both sub-meshes to the \c Problem, using the function
+\c Problem::add_sub_mesh(...) and use the function 
+\c Problem::build_global_mesh() to combine the sub-meshes into the
+\c Problem's single,  global mesh.
+
+\until build_global_mesh
+
+We apply Dirichlet boundary conditions where required: No-slip on 
+the stationary, lower wall, at \f$ x_2=0 \f$, parallel outflow 
+on the left and right boundaries, at \f$ x_1=0 \f$ and \f$ x_1=1 \f$.
+No velocity boundary conditions are applied at the "upper" boundary,
+at \f$ x_2=1 \f$, where the traction boundary condition is applied.
+
+\until end loop over boundaries
+
+Next we pass the pointers to the Reynolds and Strouhal numbers, 
+\f$ Re \f$, \f$ Re\, St \f$, to the bulk elements.
+
+\until }
+
+Finally we pass pointers to the applied traction function
+to the traction elements and assign the equation 
+numbers.
+
+\until end of constructor
+
+
+
+<HR>
+<HR>
+
+\section traction Create traction elements
+
+The creation of the traction elements is performed exactly 
+as in the <A HREF="../../../poisson/two_d_poisson_flux_bc2/html/index.html">
+Poisson </A> and 
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">
+unsteady heat</A> problems with flux boundary
+conditions, discussed earlier. We obtain pointers to the "bulk"
+elements that are adjacent to the specified boundary of the bulk mesh
+from the function \c Mesh::boundary_element_pt(...), determine which of the
+elements' local coordinate(s) are constant along that boundary, and
+pass these parameters to the constructors of the traction elements
+which "attach" themselves to the appropriate face of the
+"bulk" element. Finally, we store the pointers to the newly created
+traction elements in the surface mesh.
+
+
+\skipline start_of_create_traction_elements
+\until  end of create_traction_elements
+\
+<HR>
+<HR>
+
+\section IC Initial conditions
+The function \c set_initial_conditions(...) remains the same as in the 
+<A HREF="../../rayleigh_channel/html/index.html#IC"> previous
+example</A>.
+
+
+<HR>
+<HR>
+
+\section doc Post processing
+The function \c doc_solution(...) remains the same as in the 
+<A HREF="../../rayleigh_channel/html/index.html#doc"> previous
+example</A>.
+
+<HR>
+<HR>
+
+\section unsteady_run The timestepping loop
+The function \c unsteady_run(...) remains the same as in the 
+<A HREF="../../rayleigh_channel/html/index.html#unsteady_run"> previous
+example</A>, except that the default number of timesteps is
+increased to 500.
+
+<HR>
+<HR>
+
+\section comments Comments and Exercises
+\subsection traction_theory How do the traction elements work?
+The finite element solution of the Navier-Stokes equations is
+based on their weak form, obtained by weighting the
+stress-divergence form of the momentum equations
+\f[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j}\right) =
+\frac{\partial \tau_{ij}}{\partial x_j},
+ \ \ \ \ \ \ \ \ \ \ (6)
+\f]
+with the global test functions \f$ \psi_l \f$, and integrating
+by parts to obtain the discrete residuals
+\f[
+f_{il} = 
+\int_D \left[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j}\right)  \ \psi_l +
+ \tau_{ij} \ \frac{\partial \psi_l}{\partial x_j}   \right] \, dV -
+\int_{\partial D}  \tau_{ij} \ n_j \ \psi_l \ dS = 0.
+ \ \ \ \ \ \ \ \ \ \ (7)
+\f]
+The volume integral in this residual is computed by
+the "bulk" Navier-Stokes elements. 
+<A HREF="../../../intro/html/index.html#galerkin">Recall</A> 
+that in the residual 
+for the \f$ i \f$ -th momentum equation, the global test functions 
+\f$ \psi_l \f$ vanish on those parts of the domain boundary 
+\f$ \partial D\f$ where the \f$ i \f$ -th
+velocity component is prescribed by Dirichlet boundary conditions.
+On such boundaries, the surface integral in
+(7) vanishes
+because \f$ \psi_l=0. \f$ If the velocity on a certain part of the
+domain boundary, \f$ \partial D_{natural} \subset \partial D\f$, 
+is not prescribed by Dirichlet boundary conditions and the
+surface integral over \f$ \partial D_{natural} \f$ is not added 
+to the discrete residual, the velocity degrees of freedom on those
+boundaries are regarded as unknowns and the "traction-free"
+(or natural) boundary condition
+\f[
+\tau_{ij} \ n_j = 0 \mbox{ \ \ \ on \ \  $\partial D_{natural}$}
+\f]
+is "implied". Finally, traction boundary conditions of the form
+(1) may be applied along a
+part, \f$ \partial D_{traction} \subset \partial D\f$, of the 
+domain boundary. The surface integral along this part of the
+domain boundary is given by
+\f[
+\int_{\partial D_{traction} }  \tau_{ij} \ n_j \ \psi_l \ dS = 
+\int_{\partial D_{traction} }  t_i^{[prescribed]} \ \psi_l \ dS,
+ \ \ \ \ \ \ \ \ \ \ (8)
+\f]
+where  \f$ t_i^{[prescribed]}  \f$ is given,
+and it is this contribution that the traction elements add 
+to the residual of the momentum equations. 
+ 
+<HR>
+
+\subsection ex Exercises
+-# Pin the vertical velocity along the upper boundary, \f$ x_2 = 1\f$,
+   and compare the results against those obtained with the original 
+   version of the code. How does the change affect the velocity field?
+   Why is pressure likely to change?
+-# Pin the horizontal velocity along the upper boundary, \f$ x_2 = 1\f$,
+   and start the simulation with an impulsive start. 
+   Compare the results against those obtained with the original
+   version of the code and explain your findings, referring to the
+   theory provided in the section \ref traction_theory .
+-# Run the code with an impulsive start and confirm that it takes
+   longer for the solution to approach the time-periodic
+   solution than in the 
+   <A HREF="../../rayleigh_channel/html/index.html">  previous case</A> 
+   where the flow was driven by the wall motion. [Here are some
+   animations of the velocity fields obtained following 
+   an impulsive start, for a discretisation with 
+   <A HREF="../figures/velocity_vectors_TH.avi"> Taylor-Hood
+   elements</A> and <A HREF="../figures/velocity_vectors_CR.avi"> 
+   Crouzeix-Raviart elements</A>.]
+-# Investigate the effects of applying a non-zero value for \f$ t_2
+   \f$ on the top boundary.
+
+
+
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/rayleigh_traction_channel/">
+demo_drivers/navier_stokes/rayleigh_traction_channel/
+</A>
+</CENTER>
+- The driver code is:
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/rayleigh_traction_channel/rayleigh_traction_channel.cc">
+demo_drivers/navier_stokes/rayleigh_traction_channel/rayleigh_traction_channel.cc
+</A>
+</CENTER>
+.
+
+
+
+
+
+
+
+
+
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

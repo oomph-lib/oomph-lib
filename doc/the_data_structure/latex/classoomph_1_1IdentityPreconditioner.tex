@@ -1,0 +1,183 @@
+\hypertarget{classoomph_1_1IdentityPreconditioner}{}\doxysection{oomph\+::Identity\+Preconditioner Class Reference}
+\label{classoomph_1_1IdentityPreconditioner}\index{oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}}
+
+
+The Identity \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}.  
+
+
+
+
+{\ttfamily \#include $<$preconditioner.\+h$>$}
+
+Inheritance diagram for oomph\+::Identity\+Preconditioner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1IdentityPreconditioner}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IdentityPreconditioner_a5717f665ff04be550321d69bf2ecf58e}{Identity\+Preconditioner}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1IdentityPreconditioner_a95aeefc49b7cf4171566b4c5b0edb04a}{Identity\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner_a1a87e0d6233505b9f7d114c7d666ef11}{operator=}} (const \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner_a3e24cbb18f15b0ee32856b69a04e00e8}{$\sim$\+Identity\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner_a7a747d5499c2b04a9ecedcf97d41ede8}{setup}} ()
+\begin{DoxyCompactList}\small\item\em setup method -\/ just sets the distribution \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner_a8daf11465066158a258b5996984490af}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Apply the preconditioner. This method should apply the preconditioner operator to the vector r and return the vector z. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner_a15750aab956899d874149e7dd4ffeed8}{preconditioner\+\_\+solve\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Apply the preconditioner. This method should apply the preconditioner operator to the vector r and return the vector z. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+The Identity \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}. 
+
+Definition at line 247 of file preconditioner.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1IdentityPreconditioner_a5717f665ff04be550321d69bf2ecf58e}\label{classoomph_1_1IdentityPreconditioner_a5717f665ff04be550321d69bf2ecf58e}} 
+\index{oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}!IdentityPreconditioner@{IdentityPreconditioner}}
+\index{IdentityPreconditioner@{IdentityPreconditioner}!oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}}
+\doxysubsubsection{\texorpdfstring{IdentityPreconditioner()}{IdentityPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Identity\+Preconditioner\+::\+Identity\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 253 of file preconditioner.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1IdentityPreconditioner_a95aeefc49b7cf4171566b4c5b0edb04a}\label{classoomph_1_1IdentityPreconditioner_a95aeefc49b7cf4171566b4c5b0edb04a}} 
+\index{oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}!IdentityPreconditioner@{IdentityPreconditioner}}
+\index{IdentityPreconditioner@{IdentityPreconditioner}!oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}}
+\doxysubsubsection{\texorpdfstring{IdentityPreconditioner()}{IdentityPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Identity\+Preconditioner\+::\+Identity\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 256 of file preconditioner.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1IdentityPreconditioner_a3e24cbb18f15b0ee32856b69a04e00e8}\label{classoomph_1_1IdentityPreconditioner_a3e24cbb18f15b0ee32856b69a04e00e8}} 
+\index{oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}!````~IdentityPreconditioner@{$\sim$IdentityPreconditioner}}
+\index{````~IdentityPreconditioner@{$\sim$IdentityPreconditioner}!oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}}
+\doxysubsubsection{\texorpdfstring{$\sim$IdentityPreconditioner()}{~IdentityPreconditioner()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Identity\+Preconditioner\+::$\sim$\+Identity\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line 268 of file preconditioner.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1IdentityPreconditioner_a1a87e0d6233505b9f7d114c7d666ef11}\label{classoomph_1_1IdentityPreconditioner_a1a87e0d6233505b9f7d114c7d666ef11}} 
+\index{oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Identity\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 262 of file preconditioner.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1IdentityPreconditioner_a8daf11465066158a258b5996984490af}\label{classoomph_1_1IdentityPreconditioner_a8daf11465066158a258b5996984490af}} 
+\index{oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Identity\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Apply the preconditioner. This method should apply the preconditioner operator to the vector r and return the vector z. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 296 of file preconditioner.\+h.
+
+
+
+References oomph\+::\+Double\+Vector\+::built(), and oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt().
+
+
+
+Referenced by preconditioner\+\_\+solve\+\_\+transpose().
+
+\mbox{\Hypertarget{classoomph_1_1IdentityPreconditioner_a15750aab956899d874149e7dd4ffeed8}\label{classoomph_1_1IdentityPreconditioner_a15750aab956899d874149e7dd4ffeed8}} 
+\index{oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}!preconditioner\_solve\_transpose@{preconditioner\_solve\_transpose}}
+\index{preconditioner\_solve\_transpose@{preconditioner\_solve\_transpose}!oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve\_transpose()}{preconditioner\_solve\_transpose()}}
+{\footnotesize\ttfamily void oomph\+::\+Identity\+Preconditioner\+::preconditioner\+\_\+solve\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Apply the preconditioner. This method should apply the preconditioner operator to the vector r and return the vector z. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a1e469ffc87f31f6f2eebbe5ccf03d78b}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 329 of file preconditioner.\+h.
+
+
+
+References preconditioner\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1IdentityPreconditioner_a7a747d5499c2b04a9ecedcf97d41ede8}\label{classoomph_1_1IdentityPreconditioner_a7a747d5499c2b04a9ecedcf97d41ede8}} 
+\index{oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::IdentityPreconditioner@{oomph::IdentityPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Identity\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+setup method -\/ just sets the distribution 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 271 of file preconditioner.\+h.
+
+
+
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Preconditioner\+::comm\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Preconditioner\+::matrix\+\_\+pt(), and oomph\+::\+Double\+Matrix\+Base\+::nrow().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{preconditioner_8h}{preconditioner.\+h}}\end{DoxyCompactItemize}

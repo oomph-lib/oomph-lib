@@ -1,0 +1,106 @@
+\hypertarget{classoomph_1_1AlgebraicElement}{}\doxysection{oomph\+::Algebraic\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1AlgebraicElement}\index{oomph::AlgebraicElement$<$ ELEMENT $>$@{oomph::AlgebraicElement$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$algebraic\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Algebraic\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.165506cm]{classoomph_1_1AlgebraicElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicElement_acc029b6daf56771f0f691e9e82d3f674}{Algebraic\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor -- simply calls the constructor of the underlying E\+L\+E\+M\+E\+NT. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicElement_af4ad322eea2c6fab36c1a74c18ecd781}{Algebraic\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Constructor for face elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicElement_a2a0f43e92929bc56efa19ce12613c605}{Algebraic\+Element}} (const \mbox{\hyperlink{classoomph_1_1AlgebraicElement}{Algebraic\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicElement_a46a4575a8a218302acb4753b1675fdd7}{$\sim$\+Algebraic\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Algebraic\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Algebraic elements are elements that have Algebraic\+Nodes whose position is determined by the geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} in the Geom\+Objects that are involved in their node update functions. Algebraic Elements include the derivatives w.\+r.\+t. any unknowns that are stored in this geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} into the element\textquotesingle{}s Jacobian matrix. Otherwise they behave exactly like the templace element. 
+
+Definition at line 559 of file algebraic\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1AlgebraicElement_acc029b6daf56771f0f691e9e82d3f674}\label{classoomph_1_1AlgebraicElement_acc029b6daf56771f0f691e9e82d3f674}} 
+\index{oomph::AlgebraicElement$<$ ELEMENT $>$@{oomph::AlgebraicElement$<$ ELEMENT $>$}!AlgebraicElement@{AlgebraicElement}}
+\index{AlgebraicElement@{AlgebraicElement}!oomph::AlgebraicElement$<$ ELEMENT $>$@{oomph::AlgebraicElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicElement()}{AlgebraicElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicElement}{oomph\+::\+Algebraic\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1AlgebraicElement}{Algebraic\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor -- simply calls the constructor of the underlying E\+L\+E\+M\+E\+NT. 
+
+
+
+Definition at line 568 of file algebraic\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicElement_af4ad322eea2c6fab36c1a74c18ecd781}\label{classoomph_1_1AlgebraicElement_af4ad322eea2c6fab36c1a74c18ecd781}} 
+\index{oomph::AlgebraicElement$<$ ELEMENT $>$@{oomph::AlgebraicElement$<$ ELEMENT $>$}!AlgebraicElement@{AlgebraicElement}}
+\index{AlgebraicElement@{AlgebraicElement}!oomph::AlgebraicElement$<$ ELEMENT $>$@{oomph::AlgebraicElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicElement()}{AlgebraicElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicElement}{oomph\+::\+Algebraic\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1AlgebraicElement}{Algebraic\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for face elements. 
+
+
+
+Definition at line 574 of file algebraic\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicElement_a2a0f43e92929bc56efa19ce12613c605}\label{classoomph_1_1AlgebraicElement_a2a0f43e92929bc56efa19ce12613c605}} 
+\index{oomph::AlgebraicElement$<$ ELEMENT $>$@{oomph::AlgebraicElement$<$ ELEMENT $>$}!AlgebraicElement@{AlgebraicElement}}
+\index{AlgebraicElement@{AlgebraicElement}!oomph::AlgebraicElement$<$ ELEMENT $>$@{oomph::AlgebraicElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicElement()}{AlgebraicElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicElement}{oomph\+::\+Algebraic\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1AlgebraicElement}{Algebraic\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AlgebraicElement}{Algebraic\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 582 of file algebraic\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1AlgebraicElement_a46a4575a8a218302acb4753b1675fdd7}\label{classoomph_1_1AlgebraicElement_a46a4575a8a218302acb4753b1675fdd7}} 
+\index{oomph::AlgebraicElement$<$ ELEMENT $>$@{oomph::AlgebraicElement$<$ ELEMENT $>$}!````~AlgebraicElement@{$\sim$AlgebraicElement}}
+\index{````~AlgebraicElement@{$\sim$AlgebraicElement}!oomph::AlgebraicElement$<$ ELEMENT $>$@{oomph::AlgebraicElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$AlgebraicElement()}{~AlgebraicElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicElement}{oomph\+::\+Algebraic\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1AlgebraicElement}{Algebraic\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Empty Destructor must clean up the allocated memory 
+
+Definition at line 595 of file algebraic\+\_\+elements.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__elements_8h}{algebraic\+\_\+elements.\+h}}\end{DoxyCompactItemize}

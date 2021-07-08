@@ -1,0 +1,828 @@
+\hypertarget{classoomph_1_1ChannelWithLeafletDomain}{}\doxysection{oomph\+::Channel\+With\+Leaflet\+Domain Class Reference}
+\label{classoomph_1_1ChannelWithLeafletDomain}\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+
+
+{\ttfamily \#include $<$channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Channel\+With\+Leaflet\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1ChannelWithLeafletDomain}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a6cca7d06136de0c76facec2a92b0939e}{Channel\+With\+Leaflet\+Domain}} (\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a91d7d8d2f564c5e9d2ee07449b2653c9}{leaflet\+\_\+pt}}, const double \&\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a5538092062970dbd2f02218a05639d49}{lleft}}, const double \&\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aee74846110e70cd5538386e1ccb0ce7c}{lright}}, const double \&\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_af70ada72d505ebea468d1000b04c20e1}{hleaflet}}, const double \&\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aaf195c688423473ed97af61f8a1467ab}{htot}}, const unsigned \&nleft, const unsigned \&nright, const unsigned \&ny1, const unsigned \&ny2)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to Geom\+Object that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a7f00e3d9ed53ca70519671446fe60510}{$\sim$\+Channel\+With\+Leaflet\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aaf195c688423473ed97af61f8a1467ab}{htot}} ()
+\begin{DoxyCompactList}\small\item\em Total height of domain (width of channel) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_af70ada72d505ebea468d1000b04c20e1}{hleaflet}} ()
+\begin{DoxyCompactList}\small\item\em Height of leaflet. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a5538092062970dbd2f02218a05639d49}{lleft}} ()
+\begin{DoxyCompactList}\small\item\em Length of domain to the left of leaflet. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aee74846110e70cd5538386e1ccb0ce7c}{lright}} ()
+\begin{DoxyCompactList}\small\item\em Length of domain to the right of leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a91d7d8d2f564c5e9d2ee07449b2653c9}{leaflet\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to the wall. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ae4b123847f4ab6e242a0409d72fe5cbd}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const unsigned \&imacro, const unsigned \&idirect, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r)
+\begin{DoxyCompactList}\small\item\em Parametrisation of macro element boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a08d97680e95f42a385a869d5c384e610}{macro\+\_\+bound\+\_\+\+I\+\_\+N}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a20898c8b6747cf01e3e92e4a5c6ff5e4}{macro\+\_\+bound\+\_\+\+I\+\_\+S}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a15e43fe342a04c8466a43112e3a48ff3}{macro\+\_\+bound\+\_\+\+I\+\_\+W}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ac0bc6edb7d09bfdb310de99f846f5093}{macro\+\_\+bound\+\_\+\+I\+\_\+E}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a1402c0d3fe42a8ffd6c9fb1d6df9d460}{macro\+\_\+bound\+\_\+\+I\+I\+\_\+N}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a565166bede89908189cc8e426a898859}{macro\+\_\+bound\+\_\+\+I\+I\+\_\+S}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_afa35af75e7a60d3e5d4adf6a8097825e}{macro\+\_\+bound\+\_\+\+I\+I\+\_\+W}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a9083a5ac562feb1cd33d78e6cc18b257}{macro\+\_\+bound\+\_\+\+I\+I\+\_\+E}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a8b7f88fb218ceb09f0fde09ba22cd5b9}{macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+N}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aacdeafe878caadb3e6d0cf98a87df25a}{macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+S}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a06ccb5b6d160c3a31acf80174381a834}{macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+W}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_af17451c66c723d841aa6f16505c51be3}{macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+E}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ae8d9410d270e27677cb89c5dfe9cc136}{macro\+\_\+bound\+\_\+\+I\+V\+\_\+N}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a038eba8447f4d1643cd44642294bf43f}{macro\+\_\+bound\+\_\+\+I\+V\+\_\+S}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ab9da487d185f947a30e03b43d0fc0c9b}{macro\+\_\+bound\+\_\+\+I\+V\+\_\+W}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a16c8d718f5da2e6d9d73fe0455bacc0c}{macro\+\_\+bound\+\_\+\+I\+V\+\_\+E}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aaca0af9c2a638c80bd8af783b9972599}{slanted\+\_\+bound\+\_\+up}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r)
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a6c1a799bbedc5f0ff08f38088eaedc68}{Lright}}
+\begin{DoxyCompactList}\small\item\em Length of the domain to the right of the leaflet. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a0a50a8a7b274fb1dfc6d18c79ca884cd}{Lleft}}
+\begin{DoxyCompactList}\small\item\em Length of the domain to the left of the leaflet. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a75ce3248efae5c33a9c9989b2f310139}{Hleaflet}}
+\begin{DoxyCompactList}\small\item\em Lagrangian coordinate at end of leaflet. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ad32b0daa71b42d34aec81c7e3d25cb98}{Htot}}
+\begin{DoxyCompactList}\small\item\em Total width of the channel. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a11aac62965f9bcb7d4c0043669b28f15}{Nright}}
+\begin{DoxyCompactList}\small\item\em Number of macro element columnns to the right of the leaflet. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ad0abd8837f9f0924b801d2fb78c69532}{Nleft}}
+\begin{DoxyCompactList}\small\item\em Number of macro element columns to the left of the leaflet. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a3c6393ef6e626d7a2f2a8ea70c8addbe}{Ny1}}
+\begin{DoxyCompactList}\small\item\em Number of macro element rows up to the end of the leaflet. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a1596a538b4263b42d20f9c098c5f2752}{Ny2}}
+\begin{DoxyCompactList}\small\item\em Number of macro element rows above the leaflet. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a165703af81538c28bbbd780d65bbb333}{X\+\_\+0}}
+\begin{DoxyCompactList}\small\item\em Center of the domain \+: origin of the leaflet, extracted from Geom\+Object and stored for fast access. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$ \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a08a8eb7078cdc788dc7643e09e7405fb}{Leaflet\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to leaflet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Rectangular domain with a leaflet blocking the lower half 
+
+Definition at line 42 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a6cca7d06136de0c76facec2a92b0939e}\label{classoomph_1_1ChannelWithLeafletDomain_a6cca7d06136de0c76facec2a92b0939e}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!ChannelWithLeafletDomain@{ChannelWithLeafletDomain}}
+\index{ChannelWithLeafletDomain@{ChannelWithLeafletDomain}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{ChannelWithLeafletDomain()}{ChannelWithLeafletDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Channel\+With\+Leaflet\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$}]{leaflet\+\_\+pt,  }\item[{const double \&}]{lleft,  }\item[{const double \&}]{lright,  }\item[{const double \&}]{hleaflet,  }\item[{const double \&}]{htot,  }\item[{const unsigned \&}]{nleft,  }\item[{const unsigned \&}]{nright,  }\item[{const unsigned \&}]{ny1,  }\item[{const unsigned \&}]{ny2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to Geom\+Object that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet. 
+
+
+
+Definition at line 54 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References hleaflet(), Hleaflet, htot(), Htot, leaflet\+\_\+pt(), Leaflet\+\_\+pt, lleft(), Lleft, lright(), Lright, Nleft, Nright, Ny1, Ny2, and X\+\_\+0.
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a7f00e3d9ed53ca70519671446fe60510}\label{classoomph_1_1ChannelWithLeafletDomain_a7f00e3d9ed53ca70519671446fe60510}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!````~ChannelWithLeafletDomain@{$\sim$ChannelWithLeafletDomain}}
+\index{````~ChannelWithLeafletDomain@{$\sim$ChannelWithLeafletDomain}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{$\sim$ChannelWithLeafletDomain()}{~ChannelWithLeafletDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Channel\+With\+Leaflet\+Domain\+::$\sim$\+Channel\+With\+Leaflet\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty; cleanup done in base class. 
+
+
+
+Definition at line 90 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_af70ada72d505ebea468d1000b04c20e1}\label{classoomph_1_1ChannelWithLeafletDomain_af70ada72d505ebea468d1000b04c20e1}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!hleaflet@{hleaflet}}
+\index{hleaflet@{hleaflet}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{hleaflet()}{hleaflet()}}
+{\footnotesize\ttfamily double oomph\+::\+Channel\+With\+Leaflet\+Domain\+::hleaflet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Height of leaflet. 
+
+
+
+Definition at line 96 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_aaf195c688423473ed97af61f8a1467ab}\label{classoomph_1_1ChannelWithLeafletDomain_aaf195c688423473ed97af61f8a1467ab}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!htot@{htot}}
+\index{htot@{htot}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{htot()}{htot()}}
+{\footnotesize\ttfamily double oomph\+::\+Channel\+With\+Leaflet\+Domain\+::htot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Total height of domain (width of channel) 
+
+
+
+Definition at line 93 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Htot.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a91d7d8d2f564c5e9d2ee07449b2653c9}\label{classoomph_1_1ChannelWithLeafletDomain_a91d7d8d2f564c5e9d2ee07449b2653c9}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!leaflet\_pt@{leaflet\_pt}}
+\index{leaflet\_pt@{leaflet\_pt}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{leaflet\_pt()}{leaflet\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}}$\ast$\& oomph\+::\+Channel\+With\+Leaflet\+Domain\+::leaflet\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to the wall. 
+
+
+
+Definition at line 105 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Leaflet\+\_\+pt.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a5538092062970dbd2f02218a05639d49}\label{classoomph_1_1ChannelWithLeafletDomain_a5538092062970dbd2f02218a05639d49}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!lleft@{lleft}}
+\index{lleft@{lleft}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{lleft()}{lleft()}}
+{\footnotesize\ttfamily double oomph\+::\+Channel\+With\+Leaflet\+Domain\+::lleft (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Length of domain to the left of leaflet. 
+
+
+
+Definition at line 99 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Lleft.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_aee74846110e70cd5538386e1ccb0ce7c}\label{classoomph_1_1ChannelWithLeafletDomain_aee74846110e70cd5538386e1ccb0ce7c}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!lright@{lright}}
+\index{lright@{lright}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{lright()}{lright()}}
+{\footnotesize\ttfamily double oomph\+::\+Channel\+With\+Leaflet\+Domain\+::lright (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Length of domain to the right of leaflet. 
+
+
+
+Definition at line 102 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Lright.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ac0bc6edb7d09bfdb310de99f846f5093}\label{classoomph_1_1ChannelWithLeafletDomain_ac0bc6edb7d09bfdb310de99f846f5093}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_I\_E@{macro\_bound\_I\_E}}
+\index{macro\_bound\_I\_E@{macro\_bound\_I\_E}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_I\_E()}{macro\_bound\_I\_E()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function ~\newline
+ 
+
+Helper function for eastern boundary in lower left region. Final expression of r
+
+Definition at line 364 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet, Leaflet\+\_\+pt, Lleft, Nleft, Ny1, s, and X\+\_\+0.
+
+
+
+Referenced by macro\+\_\+bound\+\_\+\+I\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+\_\+\+S(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a08d97680e95f42a385a869d5c384e610}\label{classoomph_1_1ChannelWithLeafletDomain_a08d97680e95f42a385a869d5c384e610}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_I\_N@{macro\_bound\_I\_N}}
+\index{macro\_bound\_I\_N@{macro\_bound\_I\_N}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_I\_N()}{macro\_bound\_I\_N()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+N (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for northern boundary in lower left region. 
+
+Definition at line 453 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a20898c8b6747cf01e3e92e4a5c6ff5e4}\label{classoomph_1_1ChannelWithLeafletDomain_a20898c8b6747cf01e3e92e4a5c6ff5e4}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_I\_S@{macro\_bound\_I\_S}}
+\index{macro\_bound\_I\_S@{macro\_bound\_I\_S}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_I\_S()}{macro\_bound\_I\_S()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for southern boundary in lower left region. Find the coordinates of the two corners of the south boundary
+
+Definition at line 477 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a15e43fe342a04c8466a43112e3a48ff3}\label{classoomph_1_1ChannelWithLeafletDomain_a15e43fe342a04c8466a43112e3a48ff3}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_I\_W@{macro\_bound\_I\_W}}
+\index{macro\_bound\_I\_W@{macro\_bound\_I\_W}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_I\_W()}{macro\_bound\_I\_W()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+W (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for western boundary in lower left region. Final expression of r
+
+Definition at line 408 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet, Leaflet\+\_\+pt, Lleft, Nleft, Ny1, s, and X\+\_\+0.
+
+
+
+Referenced by macro\+\_\+bound\+\_\+\+I\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+\_\+\+S(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a9083a5ac562feb1cd33d78e6cc18b257}\label{classoomph_1_1ChannelWithLeafletDomain_a9083a5ac562feb1cd33d78e6cc18b257}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_II\_E@{macro\_bound\_II\_E}}
+\index{macro\_bound\_II\_E@{macro\_bound\_II\_E}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_II\_E()}{macro\_bound\_II\_E()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+\_\+E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for eastern boundary in lower right region. Final expression of r
+
+Definition at line 512 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet, Leaflet\+\_\+pt, Lright, Nright, Ny1, s, and X\+\_\+0.
+
+
+
+Referenced by macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+S(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a1402c0d3fe42a8ffd6c9fb1d6df9d460}\label{classoomph_1_1ChannelWithLeafletDomain_a1402c0d3fe42a8ffd6c9fb1d6df9d460}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_II\_N@{macro\_bound\_II\_N}}
+\index{macro\_bound\_II\_N@{macro\_bound\_II\_N}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_II\_N()}{macro\_bound\_II\_N()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+\_\+N (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for northern boundary in lower right region. 
+
+Definition at line 605 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a565166bede89908189cc8e426a898859}\label{classoomph_1_1ChannelWithLeafletDomain_a565166bede89908189cc8e426a898859}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_II\_S@{macro\_bound\_II\_S}}
+\index{macro\_bound\_II\_S@{macro\_bound\_II\_S}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_II\_S()}{macro\_bound\_II\_S()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for southern boundary in lower right region. 
+
+Definition at line 630 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_afa35af75e7a60d3e5d4adf6a8097825e}\label{classoomph_1_1ChannelWithLeafletDomain_afa35af75e7a60d3e5d4adf6a8097825e}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_II\_W@{macro\_bound\_II\_W}}
+\index{macro\_bound\_II\_W@{macro\_bound\_II\_W}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_II\_W()}{macro\_bound\_II\_W()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+\_\+W (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for western boundary in lower right region. 
+
+Definition at line 558 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet, Leaflet\+\_\+pt, Lright, Nright, Ny1, s, and X\+\_\+0.
+
+
+
+Referenced by macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+S(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_af17451c66c723d841aa6f16505c51be3}\label{classoomph_1_1ChannelWithLeafletDomain_af17451c66c723d841aa6f16505c51be3}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_III\_E@{macro\_bound\_III\_E}}
+\index{macro\_bound\_III\_E@{macro\_bound\_III\_E}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_III\_E()}{macro\_bound\_III\_E()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for eastern boundary in upper left region. Final expression of r
+
+Definition at line 689 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet, Htot, Lleft, Nleft, Ny2, s, slanted\+\_\+bound\+\_\+up(), and X\+\_\+0.
+
+
+
+Referenced by macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+S(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a8b7f88fb218ceb09f0fde09ba22cd5b9}\label{classoomph_1_1ChannelWithLeafletDomain_a8b7f88fb218ceb09f0fde09ba22cd5b9}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_III\_N@{macro\_bound\_III\_N}}
+\index{macro\_bound\_III\_N@{macro\_bound\_III\_N}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_III\_N()}{macro\_bound\_III\_N()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+N (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for northern boundary in upper left region. 
+
+Definition at line 781 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_aacdeafe878caadb3e6d0cf98a87df25a}\label{classoomph_1_1ChannelWithLeafletDomain_aacdeafe878caadb3e6d0cf98a87df25a}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_III\_S@{macro\_bound\_III\_S}}
+\index{macro\_bound\_III\_S@{macro\_bound\_III\_S}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_III\_S()}{macro\_bound\_III\_S()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for southern boundary in upper left region. 
+
+Definition at line 805 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a06ccb5b6d160c3a31acf80174381a834}\label{classoomph_1_1ChannelWithLeafletDomain_a06ccb5b6d160c3a31acf80174381a834}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_III\_W@{macro\_bound\_III\_W}}
+\index{macro\_bound\_III\_W@{macro\_bound\_III\_W}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_III\_W()}{macro\_bound\_III\_W()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+W (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for western boundary in upper left region. 
+
+Definition at line 735 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet, Htot, Lleft, Nleft, Ny2, s, slanted\+\_\+bound\+\_\+up(), and X\+\_\+0.
+
+
+
+Referenced by macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+S(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a16c8d718f5da2e6d9d73fe0455bacc0c}\label{classoomph_1_1ChannelWithLeafletDomain_a16c8d718f5da2e6d9d73fe0455bacc0c}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_IV\_E@{macro\_bound\_IV\_E}}
+\index{macro\_bound\_IV\_E@{macro\_bound\_IV\_E}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_IV\_E()}{macro\_bound\_IV\_E()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+V\+\_\+E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for eastern boundary in upper right region. 
+
+Definition at line 840 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet, Htot, Lright, Nright, Ny2, s, slanted\+\_\+bound\+\_\+up(), and X\+\_\+0.
+
+
+
+Referenced by macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+S(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ae8d9410d270e27677cb89c5dfe9cc136}\label{classoomph_1_1ChannelWithLeafletDomain_ae8d9410d270e27677cb89c5dfe9cc136}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_IV\_N@{macro\_bound\_IV\_N}}
+\index{macro\_bound\_IV\_N@{macro\_bound\_IV\_N}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_IV\_N()}{macro\_bound\_IV\_N()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+V\+\_\+N (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for northern boundary in upper right region. 
+
+Definition at line 930 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a038eba8447f4d1643cd44642294bf43f}\label{classoomph_1_1ChannelWithLeafletDomain_a038eba8447f4d1643cd44642294bf43f}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_IV\_S@{macro\_bound\_IV\_S}}
+\index{macro\_bound\_IV\_S@{macro\_bound\_IV\_S}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_IV\_S()}{macro\_bound\_IV\_S()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+V\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for southern boundary in upper right region. 
+
+Definition at line 954 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ab9da487d185f947a30e03b43d0fc0c9b}\label{classoomph_1_1ChannelWithLeafletDomain_ab9da487d185f947a30e03b43d0fc0c9b}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_IV\_W@{macro\_bound\_IV\_W}}
+\index{macro\_bound\_IV\_W@{macro\_bound\_IV\_W}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_IV\_W()}{macro\_bound\_IV\_W()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+V\+\_\+W (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for western boundary in upper right region. 
+
+Definition at line 885 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet, Htot, Lright, Nright, Ny2, s, slanted\+\_\+bound\+\_\+up(), and X\+\_\+0.
+
+
+
+Referenced by macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+S(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ae4b123847f4ab6e242a0409d72fe5cbd}\label{classoomph_1_1ChannelWithLeafletDomain_ae4b123847f4ab6e242a0409d72fe5cbd}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{imacro,  }\item[{const unsigned \&}]{idirect,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Parametrisation of macro element boundaries. 
+
+
+
+Definition at line 231 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+\_\+\+S(), macro\+\_\+bound\+\_\+\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+S(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+S(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+N(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+S(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W(), Nleft, Nright, and Ny1.
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_aaca0af9c2a638c80bd8af783b9972599}\label{classoomph_1_1ChannelWithLeafletDomain_aaca0af9c2a638c80bd8af783b9972599}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!slanted\_bound\_up@{slanted\_bound\_up}}
+\index{slanted\_bound\_up@{slanted\_bound\_up}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{slanted\_bound\_up()}{slanted\_bound\_up()}}
+{\footnotesize\ttfamily void oomph\+::\+Channel\+With\+Leaflet\+Domain\+::slanted\+\_\+bound\+\_\+up (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Describe the line between the boundary north of the domain (at x=X\+\_\+0) and the top of the wall, when zeta goes from 0 to 1. 
+
+Definition at line 667 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+References Hleaflet, Htot, Leaflet\+\_\+pt, and X\+\_\+0.
+
+
+
+Referenced by macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a75ce3248efae5c33a9c9989b2f310139}\label{classoomph_1_1ChannelWithLeafletDomain_a75ce3248efae5c33a9c9989b2f310139}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Hleaflet@{Hleaflet}}
+\index{Hleaflet@{Hleaflet}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Hleaflet}{Hleaflet}}
+{\footnotesize\ttfamily double oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Hleaflet\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Lagrangian coordinate at end of leaflet. 
+
+
+
+Definition at line 200 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), hleaflet(), macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W(), and slanted\+\_\+bound\+\_\+up().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ad32b0daa71b42d34aec81c7e3d25cb98}\label{classoomph_1_1ChannelWithLeafletDomain_ad32b0daa71b42d34aec81c7e3d25cb98}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Htot@{Htot}}
+\index{Htot@{Htot}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Htot}{Htot}}
+{\footnotesize\ttfamily double oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Htot\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Total width of the channel. 
+
+
+
+Definition at line 203 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), htot(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W(), and slanted\+\_\+bound\+\_\+up().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a08a8eb7078cdc788dc7643e09e7405fb}\label{classoomph_1_1ChannelWithLeafletDomain_a08a8eb7078cdc788dc7643e09e7405fb}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Leaflet\_pt@{Leaflet\_pt}}
+\index{Leaflet\_pt@{Leaflet\_pt}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Leaflet\_pt}{Leaflet\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}}$\ast$ oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Leaflet\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to leaflet. 
+
+
+
+Definition at line 222 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), leaflet\+\_\+pt(), macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W(), and slanted\+\_\+bound\+\_\+up().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a0a50a8a7b274fb1dfc6d18c79ca884cd}\label{classoomph_1_1ChannelWithLeafletDomain_a0a50a8a7b274fb1dfc6d18c79ca884cd}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Lleft@{Lleft}}
+\index{Lleft@{Lleft}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Lleft}{Lleft}}
+{\footnotesize\ttfamily double oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Lleft\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Length of the domain to the left of the leaflet. 
+
+
+
+Definition at line 197 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), lleft(), macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a6c1a799bbedc5f0ff08f38088eaedc68}\label{classoomph_1_1ChannelWithLeafletDomain_a6c1a799bbedc5f0ff08f38088eaedc68}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Lright@{Lright}}
+\index{Lright@{Lright}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Lright}{Lright}}
+{\footnotesize\ttfamily double oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Lright\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Length of the domain to the right of the leaflet. 
+
+
+
+Definition at line 194 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), lright(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ad0abd8837f9f0924b801d2fb78c69532}\label{classoomph_1_1ChannelWithLeafletDomain_ad0abd8837f9f0924b801d2fb78c69532}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Nleft@{Nleft}}
+\index{Nleft@{Nleft}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Nleft}{Nleft}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Nleft\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of macro element columns to the left of the leaflet. 
+
+
+
+Definition at line 209 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a11aac62965f9bcb7d4c0043669b28f15}\label{classoomph_1_1ChannelWithLeafletDomain_a11aac62965f9bcb7d4c0043669b28f15}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Nright@{Nright}}
+\index{Nright@{Nright}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Nright}{Nright}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Nright\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of macro element columnns to the right of the leaflet. 
+
+
+
+Definition at line 206 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a3c6393ef6e626d7a2f2a8ea70c8addbe}\label{classoomph_1_1ChannelWithLeafletDomain_a3c6393ef6e626d7a2f2a8ea70c8addbe}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Ny1@{Ny1}}
+\index{Ny1@{Ny1}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Ny1}{Ny1}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Ny1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of macro element rows up to the end of the leaflet. 
+
+
+
+Definition at line 212 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W(), and macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a1596a538b4263b42d20f9c098c5f2752}\label{classoomph_1_1ChannelWithLeafletDomain_a1596a538b4263b42d20f9c098c5f2752}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Ny2@{Ny2}}
+\index{Ny2@{Ny2}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Ny2}{Ny2}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Ny2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of macro element rows above the leaflet. 
+
+
+
+Definition at line 215 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), and macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W().
+
+\mbox{\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a165703af81538c28bbbd780d65bbb333}\label{classoomph_1_1ChannelWithLeafletDomain_a165703af81538c28bbbd780d65bbb333}} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!X\_0@{X\_0}}
+\index{X\_0@{X\_0}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{X\_0}{X\_0}}
+{\footnotesize\ttfamily double oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+X\+\_\+0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Center of the domain \+: origin of the leaflet, extracted from Geom\+Object and stored for fast access. 
+
+
+
+Definition at line 219 of file channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h.
+
+
+
+Referenced by Channel\+With\+Leaflet\+Domain(), macro\+\_\+bound\+\_\+\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+I\+I\+\_\+\+W(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+E(), macro\+\_\+bound\+\_\+\+I\+V\+\_\+\+W(), and slanted\+\_\+bound\+\_\+up().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{channel__with__leaflet__domain_8h}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}\end{DoxyCompactItemize}

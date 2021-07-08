@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Mesh generation based on Tetgen</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Mesh generation based on Tetgen </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we demonstrate how to generate unstructured tetrahedral meshes for <code>oomph-lib</code>, based on the output from <a href="http://www.wias-berlin.de/~si ">Hang Si's</a> open-source mesh generator <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a>. The mesh generation is performed in a two-stage process. First we use <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> to generate the mesh "offline". Then we process the output files generated by <br  />
+ <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> to generate an <code>oomph-lib</code> mesh.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="Tetgen_use"></a>
+Quick guide for the use of Tetgen</h1>
+<p>The <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> home page </a> contains a comprehensive User's Guide for the code and its many options, therefore we only present a brief overview of the code's most basic usage.</p>
+<p><a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> creates the mesh based on the information about the mesh boundaries provided in an input file, <code>filename.poly</code>, say. By default, three output files, <code>filename.1.node</code>, <code>filename.1.ele</code>, and <code>filename.1.face</code> are created. They contain the information about the nodal positions, the element connectivity lists and the boundary faces respectively.</p>
+<hr  />
+<h2><a class="anchor" id="input"></a>
+The input file format</h2>
+<p>The input file for <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> usually has the extension <code>*</code>.<code>poly</code> and has the following format:</p>
+<table class="doxtable">
+<tr>
+<td><p class="starttd"></p>
+<p class="intertd"><b> Node list </b></p>
+<p class="intertd">First line: [number of nodes] [dimension (must be 3)] [number of attributes] [number of boundary markers (0 or 1)] <br  />
+Remaining lines: [node index] [x] [y] [z] [[attributes]] [[boundary marker]] <br  />
+ <b> Facet list </b></p>
+<p class="intertd">One line: [number of facets] [boundary markers (0 or 1)] <br  />
+Following lines are a list of the facets: [facet index] <br  />
+ where each facet has the following format: <br  />
+ One line: [number of polygons] [[number of holes]] [[boundary marker]] <br  />
+ Following lines: [number of corners] [corner 1] [corner 2] ... [last corner] <br  />
+ Following lines: [hole index] [x] [y] [z] <br  />
+ <b> Hole list </b></p>
+<p class="intertd">One line: [number of holes] <br  />
+Following lines: [hole index] [x] [y] [z]</p>
+<p class="intertd"><b> Region attributes list </b></p>
+<p class="intertd">One line: [number of region] <br  />
+Following lines: [region index] [x] [y] [z] [region number] [region attribute]</p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<p><b>Comments:</b> </p><ul>
+<li>The data between [ ] must be provided. The attributes and boundary markers must only be specified if the corresponding number of boundary markers or the number of attributes is nonzero. <br  />
+ <br  />
+</li>
+<li>Boundary markers can be used to identify which nodes are located on which domain boundaries. If domain boundaries are to be identified the number of boundary markers should be set to 1, otherwise it must be set to zero. If the number of boundary markers is set to 1, boundary markers must be specified for every node and facet. A boundary marker 0 should be used for nodes that are not located on domain boundaries; a boundary marker <code>b+1</code> should be used to indicate that a node is located on the mesh boundary <code>b</code> in the final <code>oomph-lib</code> mesh.</li>
+<li><code>oomph-lib</code> does not use the "attributes" so their number should be set to zero.</li>
+<li>The boundary markers have to be specified in the node list AND in the facet list.</li>
+<li>If a node is located on multiple boundaries, the boundary marker of the node is chosen arbitrarily.</li>
+<li>Holes are identified by the coordinates of a single point in their interior. The holes in the facet list are holes in the facet, they are different from the holes in the hole list, which are holes in the volume.</li>
+</ul>
+<p>See the <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> home page </a> for further information.</p>
+<hr  />
+<h2><a class="anchor" id="run_Tetgen"></a>
+How to run Tetgen</h2>
+<p>To create the mesh from a given input file the command is </p><div class="fragment"><div class="line">./tetgen filename.poly</div>
+</div><!-- fragment --><p>With these commands, <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> will generate as few tetrahedra as possible. Finer meshes may be generated by imposing additional constraints via command line arguments. For instance</p><ul>
+<li>A maximum tetrahedron volume can be specified with <code>-a</code><em>n</em> where <em>n</em> is the maximal volume wanted. (There is no space between <code>-a</code> and the number specifying the volume!)</li>
+<li>...</li>
+</ul>
+<p>Again, we refer to the <br  />
+ <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> home page </a> for a comprehensive listing of all available options.</p>
+<hr  />
+<h2><a class="anchor" id="tetview"></a>
+How to visualise a mesh generated by Tetgen</h2>
+<p>To visualise the mesh, the program <code>tetview</code> (distributed with <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a>) can be used.</p>
+<hr  />
+<h1><a class="anchor" id="example"></a>
+An example: A cube with a cube hole</h1>
+<p>To illustrate the procedure, we demonstrate how to generate a mesh for the cube domain with a hole shown in the figure below. Note that the node numbers correspond to those in the <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> input file. Boundary 1 is shown in blue; boundary 2 in magenta. In the corresponding <code>oomph-lib</code> mesh, the boundaries are numbered from zero.</p>
+<div class="image">
+<img src="cube_hole.gif" alt=""/>
+<div class="caption">
+the cube with a hole domain </div></div>
+ <p>Here is a listing of the corresponding input file, <code>cube_hole.poly:</code> </p>
+<div class="fragment"><div class="line"># This file represents a cube with a cube hole in the middle.</div>
+<div class="line"> </div>
+<div class="line"># Part 1 - node list</div>
+<div class="line">16 3 0 1</div>
+<div class="line">1    0 0 0 1</div>
+<div class="line">2    3 0 0 1 </div>
+<div class="line">3    3 3 0 1</div>
+<div class="line">4    0 3 0 1</div>
+<div class="line">5    0 0 3 1</div>
+<div class="line">6    3 0 3 1</div>
+<div class="line">7    3 3 3 1</div>
+<div class="line">8    0 3 3 1</div>
+<div class="line">9    1 1 1 2</div>
+<div class="line">10   2 1 1 2</div>
+<div class="line">11   2 2 1 2</div>
+<div class="line">12   1 2 1 2</div>
+<div class="line">13   1 1 2 2</div>
+<div class="line">14   2 1 2 2</div>
+<div class="line">15   2 2 2 2</div>
+<div class="line">16   1 2 2 2</div>
+<div class="line"> </div>
+<div class="line"># Part 2 - facet list</div>
+<div class="line">12 1</div>
+<div class="line"># bottom 1</div>
+<div class="line">1 0 1</div>
+<div class="line">4 1 2 3 4</div>
+<div class="line"># top 1</div>
+<div class="line">1 0 1</div>
+<div class="line">4 5 6 7 8</div>
+<div class="line"># left 1</div>
+<div class="line">1 0 1</div>
+<div class="line">4 1 4 8 5</div>
+<div class="line"># right 1</div>
+<div class="line">1 0 1</div>
+<div class="line">4 2 3 7 6</div>
+<div class="line"># front 1</div>
+<div class="line">1 0 1</div>
+<div class="line">4 3 4 8 7</div>
+<div class="line"># back 1</div>
+<div class="line">1 0 1</div>
+<div class="line">4 1 2 6 5</div>
+<div class="line"># bottom 2</div>
+<div class="line">1 0 2</div>
+<div class="line">4 9 10 11 12</div>
+<div class="line"># top 2</div>
+<div class="line">1 0 2</div>
+<div class="line">4 13 14 15 16</div>
+<div class="line"># left 2</div>
+<div class="line">1 0 2</div>
+<div class="line">4 9 12 16 13</div>
+<div class="line"># right 2</div>
+<div class="line">1 0 2</div>
+<div class="line">4 10 11 15 14</div>
+<div class="line"># front 2</div>
+<div class="line">1 0 2</div>
+<div class="line">4 11 12 16 15</div>
+<div class="line"># back 2</div>
+<div class="line">1 0 2</div>
+<div class="line">4 9 10 14 13</div>
+<div class="line"> </div>
+<div class="line"># Part 3 - hole list</div>
+<div class="line">1</div>
+<div class="line">1 1.5 1.5 1.5 </div>
+<div class="line"> </div>
+<div class="line"># Part 4 - region list</div>
+<div class="line">0</div>
+</div><!-- fragment --><p>The output files that <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> creates with the command </p><div class="fragment"><div class="line">./tetgen  -a0.2 cube_hole.poly </div>
+</div><!-- fragment --><p> are <a href="../../../../demo_drivers/meshing/mesh_from_tetgen/cube_hole.1.node">cube_hole.1.node</a> , <a href="../../../../demo_drivers/meshing/mesh_from_tetgen/cube_hole.1.ele">cube_hole.1.ele</a> and <a href="../../../../demo_drivers/meshing/mesh_from_tetgen/cube_hole.1.face">cube_hole.1.face</a>.</p>
+<p>Here is a sketch of the resulting discretisation, as displayed by <code>tetview</code> :</p>
+<div class="image">
+<img src="tetview_screenshot.gif" alt=""/>
+<div class="caption">
+Cut plane of the tetrahedral mesh. </div></div>
+ <hr  />
+<h1><a class="anchor" id="oomph_use"></a>
+Creating an oomph-lib mesh based on output files generated by Tetgen</h1>
+<p><code>oomph-lib</code> provides a mesh, <code>TetgenMesh</code>, that uses the output from <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> to generate an unstructured <code>oomph-lib</code> Mesh containing elements from the <code>TElement&lt;3,NNODE_1D&gt;</code> family of the tetrahedral elements. The relevant interface is:</p>
+ <div class="fragment"><div class="line"><span class="comment">//=========start of TetgenMesh class======================================</span></div>
+<div class="line"><span class="comment">/// \short  Unstructured tet mesh based on output from Tetgen:</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// http://wias-berlin.de/software/tetgen/</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span>TetgenMesh : <span class="keyword">public</span> <span class="keyword">virtual</span> TetMeshBase</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Empty constructor</span></div>
+<div class="line"><span class="comment"></span> TetgenMesh()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Mesh can only be built with 3D Telements.</span></div>
+<div class="line">   MeshChecker::assert_geometric_element&lt;TElementGeometricBase,ELEMENT&gt;(3);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor with the input files</span></div>
+<div class="line"><span class="comment"></span> TetgenMesh(<span class="keyword">const</span> std::string&amp; node_file_name,</div>
+<div class="line">            <span class="keyword">const</span> std::string&amp; element_file_name,</div>
+<div class="line">            <span class="keyword">const</span> std::string&amp; face_file_name,</div>
+<div class="line">            TimeStepper* time_stepper_pt=</div>
+<div class="line">            &amp;Mesh::Default_TimeStepper,</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="poisson"></a>
+Example 1: A Poisson problem</h2>
+<p>The driver code <a href="../../../../demo_drivers/meshing/mesh_from_tetgen/mesh_from_tetgen_poisson.cc">mesh_from_tetgen_poisson.cc</a> demonstrates the use of this mesh for the solution of a 3D Poisson problem in the "cube domain with a hole", described in the previous section.</p>
+<p>The code expects the names of <code>*</code>.<code>node</code>, *.<code>ele</code> and *.<code>face</code> files generated by <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> as command line arguments and stores them in the namespace <code>CommandLineArgs</code> </p>
+ <div class="fragment"><div class="line"><span class="keywordtype">int</span> <a class="code" href="mesh__from__tetgen__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check number of command line arguments: Need exactly three.</span></div>
+<div class="line"> <span class="keywordflow">if</span> (argc!=4)</div>
+<div class="line">  {</div>
+<div class="line">   std::string error_message =</div>
+<div class="line">    <span class="stringliteral">&quot;Wrong number of command line arguments.\n&quot;</span>;</div>
+<div class="line">   error_message +=</div>
+<div class="line">    <span class="stringliteral">&quot;Must specify the following file names  \n&quot;</span>;</div>
+<div class="line">   error_message += </div>
+<div class="line">    <span class="stringliteral">&quot;filename.node then filename.ele then filename.face\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>The names of these files are then passed to the mesh constructor. Since the rest of the <a href="../../../../demo_drivers/meshing/mesh_from_tetgen/mesh_from_tetgen_poisson.cc">driver code </a> is identical to that in the <a href="../../../../doc/poisson/eighth_sphere_poisson/html/index.html">corresponding example with a structured mesh</a>, we do not provide a detailed listing but simply show the plot of the computed results, together with a plot of the exact solution, for linear (four-noded) elements</p>
+<div class="image">
+<img src="compare_linear.gif" alt=""/>
+<div class="caption">
+FE and exact solution with linear elements. </div></div>
+<p>  ...and quadratic (ten-noded) elements:</p>
+<div class="image">
+<img src="compare_quadratic.gif" alt=""/>
+<div class="caption">
+FE and exact solution with quadratic elements. </div></div>
+ <hr  />
+ <hr  />
+<h2><a class="anchor" id="nst"></a>
+Example 2: A Navier-Stokes problem</h2>
+<p>The driver code <a href="../../../../demo_drivers/meshing/mesh_from_tetgen/mesh_from_tetgen_navier_stokes.cc">mesh_from_tetgen_navier_stokes.cc</a> demonstrates the use of a <code>TetgenMesh</code> for the solution of a 3D Navier-Stokes problem in the same geometry as in the previous example. We apply no-slip boundary conditions on the central hole and impose a unit vertical velocity. On the outer boundaries we pin the <img class="formulaInl" alt="$ y $" src="form_0.png"/> and <img class="formulaInl" alt="$ z $" src="form_1.png"/> velocity components and set them to zero, while leaving the axial velocity unspecified. The resulting flow field, shown in the figure below, corresponds to the flow that is generated when the rigid block in the centre of the domain rises vertically inside a rigid duct with "slippery walls". The duct is open at the ends <img class="formulaInl" alt="$ x=const$" src="form_2.png"/>, where parallel, axially-traction free outflow is imposed. The various slices show pressure contours and the in-plane velocity vectors.</p>
+<div class="image">
+<img src="flow.gif" alt=""/>
+<div class="caption">
+Flow in a duct with slippery walls, driven by the vertical motion of the central block. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="check"></a>
+Checking the boundary numbers</h2>
+<p>We re-iterate that <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a> does not allow nodes to be located on multiple boundaries. It is therefore important to check the boundary numbers allocated by <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code> </a>, e.g. by using the function <code>Mesh::output_boundaries(...)</code>. Boundary nodes should always be placed on the boundary with the most restrictive boundary conditions. If this is not possible, some post-processing of the mesh may be required.</p>
+<h2><a class="anchor" id="elements"></a>
+Higher-order tets</h2>
+<p>Currently, <code>TetgenMesh</code> can only be used to generate four and ten-node tets (i.e. tets with tri-linear and tri-quadratic shape functions). It should be easy to generalise the "scaffold-mesh"-based mesh generation procedure to higher-order elements but this has not been done yet. Any volunteers?</p>
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>Download and install <a href="http://wias-berlin.de/software/tetgen//"><code>Tetgen</code>, </a>, and create your own meshes.</li>
+<li>Experiment with the options that allow the specification of maximum element volumes etc.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/meshing/mesh_from_tetgen/">demo_drivers/meshing/mesh_from_tetgen/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/meshing/mesh_from_tetgen/mesh_from_tetgen_poisson.cc">demo_drivers/meshing/mesh_from_tetgen/mesh_from_tetgen_poisson.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="amesh__from__tetgen__poisson_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="mesh__from__tetgen__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Demonstrate how to solve Poisson problem.</div><div class="ttdef"><b>Definition:</b> <a href="mesh__from__tetgen__poisson_8cc_source.html#l00324">mesh_from_tetgen_poisson.cc:324</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:57:36
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

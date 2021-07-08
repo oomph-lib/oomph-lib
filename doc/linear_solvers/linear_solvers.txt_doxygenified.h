@@ -1,0 +1,471 @@
+/**
+
+\mainpage Linear solvers
+
+The purpose of this tutorial is to show how to specify different
+linear solvers for \c oomph-lib's Newton solver.
+
+- \ref overview
+- \ref available_solvers
+- \ref how_to_change_linear_solver
+  - \ref direct
+  - \ref iterative_linear_solvers 
+  - \ref third_party_iterative_linear_solvers
+  .
+- \ref specific_precond
+.
+
+<HR>
+<HR>
+
+\section overview Overview
+ As discussed in the <a href="../../the_data_structure/html/index.html">
+bottom-up discussion of \c oomph-lib's data structure</a>, by default \c
+oomph-lib's Newton solver, \c Problem::newton_solve(...) solves
+the linear systems arising during the Newton iteration 
+with its default linear solver,
+<a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html"><CODE>
+SuperLUSolver</CODE></a>, a wrapper to Demmel, Eistenstat, Gilbert, Li & 
+Liu's sparse direct
+solver <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</A> 
+
+\c oomph-lib provides a large number of alternative linear solvers
+that may be used instead. All linear solvers within the library
+are derived from the base class 
+<a href="../../the_data_structure/html/classoomph_1_1LinearSolver.html"><CODE>
+LinearSolver</CODE></a> which contains a single pure virtual function
+
+
+\dontinclude linear_solver.h
+\skipline virtual void solve(Problem* const &problem_pt, DoubleVector &result)=0;
+
+whose task it is to compute the solution \f$ \delta {\bf x} \f$ (returned
+in the vector \c result) of the linear system
+\f[
+{\cal J} \delta {\bf x} = -{\bf r}
+\f]
+where \f$ {\bf r} \f$ and  \f$ {\cal J} \f$ are the  global 
+Jacobian and the residual vector, computed by the \c Problem pointed
+to by \c problem_pt. The <a href="../../the_data_structure/html/classoomph_1_1LinearSolver.html"><CODE>
+LinearSolver</CODE></a> class also defines linear-algebra-type
+interfaces that allow the solution of linear systems with matrices
+other than the \c Problem's Jacobian matrix. However, these methods 
+may not be implemented for all linear solvers. 
+
+
+<HR>
+<HR>
+
+\section available_solvers List of available linear solvers
+
+\c oomph-lib's linear solvers can be sub-divided into 
+serial and parallel, and direct and iterative linear solvers.
+Here is a quick overview of the available linear solvers. If you
+are viewing this document online, the links take you directly to
+the solvers' class references which explain any solver-specific member
+functions.
+
+- <B>Serial solvers: </B> \n\n
+  - <B>Direct solvers:</B> \n\n
+     - <a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html">
+        <CODE>SuperLUSolver</CODE></a>: \c oomph-lib's default linear
+        solver, a wrapper to Demmel, Eistenstat, Gilbert, Li & 
+        Liu's sparse direct solver 
+        <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</A> \n\n
+     - <a href="../../the_data_structure/html/classoomph_1_1HSL__MA42.html"><CODE>HSL_MA42</CODE></a>: A wrapper to the frontal solver MA42 from the 
+        <a href="http://www.hsl.rl.ac.uk/">HSL
+        library.</a> This solver is available free-of-charge for
+        UK academics. The source code can be dropped into 
+        the \c oomph-lib distribution; see the instructions in the
+        dummy code\n\n
+        <center>
+        <a href="../../../external_src/oomph_hsl/dummy_frontal.f"> 
+        external_src/oomph_hsl/dummy_frontal.f</a>\n\n
+        </center>
+     - <a href="../../the_data_structure/html/classoomph_1_1DenseLU.html"><CODE>DenseLU</CODE></a>: A direct solver, based on the LU decomposition of the 
+        Jacobian matrix which is stored as a dense matrix. Given that the 
+        Jacobian matrices arising from most problems are sparse, 
+        this is likely to be a very inefficient solver. It is mainly 
+        used by the derived (and even more inefficient!) solver 
+        <a href="../../the_data_structure/html/classoomph_1_1FD__LU.html"><CODE>FD_LU</CODE></a>.\n\n
+     - <a href="../../the_data_structure/html/classoomph_1_1FD__LU.html"><CODE>FD_LU</CODE></a>: Almost certainly the world's most inefficient solver. 
+       It computes the Jacobian matrix by finite differencing the global
+       residual vector, without taking any sparsity into account. 
+       Mainly used by developers as a last-resort sanity check.  \n\n
+     .
+  - <b>Iterative solvers:</b> \n\n
+     - \c oomph-lib provides its own implementations of various 
+       standard iterative linear solvers. They are derived from the base class 
+       <a href="../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html"><CODE>IterativeLinearSolver</CODE></a> and are typically 
+       templated by the matrix type used store the Jacobian matrix. In most
+       cases you will want to set the template argument \c MATRIX
+       to \c CRDoubleMatrix: \n\n
+       - <a  href="../../the_data_structure/html/classoomph_1_1GMRES.html"><CODE>GMRES</CODE></a>:
+          A Krylov subspace solver for symmetric and non-symmetric
+          linear systems. The memory usage increases with each 
+          iteration but the iteration can be restarted. \n\n
+       - <a href="../../the_data_structure/html/classoomph_1_1BiCGStab.html"><CODE>BiCGStab</CODE></a>:
+         A Krylov subspace method for symmetric and non-symmetric
+         linear systems. The memory requirement remains constant
+         throughout the iteration.\n\n
+       - <a  href="../../the_data_structure/html/classoomph_1_1CG.html"><CODE>CG</CODE></a>:
+         The classical conjugate gradient method for symmetric
+         positive definite matrices. The memory requirement remains constant
+         throughout the iteration. \n
+       - <a href="../../the_data_structure/html/classoomph_1_1GS.html"><CODE>GS</CODE></a>:
+         Gauss-Seidel -- a stationary iterative solver. \n\n
+       .
+     - \c oomph-lib also provides wrappers to third-party iterative
+       linear solvers. These tend to provide their own implementations of 
+       \c GMRES, \c BiCGStab, \c CG, etc. but are not necessarily
+       derived from \c oomph-lib's own 
+       <a href="../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html"><CODE>IterativeLinearSolver</CODE></a> base class. \n\n
+       - <a href="../../the_data_structure/html/classoomph_1_1HypreSolver.html"><CODE>HypreSolver</CODE></a>: A wrapper to the high-performance linear solvers/preconditioners from the <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">Scalable Linear Solvers Project.</A> \n\n
+       - <a href="../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html"><CODE>TrilinosAztecOOSolver</CODE></a>: A wrapper to the linear solvers from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a>\n\n
+       .
+     .
+  .
+- <b>Parallel solvers:</b> \n\n
+  - <B>Direct solvers:</B> \n\n
+     - When \c oomph-lib is compiled with MPI support, its default
+       linear solver
+       <a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html">
+       <CODE>SuperLUSolver</CODE></a> becomes a wrapper to Demmel, 
+       Eistenstat, Gilbert, Li & Liu's parallel sparse direct 
+       solver <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU#superlu_dist">
+       SuperLU_DIST.</A> This behaviour
+       can be over-ruled with the member function
+       \code
+       SuperLUSolver::set_solver_type(...)
+       \endcode
+       whose argument must specify one of the three options listed 
+       in the enumeration 
+       \c SuperLUSolver::Type. This allows the serial
+       solver <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">
+       SuperLU</A> to be used even if \c oomph-lib is compiled with MPI
+       support. 
+       \n\n
+     - <a href="../../the_data_structure/html/classoomph_1_1MumpsSolver.html">
+       <CODE> MumpsSolver </CODE></a>: is a wrapper to the 
+       <a href="http://graal.ens-lyon.fr/MUMPS/"> MUMPS </a> 
+       multifrontal solver that is available when \c oomph-lib is
+       compiled with MPI support and support for MUMPS.
+     .
+  - <B>Iterative solvers:</B> \n\n
+     - <a href="../../the_data_structure/html/classoomph_1_1HypreSolver.html"><CODE>HypreSolver</CODE></a>: A wrapper to the high-performance linear solvers/preconditioners from the <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">Scalable Linear Solvers Project.</A> \n\n
+     - <a href="../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html"><CODE>TrilinosAztecOOSolver</CODE></a>: A wrapper to the linear solvers from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a>\n\n
+     .
+.
+
+
+
+<HR>
+<HR>
+ 
+\section how_to_change_linear_solver How to change the LinearSolver
+
+
+\subsection direct Direct solvers
+Changing \c oomph-lib's linear solver is straightforward. For
+instance, to change the linear solver to \c oomph-lib's \c DenseLU
+solver, simply create an instance of this solver and pass a pointer
+to it to the \c Problem. This most easily done in the \c Problem
+constructor:
+
+\dontinclude two_d_poisson_dense_lu.cc
+\skipline Change solver to
+\until new DenseLU;
+
+In any subsequent calls to \c oomph-lib's Newton solver, \c DenseLU
+will now be used to solve the linear systems arising during the
+Newton iteration.
+
+
+<HR>
+<HR>
+
+\subsection iterative_linear_solvers Iterative linear solvers and preconditioners
+
+The specification of an iterative linear solver is just as easy: For
+instance, to specify \c oomph-lib's conjugate gradient solver \c CG
+(storing the Jacobian matrix in compressed row format) as the linear 
+solver, add 
+
+\dontinclude two_d_poisson_cg.cc
+\skipline Change solver to
+\until linear_solver_pt()=solver_pt;
+
+to the problem constructor.
+We note that, by default, \c oomph-lib's \c
+IterativeLinearSolvers perform the preconditioning using 
+the trivial "identity preconditioner". Most Krylov subspace solvers perform
+very poorly without some sort of preconditioning. 
+
+
+
+Specific preconditioners may be implemented by deriving from the
+\c Preconditioner base class, by implementing its two pure virtual functions
+
+\dontinclude preconditioner.h
+\skipline Apply the preconditioner
+\until = 0;
+
+and
+
+\dontinclude preconditioner.h
+\skipline Setup the preconditioner. Pure virtual generic
+\until = 0;
+
+Note that, by default, \c oomph-lib's \c IterativeLinearSolvers 
+employ left preconditioning.
+
+\c oomph-lib provides fully-functional implementations of 
+several general-purpose preconditioners. For instance, the zero-fill-in
+incomplete LU factorisation preconditioner ILU(0) may be employed
+by adding the lines
+
+\dontinclude two_d_poisson_cg.cc
+\skipline Specify preconditioner
+\until ILU
+
+to the \c Problem constructor.
+
+Of particular interest is the availability of an "exact preconditioner"  
+<a href="../../the_data_structure/html/classoomph_1_1SuperLUPreconditioner.html"><CODE>SuperLUPreconditioner</CODE></a>
+whose use guarantees the convergence of any iterative solver within
+a single iteration -- useful for code development.
+
+<HR>
+<HR>
+
+
+\subsection third_party_iterative_linear_solvers Third-party iterative linear solvers and preconditioners
+
+\c oomph-lib provides wrappers to various third-party iterative
+linear solvers and preconditioners. We stress that these solvers are 
+not necessarily implemented as \c oomph-lib \c IterativeLinearSolvers 
+since their interfaces for the specification of preconditioners, etc
+may differ from those employed by \c oomph-lib. Furthermore,
+unlike \c SuperLUSolver these solvers are not
+distributed as part of \c oomph-lib so you have to build/install them
+separately before installing \c oomph-lib (\c oomph-lib's build 
+machinery can do this for you if you wish;
+see <a href="../../the_distribution/html/index.html#external_dist">
+installation instructions</a> for details). Once this is done, they may
+be used like any other linear solver.
+
+<HR>
+
+
+\subsubsection trilinos Trilinos
+
+\c oomph-lib provides wrappers to the iterative linear solvers/preconditioners
+from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a>
+The demo code 
+<a href="../../../demo_drivers/linear_solvers/TrilinosSolver_test.cc">
+TrilinosSolver_test.cc</a> demonstrates how use various combinations
+of solvers/preconditioners. Here is a brief overview:
+
+<b>Trilinos solvers</b>
+
+
+The wrappers to Trilinos' Krylov subspace solvers are implemented
+as \c oomph-lib \c IterativeLinearSolvers, allowing them to be used
+via the standard interfaces described above. For instance, to use
+\c oomph-lib's wrapper to \c Trilinos' Aztec solver, using
+\c Trilinos' \c ML multilevel preconditioner, set the solvers
+and preconditioners as usual:
+
+\dontinclude TrilinosSolver_test.cc
+\skipline // Create a Trilinos
+\until problem.linear_solver_pt() = linear_solver_pt;
+
+The actual Krylov subspace solver used by the \c Trilinos solver is 
+specified by passing an enumerated flag (defined as static member 
+data in the \c TrilinosAztecOOSolver class) to the solver. For
+instance, \c Trilinos' CG, GMRES and BiCGStab solvers are selected with
+
+\dontinclude TrilinosSolver_test.cc
+\skipline linear_solver_pt->solver_type() = TrilinosAztecOOSolver::CG;
+
+
+or 
+
+\skipline linear_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
+
+or 
+
+\skipline  linear_solver_pt->solver_type() = TrilinosAztecOOSolver::BiCGStab;
+
+respectively.
+
+
+
+<b>Trilinos preconditioners</b>
+
+\c oomph-lib provides wrappers to \c Trilinos' ML and IFPACK 
+preconditioners that allows them to be used as \c oomph-lib 
+\c Preconditioners that may be used with  \c oomph-lib's
+own \c IterativeLinearSolvers. Here is an example that shows how
+to build an instance of \c oomph-lib's \c GMRES, preconditioned
+with its wrapper to \c Trilinos' \c IFPACK preconditioner:
+
+\dontinclude TrilinosSolver_test.cc
+\skipline Create oomph-lib linear solver
+\until linear_solver_pt->preconditioner_pt()=preconditioner_pt;
+
+<HR>
+<HR>
+
+
+\subsubsection hypre Hypre
+\c oomph-lib provides wrappers to the high-performance linear
+solvers/preconditioners from the 
+<a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">
+Scalable Linear Solvers Project.</A> The demo code 
+<a href="../../../demo_drivers/linear_solvers/HypreSolver_test.cc">
+HypreSolver_test.cc</a> demonstrates how use various combinations
+of solvers/preconditioners. Here is a brief overview:
+
+<b>Hypre solvers</b>
+
+
+The wrappers to Hypre's Krylov subspace and AMG solvers are implemented
+as \c oomph-lib \c LinearSolvers (not \c IterativeLinearSolvers!)  
+so the interfaces for the specification of preconditioners etc.
+differ from those for \c oomph-lib's own \c IterativeLinearSolvers.
+
+The \c HypreSolver is set like any other \c LinearSolver:
+
+
+\dontinclude HypreSolver_test.cc
+\skipline // Create a new Hypre
+\until  problem.linear_solver_pt() = hypre_linear_solver_pt;
+
+
+The actual solver used by the \c HypreSolver is 
+specified by passing an enumerated flag (defined as static member 
+data in the \c HypreSolver class) to the solver. For
+instance, \c Hypre's AMG, CG, GMRES and BiCGStab solvers are selected with
+
+\dontinclude HypreSolver_test.cc
+\skipline hypre_linear_solver_pt->hypre_method() = HypreSolver::BoomerAMG;
+
+or 
+
+\skipline hypre_linear_solver_pt->hypre_method() = HypreSolver::CG;
+
+or 
+
+\skipline hypre_linear_solver_pt->hypre_method() = HypreSolver::GMRES;
+
+or 
+
+\skipline hypre_linear_solver_pt->hypre_method() = HypreSolver::BiCGStab;
+
+respectively.
+
+These Krylov subspace methods may then be preconditioned by
+\c Hypre's own (internal) preconditioners, again by specifying the
+method via an enumerated flag. So, to use no preconditioning,
+or to precondition with \c BoomerAMG (and AMG-based preconditioner), 
+\c Euclid (an ILU preconditioner) or \c ParaSails (a sparse approximate
+inverse preconditioner), set:
+
+\skipline hypre_linear_solver_pt->internal_preconditioner()=HypreSolver::None;
+
+or 
+
+\skipline hypre_linear_solver_pt->internal_preconditioner()=HypreSolver::Boomer
+
+or 
+
+\skipline hypre_linear_solver_pt->internal_preconditioner()=HypreSolver::Eucl
+or 
+
+\skipline hypre_linear_solver_pt->internal_preconditioner()=HypreSolver::ParaS
+
+respectively.
+
+<b>Hypre preconditioners</b>
+
+\c oomph-lib provides wrappers to \c Hypre's 
+preconditioners that allows them to be used as \c oomph-lib 
+\c Preconditioners that may be used with  \c oomph-lib's
+own \c IterativeLinearSolvers. Here is an example that shows how
+to build an instance of \c oomph-lib's \c BiCGStab and to use
+the \c HyprePreconditioner as the preconditioner:
+
+\dontinclude HypreSolver_test.cc
+\skipline  Build and instance of BiCGStab and pass it to the problem
+\until  problem.linear_solver_pt() = oomph_linear_solver_pt;
+
+Now we build an instance of a \c HyprePreconditioner
+
+\dontinclude HypreSolver_test.cc
+\skipline // Create a new Hypre preconditioner
+\until HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
+
+and set it as the \c Preconditioner for \c oomph-lib's \c BiCGStab solver:
+
+
+\skipline oomph_linear_solver_pt->preconditioner_pt()=hypre_preconditioner_pt;
+
+The actual preconditioning methodology to be used by the \c
+HyprePreconditioner is again selected via enumerated flags, i.e.
+
+\skipline hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::Boom
+
+
+or 
+
+\skipline hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::Euc
+
+or 
+
+\skipline hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::Para
+
+
+<HR>
+<HR>
+ 
+
+\section specific_precond Problem-specific preconditioners
+
+In addition to "general-purpose" preconditioners like ILU,
+\c oomph-lib provides a number of problem-specific preconditioners
+which are typically based on the library's block preconditioning
+framework. Separate documentation is available for these:
+
+- We provide a (very!) detailed discussion of \c oomph-lib's
+  <a href="../../mpi/block_preconditioners/html/index.html">
+  block preconditioning framework.</a> \n\n
+- Another tutorial discusses \c oomph-lib's 
+  <a href="../../mpi/distributed_general_purpose_block_preconditioners/html/index.html">"general purpose" 
+  block preconditioners.</a> \n\n
+- The NavierStokesSchurComplementPreconditioner
+  for Navier-Stokes problems is described in its 
+  <a href="../../preconditioners/lsc_navier_stokes/html/index.html">
+  own tutorial. </a> \n\n
+- The FSIPreconditioner
+  for monolithically-discretised fluid-structure interaction problems
+  is described in its 
+  <a href="../../preconditioners/fsi/html/index.html">
+  own tutorial</a> \n\n
+- We provide a
+  <a href="../../preconditioners/prescribed_displ_lagr_mult/html/index.html">
+  preconditioner for large-displacement solid mechanics problems 
+  in which boundary displacements are prescribed.</a>\n\n
+- The previous preconditioner is mainly used as a subsidiary
+  block preconditioner for the 
+  <a href="../../preconditioners/pseudo_solid_fsi/html/index.html">
+  solution of fluid-structure interaction problems with (pseudo-)solid 
+  fluid mesh updates.</a> \n\n
+.
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

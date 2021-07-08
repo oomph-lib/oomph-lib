@@ -1,0 +1,129 @@
+\mainpage Example problem: SUPG-stabilised solution of the 2D advection diffusion equation
+
+In this example we discuss the SUPG-stabilised solution of the 2D
+advection-diffusion problem
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>Two-dimensional advection-diffusion problem in a 
+rectangular domain</B>
+</CENTER> 
+Solve
+\f[
+\mbox{Pe}\ \sum_{i=1}^2 w_i \left(x_1,x_2\right) \frac{\partial u}{\partial
+x_i} = \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} + f(x_1,x_2), 
+ \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@
+\f]
+in the rectangular domain \f$D =\left\{ (x_1,x_2) \in 
+[0,1] \times [0,2]\right\}\f$, 
+with Dirichlet boundary conditions
+\f[
+\left. u\right|_{\partial D}=u_0,
+\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@
+\f]
+
+where the \e Peclet \e number, \f$ \mbox{Pe} \f$ the boundary values, 
+\f$ u_0\f$, the source function \f$ f(x_1,x_2),\f$  
+and the components of the  "wind" \f$ w_i(x_1,x_2) \ (i=1,2)\f$ are given. 
+</TD>
+</TR>
+</TABLE>  
+</CENTER>  
+
+We set \f$ f(x_1,x_2)=0\f$ and assign the boundary conditions such that 
+\f[
+u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\ \ \ \ \ \ \ \ \  @E[ExactSoln]@
+\f]
+For large values of \f$ \alpha, \f$ 
+this boundary data approaches a step, oriented at an angle
+\f$\Phi\f$ against the \f$x_1-\f$axis.
+
+
+ In the computations we will impose the "wind"
+\f[
+\mathbf{w}\left(x_1,x_2 \right) = 
+\left(
+\begin{array}{c}
+\sin(6x_2) \\
+ \cos(6x_1)
+\end{array}
+\right),
+\ \ \ \ \ \ \ \ \  @E[WindFct]@
+\f]
+illustrated in this vector plot:
+
+@I w 0.75\textwidth wind "Plot of the wind. "
+
+
+The figures below show plots of the solution for 
+\f$\Phi=45^\circ, \ \alpha=50 \f$ 
+and a Peclet number of \f$ Pe = 200\f$, with and without SUPG
+stabilisation. The wire-mesh plot shows the solution computed
+on a 10x10 mesh, the shaded surface represents the solution
+obtained from an unstabilised solution on a 150x150 mesh. 
+Note how SUPG stabilisation "suppresses the wiggles" on the 
+relatively coarse mesh.
+
+
+@I w 0.75\textwidth stab "Plot of the SUPG-stabilised solution at different levels of mesh refinement. "
+
+@I w 0.75\textwidth unstab "Plot of the unstabilised solution at different levels of mesh refinement. "
+
+
+
+
+
+
+<HR>
+<HR>
+
+\section main The driver code
+
+Overall, the structure of the driver code is very similar to 
+that used for the <A HREF="../../../advection_diffusion/two_d_adv_diff_adapt/html/index.html">
+problem without stabilisation</a>. 
+
+\subsection todo To be written:
+- Discuss SUPG theory.
+- Implementation and the role of basis, shape and test functions
+  (our equations are isoparametric) 
+.
+Until we get around to completing this example, here's the driver
+code. Fairly self-explanatory, isn't it?
+
+
+
+\include two_d_adv_diff_SUPG.cc
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="
+../../../../
+
+demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/
+">
+demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/
+</A>
+</CENTER>
+- The driver code is: 
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/two_d_adv_diff_SUPG.cc
+">
+demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/two_d_adv_diff_SUPG.cc
+</A>
+</CENTER>
+.
+
+

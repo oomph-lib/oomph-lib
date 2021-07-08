@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Global_Parameters Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Global_Parameters Namespace Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace for physical parameters.  
+<a href="namespaceGlobal__Parameters.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a200109847bf4cc26da4d00e8d68d569e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a200109847bf4cc26da4d00e8d68d569e">gravity</a> (const double &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;b)</td></tr>
+<tr class="memdesc:a200109847bf4cc26da4d00e8d68d569e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-dimensional gravity as body force.  <a href="namespaceGlobal__Parameters.html#a200109847bf4cc26da4d00e8d68d569e">More...</a><br /></td></tr>
+<tr class="separator:a200109847bf4cc26da4d00e8d68d569e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a655abf819eb3045dac883f2b7073ba22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a655abf819eb3045dac883f2b7073ba22">is_on_fsi_boundary</a> (Node *nod_pt)</td></tr>
+<tr class="memdesc:a655abf819eb3045dac883f2b7073ba22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to identify if node is on fsi boundary.  <a href="namespaceGlobal__Parameters.html#a655abf819eb3045dac883f2b7073ba22">More...</a><br /></td></tr>
+<tr class="separator:a655abf819eb3045dac883f2b7073ba22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a9d72e94a9305c6a310940a6a427ebe06"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Re</a> =0.0</td></tr>
+<tr class="memdesc:a9d72e94a9305c6a310940a6a427ebe06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reynolds number.  <a href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">More...</a><br /></td></tr>
+<tr class="separator:a9d72e94a9305c6a310940a6a427ebe06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7814fddf663e56168174a42d2cd6b4c1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Q</a> =0.0</td></tr>
+<tr class="memdesc:a7814fddf663e56168174a42d2cd6b4c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">FSI parameter.  <a href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">More...</a><br /></td></tr>
+<tr class="separator:a7814fddf663e56168174a42d2cd6b4c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a335000b5db4206486a116ae0468d2d0c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a335000b5db4206486a116ae0468d2d0c">Gravity</a> =0.0</td></tr>
+<tr class="memdesc:a335000b5db4206486a116ae0468d2d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-dim gravity.  <a href="namespaceGlobal__Parameters.html#a335000b5db4206486a116ae0468d2d0c">More...</a><br /></td></tr>
+<tr class="separator:a335000b5db4206486a116ae0468d2d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a> =0.3</td></tr>
+<tr class="memdesc:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pseudo-solid Poisson ratio.  <a href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">More...</a><br /></td></tr>
+<tr class="separator:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd1f040f375c96fe56b3f475f7dbec2"><td class="memItemLeft" align="right" valign="top">ConstitutiveLaw *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#adbd1f040f375c96fe56b3f475f7dbec2">Constitutive_law_pt</a> =0</td></tr>
+<tr class="memdesc:adbd1f040f375c96fe56b3f475f7dbec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constitutive law for the solid (and pseudo-solid) mechanics.  <a href="namespaceGlobal__Parameters.html#adbd1f040f375c96fe56b3f475f7dbec2">More...</a><br /></td></tr>
+<tr class="separator:adbd1f040f375c96fe56b3f475f7dbec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace for physical parameters. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a200109847bf4cc26da4d00e8d68d569e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a200109847bf4cc26da4d00e8d68d569e">&#9670;&nbsp;</a></span>gravity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Global_Parameters::gravity </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Non-dimensional gravity as body force. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00055">55</a> of file <a class="el" href="unstructured__two__d__fsi_8cc_source.html">unstructured_two_d_fsi.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00052">Gravity</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00335">UnstructuredFSIProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::UnstructuredFSIProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a655abf819eb3045dac883f2b7073ba22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a655abf819eb3045dac883f2b7073ba22">&#9670;&nbsp;</a></span>is_on_fsi_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Global_Parameters::is_on_fsi_boundary </td>
+          <td>(</td>
+          <td class="paramtype">Node *&#160;</td>
+          <td class="paramname"><em>nod_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Boolean to identify if node is on fsi boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00070">70</a> of file <a class="el" href="unstructured__two__d__fsi_8cc_source.html">unstructured_two_d_fsi.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00185">FluidTriangleMesh&lt; FLUID_ELEMENT &gt;::FluidTriangleMesh()</a>, and <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00119">MySolidTriangleMesh&lt; SOLID_ELEMENT &gt;::MySolidTriangleMesh()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="adbd1f040f375c96fe56b3f475f7dbec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd1f040f375c96fe56b3f475f7dbec2">&#9670;&nbsp;</a></span>Constitutive_law_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ConstitutiveLaw* Global_Parameters::Constitutive_law_pt =0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constitutive law for the solid (and pseudo-solid) mechanics. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00067">67</a> of file <a class="el" href="unstructured__two__d__fsi_8cc_source.html">unstructured_two_d_fsi.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00786">main()</a>, and <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00335">UnstructuredFSIProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::UnstructuredFSIProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a335000b5db4206486a116ae0468d2d0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a335000b5db4206486a116ae0468d2d0c">&#9670;&nbsp;</a></span>Gravity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Gravity =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Non-dim gravity. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00052">52</a> of file <a class="el" href="unstructured__two__d__fsi_8cc_source.html">unstructured_two_d_fsi.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00055">gravity()</a>, and <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00786">main()</a>.</p>
+
+</div>
+</div>
+<a id="a20fccdcfa2c15ad8b951b9ada3bb1661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20fccdcfa2c15ad8b951b9ada3bb1661">&#9670;&nbsp;</a></span>Nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Nu =0.3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pseudo-solid Poisson ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00064">64</a> of file <a class="el" href="unstructured__two__d__fsi_8cc_source.html">unstructured_two_d_fsi.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00786">main()</a>.</p>
+
+</div>
+</div>
+<a id="a7814fddf663e56168174a42d2cd6b4c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7814fddf663e56168174a42d2cd6b4c1">&#9670;&nbsp;</a></span>Q</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Q =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>FSI parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00049">49</a> of file <a class="el" href="unstructured__two__d__fsi_8cc_source.html">unstructured_two_d_fsi.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00638">UnstructuredFSIProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::create_fsi_traction_elements()</a>, and <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00786">main()</a>.</p>
+
+</div>
+</div>
+<a id="a9d72e94a9305c6a310940a6a427ebe06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d72e94a9305c6a310940a6a427ebe06">&#9670;&nbsp;</a></span>Re</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Re =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reynolds number. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00046">46</a> of file <a class="el" href="unstructured__two__d__fsi_8cc_source.html">unstructured_two_d_fsi.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00786">main()</a>, and <a class="el" href="unstructured__two__d__fsi_8cc_source.html#l00335">UnstructuredFSIProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::UnstructuredFSIProblem()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:20:47
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

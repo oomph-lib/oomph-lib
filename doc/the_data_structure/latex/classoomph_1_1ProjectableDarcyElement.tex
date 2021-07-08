@@ -1,0 +1,361 @@
+\hypertarget{classoomph_1_1ProjectableDarcyElement}{}\doxysection{oomph\+::Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1ProjectableDarcyElement}\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+
+
+Darcy upgraded to become projectable.  
+
+
+
+
+{\ttfamily \#include $<$darcy\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.064897cm]{classoomph_1_1ProjectableDarcyElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_ad32ffacb463b234cc17956c1eb45f222}{Projectable\+Darcy\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_aa430ac36ed6a03558d66cae979b57a3f}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_ae6daf28fea08e70d77bcdcb5426b0fb9}{nfields\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 2 (pressure and flux) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_aba5e9617dc6346ca4318baf457445da9}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field. (Note\+: count includes current value!) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_a32091c680d7793baed0e5294c6143418}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Number of positional history values (Note\+: count includes current value!) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_a2dad4f7a1d4bdeeb2bc928677572db03}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
+\begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_a3911971a5babcc1bb85bd1dd46b30fc9}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_a5d7312cd8fb27bd36ac014b180bf5f1a}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_a7c003fb90c5a5892ce176b67f3cf18a0}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_a37aa5179ccb845ed3e9b311758c7ae09}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output FE representation of soln as in underlying element. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_ae250fc064c8c4d34f4e58191c6742df5}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+\begin{DoxyCompactList}\small\item\em Overload required\+\_\+nvalue to return at least one value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_a9ef8e257420ab1ef09862ca1cedd25c0}{pin\+\_\+superfluous\+\_\+darcy\+\_\+dofs}} ()
+\begin{DoxyCompactList}\small\item\em Helper function to pin superfluous dofs; required because we introduce at least one dof per node to allow projection during unstructured refinement) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement_abfbe95045be80a5aacaa0f3a714468fe}{residual\+\_\+for\+\_\+projection}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+\begin{DoxyCompactList}\small\item\em Residual for the projection step. Flag indicates if we want the Jacobian (1) or not (0). Virtual so it can be overloaded if necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}
+
+Darcy upgraded to become projectable. 
+
+Definition at line 522 of file darcy\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_ad32ffacb463b234cc17956c1eb45f222}\label{classoomph_1_1ProjectableDarcyElement_ad32ffacb463b234cc17956c1eb45f222}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!ProjectableDarcyElement@{ProjectableDarcyElement}}
+\index{ProjectableDarcyElement@{ProjectableDarcyElement}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ProjectableDarcyElement()}{ProjectableDarcyElement()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{Projectable\+Darcy\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. 
+
+
+
+Definition at line 531 of file darcy\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_aa430ac36ed6a03558d66cae979b57a3f}\label{classoomph_1_1ProjectableDarcyElement_aa430ac36ed6a03558d66cae979b57a3f}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
+\index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$,unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. ~\newline
+ 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a644306ebdf16f334344c2d27d72f18b7}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 536 of file darcy\+\_\+elements.\+h.
+
+
+
+References i, n, and oomph\+::\+Data\+::nvalue().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_a3911971a5babcc1bb85bd1dd46b30fc9}\label{classoomph_1_1ProjectableDarcyElement_a3911971a5babcc1bb85bd1dd46b30fc9}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!get\_field@{get\_field}}
+\index{get\_field@{get\_field}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_field()}{get\_field()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 696 of file darcy\+\_\+elements.\+h.
+
+
+
+References s.
+
+
+
+Referenced by oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::residual\+\_\+for\+\_\+projection().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_a2dad4f7a1d4bdeeb2bc928677572db03}\label{classoomph_1_1ProjectableDarcyElement_a2dad4f7a1d4bdeeb2bc928677572db03}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
+\index{jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{jacobian\_and\_shape\_of\_field()}{jacobian\_and\_shape\_of\_field()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return Jacobian of mapping and shape functions of field fld at local coordinate s. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 628 of file darcy\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dim(), i, n, oomph\+::\+Finite\+Element\+::nnode(), and s.
+
+
+
+Referenced by oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::residual\+\_\+for\+\_\+projection().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_a7c003fb90c5a5892ce176b67f3cf18a0}\label{classoomph_1_1ProjectableDarcyElement_a7c003fb90c5a5892ce176b67f3cf18a0}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!local\_equation@{local\_equation}}
+\index{local\_equation@{local\_equation}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{local\_equation()}{local\_equation()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::local\+\_\+equation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return local equation number of value j in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 765 of file darcy\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::residual\+\_\+for\+\_\+projection().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_ae6daf28fea08e70d77bcdcb5426b0fb9}\label{classoomph_1_1ProjectableDarcyElement_ae6daf28fea08e70d77bcdcb5426b0fb9}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
+\index{nfields\_for\_projection@{nfields\_for\_projection}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfields\_for\_projection()}{nfields\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nfields\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of fields to be projected\+: 2 (pressure and flux) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 594 of file darcy\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_a32091c680d7793baed0e5294c6143418}\label{classoomph_1_1ProjectableDarcyElement_a32091c680d7793baed0e5294c6143418}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
+\index{nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_coordinate\_projection()}{nhistory\_values\_for\_coordinate\_projection()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of positional history values (Note\+: count includes current value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a3ed675dc7198203c1f}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 621 of file darcy\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_aba5e9617dc6346ca4318baf457445da9}\label{classoomph_1_1ProjectableDarcyElement_aba5e9617dc6346ca4318baf457445da9}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
+\index{nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nhistory\_values\_for\_projection()}{nhistory\_values\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nhistory\+\_\+values\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of history values to be stored for fld-\/th field. (Note\+: count includes current value!) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b964663281f8740f43a5}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 601 of file darcy\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_a5d7312cd8fb27bd36ac014b180bf5f1a}\label{classoomph_1_1ProjectableDarcyElement_a5d7312cd8fb27bd36ac014b180bf5f1a}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
+\index{nvalue\_of\_field@{nvalue\_of\_field}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nvalue\_of\_field()}{nvalue\_of\_field()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nvalue\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return number of values in field fld. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}{oomph\+::\+Projectable\+Element\+Base}}.
+
+
+
+Definition at line 734 of file darcy\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::residual\+\_\+for\+\_\+projection().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_a37aa5179ccb845ed3e9b311758c7ae09}\label{classoomph_1_1ProjectableDarcyElement_a37aa5179ccb845ed3e9b311758c7ae09}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output FE representation of soln as in underlying element. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 805 of file darcy\+\_\+elements.\+h.
+
+
+
+References oomph\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_a9ef8e257420ab1ef09862ca1cedd25c0}\label{classoomph_1_1ProjectableDarcyElement_a9ef8e257420ab1ef09862ca1cedd25c0}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!pin\_superfluous\_darcy\_dofs@{pin\_superfluous\_darcy\_dofs}}
+\index{pin\_superfluous\_darcy\_dofs@{pin\_superfluous\_darcy\_dofs}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{pin\_superfluous\_darcy\_dofs()}{pin\_superfluous\_darcy\_dofs()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::pin\+\_\+superfluous\+\_\+darcy\+\_\+dofs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Helper function to pin superfluous dofs; required because we introduce at least one dof per node to allow projection during unstructured refinement) 
+
+
+
+Definition at line 820 of file darcy\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::pin().
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_ae250fc064c8c4d34f4e58191c6742df5}\label{classoomph_1_1ProjectableDarcyElement_ae250fc064c8c4d34f4e58191c6742df5}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!required\_nvalue@{required\_nvalue}}
+\index{required\_nvalue@{required\_nvalue}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload required\+\_\+nvalue to return at least one value. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 811 of file darcy\+\_\+elements.\+h.
+
+
+
+References n.
+
+\mbox{\Hypertarget{classoomph_1_1ProjectableDarcyElement_abfbe95045be80a5aacaa0f3a714468fe}\label{classoomph_1_1ProjectableDarcyElement_abfbe95045be80a5aacaa0f3a714468fe}} 
+\index{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}!residual\_for\_projection@{residual\_for\_projection}}
+\index{residual\_for\_projection@{residual\_for\_projection}!oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$@{oomph::ProjectableDarcyElement$<$ DARCY\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{residual\_for\_projection()}{residual\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableDarcyElement}{oomph\+::\+Projectable\+Darcy\+Element}}$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::residual\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Residual for the projection step. Flag indicates if we want the Jacobian (1) or not (0). Virtual so it can be overloaded if necessary. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ProjectableElement_a1ff7a9207ec5e4fc2508e75064e136de}{oomph\+::\+Projectable\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}.
+
+
+
+Definition at line 832 of file darcy\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Projectable\+Element\+Base\+::\+Coordinate, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), oomph\+::\+Projectable\+Element\+Base\+::get\+\_\+field(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+field(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field(), oomph\+::\+Integral\+::knot(), oomph\+::\+Projectable\+Element\+Base\+::\+Lagrangian, oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::local\+\_\+equation(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Projectable\+Darcy\+Element$<$ D\+A\+R\+C\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nvalue\+\_\+of\+\_\+field(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn(), oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+coordinate, oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+field, oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+lagrangian, oomph\+::\+Projectable\+Element\+Base\+::\+Projection\+\_\+type, residuals(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Projectable\+Element\+Base\+::\+Time\+\_\+level\+\_\+for\+\_\+projection, oomph\+::\+Projectable\+Element\+Base\+::\+Value, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{darcy__elements_8h}{darcy\+\_\+elements.\+h}}\end{DoxyCompactItemize}

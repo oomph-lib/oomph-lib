@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Steady flow in a curved tube</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: Steady flow in a curved tube </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>The problem of steady flow in a curved tube is considered with a prescribed Poiseuille flow at the inlet and a traction-free outlet condition. It is not clear that the latter is appropriate, but the main aim of this example is to check that the <code>TubeMesh</code> works correctly.</p>
+<p>A detailed comparison between the flow field and the Dean solution should be performed for validation purposes, but the qualitative features seem reasonable.</p>
+<div class="image">
+<img src="curve_geom.gif" alt=""/>
+<div class="caption">
+Sketch of the problem with pressure contours. </div></div>
+ <div class="image">
+<img src="curve_sec.gif" alt=""/>
+<div class="caption">
+Contours of axial velocity and secondary streamlines. </div></div>
+ <p>Detailed documentation to be written. Here's the driver code...</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">///Driver for a 3D navier stokes steady entry flow problem in a </span></div>
+<div class="line"><span class="comment">///uniformly curved tube</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">//Generic routines</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;navier_stokes.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The mesh</span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/tube_mesh.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>oomph;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=start_of_MyCurvedCylinder===================================</span></div>
+<div class="line"><span class="comment">//A geometric object that represents the geometry of the domain</span></div>
+<div class="line"><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classMyCurvedCylinder.html">MyCurvedCylinder</a> : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor that takes the radius and curvature of the tube</span></div>
+<div class="line"><span class="comment"> /// as its arguments</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classMyCurvedCylinder.html">MyCurvedCylinder</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;radius, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;delta) :</div>
+<div class="line">  GeomObject(3,3), Radius(radius), <a class="code" href="namespaceGlobal__Physical__Variables.html#add290b9e4a9c0e4c18a13faa7e29d857">Delta</a>(delta) { }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment">/// Destructor</span></div>
+<div class="line"><span class="comment"></span><span class="keyword">virtual</span>~<a class="code" href="classMyCurvedCylinder.html">MyCurvedCylinder</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///Lagrangian coordinate xi</span></div>
+<div class="line"><span class="comment"></span><span class="keywordtype">void</span> position (<span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword"></span>{</div>
+<div class="line"> r[0] = (1.0/<a class="code" href="namespaceGlobal__Physical__Variables.html#add290b9e4a9c0e4c18a13faa7e29d857">Delta</a>)*cos(xi[0]) + xi[2]*Radius*cos(xi[0])*cos(xi[1]);</div>
+<div class="line"> r[1] = (1.0/<a class="code" href="namespaceGlobal__Physical__Variables.html#add290b9e4a9c0e4c18a13faa7e29d857">Delta</a>)*sin(xi[0]) + xi[2]*Radius*sin(xi[0])*cos(xi[1]);</div>
+<div class="line"> r[2] = -xi[2]*Radius*sin(xi[1]);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/// Return the position of the tube as a function of time </span></div>
+<div class="line"><span class="comment">/// (doesn&#39;t move as a function of time)</span></div>
+<div class="line"><span class="comment"></span><span class="keywordtype">void</span> position(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
+<div class="line">              <span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   position(xi,r);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Storage for the radius of the tube</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Radius;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Storage for the curvature of the tube</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#add290b9e4a9c0e4c18a13faa7e29d857">Delta</a>;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=start_of_namespace================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a>=50;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// The desired curvature of the pipe</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#add290b9e4a9c0e4c18a13faa7e29d857">Delta</a>=0.1;</div>
+<div class="line">} <span class="comment">// end_of_namespace</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=start_of_problem_class=============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Entry flow problem in tapered tube domain</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classSteadyCurvedTubeProblem.html">SteadyCurvedTubeProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass DocInfo object and target errors</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classSteadyCurvedTubeProblem.html">SteadyCurvedTubeProblem</a>(DocInfo&amp; doc_info, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; min_error_target,</div>
+<div class="line">                  <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; max_error_target);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> ~<a class="code" href="classSteadyCurvedTubeProblem.html">SteadyCurvedTubeProblem</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// After adaptation: Pin redudant pressure dofs.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_adapt()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Pin redudant pressure dofs</span></div>
+<div class="line">   RefineableNavierStokesEquations&lt;3&gt;::</div>
+<div class="line">    pin_redundant_nodal_pressures(mesh_pt()-&gt;element_pt());</div>
+<div class="line">  } </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Overload generic access function by one that returns</span></div>
+<div class="line"><span class="comment"> /// a pointer to the specific  mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableTubeMesh&lt;ELEMENT&gt;* mesh_pt() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>RefineableTubeMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc info object</span></div>
+<div class="line"><span class="comment"></span> DocInfo Doc_info;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> ///Pointer to GeomObject that specifies the domain volume</span></div>
+<div class="line"><span class="comment"></span> GeomObject *Volume_pt;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end_of_problem_class</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=start_of_constructor===================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor: Pass DocInfo object and error targets</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classSteadyCurvedTubeProblem.html#ac276276fa87e57ff486e3af24b72e38b">SteadyCurvedTubeProblem&lt;ELEMENT&gt;::SteadyCurvedTubeProblem</a>(DocInfo&amp; doc_info,</div>
+<div class="line">                                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; min_error_target,</div>
+<div class="line">                                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; max_error_target) </div>
+<div class="line"> : Doc_info(doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup mesh:</span></div>
+<div class="line"> <span class="comment">//------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create GeomObject that specifies the domain geometry</span></div>
+<div class="line"> <span class="comment">//The radius of the tube is one and the curvature is specified by</span></div>
+<div class="line"> <span class="comment">//the global variable Delta.</span></div>
+<div class="line"> Volume_pt=<span class="keyword">new</span> <a class="code" href="classMyCurvedCylinder.html">MyCurvedCylinder</a>(1.0,<a class="code" href="namespaceGlobal__Physical__Variables.html#add290b9e4a9c0e4c18a13faa7e29d857">Global_Physical_Variables::Delta</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Define pi </span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> pi = MathematicalConstants::Pi;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set the centerline coordinates spanning the mesh</span></div>
+<div class="line"> Vector&lt;double&gt; centreline_limits(2);</div>
+<div class="line"> centreline_limits[0] = 0.0;</div>
+<div class="line"> centreline_limits[1] = pi;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set the positions of the angles that divide the outer ring</span></div>
+<div class="line"> <span class="comment">//These must be in the range -pi,pi, ordered from smallest to</span></div>
+<div class="line"> <span class="comment">//largest</span></div>
+<div class="line"> Vector&lt;double&gt; theta_positions(4);</div>
+<div class="line"> theta_positions[0] = -0.75*pi;</div>
+<div class="line"> theta_positions[1] = -0.25*pi;</div>
+<div class="line"> theta_positions[2] = 0.25*pi;</div>
+<div class="line"> theta_positions[3] = 0.75*pi;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Define the radial fraction of the central box (always halfway</span></div>
+<div class="line"> <span class="comment">//along the radius)</span></div>
+<div class="line"> Vector&lt;double&gt; radial_frac(4,0.5);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of layers in the initial mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nlayer=6;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build and assign mesh</span></div>
+<div class="line"> Problem::mesh_pt()= <span class="keyword">new</span> RefineableTubeMesh&lt;ELEMENT&gt;(Volume_pt,</div>
+<div class="line">                                                     centreline_limits,</div>
+<div class="line">                                                     theta_positions,</div>
+<div class="line">                                                     radial_frac,</div>
+<div class="line">                                                     nlayer);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator </span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> mesh_pt()-&gt;spatial_error_estimator_pt()=error_estimator_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Error targets for adaptive refinement</span></div>
+<div class="line"> mesh_pt()-&gt;max_permitted_error()=max_error_target; </div>
+<div class="line"> mesh_pt()-&gt;min_permitted_error()=min_error_target; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodal values are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here. </span></div>
+<div class="line"> <span class="comment">//Choose the conventional form by setting gamma to zero</span></div>
+<div class="line"> <span class="comment">//The boundary conditions will be pseudo-traction free (d/dn = 0)</span></div>
+<div class="line"> ELEMENT::Gamma[0] = 0.0;</div>
+<div class="line"> ELEMENT::Gamma[1] = 0.0;</div>
+<div class="line"> ELEMENT::Gamma[2] = 0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the boundaries</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Boundary 0 is the inlet symmetry boundary: </span></div>
+<div class="line">     <span class="comment">// Boundary 1 is the tube wall</span></div>
+<div class="line">     <span class="comment">// Pin all values</span></div>
+<div class="line">     <span class="keywordflow">if</span>((ibound==0) || (ibound==1))</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0);</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1);</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(2);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   ELEMENT* el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the Reynolds number, etc</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin redudant pressure dofs</span></div>
+<div class="line"> RefineableNavierStokesEquations&lt;3&gt;::</div>
+<div class="line">  pin_redundant_nodal_pressures(mesh_pt()-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Attach the boundary conditions to the mesh</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_constructor</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=start_of_actions_before_newton_solve===================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Set the inflow boundary conditions</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classSteadyCurvedTubeProblem.html#a90f3197b2cd58a6d24d7064018db3bac">SteadyCurvedTubeProblem&lt;ELEMENT&gt;::actions_before_newton_solve</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// (Re-)assign velocity profile at inflow values</span></div>
+<div class="line"> <span class="comment">//--------------------------------------------</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=0; </div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound); </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Recover coordinates of tube relative to centre position</span></div>
+<div class="line">   <span class="keywordtype">double</span> x=mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;x(0) - </div>
+<div class="line">    1.0/<a class="code" href="namespaceGlobal__Physical__Variables.html#add290b9e4a9c0e4c18a13faa7e29d857">Global_Physical_Variables::Delta</a>;</div>
+<div class="line">   <span class="keywordtype">double</span> z=mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;x(2);</div>
+<div class="line">   <span class="comment">//Calculate the radius</span></div>
+<div class="line">   <span class="keywordtype">double</span> r=sqrt(x*x+z*z);  </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Poiseuille-type profile for axial velocity (component 1 at the inlet)</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;</div>
+<div class="line">    set_value(1,(1.0-pow(r,2.0)));</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_actions_before_newton_solve</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=start_of_doc_solution==================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classSteadyCurvedTubeProblem.html#a544bdf06e254393094a39561944af6b7">SteadyCurvedTubeProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">//Output file stream</span></div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Need high precision for large radii of curvature</span></div>
+<div class="line"> <span class="comment">//some_file.precision(10);</span></div>
+<div class="line"> <span class="comment">// Output solution labelled by the Reynolds number</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln_Re%g.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         <a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>);</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_doc_solution</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=start_of_main=======================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver for 3D entry flow into a curved tube. If there are</span></div>
+<div class="line"><span class="comment">/// any command line arguments, we regard this as a validation run</span></div>
+<div class="line"><span class="comment">/// and perform only a single adaptation</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="curved__pipe_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Allow (up to) two rounds of fully automatic adapation in response to </span></div>
+<div class="line"> <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"> <span class="comment">// error estimate</span></div>
+<div class="line"> <span class="comment">//---------------</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_adapt;</div>
+<div class="line"> <span class="keywordtype">double</span> max_error_target,min_error_target;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set max number of adaptations in black-box Newton solver and</span></div>
+<div class="line"> <span class="comment">// error targets for adaptation</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc==1)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Up to two adaptations</span></div>
+<div class="line">   max_adapt=2;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Error targets for adaptive refinement</span></div>
+<div class="line">   max_error_target=0.001;</div>
+<div class="line">   min_error_target=0.00001;</div>
+<div class="line">  } </div>
+<div class="line"> <span class="comment">// Validation run: Only one adaptation. Relax error targets</span></div>
+<div class="line"> <span class="comment">// for faster solution</span></div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Validation run: Just one round of adaptation</span></div>
+<div class="line">   max_adapt=1;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Error targets for adaptive refinement</span></div>
+<div class="line">   max_error_target=0.02;</div>
+<div class="line">   min_error_target=0.002;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment">// end max_adapt setup</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up doc info</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do Taylor-Hood elements</span></div>
+<div class="line"> <span class="comment">//------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Set output directory</span></div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_TH&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Step number</span></div>
+<div class="line">  doc_info.number()=0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Build problem</span></div>
+<div class="line">  <a class="code" href="classSteadyCurvedTubeProblem.html">SteadyCurvedTubeProblem&lt;RefineableQTaylorHoodElement&lt;3&gt;</a> &gt; </div>
+<div class="line">   <a class="code" href="curved__pipe_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>(doc_info,min_error_target,max_error_target);</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot; Doing Taylor-Hood elements &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem </span></div>
+<div class="line">  <a class="code" href="curved__pipe_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve(max_adapt);</div>
+<div class="line">  <span class="comment">// Doc solution after solving</span></div>
+<div class="line">  <a class="code" href="curved__pipe_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution();</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do Crouzeix-Raviart elements</span></div>
+<div class="line"> <span class="comment">//------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Set output directory</span></div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_CR&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Step number</span></div>
+<div class="line">  doc_info.number()=0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Build problem</span></div>
+<div class="line">  <a class="code" href="classSteadyCurvedTubeProblem.html">SteadyCurvedTubeProblem&lt;RefineableQCrouzeixRaviartElement&lt;3&gt;</a> &gt; </div>
+<div class="line">   <a class="code" href="curved__pipe_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>(doc_info,min_error_target,max_error_target);</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot; Doing Crouzeix-Raviart elements &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem </span></div>
+<div class="line">  <a class="code" href="curved__pipe_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve(max_adapt);</div>
+<div class="line">  <span class="comment">// Doc solution after solving</span></div>
+<div class="line">  <a class="code" href="curved__pipe_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution();</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_main</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+</div><!-- fragment --><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassSteadyCurvedTubeProblem_html_a544bdf06e254393094a39561944af6b7"><div class="ttname"><a href="classSteadyCurvedTubeProblem.html#a544bdf06e254393094a39561944af6b7">SteadyCurvedTubeProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8cc_source.html#l00284">curved_pipe.cc:284</a></div></div>
+<div class="ttc" id="aclassSteadyCurvedTubeProblem_html_ac276276fa87e57ff486e3af24b72e38b"><div class="ttname"><a href="classSteadyCurvedTubeProblem.html#ac276276fa87e57ff486e3af24b72e38b">SteadyCurvedTubeProblem::SteadyCurvedTubeProblem</a></div><div class="ttdeci">SteadyCurvedTubeProblem(DocInfo &amp;doc_info, const double &amp;min_error_target, const double &amp;max_error_target)</div><div class="ttdoc">Constructor: Pass DocInfo object and target errors.</div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8cc_source.html#l00149">curved_pipe.cc:149</a></div></div>
+<div class="ttc" id="aclassMyCurvedCylinder_html"><div class="ttname"><a href="classMyCurvedCylinder.html">MyCurvedCylinder</a></div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8cc_source.html#l00044">curved_pipe.cc:44</a></div></div>
+<div class="ttc" id="aclassSteadyCurvedTubeProblem_html"><div class="ttname"><a href="classSteadyCurvedTubeProblem.html">SteadyCurvedTubeProblem</a></div><div class="ttdoc">Entry flow problem in tapered tube domain.</div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8cc_source.html#l00099">curved_pipe.cc:99</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8cc_source.html#l00085">curved_pipe.cc:85</a></div></div>
+<div class="ttc" id="acurved__pipe_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="curved__pipe_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8txt_source.html#l00006">curved_pipe.txt:6</a></div></div>
+<div class="ttc" id="acurved__pipe_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="curved__pipe_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8cc_source.html#l00318">curved_pipe.cc:318</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_add290b9e4a9c0e4c18a13faa7e29d857"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#add290b9e4a9c0e4c18a13faa7e29d857">Global_Physical_Variables::Delta</a></div><div class="ttdeci">double Delta</div><div class="ttdoc">The desired curvature of the pipe.</div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8cc_source.html#l00091">curved_pipe.cc:91</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8cc_source.html#l00088">curved_pipe.cc:88</a></div></div>
+<div class="ttc" id="aclassSteadyCurvedTubeProblem_html_a90f3197b2cd58a6d24d7064018db3bac"><div class="ttname"><a href="classSteadyCurvedTubeProblem.html#a90f3197b2cd58a6d24d7064018db3bac">SteadyCurvedTubeProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve.</div><div class="ttdef"><b>Definition:</b> <a href="curved__pipe_8cc_source.html#l00256">curved_pipe.cc:256</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:08:04
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

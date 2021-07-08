@@ -1,0 +1,376 @@
+\hypertarget{namespaceoomph_1_1Missing__masters__functions}{}\doxysection{oomph\+::Missing\+\_\+masters\+\_\+functions Namespace Reference}
+\label{namespaceoomph_1_1Missing__masters__functions}\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a94805dfb28ba45ff7f4d7a0d6fef108d}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&send\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&send\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper function to add external haloed nodes, including any masters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a954b632d3a93388358723d33bca9c549}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&send\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&send\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Recursively add any master nodes (and their master nodes etc) of external haloed nodes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a6034e2c1c81a56272efd35886b2a9543}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&send\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&send\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper to add external haloed node that is not a master. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_acd3ecd40c8ebcfdb04f2e26c3fc304cc}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$master\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&send\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&send\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper function to add external haloed node that is a master. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_acc3c8930de1090a3dd7d4a3ddb55cacb}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&send\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&send\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper function to get the required nodal information from an external haloed node so that a fully-\/functional external halo node (and therefore element) can be created on the receiving process. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a56eaf8c8da98960d9929a0c9921c4df7}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper}} (int \&iproc, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$master\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&send\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&send\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving proc. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a537b9f129421d1ad4f6915794d9dd66f}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, unsigned \&loc\+\_\+p, unsigned \&node\+\_\+index, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&new\+\_\+el\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&recv\+\_\+unsigneds, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+doubles, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&recv\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper functiono to add external halo node that is not a master. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_ae60b3fe43b4c8a9ccd03d2bc22f437c6}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+nod\+\_\+pt, unsigned \&loc\+\_\+p, unsigned \&node\+\_\+index, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&new\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&recv\+\_\+unsigneds, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+doubles, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&recv\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper function which constructs a new external halo node (on an element) with the information sent from the haloed process. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+X\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a9510959d4583c82a516d520c9da35a93}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, unsigned \&loc\+\_\+p, unsigned \&node\+\_\+index, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&new\+\_\+el\+\_\+pt, int \&n\+\_\+cont\+\_\+inter\+\_\+values, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&recv\+\_\+unsigneds, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+doubles, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&recv\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper function to add external halo nodes, including any masters, based on information received from the haloed process. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+X\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a5aeedca2c5268a414d83fa7cfd023f14}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, unsigned \&loc\+\_\+p, unsigned \&node\+\_\+index, int \&n\+\_\+cont\+\_\+inter\+\_\+values, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&recv\+\_\+unsigneds, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+doubles, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&recv\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+X\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a9e3bf04e14473cd6671c5b1f17bc4823}{add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+master\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, unsigned \&loc\+\_\+p, int \&n\+\_\+cont\+\_\+inter\+\_\+values, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&recv\+\_\+unsigneds, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+doubles, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&recv\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper function to add external halo node that is a master. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class E\+X\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a97561cb6cf8e5ad1c876173ee5973e41}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&new\+\_\+master\+\_\+nod\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&nod\+\_\+pt, unsigned \&loc\+\_\+p, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&mesh\+\_\+pt, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+unsigneds, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&recv\+\_\+unsigneds, unsigned \&counter\+\_\+for\+\_\+recv\+\_\+doubles, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&recv\+\_\+doubles)
+\begin{DoxyCompactList}\small\item\em Helper function which constructs a new external halo master node with the information sent from the haloed process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_af558db56295524af220b5b4c981d5aa0}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}
+\item 
+bool \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_acd9cae489a6217b1566a1e40cbca86cf}{Doc\+\_\+timings}} =false
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether to doc timings or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a86ac04bf0028ba6e66c07466cc9774ce}{Doc\+\_\+stats}} =false
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether to output basic info during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a5059632b6254fcfc11f688e3e643d71c}{Doc\+\_\+full\+\_\+stats}} =false
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether to output further info during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a9e3bf04e14473cd6671c5b1f17bc4823}\label{namespaceoomph_1_1Missing__masters__functions_a9e3bf04e14473cd6671c5b1f17bc4823}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_halo\_master\_node\_helper@{add\_external\_halo\_master\_node\_helper}}
+\index{add\_external\_halo\_master\_node\_helper@{add\_external\_halo\_master\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_halo\_master\_node\_helper()}{add\_external\_halo\_master\_node\_helper()}}
+{\footnotesize\ttfamily template$<$class E\+X\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{new\+\_\+master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{unsigned \&}]{loc\+\_\+p,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{recv\+\_\+unsigneds,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external halo node that is a master. 
+
+
+
+Definition at line 173 of file missing\+\_\+masters.\+template.\+cc.
+
+
+
+References oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::oomph\+\_\+info, and oomph\+::\+Mesh\+::shared\+\_\+node\+\_\+pt().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a537b9f129421d1ad4f6915794d9dd66f}\label{namespaceoomph_1_1Missing__masters__functions_a537b9f129421d1ad4f6915794d9dd66f}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_halo\_node\_helper@{add\_external\_halo\_node\_helper}}
+\index{add\_external\_halo\_node\_helper@{add\_external\_halo\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_halo\_node\_helper()}{add\_external\_halo\_node\_helper()}}
+{\footnotesize\ttfamily void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{unsigned \&}]{loc\+\_\+p,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{recv\+\_\+unsigneds,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper functiono to add external halo node that is not a master. 
+
+Helper function to add external halo node that is not a master. 
+
+Definition at line 1169 of file missing\+\_\+masters.\+cc.
+
+
+
+References construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::oomph\+\_\+info, and oomph\+::\+Mesh\+::shared\+\_\+node\+\_\+pt().
+
+
+
+Referenced by add\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage(), and oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a9510959d4583c82a516d520c9da35a93}\label{namespaceoomph_1_1Missing__masters__functions_a9510959d4583c82a516d520c9da35a93}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_halo\_node\_to\_storage@{add\_external\_halo\_node\_to\_storage}}
+\index{add\_external\_halo\_node\_to\_storage@{add\_external\_halo\_node\_to\_storage}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_halo\_node\_to\_storage()}{add\_external\_halo\_node\_to\_storage()}}
+{\footnotesize\ttfamily template$<$class E\+X\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{unsigned \&}]{loc\+\_\+p,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{recv\+\_\+unsigneds,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external halo nodes, including any masters, based on information received from the haloed process. 
+
+Helper function to add external halo nodes, including any masters, based on information received from the haloed process 
+
+Definition at line 64 of file missing\+\_\+masters.\+template.\+cc.
+
+
+
+References add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_acd3ecd40c8ebcfdb04f2e26c3fc304cc}\label{namespaceoomph_1_1Missing__masters__functions_acd3ecd40c8ebcfdb04f2e26c3fc304cc}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_haloed\_master\_node\_helper@{add\_external\_haloed\_master\_node\_helper}}
+\index{add\_external\_haloed\_master\_node\_helper@{add\_external\_haloed\_master\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_haloed\_master\_node\_helper()}{add\_external\_haloed\_master\_node\_helper()}}
+{\footnotesize\ttfamily void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{int \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external haloed node that is a master. 
+
+
+
+Definition at line 308 of file missing\+\_\+masters.\+cc.
+
+
+
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+pt(), Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Mesh\+::get\+\_\+shared\+\_\+node\+\_\+pt(), and oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node().
+
+
+
+Referenced by recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a6034e2c1c81a56272efd35886b2a9543}\label{namespaceoomph_1_1Missing__masters__functions_a6034e2c1c81a56272efd35886b2a9543}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_haloed\_node\_helper@{add\_external\_haloed\_node\_helper}}
+\index{add\_external\_haloed\_node\_helper@{add\_external\_haloed\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_haloed\_node\_helper()}{add\_external\_haloed\_node\_helper()}}
+{\footnotesize\ttfamily void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{int \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper to add external haloed node that is not a master. 
+
+Helper function to add external haloed node that is not a master. 
+
+Definition at line 173 of file missing\+\_\+masters.\+cc.
+
+
+
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+pt(), Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Mesh\+::get\+\_\+shared\+\_\+node\+\_\+pt(), and oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node().
+
+
+
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a94805dfb28ba45ff7f4d7a0d6fef108d}\label{namespaceoomph_1_1Missing__masters__functions_a94805dfb28ba45ff7f4d7a0d6fef108d}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_haloed\_node\_to\_storage@{add\_external\_haloed\_node\_to\_storage}}
+\index{add\_external\_haloed\_node\_to\_storage@{add\_external\_haloed\_node\_to\_storage}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_haloed\_node\_to\_storage()}{add\_external\_haloed\_node\_to\_storage()}}
+{\footnotesize\ttfamily void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage (\begin{DoxyParamCaption}\item[{int \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external haloed nodes, including any masters. 
+
+Helper function to add external haloed nodes, inc. masters of external haloed nodes. 
+
+Definition at line 80 of file missing\+\_\+masters.\+cc.
+
+
+
+References add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper(), and recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node().
+
+
+
+Referenced by get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a97561cb6cf8e5ad1c876173ee5973e41}\label{namespaceoomph_1_1Missing__masters__functions_a97561cb6cf8e5ad1c876173ee5973e41}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!construct\_new\_external\_halo\_master\_node\_helper@{construct\_new\_external\_halo\_master\_node\_helper}}
+\index{construct\_new\_external\_halo\_master\_node\_helper@{construct\_new\_external\_halo\_master\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{construct\_new\_external\_halo\_master\_node\_helper()}{construct\_new\_external\_halo\_master\_node\_helper()}}
+{\footnotesize\ttfamily template$<$class E\+X\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{new\+\_\+master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{nod\+\_\+pt,  }\item[{unsigned \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{recv\+\_\+unsigneds,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function which constructs a new external halo master node with the information sent from the haloed process. 
+
+Helper function which constructs a new external halo master node with the required information sent from the haloed process The first entry of All\+\_\+unsigned\+\_\+values is the default node update id
+
+... so for the specified update\+\_\+id, call add\+\_\+node\+\_\+update\+\_\+info
+
+Now call update\+\_\+node\+\_\+update
+
+Definition at line 245 of file missing\+\_\+masters.\+template.\+cc.
+
+
+
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt(), oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt(), oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Refineable\+Element\+::initial\+\_\+setup(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt(), oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), Node, oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update\+\_\+element\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), oomph\+::\+Data\+::set\+\_\+halo(), oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_ae60b3fe43b4c8a9ccd03d2bc22f437c6}\label{namespaceoomph_1_1Missing__masters__functions_ae60b3fe43b4c8a9ccd03d2bc22f437c6}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!construct\_new\_external\_halo\_node\_helper@{construct\_new\_external\_halo\_node\_helper}}
+\index{construct\_new\_external\_halo\_node\_helper@{construct\_new\_external\_halo\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{construct\_new\_external\_halo\_node\_helper()}{construct\_new\_external\_halo\_node\_helper()}}
+{\footnotesize\ttfamily void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{unsigned \&}]{loc\+\_\+p,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{new\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{recv\+\_\+unsigneds,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function which constructs a new external halo node (on an element) with the information sent from the haloed process. 
+
+Helper function which constructs a new external halo node (on new element) with the required information sent from the haloed process The first entry of All\+\_\+alg\+\_\+nodal\+\_\+info contains the default node update id e.\+g. for the quarter circle there are \char`\"{}\+Upper\+\_\+left\+\_\+box\char`\"{}, \char`\"{}\+Lower right box\char`\"{} etc...
+
+again we need the size of this vector as it varies between meshes; we also need some indication as to which geometric object should be used...
+
+For the received update\+\_\+id, ref\+\_\+value, geom\+\_\+object call add\+\_\+node\+\_\+update\+\_\+info
+
+Now call update\+\_\+node\+\_\+update
+
+Definition at line 1251 of file missing\+\_\+masters.\+cc.
+
+
+
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Node\+::resize(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
+
+
+
+Referenced by add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a56eaf8c8da98960d9929a0c9921c4df7}\label{namespaceoomph_1_1Missing__masters__functions_a56eaf8c8da98960d9929a0c9921c4df7}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!get\_required\_master\_nodal\_information\_helper@{get\_required\_master\_nodal\_information\_helper}}
+\index{get\_required\_master\_nodal\_information\_helper@{get\_required\_master\_nodal\_information\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{get\_required\_master\_nodal\_information\_helper()}{get\_required\_master\_nodal\_information\_helper()}}
+{\footnotesize\ttfamily void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper (\begin{DoxyParamCaption}\item[{int \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving proc. 
+
+Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving process 
+
+Definition at line 658 of file missing\+\_\+masters.\+cc.
+
+
+
+References add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage(), boundaries, oomph\+::\+Mesh\+::communicator\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Mesh\+::external\+\_\+haloed\+\_\+element\+\_\+pt(), Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Data\+::is\+\_\+halo(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Node\+::ndim(), oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object(), oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Solid\+Node\+::nlagrangian\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update\+\_\+element\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Data\+::non\+\_\+halo\+\_\+proc\+\_\+\+I\+D(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+P\+Refineable\+Element\+::p\+\_\+order(), oomph\+::\+Algebraic\+Node\+::ref\+\_\+value(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), value, oomph\+::\+Node\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
+
+
+
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_acc3c8930de1090a3dd7d4a3ddb55cacb}\label{namespaceoomph_1_1Missing__masters__functions_acc3c8930de1090a3dd7d4a3ddb55cacb}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}}
+\index{get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{get\_required\_nodal\_information\_helper()}{get\_required\_nodal\_information\_helper()}}
+{\footnotesize\ttfamily void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper (\begin{DoxyParamCaption}\item[{int \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to get the required nodal information from an external haloed node so that a fully-\/functional external halo node (and therefore element) can be created on the receiving process. 
+
+Helper function to get the required nodal information from an external haloed node so that a fully-\/functional external halo node (and therefore element) can be created on the receiving process 
+
+Definition at line 435 of file missing\+\_\+masters.\+cc.
+
+
+
+References boundaries, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Node\+::ndim(), oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object(), oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Algebraic\+Node\+::ref\+\_\+value(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), value, oomph\+::\+Node\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
+
+
+
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::add\+\_\+haloed\+\_\+node\+\_\+helper().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a5aeedca2c5268a414d83fa7cfd023f14}\label{namespaceoomph_1_1Missing__masters__functions_a5aeedca2c5268a414d83fa7cfd023f14}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage@{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage}}
+\index{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage@{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage()}{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage()}}
+{\footnotesize\ttfamily template$<$class E\+X\+T\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
+void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{unsigned \&}]{loc\+\_\+p,  }\item[{unsigned \&}]{node\+\_\+index,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{recv\+\_\+unsigneds,  }\item[{unsigned \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process. 
+
+Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process 
+
+Definition at line 102 of file missing\+\_\+masters.\+template.\+cc.
+
+
+
+References oomph\+::oomph\+\_\+info, oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), and oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a954b632d3a93388358723d33bca9c549}\label{namespaceoomph_1_1Missing__masters__functions_a954b632d3a93388358723d33bca9c549}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!recursively\_add\_masters\_of\_external\_haloed\_node@{recursively\_add\_masters\_of\_external\_haloed\_node}}
+\index{recursively\_add\_masters\_of\_external\_haloed\_node@{recursively\_add\_masters\_of\_external\_haloed\_node}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{recursively\_add\_masters\_of\_external\_haloed\_node()}{recursively\_add\_masters\_of\_external\_haloed\_node()}}
+{\footnotesize\ttfamily void oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node (\begin{DoxyParamCaption}\item[{int \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&}]{mesh\+\_\+pt,  }\item[{int \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Recursively add any master nodes (and their master nodes etc) of external haloed nodes. 
+
+Recursively add any master nodes (and their master nodes etc) of external nodes 
+
+Definition at line 106 of file missing\+\_\+masters.\+cc.
+
+
+
+References add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper(), Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), and oomph\+::\+Hang\+Info\+::nmaster().
+
+
+
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage(), and oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::additional\+\_\+synchronise\+\_\+hanging\+\_\+nodes().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a5059632b6254fcfc11f688e3e643d71c}\label{namespaceoomph_1_1Missing__masters__functions_a5059632b6254fcfc11f688e3e643d71c}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!Doc\_full\_stats@{Doc\_full\_stats}}
+\index{Doc\_full\_stats@{Doc\_full\_stats}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_full\_stats}{Doc\_full\_stats}}
+{\footnotesize\ttfamily bool oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+full\+\_\+stats =false}
+
+
+
+Boolean to indicate whether to output further info during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. 
+
+Boolean to indicate whether to document further info (to screen) during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. 
+
+Definition at line 70 of file missing\+\_\+masters.\+cc.
+
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a86ac04bf0028ba6e66c07466cc9774ce}\label{namespaceoomph_1_1Missing__masters__functions_a86ac04bf0028ba6e66c07466cc9774ce}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!Doc\_stats@{Doc\_stats}}
+\index{Doc\_stats@{Doc\_stats}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_stats}{Doc\_stats}}
+{\footnotesize\ttfamily bool oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+stats =false}
+
+
+
+Boolean to indicate whether to output basic info during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. 
+
+Boolean to indicate whether to document basic info (to screen) during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. 
+
+Definition at line 66 of file missing\+\_\+masters.\+cc.
+
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_acd9cae489a6217b1566a1e40cbca86cf}\label{namespaceoomph_1_1Missing__masters__functions_acd9cae489a6217b1566a1e40cbca86cf}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!Doc\_timings@{Doc\_timings}}
+\index{Doc\_timings@{Doc\_timings}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_timings}{Doc\_timings}}
+{\footnotesize\ttfamily bool oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+timings =false}
+
+
+
+Boolean to indicate whether to doc timings or not. 
+
+
+
+Definition at line 62 of file missing\+\_\+masters.\+cc.
+
+
+
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Missing__masters__functions_af558db56295524af220b5b4c981d5aa0}\label{namespaceoomph_1_1Missing__masters__functions_af558db56295524af220b5b4c981d5aa0}} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!Flat\_packed\_unsigneds\_string@{Flat\_packed\_unsigneds\_string}}
+\index{Flat\_packed\_unsigneds\_string@{Flat\_packed\_unsigneds\_string}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{Flat\_packed\_unsigneds\_string}{Flat\_packed\_unsigneds\_string}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}
+
+
+
+Definition at line 57 of file missing\+\_\+masters.\+cc.
+
+
+
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper(), add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::add\+\_\+haloed\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::add\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::load\+\_\+balance(), recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::send\+\_\+and\+\_\+receive\+\_\+elements\+\_\+nodes\+\_\+info().
+

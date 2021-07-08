@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: adaptive_bubble_in_channel.cc File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_ddb094a380b94394dbbcf95a63b535e6.html">demo_drivers</a></li><li class="navelem"><a class="el" href="dir_600eb748837abd3a599f824dcb8c690e.html">navier_stokes</a></li><li class="navelem"><a class="el" href="dir_451fe91e591a191a94afabfebc8f771c.html">unstructured_adaptive_fs</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">adaptive_bubble_in_channel.cc File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="adaptive__bubble__in__channel_8cc_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MyTaylorHoodElement.html">oomph::MyTaylorHoodElement</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload TaylorHood element to modify output.  <a href="classoomph_1_1MyTaylorHoodElement.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01MyTaylorHoodElement_01_4.html">oomph::FaceGeometry&lt; MyTaylorHoodElement &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01MyTaylorHoodElement_01_4_01_4.html">oomph::FaceGeometry&lt; FaceGeometry&lt; MyTaylorHoodElement &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBubbleInChannelProblem.html">BubbleInChannelProblem&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Problem class to simulate inviscid bubble propagating along 2D channel.  <a href="classBubbleInChannelProblem.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceoomph"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html">oomph</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceProblem__Parameter"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html">Problem_Parameter</a></td></tr>
+<tr class="memdesc:namespaceProblem__Parameter"><td class="mdescLeft">&#160;</td><td class="mdescRight">Namespace for Problem Parameter. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="adaptive__bubble__in__channel_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Driver code for moving bubble problem.  <a href="adaptive__bubble__in__channel_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1dd3c6bcf97360c8fe0d288ca7610351"><td class="memItemLeft" align="right" valign="top">DocInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a1dd3c6bcf97360c8fe0d288ca7610351">Problem_Parameter::Doc_info</a></td></tr>
+<tr class="memdesc:a1dd3c6bcf97360c8fe0d288ca7610351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc info object.  <a href="namespaceProblem__Parameter.html#a1dd3c6bcf97360c8fe0d288ca7610351">More...</a><br /></td></tr>
+<tr class="separator:a1dd3c6bcf97360c8fe0d288ca7610351"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc656299287d4d9a8374c2c501750b4f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#acc656299287d4d9a8374c2c501750b4f">Problem_Parameter::Re</a> =0.0</td></tr>
+<tr class="memdesc:acc656299287d4d9a8374c2c501750b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reynolds number.  <a href="namespaceProblem__Parameter.html#acc656299287d4d9a8374c2c501750b4f">More...</a><br /></td></tr>
+<tr class="separator:acc656299287d4d9a8374c2c501750b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6194d2571881779c678fbabc1503d47"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#af6194d2571881779c678fbabc1503d47">Problem_Parameter::Ca</a> = 10.0</td></tr>
+<tr class="memdesc:af6194d2571881779c678fbabc1503d47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capillary number.  <a href="namespaceProblem__Parameter.html#af6194d2571881779c678fbabc1503d47">More...</a><br /></td></tr>
+<tr class="separator:af6194d2571881779c678fbabc1503d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abec2e733c8f2d3c18ebc702b3f80cc17"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#abec2e733c8f2d3c18ebc702b3f80cc17">Problem_Parameter::Nu</a> =0.3</td></tr>
+<tr class="memdesc:abec2e733c8f2d3c18ebc702b3f80cc17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pseudo-solid Poisson ratio.  <a href="namespaceProblem__Parameter.html#abec2e733c8f2d3c18ebc702b3f80cc17">More...</a><br /></td></tr>
+<tr class="separator:abec2e733c8f2d3c18ebc702b3f80cc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a903237528f0e9bb92debcc8842576cca"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a903237528f0e9bb92debcc8842576cca">Problem_Parameter::Radius</a> = 0.25</td></tr>
+<tr class="memdesc:a903237528f0e9bb92debcc8842576cca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial radius of bubble.  <a href="namespaceProblem__Parameter.html#a903237528f0e9bb92debcc8842576cca">More...</a><br /></td></tr>
+<tr class="separator:a903237528f0e9bb92debcc8842576cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad8e0a2d1ec39a8dd7357a43bcc5f20e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#aad8e0a2d1ec39a8dd7357a43bcc5f20e">Problem_Parameter::Volume</a> = -MathematicalConstants::Pi*Radius*Radius</td></tr>
+<tr class="memdesc:aad8e0a2d1ec39a8dd7357a43bcc5f20e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Volume of the bubble (negative because it's outside the fluid!)  <a href="namespaceProblem__Parameter.html#aad8e0a2d1ec39a8dd7357a43bcc5f20e">More...</a><br /></td></tr>
+<tr class="separator:aad8e0a2d1ec39a8dd7357a43bcc5f20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7792613e563a733ad88b8e15d126fc3a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a7792613e563a733ad88b8e15d126fc3a">Problem_Parameter::Inflow_veloc_magnitude</a> = 0.0</td></tr>
+<tr class="memdesc:a7792613e563a733ad88b8e15d126fc3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scaling factor for inflow velocity (allows it to be switched off to do hydrostatics)  <a href="namespaceProblem__Parameter.html#a7792613e563a733ad88b8e15d126fc3a">More...</a><br /></td></tr>
+<tr class="separator:a7792613e563a733ad88b8e15d126fc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b67840fea463f29b53d12f7bd7cb34b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a7b67840fea463f29b53d12f7bd7cb34b">Problem_Parameter::Length</a> = 3.0</td></tr>
+<tr class="memdesc:a7b67840fea463f29b53d12f7bd7cb34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the channel.  <a href="namespaceProblem__Parameter.html#a7b67840fea463f29b53d12f7bd7cb34b">More...</a><br /></td></tr>
+<tr class="separator:a7b67840fea463f29b53d12f7bd7cb34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a810f05c8d3e3331aed75643557d1057c"><td class="memItemLeft" align="right" valign="top">ConstitutiveLaw *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a810f05c8d3e3331aed75643557d1057c">Problem_Parameter::Constitutive_law_pt</a> =0</td></tr>
+<tr class="memdesc:a810f05c8d3e3331aed75643557d1057c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constitutive law used to determine the mesh deformation.  <a href="namespaceProblem__Parameter.html#a810f05c8d3e3331aed75643557d1057c">More...</a><br /></td></tr>
+<tr class="separator:a810f05c8d3e3331aed75643557d1057c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55310be5f2dfcb5fcfe35d71f9c16e06"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a55310be5f2dfcb5fcfe35d71f9c16e06">Problem_Parameter::Trace_file</a></td></tr>
+<tr class="memdesc:a55310be5f2dfcb5fcfe35d71f9c16e06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace file.  <a href="namespaceProblem__Parameter.html#a55310be5f2dfcb5fcfe35d71f9c16e06">More...</a><br /></td></tr>
+<tr class="separator:a55310be5f2dfcb5fcfe35d71f9c16e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a388e06a5e637b21378ab1832e5564bec"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a388e06a5e637b21378ab1832e5564bec">Problem_Parameter::Norm_file</a></td></tr>
+<tr class="memdesc:a388e06a5e637b21378ab1832e5564bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">File to document the norm of the solution (for validation purposes &ndash; triangle doesn't give fully reproducible results so mesh generation/adaptation may generate slightly different numbers of elements on different machines!)  <a href="namespaceProblem__Parameter.html#a388e06a5e637b21378ab1832e5564bec">More...</a><br /></td></tr>
+<tr class="separator:a388e06a5e637b21378ab1832e5564bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Driver code for moving bubble problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01272">1272</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01003">BubbleInChannelProblem&lt; ELEMENT &gt;::complete_problem_setup()</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00398">Problem_Parameter::Constitutive_law_pt</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01156">BubbleInChannelProblem&lt; ELEMENT &gt;::doc_solution()</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00392">Problem_Parameter::Inflow_veloc_magnitude</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00407">Problem_Parameter::Norm_file</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00381">Problem_Parameter::Nu</a>, and <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00401">Problem_Parameter::Trace_file</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:07:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

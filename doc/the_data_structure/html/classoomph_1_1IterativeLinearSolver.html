@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::IterativeLinearSolver Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1IterativeLinearSolver.html">IterativeLinearSolver</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
+<a href="classoomph_1_1IterativeLinearSolver-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::IterativeLinearSolver Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Base class for all linear iterative solvers. This merely defines standard interfaces for linear iterative solvers, so that different solvers can be used in a clean and transparent manner.  
+ <a href="classoomph_1_1IterativeLinearSolver.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::IterativeLinearSolver:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1IterativeLinearSolver.png" usemap="#oomph::IterativeLinearSolver_map" alt=""/>
+  <map id="oomph::IterativeLinearSolver_map" name="oomph::IterativeLinearSolver_map">
+<area href="classoomph_1_1LinearSolver.html" alt="oomph::LinearSolver" shape="rect" coords="0,56,244,80"/>
+<area href="classoomph_1_1DistributableLinearAlgebraObject.html" title="Base class for any linear algebra object that is distributable. Just contains storage for the LinearA..." alt="oomph::DistributableLinearAlgebraObject" shape="rect" coords="0,0,244,24"/>
+<area href="classoomph_1_1AugmentedProblemGMRES.html" title="The GMRES method." alt="oomph::AugmentedProblemGMRES" shape="rect" coords="254,168,498,192"/>
+<area href="classoomph_1_1BiCGStab.html" title="The conjugate gradient method." alt="oomph::BiCGStab&lt; MATRIX &gt;" shape="rect" coords="254,224,498,248"/>
+<area href="classoomph_1_1CG.html" title="The conjugate gradient method." alt="oomph::CG&lt; MATRIX &gt;" shape="rect" coords="254,280,498,304"/>
+<area href="classoomph_1_1GMRES.html" title="The GMRES method." alt="oomph::GMRES&lt; MATRIX &gt;" shape="rect" coords="254,336,498,360"/>
+<area href="classoomph_1_1GMRESBlockPreconditioner.html" title="The block preconditioner form of GMRES. This version extracts the blocks from the global systems and ..." alt="oomph::GMRESBlockPreconditioner" shape="rect" coords="254,392,498,416"/>
+<area href="classoomph_1_1HelmholtzGMRESMG.html" title="The GMRES method for the Helmholtz solver." alt="oomph::HelmholtzGMRESMG&lt; MATRIX &gt;" shape="rect" coords="254,448,498,472"/>
+<area href="classoomph_1_1HelmholtzSmoother.html" alt="oomph::HelmholtzSmoother" shape="rect" coords="254,504,498,528"/>
+<area href="classoomph_1_1MGSolver.html" alt="oomph::MGSolver&lt; DIM &gt;" shape="rect" coords="254,560,498,584"/>
+<area href="classoomph_1_1Smoother.html" alt="oomph::Smoother" shape="rect" coords="254,616,498,640"/>
+<area href="classoomph_1_1TrilinosAztecOOSolver.html" title="An interface to the Trilinos AztecOO classes allowing it to be used as an Oomph-lib LinearSolver...." alt="oomph::TrilinosAztecOOSolver" shape="rect" coords="254,672,498,696"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a77f4a929d741d4996f02d2c2b75670cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a77f4a929d741d4996f02d2c2b75670cd">IterativeLinearSolver</a> ()</td></tr>
+<tr class="memdesc:a77f4a929d741d4996f02d2c2b75670cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Set (default) trivial preconditioner and set defaults for tolerance and max. number of iterations.  <a href="classoomph_1_1IterativeLinearSolver.html#a77f4a929d741d4996f02d2c2b75670cd">More...</a><br /></td></tr>
+<tr class="separator:a77f4a929d741d4996f02d2c2b75670cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96f01068a37f67a28e85c05657aac840"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a96f01068a37f67a28e85c05657aac840">IterativeLinearSolver</a> (const <a class="el" href="classoomph_1_1IterativeLinearSolver.html">IterativeLinearSolver</a> &amp;)</td></tr>
+<tr class="memdesc:a96f01068a37f67a28e85c05657aac840"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1IterativeLinearSolver.html#a96f01068a37f67a28e85c05657aac840">More...</a><br /></td></tr>
+<tr class="separator:a96f01068a37f67a28e85c05657aac840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f152f3c12947a48b71f35674a075a2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a0f152f3c12947a48b71f35674a075a2a">operator=</a> (const <a class="el" href="classoomph_1_1IterativeLinearSolver.html">IterativeLinearSolver</a> &amp;)</td></tr>
+<tr class="memdesc:a0f152f3c12947a48b71f35674a075a2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1IterativeLinearSolver.html#a0f152f3c12947a48b71f35674a075a2a">More...</a><br /></td></tr>
+<tr class="separator:a0f152f3c12947a48b71f35674a075a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a655eb19872606c2d05e8ee87a4fb6bc5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a655eb19872606c2d05e8ee87a4fb6bc5">~IterativeLinearSolver</a> ()</td></tr>
+<tr class="memdesc:a655eb19872606c2d05e8ee87a4fb6bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classoomph_1_1IterativeLinearSolver.html#a655eb19872606c2d05e8ee87a4fb6bc5">More...</a><br /></td></tr>
+<tr class="separator:a655eb19872606c2d05e8ee87a4fb6bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a800f699ec8dda290105807cb91297850"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a800f699ec8dda290105807cb91297850">preconditioner_pt</a> ()</td></tr>
+<tr class="memdesc:a800f699ec8dda290105807cb91297850"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to preconditioner.  <a href="classoomph_1_1IterativeLinearSolver.html#a800f699ec8dda290105807cb91297850">More...</a><br /></td></tr>
+<tr class="separator:a800f699ec8dda290105807cb91297850"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5e122965d91017dee39249c0034773d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#ab5e122965d91017dee39249c0034773d">preconditioner_pt</a> () const</td></tr>
+<tr class="memdesc:ab5e122965d91017dee39249c0034773d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to preconditioner (const version)  <a href="classoomph_1_1IterativeLinearSolver.html#ab5e122965d91017dee39249c0034773d">More...</a><br /></td></tr>
+<tr class="separator:ab5e122965d91017dee39249c0034773d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76d0f94116e2bfa615652b9de9b1af7"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#aa76d0f94116e2bfa615652b9de9b1af7">tolerance</a> ()</td></tr>
+<tr class="memdesc:aa76d0f94116e2bfa615652b9de9b1af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to convergence tolerance.  <a href="classoomph_1_1IterativeLinearSolver.html#aa76d0f94116e2bfa615652b9de9b1af7">More...</a><br /></td></tr>
+<tr class="separator:aa76d0f94116e2bfa615652b9de9b1af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adecee5890003a9178366799cb22b63e0"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#adecee5890003a9178366799cb22b63e0">max_iter</a> ()</td></tr>
+<tr class="memdesc:adecee5890003a9178366799cb22b63e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to max. number of iterations.  <a href="classoomph_1_1IterativeLinearSolver.html#adecee5890003a9178366799cb22b63e0">More...</a><br /></td></tr>
+<tr class="separator:adecee5890003a9178366799cb22b63e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fe7f7b5e4847fdbd4f95d3875ec7a46"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a5fe7f7b5e4847fdbd4f95d3875ec7a46">iterations</a> () const =0</td></tr>
+<tr class="memdesc:a5fe7f7b5e4847fdbd4f95d3875ec7a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of iterations taken.  <a href="classoomph_1_1IterativeLinearSolver.html#a5fe7f7b5e4847fdbd4f95d3875ec7a46">More...</a><br /></td></tr>
+<tr class="separator:a5fe7f7b5e4847fdbd4f95d3875ec7a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57419aaa61fde5b7f802454a4ec396cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a57419aaa61fde5b7f802454a4ec396cd">enable_doc_convergence_history</a> ()</td></tr>
+<tr class="memdesc:a57419aaa61fde5b7f802454a4ec396cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable documentation of the convergence history.  <a href="classoomph_1_1IterativeLinearSolver.html#a57419aaa61fde5b7f802454a4ec396cd">More...</a><br /></td></tr>
+<tr class="separator:a57419aaa61fde5b7f802454a4ec396cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a5b846d3df565490022348a53bbf511"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a7a5b846d3df565490022348a53bbf511">disable_doc_convergence_history</a> ()</td></tr>
+<tr class="memdesc:a7a5b846d3df565490022348a53bbf511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable documentation of the convergence history.  <a href="classoomph_1_1IterativeLinearSolver.html#a7a5b846d3df565490022348a53bbf511">More...</a><br /></td></tr>
+<tr class="separator:a7a5b846d3df565490022348a53bbf511"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c5e176ff2c767f2dc2168f9789f9c8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a1c5e176ff2c767f2dc2168f9789f9c8f">open_convergence_history_file_stream</a> (const std::string &amp;file_name, const std::string &amp;zone_title=&quot;&quot;)</td></tr>
+<tr class="memdesc:a1c5e176ff2c767f2dc2168f9789f9c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write convergence history into file with specified filename (automatically switches on doc). Optional second argument is a string that can be used (as a zone title) to identify what case we're running (e.g. what combination of linear solver and preconditioner or parameter values are used).  <a href="classoomph_1_1IterativeLinearSolver.html#a1c5e176ff2c767f2dc2168f9789f9c8f">More...</a><br /></td></tr>
+<tr class="separator:a1c5e176ff2c767f2dc2168f9789f9c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27ef8fa59ce805c221a577c6b9bb56c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a27ef8fa59ce805c221a577c6b9bb56c7">close_convergence_history_file_stream</a> ()</td></tr>
+<tr class="memdesc:a27ef8fa59ce805c221a577c6b9bb56c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close convergence history output stream.  <a href="classoomph_1_1IterativeLinearSolver.html#a27ef8fa59ce805c221a577c6b9bb56c7">More...</a><br /></td></tr>
+<tr class="separator:a27ef8fa59ce805c221a577c6b9bb56c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed10c606a26c8084e1fa482f3409f9b3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#aed10c606a26c8084e1fa482f3409f9b3">jacobian_setup_time</a> () const</td></tr>
+<tr class="memdesc:aed10c606a26c8084e1fa482f3409f9b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the time taken to assemble the jacobian matrix and residual vector  <a href="classoomph_1_1IterativeLinearSolver.html#aed10c606a26c8084e1fa482f3409f9b3">More...</a><br /></td></tr>
+<tr class="separator:aed10c606a26c8084e1fa482f3409f9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65544b6c2090d3d019f48e047e338352"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a65544b6c2090d3d019f48e047e338352">linear_solver_solution_time</a> () const</td></tr>
+<tr class="memdesc:a65544b6c2090d3d019f48e047e338352"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the time taken to solve the linear system  <a href="classoomph_1_1IterativeLinearSolver.html#a65544b6c2090d3d019f48e047e338352">More...</a><br /></td></tr>
+<tr class="separator:a65544b6c2090d3d019f48e047e338352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87eb959944a3e8efa467d60aed43a0d3"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a87eb959944a3e8efa467d60aed43a0d3">preconditioner_setup_time</a> () const</td></tr>
+<tr class="memdesc:a87eb959944a3e8efa467d60aed43a0d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the the time taken to setup the preconditioner  <a href="classoomph_1_1IterativeLinearSolver.html#a87eb959944a3e8efa467d60aed43a0d3">More...</a><br /></td></tr>
+<tr class="separator:a87eb959944a3e8efa467d60aed43a0d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a448830993c9046443cfa7479901cc307"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a448830993c9046443cfa7479901cc307">enable_setup_preconditioner_before_solve</a> ()</td></tr>
+<tr class="memdesc:a448830993c9046443cfa7479901cc307"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the preconditioner before the solve.  <a href="classoomph_1_1IterativeLinearSolver.html#a448830993c9046443cfa7479901cc307">More...</a><br /></td></tr>
+<tr class="separator:a448830993c9046443cfa7479901cc307"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbbfd63d0da5f82abc6cd1143fa5a9b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#adbbfd63d0da5f82abc6cd1143fa5a9b0">disable_setup_preconditioner_before_solve</a> ()</td></tr>
+<tr class="memdesc:adbbfd63d0da5f82abc6cd1143fa5a9b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Don't set up the preconditioner before the solve.  <a href="classoomph_1_1IterativeLinearSolver.html#adbbfd63d0da5f82abc6cd1143fa5a9b0">More...</a><br /></td></tr>
+<tr class="separator:adbbfd63d0da5f82abc6cd1143fa5a9b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68983fd17ca417843b9ba3f810dbdc99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a68983fd17ca417843b9ba3f810dbdc99">enable_error_after_max_iter</a> ()</td></tr>
+<tr class="memdesc:a68983fd17ca417843b9ba3f810dbdc99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Throw an error if we don't converge within max_iter.  <a href="classoomph_1_1IterativeLinearSolver.html#a68983fd17ca417843b9ba3f810dbdc99">More...</a><br /></td></tr>
+<tr class="separator:a68983fd17ca417843b9ba3f810dbdc99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b6ee927fcefefee7271798a6ed6f5af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a4b6ee927fcefefee7271798a6ed6f5af">disable_error_after_max_iter</a> ()</td></tr>
+<tr class="memdesc:a4b6ee927fcefefee7271798a6ed6f5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Don't throw an error if we don't converge within max_iter (default).  <a href="classoomph_1_1IterativeLinearSolver.html#a4b6ee927fcefefee7271798a6ed6f5af">More...</a><br /></td></tr>
+<tr class="separator:a4b6ee927fcefefee7271798a6ed6f5af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5992bf9fde252add8d3be2970093905b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a5992bf9fde252add8d3be2970093905b">enable_iterative_solver_as_preconditioner</a> ()</td></tr>
+<tr class="separator:a5992bf9fde252add8d3be2970093905b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b5e3f30fd7bdc9b52a22cdac02a570"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a96b5e3f30fd7bdc9b52a22cdac02a570">disable_iterative_solver_as_preconditioner</a> ()</td></tr>
+<tr class="separator:a96b5e3f30fd7bdc9b52a22cdac02a570"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1LinearSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1LinearSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1LinearSolver.html">oomph::LinearSolver</a></td></tr>
+<tr class="memitem:a6e7e8728f36c888f052e49df8624b8ca inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a6e7e8728f36c888f052e49df8624b8ca">LinearSolver</a> ()</td></tr>
+<tr class="memdesc:a6e7e8728f36c888f052e49df8624b8ca inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor, initialise the member data.  <a href="classoomph_1_1LinearSolver.html#a6e7e8728f36c888f052e49df8624b8ca">More...</a><br /></td></tr>
+<tr class="separator:a6e7e8728f36c888f052e49df8624b8ca inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53c67c7ccd63b318f3af48e826ad57dc inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a53c67c7ccd63b318f3af48e826ad57dc">LinearSolver</a> (const <a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> &amp;dummy)</td></tr>
+<tr class="memdesc:a53c67c7ccd63b318f3af48e826ad57dc inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1LinearSolver.html#a53c67c7ccd63b318f3af48e826ad57dc">More...</a><br /></td></tr>
+<tr class="separator:a53c67c7ccd63b318f3af48e826ad57dc inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb1820234b9335b2a5072e5ee19306d4 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#aeb1820234b9335b2a5072e5ee19306d4">operator=</a> (const <a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> &amp;)</td></tr>
+<tr class="memdesc:aeb1820234b9335b2a5072e5ee19306d4 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1LinearSolver.html#aeb1820234b9335b2a5072e5ee19306d4">More...</a><br /></td></tr>
+<tr class="separator:aeb1820234b9335b2a5072e5ee19306d4 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cc9b2c9a239777c4f9b15f26bb324a0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a9cc9b2c9a239777c4f9b15f26bb324a0">~LinearSolver</a> ()</td></tr>
+<tr class="memdesc:a9cc9b2c9a239777c4f9b15f26bb324a0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1LinearSolver.html#a9cc9b2c9a239777c4f9b15f26bb324a0">More...</a><br /></td></tr>
+<tr class="separator:a9cc9b2c9a239777c4f9b15f26bb324a0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeb9ef9127e927bf6df75d03645d6a81 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#abeb9ef9127e927bf6df75d03645d6a81">enable_doc_time</a> ()</td></tr>
+<tr class="memdesc:abeb9ef9127e927bf6df75d03645d6a81 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable documentation of solve times.  <a href="classoomph_1_1LinearSolver.html#abeb9ef9127e927bf6df75d03645d6a81">More...</a><br /></td></tr>
+<tr class="separator:abeb9ef9127e927bf6df75d03645d6a81 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91ffe51f3de82dad1a110c099f256d73 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a91ffe51f3de82dad1a110c099f256d73">disable_doc_time</a> ()</td></tr>
+<tr class="memdesc:a91ffe51f3de82dad1a110c099f256d73 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable documentation of solve times.  <a href="classoomph_1_1LinearSolver.html#a91ffe51f3de82dad1a110c099f256d73">More...</a><br /></td></tr>
+<tr class="separator:a91ffe51f3de82dad1a110c099f256d73 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a451ce3af5db82f9edbddf8f417597248 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a451ce3af5db82f9edbddf8f417597248">is_doc_time_enabled</a> () const</td></tr>
+<tr class="memdesc:a451ce3af5db82f9edbddf8f417597248 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is documentation of solve times enabled?  <a href="classoomph_1_1LinearSolver.html#a451ce3af5db82f9edbddf8f417597248">More...</a><br /></td></tr>
+<tr class="separator:a451ce3af5db82f9edbddf8f417597248 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1e4d34a7e2b1537d36153f87e8a62a6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#ae1e4d34a7e2b1537d36153f87e8a62a6">is_resolve_enabled</a> () const</td></tr>
+<tr class="memdesc:ae1e4d34a7e2b1537d36153f87e8a62a6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag indicating if resolves are enabled.  <a href="classoomph_1_1LinearSolver.html#ae1e4d34a7e2b1537d36153f87e8a62a6">More...</a><br /></td></tr>
+<tr class="separator:ae1e4d34a7e2b1537d36153f87e8a62a6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3000ebd9becb3468d8a6a821a9cc0cd9 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a3000ebd9becb3468d8a6a821a9cc0cd9">enable_resolve</a> ()</td></tr>
+<tr class="memdesc:a3000ebd9becb3468d8a6a821a9cc0cd9 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable resolve (i.e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks.  <a href="classoomph_1_1LinearSolver.html#a3000ebd9becb3468d8a6a821a9cc0cd9">More...</a><br /></td></tr>
+<tr class="separator:a3000ebd9becb3468d8a6a821a9cc0cd9 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#ad61c63af94c5961830bd9807225a48d6">disable_resolve</a> ()</td></tr>
+<tr class="memdesc:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable resolve (i.e. store matrix and/or LU decomposition, say) This function simply resets an internal flag. It's virtual so it can be overloaded to perform additional tasks such as cleaning up memory that is only required for the resolve.  <a href="classoomph_1_1LinearSolver.html#ad61c63af94c5961830bd9807225a48d6">More...</a><br /></td></tr>
+<tr class="separator:ad61c63af94c5961830bd9807225a48d6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15ce22542b74ed1826ea485edacbeb6e inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">solve</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)=0</td></tr>
+<tr class="memdesc:a15ce22542b74ed1826ea485edacbeb6e inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solver: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem's fully assembled Jacobian and residual vector.  <a href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">More...</a><br /></td></tr>
+<tr class="separator:a15ce22542b74ed1826ea485edacbeb6e inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">solve</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
+  <a href="classoomph_1_1LinearSolver.html#a546c09822d18191df14caed864c04c09">More...</a><br /></td></tr>
+<tr class="separator:a546c09822d18191df14caed864c04c09 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">solve</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
+<tr class="memdesc:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
+  <a href="classoomph_1_1LinearSolver.html#a1f7a2ee2cd18d3dafc20a61ca2f52dbb">More...</a><br /></td></tr>
+<tr class="separator:a1f7a2ee2cd18d3dafc20a61ca2f52dbb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a8e970813a1583f6105ee2d677d3e45f3">solve_transpose</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solver: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem's fully assembled Jacobian and residual vector (broken virtual).  <a href="classoomph_1_1LinearSolver.html#a8e970813a1583f6105ee2d677d3e45f3">More...</a><br /></td></tr>
+<tr class="separator:a8e970813a1583f6105ee2d677d3e45f3 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">solve_transpose</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
+  <a href="classoomph_1_1LinearSolver.html#a600b4d06d85c238bdd6bd33f05d69c44">More...</a><br /></td></tr>
+<tr class="separator:a600b4d06d85c238bdd6bd33f05d69c44 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">solve_transpose</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *const &amp;matrix_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;result)</td></tr>
+<tr class="memdesc:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear-algebra-type solver: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. <br  />
+  <a href="classoomph_1_1LinearSolver.html#a499b738758451f94df398d8d2556ae76">More...</a><br /></td></tr>
+<tr class="separator:a499b738758451f94df398d8d2556ae76 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a3b310d08333033edc119b2a5bd7dcbfb">resolve</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual)  <a href="classoomph_1_1LinearSolver.html#a3b310d08333033edc119b2a5bd7dcbfb">More...</a><br /></td></tr>
+<tr class="separator:a3b310d08333033edc119b2a5bd7dcbfb inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf539c2dd415e22e597fade4c0ca4022 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#acf539c2dd415e22e597fade4c0ca4022">resolve_transpose</a> (const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;rhs, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;result)</td></tr>
+<tr class="memdesc:acf539c2dd415e22e597fade4c0ca4022 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solver: Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual)  <a href="classoomph_1_1LinearSolver.html#acf539c2dd415e22e597fade4c0ca4022">More...</a><br /></td></tr>
+<tr class="separator:acf539c2dd415e22e597fade4c0ca4022 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d66f3262e80ca06a365f98216afd85f inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a9d66f3262e80ca06a365f98216afd85f">clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:a9d66f3262e80ca06a365f98216afd85f inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual function that can be overloaded in specific linear solvers to clean up any memory that may have been allocated (e.g. when preparing for a re-solve).  <a href="classoomph_1_1LinearSolver.html#a9d66f3262e80ca06a365f98216afd85f">More...</a><br /></td></tr>
+<tr class="separator:a9d66f3262e80ca06a365f98216afd85f inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37f1f8b8c6d45115e649739abd5d2f5d inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a37f1f8b8c6d45115e649739abd5d2f5d">enable_computation_of_gradient</a> ()</td></tr>
+<tr class="memdesc:a37f1f8b8c6d45115e649739abd5d2f5d inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to enable the computation of the gradient required for the globally convergent Newton method  <a href="classoomph_1_1LinearSolver.html#a37f1f8b8c6d45115e649739abd5d2f5d">More...</a><br /></td></tr>
+<tr class="separator:a37f1f8b8c6d45115e649739abd5d2f5d inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc045e20074cb9b45ab3f304d037fc6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a8bc045e20074cb9b45ab3f304d037fc6">disable_computation_of_gradient</a> ()</td></tr>
+<tr class="memdesc:a8bc045e20074cb9b45ab3f304d037fc6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to disable the computation of the gradient required for the globally convergent Newton method  <a href="classoomph_1_1LinearSolver.html#a8bc045e20074cb9b45ab3f304d037fc6">More...</a><br /></td></tr>
+<tr class="separator:a8bc045e20074cb9b45ab3f304d037fc6 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceef502cbdf826cdf6aa31f5803982e0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#aceef502cbdf826cdf6aa31f5803982e0">reset_gradient</a> ()</td></tr>
+<tr class="memdesc:aceef502cbdf826cdf6aa31f5803982e0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to reset the size of the gradient before each Newton solve  <a href="classoomph_1_1LinearSolver.html#aceef502cbdf826cdf6aa31f5803982e0">More...</a><br /></td></tr>
+<tr class="separator:aceef502cbdf826cdf6aa31f5803982e0 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6733411e85f0a1d6d82200c802481681 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a6733411e85f0a1d6d82200c802481681">get_gradient</a> (<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;gradient)</td></tr>
+<tr class="memdesc:a6733411e85f0a1d6d82200c802481681 inherit pub_methods_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to access the gradient, provided it has been computed  <a href="classoomph_1_1LinearSolver.html#a6733411e85f0a1d6d82200c802481681">More...</a><br /></td></tr>
+<tr class="separator:a6733411e85f0a1d6d82200c802481681 inherit pub_methods_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor - create a distribution.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">More...</a><br /></td></tr>
+<tr class="separator:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e24b4ce887a2e2da4dc60808f53f91 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e24b4ce887a2e2da4dc60808f53f91">DistributableLinearAlgebraObject</a> (const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;matrix)</td></tr>
+<tr class="memdesc:a21e24b4ce887a2e2da4dc60808f53f91 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e24b4ce887a2e2da4dc60808f53f91">More...</a><br /></td></tr>
+<tr class="separator:a21e24b4ce887a2e2da4dc60808f53f91 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d60098e4938b78dd3e2724551a4c7c9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a0d60098e4938b78dd3e2724551a4c7c9">operator=</a> (const <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;)</td></tr>
+<tr class="memdesc:a0d60098e4938b78dd3e2724551a4c7c9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a0d60098e4938b78dd3e2724551a4c7c9">More...</a><br /></td></tr>
+<tr class="separator:a0d60098e4938b78dd3e2724551a4c7c9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">~DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">More...</a><br /></td></tr>
+<tr class="separator:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a603105384d60c9a3710378af39f538b9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">distribution_pt</a> () const</td></tr>
+<tr class="memdesc:a603105384d60c9a3710378af39f538b9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a>  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a603105384d60c9a3710378af39f538b9">More...</a><br /></td></tr>
+<tr class="separator:a603105384d60c9a3710378af39f538b9 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a> () const</td></tr>
+<tr class="memdesc:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the number of global rows.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">More...</a><br /></td></tr>
+<tr class="separator:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> () const</td></tr>
+<tr class="memdesc:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">More...</a><br /></td></tr>
+<tr class="separator:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">nrow_local</a> (const unsigned &amp;p) const</td></tr>
+<tr class="memdesc:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">More...</a><br /></td></tr>
+<tr class="separator:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> () const</td></tr>
+<tr class="memdesc:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">More...</a><br /></td></tr>
+<tr class="separator:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">first_row</a> (const unsigned &amp;p) const</td></tr>
+<tr class="memdesc:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">More...</a><br /></td></tr>
+<tr class="separator:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a> () const</td></tr>
+<tr class="memdesc:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">distribution is serial or distributed  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">More...</a><br /></td></tr>
+<tr class="separator:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a8c35baa65e335043f62954c92c090a5a">distribution_built</a> () const</td></tr>
+<tr class="separator:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *const dist_pt)</td></tr>
+<tr class="memdesc:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">More...</a><br /></td></tr>
+<tr class="separator:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">build_distribution</a> (const <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;dist)</td></tr>
+<tr class="memdesc:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">More...</a><br /></td></tr>
+<tr class="separator:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aeb0fbe103e721196232260230abb1997"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#aeb0fbe103e721196232260230abb1997">Doc_convergence_history</a></td></tr>
+<tr class="memdesc:aeb0fbe103e721196232260230abb1997"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating if the convergence history is to be documented.  <a href="classoomph_1_1IterativeLinearSolver.html#aeb0fbe103e721196232260230abb1997">More...</a><br /></td></tr>
+<tr class="separator:aeb0fbe103e721196232260230abb1997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4d6766bec67399c29392e6540b91dd9"><td class="memItemLeft" align="right" valign="top">std::ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#ad4d6766bec67399c29392e6540b91dd9">Output_file_stream</a></td></tr>
+<tr class="memdesc:ad4d6766bec67399c29392e6540b91dd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output file stream for convergence history.  <a href="classoomph_1_1IterativeLinearSolver.html#ad4d6766bec67399c29392e6540b91dd9">More...</a><br /></td></tr>
+<tr class="separator:ad4d6766bec67399c29392e6540b91dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46dd6b0243c734a77afce3c44cf4597d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a46dd6b0243c734a77afce3c44cf4597d">Tolerance</a></td></tr>
+<tr class="memdesc:a46dd6b0243c734a77afce3c44cf4597d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convergence tolerance.  <a href="classoomph_1_1IterativeLinearSolver.html#a46dd6b0243c734a77afce3c44cf4597d">More...</a><br /></td></tr>
+<tr class="separator:a46dd6b0243c734a77afce3c44cf4597d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bdc42768d009b093fd7bc23647dc989"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a9bdc42768d009b093fd7bc23647dc989">Max_iter</a></td></tr>
+<tr class="memdesc:a9bdc42768d009b093fd7bc23647dc989"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of iterations.  <a href="classoomph_1_1IterativeLinearSolver.html#a9bdc42768d009b093fd7bc23647dc989">More...</a><br /></td></tr>
+<tr class="separator:a9bdc42768d009b093fd7bc23647dc989"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55111d8d76589944d81d13b5e15f7248"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a55111d8d76589944d81d13b5e15f7248">Preconditioner_pt</a></td></tr>
+<tr class="memdesc:a55111d8d76589944d81d13b5e15f7248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the preconditioner.  <a href="classoomph_1_1IterativeLinearSolver.html#a55111d8d76589944d81d13b5e15f7248">More...</a><br /></td></tr>
+<tr class="separator:a55111d8d76589944d81d13b5e15f7248"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82a12e45c78e910b46e9d0935beb8f0d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a82a12e45c78e910b46e9d0935beb8f0d">Jacobian_setup_time</a></td></tr>
+<tr class="memdesc:a82a12e45c78e910b46e9d0935beb8f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Jacobian setup time.  <a href="classoomph_1_1IterativeLinearSolver.html#a82a12e45c78e910b46e9d0935beb8f0d">More...</a><br /></td></tr>
+<tr class="separator:a82a12e45c78e910b46e9d0935beb8f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab90d7e7780e709946dd0540a146186b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#ab90d7e7780e709946dd0540a146186b5">Solution_time</a></td></tr>
+<tr class="memdesc:ab90d7e7780e709946dd0540a146186b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">linear solver solution time  <a href="classoomph_1_1IterativeLinearSolver.html#ab90d7e7780e709946dd0540a146186b5">More...</a><br /></td></tr>
+<tr class="separator:ab90d7e7780e709946dd0540a146186b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8022e90c9c7c720a0bacf9d090c81a10"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a8022e90c9c7c720a0bacf9d090c81a10">Preconditioner_setup_time</a></td></tr>
+<tr class="memdesc:a8022e90c9c7c720a0bacf9d090c81a10"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a> setup time.  <a href="classoomph_1_1IterativeLinearSolver.html#a8022e90c9c7c720a0bacf9d090c81a10">More...</a><br /></td></tr>
+<tr class="separator:a8022e90c9c7c720a0bacf9d090c81a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0344cc8a3a850f160973f1d44bf20f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#af0344cc8a3a850f160973f1d44bf20f2">Setup_preconditioner_before_solve</a></td></tr>
+<tr class="memdesc:af0344cc8a3a850f160973f1d44bf20f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">indicates whether the preconditioner should be setup before solve. Default = true;  <a href="classoomph_1_1IterativeLinearSolver.html#af0344cc8a3a850f160973f1d44bf20f2">More...</a><br /></td></tr>
+<tr class="separator:af0344cc8a3a850f160973f1d44bf20f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76284ada37aafb9ab39836907569c7b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a76284ada37aafb9ab39836907569c7b2">Throw_error_after_max_iter</a></td></tr>
+<tr class="memdesc:a76284ada37aafb9ab39836907569c7b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should we throw an error instead of just returning when we hit the max iterations?  <a href="classoomph_1_1IterativeLinearSolver.html#a76284ada37aafb9ab39836907569c7b2">More...</a><br /></td></tr>
+<tr class="separator:a76284ada37aafb9ab39836907569c7b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10af0af774e98543b7ecd6a563018ff8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a10af0af774e98543b7ecd6a563018ff8">Use_iterative_solver_as_preconditioner</a></td></tr>
+<tr class="memdesc:a10af0af774e98543b7ecd6a563018ff8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the iterative solver as preconditioner.  <a href="classoomph_1_1IterativeLinearSolver.html#a10af0af774e98543b7ecd6a563018ff8">More...</a><br /></td></tr>
+<tr class="separator:a10af0af774e98543b7ecd6a563018ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18f24e4d07f783ddd1f6a8153f39024a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a18f24e4d07f783ddd1f6a8153f39024a">First_time_solve_when_used_as_preconditioner</a></td></tr>
+<tr class="separator:a18f24e4d07f783ddd1f6a8153f39024a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1LinearSolver"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1LinearSolver')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1LinearSolver.html">oomph::LinearSolver</a></td></tr>
+<tr class="memitem:a5f5e7e7a44ff0897b0e4cd9524000edc inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a5f5e7e7a44ff0897b0e4cd9524000edc">Enable_resolve</a></td></tr>
+<tr class="memdesc:a5f5e7e7a44ff0897b0e4cd9524000edc inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean that indicates whether the matrix (or its factors, in the case of direct solver) should be stored so that the resolve function can be used.  <a href="classoomph_1_1LinearSolver.html#a5f5e7e7a44ff0897b0e4cd9524000edc">More...</a><br /></td></tr>
+<tr class="separator:a5f5e7e7a44ff0897b0e4cd9524000edc inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a536e41b50b3f3464ca9cb4a5776acc19 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a536e41b50b3f3464ca9cb4a5776acc19">Doc_time</a></td></tr>
+<tr class="memdesc:a536e41b50b3f3464ca9cb4a5776acc19 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag that indicates whether the time taken.  <a href="classoomph_1_1LinearSolver.html#a536e41b50b3f3464ca9cb4a5776acc19">More...</a><br /></td></tr>
+<tr class="separator:a536e41b50b3f3464ca9cb4a5776acc19 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef857e4c0c16e8b342a14493e558bb15 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#aef857e4c0c16e8b342a14493e558bb15">Compute_gradient</a></td></tr>
+<tr class="memdesc:aef857e4c0c16e8b342a14493e558bb15 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">flag that indicates whether the gradient required for the globally convergent Newton method should be computed or not  <a href="classoomph_1_1LinearSolver.html#aef857e4c0c16e8b342a14493e558bb15">More...</a><br /></td></tr>
+<tr class="separator:aef857e4c0c16e8b342a14493e558bb15 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fd3bf9a5a94dcc23b7d903f99535e72 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#a9fd3bf9a5a94dcc23b7d903f99535e72">Gradient_has_been_computed</a></td></tr>
+<tr class="memdesc:a9fd3bf9a5a94dcc23b7d903f99535e72 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">flag that indicates whether the gradient was computed or not  <a href="classoomph_1_1LinearSolver.html#a9fd3bf9a5a94dcc23b7d903f99535e72">More...</a><br /></td></tr>
+<tr class="separator:a9fd3bf9a5a94dcc23b7d903f99535e72 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad38255ae12611787a857cc5c90ffa9f8 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LinearSolver.html#ad38255ae12611787a857cc5c90ffa9f8">Gradient_for_glob_conv_newton_solve</a></td></tr>
+<tr class="memdesc:ad38255ae12611787a857cc5c90ffa9f8 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> storing the gradient for the globally convergent Newton method.  <a href="classoomph_1_1LinearSolver.html#ad38255ae12611787a857cc5c90ffa9f8">More...</a><br /></td></tr>
+<tr class="separator:ad38255ae12611787a857cc5c90ffa9f8 inherit pro_attribs_classoomph_1_1LinearSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a8393d99578cbee0fdb937ddec34be74c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classoomph_1_1IdentityPreconditioner.html">IdentityPreconditioner</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1IterativeLinearSolver.html#a8393d99578cbee0fdb937ddec34be74c">Default_preconditioner</a></td></tr>
+<tr class="memdesc:a8393d99578cbee0fdb937ddec34be74c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default preconditioner: The base class for preconditioners is a fully functional (if trivial!) preconditioner.  <a href="classoomph_1_1IterativeLinearSolver.html#a8393d99578cbee0fdb937ddec34be74c">More...</a><br /></td></tr>
+<tr class="separator:a8393d99578cbee0fdb937ddec34be74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">clear_distribution</a> ()</td></tr>
+<tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <a href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">More...</a><br /></td></tr>
+<tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for all linear iterative solvers. This merely defines standard interfaces for linear iterative solvers, so that different solvers can be used in a clean and transparent manner. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00056">56</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a77f4a929d741d4996f02d2c2b75670cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77f4a929d741d4996f02d2c2b75670cd">&#9670;&nbsp;</a></span>IterativeLinearSolver() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::IterativeLinearSolver::IterativeLinearSolver </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Set (default) trivial preconditioner and set defaults for tolerance and max. number of iterations. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00063">63</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00219">Default_preconditioner</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00211">Doc_convergence_history</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00253">First_time_solve_when_used_as_preconditioner</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00225">Max_iter</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00228">Preconditioner_pt</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00241">Setup_preconditioner_before_solve</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00245">Throw_error_after_max_iter</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00222">Tolerance</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l00248">Use_iterative_solver_as_preconditioner</a>.</p>
+
+</div>
+</div>
+<a id="a96f01068a37f67a28e85c05657aac840"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96f01068a37f67a28e85c05657aac840">&#9670;&nbsp;</a></span>IterativeLinearSolver() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::IterativeLinearSolver::IterativeLinearSolver </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1IterativeLinearSolver.html">IterativeLinearSolver</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00091">91</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="a655eb19872606c2d05e8ee87a4fb6bc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a655eb19872606c2d05e8ee87a4fb6bc5">&#9670;&nbsp;</a></span>~IterativeLinearSolver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::IterativeLinearSolver::~IterativeLinearSolver </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00103">103</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a27ef8fa59ce805c221a577c6b9bb56c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27ef8fa59ce805c221a577c6b9bb56c7">&#9670;&nbsp;</a></span>close_convergence_history_file_stream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::close_convergence_history_file_stream </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Close convergence history output stream. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00155">155</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00214">Output_file_stream</a>.</p>
+
+</div>
+</div>
+<a id="a7a5b846d3df565490022348a53bbf511"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a5b846d3df565490022348a53bbf511">&#9670;&nbsp;</a></span>disable_doc_convergence_history()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::disable_doc_convergence_history </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable documentation of the convergence history. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00124">124</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00211">Doc_convergence_history</a>.</p>
+
+</div>
+</div>
+<a id="a4b6ee927fcefefee7271798a6ed6f5af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b6ee927fcefefee7271798a6ed6f5af">&#9670;&nbsp;</a></span>disable_error_after_max_iter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::disable_error_after_max_iter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Don't throw an error if we don't converge within max_iter (default). </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00192">192</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00245">Throw_error_after_max_iter</a>.</p>
+
+</div>
+</div>
+<a id="a96b5e3f30fd7bdc9b52a22cdac02a570"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96b5e3f30fd7bdc9b52a22cdac02a570">&#9670;&nbsp;</a></span>disable_iterative_solver_as_preconditioner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::disable_iterative_solver_as_preconditioner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Disables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method &ndash; currently only used by Trilinos solver &mdash;) </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00204">204</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00248">Use_iterative_solver_as_preconditioner</a>.</p>
+
+</div>
+</div>
+<a id="adbbfd63d0da5f82abc6cd1143fa5a9b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbbfd63d0da5f82abc6cd1143fa5a9b0">&#9670;&nbsp;</a></span>disable_setup_preconditioner_before_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::disable_setup_preconditioner_before_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Don't set up the preconditioner before the solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00184">184</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00241">Setup_preconditioner_before_solve</a>.</p>
+
+</div>
+</div>
+<a id="a57419aaa61fde5b7f802454a4ec396cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57419aaa61fde5b7f802454a4ec396cd">&#9670;&nbsp;</a></span>enable_doc_convergence_history()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::enable_doc_convergence_history </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable documentation of the convergence history. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00121">121</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00211">Doc_convergence_history</a>.</p>
+
+</div>
+</div>
+<a id="a68983fd17ca417843b9ba3f810dbdc99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68983fd17ca417843b9ba3f810dbdc99">&#9670;&nbsp;</a></span>enable_error_after_max_iter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::enable_error_after_max_iter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Throw an error if we don't converge within max_iter. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00188">188</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00245">Throw_error_after_max_iter</a>.</p>
+
+</div>
+</div>
+<a id="a5992bf9fde252add8d3be2970093905b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5992bf9fde252add8d3be2970093905b">&#9670;&nbsp;</a></span>enable_iterative_solver_as_preconditioner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::enable_iterative_solver_as_preconditioner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Enables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method &ndash; currently only used by Trilinos solver &mdash;) </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00198">198</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00248">Use_iterative_solver_as_preconditioner</a>.</p>
+
+</div>
+</div>
+<a id="a448830993c9046443cfa7479901cc307"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a448830993c9046443cfa7479901cc307">&#9670;&nbsp;</a></span>enable_setup_preconditioner_before_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::enable_setup_preconditioner_before_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup the preconditioner before the solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00180">180</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00241">Setup_preconditioner_before_solve</a>.</p>
+
+</div>
+</div>
+<a id="a5fe7f7b5e4847fdbd4f95d3875ec7a46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fe7f7b5e4847fdbd4f95d3875ec7a46">&#9670;&nbsp;</a></span>iterations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::IterativeLinearSolver::iterations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of iterations taken. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1HelmholtzGMRESMG.html#ad2ae5c641eae7da8c7556b646fe38d36">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;</a>, <a class="el" href="classoomph_1_1AugmentedProblemGMRES.html#a0e6fb26306985fc6bde851d372b78708">oomph::AugmentedProblemGMRES</a>, <a class="el" href="classoomph_1_1GMRES.html#a879927e08b79ad4744a10b360ccd5ff3">oomph::GMRES&lt; MATRIX &gt;</a>, <a class="el" href="classoomph_1_1DampedJacobi.html#aa72fe9dcf19728a8b5a75f0cadb36013">oomph::DampedJacobi&lt; MATRIX &gt;</a>, <a class="el" href="classoomph_1_1GS_3_01CRDoubleMatrix_01_4.html#a0fe8a3e90df149b2ad6a247afe1adf2a">oomph::GS&lt; CRDoubleMatrix &gt;</a>, <a class="el" href="classoomph_1_1ComplexGMRES.html#a10760c61c62771773e2adc57055717aa">oomph::ComplexGMRES&lt; MATRIX &gt;</a>, <a class="el" href="classoomph_1_1GS.html#ad182a2d91cb9d629cb516102f9a3c649">oomph::GS&lt; MATRIX &gt;</a>, <a class="el" href="classoomph_1_1MGSolver.html#ace1b91d44c67c990259807ee746a6363">oomph::MGSolver&lt; DIM &gt;</a>, <a class="el" href="classoomph_1_1ComplexDampedJacobi.html#a34e565b3536b286b5544f5e30935b9e9">oomph::ComplexDampedJacobi&lt; MATRIX &gt;</a>, <a class="el" href="classoomph_1_1BiCGStab.html#a2550adba752e02423254dc0a6c592f7f">oomph::BiCGStab&lt; MATRIX &gt;</a>, <a class="el" href="classoomph_1_1TrilinosAztecOOSolver.html#aaa90619b05f448d7bd610f474a9f750d">oomph::TrilinosAztecOOSolver</a>, <a class="el" href="classoomph_1_1CG.html#a17db796814dc11cb67eac960df85d5f7">oomph::CG&lt; MATRIX &gt;</a>, <a class="el" href="classoomph_1_1GMRESBlockPreconditioner.html#a164a5a09a67705a08017e8832dd78316">oomph::GMRESBlockPreconditioner</a>, and <a class="el" href="classoomph_1_1GMRESBlockPreconditioner.html#a164a5a09a67705a08017e8832dd78316">oomph::GMRESBlockPreconditioner</a>.</p>
+
+</div>
+</div>
+<a id="aed10c606a26c8084e1fa482f3409f9b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed10c606a26c8084e1fa482f3409f9b3">&#9670;&nbsp;</a></span>jacobian_setup_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::IterativeLinearSolver::jacobian_setup_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>returns the time taken to assemble the jacobian matrix and residual vector </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a0fedfb9d9855d0e998c0e32140bc56d4">oomph::LinearSolver</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00162">162</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00231">Jacobian_setup_time</a>.</p>
+
+</div>
+</div>
+<a id="a65544b6c2090d3d019f48e047e338352"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65544b6c2090d3d019f48e047e338352">&#9670;&nbsp;</a></span>linear_solver_solution_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::IterativeLinearSolver::linear_solver_solution_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>return the time taken to solve the linear system </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1LinearSolver.html#a3c66f77db812a9c196478c7e2f77ef09">oomph::LinearSolver</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00168">168</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00234">Solution_time</a>.</p>
+
+</div>
+</div>
+<a id="adecee5890003a9178366799cb22b63e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adecee5890003a9178366799cb22b63e0">&#9670;&nbsp;</a></span>max_iter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::IterativeLinearSolver::max_iter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to max. number of iterations. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00115">115</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00225">Max_iter</a>.</p>
+
+</div>
+</div>
+<a id="a1c5e176ff2c767f2dc2168f9789f9c8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c5e176ff2c767f2dc2168f9789f9c8f">&#9670;&nbsp;</a></span>open_convergence_history_file_stream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::open_convergence_history_file_stream </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>file_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>zone_title</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write convergence history into file with specified filename (automatically switches on doc). Optional second argument is a string that can be used (as a zone title) to identify what case we're running (e.g. what combination of linear solver and preconditioner or parameter values are used). </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00131">131</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00211">Doc_convergence_history</a>, and <a class="el" href="iterative__linear__solver_8h_source.html#l00214">Output_file_stream</a>.</p>
+
+</div>
+</div>
+<a id="a0f152f3c12947a48b71f35674a075a2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f152f3c12947a48b71f35674a075a2a">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::IterativeLinearSolver::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1IterativeLinearSolver.html">IterativeLinearSolver</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00097">97</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a800f699ec8dda290105807cb91297850"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a800f699ec8dda290105807cb91297850">&#9670;&nbsp;</a></span>preconditioner_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a>*&amp; oomph::IterativeLinearSolver::preconditioner_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00106">106</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00228">Preconditioner_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l01775">oomph::AugmentedProblemGMRES::apply_schur_complement_preconditioner()</a>, <a class="el" href="trilinos__solver_8h_source.html#l00371">oomph::TrilinosAztecOOSolver::clean_up_memory()</a>, <a class="el" href="projection_8h_source.html#l00722">oomph::ProjectionProblem&lt; PROJECTABLE_ELEMENT &gt;::project()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l01378">oomph::GMRES&lt; MATRIX &gt;::update()</a>, and <a class="el" href="complex__smoother_8h_source.html#l02236">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::update()</a>.</p>
+
+</div>
+</div>
+<a id="ab5e122965d91017dee39249c0034773d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5e122965d91017dee39249c0034773d">&#9670;&nbsp;</a></span>preconditioner_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a>* const &amp; oomph::IterativeLinearSolver::preconditioner_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to preconditioner (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00109">109</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00228">Preconditioner_pt</a>.</p>
+
+</div>
+</div>
+<a id="a87eb959944a3e8efa467d60aed43a0d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87eb959944a3e8efa467d60aed43a0d3">&#9670;&nbsp;</a></span>preconditioner_setup_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double oomph::IterativeLinearSolver::preconditioner_setup_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>returns the the time taken to setup the preconditioner </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1GS_3_01CRDoubleMatrix_01_4.html#af3ddbbec56c0ecc849b07bcec0c19bf4">oomph::GS&lt; CRDoubleMatrix &gt;</a>, and <a class="el" href="classoomph_1_1GS.html#a5ee0e379319f6919f7ac00a715be72fb">oomph::GS&lt; MATRIX &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00174">174</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00237">Preconditioner_setup_time</a>.</p>
+
+</div>
+</div>
+<a id="aa76d0f94116e2bfa615652b9de9b1af7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa76d0f94116e2bfa615652b9de9b1af7">&#9670;&nbsp;</a></span>tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double&amp; oomph::IterativeLinearSolver::tolerance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to convergence tolerance. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00112">112</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="iterative__linear__solver_8h_source.html#l00222">Tolerance</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__smoother_8h_source.html#l00345">oomph::ComplexDampedJacobi&lt; MATRIX &gt;::calculate_omega()</a>, <a class="el" href="complex__smoother_8h_source.html#l01148">oomph::ComplexGMRES&lt; MATRIX &gt;::generate_plane_rotation()</a>, <a class="el" href="complex__smoother_8h_source.html#l02395">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::generate_plane_rotation()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02568">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup_smoothers()</a>, and <a class="el" href="geometric__multigrid_8h_source.html#l01364">oomph::MGSolver&lt; DIM &gt;::setup_smoothers()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8393d99578cbee0fdb937ddec34be74c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8393d99578cbee0fdb937ddec34be74c">&#9670;&nbsp;</a></span>Default_preconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1IdentityPreconditioner.html">IdentityPreconditioner</a> oomph::IterativeLinearSolver::Default_preconditioner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default preconditioner: The base class for preconditioners is a fully functional (if trivial!) preconditioner. </p>
+<p>Default preconditioner for iterative solvers: The base class for preconditioners is a fully functional (if trivial!) preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00219">219</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00063">IterativeLinearSolver()</a>.</p>
+
+</div>
+</div>
+<a id="aeb0fbe103e721196232260230abb1997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb0fbe103e721196232260230abb1997">&#9670;&nbsp;</a></span>Doc_convergence_history</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::IterativeLinearSolver::Doc_convergence_history</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag indicating if the convergence history is to be documented. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00211">211</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00124">disable_doc_convergence_history()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00121">enable_doc_convergence_history()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00063">IterativeLinearSolver()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00131">open_convergence_history_file_stream()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00729">oomph::GMRESBlockPreconditioner::preconditioner_solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01504">oomph::GS&lt; CRDoubleMatrix &gt;::solve_helper()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a18f24e4d07f783ddd1f6a8153f39024a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18f24e4d07f783ddd1f6a8153f39024a">&#9670;&nbsp;</a></span>First_time_solve_when_used_as_preconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::IterativeLinearSolver::First_time_solve_when_used_as_preconditioner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>When the iterative solver is used a preconditioner then we call the setup of solver method only once (the first time the solve method is called) </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00253">253</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00063">IterativeLinearSolver()</a>, and <a class="el" href="trilinos__solver_8cc_source.html#l00141">oomph::TrilinosAztecOOSolver::solve()</a>.</p>
+
+</div>
+</div>
+<a id="a82a12e45c78e910b46e9d0935beb8f0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82a12e45c78e910b46e9d0935beb8f0d">&#9670;&nbsp;</a></span>Jacobian_setup_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::IterativeLinearSolver::Jacobian_setup_time</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Jacobian setup time. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00231">231</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00162">jacobian_setup_time()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01386">oomph::GS&lt; CRDoubleMatrix &gt;::solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02766">oomph::AugmentedProblemGMRES::solve()</a>, <a class="el" href="complex__smoother_8h_source.html#l01866">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::solve()</a>, and <a class="el" href="complex__smoother_8h_source.html#l03362">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::solve()</a>.</p>
+
+</div>
+</div>
+<a id="a9bdc42768d009b093fd7bc23647dc989"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bdc42768d009b093fd7bc23647dc989">&#9670;&nbsp;</a></span>Max_iter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::IterativeLinearSolver::Max_iter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of iterations. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00225">225</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00063">IterativeLinearSolver()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00115">max_iter()</a>, <a class="el" href="trilinos__solver_8h_source.html#l00443">oomph::TrilinosAztecOOSolver::max_iter()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00729">oomph::GMRESBlockPreconditioner::preconditioner_solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01504">oomph::GS&lt; CRDoubleMatrix &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00584">oomph::TrilinosAztecOOSolver::solve_using_AztecOO()</a>, and <a class="el" href="trilinos__solver_8cc_source.html#l00292">oomph::TrilinosAztecOOSolver::solver_setup()</a>.</p>
+
+</div>
+</div>
+<a id="ad4d6766bec67399c29392e6540b91dd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4d6766bec67399c29392e6540b91dd9">&#9670;&nbsp;</a></span>Output_file_stream</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ofstream oomph::IterativeLinearSolver::Output_file_stream</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output file stream for convergence history. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00214">214</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00155">close_convergence_history_file_stream()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00131">open_convergence_history_file_stream()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00729">oomph::GMRESBlockPreconditioner::preconditioner_solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01504">oomph::GS&lt; CRDoubleMatrix &gt;::solve_helper()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a55111d8d76589944d81d13b5e15f7248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55111d8d76589944d81d13b5e15f7248">&#9670;&nbsp;</a></span>Preconditioner_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a>* oomph::IterativeLinearSolver::Preconditioner_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00228">228</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00063">IterativeLinearSolver()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00106">preconditioner_pt()</a>, and <a class="el" href="trilinos__solver_8cc_source.html#l00292">oomph::TrilinosAztecOOSolver::solver_setup()</a>.</p>
+
+</div>
+</div>
+<a id="a8022e90c9c7c720a0bacf9d090c81a10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8022e90c9c7c720a0bacf9d090c81a10">&#9670;&nbsp;</a></span>Preconditioner_setup_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::IterativeLinearSolver::Preconditioner_setup_time</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a> setup time. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00237">237</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00174">preconditioner_setup_time()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>.</p>
+
+</div>
+</div>
+<a id="af0344cc8a3a850f160973f1d44bf20f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0344cc8a3a850f160973f1d44bf20f2">&#9670;&nbsp;</a></span>Setup_preconditioner_before_solve</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::IterativeLinearSolver::Setup_preconditioner_before_solve</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>indicates whether the preconditioner should be setup before solve. Default = true; </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00241">241</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00184">disable_setup_preconditioner_before_solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00180">enable_setup_preconditioner_before_solve()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00063">IterativeLinearSolver()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>, and <a class="el" href="trilinos__solver_8cc_source.html#l00292">oomph::TrilinosAztecOOSolver::solver_setup()</a>.</p>
+
+</div>
+</div>
+<a id="ab90d7e7780e709946dd0540a146186b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab90d7e7780e709946dd0540a146186b5">&#9670;&nbsp;</a></span>Solution_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::IterativeLinearSolver::Solution_time</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>linear solver solution time </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00234">234</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00168">linear_solver_solution_time()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00729">oomph::GMRESBlockPreconditioner::preconditioner_solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01504">oomph::GS&lt; CRDoubleMatrix &gt;::solve_helper()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a76284ada37aafb9ab39836907569c7b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76284ada37aafb9ab39836907569c7b2">&#9670;&nbsp;</a></span>Throw_error_after_max_iter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::IterativeLinearSolver::Throw_error_after_max_iter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Should we throw an error instead of just returning when we hit the max iterations? </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00245">245</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00192">disable_error_after_max_iter()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00188">enable_error_after_max_iter()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00063">IterativeLinearSolver()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00729">oomph::GMRESBlockPreconditioner::preconditioner_solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01504">oomph::GS&lt; CRDoubleMatrix &gt;::solve_helper()</a>, and <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a46dd6b0243c734a77afce3c44cf4597d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46dd6b0243c734a77afce3c44cf4597d">&#9670;&nbsp;</a></span>Tolerance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::IterativeLinearSolver::Tolerance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convergence tolerance. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00222">222</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00063">IterativeLinearSolver()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00123">oomph::MGSolver&lt; DIM &gt;::MGSolver()</a>, <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00729">oomph::GMRESBlockPreconditioner::preconditioner_solve()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l01504">oomph::GS&lt; CRDoubleMatrix &gt;::solve_helper()</a>, <a class="el" href="iterative__linear__solver_8cc_source.html#l02881">oomph::AugmentedProblemGMRES::solve_helper()</a>, <a class="el" href="trilinos__solver_8cc_source.html#l00584">oomph::TrilinosAztecOOSolver::solve_using_AztecOO()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00112">tolerance()</a>, <a class="el" href="trilinos__solver_8h_source.html#l00449">oomph::TrilinosAztecOOSolver::tolerance()</a>, and <a class="el" href="trilinos__solver_8h_source.html#l00295">oomph::TrilinosAztecOOSolver::TrilinosAztecOOSolver()</a>.</p>
+
+</div>
+</div>
+<a id="a10af0af774e98543b7ecd6a563018ff8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10af0af774e98543b7ecd6a563018ff8">&#9670;&nbsp;</a></span>Use_iterative_solver_as_preconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::IterativeLinearSolver::Use_iterative_solver_as_preconditioner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use the iterative solver as preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="iterative__linear__solver_8h_source.html#l00248">248</a> of file <a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="iterative__linear__solver_8h_source.html#l00204">disable_iterative_solver_as_preconditioner()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00198">enable_iterative_solver_as_preconditioner()</a>, <a class="el" href="iterative__linear__solver_8h_source.html#l00063">IterativeLinearSolver()</a>, and <a class="el" href="trilinos__solver_8cc_source.html#l00141">oomph::TrilinosAztecOOSolver::solve()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="iterative__linear__solver_8h_source.html">iterative_linear_solver.h</a></li>
+<li><a class="el" href="iterative__linear__solver_8cc_source.html">iterative_linear_solver.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:50
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

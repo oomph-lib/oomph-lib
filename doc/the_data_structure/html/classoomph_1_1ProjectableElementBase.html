@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ProjectableElementBase Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ProjectableElementBase.html">ProjectableElementBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1ProjectableElementBase-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::ProjectableElementBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Template-free Base class for projectable elements.  
+ <a href="classoomph_1_1ProjectableElementBase.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="projection_8h_source.html">projection.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::ProjectableElementBase:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1ProjectableElementBase.png" usemap="#oomph::ProjectableElementBase_map" alt=""/>
+  <map id="oomph::ProjectableElementBase_map" name="oomph::ProjectableElementBase_map">
+<area href="classoomph_1_1ProjectableAxisymmetricPoroelasticityElement.html" title="Axisymmetric poro elasticity upgraded to become projectable." alt="oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;" shape="rect" coords="620,56,1230,80"/>
+<area href="classoomph_1_1ProjectableDarcyElement.html" title="Darcy upgraded to become projectable." alt="oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;" shape="rect" coords="620,112,1230,136"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; ELEMENT &gt;" shape="rect" coords="620,168,1230,192"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; ADR_ELEMENT &gt;" shape="rect" coords="620,224,1230,248"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; AXISYM_LINEAR_ELAST_ELEMENT &gt;" shape="rect" coords="620,280,1230,304"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;" shape="rect" coords="620,336,1230,360"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;" shape="rect" coords="620,392,1230,416"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; DARCY_ELEMENT &gt;" shape="rect" coords="620,448,1230,472"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;" shape="rect" coords="620,504,1230,528"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; FVK_ELEMENT &gt;" shape="rect" coords="620,560,1230,584"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; HELMHOLTZ_ELEMENT &gt;" shape="rect" coords="620,616,1230,640"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; LINEAR_ELAST_ELEMENT &gt;" shape="rect" coords="620,672,1230,696"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; POISSON_ELEMENT &gt;" shape="rect" coords="620,728,1230,752"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; PVD_ELEMENT &gt;" shape="rect" coords="620,784,1230,808"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; TAYLOR_HOOD_ELEMENT &gt;" shape="rect" coords="620,840,1230,864"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;" shape="rect" coords="620,896,1230,920"/>
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; UNSTEADY_HEAT_ELEMENT &gt;" shape="rect" coords="620,952,1230,976"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7ee05f9195757b46b3693786cd260ac5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a7ee05f9195757b46b3693786cd260ac5">ProjectableElementBase</a> ()</td></tr>
+<tr class="separator:a7ee05f9195757b46b3693786cd260ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a668500db9bcaab7aa983d3c92f94e34b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a668500db9bcaab7aa983d3c92f94e34b">~ProjectableElementBase</a> ()</td></tr>
+<tr class="memdesc:a668500db9bcaab7aa983d3c92f94e34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <a href="classoomph_1_1ProjectableElementBase.html#a668500db9bcaab7aa983d3c92f94e34b">More...</a><br /></td></tr>
+<tr class="separator:a668500db9bcaab7aa983d3c92f94e34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a644306ebdf16f334344c2d27d72f18b7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> *, unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a644306ebdf16f334344c2d27d72f18b7">data_values_of_field</a> (const unsigned &amp;fld)=0</td></tr>
+<tr class="memdesc:a644306ebdf16f334344c2d27d72f18b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object and the value within it, that correspond to field fld. E.g. in Taylor Hood elements the fld-th velocities are stored at the fld-th value of the nodes; the pressures (the DIM-th field) are the DIM-th values at the vertex nodes etc. <br  />
+  <a href="classoomph_1_1ProjectableElementBase.html#a644306ebdf16f334344c2d27d72f18b7">More...</a><br /></td></tr>
+<tr class="separator:a644306ebdf16f334344c2d27d72f18b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44634aa4049332a580d249c25564638c"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a44634aa4049332a580d249c25564638c">nfields_for_projection</a> ()=0</td></tr>
+<tr class="memdesc:a44634aa4049332a580d249c25564638c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of fields of the problem, so e.g. for 2D Navier Stokes this would be 3 (for the two velocities and one pressure)  <a href="classoomph_1_1ProjectableElementBase.html#a44634aa4049332a580d249c25564638c">More...</a><br /></td></tr>
+<tr class="separator:a44634aa4049332a580d249c25564638c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6790f394630b964663281f8740f43a5"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ac6790f394630b964663281f8740f43a5">nhistory_values_for_projection</a> (const unsigned &amp;fld)=0</td></tr>
+<tr class="memdesc:ac6790f394630b964663281f8740f43a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of history values to be stored for fld-th field <br  />
+ (includes current value!)  <a href="classoomph_1_1ProjectableElementBase.html#ac6790f394630b964663281f8740f43a5">More...</a><br /></td></tr>
+<tr class="separator:ac6790f394630b964663281f8740f43a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4ecd0cd24000a3ed675dc7198203c1f"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ab4ecd0cd24000a3ed675dc7198203c1f">nhistory_values_for_coordinate_projection</a> ()=0</td></tr>
+<tr class="memdesc:ab4ecd0cd24000a3ed675dc7198203c1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of history values to be stored when projecting the history values of the nodal coordinates (includes current value!)  <a href="classoomph_1_1ProjectableElementBase.html#ab4ecd0cd24000a3ed675dc7198203c1f">More...</a><br /></td></tr>
+<tr class="separator:ab4ecd0cd24000a3ed675dc7198203c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a9a6de16f3511bca8e8be770abb9c2e"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a1a9a6de16f3511bca8e8be770abb9c2e">nvalue_of_field</a> (const unsigned &amp;fld)=0</td></tr>
+<tr class="memdesc:a1a9a6de16f3511bca8e8be770abb9c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of values (pinned or not) associated with field fld within the element. This must correspond to the number of shape functions returned in jacobian_and_shape_of_field(...).  <a href="classoomph_1_1ProjectableElementBase.html#a1a9a6de16f3511bca8e8be770abb9c2e">More...</a><br /></td></tr>
+<tr class="separator:a1a9a6de16f3511bca8e8be770abb9c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c27ae929ff636dc7747fe23fd4f738"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ac5c27ae929ff636dc7747fe23fd4f738">local_equation</a> (const unsigned &amp;fld, const unsigned &amp;ivalue)=0</td></tr>
+<tr class="memdesc:ac5c27ae929ff636dc7747fe23fd4f738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return local equation numbers associated with value ivalue of field fld within the element.  <a href="classoomph_1_1ProjectableElementBase.html#ac5c27ae929ff636dc7747fe23fd4f738">More...</a><br /></td></tr>
+<tr class="separator:ac5c27ae929ff636dc7747fe23fd4f738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad45c21b58c0985d52f68ab2d79cbb488"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ad45c21b58c0985d52f68ab2d79cbb488">jacobian_and_shape_of_field</a> (const unsigned &amp;fld, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, <a class="el" href="classoomph_1_1Shape.html">Shape</a> &amp;psi)=0</td></tr>
+<tr class="memdesc:ad45c21b58c0985d52f68ab2d79cbb488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return Jacobian of mapping and the shape functions associated with field fld. The number of shape functions must match the number of values specified in nvalue_of_field(...). For Lagrange-type interpolations the shape functinos are simply the "normal" nodal shape functions; if the element contains internal <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that is not associated with shape functions, simply set the corresonding shape function to 1.  <a href="classoomph_1_1ProjectableElementBase.html#ad45c21b58c0985d52f68ab2d79cbb488">More...</a><br /></td></tr>
+<tr class="separator:ad45c21b58c0985d52f68ab2d79cbb488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4da5b565b6d333be2f5920f7be763cd"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ae4da5b565b6d333be2f5920f7be763cd">get_field</a> (const unsigned &amp;time, const unsigned &amp;fld, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>)=0</td></tr>
+<tr class="memdesc:ae4da5b565b6d333be2f5920f7be763cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the fld-th field at local coordinates s at time-level time (time=0: current value; time&gt;0: history values)  <a href="classoomph_1_1ProjectableElementBase.html#ae4da5b565b6d333be2f5920f7be763cd">More...</a><br /></td></tr>
+<tr class="separator:ae4da5b565b6d333be2f5920f7be763cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:aa6b28955725b5626cc4cbf0465f12a9e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">Projection_Type</a> { <a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9eab653154bbbdee655a7f9a666a971b614">Coordinate</a>, 
+<a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9ea9e3decdba764ce2f6c3155676d44e38e">Lagrangian</a>, 
+<a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9ea7923f87012a0224d8a68656e58c5474a">Value</a>
+ }</td></tr>
+<tr class="memdesc:aa6b28955725b5626cc4cbf0465f12a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerated collection to specify which projection problem is to be solved.  <a href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">More...</a><br /></td></tr>
+<tr class="separator:aa6b28955725b5626cc4cbf0465f12a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aa71079c0f1075ac390708063fd7d2731"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#aa71079c0f1075ac390708063fd7d2731">Projected_field</a></td></tr>
+<tr class="memdesc:aa71079c0f1075ac390708063fd7d2731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Field that is currently being projected.  <a href="classoomph_1_1ProjectableElementBase.html#aa71079c0f1075ac390708063fd7d2731">More...</a><br /></td></tr>
+<tr class="separator:aa71079c0f1075ac390708063fd7d2731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4698e178e500468c0af8c37bd47d0bd3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a4698e178e500468c0af8c37bd47d0bd3">Time_level_for_projection</a></td></tr>
+<tr class="memdesc:a4698e178e500468c0af8c37bd47d0bd3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Time.html" title="Class to keep track of discrete/continous time. It is essential to have a single Time object when usi...">Time</a> level we are projecting (0=current values; &gt;0: history values)  <a href="classoomph_1_1ProjectableElementBase.html#a4698e178e500468c0af8c37bd47d0bd3">More...</a><br /></td></tr>
+<tr class="separator:a4698e178e500468c0af8c37bd47d0bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab712be6423145fae3c23e444187db0e2"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ab712be6423145fae3c23e444187db0e2">Projected_coordinate</a></td></tr>
+<tr class="memdesc:ab712be6423145fae3c23e444187db0e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">When projecting the history values of the nodal coordinates, this is the coordinate we're projecting.  <a href="classoomph_1_1ProjectableElementBase.html#ab712be6423145fae3c23e444187db0e2">More...</a><br /></td></tr>
+<tr class="separator:ab712be6423145fae3c23e444187db0e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1034f9a066d1e4116f5b6acf5e5a279c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a1034f9a066d1e4116f5b6acf5e5a279c">Projected_lagrangian</a></td></tr>
+<tr class="memdesc:a1034f9a066d1e4116f5b6acf5e5a279c"><td class="mdescLeft">&#160;</td><td class="mdescRight">When projecting the Lagrangain coordinates indicate which coordiante is to be projected.  <a href="classoomph_1_1ProjectableElementBase.html#a1034f9a066d1e4116f5b6acf5e5a279c">More...</a><br /></td></tr>
+<tr class="separator:a1034f9a066d1e4116f5b6acf5e5a279c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1081b0f4b3633612639f92d13a187db5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">Projection_Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a1081b0f4b3633612639f92d13a187db5">Projection_type</a></td></tr>
+<tr class="memdesc:a1081b0f4b3633612639f92d13a187db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable to indicate if we're projecting the history values of the nodal coordinates (Coordinate) the values themselves (Value), or the Lagrangian coordinates in Solid Mechanics problems (Lagrangian)  <a href="classoomph_1_1ProjectableElementBase.html#a1081b0f4b3633612639f92d13a187db5">More...</a><br /></td></tr>
+<tr class="separator:a1081b0f4b3633612639f92d13a187db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e6db97455edb38611347e258593f592"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a8e6db97455edb38611347e258593f592">Do_projection</a></td></tr>
+<tr class="memdesc:a8e6db97455edb38611347e258593f592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool to know if we do projection or not. If false (the default) we solve the element's "real" equations rather than the projection equations.  <a href="classoomph_1_1ProjectableElementBase.html#a8e6db97455edb38611347e258593f592">More...</a><br /></td></tr>
+<tr class="separator:a8e6db97455edb38611347e258593f592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a638bf48f5b8dd513c18413cd3878c0d1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a638bf48f5b8dd513c18413cd3878c0d1">Backup_ninteraction</a></td></tr>
+<tr class="memdesc:a638bf48f5b8dd513c18413cd3878c0d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store number of "external" interactions that were assigned to the element before doing the projection.  <a href="classoomph_1_1ProjectableElementBase.html#a638bf48f5b8dd513c18413cd3878c0d1">More...</a><br /></td></tr>
+<tr class="separator:a638bf48f5b8dd513c18413cd3878c0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a907f0491ccf46f64e97365afc2fcb773"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a907f0491ccf46f64e97365afc2fcb773">Backup_external_geometric_data</a></td></tr>
+<tr class="memdesc:a907f0491ccf46f64e97365afc2fcb773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remember if the element includes external geometric data when used in non-projection mode (this is temporarily disabled during the projection)  <a href="classoomph_1_1ProjectableElementBase.html#a907f0491ccf46f64e97365afc2fcb773">More...</a><br /></td></tr>
+<tr class="separator:a907f0491ccf46f64e97365afc2fcb773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f9195c254f229b178a8844f2572c7d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a0f9195c254f229b178a8844f2572c7d4">Backup_external_interaction_data</a></td></tr>
+<tr class="memdesc:a0f9195c254f229b178a8844f2572c7d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remember if the element includes external data when used in non-projection mode (this is temporarily disabled during the projection)  <a href="classoomph_1_1ProjectableElementBase.html#a0f9195c254f229b178a8844f2572c7d4">More...</a><br /></td></tr>
+<tr class="separator:a0f9195c254f229b178a8844f2572c7d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Template-free Base class for projectable elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00055">55</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="aa6b28955725b5626cc4cbf0465f12a9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6b28955725b5626cc4cbf0465f12a9e">&#9670;&nbsp;</a></span>Projection_Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">oomph::ProjectableElementBase::Projection_Type</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enumerated collection to specify which projection problem is to be solved. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa6b28955725b5626cc4cbf0465f12a9eab653154bbbdee655a7f9a666a971b614"></a>Coordinate&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa6b28955725b5626cc4cbf0465f12a9ea9e3decdba764ce2f6c3155676d44e38e"></a>Lagrangian&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa6b28955725b5626cc4cbf0465f12a9ea7923f87012a0224d8a68656e58c5474a"></a>Value&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00062">62</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7ee05f9195757b46b3693786cd260ac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ee05f9195757b46b3693786cd260ac5">&#9670;&nbsp;</a></span>ProjectableElementBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ProjectableElementBase::ProjectableElementBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Constructor: Initialise data so that we don't project but solve the "normal" equations associated with the element. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00110">110</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+</div>
+</div>
+<a id="a668500db9bcaab7aa983d3c92f94e34b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a668500db9bcaab7aa983d3c92f94e34b">&#9670;&nbsp;</a></span>~ProjectableElementBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::ProjectableElementBase::~ProjectableElementBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00116">116</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a644306ebdf16f334344c2d27d72f18b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a644306ebdf16f334344c2d27d72f18b7">&#9670;&nbsp;</a></span>data_values_of_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;std::pair&lt;<a class="el" href="classoomph_1_1Data.html">Data</a>*,unsigned&gt; &gt; oomph::ProjectableElementBase::data_values_of_field </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object and the value within it, that correspond to field fld. E.g. in Taylor Hood elements the fld-th velocities are stored at the fld-th value of the nodes; the pressures (the DIM-th field) are the DIM-th values at the vertex nodes etc. <br  />
+ </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement.html#a69240d9116b96f70e07e52b998531fad">oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableCrouzeixRaviartElement.html#a265001a5f6f758564d50fd498a1a9ca1">oomph::ProjectableCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#ad18e5d6af580df44437f3bf3bc97df93">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#ad18e5d6af580df44437f3bf3bc97df93">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodElement.html#a6def621e7df117d5e803e8e47f53c352">oomph::ProjectableTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#ad18e5d6af580df44437f3bf3bc97df93">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement.html#aee4e12ec586f561d681f63dda4d1d3ce">oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElementWithContinuousPressure.html#ab36cf9002b4eba6b706379b609979c52">oomph::ProjectablePVDElementWithContinuousPressure&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement.html#a1734ba15f3c3062571a83c3e23933e6a">oomph::ProjectableGeneralisedNewtonianTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement.html#acd407ccde8e91cbfa31bda2d62b606cf">oomph::GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricCrouzeixRaviartElement.html#ae3768470d408e2d40f408e58d28792c2">oomph::ProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement.html#a89cf2117918a1d5074e26bb386aac730">oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricTaylorHoodElement.html#a9008d18dbbbcfa54964766fbe2d31cde">oomph::ProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricPoroelasticityElement.html#a1c98590aaf05d668c742afc430c0f5b6">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatMixedOrderSpaceTimeElement.html#a2018bdb8ee06ba6c832929406566e3f7">oomph::ProjectableUnsteadyHeatMixedOrderSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a70038057cb2f9ac055226a0e1214ebb6">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLHelmholtzElement.html#a7bae5d4f8a8716c9db2119094f9f08bc">oomph::ProjectablePMLHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a70038057cb2f9ac055226a0e1214ebb6">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLFourierDecomposedHelmholtzElement.html#a49fec167b648f17be6517f241e0745e6">oomph::ProjectablePMLFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAdvectionDiffusionReactionElement.html#a58e030b8f58628947ff0d7e58b37394d">oomph::ProjectableAdvectionDiffusionReactionElement&lt; ADR_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePoissonElement.html#a9ee630c0affbb44077365bc9309ce1a1">oomph::ProjectablePoissonElement&lt; POISSON_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDisplacementBasedFoepplvonKarmanElement.html#a18725fa9db7ade75bc789396bb91a04a">oomph::ProjectableDisplacementBasedFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableHelmholtzElement.html#a8ca133993658d3eefdfd1ab02b55fae7">oomph::ProjectableHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLTimeHarmonicLinearElasticityElement.html#a49e06b240732712d0db73340c9f104f0">oomph::ProjectablePMLTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElement.html#ab786e3176fd618064e5cb35557dc01fe">oomph::ProjectablePVDElement&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatElement.html#a5e80bbc5a4d70f51fe842bb90f988d31">oomph::ProjectableUnsteadyHeatElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFoepplvonKarmanElement.html#a945d9f6e4fe913ca3659b0aceaab9b94">oomph::ProjectableFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFourierDecomposedHelmholtzElement.html#a0644ce309555150976c0e5e16ea2dd1f">oomph::ProjectableFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymLinearElasticityElement.html#aa2fdf62a0479bffad602ff39df9c7697">oomph::ProjectableAxisymLinearElasticityElement&lt; AXISYM_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement.html#a4fcccf713843eda6d6cab9c73950d0d1">oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableLinearElasticityElement.html#ab73155dc46dafbc35a71a36c855f5790">oomph::ProjectableLinearElasticityElement&lt; LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDarcyElement.html#aa430ac36ed6a03558d66cae979b57a3f">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement.html#aa7e723386c104650e9b8f7f3e856786b">oomph::ProjectableTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1GenericLagrangeInterpolatedProjectableElement.html#abbf541f3b88a4b0acc89f4b6f252de3b">oomph::GenericLagrangeInterpolatedProjectableElement&lt; ELEMENT &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ae4da5b565b6d333be2f5920f7be763cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4da5b565b6d333be2f5920f7be763cd">&#9670;&nbsp;</a></span>get_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double oomph::ProjectableElementBase::get_field </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the fld-th field at local coordinates s at time-level time (time=0: current value; time&gt;0: history values) </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement.html#aeebbb2cb43f24c0240acaf264cd76a07">oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableCrouzeixRaviartElement.html#a7a344f2a19106f7c46f75d97c2cc5afd">oomph::ProjectableCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a565ba9ed0cf7828d3217111f8c59b489">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a565ba9ed0cf7828d3217111f8c59b489">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodElement.html#aff36e945b4f1c625b5b539bac2518b6f">oomph::ProjectableTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a565ba9ed0cf7828d3217111f8c59b489">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement.html#a28e2853c747d88204673b6aa93f2bf62">oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement.html#aa43386b75da4ae4c4b1dd89d335de0db">oomph::ProjectableGeneralisedNewtonianTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElementWithContinuousPressure.html#a541a3577c83ffd547e6504bebcbda836">oomph::ProjectablePVDElementWithContinuousPressure&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement.html#a4340dbe3df28791ddda0fa21f154f33a">oomph::GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricCrouzeixRaviartElement.html#a2eea6fde7d2818d1053e4b1706883b34">oomph::ProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement.html#aa95fa09d025d470d83606c41174c9498">oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricTaylorHoodElement.html#a81c20f0a3190e00053f095ccc5f70691">oomph::ProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricPoroelasticityElement.html#aba62f3460cbd779f3193be8e48fdb636">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatMixedOrderSpaceTimeElement.html#a952ff7ece64da77d77059c7583ac644d">oomph::ProjectableUnsteadyHeatMixedOrderSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a09c12a1c8968d3450f8a826cc7e79277">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLHelmholtzElement.html#a14a5a245ec1fa36c371a3937a3fb4e96">oomph::ProjectablePMLHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a09c12a1c8968d3450f8a826cc7e79277">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLFourierDecomposedHelmholtzElement.html#a53156274a681c286bbb20920e925b55e">oomph::ProjectablePMLFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePoissonElement.html#a39f08edb4ea9e6c4e0def984cee288c6">oomph::ProjectablePoissonElement&lt; POISSON_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAdvectionDiffusionReactionElement.html#a635af86efa15af8c52e34970467f91c8">oomph::ProjectableAdvectionDiffusionReactionElement&lt; ADR_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDisplacementBasedFoepplvonKarmanElement.html#a942127e4616e7affc908c28c2561ce5a">oomph::ProjectableDisplacementBasedFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableHelmholtzElement.html#a6635aa1b760348ac92784c4e7bb6db38">oomph::ProjectableHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatElement.html#ae4b0cb13a1849f7e950252164884eeba">oomph::ProjectableUnsteadyHeatElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFoepplvonKarmanElement.html#a762989fdeb0489dec57bb386ea6ebf58">oomph::ProjectableFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLTimeHarmonicLinearElasticityElement.html#a3b6f5752dac14debbbbe757d1a10ba97">oomph::ProjectablePMLTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFourierDecomposedHelmholtzElement.html#a163cc475f2675b5cc5e596ae9326df1b">oomph::ProjectableFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElement.html#a4a193dadf4194ff1967c0e955b8b7666">oomph::ProjectablePVDElement&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymLinearElasticityElement.html#a125b64cda7cc665d987660bccedd3c39">oomph::ProjectableAxisymLinearElasticityElement&lt; AXISYM_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement.html#a789c16121f259adb1a04f9f283a1e277">oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDarcyElement.html#a3911971a5babcc1bb85bd1dd46b30fc9">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableLinearElasticityElement.html#a00c02d888df64225d0e0e3e132496094">oomph::ProjectableLinearElasticityElement&lt; LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement.html#ac65b20b221ae454e0b236612ebd3e30b">oomph::ProjectableTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1GenericLagrangeInterpolatedProjectableElement.html#a788234ec49e0702b4af030d03a454adc">oomph::GenericLagrangeInterpolatedProjectableElement&lt; ELEMENT &gt;</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="darcy__elements_8h_source.html#l00832">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;::residual_for_projection()</a>, and <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l01725">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="ad45c21b58c0985d52f68ab2d79cbb488"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad45c21b58c0985d52f68ab2d79cbb488">&#9670;&nbsp;</a></span>jacobian_and_shape_of_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double oomph::ProjectableElementBase::jacobian_and_shape_of_field </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Shape.html">Shape</a> &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return Jacobian of mapping and the shape functions associated with field fld. The number of shape functions must match the number of values specified in nvalue_of_field(...). For Lagrange-type interpolations the shape functinos are simply the "normal" nodal shape functions; if the element contains internal <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that is not associated with shape functions, simply set the corresonding shape function to 1. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement.html#a46851951a0565eff9dc934cd33916cb1">oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableCrouzeixRaviartElement.html#a91b2d0d2f6cb0fdfe3cd8d4f93373b05">oomph::ProjectableCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#acb335e83a84b752d26c92f5207128bd2">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#acb335e83a84b752d26c92f5207128bd2">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodElement.html#a1893ca2bf9bf81d12350b9534cbf30d8">oomph::ProjectableTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#acb335e83a84b752d26c92f5207128bd2">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement.html#ae766399afa32fb3e77fb0ce9f7cb8a1c">oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement.html#a14569ba6c03489a0ad3cee644794ee2e">oomph::ProjectableGeneralisedNewtonianTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElementWithContinuousPressure.html#a9da58f06068f1f3b48e87bb6cbc97018">oomph::ProjectablePVDElementWithContinuousPressure&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement.html#ac3ff1dab92b90bee99a1e70e75bb549b">oomph::GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricCrouzeixRaviartElement.html#ab2bb9d97b476c31f4f77f06f29b25883">oomph::ProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement.html#a00a9a3ba14ff4202b64a8cdc21344b71">oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricTaylorHoodElement.html#a3cedb09c44a4cc735c5dcd1175afe704">oomph::ProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricPoroelasticityElement.html#a53a88c81a5225e213ca869e670ad1605">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatMixedOrderSpaceTimeElement.html#a6e5769592058522a44c92f3890076fdc">oomph::ProjectableUnsteadyHeatMixedOrderSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#abffad68b686c161f623183f5db539c1e">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLHelmholtzElement.html#aa4af5bb878fed3d1b286bde1da0f5419">oomph::ProjectablePMLHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#abffad68b686c161f623183f5db539c1e">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLFourierDecomposedHelmholtzElement.html#aa2dd1c8b7262a2719d3c181ccac74c7e">oomph::ProjectablePMLFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAdvectionDiffusionReactionElement.html#a7f3245cd32436bcebccf698285b7f69e">oomph::ProjectableAdvectionDiffusionReactionElement&lt; ADR_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePoissonElement.html#a0fa8292f5be360a3c8727cb1790506aa">oomph::ProjectablePoissonElement&lt; POISSON_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDisplacementBasedFoepplvonKarmanElement.html#a03270161594fb96325530ba9d1b6d291">oomph::ProjectableDisplacementBasedFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableHelmholtzElement.html#a651580abfd2d133f7cd6cd38e0bcca61">oomph::ProjectableHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatElement.html#a49318b95add2b1ac8c6f0f0cfac195f6">oomph::ProjectableUnsteadyHeatElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLTimeHarmonicLinearElasticityElement.html#abc19b33b7f42c1dae69f0b64c7e05c61">oomph::ProjectablePMLTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFoepplvonKarmanElement.html#a1fd58ba72daf96c1849cb48350684d74">oomph::ProjectableFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElement.html#afc3aa618b5fe62f6389a620b45fcae2a">oomph::ProjectablePVDElement&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFourierDecomposedHelmholtzElement.html#a7ba6062f40bc46b7c3e09fb77857aa19">oomph::ProjectableFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymLinearElasticityElement.html#a86f342760e932e4ae53f0fe36d784bd0">oomph::ProjectableAxisymLinearElasticityElement&lt; AXISYM_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement.html#a74c726d77137a9693a37d3b01eb321b8">oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableLinearElasticityElement.html#a67ba02d25acfba604dbdc3446cab9158">oomph::ProjectableLinearElasticityElement&lt; LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDarcyElement.html#a2dad4f7a1d4bdeeb2bc928677572db03">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement.html#af5b374081d576de7e29fe579ea06fd7d">oomph::ProjectableTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1GenericLagrangeInterpolatedProjectableElement.html#ac9e67d23b865eb118acbca2eea74c8a3">oomph::GenericLagrangeInterpolatedProjectableElement&lt; ELEMENT &gt;</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="ac5c27ae929ff636dc7747fe23fd4f738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5c27ae929ff636dc7747fe23fd4f738">&#9670;&nbsp;</a></span>local_equation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int oomph::ProjectableElementBase::local_equation </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ivalue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return local equation numbers associated with value ivalue of field fld within the element. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement.html#a488fb847e7c2965903d4f921ce6cc4dc">oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableCrouzeixRaviartElement.html#a1cea4dd9a75e28f84b1b7ab71a5c64eb">oomph::ProjectableCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#abc5ca8c244aa7f3a6bb68856dab812ba">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#abc5ca8c244aa7f3a6bb68856dab812ba">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodElement.html#abbe179e61df43528604207a4eddcd0e6">oomph::ProjectableTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#abc5ca8c244aa7f3a6bb68856dab812ba">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement.html#a3bc031a4608afe535d89c3ab1b611b10">oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement.html#aade79476ead53af48e508562033bfb50">oomph::ProjectableGeneralisedNewtonianTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElementWithContinuousPressure.html#a90cc8c352dc5c6dfca3bd26f642c998f">oomph::ProjectablePVDElementWithContinuousPressure&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement.html#ab19ecd24a11c5fb2d805b138e5fff043">oomph::GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricCrouzeixRaviartElement.html#ad5ef8ba115e3e8db5f456a26a95ba7d1">oomph::ProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement.html#a0aae7918d2345fd33db3c7970a596736">oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricTaylorHoodElement.html#a59807f4f9393d5140ba64930d3d2d036">oomph::ProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricPoroelasticityElement.html#a083614b12898ca9057debe48aa81364a">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatMixedOrderSpaceTimeElement.html#a40a4a5c077f96eb2bda6bf789ffa45dc">oomph::ProjectableUnsteadyHeatMixedOrderSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a0590f6d157e23ae674518acc98503658">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLHelmholtzElement.html#aaa23dc2e79e4185e5ee8665cd69ecc8d">oomph::ProjectablePMLHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a0590f6d157e23ae674518acc98503658">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLFourierDecomposedHelmholtzElement.html#a1802d1737bb3af15f79a8581880c1b55">oomph::ProjectablePMLFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePoissonElement.html#af13ec8e584c3ab11cb501030220fcb87">oomph::ProjectablePoissonElement&lt; POISSON_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAdvectionDiffusionReactionElement.html#a105bd57ef8857ddf058fff0314e1e223">oomph::ProjectableAdvectionDiffusionReactionElement&lt; ADR_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDisplacementBasedFoepplvonKarmanElement.html#a165f26b2d0561d8d6e0d8a90f1e6c45d">oomph::ProjectableDisplacementBasedFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableHelmholtzElement.html#ada5e8cc58f2c0be72da7b66e07d174be">oomph::ProjectableHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatElement.html#ad3c589c0bd97ac402919e426e5ee0e6b">oomph::ProjectableUnsteadyHeatElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFoepplvonKarmanElement.html#ad4d911152c2f5e648f7f6558e53d4c9b">oomph::ProjectableFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFourierDecomposedHelmholtzElement.html#aa978ab56d0673a25ac99e9477198d942">oomph::ProjectableFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLTimeHarmonicLinearElasticityElement.html#a7459a06e5c3dd6a91286408e8d407bf8">oomph::ProjectablePMLTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDarcyElement.html#a7c003fb90c5a5892ce176b67f3cf18a0">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElement.html#acd838813683d89c331dab13ba6d5726a">oomph::ProjectablePVDElement&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymLinearElasticityElement.html#a449c2dd77bc7f66fac46affb6223a04b">oomph::ProjectableAxisymLinearElasticityElement&lt; AXISYM_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement.html#aba8a4c3e1fdaed3fa059c55d7c021ff5">oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableLinearElasticityElement.html#a0311cfae0d3bf571be30bee3c848543c">oomph::ProjectableLinearElasticityElement&lt; LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement.html#a773b3f4a6cf431ca3a95248f6f9766e6">oomph::ProjectableTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1GenericLagrangeInterpolatedProjectableElement.html#ab1d0d99536b2d4f1c935d39d01a943fa">oomph::GenericLagrangeInterpolatedProjectableElement&lt; ELEMENT &gt;</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a44634aa4049332a580d249c25564638c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44634aa4049332a580d249c25564638c">&#9670;&nbsp;</a></span>nfields_for_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::ProjectableElementBase::nfields_for_projection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of fields of the problem, so e.g. for 2D Navier Stokes this would be 3 (for the two velocities and one pressure) </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement.html#ad59d29adf0f33f77f6c682b6d32d24b3">oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableCrouzeixRaviartElement.html#a90aa4875deb63383d5e4bf7b4a860a3c">oomph::ProjectableCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a662e3e5663832e82dd995543d06a2ffc">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a662e3e5663832e82dd995543d06a2ffc">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodElement.html#a86f40ce1d2f04cfe2a4b738cdc72a318">oomph::ProjectableTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a662e3e5663832e82dd995543d06a2ffc">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement.html#a6c8b647ec31436a5f35e4eee2cd678b6">oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElementWithContinuousPressure.html#a022141e748543a3d95230707d64f8baf">oomph::ProjectablePVDElementWithContinuousPressure&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement.html#a34bc56caf12c251a15509f1be90debf1">oomph::ProjectableGeneralisedNewtonianTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement.html#adb32f53c8b407273afcd7eb95a1dbb54">oomph::GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricCrouzeixRaviartElement.html#a99ab07cbe191cc6d692e52d89bad0877">oomph::ProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement.html#a0fadb5b52ae5980e6826d75e6be982b3">oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricTaylorHoodElement.html#a60842beb2f919f071623db9c1dc8a69a">oomph::ProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricPoroelasticityElement.html#a593b32549e17dedf66365bf3fd202536">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatMixedOrderSpaceTimeElement.html#a4752cf48b40aeb94c4a44455f863f93c">oomph::ProjectableUnsteadyHeatMixedOrderSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a8efa94e5a3145a6be2d903ce3e03d075">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLHelmholtzElement.html#ab90d84e474fccf3a814ea99ecd02e61c">oomph::ProjectablePMLHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a8efa94e5a3145a6be2d903ce3e03d075">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLFourierDecomposedHelmholtzElement.html#a58a9c476841f68800763a24421717f63">oomph::ProjectablePMLFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAdvectionDiffusionReactionElement.html#a03a11cb3cc0a4a0974302ee8bea7c3ec">oomph::ProjectableAdvectionDiffusionReactionElement&lt; ADR_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePoissonElement.html#a0b8e911e3eca8dbfecd30a5e8dc2ff33">oomph::ProjectablePoissonElement&lt; POISSON_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDisplacementBasedFoepplvonKarmanElement.html#a4146ddb00d3145268ccffc6a9742e1a5">oomph::ProjectableDisplacementBasedFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableHelmholtzElement.html#a8a516cbf286391aa6e3c0651db47de6f">oomph::ProjectableHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatElement.html#a8966da6a379eb20fcf86efe03c681a86">oomph::ProjectableUnsteadyHeatElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLTimeHarmonicLinearElasticityElement.html#a4f47d55d9864a060d434bdf1fcf0ebe1">oomph::ProjectablePMLTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElement.html#a3ef16d41268f4cdb67718a5c2fca3cab">oomph::ProjectablePVDElement&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFoepplvonKarmanElement.html#aaa74e7c246f86929e7ceeeced8819d6c">oomph::ProjectableFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFourierDecomposedHelmholtzElement.html#a222ce07a334691bbff3f3ec7c8049ada">oomph::ProjectableFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymLinearElasticityElement.html#ae470acc9389f7737d54f27751593429e">oomph::ProjectableAxisymLinearElasticityElement&lt; AXISYM_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement.html#aee73e1027994f0c4908d048a930c3992">oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableLinearElasticityElement.html#aefdb5cd9080bec31457d79ce3a888625">oomph::ProjectableLinearElasticityElement&lt; LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDarcyElement.html#ae6daf28fea08e70d77bcdcb5426b0fb9">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement.html#a2c8f219649069bad135a0a1ca7bcd907">oomph::ProjectableTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1GenericLagrangeInterpolatedProjectableElement.html#abc3c4f65ddb05984629ad9e35daa209a">oomph::GenericLagrangeInterpolatedProjectableElement&lt; ELEMENT &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ab4ecd0cd24000a3ed675dc7198203c1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4ecd0cd24000a3ed675dc7198203c1f">&#9670;&nbsp;</a></span>nhistory_values_for_coordinate_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::ProjectableElementBase::nhistory_values_for_coordinate_projection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of history values to be stored when projecting the history values of the nodal coordinates (includes current value!) </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement.html#a6d898449da166599788a597b9ff282f8">oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableCrouzeixRaviartElement.html#a95661958f80183560ddd50bb201a0532">oomph::ProjectableCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a8241aafbd16b4e2a50bcb8a1a839f530">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a8241aafbd16b4e2a50bcb8a1a839f530">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodElement.html#a7b93892cedb3a4da3dc9f30c186fdec4">oomph::ProjectableTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a8241aafbd16b4e2a50bcb8a1a839f530">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement.html#a20d7536f02164a9614ab0c4a15a1ad31">oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement.html#a126d79b6d873a2e4e73ea300089cef85">oomph::ProjectableGeneralisedNewtonianTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElementWithContinuousPressure.html#a67bdc9b19979dc1b77330fb1ab5f9493">oomph::ProjectablePVDElementWithContinuousPressure&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement.html#a551405a5bd38e4d945e29a7dae405f8e">oomph::GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricCrouzeixRaviartElement.html#a35e03deddcaceaea1909cfe14df631dd">oomph::ProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement.html#a43822b73b545d33e21a300247e1954b3">oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricTaylorHoodElement.html#a88869af2e716697b7d9296c9de2af9bf">oomph::ProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricPoroelasticityElement.html#a077bea222dd174803e3af28e6995195e">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatMixedOrderSpaceTimeElement.html#a7625028197e310d7b1da2877857ceb50">oomph::ProjectableUnsteadyHeatMixedOrderSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a6fa0baef8723cd4f6f413a3308622b35">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLHelmholtzElement.html#a3af221fe8b94d8a50917c92c3cc94b5d">oomph::ProjectablePMLHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a6fa0baef8723cd4f6f413a3308622b35">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLFourierDecomposedHelmholtzElement.html#a80ea03cabadebba315958b75987ab4ed">oomph::ProjectablePMLFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAdvectionDiffusionReactionElement.html#ab92aff0c177a54d021a313440eecfa23">oomph::ProjectableAdvectionDiffusionReactionElement&lt; ADR_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePoissonElement.html#a42e8ec2cd54a3301190d2b3a10e66370">oomph::ProjectablePoissonElement&lt; POISSON_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDisplacementBasedFoepplvonKarmanElement.html#a7366549f01d46f1830bade297af61bdb">oomph::ProjectableDisplacementBasedFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableHelmholtzElement.html#a4ec9aaa5311ce1724014c4c4240a4d59">oomph::ProjectableHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatElement.html#a1fcd0a7808f65c0ffde81c1e23d0e1c1">oomph::ProjectableUnsteadyHeatElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLTimeHarmonicLinearElasticityElement.html#abd0c7d21ef3ba99745851db30d2d1a99">oomph::ProjectablePMLTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFoepplvonKarmanElement.html#a7b6ce72f267669ecd5fc0119f669772f">oomph::ProjectableFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElement.html#a82923f600601aa9f0c9e1b168f0d8fa5">oomph::ProjectablePVDElement&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFourierDecomposedHelmholtzElement.html#ab1f9e43fe32a5c09fefe61f324a650cc">oomph::ProjectableFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymLinearElasticityElement.html#a56a9ecb113858a8ab28a1125e879416d">oomph::ProjectableAxisymLinearElasticityElement&lt; AXISYM_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement.html#a907adc47e9267b2eca42631dc95c5af4">oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableLinearElasticityElement.html#af147f2ea0fb696ae5e32b21c7b877dfb">oomph::ProjectableLinearElasticityElement&lt; LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDarcyElement.html#a32091c680d7793baed0e5294c6143418">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement.html#a5d6d66a33214a0aff4e661fca8350a83">oomph::ProjectableTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1GenericLagrangeInterpolatedProjectableElement.html#a43bb151ce94f5f171b5f0577e1f46909">oomph::GenericLagrangeInterpolatedProjectableElement&lt; ELEMENT &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ac6790f394630b964663281f8740f43a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6790f394630b964663281f8740f43a5">&#9670;&nbsp;</a></span>nhistory_values_for_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::ProjectableElementBase::nhistory_values_for_projection </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of history values to be stored for fld-th field <br  />
+ (includes current value!) </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement.html#ae3fad12106671018a2b43042b243519e">oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableCrouzeixRaviartElement.html#aa86ac441dc201801e0d96c634cb4e251">oomph::ProjectableCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#ae361a8ca7dffa909f09d34b17bdf5046">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#ae361a8ca7dffa909f09d34b17bdf5046">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodElement.html#a5d64cb39e6ae0e286c08cbb6c84bcaeb">oomph::ProjectableTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#ae361a8ca7dffa909f09d34b17bdf5046">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement.html#aa1351493ce07955f66bcc56b4a2beabf">oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement.html#a5a7f30af042df73e5a62a29830333b33">oomph::ProjectableGeneralisedNewtonianTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElementWithContinuousPressure.html#ae2e030a1740d31e491e9083c6b0107b4">oomph::ProjectablePVDElementWithContinuousPressure&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement.html#a849ba101f89e2b21525d4131e868f672">oomph::GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricCrouzeixRaviartElement.html#a75392836bcf553edb6d75f7bbc60f111">oomph::ProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement.html#a128887a8ec6ac7e2054d5343e85afde1">oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricTaylorHoodElement.html#af37df6381430a8983892ff3a1b425266">oomph::ProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricPoroelasticityElement.html#afa3e26efcd834f12046852303709c4f7">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatMixedOrderSpaceTimeElement.html#a91d261acb92f4180b03414c9664a968a">oomph::ProjectableUnsteadyHeatMixedOrderSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a0fc8ec5028f2d7e52036babafb895442">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLHelmholtzElement.html#a5b0bad4b386bf0d31aeccb963e0814a0">oomph::ProjectablePMLHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a0fc8ec5028f2d7e52036babafb895442">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLFourierDecomposedHelmholtzElement.html#a0ff6495f24663e6f1c8a50fa75443915">oomph::ProjectablePMLFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAdvectionDiffusionReactionElement.html#a1b5321bacbe986828d5726b53cec8633">oomph::ProjectableAdvectionDiffusionReactionElement&lt; ADR_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePoissonElement.html#a6256481549383c8abdd666f691e3dbed">oomph::ProjectablePoissonElement&lt; POISSON_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDisplacementBasedFoepplvonKarmanElement.html#a860e5d23c30436549175b36b508e62a0">oomph::ProjectableDisplacementBasedFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableHelmholtzElement.html#aae069d7dba3ab7ae1677053e5c55ba93">oomph::ProjectableHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatElement.html#ac26bb5fe73e07db80e7e4e7a2070074c">oomph::ProjectableUnsteadyHeatElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLTimeHarmonicLinearElasticityElement.html#a0b75e51a7ed1b8bb56238134b2c02dae">oomph::ProjectablePMLTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElement.html#a1fe76f1370f13c75f81f8dc860240084">oomph::ProjectablePVDElement&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFoepplvonKarmanElement.html#afbac2a4519a482c9a7fdc9994e783147">oomph::ProjectableFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFourierDecomposedHelmholtzElement.html#ade916dec0e853569db95b0538fcabb2a">oomph::ProjectableFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymLinearElasticityElement.html#ac728e9dd1f32500ecabd559f4f457fd6">oomph::ProjectableAxisymLinearElasticityElement&lt; AXISYM_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement.html#a6ab68c3941f90a662a1b696bc7d4b3d7">oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableLinearElasticityElement.html#a978036eab9ff96a4af083c9963f2f369">oomph::ProjectableLinearElasticityElement&lt; LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDarcyElement.html#aba5e9617dc6346ca4318baf457445da9">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement.html#a4615e8cf28f14603d0215006db2218fc">oomph::ProjectableTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1GenericLagrangeInterpolatedProjectableElement.html#a9343241dc18e1331a5b220fd3fbe07a7">oomph::GenericLagrangeInterpolatedProjectableElement&lt; ELEMENT &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a1a9a6de16f3511bca8e8be770abb9c2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a9a6de16f3511bca8e8be770abb9c2e">&#9670;&nbsp;</a></span>nvalue_of_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::ProjectableElementBase::nvalue_of_field </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return number of values (pinned or not) associated with field fld within the element. This must correspond to the number of shape functions returned in jacobian_and_shape_of_field(...). </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1ProjectableTaylorHoodMixedOrderSpaceTimeElement.html#a0fe6ba879ea6881d17be913e8f0663f7">oomph::ProjectableTaylorHoodMixedOrderSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableCrouzeixRaviartElement.html#adee290d9544673529406381ccdfbe818">oomph::ProjectableCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a7ff4171a511f42a9f0648629cf90b25e">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a7ff4171a511f42a9f0648629cf90b25e">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodElement.html#acc580c5ee1ce18d7d6b42d67e9323e99">oomph::ProjectableTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTaylorHoodSpaceTimeElement.html#a7ff4171a511f42a9f0648629cf90b25e">oomph::ProjectableTaylorHoodSpaceTimeElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement.html#af5fd14a52a74dead7b8e095cb8b20cdc">oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement.html#a44ae0637efb48b6dc0c2f886bf39e376">oomph::ProjectableGeneralisedNewtonianTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElementWithContinuousPressure.html#a2705856446a53ee4e3944ae8b5006391">oomph::ProjectablePVDElementWithContinuousPressure&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement.html#a34ceec9cc38743a2f9a106a106e4cd86">oomph::GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricCrouzeixRaviartElement.html#a0ee99c8cc0180f33177c580a46d3c902">oomph::ProjectableAxisymmetricCrouzeixRaviartElement&lt; CROUZEIX_RAVIART_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement.html#a81ea5945349c6295624df0615ec76b82">oomph::GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricTaylorHoodElement.html#a47410e0fbb3ad00b2a71f8fb7f789070">oomph::ProjectableAxisymmetricTaylorHoodElement&lt; TAYLOR_HOOD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymmetricPoroelasticityElement.html#a8082f4f9da812ae6965e20838ecce8d2">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatMixedOrderSpaceTimeElement.html#a9bd9cfc279df72d8ab2a90e40072f727">oomph::ProjectableUnsteadyHeatMixedOrderSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a72785da013a5b9579367fe3965f1c65a">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLHelmholtzElement.html#a08c9eee991edbaff38b8df1682e49a8e">oomph::ProjectablePMLHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatSpaceTimeElement.html#a72785da013a5b9579367fe3965f1c65a">oomph::ProjectableUnsteadyHeatSpaceTimeElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLFourierDecomposedHelmholtzElement.html#af96096d961b9611419ba010223e55d4e">oomph::ProjectablePMLFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePoissonElement.html#a006f46a3072037df9f301ed71af56ac1">oomph::ProjectablePoissonElement&lt; POISSON_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAdvectionDiffusionReactionElement.html#a28ca9f5ed7dfabdaeb589c39f1972bbf">oomph::ProjectableAdvectionDiffusionReactionElement&lt; ADR_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDisplacementBasedFoepplvonKarmanElement.html#aced5f16f95773d3dda606f3f21fc366e">oomph::ProjectableDisplacementBasedFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableHelmholtzElement.html#abcab89ec5baac0407527579afc8aac15">oomph::ProjectableHelmholtzElement&lt; HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableUnsteadyHeatElement.html#aa15defb47cb015dc9c589606addfdd61">oomph::ProjectableUnsteadyHeatElement&lt; UNSTEADY_HEAT_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFoepplvonKarmanElement.html#aef446291cf0c740bc541b770a194d29f">oomph::ProjectableFoepplvonKarmanElement&lt; FVK_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePMLTimeHarmonicLinearElasticityElement.html#a28dec9ac70ed3906c3fe8d2b3ecdec25">oomph::ProjectablePMLTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableFourierDecomposedHelmholtzElement.html#ad01ff7bf92e3c532b9aeb83a11428782">oomph::ProjectableFourierDecomposedHelmholtzElement&lt; FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectablePVDElement.html#a07fd8297f68847c095aff3f97fa4d91e">oomph::ProjectablePVDElement&lt; PVD_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableAxisymLinearElasticityElement.html#a00715989f89c46ba103194baf8e359b2">oomph::ProjectableAxisymLinearElasticityElement&lt; AXISYM_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement.html#a3fc2ba3dfb2547fcc704478280e9e096">oomph::ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableDarcyElement.html#a5d7312cd8fb27bd36ac014b180bf5f1a">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableLinearElasticityElement.html#ab63ab6edb80671b16a1e9de95de439b1">oomph::ProjectableLinearElasticityElement&lt; LINEAR_ELAST_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ProjectableTimeHarmonicLinearElasticityElement.html#acda6973da9b435f90d5e5be2f30836a6">oomph::ProjectableTimeHarmonicLinearElasticityElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1GenericLagrangeInterpolatedProjectableElement.html#ab2dddff594eedd24a1db29b17ab8868b">oomph::GenericLagrangeInterpolatedProjectableElement&lt; ELEMENT &gt;</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a907f0491ccf46f64e97365afc2fcb773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a907f0491ccf46f64e97365afc2fcb773">&#9670;&nbsp;</a></span>Backup_external_geometric_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::ProjectableElementBase::Backup_external_geometric_data</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remember if the element includes external geometric data when used in non-projection mode (this is temporarily disabled during the projection) </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00096">96</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00579">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::disable_projection()</a>, and <a class="el" href="projection_8h_source.html#l00544">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::enable_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a0f9195c254f229b178a8844f2572c7d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f9195c254f229b178a8844f2572c7d4">&#9670;&nbsp;</a></span>Backup_external_interaction_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::ProjectableElementBase::Backup_external_interaction_data</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remember if the element includes external data when used in non-projection mode (this is temporarily disabled during the projection) </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00102">102</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00579">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::disable_projection()</a>, and <a class="el" href="projection_8h_source.html#l00544">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::enable_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a638bf48f5b8dd513c18413cd3878c0d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a638bf48f5b8dd513c18413cd3878c0d1">&#9670;&nbsp;</a></span>Backup_ninteraction</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Backup_ninteraction</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Store number of "external" interactions that were assigned to the element before doing the projection. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00091">91</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00579">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::disable_projection()</a>, and <a class="el" href="projection_8h_source.html#l00544">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::enable_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a8e6db97455edb38611347e258593f592"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e6db97455edb38611347e258593f592">&#9670;&nbsp;</a></span>Do_projection</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::ProjectableElementBase::Do_projection</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bool to know if we do projection or not. If false (the default) we solve the element's "real" equations rather than the projection equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00086">86</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00579">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::disable_projection()</a>, <a class="el" href="projection_8h_source.html#l00544">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::enable_projection()</a>, <a class="el" href="projection_8h_source.html#l00214">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="projection_8h_source.html#l00183">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::fill_in_contribution_to_residuals()</a>, and <a class="el" href="projection_8h_source.html#l00527">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::zeta_nodal()</a>.</p>
+
+</div>
+</div>
+<a id="ab712be6423145fae3c23e444187db0e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab712be6423145fae3c23e444187db0e2">&#9670;&nbsp;</a></span>Projected_coordinate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Projected_coordinate</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>When projecting the history values of the nodal coordinates, this is the coordinate we're projecting. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00072">72</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00628">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::projected_coordinate()</a>, <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="darcy__elements_8h_source.html#l00832">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;::residual_for_projection()</a>, and <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l01725">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="aa71079c0f1075ac390708063fd7d2731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa71079c0f1075ac390708063fd7d2731">&#9670;&nbsp;</a></span>Projected_field</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Projected_field</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Field that is currently being projected. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00065">65</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00619">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::projected_field()</a>, <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="darcy__elements_8h_source.html#l00832">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;::residual_for_projection()</a>, and <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l01725">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a1034f9a066d1e4116f5b6acf5e5a279c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1034f9a066d1e4116f5b6acf5e5a279c">&#9670;&nbsp;</a></span>Projected_lagrangian</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Projected_lagrangian</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>When projecting the Lagrangain coordinates indicate which coordiante is to be projected. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00076">76</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00633">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::projected_lagrangian_coordinate()</a>, <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="darcy__elements_8h_source.html#l00832">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;::residual_for_projection()</a>, and <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l01725">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a1081b0f4b3633612639f92d13a187db5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1081b0f4b3633612639f92d13a187db5">&#9670;&nbsp;</a></span>Projection_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">Projection_Type</a> oomph::ProjectableElementBase::Projection_type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Variable to indicate if we're projecting the history values of the nodal coordinates (Coordinate) the values themselves (Value), or the Lagrangian coordinates in Solid Mechanics problems (Lagrangian) </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00081">81</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="darcy__elements_8h_source.html#l00832">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l01725">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="projection_8h_source.html#l00609">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::set_project_coordinates()</a>, <a class="el" href="projection_8h_source.html#l00615">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::set_project_lagrangian()</a>, and <a class="el" href="projection_8h_source.html#l00612">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::set_project_values()</a>.</p>
+
+</div>
+</div>
+<a id="a4698e178e500468c0af8c37bd47d0bd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4698e178e500468c0af8c37bd47d0bd3">&#9670;&nbsp;</a></span>Time_level_for_projection</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Time_level_for_projection</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Time.html" title="Class to keep track of discrete/continous time. It is essential to have a single Time object when usi...">Time</a> level we are projecting (0=current values; &gt;0: history values) </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00068">68</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="darcy__elements_8h_source.html#l00832">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l01725">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;::residual_for_projection()</a>, and <a class="el" href="projection_8h_source.html#l00623">oomph::ProjectableElement&lt; TIME_HARMONIC_LINEAR_ELAST_ELEMENT &gt;::time_level_for_projection()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="projection_8h_source.html">projection.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:19
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

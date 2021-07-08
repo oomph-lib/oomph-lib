@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: vmtk_fluid.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">vmtk_fluid.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a7a4d74b690fbdc52d0643c47281c8eb6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a> = &quot;../../../interaction/vmtk_fsi/html/index.html&quot;&gt; corresponding fluid-structure interaction <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>&lt;/a &gt; in which the vessel wall <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> elastic and deforms in response to the traction that the fluid exerts onto it. We stress that the <a class="el" href="vmtk__fluid_8txt.html#a5de945acda0f8aaa3b00edcb622299a0">tutorial</a> focuses on the implementation aspects, not the actual physics. Since the driver code discussed here <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> also used in the library 's self-tests we deliberately use a very coarse mesh and restrict ourselves to steady flows. The results shown below are therefore unlikely to bear much resemblance to the actual flows that arise \e in \e vivo. The section \ref realism at the end of this <a class="el" href="vmtk__fluid_8txt.html#a5de945acda0f8aaa3b00edcb622299a0">tutorial</a> provides several suggestions on how to make the simulation more realistic.&lt; HR &gt;&lt; HR &gt; \section <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> The <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>(and results) The two figures below show the geometry of the blood vessel(obtained from a scan of an iliac bifurcation, using the procedure discussed in \c oomph-lib 's&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../../meshes/mesh_from_vmtk/html/index.html&quot;&gt;VMTK <a class="el" href="vmtk__fluid_8txt.html#a5de945acda0f8aaa3b00edcb622299a0">tutorial</a>&lt;/a &gt;) and the flow field(velocity vectors and pressure contours) for a nominal Reynolds number of \f$ Re=10. \f$(See \ref re for a more detailed discussion of the Reynolds number.) The flow <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> driven by an applied pressure drop between the in- and outflow <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a>, as in the&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; previous example.&lt;/a &gt; @I w 0.75\textwidth vmtk_fluid &quot;Velocity field and pressure contours. &quot; The figure below shows more clearly that the in- and outflow from the upstream and downstream cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> parallel, even though the cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> are not aligned with any the coordinate planes. @I w 0.75\textwidth vmtk_fluid2 &quot;Velocity field and pressure contours. Note the parallel in- and outflow. &quot;&lt; HR &gt;&lt; HR &gt; \section parallel_flow Imposing parallel in- and outflow In most of the Navier-Stokes problems we have considered so far, the geometry of the fluid domain was such that the in- and outflow cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> were aligned with the Cartesian coordinate planes. In such geometries the imposition of parallel in- and outflow <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> straightforward as it only requires pinning of the transverse velocity components. A pressure drop between upstream and downstream ends can be applied by attaching \c NavierStokesTractionElements to the bulk elements that are adjacent to the relevant domain boundaries. In the current <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>, the in- and outflow cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> have some arbitrary orientation, implying that when the in- or outflow <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> parallel(or, more accurately, orthogonal to the in- or outflow cross <a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a>), neither of the three velocity components vanishes. The easiest way to enforce parallel outflow in such situations <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> to employ Lagrange multipliers to enforce the two constraints \<a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>[{\bf u} \cdot {\bf t}_\alpha=0 \mbox{\ \ \ \ for $\alpha=1, 2$,} \<a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>] where \f$ {\bf t}_\alpha \f$(for \f$\alpha=1, 2\f$) are the two tangent vectors spanning the in- or outflow cross-sections. Physically, the Lagrange multipliers act as tangential tractions that enforce the parallel flow. The Lagrange multipliers introduce additional degrees of freedom into the <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> and their implementation as \c ImposeParallelOutflowElements employs a technique similar to that used to enforce prescribed boundary displacements in solid mechanics problems.(This <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> discussed in&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../../solid/prescribed_displ_lagr_mult/html/index.html&quot;&gt; another <a class="el" href="vmtk__fluid_8txt.html#a5de945acda0f8aaa3b00edcb622299a0">tutorial</a>&lt;/a &gt;.) The \c ImposeParallelOutflowElements also allow the specification of a pressure that acts on the fluid(in the direction opposite to the outer unit normal on the bulk fluid element).&lt; HR &gt;&lt; HR &gt; \section driver_code The driver code The driver code <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> very similar to that discussed in&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; another example&lt;/a &gt; where we imposed parallel outflow in coordinate-aligned in- and outflow cross-sections. We will therefore only discuss the changes required to impose parallel flow in cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> with arbitrary orientation.&lt; HR &gt; \subsection namespace Problem parameters The namespace specifying the <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> parameters contains the Reynolds number and the in- and outflow pressures(rather than the complete traction vector):\dontinclude vmtk_fluid.cc \skipline start_namespace \until end namespace&lt; HR &gt; \subsection <a class="el" href="vmtk__fluid_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> The <a class="el" href="vmtk__fluid_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> function The <a class="el" href="vmtk__fluid_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> function remains identical to that in the&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis-aligned outflow.&lt;/a &gt;&lt; HR &gt; \section class The Problem class The \c Problem class <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> practically identical to that in the&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis-aligned outflow&lt;/a &gt;, apart from some trivial changes such as the provision of storage for meshes of \c ImposeParallelOutflowElements rather than \c NavierStokesTractionElements.&lt; HR &gt; \section constructor The Problem constructor The <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> constructor <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> also very similar. We start by building the fluid mesh, using the files created by&lt; A HREF=&quot;http: \skipline start_constructor \until split_corner_elements)</td></tr>
+<tr class="separator:a7a4d74b690fbdc52d0643c47281c8eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad6c99ac835e378aa06b6fdfb81410555"><td class="memItemLeft" align="right" valign="top">we set up a boundary lookup scheme that records which elements are located next to which domain and specify the IDs of the mesh <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> that coincide with the in and outflow cross <a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> Note that this information reflects the specification of the boundary IDs in the c tetgen&lt; code &gt; *poly&lt;/code &gt; file[The conversion code&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc&quot;&gt;create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc&lt;/a &gt;lists the relation between the original boundary IDs and thenew ones(obtained by giving each surface facet a separate boundary ID) at the end of the&lt; code &gt; *.poly&lt;/code &gt; file.] until We create the meshes containing the Lagrange multiplier elements and add all sub meshes to the Problem s global mesh until&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#ad6c99ac835e378aa06b6fdfb81410555">build_global_mesh</a> ()</td></tr>
+<tr class="separator:ad6c99ac835e378aa06b6fdfb81410555"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a216ebc35886245c4e2241197f1c20178"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a> When dealing with geometries that are obtained from medical the vessel coordinates are typically provided as dimensional e g in millimetres Discarding the unit of the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a216ebc35886245c4e2241197f1c20178">coordinates</a> (i.e. using a non-dimensional coordinate \f$(x, y, z)=(1, 2, 3)\f$ to represent the point located at \f$(x^ *, y^ *, z^ *)=(1\mbox{mm}, 2\mbox{mm}, 3\mbox{mm}),\f$ say) <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> therefore equivalent to non-dimensionalising all lengths on a reference length of \f$</td></tr>
+<tr class="separator:a216ebc35886245c4e2241197f1c20178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5de945acda0f8aaa3b00edcb622299a0"><td class="memItemLeft" align="right" valign="top">mainpage Demo unlike the <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> considered in&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; another&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a5de945acda0f8aaa3b00edcb622299a0">tutorial</a></td></tr>
+<tr class="separator:a5de945acda0f8aaa3b00edcb622299a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f6b9e73b5e2315f281a167cda7f1fd7"><td class="memItemLeft" align="right" valign="top">mainpage Demo unlike the <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> considered in&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; another&lt;/a &gt; the in and outflow <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> are not aligned with any coordinate planes Parallel in and outflow <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> therefore enforced by a Lagrange multiplier&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a0f6b9e73b5e2315f281a167cda7f1fd7">method</a></td></tr>
+<tr class="separator:a0f6b9e73b5e2315f281a167cda7f1fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f76e88828a6b8514d2fa31f12c5515c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a2f76e88828a6b8514d2fa31f12c5515c">Next</a></td></tr>
+<tr class="separator:a2f76e88828a6b8514d2fa31f12c5515c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09062c769e4adb565fd300e3d69cbccf"><td class="memItemLeft" align="right" valign="top">we set up a boundary lookup scheme that records which elements are located next to which domain&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a></td></tr>
+<tr class="separator:a09062c769e4adb565fd300e3d69cbccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b00c9450dfec6fea1ffca7e0eeb904c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vmtk__fluid_8txt.html#a2f76e88828a6b8514d2fa31f12c5515c">Next</a> we apply the boundary conditions We start by identifying the IDs of the <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> that are subject to no slip boundary conditions until done identification of <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> where velocities are pinned <a class="el" href="vmtk__fluid_8txt.html#a2f76e88828a6b8514d2fa31f12c5515c">Next</a> we loop over all visit their nodes and pin all three velocity components if the boundary <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> subject to a no slip&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a4b00c9450dfec6fea1ffca7e0eeb904c">condition</a></td></tr>
+<tr class="separator:a4b00c9450dfec6fea1ffca7e0eeb904c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f929125907b74ee553839ff3ae316fb"><td class="memItemLeft" align="right" valign="top">We now check if the node in question is also located on the in and outflow <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> until now we know and if it&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a></td></tr>
+<tr class="separator:a6f929125907b74ee553839ff3ae316fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a259eeb65969fd8d0128a6c775b57db6d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a> When dealing with geometries that are obtained from medical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a259eeb65969fd8d0128a6c775b57db6d">images</a></td></tr>
+<tr class="separator:a259eeb65969fd8d0128a6c775b57db6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96144b9e0d627f8647ad29fd9e64ee1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a> When dealing with geometries that are obtained from medical the vessel <a class="el" href="vmtk__fluid_8txt.html#a216ebc35886245c4e2241197f1c20178">coordinates</a> are typically provided as dimensional&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a96144b9e0d627f8647ad29fd9e64ee1c">quantities</a></td></tr>
+<tr class="separator:a96144b9e0d627f8647ad29fd9e64ee1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2b869a85a344020560c43c2b9bd1c60"><td class="memItemLeft" align="right" valign="top">respectively The lengthscale&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a></td></tr>
+<tr class="separator:aa2b869a85a344020560c43c2b9bd1c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c1d92c0d65008504f04f88d4d01dd80"><td class="memItemLeft" align="right" valign="top">respectively The lengthscale as in the&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis aligned in and outflow cross&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a></td></tr>
+<tr class="separator:a2c1d92c0d65008504f04f88d4d01dd80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6536bd7ec650e853bf81e7e9bf3723c"><td class="memItemLeft" align="right" valign="top">respectively The lengthscale as in the&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis aligned in and outflow cross&lt;/a &gt; <a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>[{\cal U}=\frac{\Delta P^ *\ {\cal L} }{\mu}.\<a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>]&lt; HR &gt; subsection realism How to make the simulation more realistic The simulation presented above <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> obviously very crude and serves primarily as a proof of concept&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#aa6536bd7ec650e853bf81e7e9bf3723c">However</a></td></tr>
+<tr class="separator:aa6536bd7ec650e853bf81e7e9bf3723c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb5e80be7fac39cd7c4b5b1c5b14ab4"><td class="memItemLeft" align="right" valign="top">respectively The lengthscale as in the&lt; a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis aligned in and outflow cross&lt;/a &gt; <a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>[{\cal U}=\frac{\Delta P^ *\ {\cal L} }{\mu}.\<a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>]&lt; HR &gt; subsection realism How to make the simulation more realistic The simulation presented above <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> obviously very crude and serves primarily as a proof of concept it <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> straightforward to address most of the shortcomings and we encourage you to explore the following&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vmtk__fluid_8txt.html#acfb5e80be7fac39cd7c4b5b1c5b14ab4">improvements</a></td></tr>
+<tr class="separator:acfb5e80be7fac39cd7c4b5b1c5b14ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a7a4d74b690fbdc52d0643c47281c8eb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a4d74b690fbdc52d0643c47281c8eb6">&#9670;&nbsp;</a></span>href</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a> =  &quot;../../../interaction/vmtk_fsi/html/index.html&quot;&gt; corresponding fluid-structure interaction <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> &lt;/a&gt; in which the vessel wall <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> elastic and deforms in response to the traction that the fluid exerts onto it. We stress that the <a class="el" href="vmtk__fluid_8txt.html#a5de945acda0f8aaa3b00edcb622299a0">tutorial</a> focuses on the implementation aspects, not the actual physics. Since the driver code discussed here <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> also used in the library's self-tests we deliberately use a very coarse mesh and restrict ourselves to steady flows. The results shown below are therefore unlikely to bear much resemblance to the actual flows that arise \e in \e vivo. The section \ref realism at the end of this <a class="el" href="vmtk__fluid_8txt.html#a5de945acda0f8aaa3b00edcb622299a0">tutorial</a> provides several suggestions on how to make the simulation more realistic. &lt;HR&gt; &lt;HR&gt; \section <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> The <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> (and results) The two figures below show the geometry of the blood vessel (obtained from a scan of an iliac bifurcation, using the procedure discussed in \c oomph-lib's &lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../../meshes/mesh_from_vmtk/html/index.html&quot;&gt;VMTK <a class="el" href="vmtk__fluid_8txt.html#a5de945acda0f8aaa3b00edcb622299a0">tutorial</a>&lt;/a&gt;) and the flow field (velocity vectors and pressure contours) for a nominal Reynolds number of \f$ Re = 10. \f$ (See \ref re for a more detailed discussion of the Reynolds number.) The flow <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> driven by an applied pressure drop between the in- and outflow <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a>, as in the &lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; previous example.&lt;/a&gt; @I w 0.75\textwidth vmtk_fluid &quot;Velocity field and pressure contours. &quot; The figure below shows more clearly that the in- and outflow from the upstream and downstream cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> parallel, even though the cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> are not aligned with any the coordinate planes. @I w 0.75\textwidth vmtk_fluid2 &quot;Velocity field and pressure contours. Note the parallel in- and outflow. &quot; &lt;HR&gt; &lt;HR&gt; \section parallel_flow Imposing parallel in- and outflow In most of the Navier-Stokes problems we have considered so far, the geometry of the fluid domain was such that the in- and outflow cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> were aligned with the Cartesian coordinate planes. In such geometries the imposition of parallel in- and outflow <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> straightforward as it only requires pinning of the transverse velocity components. A pressure drop between upstream and downstream ends can be applied by attaching \c NavierStokesTractionElements to the bulk elements that are adjacent to the relevant domain boundaries. In the current <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>, the in- and outflow cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> have some arbitrary orientation, implying that when the in- or outflow <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> parallel (or, more accurately, orthogonal to the in- or outflow cross <a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a>), neither of the three velocity components vanishes. The easiest way to enforce parallel outflow in such situations <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> to employ Lagrange multipliers to enforce the two constraints \<a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>[ {\bf u} \cdot {\bf t}_\alpha = 0 \mbox{\ \ \ \ for $\alpha = 1,2$,} \<a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>] where \f$ {\bf t}_\alpha \f$ (for \f$\alpha = 1,2\f$) are the two tangent vectors spanning the in- or outflow cross-sections. Physically, the Lagrange multipliers act as tangential tractions that enforce the parallel flow. The Lagrange multipliers introduce additional degrees of freedom into the <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> and their implementation as \c ImposeParallelOutflowElements employs a technique similar to that used to enforce prescribed boundary displacements in solid mechanics problems. (This <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> discussed in &lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../../solid/prescribed_displ_lagr_mult/html/index.html&quot;&gt; another <a class="el" href="vmtk__fluid_8txt.html#a5de945acda0f8aaa3b00edcb622299a0">tutorial</a>&lt;/a&gt;.) The \c ImposeParallelOutflowElements also allow the specification of a pressure that acts on the fluid (in the direction opposite to the outer unit normal on the bulk fluid element). &lt;HR&gt; &lt;HR&gt; \section driver_code The driver code The driver code <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> very similar to that discussed in &lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; another example&lt;/a&gt; where we imposed parallel outflow in coordinate-aligned in- and outflow cross-sections. We will therefore only discuss the changes required to impose parallel flow in cross-<a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> with arbitrary orientation. &lt;HR&gt; \subsection namespace Problem parameters The namespace specifying the <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> parameters contains the Reynolds number and the in- and outflow pressures (rather than the complete traction vector): \dontinclude vmtk_fluid.cc \skipline start_namespace \until end namespace &lt;HR&gt; \subsection <a class="el" href="vmtk__fluid_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> The <a class="el" href="vmtk__fluid_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> function The <a class="el" href="vmtk__fluid_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> function remains identical to that in the &lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis-aligned outflow.&lt;/a&gt; &lt;HR&gt; \section class The Problem class The \c Problem class <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> practically identical to that in the &lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis-aligned outflow&lt;/a&gt;, apart from some trivial changes such as the provision of storage for meshes of \c ImposeParallelOutflowElements rather than \c NavierStokesTractionElements. &lt;HR&gt; \section constructor The Problem constructor The <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> constructor <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> also very similar. We start by building the fluid mesh, using the files created by &lt;A HREF=&quot;http: \skipline start_constructor \until split_corner_elements)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00153">153</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad6c99ac835e378aa06b6fdfb81410555"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6c99ac835e378aa06b6fdfb81410555">&#9670;&nbsp;</a></span>build_global_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we set up a boundary lookup scheme that records which elements are located next to which domain and specify the IDs of the mesh <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> that coincide with the in and outflow cross <a class="el" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a> Note that this information reflects the specification of the boundary IDs in the c tetgen&lt;code&gt;* poly&lt;/code&gt; file [The conversion code &lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc&quot;&gt;create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc&lt;/a&gt;lists the relation between the original boundary IDs and thenew ones (obtained by giving each surface facet a separate boundary ID) at the end of the &lt;code&gt;*.poly&lt;/code&gt; file.] until We create the meshes containing the Lagrange multiplier elements and add all sub meshes to the Problem s global mesh until build_global_mesh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="vmtk__fluid_8cc_source.html#l00134">UnstructuredFluidProblem&lt; ELEMENT &gt;::UnstructuredFluidProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a216ebc35886245c4e2241197f1c20178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a216ebc35886245c4e2241197f1c20178">&#9670;&nbsp;</a></span>coordinates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a> When dealing with geometries that are obtained from medical the vessel coordinates are typically provided as dimensional e g in millimetres Discarding the unit of the coordinates </td>
+          <td>(</td>
+          <td class="paramtype">i.e. using a non-dimensional coordinate \f$&#160;</td>
+          <td class="paramname">x, y, z = <code>(1,2,3)\f$&#160;to&#160;represent&#160;the&#160;point&#160;located&#160;at&#160;\f$&#160;(x^*,y^*,z^*)=(1\mbox{mm},2\mbox{mm},3\mbox{mm})</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">\f$&#160;</td>
+          <td class="paramname"><em>say</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00243">243</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a09062c769e4adb565fd300e3d69cbccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09062c769e4adb565fd300e3d69cbccf">&#9670;&nbsp;</a></span>boundaries</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vmtk__fluid_8txt.html#a2f76e88828a6b8514d2fa31f12c5515c">Next</a> we apply the boundary conditions We start by identifying the IDs of the boundaries that are subject to no slip boundary conditions until done identification of boundaries where velocities are pinned <a class="el" href="vmtk__fluid_8txt.html#a2f76e88828a6b8514d2fa31f12c5515c">Next</a> we loop over all boundaries</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00157">157</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4b00c9450dfec6fea1ffca7e0eeb904c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b00c9450dfec6fea1ffca7e0eeb904c">&#9670;&nbsp;</a></span>condition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vmtk__fluid_8txt.html#a2f76e88828a6b8514d2fa31f12c5515c">Next</a> we apply the boundary conditions We start by identifying the IDs of the <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> that are subject to no slip boundary conditions until done identification of <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> where velocities are pinned <a class="el" href="vmtk__fluid_8txt.html#a2f76e88828a6b8514d2fa31f12c5515c">Next</a> we loop over all visit their nodes and pin all three velocity components if the boundary <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> subject to a no slip condition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00185">185</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa2b869a85a344020560c43c2b9bd1c60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2b869a85a344020560c43c2b9bd1c60">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">respectively The lengthscale f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{\cal L} = 1\mbox{mm} <a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">\f</a>$ does obviously</div>
+<div class="line">not provide a measure of the dimension of our blood vessel whose</div>
+<div class="line">diameter (at the inlet) <a class="code" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> <a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">about \f</a>$ D \approx 16\mbox{mm}. <a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">\f</a>$ The </div>
+<div class="line">nominal Reynolds number <a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">of \f</a>$ <a class="code" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Re</a>=10 <a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">\f</a>$ used in the computations </div>
+<div class="line"><a class="code" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> therefore equivalent to an actual Reynolds number (formed with </div>
+<div class="line">the vessel diameter)</div>
+<div class="line"><a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">of </a></div>
+<div class="line"><a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">\f</a>[</div>
+<div class="line">Re_D = \frac{\rho {\cal U} D }{\mu} = <a class="code" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Re</a> \ \frac{D}{\cal L} = 160,</div>
+<div class="line"><a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">\f</a>]</div>
+<div class="line">where the velocity <a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">scale \f</a>$ {\cal U} <a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">\f</a>$ <a class="code" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> formed with the </div>
+<div class="line">(dimensional) applied pressure <a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">drop \f</a>$ \Delta P^* <a class="code" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">\f</a>$</div>
+<div class="line">between the in- and outflow cross-<a class="code" href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00255">255</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa6536bd7ec650e853bf81e7e9bf3723c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6536bd7ec650e853bf81e7e9bf3723c">&#9670;&nbsp;</a></span>However</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">respectively The lengthscale as in the&lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis aligned in and outflow cross&lt;/a&gt; <a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a> [{\cal U} = \frac{\Delta P^*\ {\cal L} }{\mu}.\<a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>]&lt;HR&gt; subsection realism How to make the simulation more realistic The simulation presented above <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> obviously very crude and serves primarily as a proof of concept However</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00278">278</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a259eeb65969fd8d0128a6c775b57db6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a259eeb65969fd8d0128a6c775b57db6d">&#9670;&nbsp;</a></span>images</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a> When dealing with geometries that are obtained from medical images</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00241">241</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="acfb5e80be7fac39cd7c4b5b1c5b14ab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfb5e80be7fac39cd7c4b5b1c5b14ab4">&#9670;&nbsp;</a></span>improvements</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">respectively The lengthscale as in the&lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis aligned in and outflow cross&lt;/a&gt; <a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a> [{\cal U} = \frac{\Delta P^*\ {\cal L} }{\mu}.\<a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a>]&lt;HR&gt; subsection realism How to make the simulation more realistic The simulation presented above <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> obviously very crude and serves primarily as a proof of concept it <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> straightforward to address most of the shortcomings and we encourage you to explore the following improvements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00291">291</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6f929125907b74ee553839ff3ae316fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f929125907b74ee553839ff3ae316fb">&#9670;&nbsp;</a></span>is</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We now check if the node in question is also located on the in and outflow <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> until now we know and if it is</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00193">193</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0f6b9e73b5e2315f281a167cda7f1fd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f6b9e73b5e2315f281a167cda7f1fd7">&#9670;&nbsp;</a></span>method</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo unlike the <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> considered in&lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; another&lt;/a&gt; the in and outflow <a class="el" href="vmtk__fluid_8txt.html#a09062c769e4adb565fd300e3d69cbccf">boundaries</a> are not aligned with any coordinate planes Parallel in and outflow <a class="el" href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a> therefore enforced by a Lagrange multiplier method</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00020">20</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2f76e88828a6b8514d2fa31f12c5515c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f76e88828a6b8514d2fa31f12c5515c">&#9670;&nbsp;</a></span>Next</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00156">156</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00016">16</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vmtk__fluid_8cc_source.html#l00423">main()</a>.</p>
+
+</div>
+</div>
+<a id="a96144b9e0d627f8647ad29fd9e64ee1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96144b9e0d627f8647ad29fd9e64ee1c">&#9670;&nbsp;</a></span>quantities</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a> When dealing with geometries that are obtained from medical the vessel <a class="el" href="vmtk__fluid_8txt.html#a216ebc35886245c4e2241197f1c20178">coordinates</a> are typically provided as dimensional quantities</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00242">242</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2c1d92c0d65008504f04f88d4d01dd80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c1d92c0d65008504f04f88d4d01dd80">&#9670;&nbsp;</a></span>sections</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">respectively The lengthscale as in the&lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis aligned in and outflow cross sections</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00269">269</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+<a id="a5de945acda0f8aaa3b00edcb622299a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de945acda0f8aaa3b00edcb622299a0">&#9670;&nbsp;</a></span>tutorial</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo unlike the <a class="el" href="vmtk__fluid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> considered in&lt;a <a class="el" href="vmtk__fluid_8txt.html#a7a4d74b690fbdc52d0643c47281c8eb6">href</a>=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; another tutorial</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="vmtk__fluid_8txt_source.html#l00018">18</a> of file <a class="el" href="vmtk__fluid_8txt_source.html">vmtk_fluid.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="avmtk__fluid_8txt_html_a6f929125907b74ee553839ff3ae316fb"><div class="ttname"><a href="vmtk__fluid_8txt.html#a6f929125907b74ee553839ff3ae316fb">is</a></div><div class="ttdeci">We now check if the node in question is also located on the in and outflow boundaries until now we know and if it is</div><div class="ttdef"><b>Definition:</b> <a href="vmtk__fluid_8txt_source.html#l00193">vmtk_fluid.txt:193</a></div></div>
+<div class="ttc" id="avmtk__fluid_8txt_html_a2c1d92c0d65008504f04f88d4d01dd80"><div class="ttname"><a href="vmtk__fluid_8txt.html#a2c1d92c0d65008504f04f88d4d01dd80">sections</a></div><div class="ttdeci">respectively The lengthscale as in the&lt; a href=&quot;../../unstructured_three_d_fluid/html/index.html&quot;&gt; problem with axis aligned in and outflow cross sections</div><div class="ttdef"><b>Definition:</b> <a href="vmtk__fluid_8txt_source.html#l00269">vmtk_fluid.txt:269</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a9d72e94a9305c6a310940a6a427ebe06"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Global_Parameters::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Default Reynolds number.</div><div class="ttdef"><b>Definition:</b> <a href="vmtk__fluid_8cc_source.html#l00049">vmtk_fluid.cc:49</a></div></div>
+<div class="ttc" id="avmtk__fluid_8txt_html_aa2b869a85a344020560c43c2b9bd1c60"><div class="ttname"><a href="vmtk__fluid_8txt.html#aa2b869a85a344020560c43c2b9bd1c60">f</a></div><div class="ttdeci">respectively The lengthscale f</div><div class="ttdef"><b>Definition:</b> <a href="vmtk__fluid_8txt_source.html#l00255">vmtk_fluid.txt:255</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:11:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

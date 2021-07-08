@@ -1,0 +1,123 @@
+\hypertarget{classoomph_1_1OomphCommunicator}{}\doxysection{oomph\+::Oomph\+Communicator Class Reference}
+\label{classoomph_1_1OomphCommunicator}\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+
+
+An oomph-\/lib wrapper to the M\+P\+I\+\_\+\+Comm communicator object. Just contains an M\+P\+I\+\_\+\+Comm object (which is a pointer) and wrappers to the M\+P\+I\+\_\+... methods.  
+
+
+
+
+{\ttfamily \#include $<$communicator.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphCommunicator_af94e5be435b9cf1b01bed6242a5e46fe}{Oomph\+Communicator}} (const M\+P\+I\+\_\+\+Comm mpi\+\_\+communicator, const bool \&owns\+\_\+mpi\+\_\+comm=false)
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphCommunicator_a494598d5d4b772ad78e5d588d00d2d5a}{Oomph\+Communicator}} ()
+\begin{DoxyCompactList}\small\item\em Serial constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+M\+P\+I\+\_\+\+Comm \mbox{\hyperlink{classoomph_1_1OomphCommunicator_a334dbb45abab2e123872f487883f0b56}{Comm}}
+\begin{DoxyCompactList}\small\item\em the M\+P\+I\+\_\+\+Comm communicator \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1OomphCommunicator_a8c80f30933f22b84f97fcbbee6b22e81}{Owns\+\_\+mpi\+\_\+comm}}
+\begin{DoxyCompactList}\small\item\em boolean indiacting whether this communicator owns the underlying M\+P\+I\+\_\+\+Comm -\/ if so the destructor will free the communicator \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1OomphCommunicator_ab6e14f26e8effff948255e59d956d553}{Serial\+\_\+communicator}}
+\begin{DoxyCompactList}\small\item\em boolean to indicate if this communicator is for serial problems. This is true when serial codes are compiled under M\+PI \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An oomph-\/lib wrapper to the M\+P\+I\+\_\+\+Comm communicator object. Just contains an M\+P\+I\+\_\+\+Comm object (which is a pointer) and wrappers to the M\+P\+I\+\_\+... methods. 
+
+Definition at line 53 of file communicator.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1OomphCommunicator_af94e5be435b9cf1b01bed6242a5e46fe}\label{classoomph_1_1OomphCommunicator_af94e5be435b9cf1b01bed6242a5e46fe}} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!OomphCommunicator@{OomphCommunicator}}
+\index{OomphCommunicator@{OomphCommunicator}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{OomphCommunicator()}{OomphCommunicator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Communicator\+::\+Oomph\+Communicator (\begin{DoxyParamCaption}\item[{const M\+P\+I\+\_\+\+Comm}]{mpi\+\_\+communicator,  }\item[{const bool \&}]{owns\+\_\+mpi\+\_\+comm = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Construct a communicator from a M\+P\+I\+\_\+\+Comm object. if the bool owns\+\_\+mpi\+\_\+comm is true then this communicator is responsible for the destruction of the mpi\+\_\+communicator. The mpi comm will be freed when the destructor is called. 
+
+Definition at line 63 of file communicator.\+h.
+
+
+
+References Comm, and Owns\+\_\+mpi\+\_\+comm.
+
+\mbox{\Hypertarget{classoomph_1_1OomphCommunicator_a494598d5d4b772ad78e5d588d00d2d5a}\label{classoomph_1_1OomphCommunicator_a494598d5d4b772ad78e5d588d00d2d5a}} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!OomphCommunicator@{OomphCommunicator}}
+\index{OomphCommunicator@{OomphCommunicator}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{OomphCommunicator()}{OomphCommunicator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Communicator\+::\+Oomph\+Communicator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Serial constructor. 
+
+
+
+Definition at line 76 of file communicator.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1OomphCommunicator_a334dbb45abab2e123872f487883f0b56}\label{classoomph_1_1OomphCommunicator_a334dbb45abab2e123872f487883f0b56}} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!Comm@{Comm}}
+\index{Comm@{Comm}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{Comm}{Comm}}
+{\footnotesize\ttfamily M\+P\+I\+\_\+\+Comm oomph\+::\+Oomph\+Communicator\+::\+Comm\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the M\+P\+I\+\_\+\+Comm communicator 
+
+
+
+Definition at line 98 of file communicator.\+h.
+
+
+
+Referenced by Oomph\+Communicator().
+
+\mbox{\Hypertarget{classoomph_1_1OomphCommunicator_a8c80f30933f22b84f97fcbbee6b22e81}\label{classoomph_1_1OomphCommunicator_a8c80f30933f22b84f97fcbbee6b22e81}} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!Owns\_mpi\_comm@{Owns\_mpi\_comm}}
+\index{Owns\_mpi\_comm@{Owns\_mpi\_comm}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{Owns\_mpi\_comm}{Owns\_mpi\_comm}}
+{\footnotesize\ttfamily bool oomph\+::\+Oomph\+Communicator\+::\+Owns\+\_\+mpi\+\_\+comm\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+boolean indiacting whether this communicator owns the underlying M\+P\+I\+\_\+\+Comm -\/ if so the destructor will free the communicator 
+
+
+
+Definition at line 359 of file communicator.\+h.
+
+
+
+Referenced by Oomph\+Communicator().
+
+\mbox{\Hypertarget{classoomph_1_1OomphCommunicator_ab6e14f26e8effff948255e59d956d553}\label{classoomph_1_1OomphCommunicator_ab6e14f26e8effff948255e59d956d553}} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!Serial\_communicator@{Serial\_communicator}}
+\index{Serial\_communicator@{Serial\_communicator}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{Serial\_communicator}{Serial\_communicator}}
+{\footnotesize\ttfamily bool oomph\+::\+Oomph\+Communicator\+::\+Serial\+\_\+communicator\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+boolean to indicate if this communicator is for serial problems. This is true when serial codes are compiled under M\+PI 
+
+
+
+Definition at line 363 of file communicator.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{communicator_8h}{communicator.\+h}}\end{DoxyCompactItemize}

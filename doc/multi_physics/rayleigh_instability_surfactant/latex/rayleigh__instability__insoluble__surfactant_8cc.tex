@@ -1,0 +1,55 @@
+\hypertarget{rayleigh__instability__insoluble__surfactant_8cc}{}\doxysection{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc File Reference}
+\label{rayleigh__instability__insoluble__surfactant_8cc}\index{rayleigh\_instability\_insoluble\_surfactant.cc@{rayleigh\_instability\_insoluble\_surfactant.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{oomph\+::\+My\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\item 
+class \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\item 
+ \mbox{\hyperlink{namespaceoomph}{oomph}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::G}} (3)
+\begin{DoxyCompactList}\small\item\em Direction of gravity. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code for single fluid axisymmetric horizontal interface problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em External pressure. \end{DoxyCompactList}\item 
+ofstream \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4f2fe790aa186202e4e2d5f6ee21d7f4}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pvd\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Pvd file -- a wrapper for all the different vtu output files plus information about continuous time to facilitate animations in paraview. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{rayleigh__instability__insoluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{rayleigh__instability__insoluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{rayleigh\_instability\_insoluble\_surfactant.cc@{rayleigh\_instability\_insoluble\_surfactant.cc}!main@{main}}
+\index{main@{main}!rayleigh\_instability\_insoluble\_surfactant.cc@{rayleigh\_instability\_insoluble\_surfactant.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code for single fluid axisymmetric horizontal interface problem. 
+
+Maximum time
+
+Duration of timestep
+
+Definition at line 1255 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+
+
+
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G(), and Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::unsteady\+\_\+run().
+

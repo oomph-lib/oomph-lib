@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: turek_flag.txt_doxygenified.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">turek_flag.txt_doxygenified.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="turek__flag_8txt__doxygenified_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">\mainpage Parallel solution of Turek &amp; Hron&#39;s FSI benchmark problem with spatial adaptivity for the fluid and solid meshes</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">This document provides an overview of </span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">- how to change the serial driver code for </span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">  &lt;a href=&quot;../../../interaction/turek_flag/html/index.html&quot;&gt;Turek &amp;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  Hron&#39;s FSI benchmark problem&lt;/a&gt; so that both the fluid and solid meshes</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  can be adapted, </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">. </span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">- how to distribute the problem across multiple processors,</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">and</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">- how to enable load balancing of the problem once it is distributed.</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">The document is part of a</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">&lt;a href=&quot;../../../example_code_list/html/index.html#distributed&quot;&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">series of tutorials&lt;/a&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">that discuss how to modify existing serial driver codes so that the</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">\c Problem object can be distributed across multiple processors.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">\section double_adapt Enabling spatial adaptivity for the fluid and solid meshes</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">In the original (serial) driver code for </span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">&lt;a href=&quot;../../../interaction/turek_flag/html/index.html&quot;&gt;Turek &amp;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">Hron&#39;s FSI benchmark problem&lt;/a&gt; we only adapted the fluid mesh. </span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">Before discussing how to modify the code to refine the </span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">fluid and solid meshes simultaneously, we provide a</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">brief reminder of the procedure used to discretise fluid-structure</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">interaction problems that involve fluid and solid domains of equal spatial</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">dimension (e.g. a 2D fluid domain interacting with a 2D solid domain)</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">when using algebraic node update methods to adjust the position of</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">the nodes in the fluid mesh.  </span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">We refer to &lt;a href=&quot;../../fsi_channel_with_leaflet/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">another tutorial&lt;/a&gt; for a discussion of FSI</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">problems involving the interaction of fluids with (lower-dimensional)</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">shell and beam structures.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">\subsection orig General methodology</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">The figure below shows a sketch of  a simple(r)</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">fluid-structure interaction problem involving fluid and solid domains </span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">that meet along a single mesh boundary. We assume that the fluid mesh </span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">uses an algebraic node </span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">update function to adjust the position of its nodes </span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">in response to changes in the domain </span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">boundary, represented by the \c GeomObject shown in </span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">magenta. (You may wish to consult</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">&lt;a href=&quot;../../../interaction/fsi_collapsible_channel_algebraic/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">another tutorial&lt;/a&gt; for a reminder of how \c oomph-lib&#39;s algebraic</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">node update methods work). </span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">\image html fsi_with_adaptive_wall_basic.gif &quot;Basic setup for FSI problems involving algebraic node updates for the fluid mesh. &quot; </span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">\image latex fsi_with_adaptive_wall_basic.eps &quot;Basic setup for FSI problems involving algebraic node updates for the fluid mesh. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">In an FSI problem, the fluid mesh&#39;s free</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">boundary is a boundary of the solid mesh, &lt;em&gt; i.e. &lt;/em&gt; the</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">boundary along which the fluid exerts a traction onto the solid.</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">Within \c oomph-lib, the fluid traction is applied to the solid domain</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">by attaching \c FSISolidTractionElements to the faces of the </span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">&quot;bulk&quot; solid elements adjacent to the FSI boundary. </span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">(In the above sketch the \c FSISolidTractionElements are shown</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">in blue.)</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">The deformation of the fluid and solid meshes </span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">is coupled by using the \c MeshAsGeomObject formed from </span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">the \c FSISolidTractionElements as the \c GeomObject that defines</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">the moving boundary of the fluid mesh. (In sketch above, this is </span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">indicated by the magenta arrow.)</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">\subsection modification1 Modifications to allow adaptivity of the fluid and solid meshes</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">If the solid mesh is not adapted, the adaptation for the fluid</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">mesh  is straightforward and proceeds fully automatically</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">as described </span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">&lt;a href=&quot;../../../interaction/fsi_collapsible_channel_algebraic/html/index.html&quot;&gt;elsewhere&lt;/a&gt;.</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">In particular, the node update data for</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">newly-created fluid nodes is created automatically by a call to </span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">the \c AlgebraicMesh::update_node_update(...) function during the adaptation. </span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">This function obtains the required</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">information about the boundary by using the \c MeshAsGeomObject </span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">built from the \c FSISolidTractionElements.</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">If the solid mesh is also adapted, then the existing </span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">\c FSISolidTractionElements must (at some point) be deleted and new ones</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">must be attached to the adapted &quot;bulk&quot; solid mesh. In all other problems, this</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">is done by</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">deleting the \c FSISolidTractionElements in \c</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">Problem::actions_before_adapt() and attaching new ones in </span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">\c Problem::actions_after_adapt(); see, e.g. the </span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">&lt;a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt;tutorial</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">on the solution of a Poisson problem with flux boundary </span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">conditions.&lt;/a&gt; However, in the present problem</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">this is not possible because, once the \c FSISolidTractionElements </span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">have been deleted, the \c MeshAsGeomObject can no longer be used to </span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">represent the shape and position of the FSI boundary, which would cause</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">the adaptation of the fluid mesh to fail. </span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">To avoid this problem, we adopt the following strategy:</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">-# When adding the various meshes to the \c Problem&#39;s</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">   collection of sub-meshes, we add the fluid mesh</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">   \b before the solid mesh. (This happens to be what was done</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">   already in the original driver code.) Usually, the order in which </span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">   sub-meshes are added to the \c Problem is irrelevant. Here the order</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">   \b does matter because we will exploit the fact that</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">   the sub-meshes are adapted individually, in the </span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">   order in which they were added to the \c Problem.</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">-# The \c FSISolidTractionElements are not deleted in </span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">   \c Problem::actions_before_adapt() and </span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">   remain attached to the &quot;bulk&quot; solid elements throughout </span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">   the &quot;bulk&quot; mesh adaptation procedure. </span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">   When the fluid mesh is adapted, the appropriate \c MeshAsGeomObject</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">   is, therefore, still fully-functional</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">   (and refers to the boundary as represented by the solid domain</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">   \b before the &quot;bulk&quot; solid mesh is adapted). </span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">   Here is a sketch of problem after adaptation of the fluid mesh:</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">\image html fsi_with_adaptive_wall_adapted_fluid.gif &quot;Sketch of the problem following the adaptation of the fluid mesh. The solid mesh has not yet been refined. &quot; </span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">\image latex fsi_with_adaptive_wall_adapted_fluid.eps &quot;Sketch of the problem following the adaptation of the fluid mesh. The solid mesh has not yet been refined. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">-# The subsequent adaptation of the &quot;bulk&quot; solid mesh is likely </span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">   to turn some of the \c FSISolidTractionElements into &quot;dangling&quot;</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">   elements. (This occurs whenever a \c FSISolidTractionElements</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">   is attached to a &quot;bulk&quot; solid elements that disappears during the</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">   adaptation, &lt;em&gt; e.g. &lt;/em&gt; by being refined.) </span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">   Here is a plot of the problem following the adaptation of the</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">   solid mesh :</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">\image html fsi_with_adaptive_wall_adapted_solid.gif &quot;Sketch of the problem following the adaptation of the solid mesh -- the `dangling&#39; FSISolidTractionElements are represented by dotted lines. &quot; </span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">\image latex fsi_with_adaptive_wall_adapted_solid.eps &quot;Sketch of the problem following the adaptation of the solid mesh -- the `dangling&#39; FSISolidTractionElements are represented by dotted lines. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">-# Hence, in \c Problem::actions_after_adapt() we </span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">   delete the existing  \c FSISolidTractionElements and immediately </span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">   (re-)attach new ones. Now, the \c MeshAsGeomObject that represents the</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">   FSI boundary is broken because it still refers to the just deleted </span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">   \c FSISolidTractionElements. </span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">\image html fsi_with_adaptive_wall_new_face_elements.gif &quot;Sketch of the problem following the creation of new FSISolidTractionElements. The fact that the MeshAsGeomObject is broken is indicated by the dashed lines. &quot; </span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">\image latex fsi_with_adaptive_wall_new_face_elements.eps &quot;Sketch of the problem following the creation of new FSISolidTractionElements. The fact that the MeshAsGeomObject is broken is indicated by the dashed lines. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">-# Thus, we rebuild the \c MeshAsGeomObject from the </span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">   newly-created \c FSISolidTractionElements, and update the</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">   fluid mesh&#39;s pointer to this new \c GeomObject that describes the</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">   boundary shape. </span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">\image html fsi_with_adaptive_wall_done.gif &quot;Sketch of the problem with re-built MeshAsGeomObject. &quot; </span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">\image latex fsi_with_adaptive_wall_done.eps &quot;Sketch of the problem with re-built MeshAsGeomObject. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">-# Finally, we execute the \c AlgebraicMesh::update_node_update(...)</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">   function for all nodes in the fluid mesh to ensure that their</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">   node update data refers to the new \c FSISolidTractionElements.</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">   \n\n</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">-# The remaining tasks (such as the renewed setup of the fluid load on the</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">   \c FSISolidTractionElements via a call to </span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">   \c FSI_functions::setup_fluid_load_info_for_solid_elements(...), </span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">   etc.) remain the same as in the previous version of the code.</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">\section distr Distributing the Problem</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">In the present example, there are two &quot;bulk&quot;</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">meshes corresponding to the fluid and solid domains</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"> and three &quot;surface&quot; meshes of traction</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">elements. The traction elements are \c FaceElements </span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">created from the &quot;bulk&quot; fluid elements and should be deleted before the</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">problem is distributed, see the tutorial on applying </span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">&lt;a href=&quot;../../two_d_poisson_flux_bc_adapt/html/index.html&quot;&gt; flux</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">boundary conditions in a Poisson problem &lt;/a&gt; for more details.</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">In the  &lt;a href=&quot;../../fsi_channel_with_leaflet/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">previous example&lt;/a&gt; </span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">involving the interaction of a 2D fluid domain with a 1D beam</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">structure there were only two meshes: a &quot;bulk&quot; fluid mesh</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">and a &quot;surface&quot; solid mesh. In that problem</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">\b all elements in the</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">1D mesh of \c FSIHermiteBeamElements were retained on all processors </span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">as halo elements by using the function </span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">\c Mesh::keep_all_elements_as_halos(). The </span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">same methodology could be used here, but it would be extremely wasteful</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">to retain all the solid elements in the &quot;bulk&quot; solid mesh because only</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">the elements next to the FSI boundary are required. </span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">Instead, we use a more fine-grained</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">method of retaining elements via the function \c</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">GeneralisedElement::must_be_kept_as_halo(). </span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">\section impl Implementation</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">Most of the driver code is identical to the original serial version </span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">discussed in &lt;a href=&quot;../../fsi_channel_with_leaflet/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">another tutorial&lt;/a&gt;. We therefore only discuss those parts of the</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">code that have to be changed to allow (i) the simultaneous adaptation of</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">the fluid and solid meshes, and (ii) the problem distribution. </span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">\subsection main_body The main function</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">As usual in a parallel driver code, the only addition to the \c main()</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">function is the inclusion of calls to \c MPI_Helpers::init(), \c</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">MPI_Helpers::finalize(), and the \c Problem::distribute()</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">functions. </span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">\subsection problem_class The problem class</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">The only additions to the serial version of the problem class are the</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">functions \c actions_before_distribute() and \c</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">actions_after_distribute(), and the helper function \c</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">delete_fsi_traction_elements(), discussed below.</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">\subsection delete_fsi Deleting the FSISolidTractionElements</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">To facilitate the deletion and re-creation of the </span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">\c FSISolidTractionElements before and after the adaptation</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">(and distribution) we provide a new helper function </span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">\c delete_fsi_traction_elements() which complements the </span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">already-existing \c create_fsi_traction_elements() function:</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">\dontinclude turek_flag.cc</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">\skipline start_of_delete_traction_elements</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">\until end of delete traction elements</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">\subsection actions_before_distribute Actions before distribute</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment"> As discussed above, we must ensure that the &quot;bulk&quot; solid</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">elements adjacent to the FSI boundary are retained on all processors.</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">Hence, the \c actions_before_distribute()</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">function starts with a loop over the </span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">\c FSISolidTractionElements within which we use the </span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">function \c GeneralisedElement::must_be_kept_as_halo() </span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">to indicate that the associated bulk elements must be retained.</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">\dontinclude turek_flag.cc</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">\skipline start_of_actions_before_distribute</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">\until end of loop over meshes of fsi traction elements</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">Next, we flush all the meshes from the problem&#39;s</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">collection of sub-meshes and add only the &quot;bulk&quot; fluid and solid</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">meshes (in that order!). The \c FaceElements do not need to be</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">distributed, because they will be re-created in \c actions_after_distribute().</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">\until end of actions before distribute</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">\subsection actions_after_distribute Actions after distribute</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">Following the problem distribution, we delete the old </span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">\c FSISolidTractionElements and then (re-)attach new ones, which will</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">be created as halo elements where necessary.</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">\dontinclude turek_flag.cc</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">\skipline start_of_actions_after_distribute</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">\until create_fsi_traction_elements()</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">We complete the build of the \c</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">FSISolidTractionElements by passing the FSI parameter and the</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">boundary number in the bulk mesh. The relevant code is identical to </span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">the serial version and we omit its listing here.</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">Next, we create new \c MeshAsGeomObjects from the </span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">newly-created \c FSISolidTractionElements and pass them to the </span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">(algebraic) fluid mesh:</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">\skipline Turn the three meshes of FSI traction elements</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">\until set_tip_flag_pt</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">The \c MeshAsGeomObjects have changed, so we</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">must call the \c update_node_update() function again for each</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">node in the fluid mesh:</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">Now we add the FSI traction meshes back to the problem and rebuild the</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">global mesh.</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">\until rebuild_global_mesh</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">Finally, we re-set the fluid load on the solid elements by</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">calling \c FSI_functions::setup_fluid_load_info_for_solid_elements(...)</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">before re-assigning the auxiliary node update function that imposes the </span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">no-slip condition for all fluid nodes on the FSI boundaries.</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">[&lt;a href=&quot;../../fsi_channel_with_leaflet/html/index.html#action_after_adapt&quot;&gt;</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">Recall&lt;/a&gt;</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">that the (re-)assignment of the auxiliary node-update function</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">must be performed \b after the call to  \c</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">FSI_functions::setup_fluid_load_info_for_solid_elements(...).]</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">\until end of (re-)assignment of the auxiliary node update fct</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">The remainder of the function identifies which processors</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">contain the fluid control node whose velocities </span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">we document in the trace file.</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">\subsection actions_after_adapt Actions after adapt</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">The \c actions_after_adapt() function is very similar to </span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">\c actions_after_distribute() function, so we omit is listing here.</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment"> The only significant differences are that (i) the redundant fluid and</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment"> solid pressures are (re)-pinned; (ii) the identification of the </span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">fluid control node does not need to</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment"> be setup;  and (iii) the traction meshes were never removed from the</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment"> problem, so do not need to be added back in. </span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">\subsection doc_solution The doc_solution() function</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">As with the other parallel driver codes, the main modification to the</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">post-processing function is the</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">addition of the processor number to all output files. </span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">Furthermore, we only write the trace file on the processors that</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">contain the fluid control node. In the interest of brevity </span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">we omit the listing of the modified function.</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">\section result Results</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">The figure below illustrates the distribution of the problem across four</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">processors, represented by the four colours, with the fluid elements</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">outlined in black and the solid elements outlined in white.</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">\image html turek_partition.gif &quot;Distribution of the Turek \&amp; Hron benchmark problem over four processors. &quot; </span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">\image latex turek_partition.eps &quot;Distribution of the Turek \&amp; Hron benchmark problem over four processors. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">Zooming in near the &quot;flag&quot; shows how both fluid and solid meshes</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">are refined and distributed independently:</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">\image html turek_partition_zoom.gif &quot;Distribution of the Turek \&amp; Hron benchmark problem over four processors; zoomed in view near the `flag&#39;. &quot; </span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">\image latex turek_partition_zoom.eps &quot;Distribution of the Turek \&amp; Hron benchmark problem over four processors; zoomed in view near the `flag&#39;. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">\section load_balance Load balancing</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">When employing load balancing in this problem,</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">we modify the time-stepping loop to perform the procedure</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment">after each timestep:</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">\dontinclude turek_flag_load_balance.cc</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">\skipline Start of timestepping loop</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">\until end of timestepping loop</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">\subsection build_mesh The build_mesh() function</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">The function \c Problem::build_mesh() must be supplied by the user if</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">they wish to use the load balancing capability.  Thus, in this driver</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment">code, we move all the required code to build the entire global mesh</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">into this function, and call it from within the problem constructor:</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">\dontinclude turek_flag_load_balance.cc</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">\skipline start_of_constructor</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">\until end_of_constructor</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">The \c build_mesh() function itself contains all the relevant code</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">from within the previous parallel driver code&#39;s problem constructor.</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">\subsection actions_functions Actions before and after load balancing </span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">In this example, all that is required for the \c</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">actions_after_load_balance() function is the</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">addition of the unpin-repin procedure from the \c actions_after_adapt()</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">function to the appropriate part of the \c actions_after_distribute()</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">function, since all the other functionality is already identical.  The</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">\c actions_before_load_balance() function is identical to the \c</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">actions_before_distribute() function.</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">\section sources Source files for this tutorial</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">- The source files for this tutorial are located in the directory:\n\n</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/mpi/multi_domain/turek_flag/&quot;&gt;</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">demo_drivers/mpi/multi_domain/turek_flag/</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">&lt;/CENTER&gt;\n</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">- The main driver code is: \n\n</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">- The driver code for the load balancing example is: \n\n</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aturek__flag_8txt_html_a1a3b00c5633fd9687f3c96ce2867d204"><div class="ttname"><a href="turek__flag_8txt.html#a1a3b00c5633fd9687f3c96ce2867d204">is</a></div><div class="ttdeci">e g the&lt; a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; tutorial on the solution of a Poisson problem with flux boundary conditions&lt;/a &gt; in the present problem this is not possible once the c FSISolidTractionElements have been the c MeshAsGeomObject can no longer be used to represent the shape and position of the FSI which would cause the adaptation of the fluid mesh to fail To avoid this we adopt the following we add the fluid mesh b before the solid the order in which sub meshes are added to the c Problem is irrelevant Here the order b does matter because we will exploit the fact that the sub meshes are adapted in the order in which they were added to the c Problem n n c the appropriate c MeshAsGeomObject is</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00120">turek_flag.txt:120</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a2d1ed4fcce286fbdc06ea422007ddbf2"><div class="ttname"><a href="turek__flag_8txt.html#a2d1ed4fcce286fbdc06ea422007ddbf2">function</a></div><div class="ttdeci">zoomed in view near the flag&lt; HR &gt;&lt; HR &gt; section load_balance Load balancing When employing load balancing in this we modify the time stepping loop to perform the procedure after each in this driver we move all the required code to build the entire global mesh into this function</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00372">turek_flag.txt:372</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a217adeab3b00ef066233db62ad930669"><div class="ttname"><a href="turek__flag_8txt.html#a217adeab3b00ef066233db62ad930669">because</a></div><div class="ttdeci">e g the&lt; a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; tutorial on the solution of a Poisson problem with flux boundary conditions&lt;/a &gt; in the present problem this is not possible because</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00100">turek_flag.txt:100</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a6bfab73ec08ff6af6b80431c0344221a"><div class="ttname"><a href="turek__flag_8txt.html#a6bfab73ec08ff6af6b80431c0344221a">processors</a></div><div class="ttdeci">mainpage Parallel solution of Turek &amp;Hron s FSI benchmark problem with spatial adaptivity for the fluid and solid meshes This document provides an overview of how to change the serial driver code for&lt; a href=&quot;../../../interaction/turek_flag/html/index.html&quot;&gt; Turek &amp;Hron s FSI benchmark problem&lt;/a &gt; so that both the fluid and solid meshes can be how to distribute the problem across multiple processors</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00012">turek_flag.txt:12</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a958101612758f64a270ed0b3e8a6eccd"><div class="ttname"><a href="turek__flag_8txt.html#a958101612758f64a270ed0b3e8a6eccd">original</a></div><div class="ttdeci">mainpage Parallel solution of Turek &amp;Hron s FSI benchmark problem with spatial adaptivity for the fluid and solid meshes This document provides an overview of how to change the serial driver code for&lt; a href=&quot;../../../interaction/turek_flag/html/index.html&quot;&gt; Turek &amp;Hron s FSI benchmark problem&lt;/a &gt; so that both the fluid and solid meshes can be how to distribute the problem across multiple and how to enable load balancing of the problem once it is distributed The document is part of a&lt; a href=&quot;../../../example_code_list/html/index.html#distributed&quot;&gt; series of tutorials&lt;/a &gt; that discuss how to modify existing serial driver codes so that the c Problem object can be distributed across multiple processors&lt; HR &gt;&lt; HR &gt; section double_adapt Enabling spatial adaptivity for the fluid and solid meshes In the original(serial) driver code for&lt; a href</div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a33cfe287c815a91cadcff420c90a3caa"><div class="ttname"><a href="turek__flag_8txt.html#a33cfe287c815a91cadcff420c90a3caa">colours</a></div><div class="ttdeci">so do not need to be added back in&lt; HR &gt; subsection doc_solution The the main modification to the post processing function is the addition of the processor number to all output files we only write the trace file on the processors that contain the fluid control node In the interest of brevity we omit the listing of the modified function&lt; HR &gt;&lt; HR &gt; section result Results The figure below illustrates the distribution of the problem across four represented by the four colours</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00344">turek_flag.txt:344</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_ae893b018d5b639e34f9b97d9953c2f8d"><div class="ttname"><a href="turek__flag_8txt.html#ae893b018d5b639e34f9b97d9953c2f8d">individually</a></div><div class="ttdeci">e g the&lt; a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; tutorial on the solution of a Poisson problem with flux boundary conditions&lt;/a &gt; in the present problem this is not possible once the c FSISolidTractionElements have been the c MeshAsGeomObject can no longer be used to represent the shape and position of the FSI which would cause the adaptation of the fluid mesh to fail To avoid this we adopt the following we add the fluid mesh b before the solid the order in which sub meshes are added to the c Problem is irrelevant Here the order b does matter because we will exploit the fact that the sub meshes are adapted individually</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00112">turek_flag.txt:112</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a7b876778ced510947efcbce0af4d8c29"><div class="ttname"><a href="turek__flag_8txt.html#a7b876778ced510947efcbce0af4d8c29">adapted</a></div><div class="ttdeci">mainpage Parallel solution of Turek &amp;Hron s FSI benchmark problem with spatial adaptivity for the fluid and solid meshes This document provides an overview of how to change the serial driver code for&lt; a href=&quot;../../../interaction/turek_flag/html/index.html&quot;&gt; Turek &amp;Hron s FSI benchmark problem&lt;/a &gt; so that both the fluid and solid meshes can be adapted</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00010">turek_flag.txt:10</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_abe11983d8d6b76e810df7e562ff56797"><div class="ttname"><a href="turek__flag_8txt.html#abe11983d8d6b76e810df7e562ff56797">deleted</a></div><div class="ttdeci">e g the&lt; a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; tutorial on the solution of a Poisson problem with flux boundary conditions&lt;/a &gt; in the present problem this is not possible once the c FSISolidTractionElements have been deleted</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00101">turek_flag.txt:101</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a6c46d58e240d948367ad378fbf5395e1"><div class="ttname"><a href="turek__flag_8txt.html#a6c46d58e240d948367ad378fbf5395e1">therefore</a></div><div class="ttdeci">e g the&lt; a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; tutorial on the solution of a Poisson problem with flux boundary conditions&lt;/a &gt; in the present problem this is not possible once the c FSISolidTractionElements have been the c MeshAsGeomObject can no longer be used to represent the shape and position of the FSI which would cause the adaptation of the fluid mesh to fail To avoid this we adopt the following we add the fluid mesh b before the solid the order in which sub meshes are added to the c Problem is irrelevant Here the order b does matter because we will exploit the fact that the sub meshes are adapted in the order in which they were added to the c Problem n n c the appropriate c MeshAsGeomObject therefore</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00120">turek_flag.txt:120</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a79d1068e3e03fa416aafdf51c6509bab"><div class="ttname"><a href="turek__flag_8txt.html#a79d1068e3e03fa416aafdf51c6509bab">problem</a></div><div class="ttdeci">e g the&lt; a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; tutorial on the solution of a Poisson problem with flux boundary conditions&lt;/a &gt; in the present problem this is not possible once the c FSISolidTractionElements have been the c MeshAsGeomObject can no longer be used to represent the shape and position of the FSI which would cause the adaptation of the fluid mesh to fail To avoid this problem</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00105">turek_flag.txt:105</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a0843bb27f30129c4c59c79658222b9e8"><div class="ttname"><a href="turek__flag_8txt.html#a0843bb27f30129c4c59c79658222b9e8">functional</a></div><div class="ttdeci">e g the&lt; a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; tutorial on the solution of a Poisson problem with flux boundary conditions&lt;/a &gt; in the present problem this is not possible once the c FSISolidTractionElements have been the c MeshAsGeomObject can no longer be used to represent the shape and position of the FSI which would cause the adaptation of the fluid mesh to fail To avoid this we adopt the following we add the fluid mesh b before the solid the order in which sub meshes are added to the c Problem is irrelevant Here the order b does matter because we will exploit the fact that the sub meshes are adapted in the order in which they were added to the c Problem n n c the appropriate c MeshAsGeomObject still fully functional(ii) the identification of the fluid control node does not need to be setup</div></div>
+<div class="ttc" id="aturek__flag_8txt_html_af820cf4ad11af0c327ef8f0093a8d181"><div class="ttname"><a href="turek__flag_8txt.html#af820cf4ad11af0c327ef8f0093a8d181">constructor</a></div><div class="ttdeci">zoomed in view near the flag&lt; HR &gt;&lt; HR &gt; section load_balance Load balancing When employing load balancing in this we modify the time stepping loop to perform the procedure after each in this driver we move all the required code to build the entire global mesh into this and call it from within the problem constructor</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00383">turek_flag.txt:383</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_ab68fa581b66f2cd72453d83f26aa123a"><div class="ttname"><a href="turek__flag_8txt.html#ab68fa581b66f2cd72453d83f26aa123a">code</a></div><div class="ttdeci">zoomed in view near the flag&lt; HR &gt;&lt; HR &gt; section load_balance Load balancing When employing load balancing in this we modify the time stepping loop to perform the procedure after each in this driver code</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00371">turek_flag.txt:371</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a223312d9d9d8b30dc1b51af5a488b822"><div class="ttname"><a href="turek__flag_8txt.html#a223312d9d9d8b30dc1b51af5a488b822">independently</a></div><div class="ttdeci">so do not need to be added back in&lt; HR &gt; subsection doc_solution The the main modification to the post processing function is the addition of the processor number to all output files we only write the trace file on the processors that contain the fluid control node In the interest of brevity we omit the listing of the modified function&lt; HR &gt;&lt; HR &gt; section result Results The figure below illustrates the distribution of the problem across four represented by the four with the fluid elements outlined in black and the solid elements outlined in white I w textwidth turek_partition Distribution of the Turek &amp;Hron benchmark problem over four processors Zooming in near the flag shows how both fluid and solid meshes are refined and distributed independently</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00352">turek_flag.txt:352</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a48a522d745e2adeff761d9548d043a55"><div class="ttname"><a href="turek__flag_8txt.html#a48a522d745e2adeff761d9548d043a55">Furthermore</a></div><div class="ttdeci">so do not need to be added back in&lt; HR &gt; subsection doc_solution The the main modification to the post processing function is the addition of the processor number to all output files Furthermore</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00334">turek_flag.txt:334</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a4a925627256eb5f23489996ef5609813"><div class="ttname"><a href="turek__flag_8txt.html#a4a925627256eb5f23489996ef5609813">actions_after_load_balance</a></div><div class="ttdeci">zoomed in view near the flag&lt; HR &gt;&lt; HR &gt; section load_balance Load balancing When employing load balancing in this we modify the time stepping loop to perform the procedure after each in this driver we move all the required code to build the entire global mesh into this and call it from within the problem all that is required for the c actions_after_load_balance() function is the addition of the unpin-repin procedure from the \c actions_after_adapt() function to the appropriate part of the \c actions_after_distribute() function</div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a6846f2e414899c1090342a73f51c429e"><div class="ttname"><a href="turek__flag_8txt.html#a6846f2e414899c1090342a73f51c429e">and</a></div><div class="ttdeci">and(iii) the traction meshes were never removed from the problem</div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a7f1e801969f8ee6da9cf55a58e320151"><div class="ttname"><a href="turek__flag_8txt.html#a7f1e801969f8ee6da9cf55a58e320151">doc_solution</a></div><div class="ttdeci">so do not need to be added back in&lt; HR &gt; subsection doc_solution The doc_solution() function As with the other parallel driver codes</div></div>
+<div class="ttc" id="aturek__flag_8txt_html_aec6ab6fe00c6f4683fee1bba90a698b5"><div class="ttname"><a href="turek__flag_8txt.html#aec6ab6fe00c6f4683fee1bba90a698b5">mesh</a></div><div class="ttdeci">e g the&lt; a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; tutorial on the solution of a Poisson problem with flux boundary conditions&lt;/a &gt; in the present problem this is not possible once the c FSISolidTractionElements have been the c MeshAsGeomObject can no longer be used to represent the shape and position of the FSI which would cause the adaptation of the fluid mesh to fail To avoid this we adopt the following we add the fluid mesh b before the solid mesh(This happens to be what was done already in the original driver code.) Usually</div></div>
+<div class="ttc" id="aturek__flag_8txt_html_ab7fd4c6f23985a750c65acea15aa98be"><div class="ttname"><a href="turek__flag_8txt.html#ab7fd4c6f23985a750c65acea15aa98be">boundary</a></div><div class="ttdeci">e g the&lt; a href=&quot;../../../poisson/two_d_poisson_flux_bc/html/index.html&quot;&gt; tutorial on the solution of a Poisson problem with flux boundary conditions&lt;/a &gt; in the present problem this is not possible once the c FSISolidTractionElements have been the c MeshAsGeomObject can no longer be used to represent the shape and position of the FSI boundary</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00102">turek_flag.txt:102</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_ad3ce4cdee082e78f07ab0a74ef9a35fd"><div class="ttname"><a href="turek__flag_8txt.html#ad3ce4cdee082e78f07ab0a74ef9a35fd">timestep</a></div><div class="ttdeci">zoomed in view near the flag&lt; HR &gt;&lt; HR &gt; section load_balance Load balancing When employing load balancing in this we modify the time stepping loop to perform the procedure after each timestep</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00370">turek_flag.txt:370</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:27:21
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

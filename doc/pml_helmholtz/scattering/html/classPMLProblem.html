@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: PMLProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classPMLProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">PMLProblem&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for PMLProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classPMLProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae6cc833e2485ad6d37d6dd14105bf407"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#ae6cc833e2485ad6d37d6dd14105bf407">PMLProblem</a> ()</td></tr>
+<tr class="memdesc:ae6cc833e2485ad6d37d6dd14105bf407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classPMLProblem.html#ae6cc833e2485ad6d37d6dd14105bf407">More...</a><br /></td></tr>
+<tr class="separator:ae6cc833e2485ad6d37d6dd14105bf407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4922fc5b0ef4cf43c41ee9149712adb1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a4922fc5b0ef4cf43c41ee9149712adb1">~PMLProblem</a> ()</td></tr>
+<tr class="memdesc:a4922fc5b0ef4cf43c41ee9149712adb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classPMLProblem.html#a4922fc5b0ef4cf43c41ee9149712adb1">More...</a><br /></td></tr>
+<tr class="separator:a4922fc5b0ef4cf43c41ee9149712adb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13feb001d09f64dcfe44bbe3c6fe3d97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a13feb001d09f64dcfe44bbe3c6fe3d97">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a13feb001d09f64dcfe44bbe3c6fe3d97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve (empty)  <a href="classPMLProblem.html#a13feb001d09f64dcfe44bbe3c6fe3d97">More...</a><br /></td></tr>
+<tr class="separator:a13feb001d09f64dcfe44bbe3c6fe3d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac171a6a2ff881984b3e057036cbbc414"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#ac171a6a2ff881984b3e057036cbbc414">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ac171a6a2ff881984b3e057036cbbc414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs after solve (empty)  <a href="classPMLProblem.html#ac171a6a2ff881984b3e057036cbbc414">More...</a><br /></td></tr>
+<tr class="separator:ac171a6a2ff881984b3e057036cbbc414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae04985b020a9e0526ab829ca316adb26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#ae04985b020a9e0526ab829ca316adb26">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:ae04985b020a9e0526ab829ca316adb26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.  <a href="classPMLProblem.html#ae04985b020a9e0526ab829ca316adb26">More...</a><br /></td></tr>
+<tr class="separator:ae04985b020a9e0526ab829ca316adb26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa111bfe53d52cf6b2e1bb3b079c16d43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#aa111bfe53d52cf6b2e1bb3b079c16d43">create_pml_meshes</a> ()</td></tr>
+<tr class="memdesc:aa111bfe53d52cf6b2e1bb3b079c16d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create PML meshes.  <a href="classPMLProblem.html#aa111bfe53d52cf6b2e1bb3b079c16d43">More...</a><br /></td></tr>
+<tr class="separator:aa111bfe53d52cf6b2e1bb3b079c16d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d2cdf5c1e99a7600d91353fd0584d5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a2d2cdf5c1e99a7600d91353fd0584d5c">apply_boundary_conditions</a> ()</td></tr>
+<tr class="memdesc:a2d2cdf5c1e99a7600d91353fd0584d5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply boundary conditions.  <a href="classPMLProblem.html#a2d2cdf5c1e99a7600d91353fd0584d5c">More...</a><br /></td></tr>
+<tr class="separator:a2d2cdf5c1e99a7600d91353fd0584d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a310fb36ad1401d9d975957ecee43accc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a310fb36ad1401d9d975957ecee43accc">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:a310fb36ad1401d9d975957ecee43accc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the PML meshes.  <a href="classPMLProblem.html#a310fb36ad1401d9d975957ecee43accc">More...</a><br /></td></tr>
+<tr class="separator:a310fb36ad1401d9d975957ecee43accc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a732f94d99e7ef65096d6e8d227f9cbc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a732f94d99e7ef65096d6e8d227f9cbc9">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:a732f94d99e7ef65096d6e8d227f9cbc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Rebuild the PML meshes.  <a href="classPMLProblem.html#a732f94d99e7ef65096d6e8d227f9cbc9">More...</a><br /></td></tr>
+<tr class="separator:a732f94d99e7ef65096d6e8d227f9cbc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6cc833e2485ad6d37d6dd14105bf407"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#ae6cc833e2485ad6d37d6dd14105bf407">PMLProblem</a> ()</td></tr>
+<tr class="memdesc:ae6cc833e2485ad6d37d6dd14105bf407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classPMLProblem.html#ae6cc833e2485ad6d37d6dd14105bf407">More...</a><br /></td></tr>
+<tr class="separator:ae6cc833e2485ad6d37d6dd14105bf407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4922fc5b0ef4cf43c41ee9149712adb1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a4922fc5b0ef4cf43c41ee9149712adb1">~PMLProblem</a> ()</td></tr>
+<tr class="memdesc:a4922fc5b0ef4cf43c41ee9149712adb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classPMLProblem.html#a4922fc5b0ef4cf43c41ee9149712adb1">More...</a><br /></td></tr>
+<tr class="separator:a4922fc5b0ef4cf43c41ee9149712adb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13feb001d09f64dcfe44bbe3c6fe3d97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a13feb001d09f64dcfe44bbe3c6fe3d97">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a13feb001d09f64dcfe44bbe3c6fe3d97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve (empty)  <a href="classPMLProblem.html#a13feb001d09f64dcfe44bbe3c6fe3d97">More...</a><br /></td></tr>
+<tr class="separator:a13feb001d09f64dcfe44bbe3c6fe3d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac171a6a2ff881984b3e057036cbbc414"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#ac171a6a2ff881984b3e057036cbbc414">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ac171a6a2ff881984b3e057036cbbc414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs after solve (empty)  <a href="classPMLProblem.html#ac171a6a2ff881984b3e057036cbbc414">More...</a><br /></td></tr>
+<tr class="separator:ac171a6a2ff881984b3e057036cbbc414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae04985b020a9e0526ab829ca316adb26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#ae04985b020a9e0526ab829ca316adb26">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:ae04985b020a9e0526ab829ca316adb26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.  <a href="classPMLProblem.html#ae04985b020a9e0526ab829ca316adb26">More...</a><br /></td></tr>
+<tr class="separator:ae04985b020a9e0526ab829ca316adb26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa111bfe53d52cf6b2e1bb3b079c16d43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#aa111bfe53d52cf6b2e1bb3b079c16d43">create_pml_meshes</a> ()</td></tr>
+<tr class="memdesc:aa111bfe53d52cf6b2e1bb3b079c16d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create PML meshes.  <a href="classPMLProblem.html#aa111bfe53d52cf6b2e1bb3b079c16d43">More...</a><br /></td></tr>
+<tr class="separator:aa111bfe53d52cf6b2e1bb3b079c16d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a748701cc016c2bfd07ed2d2467268b5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a748701cc016c2bfd07ed2d2467268b5d">create_flux_elements</a> (const unsigned &amp;b, Mesh *const &amp;bulk_mesh_pt, Mesh *const &amp;helmholtz_inner_boundary_mesh_pt)</td></tr>
+<tr class="memdesc:a748701cc016c2bfd07ed2d2467268b5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create Helmholtz flux elements on boundary b of the Mesh pointed to by bulk_mesh_pt and add them to the specified surface Mesh.  <a href="classPMLProblem.html#a748701cc016c2bfd07ed2d2467268b5d">More...</a><br /></td></tr>
+<tr class="separator:a748701cc016c2bfd07ed2d2467268b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcd6ccc306c79d30d998530c58328b85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#afcd6ccc306c79d30d998530c58328b85">create_power_elements</a> (const unsigned &amp;b, Mesh *const &amp;bulk_mesh_pt, Mesh *const &amp;helmholtz_power_boundary_mesh_pt)</td></tr>
+<tr class="memdesc:afcd6ccc306c79d30d998530c58328b85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create Helmholtz power elements on boundary b of the Mesh pointed to by bulk_mesh_pt and add them to the specified surface Mesh.  <a href="classPMLProblem.html#afcd6ccc306c79d30d998530c58328b85">More...</a><br /></td></tr>
+<tr class="separator:afcd6ccc306c79d30d998530c58328b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a310fb36ad1401d9d975957ecee43accc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a310fb36ad1401d9d975957ecee43accc">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:a310fb36ad1401d9d975957ecee43accc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the PML meshes.  <a href="classPMLProblem.html#a310fb36ad1401d9d975957ecee43accc">More...</a><br /></td></tr>
+<tr class="separator:a310fb36ad1401d9d975957ecee43accc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a732f94d99e7ef65096d6e8d227f9cbc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a732f94d99e7ef65096d6e8d227f9cbc9">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:a732f94d99e7ef65096d6e8d227f9cbc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Rebuild the PML meshes.  <a href="classPMLProblem.html#a732f94d99e7ef65096d6e8d227f9cbc9">More...</a><br /></td></tr>
+<tr class="separator:a732f94d99e7ef65096d6e8d227f9cbc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ac8e72d9422ee75522ee98e617dd7e8ae"><td class="memItemLeft" align="right" valign="top">RefineableTriangleMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#ac8e72d9422ee75522ee98e617dd7e8ae">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:ac8e72d9422ee75522ee98e617dd7e8ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the refineable "bulk" mesh.  <a href="classPMLProblem.html#ac8e72d9422ee75522ee98e617dd7e8ae">More...</a><br /></td></tr>
+<tr class="separator:ac8e72d9422ee75522ee98e617dd7e8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712cffd454213a1eca6d98bd2f0f7e4e"><td class="memItemLeft" align="right" valign="top">TriangleMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a712cffd454213a1eca6d98bd2f0f7e4e">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:a712cffd454213a1eca6d98bd2f0f7e4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "bulk" mesh.  <a href="classPMLProblem.html#a712cffd454213a1eca6d98bd2f0f7e4e">More...</a><br /></td></tr>
+<tr class="separator:a712cffd454213a1eca6d98bd2f0f7e4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa325b694fc238fa65549ba5fca9c47ac"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#aa325b694fc238fa65549ba5fca9c47ac">PML_right_mesh_pt</a></td></tr>
+<tr class="memdesc:aa325b694fc238fa65549ba5fca9c47ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the right PML mesh.  <a href="classPMLProblem.html#aa325b694fc238fa65549ba5fca9c47ac">More...</a><br /></td></tr>
+<tr class="separator:aa325b694fc238fa65549ba5fca9c47ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94637421e2738f3b6513861a659914e1"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a94637421e2738f3b6513861a659914e1">PML_top_mesh_pt</a></td></tr>
+<tr class="memdesc:a94637421e2738f3b6513861a659914e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the top PML mesh.  <a href="classPMLProblem.html#a94637421e2738f3b6513861a659914e1">More...</a><br /></td></tr>
+<tr class="separator:a94637421e2738f3b6513861a659914e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7376c789c76f1150ebbbdf253969136"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#ab7376c789c76f1150ebbbdf253969136">PML_left_mesh_pt</a></td></tr>
+<tr class="memdesc:ab7376c789c76f1150ebbbdf253969136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the left PML mesh.  <a href="classPMLProblem.html#ab7376c789c76f1150ebbbdf253969136">More...</a><br /></td></tr>
+<tr class="separator:ab7376c789c76f1150ebbbdf253969136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a524a93acb25ace1f12bd1bb4a23d91e3"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a524a93acb25ace1f12bd1bb4a23d91e3">PML_bottom_mesh_pt</a></td></tr>
+<tr class="memdesc:a524a93acb25ace1f12bd1bb4a23d91e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the bottom PML mesh.  <a href="classPMLProblem.html#a524a93acb25ace1f12bd1bb4a23d91e3">More...</a><br /></td></tr>
+<tr class="separator:a524a93acb25ace1f12bd1bb4a23d91e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0676946d6e64d7f8eb6174bc12f3b79"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#aa0676946d6e64d7f8eb6174bc12f3b79">PML_top_right_mesh_pt</a></td></tr>
+<tr class="memdesc:aa0676946d6e64d7f8eb6174bc12f3b79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the top right corner PML mesh.  <a href="classPMLProblem.html#aa0676946d6e64d7f8eb6174bc12f3b79">More...</a><br /></td></tr>
+<tr class="separator:aa0676946d6e64d7f8eb6174bc12f3b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa74e9cdaa9f7d63cd6cd0770e30e2cbe"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#aa74e9cdaa9f7d63cd6cd0770e30e2cbe">PML_top_left_mesh_pt</a></td></tr>
+<tr class="memdesc:aa74e9cdaa9f7d63cd6cd0770e30e2cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the top left corner PML mesh.  <a href="classPMLProblem.html#aa74e9cdaa9f7d63cd6cd0770e30e2cbe">More...</a><br /></td></tr>
+<tr class="separator:aa74e9cdaa9f7d63cd6cd0770e30e2cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51dccc650129c0afd903b4c359a4e6dd"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a51dccc650129c0afd903b4c359a4e6dd">PML_bottom_right_mesh_pt</a></td></tr>
+<tr class="memdesc:a51dccc650129c0afd903b4c359a4e6dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the bottom right corner PML mesh.  <a href="classPMLProblem.html#a51dccc650129c0afd903b4c359a4e6dd">More...</a><br /></td></tr>
+<tr class="separator:a51dccc650129c0afd903b4c359a4e6dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d32b04ee51f2a9e5e14183b212e7815"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a0d32b04ee51f2a9e5e14183b212e7815">PML_bottom_left_mesh_pt</a></td></tr>
+<tr class="memdesc:a0d32b04ee51f2a9e5e14183b212e7815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the bottom left corner PML mesh.  <a href="classPMLProblem.html#a0d32b04ee51f2a9e5e14183b212e7815">More...</a><br /></td></tr>
+<tr class="separator:a0d32b04ee51f2a9e5e14183b212e7815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b343355ccace2851da1860dea7d6a3b"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a6b343355ccace2851da1860dea7d6a3b">Trace_file</a></td></tr>
+<tr class="memdesc:a6b343355ccace2851da1860dea7d6a3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace file.  <a href="classPMLProblem.html#a6b343355ccace2851da1860dea7d6a3b">More...</a><br /></td></tr>
+<tr class="separator:a6b343355ccace2851da1860dea7d6a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aeca36fdbe76a52bb68808f2d4547f2"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#a7aeca36fdbe76a52bb68808f2d4547f2">Helmholtz_inner_boundary_mesh_pt</a></td></tr>
+<tr class="memdesc:a7aeca36fdbe76a52bb68808f2d4547f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the mesh containing the Helmholtz inner boundary condition elements.  <a href="classPMLProblem.html#a7aeca36fdbe76a52bb68808f2d4547f2">More...</a><br /></td></tr>
+<tr class="separator:a7aeca36fdbe76a52bb68808f2d4547f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf7ac369650cc7a876479a208752e02c"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPMLProblem.html#abf7ac369650cc7a876479a208752e02c">Helmholtz_power_boundary_mesh_pt</a></td></tr>
+<tr class="memdesc:abf7ac369650cc7a876479a208752e02c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh of elements that compute the radiated power.  <a href="classPMLProblem.html#abf7ac369650cc7a876479a208752e02c">More...</a><br /></td></tr>
+<tr class="separator:abf7ac369650cc7a876479a208752e02c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class PMLProblem&lt; ELEMENT &gt;</h3>
+
+<p>Problem class to demonstrate use of perfectly matched layers for Helmholtz problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00075">75</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae6cc833e2485ad6d37d6dd14105bf407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6cc833e2485ad6d37d6dd14105bf407">&#9670;&nbsp;</a></span>PMLProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classPMLProblem.html">PMLProblem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Constructor for Helmholtz problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00165">165</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00061">GlobalParameters::K_squared</a>.</p>
+
+</div>
+</div>
+<a id="a4922fc5b0ef4cf43c41ee9149712adb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4922fc5b0ef4cf43c41ee9149712adb1">&#9670;&nbsp;</a></span>~PMLProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classPMLProblem.html">PMLProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00084">84</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae6cc833e2485ad6d37d6dd14105bf407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6cc833e2485ad6d37d6dd14105bf407">&#9670;&nbsp;</a></span>PMLProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classPMLProblem.html">PMLProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+</div>
+</div>
+<a id="a4922fc5b0ef4cf43c41ee9149712adb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4922fc5b0ef4cf43c41ee9149712adb1">&#9670;&nbsp;</a></span>~PMLProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classPMLProblem.html">PMLProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html#l00251">251</a> of file <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html">unstructured_two_d_helmholtz_scattering.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a732f94d99e7ef65096d6e8d227f9cbc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a732f94d99e7ef65096d6e8d227f9cbc9">&#9670;&nbsp;</a></span>actions_after_adapt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::actions_after_adapt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Rebuild the PML meshes. </p>
+<p>Actions after adapt: Rebuild the face element meshes. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00386">386</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00061">GlobalParameters::K_squared</a>.</p>
+
+</div>
+</div>
+<a id="a732f94d99e7ef65096d6e8d227f9cbc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a732f94d99e7ef65096d6e8d227f9cbc9">&#9670;&nbsp;</a></span>actions_after_adapt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::actions_after_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Rebuild the PML meshes. </p>
+
+</div>
+</div>
+<a id="ac171a6a2ff881984b3e057036cbbc414"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac171a6a2ff881984b3e057036cbbc414">&#9670;&nbsp;</a></span>actions_after_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00090">90</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac171a6a2ff881984b3e057036cbbc414"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac171a6a2ff881984b3e057036cbbc414">&#9670;&nbsp;</a></span>actions_after_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html#l00257">257</a> of file <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html">unstructured_two_d_helmholtz_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="a310fb36ad1401d9d975957ecee43accc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a310fb36ad1401d9d975957ecee43accc">&#9670;&nbsp;</a></span>actions_before_adapt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::actions_before_adapt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the PML meshes. </p>
+<p>Actions before adapt: Wipe the mesh of face elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00346">346</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="a310fb36ad1401d9d975957ecee43accc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a310fb36ad1401d9d975957ecee43accc">&#9670;&nbsp;</a></span>actions_before_adapt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::actions_before_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the PML meshes. </p>
+
+</div>
+</div>
+<a id="a13feb001d09f64dcfe44bbe3c6fe3d97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13feb001d09f64dcfe44bbe3c6fe3d97">&#9670;&nbsp;</a></span>actions_before_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00087">87</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="a13feb001d09f64dcfe44bbe3c6fe3d97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13feb001d09f64dcfe44bbe3c6fe3d97">&#9670;&nbsp;</a></span>actions_before_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html#l00254">254</a> of file <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html">unstructured_two_d_helmholtz_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2d2cdf5c1e99a7600d91353fd0584d5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d2cdf5c1e99a7600d91353fd0584d5c">&#9670;&nbsp;</a></span>apply_boundary_conditions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::apply_boundary_conditions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply boundary conditions. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00422">422</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="a748701cc016c2bfd07ed2d2467268b5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a748701cc016c2bfd07ed2d2467268b5d">&#9670;&nbsp;</a></span>create_flux_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::create_flux_elements </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mesh *const &amp;&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mesh *const &amp;&#160;</td>
+          <td class="paramname"><em>helmholtz_inner_boundary_mesh_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create Helmholtz flux elements on boundary b of the Mesh pointed to by bulk_mesh_pt and add them to the specified surface Mesh. </p>
+<p>Create Helmholtz inner Flux Elements on the b-th boundary of the Mesh object pointed to by bulk_mesh_pt and add the elements to the Mesh object pointed to by helmholtz_inner_boundary_mesh_pt </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html#l00748">748</a> of file <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html">unstructured_two_d_helmholtz_scattering.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html#l00152">GlobalParameters::prescribed_incoming_flux()</a>.</p>
+
+</div>
+</div>
+<a id="aa111bfe53d52cf6b2e1bb3b079c16d43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa111bfe53d52cf6b2e1bb3b079c16d43">&#9670;&nbsp;</a></span>create_pml_meshes() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::create_pml_meshes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create PML meshes. </p>
+<p>Create PML meshes and add them to the problem's sub-meshes. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00530">530</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa111bfe53d52cf6b2e1bb3b079c16d43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa111bfe53d52cf6b2e1bb3b079c16d43">&#9670;&nbsp;</a></span>create_pml_meshes() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::create_pml_meshes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create PML meshes. </p>
+
+</div>
+</div>
+<a id="afcd6ccc306c79d30d998530c58328b85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcd6ccc306c79d30d998530c58328b85">&#9670;&nbsp;</a></span>create_power_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::create_power_elements </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mesh *const &amp;&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mesh *const &amp;&#160;</td>
+          <td class="paramname"><em>helmholtz_power_boundary_mesh_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create Helmholtz power elements on boundary b of the Mesh pointed to by bulk_mesh_pt and add them to the specified surface Mesh. </p>
+<p>Create Helmholtz inner Flux Elements on the b-th boundary of the Mesh object pointed to by bulk_mesh_pt and add the elements to the Mesh object pointed to by helmholtz_power_boundary_mesh_pt </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html#l00784">784</a> of file <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html">unstructured_two_d_helmholtz_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae04985b020a9e0526ab829ca316adb26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae04985b020a9e0526ab829ca316adb26">&#9670;&nbsp;</a></span>doc_solution() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to. </p>
+<p>Doc the solution: doc_info contains labels/output directory etc. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00453">453</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae04985b020a9e0526ab829ca316adb26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae04985b020a9e0526ab829ca316adb26">&#9670;&nbsp;</a></span>doc_solution() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac8e72d9422ee75522ee98e617dd7e8ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8e72d9422ee75522ee98e617dd7e8ae">&#9670;&nbsp;</a></span>Bulk_mesh_pt <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TriangleMesh&lt; ELEMENT &gt; * <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the refineable "bulk" mesh. </p>
+<p>Pointer to the "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00118">118</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="a712cffd454213a1eca6d98bd2f0f7e4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a712cffd454213a1eca6d98bd2f0f7e4e">&#9670;&nbsp;</a></span>Bulk_mesh_pt <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TriangleMesh&lt;ELEMENT&gt;* <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00125">125</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="a7aeca36fdbe76a52bb68808f2d4547f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aeca36fdbe76a52bb68808f2d4547f2">&#9670;&nbsp;</a></span>Helmholtz_inner_boundary_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::Helmholtz_inner_boundary_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the mesh containing the Helmholtz inner boundary condition elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html#l00332">332</a> of file <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html">unstructured_two_d_helmholtz_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="abf7ac369650cc7a876479a208752e02c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf7ac369650cc7a876479a208752e02c">&#9670;&nbsp;</a></span>Helmholtz_power_boundary_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::Helmholtz_power_boundary_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to mesh of elements that compute the radiated power. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html#l00335">335</a> of file <a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html">unstructured_two_d_helmholtz_scattering.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0d32b04ee51f2a9e5e14183b212e7815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d32b04ee51f2a9e5e14183b212e7815">&#9670;&nbsp;</a></span>PML_bottom_left_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::PML_bottom_left_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the bottom left corner PML mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00152">152</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="a524a93acb25ace1f12bd1bb4a23d91e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a524a93acb25ace1f12bd1bb4a23d91e3">&#9670;&nbsp;</a></span>PML_bottom_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::PML_bottom_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the bottom PML mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00140">140</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="a51dccc650129c0afd903b4c359a4e6dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51dccc650129c0afd903b4c359a4e6dd">&#9670;&nbsp;</a></span>PML_bottom_right_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::PML_bottom_right_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the bottom right corner PML mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00149">149</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab7376c789c76f1150ebbbdf253969136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7376c789c76f1150ebbbdf253969136">&#9670;&nbsp;</a></span>PML_left_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::PML_left_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the left PML mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00137">137</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa325b694fc238fa65549ba5fca9c47ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa325b694fc238fa65549ba5fca9c47ac">&#9670;&nbsp;</a></span>PML_right_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::PML_right_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the right PML mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00131">131</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa74e9cdaa9f7d63cd6cd0770e30e2cbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa74e9cdaa9f7d63cd6cd0770e30e2cbe">&#9670;&nbsp;</a></span>PML_top_left_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::PML_top_left_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the top left corner PML mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00146">146</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="a94637421e2738f3b6513861a659914e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94637421e2738f3b6513861a659914e1">&#9670;&nbsp;</a></span>PML_top_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::PML_top_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the top PML mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00134">134</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa0676946d6e64d7f8eb6174bc12f3b79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0676946d6e64d7f8eb6174bc12f3b79">&#9670;&nbsp;</a></span>PML_top_right_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::PML_top_right_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the top right corner PML mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00143">143</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<a id="a6b343355ccace2851da1860dea7d6a3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b343355ccace2851da1860dea7d6a3b">&#9670;&nbsp;</a></span>Trace_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream <a class="el" href="classPMLProblem.html">PMLProblem</a>&lt; ELEMENT &gt;::Trace_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Trace file. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html#l00155">155</a> of file <a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="unstructured__two__d__helmholtz_8cc_source.html">unstructured_two_d_helmholtz.cc</a></li>
+<li><a class="el" href="unstructured__two__d__helmholtz__scattering_8cc_source.html">unstructured_two_d_helmholtz_scattering.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:30:58
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

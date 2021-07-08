@@ -1,0 +1,292 @@
+\hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement}{}\doxysection{oomph\+::T\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\label{classoomph_1_1TTimeHarmonicLinearElasticityElement}\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+
+
+{\ttfamily \#include $<$Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::T\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.732673cm]{classoomph_1_1TTimeHarmonicLinearElasticityElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_a28be2773ce1626dbae4d5222ebf599ad}{T\+Time\+Harmonic\+Linear\+Elasticity\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and Time\+Harmonic\+Linear\+Elasticity equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_a4078f42e6e4495e1985fcf3f142bedc1}{T\+Time\+Harmonic\+Linear\+Elasticity\+Element}} (const \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_a5f20fab8c4740f48557380a36b86669b}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_a6a11b59f4e32f9ce2bc7326dff35d8fb}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_ac0124efd664afd05141495c072587d6a}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_af31e14a1ea8ce2e3a8a9ebd83403d566}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_ace9f72ad0f5b88d08f8364a8acc673b0}{nvertex\+\_\+node}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_a18f6af257eff39c097cc70e49b9832a8}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_a15e0965ae89f4c6523fe61784aada176}{nrecovery\+\_\+order}} ()
+\begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_a5cce049fe8015dc639df9b028a6b187e}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
+\begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement_a62ff51ac6f51d39ccc8220203f679392}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
+class oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+
+T\+Time\+Harmonic\+Linear\+Elasticity\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are isoparametric triangular D\+I\+M-\/dimensional Time\+Harmonic\+Linear\+Elasticity elements with ~\newline
+ N\+N\+O\+D\+E\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations}{Time\+Harmonic\+Linear\+Elasticity\+Equations}} 
+
+Definition at line 64 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_a28be2773ce1626dbae4d5222ebf599ad}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_a28be2773ce1626dbae4d5222ebf599ad}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!TTimeHarmonicLinearElasticityElement@{TTimeHarmonicLinearElasticityElement}}
+\index{TTimeHarmonicLinearElasticityElement@{TTimeHarmonicLinearElasticityElement}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{TTimeHarmonicLinearElasticityElement()}{TTimeHarmonicLinearElasticityElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{T\+Time\+Harmonic\+Linear\+Elasticity\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and Time\+Harmonic\+Linear\+Elasticity equations. 
+
+
+
+Definition at line 73 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_a4078f42e6e4495e1985fcf3f142bedc1}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_a4078f42e6e4495e1985fcf3f142bedc1}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!TTimeHarmonicLinearElasticityElement@{TTimeHarmonicLinearElasticityElement}}
+\index{TTimeHarmonicLinearElasticityElement@{TTimeHarmonicLinearElasticityElement}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{TTimeHarmonicLinearElasticityElement()}{TTimeHarmonicLinearElasticityElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{T\+Time\+Harmonic\+Linear\+Elasticity\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 78 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_a62ff51ac6f51d39ccc8220203f679392}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_a62ff51ac6f51d39ccc8220203f679392}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
+\index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 142 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::get\+\_\+strain(), and i.
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_a15e0965ae89f4c6523fe61784aada176}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_a15e0965ae89f4c6523fe61784aada176}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
+\index{nrecovery\_order@{nrecovery\_order}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835bd3e0f6b2f4f7a9a4044798}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 131 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_a5cce049fe8015dc639df9b028a6b187e}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_a5cce049fe8015dc639df9b028a6b187e}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
+\index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c5728902e13da31be19c390fc28e3}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 134 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_ace9f72ad0f5b88d08f8364a8acc673b0}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_ace9f72ad0f5b88d08f8364a8acc673b0}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
+\index{nvertex\_node@{nvertex\_node}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertex nodes in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e77ef4ff35f15fdf7913b4077}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 120 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_ac0124efd664afd05141495c072587d6a}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_ac0124efd664afd05141495c072587d6a}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function\+: ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_ab92581333fed6fcfd5267e3136c445c3}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 107 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_af31e14a1ea8ce2e3a8a9ebd83403d566}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_af31e14a1ea8ce2e3a8a9ebd83403d566}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function\+: ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a1913ef957b846a4bf04991718b83f9b5}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 113 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_a5f20fab8c4740f48557380a36b86669b}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_a5f20fab8c4740f48557380a36b86669b}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Output function\+: ~\newline
+ 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_acbc7549f33300563f0a3953782fb4a46}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 94 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_a6a11b59f4e32f9ce2bc7326dff35d8fb}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_a6a11b59f4e32f9ce2bc7326dff35d8fb}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function\+: ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinearElasticityEquations_a5363121911a4418e2bfa707e02e2adc4}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$}}.
+
+
+
+Definition at line 100 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicLinearElasticityElement_a18f6af257eff39c097cc70e49b9832a8}\label{classoomph_1_1TTimeHarmonicLinearElasticityElement_a18f6af257eff39c097cc70e49b9832a8}} 
+\index{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
+\index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TTimeHarmonicLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1TTimeHarmonicLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to the j-\/th vertex node in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 124 of file Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Ttime__harmonic__linear__elasticity__elements_8h}{Ttime\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}\end{DoxyCompactItemize}

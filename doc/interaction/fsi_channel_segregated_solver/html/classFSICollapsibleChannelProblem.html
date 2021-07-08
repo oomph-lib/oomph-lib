@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: FSICollapsibleChannelProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classFSICollapsibleChannelProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">FSICollapsibleChannelProblem&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Problem class.  
+ <a href="classFSICollapsibleChannelProblem.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for FSICollapsibleChannelProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classFSICollapsibleChannelProblem.png" usemap="#FSICollapsibleChannelProblem_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="FSICollapsibleChannelProblem_3C_20ELEMENT_20_3E_map" name="FSICollapsibleChannelProblem_3C_20ELEMENT_20_3E_map">
+<area href="classSegregatedFSICollapsibleChannelProblem.html" alt="SegregatedFSICollapsibleChannelProblem&lt; ELEMENT &gt;" shape="rect" coords="0,112,333,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a74efdd9ed027ab0ca5cf59ec8da6b95c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a74efdd9ed027ab0ca5cf59ec8da6b95c">FSICollapsibleChannelProblem</a> (const unsigned &amp;nup, const unsigned &amp;ncollapsible, const unsigned &amp;ndown, const unsigned &amp;ny, const double &amp;lup, const double &amp;lcollapsible, const double &amp;ldown, const double &amp;ly, const bool &amp;displ_control, const bool &amp;steady_flag)</td></tr>
+<tr class="memdesc:a74efdd9ed027ab0ca5cf59ec8da6b95c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: The arguments are the number of elements and the lengths of the domain.  <a href="classFSICollapsibleChannelProblem.html#a74efdd9ed027ab0ca5cf59ec8da6b95c">More...</a><br /></td></tr>
+<tr class="separator:a74efdd9ed027ab0ca5cf59ec8da6b95c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe33aaaae15ea3eb10885527a1d1ad9a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#abe33aaaae15ea3eb10885527a1d1ad9a">~FSICollapsibleChannelProblem</a> ()</td></tr>
+<tr class="memdesc:abe33aaaae15ea3eb10885527a1d1ad9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classFSICollapsibleChannelProblem.html#abe33aaaae15ea3eb10885527a1d1ad9a">More...</a><br /></td></tr>
+<tr class="separator:abe33aaaae15ea3eb10885527a1d1ad9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a299ba7d5819e7871eae7e331d1abab8b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a299ba7d5819e7871eae7e331d1abab8b">steady_run</a> ()</td></tr>
+<tr class="memdesc:a299ba7d5819e7871eae7e331d1abab8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steady run.  <a href="classFSICollapsibleChannelProblem.html#a299ba7d5819e7871eae7e331d1abab8b">More...</a><br /></td></tr>
+<tr class="separator:a299ba7d5819e7871eae7e331d1abab8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f2b3abaf5e2dfc35489548d5a72edc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#ae4f2b3abaf5e2dfc35489548d5a72edc">unsteady_run</a> (const double &amp;dt=0.1)</td></tr>
+<tr class="memdesc:ae4f2b3abaf5e2dfc35489548d5a72edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsteady run; virtual so it can be overloaded in derived problem classes. Specify timestep or use default of 0.1.  <a href="classFSICollapsibleChannelProblem.html#ae4f2b3abaf5e2dfc35489548d5a72edc">More...</a><br /></td></tr>
+<tr class="separator:ae4f2b3abaf5e2dfc35489548d5a72edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b461f3afef3185ea0b461714675ef8f"><td class="memItemLeft" align="right" valign="top">AlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a9b461f3afef3185ea0b461714675ef8f">bulk_mesh_pt</a> ()</td></tr>
+<tr class="memdesc:a9b461f3afef3185ea0b461714675ef8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the specific bulk (fluid) mesh.  <a href="classFSICollapsibleChannelProblem.html#a9b461f3afef3185ea0b461714675ef8f">More...</a><br /></td></tr>
+<tr class="separator:a9b461f3afef3185ea0b461714675ef8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8b71da8da82f3c52387052ce400b930"><td class="memItemLeft" align="right" valign="top">OneDLagrangianMesh&lt; FSIHermiteBeamElement &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#ae8b71da8da82f3c52387052ce400b930">wall_mesh_pt</a> ()</td></tr>
+<tr class="memdesc:ae8b71da8da82f3c52387052ce400b930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the wall mesh.  <a href="classFSICollapsibleChannelProblem.html#ae8b71da8da82f3c52387052ce400b930">More...</a><br /></td></tr>
+<tr class="separator:ae8b71da8da82f3c52387052ce400b930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad10b2d12be052c6b1bc5005dc27cd229"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#ad10b2d12be052c6b1bc5005dc27cd229">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ad10b2d12be052c6b1bc5005dc27cd229"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before solve. Reset counter for number of Newton iterations.  <a href="classFSICollapsibleChannelProblem.html#ad10b2d12be052c6b1bc5005dc27cd229">More...</a><br /></td></tr>
+<tr class="separator:ad10b2d12be052c6b1bc5005dc27cd229"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49780267c05f4c6ecbed11bfc6b9956b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a49780267c05f4c6ecbed11bfc6b9956b">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a49780267c05f4c6ecbed11bfc6b9956b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve (empty)  <a href="classFSICollapsibleChannelProblem.html#a49780267c05f4c6ecbed11bfc6b9956b">More...</a><br /></td></tr>
+<tr class="separator:a49780267c05f4c6ecbed11bfc6b9956b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace5343d2e6e6e0480d077d4f17365288"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#ace5343d2e6e6e0480d077d4f17365288">actions_before_newton_convergence_check</a> ()</td></tr>
+<tr class="memdesc:ace5343d2e6e6e0480d077d4f17365288"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update before checking Newton convergence: Update the nodal positions in the fluid mesh in response to possible changes in the wall shape.  <a href="classFSICollapsibleChannelProblem.html#ace5343d2e6e6e0480d077d4f17365288">More...</a><br /></td></tr>
+<tr class="separator:ace5343d2e6e6e0480d077d4f17365288"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6541733e0d9e8e09bda489d6ce567ecb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a6541733e0d9e8e09bda489d6ce567ecb">doc_solution_steady</a> (DocInfo &amp;doc_info, ofstream &amp;trace_file, const double &amp;cpu, const unsigned &amp;niter)</td></tr>
+<tr class="memdesc:a6541733e0d9e8e09bda489d6ce567ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the steady solution.  <a href="classFSICollapsibleChannelProblem.html#a6541733e0d9e8e09bda489d6ce567ecb">More...</a><br /></td></tr>
+<tr class="separator:a6541733e0d9e8e09bda489d6ce567ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c8f2c34cea9b43e1496cc63b1f496c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#aa9c8f2c34cea9b43e1496cc63b1f496c">doc_solution_unsteady</a> (DocInfo &amp;doc_info, ofstream &amp;trace_file, const double &amp;cpu, const unsigned &amp;niter)</td></tr>
+<tr class="memdesc:aa9c8f2c34cea9b43e1496cc63b1f496c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the unsteady solution.  <a href="classFSICollapsibleChannelProblem.html#aa9c8f2c34cea9b43e1496cc63b1f496c">More...</a><br /></td></tr>
+<tr class="separator:aa9c8f2c34cea9b43e1496cc63b1f496c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdd6752cb134fd09ee8830158ed557b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#afdd6752cb134fd09ee8830158ed557b2">set_initial_condition</a> ()</td></tr>
+<tr class="memdesc:afdd6752cb134fd09ee8830158ed557b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply initial conditions.  <a href="classFSICollapsibleChannelProblem.html#afdd6752cb134fd09ee8830158ed557b2">More...</a><br /></td></tr>
+<tr class="separator:afdd6752cb134fd09ee8830158ed557b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2a947a11c11090b39d2bc4439fb96e36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a2a947a11c11090b39d2bc4439fb96e36">dump_it</a> (ofstream &amp;dump_file)</td></tr>
+<tr class="memdesc:a2a947a11c11090b39d2bc4439fb96e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dump problem to disk to allow for restart.  <a href="classFSICollapsibleChannelProblem.html#a2a947a11c11090b39d2bc4439fb96e36">More...</a><br /></td></tr>
+<tr class="separator:a2a947a11c11090b39d2bc4439fb96e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ee280c8cccc90baae4b0b6744be9efe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a2ee280c8cccc90baae4b0b6744be9efe">restart</a> (ifstream &amp;restart_file)</td></tr>
+<tr class="memdesc:a2ee280c8cccc90baae4b0b6744be9efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read problem for restart from specified restart file.  <a href="classFSICollapsibleChannelProblem.html#a2ee280c8cccc90baae4b0b6744be9efe">More...</a><br /></td></tr>
+<tr class="separator:a2ee280c8cccc90baae4b0b6744be9efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a22a5ea767bf0c437b78ed4e37b7a4818"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a22a5ea767bf0c437b78ed4e37b7a4818">Nup</a></td></tr>
+<tr class="memdesc:a22a5ea767bf0c437b78ed4e37b7a4818"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in the x direction in the upstream part of the channel.  <a href="classFSICollapsibleChannelProblem.html#a22a5ea767bf0c437b78ed4e37b7a4818">More...</a><br /></td></tr>
+<tr class="separator:a22a5ea767bf0c437b78ed4e37b7a4818"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fb9656feb1c32045f4fdbd74f91258f"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a3fb9656feb1c32045f4fdbd74f91258f">Ncollapsible</a></td></tr>
+<tr class="memdesc:a3fb9656feb1c32045f4fdbd74f91258f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in the x direction in the collapsible part of the channel.  <a href="classFSICollapsibleChannelProblem.html#a3fb9656feb1c32045f4fdbd74f91258f">More...</a><br /></td></tr>
+<tr class="separator:a3fb9656feb1c32045f4fdbd74f91258f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64c0aa974b39527ef22e352a4f22b156"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a64c0aa974b39527ef22e352a4f22b156">Ndown</a></td></tr>
+<tr class="memdesc:a64c0aa974b39527ef22e352a4f22b156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in the x direction in the downstream part of the channel.  <a href="classFSICollapsibleChannelProblem.html#a64c0aa974b39527ef22e352a4f22b156">More...</a><br /></td></tr>
+<tr class="separator:a64c0aa974b39527ef22e352a4f22b156"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a536804b714fd0033f3028ff1c6032918"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a536804b714fd0033f3028ff1c6032918">Ny</a></td></tr>
+<tr class="memdesc:a536804b714fd0033f3028ff1c6032918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements across the channel.  <a href="classFSICollapsibleChannelProblem.html#a536804b714fd0033f3028ff1c6032918">More...</a><br /></td></tr>
+<tr class="separator:a536804b714fd0033f3028ff1c6032918"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b8288e57097875d247bda6201b1bfcf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a7b8288e57097875d247bda6201b1bfcf">Lup</a></td></tr>
+<tr class="memdesc:a7b8288e57097875d247bda6201b1bfcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-length in the upstream part of the channel  <a href="classFSICollapsibleChannelProblem.html#a7b8288e57097875d247bda6201b1bfcf">More...</a><br /></td></tr>
+<tr class="separator:a7b8288e57097875d247bda6201b1bfcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6ce3834d06f0fb75db945a782ff0108"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#ae6ce3834d06f0fb75db945a782ff0108">Lcollapsible</a></td></tr>
+<tr class="memdesc:ae6ce3834d06f0fb75db945a782ff0108"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-length in the collapsible part of the channel  <a href="classFSICollapsibleChannelProblem.html#ae6ce3834d06f0fb75db945a782ff0108">More...</a><br /></td></tr>
+<tr class="separator:ae6ce3834d06f0fb75db945a782ff0108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0964686847cc64f2a77a866187aec626"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a0964686847cc64f2a77a866187aec626">Ldown</a></td></tr>
+<tr class="memdesc:a0964686847cc64f2a77a866187aec626"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-length in the downstream part of the channel  <a href="classFSICollapsibleChannelProblem.html#a0964686847cc64f2a77a866187aec626">More...</a><br /></td></tr>
+<tr class="separator:a0964686847cc64f2a77a866187aec626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb381270408cea69b7290ff2aeb5928f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#adb381270408cea69b7290ff2aeb5928f">Ly</a></td></tr>
+<tr class="memdesc:adb381270408cea69b7290ff2aeb5928f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transverse length.  <a href="classFSICollapsibleChannelProblem.html#adb381270408cea69b7290ff2aeb5928f">More...</a><br /></td></tr>
+<tr class="separator:adb381270408cea69b7290ff2aeb5928f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74c09286f4ad4242c37b6ea16c069fae"><td class="memItemLeft" align="right" valign="top">AlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a74c09286f4ad4242c37b6ea16c069fae">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:a74c09286f4ad4242c37b6ea16c069fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "bulk" mesh.  <a href="classFSICollapsibleChannelProblem.html#a74c09286f4ad4242c37b6ea16c069fae">More...</a><br /></td></tr>
+<tr class="separator:a74c09286f4ad4242c37b6ea16c069fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf74b392297104d704004124b8dfc7bb"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#acf74b392297104d704004124b8dfc7bb">Displ_control_mesh_pt</a></td></tr>
+<tr class="memdesc:acf74b392297104d704004124b8dfc7bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the mesh that contains the displacement control element.  <a href="classFSICollapsibleChannelProblem.html#acf74b392297104d704004124b8dfc7bb">More...</a><br /></td></tr>
+<tr class="separator:acf74b392297104d704004124b8dfc7bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc33ee9a23af728b98ed73623b65e1ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#afc33ee9a23af728b98ed73623b65e1ac">Displ_control</a></td></tr>
+<tr class="memdesc:afc33ee9a23af728b98ed73623b65e1ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use displacement control?  <a href="classFSICollapsibleChannelProblem.html#afc33ee9a23af728b98ed73623b65e1ac">More...</a><br /></td></tr>
+<tr class="separator:afc33ee9a23af728b98ed73623b65e1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a071b5cc9f660fdaccf1bf1e256320bfa"><td class="memItemLeft" align="right" valign="top">OneDLagrangianMesh&lt; FSIHermiteBeamElement &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a071b5cc9f660fdaccf1bf1e256320bfa">Wall_mesh_pt</a></td></tr>
+<tr class="memdesc:a071b5cc9f660fdaccf1bf1e256320bfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "wall" mesh.  <a href="classFSICollapsibleChannelProblem.html#a071b5cc9f660fdaccf1bf1e256320bfa">More...</a><br /></td></tr>
+<tr class="separator:a071b5cc9f660fdaccf1bf1e256320bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f37708b6caa6d79bff16b444c2e19ff"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a4f37708b6caa6d79bff16b444c2e19ff">Left_node_pt</a></td></tr>
+<tr class="memdesc:a4f37708b6caa6d79bff16b444c2e19ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the left control node.  <a href="classFSICollapsibleChannelProblem.html#a4f37708b6caa6d79bff16b444c2e19ff">More...</a><br /></td></tr>
+<tr class="separator:a4f37708b6caa6d79bff16b444c2e19ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ab75d4a593a35fb12d1e016ae3e41c4"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a5ab75d4a593a35fb12d1e016ae3e41c4">Right_node_pt</a></td></tr>
+<tr class="memdesc:a5ab75d4a593a35fb12d1e016ae3e41c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to right control node.  <a href="classFSICollapsibleChannelProblem.html#a5ab75d4a593a35fb12d1e016ae3e41c4">More...</a><br /></td></tr>
+<tr class="separator:a5ab75d4a593a35fb12d1e016ae3e41c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a377285ce93d55b9c6035737796da1bbf"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a377285ce93d55b9c6035737796da1bbf">Wall_node_pt</a></td></tr>
+<tr class="memdesc:a377285ce93d55b9c6035737796da1bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to control node on the wall.  <a href="classFSICollapsibleChannelProblem.html#a377285ce93d55b9c6035737796da1bbf">More...</a><br /></td></tr>
+<tr class="separator:a377285ce93d55b9c6035737796da1bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f21548c86e387a26a55062ef50ea416"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a7f21548c86e387a26a55062ef50ea416">Steady_flag</a></td></tr>
+<tr class="memdesc:a7f21548c86e387a26a55062ef50ea416"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for steady run.  <a href="classFSICollapsibleChannelProblem.html#a7f21548c86e387a26a55062ef50ea416">More...</a><br /></td></tr>
+<tr class="separator:a7f21548c86e387a26a55062ef50ea416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0af9dba0fa399669d099b67b8c6906fa"><td class="memItemLeft" align="right" valign="top">GeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a0af9dba0fa399669d099b67b8c6906fa">Ctrl_geom_obj_pt</a></td></tr>
+<tr class="separator:a0af9dba0fa399669d099b67b8c6906fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a203ee0ecb406f97e62b6e7facb8119b5"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a203ee0ecb406f97e62b6e7facb8119b5">S_displ_ctrl</a></td></tr>
+<tr class="memdesc:a203ee0ecb406f97e62b6e7facb8119b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of local coordinates of displacement control point in Ctrl_geom_obj_pt.  <a href="classFSICollapsibleChannelProblem.html#a203ee0ecb406f97e62b6e7facb8119b5">More...</a><br /></td></tr>
+<tr class="separator:a203ee0ecb406f97e62b6e7facb8119b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc8d15ea0d359e0df8a677415b77dc3"><td class="memItemLeft" align="right" valign="top">MeshAsGeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a1fc8d15ea0d359e0df8a677415b77dc3">Wall_geom_object_pt</a></td></tr>
+<tr class="memdesc:a1fc8d15ea0d359e0df8a677415b77dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to geometric object (one Lagrangian, two Eulerian coordinates) that will be built from the wall mesh.  <a href="classFSICollapsibleChannelProblem.html#a1fc8d15ea0d359e0df8a677415b77dc3">More...</a><br /></td></tr>
+<tr class="separator:a1fc8d15ea0d359e0df8a677415b77dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72b19fe66f2c9019ee2da6987a09995c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a72b19fe66f2c9019ee2da6987a09995c">Newton_iter</a></td></tr>
+<tr class="memdesc:a72b19fe66f2c9019ee2da6987a09995c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter for Newton iterations.  <a href="classFSICollapsibleChannelProblem.html#a72b19fe66f2c9019ee2da6987a09995c">More...</a><br /></td></tr>
+<tr class="separator:a72b19fe66f2c9019ee2da6987a09995c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31ea75b732e42eec45f333a26d6cb2ac"><td class="memItemLeft" align="right" valign="top">DocInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFSICollapsibleChannelProblem.html#a31ea75b732e42eec45f333a26d6cb2ac">Doc_info</a></td></tr>
+<tr class="memdesc:a31ea75b732e42eec45f333a26d6cb2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">DocInfo object.  <a href="classFSICollapsibleChannelProblem.html#a31ea75b732e42eec45f333a26d6cb2ac">More...</a><br /></td></tr>
+<tr class="separator:a31ea75b732e42eec45f333a26d6cb2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class FSICollapsibleChannelProblem&lt; ELEMENT &gt;</h3>
+
+<p>Problem class. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00314">314</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a74efdd9ed027ab0ca5cf59ec8da6b95c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74efdd9ed027ab0ca5cf59ec8da6b95c">&#9670;&nbsp;</a></span>FSICollapsibleChannelProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ncollapsible</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ndown</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>lcollapsible</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ldown</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>displ_control</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>steady_flag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: The arguments are the number of elements and the lengths of the domain. </p>
+<p>Constructor for the collapsible channel problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00483">483</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00042">Global_Physical_Variables::H</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00076">Global_Physical_Variables::load()</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00048">Global_Physical_Variables::P_ext_data_pt</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00089">Global_Physical_Variables::Q</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00036">Global_Physical_Variables::Re</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00039">Global_Physical_Variables::ReSt</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00045">Global_Physical_Variables::Sigma0</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00242">Flags::Steady_flag</a>, <a class="el" href="fsi__channel__segregated__solver_8txt_source.html#l00413">Wall_mesh_pt</a>, and <a class="el" href="fsi__chan__problem_8h_source.html#l00066">Global_Physical_Variables::Yprescr</a>.</p>
+
+</div>
+</div>
+<a id="abe33aaaae15ea3eb10885527a1d1ad9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe33aaaae15ea3eb10885527a1d1ad9a">&#9670;&nbsp;</a></span>~FSICollapsibleChannelProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00333">333</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a49780267c05f4c6ecbed11bfc6b9956b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49780267c05f4c6ecbed11bfc6b9956b">&#9670;&nbsp;</a></span>actions_after_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00371">371</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="ace5343d2e6e6e0480d077d4f17365288"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace5343d2e6e6e0480d077d4f17365288">&#9670;&nbsp;</a></span>actions_before_newton_convergence_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::actions_before_newton_convergence_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update before checking Newton convergence: Update the nodal positions in the fluid mesh in response to possible changes in the wall shape. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00377">377</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00433">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::Bulk_mesh_pt</a>, and <a class="el" href="fsi__chan__problem_8h_source.html#l00469">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::Newton_iter</a>.</p>
+
+</div>
+</div>
+<a id="ad10b2d12be052c6b1bc5005dc27cd229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad10b2d12be052c6b1bc5005dc27cd229">&#9670;&nbsp;</a></span>actions_before_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before solve. Reset counter for number of Newton iterations. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00365">365</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00469">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::Newton_iter</a>.</p>
+
+</div>
+</div>
+<a id="a9b461f3afef3185ea0b461714675ef8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b461f3afef3185ea0b461714675ef8f">&#9670;&nbsp;</a></span>bulk_mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AlgebraicCollapsibleChannelMesh&lt;ELEMENT&gt;* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::bulk_mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the specific bulk (fluid) mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00347">347</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00433">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::Bulk_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="a6541733e0d9e8e09bda489d6ce567ecb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6541733e0d9e8e09bda489d6ce567ecb">&#9670;&nbsp;</a></span>doc_solution_steady()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::doc_solution_steady </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>trace_file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>cpu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>niter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Doc the steady solution. </p>
+<p>Doc the solution for a steady run. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00853">853</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00048">Global_Physical_Variables::P_ext_data_pt</a>, and <a class="el" href="fsi__chan__problem_8h_source.html#l00066">Global_Physical_Variables::Yprescr</a>.</p>
+
+</div>
+</div>
+<a id="aa9c8f2c34cea9b43e1496cc63b1f496c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c8f2c34cea9b43e1496cc63b1f496c">&#9670;&nbsp;</a></span>doc_solution_unsteady()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::doc_solution_unsteady </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>trace_file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>cpu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>niter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Doc the unsteady solution. </p>
+<p>Doc the solution for an unstady run. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00914">914</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a947a11c11090b39d2bc4439fb96e36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a947a11c11090b39d2bc4439fb96e36">&#9670;&nbsp;</a></span>dump_it()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::dump_it </td>
+          <td>(</td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>dump_file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dump problem to disk to allow for restart. </p>
+<p>Dump the solution to disk to allow for restart. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00974">974</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00048">Global_Physical_Variables::P_ext_data_pt</a>, and <a class="el" href="fsi__channel__segregated__solver_8txt_source.html#l00413">Wall_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="a2ee280c8cccc90baae4b0b6744be9efe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ee280c8cccc90baae4b0b6744be9efe">&#9670;&nbsp;</a></span>restart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::restart </td>
+          <td>(</td>
+          <td class="paramtype">ifstream &amp;&#160;</td>
+          <td class="paramname"><em>restart_file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read problem for restart from specified restart file. </p>
+<p>Read solution from disk for restart. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l01016">1016</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00048">Global_Physical_Variables::P_ext_data_pt</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00062">Global_Physical_Variables::P_step</a>, and <a class="el" href="fsi__channel__segregated__solver_8txt_source.html#l00413">Wall_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="afdd6752cb134fd09ee8830158ed557b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdd6752cb134fd09ee8830158ed557b2">&#9670;&nbsp;</a></span>set_initial_condition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::set_initial_condition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply initial conditions. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l01073">1073</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00251">Flags::Restart_file_name</a>, and <a class="el" href="fsi__chan__problem_8h_source.html#l00242">Flags::Steady_flag</a>.</p>
+
+</div>
+</div>
+<a id="a299ba7d5819e7871eae7e331d1abab8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a299ba7d5819e7871eae7e331d1abab8b">&#9670;&nbsp;</a></span>steady_run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::steady_run</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Steady run. </p>
+<p>Steady run; virtual so it can be overloaded in derived problem classes </p>
+
+<p>Reimplemented in <a class="el" href="classSegregatedFSICollapsibleChannelProblem.html#a9a6b0dfeda9eb0d4c50e195768c93e37">SegregatedFSICollapsibleChannelProblem&lt; ELEMENT &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l01160">1160</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00245">Flags::Nsteps</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00048">Global_Physical_Variables::P_ext_data_pt</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00058">Global_Physical_Variables::Pmax</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00053">Global_Physical_Variables::Pmin</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00089">Global_Physical_Variables::Q</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00036">Global_Physical_Variables::Re</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00236">Flags::Resolution_factor</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00248">Flags::Run_identifier_string</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00066">Global_Physical_Variables::Yprescr</a>, and <a class="el" href="fsi__chan__problem_8h_source.html#l00071">Global_Physical_Variables::Yprescr_min</a>.</p>
+
+</div>
+</div>
+<a id="ae4f2b3abaf5e2dfc35489548d5a72edc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f2b3abaf5e2dfc35489548d5a72edc">&#9670;&nbsp;</a></span>unsteady_run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::unsteady_run </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em> = <code>0.1</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unsteady run; virtual so it can be overloaded in derived problem classes. Specify timestep or use default of 0.1. </p>
+<p>Unsteady run. Specify timestep or use default of 0.1. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l01282">1282</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00245">Flags::Nsteps</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00048">Global_Physical_Variables::P_ext_data_pt</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00058">Global_Physical_Variables::Pmax</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00089">Global_Physical_Variables::Q</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00036">Global_Physical_Variables::Re</a>, <a class="el" href="fsi__chan__problem_8h_source.html#l00236">Flags::Resolution_factor</a>, and <a class="el" href="fsi__chan__problem_8h_source.html#l00248">Flags::Run_identifier_string</a>.</p>
+
+</div>
+</div>
+<a id="ae8b71da8da82f3c52387052ce400b930"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8b71da8da82f3c52387052ce400b930">&#9670;&nbsp;</a></span>wall_mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">OneDLagrangianMesh&lt;FSIHermiteBeamElement&gt;* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::wall_mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the wall mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00357">357</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fsi__chan__problem_8h_source.html#l00442">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::Wall_mesh_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a74c09286f4ad4242c37b6ea16c069fae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74c09286f4ad4242c37b6ea16c069fae">&#9670;&nbsp;</a></span>Bulk_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AlgebraicCollapsibleChannelMesh&lt;ELEMENT&gt;* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00433">433</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__chan__problem_8h_source.html#l00377">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::actions_before_newton_convergence_check()</a>, and <a class="el" href="fsi__chan__problem_8h_source.html#l00347">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::bulk_mesh_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a0af9dba0fa399669d099b67b8c6906fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0af9dba0fa399669d099b67b8c6906fa">&#9670;&nbsp;</a></span>Ctrl_geom_obj_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObject* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Ctrl_geom_obj_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Pointer to GeomObject at which displacement control is applied (or at which wall displacement is monitored in unsteady runs) </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00458">458</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="afc33ee9a23af728b98ed73623b65e1ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc33ee9a23af728b98ed73623b65e1ac">&#9670;&nbsp;</a></span>Displ_control</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Displ_control</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use displacement control? </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00439">439</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="acf74b392297104d704004124b8dfc7bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf74b392297104d704004124b8dfc7bb">&#9670;&nbsp;</a></span>Displ_control_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Displ_control_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the mesh that contains the displacement control element. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00436">436</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a31ea75b732e42eec45f333a26d6cb2ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31ea75b732e42eec45f333a26d6cb2ac">&#9670;&nbsp;</a></span>Doc_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DocInfo <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Doc_info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>DocInfo object. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00472">472</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="ae6ce3834d06f0fb75db945a782ff0108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6ce3834d06f0fb75db945a782ff0108">&#9670;&nbsp;</a></span>Lcollapsible</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Lcollapsible</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>x-length in the collapsible part of the channel </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00424">424</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a0964686847cc64f2a77a866187aec626"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0964686847cc64f2a77a866187aec626">&#9670;&nbsp;</a></span>Ldown</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Ldown</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>x-length in the downstream part of the channel </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00427">427</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a4f37708b6caa6d79bff16b444c2e19ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f37708b6caa6d79bff16b444c2e19ff">&#9670;&nbsp;</a></span>Left_node_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Left_node_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the left control node. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00445">445</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a7b8288e57097875d247bda6201b1bfcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b8288e57097875d247bda6201b1bfcf">&#9670;&nbsp;</a></span>Lup</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Lup</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>x-length in the upstream part of the channel </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00421">421</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="adb381270408cea69b7290ff2aeb5928f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb381270408cea69b7290ff2aeb5928f">&#9670;&nbsp;</a></span>Ly</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Ly</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transverse length. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00430">430</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a3fb9656feb1c32045f4fdbd74f91258f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fb9656feb1c32045f4fdbd74f91258f">&#9670;&nbsp;</a></span>Ncollapsible</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Ncollapsible</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in the x direction in the collapsible part of the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00412">412</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a64c0aa974b39527ef22e352a4f22b156"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64c0aa974b39527ef22e352a4f22b156">&#9670;&nbsp;</a></span>Ndown</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Ndown</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in the x direction in the downstream part of the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00415">415</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a72b19fe66f2c9019ee2da6987a09995c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72b19fe66f2c9019ee2da6987a09995c">&#9670;&nbsp;</a></span>Newton_iter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Newton_iter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Counter for Newton iterations. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00469">469</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__chan__problem_8h_source.html#l00377">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::actions_before_newton_convergence_check()</a>, and <a class="el" href="fsi__chan__problem_8h_source.html#l00365">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::actions_before_newton_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a22a5ea767bf0c437b78ed4e37b7a4818"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22a5ea767bf0c437b78ed4e37b7a4818">&#9670;&nbsp;</a></span>Nup</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Nup</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in the x direction in the upstream part of the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00408">408</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a536804b714fd0033f3028ff1c6032918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a536804b714fd0033f3028ff1c6032918">&#9670;&nbsp;</a></span>Ny</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Ny</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements across the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00418">418</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a5ab75d4a593a35fb12d1e016ae3e41c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ab75d4a593a35fb12d1e016ae3e41c4">&#9670;&nbsp;</a></span>Right_node_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Right_node_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to right control node. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00448">448</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a203ee0ecb406f97e62b6e7facb8119b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a203ee0ecb406f97e62b6e7facb8119b5">&#9670;&nbsp;</a></span>S_displ_ctrl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::S_displ_ctrl</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of local coordinates of displacement control point in Ctrl_geom_obj_pt. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00462">462</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a7f21548c86e387a26a55062ef50ea416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f21548c86e387a26a55062ef50ea416">&#9670;&nbsp;</a></span>Steady_flag</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Steady_flag</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag for steady run. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00454">454</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a1fc8d15ea0d359e0df8a677415b77dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fc8d15ea0d359e0df8a677415b77dc3">&#9670;&nbsp;</a></span>Wall_geom_object_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MeshAsGeomObject* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Wall_geom_object_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to geometric object (one Lagrangian, two Eulerian coordinates) that will be built from the wall mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00466">466</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<a id="a071b5cc9f660fdaccf1bf1e256320bfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a071b5cc9f660fdaccf1bf1e256320bfa">&#9670;&nbsp;</a></span>Wall_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">OneDLagrangianMesh&lt;FSIHermiteBeamElement&gt;* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Wall_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "wall" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00442">442</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__chan__problem_8h_source.html#l00357">FSICollapsibleChannelProblem&lt; ELEMENT &gt;::wall_mesh_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a377285ce93d55b9c6035737796da1bbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a377285ce93d55b9c6035737796da1bbf">&#9670;&nbsp;</a></span>Wall_node_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node* <a class="el" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt; ELEMENT &gt;::Wall_node_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to control node on the wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="fsi__chan__problem_8h_source.html#l00451">451</a> of file <a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="fsi__chan__problem_8h_source.html">fsi_chan_problem.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:19:51
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

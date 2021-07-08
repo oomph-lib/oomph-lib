@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Solution of a Poisson problem in an &quot;elastic&quot; domain</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Solution of a Poisson problem in an "elastic" domain </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Detailed documentation to be written. Here's a plot of the result and the already fairly well documented driver code...</p>
+<div class="image">
+<img src="elastic_poisson.gif" alt=""/>
+<div class="caption">
+Adaptive solution of Poisson's equation in a fish-shaped domain for various `widths' of the domain. The update of the nodal positions in response to changes in the boundary shape is done by pseudo-elasticity. </div></div>
+ <div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">// Solve Poisson equation in deformable fish-shaped domain.</span></div>
+<div class="line"><span class="comment">// Mesh deformation is driven by pseudo-elasticity approach.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Generic oomph-lib headers</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span>  </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Poisson equations</span></div>
+<div class="line"><span class="preprocessor">#include &quot;poisson.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Solid mechanics</span></div>
+<div class="line"><span class="preprocessor">#include &quot;solid.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The fish mesh </span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/fish_mesh.h&quot;</span> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Circle as generalised element:</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="circle__as__generalised__element_8h.html">circle_as_generalised_element.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespaceoomph.html">oomph</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace for const source term in Poisson equation</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceConstSourceForPoisson.html">ConstSourceForPoisson</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Strength of source function: default value 1.0</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceConstSourceForPoisson.html#add351c5acab2561d68d1fc9ec3d5fc5e">Strength</a>=1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/// Const source function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">get_source</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; source)</div>
+<div class="line"> {</div>
+<div class="line">  source = -<a class="code" href="namespaceConstSourceForPoisson.html#add351c5acab2561d68d1fc9ec3d5fc5e">Strength</a>;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Refineable fish mesh upgraded to become a solid mesh</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classElasticFishMesh.html">ElasticFishMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> RefineableFishMesh&lt;ELEMENT&gt;, </div>
+<div class="line">                        <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor: Build underlying adaptive fish mesh and then </span></div>
+<div class="line"><span class="comment"> /// set current Eulerian coordinates to be the Lagrangian ones.</span></div>
+<div class="line"><span class="comment"> /// Pass pointer to geometric objects that specify the </span></div>
+<div class="line"><span class="comment"> /// fish&#39;s back in the &quot;current&quot; and &quot;undeformed&quot; configurations,</span></div>
+<div class="line"><span class="comment"> /// and pointer to timestepper (defaults to Static)</span></div>
+<div class="line"><span class="comment"></span> <span class="comment">// Note: FishMesh is virtual base and its constructor is automatically</span></div>
+<div class="line"> <span class="comment">// called first! --&gt; this is where we need to build the mesh;</span></div>
+<div class="line"> <span class="comment">// the constructors of the derived meshes don&#39;t call the</span></div>
+<div class="line"> <span class="comment">// base constructor again and simply add the extra functionality.</span></div>
+<div class="line"> <a class="code" href="classElasticFishMesh.html">ElasticFishMesh</a>(GeomObject* back_pt, GeomObject* undeformed_back_pt, </div>
+<div class="line">                 TimeStepper* time_stepper_pt=&amp;Mesh::Default_TimeStepper) : </div>
+<div class="line">  FishMesh&lt;ELEMENT&gt;(back_pt,time_stepper_pt), </div>
+<div class="line">  RefineableFishMesh&lt;ELEMENT&gt;(back_pt,time_stepper_pt)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Mesh has been built, adaptivity etc has been set up --&gt; </span></div>
+<div class="line">   <span class="comment">// assign the Lagrangian coordinates so that the current</span></div>
+<div class="line">   <span class="comment">// configuration becomes the stress-free initial configuration </span></div>
+<div class="line">   set_lagrangian_nodal_coordinates();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Build &quot;undeformed&quot; domain: This is a &quot;deep&quot; copy of the</span></div>
+<div class="line">   <span class="comment">// Domain that we used to create set the Eulerian coordinates</span></div>
+<div class="line">   <span class="comment">// in the initial mesh -- the original domain (accessible via </span></div>
+<div class="line">   <span class="comment">// the private member data Domain_pt) will be used to update</span></div>
+<div class="line">   <span class="comment">// the position of boundary nodes; the copy that we&#39;re</span></div>
+<div class="line">   <span class="comment">// creating here will be used to determine the Lagrangian coordinates</span></div>
+<div class="line">   <span class="comment">// of any newly created SolidNodes during mesh refinement</span></div>
+<div class="line">   <span class="keywordtype">double</span> xi_nose = this-&gt;Domain_pt-&gt;xi_nose(); </div>
+<div class="line">   <span class="keywordtype">double</span> xi_tail = this-&gt;Domain_pt-&gt;xi_tail();</div>
+<div class="line">   Undeformed_domain_pt=<span class="keyword">new</span> FishDomain(undeformed_back_pt,xi_nose,xi_tail);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over all elements and set the undeformed macro element pointer</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element=this-&gt;nelement();</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to full element type </span></div>
+<div class="line">     ELEMENT* el_pt=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(this-&gt;element_pt(e));</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Set pointer to macro element so the curvlinear boundaries</span></div>
+<div class="line">     <span class="comment">// of the undeformed mesh/domain get picked up during adaptive</span></div>
+<div class="line">     <span class="comment">// mesh refinement</span></div>
+<div class="line">     el_pt-&gt;set_undeformed_macro_elem_pt(</div>
+<div class="line">      Undeformed_domain_pt-&gt;macro_element_pt(e));</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor: Kill &quot;undeformed&quot; Domain</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> ~<a class="code" href="classElasticFishMesh.html">ElasticFishMesh</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keyword">delete</span> Undeformed_domain_pt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to &quot;undeformed&quot; Domain -- used to determine the</span></div>
+<div class="line"><span class="comment"> /// Lagrangian coordinates of any newly created SolidNodes during</span></div>
+<div class="line"><span class="comment"> /// Mesh refinement</span></div>
+<div class="line"><span class="comment"></span> Domain* Undeformed_domain_pt;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to constitutive law</span></div>
+<div class="line"><span class="comment"></span> ConstitutiveLaw* <a class="code" href="namespaceGlobal__Physical__Variables.html#a5d5f19442938130d36ee7476ae25049c">Constitutive_law_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a>=0.3;</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Solve Poisson equation on deforming fish-shaped domain.</span></div>
+<div class="line"><span class="comment">/// Mesh update via pseudo-elasticity.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classDeformableFishPoissonProblem.html">DeformableFishPoissonProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classDeformableFishPoissonProblem.html">DeformableFishPoissonProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Run simulation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> run();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Access function for the specific mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classElasticFishMesh.html">ElasticFishMesh&lt;ELEMENT&gt;</a>* mesh_pt() </div>
+<div class="line">  {<span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classElasticFishMesh.html">ElasticFishMesh&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span>(Problem::mesh_pt());} </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_newton_solve() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update before solve: We&#39;re dealing with a static problem so</span></div>
+<div class="line"><span class="comment"> /// the nodal positions before the next solve merely serve as</span></div>
+<div class="line"><span class="comment"> /// initial conditions. For meshes that are very strongly refined</span></div>
+<div class="line"><span class="comment"> /// near the boundary, the update of the displacement boundary</span></div>
+<div class="line"><span class="comment"> /// conditions (which only moves the SolidNodes *on* the boundary),</span></div>
+<div class="line"><span class="comment"> /// can lead to strongly distorted meshes. This can cause the</span></div>
+<div class="line"><span class="comment"> /// Newton method to fail --&gt; the overall method is actually more robust</span></div>
+<div class="line"><span class="comment"> /// if we use the nodal positions as determined by the Domain/MacroElement-</span></div>
+<div class="line"><span class="comment"> /// based mesh update as initial guesses. </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve()</div>
+<div class="line">  { </div>
+<div class="line">   <span class="keywordtype">bool</span> update_all_solid_nodes=<span class="keyword">true</span>;</div>
+<div class="line">   mesh_pt()-&gt;node_update(update_all_solid_nodes);</div>
+<div class="line">  }   </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update after adapt: Pin all redundant solid pressure nodes (if required)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_adapt()</div>
+<div class="line">  { </div>
+<div class="line">   <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line">   PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures(</div>
+<div class="line">    mesh_pt()-&gt;element_pt());</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Node at which the solution of the Poisson equation is documented</span></div>
+<div class="line"><span class="comment"></span> Node* Doc_node_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream Trace_file;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Geometric object/generalised element that represents the deformable </span></div>
+<div class="line"> <span class="comment">// fish back</span></div>
+<div class="line"> <a class="code" href="classoomph_1_1ElasticallySupportedRingElement.html">ElasticallySupportedRingElement</a>* Fish_back_pt;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor: </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classDeformableFishPoissonProblem.html#a383952a668f3cec16b85c6b35f437ddd">DeformableFishPoissonProblem&lt;ELEMENT&gt;::DeformableFishPoissonProblem</a>() </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set coordinates and radius for the circle that will become the fish back</span></div>
+<div class="line"> <span class="keywordtype">double</span> x_c=0.5;</div>
+<div class="line"> <span class="keywordtype">double</span> y_c=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> r_back=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build geometric object/generalised element that will become the </span></div>
+<div class="line"> <span class="comment">// deformable fish back</span></div>
+<div class="line"> Fish_back_pt=<span class="keyword">new</span> <a class="code" href="classoomph_1_1ElasticallySupportedRingElement.html">ElasticallySupportedRingElement</a>(x_c,y_c,r_back);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build geometric object/generalised that specifies the fish back in the</span></div>
+<div class="line"> <span class="comment">// undeformed configuration (basically a deep copy of the previous one)</span></div>
+<div class="line"> GeomObject* undeformed_fish_back_pt=<span class="keyword">new</span> </div>
+<div class="line">  <a class="code" href="classoomph_1_1ElasticallySupportedRingElement.html">ElasticallySupportedRingElement</a>(x_c,y_c,r_back);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build fish mesh with geometric object that specifies the deformable</span></div>
+<div class="line"> <span class="comment">// and undeformed fish back </span></div>
+<div class="line"> Problem::mesh_pt()=<span class="keyword">new</span> <a class="code" href="classElasticFishMesh.html">ElasticFishMesh&lt;ELEMENT&gt;</a>(Fish_back_pt,</div>
+<div class="line">                                                 undeformed_fish_back_pt);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Choose a node at which the solution is documented: Choose</span></div>
+<div class="line"> <span class="comment">// the central node that is shared by all four elements in</span></div>
+<div class="line"> <span class="comment">// the base mesh because it exists at all refinement levels.</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// How many nodes does element 0 have?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nnod=mesh_pt()-&gt;finite_element_pt(0)-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The central node is the last node in element 0:</span></div>
+<div class="line"> Doc_node_pt=mesh_pt()-&gt;finite_element_pt(0)-&gt;node_pt(nnod-1);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc</span></div>
+<div class="line"> cout &lt;&lt; std::endl &lt;&lt;  <span class="stringliteral">&quot;Control node is located at: &quot;</span> </div>
+<div class="line">      &lt;&lt; Doc_node_pt-&gt;x(0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Doc_node_pt-&gt;x(1) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator</span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> mesh_pt()-&gt;spatial_error_estimator_pt()=error_estimator_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Change/doc targets for mesh adaptation</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1) </div>
+<div class="line">  {</div>
+<div class="line">   mesh_pt()-&gt;max_permitted_error()=0.05;</div>
+<div class="line">   mesh_pt()-&gt;min_permitted_error()=0.005;</div>
+<div class="line">  }</div>
+<div class="line"> mesh_pt()-&gt;doc_adaptivity_targets(cout);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify BC/source fct for Poisson problem:</span></div>
+<div class="line"> <span class="comment">//-------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the Poisson boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here. </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0); </div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set homogeneous boundary conditions for the Poisson equation </span></div>
+<div class="line"> <span class="comment">// on all boundaries </span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Loop over the nodes on boundary</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(0,0.0);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Loop over elements and set pointers to source function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   el_pt-&gt;source_fct_pt() = &amp;<a class="code" href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">ConstSourceForPoisson::get_source</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify BC/source fct etc for (pseudo-)Solid problem</span></div>
+<div class="line"> <span class="comment">//-----------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin all nodal positions</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin_position(i); </div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the elements in the mesh to set Solid parameters/function pointers</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   el_pt-&gt;constitutive_law_pt() =</div>
+<div class="line">    <a class="code" href="namespaceGlobal__Physical__Variables.html#a5d5f19442938130d36ee7476ae25049c">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line">     </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line"> PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures(</div>
+<div class="line">  mesh_pt()-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Attach the boundary conditions to the mesh</span></div>
+<div class="line"> cout &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Refine the problem uniformly (this automatically passes the</span></div>
+<div class="line"> <span class="comment">// function pointers/parameters to the finer elements</span></div>
+<div class="line"> refine_uniformly();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The non-pinned positions of the newly SolidNodes will have been</span></div>
+<div class="line"> <span class="comment">// determined by interpolation. Update all solid nodes based on </span></div>
+<div class="line"> <span class="comment">// the Mesh&#39;s Domain/MacroElement representation.</span></div>
+<div class="line"> <span class="keywordtype">bool</span> update_all_solid_nodes=<span class="keyword">true</span>;</div>
+<div class="line"> mesh_pt()-&gt;node_update(update_all_solid_nodes);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now set the Eulerian equal to the Lagrangian coordinates</span></div>
+<div class="line"> mesh_pt()-&gt;set_lagrangian_nodal_coordinates();</div>
+<div class="line"> </div>
+<div class="line">} </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classDeformableFishPoissonProblem.html#aee9b59f35d1ae98cda29fba0c01b226a">DeformableFishPoissonProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts = 5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Call output function for all elements</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write vertical position of the fish back, and solution at </span></div>
+<div class="line"> <span class="comment">// control node to trace file</span></div>
+<div class="line"> Trace_file </div>
+<div class="line">  &lt;&lt; <span class="keyword">static_cast&lt;</span>Circle*<span class="keyword">&gt;</span>(mesh_pt()-&gt;fish_back_pt())-&gt;y_c()</div>
+<div class="line">  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Doc_node_pt-&gt;value(0) &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Run the problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classDeformableFishPoissonProblem.html#a0ef0e4ab464ab41a6f0b7e8a74a9c8a5">DeformableFishPoissonProblem&lt;ELEMENT&gt;::run</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Step number</span></div>
+<div class="line"> doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;VARIABLES=\&quot;y&lt;sub&gt;circle&lt;/sub&gt;\&quot;,\&quot;u&lt;sub&gt;control&lt;/sub&gt;\&quot;&quot;</span></div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Parameter incrementation</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=5; </div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Solve the problem with Newton&#39;s method, allowing for up to 2</span></div>
+<div class="line">   <span class="comment">//rounds of adaptation</span></div>
+<div class="line">   newton_solve(2);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   doc_solution(doc_info);</div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Increment width of fish domain</span></div>
+<div class="line">   Fish_back_pt-&gt;y_c()+=0.03;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver for simple elastic problem.</span></div>
+<div class="line"><span class="comment">/// If there are any command line arguments, we regard this as a </span></div>
+<div class="line"><span class="comment">/// validation run and perform only a single step.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="algebraic__free__boundary__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set physical parameters</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a> = 0.4; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define a constitutive law (based on strain energy function)</span></div>
+<div class="line">  <a class="code" href="namespaceGlobal__Physical__Variables.html#a5d5f19442938130d36ee7476ae25049c">Global_Physical_Variables::Constitutive_law_pt</a> = </div>
+<div class="line">   <span class="keyword">new</span> GeneralisedHookean(&amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Set up the problem: Choose a hybrid element that combines the</span></div>
+<div class="line">  <span class="comment">// 3x3 node refineable quad Poisson element with a displacement-based</span></div>
+<div class="line">  <span class="comment">// solid-mechanics element (for the pseudo-elastic mesh update in response</span></div>
+<div class="line">  <span class="comment">// to changes in the boundary shape)</span></div>
+<div class="line">  <a class="code" href="classDeformableFishPoissonProblem.html">DeformableFishPoissonProblem</a>&lt;</div>
+<div class="line">   RefineablePseudoSolidNodeUpdateElement&lt;RefineableQPoissonElement&lt;2,3&gt;,</div>
+<div class="line">   RefineableQPVDElement&lt;2,3&gt;  &gt; </div>
+<div class="line">                              &gt; problem;</div>
+<div class="line">  </div>
+<div class="line">  problem.<a class="code" href="classDeformableFishPoissonProblem.html#a0ef0e4ab464ab41a6f0b7e8a74a9c8a5">run</a>(); </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+</div><!-- fragment --><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassDeformableFishPoissonProblem_html_aee9b59f35d1ae98cda29fba0c01b226a"><div class="ttname"><a href="classDeformableFishPoissonProblem.html#aee9b59f35d1ae98cda29fba0c01b226a">DeformableFishPoissonProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__mesh__update_8cc_source.html#l00388">elastic_mesh_update.cc:388</a></div></div>
+<div class="ttc" id="anamespaceConstSourceForPoisson_html"><div class="ttname"><a href="namespaceConstSourceForPoisson.html">ConstSourceForPoisson</a></div><div class="ttdoc">Namespace for const source term in Poisson equation.</div><div class="ttdef"><b>Definition:</b> <a href="algebraic__free__boundary__poisson_8cc_source.html#l00055">algebraic_free_boundary_poisson.cc:55</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a5d5f19442938130d36ee7476ae25049c"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a5d5f19442938130d36ee7476ae25049c">Global_Physical_Variables::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">Pointer to constitutive law.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__mesh__update_8cc_source.html#l00158">elastic_mesh_update.cc:158</a></div></div>
+<div class="ttc" id="aalgebraic__free__boundary__poisson_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="algebraic__free__boundary__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="algebraic__free__boundary__poisson_8cc_source.html#l00558">algebraic_free_boundary_poisson.cc:558</a></div></div>
+<div class="ttc" id="anamespaceConstSourceForPoisson_html_add351c5acab2561d68d1fc9ec3d5fc5e"><div class="ttname"><a href="namespaceConstSourceForPoisson.html#add351c5acab2561d68d1fc9ec3d5fc5e">ConstSourceForPoisson::Strength</a></div><div class="ttdeci">double Strength</div><div class="ttdoc">Strength of source function: default value 1.0.</div><div class="ttdef"><b>Definition:</b> <a href="algebraic__free__boundary__poisson_8cc_source.html#l00058">algebraic_free_boundary_poisson.cc:58</a></div></div>
+<div class="ttc" id="aclassDeformableFishPoissonProblem_html_a0ef0e4ab464ab41a6f0b7e8a74a9c8a5"><div class="ttname"><a href="classDeformableFishPoissonProblem.html#a0ef0e4ab464ab41a6f0b7e8a74a9c8a5">DeformableFishPoissonProblem::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run simulation.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__mesh__update_8cc_source.html#l00417">elastic_mesh_update.cc:417</a></div></div>
+<div class="ttc" id="aclassElasticFishMesh_html"><div class="ttname"><a href="classElasticFishMesh.html">ElasticFishMesh</a></div><div class="ttdoc">Refineable fish mesh upgraded to become a solid mesh.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__mesh__update_8cc_source.html#l00075">elastic_mesh_update.cc:75</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson's ratio.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__mesh__update_8cc_source.html#l00161">elastic_mesh_update.cc:161</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition:</b> <a href="circle_8h_source.html#l00033">circle.h:33</a></div></div>
+<div class="ttc" id="acircle__as__generalised__element_8h_html"><div class="ttname"><a href="circle__as__generalised__element_8h.html">circle_as_generalised_element.h</a></div></div>
+<div class="ttc" id="aclassDeformableFishPoissonProblem_html_a383952a668f3cec16b85c6b35f437ddd"><div class="ttname"><a href="classDeformableFishPoissonProblem.html#a383952a668f3cec16b85c6b35f437ddd">DeformableFishPoissonProblem::DeformableFishPoissonProblem</a></div><div class="ttdeci">DeformableFishPoissonProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition:</b> <a href="elastic__mesh__update_8cc_source.html#l00243">elastic_mesh_update.cc:243</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__mesh__update_8cc_source.html#l00155">elastic_mesh_update.cc:155</a></div></div>
+<div class="ttc" id="aclassDeformableFishPoissonProblem_html"><div class="ttname"><a href="classDeformableFishPoissonProblem.html">DeformableFishPoissonProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="elastic__mesh__update_8cc_source.html#l00177">elastic_mesh_update.cc:177</a></div></div>
+<div class="ttc" id="anamespaceConstSourceForPoisson_html_a40ef79083874b58ed42b4df2ca0f4c10"><div class="ttname"><a href="namespaceConstSourceForPoisson.html#a40ef79083874b58ed42b4df2ca0f4c10">ConstSourceForPoisson::get_source</a></div><div class="ttdeci">void get_source(const Vector&lt; double &gt; &amp;x, double &amp;source)</div><div class="ttdoc">Const source function.</div><div class="ttdef"><b>Definition:</b> <a href="algebraic__free__boundary__poisson_8cc_source.html#l00061">algebraic_free_boundary_poisson.cc:61</a></div></div>
+<div class="ttc" id="aclassoomph_1_1ElasticallySupportedRingElement_html"><div class="ttname"><a href="classoomph_1_1ElasticallySupportedRingElement.html">oomph::ElasticallySupportedRingElement</a></div><div class="ttdoc">GeneralCircle &quot;upgraded&quot; to a GeneralisedElement: Circular ring whose position is given by.</div><div class="ttdef"><b>Definition:</b> <a href="circle__as__generalised__element_8h_source.html#l00055">circle_as_generalised_element.h:55</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:18:21
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,400 @@
+\hypertarget{classoomph_1_1PeriodicOrbitEquations}{}\doxysection{oomph\+::Periodic\+Orbit\+Equations Class Reference}
+\label{classoomph_1_1PeriodicOrbitEquations}\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+
+
+{\ttfamily \#include $<$periodic\+\_\+orbit\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Periodic\+Orbit\+Equations\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.489097cm]{classoomph_1_1PeriodicOrbitEquations}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a75cb0bc88ecc1c76756f2da7910a2c06}{Periodic\+Orbit\+Equations}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a18dc89c632263d9cbec8c14fefda563b}{Periodic\+Orbit\+Equations}} (const \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations}{Periodic\+Orbit\+Equations}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a3c9cba05d2827927a61e5e0d742b94a7}{omega\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_ae301cd215d5c6aff365fd077ff8055de}{omega}} ()
+\begin{DoxyCompactList}\small\item\em Return the frequency. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_aaed37b9539f2f77d642a18fdd1e13e88}{set\+\_\+ntstorage}} (const unsigned \&n\+\_\+tstorage)
+\begin{DoxyCompactList}\small\item\em Set the total number of time storage values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Time}{Time}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a2886a97c72b03dfd68aeb9f8a5490b4f}{time\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Retun the pointer to the global time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Time}{Time}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a0af65d581d0e63b82fea763203312c1a}{time\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Return the pointer to the global time (const version) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a75baee083d554768bd75135196ab26c5}{time}} () const
+\begin{DoxyCompactList}\small\item\em Return the global time, accessed via the time pointer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a3b1aca3d26cf545636199b830a375b04}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+integrated\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&assembly\+\_\+handler\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector (wrapper) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a1b818facd1cf315a97176daaa4bc4ee2}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+integrated\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&assembly\+\_\+handler\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a117883e07ed35569cd396deb2c5bba97}{orbit\+\_\+output}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a8601a20947d15aa0c1f55ee0b654b71f}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit}} (\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&assembly\+\_\+handler\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+\begin{DoxyCompactList}\small\item\em The routine that actually does all the work! \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a253f5b0748b61c8f68d030b861ccd025}{set\+\_\+timestepper\+\_\+weights}} (const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, const \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidt)
+\begin{DoxyCompactList}\small\item\em Set the timestepper weights. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a745c25bf4dc333322bc9b4c1841ec11e}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+orbit}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdt) const =0
+\begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; return Jacobian of mapping. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a2bf0f39d52d1416242a7f618c2ece5ca}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+orbit}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdt) const =0
+\begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a15f995392ba77c8c664c22df656efb60}{Ntstorage}}
+\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a045a3ed37f016aeb55348c0703eacdbc}{Omega\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classoomph_1_1Time}{Time}} $\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations_a015c732c43b83babe169d1ea3342fd66}{Time\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to global time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 176 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a75cb0bc88ecc1c76756f2da7910a2c06}\label{classoomph_1_1PeriodicOrbitEquations_a75cb0bc88ecc1c76756f2da7910a2c06}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!PeriodicOrbitEquations@{PeriodicOrbitEquations}}
+\index{PeriodicOrbitEquations@{PeriodicOrbitEquations}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{PeriodicOrbitEquations()}{PeriodicOrbitEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Periodic\+Orbit\+Equations\+::\+Periodic\+Orbit\+Equations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 191 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a18dc89c632263d9cbec8c14fefda563b}\label{classoomph_1_1PeriodicOrbitEquations_a18dc89c632263d9cbec8c14fefda563b}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!PeriodicOrbitEquations@{PeriodicOrbitEquations}}
+\index{PeriodicOrbitEquations@{PeriodicOrbitEquations}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{PeriodicOrbitEquations()}{PeriodicOrbitEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Periodic\+Orbit\+Equations\+::\+Periodic\+Orbit\+Equations (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations}{Periodic\+Orbit\+Equations}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 194 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a2bf0f39d52d1416242a7f618c2ece5ca}\label{classoomph_1_1PeriodicOrbitEquations_a2bf0f39d52d1416242a7f618c2ece5ca}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!dshape\_and\_dtest\_eulerian\_at\_knot\_orbit@{dshape\_and\_dtest\_eulerian\_at\_knot\_orbit}}
+\index{dshape\_and\_dtest\_eulerian\_at\_knot\_orbit@{dshape\_and\_dtest\_eulerian\_at\_knot\_orbit}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_orbit()}{dshape\_and\_dtest\_eulerian\_at\_knot\_orbit()}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Periodic\+Orbit\+Equations\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+orbit (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a0468d601cfa2cda0a7fc3312575bb252}{oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a745c25bf4dc333322bc9b4c1841ec11e}\label{classoomph_1_1PeriodicOrbitEquations_a745c25bf4dc333322bc9b4c1841ec11e}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!dshape\_and\_dtest\_eulerian\_orbit@{dshape\_and\_dtest\_eulerian\_orbit}}
+\index{dshape\_and\_dtest\_eulerian\_orbit@{dshape\_and\_dtest\_eulerian\_orbit}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_orbit()}{dshape\_and\_dtest\_eulerian\_orbit()}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Periodic\+Orbit\+Equations\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+orbit (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; return Jacobian of mapping. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a09b5fc5cee00d470952242dfea75de69}{oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a1b818facd1cf315a97176daaa4bc4ee2}\label{classoomph_1_1PeriodicOrbitEquations_a1b818facd1cf315a97176daaa4bc4ee2}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!fill\_in\_contribution\_to\_integrated\_jacobian@{fill\_in\_contribution\_to\_integrated\_jacobian}}
+\index{fill\_in\_contribution\_to\_integrated\_jacobian@{fill\_in\_contribution\_to\_integrated\_jacobian}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_integrated\_jacobian()}{fill\_in\_contribution\_to\_integrated\_jacobian()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+integrated\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&}]{assembly\+\_\+handler\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Add the element\textquotesingle{}s contribution to its residual vector and element Jacobian matrix (wrapper) 
+
+Definition at line 247 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a3b1aca3d26cf545636199b830a375b04}\label{classoomph_1_1PeriodicOrbitEquations_a3b1aca3d26cf545636199b830a375b04}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!fill\_in\_contribution\_to\_integrated\_residuals@{fill\_in\_contribution\_to\_integrated\_residuals}}
+\index{fill\_in\_contribution\_to\_integrated\_residuals@{fill\_in\_contribution\_to\_integrated\_residuals}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_integrated\_residuals()}{fill\_in\_contribution\_to\_integrated\_residuals()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+integrated\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&}]{assembly\+\_\+handler\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector (wrapper) 
+
+
+
+Definition at line 233 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a8601a20947d15aa0c1f55ee0b654b71f}\label{classoomph_1_1PeriodicOrbitEquations_a8601a20947d15aa0c1f55ee0b654b71f}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!fill\_in\_generic\_residual\_contribution\_orbit@{fill\_in\_generic\_residual\_contribution\_orbit}}
+\index{fill\_in\_generic\_residual\_contribution\_orbit@{fill\_in\_generic\_residual\_contribution\_orbit}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_orbit()}{fill\_in\_generic\_residual\_contribution\_orbit()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&}]{assembly\+\_\+handler\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The routine that actually does all the work! 
+
+
+
+Definition at line 78 of file periodic\+\_\+orbit\+\_\+handler.\+cc.
+
+
+
+References dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+orbit(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base\+::get\+\_\+dofs\+\_\+for\+\_\+element(), oomph\+::\+Periodic\+Orbit\+Base\+Element\+::get\+\_\+inner\+\_\+product\+\_\+matrix(), oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), oomph\+::\+Periodic\+Orbit\+Base\+Element\+::get\+\_\+non\+\_\+external\+\_\+ddofs\+\_\+dt(), oomph\+::\+Periodic\+Orbit\+Base\+Element\+::get\+\_\+non\+\_\+external\+\_\+dofs(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), Ntstorage, oomph\+::\+Integral\+::nweight(), omega(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), residuals(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base\+::set\+\_\+dofs\+\_\+for\+\_\+element(), set\+\_\+timestepper\+\_\+weights(), oomph\+::\+Time\+::time(), time\+\_\+pt(), u(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+
+
+
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+integrated\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+integrated\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_ae301cd215d5c6aff365fd077ff8055de}\label{classoomph_1_1PeriodicOrbitEquations_ae301cd215d5c6aff365fd077ff8055de}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!omega@{omega}}
+\index{omega@{omega}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{omega()}{omega()}}
+{\footnotesize\ttfamily double oomph\+::\+Periodic\+Orbit\+Equations\+::omega (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the frequency. 
+
+
+
+Definition at line 213 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References Omega\+\_\+pt.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit(), orbit\+\_\+output(), and set\+\_\+timestepper\+\_\+weights().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a3c9cba05d2827927a61e5e0d742b94a7}\label{classoomph_1_1PeriodicOrbitEquations_a3c9cba05d2827927a61e5e0d742b94a7}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!omega\_pt@{omega\_pt}}
+\index{omega\_pt@{omega\_pt}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{omega\_pt()}{omega\_pt()}}
+{\footnotesize\ttfamily double$\ast$ \& oomph\+::\+Periodic\+Orbit\+Equations\+::omega\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Set the pointer to the frequency 
+
+Definition at line 210 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References Omega\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a117883e07ed35569cd396deb2c5bba97}\label{classoomph_1_1PeriodicOrbitEquations_a117883e07ed35569cd396deb2c5bba97}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!orbit\_output@{orbit\_output}}
+\index{orbit\_output@{orbit\_output}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{orbit\_output()}{orbit\_output()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Equations\+::orbit\+\_\+output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})}
+
+
+
+Definition at line 31 of file periodic\+\_\+orbit\+\_\+handler.\+cc.
+
+
+
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), i, oomph\+::\+Finite\+Element\+::nnode(), omega(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), s, set\+\_\+timestepper\+\_\+weights(), oomph\+::\+Periodic\+Orbit\+Base\+Element\+::spacetime\+\_\+output(), oomph\+::\+Time\+::time(), and time\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_aaed37b9539f2f77d642a18fdd1e13e88}\label{classoomph_1_1PeriodicOrbitEquations_aaed37b9539f2f77d642a18fdd1e13e88}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!set\_ntstorage@{set\_ntstorage}}
+\index{set\_ntstorage@{set\_ntstorage}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{set\_ntstorage()}{set\_ntstorage()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Equations\+::set\+\_\+ntstorage (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+tstorage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the total number of time storage values. 
+
+
+
+Definition at line 216 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References Ntstorage.
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a253f5b0748b61c8f68d030b861ccd025}\label{classoomph_1_1PeriodicOrbitEquations_a253f5b0748b61c8f68d030b861ccd025}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!set\_timestepper\_weights@{set\_timestepper\_weights}}
+\index{set\_timestepper\_weights@{set\_timestepper\_weights}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{set\_timestepper\_weights()}{set\_timestepper\_weights()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Equations\+::set\+\_\+timestepper\+\_\+weights (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Set the timestepper weights. 
+
+
+
+Definition at line 275 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Time\+Stepper\+::ntstorage(), omega(), oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Time\+Stepper\+::\+Weight.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit(), and orbit\+\_\+output().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a75baee083d554768bd75135196ab26c5}\label{classoomph_1_1PeriodicOrbitEquations_a75baee083d554768bd75135196ab26c5}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!time@{time}}
+\index{time@{time}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{time()}{time()}}
+{\footnotesize\ttfamily double oomph\+::\+Periodic\+Orbit\+Equations\+::time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the global time, accessed via the time pointer. 
+
+
+
+Definition at line 225 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Time\+::time(), and Time\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a2886a97c72b03dfd68aeb9f8a5490b4f}\label{classoomph_1_1PeriodicOrbitEquations_a2886a97c72b03dfd68aeb9f8a5490b4f}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!time\_pt@{time\_pt}}
+\index{time\_pt@{time\_pt}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{time\_pt()}{time\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Time}{Time}}$\ast$ \& oomph\+::\+Periodic\+Orbit\+Equations\+::time\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retun the pointer to the global time. 
+
+
+
+Definition at line 219 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References Time\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit(), orbit\+\_\+output(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a0af65d581d0e63b82fea763203312c1a}\label{classoomph_1_1PeriodicOrbitEquations_a0af65d581d0e63b82fea763203312c1a}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!time\_pt@{time\_pt}}
+\index{time\_pt@{time\_pt}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{time\_pt()}{time\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Time}{Time}}$\ast$ const \& oomph\+::\+Periodic\+Orbit\+Equations\+::time\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the global time (const version) 
+
+
+
+Definition at line 222 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References Time\+\_\+pt.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a15f995392ba77c8c664c22df656efb60}\label{classoomph_1_1PeriodicOrbitEquations_a15f995392ba77c8c664c22df656efb60}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!Ntstorage@{Ntstorage}}
+\index{Ntstorage@{Ntstorage}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{Ntstorage}{Ntstorage}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Periodic\+Orbit\+Equations\+::\+Ntstorage\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 179 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit(), and set\+\_\+ntstorage().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a045a3ed37f016aeb55348c0703eacdbc}\label{classoomph_1_1PeriodicOrbitEquations_a045a3ed37f016aeb55348c0703eacdbc}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!Omega\_pt@{Omega\_pt}}
+\index{Omega\_pt@{Omega\_pt}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{Omega\_pt}{Omega\_pt}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Periodic\+Orbit\+Equations\+::\+Omega\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 182 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+Referenced by omega(), and omega\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitEquations_a015c732c43b83babe169d1ea3342fd66}\label{classoomph_1_1PeriodicOrbitEquations_a015c732c43b83babe169d1ea3342fd66}} 
+\index{oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}!Time\_pt@{Time\_pt}}
+\index{Time\_pt@{Time\_pt}!oomph::PeriodicOrbitEquations@{oomph::PeriodicOrbitEquations}}
+\doxysubsubsection{\texorpdfstring{Time\_pt}{Time\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Time}{Time}}$\ast$ oomph\+::\+Periodic\+Orbit\+Equations\+::\+Time\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to global time. 
+
+
+
+Definition at line 185 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+Referenced by time(), and time\+\_\+pt().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{periodic__orbit__handler_8h}{periodic\+\_\+orbit\+\_\+handler.\+h}}\item 
+\mbox{\hyperlink{periodic__orbit__handler_8cc}{periodic\+\_\+orbit\+\_\+handler.\+cc}}\end{DoxyCompactItemize}

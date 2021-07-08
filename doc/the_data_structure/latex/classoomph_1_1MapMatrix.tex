@@ -1,0 +1,246 @@
+\hypertarget{classoomph_1_1MapMatrix}{}\doxysection{oomph\+::Map\+Matrix$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ Class Template Reference}
+\label{classoomph_1_1MapMatrix}\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+
+
+{\ttfamily \#include $<$map\+\_\+matrix.\+h$>$}
+
+Inheritance diagram for oomph\+::Map\+Matrix$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MapMatrix}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::map$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \mbox{\hyperlink{classoomph_1_1MapMatrix_a9514409eb8ed5c6c3f3ceaa3d51e7eae}{Inner\+Map}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+typedef Inner\+Map\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrix_a23ece77bd36f3cdecf83c5ef7d490608}{Inner\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+typedef Inner\+Map\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrix_ac3738b797386c7ad5dbe170d3558ace9}{Const\+Inner\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+typedef std\+::map$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, std\+::map$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1MapMatrix_af73388510565fa9af6b2946d23bd7709}{Outer\+Map}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+typedef Outer\+Map\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrix_a96c70b7ef6e89440c40648a6be9e4216}{Outer\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+typedef Outer\+Map\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrix_a795543d1b91f719b845b7588f7644eb3}{Const\+Outer\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MapMatrix_a52ace9b2ef78f96cebbe3b6e2173a87c}{Map\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default (empty) constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MapMatrix_ac58797d44964ccff957077b74076c231}{Map\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \&map\+\_\+mat)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MapMatrix_ad28a61f99589c46468dada134650857d}{operator=}} (const \mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE, class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE$>$\newline
+class oomph\+::\+Map\+Matrix$<$ K\+E\+Y\+\_\+\+T\+Y\+P\+E, V\+A\+L\+U\+E\+\_\+\+T\+Y\+P\+E $>$}
+
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}} is a generalised, S\+T\+L-\/map-\/based, sparse(-\/ish) matrix class.
+
+The matrix is indexed by indices of type K\+E\+Y\+\_\+\+T\+Y\+PE and has entries of type V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE. It is a specialisation of the class \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{Map\+Matrix\+Mixed}}. Please implement future functions in that class.
+
+Careful\+: If a zero entry is referenced then it is created in memory. Therefore this isn\textquotesingle{}t really a practical sparse matrix scheme. Do not loop over `all' possible indices as even looking at them will inflate the matrix until it occupies as much space as a full one -- use (modification of) output routine to retrieve all nonzero entries.
+
+However, this is not a serious restriction, as the main purpose of this class is to allow non-\/integer indices.
+
+Example of usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \textcolor{comment}{// Assume we have a Vector of pointers to objects:}}
+\DoxyCodeLine{ Vector<Rubbish*> object\_pt;}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ [...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Number of objects}}
+\DoxyCodeLine{ \textcolor{keywordtype}{int} nentry=object\_pt.size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Use the pointers to the objects as indices }}
+\DoxyCodeLine{ \textcolor{comment}{// in a MapMatrix whose entries are of type int}}
+\DoxyCodeLine{ MapMatrix<Rubbish*,int> like\_a\_matrix;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}=1;\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}<nentry;\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=1;j<nentry;j++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{keywordtype}{int} number=100*\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}+j;}
+\DoxyCodeLine{     like\_a\_matrix(object\_pt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}],object\_pt[j])=number;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"Matrix has nnz() "} << like\_a\_matrix.nnz() << }
+\DoxyCodeLine{         \textcolor{stringliteral}{" and size() "} << like\_a\_matrix.size() << std::endl; }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n\(\backslash\)n Here are the nonzero entries: i, j, a(i,j)\(\backslash\)n"};}
+\DoxyCodeLine{}
+\DoxyCodeLine{ like\_a\_matrix.output(\mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Can be used like a normal matrix:}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{//Add to existing entry}}
+\DoxyCodeLine{ like\_a\_matrix(object\_pt[1],object\_pt[2])+=13;}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Add to non-\/existing entry}}
+\DoxyCodeLine{ Rubbish* temp\_pt=\textcolor{keyword}{new} Rubbish(20);}
+\DoxyCodeLine{ like\_a\_matrix(object\_pt[1],temp\_pt)+=13;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}} << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n\(\backslash\)n Here are the nonzero entries: i, j, a(i,j)\(\backslash\)n"};}
+\DoxyCodeLine{like\_a\_matrix.output(\mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}});}
+\end{DoxyCode}
+ 
+
+Definition at line 516 of file map\+\_\+matrix.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classoomph_1_1MapMatrix_ac3738b797386c7ad5dbe170d3558ace9}\label{classoomph_1_1MapMatrix_ac3738b797386c7ad5dbe170d3558ace9}} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!ConstInnerIt@{ConstInnerIt}}
+\index{ConstInnerIt@{ConstInnerIt}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{ConstInnerIt}{ConstInnerIt}}
+{\footnotesize\ttfamily template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE , class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \\
+typedef Inner\+Map\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+::\mbox{\hyperlink{classoomph_1_1MapMatrix_ac3738b797386c7ad5dbe170d3558ace9}{Const\+Inner\+It}}}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line 531 of file map\+\_\+matrix.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MapMatrix_a795543d1b91f719b845b7588f7644eb3}\label{classoomph_1_1MapMatrix_a795543d1b91f719b845b7588f7644eb3}} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!ConstOuterIt@{ConstOuterIt}}
+\index{ConstOuterIt@{ConstOuterIt}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{ConstOuterIt}{ConstOuterIt}}
+{\footnotesize\ttfamily template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE , class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \\
+typedef Outer\+Map\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+::\mbox{\hyperlink{classoomph_1_1MapMatrix_a795543d1b91f719b845b7588f7644eb3}{Const\+Outer\+It}}}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line 540 of file map\+\_\+matrix.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MapMatrix_a23ece77bd36f3cdecf83c5ef7d490608}\label{classoomph_1_1MapMatrix_a23ece77bd36f3cdecf83c5ef7d490608}} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!InnerIt@{InnerIt}}
+\index{InnerIt@{InnerIt}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{InnerIt}{InnerIt}}
+{\footnotesize\ttfamily template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE , class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \\
+typedef Inner\+Map\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+::\mbox{\hyperlink{classoomph_1_1MapMatrix_a23ece77bd36f3cdecf83c5ef7d490608}{Inner\+It}}}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line 528 of file map\+\_\+matrix.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MapMatrix_a9514409eb8ed5c6c3f3ceaa3d51e7eae}\label{classoomph_1_1MapMatrix_a9514409eb8ed5c6c3f3ceaa3d51e7eae}} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!InnerMap@{InnerMap}}
+\index{InnerMap@{InnerMap}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{InnerMap}{InnerMap}}
+{\footnotesize\ttfamily template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE , class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \\
+typedef std\+::map$<$K\+E\+Y\+\_\+\+T\+Y\+PE,V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE$>$ \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+::\mbox{\hyperlink{classoomph_1_1MapMatrix_a9514409eb8ed5c6c3f3ceaa3d51e7eae}{Inner\+Map}}}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line 522 of file map\+\_\+matrix.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MapMatrix_a96c70b7ef6e89440c40648a6be9e4216}\label{classoomph_1_1MapMatrix_a96c70b7ef6e89440c40648a6be9e4216}} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!OuterIt@{OuterIt}}
+\index{OuterIt@{OuterIt}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{OuterIt}{OuterIt}}
+{\footnotesize\ttfamily template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE , class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \\
+typedef Outer\+Map\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+::\mbox{\hyperlink{classoomph_1_1MapMatrix_a96c70b7ef6e89440c40648a6be9e4216}{Outer\+It}}}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line 537 of file map\+\_\+matrix.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MapMatrix_af73388510565fa9af6b2946d23bd7709}\label{classoomph_1_1MapMatrix_af73388510565fa9af6b2946d23bd7709}} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!OuterMap@{OuterMap}}
+\index{OuterMap@{OuterMap}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{OuterMap}{OuterMap}}
+{\footnotesize\ttfamily template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE , class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \\
+typedef std\+::map$<$K\+E\+Y\+\_\+\+T\+Y\+PE,std\+::map$<$K\+E\+Y\+\_\+\+T\+Y\+PE,V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE$>$$\ast$$>$ \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+::\mbox{\hyperlink{classoomph_1_1MapMatrix_af73388510565fa9af6b2946d23bd7709}{Outer\+Map}}}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line 534 of file map\+\_\+matrix.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1MapMatrix_a52ace9b2ef78f96cebbe3b6e2173a87c}\label{classoomph_1_1MapMatrix_a52ace9b2ef78f96cebbe3b6e2173a87c}} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!MapMatrix@{MapMatrix}}
+\index{MapMatrix@{MapMatrix}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{MapMatrix()}{MapMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE , class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \\
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+::\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default (empty) constructor. 
+
+
+
+Definition at line 522 of file map\+\_\+matrix.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1MapMatrix_ac58797d44964ccff957077b74076c231}\label{classoomph_1_1MapMatrix_ac58797d44964ccff957077b74076c231}} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!MapMatrix@{MapMatrix}}
+\index{MapMatrix@{MapMatrix}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{MapMatrix()}{MapMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE , class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \\
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+::\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \&}]{map\+\_\+mat }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor. 
+
+
+
+Definition at line 543 of file map\+\_\+matrix.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1MapMatrix_ad28a61f99589c46468dada134650857d}\label{classoomph_1_1MapMatrix_ad28a61f99589c46468dada134650857d}} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class K\+E\+Y\+\_\+\+T\+Y\+PE , class V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \\
+void \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ K\+E\+Y\+\_\+\+T\+Y\+PE, V\+A\+L\+U\+E\+\_\+\+T\+Y\+PE $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 568 of file map\+\_\+matrix.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{map__matrix_8h}{map\+\_\+matrix.\+h}}\end{DoxyCompactItemize}

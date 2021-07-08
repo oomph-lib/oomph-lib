@@ -1,0 +1,303 @@
+\hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{}\doxysection{oomph\+::Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+
+
+Mesh class that takes a 2D mesh consisting of quadrilateral elements and \char`\"{}extrudes\char`\"{} it in the z-\/direction.  
+
+
+
+
+{\ttfamily \#include $<$extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_ada54323a2bfb15d0cd4d5e1b603c06b7}{Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (Quad\+Mesh\+Base $\ast$quad\+\_\+mesh\+\_\+pt, const unsigned \&\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a9b41f4d8f41711e5e0d68abd1ef42f7a}{nz}}, const double \&lz, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding length in this direction. Assumes that the back lower left corner is located at (0,0,0). Timestepper defaults to the Steady timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a50b394141c0fbee53a9ea33eabbbe0f9}{Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (Quad\+Mesh\+Base $\ast$quad\+\_\+mesh\+\_\+pt, const unsigned \&\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a9b41f4d8f41711e5e0d68abd1ef42f7a}{nz}}, const double \&zmin, const double \&zmax, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding minimum and maximum z-\/value of the mesh. Again, timestepper defaults to Steady. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a70c7b07f8676b21240376f7d9d0e556e}{$\sim$\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: If the underlying spatial domain was made up of any macro elements then we will have created an extruded domain which in turn creates extruded macro elements. As we\textquotesingle{}re responsible for creating the domain, we need to kill it and it\textquotesingle{}ll kill the extruded macro elements... \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a3a1060226336c4b324847d793719a07f}{z\+\_\+spacing\+\_\+function}} (const unsigned \&z\+\_\+element, const unsigned \&z\+\_\+node) const
+\begin{DoxyCompactList}\small\item\em Return the value of the z-\/coordinate at the node given by the local node number, znode. \end{DoxyCompactList}\item 
+Vector$<$ std\+::pair$<$ unsigned, int $>$ $>$ \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a5b7cfb164e04a5cdd40977daa3c1373e}{get\+\_\+element\+\_\+boundary\+\_\+information}} (Quad\+Mesh\+Base $\ast$quad\+\_\+mesh\+\_\+pt, Finite\+Element $\ast$quad\+\_\+el\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Get all the boundary information of an element using the input (quad\+\_\+mesh\+\_\+pt) mesh. If the element lies on a boundary then the user will be given the corresponding boundary index and the index of the face of quad\+\_\+el\+\_\+pt attached to the boundary. If the element does N\+OT lie on any boundaries, this function simply returns a vector of size zero. \end{DoxyCompactList}\item 
+const unsigned \& \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a9b41f4d8f41711e5e0d68abd1ef42f7a}{nz}} () const
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in z-\/direction (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a0bd947d799c3bb05fb166ab92f6d4ae1}{build\+\_\+mesh}} (Quad\+Mesh\+Base $\ast$quad\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Generic mesh construction function\+: contains all the hard work. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a818f184ecbd22bbcbc945849821c6bd3}{N\+\_\+node\+\_\+1d}}
+\begin{DoxyCompactList}\small\item\em The number of nodes in each direction. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a7ed68dab30f3e19371a1729d82c3e83e}{Nz}}
+\begin{DoxyCompactList}\small\item\em Number of elements in the z-\/direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a093e86d7332b0e04d985abdc6e628ef2}{Zmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of z coordinate. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_aa31fbf612b3758962f68f42cb2d83229}{Zmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of z coordinate. \end{DoxyCompactList}\item 
+Vector$<$ Extruded\+Domain $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a4ca62b8ba6a7828647dc1e10e09102a0}{Extruded\+\_\+domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to extruded domain objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Mesh class that takes a 2D mesh consisting of quadrilateral elements and \char`\"{}extrudes\char`\"{} it in the z-\/direction. 
+
+Definition at line 101 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_ada54323a2bfb15d0cd4d5e1b603c06b7}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_ada54323a2bfb15d0cd4d5e1b603c06b7}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!ExtrudedCubeMeshFromQuadMesh@{ExtrudedCubeMeshFromQuadMesh}}
+\index{ExtrudedCubeMeshFromQuadMesh@{ExtrudedCubeMeshFromQuadMesh}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ExtrudedCubeMeshFromQuadMesh()}{ExtrudedCubeMeshFromQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{Quad\+Mesh\+Base $\ast$}]{quad\+\_\+mesh\+\_\+pt,  }\item[{const unsigned \&}]{nz,  }\item[{const double \&}]{lz,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding length in this direction. Assumes that the back lower left corner is located at (0,0,0). Timestepper defaults to the Steady timestepper. 
+
+
+
+Definition at line 111 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+References oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a50b394141c0fbee53a9ea33eabbbe0f9}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a50b394141c0fbee53a9ea33eabbbe0f9}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!ExtrudedCubeMeshFromQuadMesh@{ExtrudedCubeMeshFromQuadMesh}}
+\index{ExtrudedCubeMeshFromQuadMesh@{ExtrudedCubeMeshFromQuadMesh}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ExtrudedCubeMeshFromQuadMesh()}{ExtrudedCubeMeshFromQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{Quad\+Mesh\+Base $\ast$}]{quad\+\_\+mesh\+\_\+pt,  }\item[{const unsigned \&}]{nz,  }\item[{const double \&}]{zmin,  }\item[{const double \&}]{zmax,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding minimum and maximum z-\/value of the mesh. Again, timestepper defaults to Steady. 
+
+
+
+Definition at line 127 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+References oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a70c7b07f8676b21240376f7d9d0e556e}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a70c7b07f8676b21240376f7d9d0e556e}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!````~ExtrudedCubeMeshFromQuadMesh@{$\sim$ExtrudedCubeMeshFromQuadMesh}}
+\index{````~ExtrudedCubeMeshFromQuadMesh@{$\sim$ExtrudedCubeMeshFromQuadMesh}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$ExtrudedCubeMeshFromQuadMesh()}{~ExtrudedCubeMeshFromQuadMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: If the underlying spatial domain was made up of any macro elements then we will have created an extruded domain which in turn creates extruded macro elements. As we\textquotesingle{}re responsible for creating the domain, we need to kill it and it\textquotesingle{}ll kill the extruded macro elements... 
+
+
+
+Definition at line 145 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+References oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Extruded\+\_\+domain\+\_\+pt.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a0bd947d799c3bb05fb166ab92f6d4ae1}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a0bd947d799c3bb05fb166ab92f6d4ae1}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
+\index{build\_mesh@{build\_mesh}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{Quad\+Mesh\+Base $\ast$}]{quad\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Generic mesh construction function\+: contains all the hard work. 
+
+Generic mesh construction. This function contains all the details of the mesh generation process, including all the tedious loops, counting spacing and boundary functions. N\+O\+TE\+: The boundary number of the extruded mesh will follow the same numbering as the input quad mesh. The newly created \char`\"{}front\char`\"{} and \char`\"{}back\char`\"{} face of the 3D mesh will added after those boundaries. For example, if the input mesh has 4 boundaries; b\+\_\+0, b\+\_\+1, b\+\_\+2 \& b\+\_\+3 then the extruded mesh will have 6 boundaries; eb\+\_\+0, eb\+\_\+1, eb\+\_\+2, eb\+\_\+3, eb\+\_\+4 \& eb\+\_\+5 where eb\+\_\+4 is the \char`\"{}front\char`\"{} face and eb5 is the \char`\"{}back\char`\"{} face. The boundaries eb\+\_\+i here satisfy eb\+\_\+i = (b\+\_\+i) x \mbox{[}Zmin,Zmax\mbox{]}. 
+
+Definition at line 100 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+cc.
+
+
+
+References oomph\+::\+Mesh\+Extrusion\+Helpers\+::\+Mesh\+\_\+extrusion\+\_\+helper.
+
+
+
+Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a5b7cfb164e04a5cdd40977daa3c1373e}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a5b7cfb164e04a5cdd40977daa3c1373e}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!get\_element\_boundary\_information@{get\_element\_boundary\_information}}
+\index{get\_element\_boundary\_information@{get\_element\_boundary\_information}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_element\_boundary\_information()}{get\_element\_boundary\_information()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Vector$<$ std\+::pair$<$ unsigned, int $>$ $>$ \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+element\+\_\+boundary\+\_\+information (\begin{DoxyParamCaption}\item[{Quad\+Mesh\+Base $\ast$}]{quad\+\_\+mesh\+\_\+pt,  }\item[{Finite\+Element $\ast$}]{quad\+\_\+el\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Get all the boundary information of an element using the input (quad\+\_\+mesh\+\_\+pt) mesh. If the element lies on a boundary then the user will be given the corresponding boundary index and the index of the face of quad\+\_\+el\+\_\+pt attached to the boundary. If the element does N\+OT lie on any boundaries, this function simply returns a vector of size zero. 
+
+
+
+Definition at line 45 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a9b41f4d8f41711e5e0d68abd1ef42f7a}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a9b41f4d8f41711e5e0d68abd1ef42f7a}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!nz@{nz}}
+\index{nz@{nz}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nz()}{nz()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+const unsigned\& \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for number of elements in z-\/direction (const version) 
+
+
+
+Definition at line 190 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+References oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Nz.
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a3a1060226336c4b324847d793719a07f}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a3a1060226336c4b324847d793719a07f}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!z\_spacing\_function@{z\_spacing\_function}}
+\index{z\_spacing\_function@{z\_spacing\_function}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{z\_spacing\_function()}{z\_spacing\_function()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual double \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::z\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{const unsigned \&}]{z\+\_\+element,  }\item[{const unsigned \&}]{z\+\_\+node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the value of the z-\/coordinate at the node given by the local node number, znode. 
+
+
+
+Definition at line 168 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+References oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+N\+\_\+node\+\_\+1d, oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Nz, oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Zmax, and oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Zmin.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a4ca62b8ba6a7828647dc1e10e09102a0}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a4ca62b8ba6a7828647dc1e10e09102a0}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!Extruded\_domain\_pt@{Extruded\_domain\_pt}}
+\index{Extruded\_domain\_pt@{Extruded\_domain\_pt}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Extruded\_domain\_pt}{Extruded\_domain\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Vector$<$Extruded\+Domain$\ast$$>$ \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Extruded\+\_\+domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to extruded domain objects. 
+
+
+
+Definition at line 211 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::$\sim$\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh().
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a818f184ecbd22bbcbc945849821c6bd3}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a818f184ecbd22bbcbc945849821c6bd3}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!N\_node\_1d@{N\_node\_1d}}
+\index{N\_node\_1d@{N\_node\_1d}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{N\_node\_1d}{N\_node\_1d}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::N\+\_\+node\+\_\+1d\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The number of nodes in each direction. 
+
+
+
+Definition at line 199 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::z\+\_\+spacing\+\_\+function().
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a7ed68dab30f3e19371a1729d82c3e83e}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a7ed68dab30f3e19371a1729d82c3e83e}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!Nz@{Nz}}
+\index{Nz@{Nz}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nz}{Nz}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Nz\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in the z-\/direction. 
+
+
+
+Definition at line 202 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nz(), and oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::z\+\_\+spacing\+\_\+function().
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_aa31fbf612b3758962f68f42cb2d83229}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_aa31fbf612b3758962f68f42cb2d83229}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!Zmax@{Zmax}}
+\index{Zmax@{Zmax}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Zmax}{Zmax}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Zmax\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Maximum value of z coordinate. 
+
+
+
+Definition at line 208 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::z\+\_\+spacing\+\_\+function().
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a093e86d7332b0e04d985abdc6e628ef2}\label{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a093e86d7332b0e04d985abdc6e628ef2}} 
+\index{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!Zmin@{Zmin}}
+\index{Zmin@{Zmin}!oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::ExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Zmin}{Zmin}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Zmin\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Minimum value of z coordinate. 
+
+
+
+Definition at line 205 of file extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h.
+
+
+
+Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::z\+\_\+spacing\+\_\+function().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8h}{extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+h}}\item 
+\mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc}{extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+template.\+cc}}\end{DoxyCompactItemize}

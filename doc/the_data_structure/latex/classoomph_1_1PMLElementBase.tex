@@ -1,0 +1,220 @@
+\hypertarget{classoomph_1_1PMLElementBase}{}\doxysection{oomph\+::P\+M\+L\+Element\+Base$<$ D\+IM $>$ Class Template Reference}
+\label{classoomph_1_1PMLElementBase}\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+
+
+Base class for elements with pml capabilities.  
+
+
+
+
+{\ttfamily \#include $<$pml\+\_\+meshes.\+h$>$}
+
+Inheritance diagram for oomph\+::P\+M\+L\+Element\+Base$<$ D\+IM $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.655226cm]{classoomph_1_1PMLElementBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PMLElementBase_ad29eae1793cca20aafa774086da1fc47}{P\+M\+L\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1PMLElementBase_a2a9399aa63600f5276e865dde49f164a}{$\sim$\+P\+M\+L\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PMLElementBase_a42fdef3b3171d372e2b2dc792e8be664}{disable\+\_\+pml}} ()
+\begin{DoxyCompactList}\small\item\em Disable pml. Ensures the P\+M\+L-\/ification in all directions has been deactivated. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PMLElementBase_a31614b65c2824c9acfce1835174098e1}{enable\+\_\+pml}} (const int \&direction, const double \&interface\+\_\+border\+\_\+value, const double \&outer\+\_\+domain\+\_\+border\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Enable pml. Specify the coordinate direction along which pml boundary is constant, as well as the coordinate along the dimension for the interface between the physical and artificial domains and the coordinate for the outer boundary. All of these are used to adjust the perfectly matched layer mechanism. Needs to be called separately for each pml-\/ified direction (if needed -- e.\+g. in corner elements) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PMLElementBase_ad63639f1966cd3191fad69852732fd90}{values\+\_\+to\+\_\+be\+\_\+pinned\+\_\+on\+\_\+outer\+\_\+pml\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&values\+\_\+to\+\_\+pin)=0
+\begin{DoxyCompactList}\small\item\em Pure virtual function in which we have to specify the values to be pinned (and set to zero) on the outer edge of the pml layer. This is usually all of the nodal values (values 0 and 1 (real and imag part) for Helmholtz; values 0,1,2 and 3 (real and imag part of x-\/ and y-\/displacement for 2D time-\/harmonic linear elasticity; etc.). \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} must be resized internally! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1PMLElementBase_a0b0e980998764978801a1f0463a31989}{Pml\+\_\+is\+\_\+enabled}}
+\begin{DoxyCompactList}\small\item\em Boolean indicating if element is used in pml mode. \end{DoxyCompactList}\item 
+std\+::vector$<$ bool $>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase_a5e460c58f3fe82696004d21e3f713d73}{Pml\+\_\+direction\+\_\+active}}
+\begin{DoxyCompactList}\small\item\em Coordinate direction along which pml boundary is constant; alternatively\+: coordinate direction in which coordinate stretching is performed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase_a952ab0485b0834249e5eac1e8448f43f}{Pml\+\_\+inner\+\_\+boundary}}
+\begin{DoxyCompactList}\small\item\em Coordinate of inner pml boundary (Storage is provided for any coordinate direction; only the entries for \char`\"{}active\char`\"{} directions is used.) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase_a7f3365fcb393848b926a836e10a3a288}{Pml\+\_\+outer\+\_\+boundary}}
+\begin{DoxyCompactList}\small\item\em Coordinate of outer pml boundary (Storage is provided for any coordinate direction; only the entries for \char`\"{}active\char`\"{} directions is used.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned D\+IM$>$\newline
+class oomph\+::\+P\+M\+L\+Element\+Base$<$ D\+I\+M $>$}
+
+Base class for elements with pml capabilities. 
+
+Definition at line 61 of file pml\+\_\+meshes.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PMLElementBase_ad29eae1793cca20aafa774086da1fc47}\label{classoomph_1_1PMLElementBase_ad29eae1793cca20aafa774086da1fc47}} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!PMLElementBase@{PMLElementBase}}
+\index{PMLElementBase@{PMLElementBase}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{PMLElementBase()}{PMLElementBase()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+P\+M\+L\+Element\+Base}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1PMLElementBase}{P\+M\+L\+Element\+Base}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 67 of file pml\+\_\+meshes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PMLElementBase_a2a9399aa63600f5276e865dde49f164a}\label{classoomph_1_1PMLElementBase_a2a9399aa63600f5276e865dde49f164a}} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!````~PMLElementBase@{$\sim$PMLElementBase}}
+\index{````~PMLElementBase@{$\sim$PMLElementBase}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$PMLElementBase()}{~PMLElementBase()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+P\+M\+L\+Element\+Base}}$<$ D\+IM $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1PMLElementBase}{P\+M\+L\+Element\+Base}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+Definition at line 74 of file pml\+\_\+meshes.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PMLElementBase_a42fdef3b3171d372e2b2dc792e8be664}\label{classoomph_1_1PMLElementBase_a42fdef3b3171d372e2b2dc792e8be664}} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!disable\_pml@{disable\_pml}}
+\index{disable\_pml@{disable\_pml}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_pml()}{disable\_pml()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+P\+M\+L\+Element\+Base}}$<$ D\+IM $>$\+::disable\+\_\+pml (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable pml. Ensures the P\+M\+L-\/ification in all directions has been deactivated. 
+
+
+
+Definition at line 78 of file pml\+\_\+meshes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PMLElementBase_a31614b65c2824c9acfce1835174098e1}\label{classoomph_1_1PMLElementBase_a31614b65c2824c9acfce1835174098e1}} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!enable\_pml@{enable\_pml}}
+\index{enable\_pml@{enable\_pml}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_pml()}{enable\_pml()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+P\+M\+L\+Element\+Base}}$<$ D\+IM $>$\+::enable\+\_\+pml (\begin{DoxyParamCaption}\item[{const int \&}]{direction,  }\item[{const double \&}]{interface\+\_\+border\+\_\+value,  }\item[{const double \&}]{outer\+\_\+domain\+\_\+border\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable pml. Specify the coordinate direction along which pml boundary is constant, as well as the coordinate along the dimension for the interface between the physical and artificial domains and the coordinate for the outer boundary. All of these are used to adjust the perfectly matched layer mechanism. Needs to be called separately for each pml-\/ified direction (if needed -- e.\+g. in corner elements) 
+
+
+
+Definition at line 99 of file pml\+\_\+meshes.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PMLElementBase_ad63639f1966cd3191fad69852732fd90}\label{classoomph_1_1PMLElementBase_ad63639f1966cd3191fad69852732fd90}} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!values\_to\_be\_pinned\_on\_outer\_pml\_boundary@{values\_to\_be\_pinned\_on\_outer\_pml\_boundary}}
+\index{values\_to\_be\_pinned\_on\_outer\_pml\_boundary@{values\_to\_be\_pinned\_on\_outer\_pml\_boundary}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{values\_to\_be\_pinned\_on\_outer\_pml\_boundary()}{values\_to\_be\_pinned\_on\_outer\_pml\_boundary()}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+P\+M\+L\+Element\+Base}}$<$ D\+IM $>$\+::values\+\_\+to\+\_\+be\+\_\+pinned\+\_\+on\+\_\+outer\+\_\+pml\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{values\+\_\+to\+\_\+pin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pure virtual function in which we have to specify the values to be pinned (and set to zero) on the outer edge of the pml layer. This is usually all of the nodal values (values 0 and 1 (real and imag part) for Helmholtz; values 0,1,2 and 3 (real and imag part of x-\/ and y-\/displacement for 2D time-\/harmonic linear elasticity; etc.). \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} must be resized internally! 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1PMLHelmholtzEquations_a08c72ef039f4dd155df7bc660554c666}{oomph\+::\+P\+M\+L\+Helmholtz\+Equations$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_abde2883fb3855ca2e65cdef97176e017}{oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations}}, and \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6cf2e81c08597a2bd242941846cafa77}{oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$}}.
+
+
+
+Referenced by oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+pml\+\_\+mesh(), and oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1PMLElementBase_a5e460c58f3fe82696004d21e3f713d73}\label{classoomph_1_1PMLElementBase_a5e460c58f3fe82696004d21e3f713d73}} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!Pml\_direction\_active@{Pml\_direction\_active}}
+\index{Pml\_direction\_active@{Pml\_direction\_active}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pml\_direction\_active}{Pml\_direction\_active}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+std\+::vector$<$bool$>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+P\+M\+L\+Element\+Base}}$<$ D\+IM $>$\+::Pml\+\_\+direction\+\_\+active\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Coordinate direction along which pml boundary is constant; alternatively\+: coordinate direction in which coordinate stretching is performed. 
+
+
+
+Definition at line 126 of file pml\+\_\+meshes.\+h.
+
+
+
+Referenced by oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::compute\+\_\+pml\+\_\+coefficients(), oomph\+::\+P\+M\+L\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::compute\+\_\+pml\+\_\+coefficients(), oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::disable\+\_\+pml(), and oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::enable\+\_\+pml().
+
+\mbox{\Hypertarget{classoomph_1_1PMLElementBase_a952ab0485b0834249e5eac1e8448f43f}\label{classoomph_1_1PMLElementBase_a952ab0485b0834249e5eac1e8448f43f}} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!Pml\_inner\_boundary@{Pml\_inner\_boundary}}
+\index{Pml\_inner\_boundary@{Pml\_inner\_boundary}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pml\_inner\_boundary}{Pml\_inner\_boundary}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+P\+M\+L\+Element\+Base}}$<$ D\+IM $>$\+::Pml\+\_\+inner\+\_\+boundary\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Coordinate of inner pml boundary (Storage is provided for any coordinate direction; only the entries for \char`\"{}active\char`\"{} directions is used.) 
+
+
+
+Definition at line 131 of file pml\+\_\+meshes.\+h.
+
+
+
+Referenced by oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::compute\+\_\+pml\+\_\+coefficients(), oomph\+::\+P\+M\+L\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::compute\+\_\+pml\+\_\+coefficients(), and oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::enable\+\_\+pml().
+
+\mbox{\Hypertarget{classoomph_1_1PMLElementBase_a0b0e980998764978801a1f0463a31989}\label{classoomph_1_1PMLElementBase_a0b0e980998764978801a1f0463a31989}} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!Pml\_is\_enabled@{Pml\_is\_enabled}}
+\index{Pml\_is\_enabled@{Pml\_is\_enabled}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pml\_is\_enabled}{Pml\_is\_enabled}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+bool \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+P\+M\+L\+Element\+Base}}$<$ D\+IM $>$\+::Pml\+\_\+is\+\_\+enabled\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean indicating if element is used in pml mode. 
+
+
+
+Definition at line 121 of file pml\+\_\+meshes.\+h.
+
+
+
+Referenced by oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::compute\+\_\+pml\+\_\+coefficients(), oomph\+::\+P\+M\+L\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::compute\+\_\+pml\+\_\+coefficients(), oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::disable\+\_\+pml(), and oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::enable\+\_\+pml().
+
+\mbox{\Hypertarget{classoomph_1_1PMLElementBase_a7f3365fcb393848b926a836e10a3a288}\label{classoomph_1_1PMLElementBase_a7f3365fcb393848b926a836e10a3a288}} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!Pml\_outer\_boundary@{Pml\_outer\_boundary}}
+\index{Pml\_outer\_boundary@{Pml\_outer\_boundary}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pml\_outer\_boundary}{Pml\_outer\_boundary}}
+{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+P\+M\+L\+Element\+Base}}$<$ D\+IM $>$\+::Pml\+\_\+outer\+\_\+boundary\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Coordinate of outer pml boundary (Storage is provided for any coordinate direction; only the entries for \char`\"{}active\char`\"{} directions is used.) 
+
+
+
+Definition at line 136 of file pml\+\_\+meshes.\+h.
+
+
+
+Referenced by oomph\+::\+P\+M\+L\+Time\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::compute\+\_\+pml\+\_\+coefficients(), oomph\+::\+P\+M\+L\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::compute\+\_\+pml\+\_\+coefficients(), and oomph\+::\+P\+M\+L\+Element\+Base$<$ 2 $>$\+::enable\+\_\+pml().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pml__meshes_8h}{pml\+\_\+meshes.\+h}}\end{DoxyCompactItemize}

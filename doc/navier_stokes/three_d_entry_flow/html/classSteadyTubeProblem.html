@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: SteadyTubeProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classSteadyTubeProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">SteadyTubeProblem&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Entry flow problem in tapered tube domain.  
+ <a href="classSteadyTubeProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for SteadyTubeProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classSteadyTubeProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a333c59fbeb36a2a5cbb170fc34783ec4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteadyTubeProblem.html#a333c59fbeb36a2a5cbb170fc34783ec4">SteadyTubeProblem</a> (DocInfo &amp;doc_info, const double &amp;min_error_target, const double &amp;max_error_target)</td></tr>
+<tr class="memdesc:a333c59fbeb36a2a5cbb170fc34783ec4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass DocInfo object and target errors.  <a href="classSteadyTubeProblem.html#a333c59fbeb36a2a5cbb170fc34783ec4">More...</a><br /></td></tr>
+<tr class="separator:a333c59fbeb36a2a5cbb170fc34783ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1564d3faf03e6724565097e730d099d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteadyTubeProblem.html#a1564d3faf03e6724565097e730d099d5">~SteadyTubeProblem</a> ()</td></tr>
+<tr class="memdesc:a1564d3faf03e6724565097e730d099d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classSteadyTubeProblem.html#a1564d3faf03e6724565097e730d099d5">More...</a><br /></td></tr>
+<tr class="separator:a1564d3faf03e6724565097e730d099d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c5277cac2a887dc6c85892e9f851f97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteadyTubeProblem.html#a5c5277cac2a887dc6c85892e9f851f97">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a5c5277cac2a887dc6c85892e9f851f97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve.  <a href="classSteadyTubeProblem.html#a5c5277cac2a887dc6c85892e9f851f97">More...</a><br /></td></tr>
+<tr class="separator:a5c5277cac2a887dc6c85892e9f851f97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae598a2a0ec9bbfb563a1c78aa159561f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteadyTubeProblem.html#ae598a2a0ec9bbfb563a1c78aa159561f">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:ae598a2a0ec9bbfb563a1c78aa159561f"><td class="mdescLeft">&#160;</td><td class="mdescRight">After adaptation: Pin redudant pressure dofs.  <a href="classSteadyTubeProblem.html#ae598a2a0ec9bbfb563a1c78aa159561f">More...</a><br /></td></tr>
+<tr class="separator:ae598a2a0ec9bbfb563a1c78aa159561f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae384d816cf88c86e9f18549701d791f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteadyTubeProblem.html#ae384d816cf88c86e9f18549701d791f8">doc_solution</a> ()</td></tr>
+<tr class="memdesc:ae384d816cf88c86e9f18549701d791f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <a href="classSteadyTubeProblem.html#ae384d816cf88c86e9f18549701d791f8">More...</a><br /></td></tr>
+<tr class="separator:ae384d816cf88c86e9f18549701d791f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f2254773b6e20c58a104f9a12efba8"><td class="memItemLeft" align="right" valign="top">RefineableTubeMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteadyTubeProblem.html#ac2f2254773b6e20c58a104f9a12efba8">mesh_pt</a> ()</td></tr>
+<tr class="memdesc:ac2f2254773b6e20c58a104f9a12efba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload generic access function by one that returns a pointer to the specific mesh.  <a href="classSteadyTubeProblem.html#ac2f2254773b6e20c58a104f9a12efba8">More...</a><br /></td></tr>
+<tr class="separator:ac2f2254773b6e20c58a104f9a12efba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a2d535b7b21eb6383b9f3c9f4c3ce4510"><td class="memItemLeft" align="right" valign="top">DocInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteadyTubeProblem.html#a2d535b7b21eb6383b9f3c9f4c3ce4510">Doc_info</a></td></tr>
+<tr class="memdesc:a2d535b7b21eb6383b9f3c9f4c3ce4510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc info object.  <a href="classSteadyTubeProblem.html#a2d535b7b21eb6383b9f3c9f4c3ce4510">More...</a><br /></td></tr>
+<tr class="separator:a2d535b7b21eb6383b9f3c9f4c3ce4510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedad3a2d2afd1f1c306dae289b3c2baf"><td class="memItemLeft" align="right" valign="top">GeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSteadyTubeProblem.html#aedad3a2d2afd1f1c306dae289b3c2baf">Volume_pt</a></td></tr>
+<tr class="memdesc:aedad3a2d2afd1f1c306dae289b3c2baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to GeomObject that specifies the domain volume.  <a href="classSteadyTubeProblem.html#aedad3a2d2afd1f1c306dae289b3c2baf">More...</a><br /></td></tr>
+<tr class="separator:aedad3a2d2afd1f1c306dae289b3c2baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class SteadyTubeProblem&lt; ELEMENT &gt;</h3>
+
+<p>Entry flow problem in tapered tube domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="full__tube_8cc_source.html#l00094">94</a> of file <a class="el" href="full__tube_8cc_source.html">full_tube.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a333c59fbeb36a2a5cbb170fc34783ec4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a333c59fbeb36a2a5cbb170fc34783ec4">&#9670;&nbsp;</a></span>SteadyTubeProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>min_error_target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>max_error_target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass DocInfo object and target errors. </p>
+<p>Constructor: Pass DocInfo object and error targets. </p>
+
+<p class="definition">Definition at line <a class="el" href="full__tube_8cc_source.html#l00144">144</a> of file <a class="el" href="full__tube_8cc_source.html">full_tube.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="full__tube_8cc_source.html#l00122">SteadyTubeProblem&lt; ELEMENT &gt;::mesh_pt()</a>, <a class="el" href="full__tube_8cc_source.html#l00085">Global_Physical_Variables::Re</a>, and <a class="el" href="full__tube_8cc_source.html#l00133">SteadyTubeProblem&lt; ELEMENT &gt;::Volume_pt</a>.</p>
+
+</div>
+</div>
+<a id="a1564d3faf03e6724565097e730d099d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1564d3faf03e6724565097e730d099d5">&#9670;&nbsp;</a></span>~SteadyTubeProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="full__tube_8cc_source.html#l00104">104</a> of file <a class="el" href="full__tube_8cc_source.html">full_tube.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae598a2a0ec9bbfb563a1c78aa159561f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae598a2a0ec9bbfb563a1c78aa159561f">&#9670;&nbsp;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a>&lt; ELEMENT &gt;::actions_after_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>After adaptation: Pin redudant pressure dofs. </p>
+
+<p class="definition">Definition at line <a class="el" href="full__tube_8cc_source.html#l00110">110</a> of file <a class="el" href="full__tube_8cc_source.html">full_tube.cc</a>.</p>
+
+</div>
+</div>
+<a id="a5c5277cac2a887dc6c85892e9f851f97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c5277cac2a887dc6c85892e9f851f97">&#9670;&nbsp;</a></span>actions_before_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve. </p>
+<p>Set the inflow boundary conditions. </p>
+
+<p class="definition">Definition at line <a class="el" href="full__tube_8cc_source.html#l00251">251</a> of file <a class="el" href="full__tube_8cc_source.html">full_tube.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae384d816cf88c86e9f18549701d791f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae384d816cf88c86e9f18549701d791f8">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a>&lt; ELEMENT &gt;::doc_solution</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="full__tube_8cc_source.html#l00278">278</a> of file <a class="el" href="full__tube_8cc_source.html">full_tube.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="full__tube_8cc_source.html#l00085">Global_Physical_Variables::Re</a>.</p>
+
+</div>
+</div>
+<a id="ac2f2254773b6e20c58a104f9a12efba8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2f2254773b6e20c58a104f9a12efba8">&#9670;&nbsp;</a></span>mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableTubeMesh&lt;ELEMENT&gt;* <a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a>&lt; ELEMENT &gt;::mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload generic access function by one that returns a pointer to the specific mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="full__tube_8cc_source.html#l00122">122</a> of file <a class="el" href="full__tube_8cc_source.html">full_tube.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="full__tube_8cc_source.html#l00144">SteadyTubeProblem&lt; ELEMENT &gt;::SteadyTubeProblem()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a2d535b7b21eb6383b9f3c9f4c3ce4510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d535b7b21eb6383b9f3c9f4c3ce4510">&#9670;&nbsp;</a></span>Doc_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DocInfo <a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a>&lt; ELEMENT &gt;::Doc_info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Doc info object. </p>
+
+<p class="definition">Definition at line <a class="el" href="full__tube_8cc_source.html#l00130">130</a> of file <a class="el" href="full__tube_8cc_source.html">full_tube.cc</a>.</p>
+
+</div>
+</div>
+<a id="aedad3a2d2afd1f1c306dae289b3c2baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedad3a2d2afd1f1c306dae289b3c2baf">&#9670;&nbsp;</a></span>Volume_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObject* <a class="el" href="classSteadyTubeProblem.html">SteadyTubeProblem</a>&lt; ELEMENT &gt;::Volume_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to GeomObject that specifies the domain volume. </p>
+
+<p class="definition">Definition at line <a class="el" href="full__tube_8cc_source.html#l00133">133</a> of file <a class="el" href="full__tube_8cc_source.html">full_tube.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="full__tube_8cc_source.html#l00144">SteadyTubeProblem&lt; ELEMENT &gt;::SteadyTubeProblem()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="full__tube_8cc_source.html">full_tube.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:07:51
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

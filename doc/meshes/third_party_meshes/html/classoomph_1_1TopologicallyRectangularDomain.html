@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TopologicallyRectangularDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1TopologicallyRectangularDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::TopologicallyRectangularDomain Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Topologically Rectangular Domain - a domain dexcribing a topologically rectangular problem - primarily contains functions to access the position of the global boundary relative to the macro element boundary, as well as first and second derivates of the global boundary wrt the macro element boundary NOTE : suitable for HermiteElementQuadMesh.  
+ <a href="classoomph_1_1TopologicallyRectangularDomain.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::TopologicallyRectangularDomain:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1TopologicallyRectangularDomain.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a8b2e24f5500d86c93aef509c5410e7cc"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>) (const double &amp;s, Vector&lt; double &gt; &amp;r)</td></tr>
+<tr class="memdesc:a8b2e24f5500d86c93aef509c5410e7cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">boundary function pointer - for a given boundary takes the macro element coordinate position on that boundary and for that position returns the global coordinates (x) coordinates, or derivatives - dx_i/dm_t or second derivatives d2x_i/dm_t^2  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">More...</a><br /></td></tr>
+<tr class="separator:a8b2e24f5500d86c93aef509c5410e7cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:acd15ad13385a5077c83f73008638f4fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#acd15ad13385a5077c83f73008638f4fe">TopologicallyRectangularDomain</a> (<a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> north_pt, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> east_pt, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> south_pt, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> west_pt)</td></tr>
+<tr class="memdesc:acd15ad13385a5077c83f73008638f4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor - domain boundaries are described with four boundary function pointers describing the topology of the north, east, south, and west boundaries.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#acd15ad13385a5077c83f73008638f4fe">More...</a><br /></td></tr>
+<tr class="separator:acd15ad13385a5077c83f73008638f4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b21567d1c94ec14df12c9390a9dd195"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a2b21567d1c94ec14df12c9390a9dd195">TopologicallyRectangularDomain</a> (const double &amp;l_x, const double &amp;l_y)</td></tr>
+<tr class="memdesc:a2b21567d1c94ec14df12c9390a9dd195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor - takes length of domain in x and y direction as arguements. Assumes domain is rectangular, and the south west (lower left) corner is at 0,0.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a2b21567d1c94ec14df12c9390a9dd195">More...</a><br /></td></tr>
+<tr class="separator:a2b21567d1c94ec14df12c9390a9dd195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b00e4df8a228538f9beac85e2927033"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a6b00e4df8a228538f9beac85e2927033">TopologicallyRectangularDomain</a> (const double &amp;x_min, const double &amp;x_max, const double &amp;y_min, const double &amp;y_max)</td></tr>
+<tr class="memdesc:a6b00e4df8a228538f9beac85e2927033"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor - takes the minimum and maximum coordinates of the of an assumed rectanguler domain in the x and y direction.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a6b00e4df8a228538f9beac85e2927033">More...</a><br /></td></tr>
+<tr class="separator:a6b00e4df8a228538f9beac85e2927033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31181fa9d4032d7a1f3aa93fa011b85c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a31181fa9d4032d7a1f3aa93fa011b85c">TopologicallyRectangularDomain</a> (const <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a> &amp;)</td></tr>
+<tr class="memdesc:a31181fa9d4032d7a1f3aa93fa011b85c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a31181fa9d4032d7a1f3aa93fa011b85c">More...</a><br /></td></tr>
+<tr class="separator:a31181fa9d4032d7a1f3aa93fa011b85c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab04f175b5baff51c457c51252880b1ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#ab04f175b5baff51c457c51252880b1ff">operator=</a> (const <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a> &amp;)</td></tr>
+<tr class="memdesc:ab04f175b5baff51c457c51252880b1ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#ab04f175b5baff51c457c51252880b1ff">More...</a><br /></td></tr>
+<tr class="separator:ab04f175b5baff51c457c51252880b1ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7b1e4911a2b0ac8f599819faa2c9b27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#aa7b1e4911a2b0ac8f599819faa2c9b27">~TopologicallyRectangularDomain</a> ()</td></tr>
+<tr class="memdesc:aa7b1e4911a2b0ac8f599819faa2c9b27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor - empty; clean up done in base class.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#aa7b1e4911a2b0ac8f599819faa2c9b27">More...</a><br /></td></tr>
+<tr class="separator:aa7b1e4911a2b0ac8f599819faa2c9b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86e606d9635f02462fd4f1ef07cd09d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a86e606d9635f02462fd4f1ef07cd09d4">set_boundary_derivative_functions</a> (<a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> d_north_pt, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> d_east_pt, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> d_south_pt, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> d_west_pt)</td></tr>
+<tr class="memdesc:a86e606d9635f02462fd4f1ef07cd09d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">allows the boundary derivate function pointers to be set. To compute the derivatives of the problem domain global coordinates (x_i) wrt the macro element coordinates (m_i), dx_i/dm_t is required along the domain boundaries (where dm_t is the macro element coordinate tangential to the domain boundary). The derivatives dx_i/dm_t can either be prescribed with function pointers, or if the function pointers are not provided then dx_i/dm_t is computed with finite differencing. Note - these functions are only required for domains contructed with boundary function pointers  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a86e606d9635f02462fd4f1ef07cd09d4">More...</a><br /></td></tr>
+<tr class="separator:a86e606d9635f02462fd4f1ef07cd09d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69d21da2d4dff225943aab99fb4f1f10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a69d21da2d4dff225943aab99fb4f1f10">set_boundary_second_derivative_functions</a> (<a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> d2_north_pt, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> d2_east_pt, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> d2_south_pt, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> d2_west_pt)</td></tr>
+<tr class="memdesc:a69d21da2d4dff225943aab99fb4f1f10"><td class="mdescLeft">&#160;</td><td class="mdescRight">allows the boundary second derivate function pointers to be set. To compute the second derivatives of the problem domain global coordinates (x_i) wrt the macro element coordinates (m_i), d2x_i/dm_t^2 is required along the domain boundaries (where dm_t is the macro element coordinate tangential to the domain boundary). The derivatives d2x_i/dm_t^2 can either be prescribed with function pointers, or if the function pointers are not provided then dx_i/dm_t is computed with finite differencing. Note - these functions are only required for domains contructed with boundary function pointers  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a69d21da2d4dff225943aab99fb4f1f10">More...</a><br /></td></tr>
+<tr class="separator:a69d21da2d4dff225943aab99fb4f1f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4de4d505233303cee0690ee87e45b4cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a4de4d505233303cee0690ee87e45b4cf">macro_element_boundary</a> (const unsigned &amp;t, const unsigned &amp;i_macro, const unsigned &amp;i_direct, const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="separator:a4de4d505233303cee0690ee87e45b4cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a218b22a016e2f330d6b90354597d9786"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a218b22a016e2f330d6b90354597d9786">dmacro_element_boundary</a> (const unsigned &amp;t, const unsigned &amp;i_macro, const unsigned &amp;i_direct, const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="separator:a218b22a016e2f330d6b90354597d9786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b882a9e660cab447c6be8cbeb8c9c18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a0b882a9e660cab447c6be8cbeb8c9c18">d2macro_element_boundary</a> (const unsigned &amp;t, const unsigned &amp;i_macro, const unsigned &amp;i_direct, const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="separator:a0b882a9e660cab447c6be8cbeb8c9c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a6adb9d87f5dcedd2ede5a8da494930e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a6adb9d87f5dcedd2ede5a8da494930e5">r_N</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a6adb9d87f5dcedd2ede5a8da494930e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the north boundary and returns the global coordinate position along that boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a6adb9d87f5dcedd2ede5a8da494930e5">More...</a><br /></td></tr>
+<tr class="separator:a6adb9d87f5dcedd2ede5a8da494930e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ac630af43ddea871e5d9cf543d783b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a02ac630af43ddea871e5d9cf543d783b">r_E</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a02ac630af43ddea871e5d9cf543d783b"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the east boundary and returns the global coordinate position along that boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a02ac630af43ddea871e5d9cf543d783b">More...</a><br /></td></tr>
+<tr class="separator:a02ac630af43ddea871e5d9cf543d783b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ea308be7a90143fe728fc4799d584b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a76ea308be7a90143fe728fc4799d584b">r_S</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:a76ea308be7a90143fe728fc4799d584b"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the south boundary and returns the global coordinate position along that boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a76ea308be7a90143fe728fc4799d584b">More...</a><br /></td></tr>
+<tr class="separator:a76ea308be7a90143fe728fc4799d584b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa56f73a53b028997929605e71eab6e2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#aa56f73a53b028997929605e71eab6e2d">r_W</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;f)</td></tr>
+<tr class="memdesc:aa56f73a53b028997929605e71eab6e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the west boundary and returns the global coordinate position along that boundary access down boundary function pointer  <a href="classoomph_1_1TopologicallyRectangularDomain.html#aa56f73a53b028997929605e71eab6e2d">More...</a><br /></td></tr>
+<tr class="separator:aa56f73a53b028997929605e71eab6e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad37cd9d2ee8eb90125d66be63d5b97c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#ad37cd9d2ee8eb90125d66be63d5b97c7">dr_N</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;dr)</td></tr>
+<tr class="memdesc:ad37cd9d2ee8eb90125d66be63d5b97c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the north boundary and returns the derivates of the global coordinates with respect to the boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#ad37cd9d2ee8eb90125d66be63d5b97c7">More...</a><br /></td></tr>
+<tr class="separator:ad37cd9d2ee8eb90125d66be63d5b97c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22b9364ef22563bea32aad2ff9e6851f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a22b9364ef22563bea32aad2ff9e6851f">dr_E</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;dr)</td></tr>
+<tr class="memdesc:a22b9364ef22563bea32aad2ff9e6851f"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the E boundary and returns the derivates of the global coordinates with respect to the boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a22b9364ef22563bea32aad2ff9e6851f">More...</a><br /></td></tr>
+<tr class="separator:a22b9364ef22563bea32aad2ff9e6851f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24a20bc9749166ca61bd4373bc381680"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a24a20bc9749166ca61bd4373bc381680">dr_S</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;dr)</td></tr>
+<tr class="memdesc:a24a20bc9749166ca61bd4373bc381680"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the south boundary and returns the derivates of the global coordinates with respect to the boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a24a20bc9749166ca61bd4373bc381680">More...</a><br /></td></tr>
+<tr class="separator:a24a20bc9749166ca61bd4373bc381680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91b92399343513aed5cfa65a8377b01a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a91b92399343513aed5cfa65a8377b01a">dr_W</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;dr)</td></tr>
+<tr class="memdesc:a91b92399343513aed5cfa65a8377b01a"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the W boundary and returns the derivates of the global coordinates with respect to the boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a91b92399343513aed5cfa65a8377b01a">More...</a><br /></td></tr>
+<tr class="separator:a91b92399343513aed5cfa65a8377b01a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc86191b0085c8d7b3f05985cf647c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a6cc86191b0085c8d7b3f05985cf647c8">d2r_N</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;d2r)</td></tr>
+<tr class="memdesc:a6cc86191b0085c8d7b3f05985cf647c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the north boundary and returns the second derivates of the global coordinates with respect to the boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a6cc86191b0085c8d7b3f05985cf647c8">More...</a><br /></td></tr>
+<tr class="separator:a6cc86191b0085c8d7b3f05985cf647c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab40347c05811cfa8a76394204fd0611a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#ab40347c05811cfa8a76394204fd0611a">d2r_E</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;d2r)</td></tr>
+<tr class="memdesc:ab40347c05811cfa8a76394204fd0611a"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the east boundary and returns the second derivates of the global coordinates with respect to the boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#ab40347c05811cfa8a76394204fd0611a">More...</a><br /></td></tr>
+<tr class="separator:ab40347c05811cfa8a76394204fd0611a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3bc22aeb952c657f3b3672068243197"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#ae3bc22aeb952c657f3b3672068243197">d2r_S</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;d2r)</td></tr>
+<tr class="memdesc:ae3bc22aeb952c657f3b3672068243197"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the south boundary and returns the second derivates of the global coordinates with respect to the boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#ae3bc22aeb952c657f3b3672068243197">More...</a><br /></td></tr>
+<tr class="separator:ae3bc22aeb952c657f3b3672068243197"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4522f1751b8105bb7da4e1a14a75c05a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a4522f1751b8105bb7da4e1a14a75c05a">d2r_W</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;d2r)</td></tr>
+<tr class="memdesc:a4522f1751b8105bb7da4e1a14a75c05a"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes the macro element coordinate position along the west boundary and returns the second derivates of the global coordinates with respect to the boundary  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a4522f1751b8105bb7da4e1a14a75c05a">More...</a><br /></td></tr>
+<tr class="separator:a4522f1751b8105bb7da4e1a14a75c05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a78adac085b81bd6efed96c43f9c1f8a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a78adac085b81bd6efed96c43f9c1f8a2">North_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:a78adac085b81bd6efed96c43f9c1f8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the north boundary of this topologically rectangular domain.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a78adac085b81bd6efed96c43f9c1f8a2">More...</a><br /></td></tr>
+<tr class="separator:a78adac085b81bd6efed96c43f9c1f8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6f1166ec8fd2e62704512bfb612dfb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#ac6f1166ec8fd2e62704512bfb612dfb4">East_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:ac6f1166ec8fd2e62704512bfb612dfb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the east boundary of this topologically rectangular domain <br  />
+  <a href="classoomph_1_1TopologicallyRectangularDomain.html#ac6f1166ec8fd2e62704512bfb612dfb4">More...</a><br /></td></tr>
+<tr class="separator:ac6f1166ec8fd2e62704512bfb612dfb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48aa6d308f504b63b6f080ed486a1248"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a48aa6d308f504b63b6f080ed486a1248">South_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:a48aa6d308f504b63b6f080ed486a1248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the north boundary of this topologically rectangular domain.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a48aa6d308f504b63b6f080ed486a1248">More...</a><br /></td></tr>
+<tr class="separator:a48aa6d308f504b63b6f080ed486a1248"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab565242c7de0d10b36ec0a2e7a219bf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#ab565242c7de0d10b36ec0a2e7a219bf9">West_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:ab565242c7de0d10b36ec0a2e7a219bf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the west boundary of this topologically rectangular domain.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#ab565242c7de0d10b36ec0a2e7a219bf9">More...</a><br /></td></tr>
+<tr class="separator:ab565242c7de0d10b36ec0a2e7a219bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afda00e0273ae8dacbd3626bfd363fcc3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#afda00e0273ae8dacbd3626bfd363fcc3">dNorth_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:afda00e0273ae8dacbd3626bfd363fcc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the north boundary.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#afda00e0273ae8dacbd3626bfd363fcc3">More...</a><br /></td></tr>
+<tr class="separator:afda00e0273ae8dacbd3626bfd363fcc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a535ff2d7f9561425d9fd4b0d57bbc769"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a535ff2d7f9561425d9fd4b0d57bbc769">dEast_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:a535ff2d7f9561425d9fd4b0d57bbc769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the east boundary.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a535ff2d7f9561425d9fd4b0d57bbc769">More...</a><br /></td></tr>
+<tr class="separator:a535ff2d7f9561425d9fd4b0d57bbc769"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaea9592b94d26a6a23f4f425ee7cd37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#aeaea9592b94d26a6a23f4f425ee7cd37">dSouth_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:aeaea9592b94d26a6a23f4f425ee7cd37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the south boundary.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#aeaea9592b94d26a6a23f4f425ee7cd37">More...</a><br /></td></tr>
+<tr class="separator:aeaea9592b94d26a6a23f4f425ee7cd37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e3abcbc75bab984017cb974d81db41e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8e3abcbc75bab984017cb974d81db41e">dWest_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:a8e3abcbc75bab984017cb974d81db41e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the west boundary.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a8e3abcbc75bab984017cb974d81db41e">More...</a><br /></td></tr>
+<tr class="separator:a8e3abcbc75bab984017cb974d81db41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18674c5ad527a43b1fd3e3bdc15fff8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a18674c5ad527a43b1fd3e3bdc15fff8f">d2North_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:a18674c5ad527a43b1fd3e3bdc15fff8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the north boundary.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a18674c5ad527a43b1fd3e3bdc15fff8f">More...</a><br /></td></tr>
+<tr class="separator:a18674c5ad527a43b1fd3e3bdc15fff8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a412d6225a5a6c3c55835e295e736d1c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a412d6225a5a6c3c55835e295e736d1c0">d2East_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:a412d6225a5a6c3c55835e295e736d1c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the east boundary.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a412d6225a5a6c3c55835e295e736d1c0">More...</a><br /></td></tr>
+<tr class="separator:a412d6225a5a6c3c55835e295e736d1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71020e52d5dd8cc0be51b9b466a294dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a71020e52d5dd8cc0be51b9b466a294dc">d2South_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:a71020e52d5dd8cc0be51b9b466a294dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the south boundary.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a71020e52d5dd8cc0be51b9b466a294dc">More...</a><br /></td></tr>
+<tr class="separator:a71020e52d5dd8cc0be51b9b466a294dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55aaf2cfce3da535d9dd9ac5e990be3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a55aaf2cfce3da535d9dd9ac5e990be3b">d2West_boundary_fn_pt</a></td></tr>
+<tr class="memdesc:a55aaf2cfce3da535d9dd9ac5e990be3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the west boundary.  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a55aaf2cfce3da535d9dd9ac5e990be3b">More...</a><br /></td></tr>
+<tr class="separator:a55aaf2cfce3da535d9dd9ac5e990be3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e58acf65777d33e580b4953b7753b45"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a2e58acf65777d33e580b4953b7753b45">x_south_west</a></td></tr>
+<tr class="memdesc:a2e58acf65777d33e580b4953b7753b45"><td class="mdescLeft">&#160;</td><td class="mdescRight">coordinate position of south west corner of domain (only used if boundary functions are not used)  <a href="classoomph_1_1TopologicallyRectangularDomain.html#a2e58acf65777d33e580b4953b7753b45">More...</a><br /></td></tr>
+<tr class="separator:a2e58acf65777d33e580b4953b7753b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea8383a0d263080b49c3cbaee4af7833"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#aea8383a0d263080b49c3cbaee4af7833">x_north_east</a></td></tr>
+<tr class="memdesc:aea8383a0d263080b49c3cbaee4af7833"><td class="mdescLeft">&#160;</td><td class="mdescRight">coordinate position of north east corner of domain (only used if boundary functions are not used)  <a href="classoomph_1_1TopologicallyRectangularDomain.html#aea8383a0d263080b49c3cbaee4af7833">More...</a><br /></td></tr>
+<tr class="separator:aea8383a0d263080b49c3cbaee4af7833"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Topologically Rectangular Domain - a domain dexcribing a topologically rectangular problem - primarily contains functions to access the position of the global boundary relative to the macro element boundary, as well as first and second derivates of the global boundary wrt the macro element boundary NOTE : suitable for HermiteElementQuadMesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00052">52</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a8b2e24f5500d86c93aef509c5410e7cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b2e24f5500d86c93aef509c5410e7cc">&#9670;&nbsp;</a></span>BoundaryFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* oomph::TopologicallyRectangularDomain::BoundaryFctPt) (const double &amp;s, Vector&lt; double &gt; &amp;r)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>boundary function pointer - for a given boundary takes the macro element coordinate position on that boundary and for that position returns the global coordinates (x) coordinates, or derivatives - dx_i/dm_t or second derivatives d2x_i/dm_t^2 </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00062">62</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="acd15ad13385a5077c83f73008638f4fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd15ad13385a5077c83f73008638f4fe">&#9670;&nbsp;</a></span>TopologicallyRectangularDomain() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TopologicallyRectangularDomain::TopologicallyRectangularDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>north_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>east_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>south_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>west_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor - domain boundaries are described with four boundary function pointers describing the topology of the north, east, south, and west boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00039">39</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2b21567d1c94ec14df12c9390a9dd195"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b21567d1c94ec14df12c9390a9dd195">&#9670;&nbsp;</a></span>TopologicallyRectangularDomain() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TopologicallyRectangularDomain::TopologicallyRectangularDomain </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>l_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>l_y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor - takes length of domain in x and y direction as arguements. Assumes domain is rectangular, and the south west (lower left) corner is at 0,0. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00157">157</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+</div>
+</div>
+<a id="a6b00e4df8a228538f9beac85e2927033"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b00e4df8a228538f9beac85e2927033">&#9670;&nbsp;</a></span>TopologicallyRectangularDomain() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TopologicallyRectangularDomain::TopologicallyRectangularDomain </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>x_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>x_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>y_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>y_max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor - takes the minimum and maximum coordinates of the of an assumed rectanguler domain in the x and y direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00201">201</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+</div>
+</div>
+<a id="a31181fa9d4032d7a1f3aa93fa011b85c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31181fa9d4032d7a1f3aa93fa011b85c">&#9670;&nbsp;</a></span>TopologicallyRectangularDomain() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TopologicallyRectangularDomain::TopologicallyRectangularDomain </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00085">85</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+</div>
+</div>
+<a id="aa7b1e4911a2b0ac8f599819faa2c9b27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7b1e4911a2b0ac8f599819faa2c9b27">&#9670;&nbsp;</a></span>~TopologicallyRectangularDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TopologicallyRectangularDomain::~TopologicallyRectangularDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor - empty; clean up done in base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00099">99</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0b882a9e660cab447c6be8cbeb8c9c18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b882a9e660cab447c6be8cbeb8c9c18">&#9670;&nbsp;</a></span>d2macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::d2macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i_macro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i_direct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>returns the second derivates of the global coordinate position (f) wrt to the macro element coordinate at macro macro element position s on boundary i_direct (e.g. N/S/W/E in 2D) at time t (no time dependence) </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00359">359</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab40347c05811cfa8a76394204fd0611a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab40347c05811cfa8a76394204fd0611a">&#9670;&nbsp;</a></span>d2r_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::d2r_E </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>d2r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the east boundary and returns the second derivates of the global coordinates with respect to the boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00663">663</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00206">d2East_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00187">dEast_boundary_fn_pt</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00170">East_boundary_fn_pt</a>.</p>
+
+</div>
+</div>
+<a id="a6cc86191b0085c8d7b3f05985cf647c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cc86191b0085c8d7b3f05985cf647c8">&#9670;&nbsp;</a></span>d2r_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::d2r_N </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>d2r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the north boundary and returns the second derivates of the global coordinates with respect to the boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00610">610</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00201">d2North_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00183">dNorth_boundary_fn_pt</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00166">North_boundary_fn_pt</a>.</p>
+
+</div>
+</div>
+<a id="ae3bc22aeb952c657f3b3672068243197"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3bc22aeb952c657f3b3672068243197">&#9670;&nbsp;</a></span>d2r_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::d2r_S </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>d2r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the south boundary and returns the second derivates of the global coordinates with respect to the boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00716">716</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00211">d2South_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00191">dSouth_boundary_fn_pt</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00174">South_boundary_fn_pt</a>.</p>
+
+</div>
+</div>
+<a id="a4522f1751b8105bb7da4e1a14a75c05a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4522f1751b8105bb7da4e1a14a75c05a">&#9670;&nbsp;</a></span>d2r_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::d2r_W </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>d2r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the west boundary and returns the second derivates of the global coordinates with respect to the boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00769">769</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00216">d2West_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00195">dWest_boundary_fn_pt</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00178">West_boundary_fn_pt</a>.</p>
+
+</div>
+</div>
+<a id="a218b22a016e2f330d6b90354597d9786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a218b22a016e2f330d6b90354597d9786">&#9670;&nbsp;</a></span>dmacro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::dmacro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i_macro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i_direct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>returns the derivates of the global coordinate position (f) wrt to the macro element coordinate at macro macro element position s on boundary i_direct (e.g. N/S/W/E in 2D) at time t (no time dependence) </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00325">325</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+</div>
+</div>
+<a id="a22b9364ef22563bea32aad2ff9e6851f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22b9364ef22563bea32aad2ff9e6851f">&#9670;&nbsp;</a></span>dr_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::dr_E </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the E boundary and returns the derivates of the global coordinates with respect to the boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00502">502</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00187">dEast_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00170">East_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00225">x_north_east</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00221">x_south_west</a>.</p>
+
+</div>
+</div>
+<a id="ad37cd9d2ee8eb90125d66be63d5b97c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad37cd9d2ee8eb90125d66be63d5b97c7">&#9670;&nbsp;</a></span>dr_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::dr_N </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the north boundary and returns the derivates of the global coordinates with respect to the boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00466">466</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00183">dNorth_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00166">North_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00225">x_north_east</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00221">x_south_west</a>.</p>
+
+</div>
+</div>
+<a id="a24a20bc9749166ca61bd4373bc381680"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24a20bc9749166ca61bd4373bc381680">&#9670;&nbsp;</a></span>dr_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::dr_S </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the south boundary and returns the derivates of the global coordinates with respect to the boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00538">538</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00191">dSouth_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00174">South_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00225">x_north_east</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00221">x_south_west</a>.</p>
+
+</div>
+</div>
+<a id="a91b92399343513aed5cfa65a8377b01a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91b92399343513aed5cfa65a8377b01a">&#9670;&nbsp;</a></span>dr_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::dr_W </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the W boundary and returns the derivates of the global coordinates with respect to the boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00574">574</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00195">dWest_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00178">West_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00225">x_north_east</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00221">x_south_west</a>.</p>
+
+</div>
+</div>
+<a id="a4de4d505233303cee0690ee87e45b4cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4de4d505233303cee0690ee87e45b4cf">&#9670;&nbsp;</a></span>macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i_macro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i_direct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>returns the global coordinate position (f) of macro element position s on boundary i_direct (e.g. N/S/W/E in 2D) at time t (no time dependence) </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00291">291</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab04f175b5baff51c457c51252880b1ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab04f175b5baff51c457c51252880b1ff">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00092">92</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+</div>
+</div>
+<a id="a02ac630af43ddea871e5d9cf543d783b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02ac630af43ddea871e5d9cf543d783b">&#9670;&nbsp;</a></span>r_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::r_E </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the east boundary and returns the global coordinate position along that boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00410">410</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00170">East_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00225">x_north_east</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00221">x_south_west</a>.</p>
+
+</div>
+</div>
+<a id="a6adb9d87f5dcedd2ede5a8da494930e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6adb9d87f5dcedd2ede5a8da494930e5">&#9670;&nbsp;</a></span>r_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::r_N </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the north boundary and returns the global coordinate position along that boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00392">392</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00166">North_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00225">x_north_east</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00221">x_south_west</a>.</p>
+
+</div>
+</div>
+<a id="a76ea308be7a90143fe728fc4799d584b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76ea308be7a90143fe728fc4799d584b">&#9670;&nbsp;</a></span>r_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::r_S </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the south boundary and returns the global coordinate position along that boundary </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00428">428</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00174">South_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00225">x_north_east</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00221">x_south_west</a>.</p>
+
+</div>
+</div>
+<a id="aa56f73a53b028997929605e71eab6e2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa56f73a53b028997929605e71eab6e2d">&#9670;&nbsp;</a></span>r_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::r_W </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>takes the macro element coordinate position along the west boundary and returns the global coordinate position along that boundary access down boundary function pointer </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00447">447</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="topologically__rectangular__domain_8h_source.html#l00178">West_boundary_fn_pt</a>, <a class="el" href="topologically__rectangular__domain_8h_source.html#l00225">x_north_east</a>, and <a class="el" href="topologically__rectangular__domain_8h_source.html#l00221">x_south_west</a>.</p>
+
+</div>
+</div>
+<a id="a86e606d9635f02462fd4f1ef07cd09d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86e606d9635f02462fd4f1ef07cd09d4">&#9670;&nbsp;</a></span>set_boundary_derivative_functions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::set_boundary_derivative_functions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>d_north_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>d_east_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>d_south_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>d_west_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allows the boundary derivate function pointers to be set. To compute the derivatives of the problem domain global coordinates (x_i) wrt the macro element coordinates (m_i), dx_i/dm_t is required along the domain boundaries (where dm_t is the macro element coordinate tangential to the domain boundary). The derivatives dx_i/dm_t can either be prescribed with function pointers, or if the function pointers are not provided then dx_i/dm_t is computed with finite differencing. Note - these functions are only required for domains contructed with boundary function pointers </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00251">251</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+</div>
+</div>
+<a id="a69d21da2d4dff225943aab99fb4f1f10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69d21da2d4dff225943aab99fb4f1f10">&#9670;&nbsp;</a></span>set_boundary_second_derivative_functions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TopologicallyRectangularDomain::set_boundary_second_derivative_functions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>d2_north_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>d2_east_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>d2_south_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a>&#160;</td>
+          <td class="paramname"><em>d2_west_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allows the boundary second derivate function pointers to be set. To compute the second derivatives of the problem domain global coordinates (x_i) wrt the macro element coordinates (m_i), d2x_i/dm_t^2 is required along the domain boundaries (where dm_t is the macro element coordinate tangential to the domain boundary). The derivatives d2x_i/dm_t^2 can either be prescribed with function pointers, or if the function pointers are not provided then dx_i/dm_t is computed with finite differencing. Note - these functions are only required for domains contructed with boundary function pointers </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00275">275</a> of file <a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a412d6225a5a6c3c55835e295e736d1c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a412d6225a5a6c3c55835e295e736d1c0">&#9670;&nbsp;</a></span>d2East_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::d2East_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the east boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00206">206</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00663">d2r_E()</a>.</p>
+
+</div>
+</div>
+<a id="a18674c5ad527a43b1fd3e3bdc15fff8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18674c5ad527a43b1fd3e3bdc15fff8f">&#9670;&nbsp;</a></span>d2North_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::d2North_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the north boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00201">201</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00610">d2r_N()</a>.</p>
+
+</div>
+</div>
+<a id="a71020e52d5dd8cc0be51b9b466a294dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71020e52d5dd8cc0be51b9b466a294dc">&#9670;&nbsp;</a></span>d2South_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::d2South_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the south boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00211">211</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00716">d2r_S()</a>.</p>
+
+</div>
+</div>
+<a id="a55aaf2cfce3da535d9dd9ac5e990be3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55aaf2cfce3da535d9dd9ac5e990be3b">&#9670;&nbsp;</a></span>d2West_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::d2West_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the west boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00216">216</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00769">d2r_W()</a>.</p>
+
+</div>
+</div>
+<a id="a535ff2d7f9561425d9fd4b0d57bbc769"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a535ff2d7f9561425d9fd4b0d57bbc769">&#9670;&nbsp;</a></span>dEast_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::dEast_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the east boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00187">187</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00663">d2r_E()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00502">dr_E()</a>.</p>
+
+</div>
+</div>
+<a id="afda00e0273ae8dacbd3626bfd363fcc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afda00e0273ae8dacbd3626bfd363fcc3">&#9670;&nbsp;</a></span>dNorth_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::dNorth_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the north boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00183">183</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00610">d2r_N()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00466">dr_N()</a>.</p>
+
+</div>
+</div>
+<a id="aeaea9592b94d26a6a23f4f425ee7cd37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaea9592b94d26a6a23f4f425ee7cd37">&#9670;&nbsp;</a></span>dSouth_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::dSouth_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the south boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00191">191</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00716">d2r_S()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00538">dr_S()</a>.</p>
+
+</div>
+</div>
+<a id="a8e3abcbc75bab984017cb974d81db41e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e3abcbc75bab984017cb974d81db41e">&#9670;&nbsp;</a></span>dWest_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::dWest_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the west boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00195">195</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00769">d2r_W()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00574">dr_W()</a>.</p>
+
+</div>
+</div>
+<a id="ac6f1166ec8fd2e62704512bfb612dfb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6f1166ec8fd2e62704512bfb612dfb4">&#9670;&nbsp;</a></span>East_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::East_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the east boundary of this topologically rectangular domain <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00170">170</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00663">d2r_E()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00502">dr_E()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00410">r_E()</a>.</p>
+
+</div>
+</div>
+<a id="a78adac085b81bd6efed96c43f9c1f8a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78adac085b81bd6efed96c43f9c1f8a2">&#9670;&nbsp;</a></span>North_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::North_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the north boundary of this topologically rectangular domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00166">166</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00610">d2r_N()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00466">dr_N()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00392">r_N()</a>.</p>
+
+</div>
+</div>
+<a id="a48aa6d308f504b63b6f080ed486a1248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48aa6d308f504b63b6f080ed486a1248">&#9670;&nbsp;</a></span>South_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::South_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the north boundary of this topologically rectangular domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00174">174</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00716">d2r_S()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00538">dr_S()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00428">r_S()</a>.</p>
+
+</div>
+</div>
+<a id="ab565242c7de0d10b36ec0a2e7a219bf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab565242c7de0d10b36ec0a2e7a219bf9">&#9670;&nbsp;</a></span>West_boundary_fn_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a8b2e24f5500d86c93aef509c5410e7cc">BoundaryFctPt</a> oomph::TopologicallyRectangularDomain::West_boundary_fn_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to prescribe the west boundary of this topologically rectangular domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00178">178</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00769">d2r_W()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00574">dr_W()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00447">r_W()</a>.</p>
+
+</div>
+</div>
+<a id="aea8383a0d263080b49c3cbaee4af7833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea8383a0d263080b49c3cbaee4af7833">&#9670;&nbsp;</a></span>x_north_east</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::TopologicallyRectangularDomain::x_north_east</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>coordinate position of north east corner of domain (only used if boundary functions are not used) </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00225">225</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00502">dr_E()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00466">dr_N()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00538">dr_S()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00574">dr_W()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00410">r_E()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00392">r_N()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00428">r_S()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00447">r_W()</a>.</p>
+
+</div>
+</div>
+<a id="a2e58acf65777d33e580b4953b7753b45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e58acf65777d33e580b4953b7753b45">&#9670;&nbsp;</a></span>x_south_west</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;double&gt; oomph::TopologicallyRectangularDomain::x_south_west</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>coordinate position of south west corner of domain (only used if boundary functions are not used) </p>
+
+<p class="definition">Definition at line <a class="el" href="topologically__rectangular__domain_8h_source.html#l00221">221</a> of file <a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00502">dr_E()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00466">dr_N()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00538">dr_S()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00574">dr_W()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00410">r_E()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00392">r_N()</a>, <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00428">r_S()</a>, and <a class="el" href="topologically__rectangular__domain_8cc_source.html#l00447">r_W()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="topologically__rectangular__domain_8h_source.html">topologically_rectangular_domain.h</a></li>
+<li><a class="el" href="topologically__rectangular__domain_8cc_source.html">topologically_rectangular_domain.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:54:38
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

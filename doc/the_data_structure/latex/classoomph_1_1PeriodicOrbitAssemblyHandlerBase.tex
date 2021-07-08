@@ -1,0 +1,81 @@
+\hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{}\doxysection{oomph\+::Periodic\+Orbit\+Assembly\+Handler\+Base Class Reference}
+\label{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}\index{oomph::PeriodicOrbitAssemblyHandlerBase@{oomph::PeriodicOrbitAssemblyHandlerBase}}
+
+
+{\ttfamily \#include $<$periodic\+\_\+orbit\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Periodic\+Orbit\+Assembly\+Handler\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a75182b5fa555a6d410015feb180701b8}{Periodic\+Orbit\+Assembly\+Handler\+Base}} ()
+\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a48968325ba57e969f64298c5b2dfb8f8}{get\+\_\+dofs\+\_\+for\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dofs)=0
+\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a680c82526671e8213d317367f3f7a7e1}{get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dofs)=0
+\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a09d7c31dec8b9688cec82f8b24558b9b}{set\+\_\+dofs\+\_\+for\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const \&dofs)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+=============================================================== Base class to avoid template complications 
+
+Definition at line 647 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a75182b5fa555a6d410015feb180701b8}\label{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a75182b5fa555a6d410015feb180701b8}} 
+\index{oomph::PeriodicOrbitAssemblyHandlerBase@{oomph::PeriodicOrbitAssemblyHandlerBase}!PeriodicOrbitAssemblyHandlerBase@{PeriodicOrbitAssemblyHandlerBase}}
+\index{PeriodicOrbitAssemblyHandlerBase@{PeriodicOrbitAssemblyHandlerBase}!oomph::PeriodicOrbitAssemblyHandlerBase@{oomph::PeriodicOrbitAssemblyHandlerBase}}
+\doxysubsubsection{\texorpdfstring{PeriodicOrbitAssemblyHandlerBase()}{PeriodicOrbitAssemblyHandlerBase()}}
+{\footnotesize\ttfamily oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 651 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a48968325ba57e969f64298c5b2dfb8f8}\label{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a48968325ba57e969f64298c5b2dfb8f8}} 
+\index{oomph::PeriodicOrbitAssemblyHandlerBase@{oomph::PeriodicOrbitAssemblyHandlerBase}!get\_dofs\_for\_element@{get\_dofs\_for\_element}}
+\index{get\_dofs\_for\_element@{get\_dofs\_for\_element}!oomph::PeriodicOrbitAssemblyHandlerBase@{oomph::PeriodicOrbitAssemblyHandlerBase}}
+\doxysubsubsection{\texorpdfstring{get\_dofs\_for\_element()}{get\_dofs\_for\_element()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base\+::get\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a680c82526671e8213d317367f3f7a7e1}\label{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a680c82526671e8213d317367f3f7a7e1}} 
+\index{oomph::PeriodicOrbitAssemblyHandlerBase@{oomph::PeriodicOrbitAssemblyHandlerBase}!get\_previous\_dofs\_for\_element@{get\_previous\_dofs\_for\_element}}
+\index{get\_previous\_dofs\_for\_element@{get\_previous\_dofs\_for\_element}!oomph::PeriodicOrbitAssemblyHandlerBase@{oomph::PeriodicOrbitAssemblyHandlerBase}}
+\doxysubsubsection{\texorpdfstring{get\_previous\_dofs\_for\_element()}{get\_previous\_dofs\_for\_element()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a09d7c31dec8b9688cec82f8b24558b9b}\label{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a09d7c31dec8b9688cec82f8b24558b9b}} 
+\index{oomph::PeriodicOrbitAssemblyHandlerBase@{oomph::PeriodicOrbitAssemblyHandlerBase}!set\_dofs\_for\_element@{set\_dofs\_for\_element}}
+\index{set\_dofs\_for\_element@{set\_dofs\_for\_element}!oomph::PeriodicOrbitAssemblyHandlerBase@{oomph::PeriodicOrbitAssemblyHandlerBase}}
+\doxysubsubsection{\texorpdfstring{set\_dofs\_for\_element()}{set\_dofs\_for\_element()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base\+::set\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{periodic__orbit__handler_8h}{periodic\+\_\+orbit\+\_\+handler.\+h}}\end{DoxyCompactItemize}

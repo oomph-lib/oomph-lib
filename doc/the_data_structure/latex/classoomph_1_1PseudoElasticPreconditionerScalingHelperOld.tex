@@ -1,0 +1,166 @@
+\hypertarget{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld}{}\doxysection{oomph\+::Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old Class Reference}
+\label{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld}\index{oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}}
+
+
+A helper class for \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}. Note that this is N\+OT actually a functioning preconditioner. We simply derive from this class to get access to the blocks.  
+
+
+
+
+{\ttfamily \#include $<$pseudo\+\_\+elastic\+\_\+preconditioner.\+h$>$}
+
+Inheritance diagram for oomph\+::Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a90a89541c9067f06446c2a0e9e3c5398}{Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $>$ $\ast$master\+\_\+prec\+\_\+pt, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&dof\+\_\+list, const \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const solid\+\_\+mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$\mbox{\hyperlink{classoomph_1_1Preconditioner_ada7219933e05d94f39a46a8ddb4c749a}{comm\+\_\+pt}})
+\item 
+\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a330a6acc2a56bf439f0b3d603d392cf8}{$\sim$\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_acfd02d4f3aa04aa04485f2cc8678de5f}{Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old}} (const \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld}{Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a4774c6db30bd4f7d054e438add48f7eb}{s\+\_\+inf\+\_\+norm}} ()
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a42dca15c6f3678880f3b84ccb91513c7}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner. Pure virtual generic interface function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a185bc08ce33f220d9ef61745b46e0633}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Apply the preconditioner. Pure virtual generic interface function. This method should apply the preconditioner operator to the vector r and return the vector z. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A helper class for \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}. Note that this is N\+OT actually a functioning preconditioner. We simply derive from this class to get access to the blocks. 
+
+Definition at line 731 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a90a89541c9067f06446c2a0e9e3c5398}\label{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a90a89541c9067f06446c2a0e9e3c5398}} 
+\index{oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}!PseudoElasticPreconditionerScalingHelperOld@{PseudoElasticPreconditionerScalingHelperOld}}
+\index{PseudoElasticPreconditionerScalingHelperOld@{PseudoElasticPreconditionerScalingHelperOld}!oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}}
+\doxysubsubsection{\texorpdfstring{PseudoElasticPreconditionerScalingHelperOld()}{PseudoElasticPreconditionerScalingHelperOld()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $>$ $\ast$}]{master\+\_\+prec\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{dof\+\_\+list,  }\item[{const \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const}]{solid\+\_\+mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$}]{comm\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The constructor. N\+O\+TE\+: ~\newline
+
+\begin{DoxyEnumerate}
+\item master\+\_\+prec\+\_\+pt should point to the \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}.
+\item matrix\+\_\+pt should point to the jacobian.
+\item The vector dof\+\_\+list should contain the full list of D\+O\+FS associated with the solid subsidiary system.
+\item \char`\"{}solid\+\_\+mesh\+\_\+pt\char`\"{} should be a pointer to the solid mesh used in the master preconditioner. 
+\end{DoxyEnumerate}
+
+Definition at line 747 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+
+
+
+References oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::matrix\+\_\+pt(), oomph\+::\+Preconditioner\+::set\+\_\+comm\+\_\+pt(), oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+mesh(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::set\+\_\+nmesh(), and oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner().
+
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a330a6acc2a56bf439f0b3d603d392cf8}\label{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a330a6acc2a56bf439f0b3d603d392cf8}} 
+\index{oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}!````~PseudoElasticPreconditionerScalingHelperOld@{$\sim$PseudoElasticPreconditionerScalingHelperOld}}
+\index{````~PseudoElasticPreconditionerScalingHelperOld@{$\sim$PseudoElasticPreconditionerScalingHelperOld}!oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}}
+\doxysubsubsection{\texorpdfstring{$\sim$PseudoElasticPreconditionerScalingHelperOld()}{~PseudoElasticPreconditionerScalingHelperOld()}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old\+::$\sim$\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 774 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+
+
+
+References oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base().
+
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_acfd02d4f3aa04aa04485f2cc8678de5f}\label{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_acfd02d4f3aa04aa04485f2cc8678de5f}} 
+\index{oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}!PseudoElasticPreconditionerScalingHelperOld@{PseudoElasticPreconditionerScalingHelperOld}}
+\index{PseudoElasticPreconditionerScalingHelperOld@{PseudoElasticPreconditionerScalingHelperOld}!oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}}
+\doxysubsubsection{\texorpdfstring{PseudoElasticPreconditionerScalingHelperOld()}{PseudoElasticPreconditionerScalingHelperOld()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld}{Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 781 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a185bc08ce33f220d9ef61745b46e0633}\label{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a185bc08ce33f220d9ef61745b46e0633}} 
+\index{oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Apply the preconditioner. Pure virtual generic interface function. This method should apply the preconditioner operator to the vector r and return the vector z. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 818 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a4774c6db30bd4f7d054e438add48f7eb}\label{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a4774c6db30bd4f7d054e438add48f7eb}} 
+\index{oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}!s\_inf\_norm@{s\_inf\_norm}}
+\index{s\_inf\_norm@{s\_inf\_norm}!oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}}
+\doxysubsubsection{\texorpdfstring{s\_inf\_norm()}{s\_inf\_norm()}}
+{\footnotesize\ttfamily double oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old\+::s\+\_\+inf\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+returns the infinite norm of S 
+
+Definition at line 795 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+
+
+
+References oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block(), and oomph\+::\+C\+R\+Double\+Matrix\+::inf\+\_\+norm().
+
+
+
+Referenced by oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup().
+
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a42dca15c6f3678880f3b84ccb91513c7}\label{classoomph_1_1PseudoElasticPreconditionerScalingHelperOld_a42dca15c6f3678880f3b84ccb91513c7}} 
+\index{oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}!setup@{setup}}
+\index{setup@{setup}!oomph::PseudoElasticPreconditionerScalingHelperOld@{oomph::PseudoElasticPreconditionerScalingHelperOld}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Setup the preconditioner. Pure virtual generic interface function. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 805 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pseudo__elastic__preconditioner_8h}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}\end{DoxyCompactItemize}

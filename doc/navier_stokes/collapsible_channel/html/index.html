@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Flow in a 2D channel with an oscillating wall</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Flow in a 2D channel with an oscillating wall </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>The moving-boundary Navier-Stokes problem discussed in this document is a "warm-up" problem for the classical fluid-structure interaction problem of flow in a 2D collapsible channel. Here we compute the flow through a 2D channel in which part of one wall is replaced by a moving "membrane" whose motion is prescribed. In <a href="../../../interaction/fsi_collapsible_channel/html/index.html">another example</a>, we will demonstrate how easy it is to extend the driver code for the current problem to a fluid-structure interaction problem in which the "membrane" is represented by an elastic beam that deforms in response to the fluid traction.</p>
+<p>We note that the (FSI version of the) problem considered here was analysed in much more detail in</p>
+<ul>
+<li>
+Jensen, O.E. &amp; Heil, M. (2003) High-frequency self-excited oscillations in a collapsible-channel flow. <em>Journal of Fluid Mechanics</em> <b>481</b> 235-268. <a href="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">(pdf preprint)</a> <a href="http://www.maths.man.ac.uk/~mheil/MATTHIAS/ABSTRACTS/JensenHeil02.html">(abstract)</a> </li>
+</ul>
+<p>where a detailed discussion (and an asymptotic analysis) of the flow-structures described below may be found.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem</h1>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>Finite-Reynolds-number flow in a 2D channel with an oscillating wall .</b> </center><p class="intertd">The figure below shows a sketch of the problem: Flow is driven by a prescribed pressure drop through a 2D channel of width <img class="formulaInl" alt="$ H^* $" src="form_0.png"/> and total length <img class="formulaInl" alt="$ L^*_{total} = L^*_{up} + L^*_{collapsible} + L^*_{down}. $" src="form_1.png"/> The upstream and downstream lengths of the channel are rigid, whereas the upper wall in the central section performs a prescribed oscillation. The shape of the moving segment is parametrised by a Lagrangian coordinate, <img class="formulaInl" alt="$ \zeta^* $" src="form_2.png"/> , so that the position vector to the moving wall is given by <img class="formulaInl" alt="$ {\bf R}_w^*(\zeta^*,t^*)$" src="form_3.png"/> .</p>
+<div class="image">
+<img src="collapsible_channel_sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the problem. </div></div>
+ <p class="intertd">We scale all lengths on the channel width, <img class="formulaInl" alt="$ H^* $" src="form_0.png"/> , use the average velocity through the undeformed channel, <img class="formulaInl" alt="$ U =P^*_{up} H^{*2}/(12 \mu L^*_{total}) $" src="form_4.png"/> , to scale the velocities, and use <img class="formulaInl" alt="$ H^{*}/U $" src="form_5.png"/> to non-dimensionalise time. (As usual, we employ asterisks distinguish dimensional parameters from their non-dimensional equivalents.)</p>
+<p class="intertd">The flow is then governed by the unsteady Navier-Stokes equations </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re\left(St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}\right) = - \frac{\partial p}{\partial x_i} + \frac{\partial }{\partial x_j} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_6.png"/>
+</p>
+<p> and the continuity equation </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u_i}{\partial x_i} = 0 \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_7.png"/>
+</p>
+<p> with <img class="formulaInl" alt="$ St=1 $" src="form_8.png"/> , subject to the following boundary and initial conditions:</p><ul>
+<li>Initial condition: Poiseuille flow, i.e. <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf u}(x_1,x_2,t=0) = {\bf u}_{Poiseuille}(x_1,x_2) = 6 \ x_2 \ (1-x_2) \ {\bf e}_1. \ \ \ \ \ \ \ \ \ \ (3) \]" src="form_9.png"/>
+</p>
+</li>
+<li>Parallel inflow, <img class="formulaInl" alt="$ {\bf u} \cdot {\bf e}_2 = {\bf 0}, $" src="form_10.png"/> and an applied axial traction of <img class="formulaInl" alt="$ {\bf t} \cdot {\bf e}_1 = p_{up} = 12 \ L_{total} $" src="form_11.png"/> at the upstream end, <img class="formulaInl" alt="$ x_1=0 $" src="form_12.png"/> .</li>
+<li>Parallel, axially traction-free outflow at the downstream end, i.e. <img class="formulaInl" alt="$ {\bf u} \cdot {\bf e}_2 = {\bf 0} $" src="form_13.png"/> and <br  />
+ <img class="formulaInl" alt="$ {\bf t} \cdot {\bf e}_1 = p_{down} = 0 $" src="form_14.png"/> at <img class="formulaInl" alt="$ x_1=L_{total} $" src="form_15.png"/> .</li>
+<li>No slip on all channel walls, i.e. <img class="formulaInl" alt="$ {\bf u} = {\bf 0} $" src="form_16.png"/> on the rigid walls and <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf u} = \frac{\partial {\bf R}_w}{\partial t} \mbox{\ \ \ \ on the moving wall.} \ \ \ \ \ \ \ \ \ \ (4) \]" src="form_17.png"/>
+</p>
+</li>
+</ul>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<br  />
+ </center><p>We consider a wall motion that deforms the initially "flush" wall into a parabolic shape. We denote the non-dimensional <br  />
+ amplitude of the oscillation by <img class="formulaInl" alt="$ A $" src="form_18.png"/> and its period by <img class="formulaInl" alt="$ T $" src="form_19.png"/> , and parametrise the position vector to a point on the wall by the Lagrangian coordinate <img class="formulaInl" alt="$ \zeta \in [0,L_{collapsible}] $" src="form_20.png"/> as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf R}_w(\zeta,t) = \left( \begin{array}{l} L_{up} + \zeta \\ 1 + A \left(\frac{2}{L_{collapsible}}\right)^2 \zeta \ (L-\zeta) \ \sin(2\pi t / T) \ {\cal R}(t) \end{array} \right), \ \ \ \ \ \ \ \ \ \ (5) \]" src="form_21.png"/>
+</p>
+<p> where the "ramp" function </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal R}(t) = \left\{ \begin{array}{ll} \frac{1}{2}(1-\cos(\pi t/T)) &amp; \mbox{for $t&lt;T$} \\ 1 &amp; \mbox{for $t \ge T$} \end{array} \right. \]" src="form_22.png"/>
+</p>
+<p> is used to facilitate the start-up of the simulation from the initial condition of steady Poiseuille flow. <img class="formulaInl" alt="$ {\cal R}(t) $" src="form_23.png"/> provides a "smooth" startup of the wall motion during the first period of the oscillation.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="reslt"></a>
+The results</h1>
+<p>The figure below shows a snapshot, taken from <a href="../figures/flow.avi">the animation of the computational results</a>. The first four figures show (from top left to bottom right) "carpet plots" of the axial and transverse velocities, the axial component of the perturbation velocity <img class="formulaInl" alt="$ {\bf u} - {\bf u}_{Poiseuille} $" src="form_24.png"/> , and the pressure distribution. The 2D contour plot at the bottom of the figure shows a contour plot of the pressure and a few instantaneous streamlines.</p>
+<div class="image">
+<img src="flow.gif" alt=""/>
+<div class="caption">
+Snapshot from the animation of the flow field for Re = Re St = 50, T=0.45, A=0.01. </div></div>
+ <p>The figures illustrate the flow structures identified in <a href="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">Jensen &amp; Heil's (2003)</a> asymptotic analysis of 2D channel flows that are driven by high-frequency, small-amplitude oscillations of a finite section of one of their walls: The flow consists of oscillatory axial "sloshing flows", superimposed on the mean Poiseuille flow that is driven by the applied pressure drop. During phases when the wall moves inwards (outwards) the flow generated by the moving wall decelerates (accelerates) the flow in the upstream region as the wall "injects" fluid into ("sucks" fluid out of) the domain. Conversely, in the downstream region the flow generated by the wall adds to the pressure-driven mean flow during phases when the wall moves inwards. This is shown most clearly in the plot of the axial velocity perturbation. In the plots shown above, the wall moves outwards and the axial perturbation velocity is positive (i.e. in the direction of the pressure-driven mean flow) in the upstream region, and negative in the downstream region. This is also shown in the time-traces of the velocities at two control points in the in- and outflow cross-sections, shown in the figure below:</p>
+<div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Time-trace of the axial velocities at two control points in the upstream and downstream cross-sections, and the vertical position of a control point on the wall. (Re = Re St = 50, T=0.45, A=0.01.) </div></div>
+ <p>Finally, we comment that the plot of the perturbation velocities confirms the two-layer structure of the sloshing flows predicted in the asymptotic analysis. The sloshing flow comprises a blunt core flow region in which the flow is dominated by inertial effects while thin Stokes layers develop near the wall. Within these layers, the fluid viscosity reduces the axial velocity to zero. The carpet plot of the pressure shows that the pressure distribution is dominated by the variations induced by the oscillatory sloshing flows. For a detailed discussion of the flow structure we refer to <a href="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">Jensen &amp; Heil (2003).</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="overview"></a>
+Overview of the driver code</h1>
+<p>Overall, the driver code is very similar to codes developed for other moving-boundary Navier-Stokes problems, such as the driver code used to simulate the <a href="../../osc_ellipse/html/index.html">flow inside an oscillating ellipse.</a> The present code is slightly lengthier because of the traction boundary conditions which we impose by attaching traction elements to the upstream end of the mesh. (Refer to the <a href="../../../navier_stokes/rayleigh_traction_channel/html/index.html">traction-driven Rayleigh problem</a> for a more detailed discussion of this technique.) Also, as discussed in <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">another example</a>, the traction elements must be removed/re-attached before/after every mesh adaptation.</p>
+<p>The domain is discretised by the <br  />
+ <a href="../../../meshes/mesh_list/html/index.html#collapsible_channel"><code>CollapsibleChannelMesh</code></a> which employs the <code>CollapsibleChannelDomain</code> to provide a <code>MacroElement</code> - based representation of the deforming domain in terms of the <code>GeomObject</code> that describes the motion of the "collapsible" section of the wall (boundary 3). The sketch below illustrates the topology and the mesh deformation: As the wall deforms, the <br  />
+ boundaries of the <code>MacroElements</code> in the "collapsible" part of the <code>Domain</code> follow the wall motion.</p>
+<div class="image">
+<img src="mesh.gif" alt=""/>
+<div class="caption">
+Sketch of the CollapsibleChannelDomain/Mesh. </div></div>
+ <p>The no-slip boundary conditions on the moving wall are applied as in the <a href="../../osc_ellipse/html/index.html">oscillating ellipse problem,</a> by executing the function <code>FSI_functions::apply_no_slip_on_moving_wall(...)</code> in <code>Problem::actions_before_implicit_timestep()</code> for all nodes that are located on boundary 3.</p>
+<p>The following sections provide a complete annotated listing of the driver code. Most functions should already be familiar from previous examples and you may want to skip straight to the <a class="el" href="index.html#comments">Comments and Exercises</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="wall"></a>
+The moving wall</h1>
+<p>As usual, we represent the moving wall as a <code>GeomObject</code> and define its shape by implementing the pure virtual function <code>GeomObject::position(...)</code>. The arguments to the constructor specify the Eulerian coordinates of wall's left end, its undeformed length, the amplitude of the oscillations, <img class="formulaInl" alt="$ A $" src="form_18.png"/> , and the period of the oscillations <img class="formulaInl" alt="$ T $" src="form_19.png"/> . We also pass the pointer to a <code>Time</code> object to the constructor and store it in a private data member, to allow the <code>position(...)</code> functions to access the current value of the continuous time. The amplitude of the wall motion, and the period of its oscillations are stored as private data members, accessible via suitable member functions.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===============start_of_oscillating_wall=================================</span></div>
+<div class="line"><span class="comment">/// Straight, horizontal channel wall at \f$ y=H \f$ deforms into an </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// oscillating parabola. The amplitude of the oscillation </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f$ A \f$ and its period is \f$ T \f$.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// The position vector to a point on the wall, parametrised by</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// the Lagrangian coordinate \f$ \zeta \in [0,L]\f$, is therefore given by</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ {\bf R}(\zeta,t) = </span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \left(</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \begin{array}{c}</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   L_{up} + \zeta  \\   1 </span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \end{array}</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \right)</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   + A</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \left(</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \begin{array}{l}</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   - B \sin\left(\frac{2\pi}{L_{collapsible}}\zeta\right) \\ \left(</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \frac{2}{L_{collapsible}}\right)^2 \zeta \ (L-\zeta)</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \end{array}</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \right)   </span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \ \sin\left(\frac{2\pi t}{T}\right)</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///   \ {\cal R}(t)</span></div>
+<div class="line"><span class="comment"></span><span class="comment">///  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// The parameter \f$ B \f$ is zero by default. If it is set to a nonzero</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// value, the material particles on the wall also perform some </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// horizontal motion. The &quot;ramp&quot; function </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// {\cal R}(t) =  \left\{ </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \begin{array}{ll}  </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \frac{1}{2}(1-\cos(\pi t/T)) &amp; \mbox{for $t&lt;T$} \\ 1 &amp; \mbox{for $t \ge T$}</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \end{array} </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \right.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// provides a &quot;smooth&quot; startup of the oscillation. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classOscillatingWall.html">OscillatingWall</a> : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor : It&#39;s a 2D object, parametrised by </span></div>
+<div class="line"><span class="comment"> /// one Lagrangian coordinate. Arguments: height at ends, x-coordinate of </span></div>
+<div class="line"><span class="comment"> /// left end, length, amplitude of deflection, period of oscillation, and</span></div>
+<div class="line"><span class="comment"> /// pointer to time object</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classOscillatingWall.html#a5ededc3d27eef5c4ef7e82ac5cdf6ff9">OscillatingWall</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; h, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; x_left, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; l, </div>
+<div class="line">                 <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="classOscillatingWall.html#ac3e0098c026e23dd8be8ea29f6a9c101">period</a>, Time* time_pt) : </div>
+<div class="line">  GeomObject(1,2), <a class="code" href="classOscillatingWall.html#aa587e944cac9e501e6d3323731145b95">H</a>(h), <a class="code" href="classOscillatingWall.html#ac5e2ad6d5ef2992ba9295118787190e6">Length</a>(l), <a class="code" href="classOscillatingWall.html#a71a60ee3294746875a24aeeffb38f7ec">X_left</a>(x_left), <a class="code" href="classOscillatingWall.html#ac22b6ac70a42850ddbe2e9c4c16f4664">A</a>(a), <a class="code" href="classOscillatingWall.html#a9db810649987a2011c7fe14d10b98b9a">B</a>(0.0), <a class="code" href="classOscillatingWall.html#af33b31988c823d33a3b147281ec94599">T</a>(<a class="code" href="classOscillatingWall.html#ac3e0098c026e23dd8be8ea29f6a9c101">period</a>), </div>
+<div class="line">  <a class="code" href="classOscillatingWall.html#a9c4bea6ec6e80ba23139cd5a1d4d25d5">Time_pt</a>(time_pt) </div>
+<div class="line">  {}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Destructor:  Empty</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classOscillatingWall.html#adc35b40bdd733a244d6399d91fa20ade">~OscillatingWall</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///Access function to the amplitude</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span>&amp; <a class="code" href="classOscillatingWall.html#ae923c6a7abefe33efaf47a4b69d1b621">amplitude</a>(){<span class="keywordflow">return</span> <a class="code" href="classOscillatingWall.html#ac22b6ac70a42850ddbe2e9c4c16f4664">A</a>;}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///Access function to the period</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span>&amp; <a class="code" href="classOscillatingWall.html#ac3e0098c026e23dd8be8ea29f6a9c101">period</a>(){<span class="keywordflow">return</span> <a class="code" href="classOscillatingWall.html#af33b31988c823d33a3b147281ec94599">T</a>;}</div>
+</div><!-- fragment --><p>Since the <code>GeomObject</code> represents a moving (i.e. time-dependent) boundary, we implement both versions of the <code>GeomObject::position(...)</code> function: The "unsteady" version computes the position vector at the <code>t</code> -th previous timestep.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Position vector at Lagrangian coordinate zeta </span></div>
+<div class="line"><span class="comment"> /// at time level t.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> position(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp;zeta, </div>
+<div class="line">               Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="keyword">using namespace </span>MathematicalConstants;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Smoothly ramp up the oscillation during the first period</span></div>
+<div class="line">   <span class="keywordtype">double</span> ramp=1.0;</div>
+<div class="line">   <span class="keywordflow">if</span> (Time_pt-&gt;time(t)&lt;<a class="code" href="collapsible__channel_8txt.html#ac4952e657b7da1dbb7923ec12b675021">T</a>)</div>
+<div class="line">    {</div>
+<div class="line">     ramp=0.5*(1.0-cos(Pi*Time_pt-&gt;time(t)/<a class="code" href="collapsible__channel_8txt.html#ac4952e657b7da1dbb7923ec12b675021">T</a>));</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Position vector</span></div>
+<div class="line">   r[0] = zeta[0]+X_left </div>
+<div class="line">    -B*<a class="code" href="collapsible__channel_8txt.html#a2915e1695d3a1b958511c874d728cec0">A</a>*sin(2.0*3.14159*zeta[0]/Length)*</div>
+<div class="line">    sin(2.0*Pi*(Time_pt-&gt;time(t))/<a class="code" href="collapsible__channel_8txt.html#ac4952e657b7da1dbb7923ec12b675021">T</a>)*ramp;</div>
+<div class="line"> </div>
+<div class="line">   r[1] = H+<a class="code" href="collapsible__channel_8txt.html#a2915e1695d3a1b958511c874d728cec0">A</a>*((Length-zeta[0])*zeta[0])/pow(0.5*Length,2)*</div>
+<div class="line">    sin(2.0*Pi*(Time_pt-&gt;time(t))/<a class="code" href="collapsible__channel_8txt.html#ac4952e657b7da1dbb7923ec12b675021">T</a>)*ramp;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of &quot;unsteady&quot; version</span></div>
+</div><!-- fragment --><p>The version without additional argument computes the position vector at the present time:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short &quot;Current&quot; position vector at Lagrangian coordinate zeta </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> position(<span class="keyword">const</span> Vector&lt;double&gt;&amp;zeta, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   position (0, zeta, r);</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>Finally, here are the various private data members:</p>
+<div class="fragment"><div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Number of geometric Data in GeomObject: None.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> ngeom_data()<span class="keyword"> const </span>{<span class="keywordflow">return</span> 0;}              </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Height at ends</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> H;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Length;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// x-coordinate of left end</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> X_left;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Amplitude of oscillation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="collapsible__channel_8txt.html#a2915e1695d3a1b958511c874d728cec0">A</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Relative amplitude of horizontal wall motion</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> B;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Period of the oscillations</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="collapsible__channel_8txt.html#ac4952e657b7da1dbb7923ec12b675021">T</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Pointer to the global time object</span></div>
+<div class="line"><span class="comment"></span> Time* Time_pt;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of oscillating wall</span></div>
+</div><!-- fragment --><p>[<b>Note:</b> We note that the <code><a class="el" href="classOscillatingWall.html">OscillatingWall</a></code> class allows the wall shape to be slightly more complicated than required by (5). If the parameter <code>B</code> is set to a non-zero value, the material points on the wall also undergo some horizontal displacement. We will use this capability in one of the exercises in section <a class="el" href="index.html#comments">Comments and Exercises</a>.]</p>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="variables"></a>
+Namespace for the "global" physical variables</h1>
+<p>As usual, we define the problem parameters in a namespace and assign default values that can be overwritten if required.</p>
+ <div class="fragment"><div class="line"><span class="comment">//====start_of_Global_Physical_Variables================</span></div>
+<div class="line"><span class="comment">/// Namespace for phyical parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a>=50.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Womersley = Reynolds times Strouhal</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">ReSt</a>=50.0;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Default pressure on the left boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ae1a493695b7f4619af32f405b0b28861">P_up</a>=0.0;</div>
+</div><!-- fragment --><p>We also implement the function that defines the prescribed (axial) traction at the inflow boundary.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Traction required at the left boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a0de42ee6d39e85c77c16a04c3a05f7a2">prescribed_traction</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; t,</div>
+<div class="line">                          <span class="keyword">const</span> Vector&lt;double&gt;&amp; x,</div>
+<div class="line">                          <span class="keyword">const</span> Vector&lt;double&gt;&amp; n,</div>
+<div class="line">                          Vector&lt;double&gt;&amp; traction)</div>
+<div class="line"> {</div>
+<div class="line">  traction.resize(2);</div>
+<div class="line">  traction[0]=<a class="code" href="namespaceGlobal__Physical__Variables.html#ae1a493695b7f4619af32f405b0b28861">P_up</a>;</div>
+<div class="line">  traction[1]=0.0;</div>
+<div class="line"> } </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of Global_Physical_Variables</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p> As with most previous time-dependent codes, we use command line arguments to indicate if the code is run during <code>oomph-lib's</code> self-test. If any command line arguments are specified, we use a coarser discretisation and perform fewer timesteps.</p>
+<p>After storing the command line arguments, we choose the number of elements in the mesh, set the lengths of the domain and choose the amplitude and period of the oscillation. The parameter values are chosen such that the wall motion resembles that in the FSI simulations shown in Fig. 5 of <a href="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">Jensen &amp; Heil (2003).</a></p>
+<div class="fragment"><div class="line"><span class="comment">//=======start_of_driver_code==================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for an unsteady adaptive collapsible channel problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// with prescribed wall motion. Presence of command line arguments</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// indicates validation run with coarse resolution and small number of</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// timesteps.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=============================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="collapsible__channel_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Reduction in resolution for validation run?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> coarsening_factor=1;</div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1)</div>
+<div class="line">  {</div>
+<div class="line">   coarsening_factor=4;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in the domain</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nup=20/coarsening_factor;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> ncollapsible=40/coarsening_factor;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> ndown=40/coarsening_factor;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> ny=16/coarsening_factor;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Length of the domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> lup=5.0;</div>
+<div class="line"> <span class="keywordtype">double</span> lcollapsible=10.0;</div>
+<div class="line"> <span class="keywordtype">double</span> ldown=10.0;</div>
+<div class="line"> <span class="keywordtype">double</span> ly=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial amplitude of the wall deformation</span></div>
+<div class="line"> <span class="keywordtype">double</span> amplitude=1.0e-2; <span class="comment">// ADJUST </span></div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Period of oscillation</span></div>
+<div class="line"> <span class="keywordtype">double</span> period=0.45;</div>
+</div><!-- fragment --><p>We set the (non-dimensional) upstream pressure to <img class="formulaInl" alt="$ p_{up} = 12 L_{total }$" src="form_25.png"/> , so that in the absence of any wall oscillation, the steady flow through the channel is Poiseuille flow, <img class="formulaInl" alt="$ {\bf u} = {\bf u}_{Poiseuille} = 6 \ x_2 \ (1-x_2) \ {\bf e}_1 $" src="form_26.png"/> ; see <a class="el" href="index.html#comments">Comments and Exercises</a>. </p><div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Pressure/applied traction on the left boundary: This is consistent with </span></div>
+<div class="line"> <span class="comment">// steady Poiseuille flow</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#ae1a493695b7f4619af32f405b0b28861">Global_Physical_Variables::P_up</a>=12.0*(lup+lcollapsible+ldown);</div>
+</div><!-- fragment --><p>Next, we specify the output directory and build the problem with refineable 2D Crouzeix Raviart Elements.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set output directory</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open a trace file </span></div>
+<div class="line"> ofstream trace_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];   </div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> trace_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the problem with Crouzeix Raviart Elements</span></div>
+<div class="line"> <a class="code" href="classCollapsibleChannelProblem.html">CollapsibleChannelProblem&lt;RefineableQCrouzeixRaviartElement&lt;2&gt;</a> &gt; </div>
+<div class="line">  <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>(nup, ncollapsible, ndown, ny, </div>
+<div class="line">          lup, lcollapsible, ldown, ly, </div>
+<div class="line">          amplitude,period);</div>
+</div><!-- fragment --><p>Next we set up the time-stepping parameters for a simulation of three periods of the oscillation, performed with 40 timesteps per period. Fewer timesteps are performed if the code is run in self-test mode.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of timesteps per period</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nsteps_per_period=40;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of periods</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nperiod=3; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of timesteps (reduced for validation)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=nsteps_per_period*nperiod;</div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1)</div>
+<div class="line">  {</div>
+<div class="line">   nstep=3;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Timestep: </span></div>
+<div class="line"> <span class="keywordtype">double</span> dt=period/double(nsteps_per_period);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Start time</span></div>
+<div class="line"> <span class="keywordtype">double</span> t_min=0.0;</div>
+</div><!-- fragment --><p>We initialise the timestepper and set the initial conditions before documenting the initial condition.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise timestep and set initial conditions</span></div>
+<div class="line"> <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.time_pt()-&gt;time()=t_min;</div>
+<div class="line"> <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.initialise_dt(dt);</div>
+<div class="line"> <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.set_initial_condition();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Output the initial solution</span></div>
+<div class="line"> <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution(doc_info, trace_file);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Step number</span></div>
+<div class="line"> doc_info.number()++;</div>
+</div><!-- fragment --><p>Next we set the error targets for the adaptive mesh refinement; a smaller target error is used when the code is run in self-test mode to ensure that some mesh refinement is performed during the first few timesteps.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set targets for spatial adaptivity</span></div>
+<div class="line"> <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.bulk_mesh_pt()-&gt;max_permitted_error()=1.0e-3;</div>
+<div class="line"> <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.bulk_mesh_pt()-&gt;min_permitted_error()=1.0e-5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Overwrite with reduced targets for validation run to force</span></div>
+<div class="line"> <span class="comment">// some refinement during the first few timesteps</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1)</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.bulk_mesh_pt()-&gt;max_permitted_error()=1.0e-4;</div>
+<div class="line">   <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.bulk_mesh_pt()-&gt;min_permitted_error()=1.0e-6;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>The timestepping loop itself is identical to that used in <a href="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">other time-dependent driver codes with adaptive mesh refinement</a>. During the first timestep, an arbitrary number of spatial adaptations may be performed, as the initial condition can be re-assigned on the refined mesh. (This is indicated by setting the boolean flag <code>first</code> to <code>true</code> when calling the spatially adaptive, unsteady Newton solver.) During subsequent timesteps the need to interpolate the history values onto the refined mesh limits the benefits of repeated mesh adaptations and we limit the number of spatial adaptations per timestep to 1.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// First timestep: We may re-assign the initial condition</span></div>
+<div class="line"> <span class="comment">// following any mesh adaptation.</span></div>
+<div class="line"> <span class="keywordtype">bool</span> first=<span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Max. number of adaptations during first timestep</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_adapt=10;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Timestepping loop</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Solve the problem</span></div>
+<div class="line">   <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.unsteady_newton_solve(dt, max_adapt, first);</div>
+<div class="line">    </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Outpt the solution</span></div>
+<div class="line">   <a class="code" href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution(doc_info, trace_file);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Step number</span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// We&#39;ve done one step: Don&#39;t re-assign the initial conditions</span></div>
+<div class="line">   <span class="comment">// and limit the number of adaptive mesh refinements to one</span></div>
+<div class="line">   <span class="comment">// per timestep.</span></div>
+<div class="line">   first=<span class="keyword">false</span>;</div>
+<div class="line">   max_adapt=1;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> trace_file.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of driver code</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problemclass"></a>
+The problem class</h1>
+<p>As usual, we template the problem class by the element type and provide an access functions to the "bulk" Navier-Stokes mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_problem_class=======================================</span></div>
+<div class="line"><span class="comment">///Problem class</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classCollapsibleChannelProblem.html">CollapsibleChannelProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> public :</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor : the arguments are the number of elements,</span></div>
+<div class="line"><span class="comment"> /// the length of the domain and the amplitude and period of </span></div>
+<div class="line"><span class="comment"> ///the oscillations</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classCollapsibleChannelProblem.html#ab43fa30667f57e8019c8b30fd93156f8">CollapsibleChannelProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nup, </div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ncollapsible,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ndown,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ny,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lup,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lcollapsible, </div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ldown,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ly,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; amplitude,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; period);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Empty destructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classCollapsibleChannelProblem.html#a205e3e654d3205d1d55ac46e7b63ca9d">~CollapsibleChannelProblem</a>() {} </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Access function for the specific mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableCollapsibleChannelMesh&lt;ELEMENT&gt;* <a class="code" href="classCollapsibleChannelProblem.html#a49a428b5f489d11b3fb92199b72f6dd7">bulk_mesh_pt</a>() </div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Upcast from pointer to the Mesh base class to the specific </span></div>
+<div class="line">   <span class="comment">// element type that we&#39;re using here.</span></div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>RefineableCollapsibleChannelMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line">    (<a class="code" href="classCollapsibleChannelProblem.html#acd96e5a1d72cc3a1aad196c97dcb3883">Bulk_mesh_pt</a>);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of access to bulk mesh</span></div>
+</div><!-- fragment --><p>No action is needed before or after solving, so the pure virtual functions <code>Problem::actions_before_newton_solve()</code> and <code>Problem::actions_after_newton_solve()</code> can remain empty.</p>
+<div class="fragment"><div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve (empty) </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_newton_solve(){}</div>
+</div><!-- fragment --><p>We will use the function <code>Problem::actions_before_implicit_timestep()</code> to update the no-slip boundary conditions on the moving wall before each timestep and employ <code>Problem::actions_before_adapt()</code> and <code>Problem::actions_after_adapt()</code> to wipe and rebuild the mesh of prescribed traction elements each time a mesh adaptation is performed. The functions <code>Problem::doc_solution(...)</code> and <code>Problem::set_initial_condition()</code> will do what they say...</p>
+<div class="fragment"><div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update the velocity boundary condition on the moving wall</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_implicit_timestep();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before adapt: Wipe the mesh of prescribed traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_adapt();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Actions after adapt: Rebuild the mesh of prescribed traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_adapt();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Apply initial conditions</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> set_initial_condition();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution(DocInfo&amp; doc_info, ofstream&amp; trace_file);</div>
+</div><!-- fragment --><p>The private helper functions <code>create_traction_elements(...)</code> and <code>delete_traction_elements()</code> attach and remove the traction elements from the upstream boundary of the "bulk" Navier-Stokes mesh. </p><div class="fragment"><div class="line"> </div>
+<div class="line">private : </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create the prescribed traction elements on boundary b</span></div>
+<div class="line"><span class="comment"> /// of the bulk mesh and stick them into the surface mesh.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> create_traction_elements(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;b, </div>
+<div class="line">                               Mesh* <span class="keyword">const</span> &amp;bulk_mesh_pt,</div>
+<div class="line">                               Mesh* <span class="keyword">const</span> &amp;surface_mesh_pt);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Delete prescribed traction elements from the surface mesh</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> delete_traction_elements(Mesh* <span class="keyword">const</span> &amp;surface_mesh_pt);</div>
+</div><!-- fragment --><p>The private member data contains the geometric parameters as well as the pointer to the <code>GeomObject</code> that describes the moving wall.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Number of elements in the x direction in the upstream part of the channel</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Nup;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Number of elements in the x direction in the &quot;collapsible&quot; </span></div>
+<div class="line"><span class="comment"> /// part of the channel</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Ncollapsible;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Number of elements in the x direction in the downstream part of the channel</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Ndown;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Number of elements across the channel</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Ny;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///x-length in the upstream part of the channel</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Lup;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///x-length in the &quot;collapsible&quot; part of the channel</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Lcollapsible;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///x-length in the downstream part of the channel</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Ldown;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Transverse length</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Ly;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Pointer to the geometric object that parametrises the &quot;collapsible&quot; wall</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classOscillatingWall.html">OscillatingWall</a>* Wall_pt;</div>
+</div><!-- fragment --><p>Further private member data includes pointers to the "bulk" mesh and the surface mesh that contains the traction elements, and pointers to control nodes in the in- and outflow cross-sections.</p>
+<div class="fragment"><div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to the &quot;bulk&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableCollapsibleChannelMesh&lt;ELEMENT&gt;* Bulk_mesh_pt;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Pointer to the &quot;surface&quot; mesh that contains the applied traction</span></div>
+<div class="line"><span class="comment"> /// elements</span></div>
+<div class="line"><span class="comment"></span> Mesh* Surface_mesh_pt; </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to the left control node</span></div>
+<div class="line"><span class="comment"></span> Node* Left_node_pt;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to right control node</span></div>
+<div class="line"><span class="comment"></span> Node* Right_node_pt;</div>
+<div class="line">  </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problemcontr"></a>
+The problem constructor</h1>
+<p>The arguments passed to the problem constructor specify the number of elements and lengths of the various parts of the channel, as well as the amplitude and period of the wall oscillations.</p>
+<p>We store the parameters in the problem's private member data and increase the maximum permitted residual for the Newton iteration.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_constructor=======================================</span></div>
+<div class="line"><span class="comment">/// Constructor for the collapsible channel problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===============================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classCollapsibleChannelProblem.html#ab43fa30667f57e8019c8b30fd93156f8">CollapsibleChannelProblem&lt;ELEMENT&gt;::CollapsibleChannelProblem</a>(</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nup, </div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ncollapsible,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ndown,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ny,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lup,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lcollapsible, </div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ldown,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ly,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; amplitude,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; period)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Number of elements</span></div>
+<div class="line"> Nup=nup;</div>
+<div class="line"> Ncollapsible=ncollapsible;</div>
+<div class="line"> Ndown=ndown;</div>
+<div class="line"> Ny=ny;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Lengths of domain</span></div>
+<div class="line"> Lup=lup;</div>
+<div class="line"> Lcollapsible=lcollapsible;</div>
+<div class="line"> Ldown=ldown;</div>
+<div class="line"> Ly=ly;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Overwrite maximum allowed residual to accomodate possibly</span></div>
+<div class="line"> <span class="comment">// poor initial guess for solution</span></div>
+<div class="line"> Problem::Max_residuals=10000;</div>
+</div><!-- fragment --><p>We continue by building the <code>BDF&lt;2&gt;</code> timestepper and pass a pointer to it to the <code>Problem</code> </p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Allocate the timestepper -- this constructs the Problem&#39;s </span></div>
+<div class="line"> <span class="comment">// time object with a sufficient amount of storage to store the</span></div>
+<div class="line"> <span class="comment">// previous timsteps. </span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> BDF&lt;2&gt;);</div>
+</div><!-- fragment --><p>Next, we create the <code>GeomObject</code> that represents the oscillating wall, and pass a pointer to it to the constructor of the <a href="../../../meshes/mesh_list/html/index.html#collapsible_channel"><code>CollapsibleChannelMesh</code></a></p>
+<div class="fragment"><div class="line"> <span class="comment">//Create the geometric object that represents the wall</span></div>
+<div class="line"> Wall_pt=<span class="keyword">new</span> <a class="code" href="classOscillatingWall.html">OscillatingWall</a>(height, x_left, length, amplitude, period,</div>
+<div class="line">                             time_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Build mesh</span></div>
+<div class="line"> Bulk_mesh_pt = <span class="keyword">new</span> RefineableCollapsibleChannelMesh&lt;ELEMENT&gt;(</div>
+<div class="line">  nup, ncollapsible, ndown, ny,</div>
+<div class="line">  lup, lcollapsible, ldown, ly,</div>
+<div class="line">  Wall_pt,</div>
+<div class="line">  time_stepper_pt());</div>
+</div><!-- fragment --><p>We create a second mesh to store the applied traction elements and attach them to the inflow boundary (boundary 5) of the "bulk" fluid mesh, using the function <code>create_traction_elements(...)</code>. Both submeshes are then combined into a global mesh.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Create &quot;surface mesh&quot; that will contain only the prescribed-traction </span></div>
+<div class="line"> <span class="comment">// elements at the inflow. The default constructor just creates the mesh </span></div>
+<div class="line"> <span class="comment">// without giving it any elements, nodes, etc.</span></div>
+<div class="line"> Surface_mesh_pt = <span class="keyword">new</span> Mesh;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create prescribed-traction elements from all elements that are </span></div>
+<div class="line"> <span class="comment">// adjacent to boundary 5 (inflow boundary), and add them to the surface mesh.</span></div>
+<div class="line"> create_traction_elements(5,Bulk_mesh_pt,Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the two sub meshes to the problem</span></div>
+<div class="line"> add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Combine all submeshes added so far into a single Mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p>We create the spatial error estimator for the fluid mesh and loop over the various elements to set the pointers to the relevant physical parameters, first for the Navier-Stokes elements in the bulk mesh,</p>
+<div class="fragment"><div class="line">   </div>
+<div class="line"> <span class="comment">//Set errror estimator  for bulk mesh</span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>RefineableCollapsibleChannelMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span></div>
+<div class="line">  (Bulk_mesh_pt)-&gt;spatial_error_estimator_pt()=error_estimator_pt;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element=Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   ELEMENT* el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the Reynolds number</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the Womersley number</span></div>
+<div class="line">   el_pt-&gt;re_st_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a>;</div>
+<div class="line">   </div>
+<div class="line">  } <span class="comment">// end loop over bulk elements</span></div>
+</div><!-- fragment --><p>and then for the applied traction elements in the surface mesh:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Loop over the traction elements to pass pointer to prescribed </span></div>
+<div class="line">  <span class="comment">// traction function </span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> n_el=Surface_mesh_pt-&gt;nelement();</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_el;e++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">// Upcast from GeneralisedElement to NavierStokes traction element</span></div>
+<div class="line">    NavierStokesTractionElement&lt;ELEMENT&gt; *el_pt = </div>
+<div class="line">     <span class="keyword">dynamic_cast&lt;</span> NavierStokesTractionElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">      Surface_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Set the pointer to the prescribed traction function</span></div>
+<div class="line">    el_pt-&gt;traction_fct_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a0de42ee6d39e85c77c16a04c3a05f7a2">Global_Physical_Variables::prescribed_traction</a>;</div>
+<div class="line"> </div>
+<div class="line">   }  <span class="comment">// end loop over applied traction elements</span></div>
+</div><!-- fragment --><p>We apply the boundary conditions and pin the velocity on the relevant mesh boundaries:</p><ul>
+<li>both axial and transverse velocities are pinned along the bottom and the top boundaries (boundaries 0, 2, 3 and 4).</li>
+<li>the transverse velocities are pinned along the in- and outflow boundaries (boundaries 1 and 5).</li>
+</ul>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  </div>
+<div class="line">  </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Pin the velocity on the boundaries</span></div>
+<div class="line"> <span class="comment">//x and y-velocities pinned along boundary 0 (bottom boundary) :</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=0; </div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod= bulk_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">    {</div>
+<div class="line">     bulk_mesh_pt()-&gt;boundary_node_pt(ibound, inod)-&gt;pin(i);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//x and y-velocities pinned along boundary 2, 3, 4 (top boundaries) :</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ib=2;ib&lt;5;ib++)</div>
+<div class="line">  { </div>
+<div class="line">   num_nod= bulk_mesh_pt()-&gt;nboundary_node(ib);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       bulk_mesh_pt()-&gt;boundary_node_pt(ib, inod)-&gt;pin(i);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//y-velocity pinned along boundary 1 (right boundary):</span></div>
+<div class="line">  ibound=1; </div>
+<div class="line">  num_nod= bulk_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">   {</div>
+<div class="line">    bulk_mesh_pt()-&gt;boundary_node_pt(ibound, inod)-&gt;pin(1);</div>
+<div class="line">   }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//y-velocity pinned along boundary 5 (left boundary):</span></div>
+<div class="line">  ibound=5; </div>
+<div class="line">  num_nod= bulk_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">   {</div>
+<div class="line">    bulk_mesh_pt()-&gt;boundary_node_pt(ibound, inod)-&gt;pin(1);</div>
+<div class="line">   }<span class="comment">// end of pin_velocity</span></div>
+</div><!-- fragment --><p>We select two control nodes on the inflow and outflow boundaries to document the velocities.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Select control nodes &quot;half way&quot; up the inflow/outflow cross-sections</span></div>
+<div class="line">  <span class="comment">//--------------------------------------------------------------------</span></div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Left boundary</span></div>
+<div class="line">  ibound=5; </div>
+<div class="line">  num_nod= bulk_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">  <span class="keywordtype">unsigned</span> control_nod=num_nod/2;</div>
+<div class="line">  Left_node_pt= bulk_mesh_pt()-&gt;boundary_node_pt(ibound, control_nod);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Right boundary</span></div>
+<div class="line">  ibound=1; </div>
+<div class="line">  num_nod= bulk_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">  control_nod=num_nod/2;</div>
+<div class="line">  Right_node_pt= bulk_mesh_pt()-&gt;boundary_node_pt(ibound, control_nod);</div>
+</div><!-- fragment --><p>Finally, we set up the equation numbering scheme.</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line">  <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line">  cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line">  </div>
+<div class="line">} <span class="comment">//end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<p> <br  />
+</p>
+<h1><a class="anchor" id="doc"></a>
+Post processing</h1>
+<p>The function <code>doc_solution(...)</code> documents the results, and records the time-trace of the axial velocities at the two control nodes and the position of the midpoint on the oscillating wall.</p>
+ <div class="fragment"><div class="line"><span class="comment">//====start_of_doc_solution===================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//============================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCollapsibleChannelProblem.html#afc4af9796c01d904d4074bd5bbfc5b9b">CollapsibleChannelProblem&lt;ELEMENT&gt;:: doc_solution</a>(DocInfo&amp; doc_info, </div>
+<div class="line">                                                       ofstream&amp; trace_file)</div>
+<div class="line">{ </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> bulk_mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get the position of the midpoint on the geometric object</span></div>
+<div class="line"> Vector&lt;double&gt; zeta(1);</div>
+<div class="line"> zeta[0]=0.5*Lcollapsible;</div>
+<div class="line"> Vector&lt;double&gt; wall_point(2);</div>
+<div class="line"> Wall_pt-&gt;position(zeta,wall_point);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write trace file</span></div>
+<div class="line"> trace_file &lt;&lt; time_pt()-&gt;time() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; wall_point[1]  &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; Left_node_pt-&gt;value(0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; Right_node_pt-&gt;value(0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output wall shape</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/wall%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nplot=100; </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;nplot;i++)</div>
+<div class="line">  {</div>
+<div class="line">   zeta[0]=double(i)/double(nplot-1)*Lcollapsible;</div>
+<div class="line">   Wall_pt-&gt;position(zeta,wall_point);</div>
+<div class="line">   some_file &lt;&lt; wall_point[0]  &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">             &lt;&lt; wall_point[1]  &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_doc_solution</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="tractioncre"></a>
+Creation of the traction elements</h1>
+<p>The creation of the applied traction elements follows the usual pattern, explained in detail <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">elsewhere</a>: We loop over the elements in the fluid mesh that are adjacent to the specified mesh boundary, and build the corresponding traction elements, which are added to the surface mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==========start_of_create_traction_elements==================================</span></div>
+<div class="line"><span class="comment">/// Create the traction elements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//============================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCollapsibleChannelProblem.html#a70cfe97c12c0cb6a2a81266cdd4d6088">CollapsibleChannelProblem&lt;ELEMENT&gt;::create_traction_elements</a>(</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;b, Mesh* <span class="keyword">const</span> &amp;bulk_mesh_pt, Mesh* <span class="keyword">const</span> &amp;surface_mesh_pt)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many bulk elements are adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = bulk_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the bulk elements adjacent to boundary b</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span></div>
+<div class="line">    (bulk_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//What is the index of the face of element e that lies along boundary b</span></div>
+<div class="line">   <span class="keywordtype">int</span> face_index = bulk_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Build the corresponding prescribed-traction element</span></div>
+<div class="line">   NavierStokesTractionElement&lt;ELEMENT&gt;* traction_element_pt = </div>
+<div class="line">    <span class="keyword">new</span>  NavierStokesTractionElement&lt;ELEMENT&gt;(bulk_elem_pt,face_index);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Add the prescribed-flux element to the surface mesh</span></div>
+<div class="line">   surface_mesh_pt-&gt;add_element_pt(traction_element_pt);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">//end of loop over bulk elements adjacent to boundary b</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of create_traction_elements</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="tractiondel"></a>
+Delete the traction elements</h1>
+<p>Since the "bulk" elements that the applied traction elements are attached to may disappear during mesh adaptation, we delete all traction elements before the adaptation and re-attach them afterwards. The deletion is performed by the following member function. Note that the surface mesh that contains the traction elements is <em>not</em> deleted, as this would also delete the associated nodes which are shared with the corresponding bulk elements.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_delete_traction_elements==============================</span></div>
+<div class="line"><span class="comment">/// Delete traction elements and wipe the surface mesh</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCollapsibleChannelProblem.html#a6a5324dd1efb8c517a7e4d431b10fca4">CollapsibleChannelProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code" href="classCollapsibleChannelProblem.html#a6a5324dd1efb8c517a7e4d431b10fca4">delete_traction_elements</a>(Mesh* <span class="keyword">const</span> &amp;surface_mesh_pt)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many surface elements are in the surface mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the surface elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Kill surface element</span></div>
+<div class="line">   <span class="keyword">delete</span> surface_mesh_pt-&gt;element_pt(e);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Wipe the mesh</span></div>
+<div class="line"> surface_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of delete_traction_elements</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="IC"></a>
+Apply the initial conditions</h1>
+<p>Initial conditions are applied as usual. We start by confirming that the timestepper is a member of the <code>BDF</code> family and therefore operates on history values that represent the solution at previous timesteps. We assign the previous nodal positions and velocities at all nodes, assuming that for <img class="formulaInl" alt="$ t&lt; 0 $" src="form_27.png"/> the wall is at rest and the flow field is given by steady Poiseuille flow.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_apply_initial_conditions===================================</span></div>
+<div class="line"><span class="comment">/// Apply initial conditions: Impulsive start from steady Poiseuille flow</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//============================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCollapsibleChannelProblem.html#a646147fb75669cfcc5bb56ee79d9b8da">CollapsibleChannelProblem&lt;ELEMENT&gt;::set_initial_condition</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check that timestepper is from the BDF family</span></div>
+<div class="line"> <span class="keywordflow">if</span> (time_stepper_pt()-&gt;type()!=<span class="stringliteral">&quot;BDF&quot;</span>)</div>
+<div class="line">  {</div>
+<div class="line">   std::ostringstream error_stream;</div>
+<div class="line">   error_stream </div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;Timestepper has to be from the BDF family!\n&quot;</span></div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;You have specified a timestepper from the &quot;</span></div>
+<div class="line">    &lt;&lt; time_stepper_pt()-&gt;type() &lt;&lt; <span class="stringliteral">&quot; family&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Update the mesh</span></div>
+<div class="line"> bulk_mesh_pt()-&gt;node_update();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the nodes to set initial guess everywhere</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod = bulk_mesh_pt()-&gt;nnode();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;num_nod;n++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get nodal coordinates</span></div>
+<div class="line">   Vector&lt;double&gt; x(2);</div>
+<div class="line">   x[0]=bulk_mesh_pt()-&gt;node_pt(n)-&gt;x(0);</div>
+<div class="line">   x[1]=bulk_mesh_pt()-&gt;node_pt(n)-&gt;x(1);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Assign initial condition: Steady Poiseuille flow</span></div>
+<div class="line">   bulk_mesh_pt()-&gt;node_pt(n)-&gt;set_value(0,6.0*(x[1]/Ly)*(1.0-(x[1]/Ly)));</div>
+<div class="line">   bulk_mesh_pt()-&gt;node_pt(n)-&gt;set_value(1,0.0);</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Assign initial values for an impulsive start</span></div>
+<div class="line"> bulk_mesh_pt()-&gt;assign_initial_values_impulsive();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of set_initial_condition</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="beforestep"></a>
+Actions before the timestep</h1>
+<p>Before each timestep, we update the nodal positions in the fluid mesh, and apply the no-slip condition to each node on mesh boundary 3.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====start_of_actions_before_implicit_timestep==============================</span></div>
+<div class="line"><span class="comment">/// Execute the actions before timestep: Update the velocity</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// boundary condition on the moving wall</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//============================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCollapsibleChannelProblem.html#a4c365050b11c184007b8e1cd6079147f">CollapsibleChannelProblem&lt;ELEMENT&gt;::actions_before_implicit_timestep</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Update the domain shape</span></div>
+<div class="line"> bulk_mesh_pt()-&gt;node_update();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Moving wall: No slip; this implies that the velocity needs</span></div>
+<div class="line"> <span class="comment">// to be updated in response to wall motion</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=3;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod=bulk_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Which node are we dealing with?</span></div>
+<div class="line">   Node* node_pt=bulk_mesh_pt()-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Apply no slip</span></div>
+<div class="line">   FSI_functions::apply_no_slip_on_moving_wall(node_pt);</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">//end of actions_before_implicit_timestep</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="beforeadapt"></a>
+Actions before the mesh adaptation</h1>
+<p>As discussed above, we delete the applied traction elements before performing any mesh adaptation and then rebuild the global mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=========start_of_actions_before_adapt==================================</span></div>
+<div class="line"><span class="comment">/// Actions before adapt: Wipe the mesh of prescribed traction elements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCollapsibleChannelProblem.html#a54abc5259d590154e5dfa458d885c16c">CollapsibleChannelProblem&lt;ELEMENT&gt;::actions_before_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Kill the traction elements and wipe surface mesh</span></div>
+<div class="line"> delete_traction_elements(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the global mesh. </span></div>
+<div class="line"> rebuild_global_mesh();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of actions_before_adapt</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="beforeadapt"></a>
+Actions before the mesh adaptation</h1>
+<p>Once the mesh has been adapted, we (re-)create the prescribed traction elements and rebuild the global mesh. We also have to pass the pointers to prescribed traction function to the newly created traction elements.</p>
+<div class="fragment"><div class="line"><span class="comment">//==========start_of_actions_after_adapt==================================</span></div>
+<div class="line"><span class="comment">/// Actions after adapt: Rebuild the mesh of prescribed traction elements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classCollapsibleChannelProblem.html#a3ea01d83f0256c588a652741c6c33e0e">CollapsibleChannelProblem&lt;ELEMENT&gt;::actions_after_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Create prescribed-flux elements from all elements that are </span></div>
+<div class="line"> <span class="comment">// adjacent to boundary 5 and add them to surface mesh</span></div>
+<div class="line"> create_traction_elements(5,Bulk_mesh_pt,Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the global mesh</span></div>
+<div class="line"> rebuild_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the traction elements to pass pointer to prescribed traction function</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element=Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to NavierStokesTractionElement element</span></div>
+<div class="line">   NavierStokesTractionElement&lt;ELEMENT&gt; *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>NavierStokesTractionElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">     Surface_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the pointer to the prescribed traction function</span></div>
+<div class="line">   el_pt-&gt;traction_fct_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a0de42ee6d39e85c77c16a04c3a05f7a2">Global_Physical_Variables::prescribed_traction</a>;</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// end of actions_after_adapt</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<ol type="1">
+<li>Check the non-dimensionalisation of the governing equations and confirm that a (non-dimensional) upstream pressure <img class="formulaInl" alt="$ p_{up} = 12 \ L_{total} $" src="form_28.png"/> is required to drive the steady Poiseuille flow specified by (3) through the static, undeformed channel. Use this to "validate" (well, "plausibility-check", anyway...) the code by setting the amplitude of the wall oscillation to zero.</li>
+<li>Double the upstream pressure while keeping the amplitude of the wall oscillation at zero and confirm that the flow accelerates until it (asymptotically) approaches Poiseuille flow with twice the initial flowrate as <img class="formulaInl" alt="$ t \to \infty. $" src="form_29.png"/></li>
+<li>The flow field has the largest velocity gradients in the thin Stokes layers near the wall, causing the automatic mesh adaptation procedure to refine the mesh pre-dominantly in these regions. To facilitate the resolution of such layers the <code>CollapsibleChannelDomain</code> and <code>CollapsibleChannelMesh</code> allow the specification of a mapping [0,1] -&gt; [0,1] that redistributes the nodal points in the vertical direction so that the elements near the wall become more squashed. By default the "boundary-layer squash function" is the identity but it may be overloaded by specifying a function pointer to an alternative function. The driver code already includes a demonstration of this capability which may be activated by compiling the driver code with <code>-DUSE_BL_SQUASH_FCT</code>. This activates the code segment  <div class="fragment"><div class="line"><span class="preprocessor">#ifdef USE_BL_SQUASH_FCT</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set a non-trivial boundary-layer-squash function...</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;bl_squash_fct_pt() = &amp;<a class="code" href="namespaceBL__Squash.html#a0fdaf7661591150041b7102dbe578cdc">BL_Squash::squash_fct</a>; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// ... and update the nodal positions accordingly</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;node_update();</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --> in the Problem constructor. The "squash function" used for this example is defined in the following namespace:  <div class="fragment"><div class="line"><span class="comment">//==========start_of_BL_Squash =========================================</span></div>
+<div class="line"><span class="comment">/// Namespace to define the mapping [0,1] -&gt; [0,1] that re-distributes</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// nodal points across the channel width.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceBL__Squash.html">BL_Squash</a></div>
+<div class="line">{</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Boundary layer width</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceBL__Squash.html#a3c4183891049bca81f3a011db24fc579">Delta</a>=0.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Fraction of points in boundary layer</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">Fract_in_BL</a>=0.5;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Mapping [0,1] -&gt; [0,1] that re-distributes</span></div>
+<div class="line"><span class="comment"> /// nodal points across the channel width</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceBL__Squash.html#a0fdaf7661591150041b7102dbe578cdc">squash_fct</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; s)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Default return</span></div>
+<div class="line">  <span class="keywordtype">double</span> y=s;</div>
+<div class="line">  <span class="keywordflow">if</span> (s&lt;0.5*<a class="code" href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">Fract_in_BL</a>)</div>
+<div class="line">   {</div>
+<div class="line">    y=<a class="code" href="namespaceBL__Squash.html#a3c4183891049bca81f3a011db24fc579">Delta</a>*2.0*s/<a class="code" href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">Fract_in_BL</a>;</div>
+<div class="line">   }</div>
+<div class="line">  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (s&gt;1.0-0.5*<a class="code" href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">Fract_in_BL</a>)</div>
+<div class="line">   {</div>
+<div class="line">    y=2.0*<a class="code" href="namespaceBL__Squash.html#a3c4183891049bca81f3a011db24fc579">Delta</a>/<a class="code" href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">Fract_in_BL</a>*s+1.0-2.0*<a class="code" href="namespaceBL__Squash.html#a3c4183891049bca81f3a011db24fc579">Delta</a>/<a class="code" href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">Fract_in_BL</a>;</div>
+<div class="line">   }</div>
+<div class="line">  <span class="keywordflow">else</span></div>
+<div class="line">   {</div>
+<div class="line">    y=(1.0-2.0*<a class="code" href="namespaceBL__Squash.html#a3c4183891049bca81f3a011db24fc579">Delta</a>)/(1.0-<a class="code" href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">Fract_in_BL</a>)*s+</div>
+<div class="line">      (<a class="code" href="namespaceBL__Squash.html#a3c4183891049bca81f3a011db24fc579">Delta</a>-0.5*<a class="code" href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">Fract_in_BL</a>)/(1.0-<a class="code" href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">Fract_in_BL</a>);</div>
+<div class="line">   }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> y;</div>
+<div class="line"> }</div>
+<div class="line">}<span class="comment">// end of BL_Squash</span></div>
+</div><!-- fragment --> With this function 50% of the nodal points in the vertical direction are located within two boundary-layer regions which occupy 2 x 10% of the channel's width. The figure below shows the element shapes for a (coarse) initial mesh that is used in the validation run, with and without the boundary-layer squashing function: <div class="image">
+<img src="bl_squashing.gif" alt=""/>
+<div class="caption">
+Coarse initial meshes with and without the boundary-layer squash function. </div></div>
+  Confirm that if this "squashing function" is applied to the mesh that is used during the non-self-test runs (this mesh has 16 x larger number of elements than the meshes shown above), the quality of the computed solution improves so much that no subsequent mesh adaptation is required.</li>
+<li>The flow structures observed during the small-amplitude oscillations (shown in the animation at the beginning of this document) are in perfect agreement with the structures predicted by <a href="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">Jensen &amp; Heil's (2003)</a> asymptotic analysis. As an exercise, increase the amplitude of the wall oscillation (to <img class="formulaInl" alt="$ A=0.5$" src="form_30.png"/> , say) to confirm that the flow-structure predicted by the theory (which is strictly applicable only for small-amplitude <br  />
+ oscillations) also provides an excellent description of of the system's behaviour during large-amplitude oscillations with more complicated wall motions. <br  />
+ <br  />
+ For instance, the figure below shows a snapshot of the <a href="../figures/large_amplitude_flow.avi">the animation of the computational results</a> for an oscillation in which the wall undergoes a more complicated motion, described by <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf R}_w(\zeta,t) = \left( \begin{array}{c} L_{up} + \zeta \\ 1 \end{array} \right) + A \left( \begin{array}{l} - B \sin\left(\frac{2\pi}{L_{collapsible}}\zeta\right) \\ \left(\frac{2}{L_{collapsible}}\right)^2 \zeta \ (L-\zeta) \end{array} \right) \ \sin\left(\frac{2\pi t}{T}\right) \ {\cal R}(t) \ \ \ \ \ \ \ \ \ \ (6) \]" src="form_31.png"/>
+</p>
+ for <img class="formulaInl" alt="$ A= B = 0.5 $" src="form_32.png"/> . For these parameter values, the wall performs a large-amplitude oscillation in the course of which material particles are not only displaced vertically but also in the horizontal direction. Nevertheless, the flow generated by the moving wall may be described as arising from the superposition of Poiseuille flow and an axial sloshing motion, the latter obviously having a much larger amplitude than in the previous case. The <br  />
+ <a href="../figures/large_amplitude_flow.avi">animation of the flow field</a> shows that more complex local flow features develop briefly whenever the flow separates from the wall. However, the appearance of these features does not change the macroscopic behaviour of the flow. <div class="image">
+<img src="large_amplitude_flow.gif" alt=""/>
+<div class="caption">
+Flow field for a large-amplitude wall motion. Re=ReSt=50; A=B=0.5; T=0.45. </div></div>
+ </li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/navier_stokes/collapsible_channel/">demo_drivers/navier_stokes/collapsible_channel/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/navier_stokes/collapsible_channel/collapsible_channel.cc">demo_drivers/navier_stokes/collapsible_channel/collapsible_channel.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="anamespaceBL__Squash_html"><div class="ttname"><a href="namespaceBL__Squash.html">BL_Squash</a></div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00045">collapsible_channel.cc:45</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_a4c365050b11c184007b8e1cd6079147f"><div class="ttname"><a href="classCollapsibleChannelProblem.html#a4c365050b11c184007b8e1cd6079147f">CollapsibleChannelProblem::actions_before_implicit_timestep</a></div><div class="ttdeci">void actions_before_implicit_timestep()</div><div class="ttdoc">Update the velocity boundary condition on the moving wall.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00700">collapsible_channel.cc:700</a></div></div>
+<div class="ttc" id="anamespaceBL__Squash_html_a3c4183891049bca81f3a011db24fc579"><div class="ttname"><a href="namespaceBL__Squash.html#a3c4183891049bca81f3a011db24fc579">BL_Squash::Delta</a></div><div class="ttdeci">double Delta</div><div class="ttdoc">Boundary layer width.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00049">collapsible_channel.cc:49</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_af33b31988c823d33a3b147281ec94599"><div class="ttname"><a href="classOscillatingWall.html#af33b31988c823d33a3b147281ec94599">OscillatingWall::T</a></div><div class="ttdeci">double T</div><div class="ttdoc">Period of the oscillations.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00192">collapsible_channel.cc:192</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_a54abc5259d590154e5dfa458d885c16c"><div class="ttname"><a href="classCollapsibleChannelProblem.html#a54abc5259d590154e5dfa458d885c16c">CollapsibleChannelProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt: Wipe the mesh of prescribed traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00726">collapsible_channel.cc:726</a></div></div>
+<div class="ttc" id="acollapsible__channel_8txt_html_a2915e1695d3a1b958511c874d728cec0"><div class="ttname"><a href="collapsible__channel_8txt.html#a2915e1695d3a1b958511c874d728cec0">A</a></div><div class="ttdeci">mainpage Demo we will demonstrate how easy it is to extend the driver code for the current problem to a fluid structure interaction problem in which the membrane is represented by an elastic beam that deforms in response to the fluid traction We note that O E E[wall_shape] f where the ramp function f[{\cal R}(t)=\left\{\begin{array}{ll}\frac{1}{2}(1-\cos(\pi t/T)) &amp;\mbox{for $t&lt; T$} \\1 &amp;\mbox{for $t \ge T$}\end{array}\right.\f] is used to facilitate the start up of the simulation from the initial condition of steady Poiseuille flow taken from&lt; A HREF=&quot;../figures/flow.avi&quot;&gt; the animation of the computational results&lt;/A &gt; The first four figures the axial component of the perturbation velocity and the pressure distribution The contour plot at the bottom of the figure shows a contour plot of the pressure and a few instantaneous streamlines I w textwidth flow Snapshot from the animation of the flow field for A</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8txt_source.html#l00157">collapsible_channel.txt:157</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_a646147fb75669cfcc5bb56ee79d9b8da"><div class="ttname"><a href="classCollapsibleChannelProblem.html#a646147fb75669cfcc5bb56ee79d9b8da">CollapsibleChannelProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Apply initial conditions.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00653">collapsible_channel.cc:653</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_acd96e5a1d72cc3a1aad196c97dcb3883"><div class="ttname"><a href="classCollapsibleChannelProblem.html#acd96e5a1d72cc3a1aad196c97dcb3883">CollapsibleChannelProblem::Bulk_mesh_pt</a></div><div class="ttdeci">RefineableCollapsibleChannelMesh&lt; ELEMENT &gt; * Bulk_mesh_pt</div><div class="ttdoc">Pointer to the &quot;bulk&quot; mesh.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00329">collapsible_channel.cc:329</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_a9db810649987a2011c7fe14d10b98b9a"><div class="ttname"><a href="classOscillatingWall.html#a9db810649987a2011c7fe14d10b98b9a">OscillatingWall::B</a></div><div class="ttdeci">double B</div><div class="ttdoc">Relative amplitude of horizontal wall motion.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00189">collapsible_channel.cc:189</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_ac3e0098c026e23dd8be8ea29f6a9c101"><div class="ttname"><a href="classOscillatingWall.html#ac3e0098c026e23dd8be8ea29f6a9c101">OscillatingWall::period</a></div><div class="ttdeci">double &amp; period()</div><div class="ttdoc">Access function to the period.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00138">collapsible_channel.cc:138</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_a70cfe97c12c0cb6a2a81266cdd4d6088"><div class="ttname"><a href="classCollapsibleChannelProblem.html#a70cfe97c12c0cb6a2a81266cdd4d6088">CollapsibleChannelProblem::create_traction_elements</a></div><div class="ttdeci">void create_traction_elements(const unsigned &amp;b, Mesh *const &amp;bulk_mesh_pt, Mesh *const &amp;surface_mesh_pt)</div><div class="ttdoc">Create the traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00597">collapsible_channel.cc:597</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_ac22b6ac70a42850ddbe2e9c4c16f4664"><div class="ttname"><a href="classOscillatingWall.html#ac22b6ac70a42850ddbe2e9c4c16f4664">OscillatingWall::A</a></div><div class="ttdeci">double A</div><div class="ttdoc">Amplitude of oscillation.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00186">collapsible_channel.cc:186</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_ac5e2ad6d5ef2992ba9295118787190e6"><div class="ttname"><a href="classOscillatingWall.html#ac5e2ad6d5ef2992ba9295118787190e6">OscillatingWall::Length</a></div><div class="ttdeci">double Length</div><div class="ttdoc">Length.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00180">collapsible_channel.cc:180</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_a3ea01d83f0256c588a652741c6c33e0e"><div class="ttname"><a href="classCollapsibleChannelProblem.html#a3ea01d83f0256c588a652741c6c33e0e">CollapsibleChannelProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adapt: Rebuild the mesh of prescribed traction elements.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00741">collapsible_channel.cc:741</a></div></div>
+<div class="ttc" id="anamespaceBL__Squash_html_a0fdaf7661591150041b7102dbe578cdc"><div class="ttname"><a href="namespaceBL__Squash.html#a0fdaf7661591150041b7102dbe578cdc">BL_Squash::squash_fct</a></div><div class="ttdeci">double squash_fct(const double &amp;s)</div><div class="ttdoc">Mapping [0,1] -&gt; [0,1] that re-distributes nodal points across the channel width.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00056">collapsible_channel.cc:56</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_aa587e944cac9e501e6d3323731145b95"><div class="ttname"><a href="classOscillatingWall.html#aa587e944cac9e501e6d3323731145b95">OscillatingWall::H</a></div><div class="ttdeci">double H</div><div class="ttdoc">Height at ends.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00177">collapsible_channel.cc:177</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_a9c4bea6ec6e80ba23139cd5a1d4d25d5"><div class="ttname"><a href="classOscillatingWall.html#a9c4bea6ec6e80ba23139cd5a1d4d25d5">OscillatingWall::Time_pt</a></div><div class="ttdeci">Time * Time_pt</div><div class="ttdoc">Pointer to the global time object.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00195">collapsible_channel.cc:195</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html"><div class="ttname"><a href="classCollapsibleChannelProblem.html">CollapsibleChannelProblem</a></div><div class="ttdoc">Problem class.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00235">collapsible_channel.cc:235</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_ab43fa30667f57e8019c8b30fd93156f8"><div class="ttname"><a href="classCollapsibleChannelProblem.html#ab43fa30667f57e8019c8b30fd93156f8">CollapsibleChannelProblem::CollapsibleChannelProblem</a></div><div class="ttdeci">CollapsibleChannelProblem(const unsigned &amp;nup, const unsigned &amp;ncollapsible, const unsigned &amp;ndown, const unsigned &amp;ny, const double &amp;lup, const double &amp;lcollapsible, const double &amp;ldown, const double &amp;ly, const double &amp;amplitude, const double &amp;period)</div><div class="ttdoc">Constructor : the arguments are the number of elements, the length of the domain and the amplitude an...</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00350">collapsible_channel.cc:350</a></div></div>
+<div class="ttc" id="acollapsible__channel_8txt_html_ac4952e657b7da1dbb7923ec12b675021"><div class="ttname"><a href="collapsible__channel_8txt.html#ac4952e657b7da1dbb7923ec12b675021">T</a></div><div class="ttdeci">mainpage Demo we will demonstrate how easy it is to extend the driver code for the current problem to a fluid structure interaction problem in which the membrane is represented by an elastic beam that deforms in response to the fluid traction We note that O E E[wall_shape] f where the ramp function f[{\cal R}(t)=\left\{\begin{array}{ll}\frac{1}{2}(1-\cos(\pi t/T)) &amp;\mbox{for $t&lt; T$} \\1 &amp;\mbox{for $t \ge T$}\end{array}\right.\f] is used to facilitate the start up of the simulation from the initial condition of steady Poiseuille flow taken from&lt; A HREF=&quot;../figures/flow.avi&quot;&gt; the animation of the computational results&lt;/A &gt; The first four figures the axial component of the perturbation velocity and the pressure distribution The contour plot at the bottom of the figure shows a contour plot of the pressure and a few instantaneous streamlines I w textwidth flow Snapshot from the animation of the flow field for T</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8txt_source.html#l00157">collapsible_channel.txt:157</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a0de42ee6d39e85c77c16a04c3a05f7a2"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a0de42ee6d39e85c77c16a04c3a05f7a2">Global_Physical_Variables::prescribed_traction</a></div><div class="ttdeci">void prescribed_traction(const double &amp;t, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction)</div><div class="ttdoc">Traction required at the left boundary.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00217">collapsible_channel.cc:217</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_a71a60ee3294746875a24aeeffb38f7ec"><div class="ttname"><a href="classOscillatingWall.html#a71a60ee3294746875a24aeeffb38f7ec">OscillatingWall::X_left</a></div><div class="ttdeci">double X_left</div><div class="ttdoc">x-coordinate of left end</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00183">collapsible_channel.cc:183</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a085ee4bf968ffdd01a41b8c41864f907"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a></div><div class="ttdeci">double ReSt</div><div class="ttdoc">Womersley = Reynolds times Strouhal.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00211">collapsible_channel.cc:211</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_a205e3e654d3205d1d55ac46e7b63ca9d"><div class="ttname"><a href="classCollapsibleChannelProblem.html#a205e3e654d3205d1d55ac46e7b63ca9d">CollapsibleChannelProblem::~CollapsibleChannelProblem</a></div><div class="ttdeci">~CollapsibleChannelProblem()</div><div class="ttdoc">Empty destructor.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00255">collapsible_channel.cc:255</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_a5ededc3d27eef5c4ef7e82ac5cdf6ff9"><div class="ttname"><a href="classOscillatingWall.html#a5ededc3d27eef5c4ef7e82ac5cdf6ff9">OscillatingWall::OscillatingWall</a></div><div class="ttdeci">OscillatingWall(const double &amp;h, const double &amp;x_left, const double &amp;l, const double &amp;a, const double &amp;period, Time *time_pt)</div><div class="ttdoc">Constructor : It's a 2D object, parametrised by one Lagrangian coordinate. Arguments: height at ends,...</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00125">collapsible_channel.cc:125</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_a6a5324dd1efb8c517a7e4d431b10fca4"><div class="ttname"><a href="classCollapsibleChannelProblem.html#a6a5324dd1efb8c517a7e4d431b10fca4">CollapsibleChannelProblem::delete_traction_elements</a></div><div class="ttdeci">void delete_traction_elements(Mesh *const &amp;surface_mesh_pt)</div><div class="ttdoc">Delete prescribed traction elements from the surface mesh.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00630">collapsible_channel.cc:630</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html"><div class="ttname"><a href="classOscillatingWall.html">OscillatingWall</a></div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00116">collapsible_channel.cc:116</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_adc35b40bdd733a244d6399d91fa20ade"><div class="ttname"><a href="classOscillatingWall.html#adc35b40bdd733a244d6399d91fa20ade">OscillatingWall::~OscillatingWall</a></div><div class="ttdeci">~OscillatingWall()</div><div class="ttdoc">Destructor: Empty.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00132">collapsible_channel.cc:132</a></div></div>
+<div class="ttc" id="anamespaceBL__Squash_html_af84bda39008884cd2b01e630957573df"><div class="ttname"><a href="namespaceBL__Squash.html#af84bda39008884cd2b01e630957573df">BL_Squash::Fract_in_BL</a></div><div class="ttdeci">double Fract_in_BL</div><div class="ttdoc">Fraction of points in boundary layer.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00052">collapsible_channel.cc:52</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_afc4af9796c01d904d4074bd5bbfc5b9b"><div class="ttname"><a href="classCollapsibleChannelProblem.html#afc4af9796c01d904d4074bd5bbfc5b9b">CollapsibleChannelProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info, ofstream &amp;trace_file)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00543">collapsible_channel.cc:543</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for phyical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00205">collapsible_channel.cc:205</a></div></div>
+<div class="ttc" id="aclassCollapsibleChannelProblem_html_a49a428b5f489d11b3fb92199b72f6dd7"><div class="ttname"><a href="classCollapsibleChannelProblem.html#a49a428b5f489d11b3fb92199b72f6dd7">CollapsibleChannelProblem::bulk_mesh_pt</a></div><div class="ttdeci">RefineableCollapsibleChannelMesh&lt; ELEMENT &gt; * bulk_mesh_pt()</div><div class="ttdoc">Access function for the specific mesh.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00258">collapsible_channel.cc:258</a></div></div>
+<div class="ttc" id="acollapsible__channel_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="collapsible__channel_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8txt_source.html#l00009">collapsible_channel.txt:9</a></div></div>
+<div class="ttc" id="aclassOscillatingWall_html_ae923c6a7abefe33efaf47a4b69d1b621"><div class="ttname"><a href="classOscillatingWall.html#ae923c6a7abefe33efaf47a4b69d1b621">OscillatingWall::amplitude</a></div><div class="ttdeci">double &amp; amplitude()</div><div class="ttdoc">Access function to the amplitude.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00135">collapsible_channel.cc:135</a></div></div>
+<div class="ttc" id="acollapsible__channel_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="collapsible__channel_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00772">collapsible_channel.cc:772</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ae1a493695b7f4619af32f405b0b28861"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ae1a493695b7f4619af32f405b0b28861">Global_Physical_Variables::P_up</a></div><div class="ttdeci">double P_up</div><div class="ttdoc">Default pressure on the left boundary.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00214">collapsible_channel.cc:214</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition:</b> <a href="collapsible__channel_8cc_source.html#l00208">collapsible_channel.cc:208</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:10:40
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

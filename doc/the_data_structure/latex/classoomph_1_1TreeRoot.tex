@@ -1,0 +1,250 @@
+\hypertarget{classoomph_1_1TreeRoot}{}\doxysection{oomph\+::Tree\+Root Class Reference}
+\label{classoomph_1_1TreeRoot}\index{oomph::TreeRoot@{oomph::TreeRoot}}
+
+
+{\ttfamily \#include $<$tree.\+h$>$}
+
+Inheritance diagram for oomph\+::Tree\+Root\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1TreeRoot}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot_a9220f966655424676f4a5710b016c23d}{Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor for the (empty) root tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot_abadadc75e4d5b3398306579bb1eb76a7}{Tree\+Root}} (const \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TreeRoot_a1a600f35a0134eafe193d0996b2c7cd3}{operator=}} (const \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$\& \mbox{\hyperlink{classoomph_1_1TreeRoot_a1b03a77d1231ef49f236a97374c15d6b}{neighbour\+\_\+pt}} (const int \&direction)
+\begin{DoxyCompactList}\small\item\em Return the pointer to the neighbouring Tree\+Roots in specified direction. Returns N\+U\+LL if there\textquotesingle{}s no neighbour in this direction. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1TreeRoot_a7be347e54e34f924c008c302f5146064}{is\+\_\+neighbour\+\_\+periodic}} (const int \&direction)
+\begin{DoxyCompactList}\small\item\em Return whether the neighbour in the particular direction is periodic. ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TreeRoot_ad4a2c51b2b42261bd8dde67ca32c594c}{set\+\_\+neighbour\+\_\+periodic}} (const int \&direction)
+\begin{DoxyCompactList}\small\item\em Set the neighbour in particular direction to be periodic. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TreeRoot_a9e20f4787d7b34d5f4462dea63fd0204}{set\+\_\+neighbour\+\_\+nonperiodic}} (const int \&direction)
+\begin{DoxyCompactList}\small\item\em Set the neighbour in particular direction to be nonperiodic. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TreeRoot_a81be1a835829a48f7f443dcc85f369b9}{nneighbour}} ()
+\begin{DoxyCompactList}\small\item\em Return the number of neighbours. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TreeRoot_a01e5f3564f923fa92015c444d9f656bd}{Neighbour\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Map of pointers to the neighbouring Tree\+Roots\+: Neighbour\+\_\+pt\mbox{[}direction\mbox{]} returns the pointer to the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}\textquotesingle{}s neighbour in the (enumerated) direction. Returns N\+U\+LL if there\textquotesingle{}s no neighbour in this direction. \end{DoxyCompactList}\item 
+std\+::map$<$ int, bool $>$ \mbox{\hyperlink{classoomph_1_1TreeRoot_a735d46a67142786a3368d0e719513c03}{Neighbour\+\_\+periodic}}
+\begin{DoxyCompactList}\small\item\em Map of booleans used for periodic boundaries\+: Neighbour\+\_\+periodic\+\_\+direction\mbox{[}directon\mbox{]} returns true if the neighbour in that direction is actually a periodic neighbour --- shared data values, but independent position. The default return of the map is false. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} is a \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} that forms the root of a (recursive) tree. The \char`\"{}root node\char`\"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \mbox{\hyperlink{classoomph_1_1TreeForest}{Tree\+Forest}}). 
+
+Definition at line 299 of file tree.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_a9220f966655424676f4a5710b016c23d}\label{classoomph_1_1TreeRoot_a9220f966655424676f4a5710b016c23d}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!TreeRoot@{TreeRoot}}
+\index{TreeRoot@{TreeRoot}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{TreeRoot()}{TreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+Root\+::\+Tree\+Root (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the (empty) root tree. 
+
+
+
+Definition at line 320 of file tree.\+h.
+
+
+
+References oomph\+::\+Tree\+::\+Root\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_abadadc75e4d5b3398306579bb1eb76a7}\label{classoomph_1_1TreeRoot_abadadc75e4d5b3398306579bb1eb76a7}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!TreeRoot@{TreeRoot}}
+\index{TreeRoot@{TreeRoot}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{TreeRoot()}{TreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+Root\+::\+Tree\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 328 of file tree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_a7be347e54e34f924c008c302f5146064}\label{classoomph_1_1TreeRoot_a7be347e54e34f924c008c302f5146064}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!is\_neighbour\_periodic@{is\_neighbour\_periodic}}
+\index{is\_neighbour\_periodic@{is\_neighbour\_periodic}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{is\_neighbour\_periodic()}{is\_neighbour\_periodic()}}
+{\footnotesize\ttfamily bool oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic (\begin{DoxyParamCaption}\item[{const int \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return whether the neighbour in the particular direction is periodic. ~\newline
+ 
+
+
+
+Definition at line 346 of file tree.\+h.
+
+
+
+References Neighbour\+\_\+periodic.
+
+
+
+Referenced by oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+Q\+Element$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+P\+Refineable\+Q\+Element$<$ 2, I\+N\+I\+T\+I\+A\+L\+\_\+\+N\+N\+O\+D\+E\+\_\+1\+D $>$\+::check\+\_\+integrity(), oomph\+::\+Oc\+Tree\+::doc\+\_\+face\+\_\+neighbours(), oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours(), and oomph\+::\+Quad\+Tree\+::doc\+\_\+neighbours().
+
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_a1b03a77d1231ef49f236a97374c15d6b}\label{classoomph_1_1TreeRoot_a1b03a77d1231ef49f236a97374c15d6b}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!neighbour\_pt@{neighbour\_pt}}
+\index{neighbour\_pt@{neighbour\_pt}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{neighbour\_pt()}{neighbour\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$ \& oomph\+::\+Tree\+Root\+::neighbour\+\_\+pt (\begin{DoxyParamCaption}\item[{const int \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the neighbouring Tree\+Roots in specified direction. Returns N\+U\+LL if there\textquotesingle{}s no neighbour in this direction. 
+
+
+
+Definition at line 341 of file tree.\+h.
+
+
+
+References Neighbour\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), and oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour().
+
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_a81be1a835829a48f7f443dcc85f369b9}\label{classoomph_1_1TreeRoot_a81be1a835829a48f7f443dcc85f369b9}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!nneighbour@{nneighbour}}
+\index{nneighbour@{nneighbour}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{nneighbour()}{nneighbour()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Tree\+Root\+::nneighbour (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of neighbours. 
+
+
+
+Definition at line 358 of file tree.\+h.
+
+
+
+References Neighbour\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_a1a600f35a0134eafe193d0996b2c7cd3}\label{classoomph_1_1TreeRoot_a1a600f35a0134eafe193d0996b2c7cd3}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+Root\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 334 of file tree.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_a9e20f4787d7b34d5f4462dea63fd0204}\label{classoomph_1_1TreeRoot_a9e20f4787d7b34d5f4462dea63fd0204}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!set\_neighbour\_nonperiodic@{set\_neighbour\_nonperiodic}}
+\index{set\_neighbour\_nonperiodic@{set\_neighbour\_nonperiodic}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{set\_neighbour\_nonperiodic()}{set\_neighbour\_nonperiodic()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+Root\+::set\+\_\+neighbour\+\_\+nonperiodic (\begin{DoxyParamCaption}\item[{const int \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the neighbour in particular direction to be nonperiodic. 
+
+
+
+Definition at line 354 of file tree.\+h.
+
+
+
+References Neighbour\+\_\+periodic.
+
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_ad4a2c51b2b42261bd8dde67ca32c594c}\label{classoomph_1_1TreeRoot_ad4a2c51b2b42261bd8dde67ca32c594c}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!set\_neighbour\_periodic@{set\_neighbour\_periodic}}
+\index{set\_neighbour\_periodic@{set\_neighbour\_periodic}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{set\_neighbour\_periodic()}{set\_neighbour\_periodic()}}
+{\footnotesize\ttfamily void oomph\+::\+Tree\+Root\+::set\+\_\+neighbour\+\_\+periodic (\begin{DoxyParamCaption}\item[{const int \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the neighbour in particular direction to be periodic. 
+
+
+
+Definition at line 350 of file tree.\+h.
+
+
+
+References Neighbour\+\_\+periodic.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_a735d46a67142786a3368d0e719513c03}\label{classoomph_1_1TreeRoot_a735d46a67142786a3368d0e719513c03}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!Neighbour\_periodic@{Neighbour\_periodic}}
+\index{Neighbour\_periodic@{Neighbour\_periodic}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{Neighbour\_periodic}{Neighbour\_periodic}}
+{\footnotesize\ttfamily std\+::map$<$int,bool$>$ oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+periodic\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Map of booleans used for periodic boundaries\+: Neighbour\+\_\+periodic\+\_\+direction\mbox{[}directon\mbox{]} returns true if the neighbour in that direction is actually a periodic neighbour --- shared data values, but independent position. The default return of the map is false. 
+
+
+
+Definition at line 315 of file tree.\+h.
+
+
+
+Referenced by is\+\_\+neighbour\+\_\+periodic(), set\+\_\+neighbour\+\_\+nonperiodic(), and set\+\_\+neighbour\+\_\+periodic().
+
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_a01e5f3564f923fa92015c444d9f656bd}\label{classoomph_1_1TreeRoot_a01e5f3564f923fa92015c444d9f656bd}} 
+\index{oomph::TreeRoot@{oomph::TreeRoot}!Neighbour\_pt@{Neighbour\_pt}}
+\index{Neighbour\_pt@{Neighbour\_pt}!oomph::TreeRoot@{oomph::TreeRoot}}
+\doxysubsubsection{\texorpdfstring{Neighbour\_pt}{Neighbour\_pt}}
+{\footnotesize\ttfamily std\+::map$<$int,\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$$>$ oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Map of pointers to the neighbouring Tree\+Roots\+: Neighbour\+\_\+pt\mbox{[}direction\mbox{]} returns the pointer to the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}\textquotesingle{}s neighbour in the (enumerated) direction. Returns N\+U\+LL if there\textquotesingle{}s no neighbour in this direction. 
+
+
+
+Definition at line 307 of file tree.\+h.
+
+
+
+Referenced by oomph\+::\+Binary\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour(), neighbour\+\_\+pt(), and nneighbour().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tree_8h}{tree.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,1278 @@
+\hypertarget{classoomph_1_1HyprePreconditioner}{}\doxysection{oomph\+::Hypre\+Preconditioner Class Reference}
+\label{classoomph_1_1HyprePreconditioner}\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+
+
+{\ttfamily \#include $<$hypre\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Hypre\+Preconditioner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1HyprePreconditioner}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HyprePreconditioner_af65f23a658889324894e331af515a71c}{Hypre\+Preconditioner}} (const std\+::string \&context\+\_\+string=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructor. Provide optional string that is used in annotation of performance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a024286a123aee3db8b06db9f0c97bbf0}{$\sim$\+Hypre\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HyprePreconditioner_aca5c97a9cc1e7eac7dae52ca7dd89801}{Hypre\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ae5ca775c231584c86193d2219a9c452a}{operator=}} (const \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_afae82e15a88443946509fcb8fd91da75}{enable\+\_\+report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable reporting of cumulative solve time in destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a3936efe626674a8dbe17d842cb60423e}{disable\+\_\+report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable reporting of cumulative solve time in destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a73e679c8139564265a8c6786a112269b}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of preconditioner timings. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a7b28624e54907dc5081484842b8b8530}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of preconditioner timings. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a62f977047d4b26a11da2bb7c98beeaca}{hypre\+\_\+method}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Hypre\+\_\+method flag -- specified via enumeration. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_aa7396f1be54c31883c25e5d89f0af681}{internal\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Internal\+\_\+preconditioner flag -- specified via enumeration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_aa120789b545e8562d24a7e4f8799715f}{use\+\_\+\+Boomer\+A\+MG}} ()
+\begin{DoxyCompactList}\small\item\em Function to select Boomer\+A\+MG as the preconditioner. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a4b0afe4dc57ca9764200c2755ce27dd5}{set\+\_\+amg\+\_\+iterations}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a1fa211b49730947fe525156d08b66da4}{amg\+\_\+iterations}})
+\begin{DoxyCompactList}\small\item\em Function to set the number of times to apply Boomer\+A\+MG. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a1fa211b49730947fe525156d08b66da4}{amg\+\_\+iterations}} ()
+\begin{DoxyCompactList}\small\item\em Return function for Max\+\_\+iter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a7d4e9b31759555c67d51c0418de2980e}{amg\+\_\+using\+\_\+simple\+\_\+smoothing}} ()
+\begin{DoxyCompactList}\small\item\em Function to select use of \textquotesingle{}simple\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+simple\+\_\+smoother ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a0abc961b0dfacd9b6bf7e1da428ab484}{amg\+\_\+simple\+\_\+smoother}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+simple\+\_\+smoother flag. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a65c4923b3332f92c1712a1da86d1da9e}{amg\+\_\+using\+\_\+complex\+\_\+smoothing}} ()
+\begin{DoxyCompactList}\small\item\em Function to select use of \textquotesingle{}complex\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+complex\+\_\+smoother ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ab4a47036de2b2992259863716f6f9121}{amg\+\_\+complex\+\_\+smoother}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+complex\+\_\+smoother flag. \end{DoxyCompactList}\item 
+bool \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a7d849ee9489020e7a58bec0f5d33700e}{amg\+\_\+using\+\_\+simple\+\_\+smoothing\+\_\+flag}} ()
+\begin{DoxyCompactList}\small\item\em Return function for the A\+M\+G\+\_\+using\+\_\+simple\+\_\+smoothing\+\_\+flag. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a42a3de25133fa0816b98fcc493efc12c}{amg\+\_\+print\+\_\+level}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+print\+\_\+level. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a03bb49bd0f7dabbc8ef39b9743d1dcf1}{amg\+\_\+smoother\+\_\+iterations}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+smoother\+\_\+iterations. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ab830e0c945d5318c660cf0e2e2c9bc70}{amg\+\_\+coarsening}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+coarsening flag. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a6bae8beb2e6bff788d083f1e2af4a47b}{amg\+\_\+max\+\_\+levels}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+max\+\_\+levels. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a3abdca331efaf5b2998e1b2056c925eb}{amg\+\_\+damping}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+damping parameter. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a1ec949391111062df52ac15f7dc81525}{amg\+\_\+strength}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+strength. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a0b2ea86dd7597bfd08b0e07f726c973d}{amg\+\_\+max\+\_\+row\+\_\+sum}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+max\+\_\+row\+\_\+sum. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a7394e9282d8422f8658966c5606bdb84}{amg\+\_\+truncation}} ()
+\begin{DoxyCompactList}\small\item\em Access function to A\+M\+G\+\_\+truncation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_aacffb2fc026a5d1c4ead91b49e8002ae}{use\+\_\+\+Para\+Sails}} ()
+\begin{DoxyCompactList}\small\item\em Function to select Para\+Sails as the preconditioner. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ab169873191bebd4dfa39455e8c2f3698}{parasails\+\_\+symmetry}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Para\+Sails symmetry flag. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a29559cc7a6c8247209a20d2031111529}{parasails\+\_\+nlevel}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Para\+Sails nlevel parameter. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a26a87703b9b18194ef57ad1f0ffed5bf}{parasails\+\_\+thresh}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Para\+Sails thresh parameter. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_af7781e6421b33a38a2b473190d26df70}{parasails\+\_\+filter}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Para\+Sails filter parameter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a8250d689c9788cbe028655fc7630aee9}{use\+\_\+\+Euclid}} ()
+\begin{DoxyCompactList}\small\item\em Function to select use Euclid as the preconditioner. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a8b3913c1c8a6b9b6ef07a59f2d597815}{euclid\+\_\+droptol}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Euclid drop tolerance parameter. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a6479953e74f0796384f456d7f9787fc5}{euclid\+\_\+level}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Euclid level parameter for I\+L\+U(k) factorization. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a5fb9201982dc22f9a07b32f68963c603}{enable\+\_\+euclid\+\_\+row\+Scale}} ()
+\begin{DoxyCompactList}\small\item\em Enable euclid row\+Scaling. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a96f90cbfd3e92251707872391c3d66ab}{disable\+\_\+euclid\+\_\+row\+Scale}} ()
+\begin{DoxyCompactList}\small\item\em Disable euclid row scaling. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a722f36d087901fd11b5055f7f3b619b3}{enable\+\_\+euclid\+\_\+using\+\_\+\+BJ}} ()
+\begin{DoxyCompactList}\small\item\em Enable use of Block Jacobi as opposed to P\+I\+LU ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a2165ef8d97b1e267d0555f877a3da342}{disable\+\_\+euclid\+\_\+using\+\_\+\+BJ}} ()
+\begin{DoxyCompactList}\small\item\em Disable use of Block Jacobi,. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a635c84d0bdf407eb532e09f9ebe38d9f}{euclid\+\_\+using\+\_\+\+I\+L\+UK}} ()
+\begin{DoxyCompactList}\small\item\em Function to switch on I\+L\+U(k) factorization for Euclid (default is I\+L\+U(k) factorization) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a55b6027d5212c7e66eec212341dd0af6}{euclid\+\_\+using\+\_\+\+I\+L\+UT}} ()
+\begin{DoxyCompactList}\small\item\em Function to switch on I\+L\+UT factorization for Euclid (default is I\+L\+U(k) factorization) \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a8be8b1933ac9cc1a3b6f4977d92e615c}{euclid\+\_\+print\+\_\+level}} ()
+\begin{DoxyCompactList}\small\item\em Function to set the level of printing from Euclid when the Euclid destructor is called 0\+: no printing (default) 1\+: prints summary of runtime settings and timings 2\+: as 1 plus prints memory usage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}{enable\+\_\+delete\+\_\+matrix}} ()
+\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling this function which changes the flag from false (its default) to true. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a53c33cbd53d80d45ba2326273033f036}{disable\+\_\+delete\+\_\+matrix}} ()
+\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a5622db3b409cbdc49887aa65fa35215a}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function is required when preconditioning and must be called before using the preconditioner\+\_\+solve(...) function. This interface allows \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} object for oomph-\/lib\textquotesingle{}s own \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. {\bfseries{Note\+:}} matrix\+\_\+pt must point to an object of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix. ~\newline
+ {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} and Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}{enable\+\_\+delete\+\_\+matrix()}} function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ad4967b01386d24d1839bccb99b2f9560}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Function applies solver to vector r for preconditioning. This requires a call to setup(...) first. ~\newline
+ {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user with the delete\+\_\+matrix() function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a4d2ffc88b3a9e9ba84f969211b433231}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Function deletes all solver data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_aaca6bf7cf440f56ca8e901de64f1da9e}{report\+\_\+cumulative\+\_\+solve\+\_\+times}} ()
+\begin{DoxyCompactList}\small\item\em Report cumulative solve times of all instantiations of this class. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times}} ()
+\begin{DoxyCompactList}\small\item\em Reset cumulative solve times. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a53f01c25e89f237bd46c14f029f34a46}{Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Static double that accumulates the preconditioner solve time of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. \end{DoxyCompactList}\item 
+static std\+::map$<$ std\+::string, double $>$ \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a67a4607506c6fa1429f3e87ca04e42a5}{Context\+\_\+based\+\_\+cumulative\+\_\+solve\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Static double that accumulates the preconditioner solve time of all instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. \end{DoxyCompactList}\item 
+static unsigned \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ad38447ce80a362510590b770cc501885}{Cumulative\+\_\+npreconditioner\+\_\+solve}} =0
+\begin{DoxyCompactList}\small\item\em Static unsigned that accumulates the number of preconditioner solves of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. \end{DoxyCompactList}\item 
+static std\+::map$<$ std\+::string, unsigned $>$ \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a1eedf6ffc280c11da2e5da705dc5a612}{Context\+\_\+based\+\_\+cumulative\+\_\+npreconditioner\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em Static unsigned that accumulates the number of preconditioner solves of all instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. \end{DoxyCompactList}\item 
+static std\+::map$<$ std\+::string, unsigned $>$ \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a7d378145491234f85def4915c2e98249}{Context\+\_\+based\+\_\+nrow}}
+\begin{DoxyCompactList}\small\item\em Static unsigned that stores nrow for the most recent instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a73c88c3da340f7c3fe9857521b463176}{Delete\+\_\+matrix}}
+\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_ac88a0ccc5367586dd10e7c7c1a1f6f70}{Doc\+\_\+time}}
+\item 
+double \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a812e880bd4518b75c937870c2da0f7cd}{My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Private double that accumulates the preconditioner solve time of thi instantiation of this class. Is reported in destructor if Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time is set to true. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a653e88aa4e4f65e16cbae13cc08014c7}{Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Bool to request report of My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time in destructor ~\newline
+ \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a2662d242a5a13b6ce7c4f570e48c2615}{Context\+\_\+string}}
+\begin{DoxyCompactList}\small\item\em String can be used to provide context for annotation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+An \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} class using the suite of Hypre preconditioners to allow \begin{DoxyVerb} BoomerAMG (Algebraic Multi Grid),
+ Euclid (ILU) or 
+ ParaSails (Approximate inverse) 
+\end{DoxyVerb}
+
+
+to be used for Preconditioner\+::preconditioner\+\_\+solve(...). By default Boomer\+A\+MG is used. ~\newline
+ 
+
+Definition at line 740 of file hypre\+\_\+solver.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_af65f23a658889324894e331af515a71c}\label{classoomph_1_1HyprePreconditioner_af65f23a658889324894e331af515a71c}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!HyprePreconditioner@{HyprePreconditioner}}
+\index{HyprePreconditioner@{HyprePreconditioner}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{HyprePreconditioner()}{HyprePreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{context\+\_\+string = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Provide optional string that is used in annotation of performance. 
+
+
+
+Definition at line 746 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Boomer\+A\+MG, Context\+\_\+string, Delete\+\_\+matrix, Doc\+\_\+time, oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method, oomph\+::\+Hypre\+Interface\+::\+Internal\+\_\+preconditioner, oomph\+::\+Hypre\+Interface\+::\+Max\+\_\+iter, My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time, oomph\+::\+Hypre\+Interface\+::\+None, Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time, and oomph\+::\+Hypre\+Interface\+::\+Tolerance.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a024286a123aee3db8b06db9f0c97bbf0}\label{classoomph_1_1HyprePreconditioner_a024286a123aee3db8b06db9f0c97bbf0}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!````~HyprePreconditioner@{$\sim$HyprePreconditioner}}
+\index{````~HyprePreconditioner@{$\sim$HyprePreconditioner}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{$\sim$HyprePreconditioner()}{~HyprePreconditioner()}}
+{\footnotesize\ttfamily oomph\+::\+Hypre\+Preconditioner\+::$\sim$\+Hypre\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 778 of file hypre\+\_\+solver.\+h.
+
+
+
+References Context\+\_\+string, My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time, oomph\+::oomph\+\_\+info, and Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_aca5c97a9cc1e7eac7dae52ca7dd89801}\label{classoomph_1_1HyprePreconditioner_aca5c97a9cc1e7eac7dae52ca7dd89801}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!HyprePreconditioner@{HyprePreconditioner}}
+\index{HyprePreconditioner@{HyprePreconditioner}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{HyprePreconditioner()}{HyprePreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 790 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_ab830e0c945d5318c660cf0e2e2c9bc70}\label{classoomph_1_1HyprePreconditioner_ab830e0c945d5318c660cf0e2e2c9bc70}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_coarsening@{amg\_coarsening}}
+\index{amg\_coarsening@{amg\_coarsening}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_coarsening()}{amg\_coarsening()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+coarsening (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+coarsening flag. 
+
+
+
+Definition at line 906 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+coarsening.
+
+
+
+Referenced by oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg2v22\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+simple\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+stressdiv\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre(), oomph\+::\+Biharmonic\+\_\+schur\+\_\+complement\+\_\+\+Hypre\+\_\+defaults\+::set\+\_\+defaults(), and oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_ab4a47036de2b2992259863716f6f9121}\label{classoomph_1_1HyprePreconditioner_ab4a47036de2b2992259863716f6f9121}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_complex\_smoother@{amg\_complex\_smoother}}
+\index{amg\_complex\_smoother@{amg\_complex\_smoother}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_complex\_smoother()}{amg\_complex\_smoother()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+complex\+\_\+smoother (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+complex\+\_\+smoother flag. 
+
+
+
+Definition at line 891 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+complex\+\_\+smoother.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a3abdca331efaf5b2998e1b2056c925eb}\label{classoomph_1_1HyprePreconditioner_a3abdca331efaf5b2998e1b2056c925eb}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_damping@{amg\_damping}}
+\index{amg\_damping@{amg\_damping}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_damping()}{amg\_damping()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+damping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+damping parameter. 
+
+
+
+Definition at line 912 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+damping.
+
+
+
+Referenced by oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg2v22\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+simple\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+stressdiv\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre(), and oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+navier\+\_\+stokes\+\_\+momentum\+\_\+block().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a1fa211b49730947fe525156d08b66da4}\label{classoomph_1_1HyprePreconditioner_a1fa211b49730947fe525156d08b66da4}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_iterations@{amg\_iterations}}
+\index{amg\_iterations@{amg\_iterations}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_iterations()}{amg\_iterations()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return function for Max\+\_\+iter. 
+
+
+
+Definition at line 874 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Max\+\_\+iter.
+
+
+
+Referenced by set\+\_\+amg\+\_\+iterations(), and oomph\+::\+Biharmonic\+\_\+schur\+\_\+complement\+\_\+\+Hypre\+\_\+defaults\+::set\+\_\+defaults().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a6bae8beb2e6bff788d083f1e2af4a47b}\label{classoomph_1_1HyprePreconditioner_a6bae8beb2e6bff788d083f1e2af4a47b}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_max\_levels@{amg\_max\_levels}}
+\index{amg\_max\_levels@{amg\_max\_levels}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_max\_levels()}{amg\_max\_levels()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+max\+\_\+levels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+max\+\_\+levels. 
+
+
+
+Definition at line 909 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+max\+\_\+levels.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a0b2ea86dd7597bfd08b0e07f726c973d}\label{classoomph_1_1HyprePreconditioner_a0b2ea86dd7597bfd08b0e07f726c973d}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_max\_row\_sum@{amg\_max\_row\_sum}}
+\index{amg\_max\_row\_sum@{amg\_max\_row\_sum}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_max\_row\_sum()}{amg\_max\_row\_sum()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+max\+\_\+row\+\_\+sum (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+max\+\_\+row\+\_\+sum. 
+
+
+
+Definition at line 918 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+max\+\_\+row\+\_\+sum.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a42a3de25133fa0816b98fcc493efc12c}\label{classoomph_1_1HyprePreconditioner_a42a3de25133fa0816b98fcc493efc12c}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_print\_level@{amg\_print\_level}}
+\index{amg\_print\_level@{amg\_print\_level}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_print\_level()}{amg\_print\_level()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+print\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+print\+\_\+level. 
+
+
+
+Definition at line 900 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+print\+\_\+level.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a0abc961b0dfacd9b6bf7e1da428ab484}\label{classoomph_1_1HyprePreconditioner_a0abc961b0dfacd9b6bf7e1da428ab484}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_simple\_smoother@{amg\_simple\_smoother}}
+\index{amg\_simple\_smoother@{amg\_simple\_smoother}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_simple\_smoother()}{amg\_simple\_smoother()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+simple\+\_\+smoother (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+simple\+\_\+smoother flag. 
+
+
+
+Definition at line 884 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+simple\+\_\+smoother.
+
+
+
+Referenced by oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg2v22\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+simple\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+stressdiv\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre(), oomph\+::\+Biharmonic\+\_\+schur\+\_\+complement\+\_\+\+Hypre\+\_\+defaults\+::set\+\_\+defaults(), oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem(), and oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+navier\+\_\+stokes\+\_\+momentum\+\_\+block().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a03bb49bd0f7dabbc8ef39b9743d1dcf1}\label{classoomph_1_1HyprePreconditioner_a03bb49bd0f7dabbc8ef39b9743d1dcf1}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_smoother\_iterations@{amg\_smoother\_iterations}}
+\index{amg\_smoother\_iterations@{amg\_smoother\_iterations}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_smoother\_iterations()}{amg\_smoother\_iterations()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+smoother\+\_\+iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+smoother\+\_\+iterations. 
+
+
+
+Definition at line 903 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+smoother\+\_\+iterations.
+
+
+
+Referenced by oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg2v22\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+simple\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+stressdiv\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+poisson\+\_\+problem(), and oomph\+::\+Biharmonic\+\_\+schur\+\_\+complement\+\_\+\+Hypre\+\_\+defaults\+::set\+\_\+defaults().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a1ec949391111062df52ac15f7dc81525}\label{classoomph_1_1HyprePreconditioner_a1ec949391111062df52ac15f7dc81525}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_strength@{amg\_strength}}
+\index{amg\_strength@{amg\_strength}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_strength()}{amg\_strength()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+strength (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+strength. 
+
+
+
+Definition at line 915 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+strength.
+
+
+
+Referenced by oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg2v22\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+simple\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+stressdiv\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Biharmonic\+\_\+schur\+\_\+complement\+\_\+\+Hypre\+\_\+defaults\+::set\+\_\+defaults(), oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+3\+D\+\_\+poisson\+\_\+problem(), and oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+navier\+\_\+stokes\+\_\+momentum\+\_\+block().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a7394e9282d8422f8658966c5606bdb84}\label{classoomph_1_1HyprePreconditioner_a7394e9282d8422f8658966c5606bdb84}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_truncation@{amg\_truncation}}
+\index{amg\_truncation@{amg\_truncation}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_truncation()}{amg\_truncation()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+truncation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to A\+M\+G\+\_\+truncation. 
+
+
+
+Definition at line 921 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+truncation.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a65c4923b3332f92c1712a1da86d1da9e}\label{classoomph_1_1HyprePreconditioner_a65c4923b3332f92c1712a1da86d1da9e}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_using\_complex\_smoothing@{amg\_using\_complex\_smoothing}}
+\index{amg\_using\_complex\_smoothing@{amg\_using\_complex\_smoothing}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_using\_complex\_smoothing()}{amg\_using\_complex\_smoothing()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+complex\+\_\+smoothing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to select use of \textquotesingle{}complex\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+complex\+\_\+smoother ~\newline
+ 
+
+
+
+Definition at line 888 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+using\+\_\+simple\+\_\+smoothing.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a7d4e9b31759555c67d51c0418de2980e}\label{classoomph_1_1HyprePreconditioner_a7d4e9b31759555c67d51c0418de2980e}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_using\_simple\_smoothing@{amg\_using\_simple\_smoothing}}
+\index{amg\_using\_simple\_smoothing@{amg\_using\_simple\_smoothing}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_using\_simple\_smoothing()}{amg\_using\_simple\_smoothing()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to select use of \textquotesingle{}simple\textquotesingle{} A\+MG smoothers as controlled by the flag A\+M\+G\+\_\+simple\+\_\+smoother ~\newline
+ 
+
+
+
+Definition at line 881 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+using\+\_\+simple\+\_\+smoothing.
+
+
+
+Referenced by oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre(), and oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a7d849ee9489020e7a58bec0f5d33700e}\label{classoomph_1_1HyprePreconditioner_a7d849ee9489020e7a58bec0f5d33700e}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!amg\_using\_simple\_smoothing\_flag@{amg\_using\_simple\_smoothing\_flag}}
+\index{amg\_using\_simple\_smoothing\_flag@{amg\_using\_simple\_smoothing\_flag}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{amg\_using\_simple\_smoothing\_flag()}{amg\_using\_simple\_smoothing\_flag()}}
+{\footnotesize\ttfamily bool\& oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing\+\_\+flag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return function for the A\+M\+G\+\_\+using\+\_\+simple\+\_\+smoothing\+\_\+flag. 
+
+
+
+Definition at line 894 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+A\+M\+G\+\_\+using\+\_\+simple\+\_\+smoothing.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a4d2ffc88b3a9e9ba84f969211b433231}\label{classoomph_1_1HyprePreconditioner_a4d2ffc88b3a9e9ba84f969211b433231}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function deletes all solver data. 
+
+\mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a4d2ffc88b3a9e9ba84f969211b433231}{clean\+\_\+up\+\_\+memory()}} deletes any existing Hypre solver and Hypre matrix 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829bedcd9db238431262027}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 1870 of file hypre\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::hypre\+\_\+clean\+\_\+up\+\_\+memory().
+
+
+
+Referenced by setup().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a53c33cbd53d80d45ba2326273033f036}\label{classoomph_1_1HyprePreconditioner_a53c33cbd53d80d45ba2326273033f036}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!disable\_delete\_matrix@{disable\_delete\_matrix}}
+\index{disable\_delete\_matrix@{disable\_delete\_matrix}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_delete\_matrix()}{disable\_delete\_matrix()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::disable\+\_\+delete\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. 
+
+or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. Calling this function ensures that the matrix is not deleted. 
+
+Definition at line 991 of file hypre\+\_\+solver.\+h.
+
+
+
+References Delete\+\_\+matrix.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a7b28624e54907dc5081484842b8b8530}\label{classoomph_1_1HyprePreconditioner_a7b28624e54907dc5081484842b8b8530}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!disable\_doc\_time@{disable\_doc\_time}}
+\index{disable\_doc\_time@{disable\_doc\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_doc\_time()}{disable\_doc\_time()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::disable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable documentation of preconditioner timings. 
+
+
+
+Definition at line 855 of file hypre\+\_\+solver.\+h.
+
+
+
+References Doc\+\_\+time.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a96f90cbfd3e92251707872391c3d66ab}\label{classoomph_1_1HyprePreconditioner_a96f90cbfd3e92251707872391c3d66ab}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!disable\_euclid\_rowScale@{disable\_euclid\_rowScale}}
+\index{disable\_euclid\_rowScale@{disable\_euclid\_rowScale}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_euclid\_rowScale()}{disable\_euclid\_rowScale()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::disable\+\_\+euclid\+\_\+row\+Scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable euclid row scaling. 
+
+
+
+Definition at line 951 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a2165ef8d97b1e267d0555f877a3da342}\label{classoomph_1_1HyprePreconditioner_a2165ef8d97b1e267d0555f877a3da342}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!disable\_euclid\_using\_BJ@{disable\_euclid\_using\_BJ}}
+\index{disable\_euclid\_using\_BJ@{disable\_euclid\_using\_BJ}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_euclid\_using\_BJ()}{disable\_euclid\_using\_BJ()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::disable\+\_\+euclid\+\_\+using\+\_\+\+BJ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable use of Block Jacobi,. 
+
+so P\+I\+LU will be used 
+
+Definition at line 959 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+BJ.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a3936efe626674a8dbe17d842cb60423e}\label{classoomph_1_1HyprePreconditioner_a3936efe626674a8dbe17d842cb60423e}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!disable\_report\_my\_cumulative\_preconditioner\_solve\_time@{disable\_report\_my\_cumulative\_preconditioner\_solve\_time}}
+\index{disable\_report\_my\_cumulative\_preconditioner\_solve\_time@{disable\_report\_my\_cumulative\_preconditioner\_solve\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_report\_my\_cumulative\_preconditioner\_solve\_time()}{disable\_report\_my\_cumulative\_preconditioner\_solve\_time()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::disable\+\_\+report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable reporting of cumulative solve time in destructor. 
+
+
+
+Definition at line 848 of file hypre\+\_\+solver.\+h.
+
+
+
+References Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}\label{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!enable\_delete\_matrix@{enable\_delete\_matrix}}
+\index{enable\_delete\_matrix@{enable\_delete\_matrix}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_delete\_matrix()}{enable\_delete\_matrix()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::enable\+\_\+delete\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling this function which changes the flag from false (its default) to true. 
+
+
+
+Definition at line 985 of file hypre\+\_\+solver.\+h.
+
+
+
+References Delete\+\_\+matrix.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a73e679c8139564265a8c6786a112269b}\label{classoomph_1_1HyprePreconditioner_a73e679c8139564265a8c6786a112269b}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!enable\_doc\_time@{enable\_doc\_time}}
+\index{enable\_doc\_time@{enable\_doc\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_time()}{enable\_doc\_time()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::enable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable documentation of preconditioner timings. 
+
+
+
+Definition at line 852 of file hypre\+\_\+solver.\+h.
+
+
+
+References Doc\+\_\+time.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a5fb9201982dc22f9a07b32f68963c603}\label{classoomph_1_1HyprePreconditioner_a5fb9201982dc22f9a07b32f68963c603}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!enable\_euclid\_rowScale@{enable\_euclid\_rowScale}}
+\index{enable\_euclid\_rowScale@{enable\_euclid\_rowScale}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_euclid\_rowScale()}{enable\_euclid\_rowScale()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::enable\+\_\+euclid\+\_\+row\+Scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable euclid row\+Scaling. 
+
+
+
+Definition at line 948 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a722f36d087901fd11b5055f7f3b619b3}\label{classoomph_1_1HyprePreconditioner_a722f36d087901fd11b5055f7f3b619b3}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!enable\_euclid\_using\_BJ@{enable\_euclid\_using\_BJ}}
+\index{enable\_euclid\_using\_BJ@{enable\_euclid\_using\_BJ}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_euclid\_using\_BJ()}{enable\_euclid\_using\_BJ()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::enable\+\_\+euclid\+\_\+using\+\_\+\+BJ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable use of Block Jacobi as opposed to P\+I\+LU ~\newline
+ 
+
+
+
+Definition at line 955 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+BJ.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_afae82e15a88443946509fcb8fd91da75}\label{classoomph_1_1HyprePreconditioner_afae82e15a88443946509fcb8fd91da75}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!enable\_report\_my\_cumulative\_preconditioner\_solve\_time@{enable\_report\_my\_cumulative\_preconditioner\_solve\_time}}
+\index{enable\_report\_my\_cumulative\_preconditioner\_solve\_time@{enable\_report\_my\_cumulative\_preconditioner\_solve\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_report\_my\_cumulative\_preconditioner\_solve\_time()}{enable\_report\_my\_cumulative\_preconditioner\_solve\_time()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::enable\+\_\+report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable reporting of cumulative solve time in destructor. 
+
+
+
+Definition at line 844 of file hypre\+\_\+solver.\+h.
+
+
+
+References Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a8b3913c1c8a6b9b6ef07a59f2d597815}\label{classoomph_1_1HyprePreconditioner_a8b3913c1c8a6b9b6ef07a59f2d597815}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!euclid\_droptol@{euclid\_droptol}}
+\index{euclid\_droptol@{euclid\_droptol}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{euclid\_droptol()}{euclid\_droptol()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+droptol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Euclid drop tolerance parameter. 
+
+
+
+Definition at line 942 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+droptol.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a6479953e74f0796384f456d7f9787fc5}\label{classoomph_1_1HyprePreconditioner_a6479953e74f0796384f456d7f9787fc5}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!euclid\_level@{euclid\_level}}
+\index{euclid\_level@{euclid\_level}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{euclid\_level()}{euclid\_level()}}
+{\footnotesize\ttfamily int\& oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Euclid level parameter for I\+L\+U(k) factorization. 
+
+
+
+Definition at line 945 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+level.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a8be8b1933ac9cc1a3b6f4977d92e615c}\label{classoomph_1_1HyprePreconditioner_a8be8b1933ac9cc1a3b6f4977d92e615c}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!euclid\_print\_level@{euclid\_print\_level}}
+\index{euclid\_print\_level@{euclid\_print\_level}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{euclid\_print\_level()}{euclid\_print\_level()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+print\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set the level of printing from Euclid when the Euclid destructor is called 0\+: no printing (default) 1\+: prints summary of runtime settings and timings 2\+: as 1 plus prints memory usage. 
+
+
+
+Definition at line 974 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+print\+\_\+level.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a635c84d0bdf407eb532e09f9ebe38d9f}\label{classoomph_1_1HyprePreconditioner_a635c84d0bdf407eb532e09f9ebe38d9f}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!euclid\_using\_ILUK@{euclid\_using\_ILUK}}
+\index{euclid\_using\_ILUK@{euclid\_using\_ILUK}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{euclid\_using\_ILUK()}{euclid\_using\_ILUK()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+using\+\_\+\+I\+L\+UK (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to switch on I\+L\+U(k) factorization for Euclid (default is I\+L\+U(k) factorization) 
+
+
+
+Definition at line 963 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+I\+L\+UT.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a55b6027d5212c7e66eec212341dd0af6}\label{classoomph_1_1HyprePreconditioner_a55b6027d5212c7e66eec212341dd0af6}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!euclid\_using\_ILUT@{euclid\_using\_ILUT}}
+\index{euclid\_using\_ILUT@{euclid\_using\_ILUT}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{euclid\_using\_ILUT()}{euclid\_using\_ILUT()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+using\+\_\+\+I\+L\+UT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to switch on I\+L\+UT factorization for Euclid (default is I\+L\+U(k) factorization) 
+
+
+
+Definition at line 967 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+I\+L\+UT.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a62f977047d4b26a11da2bb7c98beeaca}\label{classoomph_1_1HyprePreconditioner_a62f977047d4b26a11da2bb7c98beeaca}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!hypre\_method@{hypre\_method}}
+\index{hypre\_method@{hypre\_method}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{hypre\_method()}{hypre\_method()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::hypre\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Hypre\+\_\+method flag -- specified via enumeration. 
+
+
+
+Definition at line 858 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method.
+
+
+
+Referenced by oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre(), oomph\+::\+Biharmonic\+\_\+schur\+\_\+complement\+\_\+\+Hypre\+\_\+defaults\+::set\+\_\+defaults(), and oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_aa7396f1be54c31883c25e5d89f0af681}\label{classoomph_1_1HyprePreconditioner_aa7396f1be54c31883c25e5d89f0af681}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!internal\_preconditioner@{internal\_preconditioner}}
+\index{internal\_preconditioner@{internal\_preconditioner}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{internal\_preconditioner()}{internal\_preconditioner()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Hypre\+Preconditioner\+::internal\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Internal\+\_\+preconditioner flag -- specified via enumeration. 
+
+
+
+Definition at line 862 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Internal\+\_\+preconditioner.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_ae5ca775c231584c86193d2219a9c452a}\label{classoomph_1_1HyprePreconditioner_ae5ca775c231584c86193d2219a9c452a}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 796 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_af7781e6421b33a38a2b473190d26df70}\label{classoomph_1_1HyprePreconditioner_af7781e6421b33a38a2b473190d26df70}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!parasails\_filter@{parasails\_filter}}
+\index{parasails\_filter@{parasails\_filter}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{parasails\_filter()}{parasails\_filter()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+filter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Para\+Sails filter parameter. 
+
+
+
+Definition at line 936 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+filter.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a29559cc7a6c8247209a20d2031111529}\label{classoomph_1_1HyprePreconditioner_a29559cc7a6c8247209a20d2031111529}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!parasails\_nlevel@{parasails\_nlevel}}
+\index{parasails\_nlevel@{parasails\_nlevel}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{parasails\_nlevel()}{parasails\_nlevel()}}
+{\footnotesize\ttfamily int\& oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+nlevel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Para\+Sails nlevel parameter. 
+
+
+
+Definition at line 930 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+nlevel.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_ab169873191bebd4dfa39455e8c2f3698}\label{classoomph_1_1HyprePreconditioner_ab169873191bebd4dfa39455e8c2f3698}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!parasails\_symmetry@{parasails\_symmetry}}
+\index{parasails\_symmetry@{parasails\_symmetry}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{parasails\_symmetry()}{parasails\_symmetry()}}
+{\footnotesize\ttfamily int\& oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+symmetry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Para\+Sails symmetry flag. 
+
+
+
+Definition at line 927 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+symmetry.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a26a87703b9b18194ef57ad1f0ffed5bf}\label{classoomph_1_1HyprePreconditioner_a26a87703b9b18194ef57ad1f0ffed5bf}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!parasails\_thresh@{parasails\_thresh}}
+\index{parasails\_thresh@{parasails\_thresh}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{parasails\_thresh()}{parasails\_thresh()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+thresh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Para\+Sails thresh parameter. 
+
+
+
+Definition at line 933 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+thresh.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_ad4967b01386d24d1839bccb99b2f9560}\label{classoomph_1_1HyprePreconditioner_ad4967b01386d24d1839bccb99b2f9560}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function applies solver to vector r for preconditioning. This requires a call to setup(...) first. ~\newline
+ {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user with the delete\+\_\+matrix() function. 
+
+Preconditioner\+\_\+solve uses a hypre solver to precondition vector r. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 1799 of file hypre\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::built(), Context\+\_\+based\+\_\+cumulative\+\_\+npreconditioner\+\_\+solve, Context\+\_\+based\+\_\+cumulative\+\_\+solve\+\_\+time, Context\+\_\+string, Cumulative\+\_\+npreconditioner\+\_\+solve, Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Hypre\+Interface\+::existing\+\_\+solver(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time, oomph\+::\+Hypre\+Interface\+::\+None, oomph\+::\+Hypre\+Interface\+::\+Output\+\_\+info, and oomph\+::\+Timing\+Helpers\+::timer().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_aaca6bf7cf440f56ca8e901de64f1da9e}\label{classoomph_1_1HyprePreconditioner_aaca6bf7cf440f56ca8e901de64f1da9e}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!report\_cumulative\_solve\_times@{report\_cumulative\_solve\_times}}
+\index{report\_cumulative\_solve\_times@{report\_cumulative\_solve\_times}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{report\_cumulative\_solve\_times()}{report\_cumulative\_solve\_times()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::report\+\_\+cumulative\+\_\+solve\+\_\+times (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Report cumulative solve times of all instantiations of this class. 
+
+
+
+Definition at line 1674 of file hypre\+\_\+solver.\+cc.
+
+
+
+References Context\+\_\+based\+\_\+cumulative\+\_\+npreconditioner\+\_\+solve, Context\+\_\+based\+\_\+cumulative\+\_\+solve\+\_\+time, Context\+\_\+based\+\_\+nrow, Cumulative\+\_\+npreconditioner\+\_\+solve, Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time, and oomph\+::oomph\+\_\+info.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}\label{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!reset\_cumulative\_solve\_times@{reset\_cumulative\_solve\_times}}
+\index{reset\_cumulative\_solve\_times@{reset\_cumulative\_solve\_times}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{reset\_cumulative\_solve\_times()}{reset\_cumulative\_solve\_times()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::reset\+\_\+cumulative\+\_\+solve\+\_\+times (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reset cumulative solve times. 
+
+
+
+Definition at line 1719 of file hypre\+\_\+solver.\+cc.
+
+
+
+References Context\+\_\+based\+\_\+cumulative\+\_\+npreconditioner\+\_\+solve, Context\+\_\+based\+\_\+cumulative\+\_\+solve\+\_\+time, Context\+\_\+based\+\_\+nrow, Cumulative\+\_\+npreconditioner\+\_\+solve, and Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a4b0afe4dc57ca9764200c2755ce27dd5}\label{classoomph_1_1HyprePreconditioner_a4b0afe4dc57ca9764200c2755ce27dd5}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!set\_amg\_iterations@{set\_amg\_iterations}}
+\index{set\_amg\_iterations@{set\_amg\_iterations}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_amg\_iterations()}{set\_amg\_iterations()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::set\+\_\+amg\+\_\+iterations (\begin{DoxyParamCaption}\item[{const unsigned \&}]{amg\+\_\+iterations }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set the number of times to apply Boomer\+A\+MG. 
+
+
+
+Definition at line 868 of file hypre\+\_\+solver.\+h.
+
+
+
+References amg\+\_\+iterations(), and oomph\+::\+Hypre\+Interface\+::\+Max\+\_\+iter.
+
+
+
+Referenced by oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg2v22\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+simple\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+momentum\+\_\+stressdiv\+\_\+visc(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+momentum(), oomph\+::\+Lagrange\+\_\+\+Enforced\+\_\+\+Flow\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::boomer\+\_\+amg\+\_\+for\+\_\+3\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre(), and oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a5622db3b409cbdc49887aa65fa35215a}\label{classoomph_1_1HyprePreconditioner_a5622db3b409cbdc49887aa65fa35215a}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function is required when preconditioning and must be called before using the preconditioner\+\_\+solve(...) function. This interface allows \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} object for oomph-\/lib\textquotesingle{}s own \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. {\bfseries{Note\+:}} matrix\+\_\+pt must point to an object of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix. ~\newline
+ {\bfseries{Note\+:}} Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} and Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned, the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by calling the \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a350716ddfca241e83904895e0d5c3f6f}{enable\+\_\+delete\+\_\+matrix()}} function. 
+
+An interface to allow \mbox{\hyperlink{classoomph_1_1HypreSolver}{Hypre\+Solver}} to be used as a \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} for the oomph-\/lib \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} has to be of type \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 1734 of file hypre\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), clean\+\_\+up\+\_\+memory(), Context\+\_\+based\+\_\+nrow, Context\+\_\+string, oomph\+::\+Hypre\+Interface\+::\+Delete\+\_\+input\+\_\+data, Delete\+\_\+matrix, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Doc\+\_\+time, oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup(), oomph\+::\+Preconditioner\+::matrix\+\_\+pt(), oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+C\+R\+Double\+Matrix\+::nnz(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+C\+R\+Double\+Matrix\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), oomph\+::oomph\+\_\+info, and oomph\+::\+Hypre\+Interface\+::\+Output\+\_\+info.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_aa120789b545e8562d24a7e4f8799715f}\label{classoomph_1_1HyprePreconditioner_aa120789b545e8562d24a7e4f8799715f}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!use\_BoomerAMG@{use\_BoomerAMG}}
+\index{use\_BoomerAMG@{use\_BoomerAMG}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_BoomerAMG()}{use\_BoomerAMG()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::use\+\_\+\+Boomer\+A\+MG (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to select Boomer\+A\+MG as the preconditioner. 
+
+
+
+Definition at line 865 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Boomer\+A\+MG, and oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a8250d689c9788cbe028655fc7630aee9}\label{classoomph_1_1HyprePreconditioner_a8250d689c9788cbe028655fc7630aee9}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!use\_Euclid@{use\_Euclid}}
+\index{use\_Euclid@{use\_Euclid}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_Euclid()}{use\_Euclid()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::use\+\_\+\+Euclid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to select use Euclid as the preconditioner. 
+
+
+
+Definition at line 939 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Euclid, and oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method.
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_aacffb2fc026a5d1c4ead91b49e8002ae}\label{classoomph_1_1HyprePreconditioner_aacffb2fc026a5d1c4ead91b49e8002ae}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!use\_ParaSails@{use\_ParaSails}}
+\index{use\_ParaSails@{use\_ParaSails}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_ParaSails()}{use\_ParaSails()}}
+{\footnotesize\ttfamily void oomph\+::\+Hypre\+Preconditioner\+::use\+\_\+\+Para\+Sails (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to select Para\+Sails as the preconditioner. 
+
+
+
+Definition at line 924 of file hypre\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method, and oomph\+::\+Hypre\+Interface\+::\+Para\+Sails.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a1eedf6ffc280c11da2e5da705dc5a612}\label{classoomph_1_1HyprePreconditioner_a1eedf6ffc280c11da2e5da705dc5a612}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Context\_based\_cumulative\_npreconditioner\_solve@{Context\_based\_cumulative\_npreconditioner\_solve}}
+\index{Context\_based\_cumulative\_npreconditioner\_solve@{Context\_based\_cumulative\_npreconditioner\_solve}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{Context\_based\_cumulative\_npreconditioner\_solve}{Context\_based\_cumulative\_npreconditioner\_solve}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, unsigned $>$ oomph\+::\+Hypre\+Preconditioner\+::\+Context\+\_\+based\+\_\+cumulative\+\_\+npreconditioner\+\_\+solve\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static unsigned that accumulates the number of preconditioner solves of all instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
+
+
+
+Definition at line 827 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by preconditioner\+\_\+solve(), report\+\_\+cumulative\+\_\+solve\+\_\+times(), and reset\+\_\+cumulative\+\_\+solve\+\_\+times().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a67a4607506c6fa1429f3e87ca04e42a5}\label{classoomph_1_1HyprePreconditioner_a67a4607506c6fa1429f3e87ca04e42a5}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Context\_based\_cumulative\_solve\_time@{Context\_based\_cumulative\_solve\_time}}
+\index{Context\_based\_cumulative\_solve\_time@{Context\_based\_cumulative\_solve\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{Context\_based\_cumulative\_solve\_time}{Context\_based\_cumulative\_solve\_time}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, double $>$ oomph\+::\+Hypre\+Preconditioner\+::\+Context\+\_\+based\+\_\+cumulative\+\_\+solve\+\_\+time\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static double that accumulates the preconditioner solve time of all instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
+
+map of static doubles that accumulates the preconditioner solve time of all instantiations of this class, labeled by
+
+context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
+
+Definition at line 812 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by preconditioner\+\_\+solve(), report\+\_\+cumulative\+\_\+solve\+\_\+times(), and reset\+\_\+cumulative\+\_\+solve\+\_\+times().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a7d378145491234f85def4915c2e98249}\label{classoomph_1_1HyprePreconditioner_a7d378145491234f85def4915c2e98249}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Context\_based\_nrow@{Context\_based\_nrow}}
+\index{Context\_based\_nrow@{Context\_based\_nrow}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{Context\_based\_nrow}{Context\_based\_nrow}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, unsigned $>$ oomph\+::\+Hypre\+Preconditioner\+::\+Context\+\_\+based\+\_\+nrow\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static unsigned that stores nrow for the most recent instantiations of this class, labeled by context string. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
+
+
+
+Definition at line 834 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by report\+\_\+cumulative\+\_\+solve\+\_\+times(), reset\+\_\+cumulative\+\_\+solve\+\_\+times(), and setup().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a2662d242a5a13b6ce7c4f570e48c2615}\label{classoomph_1_1HyprePreconditioner_a2662d242a5a13b6ce7c4f570e48c2615}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Context\_string@{Context\_string}}
+\index{Context\_string@{Context\_string}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{Context\_string}{Context\_string}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+Hypre\+Preconditioner\+::\+Context\+\_\+string\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+String can be used to provide context for annotation. 
+
+
+
+Definition at line 1053 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by Hypre\+Preconditioner(), preconditioner\+\_\+solve(), setup(), and $\sim$\+Hypre\+Preconditioner().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_ad38447ce80a362510590b770cc501885}\label{classoomph_1_1HyprePreconditioner_ad38447ce80a362510590b770cc501885}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Cumulative\_npreconditioner\_solve@{Cumulative\_npreconditioner\_solve}}
+\index{Cumulative\_npreconditioner\_solve@{Cumulative\_npreconditioner\_solve}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{Cumulative\_npreconditioner\_solve}{Cumulative\_npreconditioner\_solve}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Preconditioner\+::\+Cumulative\+\_\+npreconditioner\+\_\+solve =0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static unsigned that accumulates the number of preconditioner solves of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
+
+
+
+Definition at line 819 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by preconditioner\+\_\+solve(), report\+\_\+cumulative\+\_\+solve\+\_\+times(), and reset\+\_\+cumulative\+\_\+solve\+\_\+times().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a53f01c25e89f237bd46c14f029f34a46}\label{classoomph_1_1HyprePreconditioner_a53f01c25e89f237bd46c14f029f34a46}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Cumulative\_preconditioner\_solve\_time@{Cumulative\_preconditioner\_solve\_time}}
+\index{Cumulative\_preconditioner\_solve\_time@{Cumulative\_preconditioner\_solve\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{Cumulative\_preconditioner\_solve\_time}{Cumulative\_preconditioner\_solve\_time}}
+{\footnotesize\ttfamily double oomph\+::\+Hypre\+Preconditioner\+::\+Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time =0.\+0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static double that accumulates the preconditioner solve time of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve, using \mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
+
+Static double that accumulates the preconditioner solve time of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve, using.
+
+\mbox{\hyperlink{classoomph_1_1HyprePreconditioner_a126763a53b2c687bc1b150d0fc64fbb6}{reset\+\_\+cumulative\+\_\+solve\+\_\+times()}}. 
+
+Definition at line 805 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by preconditioner\+\_\+solve(), report\+\_\+cumulative\+\_\+solve\+\_\+times(), and reset\+\_\+cumulative\+\_\+solve\+\_\+times().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a73c88c3da340f7c3fe9857521b463176}\label{classoomph_1_1HyprePreconditioner_a73c88c3da340f7c3fe9857521b463176}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Delete\_matrix@{Delete\_matrix}}
+\index{Delete\_matrix@{Delete\_matrix}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{Delete\_matrix}{Delete\_matrix}}
+{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Preconditioner\+::\+Delete\+\_\+matrix\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or Distributed\+C\+R\+Double\+Matrix into its own data structures, doubling the memory requirements for the matrix. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true. 
+
+
+
+Definition at line 1037 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by disable\+\_\+delete\+\_\+matrix(), enable\+\_\+delete\+\_\+matrix(), Hypre\+Preconditioner(), and setup().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_ac88a0ccc5367586dd10e7c7c1a1f6f70}\label{classoomph_1_1HyprePreconditioner_ac88a0ccc5367586dd10e7c7c1a1f6f70}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Doc\_time@{Doc\_time}}
+\index{Doc\_time@{Doc\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{Doc\_time}{Doc\_time}}
+{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Preconditioner\+::\+Doc\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 1040 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by disable\+\_\+doc\+\_\+time(), enable\+\_\+doc\+\_\+time(), Hypre\+Preconditioner(), and setup().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a812e880bd4518b75c937870c2da0f7cd}\label{classoomph_1_1HyprePreconditioner_a812e880bd4518b75c937870c2da0f7cd}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!My\_cumulative\_preconditioner\_solve\_time@{My\_cumulative\_preconditioner\_solve\_time}}
+\index{My\_cumulative\_preconditioner\_solve\_time@{My\_cumulative\_preconditioner\_solve\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{My\_cumulative\_preconditioner\_solve\_time}{My\_cumulative\_preconditioner\_solve\_time}}
+{\footnotesize\ttfamily double oomph\+::\+Hypre\+Preconditioner\+::\+My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Private double that accumulates the preconditioner solve time of thi instantiation of this class. Is reported in destructor if Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time is set to true. 
+
+
+
+Definition at line 1046 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by Hypre\+Preconditioner(), preconditioner\+\_\+solve(), and $\sim$\+Hypre\+Preconditioner().
+
+\mbox{\Hypertarget{classoomph_1_1HyprePreconditioner_a653e88aa4e4f65e16cbae13cc08014c7}\label{classoomph_1_1HyprePreconditioner_a653e88aa4e4f65e16cbae13cc08014c7}} 
+\index{oomph::HyprePreconditioner@{oomph::HyprePreconditioner}!Report\_my\_cumulative\_preconditioner\_solve\_time@{Report\_my\_cumulative\_preconditioner\_solve\_time}}
+\index{Report\_my\_cumulative\_preconditioner\_solve\_time@{Report\_my\_cumulative\_preconditioner\_solve\_time}!oomph::HyprePreconditioner@{oomph::HyprePreconditioner}}
+\doxysubsubsection{\texorpdfstring{Report\_my\_cumulative\_preconditioner\_solve\_time}{Report\_my\_cumulative\_preconditioner\_solve\_time}}
+{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Preconditioner\+::\+Report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Bool to request report of My\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time in destructor ~\newline
+ 
+
+
+
+Definition at line 1050 of file hypre\+\_\+solver.\+h.
+
+
+
+Referenced by disable\+\_\+report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time(), enable\+\_\+report\+\_\+my\+\_\+cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time(), Hypre\+Preconditioner(), and $\sim$\+Hypre\+Preconditioner().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{hypre__solver_8h}{hypre\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{hypre__solver_8cc}{hypre\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

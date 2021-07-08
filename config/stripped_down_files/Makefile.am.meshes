@@ -1,0 +1,127 @@
+#==============================================================================
+# NOTE:  Mesh files generally come in two parts: *.template.cc and *.template.h
+# -----  -- usually there's no *.cc file since meshes are fully templated.
+#        It therefore doesn't make any sense to compile mesh sources into 
+#        a library. Instead, we combine the two files into a combined mesh 
+#        header, *.h, which can be included into a driver code. This means that
+#        the entire code (headers and function implementations)
+#        can get (re-)compiled with the appropriate element types
+#        in each specific driver code. If the constant re-compilation
+#        of the (possibly lengthy) mesh sources in *.template.cc gets
+#        too costly, then *.template.h and *.template.cc can be
+#        included in a separate file where the instantiation of a
+#        mesh with a specific element type can be enforced with a
+#        template statement.
+#
+# INSTRUCTIONS: If you want to add a new mesh, provide the templated
+#               header and source files,
+#
+#                   my_mesh.template.h
+#
+#               and
+#
+#                   my_mesh.template.cc
+#
+#               and add the stem of the filename ("my_mesh") to 
+#   
+#                    mesh_names.list
+#
+#               and run the script
+#
+#                    ./build_mesh_makefile.sh
+#==============================================================================
+
+
+# All the auxilliary files are built by the build_mesh_makefile.sh script
+# and all need to be rebuilt if mesh_names.list changes
+mesh_instructions.aux mesh_names.aux mesh_clean.aux: mesh_names.list
+	$(top_srcdir)/bin/build_mesh_makefile.sh $(top_srcdir)
+
+# Include various mesh names (generated automatically from mesh_names.list)
+include $(srcdir)/mesh_names.aux
+
+# Define name of library
+libname = meshes
+
+# Define the non-mesh headers
+non_mesh_headers =  
+
+# Define the non-mesh sources
+non_mesh_sources =  
+
+
+# Combine headers and sources
+headers_and_sources = $(non_mesh_headers) $(headers) $(templated_headers) $(sources) $(non_mesh_sources)
+
+# Define the library that *would* get placed in lib directory...
+# We define this simply to create a specific target --  the library
+# is empty and does therefore not need to be installed
+#-----------------------------------------------------
+#noinst_LTLIBRARIES = libmeshes.la
+lib_LTLIBRARIES = libmeshes.la
+
+# Sources that the library depends on: 
+#-------------------------------------
+libmeshes_la_SOURCES=mesh_instructions.aux mesh_names.aux mesh_clean.aux \
+	             $(headers_and_sources)
+
+# The library's include headers:
+#-------------------------------
+# Headers that are to be included in the $(includedir) directory:
+# This is the combined header which contains "#include<...>" commands
+# for the real headers in the subdirectory below  $(includedir)
+include_HEADERS = $(libname).h 
+
+#Here's the subdirectory where the actual header files are placed
+library_includedir=$(includedir)/meshes
+
+#These are the header files that are to be placed in subdirectory
+library_include_HEADERS=$(headers_and_sources)
+
+# Required libraries 
+#-------------------
+# Include path for library headers -- need to refer to include files
+# in src as they will not have been installed yet! 
+AM_CPPFLAGS += -I$(top_srcdir)/external_src 
+
+# Include instructions how to build the combined meshes
+# (generated automatically from mesh_names.list)
+include $(srcdir)/mesh_instructions.aux
+
+
+# Combined header file
+#---------------------
+# Rule for building combined header (dummy target never gets made so
+# the combined header is remade every time)
+$(libname).h: dummy_$(libname).h
+
+dummy_$(libname).h:  
+	echo  $(libname) $(headers) $(non_mesh_headers) > all_$(libname).aux
+	$(AWK) -f $(top_srcdir)/bin/headers.awk < \
+	       all_$(libname).aux > $(libname).h
+	rm all_$(libname).aux
+
+
+
+# Distribute the list of mesh names and the build script for the include files
+EXTRA_DIST = mesh_names.list
+#
+# Extra hook for install: Optionally replace headers by symbolic links
+#---------------------------------------------------------------------
+if SYMBOLIC_LINKS_FOR_HEADERS
+install-data-hook: 
+	(cd $(library_includedir) && rm -f $(headers_and_sources) )
+	(echo "$(headers_and_sources)" > include_files.list )
+	($(top_srcdir)/bin/change_headers_to_links.sh `pwd`)
+	($(LN_S) `cat include_files.list.aux` $(library_includedir) )
+	(rm -r include_files.list.aux include_files.list ) 
+else
+install-data-hook: 
+endif
+
+include $(srcdir)/mesh_clean.aux
+
+
+# Cleanup: Kill automatically generated combined header files
+distclean-local: 
+	rm -f mesh_names.aux mesh_instructions.aux mesh_clean.aux $(libname).h

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::MPI_Helpers Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1MPI__Helpers.html">MPI_Helpers</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="classoomph_1_1MPI__Helpers-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::MPI_Helpers Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classoomph_1_1MPI__Helpers.html" title="MPI_Helpers class contains static helper methods to support MPI within oomph-lib. The methods init(....">MPI_Helpers</a> class contains static helper methods to support MPI within oomph-lib. The methods init(...) and <a class="el" href="classoomph_1_1MPI__Helpers.html#a471bc4697fd5edeea3fb4af1bba0e541" title="finalize mpi">finalize()</a> initialize and finalize MPI in oomph-lib and manage the oomph-libs global communicator <a class="el" href="classoomph_1_1MPI__Helpers.html#ac16964b22bfd4f657490802beb600ffe" title="access to the global oomph-lib communicator">communicator_pt()</a>. NOTE: This class encapsulates static helper methods and instances of it CANNOT be instantiated.  
+ <a href="classoomph_1_1MPI__Helpers.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a663a35b00078ebefdc0ea0b7190212e4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPI__Helpers.html#a663a35b00078ebefdc0ea0b7190212e4">init</a> (int argc, char **argv, const bool &amp;make_duplicate_of_mpi_comm_world=true)</td></tr>
+<tr class="memdesc:a663a35b00078ebefdc0ea0b7190212e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise mpi (oomph-libs equivalent of MPI_Init(...)) Initialises MPI and creates the global oomph-lib communicator. If optional boolean flag is set to false, we use MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true.  <a href="classoomph_1_1MPI__Helpers.html#a663a35b00078ebefdc0ea0b7190212e4">More...</a><br /></td></tr>
+<tr class="separator:a663a35b00078ebefdc0ea0b7190212e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a471bc4697fd5edeea3fb4af1bba0e541"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPI__Helpers.html#a471bc4697fd5edeea3fb4af1bba0e541">finalize</a> ()</td></tr>
+<tr class="memdesc:a471bc4697fd5edeea3fb4af1bba0e541"><td class="mdescLeft">&#160;</td><td class="mdescRight">finalize mpi  <a href="classoomph_1_1MPI__Helpers.html#a471bc4697fd5edeea3fb4af1bba0e541">More...</a><br /></td></tr>
+<tr class="separator:a471bc4697fd5edeea3fb4af1bba0e541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac16964b22bfd4f657490802beb600ffe"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPI__Helpers.html#ac16964b22bfd4f657490802beb600ffe">communicator_pt</a> ()</td></tr>
+<tr class="memdesc:ac16964b22bfd4f657490802beb600ffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the global oomph-lib communicator  <a href="classoomph_1_1MPI__Helpers.html#ac16964b22bfd4f657490802beb600ffe">More...</a><br /></td></tr>
+<tr class="separator:ac16964b22bfd4f657490802beb600ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa376d403f6bc99e8595d227135932b0e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPI__Helpers.html#aa376d403f6bc99e8595d227135932b0e">mpi_has_been_initialised</a> ()</td></tr>
+<tr class="memdesc:aa376d403f6bc99e8595d227135932b0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">return true if MPI has been initialised  <a href="classoomph_1_1MPI__Helpers.html#aa376d403f6bc99e8595d227135932b0e">More...</a><br /></td></tr>
+<tr class="separator:aa376d403f6bc99e8595d227135932b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:afb01ddfbe038936ec832cdbea6e677e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPI__Helpers.html#afb01ddfbe038936ec832cdbea6e677e8">MPI_Helpers</a> ()</td></tr>
+<tr class="memdesc:afb01ddfbe038936ec832cdbea6e677e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">private default constructor definition (to prevent instances of the class being instantiated)  <a href="classoomph_1_1MPI__Helpers.html#afb01ddfbe038936ec832cdbea6e677e8">More...</a><br /></td></tr>
+<tr class="separator:afb01ddfbe038936ec832cdbea6e677e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf521b68d094e6a88a8bf14f8ebe3185"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPI__Helpers.html#acf521b68d094e6a88a8bf14f8ebe3185">MPI_Helpers</a> (const <a class="el" href="classoomph_1_1MPI__Helpers.html">MPI_Helpers</a> &amp;)</td></tr>
+<tr class="memdesc:acf521b68d094e6a88a8bf14f8ebe3185"><td class="mdescLeft">&#160;</td><td class="mdescRight">private copy constructor definition (to prevent instances of the class being instantiated)  <a href="classoomph_1_1MPI__Helpers.html#acf521b68d094e6a88a8bf14f8ebe3185">More...</a><br /></td></tr>
+<tr class="separator:acf521b68d094e6a88a8bf14f8ebe3185"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:aa8d80db3f7a06074ff4a92e3bb4ab91d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPI__Helpers.html#aa8d80db3f7a06074ff4a92e3bb4ab91d">MPI_has_been_initialised</a> = false</td></tr>
+<tr class="memdesc:aa8d80db3f7a06074ff4a92e3bb4ab91d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool set to true if MPI has been initialised.  <a href="classoomph_1_1MPI__Helpers.html#aa8d80db3f7a06074ff4a92e3bb4ab91d">More...</a><br /></td></tr>
+<tr class="separator:aa8d80db3f7a06074ff4a92e3bb4ab91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78e44036f7979616432483c805e2c93c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPI__Helpers.html#a78e44036f7979616432483c805e2c93c">Communicator_pt</a> = 0</td></tr>
+<tr class="memdesc:a78e44036f7979616432483c805e2c93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">the global communicator  <a href="classoomph_1_1MPI__Helpers.html#a78e44036f7979616432483c805e2c93c">More...</a><br /></td></tr>
+<tr class="separator:a78e44036f7979616432483c805e2c93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classoomph_1_1MPI__Helpers.html" title="MPI_Helpers class contains static helper methods to support MPI within oomph-lib. The methods init(....">MPI_Helpers</a> class contains static helper methods to support MPI within oomph-lib. The methods init(...) and <a class="el" href="classoomph_1_1MPI__Helpers.html#a471bc4697fd5edeea3fb4af1bba0e541" title="finalize mpi">finalize()</a> initialize and finalize MPI in oomph-lib and manage the oomph-libs global communicator <a class="el" href="classoomph_1_1MPI__Helpers.html#ac16964b22bfd4f657490802beb600ffe" title="access to the global oomph-lib communicator">communicator_pt()</a>. NOTE: This class encapsulates static helper methods and instances of it CANNOT be instantiated. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00858">858</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="afb01ddfbe038936ec832cdbea6e677e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb01ddfbe038936ec832cdbea6e677e8">&#9670;&nbsp;</a></span>MPI_Helpers() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::MPI_Helpers::MPI_Helpers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>private default constructor definition (to prevent instances of the class being instantiated) </p>
+
+</div>
+</div>
+<a id="acf521b68d094e6a88a8bf14f8ebe3185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf521b68d094e6a88a8bf14f8ebe3185">&#9670;&nbsp;</a></span>MPI_Helpers() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::MPI_Helpers::MPI_Helpers </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1MPI__Helpers.html">MPI_Helpers</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>private copy constructor definition (to prevent instances of the class being instantiated) </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac16964b22bfd4f657490802beb600ffe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac16964b22bfd4f657490802beb600ffe">&#9670;&nbsp;</a></span>communicator_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> * oomph::MPI_Helpers::communicator_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access to the global oomph-lib communicator </p>
+<p>access to global communicator. This is the oomph-lib equivalent of MPI_COMM_WORLD </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01375">1375</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00895">Communicator_pt</a>, and <a class="el" href="oomph__utilities_8h_source.html#l00892">MPI_has_been_initialised</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l01735">oomph::Z2ErrorEstimator::doc_flux()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01724">oomph::MemoryUsage::doc_my_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01789">oomph::MemoryUsage::doc_total_memory_usage()</a>, <a class="el" href="linear__solver_8cc_source.html#l01790">oomph::SuperLUSolver::factorise_distributed()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l01138">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::full_setup()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00041">oomph::Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper::get_elastic_preconditioner_hypre()</a>, <a class="el" href="error__estimator_8cc_source.html#l00897">oomph::Z2ErrorEstimator::get_element_errors()</a>, <a class="el" href="nodes_8h_source.html#l01158">oomph::Node::hanging_pt()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01102">oomph::HypreInterface::hypre_solve()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">oomph::HypreInterface::HypreInterface()</a>, <a class="el" href="problem_8cc_source.html#l00071">oomph::Problem::Problem()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01886">oomph::MemoryUsage::run_continous_top()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l00770">oomph::MGPreconditioner&lt; DIM &gt;::setup()</a>, <a class="el" href="complex__smoother_8h_source.html#l01866">oomph::HelmholtzGMRESMG&lt; MATRIX &gt;::solve()</a>, <a class="el" href="complex__smoother_8h_source.html#l03362">oomph::HelmholtzFGMRESMG&lt; MATRIX &gt;::solve()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01947">oomph::MemoryUsage::stop_continous_top()</a>.</p>
+
+</div>
+</div>
+<a id="a471bc4697fd5edeea3fb4af1bba0e541"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a471bc4697fd5edeea3fb4af1bba0e541">&#9670;&nbsp;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::MPI_Helpers::finalize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>finalize mpi </p>
+<p>finalize mpi (oomph-lib equivalent of MPI_Finalize()) Deletes the global oomph-lib communicator and finalizes MPI. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01361">1361</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00895">Communicator_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01093">oomph::CommandLineArgs::parse_and_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a663a35b00078ebefdc0ea0b7190212e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a663a35b00078ebefdc0ea0b7190212e4">&#9670;&nbsp;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::MPI_Helpers::init </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>make_duplicate_of_mpi_comm_world</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>initialise mpi (oomph-libs equivalent of MPI_Init(...)) Initialises MPI and creates the global oomph-lib communicator. If optional boolean flag is set to false, we use MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true. </p>
+<p>Initialize mpi. If optional boolean flag is set to false, we use MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01313">1313</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00810">oomph::MPIOutputModifier::communicator_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00895">Communicator_pt</a>, <a class="el" href="oomph__utilities_8h_source.html#l00892">MPI_has_been_initialised</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00322">oomph::oomph_info</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01277">oomph::oomph_mpi_output</a>, and <a class="el" href="oomph__definitions_8h_source.html#l00478">oomph::OomphInfo::output_modifier_pt()</a>.</p>
+
+</div>
+</div>
+<a id="aa376d403f6bc99e8595d227135932b0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa376d403f6bc99e8595d227135932b0e">&#9670;&nbsp;</a></span>mpi_has_been_initialised()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool oomph::MPI_Helpers::mpi_has_been_initialised </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>return true if MPI has been initialised </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00879">879</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00274">oomph::HypreHelpers::create_HYPRE_Matrix()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01724">oomph::MemoryUsage::doc_my_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01789">oomph::MemoryUsage::doc_total_memory_usage()</a>, <a class="el" href="linear__solver_8cc_source.html#l01743">oomph::SuperLUSolver::factorise()</a>, <a class="el" href="error__estimator_8cc_source.html#l00897">oomph::Z2ErrorEstimator::get_element_errors()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01102">oomph::HypreInterface::hypre_solve()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">oomph::HypreInterface::HypreInterface()</a>, <a class="el" href="problem_8cc_source.html#l08744">oomph::Problem::newton_solve()</a>, <a class="el" href="problem_8cc_source.html#l00071">oomph::Problem::Problem()</a>, <a class="el" href="projection_8h_source.html#l00722">oomph::ProjectionProblem&lt; PROJECTABLE_ELEMENT &gt;::project()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01886">oomph::MemoryUsage::run_continous_top()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00043">oomph::MatrixVectorProduct::setup()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01947">oomph::MemoryUsage::stop_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01638">oomph::TimingHelpers::timer()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a78e44036f7979616432483c805e2c93c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78e44036f7979616432483c805e2c93c">&#9670;&nbsp;</a></span>Communicator_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> * oomph::MPI_Helpers::Communicator_pt = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the global communicator </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00895">895</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01375">communicator_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01361">finalize()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01313">init()</a>.</p>
+
+</div>
+</div>
+<a id="aa8d80db3f7a06074ff4a92e3bb4ab91d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8d80db3f7a06074ff4a92e3bb4ab91d">&#9670;&nbsp;</a></span>MPI_has_been_initialised</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::MPI_Helpers::MPI_has_been_initialised = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bool set to true if MPI has been initialised. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00892">892</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01375">communicator_pt()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01313">init()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a></li>
+<li><a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:58
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

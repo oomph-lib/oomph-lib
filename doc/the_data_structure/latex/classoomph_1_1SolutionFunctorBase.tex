@@ -1,0 +1,191 @@
+\hypertarget{classoomph_1_1SolutionFunctorBase}{}\doxysection{oomph\+::Solution\+Functor\+Base Class Reference}
+\label{classoomph_1_1SolutionFunctorBase}\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+
+
+{\ttfamily \#include $<$oomph\+\_\+utilities.\+h$>$}
+
+Inheritance diagram for oomph\+::Solution\+Functor\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1SolutionFunctorBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6da5b9aea59f09e01378860ff559c3bb}{Time\+Space\+To\+Double\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em General function of space and time which returns a double. \end{DoxyCompactList}\item 
+typedef \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$($\ast$ \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6df07384ce36c784c7befe7d7bf4a606}{Time\+Space\+To\+Double\+Vect\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em General function of space and time which returns a vector of doubles. \end{DoxyCompactList}\item 
+typedef \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$($\ast$ \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_aca237d543e590a388b771aea22d3aad6}{Time\+Space\+Value\+To\+Double\+Vect\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a6c5ad348f7c2fa03ae7e9eaa845c6481}{$\sim$\+Solution\+Functor\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_ad7177a415b2ef72f89b69dc68028166d}{operator()}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x) const =0
+\begin{DoxyCompactList}\small\item\em Call the function. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_aac070b0759ba6f040020972706ed4a9b}{derivative}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}}) const =0
+\begin{DoxyCompactList}\small\item\em Call the derivative function. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}{jacobian}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian) const
+\item 
+virtual bool \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_af94ed993230c9b799ce6367b436e7e9e}{have\+\_\+jacobian}} () const
+\begin{DoxyCompactList}\small\item\em Is a jacobian function implemented? \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a016f7f144cc563df9efb7d4679b18c46}{initialise\+\_\+from\+\_\+problem}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Overload to grab data from the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Function base class for exact solutions/initial conditions/boundary conditions. This is needed so that we can have solutions that depend on problem parameters with resorting to global variables. 
+
+Definition at line 1135 of file oomph\+\_\+utilities.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolutionFunctorBase_a6da5b9aea59f09e01378860ff559c3bb}\label{classoomph_1_1SolutionFunctorBase_a6da5b9aea59f09e01378860ff559c3bb}} 
+\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}!TimeSpaceToDoubleFctPt@{TimeSpaceToDoubleFctPt}}
+\index{TimeSpaceToDoubleFctPt@{TimeSpaceToDoubleFctPt}!oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+\doxysubsubsection{\texorpdfstring{TimeSpaceToDoubleFctPt}{TimeSpaceToDoubleFctPt}}
+{\footnotesize\ttfamily typedef double($\ast$ oomph\+::\+Solution\+Functor\+Base\+::\+Time\+Space\+To\+Double\+Fct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)}
+
+
+
+General function of space and time which returns a double. 
+
+
+
+Definition at line 1141 of file oomph\+\_\+utilities.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SolutionFunctorBase_a6df07384ce36c784c7befe7d7bf4a606}\label{classoomph_1_1SolutionFunctorBase_a6df07384ce36c784c7befe7d7bf4a606}} 
+\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}!TimeSpaceToDoubleVectFctPt@{TimeSpaceToDoubleVectFctPt}}
+\index{TimeSpaceToDoubleVectFctPt@{TimeSpaceToDoubleVectFctPt}!oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+\doxysubsubsection{\texorpdfstring{TimeSpaceToDoubleVectFctPt}{TimeSpaceToDoubleVectFctPt}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$($\ast$ oomph\+::\+Solution\+Functor\+Base\+::\+Time\+Space\+To\+Double\+Vect\+Fct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)}
+
+
+
+General function of space and time which returns a vector of doubles. 
+
+
+
+Definition at line 1145 of file oomph\+\_\+utilities.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SolutionFunctorBase_aca237d543e590a388b771aea22d3aad6}\label{classoomph_1_1SolutionFunctorBase_aca237d543e590a388b771aea22d3aad6}} 
+\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}!TimeSpaceValueToDoubleVectFctPt@{TimeSpaceValueToDoubleVectFctPt}}
+\index{TimeSpaceValueToDoubleVectFctPt@{TimeSpaceValueToDoubleVectFctPt}!oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+\doxysubsubsection{\texorpdfstring{TimeSpaceValueToDoubleVectFctPt}{TimeSpaceValueToDoubleVectFctPt}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$($\ast$ oomph\+::\+Solution\+Functor\+Base\+::\+Time\+Space\+Value\+To\+Double\+Vect\+Fct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})}
+
+General function of time, space and a value vector which returns a vector of doubles. 
+
+Definition at line 1151 of file oomph\+\_\+utilities.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolutionFunctorBase_a6c5ad348f7c2fa03ae7e9eaa845c6481}\label{classoomph_1_1SolutionFunctorBase_a6c5ad348f7c2fa03ae7e9eaa845c6481}} 
+\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}!````~SolutionFunctorBase@{$\sim$SolutionFunctorBase}}
+\index{````~SolutionFunctorBase@{$\sim$SolutionFunctorBase}!oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+\doxysubsubsection{\texorpdfstring{$\sim$SolutionFunctorBase()}{~SolutionFunctorBase()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Solution\+Functor\+Base\+::$\sim$\+Solution\+Functor\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+Definition at line 1154 of file oomph\+\_\+utilities.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolutionFunctorBase_aac070b0759ba6f040020972706ed4a9b}\label{classoomph_1_1SolutionFunctorBase_aac070b0759ba6f040020972706ed4a9b}} 
+\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}!derivative@{derivative}}
+\index{derivative@{derivative}!oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+\doxysubsubsection{\texorpdfstring{derivative()}{derivative()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Solution\+Functor\+Base\+::derivative (\begin{DoxyParamCaption}\item[{const double \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Call the derivative function. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1SolutionFunctor_a3e597c5cb36305a3a01471fadd03aee2}{oomph\+::\+Solution\+Functor}}.
+
+
+
+Referenced by oomph\+::\+O\+D\+E\+Element\+::derivative\+\_\+function().
+
+\mbox{\Hypertarget{classoomph_1_1SolutionFunctorBase_af94ed993230c9b799ce6367b436e7e9e}\label{classoomph_1_1SolutionFunctorBase_af94ed993230c9b799ce6367b436e7e9e}} 
+\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}!have\_jacobian@{have\_jacobian}}
+\index{have\_jacobian@{have\_jacobian}!oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+\doxysubsubsection{\texorpdfstring{have\_jacobian()}{have\_jacobian()}}
+{\footnotesize\ttfamily virtual bool oomph\+::\+Solution\+Functor\+Base\+::have\+\_\+jacobian (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Is a jacobian function implemented? 
+
+
+
+Definition at line 1178 of file oomph\+\_\+utilities.\+h.
+
+
+
+Referenced by oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
+
+\mbox{\Hypertarget{classoomph_1_1SolutionFunctorBase_a016f7f144cc563df9efb7d4679b18c46}\label{classoomph_1_1SolutionFunctorBase_a016f7f144cc563df9efb7d4679b18c46}} 
+\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}!initialise\_from\_problem@{initialise\_from\_problem}}
+\index{initialise\_from\_problem@{initialise\_from\_problem}!oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+\doxysubsubsection{\texorpdfstring{initialise\_from\_problem()}{initialise\_from\_problem()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Solution\+Functor\+Base\+::initialise\+\_\+from\+\_\+problem (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload to grab data from the problem. 
+
+
+
+Definition at line 1181 of file oomph\+\_\+utilities.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}\label{classoomph_1_1SolutionFunctorBase_a53482fed2379500a8f279498aed07d56}} 
+\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}!jacobian@{jacobian}}
+\index{jacobian@{jacobian}!oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+\doxysubsubsection{\texorpdfstring{jacobian()}{jacobian()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Solution\+Functor\+Base\+::jacobian (\begin{DoxyParamCaption}\item[{const double \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+The derivatives of the derivative function with respect to u (note that this is not quite the jacobian of the residuals for an O\+DE problem defined by this solution\+: you also need the time derivative part there). Broken virtual function because not often needed. 
+
+Definition at line 1168 of file oomph\+\_\+utilities.\+h.
+
+
+
+References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+
+
+Referenced by oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
+
+\mbox{\Hypertarget{classoomph_1_1SolutionFunctorBase_ad7177a415b2ef72f89b69dc68028166d}\label{classoomph_1_1SolutionFunctorBase_ad7177a415b2ef72f89b69dc68028166d}} 
+\index{oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::SolutionFunctorBase@{oomph::SolutionFunctorBase}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Solution\+Functor\+Base\+::operator() (\begin{DoxyParamCaption}\item[{const double \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Call the function. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1SolutionFunctor_ae0428bc44f99335bd2b3d6f7203984d5}{oomph\+::\+Solution\+Functor}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__utilities_8h}{oomph\+\_\+utilities.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,712 @@
+/**
+
+\mainpage Demo problem: Turek & Hron's FSI benchmark problem
+
+In this example we consider the flow in a 2D channel past a cylinder
+with an attached elastic "flag". This is the FSI benchmark problem
+proposed by Turek & Hron,
+<CENTER>
+"Proposal for Numerical Benchmarking of
+Fluid-Structure Interaction between an Elastic Object and a Laminar
+Incompressible Flow", S. Turek & J. Hron, pp. 371-385. In: 
+"Fluid-Structure Interaction" Springer Lecture Notes in 
+Computational Science and Engineering \b 53. Ed. H.-J. Bungartz & 
+M. Schaefer. Springer Verlag 2006.
+</CENTER>
+
+The problem combines the two single-physics problems of \n\n
+- <A href="../../../navier_stokes/turek_flag_non_fsi/html/index.html">
+  Flow past a cylinder with a "flag" whose motion is prescribed.</A>
+  \n\n
+- <A href="../../../solid/airy_cantilever/html/index.html">
+  The deformation of a finite-thickness cantilever beam (modelled
+   as a 2D solid), loaded by surface tractions.</A> \n\n
+.
+This is our first example problem that involves the coupling between
+a fluid and "proper" solid (rather than beam structure) and also
+includes both fluid and wall inertia. 
+
+The problem presented here was used as one of the test cases
+for \c oomph-lib's FSI preconditioner; see \n\n
+
+<CENTER>
+<A href="http://www.maths.man.ac.uk/~mheil/oomph_lib_additional_material/HeilHazelBoyleCompMech/HeilHazelBoyleCompMech.pdf">Heil, M., Hazel, A.L. & Boyle, J. (2008): Solvers for large-displacement fluid-structure interaction problems: Segregated vs. monolithic approaches. Computational Mechanics.</A>
+</CENTER>
+
+\n\n
+In this tutorial we concentrate on the problem formulation. 
+The application of the preconditioner is discussed 
+<a href="../../../preconditioners/fsi/html/index.html">elsewhere</a> --
+the required source code is contained in the
+<A href="../../../../demo_drivers/interaction/turek_flag/turek_flag.cc">driver code.</A>
+
+<HR> 
+<HR>
+
+\section the_problem The Problem
+ 
+The figure below shows a sketch of the problem: A 2D channel of
+height \f$ H^*\f$  and length \f$ L^* \f$ conveys fluid of
+density \f$ \rho_f \f$ and dynamic viscosity \f$ \mu \f$ and contains 
+a cylinder of diameter \f$ d^* \f$, centred at 
+\f$ (X^*_c, Y^*_c) \f$ to which a linearly elastic "flag" of thickness 
+\f$ H^*_{flag}\f$  and length \f$ L^*_{flag} \f$ is attached.
+Steady Poiseuille flow with average velocity \f$ U^* \f$
+is imposed at the left end of the channel while we assume the 
+outflow to be parallel and axially traction-free. 
+We model the flag as a linearly elastic Hookean solid with elastic 
+modulus \f$ E^* \f$, density \f$ \rho_s \f$ and Poisson's ratio \f$ \nu. \f$
+
+
+\image html turek_flag_dim.gif "Sketch of the problem in dimensional variables. " 
+\image latex turek_flag_dim.eps "Sketch of the problem in dimensional variables. " width=0.75\textwidth
+    
+
+We non-dimensionalise all length and coordinates 
+on the diameter of the cylinder, \f$ d^* \f$, the
+velocities on the mean velocity,  \f$ U^* \f$, and the fluid pressure
+on the viscous scale. To facilitate comparisons with
+Turek & Hron's dimensional benchmark data (particularly for 
+the period of the self-excited oscillations), we use a timescale of 
+\f$ T^* = 1 \ \mbox{sec} \f$ to non-dimensionalise time. The 
+fluid flow is then governed by the non-dimensional Navier-Stokes equations
+\f[
+Re \left( St \frac{\partial u_i}{\partial t} + 
+u_j \frac{\partial u_i}{\partial x_j} \right) =
+- \frac{\partial p}{\partial x_i}  +
+\frac{\partial }{\partial x_j} \left[ \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right) \right],
+\f] 
+where \f$ Re = \rho U^* H_0^* / \mu \f$ and \f$ St = d^* / (U^* T^*) \f$,
+and
+<CENTER>
+\f[
+\frac{\partial u_i}{\partial x_i} = 0,
+\f]
+</CENTER>
+subject to parabolic inflow
+<CENTER>
+\f[
+{\bf u} = 6 x_2 (1-x_2) {\bf e}_1
+\f] 
+</CENTER>
+at the inflow cross-section; parallel, axially-traction-free outflow
+at the outlet; and no-slip on the stationary channel walls
+and the surface of the cylinder, \f$ {\bf u} = {\bf 0} \f$. 
+The no-slip condition on the moving flag is
+<CENTER>
+\f[
+{\bf u} = St \ \frac{\partial {\bf R}_w(\xi_{[top,tip,bottom]},t)}{\partial t}
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\f] 
+</CENTER>
+where \f$ \xi_{[top,tip,bottom]} \f$ are Lagrangian coordinates 
+parametrising the three faces of the flag.
+
+We describe the deformation of the elastic flag by the non-dimensional
+position vector \f$ {\bf R}(\xi^1, \xi^2, t) \f$ which is determined
+by the principle of virtual displacements
+\f[
+\int_{v} \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left( {\bf f} - 
+ \Lambda^2 \frac{\partial^2 {\bf R}}{\partial t^{2}} \right) \cdot 
+ \delta {\bf R} \right\} \ dv 
+ -\oint_{A_{tract}} {\bf t} \cdot \delta {\bf R} \ dA =0,
+  \ \ \ \ \ \ \ \ (2)
+ \f]
+where all solid stresses and tractions have been non-dimensionalised on 
+Young's modulus, \f$ E^* \f$; see the 
+<A href="../../../solid/solid_theory/html/index.html">Solid Mechanics
+Tutorial</A> for details. The solid mechanics timescale ratio (the ratio of the
+timescale \f$ T^* \f$ chosen to non-dimensionalise time, to the
+intrinsic timescale of the solid) can be expressed in terms of
+the Reynolds and Strouhal numbers, the density ratio, and the
+FSI interaction parameter as
+\f[
+\Lambda^2 = \left( \frac{d^*}{T^*} \sqrt{\frac{\rho_s}{E^*}} \right)^2
+= St^2 \left( \frac{\rho_s}{\rho_f} \right) Re \ Q.
+\f]
+
+Here is a sketch of the non-dimensional version of the problem:
+
+\image html turek_flag.gif "Sketch of the fluid problem in dimensionless variables, showing the Lagrangian coordinates that parametrise the three faces of the flag. " 
+\image latex turek_flag.eps "Sketch of the fluid problem in dimensionless variables, showing the Lagrangian coordinates that parametrise the three faces of the flag. " width=0.75\textwidth
+ 
+
+<HR> 
+<HR>
+
+\section parameters Parameter values for the benchmark problems
+
+The (dimensional) parameter values given in Turek & Hron's benchmark
+correspond to the following non-dimensional parameters:
+
+\subsection geom Geometry
+
+- Cylinder diameter \f$ d = 1 \f$
+- Centre of cylinder \f$ X_c = Y_c = 2 \f$
+- Channel length \f$ L= 25 \f$
+- Channel width \f$ H = 4.1 \f$
+- Thickness of the undeformed flag \f$ H_{flag} = 0.2 \f$
+- Right end of undeformed flag \f$ x_{tip} = 6 \f$ 
+.
+
+\subsection nd_params Non-dimensional parameters
+The three FSI test cases correspond to the following
+non-dimensional parameters:
+
+<TABLE BORDER=1>
+<TR>
+<TD ALIGN="CENTER">
+..
+</TD>
+<TD ALIGN="CENTER">
+\f$ Re = U^* d^* \rho_f/\mu \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ St = d^* /(U^* T^*) \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ Q = \mu U^* / (E^* d^*) \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ \rho_s/\rho_f \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ \Lambda^2 = (d^* /T^* \sqrt{\rho_s/E^*})^2 = 
+St^2 (\rho_s/\rho_f) Re \ Q \f$
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+<B>FSI1</B>
+</TD>
+<TD ALIGN="CENTER">
+\f$ 20 \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 0.5 \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 1.429 \times 10^{-6} \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 1 \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 7.145 \times 10^{-6} \f$
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+<B>FSI2</B>
+</TD>
+<TD ALIGN="CENTER">
+\f$ 100 \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 0.1 \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 7.143 \times 10^{-6} \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 10 \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 7.143 \times 10^{-6} \f$
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+<B>FSI3</B>
+</TD>
+<TD ALIGN="CENTER">
+\f$ 200 \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 0.05 \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 3.571 \times 10^{-6} \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 1 \f$
+</TD>
+<TD ALIGN="CENTER">
+\f$ 1.786 \times 10^{-6} \f$
+</TD>
+</TR>
+</TABLE>
+
+
+
+
+
+<HR> 
+<HR>
+
+\section results Results
+
+The test cases FSI2 and FSI3 are the most interesting because
+the system develops large-amplitude self-excited oscillations
+
+\subsection fsi2_results FSI2
+
+Following an initial transient period the system settles into
+large-amplitude self-excited oscillations during which the
+oscillating flag generates a regular vortex pattern that is advected
+along the channel. This is illustrated in the figure below which
+shows a snapshot of the flow field  (pressure contours and 
+instantaneous streamlines) at \f$ t=6.04. \f$
+
+\image html fsi2_flow605_cropped.gif "Snapshot of the flow field (instantaneous streamlines and pressure contours) " 
+\image latex fsi2_flow605_cropped.eps "Snapshot of the flow field (instantaneous streamlines and pressure contours) " width=0.75\textwidth
+
+The constantly adapted mesh contains and average
+of 65,000 degrees of freedom. A relatively large timestep
+of \f$ \Delta t = 0.01 \f$ -- corresponding to about 50 timesteps
+per period of the oscillation --  was used in this computation. 
+With this discretisation the system settles into oscillations with 
+a period of \f$ \approx 0.52
+\f$ and an amplitude of the tip-displacement of \f$ 0.01 \pm 0.83. \f$
+
+
+\image html fsi2_trace_cropped.gif "Time trace of the tip displacement. " 
+\image latex fsi2_trace_cropped.eps "Time trace of the tip displacement. " width=0.75\textwidth
+
+
+\subsection fsi3_results FSI3
+
+The figures below shows the corresponding results for the case FSI3
+in which the fluid and solid densities are equal and the Reynolds number
+twice as large as in the FSI2 case. The system performs
+oscillations of much higher frequency and smaller amplitude.
+This is illustrated in the figure below which
+shows a snapshot of the flow field  (pressure contours and 
+instantaneous streamlines) at \f$ t=3.615. \f$
+
+\image html fsi3_flow724_cropped.gif "Snapshot of the flow field (instantaneous streamlines and pressure contours) " 
+\image latex fsi3_flow724_cropped.eps "Snapshot of the flow field (instantaneous streamlines and pressure contours) " width=0.75\textwidth
+
+This computation was performed with a timestep of \f$ \Delta t = 0.005
+\f$ and resulted in oscillations with a period of \f$ \approx 0.19
+\f$ and an amplitude of the tip-displacement of \f$ 0.01 \pm 0.36. \f$
+
+The increase in frequency and Reynolds number leads to the development
+of thinner boundary and shear layers which require a finer spatial
+resolution, involving an average of 84,000 degrees of freedom.
+
+\image html fsi3_trace_cropped.gif "Time trace of the tip displacement. " 
+\image latex fsi3_trace_cropped.eps "Time trace of the tip displacement. " width=0.75\textwidth
+
+
+<HR> 
+<HR>
+
+
+\section overview Overview of the driver code
+
+Since the driver code is somewhat lengthy we start by providing a brief
+overview of the main steps in the \c Problem construction:
+-# We start by discretising the flag with 2D solid elements,
+   as in the corresponding 
+   <A href="../../../solid/airy_cantilever/html/index.html">
+   single-physics solid mechanics example.</A> \n\n
+-# Next we attach \c FSISolidTractionElements to the 
+   three solid mesh boundaries that are exposed to the
+   fluid traction. These elements are used to compute and impose the fluid
+   traction onto the solid elements, using the flow field
+   from the adjacent fluid elements. \n\n
+-# We now combine the three sets of \c FSISolidTractionElements
+   into three individual (sub-)meshes and convert these to \c GeomObjects, 
+   using the \c MeshAsGeomObject class.  \n\n
+-# The \c GeomObject representation of the three surface meshes 
+   is then passed to the constructor of the fluid mesh.
+   The <A href="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">algebraic node-update methodology</a>
+   provided in the \c AlgebraicMesh base class is used to
+   update its nodal positions in response to the motion of its 
+   bounding \c GeomObjects. \n\n
+-# Finally, we use the helper function
+   \c FSI_functions::setup_fluid_load_info_for_solid_elements(...)
+   to set up the fluid-structure interaction -- this function
+   determines which fluid elements are adjacent to the Gauss points
+   in the  \c FSISolidTractionElements that apply the fluid traction
+   to the solid. \n\n
+-# Done! \n\n
+.
+<HR> 
+<HR>
+
+
+\section parameters The global parameters
+
+As usual, We use a namespace to define the (many) global parameters,
+using default assignments for the FSI1 test case.
+
+\dontinclude turek_flag.cc
+\skipline start_of_global_parameters
+\until double Nu=0.4; 
+
+We also include a gravitational body force for the solid. (This
+is only used for the solid mechanics test cases, CSM1 and CSM2,
+which will not be discussed here.)
+
+\until }
+
+The domain geometry and flow field are fairly complex and it
+is difficult to construct a good initial guess for the Newton
+iteration. To ensure its convergence at the beginning of the simulation
+we therefore employ the method suggested by Turek & Hron: We start the flow 
+from rest and ramp up the inflow profile from zero to its maximum value.
+The parameters for the time-dependent increase in the influx
+are defined here:
+
+\until  end of specification of ramped influx
+
+Finally, we provide a helper function that assigns the
+parameters for the various test cases, depending on their
+ID ("FSI1", "FSI2", "FSI3", "CSM1" or "CSM2"). Here is the assignment 
+for the case FSI1:
+
+\until }
+
+In the interest of brevity we omit the listings of the assignments 
+for the other cases. Finally, we select the length of the time interval
+over which the influx is ramped up from zero to its maximum value
+to be equal to 20 timesteps, create a constitutive equation for
+the solid, and document the parameter values used in the simulation:
+
+\skipline Ramp period
+\until // end_of_namespace
+
+<HR>
+<HR>
+
+\section driver The driver code
+
+The driver code has the usual structure, though in this case
+we use the command line arguments to indicate which case
+(FSI1, FSI2, FSI3, CSM1 or CSM2) to run. The absence of
+a command line argument is interpreted as the code being
+run as part of \c oomph-lib's self-test procedure in which case
+we perform a computation with the parameter values for case FSI1
+and perform only a few timesteps.
+
+\skipline start_of_main
+\until Running case
+ 
+We set up the global parameter values, create a \c DocInfo
+object and trace file to record the output, and build the problem.
+
+\until problem(length, height);
+
+Next, we choose the number of timesteps (using a smaller
+number for a validation run, and for the case FSI1 in which the system rapidly
+approaches a steady state) and
+initialise the time-stepping for an impulsive
+start from the zero flow solution.
+
+\until assign_initial_values_impulsive
+ 
+Finally, we document the initial condition and start the
+time-stepping procedure, setting the \c first flag to \c false
+because we have not specified an analytical expression for the
+initial conditions that could be re-assigned after the
+mesh adaptation when computing the first timestep.
+
+\until end of main
+
+ 
+<HR>
+<HR>
+
+\section problem The Problem class
+The \c Problem class contains the usual member functions, such as 
+access functions to the various meshes. Because the nodal positions
+are updated by an algebraic node-update procedure, the function 
+\c actions_before_newton_convergence_check() is employed to
+update the nodal positions in response to changes in the (solid)
+variables during the Newton iteration.
+The function \c actions_before_implicit_timestep() is used to
+adjust the influx during the start-up period.
+ 
+\dontinclude turek_flag.cc
+\skipline start_of_problem_class
+\until end_of_problem_class
+
+
+<HR>
+<HR>
+
+
+\section constructor The problem constructor
+
+We start by building the solid mesh, using an initial discretisation
+with 20 x 2 elements in the x- and y-directions. (The length of
+the flag is determined such that it emanates from its intersection
+with the cylinder and ends at x=6; The \c origin vector shifts the
+"lower left" vertex of the solid mesh so that its centreline
+is aligned with the cylinder.)
+
+\skipline start_of_constructor
+\until n_x,n_y,l_x,l_y,origin,flag_time_stepper_pt);
+
+We create an error estimator for the solid mesh and identify a control
+node at the tip of the flag to track its motion.
+
+\until  Solid_control_node_pt->x(1) << 
+
+Finally, we perform one uniform mesh refinement and disable
+any further mesh adaptation.
+
+\until disable_adaptation()
+
+Next, we attach \c  FSISolidTractionElements to the boundaries 
+of the solid mesh that are exposed to the fluid. 
+We complete their build by specifying which boundary 
+of the bulk mesh they are attached to, as this information
+is required when setting up the fluid-structure interaction;
+see \ref com_ex.
+
+\until // build of FSISolidTractionElements is complete
+
+Finally, we create \c GeomObject representations of the three
+surface meshes of \c FSISolidTractionElements. We will use these to 
+represent the curvilinear, moving boundaries of the fluid mesh.
+
+\until (Traction_mesh_pt[2]);
+
+The final mesh to be built is the fluid mesh whose constructor
+requires pointers to the four \c GeomObjects that represent the
+cylinder and three fluid-loaded faces of the flag, respectively.
+We represent the cylinder by a \c Circle object:
+
+\until Global_Parameters::Radius);
+
+We build the mesh and identify a control node (a node
+at the upstream face of the cylinder), before creating an error 
+estimator and performing one uniform mesh refinement.
+
+\until  Fluid_mesh_pt->refine_uniformly();
+
+We now add the various meshes to the \c Problem's collection
+of sub-meshes and combine them to a global mesh
+
+\until build_global_mesh();
+  
+The application of boundary conditions for the solid are
+straightforward: All displacements of the flag's left end
+(mesh boundary 3) are suppressed; the other faces are free. Strictly speaking,
+the pinning of the redundant solid pressure nodes is superfluous
+since the \c RefineableQPVDElement used for the discretisation of the
+flag employ a displacement-based
+formulation, but it is good practise to perform this step anyway
+to "future-proof" the code for the use of other element types.
+
+\until solid_mesh_pt()->element_pt());
+
+The fluid has Dirichlet boundary conditions (prescribed velocity)
+everywhere apart from the outflow where only the horizontal
+velocity is unknown. 
+
+\until pin_redundant_nodal_pressures(fluid_mesh_pt()->element_pt());
+
+ We impose a parabolic inflow profile with the current value of
+the influx at the inlet (fluid mesh boundary 3).
+
+\until }
+
+We complete the build of the solid elements by passing them the
+pointer to the constitutive equation, the gravity vector and
+the timescale ratio:
+
+\until }
+
+The fluid elements require pointers to the Reynolds and Womersley
+(product of Reynolds and Strouhal) numbers:
+
+
+\until }
+
+Setting up the fluid-structure interaction is done from "both" sides"
+of the fluid-solid interface: First we ensure that the no-slip
+condition is automatically applied to all fluid nodes that are 
+located on the three faces of the flag (mesh boundaries 5, 6 and 7).
+This is done by passing the function pointer to the  
+\c FSI_functions::apply_no_slip_on_moving_wall() function
+to the relevant fluid nodes (<A href="../../../navier_stokes/osc_ellipse/html/index.html">recall</A>
+that the auxiliary node update
+functions are automatically executed whenever the position of a node 
+is updated by the algebraic node update).
+Since the no-slip condition (1) involves the Strouhal number
+(which, in the current problem, is not equal to the default value of
+\c FSI_functions::Strouhal_for_no_slip=1.0), we overwrite
+the default assignment with the actual Strouhal number in the problem.
+
+\until // done automatic application of no-slip
+
+Next, we set up the lookup schemes required by the
+\c FSISolidTractionElements to establish which fluid
+elements affect the traction onto the solid:
+
+\until }
+
+
+All interactions have now been specified and we conclude by
+assigning the equation numbers
+
+
+\skipline // Assign equation numbers
+\until //end_of_constructor
+
+<HR>
+<HR>
+
+\section set_traction Create traction elements
+
+This is a helper function that attaches \c FSISolidTractionElement
+to the solid elements that are exposed to the fluid traction.
+We store the elements in three distinct sub-meshes -- one for
+each face. (Yet another mesh, pointed to by \c
+Combined_traction_mesh_pt, is created for post-processing 
+purposes.)
+
+\skipline start_of_create_traction_elements
+\until  // end of create_traction_elements
+
+
+<HR>
+<HR>
+\section check Actions before Newton convergence check
+
+The algebraic node-update procedure updates the positions
+in response to changes in the solid displacements but this
+is not done automatically when the Newton solver updates
+the solid mechanics degrees of freedom. We therefore
+force a node-update before the Newton convergence check.
+
+\dontinclude turek_flag.cc
+\skipline start_of_actions_before_newton_convergence_check
+\until }
+
+<HR>
+<HR>
+
+\section timestep Actions before the timestep
+
+Before each timestep we update the inflow profile for all fluid nodes
+on mesh boundary 3.
+
+\skipline start_of_actions_before_implicit_timestep
+\until end_of_actions_before_implicit_timestep
+
+
+<HR> 
+<HR>
+
+\section after_adapt Actions after adapt
+
+After each adaptation, we unpin and re-pin all redundant
+pressures degrees of freedom. This is necessary because their
+"redundant-ness" may have been altered by changes in the refinement 
+pattern; see
+<A href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">
+another tutorial</A> for details. We ensure the automatic application of the
+no-slip condition on fluid nodes that are located on the
+faces of the flag, and re-setup the FSI lookup scheme
+that tells \c FSISolidTractionElements which fluid elements
+are located next to their Gauss points.
+
+\skipline actions_after_adapt
+\until end of actions_after_adapt
+
+
+
+<HR>
+<HR>
+
+\section doc Post-processing
+
+The function \c doc_solution(...) produces the output
+for the fluid, solid and traction meshes and writes
+selected data to the trace file.
+
+\skipline start_of_doc_solution
+\until end_of_doc_solution
+
+
+ 
+<HR>
+<HR>
+
+\section com_ex Further comments and exercises
+
+- When completing the build of the \c FSISolidTractionElements
+  (the elements that apply the fluid traction to the 
+  solid elements that are exposed to the fluid) we specified the 
+  number of the solid mesh boundary they are located on, using
+  \n\n
+  \code
+  elem_pt->set_boundary_number_in_bulk_mesh(bound);
+  \endcode
+  \n
+  This information is required when setting up the fluid-structure
+  interaction because the \c MeshAsGeomObject representation of the
+  mesh of \c FSISolidTractionElements is parametrised by the 
+  boundary coordinate in the solid mesh. Explore the details of
+  the implementation by commenting out the relevant line of 
+  code and use the debugger to find out how and where the code
+  fails. \b Note: Since this step is somewhat subtle and therefore
+  easily forgotten, the  \c FSISolidTractionElements issue
+  an explicit warning if the bulk boundary number has not been set --
+  but only if the the library is compiled in PARANOID mode.
+  \n\n
+- When comparing our results against those in Turek & Hron's
+  benchmark, we only focused on the period and amplitude of the
+  fully-developed self-excited oscillations. The benchmark data also 
+  provides data on the time-dependent variations of the drag and lift
+  coefficients. Design suitable \c FaceElements (to be attached
+  to the faces of the Navier-Stokes elements that are adjacent
+  to the flag or the cylinder) to compute these quantities.
+  The 
+  <a href="../../../the_data_structure/html/classoomph_1_1NavierStokesSurfacePowerElement.html">
+  <code>NavierStokesSurfacePowerElements</code></a>
+  should provide a good basis for these.
+
+  
+
+
+<HR>
+<HR>
+
+\section ackn Acknowledgements
+
+
+- This code was originally developed by 
+  Stefan Kollmannsberger and his students Iason Papaioannou and  
+  Orkun Oezkan Doenmez. It was completed by Floraine Cordier.
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A href="../../../../demo_drivers/interaction/turek_flag/">
+demo_drivers/interaction/turek_flag/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A href="../../../../demo_drivers/interaction/turek_flag/turek_flag.cc">
+demo_drivers/interaction/turek_flag/turek_flag.cc
+</A>
+</CENTER>
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

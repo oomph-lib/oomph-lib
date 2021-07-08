@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: RefineableYoungLaplaceProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classRefineableYoungLaplaceProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">RefineableYoungLaplaceProblem&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for RefineableYoungLaplaceProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classRefineableYoungLaplaceProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a78f77a299f2770a82378fcccf86a0b71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a78f77a299f2770a82378fcccf86a0b71">RefineableYoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:a78f77a299f2770a82378fcccf86a0b71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor:  <a href="classRefineableYoungLaplaceProblem.html#a78f77a299f2770a82378fcccf86a0b71">More...</a><br /></td></tr>
+<tr class="separator:a78f77a299f2770a82378fcccf86a0b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b45d5ecdd1d7dbb678e7f74777bf41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a24b45d5ecdd1d7dbb678e7f74777bf41">~RefineableYoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:a24b45d5ecdd1d7dbb678e7f74777bf41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classRefineableYoungLaplaceProblem.html#a24b45d5ecdd1d7dbb678e7f74777bf41">More...</a><br /></td></tr>
+<tr class="separator:a24b45d5ecdd1d7dbb678e7f74777bf41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2807bb8cddbfa553df9f5dd170c8645d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a2807bb8cddbfa553df9f5dd170c8645d">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a2807bb8cddbfa553df9f5dd170c8645d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve: Empty.  <a href="classRefineableYoungLaplaceProblem.html#a2807bb8cddbfa553df9f5dd170c8645d">More...</a><br /></td></tr>
+<tr class="separator:a2807bb8cddbfa553df9f5dd170c8645d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0791c90a16016372e09faf3f5721ecbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a0791c90a16016372e09faf3f5721ecbe">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a0791c90a16016372e09faf3f5721ecbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve: Empty.  <a href="classRefineableYoungLaplaceProblem.html#a0791c90a16016372e09faf3f5721ecbe">More...</a><br /></td></tr>
+<tr class="separator:a0791c90a16016372e09faf3f5721ecbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab64eb0b58beb3bb096ecc81b1a3f8a4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#ab64eb0b58beb3bb096ecc81b1a3f8a4f">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:ab64eb0b58beb3bb096ecc81b1a3f8a4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the mesh of contact angle elements.  <a href="classRefineableYoungLaplaceProblem.html#ab64eb0b58beb3bb096ecc81b1a3f8a4f">More...</a><br /></td></tr>
+<tr class="separator:ab64eb0b58beb3bb096ecc81b1a3f8a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2eab8da1b83091df804ede7c60fac87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#aa2eab8da1b83091df804ede7c60fac87">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:aa2eab8da1b83091df804ede7c60fac87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Rebuild the mesh of contact angle elements.  <a href="classRefineableYoungLaplaceProblem.html#aa2eab8da1b83091df804ede7c60fac87">More...</a><br /></td></tr>
+<tr class="separator:aa2eab8da1b83091df804ede7c60fac87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ec7313c8e4015b0c2af0bbef789e70f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a4ec7313c8e4015b0c2af0bbef789e70f">doc_solution</a> (DocInfo &amp;doc_info, ofstream &amp;trace_file)</td></tr>
+<tr class="memdesc:a4ec7313c8e4015b0c2af0bbef789e70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file.  <a href="classRefineableYoungLaplaceProblem.html#a4ec7313c8e4015b0c2af0bbef789e70f">More...</a><br /></td></tr>
+<tr class="separator:a4ec7313c8e4015b0c2af0bbef789e70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78f77a299f2770a82378fcccf86a0b71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a78f77a299f2770a82378fcccf86a0b71">RefineableYoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:a78f77a299f2770a82378fcccf86a0b71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor:  <a href="classRefineableYoungLaplaceProblem.html#a78f77a299f2770a82378fcccf86a0b71">More...</a><br /></td></tr>
+<tr class="separator:a78f77a299f2770a82378fcccf86a0b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b45d5ecdd1d7dbb678e7f74777bf41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a24b45d5ecdd1d7dbb678e7f74777bf41">~RefineableYoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:a24b45d5ecdd1d7dbb678e7f74777bf41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classRefineableYoungLaplaceProblem.html#a24b45d5ecdd1d7dbb678e7f74777bf41">More...</a><br /></td></tr>
+<tr class="separator:a24b45d5ecdd1d7dbb678e7f74777bf41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2807bb8cddbfa553df9f5dd170c8645d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a2807bb8cddbfa553df9f5dd170c8645d">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a2807bb8cddbfa553df9f5dd170c8645d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve: Empty.  <a href="classRefineableYoungLaplaceProblem.html#a2807bb8cddbfa553df9f5dd170c8645d">More...</a><br /></td></tr>
+<tr class="separator:a2807bb8cddbfa553df9f5dd170c8645d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0791c90a16016372e09faf3f5721ecbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a0791c90a16016372e09faf3f5721ecbe">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a0791c90a16016372e09faf3f5721ecbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve: Empty.  <a href="classRefineableYoungLaplaceProblem.html#a0791c90a16016372e09faf3f5721ecbe">More...</a><br /></td></tr>
+<tr class="separator:a0791c90a16016372e09faf3f5721ecbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab64eb0b58beb3bb096ecc81b1a3f8a4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#ab64eb0b58beb3bb096ecc81b1a3f8a4f">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:ab64eb0b58beb3bb096ecc81b1a3f8a4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the mesh of contact angle elements.  <a href="classRefineableYoungLaplaceProblem.html#ab64eb0b58beb3bb096ecc81b1a3f8a4f">More...</a><br /></td></tr>
+<tr class="separator:ab64eb0b58beb3bb096ecc81b1a3f8a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2eab8da1b83091df804ede7c60fac87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#aa2eab8da1b83091df804ede7c60fac87">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:aa2eab8da1b83091df804ede7c60fac87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Rebuild the mesh of contact angle elements.  <a href="classRefineableYoungLaplaceProblem.html#aa2eab8da1b83091df804ede7c60fac87">More...</a><br /></td></tr>
+<tr class="separator:aa2eab8da1b83091df804ede7c60fac87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8da9e38012994438200b53d398ce465"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#ac8da9e38012994438200b53d398ce465">increment_parameters</a> ()</td></tr>
+<tr class="memdesc:ac8da9e38012994438200b53d398ce465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase the problem parameters before each solve.  <a href="classRefineableYoungLaplaceProblem.html#ac8da9e38012994438200b53d398ce465">More...</a><br /></td></tr>
+<tr class="separator:ac8da9e38012994438200b53d398ce465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ec7313c8e4015b0c2af0bbef789e70f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a4ec7313c8e4015b0c2af0bbef789e70f">doc_solution</a> (DocInfo &amp;doc_info, ofstream &amp;trace_file)</td></tr>
+<tr class="memdesc:a4ec7313c8e4015b0c2af0bbef789e70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file.  <a href="classRefineableYoungLaplaceProblem.html#a4ec7313c8e4015b0c2af0bbef789e70f">More...</a><br /></td></tr>
+<tr class="separator:a4ec7313c8e4015b0c2af0bbef789e70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78f77a299f2770a82378fcccf86a0b71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a78f77a299f2770a82378fcccf86a0b71">RefineableYoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:a78f77a299f2770a82378fcccf86a0b71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor:  <a href="classRefineableYoungLaplaceProblem.html#a78f77a299f2770a82378fcccf86a0b71">More...</a><br /></td></tr>
+<tr class="separator:a78f77a299f2770a82378fcccf86a0b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b45d5ecdd1d7dbb678e7f74777bf41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a24b45d5ecdd1d7dbb678e7f74777bf41">~RefineableYoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:a24b45d5ecdd1d7dbb678e7f74777bf41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classRefineableYoungLaplaceProblem.html#a24b45d5ecdd1d7dbb678e7f74777bf41">More...</a><br /></td></tr>
+<tr class="separator:a24b45d5ecdd1d7dbb678e7f74777bf41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2a639c1cdfd6334c9023c6bfbe69c8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#af2a639c1cdfd6334c9023c6bfbe69c8a">actions_before_solve</a> ()</td></tr>
+<tr class="memdesc:af2a639c1cdfd6334c9023c6bfbe69c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve: Empty.  <a href="classRefineableYoungLaplaceProblem.html#af2a639c1cdfd6334c9023c6bfbe69c8a">More...</a><br /></td></tr>
+<tr class="separator:af2a639c1cdfd6334c9023c6bfbe69c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c472ae3361af18979085c824a47ab53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a5c472ae3361af18979085c824a47ab53">actions_after_solve</a> ()</td></tr>
+<tr class="memdesc:a5c472ae3361af18979085c824a47ab53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve: Empty.  <a href="classRefineableYoungLaplaceProblem.html#a5c472ae3361af18979085c824a47ab53">More...</a><br /></td></tr>
+<tr class="separator:a5c472ae3361af18979085c824a47ab53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8da9e38012994438200b53d398ce465"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#ac8da9e38012994438200b53d398ce465">increment_parameters</a> ()</td></tr>
+<tr class="memdesc:ac8da9e38012994438200b53d398ce465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment problem parameters.  <a href="classRefineableYoungLaplaceProblem.html#ac8da9e38012994438200b53d398ce465">More...</a><br /></td></tr>
+<tr class="separator:ac8da9e38012994438200b53d398ce465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ec7313c8e4015b0c2af0bbef789e70f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a4ec7313c8e4015b0c2af0bbef789e70f">doc_solution</a> (DocInfo &amp;doc_info, ofstream &amp;trace_file)</td></tr>
+<tr class="memdesc:a4ec7313c8e4015b0c2af0bbef789e70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file.  <a href="classRefineableYoungLaplaceProblem.html#a4ec7313c8e4015b0c2af0bbef789e70f">More...</a><br /></td></tr>
+<tr class="separator:a4ec7313c8e4015b0c2af0bbef789e70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a00d1304e030120e76d9f316dd4053116"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a00d1304e030120e76d9f316dd4053116">create_contact_angle_elements</a> (const unsigned &amp;b)</td></tr>
+<tr class="memdesc:a00d1304e030120e76d9f316dd4053116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create YoungLaplace contact angle elements on the b-th boundary of the bulk mesh and add them to contact angle mesh.  <a href="classRefineableYoungLaplaceProblem.html#a00d1304e030120e76d9f316dd4053116">More...</a><br /></td></tr>
+<tr class="separator:a00d1304e030120e76d9f316dd4053116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa270ba8da395897a5a99d052f076e0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#aaa270ba8da395897a5a99d052f076e0c">delete_contact_angle_elements</a> ()</td></tr>
+<tr class="memdesc:aaa270ba8da395897a5a99d052f076e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete contact angle elements.  <a href="classRefineableYoungLaplaceProblem.html#aaa270ba8da395897a5a99d052f076e0c">More...</a><br /></td></tr>
+<tr class="separator:aaa270ba8da395897a5a99d052f076e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00d1304e030120e76d9f316dd4053116"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a00d1304e030120e76d9f316dd4053116">create_contact_angle_elements</a> (const unsigned &amp;b)</td></tr>
+<tr class="memdesc:a00d1304e030120e76d9f316dd4053116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create YoungLaplace contact angle elements on the b-th boundary of the bulk mesh and add them to contact angle mesh.  <a href="classRefineableYoungLaplaceProblem.html#a00d1304e030120e76d9f316dd4053116">More...</a><br /></td></tr>
+<tr class="separator:a00d1304e030120e76d9f316dd4053116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa270ba8da395897a5a99d052f076e0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#aaa270ba8da395897a5a99d052f076e0c">delete_contact_angle_elements</a> ()</td></tr>
+<tr class="memdesc:aaa270ba8da395897a5a99d052f076e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete contact angle elements.  <a href="classRefineableYoungLaplaceProblem.html#aaa270ba8da395897a5a99d052f076e0c">More...</a><br /></td></tr>
+<tr class="separator:aaa270ba8da395897a5a99d052f076e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a251d9473d70dea7bfb36d9f0b4bb412d"><td class="memItemLeft" align="right" valign="top">RefineableRectangularQuadMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a251d9473d70dea7bfb36d9f0b4bb412d">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:a251d9473d70dea7bfb36d9f0b4bb412d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "bulk" mesh.  <a href="classRefineableYoungLaplaceProblem.html#a251d9473d70dea7bfb36d9f0b4bb412d">More...</a><br /></td></tr>
+<tr class="separator:a251d9473d70dea7bfb36d9f0b4bb412d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36f5dc0f7071ac15fd63c7c477f77fb0"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a36f5dc0f7071ac15fd63c7c477f77fb0">Contact_angle_mesh_pt</a></td></tr>
+<tr class="memdesc:a36f5dc0f7071ac15fd63c7c477f77fb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the contact angle mesh.  <a href="classRefineableYoungLaplaceProblem.html#a36f5dc0f7071ac15fd63c7c477f77fb0">More...</a><br /></td></tr>
+<tr class="separator:a36f5dc0f7071ac15fd63c7c477f77fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2ae72b9b685c052b6a86892f64c2d85"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#ae2ae72b9b685c052b6a86892f64c2d85">Height_control_mesh_pt</a></td></tr>
+<tr class="memdesc:ae2ae72b9b685c052b6a86892f64c2d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh containing the height control element.  <a href="classRefineableYoungLaplaceProblem.html#ae2ae72b9b685c052b6a86892f64c2d85">More...</a><br /></td></tr>
+<tr class="separator:ae2ae72b9b685c052b6a86892f64c2d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af14d838e5d4a1b9df2595bb08fa5e99d"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#af14d838e5d4a1b9df2595bb08fa5e99d">Control_node_pt</a></td></tr>
+<tr class="memdesc:af14d838e5d4a1b9df2595bb08fa5e99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node at which the height (displacement along spine) is controlled/doced.  <a href="classRefineableYoungLaplaceProblem.html#af14d838e5d4a1b9df2595bb08fa5e99d">More...</a><br /></td></tr>
+<tr class="separator:af14d838e5d4a1b9df2595bb08fa5e99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d667f8f0c41048740c5344619e27584"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a0d667f8f0c41048740c5344619e27584">Kappa_pt</a></td></tr>
+<tr class="memdesc:a0d667f8f0c41048740c5344619e27584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Data object that stores the prescribed curvature.  <a href="classRefineableYoungLaplaceProblem.html#a0d667f8f0c41048740c5344619e27584">More...</a><br /></td></tr>
+<tr class="separator:a0d667f8f0c41048740c5344619e27584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab97cbf6dc6490194591b03c45642e147"><td class="memItemLeft" align="right" valign="top">HeightControlElement *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#ab97cbf6dc6490194591b03c45642e147">Height_control_element_pt</a></td></tr>
+<tr class="memdesc:ab97cbf6dc6490194591b03c45642e147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to height control element.  <a href="classRefineableYoungLaplaceProblem.html#ab97cbf6dc6490194591b03c45642e147">More...</a><br /></td></tr>
+<tr class="separator:ab97cbf6dc6490194591b03c45642e147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6092f98c7ffbcd158c783d372d375759"><td class="memItemLeft" align="right" valign="top">GeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#a6092f98c7ffbcd158c783d372d375759">Boundary_pt</a></td></tr>
+<tr class="memdesc:a6092f98c7ffbcd158c783d372d375759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to GeomObject that specifies the domain bondary.  <a href="classRefineableYoungLaplaceProblem.html#a6092f98c7ffbcd158c783d372d375759">More...</a><br /></td></tr>
+<tr class="separator:a6092f98c7ffbcd158c783d372d375759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab036ff8d3bf66d3f3bb9e977bc6822d3"><td class="memItemLeft" align="right" valign="top">RefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableYoungLaplaceProblem.html#ab036ff8d3bf66d3f3bb9e977bc6822d3">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:ab036ff8d3bf66d3f3bb9e977bc6822d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "bulk" mesh.  <a href="classRefineableYoungLaplaceProblem.html#ab036ff8d3bf66d3f3bb9e977bc6822d3">More...</a><br /></td></tr>
+<tr class="separator:ab036ff8d3bf66d3f3bb9e977bc6822d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class RefineableYoungLaplaceProblem&lt; ELEMENT &gt;</h3>
+
+<p>2D RefineableYoungLaplace problem on rectangular domain, discretised with 2D QRefineableYoungLaplace elements. The specific type of element is specified via the template parameter.</p>
+<p>2D RefineableYoungLaplace problem on a circle sector, discretised with 2D QRefineableYoungLaplace elements. The specific type of element is specified via the template parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00138">138</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a78f77a299f2770a82378fcccf86a0b71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f77a299f2770a82378fcccf86a0b71">&#9670;&nbsp;</a></span>RefineableYoungLaplaceProblem() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: </p>
+<p>Constructor for RefineableYoungLaplace problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00226">226</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="barrel_8cc_source.html#l00051">GlobalParameters::Controlled_height</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00061">GlobalParameters::Cos_gamma</a>, <a class="el" href="young__laplace_8txt_source.html#l00419">Kappa_pt</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00096">GlobalParameters::L_x</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00097">GlobalParameters::L_y</a>, <a class="el" href="barrel_8cc_source.html#l00072">GlobalParameters::spine_base_function()</a>, and <a class="el" href="barrel_8cc_source.html#l00104">GlobalParameters::spine_function()</a>.</p>
+
+</div>
+</div>
+<a id="a24b45d5ecdd1d7dbb678e7f74777bf41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b45d5ecdd1d7dbb678e7f74777bf41">&#9670;&nbsp;</a></span>~RefineableYoungLaplaceProblem() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00147">147</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="a78f77a299f2770a82378fcccf86a0b71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f77a299f2770a82378fcccf86a0b71">&#9670;&nbsp;</a></span>RefineableYoungLaplaceProblem() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: </p>
+
+</div>
+</div>
+<a id="a24b45d5ecdd1d7dbb678e7f74777bf41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b45d5ecdd1d7dbb678e7f74777bf41">&#9670;&nbsp;</a></span>~RefineableYoungLaplaceProblem() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__young__laplace_8cc_source.html#l00059">59</a> of file <a class="el" href="refineable__young__laplace_8cc_source.html">refineable_young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<a id="a78f77a299f2770a82378fcccf86a0b71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f77a299f2770a82378fcccf86a0b71">&#9670;&nbsp;</a></span>RefineableYoungLaplaceProblem() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: </p>
+
+</div>
+</div>
+<a id="a24b45d5ecdd1d7dbb678e7f74777bf41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b45d5ecdd1d7dbb678e7f74777bf41">&#9670;&nbsp;</a></span>~RefineableYoungLaplaceProblem() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="spherical__cap__in__cylinder_8cc_source.html#l00062">62</a> of file <a class="el" href="spherical__cap__in__cylinder_8cc_source.html">spherical_cap_in_cylinder.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa2eab8da1b83091df804ede7c60fac87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2eab8da1b83091df804ede7c60fac87">&#9670;&nbsp;</a></span>actions_after_adapt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_after_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Rebuild the mesh of contact angle elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__young__laplace_8cc_source.html#l00079">79</a> of file <a class="el" href="refineable__young__laplace_8cc_source.html">refineable_young_laplace.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="common__young__laplace__stuff_8h_source.html#l00053">GlobalParameters::Case</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00061">GlobalParameters::Cos_gamma</a>, and <a class="el" href="common__young__laplace__stuff_8h_source.html#l00049">GlobalParameters::T_junction_with_nonzero_contact_angle</a>.</p>
+
+</div>
+</div>
+<a id="aa2eab8da1b83091df804ede7c60fac87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2eab8da1b83091df804ede7c60fac87">&#9670;&nbsp;</a></span>actions_after_adapt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_after_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Rebuild the mesh of contact angle elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00167">167</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="common__young__laplace__stuff_8h_source.html#l00061">GlobalParameters::Cos_gamma</a>.</p>
+
+</div>
+</div>
+<a id="a0791c90a16016372e09faf3f5721ecbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0791c90a16016372e09faf3f5721ecbe">&#9670;&nbsp;</a></span>actions_after_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__young__laplace_8cc_source.html#l00065">65</a> of file <a class="el" href="refineable__young__laplace_8cc_source.html">refineable_young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0791c90a16016372e09faf3f5721ecbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0791c90a16016372e09faf3f5721ecbe">&#9670;&nbsp;</a></span>actions_after_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00153">153</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="a5c472ae3361af18979085c824a47ab53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c472ae3361af18979085c824a47ab53">&#9670;&nbsp;</a></span>actions_after_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_after_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="spherical__cap__in__cylinder_8cc_source.html#l00068">68</a> of file <a class="el" href="spherical__cap__in__cylinder_8cc_source.html">spherical_cap_in_cylinder.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab64eb0b58beb3bb096ecc81b1a3f8a4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab64eb0b58beb3bb096ecc81b1a3f8a4f">&#9670;&nbsp;</a></span>actions_before_adapt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_before_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the mesh of contact angle elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__young__laplace_8cc_source.html#l00068">68</a> of file <a class="el" href="refineable__young__laplace_8cc_source.html">refineable_young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab64eb0b58beb3bb096ecc81b1a3f8a4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab64eb0b58beb3bb096ecc81b1a3f8a4f">&#9670;&nbsp;</a></span>actions_before_adapt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_before_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the mesh of contact angle elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00156">156</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2807bb8cddbfa553df9f5dd170c8645d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2807bb8cddbfa553df9f5dd170c8645d">&#9670;&nbsp;</a></span>actions_before_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__young__laplace_8cc_source.html#l00062">62</a> of file <a class="el" href="refineable__young__laplace_8cc_source.html">refineable_young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2807bb8cddbfa553df9f5dd170c8645d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2807bb8cddbfa553df9f5dd170c8645d">&#9670;&nbsp;</a></span>actions_before_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00150">150</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="af2a639c1cdfd6334c9023c6bfbe69c8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a639c1cdfd6334c9023c6bfbe69c8a">&#9670;&nbsp;</a></span>actions_before_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_before_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="spherical__cap__in__cylinder_8cc_source.html#l00065">65</a> of file <a class="el" href="spherical__cap__in__cylinder_8cc_source.html">spherical_cap_in_cylinder.cc</a>.</p>
+
+</div>
+</div>
+<a id="a00d1304e030120e76d9f316dd4053116"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00d1304e030120e76d9f316dd4053116">&#9670;&nbsp;</a></span>create_contact_angle_elements() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::create_contact_angle_elements </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create YoungLaplace contact angle elements on the b-th boundary of the bulk mesh and add them to contact angle mesh. </p>
+
+</div>
+</div>
+<a id="a00d1304e030120e76d9f316dd4053116"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00d1304e030120e76d9f316dd4053116">&#9670;&nbsp;</a></span>create_contact_angle_elements() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::create_contact_angle_elements </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create YoungLaplace contact angle elements on the b-th boundary of the bulk mesh and add them to contact angle mesh. </p>
+<p>Create YoungLaplace contact angle elements on the b-th boundary of the bulk mesh and add them to the contact angle mesh </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00373">373</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="aaa270ba8da395897a5a99d052f076e0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa270ba8da395897a5a99d052f076e0c">&#9670;&nbsp;</a></span>delete_contact_angle_elements() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::delete_contact_angle_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete contact angle elements. </p>
+
+</div>
+</div>
+<a id="aaa270ba8da395897a5a99d052f076e0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa270ba8da395897a5a99d052f076e0c">&#9670;&nbsp;</a></span>delete_contact_angle_elements() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::delete_contact_angle_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete contact angle elements. </p>
+<p>Delete YoungLaplace contact angle elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00405">405</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4ec7313c8e4015b0c2af0bbef789e70f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ec7313c8e4015b0c2af0bbef789e70f">&#9670;&nbsp;</a></span>doc_solution() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>trace_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file. </p>
+
+</div>
+</div>
+<a id="a4ec7313c8e4015b0c2af0bbef789e70f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ec7313c8e4015b0c2af0bbef789e70f">&#9670;&nbsp;</a></span>doc_solution() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>trace_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file. </p>
+
+</div>
+</div>
+<a id="a4ec7313c8e4015b0c2af0bbef789e70f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ec7313c8e4015b0c2af0bbef789e70f">&#9670;&nbsp;</a></span>doc_solution() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>trace_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file. </p>
+<p>Doc the solution: doc_info contains labels/output directory etc. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00430">430</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="young__laplace_8txt_source.html#l00419">Kappa_pt</a>.</p>
+
+</div>
+</div>
+<a id="ac8da9e38012994438200b53d398ce465"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8da9e38012994438200b53d398ce465">&#9670;&nbsp;</a></span>increment_parameters() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::increment_parameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Increment problem parameters. </p>
+
+</div>
+</div>
+<a id="ac8da9e38012994438200b53d398ce465"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8da9e38012994438200b53d398ce465">&#9670;&nbsp;</a></span>increment_parameters() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::increment_parameters</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Increase the problem parameters before each solve. </p>
+<p>Update (increase/decrease) parameters. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__young__laplace_8cc_source.html#l00391">391</a> of file <a class="el" href="refineable__young__laplace_8cc_source.html">refineable_young_laplace.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="barrel_8cc_source.html#l00051">GlobalParameters::Controlled_height</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00085">GlobalParameters::Controlled_height_increment</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00082">GlobalParameters::Kappa_increment</a>, <a class="el" href="common__young__laplace__stuff_8h_source.html#l00064">GlobalParameters::Kappa_pt</a>, and <a class="el" href="common__young__laplace__stuff_8h_source.html#l00043">GlobalParameters::Use_height_control</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6092f98c7ffbcd158c783d372d375759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6092f98c7ffbcd158c783d372d375759">&#9670;&nbsp;</a></span>Boundary_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObject* <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::Boundary_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to GeomObject that specifies the domain bondary. </p>
+
+<p class="definition">Definition at line <a class="el" href="spherical__cap__in__cylinder_8cc_source.html#l00080">80</a> of file <a class="el" href="spherical__cap__in__cylinder_8cc_source.html">spherical_cap_in_cylinder.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab036ff8d3bf66d3f3bb9e977bc6822d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab036ff8d3bf66d3f3bb9e977bc6822d3">&#9670;&nbsp;</a></span>Bulk_mesh_pt <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;* <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="spherical__cap__in__cylinder_8cc_source.html#l00083">83</a> of file <a class="el" href="spherical__cap__in__cylinder_8cc_source.html">spherical_cap_in_cylinder.cc</a>.</p>
+
+</div>
+</div>
+<a id="a251d9473d70dea7bfb36d9f0b4bb412d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a251d9473d70dea7bfb36d9f0b4bb412d">&#9670;&nbsp;</a></span>Bulk_mesh_pt <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableRectangularQuadMesh&lt; ELEMENT &gt; * <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00205">205</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="a36f5dc0f7071ac15fd63c7c477f77fb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36f5dc0f7071ac15fd63c7c477f77fb0">&#9670;&nbsp;</a></span>Contact_angle_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::Contact_angle_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the contact angle mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00208">208</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="af14d838e5d4a1b9df2595bb08fa5e99d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af14d838e5d4a1b9df2595bb08fa5e99d">&#9670;&nbsp;</a></span>Control_node_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node * <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::Control_node_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Node at which the height (displacement along spine) is controlled/doced. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00214">214</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab97cbf6dc6490194591b03c45642e147"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab97cbf6dc6490194591b03c45642e147">&#9670;&nbsp;</a></span>Height_control_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HeightControlElement * <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::Height_control_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to height control element. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__young__laplace_8cc_source.html#l00134">134</a> of file <a class="el" href="refineable__young__laplace_8cc_source.html">refineable_young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae2ae72b9b685c052b6a86892f64c2d85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2ae72b9b685c052b6a86892f64c2d85">&#9670;&nbsp;</a></span>Height_control_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh * <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::Height_control_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to mesh containing the height control element. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00211">211</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0d667f8f0c41048740c5344619e27584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d667f8f0c41048740c5344619e27584">&#9670;&nbsp;</a></span>Kappa_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* <a class="el" href="classRefineableYoungLaplaceProblem.html">RefineableYoungLaplaceProblem</a>&lt; ELEMENT &gt;::Kappa_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to Data object that stores the prescribed curvature. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__t__junction_8cc_source.html#l00217">217</a> of file <a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="refineable__t__junction_8cc_source.html">refineable_t_junction.cc</a></li>
+<li><a class="el" href="refineable__young__laplace_8cc_source.html">refineable_young_laplace.cc</a></li>
+<li><a class="el" href="spherical__cap__in__cylinder_8cc_source.html">spherical_cap_in_cylinder.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:26:07
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

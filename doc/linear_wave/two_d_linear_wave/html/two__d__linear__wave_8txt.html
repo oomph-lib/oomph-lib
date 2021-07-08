@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: two_d_linear_wave.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">two_d_linear_wave.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a084ddc7a5f9042994f2768d1e4a8f160"><td class="memItemLeft" align="right" valign="top">mainpage Demo t E[2DLinearWave] f in the rectangular domain f subject to the Dirichlet boundary conditions f[\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\f] and the initial conditions f[u(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t=0)=h_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\f] and f[\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\f] where the functions f h_0 f and f k_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; Here we consider the unforced f and choose boundary and initial conditions that are consistent with the travelling wave <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> f[u_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t)=\tanh\left(1-\alpha\left(\zeta-<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">t\right</a>)\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\f] where f[\zeta=\cos\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>) x_1+\sin\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>) <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@\f] is the travelling wave coordinate The <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> represents a tanh step profile that propagates with unit speed through the domain The parameter f <a class="el" href="two__d__linear__wave_8txt.html#ac981130761cbf5d743da112c92397c93">alpha</a> f controls the steepness of the step while f <a class="el" href="two__d__linear__wave_8txt.html#a06b3fc8b5665a04be2171f6436da0d46">phi</a> f controls the orientation of the step in the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a084ddc7a5f9042994f2768d1e4a8f160">f</a> (x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>) \f$ - plane. The figure below shows a plot of computed and <a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a> solutions at <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> \f$ t=0.25 \f$</td></tr>
+<tr class="separator:a084ddc7a5f9042994f2768d1e4a8f160"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8944fe01f91f9194c0f150923a9f0517"><td class="memItemLeft" align="right" valign="top">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs::We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt; 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a8944fe01f91f9194c0f150923a9f0517">timestepper</a> (see \ref IC for an explanation of the template argument)</td></tr>
+<tr class="separator:a8944fe01f91f9194c0f150923a9f0517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad053ced66e2dd4efb8f87941a2e9cc55"><td class="memItemLeft" align="right" valign="top">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh solution&lt; HR &gt;&lt; HR &gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs::We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt; 1 &gt; passing the number of and the pointer to the source function to the and run the <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent simulation We solve the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> once with an impulsive start and once a with smooth start from the travelling wave&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> (@R[ExactSoln1]@). \<a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>&lt; HR &gt;&lt; HR &gt; \section <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> The <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> class The <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> class is practically identical to that used for&lt; A HREF</td></tr>
+<tr class="separator:ad053ced66e2dd4efb8f87941a2e9cc55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98ebbf3c795d1865c38cf29b297a36c3"><td class="memItemLeft" align="right" valign="top">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the solve the equations at each <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> level and document the results <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of unsteady run&lt; HR &gt;&lt; HR &gt; section comments Comments and Exercises subsection default Default <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> for the linear wave equations The linear wave equation does not contain any therefore the c Problem <a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a> only passed the pointer to the pointer to the source function to the <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> Passing the pointer to the source function is optional if no source function pointer is the linear wave <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> will use the default f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> (x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t)=0\f$</td></tr>
+<tr class="separator:a98ebbf3c795d1865c38cf29b297a36c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4ef72987dace2a540db22ace941eceb"><td class="memItemLeft" align="right" valign="top">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the solve the equations at each <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> level and document the results <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of unsteady run&lt; HR &gt;&lt; HR &gt; section comments Comments and Exercises subsection default Default <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> for the linear wave equations The linear wave equation does not contain any therefore the c Problem <a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a> only passed the pointer to the pointer to the source function to the <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> Passing the pointer to the source function is optional if no source function pointer is the linear wave <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> will use the default <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> so that the unforced linear wave equation is solved You should confirm this by commenting out the assignment of the source function pointer in the Problem <a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a> the code&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#ae4ef72987dace2a540db22ace941eceb">should</a> (and does!) still compute the correct results. This is because the travelling-wave <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>(@R[ExactSoln1]@) is in fact a <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> of the \e unforced wave equation -- the source function defined in the namespace \c TanhSolnForLinearWave implements \f$ <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>(x_1</td></tr>
+<tr class="separator:ae4ef72987dace2a540db22ace941eceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41ba270ba090bb0d052ec204a24c2b15"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a></td></tr>
+<tr class="separator:a41ba270ba090bb0d052ec204a24c2b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8deb2937f52462562f803525a7229e58"><td class="memItemLeft" align="right" valign="top">mainpage Demo t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a></td></tr>
+<tr class="separator:a8deb2937f52462562f803525a7229e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3126063820ee559efb451c17db97c3d1"><td class="memItemLeft" align="right" valign="top">mainpage Demo t E[2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a></td></tr>
+<tr class="separator:a3126063820ee559efb451c17db97c3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35f35c6757e7f45a1d0acf59649a63c3"><td class="memItemLeft" align="right" valign="top">mainpage Demo t E[2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[u(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t=0)=h_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a35f35c6757e7f45a1d0acf59649a63c3">g_0</a></td></tr>
+<tr class="separator:a35f35c6757e7f45a1d0acf59649a63c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46197e9c78fac9bb1c50967be725ba6c"><td class="memItemLeft" align="right" valign="top">mainpage Demo t E[2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[u(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t=0)=h_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> h_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> k_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; Here we consider the unforced&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a46197e9c78fac9bb1c50967be725ba6c">case</a></td></tr>
+<tr class="separator:a46197e9c78fac9bb1c50967be725ba6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad479b7afa8ea75b489299c9af614aef6"><td class="memItemLeft" align="right" valign="top">mainpage Demo t E[2DLinearWave] f in the rectangular domain f subject to the Dirichlet boundary conditions f[\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\f] and the initial conditions f[u(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t=0)=h_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\f] and f[\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\f] where the functions f h_0 f and f k_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; Here we consider the unforced f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#ad479b7afa8ea75b489299c9af614aef6">f</a> =0 \f$</td></tr>
+<tr class="separator:ad479b7afa8ea75b489299c9af614aef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fef684a92649cef275027a253559e38"><td class="memItemLeft" align="right" valign="top">mainpage Demo t E[2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[u(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t=0)=h_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> h_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> k_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; Here we consider the unforced <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and choose boundary and initial conditions that are consistent with the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a></td></tr>
+<tr class="separator:a4fef684a92649cef275027a253559e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac981130761cbf5d743da112c92397c93"><td class="memItemLeft" align="right" valign="top">mainpage Demo t E[2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[u(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t=0)=h_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> h_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> k_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; Here we consider the unforced <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and choose boundary and initial conditions that are consistent with the travelling wave <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[u_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t)=\tanh\left(1-\alpha\left(\zeta-<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">t\right</a>)\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\zeta=\cos\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>) x_1+\sin\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>) <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] is the travelling wave coordinate The <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> represents a tanh step profile that propagates with unit speed through the domain The parameter <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> alpha <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> controls the steepness of the step while <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> <a class="el" href="two__d__linear__wave_8txt.html#a06b3fc8b5665a04be2171f6436da0d46">phi</a> <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> controls the orientation of the step in the for a steepness parameter <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#ac981130761cbf5d743da112c92397c93">alpha</a> =4 \f$</td></tr>
+<tr class="separator:ac981130761cbf5d743da112c92397c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06b3fc8b5665a04be2171f6436da0d46"><td class="memItemLeft" align="right" valign="top">mainpage Demo t E[2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[u(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t=0)=h_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> h_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> k_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; Here we consider the unforced <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and choose boundary and initial conditions that are consistent with the travelling wave <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[u_0(x_1, <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, t)=\tanh\left(1-\alpha\left(\zeta-<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">t\right</a>)\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>[\zeta=\cos\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>) x_1+\sin\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>) <a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] is the travelling wave coordinate The <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> represents a tanh step profile that propagates with unit speed through the domain The parameter <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> <a class="el" href="two__d__linear__wave_8txt.html#ac981130761cbf5d743da112c92397c93">alpha</a> <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> controls the steepness of the step while <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> phi <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> controls the orientation of the step in the for a steepness parameter <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and an angle <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a06b3fc8b5665a04be2171f6436da0d46">phi</a> =\pi/6 \f$ . The plot is a snapshot</td></tr>
+<tr class="separator:a06b3fc8b5665a04be2171f6436da0d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4aae5f087bf5f3cd515c9ceb5e0ecfe"><td class="memItemLeft" align="right" valign="top">namespace Global <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> and functions As usual we store the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> in a namespace Note that we define not only the <a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a> <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> but also its first and second <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> derivatives as both are needed to assign the initial conditions for the Newmark&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#ab4aae5f087bf5f3cd515c9ceb5e0ecfe">timestepper</a></td></tr>
+<tr class="separator:ab4aae5f087bf5f3cd515c9ceb5e0ecfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a8193c95fb3ff0e038d38a62b0f9501"><td class="memItemLeft" align="right" valign="top">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a7a8193c95fb3ff0e038d38a62b0f9501">codes</a></td></tr>
+<tr class="separator:a7a8193c95fb3ff0e038d38a62b0f9501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18d969b7f251363aed27bd9acbfc5096"><td class="memItemLeft" align="right" valign="top">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a18d969b7f251363aed27bd9acbfc5096">specified</a></td></tr>
+<tr class="separator:a18d969b7f251363aed27bd9acbfc5096"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296a3e5bfecd9974037e2ffba9127af2"><td class="memItemLeft" align="right" valign="top">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs::We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt; 1 &gt; passing the number of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a></td></tr>
+<tr class="separator:a296a3e5bfecd9974037e2ffba9127af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf05aaf041272ee50ed0dc06113f0bee"><td class="memItemLeft" align="right" valign="top">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs::We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt; 1 &gt; passing the number of and the pointer to the source function to the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a></td></tr>
+<tr class="separator:acf05aaf041272ee50ed0dc06113f0bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e4b88fbcede57d0a17d67b61f4fad11"><td class="memItemLeft" align="right" valign="top">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs::We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt; 1 &gt; passing the number of and the pointer to the source function to the and run the <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent simulation We solve the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a6e4b88fbcede57d0a17d67b61f4fad11">twice</a></td></tr>
+<tr class="separator:a6e4b88fbcede57d0a17d67b61f4fad11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ba8bc0eeb3abe9aaa13364d68988aeb"><td class="memItemLeft" align="right" valign="top">Now we loop over all nodes and pass the vectors of function pointers to c we compare the Newmark approximation for the zero&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a2ba8bc0eeb3abe9aaa13364d68988aeb">th</a></td></tr>
+<tr class="separator:a2ba8bc0eeb3abe9aaa13364d68988aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85916c045889a1e4c2ea7c275ebca92c"><td class="memItemLeft" align="right" valign="top">Now we loop over all nodes and pass the vectors of function pointers to c we compare the Newmark approximation for the zero first and second <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> derivatives of the nodal values against the <a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a> solution and document the maximum discrepancy <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of set initial condition&lt; HR &gt;&lt; HR &gt; section doc Post processing The post processing routine is practically identical to that in the&lt; A HREF=&quot;../../../unsteady_heat/two_d_unsteady_heat/html/index.html&quot;&gt; corresponding unsteady heat <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a>&lt;/A &gt; We output the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a85916c045889a1e4c2ea7c275ebca92c">solution</a></td></tr>
+<tr class="separator:a85916c045889a1e4c2ea7c275ebca92c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a707e50bc4cb6608e5a58bad8f7e94e33"><td class="memItemLeft" align="right" valign="top">Now we loop over all nodes and pass the vectors of function pointers to c we compare the Newmark approximation for the zero first and second <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> derivatives of the nodal values against the <a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a> <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> and document the maximum discrepancy <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of set initial condition&lt; HR &gt;&lt; HR &gt; section doc Post processing The post processing routine is practically identical to that in the&lt; A HREF=&quot;../../../unsteady_heat/two_d_unsteady_heat/html/index.html&quot;&gt; corresponding unsteady heat example&lt;/A &gt; We output the and compare the computed and <a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a> solutions <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of doc <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt; HR &gt;&lt; HR &gt; section unsteady_run The timestepping loop Timestepping the linear wave equation involves exactly the same steps as in the&lt; A HREF=&quot;../../../unsteady_heat/two_d_unsteady_heat/html/index.html&quot;&gt; unsteady heat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a></td></tr>
+<tr class="separator:a707e50bc4cb6608e5a58bad8f7e94e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8557a05c60c71ca0ae7ab317655852e1"><td class="memItemLeft" align="right" valign="top">We then initialise the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a></td></tr>
+<tr class="separator:a8557a05c60c71ca0ae7ab317655852e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3014b0eaf478b612fa68a36e3137f97f"><td class="memItemLeft" align="right" valign="top">We then initialise the set the initial condition and output the initial <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a></td></tr>
+<tr class="separator:a3014b0eaf478b612fa68a36e3137f97f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeedf7b2d150c02ef9efc4231ad36f9c4"><td class="memItemLeft" align="right" valign="top">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a></td></tr>
+<tr class="separator:aeedf7b2d150c02ef9efc4231ad36f9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acae6eb0f5091039e206d4582c7d6f56c"><td class="memItemLeft" align="right" valign="top">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a></td></tr>
+<tr class="separator:acae6eb0f5091039e206d4582c7d6f56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e4636f8386fe21c19e75ec950754acc"><td class="memItemLeft" align="right" valign="top">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#a7e4636f8386fe21c19e75ec950754acc">Finally</a></td></tr>
+<tr class="separator:a7e4636f8386fe21c19e75ec950754acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab84f269ed920e60d70fea81270c5db45"><td class="memItemLeft" align="right" valign="top">Next we set up the number of timesteps to be performed If the code is run in validation indicated by a non zero number of command line we only perform two timesteps <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a></td></tr>
+<tr class="separator:ab84f269ed920e60d70fea81270c5db45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd145270feed575feb630ed3ff8bb9a6"><td class="memItemLeft" align="right" valign="top">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the solve the equations at each <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> level and document the results <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of unsteady run&lt; HR &gt;&lt; HR &gt; section comments Comments and Exercises subsection default Default parameters for the linear wave equations The linear wave equation does not contain any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a></td></tr>
+<tr class="separator:acd145270feed575feb630ed3ff8bb9a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a084ddc7a5f9042994f2768d1e4a8f160"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a084ddc7a5f9042994f2768d1e4a8f160">&#9670;&nbsp;</a></span>f() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t E [2DLinearWave] f in the rectangular domain f subject to the Dirichlet boundary conditions f [\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\f] and the initial conditions f [u(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t=0)=h_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\f] and f [\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\f] where the functions f h_0 f and f k_0 f are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; Here we consider the unforced f and choose boundary and initial conditions that are consistent with the travelling wave <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> f [u_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t) = \tanh\left(1-\alpha\left(\zeta-<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">t\right</a>)\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\f] where f [\zeta=\cos\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>)x_1+\sin\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>)<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@\f] is the travelling wave coordinate The <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> represents a tanh step profile that propagates with unit speed through the domain The parameter f <a class="el" href="two__d__linear__wave_8txt.html#ac981130761cbf5d743da112c92397c93">alpha</a> f controls the steepness of the step while f <a class="el" href="two__d__linear__wave_8txt.html#a06b3fc8b5665a04be2171f6436da0d46">phi</a> f controls the orientation of the step in the f </td>
+          <td>(</td>
+          <td class="paramtype">x_1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98ebbf3c795d1865c38cf29b297a36c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98ebbf3c795d1865c38cf29b297a36c3">&#9670;&nbsp;</a></span>f() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the solve the equations at each <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> level and document the results <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of unsteady run&lt;HR&gt;&lt;HR&gt; section comments Comments and Exercises subsection default Default <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> for the linear wave equations The linear wave equation does not contain any therefore the c Problem <a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a> only passed the pointer to the pointer to the source function to the <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> Passing the pointer to the source function is optional if no source function pointer is the linear wave <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> will use the default f f </td>
+          <td>(</td>
+          <td class="paramtype">x_1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">t&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4ef72987dace2a540db22ace941eceb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4ef72987dace2a540db22ace941eceb">&#9670;&nbsp;</a></span>should()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the solve the equations at each <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> level and document the results <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of unsteady run&lt;HR&gt;&lt;HR&gt; section comments Comments and Exercises subsection default Default <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> for the linear wave equations The linear wave equation does not contain any therefore the c Problem <a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a> only passed the pointer to the pointer to the source function to the <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> Passing the pointer to the source function is optional if no source function pointer is the linear wave <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> will use the default <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> so that the unforced linear wave equation is solved You should confirm this by commenting out the assignment of the source function pointer in the Problem <a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a> the code should </td>
+          <td>(</td>
+          <td class="paramtype">and does!&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad053ced66e2dd4efb8f87941a2e9cc55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad053ced66e2dd4efb8f87941a2e9cc55">&#9670;&nbsp;</a></span>solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh solution&lt;HR&gt;&lt;HR&gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs:: We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt;1&gt; passing the number of and the pointer to the source function to the and run the <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent simulation We solve the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> once with an impulsive start and once a with smooth start from the travelling wave solution </td>
+          <td>(</td>
+          <td class="paramtype">@R@&#160;</td>
+          <td class="paramname">[ExactSoln1]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8944fe01f91f9194c0f150923a9f0517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8944fe01f91f9194c0f150923a9f0517">&#9670;&nbsp;</a></span>timestepper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs:: We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt;1&gt; timestepper </td>
+          <td>(</td>
+          <td class="paramtype">see \ref IC for an explanation of the template&#160;</td>
+          <td class="paramname"><em>argument</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ac981130761cbf5d743da112c92397c93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac981130761cbf5d743da112c92397c93">&#9670;&nbsp;</a></span>alpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t E [2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [u(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t=0)=h_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> h_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> k_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; Here we consider the unforced <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and choose boundary and initial conditions that are consistent with the travelling wave <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [u_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t) = \tanh\left(1-\alpha\left(\zeta-<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">t\right</a>)\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\zeta=\cos\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>)x_1+\sin\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>)<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] is the travelling wave coordinate The <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> represents a tanh step profile that propagates with unit speed through the domain The parameter <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> alpha <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> controls the steepness of the step while <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> <a class="el" href="two__d__linear__wave_8txt.html#a06b3fc8b5665a04be2171f6436da0d46">phi</a> <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> controls the orientation of the step in the for a steepness parameter <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> alpha =4 \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00073">73</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="acae6eb0f5091039e206d4582c7d6f56c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acae6eb0f5091039e206d4582c7d6f56c">&#9670;&nbsp;</a></span>arguments</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line arguments</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00333">333</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a46197e9c78fac9bb1c50967be725ba6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46197e9c78fac9bb1c50967be725ba6c">&#9670;&nbsp;</a></span>case</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t E [2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [u(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t=0)=h_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> h_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> k_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; Here we consider the unforced case</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00054">54</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7a8193c95fb3ff0e038d38a62b0f9501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a8193c95fb3ff0e038d38a62b0f9501">&#9670;&nbsp;</a></span>codes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> codes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00099">99</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="acf05aaf041272ee50ed0dc06113f0bee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf05aaf041272ee50ed0dc06113f0bee">&#9670;&nbsp;</a></span>constructor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs:: We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt;1&gt; passing the number of and the pointer to the source function to the constructor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00110">110</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3126063820ee559efb451c17db97c3d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3126063820ee559efb451c17db97c3d1">&#9670;&nbsp;</a></span>D</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t E [2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> D</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= </div>
+<div class="line">\left\{ (x_1,<a class="code" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>) \ \bigg| \ x_1 \in [0,1],\ <a class="code" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a> \in [0,2] \<a class="code" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>\} <a class="code" href="two__d__linear__wave_8txt.html#ad479b7afa8ea75b489299c9af614aef6">\f</a>$</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00031">31</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a296a3e5bfecd9974037e2ffba9127af2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a296a3e5bfecd9974037e2ffba9127af2">&#9670;&nbsp;</a></span>elements</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs:: We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt;1&gt; passing the number of elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00109">109</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4fef684a92649cef275027a253559e38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fef684a92649cef275027a253559e38">&#9670;&nbsp;</a></span>exact</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t E [2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [u(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t=0)=h_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> h_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> k_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; Here we consider the unforced <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and choose boundary and initial conditions that are consistent with the exact</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00055">55</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a707e50bc4cb6608e5a58bad8f7e94e33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a707e50bc4cb6608e5a58bad8f7e94e33">&#9670;&nbsp;</a></span>example</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Now we loop over all nodes and pass the vectors of function pointers to c we compare the Newmark approximation for the zero first and second <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> derivatives of the nodal values against the <a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a> <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> and document the maximum discrepancy <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of set initial condition&lt;HR&gt;&lt;HR&gt; section doc Post processing The post processing routine is practically identical to that in the&lt;A HREF=&quot;../../../unsteady_heat/two_d_unsteady_heat/html/index.html&quot;&gt; corresponding unsteady heat example&lt;/A&gt; We output the and compare the computed and <a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a> solutions <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of doc <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt;HR&gt;&lt;HR&gt; section unsteady_run The timestepping loop Timestepping the linear wave equation involves exactly the same steps as in the&lt;A HREF=&quot;../../../unsteady_heat/two_d_unsteady_heat/html/index.html&quot;&gt; unsteady heat example</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00324">324</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad479b7afa8ea75b489299c9af614aef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad479b7afa8ea75b489299c9af614aef6">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t E [2DLinearWave] f in the rectangular domain f subject to the Dirichlet boundary conditions f [\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\f] and the initial conditions f [u(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t=0)=h_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\f] and f [\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\f] where the functions f h_0 f and f k_0 f are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; Here we consider the unforced f f =0 \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00054">54</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7e4636f8386fe21c19e75ec950754acc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e4636f8386fe21c19e75ec950754acc">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00337">337</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a35f35c6757e7f45a1d0acf59649a63c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f35c6757e7f45a1d0acf59649a63c3">&#9670;&nbsp;</a></span>g_0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t E [2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [u(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t=0)=h_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> g_0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00048">48</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="aeedf7b2d150c02ef9efc4231ad36f9c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeedf7b2d150c02ef9efc4231ad36f9c4">&#9670;&nbsp;</a></span>mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation mode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00332">332</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="acd145270feed575feb630ed3ff8bb9a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd145270feed575feb630ed3ff8bb9a6">&#9670;&nbsp;</a></span>parameters</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the solve the equations at each <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> level and document the results <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of unsteady run&lt;HR&gt;&lt;HR&gt; section comments Comments and Exercises subsection default Default parameters for the linear wave equations The linear wave equation does not contain any parameters</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00348">348</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a06b3fc8b5665a04be2171f6436da0d46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06b3fc8b5665a04be2171f6436da0d46">&#9670;&nbsp;</a></span>phi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t E [2DLinearWave] <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> in the rectangular domain <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> subject to the Dirichlet boundary conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. <a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">u\right</a>|_{\partial <a class="el" href="two__d__linear__wave_8txt.html#a3126063820ee559efb451c17db97c3d1">D</a>}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and the initial conditions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [u(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t=0)=h_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\left. \frac{\partial u}{\partial t}\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>|_{t=0}=k_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where the functions <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> h_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> k_0 <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> are given&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; Here we consider the unforced <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and choose boundary and initial conditions that are consistent with the travelling wave <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [u_0(x_1,<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>,t) = \tanh\left(1-\alpha\left(\zeta-<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">t\right</a>)\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a>), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] where <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> [\zeta=\cos\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>)x_1+\sin\left(\<a class="el" href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">phi\right</a>)<a class="el" href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a>, \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@\<a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a>] is the travelling wave coordinate The <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> represents a tanh step profile that propagates with unit speed through the domain The parameter <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> <a class="el" href="two__d__linear__wave_8txt.html#ac981130761cbf5d743da112c92397c93">alpha</a> <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> controls the steepness of the step while <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> phi <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> controls the orientation of the step in the for a steepness parameter <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> and an angle <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> phi =\pi/6 \f$ . The plot is a snapshot</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00074">74</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00028">28</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__linear__wave_8cc_source.html#l00553">main()</a>.</p>
+
+</div>
+</div>
+<a id="a8deb2937f52462562f803525a7229e58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8deb2937f52462562f803525a7229e58">&#9670;&nbsp;</a></span>right</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo t right</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00028">28</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a85916c045889a1e4c2ea7c275ebca92c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85916c045889a1e4c2ea7c275ebca92c">&#9670;&nbsp;</a></span>solution</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Now we loop over all nodes and pass the vectors of function pointers to c we compare the Newmark approximation for the zero first and second <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> derivatives of the nodal values against the <a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a> solution and document the maximum discrepancy <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of set initial condition&lt;HR&gt;&lt;HR&gt; section doc Post processing The post processing routine is practically identical to that in the&lt;A HREF=&quot;../../../unsteady_heat/two_d_unsteady_heat/html/index.html&quot;&gt; corresponding unsteady heat <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a>&lt;/A&gt; We output the solution</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00308">308</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a18d969b7f251363aed27bd9acbfc5096"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18d969b7f251363aed27bd9acbfc5096">&#9670;&nbsp;</a></span>specified</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the solve the equations at each <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> level and document the results <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of unsteady run&lt; HR &gt;&lt; HR &gt; section comments Comments and Exercises subsection default Default <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> for the linear wave equations The linear wave equation does not contain any therefore the c Problem <a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a> only passed the pointer to the pointer to the source function to the <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> Passing the pointer to the source function is optional if no source function pointer is specified</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00101">101</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2ba8bc0eeb3abe9aaa13364d68988aeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ba8bc0eeb3abe9aaa13364d68988aeb">&#9670;&nbsp;</a></span>th</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Now we loop over all nodes and pass the vectors of function pointers to c we compare the Newmark approximation for the zero th</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00297">297</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8557a05c60c71ca0ae7ab317655852e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8557a05c60c71ca0ae7ab317655852e1">&#9670;&nbsp;</a></span>time</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then initialise the time</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00326">326</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__linear__wave_8cc_source.html#l00134">LinearWaveProblem&lt; ELEMENT, TIMESTEPPER &gt;::actions_before_implicit_timestep()</a>, <a class="el" href="two__d__linear__wave_8cc_source.html#l00404">LinearWaveProblem&lt; ELEMENT, TIMESTEPPER &gt;::doc_solution()</a>, <a class="el" href="two__d__linear__wave_8cc_source.html#l00073">TanhSolnForLinearWave::exact_d2udt2()</a>, <a class="el" href="two__d__linear__wave_8cc_source.html#l00065">TanhSolnForLinearWave::exact_dudt()</a>, <a class="el" href="two__d__linear__wave_8cc_source.html#l00058">TanhSolnForLinearWave::exact_u()</a>, <a class="el" href="two__d__linear__wave__flux_8cc_source.html#l00096">TanhSolnForLinearWave::get_exact_gradient()</a>, <a class="el" href="two__d__linear__wave_8cc_source.html#l00082">TanhSolnForLinearWave::get_exact_u()</a>, <a class="el" href="two__d__linear__wave__flux_8cc_source.html#l00108">TanhSolnForLinearWave::prescribed_flux_on_fixed_y_boundary()</a>, and <a class="el" href="two__d__linear__wave_8cc_source.html#l00289">LinearWaveProblem&lt; ELEMENT, TIMESTEPPER &gt;::set_initial_condition()</a>.</p>
+
+</div>
+</div>
+<a id="ab4aae5f087bf5f3cd515c9ceb5e0ecfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4aae5f087bf5f3cd515c9ceb5e0ecfe">&#9670;&nbsp;</a></span>timestepper</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace Global <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> and functions As usual we store the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> in a namespace Note that we define not only the <a class="el" href="two__d__linear__wave_8txt.html#a4fef684a92649cef275027a253559e38">exact</a> <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> but also its first and second <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> derivatives as both are needed to assign the initial conditions for the Newmark timestepper</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00083">83</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab84f269ed920e60d70fea81270c5db45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab84f269ed920e60d70fea81270c5db45">&#9670;&nbsp;</a></span>timesteps</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we set up the number of timesteps to be performed If the code is run in validation indicated by a non zero number of command line we only perform two timesteps <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the timesteps</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00337">337</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6e4b88fbcede57d0a17d67b61f4fad11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e4b88fbcede57d0a17d67b61f4fad11">&#9670;&nbsp;</a></span>twice</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref IC for details dontinclude two_d_linear_wave cc skipline start_of_tanh_solution <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of tanh <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="two__d__linear__wave__flux_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code As in most previous <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent <a class="el" href="two__d__linear__wave_8txt.html#a707e50bc4cb6608e5a58bad8f7e94e33">example</a> we use the command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> as flags that indicate if the code is run in validation <a class="el" href="two__d__linear__wave_8txt.html#aeedf7b2d150c02ef9efc4231ad36f9c4">mode</a> if command line <a class="el" href="two__d__linear__wave_8txt.html#acae6eb0f5091039e206d4582c7d6f56c">arguments</a> are the code will only perform a small number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> skipline start_of_main <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> CommandLineArgs:: We build the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> with bi quadratic c QLinearWaveElements and a c Newmark&lt;1&gt; passing the number of and the pointer to the source function to the and run the <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> dependent simulation We solve the <a class="el" href="two__d__linear__wave_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> twice</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00111">111</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3014b0eaf478b612fa68a36e3137f97f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3014b0eaf478b612fa68a36e3137f97f">&#9670;&nbsp;</a></span>until</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We then initialise the set the initial condition and output the initial <a class="el" href="two__d__linear__wave_8txt.html#ad053ced66e2dd4efb8f87941a2e9cc55">solution</a> until</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00329">329</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+<a id="a41ba270ba090bb0d052ec204a24c2b15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41ba270ba090bb0d052ec204a24c2b15">&#9670;&nbsp;</a></span>x_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Next we set up the number of <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> to be performed If the code is run in validation indicated by a non zero number of command line we only perform two <a class="el" href="two__d__linear__wave_8txt.html#ab84f269ed920e60d70fea81270c5db45">timesteps</a> <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> we loop over the solve the equations at each <a class="el" href="two__d__linear__wave_8txt.html#a8557a05c60c71ca0ae7ab317655852e1">time</a> level and document the results <a class="el" href="two__d__linear__wave_8txt.html#a3014b0eaf478b612fa68a36e3137f97f">until</a> end of unsteady run&lt; HR &gt;&lt; HR &gt; section comments Comments and Exercises subsection default Default <a class="el" href="two__d__linear__wave_8txt.html#acd145270feed575feb630ed3ff8bb9a6">parameters</a> for the linear wave equations The linear wave equation does not contain any therefore the c Problem <a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a> only passed the pointer to the pointer to the source function to the <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> Passing the pointer to the source function is optional if no source function pointer is the linear wave <a class="el" href="two__d__linear__wave_8txt.html#a296a3e5bfecd9974037e2ffba9127af2">elements</a> will use the default <a class="el" href="two__d__linear__wave_8txt.html#a98ebbf3c795d1865c38cf29b297a36c3">f</a> so that the unforced linear wave equation is solved You <a class="el" href="two__d__linear__wave_8txt.html#ae4ef72987dace2a540db22ace941eceb">should</a> confirm this by commenting out the assignment of the source function pointer in the Problem <a class="el" href="two__d__linear__wave_8txt.html#acf05aaf041272ee50ed0dc06113f0bee">constructor</a> the code x_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="two__d__linear__wave_8txt_source.html#l00028">28</a> of file <a class="el" href="two__d__linear__wave_8txt_source.html">two_d_linear_wave.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="atwo__d__linear__wave_8txt_html_a41ba270ba090bb0d052ec204a24c2b15"><div class="ttname"><a href="two__d__linear__wave_8txt.html#a41ba270ba090bb0d052ec204a24c2b15">x_2</a></div><div class="ttdeci">mainpage Demo x_2</div><div class="ttdef"><b>Definition:</b> <a href="two__d__linear__wave_8txt_source.html#l00028">two_d_linear_wave.txt:28</a></div></div>
+<div class="ttc" id="atwo__d__linear__wave_8txt_html_a8deb2937f52462562f803525a7229e58"><div class="ttname"><a href="two__d__linear__wave_8txt.html#a8deb2937f52462562f803525a7229e58">right</a></div><div class="ttdeci">mainpage Demo t right</div><div class="ttdef"><b>Definition:</b> <a href="two__d__linear__wave_8txt_source.html#l00028">two_d_linear_wave.txt:28</a></div></div>
+<div class="ttc" id="atwo__d__linear__wave_8txt_html_ad479b7afa8ea75b489299c9af614aef6"><div class="ttname"><a href="two__d__linear__wave_8txt.html#ad479b7afa8ea75b489299c9af614aef6">f</a></div><div class="ttdeci">mainpage Demo t E[2DLinearWave] f in the rectangular domain f subject to the Dirichlet boundary conditions f[\left. u\right|_{\partial D}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_BC1]@\f] and the initial conditions f[u(x_1, x_2, t=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC1]@\f] and f[\left. \frac{\partial u}{\partial t}\right|_{t=0}=k_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DLinearWave_IC2]@\f] where the functions f h_0 f and f k_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; Here we consider the unforced f f</div><div class="ttdef"><b>Definition:</b> <a href="two__d__linear__wave_8txt_source.html#l00054">two_d_linear_wave.txt:54</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:06:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

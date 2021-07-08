@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Parallel solution of the Boussinesq convection problem</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Parallel solution of the Boussinesq convection problem </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Part I of this document provides an overview of how to distribute the Boussinesq convection problem, using the <a href="../../../multi_physics/refine_b_convect/html/index.html">single-domain</a> and <a href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">multi-domain</a> approaches. It is part of a <a href="../../../example_code_list/html/index.html#distributed">series of tutorials</a> that discuss how to modify existing serial driver codes so that the <code>Problem</code> object can be distributed across multiple processors. Part II provides a more detailed discussion of the serial and parallel implementation of the various helper functions that may be used to set up multi-domain interactions.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="boussinesq"></a>
+Part I: Distributing the Boussinesq convection problem</h1>
+<p>For the single-domain discretisation of the Boussinesq convection <br  />
+ problem, in which the Navier&ndash;Stokes and advection-diffusion equations are combined using a single element, the procedure required to distribute the problem is exactly the same as that described in the <a href="../../adaptive_driven_cavity/html/index.html">adaptive driven cavity tutorial</a>. We therefore omit a detailed discussion of the changes to the driver code but encourage you to compare the serial driver codes, <br  />
+</p>
+<center> <a href="../../../../demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc"><code>demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc</code></a> </center><p>and</p>
+<center> <a href="../../../../demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.cc"><code>demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.cc</code></a> </center><p>with their distributed counterparts,</p>
+<center> <a href="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_boussinesq_convection.cc"><code>demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_boussinesq_convection.cc</code></a> </center><p>and</p>
+<center> <a href="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_b_convection.cc"><code>demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_convection.cc</code></a>. </center><p>The parallelisation of the <a href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">multi-domain driver code </a> is also quite straightforward. The key point is that the interaction between the domains must be set up again after the distribution of the problem because, on each processor, some of the "external elements" will have been deleted during the distribution. The required changes to the serial driver code are described below.</p>
+<h2><a class="anchor" id="main_body"></a>
+The main function</h2>
+<p>The main function begins and ends with the usual calls to <code>MPI_Helpers::init()</code> and <code>MPI_Helpers::finalize()</code>; the problem is distributed with a simple call to <code>Problem::distribute()</code>.</p>
+<hr  />
+<h2><a class="anchor" id="problem_class"></a>
+The problem class</h2>
+<p>The problem class is identical to its serial counterpart, apart from the addition of the <code><a class="el" href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute()</a></code> function, discussed below.</p>
+<hr  />
+<h2><a class="anchor" id="actions_after_adapt"></a>
+Actions after adaptation</h2>
+<p>The boundary conditions are such that a single pressure degree of freedom must be pinned after the adaptation. Once the problem has been distributed, pinning the first pressure freedom in the first element no longer works because the first element will be different on each processor. The required modifications mirror those in the <a href="../../adaptive_driven_cavity/html/index.html">adaptive driven cavity problem</a> and ensure that the pressure is only pinned in the first element in the mesh by testing the Eulerian position of the element. The remainder of the function is the same as in the serial driver code.</p>
+ <div class="fragment"><div class="line"> <span class="comment">/// \short Actions after adaptation, re-set all interactions, then</span></div>
+<div class="line"><span class="comment"> /// re-pin a single pressure degree of freedom</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_adapt()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Unpin all the pressures in NST mesh to avoid pinning two pressures</span></div>
+<div class="line">   RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line">    unpin_all_pressure_dofs(nst_mesh_pt()-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Pin the zero-th pressure dof in the zero-th element and set</span></div>
+<div class="line">   <span class="comment">// its value to zero</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> nnod=nst_mesh_pt()-&gt;nnode();</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0; j&lt;nnod; j++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">if</span> (mesh_pt()-&gt;node_pt(j)-&gt;x(0)==0.0 &amp;&amp; </div>
+<div class="line">         mesh_pt()-&gt;node_pt(j)-&gt;x(1)==0.0) <span class="comment">// 2d problem only</span></div>
+<div class="line">      {</div>
+<div class="line">       fix_pressure(0,0,0.0);</div>
+<div class="line">       <span class="keywordflow">break</span>;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set external elements for the multi-domain solution.</span></div>
+<div class="line">   Multi_domain_functions::</div>
+<div class="line">    setup_multi_domain_interactions&lt;NST_ELEMENT,AD_ELEMENT&gt;</div>
+<div class="line">    (<span class="keyword">this</span>,nst_mesh_pt(),adv_diff_mesh_pt());</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">//end_of_actions_after_adapt</span></div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="actions_after_distribute"></a>
+Actions after distribution</h2>
+<p>After the problem distribution, the multi-domain interactions must be set up again because some of the "external elements" may now only exist on other processors. Such elements are re-created locally as "external halo elements" when <code>Multi_domain_functions::setup_multi_domain_interactions(...)</code> is called.</p>
+ <div class="fragment"><div class="line"> <span class="comment">/// Actions after distribute: Re-setup multi-domain interaction</span></div>
+<div class="line"> <span class="keywordtype">void</span> <a class="code" href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Re-set all the interactions in the problem</span></div>
+<div class="line">   Multi_domain_functions::setup_multi_domain_interactions</div>
+<div class="line">    &lt;NST_ELEMENT,AD_ELEMENT&gt;(<span class="keyword">this</span>,nst_mesh_pt(),adv_diff_mesh_pt());</div>
+<div class="line">  } </div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="doc_solution"></a>
+The doc_solution() routine</h2>
+<p>As usual, the <code><a class="el" href="boussinesq__convection_8txt.html#a8cb7bc96a2ec61fe51b7b81e7ca542df">doc_solution()</a></code> function is modified by adding the processor ID to each output file, ensuring that output from one processor does not overwrite that from another.</p>
+<hr  />
+<p>The remainder of the driver code is identical to the <a href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">serial version</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="multi_domain"></a>
+Part II: Setting up multi-domain interactions</h1>
+<p>The namespace <code>Multi_domain_functions</code> provides several helper functions that facilitate the location of "external elements" in multi-domain problems, in which the two interacting domains occupy the same physical space. The namespace also provides functions that can be used for problems in which the interacting domains meet at a lower-dimensional interface, <em> e.g.</em> in fluid-structure interaction problems. The functions have a sensible default behaviour and can be used as "block-box" routines. We provide a brief overview of their (serial and parallel) implementation, providing enough detail to allow users to appreciate the role of the parameters that can be adjusted in order to optimise the functions' performance in specific applications.</p>
+<p>The function</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT_0,<span class="keyword">class</span> ELEMENT_1&gt;     </div>
+<div class="line"><span class="keywordtype">void</span> Multi_domain_functions::setup_multi_domain_interactions(</div>
+<div class="line">                                       Problem* problem_pt, </div>
+<div class="line">                                       Mesh* <span class="keyword">const</span> &amp;<a class="code" href="boussinesq__convection_8txt.html#a707b60a792e911d3fa7d844de3c21d8a">first_mesh_pt</a>,</div>
+<div class="line">                                       Mesh* <span class="keyword">const</span> &amp;<a class="code" href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a>);</div>
+</div><!-- fragment --><p>sets up a two-way interaction between two domains of the same spatial dimension represented by <code>first_mesh_pt</code>, a mesh of elements of type <code>ELEMENT_0</code>, and <code>second_mesh_pt</code>, a mesh of elements of type <code>ELEMENT_1</code>. Both <code>ELEMENT_0</code> and <code>ELEMENT_1</code> must inherit from <code>ElementWithExternalElements</code>. The function loops over the integration points of all the elements in <code>first_mesh_pt</code> and establishes which "external element" in <code>second_mesh_pt</code> covers the same spatial position as the integration point. A pointer to this "external element" and the appropriate local coordinate are stored in the element in the <code>first_mesh_pt</code>, using the storage provided by the <code>ElementWithExternalElement</code> base class. Once the "external elements" have been found for all elements in <code>first_mesh_pt</code>, the procedure is repeated with the roles of the two meshes interchanged.</p>
+<p>The corresponding function</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> EXT_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> Multi_domain_functions::setup_multi_domain_interaction(</div>
+<div class="line">                                       Problem* problem_pt,</div>
+<div class="line">                                       Mesh* <span class="keyword">const</span> &amp;mesh_pt,</div>
+<div class="line">                                       Mesh* <span class="keyword">const</span> &amp;external_mesh_pt);</div>
+</div><!-- fragment --><p>(note the singular) sets up a one-way interaction in which the mesh pointed to by <code>external_mesh_pt</code> provides the "external
+elements" (of type <code>EXT_ELEMENT</code>) for the <code>ElementWithExternalElements</code> stored in <code>mesh_pt</code>, but not vice versa. In fact, the two-way interaction described above is performed by two successive calls to this function</p>
+<div class="fragment"><div class="line"><a class="code" href="boussinesq__convection_8txt.html#a15a095909692c48e1e31dac9df3387a3">setup_multi_domain_interaction&lt;ELEMENT_1&gt;</a></div>
+<div class="line">     (problem_pt,<a class="code" href="boussinesq__convection_8txt.html#a707b60a792e911d3fa7d844de3c21d8a">first_mesh_pt</a>,<a class="code" href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a>);</div>
+<div class="line"><a class="code" href="boussinesq__convection_8txt.html#ad0de0d1da8264c20e566a642a54e36a5">setup_multi_domain_interaction&lt;ELEMENT_0&gt;</a></div>
+<div class="line">     (problem_pt,<a class="code" href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a>,<a class="code" href="boussinesq__convection_8txt.html#a707b60a792e911d3fa7d844de3c21d8a">first_mesh_pt</a>);</div>
+</div><!-- fragment --><p>Finally, the function </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> EXT_ELEMENT, <span class="keyword">class</span> FACE_ELEMENT_GEOM_OBJECT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> Multi_domain_functions:: setup_multi_domain_interaction(</div>
+<div class="line">                                       Problem* problem_pt,</div>
+<div class="line">                                       Mesh* <span class="keyword">const</span> &amp;mesh_pt,</div>
+<div class="line">                                       Mesh* <span class="keyword">const</span> &amp;external_mesh_pt,</div>
+<div class="line">                                       Mesh* <span class="keyword">const</span> &amp;external_face_mesh_pt);</div>
+</div><!-- fragment --><p>may be used to set up multi-domain interactions for problems in which the interaction occurs across the boundaries of adjacent domains (<em> e.g. </em> in FSI problems where the fluid and solid domains meet along a lower-dimensional interface). We do not anticipate that users will have to call this function directly; it is called internally by the function <code>FSI_functions::setup_fluid_load_info_for_solid_elements(...)</code>.</p>
+<hr  />
+<h2><a class="anchor" id="overview"></a>
+Overview of the implementation</h2>
+<p>The setup of multi-domain interactions requires the identification of local coordinates within "external elements" that occupy the same Eulerian position as the integration points of the <code>ElementWithExternalElements</code> with which they interact. Initially, the helper functions convert the mesh containing the "external elements" into a <code>MeshAsGeomObject</code> &mdash; a compound <code>GeomObject</code> in which the constituent finite elements act as sub-<code>GeomObjects</code>. Given the Eulerian coordinates of a "target point", the function <code>MeshAsGeomObject::locate_zeta(...)</code> is used to locate the "external element" (and the local coordinate within it) that contains the "target point". The simplest implementation of this function is to loop over all the elements in the mesh, calling <code>FiniteElement::locate_zeta(...)</code> until the required point is located. The function <code>FiniteElement::locate_zeta(...)</code> can be overloaded for specific elements to take into account the interpolation method used within the element. By default, a Newton method is employed to determine the local coordinates of the "target point" within an element. If the Newton method fails to converge or if the "target point" is found at a local coordinate that is outside the element, then the functions return values are set to indicate that the "target point" has not been found within the element.</p>
+<p>One problem with the naive "loop over all the elements" approach is that in most cases, the candidate element will not contain the "target
+point", so there will be a lot of wasted work. In addition, there is no guarantee that the (default) Newton iteration will converge, even when the element does contain the required point. A further complication in a distributed problem is that the element that contains the "target point" may not be located on the current processor. For these reasons, <code>MeshAsGeomObject::locate_zeta(...)</code> uses a bin-based search procedure described below. Conceptually, the algorithm still loops over all elements until it finds the one containing the "target
+point"; the efficiency gains are achieved by choosing a sensible search order so that the element containing the point is found quickly.</p>
+<hr  />
+<h2><a class="anchor" id="impl"></a>
+Basic (serial) implementation</h2>
+<p>To make the search process efficient, the constructor of the <code>MeshAsGeomObject</code> automatically creates a bin structure that aids the identification of elements that are close to a given "target point". The setup of the bin structure is performed as follows: </p><center> <b>Setting up the bin structure</b> </center><ol type="1">
+<li>We start by sampling the position of the elements in the <code>MeshAsGeomObject</code> to determine the mesh's maximum and minimum Eulerian coordinates. <br  />
+<br  />
+</li>
+<li>Next we create a rectangular (or cubic) bin structure that spans the entire mesh (using the extremal coordinates determined in the previous step, plus a small margin for safety), using <code>Nx_bin</code> <img class="formulaInl" alt="$ \times $" src="form_0.png"/> <code>Ny_bin</code> ( <img class="formulaInl" alt="$ \times $" src="form_0.png"/> <code>Nz_bin</code>) equal-sized rectangular (or cubic) bins. <br  />
+<br  />
+</li>
+<li>Finally, we populate the bin structure by evaluating the position of a number of sampling points within each element. For each sampling point we determine in which bin the point is located and associate a pair, comprising the pointer to the element and appropriate local coordinate, with that bin. <br  />
+<br  />
+</li>
+</ol>
+<p>Once the bin structure has been set up, a given "target point" can be located very quickly within the <code>MeshAsGeomObject</code> by the following procedure:</p>
+<center> <b>Locating points within the <code>MeshAsGeomObject</code></b> </center><ol type="1">
+<li>Given the coordinates of the "target point", we identify the bin in which it is located. This is a cheap operation because all bins have the same size and are aligned with the coordinate axes. <br  />
+<br  />
+</li>
+<li>Next we visit the element/local coordinate pairs associated with that bin. For each pair, we use the <code>FiniteElement::locate_zeta(...)</code> function to (attempt to!) find the the local coordinate within the element that corresponds to the "target point". The local coordinate stored in the pair is passed to the function to be used as the initial guess for the (default) Newton iteration. If the "target point" is not found, the procedure is repeated with next pair of element and local coordinates. <br  />
+<br  />
+</li>
+<li>If the relevant point is not located within the initial bin (<em> e.g. </em> because the bin is empty) the procedure is repeated in adjacent bins, spiralling outwards through the bin structure. <br  />
+<br  />
+</li>
+<li>If the "target point" cannot be found in any of the bins, the search fails, indicating/suggesting that the "target point" is not contained in the mesh. (The search may also fail when the Newton method is used if none of the element/local coordinate pairs associated with the bins were close enough to the "target point". If this happens, we recommend increasing the number of sampling points by increasing the value of <code>Multi_domain_functions::Nsample_points</code> before re-running the code. Note, however, that we have never encountered this problem in any of our test cases.)</li>
+</ol>
+<p>A tacit assumption in the above procedure is that, since the two interacting meshes represent the same physical domain, any point in one mesh can also be found in the other, regardless of possible differences in the meshes' refinement patterns. While this is true for meshes that discretise domains with polygonal boundaries, problems may arise in domains whose boundaries are curvilinear because <code>oomph-lib's</code> <code>MacroElement/Domain</code>-based representation of such domains ensures that during successive mesh refinements, any newly-created nodes are placed exactly on the curvilinear boundary. This procedure is necessary to guarantee convergence to the exact solution under mesh refinement, but it creates the problem that a strongly refined mesh (whose boundaries provide a better approximation to the exact curvilinear boundary) may contain points that are not contained within the coarser mesh with which it interacts. To avoid this problem, we determine the location of "target points" within each element using the <code>MacroElement</code> (exact curvilinear) representation, if there is one. An important consequence of this approach is that points in the two interacting meshes deemed to be located at the same spatial position (same position in the exact representation) may actually have slightly different positions. Nonetheless, the difference between their positions decreases under mesh refinement at the same rate at which the finite-element representation of the curvilinear domain approaches the domain itself.</p>
+<hr  />
+<h2><a class="anchor" id="parallel"></a>
+Parallel implementation</h2>
+<p>When setting up multi-domain interactions for distributed meshes we face the additional challenge that the "external
+element" that contains a "target point" may not be located on the same processor as the <code>ElementWithExternalElement</code> with which it interacts. When dealing with distributed meshes, the search procedure described above is therefore modified as follows:</p><ol type="1">
+<li>When creating the <code>MeshAsGeomObject</code> representation of the distributed mesh that contains the "external elements", each processor sets up a bin structure for its own part of that mesh. Some communication takes place at this point so that every processor holds the "global" extrema of the mesh. <br  />
+<br  />
+</li>
+<li>When setting up the multi-domain interaction, each processor only determines the "external elements" for the locally-stored <code>ElementWithExternalElements</code> Initially, the required "external elements" are sought among the locally-stored "external elements" and the search is restricted to the bin that contains the "target point". Each processor then creates a list of the "external elements" that have not been found locally. <br  />
+<br  />
+</li>
+<li>Each processor communicates its list of missing "external elements" to the "next" processor, using a ring-like communication pattern. <br  />
+<br  />
+</li>
+<li>All processors search for the yet-to-be-found "external
+   elements" amongst the "external elements" stored in their part of the distributed mesh. Again the search is restricted to the "external elements" that are associated with the bin that contains the "target point". If an "external element" is found, a halo copy of it is created on the processor that contains the <code>ElementWithExternalElement</code>. <br  />
+<br  />
+</li>
+<li>The list of any remaining missing "external elements" is then forwarded to the next processor in the communication ring where the search process is repeated. <br  />
+<br  />
+</li>
+<li>If, after a complete sweep through all processors, some "external elements" have still not been located, we initiate another search loop, re-commencing the search at the next level of the search spiral through the bins. <br  />
+<br  />
+</li>
+<li>The setup of the multi-domain interaction is complete when all "external elements" have been located and halo copies have been made where required. The setup fails (for the same possible reasons listed in the discussion of the serial implementation) if none of the processors are able to locate one or more of the required "external elements".</li>
+</ol>
+<p>The algorithm is based on the assumption that the majority of the pairs of interacting elements will be stored on the same processor, which is typically the case when <code>METIS</code> is used to determine the distribution. The algorithm also assumes that the external elements can usually be found by searching only in the bin containing the "target
+ point", which is true provided the bin structure is not too fine. The algorithm should always find the external elements even if these assumptions are not satisfied, but it may not be optimal in these situations.</p>
+<hr  />
+<h2><a class="anchor" id="optim"></a>
+Optimising the setup of multi-domain interactions</h2>
+<p>It is possible to optimise the setup of the multi-domain interactions by changing the default parameters defined in the <code>Multi_domain_functions</code> namespace. (<b>Note:</b> Because the parameters discussed below are defined in a global namespace, they have to be re-set manually to their defaults.)</p><ul>
+<li>If the size of the domain is known, the extremal coordinates of the bin structure do not have to be (re-)computed "on the fly". Hence if the user knows that a 2D mesh is contained within the region <img class="formulaInl" alt="$ 0 \le x \le 3 $" src="form_1.png"/> and <img class="formulaInl" alt="$ 0 \le y \le 1 $" src="form_2.png"/>, say, the determination of the bin boundaries may be bypassed by setting <br  />
+<br  />
+  <div class="fragment"></div><!-- fragment --> If the size of the mesh is known exactly, it makes sense to suppress the slight increase in the size of the bin structure beyond the extreme mesh coordinates: <br  />
+<br  />
+ <div class="fragment"></div><!-- fragment --> <br  />
+<br  />
+ (By default, this parameter is set to 5% to allow for the fact that the automatic determination of the mesh's size only samples the mesh at the vertex nodes of its elements. In problems with strongly curved boundaries, elements may extend slightly beyond their vertex nodes.) <br  />
+<br  />
+</li>
+<li>Similarly, the number of bins in each of the coordinate directions may be adjusted. For instance, if the width of the domain (in the x-direction) is three times greater than its height (in the y-direction), it makes sense to adjust the number of bins accordingly. <br  />
+<br  />
+  <div class="fragment"></div><!-- fragment --> <br  />
+<br  />
+ Unfortunately, the optimal number of bins is problem-dependent. If we use very few bins, each bin will contain a large number of "external 
+  elements" and it may take a long time to locate the element that actually contains the "target point". <br  />
+<br  />
+ Choosing a large number of bins is therefore likely to be beneficial (at least for non-distributed problems) as long as the (relatively small) storage requirements for the bin structure itself remain acceptable. This is because in a sufficiently fine bin structure (where the number of bins greatly exceeds the number of sampling points), most of the bins will be empty. When spiralling outwards from the bin that contains the "target
+  point", the fact that a bin is empty can be detected very quickly, and there is no need to perform any costly Newton iterations until we encounter the first non-empty bin. The bin that contains the "external element" with the "target point" can therefore be located fairly quickly even if a large number of empty bins have to be visited first. <br  />
+<br  />
+ In a distributed problem, the issue is more complicated because we only perform one level of the spiralling search through the bins before communicating the missing "external elements" to other processors. An unnecessarily fine bin structure therefore incurs large communication costs. <br  />
+<br  />
+</li>
+<li>Finally, we can adjust the parameter <code>Multi_domain::Nsample_point</code> which controls the number of sampling points per element used when populating the bins with the pairs of elements and local coordinates. We note that <code>Multi_domain::Nsample_point</code> does not specify the number of sampling points within the element directly; the sampling points are, in fact, the same as the element's plot points and their number may be obtained from the <code>FiniteElement::nplot_points(...)</code> function. <br  />
+<br  />
+ The number of sampling points should be increased if the mesh contains strongly distorted elements. This is because in such elements the Newton method may not converge to the "target point" from all sample points in the element, even if the "target point" is contained in the element. Increasing the number of sampling points ensures that more of them <br  />
+ are "close" to the "target point", thus improving the chances that the Newton method will converge. An increase in the number of sampling points can lead to a significant increase in the multi-domain setup times, however. In the present problem, the elements are only stretched in the coordinate directions so a small number of sample points per element suffices: <br  />
+<br  />
+  <div class="fragment"></div><!-- fragment --></li>
+</ul>
+<p>Luckily, the setup of the multi-domain interactions tends to be relatively cheap (compared to other phases of a typical computation) so in most cases the default settings for above parameters are perfectly adequate.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<p>The full parallel driver code for the distributed, multi-domain based solution of the Boussinesq convection problem can be found at</p>
+<center> <a href="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_b_convection.cc">demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_b_convection.cc </a> </center><p>Additional parallel driver codes for the distributed Boussinesq problem using both single- and multi-domain methods are located in</p>
+<center> <a href="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection">demo_drivers/mpi/multi_domain/boussinesq_convection </a> </center><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aboussinesq__convection_8txt_html_ae55dc27b6a9169b989fbdb65e21a2e98"><div class="ttname"><a href="boussinesq__convection_8txt.html#ae55dc27b6a9169b989fbdb65e21a2e98">second_mesh_pt</a></div><div class="ttdeci">endcode sets up a two way interaction between two domains of the same spatial dimension represented by c a mesh of elements of type c and c second_mesh_pt</div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__convection_8txt_source.html#l00157">boussinesq_convection.txt:157</a></div></div>
+<div class="ttc" id="aboussinesq__convection_8txt_html_a707b60a792e911d3fa7d844de3c21d8a"><div class="ttname"><a href="boussinesq__convection_8txt.html#a707b60a792e911d3fa7d844de3c21d8a">first_mesh_pt</a></div><div class="ttdeci">endcode sets up a two way interaction between two domains of the same spatial dimension represented by c first_mesh_pt</div><div class="ttdef"><b>Definition:</b> <a href="boussinesq__convection_8txt_source.html#l00156">boussinesq_convection.txt:156</a></div></div>
+<div class="ttc" id="aboussinesq__convection_8txt_html_a472f479ab997a5a2d889405dce0b7c39"><div class="ttname"><a href="boussinesq__convection_8txt.html#a472f479ab997a5a2d889405dce0b7c39">actions_after_distribute</a></div><div class="ttdeci">the problem is distributed with a simple call to c apart from the addition of the c actions_after_distribute() function</div></div>
+<div class="ttc" id="aboussinesq__convection_8txt_html_a15a095909692c48e1e31dac9df3387a3"><div class="ttname"><a href="boussinesq__convection_8txt.html#a15a095909692c48e1e31dac9df3387a3">setup_multi_domain_interaction&lt; ELEMENT_1 &gt;</a></div><div class="ttdeci">but not vice versa In the two way interaction described above is performed by two successive calls to this function code setup_multi_domain_interaction&lt; ELEMENT_1 &gt;(problem_pt, first_mesh_pt, second_mesh_pt)</div></div>
+<div class="ttc" id="aboussinesq__convection_8txt_html_ad0de0d1da8264c20e566a642a54e36a5"><div class="ttname"><a href="boussinesq__convection_8txt.html#ad0de0d1da8264c20e566a642a54e36a5">setup_multi_domain_interaction&lt; ELEMENT_0 &gt;</a></div><div class="ttdeci">setup_multi_domain_interaction&lt; ELEMENT_0 &gt;(problem_pt, second_mesh_pt, first_mesh_pt)</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:27:19
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

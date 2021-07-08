@@ -1,0 +1,484 @@
+\hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{}\doxysection{oomph\+::Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$solid\+\_\+traction\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.735537cm]{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aceac32bea480d5da84d225c023bf724c}{Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}}, const unsigned \&id=0, const bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
+\begin{DoxyCompactList}\small\item\em Constructor takes a \char`\"{}bulk\char`\"{} element and the index that identifies which face the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} is supposed to be attached to. The optional identifier can be used to distinguish the additional nodal values created by this element from thos created by other Face\+Elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aafddef9b676b780db8f48608f2a8e90d}{boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Access to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the prescribed boundary displacement; \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is assumed to be parametrised by the same coordinate that is used as the boundary coordinate in the bulk solid mesh to which this element is attached. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a6efb185b3c2bb21d62cc5df7fccfe56f}{set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aafddef9b676b780db8f48608f2a8e90d}{boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1FaceElement_a7658b23bf2cf041883f51b827eab9059}{boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}})
+\begin{DoxyCompactList}\small\item\em Set \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the prescribed boundary displacement; \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is assumed to be parametrised by the same coordinate that is used as the boundary coordinate in the bulk solid mesh to which this element is attached. Geom\+Data of \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is added to this element\textquotesingle{}s external \mbox{\hyperlink{classoomph_1_1Data}{Data}}. Also specify the boundary number in the bulk mesh to which this element is attached. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a1c65bc4013288cba24313e4cd1339919}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Fill in the residuals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a8f196eaf084264031cf36fb541978123}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Fill in contribution from Jacobian. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_adf4f9f9359fbc7cd2acec4647dfa3c5a}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Fill in contribution to Mass matrix and Jacobian. There is no contributiont to mass matrix so simply call the fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian term Note that the Jacobian is multiplied by minus one to ensure that the mass matrix is positive semi-\/definite. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aabe7cb82a9040aec297ad37f55550e3d}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a5b3cc07419816463f67ec4ded04e2f66}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a911c9bced8c0bdb15dbd4dd6bb2fcb5a}{square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error}} ()
+\begin{DoxyCompactList}\small\item\em Compute square of L2 norm of error between prescribed and actual displacement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_af57cab6b68c332061086aae5e8c393b3}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+\begin{DoxyCompactList}\small\item\em Helper function to compute the residuals and, if flag==1, the Jacobian ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a321d06e523a87b42c25ac14a11229ee7}{ndof\+\_\+types}} () const
+\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: We only label the Lagrange multiplier degrees of freedom (one for each spatial dimension) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aa6fc1525ac4a93f5135a0c58bd211ffb}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the dof that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a34eff65966642b9afdc812c8e758d837}{Id}}
+\begin{DoxyCompactList}\small\item\em Lagrange Id. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a152b5d78d73fa32a82153b32633794c0}{N\+\_\+assigned\+\_\+geom\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Bool to record the number of geom \mbox{\hyperlink{classoomph_1_1Data}{Data}} that has been assigned to external data (we\textquotesingle{}re keeping a record to make sure we\textquotesingle{}re not accidentally wiping more than we assigned). Only included if compiled with P\+A\+R\+A\+N\+O\+ID switched on. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a97f265e6d79381df4fa00bf1af174f52}{Boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the prescribed boundary displacement; \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is assumed to be parametrised by the same coordinate the is used as the boundary coordinate in the bulk solid mesh to which this element is attached. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a3049f33a38a6566d74e1201f890ddc75}{Sub\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for sub-\/\+Geom\+Object at the integration points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a05446a83806527c72790c3f001ff9cec}{Zeta\+\_\+sub\+\_\+geom\+\_\+object}}
+\begin{DoxyCompactList}\small\item\em Storage for local coordinates in sub-\/\+Geom\+Objects at integration points. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_ab8a7884a570a2ac0f3ea1f38642f26a7}{Sparsify}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if we\textquotesingle{}re using geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} of sub-\/\+Geom\+Objects that make up the (possibly compound) \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the boundary shape. Defaults to true. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+A class for elements that allow the imposition of a displacement constraint for \char`\"{}bulk\char`\"{} solid elements via a Lagrange multiplier. The geometrical information can be read from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class. {\bfseries{N\+O\+TE\+:}} Currently (and for the foreseeable future) this element only works with bulk elements that do not have generalised degrees of freedom (so it won\textquotesingle{}t work with Hermite-\/type elements, say). The additional functionality to deal with such elements could easily be added (once a a suitable test case is written). For now we simply throw errors if an attempt is made to use the element with an unsuitable bulk element. 
+
+Definition at line 1119 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aceac32bea480d5da84d225c023bf724c}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aceac32bea480d5da84d225c023bf724c}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!ImposeDisplacementByLagrangeMultiplierElement@{ImposeDisplacementByLagrangeMultiplierElement}}
+\index{ImposeDisplacementByLagrangeMultiplierElement@{ImposeDisplacementByLagrangeMultiplierElement}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ImposeDisplacementByLagrangeMultiplierElement()}{ImposeDisplacementByLagrangeMultiplierElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const unsigned \&}]{id = {\ttfamily 0},  }\item[{const bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor takes a \char`\"{}bulk\char`\"{} element and the index that identifies which face the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} is supposed to be attached to. The optional identifier can be used to distinguish the additional nodal values created by this element from thos created by other Face\+Elements. 
+
+
+
+Definition at line 1131 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Face\+Element\+::add\+\_\+additional\+\_\+values(), oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Id, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+N\+\_\+assigned\+\_\+geom\+\_\+data, oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Sparsify.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aafddef9b676b780db8f48608f2a8e90d}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aafddef9b676b780db8f48608f2a8e90d}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!boundary\_shape\_geom\_object\_pt@{boundary\_shape\_geom\_object\_pt}}
+\index{boundary\_shape\_geom\_object\_pt@{boundary\_shape\_geom\_object\_pt}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{boundary\_shape\_geom\_object\_pt()}{boundary\_shape\_geom\_object\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the prescribed boundary displacement; \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is assumed to be parametrised by the same coordinate that is used as the boundary coordinate in the bulk solid mesh to which this element is attached. 
+
+
+
+Definition at line 1211 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a8f196eaf084264031cf36fb541978123}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a8f196eaf084264031cf36fb541978123}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Fill in contribution from Jacobian. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a3167a2005e33815948bef357214e15ee}{oomph\+::\+Solid\+Finite\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableImposeDisplacementByLagrangeMultiplierElement_af0d1b2633de720222d85e2083296a209}{oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+
+
+
+Definition at line 1384 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd(), and residuals().
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_adf4f9f9359fbc7cd2acec4647dfa3c5a}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_adf4f9f9359fbc7cd2acec4647dfa3c5a}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
+\index{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Fill in contribution to Mass matrix and Jacobian. There is no contributiont to mass matrix so simply call the fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian term Note that the Jacobian is multiplied by minus one to ensure that the mass matrix is positive semi-\/definite. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730647cf865da94f2531466f8}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 1402 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), i, oomph\+::\+Generalised\+Element\+::ndof(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a1c65bc4013288cba24313e4cd1339919}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a1c65bc4013288cba24313e4cd1339919}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Fill in the residuals. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableImposeDisplacementByLagrangeMultiplierElement_a31ed3e9bd0d168fb2278add70062dac2}{oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+
+
+
+Definition at line 1375 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_af57cab6b68c332061086aae5e8c393b3}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_af57cab6b68c332061086aae5e8c393b3}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!fill\_in\_generic\_contribution\_to\_residuals\_displ\_lagr\_multiplier@{fill\_in\_generic\_contribution\_to\_residuals\_displ\_lagr\_multiplier}}
+\index{fill\_in\_generic\_contribution\_to\_residuals\_displ\_lagr\_multiplier@{fill\_in\_generic\_contribution\_to\_residuals\_displ\_lagr\_multiplier}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_contribution\_to\_residuals\_displ\_lagr\_multiplier()}{fill\_in\_generic\_contribution\_to\_residuals\_displ\_lagr\_multiplier()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Helper function to compute the residuals and, if flag==1, the Jacobian ~\newline
+ 
+
+
+
+Definition at line 1700 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References a(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::dshape\+\_\+local\+\_\+at\+\_\+knot(), i, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Id, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn(), residuals(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Sparsify, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Sub\+\_\+geom\+\_\+object\+\_\+pt, oomph\+::\+Node\+::value(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), oomph\+::\+Solid\+Face\+Element\+::zeta\+\_\+nodal(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Zeta\+\_\+sub\+\_\+geom\+\_\+object.
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aa6fc1525ac4a93f5135a0c58bd211ffb}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aa6fc1525ac4a93f5135a0c58bd211ffb}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
+\index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the dof that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 1936 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Id, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a321d06e523a87b42c25ac14a11229ee7}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a321d06e523a87b42c25ac14a11229ee7}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!ndof\_types@{ndof\_types}}
+\index{ndof\_types@{ndof\_types}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: We only label the Lagrange multiplier degrees of freedom (one for each spatial dimension) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870597b35dcf1c780710b9a56}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 1924 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dim().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a5b3cc07419816463f67ec4ded04e2f66}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a5b3cc07419816463f67ec4ded04e2f66}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 1530 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aabe7cb82a9040aec297ad37f55550e3d}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_aabe7cb82a9040aec297ad37f55550e3d}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 1425 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Id, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), oomph\+::\+Geom\+Object\+::position(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), oomph\+::\+Node\+::value(), and oomph\+::\+Solid\+Face\+Element\+::zeta\+\_\+nodal().
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a6efb185b3c2bb21d62cc5df7fccfe56f}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a6efb185b3c2bb21d62cc5df7fccfe56f}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!set\_boundary\_shape\_geom\_object\_pt@{set\_boundary\_shape\_geom\_object\_pt}}
+\index{set\_boundary\_shape\_geom\_object\_pt@{set\_boundary\_shape\_geom\_object\_pt}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_boundary\_shape\_geom\_object\_pt()}{set\_boundary\_shape\_geom\_object\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$}]{boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{const unsigned \&}]{boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the prescribed boundary displacement; \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is assumed to be parametrised by the same coordinate that is used as the boundary coordinate in the bulk solid mesh to which this element is attached. Geom\+Data of \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is added to this element\textquotesingle{}s external \mbox{\hyperlink{classoomph_1_1Data}{Data}}. Also specify the boundary number in the bulk mesh to which this element is attached. 
+
+
+
+Definition at line 1225 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), oomph\+::\+Face\+Element\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh, oomph\+::\+Face\+Element\+::boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh(), oomph\+::\+Face\+Element\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Generalised\+Element\+::flush\+\_\+external\+\_\+data(), oomph\+::\+Geom\+Object\+::geom\+\_\+data\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::geom\+\_\+data\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Geom\+Object\+::locate\+\_\+zeta(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+N\+\_\+assigned\+\_\+geom\+\_\+data, oomph\+::\+Generalised\+Element\+::nexternal\+\_\+data(), oomph\+::\+Geom\+Object\+::ngeom\+\_\+data(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), s, oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Sparsify, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Sub\+\_\+geom\+\_\+object\+\_\+pt, oomph\+::\+Solid\+Face\+Element\+::zeta\+\_\+nodal(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Zeta\+\_\+sub\+\_\+geom\+\_\+object.
+
+
+
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a911c9bced8c0bdb15dbd4dd6bb2fcb5a}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a911c9bced8c0bdb15dbd4dd6bb2fcb5a}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!square\_of\_l2\_norm\_of\_error@{square\_of\_l2\_norm\_of\_error}}
+\index{square\_of\_l2\_norm\_of\_error@{square\_of\_l2\_norm\_of\_error}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{square\_of\_l2\_norm\_of\_error()}{square\_of\_l2\_norm\_of\_error()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute square of L2 norm of error between prescribed and actual displacement. 
+
+
+
+Definition at line 1539 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+References a(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::dshape\+\_\+local\+\_\+at\+\_\+knot(), i, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Id, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Sparsify, oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Sub\+\_\+geom\+\_\+object\+\_\+pt, oomph\+::\+Node\+::value(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), oomph\+::\+Solid\+Face\+Element\+::zeta\+\_\+nodal(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Zeta\+\_\+sub\+\_\+geom\+\_\+object.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a97f265e6d79381df4fa00bf1af174f52}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a97f265e6d79381df4fa00bf1af174f52}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!Boundary\_shape\_geom\_object\_pt@{Boundary\_shape\_geom\_object\_pt}}
+\index{Boundary\_shape\_geom\_object\_pt@{Boundary\_shape\_geom\_object\_pt}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Boundary\_shape\_geom\_object\_pt}{Boundary\_shape\_geom\_object\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the prescribed boundary displacement; \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is assumed to be parametrised by the same coordinate the is used as the boundary coordinate in the bulk solid mesh to which this element is attached. 
+
+
+
+Definition at line 1994 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a34eff65966642b9afdc812c8e758d837}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a34eff65966642b9afdc812c8e758d837}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!Id@{Id}}
+\index{Id@{Id}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Id\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Lagrange Id. 
+
+
+
+Definition at line 1976 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::output(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a152b5d78d73fa32a82153b32633794c0}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a152b5d78d73fa32a82153b32633794c0}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!N\_assigned\_geom\_data@{N\_assigned\_geom\_data}}
+\index{N\_assigned\_geom\_data@{N\_assigned\_geom\_data}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{N\_assigned\_geom\_data}{N\_assigned\_geom\_data}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::N\+\_\+assigned\+\_\+geom\+\_\+data\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Bool to record the number of geom \mbox{\hyperlink{classoomph_1_1Data}{Data}} that has been assigned to external data (we\textquotesingle{}re keeping a record to make sure we\textquotesingle{}re not accidentally wiping more than we assigned). Only included if compiled with P\+A\+R\+A\+N\+O\+ID switched on. 
+
+
+
+Definition at line 1985 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_ab8a7884a570a2ac0f3ea1f38642f26a7}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_ab8a7884a570a2ac0f3ea1f38642f26a7}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!Sparsify@{Sparsify}}
+\index{Sparsify@{Sparsify}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Sparsify}{Sparsify}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Sparsify\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean flag to indicate if we\textquotesingle{}re using geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} of sub-\/\+Geom\+Objects that make up the (possibly compound) \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that specifies the boundary shape. Defaults to true. 
+
+
+
+Definition at line 2006 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a3049f33a38a6566d74e1201f890ddc75}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a3049f33a38a6566d74e1201f890ddc75}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!Sub\_geom\_object\_pt@{Sub\_geom\_object\_pt}}
+\index{Sub\_geom\_object\_pt@{Sub\_geom\_object\_pt}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Sub\_geom\_object\_pt}{Sub\_geom\_object\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Sub\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storage for sub-\/\+Geom\+Object at the integration points. 
+
+
+
+Definition at line 1997 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error().
+
+\mbox{\Hypertarget{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a05446a83806527c72790c3f001ff9cec}\label{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement_a05446a83806527c72790c3f001ff9cec}} 
+\index{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}!Zeta\_sub\_geom\_object@{Zeta\_sub\_geom\_object}}
+\index{Zeta\_sub\_geom\_object@{Zeta\_sub\_geom\_object}!oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$@{oomph::ImposeDisplacementByLagrangeMultiplierElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Zeta\_sub\_geom\_object}{Zeta\_sub\_geom\_object}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ \mbox{\hyperlink{classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Zeta\+\_\+sub\+\_\+geom\+\_\+object\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storage for local coordinates in sub-\/\+Geom\+Objects at integration points. 
+
+
+
+Definition at line 2001 of file solid\+\_\+traction\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt(), and oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{solid__traction__elements_8h}{solid\+\_\+traction\+\_\+elements.\+h}}\end{DoxyCompactItemize}

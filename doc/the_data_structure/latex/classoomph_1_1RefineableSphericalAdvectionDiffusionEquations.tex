@@ -1,0 +1,289 @@
+\hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations}{}\doxysection{oomph\+::Refineable\+Spherical\+Advection\+Diffusion\+Equations Class Reference}
+\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations}\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+
+
+A version of the Advection Diffusion in spherical coordinates equations that can be used with non-\/uniform mesh refinement. In essence, the class overloads the \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a08a48e0e7e544ec61f4adde6c5e41211}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff()}} function so that contributions from hanging nodes (or alternatively in-\/compatible function values) are taken into account.  
+
+
+
+
+{\ttfamily \#include $<$refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Spherical\+Advection\+Diffusion\+Equations\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.085271cm]{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a9138fe8eab86522fb1b9e5f4f3fcbe84}{Refineable\+Spherical\+Advection\+Diffusion\+Equations}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ab8317c0134459e7113b68b4e826b6633}{Refineable\+Spherical\+Advection\+Diffusion\+Equations}} (const \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations}{Refineable\+Spherical\+Advection\+Diffusion\+Equations}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a0b4c00d0e0e39dcfe22b2968523a78b0}{operator=}} (const \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations}{Refineable\+Spherical\+Advection\+Diffusion\+Equations}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ab9d53dc4a0842309fbb0a04c53f9575c}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
+\begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ac43262d025548fc9063c58529bd1e33f}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
+ Standard flux.\+from Advection\+Diffusion equations. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ae8ee03bbf706d765a3756a3a2f8804f9}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+\begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a208a004e8b7403001400d7de2ebd692f}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+\begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_addfcf580759ab8cf263c8e00acd31953}{geometric\+\_\+jacobian}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Fill in the geometric Jacobian, which in this case is r$\ast$r$\ast$sin(theta) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a77053e6352f6cc7a3c550d7bc4ee8b39}{further\+\_\+build}} ()
+\begin{DoxyCompactList}\small\item\em Further build\+: Copy source function pointer from father element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ad334452c86e729a53dcbd234a1420680}{dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+ddata, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&global\+\_\+eqn\+\_\+number)
+\begin{DoxyCompactList}\small\item\em Compute the derivatives of the i-\/th component of velocity at point s with respect to all data that can affect its value. In addition, return the global equation numbers corresponding to the data. Overload the non-\/refineable version to take account of hanging node information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a08a48e0e7e544ec61f4adde6c5e41211}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A version of the Advection Diffusion in spherical coordinates equations that can be used with non-\/uniform mesh refinement. In essence, the class overloads the \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a08a48e0e7e544ec61f4adde6c5e41211}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff()}} function so that contributions from hanging nodes (or alternatively in-\/compatible function values) are taken into account. 
+
+Definition at line 55 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a9138fe8eab86522fb1b9e5f4f3fcbe84}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a9138fe8eab86522fb1b9e5f4f3fcbe84}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!RefineableSphericalAdvectionDiffusionEquations@{RefineableSphericalAdvectionDiffusionEquations}}
+\index{RefineableSphericalAdvectionDiffusionEquations@{RefineableSphericalAdvectionDiffusionEquations}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{RefineableSphericalAdvectionDiffusionEquations()}{RefineableSphericalAdvectionDiffusionEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Constructor. 
+
+
+
+Definition at line 63 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ab8317c0134459e7113b68b4e826b6633}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ab8317c0134459e7113b68b4e826b6633}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!RefineableSphericalAdvectionDiffusionEquations@{RefineableSphericalAdvectionDiffusionEquations}}
+\index{RefineableSphericalAdvectionDiffusionEquations@{RefineableSphericalAdvectionDiffusionEquations}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{RefineableSphericalAdvectionDiffusionEquations()}{RefineableSphericalAdvectionDiffusionEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations}{Refineable\+Spherical\+Advection\+Diffusion\+Equations}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 71 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ad334452c86e729a53dcbd234a1420680}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ad334452c86e729a53dcbd234a1420680}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!dinterpolated\_u\_adv\_diff\_ddata@{dinterpolated\_u\_adv\_diff\_ddata}}
+\index{dinterpolated\_u\_adv\_diff\_ddata@{dinterpolated\_u\_adv\_diff\_ddata}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{dinterpolated\_u\_adv\_diff\_ddata()}{dinterpolated\_u\_adv\_diff\_ddata()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+ddata,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{global\+\_\+eqn\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute the derivatives of the i-\/th component of velocity at point s with respect to all data that can affect its value. In addition, return the global equation numbers corresponding to the data. Overload the non-\/refineable version to take account of hanging node information. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_aec614fe14108871e1c47345b8cac97d7}{oomph\+::\+Spherical\+Advection\+Diffusion\+Equations}}.
+
+
+
+Definition at line 202 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+adv\+\_\+diff().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a08a48e0e7e544ec61f4adde6c5e41211}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a08a48e0e7e544ec61f4adde6c5e41211}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!fill\_in\_generic\_residual\_contribution\_spherical\_adv\_diff@{fill\_in\_generic\_residual\_contribution\_spherical\_adv\_diff}}
+\index{fill\_in\_generic\_residual\_contribution\_spherical\_adv\_diff@{fill\_in\_generic\_residual\_contribution\_spherical\_adv\_diff}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_spherical\_adv\_diff()}{fill\_in\_generic\_residual\_contribution\_spherical\_adv\_diff()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. 
+
+Add the element\textquotesingle{}s contribution to the elemental residual vector and/or elemental jacobian matrix. This function overloads the standard version so that the possible presence of hanging nodes is taken into account. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SphericalAdvectionDiffusionEquations_ad97d019b2b4715d379adca3320262d29}{oomph\+::\+Spherical\+Advection\+Diffusion\+Equations}}.
+
+
+
+Definition at line 39 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::get\+\_\+source\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::get\+\_\+wind\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Integral\+::knot(), oomph\+::\+Refineable\+Element\+::local\+\_\+hang\+\_\+eqn(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::pe(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::pe\+\_\+st(), residuals(), s, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+adv\+\_\+diff(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Time\+Stepper\+::weight().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a77053e6352f6cc7a3c550d7bc4ee8b39}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a77053e6352f6cc7a3c550d7bc4ee8b39}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!further\_build@{further\_build}}
+\index{further\_build@{further\_build}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{further\_build()}{further\_build()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::further\+\_\+build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Further build\+: Copy source function pointer from father element. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36dfad028686adeb4694a9ef3}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 180 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::pe\+\_\+pt(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::\+Pe\+\_\+pt, oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::pe\+\_\+st\+\_\+pt(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::\+Pe\+St\+\_\+pt, oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::source\+\_\+fct\+\_\+pt(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::\+Source\+\_\+fct\+\_\+pt, oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::wind\+\_\+fct\+\_\+pt(), and oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::\+Wind\+\_\+fct\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_addfcf580759ab8cf263c8e00acd31953}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_addfcf580759ab8cf263c8e00acd31953}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!geometric\_jacobian@{geometric\_jacobian}}
+\index{geometric\_jacobian@{geometric\_jacobian}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{geometric\_jacobian()}{geometric\_jacobian()}}
+{\footnotesize\ttfamily double oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::geometric\+\_\+jacobian (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Fill in the geometric Jacobian, which in this case is r$\ast$r$\ast$sin(theta) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ad2add457436f34d0d4b9e48900be309c}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 176 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a208a004e8b7403001400d7de2ebd692f}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a208a004e8b7403001400d7de2ebd692f}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!get\_interpolated\_values@{get\_interpolated\_values}}
+\index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2829ce01d45bfc}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 127 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References get\+\_\+interpolated\+\_\+values(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+adv\+\_\+diff(), and values.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ae8ee03bbf706d765a3756a3a2f8804f9}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ae8ee03bbf706d765a3756a3a2f8804f9}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!get\_interpolated\_values@{get\_interpolated\_values}}
+\index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f92880668a2373326d8306365c43}{oomph\+::\+Refineable\+Element}}.
+
+
+
+Definition at line 96 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::u\+\_\+index\+\_\+spherical\+\_\+adv\+\_\+diff(), and values.
+
+
+
+Referenced by get\+\_\+interpolated\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ac43262d025548fc9063c58529bd1e33f}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ac43262d025548fc9063c58529bd1e33f}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!get\_Z2\_flux@{get\_Z2\_flux}}
+\index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: ~\newline
+ Standard flux.\+from Advection\+Diffusion equations. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 88 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::get\+\_\+flux().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ab9d53dc4a0842309fbb0a04c53f9575c}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_ab9d53dc4a0842309fbb0a04c53f9575c}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
+\index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c5728902e13da31be19c390fc28e3}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 84 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a0b4c00d0e0e39dcfe22b2968523a78b0}\label{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a0b4c00d0e0e39dcfe22b2968523a78b0}} 
+\index{oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::RefineableSphericalAdvectionDiffusionEquations@{oomph::RefineableSphericalAdvectionDiffusionEquations}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations}{Refineable\+Spherical\+Advection\+Diffusion\+Equations}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 78 of file refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__spherical__advection__diffusion__elements_8h}{refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{refineable__spherical__advection__diffusion__elements_8cc}{refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

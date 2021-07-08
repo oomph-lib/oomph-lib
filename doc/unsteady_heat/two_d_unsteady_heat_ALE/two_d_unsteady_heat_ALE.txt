@@ -1,0 +1,404 @@
+\mainpage Example problem: Spatially adaptive solution of the 2D unsteady heat equation with flux boundary conditions in a moving domain: ALE methods.
+
+In this example we consider the solution of the unsteady heat
+equation in a domain with moving boundaries. We demonstrate
+that the presence of moving boundaries only requires trivial changes
+to driver codes for corresponding fixed-mesh computations.
+
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>The two-dimensional unsteady heat equation with flux boundary
+conditions in a moving domain.</B>
+</CENTER> 
+Solve
+\f[
+\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} 
+= \frac{\partial u}{\partial t} + f\left(x_1,x_2,t\right),
+ \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@
+\f]
+in the domain \f$ D \f$ , bounded by the coordinate axes
+and the time-dependent ellipse
+\f[
+\mathbf{r}_{ellipse}(\xi,t) = 
+\left(
+\begin{array}{c}
+\big( a+\hat{a}\sin(2\pi t/\hat{T}) \big) \cos(\xi) \\
+\big( b+\hat{b}\sin(2\pi t/\hat{T}) \big) \sin(\xi)
+\end{array}
+\right),
+ \ \ \ \ \ \ \ \ \ \ @E[Domain]@
+\f]
+subject to Neumann boundary conditions,
+\f[
+\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}=
+- \left. \frac{\partial u}{\partial x_2}\right|_{\partial D_{Neumann}}=
+g_0, 
+\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC2]@
+\f]
+along the horizontal domain boundary \f$ \partial D_{Neumann} = 
+\{ (x_1,x_2) | x_1 \in [0,1], x_2=0 \} \f$ , and to Dirichlet 
+boundary conditions,
+\f[
+\left. u\right|_{\partial D_{Dirichlet}}=h_0, 
+\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@
+\f]
+elsewhere.
+@I w 0.75\textwidth domain "Sketch of the time-dependent domain and the boundary conditions. "
+The initial conditions are given by
+\f[
+u(x_1,x_2,t=0)=k_0(x_1,x_2),
+\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@
+\f]
+where the functions \f$ f, g_0, \ h_0 \f$ and  \f$ k_0 \f$ are given. 
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+We choose the functions \f$ f, g_0, \ h_0 \f$ and  \f$ k_0 \f$ 
+so that
+\f[
+u_0(x_1,x_2,t) = \tanh\bigg[ 1-\alpha\bigg( \tan\Phi
+\big(x_1-\beta\tanh[ \gamma\cos\left(2\pi
+t\right)]\big)- x_2\bigg)\bigg]
+ \ \ \ \ \ \ \ \ \ \ @E[ExactSoln2]@
+\f]
+is the exact solution.
+
+The solution represents the "usual" tanh profile, whose steepness
+is controlled by the parameter \f$ \alpha \f$ so that for \f$ \alpha
+\gg 1 \f$ the solution approaches a step. The step is oriented
+at an angle \f$ \Phi \f$ against the \f$ x_1- \f$ axis and its position varies
+periodically. The parameter \f$ \beta \f$ controls the amplitude
+of the step's lateral displacement, while \f$ \gamma \f$ determines the
+rate at which its position changes. For \f$ \gamma \gg 1 \f$ ,
+the step remains stationary for most of the period and then
+translates rapidly parallel to the \f$ x_1- \f$ axis, making this a very 
+challenging problem.
+
+The figure below shows a snapshot of the <A HREF="../figures/step_soln.avi">
+animated solution</A>, obtained from the spatially adaptive simulation
+discussed below, for the parameter values \f$ \alpha=10, \ 
+\Phi=45^o, \ \beta=-0.3, \ \gamma=5. \f$
+
+@I w 0.75\textwidth step_soln "Snapshot of the solution. "
+
+
+
+
+
+  The mesh adaptation in response to the translation of the step can be
+seen more clearly in this contour plot, taken from
+<A HREF="../figures/unsteady_heat_contour.avi">
+another animation of the solution</A>.
+
+@I w 0.75\textwidth unsteady_heat_contour "Contour plot of the solution. "
+
+<HR>
+<HR>
+
+
+\section ale Background: ALE methods and the evaluation of time-derivatives in moving domains
+
+\c oomph-lib's \c UnsteadyHeatEquations, the equation class that forms the
+basis for the isoparametric \c QUnsteadyHeatElements, is based
+on the Arbitrary Lagrangian Eulerian (ALE) formulation of the 
+weak form of the governing PDE, (@R[2DHeat]@). Within each element, the
+solution is represented by interpolation between the 
+element's  \f$ N_{node}^{(E)} \f$ nodal values \f$ U_j^{(E)}(t) \ 
+(i=1,..., N_{node}^{(E)})\f$ , i.e. 
+\f[
+u = \sum_{j=1}^{N_{node}^{(E)}} U_j^{(E)}(t) \  \psi_{j}(s_1,s_2),
+\ \ \ \ \ \ \ \ \ \ @E[fe_exp]@
+\f]
+where \f$ s_1 \f$ and \f$ s_2 \f$ are the element's two local coordinates.
+The mapping between the local and global (Eulerian) coordinates is based on 
+the interpolation between the nodal coordinates,
+\f[
+x_i(s_1,s_2) = \sum_{j=1}^{N_{node}^{(E)}} X_{ij}^{(E)}(t) \  
+\psi_{j}(s_1,s_2),
+\ \ \ \ (i=1,2) \ \ \ \ \ \  @E[x_fe_exp]@
+\f]
+where \f$ X_{ij}^{(E)}(t) \f$ is the i-th global (Eulerian) coordinate of 
+node j in the element. In moving-domain problems, where the nodal positions vary as
+function of time, the time-derivative of the nodal value, 
+\f$ dU_j(t)/dt \f$ , represents the rate-of-change of  \f$ u \f$ 
+at the moving node, rather than the time-derivative 
+of \f$ u \f$ at a fixed Eulerian position,  
+\f$ \partial u/\partial t, \f$ the quantity required in the 
+PDE, (@R[2DHeat]@).
+
+The rate of change of \f$ u \f$ at a moving node,
+\f$ dU_j(t)/dt \f$ , may also be expressed by the material derivative,
+\f[
+\left. \frac{D u}{Dt}\right|_{\mbox{\small node} \ j} =  
+\frac{\partial u}{\partial t}
++ \sum_{i=1}^2 v_{ij} \ \frac{\partial u}{\partial x_i}
+\f]
+where
+ \f[
+v_{ij} =  \frac{dX_{ij}^{(E)}}{dt}
+\f]
+is the i-th velocity component of node j, often referred to 
+as the "mesh velocity". The rate of change of  \f$ u \f$ , 
+experienced at the (fixed) spatial position that coincides with 
+the current position  of node j is therefore given by
+\f[
+\frac{\partial u}{\partial t} =
+\frac{d U_j^{(E)}}{dt}
+- \sum_{i=1}^2 
+\left( 
+\frac{dX_{ij}^{(E)}}{dt}
+\ \sum_{k=1}^{N_{node}^{(E)}} U_k^{(E)} \
+\frac{\partial \psi_{k}}{\partial x_i}
+\right) .
+\f]
+This is the form in which the time-derivative in  (@R[2DHeat]@)
+is implemented in \c oomph-lib's unsteady heat elements. The mesh
+velocity is determined automatically, using the \c Node's positional
+\c TimeStepper and the history values of the nodal positions.
+[By  default, the positional \c TimeStepper is the same as the \c TimeStepper
+used for the evaluation of the time-derivatives of the nodal values;
+a different one  may be assigned with the access function
+\c Node::position_time_stepper_pt().] This is why it is important
+to initialise the "previous nodal positions" in computations
+on fixed meshes, as demonstrated in the 
+<A HREF="../../two_d_unsteady_heat/html/index.html">
+exercise in our earlier
+example:</A> The previous nodal positions are
+initialised to zero when a \c Node is first created. Therefore, if the previous
+positions are not overwritten with the actual nodal positions,
+the positional \c TimeStepper would compute non-zero mesh velocities,
+even though the \c Nodes are stationary.
+
+ \c oomph-lib's unsteady Newton solvers automatically
+advance the time-history of the nodal positions when computing
+a new timestep. Performing computations on moving meshes
+is  therefore extremely straightforward: The only task to be performed
+by the "user" is to update the nodal positions before a new
+timestep is taken. This is best done in the function
+\c Problem::actions_before_implicit_timestep(). 
+
+  The update of the nodal positions may be performed "manually",
+by assigning new nodal positions directly, using the function
+\c Node::x(...). However, in most cases, the deformation of the domain
+will be driven by the motion of its boundaries. We discussed
+in an <A HREF="../../../poisson/fish_poisson2/html/index.html">earlier
+example,</A> that in \c oomph-lib curvilinear, moving boundaries are typically 
+represented by (time-dependent) \c GeomObjects which define the
+\c MacroElement boundaries of the \c Domain object associated with
+the \c Mesh. In this case, the update of the nodal positions may be
+performed by updating the parameters that control the shape of the
+\c GeomObject and calling the \c Mesh's node-update function 
+\c Mesh::node_update(), as illustrated
+in the <A HREF="../../../poisson/fish_poisson2/html/index.html">earlier
+example.</A>
+
+It is also possible (and, in fact, much easier) to include the
+time-dependence of the domain boundaries into the definition of 
+the \c GeomObject, by making its shape, described by 
+\c GeomObject::position(...), a function of time.
+In that case, the update of the nodal positions in response to the
+boundary motion merely requires a call to  \c Mesh::node_update() in
+\c Problem::actions_before_implicit_timestep(). This is the approach we take
+in the present problem.
+
+<HR>
+<HR>
+
+
+\section namespace Global parameters and functions
+
+As usual, we store the problem parameters in a namespace,
+\c TanhSolnForUnsteadyHeat, in which we also specify the 
+source function, the prescribed flux along the Neumann boundary 
+and the exact solution. The namespace is identical to that
+used in <A HREF="../../two_d_unsteady_heat/html/index.html">
+the fixed domain example.</A> 
+
+<HR>
+<HR>
+ 
+\section ellipse Representing the moving curvilinear domain boundary by a time-dependent GeomObject
+
+As discussed above, we will incorporate the time-dependence of the
+moving curvilinear boundary into the specification of the \c GeomObject
+that defines that boundary. For this purpose we represent the
+elliptical boundary by the \c GeomObject \c MyEllipse.
+Its constructor stores the geometric parameters (the
+mean values of the ellipse's half axes, \f$ a \f$ and \f$ b \f$ , the 
+amplitude of their temporal variations \f$ \hat{a} \f$ and
+\f$ \hat{b} \f$ , and the period of the
+oscillation, \f$ \hat{T} \f$ , in its private member data. We also store a 
+pointer to a \c Time  object to give the \c GeomObject access to the 
+"current" and "previous" values of the "continuous time". 
+The destructor can remain empty.
+
+\dontinclude two_d_unsteady_heat_ALE.cc
+\skipline start_of_MyEllipse
+\until ~MyEllipse
+
+The "steady" version of the \c position(...) function must return
+the position vector to the point on the \c GeomObject, identified
+by its intrinsic coordinate \c xi, and evaluated at the current 
+value of the continuous time, which we extract from \c Time::time():
+\skipline Current position
+\until end of position
+
+
+The "time-dependent" version of the \c position(...) function must return
+the position vector to the \c GeomObject, evaluated at the
+\c t - th previous timestep. The value of the continuous time at that timestep
+is available from from \c Time::time(t):
+\skipline Parametrised
+\until end of position
+
+We omit the code that defines the private member data.
+
+<HR>
+<HR>
+
+\section main The main function
+Since the deformation of the domain and the update of the nodal
+positions will be handled automatically by adding a call to
+\c Mesh::node_update() to \c Problem::actions_before_implicit_timestep(), the
+driver code for this problem is exactly the same as that in the 
+<A HREF="../../two_d_unsteady_heat_adapt/html/index.html"> previous
+example in a fixed domain. </A> 
+ 
+<HR>
+<HR>
+
+\section problem_class The Problem class
+
+The \c Problem class and most of its member functions are exactly the same 
+as in the <A HREF="../../two_d_unsteady_heat/html/index.html">
+previous example.</A>
+
+
+
+<HR>
+<HR>
+
+
+
+\section constructor The Problem constructor
+
+
+The \c Problem constructor is identical to the fixed-mesh version 
+in the <A HREF="../../two_d_unsteady_heat/html/index.html">
+previous example,</A> apart from the fact that we use the \c MyEllipse \c
+GeomObject to define the curvilinear \c Mesh boundary. Here is the relevant
+code fragment:
+
+\dontinclude two_d_unsteady_heat_ALE.cc
+\skipline Setup mesh
+\until time_stepper_pt()
+
+
+
+<HR>
+<HR>
+
+\section actions_before_implicit_timestep Actions before timestep
+
+As discussed above, the addition of a single line to 
+\c Problem::actions_before_implicit_timestep() suffices to update
+the nodal positions in response to the changes in the domain boundary.
+
+\dontinclude two_d_unsteady_heat_ALE.cc
+\skipline start of actions_before_implicit_timestep
+\until Bulk_mesh_pt->node_update();
+
+The rest of this function is identical to the that in the
+<A HREF="../../two_d_unsteady_heat/html/index.html">
+fixed-domain version</A> and updates the nodal values on the
+Dirichlet boundaries according to the values given by the 
+exact solution.
+
+<HR>
+<HR>
+
+\section set_init Setting the initial condition
+
+The only other change to the code occurs in the assignment of
+the initial conditions. The \c Nodes' positional history values 
+are given by the positions at which the \c Nodes would have been at 
+previous timesteps. Similarly, the history values themselves
+must be computed by evaluating the exact solution at the position 
+at which the \c Nodes would have been at those timesteps.
+
+This is achieved with a few minor changes to the previous version 
+of this function. We loop over the previous timesteps, reconstruct
+the value of the continuous time at that timestep, and temporarily
+over-write the value of the continuous time stored in \c
+Time::time(). This ensures that the call to \c
+MyEllipse::position(...) during the node update
+operation returns the position vector to the domain boundary
+at that timestep. Following the update of the nodal positions (which moves them
+into the position they would have occupied at the previous timestep)
+we copy their positions and the value of the exact solution
+into the appropriate history values. Here is the relevant code
+fragment from the \c set_initial_condition() function:
+ 
+\skipline Loop over current & previous timesteps 
+\until  end of loop over previous timesteps
+
+ 
+
+<HR>
+<HR>
+
+\section comm Comments and Exercises
+While the spatial adaptivity resolves the rapid spatial variations
+in the solution, the time-integration with a fixed timestep
+introduces errors during the phases when the solution undergoes
+rapid temporal variations. The <A HREF="../figures/step_soln.avi">
+animations</A> of the exact and computed solutions show clearly
+that the computed solution lags behind the exact one during these
+phases. In the <A HREF="../../two_d_unsteady_heat_2adapt/html/index.html">
+next example</A> we will therefore demonstrate how to combine
+temporal and spatial adaptivity.
+
+
+
+
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/">
+demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/
+</A>
+</CENTER>
+- The driver code is:
+<CENTER>
+<A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/two_d_unsteady_heat_ALE.cc">
+demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/two_d_unsteady_heat_ALE.cc
+</A>
+</CENTER>
+.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::CCComplexMatrix Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1CCComplexMatrix.html">CCComplexMatrix</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1CCComplexMatrix-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::CCComplexMatrix Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class for compressed column matrices that store doubles.  
+ <a href="classoomph_1_1CCComplexMatrix.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::CCComplexMatrix:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1CCComplexMatrix.png" usemap="#oomph::CCComplexMatrix_map" alt=""/>
+  <map id="oomph::CCComplexMatrix_map" name="oomph::CCComplexMatrix_map">
+<area href="classoomph_1_1ComplexMatrixBase.html" title="Abstract base class for matrices of complex doubles – adds abstract interfaces for solving,..." alt="oomph::ComplexMatrixBase" shape="rect" coords="0,112,500,136"/>
+<area href="classoomph_1_1CCMatrix.html" alt="oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;" shape="rect" coords="510,112,1010,136"/>
+<area href="classoomph_1_1SparseMatrix.html" alt="oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;" shape="rect" coords="510,56,1010,80"/>
+<area href="classoomph_1_1Matrix.html" alt="oomph::Matrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;" shape="rect" coords="510,0,1010,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a5978332570ff5adabc1e185edc240398"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a5978332570ff5adabc1e185edc240398">CCComplexMatrix</a> ()</td></tr>
+<tr class="memdesc:a5978332570ff5adabc1e185edc240398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="classoomph_1_1CCComplexMatrix.html#a5978332570ff5adabc1e185edc240398">More...</a><br /></td></tr>
+<tr class="separator:a5978332570ff5adabc1e185edc240398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b354aedafe10d75bda23ce1e34e2971"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a3b354aedafe10d75bda23ce1e34e2971">CCComplexMatrix</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;<a class="el" href="classoomph_1_1SparseMatrix.html#a3e382ff145082821a6b0b3e63b6aed5d">value</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;<a class="el" href="classoomph_1_1CCMatrix.html#acbea54ff48550342267246b7ae07c8c4">row_index</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;<a class="el" href="classoomph_1_1CCMatrix.html#a955390de47c08eb8799550519a1a2751">column_start</a>, const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m)</td></tr>
+<tr class="memdesc:a3b354aedafe10d75bda23ce1e34e2971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length.  <a href="classoomph_1_1CCComplexMatrix.html#a3b354aedafe10d75bda23ce1e34e2971">More...</a><br /></td></tr>
+<tr class="separator:a3b354aedafe10d75bda23ce1e34e2971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee92c78d8715e0221d8db215609e7c3c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#aee92c78d8715e0221d8db215609e7c3c">CCComplexMatrix</a> (const <a class="el" href="classoomph_1_1CCComplexMatrix.html">CCComplexMatrix</a> &amp;matrix)</td></tr>
+<tr class="memdesc:aee92c78d8715e0221d8db215609e7c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1CCComplexMatrix.html#aee92c78d8715e0221d8db215609e7c3c">More...</a><br /></td></tr>
+<tr class="separator:aee92c78d8715e0221d8db215609e7c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95c58231d17ca240a62f9398118cd433"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a95c58231d17ca240a62f9398118cd433">operator=</a> (const <a class="el" href="classoomph_1_1CCComplexMatrix.html">CCComplexMatrix</a> &amp;)</td></tr>
+<tr class="memdesc:a95c58231d17ca240a62f9398118cd433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1CCComplexMatrix.html#a95c58231d17ca240a62f9398118cd433">More...</a><br /></td></tr>
+<tr class="separator:a95c58231d17ca240a62f9398118cd433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a061e34b3b777e15df53071c25a8bb895"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a061e34b3b777e15df53071c25a8bb895">~CCComplexMatrix</a> ()</td></tr>
+<tr class="memdesc:a061e34b3b777e15df53071c25a8bb895"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Kill the LU factors if they have been setup.  <a href="classoomph_1_1CCComplexMatrix.html#a061e34b3b777e15df53071c25a8bb895">More...</a><br /></td></tr>
+<tr class="separator:a061e34b3b777e15df53071c25a8bb895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afccd0ba0992ac02b062d8051bcd0d34e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#afccd0ba0992ac02b062d8051bcd0d34e">enable_doc_stats</a> ()</td></tr>
+<tr class="memdesc:afccd0ba0992ac02b062d8051bcd0d34e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set flag to indicate that stats are to be displayed during solution of linear system with SuperLU.  <a href="classoomph_1_1CCComplexMatrix.html#afccd0ba0992ac02b062d8051bcd0d34e">More...</a><br /></td></tr>
+<tr class="separator:afccd0ba0992ac02b062d8051bcd0d34e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5b2b64350d3335d136a8e96ffca267f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#ad5b2b64350d3335d136a8e96ffca267f">disable_doc_stats</a> ()</td></tr>
+<tr class="memdesc:ad5b2b64350d3335d136a8e96ffca267f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the solve  <a href="classoomph_1_1CCComplexMatrix.html#ad5b2b64350d3335d136a8e96ffca267f">More...</a><br /></td></tr>
+<tr class="separator:ad5b2b64350d3335d136a8e96ffca267f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52c78210ebe95b72ead8d938f5c7a9bb"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a52c78210ebe95b72ead8d938f5c7a9bb">nrow</a> () const</td></tr>
+<tr class="memdesc:a52c78210ebe95b72ead8d938f5c7a9bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of rows of the matrix.  <a href="classoomph_1_1CCComplexMatrix.html#a52c78210ebe95b72ead8d938f5c7a9bb">More...</a><br /></td></tr>
+<tr class="separator:a52c78210ebe95b72ead8d938f5c7a9bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62540288d116687aa4bd201787845b4d"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a62540288d116687aa4bd201787845b4d">ncol</a> () const</td></tr>
+<tr class="memdesc:a62540288d116687aa4bd201787845b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of columns of the matrix.  <a href="classoomph_1_1CCComplexMatrix.html#a62540288d116687aa4bd201787845b4d">More...</a><br /></td></tr>
+<tr class="separator:a62540288d116687aa4bd201787845b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09035e7b3fc0346ed91f4ddff4bebc13"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a09035e7b3fc0346ed91f4ddff4bebc13">operator()</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j) const</td></tr>
+<tr class="memdesc:a09035e7b3fc0346ed91f4ddff4bebc13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the round-bracket access operator to provide read-only (const) access to the data.  <a href="classoomph_1_1CCComplexMatrix.html#a09035e7b3fc0346ed91f4ddff4bebc13">More...</a><br /></td></tr>
+<tr class="separator:a09035e7b3fc0346ed91f4ddff4bebc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7076d4dc153b80fe4adbedbfb916b395"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a7076d4dc153b80fe4adbedbfb916b395">ludecompose</a> ()</td></tr>
+<tr class="memdesc:a7076d4dc153b80fe4adbedbfb916b395"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU decomposition using SuperLU.  <a href="classoomph_1_1CCComplexMatrix.html#a7076d4dc153b80fe4adbedbfb916b395">More...</a><br /></td></tr>
+<tr class="separator:a7076d4dc153b80fe4adbedbfb916b395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade5d51dc8e2a44b6c011184366ce052c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#ade5d51dc8e2a44b6c011184366ce052c">lubksub</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ade5d51dc8e2a44b6c011184366ce052c"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU back solve for given RHS.  <a href="classoomph_1_1CCComplexMatrix.html#ade5d51dc8e2a44b6c011184366ce052c">More...</a><br /></td></tr>
+<tr class="separator:ade5d51dc8e2a44b6c011184366ce052c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8697d57e2ed92d56ee6f6e819482fdc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a8697d57e2ed92d56ee6f6e819482fdc3">clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:a8697d57e2ed92d56ee6f6e819482fdc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU clean up (perhaps this should happen in the destructor)  <a href="classoomph_1_1CCComplexMatrix.html#a8697d57e2ed92d56ee6f6e819482fdc3">More...</a><br /></td></tr>
+<tr class="separator:a8697d57e2ed92d56ee6f6e819482fdc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade719948640907a8f338f83ee1587a90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#ade719948640907a8f338f83ee1587a90">residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;b, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;residual)</td></tr>
+<tr class="memdesc:ade719948640907a8f338f83ee1587a90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the residulal to x of Ax=b, ie r=b-Ax.  <a href="classoomph_1_1CCComplexMatrix.html#ade719948640907a8f338f83ee1587a90">More...</a><br /></td></tr>
+<tr class="separator:ade719948640907a8f338f83ee1587a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c7ba50bf29c2e9f40a68a073534f261"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a6c7ba50bf29c2e9f40a68a073534f261">multiply</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;soln)</td></tr>
+<tr class="memdesc:a6c7ba50bf29c2e9f40a68a073534f261"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the matrix by the vector x: soln=Ax.  <a href="classoomph_1_1CCComplexMatrix.html#a6c7ba50bf29c2e9f40a68a073534f261">More...</a><br /></td></tr>
+<tr class="separator:a6c7ba50bf29c2e9f40a68a073534f261"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85c89a6e460b6eb0a1ab704b6272c4d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a85c89a6e460b6eb0a1ab704b6272c4d7">multiply_transpose</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;soln)</td></tr>
+<tr class="memdesc:a85c89a6e460b6eb0a1ab704b6272c4d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the transposed matrix by the vector x: soln=A^T x.  <a href="classoomph_1_1CCComplexMatrix.html#a85c89a6e460b6eb0a1ab704b6272c4d7">More...</a><br /></td></tr>
+<tr class="separator:a85c89a6e460b6eb0a1ab704b6272c4d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1ComplexMatrixBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1ComplexMatrixBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1ComplexMatrixBase.html">oomph::ComplexMatrixBase</a></td></tr>
+<tr class="memitem:aecfeaf77e3e03743b0b87f677470c56d inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#aecfeaf77e3e03743b0b87f677470c56d">ComplexMatrixBase</a> ()</td></tr>
+<tr class="memdesc:aecfeaf77e3e03743b0b87f677470c56d inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) constructor.  <a href="classoomph_1_1ComplexMatrixBase.html#aecfeaf77e3e03743b0b87f677470c56d">More...</a><br /></td></tr>
+<tr class="separator:aecfeaf77e3e03743b0b87f677470c56d inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a000722ba16915a4b9770238997b43d19 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a000722ba16915a4b9770238997b43d19">ComplexMatrixBase</a> (const <a class="el" href="classoomph_1_1ComplexMatrixBase.html">ComplexMatrixBase</a> &amp;matrix)</td></tr>
+<tr class="memdesc:a000722ba16915a4b9770238997b43d19 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1ComplexMatrixBase.html#a000722ba16915a4b9770238997b43d19">More...</a><br /></td></tr>
+<tr class="separator:a000722ba16915a4b9770238997b43d19 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c04df6907d8f8b6517ede080b86705 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa1c04df6907d8f8b6517ede080b86705">operator=</a> (const <a class="el" href="classoomph_1_1ComplexMatrixBase.html">ComplexMatrixBase</a> &amp;)</td></tr>
+<tr class="memdesc:aa1c04df6907d8f8b6517ede080b86705 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1ComplexMatrixBase.html#aa1c04df6907d8f8b6517ede080b86705">More...</a><br /></td></tr>
+<tr class="separator:aa1c04df6907d8f8b6517ede080b86705 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6bb3011ea7b08dead73e943fd74b15 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a5b6bb3011ea7b08dead73e943fd74b15">~ComplexMatrixBase</a> ()</td></tr>
+<tr class="memdesc:a5b6bb3011ea7b08dead73e943fd74b15 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual (empty) destructor  <a href="classoomph_1_1ComplexMatrixBase.html#a5b6bb3011ea7b08dead73e943fd74b15">More...</a><br /></td></tr>
+<tr class="separator:a5b6bb3011ea7b08dead73e943fd74b15 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131e601fd0e82e811b26a3c11a455d0e inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a131e601fd0e82e811b26a3c11a455d0e">solve</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a131e601fd0e82e811b26a3c11a455d0e inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <a href="classoomph_1_1ComplexMatrixBase.html#a131e601fd0e82e811b26a3c11a455d0e">More...</a><br /></td></tr>
+<tr class="separator:a131e601fd0e82e811b26a3c11a455d0e inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a223cef84c48a2aa9fb387ed4ffaaf48a inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a223cef84c48a2aa9fb387ed4ffaaf48a">solve</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;soln)</td></tr>
+<tr class="memdesc:a223cef84c48a2aa9fb387ed4ffaaf48a inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <a href="classoomph_1_1ComplexMatrixBase.html#a223cef84c48a2aa9fb387ed4ffaaf48a">More...</a><br /></td></tr>
+<tr class="separator:a223cef84c48a2aa9fb387ed4ffaaf48a inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5ad285a4cb503c9c962ff7e8d89857f inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#ab5ad285a4cb503c9c962ff7e8d89857f">max_residual</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;x, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ab5ad285a4cb503c9c962ff7e8d89857f inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum residual r=b-Ax &ndash; generic version, can be overloaded for specific derived classes where the max. can be determined "on the fly".  <a href="classoomph_1_1ComplexMatrixBase.html#ab5ad285a4cb503c9c962ff7e8d89857f">More...</a><br /></td></tr>
+<tr class="separator:ab5ad285a4cb503c9c962ff7e8d89857f inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1CCMatrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1CCMatrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1CCMatrix.html">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;</a></td></tr>
+<tr class="memitem:a16be0ba4cd8d9d5422de26513bab3b41 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a16be0ba4cd8d9d5422de26513bab3b41">CCMatrix</a> ()</td></tr>
+<tr class="memdesc:a16be0ba4cd8d9d5422de26513bab3b41 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="classoomph_1_1CCMatrix.html#a16be0ba4cd8d9d5422de26513bab3b41">More...</a><br /></td></tr>
+<tr class="separator:a16be0ba4cd8d9d5422de26513bab3b41 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d8bf86e2cb87a710fb5485ac5904274 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a4d8bf86e2cb87a710fb5485ac5904274">CCMatrix</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;<a class="el" href="classoomph_1_1SparseMatrix.html#a3e382ff145082821a6b0b3e63b6aed5d">value</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;row_index_, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;column_start_, const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m)</td></tr>
+<tr class="memdesc:a4d8bf86e2cb87a710fb5485ac5904274 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length.  <a href="classoomph_1_1CCMatrix.html#a4d8bf86e2cb87a710fb5485ac5904274">More...</a><br /></td></tr>
+<tr class="separator:a4d8bf86e2cb87a710fb5485ac5904274 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a815c8a3473ce3b8fe70c682e7591a33d inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a815c8a3473ce3b8fe70c682e7591a33d">CCMatrix</a> (const <a class="el" href="classoomph_1_1CCMatrix.html">CCMatrix</a> &amp;source_matrix)</td></tr>
+<tr class="memdesc:a815c8a3473ce3b8fe70c682e7591a33d inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classoomph_1_1CCMatrix.html#a815c8a3473ce3b8fe70c682e7591a33d">More...</a><br /></td></tr>
+<tr class="separator:a815c8a3473ce3b8fe70c682e7591a33d inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3612b9c4bbaa346c649cd4790a91df8 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#ac3612b9c4bbaa346c649cd4790a91df8">operator=</a> (const <a class="el" href="classoomph_1_1CCMatrix.html">CCMatrix</a> &amp;)</td></tr>
+<tr class="memdesc:ac3612b9c4bbaa346c649cd4790a91df8 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1CCMatrix.html#ac3612b9c4bbaa346c649cd4790a91df8">More...</a><br /></td></tr>
+<tr class="separator:ac3612b9c4bbaa346c649cd4790a91df8 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f6e403c6f6478abe752ca515d3120d9 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a5f6e403c6f6478abe752ca515d3120d9">~CCMatrix</a> ()</td></tr>
+<tr class="memdesc:a5f6e403c6f6478abe752ca515d3120d9 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, delete any allocated memory.  <a href="classoomph_1_1CCMatrix.html#a5f6e403c6f6478abe752ca515d3120d9">More...</a><br /></td></tr>
+<tr class="separator:a5f6e403c6f6478abe752ca515d3120d9 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b40b8a395a94be77939308cc413828a inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a9b40b8a395a94be77939308cc413828a">get_entry</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j) const</td></tr>
+<tr class="memdesc:a9b40b8a395a94be77939308cc413828a inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function that will be called by the read-only round-bracket operator (const)  <a href="classoomph_1_1CCMatrix.html#a9b40b8a395a94be77939308cc413828a">More...</a><br /></td></tr>
+<tr class="separator:a9b40b8a395a94be77939308cc413828a inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b26c3364bd4994f547998b7ceb939c inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a93b26c3364bd4994f547998b7ceb939c">entry</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j)</td></tr>
+<tr class="separator:a93b26c3364bd4994f547998b7ceb939c inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a955390de47c08eb8799550519a1a2751 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a955390de47c08eb8799550519a1a2751">column_start</a> ()</td></tr>
+<tr class="memdesc:a955390de47c08eb8799550519a1a2751 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style column_start array.  <a href="classoomph_1_1CCMatrix.html#a955390de47c08eb8799550519a1a2751">More...</a><br /></td></tr>
+<tr class="separator:a955390de47c08eb8799550519a1a2751 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a972a8849d0df2ae0908a9a091e471aca inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">const int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a972a8849d0df2ae0908a9a091e471aca">column_start</a> () const</td></tr>
+<tr class="memdesc:a972a8849d0df2ae0908a9a091e471aca inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style column_start array (const version)  <a href="classoomph_1_1CCMatrix.html#a972a8849d0df2ae0908a9a091e471aca">More...</a><br /></td></tr>
+<tr class="separator:a972a8849d0df2ae0908a9a091e471aca inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbea54ff48550342267246b7ae07c8c4 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#acbea54ff48550342267246b7ae07c8c4">row_index</a> ()</td></tr>
+<tr class="memdesc:acbea54ff48550342267246b7ae07c8c4 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style row index array.  <a href="classoomph_1_1CCMatrix.html#acbea54ff48550342267246b7ae07c8c4">More...</a><br /></td></tr>
+<tr class="separator:acbea54ff48550342267246b7ae07c8c4 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabe4e5f26a8581821f3c5458aeca7c50 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">const int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#aabe4e5f26a8581821f3c5458aeca7c50">row_index</a> () const</td></tr>
+<tr class="memdesc:aabe4e5f26a8581821f3c5458aeca7c50 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style row index array (const version)  <a href="classoomph_1_1CCMatrix.html#aabe4e5f26a8581821f3c5458aeca7c50">More...</a><br /></td></tr>
+<tr class="separator:aabe4e5f26a8581821f3c5458aeca7c50 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3b138b2ed470866999f2a92f3e1f239 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#ac3b138b2ed470866999f2a92f3e1f239">output_bottom_right_zero_helper</a> (std::ostream &amp;outfile) const</td></tr>
+<tr class="memdesc:ac3b138b2ed470866999f2a92f3e1f239 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <a href="classoomph_1_1CCMatrix.html#ac3b138b2ed470866999f2a92f3e1f239">More...</a><br /></td></tr>
+<tr class="separator:ac3b138b2ed470866999f2a92f3e1f239 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f6e451f0688c392e45bc03bf20fdda7 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a1f6e451f0688c392e45bc03bf20fdda7">sparse_indexed_output_helper</a> (std::ostream &amp;outfile) const</td></tr>
+<tr class="memdesc:a1f6e451f0688c392e45bc03bf20fdda7 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only.  <a href="classoomph_1_1CCMatrix.html#a1f6e451f0688c392e45bc03bf20fdda7">More...</a><br /></td></tr>
+<tr class="separator:a1f6e451f0688c392e45bc03bf20fdda7 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3f7a40493a8576558e211c681b1ca3c inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#af3f7a40493a8576558e211c681b1ca3c">clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:af3f7a40493a8576558e211c681b1ca3c inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wipe matrix data and set all values to 0.  <a href="classoomph_1_1CCMatrix.html#af3f7a40493a8576558e211c681b1ca3c">More...</a><br /></td></tr>
+<tr class="separator:af3f7a40493a8576558e211c681b1ca3c inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa08192365e3c87357d1f7ca8131f03de inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#aa08192365e3c87357d1f7ca8131f03de">build</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;<a class="el" href="classoomph_1_1SparseMatrix.html#a3e382ff145082821a6b0b3e63b6aed5d">value</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;<a class="el" href="classoomph_1_1CCMatrix.html#acbea54ff48550342267246b7ae07c8c4">row_index</a>, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;<a class="el" href="classoomph_1_1CCMatrix.html#a955390de47c08eb8799550519a1a2751">column_start</a>, const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m)</td></tr>
+<tr class="memdesc:aa08192365e3c87357d1f7ca8131f03de inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. <br  />
+  <a href="classoomph_1_1CCMatrix.html#aa08192365e3c87357d1f7ca8131f03de">More...</a><br /></td></tr>
+<tr class="separator:aa08192365e3c87357d1f7ca8131f03de inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57eddb79a6a3af698a1c92196482335a inherit pub_methods_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a57eddb79a6a3af698a1c92196482335a">build_without_copy</a> (std::complex&lt; double &gt; *<a class="el" href="classoomph_1_1SparseMatrix.html#a3e382ff145082821a6b0b3e63b6aed5d">value</a>, int *<a class="el" href="classoomph_1_1CCMatrix.html#acbea54ff48550342267246b7ae07c8c4">row_index</a>, int *<a class="el" href="classoomph_1_1CCMatrix.html#a955390de47c08eb8799550519a1a2751">column_start</a>, const unsigned long &amp;<a class="el" href="classoomph_1_1SparseMatrix.html#a8b8010edcc0869283621e72a9bbc51e3">nnz</a>, const unsigned long &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>, const unsigned long &amp;m)</td></tr>
+<tr class="memdesc:a57eddb79a6a3af698a1c92196482335a inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to build matrix from pointers to arrays which hold the column starts, row indices and non-zero values. The final parameters specifies the number of rows and columns. Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments!  <a href="classoomph_1_1CCMatrix.html#a57eddb79a6a3af698a1c92196482335a">More...</a><br /></td></tr>
+<tr class="separator:a57eddb79a6a3af698a1c92196482335a inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1SparseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1SparseMatrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1SparseMatrix.html">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;</a></td></tr>
+<tr class="memitem:a9aff0ae09aadbc704580726a53fe51c5 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a9aff0ae09aadbc704580726a53fe51c5">SparseMatrix</a> ()</td></tr>
+<tr class="memdesc:a9aff0ae09aadbc704580726a53fe51c5 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="classoomph_1_1SparseMatrix.html#a9aff0ae09aadbc704580726a53fe51c5">More...</a><br /></td></tr>
+<tr class="separator:a9aff0ae09aadbc704580726a53fe51c5 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e4062d0e4f877537d195aada71d854d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a9e4062d0e4f877537d195aada71d854d">SparseMatrix</a> (const <a class="el" href="classoomph_1_1SparseMatrix.html">SparseMatrix</a> &amp;source_matrix)</td></tr>
+<tr class="memdesc:a9e4062d0e4f877537d195aada71d854d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classoomph_1_1SparseMatrix.html#a9e4062d0e4f877537d195aada71d854d">More...</a><br /></td></tr>
+<tr class="separator:a9e4062d0e4f877537d195aada71d854d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c2fc4a13ad870653414fee8daad23d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a51c2fc4a13ad870653414fee8daad23d">operator=</a> (const <a class="el" href="classoomph_1_1SparseMatrix.html">SparseMatrix</a> &amp;)</td></tr>
+<tr class="memdesc:a51c2fc4a13ad870653414fee8daad23d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1SparseMatrix.html#a51c2fc4a13ad870653414fee8daad23d">More...</a><br /></td></tr>
+<tr class="separator:a51c2fc4a13ad870653414fee8daad23d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa938bb1200e49f080b980fe7248f589e inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#aa938bb1200e49f080b980fe7248f589e">~SparseMatrix</a> ()</td></tr>
+<tr class="memdesc:aa938bb1200e49f080b980fe7248f589e inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, delete the memory associated with the values.  <a href="classoomph_1_1SparseMatrix.html#aa938bb1200e49f080b980fe7248f589e">More...</a><br /></td></tr>
+<tr class="separator:aa938bb1200e49f080b980fe7248f589e inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e382ff145082821a6b0b3e63b6aed5d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a3e382ff145082821a6b0b3e63b6aed5d">value</a> ()</td></tr>
+<tr class="memdesc:a3e382ff145082821a6b0b3e63b6aed5d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style value array.  <a href="classoomph_1_1SparseMatrix.html#a3e382ff145082821a6b0b3e63b6aed5d">More...</a><br /></td></tr>
+<tr class="separator:a3e382ff145082821a6b0b3e63b6aed5d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d78622bb3cbfe1f39bb175355fb23fb inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">const std::complex&lt; double &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a4d78622bb3cbfe1f39bb175355fb23fb">value</a> () const</td></tr>
+<tr class="memdesc:a4d78622bb3cbfe1f39bb175355fb23fb inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style value array (const version)  <a href="classoomph_1_1SparseMatrix.html#a4d78622bb3cbfe1f39bb175355fb23fb">More...</a><br /></td></tr>
+<tr class="separator:a4d78622bb3cbfe1f39bb175355fb23fb inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e22f93a942583ca83cea18c23bdd11 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a21e22f93a942583ca83cea18c23bdd11">nrow</a> () const</td></tr>
+<tr class="memdesc:a21e22f93a942583ca83cea18c23bdd11 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of rows of the matrix.  <a href="classoomph_1_1SparseMatrix.html#a21e22f93a942583ca83cea18c23bdd11">More...</a><br /></td></tr>
+<tr class="separator:a21e22f93a942583ca83cea18c23bdd11 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4db71b6d794cfcee1624c15c09d62d7f inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a4db71b6d794cfcee1624c15c09d62d7f">ncol</a> () const</td></tr>
+<tr class="memdesc:a4db71b6d794cfcee1624c15c09d62d7f inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of columns of the matrix.  <a href="classoomph_1_1SparseMatrix.html#a4db71b6d794cfcee1624c15c09d62d7f">More...</a><br /></td></tr>
+<tr class="separator:a4db71b6d794cfcee1624c15c09d62d7f inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b8010edcc0869283621e72a9bbc51e3 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a8b8010edcc0869283621e72a9bbc51e3">nnz</a> () const</td></tr>
+<tr class="memdesc:a8b8010edcc0869283621e72a9bbc51e3 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of nonzero entries.  <a href="classoomph_1_1SparseMatrix.html#a8b8010edcc0869283621e72a9bbc51e3">More...</a><br /></td></tr>
+<tr class="separator:a8b8010edcc0869283621e72a9bbc51e3 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1Matrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1Matrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1Matrix.html">oomph::Matrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;</a></td></tr>
+<tr class="memitem:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ab414a0bf8e2658fc30d2c516f3bf4837">Matrix</a> ()</td></tr>
+<tr class="memdesc:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) constructor  <a href="classoomph_1_1Matrix.html#ab414a0bf8e2658fc30d2c516f3bf4837">More...</a><br /></td></tr>
+<tr class="separator:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6fb4df80b38414670a17080ca25aa4b inherit pub_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#af6fb4df80b38414670a17080ca25aa4b">Matrix</a> (const <a class="el" href="classoomph_1_1Matrix.html">Matrix</a> &amp;matrix)</td></tr>
+<tr class="memdesc:af6fb4df80b38414670a17080ca25aa4b inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1Matrix.html#af6fb4df80b38414670a17080ca25aa4b">More...</a><br /></td></tr>
+<tr class="separator:af6fb4df80b38414670a17080ca25aa4b inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9220e1bb01e5c77c4d4c2e6cb6865277 inherit pub_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a9220e1bb01e5c77c4d4c2e6cb6865277">operator=</a> (const <a class="el" href="classoomph_1_1Matrix.html">Matrix</a> &amp;)</td></tr>
+<tr class="memdesc:a9220e1bb01e5c77c4d4c2e6cb6865277 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1Matrix.html#a9220e1bb01e5c77c4d4c2e6cb6865277">More...</a><br /></td></tr>
+<tr class="separator:a9220e1bb01e5c77c4d4c2e6cb6865277 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bc2eeb0940268de5252a9234d126f11 inherit pub_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a3bc2eeb0940268de5252a9234d126f11">~Matrix</a> ()</td></tr>
+<tr class="memdesc:a3bc2eeb0940268de5252a9234d126f11 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual (empty) destructor.  <a href="classoomph_1_1Matrix.html#a3bc2eeb0940268de5252a9234d126f11">More...</a><br /></td></tr>
+<tr class="separator:a3bc2eeb0940268de5252a9234d126f11 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f23d2b331cb7f533fd8585f1ef8d28 inherit pub_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a26f23d2b331cb7f533fd8585f1ef8d28">operator()</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j) const</td></tr>
+<tr class="memdesc:a26f23d2b331cb7f533fd8585f1ef8d28 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Round brackets to give access as a(i,j) for read only (we're not providing a general interface for component-wise write access since not all matrix formats allow efficient direct access!) The function uses the MATRIX_TYPE template parameter to call the get_entry() function which must be defined in all derived classes that are to be fully instantiated.  <a href="classoomph_1_1Matrix.html#a26f23d2b331cb7f533fd8585f1ef8d28">More...</a><br /></td></tr>
+<tr class="separator:a26f23d2b331cb7f533fd8585f1ef8d28 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1601b48479c8fe38dd2d04600d7ebbae inherit pub_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a1601b48479c8fe38dd2d04600d7ebbae">operator()</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j)</td></tr>
+<tr class="memdesc:a1601b48479c8fe38dd2d04600d7ebbae inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Round brackets to give access as a(i,j) for read-write access. The function uses the MATRIX_TYPE template parameter to call the entry() function which must be defined in all derived classes that are to be fully instantiated. If the particular Matrix does not allow write access, the function should break with an error message.  <a href="classoomph_1_1Matrix.html#a1601b48479c8fe38dd2d04600d7ebbae">More...</a><br /></td></tr>
+<tr class="separator:a1601b48479c8fe38dd2d04600d7ebbae inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace9b59cbe514c77f0b3816b144c740f6 inherit pub_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ace9b59cbe514c77f0b3816b144c740f6">output</a> (std::ostream &amp;outfile) const</td></tr>
+<tr class="memdesc:ace9b59cbe514c77f0b3816b144c740f6 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function to print a matrix row-by-row, in the form a(0,0) a(0,1) ... a(1,0) a(1,1) ... ... to the stream outfile. Broken virtual since it might not be sensible to implement this for some sparse matrices.  <a href="classoomph_1_1Matrix.html#ace9b59cbe514c77f0b3816b144c740f6">More...</a><br /></td></tr>
+<tr class="separator:ace9b59cbe514c77f0b3816b144c740f6 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a4f97fa3c94e6fd664e46acb8873a80f8">sparse_indexed_output</a> (std::ostream &amp;outfile, const unsigned &amp;precision=0, const bool &amp;output_bottom_right_zero=false) const</td></tr>
+<tr class="memdesc:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <a href="classoomph_1_1Matrix.html#a4f97fa3c94e6fd664e46acb8873a80f8">More...</a><br /></td></tr>
+<tr class="separator:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ac7473fb07d4db925b4cf3a22131b561a">sparse_indexed_output</a> (std::string filename, const unsigned &amp;precision=0, const bool &amp;output_bottom_right_zero=false) const</td></tr>
+<tr class="memdesc:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <a href="classoomph_1_1Matrix.html#ac7473fb07d4db925b4cf3a22131b561a">More...</a><br /></td></tr>
+<tr class="separator:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a8b3cb444d689a80fc8eab064bde4a7fb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a8b3cb444d689a80fc8eab064bde4a7fb">Doc_stats_during_solve</a></td></tr>
+<tr class="memdesc:a8b3cb444d689a80fc8eab064bde4a7fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to indicate if stats are to be displayed during solution of linear system with SuperLU.  <a href="classoomph_1_1CCComplexMatrix.html#a8b3cb444d689a80fc8eab064bde4a7fb">More...</a><br /></td></tr>
+<tr class="separator:a8b3cb444d689a80fc8eab064bde4a7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1CCMatrix"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1CCMatrix')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1CCMatrix.html">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;</a></td></tr>
+<tr class="memitem:a7dba85934f3059d0163dda06f94ddf9b inherit pro_attribs_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a7dba85934f3059d0163dda06f94ddf9b">Row_index</a></td></tr>
+<tr class="memdesc:a7dba85934f3059d0163dda06f94ddf9b inherit pro_attribs_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Row index.  <a href="classoomph_1_1CCMatrix.html#a7dba85934f3059d0163dda06f94ddf9b">More...</a><br /></td></tr>
+<tr class="separator:a7dba85934f3059d0163dda06f94ddf9b inherit pro_attribs_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a38ae2bd1a69905375585d5b24c6136 inherit pro_attribs_classoomph_1_1CCMatrix"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a6a38ae2bd1a69905375585d5b24c6136">Column_start</a></td></tr>
+<tr class="memdesc:a6a38ae2bd1a69905375585d5b24c6136 inherit pro_attribs_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index for column.  <a href="classoomph_1_1CCMatrix.html#a6a38ae2bd1a69905375585d5b24c6136">More...</a><br /></td></tr>
+<tr class="separator:a6a38ae2bd1a69905375585d5b24c6136 inherit pro_attribs_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1SparseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1SparseMatrix')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1SparseMatrix.html">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;</a></td></tr>
+<tr class="memitem:a55b53c70fe3906a65d0f84c429e963b1 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a55b53c70fe3906a65d0f84c429e963b1">Value</a></td></tr>
+<tr class="memdesc:a55b53c70fe3906a65d0f84c429e963b1 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal representation of the matrix values, a pointer.  <a href="classoomph_1_1SparseMatrix.html#a55b53c70fe3906a65d0f84c429e963b1">More...</a><br /></td></tr>
+<tr class="separator:a55b53c70fe3906a65d0f84c429e963b1 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f15f962605f52fc75e8679efc6c8677 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a8f15f962605f52fc75e8679efc6c8677">N</a></td></tr>
+<tr class="memdesc:a8f15f962605f52fc75e8679efc6c8677 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of rows.  <a href="classoomph_1_1SparseMatrix.html#a8f15f962605f52fc75e8679efc6c8677">More...</a><br /></td></tr>
+<tr class="separator:a8f15f962605f52fc75e8679efc6c8677 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae558ff039363bd2aa163525442090508 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#ae558ff039363bd2aa163525442090508">M</a></td></tr>
+<tr class="memdesc:ae558ff039363bd2aa163525442090508 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of columns.  <a href="classoomph_1_1SparseMatrix.html#ae558ff039363bd2aa163525442090508">More...</a><br /></td></tr>
+<tr class="separator:ae558ff039363bd2aa163525442090508 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1459cbaeec275fe95ba45f7d843b26a5 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a1459cbaeec275fe95ba45f7d843b26a5">Nnz</a></td></tr>
+<tr class="memdesc:a1459cbaeec275fe95ba45f7d843b26a5 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of non-zero values (i.e. size of Value array)  <a href="classoomph_1_1SparseMatrix.html#a1459cbaeec275fe95ba45f7d843b26a5">More...</a><br /></td></tr>
+<tr class="separator:a1459cbaeec275fe95ba45f7d843b26a5 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ac97a80e97db7930912a519ba06ef2e98"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#ac97a80e97db7930912a519ba06ef2e98">F_factors</a></td></tr>
+<tr class="memdesc:ac97a80e97db7930912a519ba06ef2e98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the LU factors as required by SuperLU.  <a href="classoomph_1_1CCComplexMatrix.html#ac97a80e97db7930912a519ba06ef2e98">More...</a><br /></td></tr>
+<tr class="separator:ac97a80e97db7930912a519ba06ef2e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f306917c87df84224f9f78e96d3a100"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCComplexMatrix.html#a2f306917c87df84224f9f78e96d3a100">Info</a></td></tr>
+<tr class="memdesc:a2f306917c87df84224f9f78e96d3a100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Info flag for the SuperLU solver.  <a href="classoomph_1_1CCComplexMatrix.html#a2f306917c87df84224f9f78e96d3a100">More...</a><br /></td></tr>
+<tr class="separator:a2f306917c87df84224f9f78e96d3a100"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1Matrix"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1Matrix')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1Matrix.html">oomph::Matrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;</a></td></tr>
+<tr class="memitem:a2fed2ea1840638eb0ddaa2d4ab1da82f inherit pro_methods_classoomph_1_1Matrix"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a2fed2ea1840638eb0ddaa2d4ab1da82f">range_check</a> (const unsigned long &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned long &amp;j) const</td></tr>
+<tr class="memdesc:a2fed2ea1840638eb0ddaa2d4ab1da82f inherit pro_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an <code>OomphLibError</code>.  <a href="classoomph_1_1Matrix.html#a2fed2ea1840638eb0ddaa2d4ab1da82f">More...</a><br /></td></tr>
+<tr class="separator:a2fed2ea1840638eb0ddaa2d4ab1da82f inherit pro_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_attribs_classoomph_1_1SparseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1SparseMatrix')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1SparseMatrix.html">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;</a></td></tr>
+<tr class="memitem:a71a5ae159c26f93c314c839f4db6eaaf inherit pro_static_attribs_classoomph_1_1SparseMatrix"><td class="memItemLeft" align="right" valign="top">static std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a71a5ae159c26f93c314c839f4db6eaaf">Zero</a></td></tr>
+<tr class="memdesc:a71a5ae159c26f93c314c839f4db6eaaf inherit pro_static_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy zero.  <a href="classoomph_1_1SparseMatrix.html#a71a5ae159c26f93c314c839f4db6eaaf">More...</a><br /></td></tr>
+<tr class="separator:a71a5ae159c26f93c314c839f4db6eaaf inherit pro_static_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class for compressed column matrices that store doubles. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00383">383</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5978332570ff5adabc1e185edc240398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5978332570ff5adabc1e185edc240398">&#9670;&nbsp;</a></span>CCComplexMatrix() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CCComplexMatrix::CCComplexMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00403">403</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00398">Doc_stats_during_solve</a>.</p>
+
+</div>
+</div>
+<a id="a3b354aedafe10d75bda23ce1e34e2971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b354aedafe10d75bda23ce1e34e2971">&#9670;&nbsp;</a></span>CCComplexMatrix() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CCComplexMatrix::CCComplexMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>row_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>column_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00414">414</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00398">Doc_stats_during_solve</a>.</p>
+
+</div>
+</div>
+<a id="aee92c78d8715e0221d8db215609e7c3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee92c78d8715e0221d8db215609e7c3c">&#9670;&nbsp;</a></span>CCComplexMatrix() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CCComplexMatrix::CCComplexMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1CCComplexMatrix.html">CCComplexMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00427">427</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="a061e34b3b777e15df53071c25a8bb895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a061e34b3b777e15df53071c25a8bb895">&#9670;&nbsp;</a></span>~CCComplexMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::CCComplexMatrix::~CCComplexMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Kill the LU factors if they have been setup. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00439">439</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8cc_source.html#l00726">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8697d57e2ed92d56ee6f6e819482fdc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8697d57e2ed92d56ee6f6e819482fdc3">&#9670;&nbsp;</a></span>clean_up_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CCComplexMatrix::clean_up_memory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>LU clean up (perhaps this should happen in the destructor) </p>
+<p>Cleanup storage. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00726">726</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02557">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Column_start</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01547">oomph::LeakCheckNames::doc()</a>, <a class="el" href="complex__matrices_8h_source.html#l00398">Doc_stats_during_solve</a>, <a class="el" href="complex__matrices_8h_source.html#l00389">F_factors</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="complex__matrices_8h_source.html#l00392">Info</a>, <a class="el" href="matrices_8h_source.html#l00569">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l00575">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::Nnz</a>, <a class="el" href="matrices_8h_source.html#l02554">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Row_index</a>, <a class="el" href="namespaceoomph.html#a86eed4072592007720b957cf58c7bbe5">oomph::superlu_complex()</a>, and <a class="el" href="matrices_8h_source.html#l00566">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::Value</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8h_source.html#l00439">~CCComplexMatrix()</a>.</p>
+
+</div>
+</div>
+<a id="ad5b2b64350d3335d136a8e96ffca267f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5b2b64350d3335d136a8e96ffca267f">&#9670;&nbsp;</a></span>disable_doc_stats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CCComplexMatrix::disable_doc_stats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the solve </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00447">447</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00398">Doc_stats_during_solve</a>.</p>
+
+</div>
+</div>
+<a id="afccd0ba0992ac02b062d8051bcd0d34e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afccd0ba0992ac02b062d8051bcd0d34e">&#9670;&nbsp;</a></span>enable_doc_stats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CCComplexMatrix::enable_doc_stats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set flag to indicate that stats are to be displayed during solution of linear system with SuperLU. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00443">443</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00398">Doc_stats_during_solve</a>.</p>
+
+</div>
+</div>
+<a id="ade5d51dc8e2a44b6c011184366ce052c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade5d51dc8e2a44b6c011184366ce052c">&#9670;&nbsp;</a></span>lubksub()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CCComplexMatrix::lubksub </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>LU back solve for given RHS. </p>
+<p>Do the backsubstitution. </p>
+<p>RHS vector</p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa0e444d60d4ec9e35a6903ab88baaf62">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00654">654</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02557">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Column_start</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01547">oomph::LeakCheckNames::doc()</a>, <a class="el" href="complex__matrices_8h_source.html#l00398">Doc_stats_during_solve</a>, <a class="el" href="complex__matrices_8h_source.html#l00389">F_factors</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="complex__matrices_8h_source.html#l00392">Info</a>, <a class="el" href="matrices_8h_source.html#l00572">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00569">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l00575">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::Nnz</a>, <a class="el" href="matrices_8h_source.html#l02554">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Row_index</a>, <a class="el" href="namespaceoomph.html#a86eed4072592007720b957cf58c7bbe5">oomph::superlu_complex()</a>, and <a class="el" href="matrices_8h_source.html#l00566">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::Value</a>.</p>
+
+</div>
+</div>
+<a id="a7076d4dc153b80fe4adbedbfb916b395"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7076d4dc153b80fe4adbedbfb916b395">&#9670;&nbsp;</a></span>ludecompose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::CCComplexMatrix::ludecompose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>LU decomposition using SuperLU. </p>
+<p>Perform LU decomposition. Return the sign of the determinant. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a11e1beeb7767e9bc5e511c17f80f097f">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00608">608</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02557">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Column_start</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01547">oomph::LeakCheckNames::doc()</a>, <a class="el" href="complex__matrices_8h_source.html#l00398">Doc_stats_during_solve</a>, <a class="el" href="complex__matrices_8h_source.html#l00389">F_factors</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="complex__matrices_8h_source.html#l00392">Info</a>, <a class="el" href="matrices_8h_source.html#l00572">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00569">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l00575">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::Nnz</a>, <a class="el" href="matrices_8h_source.html#l02554">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Row_index</a>, <a class="el" href="namespaceoomph.html#a86eed4072592007720b957cf58c7bbe5">oomph::superlu_complex()</a>, and <a class="el" href="matrices_8h_source.html#l00566">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::Value</a>.</p>
+
+</div>
+</div>
+<a id="a6c7ba50bf29c2e9f40a68a073534f261"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7ba50bf29c2e9f40a68a073534f261">&#9670;&nbsp;</a></span>multiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CCComplexMatrix::multiply </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>soln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply the matrix by the vector x: soln=Ax. </p>
+<p>Multiply the matrix by the vector x. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a730c106643464a29ebf0660a6921ebaa">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00823">823</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02557">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Column_start</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00572">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00569">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02554">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Row_index</a>, and <a class="el" href="matrices_8h_source.html#l00566">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::Value</a>.</p>
+
+</div>
+</div>
+<a id="a85c89a6e460b6eb0a1ab704b6272c4d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85c89a6e460b6eb0a1ab704b6272c4d7">&#9670;&nbsp;</a></span>multiply_transpose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CCComplexMatrix::multiply_transpose </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>soln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply the transposed matrix by the vector x: soln=A^T x. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a90c7832bad84aad3d0f437925efb089a">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00869">869</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02557">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Column_start</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00572">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00569">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02554">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Row_index</a>, and <a class="el" href="matrices_8h_source.html#l00566">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::Value</a>.</p>
+
+</div>
+</div>
+<a id="a62540288d116687aa4bd201787845b4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62540288d116687aa4bd201787845b4d">&#9670;&nbsp;</a></span>ncol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long oomph::CCComplexMatrix::ncol </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of columns of the matrix. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a849b63e50dad36ca8b20b7bdefd34b8d">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00454">454</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="a52c78210ebe95b72ead8d938f5c7a9bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52c78210ebe95b72ead8d938f5c7a9bb">&#9670;&nbsp;</a></span>nrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long oomph::CCComplexMatrix::nrow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of rows of the matrix. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#adcbdf19bc82c61c0a4fbfd8c8de97b3b">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00450">450</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="a09035e7b3fc0346ed91f4ddff4bebc13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09035e7b3fc0346ed91f4ddff4bebc13">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt;double&gt; oomph::CCComplexMatrix::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned long &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the round-bracket access operator to provide read-only (const) access to the data. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a78d1185ec8249fec5855d01129a1c870">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00459">459</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02444">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::get_entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="a95c58231d17ca240a62f9398118cd433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95c58231d17ca240a62f9398118cd433">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CCComplexMatrix::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1CCComplexMatrix.html">CCComplexMatrix</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00433">433</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="ade719948640907a8f338f83ee1587a90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade719948640907a8f338f83ee1587a90">&#9670;&nbsp;</a></span>residual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::CCComplexMatrix::residual </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residual</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find the residulal to x of Ax=b, ie r=b-Ax. </p>
+<p>Work out residual vector r = b-Ax for candidate solution x. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aec72875402b9ba387e0724d6c2597430">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00758">758</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02557">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Column_start</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00572">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00569">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02554">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;::Row_index</a>, and <a class="el" href="matrices_8h_source.html#l00566">oomph::SparseMatrix&lt; std::complex&lt; double &gt;, CCMatrix&lt; std::complex&lt; double &gt; &gt; &gt;::Value</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8b3cb444d689a80fc8eab064bde4a7fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b3cb444d689a80fc8eab064bde4a7fb">&#9670;&nbsp;</a></span>Doc_stats_during_solve</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::CCComplexMatrix::Doc_stats_during_solve</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag to indicate if stats are to be displayed during solution of linear system with SuperLU. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00398">398</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8h_source.html#l00403">CCComplexMatrix()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00726">clean_up_memory()</a>, <a class="el" href="complex__matrices_8h_source.html#l00447">disable_doc_stats()</a>, <a class="el" href="complex__matrices_8h_source.html#l00443">enable_doc_stats()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00654">lubksub()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00608">ludecompose()</a>.</p>
+
+</div>
+</div>
+<a id="ac97a80e97db7930912a519ba06ef2e98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac97a80e97db7930912a519ba06ef2e98">&#9670;&nbsp;</a></span>F_factors</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* oomph::CCComplexMatrix::F_factors</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the LU factors as required by SuperLU. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00389">389</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00726">clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00654">lubksub()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00608">ludecompose()</a>.</p>
+
+</div>
+</div>
+<a id="a2f306917c87df84224f9f78e96d3a100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f306917c87df84224f9f78e96d3a100">&#9670;&nbsp;</a></span>Info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::CCComplexMatrix::Info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Info flag for the SuperLU solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00392">392</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00726">clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00654">lubksub()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00608">ludecompose()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a></li>
+<li><a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:22
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

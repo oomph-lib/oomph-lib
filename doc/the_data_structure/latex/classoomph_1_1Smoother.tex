@@ -1,0 +1,146 @@
+\hypertarget{classoomph_1_1Smoother}{}\doxysection{oomph\+::Smoother Class Reference}
+\label{classoomph_1_1Smoother}\index{oomph::Smoother@{oomph::Smoother}}
+
+
+{\ttfamily \#include $<$iterative\+\_\+linear\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Smoother\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.718459cm]{classoomph_1_1Smoother}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Smoother_ae5c884d6c74054c5fdfe8a691293e3be}{Smoother}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1Smoother_a225c288501a99fff61317957ea6adefa}{$\sim$\+Smoother}} ()
+\begin{DoxyCompactList}\small\item\em Virtual empty destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Smoother_a94899c8d7bf84c068cda8d312d195bfe}{smoother\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)=0
+\begin{DoxyCompactList}\small\item\em The smoother\+\_\+solve function performs fixed number of iterations on the system A$\ast$result=rhs. The number of (smoothing) iterations is the same as the max. number of iterations in the underlying \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. Note that the result vector M\+U\+ST N\+OT re-\/initialised to zero (as it would typically be when the \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} is called as a iterative linear solver). \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1Smoother_a6eb7009ab3bebcccc83062cbe980bf91}{smoother\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$matrix\+\_\+pt)=0
+\begin{DoxyCompactList}\small\item\em Set up the smoother for the matrix specified by the pointer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename M\+A\+T\+R\+IX $>$ }\\void \mbox{\hyperlink{classoomph_1_1Smoother_a26a3dba61218b77cf65775475dc8751d}{check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs}} (M\+A\+T\+R\+IX $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution, const double \&n\+\_\+dof)
+\begin{DoxyCompactList}\small\item\em Self-\/test to check that all the dimensions of the inputs to solve helper are consistent and everything that needs to be built, is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1Smoother_aa789c91e11408d9ffd94c237e4a729b7}{Use\+\_\+as\+\_\+smoother}}
+\begin{DoxyCompactList}\small\item\em When a derived class object is being used as a smoother in the MG solver (or elsewhere) the residual norm does not need to be calculated because we\textquotesingle{}re simply performing a fixed number of (smoothing) iterations. This boolean is used as a flag to indicate that the \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} (which this class is by inheritance) is supposed to act in this way. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} class\+: The smoother class is designed for to be used in conjunction with multigrid. The action of the smoother should reduce the high frequency errors. These methods are inefficient as stand-\/alone solvers. 
+
+Definition at line 543 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1Smoother_ae5c884d6c74054c5fdfe8a691293e3be}\label{classoomph_1_1Smoother_ae5c884d6c74054c5fdfe8a691293e3be}} 
+\index{oomph::Smoother@{oomph::Smoother}!Smoother@{Smoother}}
+\index{Smoother@{Smoother}!oomph::Smoother@{oomph::Smoother}}
+\doxysubsubsection{\texorpdfstring{Smoother()}{Smoother()}}
+{\footnotesize\ttfamily oomph\+::\+Smoother\+::\+Smoother (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line 549 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1Smoother_a225c288501a99fff61317957ea6adefa}\label{classoomph_1_1Smoother_a225c288501a99fff61317957ea6adefa}} 
+\index{oomph::Smoother@{oomph::Smoother}!````~Smoother@{$\sim$Smoother}}
+\index{````~Smoother@{$\sim$Smoother}!oomph::Smoother@{oomph::Smoother}}
+\doxysubsubsection{\texorpdfstring{$\sim$Smoother()}{~Smoother()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Smoother\+::$\sim$\+Smoother (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual empty destructor. 
+
+
+
+Definition at line 553 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1Smoother_a26a3dba61218b77cf65775475dc8751d}\label{classoomph_1_1Smoother_a26a3dba61218b77cf65775475dc8751d}} 
+\index{oomph::Smoother@{oomph::Smoother}!check\_validity\_of\_solve\_helper\_inputs@{check\_validity\_of\_solve\_helper\_inputs}}
+\index{check\_validity\_of\_solve\_helper\_inputs@{check\_validity\_of\_solve\_helper\_inputs}!oomph::Smoother@{oomph::Smoother}}
+\doxysubsubsection{\texorpdfstring{check\_validity\_of\_solve\_helper\_inputs()}{check\_validity\_of\_solve\_helper\_inputs()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs (\begin{DoxyParamCaption}\item[{M\+A\+T\+R\+IX $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution,  }\item[{const double \&}]{n\+\_\+dof }\end{DoxyParamCaption})}
+
+
+
+Self-\/test to check that all the dimensions of the inputs to solve helper are consistent and everything that needs to be built, is. 
+
+Self-\/test to be called inside solve\+\_\+helper to ensure that all inputs are consistent and everything that needs to be built, is. 
+
+Definition at line 1054 of file iterative\+\_\+linear\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), and oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow().
+
+\mbox{\Hypertarget{classoomph_1_1Smoother_a6eb7009ab3bebcccc83062cbe980bf91}\label{classoomph_1_1Smoother_a6eb7009ab3bebcccc83062cbe980bf91}} 
+\index{oomph::Smoother@{oomph::Smoother}!smoother\_setup@{smoother\_setup}}
+\index{smoother\_setup@{smoother\_setup}!oomph::Smoother@{oomph::Smoother}}
+\doxysubsubsection{\texorpdfstring{smoother\_setup()}{smoother\_setup()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Smoother\+::smoother\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Set up the smoother for the matrix specified by the pointer. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1DampedJacobi_a8f136ac45998419c70708166b16a66e1}{oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_ab7762326bb595dc015a7504e1b9b996f}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, and \mbox{\hyperlink{classoomph_1_1GS_a92a30b95c5ff0b2eefdc7730c822b6d5}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1Smoother_a94899c8d7bf84c068cda8d312d195bfe}\label{classoomph_1_1Smoother_a94899c8d7bf84c068cda8d312d195bfe}} 
+\index{oomph::Smoother@{oomph::Smoother}!smoother\_solve@{smoother\_solve}}
+\index{smoother\_solve@{smoother\_solve}!oomph::Smoother@{oomph::Smoother}}
+\doxysubsubsection{\texorpdfstring{smoother\_solve()}{smoother\_solve()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Smoother\+::smoother\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The smoother\+\_\+solve function performs fixed number of iterations on the system A$\ast$result=rhs. The number of (smoothing) iterations is the same as the max. number of iterations in the underlying \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. Note that the result vector M\+U\+ST N\+OT re-\/initialised to zero (as it would typically be when the \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} is called as a iterative linear solver). 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1DampedJacobi_af1e5baec4c87874bbd2a2834810f92ba}{oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a0917e59d120fe7c49ecef62806392f6a}{oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$}}, and \mbox{\hyperlink{classoomph_1_1GS_a8707c2bcc7fcaceca2fe93ac471ed1a2}{oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1Smoother_aa789c91e11408d9ffd94c237e4a729b7}\label{classoomph_1_1Smoother_aa789c91e11408d9ffd94c237e4a729b7}} 
+\index{oomph::Smoother@{oomph::Smoother}!Use\_as\_smoother@{Use\_as\_smoother}}
+\index{Use\_as\_smoother@{Use\_as\_smoother}!oomph::Smoother@{oomph::Smoother}}
+\doxysubsubsection{\texorpdfstring{Use\_as\_smoother}{Use\_as\_smoother}}
+{\footnotesize\ttfamily bool oomph\+::\+Smoother\+::\+Use\+\_\+as\+\_\+smoother\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+When a derived class object is being used as a smoother in the MG solver (or elsewhere) the residual norm does not need to be calculated because we\textquotesingle{}re simply performing a fixed number of (smoothing) iterations. This boolean is used as a flag to indicate that the \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} (which this class is by inheritance) is supposed to act in this way. 
+
+
+
+Definition at line 581 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+Referenced by oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::smoother\+\_\+solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::smoother\+\_\+solve(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::smoother\+\_\+solve(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve(), and oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve\+\_\+helper().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{iterative__linear__solver_8h}{iterative\+\_\+linear\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{iterative__linear__solver_8cc}{iterative\+\_\+linear\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

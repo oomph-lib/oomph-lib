@@ -1,0 +1,239 @@
+\hypertarget{classoomph_1_1DummyErrorEstimator}{}\doxysection{oomph\+::Dummy\+Error\+Estimator Class Reference}
+\label{classoomph_1_1DummyErrorEstimator}\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+
+
+{\ttfamily \#include $<$error\+\_\+estimator.\+h$>$}
+
+Inheritance diagram for oomph\+::Dummy\+Error\+Estimator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1DummyErrorEstimator}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a32f15a763f800e451cc9ddec074cd25c}{Dummy\+Error\+Estimator}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&elements\+\_\+to\+\_\+refine, const unsigned \&central\+\_\+node\+\_\+number, const bool \&use\+\_\+lagrangian\+\_\+coordinates=false)
+\begin{DoxyCompactList}\small\item\em Constructor. Provide mesh and number of the elements that define the regions within which elements are to be refined subsequently. Also specify the node number of a central node within elements -- it\textquotesingle{}s used to determine if an element is in the region where refinement is supposed to take place. Optional boolean flag (defaulting to false) indicates that refinement decision is based on Lagrangian coordinates -- only applicable to solid meshes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_ac08dd82bba49368bb49eb7f58778778f}{Dummy\+Error\+Estimator}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&lower\+\_\+left, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&upper\+\_\+right, const unsigned \&central\+\_\+node\+\_\+number, const bool \&use\+\_\+lagrangian\+\_\+coordinates=false)
+\begin{DoxyCompactList}\small\item\em Constructor. Provide vectors to \char`\"{}lower left\char`\"{} and \char`\"{}upper right\char`\"{} vertices of refinement region Also specify the node number of a central node within elements -- it\textquotesingle{}s used to determine if an element is in the region where refinement is supposed to take place. Optional boolean flag (defaulting to false) indicates that refinement decision is based on Lagrangian coordinates -- only applicable to solid meshes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a69397622563794501de5bbbeb8c072ab}{Dummy\+Error\+Estimator}} (const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a001f55cc9e376d626a82147fed7f08f1}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_ac379252c48c85e03d9a5bc8b8c0d2d5e}{$\sim$\+Dummy\+Error\+Estimator}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a471038816556f1af7602cadbbb21d8fb}{get\+\_\+element\+\_\+errors}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&elemental\+\_\+error, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Compute the elemental error measures for a given mesh and store them in a vector. Doc errors etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a052e3d319921a682b7fa0fef66496625}{Use\+\_\+lagrangian\+\_\+coordinates}}
+\begin{DoxyCompactList}\small\item\em Use Lagrangian coordinates to decide which element is to be refined. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a9885e1d7966047816f1a24448d5f6ac5}{Central\+\_\+node\+\_\+number}}
+\begin{DoxyCompactList}\small\item\em Number of local node that is used to identify if an element is located in the refinement region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a80f495a70922a1e458899e2e7313620d}{Region\+\_\+upp\+\_\+bound}}
+\begin{DoxyCompactList}\small\item\em Upper bounds for the coordinates of the refinement regions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a181a66a833352440c325a8edbefb51cf}{Region\+\_\+low\+\_\+bound}}
+\begin{DoxyCompactList}\small\item\em Lower bounds for the coordinates of the refinement regions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Dummy error estimator, allows manual specification of refinement pattern by forcing refinement in regions defined by elements in a reference mesh. 
+
+Definition at line 467 of file error\+\_\+estimator.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a32f15a763f800e451cc9ddec074cd25c}\label{classoomph_1_1DummyErrorEstimator_a32f15a763f800e451cc9ddec074cd25c}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!DummyErrorEstimator@{DummyErrorEstimator}}
+\index{DummyErrorEstimator@{DummyErrorEstimator}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{DummyErrorEstimator()}{DummyErrorEstimator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Dummy\+Error\+Estimator\+::\+Dummy\+Error\+Estimator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{elements\+\_\+to\+\_\+refine,  }\item[{const unsigned \&}]{central\+\_\+node\+\_\+number,  }\item[{const bool \&}]{use\+\_\+lagrangian\+\_\+coordinates = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Provide mesh and number of the elements that define the regions within which elements are to be refined subsequently. Also specify the node number of a central node within elements -- it\textquotesingle{}s used to determine if an element is in the region where refinement is supposed to take place. Optional boolean flag (defaulting to false) indicates that refinement decision is based on Lagrangian coordinates -- only applicable to solid meshes. 
+
+
+
+Definition at line 480 of file error\+\_\+estimator.\+h.
+
+
+
+References e, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Region\+\_\+low\+\_\+bound, Region\+\_\+upp\+\_\+bound, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
+
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_ac08dd82bba49368bb49eb7f58778778f}\label{classoomph_1_1DummyErrorEstimator_ac08dd82bba49368bb49eb7f58778778f}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!DummyErrorEstimator@{DummyErrorEstimator}}
+\index{DummyErrorEstimator@{DummyErrorEstimator}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{DummyErrorEstimator()}{DummyErrorEstimator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Dummy\+Error\+Estimator\+::\+Dummy\+Error\+Estimator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{lower\+\_\+left,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{upper\+\_\+right,  }\item[{const unsigned \&}]{central\+\_\+node\+\_\+number,  }\item[{const bool \&}]{use\+\_\+lagrangian\+\_\+coordinates = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Provide vectors to \char`\"{}lower left\char`\"{} and \char`\"{}upper right\char`\"{} vertices of refinement region Also specify the node number of a central node within elements -- it\textquotesingle{}s used to determine if an element is in the region where refinement is supposed to take place. Optional boolean flag (defaulting to false) indicates that refinement decision is based on Lagrangian coordinates -- only applicable to solid meshes. 
+
+
+
+Definition at line 565 of file error\+\_\+estimator.\+h.
+
+
+
+References oomph\+::\+Mesh\+::nelement(), Region\+\_\+low\+\_\+bound, and Region\+\_\+upp\+\_\+bound.
+
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a69397622563794501de5bbbeb8c072ab}\label{classoomph_1_1DummyErrorEstimator_a69397622563794501de5bbbeb8c072ab}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!DummyErrorEstimator@{DummyErrorEstimator}}
+\index{DummyErrorEstimator@{DummyErrorEstimator}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{DummyErrorEstimator()}{DummyErrorEstimator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Dummy\+Error\+Estimator\+::\+Dummy\+Error\+Estimator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 598 of file error\+\_\+estimator.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_ac379252c48c85e03d9a5bc8b8c0d2d5e}\label{classoomph_1_1DummyErrorEstimator_ac379252c48c85e03d9a5bc8b8c0d2d5e}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!````~DummyErrorEstimator@{$\sim$DummyErrorEstimator}}
+\index{````~DummyErrorEstimator@{$\sim$DummyErrorEstimator}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{$\sim$DummyErrorEstimator()}{~DummyErrorEstimator()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Dummy\+Error\+Estimator\+::$\sim$\+Dummy\+Error\+Estimator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line 612 of file error\+\_\+estimator.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a471038816556f1af7602cadbbb21d8fb}\label{classoomph_1_1DummyErrorEstimator_a471038816556f1af7602cadbbb21d8fb}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!get\_element\_errors@{get\_element\_errors}}
+\index{get\_element\_errors@{get\_element\_errors}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{get\_element\_errors()}{get\_element\_errors()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Dummy\+Error\+Estimator\+::get\+\_\+element\+\_\+errors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{elemental\+\_\+error,  }\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Compute the elemental error measures for a given mesh and store them in a vector. Doc errors etc. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ErrorEstimator_a77e85262d309d6e7da0ca71e98b7afff}{oomph\+::\+Error\+Estimator}}.
+
+
+
+Definition at line 617 of file error\+\_\+estimator.\+h.
+
+
+
+References Central\+\_\+node\+\_\+number, e, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Region\+\_\+low\+\_\+bound, Region\+\_\+upp\+\_\+bound, Use\+\_\+lagrangian\+\_\+coordinates, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
+
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a001f55cc9e376d626a82147fed7f08f1}\label{classoomph_1_1DummyErrorEstimator_a001f55cc9e376d626a82147fed7f08f1}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Dummy\+Error\+Estimator\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 605 of file error\+\_\+estimator.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a9885e1d7966047816f1a24448d5f6ac5}\label{classoomph_1_1DummyErrorEstimator_a9885e1d7966047816f1a24448d5f6ac5}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!Central\_node\_number@{Central\_node\_number}}
+\index{Central\_node\_number@{Central\_node\_number}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{Central\_node\_number}{Central\_node\_number}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Dummy\+Error\+Estimator\+::\+Central\+\_\+node\+\_\+number\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of local node that is used to identify if an element is located in the refinement region. 
+
+
+
+Definition at line 685 of file error\+\_\+estimator.\+h.
+
+
+
+Referenced by get\+\_\+element\+\_\+errors().
+
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a181a66a833352440c325a8edbefb51cf}\label{classoomph_1_1DummyErrorEstimator_a181a66a833352440c325a8edbefb51cf}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!Region\_low\_bound@{Region\_low\_bound}}
+\index{Region\_low\_bound@{Region\_low\_bound}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{Region\_low\_bound}{Region\_low\_bound}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Dummy\+Error\+Estimator\+::\+Region\+\_\+low\+\_\+bound\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Lower bounds for the coordinates of the refinement regions. 
+
+
+
+Definition at line 691 of file error\+\_\+estimator.\+h.
+
+
+
+Referenced by Dummy\+Error\+Estimator(), and get\+\_\+element\+\_\+errors().
+
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a80f495a70922a1e458899e2e7313620d}\label{classoomph_1_1DummyErrorEstimator_a80f495a70922a1e458899e2e7313620d}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!Region\_upp\_bound@{Region\_upp\_bound}}
+\index{Region\_upp\_bound@{Region\_upp\_bound}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{Region\_upp\_bound}{Region\_upp\_bound}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Dummy\+Error\+Estimator\+::\+Region\+\_\+upp\+\_\+bound\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Upper bounds for the coordinates of the refinement regions. 
+
+
+
+Definition at line 688 of file error\+\_\+estimator.\+h.
+
+
+
+Referenced by Dummy\+Error\+Estimator(), and get\+\_\+element\+\_\+errors().
+
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a052e3d319921a682b7fa0fef66496625}\label{classoomph_1_1DummyErrorEstimator_a052e3d319921a682b7fa0fef66496625}} 
+\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!Use\_lagrangian\_coordinates@{Use\_lagrangian\_coordinates}}
+\index{Use\_lagrangian\_coordinates@{Use\_lagrangian\_coordinates}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{Use\_lagrangian\_coordinates}{Use\_lagrangian\_coordinates}}
+{\footnotesize\ttfamily bool oomph\+::\+Dummy\+Error\+Estimator\+::\+Use\+\_\+lagrangian\+\_\+coordinates\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Use Lagrangian coordinates to decide which element is to be refined. 
+
+
+
+Definition at line 681 of file error\+\_\+estimator.\+h.
+
+
+
+Referenced by get\+\_\+element\+\_\+errors().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{error__estimator_8h}{error\+\_\+estimator.\+h}}\end{DoxyCompactItemize}

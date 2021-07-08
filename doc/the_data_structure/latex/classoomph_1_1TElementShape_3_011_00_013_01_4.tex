@@ -1,0 +1,101 @@
+\hypertarget{classoomph_1_1TElementShape_3_011_00_013_01_4}{}\doxysection{oomph\+::T\+Element\+Shape$<$ 1, 3 $>$ Class Reference}
+\label{classoomph_1_1TElementShape_3_011_00_013_01_4}\index{oomph::TElementShape$<$ 1, 3 $>$@{oomph::TElementShape$<$ 1, 3 $>$}}
+
+
+{\ttfamily \#include $<$Telements.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1TElementShape_3_011_00_013_01_4_a08e97f9735505002c27e524d86371e5b}{local\+\_\+coordinate\+\_\+of\+\_\+node}} (const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
+\begin{DoxyCompactList}\small\item\em Return local coordinates of node j. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TElementShape_3_011_00_013_01_4_adf2d6ccfcceccd657650bb25d685b00c}{shape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} function for specific \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element$<$1,3$>$}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TElementShape_3_011_00_013_01_4_a47bfa41ceb5f7df0b6ba774c653a9ea3}{dshape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids) const
+\begin{DoxyCompactList}\small\item\em Derivatives of shape functions for specific \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element$<$1,3$>$}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TElementShape_3_011_00_013_01_4_a58380921c91e5fb9d5e3e47deb4f6354}{d2shape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psids) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 311 of file Telements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TElementShape_3_011_00_013_01_4_a58380921c91e5fb9d5e3e47deb4f6354}\label{classoomph_1_1TElementShape_3_011_00_013_01_4_a58380921c91e5fb9d5e3e47deb4f6354}} 
+\index{oomph::TElementShape$<$ 1, 3 $>$@{oomph::TElementShape$<$ 1, 3 $>$}!d2shape\_local@{d2shape\_local}}
+\index{d2shape\_local@{d2shape\_local}!oomph::TElementShape$<$ 1, 3 $>$@{oomph::TElementShape$<$ 1, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{d2shape\_local()}{d2shape\_local()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TElementShape}{oomph\+::\+T\+Element\+Shape}}$<$ 1, 3 $>$\+::d2shape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{d2psids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Second derivatives of shape functions for specific \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element$<$1,3$>$}}\+: d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ ~\newline
+ 
+
+Definition at line 378 of file Telements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1TElementShape_3_011_00_013_01_4_a47bfa41ceb5f7df0b6ba774c653a9ea3}\label{classoomph_1_1TElementShape_3_011_00_013_01_4_a47bfa41ceb5f7df0b6ba774c653a9ea3}} 
+\index{oomph::TElementShape$<$ 1, 3 $>$@{oomph::TElementShape$<$ 1, 3 $>$}!dshape\_local@{dshape\_local}}
+\index{dshape\_local@{dshape\_local}!oomph::TElementShape$<$ 1, 3 $>$@{oomph::TElementShape$<$ 1, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_local()}{dshape\_local()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TElementShape}{oomph\+::\+T\+Element\+Shape}}$<$ 1, 3 $>$\+::dshape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Derivatives of shape functions for specific \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element$<$1,3$>$}} 
+
+
+
+Definition at line 362 of file Telements.\+h.
+
+
+
+References s, and oomph\+::\+One\+Dim\+Lagrange\+::shape().
+
+\mbox{\Hypertarget{classoomph_1_1TElementShape_3_011_00_013_01_4_a08e97f9735505002c27e524d86371e5b}\label{classoomph_1_1TElementShape_3_011_00_013_01_4_a08e97f9735505002c27e524d86371e5b}} 
+\index{oomph::TElementShape$<$ 1, 3 $>$@{oomph::TElementShape$<$ 1, 3 $>$}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
+\index{local\_coordinate\_of\_node@{local\_coordinate\_of\_node}!oomph::TElementShape$<$ 1, 3 $>$@{oomph::TElementShape$<$ 1, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{local\_coordinate\_of\_node()}{local\_coordinate\_of\_node()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TElementShape}{oomph\+::\+T\+Element\+Shape}}$<$ 1, 3 $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return local coordinates of node j. 
+
+
+
+Definition at line 317 of file Telements.\+h.
+
+
+
+References s.
+
+\mbox{\Hypertarget{classoomph_1_1TElementShape_3_011_00_013_01_4_adf2d6ccfcceccd657650bb25d685b00c}\label{classoomph_1_1TElementShape_3_011_00_013_01_4_adf2d6ccfcceccd657650bb25d685b00c}} 
+\index{oomph::TElementShape$<$ 1, 3 $>$@{oomph::TElementShape$<$ 1, 3 $>$}!shape@{shape}}
+\index{shape@{shape}!oomph::TElementShape$<$ 1, 3 $>$@{oomph::TElementShape$<$ 1, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TElementShape}{oomph\+::\+T\+Element\+Shape}}$<$ 1, 3 $>$\+::shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} function for specific \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element$<$1,3$>$}} 
+
+
+
+Definition at line 351 of file Telements.\+h.
+
+
+
+References s.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Telements_8h}{Telements.\+h}}\end{DoxyCompactItemize}

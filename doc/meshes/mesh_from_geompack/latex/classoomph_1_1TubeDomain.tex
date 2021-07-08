@@ -1,0 +1,254 @@
+\hypertarget{classoomph_1_1TubeDomain}{}\doxysection{oomph\+::Tube\+Domain Class Reference}
+\label{classoomph_1_1TubeDomain}\index{oomph::TubeDomain@{oomph::TubeDomain}}
+
+
+Tube as a domain. The entire domain must be defined by a Geom\+Object with the following convention\+: zeta\mbox{[}0\mbox{]} is the coordinate along the centreline, zeta\mbox{[}1\mbox{]} is the theta coordinate around the tube wall and zeta\mbox{[}2\mbox{]} is the radial coordinate. The outer boundary must lie at zeta\mbox{[}2\mbox{]} = 1.  
+
+
+
+
+{\ttfamily \#include $<$tube\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Tube\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1TubeDomain}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TubeDomain_a025d462a0676026e5902d07ffbb3510e}{Tube\+Domain}} (Geom\+Object $\ast$volume\+\_\+geom\+\_\+object\+\_\+pt, const Vector$<$ double $>$ \&centreline\+\_\+limits, const Vector$<$ double $>$ \&theta\+\_\+positions, const Vector$<$ double $>$ \&radius\+\_\+box, const unsigned \&nlayer)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass geometric object; start and end limit of the centreline coordinate; the theta locations marking the division between the elements of the outer ring, labelled from the lower left to the upper left in order, theta should be in the range $-\pi$ to $\pi$; the corresponding fractions of the radius at which the central box is to be placed; and the number of layers in the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TubeDomain_a39d38474ae91e479d615e315445b22c5}{Tube\+Domain}} (const \mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TubeDomain_a3731e671028bb0ea3b01e7fe2723cbbc}{operator=}} (const \mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TubeDomain_ad836e9ab146d2317ed55ee199d54b3e4}{$\sim$\+Tube\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&t, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const Vector$<$ double $>$ \&s, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1TubeDomain_a4e893ffe544f30d0160c41b2aff75d7f}{lin\+\_\+interpolate}} (const Vector$<$ double $>$ \&low, const Vector$<$ double $>$ \&high, const double \&s, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em A very little linear interpolation helper. Interpolate from the low point to the high point using the coordinate s which is assumed to run from -\/1 to 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TubeDomain_a472cea9a87841cc70a3b8a65e87f6aff}{Centreline\+\_\+limits}}
+\begin{DoxyCompactList}\small\item\em Storage for the limits of the centreline coordinate. \end{DoxyCompactList}\item 
+Vector$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TubeDomain_a893b7c0f20f3971948bf4ab04d3fe182}{Theta\+\_\+positions}}
+\begin{DoxyCompactList}\small\item\em Storage for the dividing lines on the boundary starting from the lower left and proceeding anticlockwise to the upper left. \end{DoxyCompactList}\item 
+Vector$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TubeDomain_ad70a97648fd496d9f5322e122ef907e4}{Radius\+\_\+box}}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TubeDomain_a76d77b0dde9979a92e88d3d0143bf114}{Nlayer}}
+\begin{DoxyCompactList}\small\item\em Number of axial layers. \end{DoxyCompactList}\item 
+Geom\+Object $\ast$ \mbox{\hyperlink{classoomph_1_1TubeDomain_a6dd70d59e8cd65e44444f78fbfa1f97a}{Volume\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Tube as a domain. The entire domain must be defined by a Geom\+Object with the following convention\+: zeta\mbox{[}0\mbox{]} is the coordinate along the centreline, zeta\mbox{[}1\mbox{]} is the theta coordinate around the tube wall and zeta\mbox{[}2\mbox{]} is the radial coordinate. The outer boundary must lie at zeta\mbox{[}2\mbox{]} = 1. 
+
+The domain is parametrised by five macro elements (a central box surrounded by four curved elements) in each of the nlayer slices. The labelling of the macro elements is as follows with the zeta\mbox{[}0\mbox{]} coordinate coming out of the page.
+
+\DoxyHorRuler{0}
+ $\vert$\textbackslash{} /$\vert$ $\vert$ \textbackslash{} Macro / $\vert$ $\vert$ 3 Element 3 2 $\vert$ $\vert$ \textbackslash{} / $\vert$ $\vert$ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---/ $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ 4 $\vert$ Macro $\vert$ $\vert$ $\vert$ $\vert$ Element 0 $\vert$ 2 $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- $\vert$ $\vert$ / \textbackslash{} $\vert$ $\vert$ 0 Macro 1 $\vert$ $\vert$ / Element 1 \textbackslash{} $\vert$ $\vert$ / $|$ $\vert$/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---$\vert$ 
+
+Definition at line 70 of file tube\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_a025d462a0676026e5902d07ffbb3510e}\label{classoomph_1_1TubeDomain_a025d462a0676026e5902d07ffbb3510e}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!TubeDomain@{TubeDomain}}
+\index{TubeDomain@{TubeDomain}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{TubeDomain()}{TubeDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Tube\+Domain\+::\+Tube\+Domain (\begin{DoxyParamCaption}\item[{Geom\+Object $\ast$}]{volume\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{const Vector$<$ double $>$ \&}]{centreline\+\_\+limits,  }\item[{const Vector$<$ double $>$ \&}]{theta\+\_\+positions,  }\item[{const Vector$<$ double $>$ \&}]{radius\+\_\+box,  }\item[{const unsigned \&}]{nlayer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass geometric object; start and end limit of the centreline coordinate; the theta locations marking the division between the elements of the outer ring, labelled from the lower left to the upper left in order, theta should be in the range $-\pi$ to $\pi$; the corresponding fractions of the radius at which the central box is to be placed; and the number of layers in the domain. 
+
+
+
+Definition at line 82 of file tube\+\_\+domain.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_a39d38474ae91e479d615e315445b22c5}\label{classoomph_1_1TubeDomain_a39d38474ae91e479d615e315445b22c5}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!TubeDomain@{TubeDomain}}
+\index{TubeDomain@{TubeDomain}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{TubeDomain()}{TubeDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Tube\+Domain\+::\+Tube\+Domain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 103 of file tube\+\_\+domain.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_ad836e9ab146d2317ed55ee199d54b3e4}\label{classoomph_1_1TubeDomain_ad836e9ab146d2317ed55ee199d54b3e4}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!````~TubeDomain@{$\sim$TubeDomain}}
+\index{````~TubeDomain@{$\sim$TubeDomain}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{$\sim$TubeDomain()}{~TubeDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Tube\+Domain\+::$\sim$\+Tube\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty; cleanup done in base class. 
+
+
+
+Definition at line 116 of file tube\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_a4e893ffe544f30d0160c41b2aff75d7f}\label{classoomph_1_1TubeDomain_a4e893ffe544f30d0160c41b2aff75d7f}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!lin\_interpolate@{lin\_interpolate}}
+\index{lin\_interpolate@{lin\_interpolate}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{lin\_interpolate()}{lin\_interpolate()}}
+{\footnotesize\ttfamily void oomph\+::\+Tube\+Domain\+::lin\+\_\+interpolate (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{low,  }\item[{const Vector$<$ double $>$ \&}]{high,  }\item[{const double \&}]{s,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+A very little linear interpolation helper. Interpolate from the low point to the high point using the coordinate s which is assumed to run from -\/1 to 1. 
+
+
+
+Definition at line 152 of file tube\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0}\label{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily void oomph\+::\+Tube\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{i\+\_\+macro,  }\item[{const unsigned \&}]{i\+\_\+direct,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})}
+
+
+
+Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). ~\newline
+ 
+
+Vector representation of the imacro-\/th macro element boundary idirect (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s) 
+
+Definition at line 179 of file tube\+\_\+domain.\+h.
+
+
+
+References Centreline\+\_\+limits, lin\+\_\+interpolate(), Nlayer, Radius\+\_\+box, Theta\+\_\+positions, and Volume\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_a3731e671028bb0ea3b01e7fe2723cbbc}\label{classoomph_1_1TubeDomain_a3731e671028bb0ea3b01e7fe2723cbbc}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Tube\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 109 of file tube\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_a472cea9a87841cc70a3b8a65e87f6aff}\label{classoomph_1_1TubeDomain_a472cea9a87841cc70a3b8a65e87f6aff}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Centreline\_limits@{Centreline\_limits}}
+\index{Centreline\_limits@{Centreline\_limits}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Centreline\_limits}{Centreline\_limits}}
+{\footnotesize\ttfamily Vector$<$double$>$ oomph\+::\+Tube\+Domain\+::\+Centreline\+\_\+limits\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the limits of the centreline coordinate. 
+
+
+
+Definition at line 131 of file tube\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_a76d77b0dde9979a92e88d3d0143bf114}\label{classoomph_1_1TubeDomain_a76d77b0dde9979a92e88d3d0143bf114}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Nlayer@{Nlayer}}
+\index{Nlayer@{Nlayer}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Nlayer}{Nlayer}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Tube\+Domain\+::\+Nlayer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of axial layers. 
+
+
+
+Definition at line 143 of file tube\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_ad70a97648fd496d9f5322e122ef907e4}\label{classoomph_1_1TubeDomain_ad70a97648fd496d9f5322e122ef907e4}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Radius\_box@{Radius\_box}}
+\index{Radius\_box@{Radius\_box}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Radius\_box}{Radius\_box}}
+{\footnotesize\ttfamily Vector$<$double$>$ oomph\+::\+Tube\+Domain\+::\+Radius\+\_\+box\hspace{0.3cm}{\ttfamily [private]}}
+
+Storage for the fraction of the radius at which the central box should be located corresponding to the chosen values of theta. 
+
+Definition at line 140 of file tube\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_a893b7c0f20f3971948bf4ab04d3fe182}\label{classoomph_1_1TubeDomain_a893b7c0f20f3971948bf4ab04d3fe182}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Theta\_positions@{Theta\_positions}}
+\index{Theta\_positions@{Theta\_positions}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Theta\_positions}{Theta\_positions}}
+{\footnotesize\ttfamily Vector$<$double$>$ oomph\+::\+Tube\+Domain\+::\+Theta\+\_\+positions\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the dividing lines on the boundary starting from the lower left and proceeding anticlockwise to the upper left. 
+
+
+
+Definition at line 136 of file tube\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1TubeDomain_a6dd70d59e8cd65e44444f78fbfa1f97a}\label{classoomph_1_1TubeDomain_a6dd70d59e8cd65e44444f78fbfa1f97a}} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Volume\_pt@{Volume\_pt}}
+\index{Volume\_pt@{Volume\_pt}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Volume\_pt}{Volume\_pt}}
+{\footnotesize\ttfamily Geom\+Object$\ast$ oomph\+::\+Tube\+Domain\+::\+Volume\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the domain. 
+
+
+
+Definition at line 146 of file tube\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tube__domain_8h}{tube\+\_\+domain.\+h}}\end{DoxyCompactItemize}

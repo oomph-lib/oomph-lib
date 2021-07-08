@@ -1,0 +1,439 @@
+\hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement}{}\doxysection{oomph\+::Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element Class Reference}
+\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement}\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+
+
+{\ttfamily \#include $<$linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.629108cm]{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a7661fbccf605f3affb81249aca99c19f}{Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: there are three internal values for each of the two pressure components. \end{DoxyCompactList}\item 
+virtual unsigned \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a98093f738bed5e37fd68a3c2e841963d}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+\begin{DoxyCompactList}\small\item\em Return number of values (pinned or dofs) required at local node n. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a63b75f226201b74bd4141674bcb39286}{p\+\_\+linearised\+\_\+axi\+\_\+nst}} (const unsigned \&i\+\_\+internal, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Return the pressure value i at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_abeb1140cee07405cbaa6b3038e1ec2de}{npres\+\_\+linearised\+\_\+axi\+\_\+nst}} () const
+\begin{DoxyCompactList}\small\item\em Return number of pressure values corresponding to a single pressure component. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_aad815f117651a5d45360685ca30bcc98}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&pvalue)
+\begin{DoxyCompactList}\small\item\em Fix both components of the internal pressure degrees of freedom p\+\_\+dof to pvalue. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_ad3249306342a5b2be80bf0b73c7d2fca}{p\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Overload the access function for the i-\/th component of the pressure\textquotesingle{}s local equation numbers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_ae89fb3e2f320a51ef7904b09a480ee89}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a332ee735b33a99dae78a799f369b3069}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a36138cdd6b03f179d648edeb0b0b31e1}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a72a580ae5281b5e5d88e656194cbf7b1}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a3626eb04e30bef2ff695cb6c58dc59ba}{ndof\+\_\+types}} () const
+\begin{DoxyCompactList}\small\item\em The number of \char`\"{}dof-\/blocks\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a8b78103c409fbe8842b7a25510ad15fb}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+linearised\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivatives w.\+r.\+t. global coordinates at local coordinate s (taken from geometry). Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a5de687eab43c1a20f7999983d8178347}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+linearised\+\_\+axi\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivatives w.\+r.\+t. global coordinates at the ipt-\/th integation point (taken from geometry). Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_aa04596314af005c461482c54e086f252}{pshape\+\_\+linearised\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+\begin{DoxyCompactList}\small\item\em Compute the pressure shape functions at local coordinate s. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a362d335bf1eeed38461e494645969ad1}{pshape\+\_\+linearised\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+\begin{DoxyCompactList}\small\item\em Compute the pressure shape and test functions at local coordinate s. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a67af2873ed8775ce5916590a932e5ec9}{P\+\_\+linearised\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Internal indices that indicate at which internal data the pressure values are stored. We note that there are two pressure values, corresponding to the functions P$^\wedge$C(r,z,t) and P$^\wedge$S(r,z,t) which multiply the cosine and sine terms respectively. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const unsigned \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a0d6c3205a5b72d828abe528491ab1311}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em Static array of ints to hold required number of variables at nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Crouzeix-\/\+Raviart elements are Navier-\/\+Stokes elements with quadratic interpolation for velocities and positions, but a discontinuous linear pressure interpolation 
+
+Definition at line 472 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a7661fbccf605f3affb81249aca99c19f}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a7661fbccf605f3affb81249aca99c19f}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!LinearisedAxisymmetricQCrouzeixRaviartElement@{LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\index{LinearisedAxisymmetricQCrouzeixRaviartElement@{LinearisedAxisymmetricQCrouzeixRaviartElement}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{LinearisedAxisymmetricQCrouzeixRaviartElement()}{LinearisedAxisymmetricQCrouzeixRaviartElement()}}
+{\footnotesize\ttfamily oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: there are three internal values for each of the two pressure components. 
+
+
+
+Definition at line 518 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), Data, i, and P\+\_\+linearised\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a5de687eab43c1a20f7999983d8178347}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a5de687eab43c1a20f7999983d8178347}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_axi\_nst}}
+\index{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_axi\_nst}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_axi\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_linearised\_axi\_nst()}}
+{\footnotesize\ttfamily double oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+linearised\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Velocity shape and test functions and their derivatives w.\+r.\+t. global coordinates at the ipt-\/th integation point (taken from geometry). Return Jacobian of mapping between local and global coordinates. 
+
+Derivatives of the shape functions and test functions w.\+r.\+t. global (Eulerian) coordinates at the ipt-\/th integration point. Return Jacobian of mapping between local and global coordinates. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_aa42c291276849d54300289506e8c365b}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 629 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), and i.
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a8b78103c409fbe8842b7a25510ad15fb}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a8b78103c409fbe8842b7a25510ad15fb}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!dshape\_and\_dtest\_eulerian\_linearised\_axi\_nst@{dshape\_and\_dtest\_eulerian\_linearised\_axi\_nst}}
+\index{dshape\_and\_dtest\_eulerian\_linearised\_axi\_nst@{dshape\_and\_dtest\_eulerian\_linearised\_axi\_nst}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_linearised\_axi\_nst()}{dshape\_and\_dtest\_eulerian\_linearised\_axi\_nst()}}
+{\footnotesize\ttfamily double oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+linearised\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Velocity shape and test functions and their derivatives w.\+r.\+t. global coordinates at local coordinate s (taken from geometry). Return Jacobian of mapping between local and global coordinates. 
+
+Derivatives of the shape functions and test functions w.\+r.\+t. global (Eulerian) coordinates at local coordinate s. Return Jacobian of mapping between local and global coordinates. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_a0c2247614d1d1414dc53cde8e755e836}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 602 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), and i.
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_aad815f117651a5d45360685ca30bcc98}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_aad815f117651a5d45360685ca30bcc98}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p\+\_\+dof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fix both components of the internal pressure degrees of freedom p\+\_\+dof to pvalue. 
+
+
+
+Definition at line 551 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), P\+\_\+linearised\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a3626eb04e30bef2ff695cb6c58dc59ba}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a3626eb04e30bef2ff695cb6c58dc59ba}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!ndof\_types@{ndof\_types}}
+\index{ndof\_types@{ndof\_types}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The number of \char`\"{}dof-\/blocks\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870597b35dcf1c780710b9a56}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 588 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_abeb1140cee07405cbaa6b3038e1ec2de}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_abeb1140cee07405cbaa6b3038e1ec2de}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!npres\_linearised\_axi\_nst@{npres\_linearised\_axi\_nst}}
+\index{npres\_linearised\_axi\_nst@{npres\_linearised\_axi\_nst}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{npres\_linearised\_axi\_nst()}{npres\_linearised\_axi\_nst()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::npres\+\_\+linearised\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return number of pressure values corresponding to a single pressure component. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_aad6f1582b4516aae4fe0ce3c9e2d16c2}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 547 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), and oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a36138cdd6b03f179d648edeb0b0b31e1}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a36138cdd6b03f179d648edeb0b0b31e1}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!output@{output}}
+\index{output@{output}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_a11528829faa67968adcb46ad7cfa1fb2}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 579 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a72a580ae5281b5e5d88e656194cbf7b1}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a72a580ae5281b5e5d88e656194cbf7b1}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!output@{output}}
+\index{output@{output}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_a19ee5f4d8f6e187300f135b3eb69d194}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 583 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_ae89fb3e2f320a51ef7904b09a480ee89}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_ae89fb3e2f320a51ef7904b09a480ee89}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!output@{output}}
+\index{output@{output}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_a70e8f2426b53160afabe2f6dce78b920}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 571 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a332ee735b33a99dae78a799f369b3069}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a332ee735b33a99dae78a799f369b3069}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!output@{output}}
+\index{output@{output}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_af91220377d90bc7506327e4f1de9e42a}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 575 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a63b75f226201b74bd4141674bcb39286}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a63b75f226201b74bd4141674bcb39286}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!p\_linearised\_axi\_nst@{p\_linearised\_axi\_nst}}
+\index{p\_linearised\_axi\_nst@{p\_linearised\_axi\_nst}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{p\_linearised\_axi\_nst()}{p\_linearised\_axi\_nst()}}
+{\footnotesize\ttfamily double oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+linearised\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i\+\_\+internal,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the pressure value i at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_aed0485a01052ffe2a5c9f36d6dd07da4}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 538 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), P\+\_\+linearised\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, and oomph\+::\+Data\+::value().
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_ad3249306342a5b2be80bf0b73c7d2fca}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_ad3249306342a5b2be80bf0b73c7d2fca}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!p\_local\_eqn@{p\_local\_eqn}}
+\index{p\_local\_eqn@{p\_local\_eqn}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}}
+{\footnotesize\ttfamily int oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the access function for the i-\/th component of the pressure\textquotesingle{}s local equation numbers. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_a78d4ea2b8f4d23f8e942dc7bcb3fa4c5}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 565 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn(), n, and P\+\_\+linearised\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index.
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_aa04596314af005c461482c54e086f252}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_aa04596314af005c461482c54e086f252}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!pshape\_linearised\_axi\_nst@{pshape\_linearised\_axi\_nst}}
+\index{pshape\_linearised\_axi\_nst@{pshape\_linearised\_axi\_nst}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{pshape\_linearised\_axi\_nst()}{pshape\_linearised\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::pshape\+\_\+linearised\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Compute the pressure shape functions at local coordinate s. 
+
+Pressure shape functions. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_a86dd84e88a2f10e33f61b1a09c8aefd7}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 655 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References s.
+
+
+
+Referenced by oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::interpolating\+\_\+basis(), and pshape\+\_\+linearised\+\_\+axi\+\_\+nst().
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a362d335bf1eeed38461e494645969ad1}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a362d335bf1eeed38461e494645969ad1}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!pshape\_linearised\_axi\_nst@{pshape\_linearised\_axi\_nst}}
+\index{pshape\_linearised\_axi\_nst@{pshape\_linearised\_axi\_nst}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{pshape\_linearised\_axi\_nst()}{pshape\_linearised\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::pshape\+\_\+linearised\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Compute the pressure shape and test functions at local coordinate s. 
+
+Define the pressure shape and test functions. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearisedAxisymmetricNavierStokesEquations_ae2f6cf4a374c45a35ac1bea04ffced1f}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+
+
+
+Definition at line 666 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+References i, pshape\+\_\+linearised\+\_\+axi\+\_\+nst(), and s.
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a98093f738bed5e37fd68a3c2e841963d}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a98093f738bed5e37fd68a3c2e841963d}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!required\_nvalue@{required\_nvalue}}
+\index{required\_nvalue@{required\_nvalue}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return number of values (pinned or dofs) required at local node n. 
+
+Number of values (pinned or dofs) required at node n. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 1814 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+
+
+
+References Initial\+\_\+\+Nvalue, and n.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a0d6c3205a5b72d828abe528491ab1311}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a0d6c3205a5b72d828abe528491ab1311}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!Initial\_Nvalue@{Initial\_Nvalue}}
+\index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+Initial\+\_\+\+Nvalue\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Static array of ints to hold required number of variables at nodes. 
+
+
+
+Definition at line 479 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+Referenced by required\+\_\+nvalue().
+
+\mbox{\Hypertarget{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a67af2873ed8775ce5916590a932e5ec9}\label{classoomph_1_1LinearisedAxisymmetricQCrouzeixRaviartElement_a67af2873ed8775ce5916590a932e5ec9}} 
+\index{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}!P\_linearised\_axi\_nst\_internal\_index@{P\_linearised\_axi\_nst\_internal\_index}}
+\index{P\_linearised\_axi\_nst\_internal\_index@{P\_linearised\_axi\_nst\_internal\_index}!oomph::LinearisedAxisymmetricQCrouzeixRaviartElement@{oomph::LinearisedAxisymmetricQCrouzeixRaviartElement}}
+\doxysubsubsection{\texorpdfstring{P\_linearised\_axi\_nst\_internal\_index}{P\_linearised\_axi\_nst\_internal\_index}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+P\+\_\+linearised\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Internal indices that indicate at which internal data the pressure values are stored. We note that there are two pressure values, corresponding to the functions P$^\wedge$C(r,z,t) and P$^\wedge$S(r,z,t) which multiply the cosine and sine terms respectively. 
+
+
+
+Definition at line 487 of file linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+
+
+
+Referenced by fix\+\_\+pressure(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element(), p\+\_\+linearised\+\_\+axi\+\_\+nst(), p\+\_\+local\+\_\+eqn(), oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), and oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{linearised__axisym__navier__stokes__elements_8h}{linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{linearised__axisym__navier__stokes__elements_8cc}{linearised\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

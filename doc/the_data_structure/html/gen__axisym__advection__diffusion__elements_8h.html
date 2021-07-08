@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: gen_axisym_advection_diffusion_elements.h File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9d784b0946b4c68a4b7765d67abc38a5.html">axisym_advection_diffusion</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">gen_axisym_advection_diffusion_elements.h File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="gen__axisym__advection__diffusion__elements_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQGeneralisedAxisymAdvectionDiffusionElement.html">QGeneralisedAxisymAdvectionDiffusionElement&lt; NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classQGeneralisedAxisymAdvectionDiffusionElement.html" title="QGeneralisedAxisymAdvectionDiffusionElement elements are linear/quadrilateral/brick-shaped Advection ...">QGeneralisedAxisymAdvectionDiffusionElement</a> elements are linear/quadrilateral/brick-shaped Advection Diffusion elements with isoparametric interpolation for the function.  <a href="classQGeneralisedAxisymAdvectionDiffusionElement.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFaceGeometry_3_01QGeneralisedAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4.html">FaceGeometry&lt; QGeneralisedAxisymAdvectionDiffusionElement&lt; NNODE_1D &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Face geometry for the <a class="el" href="classQGeneralisedAxisymAdvectionDiffusionElement.html" title="QGeneralisedAxisymAdvectionDiffusionElement elements are linear/quadrilateral/brick-shaped Advection ...">QGeneralisedAxisymAdvectionDiffusionElement</a> elements: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges.  <a href="classFaceGeometry_3_01QGeneralisedAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceoomph"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html">oomph</a></td></tr>
+<tr class="memdesc:namespaceoomph"><td class="mdescLeft">&#160;</td><td class="mdescRight">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a03ba213638004c56b6417e159f16892f"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a03ba213638004c56b6417e159f16892f">oomph::u_index_cons_axisym_adv_diff</a> () const</td></tr>
+<tr class="memdesc:a03ba213638004c56b6417e159f16892f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class for all elements that solve the Advection Diffusion equations in conservative form using isoparametric elements in a cylindrical polar coordinate system. \mbox{\boldmath$\nabla\cdot$} \left( Pe \mbox{\boldmath$w$}(\mbox{\boldmath$x$}) u.  <a href="namespaceoomph.html#a03ba213638004c56b6417e159f16892f">More...</a><br /></td></tr>
+<tr class="separator:a03ba213638004c56b6417e159f16892f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae18c2f8b384a4a115d68ee5cbcdc84a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#aae18c2f8b384a4a115d68ee5cbcdc84a">oomph::du_dt_cons_axisym_adv_diff</a> (const unsigned &amp;<a class="el" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>) const</td></tr>
+<tr class="memdesc:aae18c2f8b384a4a115d68ee5cbcdc84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">du/dt at local node n. <br  />
+  <a href="namespaceoomph.html#aae18c2f8b384a4a115d68ee5cbcdc84a">More...</a><br /></td></tr>
+<tr class="separator:aae18c2f8b384a4a115d68ee5cbcdc84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac9e9b485dd3b82c6c0b42989017c57f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#aac9e9b485dd3b82c6c0b42989017c57f">oomph::disable_ALE</a> ()</td></tr>
+<tr class="memdesc:aac9e9b485dd3b82c6c0b42989017c57f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable ALE, i.e. assert the mesh is not moving &ndash; you do this at your own risk!  <a href="namespaceoomph.html#aac9e9b485dd3b82c6c0b42989017c57f">More...</a><br /></td></tr>
+<tr class="separator:aac9e9b485dd3b82c6c0b42989017c57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad37abf393b70f7aa747525923469a08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#aad37abf393b70f7aa747525923469a08">oomph::enable_ALE</a> ()</td></tr>
+<tr class="memdesc:aad37abf393b70f7aa747525923469a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re-)enable ALE, i.e. take possible mesh motion into account when evaluating the time-derivative. Note: By default, ALE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. <br  />
+  <a href="namespaceoomph.html#aad37abf393b70f7aa747525923469a08">More...</a><br /></td></tr>
+<tr class="separator:aad37abf393b70f7aa747525923469a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2473930e2634d673e2a3bed63b6851f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a2473930e2634d673e2a3bed63b6851f0">oomph::output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:a2473930e2634d673e2a3bed63b6851f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output with default number of plot points.  <a href="namespaceoomph.html#a2473930e2634d673e2a3bed63b6851f0">More...</a><br /></td></tr>
+<tr class="separator:a2473930e2634d673e2a3bed63b6851f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae53ff6c2852d72b8aa8801e40848e356"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#ae53ff6c2852d72b8aa8801e40848e356">oomph::output</a> (std::ostream &amp;outfile, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:ae53ff6c2852d72b8aa8801e40848e356"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output FE representation of soln: r,z,u at nplot^2 plot points.  <a href="namespaceoomph.html#ae53ff6c2852d72b8aa8801e40848e356">More...</a><br /></td></tr>
+<tr class="separator:ae53ff6c2852d72b8aa8801e40848e356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37b4754a63827566176ebfc2f3a2c601"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a37b4754a63827566176ebfc2f3a2c601">oomph::output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:a37b4754a63827566176ebfc2f3a2c601"><td class="mdescLeft">&#160;</td><td class="mdescRight">C_style output with default number of plot points.  <a href="namespaceoomph.html#a37b4754a63827566176ebfc2f3a2c601">More...</a><br /></td></tr>
+<tr class="separator:a37b4754a63827566176ebfc2f3a2c601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cb50c6adc7ee4a17c17a567b645f6db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a3cb50c6adc7ee4a17c17a567b645f6db">oomph::output</a> (FILE *file_pt, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a3cb50c6adc7ee4a17c17a567b645f6db"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output FE representation of soln: r,z,u at n_plot^2 plot points.  <a href="namespaceoomph.html#a3cb50c6adc7ee4a17c17a567b645f6db">More...</a><br /></td></tr>
+<tr class="separator:a3cb50c6adc7ee4a17c17a567b645f6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af34df05c5bb9eca3576db493fb7d55ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#af34df05c5bb9eca3576db493fb7d55ca">oomph::output_fct</a> (std::ostream &amp;outfile, const unsigned &amp;nplot, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)</td></tr>
+<tr class="memdesc:af34df05c5bb9eca3576db493fb7d55ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output exact soln: r,z,u_exact at nplot^2 plot points.  <a href="namespaceoomph.html#af34df05c5bb9eca3576db493fb7d55ca">More...</a><br /></td></tr>
+<tr class="separator:af34df05c5bb9eca3576db493fb7d55ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03bf88dd9de6857057781501ca5c066f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a03bf88dd9de6857057781501ca5c066f">oomph::output_fct</a> (std::ostream &amp;outfile, const unsigned &amp;nplot, const double &amp;time, FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)</td></tr>
+<tr class="memdesc:a03bf88dd9de6857057781501ca5c066f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output exact soln: r,z,,u_exact at nplot^2 plot points (dummy time-dependent version to keep intel compiler happy)  <a href="namespaceoomph.html#a03bf88dd9de6857057781501ca5c066f">More...</a><br /></td></tr>
+<tr class="separator:a03bf88dd9de6857057781501ca5c066f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99ee82405593cbf515785fa2116ec2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#ae99ee82405593cbf515785fa2116ec2a">oomph::compute_error</a> (std::ostream &amp;outfile, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt, double &amp;error, double &amp;norm)</td></tr>
+<tr class="memdesc:ae99ee82405593cbf515785fa2116ec2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get error against and norm of exact solution.  <a href="namespaceoomph.html#ae99ee82405593cbf515785fa2116ec2a">More...</a><br /></td></tr>
+<tr class="separator:ae99ee82405593cbf515785fa2116ec2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac84166e8fd13dcb55670244c618a2bab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#ac84166e8fd13dcb55670244c618a2bab">oomph::compute_error</a> (std::ostream &amp;outfile, FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt, const double &amp;time, double &amp;error, double &amp;norm)</td></tr>
+<tr class="memdesc:ac84166e8fd13dcb55670244c618a2bab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy, time dependent error checker.  <a href="namespaceoomph.html#ac84166e8fd13dcb55670244c618a2bab">More...</a><br /></td></tr>
+<tr class="separator:ac84166e8fd13dcb55670244c618a2bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a816fb1d612ecf4c4f42cecc69d5c636f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a816fb1d612ecf4c4f42cecc69d5c636f">oomph::integrate_u</a> ()</td></tr>
+<tr class="memdesc:a816fb1d612ecf4c4f42cecc69d5c636f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate the concentration over the element.  <a href="namespaceoomph.html#a816fb1d612ecf4c4f42cecc69d5c636f">More...</a><br /></td></tr>
+<tr class="separator:a816fb1d612ecf4c4f42cecc69d5c636f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb31b697ac413871cfe74e70c3a60b1"><td class="memItemLeft" align="right" valign="top">GeneralisedAxisymAdvectionDiffusionSourceFctPt &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#aaeb31b697ac413871cfe74e70c3a60b1">oomph::source_fct_pt</a> ()</td></tr>
+<tr class="memdesc:aaeb31b697ac413871cfe74e70c3a60b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to source function.  <a href="namespaceoomph.html#aaeb31b697ac413871cfe74e70c3a60b1">More...</a><br /></td></tr>
+<tr class="separator:aaeb31b697ac413871cfe74e70c3a60b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09679a76034a175cfc8a098dda6621c1"><td class="memItemLeft" align="right" valign="top">GeneralisedAxisymAdvectionDiffusionWindFctPt &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a09679a76034a175cfc8a098dda6621c1">oomph::wind_fct_pt</a> ()</td></tr>
+<tr class="memdesc:a09679a76034a175cfc8a098dda6621c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to wind function.  <a href="namespaceoomph.html#a09679a76034a175cfc8a098dda6621c1">More...</a><br /></td></tr>
+<tr class="separator:a09679a76034a175cfc8a098dda6621c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a664dfd26d500b1a6af69253d6265366b"><td class="memItemLeft" align="right" valign="top">GeneralisedAxisymAdvectionDiffusionWindFctPt &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a664dfd26d500b1a6af69253d6265366b">oomph::conserved_wind_fct_pt</a> ()</td></tr>
+<tr class="memdesc:a664dfd26d500b1a6af69253d6265366b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to additional (conservative) wind function.  <a href="namespaceoomph.html#a664dfd26d500b1a6af69253d6265366b">More...</a><br /></td></tr>
+<tr class="separator:a664dfd26d500b1a6af69253d6265366b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dd5f52cf4ab589e9675a8b36fcc0e83"><td class="memItemLeft" align="right" valign="top">GeneralisedAxisymAdvectionDiffusionDiffFctPt &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a6dd5f52cf4ab589e9675a8b36fcc0e83">oomph::diff_fct_pt</a> ()</td></tr>
+<tr class="memdesc:a6dd5f52cf4ab589e9675a8b36fcc0e83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Pointer to diffusion function.  <a href="namespaceoomph.html#a6dd5f52cf4ab589e9675a8b36fcc0e83">More...</a><br /></td></tr>
+<tr class="separator:a6dd5f52cf4ab589e9675a8b36fcc0e83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc45e5b8613b10bb546b3400a996d8a2"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#afc45e5b8613b10bb546b3400a996d8a2">oomph::pe</a> () const</td></tr>
+<tr class="memdesc:afc45e5b8613b10bb546b3400a996d8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peclet number.  <a href="namespaceoomph.html#afc45e5b8613b10bb546b3400a996d8a2">More...</a><br /></td></tr>
+<tr class="separator:afc45e5b8613b10bb546b3400a996d8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92163fa29e433b796a345137e525b3af"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a92163fa29e433b796a345137e525b3af">oomph::pe_pt</a> ()</td></tr>
+<tr class="memdesc:a92163fa29e433b796a345137e525b3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Peclet number.  <a href="namespaceoomph.html#a92163fa29e433b796a345137e525b3af">More...</a><br /></td></tr>
+<tr class="separator:a92163fa29e433b796a345137e525b3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f4533f76fda86b1fe191b46ae452971"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a7f4533f76fda86b1fe191b46ae452971">oomph::pe_st</a> () const</td></tr>
+<tr class="memdesc:a7f4533f76fda86b1fe191b46ae452971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peclet number multiplied by Strouhal number.  <a href="namespaceoomph.html#a7f4533f76fda86b1fe191b46ae452971">More...</a><br /></td></tr>
+<tr class="separator:a7f4533f76fda86b1fe191b46ae452971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a996fd022407db74d470a6989afe05add"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a996fd022407db74d470a6989afe05add">oomph::pe_st_pt</a> ()</td></tr>
+<tr class="memdesc:a996fd022407db74d470a6989afe05add"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Peclet number multipled by Strouha number.  <a href="namespaceoomph.html#a996fd022407db74d470a6989afe05add">More...</a><br /></td></tr>
+<tr class="separator:a996fd022407db74d470a6989afe05add"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0cdf7be6b3844c558f937572c4dfb5c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#aa0cdf7be6b3844c558f937572c4dfb5c">oomph::get_source_cons_axisym_adv_diff</a> (const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;x, double &amp;source) const</td></tr>
+<tr class="memdesc:aa0cdf7be6b3844c558f937572c4dfb5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-physics problems where the strength of the source function might be determined by another system of equations <br  />
+  <a href="namespaceoomph.html#aa0cdf7be6b3844c558f937572c4dfb5c">More...</a><br /></td></tr>
+<tr class="separator:aa0cdf7be6b3844c558f937572c4dfb5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6e74f36ccca7009265f81f333c4b5df"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#aa6e74f36ccca7009265f81f333c4b5df">oomph::get_wind_cons_axisym_adv_diff</a> (const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;wind) const</td></tr>
+<tr class="memdesc:aa6e74f36ccca7009265f81f333c4b5df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-physics problems where the wind function might be determined by another system of equations <br  />
+  <a href="namespaceoomph.html#aa6e74f36ccca7009265f81f333c4b5df">More...</a><br /></td></tr>
+<tr class="separator:aa6e74f36ccca7009265f81f333c4b5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82958379ca7e57f9f8c3f273eb83f55c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a82958379ca7e57f9f8c3f273eb83f55c">oomph::get_conserved_wind_cons_axisym_adv_diff</a> (const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;wind) const</td></tr>
+<tr class="memdesc:a82958379ca7e57f9f8c3f273eb83f55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get additional (conservative) wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-physics problems where the wind function might be determined by another system of equations <br  />
+  <a href="namespaceoomph.html#a82958379ca7e57f9f8c3f273eb83f55c">More...</a><br /></td></tr>
+<tr class="separator:a82958379ca7e57f9f8c3f273eb83f55c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e1c951324dd766cdaddac0eb376f78f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a2e1c951324dd766cdaddac0eb376f78f">oomph::get_diff_cons_axisym_adv_diff</a> (const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, const Vector&lt; double &gt; &amp;x, DenseMatrix&lt; double &gt; &amp;D) const</td></tr>
+<tr class="memdesc:a2e1c951324dd766cdaddac0eb376f78f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get diffusivity tensor at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-physics problems where the wind function might be determined by another system of equations <br  />
+  <a href="namespaceoomph.html#a2e1c951324dd766cdaddac0eb376f78f">More...</a><br /></td></tr>
+<tr class="separator:a2e1c951324dd766cdaddac0eb376f78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af24fd3b21fc45dcbe4b87f8e4224bd15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#af24fd3b21fc45dcbe4b87f8e4224bd15">oomph::get_flux</a> (const Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, Vector&lt; double &gt; &amp;flux) const</td></tr>
+<tr class="memdesc:af24fd3b21fc45dcbe4b87f8e4224bd15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get flux: <img class="formulaInl" alt="$\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i $" src="form_37.png"/>.  <a href="namespaceoomph.html#af24fd3b21fc45dcbe4b87f8e4224bd15">More...</a><br /></td></tr>
+<tr class="separator:af24fd3b21fc45dcbe4b87f8e4224bd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bbeae059a0f06fc51b97fd76be99067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a6bbeae059a0f06fc51b97fd76be99067">oomph::get_total_flux</a> (const Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, Vector&lt; double &gt; &amp;total_flux) const</td></tr>
+<tr class="memdesc:a6bbeae059a0f06fc51b97fd76be99067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get flux: <img class="formulaInl" alt="$\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i $" src="form_37.png"/>.  <a href="namespaceoomph.html#a6bbeae059a0f06fc51b97fd76be99067">More...</a><br /></td></tr>
+<tr class="separator:a6bbeae059a0f06fc51b97fd76be99067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4221193ecad909a3bf5cfcec81202e39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a4221193ecad909a3bf5cfcec81202e39">oomph::fill_in_contribution_to_residuals</a> (Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td></tr>
+<tr class="memdesc:a4221193ecad909a3bf5cfcec81202e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residual vector (wrapper)  <a href="namespaceoomph.html#a4221193ecad909a3bf5cfcec81202e39">More...</a><br /></td></tr>
+<tr class="separator:a4221193ecad909a3bf5cfcec81202e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96a6d71e6bedf75a2fb9051be0644f98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a96a6d71e6bedf75a2fb9051be0644f98">oomph::fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a96a6d71e6bedf75a2fb9051be0644f98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residual vector and the element Jacobian matrix (wrapper)  <a href="namespaceoomph.html#a96a6d71e6bedf75a2fb9051be0644f98">More...</a><br /></td></tr>
+<tr class="separator:a96a6d71e6bedf75a2fb9051be0644f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a572a47ad179fe5efba31f8f0a67244"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a2a572a47ad179fe5efba31f8f0a67244">oomph::fill_in_contribution_to_jacobian_and_mass_matrix</a> (Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, DenseMatrix&lt; double &gt; &amp;jacobian, DenseMatrix&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="separator:a2a572a47ad179fe5efba31f8f0a67244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24e114f1df46d56b50a57474d27e3dbb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a24e114f1df46d56b50a57474d27e3dbb">oomph::interpolated_u_cons_axisym_adv_diff</a> (const Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>) const</td></tr>
+<tr class="memdesc:a24e114f1df46d56b50a57474d27e3dbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return FE representation of function value u(s) at local coordinate s.  <a href="namespaceoomph.html#a24e114f1df46d56b50a57474d27e3dbb">More...</a><br /></td></tr>
+<tr class="separator:a24e114f1df46d56b50a57474d27e3dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a5cfce839009bef49cce08492ec6aeb"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a6a5cfce839009bef49cce08492ec6aeb">oomph::self_test</a> ()</td></tr>
+<tr class="memdesc:a6a5cfce839009bef49cce08492ec6aeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Self-test: Return 0 for OK.  <a href="namespaceoomph.html#a6a5cfce839009bef49cce08492ec6aeb">More...</a><br /></td></tr>
+<tr class="separator:a6a5cfce839009bef49cce08492ec6aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af332902ab67ff475277342a07dcb8a9b"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#af332902ab67ff475277342a07dcb8a9b">oomph::dshape_and_dtest_eulerian_cons_axisym_adv_diff</a> (const Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#acdf437512dc428cd2c5e8b3aa8b92896">s</a>, Shape &amp;psi, DShape &amp;dpsidx, Shape &amp;test, DShape &amp;dtestdx) const =0</td></tr>
+<tr class="memdesc:af332902ab67ff475277342a07dcb8a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shape/test functions and derivs w.r.t. to global coords at local coord. s; return Jacobian of mapping.  <a href="namespaceoomph.html#af332902ab67ff475277342a07dcb8a9b">More...</a><br /></td></tr>
+<tr class="separator:af332902ab67ff475277342a07dcb8a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1302011e0b30d149dd485a356f901289"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a1302011e0b30d149dd485a356f901289">oomph::dshape_and_dtest_eulerian_at_knot_cons_axisym_adv_diff</a> (const unsigned &amp;ipt, Shape &amp;psi, DShape &amp;dpsidx, Shape &amp;test, DShape &amp;dtestdx) const =0</td></tr>
+<tr class="memdesc:a1302011e0b30d149dd485a356f901289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shape/test functions and derivs w.r.t. to global coords at integration point ipt; return Jacobian of mapping.  <a href="namespaceoomph.html#a1302011e0b30d149dd485a356f901289">More...</a><br /></td></tr>
+<tr class="separator:a1302011e0b30d149dd485a356f901289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d874a2081564c9490111b5fb936e46d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a7d874a2081564c9490111b5fb936e46d">oomph::fill_in_generic_residual_contribution_cons_axisym_adv_diff</a> (Vector&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, DenseMatrix&lt; double &gt; &amp;jacobian, DenseMatrix&lt; double &gt; &amp;mass_matrix, unsigned flag)</td></tr>
+<tr class="memdesc:a7d874a2081564c9490111b5fb936e46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residual vector only (if flag=and/or element Jacobian matrix <br  />
+  <a href="namespaceoomph.html#a7d874a2081564c9490111b5fb936e46d">More...</a><br /></td></tr>
+<tr class="separator:a7d874a2081564c9490111b5fb936e46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ae8c74390a52fa2e57b6ef898649fdfff"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#ae8c74390a52fa2e57b6ef898649fdfff">oomph::Pe_pt</a></td></tr>
+<tr class="memdesc:ae8c74390a52fa2e57b6ef898649fdfff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to global Peclet number.  <a href="namespaceoomph.html#ae8c74390a52fa2e57b6ef898649fdfff">More...</a><br /></td></tr>
+<tr class="separator:ae8c74390a52fa2e57b6ef898649fdfff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54db0b0b7bccb80aa5110f4d86758dd5"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a54db0b0b7bccb80aa5110f4d86758dd5">oomph::PeSt_pt</a></td></tr>
+<tr class="memdesc:a54db0b0b7bccb80aa5110f4d86758dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to global Peclet number multiplied by Strouhal number.  <a href="namespaceoomph.html#a54db0b0b7bccb80aa5110f4d86758dd5">More...</a><br /></td></tr>
+<tr class="separator:a54db0b0b7bccb80aa5110f4d86758dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a051e9244ca4fd64439699c8e7e7bcf09"><td class="memItemLeft" align="right" valign="top">GeneralisedAxisymAdvectionDiffusionSourceFctPt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a051e9244ca4fd64439699c8e7e7bcf09">oomph::Source_fct_pt</a></td></tr>
+<tr class="memdesc:a051e9244ca4fd64439699c8e7e7bcf09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to source function:  <a href="namespaceoomph.html#a051e9244ca4fd64439699c8e7e7bcf09">More...</a><br /></td></tr>
+<tr class="separator:a051e9244ca4fd64439699c8e7e7bcf09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9065bf486c804884097785e02883f377"><td class="memItemLeft" align="right" valign="top">GeneralisedAxisymAdvectionDiffusionWindFctPt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a9065bf486c804884097785e02883f377">oomph::Wind_fct_pt</a></td></tr>
+<tr class="memdesc:a9065bf486c804884097785e02883f377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to wind function:  <a href="namespaceoomph.html#a9065bf486c804884097785e02883f377">More...</a><br /></td></tr>
+<tr class="separator:a9065bf486c804884097785e02883f377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2453d7b0c71b0b9039b1f025226fad27"><td class="memItemLeft" align="right" valign="top">GeneralisedAxisymAdvectionDiffusionWindFctPt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a2453d7b0c71b0b9039b1f025226fad27">oomph::Conserved_wind_fct_pt</a></td></tr>
+<tr class="memdesc:a2453d7b0c71b0b9039b1f025226fad27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to additional (conservative) wind function:  <a href="namespaceoomph.html#a2453d7b0c71b0b9039b1f025226fad27">More...</a><br /></td></tr>
+<tr class="separator:a2453d7b0c71b0b9039b1f025226fad27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a213e9eeb52fa6ea98254de45f1ba4f98"><td class="memItemLeft" align="right" valign="top">GeneralisedAxisymAdvectionDiffusionDiffFctPt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a213e9eeb52fa6ea98254de45f1ba4f98">oomph::Diff_fct_pt</a></td></tr>
+<tr class="memdesc:a213e9eeb52fa6ea98254de45f1ba4f98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to diffusivity funciton.  <a href="namespaceoomph.html#a213e9eeb52fa6ea98254de45f1ba4f98">More...</a><br /></td></tr>
+<tr class="separator:a213e9eeb52fa6ea98254de45f1ba4f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5302eaf07e49e53147c42e2e6450eff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#ae5302eaf07e49e53147c42e2e6450eff">oomph::ALE_is_disabled</a></td></tr>
+<tr class="memdesc:ae5302eaf07e49e53147c42e2e6450eff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to indicate if ALE formulation is disabled when time-derivatives are computed. Only set to false if you're sure that the mesh is stationary.  <a href="namespaceoomph.html#ae5302eaf07e49e53147c42e2e6450eff">More...</a><br /></td></tr>
+<tr class="separator:ae5302eaf07e49e53147c42e2e6450eff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76008dfc377a12c79c93b9c506577c63"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html#a76008dfc377a12c79c93b9c506577c63">oomph::Default_peclet_number</a></td></tr>
+<tr class="memdesc:a76008dfc377a12c79c93b9c506577c63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static default value for the Peclet number.  <a href="namespaceoomph.html#a76008dfc377a12c79c93b9c506577c63">More...</a><br /></td></tr>
+<tr class="separator:a76008dfc377a12c79c93b9c506577c63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members - Functions</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>actions_after_adapt()
+: <a class="el" href="classBubbleInChannelProblem.html#a67d2650bfca3775800784379938a35bc">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#af5cc96bc60c2fd2386d16eac3ee5f83a">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>actions_after_newton_solve()
+: <a class="el" href="classBubbleInChannelProblem.html#a566685b0a4f5dda91adbf9c781f9eafb">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#ab38a14018a4093afe7cc0d9db9f1fc3b">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>actions_before_adapt()
+: <a class="el" href="classBubbleInChannelProblem.html#aae0753340720453a44622c4dbb8807fb">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#a4d4ae7fdef14f9838a46cc45278c7920">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>actions_before_newton_solve()
+: <a class="el" href="classBubbleInChannelProblem.html#aef53cd0e961bd899e50806ec39f5a3fd">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#a0e229343783fd73768dfa0a2672e9ad1">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_b"></a>- b -</h3><ul>
+<li>BubbleInChannelProblem()
+: <a class="el" href="classBubbleInChannelProblem.html#a04bf2f20c65e85228fac381d786bedad">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>complete_problem_setup()
+: <a class="el" href="classBubbleInChannelProblem.html#a7b3c042477f4ee4e62dd1e00e1a480f8">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#a3a868202b34b195a78298b4eaf7d3aff">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>compute_error_estimate()
+: <a class="el" href="classBubbleInChannelProblem.html#ad400025c03926745e230e5f654c28562">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#a49944969eb8dc6892cab3f1a9a2cb382">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>create_free_surface_elements()
+: <a class="el" href="classBubbleInChannelProblem.html#a9a5a34516352db3153baa52ccb204b62">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#a73b989e3bedbd3630f576b0dba0f724f">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>create_volume_constraint_elements()
+: <a class="el" href="classBubbleInChannelProblem.html#ae1ab79ef810211e337127878876c0fa6">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#a53b96cd50b4e6c9bee294b8fb7dd51bd">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_d"></a>- d -</h3><ul>
+<li>delete_free_surface_elements()
+: <a class="el" href="classBubbleInChannelProblem.html#af660f1a89b325e6da5d040f0abf837b0">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#a4463a1b341429f5a2c84a493aabb3a14">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>delete_volume_constraint_elements()
+: <a class="el" href="classBubbleInChannelProblem.html#aecf64bacdf8735910d7dc7d747e1737a">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#aec42cdf762f8b64c064db84df7f40f0a">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>doc_solution()
+: <a class="el" href="classBubbleInChannelProblem.html#a6a68ee06024107d7b3f92059365a06d1">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+, <a class="el" href="classDropInChannelProblem.html#a3bcebc0cd731b75db441f3e1d62296ae">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>DropInChannelProblem()
+: <a class="el" href="classDropInChannelProblem.html#aad6e79f5560a5bfcba325f6558afb4ff">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_f"></a>- f -</h3><ul>
+<li>FaceGeometry()
+: <a class="el" href="classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01MyCrouzeixRaviartElement_01_4_01_4.html#ace1479da1535c271d7dc671dacbbdcca">oomph::FaceGeometry&lt; FaceGeometry&lt; MyCrouzeixRaviartElement &gt; &gt;</a>
+, <a class="el" href="classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01MyTaylorHoodElement_01_4_01_4.html#a35f1bde1f3b3cc7c29d417cd75f0ef86">oomph::FaceGeometry&lt; FaceGeometry&lt; MyTaylorHoodElement &gt; &gt;</a>
+, <a class="el" href="classoomph_1_1FaceGeometry_3_01MyCrouzeixRaviartElement_01_4.html#a28b4b942614e6cfee40e773deb3e3003">oomph::FaceGeometry&lt; MyCrouzeixRaviartElement &gt;</a>
+, <a class="el" href="classoomph_1_1FaceGeometry_3_01MyTaylorHoodElement_01_4.html#a604dfaeec030bb7a08069c0e2c8805ab">oomph::FaceGeometry&lt; MyTaylorHoodElement &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>MyCrouzeixRaviartElement()
+: <a class="el" href="classoomph_1_1MyCrouzeixRaviartElement.html#a6719573c11157d360cb0a0fd0d2b92f4">oomph::MyCrouzeixRaviartElement</a>
+</li>
+<li>MyTaylorHoodElement()
+: <a class="el" href="classoomph_1_1MyTaylorHoodElement.html#a936bd6421ba42e5b73f983f5141b37c2">oomph::MyTaylorHoodElement</a>
+</li>
+</ul>
+
+
+<h3><a id="index_o"></a>- o -</h3><ul>
+<li>output()
+: <a class="el" href="classoomph_1_1MyCrouzeixRaviartElement.html#ad1ea7115e6cb090d687ac421e56f4d16">oomph::MyCrouzeixRaviartElement</a>
+, <a class="el" href="classoomph_1_1MyTaylorHoodElement.html#a5505717f2d16c2b231e7c347cb0c49b1">oomph::MyTaylorHoodElement</a>
+</li>
+</ul>
+
+
+<h3><a id="index_r"></a>- r -</h3><ul>
+<li>remove_volume_constraint()
+: <a class="el" href="classDropInChannelProblem.html#ab8a7491ab12974ccc4cc10bfc0f20675">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>set_error()
+: <a class="el" href="classoomph_1_1MyCrouzeixRaviartElement.html#a0b1ccbfb0eda6807c3a332aa0b6ea6e2">oomph::MyCrouzeixRaviartElement</a>
+, <a class="el" href="classoomph_1_1MyTaylorHoodElement.html#ae4f6eea59b7bcf6e737d829b37c47fe9">oomph::MyTaylorHoodElement</a>
+</li>
+<li>square_of_l2_norm()
+: <a class="el" href="classoomph_1_1MyCrouzeixRaviartElement.html#a18e8ab7199f42ca292214180ed86aa3a">oomph::MyCrouzeixRaviartElement</a>
+, <a class="el" href="classoomph_1_1MyTaylorHoodElement.html#ad9efcab0ef22434e6fc5f2eb4b84643d">oomph::MyTaylorHoodElement</a>
+</li>
+</ul>
+
+
+<h3><a id="index_v"></a>- v -</h3><ul>
+<li>variable_identifier()
+: <a class="el" href="classoomph_1_1MyCrouzeixRaviartElement.html#afbec727a48f104b945cc54f798cbd1d3">oomph::MyCrouzeixRaviartElement</a>
+, <a class="el" href="classoomph_1_1MyTaylorHoodElement.html#a429987090e76cd39a657b3a8eefbbbe9">oomph::MyTaylorHoodElement</a>
+</li>
+</ul>
+
+
+<h3><a id="index__7E"></a>- ~ -</h3><ul>
+<li>~BubbleInChannelProblem()
+: <a class="el" href="classBubbleInChannelProblem.html#a7a048a26898571d0f109df2a11f08eb7">BubbleInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+<li>~DropInChannelProblem()
+: <a class="el" href="classDropInChannelProblem.html#aa311cd8061b915901c8c74617d2e4a37">DropInChannelProblem&lt; ELEMENT &gt;</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:07:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

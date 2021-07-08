@@ -1,0 +1,389 @@
+\hypertarget{classoomph_1_1NetFluxControlElement}{}\doxysection{oomph\+::Net\+Flux\+Control\+Element Class Reference}
+\label{classoomph_1_1NetFluxControlElement}\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+
+
+{\ttfamily \#include $<$navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Net\+Flux\+Control\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1NetFluxControlElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NetFluxControlElement_aa855e7600ca93b005e63c8b2d4484f45}{Net\+Flux\+Control\+Element}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$flux\+\_\+control\+\_\+mesh\+\_\+pt, double $\ast$prescribed\+\_\+flux\+\_\+value\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor takes a mesh of \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase}{Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base}} elements that impose the pressure to control the flux, plus a pointer to the double which contains the desired flux value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a7a321d25a4fc51822abe7c92c8f37b94}{$\sim$\+Net\+Flux\+Control\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Empty Destructor -\/ \mbox{\hyperlink{classoomph_1_1Data}{Data}} gets deleted automatically. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a3ee9cdd9d404f577db1d18bf4c5e1ae1}{Net\+Flux\+Control\+Element}} (const \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_ada42257a8f26546b44182fe463f200bf}{dim}} () const
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_ac19688739022d56b66e74c14fedb7c4a}{pressure\+\_\+data\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Function to return a pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element}} elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a1042b589f6b086f5485214057f255678}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector\+: i.\+e. the flux constraint. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a7b7d3a32fcad5b06fe6a49f05f2c01a9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em This function returns the residuals, but adds nothing to the Jacobian as this element\textquotesingle{}s Jacobian contributions are calculated by the Navier\+Stokes\+Flux\+Control\+Elements which impose the traction used to control the flux. ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a16809a8ad123ba41f826d9e920aba9e0}{ndof\+\_\+types}} () const
+\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into -\/ it\textquotesingle{}s set to Dof\+\_\+number\+\_\+for\+\_\+unknown+1 because it\textquotesingle{}s expected this element is added to a fluid mesh containing navier stokes elements. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a43142408a4d2cea51b26d0c641bb0f51}{dof\+\_\+number\+\_\+for\+\_\+unknown}} ()
+\begin{DoxyCompactList}\small\item\em Function to set / get the nodal value of the \char`\"{}\+D\+O\+F type\char`\"{} to which the degree of freedom in this element (the pressure that enforces the required volume flux!) is added to. This should be set to the Navier-\/\+Stokes pressure D\+OF type (usually the dimension of the problem, for example, in 3D, the D\+OF types for single-\/physics Navier-\/\+Stokes elements are usually labelled 0, 1, 2, 3 for u, v and w velocities and pressure respectively. It is important to note that this is dimension dependent, so should not be hard coded in!! In particularly, this should not simply be set to the dimension of the problem if there is further splitting of the velocity D\+OF types) if this element is added to a fluid mesh containing Navier-\/\+Stokes elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_ac4eedd635a016d29fd9e6da5ae0f8707}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) The single degree of freedom is given the D\+OF type number of Dof\+\_\+number\+\_\+for\+\_\+unknown since it\textquotesingle{}s expected this unknown is added to the Navier-\/\+Stokes pressure D\+OF block (it is also assumed that the user has set the Dof\+\_\+number\+\_\+for\+\_\+unknown variable to the velocity D\+OF type using the function \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a43142408a4d2cea51b26d0c641bb0f51}{dof\+\_\+number\+\_\+for\+\_\+unknown()}}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a1904cdd012883add53cb41253d1effaf}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+control}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em This function returns the residuals for the flux control master element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_ae1c3f471f98f4c18f05c7a00a7c0489e}{Pressure\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the elements in the Flux\+\_\+control\+\_\+mesh\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a38fc3c20ff284af95fdcd83527edd94f}{Flux\+\_\+control\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} of elements which impose the pressure which controls the net flux. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_af3cf3627b1db5ad3303ef946efe5fc2f}{Prescribed\+\_\+flux\+\_\+value\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the value that stores the prescribed flux. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a80e84d97293e349064804d4141f3aeaf}{Dof\+\_\+number\+\_\+for\+\_\+unknown}}
+\begin{DoxyCompactList}\small\item\em The id number of the \char`\"{}\+D\+O\+F type\char`\"{} to which the degree of freedom in this element is added to. This should be set to the number id of the Navier-\/\+Stokes pressure D\+OF block (which is dimension dependent!) if this element is added to a fluid mesh containing navier stokes elements. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a1ae25acba7d703f73151e8977216eefc}{Dim}}
+\begin{DoxyCompactList}\small\item\em spatial dim of NS system \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A class for an element that controls the net fluid flux across a boundary by the imposition of an unknown applied pressure to the Navier-\/\+Stokes equations. This element is used with a mesh of \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element}} elements which are attached to the boundary. Note\+: \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a7b7d3a32fcad5b06fe6a49f05f2c01a9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}} does not calculate Jacobian contributions for this element as they are calculated by Navier\+Stokes\+Flux\+Control\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...) 
+
+Definition at line 107 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_aa855e7600ca93b005e63c8b2d4484f45}\label{classoomph_1_1NetFluxControlElement_aa855e7600ca93b005e63c8b2d4484f45}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!NetFluxControlElement@{NetFluxControlElement}}
+\index{NetFluxControlElement@{NetFluxControlElement}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{NetFluxControlElement()}{NetFluxControlElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Net\+Flux\+Control\+Element\+::\+Net\+Flux\+Control\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{flux\+\_\+control\+\_\+mesh\+\_\+pt,  }\item[{double $\ast$}]{prescribed\+\_\+flux\+\_\+value\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor takes a mesh of \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase}{Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base}} elements that impose the pressure to control the flux, plus a pointer to the double which contains the desired flux value. 
+
+
+
+Definition at line 115 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::add\+\_\+pressure\+\_\+data(), Data, Dof\+\_\+number\+\_\+for\+\_\+unknown, e, oomph\+::\+Mesh\+::element\+\_\+pt(), Flux\+\_\+control\+\_\+mesh\+\_\+pt, oomph\+::\+Mesh\+::nelement(), and Pressure\+\_\+data\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a7a321d25a4fc51822abe7c92c8f37b94}\label{classoomph_1_1NetFluxControlElement_a7a321d25a4fc51822abe7c92c8f37b94}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!````~NetFluxControlElement@{$\sim$NetFluxControlElement}}
+\index{````~NetFluxControlElement@{$\sim$NetFluxControlElement}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{$\sim$NetFluxControlElement()}{~NetFluxControlElement()}}
+{\footnotesize\ttfamily oomph\+::\+Net\+Flux\+Control\+Element\+::$\sim$\+Net\+Flux\+Control\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Destructor -\/ \mbox{\hyperlink{classoomph_1_1Data}{Data}} gets deleted automatically. 
+
+
+
+Definition at line 152 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a3ee9cdd9d404f577db1d18bf4c5e1ae1}\label{classoomph_1_1NetFluxControlElement_a3ee9cdd9d404f577db1d18bf4c5e1ae1}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!NetFluxControlElement@{NetFluxControlElement}}
+\index{NetFluxControlElement@{NetFluxControlElement}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{NetFluxControlElement()}{NetFluxControlElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Net\+Flux\+Control\+Element\+::\+Net\+Flux\+Control\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 155 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_ada42257a8f26546b44182fe463f200bf}\label{classoomph_1_1NetFluxControlElement_ada42257a8f26546b44182fe463f200bf}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!dim@{dim}}
+\index{dim@{dim}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{dim()}{dim()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Net\+Flux\+Control\+Element\+::dim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Spatial dimension of the problem 
+
+Definition at line 172 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References Dim.
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a43142408a4d2cea51b26d0c641bb0f51}\label{classoomph_1_1NetFluxControlElement_a43142408a4d2cea51b26d0c641bb0f51}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!dof\_number\_for\_unknown@{dof\_number\_for\_unknown}}
+\index{dof\_number\_for\_unknown@{dof\_number\_for\_unknown}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{dof\_number\_for\_unknown()}{dof\_number\_for\_unknown()}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Net\+Flux\+Control\+Element\+::dof\+\_\+number\+\_\+for\+\_\+unknown (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to set / get the nodal value of the \char`\"{}\+D\+O\+F type\char`\"{} to which the degree of freedom in this element (the pressure that enforces the required volume flux!) is added to. This should be set to the Navier-\/\+Stokes pressure D\+OF type (usually the dimension of the problem, for example, in 3D, the D\+OF types for single-\/physics Navier-\/\+Stokes elements are usually labelled 0, 1, 2, 3 for u, v and w velocities and pressure respectively. It is important to note that this is dimension dependent, so should not be hard coded in!! In particularly, this should not simply be set to the dimension of the problem if there is further splitting of the velocity D\+OF types) if this element is added to a fluid mesh containing Navier-\/\+Stokes elements. 
+
+
+
+Definition at line 234 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References Dof\+\_\+number\+\_\+for\+\_\+unknown.
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a7b7d3a32fcad5b06fe6a49f05f2c01a9}\label{classoomph_1_1NetFluxControlElement_a7b7d3a32fcad5b06fe6a49f05f2c01a9}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily void oomph\+::\+Net\+Flux\+Control\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This function returns the residuals, but adds nothing to the Jacobian as this element\textquotesingle{}s Jacobian contributions are calculated by the Navier\+Stokes\+Flux\+Control\+Elements which impose the traction used to control the flux. ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d68e4309ac1b03583d252845}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 192 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+control(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a1042b589f6b086f5485214057f255678}\label{classoomph_1_1NetFluxControlElement_a1042b589f6b086f5485214057f255678}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily void oomph\+::\+Net\+Flux\+Control\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector\+: i.\+e. the flux constraint. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 182 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+control(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a1904cdd012883add53cb41253d1effaf}\label{classoomph_1_1NetFluxControlElement_a1904cdd012883add53cb41253d1effaf}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!fill\_in\_generic\_residual\_contribution\_flux\_control@{fill\_in\_generic\_residual\_contribution\_flux\_control}}
+\index{fill\_in\_generic\_residual\_contribution\_flux\_control@{fill\_in\_generic\_residual\_contribution\_flux\_control}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_flux\_control()}{fill\_in\_generic\_residual\_contribution\_flux\_control()}}
+{\footnotesize\ttfamily void oomph\+::\+Net\+Flux\+Control\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+This function returns the residuals for the flux control master element. 
+
+
+
+Definition at line 276 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References e, oomph\+::\+Mesh\+::element\+\_\+pt(), Flux\+\_\+control\+\_\+mesh\+\_\+pt, oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+Mesh\+::nelement(), Prescribed\+\_\+flux\+\_\+value\+\_\+pt, and residuals().
+
+
+
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_ac4eedd635a016d29fd9e6da5ae0f8707}\label{classoomph_1_1NetFluxControlElement_ac4eedd635a016d29fd9e6da5ae0f8707}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
+\index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
+{\footnotesize\ttfamily void oomph\+::\+Net\+Flux\+Control\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) The single degree of freedom is given the D\+OF type number of Dof\+\_\+number\+\_\+for\+\_\+unknown since it\textquotesingle{}s expected this unknown is added to the Navier-\/\+Stokes pressure D\+OF block (it is also assumed that the user has set the Dof\+\_\+number\+\_\+for\+\_\+unknown variable to the velocity D\+OF type using the function \mbox{\hyperlink{classoomph_1_1NetFluxControlElement_a43142408a4d2cea51b26d0c641bb0f51}{dof\+\_\+number\+\_\+for\+\_\+unknown()}}). 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a63f6761cad384044fae2c8339422c9df}{oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}}.
+
+
+
+Definition at line 246 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References Dof\+\_\+number\+\_\+for\+\_\+unknown, and oomph\+::\+Generalised\+Element\+::eqn\+\_\+number().
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a16809a8ad123ba41f826d9e920aba9e0}\label{classoomph_1_1NetFluxControlElement_a16809a8ad123ba41f826d9e920aba9e0}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!ndof\_types@{ndof\_types}}
+\index{ndof\_types@{ndof\_types}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Net\+Flux\+Control\+Element\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into -\/ it\textquotesingle{}s set to Dof\+\_\+number\+\_\+for\+\_\+unknown+1 because it\textquotesingle{}s expected this element is added to a fluid mesh containing navier stokes elements. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870597b35dcf1c780710b9a56}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl_a538b22e5aceecf140d03e400a8848a33}{oomph\+::\+Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}}.
+
+
+
+Definition at line 204 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References Dof\+\_\+number\+\_\+for\+\_\+unknown.
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_ac19688739022d56b66e74c14fedb7c4a}\label{classoomph_1_1NetFluxControlElement_ac19688739022d56b66e74c14fedb7c4a}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!pressure\_data\_pt@{pressure\_data\_pt}}
+\index{pressure\_data\_pt@{pressure\_data\_pt}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{pressure\_data\_pt()}{pressure\_data\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ oomph\+::\+Net\+Flux\+Control\+Element\+::pressure\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to return a pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element}} elements. 
+
+
+
+Definition at line 177 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+References Pressure\+\_\+data\+\_\+pt.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a1ae25acba7d703f73151e8977216eefc}\label{classoomph_1_1NetFluxControlElement_a1ae25acba7d703f73151e8977216eefc}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!Dim@{Dim}}
+\index{Dim@{Dim}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{Dim}{Dim}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Net\+Flux\+Control\+Element\+::\+Dim\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+spatial dim of NS system 
+
+
+
+Definition at line 334 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+Referenced by dim().
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a80e84d97293e349064804d4141f3aeaf}\label{classoomph_1_1NetFluxControlElement_a80e84d97293e349064804d4141f3aeaf}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!Dof\_number\_for\_unknown@{Dof\_number\_for\_unknown}}
+\index{Dof\_number\_for\_unknown@{Dof\_number\_for\_unknown}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{Dof\_number\_for\_unknown}{Dof\_number\_for\_unknown}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Net\+Flux\+Control\+Element\+::\+Dof\+\_\+number\+\_\+for\+\_\+unknown\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The id number of the \char`\"{}\+D\+O\+F type\char`\"{} to which the degree of freedom in this element is added to. This should be set to the number id of the Navier-\/\+Stokes pressure D\+OF block (which is dimension dependent!) if this element is added to a fluid mesh containing navier stokes elements. 
+
+
+
+Definition at line 331 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+Referenced by dof\+\_\+number\+\_\+for\+\_\+unknown(), get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), ndof\+\_\+types(), and Net\+Flux\+Control\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_a38fc3c20ff284af95fdcd83527edd94f}\label{classoomph_1_1NetFluxControlElement_a38fc3c20ff284af95fdcd83527edd94f}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!Flux\_control\_mesh\_pt@{Flux\_control\_mesh\_pt}}
+\index{Flux\_control\_mesh\_pt@{Flux\_control\_mesh\_pt}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{Flux\_control\_mesh\_pt}{Flux\_control\_mesh\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ oomph\+::\+Net\+Flux\+Control\+Element\+::\+Flux\+\_\+control\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} of elements which impose the pressure which controls the net flux. 
+
+
+
+Definition at line 321 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+control(), and Net\+Flux\+Control\+Element().
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_af3cf3627b1db5ad3303ef946efe5fc2f}\label{classoomph_1_1NetFluxControlElement_af3cf3627b1db5ad3303ef946efe5fc2f}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!Prescribed\_flux\_value\_pt@{Prescribed\_flux\_value\_pt}}
+\index{Prescribed\_flux\_value\_pt@{Prescribed\_flux\_value\_pt}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{Prescribed\_flux\_value\_pt}{Prescribed\_flux\_value\_pt}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Net\+Flux\+Control\+Element\+::\+Prescribed\+\_\+flux\+\_\+value\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the value that stores the prescribed flux. 
+
+
+
+Definition at line 324 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+control().
+
+\mbox{\Hypertarget{classoomph_1_1NetFluxControlElement_ae1c3f471f98f4c18f05c7a00a7c0489e}\label{classoomph_1_1NetFluxControlElement_ae1c3f471f98f4c18f05c7a00a7c0489e}} 
+\index{oomph::NetFluxControlElement@{oomph::NetFluxControlElement}!Pressure\_data\_pt@{Pressure\_data\_pt}}
+\index{Pressure\_data\_pt@{Pressure\_data\_pt}!oomph::NetFluxControlElement@{oomph::NetFluxControlElement}}
+\doxysubsubsection{\texorpdfstring{Pressure\_data\_pt}{Pressure\_data\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ oomph\+::\+Net\+Flux\+Control\+Element\+::\+Pressure\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose single value is the pressure applied by the elements in the Flux\+\_\+control\+\_\+mesh\+\_\+pt. 
+
+
+
+Definition at line 317 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+
+
+
+Referenced by Net\+Flux\+Control\+Element(), and pressure\+\_\+data\+\_\+pt().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{navier__stokes__flux__control__elements_8h}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}\end{DoxyCompactItemize}

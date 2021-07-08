@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Upgrading a GeomObject to a GeneralisedElement &ndash; how to parametrise unknown domain boundaries</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Upgrading a GeomObject to a GeneralisedElement &ndash; how to parametrise unknown domain boundaries </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In many previous examples we demonstrated how to use <code>GeomObjects</code> to parametrise curvilinear, moving domain boundaries. We used this functionality extensively to perform simulations of problems in moving domains. The techniques illustrated in these examples are adequate for problems in which the motion of the boundary is prescribed; see e.g. the <br  />
+ <a href="../../../navier_stokes/collapsible_channel/html/index.html">simulation of fluid flow in a 2D channel in which a part of one channel wall performs a prescribed oscillation</a>.</p>
+<p>Here we shall demonstrate how to use <code>GeomObjects</code> to parametrise curvilinear, moving domain boundaries in problem in which the position of the boundary is unknown and has to be determined as part of the overall solution. We will also address the following questions:</p><ul>
+<li>What is a <code>GeomObject's</code> geometric <code>Data</code>?</li>
+<li>What is a <code>GeneralisedElement's</code> external and internal <code>Data</code>?</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="geom_data"></a>
+Part 1: A closer look at the GeomObject class: Geometric Data</h1>
+<p>In an <a href="../../../poisson/fish_poisson2/html/index.html">earlier example</a>, we introduced the <code>GeomObject</code> as a base class for all objects that provide an analytical parametrisation of a geometric object by specifying its Eulerian coordinates (i.e. the position vector to "material points" in the object, <img class="formulaInl" alt="$ {\bf r}$" src="form_0.png"/>) as a function of some intrinsic (Lagrangian) coordinates, <img class="formulaInl" alt="$ {\bf \zeta} $" src="form_1.png"/>, so that <img class="formulaInl" alt="$ {\bf r} = {\bf r}({\bf \zeta})$" src="form_2.png"/>. Every specific <code>GeomObject</code> must implement the pure virtual function</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> GeomObject::position(<span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta, Vector&lt;double&gt;&amp; r);</div>
+</div><!-- fragment --><p>where the number of Lagrangian and Eulerian coordinates involved in the parametrisation (i.e. the sizes of the vectors <code>zeta</code> and <code>r</code>) are stored as unsigned integers in the protected member data, <code>GeomObject::NLagrangian</code> and <code>GeomObject::Ndim</code>, respectively.</p>
+<p>Most specific geometric objects store some additional parameters as private data members. For instance, a <code>GeomObject</code> that represents a 2D circle, parametrised by the 1D Lagrangian coordinate <img class="formulaInl" alt="$ \zeta $" src="form_3.png"/> as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf r}(\zeta)= \left( \begin{array}{c} X_c + R \cos(\zeta) \\ Y_c + R \sin(\zeta) \end{array} \right) \]" src="form_4.png"/>
+</p>
+<p> may be implemented as follows:</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====start_of_circle=====================================================</span></div>
+<div class="line"><span class="comment">/// \short Simple circle in 2D space.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ x = X_c + R \cos(\zeta)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ y = Y_c + R \sin(\zeta)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">class </span>SimpleCircle : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:  Pass x and y-coords of centre and radius</span></div>
+<div class="line"><span class="comment"></span> SimpleCircle(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; x_c, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; y_c, </div>
+<div class="line">               <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; r) : GeomObject(1,2), X_c(x_c), Y_c(y_c), R(r)</div>
+<div class="line">  {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Position Vector at Lagrangian coordinate zeta </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> position(<span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Position vector</span></div>
+<div class="line">   r[0] = X_c+R*cos(zeta[0]);</div>
+<div class="line">   r[1] = Y_c+R*sin(zeta[0]);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Position Vector at Lagrangian coordinate zeta  at time level t</span></div>
+<div class="line"><span class="comment"> /// (t=0: present; t&gt;0: previous level). Steady object, so we </span></div>
+<div class="line"><span class="comment"> /// simply forward the call to the steady version.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> position(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta,</div>
+<div class="line">               Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{position(zeta,r);}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// X-coordinate of centre</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> X_c;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Y-coordinate of centre</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Y_c;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Radius</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> R;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of SimpleCircle class</span></div>
+</div><!-- fragment --><p>The shape and position of this <code>GeomObject</code> is defined by the parameters <img class="formulaInl" alt="$ X_c, Y_c $" src="form_5.png"/> and <img class="formulaInl" alt="$ R $" src="form_6.png"/> which are stored as double precision numbers in the object's private member data.</p>
+<p>In many applications (e.g. in free-boundary problems) it is necessary to regard some (or all) of the parameters that specify the object's shape as (an) unknown(s) in the overall problem. Within <code>oomph-lib</code> all unknowns are values in <code>Data</code> objects. We refer to any <code>Data</code> objects whose values affect the shape of a <code>GeomObject</code> as the <code>GeomObject's</code> geometric <code>Data</code>. The <code>GeomObject</code> class defines interfaces for two functions that provide access to such <code>Data</code>. The function</p>
+<div class="fragment"><div class="line"><span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> GeomObject::ngeom_data() <span class="keyword">const</span>;</div>
+</div><!-- fragment --><p>should return the number of geometric <code>Data</code> objects that affect a <code>GeomObject's</code> shape and position. The function</p>
+<div class="fragment"><div class="line"><span class="keyword">virtual</span> Data* GeomObject::geom_data_pt(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; j);</div>
+</div><!-- fragment --><p>should return a pointer to the <code>GeomObject's</code> <code>j</code> - th geometric <code>Data</code> object. Both functions are implemented as "broken" virtual functions in the <code>GeomObject</code> base class in order to facilitate the creation of new <code>GeomObjects</code>. The functions should be overloaded in <code>GeomObjects</code> that actually contain geometric <code>Data</code>. If this is not done, the broken versions in the base class issue a suitable explanation before throwing an error.</p>
+<p>Here is a re-implementation of the above <code>GeomObject</code> in a form that allows the the parameters <img class="formulaInl" alt="$ X_c, Y_c $" src="form_5.png"/> and <img class="formulaInl" alt="$ R $" src="form_6.png"/> to be regarded as unknowns, by storing them as values in a suitable <code>Data</code> object:</p>
+<div class="fragment"><div class="line"><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="comment">/// \short GeneralCircle in 2D space.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ x = X_c + R \cos(\zeta)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ y = Y_c + R \sin(\zeta)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// The three parameters \f$ X_c, Y_c \f$ and \f$ R \f$ are represented</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// by Data and can therefore be unknowns in the problem.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">class </span>GeneralCircle : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+</div><!-- fragment --><p>The object has two constructors which we will discuss separately. The arguments to the first constructor specify the x- and y-coordinates of the ring's centre ( <img class="formulaInl" alt="$ X_c$" src="form_7.png"/> and <img class="formulaInl" alt="$ Y_c$" src="form_8.png"/>), and its radius, <img class="formulaInl" alt="$ R $" src="form_6.png"/>, as double-precision numbers. The constructor creates storage for these values in the <code>Geom_data_pt</code> vector which is stored in the object's protected member data. First, the <code>Geom_data_pt</code> vector (empty by default) is resized to provide storage for a (pointer to a) single Data item. Next we create a Data object that provides storage for three values and store the pointer to this <code>Data</code> object in the first (and only) component of the <code>Geom_data_pt</code> vector. Finally, we set the values to those specified by the arguments and pin them to reflect the fact that, by default, the values are constants rather than unknowns in the problem. [<b>Note:</b> Clearly, there is some ambiguity as to how to distribute the values of the geometric parameters among the geometric <code>Data</code>. Here we chose to store the three values in a single <code>Data</code> object, but we could also have stored each value in its own <code>Data</code> object.]</p>
+<div class="fragment"><div class="line"> <span class="comment">/// Constructor:  Pass x and y-coords of centre and radius (all pinned)</span></div>
+<div class="line"> GeneralCircle(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; x_c, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; y_c, </div>
+<div class="line">               <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; r) : GeomObject(1,2)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Create Data: We have one Data item with 3 values. The Data object</span></div>
+<div class="line">   <span class="comment">// stores the x position of the circle&#39;s centre as value 0,</span></div>
+<div class="line">   <span class="comment">// the y position of the circle&#39;s centre as value 1, and the </span></div>
+<div class="line">   <span class="comment">// circle&#39;s radius as value 2.</span></div>
+<div class="line">   Geom_data_pt.resize(1);</div>
+<div class="line">   Geom_data_pt[0] = <span class="keyword">new</span> Data(3);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Assign data: X_c -- the value is free by default: Need to pin it.</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Pin the data</span></div>
+<div class="line">   Geom_data_pt[0]-&gt;pin(0); </div>
+<div class="line">   <span class="comment">// Give it a value: </span></div>
+<div class="line">   Geom_data_pt[0]-&gt;set_value(0,x_c);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Assign data: Y_c -- the value is free by default: Need to pin it.</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Pin the data</span></div>
+<div class="line">   Geom_data_pt[0]-&gt;pin(1); </div>
+<div class="line">   <span class="comment">// Give it a value: </span></div>
+<div class="line">   Geom_data_pt[0]-&gt;set_value(1,y_c);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Assign data: R -- the value is free by default: Need to pin it.</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Pin the data</span></div>
+<div class="line">   Geom_data_pt[0]-&gt;pin(2); </div>
+<div class="line">   <span class="comment">// Give it a value: </span></div>
+<div class="line">   Geom_data_pt[0]-&gt;set_value(2,r);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// I&#39;ve created the data, I need to clean up</span></div>
+<div class="line">   Must_clean_up=<span class="keyword">true</span>; </div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>With this constructor, the geometric <code>Data</code> that controls the shape of the object is created internally &ndash; the "user" only specifies the values of the parameters. Their values are accessible via the access functions</p>
+<div class="fragment"><div class="line"> <span class="comment">/// Access function to x-coordinate of centre of circle</span></div>
+<div class="line"> <span class="keywordtype">double</span>&amp; x_c(){<span class="keywordflow">return</span> *Geom_data_pt[0]-&gt;value_pt(0);}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access function to y-coordinate of centre of circle</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span>&amp; y_c(){<span class="keywordflow">return</span> *Geom_data_pt[0]-&gt;value_pt(1);}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access function to radius of circle</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span>&amp; R(){<span class="keywordflow">return</span> *Geom_data_pt[0]-&gt;value_pt(2);}</div>
+</div><!-- fragment --><p>but their internal representation as (pinned) values of a <code>Data</code> object remains hidden. Access to the geometric <code>Data</code> is, however, possible via the functions</p>
+<div class="fragment"><div class="line"> <span class="comment">/// How many items of Data does the shape of the object depend on?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ngeom_data()<span class="keyword"> const </span>{<span class="keywordflow">return</span> Geom_data_pt.size();}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Return pointer to the j-th Data item that the object&#39;s </span></div>
+<div class="line"><span class="comment"> /// shape depends on </span></div>
+<div class="line"><span class="comment"></span> Data* geom_data_pt(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; j) {<span class="keywordflow">return</span> Geom_data_pt[j];}</div>
+</div><!-- fragment --><p>which overload the broken versions in the <code>GeomObject</code> base class. Both functions access the protected vector of pointers to the object's geometric <code>Data:</code> </p>
+<div class="fragment"><div class="line"><span class="keyword">protected</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Vector of pointers to Data items that affects the object&#39;s shape</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;Data*&gt; Geom_data_pt;</div>
+</div><!-- fragment --><p>The second constructor is appropriate for cases in which the <code>Data</code> object that specifies the object's shape has already been created elsewhere. In this case, we simply pass the pointer to the Data object to the constructor and store it in the first entry of the <code>Geom_data_pt</code> vector:  </p><div class="fragment"><div class="line"> <span class="comment">/// \short Alternative constructor:  Pass x and y-coords of centre and radius</span></div>
+<div class="line"><span class="comment"> /// (all as part of Data)</span></div>
+<div class="line"><span class="comment"></span><span class="comment"> /// \code </span></div>
+<div class="line"><span class="comment"></span><span class="comment"> /// Geom_data_pt[0]-&gt;value(0) = X_c;</span></div>
+<div class="line"><span class="comment"></span><span class="comment"> /// Geom_data_pt[0]-&gt;value(1) = Y_c;</span></div>
+<div class="line"><span class="comment"></span><span class="comment"> /// Geom_data_pt[0]-&gt;value(2) = R;</span></div>
+<div class="line"><span class="comment"></span><span class="comment"> /// \endcode</span></div>
+<div class="line"><span class="comment"></span> GeneralCircle(Data* geom_data_pt) : GeomObject(1,2)</div>
+<div class="line">  {</div>
+<div class="line"><span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line">   <span class="keywordflow">if</span> (geom_data_pt-&gt;nvalue()!=3)</div>
+<div class="line">    {</div>
+<div class="line">     std::ostringstream error_stream;</div>
+<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;Geometric Data must have 3 values, not &quot;</span></div>
+<div class="line">                  &lt;&lt; geom_data_pt-&gt;nvalue() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    }</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line">   Geom_data_pt.resize(1);</div>
+<div class="line">   Geom_data_pt[0]=geom_data_pt;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Data has been created externally: Must not clean up</span></div>
+<div class="line">   Must_clean_up=<span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">//end of alternative constructor</span></div>
+</div><!-- fragment --><p>The boolean flag <code>Must_clean_up</code> is stored as private member data in the class. It is used in the destructor to decide if the geometric <code>Data</code> should be deleted. If the <code>Data</code> was created internally by the object (i.e. if the first constructor was used), the <code>Data</code> must also be deleted by the object; if the <code>Data</code> was created externally (i.e. if the second constructor was used), the <code>Data</code> must not be deleted as it may still be required in other parts of the code.</p>
+<div class="fragment"><div class="line"> <span class="comment">/// Destructor:  Clean up if necessary</span></div>
+<div class="line"> <span class="keyword">virtual</span> ~GeneralCircle()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Do I need to clean up?</span></div>
+<div class="line">   <span class="keywordflow">if</span> (Must_clean_up)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">unsigned</span> ngeom_data=Geom_data_pt.size();</div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;ngeom_data;i++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="keyword">delete</span> Geom_data_pt[i];</div>
+<div class="line">       Geom_data_pt[i]=0;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end of destructor</span></div>
+</div><!-- fragment --><p>The function <code>GeomObject::position(...)</code> simply extracts the relevant parameters ( <img class="formulaInl" alt="$ X_c, Y_c, R $" src="form_9.png"/>) from the <code>Geom_data_pt</code> vector and computes the position vector as a function of the 1D Lagrangian coordinate <img class="formulaInl" alt="$ \zeta $" src="form_3.png"/>:</p>
+<div class="fragment"><div class="line"> <span class="comment">/// \short Position Vector at Lagrangian coordinate zeta </span></div>
+<div class="line"> <span class="keywordtype">void</span> position(<span class="keyword">const</span> Vector&lt;double&gt;&amp; zeta, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Extract data</span></div>
+<div class="line">   <span class="keywordtype">double</span> X_c= Geom_data_pt[0]-&gt;value(0);</div>
+<div class="line">   <span class="keywordtype">double</span> Y_c= Geom_data_pt[0]-&gt;value(1);</div>
+<div class="line">   <span class="keywordtype">double</span> R= Geom_data_pt[0]-&gt;value(2);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Position vector</span></div>
+<div class="line">   r[0] = X_c+R*cos(zeta[0]);</div>
+<div class="line">   r[1] = Y_c+R*sin(zeta[0]);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of position(...)</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+Part 2: Upgrading a GeomObject to a GeneralisedElement</h1>
+<p>We will now consider a (toy!) problem in which the ability to treat a parameter that specifies the shape and/or the position of a geometric object as an unknown (i.e. as a value in a <code>Data</code> object) is essential: A circular ring of radius <img class="formulaInl" alt="$ R $" src="form_6.png"/> is mounted on a linearly elastic spring of stiffness <img class="formulaInl" alt="$ k_{stiff} $" src="form_10.png"/>. We wish to find the ring's equilibrium position when it is subjected to a vertical load, <img class="formulaInl" alt="$ f_{load} $" src="form_11.png"/>.</p>
+<div class="image">
+<img src="circle_as_element_sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the example problem. </div></div>
+ <p>To solve this problem with <code>oomph-lib</code> [Yes, the solution is <img class="formulaInl" alt="$ Y_c = f_{load}/k_{stiff}$" src="form_12.png"/> but let's pretend we don't know this...], we employ C++ inheritance to "upgrade" the <code>GeneralCircle</code> object, discussed above, to a <code>GeneralisedElement</code> in which the vertical position of the ring, <img class="formulaInl" alt="$ Y_c $" src="form_13.png"/>, is one of the unknowns whose value is determined by the equilibrium equation (in residual form), </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ f_{load} - Y_c \ k_{stiff} = 0. \ \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_14.png"/>
+</p>
+<p> In the present problem, the load on the ring is a control parameter, but in different applications it may be an unknown whose value has to be determined as part of the solution. (For instance, in fluid-structure interaction problems, the load on an elastic structure depends on the unknowns in the adjacent fluid elements.) Therefore, we also represent <img class="formulaInl" alt="$ f_{load} $" src="form_11.png"/> by a <code>Data</code> object.</p>
+<p>To solve the above problem with <code>oomph-lib</code>, the residual equation (1) must be implemented in the <code>get_residuals(...)</code> function of a suitable <code>GeneralisedElement</code>. Recall that the elemental residual vector computed by a <code>GeneralisedElement</code> can depend on two types of <code>Data:</code> </p><ul>
+<li><b>Internal <em>Data</em></b> stores values that are "internal" to the element, i.e. values that the element is "in charge of". Such <code>Data</code> is accessible via the pointer-based access function <code>GeneralisedElement::internal_data_pt(...)</code> </li>
+<li><b>External <em>Data</em></b> stores values that are "external" to the element. The values stored in such <code>Data</code> <em>affect</em> the element's residual vector but its values are not determined <em>by</em> the element. Such <code>Data</code> is accessible via the pointer-based access function <code>GeneralisedElement::external_data_pt(...)</code> </li>
+</ul>
+<p>In the present context, it is most natural to regard the <code>GeneralCircle's</code> geometric <code>Data</code> as internal to the element and the load <code>Data</code> as external.</p>
+<p>Here is the class definition for the <code>ElasticallySupportedRingElement</code> which combines the <code>GeneralisedElement</code> and <code>GeneralCircle</code> classes by multiple inheritance. Its role as a <code>GeomObject</code> allows the object to be used in the parametrisation of domain boundaries; its role as a <code>GeneralisedElement</code> allows the value of <img class="formulaInl" alt="$ Y_c $" src="form_13.png"/> to be determined as part of the solution.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===========start_of_general_circle=========================================</span></div>
+<div class="line"><span class="comment">/// \short GeneralCircle &quot;upgraded&quot; to a GeneralisedElement: Circular </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// ring whose position is given by</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ x = X_c + R \cos(\zeta)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ y = Y_c + R \sin(\zeta)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// The ring&#39;s vertical position \f$ Y_c \f$ is</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// determined by &quot;pseudo elasticity&quot;:</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// 0 = f_{load} - Y_c \ k_{stiff} </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// This simulates the case where the centre of the ring is mounted on </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// an elastic spring of stiffness \f$ k_{stiff} \f$ and loaded by </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// the force \f$ f_{load}. \f$ The &quot;load&quot; is specified by the </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// Data object \c load_pt(). </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">class </span>ElasticallySupportedRingElement : <span class="keyword">public</span> GeneralisedElement, </div>
+<div class="line">                                        <span class="keyword">public</span> GeneralCircle</div>
+</div><!-- fragment --><p>The arguments to the constructor specify the initial geometric parameters, <img class="formulaInl" alt="$ X_c, Y_c $" src="form_5.png"/> and <img class="formulaInl" alt="$ R $" src="form_6.png"/>. We pass them to the constructor of the <code>GeneralCircle</code> object and assign a default value for the spring stiffness <img class="formulaInl" alt="$ k_{stiff}$" src="form_15.png"/> (stored as a private data member of the class; see below):  </p><div class="fragment"><div class="line"> <span class="comment">/// \short Constructor: Build  ring from doubles that describe </span></div>
+<div class="line"><span class="comment"> /// the geometry: x and y positions of centre and the radius.</span></div>
+<div class="line"><span class="comment"></span><span class="comment"> /// Initialise stiffness to 1.0. By default, no load is set.</span></div>
+<div class="line"><span class="comment"></span> ElasticallySupportedRingElement(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; x_c, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; y_c, </div>
+<div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; r) : </div>
+<div class="line">  GeneralCircle(x_c,y_c,r), K_stiff(1.0), Load_data_has_been_set(false)</div>
+</div><!-- fragment --><p>Next, we add the <code>GeneralCircle's</code> geometric <code>Data</code> (created automatically by the constructor of the <code>GeneralCircle</code> object; see above) into the element's storage for its internal <code>Data</code>. This ensures that the geometric <code>Data</code> is included in the element's equation numbering procedures. Within the context of the <code>GeneralCircle</code>, all geometric parameters were regarded as constants and their values were pinned. Here, the vertical position [stored in the second entry in the geometric <code>Data</code>] is unknown, therefore we un-pin it.</p>
+<div class="fragment"><div class="line">  {</div>
+<div class="line">   <span class="comment">// The geometric data is internal to the element -- we copy the pointers</span></div>
+<div class="line">   <span class="comment">// to the GeomObject&#39;s geometric data to the element&#39;s internal </span></div>
+<div class="line">   <span class="comment">// data to ensure that any unknown values of geometric data are </span></div>
+<div class="line">   <span class="comment">// given global equation numbers. The add_internal_data(...)</span></div>
+<div class="line">   <span class="comment">// function returns the index by which the added Data item</span></div>
+<div class="line">   <span class="comment">// is accessible from internal_data_pt(...). </span></div>
+<div class="line">   Internal_geometric_data_index=add_internal_data(Geom_data_pt[0]);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Geometric Data for the GeomObject has been set up (and pinned) in</span></div>
+<div class="line">   <span class="comment">// constructor for geometric object. Now free the y-position </span></div>
+<div class="line">   <span class="comment">// of the centre because we want to determine it as an unknown</span></div>
+<div class="line">   internal_data_pt(Internal_geometric_data_index)-&gt;unpin(1);</div>
+</div><!-- fragment --><p>Once <code>Data</code> has been added to a <code>GeneralisedElement's</code> internal <code>Data</code>, it is deleted by the destructor of the <code>GeneralisedElement</code> when the <code>GeneralisedElement</code> goes out of scope. The <code>Data</code> must therefore not be deleted again by the destructor of the <code>GeneralCircle</code> class, and we change the cleanup responsibilities accordingly:</p>
+ <div class="fragment"><div class="line">   <span class="comment">// Change cleanup responsibilities: The GeomData will now be killed</span></div>
+<div class="line">   <span class="comment">// by the GeneralisedElement when it wipes its internal Data</span></div>
+<div class="line">   Must_clean_up=<span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>Since the <code>GeneralisedElement's</code> destructor will delete the internal <code>Data</code>, the destructor can remain empty: </p><div class="fragment"><div class="line"> <span class="comment">/// Destructor: </span></div>
+<div class="line"> <span class="keyword">virtual</span> ~ElasticallySupportedRingElement()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// The GeomObject&#39;s GeomData is mirrored in the element&#39;s</span></div>
+<div class="line">   <span class="comment">// Internal Data and therefore gets wiped in the</span></div>
+<div class="line">   <span class="comment">// destructor of GeneralisedElement --&gt; No need to kill it here</span></div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>The <code>Data</code> whose one-and-only value represents the load must be set by the "user", using the function <code>set_load_pt(...)</code> As discussed above, we store the pointer to the load <code>Data</code> object in the <code>GeneralisedElement's</code> external <code>Data</code> and record its index within that storage scheme.</p>
+ <div class="fragment"><div class="line"> <span class="comment">/// \short Set pointer to Data object that specifies the &quot;load&quot;</span></div>
+<div class="line"><span class="comment"> /// on the ElasticallySupportedRingElement</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> set_load_pt(Data* load_pt)</div>
+<div class="line">  {</div>
+<div class="line"><span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line">   <span class="keywordflow">if</span> (load_pt-&gt;nvalue()!=1)</div>
+<div class="line">    {</div>
+<div class="line">     std::ostringstream error_stream;</div>
+<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;The data object that stores the load on the &quot;</span></div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot;ElasticallySupportedRingElement\n&quot;</span></div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot;should only contain a single data value\n&quot;</span></div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot;This one contains &quot;</span> &lt;&lt; load_pt-&gt;nvalue() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    }</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Add load to the element&#39;s external data and store</span></div>
+<div class="line">   <span class="comment">// its index within that storage scheme: Following this assignment, </span></div>
+<div class="line">   <span class="comment">// the load Data is accessible from</span></div>
+<div class="line">   <span class="comment">// GeneralisedElement::external_data_pt(External_load_index)</span></div>
+<div class="line">   External_load_index = add_external_data(load_pt);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Load has now been set</span></div>
+<div class="line">   Load_data_has_been_set=<span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of set_load_pt(...)</span></div>
+</div><!-- fragment --><p>[Note the sanity check which asserts that the load <code>Data</code> object only contains a single value; see <a class="el" href="index.html#notes">Comments and Exercises</a> for a further discussion of this aspect.]</p>
+<p>The <code>load()</code> function provides access to the load specified by the load <code>Data</code>. It returns zero if no load was set &ndash; a sensible default.</p>
+<div class="fragment"><div class="line"> <span class="comment">/// &quot;Load&quot; acting on the ring</span></div>
+<div class="line"> <span class="keywordtype">double</span> load()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Return the load if it has been set</span></div>
+<div class="line">   <span class="keywordflow">if</span> (Load_data_has_been_set)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">return</span> external_data_pt(External_load_index)-&gt;value(0);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="comment">// ...otherwise return zero load</span></div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">return</span> 0.0;</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end of load()</span></div>
+</div><!-- fragment --><p>Next, we provide an access functions to the spring stiffness parameter, </p><div class="fragment"><div class="line"> <span class="comment">/// Access function for the spring stiffness</span></div>
+<div class="line"> <span class="keywordtype">double</span>&amp; k_stiff() {<span class="keywordflow">return</span> K_stiff;}</div>
+</div><!-- fragment --><p>and functions that allow the vertical displacement of the ring to be pinned and un-pinned:</p>
+<div class="fragment"><div class="line"> <span class="comment">/// Pin the vertical displacement</span></div>
+<div class="line"> <span class="keywordtype">void</span> pin_yc()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Vertical position of centre is stored as value 1 in the</span></div>
+<div class="line">   <span class="comment">// element&#39;s one and only internal Data object.</span></div>
+<div class="line">   internal_data_pt(Internal_geometric_data_index)-&gt;pin(1);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Unpin the vertical displacement</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> unpin_yc()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Vertical position of centre is stored as value 1 in the</span></div>
+<div class="line">   <span class="comment">// element&#39;s one and only internal Data object.</span></div>
+<div class="line">   internal_data_pt(Internal_geometric_data_index)-&gt;unpin(1);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of unpin_yc()</span></div>
+</div><!-- fragment --><p>Finally, we implement the pure virtual functions <code>GeneralisedElement::get_jacobian(...)</code> and <code>GeneralisedElement::get_residuals(...)</code> which are required to make the element functional. These functions must compute the element's contributions to the <code>Problem's</code> global residual vector and Jacobian matrix. As usual, we implement them as wrappers to a single function that computes the residual and (optionally) the Jacobian matrix:</p>
+<div class="fragment"><div class="line"> <span class="comment">/// Compute element residual vector (wrapper)</span></div>
+<div class="line"> <span class="keywordtype">void</span> get_residuals(Vector&lt;double&gt; &amp;residuals)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Initialise residuals to zero</span></div>
+<div class="line">   residuals.initialise(0.0);</div>
+<div class="line">   <span class="comment">//Create a dummy matrix</span></div>
+<div class="line">   DenseMatrix&lt;double&gt; dummy(1);</div>
+<div class="line">   <span class="comment">//Call the generic residuals function with flag set to 0</span></div>
+<div class="line">   fill_in_generic_residual_contribution(residuals,dummy,0);</div>
+<div class="line">   }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Compute element residual Vector and element Jacobian matrix (wrapper)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> get_jacobian(Vector&lt;double&gt; &amp;residuals,</div>
+<div class="line">                   DenseMatrix&lt;double&gt; &amp;jacobian)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Initialise residuals to zero</span></div>
+<div class="line">   residuals.initialise(0.0);</div>
+<div class="line">   <span class="comment">//Initialise the jacobian matrix to zero</span></div>
+<div class="line">   jacobian.initialise(0.0);</div>
+<div class="line">   <span class="comment">//Call the generic routine with the flag set to 1</span></div>
+<div class="line">   fill_in_generic_residual_contribution(residuals,jacobian,1);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of get_jacobian(...)</span></div>
+</div><!-- fragment --><p>The "real work" is done in the protected member function <code>get_residuals_generic(...)</code>, where we distinguish two cases.</p><ol type="1">
+<li>The load is prescribed, i.e. the (single) value in the load <code>Data</code> object is pinned. In this case, the element's <code>Data</code> contains only one unknown &ndash; the vertical displacement <img class="formulaInl" alt="$ Y_c $" src="form_13.png"/>, stored as value 1 in the internal <code>Data</code>. The element's residual vector has a single entry, given by <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\tt r}_0 = f_{load} - Y_c \ k_{stiff} \]" src="form_16.png"/>
+</p>
+ and the element's Jacobian matrix is a 1x1 matrix whose single entry is given by <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\tt J}_{00} = \frac{\partial {\tt r}_0}{\partial Y_c} = - k_{stiff} \]" src="form_17.png"/>
+</p>
+ <br  />
+</li>
+<li>If the load is unknown (i.e. an unknown in the overall problem) the element's <code>Data</code> contains two unknowns. Recall that an element only makes a contribution to the residuals associated with unknowns that it is "in charge of" &ndash; the external <code>Data</code> is assumed to be "determined" by another element. Therefore, the elements residual vectors (i.e. its contribution to the <code>Problem's</code> global residual vector) is given by <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left( \begin{array}{c} {\tt r}_0 \\ {\tt r}_1 \end{array} \right) = \left( \begin{array}{c} f_{load} - Y_c \ k_{stiff}\\ 0 \end{array} \right). \]" src="form_18.png"/>
+</p>
+ The element's 2x2 Jacobian matrix contains the derivatives of the residuals with respect to the element's unknowns, <img class="formulaInl" alt="$ Y_c $" src="form_13.png"/> and <img class="formulaInl" alt="$ f_{load}$" src="form_19.png"/>, <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left( \begin{array}{cc} {\tt J}_{00} &amp; {\tt J}_{01} \\ {\tt J}_{10} &amp; {\tt J}_{11} \end{array} \right) = \left( \begin{array}{cc} \partial {\tt r}_0 / \partial Y_c&amp; \partial {\tt r}_0 / \partial f_{load} \\ \partial {\tt r}_1 / \partial Y_c &amp; \partial {\tt r}_1 / \partial f_{load} \end{array} \right) = \left( \begin{array}{cc} - k_{stiff} &amp; 1 \\ 0 &amp; 0 \end{array} \right) \]" src="form_20.png"/>
+</p>
+ <br  />
+</li>
+</ol>
+<p>Note that we have (correctly!) assumed that the (fully automatic) local equation numbering procedure, implemented in <code>GeneralisedElement::assign_local_eqn_numbers()</code>, regards the internal degree of freedom as local unknown "0" and the external one (if it exists) as unknown "1". However, to be on the safe side, we determine the local equation numbers via the access functions <code>internal_local_eqn(i,j)</code> and <code>external_local_eqn(i,j)</code>, which return the local equation numbers of the j-th value, stored in the element's i-th internal (or external) <code>Data</code> object:</p>
+<div class="fragment"><div class="line"> <span class="comment">/// \short Compute element residual Vector (only if flag=0) and also</span></div>
+<div class="line"><span class="comment"> /// the element Jacobian matrix (if flag=1)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> fill_in_generic_residual_contribution(Vector&lt;double&gt; &amp;residuals,</div>
+<div class="line">                                            DenseMatrix&lt;double&gt; &amp;jacobian,</div>
+<div class="line">                                            <span class="keywordtype">unsigned</span> flag)</div>
+<div class="line">  { </div>
+<div class="line">   <span class="comment">//Find out how may dofs there are in the element</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_dof = ndof();</div>
+<div class="line">   <span class="comment">//If everything is pinned return straight away</span></div>
+<div class="line">   <span class="keywordflow">if</span> (n_dof==0) <span class="keywordflow">return</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Pseudo-elastic force balance to determine the position of the</span></div>
+<div class="line">   <span class="comment">// ring&#39;s centre for a given load.</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// What&#39;s the local equation number of the force balance equation</span></div>
+<div class="line">   <span class="comment">// [It&#39;s the equation that &quot;determines&quot; the value of the internal</span></div>
+<div class="line">   <span class="comment">// dof, y_c, which is stored as the second value of the one-and-only</span></div>
+<div class="line">   <span class="comment">// internal data object in this element]</span></div>
+<div class="line">   <span class="keywordtype">int</span> local_eqn_number_for_yc = </div>
+<div class="line">    internal_local_eqn(Internal_geometric_data_index,1);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Add residual to appropriate entry in the element&#39;s residual</span></div>
+<div class="line">   <span class="comment">// vector:</span></div>
+<div class="line">   residuals[local_eqn_number_for_yc]=load()-K_stiff*y_c();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Work out Jacobian: </span></div>
+<div class="line">   <span class="keywordflow">if</span> (flag)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Derivative of residual w.r.t. the internal dof, i.e. the vertical</span></div>
+<div class="line">     <span class="comment">// position of the ring&#39;s centre: d residual[0]/d y_c</span></div>
+<div class="line">     jacobian(local_eqn_number_for_yc,local_eqn_number_for_yc) = -K_stiff;</div>
+<div class="line">     </div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Derivative with respect to external dof, i.e. the applied </span></div>
+<div class="line">     <span class="comment">// load: d residual[0]/d load -- but only if the load is an unknown</span></div>
+<div class="line">     <span class="keywordflow">if</span> (n_dof==2)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// What&#39;s the local equation number of the load parameter?</span></div>
+<div class="line">       <span class="comment">// It&#39;s stored as the 0th value in the the element&#39;s</span></div>
+<div class="line">       <span class="comment">// one-and-only external data item:</span></div>
+<div class="line">       <span class="keywordtype">int</span> local_eqn_number_for_load = </div>
+<div class="line">        external_local_eqn(External_load_index,0);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line">       <span class="keywordflow">if</span> (local_eqn_number_for_load&lt;0)</div>
+<div class="line">        {</div>
+<div class="line">         <span class="keywordflow">throw</span> OomphLibError(</div>
+<div class="line">          <span class="stringliteral">&quot;Load is pinned and yet n_dof=2?\n This is very fishy!\n&quot;</span>,</div>
+<div class="line">          OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">          OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">        }</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line">         </div>
+<div class="line">       <span class="comment">// Add entry into element Jacobian</span></div>
+<div class="line">       jacobian(local_eqn_number_for_yc,local_eqn_number_for_load) = 1.0;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end of get_residuals_generic(...)</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="driver"></a>
+Part 3: The driver code</h1>
+<p>Finally, we provide an example that shows our <code>ElasticallySupportedRingElement</code> in action. The animation below shows the result of the computational simulation of the toy problem described at the beginning of the previous section: An elastically supported ring, subjected to a vertical load. The animation shows the position of the ring for various values of the load.</p>
+<div class="image">
+<img src="circle_as_element.gif" alt=""/>
+<div class="caption">
+Vertical displacement of a Circle, mounted on an elastic support. </div></div>
+ <hr  />
+<h2><a class="anchor" id="main"></a>
+The driver code</h2>
+<p>The driver builds the <code>Problem</code> object and solves the problem for various load levels:</p>
+ <div class="fragment"><div class="line"><span class="comment">//===============start_of_driver==========================================</span></div>
+<div class="line"><span class="comment">/// Driver </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="geom__object__element_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up the problem </span></div>
+<div class="line"> <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html">GeomObjectAsGeneralisedElementProblem</a> <a class="code" href="circle__as__element_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial value for the load </span></div>
+<div class="line"> <a class="code" href="circle__as__element_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.load()=-0.3;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop for different loads</span></div>
+<div class="line"> <span class="comment">//-------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of steps</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increment in load</span></div>
+<div class="line"> <span class="keywordtype">double</span> dp=0.6/double(nstep-1);</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line">  {    </div>
+<div class="line">   <span class="comment">// Solve/doc</span></div>
+<div class="line">   <a class="code" href="circle__as__element_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.newton_solve();</div>
+<div class="line">   <a class="code" href="circle__as__element_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_solution();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Increment counter for solutions </span></div>
+<div class="line">   <a class="code" href="circle__as__element_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.doc_info().number()++;    </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Change load on ring</span></div>
+<div class="line">   <a class="code" href="circle__as__element_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>.load()+=dp;</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of driver</span></div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="class"></a>
+The problem class definition</h2>
+<p>Here is the problem class definition which requires little comment:</p>
+ <div class="fragment"><div class="line"><span class="comment">//======start_of_problem==============================================</span></div>
+<div class="line"><span class="comment">/// Problem to demonstrate the use of a GeomObject as a </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// GeneralisedElement: A geometric object (a Circle) is &quot;upgraded&quot;</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// to a GeneralisedElement. The position of the Circle is</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// determined by a balance of forces, assuming that the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// Circle is mounted on an elastic spring of specified</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// stiffness and loaded by a vertical &quot;load&quot;. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classGeomObjectAsGeneralisedElementProblem.html">GeomObjectAsGeneralisedElementProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#ad1f15fcb6c055c58d1f71b522f1f7bd6">GeomObjectAsGeneralisedElementProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#af396d1789e2552c43e0c68561d88d473">actions_after_newton_solve</a>(){}</div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a4ae01862ddbbeeacca1ce7a444e28931">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a5092be8e6172d6c9147115bdd485db35">doc_solution</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Return value of the &quot;load&quot; on the elastically supported ring</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span>&amp; <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a5ae799de23742e4c8fa54ee7ae32e679">load</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> *<a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#ac04469b2dbce010fff3f5b2cf5591bcd">Load_pt</a>-&gt;value_pt(0);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access to DocInfo object</span></div>
+<div class="line"><span class="comment"></span> DocInfo&amp; <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a4be869d81c0df187d4239a590826f139">doc_info</a>() {<span class="keywordflow">return</span> <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a89a7f5fa555839193166f802d6ff6be2">Doc_info</a>;}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#ad6261e556a52596ba8904ee902ea6d70">Trace_file</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Pointer to data item that stores the &quot;load&quot; on the ring</span></div>
+<div class="line"><span class="comment"></span> Data* <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#ac04469b2dbce010fff3f5b2cf5591bcd">Load_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc info object</span></div>
+<div class="line"><span class="comment"></span> DocInfo <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a89a7f5fa555839193166f802d6ff6be2">Doc_info</a>;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="constructor"></a>
+The problem constructor</h2>
+<p>In the problem constructor, we create the (single) <code>ElasticallySupportedRingElement</code> and and assign a value to its "spring stiffness" parameter. </p><div class="fragment"><div class="line"><span class="comment">//=============================start_of_problem_constructor===============</span></div>
+<div class="line"><span class="comment">/// Constructor</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#ad1f15fcb6c055c58d1f71b522f1f7bd6">GeomObjectAsGeneralisedElementProblem::GeomObjectAsGeneralisedElementProblem</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set coordinates and radius for the circle</span></div>
+<div class="line"> <span class="keywordtype">double</span> x_c=0.5;</div>
+<div class="line"> <span class="keywordtype">double</span> y_c=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> R=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build GeomObject that&#39;s been upgraded to a GeneralisedElement</span></div>
+<div class="line"> <span class="comment">// GeneralisedElement* </span></div>
+<div class="line"> ElasticallySupportedRingElement* geom_object_element_pt = </div>
+<div class="line">  <span class="keyword">new</span> ElasticallySupportedRingElement(x_c,y_c,R);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the stiffness of the elastic support</span></div>
+<div class="line"> geom_object_element_pt-&gt;k_stiff()=0.3;</div>
+</div><!-- fragment --><p>Next, we create the problem's mesh: We start by creating an (empty) <code>Mesh</code> object and then add the (pointer to the) newly created <code>ElasticallySupportedRingElement</code> (in its incarnation as a <code>GeneralisedElement</code>) to it:</p>
+<div class="fragment"><div class="line"> <span class="comment">// Build mesh</span></div>
+<div class="line"> mesh_pt()=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// So far, the mesh is completely empty. Let&#39;s add the </span></div>
+<div class="line"> <span class="comment">// one (and only!) GeneralisedElement to it:</span></div>
+<div class="line"> mesh_pt()-&gt;add_element_pt(geom_object_element_pt);</div>
+</div><!-- fragment --><p>As discussed in the previous section, the load must be specified as a <code>Data</code> object that stores a single value. In our example, the load is prescribed (i.e. not an unknown in the problem) therefore the value must be pinned:</p>
+<div class="fragment"><div class="line"> <span class="comment">// Create the load (a Data object with a single value)</span></div>
+<div class="line"> Load_pt=<span class="keyword">new</span> Data(1);</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// The load is prescribed so its one-and-only value is pinned</span></div>
+<div class="line"> Load_pt-&gt;pin(0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the pointer to the Data object that specifies the </span></div>
+<div class="line"> <span class="comment">// load on the ring</span></div>
+<div class="line"> geom_object_element_pt-&gt;set_load_pt(Load_pt);</div>
+</div><!-- fragment --><p>Finally, we set up the equation numbering scheme, set the output directory and open a trace file in which we will document the load/displacement characteristics.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Setup equation numbering scheme.</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> Doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>); </div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/trace.dat&quot;</span>,Doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;VARIABLES=\&quot;load\&quot;,\&quot;y&lt;sub&gt;circle&lt;/sub&gt;\&quot;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="post"></a>
+The post-processing function</h2>
+<p>The post-processing routine is straightforward and is listed only to highlight the need to cast the pointer to the <code>GeneralisedElement</code> (as returned by <code>Mesh::element_pt(...)</code>) to the specific element used here &ndash; obviously, a <code>GeneralisedElement</code> does not have member functions that return the load on the ring or its vertical displacement.</p>
+<div class="fragment"><div class="line"><span class="comment">//===========================start_of_doc_solution========================</span></div>
+<div class="line"><span class="comment">/// Doc the solution in tecplot format.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a5092be8e6172d6c9147115bdd485db35">GeomObjectAsGeneralisedElementProblem::doc_solution</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=100;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Lagrangian coordinate and position vector (both as vectors)</span></div>
+<div class="line"> Vector&lt;double&gt; zeta(1);</div>
+<div class="line"> Vector&lt;double&gt; r(2);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,<a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a89a7f5fa555839193166f802d6ff6be2">Doc_info</a>.directory().c_str(),</div>
+<div class="line">         <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a89a7f5fa555839193166f802d6ff6be2">Doc_info</a>.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;npts;i++)</div>
+<div class="line">  {</div>
+<div class="line">   zeta[0]=2.0*MathematicalConstants::Pi*double(i)/double(npts-1);</div>
+<div class="line">   <span class="keyword">static_cast&lt;</span>ElasticallySupportedRingElement*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(0))-&gt;</div>
+<div class="line">    position(zeta,r);  </div>
+<div class="line">   some_file &lt;&lt; r[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; r[1] &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write &quot;load&quot; and vertical position of the ring&#39;s centre</span></div>
+<div class="line"> <a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#ad6261e556a52596ba8904ee902ea6d70">Trace_file</a> </div>
+<div class="line">  &lt;&lt; <span class="keyword">static_cast&lt;</span>ElasticallySupportedRingElement*<span class="keyword">&gt;</span>(</div>
+<div class="line">   mesh_pt()-&gt;element_pt(0))-&gt;<a class="code" href="classGeomObjectAsGeneralisedElementProblem.html#a5ae799de23742e4c8fa54ee7ae32e679">load</a>()</div>
+<div class="line">  &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">  &lt;&lt; <span class="keyword">static_cast&lt;</span>ElasticallySupportedRingElement*<span class="keyword">&gt;</span>(</div>
+<div class="line">   mesh_pt()-&gt;element_pt(0))-&gt;y_c()</div>
+<div class="line">  &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">  &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc_solution</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="notes"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>In the current implementation of the <code>ElasticallySupportedRingElement</code>, the load <code>Data</code> must only store a single value: Generalise this to the case where the <code>Data</code> object can contain an arbitrary number of values. You could add an additional argument to the <code>set_load_pt(...)</code> function to specify which value in the <code>Data</code> object represents the load. Think carefully in which other parts of the code this index will be required. <br  />
+<br  />
+</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="
+../../../../
+demo_drivers/interaction/free_boundary_poisson/
+">demo_drivers/interaction/free_boundary_poisson/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="
+../../../../
+demo_drivers/interaction/free_boundary_poisson/geom_object_element.cc
+">demo_drivers/interaction/free_boundary_poisson/geom_object_element.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html">GeomObjectAsGeneralisedElementProblem</a></div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00052">geom_object_element.cc:52</a></div></div>
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html_ac04469b2dbce010fff3f5b2cf5591bcd"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html#ac04469b2dbce010fff3f5b2cf5591bcd">GeomObjectAsGeneralisedElementProblem::Load_pt</a></div><div class="ttdeci">Data * Load_pt</div><div class="ttdoc">Pointer to data item that stores the &quot;load&quot; on the ring.</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00084">geom_object_element.cc:84</a></div></div>
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html_ad1f15fcb6c055c58d1f71b522f1f7bd6"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html#ad1f15fcb6c055c58d1f71b522f1f7bd6">GeomObjectAsGeneralisedElementProblem::GeomObjectAsGeneralisedElementProblem</a></div><div class="ttdeci">GeomObjectAsGeneralisedElementProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00098">geom_object_element.cc:98</a></div></div>
+<div class="ttc" id="ageom__object__element_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="geom__object__element_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver.</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00208">geom_object_element.cc:208</a></div></div>
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html_a4ae01862ddbbeeacca1ce7a444e28931"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html#a4ae01862ddbbeeacca1ce7a444e28931">GeomObjectAsGeneralisedElementProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00064">geom_object_element.cc:64</a></div></div>
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html_a5ae799de23742e4c8fa54ee7ae32e679"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html#a5ae799de23742e4c8fa54ee7ae32e679">GeomObjectAsGeneralisedElementProblem::load</a></div><div class="ttdeci">double &amp; load()</div><div class="ttdoc">Return value of the &quot;load&quot; on the elastically supported ring.</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00070">geom_object_element.cc:70</a></div></div>
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html_a4be869d81c0df187d4239a590826f139"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html#a4be869d81c0df187d4239a590826f139">GeomObjectAsGeneralisedElementProblem::doc_info</a></div><div class="ttdeci">DocInfo &amp; doc_info()</div><div class="ttdoc">Access to DocInfo object.</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00076">geom_object_element.cc:76</a></div></div>
+<div class="ttc" id="acircle__as__element_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="circle__as__element_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="circle__as__element_8txt_source.html#l00004">circle_as_element.txt:4</a></div></div>
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html_af396d1789e2552c43e0c68561d88d473"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html#af396d1789e2552c43e0c68561d88d473">GeomObjectAsGeneralisedElementProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00061">geom_object_element.cc:61</a></div></div>
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html_a89a7f5fa555839193166f802d6ff6be2"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html#a89a7f5fa555839193166f802d6ff6be2">GeomObjectAsGeneralisedElementProblem::Doc_info</a></div><div class="ttdeci">DocInfo Doc_info</div><div class="ttdoc">Doc info object.</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00087">geom_object_element.cc:87</a></div></div>
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html_a5092be8e6172d6c9147115bdd485db35"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html#a5092be8e6172d6c9147115bdd485db35">GeomObjectAsGeneralisedElementProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00151">geom_object_element.cc:151</a></div></div>
+<div class="ttc" id="aclassGeomObjectAsGeneralisedElementProblem_html_ad6261e556a52596ba8904ee902ea6d70"><div class="ttname"><a href="classGeomObjectAsGeneralisedElementProblem.html#ad6261e556a52596ba8904ee902ea6d70">GeomObjectAsGeneralisedElementProblem::Trace_file</a></div><div class="ttdeci">ofstream Trace_file</div><div class="ttdoc">Trace file.</div><div class="ttdef"><b>Definition:</b> <a href="geom__object__element_8cc_source.html#l00081">geom_object_element.cc:81</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:17:54
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

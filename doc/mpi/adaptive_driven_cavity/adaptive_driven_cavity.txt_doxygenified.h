@@ -1,0 +1,244 @@
+/**
+
+\mainpage Parallel solution of the adaptive driven cavity problem
+
+This document concerns the parallel solution of the 
+<a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">adaptive
+driven cavity problem</a>.  It is the first in a
+<a href="../../../example_code_list/html/index.html#distributed">
+series 
+of tutorials</a>
+that discuss how to modify serial driver codes to distribute the
+\c Problem object across multiple processors.
+
+Most of the driver code is identical to its serial counterpart and
+we only discuss the changes required to distribute the problem. Please
+refer to
+<a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">
+another tutorial</a> for a more detailed discussion of the
+problem and its (serial) implementation. 
+
+<HR>
+
+\section main_body The main function
+
+As described in the <a href="../../general_mpi/html/index.html">
+parallel processing document </a> all parallel driver codes must 
+initialise and shutdown oomph-lib's MPI routines
+by calling \c MPI_Helpers::init(...) and \c MPI_Helpers::finalize(). 
+The functions \c MPI_Helpers::init(...) 
+and \c  MPI_Helpers::finalize() call their MPI counterparts,
+\c MPI_Init(...) and \c MPI_Finalize(), which must \b not be called
+again. 
+
+In our demo driver codes, we surround all parallel
+sections of code with \c \#ifdefs to ensure that the code remains
+functional if compiled without parallel support (in which case
+the macro \c OOMPH_HAS_MPI is undefined), for example. 
+
+\dontinclude adaptive_driven_cavity.cc
+\skipline start_of_main
+\until #endif
+
+In order to distribute the problem over multiple processors a single
+call to the function \c Problem::distribute() is all that is
+required. Thus, a minimally-changed serial driver code would be
+\code
+ // Set output directory
+ DocInfo doc_info;
+ doc_info.set_directory("RESLT");
+
+ // Set max. number of black-box adaptation
+ unsigned max_adapt=3;
+
+ // Solve problem with Taylor Hood elements
+ //---------------------------------------
+ {
+  //Build problem
+  RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2> > problem;
+
+  //Distribute the problem (only change from serial version)
+  problem.distribute();         
+
+  //Solve the problem with automatic adaptation
+  problem.newton_solve(max_adapt);
+
+  //Output solution
+  problem.doc_solution(doc_info);
+ }
+\endcode
+
+ Finally, we must call \c MPI_finalize() before the end of the main
+ function
+\dontinclude adaptive_driven_cavity.cc
+\skipline Finalise MPI
+\until }
+
+The actual driver code is slightly more complicated that the 
+version shown above because it also acts as a self-test. The distribution
+of individual elements over the processors is determined by 
+\c METIS and we have found that \c METIS occasionally gives slightly
+different results on different machines. To ensure reproducible 
+results when acting as a self-test, the code (like all our parallel test codes) 
+reads a predetermined element distribution from the disk; see 
+<a href="#distribution">  below </a> for more details.
+
+<HR>
+
+\section problem_class Changes to the problem class
+
+A particular feature of the
+<a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html"> 
+driven cavity problem</a> is that the flow is completely enclosed
+and that a single pressure degree of freedom must be prescribed. 
+In the serial driver code, we arbitrarily pinned the first pressure
+degree of freedom in the "first" element in the mesh. 
+Once the problem is distributed this element will only be available to
+particular processors and the pressure degree of freedom must be
+pinned on each one.
+Consequently we re-write the \c actions_after_adapt()
+function as follows:
+
+\dontinclude adaptive_driven_cavity.cc
+\skipline After adaptation: Unpin pressure
+\until end_of_actions_after_adapt
+
+This change ensures that every processor that holds the element
+containing the node at position (0,0) (i.e. the first element) 
+fixes the pressure for that element. The floating-point comparison
+does not cause any problems in this case because the \c Node's
+position is explicitly set to "exactly" (0.0,0.0) in the Mesh
+constructor and never changes.
+
+It is not necessary to change the corresponding statements
+in the problem constructor because the problem distribution occurs after 
+the problem has been constructed.  In fact, the problem constructor 
+is unchanged from the serial version. 
+
+<HR>
+
+\section doc_solution Changes to doc_solution
+
+The \c doc_solution() routine requires a slight modification to ensure
+that the output from different processors can be distinguished; this 
+is achieved by including the current processor number in the 
+filename of the solution:
+
+\skipline start_of_doc_solution
+\until end_of_doc_solution
+
+<HR>
+
+The figure below shows the mesh after the final solution of this
+problem, distributed across two processors, with the two colours
+indicating which processor the elements belong to.
+
+\image html partition.gif "Plot illustrating the distribution of the mesh for the adaptive driven cavity " 
+\image latex partition.eps "Plot illustrating the distribution of the mesh for the adaptive driven cavity " width=0.75\textwidth
+
+
+<HR>
+
+\section distribution Customising the distribution
+
+The actual driver code demonstrates two of the different options available 
+for the \c Problem::distribute() function, selected by the presence or 
+absence of command line arguments.
+
+\subsection no_disk Option I: Distributing a problem using METIS and documenting its distribution
+
+If no command line arguments are specified we determine the problem
+distribution using \c METIS, and write the distribution to a file.
+
+\skipline Are there
+\until {
+
+The distribution is represented by a vector of unsigneds whose values indicate
+the processor on which the corresponding element is stored.
+
+\until out_element_partiti
+
+We distribute the problem with a call to \c Problem::distribute(...),
+using the boolean flag to request that the relevant statistics
+are displayed on screen. The distribution chosen for the elements 
+is returned in the vector created earlier.
+
+\until problem.distribute(
+
+We document the distribution by writing the distribution vector
+to a file. 
+
+\until }
+
+Finally, we perform an optional self-test of the halo-haloed lookup
+schemes.
+
+\until #endif
+
+<HR>
+
+\subsection from_disk Option II: Using a pre-determined distribution
+
+If command line arguments are specified (typically when the code is 
+run in validation mode) we read the distribution from disk,
+using a file that was written using the procedure shown above.
+(This is useful because in our experience \c METIS may produce 
+slightly different distribution on different machines. This would
+cause the self-tests to fail even though the computed results 
+would be correct). 
+
+We start by creating a \c DocInfo object that specifies the directory
+in which the problem distribution will be documented and by reading in
+the vector that represents the distribution
+
+\dontinclude adaptive_driven_cavity.cc
+\skipline partition from file
+\until }
+
+We pass the distribution vector to \c Problem::distribute(...) and
+thus bypass the partitioning by \c METIS. 
+
+\until #endif
+
+We note that it is possible to document a mesh's distribution
+at any point, using the \c Mesh::doc_mesh_distribution(...) function,
+as indicated here
+
+\until end of Taylor Hood elements
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+
+The driver code from which this example is taken also solves the same
+distributed problem using Crouzeix-Raviart elements.  The fully
+modified parallel driver code can be found at
+
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc">
+demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc
+</A>
+</CENTER>
+
+For further examples of using the \c distribute() function for both 
+two-dimensional and three-dimensional single-domain problems, see
+the directory
+
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/distribution/">
+demo_drivers/mpi/distribution/
+</A>
+</CENTER>
+
+
+
+
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Deformation of a string under tension, using Kirchhoff-Love Beam elements.</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Demo problem: Deformation of a string under tension, using Kirchhoff-Love Beam elements. </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document, we discuss the solution of a simple one-dimensional solid mechanics problem, using <code>oomph-lib's</code> Kirchhoff-Love beam elements:</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>One-dimensional beam problem</b> </center><p> Determine the deformation of a pre-stressed, pressure-loaded elastic beam of length <img class="formulaInl" alt="$ L^* $" src="form_0.png"/> and wall thickness <img class="formulaInl" alt="$ h^* $" src="form_1.png"/> . In its undeformed configuration, the beam is subject to an axial (2nd Piola-Kirchhoff) pre-stress of size <img class="formulaInl" alt="$ \sigma^*_0 $" src="form_2.png"/> . We wish to compute its deformation when it is loaded by a spatially uniform pressure of size <img class="formulaInl" alt="$ p^*_{ext} $" src="form_3.png"/> .</p>
+<div class="image">
+<img src="string_sketch.gif" alt=""/>
+<div class="caption">
+A pre-stressed elastic beam under constant pressure loading. </div></div>
+    </td></tr>
+</table>
+<br  />
+ </center><p> <br  />
+</p>
+<hr  />
+<h1><a class="anchor" id="non_dim"></a>
+Theory and non-dimensionalisation</h1>
+<p><code>oomph-lib's</code> beam elements are based on geometrically nonlinear Kirchhoff-Love beam theory with incrementally linear constitutive equations (Young's modulus <img class="formulaInl" alt="$ E $" src="form_4.png"/> and Poisson's ratio <img class="formulaInl" alt="$ \nu $" src="form_5.png"/>). The equations are implemented in non-dimensional form, obtained by non-dimensionalising all length on some lengthscale <img class="formulaInl" alt="$ {\cal L} $" src="form_6.png"/>, by scaling the stresses and the applied traction on the beam's effective Young's modulus <img class="formulaInl" alt="$ E_{eff} = E/(1-\nu^2) $" src="form_7.png"/> and by non-dimensionalising time on some timescale <img class="formulaInl" alt="$ {\cal T} $" src="form_8.png"/> so that the dimensional (identified by an asterisk) and non-dimensional variables are related by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ L^* = {\cal L} \ L, \]" src="form_9.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ h^* = {\cal L} \ h, \]" src="form_10.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ t^* = {\cal T} \ t, \]" src="form_11.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ p_{ext}^* = E_{eff} \ p_{ext}, \]" src="form_12.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sigma_0^* = E_{eff} \ \sigma_0. \]" src="form_13.png"/>
+</p>
+<p> The beam's undeformed shape is parametrised by a non-dimensional Lagrangian coordinate <img class="formulaInl" alt="$ \xi = \xi^*/{\cal L} $" src="form_14.png"/> so that the non-dimensional position vector to a material particle on the beam's centreline in the undeformed configuration is given by <img class="formulaInl" alt="$ {\bf r}_w(\xi) $" src="form_15.png"/> . We denote the unit normal to the beam's undeformed centreline by <img class="formulaInl" alt="$ {\bf n} $" src="form_16.png"/>. The applied traction <img class="formulaInl" alt="$ {\bf f} = {\bf f}^*/E_{eff} $" src="form_17.png"/> (a force per unit deformed length of the beam) deforms the beam, causing its material particles to be displaced to their new positions <img class="formulaInl" alt="$ {\bf R}_w(\xi) $" src="form_18.png"/>; the unit normal to the beam's deformed centreline is <img class="formulaInl" alt="$ {\bf N} $" src="form_19.png"/>.</p>
+<p>The non-dimensional form of the principle of virtual displacements that governs the beams deformation is then given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \int_0^{L} \left[ (\sigma_0 + \gamma) \ \delta \gamma + \frac{1}{12} h^2 \kappa \ \delta \kappa - \left(\frac{1}{h} \sqrt{\frac{A}{a}} \ {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot \delta {\bf R}_w \right] \ \sqrt{a} \ d\xi = 0, \ \ \ \ \ \ \ \ \ (1) \]" src="form_20.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ a = \frac{\partial {\bf r}_w}{\partial \xi} \cdot \frac{\partial {\bf r}_w}{\partial \xi}, \]" src="form_21.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ A = \frac{\partial {\bf R}_w}{\partial \xi} \cdot \frac{\partial {\bf R}_w}{\partial \xi}, \]" src="form_22.png"/>
+</p>
+<p> represent the squares of the lengths of infinitesimal material line elements in the undeformed and the deformed configurations, respectively. </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ ds = \sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS = \sqrt{A} \ d\xi. \]" src="form_23.png"/>
+</p>
+<p> <img class="formulaInl" alt="$ A $" src="form_24.png"/> and <img class="formulaInl" alt="$ a $" src="form_25.png"/> may be interpreted as the "1x1 metric
+tensors" of the beam's centreline, in the deformed and undeformed configurations, respectively. The ratio <img class="formulaInl" alt="$ \sqrt{A/a} $" src="form_26.png"/> represents the "extension ratio" or the "stretch" of the beam's centreline.</p>
+<p>We represent the curvature of the beam's centreline before and after the deformation by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ b = {\bf n} \cdot \frac{\partial^2 {\bf r}_w}{d\xi^2} \]" src="form_27.png"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ B = {\bf N} \cdot \frac{\partial^2 {\bf R}_w}{d\xi^2} \]" src="form_28.png"/>
+</p>
+<p> respectively. The ("1x1") strain and and bending "tensors" <img class="formulaInl" alt="$ \gamma $" src="form_29.png"/> and <img class="formulaInl" alt="$ \kappa $" src="form_30.png"/> are then given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \gamma = \frac{1}{2}\left(A-a\right) \mbox{\ \ \ and \ \ \ } \kappa = - \left( B-b \right). \]" src="form_31.png"/>
+</p>
+<p> Finally, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \Lambda = \frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}} \]" src="form_32.png"/>
+</p>
+<p> is the ratio of the natural timescale of the beam's in-plane extensional oscillations, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\cal T}_{natural} = {\cal L} \sqrt{\frac{\rho}{E_{eff}}}, \]" src="form_33.png"/>
+</p>
+<p> to the timescale <img class="formulaInl" alt="$ {\cal T}$" src="form_34.png"/> used in the non-dimensionalisation of the equations. <img class="formulaInl" alt="$ \Lambda^2 $" src="form_35.png"/> may be interpreted as the non-dimensional wall density, therefore <img class="formulaInl" alt="$ \Lambda=0 $" src="form_36.png"/> corresponds to the case without wall inertia.</p>
+<p><a class="anchor" id="hermite"></a><code>oomph-lib's</code> <code>HermiteBeamElement</code> provides a discretisation of the variational principle (1) with one-dimensional, isoparametric, two-node Hermite solid mechanics elements. In these elements, the Eulerian positions of the nodes, accessible via <code>Node::x(...)</code>, are regarded as unknowns, and Hermite interpolation is used to interpolate the position between the nodes, so that the Eulerian position of material points within an element is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_i(s) = \sum_{j=1}^2 \sum_{k=1}^2 X_{ijk} \ \psi_{jk}(s) \mbox{\ \ \ for $i=1,2$}, \ \ \ \ \ \ \ \ (2) \]" src="form_37.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ s \in [-1,1] $" src="form_38.png"/> is the element's 1D local coordinate. The functions <img class="formulaInl" alt="$ \psi_{jk}(s) $" src="form_39.png"/> are the one-dimensional Hermite shape functions </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_{11}(s) = \frac{1}{4}\left(s^3 - 3s + 2\right), \]" src="form_40.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_{12}(s) = \frac{1}{4}\left(s^3 - s^2 - s +1 \right), \]" src="form_41.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_{21}(s) = \frac{1}{4}\left(2 + 3 s - s^3\right), \]" src="form_42.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \psi_{22}(s) = \frac{1}{4}\left(s^3 + s^2 -s -1 \right). \]" src="form_43.png"/>
+</p>
+<p> They have the property that</p><ul>
+<li><img class="formulaInl" alt="$ \psi_{j1} = 1 $" src="form_44.png"/> at node <img class="formulaInl" alt="$ j $" src="form_45.png"/> and <img class="formulaInl" alt="$ \psi_{j1} = 0 $" src="form_46.png"/> at the other node. Furthermore, <img class="formulaInl" alt="$ d\psi_{j1}/ds = 0 $" src="form_47.png"/> at both nodes.</li>
+<li><img class="formulaInl" alt="$ d\psi_{j2}/ds = 1 $" src="form_48.png"/> at node <img class="formulaInl" alt="$ j $" src="form_45.png"/> and <img class="formulaInl" alt="$ d\psi_{j2}/ds = 0 $" src="form_49.png"/> at the other node. Furthermore, <img class="formulaInl" alt="$ \psi_{j2} = 0 $" src="form_50.png"/> at both nodes.</li>
+</ul>
+<p>The mapping (2) therefore provide an independent interpolation for the position and its derivative with respect to the local coordinate <img class="formulaInl" alt="$ s $" src="form_51.png"/>. As a result we have two types of (generalised) nodal coordinates:</p><ul>
+<li><img class="formulaInl" alt="$ X_{ij1} $" src="form_52.png"/> represents the <img class="formulaInl" alt="$ i $" src="form_53.png"/>-th coordinate of the element's local node <img class="formulaInl" alt="$ j $" src="form_45.png"/>.</li>
+<li><img class="formulaInl" alt="$ X_{ij2} $" src="form_54.png"/> represents the derivative of <img class="formulaInl" alt="$ i $" src="form_53.png"/>-th coordinate with respect to the local coordinate <img class="formulaInl" alt="$ s $" src="form_51.png"/>, evaluated at the element's local node <img class="formulaInl" alt="$ j $" src="form_45.png"/>.</li>
+</ul>
+<p>This representation ensures the <img class="formulaInl" alt="$ C^1 $" src="form_55.png"/> continuity of the wall shape, required by the variational principle (1) which contains second derivatives of <img class="formulaInl" alt="$ {\bf R}_w $" src="form_56.png"/>. Physically, the inter-element continuity of the slope is enforced by the beam's nonzero bending stiffness.</p>
+<p><a class="anchor" id="solid_bound"></a>The two "types" of "generalised" positional degrees of freedom are accessible via the function <code>Node::x_gen(k,i)</code>, where <code>Node::x_gen(0,i)</code> <img class="formulaInl" alt="$ \equiv $" src="form_57.png"/> <code>Node::x(i)</code>. The two types of positional degrees of freedom correspond to the two types of boundary conditions (pinned and clamped) that can be applied at the ends of the beam. Mathematically, the number of boundary conditions reflects the fact that the Euler-Lagrange equations of the variational principle are of fourth-order.</p>
+<p>The nodes of solid mechanics elements are <code>SolidNodes</code>, a generalisation of the basic <code>Node</code> class that allows the nodal positions to be treated as unknowns. Its member function <code>SolidNode::pin_position(...)</code> allows the application of boundary conditions for the (generalised) nodal positions. The table below lists several common boundary conditions and their application: </p><table border="1">
+<tr>
+<td>Boundary condition  </td><td>Mathematical condition  </td><td>Implementation   </td></tr>
+<tr>
+<td><b>Pinned:</b> <img src="../figures/pinned.gif" alt="" class="inline"/>  </td><td><img class="formulaInl" alt="$ {\bf R}_w \cdot {\bf e}_x = const. $" src="form_58.png"/> <br  />
+ <img class="formulaInl" alt="$ {\bf R}_w \cdot {\bf e}_y = const. $" src="form_59.png"/>  </td><td><code>SolidNode::pin_position(0)</code>;<br  />
+ <code>SolidNode::pin_position(1)</code>; <br  />
+ <br  />
+or, equivalently, <br  />
+ <br  />
+<code>SolidNode::pin_position(0,0)</code>;<br  />
+ <code>SolidNode::pin_position(0,1)</code>; <br  />
+  </td></tr>
+<tr>
+<td><b>Pinned, sliding in the x-direction:</b> <img src="../figures/pinned_sliding_x.gif" alt="" class="inline"/>  </td><td><img class="formulaInl" alt="$ {\bf R}_w \cdot {\bf e}_y = const. $" src="form_59.png"/>  </td><td><code>SolidNode::pin_position(1)</code>; <br  />
+ <br  />
+or, equivalently, <br  />
+ <br  />
+<code>SolidNode::pin_position(0,1)</code>; <br  />
+  </td></tr>
+<tr>
+<td><b>Pinned, sliding in the y-direction:</b> <img src="../figures/pinned_sliding_y.gif" alt="" class="inline"/>  </td><td><img class="formulaInl" alt="$ {\bf R}_w \cdot {\bf e}_x = const. $" src="form_58.png"/>  </td><td><code>SolidNode::pin_position(0)</code>; <br  />
+ <br  />
+or, equivalently, <br  />
+ <br  />
+<code>SolidNode::pin_position(0,0)</code>; <br  />
+  </td></tr>
+<tr>
+<td><b>Clamped:</b> <img src="../figures/clamped.gif" alt="" class="inline"/>  </td><td><img class="formulaInl" alt="$ {\bf R}_w \cdot {\bf e}_x = const. $" src="form_58.png"/><br  />
+ <img class="formulaInl" alt="$ {\bf R}_w \cdot {\bf e}_y = const. $" src="form_59.png"/> <br  />
+ <img class="formulaInl" alt="$ d({\bf R}_w \cdot {\bf e}_y)/d\xi = 0. $" src="form_60.png"/>  </td><td><code>SolidNode::pin_position(0)</code>; <br  />
+ <code>SolidNode::pin_position(1)</code>; <br  />
+ <code>SolidNode::pin_position(1,1)</code>; <br  />
+ <br  />
+or, equivalently, <br  />
+ <br  />
+<code>SolidNode::pin_position(0,0)</code>; <br  />
+ <code>SolidNode::pin_position(0,1)</code>; <br  />
+ <code>SolidNode::pin_position(1,1)</code>; <br  />
+  </td></tr>
+<tr>
+<td><b>Clamped, sliding in the y-direction<br  />
+(symmetry boundary condition!)</b> <img src="../figures/clamped_sliding_y.gif" alt="" class="inline"/>  </td><td><img class="formulaInl" alt="$ {\bf R}_w \cdot {\bf e}_x = const. $" src="form_58.png"/><br  />
+ <img class="formulaInl" alt="$ d({\bf R}_w \cdot {\bf e}_y)/d\xi = 0. $" src="form_60.png"/>  </td><td><code>SolidNode::pin_position(0)</code>; <br  />
+ <code>SolidNode::pin_position(1,1)</code>; <br  />
+ <br  />
+or, equivalently, <br  />
+ <br  />
+<code>SolidNode::pin_position(0,0)</code>; <br  />
+ <code>SolidNode::pin_position(1,1)</code>; <br  />
+  </td></tr>
+</table>
+<p>The <code>HermiteBeamElement</code> provides default values for all non-dimensional physical parameters:</p><ul>
+<li>the non-dimensional 2nd Piola Kirchhoff pre-stress <img class="formulaInl" alt="$ \sigma_0 $" src="form_61.png"/> is zero.</li>
+<li>the non-dimensional beam thickness <img class="formulaInl" alt="$ h $" src="form_62.png"/> is 1/20.</li>
+<li>the timescale ratio <img class="formulaInl" alt="$ \Lambda^2 $" src="form_35.png"/> is 1.</li>
+<li>the non-dimensional traction vector <img class="formulaInl" alt="$ {\bf f} $" src="form_63.png"/> evaluates to zero.</li>
+</ul>
+<p>These values can be over-written via suitable access functions. [Time-dependent computations also require the specification of a timestepper for the elements. This is demonstrated in <a href="../../../beam/unsteady_ring/html/index.html">another example.</a>] The "user" must specify:</p><ul>
+<li>the undeformed wall shape <img class="formulaInl" alt="$ {\bf r}_w(\xi) $" src="form_15.png"/> as a <code>GeomObject</code> &ndash; see the <a href="../../../poisson/fish_poisson2/html/index.html">earlier example</a> for a discussion of <code>oomph-lib's</code> geometric objects.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The animation shown below illustrates the deformation of the beam under increasing pressure. An increase in pressure initially deflects the beam vertically downwards. The pressure acts as a "follower
+load" since it always acts in the direction normal to the deformed beam. This causes the beam to deform into an approximately circular shape whose radius increases rapidly.</p>
+<div class="image">
+<img src="string_animation.gif" alt=""/>
+<div class="caption">
+Deformation of a pre-stressed elastic beam under constant pressure loading. </div></div>
+ <hr  />
+<h1><a class="anchor" id="approx"></a>
+An approximate analytical solution</h1>
+<p>Before discussing the details of the numerical solution, we will derive an approximate analytical solution of the problem. The analytical solution will be useful to validate the computational results, and the derivation will allow us to discuss certain aspects of the theory in more detail.</p>
+<p>We start by parametrising the beam's undeformed shape as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf r}_w(\xi) = \left( \begin{array}{c} \xi \\ 0 \end{array} \right) \mbox{ \ \ \ \ where $\xi \in [0,L].$} \]" src="form_64.png"/>
+</p>
+<p> The 1x1 "metric tensor" associated with this parametrisation is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ a = \frac{{\bf r}_w(\xi)}{d\xi} \cdot \frac{{\bf r}_w(\xi)}{d\xi} = 1, \]" src="form_65.png"/>
+</p>
+<p> consistent with the fact that the Lagrangian coordinate <img class="formulaInl" alt="$ \xi $" src="form_66.png"/> is the arclength along the beam's undeformed centreline.</p>
+<p>If the beam is thin (so that <img class="formulaInl" alt="$ h \ll 1 $" src="form_67.png"/>) bending effects will be confined to thin boundary layers near its ends. The beam will therefore behave (approximately) like a "string under tension" and its deformed shape will be an arc of a circle. All material line elements will be stretched by the same amount so that the tension is spatially uniform. The position vector to the material particles on the beam's deformed centreline is therefore given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf R}_w(\xi) = \left( \begin{array}{c} \frac{1}{2}\left(1+\frac{\sin(-\alpha/2+\alpha\xi/L)} {\sin(\alpha/2)}\right) \\ \frac{\cos(-\alpha/2+\alpha\xi/L)-\cos(\alpha/2)} {2\sin(\alpha/2)} \end{array} \right) \mbox{ \ \ \ \ where $\xi \in [0,L].$} \ \ \ \ \ \ \ \ \ (3) \]" src="form_68.png"/>
+</p>
+<p> (See the <a class="el" href="index.html#comments">Exercises and Comments</a> for a more detailed discussion of this analytical solution.) Here <img class="formulaInl" alt="$ \alpha $" src="form_69.png"/> is the opening angle of the circular arc as shown in this sketch:</p>
+<div class="image">
+<img src="string.gif" alt=""/>
+<div class="caption">
+Sketch illustrating the approximate analytical solution for the problem. </div></div>
+ <p>This deformation generates a uniform stretch of </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{dS}{ds} = \sqrt{\frac{A}{a}} = \frac{1}{2} \frac{\alpha}{\sin(\alpha/2)}, \]" src="form_70.png"/>
+</p>
+<p> corresponding to a uniform strain </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \gamma = \frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)} - 1 \right). \]" src="form_71.png"/>
+</p>
+<p> The incremental Hooke's law predicts a linear relation between the (2nd Piola Kirchhoff) stress, <img class="formulaInl" alt="$ \sigma $" src="form_72.png"/>, and the (Green) strain, <img class="formulaInl" alt="$ \gamma $" src="form_29.png"/>, so that </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sigma = \sigma_0 + \gamma, \]" src="form_73.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \sigma_0 $" src="form_61.png"/> is the axial pre-stress that acts in the undeformed configuration.</p>
+<p>An elementary force balance shows that the pressure <img class="formulaInl" alt="$ p_{ext} $" src="form_74.png"/> required to deform the beam into the shape specified by (3), is given by "Laplace's law" <br  />
+ </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ p_{ext} =\frac{{\tt T}}{R} \]" src="form_75.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R = \frac{L}{2 \sin(\alpha/2)} \]" src="form_76.png"/>
+</p>
+<p> is the radius of the circular arc, and the axial tension <img class="formulaInl" alt="$ {\tt T} $" src="form_77.png"/> is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\tt T} = h \ (\sigma_0 + \gamma) \ \left|\frac{d{\bf R}_w}{d\xi}\right| = h \ (\sigma_0 + \gamma) \ \sqrt{A}. \]" src="form_78.png"/>
+</p>
+<p> In this expression we have used the fact that the 2nd Piola Kirchhoff stress <img class="formulaInl" alt="$ \sigma $" src="form_72.png"/> decomposes the (physical) stress vector into the vector <img class="formulaInl" alt="$ d{\bf R}_w/d\xi $" src="form_79.png"/>. This vector is tangent to the deformed centreline but not necessarily a unit vector.</p>
+<p>The pressure required to deform the beam into a circular arc with opening angle <img class="formulaInl" alt="$ \alpha $" src="form_69.png"/> is therefore given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ p_{ext} = \frac{\alpha h}{L} \ \left(\sigma_0 + \frac{1}{2}\left(\frac{1}{4}\frac{\alpha^2}{\sin^2(\alpha/2)} - 1 \right) \right). \]" src="form_80.png"/>
+</p>
+<p>To facilitate comparisons with the numerical solutions, we determine the opening angle <img class="formulaInl" alt="$ \alpha $" src="form_69.png"/> as a function of the vertical displacement <img class="formulaInl" alt="$ d $" src="form_81.png"/> of the beam's midpoint by determining the auxiliary angle <img class="formulaInl" alt="$ \beta $" src="form_82.png"/> from </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tan\beta = \frac{2d}{L}. \]" src="form_83.png"/>
+</p>
+<p> The opening angle then follows from </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \tan\left(\frac{\alpha}{2}\right) = \tan(\pi - 2\beta) = - \tan 2\beta = \frac{2\tan\beta}{\tan^{2}\beta -1}. \]" src="form_84.png"/>
+</p>
+<p>Here is a comparison between the computed and analytically predicted values for the pressure <img class="formulaInl" alt="$ p_{ext} $" src="form_74.png"/>, required to deflect the beam's midpoint by the specified displacement, <img class="formulaInl" alt="$ d $" src="form_81.png"/>.</p>
+<div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Comparison between the computed and analytical solutions. </div></div>
+ <table class="doxtable">
+<tr>
+<td bgcolor="cornsilk"><center><b>Comment: Geometric and constitutive nonlinearities</b></center><p> The comparison between the computational results and the analytical predictions is very satisfying but is important to realise that the agreement only validates the numerical solution, not the physical model. <code>oomph-lib's</code> <code>HermiteBeamElement</code> is based on a <b>geometrically</b> <b>nonlinear</b> theory, implying that the kinematics of the deformation are captured exactly for arbitrarily large displacements and rotations. However, the use of <b>incrementally</b> <b>linear</b> <b>constitutive</b> <b>equations</b> in the variational principle (1) can only be justified if the strain is small. This is clearly not the case for the deformations shown above. The combination of geometric nonlinearity with linear constitutive equations can, however, be justified in applications in which the beam undergoes large displacements with little extension of its centreline. This typically occurs in stability problems, such as the <a href="../../steady_ring/html/index.html">buckling of a circular ring under external pressure</a>, considered in <a href="../../steady_ring/html/index.html">another example</a>.</p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<hr  />
+<p> <br  />
+ </p><hr  />
+<h1><a class="anchor" id="global"></a>
+Global parameters and functions</h1>
+<p>The namespace <code><a class="el" href="namespaceGlobal__Physical__Variables.html" title="Namespace for physical parameters.">Global_Physical_Variables</a></code> contains the dimensionless beam thickness, <img class="formulaInl" alt="$ h $" src="form_62.png"/>, the dimensionless pre-stress, <img class="formulaInl" alt="$ \sigma_{0} $" src="form_85.png"/>, and the pressure load, <img class="formulaInl" alt="$ p_{ext} $" src="form_74.png"/>, as well as the function <code><a class="el" href="namespaceGlobal__Physical__Variables.html#a321267e1efb30b5d586302509354fb07" title="Load function: Apply a constant external pressure to the beam.">Global_Physical_Variables::load()</a></code> which computes the load vector in the form required by the <code>HermiteBeamElements</code>. (The function's arguments allow the load vector to be a function of the Lagrangian and Eulerian coordinates, and the unit normal to the deformed beam, <img class="formulaInl" alt="$ {\bf N} $" src="form_19.png"/>.)</p>
+ <div class="fragment"><div class="line"><span class="comment">//========start_of_namespace========================</span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Non-dimensional thickness</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">H</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// 2nd Piola Kirchhoff pre-stress</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a417dc688a70c4f06ef0faed047068ba2">Sigma0</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pressure load</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a0406c0cbd463d1df2458fe5de98a00eb">P_ext</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Load function: Apply a constant external pressure to the beam</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a321267e1efb30b5d586302509354fb07">load</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, <span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">           <span class="keyword">const</span> Vector&lt;double&gt;&amp; N, Vector&lt;double&gt;&amp; <a class="code" href="namespaceGlobal__Physical__Variables.html#a321267e1efb30b5d586302509354fb07">load</a>)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++) {<a class="code" href="namespaceGlobal__Physical__Variables.html#a321267e1efb30b5d586302509354fb07">load</a>[i] = -<a class="code" href="namespaceGlobal__Physical__Variables.html#a0406c0cbd463d1df2458fe5de98a00eb">P_ext</a>*N[i];}</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The main code is very short. The physical parameters <img class="formulaInl" alt="$ h $" src="form_62.png"/>, <img class="formulaInl" alt="$ \sigma_{0} $" src="form_85.png"/> and <img class="formulaInl" alt="$ L $" src="form_86.png"/> are initialised and the problem is constructed using 10 elements. Following the usual self-test, we call the function <a class="el" href="classElasticBeamProblem.html#a2da3cb02ce953da67fb27742e20774a5" title="Conduct a parameter study.">ElasticBeamProblem::parameter_study()</a> to compute the deformation of the beam for a range of external pressures.</p>
+ <div class="fragment"><div class="line"><span class="comment">//========start_of_main================================================</span></div>
+<div class="line"><span class="comment">/// Driver for beam (string under tension) test problem </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="tensioned__string_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the non-dimensional thickness </span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">Global_Physical_Variables::H</a>=0.01; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the 2nd Piola Kirchhoff prestress</span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a417dc688a70c4f06ef0faed047068ba2">Global_Physical_Variables::Sigma0</a>=0.1; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the length of domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> L = 10.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements (choose an even number if you want the control point </span></div>
+<div class="line"> <span class="comment">// to be located at the centre of the beam)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = 10;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Construst the problem</span></div>
+<div class="line"> <a class="code" href="classElasticBeamProblem.html">ElasticBeamProblem</a> <a class="code" href="tensioned__string_8txt.html#a1ce091cd301555b09a13f3432beaf2fd">problem</a>(n_element,L);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check that we&#39;re ready to go:</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\n\n\nProblem self-test &quot;</span>;</div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code" href="tensioned__string_8txt.html#a1ce091cd301555b09a13f3432beaf2fd">problem</a>.self_test()==0) </div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;passed: Problem can be solved.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(<span class="stringliteral">&quot;Self test failed&quot;</span>,</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Conduct parameter study</span></div>
+<div class="line"> <a class="code" href="tensioned__string_8txt.html#a1ce091cd301555b09a13f3432beaf2fd">problem</a>.parameter_study();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class has five member functions, only two of which are non-trivial:</p><ul>
+<li>the problem constructor, <code><a class="el" href="classElasticBeamProblem.html" title="Beam problem object.">ElasticBeamProblem(...)</a></code>, whose arguments specify the number of elements and the beam's undeformed length.</li>
+<li>the function <code>parameter_study()</code>, which computes the beam's deformation for a range of external pressures.</li>
+</ul>
+<p>In the present problem, the functions <code>Problem::actions_before_newton_solve()</code> and <code>Problem::actions_after_newton_solve()</code> are not required, so remain empty. The function <code><a class="el" href="classElasticBeamProblem.html#ae7d14ba8bec2325a82cbeed0c1b29910" title="Return pointer to the mesh.">ElasticBeamProblem::mesh_pt()</a></code> overloads the (virtual) function <code>Problem::mesh_pt()</code> to return a pointer to the specific mesh used in this problem. This avoids explicit re-casts when member functions of the specific mesh need to be accessed.</p>
+<p>The class also includes three private data members which store a pointer to a node at which the displacement is documented, the length of the domain, and a pointer to the geometric object that specifies the beam's undeformed shape.</p>
+ <div class="fragment"><div class="line"><span class="comment">//======start_of_problem_class==========================================</span></div>
+<div class="line"><span class="comment">/// Beam problem object</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classElasticBeamProblem.html">ElasticBeamProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// \short Constructor: The arguments are the number of elements, </span></div>
+<div class="line"><span class="comment"> /// the length of domain</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classElasticBeamProblem.html#a1c62c2a14c9a5528a649700d16dac2ea">ElasticBeamProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;n_elem, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;length);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Conduct a parameter study</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticBeamProblem.html#a2da3cb02ce953da67fb27742e20774a5">parameter_study</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Return pointer to the mesh</span></div>
+<div class="line"><span class="comment"></span> OneDLagrangianMesh&lt;HermiteBeamElement&gt;* <a class="code" href="classElasticBeamProblem.html#ae7d14ba8bec2325a82cbeed0c1b29910">mesh_pt</a>() </div>
+<div class="line">  {<span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>OneDLagrangianMesh&lt;HermiteBeamElement&gt;*<span class="keyword">&gt;</span></div>
+<div class="line">    (<a class="code" href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">Problem::mesh_pt</a>());}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// No actions need to be performed after a solve</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticBeamProblem.html#a30dde8d0101a3d3994965d6e560cb585">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// No actions need to be performed before a solve</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classElasticBeamProblem.html#a5b534c11d9b1d54123bf587aad5f98f6">actions_before_newton_solve</a>() {}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the node whose displacement is documented</span></div>
+<div class="line"><span class="comment"></span> Node* <a class="code" href="classElasticBeamProblem.html#a9c96cab7e71243e51f7c4040a84cdd5d">Doc_node_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of domain (in terms of the Lagrangian coordinates)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classElasticBeamProblem.html#aa68b1c77e0aa1571fe956d62bd8cf096">Length</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to geometric object that represents the beam&#39;s undeformed shape</span></div>
+<div class="line"><span class="comment"></span> GeomObject* <a class="code" href="classElasticBeamProblem.html#a134a789cae77ab61a3e32bd93b28e1fa">Undef_beam_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>We start by creating the undeformed centreline of the beam as a <code>StraightLine</code>, one of <code>oomph-lib's</code> standard geometric objects.</p>
+<div class="fragment"><div class="line"><span class="comment">//=============start_of_constructor=====================================</span></div>
+</div><!-- fragment --><p> <br  />
+ </p><div class="fragment"><div class="line"><span class="comment">/// Constructor for elastic beam problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><a class="code" href="classElasticBeamProblem.html#a1c62c2a14c9a5528a649700d16dac2ea">ElasticBeamProblem::ElasticBeamProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;n_elem,</div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;length) : Length(length)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Set the undeformed beam to be a straight line at y=0</span></div>
+<div class="line"> <a class="code" href="tensioned__string_8txt.html#a3ce9132b2accc26a8e67d561a46891e5">Undef_beam_pt</a>=<span class="keyword">new</span> StraightLine(0.0); </div>
+</div><!-- fragment --><p>We then construct the a one-dimensional Lagrangian mesh in two-dimensional space, using the previously-constructed geometric object to set the initial positions of the nodes.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Create the (Lagrangian!) mesh, using the geometric object</span></div>
+<div class="line"> <span class="comment">// Undef_beam_pt to specify the initial (Eulerian) position of the</span></div>
+<div class="line"> <span class="comment">// nodes.</span></div>
+<div class="line"> <a class="code" href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">Problem::mesh_pt</a>() = </div>
+<div class="line">  <span class="keyword">new</span> OneDLagrangianMesh&lt;HermiteBeamElement&gt;(n_elem,length,<a class="code" href="tensioned__string_8txt.html#a3ce9132b2accc26a8e67d561a46891e5">Undef_beam_pt</a>);</div>
+</div><!-- fragment --><p>The <code>OneDLagrangianMesh</code> is a <code>SolidMesh</code> whose constituent nodes are <code>SolidNodes</code>. These nodes store not only their (variable) 2D Eulerian position, accessible via <code>SolidNode::x(...)</code>, but also their (fixed) 1D Lagrangian coordinates, accessible via <code>SolidNode::xi(...)</code>. The <code>OneDLagrangianMesh</code> constructor assigns the nodes' Lagrangian coordinate, <img class="formulaInl" alt="$ \xi $" src="form_66.png"/>, by spacing them evenly in the range <img class="formulaInl" alt="$ \xi \in [0,L] $" src="form_87.png"/>. The <code>GeomObject</code> pointed to by <code>Undef_beam_pt</code>, provides a parametrisation of the beam's undeformed shape in the form <img class="formulaInl" alt="$ {\bf r}(\xi) $" src="form_88.png"/>, and this is used to determine the nodes's initial Eulerian position.</p>
+<p>Next we pin the nodal positions on both boundaries</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set the boundary conditions: Each end of the beam is fixed in space</span></div>
+<div class="line"> <span class="comment">// Loop over the boundaries (ends of the beam)</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;2;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Pin displacements in both x and y directions</span></div>
+<div class="line">   <span class="comment">// [Note: The mesh_pt() function has been overloaded</span></div>
+<div class="line">   <span class="comment">//  to return a pointer to the actual mesh, rather than</span></div>
+<div class="line">   <span class="comment">//  a pointer to the Mesh base class. The current mesh is derived</span></div>
+<div class="line">   <span class="comment">//  from the SolidMesh class. In such meshes, all access functions</span></div>
+<div class="line">   <span class="comment">//  to the nodes, such as boundary_node_pt(...), are overloaded</span></div>
+<div class="line">   <span class="comment">//  to return pointers to SolidNodes (whose position can be</span></div>
+<div class="line">   <span class="comment">//  pinned) rather than &quot;normal&quot; Nodes.]</span></div>
+<div class="line">   <a class="code" href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">mesh_pt</a>()-&gt;boundary_node_pt(b,0)-&gt;pin_position(0); </div>
+<div class="line">   <a class="code" href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">mesh_pt</a>()-&gt;boundary_node_pt(b,0)-&gt;pin_position(1); </div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>We then loop over the elements and set the pointers to the physical parameters (the pre-stress and the thickness), the function pointer to the load vector, and the pointer to the geometric object that specifies the undeformed beam shape. </p><div class="fragment"><div class="line"> <span class="comment">//Loop over the elements to set physical parameters etc.</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast to the specific element type</span></div>
+<div class="line">   HermiteBeamElement *elem_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>HermiteBeamElement*<span class="keyword">&gt;</span>(<a class="code" href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">mesh_pt</a>()-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set physical parameters for each element:</span></div>
+<div class="line">   elem_pt-&gt;sigma0_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a417dc688a70c4f06ef0faed047068ba2">Global_Physical_Variables::Sigma0</a>;</div>
+<div class="line">   elem_pt-&gt;h_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">Global_Physical_Variables::H</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the load Vector for each element</span></div>
+<div class="line">   elem_pt-&gt;load_vector_fct_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a321267e1efb30b5d586302509354fb07">Global_Physical_Variables::load</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the undeformed shape for each element</span></div>
+<div class="line">   elem_pt-&gt;undeformed_beam_pt() = <a class="code" href="tensioned__string_8txt.html#a3ce9132b2accc26a8e67d561a46891e5">Undef_beam_pt</a>;</div>
+<div class="line">  } <span class="comment">// end of loop over elements</span></div>
+</div><!-- fragment --><p>We choose a node near the centre of the beam to monitor the displacements. (If the total number of nodes is even, the control node will not be located at the beam's exact centre; its vertical displacement will therefore differ from the analytical solution that we output in <code>doc_solution(...)</code> &ndash; in this case we issue a suitable warning.) </p><div class="fragment"><div class="line"> <span class="comment">// Choose node at which displacement is documented (halfway along -- provided</span></div>
+<div class="line"> <span class="comment">// we have an odd number of nodes; complain if this is not the</span></div>
+<div class="line"> <span class="comment">// case because the comparison with the exact solution will be wrong </span></div>
+<div class="line"> <span class="comment">// otherwise!)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_nod=<a class="code" href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">mesh_pt</a>()-&gt;nnode();</div>
+<div class="line"> <span class="keywordflow">if</span> (n_nod%2!=1)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;Warning: Even number of nodes &quot;</span> &lt;&lt; n_nod &lt;&lt; std::endl;</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;Comparison with exact solution will be misleading...&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> Doc_node_pt=<a class="code" href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">mesh_pt</a>()-&gt;node_pt((n_nod+1)/2-1);</div>
+</div><!-- fragment --><p>Finally, we assign the equation numbers </p><div class="fragment"><div class="line"> <span class="comment">// Assign the global and local equation numbers</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;# of dofs &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="param"></a>
+The Parameter Study</h1>
+<p>The function <a class="el" href="classElasticBeamProblem.html#a2da3cb02ce953da67fb27742e20774a5" title="Conduct a parameter study.">ElasticBeamProblem::parameter_study()</a> is used to perform a parameter study, computing the beam's deformation for a range of external pressures. During the solution of this particular problem, the maximum residual in the Newton iteration can be greater than the default maximum value of 10.0. We increase the default value by assigning a (much) larger value to <code>Problem::Max_residuals</code>.</p>
+<p>Next, we choose the increment in the control parameter (the external pressure), set its initial value and open an output file that will contain the value of the external pressure, the mid-point displacement and external pressure computed from the analytical solution. We also create an output stream and a string that will be used to write the complete solution for each value of the external pressure.</p>
+<p>In the loop, we increment the external pressure <img class="formulaInl" alt="$ P_{ext} $" src="form_89.png"/>, solve the problem, calculate the analytical prediction for the pressure that is required to achieve the computed deformation, plot the solution and write the pressure, the displacement and exact pressure to the trace file.</p>
+<div class="fragment"><div class="line"><span class="comment">//=======start_of_parameter_study==========================================</span></div>
+<div class="line"><span class="comment">/// Solver loop to perform parameter study</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classElasticBeamProblem.html#a2da3cb02ce953da67fb27742e20774a5">ElasticBeamProblem::parameter_study</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Over-ride the default maximum value for the residuals</span></div>
+<div class="line"> Problem::Max_residuals = 1.0e10;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the increments in control parameters</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code" href="tensioned__string_8txt.html#a7cf04bcca51c3cfd9e74200fb6c25b1d">pext_increment</a> = 0.001;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set initial values for control parameters </span></div>
+<div class="line"> <a class="code" href="namespaceGlobal__Physical__Variables.html#a0406c0cbd463d1df2458fe5de98a00eb">Global_Physical_Variables::P_ext</a> = 0.0 - <a class="code" href="tensioned__string_8txt.html#a7cf04bcca51c3cfd9e74200fb6c25b1d">pext_increment</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create label for output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory -- this function checks if the output</span></div>
+<div class="line"> <span class="comment">// directory exists and issues a warning if it doesn&#39;t.</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open a trace file</span></div>
+<div class="line"> ofstream trace(<span class="stringliteral">&quot;RESLT/trace_beam.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write a header for the trace file</span></div>
+<div class="line"> trace &lt;&lt; </div>
+<div class="line">  <span class="stringliteral">&quot;VARIABLES=\&quot;p_e_x_t\&quot;,\&quot;d\&quot;&quot;</span> &lt;&lt; </div>
+<div class="line">  <span class="stringliteral">&quot;, \&quot;p_e_x_t_(_e_x_a_c_t_)\&quot;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output file stream used for writing results</span></div>
+<div class="line"> ofstream file;</div>
+<div class="line"> <span class="comment">// String used for the filename</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100]; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over parameter increments</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=10;</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=1;i&lt;=nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Increment pressure</span></div>
+<div class="line">   <a class="code" href="namespaceGlobal__Physical__Variables.html#a0406c0cbd463d1df2458fe5de98a00eb">Global_Physical_Variables::P_ext</a> += <a class="code" href="tensioned__string_8txt.html#a7cf04bcca51c3cfd9e74200fb6c25b1d">pext_increment</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Solve the system</span></div>
+<div class="line">   newton_solve();</div>
+<div class="line">    </div>
+<div class="line">   <span class="comment">// Calculate exact solution for `string under tension&#39; (applicable for</span></div>
+<div class="line">   <span class="comment">// small wall thickness and pinned ends)</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// The tangent of the angle beta</span></div>
+<div class="line">   <span class="keywordtype">double</span> tanbeta =-2.0*<a class="code" href="classElasticBeamProblem.html#a9c96cab7e71243e51f7c4040a84cdd5d">Doc_node_pt</a>-&gt;x(1)/<a class="code" href="classElasticBeamProblem.html#aa68b1c77e0aa1571fe956d62bd8cf096">Length</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordtype">double</span> exact_pressure = 0.0;</div>
+<div class="line">   <span class="comment">//If the beam has deformed, calculate the pressure required</span></div>
+<div class="line">   <span class="keywordflow">if</span>(tanbeta!=0)</div>
+<div class="line">    {</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">//Calculate the opening angle alpha</span></div>
+<div class="line">      <span class="keywordtype">double</span> alpha = 2.0*atan(2.0*tanbeta/(1.0-tanbeta*tanbeta));</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Jump back onto the main branch if alpha&gt;180 degrees</span></div>
+<div class="line">      <span class="keywordflow">if</span> (alpha&lt;0) alpha+=2.0*MathematicalConstants::Pi;</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Green strain:</span></div>
+<div class="line">     <span class="keywordtype">double</span> gamma=0.5*(0.25*alpha*alpha/(sin(0.5*alpha)*sin(0.5*alpha))-1.0);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Calculate the exact pressure</span></div>
+<div class="line">     exact_pressure=<a class="code" href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">Global_Physical_Variables::H</a>*</div>
+<div class="line">      (<a class="code" href="namespaceGlobal__Physical__Variables.html#a417dc688a70c4f06ef0faed047068ba2">Global_Physical_Variables::Sigma0</a>+gamma)*alpha/<a class="code" href="classElasticBeamProblem.html#aa68b1c77e0aa1571fe956d62bd8cf096">Length</a>;</div>
+<div class="line">    } </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Document the solution</span></div>
+<div class="line">   sprintf(filename,<span class="stringliteral">&quot;RESLT/beam%i.dat&quot;</span>,i);</div>
+<div class="line">   file.open(filename);</div>
+<div class="line">   <a class="code" href="classElasticBeamProblem.html#ae7d14ba8bec2325a82cbeed0c1b29910">mesh_pt</a>()-&gt;output(file,5);</div>
+<div class="line">   file.close();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Write trace file: Pressure, displacement and exact solution</span></div>
+<div class="line">   <span class="comment">// (for string under tension)</span></div>
+<div class="line">   trace &lt;&lt; <a class="code" href="namespaceGlobal__Physical__Variables.html#a0406c0cbd463d1df2458fe5de98a00eb">Global_Physical_Variables::P_ext</a>  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">         &lt;&lt; abs(<a class="code" href="classElasticBeamProblem.html#a9c96cab7e71243e51f7c4040a84cdd5d">Doc_node_pt</a>-&gt;x(1))</div>
+<div class="line">         &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; exact_pressure </div>
+<div class="line">         &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of parameter study</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Exercises and Comments</h1>
+<ol type="1">
+<li>Modify the code so that one end of the beam is no longer fixed in space. What happens? Why?</li>
+<li>Increase the bending effects by increasing the beam's thickness to <img class="formulaInl" alt="$ h=0.1 $" src="form_90.png"/>, say, and by "clamping" its ends, so that <img class="formulaInl" alt="$ d({\bf R}_w(\xi)\cdot {\bf e}_y)/d\xi = 0 $" src="form_91.png"/> at <img class="formulaInl" alt="$ \xi=0 $" src="form_92.png"/> and <img class="formulaInl" alt="$ \xi=L $" src="form_93.png"/>. This condition can be enforced by pinning the "type 1" (slope) positional degree of freedom in the vertical (1) direction at both ends; this requires the insertion of the statement <div class="fragment"><div class="line"><a class="code" href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">mesh_pt</a>()-&gt;boundary_node_pt(b,0)-&gt;pin_position(1,1); </div>
+</div><!-- fragment --> in the loop in the <code>Problem</code> constructor. You will have to adjust the number of elements to fully resolve the bending boundary layers.</li>
+<li><code>oomph-lib's</code> default<a class="anchor" id="newton_cust"></a>nonlinear solver, <code>Problem::newton_solve(...)</code>, provides an implementation of the Newton method, which has the attractive feature that it converges quadratically &ndash; provided a good initial guess for the solution is available. Good initial guesses can often (usually?) be generated by computing the solution via a sequence of substeps, as in the above example where we started with a known solution (the undeformed beam &ndash; the exact solution for <img class="formulaInl" alt="$ p_{ext} = p_{ext}^{(0)} =0 $" src="form_94.png"/> ) and used it as the initial guess for the solution at a small external pressure, <img class="formulaInl" alt="$ p_{ext}^{(1)} $" src="form_95.png"/>. When the Newton method converged, we used the computed solution as the initial guess for the solution at a slightly larger pressure, <img class="formulaInl" alt="$ p_{ext}^{(2)} $" src="form_96.png"/>, etc. If the increase in the load (or some other control parameter) is too large, the Newton method will diverge. To avoid unnecessary computations, the Newton iteration is terminated if:<ul>
+<li>the number of iterations exceeds <code>Problem::Max_newton_iterations</code> (which has a default value of 10)</li>
+<li>the residual exceeds <code>Problem::Max_residuals</code> (which has a default value of 10.0)</li>
+</ul>
+The Newton method continues until the maximum residual has been reduced to <code>Problem::Newton_solver_tolerance</code>, which has a default value of <img class="formulaInl" alt="$ 10^{-8} $" src="form_97.png"/>. <br  />
+<br  />
+ All three values are protected data members of the <code>Problem</code> base class and can therefore be changed in any specific <code>Problem</code>. For instance, in the problem considered above, the undeformed beam provides a poor approximation of its equilibrium shape at the first pressure value. The Newton method still converges (very slowly initially, then quadratically as it approaches the exact solution), even though the initial maximum residual has a relatively large value of 19.6. Here are some exercises that explore the convergence characteristics of the Newton method:<ol type="a">
+<li>Experiment with the Newton solver and find the largest value for the load increment, <code>pext_increment</code>, for which the Newton method still converges.</li>
+<li>Explain why the Newton method converges very slowly for small values of <img class="formulaInl" alt="$ p_{ext} $" src="form_74.png"/> and much more rapidly at larger values, even though the load increment, <code>pext_increment</code>, remains constant.</li>
+<li>Compare the solutions for different values of <code>Problem::Newton_solver_tolerance</code>. Is the default value <br  />
+ <img class="formulaInl" alt="$ 10^{-8} $" src="form_97.png"/> adequate? Reduce it to <img class="formulaInl" alt="$ 10^{-12} $" src="form_98.png"/> and <img class="formulaInl" alt="$ 10^{-18} $" src="form_99.png"/>. What do you observe? <br  />
+</li>
+</ol>
+</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="
+../../../../
+demo_drivers/beam/tensioned_string/
+">demo_drivers/beam/tensioned_string/ </a> </center></li>
+<li>The driver code is: <center> <a href="
+../../../../
+demo_drivers/beam/tensioned_string/tensioned_string.cc
+">demo_drivers/beam/tensioned_string/tensioned_string.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassElasticBeamProblem_html_a9c96cab7e71243e51f7c4040a84cdd5d"><div class="ttname"><a href="classElasticBeamProblem.html#a9c96cab7e71243e51f7c4040a84cdd5d">ElasticBeamProblem::Doc_node_pt</a></div><div class="ttdeci">Node * Doc_node_pt</div><div class="ttdoc">Pointer to the node whose displacement is documented.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00088">tensioned_string.cc:88</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a0406c0cbd463d1df2458fe5de98a00eb"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a0406c0cbd463d1df2458fe5de98a00eb">Global_Physical_Variables::P_ext</a></div><div class="ttdeci">double P_ext</div><div class="ttdoc">Pressure load.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00049">tensioned_string.cc:49</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a3ce9132b2accc26a8e67d561a46891e5"><div class="ttname"><a href="tensioned__string_8txt.html#a3ce9132b2accc26a8e67d561a46891e5">Undef_beam_pt</a></div><div class="ttdeci">and the pressure f as well as the function c and the unit normal to the deformed L f The c GeomObject pointed to by c Undef_beam_pt</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00586">tensioned_string.txt:586</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html_aa68b1c77e0aa1571fe956d62bd8cf096"><div class="ttname"><a href="classElasticBeamProblem.html#aa68b1c77e0aa1571fe956d62bd8cf096">ElasticBeamProblem::Length</a></div><div class="ttdeci">double Length</div><div class="ttdoc">Length of domain (in terms of the Lagrangian coordinates)</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00091">tensioned_string.cc:91</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html_a1c62c2a14c9a5528a649700d16dac2ea"><div class="ttname"><a href="classElasticBeamProblem.html#a1c62c2a14c9a5528a649700d16dac2ea">ElasticBeamProblem::ElasticBeamProblem</a></div><div class="ttdeci">ElasticBeamProblem(const unsigned &amp;n_elem, const double &amp;length)</div><div class="ttdoc">Constructor: The arguments are the number of elements, the length of domain.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00102">tensioned_string.cc:102</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a321267e1efb30b5d586302509354fb07"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a321267e1efb30b5d586302509354fb07">Global_Physical_Variables::load</a></div><div class="ttdeci">void load(const Vector&lt; double &gt; &amp;xi, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;N, Vector&lt; double &gt; &amp;load)</div><div class="ttdoc">Load function: Apply a constant external pressure to the beam.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00052">tensioned_string.cc:52</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html_a30dde8d0101a3d3994965d6e560cb585"><div class="ttname"><a href="classElasticBeamProblem.html#a30dde8d0101a3d3994965d6e560cb585">ElasticBeamProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">No actions need to be performed after a solve.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00080">tensioned_string.cc:80</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html_ae7d14ba8bec2325a82cbeed0c1b29910"><div class="ttname"><a href="classElasticBeamProblem.html#ae7d14ba8bec2325a82cbeed0c1b29910">ElasticBeamProblem::mesh_pt</a></div><div class="ttdeci">OneDLagrangianMesh&lt; HermiteBeamElement &gt; * mesh_pt()</div><div class="ttdoc">Return pointer to the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00075">tensioned_string.cc:75</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html"><div class="ttname"><a href="classElasticBeamProblem.html">ElasticBeamProblem</a></div><div class="ttdoc">Beam problem object.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00063">tensioned_string.cc:63</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html_a2da3cb02ce953da67fb27742e20774a5"><div class="ttname"><a href="classElasticBeamProblem.html#a2da3cb02ce953da67fb27742e20774a5">ElasticBeamProblem::parameter_study</a></div><div class="ttdeci">void parameter_study()</div><div class="ttdoc">Conduct a parameter study.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00172">tensioned_string.cc:172</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a417dc688a70c4f06ef0faed047068ba2"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a417dc688a70c4f06ef0faed047068ba2">Global_Physical_Variables::Sigma0</a></div><div class="ttdeci">double Sigma0</div><div class="ttdoc">2nd Piola Kirchhoff pre-stress</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00046">tensioned_string.cc:46</a></div></div>
+<div class="ttc" id="atensioned__string_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="tensioned__string_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver for beam (string under tension) test problem.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00257">tensioned_string.cc:257</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a1ce091cd301555b09a13f3432beaf2fd"><div class="ttname"><a href="tensioned__string_8txt.html#a1ce091cd301555b09a13f3432beaf2fd">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00001">tensioned_string.txt:1</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html_a5b534c11d9b1d54123bf587aad5f98f6"><div class="ttname"><a href="classElasticBeamProblem.html#a5b534c11d9b1d54123bf587aad5f98f6">ElasticBeamProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">No actions need to be performed before a solve.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00083">tensioned_string.cc:83</a></div></div>
+<div class="ttc" id="aclassElasticBeamProblem_html_a134a789cae77ab61a3e32bd93b28e1fa"><div class="ttname"><a href="classElasticBeamProblem.html#a134a789cae77ab61a3e32bd93b28e1fa">ElasticBeamProblem::Undef_beam_pt</a></div><div class="ttdeci">GeomObject * Undef_beam_pt</div><div class="ttdoc">Pointer to geometric object that represents the beam's undeformed shape.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00094">tensioned_string.cc:94</a></div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a0f5aaa7d7eab4fbec16d94c64db068d1"><div class="ttname"><a href="tensioned__string_8txt.html#a0f5aaa7d7eab4fbec16d94c64db068d1">mesh_pt</a></div><div class="ttdeci">and the pressure f as well as the function c and the unit normal to the deformed L f The c GeomObject pointed to by c provides a parametrisation of the beam s undeformed shape in the form and this is used to determine the nodes s initial Eulerian position Next we pin the nodal positions on both boundaries skipline Set the until We then loop over the elements and set the pointers to the physical the function pointer to the load and the pointer to the geometric object that specifies the undeformed beam shape skipline Loop until end of loop over elements We choose a node near the centre of the beam to monitor the we assign the equation numbers skipline Assign until end of&lt; HR &gt;&lt; HR &gt; section param The Parameter Study The function computing the beam s deformation for a range of external pressures During the solution of this particular the maximum residual in the Newton iteration can be greater than the default maximum value of We increase the default value by assigning a(much) larger value to \c Problem this requires the insertion of the statement code mesh_pt() -&gt; boundary_node_pt(b, 0) -&gt;pin_position(1, 1)</div></div>
+<div class="ttc" id="atensioned__string_8txt_html_a7cf04bcca51c3cfd9e74200fb6c25b1d"><div class="ttname"><a href="tensioned__string_8txt.html#a7cf04bcca51c3cfd9e74200fb6c25b1d">pext_increment</a></div><div class="ttdeci">endcode in the loop in the c Problem constructor You will have to adjust the number of elements to fully resolve the bending boundary layers provides an implementation of the Newton which has the attractive feature that it converges quadratically provided a good initial guess for the solution is available Good initial guesses can as in the above example where we started with a known f we used the computed solution as the initial guess for the solution at a slightly larger f etc If the increase in the the Newton method will diverge To avoid unnecessary the Newton iteration is terminated which has a default value of in the problem considered the undeformed beam provides a poor approximation of its equilibrium shape at the first pressure value The Newton method still even though the initial maximum residual has a relatively large value of Here are some exercises that explore the convergence characteristics of the Newton c pext_increment</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8txt_source.html#l00706">tensioned_string.txt:706</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_af6e07423e22c0991084d9a2f43727805"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#af6e07423e22c0991084d9a2f43727805">Global_Physical_Variables::H</a></div><div class="ttdeci">double H</div><div class="ttdoc">Non-dimensional thickness.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00043">tensioned_string.cc:43</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="tensioned__string_8cc_source.html#l00040">tensioned_string.cc:40</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:14:06
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

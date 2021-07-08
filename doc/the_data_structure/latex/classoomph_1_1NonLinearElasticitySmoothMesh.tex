@@ -1,0 +1,286 @@
+\hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh}{}\doxysection{oomph\+::Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1NonLinearElasticitySmoothMesh}\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$mesh\+\_\+smooth.\+h$>$}
+
+Inheritance diagram for oomph\+::Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1NonLinearElasticitySmoothMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a08291c80b1b4e30fdce23be10c54d3bb}{operator()}} (\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$orig\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$copy\+\_\+of\+\_\+mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&controlled\+\_\+boundary\+\_\+id, const unsigned \&max\+\_\+steps=100000000)
+\begin{DoxyCompactList}\small\item\em Functor to update the nodal positions in \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} pointed to by orig\+\_\+mesh\+\_\+pt in response to the displacement of some of its nodes relative to their original position which must still be indicated by the nodes\textquotesingle{} Lagrangian position. copy\+\_\+of\+\_\+mesh\+\_\+pt must be a deep copy of orig\+\_\+mesh\+\_\+pt, with the same boundary coordinates etc. This mesh is used as workspace and can be deleted afterwards. The vector controlled\+\_\+boundary\+\_\+id contains the ids of the mesh boundaries in orig\+\_\+mesh\+\_\+pt whose position is supposed to remain fixed (while the other nodes are re-\/positioned to avoid the inversion of elements). The final optional argument specifies the max. number of increments in which the mesh boundary is deformed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a426905484f20903c02c995b297df36a6}{operator()}} (\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$orig\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$copy\+\_\+of\+\_\+mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&controlled\+\_\+boundary\+\_\+id, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} doc\+\_\+info, const unsigned \&max\+\_\+steps=100000000)
+\begin{DoxyCompactList}\small\item\em Functor to update the nodal positions in \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} pointed to by orig\+\_\+mesh\+\_\+pt in response to the displacement of some of its nodes relative to their original position which must still be indicated by the nodes\textquotesingle{} Lagrangian position. copy\+\_\+of\+\_\+mesh\+\_\+pt must be a deep copy of orig\+\_\+mesh\+\_\+pt, with the same boundary coordinates etc. This mesh is used as workspace and can be deleted afterwards. The vector controlled\+\_\+boundary\+\_\+id contains the ids of the mesh boundaries in orig\+\_\+mesh\+\_\+pt whose position is supposed to remain fixed (while the other nodes are re-\/positioned to avoid the inversion of elements). The \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} allows allows the output of the intermediate meshes. The final optional argument specifies the max. number of increments in which the mesh boundary is deformed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_af452c1406ac93eea7dff91ab62f74e32}{$\sim$\+Non\+Linear\+Elasticity\+Smooth\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a778763122903088b5234fcf7ca35a0b5}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update nodal positions in main mesh -- also moves the nodes of the Face\+Elements that impose the new position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a07ef87c5d5c74b5d9ceb23800608c87a}{backup}} ()
+\begin{DoxyCompactList}\small\item\em Backup nodal positions in dummy mesh to allow for reset after non-\/convergence of Newton method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a7c6d16d244b89aece322e31cb4c83588}{reset}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a47de05f2c3a8c3fb712dbdb7a1349db6}{doc\+\_\+solution}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a0d59ca9e732fafa9c1d70c85cdefbb74}{Orig\+\_\+node\+\_\+pos}}
+\begin{DoxyCompactList}\small\item\em Original nodal positions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a6ae3b3800d408d21fe1e6fa68575f58a}{Backup\+\_\+node\+\_\+pos}}
+\begin{DoxyCompactList}\small\item\em Backup nodal positions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a24fd838e1a0a8b8a7fe59249349e7da3}{Orig\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Bulk original mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}{Dummy\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Copy of mesh to work on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Auxiliary \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} to smooth a \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} by adjusting the internal nodal positions via the solution of a nonlinear solid mechanics problem. The mesh will typically have been created with an unstructured mesh generator that uses a low-\/order (simplex) representation of the element geometry; some of the nodes, typically non-\/vertex nodes on the domain\textquotesingle{}s curvilinear boundaries, were then moved to their new position to provide a more accurate representation of the geometry. This class should be used to deal with elements that may have become inverted during the node motion. ~\newline
+{\bfseries{Important}} {\bfseries{assumption\+:}} 
+\begin{DoxyItemize}
+\item It is important that the Lagrangian coordinates of all nodes still indicate their original position, i.\+e. their position before (some of) them were moved to their new position. This is because we apply the boundary displacements in small increments.
+\end{DoxyItemize}Template argument specifies type of element. It must be a pure solid mechanics element! This shouldn\textquotesingle{}t cause any problems since mesh smoothing operations tend to be performed off-\/line so the mesh may as well be built with pure solid elements even if it is ultimately to be used with other element types. (This restriction could easily be avoided but would require double templating and would generally be messy...) 
+
+Definition at line 101 of file mesh\+\_\+smooth.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_af452c1406ac93eea7dff91ab62f74e32}\label{classoomph_1_1NonLinearElasticitySmoothMesh_af452c1406ac93eea7dff91ab62f74e32}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!````~NonLinearElasticitySmoothMesh@{$\sim$NonLinearElasticitySmoothMesh}}
+\index{````~NonLinearElasticitySmoothMesh@{$\sim$NonLinearElasticitySmoothMesh}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$NonLinearElasticitySmoothMesh()}{~NonLinearElasticitySmoothMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{Non\+Linear\+Elasticity\+Smooth\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line 399 of file mesh\+\_\+smooth.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a778763122903088b5234fcf7ca35a0b5}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a778763122903088b5234fcf7ca35a0b5}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Update nodal positions in main mesh -- also moves the nodes of the Face\+Elements that impose the new position. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a0c8d70891f7369bb4bf8412fa1a08ecb}{oomph\+::\+Problem}}.
+
+
+
+Definition at line 404 of file mesh\+\_\+smooth.\+h.
+
+
+
+References i, oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Orig\+\_\+mesh\+\_\+pt, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Orig\+\_\+node\+\_\+pos, oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
+
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a07ef87c5d5c74b5d9ceb23800608c87a}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a07ef87c5d5c74b5d9ceb23800608c87a}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!backup@{backup}}
+\index{backup@{backup}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{backup()}{backup()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::backup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Backup nodal positions in dummy mesh to allow for reset after non-\/convergence of Newton method. 
+
+
+
+Definition at line 425 of file mesh\+\_\+smooth.\+h.
+
+
+
+References oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+\_\+node\+\_\+pos, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dummy\+\_\+mesh\+\_\+pt, i, oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), and oomph\+::\+Node\+::x().
+
+
+
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()().
+
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a47de05f2c3a8c3fb712dbdb7a1349db6}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a47de05f2c3a8c3fb712dbdb7a1349db6}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line 460 of file mesh\+\_\+smooth.\+h.
+
+
+
+References oomph\+::\+Mesh\+::check\+\_\+inverted\+\_\+elements(), oomph\+::\+Doc\+Info\+::directory(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dummy\+\_\+mesh\+\_\+pt, oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Doc\+Info\+::number(), oomph\+::oomph\+\_\+info, and oomph\+::\+Mesh\+::output().
+
+
+
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()().
+
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a08291c80b1b4e30fdce23be10c54d3bb}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a08291c80b1b4e30fdce23be10c54d3bb}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$}]{orig\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$}]{copy\+\_\+of\+\_\+mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{controlled\+\_\+boundary\+\_\+id,  }\item[{const unsigned \&}]{max\+\_\+steps = {\ttfamily 100000000} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Functor to update the nodal positions in \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} pointed to by orig\+\_\+mesh\+\_\+pt in response to the displacement of some of its nodes relative to their original position which must still be indicated by the nodes\textquotesingle{} Lagrangian position. copy\+\_\+of\+\_\+mesh\+\_\+pt must be a deep copy of orig\+\_\+mesh\+\_\+pt, with the same boundary coordinates etc. This mesh is used as workspace and can be deleted afterwards. The vector controlled\+\_\+boundary\+\_\+id contains the ids of the mesh boundaries in orig\+\_\+mesh\+\_\+pt whose position is supposed to remain fixed (while the other nodes are re-\/positioned to avoid the inversion of elements). The final optional argument specifies the max. number of increments in which the mesh boundary is deformed. 
+
+
+
+Definition at line 118 of file mesh\+\_\+smooth.\+h.
+
+
+
+References oomph\+::\+Doc\+Info\+::disable\+\_\+doc().
+
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a426905484f20903c02c995b297df36a6}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a426905484f20903c02c995b297df36a6}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$}]{orig\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$}]{copy\+\_\+of\+\_\+mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{controlled\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}}}]{doc\+\_\+info,  }\item[{const unsigned \&}]{max\+\_\+steps = {\ttfamily 100000000} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Functor to update the nodal positions in \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} pointed to by orig\+\_\+mesh\+\_\+pt in response to the displacement of some of its nodes relative to their original position which must still be indicated by the nodes\textquotesingle{} Lagrangian position. copy\+\_\+of\+\_\+mesh\+\_\+pt must be a deep copy of orig\+\_\+mesh\+\_\+pt, with the same boundary coordinates etc. This mesh is used as workspace and can be deleted afterwards. The vector controlled\+\_\+boundary\+\_\+id contains the ids of the mesh boundaries in orig\+\_\+mesh\+\_\+pt whose position is supposed to remain fixed (while the other nodes are re-\/positioned to avoid the inversion of elements). The \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} allows allows the output of the intermediate meshes. The final optional argument specifies the max. number of increments in which the mesh boundary is deformed. 
+
+
+
+Definition at line 147 of file mesh\+\_\+smooth.\+h.
+
+
+
+References oomph\+::\+Problem\+::add\+\_\+sub\+\_\+mesh(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::backup(), oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt(), oomph\+::\+Problem\+::build\+\_\+global\+\_\+mesh(), oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dummy\+\_\+mesh\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::face\+\_\+index\+\_\+at\+\_\+boundary(), i, n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+element(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), oomph\+::\+Doc\+Info\+::number(), oomph\+::oomph\+\_\+info, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Orig\+\_\+mesh\+\_\+pt, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Orig\+\_\+node\+\_\+pos, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset(), oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale, oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale\+\_\+increment, oomph\+::\+Face\+Element\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates(), and oomph\+::\+Node\+::x().
+
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a7c6d16d244b89aece322e31cb4c83588}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a7c6d16d244b89aece322e31cb4c83588}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!reset@{reset}}
+\index{reset@{reset}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Reset nodal positions in dummy mesh to allow for restart of Newton method with reduced increment in Scale 
+
+Definition at line 445 of file mesh\+\_\+smooth.\+h.
+
+
+
+References oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Backup\+\_\+node\+\_\+pos, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dummy\+\_\+mesh\+\_\+pt, i, oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), and oomph\+::\+Node\+::x().
+
+
+
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a6ae3b3800d408d21fe1e6fa68575f58a}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a6ae3b3800d408d21fe1e6fa68575f58a}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!Backup\_node\_pos@{Backup\_node\_pos}}
+\index{Backup\_node\_pos@{Backup\_node\_pos}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Backup\_node\_pos}{Backup\_node\_pos}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Backup\+\_\+node\+\_\+pos\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Backup nodal positions. 
+
+
+
+Definition at line 502 of file mesh\+\_\+smooth.\+h.
+
+
+
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::backup(), and oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset().
+
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!Dummy\_mesh\_pt@{Dummy\_mesh\_pt}}
+\index{Dummy\_mesh\_pt@{Dummy\_mesh\_pt}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Dummy\_mesh\_pt}{Dummy\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Dummy\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Copy of mesh to work on. 
+
+
+
+Definition at line 508 of file mesh\+\_\+smooth.\+h.
+
+
+
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::backup(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()(), and oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::reset().
+
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a24fd838e1a0a8b8a7fe59249349e7da3}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a24fd838e1a0a8b8a7fe59249349e7da3}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!Orig\_mesh\_pt@{Orig\_mesh\_pt}}
+\index{Orig\_mesh\_pt@{Orig\_mesh\_pt}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Orig\_mesh\_pt}{Orig\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Orig\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Bulk original mesh. 
+
+
+
+Definition at line 505 of file mesh\+\_\+smooth.\+h.
+
+
+
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve(), and oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()().
+
+\mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a0d59ca9e732fafa9c1d70c85cdefbb74}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a0d59ca9e732fafa9c1d70c85cdefbb74}} 
+\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!Orig\_node\_pos@{Orig\_node\_pos}}
+\index{Orig\_node\_pos@{Orig\_node\_pos}!oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Orig\_node\_pos}{Orig\_node\_pos}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Orig\+\_\+node\+\_\+pos\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Original nodal positions. 
+
+
+
+Definition at line 499 of file mesh\+\_\+smooth.\+h.
+
+
+
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve(), and oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::operator()().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mesh__smooth_8h}{mesh\+\_\+smooth.\+h}}\end{DoxyCompactItemize}

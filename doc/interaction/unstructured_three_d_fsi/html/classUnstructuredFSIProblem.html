@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: UnstructuredFSIProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classUnstructuredFSIProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">UnstructuredFSIProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Unstructured 3D FSI problem.  
+ <a href="classUnstructuredFSIProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for UnstructuredFSIProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classUnstructuredFSIProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6a31fd839e0215ef1312942cf7284bd2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a6a31fd839e0215ef1312942cf7284bd2">UnstructuredFSIProblem</a> ()</td></tr>
+<tr class="memdesc:a6a31fd839e0215ef1312942cf7284bd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor:  <a href="classUnstructuredFSIProblem.html#a6a31fd839e0215ef1312942cf7284bd2">More...</a><br /></td></tr>
+<tr class="separator:a6a31fd839e0215ef1312942cf7284bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a976a81e0dee902f6713bd8ca4d79d000"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a976a81e0dee902f6713bd8ca4d79d000">~UnstructuredFSIProblem</a> ()</td></tr>
+<tr class="memdesc:a976a81e0dee902f6713bd8ca4d79d000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classUnstructuredFSIProblem.html#a976a81e0dee902f6713bd8ca4d79d000">More...</a><br /></td></tr>
+<tr class="separator:a976a81e0dee902f6713bd8ca4d79d000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15f581318b505de07f50bd570da8c8d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a15f581318b505de07f50bd570da8c8d0">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a15f581318b505de07f50bd570da8c8d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <a href="classUnstructuredFSIProblem.html#a15f581318b505de07f50bd570da8c8d0">More...</a><br /></td></tr>
+<tr class="separator:a15f581318b505de07f50bd570da8c8d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af766e3bbc8963a286678cb1d277909f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#af766e3bbc8963a286678cb1d277909f5">create_fluid_traction_elements</a> ()</td></tr>
+<tr class="memdesc:af766e3bbc8963a286678cb1d277909f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create fluid traction elements at inflow.  <a href="classUnstructuredFSIProblem.html#af766e3bbc8963a286678cb1d277909f5">More...</a><br /></td></tr>
+<tr class="separator:af766e3bbc8963a286678cb1d277909f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a934a587c99668fca969a72814b3142a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a934a587c99668fca969a72814b3142a7">create_fsi_traction_elements</a> ()</td></tr>
+<tr class="memdesc:a934a587c99668fca969a72814b3142a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create FSI traction elements.  <a href="classUnstructuredFSIProblem.html#a934a587c99668fca969a72814b3142a7">More...</a><br /></td></tr>
+<tr class="separator:a934a587c99668fca969a72814b3142a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f810c300f373cfc79e23d58f95944e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a6f810c300f373cfc79e23d58f95944e3">create_lagrange_multiplier_elements</a> ()</td></tr>
+<tr class="memdesc:a6f810c300f373cfc79e23d58f95944e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create elements that enforce prescribed boundary motion for the pseudo-solid fluid mesh by Lagrange multipliers.  <a href="classUnstructuredFSIProblem.html#a6f810c300f373cfc79e23d58f95944e3">More...</a><br /></td></tr>
+<tr class="separator:a6f810c300f373cfc79e23d58f95944e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a90c15e131c5ef01add676e0e78e5628c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a90c15e131c5ef01add676e0e78e5628c">doc_solid_boundary_coordinates</a> (const unsigned &amp;i)</td></tr>
+<tr class="memdesc:a90c15e131c5ef01add676e0e78e5628c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sanity check: Doc boundary coordinates on i-th solid FSI interface.  <a href="classUnstructuredFSIProblem.html#a90c15e131c5ef01add676e0e78e5628c">More...</a><br /></td></tr>
+<tr class="separator:a90c15e131c5ef01add676e0e78e5628c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74a81b12db3e54dffcb68ebd0447610c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a74a81b12db3e54dffcb68ebd0447610c">nfluid_inflow_traction_boundary</a> ()</td></tr>
+<tr class="memdesc:a74a81b12db3e54dffcb68ebd0447610c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return total number of mesh boundaries that make up the inflow boundary.  <a href="classUnstructuredFSIProblem.html#a74a81b12db3e54dffcb68ebd0447610c">More...</a><br /></td></tr>
+<tr class="separator:a74a81b12db3e54dffcb68ebd0447610c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc6f2d0f03a9bc1af96e85b54824a16b"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#acc6f2d0f03a9bc1af96e85b54824a16b">nfluid_outflow_traction_boundary</a> ()</td></tr>
+<tr class="memdesc:acc6f2d0f03a9bc1af96e85b54824a16b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return total number of mesh boundaries that make up the outflow boundary.  <a href="classUnstructuredFSIProblem.html#acc6f2d0f03a9bc1af96e85b54824a16b">More...</a><br /></td></tr>
+<tr class="separator:acc6f2d0f03a9bc1af96e85b54824a16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a476394046c343524eefff856715eb722"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a476394046c343524eefff856715eb722">nfluid_traction_boundary</a> ()</td></tr>
+<tr class="memdesc:a476394046c343524eefff856715eb722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return total number of mesh boundaries that make up the in- and outflow boundaries where a traction has to be applied.  <a href="classUnstructuredFSIProblem.html#a476394046c343524eefff856715eb722">More...</a><br /></td></tr>
+<tr class="separator:a476394046c343524eefff856715eb722"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e4ee23245ec4c43e085006f5cd192e1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a3e4ee23245ec4c43e085006f5cd192e1">nsolid_fsi_boundary</a> ()</td></tr>
+<tr class="memdesc:a3e4ee23245ec4c43e085006f5cd192e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return total number of mesh boundaries in the solid mesh that make up the FSI interface.  <a href="classUnstructuredFSIProblem.html#a3e4ee23245ec4c43e085006f5cd192e1">More...</a><br /></td></tr>
+<tr class="separator:a3e4ee23245ec4c43e085006f5cd192e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ef3b155002c3a71a7cb43d8c86a7a6d"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a7ef3b155002c3a71a7cb43d8c86a7a6d">nfluid_fsi_boundary</a> ()</td></tr>
+<tr class="memdesc:a7ef3b155002c3a71a7cb43d8c86a7a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return total number of mesh boundaries in the fluid mesh that make up the FSI interface.  <a href="classUnstructuredFSIProblem.html#a7ef3b155002c3a71a7cb43d8c86a7a6d">More...</a><br /></td></tr>
+<tr class="separator:a7ef3b155002c3a71a7cb43d8c86a7a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221ed63d39e5377626e458b2c070541e"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a221ed63d39e5377626e458b2c070541e">npinned_solid_boundary</a> ()</td></tr>
+<tr class="memdesc:a221ed63d39e5377626e458b2c070541e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return total number of mesh boundaries in the solid mesh where the position is pinned.  <a href="classUnstructuredFSIProblem.html#a221ed63d39e5377626e458b2c070541e">More...</a><br /></td></tr>
+<tr class="separator:a221ed63d39e5377626e458b2c070541e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a54debe981843ae9c7a40de65229698a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMySolidTetgenMesh.html">MySolidTetgenMesh</a>&lt; SOLID_ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a54debe981843ae9c7a40de65229698a3">Solid_mesh_pt</a></td></tr>
+<tr class="memdesc:a54debe981843ae9c7a40de65229698a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bulk solid mesh.  <a href="classUnstructuredFSIProblem.html#a54debe981843ae9c7a40de65229698a3">More...</a><br /></td></tr>
+<tr class="separator:a54debe981843ae9c7a40de65229698a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ff1c23ca84612c8bb468f1476e0bdd9"><td class="memItemLeft" align="right" valign="top">Vector&lt; SolidMesh * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a5ff1c23ca84612c8bb468f1476e0bdd9">Solid_fsi_traction_mesh_pt</a></td></tr>
+<tr class="memdesc:a5ff1c23ca84612c8bb468f1476e0bdd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meshes of FSI traction elements.  <a href="classUnstructuredFSIProblem.html#a5ff1c23ca84612c8bb468f1476e0bdd9">More...</a><br /></td></tr>
+<tr class="separator:a5ff1c23ca84612c8bb468f1476e0bdd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7892a7d7fd6aeff9f7a391b70bab9c81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFluidTetMesh.html">FluidTetMesh</a>&lt; FLUID_ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a7892a7d7fd6aeff9f7a391b70bab9c81">Fluid_mesh_pt</a></td></tr>
+<tr class="memdesc:a7892a7d7fd6aeff9f7a391b70bab9c81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bulk fluid mesh.  <a href="classUnstructuredFSIProblem.html#a7892a7d7fd6aeff9f7a391b70bab9c81">More...</a><br /></td></tr>
+<tr class="separator:a7892a7d7fd6aeff9f7a391b70bab9c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ae2785eef94e3ba41fe5562a4a32c8d"><td class="memItemLeft" align="right" valign="top">Vector&lt; Mesh * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a1ae2785eef94e3ba41fe5562a4a32c8d">Fluid_traction_mesh_pt</a></td></tr>
+<tr class="memdesc:a1ae2785eef94e3ba41fe5562a4a32c8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meshes of fluid traction elements that apply pressure at in/outflow.  <a href="classUnstructuredFSIProblem.html#a1ae2785eef94e3ba41fe5562a4a32c8d">More...</a><br /></td></tr>
+<tr class="separator:a1ae2785eef94e3ba41fe5562a4a32c8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e942a90cc462bf0df04ad28057d4071"><td class="memItemLeft" align="right" valign="top">Vector&lt; SolidMesh * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a2e942a90cc462bf0df04ad28057d4071">Lagrange_multiplier_mesh_pt</a></td></tr>
+<tr class="memdesc:a2e942a90cc462bf0df04ad28057d4071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meshes of Lagrange multiplier elements.  <a href="classUnstructuredFSIProblem.html#a2e942a90cc462bf0df04ad28057d4071">More...</a><br /></td></tr>
+<tr class="separator:a2e942a90cc462bf0df04ad28057d4071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a292fef90d668209e31d51db20d6bfd9a"><td class="memItemLeft" align="right" valign="top">Vector&lt; MeshAsGeomObject * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a292fef90d668209e31d51db20d6bfd9a">Solid_fsi_boundary_pt</a></td></tr>
+<tr class="memdesc:a292fef90d668209e31d51db20d6bfd9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">GeomObject incarnations of the FSI boundary in the solid mesh.  <a href="classUnstructuredFSIProblem.html#a292fef90d668209e31d51db20d6bfd9a">More...</a><br /></td></tr>
+<tr class="separator:a292fef90d668209e31d51db20d6bfd9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a788dde635a29da6a40b21629780eb9b8"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a788dde635a29da6a40b21629780eb9b8">Pinned_solid_boundary_id</a></td></tr>
+<tr class="memdesc:a788dde635a29da6a40b21629780eb9b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">IDs of solid mesh boundaries where displacements are pinned.  <a href="classUnstructuredFSIProblem.html#a788dde635a29da6a40b21629780eb9b8">More...</a><br /></td></tr>
+<tr class="separator:a788dde635a29da6a40b21629780eb9b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a286830595411866cbbb3a43313d76285"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a286830595411866cbbb3a43313d76285">Solid_fsi_boundary_id</a></td></tr>
+<tr class="memdesc:a286830595411866cbbb3a43313d76285"><td class="mdescLeft">&#160;</td><td class="mdescRight">IDs of solid mesh boundaries which make up the FSI interface.  <a href="classUnstructuredFSIProblem.html#a286830595411866cbbb3a43313d76285">More...</a><br /></td></tr>
+<tr class="separator:a286830595411866cbbb3a43313d76285"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75cb40c497f6b54e05741df6e9c430ba"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a75cb40c497f6b54e05741df6e9c430ba">Inflow_boundary_id</a></td></tr>
+<tr class="memdesc:a75cb40c497f6b54e05741df6e9c430ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">IDs of fluid mesh boundaries along which inflow boundary conditions are applied.  <a href="classUnstructuredFSIProblem.html#a75cb40c497f6b54e05741df6e9c430ba">More...</a><br /></td></tr>
+<tr class="separator:a75cb40c497f6b54e05741df6e9c430ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3ca6da48fb75f5b56cd2f0b581a2da0"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#ab3ca6da48fb75f5b56cd2f0b581a2da0">Outflow_boundary_id</a></td></tr>
+<tr class="memdesc:ab3ca6da48fb75f5b56cd2f0b581a2da0"><td class="mdescLeft">&#160;</td><td class="mdescRight">IDs of fluid mesh boundaries along which inflow boundary conditions are applied.  <a href="classUnstructuredFSIProblem.html#ab3ca6da48fb75f5b56cd2f0b581a2da0">More...</a><br /></td></tr>
+<tr class="separator:ab3ca6da48fb75f5b56cd2f0b581a2da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79fee04b489d1ce1f822eec9d34251e5"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnstructuredFSIProblem.html#a79fee04b489d1ce1f822eec9d34251e5">Fluid_fsi_boundary_id</a></td></tr>
+<tr class="memdesc:a79fee04b489d1ce1f822eec9d34251e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">IDs of fluid mesh boundaries which make up the FSI interface.  <a href="classUnstructuredFSIProblem.html#a79fee04b489d1ce1f822eec9d34251e5">More...</a><br /></td></tr>
+<tr class="separator:a79fee04b489d1ce1f822eec9d34251e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class FLUID_ELEMENT, class SOLID_ELEMENT&gt;<br />
+class UnstructuredFSIProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;</h3>
+
+<p>Unstructured 3D FSI problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00212">212</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6a31fd839e0215ef1312942cf7284bd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a31fd839e0215ef1312942cf7284bd2">&#9670;&nbsp;</a></span>UnstructuredFSIProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::<a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: </p>
+<p>Constructor for unstructured 3D FSI problem. </p>
+<p>IDs of solid mesh boundaries where displacements are pinned</p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00318">318</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00166">Global_Parameters::Constitutive_law_pt</a>, and <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00160">Global_Parameters::Re</a>.</p>
+
+</div>
+</div>
+<a id="a976a81e0dee902f6713bd8ca4d79d000"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a976a81e0dee902f6713bd8ca4d79d000">&#9670;&nbsp;</a></span>~UnstructuredFSIProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::~<a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00221">221</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af766e3bbc8963a286678cb1d277909f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af766e3bbc8963a286678cb1d277909f5">&#9670;&nbsp;</a></span>create_fluid_traction_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::create_fluid_traction_elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create fluid traction elements at inflow. </p>
+<p>Create fluid traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00806">806</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00175">Global_Parameters::prescribed_inflow_traction()</a>, and <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00190">Global_Parameters::prescribed_outflow_traction()</a>.</p>
+
+</div>
+</div>
+<a id="a934a587c99668fca969a72814b3142a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a934a587c99668fca969a72814b3142a7">&#9670;&nbsp;</a></span>create_fsi_traction_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::create_fsi_traction_elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create FSI traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00705">705</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00163">Global_Parameters::Q</a>.</p>
+
+</div>
+</div>
+<a id="a6f810c300f373cfc79e23d58f95944e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f810c300f373cfc79e23d58f95944e3">&#9670;&nbsp;</a></span>create_lagrange_multiplier_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::create_lagrange_multiplier_elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create elements that enforce prescribed boundary motion for the pseudo-solid fluid mesh by Lagrange multipliers. </p>
+<p>Create elements that impose the prescribed boundary displacement for the pseudo-solid fluid mesh </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00752">752</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a90c15e131c5ef01add676e0e78e5628c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90c15e131c5ef01add676e0e78e5628c">&#9670;&nbsp;</a></span>doc_solid_boundary_coordinates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::doc_solid_boundary_coordinates </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sanity check: Doc boundary coordinates on i-th solid FSI interface. </p>
+<p>Doc boundary coordinates of i-th solid FSI boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00878">878</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a15f581318b505de07f50bd570da8c8d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15f581318b505de07f50bd570da8c8d0">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00935">935</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a7ef3b155002c3a71a7cb43d8c86a7a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ef3b155002c3a71a7cb43d8c86a7a6d">&#9670;&nbsp;</a></span>nfluid_fsi_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::nfluid_fsi_boundary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return total number of mesh boundaries in the fluid mesh that make up the FSI interface. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00264">264</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a74a81b12db3e54dffcb68ebd0447610c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74a81b12db3e54dffcb68ebd0447610c">&#9670;&nbsp;</a></span>nfluid_inflow_traction_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::nfluid_inflow_traction_boundary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return total number of mesh boundaries that make up the inflow boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00244">244</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="acc6f2d0f03a9bc1af96e85b54824a16b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc6f2d0f03a9bc1af96e85b54824a16b">&#9670;&nbsp;</a></span>nfluid_outflow_traction_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::nfluid_outflow_traction_boundary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return total number of mesh boundaries that make up the outflow boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00249">249</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a476394046c343524eefff856715eb722"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a476394046c343524eefff856715eb722">&#9670;&nbsp;</a></span>nfluid_traction_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::nfluid_traction_boundary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return total number of mesh boundaries that make up the in- and outflow boundaries where a traction has to be applied. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00254">254</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a221ed63d39e5377626e458b2c070541e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a221ed63d39e5377626e458b2c070541e">&#9670;&nbsp;</a></span>npinned_solid_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::npinned_solid_boundary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return total number of mesh boundaries in the solid mesh where the position is pinned. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00269">269</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3e4ee23245ec4c43e085006f5cd192e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e4ee23245ec4c43e085006f5cd192e1">&#9670;&nbsp;</a></span>nsolid_fsi_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::nsolid_fsi_boundary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return total number of mesh boundaries in the solid mesh that make up the FSI interface. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00259">259</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a79fee04b489d1ce1f822eec9d34251e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79fee04b489d1ce1f822eec9d34251e5">&#9670;&nbsp;</a></span>Fluid_fsi_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;unsigned&gt; <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Fluid_fsi_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>IDs of fluid mesh boundaries which make up the FSI interface. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00308">308</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a7892a7d7fd6aeff9f7a391b70bab9c81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7892a7d7fd6aeff9f7a391b70bab9c81">&#9670;&nbsp;</a></span>Fluid_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classFluidTetMesh.html">FluidTetMesh</a>&lt;FLUID_ELEMENT&gt;* <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Fluid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bulk fluid mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00281">281</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a1ae2785eef94e3ba41fe5562a4a32c8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ae2785eef94e3ba41fe5562a4a32c8d">&#9670;&nbsp;</a></span>Fluid_traction_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;Mesh*&gt; <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Fluid_traction_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Meshes of fluid traction elements that apply pressure at in/outflow. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00284">284</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a75cb40c497f6b54e05741df6e9c430ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75cb40c497f6b54e05741df6e9c430ba">&#9670;&nbsp;</a></span>Inflow_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;unsigned&gt; <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Inflow_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>IDs of fluid mesh boundaries along which inflow boundary conditions are applied. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00301">301</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2e942a90cc462bf0df04ad28057d4071"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e942a90cc462bf0df04ad28057d4071">&#9670;&nbsp;</a></span>Lagrange_multiplier_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;SolidMesh*&gt; <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Lagrange_multiplier_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Meshes of Lagrange multiplier elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00287">287</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab3ca6da48fb75f5b56cd2f0b581a2da0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3ca6da48fb75f5b56cd2f0b581a2da0">&#9670;&nbsp;</a></span>Outflow_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;unsigned&gt; <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Outflow_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>IDs of fluid mesh boundaries along which inflow boundary conditions are applied. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00305">305</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a788dde635a29da6a40b21629780eb9b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a788dde635a29da6a40b21629780eb9b8">&#9670;&nbsp;</a></span>Pinned_solid_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;unsigned&gt; <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Pinned_solid_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>IDs of solid mesh boundaries where displacements are pinned. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00294">294</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a286830595411866cbbb3a43313d76285"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a286830595411866cbbb3a43313d76285">&#9670;&nbsp;</a></span>Solid_fsi_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;unsigned&gt; <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Solid_fsi_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>IDs of solid mesh boundaries which make up the FSI interface. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00297">297</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a292fef90d668209e31d51db20d6bfd9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a292fef90d668209e31d51db20d6bfd9a">&#9670;&nbsp;</a></span>Solid_fsi_boundary_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;MeshAsGeomObject*&gt; <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Solid_fsi_boundary_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>GeomObject incarnations of the FSI boundary in the solid mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00291">291</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a5ff1c23ca84612c8bb468f1476e0bdd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ff1c23ca84612c8bb468f1476e0bdd9">&#9670;&nbsp;</a></span>Solid_fsi_traction_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;SolidMesh*&gt; <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Solid_fsi_traction_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Meshes of FSI traction elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00278">278</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<a id="a54debe981843ae9c7a40de65229698a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54debe981843ae9c7a40de65229698a3">&#9670;&nbsp;</a></span>Solid_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FLUID_ELEMENT , class SOLID_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMySolidTetgenMesh.html">MySolidTetgenMesh</a>&lt;SOLID_ELEMENT&gt;* <a class="el" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::Solid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bulk solid mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__three__d__fsi_8cc_source.html#l00275">275</a> of file <a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="unstructured__three__d__fsi_8cc_source.html">unstructured_three_d_fsi.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:21:08
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

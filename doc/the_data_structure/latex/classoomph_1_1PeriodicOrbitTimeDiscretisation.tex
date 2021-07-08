@@ -1,0 +1,327 @@
+\hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation}{}\doxysection{oomph\+::Periodic\+Orbit\+Time\+Discretisation Class Reference}
+\label{classoomph_1_1PeriodicOrbitTimeDiscretisation}\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+
+
+Timestepper used to calculate periodic orbits directly. It\textquotesingle{}s not really a \char`\"{}timestepper\char`\"{} per se, but represents the time storage and means of calculating time-\/derivatives given the underlying discretisation.  
+
+
+
+
+{\ttfamily \#include $<$periodic\+\_\+orbit\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Periodic\+Orbit\+Time\+Discretisation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1PeriodicOrbitTimeDiscretisation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a0bccd8d239689d95cf7422d877a5eed8}{Initial\+Condition\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})
+\begin{DoxyCompactList}\small\item\em Typedef for function that returns the (scalar) initial value at a given value of the continuous time t. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a7167c51f5a15cd10f9cf1d534534d0ab}{Periodic\+Orbit\+Time\+Discretisation}} (const unsigned \&n\+\_\+tstorage)
+\begin{DoxyCompactList}\small\item\em Constructor for the case when we allow adaptive timestepping. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_ae5aa461a5d284736975fb3d41e769be0}{Periodic\+Orbit\+Time\+Discretisation}} (const \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation}{Periodic\+Orbit\+Time\+Discretisation}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a2d0767948e0120cf8e913bd52c459940}{operator=}} (const \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation}{Periodic\+Orbit\+Time\+Discretisation}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a395bce926ad4a0dfb474aaf05f607b99}{order}} () const
+\begin{DoxyCompactList}\small\item\em Return the actual order of the scheme. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a45c5cd901ddf52fb1566665a2e161497}{assign\+\_\+initial\+\_\+values\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Broken initialisation the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values corresponding to an impulsive start. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_ab0445858504afb534970431e8bf2d3c6}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Broken initialisation of the positions for the node corresponding to an impulsive start. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_abdbc5908a5f202d6ecf37fd1a1431292}{assign\+\_\+initial\+\_\+data\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a0bccd8d239689d95cf7422d877a5eed8}{Initial\+Condition\+Fct\+Pt}} $>$ initial\+\_\+value\+\_\+fct)
+\begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, corresponding to given time history, specified by \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of function pointers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a6893d2c1436831d5ad635b43bd91f42e}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Broken shifting of time values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a246a40f0cfe0ebc3d5020ede92a2d0e9}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Broken shifting of time positions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a250509cf3fb767dc65b14b8dea9ea1e8}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Set the weights. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_aff80f0af851d19d3b19cfee5d17022f3}{nprev\+\_\+values}} () const
+\begin{DoxyCompactList}\small\item\em Number of previous values available. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_ac26b0ab91fc9ec95dad7c207d960216a}{ndt}} () const
+\begin{DoxyCompactList}\small\item\em Number of timestep increments that need to be stored by the scheme. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a3652005e173ad0e9d796ff415406c9c4}{Periodic\+Orbit\+Equations}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Timestepper used to calculate periodic orbits directly. It\textquotesingle{}s not really a \char`\"{}timestepper\char`\"{} per se, but represents the time storage and means of calculating time-\/derivatives given the underlying discretisation. 
+
+Definition at line 57 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_a0bccd8d239689d95cf7422d877a5eed8}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_a0bccd8d239689d95cf7422d877a5eed8}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!InitialConditionFctPt@{InitialConditionFctPt}}
+\index{InitialConditionFctPt@{InitialConditionFctPt}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{InitialConditionFctPt}{InitialConditionFctPt}}
+{\footnotesize\ttfamily typedef double($\ast$ oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::\+Initial\+Condition\+Fct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})}
+
+
+
+Typedef for function that returns the (scalar) initial value at a given value of the continuous time t. 
+
+
+
+Definition at line 109 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_a7167c51f5a15cd10f9cf1d534534d0ab}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_a7167c51f5a15cd10f9cf1d534534d0ab}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!PeriodicOrbitTimeDiscretisation@{PeriodicOrbitTimeDiscretisation}}
+\index{PeriodicOrbitTimeDiscretisation@{PeriodicOrbitTimeDiscretisation}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{PeriodicOrbitTimeDiscretisation()}{PeriodicOrbitTimeDiscretisation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::\+Periodic\+Orbit\+Time\+Discretisation (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+tstorage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the case when we allow adaptive timestepping. 
+
+
+
+Definition at line 64 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Time\+Stepper\+::\+Type.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_ae5aa461a5d284736975fb3d41e769be0}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_ae5aa461a5d284736975fb3d41e769be0}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!PeriodicOrbitTimeDiscretisation@{PeriodicOrbitTimeDiscretisation}}
+\index{PeriodicOrbitTimeDiscretisation@{PeriodicOrbitTimeDiscretisation}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{PeriodicOrbitTimeDiscretisation()}{PeriodicOrbitTimeDiscretisation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::\+Periodic\+Orbit\+Time\+Discretisation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation}{Periodic\+Orbit\+Time\+Discretisation}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 72 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_abdbc5908a5f202d6ecf37fd1a1431292}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_abdbc5908a5f202d6ecf37fd1a1431292}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!assign\_initial\_data\_values@{assign\_initial\_data\_values}}
+\index{assign\_initial\_data\_values@{assign\_initial\_data\_values}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{assign\_initial\_data\_values()}{assign\_initial\_data\_values()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+data\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation_a0bccd8d239689d95cf7422d877a5eed8}{Initial\+Condition\+Fct\+Pt}} $>$}]{initial\+\_\+value\+\_\+fct }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, corresponding to given time history, specified by \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of function pointers. 
+
+
+
+Definition at line 114 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Time\+::time(), oomph\+::\+Time\+Stepper\+::time(), and oomph\+::\+Time\+Stepper\+::\+Time\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_ab0445858504afb534970431e8bf2d3c6}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_ab0445858504afb534970431e8bf2d3c6}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
+\index{assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{assign\_initial\_positions\_impulsive()}{assign\_initial\_positions\_impulsive()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken initialisation of the positions for the node corresponding to an impulsive start. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_ab66972f0eaf3ba34645793e23e46afd5}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 98 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_a45c5cd901ddf52fb1566665a2e161497}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_a45c5cd901ddf52fb1566665a2e161497}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}}
+\index{assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{assign\_initial\_values\_impulsive()}{assign\_initial\_values\_impulsive()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken initialisation the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values corresponding to an impulsive start. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a7e894df13c88c96dd8eced2700228225}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 88 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_ac26b0ab91fc9ec95dad7c207d960216a}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_ac26b0ab91fc9ec95dad7c207d960216a}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!ndt@{ndt}}
+\index{ndt@{ndt}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{ndt()}{ndt()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::ndt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of timestep increments that need to be stored by the scheme. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a00e57b6436cff4fc82af481b81a78a1a}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 167 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Time\+Stepper\+::ntstorage().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_aff80f0af851d19d3b19cfee5d17022f3}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_aff80f0af851d19d3b19cfee5d17022f3}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!nprev\_values@{nprev\_values}}
+\index{nprev\_values@{nprev\_values}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{nprev\_values()}{nprev\_values()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::nprev\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of previous values available. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 164 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Time\+Stepper\+::ntstorage().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_a2d0767948e0120cf8e913bd52c459940}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_a2d0767948e0120cf8e913bd52c459940}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation}{Periodic\+Orbit\+Time\+Discretisation}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 78 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_a395bce926ad4a0dfb474aaf05f607b99}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_a395bce926ad4a0dfb474aaf05f607b99}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!order@{order}}
+\index{order@{order}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{order()}{order()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the actual order of the scheme. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a251e5d4b37381e582b7cf4c554e2e724}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 84 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_a250509cf3fb767dc65b14b8dea9ea1e8}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_a250509cf3fb767dc65b14b8dea9ea1e8}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Set the weights. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb0468d55}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 158 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_a246a40f0cfe0ebc3d5020ede92a2d0e9}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_a246a40f0cfe0ebc3d5020ede92a2d0e9}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!shift\_time\_positions@{shift\_time\_positions}}
+\index{shift\_time\_positions@{shift\_time\_positions}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{shift\_time\_positions()}{shift\_time\_positions()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken shifting of time positions. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a518b1bee5dc3aae8c5ef13560d1954ac}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 149 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_a6893d2c1436831d5ad635b43bd91f42e}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_a6893d2c1436831d5ad635b43bd91f42e}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!shift\_time\_values@{shift\_time\_values}}
+\index{shift\_time\_values@{shift\_time\_values}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{shift\_time\_values()}{shift\_time\_values()}}
+{\footnotesize\ttfamily void oomph\+::\+Periodic\+Orbit\+Time\+Discretisation\+::shift\+\_\+time\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken shifting of time values. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a010a3b03a23a1c48dd8ca10641427255}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 140 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTimeDiscretisation_a3652005e173ad0e9d796ff415406c9c4}\label{classoomph_1_1PeriodicOrbitTimeDiscretisation_a3652005e173ad0e9d796ff415406c9c4}} 
+\index{oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}!PeriodicOrbitEquations@{PeriodicOrbitEquations}}
+\index{PeriodicOrbitEquations@{PeriodicOrbitEquations}!oomph::PeriodicOrbitTimeDiscretisation@{oomph::PeriodicOrbitTimeDiscretisation}}
+\doxysubsubsection{\texorpdfstring{PeriodicOrbitEquations}{PeriodicOrbitEquations}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classoomph_1_1PeriodicOrbitEquations}{Periodic\+Orbit\+Equations}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 59 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{periodic__orbit__handler_8h}{periodic\+\_\+orbit\+\_\+handler.\+h}}\end{DoxyCompactItemize}

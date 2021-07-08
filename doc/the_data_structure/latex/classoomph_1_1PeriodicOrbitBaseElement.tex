@@ -1,0 +1,122 @@
+\hypertarget{classoomph_1_1PeriodicOrbitBaseElement}{}\doxysection{oomph\+::Periodic\+Orbit\+Base\+Element Class Reference}
+\label{classoomph_1_1PeriodicOrbitBaseElement}\index{oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}}
+
+
+{\ttfamily \#include $<$periodic\+\_\+orbit\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Periodic\+Orbit\+Base\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1PeriodicOrbitBaseElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitBaseElement_a1eb14a3e5456ff4f6dda6032ab26f9fe}{Periodic\+Orbit\+Base\+Element}} ()
+\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitBaseElement_abba1af9fcade9cb3348ba3211b4241b6}{get\+\_\+non\+\_\+external\+\_\+dofs}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})
+\begin{DoxyCompactList}\small\item\em Interface to get the current value of all (internal and shared) unknowns. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitBaseElement_a115fb7538cac83389818170a6b36bdcc}{get\+\_\+non\+\_\+external\+\_\+ddofs\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+dt)
+\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitBaseElement_acc9cea11affa9cba587419c833ef6ea9}{get\+\_\+inner\+\_\+product\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&inner\+\_\+product)
+\begin{DoxyCompactList}\small\item\em Get the inner product matrix. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitBaseElement_a6d543d9fa979ed60cec6b5f0dac4b0d6}{spacetime\+\_\+output}} (std\+::ostream \&outilfe, const unsigned \&Nplot, const double \&time=0.\+0)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 1430 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitBaseElement_a1eb14a3e5456ff4f6dda6032ab26f9fe}\label{classoomph_1_1PeriodicOrbitBaseElement_a1eb14a3e5456ff4f6dda6032ab26f9fe}} 
+\index{oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}!PeriodicOrbitBaseElement@{PeriodicOrbitBaseElement}}
+\index{PeriodicOrbitBaseElement@{PeriodicOrbitBaseElement}!oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}}
+\doxysubsubsection{\texorpdfstring{PeriodicOrbitBaseElement()}{PeriodicOrbitBaseElement()}}
+{\footnotesize\ttfamily oomph\+::\+Periodic\+Orbit\+Base\+Element\+::\+Periodic\+Orbit\+Base\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1434 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitBaseElement_acc9cea11affa9cba587419c833ef6ea9}\label{classoomph_1_1PeriodicOrbitBaseElement_acc9cea11affa9cba587419c833ef6ea9}} 
+\index{oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}!get\_inner\_product\_matrix@{get\_inner\_product\_matrix}}
+\index{get\_inner\_product\_matrix@{get\_inner\_product\_matrix}!oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}}
+\doxysubsubsection{\texorpdfstring{get\_inner\_product\_matrix()}{get\_inner\_product\_matrix()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Periodic\+Orbit\+Base\+Element\+::get\+\_\+inner\+\_\+product\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{inner\+\_\+product }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the inner product matrix. 
+
+
+
+Definition at line 1447 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+References i, oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise(), and oomph\+::\+Generalised\+Element\+::ndof().
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitBaseElement_a115fb7538cac83389818170a6b36bdcc}\label{classoomph_1_1PeriodicOrbitBaseElement_a115fb7538cac83389818170a6b36bdcc}} 
+\index{oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}!get\_non\_external\_ddofs\_dt@{get\_non\_external\_ddofs\_dt}}
+\index{get\_non\_external\_ddofs\_dt@{get\_non\_external\_ddofs\_dt}!oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}}
+\doxysubsubsection{\texorpdfstring{get\_non\_external\_ddofs\_dt()}{get\_non\_external\_ddofs\_dt()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Periodic\+Orbit\+Base\+Element\+::get\+\_\+non\+\_\+external\+\_\+ddofs\+\_\+dt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Interface to get the current value of the time derivative of all (internal and shared) unknowns 
+
+Definition at line 1443 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitBaseElement_abba1af9fcade9cb3348ba3211b4241b6}\label{classoomph_1_1PeriodicOrbitBaseElement_abba1af9fcade9cb3348ba3211b4241b6}} 
+\index{oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}!get\_non\_external\_dofs@{get\_non\_external\_dofs}}
+\index{get\_non\_external\_dofs@{get\_non\_external\_dofs}!oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}}
+\doxysubsubsection{\texorpdfstring{get\_non\_external\_dofs()}{get\_non\_external\_dofs()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Periodic\+Orbit\+Base\+Element\+::get\+\_\+non\+\_\+external\+\_\+dofs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Interface to get the current value of all (internal and shared) unknowns. 
+
+
+
+Definition at line 1439 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit().
+
+\mbox{\Hypertarget{classoomph_1_1PeriodicOrbitBaseElement_a6d543d9fa979ed60cec6b5f0dac4b0d6}\label{classoomph_1_1PeriodicOrbitBaseElement_a6d543d9fa979ed60cec6b5f0dac4b0d6}} 
+\index{oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}!spacetime\_output@{spacetime\_output}}
+\index{spacetime\_output@{spacetime\_output}!oomph::PeriodicOrbitBaseElement@{oomph::PeriodicOrbitBaseElement}}
+\doxysubsubsection{\texorpdfstring{spacetime\_output()}{spacetime\_output()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Periodic\+Orbit\+Base\+Element\+::spacetime\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outilfe,  }\item[{const unsigned \&}]{Nplot,  }\item[{const double \&}]{time = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 1454 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+
+
+
+Referenced by oomph\+::\+Periodic\+Orbit\+Equations\+::orbit\+\_\+output().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{periodic__orbit__handler_8h}{periodic\+\_\+orbit\+\_\+handler.\+h}}\end{DoxyCompactItemize}

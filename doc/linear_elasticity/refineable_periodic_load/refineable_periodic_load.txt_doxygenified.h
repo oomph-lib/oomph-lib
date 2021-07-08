@@ -1,0 +1,273 @@
+/**
+
+\mainpage Example problem: The deformation of an elastic strip by a periodic traction -- this time with spatial adaptivity
+
+In this tutorial we re-visit a linear elasticity problem that we
+already discussed in detail
+in <a href="../../periodic_load/html/index.html">
+another tutorial</a>: The deformation of an elastic strip loaded by 
+a periodic surface traction. We demonstrate how to solve
+the problem with spatial adaptivity and explain how 
+to apply periodic boundary conditions in such problems.
+ 
+ 
+<HR>
+<HR>
+
+\section example The example problem
+We consider the same problem that we discussed in 
+<a href="../../periodic_load/html/index.html">another tutorial:</a>
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>The problem.</B>
+</CENTER> 
+\image html attempt3.gif "Infinitely long strip loaded by a periodic traction. " 
+\image latex attempt3.eps "Infinitely long strip loaded by a periodic traction. " width=0.5\textwidth
+Solve
+\f[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i=0,
+ \ \ \ \ \ \ \ \ \ \ (1)
+\f]
+in the domain \f$ D = \{x_1 \in [-\infty,+\infty], x_2 \in [0,L_y]\} \f$,
+subject to the Dirichlet boundary conditions
+\f[
+\left. \mathbf{u}\right|_{x_2 = 0}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (2)
+\f]
+on the bottom boundary, the Neumann (traction) boundary conditions
+\f[
+\left. \mathbf{t}\right|_{x_2 = L_y}=\left(-A \cos{\left(\frac{2 \pi x_1}{L_x}\right)}, -A \sin{\left(\frac{2 \pi x_1}{L_x}\right)}\right),
+\ \ \ \ \ \ \ \ \ \ (3)
+\f]
+on the top boundary, and symmetry conditions at \f$ x_1 = 0 \f$ and \f$ x_1 = L_x\f$,
+\f[
+\left. {\bf u}\right|_{x_1=0} = \left.{\bf u}\right|_{x_1=L_x}.
+\ \ \ \ \ \ \ \ \ \ (4)
+\f]
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+As before, we only discretise the domain over one period of the 
+applied spatially-periodic traction and apply symmetry conditions
+at the left and right domain boundaries. Here we compute the 
+solution with spatial adaptivity.
+
+<HR>
+<HR>
+
+\section results Results
+The figure below shows a vector plot of the displacement field
+near the upper domain boundary. As already observed in the
+<a href="../../periodic_load/html/index.html">computations with a 
+spatially uniform discretisation,</a> the displacements decay rapidly with
+distance from the loaded surface. \c oomph-lib's automatic mesh
+adaptation therefore chooses a much finer discretisation near the upper
+domain boundary than in the interior, leading to a significant
+reduction in the number of unknowns in the problem. 
+
+\image html displ.gif "Plot of displacement field, computed with spatial adaptivity. Note that the mesh is much finer near the top boundary where the displacement (gradients) are large. " 
+\image latex displ.eps "Plot of displacement field, computed with spatial adaptivity. Note that the mesh is much finer near the top boundary where the displacement (gradients) are large. " width=0.75\textwidth
+
+
+<HR>
+<HR>
+
+\section main The driver code
+
+Most of the driver code is identical to that discussed in the 
+<a href="../../periodic_load/html/index.html">
+tutorial in which we solved the problem without spatial adaptivity</a>.
+We will therefore only discuss the parts of the code that require
+significant changes.
+
+<HR>
+<HR>
+
+\section problem The problem class 
+The problem class is very similar to that used in the non-refineable
+version of the problem. As usual, we detach the face elements that
+apply the traction boundary condition before adapting the bulk mesh
+and then re-attach them afterwards. This is done by the functions
+\c delete_traction_elements() and \c assign_traction_elements() which
+are called from \c actions_before_adapt() and \c actions_after_adapt(),
+respectively.
+
+\dontinclude refineable_periodic_load.cc
+\skipline start_of_problem_class
+\until end_of_problem_class
+
+
+
+<HR>
+<HR>
+
+\section constructor The problem constructor -- applying periodic boundary condition in spatially adaptive computations.
+
+A key feature of this problem is the presence of the periodic boundary
+conditions (4) which require that the displacement 
+field at the left boundary is the same as that on the right one. 
+As discussed in 
+<a href="../../../navier_stokes/rayleigh_channel/html/index.html#periodic">
+another tutorial,</a> such constraints can be imposed by 
+the function 
+\code
+BoundaryNode::make_periodic(...).
+\endcode
+Once this function is called for a \c BoundaryNode, the \c
+BoundaryNode shares its \c Data with the \c Node specified as the 
+argument to that function. This "wraps the solution around the domain".
+
+In spatially adaptive computations a complication arises because 
+the non-uniform refinement of a mesh creates so-called hanging nodes, 
+i.e. nodes in a refined element that have no counterpart in 
+an adjacent less-refined element. Within \c oomph-lib, such hanging nodes  
+are automatically constrained to maintain the inter-element continuity 
+of the solution. The automatic detection of hanging nodes requires the 
+identification of the elements' neighbours. This task is performed by 
+neighbour finding routines that operate on a tree-(forest-)based 
+representation of a mesh's refinement pattern; see the discussion in  
+<a href="../../../the_data_structure/html/index.html#QuadTreeInMeshes">
+the tutorial explaining \c oomph-lib's overall data structure.</a>
+The representation of the initial, unrefined mesh as a \c TreeForest,
+required by these routines, is typically generated in the mesh constructor, 
+using the function \c TreeBasedRefineableMeshBase::setup_tree_forest().
+In the 4x4 mesh shown below this function would establish that
+within the \c Forest representing this mesh, the \c Tree associated
+with element 11 has three neighbours: Element 16 in the northern (N)
+direction; element 10 in the western (W) direction; element 7 in the
+southern (S) direction. There is no neighbour in the eastern (E)
+direction. If element 11 is refined but its neighbours are not, the
+hanging nodes on the edges with elements 7, 10 and 16 are
+automatically detected and constrained, maintaining the continuity 
+of the solution across the element boundaries. 
+
+
+\image html wrapped_forest.gif "Sketch illustrating neighbour finding in problems with periodic boundary conditions. " 
+\image latex wrapped_forest.eps "Sketch illustrating neighbour finding in problems with periodic boundary conditions. " width=0.75\textwidth
+
+
+If periodic boundary conditions are applied, the "wrapping around" of
+the domain (indicated by the red line) means that element 8 must be
+regarded as the (periodic) eastern (E) neighbour of element 11. 
+This information must be passed to the root of the \c Tree associated with 
+element 11, using the functions \c TreeRoot::neighbour_pt(...) and
+\c TreeRoot::neighbour_periodic(...).
+
+This is illustrated in the following code segment which shows
+the revised version of the problem constructor. 
+We start by building the refineable mesh and set the spatial error
+estimator.
+
+\skipline start_of_constructor
+\until Z2
+
+Next we declare all nodes on boundary 1 (the right boundary) to be
+periodic counterparts of the corresponding nodes on boundary 3 (the
+left boundary). 
+(Here we exploit that within this particular mesh the boundary
+nodes on the left and right boundaries are enumerated consistently
+from top to bottom; this is not guaranteed to be the case --
+for a general mesh you will have to establish which node corresponds
+to which; see \ref comments .)
+
+
+\until }
+
+We obtain the tree roots associated with the elements on the
+left and right boundaries, again exploiting the specific enumeration of
+the elements (from bottom left to top right, as in the sketch shown above).
+
+\until }
+
+Using this information it is easy to establish the (periodic) 
+connections between the trees:
+
+\until done
+
+The rest of the problem constructor is identical to that in its
+non-refineable counterpart and is therefore omitted here.
+ 
+<HR>
+<HR>
+
+
+\section comments Comments and Exercises
+
+\subsection nondim Comments
+
+When setting up periodic boundary conditions, it is obviously
+important to correctly identify the corresponding nodes and elements
+on the mesh boundaries. The enumeration of these nodes and elements
+is typically performed in the mesh 
+constructor. If you are unsure what conventions have been used
+(and are too lazy to read the source code), recall that you can use the
+function
+\code
+Mesh::boundary_node_pt(b,j)
+\endcode
+to obtain a pointer to the \c j -th node on the \c Mesh's \c b -th 
+boundary and  
+\code
+Mesh::boundary_element_pt(b,j)
+\endcode
+to obtain a pointer to the \c j -th element on the \c Mesh's \c b -th 
+boundary.
+
+
+\subsection exercises Exercises
+
+-# Modify the problem constructor to check that the vertical coordinate
+   of each periodic node matches that of its non-periodic counterpart.
+-# Confirm that the computed solution has a small discontinuity 
+   across the periodic boundary when you 
+   -# comment out the assignment of the periodic tree neighbours 
+   -# force the refinement of a single element next to the left
+      boundary, say. 
+   .
+   The relevant code is for the latter task is, in fact, already
+   implemented in the problem constructor because the driver code acts as a
+   self-test for this functionality.
+   \dontinclude refineable_periodic_load.cc
+   \skipline Do selective
+   \until Bulk
+   <b>Note:</b> To facilitate the visualisation of the discontinuity 
+   it is helpful to perform this test with the bilinear 
+   \c RefineableQLinearElasticityElement<2,2>, with a shallower domain 
+   (e.g. \f$ L_y = 0.5 \f$ ), and without any further spatial refinement
+   (set \c max_adapt=0 in \c main() ).
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/linear_elasticity/periodic_load/">
+demo_drivers/linear_elasticity/periodic_load/
+</A>
+</CENTER>
+- The driver code is: 
+<CENTER>
+<A HREF="../../../../demo_drivers/linear_elasticity/periodic_load/refineable_periodic_load.cc">
+demo_drivers/linear_elasticity/periodic_load/refineable_periodic_load.cc
+</A>
+</CENTER>
+.
+
+
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

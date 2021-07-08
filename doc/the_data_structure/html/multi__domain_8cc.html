@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: multi_domain.cc File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4075b182e53a3873a42d885f4e1e98c4.html">generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">multi_domain.cc File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="multi__domain_8cc_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceoomph"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html">oomph</a></td></tr>
+<tr class="memdesc:namespaceoomph"><td class="mdescLeft">&#160;</td><td class="mdescRight">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceoomph_1_1Multi__domain__functions"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html">oomph::Multi_domain_functions</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a2fb1a620c45f362039bef826b32b6785"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a2fb1a620c45f362039bef826b32b6785">oomph::Multi_domain_functions::send_and_receive_missing_zetas</a> (Problem *problem_pt)</td></tr>
+<tr class="memdesc:a2fb1a620c45f362039bef826b32b6785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to send any "missing" zeta coordinates to the next process and receive any coordinates from previous process.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a2fb1a620c45f362039bef826b32b6785">More...</a><br /></td></tr>
+<tr class="separator:a2fb1a620c45f362039bef826b32b6785"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131c53d0a1557066df4719d24796b3a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a131c53d0a1557066df4719d24796b3a8">oomph::Multi_domain_functions::send_and_receive_located_info</a> (int &amp;iproc, Mesh *const &amp;external_mesh_pt, Problem *problem_pt)</td></tr>
+<tr class="memdesc:a131c53d0a1557066df4719d24796b3a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to send back any located information.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a131c53d0a1557066df4719d24796b3a8">More...</a><br /></td></tr>
+<tr class="separator:a131c53d0a1557066df4719d24796b3a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea9c2b1984158b8f560c6fff7c0adea7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aea9c2b1984158b8f560c6fff7c0adea7">oomph::Multi_domain_functions::add_external_haloed_node_to_storage</a> (int &amp;iproc, <a class="el" href="the__data__structure_8txt.html#ae1accb258c8081d6bdccc3b740b9f5ed">Node</a> *nod_pt, Problem *problem_pt, Mesh *const &amp;external_mesh_pt, int &amp;n_cont_inter_values)</td></tr>
+<tr class="memdesc:aea9c2b1984158b8f560c6fff7c0adea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to add external haloed nodes, including any masters.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aea9c2b1984158b8f560c6fff7c0adea7">More...</a><br /></td></tr>
+<tr class="separator:aea9c2b1984158b8f560c6fff7c0adea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaafd14a3e78c1965c294797913b44bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#abaafd14a3e78c1965c294797913b44bf">oomph::Multi_domain_functions::recursively_add_masters_of_external_haloed_node</a> (int &amp;iproc, <a class="el" href="the__data__structure_8txt.html#ae1accb258c8081d6bdccc3b740b9f5ed">Node</a> *nod_pt, Problem *problem_pt, Mesh *const &amp;external_mesh_pt, int &amp;n_cont_inter_values)</td></tr>
+<tr class="memdesc:abaafd14a3e78c1965c294797913b44bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively add any master nodes (and their master nodes etc) of external haloed nodes.  <a href="namespaceoomph_1_1Multi__domain__functions.html#abaafd14a3e78c1965c294797913b44bf">More...</a><br /></td></tr>
+<tr class="separator:abaafd14a3e78c1965c294797913b44bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac4036d305c98081e778e16d568ae560"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aac4036d305c98081e778e16d568ae560">oomph::Multi_domain_functions::add_external_haloed_node_helper</a> (int &amp;iproc, <a class="el" href="the__data__structure_8txt.html#ae1accb258c8081d6bdccc3b740b9f5ed">Node</a> *nod_pt, Problem *problem_pt, Mesh *const &amp;external_mesh_pt, int &amp;n_cont_inter_values)</td></tr>
+<tr class="memdesc:aac4036d305c98081e778e16d568ae560"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to add external haloed node that is not a master.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aac4036d305c98081e778e16d568ae560">More...</a><br /></td></tr>
+<tr class="separator:aac4036d305c98081e778e16d568ae560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7116b75de2083297cc1ab4e4b1ca2e48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a7116b75de2083297cc1ab4e4b1ca2e48">oomph::Multi_domain_functions::add_external_haloed_master_node_helper</a> (int &amp;iproc, <a class="el" href="the__data__structure_8txt.html#ae1accb258c8081d6bdccc3b740b9f5ed">Node</a> *master_nod_pt, Problem *problem_pt, Mesh *const &amp;external_mesh_pt, int &amp;n_cont_inter_values)</td></tr>
+<tr class="memdesc:a7116b75de2083297cc1ab4e4b1ca2e48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to add external haloed node that is a master.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a7116b75de2083297cc1ab4e4b1ca2e48">More...</a><br /></td></tr>
+<tr class="separator:a7116b75de2083297cc1ab4e4b1ca2e48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf7f6048aab50adfe33d24f8ff9f8390"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aaf7f6048aab50adfe33d24f8ff9f8390">oomph::Multi_domain_functions::get_required_nodal_information_helper</a> (int &amp;iproc, <a class="el" href="the__data__structure_8txt.html#ae1accb258c8081d6bdccc3b740b9f5ed">Node</a> *nod_pt, Problem *problem_pt, Mesh *const &amp;external_mesh_pt, int &amp;n_cont_inter_values)</td></tr>
+<tr class="memdesc:aaf7f6048aab50adfe33d24f8ff9f8390"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to get the required nodal information from an external haloed node so that a fully-functional external halo node (and therefore element) can be created on the receiving process.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aaf7f6048aab50adfe33d24f8ff9f8390">More...</a><br /></td></tr>
+<tr class="separator:aaf7f6048aab50adfe33d24f8ff9f8390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b08cda68388e72b4159bbc0fa0826ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a3b08cda68388e72b4159bbc0fa0826ee">oomph::Multi_domain_functions::get_required_master_nodal_information_helper</a> (int &amp;iproc, <a class="el" href="the__data__structure_8txt.html#ae1accb258c8081d6bdccc3b740b9f5ed">Node</a> *master_nod_pt, Problem *problem_pt, Mesh *const &amp;external_mesh_pt, int &amp;n_cont_inter_values)</td></tr>
+<tr class="memdesc:a3b08cda68388e72b4159bbc0fa0826ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to get the required master nodal information from an external haloed master node so that a fully-functional external halo master node (and possible element) can be created on the receiving proc.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a3b08cda68388e72b4159bbc0fa0826ee">More...</a><br /></td></tr>
+<tr class="separator:a3b08cda68388e72b4159bbc0fa0826ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbec3c28e0cdbe77c6ce3c9021528247"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#abbec3c28e0cdbe77c6ce3c9021528247">oomph::Multi_domain_functions::add_external_halo_node_helper</a> (<a class="el" href="the__data__structure_8txt.html#ae1accb258c8081d6bdccc3b740b9f5ed">Node</a> *&amp;new_nod_pt, Mesh *const &amp;external_mesh_pt, unsigned &amp;loc_p, unsigned &amp;node_index, FiniteElement *const &amp;new_el_pt, int &amp;n_cont_inter_values, Problem *problem_pt)</td></tr>
+<tr class="memdesc:abbec3c28e0cdbe77c6ce3c9021528247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper functiono to add external halo node that is not a master.  <a href="namespaceoomph_1_1Multi__domain__functions.html#abbec3c28e0cdbe77c6ce3c9021528247">More...</a><br /></td></tr>
+<tr class="separator:abbec3c28e0cdbe77c6ce3c9021528247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0a1707ca80a12f948616e016a1ed191"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aa0a1707ca80a12f948616e016a1ed191">oomph::Multi_domain_functions::construct_new_external_halo_node_helper</a> (<a class="el" href="the__data__structure_8txt.html#ae1accb258c8081d6bdccc3b740b9f5ed">Node</a> *&amp;new_nod_pt, unsigned &amp;loc_p, unsigned &amp;node_index, FiniteElement *const &amp;new_el_pt, Mesh *const &amp;external_mesh_pt, Problem *problem_pt)</td></tr>
+<tr class="memdesc:aa0a1707ca80a12f948616e016a1ed191"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function which constructs a new external halo node (on an element) with the information sent from the haloed process.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aa0a1707ca80a12f948616e016a1ed191">More...</a><br /></td></tr>
+<tr class="separator:aa0a1707ca80a12f948616e016a1ed191"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af094851b9ae730f6e8a37a793be05bc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#af094851b9ae730f6e8a37a793be05bc9">oomph::Multi_domain_functions::locate_zeta_for_missing_coordinates</a> (int &amp;iproc, Mesh *const &amp;external_mesh_pt, Problem *problem_pt, Vector&lt; MeshAsGeomObject * &gt; &amp;mesh_geom_obj_pt)</td></tr>
+<tr class="memdesc:af094851b9ae730f6e8a37a793be05bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locate zeta for current set of missing coordinates; vector-based version.  <a href="namespaceoomph_1_1Multi__domain__functions.html#af094851b9ae730f6e8a37a793be05bc9">More...</a><br /></td></tr>
+<tr class="separator:af094851b9ae730f6e8a37a793be05bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a969b893c0f6f013c78076e4013c0f34c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a969b893c0f6f013c78076e4013c0f34c">oomph::Multi_domain_functions::locate_zeta_for_local_coordinates</a> (const Vector&lt; Mesh * &gt; &amp;mesh_pt, Mesh *const &amp;external_mesh_pt, Vector&lt; MeshAsGeomObject * &gt; &amp;mesh_geom_obj_pt, const unsigned &amp;interaction_index)</td></tr>
+<tr class="memdesc:a969b893c0f6f013c78076e4013c0f34c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to locate "local" zeta coordinates This is the vector-based version which operates simultaenously on the meshes contained in the Vectors.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a969b893c0f6f013c78076e4013c0f34c">More...</a><br /></td></tr>
+<tr class="separator:a969b893c0f6f013c78076e4013c0f34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81f7a581bfb6abfcce009546b80b9898"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a81f7a581bfb6abfcce009546b80b9898">oomph::Multi_domain_functions::get_dim_helper</a> (Problem *problem_pt, Mesh *const &amp;mesh_pt, Mesh *const &amp;external_mesh_pt)</td></tr>
+<tr class="memdesc:a81f7a581bfb6abfcce009546b80b9898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that computes the dimension of the elements within each of the specified meshes (and checks they are the same) Stores result in Dim.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a81f7a581bfb6abfcce009546b80b9898">More...</a><br /></td></tr>
+<tr class="separator:a81f7a581bfb6abfcce009546b80b9898"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45a7960bff85287284bea3939dcda5c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a45a7960bff85287284bea3939dcda5c2">oomph::Multi_domain_functions::clean_up</a> ()</td></tr>
+<tr class="memdesc:a45a7960bff85287284bea3939dcda5c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that clears all the intermediate information used during the external storage creation at the end of the procedure.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a45a7960bff85287284bea3939dcda5c2">More...</a><br /></td></tr>
+<tr class="separator:a45a7960bff85287284bea3939dcda5c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee712f5dc126a26cd46b6f717aa1d6c2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aee712f5dc126a26cd46b6f717aa1d6c2">oomph::Multi_domain_functions::first_closer_than_second</a> (const std::pair&lt; FiniteElement *, Vector&lt; double &gt; &gt; &amp;p1, const std::pair&lt; FiniteElement *, Vector&lt; double &gt; &gt; &amp;p2)</td></tr>
+<tr class="separator:aee712f5dc126a26cd46b6f717aa1d6c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a87a54c04fcc68b716adf10ca29a1f449"><td class="memItemLeft" align="right" valign="top">std::ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a87a54c04fcc68b716adf10ca29a1f449">oomph::Multi_domain_functions::Doc_boundary_coordinate_file</a></td></tr>
+<tr class="memdesc:a87a54c04fcc68b716adf10ca29a1f449"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output file to document the boundary coordinate along the mesh boundary of the bulk mesh during call to setup_bulk_elements_adjacent_to_face_mesh(...)  <a href="namespaceoomph_1_1Multi__domain__functions.html#a87a54c04fcc68b716adf10ca29a1f449">More...</a><br /></td></tr>
+<tr class="separator:a87a54c04fcc68b716adf10ca29a1f449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4e0a3d3191c370209c6a7830a0dc368"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#af4e0a3d3191c370209c6a7830a0dc368">oomph::Multi_domain_functions::Accept_failed_locate_zeta_in_setup_multi_domain_interaction</a> =false</td></tr>
+<tr class="memdesc:af4e0a3d3191c370209c6a7830a0dc368"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate that failure in setup multi domain functions is acceptable; defaults to false. If set to true external element pointers are set to null for those elements for which external elements couldn't be located.  <a href="namespaceoomph_1_1Multi__domain__functions.html#af4e0a3d3191c370209c6a7830a0dc368">More...</a><br /></td></tr>
+<tr class="separator:af4e0a3d3191c370209c6a7830a0dc368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27cbb5ec7f6fea2f237c11659ffeef58"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a27cbb5ec7f6fea2f237c11659ffeef58">oomph::Multi_domain_functions::Dim</a></td></tr>
+<tr class="memdesc:a27cbb5ec7f6fea2f237c11659ffeef58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dimension of zeta tuples (set by get_dim_helper) &ndash; needed because we store the scalar coordinates in flat-packed form.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a27cbb5ec7f6fea2f237c11659ffeef58">More...</a><br /></td></tr>
+<tr class="separator:a27cbb5ec7f6fea2f237c11659ffeef58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2325d66c90ff388dfd6b2649a48e9827"><td class="memItemLeft" align="right" valign="top">Vector&lt; Vector&lt; unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a2325d66c90ff388dfd6b2649a48e9827">oomph::Multi_domain_functions::External_element_located</a></td></tr>
+<tr class="memdesc:a2325d66c90ff388dfd6b2649a48e9827"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lookup scheme for whether a local element's integration point has had an external element assigned to it &ndash; essentially boolean. External_element_located[e][ipt] = {0,1} if external element for ipt-th integration in local element e {has not, has} been found. Used locally to ensure that we're not searching for the same elements over and over again when we go around the spirals.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a2325d66c90ff388dfd6b2649a48e9827">More...</a><br /></td></tr>
+<tr class="separator:a2325d66c90ff388dfd6b2649a48e9827"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a880374b0f685eeddca0c70b5a5d40a85"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a880374b0f685eeddca0c70b5a5d40a85">oomph::Multi_domain_functions::Flat_packed_zetas_not_found_locally</a></td></tr>
+<tr class="memdesc:a880374b0f685eeddca0c70b5a5d40a85"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of flat-packed zeta coordinates for which the external element could not be found during current local search. These will be sent to the next processor in the ring-like parallel search. The zeta coordinates come in groups of Dim (scalar) coordinates.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a880374b0f685eeddca0c70b5a5d40a85">More...</a><br /></td></tr>
+<tr class="separator:a880374b0f685eeddca0c70b5a5d40a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5bb8d568feb34660caf8f88928f3be7"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aa5bb8d568feb34660caf8f88928f3be7">oomph::Multi_domain_functions::Received_flat_packed_zetas_to_be_found</a></td></tr>
+<tr class="memdesc:aa5bb8d568feb34660caf8f88928f3be7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of flat-packed zeta coordinates for which the external element could not be found on another processor and for which we're currently searching here. Whatever can't be found here, gets written into Flat_packed_zetas_not_found_locally and then passed on to the next processor during the ring-like parallel search. The zeta coordinates come in groups of Dim (scalar) coordinates.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aa5bb8d568feb34660caf8f88928f3be7">More...</a><br /></td></tr>
+<tr class="separator:aa5bb8d568feb34660caf8f88928f3be7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05cf6413be5c69ff7535ebf0b8a153e3"><td class="memItemLeft" align="right" valign="top">Vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a05cf6413be5c69ff7535ebf0b8a153e3">oomph::Multi_domain_functions::Proc_id_plus_one_of_external_element</a></td></tr>
+<tr class="memdesc:a05cf6413be5c69ff7535ebf0b8a153e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proc_id_plus_one_of_external_element[i] contains the processor id (plus one) of the processor on which the i-th zeta coordinate tuple received from elsewhere (in the order in which these are stored in Received_flat_packed_zetas_to_be_found) was located; it's zero if it wasn't found during the current stage of the ring-like parallel search.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a05cf6413be5c69ff7535ebf0b8a153e3">More...</a><br /></td></tr>
+<tr class="separator:a05cf6413be5c69ff7535ebf0b8a153e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f22430d0d0df252be95eeda5c03151"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#ae6f22430d0d0df252be95eeda5c03151">oomph::Multi_domain_functions::Located_element_status</a></td></tr>
+<tr class="memdesc:ae6f22430d0d0df252be95eeda5c03151"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> to indicate (to another processor) whether a located element (that will have to represented as an external halo element on that processor) should be newly created on that processor (2), already exists on that processor (1), or is not on the current processor either (0).  <a href="namespaceoomph_1_1Multi__domain__functions.html#ae6f22430d0d0df252be95eeda5c03151">More...</a><br /></td></tr>
+<tr class="separator:ae6f22430d0d0df252be95eeda5c03151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a095771257db01cdebaaf92facc3057a3"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a095771257db01cdebaaf92facc3057a3">oomph::Multi_domain_functions::Flat_packed_located_coordinates</a></td></tr>
+<tr class="memdesc:a095771257db01cdebaaf92facc3057a3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of flat-packed local coordinates for zeta tuples that have been located.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a095771257db01cdebaaf92facc3057a3">More...</a><br /></td></tr>
+<tr class="separator:a095771257db01cdebaaf92facc3057a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fa0a4a4e31700e161441b19f88c4bf3"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a2fa0a4a4e31700e161441b19f88c4bf3">oomph::Multi_domain_functions::Flat_packed_doubles</a></td></tr>
+<tr class="memdesc:a2fa0a4a4e31700e161441b19f88c4bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of flat-packed doubles to be communicated with other processors.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a2fa0a4a4e31700e161441b19f88c4bf3">More...</a><br /></td></tr>
+<tr class="separator:a2fa0a4a4e31700e161441b19f88c4bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb7431547acc61e750fcc456a25ffc13"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aeb7431547acc61e750fcc456a25ffc13">oomph::Multi_domain_functions::Counter_for_flat_packed_doubles</a></td></tr>
+<tr class="memdesc:aeb7431547acc61e750fcc456a25ffc13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter used when processing vector of flat-packed doubles &ndash; this is really "private" data, declared here to avoid having to pass it (and the associated array) between the various helper functions.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aeb7431547acc61e750fcc456a25ffc13">More...</a><br /></td></tr>
+<tr class="separator:aeb7431547acc61e750fcc456a25ffc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5748b2389912d36f8f05cb175105c0a3"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a5748b2389912d36f8f05cb175105c0a3">oomph::Multi_domain_functions::Flat_packed_unsigneds</a></td></tr>
+<tr class="memdesc:a5748b2389912d36f8f05cb175105c0a3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of flat-packed unsigneds to be communicated with other processors &ndash; this is really "private" data, declared here to avoid having to pass the array between the various helper functions.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a5748b2389912d36f8f05cb175105c0a3">More...</a><br /></td></tr>
+<tr class="separator:a5748b2389912d36f8f05cb175105c0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a910c65c750d007e76f9175993179d151"><td class="memItemLeft" align="right" valign="top">Vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a910c65c750d007e76f9175993179d151">oomph::Multi_domain_functions::Flat_packed_unsigneds_string</a></td></tr>
+<tr class="separator:a910c65c750d007e76f9175993179d151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20f6de2e1bd15cb40c461d2ca3940bd7"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a20f6de2e1bd15cb40c461d2ca3940bd7">oomph::Multi_domain_functions::Counter_for_flat_packed_unsigneds</a></td></tr>
+<tr class="memdesc:a20f6de2e1bd15cb40c461d2ca3940bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter used when processing vector of flat-packed unsigneds &ndash; this is really "private" data, declared here to avoid having to pass it (and the associated array) between the various helper functions.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a20f6de2e1bd15cb40c461d2ca3940bd7">More...</a><br /></td></tr>
+<tr class="separator:a20f6de2e1bd15cb40c461d2ca3940bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc1119753cf68493ba6ea43c2a8bc378"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#abc1119753cf68493ba6ea43c2a8bc378">oomph::Multi_domain_functions::Use_bulk_element_as_external</a> =false</td></tr>
+<tr class="memdesc:abc1119753cf68493ba6ea43c2a8bc378"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate when to use the bulk element as the external element. Defaults to false, you must have set up FaceElements properly first in order for it to work.  <a href="namespaceoomph_1_1Multi__domain__functions.html#abc1119753cf68493ba6ea43c2a8bc378">More...</a><br /></td></tr>
+<tr class="separator:abc1119753cf68493ba6ea43c2a8bc378"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3b57b233a416885018e8993db0b291c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aa3b57b233a416885018e8993db0b291c">oomph::Multi_domain_functions::Allow_use_of_halo_elements_as_external_elements</a> =true</td></tr>
+<tr class="memdesc:aa3b57b233a416885018e8993db0b291c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate if we're allowed to use halo elements as external elements. Can drastically reduce the number of external halo elements &ndash; currently not aware of any problems therefore set to true by default but retention of this flag allows easy return to previous implementation.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aa3b57b233a416885018e8993db0b291c">More...</a><br /></td></tr>
+<tr class="separator:aa3b57b233a416885018e8993db0b291c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa45f040b8ffc6448777fae76190d308c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aa45f040b8ffc6448777fae76190d308c">oomph::Multi_domain_functions::Allow_use_of_halo_elements_as_external_elements_for_projection</a> =true</td></tr>
+<tr class="memdesc:aa45f040b8ffc6448777fae76190d308c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate whether we are allowed to use halo elements as external elements for projection, possibly only required in parallel unstructured mesh generation during the projection stage. Default set to true.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aa45f040b8ffc6448777fae76190d308c">More...</a><br /></td></tr>
+<tr class="separator:aa45f040b8ffc6448777fae76190d308c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64dc4667540a9a2591b00635dea88423"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a64dc4667540a9a2591b00635dea88423">oomph::Multi_domain_functions::Doc_timings</a> =false</td></tr>
+<tr class="memdesc:a64dc4667540a9a2591b00635dea88423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether to doc timings or not.  <a href="namespaceoomph_1_1Multi__domain__functions.html#a64dc4667540a9a2591b00635dea88423">More...</a><br /></td></tr>
+<tr class="separator:a64dc4667540a9a2591b00635dea88423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa490ae6349c68dc3c5b40f6a4a40e718"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aa490ae6349c68dc3c5b40f6a4a40e718">oomph::Multi_domain_functions::Doc_stats</a> =false</td></tr>
+<tr class="memdesc:aa490ae6349c68dc3c5b40f6a4a40e718"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether to output basic info during <a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#ac64183e03f173c69ed6ed6f493a1a67e" title="Function to set up the one-way multi-domain interaction for problems where the meshes pointed to by m...">setup_multi_domain_interaction()</a> routines.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aa490ae6349c68dc3c5b40f6a4a40e718">More...</a><br /></td></tr>
+<tr class="separator:aa490ae6349c68dc3c5b40f6a4a40e718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5969c7c730e13e9d5a2c268f3045203"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#aa5969c7c730e13e9d5a2c268f3045203">oomph::Multi_domain_functions::Doc_full_stats</a> =false</td></tr>
+<tr class="memdesc:aa5969c7c730e13e9d5a2c268f3045203"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether to output further info during <a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#ac64183e03f173c69ed6ed6f493a1a67e" title="Function to set up the one-way multi-domain interaction for problems where the meshes pointed to by m...">setup_multi_domain_interaction()</a> routines.  <a href="namespaceoomph_1_1Multi__domain__functions.html#aa5969c7c730e13e9d5a2c268f3045203">More...</a><br /></td></tr>
+<tr class="separator:aa5969c7c730e13e9d5a2c268f3045203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f14db731fddbd057f4099fbdba95cc0"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a5f14db731fddbd057f4099fbdba95cc0">oomph::Multi_domain_functions::Zeta_coords_for_further_away_comparison</a></td></tr>
+<tr class="separator:a5f14db731fddbd057f4099fbdba95cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:58:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

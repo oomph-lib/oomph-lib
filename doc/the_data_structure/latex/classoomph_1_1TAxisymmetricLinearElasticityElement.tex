@@ -1,0 +1,314 @@
+\hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement}{}\doxysection{oomph\+::T\+Axisymmetric\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\label{classoomph_1_1TAxisymmetricLinearElasticityElement}\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+
+
+{\ttfamily \#include $<$Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::T\+Axisymmetric\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.530055cm]{classoomph_1_1TAxisymmetricLinearElasticityElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_a53d9f1f12cfa81a392b4cadff3be1e48}{T\+Axisymmetric\+Linear\+Elasticity\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and Axisymmetric\+Linear\+Elasticity equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_ad7aebefff103ec57124394b34a5bc73a}{T\+Axisymmetric\+Linear\+Elasticity\+Element}} (const \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_a985cc21365c01fe374964f4d063dd5e3}{operator=}} (const \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_a803cb886b6c610f021fdfd41113eeab8}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_aa56d730cdb3e5e31f4edeb9d270c8218}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_a8a33c1d33c51c47f563aed46f5a9d835}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_a834bb7feb673a5cf90b07ee16f6b1fa5}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: ~\newline
+ \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_a622394d7222ff94019c022ae0cc5bf21}{nvertex\+\_\+node}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_ab3bdf47afd764b6f73d967f35cf24794}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_a0e59e9e92b5e6414a2da13a2b782a155}{nrecovery\+\_\+order}} ()
+\begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_a8badf4a8ed47cc64b0a728baec1c243a}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
+\begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement_af2c386150c3beb3e4f92cad017b12e1f}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
+class oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}
+
+T\+Axisym\+Axisymmetric\+Linear\+Elasticity\+Element$<$\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are isoparametric triangular Axisymmetric\+Linear\+Elasticity elements with ~\newline
+ N\+N\+O\+D\+E\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquations}{Axisymmetric\+Linear\+Elasticity\+Equations}} 
+
+Definition at line 63 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_a53d9f1f12cfa81a392b4cadff3be1e48}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_a53d9f1f12cfa81a392b4cadff3be1e48}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!TAxisymmetricLinearElasticityElement@{TAxisymmetricLinearElasticityElement}}
+\index{TAxisymmetricLinearElasticityElement@{TAxisymmetricLinearElasticityElement}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{TAxisymmetricLinearElasticityElement()}{TAxisymmetricLinearElasticityElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{T\+Axisymmetric\+Linear\+Elasticity\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and Axisymmetric\+Linear\+Elasticity equations. 
+
+
+
+Definition at line 73 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_ad7aebefff103ec57124394b34a5bc73a}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_ad7aebefff103ec57124394b34a5bc73a}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!TAxisymmetricLinearElasticityElement@{TAxisymmetricLinearElasticityElement}}
+\index{TAxisymmetricLinearElasticityElement@{TAxisymmetricLinearElasticityElement}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{TAxisymmetricLinearElasticityElement()}{TAxisymmetricLinearElasticityElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{T\+Axisymmetric\+Linear\+Elasticity\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 78 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_af2c386150c3beb3e4f92cad017b12e1f}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_af2c386150c3beb3e4f92cad017b12e1f}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
+\index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 137 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::get\+\_\+strain(), and i.
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_a0e59e9e92b5e6414a2da13a2b782a155}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_a0e59e9e92b5e6414a2da13a2b782a155}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
+\index{nrecovery\_order@{nrecovery\_order}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835bd3e0f6b2f4f7a9a4044798}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 127 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_a8badf4a8ed47cc64b0a728baec1c243a}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_a8badf4a8ed47cc64b0a728baec1c243a}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
+\index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c5728902e13da31be19c390fc28e3}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 130 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_a622394d7222ff94019c022ae0cc5bf21}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_a622394d7222ff94019c022ae0cc5bf21}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
+\index{nvertex\_node@{nvertex\_node}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertex nodes in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e77ef4ff35f15fdf7913b4077}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 116 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_a985cc21365c01fe374964f4d063dd5e3}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_a985cc21365c01fe374964f4d063dd5e3}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 85 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_a8a33c1d33c51c47f563aed46f5a9d835}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_a8a33c1d33c51c47f563aed46f5a9d835}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function\+: ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquations_a8a96657fee4dd85fdbbf25d0855c27f2}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations}}.
+
+
+
+Definition at line 104 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_a834bb7feb673a5cf90b07ee16f6b1fa5}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_a834bb7feb673a5cf90b07ee16f6b1fa5}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function\+: ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquations_ae706158f52c6251de990b640787e608b}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations}}.
+
+
+
+Definition at line 110 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_a803cb886b6c610f021fdfd41113eeab8}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_a803cb886b6c610f021fdfd41113eeab8}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function\+: ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquations_a798627057a8d79bccc17d277e1717f67}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations}}.
+
+
+
+Definition at line 91 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_aa56d730cdb3e5e31f4edeb9d270c8218}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_aa56d730cdb3e5e31f4edeb9d270c8218}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function\+: ~\newline
+ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquations_a55d90a70997efe0a5cf34e269e0cf6b8}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations}}.
+
+
+
+Definition at line 97 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TAxisymmetricLinearElasticityElement_ab3bdf47afd764b6f73d967f35cf24794}\label{classoomph_1_1TAxisymmetricLinearElasticityElement_ab3bdf47afd764b6f73d967f35cf24794}} 
+\index{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
+\index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TAxisymmetricLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{oomph\+::\+T\+Axisymmetric\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to the j-\/th vertex node in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 120 of file Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Taxisym__linear__elasticity__elements_8h}{Taxisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}\end{DoxyCompactItemize}

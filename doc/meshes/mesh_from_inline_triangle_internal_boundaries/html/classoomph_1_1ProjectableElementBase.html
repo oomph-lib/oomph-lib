@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ProjectableElementBase Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ProjectableElementBase.html">ProjectableElementBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1ProjectableElementBase-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::ProjectableElementBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Template-free Base class for projectable elements.  
+ <a href="classoomph_1_1ProjectableElementBase.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="projection_8h_source.html">projection.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::ProjectableElementBase:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1ProjectableElementBase.png" usemap="#oomph::ProjectableElementBase_map" alt=""/>
+  <map id="oomph::ProjectableElementBase_map" name="oomph::ProjectableElementBase_map">
+<area href="classoomph_1_1ProjectableElement.html" alt="oomph::ProjectableElement&lt; ELEMENT &gt;" shape="rect" coords="0,56,245,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7ee05f9195757b46b3693786cd260ac5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a7ee05f9195757b46b3693786cd260ac5">ProjectableElementBase</a> ()</td></tr>
+<tr class="separator:a7ee05f9195757b46b3693786cd260ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a668500db9bcaab7aa983d3c92f94e34b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a668500db9bcaab7aa983d3c92f94e34b">~ProjectableElementBase</a> ()</td></tr>
+<tr class="memdesc:a668500db9bcaab7aa983d3c92f94e34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <a href="classoomph_1_1ProjectableElementBase.html#a668500db9bcaab7aa983d3c92f94e34b">More...</a><br /></td></tr>
+<tr class="separator:a668500db9bcaab7aa983d3c92f94e34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a644306ebdf16f334344c2d27d72f18b7"><td class="memItemLeft" align="right" valign="top">virtual Vector&lt; std::pair&lt; Data *, unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a644306ebdf16f334344c2d27d72f18b7">data_values_of_field</a> (const unsigned &amp;fld)=0</td></tr>
+<tr class="memdesc:a644306ebdf16f334344c2d27d72f18b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.g. in Taylor Hood elements the fld-th velocities are stored at the fld-th value of the nodes; the pressures (the DIM-th field) are the DIM-th values at the vertex nodes etc. <br  />
+  <a href="classoomph_1_1ProjectableElementBase.html#a644306ebdf16f334344c2d27d72f18b7">More...</a><br /></td></tr>
+<tr class="separator:a644306ebdf16f334344c2d27d72f18b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44634aa4049332a580d249c25564638c"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a44634aa4049332a580d249c25564638c">nfields_for_projection</a> ()=0</td></tr>
+<tr class="memdesc:a44634aa4049332a580d249c25564638c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of fields of the problem, so e.g. for 2D Navier Stokes this would be 3 (for the two velocities and one pressure)  <a href="classoomph_1_1ProjectableElementBase.html#a44634aa4049332a580d249c25564638c">More...</a><br /></td></tr>
+<tr class="separator:a44634aa4049332a580d249c25564638c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6790f394630b964663281f8740f43a5"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ac6790f394630b964663281f8740f43a5">nhistory_values_for_projection</a> (const unsigned &amp;fld)=0</td></tr>
+<tr class="memdesc:ac6790f394630b964663281f8740f43a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of history values to be stored for fld-th field <br  />
+ (includes current value!)  <a href="classoomph_1_1ProjectableElementBase.html#ac6790f394630b964663281f8740f43a5">More...</a><br /></td></tr>
+<tr class="separator:ac6790f394630b964663281f8740f43a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4ecd0cd24000a3ed675dc7198203c1f"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ab4ecd0cd24000a3ed675dc7198203c1f">nhistory_values_for_coordinate_projection</a> ()=0</td></tr>
+<tr class="memdesc:ab4ecd0cd24000a3ed675dc7198203c1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of history values to be stored when projecting the history values of the nodal coordinates (includes current value!)  <a href="classoomph_1_1ProjectableElementBase.html#ab4ecd0cd24000a3ed675dc7198203c1f">More...</a><br /></td></tr>
+<tr class="separator:ab4ecd0cd24000a3ed675dc7198203c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a9a6de16f3511bca8e8be770abb9c2e"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a1a9a6de16f3511bca8e8be770abb9c2e">nvalue_of_field</a> (const unsigned &amp;fld)=0</td></tr>
+<tr class="memdesc:a1a9a6de16f3511bca8e8be770abb9c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of values (pinned or not) associated with field fld within the element. This must correspond to the number of shape functions returned in jacobian_and_shape_of_field(...).  <a href="classoomph_1_1ProjectableElementBase.html#a1a9a6de16f3511bca8e8be770abb9c2e">More...</a><br /></td></tr>
+<tr class="separator:a1a9a6de16f3511bca8e8be770abb9c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c27ae929ff636dc7747fe23fd4f738"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ac5c27ae929ff636dc7747fe23fd4f738">local_equation</a> (const unsigned &amp;fld, const unsigned &amp;ivalue)=0</td></tr>
+<tr class="memdesc:ac5c27ae929ff636dc7747fe23fd4f738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return local equation numbers associated with value ivalue of field fld within the element.  <a href="classoomph_1_1ProjectableElementBase.html#ac5c27ae929ff636dc7747fe23fd4f738">More...</a><br /></td></tr>
+<tr class="separator:ac5c27ae929ff636dc7747fe23fd4f738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad45c21b58c0985d52f68ab2d79cbb488"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ad45c21b58c0985d52f68ab2d79cbb488">jacobian_and_shape_of_field</a> (const unsigned &amp;fld, const Vector&lt; double &gt; &amp;s, Shape &amp;psi)=0</td></tr>
+<tr class="memdesc:ad45c21b58c0985d52f68ab2d79cbb488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return Jacobian of mapping and the shape functions associated with field fld. The number of shape functions must match the number of values specified in nvalue_of_field(...). For Lagrange-type interpolations the shape functinos are simply the "normal" nodal shape functions; if the element contains internal Data that is not associated with shape functions, simply set the corresonding shape function to 1.  <a href="classoomph_1_1ProjectableElementBase.html#ad45c21b58c0985d52f68ab2d79cbb488">More...</a><br /></td></tr>
+<tr class="separator:ad45c21b58c0985d52f68ab2d79cbb488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4da5b565b6d333be2f5920f7be763cd"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ae4da5b565b6d333be2f5920f7be763cd">get_field</a> (const unsigned &amp;time, const unsigned &amp;fld, const Vector&lt; double &gt; &amp;s)=0</td></tr>
+<tr class="memdesc:ae4da5b565b6d333be2f5920f7be763cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the fld-th field at local coordinates s at time-level time (time=0: current value; time&gt;0: history values)  <a href="classoomph_1_1ProjectableElementBase.html#ae4da5b565b6d333be2f5920f7be763cd">More...</a><br /></td></tr>
+<tr class="separator:ae4da5b565b6d333be2f5920f7be763cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:aa6b28955725b5626cc4cbf0465f12a9e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">Projection_Type</a> { <a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9eab653154bbbdee655a7f9a666a971b614">Coordinate</a>, 
+<a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9ea9e3decdba764ce2f6c3155676d44e38e">Lagrangian</a>, 
+<a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9ea7923f87012a0224d8a68656e58c5474a">Value</a>
+ }</td></tr>
+<tr class="memdesc:aa6b28955725b5626cc4cbf0465f12a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerated collection to specify which projection problem is to be solved.  <a href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">More...</a><br /></td></tr>
+<tr class="separator:aa6b28955725b5626cc4cbf0465f12a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aa71079c0f1075ac390708063fd7d2731"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#aa71079c0f1075ac390708063fd7d2731">Projected_field</a></td></tr>
+<tr class="memdesc:aa71079c0f1075ac390708063fd7d2731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Field that is currently being projected.  <a href="classoomph_1_1ProjectableElementBase.html#aa71079c0f1075ac390708063fd7d2731">More...</a><br /></td></tr>
+<tr class="separator:aa71079c0f1075ac390708063fd7d2731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4698e178e500468c0af8c37bd47d0bd3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a4698e178e500468c0af8c37bd47d0bd3">Time_level_for_projection</a></td></tr>
+<tr class="memdesc:a4698e178e500468c0af8c37bd47d0bd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time level we are projecting (0=current values; &gt;0: history values)  <a href="classoomph_1_1ProjectableElementBase.html#a4698e178e500468c0af8c37bd47d0bd3">More...</a><br /></td></tr>
+<tr class="separator:a4698e178e500468c0af8c37bd47d0bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab712be6423145fae3c23e444187db0e2"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#ab712be6423145fae3c23e444187db0e2">Projected_coordinate</a></td></tr>
+<tr class="memdesc:ab712be6423145fae3c23e444187db0e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">When projecting the history values of the nodal coordinates, this is the coordinate we're projecting.  <a href="classoomph_1_1ProjectableElementBase.html#ab712be6423145fae3c23e444187db0e2">More...</a><br /></td></tr>
+<tr class="separator:ab712be6423145fae3c23e444187db0e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1034f9a066d1e4116f5b6acf5e5a279c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a1034f9a066d1e4116f5b6acf5e5a279c">Projected_lagrangian</a></td></tr>
+<tr class="memdesc:a1034f9a066d1e4116f5b6acf5e5a279c"><td class="mdescLeft">&#160;</td><td class="mdescRight">When projecting the Lagrangain coordinates indicate which coordiante is to be projected.  <a href="classoomph_1_1ProjectableElementBase.html#a1034f9a066d1e4116f5b6acf5e5a279c">More...</a><br /></td></tr>
+<tr class="separator:a1034f9a066d1e4116f5b6acf5e5a279c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1081b0f4b3633612639f92d13a187db5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">Projection_Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a1081b0f4b3633612639f92d13a187db5">Projection_type</a></td></tr>
+<tr class="memdesc:a1081b0f4b3633612639f92d13a187db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable to indicate if we're projecting the history values of the nodal coordinates (Coordinate) the values themselves (Value), or the Lagrangian coordinates in Solid Mechanics problems (Lagrangian)  <a href="classoomph_1_1ProjectableElementBase.html#a1081b0f4b3633612639f92d13a187db5">More...</a><br /></td></tr>
+<tr class="separator:a1081b0f4b3633612639f92d13a187db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e6db97455edb38611347e258593f592"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a8e6db97455edb38611347e258593f592">Do_projection</a></td></tr>
+<tr class="memdesc:a8e6db97455edb38611347e258593f592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool to know if we do projection or not. If false (the default) we solve the element's "real" equations rather than the projection equations.  <a href="classoomph_1_1ProjectableElementBase.html#a8e6db97455edb38611347e258593f592">More...</a><br /></td></tr>
+<tr class="separator:a8e6db97455edb38611347e258593f592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a638bf48f5b8dd513c18413cd3878c0d1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a638bf48f5b8dd513c18413cd3878c0d1">Backup_ninteraction</a></td></tr>
+<tr class="memdesc:a638bf48f5b8dd513c18413cd3878c0d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store number of "external" interactions that were assigned to the element before doing the projection.  <a href="classoomph_1_1ProjectableElementBase.html#a638bf48f5b8dd513c18413cd3878c0d1">More...</a><br /></td></tr>
+<tr class="separator:a638bf48f5b8dd513c18413cd3878c0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a907f0491ccf46f64e97365afc2fcb773"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a907f0491ccf46f64e97365afc2fcb773">Backup_external_geometric_data</a></td></tr>
+<tr class="memdesc:a907f0491ccf46f64e97365afc2fcb773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remember if the element includes external geometric data when used in non-projection mode (this is temporarily disabled during the projection)  <a href="classoomph_1_1ProjectableElementBase.html#a907f0491ccf46f64e97365afc2fcb773">More...</a><br /></td></tr>
+<tr class="separator:a907f0491ccf46f64e97365afc2fcb773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f9195c254f229b178a8844f2572c7d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ProjectableElementBase.html#a0f9195c254f229b178a8844f2572c7d4">Backup_external_interaction_data</a></td></tr>
+<tr class="memdesc:a0f9195c254f229b178a8844f2572c7d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remember if the element includes external data when used in non-projection mode (this is temporarily disabled during the projection)  <a href="classoomph_1_1ProjectableElementBase.html#a0f9195c254f229b178a8844f2572c7d4">More...</a><br /></td></tr>
+<tr class="separator:a0f9195c254f229b178a8844f2572c7d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Template-free Base class for projectable elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00055">55</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="aa6b28955725b5626cc4cbf0465f12a9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6b28955725b5626cc4cbf0465f12a9e">&#9670;&nbsp;</a></span>Projection_Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">oomph::ProjectableElementBase::Projection_Type</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enumerated collection to specify which projection problem is to be solved. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa6b28955725b5626cc4cbf0465f12a9eab653154bbbdee655a7f9a666a971b614"></a>Coordinate&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa6b28955725b5626cc4cbf0465f12a9ea9e3decdba764ce2f6c3155676d44e38e"></a>Lagrangian&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa6b28955725b5626cc4cbf0465f12a9ea7923f87012a0224d8a68656e58c5474a"></a>Value&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00062">62</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7ee05f9195757b46b3693786cd260ac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ee05f9195757b46b3693786cd260ac5">&#9670;&nbsp;</a></span>ProjectableElementBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ProjectableElementBase::ProjectableElementBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Constructor: Initialise data so that we don't project but solve the "normal" equations associated with the element. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00110">110</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+</div>
+</div>
+<a id="a668500db9bcaab7aa983d3c92f94e34b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a668500db9bcaab7aa983d3c92f94e34b">&#9670;&nbsp;</a></span>~ProjectableElementBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::ProjectableElementBase::~ProjectableElementBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00116">116</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a644306ebdf16f334344c2d27d72f18b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a644306ebdf16f334344c2d27d72f18b7">&#9670;&nbsp;</a></span>data_values_of_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Vector&lt;std::pair&lt;Data*,unsigned&gt; &gt; oomph::ProjectableElementBase::data_values_of_field </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.g. in Taylor Hood elements the fld-th velocities are stored at the fld-th value of the nodes; the pressures (the DIM-th field) are the DIM-th values at the vertex nodes etc. <br  />
+ </p>
+
+</div>
+</div>
+<a id="ae4da5b565b6d333be2f5920f7be763cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4da5b565b6d333be2f5920f7be763cd">&#9670;&nbsp;</a></span>get_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double oomph::ProjectableElementBase::get_field </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the fld-th field at local coordinates s at time-level time (time=0: current value; time&gt;0: history values) </p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="ad45c21b58c0985d52f68ab2d79cbb488"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad45c21b58c0985d52f68ab2d79cbb488">&#9670;&nbsp;</a></span>jacobian_and_shape_of_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double oomph::ProjectableElementBase::jacobian_and_shape_of_field </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shape &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return Jacobian of mapping and the shape functions associated with field fld. The number of shape functions must match the number of values specified in nvalue_of_field(...). For Lagrange-type interpolations the shape functinos are simply the "normal" nodal shape functions; if the element contains internal Data that is not associated with shape functions, simply set the corresonding shape function to 1. </p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="ac5c27ae929ff636dc7747fe23fd4f738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5c27ae929ff636dc7747fe23fd4f738">&#9670;&nbsp;</a></span>local_equation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int oomph::ProjectableElementBase::local_equation </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ivalue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return local equation numbers associated with value ivalue of field fld within the element. </p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a44634aa4049332a580d249c25564638c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44634aa4049332a580d249c25564638c">&#9670;&nbsp;</a></span>nfields_for_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::ProjectableElementBase::nfields_for_projection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of fields of the problem, so e.g. for 2D Navier Stokes this would be 3 (for the two velocities and one pressure) </p>
+
+</div>
+</div>
+<a id="ab4ecd0cd24000a3ed675dc7198203c1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4ecd0cd24000a3ed675dc7198203c1f">&#9670;&nbsp;</a></span>nhistory_values_for_coordinate_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::ProjectableElementBase::nhistory_values_for_coordinate_projection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of history values to be stored when projecting the history values of the nodal coordinates (includes current value!) </p>
+
+</div>
+</div>
+<a id="ac6790f394630b964663281f8740f43a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6790f394630b964663281f8740f43a5">&#9670;&nbsp;</a></span>nhistory_values_for_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::ProjectableElementBase::nhistory_values_for_projection </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of history values to be stored for fld-th field <br  />
+ (includes current value!) </p>
+
+</div>
+</div>
+<a id="a1a9a6de16f3511bca8e8be770abb9c2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a9a6de16f3511bca8e8be770abb9c2e">&#9670;&nbsp;</a></span>nvalue_of_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned oomph::ProjectableElementBase::nvalue_of_field </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>fld</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return number of values (pinned or not) associated with field fld within the element. This must correspond to the number of shape functions returned in jacobian_and_shape_of_field(...). </p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a907f0491ccf46f64e97365afc2fcb773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a907f0491ccf46f64e97365afc2fcb773">&#9670;&nbsp;</a></span>Backup_external_geometric_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::ProjectableElementBase::Backup_external_geometric_data</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remember if the element includes external geometric data when used in non-projection mode (this is temporarily disabled during the projection) </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00096">96</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00579">oomph::ProjectableElement&lt; ELEMENT &gt;::disable_projection()</a>, and <a class="el" href="projection_8h_source.html#l00544">oomph::ProjectableElement&lt; ELEMENT &gt;::enable_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a0f9195c254f229b178a8844f2572c7d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f9195c254f229b178a8844f2572c7d4">&#9670;&nbsp;</a></span>Backup_external_interaction_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::ProjectableElementBase::Backup_external_interaction_data</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remember if the element includes external data when used in non-projection mode (this is temporarily disabled during the projection) </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00102">102</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00579">oomph::ProjectableElement&lt; ELEMENT &gt;::disable_projection()</a>, and <a class="el" href="projection_8h_source.html#l00544">oomph::ProjectableElement&lt; ELEMENT &gt;::enable_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a638bf48f5b8dd513c18413cd3878c0d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a638bf48f5b8dd513c18413cd3878c0d1">&#9670;&nbsp;</a></span>Backup_ninteraction</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Backup_ninteraction</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Store number of "external" interactions that were assigned to the element before doing the projection. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00091">91</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00579">oomph::ProjectableElement&lt; ELEMENT &gt;::disable_projection()</a>, and <a class="el" href="projection_8h_source.html#l00544">oomph::ProjectableElement&lt; ELEMENT &gt;::enable_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a8e6db97455edb38611347e258593f592"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e6db97455edb38611347e258593f592">&#9670;&nbsp;</a></span>Do_projection</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::ProjectableElementBase::Do_projection</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bool to know if we do projection or not. If false (the default) we solve the element's "real" equations rather than the projection equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00086">86</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00579">oomph::ProjectableElement&lt; ELEMENT &gt;::disable_projection()</a>, <a class="el" href="projection_8h_source.html#l00544">oomph::ProjectableElement&lt; ELEMENT &gt;::enable_projection()</a>, <a class="el" href="projection_8h_source.html#l00214">oomph::ProjectableElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="projection_8h_source.html#l00183">oomph::ProjectableElement&lt; ELEMENT &gt;::fill_in_contribution_to_residuals()</a>, and <a class="el" href="projection_8h_source.html#l00527">oomph::ProjectableElement&lt; ELEMENT &gt;::zeta_nodal()</a>.</p>
+
+</div>
+</div>
+<a id="ab712be6423145fae3c23e444187db0e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab712be6423145fae3c23e444187db0e2">&#9670;&nbsp;</a></span>Projected_coordinate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Projected_coordinate</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>When projecting the history values of the nodal coordinates, this is the coordinate we're projecting. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00072">72</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00628">oomph::ProjectableElement&lt; ELEMENT &gt;::projected_coordinate()</a>, and <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="aa71079c0f1075ac390708063fd7d2731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa71079c0f1075ac390708063fd7d2731">&#9670;&nbsp;</a></span>Projected_field</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Projected_field</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Field that is currently being projected. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00065">65</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00619">oomph::ProjectableElement&lt; ELEMENT &gt;::projected_field()</a>, and <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a1034f9a066d1e4116f5b6acf5e5a279c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1034f9a066d1e4116f5b6acf5e5a279c">&#9670;&nbsp;</a></span>Projected_lagrangian</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Projected_lagrangian</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>When projecting the Lagrangain coordinates indicate which coordiante is to be projected. </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00076">76</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00633">oomph::ProjectableElement&lt; ELEMENT &gt;::projected_lagrangian_coordinate()</a>, and <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+
+</div>
+</div>
+<a id="a1081b0f4b3633612639f92d13a187db5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1081b0f4b3633612639f92d13a187db5">&#9670;&nbsp;</a></span>Projection_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1ProjectableElementBase.html#aa6b28955725b5626cc4cbf0465f12a9e">Projection_Type</a> oomph::ProjectableElementBase::Projection_type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Variable to indicate if we're projecting the history values of the nodal coordinates (Coordinate) the values themselves (Value), or the Lagrangian coordinates in Solid Mechanics problems (Lagrangian) </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00081">81</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="projection_8h_source.html#l00609">oomph::ProjectableElement&lt; ELEMENT &gt;::set_project_coordinates()</a>, <a class="el" href="projection_8h_source.html#l00615">oomph::ProjectableElement&lt; ELEMENT &gt;::set_project_lagrangian()</a>, and <a class="el" href="projection_8h_source.html#l00612">oomph::ProjectableElement&lt; ELEMENT &gt;::set_project_values()</a>.</p>
+
+</div>
+</div>
+<a id="a4698e178e500468c0af8c37bd47d0bd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4698e178e500468c0af8c37bd47d0bd3">&#9670;&nbsp;</a></span>Time_level_for_projection</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ProjectableElementBase::Time_level_for_projection</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Time level we are projecting (0=current values; &gt;0: history values) </p>
+
+<p class="definition">Definition at line <a class="el" href="projection_8h_source.html#l00068">68</a> of file <a class="el" href="projection_8h_source.html">projection.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="projection_8h_source.html#l00239">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>, and <a class="el" href="projection_8h_source.html#l00623">oomph::ProjectableElement&lt; ELEMENT &gt;::time_level_for_projection()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="projection_8h_source.html">projection.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:55:11
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

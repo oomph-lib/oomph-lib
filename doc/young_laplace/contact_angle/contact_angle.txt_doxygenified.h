@@ -1,0 +1,583 @@
+/**
+
+\mainpage Example problem: The Young Laplace equation with contact angle boundary conditions
+
+
+In this document we demonstrate the adaptive solution of the Young
+Laplace equation with contact angle boundary conditions. We 
+start by reviewing the physical background in the context of 
+a representative model problem, and then discuss the spine-based 
+representation of free contact lines and the implementation of 
+the contact angle boundary condition along such lines.
+
+
+<CENTER>
+<TABLE BORDER=1, WIDTH=500px>
+<TR>
+<TD bgcolor="cornsilk">
+<CENTER>
+<B>Acknowledgement:</B>
+</CENTER>
+This tutorial and the associated driver codes were developed jointly
+with Cedric Ody (Ecole Polytechnique, Paris; now Rennes).
+\n\n
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+
+<HR>
+<HR>
+
+
+\section model A model problem
+The figure below shows a sketch of a T-junction in a microchannel 
+with a rectangular cross-section. (The front wall has been removed for
+clarity). Fluid is being pushed quasi-steadily along the (vertical)
+main channel and is in the process of entering the T-junction. 
+We assume that the air-liquid interface (shown in red) remains 
+pinned at the two sharp edges (at \f$ y=const.\f$) where the channels meet,
+while the meniscus forms a quasi-static contact angle, \f$ \gamma \f$, 
+with the smooth front and back walls.
+
+
+\image html t_junction_contact_angle_sketch.gif "A typical problem: Fluid propagates quasi-steadily through a T-junction that connects two channels of rectangular cross-section. " 
+\image latex t_junction_contact_angle_sketch.eps "A typical problem: Fluid propagates quasi-steadily through a T-junction that connects two channels of rectangular cross-section. " width=0.6\textwidth
+
+
+It is of interest to determine the maximum pressure that the meniscus 
+can withstand: if the driving pressure is less than that 
+value, the fluid will not be able to propagate past the T-junction.
+
+
+<HR>
+<HR>
+
+
+\section theory Theory and implementation
+
+
+\subsection spine Spine-based representation of the meniscus
+
+<a href="../../young_laplace/html/index.html">Recall</a> 
+that we parametrised the meniscus by two intrinsic coordinates
+as \f$ {\bf R}(\zeta_1,\zeta_2) \in {R}^3 \f$, where 
+\f$(\zeta_1,\zeta_2) \in D \in {R}^2\f$. Furthermore,
+we parametrised the domain boundary,
+\f$\partial D\f$, by a scalar coordinate \f$\xi\f$ so that,
+\f[
+{\partial D} =  \bigg\{ (\zeta_1,\zeta_2) \ \bigg| \ (\zeta_1,\zeta_2) =
+\left( \zeta_1^{[\partial D]}(\xi), \ 
+\zeta_2^{[\partial D]}(\xi) \right) \bigg\}.
+\f]
+The normal to the meniscus is then given by
+\f[
+{\bf N} = \frac{{\bf R}_{,1} \times {\bf R}_{,2} }
+{|{\bf R}_{,1} \times {\bf R}_{,2}|},
+\f]
+where a comma denotes partial differentiation with respect to one of the
+intrinsic coordinates, \f$ (\zeta_1, \zeta_2). \f$
+
+Along the contact line we define two unit vectors, \f${\bf T}_t\f$ 
+and \f${\bf T}_n\f$, that are tangential to the meniscus.
+\f${\bf T}_t\f$ is tangent to the contact line 
+while \f${\bf T}_n\f$ is normal to it and points away from the
+meniscus, as shown in the sketch below.
+
+We split the domain boundary \f$ \partial D \f$ so that \f$ \partial D = 
+\partial D_{\rm pinned} \cup \partial D_{\rm angle} \f$ and 
+assume that along  \f$\partial D_{\rm pinned}\f$ the meniscus is
+pinned, 
+\f[
+\left. {\bf R} \right|_{\partial D_{\rm pinned}} = {\bf R}_{\rm pinned}(\xi),
+\f]
+where \f${\bf R}_{\rm pinned}(\xi) \f$ is given.
+On \f$\partial D_{\rm  angle}\f$ the meniscus meets the wall at a prescribed
+contact angle \f$\gamma\f$ so that
+\f[
+\left. \left( ({\bf T}_t \times {\bf N}_{\rm wall}) \cdot {\bf T}_n\right) 
+\right|_{\partial D_{angle}} = \cos \gamma,
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\f]
+where \f${\bf N}_{\rm wall}\f$ is the outer unit normal to the wall
+as shown in this sketch:
+
+
+\image html contact_angle_sketch.gif "Sketch of the meniscus, the contact line along which it meets the wall, and the spine-based representation of the meniscus. " 
+\image latex contact_angle_sketch.eps "Sketch of the meniscus, the contact line along which it meets the wall, and the spine-based representation of the meniscus. " width=0.6\textwidth
+
+The figure also illustrates the spine-based representation of the meniscus 
+in the form
+\f[
+{\bf R}(\zeta_1,\zeta_2) = 
+{\bf B}(\zeta_1,\zeta_2) +
+u(\zeta_1,\zeta_2) \ {\bf S}(\zeta_1,\zeta_2)
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2)
+\f]
+where the spine basis \f${\bf R}(\zeta_1,\zeta_2)\f$ and
+spines \f${\bf S}(\zeta_1,\zeta_2)\f$ are pre-determined 
+vector fields, chosen such that
+\n
+- The mapping from \f$(\zeta_1,\zeta_2)\f$ to \f${\bf R}(\zeta_1,\zeta_2)\f$  
+  is one-to-one, at least for the meniscus shapes of interest.
+   \n\n
+- Along the parts of the boundary where the contact line is
+  pinned we have
+  \f[
+  \left. {\bf B}\right|_{\partial D_{\rm pinned}} = {\bf R}_{\rm pinned}
+  \f]
+  so that the pinned boundary condition may be enforced by
+  setting \f$ u|_{\partial D_{\rm pinned}} = 0.\f$
+  \n\n
+.
+\subsection contact_angle_term Computation of the contact-angle term in the variational principle
+
+<a href="../../young_laplace/html/index.html">Recall</a> 
+that the variational principle that determines the shape of the
+meniscus contained the line term
+\f[
+\delta \Pi_{\rm contact \ line} = 
+\oint_{\partial D } {\bf T}_n \cdot \delta {\bf R} 
+\left| \frac{\partial {\bf R}} {\partial \xi}\right| \ d\xi.
+\f]
+Along \f$ \partial D_{pinned} \f$ the line integral vanishes 
+because \f$ \delta {\bf R}\big|_{ \partial D_{pinned} } ={\bf 0} \f$. 
+The line integral can therefore be written as
+\f[
+\delta \Pi_{\rm contact \ line} = 
+\int_{\partial D_{\rm angle}} {\bf T}_n \cdot \delta {\bf R} 
+\left| \frac{\partial {\bf R}}{\partial \xi}\right| \ d\xi,
+\f]
+or, using the spine-based representation of the meniscus, (2),
+\f[
+\delta \Pi_{\rm contact\ line} = 
+\int_{\partial D_{\rm angle}} {\bf T}_n \cdot  {\bf S} \ \delta u 
+\left| \frac{\partial {\bf R}}{\partial \xi}\right| \ d\xi.
+\f]
+
+We shall now demonstrate that the integrand in this expression can be expressed
+in terms of the contact angle boundary
+condition (1). We start with several observations:
+-# \f${\bf T}_t\f$ is tangential to the wall.
+   \n\n
+-# Since \f${\bf N}_{\rm wall}\f$ is normal to the wall, 
+   \f${\bf T}_t \times {\bf N}_{\rm wall}\f$ is tangential to the wall
+   and orthogonal to \f${\bf T}_t\f$.
+   \n\n
+-# \f${\bf S}\f$ is tangential to the wall and can therefore
+   be decomposed into its components parallel to \f$ {\bf T}_t \f$
+   and  \f${\bf T}_t \times {\bf N}_{\rm wall} \f$ as
+   \f[
+   {\bf S} = \alpha {\bf T}_t + \beta ( {\bf T}_t \times {\bf N}_{\rm
+   wall} )
+   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   (3)
+   \f]
+   for some values of \f$\alpha\f$ and \f$\beta\f$. In fact,
+   \f[
+   \beta = {\bf S}
+   \cdot ( {\bf T}_t \times {\bf N}_{\rm wall} )
+   \f]
+-# During the computation it is most convenient to perform all
+   calculations in terms of quantities that are easily obtained from
+   the parametrisation of the meniscus as this avoids having to 
+   specify \f${\bf N}_{\rm wall}\f$ explicitly. For this purpose we
+   exploit that  \f${\bf T}_t\f$ and  \f${\bf S}\f$ are tangential
+   to the wall and not parallel to each other (unless the
+   parametrisation of the meniscus by (2) is no longer 
+   one-to-one). Therefore \f${\bf N}_{\rm wall}\f$ can be obtained 
+   from quantities that are intrinsic to the meniscus representation
+   via
+   \n\n
+   \f[
+   {\bf N}_{\rm wall} = \frac{ {\bf S} \times {\bf T}_t } 
+   {|{\bf S} \times {\bf T}_t|}
+   \f]
+   and thus
+   \f[
+   \beta = {\bf S}
+   \cdot \left( {\bf T}_t \times  
+   \frac{ {\bf S} \times {\bf T}_t } 
+   {|{\bf S} \times {\bf T}_t|} \right)
+   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4)
+   \f]
+-# Given (3) and the fact that \f${\bf T}_t \cdot {\bf
+   T}_n =0\f$, we have
+   \n\n
+   \f[
+   {\bf S} \cdot {\bf T}_n =  \beta ( {\bf T}_t \times {\bf N}_{\rm wall}
+   ) \cdot {\bf T}_n
+   \f]
+   and with (1):
+   \f[
+   {\bf S} \cdot {\bf T}_n =  \beta \cos \gamma.
+   \f]
+   Hence, the line integral may be written as
+   \f[
+   \delta \Pi_{\rm contact\ line} = 
+   \int_{\partial D_{\rm angle}} \beta \cos \gamma \ \delta u 
+   \left| \frac{\partial {\bf R}}{\partial \xi}\right| \ d\xi,
+   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5)
+   \f]
+   where \f$ \beta \f$ is given by (4).
+.
+Equation (5) is easily discretised
+by finite elements. Within \c oomph-lib, the line integral
+is decomposed into \c FaceElements that are attached to the
+"bulk" Young-Laplace elements that are adjacent to the
+contact line. The imposition of the contact angle boundary condition
+for the Young Laplace equation is therefore as easy as the application
+of Neumann boundary conditions for a Poisson equation, say.
+
+<HR>
+<HR>
+
+\section results Results
+
+The animation below illustrates the variation in the quasi-steady meniscus
+shape as the fluid enters the T-junction. 
+
+\image html t_junction_meniscus.gif "Animation of the meniscus shapes. " 
+\image latex t_junction_meniscus.eps "Animation of the meniscus shapes. " width=0.6\textwidth
+
+The computation was performed with full spatial adaptivity. The plot 
+below illustrates how the automatic mesh adaptation has strongly 
+refined the mesh towards the corners of the domain where
+the meniscus shape has a singularity. (The singularity develops
+because in the corners of the domain the contact angle boundary
+condition along the side walls is inconsistent with the \f$ 90^o \f$
+contact angle enforced by the pinned boundary condition along the
+sharp edges.)
+
+\image html t_junction_meniscus_adapt.gif "Illustration of the adaptive mesh refinement. " 
+\image latex t_junction_meniscus_adapt.eps "Illustration of the adaptive mesh refinement. " width=0.6\textwidth
+
+Finally, here is a plot of the "load-displacement diagram", i.e. a plot
+of the meniscus deflection as a function of its curvature (i.e. the 
+applied pressure drop). The limit point indicates the maximum
+pressure that can be withstood by the static meniscus.
+ 
+
+\image html t_junction_trace.gif "The load-displacement diagram for the meniscus. " 
+\image latex t_junction_trace.eps "The load-displacement diagram for the meniscus. " width=0.6\textwidth
+
+
+<HR>
+<HR>
+
+\section code The driver code
+The modifications to the driver code required to impose the contact
+angle boundary conditions are very similar to those used in other driver
+codes for problems with Neumann-type boundary conditions. We attach 
+\c FaceElements to the appropriate faces of the "bulk" Young-Laplace
+elements detach/re-attach them before and after any spatial 
+adaptation of the "bulk" mesh. 
+
+
+<HR>
+<HR>
+
+\subsection namespace The global namespace
+The namespace that defines the problem parameters is very similar
+to that used in the 
+<a href="../../young_laplace/html/index.html">previous example</a> 
+without contact angle boundary
+conditions. We provide storage for the cosine of the contact angle,
+and the prescribed meniscus height that is used by the displacement
+control method. 
+
+
+\dontinclude refineable_t_junction.cc
+\skipline start_of_namespace
+\until Controlled_height
+
+<a href="../../young_laplace/html/index.html">As before</a>, we 
+use the spine basis 
+\f$ {\bf B}(\zeta_1,\zeta_2)=(\zeta_1,\zeta_2,0)^T, \f$ to
+establish a reference configuration in which
+the flat meniscus is located in the plane \f$ z=0 \f$ and occupies the domain 
+\f$ (x,y) \in [0,L_x] \times [0,L_y]. \f$ 
+
+
+\until End of bspine functions
+
+
+As in the <a href="../../young_laplace/html/index.html">previous
+example</a>, we rotate the spines in the \f$ y \f$ -direction to 
+allow the representation of meniscus shapes that cannot be 
+projected onto the \f$ (x,y) \f$ -plane. 
+
+
+\until end of namespace
+
+<HR>
+<HR>
+
+\subsection main The driver code
+We start by defining the output directory and open a trace file
+to record the load-displacement curve.
+
+\dontinclude refineable_t_junction.cc
+\skipline start_of_main
+\until ZONE
+
+
+Next, we create the problem object, refine the mesh uniformly
+and output the initial guess for the solution: a flat interface
+which, unlike the <a href="../../young_laplace/html/index.html">previous 
+case</a>, is not a solution of the problem
+because it does not satisfy the contact-angle boundary condition;
+see the section \ref comm_ex for a more detailed discussion of this
+issue.
+
+\until number()++;
+
+Finally, we perform a parameter study by slowly incrementing
+the control displacement and recomputing the meniscus shape.
+
+\until end of main
+
+
+
+ 
+<HR>
+<HR>
+
+\subsection class The problem class
+
+The problem class contains the usual member functions. The functions
+\c actions_before_adapt() and \c actions_after_adapt() 
+are used to detach and re-attach (and rebuild) the contact angle
+elements on the appropriate boundaries of the "bulk" mesh. 
+
+
+\dontinclude refineable_t_junction.cc
+\skipline start_of_problem_class
+\until doc_solution(
+
+
+Two private helper functions are provided to create and delete 
+the contact angle elements. The class also provides storage for 
+the pointers to the various meshes, to the node at which the meniscus 
+displacement is prescribed by the displacement control method, and to 
+the \c Data object whose one-and-only value stores the (unknown) meniscus
+curvature.
+
+\until end of problem class
+
+ 
+<HR>
+<HR>
+
+\subsection constr The problem constructor
+
+We start by creating the "bulk" mesh of refineable Young Laplace
+elements and specify the error estimator. 
+
+\skipline start_of_constructor
+\until min_permitted_error()
+ 
+We identify the node (in the centre of the mesh)
+at which we apply displacement control. We pass a pointer to 
+this node to the constructor of the displacement control element 
+and store that element in its own mesh. 
+
+\until kappa_pt()
+
+Next we create the mesh that stores the contact-angle elements.
+We attach these elements to boundaries 1 and 3 of the "bulk" mesh.
+
+\until contact_angle_elements(3);
+
+The various sub-meshes are now added to the problem and the global mesh
+is built.
+
+\until build_global_mesh();
+
+As usual, we enforce only the essential boundary conditions directly by 
+pinning the meniscus displacement along mesh boundaries 0 and 2:
+
+\until end bcs
+
+The build of the "bulk" Young Laplace elements is completed
+by specifying the function pointers to the spine functions and
+the pointer to the \c Data object that stores the
+curvature.
+
+\until }
+
+Finally, we complete the build of the contact line elements 
+by passing the pointer to the double that stores the
+cosine of the contact angle. 
+
+\until }
+
+All that's now left to do is to assign the equation numbers:
+
+\until end of constructor
+
+<HR>
+<HR>
+
+\subsection create Creating the contact angle elements
+
+The function \c  create_contact_angle_elements() attaches
+the \c FaceElements that apply the contact angle boundary condition
+to the specified boundary of the "bulk" mesh. Pointers
+to the newly-created \c FaceElements are stored in a separate mesh.
+
+\skipline start_of_create_contact_angle_elements
+\until end of create_contact_angle_elements
+
+
+<HR>
+<HR>
+
+\subsection delete Deleting the contact angle elements
+
+The function \c delete_contact_angle_elements() deletes the
+contact angle elements and flushes the associated mesh.
+
+\skipline start_of_delete_contact_angle_elements
+\until // end of delete_contact_angle_elements
+
+
+
+
+<HR>
+<HR>
+
+\subsection doc Post-processing
+We output the load-displacement data, the meniscus shape,
+and various contact line quantities. 
+
+\skipline start_of_doc
+\until end of doc
+
+
+<HR>
+<HR>
+
+\section comm_ex Comments and Exercises
+
+\subsection ic How to generate a good initial guess for the solution
+
+We already commented on the need to provide a "good" initial
+guess for the solution in order to ensure the convergence of the Newton
+iteration. In the <a href="../../young_laplace/html/index.html">
+previous example</a> this was easy because the flat meniscus
+(clearly a solution of the Young-Laplace equations for
+zero curvature) also satisfied the boundary conditions. In the
+present example, and in many others, this is not the case. In such
+problems it may be difficult to generate initial guesses for the meniscus
+shape that are sufficiently close to actual solution. 
+
+In such cases it may be necessary to compute the initial solution 
+to the problem whose behaviour we wish to investigate during the
+actual parameter study via a preliminary auxiliary continuation procedure that
+transforms an easier-solve-problem (for which a good initial guess
+can be found) into the actual problem. 
+
+
+Explore this approach in the present problem by implementing the
+following steps:
+-# Set the contact angle to \f$ 90^o \f$  and solve the problem, using
+   the "flat" meniscus as the initial guess. The "flat" meniscus 
+   is, of course, the exact solution for zero control displacement and/or zero
+   curvature.
+   \n\n
+-# Now start a preliminary continuation procedure in which the contact angle
+   is adjusted in small steps until it reaches the desired value. Keep
+   the prescribed control displacement (or the meniscus curvature)
+   constant during this procedure.
+   \n\n
+-# The solution for the desired contact angle may now be used 
+   as the initial guess for the actual parameter study in which
+   the control displacement (or the meniscus curvature) are increased
+   while the contact angle is kept fixed.
+.
+
+
+
+\subsection lim Limitations of the current approach -- suggestions for improvement
+
+One of the main disadvantages of the approach adopted here
+is that the spine vector fields \f$ {\bf B} \f$
+and \f$ {\bf S} \f$ must be specified <em>a priori</em>. For sufficiently
+complicated meniscus shapes (or for menisci that undergo 
+large changes in shape as their curvature is varied) the choice
+of suitable spines may be very difficult.
+\n\n
+One (possible) solution to this problem could be (we haven't tried
+it!) to occasionally update the spine representation. For instance, 
+assume that we have computed a meniscus shape in the form
+\n\n
+\f[
+\widehat{\bf R} = {\bf R}(\zeta_1,\zeta_2) = 
+{\bf B}(\zeta_1,\zeta_2) +
+u(\zeta_1,\zeta_2) \ {\bf S}(\zeta_1,\zeta_2)
+\f]
+with an associated normal vector \f$ \widehat{\bf N} \f$.
+We can reparametrise this shape by setting
+\f[
+{\bf B} :=  \widehat{\bf R},
+\f]     
+\f[
+{\bf S} :=  \widehat{\bf N},
+\f]    
+and  
+\f[
+u := 0
+\f] 
+before continuing the computation. Provided this is done
+sufficiently frequently, i.e. long before 
+the displacement along the spines has become so large
+that the mapping from \f$ (\zeta_1,\zeta_2) \f$ to 
+\f$ {\bf R}(\zeta_1,\zeta_2)\f$ is about to become non-one-to-one,
+this should allow the computation of arbitrarily large meniscus
+deflections. Try it out and let us know how it works!
+\n\n
+
+\subsection zero Zero contact angles
+
+Our problem formulation suffers from an additional, more
+fundamental problem: it cannot be used to solve problems
+with zero contact angle. This is because for zero contact angles
+the equilibrium solution is no longer a minimiser of the
+variational principle: given a solution at which the
+meniscus meets the wall at zero contact angle, it is always
+possible to extend the meniscus with an arbitrary-length
+"collar" along the wall without changing the overall energy
+of the system. As a result, the position of the contact line becomes
+increasingly ill-defined as the contact angle \f$ \gamma \f$ is reduced,
+causing the Newton method to converge very slowly (and ultimately
+not at all) as \f$ \gamma \to 0. \f$
+
+
+
+ 
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/young_laplace/">
+  demo_drivers/young_laplace/
+  </A>
+  </CENTER>\n
+- The driver code is: \n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/young_laplace/refineable_t_junction.cc">
+  demo_drivers/young_laplace/refineable_t_junction.cc
+  </A>
+  </CENTER>
+.
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

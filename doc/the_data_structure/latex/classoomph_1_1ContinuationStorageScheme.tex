@@ -1,0 +1,413 @@
+\hypertarget{classoomph_1_1ContinuationStorageScheme}{}\doxysection{oomph\+::Continuation\+Storage\+Scheme Class Reference}
+\label{classoomph_1_1ContinuationStorageScheme}\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+
+
+Generalised\+Timestepper used to store the arclength derivatives and pervious solutions required in continuation problems. The data is stored as auxilliary data in the (fake) \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} so that spatial adaptivity will be handled automatically through our standard mechanisms. The adopted storage scheme is that the continuation derivatives will be stored at the first auxilliary value and the previous value will be the second auixilliary value.  
+
+
+
+
+{\ttfamily \#include $<$generalised\+\_\+timesteppers.\+h$>$}
+
+Inheritance diagram for oomph\+::Continuation\+Storage\+Scheme\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1ContinuationStorageScheme}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_afc4105a9e848ef6ea1320611d9d65c9b}{Continuation\+Storage\+Scheme}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a7b7f8451e6b9125f36136bdadca73fad}{Continuation\+Storage\+Scheme}} (const \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme}{Continuation\+Storage\+Scheme}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a48726b336985f9c71e10a01fdded177b}{modify\+\_\+storage}} (\mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper}{Generalised\+Time\+Stepper}} $\ast$const \&time\+\_\+stepper\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Modify the scheme based on the underlying timestepper. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a27c17cf31af802a84973b02d13268f89}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme}{Continuation\+Storage\+Scheme}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_ab9ebd03333ee68a6ec5038386134d79a}{order}} () const
+\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_adf4be6b7cf66d8b8f4dfed7520d43afb}{undo\+\_\+make\+\_\+steady}} ()
+\begin{DoxyCompactList}\small\item\em This is a steady scheme, so you can\textquotesingle{}t do this. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a24344971f7f5dd254488f7373ceb2074}{assign\+\_\+initial\+\_\+values\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Broken initialisation the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values corresponding to an impulsive start. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a6d8eb64dca810444b461cd893ad7526c}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Broken initialisation of the positions for the node corresponding to an impulsive start. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a74f8d1b2ca6413edfa6fe4a5110a215f}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Broken shifting of time values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a2271fd0ad65dda38686851df5a3970d5}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Broken shifting of time positions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a57108416ef10b5d0a7664ea2d748a4cb}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Set the weights (Do nothing) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a895e0f4bc35dc3cae52fcee71db86de3}{nprev\+\_\+values}} () const
+\begin{DoxyCompactList}\small\item\em Number of previous values available. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_aedf54b092d3f98b60b49190cb5dad540}{ndt}} () const
+\begin{DoxyCompactList}\small\item\em Number of timestep increments that need to be stored by the scheme. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a279e4c16176c0374b9bba05519a17b0c}{set\+\_\+consistent\+\_\+pinned\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Set consistent values of the derivatives and current value when the data is pinned. This must be done by the \char`\"{}timestepper\char`\"{} because only it knows the local storage scheme. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_ad08f35407fff9e171312d482cfdeacc0}{set\+\_\+consistent\+\_\+pinned\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Set consistent values of the derivatives and current value when the Nodes position is pinned. This must be done by the \char`\"{}timestepper\char`\"{} because only it knows the local storage scheme. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_acef989300e17ce031538fe447f13c4d8}{dof\+\_\+derivative\+\_\+offset}} ()
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a8f074b7e24750498f7d640e6476bef61}{dof\+\_\+current\+\_\+offset}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_aafee8dedf6e4787bc3e65ba52eab26dc}{Dof\+\_\+derivative\+\_\+offset}}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme_a8b0d1e52fa6ff062f58b4d37ba5fbc7f}{Dof\+\_\+current\+\_\+offset}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Generalised\+Timestepper used to store the arclength derivatives and pervious solutions required in continuation problems. The data is stored as auxilliary data in the (fake) \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} so that spatial adaptivity will be handled automatically through our standard mechanisms. The adopted storage scheme is that the continuation derivatives will be stored at the first auxilliary value and the previous value will be the second auixilliary value. 
+
+Definition at line 106 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_afc4105a9e848ef6ea1320611d9d65c9b}\label{classoomph_1_1ContinuationStorageScheme_afc4105a9e848ef6ea1320611d9d65c9b}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!ContinuationStorageScheme@{ContinuationStorageScheme}}
+\index{ContinuationStorageScheme@{ContinuationStorageScheme}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{ContinuationStorageScheme()}{ContinuationStorageScheme()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Continuation\+Storage\+Scheme\+::\+Continuation\+Storage\+Scheme (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor for the case when we allow adaptive continuation It can evaulate up to second derivatives, but doesn\textquotesingle{}t do anything the time-\/derivatives evaluate to zero. 
+
+Definition at line 119 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References oomph\+::\+Time\+Stepper\+::\+Is\+\_\+steady, and oomph\+::\+Time\+Stepper\+::\+Type.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a7b7f8451e6b9125f36136bdadca73fad}\label{classoomph_1_1ContinuationStorageScheme_a7b7f8451e6b9125f36136bdadca73fad}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!ContinuationStorageScheme@{ContinuationStorageScheme}}
+\index{ContinuationStorageScheme@{ContinuationStorageScheme}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{ContinuationStorageScheme()}{ContinuationStorageScheme()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Continuation\+Storage\+Scheme\+::\+Continuation\+Storage\+Scheme (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme}{Continuation\+Storage\+Scheme}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 128 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a6d8eb64dca810444b461cd893ad7526c}\label{classoomph_1_1ContinuationStorageScheme_a6d8eb64dca810444b461cd893ad7526c}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
+\index{assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{assign\_initial\_positions\_impulsive()}{assign\_initial\_positions\_impulsive()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken initialisation of the positions for the node corresponding to an impulsive start. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_ab66972f0eaf3ba34645793e23e46afd5}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 182 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a24344971f7f5dd254488f7373ceb2074}\label{classoomph_1_1ContinuationStorageScheme_a24344971f7f5dd254488f7373ceb2074}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}}
+\index{assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{assign\_initial\_values\_impulsive()}{assign\_initial\_values\_impulsive()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken initialisation the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values corresponding to an impulsive start. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a7e894df13c88c96dd8eced2700228225}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 172 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a8f074b7e24750498f7d640e6476bef61}\label{classoomph_1_1ContinuationStorageScheme_a8f074b7e24750498f7d640e6476bef61}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!dof\_current\_offset@{dof\_current\_offset}}
+\index{dof\_current\_offset@{dof\_current\_offset}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{dof\_current\_offset()}{dof\_current\_offset()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Continuation\+Storage\+Scheme\+::dof\+\_\+current\+\_\+offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 321 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References Dof\+\_\+current\+\_\+offset.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_acef989300e17ce031538fe447f13c4d8}\label{classoomph_1_1ContinuationStorageScheme_acef989300e17ce031538fe447f13c4d8}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!dof\_derivative\_offset@{dof\_derivative\_offset}}
+\index{dof\_derivative\_offset@{dof\_derivative\_offset}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{dof\_derivative\_offset()}{dof\_derivative\_offset()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Continuation\+Storage\+Scheme\+::dof\+\_\+derivative\+\_\+offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 318 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References Dof\+\_\+derivative\+\_\+offset.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a48726b336985f9c71e10a01fdded177b}\label{classoomph_1_1ContinuationStorageScheme_a48726b336985f9c71e10a01fdded177b}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!modify\_storage@{modify\_storage}}
+\index{modify\_storage@{modify\_storage}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{modify\_storage()}{modify\_storage()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::modify\+\_\+storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedTimeStepper}{Generalised\+Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Modify the scheme based on the underlying timestepper. 
+
+
+
+Definition at line 134 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References Dof\+\_\+current\+\_\+offset, Dof\+\_\+derivative\+\_\+offset, oomph\+::\+Generalised\+Time\+Stepper\+::\+Ndof\+\_\+storage\+\_\+entries, oomph\+::\+Generalised\+Time\+Stepper\+::ndof\+\_\+storage\+\_\+entries(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize(), and oomph\+::\+Time\+Stepper\+::\+Weight.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_aedf54b092d3f98b60b49190cb5dad540}\label{classoomph_1_1ContinuationStorageScheme_aedf54b092d3f98b60b49190cb5dad540}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!ndt@{ndt}}
+\index{ndt@{ndt}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{ndt()}{ndt()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Continuation\+Storage\+Scheme\+::ndt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of timestep increments that need to be stored by the scheme. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a00e57b6436cff4fc82af481b81a78a1a}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 215 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a895e0f4bc35dc3cae52fcee71db86de3}\label{classoomph_1_1ContinuationStorageScheme_a895e0f4bc35dc3cae52fcee71db86de3}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!nprev\_values@{nprev\_values}}
+\index{nprev\_values@{nprev\_values}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{nprev\_values()}{nprev\_values()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Continuation\+Storage\+Scheme\+::nprev\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of previous values available. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 212 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a27c17cf31af802a84973b02d13268f89}\label{classoomph_1_1ContinuationStorageScheme_a27c17cf31af802a84973b02d13268f89}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ContinuationStorageScheme}{Continuation\+Storage\+Scheme}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 158 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_ab9ebd03333ee68a6ec5038386134d79a}\label{classoomph_1_1ContinuationStorageScheme_ab9ebd03333ee68a6ec5038386134d79a}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!order@{order}}
+\index{order@{order}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{order()}{order()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Continuation\+Storage\+Scheme\+::order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Return the actual order of the scheme. It\textquotesingle{}s a steady scheme so it\textquotesingle{}s zero, but that doesn\textquotesingle{}t really make sense. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a251e5d4b37381e582b7cf4c554e2e724}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 165 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_ad08f35407fff9e171312d482cfdeacc0}\label{classoomph_1_1ContinuationStorageScheme_ad08f35407fff9e171312d482cfdeacc0}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!set\_consistent\_pinned\_positions@{set\_consistent\_pinned\_positions}}
+\index{set\_consistent\_pinned\_positions@{set\_consistent\_pinned\_positions}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{set\_consistent\_pinned\_positions()}{set\_consistent\_pinned\_positions()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set consistent values of the derivatives and current value when the Nodes position is pinned. This must be done by the \char`\"{}timestepper\char`\"{} because only it knows the local storage scheme. 
+
+
+
+Definition at line 262 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References Dof\+\_\+current\+\_\+offset, Dof\+\_\+derivative\+\_\+offset, i, oomph\+::\+Generalised\+Time\+Stepper\+::\+Ndof\+\_\+storage\+\_\+entries, oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt(), and t.
+
+
+
+Referenced by oomph\+::\+Mesh\+::set\+\_\+consistent\+\_\+pinned\+\_\+values\+\_\+for\+\_\+continuation().
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a279e4c16176c0374b9bba05519a17b0c}\label{classoomph_1_1ContinuationStorageScheme_a279e4c16176c0374b9bba05519a17b0c}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!set\_consistent\_pinned\_values@{set\_consistent\_pinned\_values}}
+\index{set\_consistent\_pinned\_values@{set\_consistent\_pinned\_values}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{set\_consistent\_pinned\_values()}{set\_consistent\_pinned\_values()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set consistent values of the derivatives and current value when the data is pinned. This must be done by the \char`\"{}timestepper\char`\"{} because only it knows the local storage scheme. 
+
+
+
+Definition at line 220 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References Dof\+\_\+current\+\_\+offset, Dof\+\_\+derivative\+\_\+offset, i, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Data\+::is\+\_\+pinned(), oomph\+::\+Generalised\+Time\+Stepper\+::\+Ndof\+\_\+storage\+\_\+entries, oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Data\+::value().
+
+
+
+Referenced by oomph\+::\+Spine\+Mesh\+::set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation(), oomph\+::\+Mesh\+::set\+\_\+consistent\+\_\+pinned\+\_\+values\+\_\+for\+\_\+continuation(), and oomph\+::\+Problem\+::set\+\_\+consistent\+\_\+pinned\+\_\+values\+\_\+for\+\_\+continuation().
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a57108416ef10b5d0a7664ea2d748a4cb}\label{classoomph_1_1ContinuationStorageScheme_a57108416ef10b5d0a7664ea2d748a4cb}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Set the weights (Do nothing) 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb0468d55}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 209 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a2271fd0ad65dda38686851df5a3970d5}\label{classoomph_1_1ContinuationStorageScheme_a2271fd0ad65dda38686851df5a3970d5}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!shift\_time\_positions@{shift\_time\_positions}}
+\index{shift\_time\_positions@{shift\_time\_positions}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{shift\_time\_positions()}{shift\_time\_positions()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken shifting of time positions. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a518b1bee5dc3aae8c5ef13560d1954ac}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 200 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a74f8d1b2ca6413edfa6fe4a5110a215f}\label{classoomph_1_1ContinuationStorageScheme_a74f8d1b2ca6413edfa6fe4a5110a215f}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!shift\_time\_values@{shift\_time\_values}}
+\index{shift\_time\_values@{shift\_time\_values}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{shift\_time\_values()}{shift\_time\_values()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::shift\+\_\+time\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken shifting of time values. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a010a3b03a23a1c48dd8ca10641427255}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 191 of file generalised\+\_\+timesteppers.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_adf4be6b7cf66d8b8f4dfed7520d43afb}\label{classoomph_1_1ContinuationStorageScheme_adf4be6b7cf66d8b8f4dfed7520d43afb}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!undo\_make\_steady@{undo\_make\_steady}}
+\index{undo\_make\_steady@{undo\_make\_steady}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{undo\_make\_steady()}{undo\_make\_steady()}}
+{\footnotesize\ttfamily void oomph\+::\+Continuation\+Storage\+Scheme\+::undo\+\_\+make\+\_\+steady (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This is a steady scheme, so you can\textquotesingle{}t do this. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_aada05f89e86aae352bd5b32bfb173b18}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line 168 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+References oomph\+::\+Time\+Stepper\+::\+Is\+\_\+steady.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_a8b0d1e52fa6ff062f58b4d37ba5fbc7f}\label{classoomph_1_1ContinuationStorageScheme_a8b0d1e52fa6ff062f58b4d37ba5fbc7f}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!Dof\_current\_offset@{Dof\_current\_offset}}
+\index{Dof\_current\_offset@{Dof\_current\_offset}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{Dof\_current\_offset}{Dof\_current\_offset}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Continuation\+Storage\+Scheme\+::\+Dof\+\_\+current\+\_\+offset\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 112 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+Referenced by dof\+\_\+current\+\_\+offset(), modify\+\_\+storage(), set\+\_\+consistent\+\_\+pinned\+\_\+positions(), and set\+\_\+consistent\+\_\+pinned\+\_\+values().
+
+\mbox{\Hypertarget{classoomph_1_1ContinuationStorageScheme_aafee8dedf6e4787bc3e65ba52eab26dc}\label{classoomph_1_1ContinuationStorageScheme_aafee8dedf6e4787bc3e65ba52eab26dc}} 
+\index{oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}!Dof\_derivative\_offset@{Dof\_derivative\_offset}}
+\index{Dof\_derivative\_offset@{Dof\_derivative\_offset}!oomph::ContinuationStorageScheme@{oomph::ContinuationStorageScheme}}
+\doxysubsubsection{\texorpdfstring{Dof\_derivative\_offset}{Dof\_derivative\_offset}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Continuation\+Storage\+Scheme\+::\+Dof\+\_\+derivative\+\_\+offset\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 109 of file generalised\+\_\+timesteppers.\+h.
+
+
+
+Referenced by dof\+\_\+derivative\+\_\+offset(), modify\+\_\+storage(), set\+\_\+consistent\+\_\+pinned\+\_\+positions(), and set\+\_\+consistent\+\_\+pinned\+\_\+values().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalised__timesteppers_8h}{generalised\+\_\+timesteppers.\+h}}\end{DoxyCompactItemize}

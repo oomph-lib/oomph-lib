@@ -1,0 +1,98 @@
+\hypertarget{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper}{}\doxysection{oomph\+::Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper Namespace Reference}
+\label{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper}\index{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper@{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}}
+
+
+Functions to create instances of optimal subsidiary operators for the \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ \mbox{\hyperlink{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_aedfcfd828b599566ad795d22850a6960}{get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre}} ()
+\begin{DoxyCompactList}\small\item\em A\+MG w/ \mbox{\hyperlink{classoomph_1_1GS}{GS}} smoothing for the augmented elastic subsidiary linear systems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ \mbox{\hyperlink{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_a89297aa38d1b277fe3db3c0281aa4924}{get\+\_\+elastic\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em A\+MG w/ \mbox{\hyperlink{classoomph_1_1GS}{GS}} smoothing for the augmented elastic subsidiary linear systems -- calls Hypre version to stay consistent with previous default. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ \mbox{\hyperlink{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_ac5df49cd5860e1cd611fa73cc0f60bc6}{get\+\_\+elastic\+\_\+preconditioner\+\_\+trilinos\+\_\+ml}} ()
+\begin{DoxyCompactList}\small\item\em Trilinos\+ML smoothing for the augmented elastic subsidiary linear systems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ \mbox{\hyperlink{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_a00a15f5ea18cab0665797ba03a9c9286}{get\+\_\+lagrange\+\_\+multiplier\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1CG}{CG}} with diagonal preconditioner for the lagrange multiplier subsidiary linear systems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions to create instances of optimal subsidiary operators for the \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}. 
+
+Functions to create instances of optimal subsidiary operators for the \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}. By default we use hypre for the the elastic blocks but can use Trilinos ML too. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_a89297aa38d1b277fe3db3c0281aa4924}\label{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_a89297aa38d1b277fe3db3c0281aa4924}} 
+\index{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper@{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}!get\_elastic\_preconditioner@{get\_elastic\_preconditioner}}
+\index{get\_elastic\_preconditioner@{get\_elastic\_preconditioner}!oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper@{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}}
+\doxysubsubsection{\texorpdfstring{get\_elastic\_preconditioner()}{get\_elastic\_preconditioner()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+A\+MG w/ \mbox{\hyperlink{classoomph_1_1GS}{GS}} smoothing for the augmented elastic subsidiary linear systems -- calls Hypre version to stay consistent with previous default. 
+
+
+
+Definition at line 66 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
+
+
+
+References get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_aedfcfd828b599566ad795d22850a6960}\label{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_aedfcfd828b599566ad795d22850a6960}} 
+\index{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper@{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}!get\_elastic\_preconditioner\_hypre@{get\_elastic\_preconditioner\_hypre}}
+\index{get\_elastic\_preconditioner\_hypre@{get\_elastic\_preconditioner\_hypre}!oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper@{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}}
+\doxysubsubsection{\texorpdfstring{get\_elastic\_preconditioner\_hypre()}{get\_elastic\_preconditioner\_hypre()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+A\+MG w/ \mbox{\hyperlink{classoomph_1_1GS}{GS}} smoothing for the augmented elastic subsidiary linear systems. 
+
+Hypre A\+MG w/ \mbox{\hyperlink{classoomph_1_1GS}{GS}} smoothing for the augmented elastic subsidiary linear systems. 
+
+Definition at line 41 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
+
+
+
+References oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+coarsening(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+damping(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+simple\+\_\+smoother(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing(), oomph\+::\+Hypre\+Interface\+::\+Boomer\+A\+MG, oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::communicator\+\_\+pt(), oomph\+::\+Hypre\+Preconditioner\+::hypre\+\_\+method(), and oomph\+::\+Hypre\+Preconditioner\+::set\+\_\+amg\+\_\+iterations().
+
+
+
+Referenced by get\+\_\+elastic\+\_\+preconditioner().
+
+\mbox{\Hypertarget{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_ac5df49cd5860e1cd611fa73cc0f60bc6}\label{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_ac5df49cd5860e1cd611fa73cc0f60bc6}} 
+\index{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper@{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}!get\_elastic\_preconditioner\_trilinos\_ml@{get\_elastic\_preconditioner\_trilinos\_ml}}
+\index{get\_elastic\_preconditioner\_trilinos\_ml@{get\_elastic\_preconditioner\_trilinos\_ml}!oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper@{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}}
+\doxysubsubsection{\texorpdfstring{get\_elastic\_preconditioner\_trilinos\_ml()}{get\_elastic\_preconditioner\_trilinos\_ml()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner\+\_\+trilinos\+\_\+ml (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Trilinos\+ML smoothing for the augmented elastic subsidiary linear systems. 
+
+
+
+Definition at line 77 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
+
+\mbox{\Hypertarget{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_a00a15f5ea18cab0665797ba03a9c9286}\label{namespaceoomph_1_1Pseudo__Elastic__Preconditioner__Subsidiary__Operator__Helper_a00a15f5ea18cab0665797ba03a9c9286}} 
+\index{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper@{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}!get\_lagrange\_multiplier\_preconditioner@{get\_lagrange\_multiplier\_preconditioner}}
+\index{get\_lagrange\_multiplier\_preconditioner@{get\_lagrange\_multiplier\_preconditioner}!oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper@{oomph::Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}}
+\doxysubsubsection{\texorpdfstring{get\_lagrange\_multiplier\_preconditioner()}{get\_lagrange\_multiplier\_preconditioner()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+lagrange\+\_\+multiplier\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classoomph_1_1CG}{CG}} with diagonal preconditioner for the lagrange multiplier subsidiary linear systems. 
+
+
+
+Definition at line 86 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
+
+
+
+References oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::\+CG.
+

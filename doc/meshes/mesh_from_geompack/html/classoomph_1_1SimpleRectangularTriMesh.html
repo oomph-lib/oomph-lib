@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html">SimpleRectangularTriMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1SimpleRectangularTriMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Simple 2D triangular mesh for TElements.  
+ <a href="classoomph_1_1SimpleRectangularTriMesh.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html">simple_rectangular_tri_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1SimpleRectangularTriMesh.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4a4e728bd6245b820d4698de28ee7d38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html#a4a4e728bd6245b820d4698de28ee7d38">SimpleRectangularTriMesh</a> (const unsigned &amp;n_x, const unsigned &amp;n_y, const double &amp;l_x, const double &amp;l_y, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a4a4e728bd6245b820d4698de28ee7d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor n_x : number of elements in the x direction; n_y : number of elements in the y direction; l_x : length in the x direction l_y : length in the y direction Ordering of elements: 'lower left' to 'lower right' then 'upwards'.  <a href="classoomph_1_1SimpleRectangularTriMesh.html#a4a4e728bd6245b820d4698de28ee7d38">More...</a><br /></td></tr>
+<tr class="separator:a4a4e728bd6245b820d4698de28ee7d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8fcc898b00209b300684dd8addd9b4f"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html#ac8fcc898b00209b300684dd8addd9b4f">nx</a> () const</td></tr>
+<tr class="memdesc:ac8fcc898b00209b300684dd8addd9b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for number of elements in x directions.  <a href="classoomph_1_1SimpleRectangularTriMesh.html#ac8fcc898b00209b300684dd8addd9b4f">More...</a><br /></td></tr>
+<tr class="separator:ac8fcc898b00209b300684dd8addd9b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f3713497e6c9fef258d5f239ad5d3b"><td class="memItemLeft" align="right" valign="top">const unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html#a39f3713497e6c9fef258d5f239ad5d3b">ny</a> () const</td></tr>
+<tr class="memdesc:a39f3713497e6c9fef258d5f239ad5d3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for number of elements in y directions.  <a href="classoomph_1_1SimpleRectangularTriMesh.html#a39f3713497e6c9fef258d5f239ad5d3b">More...</a><br /></td></tr>
+<tr class="separator:a39f3713497e6c9fef258d5f239ad5d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad997a3ce1ed243b79cd49eb5a0687844"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html#ad997a3ce1ed243b79cd49eb5a0687844">Nx</a></td></tr>
+<tr class="memdesc:ad997a3ce1ed243b79cd49eb5a0687844"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in x direction.  <a href="classoomph_1_1SimpleRectangularTriMesh.html#ad997a3ce1ed243b79cd49eb5a0687844">More...</a><br /></td></tr>
+<tr class="separator:ad997a3ce1ed243b79cd49eb5a0687844"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac180c4ab5947c4417d912bc75621fc7e"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html#ac180c4ab5947c4417d912bc75621fc7e">Ny</a></td></tr>
+<tr class="memdesc:ac180c4ab5947c4417d912bc75621fc7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in y directions.  <a href="classoomph_1_1SimpleRectangularTriMesh.html#ac180c4ab5947c4417d912bc75621fc7e">More...</a><br /></td></tr>
+<tr class="separator:ac180c4ab5947c4417d912bc75621fc7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85d3446550324f92540d389dfb4d063b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html#a85d3446550324f92540d389dfb4d063b">Lx</a></td></tr>
+<tr class="memdesc:a85d3446550324f92540d389dfb4d063b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of mesh in x-direction.  <a href="classoomph_1_1SimpleRectangularTriMesh.html#a85d3446550324f92540d389dfb4d063b">More...</a><br /></td></tr>
+<tr class="separator:a85d3446550324f92540d389dfb4d063b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc35409d2a480d6de11d8df4ec23d1cf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html#adc35409d2a480d6de11d8df4ec23d1cf">Ly</a></td></tr>
+<tr class="memdesc:adc35409d2a480d6de11d8df4ec23d1cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of mesh in y-direction.  <a href="classoomph_1_1SimpleRectangularTriMesh.html#adc35409d2a480d6de11d8df4ec23d1cf">More...</a><br /></td></tr>
+<tr class="separator:adc35409d2a480d6de11d8df4ec23d1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;</h3>
+
+<p>Simple 2D triangular mesh for TElements. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00049">49</a> of file <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html">simple_rectangular_tri_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4a4e728bd6245b820d4698de28ee7d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a4e728bd6245b820d4698de28ee7d38">&#9670;&nbsp;</a></span>SimpleRectangularTriMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html">oomph::SimpleRectangularTriMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html">SimpleRectangularTriMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>l_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>l_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor n_x : number of elements in the x direction; n_y : number of elements in the y direction; l_x : length in the x direction l_y : length in the y direction Ordering of elements: 'lower left' to 'lower right' then 'upwards'. </p>
+<p>Constructor for simple 2D triangular mesh class:</p>
+<p>n_x : number of elements in the x direction</p>
+<p>n_y : number of elements in the y direction</p>
+<p>l_x : length in the x direction</p>
+<p>l_y : length in the y direction</p>
+<p>Ordering of elements: 'lower left' to 'lower right' then 'upwards' </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__rectangular__tri__mesh_8template_8cc_source.html#l00057">57</a> of file <a class="el" href="simple__rectangular__tri__mesh_8template_8cc_source.html">simple_rectangular_tri_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00079">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::Lx</a>, <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00082">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::Ly</a>, <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00073">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::Nx</a>, and <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00076">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::Ny</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac8fcc898b00209b300684dd8addd9b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8fcc898b00209b300684dd8addd9b4f">&#9670;&nbsp;</a></span>nx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned&amp; <a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html">oomph::SimpleRectangularTriMesh</a>&lt; ELEMENT &gt;::nx </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for number of elements in x directions. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00065">65</a> of file <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html">simple_rectangular_tri_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00073">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::Nx</a>.</p>
+
+</div>
+</div>
+<a id="a39f3713497e6c9fef258d5f239ad5d3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39f3713497e6c9fef258d5f239ad5d3b">&#9670;&nbsp;</a></span>ny()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned&amp; <a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html">oomph::SimpleRectangularTriMesh</a>&lt; ELEMENT &gt;::ny </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for number of elements in y directions. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00068">68</a> of file <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html">simple_rectangular_tri_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00076">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::Ny</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a85d3446550324f92540d389dfb4d063b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85d3446550324f92540d389dfb4d063b">&#9670;&nbsp;</a></span>Lx</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html">oomph::SimpleRectangularTriMesh</a>&lt; ELEMENT &gt;::Lx</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of mesh in x-direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00079">79</a> of file <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html">simple_rectangular_tri_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="simple__rectangular__tri__mesh_8template_8cc_source.html#l00057">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::SimpleRectangularTriMesh()</a>.</p>
+
+</div>
+</div>
+<a id="adc35409d2a480d6de11d8df4ec23d1cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc35409d2a480d6de11d8df4ec23d1cf">&#9670;&nbsp;</a></span>Ly</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html">oomph::SimpleRectangularTriMesh</a>&lt; ELEMENT &gt;::Ly</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of mesh in y-direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00082">82</a> of file <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html">simple_rectangular_tri_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="simple__rectangular__tri__mesh_8template_8cc_source.html#l00057">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::SimpleRectangularTriMesh()</a>.</p>
+
+</div>
+</div>
+<a id="ad997a3ce1ed243b79cd49eb5a0687844"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad997a3ce1ed243b79cd49eb5a0687844">&#9670;&nbsp;</a></span>Nx</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html">oomph::SimpleRectangularTriMesh</a>&lt; ELEMENT &gt;::Nx</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in x direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00073">73</a> of file <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html">simple_rectangular_tri_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00065">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::nx()</a>, and <a class="el" href="simple__rectangular__tri__mesh_8template_8cc_source.html#l00057">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::SimpleRectangularTriMesh()</a>.</p>
+
+</div>
+</div>
+<a id="ac180c4ab5947c4417d912bc75621fc7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac180c4ab5947c4417d912bc75621fc7e">&#9670;&nbsp;</a></span>Ny</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1SimpleRectangularTriMesh.html">oomph::SimpleRectangularTriMesh</a>&lt; ELEMENT &gt;::Ny</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements in y directions. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00076">76</a> of file <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html">simple_rectangular_tri_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html#l00068">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::ny()</a>, and <a class="el" href="simple__rectangular__tri__mesh_8template_8cc_source.html#l00057">oomph::SimpleRectangularTriMesh&lt; ELEMENT &gt;::SimpleRectangularTriMesh()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="simple__rectangular__tri__mesh_8template_8h_source.html">simple_rectangular_tri_mesh.template.h</a></li>
+<li><a class="el" href="simple__rectangular__tri__mesh_8template_8cc_source.html">simple_rectangular_tri_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:57:01
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

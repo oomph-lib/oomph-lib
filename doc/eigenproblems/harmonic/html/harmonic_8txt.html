@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: harmonic.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">harmonic.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aebc3d4be5979b596df2f466a3eca261d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#aebc3d4be5979b596df2f466a3eca261d">j</a> = \lambda M_{ij} V_{<a class="el" href="harmonic_8txt.html#aebc3d4be5979b596df2f466a3eca261d">j</a>}, \ \ \ \ \ \ \ \ @E[Eigen]@ \<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>] where \f$ V_{<a class="el" href="harmonic_8txt.html#aebc3d4be5979b596df2f466a3eca261d">j</a>} \f$ is the vector of discrete unknowns, \f$ \lambda \f$ is the eigenvalue, and \f$ J_{ij} \f$ and \f$ M_{ij} \f$ are two matrices:\f$ J_{ij} \f$(often denoted \f$ K_{ij} \f$ in the literature) is known as the stiffness matrix and \f$ M_{ij} \f$ is termed the mass matrix. The third-party libraries mentioned above all solve systems of the form( @R[Eigen]@), and within \c oomph-lib we must simply provide the required mass and stiffness matrices. \subsection linear_stab Linear Stability Theory In many cases, eigenproblems arise from linear stability analyses of steady <a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> to our <a class="el" href="harmonic_8txt.html#a753acb082b288cf7d21fb7b3e638ca11">set</a> of nonlinear residuals. For example, if we have a time-dependent system of <a class="el" href="harmonic_8txt.html#afd1e4bddbd3e25a2ad85fdcec7e13da8">equations</a> \<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>[\frac{\partial <a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>}{\partial t}=\mathcal{F}(<a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>), \<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>] then the residual formulation is \<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>[\mathcal{R}(<a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>)=\mathcal{F}(<a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>) - \frac{\partial <a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>}{\partial t}=0</td></tr>
+<tr class="separator:aebc3d4be5979b596df2f466a3eca261d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a3caab1bc5021f6841f8bfa1ddf2167cf"><td class="memItemLeft" align="right" valign="top">mainpage Demo we demonstrate how to solve a&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#a3caab1bc5021f6841f8bfa1ddf2167cf">eigenproblem</a> (eigenvalues of the 1D Laplace operator in a bounded domain) by creating custom elements. The tutorial is similar in spirit to the&lt; a href</td></tr>
+<tr class="separator:a3caab1bc5021f6841f8bfa1ddf2167cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44e20240f16d9acb88844ded005b8107"><td class="memItemLeft" align="right" valign="top">E[Eigen_res] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> and steady <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> so that <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> where <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> epsilon ll <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> If we substitute this expression into the governing&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#a44e20240f16d9acb88844ded005b8107">equation</a> (@R[Eigen_res]@) and neglect terms that involve \f$ \epsilon^</td></tr>
+<tr class="separator:a44e20240f16d9acb88844ded005b8107"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af56213eccbff17d3cdee2033fa43449b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> (on the assumption that they are really small) then we obtain the <a class="el" href="harmonic_8txt.html#a44e20240f16d9acb88844ded005b8107">equation</a></td></tr>
+<tr class="separator:af56213eccbff17d3cdee2033fa43449b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd1e4bddbd3e25a2ad85fdcec7e13da8"><td class="memItemLeft" align="right" valign="top">endcode is used and this will be overloaded in our custom elements below subsection equations Creating the elements For we implement the mathematics to assemble contributions to the Jacobian and mass matrices defined in&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#afd1e4bddbd3e25a2ad85fdcec7e13da8">equations</a> (@R[Jac_Mass]@) in the class \c <a class="el" href="classHarmonicEquations.html">HarmonicEquations</a> that inherits from \c FiniteElement. This const ruction mirrors that in our standard <a class="el" href="harmonic_8txt.html#a44e20240f16d9acb88844ded005b8107">equation</a> classes and allows a clean separation between the equations and the choice of basis function. \dontinclude harmonic.cc \skipline A class \until <a class="el" href="classHarmonicEquations.html">HarmonicEquations</a>() The unknowns that represent the discretised eigenfunction are assumed to be stored at the nodes. \until</td></tr>
+<tr class="separator:afd1e4bddbd3e25a2ad85fdcec7e13da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d88bc291e356f188e25ccc398587e9"><td class="memItemLeft" align="right" valign="top">mainpage Demo we demonstrate how to solve a E[1DEigen] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> in the domain <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#aa1d88bc291e356f188e25ccc398587e9">$D</a></td></tr>
+<tr class="separator:aa1d88bc291e356f188e25ccc398587e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a753acb082b288cf7d21fb7b3e638ca11"><td class="memItemLeft" align="right" valign="top">mainpage Demo we demonstrate how to solve a E[1DEigen] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> in the domain <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> with homogeneous Dirichlet boundary conditions <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>[\left. u\right|_{\partial D}=0. \ \ \ \ \ \ \ \ \ \ @E[1DEigen_BC]@\<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; An eigenfunction must be non zero by definition and so the exact <a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> are given by the countably infinite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#a753acb082b288cf7d21fb7b3e638ca11">set</a></td></tr>
+<tr class="separator:a753acb082b288cf7d21fb7b3e638ca11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf53126db09de0c6f68537777a65c6ff"><td class="memItemLeft" align="right" valign="top">mainpage Demo we demonstrate how to solve a E[1DEigen] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> in the domain <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> with homogeneous Dirichlet boundary conditions <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>[\left. u\right|_{\partial D}=0. \ \ \ \ \ \ \ \ \ \ @E[1DEigen_BC]@\<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; An eigenfunction must be non zero by definition and so the exact <a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> are given by the countably infinite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#adf53126db09de0c6f68537777a65c6ff">lambda_</a></td></tr>
+<tr class="separator:adf53126db09de0c6f68537777a65c6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a084d4655f6daba8f288c252a41f8b42d"><td class="memItemLeft" align="right" valign="top">for larger&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#a084d4655f6daba8f288c252a41f8b42d">problems</a></td></tr>
+<tr class="separator:a084d4655f6daba8f288c252a41f8b42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a43a5556bead69fd440bada03808f02"><td class="memItemLeft" align="right" valign="top">E[Eigen_res] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> and steady&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a></td></tr>
+<tr class="separator:a5a43a5556bead69fd440bada03808f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed5125062946ed7cf3a34f315c1ffc9"><td class="memItemLeft" align="right" valign="top">E[Eigen_res] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> and steady <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#a4ed5125062946ed7cf3a34f315c1ffc9">u_</a></td></tr>
+<tr class="separator:a4ed5125062946ed7cf3a34f315c1ffc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bec0faf084550bbe9f4c3d913e5f1b8"><td class="memItemLeft" align="right" valign="top">E[Eigen_res] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> and steady <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> so that <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a> = <a class="el" href="harmonic_8txt.html#a4ed5125062946ed7cf3a34f315c1ffc9">u_</a>{s} + \epsilon \<a class="el" href="harmonic_8txt.html#aff10ff0e0fc4638a20baaa00f4c79a56">hat</a>{u} \f$</td></tr>
+<tr class="separator:a8bec0faf084550bbe9f4c3d913e5f1b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff10ff0e0fc4638a20baaa00f4c79a56"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#aff10ff0e0fc4638a20baaa00f4c79a56">hat</a></td></tr>
+<tr class="separator:aff10ff0e0fc4638a20baaa00f4c79a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4517e68aba45036016bab56ee2431ce1"><td class="memItemLeft" align="right" valign="top">endcode where the Jacobian is the matrix <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#a4517e68aba45036016bab56ee2431ce1">$J_</a></td></tr>
+<tr class="separator:a4517e68aba45036016bab56ee2431ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afee66c3978bd21d2a11c37ede79f79a5"><td class="memItemLeft" align="right" valign="top">endcode where the Jacobian is the matrix <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> but the interface is chosen so that linear stability of <a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> to the nonlinear system can easily be calculated without reformulating the <a class="el" href="harmonic_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> Once&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#afee66c3978bd21d2a11c37ede79f79a5">again</a></td></tr>
+<tr class="separator:afee66c3978bd21d2a11c37ede79f79a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac25b3a8a9e049d4178cd786eb2faa416"><td class="memItemLeft" align="right" valign="top">endcode is used and this will be overloaded in our custom elements below subsection <a class="el" href="harmonic_8txt.html#afd1e4bddbd3e25a2ad85fdcec7e13da8">equations</a> Creating the elements For&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="harmonic_8txt.html#ac25b3a8a9e049d4178cd786eb2faa416">generality</a></td></tr>
+<tr class="separator:ac25b3a8a9e049d4178cd786eb2faa416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="aebc3d4be5979b596df2f466a3eca261d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebc3d4be5979b596df2f466a3eca261d">&#9670;&nbsp;</a></span>j</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="harmonic_8txt.html#aebc3d4be5979b596df2f466a3eca261d">j</a> =  \lambda M_{ij} V_{<a class="el" href="harmonic_8txt.html#aebc3d4be5979b596df2f466a3eca261d">j</a>}, \ \ \ \ \ \ \ \ @E[Eigen]@ \<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>] where \f$ V_{<a class="el" href="harmonic_8txt.html#aebc3d4be5979b596df2f466a3eca261d">j</a>} \f$ is the vector of discrete unknowns, \f$ \lambda \f$ is the eigenvalue, and \f$ J_{ij} \f$ and \f$ M_{ij} \f$ are two matrices: \f$ J_{ij} \f$ (often denoted \f$ K_{ij} \f$ in the literature) is known as the stiffness matrix and \f$ M_{ij} \f$ is termed the mass matrix. The third-party libraries mentioned above all solve systems of the form (@R[Eigen]@), and within \c oomph-lib we must simply provide the required mass and stiffness matrices. \subsection linear_stab Linear Stability Theory In many cases, eigenproblems arise from linear stability analyses of steady <a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> to our <a class="el" href="harmonic_8txt.html#a753acb082b288cf7d21fb7b3e638ca11">set</a> of nonlinear residuals. For example, if we have a time-dependent system of <a class="el" href="harmonic_8txt.html#afd1e4bddbd3e25a2ad85fdcec7e13da8">equations</a> \<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>[ \frac{\partial <a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>}{\partial t} = \mathcal{F}(<a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>), \<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>] then the residual formulation is \<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>[ \mathcal{R}(<a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>) = \mathcal{F}(<a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>) - \frac{\partial <a class="el" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a>}{\partial t} = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00077">77</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a3caab1bc5021f6841f8bfa1ddf2167cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3caab1bc5021f6841f8bfa1ddf2167cf">&#9670;&nbsp;</a></span>eigenproblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo we demonstrate how to solve a eigenproblem </td>
+          <td>(</td>
+          <td class="paramtype">eigenvalues of the 1D Laplace operator in a bounded&#160;</td>
+          <td class="paramname"><em>domain</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a44e20240f16d9acb88844ded005b8107"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44e20240f16d9acb88844ded005b8107">&#9670;&nbsp;</a></span>equation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">E [Eigen_res] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> and steady <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> so that <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> where <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> epsilon ll <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> If we substitute this expression into the governing equation </td>
+          <td>(</td>
+          <td class="paramtype">@R@&#160;</td>
+          <td class="paramname">[Eigen_res]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00087">87</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="afd1e4bddbd3e25a2ad85fdcec7e13da8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd1e4bddbd3e25a2ad85fdcec7e13da8">&#9670;&nbsp;</a></span>equations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode is used and this will be overloaded in our custom elements below subsection equations Creating the elements For we implement the mathematics to assemble contributions to the Jacobian and mass matrices defined in equations </td>
+          <td>(</td>
+          <td class="paramtype">@R@&#160;</td>
+          <td class="paramname">[Jac_Mass]</td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00181">181</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="af56213eccbff17d3cdee2033fa43449b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af56213eccbff17d3cdee2033fa43449b">&#9670;&nbsp;</a></span>f()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">f </td>
+          <td>(</td>
+          <td class="paramtype">on the assumption that they are really&#160;</td>
+          <td class="paramname"><em>small</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00088">88</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aa1d88bc291e356f188e25ccc398587e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1d88bc291e356f188e25ccc398587e9">&#9670;&nbsp;</a></span>$D</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo we demonstrate how to solve a E [1DEigen] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> in the domain <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> $D</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=\left\{ x_1 \in </div>
+<div class="line">[0,1] \right\}<a class="code" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">\f</a>$</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00019">19</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4517e68aba45036016bab56ee2431ce1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4517e68aba45036016bab56ee2431ce1">&#9670;&nbsp;</a></span>$J_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode where the Jacobian is the matrix <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> $J_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{ij}<a class="code" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">\f</a>$ and the mass matrix <a class="code" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">is</a></div>
+<div class="line"><a class="code" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b"> \f</a>$M_{ij}<a class="code" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">\f</a>$ in <a class="code" href="harmonic_8txt.html#a44e20240f16d9acb88844ded005b8107">equation</a> (@R[Eigen]@). The residuals need not be</div>
+<div class="line"> returned when solving an <a class="code" href="harmonic_8txt.html#a3caab1bc5021f6841f8bfa1ddf2167cf">eigenproblem</a></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00161">161</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="afee66c3978bd21d2a11c37ede79f79a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afee66c3978bd21d2a11c37ede79f79a5">&#9670;&nbsp;</a></span>again</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode where the Jacobian is the matrix <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> but the interface is chosen so that linear stability of <a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> to the nonlinear system can easily be calculated without reformulating the <a class="el" href="harmonic_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> Once again</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00167">167</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac25b3a8a9e049d4178cd786eb2faa416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac25b3a8a9e049d4178cd786eb2faa416">&#9670;&nbsp;</a></span>generality</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode is used and this will be overloaded in our custom elements below subsection <a class="el" href="harmonic_8txt.html#afd1e4bddbd3e25a2ad85fdcec7e13da8">equations</a> Creating the elements For generality</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00180">180</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="aff10ff0e0fc4638a20baaa00f4c79a56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff10ff0e0fc4638a20baaa00f4c79a56">&#9670;&nbsp;</a></span>hat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">hat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00091">91</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="adf53126db09de0c6f68537777a65c6ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf53126db09de0c6f68537777a65c6ff">&#9670;&nbsp;</a></span>lambda_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo we demonstrate how to solve a E [1DEigen] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> in the domain <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> with homogeneous Dirichlet boundary conditions <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> [\left. u\right|_{\partial D}=0. \ \ \ \ \ \ \ \ \ \ @E[1DEigen_BC]@\<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>]&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; An eigenfunction must be non zero by definition and so the exact <a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> are given by the countably infinite lambda_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{n} = n^{2}\pi^{2}.</div>
+<div class="line">\f]</div>
+<div class="line"> </div>
+<div class="line">We provide a detailed discussion of the driver code </div>
+<div class="line">&lt;A HREF=<span class="stringliteral">&quot;../../../../demo_drivers/eigenproblems/harmonic/harmonic.cc&quot;</span>&gt;</div>
+<div class="line">harmonic.cc&lt;/A&gt; which solves the <a class="code" href="harmonic_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> <span class="keywordflow">for</span> the first four eigenvalues.</div>
+<div class="line"> </div>
+<div class="line">In \c oomph-lib all eigenproblems are solved by <span class="keyword">using</span> interfaces to third-party</div>
+<div class="line">libraries. The <span class="keywordflow">default</span> is LAPACK<span class="stringliteral">&#39;s (direct) QZ solver which is included with</span></div>
+<div class="line"><span class="stringliteral">the library. An interface is also provided to the serial version of </span></div>
+<div class="line"><span class="stringliteral">ARPACK, an iterative solver, but we are not allowed to </span></div>
+<div class="line"><span class="stringliteral">redistribute the source code, so it</span></div>
+<div class="line"><span class="stringliteral">must be downloaded separately. That said, much of </span></div>
+<div class="line"><span class="stringliteral">the functionality of ARPACK has</span></div>
+<div class="line"><span class="stringliteral">been superseded by the ANASAZI solver that is part of The Trilinos</span></div>
+<div class="line"><span class="stringliteral">Project. Thus, if you want to solve small problems, use the default QZ</span></div>
+<div class="line"><span class="stringliteral">solver</span></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00035">35</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00002">2</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__harmonic_8cc_source.html#l00527">main()</a>.</p>
+
+</div>
+</div>
+<a id="a084d4655f6daba8f288c252a41f8b42d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a084d4655f6daba8f288c252a41f8b42d">&#9670;&nbsp;</a></span>problems</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode where the Jacobian is the matrix <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> but the interface is chosen so that linear stability of <a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> to the nonlinear system can easily be calculated without reformulating the <a class="el" href="harmonic_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> Once to avoid reinitialisation in multi physics problems</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00051">51</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="a753acb082b288cf7d21fb7b3e638ca11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a753acb082b288cf7d21fb7b3e638ca11">&#9670;&nbsp;</a></span>set</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo we demonstrate how to solve a E [1DEigen] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> in the domain <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> with homogeneous Dirichlet boundary conditions <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> [\left. u\right|_{\partial D}=0. \ \ \ \ \ \ \ \ \ \ @E[1DEigen_BC]@\<a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a>]&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&lt;/CENTER&gt; An eigenfunction must be non zero by definition and so the exact <a class="el" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> are given by the countably infinite set</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00034">34</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="a5a43a5556bead69fd440bada03808f02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a43a5556bead69fd440bada03808f02">&#9670;&nbsp;</a></span>solutions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">E [Eigen_res] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> and steady solutions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00078">78</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8bec0faf084550bbe9f4c3d913e5f1b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bec0faf084550bbe9f4c3d913e5f1b8">&#9670;&nbsp;</a></span>u</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">E [Eigen_res] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> and steady <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> so that <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> u = <a class="el" href="harmonic_8txt.html#a4ed5125062946ed7cf3a34f315c1ffc9">u_</a>{s} + \epsilon \<a class="el" href="harmonic_8txt.html#aff10ff0e0fc4638a20baaa00f4c79a56">hat</a>{u} \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00085">85</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="harmonic_8cc_source.html#l00170">HarmonicEquations::interpolated_u()</a>, and <a class="el" href="complex__harmonic_8cc_source.html#l00228">ComplexHarmonicEquations::interpolated_u()</a>.</p>
+
+</div>
+</div>
+<a id="a4ed5125062946ed7cf3a34f315c1ffc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ed5125062946ed7cf3a34f315c1ffc9">&#9670;&nbsp;</a></span>u_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">E [Eigen_res] <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> and steady <a class="el" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a> u_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{s} <a class="code" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">\f</a>$ are found by <a class="code" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">setting \f</a>$ \partial</div>
+<div class="line"><a class="code" href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a> / \partial t  =</div>
+<div class="line">0 <a class="code" href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">\f</a>$. Note that in a nonlinear system there may be many possible</div>
+<div class="line">steady <a class="code" href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a> <span class="keywordflow">for</span> the same <a class="code" href="harmonic_8txt.html#a753acb082b288cf7d21fb7b3e638ca11">set</a> of parameter values.</div>
+<div class="line"> </div>
+<div class="line">A linear stability analysis proceeds by assuming that the steady</div>
+<div class="line">solution is perturbed by a small amount</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="harmonic_8txt_source.html#l00078">78</a> of file <a class="el" href="harmonic_8txt_source.html">harmonic.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aharmonic_8txt_html_a8bec0faf084550bbe9f4c3d913e5f1b8"><div class="ttname"><a href="harmonic_8txt.html#a8bec0faf084550bbe9f4c3d913e5f1b8">u</a></div><div class="ttdeci">E[Eigen_res] f and steady f so that f u</div><div class="ttdef"><b>Definition:</b> <a href="harmonic_8txt_source.html#l00085">harmonic.txt:85</a></div></div>
+<div class="ttc" id="aharmonic_8txt_html_a3caab1bc5021f6841f8bfa1ddf2167cf"><div class="ttname"><a href="harmonic_8txt.html#a3caab1bc5021f6841f8bfa1ddf2167cf">eigenproblem</a></div><div class="ttdeci">mainpage Demo we demonstrate how to solve a eigenproblem(eigenvalues of the 1D Laplace operator in a bounded domain) by creating custom elements. The tutorial is similar in spirit to the&lt; a href</div></div>
+<div class="ttc" id="aharmonic_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="harmonic_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="harmonic_8txt_source.html#l00002">harmonic.txt:2</a></div></div>
+<div class="ttc" id="aharmonic_8txt_html_a44e20240f16d9acb88844ded005b8107"><div class="ttname"><a href="harmonic_8txt.html#a44e20240f16d9acb88844ded005b8107">equation</a></div><div class="ttdeci">E[Eigen_res] f and steady f so that f where f epsilon ll f If we substitute this expression into the governing equation(@R[Eigen_res]@) and neglect terms that involve \f$ \epsilon^</div><div class="ttdef"><b>Definition:</b> <a href="harmonic_8txt_source.html#l00087">harmonic.txt:87</a></div></div>
+<div class="ttc" id="aharmonic_8txt_html_a753acb082b288cf7d21fb7b3e638ca11"><div class="ttname"><a href="harmonic_8txt.html#a753acb082b288cf7d21fb7b3e638ca11">set</a></div><div class="ttdeci">mainpage Demo we demonstrate how to solve a E[1DEigen] f in the domain f with homogeneous Dirichlet boundary conditions f[\left. u\right|_{\partial D}=0. \ \ \ \ \ \ \ \ \ \ @E[1DEigen_BC]@\f]&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; An eigenfunction must be non zero by definition and so the exact solutions are given by the countably infinite set</div><div class="ttdef"><b>Definition:</b> <a href="harmonic_8txt_source.html#l00034">harmonic.txt:34</a></div></div>
+<div class="ttc" id="aharmonic_8txt_html_a5a43a5556bead69fd440bada03808f02"><div class="ttname"><a href="harmonic_8txt.html#a5a43a5556bead69fd440bada03808f02">solutions</a></div><div class="ttdeci">E[Eigen_res] f and steady solutions</div><div class="ttdef"><b>Definition:</b> <a href="harmonic_8txt_source.html#l00078">harmonic.txt:78</a></div></div>
+<div class="ttc" id="aharmonic_8txt_html_af56213eccbff17d3cdee2033fa43449b"><div class="ttname"><a href="harmonic_8txt.html#af56213eccbff17d3cdee2033fa43449b">f</a></div><div class="ttdeci">f(on the assumption that they are really small) then we obtain the equation</div><div class="ttdef"><b>Definition:</b> <a href="harmonic_8txt_source.html#l00088">harmonic.txt:88</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:44
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

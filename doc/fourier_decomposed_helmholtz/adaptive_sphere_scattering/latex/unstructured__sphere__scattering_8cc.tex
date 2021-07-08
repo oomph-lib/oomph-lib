@@ -1,0 +1,54 @@
+\hypertarget{unstructured__sphere__scattering_8cc}{}\doxysection{unstructured\+\_\+sphere\+\_\+scattering.\+cc File Reference}
+\label{unstructured__sphere__scattering_8cc}\index{unstructured\_sphere\_scattering.cc@{unstructured\_sphere\_scattering.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{Fourier\+Decomposed\+Helmholtz\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacePlanarWave}{Planar\+Wave}}
+\item 
+ \mbox{\hyperlink{namespaceProblemParameters}{Problem\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for the Fourier decomposed Helmholtz problem parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{Planar\+Wave\+::I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Imaginary unit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacePlanarWave_a00f252bcf0181187c656a58ce36b07b5}{Planar\+Wave\+::get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector of size 2, containing real and imag parts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacePlanarWave_afe1e9812d1b1dc40a89f7a1f18d1165f}{Planar\+Wave\+::plot}} ()
+\begin{DoxyCompactList}\small\item\em Plot. \end{DoxyCompactList}\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Problem\+Parameters\+::\+Coeff}} (N\+\_\+terms, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Coefficients in the exact solution. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{Problem\+Parameters\+::I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Imaginary unit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{Problem\+Parameters\+::get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector of size 2, containing real and imag parts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{Problem\+Parameters\+::exact\+\_\+minus\+\_\+dudr}} (const Vector$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Get -\/du/dr (spherical r) for exact solution. Equal to prescribed flux on inner boundary. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{unstructured__sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Driver code for Fourier decomposed Helmholtz problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{unstructured__sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{unstructured__sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{unstructured\_sphere\_scattering.cc@{unstructured\_sphere\_scattering.cc}!main@{main}}
+\index{main@{main}!unstructured\_sphere\_scattering.cc@{unstructured\_sphere\_scattering.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver code for Fourier decomposed Helmholtz problem. 
+
+
+
+Definition at line 881 of file unstructured\+\_\+sphere\+\_\+scattering.\+cc.
+
+
+
+References Problem\+Parameters\+::\+N\+\_\+fourier, and problem.
+

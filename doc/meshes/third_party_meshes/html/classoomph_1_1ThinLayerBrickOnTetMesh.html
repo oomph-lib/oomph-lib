@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">ThinLayerBrickOnTetMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1ThinLayerBrickOnTetMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1ThinLayerBrickOnTetMesh.png" usemap="#oomph::ThinLayerBrickOnTetMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::ThinLayerBrickOnTetMesh_3C_20ELEMENT_20_3E_map" name="oomph::ThinLayerBrickOnTetMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh.html" alt="oomph::RefineableSolidThinLayerBrickOnTetMesh&lt; ELEMENT &gt;" shape="rect" coords="0,112,376,136"/>
+<area href="classoomph_1_1RefineableThinLayerBrickOnTetMesh.html" alt="oomph::RefineableThinLayerBrickOnTetMesh&lt; ELEMENT &gt;" shape="rect" coords="386,112,762,136"/>
+<area href="classoomph_1_1SolidThinLayerBrickOnTetMesh.html" alt="oomph::SolidThinLayerBrickOnTetMesh&lt; ELEMENT &gt;" shape="rect" coords="772,112,1148,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aed34f7d1e9a5c6b5f3e220cb5bdf4550"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aed34f7d1e9a5c6b5f3e220cb5bdf4550">ThicknessFctPt</a>) (const Vector&lt; double &gt; &amp;x, double &amp;h_thick)</td></tr>
+<tr class="memdesc:aed34f7d1e9a5c6b5f3e220cb5bdf4550"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to function that specifies the wall thickness as a fct of the coordinates of the inner surface.  <a href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aed34f7d1e9a5c6b5f3e220cb5bdf4550">More...</a><br /></td></tr>
+<tr class="separator:aed34f7d1e9a5c6b5f3e220cb5bdf4550"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad452469bc94bff203012e68e80ee543c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#ad452469bc94bff203012e68e80ee543c">ThinLayerBrickOnTetMesh</a> (Mesh *tet_mesh_pt, const Vector&lt; unsigned &gt; &amp;boundary_ids, <a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aed34f7d1e9a5c6b5f3e220cb5bdf4550">ThicknessFctPt</a> thickness_fct_pt, const unsigned &amp;nlayer, const Vector&lt; Vector&lt; unsigned &gt; &gt; &amp;<a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#a3cfd55eb5bbd6801e9d4cd271e602cd8">in_out_boundary_id</a>, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ad452469bc94bff203012e68e80ee543c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Specify (quadratic) tet mesh, boundary IDs of boundary on which the current mesh is to be erected (in an FSI context this boundary tends to be the FSI boundary of the fluid mesh. Also specify the uniform thickness of layer, and the number of element layers. The vectors stored in in_out_boundary_ids contain the boundary IDs of the other boundaries in the tet mesh. In an FSI context these typically identify the in/outflow boundaries in the fluid mesh. The boundary enumeration of the current mesh follows the one of the underlying fluid mesh: The enumeration of the FSI boundary matches (to enable the setup of the FSI matching); the "in/outflow" faces in this mesh inherit the same enumeration as the in/outflow faces in the underlying fluid mesh. Finally, the "outer" boundary gets its own boundary ID. Timestepper defaults to steady pseudo-timestepper.  <a href="classoomph_1_1ThinLayerBrickOnTetMesh.html#ad452469bc94bff203012e68e80ee543c">More...</a><br /></td></tr>
+<tr class="separator:ad452469bc94bff203012e68e80ee543c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada2e50ab8dfb631a26fc4111eb2fe9ad"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#ada2e50ab8dfb631a26fc4111eb2fe9ad">fsi_boundary_id</a> ()</td></tr>
+<tr class="memdesc:ada2e50ab8dfb631a26fc4111eb2fe9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access functions to the Vector of oomph-lib boundary ids that make up boundary on which the mesh was erected (typically the FSI interface in an FSI problem)  <a href="classoomph_1_1ThinLayerBrickOnTetMesh.html#ada2e50ab8dfb631a26fc4111eb2fe9ad">More...</a><br /></td></tr>
+<tr class="separator:ada2e50ab8dfb631a26fc4111eb2fe9ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa753cb61dc2b1ed692dff8feeff67930"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aa753cb61dc2b1ed692dff8feeff67930">outer_boundary_id</a> ()</td></tr>
+<tr class="memdesc:aa753cb61dc2b1ed692dff8feeff67930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary ID of the "outer" surface &ndash; in an FSI context this is the non-wetted tube surface at a distance h_thick from the FSI surface.  <a href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aa753cb61dc2b1ed692dff8feeff67930">More...</a><br /></td></tr>
+<tr class="separator:aa753cb61dc2b1ed692dff8feeff67930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cfd55eb5bbd6801e9d4cd271e602cd8"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#a3cfd55eb5bbd6801e9d4cd271e602cd8">in_out_boundary_id</a> (const unsigned &amp;boundary_id)</td></tr>
+<tr class="memdesc:a3cfd55eb5bbd6801e9d4cd271e602cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the vector containing the ids of the oomph-lib mesh boundaries that make up the specified in/outflow boundaries as specified in constructor.  <a href="classoomph_1_1ThinLayerBrickOnTetMesh.html#a3cfd55eb5bbd6801e9d4cd271e602cd8">More...</a><br /></td></tr>
+<tr class="separator:a3cfd55eb5bbd6801e9d4cd271e602cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad2b0a664fa1fc0f6f530740e40591212"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#ad2b0a664fa1fc0f6f530740e40591212">FSI_boundary_id</a></td></tr>
+<tr class="memdesc:ad2b0a664fa1fc0f6f530740e40591212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of oomph-lib boundary ids that make up boundary on which the mesh was erected (typically the FSI interface in an FSI problem)  <a href="classoomph_1_1ThinLayerBrickOnTetMesh.html#ad2b0a664fa1fc0f6f530740e40591212">More...</a><br /></td></tr>
+<tr class="separator:ad2b0a664fa1fc0f6f530740e40591212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93acb15ee2a6fd52a21c31830b2a984b"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#a93acb15ee2a6fd52a21c31830b2a984b">Outer_boundary_id</a></td></tr>
+<tr class="memdesc:a93acb15ee2a6fd52a21c31830b2a984b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary ID of the "outer" surface &ndash; the non-wetted tube surface at a distance h_thick from the FSI surface.  <a href="classoomph_1_1ThinLayerBrickOnTetMesh.html#a93acb15ee2a6fd52a21c31830b2a984b">More...</a><br /></td></tr>
+<tr class="separator:a93acb15ee2a6fd52a21c31830b2a984b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8990092c886c1f5ac89b4476bf75b39"><td class="memItemLeft" align="right" valign="top">Vector&lt; Vector&lt; unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aa8990092c886c1f5ac89b4476bf75b39">In_out_boundary_id</a></td></tr>
+<tr class="memdesc:aa8990092c886c1f5ac89b4476bf75b39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of vectors containing the ids of the oomph-lib mesh boundaries that make up the specified in/outflow boundaries.  <a href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aa8990092c886c1f5ac89b4476bf75b39">More...</a><br /></td></tr>
+<tr class="separator:aa8990092c886c1f5ac89b4476bf75b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51d5c130c6b267fc8996e02d1172c81d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aed34f7d1e9a5c6b5f3e220cb5bdf4550">ThicknessFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#a51d5c130c6b267fc8996e02d1172c81d">Thickness_fct_pt</a></td></tr>
+<tr class="memdesc:a51d5c130c6b267fc8996e02d1172c81d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to function that specifies the wall thickness as a fct of the coordinates of the inner surface.  <a href="classoomph_1_1ThinLayerBrickOnTetMesh.html#a51d5c130c6b267fc8996e02d1172c81d">More...</a><br /></td></tr>
+<tr class="separator:a51d5c130c6b267fc8996e02d1172c81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;</h3>
+
+<p>Brick mesh layer built on top of a given tet mesh. Typically used in FSI problems where the tet mesh is the fluid mesh and this mesh acts as the solid mesh that surrounds the FSI interface. </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00042">42</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="aed34f7d1e9a5c6b5f3e220cb5bdf4550"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed34f7d1e9a5c6b5f3e220cb5bdf4550">&#9670;&nbsp;</a></span>ThicknessFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* <a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">oomph::ThinLayerBrickOnTetMesh</a>&lt; ELEMENT &gt;::ThicknessFctPt) (const Vector&lt; double &gt; &amp;x, double &amp;h_thick)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function pointer to function that specifies the wall thickness as a fct of the coordinates of the inner surface. </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00049">49</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad452469bc94bff203012e68e80ee543c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad452469bc94bff203012e68e80ee543c">&#9670;&nbsp;</a></span>ThinLayerBrickOnTetMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">oomph::ThinLayerBrickOnTetMesh</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">ThinLayerBrickOnTetMesh</a> </td>
+          <td>(</td>
+          <td class="paramtype">Mesh *&#160;</td>
+          <td class="paramname"><em>tet_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>boundary_ids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aed34f7d1e9a5c6b5f3e220cb5bdf4550">ThicknessFctPt</a>&#160;</td>
+          <td class="paramname"><em>thickness_fct_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nlayer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; Vector&lt; unsigned &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>in_out_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TimeStepper *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Specify (quadratic) tet mesh, boundary IDs of boundary on which the current mesh is to be erected (in an FSI context this boundary tends to be the FSI boundary of the fluid mesh. Also specify the uniform thickness of layer, and the number of element layers. The vectors stored in in_out_boundary_ids contain the boundary IDs of the other boundaries in the tet mesh. In an FSI context these typically identify the in/outflow boundaries in the fluid mesh. The boundary enumeration of the current mesh follows the one of the underlying fluid mesh: The enumeration of the FSI boundary matches (to enable the setup of the FSI matching); the "in/outflow" faces in this mesh inherit the same enumeration as the in/outflow faces in the underlying fluid mesh. Finally, the "outer" boundary gets its own boundary ID. Timestepper defaults to steady pseudo-timestepper. </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8cc_source.html#l00055">55</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8cc_source.html">thin_layer_brick_on_tet_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00104">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::FSI_boundary_id</a>, <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00093">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::in_out_boundary_id()</a>, <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00112">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::In_out_boundary_id</a>, <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00108">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::Outer_boundary_id</a>, and <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00116">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::Thickness_fct_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ada2e50ab8dfb631a26fc4111eb2fe9ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada2e50ab8dfb631a26fc4111eb2fe9ad">&#9670;&nbsp;</a></span>fsi_boundary_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;unsigned&gt; <a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">oomph::ThinLayerBrickOnTetMesh</a>&lt; ELEMENT &gt;::fsi_boundary_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access functions to the Vector of oomph-lib boundary ids that make up boundary on which the mesh was erected (typically the FSI interface in an FSI problem) </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00077">77</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00104">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::FSI_boundary_id</a>.</p>
+
+</div>
+</div>
+<a id="a3cfd55eb5bbd6801e9d4cd271e602cd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cfd55eb5bbd6801e9d4cd271e602cd8">&#9670;&nbsp;</a></span>in_out_boundary_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;unsigned&gt; <a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">oomph::ThinLayerBrickOnTetMesh</a>&lt; ELEMENT &gt;::in_out_boundary_id </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>boundary_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to the vector containing the ids of the oomph-lib mesh boundaries that make up the specified in/outflow boundaries as specified in constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00093">93</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00112">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::In_out_boundary_id</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8cc_source.html#l00055">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::ThinLayerBrickOnTetMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aa753cb61dc2b1ed692dff8feeff67930"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa753cb61dc2b1ed692dff8feeff67930">&#9670;&nbsp;</a></span>outer_boundary_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">oomph::ThinLayerBrickOnTetMesh</a>&lt; ELEMENT &gt;::outer_boundary_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary ID of the "outer" surface &ndash; in an FSI context this is the non-wetted tube surface at a distance h_thick from the FSI surface. </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00085">85</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>.</p>
+
+<p class="reference">References <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00108">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::Outer_boundary_id</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad2b0a664fa1fc0f6f530740e40591212"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2b0a664fa1fc0f6f530740e40591212">&#9670;&nbsp;</a></span>FSI_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;unsigned&gt; <a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">oomph::ThinLayerBrickOnTetMesh</a>&lt; ELEMENT &gt;::FSI_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of oomph-lib boundary ids that make up boundary on which the mesh was erected (typically the FSI interface in an FSI problem) </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00104">104</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00077">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::fsi_boundary_id()</a>, and <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8cc_source.html#l00055">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::ThinLayerBrickOnTetMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aa8990092c886c1f5ac89b4476bf75b39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8990092c886c1f5ac89b4476bf75b39">&#9670;&nbsp;</a></span>In_out_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;Vector&lt;unsigned&gt; &gt; <a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">oomph::ThinLayerBrickOnTetMesh</a>&lt; ELEMENT &gt;::In_out_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of vectors containing the ids of the oomph-lib mesh boundaries that make up the specified in/outflow boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00112">112</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00093">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::in_out_boundary_id()</a>, and <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8cc_source.html#l00055">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::ThinLayerBrickOnTetMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a93acb15ee2a6fd52a21c31830b2a984b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93acb15ee2a6fd52a21c31830b2a984b">&#9670;&nbsp;</a></span>Outer_boundary_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">oomph::ThinLayerBrickOnTetMesh</a>&lt; ELEMENT &gt;::Outer_boundary_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary ID of the "outer" surface &ndash; the non-wetted tube surface at a distance h_thick from the FSI surface. </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00108">108</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00085">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::outer_boundary_id()</a>, and <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8cc_source.html#l00055">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::ThinLayerBrickOnTetMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a51d5c130c6b267fc8996e02d1172c81d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51d5c130c6b267fc8996e02d1172c81d">&#9670;&nbsp;</a></span>Thickness_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html#aed34f7d1e9a5c6b5f3e220cb5bdf4550">ThicknessFctPt</a> <a class="el" href="classoomph_1_1ThinLayerBrickOnTetMesh.html">oomph::ThinLayerBrickOnTetMesh</a>&lt; ELEMENT &gt;::Thickness_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer to function that specifies the wall thickness as a fct of the coordinates of the inner surface. </p>
+
+<p class="definition">Definition at line <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html#l00116">116</a> of file <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="thin__layer__brick__on__tet__mesh_8template_8cc_source.html#l00055">oomph::ThinLayerBrickOnTetMesh&lt; ELEMENT &gt;::ThinLayerBrickOnTetMesh()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="thin__layer__brick__on__tet__mesh_8template_8h_source.html">thin_layer_brick_on_tet_mesh.template.h</a></li>
+<li><a class="el" href="thin__layer__brick__on__tet__mesh_8template_8cc_source.html">thin_layer_brick_on_tet_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:54:38
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

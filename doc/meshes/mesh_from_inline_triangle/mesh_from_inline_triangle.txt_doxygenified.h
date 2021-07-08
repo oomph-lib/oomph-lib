@@ -1,0 +1,617 @@
+/**
+
+\mainpage Inline mesh generation and adaptation based on Triangle
+
+In this document we demonstrate how to generate unstructured
+2D meshes for \c oomph-lib, using
+<A HREF="http://www.cs.berkeley.edu/~jrs/">Jonathan Shewchuk's</A>
+<A HREF="http://www.cs.cmu.edu/~quake/triangle.html"> Triangle</A>
+library from within an \c oomph-lib driver code.
+This complements the discussion in 
+<A HREF="../../../../doc/meshes/mesh_from_triangle/html/index.html">
+another tutorial</a>
+where we illustrated how to build \c oomph-lib meshes using the
+output generated when <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">
+\c Triangle </A> is used to create the mesh externally. 
+
+ In addition, we demonstrate 
+- how to create meshes with polygonal or curvilinear boundaries
+.
+and 
+- how to  adapt (re-generate) these meshes based on spatial error estimates. 
+.
+Here we restrict ourselves to the solution of problems in fixed
+domains. Other tutorials discuss more advanced applications involving
+moving meshes, e.g.
+- <A HREF="../../../../doc/navier_stokes/jeffery_orbit/html/index.html">
+  The motion of an ellipse in a shear flow</a>
+  \n\n
+- <A HREF=
+  "../../../../doc/navier_stokes/adaptive_bubble_in_channel/html/index.html">
+  The propagation of a bubble in a channel -- mesh generation and adaptation
+  for free-surface flows.</a>
+  \n\n
+.
+<HR>
+<HR>
+
+\section overview Overview of mesh generation procedures
+
+\subsection polygonal Meshes with polygonal boundaries
+If the domain has polygonal outer (and possibly internal) 
+boundaries, the mesh generation process follows a similar pattern 
+to that required in the external use
+of <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle
+</A>, but using \c oomph-lib classes to represent the required data.
+We define the polygonal boundaries using \c
+TriangleMeshPolyLines, 
+which represent distinct mesh boundaries and are defined by a series of
+vertex coordinates. Multiple \c TriangleMeshPolyLines can be 
+combined to define
+(closed) \c TriangleMeshPolygons. These are then used 
+to create an unstructured mesh with a pre-determined target area for
+all elements, via an interface to
+<A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle </A>.
+
+One particular feature of \c oomph-lib's interface
+to  <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle </A>
+is that each closed \c TriangleMeshPolygon must contain at least two
+distinct \c TriangleMeshPolyLines, each with its own boundary ID. 
+This is because every \c Node can only have a single-valued boundary
+coordinate but if the boundary is closed there would be a discontinuity
+in the coordinate value. (For example, a standard representation 
+would have \f$ \zeta = [0,2\pi] \f$ , but the node at 
+\f$\zeta=0\f$ should also have \f$ \zeta=2\pi \f$ and this is not possible.)
+The sketch below shows a representative domain 
+as well as two legal and one illegal representations of the domain
+boundaries. Note that the boundaries can be enumerated in an arbitrary 
+fashion. 
+
+\image html polygonal_mesh.gif "Sketch of a polygonal domain (top) and two legal (bottom left and middle) and one illegal (bottom right) representations of the boundaries in terms of TriangleMeshPolyLines. " 
+\image latex polygonal_mesh.eps "Sketch of a polygonal domain (top) and two legal (bottom left and middle) and one illegal (bottom right) representations of the boundaries in terms of TriangleMeshPolyLines. " width=0.75\textwidth
+
+
+<HR>
+
+
+\subsection curvilinear Meshes with curvilinear boundaries
+It is also possible to discretise domains with curvilinear boundaries
+as shown in the sketch below. Assuming that each curvilinear boundary
+is represented by a \c GeomObject that specifies the position vector
+\f$ {\bf R}(\zeta) \f$ to a point on the curvilinear boundary as a 
+function of some surface coordinate \f$ \zeta \f$, we split each
+closed boundary into (at least) two distinct \c TriangleMeshCurviLines --
+the curvilinear equivalents of \c TriangleMeshPolyLines.
+Each \c TriangleMeshCurviLine is constructed from a pointer to the \c
+GeomObject and the start and end values of the boundary coordinate \f$
+\zeta \f$
+along the relevant part of the curvilinear boundary. 
+The \c TriangleMeshCurviLines are then  combined to a
+\c TriangleMeshClosedCurve -- the general closed curve.
+
+
+\image html curvilinear_mesh.gif "Sketch of a domain bounded by a curvilinear boundary, containing two holes with curvilinear (hole 1) and polygonal (hole 2) boundaries, respectively. " 
+\image latex curvilinear_mesh.eps "Sketch of a domain bounded by a curvilinear boundary, containing two holes with curvilinear (hole 1) and polygonal (hole 2) boundaries, respectively. " width=0.75\textwidth
+
+The mesh is then created in a two-stage process: All  \c
+TriangleMeshCurviLines are sampled at a certain number of
+points (specified by the user in the constructor) to create the 
+vertices for a polyline representation of the boundary. 
+This polygonal representation of the boundaries is 
+used by \c Triangle to generate the mesh. Finally, nodes on 
+curvilinear boundaries are "snapped" onto the actual curvilinear 
+boundary.
+
+<HR>
+<HR>
+
+\section adapt Overview of mesh adaptation methodology
+The methodology employed to adapt \c oomph-lib's unstructured meshes 
+differs from that used for structured meshes. Specifically, rather than
+sub-dividing elements in which the error estimate exceeds a threshold
+and merging elements in which the solution is 
+"too accurate", we completely re-generate the mesh and project
+the solution from the old to the new mesh. This is because we
+originally developed the underlying methodology to solve
+free-boundary problems in which the domain undergoes such large
+deformations that re-meshing is required. The ability to 
+adjust the element sizes guided by spatial error estimates
+when re-meshing the domain is a simple fringe benefit.
+
+A number of issues are important: 
+- To facilitate mesh adaptation in free-boundary problems, we 
+  re-generate the polygonal representation of the boundary,
+  using the vertex nodes of the elements on the boundary to re-define 
+  the polygon. The number of vertices in the polygons that define the
+  mesh boundaries will therefore generally change during the mesh 
+  adaptation process. This is discussed in more detail in 
+  <a href=
+  "../../../../doc/navier_stokes/adaptive_bubble_in_channel/html/index.html#adapt">
+  another tutorial.</a>\n\n
+- The mesh (and thus its constituent elements) are completely 
+  re-generated when the mesh is adapted, and so it is necessary to "complete
+  the build" of all elements after each mesh adaptation. For instance,
+  pointers to problem parameters (Reynolds numbers, source functions,
+  etc) must  be re-set after the adaptation since they cannot 
+  (easily) be passed from the old to the new mesh. 
+  \n\n
+- When projecting the solution from the old to the new mesh, we
+  project 
+  \n\n
+  - all unknowns and their associated history values (if any)
+    \n\n
+  - the history values of the nodal positions. This is important for moving
+    mesh problems where the mesh velocity is required to evaluate
+    the ALE time-derivatives.
+  .
+  \n\n
+- The ability to automatically project the solution from the old to 
+  the new mesh requires the elements, of type \c ELEMENT, say, to be wrapped 
+  in the templated \c ProjectableElement<ELEMENT> class. This class
+  requires the specification of various element characteristics
+  (such as the number of fields to be projected, the number of history 
+  values, etc) in the form of virtual functions. This is much more
+  straightforward than upgrading an existing element to become a refineable
+  element for use in an adaptive computation on a structured
+  mesh because the "mesh adaptation by mesh re-generation" avoids the
+  creation of hanging nodes. See the section \ref wrapper for a
+  slightly more detailed 
+  discussion of this aspect.  
+  \n\n
+- Note that we do \b not apply any boundary conditions 
+  during the projection of these fields. This decision was not taken
+  out of laziness but because the interfaces required to specify
+  which boundary conditions to enforce and which ones to relax during
+  the projection were too unwieldy. It is therefore \b important
+  to re-apply boundary conditions and boundary values after each
+  adaptation.
+  \n\n
+.
+We recommend using the \c Problem::actions_after_adapt()  function to
+re-assign boundary conditions and to complete the build of all
+elements after the adaptation.
+
+Apart from these issues, the user interfaces to the mesh adaptation
+functions are exactly the same as for structured meshes. Specifically,
+it is possible to specify maximum and minimum element sizes and
+target values for the error such that the mesh is refined in regions
+where the error estimate is ``too large'' and unrefined where it is 
+``too small''.
+
+Typically, the most computationally expensive stage of the mesh 
+regeneration procedure is the multi-domain setup procedure which identifies
+corresponding points in the old and new meshes. In "cheap" problems, such as 
+the Poisson problem discussed below, the cost of the mesh regeneration
+can exceed the cost of the subsequent solve, but in most "hard"
+problems (such as the ones listed at the beginning of this tutorial)
+the cost of the mesh regeneration is modest (and, in the case
+of large-displacement free-boundary problems, unavoidable anyway).
+
+<HR>
+<HR>
+
+\section example An example: The adaptive solution of Poisson's equations on an unstructured mesh
+
+As an example we consider the adaptive solution of Poisson's equation
+\f[
+\frac{\partial^2 u}{\partial x_i^2} = f(x_1,x_2)
+\f]
+in a circular domain that contains an elliptical and a polygonal
+hole. As in many previous examples, we apply Dirichlet boundary
+conditions on all domain boundaries and choose the boundary
+values and the source function  \f$ f(x_1,x_2) \f$ such that 
+the exact solution of the problem is given by
+\f[
+u(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\f]
+which approaches a step function, oriented at an angle \f$ \Phi \f$ 
+within the \f$ (x_1,x_2) \f$ plane, as \f$ \alpha \f$ becomes large.
+The figure below shows contour plots of the solution 
+for \f$ \alpha = 5 \f$ for various angles \f$ \Phi \f$. It illustrates 
+how the mesh adaptation adjusts the mesh such the smallest elements
+are located in the region where the solution undergoes rapid change. 
+
+\image html solution.gif "Contour plot of the solution. " 
+\image latex solution.eps "Contour plot of the solution. " width=0.75\textwidth
+
+<HR>
+<HR>
+
+\section global Global parameters and functions
+Following our usual practice, we use a namespace to define the source function 
+and the exact solution. 
+\dontinclude mesh_from_inline_triangle.cc
+\skipline start_of_namespace
+\until end of namespace
+
+
+<HR>
+<HR>
+
+\section main The driver code
+We start by processing command line arguments which allow us to 
+run the code in self-test mode and build the problem with 
+"projectable" six-noded triangular Poisson elements. 
+
+
+\dontinclude mesh_from_inline_triangle.cc
+\skipline start_of_main
+\until problem;
+
+
+We then perform a parameter study, solving the problem for various
+orientations of the "step" and allowing a certain number of spatial 
+adaptations per solve. (If the code is run in self-test mode, we
+perform fewer steps and allow for less adaptation to speed up
+the computation.)
+
+\skipline Loop over orientation
+\until End of main
+
+
+<HR>
+<HR>
+
+\section problem The problem class
+The problem class contains the
+usual member functions. As discussed above, the boundary conditions
+and the source function have to be re-specified after every mesh 
+adaptation since the adapted mesh contains completely new elements.
+This is done in the function \c complete_problem_setup(), discussed
+below, which is called from the Problem constructor and 
+from \c actions_after_adapt(). We re-assign the Dirichlet boundary 
+conditions in \c actions_before_newton_solve(), using a second helper function
+\c apply_boundary_conditions():
+
+\dontinclude mesh_from_inline_triangle.cc 
+\skipline start_of_problem_class
+\until end_of_problem_class
+
+<HR>
+<HR>
+
+\section constructor The Problem constructor
+Most of the problem constructor is concerned with the
+specification of the mesh boundaries.
+We start by generating a \c GeomObject that describes the 
+circular outer boundary of the domain.
+
+\skipline start_constructor
+\until Ellipse(A,B)
+
+This \c GeomObject is now used to describe the outer boundary in
+terms of a \c TriangleMeshClosedCurve object, a base class which 
+can represent polygonal and curvilinear boundaries. We start by
+providing a pointer to this (yet-to-be-built) object.
+
+\until closed_curve_pt
+
+
+As discussed above, the closed outer boundary must be broken up into 
+(at least) two distinct sub-boundaries to allow \c oomph-lib
+to automatically refine and setup boundary coordinates. We therefore create
+two \c TriangleMeshCurviLines, specifying
+- the \c GeomObject that provides the exact curvilinear representation
+  of the boundary,
+  \n\n
+- the start and end coordinates of the boundary on that \c GeomObject,
+  \n\n
+- the number of straight-line segments used to represent this
+  boundary during the initial phase of the mesh generation process.
+  Recall that nodes on this boundary are "snapped" onto the
+  exact curvilinear boundary after the initial mesh is generated --
+  the number of segments should therefore be sufficiently large to
+  ensure that the "snapping" does not distort the elements next to the
+  boundary too much. See \ref how_many_segments for a more detailed
+  discussion of this issue.
+. 
+
+\skipline Provide storage for pointers to the two parts of the
+\until outer_curvi
+
+We choose five boundary segments for the first \c
+TriangleMeshCurviLine which represents the upper half of the boundary
+which we label as boundary 0,
+
+\until outer_boundary_ellipse_pt,zeta_start,zeta_end,
+
+and eight segments for the lower half which we label as boundary 1:
+
+\until outer_boundary_ellipse_pt,zeta_start,zeta_end,
+
+We then combine the two \c TriangleMeshCurviLines to a 
+\c TriangleMeshClosedCurve which describes the outer boundary.
+
+\skipline // Combine to curvilinear boundary and define the
+\until TriangleMeshClosedCurve
+
+Next we deal with the two inner (hole) boundaries
+
+\skipline Now build the holes
+\until hole_pt(2)
+
+The first hole is a polygon whose 12 vertices we distribute along a
+circle of radius \f$ 0.1 \f$ , centred at \f$ (x_1,x_2)=(0,0.5). \f$ 
+As above, we break the closed boundary into two distinct 
+sub-boundaries -- this time represented by \c TriangleMeshPolyLines:
+
+\until TriangleMeshCurveSection
+
+We create the vertex coordinates for the upper half of the polygonal
+hole,
+
+\until }
+
+and build the \c TriangleMeshPolyLine, specifying a boundary ID:
+
+\until boundary_id)
+
+We repeat the exercise for the lower half which we turn into boundary
+4:
+
+\until boundary_id)
+
+Finally, we build the polygonal hole itself, specifying its constituent
+\c TriangleMeshPolyLines and the coordinate of a point inside the
+hole, which is required by \c Triangle:
+
+\until hole_pt[0]
+
+The construction of the second, curvilinear internal boundary 
+(an ellipse centred at the origin) is virtually identical to the 
+steps taken for the construction of the outer boundary, apart from 
+the fact that, as an internal boundary, it again requires the
+specification of a point inside the hole.
+
+\skipline curvilinear hole
+\until hole_coords); 
+
+\subsection build_mesh Construct the mesh
+
+To facilitate the construction of the mesh \c TriangleMesh
+object we use the object \c TriangleMeshParameters. 
+The only necessary argument for creating this object is the outer 
+boundary. The definition of holes, internal boundaries and regions is
+explained in 
+<A HREF="../../../../doc/meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html">
+another tutorial</a>.
+The object can also be used to control whether
+additional refinement may be performed on the mesh boundaries. The
+default behaviour is that such refinement will occur so that 
+the highest quality mesh is obtained. In some cases,
+e.g. periodic boundary conditions, you may wish to ensure that each
+input boundary segment corresponds to a single element edge in the
+final mesh. This can be achieved for the outer boundary by calling 
+\c TriangleMeshParameters::disable_boundary_refinement(). However, Triangle
+will still add additional points to any internal boundaries unless the
+additional function 
+\c TriangleMeshParameters::disable_internal_boundary_refinement() is
+also called. 
+The functions \c TriangleMeshParameters::enable_boundary_refinement()
+and \c TriangleMeshParameters::enable_internal_boundary_refinement()
+can be used to return to the default behaviour. Note that it is not 
+currently possible to suppress refinement on the internal boundaries,
+but refine the outer boundary.
+
+We can specify a target for the element sizes and pass it to the
+\c TriangleMeshParameters object as showed next:
+
+\skipline Now build the mesh
+\until Problem::mesh_pt()
+
+We specify a spatial error estimator and limit the maximum and 
+minimum element sizes,
+
+\until min_element_size()
+
+before completing the problem setup (see below) and assigning 
+the equation numbers.
+
+\until end_of_constructor
+ 
+
+<HR>
+<HR>
+
+\section complete Completing the problem setup
+As discussed above, the helper function \c complete_problem_setup()
+starts by (re-)applying the boundary conditions by pinning the nodal values
+on all mesh boundaries,
+
+\skipline start_of_complete
+\until end loop over
+
+specifies the source function pointer for all elements,
+
+\until }
+
+and then re-sets the boundary values:
+
+\until }
+
+
+<HR>
+<HR>
+
+\section bc Assigning the boundary values
+The function \c apply_boundary_conditions()
+does exactly what is says: It loops over all boundary nodes
+and assigns the value according the exact solution specified
+in the namespace \c TanhSolnForPoisson.
+
+\skipline start_of_apply_bc
+\until end set bc
+
+<HR>
+<HR>
+
+
+\section doc Post-processing
+We compare the computed solution against the exact solution:
+
+\skipline start_of_doc
+\until end of doc
+
+
+<HR>
+<HR>
+ 
+
+
+
+\section comments Comments and Exercises
+  
+\subsection wrapper Upgrading elements to become "projectable"
+As discussed above, a key step in the "mesh-adaptation-by-mesh-regeneration" 
+procedure is the projection of the solution from the old to the new mesh. 
+The ability to perform this projection fully-automatically during the
+mesh adaptation requires the elements to be "wrapped" in the templated
+\c ProjectableElement<ELEMENT> class. This class is derived from the
+\c ProjectableElementBase base class which specifies a number of
+pure virtual functions that must be specified for each specific
+element type. For the Poisson problem considered here these functions 
+are already provided in the \c ProjectablePoissonElement<ELEMENT>
+class. Similar wrappers exist for many other equations. If you 
+want to "upgrade" your own elements to become projectable, inspect
+the prototypes for the relevant pure virtual functions 
+which are defined in 
+
+<CENTER>
+<A HREF="../../../../src/generic/projection.h">
+src/generic/projection.h
+</A>
+</CENTER>
+
+while the specific implementation for the projectable Poisson elements
+is provided in 
+
+<CENTER>
+<A HREF="../../../../src/poisson/poisson_elements.h">
+src/poisson/poisson_elements.h
+</A>
+</CENTER>
+
+Of course, you can avoid the additional work by dispensing with
+adaptivity and simply generating a sufficiently fine (uniform)
+mesh. This is illustrated in the alternative driver code
+<CENTER>
+<A HREF="../../../../demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc">
+demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc
+</A>
+</CENTER>
+
+<HR>
+
+\subsection how_many_segments How many vertices should I use to sample my curvilinear boundary?
+
+As discussed above, meshes with curvilinear boundaries are created in 
+a two-stage process. Initially, Triangle generates a mesh with 
+polygonal boundaries using a user-specified number of vertices 
+that are evenly distributed along the
+relevant \c GeomObject. The nodes on that boundary are then
+"snapped" onto the actual curvilinear boundary in a post-processing 
+step.  The decision of how many vertices to choose involves a
+compromise between two conflicting demands:
+- The number of boundary nodes created by Triangle will be at least
+  as big as the number of vertices specified. Triangle may add 
+  additional boundary nodes to generate a mesh of sufficient quality 
+  but it will not remove any vertices. Using a very large number of vertices 
+  can therefore lead to unnecessarily fine meshes.
+  \n\n
+- If the number of vertices is too small, the polygonal representation
+  of the domain boundary may be a poor approximation to the actual
+  curvilinear boundary. Elements near such boundaries may become
+  (too) strongly distorted when nodes are "snapped" onto the
+  curvilinear boundary. This often
+  manifests itself in inverted elements. (An element is
+  considered inverted if the Jacobian of the mapping between local
+  and global coordinates becomes non-positive anywhere. 
+  Note that negative Jacobians may
+  occur in the interior of elements (e.g. at their Gauss points) even
+  if a plot of the element, based on its nodal positions, still looks "OK").
+.
+
+<HR>
+
+\subsection ex Exercises
+-# Change the outer curvilinear boundary to a polygonal boundary
+   (you can cheat -- the relevant code is already contained in 
+   the driver code but it's "hidden" with \c ifdefs; this code also
+   documents the re-distribution of straight-line segments between 
+   different polylines, a capability that is important in certain
+   free-boundary problems). 
+   \n\n
+-# Vary the number of vertices used for the initial polygonal
+   representation of the curvilinear hole to establish what number
+   is required to avoid the inversion of elements during the
+   "snap-nodes-to-the-curvilinear-boundary" phase.
+   \n\n
+-# Create "projectable" advection diffusion elements to solve the
+   the advection diffusion problem discussed in 
+<A HREF="../../../../doc/advection_diffusion/two_d_adv_diff_adapt/html/index.html">another tutorial,</a>
+   using spatial adaptation on an unstructured mesh.
+   \n\n
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/meshing/mesh_from_triangle/">
+demo_drivers/meshing/mesh_from_inline_triangle/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle.cc">
+demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle.cc
+</A> 
+</CENTER>
+\n\n
+- The additional driver code \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc">
+demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc
+</A>
+</CENTER>
+\n
+shows how to generate non-refineable triangle meshes inline. This
+code does not require any modifications to existing triangular
+elements.
+.
+
+\section curve_sections Appendix A: Generalization for polylines and curvilines
+
+The objects, \c TriangleMeshPolyLine and \c TriangleMeshCurviLine 
+inherit the properties of a more general representation called 
+\c TriangleMeshCurveSection. This allows one to define more general 
+boundaries as a combination of \c TriangleMeshPolyLines and 
+\c TriangleMeshCurviLines. Therefore, if we want to define a more general
+closed curve use the \c TriangleMeshClosedCurve object. 
+You may notice the use of this object through the example code when defining the outer boundary.
+
+For the interested reader, the class diagram showing the hierarchy of the mentioned objects is
+showed on the next figure.
+
+\image html class_diagram.gif "The hierarchy of the \c TriangleMesh objects. " 
+\image latex class_diagram.eps "The hierarchy of the \c TriangleMesh objects. " width=0.75\textwidth
+
+Note the \c TriangleMeshOpenCurve object, which allows to define
+internal boundaries on the domain, explained on 
+<A HREF="../../../../doc/meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html">another tutorial</a>
+
+
+
+
+
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

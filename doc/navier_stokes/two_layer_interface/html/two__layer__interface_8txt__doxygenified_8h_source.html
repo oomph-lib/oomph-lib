@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: two_layer_interface.txt_doxygenified.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">two_layer_interface.txt_doxygenified.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="two__layer__interface_8txt__doxygenified_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">\mainpage Demo problem: Relaxation oscillations of an interface between two viscous fluids</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">In the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html&quot;&gt;previous example&lt;/A&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">we considered a two-dimensional free surface Navier--Stokes</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">problem. The free surface was deformed to a</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">prescribed shape and then allowed to relax. In this example we</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">consider the relaxation of an interface between two viscous fluids.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">\section implementation Implementation</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">The extension from a single fluid problem to one involving two fluids</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">separated by an interface is very straightforward. As \c oomph-lib&#39;s</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">Navier--Stokes elements are based on the Arbitrary Lagrangian Eulerian</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">form of the equations, and can therefore be used to solve problems in</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">moving domains, we can discretise the domain using a rectangular mesh</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">containing an additional boundary corresponding to the position of the</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">interface. The construction of such a mesh is described &lt;A HREF=&quot;#mesh&quot;&gt;below&lt;/A&gt;. </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">We also require a method of distinguishing between</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">(and assigning) the physical properties of the two fluid layers.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">\subsection interface_eqns Boundary conditions at the interface</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">A discussion of the theory and implementation of the boundary</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">conditions at a free surface is given in the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#free_surface_eqns&quot;&gt;previous example&lt;/A&gt;,</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">where we showed that the dynamic boundary condition is given by</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">\tau_{ij}^{[2]} \, n_j^{[1]} =</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">\tau_{ij}^{[1]} \, n_j^{[1]} + \frac{1}{Ca} \, \kappa \, n_i^{[1]}.</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">Here \f$ \tau_{ij}^{[1]} \f$ and \f$ \tau_{ij}^{[2]} \f$ are the</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">stress tensors in the `lower&#39; and `upper&#39; fluids respectively, \f$</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">n_j^{[1]} \f$ is the unit normal pointing out of the `lower&#39; fluid and</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">\f$ Ca \f$ is the Capillary number.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">The interface conditions in this two-fluid example are implemented in</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">an almost identical way to the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#implementation&quot;&gt;single layer case&lt;/A&gt;. </span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">We employ the same pseudo-solid node-update strategy, where the</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">interior mesh is treated as a fictitious elastic solid and thus the</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">(unknown) nodal positions can be determined by solving a solid</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">mechanics problem. The deformation of the free surface boundary itself</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">is imposed by introducing a a field of Lagrange multipliers at the</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">interface, and the equation associated with these additional unknowns</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">is the kinematic condition. In the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#implementation&quot;&gt;single layer case&lt;/A&gt; </span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">this equation is discretised by attaching \c FaceElements to the</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">boundaries of the `bulk&#39; elements that are adjacent to the free</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">surface. In this two-layer example we attach the same \c FaceElements</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">to only those `bulk&#39; elements which are in the `lower&#39; fluid (and have</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">boundaries adjacent to the interface). These same \c FaceElements are</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">also responsible for adding the surface tension contributions to the</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">momentum equations that arise through the application of the dynamic</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">boundary condition. We note that since we are solving the</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">Navier--Stokes equations on either side of the interface we do not</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">specify an external pressure, a step that was necessary in the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#implementation&quot;&gt;single layer case&lt;/A&gt;. </span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">The other difference between this problem and the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html&quot;&gt;previous example&lt;/A&gt;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">is that we shall be solving this one using spatial adaptivity. We</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">refer to &lt;A HREF=&quot;../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html&quot;&gt;another tutorial&lt;/A&gt; </span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">for a discussion of how to apply boundary conditions in such problems.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">\subsection dens_visc_ratios Distinguishing between the two fluids</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">In a problem containing a single fluid, the definitions of the</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">Reynolds number, Strouhal number, Capillary number and so on are based</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">on the physical properties of that fluid, as well as the geometry of</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">the problem and typical timescales. In our &lt;A HREF=&quot;../../driven_cavity/html/index.html&quot;&gt;discussion of the non-dimensionalisation of the Navier--Stokes equations&lt;/A&gt;</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">we describe how the various dimensionless parameters are defined in</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">terms of a reference density, \f$ \rho_{ext} \f$, and a reference</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">viscosity, \f$ \mu_{ext} \f$. We can then define two dimensionless</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">ratios, \f$ R_\rho \f$ and \f$ R_\mu \f$, which describe a particular</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">fluid&#39;s density \f$ \rho \f$ and kinematic viscosity \f$ \mu \f$</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">relative to these reference quantities:</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">R_\rho = \frac{\rho}{\rho_{ref}} </span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">\qquad ; \qquad </span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">R_\mu = \frac{\mu}{\mu_{ref}}.</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">\c oomph-lib&#39;s implementation of the Navier--Stokes equations contains</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">these ratios in the appropriate terms. They default to one but can be</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">set to other values via the member functions \c density_ratio_pt() and</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">\c viscosity_ratio_pt() in each element.</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">It is convenient to choose one of the fluids in this problem to be</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">the `reference fluid&#39; on which the dimensionless parameters are</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">based. We choose the lower fluid (fluid 1), and hence the</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">density \f$ \rho^{[1]} \f$ and viscosity \f$ \mu^{[1]} \f$ of this</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">fluid are identically equal to \f$ \rho_{ref} \f$ and \f$ \mu_{ref}</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">\f$ (and thus \f$ R_\rho^{[1]} = R_\mu^{[1]} = 1 \f$). We can now</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">control the relative density and viscosity of the upper fluid to the</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">lower fluid using the ratios \f$ R_\rho^{[2]} = \rho^{[2]}/\rho_{ref}</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">\f$ and \f$ R_\mu^{[2]} = \mu^{[2]}/\mu_{ref} \f$ respectively. For</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">simplicity we will from now on refer to \f$ R_\rho^{[2]} \f$ simply as</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">\f$ R_\rho \f$ and to \f$ R_\mu^{[2]} \f$ as \f$ R_\mu \f$.</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">\section example_problem The example problem</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">We will illustrate the solution of the unsteady two-dimensional</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">Navier--Stokes equations using the example of a distorted interface</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">between two viscous fluids which is allowed to relax. The domain is</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">periodic in the \f$ x_1 \f$ direction.</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">&lt;TABLE&gt;</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">&lt;TR&gt; </span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">&lt;TD&gt;</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">&lt;B&gt;</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">The 2D unsteady Navier--Stokes equations either side of a distorted interface.&lt;/B&gt;</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">&lt;/CENTER&gt; </span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">Solve</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">Re\left(St\frac{\partial u_i}{\partial t} +</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">\ u_j\frac{\partial u_i}{\partial x_j}\right) =</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">- \frac{\partial p}{\partial x_i} + \frac{Re}{Fr}G_i +</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">\frac{\partial }{\partial x_j} \left[</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">\frac{\partial u_i}{\partial x_j} +  </span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">\frac{\partial u_j}{\partial x_i} \right]</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (1)</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">and</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">\frac{\partial u_i}{\partial x_i} = 0</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (2)</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">in the `lower&#39; fluid, and</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">R_\rho Re\left(St\frac{\partial u_i}{\partial t} +</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">\ u_j\frac{\partial u_i}{\partial x_j}\right) =</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">- \frac{\partial p}{\partial x_i} + R_\rho \frac{Re}{Fr}G_i +</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">\frac{\partial }{\partial x_j} \left[R_\mu \left(</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">\frac{\partial u_i}{\partial x_j} +  </span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">\frac{\partial u_j}{\partial x_i} \right) \right]</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (3)</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">and</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">\frac{\partial u_i}{\partial x_i} = 0</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (4)</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">in the `upper&#39; fluid. Gravity acts in the negative \f$ x_2 \f$</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">direction and so \f$ G_1 = 0 \f$ and \f$ G_2 = 1 \f$. The governing</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">equations are subject to the no slip boundary conditions</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">u_1 = u_2 = 0 \ \ \ \ \ \ \ \ \ \ (5)</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">on the top (\f$ x_2 = 2.0 \f$) and bottom (\f$ x_2 = 0.0 \f$) solid</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">boundaries and the symmetry boundary conditions</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">u_1 = 0 \ \ \ \ \ \ \ \ \ \ (6)</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">on the left (\f$ x_1 = 0.0 \f$) and right (\f$ x_1 = 1.0 \f$)</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">boundaries.</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">We denote the position vector to the interface between the two fluids</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">by \f$ \mathbf{R} \f$, which is subject to the kinematic condition</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">\left(u_i - St\, \frac{\partial R_i}{\partial t}\right) n_i = 0,</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (7)</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">and the dynamic condition</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">\tau_{ij}^{[2]} \, n_j^{[1]} =</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">\tau_{ij}^{[1]} \, n_j^{[1]} + \frac{1}{Ca} \, \kappa \, n_i^{[1]}.</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (8)</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">The stress tensor in the `lower&#39; fluid is defined as</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">\tau_{ij}^{[1]} = -p^{[1]} \, \delta_{ij} + \left(\frac{\partial u^{[1]}_i}{\partial x_j}</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">+ \frac{\partial u^{[1]}_j}{\partial x_i}\right),</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (9)</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">and that in the `upper&#39; fluid is defined as</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">\tau_{ij}^{[2]} = -p^{[2]} \, \delta_{ij} + R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">+ \frac{\partial u^{[2]}_j}{\partial x_i}\right).</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (10)</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">The initial shape of the interface is defined by</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"> \mathbf{R} = x_1 \, \mathbf{i} + \left[ 1.0 + </span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment"> \epsilon\cos\left( 2 n \pi x_1 \right)\right] \, \mathbf{j},</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (11)</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">where \f$ \epsilon \f$ is the amplitude of the initial deflection and</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">\f$ n \f$ is an integer.</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">&lt;/TD&gt;</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">&lt;/TR&gt;</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">&lt;/TABLE&gt;  </span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">\section results Results</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">The figure below shows a contour plot of the pressure distribution</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">taken from &lt;A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt;an animation of the flow field&lt;/A&gt;,</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">for the parameters \f$ Re = Re \, St = Re/Fr = 5.0 \f$, \f$ R_\rho =</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">0.5 \f$, \f$ R_\mu = 0.1 \f$ and \f$ Ca = 0.01 \f$.</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">\image html two_layer_interface.gif &quot;Pressure contour plot for the relaxing interface problem. &quot; </span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">\image latex two_layer_interface.eps &quot;Pressure contour plot for the relaxing interface problem. &quot; width=0.6\textwidth</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">The restoring forces of surface tension</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">and gravitational acceleration act to revert the interface to its</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">undeformed flat state. The interface oscillates up and down, but the </span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">motion is damped as the energy in the system is dissipated through</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">viscous forces. Eventually the interface settles down to its</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">equilibrium position, as can be seen in the</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">following time-trace of the height of the interface at the left-hand</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">edge of the domain (\f$ x_1 = 0 \f$).</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">\image html two_layer_interface_trace.gif &quot;Time-trace of the height of the interface at the point x_1 = 0. &quot; </span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">\image latex two_layer_interface_trace.eps &quot;Time-trace of the height of the interface at the point x_1 = 0. &quot; width=0.95\textwidth</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">\section validation Validation</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">The free surface boundary conditions for the Cartesian Navier--Stokes</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">equations have been validated against an analytical test</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">case, and we present the results in the figure</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">below. For sufficiently small amplitudes, \f$ \epsilon \ll 1 \f$, we</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">can linearise the governing equations and obtain a dispersion relation</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">\f$ \lambda(k) \f$, the derivation of which is discussed in the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#validation&quot;&gt;previous tutorial&lt;/A&gt;. </span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">The only difference in this two layer case is that the linear system</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">which needs to be solved contains nine unknowns rather than five,</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">since the two fluids have different properties.</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">The real and imaginary parts of \f$ \lambda \f$</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">correspond to the growth rate and the frequency of the oscillating</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">interface respectively, and can be compared to numerical results</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">computed for given values of the wavenumber \f$ k \f$. We choose an</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">initial deflection amplitude of \f$ \epsilon = 0.01 \f$ and determine</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">the growth rate and frequency of the oscillation from a time-trace of</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">the left-hand edge of the interface.</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">\image html two_layer_interface_code_validation.gif &quot;Validation of the code (points) by comparison with an analytical dispersion relation (lines). &quot; </span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">\image latex two_layer_interface_code_validation.eps &quot;Validation of the code (points) by comparison with an analytical dispersion relation (lines). &quot; width=0.95\textwidth</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">\section namespace Global parameters and functions</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">As in the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#namespace&quot;&gt;previous example&lt;/A&gt;, we use a namespace to define the dimensionless parameters</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">\f$ Re \f$, \f$ St \f$, \f$ Re/Fr \f$ and \f$ Ca \f$. The pseudo-solid</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">mesh is governed by a generalised Hookean constitutive law which</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">requires the definition of the Poisson ratio, \f$ \nu \f$, and we</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">create a vector \f$ G \f$ which will define the direction in which</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">gravity acts. Because this is a two-fluid problem, we also need to</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">define the density ratio \f$ R_{\rho} = \rho^{[2]}/\rho^{[1]} \f$ and</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">viscosity ratio \f$ R_{\mu} = \mu^{[2]}/\mu^{[1]} \f$ of the two</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">fluids.</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">\dontinclude elastic_two_layer_interface.cc</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">\skipline start_of_namespace</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">\until End of namespace</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">\section main The driver code</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">The driver code is very similar to the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#main&quot;&gt;previous example&lt;/A&gt;. </span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">We define a command line flag which allows us to run a</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">`validation&#39; version of the code (for \c oomph-lib&#39;s self-testing</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">routines) and check that the non-dimensional quantities provided in the</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">\c Global_Physical_Variables namespace are self-consistent.</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">\skipline start_of_main</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">Next we specify the duration of the simulation and the</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">size of the timestep. If we are running the code as a self-test, we</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">set the length of the simulation such that only two timesteps are</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">taken. The direction in which gravity acts is defined to be vertically</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">downwards.</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">\skipline Maximum time</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">\until G[1]</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">Finally, we build the problem using the `pseudo-solid&#39; version of \c</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">RefineableQCrouzeixRaviartElements and the \c BDF&lt;2&gt; timestepper, before calling \c</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">unsteady_run(...). This function solves the system at each timestep</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">using the \c Problem::unsteady_newton_solve(...) function before</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">documenting the result.</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">\skipline Set up the elastic test problem</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">\until End of main</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">\section mesh The mesh class</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">In the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#main&quot;&gt;previous example&lt;/A&gt; we employed \c oomph-lib&#39;s \c</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">ElasticRectangularQuadMesh. If we wanted to solve the same</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">single-layer problem but with spatial adaptivity we would simply use</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">that mesh&#39;s refineable counterpart, the \c</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">ElasticRefineableRectangularQuadMesh. For this two-layer problem,</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">however, it is convenient to define a new mesh class which contains an</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">additional `boundary&#39; which corresponds to the interface between the</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">two fluids. We start by</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">defining the new class (which is templated by the element type) and</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">inheriting from \c ElasticRefineableRectangularQuadMesh.</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">\dontinclude elastic_two_layer_interface.cc</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">\skipline start_of_specific_mesh_class</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">\until {</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">Next we define the mesh&#39;s constructor. We pass it</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">the usual parameters, including a boolean flag which indicates whether</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">or not the mesh is periodic in the \f$ x \f$ direction.</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">\skipline public:</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">\until {</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">We have so far created an \c ElasticRefineableRectangularQuadMesh,</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">which has four boundaries corresponding to the edges of our</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">problem&#39;s domain. We wish to define a fifth boundary which corresponds</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">to the interface position. First we set the number of boundaries to</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">five and then convert all the \c Nodes which lie on the interface into</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">\c BoundaryNodes. These are then added to the fifth boundary.</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">\skipline Set the number of boundaries</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">\until End of loop over horizontal elements</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">All that remains is to set up the boundary element information. This</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">is required so that we can easily have access to the bulk elements</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">either side of this new boundary.</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">\skipline Set up the boundary element information</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">\until End of specific mesh class</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">\section problem_class The problem class </span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">This is very similar to the problem class in the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#problem_class&quot;&gt;previous example&lt;/A&gt;, </span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">with a few modifications. Because we shall use spatial</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">adaptivity when solving this problem, we </span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">define the following two functions, which will be called before and after</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">mesh adaptation.</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">\skipline Strip off the interface elements</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">\until actions_after_adapt</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">These two functions will employ two helper functions which are</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">responsible for the creation and deletion of the interface elements.</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">\skipline Create the 1d interface elements</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">\until delete_interface_elements</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">The final modification to the problem class is the addition of a</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">helper function which pins a pressure value in a specified element and</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">assigns a specific value.</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">\skipline Fix pressure in element e</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">\section constructor The problem constructor</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">The constructor starts by building the timestepper and setting the</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">dimensions of the mesh. The number of elements in the</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">\f$ x_1 \f$ and \f$ x_2 \f$ directions in both fluid layers are</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">specified.</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">\skipline start_of_constructor</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">\until double h2</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">Next we build the bulk mesh, create an error estimator for the problem</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">and set the maximum refinement level.</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">\skipline Build and assign the &quot;bulk&quot; mesh</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">\until max_refinement_level</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">An empty surface mesh is created and then populated with a call to \c</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">create_interface_elements(). The bulk and surface meshes are then</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">combined to form the global mesh.</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">\skipline Create the &quot;surface&quot; mesh</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">\until build_global_mesh</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">On the top and bottom boundaries (\f$ y = 2.0 \f$ and \f$ y = 0.0 \f$)</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">we apply the no-slip condition by pinning both velocity components. On</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">the left and right symmetry boundaries (\f$ x = 0.0 \f$ and \f$ x =</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">1.0 \f$) we pin the \f$ x \f$</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">component of the velocity but leave the \f$ y \f$ component</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">unconstrained. We pin the vertical displacement of the nodes on the</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">solid boundaries (since these must remain stationary) and pin the</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">horizontal displacement of all nodes in the mesh.</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">\skipline Set the boundary conditions for this problem</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">\until Bulk_mesh_pt-&gt;node_pt(n)-&gt;pin_position(0)</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">Next we create a generalised Hookean constitutive equation for the</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">pseudo-solid mesh. This constitutive equation is discussed in &lt;A HREF=&quot;../../../solid/disk_compression/html/index.html#hooke&quot;&gt;another tutorial&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">\skipline Define a constitutive law</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">\until GeneralisedHookean</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">We loop over the bulk elements in the lower fluid and pass them</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">pointers to the Reynolds and Womersley numbers, \f$ Re \f$ and \f$</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">Re\, St \f$, the product of the Reynolds number and the inverse of the</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">Froude number, \f$ Re/Fr \f$, the direction of gravity, \f$ G \f$, the</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">constitutive law and the global time object, created when we called \c</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">Problem::add_time_stepper_pt(...) above. Note that we do not assign</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">pointers for the viscosity and density ratios, \f$ R_\mu \f$ and \f$</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">R_\rho \f$, since these take the default value in the lower fluid.</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">\skipline Complete the problem setup to make the elements fully functional</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">\until End of loop over bulk elements in lower fluid</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">We then do the same for the bulk elements in the upper fluid, and this</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">time we do assign pointers for the viscosity and density ratios.</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">\skipline Loop over bulk elements in upper fluid</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">\until End of loop over bulk elements in upper fluid</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">We then pin one pressure degree of freedom.</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">\skipline Set the pressure</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">\until fix_pressure</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">At this point we set up the boundary conditions.</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">\skipline Apply the boundary conditions</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">\until set_boundary_conditions</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">Finally, we set up the equation numbering scheme.</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">\skipline Set up equation numbering scheme</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">\until End of constructor</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">\section set_initial_condition Initial conditions</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">The \c set_initial_conditions() function is identical to that in the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#set_initial_condition&quot;&gt;previous example&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment">\section set_boundary_conditions Boundary conditions</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment">The \c set_boundary_conditions() function is very similar to that in</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#set_boundary_conditions&quot;&gt;previous example&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="comment">\section before_adapt Actions before adaptation</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="comment">The mesh adaptation is driven by the error estimates in the bulk</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment">elements and only performed for that mesh. The interface elements must </span></div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="comment">therefore be removed before adaptation. We do this by calling </span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="comment">the function \c delete_interface_elements(), and</span></div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="comment">then rebuilding the \c Problem&#39;s global mesh.</span></div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="comment">\skipline start_of_actions_before_adapt</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="comment">\until End of actions_before_adapt</span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">\section after_adapt Actions after adapt</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="comment">After the bulk mesh has been adapted we must create new interface</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="comment">elements and rebuild the problem&#39;s global mesh. Any newly-created</span></div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment">boundary nodes will automatically have the appropriate boundary</span></div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment">conditions applied; however, we must remember to pin the horizontal</span></div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="comment">displacement of all nodes throughout the bulk of the domain.</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment">\skipline start_of_actions_after_adapt</span></div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment">\until Bulk_mesh_pt-&gt;node_pt(n)-&gt;pin_position(0)</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment">To ensure that precisely one fluid pressure degree of freedom is</span></div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment">pinned, we unpin all pressure degrees of freedom, pin any redundant</span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment">nodal pressures which have arisen following mesh adaptation and call</span></div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment">\c fix_pressure(...). We also pin any redundant solid pressures before</span></div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment">re-setting the boundary conditions.</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment">\skipline Unpin all fluid pressure dofs</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">\until End of actions_after_adapt</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="comment">\section create_interface_elements Create interface elements</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="comment">This function is used to `attach&#39;</span></div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="comment">interface elements to the upper face of those bulk elements in the</span></div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;<span class="comment">lower fluid which are adjacent to the interface. Firstly, we loop over</span></div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="comment">all bulk elements (in either fluid) which are adjacent to the</span></div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="comment">interface.</span></div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="comment">\skipline start_of_create_interface_elements</span></div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="comment">\until Bulk_mesh_pt-&gt;boundary_element_pt</span></div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;<span class="comment">In order to determine whether the bulk element we are currently</span></div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="comment">looking at is in the upper or lower fluid, we check to see whether</span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment">that element&#39;s \c viscosity_ratio_pt is pointing to the address of \c</span></div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment">Global_Physical_Variables::Viscosity_Ratio. If it is, then that bulk</span></div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="comment">element is in the upper fluid, and we ignore it. Otherwise, we</span></div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment">determine the face of the bulk element that corresponds to the</span></div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="comment">interface and create an interface element on that face. The</span></div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="comment">newly-created element is then added to the surface mesh.</span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="comment">\skipline We only want to attach</span></div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="comment">Finally, we pass the Strouhal and Capillary numbers to the interface</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="comment">elements.</span></div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="comment">\skipline Complete the setup to make the elements fully functional</span></div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;<span class="comment">\until End of create_interface_elements</span></div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="comment">\section delete_interface_elements Delete interface elements</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="comment">This function loops over all the interface elements (i.e. those in the</span></div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;<span class="comment">surface mesh) and deletes them and their storage.</span></div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="comment">\skipline start_of_delete_interface_elements</span></div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="comment">\until End of delete_interface_elements</span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment">\section deform_free_surface Prescribing the initial free surface position</span></div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="comment">At the beginning of the simulation the interface is deformed by a</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="comment">prescribed function (11), implemented in</span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="comment">the function \c deform_free_surface(...), which cycles through</span></div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="comment">the bulk mesh&#39;s \c Nodes and modifies their positions such that the</span></div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="comment">nodes on the free surface follow the prescribed interface shape and</span></div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="comment">the bulk nodes retain their fractional position between the solid</span></div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="comment">boundaries and the (now deformed) interface.</span></div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;<span class="comment">\skipline start_of_deform_free_surface</span></div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;<span class="comment">\until End of deform_free_surface</span></div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="comment">\section doc Post-processing</span></div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="comment">This function is identical to that in the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#doc&quot;&gt;previous example&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="comment">\section unsteady_run The timestepping loop</span></div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="comment">The function \c unsteady_run(...) is used to perform the timestepping</span></div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="comment">procedure, and is very similar to that in the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html#unsteady_run&quot;&gt;previous example&lt;/A&gt;. The only changes arise due to this problem being solved</span></div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="comment">with spatial adaptivity. We start by deforming the interface in the</span></div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="comment">manner specified by equation (11).</span></div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="comment">\skipline start_of_unsteady_run</span></div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="comment">\until deform_free_surface</span></div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="comment">We then create a \c DocInfo object to store the output directory and</span></div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="comment">the label for the output files.</span></div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="comment">\skipline Initialise DocInfo object</span></div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="comment">\until doc_info.number()=0</span></div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="comment">Next we open and initialise the trace file.</span></div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="comment">\skipline Open trace file</span></div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="comment">\until std::endl</span></div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;<span class="comment">Before using any of \c oomph-lib&#39;s timestepping functions, the timestep</span></div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="comment">\f$ dt \f$ must be passed to the problem&#39;s timestepping routines by calling</span></div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;<span class="comment">the function \c Problem::initialise_dt(...) which sets the weights for</span></div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;<span class="comment">all timesteppers in the problem. Next we assign the initial conditions</span></div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;<span class="comment">by calling \c Problem::set_initial_condition(), which was discussed</span></div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;<span class="comment">&lt;A HREF=&quot;#set_initial_condition&quot;&gt;above&lt;/A&gt;.</span></div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;<span class="comment">\skipline Initialise timestep</span></div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="comment">\until set_initial_condition</span></div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;<span class="comment">We limit number of spatial adaptations per timestep to two and refine</span></div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="comment">the problem uniformly twice, before documenting the initial conditions.</span></div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;<span class="comment">\skipline Maximum number of spatial adaptations per timestep</span></div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;<span class="comment">\until doc_info.number()++</span></div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="comment">Finally, we determine the number of timesteps to be performed and</span></div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;<span class="comment">perform the actual timestepping loop. For each timestep the function</span></div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;<span class="comment">\c unsteady_newton_solve(dt,max_adapt,first_timestep) is called and </span></div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="comment">the solution documented. The boolean flag \c first_timestep is used to</span></div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="comment">instruct the code to re-assign the initial conditions after every mesh</span></div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="comment">adaptation. After the first timestep, the maximum number of</span></div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="comment">adaptations for all timesteps is reset to one. We refer to &lt;A HREF=&quot;../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html#spatial_adapt&quot;&gt;another example&lt;/A&gt; for a discussion of why this is recommended.</span></div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;<span class="comment">\skipline Determine number of timesteps</span></div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="comment">\until End of unsteady_run</span></div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;<span class="comment">\section comments Comments</span></div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="comment">- Since the problem discussed in this example has the fluid velocity</span></div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="comment">  prescribed along the entire domain boundary, the fluid pressure is</span></div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<span class="comment">  only determined up to an arbitrary constant and hence we fix the</span></div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="comment">  pressure at a single point in the domain. However, it is worth</span></div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;<span class="comment">  noting that in the case of Crouzeix--Raviart elements being used in</span></div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;<span class="comment">  a problem with spatial adaptivity the notion of a fixed pressure is</span></div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;<span class="comment">  slightly subtle. In this example we fix the first pressure value of</span></div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;<span class="comment">  the first element in the mesh to zero, which in the case of</span></div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;<span class="comment">  Crouzeix--Raviart elements means that we fix the average value of</span></div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;<span class="comment">  the pressure to zero in this element. Were this element to be</span></div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;<span class="comment">  refined, however, we would then be imposing a zero pressure</span></div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;<span class="comment">  elsewhere in the domain, causing the entire pressure field to `jump&#39;</span></div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<span class="comment">  from one timestep to the next. Since the problem is incompressible</span></div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="comment">  this would not affect the computed velocity fields, but could lead</span></div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;<span class="comment">  to some confusion when studying the time evolution of the pressure</span></div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;<span class="comment">  field.</span></div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;<span class="comment">\section exercises Exercises</span></div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="comment">- In the &lt;A HREF=&quot;../../single_layer_free_surface/html/index.html&quot;&gt;single-layer example&lt;/A&gt; we chose to discretise the problem using</span></div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="comment">  Crouzeix--Raviart elements, but we could also have chosen to use</span></div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="comment">  Taylor--Hood elements. Why can we not use Taylor--Hood elements to</span></div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;<span class="comment">  solve this two-layer problem?</span></div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="comment">- What happens if we do not call \c setup_boundary_element_info() in</span></div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;<span class="comment">  the &lt;A HREF=&quot;#mesh&quot;&gt;mesh constructor&lt;/A&gt;? Why is this?</span></div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="comment">\section sources Source files for this tutorial</span></div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment">- The source files for this tutorial are located in the directory:</span></div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/two_layer_interface/&quot;&gt;</span></div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment">demo_drivers/navier_stokes/two_layer_interface/</span></div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="comment">- The driver code is:</span></div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/navier_stokes/two_layer_interface/elastic_two_layer_interface.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment">demo_drivers/navier_stokes/two_layer_interface/elastic_two_layer_interface.cc</span></div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="atwo__layer__interface_8txt_html_a12ad175f862d3fe119900bd546c618c2"><div class="ttname"><a href="two__layer__interface_8txt.html#a12ad175f862d3fe119900bd546c618c2">epsilon</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ epsilon[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f f R_ f R_ but the motion is damped as the energy in the system is dissipated through viscous forces Eventually the interface settles down to its equilibrium as can be seen in the following time trace of the height of the interface at the left hand edge of the and we present the results in the figure below For sufficiently small f epsilon ll we can linearise the governing equations and obtain a dispersion relation f the derivation of which is discussed in the&lt; A HREF=&quot;../../single_layer_free_surface/html/index.html#validation&quot;&gt; previous tutorial&lt;/A &gt; The only difference in this two layer case is that the linear system which needs to be solved contains nine unknowns rather than since the two fluids have different properties The real and imaginary parts of f lambda f correspond to the growth rate and the frequency of the oscillating interface and can be compared to numerical results computed for given values of the wavenumber f k f We choose an initial deflection amplitude of f</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00238">two_layer_interface.txt:238</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_a27b1345be7a7be64417b6ee41bb0a13c"><div class="ttname"><a href="two__layer__interface_8txt.html#a27b1345be7a7be64417b6ee41bb0a13c">lambda</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ lambda[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f f R_ f R_ but the motion is damped as the energy in the system is dissipated through viscous forces Eventually the interface settles down to its equilibrium as can be seen in the following time trace of the height of the interface at the left hand edge of the and we present the results in the figure below For sufficiently small f epsilon ll we can linearise the governing equations and obtain a dispersion relation f(k) \f$</div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_af738d67f78bdf64bc92c89e9596d14db"><div class="ttname"><a href="two__layer__interface_8txt.html#af738d67f78bdf64bc92c89e9596d14db">Re</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ Re[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00204">two_layer_interface.txt:204</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_aed1d43e145a7aecb9f5b521e614b9d97"><div class="ttname"><a href="two__layer__interface_8txt.html#aed1d43e145a7aecb9f5b521e614b9d97">domain</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ domain[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f f R_ f R_ but the motion is damped as the energy in the system is dissipated through viscous forces Eventually the interface settles down to its equilibrium as can be seen in the following time trace of the height of the interface at the left hand edge of the(\f$ x_1=0 \f$). @I w 0.95\textwidth two_layer_interface_trace &quot;Time-trace of the height of the interface at the point x_1 = 0. &quot;&lt; HR &gt;&lt; HR &gt; \section validation Validation The free surface boundary conditions for the Cartesian Navier--Stokes equations have been validated against an analytical test case</div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_a45f5401dd5d0c390393c4213dc997ceb"><div class="ttname"><a href="two__layer__interface_8txt.html#a45f5401dd5d0c390393c4213dc997ceb">position</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ position[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f f R_ f R_ but the motion is damped as the energy in the system is dissipated through viscous forces Eventually the interface settles down to its equilibrium</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00214">two_layer_interface.txt:214</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_a7f1677f5abf78f46bd59df2c376196f0"><div class="ttname"><a href="two__layer__interface_8txt.html#a7f1677f5abf78f46bd59df2c376196f0">domains</a></div><div class="ttdeci">mainpage Demo and can therefore be used to solve problems in moving domains</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00018">two_layer_interface.txt:18</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_afca9ae9f40446eedf2546a43630c589a"><div class="ttname"><a href="two__layer__interface_8txt.html#afca9ae9f40446eedf2546a43630c589a">HREF</a></div><div class="ttdeci">&quot;#mesh&quot;&gt;below&lt;/A &gt;. We also require a method of distinguishing between(and assigning) the physical properties of the two fluid layers. \subsection interface_eqns Boundary conditions at the interface A discussion of the theory and implementation of the boundary conditions at a free surface is given in the&lt; A HREF=&quot;../../single_layer_free_surface/html/index.html#free_surface_eqns&quot;&gt;previous example&lt;/A &gt;, where we showed that the dynamic boundary condition is given by \f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}. \f] Here \f$ \tau_{ij}^{[1]} \f$ and \f$ \tau_{ij}^{[2]} \f$ are the stress tensors in the `lower' and `upper' fluids respectively, \f$ n_j^{[1]} \f$ is the unit normal pointing out of the `lower' fluid and \f$ Ca \f$ is the Capillary number. The interface conditions in this two-fluid example are implemented in an almost identical way to the&lt; A HREF=&quot;../../single_layer_free_surface/html/index.html#implementation&quot;&gt;single layer case&lt;/A &gt;. We employ the same pseudo-solid node-update strategy, where the interior mesh is treated as a fictitious elastic solid and thus the(unknown) nodal positions can be determined by solving a solid mechanics problem. The deformation of the free surface boundary itself is imposed by introducing a a field of Lagrange multipliers at the interface, and the equation associated with these additional unknowns is the kinematic condition. In the&lt; A HREF=&quot;../../single_layer_free_surface/html/index.html#implementation&quot;&gt;single layer case&lt;/A &gt; this equation is discretised by attaching \c FaceElements to the boundaries of the `bulk' elements that are adjacent to the free surface. In this two-layer example we attach the same \c FaceElements to only those `bulk' elements which are in the `lower' fluid(and have boundaries adjacent to the interface). These same \c FaceElements are also responsible for adding the surface tension contributions to the momentum equations that arise through the application of the dynamic boundary condition. We note that since we are solving the Navier--Stokes equations on either side of the interface we do not specify an external pressure, a step that was necessary in the&lt; A HREF=&quot;../../single_layer_free_surface/html/index.html#implementation&quot;&gt;single layer case&lt;/A &gt;. The other difference between this problem and the&lt; A HREF=&quot;../../single_layer_free_surface/html/index.html&quot;&gt;previous example&lt;/A &gt; is that we shall be solving this one using spatial adaptivity. We refer to&lt; A HREF=&quot;../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html&quot;&gt;another tutorial&lt;/A &gt; for a discussion of how to apply boundary conditions in such problems. \subsection dens_visc_ratios Distinguishing between the two fluids In a problem containing a single fluid, the definitions of the Reynolds number, Strouhal number, Capillary number and so on are based on the physical properties of that fluid, as well as the geometry of the problem and typical timescales. In our&lt; A HREF=&quot;../../driven_cavity/html/index.html&quot;&gt;discussion of the non-dimensionalisation of the Navier--Stokes equations&lt;/A &gt; we describe how the various dimensionless parameters are defined in terms of a reference density, \f$ \rho_{ext} \f$, and a reference viscosity, \f$ \mu_{ext} \f$. We can then define two dimensionless ratios, \f$ R_\rho \f$ and \f$ R_\mu \f$, which describe a particular fluid 's density \f$ \rho \f$ and kinematic viscosity \f$ \mu \f$ relative to these reference quantities:\f[R_\rho=\frac{\rho}{\rho_{ref}} \qquad HREF</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00077">two_layer_interface.txt:77</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a37a6f46efcb35b4bd12c73f19d741020"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a37a6f46efcb35b4bd12c73f19d741020">Global_Physical_Variables::G</a></div><div class="ttdeci">Vector&lt; double &gt; G(2)</div><div class="ttdoc">Direction of gravity.</div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_ac97470a3d889ea4d3ec5e3a143ed0f2f"><div class="ttname"><a href="two__layer__interface_8txt.html#ac97470a3d889ea4d3ec5e3a143ed0f2f">St</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ St[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00204">two_layer_interface.txt:204</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_a02e07e2b7de74d24b556eaf9a56c3db6"><div class="ttname"><a href="two__layer__interface_8txt.html#a02e07e2b7de74d24b556eaf9a56c3db6">f</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ f[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f f R_ f R_ but the motion is damped as the energy in the system is dissipated through viscous forces Eventually the interface settles down to its equilibrium as can be seen in the following time trace of the height of the interface at the left hand edge of the and we present the results in the figure below For sufficiently small f epsilon ll</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00228">two_layer_interface.txt:228</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_a493142f63880bc5b7ab19daf794da37c"><div class="ttname"><a href="two__layer__interface_8txt.html#a493142f63880bc5b7ab19daf794da37c">mu</a></div><div class="ttdeci">qquad R_ mu</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00078">two_layer_interface.txt:78</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_a18ff6f65ad15eaf23b5d162c5cd3256c"><div class="ttname"><a href="two__layer__interface_8txt.html#a18ff6f65ad15eaf23b5d162c5cd3256c">five</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ five[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f f R_ f R_ but the motion is damped as the energy in the system is dissipated through viscous forces Eventually the interface settles down to its equilibrium as can be seen in the following time trace of the height of the interface at the left hand edge of the and we present the results in the figure below For sufficiently small f epsilon ll we can linearise the governing equations and obtain a dispersion relation f the derivation of which is discussed in the&lt; A HREF=&quot;../../single_layer_free_surface/html/index.html#validation&quot;&gt; previous tutorial&lt;/A &gt; The only difference in this two layer case is that the linear system which needs to be solved contains nine unknowns rather than</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00232">two_layer_interface.txt:232</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_adb51428300a01b19395c43c0d3586d6f"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">Global_Physical_Variables::Viscosity_Ratio</a></div><div class="ttdeci">double Viscosity_Ratio</div><div class="ttdoc">Ratio of viscosity in upper fluid to viscosity in lower fluid. Reynolds number etc....</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface_8cc_source.html#l00072">elastic_two_layer_interface.cc:72</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_a50bf69f24d29ddec45d9f2a196e70081"><div class="ttname"><a href="two__layer__interface_8txt.html#a50bf69f24d29ddec45d9f2a196e70081">amplitudes</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ amplitudes[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f f R_ f R_ but the motion is damped as the energy in the system is dissipated through viscous forces Eventually the interface settles down to its equilibrium as can be seen in the following time trace of the height of the interface at the left hand edge of the and we present the results in the figure below For sufficiently small</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00228">two_layer_interface.txt:228</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="two__layer__interface_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00017">two_layer_interface.txt:17</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition:</b> <a href="refineable__two__layer__interface_8cc_source.html#l00044">refineable_two_layer_interface.cc:44</a></div></div>
+<div class="ttc" id="aelastic__two__layer__interface_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="elastic__two__layer__interface_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code for two-dimensional two fluid interface problem.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface_8cc_source.html#l00810">elastic_two_layer_interface.cc:810</a></div></div>
+<div class="ttc" id="anamespaceR___html"><div class="ttname"><a href="namespaceR__.html">R_</a></div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00249">two_layer_interface.txt:249</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a8b32b93d2e546f9375ec418474107838"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Global_Physical_Variables::Ca</a></div><div class="ttdeci">double Ca</div><div class="ttdoc">Capillary number.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface_8cc_source.html#l00079">elastic_two_layer_interface.cc:79</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_a1b62ace72f1198379fb7e96cf0f1fa86"><div class="ttname"><a href="two__layer__interface_8txt.html#a1b62ace72f1198379fb7e96cf0f1fa86">respectively</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ respectively[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f f R_ f R_ but the motion is damped as the energy in the system is dissipated through viscous forces Eventually the interface settles down to its equilibrium as can be seen in the following time trace of the height of the interface at the left hand edge of the and we present the results in the figure below For sufficiently small f epsilon ll we can linearise the governing equations and obtain a dispersion relation f the derivation of which is discussed in the&lt; A HREF=&quot;../../single_layer_free_surface/html/index.html#validation&quot;&gt; previous tutorial&lt;/A &gt; The only difference in this two layer case is that the linear system which needs to be solved contains nine unknowns rather than since the two fluids have different properties The real and imaginary parts of f lambda f correspond to the growth rate and the frequency of the oscillating interface</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00236">two_layer_interface.txt:236</a></div></div>
+<div class="ttc" id="atwo__layer__interface_8txt_html_ac47e50c4b59f3e93c1f179b744363183"><div class="ttname"><a href="two__layer__interface_8txt.html#ac47e50c4b59f3e93c1f179b744363183">rho</a></div><div class="ttdeci">qquad R_ E[eqn:kinematicBC] f and the dynamic condition f[\tau_{ij}^{[2]} \, n_j^{[1]}=\tau_{ij}^{[1]} \, n_j^{[1]}+\frac{1}{Ca} \, \kappa \, n_i^{[1]}.\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@\f] The stress tensor in the lower fluid is defined as f[\tau_{ij}^{[1]}=-p^{[1]} \, \delta_{ij}+\left(\frac{\partial u^{ rho[1]}_i}{\partial x_j}+\frac{\partial u^{[1]}_j}{\partial x_i}\right),\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorlower]@\f] and that in the upper fluid is defined as f[\tau_{ij}^{[2]}=-p^{[2]} \, \delta_{ij}+R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}+\frac{\partial u^{[2]}_j}{\partial x_i}\right).\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensorupper]@\f] The initial shape of the interface is defined by f[\mathbf{R}=x_1 \, \mathbf{i}+\left[1.0+\epsilon\cos\left(2 n \pi x_1 \right)\right] \, \mathbf{j},\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@\f] where f epsilon f is the amplitude of the initial deflection and f n f is an integer&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section results Results The figure below shows a contour plot of the pressure distribution taken from&lt; A HREF=&quot;../figures/two_layer_interface.avi&quot;&gt; an animation of the flow for the parameters f f R_</div><div class="ttdef"><b>Definition:</b> <a href="two__layer__interface_8txt_source.html#l00204">two_layer_interface.txt:204</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition:</b> <a href="elastic__two__layer__interface_8cc_source.html#l00055">elastic_two_layer_interface.cc:55</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:09:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

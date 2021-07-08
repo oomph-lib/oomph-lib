@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">HelmholtzFluxFromNormalDisplacementBCElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class for elements that allow the imposition of an prescribed flux (determined from the normal displacements of an adjacent linearly elastic solid. Normal derivative for displacement potential is given by normal displacement of adjacent solid multiplies by FSI parameter (q = k^2 B/E). The element geometry is obtained from the FaceGeometry&lt;ELEMENT&gt; policy class.  
+ <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae37a7a8b5ad9850527f9285f2325aa2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ae37a7a8b5ad9850527f9285f2325aa2c">HelmholtzFluxFromNormalDisplacementBCElement</a> (FiniteElement *const &amp;bulk_el_pt, const int &amp;face_index)</td></tr>
+<tr class="memdesc:ae37a7a8b5ad9850527f9285f2325aa2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, takes the pointer to the "bulk" element and the face index identifying the face to which the element is attached.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ae37a7a8b5ad9850527f9285f2325aa2c">More...</a><br /></td></tr>
+<tr class="separator:ae37a7a8b5ad9850527f9285f2325aa2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c093c485f9df81a14729f2ef41eced1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a5c093c485f9df81a14729f2ef41eced1">HelmholtzFluxFromNormalDisplacementBCElement</a> (const <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">HelmholtzFluxFromNormalDisplacementBCElement</a> &amp;dummy)</td></tr>
+<tr class="memdesc:a5c093c485f9df81a14729f2ef41eced1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a5c093c485f9df81a14729f2ef41eced1">More...</a><br /></td></tr>
+<tr class="separator:a5c093c485f9df81a14729f2ef41eced1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5bbb5d7c84d2aa0a5d9112e6f2d914"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#aab5bbb5d7c84d2aa0a5d9112e6f2d914">fill_in_contribution_to_residuals</a> (Vector&lt; double &gt; &amp;residuals)</td></tr>
+<tr class="memdesc:aab5bbb5d7c84d2aa0a5d9112e6f2d914"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#aab5bbb5d7c84d2aa0a5d9112e6f2d914">More...</a><br /></td></tr>
+<tr class="separator:aab5bbb5d7c84d2aa0a5d9112e6f2d914"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e10f6e632c05ce464548f51c8381b43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a5e10f6e632c05ce464548f51c8381b43">fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a5e10f6e632c05ce464548f51c8381b43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residual vector and its Jacobian matrix.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a5e10f6e632c05ce464548f51c8381b43">More...</a><br /></td></tr>
+<tr class="separator:a5e10f6e632c05ce464548f51c8381b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a778e21256d01c8b51e4d9ab8e5767d5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a778e21256d01c8b51e4d9ab8e5767d5f">output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:a778e21256d01c8b51e4d9ab8e5767d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a778e21256d01c8b51e4d9ab8e5767d5f">More...</a><br /></td></tr>
+<tr class="separator:a778e21256d01c8b51e4d9ab8e5767d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec87ba2999b0c2e58447ca490b987c0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#aec87ba2999b0c2e58447ca490b987c0e">output</a> (std::ostream &amp;outfile, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:aec87ba2999b0c2e58447ca490b987c0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function: flux etc at Gauss points; n_plot is ignored.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#aec87ba2999b0c2e58447ca490b987c0e">More...</a><br /></td></tr>
+<tr class="separator:aec87ba2999b0c2e58447ca490b987c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae75706159d926cbad94fe66fa607b1fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ae75706159d926cbad94fe66fa607b1fe">output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:ae75706159d926cbad94fe66fa607b1fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ae75706159d926cbad94fe66fa607b1fe">More...</a><br /></td></tr>
+<tr class="separator:ae75706159d926cbad94fe66fa607b1fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a08931249b5071b11ec8082848cc94e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a3a08931249b5071b11ec8082848cc94e">output</a> (FILE *file_pt, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a3a08931249b5071b11ec8082848cc94e"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a3a08931249b5071b11ec8082848cc94e">More...</a><br /></td></tr>
+<tr class="separator:a3a08931249b5071b11ec8082848cc94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a91ee0e36a8c127d83269a08d6740dfb2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a91ee0e36a8c127d83269a08d6740dfb2">shape_and_test</a> (const Vector&lt; double &gt; &amp;s, Shape &amp;psi, Shape &amp;test) const</td></tr>
+<tr class="memdesc:a91ee0e36a8c127d83269a08d6740dfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a91ee0e36a8c127d83269a08d6740dfb2">More...</a><br /></td></tr>
+<tr class="separator:a91ee0e36a8c127d83269a08d6740dfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3a879cf569b317c086f07872164f9f8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ad3a879cf569b317c086f07872164f9f8">shape_and_test_at_knot</a> (const unsigned &amp;ipt, Shape &amp;psi, Shape &amp;test) const</td></tr>
+<tr class="memdesc:ad3a879cf569b317c086f07872164f9f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to compute the shape and test functions and to return <br  />
+  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#ad3a879cf569b317c086f07872164f9f8">More...</a><br /></td></tr>
+<tr class="separator:ad3a879cf569b317c086f07872164f9f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a66f653fb85249296deb66cc91647cc52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a66f653fb85249296deb66cc91647cc52">fill_in_generic_residual_contribution_helmholtz_flux_from_displacement</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, const unsigned &amp;flag)</td></tr>
+<tr class="memdesc:a66f653fb85249296deb66cc91647cc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residual vector. flag=1(or 0): do (or don't) compute the contribution to the Jacobian as well. <br  />
+  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a66f653fb85249296deb66cc91647cc52">More...</a><br /></td></tr>
+<tr class="separator:a66f653fb85249296deb66cc91647cc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a72d189d7598def4ce0ce2aecdc93bcd9"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a72d189d7598def4ce0ce2aecdc93bcd9">Dim</a></td></tr>
+<tr class="memdesc:a72d189d7598def4ce0ce2aecdc93bcd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The spatial dimension of the problem.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a72d189d7598def4ce0ce2aecdc93bcd9">More...</a><br /></td></tr>
+<tr class="separator:a72d189d7598def4ce0ce2aecdc93bcd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84343ef8842d932061e696fdbd032590"><td class="memItemLeft" align="right" valign="top">std::complex&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a84343ef8842d932061e696fdbd032590">U_index_helmholtz_from_displacement</a></td></tr>
+<tr class="memdesc:a84343ef8842d932061e696fdbd032590"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index at which the unknown is stored at the nodes.  <a href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html#a84343ef8842d932061e696fdbd032590">More...</a><br /></td></tr>
+<tr class="separator:a84343ef8842d932061e696fdbd032590"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class HELMHOLTZ_BULK_ELEMENT, class ELASTICITY_BULK_ELEMENT&gt;<br />
+class oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;</h3>
+
+<p>A class for elements that allow the imposition of an prescribed flux (determined from the normal displacements of an adjacent linearly elastic solid. Normal derivative for displacement potential is given by normal displacement of adjacent solid multiplies by FSI parameter (q = k^2 B/E). The element geometry is obtained from the FaceGeometry&lt;ELEMENT&gt; policy class. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00452">452</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae37a7a8b5ad9850527f9285f2325aa2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae37a7a8b5ad9850527f9285f2325aa2c">&#9670;&nbsp;</a></span>HelmholtzFluxFromNormalDisplacementBCElement() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::<a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">HelmholtzFluxFromNormalDisplacementBCElement</a> </td>
+          <td>(</td>
+          <td class="paramtype">FiniteElement *const &amp;&#160;</td>
+          <td class="paramname"><em>bulk_el_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>face_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor, takes the pointer to the "bulk" element and the face index identifying the face to which the element is attached. </p>
+<p>Constructor, takes the pointer to the "bulk" element, and the face index that identifies the face of the bulk element to which this face element is to be attached. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00665">665</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00643">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::Dim</a>, and <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00646">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::U_index_helmholtz_from_displacement</a>.</p>
+
+</div>
+</div>
+<a id="a5c093c485f9df81a14729f2ef41eced1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c093c485f9df81a14729f2ef41eced1">&#9670;&nbsp;</a></span>HelmholtzFluxFromNormalDisplacementBCElement() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::<a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">HelmholtzFluxFromNormalDisplacementBCElement</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00467">467</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5e10f6e632c05ce464548f51c8381b43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e10f6e632c05ce464548f51c8381b43">&#9670;&nbsp;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add the element's contribution to its residual vector and its Jacobian matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00496">496</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00832">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_generic_residual_contribution_helmholtz_flux_from_displacement()</a>.</p>
+
+</div>
+</div>
+<a id="aab5bbb5d7c84d2aa0a5d9112e6f2d914"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab5bbb5d7c84d2aa0a5d9112e6f2d914">&#9670;&nbsp;</a></span>fill_in_contribution_to_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+<p>Add the element's contribution to its residual vector </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00485">485</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00832">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_generic_residual_contribution_helmholtz_flux_from_displacement()</a>.</p>
+
+</div>
+</div>
+<a id="a66f653fb85249296deb66cc91647cc52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66f653fb85249296deb66cc91647cc52">&#9670;&nbsp;</a></span>fill_in_generic_residual_contribution_helmholtz_flux_from_displacement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_generic_residual_contribution_helmholtz_flux_from_displacement </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>flag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add the element's contribution to its residual vector. flag=1(or 0): do (or don't) compute the contribution to the Jacobian as well. <br  />
+ </p>
+<p>Helper function to compute the element's residual vector and the Jacobian matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00832">832</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00496">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00485">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
+
+</div>
+</div>
+<a id="ae75706159d926cbad94fe66fa607b1fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae75706159d926cbad94fe66fa607b1fe">&#9670;&nbsp;</a></span>output() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00579">579</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="a3a08931249b5071b11ec8082848cc94e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a08931249b5071b11ec8082848cc94e">&#9670;&nbsp;</a></span>output() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00583">583</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="a778e21256d01c8b51e4d9ab8e5767d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a778e21256d01c8b51e4d9ab8e5767d5f">&#9670;&nbsp;</a></span>output() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00508">508</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="aec87ba2999b0c2e58447ca490b987c0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec87ba2999b0c2e58447ca490b987c0e">&#9670;&nbsp;</a></span>output() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function: flux etc at Gauss points; n_plot is ignored. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00516">516</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00643">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::Dim</a>.</p>
+
+</div>
+</div>
+<a id="a91ee0e36a8c127d83269a08d6740dfb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91ee0e36a8c127d83269a08d6740dfb2">&#9670;&nbsp;</a></span>shape_and_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::shape_and_test </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shape &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shape &amp;&#160;</td>
+          <td class="paramname"><em>test</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00593">593</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="ad3a879cf569b317c086f07872164f9f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a879cf569b317c086f07872164f9f8">&#9670;&nbsp;</a></span>shape_and_test_at_knot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::shape_and_test_at_knot </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shape &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shape &amp;&#160;</td>
+          <td class="paramname"><em>test</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to compute the shape and test functions and to return <br  />
+ </p>
+<p>the Jacobian of mapping between local and global (Eulerian) coordinates </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00613">613</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a72d189d7598def4ce0ce2aecdc93bcd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72d189d7598def4ce0ce2aecdc93bcd9">&#9670;&nbsp;</a></span>Dim</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::Dim</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The spatial dimension of the problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00643">643</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00665">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::HelmholtzFluxFromNormalDisplacementBCElement()</a>, and <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00516">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::output()</a>.</p>
+
+</div>
+</div>
+<a id="a84343ef8842d932061e696fdbd032590"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84343ef8842d932061e696fdbd032590">&#9670;&nbsp;</a></span>U_index_helmholtz_from_displacement</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class HELMHOLTZ_BULK_ELEMENT , class ELASTICITY_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt;unsigned&gt; <a class="el" href="classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement.html">oomph::HelmholtzFluxFromNormalDisplacementBCElement</a>&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::U_index_helmholtz_from_displacement</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The index at which the unknown is stored at the nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00646">646</a> of file <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00665">oomph::HelmholtzFluxFromNormalDisplacementBCElement&lt; HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT &gt;::HelmholtzFluxFromNormalDisplacementBCElement()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">helmholtz_time_harmonic_linear_elasticity_interaction.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:09
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

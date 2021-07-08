@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::SpineAxisymmetricFluidInterfaceElement&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1SpineAxisymmetricFluidInterfaceElement.html">SpineAxisymmetricFluidInterfaceElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1SpineAxisymmetricFluidInterfaceElement-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::SpineAxisymmetricFluidInterfaceElement&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::SpineAxisymmetricFluidInterfaceElement&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1SpineAxisymmetricFluidInterfaceElement.png" usemap="#oomph::SpineAxisymmetricFluidInterfaceElement_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::SpineAxisymmetricFluidInterfaceElement_3C_20ELEMENT_20_3E_map" name="oomph::SpineAxisymmetricFluidInterfaceElement_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1SpineUpdateFluidInterfaceElement.html" alt="oomph::SpineUpdateFluidInterfaceElement&lt; FluidInterfaceElement, AxisymmetricDerivatives, ELEMENT &gt;" shape="rect" coords="618,112,1226,136"/>
+<area href="classoomph_1_1FluidInterfaceElement.html" alt="oomph::FluidInterfaceElement" shape="rect" coords="618,56,1226,80"/>
+<area href="classoomph_1_1AxisymmetricDerivatives.html" alt="oomph::AxisymmetricDerivatives" shape="rect" coords="1236,56,1844,80"/>
+<area href="classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement.html" alt="oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement&lt; ELEMENT &gt;" shape="rect" coords="618,224,1226,248"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a66aaa2581711338cf66660d97663d7cb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineAxisymmetricFluidInterfaceElement.html#a66aaa2581711338cf66660d97663d7cb">SpineAxisymmetricFluidInterfaceElement</a> (FiniteElement *const &amp;element_pt, const int &amp;face_index)</td></tr>
+<tr class="separator:a66aaa2581711338cf66660d97663d7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html">oomph::SpineUpdateFluidInterfaceElement&lt; FluidInterfaceElement, AxisymmetricDerivatives, ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a2cc44705997f9fb44abf56ddb5f0cde0 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a2cc44705997f9fb44abf56ddb5f0cde0">SpineUpdateFluidInterfaceElement</a> (FiniteElement *const &amp;element_pt, const int &amp;face_index, const unsigned &amp;id=0)</td></tr>
+<tr class="memdesc:a2cc44705997f9fb44abf56ddb5f0cde0 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, the arguments are a pointer to the "bulk" element and the index of the face to be created.  <a href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a2cc44705997f9fb44abf56ddb5f0cde0">More...</a><br /></td></tr>
+<tr class="separator:a2cc44705997f9fb44abf56ddb5f0cde0 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a457ca93343689e34535054cf829a9499 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a457ca93343689e34535054cf829a9499">fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a457ca93343689e34535054cf829a9499 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contribution to the residuals and the jacobian.  <a href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a457ca93343689e34535054cf829a9499">More...</a><br /></td></tr>
+<tr class="separator:a457ca93343689e34535054cf829a9499 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3958845051cafecd8e73745fc04c7a78 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a3958845051cafecd8e73745fc04c7a78">add_additional_residual_contributions_interface</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, const unsigned &amp;flag, const Shape &amp;psif, const DShape &amp;dpsifds, const DShape &amp;dpsifdS, const DShape &amp;dpsifdS_div, const Vector&lt; double &gt; &amp;s, const Vector&lt; double &gt; &amp;interpolated_x, const Vector&lt; double &gt; &amp;interpolated_n, const double &amp;W, const double &amp;J)</td></tr>
+<tr class="memdesc:a3958845051cafecd8e73745fc04c7a78 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to calculate the additional contributions These are those filled in by the particular equations.  <a href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a3958845051cafecd8e73745fc04c7a78">More...</a><br /></td></tr>
+<tr class="separator:a3958845051cafecd8e73745fc04c7a78 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2875e70d1f8eacc229ea3d4318f7de4 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#ae2875e70d1f8eacc229ea3d4318f7de4">output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:ae2875e70d1f8eacc229ea3d4318f7de4 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the output function.  <a href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#ae2875e70d1f8eacc229ea3d4318f7de4">More...</a><br /></td></tr>
+<tr class="separator:ae2875e70d1f8eacc229ea3d4318f7de4 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c9c00def11f68f48db0f46004f1e6fe inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a3c9c00def11f68f48db0f46004f1e6fe">output</a> (std::ostream &amp;outfile, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a3c9c00def11f68f48db0f46004f1e6fe inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the element.  <a href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a3c9c00def11f68f48db0f46004f1e6fe">More...</a><br /></td></tr>
+<tr class="separator:a3c9c00def11f68f48db0f46004f1e6fe inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a963fdd8b603e563da9fb966e0c429457 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a963fdd8b603e563da9fb966e0c429457">output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:a963fdd8b603e563da9fb966e0c429457 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the C-style output function.  <a href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a963fdd8b603e563da9fb966e0c429457">More...</a><br /></td></tr>
+<tr class="separator:a963fdd8b603e563da9fb966e0c429457 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af876d90d19b6faa253260193ded3f175 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#af876d90d19b6faa253260193ded3f175">output</a> (FILE *file_pt, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:af876d90d19b6faa253260193ded3f175 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style Output function.  <a href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#af876d90d19b6faa253260193ded3f175">More...</a><br /></td></tr>
+<tr class="separator:af876d90d19b6faa253260193ded3f175 inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e464c689a19ce2d6fbff2c167dcc41a inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classoomph_1_1FluidInterfaceBoundingElement.html">FluidInterfaceBoundingElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a8e464c689a19ce2d6fbff2c167dcc41a">make_bounding_element</a> (const int &amp;face_index)</td></tr>
+<tr class="memdesc:a8e464c689a19ce2d6fbff2c167dcc41a inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an "bounding" element of the type specified by the BoundingElementType policy class Here, this allows the application of a contact angle boundary condition on the the specified face.  <a href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a8e464c689a19ce2d6fbff2c167dcc41a">More...</a><br /></td></tr>
+<tr class="separator:a8e464c689a19ce2d6fbff2c167dcc41a inherit pub_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1FluidInterfaceElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1FluidInterfaceElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1FluidInterfaceElement.html">oomph::FluidInterfaceElement</a></td></tr>
+<tr class="memitem:a4bd4a44ee08780fb8ba1be83c4353dd4 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a4bd4a44ee08780fb8ba1be83c4353dd4">FluidInterfaceElement</a> ()</td></tr>
+<tr class="memdesc:a4bd4a44ee08780fb8ba1be83c4353dd4 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, set the default values of the booleans and pointers (null)  <a href="classoomph_1_1FluidInterfaceElement.html#a4bd4a44ee08780fb8ba1be83c4353dd4">More...</a><br /></td></tr>
+<tr class="separator:a4bd4a44ee08780fb8ba1be83c4353dd4 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e5c3ca1eba5d4dd44c0eab9be252c2a inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a7e5c3ca1eba5d4dd44c0eab9be252c2a">sigma</a> (const Vector&lt; double &gt; &amp;s_local)</td></tr>
+<tr class="memdesc:a7e5c3ca1eba5d4dd44c0eab9be252c2a inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function that specifies the non-dimensional surface tension as a function of local position within the element. The default behaviour is a constant surface tension of value 1.0 This function can be overloaded in more specialised elements to incorporate variations in surface tension.  <a href="classoomph_1_1FluidInterfaceElement.html#a7e5c3ca1eba5d4dd44c0eab9be252c2a">More...</a><br /></td></tr>
+<tr class="separator:a7e5c3ca1eba5d4dd44c0eab9be252c2a inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f66ffd5d9a8b9b6bd8cd54e90ce2d61 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a3f66ffd5d9a8b9b6bd8cd54e90ce2d61">fill_in_contribution_to_residuals</a> (Vector&lt; double &gt; &amp;residuals)</td></tr>
+<tr class="memdesc:a3f66ffd5d9a8b9b6bd8cd54e90ce2d61 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the residuals by calling the generic residual contribution.  <a href="classoomph_1_1FluidInterfaceElement.html#a3f66ffd5d9a8b9b6bd8cd54e90ce2d61">More...</a><br /></td></tr>
+<tr class="separator:a3f66ffd5d9a8b9b6bd8cd54e90ce2d61 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcb18ff13b322136dd2346a6b40ecabc inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#abcb18ff13b322136dd2346a6b40ecabc">ca</a> () const</td></tr>
+<tr class="memdesc:abcb18ff13b322136dd2346a6b40ecabc inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The value of the Capillary number.  <a href="classoomph_1_1FluidInterfaceElement.html#abcb18ff13b322136dd2346a6b40ecabc">More...</a><br /></td></tr>
+<tr class="separator:abcb18ff13b322136dd2346a6b40ecabc inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a950f0202d6dd15fab2f0c03927edc9 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a1a950f0202d6dd15fab2f0c03927edc9">ca_pt</a> ()</td></tr>
+<tr class="memdesc:a1a950f0202d6dd15fab2f0c03927edc9 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the Capillary number.  <a href="classoomph_1_1FluidInterfaceElement.html#a1a950f0202d6dd15fab2f0c03927edc9">More...</a><br /></td></tr>
+<tr class="separator:a1a950f0202d6dd15fab2f0c03927edc9 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c55c0e3cff597363ecb9ab0869c0015 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a0c55c0e3cff597363ecb9ab0869c0015">st</a> () const</td></tr>
+<tr class="memdesc:a0c55c0e3cff597363ecb9ab0869c0015 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The value of the Strouhal number.  <a href="classoomph_1_1FluidInterfaceElement.html#a0c55c0e3cff597363ecb9ab0869c0015">More...</a><br /></td></tr>
+<tr class="separator:a0c55c0e3cff597363ecb9ab0869c0015 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fa462bb0ff807cf655ba02b35c1ccb4 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a3fa462bb0ff807cf655ba02b35c1ccb4">st_pt</a> ()</td></tr>
+<tr class="memdesc:a3fa462bb0ff807cf655ba02b35c1ccb4 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pointer to the Strouhal number.  <a href="classoomph_1_1FluidInterfaceElement.html#a3fa462bb0ff807cf655ba02b35c1ccb4">More...</a><br /></td></tr>
+<tr class="separator:a3fa462bb0ff807cf655ba02b35c1ccb4 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50a509413ea7f2a481678837846dd476 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a50a509413ea7f2a481678837846dd476">u</a> (const unsigned &amp;j, const unsigned &amp;i)</td></tr>
+<tr class="memdesc:a50a509413ea7f2a481678837846dd476 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the i-th velocity component at local node j.  <a href="classoomph_1_1FluidInterfaceElement.html#a50a509413ea7f2a481678837846dd476">More...</a><br /></td></tr>
+<tr class="separator:a50a509413ea7f2a481678837846dd476 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f807a6456da7785b12e45a4c17fb969 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a8f807a6456da7785b12e45a4c17fb969">interpolated_u</a> (const Vector&lt; double &gt; &amp;s, const unsigned &amp;i)</td></tr>
+<tr class="memdesc:a8f807a6456da7785b12e45a4c17fb969 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the i-th velocity component at the local coordinate s.  <a href="classoomph_1_1FluidInterfaceElement.html#a8f807a6456da7785b12e45a4c17fb969">More...</a><br /></td></tr>
+<tr class="separator:a8f807a6456da7785b12e45a4c17fb969 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c0a2a21afce911c301c75febd3ba44c inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a7c0a2a21afce911c301c75febd3ba44c">pext</a> () const</td></tr>
+<tr class="memdesc:a7c0a2a21afce911c301c75febd3ba44c inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the external pressure.  <a href="classoomph_1_1FluidInterfaceElement.html#a7c0a2a21afce911c301c75febd3ba44c">More...</a><br /></td></tr>
+<tr class="separator:a7c0a2a21afce911c301c75febd3ba44c inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7230ddea36eb36938d64583e5ee4b15f inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a7230ddea36eb36938d64583e5ee4b15f">set_external_pressure_data</a> (Data *external_pressure_data_pt)</td></tr>
+<tr class="memdesc:a7230ddea36eb36938d64583e5ee4b15f inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Data that contains the single pressure value that specifies the "external pressure" for the interface/free-surface. Setting this only makes sense if the interface is, in fact, a free surface (well, an interface to another inviscid fluid if you want to be picky). <br  />
+  <a href="classoomph_1_1FluidInterfaceElement.html#a7230ddea36eb36938d64583e5ee4b15f">More...</a><br /></td></tr>
+<tr class="separator:a7230ddea36eb36938d64583e5ee4b15f inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87ee1f3227c456a4c30df77c4d0bad6b inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a87ee1f3227c456a4c30df77c4d0bad6b">set_external_pressure_data</a> (Data *external_pressure_data_pt, const unsigned &amp;index_of_external_pressure_value)</td></tr>
+<tr class="memdesc:a87ee1f3227c456a4c30df77c4d0bad6b inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Data that contains the pressure value that specifies the "external pressure" for the interface/free-surface. Setting this only makes sense if the interface is, in fact, a free surface (well, an interface to another inviscid fluid if you want to be picky). Second argument specifies the index of the pressure value within the Data object.  <a href="classoomph_1_1FluidInterfaceElement.html#a87ee1f3227c456a4c30df77c4d0bad6b">More...</a><br /></td></tr>
+<tr class="separator:a87ee1f3227c456a4c30df77c4d0bad6b inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba83fbd0679ffca4ef6aa32f7aa5d179 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#aba83fbd0679ffca4ef6aa32f7aa5d179">output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:aba83fbd0679ffca4ef6aa32f7aa5d179 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the output function.  <a href="classoomph_1_1FluidInterfaceElement.html#aba83fbd0679ffca4ef6aa32f7aa5d179">More...</a><br /></td></tr>
+<tr class="separator:aba83fbd0679ffca4ef6aa32f7aa5d179 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a213b1a40132a9605ee8bd31c88b225e0 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a213b1a40132a9605ee8bd31c88b225e0">output</a> (std::ostream &amp;outfile, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a213b1a40132a9605ee8bd31c88b225e0 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function.  <a href="classoomph_1_1FluidInterfaceElement.html#a213b1a40132a9605ee8bd31c88b225e0">More...</a><br /></td></tr>
+<tr class="separator:a213b1a40132a9605ee8bd31c88b225e0 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad39bb9862c7f76e07d5ac006a1209cf9 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#ad39bb9862c7f76e07d5ac006a1209cf9">output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:ad39bb9862c7f76e07d5ac006a1209cf9 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the C-style output function.  <a href="classoomph_1_1FluidInterfaceElement.html#ad39bb9862c7f76e07d5ac006a1209cf9">More...</a><br /></td></tr>
+<tr class="separator:ad39bb9862c7f76e07d5ac006a1209cf9 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57efd66ae07fab9e0cf98ac5f8eeb000 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a57efd66ae07fab9e0cf98ac5f8eeb000">output</a> (FILE *file_pt, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a57efd66ae07fab9e0cf98ac5f8eeb000 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style Output function.  <a href="classoomph_1_1FluidInterfaceElement.html#a57efd66ae07fab9e0cf98ac5f8eeb000">More...</a><br /></td></tr>
+<tr class="separator:a57efd66ae07fab9e0cf98ac5f8eeb000 inherit pub_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1AxisymmetricDerivatives"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1AxisymmetricDerivatives')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1AxisymmetricDerivatives.html">oomph::AxisymmetricDerivatives</a></td></tr>
+<tr class="memitem:a91b259ef45c7563b05bf79de4b0fe4bf inherit pub_methods_classoomph_1_1AxisymmetricDerivatives"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricDerivatives.html#a91b259ef45c7563b05bf79de4b0fe4bf">AxisymmetricDerivatives</a> ()</td></tr>
+<tr class="separator:a91b259ef45c7563b05bf79de4b0fe4bf inherit pub_methods_classoomph_1_1AxisymmetricDerivatives"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1SpineUpdateFluidInterfaceElement')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html">oomph::SpineUpdateFluidInterfaceElement&lt; FluidInterfaceElement, AxisymmetricDerivatives, ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a75debcd348674d5ea58bfefc0e72b737 inherit pro_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a75debcd348674d5ea58bfefc0e72b737">compute_surface_derivatives</a> (const Shape &amp;psi, const DShape &amp;dpsids, const DenseMatrix&lt; double &gt; &amp;interpolated_t, const Vector&lt; double &gt; &amp;interpolated_x, DShape &amp;surface_gradient, DShape &amp;surface_divergence)</td></tr>
+<tr class="memdesc:a75debcd348674d5ea58bfefc0e72b737 inherit pro_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the specific surface derivative calculations by calling the appropriate class function.  <a href="classoomph_1_1SpineUpdateFluidInterfaceElement.html#a75debcd348674d5ea58bfefc0e72b737">More...</a><br /></td></tr>
+<tr class="separator:a75debcd348674d5ea58bfefc0e72b737 inherit pro_methods_classoomph_1_1SpineUpdateFluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1FluidInterfaceElement"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1FluidInterfaceElement')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1FluidInterfaceElement.html">oomph::FluidInterfaceElement</a></td></tr>
+<tr class="memitem:abd4aece98dee8173c6d796e23ccf1e03 inherit pro_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#abd4aece98dee8173c6d796e23ccf1e03">pext_local_eqn</a> ()</td></tr>
+<tr class="memdesc:abd4aece98dee8173c6d796e23ccf1e03 inherit pro_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the local equation number that corresponds to the external pressure.  <a href="classoomph_1_1FluidInterfaceElement.html#abd4aece98dee8173c6d796e23ccf1e03">More...</a><br /></td></tr>
+<tr class="separator:abd4aece98dee8173c6d796e23ccf1e03 inherit pro_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4ea3a18a513bed3725fdf413cf18874 inherit pro_methods_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#ae4ea3a18a513bed3725fdf413cf18874">fill_in_generic_residual_contribution_interface</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, unsigned flag)</td></tr>
+<tr class="memdesc:ae4ea3a18a513bed3725fdf413cf18874 inherit pro_methods_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to calculate the residuals and (if flag==1) the Jacobian of the equations. This is implemented generically using the surface divergence information that is overloaded in each element i.e. axisymmetric, two- or three-dimensional.  <a href="classoomph_1_1FluidInterfaceElement.html#ae4ea3a18a513bed3725fdf413cf18874">More...</a><br /></td></tr>
+<tr class="separator:ae4ea3a18a513bed3725fdf413cf18874 inherit pro_methods_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1AxisymmetricDerivatives"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1AxisymmetricDerivatives')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1AxisymmetricDerivatives.html">oomph::AxisymmetricDerivatives</a></td></tr>
+<tr class="memitem:a306ea6b57d09d57e87e8d74a13c2f828 inherit pro_methods_classoomph_1_1AxisymmetricDerivatives"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricDerivatives.html#a306ea6b57d09d57e87e8d74a13c2f828">compute_surface_derivatives</a> (const Shape &amp;psi, const DShape &amp;dpsids, const DenseMatrix&lt; double &gt; &amp;interpolated_t, const Vector&lt; double &gt; &amp;interpolated_x, DShape &amp;surface_gradient, DShape &amp;surface_divergence)</td></tr>
+<tr class="memdesc:a306ea6b57d09d57e87e8d74a13c2f828 inherit pro_methods_classoomph_1_1AxisymmetricDerivatives"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the specific surface derivative calculations.  <a href="classoomph_1_1AxisymmetricDerivatives.html#a306ea6b57d09d57e87e8d74a13c2f828">More...</a><br /></td></tr>
+<tr class="separator:a306ea6b57d09d57e87e8d74a13c2f828 inherit pro_methods_classoomph_1_1AxisymmetricDerivatives"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1FluidInterfaceElement"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1FluidInterfaceElement')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1FluidInterfaceElement.html">oomph::FluidInterfaceElement</a></td></tr>
+<tr class="memitem:a6a818d9999c68641223edcad217a8c3f inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a6a818d9999c68641223edcad217a8c3f">U_index_interface</a></td></tr>
+<tr class="memdesc:a6a818d9999c68641223edcad217a8c3f inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nodal index at which the i-th velocity component is stored.  <a href="classoomph_1_1FluidInterfaceElement.html#a6a818d9999c68641223edcad217a8c3f">More...</a><br /></td></tr>
+<tr class="separator:a6a818d9999c68641223edcad217a8c3f inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d4c5b3e08177f5695fa9e76bf08b570 inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a2d4c5b3e08177f5695fa9e76bf08b570">External_data_number_of_external_pressure</a></td></tr>
+<tr class="memdesc:a2d4c5b3e08177f5695fa9e76bf08b570 inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Data that contains the external pressure is stored as external Data for the element. Which external Data item is it? (int so it can be initialised to -1, indicating that external pressure hasn't been set).  <a href="classoomph_1_1FluidInterfaceElement.html#a2d4c5b3e08177f5695fa9e76bf08b570">More...</a><br /></td></tr>
+<tr class="separator:a2d4c5b3e08177f5695fa9e76bf08b570 inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9177eb6e96e5ac13fe092596bc104910 inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a9177eb6e96e5ac13fe092596bc104910">Pext_data_pt</a></td></tr>
+<tr class="memdesc:a9177eb6e96e5ac13fe092596bc104910 inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the Data item that stores the external pressure.  <a href="classoomph_1_1FluidInterfaceElement.html#a9177eb6e96e5ac13fe092596bc104910">More...</a><br /></td></tr>
+<tr class="separator:a9177eb6e96e5ac13fe092596bc104910 inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a49c97d42ce05d1876626e5918bb8eb inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FluidInterfaceElement.html#a2a49c97d42ce05d1876626e5918bb8eb">Index_of_external_pressure_value</a></td></tr>
+<tr class="memdesc:a2a49c97d42ce05d1876626e5918bb8eb inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which of the values in Pext_data_pt stores the external pressure.  <a href="classoomph_1_1FluidInterfaceElement.html#a2a49c97d42ce05d1876626e5918bb8eb">More...</a><br /></td></tr>
+<tr class="separator:a2a49c97d42ce05d1876626e5918bb8eb inherit pro_attribs_classoomph_1_1FluidInterfaceElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class oomph::SpineAxisymmetricFluidInterfaceElement&lt; ELEMENT &gt;</h3>
+
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00521">521</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a66aaa2581711338cf66660d97663d7cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66aaa2581711338cf66660d97663d7cb">&#9670;&nbsp;</a></span>SpineAxisymmetricFluidInterfaceElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SpineAxisymmetricFluidInterfaceElement.html">oomph::SpineAxisymmetricFluidInterfaceElement</a>&lt; ELEMENT &gt;::<a class="el" href="classoomph_1_1SpineAxisymmetricFluidInterfaceElement.html">SpineAxisymmetricFluidInterfaceElement</a> </td>
+          <td>(</td>
+          <td class="paramtype">FiniteElement *const &amp;&#160;</td>
+          <td class="paramname"><em>element_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>face_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00527">527</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:35
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

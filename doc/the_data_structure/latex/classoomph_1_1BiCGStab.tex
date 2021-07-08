@@ -1,0 +1,417 @@
+\hypertarget{classoomph_1_1BiCGStab}{}\doxysection{oomph\+::Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+IX $>$ Class Template Reference}
+\label{classoomph_1_1BiCGStab}\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+
+
+The conjugate gradient method.  
+
+
+
+
+{\ttfamily \#include $<$iterative\+\_\+linear\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+IX $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1BiCGStab}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1BiCGStab_ae2ed7dfe942fb9947a14ddb0274a0bb5}{Bi\+C\+G\+Stab}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1BiCGStab_a79d6bd465113ebb2000d44bd08fcadc7}{$\sim$\+Bi\+C\+G\+Stab}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (cleanup storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BiCGStab_a8b97ca7e38f6f39c47b3dcb2afc87a48}{Bi\+C\+G\+Stab}} (const \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiCGStab_a3b99e41f431ac8775c1eafe9a67edf54}{operator=}} (const \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiCGStab_a7ed3198928966fddf84e9f908b3361d4}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Overload disable resolve so that it cleans up memory too. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiCGStab_a56e2df052fee2e26ffec644ad9161864}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiCGStab_ae37a1ed41c1c12bfba516e27254ed03c}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiCGStab_a994915fcd5d99a58472559fdb57807c4}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiCGStab_a3694a08628f3567caa5f20bb5dcfe677}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Re-\/solve the system defined by the last assembled Jacobian and the rhs vector specified here. Solution is returned in the vector result. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1BiCGStab_a2550adba752e02423254dc0a6c592f7f}{iterations}} () const
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1BiCGStab_a6e6e49eb139bbc2aedfcb6cd075de3db}{solve\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
+\begin{DoxyCompactList}\small\item\em General interface to solve function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiCGStab_a6c97b794a4bec6a22df28f5f160577be}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1BiCGStab_a6f7e515c8dd64b1f3cc65e021abcbdca}{Iterations}}
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
+M\+A\+T\+R\+IX $\ast$ \mbox{\hyperlink{classoomph_1_1BiCGStab_a618f4b5ef6a92b4a7163986f40b62f18}{Matrix\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to matrix. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1BiCGStab_aa50a58f59ddf74c0c902dd7769b11498}{Resolving}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setup of matrix and preconditioner. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1BiCGStab_a4314b4e4044e111412b5c0150250829f}{Matrix\+\_\+can\+\_\+be\+\_\+deleted}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be deleted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename M\+A\+T\+R\+IX$>$\newline
+class oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$}
+
+The conjugate gradient method. 
+
+Definition at line 396 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_ae2ed7dfe942fb9947a14ddb0274a0bb5}\label{classoomph_1_1BiCGStab_ae2ed7dfe942fb9947a14ddb0274a0bb5}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!BiCGStab@{BiCGStab}}
+\index{BiCGStab@{BiCGStab}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{BiCGStab()}{BiCGStab()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 402 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a79d6bd465113ebb2000d44bd08fcadc7}\label{classoomph_1_1BiCGStab_a79d6bd465113ebb2000d44bd08fcadc7}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!````~BiCGStab@{$\sim$BiCGStab}}
+\index{````~BiCGStab@{$\sim$BiCGStab}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$BiCGStab()}{~BiCGStab()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor (cleanup storage) 
+
+
+
+Definition at line 408 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a8b97ca7e38f6f39c47b3dcb2afc87a48}\label{classoomph_1_1BiCGStab_a8b97ca7e38f6f39c47b3dcb2afc87a48}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!BiCGStab@{BiCGStab}}
+\index{BiCGStab@{BiCGStab}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{BiCGStab()}{BiCGStab()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+\mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 414 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a6c97b794a4bec6a22df28f5f160577be}\label{classoomph_1_1BiCGStab_a6c97b794a4bec6a22df28f5f160577be}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 505 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted, and oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+pt.
+
+
+
+Referenced by oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::disable\+\_\+resolve(), and oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::$\sim$\+Bi\+C\+G\+Stab().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a7ed3198928966fddf84e9f908b3361d4}\label{classoomph_1_1BiCGStab_a7ed3198928966fddf84e9f908b3361d4}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!disable\_resolve@{disable\_resolve}}
+\index{disable\_resolve@{disable\_resolve}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_resolve()}{disable\_resolve()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload disable resolve so that it cleans up memory too. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 428 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a2550adba752e02423254dc0a6c592f7f}\label{classoomph_1_1BiCGStab_a2550adba752e02423254dc0a6c592f7f}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46}{oomph\+::\+Iterative\+Linear\+Solver}}.
+
+
+
+Definition at line 491 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::\+Iterations.
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a3b99e41f431ac8775c1eafe9a67edf54}\label{classoomph_1_1BiCGStab_a3b99e41f431ac8775c1eafe9a67edf54}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 420 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a3694a08628f3567caa5f20bb5dcfe677}\label{classoomph_1_1BiCGStab_a3694a08628f3567caa5f20bb5dcfe677}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!resolve@{resolve}}
+\index{resolve@{resolve}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::resolve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Re-\/solve the system defined by the last assembled Jacobian and the rhs vector specified here. Solution is returned in the vector result. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 65 of file iterative\+\_\+linear\+\_\+solver.\+cc.
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_ae37a1ed41c1c12bfba516e27254ed03c}\label{classoomph_1_1BiCGStab_ae37a1ed41c1c12bfba516e27254ed03c}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 441 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted, oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::\+Matrix\+\_\+pt, oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::\+Resolving, and oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a994915fcd5d99a58472559fdb57807c4}\label{classoomph_1_1BiCGStab_a994915fcd5d99a58472559fdb57807c4}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 476 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+References oomph\+::\+Linear\+Solver\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a56e2df052fee2e26ffec644ad9161864}\label{classoomph_1_1BiCGStab_a56e2df052fee2e26ffec644ad9161864}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. 
+
+Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line 96 of file iterative\+\_\+linear\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::oomph\+\_\+info, oomph\+::\+Double\+Vector\+::redistribute(), and oomph\+::\+Timing\+Helpers\+::timer().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a6e6e49eb139bbc2aedfcb6cd075de3db}\label{classoomph_1_1BiCGStab_a6e6e49eb139bbc2aedfcb6cd075de3db}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!solve\_helper@{solve\_helper}}
+\index{solve\_helper@{solve\_helper}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve\_helper()}{solve\_helper()}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::solve\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+General interface to solve function. 
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. Algorithm and variable names based on \char`\"{}\+Numerical Linear Algebra
+for High-\/\+Performance Computers\char`\"{} by Dongarra, Duff, Sorensen \& van der Vorst. S\+I\+AM (1998), page 185. 
+
+Definition at line 181 of file iterative\+\_\+linear\+\_\+solver.\+cc.
+
+
+
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Double\+Vector\+::dot(), i, oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::\+Max\+\_\+iter, oomph\+::\+Double\+Matrix\+Base\+::multiply(), oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+Double\+Vector\+::norm(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::oomph\+\_\+info, s, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, and oomph\+::\+Timing\+Helpers\+::timer().
+
+
+
+Referenced by oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a6f7e515c8dd64b1f3cc65e021abcbdca}\label{classoomph_1_1BiCGStab_a6f7e515c8dd64b1f3cc65e021abcbdca}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!Iterations@{Iterations}}
+\index{Iterations@{Iterations}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::Iterations\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Definition at line 515 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+Referenced by oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::iterations().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a4314b4e4044e111412b5c0150250829f}\label{classoomph_1_1BiCGStab_a4314b4e4044e111412b5c0150250829f}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}}
+\index{Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_can\_be\_deleted}{Matrix\_can\_be\_deleted}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+can\+\_\+be\+\_\+deleted\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be deleted. 
+
+
+
+Definition at line 526 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+Referenced by oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_a618f4b5ef6a92b4a7163986f40b62f18}\label{classoomph_1_1BiCGStab_a618f4b5ef6a92b4a7163986f40b62f18}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!Matrix\_pt@{Matrix\_pt}}
+\index{Matrix\_pt@{Matrix\_pt}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_pt}{Matrix\_pt}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+M\+A\+T\+R\+IX$\ast$ \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::Matrix\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to matrix. 
+
+
+
+Definition at line 518 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+Referenced by oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
+
+\mbox{\Hypertarget{classoomph_1_1BiCGStab_aa50a58f59ddf74c0c902dd7769b11498}\label{classoomph_1_1BiCGStab_aa50a58f59ddf74c0c902dd7769b11498}} 
+\index{oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}!Resolving@{Resolving}}
+\index{Resolving@{Resolving}!oomph::BiCGStab$<$ MATRIX $>$@{oomph::BiCGStab$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Resolving}{Resolving}}
+{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+C\+G\+Stab}}$<$ M\+A\+T\+R\+IX $>$\+::Resolving\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setup of matrix and preconditioner. 
+
+
+
+Definition at line 522 of file iterative\+\_\+linear\+\_\+solver.\+h.
+
+
+
+Referenced by oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{iterative__linear__solver_8h}{iterative\+\_\+linear\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{iterative__linear__solver_8cc}{iterative\+\_\+linear\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

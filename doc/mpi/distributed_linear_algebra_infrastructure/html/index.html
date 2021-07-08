@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Distributed Linear Algebra Infrastructure</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Distributed Linear Algebra Infrastructure </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we provide an overview of <code>oomph-lib's</code> distributed linear algebra framework, discussing its design and key functionality. The aim of this framework is to facilitate the parallel (distributed) execution of linear algebra type operations with little (or no) user intervention. This requires all linear algebra data and computations to be distributed over all available processes.</p>
+<p>We begin by defining the <code>OomphCommunicator</code>, a class that is fundamental <br  />
+ to distributed computing in <code>oomph-lib</code>. Next we discuss the class <code>LinearAlgebraDistribution</code> which specifies the distribution of the data and computations over the available processes. In Sections <a class="el" href="index.html#double_vector">DoubleVector</a>, <a class="el" href="index.html#cr_double_matrix">CRDoubleMatrix</a> and <a class="el" href="index.html#distributed_linear_algebra_object">DistributedLinearAlgebraObject</a> we discuss <code>oomph-lib's</code> distributed linear algebra objects including the key containers (matrices and vectors) and operators (solvers and preconditioners). Finally, we demonstrate how the distributed linear algebra framework is typically used in practice.</p>
+<p>The primary aim of this document is to provide an overview of the design and functionality of distributed linear algebra capabilities in <code>oomph-lib</code>, and hence we do not discuss every method of every class; we refer the reader to the class documentation for a complete specification.</p>
+<h1><a class="anchor" id="oomph_communicator"></a>
+OomphCommunicator</h1>
+<p><code>Oomph-lib</code> employs MPI for distributed memory parallelisation. Fundamental to MPI is the communicator <br  />
+ ( <code>MPI_Comm</code> ) which determines which processes are involved in a parallel computation. Although <code>oomph-lib</code> is implemented in C++, the C MPI bindings are utilised. <code>Oomph-lib</code> provides the class <code>OomphCommunicator</code> as an object-oriented wrapper for a <code>MPI_Comm</code>.</p>
+<p>Calling <code>MPI_Helpers::init(argc,argv)</code> is equivalent to calling <code>MPI_Init(argc,argv)</code>. It initialises MPI ( i.e. calls <code>MPI_Init(argc,argv)</code> ) and creates <code>oomph-lib's</code> global communicator:</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_main=============================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for generic mpi stuff</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=============================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Initialise MPI</span></div>
+<div class="line">  MPI_Helpers::init(argc,argv);</div>
+</div><!-- fragment --><p>The newly created communicator is available via a <code>MPI_Helpers</code> class static method:</p>
+<div class="fragment"><div class="line">  <span class="comment">// Get the global oomph-lib communicator </span></div>
+<div class="line">  <span class="keyword">const</span> OomphCommunicator* <span class="keyword">const</span> comm_pt = MPI_Helpers::communicator_pt();</div>
+</div><!-- fragment --><p>and is equivalent to the <code>MPI_COMM_WORLD</code> communicator in that it represents all the processes that <code>oomph-lib</code> knows about. By default, this communicator contains exactly the same set of processes as <code>MPI_COMM_WORLD</code>.</p>
+<p>The <code>OomphCommunicator</code> provides a number of access functions to communicator data including the rank of the process and the number of the processes:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  <span class="comment">// Get rank and total number of processors. </span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> my_rank = comm_pt-&gt;my_rank();</div>
+<div class="line">  <span class="keywordtype">unsigned</span> nproc = comm_pt-&gt;nproc();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Tell us who you are...</span></div>
+<div class="line">  oomph_info &lt;&lt; <span class="stringliteral">&quot;I&#39;m rank &quot;</span> &lt;&lt; my_rank &lt;&lt; <span class="stringliteral">&quot; on a total of &quot;</span></div>
+<div class="line">             &lt;&lt; nproc &lt;&lt; <span class="stringliteral">&quot; processors&quot;</span> &lt;&lt; std::endl;</div>
+</div><!-- fragment --><h1><a class="anchor" id="linear_algebra_distribution"></a>
+LinearAlgebraDistribution</h1>
+<p>Distributed memory parallelisation requires data and computations to be distributed over the available processes in some way. In this document we are solely interested in distributed linear algebra. We choose to distribute the linear algebra objects row-wise, and constrain the distribution such that each process is associated with a single contiguous set of rows. The class <code>LinearAlgebraDistribution</code> allows the specification of such a distribution.</p>
+<p>The distribution is defined by two integers defining the first global row and the number of local rows associated with a process. This data is sufficient to allow a mapping between a global row number and a local row number on a particular process.</p>
+<p>To construct a <code>LinearAlgebraDistribution</code> in which 100 rows are uniformly distributed across the set of processes specified by <code>comm_pt</code> we write:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Create a uniformly distributed LinearAlgebraDistribution</span></div>
+<div class="line">  <span class="comment">// 100 global rows are uniformly distributed accross the processes of </span></div>
+<div class="line">  <span class="comment">// comm_pt</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> nrow_global = 100;</div>
+<div class="line">  LinearAlgebraDistribution distributed_distribution(comm_pt,</div>
+<div class="line">                                                     nrow_global); </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Show us how many rows this processor holds</span></div>
+<div class="line">  oomph_info &lt;&lt; <span class="stringliteral">&quot;distributed distribution: first_row and nrow_local: &quot;</span></div>
+<div class="line">             &lt;&lt; distributed_distribution.first_row() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">             &lt;&lt; distributed_distribution.nrow_local() </div>
+<div class="line">             &lt;&lt; std::endl;</div>
+</div><!-- fragment --><p>In this example, if run on four processes, the first 25 rows are associated with process 0, the next 25 rows are on process 1 and so on. In general, in a uniform distribution of <img class="formulaInl" alt="$n_r$" src="form_0.png"/> global rows over <img class="formulaInl" alt="$n_p$" src="form_1.png"/> processes the first row on process <img class="formulaInl" alt="$p=0,1,\ldots,(n_p-1)$" src="form_2.png"/> is <img class="formulaInl" alt="$\lfloor \frac{pn_r}{n_p}\rfloor$" src="form_3.png"/>. It is also possible the specify alternative user defined distributions; see the class documentation for details.</p>
+<p>An optional third ( <code>bool</code> ) argument (default: true) in the constructor indicates that we require a distributed linear algebra distribution. However, on some occasions we may want to replicate all rows of a linear algebra object on all processes. This is achieved by simply making the third argument <code>false</code> (non-distributed):</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Construct an empty distribution object (does not specify a distribution)</span></div>
+<div class="line">  LinearAlgebraDistribution locally_replicated_distribution;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Build a locally replicated distribution such that every row is available</span></div>
+<div class="line">  <span class="comment">// on every process</span></div>
+<div class="line">  <span class="keywordtype">bool</span> <a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a>=<span class="keyword">false</span>;</div>
+<div class="line">  locally_replicated_distribution.build(comm_pt,nrow_global,<a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Show us how many rows this processor holds</span></div>
+<div class="line">  oomph_info &lt;&lt; <span class="stringliteral">&quot;locally replicated distribution: first_row and nrow_local: &quot;</span></div>
+<div class="line">             &lt;&lt; locally_replicated_distribution.first_row() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">             &lt;&lt; locally_replicated_distribution.nrow_local() </div>
+<div class="line">             &lt;&lt; std::endl;</div>
+</div><!-- fragment --><p>This example illustrates two other features of <code>LinearAlgebraDistribution</code>. Firstly, the default constructor creates an empty distribution, and secondly for every (non-default) constructor there is an equivalent <code>build(...)</code> method to "re-construct" the object.</p>
+<p>The state of the object is accessible through a range of methods.</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line">  <span class="comment">// Get the number of local rows on this process</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> nrow_local = distributed_distribution.nrow_local();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Get the first row on this process</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a735f6f26a559982261bb63ecfb78b016">first_row</a> = distributed_distribution.first_row();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Get the number of global rows</span></div>
+<div class="line">  nrow_global = distributed_distribution.nrow();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Is this distributed (true) or locally replicated (false)</span></div>
+<div class="line">  <a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a> = distributed_distribution.distributed();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Does this object specify a distribution</span></div>
+<div class="line">  <span class="keywordtype">bool</span> built = distributed_distribution.built();</div>
+</div><!-- fragment --><p>The <code>built()</code> method indicates if the object specifies a distribution, or is empty.</p>
+<h1><a class="anchor" id="double_vector"></a>
+DoubleVector</h1>
+<p>The simplest distributed linear algebra object is <code>DoubleVector</code>, a distributed vector of <code>doubles</code> developed specifically for linear algebra (It differs from a <code>Vector&lt;double&gt;</code> which simply provides a container for <code>doubles</code> ). For example, the following command constructs a <code>DoubleVector</code> with a uniform distribution (specified by the distributed <code>LinearAlgebraDistribution</code> defined in the previous section) and unit elements:</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Construct a uniformly distributed DoubleVector with unit elements</span></div>
+<div class="line">  DoubleVector my_vector(distributed_distribution,1.0);</div>
+</div><!-- fragment --><p>To access the vector elements the <code>operator</code>[] is implemented. For example to increment every element by one:</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line">  <span class="comment">// Increment every element of my_vector on this process by 1</span></div>
+<div class="line">  nrow_local = my_vector.distribution_pt()-&gt;nrow_local();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; nrow_local; i++)</div>
+<div class="line">   {</div>
+<div class="line">    my_vector[i]+=1.0;</div>
+<div class="line">   }</div>
+</div><!-- fragment --><p>It is the <code>oomph-lib</code> convention that the data in <code>DoubleVector</code> (and all other distributed linear algebra object) is accessed using local indices. The following loop documents the local row number, the global row number, and the value of the elements on each process:</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line">  <span class="comment">// Document elements on this process in my_vector</span></div>
+<div class="line">  nrow_local = my_vector.distribution_pt()-&gt;nrow_local();</div>
+<div class="line">  <a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a735f6f26a559982261bb63ecfb78b016">first_row</a> = my_vector.distribution_pt()-&gt;first_row();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; nrow_local; i++)</div>
+<div class="line">   {</div>
+<div class="line">    oomph_info &lt;&lt; <span class="stringliteral">&quot;local row &quot;</span> &lt;&lt; i </div>
+<div class="line">               &lt;&lt; <span class="stringliteral">&quot; is global row &quot;</span> &lt;&lt; <a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a735f6f26a559982261bb63ecfb78b016">first_row</a>+i </div>
+<div class="line">               &lt;&lt; <span class="stringliteral">&quot; and has value &quot;</span> &lt;&lt; my_vector[i] &lt;&lt; std::endl; </div>
+<div class="line">   }</div>
+</div><!-- fragment --><p>To change the distribution of a <code>DoubleVector</code> while retaining the data, we provide the <code>redistribute(...)</code> method. For example to change <code>my_vector</code> from uniformly distributed to locally replicated:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  <span class="comment">// Redistribute my_vector such that it is locally replicated on all processes</span></div>
+<div class="line">  my_vector.redistribute(&amp;locally_replicated_distribution);</div>
+</div><!-- fragment --><p>Just like the <code>LinearAlgebraDistribution</code>, we provide <code>build()</code> methods that mirror the behaviour of all non-default constructors. For example to revert <code>my_vector</code> to a uniform distribution with unit elements:</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line">  <span class="comment">// (Re)build my_vector such that it is uniformly distributed over all</span></div>
+<div class="line">  <span class="comment">// processes</span></div>
+<div class="line">  my_vector.build(distributed_distribution,1.0);</div>
+</div><!-- fragment --><p>It is important to differentiate between <code>build(...)</code> and <code>redistribute(...)</code>; calling <code>build(...)</code> deletes the existing data, effectively re-constructing the object, whereas <code>redistribute(...)</code> retains the vector's data.</p>
+<p>Like the <code>LinearAlgebraDistribution</code>, a <code>DoubleVector</code> need not contain any data. To generate an object in this state, we could instantiate an object using the default constructor or call the <code>clear()</code> method:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  <span class="comment">// Construct an empty DoubleVector</span></div>
+<div class="line">  DoubleVector another_vector;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Clear all data from an existing DoubleVector</span></div>
+<div class="line">  my_vector.clear();</div>
+</div><!-- fragment --><p>Again the <code>built()</code> method returns the state of the object and indicates if it contains any data.</p>
+<h1><a class="anchor" id="cr_double_matrix"></a>
+CRDoubleMatrix</h1>
+<p><code>CRDoubleMatrix</code> is the only distributed matrix in <code>oomph-lib</code>. It employs sparse compressed row storage to store <code>double</code> coefficients.</p>
+<p>A <code>CRDoubleMatrix</code> has three fundamental states:</p>
+<ul>
+<li>A <code>CRDoubleMatrix</code> can have no distribution or coefficients in which case <code>my_matrix-&gt;distribution_built()</code> and <code>my_matrix-&gt;built()</code> are both <code>false</code>.</li>
+<li>A (built) distribution but no coefficients in which case <code>my_matrix-&gt;distribution_built()</code> is <code>true</code> but <code>my_matrix-&gt;built()</code> is still <code>false</code>.</li>
+<li>A (built) distribution and coefficients in which case <code>my_matrix-&gt;distribution_built()</code> and <code>my_matrix-&gt;built()</code> are both <code>true</code>. <br  />
+</li>
+</ul>
+<p>For example, to construct an empty matrix we call:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Construct an empty CRDoubleMatrix</span></div>
+<div class="line">  CRDoubleMatrix my_matrix;</div>
+</div><!-- fragment --><p>To specify the distribution as defined by the <code>LinearAlgebraDistribution</code> <code>distributed_distribution</code> we write:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  <span class="comment">// Specify that the rows be uniformly distributed</span></div>
+<div class="line">  my_matrix.build(&amp;distributed_distribution);</div>
+</div><!-- fragment --><p>The distribution has now been specified but the coefficients have not. Like the <code>DoubleVector</code>, rows are indexed locally and hence the coefficients rows must be indexed locally. For example, to populate <code>my_matrix</code> as a square identity matrix, we write:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  <span class="comment">// Vector of coefficient of value 1.0</span></div>
+<div class="line">  Vector&lt;double&gt; values(nrow_local,1.0);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Column indices corresponding to values</span></div>
+<div class="line">  Vector&lt;int&gt; column_indices(nrow_local);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Index of vectors values and column_indices where the i-th row starts</span></div>
+<div class="line">  <span class="comment">// (each row contains one coefficient)</span></div>
+<div class="line">  Vector&lt;int&gt; row_start(nrow_local+1);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// populate column_indices and row_start</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; nrow_local; ++i)</div>
+<div class="line">   {</div>
+<div class="line">    column_indices[i]=<a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a735f6f26a559982261bb63ecfb78b016">first_row</a>+nrow_local;</div>
+<div class="line">    row_start[i]=i;</div>
+<div class="line">   }</div>
+<div class="line">  row_start[nrow_local]=nrow_local;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Build the (square) matrix</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> ncol = nrow_global;</div>
+<div class="line">  my_matrix.build(ncol,values,column_indices,row_start);</div>
+</div><!-- fragment --><p>We note that the column indices are global because only the rows are distributed. The assembly of a <code>CRDoubleMatrix</code> is now complete.</p>
+<p>We constructed the matrix in two stages by first specifying the distribution and then specifying the coefficients. However it is possible to perform this operation in just one step, by using the appropriate constructor or <code>build(...)</code> method, for example:</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line">  CRDoubleMatrix my_matrix2(&amp;distributed_distribution,ncol,values,</div>
+<div class="line">                           column_indices,row_start);</div>
+</div><!-- fragment --><h1><a class="anchor" id="distributed_linear_algebra_object"></a>
+DistributedLinearAlgebraObject</h1>
+<p>In this section we introduce the class <code>DistributedLinearAlgebraObject</code>, a base class for all distributed linear algebra objects. This class encapsulates a <code>LinearAlgebraDistribution</code>, provides (protected) access to derived classes to update ( <code>build_distribution(...)</code> ) and clear ( <code>clear()</code> ) the stored distribution. Secondly, it provides methods to simplify access to commonly used <code>LinearAlgebraDistribution</code> data. For example, because a <code>CRDoubleMatrix</code> is a <code>DistributedLinearAlgebraObject</code>,</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line">  <span class="comment">// Get the first (global) row of my_matrix on this process</span></div>
+<div class="line">  <a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a735f6f26a559982261bb63ecfb78b016">first_row</a> =  my_matrix2.distribution_pt()-&gt;first_row();</div>
+</div><!-- fragment --><p>can be replaced with</p>
+<div class="fragment"><div class="line">  </div>
+<div class="line">  <span class="comment">// Get the first (global) row of my_matrix on this process</span></div>
+<div class="line">  <a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a735f6f26a559982261bb63ecfb78b016">first_row</a> =  my_matrix2.first_row();</div>
+</div><!-- fragment --><p><code>DistributedLinearAlgebraObjects</code> can be divided into two types: containers and operators. We have already reviewed the containers <code>DoubleVector</code> and <code>CRDoubleMatrix</code>. A wide range of operator classes have been implemented in <code>oomph-lib</code> to operate on these containers. In particular, all <code>LinearSolvers</code>, <code>IterativeLinearSolvers</code> and <code>Preconditioners</code> (discussed in the <a href="../../../linear_solvers/html/index.html">Linear Solvers Tutorial</a>) are <code>DistributedLinearAlgebraObjects</code>. We finish this section by reviewing the key linear algebra operators:</p>
+<ul>
+<li><code>SuperLUSolver</code> is a <code>LinearSolver</code> wrapper to both the <a href="http://crd.lbl.gov/~xiaoye/SuperLU/#superlu"><code>SuperLU</code></a> direct solver and the <a href="http://crd.lbl.gov/~xiaoye/SuperLU/#superlu_dist"><code>SuperLU Dist</code></a> distributed direct solver. By default, whenever possible this class will automatically perform distributed solves.</li>
+<li><code>TrilinosAztecOOSolver</code> is an <code>IterativeLinearSolver</code> wrapper to the <a href="http://trilinos.sandia.gov/packages/aztecoo"><code>Trilinos AztecOO</code></a> package implementation of distributed Krylov methods including CG, GMRES and BiCGStab.</li>
+<li><code>TrilinosMLPreconditioner</code> is a wrapper to the distributed <a href="http://trilinos.sandia.gov/packages/ml">Trilinos ML AMG preconditioners</a>.</li>
+<li><code>TrilinosIFPACKPreconditioner</code> is a wrapper to the distributed <a href="http://trilinos.sandia.gov/packages/ifpack">Trilinos IFPACK preconditioners</a>.</li>
+<li><code>HyprePreconditioner</code> is a wrapper to the distributed <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html"><code>Hypre Scalable Linear Solvers</code></a> package, of particular interest is the classical AMG implementation <code>BoomerAMG</code>.</li>
+<li><code>MatrixVectorProduct</code> is a wrapper to the <a href="http://trilinos.sandia.gov/packages/epetra/"><code>Trilinos Epetra</code></a> distributed matrix-vector product implementation.</li>
+</ul>
+<h1><a class="anchor" id="distributed_linear_algebra_in_practice"></a>
+Distributed Linear Algebra In Practice</h1>
+<p>Having discussed <code>oomph-lib's</code> linear algebra infrastructure, we finally remark that <code>oomph-lib</code> is implemented such that linear algebra in <code>oomph-lib</code> is automatically distributed if executed under MPI on multiple processes. Specifically, a user should not need to specify either a <code>LinearAlgebraDistribution</code> or a <code>OomphCommunicator</code>, unless they wish to customise some aspect of the parallelisation.</p>
+<p>All functionality is designed such that if a user does not specify a <code>LinearAlgebraDistribution</code>, then as much data and computation as possible will be uniformly distributed over all available processes.</p>
+<p>As an example, we consider the <code>Problem</code> method <code>get_jacobian(...)</code>. If the user does not specify a return distribution for the Jacobian and residuals, then <code>oomph-lib</code> will uniformly distribute both containers.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Set up a problem: </span></div>
+<div class="line">  <span class="comment">// Solve a 1D Poisson problem using a source function that generates</span></div>
+<div class="line">  <span class="comment">// a fish shaped exact solution</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> n_element=40; </div>
+<div class="line">  OneDPoissonProblem&lt;QPoissonElement&lt;1,4&gt; &gt; </div>
+<div class="line">   problem(n_element,FishSolnOneDPoisson::source_function);</div>
+<div class="line">    </div>
+<div class="line">  <span class="comment">// Get the residual and Jacobian, by default both are uniformly distributed</span></div>
+<div class="line">  <span class="comment">// over all available processes</span></div>
+<div class="line">  my_vector.clear();</div>
+<div class="line">  my_matrix.clear();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Get the Jacobian</span></div>
+<div class="line">  problem.get_jacobian(my_vector,my_matrix);</div>
+<div class="line">  </div>
+<div class="line">  oomph_info </div>
+<div class="line">   &lt;&lt; <span class="stringliteral">&quot;Uniformly distributed residual vector: first_row and nrow_local: &quot;</span> </div>
+<div class="line">   &lt;&lt; my_vector.first_row() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">   &lt;&lt; my_vector.nrow_local() &lt;&lt; std::endl</div>
+<div class="line">   &lt;&lt; <span class="stringliteral">&quot;Uniformly distributed jacobian matrix: first_row, nrow_local and nnz: &quot;</span> </div>
+<div class="line">   &lt;&lt; my_matrix.first_row() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">   &lt;&lt; my_matrix.nrow_local() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">   &lt;&lt; my_matrix.nnz() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">   &lt;&lt; std::endl;</div>
+</div><!-- fragment --><p>On the other hand, a user can specify a return distribution by setting the distribution of the matrix and vector prior to calling <code>get_jacobian(...)</code>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Request locally replicated residual and Jacobian from the problem</span></div>
+<div class="line">  <a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a>=<span class="keyword">false</span>;</div>
+<div class="line">  LinearAlgebraDistribution locally_replicated_distribution_for_jac(</div>
+<div class="line">   comm_pt,problem.ndof(),<a class="code" href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Show us how many rows this processor holds</span></div>
+<div class="line">  oomph_info </div>
+<div class="line">   &lt;&lt; <span class="stringliteral">&quot;locally replicated distribution_for_jac: first_row and nrow_local: &quot;</span></div>
+<div class="line">   &lt;&lt; locally_replicated_distribution_for_jac.first_row() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">   &lt;&lt; locally_replicated_distribution_for_jac.nrow_local() </div>
+<div class="line">   &lt;&lt; std::endl;</div>
+</div><!-- fragment --><p>We finally remark that because all linear algebra operations are automatically distributed, to parallelise <code>oomph-lib's</code> Newton solve phase, the user need only run their executable under MPI on multiple processes.</p>
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../self_test/mpi/generic_mpi/">self_test/mpi/generic_mpi </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../self_test/mpi/generic_mpi/generic_mpi_test.cc">self_test/mpi/generic_mpi/generic_mpi_test.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="adistributed__linear__algebra__infrastructure_8txt_html_a03654fcd0f1ae9cac59686ccb27bd720"><div class="ttname"><a href="distributed__linear__algebra__infrastructure_8txt.html#a03654fcd0f1ae9cac59686ccb27bd720">distributed</a></div><div class="ttdeci">c DistributedLinearAlgebraObjects can be divided into two all c c IterativeLinearSolvers and c Preconditioners(discussed in the&lt; a href=&quot;../../../linear_solvers/html/index.html&quot;&gt;Linear Solvers Tutorial&lt;/A &gt;) are \c DistributedLinearAlgebraObjects. We finish this section by reviewing the key linear algebra operators On the other a user can specify a return distribution by setting the distribution of the matrix and vector prior to calling c get_jacobian(...). \until std We finally remark that because all linear algebra operations are automatically distributed</div><div class="ttdef"><b>Definition:</b> <a href="distributed__linear__algebra__infrastructure_8txt_source.html#l00310">distributed_linear_algebra_infrastructure.txt:310</a></div></div>
+<div class="ttc" id="adistributed__linear__algebra__infrastructure_8txt_html_a735f6f26a559982261bb63ecfb78b016"><div class="ttname"><a href="distributed__linear__algebra__infrastructure_8txt.html#a735f6f26a559982261bb63ecfb78b016">first_row</a></div><div class="ttdeci">we refer the reader to the class documentation for a complete specification section oomph_communicator OomphCommunicator c Oomph lib employs MPI for distributed memory parallelisation Fundamental to MPI is the the C MPI bindings are utilised c Oomph lib provides the class c OomphCommunicator as an object oriented wrapper for a c MPI_Comm Calling c argv It initialises MPI(i.e. calls \c MPI_Init(argc, argv)) and creates \c oomph-lib 's global communicator section distributed_linear_algebra_object DistributedLinearAlgebraObject In this section we introduce the class c DistributedLinearAlgebraObject a base class for all distributed linear algebra objects This class encapsulates a c LinearAlgebraDistribution it provides methods to simplify access to commonly used c LinearAlgebraDistribution data For because a c CRDoubleMatrix is a c until first_row()</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:28:03
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

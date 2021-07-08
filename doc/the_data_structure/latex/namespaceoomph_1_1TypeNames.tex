@@ -1,0 +1,54 @@
+\hypertarget{namespaceoomph_1_1TypeNames}{}\doxysection{oomph\+::Type\+Names Namespace Reference}
+\label{namespaceoomph_1_1TypeNames}\index{oomph::TypeNames@{oomph::TypeNames}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\std\+::string \mbox{\hyperlink{namespaceoomph_1_1TypeNames_aa1ac15f9594d19e6dab530390ecf1e79}{get\+\_\+type\+\_\+name}} (T \&obj)
+\begin{DoxyCompactList}\small\item\em Get the type name of an object. Only for use in debugging, do not write real code using this function as it is implementation dependant! \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\std\+::string \mbox{\hyperlink{namespaceoomph_1_1TypeNames_ab0532785ab096d82cdec476b948da06f}{get\+\_\+type\+\_\+name}} (T $\ast$obj)
+\begin{DoxyCompactList}\small\item\em Get the type name of an object from a pointer to the object (we usually want the type of the object itself not the pointer because the type of the pointer may be a base class). Only for use in debugging, do not write real code using this function as it is implementation dependant! \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceoomph_1_1TypeNames_aa1ac15f9594d19e6dab530390ecf1e79}\label{namespaceoomph_1_1TypeNames_aa1ac15f9594d19e6dab530390ecf1e79}} 
+\index{oomph::TypeNames@{oomph::TypeNames}!get\_type\_name@{get\_type\_name}}
+\index{get\_type\_name@{get\_type\_name}!oomph::TypeNames@{oomph::TypeNames}}
+\doxysubsubsection{\texorpdfstring{get\_type\_name()}{get\_type\_name()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::string oomph\+::\+Type\+Names\+::get\+\_\+type\+\_\+name (\begin{DoxyParamCaption}\item[{T \&}]{obj }\end{DoxyParamCaption})}
+
+
+
+Get the type name of an object. Only for use in debugging, do not write real code using this function as it is implementation dependant! 
+
+
+
+Definition at line 227 of file oomph\+\_\+utilities.\+h.
+
+
+
+References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+String\+Conversion\+::to\+\_\+string().
+
+
+
+Referenced by get\+\_\+type\+\_\+name().
+
+\mbox{\Hypertarget{namespaceoomph_1_1TypeNames_ab0532785ab096d82cdec476b948da06f}\label{namespaceoomph_1_1TypeNames_ab0532785ab096d82cdec476b948da06f}} 
+\index{oomph::TypeNames@{oomph::TypeNames}!get\_type\_name@{get\_type\_name}}
+\index{get\_type\_name@{get\_type\_name}!oomph::TypeNames@{oomph::TypeNames}}
+\doxysubsubsection{\texorpdfstring{get\_type\_name()}{get\_type\_name()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::string oomph\+::\+Type\+Names\+::get\+\_\+type\+\_\+name (\begin{DoxyParamCaption}\item[{T $\ast$}]{obj }\end{DoxyParamCaption})}
+
+
+
+Get the type name of an object from a pointer to the object (we usually want the type of the object itself not the pointer because the type of the pointer may be a base class). Only for use in debugging, do not write real code using this function as it is implementation dependant! 
+
+
+
+Definition at line 250 of file oomph\+\_\+utilities.\+h.
+
+
+
+References get\+\_\+type\+\_\+name().
+

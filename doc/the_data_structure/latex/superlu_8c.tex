@@ -1,0 +1,135 @@
+\hypertarget{superlu_8c}{}\doxysection{superlu.\+c File Reference}
+\label{superlu_8c}\index{superlu.c@{superlu.c}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfactors__t}{factors\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structMemoryStatisticsStorage}{Memory\+Statistics\+Storage}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void $\ast$ \mbox{\hyperlink{superlu_8c_a2b91e9b8520a970ebe560735f71ba3bd}{fptr}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{superlu_8c_a9e8f593487b0f2e6925138cd33e3fbb2}{get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes}} ()
+\begin{DoxyCompactList}\small\item\em Function to calculate the number of bytes used to store the LU factors. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{superlu_8c_ad729fab34b601084a13f8f8bc5cc653c}{get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes}} ()
+\begin{DoxyCompactList}\small\item\em Function to calculate the number of bytes used in calculating and storing the LU factors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{superlu_8c_a69adc9284c505fa959966039ac941988}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes}} (double $\ast$lu\+\_\+factor\+\_\+memory, double $\ast$total\+\_\+memory)
+\item 
+int \mbox{\hyperlink{superlu_8c_a1239692943ece692bfd22e2f62364381}{superlu}} (int $\ast$op\+\_\+flag, int $\ast$\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, int $\ast$nnz, int $\ast$nrhs, double $\ast$\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}}, int $\ast$rowind, int $\ast$colptr, double $\ast$b, int $\ast$ldb, int $\ast$transpose, int $\ast$doc, \mbox{\hyperlink{superlu_8c_a2b91e9b8520a970ebe560735f71ba3bd}{fptr}} $\ast$f\+\_\+factors, int $\ast$info)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structMemoryStatisticsStorage}{Memory\+Statistics\+Storage}} \mbox{\hyperlink{superlu_8c_a2c4a0d7993d6af11809efcf0bfe3fcd8}{memory\+\_\+statistics\+\_\+storage}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{superlu_8c_a2b91e9b8520a970ebe560735f71ba3bd}\label{superlu_8c_a2b91e9b8520a970ebe560735f71ba3bd}} 
+\index{superlu.c@{superlu.c}!fptr@{fptr}}
+\index{fptr@{fptr}!superlu.c@{superlu.c}}
+\doxysubsubsection{\texorpdfstring{fptr}{fptr}}
+{\footnotesize\ttfamily typedef void$\ast$ \mbox{\hyperlink{superlu_8c_a2b91e9b8520a970ebe560735f71ba3bd}{fptr}}}
+
+
+
+Definition at line 23 of file superlu.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{superlu_8c_a9e8f593487b0f2e6925138cd33e3fbb2}\label{superlu_8c_a9e8f593487b0f2e6925138cd33e3fbb2}} 
+\index{superlu.c@{superlu.c}!get\_lu\_factor\_memory\_usage\_in\_bytes@{get\_lu\_factor\_memory\_usage\_in\_bytes}}
+\index{get\_lu\_factor\_memory\_usage\_in\_bytes@{get\_lu\_factor\_memory\_usage\_in\_bytes}!superlu.c@{superlu.c}}
+\doxysubsubsection{\texorpdfstring{get\_lu\_factor\_memory\_usage\_in\_bytes()}{get\_lu\_factor\_memory\_usage\_in\_bytes()}}
+{\footnotesize\ttfamily double get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to calculate the number of bytes used to store the LU factors. 
+
+
+
+Definition at line 53 of file superlu.\+c.
+
+
+
+References memory\+\_\+statistics\+\_\+storage, Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage, and Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage\+\_\+has\+\_\+been\+\_\+recorded.
+
+
+
+Referenced by oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors().
+
+\mbox{\Hypertarget{superlu_8c_a69adc9284c505fa959966039ac941988}\label{superlu_8c_a69adc9284c505fa959966039ac941988}} 
+\index{superlu.c@{superlu.c}!get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}}
+\index{get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}!superlu.c@{superlu.c}}
+\doxysubsubsection{\texorpdfstring{get\_memory\_usage\_in\_bytes()}{get\_memory\_usage\_in\_bytes()}}
+{\footnotesize\ttfamily void get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes (\begin{DoxyParamCaption}\item[{double $\ast$}]{lu\+\_\+factor\+\_\+memory,  }\item[{double $\ast$}]{total\+\_\+memory }\end{DoxyParamCaption})}
+
+
+
+Definition at line 85 of file superlu.\+c.
+
+
+
+References memory\+\_\+statistics\+\_\+storage, and Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage.
+
+
+
+Referenced by oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::setup().
+
+\mbox{\Hypertarget{superlu_8c_ad729fab34b601084a13f8f8bc5cc653c}\label{superlu_8c_ad729fab34b601084a13f8f8bc5cc653c}} 
+\index{superlu.c@{superlu.c}!get\_total\_memory\_usage\_in\_bytes@{get\_total\_memory\_usage\_in\_bytes}}
+\index{get\_total\_memory\_usage\_in\_bytes@{get\_total\_memory\_usage\_in\_bytes}!superlu.c@{superlu.c}}
+\doxysubsubsection{\texorpdfstring{get\_total\_memory\_usage\_in\_bytes()}{get\_total\_memory\_usage\_in\_bytes()}}
+{\footnotesize\ttfamily double get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to calculate the number of bytes used in calculating and storing the LU factors. 
+
+
+
+Definition at line 69 of file superlu.\+c.
+
+
+
+References memory\+\_\+statistics\+\_\+storage, Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage, and Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage\+\_\+has\+\_\+been\+\_\+recorded.
+
+
+
+Referenced by oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+total\+\_\+needed\+\_\+memory().
+
+\mbox{\Hypertarget{superlu_8c_a1239692943ece692bfd22e2f62364381}\label{superlu_8c_a1239692943ece692bfd22e2f62364381}} 
+\index{superlu.c@{superlu.c}!superlu@{superlu}}
+\index{superlu@{superlu}!superlu.c@{superlu.c}}
+\doxysubsubsection{\texorpdfstring{superlu()}{superlu()}}
+{\footnotesize\ttfamily int superlu (\begin{DoxyParamCaption}\item[{int $\ast$}]{op\+\_\+flag,  }\item[{int $\ast$}]{n,  }\item[{int $\ast$}]{nnz,  }\item[{int $\ast$}]{nrhs,  }\item[{double $\ast$}]{values,  }\item[{int $\ast$}]{rowind,  }\item[{int $\ast$}]{colptr,  }\item[{double $\ast$}]{b,  }\item[{int $\ast$}]{ldb,  }\item[{int $\ast$}]{transpose,  }\item[{int $\ast$}]{doc,  }\item[{\mbox{\hyperlink{superlu_8c_a2b91e9b8520a970ebe560735f71ba3bd}{fptr}} $\ast$}]{f\+\_\+factors,  }\item[{int $\ast$}]{info }\end{DoxyParamCaption})}
+
+
+
+Definition at line 118 of file superlu.\+c.
+
+
+
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Leak\+Check\+Names\+::doc(), i, factors\+\_\+t\+::L, oomph\+::\+Binary\+Tree\+Names\+::L, memory\+\_\+statistics\+\_\+storage, Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage, Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage\+\_\+has\+\_\+been\+\_\+recorded, n, factors\+\_\+t\+::perm\+\_\+c, factors\+\_\+t\+::perm\+\_\+r, factors\+\_\+t\+::U, oomph\+::\+Oc\+Tree\+Names\+::U, and values.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{superlu_8c_a2c4a0d7993d6af11809efcf0bfe3fcd8}\label{superlu_8c_a2c4a0d7993d6af11809efcf0bfe3fcd8}} 
+\index{superlu.c@{superlu.c}!memory\_statistics\_storage@{memory\_statistics\_storage}}
+\index{memory\_statistics\_storage@{memory\_statistics\_storage}!superlu.c@{superlu.c}}
+\doxysubsubsection{\texorpdfstring{memory\_statistics\_storage}{memory\_statistics\_storage}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structMemoryStatisticsStorage}{Memory\+Statistics\+Storage}} memory\+\_\+statistics\+\_\+storage}
+
+
+
+Referenced by get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), and superlu().
+

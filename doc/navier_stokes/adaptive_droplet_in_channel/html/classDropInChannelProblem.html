@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: DropInChannelProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classDropInChannelProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">DropInChannelProblem&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Problem class to simulate viscous drop propagating along 2D channel.  
+ <a href="classDropInChannelProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for DropInChannelProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classDropInChannelProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aad6e79f5560a5bfcba325f6558afb4ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#aad6e79f5560a5bfcba325f6558afb4ff">DropInChannelProblem</a> ()</td></tr>
+<tr class="memdesc:aad6e79f5560a5bfcba325f6558afb4ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classDropInChannelProblem.html#aad6e79f5560a5bfcba325f6558afb4ff">More...</a><br /></td></tr>
+<tr class="separator:aad6e79f5560a5bfcba325f6558afb4ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa311cd8061b915901c8c74617d2e4a37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#aa311cd8061b915901c8c74617d2e4a37">~DropInChannelProblem</a> ()</td></tr>
+<tr class="memdesc:aa311cd8061b915901c8c74617d2e4a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classDropInChannelProblem.html#aa311cd8061b915901c8c74617d2e4a37">More...</a><br /></td></tr>
+<tr class="separator:aa311cd8061b915901c8c74617d2e4a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d4ae7fdef14f9838a46cc45278c7920"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a4d4ae7fdef14f9838a46cc45278c7920">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:a4d4ae7fdef14f9838a46cc45278c7920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the mesh of free surface elements.  <a href="classDropInChannelProblem.html#a4d4ae7fdef14f9838a46cc45278c7920">More...</a><br /></td></tr>
+<tr class="separator:a4d4ae7fdef14f9838a46cc45278c7920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5cc96bc60c2fd2386d16eac3ee5f83a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#af5cc96bc60c2fd2386d16eac3ee5f83a">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:af5cc96bc60c2fd2386d16eac3ee5f83a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Rebuild the mesh of free surface elements.  <a href="classDropInChannelProblem.html#af5cc96bc60c2fd2386d16eac3ee5f83a">More...</a><br /></td></tr>
+<tr class="separator:af5cc96bc60c2fd2386d16eac3ee5f83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab38a14018a4093afe7cc0d9db9f1fc3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#ab38a14018a4093afe7cc0d9db9f1fc3b">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ab38a14018a4093afe7cc0d9db9f1fc3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the after solve (empty)  <a href="classDropInChannelProblem.html#ab38a14018a4093afe7cc0d9db9f1fc3b">More...</a><br /></td></tr>
+<tr class="separator:ab38a14018a4093afe7cc0d9db9f1fc3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e229343783fd73768dfa0a2672e9ad1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a0e229343783fd73768dfa0a2672e9ad1">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a0e229343783fd73768dfa0a2672e9ad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve.  <a href="classDropInChannelProblem.html#a0e229343783fd73768dfa0a2672e9ad1">More...</a><br /></td></tr>
+<tr class="separator:a0e229343783fd73768dfa0a2672e9ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a868202b34b195a78298b4eaf7d3aff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a3a868202b34b195a78298b4eaf7d3aff">complete_problem_setup</a> ()</td></tr>
+<tr class="memdesc:a3a868202b34b195a78298b4eaf7d3aff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set boundary conditions and complete the build of all elements.  <a href="classDropInChannelProblem.html#a3a868202b34b195a78298b4eaf7d3aff">More...</a><br /></td></tr>
+<tr class="separator:a3a868202b34b195a78298b4eaf7d3aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bcebc0cd731b75db441f3e1d62296ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a3bcebc0cd731b75db441f3e1d62296ae">doc_solution</a> (const std::string &amp;comment=&quot;&quot;)</td></tr>
+<tr class="memdesc:a3bcebc0cd731b75db441f3e1d62296ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <a href="classDropInChannelProblem.html#a3bcebc0cd731b75db441f3e1d62296ae">More...</a><br /></td></tr>
+<tr class="separator:a3bcebc0cd731b75db441f3e1d62296ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49944969eb8dc6892cab3f1a9a2cb382"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a49944969eb8dc6892cab3f1a9a2cb382">compute_error_estimate</a> (double &amp;max_err, double &amp;min_err)</td></tr>
+<tr class="memdesc:a49944969eb8dc6892cab3f1a9a2cb382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the error estimates and assign to elements for plotting.  <a href="classDropInChannelProblem.html#a49944969eb8dc6892cab3f1a9a2cb382">More...</a><br /></td></tr>
+<tr class="separator:a49944969eb8dc6892cab3f1a9a2cb382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8a7491ab12974ccc4cc10bfc0f20675"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#ab8a7491ab12974ccc4cc10bfc0f20675">remove_volume_constraint</a> ()</td></tr>
+<tr class="memdesc:ab8a7491ab12974ccc4cc10bfc0f20675"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the boundary conditions to remove the volume constraint.  <a href="classDropInChannelProblem.html#ab8a7491ab12974ccc4cc10bfc0f20675">More...</a><br /></td></tr>
+<tr class="separator:ab8a7491ab12974ccc4cc10bfc0f20675"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a334e4cdb720696ffbc70724caf9b6dab"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
+&#160;&#160;<a class="el" href="classDropInChannelProblem.html#a334e4cdb720696ffbc70724caf9b6daba024ca7e6fdbb8bb0dee2984ad4fced0f">Inflow_boundary_id</a> =0, 
+<a class="el" href="classDropInChannelProblem.html#a334e4cdb720696ffbc70724caf9b6daba8ce939185dbf37b1b305415c8c73c49c">Upper_wall_boundary_id</a> =1, 
+<a class="el" href="classDropInChannelProblem.html#a334e4cdb720696ffbc70724caf9b6daba760529dba266f41a831817920ccb1873">Outflow_boundary_id</a> =2, 
+<a class="el" href="classDropInChannelProblem.html#a334e4cdb720696ffbc70724caf9b6daba2eb65a21fcbe1b5fe6df3e39edfc3ad7">Bottom_wall_boundary_id</a> =3, 
+<br />
+&#160;&#160;<a class="el" href="classDropInChannelProblem.html#a334e4cdb720696ffbc70724caf9b6daba7302dcf9298cbc359783e0bc10832a1a">First_drop_boundary_id</a> =4, 
+<a class="el" href="classDropInChannelProblem.html#a334e4cdb720696ffbc70724caf9b6dababf5c99f82e00ae63a827d4aef8c9d918">Second_drop_boundary_id</a> =5
+<br />
+ }</td></tr>
+<tr class="memdesc:a334e4cdb720696ffbc70724caf9b6dab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of channel boundaries.  <a href="classDropInChannelProblem.html#a334e4cdb720696ffbc70724caf9b6dab">More...</a><br /></td></tr>
+<tr class="separator:a334e4cdb720696ffbc70724caf9b6dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a73b989e3bedbd3630f576b0dba0f724f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a73b989e3bedbd3630f576b0dba0f724f">create_free_surface_elements</a> ()</td></tr>
+<tr class="memdesc:a73b989e3bedbd3630f576b0dba0f724f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create free surface elements.  <a href="classDropInChannelProblem.html#a73b989e3bedbd3630f576b0dba0f724f">More...</a><br /></td></tr>
+<tr class="separator:a73b989e3bedbd3630f576b0dba0f724f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4463a1b341429f5a2c84a493aabb3a14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a4463a1b341429f5a2c84a493aabb3a14">delete_free_surface_elements</a> ()</td></tr>
+<tr class="memdesc:a4463a1b341429f5a2c84a493aabb3a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete free surface elements.  <a href="classDropInChannelProblem.html#a4463a1b341429f5a2c84a493aabb3a14">More...</a><br /></td></tr>
+<tr class="separator:a4463a1b341429f5a2c84a493aabb3a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53b96cd50b4e6c9bee294b8fb7dd51bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a53b96cd50b4e6c9bee294b8fb7dd51bd">create_volume_constraint_elements</a> ()</td></tr>
+<tr class="memdesc:a53b96cd50b4e6c9bee294b8fb7dd51bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create elements that impose volume constraint on the drop.  <a href="classDropInChannelProblem.html#a53b96cd50b4e6c9bee294b8fb7dd51bd">More...</a><br /></td></tr>
+<tr class="separator:a53b96cd50b4e6c9bee294b8fb7dd51bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec42cdf762f8b64c064db84df7f40f0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#aec42cdf762f8b64c064db84df7f40f0a">delete_volume_constraint_elements</a> ()</td></tr>
+<tr class="memdesc:aec42cdf762f8b64c064db84df7f40f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete volume constraint elements.  <a href="classDropInChannelProblem.html#aec42cdf762f8b64c064db84df7f40f0a">More...</a><br /></td></tr>
+<tr class="separator:aec42cdf762f8b64c064db84df7f40f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a6de0bac4bc483d500aa215a59bbf25bc"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a6de0bac4bc483d500aa215a59bbf25bc">Free_surface_mesh_pt</a></td></tr>
+<tr class="memdesc:a6de0bac4bc483d500aa215a59bbf25bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointers to mesh of free surface elements.  <a href="classDropInChannelProblem.html#a6de0bac4bc483d500aa215a59bbf25bc">More...</a><br /></td></tr>
+<tr class="separator:a6de0bac4bc483d500aa215a59bbf25bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5f5480fe22c40a175a0b5c0ce39fa05"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#ac5f5480fe22c40a175a0b5c0ce39fa05">Volume_constraint_mesh_pt</a></td></tr>
+<tr class="memdesc:ac5f5480fe22c40a175a0b5c0ce39fa05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh containing elements that impose volume constraint.  <a href="classDropInChannelProblem.html#ac5f5480fe22c40a175a0b5c0ce39fa05">More...</a><br /></td></tr>
+<tr class="separator:ac5f5480fe22c40a175a0b5c0ce39fa05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f16a75afe9aad09be325d409a4a1b0d"><td class="memItemLeft" align="right" valign="top">RefineableSolidTriangleMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a1f16a75afe9aad09be325d409a4a1b0d">Fluid_mesh_pt</a></td></tr>
+<tr class="memdesc:a1f16a75afe9aad09be325d409a4a1b0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Fluid_mesh.  <a href="classDropInChannelProblem.html#a1f16a75afe9aad09be325d409a4a1b0d">More...</a><br /></td></tr>
+<tr class="separator:a1f16a75afe9aad09be325d409a4a1b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abccd5c5d075bf179150c3d0df25dcea9"><td class="memItemLeft" align="right" valign="top">Vector&lt; TriangleMeshPolygon * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#abccd5c5d075bf179150c3d0df25dcea9">Drop_polygon_pt</a></td></tr>
+<tr class="memdesc:abccd5c5d075bf179150c3d0df25dcea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector storing pointer to the drop polygons.  <a href="classDropInChannelProblem.html#abccd5c5d075bf179150c3d0df25dcea9">More...</a><br /></td></tr>
+<tr class="separator:abccd5c5d075bf179150c3d0df25dcea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebc1a038a715fd269319b1fb091f0b26"><td class="memItemLeft" align="right" valign="top">TriangleMeshPolygon *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#aebc1a038a715fd269319b1fb091f0b26">Outer_boundary_polyline_pt</a></td></tr>
+<tr class="memdesc:aebc1a038a715fd269319b1fb091f0b26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triangle mesh polygon for outer boundary.  <a href="classDropInChannelProblem.html#aebc1a038a715fd269319b1fb091f0b26">More...</a><br /></td></tr>
+<tr class="separator:aebc1a038a715fd269319b1fb091f0b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada417f705745bf3e6612f5a9a0a5ef78"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#ada417f705745bf3e6612f5a9a0a5ef78">Drop_pressure_data_pt</a></td></tr>
+<tr class="memdesc:ada417f705745bf3e6612f5a9a0a5ef78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a global drop pressure datum.  <a href="classDropInChannelProblem.html#ada417f705745bf3e6612f5a9a0a5ef78">More...</a><br /></td></tr>
+<tr class="separator:ada417f705745bf3e6612f5a9a0a5ef78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7476353270d83e26d60f817c371572c"><td class="memItemLeft" align="right" valign="top">VolumeConstraintElement *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#ac7476353270d83e26d60f817c371572c">Vol_constraint_el_pt</a></td></tr>
+<tr class="memdesc:ac7476353270d83e26d60f817c371572c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to element that imposes volume constraint for drop.  <a href="classDropInChannelProblem.html#ac7476353270d83e26d60f817c371572c">More...</a><br /></td></tr>
+<tr class="separator:ac7476353270d83e26d60f817c371572c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b54287d521735c003d32b71f4f925c3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#a0b54287d521735c003d32b71f4f925c3">Initial_value_for_drop_pressure</a></td></tr>
+<tr class="memdesc:a0b54287d521735c003d32b71f4f925c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backed up drop pressure between adaptations.  <a href="classDropInChannelProblem.html#a0b54287d521735c003d32b71f4f925c3">More...</a><br /></td></tr>
+<tr class="separator:a0b54287d521735c003d32b71f4f925c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af88997c3a40755063c21e4a95601600a"><td class="memItemLeft" align="right" valign="top">ELEMENT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#af88997c3a40755063c21e4a95601600a">Hijacked_element_pt</a></td></tr>
+<tr class="memdesc:af88997c3a40755063c21e4a95601600a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to hijacked element.  <a href="classDropInChannelProblem.html#af88997c3a40755063c21e4a95601600a">More...</a><br /></td></tr>
+<tr class="separator:af88997c3a40755063c21e4a95601600a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa555cfd96e802218280acd0165f974dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDropInChannelProblem.html#aa555cfd96e802218280acd0165f974dd">Use_volume_constraint</a></td></tr>
+<tr class="memdesc:aa555cfd96e802218280acd0165f974dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool to indicate if volume constraint is applied (only for steady run)  <a href="classDropInChannelProblem.html#aa555cfd96e802218280acd0165f974dd">More...</a><br /></td></tr>
+<tr class="separator:aa555cfd96e802218280acd0165f974dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class DropInChannelProblem&lt; ELEMENT &gt;</h3>
+
+<p>Problem class to simulate viscous drop propagating along 2D channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00408">408</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a334e4cdb720696ffbc70724caf9b6dab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a334e4cdb720696ffbc70724caf9b6dab">&#9670;&nbsp;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enumeration of channel boundaries. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a334e4cdb720696ffbc70724caf9b6daba024ca7e6fdbb8bb0dee2984ad4fced0f"></a>Inflow_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a334e4cdb720696ffbc70724caf9b6daba8ce939185dbf37b1b305415c8c73c49c"></a>Upper_wall_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a334e4cdb720696ffbc70724caf9b6daba760529dba266f41a831817920ccb1873"></a>Outflow_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a334e4cdb720696ffbc70724caf9b6daba2eb65a21fcbe1b5fe6df3e39edfc3ad7"></a>Bottom_wall_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a334e4cdb720696ffbc70724caf9b6daba7302dcf9298cbc359783e0bc10832a1a"></a>First_drop_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a334e4cdb720696ffbc70724caf9b6dababf5c99f82e00ae63a827d4aef8c9d918"></a>Second_drop_boundary_id&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00644">644</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aad6e79f5560a5bfcba325f6558afb4ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad6e79f5560a5bfcba325f6558afb4ff">&#9670;&nbsp;</a></span>DropInChannelProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00662">662</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00378">Problem_Parameter::Ca</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00372">Problem_Parameter::Doc_info</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00395">Problem_Parameter::Length</a>, and <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00384">Problem_Parameter::Radius</a>.</p>
+
+</div>
+</div>
+<a id="aa311cd8061b915901c8c74617d2e4a37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa311cd8061b915901c8c74617d2e4a37">&#9670;&nbsp;</a></span>~DropInChannelProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00417">417</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00398">Problem_Parameter::Constitutive_law_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af5cc96bc60c2fd2386d16eac3ee5f83a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5cc96bc60c2fd2386d16eac3ee5f83a">&#9670;&nbsp;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::actions_after_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Rebuild the mesh of free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00477">477</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab38a14018a4093afe7cc0d9db9f1fc3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab38a14018a4093afe7cc0d9db9f1fc3b">&#9670;&nbsp;</a></span>actions_after_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00496">496</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4d4ae7fdef14f9838a46cc45278c7920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d4ae7fdef14f9838a46cc45278c7920">&#9670;&nbsp;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::actions_before_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the mesh of free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00464">464</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0e229343783fd73768dfa0a2672e9ad1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e229343783fd73768dfa0a2672e9ad1">&#9670;&nbsp;</a></span>actions_before_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00499">499</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3a868202b34b195a78298b4eaf7d3aff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a868202b34b195a78298b4eaf7d3aff">&#9670;&nbsp;</a></span>complete_problem_setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::complete_problem_setup</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set boundary conditions and complete the build of all elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01025">1025</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00398">Problem_Parameter::Constitutive_law_pt</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00392">Problem_Parameter::Inflow_veloc_magnitude</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00375">Problem_Parameter::Re</a>, and <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00375">Problem_Parameter::Viscosity_ratio</a>.</p>
+
+</div>
+</div>
+<a id="a49944969eb8dc6892cab3f1a9a2cb382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49944969eb8dc6892cab3f1a9a2cb382">&#9670;&nbsp;</a></span>compute_error_estimate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::compute_error_estimate </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>max_err</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>min_err</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the error estimates and assign to elements for plotting. </p>
+<p>Compute error estimates and assign to elements for plotting. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01268">1268</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a73b989e3bedbd3630f576b0dba0f724f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73b989e3bedbd3630f576b0dba0f724f">&#9670;&nbsp;</a></span>create_free_surface_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::create_free_surface_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create free surface elements. </p>
+<p>Create elements that impose the kinematic and dynamic bcs for the pseudo-solid fluid mesh </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00908">908</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00378">Problem_Parameter::Ca</a>.</p>
+
+</div>
+</div>
+<a id="a53b96cd50b4e6c9bee294b8fb7dd51bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53b96cd50b4e6c9bee294b8fb7dd51bd">&#9670;&nbsp;</a></span>create_volume_constraint_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::create_volume_constraint_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create elements that impose volume constraint on the drop. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00956">956</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00388">Problem_Parameter::Volume</a>.</p>
+
+</div>
+</div>
+<a id="a4463a1b341429f5a2c84a493aabb3a14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4463a1b341429f5a2c84a493aabb3a14">&#9670;&nbsp;</a></span>delete_free_surface_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::delete_free_surface_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00561">561</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="aec42cdf762f8b64c064db84df7f40f0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec42cdf762f8b64c064db84df7f40f0a">&#9670;&nbsp;</a></span>delete_volume_constraint_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::delete_volume_constraint_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete volume constraint elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00585">585</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3bcebc0cd731b75db441f3e1d62296ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bcebc0cd731b75db441f3e1d62296ae">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>comment</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01191">1191</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00372">Problem_Parameter::Doc_info</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00407">Problem_Parameter::Norm_file</a>, and <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00401">Problem_Parameter::Trace_file</a>.</p>
+
+</div>
+</div>
+<a id="ab8a7491ab12974ccc4cc10bfc0f20675"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8a7491ab12974ccc4cc10bfc0f20675">&#9670;&nbsp;</a></span>remove_volume_constraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::remove_volume_constraint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Change the boundary conditions to remove the volume constraint. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00519">519</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="abccd5c5d075bf179150c3d0df25dcea9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abccd5c5d075bf179150c3d0df25dcea9">&#9670;&nbsp;</a></span>Drop_polygon_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;TriangleMeshPolygon*&gt; <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Drop_polygon_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector storing pointer to the drop polygons. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00623">623</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="ada417f705745bf3e6612f5a9a0a5ef78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada417f705745bf3e6612f5a9a0a5ef78">&#9670;&nbsp;</a></span>Drop_pressure_data_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Drop_pressure_data_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to a global drop pressure datum. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00629">629</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a1f16a75afe9aad09be325d409a4a1b0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f16a75afe9aad09be325d409a4a1b0d">&#9670;&nbsp;</a></span>Fluid_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableSolidTriangleMesh&lt;ELEMENT&gt;* <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Fluid_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to Fluid_mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00620">620</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a6de0bac4bc483d500aa215a59bbf25bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6de0bac4bc483d500aa215a59bbf25bc">&#9670;&nbsp;</a></span>Free_surface_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Free_surface_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointers to mesh of free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00614">614</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="af88997c3a40755063c21e4a95601600a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af88997c3a40755063c21e4a95601600a">&#9670;&nbsp;</a></span>Hijacked_element_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ELEMENT* <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Hijacked_element_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to hijacked element. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00638">638</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0b54287d521735c003d32b71f4f925c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b54287d521735c003d32b71f4f925c3">&#9670;&nbsp;</a></span>Initial_value_for_drop_pressure</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Initial_value_for_drop_pressure</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Backed up drop pressure between adaptations. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00635">635</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="aebc1a038a715fd269319b1fb091f0b26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebc1a038a715fd269319b1fb091f0b26">&#9670;&nbsp;</a></span>Outer_boundary_polyline_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TriangleMeshPolygon* <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Outer_boundary_polyline_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Triangle mesh polygon for outer boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00626">626</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa555cfd96e802218280acd0165f974dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa555cfd96e802218280acd0165f974dd">&#9670;&nbsp;</a></span>Use_volume_constraint</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Use_volume_constraint</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bool to indicate if volume constraint is applied (only for steady run) </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00641">641</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac7476353270d83e26d60f817c371572c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7476353270d83e26d60f817c371572c">&#9670;&nbsp;</a></span>Vol_constraint_el_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VolumeConstraintElement* <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Vol_constraint_el_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to element that imposes volume constraint for drop. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00632">632</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac5f5480fe22c40a175a0b5c0ce39fa05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5f5480fe22c40a175a0b5c0ce39fa05">&#9670;&nbsp;</a></span>Volume_constraint_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classDropInChannelProblem.html">DropInChannelProblem</a>&lt; ELEMENT &gt;::Volume_constraint_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to mesh containing elements that impose volume constraint. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00617">617</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:07:03
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

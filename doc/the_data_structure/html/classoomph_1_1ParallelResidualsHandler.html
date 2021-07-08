@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ParallelResidualsHandler Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ParallelResidualsHandler.html">ParallelResidualsHandler</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1ParallelResidualsHandler-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::ParallelResidualsHandler Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class that is used to assemble the residuals in parallel by overloading the get_all_vectors_and_matrices, so that only the residuals are returned. This ensures that the (moderately complex) distributed parallel assembly loops are only in one place.  
+ <a href="classoomph_1_1ParallelResidualsHandler.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::ParallelResidualsHandler:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1ParallelResidualsHandler.png" usemap="#oomph::ParallelResidualsHandler_map" alt=""/>
+  <map id="oomph::ParallelResidualsHandler_map" name="oomph::ParallelResidualsHandler_map">
+<area href="classoomph_1_1AssemblyHandler.html" title="A class that is used to define the functions used to assemble the elemental contributions to the resi..." alt="oomph::AssemblyHandler" shape="rect" coords="0,0,197,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a900d86e1f8e9f4fa9369b0afec456b22"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ParallelResidualsHandler.html#a900d86e1f8e9f4fa9369b0afec456b22">ParallelResidualsHandler</a> (<a class="el" href="classoomph_1_1AssemblyHandler.html">AssemblyHandler</a> *const &amp;assembly_handler_pt)</td></tr>
+<tr class="memdesc:a900d86e1f8e9f4fa9369b0afec456b22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, set the original assembly handler.  <a href="classoomph_1_1ParallelResidualsHandler.html#a900d86e1f8e9f4fa9369b0afec456b22">More...</a><br /></td></tr>
+<tr class="separator:a900d86e1f8e9f4fa9369b0afec456b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16eb9ec097e85c5da57b2e588d9683b6"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ParallelResidualsHandler.html#a16eb9ec097e85c5da57b2e588d9683b6">ndof</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt)</td></tr>
+<tr class="memdesc:a16eb9ec097e85c5da57b2e588d9683b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use underlying assembly handler to return the number of degrees of freedom in the element elem_pt.  <a href="classoomph_1_1ParallelResidualsHandler.html#a16eb9ec097e85c5da57b2e588d9683b6">More...</a><br /></td></tr>
+<tr class="separator:a16eb9ec097e85c5da57b2e588d9683b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0541d552e54eb2ca8681054180eafb87"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ParallelResidualsHandler.html#a0541d552e54eb2ca8681054180eafb87">eqn_number</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, const unsigned &amp;ieqn_local)</td></tr>
+<tr class="memdesc:a0541d552e54eb2ca8681054180eafb87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use underlying <a class="el" href="classoomph_1_1AssemblyHandler.html" title="A class that is used to define the functions used to assemble the elemental contributions to the resi...">AssemblyHandler</a> to return the global equation number of the local unknown ieqn_local in elem_pt.  <a href="classoomph_1_1ParallelResidualsHandler.html#a0541d552e54eb2ca8681054180eafb87">More...</a><br /></td></tr>
+<tr class="separator:a0541d552e54eb2ca8681054180eafb87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a4e40b86cfb1db2b4c770d8d7241ad1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ParallelResidualsHandler.html#a9a4e40b86cfb1db2b4c770d8d7241ad1">get_residuals</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td></tr>
+<tr class="memdesc:a9a4e40b86cfb1db2b4c770d8d7241ad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use underlying <a class="el" href="classoomph_1_1AssemblyHandler.html" title="A class that is used to define the functions used to assemble the elemental contributions to the resi...">AssemblyHandler</a> to return the contribution to the residuals of the element elem_pt.  <a href="classoomph_1_1ParallelResidualsHandler.html#a9a4e40b86cfb1db2b4c770d8d7241ad1">More...</a><br /></td></tr>
+<tr class="separator:a9a4e40b86cfb1db2b4c770d8d7241ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a366186bb0905d7251390ec726fe33797"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ParallelResidualsHandler.html#a366186bb0905d7251390ec726fe33797">get_jacobian</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a366186bb0905d7251390ec726fe33797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use underlying <a class="el" href="classoomph_1_1AssemblyHandler.html" title="A class that is used to define the functions used to assemble the elemental contributions to the resi...">AssemblyHandler</a> to Calculate the elemental Jacobian matrix "d equation 
+/ d variable" for elem_pt.  <a href="classoomph_1_1ParallelResidualsHandler.html#a366186bb0905d7251390ec726fe33797">More...</a><br /></td></tr>
+<tr class="separator:a366186bb0905d7251390ec726fe33797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adea071e3131e4e84b7c3e9400892fb17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ParallelResidualsHandler.html#adea071e3131e4e84b7c3e9400892fb17">get_all_vectors_and_matrices</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;vec, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &gt; &amp;matrix)</td></tr>
+<tr class="memdesc:adea071e3131e4e84b7c3e9400892fb17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate all desired vectors and matrices provided by the element elem_pt This function calls only the get_residuals function associated with the original assembly handler.  <a href="classoomph_1_1ParallelResidualsHandler.html#adea071e3131e4e84b7c3e9400892fb17">More...</a><br /></td></tr>
+<tr class="separator:adea071e3131e4e84b7c3e9400892fb17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe905bb4dfc8977da144e8796f65ebf4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ParallelResidualsHandler.html#abe905bb4dfc8977da144e8796f65ebf4">~ParallelResidualsHandler</a> ()</td></tr>
+<tr class="memdesc:abe905bb4dfc8977da144e8796f65ebf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1ParallelResidualsHandler.html#abe905bb4dfc8977da144e8796f65ebf4">More...</a><br /></td></tr>
+<tr class="separator:abe905bb4dfc8977da144e8796f65ebf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1AssemblyHandler"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1AssemblyHandler')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1AssemblyHandler.html">oomph::AssemblyHandler</a></td></tr>
+<tr class="memitem:af3ab79744dce0b50370defdbf7981691 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#af3ab79744dce0b50370defdbf7981691">AssemblyHandler</a> ()</td></tr>
+<tr class="memdesc:af3ab79744dce0b50370defdbf7981691 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="classoomph_1_1AssemblyHandler.html#af3ab79744dce0b50370defdbf7981691">More...</a><br /></td></tr>
+<tr class="separator:af3ab79744dce0b50370defdbf7981691 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfd15243fce76ce8f1ea0248c700a3f4 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#abfd15243fce76ce8f1ea0248c700a3f4">dof_vector</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dof)</td></tr>
+<tr class="memdesc:abfd15243fce76ce8f1ea0248c700a3f4 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return vector of dofs at time level t in the element elem_pt.  <a href="classoomph_1_1AssemblyHandler.html#abfd15243fce76ce8f1ea0248c700a3f4">More...</a><br /></td></tr>
+<tr class="separator:abfd15243fce76ce8f1ea0248c700a3f4 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6002d5703a93b3b147de79508c5719 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#afe6002d5703a93b3b147de79508c5719">dof_pt_vector</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double * &gt; &amp;dof_pt)</td></tr>
+<tr class="memdesc:afe6002d5703a93b3b147de79508c5719 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return vector of pointers to dofs in the element elem_pt.  <a href="classoomph_1_1AssemblyHandler.html#afe6002d5703a93b3b147de79508c5719">More...</a><br /></td></tr>
+<tr class="separator:afe6002d5703a93b3b147de79508c5719 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab61559fc5df46871c1eebd103f7bf08b inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#ab61559fc5df46871c1eebd103f7bf08b">local_problem_dof</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:ab61559fc5df46871c1eebd103f7bf08b inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the t-th level of storage associated with the i-th (local) dof stored in the problem.  <a href="classoomph_1_1AssemblyHandler.html#ab61559fc5df46871c1eebd103f7bf08b">More...</a><br /></td></tr>
+<tr class="separator:ab61559fc5df46871c1eebd103f7bf08b inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ee980ccabe0ad82f98e694eecf270bb inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a2ee980ccabe0ad82f98e694eecf270bb">get_dresiduals_dparameter</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam)</td></tr>
+<tr class="memdesc:a2ee980ccabe0ad82f98e694eecf270bb inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivative of the residuals with respect to a parameter.  <a href="classoomph_1_1AssemblyHandler.html#a2ee980ccabe0ad82f98e694eecf270bb">More...</a><br /></td></tr>
+<tr class="separator:a2ee980ccabe0ad82f98e694eecf270bb inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc0c13a65342806c167c5d53f014803 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#aefc0c13a65342806c167c5d53f014803">get_djacobian_dparameter</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;djac_dparam)</td></tr>
+<tr class="memdesc:aefc0c13a65342806c167c5d53f014803 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivative of the residuals and jacobian with respect to a parameter.  <a href="classoomph_1_1AssemblyHandler.html#aefc0c13a65342806c167c5d53f014803">More...</a><br /></td></tr>
+<tr class="separator:aefc0c13a65342806c167c5d53f014803 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296bef49838d23522bb660c4c5207f03 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a296bef49838d23522bb660c4c5207f03">get_hessian_vector_products</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;Y, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; const &amp;C, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;product)</td></tr>
+<tr class="memdesc:a296bef49838d23522bb660c4c5207f03 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the product of the Hessian (derivative of Jacobian with respect to all variables) an eigenvector, Y, and other specified vectors, C (d(J_{ij})/d u_{k}) Y_{j} C_{k}.  <a href="classoomph_1_1AssemblyHandler.html#a296bef49838d23522bb660c4c5207f03">More...</a><br /></td></tr>
+<tr class="separator:a296bef49838d23522bb660c4c5207f03 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22c5f240674e4f6cee12006790c11dae inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a22c5f240674e4f6cee12006790c11dae">bifurcation_type</a> () const</td></tr>
+<tr class="memdesc:a22c5f240674e4f6cee12006790c11dae inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return an unsigned integer to indicate whether the handler is a bifurcation tracking handler. The default is zero (not)  <a href="classoomph_1_1AssemblyHandler.html#a22c5f240674e4f6cee12006790c11dae">More...</a><br /></td></tr>
+<tr class="separator:a22c5f240674e4f6cee12006790c11dae inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e369ec692c3d36a4a2a8a64dab7fe2b inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a3e369ec692c3d36a4a2a8a64dab7fe2b">bifurcation_parameter_pt</a> () const</td></tr>
+<tr class="memdesc:a3e369ec692c3d36a4a2a8a64dab7fe2b inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the bifurcation parameter in bifurcation tracking problems.  <a href="classoomph_1_1AssemblyHandler.html#a3e369ec692c3d36a4a2a8a64dab7fe2b">More...</a><br /></td></tr>
+<tr class="separator:a3e369ec692c3d36a4a2a8a64dab7fe2b inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d614b1b3809d0eb7ceb393e3ae9594f inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a6d614b1b3809d0eb7ceb393e3ae9594f">get_eigenfunction</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenfunction)</td></tr>
+<tr class="memdesc:a6d614b1b3809d0eb7ceb393e3ae9594f inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems.  <a href="classoomph_1_1AssemblyHandler.html#a6d614b1b3809d0eb7ceb393e3ae9594f">More...</a><br /></td></tr>
+<tr class="separator:a6d614b1b3809d0eb7ceb393e3ae9594f inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60c8efc6756825df9cd41389cdeac6cc inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a60c8efc6756825df9cd41389cdeac6cc">get_inner_products</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt; &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
+<tr class="memdesc:a60c8efc6756825df9cd41389cdeac6cc inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the inner products of the given vector of pairs of history values over the element.  <a href="classoomph_1_1AssemblyHandler.html#a60c8efc6756825df9cd41389cdeac6cc">More...</a><br /></td></tr>
+<tr class="separator:a60c8efc6756825df9cd41389cdeac6cc inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2300910f43476551318d74e3a90e7713 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a2300910f43476551318d74e3a90e7713">get_inner_product_vectors</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;inner_product_vector)</td></tr>
+<tr class="memdesc:a2300910f43476551318d74e3a90e7713 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the vectors that when taken as a dot product with other history values give the inner product over the element.  <a href="classoomph_1_1AssemblyHandler.html#a2300910f43476551318d74e3a90e7713">More...</a><br /></td></tr>
+<tr class="separator:a2300910f43476551318d74e3a90e7713 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ccef21253d997dd1a78ed26c2b99fce inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a0ccef21253d997dd1a78ed26c2b99fce">synchronise</a> ()</td></tr>
+<tr class="memdesc:a0ccef21253d997dd1a78ed26c2b99fce inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that is used to perform any synchronisation required during the solution <br  />
+  <a href="classoomph_1_1AssemblyHandler.html#a0ccef21253d997dd1a78ed26c2b99fce">More...</a><br /></td></tr>
+<tr class="separator:a0ccef21253d997dd1a78ed26c2b99fce inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab26633238200230ab57a20cc49e731de inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#ab26633238200230ab57a20cc49e731de">~AssemblyHandler</a> ()</td></tr>
+<tr class="memdesc:ab26633238200230ab57a20cc49e731de inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1AssemblyHandler.html#ab26633238200230ab57a20cc49e731de">More...</a><br /></td></tr>
+<tr class="separator:ab26633238200230ab57a20cc49e731de inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a39fa02ec4efbb5f23df78a593d116672"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AssemblyHandler.html">AssemblyHandler</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ParallelResidualsHandler.html#a39fa02ec4efbb5f23df78a593d116672">Assembly_handler_pt</a></td></tr>
+<tr class="memdesc:a39fa02ec4efbb5f23df78a593d116672"><td class="mdescLeft">&#160;</td><td class="mdescRight">The original assembly handler.  <a href="classoomph_1_1ParallelResidualsHandler.html#a39fa02ec4efbb5f23df78a593d116672">More...</a><br /></td></tr>
+<tr class="separator:a39fa02ec4efbb5f23df78a593d116672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class that is used to assemble the residuals in parallel by overloading the get_all_vectors_and_matrices, so that only the residuals are returned. This ensures that the (moderately complex) distributed parallel assembly loops are only in one place. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00270">270</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a900d86e1f8e9f4fa9369b0afec456b22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a900d86e1f8e9f4fa9369b0afec456b22">&#9670;&nbsp;</a></span>ParallelResidualsHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ParallelResidualsHandler::ParallelResidualsHandler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AssemblyHandler.html">AssemblyHandler</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>assembly_handler_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor, set the original assembly handler. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00278">278</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+</div>
+</div>
+<a id="abe905bb4dfc8977da144e8796f65ebf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe905bb4dfc8977da144e8796f65ebf4">&#9670;&nbsp;</a></span>~ParallelResidualsHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ParallelResidualsHandler::~ParallelResidualsHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00318">318</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0541d552e54eb2ca8681054180eafb87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0541d552e54eb2ca8681054180eafb87">&#9670;&nbsp;</a></span>eqn_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long oomph::ParallelResidualsHandler::eqn_number </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ieqn_local</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use underlying <a class="el" href="classoomph_1_1AssemblyHandler.html" title="A class that is used to define the functions used to assemble the elemental contributions to the resi...">AssemblyHandler</a> to return the global equation number of the local unknown ieqn_local in elem_pt. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a94d28e2de2559cde803d1ba2195b5290">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00288">288</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="assembly__handler_8h_source.html#l00273">Assembly_handler_pt</a>, and <a class="el" href="assembly__handler_8cc_source.html#l00074">oomph::AssemblyHandler::eqn_number()</a>.</p>
+
+</div>
+</div>
+<a id="adea071e3131e4e84b7c3e9400892fb17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adea071e3131e4e84b7c3e9400892fb17">&#9670;&nbsp;</a></span>get_all_vectors_and_matrices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ParallelResidualsHandler::get_all_vectors_and_matrices </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate all desired vectors and matrices provided by the element elem_pt This function calls only the get_residuals function associated with the original assembly handler. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#ab2e4ee4623116b18245ca90cfe9ba144">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00312">312</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="assembly__handler_8h_source.html#l00273">Assembly_handler_pt</a>, and <a class="el" href="assembly__handler_8cc_source.html#l00082">oomph::AssemblyHandler::get_residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a366186bb0905d7251390ec726fe33797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a366186bb0905d7251390ec726fe33797">&#9670;&nbsp;</a></span>get_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ParallelResidualsHandler::get_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use underlying <a class="el" href="classoomph_1_1AssemblyHandler.html" title="A class that is used to define the functions used to assemble the elemental contributions to the resi...">AssemblyHandler</a> to Calculate the elemental Jacobian matrix "d equation 
+/ d variable" for elem_pt. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#ad43c3d8760be0ba6ebee8d82509458e5">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00302">302</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="assembly__handler_8h_source.html#l00273">Assembly_handler_pt</a>, <a class="el" href="assembly__handler_8cc_source.html#l00090">oomph::AssemblyHandler::get_jacobian()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a9a4e40b86cfb1db2b4c770d8d7241ad1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a4e40b86cfb1db2b4c770d8d7241ad1">&#9670;&nbsp;</a></span>get_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::ParallelResidualsHandler::get_residuals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use underlying <a class="el" href="classoomph_1_1AssemblyHandler.html" title="A class that is used to define the functions used to assemble the elemental contributions to the resi...">AssemblyHandler</a> to return the contribution to the residuals of the element elem_pt. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a7a6203b0ab90da62b4da2af8a26d08b3">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00294">294</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="assembly__handler_8h_source.html#l00273">Assembly_handler_pt</a>, <a class="el" href="assembly__handler_8cc_source.html#l00082">oomph::AssemblyHandler::get_residuals()</a>, and <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a16eb9ec097e85c5da57b2e588d9683b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16eb9ec097e85c5da57b2e588d9683b6">&#9670;&nbsp;</a></span>ndof()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::ParallelResidualsHandler::ndof </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Use underlying assembly handler to return the number of degrees of freedom in the element elem_pt. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a09213be8f4aa009e0366460a7ed78e68">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00283">283</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="assembly__handler_8h_source.html#l00273">Assembly_handler_pt</a>, and <a class="el" href="assembly__handler_8cc_source.html#l00042">oomph::AssemblyHandler::ndof()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a39fa02ec4efbb5f23df78a593d116672"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39fa02ec4efbb5f23df78a593d116672">&#9670;&nbsp;</a></span>Assembly_handler_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AssemblyHandler.html">AssemblyHandler</a>* oomph::ParallelResidualsHandler::Assembly_handler_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The original assembly handler. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l00273">273</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8h_source.html#l00288">eqn_number()</a>, <a class="el" href="assembly__handler_8h_source.html#l00312">get_all_vectors_and_matrices()</a>, <a class="el" href="assembly__handler_8h_source.html#l00302">get_jacobian()</a>, <a class="el" href="assembly__handler_8h_source.html#l00294">get_residuals()</a>, and <a class="el" href="assembly__handler_8h_source.html#l00283">ndof()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

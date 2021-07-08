@@ -1,0 +1,246 @@
+\hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4}{}\doxysection{oomph\+::Refineable\+Solid\+Q\+Element$<$ 3 $>$ Class Reference}
+\label{classoomph_1_1RefineableSolidQElement_3_013_01_4}\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+
+
+Refineable version of Solid brick elements.  
+
+
+
+
+{\ttfamily \#include $<$refineable\+\_\+brick\+\_\+element.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Solid\+Q\+Element$<$ 3 $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.423729cm]{classoomph_1_1RefineableSolidQElement_3_013_01_4}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2ed2ea0f307ab12940b058734a428eea}{Refineable\+Solid\+Q\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, just call the constructor of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4}{Refineable\+Q\+Element$<$2$>$}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a814ca5f2d10f67a9429edd416d394f27}{Refineable\+Solid\+Q\+Element}} (const \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+Q\+Element}}$<$ 3 $>$ \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_adae9e315add1f710adb04beb738fa4f9}{$\sim$\+Refineable\+Solid\+Q\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2b1aa7874048e0f38370ae7bf761d315}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_aa8bce95f69e3199a508672eea7ecc226}{macro\+\_\+elem\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Final over-\/ride\+: Use version in \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{Q\+Solid\+Element\+Base}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_ab2c2950454d7c4ea16a597192c7fae15}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_aa8bce95f69e3199a508672eea7ecc226}{macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a20517d8d6ba84c8e90d880f38310915f}{undeformed\+\_\+macro\+\_\+elem\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Final over-\/ride\+: Use version in \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{Q\+Solid\+Element\+Base}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a305f594f84be7336b1bd63bc5c8f2d35}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Use the generic finite difference routine defined in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement}{Refineable\+Solid\+Element}} to calculate the Jacobian matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_ac880a52e8224bd4798969c5c7b5fb540}{get\+\_\+face\+\_\+solid\+\_\+bcs}} (const int \&edge, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&solid\+\_\+bound\+\_\+cons) const
+\begin{DoxyCompactList}\small\item\em Determine vector of solid (positional) boundary conditions along face (R/\+L/\+U/\+D/\+B/F) \mbox{[}Pressure does not have to be included since it can\textquotesingle{}t be subjected to bc at more than one node anyway\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a57590ae1b7cb21cc362a371eef096217}{get\+\_\+solid\+\_\+bcs}} (int bound, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&solid\+\_\+bound\+\_\+cons) const
+\begin{DoxyCompactList}\small\item\em Determine vector of solid (positional) boundary conditions along edge (or on vertex) bound (S/\+W/\+N/\+E/\+S\+W/\+S\+E/\+N\+W/\+NE)\+: For direction i, solid\+\_\+bound\+\_\+cons\mbox{[}i\mbox{]}=1 if displacement in this coordinate direction is pinned and 0 if it\textquotesingle{}s free. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a04d5c701a6769a34f5977920184e2eff}{build}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&new\+\_\+node\+\_\+pt, bool \&was\+\_\+already\+\_\+built, std\+::ofstream \&new\+\_\+nodes\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Build the element, i.\+e. give it nodal positions, apply B\+Cs, etc. Incl. documention into new\+\_\+nodes\+\_\+file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Refineable version of Solid brick elements. 
+
+Definition at line 235 of file refineable\+\_\+brick\+\_\+element.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2ed2ea0f307ab12940b058734a428eea}\label{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2ed2ea0f307ab12940b058734a428eea}} 
+\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}!RefineableSolidQElement@{RefineableSolidQElement}}
+\index{RefineableSolidQElement@{RefineableSolidQElement}!oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableSolidQElement()}{RefineableSolidQElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+Q\+Element}}$<$ 3 $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+Q\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, just call the constructor of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4}{Refineable\+Q\+Element$<$2$>$}} 
+
+
+
+Definition at line 242 of file refineable\+\_\+brick\+\_\+element.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4_a814ca5f2d10f67a9429edd416d394f27}\label{classoomph_1_1RefineableSolidQElement_3_013_01_4_a814ca5f2d10f67a9429edd416d394f27}} 
+\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}!RefineableSolidQElement@{RefineableSolidQElement}}
+\index{RefineableSolidQElement@{RefineableSolidQElement}!oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableSolidQElement()}{RefineableSolidQElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+Q\+Element}}$<$ 3 $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+Q\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+Q\+Element}}$<$ 3 $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 248 of file refineable\+\_\+brick\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4_adae9e315add1f710adb04beb738fa4f9}\label{classoomph_1_1RefineableSolidQElement_3_013_01_4_adae9e315add1f710adb04beb738fa4f9}} 
+\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}!````~RefineableSolidQElement@{$\sim$RefineableSolidQElement}}
+\index{````~RefineableSolidQElement@{$\sim$RefineableSolidQElement}!oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$RefineableSolidQElement()}{~RefineableSolidQElement()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+Q\+Element}}$<$ 3 $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{Refineable\+Solid\+Q\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Virtual Destructor 
+
+Definition at line 260 of file refineable\+\_\+brick\+\_\+element.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4_a04d5c701a6769a34f5977920184e2eff}\label{classoomph_1_1RefineableSolidQElement_3_013_01_4_a04d5c701a6769a34f5977920184e2eff}} 
+\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}!build@{build}}
+\index{build@{build}!oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+Q\+Element}}$<$ 3 $>$\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{new\+\_\+node\+\_\+pt,  }\item[{bool \&}]{was\+\_\+already\+\_\+built,  }\item[{std\+::ofstream \&}]{new\+\_\+nodes\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Build the element, i.\+e. give it nodal positions, apply B\+Cs, etc. Incl. documention into new\+\_\+nodes\+\_\+file. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4_ac085ca58b7eefb81628275e2b7ab07ce}{oomph\+::\+Refineable\+Q\+Element$<$ 3 $>$}}.
+
+
+
+Definition at line 297 of file refineable\+\_\+brick\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Q\+Solid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Node\+::nlagrangian\+\_\+type(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), s, oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+Q\+Element\+Base\+::s\+\_\+macro\+\_\+ur(), t, oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::\+Undeformed\+\_\+macro\+\_\+elem\+\_\+pt, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4_ac880a52e8224bd4798969c5c7b5fb540}\label{classoomph_1_1RefineableSolidQElement_3_013_01_4_ac880a52e8224bd4798969c5c7b5fb540}} 
+\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}!get\_face\_solid\_bcs@{get\_face\_solid\_bcs}}
+\index{get\_face\_solid\_bcs@{get\_face\_solid\_bcs}!oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+\doxysubsubsection{\texorpdfstring{get\_face\_solid\_bcs()}{get\_face\_solid\_bcs()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+Q\+Element}}$<$ 3 $>$\+::get\+\_\+face\+\_\+solid\+\_\+bcs (\begin{DoxyParamCaption}\item[{const int \&}]{face,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{solid\+\_\+bound\+\_\+cons }\end{DoxyParamCaption}) const}
+
+
+
+Determine vector of solid (positional) boundary conditions along face (R/\+L/\+U/\+D/\+B/F) \mbox{[}Pressure does not have to be included since it can\textquotesingle{}t be subjected to bc at more than one node anyway\mbox{]}. 
+
+Determine \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of solid (positional) boundary conditions along the element\textquotesingle{}s edge (S/\+N/\+W/E) -- BC is the least restrictive combination of all the nodes on this edge
+
+Usual convention\+:
+\begin{DoxyItemize}
+\item solid\+\_\+bound\+\_\+cons\mbox{[}i\mbox{]}=0 if displacement in coordinate direction i on this boundary is free
+\item solid\+\_\+bound\+\_\+cons\mbox{[}i\mbox{]}=1 if it\textquotesingle{}s pinned 
+\end{DoxyItemize}
+
+Definition at line 2773 of file refineable\+\_\+brick\+\_\+element.\+cc.
+
+
+
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Solid\+Node\+::position\+\_\+is\+\_\+pinned(), oomph\+::\+Binary\+Tree\+Names\+::R, and oomph\+::\+Oc\+Tree\+Names\+::U.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4_a305f594f84be7336b1bd63bc5c8f2d35}\label{classoomph_1_1RefineableSolidQElement_3_013_01_4_a305f594f84be7336b1bd63bc5c8f2d35}} 
+\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}!get\_jacobian@{get\_jacobian}}
+\index{get\_jacobian@{get\_jacobian}!oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+\doxysubsubsection{\texorpdfstring{get\_jacobian()}{get\_jacobian()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+Q\+Element}}$<$ 3 $>$\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Use the generic finite difference routine defined in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement}{Refineable\+Solid\+Element}} to calculate the Jacobian matrix. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_ab915bdad7e6643e5e73a6d98bc7cf48e}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 279 of file refineable\+\_\+brick\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4_a57590ae1b7cb21cc362a371eef096217}\label{classoomph_1_1RefineableSolidQElement_3_013_01_4_a57590ae1b7cb21cc362a371eef096217}} 
+\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}!get\_solid\_bcs@{get\_solid\_bcs}}
+\index{get\_solid\_bcs@{get\_solid\_bcs}!oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+\doxysubsubsection{\texorpdfstring{get\_solid\_bcs()}{get\_solid\_bcs()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+Q\+Element}}$<$ 3 $>$\+::get\+\_\+solid\+\_\+bcs (\begin{DoxyParamCaption}\item[{int}]{bound,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{solid\+\_\+bound\+\_\+cons }\end{DoxyParamCaption}) const}
+
+
+
+Determine vector of solid (positional) boundary conditions along edge (or on vertex) bound (S/\+W/\+N/\+E/\+S\+W/\+S\+E/\+N\+W/\+NE)\+: For direction i, solid\+\_\+bound\+\_\+cons\mbox{[}i\mbox{]}=1 if displacement in this coordinate direction is pinned and 0 if it\textquotesingle{}s free. 
+
+Determine vector of solid (positional) boundary conditions along the element\textquotesingle{}s boundary (or vertex) bound (S/\+W/\+N/\+E/\+S\+W/\+S\+E/\+N\+W/\+NE).
+
+This function assumes that the same boundary condition is applied along the entire length of an element\textquotesingle{}s edge (of course, the vertices combine the boundary conditions of their two adjacent edges in the most restrictive combination. Hence, if we\textquotesingle{}re at a vertex, we apply the most restrictive boundary condition of the two adjacent edges. If we\textquotesingle{}re on an edge (in its proper interior), we apply the least restrictive boundary condition of all nodes along the edge.
+
+Usual convention\+:
+\begin{DoxyItemize}
+\item solid\+\_\+bound\+\_\+cons\mbox{[}i\mbox{]}=0 if displacement in coordinate direction i on this boundary is free.
+\item solid\+\_\+bound\+\_\+cons\mbox{[}i\mbox{]}=1 if it\textquotesingle{}s pinned. 
+\end{DoxyItemize}
+
+Definition at line 2674 of file refineable\+\_\+brick\+\_\+element.\+cc.
+
+
+
+References oomph\+::\+Oc\+Tree\+::\+Direction\+\_\+to\+\_\+vector, i, n, and oomph\+::\+Oc\+Tree\+::\+Vector\+\_\+to\+\_\+direction.
+
+
+
+Referenced by oomph\+::\+Refineable\+Q\+Spectral\+Element$<$ 3 $>$\+::rebuild\+\_\+from\+\_\+sons().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2b1aa7874048e0f38370ae7bf761d315}\label{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2b1aa7874048e0f38370ae7bf761d315}} 
+\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}!set\_macro\_elem\_pt@{set\_macro\_elem\_pt}}
+\index{set\_macro\_elem\_pt@{set\_macro\_elem\_pt}!oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+\doxysubsubsection{\texorpdfstring{set\_macro\_elem\_pt()}{set\_macro\_elem\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+Q\+Element}}$<$ 3 $>$\+::set\+\_\+macro\+\_\+elem\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$}]{macro\+\_\+elem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Final over-\/ride\+: Use version in \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{Q\+Solid\+Element\+Base}}. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a0ceca47c039bbb38b0feb3baa330a27f}{oomph\+::\+Q\+Solid\+Element\+Base}}.
+
+
+
+Definition at line 264 of file refineable\+\_\+brick\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Q\+Solid\+Element\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidQElement_3_013_01_4_ab2c2950454d7c4ea16a597192c7fae15}\label{classoomph_1_1RefineableSolidQElement_3_013_01_4_ab2c2950454d7c4ea16a597192c7fae15}} 
+\index{oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}!set\_macro\_elem\_pt@{set\_macro\_elem\_pt}}
+\index{set\_macro\_elem\_pt@{set\_macro\_elem\_pt}!oomph::RefineableSolidQElement$<$ 3 $>$@{oomph::RefineableSolidQElement$<$ 3 $>$}}
+\doxysubsubsection{\texorpdfstring{set\_macro\_elem\_pt()}{set\_macro\_elem\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+Q\+Element}}$<$ 3 $>$\+::set\+\_\+macro\+\_\+elem\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$}]{macro\+\_\+elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$}]{undeformed\+\_\+macro\+\_\+elem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Final over-\/ride\+: Use version in \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{Q\+Solid\+Element\+Base}}. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QSolidElementBase_aa7f14a039224fb4c513da587448d2c3b}{oomph\+::\+Q\+Solid\+Element\+Base}}.
+
+
+
+Definition at line 270 of file refineable\+\_\+brick\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Q\+Solid\+Element\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__brick__element_8h}{refineable\+\_\+brick\+\_\+element.\+h}}\item 
+\mbox{\hyperlink{refineable__brick__element_8cc}{refineable\+\_\+brick\+\_\+element.\+cc}}\end{DoxyCompactItemize}

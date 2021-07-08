@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: two_d_unsteady_heat2.txt_doxygenified.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">two_d_unsteady_heat2.txt_doxygenified.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="two__d__unsteady__heat2_8txt__doxygenified_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">\mainpage Example problem: Solution of the 2D unsteady heat equation with restarts</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">Simulations of time-dependent problem can be very time consuming</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">and it is important to be able to restart simulations, e.g. to </span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">continue a run after a system crash, etc. </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">We shall illustrate \c oomph-lib&#39;s dump/restart capabilities by</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">re-visiting the 2D unsteady heat equation discussed</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">in a  &lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous example.&lt;/A&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">&lt;TABLE&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">&lt;TR&gt; </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">&lt;TD&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">&lt;B&gt;The two-dimensional unsteady heat equation in a square domain.&lt;/B&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">&lt;/CENTER&gt; </span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">Solve</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} </span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">= \frac{\partial u}{\partial t} + f\left(x_1,x_2,t\right),</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (1)</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">in the square domain \f$ D = \{x_i \in [0,1]; i=1,2 \} \f$ ,</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">subject to the Dirichlet boundary conditions</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">\left. u\right|_{\partial D}=g_0</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (2)</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">and initial conditions</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">u(x_1,x_2,t=0)=h_0(x_1,x_2),</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">\ \ \ \ \ \ \ \ \ \ (3)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">where the functions \f$ g_0 \f$ and  \f$ h_0 \f$ are given.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">&lt;/TD&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">&lt;/TR&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">&lt;/TABLE&gt;  </span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">As before, we consider the unforced case, \f$ f=0 \f$, and choose boundary</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">and initial conditions that are consistent with the exact solution</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">\f[</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">u_0(x_1,x_2,t) = e^{-Kt}\sin\left( \sqrt{K} \left( x_1 \cos \Phi + x_2 \sin</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">\Phi\right)\right),</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> \ \ \ \ \ \ \ \ \ \ (4)</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">\f]</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">where \f$ K \f$ and \f$ \Phi \f$ are constants, controlling the</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">decay rate of the solution and its spatial orientation, respectively.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">The figure below shows a plot of computed and exact solution at </span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">a control node as a function of time. The solid lines represent</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">quantities computed during the original simulation; the dashed line</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">shows the corresponding data from a second simulation that was </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">restarted with the restart file generated at timestep 23 of</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">the original simulation.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">\image html trace.gif &quot;Time evolution of the computed and exact solutions at a control node, the global error norm and the norm of the solution. Solid lines: original simulation; dashed lines: restarted simulation. &quot; </span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">\image latex trace.eps &quot;Time evolution of the computed and exact solutions at a control node, the global error norm and the norm of the solution. Solid lines: original simulation; dashed lines: restarted simulation. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">Most of the driver code for this example is identical to that </span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">discussed in the </span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous example,&lt;/A&gt;</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">therefore we only discuss the modifications required to enable the</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">dump and restart operations:</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">- We use optional command line arguments to specify the name of the restart</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">  file. If the code is run without any command line arguments, we</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">  start the simulation at time \f$ t=0 \f$ and generate the</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">  initial conditions as in the </span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">  &lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous example&lt;/A&gt;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">- We add dump and restart functions to the Problem class and</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">  call the dump function when post-processing the solution </span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">  in \c doc_solution(...).</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">- We modify the Problem member function \c set_initial_condition()        </span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">  so that the initial conditions are read from the restart file</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">  if a restart file was specified on the command line.</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">\section namespace Global parameters and functions</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">The namespace \c ExactSolnForUnsteadyHeat </span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">that stores the problem parameters is identical</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">to that in the &lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous example.&lt;/A&gt;</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">\section main The driver code</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">The only change to the main function is that we record the command line</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">arguments and store them in the namespace \c CommandLineArgs</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">\dontinclude two_d_unsteady_heat_restarted.cc</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">\skipline start_of_main</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">\until CommandLine</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">The rest of the main function is identical</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">to that in the &lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous example.&lt;/A&gt;</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">\section problem The problem class </span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">The problem class contains the two additional member functions</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">\dontinclude two_d_unsteady_heat_restarted.cc</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">\skipline Dump</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">\until restart_file</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">\section constructor The problem constructor</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">The  problem constructor is identical to that in the </span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous example.&lt;/A&gt;</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">\section destructor The problem destructor</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">The  problem destructor is identical to that in the </span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous example.&lt;/A&gt;</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">\section before_timestep Actions before timestep</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">This function is identical to that in the </span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous example.&lt;/A&gt;</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">\section IC Set initial condition</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">We start by checking the validity of the command line arguments,</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">accessible via the namespace \c CommandLineArgs, as</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">only a single command line argument is allowed. If a command line </span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">argument is provided, it is interpreted as the name of the restart file. </span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">We try to open the file and, if successful, pass the input stream</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">to the \c restart(...) function, discussed below. If no command line</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">arguments are specified, we generate the initial conditions, </span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">essentially as in the  </span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">&lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous example.&lt;/A&gt;</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">The only difference is that in the current version of the code, we </span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">moved the specification and initialisation of the timestep from the</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">\c main function into </span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">\c set_initial_condition(). This is because in a restarted</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">simulation, the value of \c dt must be consistent with that</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">used in the original simulation. If the simulation is restarted,</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">the generic \c Problem::read(...) function, called by \c restart(...), </span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">automatically initialises the previous timestep; otherwise</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">we have to perform the initialisation ourselves.</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">\skipline start_of_set_initial_condition</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">\until end of set_initial_condition  </span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">\section doc Post-processing</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">The Problem member function \c doc_solution(...) is identical to that</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">in the  &lt;A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt;previous </span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">example,&lt;/A&gt; apart from the addition of a call to the new \c</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">dump_it(...) function, discussed below. </span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">\skipline Write restart file</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">\until  some_file.close();</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">\section dump Dumping the solution</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">The \c Problem::dump(...) function writes the generic \c Problem data</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">in ASCII format to the specified output file. The content of the</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">file can therefore be inspected and, if necessary, manipulated</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">before a restart. However, the specific content of the file is</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">generally of little interest -- it is written in a format that</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">can be read by the corresponding function  \c Problem::read(...). </span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment"> Briefly, the dump file contains:</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">- A flag that indicates if the data was produced by a time-dependent</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">  simulation.</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">- The current value of the &quot;continuous&quot; time, i.e. the value returned</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">  by \c Problem::time_pt()-&gt;time();</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">- The number of previous timesteps, \c dt, stored in the \c Problem&#39;s \c Time</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">  object, and their values. </span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">- The values and history values for all \c Data objects in</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">  the \c Problem, as well as the present and previous coordinates</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">  of all \c Nodes.</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">The &quot;raw data&quot; is augmented by brief comments that facilitate </span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">the identification of individual entries. </span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">In the present problem, the generic \c Problem::dump(...) function</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">is sufficient to record the current state of the simulation, therefore</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">no additional information needs to be added to the dump file.</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">The section \ref comments below contains an exercise that </span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">illustrates how to customise the dump function to record additional </span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">parameters; the </span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">&lt;A HREF=&quot;../../two_d_unsteady_heat_ALE/html/index.html&quot;&gt;demo code</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">with spatial adaptivity&lt;/A&gt; provides another example of a customised</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">dump/restart function.</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">\skipline start_of_dump_it</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">\until end of dump_it</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">\section read Reading a solution from disk</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">Since the restart file was written by the generic \c</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">Problem::dump(...) function, it can be read back with the</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">generic  \c Problem::read(...) function. If any additional data</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">had been recorded in the restart file, additional read statements</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">could be added here; see \ref comments.</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">\skipline start_of_restart</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">\until end of restart</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">\section comments Comments and Exercises</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">The \c Problem::dump(...) and \c Problem::read(...)</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">functions write/read the generic data that is common to </span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">all \c oomph-lib problems. Occasionally, it is necessary </span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">to record additional data to re-create the system&#39;s</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">state when the simulations is restarted. We will explore this</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">in more detail in </span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">&lt;A HREF=&quot;../../two_d_unsteady_heat_2adapt/html/index.html&quot;&gt;another</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">example&lt;/A&gt;. Here we provide a brief exercise that illustrates </span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">the general idea and addresses a shortcoming of the driver code:</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">Currently the program computes the same number of timesteps,</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">regardless of whether or not the simulation was</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">restarted. If a simulation is restarted, the computation therefore</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">continues past \f$ t=t_{max}. \f$</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">\subsection exercises Exercises</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">- Change the \c for loop over the fixed number of timesteps</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">  in the \c main function to a \c while loop that checks if</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">  the continuous time, accessible via \c Problem::time_pt()-&gt;time(), </span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">  has reached or exceeded \f$ t_{max} \f$. This works because</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">  the \c Problem::dump(...) and \c Problem::read(...) functions</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">  dump and restore the value of the continuous time. </span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">- Following this trivial change, the restarted simulation </span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">  is terminated at the appropriate point but the numbering of the</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">  output files begins at 0, making it difficult to merge the </span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">  results from the original and the restarted simulations.</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">  Modify the functions \c dump_it(...) and \c restart(...) so that</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">  they write/read the current label for the output files</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">  to/from the restart file.</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">  \n\n \b Hints: &lt;B&gt;(i)&lt;/B&gt; You can write to/read from the restart file</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">  before calling \c Problem::dump(...) and \c Problem::read(...); just</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">  make sure you do it in the same order in both functions. &lt;B&gt;(ii)&lt;/B&gt; </span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">  The easiest way to make the label, currently stored in the \c</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">  DocInfo object in the \c main function,</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">  accessible to all member functions in the \c Problem is to </span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">  make the \c DocInfo object a private data member of the \c Problem </span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">  class.</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">\section sources Source files for this tutorial</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">- The source files for this tutorial are located in the directory:</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat/&quot;&gt;</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">demo_drivers/unsteady_heat/two_d_unsteady_heat/</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">- The driver code is: </span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat/two_d_unsteady_heat_restarted.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">demo_drivers/unsteady_heat/two_d_unsteady_heat/two_d_unsteady_heat_restarted.cc</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a78567464fb2a399ebab2eedacee86b9d"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a78567464fb2a399ebab2eedacee86b9d">D</a></div><div class="ttdeci">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump restart capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve f[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\f] in the square domain f D</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00023">two_d_unsteady_heat2.txt:23</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_ac2d0b1564b443624e10612d99ead968b"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#ac2d0b1564b443624e10612d99ead968b">before</a></div><div class="ttdeci">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump restart capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve f[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\f] in the square domain f subject to the Dirichlet boundary conditions f[\left. u\right|_{\partial D}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\f] and initial conditions f[u(x_1, x_2, t=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\f] where the functions f g_0 f and f h_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; As before</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00040">two_d_unsteady_heat2.txt:40</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a3e5bb1e45274fcc92a839a879b4ae6d3"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a3e5bb1e45274fcc92a839a879b4ae6d3">crash</a></div><div class="ttdeci">mainpage Example e g to continue a run after a system crash</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00005">two_d_unsteady_heat2.txt:5</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_af9b691f352becf166d45985f6e27743a"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#af9b691f352becf166d45985f6e27743a">restarted</a></div><div class="ttdeci">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the restart file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt; The only difference is that in the current version of the we moved the specification and initialisation of the timestep from the c main function into c the value of c dt must be consistent with that used in the original simulation If the simulation is restarted</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00158">two_d_unsteady_heat2.txt:158</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a82664a70747de92ecd18c5517938284e"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a82664a70747de92ecd18c5517938284e">timesteps</a></div><div class="ttdeci">The number of previous timesteps</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00198">two_d_unsteady_heat2.txt:198</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a16804cca049bcf5218aafab0e5c18250"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a16804cca049bcf5218aafab0e5c18250">f</a></div><div class="ttdeci">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump restart capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve f[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\f] in the square domain f subject to the Dirichlet boundary conditions f[\left. u\right|_{\partial D}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\f] and initial conditions f[u(x_1, x_2, t=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\f] where the functions f g_0 f and f h_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; As we consider the unforced f f</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00040">two_d_unsteady_heat2.txt:40</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a73236bbb6813d9d1fd18b9c406eac7a6"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a73236bbb6813d9d1fd18b9c406eac7a6">code</a></div><div class="ttdeci">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the restart file We try to open the file and if successful pass the input stream to the c discussed below If no command line arguments are we generate the initial essentially as in the&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt; The only difference is that in the current version of the code</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00153">two_d_unsteady_heat2.txt:153</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a54fa6ac9bf4f959cb77fdbeb29cbf67e"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a54fa6ac9bf4f959cb77fdbeb29cbf67e">Problem</a></div><div class="ttdeci">The number of previous c stored in the c Problem s c Time and their values The values and history values for all c Data objects in the c Problem</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00201">two_d_unsteady_heat2.txt:201</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_ac32f9756397f5ec7b244640399dbedc1"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#ac32f9756397f5ec7b244640399dbedc1">parameters</a></div><div class="ttdeci">The number of previous c stored in the c Problem s c Time and their values The values and history values for all c Data objects in the c as well as the present and previous coordinates of all c Nodes The raw data is augmented by brief comments that facilitate the identification of individual entries In the present the generic c therefore no additional information needs to be added to the dump file The section ref comments below contains an exercise that illustrates how to customise the dump function to record additional parameters</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00212">two_d_unsteady_heat2.txt:212</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_abe9a9796f4c9667bdf98f4296331a7c1"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#abe9a9796f4c9667bdf98f4296331a7c1">t</a></div><div class="ttdeci">dashed&lt;/A &gt; therefore we only discuss the modifications required to enable the dump and restart we start the simulation at time f t</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00069">two_d_unsteady_heat2.txt:69</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a63a7536226dfe6334a9dd4dbd78d2bce"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a63a7536226dfe6334a9dd4dbd78d2bce">simulation</a></div><div class="ttdeci">mainpage Example e g to continue a run after a system etc We shall illustrate c oomph lib s dump restart capabilities by re visiting the unsteady heat equation discussed in a&lt; A HREF=&quot;../../two_d_unsteady_heat/html/index.html&quot;&gt; previous example&lt;/A &gt;&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; The two dimensional unsteady heat equation in a square domain&lt;/B &gt;&lt;/CENTER &gt; Solve f[\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f\left(x_1, x_2, t\right), \ \ \ \ \ \ \ \ \ \ @E[2DHeat]@\f] in the square domain f subject to the Dirichlet boundary conditions f[\left. u\right|_{\partial D}=g_0\ \ \ \ \ \ \ \ \ \ @E[2DHeat_BC1]@\f] and initial conditions f[u(x_1, x_2, t=0)=h_0(x_1, x_2),\ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@\f] where the functions f g_0 f and f h_0 f are given&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt; As we consider the unforced f and choose boundary and initial conditions that are consistent with the exact solution f[u_0(x_1, x_2, t)=e^{-Kt}\sin\left(\sqrt{K} \left(x_1 \cos \Phi+x_2 \sin\Phi\right)\right), \ \ \ \ \ \ \ \ \ \ @E[ExactSoln1]@\f] where f K f and f Phi f are controlling the decay rate of the solution and its spatial respectively The figure below shows a plot of computed and exact solution at a control node as a function of time The solid lines represent quantities computed during the original simulation</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00052">two_d_unsteady_heat2.txt:52</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a23b281df1ce97bf86f6e777c703c7780"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a23b281df1ce97bf86f6e777c703c7780">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00004">two_d_unsteady_heat2.txt:4</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a2740d2bcf26c788968d97ee96c61b2c2"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a2740d2bcf26c788968d97ee96c61b2c2">function</a></div><div class="ttdeci">see ref comments skipline start_of_restart until end of restart&lt; HR &gt;&lt; HR &gt; section comments Comments and Exercises The c Problem::dump(...) and \c Problem just make sure you do it in the same order in both functions&lt; B &gt; ii&lt;/B &gt; The easiest way to make the currently stored in the c DocInfo object in the c main function</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00272">two_d_unsteady_heat2.txt:272</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a698650bba68085cb0034f8bcfe57ae04"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a698650bba68085cb0034f8bcfe57ae04">label</a></div><div class="ttdeci">see ref comments skipline start_of_restart until end of restart&lt; HR &gt;&lt; HR &gt; section comments Comments and Exercises The c Problem::dump(...) and \c Problem just make sure you do it in the same order in both functions&lt; B &gt; ii&lt;/B &gt; The easiest way to make the label</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00240">two_d_unsteady_heat2.txt:240</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_ab2597ecdbc7dd261da98cff494df71f9"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#ab2597ecdbc7dd261da98cff494df71f9">here</a></div><div class="ttdeci">the&lt; A HREF=&quot;../../two_d_unsteady_heat_ALE/html/index.html&quot;&gt; demo code with spatial adaptivity&lt;/A &gt; provides another example of a customised dump restart function skipline start_of_dump_it until end of dump_it&lt; HR &gt;&lt; HR &gt; section read Reading a solution from disk Since the restart file was written by the generic c it can be read back with the generic c additional read statements could be added here</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00230">two_d_unsteady_heat2.txt:230</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="two__d__unsteady__heat_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver code for unsteady heat equation.</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat_8cc_source.html#l00414">two_d_unsteady_heat.cc:414</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a7db09e50f04a54496d12ea041f5864b2"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a7db09e50f04a54496d12ea041f5864b2">restart</a></div><div class="ttdeci">namespace c CommandLineArgs as only a single command line argument is allowed If a command line argument is provided it is interpreted as the name of the restart file We try to open the file and if successful pass the input stream to the c restart(...) function</div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a8d4fdf96c485823f65b45440272f1dba"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a8d4fdf96c485823f65b45440272f1dba">necessary</a></div><div class="ttdeci">&lt; HR &gt;&lt; HR &gt; section dump Dumping the solution The c if necessary</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00188">two_d_unsteady_heat2.txt:188</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a7a2604285e6d47eab09c6e0022169c94"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a7a2604285e6d47eab09c6e0022169c94">contains</a></div><div class="ttdeci">&lt; HR &gt;&lt; HR &gt; section dump Dumping the solution The c if manipulated before a restart the specific content of the file is generally of little interest it is written in a format that can be read by the corresponding function c the dump file contains</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00196">two_d_unsteady_heat2.txt:196</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat2_8txt_html_a63cad0055231f0bffe1b58d16de769ad"><div class="ttname"><a href="two__d__unsteady__heat2_8txt.html#a63cad0055231f0bffe1b58d16de769ad">object</a></div><div class="ttdeci">The number of previous c stored in the c Problem s c Time object</div><div class="ttdef"><b>Definition:</b> <a href="two__d__unsteady__heat2_8txt_source.html#l00199">two_d_unsteady_heat2.txt:199</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:05:15
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

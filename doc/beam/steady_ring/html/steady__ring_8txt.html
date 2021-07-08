@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: steady_ring.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">steady_ring.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a33298df64564d35290d4b62eb7d5db4b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a33298df64564d35290d4b62eb7d5db4b">cos</a> = 0\f$ and reversed the procedure to re-trace the deformation to the axisymmetric state. @I w 0.75\textwidth <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> &quot;Computed <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> shapes. &quot; The figure below illustrates the load/displacement characteristics computed by this procedure. The graph shows the radii of two material points on the ring:The green line shows the radius \f$ R_1=<a class="el" href="steady__ring_8txt.html#a9566c2fac99af597dc818b88c49af085">R_</a>{ctrl} \f$ of the control point</td></tr>
+<tr class="separator:a33298df64564d35290d4b62eb7d5db4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a07f10fca61608cc50c44b7521c01e9eb"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a07f10fca61608cc50c44b7521c01e9eb">method</a> (whose convergence relies on the provision of good initial guesses for the unknowns) to diverge. We will demonstrate the use of so-called &quot;displacement control&quot; techniques to overcome these problems. Displacement-control techniques are useful in problems in which some \e a-priori knowledge about the expected displacement field allows us to re-formulate the problem. Rather than prescribing the load on the <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> solid and computing the displacement field</td></tr>
+<tr class="separator:a07f10fca61608cc50c44b7521c01e9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af43231c28de514cbf24bab9bd132b657"><td class="memItemLeft" align="right" valign="top">the red line the radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_2 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> of the material point located at <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> i e the material point located on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s second line of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#af43231c28de514cbf24bab9bd132b657">symmetry</a> (Because of the symmetry of the buckling pattern this line may also be interpreted as the load-displacement curve for the control point when the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> buckles in the &quot;opposite&quot; direction). The dash-dotted blue line shows the load/displacement curve when the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> deforms axisymmetrically. In this mode</td></tr>
+<tr class="separator:af43231c28de514cbf24bab9bd132b657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fd111ba8588ca6fa58a49b3f42739d9"><td class="memItemLeft" align="right" valign="top">n n This version of the constructor creates the load c Data object whose one and only value stores the adjustable load We obtain a pointer to the newly created c Data object from the access function c DisplacementControlElement::displacement_control_load_pt() and store it in \c Global_Physical_Variables n n&lt; B &gt; the c Data object that specifies the adjustable load level might already have been created elsewhere in the c Problem For such c oomph lib provides an alternative constructor whose argument list includes the pointer to the already existing load c Data object To demonstrate its use we create a suitable c Data object and store it in the c Problem s global c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a> (see \ref global_data for a more detailed discussion of this step) and pass it to the const ructor</td></tr>
+<tr class="separator:a6fd111ba8588ca6fa58a49b3f42739d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4cb42d1c9972b0bed2ea63a46d7fa6b"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a></td></tr>
+<tr class="separator:ae4cb42d1c9972b0bed2ea63a46d7fa6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae439c0156b07f1d396d1059b80900627"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a></td></tr>
+<tr class="separator:ae439c0156b07f1d396d1059b80900627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e3260e5f0a555a6c26886a0ff1f588"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a03e3260e5f0a555a6c26886a0ff1f588">However</a></td></tr>
+<tr class="separator:a03e3260e5f0a555a6c26886a0ff1f588"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bf6a2653642e85e8b35409f72eabaa1"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a0bf6a2653642e85e8b35409f72eabaa1">unstable</a></td></tr>
+<tr class="separator:a0bf6a2653642e85e8b35409f72eabaa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aa087d839f9c5c8936aad9799246a90"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a0aa087d839f9c5c8936aad9799246a90">buckled</a></td></tr>
+<tr class="separator:a0aa087d839f9c5c8936aad9799246a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac55261289ab92ecaeacd417f4446a15f"><td class="memItemLeft" align="right" valign="top">mainpage Demo loaded by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a></td></tr>
+<tr class="separator:ac55261289ab92ecaeacd417f4446a15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613315c2be71a812a98eeb48fdfc47db"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled elastic <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a></td></tr>
+<tr class="separator:a613315c2be71a812a98eeb48fdfc47db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a071bda08a071b8ffb953d85cf3d8d220"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external f implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if f the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in f this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius f R_0 f and wall thickness f h *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> {\bf R}_w(\<a class="el" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a>) \f$</td></tr>
+<tr class="separator:a071bda08a071b8ffb953d85cf3d8d220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace604e7e89d634205380f061ce23b4de"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt; A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A &gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s effective Young s&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#ace604e7e89d634205380f061ce23b4de">modulus</a></td></tr>
+<tr class="separator:ace604e7e89d634205380f061ce23b4de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9318e6fc6168deacb6d49ebfe463edbe"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt; A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A &gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s effective Young s <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a9318e6fc6168deacb6d49ebfe463edbe">E_</a></td></tr>
+<tr class="separator:a9318e6fc6168deacb6d49ebfe463edbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd3ebdb3f69ede75ded753a59b3f73e4"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt; A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A &gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s effective Young s <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> based on an inextensible beam&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#acd3ebdb3f69ede75ded753a59b3f73e4">model</a></td></tr>
+<tr class="separator:acd3ebdb3f69ede75ded753a59b3f73e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ef0c092c98e8a6a26c609e79c94f663"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the ring to buckle non axisymmetrically Once the ring is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> ring&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular ring of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt; A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A &gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the ring s effective Young s <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> based on an inextensible beam predicts opposite wall contact to occur at an external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> of <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>[<a class="el" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{ext}^{[owc]}=5.22 \times \frac{1}{12} h^3.\<a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>] To apply displacement control we change the formulation of the <a class="el" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> from&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Original formulation of the <a class="el" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>&lt;/B &gt;&lt;/CENTER &gt; Determine the position vector to the centreline of the deformed&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a></td></tr>
+<tr class="separator:a9ef0c092c98e8a6a26c609e79c94f663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9566c2fac99af597dc818b88c49af085"><td class="memItemLeft" align="right" valign="top">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt; A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A &gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s effective Young s <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> based on an inextensible beam predicts opposite wall contact to occur at an external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> of <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>[<a class="el" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{ext}^{[owc]}=5.22 \times \frac{1}{12} h^3.\<a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>] To apply displacement control we change the formulation of the <a class="el" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> from&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Original formulation of the <a class="el" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>&lt;/B &gt;&lt;/CENTER &gt; Determine the position vector to the centreline of the deformed in terms of the Lagragian coordinate <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> <a class="el" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a> in[0, 2\pi] for a given value of the external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> in terms of the Lagragian coordinate <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> <a class="el" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a> in[0, 2\pi] for an external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> i e <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>[{\bf R}_w(\<a class="el" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a>=\pi/2) \cdot {\bf e}_2=R_{ctrl},\<a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>] where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#a9566c2fac99af597dc818b88c49af085">R_</a></td></tr>
+<tr class="separator:a9566c2fac99af597dc818b88c49af085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad491714529f007b47396d009f24f18ac"><td class="memItemLeft" align="right" valign="top">the red line the radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_2 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> of the material point located at <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a> = 0\f$</td></tr>
+<tr class="separator:ad491714529f007b47396d009f24f18ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab27ab9e5dfedad74cc89fad8c81e94e3"><td class="memItemLeft" align="right" valign="top">the red line the radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_2 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> of the material point located at <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> i e the material point located on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s second line of the radii of the two material points are obviously identical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#ab27ab9e5dfedad74cc89fad8c81e94e3">Finally</a></td></tr>
+<tr class="separator:ab27ab9e5dfedad74cc89fad8c81e94e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc96a38c1197c5a2a124caea1249a39"><td class="memItemLeft" align="right" valign="top">n n&lt; B &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#aefc96a38c1197c5a2a124caea1249a39">Case</a></td></tr>
+<tr class="separator:aefc96a38c1197c5a2a124caea1249a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1612e04b9f9cc8202988b668bcaf278"><td class="memItemLeft" align="right" valign="top">n n This version of the constructor creates the load c <a class="el" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a> object whose one and only value stores the adjustable load We obtain a pointer to the newly created c <a class="el" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a> object from the access function c DisplacementControlElement::displacement_control_load_pt() and store it in \c Global_Physical_Variables n n&lt; B &gt; the c <a class="el" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a> object that specifies the adjustable load level might already have been created elsewhere in the c Problem For such&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="steady__ring_8txt.html#aa1612e04b9f9cc8202988b668bcaf278">cases</a></td></tr>
+<tr class="separator:aa1612e04b9f9cc8202988b668bcaf278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a33298df64564d35290d4b62eb7d5db4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33298df64564d35290d4b62eb7d5db4b">&#9670;&nbsp;</a></span>cos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="steady__ring_8txt.html#a33298df64564d35290d4b62eb7d5db4b">cos</a> =  0\f$ and reversed the procedure to re-trace the deformation to the axisymmetric state. @I w 0.75\textwidth <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> &quot;Computed <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> shapes. &quot; The figure below illustrates the load/displacement characteristics computed by this procedure. The graph shows the radii of two material points on the ring: The green line shows the radius \f$ R_1 = <a class="el" href="steady__ring_8txt.html#a9566c2fac99af597dc818b88c49af085">R_</a>{ctrl} \f$ of the control point</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00189">189</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a6fd111ba8588ca6fa58a49b3f42739d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fd111ba8588ca6fa58a49b3f42739d9">&#9670;&nbsp;</a></span>Data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">n n This version of the constructor creates the load c Data object whose one and only value stores the adjustable load We obtain a pointer to the newly created c Data object from the access function c DisplacementControlElement::displacement_control_load_pt () and store it in \c Global_Physical_Variables n n&lt;B&gt; the c Data object that specifies the adjustable load level might already have been created elsewhere in the c Problem For such c oomph lib provides an alternative constructor whose argument list includes the pointer to the already existing load c Data object To demonstrate its use we create a suitable c Data object and store it in the c Problem s global c Data </td>
+          <td>(</td>
+          <td class="paramtype">see \ref global_data for a more detailed discussion of this&#160;</td>
+          <td class="paramname"><em>step</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00406">406</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="steady__ring_8cc_source.html#l00150">ElasticRingProblem&lt; ELEMENT &gt;::ElasticRingProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a07f10fca61608cc50c44b7521c01e9eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07f10fca61608cc50c44b7521c01e9eb">&#9670;&nbsp;</a></span>method()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton method </td>
+          <td>(</td>
+          <td class="paramtype">whose convergence relies on the provision of good initial guesses for the&#160;</td>
+          <td class="paramname"><em>unknowns</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af43231c28de514cbf24bab9bd132b657"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af43231c28de514cbf24bab9bd132b657">&#9670;&nbsp;</a></span>symmetry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the red line the radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_2 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> of the material point located at <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> i e the material point located on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s second line of symmetry </td>
+          <td>(</td>
+          <td class="paramtype">Because of the symmetry of the buckling pattern this line may also be interpreted as the load-displacement curve for the control point when the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> buckles in the &quot;opposite&quot;&#160;</td>
+          <td class="paramname"><em>direction</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a0aa087d839f9c5c8936aad9799246a90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aa087d839f9c5c8936aad9799246a90">&#9670;&nbsp;</a></span>buckled</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once buckled</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00011">11</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="aefc96a38c1197c5a2a124caea1249a39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefc96a38c1197c5a2a124caea1249a39">&#9670;&nbsp;</a></span>Case</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">n n This version of the constructor creates the load c <a class="el" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a> object whose one and only value stores the adjustable load We obtain a pointer to the newly created c <a class="el" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a> object from the access function c DisplacementControlElement::displacement_control_load_pt () and store it in \c Global_Physical_Variables n n&lt;B&gt; Case</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00375">375</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa1612e04b9f9cc8202988b668bcaf278"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1612e04b9f9cc8202988b668bcaf278">&#9670;&nbsp;</a></span>cases</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">n n This version of the constructor creates the load c <a class="el" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a> object whose one and only value stores the adjustable load We obtain a pointer to the newly created c <a class="el" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a> object from the access function c DisplacementControlElement::displacement_control_load_pt () and store it in \c Global_Physical_Variables n n&lt;B&gt; the c <a class="el" href="steady__ring_8txt.html#a6fd111ba8588ca6fa58a49b3f42739d9">Data</a> object that specifies the adjustable load level might already have been created elsewhere in the c Problem For such cases</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00402">402</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9318e6fc6168deacb6d49ebfe463edbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9318e6fc6168deacb6d49ebfe463edbe">&#9670;&nbsp;</a></span>E_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt;A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A&gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s effective Young s <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> E_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00050">50</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a613315c2be71a812a98eeb48fdfc47db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a613315c2be71a812a98eeb48fdfc47db">&#9670;&nbsp;</a></span>elastic</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled elastic <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the deformation of a linearly elastic</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00041">41</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a071bda08a071b8ffb953d85cf3d8d220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a071bda08a071b8ffb953d85cf3d8d220">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external f implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if f the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in f this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius f R_0 f and wall thickness f h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> f justifying the use of beam theory As discussed in&lt; A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A &gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s effective Young s f where f based on an inextensible beam predicts opposite wall contact to occur at an external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> of f {\bf R}_w(\<a class="el" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a>) \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00042">42</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab27ab9e5dfedad74cc89fad8c81e94e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab27ab9e5dfedad74cc89fad8c81e94e3">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the red line the radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_2 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> of the material point located at <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> i e the material point located on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s second line of the radii of the two material points are obviously identical Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00197">197</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a03e3260e5f0a555a6c26886a0ff1f588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03e3260e5f0a555a6c26886a0ff1f588">&#9670;&nbsp;</a></span>However</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius However</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00009">9</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac55261289ab92ecaeacd417f4446a15f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac55261289ab92ecaeacd417f4446a15f">&#9670;&nbsp;</a></span>loaded</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo loaded by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> loaded</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00038">38</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="acd3ebdb3f69ede75ded753a59b3f73e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd3ebdb3f69ede75ded753a59b3f73e4">&#9670;&nbsp;</a></span>model</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt;A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A&gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s effective Young s <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> based on an inextensible beam model</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00104">104</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="ace604e7e89d634205380f061ce23b4de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace604e7e89d634205380f061ce23b4de">&#9670;&nbsp;</a></span>modulus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt;A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A&gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s effective Young s modulus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00049">49</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae439c0156b07f1d396d1059b80900627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae439c0156b07f1d396d1059b80900627">&#9670;&nbsp;</a></span>p_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the red line the radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_2 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> of the material point located at <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> i e the material point located on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s second line of the radii of the two material points are obviously identical the dashed lines shows the load displacement path when the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is subjected to a non zero perturbation <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> which deforms it non axisymmetrically so that <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_1 ne R_2 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> even for <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> p_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{ext}<a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ .</div>
+<div class="line">For sufficiently small positive (or arbitrarily large negative)</div>
+<div class="line">values <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">of  \f</a>$ <a class="code" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{ext}<a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ the <a class="code" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> deforms axisymmetrically and in</div>
+<div class="line"><span class="keyword">this</span> mode it is very stiff</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00005">5</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae4cb42d1c9972b0bed2ea63a46d7fa6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4cb42d1c9972b0bed2ea63a46d7fa6b">&#9670;&nbsp;</a></span>pressure</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the red line the radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_2 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> of the material point located at <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> i e the material point located on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s second line of the radii of the two material points are obviously identical the dashed lines shows the load displacement path when the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is subjected to a non zero perturbation pressure</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00005">5</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00005">5</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="steady__ring_8cc_source.html#l00456">main()</a>.</p>
+
+</div>
+</div>
+<a id="a9566c2fac99af597dc818b88c49af085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9566c2fac99af597dc818b88c49af085">&#9670;&nbsp;</a></span>R_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle non axisymmetrically Once the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a>&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the deformation of a linearly circular <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt;A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A&gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the <a class="el" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> s effective Young s <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> based on an inextensible beam predicts opposite wall contact to occur at an external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> of <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> [<a class="el" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{ext}^{[owc]} = 5.22 \times \frac{1}{12} h^3.\<a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>] To apply displacement control we change the formulation of the <a class="el" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> from&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; Original formulation of the <a class="el" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>&lt;/B&gt;&lt;/CENTER&gt; Determine the position vector to the centreline of the deformed in terms of the Lagragian coordinate <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> <a class="el" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a> in [0,2\pi] for a given value of the external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> in terms of the Lagragian coordinate <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> <a class="el" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a> in [0,2\pi] for an external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> i e <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> [{\bf R}_w(\<a class="el" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a>=\pi/2) \cdot {\bf e}_2 = R_{ctrl},\<a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>] where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{ctrl} \in [0,1] <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ is given.</div>
+<div class="line"> </div>
+<div class="line">&lt;/TD&gt; </div>
+<div class="line">&lt;/TR&gt;</div>
+<div class="line">&lt;/TABLE&gt;  </div>
+<div class="line">&lt;/CENTER&gt;  </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">&lt;HR&gt;</div>
+<div class="line"> </div>
+<div class="line">\section results Results</div>
+<div class="line"> </div>
+<div class="line">The figure below shows computed <a class="code" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> shapes <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">for \f</a>$ h^*/R_0 =</div>
+<div class="line">1/20 <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$. They were obtained in two phases: During the first phase </div>
+<div class="line">of the computation we subjected the <a class="code" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to a load of the <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">form</a></div>
+<div class="line"><a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>[</div>
+<div class="line">{\bf <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>} = \bigg( <a class="code" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{ext} - <a class="code" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{<a class="code" href="steady__ring_8txt.html#a33298df64564d35290d4b62eb7d5db4b">cos</a>} <a class="code" href="steady__ring_8txt.html#a33298df64564d35290d4b62eb7d5db4b">\cos</a>(2 \<a class="code" href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a>) \bigg) \, {\bf N}</div>
+<div class="line"><a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>]</div>
+<div class="line"><a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">where \f</a>$ {\bf N} <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ is the outer unit normal on the deformed <a class="code" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a></div>
+<div class="line"><a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">and \f</a>$ <a class="code" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{<a class="code" href="steady__ring_8txt.html#a33298df64564d35290d4b62eb7d5db4b">cos</a>} \ll 1 <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ is a small cosinusoidal perturbation</div>
+<div class="line">to the external <a class="code" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> which forces the <a class="code" href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a> to buckle</div>
+<div class="line"><span class="stringliteral">&quot;in the right direction&quot;</span>. The undeformed configuration was </div>
+<div class="line">used as the initial guess <span class="keywordflow">for</span> an initial computation <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">with </a></div>
+<div class="line"><a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ <a class="code" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{ext} = 0<a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ [or, in the <span class="keywordflow">case</span> of displacement control, </div>
+<div class="line"><a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ <a class="code" href="steady__ring_8txt.html#a9566c2fac99af597dc818b88c49af085">R_</a>{ctrl} = 1<a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ ]. Subsequently we <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">increased \f</a>$ <a class="code" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{ext} <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$</div>
+<div class="line">[or <a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">decreased \f</a>$ <a class="code" href="steady__ring_8txt.html#a9566c2fac99af597dc818b88c49af085">R_</a>{ctrl}<a class="code" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">\f</a>$ ] in small steps</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00151">151</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9ef0c092c98e8a6a26c609e79c94f663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ef0c092c98e8a6a26c609e79c94f663">&#9670;&nbsp;</a></span>ring</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes causing the ring to buckle non axisymmetrically Once the ring is much more flexible and small changes in <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt; n&lt;CENTER&gt;&lt;B&gt; Non axisymmetric buckling of a <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> thin walled <a class="el" href="steady__ring_8txt.html#a613315c2be71a812a98eeb48fdfc47db">elastic</a> ring&lt;/B&gt;&lt;/CENTER&gt; We wish to compute the deformation of a linearly circular ring of undeformed radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_0 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> and wall thickness <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> h subject to a spatially constant external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> justifying the use of beam theory As discussed in&lt;A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A&gt; we scale the <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> on the ring s effective Young s <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> where <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> based on an inextensible beam predicts opposite wall contact to occur at an external <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> of <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> [<a class="el" href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a>{ext}^{[owc]} = 5.22 \times \frac{1}{12} h^3.\<a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a>] To apply displacement control we change the formulation of the <a class="el" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> from&lt;CENTER&gt;&lt;TABLE&gt;&lt;TR&gt;&lt;TD&gt;&lt;CENTER&gt;&lt;B&gt; Original formulation of the <a class="el" href="steady__ring_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a>&lt;/B&gt;&lt;/CENTER&gt; Determine the position vector to the centreline of the deformed ring</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00122">122</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0bf6a2653642e85e8b35409f72eabaa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bf6a2653642e85e8b35409f72eabaa1">&#9670;&nbsp;</a></span>unstable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo <a class="el" href="steady__ring_8txt.html#ac55261289ab92ecaeacd417f4446a15f">loaded</a> by a spatially constant external <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> implying that large changes in <a class="el" href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a> are required to change its radius if <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> the axisymmetric configuration becomes unstable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00010">10</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad491714529f007b47396d009f24f18ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad491714529f007b47396d009f24f18ac">&#9670;&nbsp;</a></span>xi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the red line the radius <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> R_2 <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> of the material point located at <a class="el" href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a> xi = 0\f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="steady__ring_8txt_source.html#l00190">190</a> of file <a class="el" href="steady__ring_8txt_source.html">steady_ring.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="steady__ring_8cc_source.html#l00064">Global_Physical_Variables::press_load()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="asteady__ring_8txt_html_a9ef0c092c98e8a6a26c609e79c94f663"><div class="ttname"><a href="steady__ring_8txt.html#a9ef0c092c98e8a6a26c609e79c94f663">ring</a></div><div class="ttdeci">mainpage Demo loaded by a spatially constant external f implying that large changes in pressure are required to change its radius if f the axisymmetric configuration becomes causing the ring to buckle non axisymmetrically Once the ring is much more flexible and small changes in f this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a pressure thin walled elastic ring&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular ring of undeformed radius f R_0 f and wall thickness f h subject to a spatially constant external pressure f justifying the use of beam theory As discussed in&lt; A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A &gt; we scale the pressure on the ring s effective Young s f where f based on an inextensible beam predicts opposite wall contact to occur at an external pressure of f[p_{ext}^{[owc]}=5.22 \times \frac{1}{12} h^3.\f] To apply displacement control we change the formulation of the problem from&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Original formulation of the problem&lt;/B &gt;&lt;/CENTER &gt; Determine the position vector to the centreline of the deformed ring</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00122">steady_ring.txt:122</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_ae4cb42d1c9972b0bed2ea63a46d7fa6b"><div class="ttname"><a href="steady__ring_8txt.html#ae4cb42d1c9972b0bed2ea63a46d7fa6b">pressure</a></div><div class="ttdeci">mainpage Demo loaded by a spatially constant external pressure</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00005">steady_ring.txt:5</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_ae439c0156b07f1d396d1059b80900627"><div class="ttname"><a href="steady__ring_8txt.html#ae439c0156b07f1d396d1059b80900627">p_</a></div><div class="ttdeci">mainpage Demo loaded by a spatially constant external f p_</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00005">steady_ring.txt:5</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_a071bda08a071b8ffb953d85cf3d8d220"><div class="ttname"><a href="steady__ring_8txt.html#a071bda08a071b8ffb953d85cf3d8d220">f</a></div><div class="ttdeci">mainpage Demo loaded by a spatially constant external f implying that large changes in pressure are required to change its radius if f the axisymmetric configuration becomes causing the ring to buckle non axisymmetrically Once the ring is much more flexible and small changes in f this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a pressure thin walled elastic ring&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular ring of undeformed radius f R_0 f and wall thickness f h * f</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00042">steady_ring.txt:42</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_a9566c2fac99af597dc818b88c49af085"><div class="ttname"><a href="steady__ring_8txt.html#a9566c2fac99af597dc818b88c49af085">R_</a></div><div class="ttdeci">mainpage Demo loaded by a spatially constant external f implying that large changes in pressure are required to change its radius if f the axisymmetric configuration becomes causing the ring to buckle non axisymmetrically Once the ring is much more flexible and small changes in f this can cause the Newton we prescribe the displacement of a carefully selected material control point and regard the load required to achieve this displacement as an unknown&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt; n&lt; CENTER &gt;&lt; B &gt; Non axisymmetric buckling of a pressure thin walled elastic ring&lt;/B &gt;&lt;/CENTER &gt; We wish to compute the deformation of a linearly circular ring of undeformed radius f R_0 f and wall thickness f h subject to a spatially constant external pressure f justifying the use of beam theory As discussed in&lt; A HREF=&quot;../../tensioned_string/html/index.html&quot;&gt; the previous example&lt;/A &gt; we scale the pressure on the ring s effective Young s f where f based on an inextensible beam predicts opposite wall contact to occur at an external pressure of f[p_{ext}^{[owc]}=5.22 \times \frac{1}{12} h^3.\f] To apply displacement control we change the formulation of the problem from&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Original formulation of the problem&lt;/B &gt;&lt;/CENTER &gt; Determine the position vector to the centreline of the deformed in terms of the Lagragian coordinate f xi in[0, 2\pi] for a given value of the external pressure f in terms of the Lagragian coordinate f xi in[0, 2\pi] for an external pressure f i e f[{\bf R}_w(\xi=\pi/2) \cdot {\bf e}_2=R_{ctrl},\f] where f R_</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00151">steady_ring.txt:151</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_a33298df64564d35290d4b62eb7d5db4b"><div class="ttname"><a href="steady__ring_8txt.html#a33298df64564d35290d4b62eb7d5db4b">cos</a></div><div class="ttdeci">0\f$ and reversed the procedure to re-trace the deformation to the axisymmetric state. @I w 0.75\textwidth ring &quot;Computed ring shapes. &quot; The figure below illustrates the load/displacement characteristics computed by this procedure. The graph shows the radii of two material points on the ring:The green line shows the radius \f$ R_1=R_{ctrl} \f$ of the control point cos</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00189">steady_ring.txt:189</a></div></div>
+<div class="ttc" id="asteady__ring_8txt_html_ad491714529f007b47396d009f24f18ac"><div class="ttname"><a href="steady__ring_8txt.html#ad491714529f007b47396d009f24f18ac">xi</a></div><div class="ttdeci">the red line the radius f R_2 f of the material point located at f xi</div><div class="ttdef"><b>Definition:</b> <a href="steady__ring_8txt_source.html#l00190">steady_ring.txt:190</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:14:11
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

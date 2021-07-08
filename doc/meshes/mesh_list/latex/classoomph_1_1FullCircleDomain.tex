@@ -1,0 +1,214 @@
+\hypertarget{classoomph_1_1FullCircleDomain}{}\doxysection{oomph\+::Full\+Circle\+Domain Class Reference}
+\label{classoomph_1_1FullCircleDomain}\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+
+
+Topologically circular domain, e.\+g. a tube cross section. The entire domain must be defined by a Geom\+Object with the following convention\+: zeta\mbox{[}0\mbox{]} is the radial coordinate and zeta\mbox{[}1\mbox{]} is the theta coordinate around the cross-\/sectin. The outer boundary must lie at zeta\mbox{[}0\mbox{]} = 1.  
+
+
+
+
+{\ttfamily \#include $<$full\+\_\+circle\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Full\+Circle\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1FullCircleDomain}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FullCircleDomain_a35697cff7683dde517a2b8cf912a6aac}{Full\+Circle\+Domain}} (Geom\+Object $\ast$area\+\_\+geom\+\_\+object\+\_\+pt, const Vector$<$ double $>$ \&theta\+\_\+positions, const Vector$<$ double $>$ \&radius\+\_\+box)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass geometric object; the theta locations marking the division between the elements of the outer ring, labelled from the lower left to the upper left in order, theta should be in the range $-\pi$ to $\pi$; and the corresponding fractions of the radius at which the central box is to be placed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FullCircleDomain_a36c2bdc01a19f511c97a89f87cd5b7dc}{Full\+Circle\+Domain}} (const \mbox{\hyperlink{classoomph_1_1FullCircleDomain}{Full\+Circle\+Domain}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a9293b7e09e37a9bc3cc4e495e6a22587}{operator=}} (const \mbox{\hyperlink{classoomph_1_1FullCircleDomain}{Full\+Circle\+Domain}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FullCircleDomain_afbdae044de6d958491a0b1a8cfcbc175}{$\sim$\+Full\+Circle\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a93253d6c878c3ab40a582e0d2070a69d}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&t, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const Vector$<$ double $>$ \&s, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\+\_\+interpolate}} (const Vector$<$ double $>$ \&low, const Vector$<$ double $>$ \&high, const double \&s, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em A very little linear interpolation helper. Interpolate from the low point to the high point using the coordinate s, which is assumed to run from -\/1 to 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\+\_\+positions}}
+\begin{DoxyCompactList}\small\item\em Storage for the dividing lines on the boundary starting from the lower left and proceeding anticlockwise to the upper left. \end{DoxyCompactList}\item 
+Vector$<$ double $>$ \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a96d5b35a7b41251a033d923afc953636}{Radius\+\_\+box}}
+\item 
+Geom\+Object $\ast$ \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Topologically circular domain, e.\+g. a tube cross section. The entire domain must be defined by a Geom\+Object with the following convention\+: zeta\mbox{[}0\mbox{]} is the radial coordinate and zeta\mbox{[}1\mbox{]} is the theta coordinate around the cross-\/sectin. The outer boundary must lie at zeta\mbox{[}0\mbox{]} = 1. 
+
+The domain is parametrised by five macro elements (a central box surrounded by four curved elements). The labelling of the macro elements is shown below.
+
+\DoxyHorRuler{0}
+ $\vert$\textbackslash{} /$\vert$ $\vert$ \textbackslash{} Macro / $\vert$ $\vert$ 3 Element 3 2 $\vert$ $\vert$ \textbackslash{} / $\vert$ $\vert$ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---/ $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ 4 $\vert$ Macro $\vert$ $\vert$ $\vert$ $\vert$ Element 0 $\vert$ 2 $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ $\vert$ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- $\vert$ $\vert$ / \textbackslash{} $\vert$ $\vert$ 0 Macro 1 $\vert$ $\vert$ / Element 1 \textbackslash{} $\vert$ $\vert$ / $|$ $\vert$/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---$\vert$ 
+
+Definition at line 69 of file full\+\_\+circle\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1FullCircleDomain_a35697cff7683dde517a2b8cf912a6aac}\label{classoomph_1_1FullCircleDomain_a35697cff7683dde517a2b8cf912a6aac}} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!FullCircleDomain@{FullCircleDomain}}
+\index{FullCircleDomain@{FullCircleDomain}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{FullCircleDomain()}{FullCircleDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Full\+Circle\+Domain\+::\+Full\+Circle\+Domain (\begin{DoxyParamCaption}\item[{Geom\+Object $\ast$}]{area\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{const Vector$<$ double $>$ \&}]{theta\+\_\+positions,  }\item[{const Vector$<$ double $>$ \&}]{radius\+\_\+box }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass geometric object; the theta locations marking the division between the elements of the outer ring, labelled from the lower left to the upper left in order, theta should be in the range $-\pi$ to $\pi$; and the corresponding fractions of the radius at which the central box is to be placed. 
+
+
+
+Definition at line 80 of file full\+\_\+circle\+\_\+domain.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FullCircleDomain_a36c2bdc01a19f511c97a89f87cd5b7dc}\label{classoomph_1_1FullCircleDomain_a36c2bdc01a19f511c97a89f87cd5b7dc}} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!FullCircleDomain@{FullCircleDomain}}
+\index{FullCircleDomain@{FullCircleDomain}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{FullCircleDomain()}{FullCircleDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Full\+Circle\+Domain\+::\+Full\+Circle\+Domain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FullCircleDomain}{Full\+Circle\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 98 of file full\+\_\+circle\+\_\+domain.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FullCircleDomain_afbdae044de6d958491a0b1a8cfcbc175}\label{classoomph_1_1FullCircleDomain_afbdae044de6d958491a0b1a8cfcbc175}} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!````~FullCircleDomain@{$\sim$FullCircleDomain}}
+\index{````~FullCircleDomain@{$\sim$FullCircleDomain}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{$\sim$FullCircleDomain()}{~FullCircleDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Full\+Circle\+Domain\+::$\sim$\+Full\+Circle\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty; cleanup done in base class. 
+
+
+
+Definition at line 111 of file full\+\_\+circle\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}\label{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!lin\_interpolate@{lin\_interpolate}}
+\index{lin\_interpolate@{lin\_interpolate}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{lin\_interpolate()}{lin\_interpolate()}}
+{\footnotesize\ttfamily void oomph\+::\+Full\+Circle\+Domain\+::lin\+\_\+interpolate (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{low,  }\item[{const Vector$<$ double $>$ \&}]{high,  }\item[{const double \&}]{s,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+A very little linear interpolation helper. Interpolate from the low point to the high point using the coordinate s, which is assumed to run from -\/1 to 1. 
+
+
+
+Definition at line 142 of file full\+\_\+circle\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FullCircleDomain_a93253d6c878c3ab40a582e0d2070a69d}\label{classoomph_1_1FullCircleDomain_a93253d6c878c3ab40a582e0d2070a69d}} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily void oomph\+::\+Full\+Circle\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{i\+\_\+macro,  }\item[{const unsigned \&}]{i\+\_\+direct,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})}
+
+
+
+Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). ~\newline
+ 
+
+Vector representation of the imacro-\/th macro element boundary idirect (N/\+S/\+W/E) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s) 
+
+Definition at line 168 of file full\+\_\+circle\+\_\+domain.\+h.
+
+
+
+References Area\+\_\+pt, lin\+\_\+interpolate(), Radius\+\_\+box, and Theta\+\_\+positions.
+
+\mbox{\Hypertarget{classoomph_1_1FullCircleDomain_a9293b7e09e37a9bc3cc4e495e6a22587}\label{classoomph_1_1FullCircleDomain_a9293b7e09e37a9bc3cc4e495e6a22587}} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Full\+Circle\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FullCircleDomain}{Full\+Circle\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 104 of file full\+\_\+circle\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}\label{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!Area\_pt@{Area\_pt}}
+\index{Area\_pt@{Area\_pt}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{Area\_pt}{Area\_pt}}
+{\footnotesize\ttfamily Geom\+Object$\ast$ oomph\+::\+Full\+Circle\+Domain\+::\+Area\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the domain. 
+
+
+
+Definition at line 136 of file full\+\_\+circle\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FullCircleDomain_a96d5b35a7b41251a033d923afc953636}\label{classoomph_1_1FullCircleDomain_a96d5b35a7b41251a033d923afc953636}} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!Radius\_box@{Radius\_box}}
+\index{Radius\_box@{Radius\_box}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{Radius\_box}{Radius\_box}}
+{\footnotesize\ttfamily Vector$<$double$>$ oomph\+::\+Full\+Circle\+Domain\+::\+Radius\+\_\+box\hspace{0.3cm}{\ttfamily [private]}}
+
+Storage for the fraction of the radius at which the central box should be located corresponding to the chosen values of theta. 
+
+Definition at line 133 of file full\+\_\+circle\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}\label{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!Theta\_positions@{Theta\_positions}}
+\index{Theta\_positions@{Theta\_positions}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{Theta\_positions}{Theta\_positions}}
+{\footnotesize\ttfamily Vector$<$double$>$ oomph\+::\+Full\+Circle\+Domain\+::\+Theta\+\_\+positions\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the dividing lines on the boundary starting from the lower left and proceeding anticlockwise to the upper left. 
+
+
+
+Definition at line 129 of file full\+\_\+circle\+\_\+domain.\+h.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{full__circle__domain_8h}{full\+\_\+circle\+\_\+domain.\+h}}\end{DoxyCompactItemize}

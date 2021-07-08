@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: turek_flag.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">turek_flag.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a52da077d2f7f550f198cf26338502ee9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a> = &quot;../../../interaction/fsi_collapsible_channel_algebraic/html/index.html&quot;&gt;algebraic <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a>-update methodology&lt;/a &gt; provided in the \c AlgebraicMesh base class is used <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> update its nodal positions in response <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the motion <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> its bounding \c GeomObjects. \n\n -# <a class="el" href="turek__flag_8txt.html#a21c82020934af5cae73962f591e2cb17">Finally</a>, we use the helper function \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> set up the fluid-structure <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> -- this function determines which fluid <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> are adjacent <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the Gauss points in the \c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> that apply the fluid traction <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the solid. \n\n -# Done! \n\n .&lt; HR &gt;&lt; HR &gt; \<a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> parameters <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> global parameters As usual, We use a namespace <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> define the(many) global parameters, using default assignments for the FSI1 test case. \dontinclude turek_flag.cc \skipline start_of_global_parameters \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> double Nu=0.4</td></tr>
+<tr class="separator:a52da077d2f7f550f198cf26338502ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f925d9ecbf558b273ec8b9f4fce2913"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a1f925d9ecbf558b273ec8b9f4fce2913">x</a> = 6</td></tr>
+<tr class="separator:a1f925d9ecbf558b273ec8b9f4fce2913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a7ecee877e110d34c4de5131471cda53c"><td class="memItemLeft" align="right" valign="top">mainpage Demo&lt; CENTER &gt; Proposal for Numerical Benchmarking <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> Fluid Structure Interaction between an Elastic Object and a Laminar Incompressible S Turek &amp;J pp loaded by surface tractions&lt;/A &gt; n n This is our first example <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> that involves the coupling between a fluid and proper&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> (rather than beam structure) and also includes both fluid and wall inertia. <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> presented here was used as one <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the test cases for \c oomph-lib 's FSI preconditioner</td></tr>
+<tr class="separator:a7ecee877e110d34c4de5131471cda53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0e47712342b1eebbf9d7cdbf785900d"><td class="memItemLeft" align="right" valign="top">see n n&lt; CENTER &gt;&lt; A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;http: &lt;/CENTER&gt; n n <a class="el" href="turek__flag_8txt.html#ad88db755434ec936650d1c02021f682d">In</a> this tutorial we concentrate on the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> <a class="el" href="turek__flag_8txt.html#a707bb6a8631b727d6729c895a1be6ba5">formulation</a> <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> application <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the preconditioner is discussed&lt;a <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../preconditioners/fsi/html/index.html&quot;&gt; elsewhere&lt;/a&gt; the required source code is contained in the&lt;A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../../demo_drivers/<a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a>/turek_flag/turek_flag.cc&quot;&gt; driver code&lt;/A&gt;&lt;HR&gt;&lt;HR&gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> the_problem <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> Problem <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> figure below shows a sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the centred at&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> (X^ *_c, Y^ *_c) \f$ <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> which a linearly elastic &quot;flag&quot; of thickness \f$ H^ *<a class="el" href="turek__flag_8txt.html#ae9a7b69a5f4403491ab6404a9888c78c">_</a></td></tr>
+<tr class="separator:af0e47712342b1eebbf9d7cdbf785900d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a003657f3746d48ea9d13cdd6c7ac0db8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and length <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> L density <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> rho_s <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and Poisson s <a class="el" href="turek__flag_8txt.html#a2f0b1be140355c6a8ff5a287f14a9aae">ratio</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> nu <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> I w textwidth turek_flag_dim Sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the diameter <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> d the velocities on the mean <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> U and the fluid pressure on the viscous scale To facilitate comparisons with Turek &amp;<a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> s dimensional <a class="el" href="turek__flag_8txt.html#ae63090a397f60c30c9ca5e91af57f6b6">benchmark</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a003657f3746d48ea9d13cdd6c7ac0db8">data</a> (particularly for the period <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the self-excited oscillations)</td></tr>
+<tr class="separator:a003657f3746d48ea9d13cdd6c7ac0db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f0b1be140355c6a8ff5a287f14a9aae"><td class="memItemLeft" align="right" valign="top">see the&lt; A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../solid/solid_theory/html/index.html&quot;&gt; Solid Mechanics Tutorial&lt;/A &gt; for details <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics timescale&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a2f0b1be140355c6a8ff5a287f14a9aae">ratio</a> (the ratio <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the timescale \f$ T^ *\f$ chosen <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> non-dimensionalise time, <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the intrinsic timescale <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a>) can be expressed in terms <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the Reynolds and Strouhal numbers</td></tr>
+<tr class="separator:a2f0b1be140355c6a8ff5a287f14a9aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a290a2b85e23ed04b3dc4dfd848fad805"><td class="memItemLeft" align="right" valign="top">see the&lt; A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../solid/solid_theory/html/index.html&quot;&gt; Solid Mechanics Tutorial&lt;/A &gt; for details The <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics timescale the density and the FSI <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> parameter as <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>[\Lambda^2=\left(\frac{d^ *}{T^ *} \sqrt{\frac{\rho_s}{E^ *}} \right)^2=St^2 \left(\frac{\rho_s}{\rho_f} \right) Re \ <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">Q.\f</a>] Here is a sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the non dimensional version <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the showing the Lagrangian coordinates that parametrise the three faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a>&lt; HR &gt;&lt; HR &gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> parameters Parameter values for the <a class="el" href="turek__flag_8txt.html#ae63090a397f60c30c9ca5e91af57f6b6">benchmark</a> problems&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> (dimensional) parameter values given in Turek &amp;<a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> 's <a class="el" href="turek__flag_8txt.html#ae63090a397f60c30c9ca5e91af57f6b6">benchmark</a> correspond <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the following non-dimensional parameters</td></tr>
+<tr class="separator:a290a2b85e23ed04b3dc4dfd848fad805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3931fbf34037096bdb4ab6e3b4609f9"><td class="memItemLeft" align="right" valign="top">We also include a gravitational body force for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a>(This is only used for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics test cases, CSM1 and CSM2, which will not be discussed here.) \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> } <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> domain geometry and flow field are fairly complex and it is difficult <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> const ruct a good initial guess for the Newton iteration. To ensure its convergence at the beginning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the simulation we therefore employ the method suggested by Turek &amp;<a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> we choose the number <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ad3931fbf34037096bdb4ab6e3b4609f9">timesteps</a> (using a smaller number for a validation run, and for the case FSI1 in which the system rapidly approaches a steady state) and initialise the time-stepping for an impulsive start from the zero flow solution. \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> assign_initial_values_impulsive <a class="el" href="turek__flag_8txt.html#a21c82020934af5cae73962f591e2cb17">Finally</a></td></tr>
+<tr class="separator:ad3931fbf34037096bdb4ab6e3b4609f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85a69cc532853b0453e0269031f79916"><td class="memItemLeft" align="right" valign="top">We also include a gravitational body force for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a>(This is only used for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics test cases, CSM1 and CSM2, which will not be discussed here.) \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> } <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> domain geometry and flow field are fairly complex and it is difficult <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> const ruct a good initial guess for the Newton iteration. To ensure its convergence at the beginning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the simulation we therefore employ the method suggested by Turek &amp;<a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> we choose the number <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> we document the initial condition and start the time stepping setting the c first <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> c false because we have not specified an analytical expression for the initial <a class="el" href="turek__flag_8txt.html#a2e9c8e9cbfb2b10635929d81ea38a6b5">conditions</a> that could be re assigned after the mesh adaptation when computing the first timestep <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> end <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>&lt; HR &gt;&lt; HR &gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> Problem class <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c Problem class contains the usual member functions such as access functions <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the various meshes Because the nodal positions are updated by an algebraic <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> update <a class="el" href="turek__flag_8txt.html#a8ca531cc02b78238f62a21328719e48b">procedure</a> the function c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a85a69cc532853b0453e0269031f79916">actions_before_newton_convergence_check</a> () is employed <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> update the nodal positions in response <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> changes in the(<a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a>) variables during the Newton iteration. <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> function \c actions_before_implicit_timestep() is used <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> adjust the influx during the start-up period. \dontinclude turek_flag.cc \skipline start_of_problem_class \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> end_of_problem_class&lt; HR &gt;&lt; HR &gt; \<a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> const ructor <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> const ructor We start by building the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh</td></tr>
+<tr class="separator:a85a69cc532853b0453e0269031f79916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88e2b0567eda908bae5a3b2b0a355d5a"><td class="memItemLeft" align="right" valign="top">We create an error estimator for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh and identify a control <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> at the tip <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> track its motion <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Solid_control_node_pt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a88e2b0567eda908bae5a3b2b0a355d5a">x</a> (1)&lt;&lt; <a class="el" href="turek__flag_8txt.html#a21c82020934af5cae73962f591e2cb17">Finally</a></td></tr>
+<tr class="separator:a88e2b0567eda908bae5a3b2b0a355d5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab1ae734344d9839773f3ae4cdda4096"><td class="memItemLeft" align="right" valign="top">We create an error estimator for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh and identify a control <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> at the tip <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> track its motion <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Solid_control_node_pt we perform one uniform mesh refinement and disable any further mesh adaptation <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#aab1ae734344d9839773f3ae4cdda4096">disable_adaptation</a> () <a class="el" href="turek__flag_8txt.html#a4d9e5c6e7472b63c0e39069d029b7c5b">Next</a></td></tr>
+<tr class="separator:aab1ae734344d9839773f3ae4cdda4096"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c8f2451d835b5ae77c101d4d3652d34"><td class="memItemLeft" align="right" valign="top">see ref com_ex until we create c GeomObject representations <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the three surface meshes <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> We will use these <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> represent the moving boundaries <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the fluid mesh&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> (Traction_mesh_pt[2])</td></tr>
+<tr class="separator:a1c8f2451d835b5ae77c101d4d3652d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fd90421f7eb5253fa80b9673f1bd908"><td class="memItemLeft" align="right" valign="top">We build the mesh and identify a control&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> (a node at the upstream face <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a>)</td></tr>
+<tr class="separator:a3fd90421f7eb5253fa80b9673f1bd908"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab796d783db5be5252c640f8415e2e37d"><td class="memItemLeft" align="right" valign="top">We build the mesh and identify a control before creating an error estimator and performing one uniform mesh refinement <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Fluid_mesh_pt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ab796d783db5be5252c640f8415e2e37d">refine_uniformly</a> ()</td></tr>
+<tr class="separator:ab796d783db5be5252c640f8415e2e37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b26656bb9ec986a1e2e78eca382269a"><td class="memItemLeft" align="right" valign="top">We now add the various meshes <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the c Problem s collection <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> sub meshes and combine them <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> a global mesh <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a1b26656bb9ec986a1e2e78eca382269a">build_global_mesh</a> ()</td></tr>
+<tr class="separator:a1b26656bb9ec986a1e2e78eca382269a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdd098bc82b9d35854b3a4959e4291f9"><td class="memItemLeft" align="right" valign="top">the other faces are free Strictly the pinning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the redundant <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> pressure nodes is superfluous since the c RefineableQPVDElement used for the discretisation <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> employ a displacement based but it is good practise <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> perform this step anyway <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> future proof the code for the use <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> other element types <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#acdd098bc82b9d35854b3a4959e4291f9">solid_mesh_pt</a> () -&gt; element_pt())</td></tr>
+<tr class="separator:acdd098bc82b9d35854b3a4959e4291f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e9c8e9cbfb2b10635929d81ea38a6b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> fluid has Dirichlet boundary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a2e9c8e9cbfb2b10635929d81ea38a6b5">conditions</a> (prescribed <a class="el" href="turek__flag_8txt.html#a0a36f08520ac390a30a3a6f94c337338">velocity</a>) everywhere apart from the outflow where only the horizontal <a class="el" href="turek__flag_8txt.html#a0a36f08520ac390a30a3a6f94c337338">velocity</a> is unknown. \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> pin_redundant_nodal_pressures(fluid_mesh_pt() -&gt; element_pt())</td></tr>
+<tr class="separator:a2e9c8e9cbfb2b10635929d81ea38a6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0b8807ec5508753b05bd5259716c84c"><td class="memItemLeft" align="right" valign="top">We impose a parabolic inflow profile with the current value <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the influx at the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ac0b8807ec5508753b05bd5259716c84c">inlet</a> (fluid mesh boundary 3). \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> } We complete the build <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> by passing them the pointer <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the const itutive equation</td></tr>
+<tr class="separator:ac0b8807ec5508753b05bd5259716c84c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e655f3477ba01c404fe8257d4d9d0bc"><td class="memItemLeft" align="right" valign="top">see&lt; A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; another tutorial&lt;/A &gt; for details We ensure the automatic application <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the no slip condition on fluid nodes that are located on the faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the and re setup the FSI lookup scheme that tells c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> which fluid <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> are located next <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> their Gauss points skipline actions_after_adapt <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> end <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> actions_after_adapt&lt; HR &gt;&lt; HR &gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> doc Post processing <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> function c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a3e655f3477ba01c404fe8257d4d9d0bc">doc_solution</a> (...) produces the output for the fluid</td></tr>
+<tr class="separator:a3e655f3477ba01c404fe8257d4d9d0bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8fd477505e7a7face8194506141b6d7"><td class="memItemLeft" align="right" valign="top">see&lt; A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; another tutorial&lt;/A &gt; for details We ensure the automatic application <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the no slip condition on fluid nodes that are located on the faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the and re setup the FSI lookup scheme that tells c FSISolidTractionElements which fluid <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> are located next <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> their Gauss points skipline actions_after_adapt <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> end <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> actions_after_adapt&lt; HR &gt;&lt; HR &gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> doc Post processing <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> function c <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> and traction meshes and writes selected <a class="el" href="turek__flag_8txt.html#a003657f3746d48ea9d13cdd6c7ac0db8">data</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the trace file skipline start_of_doc_solution <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> end_of_doc_solution&lt; HR &gt;&lt; HR &gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> com_ex Further comments and exercises When completing the build <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> (the <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> that apply the fluid traction <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> that are exposed <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the fluid) we specified the number <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh boundary they are located on</td></tr>
+<tr class="separator:aa8fd477505e7a7face8194506141b6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a8862c1c10f896d09569de1c3c2454432"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a></td></tr>
+<tr class="separator:a8862c1c10f896d09569de1c3c2454432"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0aac7d1fc911b162e5d70c4172542e0"><td class="memItemLeft" align="right" valign="top">mainpage Demo&lt; CENTER &gt; Proposal for Numerical Benchmarking <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> Fluid Structure Interaction between an Elastic Object and a Laminar Incompressible&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#aa0aac7d1fc911b162e5d70c4172542e0">Flow</a></td></tr>
+<tr class="separator:aa0aac7d1fc911b162e5d70c4172542e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad98d16bb30a4047b469d4cc0d612cf4f"><td class="memItemLeft" align="right" valign="top">mainpage Demo&lt; CENTER &gt; Proposal for Numerical Benchmarking <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> Fluid Structure Interaction between an Elastic Object and a Laminar Incompressible S Turek &amp;J&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a></td></tr>
+<tr class="separator:ad98d16bb30a4047b469d4cc0d612cf4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad88db755434ec936650d1c02021f682d"><td class="memItemLeft" align="right" valign="top">mainpage Demo&lt; CENTER &gt; Proposal for Numerical Benchmarking <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> Fluid Structure Interaction between an Elastic Object and a Laminar Incompressible S Turek &amp;J pp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ad88db755434ec936650d1c02021f682d">In</a></td></tr>
+<tr class="separator:ad88db755434ec936650d1c02021f682d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9a7b69a5f4403491ab6404a9888c78c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and length <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> L *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ae9a7b69a5f4403491ab6404a9888c78c">_</a></td></tr>
+<tr class="separator:ae9a7b69a5f4403491ab6404a9888c78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad723a985e08e8bbfd526a76068f3fdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and length <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> L density <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> rho_s <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and Poisson s <a class="el" href="turek__flag_8txt.html#a2f0b1be140355c6a8ff5a287f14a9aae">ratio</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> nu <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> I w textwidth turek_flag_dim Sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the diameter <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a></td></tr>
+<tr class="separator:aad723a985e08e8bbfd526a76068f3fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab464d4166f1327609dd03bfa58290aec"><td class="memItemLeft" align="right" valign="top">f and length f L density f rho_s f and Poisson s <a class="el" href="turek__flag_8txt.html#a2f0b1be140355c6a8ff5a287f14a9aae">ratio</a> f nu f I w textwidth turek_flag_dim Sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the diameter <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the f d *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">f</a></td></tr>
+<tr class="separator:ab464d4166f1327609dd03bfa58290aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a36f08520ac390a30a3a6f94c337338"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and length <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> L density <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> rho_s <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and Poisson s <a class="el" href="turek__flag_8txt.html#a2f0b1be140355c6a8ff5a287f14a9aae">ratio</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> nu <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> I w textwidth turek_flag_dim Sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the diameter <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> d the velocities on the mean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a0a36f08520ac390a30a3a6f94c337338">velocity</a></td></tr>
+<tr class="separator:a0a36f08520ac390a30a3a6f94c337338"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2732b6c9ab551852cafd9ab8b4625b5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and length <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> L density <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> rho_s <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and Poisson s <a class="el" href="turek__flag_8txt.html#a2f0b1be140355c6a8ff5a287f14a9aae">ratio</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> nu <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> I w textwidth turek_flag_dim Sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the diameter <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> d the velocities on the mean <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> U and the fluid pressure on the viscous scale To facilitate comparisons with Turek &amp;<a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> s dimensional <a class="el" href="turek__flag_8txt.html#ae63090a397f60c30c9ca5e91af57f6b6">benchmark</a> we use a timescale <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> T and&lt; CENTER &gt; <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>[\frac{\partial u_i}{\partial x_i}=0,\<a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>]&lt;/CENTER &gt; subject <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> parabolic inflow&lt; CENTER &gt; <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>[{\bf u}=6 x_2(1-x_2) {\bf e}<a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">_1\f</a>]&lt;/CENTER &gt; at the inflow cross&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a></td></tr>
+<tr class="separator:a2732b6c9ab551852cafd9ab8b4625b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfa699c1fb198b4d5003250cd5ca3a33"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a></td></tr>
+<tr class="separator:adfa699c1fb198b4d5003250cd5ca3a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade699c3053b3dd70b4ef68378f9001f8"><td class="memItemLeft" align="right" valign="top">axially traction free outflow at the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ade699c3053b3dd70b4ef68378f9001f8">outlet</a></td></tr>
+<tr class="separator:ade699c3053b3dd70b4ef68378f9001f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85c8ecbce8c645ada021a94495125fc2"><td class="memItemLeft" align="right" valign="top">see the&lt; A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../solid/solid_theory/html/index.html&quot;&gt; Solid Mechanics Tutorial&lt;/A &gt; for details <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics timescale the density&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a85c8ecbce8c645ada021a94495125fc2">ratio</a></td></tr>
+<tr class="separator:a85c8ecbce8c645ada021a94495125fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d1b11b99f70a7e88e40b3d897bb47f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a3d1b11b99f70a7e88e40b3d897bb47f0">times</a></td></tr>
+<tr class="separator:a3d1b11b99f70a7e88e40b3d897bb47f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e13eaa7c5f7694e71118ba0687a09ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom A relatively large timestep <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> Delta&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a0e13eaa7c5f7694e71118ba0687a09ec">t</a></td></tr>
+<tr class="separator:a0e13eaa7c5f7694e71118ba0687a09ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43c2ad697f7900737359f17d706c2d4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f degrees of freedom A relatively large timestep of <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> Delta involving an average&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a></td></tr>
+<tr class="separator:a43c2ad697f7900737359f17d706c2d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363c10b7cb4b242fe881d6bedb6edec3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom A relatively large timestep <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> Delta involving an average degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom I w textwidth fsi3_trace_cropped Time trace <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the tip displacement&lt; HR &gt;&lt; HR &gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> overview Overview <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the driver code Since the driver code is somewhat lengthy we start by providing a brief overview <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> steps in the c Problem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a363c10b7cb4b242fe881d6bedb6edec3">construction</a></td></tr>
+<tr class="separator:a363c10b7cb4b242fe881d6bedb6edec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c27ffb758561db31897a5a358d8e2ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom A relatively large timestep <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> Delta involving an average degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom I w textwidth fsi3_trace_cropped Time trace <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the tip displacement&lt; HR &gt;&lt; HR &gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> overview Overview <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the driver code Since the driver code is somewhat lengthy we start by providing a brief overview <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> steps in the c Problem as in the corresponding&lt; A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../solid/airy_cantilever/html/index.html&quot;&gt; single physics <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics example&lt;/A &gt; n n three <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh boundaries that are exposed <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the fluid traction These elements are used <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> compute and impose the fluid traction onto the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a></td></tr>
+<tr class="separator:a0c27ffb758561db31897a5a358d8e2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d9e5c6e7472b63c0e39069d029b7c5b"><td class="memItemLeft" align="right" valign="top">We also include a gravitational body force for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a>(This is only used for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics test cases, CSM1 and CSM2, which will not be discussed here.) \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> } <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> domain geometry and flow field are fairly complex and it is difficult <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> const ruct a good initial guess for the Newton iteration. To ensure its convergence at the beginning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the simulation we therefore employ the method suggested by Turek &amp;<a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a4d9e5c6e7472b63c0e39069d029b7c5b">Next</a></td></tr>
+<tr class="separator:a4d9e5c6e7472b63c0e39069d029b7c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ca531cc02b78238f62a21328719e48b"><td class="memItemLeft" align="right" valign="top">We also include a gravitational body force for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a>(This is only used for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics test cases, CSM1 and CSM2, which will not be discussed here.) \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> } <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> domain geometry and flow field are fairly complex and it is difficult <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> const ruct a good initial guess for the Newton iteration. To ensure its convergence at the beginning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the simulation we therefore employ the method suggested by Turek &amp;<a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> we choose the number <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> we document the initial condition and start the time stepping&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a8ca531cc02b78238f62a21328719e48b">procedure</a></td></tr>
+<tr class="separator:a8ca531cc02b78238f62a21328719e48b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5a60b1de123a99846307cf3f4186828"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ab5a60b1de123a99846307cf3f4186828">n_x</a></td></tr>
+<tr class="separator:ab5a60b1de123a99846307cf3f4186828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d22db0f01d59531ccaa6b87399f0c4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a3d22db0f01d59531ccaa6b87399f0c4a">n_y</a></td></tr>
+<tr class="separator:a3d22db0f01d59531ccaa6b87399f0c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30dbfe80a1da9c57dc1989f42ca2a3a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a30dbfe80a1da9c57dc1989f42ca2a3a1">l_x</a></td></tr>
+<tr class="separator:a30dbfe80a1da9c57dc1989f42ca2a3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8180485ff9e17af08ccc3181366d29de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a8180485ff9e17af08ccc3181366d29de">l_y</a></td></tr>
+<tr class="separator:a8180485ff9e17af08ccc3181366d29de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe136565f9a9a75ef3a0b95f7d5aa38c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c origin vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a></td></tr>
+<tr class="separator:abe136565f9a9a75ef3a0b95f7d5aa38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a838b1a75bbaf13e686d961357717334e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a838b1a75bbaf13e686d961357717334e">flag_time_stepper_pt</a></td></tr>
+<tr class="separator:a838b1a75bbaf13e686d961357717334e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a071fd776ea385c462c363c9a3907169f"><td class="memItemLeft" align="right" valign="top">We create an error estimator for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh and identify a control <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> at the tip <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> to track its motion <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Solid_control_node_pt we perform one uniform mesh refinement and disable any further mesh adaptation <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> we attach c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> to the boundaries <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh that are exposed to the fluid We complete their build by specifying which boundary <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the bulk mesh they are attached&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a></td></tr>
+<tr class="separator:a071fd776ea385c462c363c9a3907169f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03279b742e5ee23f6d9f87572c38061e"><td class="memItemLeft" align="right" valign="top">We create an error estimator for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh and identify a control <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> at the tip <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> track its motion <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Solid_control_node_pt we perform one uniform mesh refinement and disable any further mesh adaptation <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> we attach c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the boundaries <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh that are exposed <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the fluid We complete their build by specifying which boundary <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the bulk mesh they are attached as this information is required when setting up the fluid structure&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a></td></tr>
+<tr class="separator:a03279b742e5ee23f6d9f87572c38061e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21c82020934af5cae73962f591e2cb17"><td class="memItemLeft" align="right" valign="top">see ref com_ex <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a21c82020934af5cae73962f591e2cb17">Finally</a></td></tr>
+<tr class="separator:a21c82020934af5cae73962f591e2cb17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad56467203ab4e831aa552c69be9cabd5"><td class="memItemLeft" align="right" valign="top">see ref com_ex <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> we create c GeomObject representations <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the three surface meshes <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> We will use these <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> represent the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ad56467203ab4e831aa552c69be9cabd5">curvilinear</a></td></tr>
+<tr class="separator:ad56467203ab4e831aa552c69be9cabd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42b0ea4b646fa7f5b71e67fc676333fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> final mesh <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> be built is the fluid mesh whose constructor requires pointers <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the four c GeomObjects that represent the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> and three fluid loaded faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a></td></tr>
+<tr class="separator:a42b0ea4b646fa7f5b71e67fc676333fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50919a2168306f8c3babbce4f46488ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> final mesh <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> be built is the fluid mesh whose constructor requires pointers <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the four c GeomObjects that represent the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> and three fluid loaded faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the respectively We represent the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> by a c Circle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a50919a2168306f8c3babbce4f46488ed">object</a></td></tr>
+<tr class="separator:a50919a2168306f8c3babbce4f46488ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad46ec1fccbb7aaccba226a0222f6f4a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> application <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> boundary <a class="el" href="turek__flag_8txt.html#a2e9c8e9cbfb2b10635929d81ea38a6b5">conditions</a> for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> are&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ad46ec1fccbb7aaccba226a0222f6f4a9">straightforward</a></td></tr>
+<tr class="separator:ad46ec1fccbb7aaccba226a0222f6f4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c2814c18eaefbc2bf343a34842af0cb"><td class="memItemLeft" align="right" valign="top">the other faces are free Strictly&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a8c2814c18eaefbc2bf343a34842af0cb">speaking</a></td></tr>
+<tr class="separator:a8c2814c18eaefbc2bf343a34842af0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a707bb6a8631b727d6729c895a1be6ba5"><td class="memItemLeft" align="right" valign="top">the other faces are free Strictly the pinning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the redundant <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> pressure nodes is superfluous since the c RefineableQPVDElement used for the discretisation <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> employ a displacement based&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a707bb6a8631b727d6729c895a1be6ba5">formulation</a></td></tr>
+<tr class="separator:a707bb6a8631b727d6729c895a1be6ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a877c50f1fc4614564e6d0fa5420b7f5f"><td class="memItemLeft" align="right" valign="top">endcode n This information is required when setting up the fluid structure <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> because the c MeshAsGeomObject representation <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the mesh <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> is parametrised by the boundary coordinate in the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh Explore the details <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the implementation by commenting out the relevant line <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> code and use the debugger <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> find out how and where the code fails b&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#a877c50f1fc4614564e6d0fa5420b7f5f">Note</a></td></tr>
+<tr class="separator:a877c50f1fc4614564e6d0fa5420b7f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae63090a397f60c30c9ca5e91af57f6b6"><td class="memItemLeft" align="right" valign="top">endcode n This information is required when setting up the fluid structure <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> because the c MeshAsGeomObject representation <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the mesh <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> is parametrised by the boundary coordinate in the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh Explore the details <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the implementation by commenting out the relevant line <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> code and use the debugger <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> find out how and where the code fails b the c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> issue an warning if the bulk boundary number has not been set but only if the the library is compiled in PARANOID mode n n When comparing our results against those in Turek &amp;<a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> s&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="turek__flag_8txt.html#ae63090a397f60c30c9ca5e91af57f6b6">benchmark</a></td></tr>
+<tr class="separator:ae63090a397f60c30c9ca5e91af57f6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a52da077d2f7f550f198cf26338502ee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52da077d2f7f550f198cf26338502ee9">&#9670;&nbsp;</a></span>href</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a> =  &quot;../../../interaction/fsi_collapsible_channel_algebraic/html/index.html&quot;&gt;algebraic <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a>-update methodology&lt;/a&gt; provided in the \c AlgebraicMesh base class is used <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> update its nodal positions in response <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the motion <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> its bounding \c GeomObjects. \n\n -# <a class="el" href="turek__flag_8txt.html#a21c82020934af5cae73962f591e2cb17">Finally</a>, we use the helper function \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> set up the fluid-structure <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> -- this function determines which fluid <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> are adjacent <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the Gauss points in the \c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> that apply the fluid traction <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the solid. \n\n -# Done! \n\n . &lt;HR&gt; &lt;HR&gt; \<a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> parameters <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> global parameters As usual, We use a namespace <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> define the (many) global parameters, using default assignments for the FSI1 test case. \dontinclude turek_flag.cc \skipline start_of_global_parameters \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> double Nu=0.4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00341">341</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1f925d9ecbf558b273ec8b9f4fce2913"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f925d9ecbf558b273ec8b9f4fce2913">&#9670;&nbsp;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="turek__flag_8txt.html#a1f925d9ecbf558b273ec8b9f4fce2913">x</a> =  6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00440">440</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a85a69cc532853b0453e0269031f79916"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85a69cc532853b0453e0269031f79916">&#9670;&nbsp;</a></span>actions_before_newton_convergence_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We also include a gravitational body force for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> (This is only used for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics test cases, CSM1 and CSM2, which will not be discussed here.) \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> } <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> domain geometry and flow field are fairly complex and it is difficult <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> const ruct a good initial guess for the Newton iteration. To ensure its convergence at the beginning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the simulation we therefore employ the method suggested by Turek &amp; <a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> we choose the number <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> we document the initial condition and start the time stepping setting the c first <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> c false because we have not specified an analytical expression for the initial <a class="el" href="turek__flag_8txt.html#a2e9c8e9cbfb2b10635929d81ea38a6b5">conditions</a> that could be re assigned after the mesh adaptation when computing the first timestep <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> end <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>&lt;HR&gt;&lt;HR&gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> Problem class <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c Problem class contains the usual member functions such as access functions <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the various meshes Because the nodal positions are updated by an algebraic <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> update <a class="el" href="turek__flag_8txt.html#a8ca531cc02b78238f62a21328719e48b">procedure</a> the function c actions_before_newton_convergence_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1b26656bb9ec986a1e2e78eca382269a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b26656bb9ec986a1e2e78eca382269a">&#9670;&nbsp;</a></span>build_global_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We now add the various meshes <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the c Problem s collection <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> sub meshes and combine them <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> a global mesh <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> build_global_mesh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a2e9c8e9cbfb2b10635929d81ea38a6b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e9c8e9cbfb2b10635929d81ea38a6b5">&#9670;&nbsp;</a></span>conditions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> fluid has Dirichlet boundary conditions </td>
+          <td>(</td>
+          <td class="paramtype">prescribed&#160;</td>
+          <td class="paramname"><em>velocity</em></td><td>)</td>
+          <td> -&gt;  element_pt())</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a003657f3746d48ea9d13cdd6c7ac0db8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a003657f3746d48ea9d13cdd6c7ac0db8">&#9670;&nbsp;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and length <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> L density <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> rho_s <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and Poisson s <a class="el" href="turek__flag_8txt.html#a2f0b1be140355c6a8ff5a287f14a9aae">ratio</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> nu <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> I w textwidth turek_flag_dim Sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the diameter <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> d the velocities on the mean <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> U and the fluid pressure on the viscous scale To facilitate comparisons with Turek&amp; <a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> s dimensional <a class="el" href="turek__flag_8txt.html#ae63090a397f60c30c9ca5e91af57f6b6">benchmark</a> data </td>
+          <td>(</td>
+          <td class="paramtype">particularly for the period <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the self-excited&#160;</td>
+          <td class="paramname"><em>oscillations</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aab1ae734344d9839773f3ae4cdda4096"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab1ae734344d9839773f3ae4cdda4096">&#9670;&nbsp;</a></span>disable_adaptation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We create an error estimator for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh and identify a control <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> at the tip <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> track its motion <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Solid_control_node_pt we perform one uniform mesh refinement and disable any further mesh adaptation <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> disable_adaptation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e655f3477ba01c404fe8257d4d9d0bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e655f3477ba01c404fe8257d4d9d0bc">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see&lt;A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; another tutorial&lt;/A&gt; for details We ensure the automatic application <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the no slip condition on fluid nodes that are located on the faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the and re setup the FSI lookup scheme that tells c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> which fluid <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> are located next <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> their Gauss points skipline actions_after_adapt <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> end <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> actions_after_adapt&lt;HR&gt;&lt;HR&gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> doc Post processing <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> function c doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af0e47712342b1eebbf9d7cdbf785900d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0e47712342b1eebbf9d7cdbf785900d">&#9670;&nbsp;</a></span>f()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see n n&lt;CENTER&gt;&lt;A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;http: &lt;/CENTER&gt; n n <a class="el" href="turek__flag_8txt.html#ad88db755434ec936650d1c02021f682d">In</a> this tutorial we concentrate on the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> <a class="el" href="turek__flag_8txt.html#a707bb6a8631b727d6729c895a1be6ba5">formulation</a> <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> application <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the preconditioner is discussed&lt;a <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../preconditioners/fsi/html/index.html&quot;&gt; elsewhere&lt;/a&gt; the required source code is contained in the&lt;A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../../demo_drivers/<a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a>/turek_flag/turek_flag.cc&quot;&gt; driver code&lt;/A&gt;&lt;HR&gt;&lt;HR&gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> the_problem <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> Problem <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> figure below shows a sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the centred at f </td>
+          <td>(</td>
+          <td class="paramtype">X^ *&#160;</td>
+          <td class="paramname"><em>_c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Y^ *&#160;</td>
+          <td class="paramname"><em>_c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00050">50</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa8fd477505e7a7face8194506141b6d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8fd477505e7a7face8194506141b6d7">&#9670;&nbsp;</a></span>FSISolidTractionElements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see&lt;A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; another tutorial&lt;/A&gt; for details We ensure the automatic application <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the no slip condition on fluid nodes that are located on the faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the and re setup the FSI lookup scheme that tells c FSISolidTractionElements which fluid <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> are located next <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> their Gauss points skipline actions_after_adapt <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> end <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> actions_after_adapt&lt;HR&gt;&lt;HR&gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> doc Post processing <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> function c <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> and traction meshes and writes selected <a class="el" href="turek__flag_8txt.html#a003657f3746d48ea9d13cdd6c7ac0db8">data</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the trace file skipline start_of_doc_solution <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> end_of_doc_solution&lt;HR&gt;&lt;HR&gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> com_ex Further comments and exercises When completing the build <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the c FSISolidTractionElements </td>
+          <td>(</td>
+          <td class="paramtype">the <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> that apply the fluid traction <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> <a class="el" href="turek__flag_8txt.html#a0c27ffb758561db31897a5a358d8e2ed">elements</a> that are exposed <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the&#160;</td>
+          <td class="paramname"><em>fluid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac0b8807ec5508753b05bd5259716c84c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0b8807ec5508753b05bd5259716c84c">&#9670;&nbsp;</a></span>inlet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We impose a parabolic inflow profile with the current value <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the influx at the inlet </td>
+          <td>(</td>
+          <td class="paramtype">fluid mesh boundary&#160;</td>
+          <td class="paramname"><em>3</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3fd90421f7eb5253fa80b9673f1bd908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fd90421f7eb5253fa80b9673f1bd908">&#9670;&nbsp;</a></span>node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We build the mesh and identify a control node </td>
+          <td>(</td>
+          <td class="paramtype">a node at the upstream face <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the&#160;</td>
+          <td class="paramname"><em>cylinder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f0b1be140355c6a8ff5a287f14a9aae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f0b1be140355c6a8ff5a287f14a9aae">&#9670;&nbsp;</a></span>ratio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see the&lt;A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../solid/solid_theory/html/index.html&quot;&gt; Solid Mechanics Tutorial&lt;/A&gt; for details <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics timescale ratio </td>
+          <td>(</td>
+          <td class="paramtype">the ratio <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the timescale \f$ T^ *\f$ chosen <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> non-dimensionalise&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the intrinsic timescale <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the&#160;</td>
+          <td class="paramname"><em>solid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab796d783db5be5252c640f8415e2e37d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab796d783db5be5252c640f8415e2e37d">&#9670;&nbsp;</a></span>refine_uniformly()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We build the mesh and identify a control before creating an error estimator and performing one uniform mesh refinement <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Fluid_mesh_pt refine_uniformly </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ecee877e110d34c4de5131471cda53c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ecee877e110d34c4de5131471cda53c">&#9670;&nbsp;</a></span>solid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo&lt;CENTER&gt; Proposal for Numerical Benchmarking <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> Fluid Structure Interaction between an Elastic Object and a Laminar Incompressible S Turek&amp; J pp loaded by surface tractions&lt;/A&gt; n n This is our first example <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> that involves the coupling between a fluid and proper solid </td>
+          <td>(</td>
+          <td class="paramtype">rather than beam&#160;</td>
+          <td class="paramname"><em>structure</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acdd098bc82b9d35854b3a4959e4291f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdd098bc82b9d35854b3a4959e4291f9">&#9670;&nbsp;</a></span>solid_mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the other faces are free Strictly the pinning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the redundant <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> pressure nodes is superfluous since the c RefineableQPVDElement used for the discretisation <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> employ a displacement based but it is good practise <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> perform this step anyway <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> future proof the code for the use <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> other element types <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> solid_mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  element_pt())</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00895">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::actions_after_adapt()</a>, <a class="el" href="turek__flag_8cc_source.html#l00953">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::create_fsi_traction_elements()</a>, and <a class="el" href="turek__flag_8cc_source.html#l01008">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::doc_solution()</a>.</p>
+
+</div>
+</div>
+<a id="a290a2b85e23ed04b3dc4dfd848fad805"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a290a2b85e23ed04b3dc4dfd848fad805">&#9670;&nbsp;</a></span>The()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see the&lt;A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../solid/solid_theory/html/index.html&quot;&gt; Solid Mechanics Tutorial&lt;/A&gt; for details The <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics timescale the density and the FSI <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> parameter as <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> [\Lambda^2 = \left( \frac{d^*}{T^*} \sqrt{\frac{\rho_s}{E^*}} \right)^2= St^2 \left( \frac{\rho_s}{\rho_f} \right) Re \ <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">Q.\f</a>] Here is a sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the non dimensional version <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the showing the Lagrangian coordinates that parametrise the three faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a>&lt;HR&gt;&lt;HR&gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> parameters Parameter values for the <a class="el" href="turek__flag_8txt.html#ae63090a397f60c30c9ca5e91af57f6b6">benchmark</a> problems The </td>
+          <td>(</td>
+          <td class="paramtype">dimensional&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00137">137</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">References <a class="el" href="turek__flag_8txt_source.html#l00474">flag</a>.</p>
+
+</div>
+</div>
+<a id="ad3931fbf34037096bdb4ab6e3b4609f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3931fbf34037096bdb4ab6e3b4609f9">&#9670;&nbsp;</a></span>timesteps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We also include a gravitational body force for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> (This is only used for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics test cases, CSM1 and CSM2, which will not be discussed here.) \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> } <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> domain geometry and flow field are fairly complex and it is difficult <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> const ruct a good initial guess for the Newton iteration. To ensure its convergence at the beginning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the simulation we therefore employ the method suggested by Turek &amp; <a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> we choose the number <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> timesteps </td>
+          <td>(</td>
+          <td class="paramtype">using a smaller number for a validation&#160;</td>
+          <td class="paramname"><em>run</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">and for the case FSI1 in which the system rapidly approaches a steady&#160;</td>
+          <td class="paramname"><em>state</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c8f2451d835b5ae77c101d4d3652d34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c8f2451d835b5ae77c101d4d3652d34">&#9670;&nbsp;</a></span>until()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref com_ex until we create c GeomObject representations <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the three surface meshes <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> We will use these <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> represent the moving boundaries <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the fluid mesh until </td>
+          <td>(</td>
+          <td class="paramtype">Traction_mesh_pt&#160;</td>
+          <td class="paramname">[2]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a88e2b0567eda908bae5a3b2b0a355d5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88e2b0567eda908bae5a3b2b0a355d5a">&#9670;&nbsp;</a></span>x()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We create an error estimator for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh and identify a control <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> at the tip <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> track its motion <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Solid_control_node_pt <a class="el" href="turek__flag_8txt.html#a1f925d9ecbf558b273ec8b9f4fce2913">x</a> </td>
+          <td>(</td>
+          <td class="paramtype">1&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ae9a7b69a5f4403491ab6404a9888c78c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9a7b69a5f4403491ab6404a9888c78c">&#9670;&nbsp;</a></span>_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and length <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> L* _</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{<a class="code" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a>} <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>$ is attached.</div>
+<div class="line">Steady Poiseuille flow with average <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">velocity \f</a>$ U^* <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>$</div>
+<div class="line">is imposed at the left end <a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the channel <span class="keywordflow">while</span> we assume the </div>
+<div class="line">outflow <a class="code" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> be <a class="code" href="turek__flag_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a> and axially traction-free. </div>
+<div class="line">We model the <a class="code" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> as a linearly elastic Hookean <a class="code" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> with elastic </div>
+<div class="line"><a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">modulus \f</a>$ <a class="code" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">E</a>^* <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>$</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00051">51</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae63090a397f60c30c9ca5e91af57f6b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae63090a397f60c30c9ca5e91af57f6b6">&#9670;&nbsp;</a></span>benchmark</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode n This information is required when setting up the fluid structure <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> because the c MeshAsGeomObject representation <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the mesh <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> is parametrised by the boundary coordinate in the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh Explore the details <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the implementation by commenting out the relevant line <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> code and use the debugger <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> find out how and where the code fails b the c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> issue an warning if the bulk boundary number has not been set but only if the the library is compiled in PARANOID mode n n When comparing our results against those in Turek&amp; <a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> s benchmark</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00658">658</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a363c10b7cb4b242fe881d6bedb6edec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a363c10b7cb4b242fe881d6bedb6edec3">&#9670;&nbsp;</a></span>construction</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom A relatively large timestep <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> Delta involving an average degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom I w textwidth fsi3_trace_cropped Time trace <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the tip displacement&lt;HR&gt;&lt;HR&gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> overview Overview <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the driver code Since the driver code is somewhat lengthy we start by providing a brief overview <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> steps in the c Problem construction</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00304">304</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad56467203ab4e831aa552c69be9cabd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad56467203ab4e831aa552c69be9cabd5">&#9670;&nbsp;</a></span>curvilinear</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref com_ex <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> we create c GeomObject representations <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the three surface meshes <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> We will use these <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> represent the curvilinear</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00468">468</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="aad723a985e08e8bbfd526a76068f3fdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad723a985e08e8bbfd526a76068f3fdf">&#9670;&nbsp;</a></span>cylinder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and no slip on the stationary channel walls and the surface <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the cylinder</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00063">63</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0c27ffb758561db31897a5a358d8e2ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c27ffb758561db31897a5a358d8e2ed">&#9670;&nbsp;</a></span>elements</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom A relatively large timestep <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> Delta involving an average degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom I w textwidth fsi3_trace_cropped Time trace <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the tip displacement&lt;HR&gt;&lt;HR&gt; <a class="el" href="turek__flag_8txt.html#a2732b6c9ab551852cafd9ab8b4625b5e">section</a> overview Overview <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the driver code Since the driver code is somewhat lengthy we start by providing a brief overview <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> steps in the c Problem as in the corresponding&lt;A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../solid/airy_cantilever/html/index.html&quot;&gt; single physics <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics example&lt;/A&gt; n n three <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh boundaries that are exposed <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the fluid traction These elements are used <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> compute and impose the fluid traction onto the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00311">311</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab464d4166f1327609dd03bfa58290aec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab464d4166f1327609dd03bfa58290aec">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see the&lt; A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../solid/solid_theory/html/index.html&quot;&gt; Solid Mechanics Tutorial&lt;/A &gt; for details <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics timescale the density and the FSI <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> parameter as f[\Lambda^2=\left(\frac{d^ *}{T^ *} \sqrt{\frac{\rho_s}{E^ *}} \right) <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a>^2=St^2 \left(\frac{\rho_s}{\rho_f} \right) Re \ Q.\f] Here is a sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the non dimensional version <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{\bf u} = {\bf 0} <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>$. </div>
+<div class="line"><a class="code" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> no-slip condition on the moving <a class="code" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> is</div>
+<div class="line">&lt;CENTER&gt;</div>
+<div class="line"><a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>[</div>
+<div class="line">{\bf u} = <a class="code" href="namespaceGlobal__Parameters.html#af1af40a0df651e86bc1be273fafa98da">St</a> \ \frac{\partial {\bf R}_w(\xi_{[top,tip,bottom]},<a class="code" href="turek__flag_8txt.html#a0e13eaa7c5f7694e71118ba0687a09ec">t</a>)}{\partial <a class="code" href="turek__flag_8txt.html#a0e13eaa7c5f7694e71118ba0687a09ec">t</a>}</div>
+<div class="line">\ \ \ \ \ \ \ \ \ \ \ \ \ \ @<a class="code" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">E</a>[no_slip]@</div>
+<div class="line"><a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>] </div>
+<div class="line">&lt;/CENTER&gt;</div>
+<div class="line"><a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">where \f</a>$ \xi_{[top,tip,bottom]} <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>$ are Lagrangian coordinates </div>
+<div class="line">parametrising the three faces <a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="code" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a>.</div>
+<div class="line"> </div>
+<div class="line">We describe the deformation <a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the elastic <a class="code" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> by the non-dimensional</div>
+<div class="line">position <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">vector \f</a>$ {\bf R}(\xi^1, \xi^2, <a class="code" href="turek__flag_8txt.html#a0e13eaa7c5f7694e71118ba0687a09ec">t</a>) \<a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">f</a>$ which is determined</div>
+<div class="line">by the principle <a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <span class="keyword">virtual</span> displacements</div>
+<div class="line">\<a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">f</a>[</div>
+<div class="line">\int_{v} \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left( {\bf <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">f</a>} - </div>
+<div class="line"> \Lambda^2 \frac{\partial^2 {\bf R}}{\partial <a class="code" href="turek__flag_8txt.html#a0e13eaa7c5f7694e71118ba0687a09ec">t</a>^{2}} \right) \cdot </div>
+<div class="line"> \delta {\bf R} \right\} \ dv </div>
+<div class="line"> -\oint_{A_{tract}} {\bf <a class="code" href="turek__flag_8txt.html#a0e13eaa7c5f7694e71118ba0687a09ec">t</a>} \cdot \delta {\bf R} \ dA =0,</div>
+<div class="line">  \ \ \ \ \ \ \ \ @<a class="code" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">E</a>[nondim_continuous_pdv]@</div>
+<div class="line"> <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>]</div>
+<div class="line">where all <a class="code" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> stresses and tractions have been non-dimensionalised on </div>
+<div class="line">Young<span class="stringliteral">&#39;s modulus</span></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00063">63</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a21c82020934af5cae73962f591e2cb17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21c82020934af5cae73962f591e2cb17">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref com_ex <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00466">466</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a42b0ea4b646fa7f5b71e67fc676333fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42b0ea4b646fa7f5b71e67fc676333fe">&#9670;&nbsp;</a></span>flag</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see&lt; A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../navier_stokes/adaptive_driven_cavity/html/index.html&quot;&gt; another tutorial&lt;/A &gt; for details We ensure the automatic application <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the no slip condition on fluid nodes that are located on the faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the flag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00474">474</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8txt_source.html#l00137">The()</a>.</p>
+
+</div>
+</div>
+<a id="a838b1a75bbaf13e686d961357717334e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a838b1a75bbaf13e686d961357717334e">&#9670;&nbsp;</a></span>flag_time_stepper_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> flag_time_stepper_pt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00445">445</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="aa0aac7d1fc911b162e5d70c4172542e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0aac7d1fc911b162e5d70c4172542e0">&#9670;&nbsp;</a></span>Flow</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo&lt;CENTER&gt; Proposal for Numerical Benchmarking <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> Fluid Structure Interaction between an Elastic Object and a Laminar Incompressible Flow</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00009">9</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a707bb6a8631b727d6729c895a1be6ba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a707bb6a8631b727d6729c895a1be6ba5">&#9670;&nbsp;</a></span>formulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the other faces are free Strictly the pinning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the redundant <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> pressure nodes is superfluous since the c RefineableQPVDElement used for the discretisation <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> employ a displacement based formulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00496">496</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad98d16bb30a4047b469d4cc0d612cf4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad98d16bb30a4047b469d4cc0d612cf4f">&#9670;&nbsp;</a></span>Hron</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo&lt;CENTER&gt; Proposal for Numerical Benchmarking <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> Fluid Structure Interaction between an Elastic Object and a Laminar Incompressible S Turek&amp; J Hron</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00009">9</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad88db755434ec936650d1c02021f682d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad88db755434ec936650d1c02021f682d">&#9670;&nbsp;</a></span>In</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo&lt;CENTER&gt; Proposal for Numerical Benchmarking <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> Fluid Structure Interaction between an Elastic Object and a Laminar Incompressible S Turek&amp; J pp In</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00021">21</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a03279b742e5ee23f6d9f87572c38061e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03279b742e5ee23f6d9f87572c38061e">&#9670;&nbsp;</a></span>interaction</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We create an error estimator for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh and identify a control <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> at the tip <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> track its motion <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Solid_control_node_pt we perform one uniform mesh refinement and disable any further mesh adaptation <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> we attach c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the boundaries <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh that are exposed <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the fluid We complete their build by specifying which boundary <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the bulk mesh they are attached as this information is required when setting up the fluid structure interaction</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00461">461</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a30dbfe80a1da9c57dc1989f42ca2a3a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30dbfe80a1da9c57dc1989f42ca2a3a1">&#9670;&nbsp;</a></span>l_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> l_x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00445">445</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a8180485ff9e17af08ccc3181366d29de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8180485ff9e17af08ccc3181366d29de">&#9670;&nbsp;</a></span>l_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> l_y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00445">445</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ab5a60b1de123a99846307cf3f4186828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5a60b1de123a99846307cf3f4186828">&#9670;&nbsp;</a></span>n_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> n_x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00445">445</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a3d22db0f01d59531ccaa6b87399f0c4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d22db0f01d59531ccaa6b87399f0c4a">&#9670;&nbsp;</a></span>n_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c <a class="el" href="turek__flag_8txt.html#abe136565f9a9a75ef3a0b95f7d5aa38c">origin</a> vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> n_y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00445">445</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a4d9e5c6e7472b63c0e39069d029b7c5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d9e5c6e7472b63c0e39069d029b7c5b">&#9670;&nbsp;</a></span>Next</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We also include a gravitational body force for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> (This is only used for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics test cases, CSM1 and CSM2, which will not be discussed here.) \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> } <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> domain geometry and flow field are fairly complex and it is difficult <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> const ruct a good initial guess for the Newton iteration. To ensure its convergence at the beginning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the simulation we therefore employ the method suggested by Turek &amp; <a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> Next</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00343">343</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a877c50f1fc4614564e6d0fa5420b7f5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a877c50f1fc4614564e6d0fa5420b7f5f">&#9670;&nbsp;</a></span>Note</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">endcode n This information is required when setting up the fluid structure <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> because the c MeshAsGeomObject representation <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the mesh <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> is parametrised by the boundary coordinate in the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh Explore the details <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the implementation by commenting out the relevant line <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> code and use the debugger <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> find out how and where the code fails b Note</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00653">653</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a50919a2168306f8c3babbce4f46488ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50919a2168306f8c3babbce4f46488ed">&#9670;&nbsp;</a></span>object</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> final mesh <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> be built is the fluid mesh whose constructor requires pointers <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the four c GeomObjects that represent the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> and three fluid loaded faces <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the respectively We represent the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> by a c Circle object</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00477">477</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a43c2ad697f7900737359f17d706c2d4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43c2ad697f7900737359f17d706c2d4c">&#9670;&nbsp;</a></span>of</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f degrees of freedom A relatively large timestep of <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> Delta involving an average of</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00291">291</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="abe136565f9a9a75ef3a0b95f7d5aa38c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe136565f9a9a75ef3a0b95f7d5aa38c">&#9670;&nbsp;</a></span>origin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> c origin vector shifts the lower left vertex <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh so that its centreline is aligned with the <a class="el" href="turek__flag_8txt.html#aad723a985e08e8bbfd526a76068f3fdf">cylinder</a> skipline start_of_constructor <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> origin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00445">445</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ade699c3053b3dd70b4ef68378f9001f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade699c3053b3dd70b4ef68378f9001f8">&#9670;&nbsp;</a></span>outlet</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axially traction free outflow at the outlet</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00092">92</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="adfa699c1fb198b4d5003250cd5ca3a33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfa699c1fb198b4d5003250cd5ca3a33">&#9670;&nbsp;</a></span>parallel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">parallel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00091">91</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8862c1c10f896d09569de1c3c2454432"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8862c1c10f896d09569de1c3c2454432">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see the&lt;A <a class="el" href="turek__flag_8txt.html#a52da077d2f7f550f198cf26338502ee9">href</a>=&quot;../../../solid/solid_theory/html/index.html&quot;&gt; Solid Mechanics Tutorial&lt;/A&gt; for details <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics timescale the density and the FSI <a class="el" href="turek__flag_8txt.html#a03279b742e5ee23f6d9f87572c38061e">interaction</a> parameter as <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> [\Lambda^2 = \left( \frac{d^*}{T^*} \sqrt{\frac{\rho_s}{E^*}} \right)^2= St^2 \left( \frac{\rho_s}{\rho_f} \right) Re \ <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">Q.\f</a>] Here is a sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the non dimensional version <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> th problem) </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00005">5</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l01080">main()</a>.</p>
+
+</div>
+</div>
+<a id="a8ca531cc02b78238f62a21328719e48b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ca531cc02b78238f62a21328719e48b">&#9670;&nbsp;</a></span>procedure</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We also include a gravitational body force for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> (This is only used for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mechanics test cases, CSM1 and CSM2, which will not be discussed here.) \<a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> } <a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> domain geometry and flow field are fairly complex and it is difficult <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> const ruct a good initial guess for the Newton iteration. To ensure its convergence at the beginning <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the simulation we therefore employ the method suggested by Turek &amp; <a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> we choose the number <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> we document the initial condition and start the time stepping procedure</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00405">405</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a85c8ecbce8c645ada021a94495125fc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85c8ecbce8c645ada021a94495125fc2">&#9670;&nbsp;</a></span>ratio</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We impose a parabolic inflow profile with the current value <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the influx at the the gravity vector and the timescale ratio</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00120">120</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2732b6c9ab551852cafd9ab8b4625b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2732b6c9ab551852cafd9ab8b4625b5e">&#9670;&nbsp;</a></span>section</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and length <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> L density <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> rho_s <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and Poisson s <a class="el" href="turek__flag_8txt.html#a2f0b1be140355c6a8ff5a287f14a9aae">ratio</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> nu <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> I w textwidth turek_flag_dim Sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the diameter <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> d the velocities on the mean <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> U and the fluid pressure on the viscous scale To facilitate comparisons with Turek&amp; <a class="el" href="turek__flag_8txt.html#ad98d16bb30a4047b469d4cc0d612cf4f">Hron</a> s dimensional <a class="el" href="turek__flag_8txt.html#ae63090a397f60c30c9ca5e91af57f6b6">benchmark</a> we use a timescale <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> T and&lt;CENTER&gt; <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> [\frac{\partial u_i}{\partial x_i} = 0,\<a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>]&lt;/CENTER&gt; subject <a class="el" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> parabolic inflow&lt;CENTER&gt; <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> [{\bf u} = 6 x_2 (1-x_2) {\bf e}<a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">_1\f</a>]&lt;/CENTER&gt; at the inflow cross section</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00068">68</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a8c2814c18eaefbc2bf343a34842af0cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c2814c18eaefbc2bf343a34842af0cb">&#9670;&nbsp;</a></span>speaking</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the other faces are free Strictly speaking</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00492">492</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad46ec1fccbb7aaccba226a0222f6f4a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad46ec1fccbb7aaccba226a0222f6f4a9">&#9670;&nbsp;</a></span>straightforward</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> application <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> boundary <a class="el" href="turek__flag_8txt.html#a2e9c8e9cbfb2b10635929d81ea38a6b5">conditions</a> for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> are straightforward</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00492">492</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0e13eaa7c5f7694e71118ba0687a09ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e13eaa7c5f7694e71118ba0687a09ec">&#9670;&nbsp;</a></span>t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f degrees <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> freedom A relatively large timestep <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> Delta t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= 0.01 <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>$ -- corresponding <a class="code" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> about 50 <a class="code" href="turek__flag_8txt.html#ad3931fbf34037096bdb4ab6e3b4609f9">timesteps</a></div>
+<div class="line">per period <a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the oscillation --  was used in <span class="keyword">this</span> computation. </div>
+<div class="line">With <span class="keyword">this</span> discretisation the system settles into oscillations with </div>
+<div class="line">a period <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">of \f</a>$ \approx 0.52</div>
+<div class="line">\f$ and an amplitude <a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the tip-displacement <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">of \f</a>$ 0.01 \pm 0.83. <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>$</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">@I w 0.75\textwidth fsi2_trace_cropped <span class="stringliteral">&quot;Time trace of the tip displacement. &quot;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">\subsection fsi3_results FSI3</div>
+<div class="line"> </div>
+<div class="line"><a class="code" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> figures below shows the corresponding results <span class="keywordflow">for</span> the <span class="keywordflow">case</span> FSI3</div>
+<div class="line">in which the fluid and <a class="code" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> densities are equal and the Reynolds number</div>
+<div class="line">twice as large as in the FSI2 <span class="keywordflow">case</span>. <a class="code" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> system performs</div>
+<div class="line">oscillations <a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> much higher frequency and smaller amplitude.</div>
+<div class="line">This is illustrated in the figure below which</div>
+<div class="line">shows a snapshot <a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the flow field  (pressure contours and </div>
+<div class="line">instantaneous streamlines) <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">at \f</a>$ <a class="code" href="turek__flag_8txt.html#a0e13eaa7c5f7694e71118ba0687a09ec">t</a>=3.615. <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>$</div>
+<div class="line"> </div>
+<div class="line">@I w 0.75\textwidth fsi3_flow724_cropped <span class="stringliteral">&quot;Snapshot of the flow field (instantaneous streamlines and pressure contours) &quot;</span></div>
+<div class="line"> </div>
+<div class="line">This computation was performed with a timestep <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">of \f</a>$ \Delta <a class="code" href="turek__flag_8txt.html#a0e13eaa7c5f7694e71118ba0687a09ec">t</a> = 0.005</div>
+<div class="line">\f$ and resulted in oscillations with a period <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">of \f</a>$ \approx 0.19</div>
+<div class="line">\f$ and an amplitude <a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the tip-displacement <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">of \f</a>$ 0.01 \pm 0.36. <a class="code" href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">\f</a>$</div>
+<div class="line"> </div>
+<div class="line"><a class="code" href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a> increase in frequency and Reynolds number leads <a class="code" href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a> the development</div>
+<div class="line"><a class="code" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> thinner boundary and shear layers which require a finer spatial</div>
+<div class="line">resolution</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00263">263</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="turek__flag_8cc_source.html#l00869">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::actions_before_implicit_timestep()</a>, <a class="el" href="turek__flag_8cc_source.html#l00128">Global_Parameters::flux()</a>, and <a class="el" href="turek__flag_8cc_source.html#l00447">TurekProblem&lt; FLUID_ELEMENT, SOLID_ELEMENT &gt;::TurekProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a3d1b11b99f70a7e88e40b3d897bb47f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d1b11b99f70a7e88e40b3d897bb47f0">&#9670;&nbsp;</a></span>times</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a>&lt;/TD&gt;&lt;TD ALIGN=&quot;CENTER&quot;&gt; f times</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00193">193</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a071fd776ea385c462c363c9a3907169f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a071fd776ea385c462c363c9a3907169f">&#9670;&nbsp;</a></span>to</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">We create an error estimator for the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh and identify a control <a class="el" href="turek__flag_8txt.html#a3fd90421f7eb5253fa80b9673f1bd908">node</a> at the tip <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a> to track its motion <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> Solid_control_node_pt we perform one uniform mesh refinement and disable any further mesh adaptation <a class="el" href="turek__flag_8txt.html#a1c8f2451d835b5ae77c101d4d3652d34">until</a> we attach c <a class="el" href="turek__flag_8txt.html#aa8fd477505e7a7face8194506141b6d7">FSISolidTractionElements</a> to the boundaries <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a> mesh that are exposed to the fluid We complete their build by specifying which boundary <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the bulk mesh they are attached to</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00460">460</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0a36f08520ac390a30a3a6f94c337338"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a36f08520ac390a30a3a6f94c337338">&#9670;&nbsp;</a></span>velocity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and length <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> L density <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> rho_s <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> and Poisson s <a class="el" href="turek__flag_8txt.html#a2f0b1be140355c6a8ff5a287f14a9aae">ratio</a> <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> nu <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> I w textwidth turek_flag_dim Sketch <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#a8862c1c10f896d09569de1c3c2454432">problem</a> in dimensional variables We non dimensionalise all length and coordinates on the diameter <a class="el" href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a> the <a class="el" href="turek__flag_8txt.html#af0e47712342b1eebbf9d7cdbf785900d">f</a> d the velocities on the mean velocity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="turek__flag_8txt_source.html#l00064">64</a> of file <a class="el" href="turek__flag_8txt_source.html">turek_flag.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aturek__flag_8txt_html_ad3931fbf34037096bdb4ab6e3b4609f9"><div class="ttname"><a href="turek__flag_8txt.html#ad3931fbf34037096bdb4ab6e3b4609f9">timesteps</a></div><div class="ttdeci">We also include a gravitational body force for the solid(This is only used for the solid mechanics test cases, CSM1 and CSM2, which will not be discussed here.) \until } The domain geometry and flow field are fairly complex and it is difficult to const ruct a good initial guess for the Newton iteration. To ensure its convergence at the beginning of the simulation we therefore employ the method suggested by Turek &amp;Hron we choose the number of timesteps(using a smaller number for a validation run, and for the case FSI1 in which the system rapidly approaches a steady state) and initialise the time-stepping for an impulsive start from the zero flow solution. \until assign_initial_values_impulsive Finally</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_af1af40a0df651e86bc1be273fafa98da"><div class="ttname"><a href="namespaceGlobal__Parameters.html#af1af40a0df651e86bc1be273fafa98da">Global_Parameters::St</a></div><div class="ttdeci">double St</div><div class="ttdoc">Strouhal number (default assignment for FSI1 test case)</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8cc_source.html#l00061">turek_flag.cc:61</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a7ecee877e110d34c4de5131471cda53c"><div class="ttname"><a href="turek__flag_8txt.html#a7ecee877e110d34c4de5131471cda53c">solid</a></div><div class="ttdeci">mainpage Demo&lt; CENTER &gt; Proposal for Numerical Benchmarking of Fluid Structure Interaction between an Elastic Object and a Laminar Incompressible S Turek &amp;J pp loaded by surface tractions&lt;/A &gt; n n This is our first example problem that involves the coupling between a fluid and proper solid(rather than beam structure) and also includes both fluid and wall inertia. The problem presented here was used as one of the test cases for \c oomph-lib 's FSI preconditioner</div></div>
+<div class="ttc" id="aturek__flag_8txt_html_adfa699c1fb198b4d5003250cd5ca3a33"><div class="ttname"><a href="turek__flag_8txt.html#adfa699c1fb198b4d5003250cd5ca3a33">parallel</a></div><div class="ttdeci">parallel</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00091">turek_flag.txt:91</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a290a2b85e23ed04b3dc4dfd848fad805"><div class="ttname"><a href="turek__flag_8txt.html#a290a2b85e23ed04b3dc4dfd848fad805">The</a></div><div class="ttdeci">see the&lt; A href=&quot;../../../solid/solid_theory/html/index.html&quot;&gt; Solid Mechanics Tutorial&lt;/A &gt; for details The solid mechanics timescale the density and the FSI interaction parameter as f[\Lambda^2=\left(\frac{d^ *}{T^ *} \sqrt{\frac{\rho_s}{E^ *}} \right)^2=St^2 \left(\frac{\rho_s}{\rho_f} \right) Re \ Q.\f] Here is a sketch of the non dimensional version of the showing the Lagrangian coordinates that parametrise the three faces of the flag&lt; HR &gt;&lt; HR &gt; section parameters Parameter values for the benchmark problems The(dimensional) parameter values given in Turek &amp;Hron 's benchmark correspond to the following non-dimensional parameters</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00137">turek_flag.txt:137</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aa3dfbdb1b2fd80d516850f66c96b6fd0"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">Global_Parameters::E</a></div><div class="ttdeci">double E</div><div class="ttdoc">Elastic modulus.</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8cc_source.html#l00100">turek_flag.cc:100</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a42b0ea4b646fa7f5b71e67fc676333fe"><div class="ttname"><a href="turek__flag_8txt.html#a42b0ea4b646fa7f5b71e67fc676333fe">flag</a></div><div class="ttdeci">The final mesh to be built is the fluid mesh whose constructor requires pointers to the four c GeomObjects that represent the cylinder and three fluid loaded faces of the flag</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00474">turek_flag.txt:474</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_ab464d4166f1327609dd03bfa58290aec"><div class="ttname"><a href="turek__flag_8txt.html#ab464d4166f1327609dd03bfa58290aec">f</a></div><div class="ttdeci">f and length f L density f rho_s f and Poisson s ratio f nu f I w textwidth turek_flag_dim Sketch of the problem in dimensional variables We non dimensionalise all length and coordinates on the diameter of the f d * f</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00063">turek_flag.txt:63</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a071fd776ea385c462c363c9a3907169f"><div class="ttname"><a href="turek__flag_8txt.html#a071fd776ea385c462c363c9a3907169f">to</a></div><div class="ttdeci">We create an error estimator for the solid mesh and identify a control node at the tip of the flag to track its motion until Solid_control_node_pt we perform one uniform mesh refinement and disable any further mesh adaptation until we attach c FSISolidTractionElements to the boundaries of the solid mesh that are exposed to the fluid We complete their build by specifying which boundary of the bulk mesh they are attached to</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00460">turek_flag.txt:460</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a0e13eaa7c5f7694e71118ba0687a09ec"><div class="ttname"><a href="turek__flag_8txt.html#a0e13eaa7c5f7694e71118ba0687a09ec">t</a></div><div class="ttdeci">f&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f f&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f degrees of freedom A relatively large timestep of f Delta t</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00263">turek_flag.txt:263</a></div></div>
+<div class="ttc" id="aturek__flag_8txt_html_a43c2ad697f7900737359f17d706c2d4c"><div class="ttname"><a href="turek__flag_8txt.html#a43c2ad697f7900737359f17d706c2d4c">of</a></div><div class="ttdeci">f&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f f&lt;/TD &gt;&lt; TD ALIGN=&quot;CENTER&quot;&gt; f degrees of freedom A relatively large timestep of f Delta involving an average of</div><div class="ttdef"><b>Definition:</b> <a href="turek__flag_8txt_source.html#l00291">turek_flag.txt:291</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:20:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

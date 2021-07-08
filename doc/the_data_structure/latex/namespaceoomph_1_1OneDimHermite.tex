@@ -1,0 +1,88 @@
+\hypertarget{namespaceoomph_1_1OneDimHermite}{}\doxysection{oomph\+::One\+Dim\+Hermite Namespace Reference}
+\label{namespaceoomph_1_1OneDimHermite}\index{oomph::OneDimHermite@{oomph::OneDimHermite}}
+
+
+One Dimensional Hermite shape functions.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceoomph_1_1OneDimHermite_aebab8114996e792678738c0b203ee6dc}{shape}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double Psi\mbox{[}2\mbox{]}\mbox{[}2\mbox{]})
+\begin{DoxyCompactList}\small\item\em Constructor sets the values of the shape functions at the position s. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1OneDimHermite_a813edd3bba87119e400fbcf996e48b2d}{dshape}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double D\+Psi\mbox{[}2\mbox{]}\mbox{[}2\mbox{]})
+\begin{DoxyCompactList}\small\item\em Derivatives of 1D Hermite shape functions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1OneDimHermite_a84928411c3c92bf563b9f04005436fd1}{d2shape}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double D\+Psi\mbox{[}2\mbox{]}\mbox{[}2\mbox{]})
+\begin{DoxyCompactList}\small\item\em Second derivatives of the Hermite shape functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+One Dimensional Hermite shape functions. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceoomph_1_1OneDimHermite_a84928411c3c92bf563b9f04005436fd1}\label{namespaceoomph_1_1OneDimHermite_a84928411c3c92bf563b9f04005436fd1}} 
+\index{oomph::OneDimHermite@{oomph::OneDimHermite}!d2shape@{d2shape}}
+\index{d2shape@{d2shape}!oomph::OneDimHermite@{oomph::OneDimHermite}}
+\doxysubsubsection{\texorpdfstring{d2shape()}{d2shape()}}
+{\footnotesize\ttfamily void oomph\+::\+One\+Dim\+Hermite\+::d2shape (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double}]{D\+Psi\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Second derivatives of the Hermite shape functions. 
+
+
+
+Definition at line 1206 of file shape.\+h.
+
+
+
+References s.
+
+
+
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::d2shape\+\_\+local().
+
+\mbox{\Hypertarget{namespaceoomph_1_1OneDimHermite_a813edd3bba87119e400fbcf996e48b2d}\label{namespaceoomph_1_1OneDimHermite_a813edd3bba87119e400fbcf996e48b2d}} 
+\index{oomph::OneDimHermite@{oomph::OneDimHermite}!dshape@{dshape}}
+\index{dshape@{dshape}!oomph::OneDimHermite@{oomph::OneDimHermite}}
+\doxysubsubsection{\texorpdfstring{dshape()}{dshape()}}
+{\footnotesize\ttfamily void oomph\+::\+One\+Dim\+Hermite\+::dshape (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double}]{D\+Psi\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Derivatives of 1D Hermite shape functions. 
+
+
+
+Definition at line 1195 of file shape.\+h.
+
+
+
+References s.
+
+
+
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::d2shape\+\_\+local(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::dshape\+\_\+local(), and oomph\+::\+D\+Shape\+::operator=().
+
+\mbox{\Hypertarget{namespaceoomph_1_1OneDimHermite_aebab8114996e792678738c0b203ee6dc}\label{namespaceoomph_1_1OneDimHermite_aebab8114996e792678738c0b203ee6dc}} 
+\index{oomph::OneDimHermite@{oomph::OneDimHermite}!shape@{shape}}
+\index{shape@{shape}!oomph::OneDimHermite@{oomph::OneDimHermite}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily void oomph\+::\+One\+Dim\+Hermite\+::shape (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double}]{Psi\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor sets the values of the shape functions at the position s. 
+
+
+
+Definition at line 1183 of file shape.\+h.
+
+
+
+References s.
+
+
+
+Referenced by oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::d2shape\+\_\+local(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::dshape\+\_\+local(), oomph\+::\+Shape\+::operator=(), and oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M-\/1 $>$\+::shape().
+

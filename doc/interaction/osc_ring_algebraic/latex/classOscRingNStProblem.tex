@@ -1,0 +1,681 @@
+\hypertarget{classOscRingNStProblem}{}\doxysection{Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classOscRingNStProblem}\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+Inheritance diagram for Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classOscRingNStProblem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classOscRingNStProblem_acd5f633c43eb4cfb43c45361ecf85e6b}{Osc\+Ring\+N\+St\+Problem}} (const double \&dt, Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt I\+C\+\_\+fct\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass timestep and function pointer to the solution that provides the initial conditions for the fluid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classOscRingNStProblem_a96e43adf75d4e33270218ceb3397443c}{$\sim$\+Osc\+Ring\+N\+St\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+Geom\+Object $\ast$ \mbox{\hyperlink{classOscRingNStProblem_a8ef3175a1869d5d2f788c68e1c090538}{wall\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Get pointer to wall as geometric object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a6e4be6a46ab263941b76ab4e6706f63a}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a7d8ff9543c042752b649ed326d6c5915}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a98d4c847cd9d53ab3569b8418ecb0c6b}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before checking Newton convergence\+: Update the fluid mesh and re-\/set velocity boundary conditions -- no slip velocity on the wall means that the velocity on the wall is dependent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a2dd1cb9b211f2cbd2ea9aea625685bcb}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after adaptation\+: Set auxiliary update function that applies no slip on all boundary nodes and choose fluid pressure dof that drives the wall deformation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a00e957fb6a313a9c1de784d0fa3a7a36}{unsteady\+\_\+run}} (const unsigned \&ntsteps, const bool \&restarted, Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Run the time integration for ntsteps steps. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_ab1f2083699d00da4b7f6116e10792e86}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set initial condition (incl previous timesteps) according to specified function. ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a7de5df21c2179db1c97cc83332dcc82c}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classOscRingNStProblem_ae9749337fca6dff52ac6e530c6339faa}{fluid\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the fluid mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_af32f94658174188b1f029446161755b2}{dump\+\_\+it}} (ofstream \&dump\+\_\+file, Doc\+Info doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Dump problem data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a0cf01737b8d53213d644413e84251d0f}{restart}} (ifstream \&restart\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Read problem data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classOscRingNStProblem_acd5f633c43eb4cfb43c45361ecf85e6b}{Osc\+Ring\+N\+St\+Problem}} (const double \&dt, Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt I\+C\+\_\+fct\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass timestep and function pointer to the solution that provides the initial conditions for the fluid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classOscRingNStProblem_a96e43adf75d4e33270218ceb3397443c}{$\sim$\+Osc\+Ring\+N\+St\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+Geom\+Object $\ast$ \mbox{\hyperlink{classOscRingNStProblem_a8ef3175a1869d5d2f788c68e1c090538}{wall\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Get pointer to wall as geometric object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a6e4be6a46ab263941b76ab4e6706f63a}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a7d8ff9543c042752b649ed326d6c5915}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a98d4c847cd9d53ab3569b8418ecb0c6b}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before checking Newton convergence\+: Update the fluid mesh and re-\/set velocity boundary conditions -- no slip velocity on the wall means that the velocity on the wall is dependent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a2dd1cb9b211f2cbd2ea9aea625685bcb}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after adaptation\+: Set auxiliary update function that applies no slip on all boundary nodes and choose fluid pressure dof that drives the wall deformation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a00e957fb6a313a9c1de784d0fa3a7a36}{unsteady\+\_\+run}} (const unsigned \&ntsteps, const bool \&restarted, Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Run the time integration for ntsteps steps. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_ab1f2083699d00da4b7f6116e10792e86}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set initial condition (incl previous timesteps) according to specified function. ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a7de5df21c2179db1c97cc83332dcc82c}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classOscRingNStProblem_a9c0a167a315009ff298b4c43967aba9a}{fluid\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the fluid mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_af32f94658174188b1f029446161755b2}{dump\+\_\+it}} (ofstream \&dump\+\_\+file, Doc\+Info doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Dump problem data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a0cf01737b8d53213d644413e84251d0f}{restart}} (ifstream \&restart\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Read problem data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a96e12e5bb761d765ebe9065b9990112f}{write\+\_\+trace\+\_\+file\+\_\+header}} ()
+\begin{DoxyCompactList}\small\item\em Write header for trace file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscRingNStProblem_a96e12e5bb761d765ebe9065b9990112f}{write\+\_\+trace\+\_\+file\+\_\+header}} ()
+\begin{DoxyCompactList}\small\item\em Write header for trace file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt \mbox{\hyperlink{classOscRingNStProblem_ad9b2810092588c7708660c5325c73256}{I\+C\+\_\+\+Fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to set the intial condition. \end{DoxyCompactList}\item 
+Geom\+Object $\ast$ \mbox{\hyperlink{classOscRingNStProblem_a1349ecb860cacb34792fde6807d92905}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to wall. \end{DoxyCompactList}\item 
+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classOscRingNStProblem_af9ccaa9a5c41ffadda773d704793c76e}{Fluid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to fluid mesh. \end{DoxyCompactList}\item 
+Mesh $\ast$ \mbox{\hyperlink{classOscRingNStProblem_aafee49228dbbee7178448da624b96c3f}{Wall\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to wall mesh (contains only a single Generalised\+Element) \end{DoxyCompactList}\item 
+ofstream \mbox{\hyperlink{classOscRingNStProblem_a37c1af48245859045bed1c3fc36be3da}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+Node $\ast$ \mbox{\hyperlink{classOscRingNStProblem_aed51269a285ffdc064739d6d363b1179}{Veloc\+\_\+trace\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to node on coarsest mesh on which velocity is traced. \end{DoxyCompactList}\item 
+Node $\ast$ \mbox{\hyperlink{classOscRingNStProblem_a6688cac5da1f4092a9cd343ad5fdfd53}{Sarah\+\_\+veloc\+\_\+trace\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to node in symmetry plane on coarsest mesh at which velocity is traced. \end{DoxyCompactList}\item 
+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classOscRingNStProblem_a7747a4f4f3bcc507376ca09649fcf6fd}{Fluid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to fluid mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Driver for oscillating ring problem\+: Wall performs oscillations that resemble eigenmodes of freely oscillating ring and drives viscous fluid flow. Mean radius of wall is adjustable and responds to a pressure value in the fluid to allow for mass conservation. ~\newline
+ 
+
+Definition at line 85 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classOscRingNStProblem_acd5f633c43eb4cfb43c45361ecf85e6b}\label{classOscRingNStProblem_acd5f633c43eb4cfb43c45361ecf85e6b}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!OscRingNStProblem@{OscRingNStProblem}}
+\index{OscRingNStProblem@{OscRingNStProblem}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{OscRingNStProblem()}{OscRingNStProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}} (\begin{DoxyParamCaption}\item[{const double \&}]{dt,  }\item[{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}]{I\+C\+\_\+fct\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass timestep and function pointer to the solution that provides the initial conditions for the fluid. 
+
+Constructor\+: Pass (constant) timestep and function pointer to the solution that provides the initial conditions for the fluid. 
+
+Definition at line 209 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+References oomph\+::\+Sarah\+B\+L\+::A, oomph\+::\+Sarah\+B\+L\+::alpha, oomph\+::\+Sarah\+B\+L\+::epsilon, Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fluid\+\_\+mesh\+\_\+pt(), Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fluid\+\_\+mesh\+\_\+pt, oomph\+::\+Sarah\+B\+L\+::N, oomph\+::\+Sarah\+B\+L\+::\+Omega, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St, Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Sarah\+\_\+veloc\+\_\+trace\+\_\+node\+\_\+pt, Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Veloc\+\_\+trace\+\_\+node\+\_\+pt, Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Wall\+\_\+mesh\+\_\+pt, and Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Wall\+\_\+pt.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a96e43adf75d4e33270218ceb3397443c}\label{classOscRingNStProblem_a96e43adf75d4e33270218ceb3397443c}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!````~OscRingNStProblem@{$\sim$OscRingNStProblem}}
+\index{````~OscRingNStProblem@{$\sim$OscRingNStProblem}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$OscRingNStProblem()}{~OscRingNStProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line 96 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_acd5f633c43eb4cfb43c45361ecf85e6b}\label{classOscRingNStProblem_acd5f633c43eb4cfb43c45361ecf85e6b}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!OscRingNStProblem@{OscRingNStProblem}}
+\index{OscRingNStProblem@{OscRingNStProblem}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{OscRingNStProblem()}{OscRingNStProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}} (\begin{DoxyParamCaption}\item[{const double \&}]{dt,  }\item[{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}]{I\+C\+\_\+fct\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass timestep and function pointer to the solution that provides the initial conditions for the fluid. 
+
+\mbox{\Hypertarget{classOscRingNStProblem_a96e43adf75d4e33270218ceb3397443c}\label{classOscRingNStProblem_a96e43adf75d4e33270218ceb3397443c}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!````~OscRingNStProblem@{$\sim$OscRingNStProblem}}
+\index{````~OscRingNStProblem@{$\sim$OscRingNStProblem}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$OscRingNStProblem()}{~OscRingNStProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line 95 of file osc\+\_\+ring\+\_\+macro.\+cc.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classOscRingNStProblem_a2dd1cb9b211f2cbd2ea9aea625685bcb}\label{classOscRingNStProblem_a2dd1cb9b211f2cbd2ea9aea625685bcb}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after adaptation\+: Set auxiliary update function that applies no slip on all boundary nodes and choose fluid pressure dof that drives the wall deformation. 
+
+
+
+Definition at line 125 of file osc\+\_\+ring\+\_\+macro.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a2dd1cb9b211f2cbd2ea9aea625685bcb}\label{classOscRingNStProblem_a2dd1cb9b211f2cbd2ea9aea625685bcb}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after adaptation\+: Set auxiliary update function that applies no slip on all boundary nodes and choose fluid pressure dof that drives the wall deformation. 
+
+
+
+Definition at line 126 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a6e4be6a46ab263941b76ab4e6706f63a}\label{classOscRingNStProblem_a6e4be6a46ab263941b76ab4e6706f63a}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update after solve (empty) 
+
+
+
+Definition at line 104 of file osc\+\_\+ring\+\_\+macro.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a6e4be6a46ab263941b76ab4e6706f63a}\label{classOscRingNStProblem_a6e4be6a46ab263941b76ab4e6706f63a}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update after solve (empty) 
+
+
+
+Definition at line 105 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a98d4c847cd9d53ab3569b8418ecb0c6b}\label{classOscRingNStProblem_a98d4c847cd9d53ab3569b8418ecb0c6b}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
+\index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before checking Newton convergence\+: Update the fluid mesh and re-\/set velocity boundary conditions -- no slip velocity on the wall means that the velocity on the wall is dependent. 
+
+
+
+Definition at line 113 of file osc\+\_\+ring\+\_\+macro.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a98d4c847cd9d53ab3569b8418ecb0c6b}\label{classOscRingNStProblem_a98d4c847cd9d53ab3569b8418ecb0c6b}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
+\index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before checking Newton convergence\+: Update the fluid mesh and re-\/set velocity boundary conditions -- no slip velocity on the wall means that the velocity on the wall is dependent. 
+
+
+
+Definition at line 114 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a7d8ff9543c042752b649ed326d6c5915}\label{classOscRingNStProblem_a7d8ff9543c042752b649ed326d6c5915}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve (empty) 
+
+
+
+Definition at line 107 of file osc\+\_\+ring\+\_\+macro.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a7d8ff9543c042752b649ed326d6c5915}\label{classOscRingNStProblem_a7d8ff9543c042752b649ed326d6c5915}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve (empty) 
+
+
+
+Definition at line 108 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a7de5df21c2179db1c97cc83332dcc82c}\label{classOscRingNStProblem_a7de5df21c2179db1c97cc83332dcc82c}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+\mbox{\Hypertarget{classOscRingNStProblem_a7de5df21c2179db1c97cc83332dcc82c}\label{classOscRingNStProblem_a7de5df21c2179db1c97cc83332dcc82c}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+Doc the solution 
+
+Definition at line 486 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+References oomph\+::\+Sarah\+B\+L\+::exact\+\_\+soln(), oomph\+::\+Sarah\+B\+L\+::full\+\_\+exact\+\_\+soln(), oomph\+::\+Sarah\+B\+L\+::\+Kin\+\_\+energy\+\_\+sarah(), and oomph\+::\+Sarah\+B\+L\+::\+Total\+\_\+\+Diss\+\_\+sarah().
+
+\mbox{\Hypertarget{classOscRingNStProblem_af32f94658174188b1f029446161755b2}\label{classOscRingNStProblem_af32f94658174188b1f029446161755b2}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!dump\_it@{dump\_it}}
+\index{dump\_it@{dump\_it}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{dump\_it()}{dump\_it()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::dump\+\_\+it (\begin{DoxyParamCaption}\item[{ofstream \&}]{dump\+\_\+file,  }\item[{Doc\+Info}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Dump problem data. 
+
+\mbox{\Hypertarget{classOscRingNStProblem_af32f94658174188b1f029446161755b2}\label{classOscRingNStProblem_af32f94658174188b1f029446161755b2}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!dump\_it@{dump\_it}}
+\index{dump\_it@{dump\_it}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{dump\_it()}{dump\_it()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::dump\+\_\+it (\begin{DoxyParamCaption}\item[{ofstream \&}]{dump\+\_\+file,  }\item[{Doc\+Info}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Dump problem data. 
+
+Dump the solution. 
+
+Definition at line 687 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a9c0a167a315009ff298b4c43967aba9a}\label{classOscRingNStProblem_a9c0a167a315009ff298b4c43967aba9a}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!fluid\_mesh\_pt@{fluid\_mesh\_pt}}
+\index{fluid\_mesh\_pt@{fluid\_mesh\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fluid\_mesh\_pt()}{fluid\_mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fluid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the fluid mesh. 
+
+
+
+Definition at line 162 of file osc\+\_\+ring\+\_\+macro.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_ae9749337fca6dff52ac6e530c6339faa}\label{classOscRingNStProblem_ae9749337fca6dff52ac6e530c6339faa}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!fluid\_mesh\_pt@{fluid\_mesh\_pt}}
+\index{fluid\_mesh\_pt@{fluid\_mesh\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fluid\_mesh\_pt()}{fluid\_mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fluid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the fluid mesh. 
+
+
+
+Definition at line 163 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+Referenced by Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Osc\+Ring\+N\+St\+Problem().
+
+\mbox{\Hypertarget{classOscRingNStProblem_a0cf01737b8d53213d644413e84251d0f}\label{classOscRingNStProblem_a0cf01737b8d53213d644413e84251d0f}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!restart@{restart}}
+\index{restart@{restart}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{restart()}{restart()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::restart (\begin{DoxyParamCaption}\item[{ifstream \&}]{restart\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Read problem data. 
+
+\mbox{\Hypertarget{classOscRingNStProblem_a0cf01737b8d53213d644413e84251d0f}\label{classOscRingNStProblem_a0cf01737b8d53213d644413e84251d0f}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!restart@{restart}}
+\index{restart@{restart}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{restart()}{restart()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::restart (\begin{DoxyParamCaption}\item[{ifstream \&}]{restart\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Read problem data. 
+
+Read solution from disk. 
+
+Definition at line 704 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{classOscRingNStProblem_ab1f2083699d00da4b7f6116e10792e86}\label{classOscRingNStProblem_ab1f2083699d00da4b7f6116e10792e86}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set initial condition (incl previous timesteps) according to specified function. ~\newline
+ 
+
+\mbox{\Hypertarget{classOscRingNStProblem_ab1f2083699d00da4b7f6116e10792e86}\label{classOscRingNStProblem_ab1f2083699d00da4b7f6116e10792e86}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+initial\+\_\+condition}
+
+
+
+Set initial condition (incl previous timesteps) according to specified function. ~\newline
+ 
+
+Set initial condition\+: Assign previous and current values of the velocity from the velocity field specified via the function pointer.
+
+Values are assigned so that the velocities and accelerations are correct for current time. 
+
+Definition at line 400 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{classOscRingNStProblem_a00e957fb6a313a9c1de784d0fa3a7a36}\label{classOscRingNStProblem_a00e957fb6a313a9c1de784d0fa3a7a36}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ntsteps,  }\item[{const bool \&}]{restarted,  }\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Run the time integration for ntsteps steps. 
+
+\mbox{\Hypertarget{classOscRingNStProblem_a00e957fb6a313a9c1de784d0fa3a7a36}\label{classOscRingNStProblem_a00e957fb6a313a9c1de784d0fa3a7a36}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ntsteps,  }\item[{const bool \&}]{restarted,  }\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Run the time integration for ntsteps steps. 
+
+Driver for timestepping the problem\+: Fixed timestep but guaranteed spatial accuracy. Beautiful, innit? 
+
+Definition at line 731 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{classOscRingNStProblem_a8ef3175a1869d5d2f788c68e1c090538}\label{classOscRingNStProblem_a8ef3175a1869d5d2f788c68e1c090538}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!wall\_pt@{wall\_pt}}
+\index{wall\_pt@{wall\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{wall\_pt()}{wall\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Geom\+Object$\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::wall\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get pointer to wall as geometric object. 
+
+
+
+Definition at line 98 of file osc\+\_\+ring\+\_\+macro.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a8ef3175a1869d5d2f788c68e1c090538}\label{classOscRingNStProblem_a8ef3175a1869d5d2f788c68e1c090538}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!wall\_pt@{wall\_pt}}
+\index{wall\_pt@{wall\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{wall\_pt()}{wall\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Geom\+Object$\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::wall\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get pointer to wall as geometric object. 
+
+
+
+Definition at line 99 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a96e12e5bb761d765ebe9065b9990112f}\label{classOscRingNStProblem_a96e12e5bb761d765ebe9065b9990112f}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!write\_trace\_file\_header@{write\_trace\_file\_header}}
+\index{write\_trace\_file\_header@{write\_trace\_file\_header}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{write\_trace\_file\_header()}{write\_trace\_file\_header()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::write\+\_\+trace\+\_\+file\+\_\+header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Write header for trace file. 
+
+\mbox{\Hypertarget{classOscRingNStProblem_a96e12e5bb761d765ebe9065b9990112f}\label{classOscRingNStProblem_a96e12e5bb761d765ebe9065b9990112f}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!write\_trace\_file\_header@{write\_trace\_file\_header}}
+\index{write\_trace\_file\_header@{write\_trace\_file\_header}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{write\_trace\_file\_header()}{write\_trace\_file\_header()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::write\+\_\+trace\+\_\+file\+\_\+header\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Write header for trace file. 
+
+Write trace file header. 
+
+Definition at line 856 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classOscRingNStProblem_a7747a4f4f3bcc507376ca09649fcf6fd}\label{classOscRingNStProblem_a7747a4f4f3bcc507376ca09649fcf6fd}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!Fluid\_mesh\_pt@{Fluid\_mesh\_pt}}
+\index{Fluid\_mesh\_pt@{Fluid\_mesh\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Fluid\_mesh\_pt}{Fluid\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Fluid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to fluid mesh. 
+
+
+
+Definition at line 185 of file osc\+\_\+ring\+\_\+macro.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_af9ccaa9a5c41ffadda773d704793c76e}\label{classOscRingNStProblem_af9ccaa9a5c41ffadda773d704793c76e}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!Fluid\_mesh\_pt@{Fluid\_mesh\_pt}}
+\index{Fluid\_mesh\_pt@{Fluid\_mesh\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Fluid\_mesh\_pt}{Fluid\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Fluid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to fluid mesh. 
+
+
+
+Definition at line 186 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+Referenced by Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Osc\+Ring\+N\+St\+Problem().
+
+\mbox{\Hypertarget{classOscRingNStProblem_ad9b2810092588c7708660c5325c73256}\label{classOscRingNStProblem_ad9b2810092588c7708660c5325c73256}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!IC\_Fct\_pt@{IC\_Fct\_pt}}
+\index{IC\_Fct\_pt@{IC\_Fct\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{IC\_Fct\_pt}{IC\_Fct\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::I\+C\+\_\+\+Fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to set the intial condition. 
+
+
+
+Definition at line 180 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_a6688cac5da1f4092a9cd343ad5fdfd53}\label{classOscRingNStProblem_a6688cac5da1f4092a9cd343ad5fdfd53}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!Sarah\_veloc\_trace\_node\_pt@{Sarah\_veloc\_trace\_node\_pt}}
+\index{Sarah\_veloc\_trace\_node\_pt@{Sarah\_veloc\_trace\_node\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Sarah\_veloc\_trace\_node\_pt}{Sarah\_veloc\_trace\_node\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Node $\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Sarah\+\_\+veloc\+\_\+trace\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to node in symmetry plane on coarsest mesh at which velocity is traced. 
+
+
+
+Definition at line 199 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+Referenced by Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Osc\+Ring\+N\+St\+Problem().
+
+\mbox{\Hypertarget{classOscRingNStProblem_a37c1af48245859045bed1c3fc36be3da}\label{classOscRingNStProblem_a37c1af48245859045bed1c3fc36be3da}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+ofstream \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line 192 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+\mbox{\Hypertarget{classOscRingNStProblem_aed51269a285ffdc064739d6d363b1179}\label{classOscRingNStProblem_aed51269a285ffdc064739d6d363b1179}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!Veloc\_trace\_node\_pt@{Veloc\_trace\_node\_pt}}
+\index{Veloc\_trace\_node\_pt@{Veloc\_trace\_node\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Veloc\_trace\_node\_pt}{Veloc\_trace\_node\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Node $\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Veloc\+\_\+trace\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to node on coarsest mesh on which velocity is traced. 
+
+
+
+Definition at line 195 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+Referenced by Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Osc\+Ring\+N\+St\+Problem().
+
+\mbox{\Hypertarget{classOscRingNStProblem_aafee49228dbbee7178448da624b96c3f}\label{classOscRingNStProblem_aafee49228dbbee7178448da624b96c3f}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!Wall\_mesh\_pt@{Wall\_mesh\_pt}}
+\index{Wall\_mesh\_pt@{Wall\_mesh\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Wall\_mesh\_pt}{Wall\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Mesh $\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Wall\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to wall mesh (contains only a single Generalised\+Element) 
+
+
+
+Definition at line 189 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+Referenced by Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Osc\+Ring\+N\+St\+Problem().
+
+\mbox{\Hypertarget{classOscRingNStProblem_a1349ecb860cacb34792fde6807d92905}\label{classOscRingNStProblem_a1349ecb860cacb34792fde6807d92905}} 
+\index{OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}!Wall\_pt@{Wall\_pt}}
+\index{Wall\_pt@{Wall\_pt}!OscRingNStProblem$<$ ELEMENT $>$@{OscRingNStProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Wall\_pt}{Wall\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+Geom\+Object $\ast$ \mbox{\hyperlink{classOscRingNStProblem}{Osc\+Ring\+N\+St\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Wall\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to wall. 
+
+
+
+Definition at line 183 of file osc\+\_\+ring\+\_\+alg.\+cc.
+
+
+
+Referenced by Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Osc\+Ring\+N\+St\+Problem().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{osc__ring__alg_8cc}{osc\+\_\+ring\+\_\+alg.\+cc}}\item 
+\mbox{\hyperlink{osc__ring__macro_8cc}{osc\+\_\+ring\+\_\+macro.\+cc}}\end{DoxyCompactItemize}

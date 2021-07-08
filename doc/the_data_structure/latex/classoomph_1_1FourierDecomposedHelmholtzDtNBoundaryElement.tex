@@ -1,0 +1,255 @@
+\hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{}\doxysection{oomph\+::Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.150538cm]{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a248410954051f22d292126e70ca2f889}{Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Construct element from specification of bulk element and face index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a7cc11232d6c849efc10bc683d047126c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a05f4242ac8ee12f5a765bf7eff896e60}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aeabcecba445cac4bc31ef5133f87ce08}{compute\+\_\+gamma\+\_\+contribution}} (const double \&theta, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, std\+::complex$<$ double $>$ \&gamma\+\_\+con, std\+::map$<$ unsigned, std\+::complex$<$ double $>$ $>$ \&d\+\_\+gamma\+\_\+con)
+\begin{DoxyCompactList}\small\item\em Compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes the wavenumber (for gamma integral, not the one from the Fourier decomposition of the Helmholtz equations!) and the polar angle theta as input. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNMesh}{Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aceac2fb059ea8969dd57e1817e3beefa}{outer\+\_\+boundary\+\_\+mesh\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Access function to mesh of all DtN boundary condition elements (needed to get access to gamma values) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_ac5f8ab5703f05b0e190906c98cb9339e}{set\+\_\+outer\+\_\+boundary\+\_\+mesh\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNMesh}{Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Set mesh of all DtN boundary condition elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a7d8941de400e6f9497ae80ce24fee6cd}{complete\+\_\+setup\+\_\+of\+\_\+dependencies}} ()
+\begin{DoxyCompactList}\small\item\em Complete the setup of additional dependencies arising through the far-\/away interaction with other nodes in Outer\+\_\+boundary\+\_\+mesh\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a044d961d83a7d688f5e65ba91da751fa}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual vector ~\newline
+ Jacobian matrix. Overloaded version, using the gamma computed in the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNMesh}{Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_ab09f70cbb3ec70075e9c25fee1b67fbd}{Outer\+\_\+boundary\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh of all DtN boundary condition elements (needed to get access to gamma values) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} used to apply Sommerfeld radiation conditon via Dirichlet to Neumann map. ~\newline
+ 
+
+Definition at line 421 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a248410954051f22d292126e70ca2f889}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a248410954051f22d292126e70ca2f889}} 
+\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!FourierDecomposedHelmholtzDtNBoundaryElement@{FourierDecomposedHelmholtzDtNBoundaryElement}}
+\index{FourierDecomposedHelmholtzDtNBoundaryElement@{FourierDecomposedHelmholtzDtNBoundaryElement}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{FourierDecomposedHelmholtzDtNBoundaryElement()}{FourierDecomposedHelmholtzDtNBoundaryElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct element from specification of bulk element and face index. 
+
+
+
+Definition at line 429 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a7d8941de400e6f9497ae80ce24fee6cd}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a7d8941de400e6f9497ae80ce24fee6cd}} 
+\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!complete\_setup\_of\_dependencies@{complete\_setup\_of\_dependencies}}
+\index{complete\_setup\_of\_dependencies@{complete\_setup\_of\_dependencies}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{complete\_setup\_of\_dependencies()}{complete\_setup\_of\_dependencies()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Complete the setup of additional dependencies arising through the far-\/away interaction with other nodes in Outer\+\_\+boundary\+\_\+mesh\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af03c43b9df873659a6ca91e39566256e}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 484 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), oomph\+::\+Node\+::copied\+\_\+node\+\_\+pt(), e, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aeabcecba445cac4bc31ef5133f87ce08}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aeabcecba445cac4bc31ef5133f87ce08}} 
+\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!compute\_gamma\_contribution@{compute\_gamma\_contribution}}
+\index{compute\_gamma\_contribution@{compute\_gamma\_contribution}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_gamma\_contribution()}{compute\_gamma\_contribution()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+gamma\+\_\+contribution (\begin{DoxyParamCaption}\item[{const double \&}]{theta,  }\item[{const unsigned \&}]{n,  }\item[{std\+::complex$<$ double $>$ \&}]{gamma\+\_\+con,  }\item[{std\+::map$<$ unsigned, std\+::complex$<$ double $>$ $>$ \&}]{d\+\_\+gamma\+\_\+con }\end{DoxyParamCaption})}
+
+
+
+Compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes the wavenumber (for gamma integral, not the one from the Fourier decomposition of the Helmholtz equations!) and the polar angle theta as input. 
+
+compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes wavenumber n (from the computation of the gamma integral, not the one from the Fourier decomposition of the Helmholtz equations!) and polar angle theta as input. ~\newline
+ 
+
+Definition at line 769 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Mathematical\+Constants\+::\+I(), i, interpolated\+\_\+u(), n, oomph\+::\+Legendre\+\_\+functions\+\_\+helper\+::plgndr2(), and s.
+
+
+
+Referenced by oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma().
+
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a05f4242ac8ee12f5a765bf7eff896e60}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a05f4242ac8ee12f5a765bf7eff896e60}} 
+\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d68e4309ac1b03583d252845}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 447 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a7cc11232d6c849efc10bc683d047126c}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a7cc11232d6c849efc10bc683d047126c}} 
+\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 436 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), and residuals().
+
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a044d961d83a7d688f5e65ba91da751fa}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_a044d961d83a7d688f5e65ba91da751fa}} 
+\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_fourier\_decomposed\_helmholtz\_DtN\_bc@{fill\_in\_generic\_residual\_contribution\_fourier\_decomposed\_helmholtz\_DtN\_bc}}
+\index{fill\_in\_generic\_residual\_contribution\_fourier\_decomposed\_helmholtz\_DtN\_bc@{fill\_in\_generic\_residual\_contribution\_fourier\_decomposed\_helmholtz\_DtN\_bc}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_fourier\_decomposed\_helmholtz\_DtN\_bc()}{fill\_in\_generic\_residual\_contribution\_fourier\_decomposed\_helmholtz\_DtN\_bc()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Compute the element\textquotesingle{}s residual vector ~\newline
+ Jacobian matrix. Overloaded version, using the gamma computed in the mesh. 
+
+
+
+Definition at line 536 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Integral\+::knot(), oomph\+::\+Generalised\+Element\+::nexternal\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt, residuals(), s, oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz, oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Node\+::x().
+
+
+
+Referenced by oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aceac2fb059ea8969dd57e1817e3beefa}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_aceac2fb059ea8969dd57e1817e3beefa}} 
+\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!outer\_boundary\_mesh\_pt@{outer\_boundary\_mesh\_pt}}
+\index{outer\_boundary\_mesh\_pt@{outer\_boundary\_mesh\_pt}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{outer\_boundary\_mesh\_pt()}{outer\_boundary\_mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNMesh}{Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh}}$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::outer\+\_\+boundary\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to mesh of all DtN boundary condition elements (needed to get access to gamma values) 
+
+
+
+Definition at line 468 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_ac5f8ab5703f05b0e190906c98cb9339e}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_ac5f8ab5703f05b0e190906c98cb9339e}} 
+\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!set\_outer\_boundary\_mesh\_pt@{set\_outer\_boundary\_mesh\_pt}}
+\index{set\_outer\_boundary\_mesh\_pt@{set\_outer\_boundary\_mesh\_pt}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_outer\_boundary\_mesh\_pt()}{set\_outer\_boundary\_mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+outer\+\_\+boundary\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNMesh}{Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set mesh of all DtN boundary condition elements. 
+
+
+
+Definition at line 475 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_ab09f70cbb3ec70075e9c25fee1b67fbd}\label{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement_ab09f70cbb3ec70075e9c25fee1b67fbd}} 
+\index{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!Outer\_boundary\_mesh\_pt@{Outer\_boundary\_mesh\_pt}}
+\index{Outer\_boundary\_mesh\_pt@{Outer\_boundary\_mesh\_pt}!oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Outer\_boundary\_mesh\_pt}{Outer\_boundary\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNMesh}{Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh}}$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzDtNBoundaryElement}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Outer\+\_\+boundary\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to mesh of all DtN boundary condition elements (needed to get access to gamma values) 
+
+
+
+Definition at line 748 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::outer\+\_\+boundary\+\_\+mesh\+\_\+pt(), and oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+outer\+\_\+boundary\+\_\+mesh\+\_\+pt().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}\end{DoxyCompactItemize}

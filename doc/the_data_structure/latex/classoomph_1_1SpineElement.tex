@@ -1,0 +1,165 @@
+\hypertarget{classoomph_1_1SpineElement}{}\doxysection{oomph\+::Spine\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1SpineElement}\index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
+
+
+The Spine\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ class takes an existing element as a template parameter and adds the necessary additional functionality to allow the element to be update using the Method of Spines. A vector of pointers to spines and storage for the local equation numbers associated with the spines are added to the element. ~\newline
+  
+
+
+
+
+{\ttfamily \#include $<$spines.\+h$>$}
+
+Inheritance diagram for oomph\+::Spine\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.287582cm]{classoomph_1_1SpineElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SpineElement_ab8d0c3d5ff2a820c76a9eaef12d1b71c}{Spine\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, call the constructor of the base element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SpineElement_aaf749916e9365affb7bed85dcc129e74}{Spine\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Constructor used for spine face elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SpineElement_a54acf4222f3807c53075beedd25ed824}{$\sim$\+Spine\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, clean up the storage allocated to the local equation numbers. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classoomph_1_1SpineElement_aaee520873e49100368ac2362e3d16324}{spine\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+\begin{DoxyCompactList}\small\item\em Return the local equation number corresponding to the height of the spine at the n-\/th node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1SpineElement_a867b5e4eb64d60da9585f8a791fbac36}{complete\+\_\+setup\+\_\+of\+\_\+dependencies}} ()
+\begin{DoxyCompactList}\small\item\em Complete the setup of additional dependencies. Overloads empty virtual function in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} to determine the \char`\"{}geometric 
+\+Data\char`\"{}, i.\+e. the \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects the element\textquotesingle{}s shape. This function is called (for all elements) at the very beginning of the equation numbering procedure to ensure that all dependencies are accounted for. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned $\ast$ \mbox{\hyperlink{classoomph_1_1SpineElement_a222c05c78bc15766a81a8a05c811fcf6}{Spine\+\_\+geometric\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Array to hold the index of the geometric data associated with the spine height of the spine that affects the n-\/th node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Spine\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+The Spine\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ class takes an existing element as a template parameter and adds the necessary additional functionality to allow the element to be update using the Method of Spines. A vector of pointers to spines and storage for the local equation numbers associated with the spines are added to the element. ~\newline
+ 
+
+Definition at line 419 of file spines.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SpineElement_ab8d0c3d5ff2a820c76a9eaef12d1b71c}\label{classoomph_1_1SpineElement_ab8d0c3d5ff2a820c76a9eaef12d1b71c}} 
+\index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}!SpineElement@{SpineElement}}
+\index{SpineElement@{SpineElement}!oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SpineElement()}{SpineElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, call the constructor of the base element. 
+
+
+
+Definition at line 441 of file spines.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SpineElement_aaf749916e9365affb7bed85dcc129e74}\label{classoomph_1_1SpineElement_aaf749916e9365affb7bed85dcc129e74}} 
+\index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}!SpineElement@{SpineElement}}
+\index{SpineElement@{SpineElement}!oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SpineElement()}{SpineElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor used for spine face elements. 
+
+
+
+Definition at line 447 of file spines.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SpineElement_a54acf4222f3807c53075beedd25ed824}\label{classoomph_1_1SpineElement_a54acf4222f3807c53075beedd25ed824}} 
+\index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}!````~SpineElement@{$\sim$SpineElement}}
+\index{````~SpineElement@{$\sim$SpineElement}!oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$SpineElement()}{~SpineElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor, clean up the storage allocated to the local equation numbers. 
+
+
+
+Definition at line 453 of file spines.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SpineElement_a867b5e4eb64d60da9585f8a791fbac36}\label{classoomph_1_1SpineElement_a867b5e4eb64d60da9585f8a791fbac36}} 
+\index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}!complete\_setup\_of\_dependencies@{complete\_setup\_of\_dependencies}}
+\index{complete\_setup\_of\_dependencies@{complete\_setup\_of\_dependencies}!oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{complete\_setup\_of\_dependencies()}{complete\_setup\_of\_dependencies()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Complete the setup of additional dependencies. Overloads empty virtual function in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} to determine the \char`\"{}geometric 
+\+Data\char`\"{}, i.\+e. the \mbox{\hyperlink{classoomph_1_1Data}{Data}} that affects the element\textquotesingle{}s shape. This function is called (for all elements) at the very beginning of the equation numbering procedure to ensure that all dependencies are accounted for. 
+
+Construct and fill the node\+\_\+update\+\_\+data vector. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a6d2fa178f36d4b8413a9ce4f24e9c87e}{oomph\+::\+Element\+With\+Moving\+Nodes}}.
+
+
+
+Definition at line 721 of file spines.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SpineElement_aaee520873e49100368ac2362e3d16324}\label{classoomph_1_1SpineElement_aaee520873e49100368ac2362e3d16324}} 
+\index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}!spine\_local\_eqn@{spine\_local\_eqn}}
+\index{spine\_local\_eqn@{spine\_local\_eqn}!oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_local\_eqn()}{spine\_local\_eqn()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the local equation number corresponding to the height of the spine at the n-\/th node. 
+
+
+
+Definition at line 463 of file spines.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1SpineElement_a222c05c78bc15766a81a8a05c811fcf6}\label{classoomph_1_1SpineElement_a222c05c78bc15766a81a8a05c811fcf6}} 
+\index{oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}!Spine\_geometric\_index@{Spine\_geometric\_index}}
+\index{Spine\_geometric\_index@{Spine\_geometric\_index}!oomph::SpineElement$<$ ELEMENT $>$@{oomph::SpineElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Spine\_geometric\_index}{Spine\_geometric\_index}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned$\ast$ \mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Spine\+\_\+geometric\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Array to hold the index of the geometric data associated with the spine height of the spine that affects the n-\/th node. 
+
+
+
+Definition at line 427 of file spines.\+h.
+
+
+
+Referenced by oomph\+::\+Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$\+::spine\+\_\+local\+\_\+eqn(), and oomph\+::\+Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$\+::$\sim$\+Spine\+Element().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{spines_8h}{spines.\+h}}\end{DoxyCompactItemize}

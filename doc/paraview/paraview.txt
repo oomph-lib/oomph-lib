@@ -1,0 +1,645 @@
+\mainpage Visualising oomph-lib's output files with Paraview
+
+All of \c oomph-lib's existing elements implement the
+\c GeneralisedElement::output(...) functions, allowing
+the computed solution to be documented via a simple
+call to the \c Mesh::output(...) function, e.g.
+
+\code
+// Open output file
+ofstream output_file("output.dat")
+
+// Call the mesh's output function which loops over the 
+// element and calls theirs...
+Problem::mesh_pt()->output(output_file);
+\endcode
+
+By default, the output is written in a format that is suitable
+for displaying the data with <A HREF="http://www.tecplot.com">
+tecplot,</A> a powerful and easy-to-use commercial plotting package
+-- possibly a somewhat odd choice for a an open-source library. 
+
+We also provide the capability to output data in 
+a format that is suitable for display with 
+<a href="http://www.paraview.org">paraview</a>,
+an open-source 3D plotting package.
+For elements for which the relevant output functions are
+implemented (they are defined as broken virtual functions in the
+\c FiniteElement base class) output files for all the elements
+in a certain mesh (here the one pointed t by \c Bulk_mesh_pt) can 
+be written as
+
+\dontinclude rayleigh_instability.cc
+\skipline Output solution to file in paraview format
+\skipline some_file.open(
+\until some_file.close();
+
+where the unsigned integer \c npts  controls the number of plot points per
+element (just as in the tecplot-based output functions). If \c npts
+is set to 2, the solution is output at the elements' vertices. For 
+larger values of \c npts the solution is sampled at greater number of (equally
+spaced) plot points within the element -- this makes sense for 
+higher-order elements, i.e. elements in which the finite-element solution is not
+interpolated linearly between the vertex nodes. It is important to note that
+when displaying such a solution in paraview's "Surface with Edges" mode, the 
+"mesh" that is displayed does not represent the actual finite element mesh but is a
+finer auxiliary mesh that is created merely to establish the connectivity
+between the plot points.
+
+Paraview makes it possible to animate sequences of plots from
+time-dependent simulations. To correctly animate results from
+temporally adaptive simulations (where the timestep varies)
+paraview can operate on pvd files which provide a list of 
+filenames and the associated time. These can be written automatically
+from within \c oomph-lib, using the functions in the \c ParaviewHelper
+namespace:
+
+\dontinclude mesh.h
+\skipline paraview_helper
+\until }
+
+Once the pvd file is opened, call \c
+ParaviewHelper::write_pvd_header(...) to write the header information
+required by paraview; then add the name of each output file 
+and the value of the associated value of the continuous time, using \c
+ParaviewHelper::write_pvd_information(...). When the simulation is
+complete write the footer
+information using \c
+ParaviewHelper::write_pvd_footer(...), then close to the pvd file.
+
+Currently, the paraview output functions are only implemented for a
+relatively small number of elements but it is straightforward
+to implement them for others.
+
+The <a href="../../FAQ/html/index.html">FAQ</a> contain
+an entry that discusses how to display \c oomph-lib's output
+with <A HREF="http://www.gnuplot.info">gnuplot</A> and 
+<a href="../../FAQ/html/index.html#tecplot">
+how to adjust \c oomph-lib's output functions to different 
+formats.</a>
+  
+
+
+Angelo 
+Simone has written a python script that converts \c oomph-lib's
+output to the vtu format that can be read by 
+<a href="http://www.paraview.org">paraview</a>. 
+This has since been improved
+and extended significantly with input from Alexandre Raczynski and 
+Jeremy van Chu. The conversion script
+can currently deal with output from meshes that are composed
+of 2D triangles and quad and 3D brick and tet elements. 
+
+The \c oomph-lib distribution contains three scripts:
+
+- <a href="../../../bin/oomph-convert.py"><code>bin/oomph-convert.py
+  </code>:</a> The python conversion script itself.
+  \n\n
+- <a href="../../../bin/oomph-convert"><code>bin/oomph-convert
+  </code>:</a> A shell script wrapper that allows the processing of
+  multiple files.
+  \n\n
+- <a href="../../../bin/makePvd"><code>bin/makePvd</code>:</a>
+  A shell script the creates the \c * \c .pvd files required by
+  paraview to produce animations.
+. 
+ 
+<hr>
+<hr>
+
+
+
+\section py The oomph-convert.py script for single files
+
+\subsection py_sample An example session
+
+
+-# Add \c oomph-lib's bin directory to your path (in the example
+   shown here, \c oomph-lib
+   is installed in the directory \c /home/mheil/version185/oomph): 
+   \n\n
+   \code
+   biowulf: 10:31:50$ PATH=$PATH:/home/mheil/version185/oomph/bin
+   \endcode
+   \n
+-# Here is what's in the current directory at the moment: \c curved_pipe.dat is
+   the \c oomph-lib output produced from 
+   <a href="../../navier_stokes/curved_pipe/html/index.html">a
+   simulation of steady flow through a curved pipe.</a>
+   \n\n
+   \code
+   biowulf: 11:05:10$ ll
+   total 824
+   -rw-r--r--    1 mheil    users        2292 May 21 09:19 curved_pipe.dat
+   \endcode
+   \n
+-# Run \c oomph-convert.py 
+   \n\n
+   \code
+    biowulf: 11:16:18$  oomph-convert curved_pipe.dat
+
+    -- Processing curved_pipe.dat
+    * oomph-convert.py, ver. 20110531
+    Convert from oomph-lib Tecplot format to VTK XML format.
+    Dimension of the problem: 3
+    Plot cells defined
+    Field variables =  4
+    Conversion started
+    Coordinate defined
+    Connectivities defined
+    Offset defined
+    Element types defined
+    Field data defined
+    Conversion done
+    * Output file name: curved_pipe.vtu
+    \endcode
+   \n
+-# We now have the corresponding \c * \c .vtu file
+   \n\n
+   \code
+   biowulf: 11:32:08$ ll
+   total 1024
+   -rw-r--r--    1 mheil    users      329874 Jun 21 09:19 curved_pipe.dat
+   -rw-r--r--    1 mheil    users      705294 Jun 21 11:16 curved_pipe.vtu
+   \endcode
+   \n
+-# ...which we can visualise with paraview:
+   \n\n
+   \code
+   biowulf: 11:34:08$ paraview --data=curved_pipe.vtu
+   \endcode
+
+
+<hr>
+<hr>
+
+If your output file is invalid or contains elements
+that cannot currently be converted, you can use the \c -p option (followed by
+2 or 3 to indicate the spatial dimension of the problem) to 
+extract points only:
+
+   \code
+   biowulf: 11:16:13$ oomph-convert.py -p2 soln0.dat
+   \endcode
+   \n
+
+The output is now a .vtp data file (Visualization Toolkit Polygonal)
+which is also supported by Paraview. To display your .vtp data, use the
+@I w 0.03\textwidth glyph_button " "
+\c Glyph filter (displaying the points as crosses, say). Here 
+is a representative plot in which 
+<a href="../../poisson/fish_poisson/html/index.html"> the adaptive 
+solution of a 2D Poisson equation in a fish-shaped domain</a>
+is displayed with points. 
+
+
+@I w \textwidth paraview00 " "
+
+
+\subsection display Display your data
+
+Here are a few screenshots from a paraview session to get you
+started. When paraview starts up, you have to select
+the arrays of values you want to load and click on 
+@I w 0.07\textwidth apply_button " "
+\c Apply:
+ 
+@I w \textwidth paraview01 " "
+
+
+Select the array of values you want to display in the active window
+(V1, V2, V3...). You can only display one at a time. It is applied on
+the data set selected in the pipeline:
+
+@I w \textwidth paraview02 " "
+
+
+Now choose the plot style of your data. \c Outline display a box containing
+the data but not the data itself (it's not entirely clear to us
+why you would want to do this, but...). \c Points and \c Wireframe 
+best suited for 3D computations because they allow you to "see 
+through" the data set. 
+\c Surface and
+\c Surface \c With \c Edges is best suited for 2D computations
+because only the surface is displayed. Here is a view of the data 
+in \c Wireframe mode:
+
+@I w \textwidth paraview03 " "
+
+
+You can move the figure with buttons
+@I w 0.30\textwidth move_button " "
+in the toolbar or simply with the
+mouse: "Left click + Move" to rotate, "Middle click + Move" to move, zoom in
+with scroll up or "Right click + Move up" and zoom out with scroll down
+or "Right click + Move down".
+
+@I w \textwidth paraview04 " "
+
+
+You can also display the colour legend by clicking on 
+@I w 0.03\textwidth legend_button " "
+, change the display colours (HSV,
+RGB, Diverging...) by clicking on
+@I w 0.03\textwidth color_button " "
+, and rescale the colour scale to data by clicking on
+@I w 0.03\textwidth scale_button " "
+. Modifying the colour scale is easy: add
+points by clicking on the colour bar to change the distribution of colours
+or use a logarithmic scale.
+
+@I w \textwidth paraview05 " "
+
+
+You can split a window by clicking on 
+@I w 0.07\textwidth split_button " "
+. Clicking on the plot window will make
+it active. You can switch on/off the display of a pipeline member by
+clicking on the eye
+@I w 0.02\textwidth eye_button " "
+on the left. You can display different values and states in different windows:
+
+@I w \textwidth paraview051 " "
+
+
+<hr>
+<hr>
+
+\section py_mult The oomph-convert and makePvd scripts for multiple files and animations
+
+
+\subsection py_sample_mult An example session for data from a serial computation
+
+Here is a quick demonstration of \c oomph-convert and \c makePvd
+scripts in action
+
+-# Add \c oomph-lib's bin directory to your path (in the example shown
+   here, \c oomph-lib
+   is installed in the directory \c /home/mheil/version185/oomph): 
+   \n\n
+   \code
+   biowulf: 10:31:50$ PATH=$PATH:/home/mheil/version185/oomph/bin
+   \endcode
+   \n
+-# Here is what's in the current directory at the moment: \c soln?. \c dat are
+   the \c oomph-lib output files that illustrate the progress
+   of the mesh adaptation during
+   <a href="../../poisson/fish_poisson/html/index.html">the adaptive 
+   solution of a Poisson equation in a fish-shaped domain.</a>
+   \n\n
+   \code
+   biowulf: 11:05:10$ ll
+   total 824
+   -rw-r--r--    1 mheil    users        2292 May 21 09:19 soln0.dat
+   -rw-r--r--    1 mheil    users      176776 May 21 09:19 soln1.dat
+   -rw-r--r--    1 mheil    users      278117 May 21 09:19 soln2.dat
+   -rw-r--r--    1 mheil    users      367408 May 21 09:19 soln3.dat
+   \endcode
+   \n
+-# Run \c oomph-convert on all files (the -z option adds zeroes to the
+   numbers -- this is only required if the files are to combined
+   into an animation by paraview)
+   \n\n
+   \code
+   biowulf: 11:16:13$ oomph-convert -z soln*.dat
+
+
+   -- Processing soln0.dat
+   * oomph-convert.py, ver. 20110615
+   Parse input file for Tecplot zones........done
+   * 0 lines ignored    
+   Write nodal coordinates...................done
+   Write cell connectivity..................done
+   Write cell offsets.......................done
+   Write cell types.........................done
+   Write field 01/01.........................done
+   * Conversion done in 0 seconds
+   * Output file name: soln00000.vtu 
+ 
+
+   -- Processing soln1.dat
+   * oomph-convert.py, ver. 20110615
+   Parse input file for Tecplot zones........done
+   * 0 lines ignored    
+   Write nodal coordinates...................done
+   Write cell connectivity..................done
+   Write cell offsets.......................done
+   Write cell types.........................done
+   Write field 01/01.........................done
+   * Conversion done in 0 seconds
+   * Output file name: soln00001.vtu 
+
+
+   [further output suppressed]
+  
+
+
+   \endcode
+   \n
+-# We now have the corresponding \c * \c .vtu files
+   \n\n
+   \code
+   biowulf: 12:37:05$ ll
+   total 2568
+   -rw-r--r--    1 mheil    users        5979 Jun 21 12:37 soln00000.vtu
+   -rw-r--r--    1 mheil    users      377490 Jun 21 12:37 soln00001.vtu
+   -rw-r--r--    1 mheil    users      592990 Jun 21 12:37 soln00002.vtu
+   -rw-r--r--    1 mheil    users      789325 Jun 21 12:37 soln00003.vtu
+   -rw-r--r--    1 mheil    users        2292 Jun 21 09:19 soln0.dat
+   -rw-r--r--    1 mheil    users      176776 Jun 21 09:19 soln1.dat
+   -rw-r--r--    1 mheil    users      278117 Jun 21 09:19 soln2.dat
+   -rw-r--r--    1 mheil    users      367408 Jun 21 09:19 soln3.dat
+   \endcode
+   \n
+   These \c * \c .vtu files can be displayed individually
+   as discussed above.
+   \n\n
+-# To produce an animation of the results with paraview, create a \c * \c .pvd 
+   file using \c makePvd
+   \n\n   
+   \code
+   biowulf: 12:40:56$ makePvd soln mysoln.pvd
+   --> File mysoln.pvd created
+   \endcode
+   \n\n
+-# ...and visualise it:
+   \n\n
+   \code
+   biowulf: 12:42:08$ paraview --data=mysoln.pvd  
+   \endcode
+.
+
+
+<hr>
+<hr>
+
+
+\subsection screenshots_mult Screenshots from the paraview session
+
+Here's a screenshot from the paraview session: once the \c * \c .pvd
+file is loaded you can customise the plot style as discussed
+in the previous example, and then use the
+@I w 0.1\textwidth play_buttons " "
+\c Play/Stop/... buttons to 
+animate the progress of the mesh adaptation. 
+
+@I w \textwidth paraview_animation_select " "
+
+<hr>
+<hr>
+
+\subsection py_sample_mult_par An example session for data from a parallel computation
+ 	 
+\c oomph-lib typically outputs results from parallel (distributed)
+computations on a processor-by-processor basis, resulting in filenames 
+of the form
+\code
+ 	 soln_proc0_0.dat 	 	 \ 
+ 	 soln_proc1_0.dat 	 	 | 
+ 	 	 : 	 	 	 | Data for timestep 0 
+ 	 soln_proc[NPROC-1]_0.dat 	 / 
+ 	 	 
+ 
+ 	 soln_proc0_1.dat 	 	 \ 
+ 	 soln_proc1_1.dat 	 	 | 
+ 	 	 :                    	 | Data for timestep 1 
+ 	 soln_proc[NPROC-1]_1.dat, 	 /
+
+                 :
+
+\endcode
+where NPROC is the number of processors. An animation of such data 
+obviously requires the output from different processors (but for the 
+the same timestep) to be combined. Provided, the filenames have 
+the pattern 
+\code
+	 [stem]proc[processor_number]_[timestep_number].dat
+\endcode
+(note the "proc" and "_", both of which are required), the pvd file 
+can be generated by first processing the files with \c oomph-convert,
+\code
+        oomph-convert -z [stem]proc* 
+\endcode
+followed by 
+\code
+         makePvd [NPROC] [stem] myplot.pvd 
+\endcode
+So, for the files listed above, to produce a pvd file that 
+contains data from a computation with four processors the commands
+\code
+biowulf: 12:40:56$ oomph-convert soln_proc*
+\endcode
+followed by
+\code
+biowulf: 12:40:59$ makePvd 4 soln_ soln.pvd 
+\endcode
+would create the file soln.pvd from which paraview 
+can create an animation of the solution. 
+
+<hr>
+<hr>
+
+\section filters Data analysis with filters
+
+In order to analyse the data, we can apply filters. Some filters are
+accessible directly via the navigation bar; a full list is available
+in the \c Filters menu:
+
+@I w \textwidth paraview06 " "
+
+Here are few examples of filters available:
+
+-# \c Calculator: Evaluates a user-defined expression e.g \f$
+   \frac{1}{2} V1^2 \f$ and creates a new data array, called here
+   "Energy", containing the result of this expression:
+   \n
+@I w \textwidth paraview07 " "
+   \n
+-# \c Contour: Extracts the points, curves or surfaces where a scalar
+   field is equal to a user-defined value e.g \f$ V1 = -0.5 \f$:
+   \n
+@I w \textwidth paraview08 " "
+   \n
+-# \c Clip: Intersects the geometry with a half space. (Warning:
+   with some versions of Paraview, zooming on the clipped surface can
+   cause the X server to crash.)
+   \n
+@I w \textwidth paraview09 " "
+@I w \textwidth paraview091 " "
+   \n
+-# \c Slice: Intersects the geometry with a plane. (Warning:
+   with some versions of Paraview, zooming on the clipped surface can
+   cause the X server to crash.)
+   \n
+@I w \textwidth paraview10 " "
+@I w \textwidth paraview11 " "
+   \n
+-# \c Threshold: Extracts cells that lie within a specified range of
+values
+   \n
+@I w \textwidth paraview12 " "
+
+
+\section howto How to ...
+
+\subsection outlines Select and extract elements
+
+Click on the button:
+\n
+@I w 0.03\textwidth selec_button " "
+\c Select \c Cells \c On to select elements on the surface (2D selection)
+\n
+@I w 0.03\textwidth selec2_button " "
+\c Select \c Points \c On to select points on the surface (2D selection)
+\n
+@I w 0.03\textwidth selec3_button " "
+\c Select \c Cells \c Through to select elements through the region
+selected (3D selection)
+\n
+@I w 0.03\textwidth selec4_button " "
+\c Select \c Points \c Through to select points through the region
+selected (3D selection)
+\n
+When your selection is  highlighted, go to \c Filters->Data \c
+Analysis->Extract \c Selection and 
+@I w 0.07\textwidth apply_button " "
+\c Apply the filter to extract the selected elements. You can now
+modify or apply filters on the extracted data only.
+
+Here is an example of extraction of the surface elements of the curved
+pipe data:
+
+@I w \textwidth how_to_01 " "
+
+@@END@@
+
+\subsubsection display Display multiple files
+
+
+Click on the
+@I w 0.03\textwidth open_button " "
+\c Open button to load the files. You can set the properties for each
+collection separately. Here is an example of data produced in a
+parallel simulation on a fluid structure interaction problem: the pipe
+is displayed in "Solid Color" and the fluid in "Wireframe"
+
+@I w \textwidth how_to_02 " " 
+ 
+
+\subsubsection warp Visualisation of a scalar field by warping -- "carpet plots"
+
+If you want to visualise a scalar field, you can warp the
+domain using the filter \c Filters->Alphabetical->Warp \c by \c
+Scalar. This allows the results from a 2D simulation \f$ u(x,y) \f$ , to be
+displayed as a "carpet plot" in the form \f$ z=f(x,y)\f$ 
+as in this example which shows, yet again, the solution of a 2D
+Poisson  equation on a fish shaped domain:
+
+@I w \textwidth how_to_021 " "
+@I w \textwidth how_to_022 " "
+
+
+\subsubsection vecstream Create vectors and display streamlines
+
+To create a vector, go to \c Filters->Alphabetical->Python \c Calculator and
+enter the expression \c hstack([component1,component2,component3]) and 
+@I w 0.07\textwidth apply_button " "
+\c Apply the filter to create your 3D vector.
+
+
+You can also use the simple \c Calculator: enter the expression \c
+V1 * \c iHat + \c V2 * \c jHat + \c V3 * \c kHat and
+@I w 0.07\textwidth apply_button " "
+\c Apply the filter to create your 3D vector.
+
+@I w \textwidth how_to_03 " "
+
+
+To visualise these vectors, you have to use the 
+@I w 0.03\textwidth glyph_button " "
+\c Glyph filter. You can set the type (arrows, cones...), the size and the
+number of points:
+
+@I w \textwidth how_to_031 " "
+
+
+After creating your data vector, you can also display streamlines by clicking on the button 
+@I w 0.03\textwidth stream_button " "
+\c Stream \c Tracer in the bar or in the menu \c Filters->Common->Stream \c
+Tracer. Select the source type (point or line) and 
+@I w 0.07\textwidth apply_button " "
+\c Apply the filter. To modify the plot style, you can also use the 
+@I w 0.03\textwidth glyph_button " "
+\c Glyph filter. Vorticity and Normals can be displayed along these streamlines.
+
+@I w \textwidth how_to_04 " "
+
+
+\subsubsection reflec Mirroring data
+
+You can mirror data using the "Reflect" filter in \c
+Filters->Alphabetical->Reflect. This is particularly useful if your
+computation has exploited spatial symmetries in the domain and has
+therefore only be performed in a fraction of the domain.
+Reflections make it possible to display the data for the full domain.
+as shown in this figure:
+
+@I w \textwidth how_to_041 " "
+
+
+\subsubsection text Display text in the plot
+
+To insert text in the plot, go to \c Sources->3D \c Text. To move the
+text in the plot, go to \c Object \c Inspector->Display and
+apply the transformation:
+
+@I w \textwidth how_to_05 " "
+
+
+\subsubsection save Save your work and record macros
+
+You can save the whole geometry in \c File->Save \c Geometry in a
+.pvd file. However, as all .pvd files, it requires other source files to
+be in the same directory. To save your work and the whole data in one single .vtp file (Visualization Toolkit Polygonal Data file), you have to use \c
+File->Save \c State.
+
+These files can then be re-loaded from the \c File->Open menu.
+
+To save the complete layout (the view, the geometry, the pipeline...),
+you can save macros which can then also be applied to display a different
+dataset. To do this, go to \c Tools->Python \c Shell. Recording is
+initiated in the menu \c Trace. Start the animation by clicking on
+\c Start \c Trace, then perform the actions on the data and on the
+plot, and finally stop recording with \c Stop \c Trace and \c Save 
+\c Trace. Afterwards, you will be able to run the recorded 
+macro in the menu \c Directory \c View of the \c Python \c
+Shell.
+
+@I w \textwidth how_to_06 " "
+
+
+\subsubsection output Output: Screenshots and videos
+
+You can save screenshots  of the active window 
+in .png, .gif, .jpg, .tif, .pdf and .ppm format in the menu \c
+File->Save \c Screenshots.
+
+Depending on the version of Paraview and the setup, Paraview 
+can record \c .avi videos. If this is not possible with your
+installation, go to \c File->Save \c Animation and save the 
+animation in .jpg, .png or .tif format. 
+
+@I w \textwidth how_to_07 " "
+
+
+These image files can then be combined into a video using \c
+mencoder, for example to combine all png files in the current
+directory to an avi file use:
+\n
+\code
+mencoder "mf://*.png" -mf fps=25 -o output.avi -ovc lavc -lavcopts vcodec=mpeg4
+\endcode
+\n
+
+In the above example the speed is set to 25 frames per second
+(fps). See the mencoder man page for further details.

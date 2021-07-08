@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.png" usemap="#oomph::FoepplvonKarmanVolumeConstraintElement_3C_20ELEMENT_2C_20MESH_20_3E_map" alt=""/>
+  <map id="oomph::FoepplvonKarmanVolumeConstraintElement_3C_20ELEMENT_2C_20MESH_20_3E_map" name="oomph::FoepplvonKarmanVolumeConstraintElement_3C_20ELEMENT_2C_20MESH_20_3E_map">
+<area href="classoomph_1_1GeneralisedElement.html" title="A Generalised Element class." alt="oomph::GeneralisedElement" shape="rect" coords="0,0,428,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af470df251a724f84a330e506bf9e14c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#af470df251a724f84a330e506bf9e14c3">FoepplvonKarmanVolumeConstraintElement</a> (MESH&lt; ELEMENT &gt; *bounding_mesh_pt, const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;contributing_region, const double &amp;pressure=0.0)</td></tr>
+<tr class="memdesc:af470df251a724f84a330e506bf9e14c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Takes pointer to mesh of Foeppl von Karman elements and a vector of unsigneds which identifies the regions within it that contribute to the controlled volume defined as int w dA (i.e. the "volume under the membrane"). The optional final argument specifies the initial value for the pressure that is "traded" in exchange for the volume constraint.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#af470df251a724f84a330e506bf9e14c3">More...</a><br /></td></tr>
+<tr class="separator:af470df251a724f84a330e506bf9e14c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59878334d7186dbbe7fdaa609bb636b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a59878334d7186dbbe7fdaa609bb636b9">~FoepplvonKarmanVolumeConstraintElement</a> ()</td></tr>
+<tr class="separator:a59878334d7186dbbe7fdaa609bb636b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad429fa00b4af95528c141a0ee95884f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ad429fa00b4af95528c141a0ee95884f1">FoepplvonKarmanVolumeConstraintElement</a> (const <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a> &amp;)</td></tr>
+<tr class="memdesc:ad429fa00b4af95528c141a0ee95884f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ad429fa00b4af95528c141a0ee95884f1">More...</a><br /></td></tr>
+<tr class="separator:ad429fa00b4af95528c141a0ee95884f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d433867de128ccc2f01b304b87b1b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ae7d433867de128ccc2f01b304b87b1b6">operator=</a> (const <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a> &amp;)</td></tr>
+<tr class="memdesc:ae7d433867de128ccc2f01b304b87b1b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ae7d433867de128ccc2f01b304b87b1b6">More...</a><br /></td></tr>
+<tr class="separator:ae7d433867de128ccc2f01b304b87b1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0323cc351bcaf25dfc1830b78601541a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0323cc351bcaf25dfc1830b78601541a">get_bounded_volume</a> ()</td></tr>
+<tr class="memdesc:a0323cc351bcaf25dfc1830b78601541a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the volume "under the elements" in the constrained regions.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0323cc351bcaf25dfc1830b78601541a">More...</a><br /></td></tr>
+<tr class="separator:a0323cc351bcaf25dfc1830b78601541a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8879fad1a0804054520a2d7a57d940b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab8879fad1a0804054520a2d7a57d940b">assign_additional_local_eqn_numbers</a> ()</td></tr>
+<tr class="memdesc:ab8879fad1a0804054520a2d7a57d940b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the equation number for the new equation.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab8879fad1a0804054520a2d7a57d940b">More...</a><br /></td></tr>
+<tr class="separator:ab8879fad1a0804054520a2d7a57d940b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a670a824ff37ac6b77f9230184f4bb9f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a670a824ff37ac6b77f9230184f4bb9f4">fill_in_contribution_to_residuals</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td></tr>
+<tr class="memdesc:a670a824ff37ac6b77f9230184f4bb9f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in residual: Difference between actual and prescribed bounded volume.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a670a824ff37ac6b77f9230184f4bb9f4">More...</a><br /></td></tr>
+<tr class="separator:a670a824ff37ac6b77f9230184f4bb9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3763adc00373350071bef1dea329f94d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3763adc00373350071bef1dea329f94d">fill_in_contribution_to_jacobian</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a3763adc00373350071bef1dea329f94d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in contribution to elemental residual and Jacobian.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3763adc00373350071bef1dea329f94d">More...</a><br /></td></tr>
+<tr class="separator:a3763adc00373350071bef1dea329f94d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91f7e77ffeaf09914838d9af945c2c56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a91f7e77ffeaf09914838d9af945c2c56">set_prescribed_volume</a> (double *volume_pt)</td></tr>
+<tr class="memdesc:a91f7e77ffeaf09914838d9af945c2c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pointer to target volume.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a91f7e77ffeaf09914838d9af945c2c56">More...</a><br /></td></tr>
+<tr class="separator:a91f7e77ffeaf09914838d9af945c2c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a092ba84924e8389c573eb232d3ec640c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a092ba84924e8389c573eb232d3ec640c">pressure_data_pt</a> () const</td></tr>
+<tr class="memdesc:a092ba84924e8389c573eb232d3ec640c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object whose single value contains the pressure that has been "traded" for the volume constraint.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a092ba84924e8389c573eb232d3ec640c">More...</a><br /></td></tr>
+<tr class="separator:a092ba84924e8389c573eb232d3ec640c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
+<tr class="memitem:a245bc1dfb2667394ecd7597a00d1f46f inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a>()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a245bc1dfb2667394ecd7597a00d1f46f">GeneralisedElement</a> (const <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> &amp;)</td></tr>
+<tr class="memdesc:a245bc1dfb2667394ecd7597a00d1f46f inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Initialise all pointers and all values to zero.  <a href="classoomph_1_1GeneralisedElement.html#a245bc1dfb2667394ecd7597a00d1f46f">More...</a><br /></td></tr>
+<tr class="separator:a245bc1dfb2667394ecd7597a00d1f46f inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a180a0684a2b174f0396b97f247eb629f inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a180a0684a2b174f0396b97f247eb629f">operator=</a> (const <a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> &amp;)</td></tr>
+<tr class="memdesc:a180a0684a2b174f0396b97f247eb629f inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1GeneralisedElement.html#a180a0684a2b174f0396b97f247eb629f">More...</a><br /></td></tr>
+<tr class="separator:a180a0684a2b174f0396b97f247eb629f inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45e32d895d4b3686e0f15fe455f4ed44 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">internal_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a45e32d895d4b3686e0f15fe455f4ed44 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th internal data object.  <a href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">More...</a><br /></td></tr>
+<tr class="separator:a45e32d895d4b3686e0f15fe455f4ed44 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4290f039c30e4a84a391025786cf72f6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a4290f039c30e4a84a391025786cf72f6">internal_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a4290f039c30e4a84a391025786cf72f6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th internal data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a4290f039c30e4a84a391025786cf72f6">More...</a><br /></td></tr>
+<tr class="separator:a4290f039c30e4a84a391025786cf72f6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ec4e27a7a3d16122b00e2b5be0d1036 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a3ec4e27a7a3d16122b00e2b5be0d1036">external_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a3ec4e27a7a3d16122b00e2b5be0d1036 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th external data object.  <a href="classoomph_1_1GeneralisedElement.html#a3ec4e27a7a3d16122b00e2b5be0d1036">More...</a><br /></td></tr>
+<tr class="separator:a3ec4e27a7a3d16122b00e2b5be0d1036 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d81683e4c8177eff051838175188600 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a7d81683e4c8177eff051838175188600">external_data_pt</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a7d81683e4c8177eff051838175188600 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to i-th external data object (const version)  <a href="classoomph_1_1GeneralisedElement.html#a7d81683e4c8177eff051838175188600">More...</a><br /></td></tr>
+<tr class="separator:a7d81683e4c8177eff051838175188600 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37ac5a1d5234fa931ab710c0c74d55d2 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a37ac5a1d5234fa931ab710c0c74d55d2">eqn_number</a> (const unsigned &amp;ieqn_local) const</td></tr>
+<tr class="memdesc:a37ac5a1d5234fa931ab710c0c74d55d2 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the global equation number corresponding to the ieqn_local-th local equation number.  <a href="classoomph_1_1GeneralisedElement.html#a37ac5a1d5234fa931ab710c0c74d55d2">More...</a><br /></td></tr>
+<tr class="separator:a37ac5a1d5234fa931ab710c0c74d55d2 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d46b71d27f94aeba21aff1ef84fd0a6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a3d46b71d27f94aeba21aff1ef84fd0a6">local_eqn_number</a> (const unsigned long &amp;ieqn_global) const</td></tr>
+<tr class="memdesc:a3d46b71d27f94aeba21aff1ef84fd0a6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the local equation number corresponding to the ieqn_global-th global equation number. Returns minus one (-1) if there is no local degree of freedom corresponding to the chosen global equation number.  <a href="classoomph_1_1GeneralisedElement.html#a3d46b71d27f94aeba21aff1ef84fd0a6">More...</a><br /></td></tr>
+<tr class="separator:a3d46b71d27f94aeba21aff1ef84fd0a6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc58b505360aa5d172e50baad9aae46d inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#afc58b505360aa5d172e50baad9aae46d">add_external_data</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;data_pt, const bool &amp;fd=true)</td></tr>
+<tr class="separator:afc58b505360aa5d172e50baad9aae46d inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34e8a59703e2b223406112525104034c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a34e8a59703e2b223406112525104034c">external_data_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a34e8a59703e2b223406112525104034c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the status of the boolean flag indicating whether the external data is included in the finite difference loop.  <a href="classoomph_1_1GeneralisedElement.html#a34e8a59703e2b223406112525104034c">More...</a><br /></td></tr>
+<tr class="separator:a34e8a59703e2b223406112525104034c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67b6dd1e2d93449e5a898d9b02df605 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#af67b6dd1e2d93449e5a898d9b02df605">exclude_external_data_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:af67b6dd1e2d93449e5a898d9b02df605 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the boolean flag to exclude the external datum from the the finite difference loop when computing the jacobian matrix.  <a href="classoomph_1_1GeneralisedElement.html#af67b6dd1e2d93449e5a898d9b02df605">More...</a><br /></td></tr>
+<tr class="separator:af67b6dd1e2d93449e5a898d9b02df605 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac65bd63d3959f613a845cdbaff0420de inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ac65bd63d3959f613a845cdbaff0420de">include_external_data_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:ac65bd63d3959f613a845cdbaff0420de inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the boolean flag to include the external datum in the the finite difference loop when computing the jacobian matrix.  <a href="classoomph_1_1GeneralisedElement.html#ac65bd63d3959f613a845cdbaff0420de">More...</a><br /></td></tr>
+<tr class="separator:ac65bd63d3959f613a845cdbaff0420de inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea4a43b909489688ecaf21c4c619fff1 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aea4a43b909489688ecaf21c4c619fff1">flush_external_data</a> ()</td></tr>
+<tr class="memdesc:aea4a43b909489688ecaf21c4c619fff1 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush all external data.  <a href="classoomph_1_1GeneralisedElement.html#aea4a43b909489688ecaf21c4c619fff1">More...</a><br /></td></tr>
+<tr class="separator:aea4a43b909489688ecaf21c4c619fff1 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada93272e25778609ac991fc3b6d664e1 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ada93272e25778609ac991fc3b6d664e1">flush_external_data</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;data_pt)</td></tr>
+<tr class="memdesc:ada93272e25778609ac991fc3b6d664e1 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the object addressed by data_pt from the external data array.  <a href="classoomph_1_1GeneralisedElement.html#ada93272e25778609ac991fc3b6d664e1">More...</a><br /></td></tr>
+<tr class="separator:ada93272e25778609ac991fc3b6d664e1 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b736de0af4c92831968636479b3480e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a6b736de0af4c92831968636479b3480e">ninternal_data</a> () const</td></tr>
+<tr class="memdesc:a6b736de0af4c92831968636479b3480e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of internal data objects.  <a href="classoomph_1_1GeneralisedElement.html#a6b736de0af4c92831968636479b3480e">More...</a><br /></td></tr>
+<tr class="separator:a6b736de0af4c92831968636479b3480e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01ff34b3ace7455df74ad77fc86beb71 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a01ff34b3ace7455df74ad77fc86beb71">nexternal_data</a> () const</td></tr>
+<tr class="memdesc:a01ff34b3ace7455df74ad77fc86beb71 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of external data objects.  <a href="classoomph_1_1GeneralisedElement.html#a01ff34b3ace7455df74ad77fc86beb71">More...</a><br /></td></tr>
+<tr class="separator:a01ff34b3ace7455df74ad77fc86beb71 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37204f67b37d212fd170c68d48f6da57 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a37204f67b37d212fd170c68d48f6da57">ndof</a> () const</td></tr>
+<tr class="memdesc:a37204f67b37d212fd170c68d48f6da57 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of equations/dofs in the element.  <a href="classoomph_1_1GeneralisedElement.html#a37204f67b37d212fd170c68d48f6da57">More...</a><br /></td></tr>
+<tr class="separator:a37204f67b37d212fd170c68d48f6da57 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14f3cf0fbf4f2f7ae45cac6beef398c7 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a14f3cf0fbf4f2f7ae45cac6beef398c7">dof_vector</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dof)</td></tr>
+<tr class="memdesc:a14f3cf0fbf4f2f7ae45cac6beef398c7 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vector of dof values at time level t.  <a href="classoomph_1_1GeneralisedElement.html#a14f3cf0fbf4f2f7ae45cac6beef398c7">More...</a><br /></td></tr>
+<tr class="separator:a14f3cf0fbf4f2f7ae45cac6beef398c7 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a773a27189615056c958e8d71f0b5d944 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a773a27189615056c958e8d71f0b5d944">dof_pt_vector</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double * &gt; &amp;dof_pt)</td></tr>
+<tr class="memdesc:a773a27189615056c958e8d71f0b5d944 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vector of pointers to dof values.  <a href="classoomph_1_1GeneralisedElement.html#a773a27189615056c958e8d71f0b5d944">More...</a><br /></td></tr>
+<tr class="separator:a773a27189615056c958e8d71f0b5d944 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17a0ab600e97a50352a5ef696907a625 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a17a0ab600e97a50352a5ef696907a625">set_internal_data_time_stepper</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *const &amp;time_stepper_pt, const bool &amp;preserve_existing_data)</td></tr>
+<tr class="memdesc:a17a0ab600e97a50352a5ef696907a625 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the timestepper associated with the i-th internal data object.  <a href="classoomph_1_1GeneralisedElement.html#a17a0ab600e97a50352a5ef696907a625">More...</a><br /></td></tr>
+<tr class="separator:a17a0ab600e97a50352a5ef696907a625 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1539aa14d601d12b9558ac21bf5e4a2e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a1539aa14d601d12b9558ac21bf5e4a2e">assign_internal_eqn_numbers</a> (unsigned long &amp;global_number, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double * &gt; &amp;<a class="el" href="classoomph_1_1GeneralisedElement.html#ad227e5660854a3bc84a5d18eeabb457c">Dof_pt</a>)</td></tr>
+<tr class="memdesc:a1539aa14d601d12b9558ac21bf5e4a2e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the global equation numbers to the internal <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>. The arguments are the current highest global equation number (which will be incremented) and a <a class="el" href="classoomph_1_1Vector.html">Vector</a> of pointers to the global variables (to which any unpinned values in the internal <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> are added).  <a href="classoomph_1_1GeneralisedElement.html#a1539aa14d601d12b9558ac21bf5e4a2e">More...</a><br /></td></tr>
+<tr class="separator:a1539aa14d601d12b9558ac21bf5e4a2e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad66a4deee43225439b62e20c18accea7 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ad66a4deee43225439b62e20c18accea7">describe_dofs</a> (std::ostream &amp;out, const std::string &amp;current_string) const</td></tr>
+<tr class="memdesc:ad66a4deee43225439b62e20c18accea7 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to describe the dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data::describe_dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem::describe_dofs(...)  <a href="classoomph_1_1GeneralisedElement.html#ad66a4deee43225439b62e20c18accea7">More...</a><br /></td></tr>
+<tr class="separator:ad66a4deee43225439b62e20c18accea7 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a6edcb57e0d9c282b1e2bdca7a6e2a inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa1a6edcb57e0d9c282b1e2bdca7a6e2a">describe_local_dofs</a> (std::ostream &amp;out, const std::string &amp;current_string) const</td></tr>
+<tr class="memdesc:aa1a6edcb57e0d9c282b1e2bdca7a6e2a inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data::describe_dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem::describe_dofs(...)  <a href="classoomph_1_1GeneralisedElement.html#aa1a6edcb57e0d9c282b1e2bdca7a6e2a">More...</a><br /></td></tr>
+<tr class="separator:aa1a6edcb57e0d9c282b1e2bdca7a6e2a inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80a55128c12660e1c5b0ed191ca25a14 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a80a55128c12660e1c5b0ed191ca25a14">add_internal_value_pt_to_map</a> (std::map&lt; unsigned, double * &gt; &amp;map_of_value_pt)</td></tr>
+<tr class="memdesc:a80a55128c12660e1c5b0ed191ca25a14 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add pointers to the internal data values to map indexed by the global equation number.  <a href="classoomph_1_1GeneralisedElement.html#a80a55128c12660e1c5b0ed191ca25a14">More...</a><br /></td></tr>
+<tr class="separator:a80a55128c12660e1c5b0ed191ca25a14 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f15bfeb2a705f8acfa529967077bc20 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a3f15bfeb2a705f8acfa529967077bc20">add_internal_data_values_to_vector</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;vector_of_values)</td></tr>
+<tr class="memdesc:a3f15bfeb2a705f8acfa529967077bc20 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add all internal data and time history values to the vector in the internal storage order.  <a href="classoomph_1_1GeneralisedElement.html#a3f15bfeb2a705f8acfa529967077bc20">More...</a><br /></td></tr>
+<tr class="separator:a3f15bfeb2a705f8acfa529967077bc20 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4db27d80c24979a9cb822203ff77557 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#af4db27d80c24979a9cb822203ff77557">read_internal_data_values_from_vector</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;vector_of_values, unsigned &amp;index)</td></tr>
+<tr class="memdesc:af4db27d80c24979a9cb822203ff77557 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read all internal data and time history values from the vector starting from index. On return the index will be set to the value at the end of the data that has been read in.  <a href="classoomph_1_1GeneralisedElement.html#af4db27d80c24979a9cb822203ff77557">More...</a><br /></td></tr>
+<tr class="separator:af4db27d80c24979a9cb822203ff77557 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3af7347c1269583d2409d30415b5016 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ab3af7347c1269583d2409d30415b5016">add_internal_eqn_numbers_to_vector</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; long &gt; &amp;vector_of_eqn_numbers)</td></tr>
+<tr class="memdesc:ab3af7347c1269583d2409d30415b5016 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add all equation numbers associated with internal data to the vector in the internal storage order.  <a href="classoomph_1_1GeneralisedElement.html#ab3af7347c1269583d2409d30415b5016">More...</a><br /></td></tr>
+<tr class="separator:ab3af7347c1269583d2409d30415b5016 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27afd80364f84725fbcf20d69e6f98e6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a27afd80364f84725fbcf20d69e6f98e6">read_internal_eqn_numbers_from_vector</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; long &gt; &amp;vector_of_eqn_numbers, unsigned &amp;index)</td></tr>
+<tr class="memdesc:a27afd80364f84725fbcf20d69e6f98e6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read all equation numbers associated with internal data from the vector starting from index. On return the index will be set to the value at the end of the data that has been read in.  <a href="classoomph_1_1GeneralisedElement.html#a27afd80364f84725fbcf20d69e6f98e6">More...</a><br /></td></tr>
+<tr class="separator:a27afd80364f84725fbcf20d69e6f98e6 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5aa22a9fb43a762e0bec65d210cff19 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ac5aa22a9fb43a762e0bec65d210cff19">assign_local_eqn_numbers</a> (const bool &amp;store_local_dof_pt)</td></tr>
+<tr class="memdesc:ac5aa22a9fb43a762e0bec65d210cff19 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the arrays of local equation numbers for the element. If the optional boolean argument is true, then pointers to the associated degrees of freedom are stored locally in the array Dof_pt.  <a href="classoomph_1_1GeneralisedElement.html#ac5aa22a9fb43a762e0bec65d210cff19">More...</a><br /></td></tr>
+<tr class="separator:ac5aa22a9fb43a762e0bec65d210cff19 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af03c43b9df873659a6ca91e39566256e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#af03c43b9df873659a6ca91e39566256e">complete_setup_of_dependencies</a> ()</td></tr>
+<tr class="memdesc:af03c43b9df873659a6ca91e39566256e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete the setup of any additional dependencies that the element may have. Empty virtual function that may be overloaded for specific derived elements. Used, e.g., for elements with algebraic node update functions to determine the "geometric
+Data", i.e. the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that affects the element's shape. This function is called (for all elements) at the very beginning of the equation numbering procedure to ensure that all dependencies are accounted for.  <a href="classoomph_1_1GeneralisedElement.html#af03c43b9df873659a6ca91e39566256e">More...</a><br /></td></tr>
+<tr class="separator:af03c43b9df873659a6ca91e39566256e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53d348ab71c86b53619129a1dd411d30 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a53d348ab71c86b53619129a1dd411d30">get_residuals</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td></tr>
+<tr class="memdesc:a53d348ab71c86b53619129a1dd411d30 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the vector of residuals of the equations in the element. By default initialise the vector to zero and then call the <a class="el" href="classoomph_1_1GeneralisedElement.html#a310c97f515e8504a48179c0e72c550d7" title="Add the elemental contribution to the residuals vector. Note that this function will NOT initialise t...">fill_in_contribution_to_residuals()</a> function. Note that this entire function can be overloaded if desired.  <a href="classoomph_1_1GeneralisedElement.html#a53d348ab71c86b53619129a1dd411d30">More...</a><br /></td></tr>
+<tr class="separator:a53d348ab71c86b53619129a1dd411d30 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a6d98bc7cf48e">get_jacobian</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the elemental Jacobian matrix "d equation / d variable".  <a href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a6d98bc7cf48e">More...</a><br /></td></tr>
+<tr class="separator:ab915bdad7e6643e5e73a6d98bc7cf48e inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5be9add27c9e4a6bd05e6ccaec6263aa inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a5be9add27c9e4a6bd05e6ccaec6263aa">get_mass_matrix</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="memdesc:a5be9add27c9e4a6bd05e6ccaec6263aa inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the residuals and the elemental "mass" matrix, the matrix that multiplies the time derivative terms in a problem.  <a href="classoomph_1_1GeneralisedElement.html#a5be9add27c9e4a6bd05e6ccaec6263aa">More...</a><br /></td></tr>
+<tr class="separator:a5be9add27c9e4a6bd05e6ccaec6263aa inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd153d7425b92936314100a7b7354bdc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acd153d7425b92936314100a7b7354bdc">get_jacobian_and_mass_matrix</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="memdesc:acd153d7425b92936314100a7b7354bdc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the residuals and jacobian and elemental "mass" matrix, the matrix that multiplies the time derivative terms.  <a href="classoomph_1_1GeneralisedElement.html#acd153d7425b92936314100a7b7354bdc">More...</a><br /></td></tr>
+<tr class="separator:acd153d7425b92936314100a7b7354bdc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63bf8f3db94fdb4098ff61fa930a6d40 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a63bf8f3db94fdb4098ff61fa930a6d40">get_dresiduals_dparameter</a> (double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam)</td></tr>
+<tr class="memdesc:a63bf8f3db94fdb4098ff61fa930a6d40 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivatives of the residuals with respect to a parameter.  <a href="classoomph_1_1GeneralisedElement.html#a63bf8f3db94fdb4098ff61fa930a6d40">More...</a><br /></td></tr>
+<tr class="separator:a63bf8f3db94fdb4098ff61fa930a6d40 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab92de6f9c750735bc660f0a10f0df44c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ab92de6f9c750735bc660f0a10f0df44c">get_djacobian_dparameter</a> (double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;djac_dparam)</td></tr>
+<tr class="memdesc:ab92de6f9c750735bc660f0a10f0df44c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivatives of the elemental Jacobian matrix and residuals with respect to a parameter.  <a href="classoomph_1_1GeneralisedElement.html#ab92de6f9c750735bc660f0a10f0df44c">More...</a><br /></td></tr>
+<tr class="separator:ab92de6f9c750735bc660f0a10f0df44c inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4146a407d84ad907b4c41cf555c7f28 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa4146a407d84ad907b4c41cf555c7f28">get_djacobian_and_dmass_matrix_dparameter</a> (double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;djac_dparam, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;dmass_matrix_dparam)</td></tr>
+<tr class="memdesc:aa4146a407d84ad907b4c41cf555c7f28 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivatives of the elemental Jacobian matrix mass matrix and residuals with respect to a parameter.  <a href="classoomph_1_1GeneralisedElement.html#aa4146a407d84ad907b4c41cf555c7f28">More...</a><br /></td></tr>
+<tr class="separator:aa4146a407d84ad907b4c41cf555c7f28 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fbe77c663eefdf38a0c95f62f6e51bb inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a1fbe77c663eefdf38a0c95f62f6e51bb">get_hessian_vector_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;Y, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; const &amp;C, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;product)</td></tr>
+<tr class="memdesc:a1fbe77c663eefdf38a0c95f62f6e51bb inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the product of the Hessian (derivative of Jacobian with respect to all variables) an eigenvector, Y, and other specified vectors, C (d(J_{ij})/d u_{k}) Y_{j} C_{k}.  <a href="classoomph_1_1GeneralisedElement.html#a1fbe77c663eefdf38a0c95f62f6e51bb">More...</a><br /></td></tr>
+<tr class="separator:a1fbe77c663eefdf38a0c95f62f6e51bb inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50091d9dad94bd60d5b6fa6c6e9a6fbc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a50091d9dad94bd60d5b6fa6c6e9a6fbc">get_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt; &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
+<tr class="memdesc:a50091d9dad94bd60d5b6fa6c6e9a6fbc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vector of inner product of the given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#a50091d9dad94bd60d5b6fa6c6e9a6fbc">More...</a><br /></td></tr>
+<tr class="separator:a50091d9dad94bd60d5b6fa6c6e9a6fbc inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a464659c067a0bdd21f3314491a429381 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a464659c067a0bdd21f3314491a429381">get_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;inner_product_vector)</td></tr>
+<tr class="memdesc:a464659c067a0bdd21f3314491a429381 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the vectors that when taken as a dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#a464659c067a0bdd21f3314491a429381">More...</a><br /></td></tr>
+<tr class="separator:a464659c067a0bdd21f3314491a429381 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6bf086bf8268c53ea588e4e52c47cec inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ab6bf086bf8268c53ea588e4e52c47cec">self_test</a> ()</td></tr>
+<tr class="memdesc:ab6bf086bf8268c53ea588e4e52c47cec inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Self-test: Have all internal values been classified as pinned/unpinned? Return 0 if OK.  <a href="classoomph_1_1GeneralisedElement.html#ab6bf086bf8268c53ea588e4e52c47cec">More...</a><br /></td></tr>
+<tr class="separator:ab6bf086bf8268c53ea588e4e52c47cec inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf790e568048d203a4a954f3f8cd1f24 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acf790e568048d203a4a954f3f8cd1f24">compute_norm</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;norm)</td></tr>
+<tr class="memdesc:acf790e568048d203a4a954f3f8cd1f24 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute norm of solution &ndash; broken virtual can be overloaded by element writer to implement whatever norm is desired for the specific element.  <a href="classoomph_1_1GeneralisedElement.html#acf790e568048d203a4a954f3f8cd1f24">More...</a><br /></td></tr>
+<tr class="separator:acf790e568048d203a4a954f3f8cd1f24 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2025a472df6752a946739da58e7fb37 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#af2025a472df6752a946739da58e7fb37">compute_norm</a> (double &amp;norm)</td></tr>
+<tr class="memdesc:af2025a472df6752a946739da58e7fb37 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute norm of solution &ndash; broken virtual can be overloaded by element writer to implement whatever norm is desired for the specific element.  <a href="classoomph_1_1GeneralisedElement.html#af2025a472df6752a946739da58e7fb37">More...</a><br /></td></tr>
+<tr class="separator:af2025a472df6752a946739da58e7fb37 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac64aa49118c51541559c86e8572b317 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aac64aa49118c51541559c86e8572b317">set_halo</a> (const unsigned &amp;<a class="el" href="classoomph_1_1GeneralisedElement.html#a588d15a39b8c656c354f8e4873d394b3">non_halo_proc_ID</a>)</td></tr>
+<tr class="memdesc:aac64aa49118c51541559c86e8572b317 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Label the element as halo and specify processor that holds non-halo counterpart.  <a href="classoomph_1_1GeneralisedElement.html#aac64aa49118c51541559c86e8572b317">More...</a><br /></td></tr>
+<tr class="separator:aac64aa49118c51541559c86e8572b317 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0067cc08893086ab156cc13950e9943f inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a0067cc08893086ab156cc13950e9943f">set_nonhalo</a> ()</td></tr>
+<tr class="memdesc:a0067cc08893086ab156cc13950e9943f inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Label the element as not being a halo.  <a href="classoomph_1_1GeneralisedElement.html#a0067cc08893086ab156cc13950e9943f">More...</a><br /></td></tr>
+<tr class="separator:a0067cc08893086ab156cc13950e9943f inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d9869eaf7d6e104c1e465b0d3cd6a9b inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a0d9869eaf7d6e104c1e465b0d3cd6a9b">is_halo</a> () const</td></tr>
+<tr class="memdesc:a0d9869eaf7d6e104c1e465b0d3cd6a9b inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is this element a halo?  <a href="classoomph_1_1GeneralisedElement.html#a0d9869eaf7d6e104c1e465b0d3cd6a9b">More...</a><br /></td></tr>
+<tr class="separator:a0d9869eaf7d6e104c1e465b0d3cd6a9b inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a588d15a39b8c656c354f8e4873d394b3 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a588d15a39b8c656c354f8e4873d394b3">non_halo_proc_ID</a> ()</td></tr>
+<tr class="memdesc:a588d15a39b8c656c354f8e4873d394b3 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID of processor ID that holds non-halo counterpart of halo element; negative if not a halo.  <a href="classoomph_1_1GeneralisedElement.html#a588d15a39b8c656c354f8e4873d394b3">More...</a><br /></td></tr>
+<tr class="separator:a588d15a39b8c656c354f8e4873d394b3 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5902d0381f64162286885c984a01a17 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ab5902d0381f64162286885c984a01a17">set_must_be_kept_as_halo</a> ()</td></tr>
+<tr class="memdesc:ab5902d0381f64162286885c984a01a17 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insist that this element be kept as a halo element during a distribute?  <a href="classoomph_1_1GeneralisedElement.html#ab5902d0381f64162286885c984a01a17">More...</a><br /></td></tr>
+<tr class="separator:ab5902d0381f64162286885c984a01a17 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c7e434279753aea0912cca56401f9ce inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a5c7e434279753aea0912cca56401f9ce">unset_must_be_kept_as_halo</a> ()</td></tr>
+<tr class="memdesc:a5c7e434279753aea0912cca56401f9ce inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do not insist that this element be kept as a halo element during distribution.  <a href="classoomph_1_1GeneralisedElement.html#a5c7e434279753aea0912cca56401f9ce">More...</a><br /></td></tr>
+<tr class="separator:a5c7e434279753aea0912cca56401f9ce inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bfd80be22c82459b6029ca1202c8f36 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a6bfd80be22c82459b6029ca1202c8f36">must_be_kept_as_halo</a> () const</td></tr>
+<tr class="memdesc:a6bfd80be22c82459b6029ca1202c8f36 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether the element must be kept as a halo element.  <a href="classoomph_1_1GeneralisedElement.html#a6bfd80be22c82459b6029ca1202c8f36">More...</a><br /></td></tr>
+<tr class="separator:a6bfd80be22c82459b6029ca1202c8f36 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6037a870597b35dcf1c780710b9a56 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a0c6037a870597b35dcf1c780710b9a56">ndof_types</a> () const</td></tr>
+<tr class="memdesc:a0c6037a870597b35dcf1c780710b9a56 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of types of degrees of freedom in this element are sub-divided into.  <a href="classoomph_1_1GeneralisedElement.html#a0c6037a870597b35dcf1c780710b9a56">More...</a><br /></td></tr>
+<tr class="separator:a0c6037a870597b35dcf1c780710b9a56 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a069f59bfc3e607a5bebba52c6314d777 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a069f59bfc3e607a5bebba52c6314d777">get_dof_numbers_for_unknowns</a> (std::list&lt; std::pair&lt; unsigned long, unsigned &gt; &gt; &amp;dof_lookup_list) const</td></tr>
+<tr class="memdesc:a069f59bfc3e607a5bebba52c6314d777 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a list of pairs for the unknowns that this element is "in charge of" &ndash; ignore any unknowns associated with external <code><a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a></code>. The first entry in each pair must contain the global equation number of the unknown, while the second one contains the number of the DOF type that this unknown is associated with. (The function can obviously only be called if the equation numbering scheme has been set up.)  <a href="classoomph_1_1GeneralisedElement.html#a069f59bfc3e607a5bebba52c6314d777">More...</a><br /></td></tr>
+<tr class="separator:a069f59bfc3e607a5bebba52c6314d777 inherit pub_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a15515003602f6303d5798b3553331fac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a15515003602f6303d5798b3553331fac">Volume_control_pressure_pt</a></td></tr>
+<tr class="memdesc:a15515003602f6303d5798b3553331fac"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object whose single value contains the pressure that has been "traded" for the volume constraint.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a15515003602f6303d5798b3553331fac">More...</a><br /></td></tr>
+<tr class="separator:a15515003602f6303d5798b3553331fac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3881d17c5bdda4a71815f1fedfeb4185"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3881d17c5bdda4a71815f1fedfeb4185">Pressure_data_index</a></td></tr>
+<tr class="memdesc:a3881d17c5bdda4a71815f1fedfeb4185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsigned indicating which internal <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object stores the pressure.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3881d17c5bdda4a71815f1fedfeb4185">More...</a><br /></td></tr>
+<tr class="separator:a3881d17c5bdda4a71815f1fedfeb4185"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c3ee6a6c6c4f5eb93f9540c6d400f26"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">Volume_control_local_eqn</a></td></tr>
+<tr class="memdesc:a0c3ee6a6c6c4f5eb93f9540c6d400f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local equation number of volume constraint.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">More...</a><br /></td></tr>
+<tr class="separator:a0c3ee6a6c6c4f5eb93f9540c6d400f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bebd0ba7ecef23139c97ed56ee83b71"><td class="memItemLeft" align="right" valign="top">MESH&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0bebd0ba7ecef23139c97ed56ee83b71">Bounding_mesh_pt</a></td></tr>
+<tr class="memdesc:a0bebd0ba7ecef23139c97ed56ee83b71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh of Foeppl von Karman elements that bound the prescribed volume; NULL if the FvK elements that contribute to the bounding volume are in charge of adding their own contribution to the volume constraint equation (and the associated Jacobian)  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0bebd0ba7ecef23139c97ed56ee83b71">More...</a><br /></td></tr>
+<tr class="separator:a0bebd0ba7ecef23139c97ed56ee83b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7504a6d7b951b3a8c0580acddd4d3b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab7504a6d7b951b3a8c0580acddd4d3b0">Contributing_region</a></td></tr>
+<tr class="memdesc:ab7504a6d7b951b3a8c0580acddd4d3b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Region IDs in the bounding mesh that contribute to the prescribed/controlled volume.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab7504a6d7b951b3a8c0580acddd4d3b0">More...</a><br /></td></tr>
+<tr class="separator:ab7504a6d7b951b3a8c0580acddd4d3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47b9920b4fe975f324d6ff0aca6d325b"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a47b9920b4fe975f324d6ff0aca6d325b">Prescribed_volume_pt</a></td></tr>
+<tr class="memdesc:a47b9920b4fe975f324d6ff0aca6d325b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to target volume.  <a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a47b9920b4fe975f324d6ff0aca6d325b">More...</a><br /></td></tr>
+<tr class="separator:a47b9920b4fe975f324d6ff0aca6d325b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
+<tr class="memitem:a710f464f432f1704270931453118c60c inherit pro_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a710f464f432f1704270931453118c60c">Non_halo_proc_ID</a></td></tr>
+<tr class="memdesc:a710f464f432f1704270931453118c60c inherit pro_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-halo processor ID for <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>; -1 if it's not a halo.  <a href="classoomph_1_1GeneralisedElement.html#a710f464f432f1704270931453118c60c">More...</a><br /></td></tr>
+<tr class="separator:a710f464f432f1704270931453118c60c inherit pro_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14ec40733415a0f903fa4c355a004f5f inherit pro_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a14ec40733415a0f903fa4c355a004f5f">Must_be_kept_as_halo</a></td></tr>
+<tr class="memdesc:a14ec40733415a0f903fa4c355a004f5f inherit pro_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does this element need to be kept as a halo element during a distribute?  <a href="classoomph_1_1GeneralisedElement.html#a14ec40733415a0f903fa4c355a004f5f">More...</a><br /></td></tr>
+<tr class="separator:a14ec40733415a0f903fa4c355a004f5f inherit pro_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
+<tr class="memitem:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">Suppress_warning_about_repeated_internal_data</a> =false</td></tr>
+<tr class="memdesc:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated internal data. Defaults to false.  <a href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">More...</a><br /></td></tr>
+<tr class="separator:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a1bf8531f4b0ba0a0008e9a25af9b0b8b">Suppress_warning_about_repeated_external_data</a> =true</td></tr>
+<tr class="memdesc:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated external data. Defaults to true.  <a href="classoomph_1_1GeneralisedElement.html#a1bf8531f4b0ba0a0008e9a25af9b0b8b">More...</a><br /></td></tr>
+<tr class="separator:a1bf8531f4b0ba0a0008e9a25af9b0b8b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a156163c9f6fbd17548a9fa836616d19b">Default_fd_jacobian_step</a> =1.0e-8</td></tr>
+<tr class="memdesc:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Double used for the default finite difference step in elemental jacobian calculations.  <a href="classoomph_1_1GeneralisedElement.html#a156163c9f6fbd17548a9fa836616d19b">More...</a><br /></td></tr>
+<tr class="separator:a156163c9f6fbd17548a9fa836616d19b inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
+<tr class="memitem:a36571ae9c4b6d2a26c36004e5be88389 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a36571ae9c4b6d2a26c36004e5be88389">add_internal_data</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *const &amp;data_pt, const bool &amp;fd=true)</td></tr>
+<tr class="memdesc:a36571ae9c4b6d2a26c36004e5be88389 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a (pointer to an) internal data object to the element and return the index required to obtain it from the access function <code><a class="el" href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44" title="Return a pointer to i-th internal data object.">internal_data_pt()</a></code>. The boolean indicates whether the datum should be included in the general finite-difference loop when calculating the jacobian. The default value is true, i.e. the data will be included in the finite differencing.  <a href="classoomph_1_1GeneralisedElement.html#a36571ae9c4b6d2a26c36004e5be88389">More...</a><br /></td></tr>
+<tr class="separator:a36571ae9c4b6d2a26c36004e5be88389 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a267f0eb0e548ea9b4908d1076370ba95 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a267f0eb0e548ea9b4908d1076370ba95">internal_data_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a267f0eb0e548ea9b4908d1076370ba95 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the status of the boolean flag indicating whether the internal data is included in the finite difference loop.  <a href="classoomph_1_1GeneralisedElement.html#a267f0eb0e548ea9b4908d1076370ba95">More...</a><br /></td></tr>
+<tr class="separator:a267f0eb0e548ea9b4908d1076370ba95 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3609beaea7104b223d6f7750f071f023 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a3609beaea7104b223d6f7750f071f023">exclude_internal_data_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a3609beaea7104b223d6f7750f071f023 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the boolean flag to exclude the internal datum from the finite difference loop when computing the jacobian matrix.  <a href="classoomph_1_1GeneralisedElement.html#a3609beaea7104b223d6f7750f071f023">More...</a><br /></td></tr>
+<tr class="separator:a3609beaea7104b223d6f7750f071f023 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76c12b675e16b3ad2f44a59af36aa2af inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a76c12b675e16b3ad2f44a59af36aa2af">include_internal_data_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a76c12b675e16b3ad2f44a59af36aa2af inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the boolean flag to include the internal datum in the finite difference loop when computing the jacobian matrix.  <a href="classoomph_1_1GeneralisedElement.html#a76c12b675e16b3ad2f44a59af36aa2af">More...</a><br /></td></tr>
+<tr class="separator:a76c12b675e16b3ad2f44a59af36aa2af inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75da2bf85ec82c9d59cbb2e06f82b9a1 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a75da2bf85ec82c9d59cbb2e06f82b9a1">clear_global_eqn_numbers</a> ()</td></tr>
+<tr class="memdesc:a75da2bf85ec82c9d59cbb2e06f82b9a1 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the storage for the global equation numbers and pointers to dofs (if stored)  <a href="classoomph_1_1GeneralisedElement.html#a75da2bf85ec82c9d59cbb2e06f82b9a1">More...</a><br /></td></tr>
+<tr class="separator:a75da2bf85ec82c9d59cbb2e06f82b9a1 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a817e216d749a7be41ebcfc6ef3f1b002 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a817e216d749a7be41ebcfc6ef3f1b002">add_global_eqn_numbers</a> (std::deque&lt; unsigned long &gt; const &amp;global_eqn_numbers, std::deque&lt; double * &gt; const &amp;global_dof_pt)</td></tr>
+<tr class="memdesc:a817e216d749a7be41ebcfc6ef3f1b002 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the contents of the queue global_eqn_numbers to the local storage for the local-to-global translation scheme. It is essential that the entries in the queue are added IN ORDER i.e. from the front.  <a href="classoomph_1_1GeneralisedElement.html#a817e216d749a7be41ebcfc6ef3f1b002">More...</a><br /></td></tr>
+<tr class="separator:a817e216d749a7be41ebcfc6ef3f1b002 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4884467f33b95c17e2e57e592ccd480 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa4884467f33b95c17e2e57e592ccd480">assign_internal_and_external_local_eqn_numbers</a> (const bool &amp;store_local_dof_pt)</td></tr>
+<tr class="memdesc:aa4884467f33b95c17e2e57e592ccd480 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the local equation numbers for the internal and external <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> This must be called after the global equation numbers have all been assigned. It is virtual so that it can be overloaded by ElementWithExternalElements so that any external data from the external elements in included in the numbering scheme. If the boolean argument is true then pointers to the dofs will be stored in Dof_pt.  <a href="classoomph_1_1GeneralisedElement.html#aa4884467f33b95c17e2e57e592ccd480">More...</a><br /></td></tr>
+<tr class="separator:aa4884467f33b95c17e2e57e592ccd480 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35dfba78813087c1070c9fd1a69824e5 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a35dfba78813087c1070c9fd1a69824e5">assign_all_generic_local_eqn_numbers</a> (const bool &amp;store_local_dof_pt)</td></tr>
+<tr class="memdesc:a35dfba78813087c1070c9fd1a69824e5 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign all the local equation numbering schemes that can be applied generically for the element. In most cases, this is the function that will be overloaded by inherited classes. It is required to ensure that <a class="el" href="classoomph_1_1GeneralisedElement.html#a4cdd0d1eef33b43f652c8f0b9e43967b" title="Setup any additional look-up schemes for local equation numbers. Examples of use include using local ...">assign_additional_local_eqn_numbers()</a> can always be called after ALL other local equation numbering has been performed. The default for the <a class="el" href="classoomph_1_1GeneralisedElement.html" title="A Generalised Element class.">GeneralisedElement</a> is simply to call internal and external local equation numbering. If the boolean argument is true then pointers to the dofs will be stored in Dof_pt.  <a href="classoomph_1_1GeneralisedElement.html#a35dfba78813087c1070c9fd1a69824e5">More...</a><br /></td></tr>
+<tr class="separator:a35dfba78813087c1070c9fd1a69824e5 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9db9d3c59caed7ff927373caf5ea4b6 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa9db9d3c59caed7ff927373caf5ea4b6">internal_local_eqn</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j) const</td></tr>
+<tr class="memdesc:aa9db9d3c59caed7ff927373caf5ea4b6 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the local equation number corresponding to the j-th value stored at the i-th internal data.  <a href="classoomph_1_1GeneralisedElement.html#aa9db9d3c59caed7ff927373caf5ea4b6">More...</a><br /></td></tr>
+<tr class="separator:aa9db9d3c59caed7ff927373caf5ea4b6 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64d0c116d24bafae79d8602012e4941 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ad64d0c116d24bafae79d8602012e4941">external_local_eqn</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, const unsigned &amp;j)</td></tr>
+<tr class="memdesc:ad64d0c116d24bafae79d8602012e4941 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the local equation number corresponding to the j-th value stored at the i-th external data.  <a href="classoomph_1_1GeneralisedElement.html#ad64d0c116d24bafae79d8602012e4941">More...</a><br /></td></tr>
+<tr class="separator:ad64d0c116d24bafae79d8602012e4941 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3409d6da14739827766547c7338360e3 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a3409d6da14739827766547c7338360e3">fill_in_jacobian_from_internal_by_fd</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, const bool &amp;fd_all_data=false)</td></tr>
+<tr class="memdesc:a3409d6da14739827766547c7338360e3 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contributions to the jacobian from the internal degrees of freedom using finite differences. This version of the function assumes that the residuals vector has already been calculated. If the boolean argument is true, the finite differencing will be performed for all internal data, irrespective of the information in Data_fd. The default value (false) uses the information in Data_fd to selectively difference only certain data.  <a href="classoomph_1_1GeneralisedElement.html#a3409d6da14739827766547c7338360e3">More...</a><br /></td></tr>
+<tr class="separator:a3409d6da14739827766547c7338360e3 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30caea3a6e2f41b2149f5cae2a1feb30 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a30caea3a6e2f41b2149f5cae2a1feb30">fill_in_jacobian_from_internal_by_fd</a> (<a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, const bool &amp;fd_all_data=false)</td></tr>
+<tr class="memdesc:a30caea3a6e2f41b2149f5cae2a1feb30 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contributions to the jacobian from the internal degrees of freedom using finite differences. This version computes the residuals vector before calculating the jacobian terms. If the boolean argument is true, the finite differencing will be performed for all internal data, irrespective of the information in Data_fd. The default value (false) uses the information in Data_fd to selectively difference only certain data.  <a href="classoomph_1_1GeneralisedElement.html#a30caea3a6e2f41b2149f5cae2a1feb30">More...</a><br /></td></tr>
+<tr class="separator:a30caea3a6e2f41b2149f5cae2a1feb30 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01ccf0a6a959cff46a36a4b7f1cf1554 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a01ccf0a6a959cff46a36a4b7f1cf1554">fill_in_jacobian_from_external_by_fd</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, const bool &amp;fd_all_data=false)</td></tr>
+<tr class="memdesc:a01ccf0a6a959cff46a36a4b7f1cf1554 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contributions to the jacobian from the external degrees of freedom using finite differences. This version of the function assumes that the residuals vector has already been calculated. If the boolean argument is true, the finite differencing will be performed for all external data, irrespective of the information in Data_fd. The default value (false) uses the information in Data_fd to selectively difference only certain data.  <a href="classoomph_1_1GeneralisedElement.html#a01ccf0a6a959cff46a36a4b7f1cf1554">More...</a><br /></td></tr>
+<tr class="separator:a01ccf0a6a959cff46a36a4b7f1cf1554 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a427611c389715ff4e9ea98e9d08cd93f inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a427611c389715ff4e9ea98e9d08cd93f">fill_in_jacobian_from_external_by_fd</a> (<a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, const bool &amp;fd_all_data=false)</td></tr>
+<tr class="memdesc:a427611c389715ff4e9ea98e9d08cd93f inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contributions to the jacobian from the external degrees of freedom using finite differences. This version computes the residuals vector before calculating the jacobian terms. If the boolean argument is true, the finite differencing will be performed for all internal data, irrespective of the information in Data_fd. The default value (false) uses the information in Data_fd to selectively difference only certain data.  <a href="classoomph_1_1GeneralisedElement.html#a427611c389715ff4e9ea98e9d08cd93f">More...</a><br /></td></tr>
+<tr class="separator:a427611c389715ff4e9ea98e9d08cd93f inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a841503bfd99e2ccb1170b958190f6386 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a841503bfd99e2ccb1170b958190f6386">update_before_internal_fd</a> ()</td></tr>
+<tr class="memdesc:a841503bfd99e2ccb1170b958190f6386 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that is called before the finite differencing of any internal data. This may be overloaded to update any dependent data before finite differencing takes place.  <a href="classoomph_1_1GeneralisedElement.html#a841503bfd99e2ccb1170b958190f6386">More...</a><br /></td></tr>
+<tr class="separator:a841503bfd99e2ccb1170b958190f6386 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3e2e13d219c132488fb05e9596cb43f inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#ab3e2e13d219c132488fb05e9596cb43f">reset_after_internal_fd</a> ()</td></tr>
+<tr class="memdesc:ab3e2e13d219c132488fb05e9596cb43f inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that is call after the finite differencing of the internal data. This may be overloaded to reset any dependent variables that may have changed during the finite differencing.  <a href="classoomph_1_1GeneralisedElement.html#ab3e2e13d219c132488fb05e9596cb43f">More...</a><br /></td></tr>
+<tr class="separator:ab3e2e13d219c132488fb05e9596cb43f inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c94ccb2cad3bcf15f97a6e5a6dff90b inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a0c94ccb2cad3bcf15f97a6e5a6dff90b">update_in_internal_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a0c94ccb2cad3bcf15f97a6e5a6dff90b inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function called within the finite difference loop for internal data after a change in any values in the i-th internal data object.  <a href="classoomph_1_1GeneralisedElement.html#a0c94ccb2cad3bcf15f97a6e5a6dff90b">More...</a><br /></td></tr>
+<tr class="separator:a0c94ccb2cad3bcf15f97a6e5a6dff90b inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c6c5cf8b4d8b451caa124b346e5e8d inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a89c6c5cf8b4d8b451caa124b346e5e8d">reset_in_internal_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a89c6c5cf8b4d8b451caa124b346e5e8d inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function called within the finite difference loop for internal data after the values in the i-th external data object are reset. The default behaviour is to call the update function.  <a href="classoomph_1_1GeneralisedElement.html#a89c6c5cf8b4d8b451caa124b346e5e8d">More...</a><br /></td></tr>
+<tr class="separator:a89c6c5cf8b4d8b451caa124b346e5e8d inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a103e7ca408559e9aa40066f529e814c0 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a103e7ca408559e9aa40066f529e814c0">update_before_external_fd</a> ()</td></tr>
+<tr class="memdesc:a103e7ca408559e9aa40066f529e814c0 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that is called before the finite differencing of any external data. This may be overloaded to update any dependent data before finite differencing takes place.  <a href="classoomph_1_1GeneralisedElement.html#a103e7ca408559e9aa40066f529e814c0">More...</a><br /></td></tr>
+<tr class="separator:a103e7ca408559e9aa40066f529e814c0 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10210277ae4fa66b7701ff00d4dd9b14 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a10210277ae4fa66b7701ff00d4dd9b14">reset_after_external_fd</a> ()</td></tr>
+<tr class="memdesc:a10210277ae4fa66b7701ff00d4dd9b14 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that is call after the finite differencing of the external data. This may be overloaded to reset any dependent variables that may have changed during the finite differencing.  <a href="classoomph_1_1GeneralisedElement.html#a10210277ae4fa66b7701ff00d4dd9b14">More...</a><br /></td></tr>
+<tr class="separator:a10210277ae4fa66b7701ff00d4dd9b14 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af740b8c507dde03700cff5d196e28019 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#af740b8c507dde03700cff5d196e28019">update_in_external_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:af740b8c507dde03700cff5d196e28019 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function called within the finite difference loop for external data after a change in any values in the i-th external data object.  <a href="classoomph_1_1GeneralisedElement.html#af740b8c507dde03700cff5d196e28019">More...</a><br /></td></tr>
+<tr class="separator:af740b8c507dde03700cff5d196e28019 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a027a9213e91b946346062adf96e26a85 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a027a9213e91b946346062adf96e26a85">reset_in_external_fd</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a027a9213e91b946346062adf96e26a85 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function called within the finite difference loop for external data after the values in the i-th external data object are reset. The default behaviour is to call the update function.  <a href="classoomph_1_1GeneralisedElement.html#a027a9213e91b946346062adf96e26a85">More...</a><br /></td></tr>
+<tr class="separator:a027a9213e91b946346062adf96e26a85 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09e337880e9bfc6e2d43202616121b50 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a09e337880e9bfc6e2d43202616121b50">fill_in_contribution_to_mass_matrix</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="memdesc:a09e337880e9bfc6e2d43202616121b50 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the elemental contribution to the mass matrix matrix. and the residuals vector. Note that this function should NOT initialise the residuals vector or the mass matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is deliberately broken.  <a href="classoomph_1_1GeneralisedElement.html#a09e337880e9bfc6e2d43202616121b50">More...</a><br /></td></tr>
+<tr class="separator:a09e337880e9bfc6e2d43202616121b50 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b6294a730647cf865da94f2531466f8 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a2b6294a730647cf865da94f2531466f8">fill_in_contribution_to_jacobian_and_mass_matrix</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="memdesc:a2b6294a730647cf865da94f2531466f8 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the elemental contribution to the jacobian matrix, mass matrix and the residuals vector. Note that this function should NOT initialise any entries. It must be called after the residuals vector and matrices have been initialised to zero.  <a href="classoomph_1_1GeneralisedElement.html#a2b6294a730647cf865da94f2531466f8">More...</a><br /></td></tr>
+<tr class="separator:a2b6294a730647cf865da94f2531466f8 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64d31806fcbe7c5b689a3281932e8073 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a64d31806fcbe7c5b689a3281932e8073">fill_in_contribution_to_dresiduals_dparameter</a> (double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam)</td></tr>
+<tr class="memdesc:a64d31806fcbe7c5b689a3281932e8073 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the elemental contribution to the derivatives of the residuals with respect to a parameter. This function should NOT initialise any entries and must be called after the entries have been initialised to zero The default implementation is to use finite differences to calculate the derivatives.  <a href="classoomph_1_1GeneralisedElement.html#a64d31806fcbe7c5b689a3281932e8073">More...</a><br /></td></tr>
+<tr class="separator:a64d31806fcbe7c5b689a3281932e8073 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90ee6ee39dd3950f625148d960f1ba67 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a90ee6ee39dd3950f625148d960f1ba67">fill_in_contribution_to_djacobian_dparameter</a> (double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;djac_dparam)</td></tr>
+<tr class="memdesc:a90ee6ee39dd3950f625148d960f1ba67 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the elemental contribution to the derivatives of the elemental Jacobian matrix and residuals with respect to a parameter. This function should NOT initialise any entries and must be called after the entries have been initialised to zero The default implementation is to use finite differences to calculate the derivatives.  <a href="classoomph_1_1GeneralisedElement.html#a90ee6ee39dd3950f625148d960f1ba67">More...</a><br /></td></tr>
+<tr class="separator:a90ee6ee39dd3950f625148d960f1ba67 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d6e3c918ebc1f270eebdf4eb1027093 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a2d6e3c918ebc1f270eebdf4eb1027093">fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter</a> (double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;djac_dparam, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;dmass_matrix_dparam)</td></tr>
+<tr class="memdesc:a2d6e3c918ebc1f270eebdf4eb1027093 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the elemental contribution to the derivative of the jacobian matrix, mass matrix and the residuals vector with respect to the passed parameter. Note that this function should NOT initialise any entries. It must be called after the residuals vector and matrices have been initialised to zero.  <a href="classoomph_1_1GeneralisedElement.html#a2d6e3c918ebc1f270eebdf4eb1027093">More...</a><br /></td></tr>
+<tr class="separator:a2d6e3c918ebc1f270eebdf4eb1027093 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94e118d65f31ce404963509e462b2d0e inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a94e118d65f31ce404963509e462b2d0e">fill_in_contribution_to_hessian_vector_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;Y, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; const &amp;C, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;product)</td></tr>
+<tr class="memdesc:a94e118d65f31ce404963509e462b2d0e inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in contribution to the product of the Hessian (derivative of Jacobian with respect to all variables) an eigenvector, Y, and other specified vectors, C (d(J_{ij})/d u_{k}) Y_{j} C_{k}.  <a href="classoomph_1_1GeneralisedElement.html#a94e118d65f31ce404963509e462b2d0e">More...</a><br /></td></tr>
+<tr class="separator:a94e118d65f31ce404963509e462b2d0e inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa69127912ea0def7044311c86e5d6eac inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa69127912ea0def7044311c86e5d6eac">fill_in_contribution_to_inner_products</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt; &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
+<tr class="memdesc:aa69127912ea0def7044311c86e5d6eac inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contribution to the inner products between given pairs of history values.  <a href="classoomph_1_1GeneralisedElement.html#aa69127912ea0def7044311c86e5d6eac">More...</a><br /></td></tr>
+<tr class="separator:aa69127912ea0def7044311c86e5d6eac inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7bd5d890614037d1023aae753a66957 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa7bd5d890614037d1023aae753a66957">fill_in_contribution_to_inner_product_vectors</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;inner_product_vector)</td></tr>
+<tr class="memdesc:aa7bd5d890614037d1023aae753a66957 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the contributions to the vectors that when taken as dot product with other history values give the inner product over the element.  <a href="classoomph_1_1GeneralisedElement.html#aa7bd5d890614037d1023aae753a66957">More...</a><br /></td></tr>
+<tr class="separator:aa7bd5d890614037d1023aae753a66957 inherit pro_methods_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
+<tr class="memitem:a4bff11b8ff97aefabb2df41e61e1779f inherit pro_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a4bff11b8ff97aefabb2df41e61e1779f">Dummy_matrix</a></td></tr>
+<tr class="memdesc:a4bff11b8ff97aefabb2df41e61e1779f inherit pro_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty dense matrix used as a dummy argument to combined residual and jacobian functions in the case when only the residuals are being assembled.  <a href="classoomph_1_1GeneralisedElement.html#a4bff11b8ff97aefabb2df41e61e1779f">More...</a><br /></td></tr>
+<tr class="separator:a4bff11b8ff97aefabb2df41e61e1779f inherit pro_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa39d74bcbf019835d645ac07503f3232 inherit pro_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static std::deque&lt; double * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#aa39d74bcbf019835d645ac07503f3232">Dof_pt_deque</a></td></tr>
+<tr class="memdesc:aa39d74bcbf019835d645ac07503f3232 inherit pro_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static storage for deque used to add_global_equation_numbers when pointers to the dofs in each element are not required.  <a href="classoomph_1_1GeneralisedElement.html#aa39d74bcbf019835d645ac07503f3232">More...</a><br /></td></tr>
+<tr class="separator:aa39d74bcbf019835d645ac07503f3232 inherit pro_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT, template&lt; class &gt; class MESH&gt;<br />
+class oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;</h3>
+
+<p>A class which allows the user to specify a prescribed volume (as opposed to a prescribed pressure) for in the region bounded by the membrane. Effectively adds an equation to the system for pressure. There would usually only be a single instance of this element in a problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00053">53</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af470df251a724f84a330e506bf9e14c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af470df251a724f84a330e506bf9e14c3">&#9670;&nbsp;</a></span>FoepplvonKarmanVolumeConstraintElement() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::<a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a> </td>
+          <td>(</td>
+          <td class="paramtype">MESH&lt; ELEMENT &gt; *&#160;</td>
+          <td class="paramname"><em>bounding_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>contributing_region</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>pressure</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Takes pointer to mesh of Foeppl von Karman elements and a vector of unsigneds which identifies the regions within it that contribute to the controlled volume defined as int w dA (i.e. the "volume under the membrane"). The optional final argument specifies the initial value for the pressure that is "traded" in exchange for the volume constraint. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00065">65</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l00062">oomph::GeneralisedElement::add_internal_data()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00148">Data</a>, <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00262">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Pressure_data_index</a>, <a class="el" href="nodes_8h_source.html#l00263">oomph::Data::set_value()</a>, and <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00258">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Volume_control_pressure_pt</a>.</p>
+
+</div>
+</div>
+<a id="a59878334d7186dbbe7fdaa609bb636b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59878334d7186dbbe7fdaa609bb636b9">&#9670;&nbsp;</a></span>~FoepplvonKarmanVolumeConstraintElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::~<a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00082">82</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+</div>
+</div>
+<a id="ad429fa00b4af95528c141a0ee95884f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad429fa00b4af95528c141a0ee95884f1">&#9670;&nbsp;</a></span>FoepplvonKarmanVolumeConstraintElement() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::<a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00086">86</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab8879fad1a0804054520a2d7a57d940b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8879fad1a0804054520a2d7a57d940b">&#9670;&nbsp;</a></span>assign_additional_local_eqn_numbers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::assign_additional_local_eqn_numbers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assign the equation number for the new equation. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a4cdd0d1eef33b43f652c8f0b9e43967b">oomph::GeneralisedElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00123">123</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00264">oomph::GeneralisedElement::internal_local_eqn()</a>, <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00262">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Pressure_data_index</a>, and <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00265">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Volume_control_local_eqn</a>.</p>
+
+</div>
+</div>
+<a id="a3763adc00373350071bef1dea329f94d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3763adc00373350071bef1dea329f94d">&#9670;&nbsp;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill in contribution to elemental residual and Jacobian. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a6ae09fc0d68e4309ac1b03583d252845">oomph::GeneralisedElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00141">141</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00265">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Volume_control_local_eqn</a>.</p>
+
+</div>
+</div>
+<a id="a670a824ff37ac6b77f9230184f4bb9f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a670a824ff37ac6b77f9230184f4bb9f4">&#9670;&nbsp;</a></span>fill_in_contribution_to_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::fill_in_contribution_to_residuals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill in residual: Difference between actual and prescribed bounded volume. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a310c97f515e8504a48179c0e72c550d7">oomph::GeneralisedElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00130">130</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00265">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Volume_control_local_eqn</a>.</p>
+
+</div>
+</div>
+<a id="a0323cc351bcaf25dfc1830b78601541a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0323cc351bcaf25dfc1830b78601541a">&#9670;&nbsp;</a></span>get_bounded_volume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::get_bounded_volume </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the volume "under the elements" in the constrained regions. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00100">100</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00272">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Bounding_mesh_pt</a>, <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00276">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Contributing_region</a>, and <a class="el" href="cfortran_8h_source.html#l00571">e</a>.</p>
+
+</div>
+</div>
+<a id="ae7d433867de128ccc2f01b304b87b1b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d433867de128ccc2f01b304b87b1b6">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00093">93</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a092ba84924e8389c573eb232d3ec640c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a092ba84924e8389c573eb232d3ec640c">&#9670;&nbsp;</a></span>pressure_data_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Data.html">Data</a>* <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::pressure_data_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object whose single value contains the pressure that has been "traded" for the volume constraint. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00249">249</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00258">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Volume_control_pressure_pt</a>.</p>
+
+</div>
+</div>
+<a id="a91f7e77ffeaf09914838d9af945c2c56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91f7e77ffeaf09914838d9af945c2c56">&#9670;&nbsp;</a></span>set_prescribed_volume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::set_prescribed_volume </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>volume_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set pointer to target volume. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00242">242</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00279">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::Prescribed_volume_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0bebd0ba7ecef23139c97ed56ee83b71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bebd0ba7ecef23139c97ed56ee83b71">&#9670;&nbsp;</a></span>Bounding_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MESH&lt;ELEMENT&gt;* <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::Bounding_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to mesh of Foeppl von Karman elements that bound the prescribed volume; NULL if the FvK elements that contribute to the bounding volume are in charge of adding their own contribution to the volume constraint equation (and the associated Jacobian) </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00272">272</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00100">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::get_bounded_volume()</a>.</p>
+
+</div>
+</div>
+<a id="ab7504a6d7b951b3a8c0580acddd4d3b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7504a6d7b951b3a8c0580acddd4d3b0">&#9670;&nbsp;</a></span>Contributing_region</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;unsigned&gt; <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::Contributing_region</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Region IDs in the bounding mesh that contribute to the prescribed/controlled volume. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00276">276</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00100">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::get_bounded_volume()</a>.</p>
+
+</div>
+</div>
+<a id="a47b9920b4fe975f324d6ff0aca6d325b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47b9920b4fe975f324d6ff0aca6d325b">&#9670;&nbsp;</a></span>Prescribed_volume_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::Prescribed_volume_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to target volume. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00279">279</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00242">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::set_prescribed_volume()</a>.</p>
+
+</div>
+</div>
+<a id="a3881d17c5bdda4a71815f1fedfeb4185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3881d17c5bdda4a71815f1fedfeb4185">&#9670;&nbsp;</a></span>Pressure_data_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::Pressure_data_index</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unsigned indicating which internal <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object stores the pressure. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00262">262</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00123">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::assign_additional_local_eqn_numbers()</a>, and <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00065">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::FoepplvonKarmanVolumeConstraintElement()</a>.</p>
+
+</div>
+</div>
+<a id="a0c3ee6a6c6c4f5eb93f9540c6d400f26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c3ee6a6c6c4f5eb93f9540c6d400f26">&#9670;&nbsp;</a></span>Volume_control_local_eqn</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::Volume_control_local_eqn</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Local equation number of volume constraint. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00265">265</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00123">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::assign_additional_local_eqn_numbers()</a>, <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00141">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00130">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::fill_in_contribution_to_residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a15515003602f6303d5798b3553331fac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15515003602f6303d5798b3553331fac">&#9670;&nbsp;</a></span>Volume_control_pressure_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , template&lt; class &gt; class MESH&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Data.html">Data</a>* <a class="el" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a>&lt; ELEMENT, MESH &gt;::Volume_control_pressure_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object whose single value contains the pressure that has been "traded" for the volume constraint. </p>
+
+<p class="definition">Definition at line <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00258">258</a> of file <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00065">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::FoepplvonKarmanVolumeConstraintElement()</a>, and <a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00249">oomph::FoepplvonKarmanVolumeConstraintElement&lt; ELEMENT, MESH &gt;::pressure_data_pt()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="foeppl__von__karman__volume__constraint__element_8h_source.html">foeppl_von_karman_volume_constraint_element.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:29
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,109 @@
+\hypertarget{classoomph_1_1DGScalarAdvectionFaceElement}{}\doxysection{oomph\+::D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1DGScalarAdvectionFaceElement}\index{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$@{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$}}
+
+
+\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} for Discontinuous Galerkin Problems.  
+
+
+
+
+{\ttfamily \#include $<$scalar\+\_\+advection\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.828283cm]{classoomph_1_1DGScalarAdvectionFaceElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement_aa0af0a27203845c9af1ada1cfab13efb}{D\+G\+Scalar\+Advection\+Face\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement_ae3c10d2af6a6aae42ced528040a4d530}{required\+\_\+nflux}} ()
+\begin{DoxyCompactList}\small\item\em Set the number of flux components. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement_afdbb802744c914451223b5664bb589e4}{numerical\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n\+\_\+out, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u\+\_\+int, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u\+\_\+ext, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} for Discontinuous Galerkin Problems. 
+
+Definition at line 385 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1DGScalarAdvectionFaceElement_aa0af0a27203845c9af1ada1cfab13efb}\label{classoomph_1_1DGScalarAdvectionFaceElement_aa0af0a27203845c9af1ada1cfab13efb}} 
+\index{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$@{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$}!DGScalarAdvectionFaceElement@{DGScalarAdvectionFaceElement}}
+\index{DGScalarAdvectionFaceElement@{DGScalarAdvectionFaceElement}!oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$@{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{DGScalarAdvectionFaceElement()}{DGScalarAdvectionFaceElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement}{oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement}{D\+G\+Scalar\+Advection\+Face\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 391 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Face\+Element\+::face\+\_\+index().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1DGScalarAdvectionFaceElement_afdbb802744c914451223b5664bb589e4}\label{classoomph_1_1DGScalarAdvectionFaceElement_afdbb802744c914451223b5664bb589e4}} 
+\index{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$@{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$}!numerical\_flux@{numerical\_flux}}
+\index{numerical\_flux@{numerical\_flux}!oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$@{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{numerical\_flux()}{numerical\_flux()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement}{oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::numerical\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n\+\_\+out,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u\+\_\+int,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u\+\_\+ext,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Calculate the normal flux, so this is the dot product of the numerical flux with n\+\_\+in 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DGFaceElement_a023e05bcee73952fbc2c1f816a0a0860}{oomph\+::\+D\+G\+Face\+Element}}.
+
+
+
+Definition at line 407 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Vector\+Helpers\+::dot(), i, n, oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::required\+\_\+nflux(), and s.
+
+\mbox{\Hypertarget{classoomph_1_1DGScalarAdvectionFaceElement_ae3c10d2af6a6aae42ced528040a4d530}\label{classoomph_1_1DGScalarAdvectionFaceElement_ae3c10d2af6a6aae42ced528040a4d530}} 
+\index{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$@{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$}!required\_nflux@{required\_nflux}}
+\index{required\_nflux@{required\_nflux}!oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$@{oomph::DGScalarAdvectionFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{required\_nflux()}{required\_nflux()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement}{oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::required\+\_\+nflux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Set the number of flux components. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DGFaceElement_af45b5a88226a143c8fafbc5f3e097526}{oomph\+::\+D\+G\+Face\+Element}}.
+
+
+
+Definition at line 403 of file scalar\+\_\+advection\+\_\+elements.\+h.
+
+
+
+Referenced by oomph\+::\+D\+G\+Scalar\+Advection\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::numerical\+\_\+flux().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{scalar__advection__elements_8h}{scalar\+\_\+advection\+\_\+elements.\+h}}\end{DoxyCompactItemize}

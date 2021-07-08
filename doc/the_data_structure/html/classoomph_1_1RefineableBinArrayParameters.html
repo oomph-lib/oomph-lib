@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RefineableBinArrayParameters Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1RefineableBinArrayParameters-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::RefineableBinArrayParameters Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Helper object for dealing with the parameters used for the <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a> objects.  
+ <a href="classoomph_1_1RefineableBinArrayParameters.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::RefineableBinArrayParameters:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1RefineableBinArrayParameters.png" usemap="#oomph::RefineableBinArrayParameters_map" alt=""/>
+  <map id="oomph::RefineableBinArrayParameters_map" name="oomph::RefineableBinArrayParameters_map">
+<area href="classoomph_1_1BinArrayParameters.html" title="Helper object for dealing with the parameters used for the BinArray objects." alt="oomph::BinArrayParameters" shape="rect" coords="0,56,243,80"/>
+<area href="classoomph_1_1SamplePointContainerParameters.html" title="Helper object for dealing with the parameters used for the SamplePointContainer objects." alt="oomph::SamplePointContainerParameters" shape="rect" coords="0,0,243,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a818b4740e10aa5869981ce9f5bf1193e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a818b4740e10aa5869981ce9f5bf1193e">RefineableBinArrayParameters</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a>)</td></tr>
+<tr class="memdesc:a818b4740e10aa5869981ce9f5bf1193e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass mesh.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a818b4740e10aa5869981ce9f5bf1193e">More...</a><br /></td></tr>
+<tr class="separator:a818b4740e10aa5869981ce9f5bf1193e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f1ba6468651705363da2637e9a142b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a2f1ba6468651705363da2637e9a142b9">RefineableBinArrayParameters</a> (const <a class="el" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a> &amp;data)</td></tr>
+<tr class="memdesc:a2f1ba6468651705363da2637e9a142b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a2f1ba6468651705363da2637e9a142b9">More...</a><br /></td></tr>
+<tr class="separator:a2f1ba6468651705363da2637e9a142b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b307d5acebd67ad9ce7745b848da5a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a5b307d5acebd67ad9ce7745b848da5a6">operator=</a> (const <a class="el" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a> &amp;)</td></tr>
+<tr class="memdesc:a5b307d5acebd67ad9ce7745b848da5a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a5b307d5acebd67ad9ce7745b848da5a6">More...</a><br /></td></tr>
+<tr class="separator:a5b307d5acebd67ad9ce7745b848da5a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc0752c4b4731443b5ec6e960afa61ae"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#afc0752c4b4731443b5ec6e960afa61ae">~RefineableBinArrayParameters</a> ()</td></tr>
+<tr class="memdesc:afc0752c4b4731443b5ec6e960afa61ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <a href="classoomph_1_1RefineableBinArrayParameters.html#afc0752c4b4731443b5ec6e960afa61ae">More...</a><br /></td></tr>
+<tr class="separator:afc0752c4b4731443b5ec6e960afa61ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e7008ab131125dd1ed4118f5953848a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a0e7008ab131125dd1ed4118f5953848a">bin_array_is_recursive</a> () const</td></tr>
+<tr class="memdesc:a0e7008ab131125dd1ed4118f5953848a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is bin recursive?  <a href="classoomph_1_1RefineableBinArrayParameters.html#a0e7008ab131125dd1ed4118f5953848a">More...</a><br /></td></tr>
+<tr class="separator:a0e7008ab131125dd1ed4118f5953848a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac06c56e4dd074e6f133e0708dc7a1fb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#ac06c56e4dd074e6f133e0708dc7a1fb7">enable_bin_array_is_recursive</a> ()</td></tr>
+<tr class="memdesc:ac06c56e4dd074e6f133e0708dc7a1fb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable recursiveness.  <a href="classoomph_1_1RefineableBinArrayParameters.html#ac06c56e4dd074e6f133e0708dc7a1fb7">More...</a><br /></td></tr>
+<tr class="separator:ac06c56e4dd074e6f133e0708dc7a1fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2922f7c04fcc8a21aec0ab8c6a0651b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#ad2922f7c04fcc8a21aec0ab8c6a0651b">disable_bin_array_is_recursive</a> ()</td></tr>
+<tr class="memdesc:ad2922f7c04fcc8a21aec0ab8c6a0651b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable recursiveness.  <a href="classoomph_1_1RefineableBinArrayParameters.html#ad2922f7c04fcc8a21aec0ab8c6a0651b">More...</a><br /></td></tr>
+<tr class="separator:ad2922f7c04fcc8a21aec0ab8c6a0651b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4056b694152383da1440ff8ee62811b8"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a4056b694152383da1440ff8ee62811b8">depth</a> ()</td></tr>
+<tr class="memdesc:a4056b694152383da1440ff8ee62811b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable which stores the Depth value of the bin_array.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a4056b694152383da1440ff8ee62811b8">More...</a><br /></td></tr>
+<tr class="separator:a4056b694152383da1440ff8ee62811b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a198892de079e38ec6b7e3e39c878ffd5"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a198892de079e38ec6b7e3e39c878ffd5">depth</a> () const</td></tr>
+<tr class="memdesc:a198892de079e38ec6b7e3e39c878ffd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable which stores the Depth value of the bin_array. const version.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a198892de079e38ec6b7e3e39c878ffd5">More...</a><br /></td></tr>
+<tr class="separator:a198892de079e38ec6b7e3e39c878ffd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d341ba18f784b2669f9e75561ea3321"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a7d341ba18f784b2669f9e75561ea3321">max_depth</a> ()</td></tr>
+<tr class="memdesc:a7d341ba18f784b2669f9e75561ea3321"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. depth value of the bin_array.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a7d341ba18f784b2669f9e75561ea3321">More...</a><br /></td></tr>
+<tr class="separator:a7d341ba18f784b2669f9e75561ea3321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e27c9afc435df8c4980349a12373c78"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a5e27c9afc435df8c4980349a12373c78">max_depth</a> () const</td></tr>
+<tr class="memdesc:a5e27c9afc435df8c4980349a12373c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. depth value of the bin_array. const version.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a5e27c9afc435df8c4980349a12373c78">More...</a><br /></td></tr>
+<tr class="separator:a5e27c9afc435df8c4980349a12373c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a5739f3fed040e8d342d5b46f43151b"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a9a5739f3fed040e8d342d5b46f43151b">max_number_of_sample_point_per_bin</a> ()</td></tr>
+<tr class="memdesc:a9a5739f3fed040e8d342d5b46f43151b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of sample points in bin (before it's subdivided recursively)  <a href="classoomph_1_1RefineableBinArrayParameters.html#a9a5739f3fed040e8d342d5b46f43151b">More...</a><br /></td></tr>
+<tr class="separator:a9a5739f3fed040e8d342d5b46f43151b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a9b5ec5cb8b505a4166e9edacc2b964"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a0a9b5ec5cb8b505a4166e9edacc2b964">max_number_of_sample_point_per_bin</a> () const</td></tr>
+<tr class="memdesc:a0a9b5ec5cb8b505a4166e9edacc2b964"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of sample points in bin (before it's subdivided recursively; const version.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a0a9b5ec5cb8b505a4166e9edacc2b964">More...</a><br /></td></tr>
+<tr class="separator:a0a9b5ec5cb8b505a4166e9edacc2b964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e76aec48f38072750e1951f1373f5b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a2e76aec48f38072750e1951f1373f5b9">root_bin_array_pt</a> ()</td></tr>
+<tr class="memdesc:a2e76aec48f38072750e1951f1373f5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to root bin array.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a2e76aec48f38072750e1951f1373f5b9">More...</a><br /></td></tr>
+<tr class="separator:a2e76aec48f38072750e1951f1373f5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2405a7ef44b0b511a64e2410e53a4ca8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a2405a7ef44b0b511a64e2410e53a4ca8">root_bin_array_pt</a> () const</td></tr>
+<tr class="memdesc:a2405a7ef44b0b511a64e2410e53a4ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to root bin array; const version.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a2405a7ef44b0b511a64e2410e53a4ca8">More...</a><br /></td></tr>
+<tr class="separator:a2405a7ef44b0b511a64e2410e53a4ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1BinArrayParameters"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1BinArrayParameters')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1BinArrayParameters.html">oomph::BinArrayParameters</a></td></tr>
+<tr class="memitem:a5a1bf38b22afec8348b47d3ccbc9c2a9 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinArrayParameters.html#a5a1bf38b22afec8348b47d3ccbc9c2a9">BinArrayParameters</a> (const <a class="el" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a> &amp;data)</td></tr>
+<tr class="memdesc:a5a1bf38b22afec8348b47d3ccbc9c2a9 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1BinArrayParameters.html#a5a1bf38b22afec8348b47d3ccbc9c2a9">More...</a><br /></td></tr>
+<tr class="separator:a5a1bf38b22afec8348b47d3ccbc9c2a9 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75c95b9419516e5ca6328a9f03432467 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinArrayParameters.html#a75c95b9419516e5ca6328a9f03432467">operator=</a> (const <a class="el" href="classoomph_1_1BinArrayParameters.html">BinArrayParameters</a> &amp;)</td></tr>
+<tr class="memdesc:a75c95b9419516e5ca6328a9f03432467 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1BinArrayParameters.html#a75c95b9419516e5ca6328a9f03432467">More...</a><br /></td></tr>
+<tr class="separator:a75c95b9419516e5ca6328a9f03432467 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a4fb68a273000d3782364ccac09c3f inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinArrayParameters.html#a55a4fb68a273000d3782364ccac09c3f">~BinArrayParameters</a> ()</td></tr>
+<tr class="memdesc:a55a4fb68a273000d3782364ccac09c3f inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <a href="classoomph_1_1BinArrayParameters.html#a55a4fb68a273000d3782364ccac09c3f">More...</a><br /></td></tr>
+<tr class="separator:a55a4fb68a273000d3782364ccac09c3f inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb1b653260c401db87ed75c51d06de8 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinArrayParameters.html#aafb1b653260c401db87ed75c51d06de8">dimensions_of_bin_array</a> ()</td></tr>
+<tr class="memdesc:aafb1b653260c401db87ed75c51d06de8 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bins in each coordinate direction.  <a href="classoomph_1_1BinArrayParameters.html#aafb1b653260c401db87ed75c51d06de8">More...</a><br /></td></tr>
+<tr class="separator:aafb1b653260c401db87ed75c51d06de8 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f14007784881e7da72d48d80dcaebc9 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinArrayParameters.html#a9f14007784881e7da72d48d80dcaebc9">dimensions_of_bin_array</a> () const</td></tr>
+<tr class="memdesc:a9f14007784881e7da72d48d80dcaebc9 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bins in each coordinate direction. Const version.  <a href="classoomph_1_1BinArrayParameters.html#a9f14007784881e7da72d48d80dcaebc9">More...</a><br /></td></tr>
+<tr class="separator:a9f14007784881e7da72d48d80dcaebc9 inherit pub_methods_classoomph_1_1BinArrayParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1SamplePointContainerParameters"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1SamplePointContainerParameters')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1SamplePointContainerParameters.html">oomph::SamplePointContainerParameters</a></td></tr>
+<tr class="memitem:a63f93ee4ddc61cb01af363187de21947 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a63f93ee4ddc61cb01af363187de21947">SamplePointContainerParameters</a> (const <a class="el" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a> &amp;data)</td></tr>
+<tr class="memdesc:a63f93ee4ddc61cb01af363187de21947 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <a href="classoomph_1_1SamplePointContainerParameters.html#a63f93ee4ddc61cb01af363187de21947">More...</a><br /></td></tr>
+<tr class="separator:a63f93ee4ddc61cb01af363187de21947 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa089aeff405b3e4362b4335a9acfb5a2 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#aa089aeff405b3e4362b4335a9acfb5a2">operator=</a> (const <a class="el" href="classoomph_1_1SamplePointContainerParameters.html">SamplePointContainerParameters</a> &amp;)</td></tr>
+<tr class="memdesc:aa089aeff405b3e4362b4335a9acfb5a2 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <a href="classoomph_1_1SamplePointContainerParameters.html#aa089aeff405b3e4362b4335a9acfb5a2">More...</a><br /></td></tr>
+<tr class="separator:aa089aeff405b3e4362b4335a9acfb5a2 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e0ced492320cc06615bcb1782b7bb22 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a5e0ced492320cc06615bcb1782b7bb22">~SamplePointContainerParameters</a> ()</td></tr>
+<tr class="memdesc:a5e0ced492320cc06615bcb1782b7bb22 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <a href="classoomph_1_1SamplePointContainerParameters.html#a5e0ced492320cc06615bcb1782b7bb22">More...</a><br /></td></tr>
+<tr class="separator:a5e0ced492320cc06615bcb1782b7bb22 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92bcab955d47e99d47b601253da7b6b2 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">mesh_pt</a> () const</td></tr>
+<tr class="memdesc:a92bcab955d47e99d47b601253da7b6b2 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh from whose FiniteElements sample points are created.  <a href="classoomph_1_1SamplePointContainerParameters.html#a92bcab955d47e99d47b601253da7b6b2">More...</a><br /></td></tr>
+<tr class="separator:a92bcab955d47e99d47b601253da7b6b2 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5b9cd742d38c42d337ede45bb9dda8c inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#ae5b9cd742d38c42d337ede45bb9dda8c">min_and_max_coordinates</a> ()</td></tr>
+<tr class="memdesc:ae5b9cd742d38c42d337ede45bb9dda8c inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of pairs of doubles for min and maximum coordinates. Call: Min_and_max_coordinates[j] gives me the pair of min (first) and max. (second) coordinates in the j-th coordinate direction.  <a href="classoomph_1_1SamplePointContainerParameters.html#ae5b9cd742d38c42d337ede45bb9dda8c">More...</a><br /></td></tr>
+<tr class="separator:ae5b9cd742d38c42d337ede45bb9dda8c inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad619df6bc0253178dbbaf195cea2fb5a inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; double, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#ad619df6bc0253178dbbaf195cea2fb5a">min_and_max_coordinates</a> () const</td></tr>
+<tr class="memdesc:ad619df6bc0253178dbbaf195cea2fb5a inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html">Vector</a> of pairs of doubles for min and maximum coordinates. Call: Min_and_max_coordinates[j] gives me the pair of min (first) and max. (second) coordinates in the j-th coordinate direction. Const version.  <a href="classoomph_1_1SamplePointContainerParameters.html#ad619df6bc0253178dbbaf195cea2fb5a">More...</a><br /></td></tr>
+<tr class="separator:ad619df6bc0253178dbbaf195cea2fb5a inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a710a6a32b2518b202a38fde405cdf7e5 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a710a6a32b2518b202a38fde405cdf7e5">nsample_points_generated_per_element</a> () const</td></tr>
+<tr class="memdesc:a710a6a32b2518b202a38fde405cdf7e5 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Measure of" number of sample points generated in each element const version  <a href="classoomph_1_1SamplePointContainerParameters.html#a710a6a32b2518b202a38fde405cdf7e5">More...</a><br /></td></tr>
+<tr class="separator:a710a6a32b2518b202a38fde405cdf7e5 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645bbbfc9395e5fe39a05845b2352b99 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a645bbbfc9395e5fe39a05845b2352b99">nsample_points_generated_per_element</a> ()</td></tr>
+<tr class="memdesc:a645bbbfc9395e5fe39a05845b2352b99 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Measure of" number of sample points generated in each element  <a href="classoomph_1_1SamplePointContainerParameters.html#a645bbbfc9395e5fe39a05845b2352b99">More...</a><br /></td></tr>
+<tr class="separator:a645bbbfc9395e5fe39a05845b2352b99 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a946a3657f6c50f2e14dccf421ed5e178 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a946a3657f6c50f2e14dccf421ed5e178">use_eulerian_coordinates_during_setup</a> () const</td></tr>
+<tr class="memdesc:a946a3657f6c50f2e14dccf421ed5e178 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use eulerian coordinates (via interpolated_x) during setup (otherwise use interpolated_zeta())?  <a href="classoomph_1_1SamplePointContainerParameters.html#a946a3657f6c50f2e14dccf421ed5e178">More...</a><br /></td></tr>
+<tr class="separator:a946a3657f6c50f2e14dccf421ed5e178 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aa712173bb8242b17e49df97c0072e3 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a8aa712173bb8242b17e49df97c0072e3">enable_use_eulerian_coordinates_during_setup</a> ()</td></tr>
+<tr class="separator:a8aa712173bb8242b17e49df97c0072e3 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c59f44fa07b7f79e8b854d5b918e3bd inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a9c59f44fa07b7f79e8b854d5b918e3bd">disable_use_eulerian_coordinates_during_setup</a> ()</td></tr>
+<tr class="separator:a9c59f44fa07b7f79e8b854d5b918e3bd inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a436175c53c2801c510673146cdb75761 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a436175c53c2801c510673146cdb75761">ignore_halo_elements_during_locate_zeta_search</a> () const</td></tr>
+<tr class="memdesc:a436175c53c2801c510673146cdb75761 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ignore halo elements? (MPI only)  <a href="classoomph_1_1SamplePointContainerParameters.html#a436175c53c2801c510673146cdb75761">More...</a><br /></td></tr>
+<tr class="separator:a436175c53c2801c510673146cdb75761 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6585db241b22e087222ca3b09e99b663 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a6585db241b22e087222ca3b09e99b663">enable_ignore_halo_elements_during_locate_zeta_search</a> ()</td></tr>
+<tr class="memdesc:a6585db241b22e087222ca3b09e99b663 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable Ignore halo elements? (MPI only)  <a href="classoomph_1_1SamplePointContainerParameters.html#a6585db241b22e087222ca3b09e99b663">More...</a><br /></td></tr>
+<tr class="separator:a6585db241b22e087222ca3b09e99b663 inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1520f275ffb0941541aa51c89f3eeec inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#ae1520f275ffb0941541aa51c89f3eeec">disable_ignore_halo_elements_during_locate_zeta_search</a> ()</td></tr>
+<tr class="memdesc:ae1520f275ffb0941541aa51c89f3eeec inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable Ignore halo elements? (MPI only)  <a href="classoomph_1_1SamplePointContainerParameters.html#ae1520f275ffb0941541aa51c89f3eeec">More...</a><br /></td></tr>
+<tr class="separator:ae1520f275ffb0941541aa51c89f3eeec inherit pub_methods_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a5de4867a1cd15e1e494cb53261f0b1a7"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a5de4867a1cd15e1e494cb53261f0b1a7">Default_max_depth</a> =100</td></tr>
+<tr class="memdesc:a5de4867a1cd15e1e494cb53261f0b1a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for max. depth.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a5de4867a1cd15e1e494cb53261f0b1a7">More...</a><br /></td></tr>
+<tr class="separator:a5de4867a1cd15e1e494cb53261f0b1a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e94143bc3bdbd74d8927ea7e9c5f234"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a0e94143bc3bdbd74d8927ea7e9c5f234">Default_max_number_of_sample_point_per_bin</a></td></tr>
+<tr class="memdesc:a0e94143bc3bdbd74d8927ea7e9c5f234"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for max. number of sample points before refinement.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a0e94143bc3bdbd74d8927ea7e9c5f234">More...</a><br /></td></tr>
+<tr class="separator:a0e94143bc3bdbd74d8927ea7e9c5f234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_attribs_classoomph_1_1SamplePointContainerParameters"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1SamplePointContainerParameters')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1SamplePointContainerParameters.html">oomph::SamplePointContainerParameters</a></td></tr>
+<tr class="memitem:ad8a463ddc961e51f6f77b4e8f678b962 inherit pub_static_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#ad8a463ddc961e51f6f77b4e8f678b962">Default_nsample_points_generated_per_element</a></td></tr>
+<tr class="memdesc:ad8a463ddc961e51f6f77b4e8f678b962 inherit pub_static_attribs_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default for "measure of" number of sample points per element.  <a href="classoomph_1_1SamplePointContainerParameters.html#ad8a463ddc961e51f6f77b4e8f678b962">More...</a><br /></td></tr>
+<tr class="separator:ad8a463ddc961e51f6f77b4e8f678b962 inherit pub_static_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a1f0e523056c7a2aed792b0fabeb06bda"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a1f0e523056c7a2aed792b0fabeb06bda">Bin_array_is_recursive</a></td></tr>
+<tr class="memdesc:a1f0e523056c7a2aed792b0fabeb06bda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable which stores if the <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a> is recursive or not.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a1f0e523056c7a2aed792b0fabeb06bda">More...</a><br /></td></tr>
+<tr class="separator:a1f0e523056c7a2aed792b0fabeb06bda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a298bbaa33862244e5c153c07da29636c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a298bbaa33862244e5c153c07da29636c">Depth</a></td></tr>
+<tr class="memdesc:a298bbaa33862244e5c153c07da29636c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable which stores the Depth value of the bin_array. Useful for debugging and for preventing "infinite" recursion in case if there is a problem.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a298bbaa33862244e5c153c07da29636c">More...</a><br /></td></tr>
+<tr class="separator:a298bbaa33862244e5c153c07da29636c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31ec6c0f07ea4ce3b5d29ae3a9e8dc11"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#a31ec6c0f07ea4ce3b5d29ae3a9e8dc11">Max_depth</a></td></tr>
+<tr class="memdesc:a31ec6c0f07ea4ce3b5d29ae3a9e8dc11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. depth value of the bin_array.  <a href="classoomph_1_1RefineableBinArrayParameters.html#a31ec6c0f07ea4ce3b5d29ae3a9e8dc11">More...</a><br /></td></tr>
+<tr class="separator:a31ec6c0f07ea4ce3b5d29ae3a9e8dc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6bec286a43785726d81c0bcadcb75be"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#ad6bec286a43785726d81c0bcadcb75be">Max_number_of_sample_point_per_bin</a></td></tr>
+<tr class="memdesc:ad6bec286a43785726d81c0bcadcb75be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of sample points in bin (before its subdivided recursively.  <a href="classoomph_1_1RefineableBinArrayParameters.html#ad6bec286a43785726d81c0bcadcb75be">More...</a><br /></td></tr>
+<tr class="separator:ad6bec286a43785726d81c0bcadcb75be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4e2e5c03c4d3e725bd4f595b850bc2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBinArrayParameters.html#ab4e2e5c03c4d3e725bd4f595b850bc2d">Root_bin_array_pt</a></td></tr>
+<tr class="memdesc:ab4e2e5c03c4d3e725bd4f595b850bc2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to root bin array.  <a href="classoomph_1_1RefineableBinArrayParameters.html#ab4e2e5c03c4d3e725bd4f595b850bc2d">More...</a><br /></td></tr>
+<tr class="separator:ab4e2e5c03c4d3e725bd4f595b850bc2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1BinArrayParameters"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1BinArrayParameters')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1BinArrayParameters.html">oomph::BinArrayParameters</a></td></tr>
+<tr class="memitem:af3dfb49b2d50911c4b8b2f063ffa8de9 inherit pro_attribs_classoomph_1_1BinArrayParameters"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinArrayParameters.html#af3dfb49b2d50911c4b8b2f063ffa8de9">Dimensions_of_bin_array</a></td></tr>
+<tr class="memdesc:af3dfb49b2d50911c4b8b2f063ffa8de9 inherit pro_attribs_classoomph_1_1BinArrayParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bins in each coordinate direction.  <a href="classoomph_1_1BinArrayParameters.html#af3dfb49b2d50911c4b8b2f063ffa8de9">More...</a><br /></td></tr>
+<tr class="separator:af3dfb49b2d50911c4b8b2f063ffa8de9 inherit pro_attribs_classoomph_1_1BinArrayParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1SamplePointContainerParameters"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1SamplePointContainerParameters')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1SamplePointContainerParameters.html">oomph::SamplePointContainerParameters</a></td></tr>
+<tr class="memitem:a9047299fdfac8074a9996267d66e901e inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a9047299fdfac8074a9996267d66e901e">Mesh_pt</a></td></tr>
+<tr class="memdesc:a9047299fdfac8074a9996267d66e901e inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh from whose FiniteElements sample points are created.  <a href="classoomph_1_1SamplePointContainerParameters.html#a9047299fdfac8074a9996267d66e901e">More...</a><br /></td></tr>
+<tr class="separator:a9047299fdfac8074a9996267d66e901e inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a980161906be89a1cf50835fe45949cfe inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; double, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a980161906be89a1cf50835fe45949cfe">Min_and_max_coordinates</a></td></tr>
+<tr class="separator:a980161906be89a1cf50835fe45949cfe inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68141123ff5252ad3dd1a8a5279282c4 inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#a68141123ff5252ad3dd1a8a5279282c4">Nsample_points_generated_per_element</a></td></tr>
+<tr class="memdesc:a68141123ff5252ad3dd1a8a5279282c4 inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Measure of" number of sample points generated in each element  <a href="classoomph_1_1SamplePointContainerParameters.html#a68141123ff5252ad3dd1a8a5279282c4">More...</a><br /></td></tr>
+<tr class="separator:a68141123ff5252ad3dd1a8a5279282c4 inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8757aae90e85b2a860fd07acd19a92a inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#ab8757aae90e85b2a860fd07acd19a92a">Use_eulerian_coordinates_during_setup</a></td></tr>
+<tr class="memdesc:ab8757aae90e85b2a860fd07acd19a92a inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Eulerian coordinates to setup bin (i.e. use interpolated_x() rather than interpolated_zeta() when setting up and searching sample point container)  <a href="classoomph_1_1SamplePointContainerParameters.html#ab8757aae90e85b2a860fd07acd19a92a">More...</a><br /></td></tr>
+<tr class="separator:ab8757aae90e85b2a860fd07acd19a92a inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ba2b667c746fc6c66830e4f3dc3f70 inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SamplePointContainerParameters.html#ad6ba2b667c746fc6c66830e4f3dc3f70">Ignore_halo_elements_during_locate_zeta_search</a></td></tr>
+<tr class="memdesc:ad6ba2b667c746fc6c66830e4f3dc3f70 inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ignore halo elements? Accepting halo elements can drastically reduce the number of external halo elements in multidomain problems &ndash; currently not aware of any problems with doing this therefore set to false by default but retention of this flag allows easy return to previous implementation.  <a href="classoomph_1_1SamplePointContainerParameters.html#ad6ba2b667c746fc6c66830e4f3dc3f70">More...</a><br /></td></tr>
+<tr class="separator:ad6ba2b667c746fc6c66830e4f3dc3f70 inherit pro_attribs_classoomph_1_1SamplePointContainerParameters"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Helper object for dealing with the parameters used for the <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a> objects. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00355">355</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a818b4740e10aa5869981ce9f5bf1193e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a818b4740e10aa5869981ce9f5bf1193e">&#9670;&nbsp;</a></span>RefineableBinArrayParameters() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::RefineableBinArrayParameters::RefineableBinArrayParameters </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>mesh_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00361">361</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+</div>
+</div>
+<a id="a2f1ba6468651705363da2637e9a142b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f1ba6468651705363da2637e9a142b9">&#9670;&nbsp;</a></span>RefineableBinArrayParameters() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::RefineableBinArrayParameters::RefineableBinArrayParameters </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00373">373</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00214">oomph::BrokenCopy::broken_copy()</a>.</p>
+
+</div>
+</div>
+<a id="afc0752c4b4731443b5ec6e960afa61ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc0752c4b4731443b5ec6e960afa61ae">&#9670;&nbsp;</a></span>~RefineableBinArrayParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::RefineableBinArrayParameters::~RefineableBinArrayParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00386">386</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0e7008ab131125dd1ed4118f5953848a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e7008ab131125dd1ed4118f5953848a">&#9670;&nbsp;</a></span>bin_array_is_recursive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::RefineableBinArrayParameters::bin_array_is_recursive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is bin recursive? </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00391">391</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00470">Bin_array_is_recursive</a>.</p>
+
+</div>
+</div>
+<a id="a4056b694152383da1440ff8ee62811b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4056b694152383da1440ff8ee62811b8">&#9670;&nbsp;</a></span>depth() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::RefineableBinArrayParameters::depth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Variable which stores the Depth value of the bin_array. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00409">409</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00475">Depth</a>.</p>
+
+</div>
+</div>
+<a id="a198892de079e38ec6b7e3e39c878ffd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a198892de079e38ec6b7e3e39c878ffd5">&#9670;&nbsp;</a></span>depth() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::RefineableBinArrayParameters::depth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Variable which stores the Depth value of the bin_array. const version. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00416">416</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00475">Depth</a>.</p>
+
+</div>
+</div>
+<a id="ad2922f7c04fcc8a21aec0ab8c6a0651b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2922f7c04fcc8a21aec0ab8c6a0651b">&#9670;&nbsp;</a></span>disable_bin_array_is_recursive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::RefineableBinArrayParameters::disable_bin_array_is_recursive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable recursiveness. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00403">403</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00470">Bin_array_is_recursive</a>.</p>
+
+</div>
+</div>
+<a id="ac06c56e4dd074e6f133e0708dc7a1fb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac06c56e4dd074e6f133e0708dc7a1fb7">&#9670;&nbsp;</a></span>enable_bin_array_is_recursive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::RefineableBinArrayParameters::enable_bin_array_is_recursive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable recursiveness. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00397">397</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00470">Bin_array_is_recursive</a>.</p>
+
+</div>
+</div>
+<a id="a7d341ba18f784b2669f9e75561ea3321"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d341ba18f784b2669f9e75561ea3321">&#9670;&nbsp;</a></span>max_depth() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::RefineableBinArrayParameters::max_depth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max. depth value of the bin_array. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00422">422</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00478">Max_depth</a>.</p>
+
+</div>
+</div>
+<a id="a5e27c9afc435df8c4980349a12373c78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e27c9afc435df8c4980349a12373c78">&#9670;&nbsp;</a></span>max_depth() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::RefineableBinArrayParameters::max_depth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max. depth value of the bin_array. const version. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00429">429</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00478">Max_depth</a>.</p>
+
+</div>
+</div>
+<a id="a9a5739f3fed040e8d342d5b46f43151b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a5739f3fed040e8d342d5b46f43151b">&#9670;&nbsp;</a></span>max_number_of_sample_point_per_bin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned&amp; oomph::RefineableBinArrayParameters::max_number_of_sample_point_per_bin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of sample points in bin (before it's subdivided recursively) </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00436">436</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00482">Max_number_of_sample_point_per_bin</a>.</p>
+
+</div>
+</div>
+<a id="a0a9b5ec5cb8b505a4166e9edacc2b964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a9b5ec5cb8b505a4166e9edacc2b964">&#9670;&nbsp;</a></span>max_number_of_sample_point_per_bin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::RefineableBinArrayParameters::max_number_of_sample_point_per_bin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of sample points in bin (before it's subdivided recursively; const version. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00443">443</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00482">Max_number_of_sample_point_per_bin</a>.</p>
+
+</div>
+</div>
+<a id="a5b307d5acebd67ad9ce7745b848da5a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b307d5acebd67ad9ce7745b848da5a6">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::RefineableBinArrayParameters::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1RefineableBinArrayParameters.html">RefineableBinArrayParameters</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00380">380</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l00197">oomph::BrokenCopy::broken_assign()</a>.</p>
+
+</div>
+</div>
+<a id="a2e76aec48f38072750e1951f1373f5b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e76aec48f38072750e1951f1373f5b9">&#9670;&nbsp;</a></span>root_bin_array_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a>*&amp; oomph::RefineableBinArrayParameters::root_bin_array_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to root bin array. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00449">449</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00485">Root_bin_array_pt</a>.</p>
+
+</div>
+</div>
+<a id="a2405a7ef44b0b511a64e2410e53a4ca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2405a7ef44b0b511a64e2410e53a4ca8">&#9670;&nbsp;</a></span>root_bin_array_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a>* oomph::RefineableBinArrayParameters::root_bin_array_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to root bin array; const version. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00455">455</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__parameters_8h_source.html#l00485">Root_bin_array_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1f0e523056c7a2aed792b0fabeb06bda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f0e523056c7a2aed792b0fabeb06bda">&#9670;&nbsp;</a></span>Bin_array_is_recursive</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::RefineableBinArrayParameters::Bin_array_is_recursive</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Variable which stores if the <a class="el" href="classRefineableBinArray.html" title="RefineableBinArray class.">RefineableBinArray</a> is recursive or not. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00470">470</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__parameters_8h_source.html#l00391">bin_array_is_recursive()</a>, <a class="el" href="sample__point__parameters_8h_source.html#l00403">disable_bin_array_is_recursive()</a>, and <a class="el" href="sample__point__parameters_8h_source.html#l00397">enable_bin_array_is_recursive()</a>.</p>
+
+</div>
+</div>
+<a id="a5de4867a1cd15e1e494cb53261f0b1a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de4867a1cd15e1e494cb53261f0b1a7">&#9670;&nbsp;</a></span>Default_max_depth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::RefineableBinArrayParameters::Default_max_depth =100</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value for max. depth. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00461">461</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+</div>
+</div>
+<a id="a0e94143bc3bdbd74d8927ea7e9c5f234"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e94143bc3bdbd74d8927ea7e9c5f234">&#9670;&nbsp;</a></span>Default_max_number_of_sample_point_per_bin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::RefineableBinArrayParameters::Default_max_number_of_sample_point_per_bin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value for max. number of sample points before refinement. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00464">464</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+</div>
+</div>
+<a id="a298bbaa33862244e5c153c07da29636c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a298bbaa33862244e5c153c07da29636c">&#9670;&nbsp;</a></span>Depth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::RefineableBinArrayParameters::Depth</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Variable which stores the Depth value of the bin_array. Useful for debugging and for preventing "infinite" recursion in case if there is a problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00475">475</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__parameters_8h_source.html#l00409">depth()</a>.</p>
+
+</div>
+</div>
+<a id="a31ec6c0f07ea4ce3b5d29ae3a9e8dc11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31ec6c0f07ea4ce3b5d29ae3a9e8dc11">&#9670;&nbsp;</a></span>Max_depth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::RefineableBinArrayParameters::Max_depth</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max. depth value of the bin_array. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00478">478</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__parameters_8h_source.html#l00422">max_depth()</a>.</p>
+
+</div>
+</div>
+<a id="ad6bec286a43785726d81c0bcadcb75be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6bec286a43785726d81c0bcadcb75be">&#9670;&nbsp;</a></span>Max_number_of_sample_point_per_bin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::RefineableBinArrayParameters::Max_number_of_sample_point_per_bin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of sample points in bin (before its subdivided recursively. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00482">482</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__parameters_8h_source.html#l00436">max_number_of_sample_point_per_bin()</a>.</p>
+
+</div>
+</div>
+<a id="ab4e2e5c03c4d3e725bd4f595b850bc2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4e2e5c03c4d3e725bd4f595b850bc2d">&#9670;&nbsp;</a></span>Root_bin_array_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableBinArray.html">RefineableBinArray</a>* oomph::RefineableBinArrayParameters::Root_bin_array_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to root bin array. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__parameters_8h_source.html#l00485">485</a> of file <a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__parameters_8h_source.html#l00449">root_bin_array_pt()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="sample__point__parameters_8h_source.html">sample_point_parameters.h</a></li>
+<li><a class="el" href="sample__point__parameters_8cc_source.html">sample_point_parameters.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:00:41
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

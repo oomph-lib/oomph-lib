@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Adaptive solution of the 3D Poisson equation in a spherical domain</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: Adaptive solution of the 3D Poisson equation in a spherical domain </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Following the numerous 2D problems discussed in earlier examples we now demonstrate that the solution of 3D problems is just as easy. For this purpose we discuss the adaptive solution of the 3D Poisson problem </p><center> <table class="doxtable">
+<tr>
+<td><center> <b>Three-dimensional model Poisson problem</b> </center> Solve <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sum_{i=1}^3 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2,x_3), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_0.png"/>
+</p>
+ in the "eighth-of-a-sphere" domain <img class="formulaInl" alt="$D$" src="form_1.png"/>, with Dirichlet boundary conditions <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. u\right|_{\partial D}=u_0 \ \ \ \ \ \ \ \ \ \ (2) \]" src="form_2.png"/>
+</p>
+ where the function <img class="formulaInl" alt="$ u_0 $" src="form_3.png"/> is given.   </td></tr>
+</table>
+<br  />
+ </center><p>We choose a source function and boundary conditions for which </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_0(x_1,x_2,x_3) = \tanh\left(1-\alpha(({\bf x}-{\bf x_0}) \cdot {\bf N})\right), \ \ \ \ \ \ \ \ \ (3) \]" src="form_4.png"/>
+</p>
+<p> is the exact solution. Here where <img class="formulaInl" alt="${\bf x} = (x_1,x_2,x_3)$" src="form_5.png"/> <br  />
+ is the vector of the spatial coordinates, and the vectors <img class="formulaInl" alt="${\bf x}_0 = \left(x_1^{(0)},x_2^{(0)},x_3^{(0)}\right)$" src="form_6.png"/> and <img class="formulaInl" alt="${\bf N}_0 = (N_1,N_2,N_3)$" src="form_7.png"/> are constants. For large values of the constant <img class="formulaInl" alt="$ \alpha $" src="form_8.png"/> the solution varies rapidly across the plane through <img class="formulaInl" alt="${\bf x}_0$" src="form_9.png"/> whose normal is given by <img class="formulaInl" alt="${\bf N}$" src="form_10.png"/>.</p>
+<p>Here are some plots of the exact and computed solutions for <img class="formulaInl" alt="${\bf x}_0 = (0,0,0)$" src="form_11.png"/>, <img class="formulaInl" alt="${\bf N}_0 = 1/\sqrt{3} \ (-1,-1,1)$" src="form_12.png"/>, and <img class="formulaInl" alt="$ \alpha=50$" src="form_13.png"/> at various levels of mesh refinement. Note that the plot of the exact solution was produced by setting the nodal values to the exact solution, obtained by evaluating (3) at the nodal positions. The elements' basis functions were then used to interpolate between the nodal values. On the coarse meshes, the interpolation between the "exact" nodal values is clearly inadequate to resolve the rapid variation of the solution.</p>
+<div class="image">
+<img src="eight_sphere_poisson.gif" alt=""/>
+<div class="caption">
+Plot of the solution </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="global"></a>
+Global parameters and functions</h1>
+<p>Following our usual practice, we use a namespace, <code><a class="el" href="namespaceTanhSolnForPoisson.html" title="Namespace for exact solution for Poisson equation with sharp step.">TanhSolnForPoisson</a></code>, to define the source function, the exact solution and various problem parameters.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=============start_of_namespace=====================================</span></div>
+<div class="line"><span class="comment">/// Namespace for exact solution for Poisson equation with sharp step </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceTanhSolnForPoisson.html">TanhSolnForPoisson</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Parameter for steepness of step</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>=1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///\short Orientation (non-normalised x-component of unit vector in direction</span></div>
+<div class="line"><span class="comment"> /// of step plane)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>=-1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///\short Orientation (non-normalised y-component of unit vector in direction</span></div>
+<div class="line"><span class="comment"> /// of step plane)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>=-1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///\short Orientation (non-normalised z-component of unit vector in direction</span></div>
+<div class="line"><span class="comment"> /// of step plane)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///\short Orientation (x-coordinate of step plane) </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">X_0</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///\short Orientation (y-coordinate of step plane) </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">Y_0</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///\short Orientation (z-coordinate of step plane) </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">Z_0</a>=0.0;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Exact solution as a Vector</span></div>
+<div class="line"> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">get_exact_u</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  u[0] = tanh(<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*((x[0]-<a class="code" href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">X_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[1]-<a class="code" href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">Y_0</a>)*</div>
+<div class="line">                     <a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[2]-<a class="code" href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">Z_0</a>)*</div>
+<div class="line">                     <a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)));</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exact solution as a scalar</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">get_exact_u</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  u = tanh(<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*((x[0]-<a class="code" href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">X_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[1]-<a class="code" href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">Y_0</a>)*</div>
+<div class="line">                     <a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[2]-<a class="code" href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">Z_0</a>)*</div>
+<div class="line">                     <a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)));</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Source function to make it an exact solution </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceTanhSolnForPoisson.html#ae1b9d6789ff301e3d63a4e292213036c">get_source</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; source)</div>
+<div class="line"> {</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">double</span> s1,s2,s3,s4;</div>
+<div class="line"> </div>
+<div class="line">  s1 = -2.0*tanh(<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*((x[0]-<a class="code" href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">X_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[1]-</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">Y_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[2]-<a class="code" href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">Z_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)))*(1.0-pow(tanh(<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*((x[0]-<a class="code" href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">X_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[1]-</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">Y_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[2]-<a class="code" href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">Z_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>))),2.0))*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>/(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>);</div>
+<div class="line">      s3 = -2.0*tanh(<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*((x[0]-<a class="code" href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">X_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[1]-</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">Y_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[2]-<a class="code" href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">Z_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)))*(1.0-pow(tanh(<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*((x[0]-<a class="code" href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">X_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[1]-</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">Y_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[2]-<a class="code" href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">Z_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>))),2.0))*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>/(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>);</div>
+<div class="line">      s4 = -2.0*tanh(<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*((x[0]-<a class="code" href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">X_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[1]-</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">Y_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[2]-<a class="code" href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">Z_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)))*(1.0-pow(tanh(<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*((x[0]-<a class="code" href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">X_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[1]-</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">Y_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>)+(x[2]-<a class="code" href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">Z_0</a>)*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>/sqrt(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*</div>
+<div class="line"><a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>))),2.0))*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">Alpha</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>/(<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">N_x</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">N_y</a>+<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>*<a class="code" href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">N_z</a>);</div>
+<div class="line">      s2 = s3+s4;</div>
+<div class="line">      source = s1+s2;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The driver code solves the 3D Poisson problem with full spatial adaptivity &ndash; a fairly time-consuming process. To minimise the run-times when the code is executed during <code>oomph-lib's</code> self-tests, we use command line arguments to optionally limit the number of adaptive refinements. If the code is run with <a class="el" href="eighth__sphere__poisson_8txt.html#a15a33fff8fc4425dd54fd49a131d2835">a(ny)</a> command line arguments, only a single adaptive refinement is performed; otherwise up to four levels of refinement are permitted. <code>oomph-lib</code> provides storage for the command line arguments in the namespace <code>CommandLineArgs</code> to make them accessible to other parts of the code.</p>
+<p>Otherwise the driver code is very similar to that used in the <a href="../../../poisson/fish_poisson/html/index.html">corresponding 2D Poisson problems</a>: We construct the problem, passing the pointer to the source function. Next, we create a <code>DocInfo</code> object to specify the output directory, and execute the global self-test to assert that the problem has been set up correctly. Next we solve the problem on the coarse initial mesh (comprising four 27-node brick elements) and then adapt the problem based on the elemental error estimates, until the maximum number of adaptations has been reached or until the adaptation ceases to changes the mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=========start_of_main=============================================</span></div>
+<div class="line"><span class="comment">/// Driver for 3D Poisson problem in eighth of a sphere. Solution </span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// has a sharp step. If there are</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// any command line arguments, we regard this as a validation run</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// and perform only a single adaptation.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="eighth__sphere__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]) </div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up the problem with 27-node brick elements, pass pointer to </span></div>
+<div class="line"> <span class="comment">// source function</span></div>
+<div class="line"> <a class="code" href="classEighthSpherePoissonProblem.html">EighthSpherePoissonProblem&lt;RefineableQPoissonElement&lt;3,3&gt;</a> &gt;</div>
+<div class="line">  <a class="code" href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>(&amp;<a class="code" href="namespaceTanhSolnForPoisson.html#ae1b9d6789ff301e3d63a4e292213036c">TanhSolnForPoisson::get_source</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup labels for output</span></div>
+<div class="line">  DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Step number</span></div>
+<div class="line"> doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check if we&#39;re ready to go</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Self test: &quot;</span> &lt;&lt; <a class="code" href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.self_test() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve the problem</span></div>
+<div class="line"> <a class="code" href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output solution</span></div>
+<div class="line"> <a class="code" href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Increment counter for solutions </span></div>
+<div class="line"> doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now do (up to) three rounds of fully automatic adapation in response to </span></div>
+<div class="line"> <span class="comment">// error estimate</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_solve;</div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Validation run: Just one adaptation</span></div>
+<div class="line">   max_solve=1;</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;Only doing one adaptation for validation&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Up to four adaptations</span></div>
+<div class="line">   max_solve=4;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> isolve=0;isolve&lt;max_solve;isolve++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Adapt problem/mesh</span></div>
+<div class="line">   <a class="code" href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.adapt(); </div>
+<div class="line">         </div>
+<div class="line">   <span class="comment">// Re-solve the problem if the adaptation has changed anything</span></div>
+<div class="line">   <span class="keywordflow">if</span> ((<a class="code" href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.mesh_pt()-&gt;nrefined()  !=0)||</div>
+<div class="line">       (<a class="code" href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.mesh_pt()-&gt;nunrefined()!=0))</div>
+<div class="line">    {</div>
+<div class="line">     <a class="code" href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.newton_solve();</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     cout &lt;&lt; <span class="stringliteral">&quot;Mesh wasn&#39;t adapted --&gt; we&#39;ll stop here&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">     <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Output solution</span></div>
+<div class="line">   <a class="code" href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.doc_solution(doc_info);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Increment counter for solutions </span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// pause(&quot;done&quot;);</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class has the usual structure &ndash; the only difference to the corresponding 2D codes is that the assignment of the boundary conditions in <code>actions_before_newton_solve()</code> now involves thee nodal coordinates rather than two.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_class_definition====================================</span></div>
+<div class="line"><span class="comment">/// Poisson problem in refineable eighth of a sphere mesh.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classEighthSpherePoissonProblem.html">EighthSpherePoissonProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass pointer to source function</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classEighthSpherePoissonProblem.html#ae51db2c3e80f0d5628e4d81eb1c11db4">EighthSpherePoissonProblem</a>(</div>
+<div class="line">  PoissonEquations&lt;3&gt;::PoissonSourceFctPt source_fct_pt);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor: Empty</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classEighthSpherePoissonProblem.html#a043c7aa08c939fdc019870ad2c2270cc">~EighthSpherePoissonProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Overload generic access function by one that returns</span></div>
+<div class="line"><span class="comment"> /// a pointer to the specific  mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableEighthSphereMesh&lt;ELEMENT&gt;* <a class="code" href="classEighthSpherePoissonProblem.html#aa33edbb75ba8fe8d4daac3c940a7ff6a">mesh_pt</a>() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>RefineableEighthSphereMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classEighthSpherePoissonProblem.html#a480189fe5d2f42fe3ff6062d5f151ea3">actions_after_newton_solve</a>()  {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before solve: </span></div>
+<div class="line"><span class="comment"> /// Set Dirchlet boundary conditions from exact solution.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classEighthSpherePoissonProblem.html#af82dd7abdf631950a68c997af314be5d">actions_before_newton_solve</a>()</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Loop over the boundaries</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> num_bound = <a class="code" href="classEighthSpherePoissonProblem.html#aa33edbb75ba8fe8d4daac3c940a7ff6a">mesh_pt</a>()-&gt;nboundary();</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">// Loop over the nodes on boundary</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> num_nod=<a class="code" href="classEighthSpherePoissonProblem.html#aa33edbb75ba8fe8d4daac3c940a7ff6a">mesh_pt</a>()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     Node* nod_pt=<a class="code" href="classEighthSpherePoissonProblem.html#aa33edbb75ba8fe8d4daac3c940a7ff6a">mesh_pt</a>()-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">     <span class="keywordtype">double</span> u;</div>
+<div class="line">     Vector&lt;double&gt; x(3);</div>
+<div class="line">     x[0]=nod_pt-&gt;x(0);</div>
+<div class="line">     x[1]=nod_pt-&gt;x(1);</div>
+<div class="line">     x[2]=nod_pt-&gt;x(2);</div>
+<div class="line">     <a class="code" href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">TanhSolnForPoisson::get_exact_u</a>(x,u);</div>
+<div class="line">     nod_pt-&gt;set_value(0,u);</div>
+<div class="line">    }</div>
+<div class="line">   }</div>
+<div class="line"> }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classEighthSpherePoissonProblem.html#ac8e9911536d04bab829cfe92bb40e302">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to source function</span></div>
+<div class="line"><span class="comment"></span> PoissonEquations&lt;3&gt;::PoissonSourceFctPt <a class="code" href="classEighthSpherePoissonProblem.html#af41ed0ce372d5932c64b3cd4fe69f312">Source_fct_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of class definition</span></div>
+</div><!-- fragment --><p>[See the discussion of the <a href="../../../poisson/one_d_poisson/html/index.html">1D Poisson problem</a> for a more detailed discussion of the function type PoissonEquations&lt;3&gt;::PoissonSourceFctPt.]</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>In the <code>Problem</code> constructor, we set the "steepness parameter" <img class="formulaInl" alt="$ \alpha $" src="form_8.png"/> to a large value and create the mesh for a a sphere of radius 5. Next, we create the error estimator and pass it to the adaptive mesh.</p>
+<div class="fragment"><div class="line"><span class="comment">//====================start_of_constructor================================</span></div>
+<div class="line"><span class="comment">/// Constructor for Poisson problem on eighth of a sphere mesh</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code" href="classEighthSpherePoissonProblem.html#ae51db2c3e80f0d5628e4d81eb1c11db4">EighthSpherePoissonProblem&lt;ELEMENT&gt;::EighthSpherePoissonProblem</a>(</div>
+<div class="line">   PoissonEquations&lt;3&gt;::PoissonSourceFctPt source_fct_pt) : </div>
+<div class="line">         Source_fct_pt(source_fct_pt)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup parameters for exact tanh solution</span></div>
+<div class="line"> <span class="comment">// Steepness of step</span></div>
+<div class="line"> <a class="code" href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">TanhSolnForPoisson::Alpha</a>=50.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create mesh for sphere of radius 5</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> radius=5.0; </div>
+<div class="line"> Problem::mesh_pt() = <span class="keyword">new</span> RefineableEighthSphereMesh&lt;ELEMENT&gt;(radius);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator </span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> mesh_pt()-&gt;spatial_error_estimator_pt()=error_estimator_pt;</div>
+</div><!-- fragment --><p>We adjust the targets for the mesh adaptation so that the single mesh adaptation performed during a validation run produces a non-uniform refinement pattern. (The error targets for this case were determined by trial and error.) The tighter error tolerances specified otherwise are appropriate to properly resolve the solution, as shown in the animated gif files at the beginning of this document. </p><div class="fragment"><div class="line"> <span class="comment">// Adjust error targets for adaptive refinement</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Validation: Relax tolerance to get nonuniform refinement during</span></div>
+<div class="line">   <span class="comment">// first step</span></div>
+<div class="line">   mesh_pt()-&gt;max_permitted_error()=0.7;</div>
+<div class="line">   mesh_pt()-&gt;min_permitted_error()=0.5;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   mesh_pt()-&gt;max_permitted_error()=0.01;</div>
+<div class="line">   mesh_pt()-&gt;min_permitted_error()=0.001;</div>
+<div class="line">  } <span class="comment">// end adjustment</span></div>
+</div><!-- fragment --><p>Next, we assign the boundary conditions. In the present problem all boundaries are Dirichlet boundaries, therefore we loop over all nodes on all boundaries and pin their values. If only a subset of the mesh boundaries were of Dirichlet type, only the nodes on those boundaries would have to be pinned. "Usually" the numbering of the mesh boundaries is (or at least should be!) documented in the mesh constructor but it can also be obtained from the function <code>Mesh::output_boundaries(...)</code> whose use is illustrated here.</p>
+<div class="fragment"><div class="line"> <span class="comment">//Doc the mesh boundaries</span></div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> some_file.open(<span class="stringliteral">&quot;boundaries.dat&quot;</span>);</div>
+<div class="line"> mesh_pt()-&gt;output_boundaries(some_file);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here (all the nodes on the boundary)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0); </div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end of pinning</span></div>
+</div><!-- fragment --><p>Finally we loop over all elements to assign the source function pointer, and then call the generic <code>Problem::assign_eqn_numbers()</code> routine to set up the equation numbers.</p>
+<div class="fragment"><div class="line"> <span class="comment">//Find number of elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   el_pt-&gt;source_fct_pt() = Source_fct_pt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering </span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The function <code>doc_solution(...)</code> writes the FE solution and the corresponding exact solution, defined in <code>TanhSolnForPoisson::get_exact_u(...)</code> to disk. The <code>DocInfo</code> object specifies the output directory and the label for the file names. [See the discussion of the <br  />
+ <a href="../../../poisson/one_d_poisson/html/index.html">1D Poisson problem</a> for a more detailed discussion of the generic <code>Mesh</code> member functions <code>Mesh::output(...)</code>, <code>Mesh::output_fct(...)</code> and <code>Mesh::compute_error(...)</code>].</p>
+<div class="fragment"><div class="line"><span class="comment">//========================start_of_doc====================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classEighthSpherePoissonProblem.html#ac8e9911536d04bab829cfe92bb40e302">EighthSpherePoissonProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output_fct(some_file,npts,<a class="code" href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">TanhSolnForPoisson::get_exact_u</a>); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error</span></div>
+<div class="line"> <span class="comment">//----------</span></div>
+<div class="line"> <span class="keywordtype">double</span> error,norm;</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/error%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;compute_error(some_file,<a class="code" href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">TanhSolnForPoisson::get_exact_u</a>,</div>
+<div class="line">                          error,norm); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;error: &quot;</span> &lt;&lt; sqrt(error) &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;norm : &quot;</span> &lt;&lt; sqrt(norm) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="
+../../../../
+demo_drivers/poisson/eighth_sphere_poisson/
+">demo_drivers/poisson/eighth_sphere_poisson/ </a> </center></li>
+<li>The driver code is: <center> <a href="
+../../../../
+demo_drivers/poisson/eighth_sphere_poisson/eighth_sphere_poisson.cc
+">demo_drivers/poisson/eighth_sphere_poisson/eighth_sphere_poisson.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassEighthSpherePoissonProblem_html_a043c7aa08c939fdc019870ad2c2270cc"><div class="ttname"><a href="classEighthSpherePoissonProblem.html#a043c7aa08c939fdc019870ad2c2270cc">EighthSpherePoissonProblem::~EighthSpherePoissonProblem</a></div><div class="ttdeci">~EighthSpherePoissonProblem()</div><div class="ttdoc">Destructor: Empty.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00141">eighth_sphere_poisson.cc:141</a></div></div>
+<div class="ttc" id="aclassEighthSpherePoissonProblem_html_aa33edbb75ba8fe8d4daac3c940a7ff6a"><div class="ttname"><a href="classEighthSpherePoissonProblem.html#aa33edbb75ba8fe8d4daac3c940a7ff6a">EighthSpherePoissonProblem::mesh_pt</a></div><div class="ttdeci">RefineableEighthSphereMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Overload generic access function by one that returns a pointer to the specific mesh.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00145">eighth_sphere_poisson.cc:145</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_a482d668ef91071985d1f4ce7cf29a926"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#a482d668ef91071985d1f4ce7cf29a926">TanhSolnForPoisson::N_y</a></div><div class="ttdeci">double N_y</div><div class="ttdoc">Orientation (non-normalised y-component of unit vector in direction of step plane)</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00056">eighth_sphere_poisson.cc:56</a></div></div>
+<div class="ttc" id="aclassEighthSpherePoissonProblem_html_ae51db2c3e80f0d5628e4d81eb1c11db4"><div class="ttname"><a href="classEighthSpherePoissonProblem.html#ae51db2c3e80f0d5628e4d81eb1c11db4">EighthSpherePoissonProblem::EighthSpherePoissonProblem</a></div><div class="ttdeci">EighthSpherePoissonProblem(PoissonEquations&lt; 3 &gt;::PoissonSourceFctPt source_fct_pt)</div><div class="ttdoc">Constructor: Pass pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00195">eighth_sphere_poisson.cc:195</a></div></div>
+<div class="ttc" id="aeighth__sphere__poisson_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="eighth__sphere__poisson_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00326">eighth_sphere_poisson.cc:326</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_addc6dc6578b16a1d9aa774c25776b921"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#addc6dc6578b16a1d9aa774c25776b921">TanhSolnForPoisson::Y_0</a></div><div class="ttdeci">double Y_0</div><div class="ttdoc">Orientation (y-coordinate of step plane)</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00067">eighth_sphere_poisson.cc:67</a></div></div>
+<div class="ttc" id="aclassEighthSpherePoissonProblem_html_af82dd7abdf631950a68c997af314be5d"><div class="ttname"><a href="classEighthSpherePoissonProblem.html#af82dd7abdf631950a68c997af314be5d">EighthSpherePoissonProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve: Set Dirchlet boundary conditions from exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00155">eighth_sphere_poisson.cc:155</a></div></div>
+<div class="ttc" id="aeighth__sphere__poisson_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="eighth__sphere__poisson_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8txt_source.html#l00015">eighth_sphere_poisson.txt:15</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_ac3d25f0791c1363f487600e02757bc97"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#ac3d25f0791c1363f487600e02757bc97">TanhSolnForPoisson::N_x</a></div><div class="ttdeci">double N_x</div><div class="ttdoc">Orientation (non-normalised x-component of unit vector in direction of step plane)</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00052">eighth_sphere_poisson.cc:52</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_ae1b9d6789ff301e3d63a4e292213036c"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#ae1b9d6789ff301e3d63a4e292213036c">TanhSolnForPoisson::get_source</a></div><div class="ttdeci">void get_source(const Vector&lt; double &gt; &amp;x, double &amp;source)</div><div class="ttdoc">Source function to make it an exact solution.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00091">eighth_sphere_poisson.cc:91</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_ae6b5b5d21747a45776004756dc97dc5c"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#ae6b5b5d21747a45776004756dc97dc5c">TanhSolnForPoisson::N_z</a></div><div class="ttdeci">double N_z</div><div class="ttdoc">Orientation (non-normalised z-component of unit vector in direction of step plane)</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00060">eighth_sphere_poisson.cc:60</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_af55e0479c15ab58929eb96ee9d6cf07a"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#af55e0479c15ab58929eb96ee9d6cf07a">TanhSolnForPoisson::X_0</a></div><div class="ttdeci">double X_0</div><div class="ttdoc">Orientation (x-coordinate of step plane)</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00064">eighth_sphere_poisson.cc:64</a></div></div>
+<div class="ttc" id="aclassEighthSpherePoissonProblem_html"><div class="ttname"><a href="classEighthSpherePoissonProblem.html">EighthSpherePoissonProblem</a></div><div class="ttdoc">Poisson problem in refineable eighth of a sphere mesh.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00131">eighth_sphere_poisson.cc:131</a></div></div>
+<div class="ttc" id="aclassEighthSpherePoissonProblem_html_a480189fe5d2f42fe3ff6062d5f151ea3"><div class="ttname"><a href="classEighthSpherePoissonProblem.html#a480189fe5d2f42fe3ff6062d5f151ea3">EighthSpherePoissonProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00151">eighth_sphere_poisson.cc:151</a></div></div>
+<div class="ttc" id="aclassEighthSpherePoissonProblem_html_af41ed0ce372d5932c64b3cd4fe69f312"><div class="ttname"><a href="classEighthSpherePoissonProblem.html#af41ed0ce372d5932c64b3cd4fe69f312">EighthSpherePoissonProblem::Source_fct_pt</a></div><div class="ttdeci">PoissonEquations&lt; 3 &gt;::PoissonSourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00183">eighth_sphere_poisson.cc:183</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_ae676ccd186d5df119cce811596d949c1"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#ae676ccd186d5df119cce811596d949c1">TanhSolnForPoisson::Alpha</a></div><div class="ttdeci">double Alpha</div><div class="ttdoc">Parameter for steepness of step.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00048">eighth_sphere_poisson.cc:48</a></div></div>
+<div class="ttc" id="aclassEighthSpherePoissonProblem_html_ac8e9911536d04bab829cfe92bb40e302"><div class="ttname"><a href="classEighthSpherePoissonProblem.html#ac8e9911536d04bab829cfe92bb40e302">EighthSpherePoissonProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00271">eighth_sphere_poisson.cc:271</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html">TanhSolnForPoisson</a></div><div class="ttdoc">Namespace for exact solution for Poisson equation with sharp step.</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00044">eighth_sphere_poisson.cc:44</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_af7896e9c18ce6438c73ae2a875e8b7de"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#af7896e9c18ce6438c73ae2a875e8b7de">TanhSolnForPoisson::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00074">eighth_sphere_poisson.cc:74</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForPoisson_html_abf4856ed1855c34c2b2ea57fd6783644"><div class="ttname"><a href="namespaceTanhSolnForPoisson.html#abf4856ed1855c34c2b2ea57fd6783644">TanhSolnForPoisson::Z_0</a></div><div class="ttdeci">double Z_0</div><div class="ttdoc">Orientation (z-coordinate of step plane)</div><div class="ttdef"><b>Definition:</b> <a href="eighth__sphere__poisson_8cc_source.html#l00070">eighth_sphere_poisson.cc:70</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:04:57
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

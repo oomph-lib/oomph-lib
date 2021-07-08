@@ -1,0 +1,55 @@
+\hypertarget{two__d__adv__diff__adapt_8cc}{}\doxysection{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+adapt.\+cc File Reference}
+\label{two__d__adv__diff__adapt_8cc}\index{two\_d\_adv\_diff\_adapt.cc@{two\_d\_adv\_diff\_adapt.cc}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem}{Refineable\+Advection\+Diffusion\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion}{Tanh\+Soln\+For\+Advection\+Diffusion}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_ae4c9ed0a4f123ec8e634f0cc45bfcebc}{Tanh\+Soln\+For\+Advection\+Diffusion\+::get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_af302dc41c1e494b3430fe6654bd1fd39}{Tanh\+Soln\+For\+Advection\+Diffusion\+::get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, double \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a scalar. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_aaa1aa95713b02b211812fdd18eeaa369}{Tanh\+Soln\+For\+Advection\+Diffusion\+::source\+\_\+function}} (const Vector$<$ double $>$ \&x\+\_\+vect, double \&source)
+\begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_ab40e93031d34986762c69616c3c8b065}{Tanh\+Soln\+For\+Advection\+Diffusion\+::wind\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&wind)
+\begin{DoxyCompactList}\small\item\em Wind. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{two__d__adv__diff__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver code for 2D Advection\+Diffusion problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_aeba486af70e92ab7eec1da3ce44d51ee}{Tanh\+Soln\+For\+Advection\+Diffusion\+::\+Peclet}} =200.\+0
+\begin{DoxyCompactList}\small\item\em Peclet number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_a4d202e8ac48cc75f760ef40681402ec7}{Tanh\+Soln\+For\+Advection\+Diffusion\+::\+Alpha}}
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of step. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_a236bf82c661189623706b7c9d9b0c52f}{Tanh\+Soln\+For\+Advection\+Diffusion\+::\+Tan\+Phi}}
+\begin{DoxyCompactList}\small\item\em Parameter for angle of step. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{two__d__adv__diff__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{two__d__adv__diff__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{two\_d\_adv\_diff\_adapt.cc@{two\_d\_adv\_diff\_adapt.cc}!main@{main}}
+\index{main@{main}!two\_d\_adv\_diff\_adapt.cc@{two\_d\_adv\_diff\_adapt.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver code for 2D Advection\+Diffusion problem. 
+
+
+
+Definition at line 322 of file two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+adapt.\+cc.
+
+
+
+References Tanh\+Soln\+For\+Advection\+Diffusion\+::\+Alpha, problem, Tanh\+Soln\+For\+Advection\+Diffusion\+::source\+\_\+function(), Tanh\+Soln\+For\+Advection\+Diffusion\+::\+Tan\+Phi, and Tanh\+Soln\+For\+Advection\+Diffusion\+::wind\+\_\+function().
+

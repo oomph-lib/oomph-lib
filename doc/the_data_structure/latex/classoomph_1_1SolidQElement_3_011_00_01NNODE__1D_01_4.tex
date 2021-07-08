@@ -1,0 +1,205 @@
+\hypertarget{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4}{}\doxysection{oomph\+::Solid\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\label{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4}\index{oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}}
+
+
+\mbox{\hyperlink{classoomph_1_1SolidQElement}{Solid\+Q\+Element}} elements, specialised to one spatial dimension.  
+
+
+
+
+{\ttfamily \#include $<$Qelements.\+h$>$}
+
+Inheritance diagram for oomph\+::Solid\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.706667cm]{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_a7dfe2bebc8306a8395c35dc890193215}{Solid\+Q\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_a898cb4736295a43a4df5e4a12cb694c7}{Solid\+Q\+Element}} (const \mbox{\hyperlink{classoomph_1_1SolidQElement}{Solid\+Q\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_aa419f785459467534f9e365dc80383b7}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_af9949cdad7c4cd1a8a9c50385d00ce7f}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output at n\+\_\+plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_a48a580c256586164ec6ba559e100eb0f}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_aee559383965b0581c287e10d6278050e}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C\+\_\+style output at n\+\_\+plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_ad641fb5cfe3c380c1d6e22f161b9f2b8}{build\+\_\+face\+\_\+element}} (const int \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$face\+\_\+element\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} (an element of type Solid\+Q\+Element$<$0,\+N\+N\+O\+D\+E\+\_\+1\+D$>$). The face index takes one of two values corresponding to the two possible faces\+: -\/1 (Left) s\mbox{[}0\mbox{]} = -\/1.\+0 +1 (Right) s\mbox{[}0\mbox{]} = 1.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
+class oomph\+::\+Solid\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+
+\mbox{\hyperlink{classoomph_1_1SolidQElement}{Solid\+Q\+Element}} elements, specialised to one spatial dimension. 
+
+Definition at line 1604 of file Qelements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_a7dfe2bebc8306a8395c35dc890193215}\label{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_a7dfe2bebc8306a8395c35dc890193215}} 
+\index{oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}!SolidQElement@{SolidQElement}}
+\index{SolidQElement@{SolidQElement}!oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{SolidQElement()}{SolidQElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1SolidQElement}{oomph\+::\+Solid\+Q\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1SolidQElement}{Solid\+Q\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 1610 of file Qelements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_a898cb4736295a43a4df5e4a12cb694c7}\label{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_a898cb4736295a43a4df5e4a12cb694c7}} 
+\index{oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}!SolidQElement@{SolidQElement}}
+\index{SolidQElement@{SolidQElement}!oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{SolidQElement()}{SolidQElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1SolidQElement}{oomph\+::\+Solid\+Q\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1SolidQElement}{Solid\+Q\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidQElement}{Solid\+Q\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 1617 of file Qelements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_ad641fb5cfe3c380c1d6e22f161b9f2b8}\label{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_ad641fb5cfe3c380c1d6e22f161b9f2b8}} 
+\index{oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}!build\_face\_element@{build\_face\_element}}
+\index{build\_face\_element@{build\_face\_element}!oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{build\_face\_element()}{build\_face\_element()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQElement}{oomph\+::\+Solid\+Q\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} (an element of type Solid\+Q\+Element$<$0,\+N\+N\+O\+D\+E\+\_\+1\+D$>$). The face index takes one of two values corresponding to the two possible faces\+: -\/1 (Left) s\mbox{[}0\mbox{]} = -\/1.\+0 +1 (Right) s\mbox{[}0\mbox{]} = 1.\+0. 
+
+Function to setup geometrical information for lower-\/dimensional Face\+Elements (which are of type Solid\+Q\+Element$<$0,1$>$). 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aaf7bead5b462cfd5401d97b3dbdc7af7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 1753 of file Qelements.\+h.
+
+
+
+References oomph\+::\+Solid\+Node\+::nlagrangian().
+
+\mbox{\Hypertarget{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_a48a580c256586164ec6ba559e100eb0f}\label{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_a48a580c256586164ec6ba559e100eb0f}} 
+\index{oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQElement}{oomph\+::\+Solid\+Q\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_a54d62722411a1b5361718aa95f6c4e70}{oomph\+::\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Definition at line 1635 of file Qelements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_aee559383965b0581c287e10d6278050e}\label{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_aee559383965b0581c287e10d6278050e}} 
+\index{oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQElement}{oomph\+::\+Solid\+Q\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C\+\_\+style output at n\+\_\+plot points. 
+
+C-\/style output function for n\+\_\+plot points in each coordinate direction for the 1D element 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_a5ba26a038a5a26e6873753fb78cd6a5c}{oomph\+::\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Definition at line 1710 of file Qelements.\+h.
+
+
+
+References i, and s.
+
+\mbox{\Hypertarget{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_aa419f785459467534f9e365dc80383b7}\label{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_aa419f785459467534f9e365dc80383b7}} 
+\index{oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQElement}{oomph\+::\+Solid\+Q\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Overload the output function 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_ac157449520794a71b85b66428c4e38ba}{oomph\+::\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Definition at line 1629 of file Qelements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_af9949cdad7c4cd1a8a9c50385d00ce7f}\label{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4_af9949cdad7c4cd1a8a9c50385d00ce7f}} 
+\index{oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::SolidQElement$<$ 1, NNODE\_1D $>$@{oomph::SolidQElement$<$ 1, NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1SolidQElement}{oomph\+::\+Solid\+Q\+Element}}$<$ 1, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output at n\+\_\+plot points. 
+
+The output function for n\+\_\+plot points in each coordinate direction for the 1D element 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_a19fb7fd1e4def7132018d2aa0e6c00d7}{oomph\+::\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Definition at line 1670 of file Qelements.\+h.
+
+
+
+References i, and s.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Qelements_8h}{Qelements.\+h}}\end{DoxyCompactItemize}

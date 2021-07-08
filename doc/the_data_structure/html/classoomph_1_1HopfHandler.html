@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::HopfHandler Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1HopfHandler.html">HopfHandler</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="classoomph_1_1HopfHandler-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::HopfHandler Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::HopfHandler:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1HopfHandler.png" usemap="#oomph::HopfHandler_map" alt=""/>
+  <map id="oomph::HopfHandler_map" name="oomph::HopfHandler_map">
+<area href="classoomph_1_1AssemblyHandler.html" title="A class that is used to define the functions used to assemble the elemental contributions to the resi..." alt="oomph::AssemblyHandler" shape="rect" coords="0,0,154,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac219516b8263300eb5102d38baab05d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#ac219516b8263300eb5102d38baab05d7">HopfHandler</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, double *const &amp;parameter_pt)</td></tr>
+<tr class="memdesc:ac219516b8263300eb5102d38baab05d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classoomph_1_1HopfHandler.html#ac219516b8263300eb5102d38baab05d7">More...</a><br /></td></tr>
+<tr class="separator:ac219516b8263300eb5102d38baab05d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5799482b1a7d06cbefcbcc862d33b41a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a5799482b1a7d06cbefcbcc862d33b41a">HopfHandler</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, double *const &amp;paramter_pt, const double &amp;<a class="el" href="classoomph_1_1HopfHandler.html#a788a0cf74664712827f46bf26e078994">omega</a>, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;phi, const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;psi)</td></tr>
+<tr class="separator:a5799482b1a7d06cbefcbcc862d33b41a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b2822861fc417fea32cbba38f9dd650"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a2b2822861fc417fea32cbba38f9dd650">~HopfHandler</a> ()</td></tr>
+<tr class="memdesc:a2b2822861fc417fea32cbba38f9dd650"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor return the problem to its original (non-augmented) state.  <a href="classoomph_1_1HopfHandler.html#a2b2822861fc417fea32cbba38f9dd650">More...</a><br /></td></tr>
+<tr class="separator:a2b2822861fc417fea32cbba38f9dd650"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d1b73ec4e9b8b27252b4bacf2ef7f38"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a8d1b73ec4e9b8b27252b4bacf2ef7f38">ndof</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt)</td></tr>
+<tr class="memdesc:a8d1b73ec4e9b8b27252b4bacf2ef7f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of elemental degrees of freedom.  <a href="classoomph_1_1HopfHandler.html#a8d1b73ec4e9b8b27252b4bacf2ef7f38">More...</a><br /></td></tr>
+<tr class="separator:a8d1b73ec4e9b8b27252b4bacf2ef7f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9feb8087e8b9554164c0de002f4ec056"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a9feb8087e8b9554164c0de002f4ec056">eqn_number</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, const unsigned &amp;ieqn_local)</td></tr>
+<tr class="memdesc:a9feb8087e8b9554164c0de002f4ec056"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the global equation number of the local unknown.  <a href="classoomph_1_1HopfHandler.html#a9feb8087e8b9554164c0de002f4ec056">More...</a><br /></td></tr>
+<tr class="separator:a9feb8087e8b9554164c0de002f4ec056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61a4006161da6532a9acfec0f979aafa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a61a4006161da6532a9acfec0f979aafa">get_residuals</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>)</td></tr>
+<tr class="memdesc:a61a4006161da6532a9acfec0f979aafa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the residuals.  <a href="classoomph_1_1HopfHandler.html#a61a4006161da6532a9acfec0f979aafa">More...</a><br /></td></tr>
+<tr class="separator:a61a4006161da6532a9acfec0f979aafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab36c50421f53accced01dd9e04d904ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#ab36c50421f53accced01dd9e04d904ef">get_jacobian</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:ab36c50421f53accced01dd9e04d904ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the elemental Jacobian matrix "d equation 
+/ d variable".  <a href="classoomph_1_1HopfHandler.html#ab36c50421f53accced01dd9e04d904ef">More...</a><br /></td></tr>
+<tr class="separator:ab36c50421f53accced01dd9e04d904ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2953368ecc48dc22f8ea1f563064ece2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a2953368ecc48dc22f8ea1f563064ece2">get_dresiduals_dparameter</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam)</td></tr>
+<tr class="memdesc:a2953368ecc48dc22f8ea1f563064ece2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system.  <a href="classoomph_1_1HopfHandler.html#a2953368ecc48dc22f8ea1f563064ece2">More...</a><br /></td></tr>
+<tr class="separator:a2953368ecc48dc22f8ea1f563064ece2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59fb2c41d850cfe1fdccc3e97ca75135"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a59fb2c41d850cfe1fdccc3e97ca75135">get_djacobian_dparameter</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, double *const &amp;parameter_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dres_dparam, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;djac_dparam)</td></tr>
+<tr class="memdesc:a59fb2c41d850cfe1fdccc3e97ca75135"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks.  <a href="classoomph_1_1HopfHandler.html#a59fb2c41d850cfe1fdccc3e97ca75135">More...</a><br /></td></tr>
+<tr class="separator:a59fb2c41d850cfe1fdccc3e97ca75135"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74b0266ee15bcb294dbb946156095f8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a74b0266ee15bcb294dbb946156095f8c">get_hessian_vector_products</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;Y, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; const &amp;<a class="el" href="classoomph_1_1HopfHandler.html#a99aabcf5ac54311f1f7acb0dbd431b84">C</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;product)</td></tr>
+<tr class="memdesc:a74b0266ee15bcb294dbb946156095f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the hessian vector product function so that it breaks.  <a href="classoomph_1_1HopfHandler.html#a74b0266ee15bcb294dbb946156095f8c">More...</a><br /></td></tr>
+<tr class="separator:a74b0266ee15bcb294dbb946156095f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a789de82e82adaac82b366bbaa7f7ce59"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a789de82e82adaac82b366bbaa7f7ce59">bifurcation_type</a> () const</td></tr>
+<tr class="memdesc:a789de82e82adaac82b366bbaa7f7ce59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate that we are tracking a Hopf bifurcation by returning 3.  <a href="classoomph_1_1HopfHandler.html#a789de82e82adaac82b366bbaa7f7ce59">More...</a><br /></td></tr>
+<tr class="separator:a789de82e82adaac82b366bbaa7f7ce59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49f4d0a78ac46ea1412d71d3bb9cc6a1"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a49f4d0a78ac46ea1412d71d3bb9cc6a1">bifurcation_parameter_pt</a> () const</td></tr>
+<tr class="memdesc:a49f4d0a78ac46ea1412d71d3bb9cc6a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the bifurcation parameter in bifurcation tracking problems.  <a href="classoomph_1_1HopfHandler.html#a49f4d0a78ac46ea1412d71d3bb9cc6a1">More...</a><br /></td></tr>
+<tr class="separator:a49f4d0a78ac46ea1412d71d3bb9cc6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d1ee586e6274cfa0baa15f82b9fa0ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a9d1ee586e6274cfa0baa15f82b9fa0ae">get_eigenfunction</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenfunction)</td></tr>
+<tr class="memdesc:a9d1ee586e6274cfa0baa15f82b9fa0ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems.  <a href="classoomph_1_1HopfHandler.html#a9d1ee586e6274cfa0baa15f82b9fa0ae">More...</a><br /></td></tr>
+<tr class="separator:a9d1ee586e6274cfa0baa15f82b9fa0ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a788a0cf74664712827f46bf26e078994"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a788a0cf74664712827f46bf26e078994">omega</a> () const</td></tr>
+<tr class="memdesc:a788a0cf74664712827f46bf26e078994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the frequency of the bifurcation.  <a href="classoomph_1_1HopfHandler.html#a788a0cf74664712827f46bf26e078994">More...</a><br /></td></tr>
+<tr class="separator:a788a0cf74664712827f46bf26e078994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd2149152659deef1d938739222dbcf2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#acd2149152659deef1d938739222dbcf2">solve_standard_system</a> ()</td></tr>
+<tr class="memdesc:acd2149152659deef1d938739222dbcf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set to solve the standard system.  <a href="classoomph_1_1HopfHandler.html#acd2149152659deef1d938739222dbcf2">More...</a><br /></td></tr>
+<tr class="separator:acd2149152659deef1d938739222dbcf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7feecfa644ae33b4a4a9fa8d1d993af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#ac7feecfa644ae33b4a4a9fa8d1d993af">solve_complex_system</a> ()</td></tr>
+<tr class="memdesc:ac7feecfa644ae33b4a4a9fa8d1d993af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set to solve the complex system.  <a href="classoomph_1_1HopfHandler.html#ac7feecfa644ae33b4a4a9fa8d1d993af">More...</a><br /></td></tr>
+<tr class="separator:ac7feecfa644ae33b4a4a9fa8d1d993af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a507681043126f6bea58cc90deed16d1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a507681043126f6bea58cc90deed16d1d">solve_full_system</a> ()</td></tr>
+<tr class="memdesc:a507681043126f6bea58cc90deed16d1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve non-block system.  <a href="classoomph_1_1HopfHandler.html#a507681043126f6bea58cc90deed16d1d">More...</a><br /></td></tr>
+<tr class="separator:a507681043126f6bea58cc90deed16d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1AssemblyHandler"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1AssemblyHandler')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1AssemblyHandler.html">oomph::AssemblyHandler</a></td></tr>
+<tr class="memitem:af3ab79744dce0b50370defdbf7981691 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#af3ab79744dce0b50370defdbf7981691">AssemblyHandler</a> ()</td></tr>
+<tr class="memdesc:af3ab79744dce0b50370defdbf7981691 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="classoomph_1_1AssemblyHandler.html#af3ab79744dce0b50370defdbf7981691">More...</a><br /></td></tr>
+<tr class="separator:af3ab79744dce0b50370defdbf7981691 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfd15243fce76ce8f1ea0248c700a3f4 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#abfd15243fce76ce8f1ea0248c700a3f4">dof_vector</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;dof)</td></tr>
+<tr class="memdesc:abfd15243fce76ce8f1ea0248c700a3f4 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return vector of dofs at time level t in the element elem_pt.  <a href="classoomph_1_1AssemblyHandler.html#abfd15243fce76ce8f1ea0248c700a3f4">More...</a><br /></td></tr>
+<tr class="separator:abfd15243fce76ce8f1ea0248c700a3f4 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6002d5703a93b3b147de79508c5719 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#afe6002d5703a93b3b147de79508c5719">dof_pt_vector</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double * &gt; &amp;dof_pt)</td></tr>
+<tr class="memdesc:afe6002d5703a93b3b147de79508c5719 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return vector of pointers to dofs in the element elem_pt.  <a href="classoomph_1_1AssemblyHandler.html#afe6002d5703a93b3b147de79508c5719">More...</a><br /></td></tr>
+<tr class="separator:afe6002d5703a93b3b147de79508c5719 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab61559fc5df46871c1eebd103f7bf08b inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#ab61559fc5df46871c1eebd103f7bf08b">local_problem_dof</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, const unsigned &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:ab61559fc5df46871c1eebd103f7bf08b inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the t-th level of storage associated with the i-th (local) dof stored in the problem.  <a href="classoomph_1_1AssemblyHandler.html#ab61559fc5df46871c1eebd103f7bf08b">More...</a><br /></td></tr>
+<tr class="separator:ab61559fc5df46871c1eebd103f7bf08b inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2e4ee4623116b18245ca90cfe9ba144 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#ab2e4ee4623116b18245ca90cfe9ba144">get_all_vectors_and_matrices</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;vec, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &gt; &amp;matrix)</td></tr>
+<tr class="memdesc:ab2e4ee4623116b18245ca90cfe9ba144 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate all desired vectors and matrices provided by the element elem_pt.  <a href="classoomph_1_1AssemblyHandler.html#ab2e4ee4623116b18245ca90cfe9ba144">More...</a><br /></td></tr>
+<tr class="separator:ab2e4ee4623116b18245ca90cfe9ba144 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60c8efc6756825df9cd41389cdeac6cc inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a60c8efc6756825df9cd41389cdeac6cc">get_inner_products</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::pair&lt; unsigned, unsigned &gt; &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;inner_product)</td></tr>
+<tr class="memdesc:a60c8efc6756825df9cd41389cdeac6cc inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the inner products of the given vector of pairs of history values over the element.  <a href="classoomph_1_1AssemblyHandler.html#a60c8efc6756825df9cd41389cdeac6cc">More...</a><br /></td></tr>
+<tr class="separator:a60c8efc6756825df9cd41389cdeac6cc inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2300910f43476551318d74e3a90e7713 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a2300910f43476551318d74e3a90e7713">get_inner_product_vectors</a> (<a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;elem_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; unsigned &gt; const &amp;history_index, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &gt; &amp;inner_product_vector)</td></tr>
+<tr class="memdesc:a2300910f43476551318d74e3a90e7713 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the vectors that when taken as a dot product with other history values give the inner product over the element.  <a href="classoomph_1_1AssemblyHandler.html#a2300910f43476551318d74e3a90e7713">More...</a><br /></td></tr>
+<tr class="separator:a2300910f43476551318d74e3a90e7713 inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ccef21253d997dd1a78ed26c2b99fce inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#a0ccef21253d997dd1a78ed26c2b99fce">synchronise</a> ()</td></tr>
+<tr class="memdesc:a0ccef21253d997dd1a78ed26c2b99fce inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that is used to perform any synchronisation required during the solution <br  />
+  <a href="classoomph_1_1AssemblyHandler.html#a0ccef21253d997dd1a78ed26c2b99fce">More...</a><br /></td></tr>
+<tr class="separator:a0ccef21253d997dd1a78ed26c2b99fce inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab26633238200230ab57a20cc49e731de inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AssemblyHandler.html#ab26633238200230ab57a20cc49e731de">~AssemblyHandler</a> ()</td></tr>
+<tr class="memdesc:ab26633238200230ab57a20cc49e731de inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <a href="classoomph_1_1AssemblyHandler.html#ab26633238200230ab57a20cc49e731de">More...</a><br /></td></tr>
+<tr class="separator:ab26633238200230ab57a20cc49e731de inherit pub_methods_classoomph_1_1AssemblyHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aa3d4d806a328a460edaae915670edad3"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#aa3d4d806a328a460edaae915670edad3">Solve_which_system</a></td></tr>
+<tr class="memdesc:aa3d4d806a328a460edaae915670edad3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integer flag to indicate which system should be assembled. There are three possibilities. The full augmented system (0), the non-augmented jacobian system (1), and complex system (2), where the matrix is a combination of the jacobian and mass matrices.  <a href="classoomph_1_1HopfHandler.html#aa3d4d806a328a460edaae915670edad3">More...</a><br /></td></tr>
+<tr class="separator:aa3d4d806a328a460edaae915670edad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4464f9abb45bad3222f748703c31155"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#aa4464f9abb45bad3222f748703c31155">Problem_pt</a></td></tr>
+<tr class="memdesc:aa4464f9abb45bad3222f748703c31155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the problem.  <a href="classoomph_1_1HopfHandler.html#aa4464f9abb45bad3222f748703c31155">More...</a><br /></td></tr>
+<tr class="separator:aa4464f9abb45bad3222f748703c31155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff98f00728cd365d552229fec352f4e6"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#aff98f00728cd365d552229fec352f4e6">Parameter_pt</a></td></tr>
+<tr class="memdesc:aff98f00728cd365d552229fec352f4e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the parameter.  <a href="classoomph_1_1HopfHandler.html#aff98f00728cd365d552229fec352f4e6">More...</a><br /></td></tr>
+<tr class="separator:aff98f00728cd365d552229fec352f4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac35b7c357ab453b686e80d8efe761945"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#ac35b7c357ab453b686e80d8efe761945">Ndof</a></td></tr>
+<tr class="memdesc:ac35b7c357ab453b686e80d8efe761945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store the number of degrees of freedom in the non-augmented problem.  <a href="classoomph_1_1HopfHandler.html#ac35b7c357ab453b686e80d8efe761945">More...</a><br /></td></tr>
+<tr class="separator:ac35b7c357ab453b686e80d8efe761945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dc27019f4889918cd01207576eabaea"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a1dc27019f4889918cd01207576eabaea">Omega</a></td></tr>
+<tr class="memdesc:a1dc27019f4889918cd01207576eabaea"><td class="mdescLeft">&#160;</td><td class="mdescRight">The critical frequency of the bifurcation.  <a href="classoomph_1_1HopfHandler.html#a1dc27019f4889918cd01207576eabaea">More...</a><br /></td></tr>
+<tr class="separator:a1dc27019f4889918cd01207576eabaea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a117a5e192857e2f51c9c5d392fd6e5e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a117a5e192857e2f51c9c5d392fd6e5e7">Phi</a></td></tr>
+<tr class="memdesc:a117a5e192857e2f51c9c5d392fd6e5e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The real part of the null vector.  <a href="classoomph_1_1HopfHandler.html#a117a5e192857e2f51c9c5d392fd6e5e7">More...</a><br /></td></tr>
+<tr class="separator:a117a5e192857e2f51c9c5d392fd6e5e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f4d4f9e8962f1cd666df8de85a37d2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a9f4d4f9e8962f1cd666df8de85a37d2a">Psi</a></td></tr>
+<tr class="memdesc:a9f4d4f9e8962f1cd666df8de85a37d2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The imaginary part of the null vector.  <a href="classoomph_1_1HopfHandler.html#a9f4d4f9e8962f1cd666df8de85a37d2a">More...</a><br /></td></tr>
+<tr class="separator:a9f4d4f9e8962f1cd666df8de85a37d2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99aabcf5ac54311f1f7acb0dbd431b84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a99aabcf5ac54311f1f7acb0dbd431b84">C</a></td></tr>
+<tr class="memdesc:a99aabcf5ac54311f1f7acb0dbd431b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constant vector used to ensure that the null vector is not trivial.  <a href="classoomph_1_1HopfHandler.html#a99aabcf5ac54311f1f7acb0dbd431b84">More...</a><br /></td></tr>
+<tr class="separator:a99aabcf5ac54311f1f7acb0dbd431b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b429a8220b316a487998cae04f46ec7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a1b429a8220b316a487998cae04f46ec7">Count</a></td></tr>
+<tr class="memdesc:a1b429a8220b316a487998cae04f46ec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. <br  />
+  <a href="classoomph_1_1HopfHandler.html#a1b429a8220b316a487998cae04f46ec7">More...</a><br /></td></tr>
+<tr class="separator:a1b429a8220b316a487998cae04f46ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a199677d64d3b2f908690d10a2398b737"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HopfHandler.html#a199677d64d3b2f908690d10a2398b737">BlockHopfLinearSolver</a></td></tr>
+<tr class="separator:a199677d64d3b2f908690d10a2398b737"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class that is used to assemble the augmented system that defines a Hopf bifurcation. The "standard" problem must be a function of a global parameter <img class="formulaInl" alt="$ \lambda $" src="form_179.png"/> and a solution is <img class="formulaInl" alt="$ R(u,\lambda) = 0 $" src="form_194.png"/>, where <img class="formulaInl" alt="$ u $" src="form_1.png"/> are the unknowns in the problem. A Hopf bifurcation may be specified by the augmented system of size <img class="formulaInl" alt="$ 3N+2 $" src="form_195.png"/>. </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ R(u,\lambda) = 0, \]" src="form_173.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J\phi + \omega M \psi = 0, \]" src="form_196.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ J\psi - \omega M \phi = 0, \]" src="form_197.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ c \cdot \phi = 1. \]" src="form_198.png"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ c \cdot \psi = 0. \]" src="form_199.png"/>
+</p>
+<p> In the above <img class="formulaInl" alt="$ J $" src="form_8.png"/> is the usual Jacobian matrix, <img class="formulaInl" alt="$ dR/du $" src="form_176.png"/> and <img class="formulaInl" alt="$ M $" src="form_200.png"/> is the mass matrix that multiplies the time derivative terms. <img class="formulaInl" alt="$ \phi + i\psi $" src="form_201.png"/> is the (complex) null vector of the complex matrix <img class="formulaInl" alt="$ J - i\omega M $" src="form_202.png"/>, where <img class="formulaInl" alt="$ \omega $" src="form_203.png"/> is the critical frequency. <img class="formulaInl" alt="$ c $" src="form_204.png"/> is a constant vector that is used to ensure that the null vector is non-trivial. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01007">1007</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac219516b8263300eb5102d38baab05d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac219516b8263300eb5102d38baab05d7">&#9670;&nbsp;</a></span>HopfHandler() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HopfHandler::HopfHandler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>problem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *const &amp;&#160;</td>
+          <td class="paramname"><em>parameter_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Constructor: Initialise the hopf handler, by setting initial guesses for Phi, Psi and calculating Count. If the system changes, a new handler must be constructed. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04223">4223</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="assembly__handler_8h_source.html#l01039">C</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="assembly__handler_8h_source.html#l01044">Count</a>, <a class="el" href="linear__solver_8h_source.html#l00134">oomph::LinearSolver::disable_resolve()</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="linear__solver_8h_source.html#l00128">oomph::LinearSolver::enable_resolve()</a>, <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="problem_8cc_source.html#l07871">oomph::Problem::get_derivative_wrt_global_parameter()</a>, <a class="el" href="linear__solver_8h_source.html#l00124">oomph::LinearSolver::is_resolve_enabled()</a>, <a class="el" href="problem_8h_source.html#l01427">oomph::Problem::linear_solver_pt()</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="assembly__handler_8h_source.html#l01026">Ndof</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="assembly__handler_8h_source.html#l01029">Omega</a>, <a class="el" href="assembly__handler_8h_source.html#l01032">Phi</a>, <a class="el" href="assembly__handler_8h_source.html#l01019">Problem_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l01035">Psi</a>, <a class="el" href="linear__solver_8h_source.html#l00211">oomph::LinearSolver::resolve()</a>, <a class="el" href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">oomph::LinearSolver::solve()</a>, and <a class="el" href="problem_8h_source.html#l00658">oomph::Problem::Sparse_assemble_with_arrays_previous_allocation</a>.</p>
+
+</div>
+</div>
+<a id="a5799482b1a7d06cbefcbcc862d33b41a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5799482b1a7d06cbefcbcc862d33b41a">&#9670;&nbsp;</a></span>HopfHandler() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HopfHandler::HopfHandler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>problem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *const &amp;&#160;</td>
+          <td class="paramname"><em>parameter_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>omega</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>phi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Constructor with initial guesses for the frequency and null vectors, such as might be provided by an eigensolver</p>
+<p>Constructor: Initialise the hopf handler, by setting initial guesses for Phi, Psi, Omega and calculating Count. If the system changes, a new handler must be constructed. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04354">4354</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="assembly__handler_8h_source.html#l01039">C</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="assembly__handler_8h_source.html#l01044">Count</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00458">oomph::Mesh::element_pt()</a>, <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="assembly__handler_8h_source.html#l01026">Ndof</a>, <a class="el" href="problem_8h_source.html#l01577">oomph::Problem::ndof()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="assembly__handler_8h_source.html#l01029">Omega</a>, <a class="el" href="assembly__handler_8h_source.html#l01032">Phi</a>, <a class="el" href="assembly__handler_8h_source.html#l01019">Problem_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l01035">Psi</a>, and <a class="el" href="problem_8h_source.html#l00658">oomph::Problem::Sparse_assemble_with_arrays_previous_allocation</a>.</p>
+
+</div>
+</div>
+<a id="a2b2822861fc417fea32cbba38f9dd650"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b2822861fc417fea32cbba38f9dd650">&#9670;&nbsp;</a></span>~HopfHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HopfHandler::~HopfHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destructor return the problem to its original (non-augmented) state. </p>
+<p>Destructor, return the problem to its original state, before the augmented system was added </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04423">4423</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l00983">oomph::BlockHopfLinearSolver::linear_solver_pt()</a>, <a class="el" href="problem_8h_source.html#l01427">oomph::Problem::linear_solver_pt()</a>, <a class="el" href="assembly__handler_8h_source.html#l01026">Ndof</a>, <a class="el" href="assembly__handler_8h_source.html#l01019">Problem_pt</a>, and <a class="el" href="problem_8h_source.html#l00658">oomph::Problem::Sparse_assemble_with_arrays_previous_allocation</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a49f4d0a78ac46ea1412d71d3bb9cc6a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49f4d0a78ac46ea1412d71d3bb9cc6a1">&#9670;&nbsp;</a></span>bifurcation_parameter_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* oomph::HopfHandler::bifurcation_parameter_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a pointer to the bifurcation parameter in bifurcation tracking problems. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a3e369ec692c3d36a4a2a8a64dab7fe2b">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01104">1104</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="assembly__handler_8h_source.html#l01022">Parameter_pt</a>.</p>
+
+</div>
+</div>
+<a id="a789de82e82adaac82b366bbaa7f7ce59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a789de82e82adaac82b366bbaa7f7ce59">&#9670;&nbsp;</a></span>bifurcation_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int oomph::HopfHandler::bifurcation_type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indicate that we are tracking a Hopf bifurcation by returning 3. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a22c5f240674e4f6cee12006790c11dae">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01100">1100</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+</div>
+</div>
+<a id="a9feb8087e8b9554164c0de002f4ec056"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9feb8087e8b9554164c0de002f4ec056">&#9670;&nbsp;</a></span>eqn_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long oomph::HopfHandler::eqn_number </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ieqn_local</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the global equation number of the local unknown. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a94d28e2de2559cde803d1ba2195b5290">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04476">4476</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, and <a class="el" href="assembly__handler_8h_source.html#l01026">Ndof</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a59fb2c41d850cfe1fdccc3e97ca75135"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59fb2c41d850cfe1fdccc3e97ca75135">&#9670;&nbsp;</a></span>get_djacobian_dparameter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HopfHandler::get_djacobian_dparameter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *const &amp;&#160;</td>
+          <td class="paramname"><em>parameter_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dres_dparam</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>djac_dparam</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks. </p>
+<p>Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks because it should not be required </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#aefc0c13a65342806c167c5d53f014803">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04776">4776</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2953368ecc48dc22f8ea1f563064ece2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2953368ecc48dc22f8ea1f563064ece2">&#9670;&nbsp;</a></span>get_dresiduals_dparameter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HopfHandler::get_dresiduals_dparameter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *const &amp;&#160;</td>
+          <td class="paramname"><em>parameter_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dres_dparam</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system. </p>
+<p>Get the derivatives of the augmented residuals with respect to a parameter </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a2ee980ccabe0ad82f98e694eecf270bb">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04720">4720</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="elements_8h_source.html#l01053">oomph::GeneralisedElement::get_djacobian_and_dmass_matrix_dparameter()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="assembly__handler_8h_source.html#l01029">Omega</a>, <a class="el" href="assembly__handler_8h_source.html#l01032">Phi</a>, <a class="el" href="assembly__handler_8h_source.html#l01035">Psi</a>, and <a class="el" href="assembly__handler_8h_source.html#l01016">Solve_which_system</a>.</p>
+
+</div>
+</div>
+<a id="a9d1ee586e6274cfa0baa15f82b9fa0ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d1ee586e6274cfa0baa15f82b9fa0ae">&#9670;&nbsp;</a></span>get_eigenfunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HopfHandler::get_eigenfunction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>eigenfunction</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. </p>
+<p>Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a6d614b1b3809d0eb7ceb393e3ae9594f">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04822">4822</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="assembly__handler_8h_source.html#l01026">Ndof</a>, <a class="el" href="assembly__handler_8h_source.html#l01032">Phi</a>, <a class="el" href="assembly__handler_8h_source.html#l01019">Problem_pt</a>, and <a class="el" href="assembly__handler_8h_source.html#l01035">Psi</a>.</p>
+
+</div>
+</div>
+<a id="a74b0266ee15bcb294dbb946156095f8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74b0266ee15bcb294dbb946156095f8c">&#9670;&nbsp;</a></span>get_hessian_vector_products()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HopfHandler::get_hessian_vector_products </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>product</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the hessian vector product function so that it breaks. </p>
+<p>Overload the hessian vector product function so that it breaks because it should not be required </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a296bef49838d23522bb660c4c5207f03">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04799">4799</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab36c50421f53accced01dd9e04d904ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab36c50421f53accced01dd9e04d904ef">&#9670;&nbsp;</a></span>get_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HopfHandler::get_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the elemental Jacobian matrix "d equation 
+/ d variable". </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#ad43c3d8760be0ba6ebee8d82509458e5">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04566">4566</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01137">oomph::Problem::actions_after_change_in_bifurcation_parameter()</a>, <a class="el" href="assembly__handler_8h_source.html#l01039">C</a>, <a class="el" href="assembly__handler_8h_source.html#l01044">Count</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04476">eqn_number()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00320">oomph::BlackBoxFDNewtonSolver::FD_step</a>, <a class="el" href="elements_8h_source.html#l00982">oomph::GeneralisedElement::get_jacobian()</a>, <a class="el" href="elements_8h_source.html#l01008">oomph::GeneralisedElement::get_jacobian_and_mass_matrix()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04508">get_residuals()</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="assembly__handler_8h_source.html#l01026">Ndof</a>, <a class="el" href="assembly__handler_8cc_source.html#l04448">ndof()</a>, <a class="el" href="assembly__handler_8h_source.html#l01029">Omega</a>, <a class="el" href="assembly__handler_8h_source.html#l01032">Phi</a>, <a class="el" href="assembly__handler_8h_source.html#l01019">Problem_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l01035">Psi</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="assembly__handler_8h_source.html#l01016">Solve_which_system</a>.</p>
+
+</div>
+</div>
+<a id="a61a4006161da6532a9acfec0f979aafa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61a4006161da6532a9acfec0f979aafa">&#9670;&nbsp;</a></span>get_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HopfHandler::get_residuals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the residuals. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a7a6203b0ab90da62b4da2af8a26d08b3">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04508">4508</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="assembly__handler_8h_source.html#l01039">C</a>, <a class="el" href="assembly__handler_8h_source.html#l01044">Count</a>, <a class="el" href="elements_8h_source.html#l00705">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="elements_8h_source.html#l01008">oomph::GeneralisedElement::get_jacobian_and_mass_matrix()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01267">oomph::Problem::mesh_pt()</a>, <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="mesh_8h_source.html#l00583">oomph::Mesh::nelement()</a>, <a class="el" href="assembly__handler_8h_source.html#l01029">Omega</a>, <a class="el" href="assembly__handler_8h_source.html#l01032">Phi</a>, <a class="el" href="assembly__handler_8h_source.html#l01019">Problem_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l01035">Psi</a>, <a class="el" href="the__data__structure_8txt.html#a1400a973def57b85051cfe1070be1810">residuals()</a>, and <a class="el" href="assembly__handler_8h_source.html#l01016">Solve_which_system</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a8d1b73ec4e9b8b27252b4bacf2ef7f38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d1b73ec4e9b8b27252b4bacf2ef7f38">&#9670;&nbsp;</a></span>ndof()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::HopfHandler::ndof </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>elem_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the number of elemental degrees of freedom. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1AssemblyHandler.html#a09213be8f4aa009e0366460a7ed78e68">oomph::AssemblyHandler</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04448">4448</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00830">oomph::GeneralisedElement::ndof()</a>, and <a class="el" href="assembly__handler_8h_source.html#l01016">Solve_which_system</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a788a0cf74664712827f46bf26e078994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a788a0cf74664712827f46bf26e078994">&#9670;&nbsp;</a></span>omega()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double&amp; oomph::HopfHandler::omega </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the frequency of the bifurcation. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01112">1112</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">References <a class="el" href="assembly__handler_8h_source.html#l01029">Omega</a>.</p>
+
+</div>
+</div>
+<a id="ac7feecfa644ae33b4a4a9fa8d1d993af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7feecfa644ae33b4a4a9fa8d1d993af">&#9670;&nbsp;</a></span>solve_complex_system()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HopfHandler::solve_complex_system </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set to solve the complex system. </p>
+<p>Set to solve the complex (jacobian and mass matrix) system. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04860">4860</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="assembly__handler_8h_source.html#l01026">Ndof</a>, <a class="el" href="assembly__handler_8h_source.html#l01032">Phi</a>, <a class="el" href="assembly__handler_8h_source.html#l01019">Problem_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l01016">Solve_which_system</a>, and <a class="el" href="problem_8h_source.html#l00658">oomph::Problem::Sparse_assemble_with_arrays_previous_allocation</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>.</p>
+
+</div>
+</div>
+<a id="a507681043126f6bea58cc90deed16d1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a507681043126f6bea58cc90deed16d1d">&#9670;&nbsp;</a></span>solve_full_system()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HopfHandler::solve_full_system </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Solve non-block system. </p>
+<p>Set to Solve full system system. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04886">4886</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="the__data__structure_8txt_source.html#l00582">n</a>, <a class="el" href="assembly__handler_8h_source.html#l01026">Ndof</a>, <a class="el" href="assembly__handler_8h_source.html#l01029">Omega</a>, <a class="el" href="assembly__handler_8h_source.html#l01022">Parameter_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l01032">Phi</a>, <a class="el" href="assembly__handler_8h_source.html#l01019">Problem_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l01035">Psi</a>, <a class="el" href="assembly__handler_8h_source.html#l01016">Solve_which_system</a>, and <a class="el" href="problem_8h_source.html#l00658">oomph::Problem::Sparse_assemble_with_arrays_previous_allocation</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>.</p>
+
+</div>
+</div>
+<a id="acd2149152659deef1d938739222dbcf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd2149152659deef1d938739222dbcf2">&#9670;&nbsp;</a></span>solve_standard_system()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::HopfHandler::solve_standard_system </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set to solve the standard system. </p>
+<p>Set to solve the standard (underlying jacobian) system. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8cc_source.html#l04843">4843</a> of file <a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8cc_source.html#l00037">oomph::LinearAlgebraDistribution::build()</a>, <a class="el" href="problem_8h_source.html#l01224">oomph::Problem::communicator_pt()</a>, <a class="el" href="problem_8h_source.html#l00453">oomph::Problem::Dof_distribution_pt</a>, <a class="el" href="problem_8h_source.html#l00547">oomph::Problem::Dof_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l01026">Ndof</a>, <a class="el" href="assembly__handler_8h_source.html#l01019">Problem_pt</a>, <a class="el" href="assembly__handler_8h_source.html#l01016">Solve_which_system</a>, and <a class="el" href="problem_8h_source.html#l00658">oomph::Problem::Sparse_assemble_with_arrays_previous_allocation</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a199677d64d3b2f908690d10a2398b737"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a199677d64d3b2f908690d10a2398b737">&#9670;&nbsp;</a></span>BlockHopfLinearSolver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classoomph_1_1BlockHopfLinearSolver.html">BlockHopfLinearSolver</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01009">1009</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a99aabcf5ac54311f1f7acb0dbd431b84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99aabcf5ac54311f1f7acb0dbd431b84">&#9670;&nbsp;</a></span>C</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;double&gt; oomph::HopfHandler::C</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A constant vector used to ensure that the null vector is not trivial. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01039">1039</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04508">get_residuals()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04223">HopfHandler()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>.</p>
+
+</div>
+</div>
+<a id="a1b429a8220b316a487998cae04f46ec7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b429a8220b316a487998cae04f46ec7">&#9670;&nbsp;</a></span>Count</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;int&gt; oomph::HopfHandler::Count</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01044">1044</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04508">get_residuals()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l04223">HopfHandler()</a>.</p>
+
+</div>
+</div>
+<a id="ac35b7c357ab453b686e80d8efe761945"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac35b7c357ab453b686e80d8efe761945">&#9670;&nbsp;</a></span>Ndof</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::HopfHandler::Ndof</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Store the number of degrees of freedom in the non-augmented problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01026">1026</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04476">eqn_number()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04822">get_eigenfunction()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04223">HopfHandler()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04860">solve_complex_system()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04886">solve_full_system()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04843">solve_standard_system()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l04423">~HopfHandler()</a>.</p>
+
+</div>
+</div>
+<a id="a1dc27019f4889918cd01207576eabaea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dc27019f4889918cd01207576eabaea">&#9670;&nbsp;</a></span>Omega</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::HopfHandler::Omega</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The critical frequency of the bifurcation. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01029">1029</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04720">get_dresiduals_dparameter()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04508">get_residuals()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04223">HopfHandler()</a>, <a class="el" href="assembly__handler_8h_source.html#l01112">omega()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l04886">solve_full_system()</a>.</p>
+
+</div>
+</div>
+<a id="aff98f00728cd365d552229fec352f4e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff98f00728cd365d552229fec352f4e6">&#9670;&nbsp;</a></span>Parameter_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* oomph::HopfHandler::Parameter_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01022">1022</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8h_source.html#l01104">bifurcation_parameter_pt()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l04886">solve_full_system()</a>.</p>
+
+</div>
+</div>
+<a id="a117a5e192857e2f51c9c5d392fd6e5e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a117a5e192857e2f51c9c5d392fd6e5e7">&#9670;&nbsp;</a></span>Phi</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;double&gt; oomph::HopfHandler::Phi</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The real part of the null vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01032">1032</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04720">get_dresiduals_dparameter()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04822">get_eigenfunction()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04508">get_residuals()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04223">HopfHandler()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04860">solve_complex_system()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l04886">solve_full_system()</a>.</p>
+
+</div>
+</div>
+<a id="aa4464f9abb45bad3222f748703c31155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4464f9abb45bad3222f748703c31155">&#9670;&nbsp;</a></span>Problem_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Problem.html">Problem</a>* oomph::HopfHandler::Problem_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01019">1019</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04822">get_eigenfunction()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04508">get_residuals()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04223">HopfHandler()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04860">solve_complex_system()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04886">solve_full_system()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04843">solve_standard_system()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l04423">~HopfHandler()</a>.</p>
+
+</div>
+</div>
+<a id="a9f4d4f9e8962f1cd666df8de85a37d2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f4d4f9e8962f1cd666df8de85a37d2a">&#9670;&nbsp;</a></span>Psi</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;double&gt; oomph::HopfHandler::Psi</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The imaginary part of the null vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01035">1035</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04720">get_dresiduals_dparameter()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04822">get_eigenfunction()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04508">get_residuals()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04223">HopfHandler()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03469">oomph::BlockHopfLinearSolver::solve()</a>, <a class="el" href="assembly__handler_8cc_source.html#l03788">oomph::BlockHopfLinearSolver::solve_for_two_rhs()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l04886">solve_full_system()</a>.</p>
+
+</div>
+</div>
+<a id="aa3d4d806a328a460edaae915670edad3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3d4d806a328a460edaae915670edad3">&#9670;&nbsp;</a></span>Solve_which_system</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::HopfHandler::Solve_which_system</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Integer flag to indicate which system should be assembled. There are three possibilities. The full augmented system (0), the non-augmented jacobian system (1), and complex system (2), where the matrix is a combination of the jacobian and mass matrices. </p>
+
+<p class="definition">Definition at line <a class="el" href="assembly__handler_8h_source.html#l01016">1016</a> of file <a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="assembly__handler_8cc_source.html#l04720">get_dresiduals_dparameter()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04566">get_jacobian()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04508">get_residuals()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04448">ndof()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04860">solve_complex_system()</a>, <a class="el" href="assembly__handler_8cc_source.html#l04886">solve_full_system()</a>, and <a class="el" href="assembly__handler_8cc_source.html#l04843">solve_standard_system()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="assembly__handler_8h_source.html">assembly_handler.h</a></li>
+<li><a class="el" href="assembly__handler_8cc_source.html">assembly_handler.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:59:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

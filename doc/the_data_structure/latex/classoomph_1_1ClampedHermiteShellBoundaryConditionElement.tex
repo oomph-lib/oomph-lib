@@ -1,0 +1,367 @@
+\hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement}{}\doxysection{oomph\+::Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element Class Reference}
+\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement}\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+
+
+{\ttfamily \#include $<$shell\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.910448cm]{classoomph_1_1ClampedHermiteShellBoundaryConditionElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ac2c060fc25233cb0c73fdff218c25922}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a72fed47743a1a079d39307c63d06a65b}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a82fb81f4cd6214474c8966d8f3bd7d58}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} (const \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af5081c0ce57fedef78e6dc2359ea3a1d}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a965c9a87e809f21f77ea4eb635fdd996}{set\+\_\+symmetry\+\_\+line}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&normal\+\_\+to\+\_\+clamping\+\_\+plane)
+\begin{DoxyCompactList}\small\item\em Set normal vector to clamping plane. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ab50bd8d39186b633c398c508f9caf7fb}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+\begin{DoxyCompactList}\small\item\em Fill in the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae9a3033b7bcba34dafcb7154be331b7f}{shape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+\begin{DoxyCompactList}\small\item\em Calculate the geometric shape functions at local coordinate s. Set any \char`\"{}superfluous\char`\"{} shape functions to zero. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_aa7324ef347e70cfa0828fa7c82074398}{dshape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids) const
+\begin{DoxyCompactList}\small\item\em Calculate the geometric shape functions at local coordinate s. Set any \char`\"{}superfluous\char`\"{} shape functions to zero. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a1595e604991ff18f4d907da5a8fdf40b}{output}} (std\+::ostream \&outfile)
+\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a099a046661da996bac32617c0479b220}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af1b8f1785d656386e36a01336611a22d}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ade7c773aa9f4587d25945b4f4860a690}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a189db759eda561b5ae63ae9527b3ae39}{ndof\+\_\+types}} () const
+\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a7b18a5df8ade2926ccd6e7bcfa182dd9}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae374c52cd948ff9871ea64442ef8a53d}{Normal\+\_\+to\+\_\+clamping\+\_\+plane}}
+\begin{DoxyCompactList}\small\item\em Normal vector to the clamping plane. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Element that allows the imposition of boundary conditions for a shell that is clamped to a 2D plane that is specified by its normal. Constraint is applied by a Lagrange multiplier. ~\newline
+{\bfseries{Note}} {\bfseries{1}}\+: Note that the introduction of the Lagrange multiplier adds two additional values (relative to the number of values before the addition of the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}) to the nodes. This ensures that nodes that are shared by adjacent Face\+Elements are not resized repeatedly but also means that this won\textquotesingle{}t work if two \char`\"{}edges\char`\"{} of the shell (that share a node) are subject to different constraints, each applied with its own independent Lagrange multiplier. In such cases a modified version of this class must be written. ~\newline
+ {\bfseries{Note}} {\bfseries{2}}\+: The \mbox{\hyperlink{classoomph_1_1FaceGeometry}{Face\+Geometry}} for a \mbox{\hyperlink{classoomph_1_1HermiteShellElement}{Hermite\+Shell\+Element}} is the 1D two-\/node element \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+Q\+Hermite\+Element$<$1$>$}} which has four shape functions (two nodes, two types -- representing the shape functions that interpolate the value and the derivative). These are the \char`\"{}correct\char`\"{} shape functions for the interpolation of the Lagrange multiplier and the isoparametric representation of the geometry. However, when applying the contribution from the constraint equation to the bulk equations, we have to take all four types of dof into account so the element has to reset the number of positional dofs to four. To avoid any clashes we overload (the relevant subset of) the access functions to the shape functions and their derivatives and set the shape functions associated with the spurious positional dofs to zero. This is a bit hacky but the only way (?) this can be done... 
+
+Definition at line 600 of file shell\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ac2c060fc25233cb0c73fdff218c25922}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ac2c060fc25233cb0c73fdff218c25922}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!ClampedHermiteShellBoundaryConditionElement@{ClampedHermiteShellBoundaryConditionElement}}
+\index{ClampedHermiteShellBoundaryConditionElement@{ClampedHermiteShellBoundaryConditionElement}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{ClampedHermiteShellBoundaryConditionElement()}{ClampedHermiteShellBoundaryConditionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index. 
+
+Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. 
+
+Definition at line 1418 of file shell\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type(), oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type\+\_\+resize(), oomph\+::\+Face\+Element\+::face\+\_\+index(), Normal\+\_\+to\+\_\+clamping\+\_\+plane, oomph\+::\+Face\+Element\+::resize\+\_\+nodes(), and oomph\+::\+Finite\+Element\+::set\+\_\+nnodal\+\_\+position\+\_\+type().
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a72fed47743a1a079d39307c63d06a65b}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a72fed47743a1a079d39307c63d06a65b}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!ClampedHermiteShellBoundaryConditionElement@{ClampedHermiteShellBoundaryConditionElement}}
+\index{ClampedHermiteShellBoundaryConditionElement@{ClampedHermiteShellBoundaryConditionElement}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{ClampedHermiteShellBoundaryConditionElement()}{ClampedHermiteShellBoundaryConditionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken empty constructor. 
+
+
+
+Definition at line 614 of file shell\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a82fb81f4cd6214474c8966d8f3bd7d58}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a82fb81f4cd6214474c8966d8f3bd7d58}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!ClampedHermiteShellBoundaryConditionElement@{ClampedHermiteShellBoundaryConditionElement}}
+\index{ClampedHermiteShellBoundaryConditionElement@{ClampedHermiteShellBoundaryConditionElement}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{ClampedHermiteShellBoundaryConditionElement()}{ClampedHermiteShellBoundaryConditionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 623 of file shell\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_aa7324ef347e70cfa0828fa7c82074398}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_aa7324ef347e70cfa0828fa7c82074398}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!dshape\_local@{dshape\_local}}
+\index{dshape\_local@{dshape\_local}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{dshape\_local()}{dshape\_local()}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::dshape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Calculate the geometric shape functions at local coordinate s. Set any \char`\"{}superfluous\char`\"{} shape functions to zero. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c21a991ac9fedf4b0c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 675 of file shell\+\_\+elements.\+h.
+
+
+
+References i, n, oomph\+::\+Shape\+::nindex1(), oomph\+::\+D\+Shape\+::nindex1(), oomph\+::\+Shape\+::nindex2(), oomph\+::\+D\+Shape\+::nindex2(), oomph\+::\+D\+Shape\+::nindex3(), and s.
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ab50bd8d39186b633c398c508f9caf7fb}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ab50bd8d39186b633c398c508f9caf7fb}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Fill in the element\textquotesingle{}s contribution to its residual vector. 
+
+Add the element\textquotesingle{}s contribution to its residual vector. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515e8504a48179c0e72c550d7}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 1486 of file shell\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Face\+Element\+::\+Nbulk\+\_\+value, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Normal\+\_\+to\+\_\+clamping\+\_\+plane, oomph\+::\+Integral\+::nweight(), oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn(), residuals(), s, shape(), oomph\+::\+Node\+::value(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Node\+::x\+\_\+gen().
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a7b18a5df8ade2926ccd6e7bcfa182dd9}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a7b18a5df8ade2926ccd6e7bcfa182dd9}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
+\index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
+
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) This element is only in charge of the solid dofs. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 1769 of file shell\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, n, oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), and oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn().
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a189db759eda561b5ae63ae9527b3ae39}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a189db759eda561b5ae63ae9527b3ae39}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!ndof\_types@{ndof\_types}}
+\index{ndof\_types@{ndof\_types}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870597b35dcf1c780710b9a56}{oomph\+::\+Generalised\+Element}}.
+
+
+
+Definition at line 722 of file shell\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af5081c0ce57fedef78e6dc2359ea3a1d}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af5081c0ce57fedef78e6dc2359ea3a1d}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 631 of file shell\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af1b8f1785d656386e36a01336611a22d}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af1b8f1785d656386e36a01336611a22d}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!output@{output}}
+\index{output@{output}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee1a20a1ff404c6943e}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 712 of file shell\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ade7c773aa9f4587d25945b4f4860a690}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ade7c773aa9f4587d25945b4f4860a690}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!output@{output}}
+\index{output@{output}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 717 of file shell\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a1595e604991ff18f4d907da5a8fdf40b}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a1595e604991ff18f4d907da5a8fdf40b}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!output@{output}}
+\index{output@{output}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999f1bef62c0ff13f2a7}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 705 of file shell\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a099a046661da996bac32617c0479b220}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a099a046661da996bac32617c0479b220}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!output@{output}}
+\index{output@{output}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 1649 of file shell\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), e, oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Face\+Element\+::\+Nbulk\+\_\+value, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Normal\+\_\+to\+\_\+clamping\+\_\+plane, oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, s, shape(), and oomph\+::\+Node\+::value().
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a965c9a87e809f21f77ea4eb635fdd996}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a965c9a87e809f21f77ea4eb635fdd996}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!set\_symmetry\_line@{set\_symmetry\_line}}
+\index{set\_symmetry\_line@{set\_symmetry\_line}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{set\_symmetry\_line()}{set\_symmetry\_line()}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::set\+\_\+symmetry\+\_\+line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{normal\+\_\+to\+\_\+clamping\+\_\+plane }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set normal vector to clamping plane. 
+
+
+
+Definition at line 638 of file shell\+\_\+elements.\+h.
+
+
+
+References Normal\+\_\+to\+\_\+clamping\+\_\+plane.
+
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae9a3033b7bcba34dafcb7154be331b7f}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae9a3033b7bcba34dafcb7154be331b7f}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!shape@{shape}}
+\index{shape@{shape}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Calculate the geometric shape functions at local coordinate s. Set any \char`\"{}superfluous\char`\"{} shape functions to zero. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line 657 of file shell\+\_\+elements.\+h.
+
+
+
+References i, n, oomph\+::\+Shape\+::nindex1(), oomph\+::\+Shape\+::nindex2(), s, and oomph\+::\+One\+Dim\+Lagrange\+::shape().
+
+
+
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and output().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae374c52cd948ff9871ea64442ef8a53d}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae374c52cd948ff9871ea64442ef8a53d}} 
+\index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!Normal\_to\_clamping\_plane@{Normal\_to\_clamping\_plane}}
+\index{Normal\_to\_clamping\_plane@{Normal\_to\_clamping\_plane}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
+\doxysubsubsection{\texorpdfstring{Normal\_to\_clamping\_plane}{Normal\_to\_clamping\_plane}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::\+Normal\+\_\+to\+\_\+clamping\+\_\+plane\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Normal vector to the clamping plane. 
+
+
+
+Definition at line 740 of file shell\+\_\+elements.\+h.
+
+
+
+Referenced by Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), output(), and set\+\_\+symmetry\+\_\+line().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{shell__elements_8h}{shell\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{shell__elements_8cc}{shell\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

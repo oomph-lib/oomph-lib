@@ -1,0 +1,122 @@
+/**
+
+\mainpage Example problem: The spatially-adaptive solution of the azimuthally Fourier-decomposed 3D Helmholtz equation
+
+
+In this document we discuss the spatially-adaptive
+finite-element-based solution of the 3D
+Helmholtz equation in cylindrical polar coordinates, using a
+Fourier-decomposition of the solution in the azimuthal direction.
+
+The driver code is very similar to the one discussed in 
+<a href="../../sphere_scattering/html/index.html">another tutorial
+</a> -- the main purpose of the current tutorial is to demonstrate
+the use of spatial adaptivity on unstructured meshes.
+
+ 
+<HR>
+<HR>
+
+\section scattering A specific example
+We will solve the azimuthally Fourier-decomposed Helmholtz equation 
+\f[
+\nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0,
+ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\f]
+where \f$ N \f$ is the azimuthal wavenumber, 
+in the finite domain \f$ 1 < \sqrt{r^2 + z^2} < 3 \f$. 
+We impose the Sommerfeld radiation condition at the outer boundary 
+of the computational domain at \f$ \sqrt{r^2 + z^2} = 3\f$, 
+using a Dirichlet-to-Neumann mapping, and apply flux boundary condition 
+on the surface of the unit-sphere (where \f$ \sqrt{r^2 + z^2} = 1 \f$)
+such that the exact solution is given by 
+\f[
+u_N(r,z)=u_N^{[exact]}(r,z)=\sum_{l=N}^{N_{\rm terms}} 
+h_{l}^{(1)}(k\sqrt{r^2+z^2}) \ P_{l}^{N}\left(\frac{z}{\sqrt{r^2+z^2}}\right).
+\f]
+This solution corresponds to the superposition of several outgoing 
+waves that emerge from the unit sphere.
+
+The two plots below show a comparison between the exact and computed
+solutions for \f$ N_{\rm terms}=6 \f$ , a Fourier wavenumber 
+of \f$ N=1 \f$ , and a (squared) Helmholtz wavenumber of \f$ k^2 = 10 \f$.
+
+\image html re.gif "Plot of the exact (green) and computed (red) real parts of the solution of the Fourier-decomposed Helmholtz equation for N=1 and a wavenumber of k^2 = 10. " 
+\image latex re.eps "Plot of the exact (green) and computed (red) real parts of the solution of the Fourier-decomposed Helmholtz equation for N=1 and a wavenumber of k^2 = 10. " width=0.6\textwidth
+ 
+
+\image html im.gif "Plot of the exact (green) and computed (red) imaginary parts of the solution of the Fourier-decomposed Helmholtz equation for N=1 and a wavenumber of k^2 = 10. " 
+\image latex im.eps "Plot of the exact (green) and computed (red) imaginary parts of the solution of the Fourier-decomposed Helmholtz equation for N=1 and a wavenumber of k^2 = 10. " width=0.6\textwidth
+
+
+
+<HR>
+<HR>
+
+\section num_soln The numerical solution
+
+The driver code for this problem is very similar to the one discussed
+in <a href="../../sphere_scattering/html/index.html">another tutorial.
+</a>
+ 
+
+Running \c sdiff on the driver codes
+  <CENTER>
+  <A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">
+  demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc
+  </A>
+  </CENTER>
+and
+  <CENTER>
+  <A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc">
+  demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc
+  </A>
+  </CENTER>
+shows the main differences required to discretise the computational
+domain with an adaptive, unstructured mesh:
+- The provision of the functions \c actions_before/after_adapt() to 
+  detach/re-attach the \c FaceElements that are used to enforce 
+  the Neumann boundary conditions before and after every spatial
+  adaptation, and to pass the physical parameters to the newly
+  created bulk elements.
+  \n\n
+- The generation of an unstructured mesh whose curvilinear boundaries are
+  represented by \c GeomObjects -- this ensures that the domain boundaries
+  become increasingly well resolved under mesh refinement.
+.
+That's all!
+
+<HR>
+<HR> 
+
+\section code Code listing
+Here's a listing of the complete driver code:
+
+\include unstructured_sphere_scattering.cc
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering">
+  demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/
+  </A>
+  </CENTER>\n
+- The driver code is: \n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc">
+  demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc
+  </A>
+  </CENTER>
+.
+
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+**/
+

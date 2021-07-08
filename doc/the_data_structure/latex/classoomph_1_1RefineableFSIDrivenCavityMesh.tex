@@ -1,0 +1,80 @@
+\hypertarget{classoomph_1_1RefineableFSIDrivenCavityMesh}{}\doxysection{oomph\+::Refineable\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1RefineableFSIDrivenCavityMesh}\index{oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.404255cm]{classoomph_1_1RefineableFSIDrivenCavityMesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableFSIDrivenCavityMesh_a91c0ab00784098cb0e583ab0882b0e0e}{Refineable\+F\+S\+I\+Driven\+Cavity\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a4ff7678ec433180e2245ea2147f222b7}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a45011f22dedd480392b1f376e4269921}{ny}}, const double \&lx, const double \&ly, const double \&gap\+\_\+fraction, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$wall\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, lengths, pointer to geometric object that describes the wall and timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableFSIDrivenCavityMesh_a01e9f73b3d9344b6df2aeda2c57de628}{$\sim$\+Refineable\+F\+S\+I\+Driven\+Cavity\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor(empty) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Refineable\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Refineable version of \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh}{F\+S\+I\+Driven\+Cavity\+Mesh}}. The mesh is derived from the {\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Simple\+Rectangular\+Quad\+Mesh}}} so it\textquotesingle{}s node and element numbering scheme is the same as in that mesh. Only the boundaries are numbered differently to allow the easy identification of the \char`\"{}collapsible\char`\"{} segment. Boundary coordinates are set up for all nodes located on boundary 3 (the collapsible segment). The curvilinear (\char`\"{}collapsible\char`\"{}) segment is defined by a {\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}}.
+\begin{DoxyItemize}
+\item Boundary 0 is the moving lid.
+\item Boundary 1 is the gap above the moving lid on the right wall
+\item Boundary 2 is the rigid part of the right wall
+\item Boundary 3 is the moving (elastic) wall
+\item Boundary 4 is the rigid part of the left wall
+\item Boundary 5 is the gap above the moving lid on the left wall 
+\end{DoxyItemize}
+
+Definition at line 128 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1RefineableFSIDrivenCavityMesh_a91c0ab00784098cb0e583ab0882b0e0e}\label{classoomph_1_1RefineableFSIDrivenCavityMesh_a91c0ab00784098cb0e583ab0882b0e0e}} 
+\index{oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$}!RefineableFSIDrivenCavityMesh@{RefineableFSIDrivenCavityMesh}}
+\index{RefineableFSIDrivenCavityMesh@{RefineableFSIDrivenCavityMesh}!oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableFSIDrivenCavityMesh()}{RefineableFSIDrivenCavityMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableFSIDrivenCavityMesh}{oomph\+::\+Refineable\+F\+S\+I\+Driven\+Cavity\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableFSIDrivenCavityMesh}{Refineable\+F\+S\+I\+Driven\+Cavity\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{ly,  }\item[{const double \&}]{gap\+\_\+fraction,  }\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements, lengths, pointer to geometric object that describes the wall and timestepper. 
+
+
+
+Definition at line 137 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+
+
+
+References oomph\+::\+Refineable\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+quadtree\+\_\+forest().
+
+\mbox{\Hypertarget{classoomph_1_1RefineableFSIDrivenCavityMesh_a01e9f73b3d9344b6df2aeda2c57de628}\label{classoomph_1_1RefineableFSIDrivenCavityMesh_a01e9f73b3d9344b6df2aeda2c57de628}} 
+\index{oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$}!````~RefineableFSIDrivenCavityMesh@{$\sim$RefineableFSIDrivenCavityMesh}}
+\index{````~RefineableFSIDrivenCavityMesh@{$\sim$RefineableFSIDrivenCavityMesh}!oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$RefineableFSIDrivenCavityMesh()}{~RefineableFSIDrivenCavityMesh()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableFSIDrivenCavityMesh}{oomph\+::\+Refineable\+F\+S\+I\+Driven\+Cavity\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableFSIDrivenCavityMesh}{Refineable\+F\+S\+I\+Driven\+Cavity\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor(empty) 
+
+
+
+Definition at line 154 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h}}\end{DoxyCompactItemize}

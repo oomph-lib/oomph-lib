@@ -1,0 +1,679 @@
+\mainpage Time-harmonic acoustic fluid-structure interaction problems
+
+
+In this document we discuss the solution of 
+time-harmonic acoustic fluid-structure interaction problems.
+ We start by reviewing the relevant theory and then 
+present the solution of a simple model problem -- the sound radiation
+from an oscillating circular cylinder that is coated with a compressible
+elastic layer.
+
+This problem combines the problems discussed in the tutorials 
+illustrating
+- <a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">the solution of the time-harmonic equations of linear elasticity</a>
+.
+and
+- <a href="../../../helmholtz/scattering/html/index.html">the Helmholtz
+equation.</a>
+.
+<HR>
+<HR>
+ 
+\section theory Theory: Time-harmonic acoustic fluid-structure interaction problems
+
+The figure below shows a sketch of a representative model problem:
+a circular cylinder is immersed in an inviscid compressible fluid and
+performs a prescribed two-dimensional harmonic oscillation of radian
+frequency \f$\omega\f$. The cylinder is coated with a compressible elastic 
+layer. We wish to compute the displacement field in the elastic coating
+(assumed to be described by the <a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">equations of
+time-harmonic linear elasticity</a>) and the pressure distribution
+in the fluid (governed by 
+<a href="../../../helmholtz/scattering/html/index.html">the Helmholtz
+equation</a>). The two sets of equations interact at the interface
+between fluid and solid: the fluid pressure exerts a traction
+onto the elastic layer, while the motion of the elastic layer
+drives the fluid motion via the non-penetration condition.
+
+@I w 0.6\textwidth coated_pipe "Sketch of the model problem: Forced oscillations of a circular cylinder (black) deform an elastic coating layer (pink) which is surrounded by a compressible fluid. "
+
+\subsection fluid The fluid model: the Helmholtz equation
+We describe the behaviour of the fluid in terms of the displacement
+field, \f$ d_i^*(x_j^*,t^*)\f$, of the fluid particles. As usual
+we employ index notation and the summation convention, 
+and use asterisks to distinguish dimensional quantities from 
+their non-dimensional equivalents. The fluid is inviscid
+and compressible, with a bulk modulus \f$ B \f$, such 
+that the acoustic pressure is given by 
+\f$ P^* = - B \ \partial d_j^*/\partial x_j^* \f$ 
+We assume that the fluid motion is irrotational and can be described by a
+displacement potential \f$\Phi^*\f$, such that \f$ d^*_j = \partial
+\Phi^*/\partial x_j^*. \f$  We consider steady-state time-harmonic 
+oscillations and write the displacement potential and the pressure 
+as \f$\Phi^*(x_j^*,t^*) =
+\mbox{Re} \{\phi^*(x_j^*) \exp(-{\rm i} \omega t^*)\} \f$ and
+\f$P^*(x_j^*,t^*) = \mbox{Re}\{p^*(x_j^*) \exp(-{\rm i} \omega
+t^*)\}\f$, respectively,
+where \f$\mbox{Re}\{\ldots \}\f$ denotes the real part.
+For small disturbances, the linearised Euler equation reveals that the 
+time-harmonic pressure is related to the displacement potential
+via \f$ p^* = \rho_{\rm f} \omega^2 \phi^*\f$ where
+\f$ \rho_{\rm f} \f$ is the ambient fluid density. 
+We non-dimensionalise all lengths
+on a problem-specific lengthscale \f$ {\cal L}\f$ (e.g. the 
+outer radius of the coating layer) such that
+\f$x_j^* = {\cal L} x_j,\ d_j^* = {\cal L} d_j\f$ and \f$\phi^*
+= {\cal L}^2 \phi\f$. The non-dimensional displacement potential \f$\phi\f$
+is then governed by the Helmholtz equation
+\f[
+\frac{\partial^2 \phi}{\partial x_j^{2}} + k^2 \phi = 0,
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[fluid_pde]@
+\f]
+where the square of the non-dimensional wavenumber,
+\f[
+k^2 = \frac{\rho_f (\omega {\cal L})^2}{B},
+\f]
+represents the ratio of the typical
+inertial fluid pressure induced by the wall oscillation to the
+`stiffness' of the fluid.
+
+\subsection elastic The solid model: the time harmonic equations of linear elasticity
+We model the coating layer as a linearly elastic solid, described
+in terms of a displacement field \f$U^*_i(x_j^*,t^*)\f$, with stress tensor
+\f[
+\tau_{ij}^* = E \left[ \frac{\nu}{(1+\nu)(1-2\nu)} \, \frac{\partial
+    U_k^*}{\partial x_k^*} \, \delta_{ij}
++\frac{1}{2(1+\nu)}\left(
+\frac{\partial U_i^*}{\partial x_j^*}+
+\frac{\partial U_j^*}{\partial x_i^*}
+\right) \right],
+\f]
+where \f$E\f$ and \f$\nu\f$ are the material's Young's modulus and Poisson's
+ratio, respectively.
+As before, we assume a time-harmonic solution with frequency
+\f$\omega\f$ so that
+\f$U_i^*(x_j^*,t^*) = {\rm Re} \{ u_i^*(x_j^*) \exp(-{\rm i}\omega
+t^*)\}\f$,
+and we non-dimensionalise the displacements on \f${\cal L}\f$ and the
+stress on Young's modulus, \f$E\f$, so that \f$u_j^* = {\cal L} u_j\f$ and
+\f$\tau_{ij}^* = E \tau_{ij}\f$. The deformation of the elastic coating
+is then governed by the time-harmonic Navier-Lame equations
+\f[
+\frac{\partial \tau_{ij}}{\partial x_j} + \Omega^2 u_i = 0,
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[solid_pde]@
+\f]
+which depend (implicitly) on Poisson's ratio \f$\nu\f$, and on
+the (square of the) non-dimensional wavenumber 
+\f[
+\Omega^2 = \frac{\rho_{\rm s} (\omega {\cal L})^2}{E},
+\f]
+where \f$ \rho_{\rm s} \f$ is the solid density.
+The parameter \f$ \Omega^2 \f$ represents the ratio of the typical
+inertial solid pressure induced by the wall oscillation to the
+stiffness of the elastic coating. We note that for a `light'
+coating we have  \f$\Omega \ll 1\f$.
+
+ 
+\subsection bc Boundary conditions
+The inner surface of the elastic coating, \f$ \partial D_{\rm s} \f$, 
+is subject to the prescribed
+displacement imposed by the oscillating cylinder. For instance, if the inner
+cylinder performs axisymmetric oscillations of non-dimensional
+amplitude \f$ \epsilon\f$, we have
+\f[
+\mbox{\bf u} = \epsilon \, \mbox{\bf e}_r 
+\mbox{\ \ \ \ \ on $\partial D_{\rm s}$},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[displ_bc]@
+\f]
+where \f$ \mbox{\bf e}_r \f$ is the unit vector in the radial direction.
+The fluid-loaded surface of the elastic coating, \f$ \partial D_{\rm
+f} \f$,
+is subject to the
+fluid pressure. The non-dimensional traction exerted by the
+fluid onto the solid (on the solid stress scale) is therefore given by
+\f[
+t_i^{\rm [solid]} = \tau_{ij}^{\rm [solid]} n_j = - \phi \  Q \ n_i
+\mbox{\ \ \ \ \ on $\partial D_{\rm f}$},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[fsi_for_solid]@
+\f]
+where the \f$n_i\f$ are the components of the outer unit normal on the solid
+boundary \f$\partial D_{\rm f}\f$ and
+\f[
+Q=\frac{\rho_{\rm f}({\cal L}\omega)^2}{E}
+\f]
+is the final non-dimensional parameter in the problem. It represents the
+ratio of the typical inertial fluid pressure induced by the wall
+oscillation to the stiffness of the elastic coating. The parameter \f$Q\f$
+therefore provides a measure of the strength of the fluid-structure 
+interaction (FSI) in the sense that for \f$Q \to 0\f$ 
+the elastic coating does not `feel' the presence of the fluid.
+
+The fluid is forced by the normal displacement of the solid. Imposing
+the non-penetration condition \f$(d_j - u_j) n_j = 0\f$ on \f$\partial
+D_{\rm f}\f$ yields a Neumann condition for the displacement
+potential,
+\f[
+\frac{\partial \phi}{\partial n} = u_j n_j
+\mbox{\ \ \ \ \ on $\partial D_{\rm f}$}.
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[fsi_for_fluid]@
+\f]
+Finally, the displacement potential for the fluid must satisfy the
+Sommerfeld radiation condition
+\f[
+\lim_{r \to \infty} \sqrt{r}\left( \frac{\partial \phi}{\partial r} -
+    {\rm i} k \phi \right) = 0
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[sommerfeld]@
+\f]
+which ensures that the oscillating cylinder does not generate any incoming
+waves.
+
+<HR>
+<HR>
+
+\section impl Implementation
+The implementation of the coupled problem follows the usual procedure 
+for multi-domain problems in \c oomph-lib. We discretise the
+constituent single-physics problems using the existing single-physics
+elements, here \c oomph-lib's
+- <a href="../../../helmholtz/scattering/html/index.html">Helmholtz
+elements</a>
+.
+and 
+- <a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">
+  time-harmonic linear elasticity elements</a>
+.
+for the discretisation of the PDEs (@R[fluid_pde]@) and 
+(@R[solid_pde]@), respectively.
+The displacement boundary condition (@R[displ_bc]@) on the inner surface
+of the elastic coating is imposed as usual by pinning
+the relevant degrees of freedom, exactly as in a <a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">single-physics
+solid mechanics problem</a>. Similarly, the 
+Sommerfeld radiation condition (@R[sommerfeld]@) on the outer boundary
+of the fluid domain can be imposed by any of the methods
+available for the solution of the single-physics
+Helmholtz equation, such as 
+<a href="../../../helmholtz/scattering/html/index.html#ABCs">
+ approximate/absorbing boundary conditions (ABCs)</a>
+or a <a href="../../../helmholtz/scattering/html/index.html#DtN">
+Dirichlet-to-Neumann mapping.</a>
+
+The boundary conditions (@R[fsi_for_solid]@) and 
+(@R[fsi_for_fluid]@) at the fluid-solid interface are 
+traction boundary conditions for the solid, and Neumann boundary
+conditions for the Helmholtz equation, respectively. In a single-physics problem
+we would impose such boundary conditions by attaching suitable \c FaceElements
+to the appropriate boundaries of the "bulk" elements, as shown in the
+sketch below: \c TimeHarmonicLinearElasticityTractionElements could be used to
+impose a (given) traction, \f$ {\bf t}_0\f$, onto the solid;
+\c HelmholtzFluxElements could be used to impose a (given) normal derivative,
+\f$ f_0\f$, on the displacement potential. Both \f$ {\bf t}_0\f$
+and \f$ f_0 \f$ would usually be specified in a user-defined namespace
+and accessed via function pointers as indicated in the right half of
+the sketch.
+
+@I w 0.6\textwidth single_physics "Sketch illustrating the imposition of flux and traction boundary conditions in single-physics problems. The continuous problems are shown on the left; the discretised ones on the right. "
+
+
+In the coupled problem, illustrated in the left half of the 
+next sketch, the traction acting on the solid becomes a function 
+of the displacement potential via the boundary condition 
+(@R[fsi_for_solid]@), while the normal derivative of the
+displacement potential is given in terms of the solid displacement via 
+equation (@R[fsi_for_fluid]@). Note that corresponding points on the
+FSI boundary \f$ \partial D_{\rm f}\f$ are 
+identified by matching values of the boundary
+coordinate \f$ \zeta \f$ which is assumed to be consistent between
+the two domains. 
+ 
+The implementation of this interaction in the discretised problem 
+is illustrated in the right half of the sketch: We replace the single-physics 
+\c HelmholtzFluxElements by \c HelmholtzFluxFromNormalDisplacementBCElements,
+and the \c TimeHarmonicLinearElasticityTractionElements by
+\c TimeHarmonicLinElastLoadedByHelmholtzPressureBCElements.
+(Yes, we like to be verbose...).
+Both of these \c FaceElements are derived from the \c ElementWithExternalElement
+base class and can therefore store a pointer to an "external"
+element that provides the information required to impose the
+appropriate boundary condition. Thus, the \c
+HelmholtzFluxFromNormalDisplacementBCElements store pointers to 
+the "adjacent" time-harmonic linear elasticity elements (from which
+they obtain the boundary displacement required for the imposition of
+(@R[fsi_for_fluid]@)),
+while the \c TimeHarmonicLinElastLoadedByHelmholtzPressureBCElements
+store pointers to the "adjacent" Helmholtz elements that provide the
+value of the displacement potential required for the evaluation of
+(@R[fsi_for_solid]@).
+
+
+@I w 0.6\textwidth multi_physics "Sketch illustrating the imposition of flux and traction boundary conditions in the coupled multi-physics problem.  The continuous problems are shown on the left; the discretised ones on the right. "
+
+The identification of the "adjacent" bulk elements can be performed using the 
+\c Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)
+helper function. We note that, as suggested by the sketch above,
+this  function does not require to the two adjacent meshes
+to have a consistent discretisation -- the identification of
+adjacent elements is based entirely on the (assumed to be
+consistent) boundary coordinate \f$ \zeta \f$ in the two meshes.
+We refer to 
+<A HREF="../../../poisson/fish_poisson2/html/index.html#boundary_coords"> 
+another tutorial</a> for a discussion of how to set up (or change)
+the parametrisation of mesh boundaries by boundary coordinates.
+
+<HR>
+<HR>
+ 
+\section results Results
+
+The animation below shows the deformation of the elastic
+coating if a non-axisymmetric displacement 
+\f[
+\mbox{\bf u} = \epsilon \, \mbox{\bf e}_r \cos (N\varphi)
+\mbox{\ \ \ \ \ on $\partial D_{\rm s}$},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[displ_bc2]@
+\f]
+(for \f$ N=3 \f$) is imposed on the inner boundary of the 
+coating \f$\partial D_{\rm s}\f$.
+
+@I w 0.6\textwidth anim "Animation showing the time-harmonic oscillation of the elastic coating. (The pink region in the background shows the undeformed configuration.) "
+
+Here is a plot of the corresponding pressure field:
+
+@I w 0.6\textwidth potential "Plot of the displacement potential (a measure of the fluid pressure). The elevation in the carpet plot indicates the real part; the colour contours represent the imaginary part. "
+
+
+Finally, we provide some validation of the computational results by
+comparing the non-dimensional time-average radiated power
+\f[
+\overline{\cal P}  = 
+\frac{1}{2}
+\oint\bigg[Im\bigg(\frac{\partial \phi}{\partial n}\bigg) \ Re(\phi) -
+           Re\bigg(\frac{\partial \phi}{\partial n}\bigg) \ Im(\phi)
+           \bigg]
+ \ dS
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[power]@
+\f]
+against the analytical solution for axisymmetric forcing (\f$ N=0
+\f$) for the parameter values \f$ k^2 = 10 \f$, \f$ \Omega^2 = 0 \f$, 
+\f$ \nu =0.3 \f$ and a non-dimensional coating thickness of 
+\f$ h = 0.2; \f$ see <A HREF="http://dx.doi.org/10.1016/j.jsv.2012.05.029">
+Heil, M., Kharrat, T., Cotterill, P.A. & 
+Abrahams, I.D. (2012) Quasi-resonances in sound-insulating coatings.
+<EM>Journal of Sound and Vibration</EM>
+<b>331</B> 4774-4784</a> for details.
+In the computations the integral in (@R[power]@) is evaluated 
+along the outer boundary of the computational domain. 
+
+
+@I w 0.6\textwidth trace "Radiated power as function of the FSI parameter Q for an axisymmetrically oscillating coating. Markers: computed results; continuous line: analytical result.  "
+
+
+<HR>
+<HR>
+
+\section num_soln The numerical solution
+
+\subsection namespace The global namespace
+
+As usual we define the problem parameters in a namespace.
+\dontinclude acoustic_fsi.cc
+\skipline start_namespace
+\until TimeHarmonicIsotropicElasticityTensor
+
+We wish to perform parameter studies in which we vary the FSI parameter
+\f$ Q \f$. To make this physically meaningful, we interpret 
+\f$ Q =(\rho_{\rm f}({\cal L}\omega)^2)/E \f$ 
+as a measure of the stiffness of the elastic coating
+(so that an increase in \f$ Q \f$ corresponds to a reduction in the
+layer's elastic modulus \f$ E \f$). In that case, the frequency
+parameter \f$ \Omega^2 = (\rho_{\rm s} (\omega {\cal L})^2)/E \f$ 
+in the time-harmonic linear elasticity
+equations becomes a dependent parameter and is given
+in terms of the density ratio \f$ \rho_{\rm solid}/\rho_{\rm fluid}
+\f$ and \f$ Q \f$ by \f$ \Omega^2 = (\rho_{\rm solid}/\rho_{\rm fluid}) Q\f$.
+We therefore provide a helper function to update the dependent parameter
+following any change in the independent parameters.
+
+\until }
+
+We force the system by imposing a prescribed displacement
+on the inner surface of the elastic coating and allow this to vary
+in the azimuthal direction with wavenumber \f$ N \f$:
+
+\until } 
+
+The rest of the namespace contains lengthy expressions for
+various exact solutions and is omitted here.
+
+
+<HR>
+<HR>
+
+\subsection main The driver code
+The driver code is very straightforward. We parse the command line
+to determine the parameters for the parameter study and build
+the problem object, using refineable nine-noded quadrilateral elements for
+the solution of the time-harmonic elasticity and Helmholtz
+equations. 
+
+\dontinclude acoustic_fsi.cc
+\skipline start_of_main
+\until > problem
+
+We then solve the problem for various values of \f$ Q \f$, updating
+the dependent variables after every increment.
+
+\until } //end of main
+
+ 
+<HR>
+<HR>
+
+\subsection class The problem class
+
+The \c Problem class is templated by the types of the
+"bulk" elements used to discretise the time-harmonic linear elasticity
+and Helmholtz equations, respectively. It contains the 
+usual member functions
+to detach and attach \c FaceElements from the bulk meshes
+before and after any mesh adaptation, respectively. 
+\dontinclude acoustic_fsi.cc
+\skipline begin_problem
+\until create_helmholtz_DtN_elements()
+
+The private member data includes storage for the various meshes
+and objects that are used for outputting the results.
+
+\until }; 
+
+
+<HR>
+<HR>
+
+\subsection constr The problem constructor
+We start by building the meshes for the elasticity and Helmholtz
+equations. Both domains are complete annular regions, so the
+annular mesh (which is built from a rectangular quad mesh) is
+periodic. 
+
+\dontinclude acoustic_fsi.cc
+\skipline start_of_constructor
+\until azimuthal_fraction
+
+The solid mesh occupies the region between \f$ r = 1-h \f$ and \f$ r=1
+\f$ where \f$ h \f$ is the thickness of the elastic coating:
+
+\until H_coating);
+
+
+The Helmholtz mesh occupies the region between \f$ r = 1 \f$ and \f$
+r=R_{\rm outer} \f$ where \f$ R_{\rm outer}\f$ is the outer radius of 
+the computational domain where we will apply the Sommerfeld radiation 
+condition. Note that the two meshes are not matching -- both meshes
+have 3 element layers in the radial direction but 10 and 11
+in the azimuthal direction, respectively. This is done mainly 
+to illustrate our claim that the multi-domain setup functions
+can operate with non-matching meshes.
+
+\until h_thick_helmholtz);
+
+Both bulk meshes are adaptive so we create error estimators for them:
+
+\until Helmholtz_mesh_pt->spatial_error_estimator_pt()
+
+Next we create the mesh that will store the \c FaceElements that
+will apply the Sommerfeld radiation condition, using the specified
+number of Fourier terms in the Dirichlet-to-Neumann mapping;
+see the <a href="../../../helmholtz/scattering/html/index.html#DtN">Helmholtz
+tutorial</a> for details.
+
+\until nfourier);
+
+Next we pass the problem parameters to the bulk elements. The
+elasticity elements require a pointer to the elasticity tensor
+and the frequency parameter \f$ \Omega^2 \f$:
+
+\until }
+
+The Helmholtz elements need a pointer to the (square of the)
+wavenumber, \f$ k^2 \f$:
+
+\until }
+
+It is always a good idea to check the enumeration of the mesh
+boundaries to facilitate the application of boundary conditions:
+
+\until helmholtz_mesh_boundary.dat
+
+Next we create the meshes containing the various \c FaceElements
+used to apply to the FSI traction boundary condition
+(@R[fsi_for_solid]@), the FSI flux boundary condition (@R[fsi_for_fluid]@)
+for the Helmholtz equation, and the Sommerfeld radiation condition 
+(@R[sommerfeld]@), respectively, using helper functions discussed
+below.
+
+\until create_helmholtz_DtN_elements
+
+
+We add the various sub-meshes to the problem and build the global mesh
+
+\until build_global_mesh();
+
+The solid displacements are prescribed on the inner boundary
+(boundary 0) of the solid mesh so we pin all four values 
+(representing the real and imaginary parts of the displacements
+in the \f$ x_1- \f$ and \f$ x_2-\f$ directions, respectively)
+and assign the boundary values using the function \c
+Global_Parameters::solid_boundary_displacement(...).
+(The enumeration of the unknowns is discussed in 
+<a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html#element_types">another tutorial</a>.)
+
+\until }
+
+Finally, we set up the fluid-structure interaction, assign the
+equation numbers, define the output directory and open a trace
+file to record the radiated power as a function of the FSI
+parameter \f$ Q \f$.
+
+\until end of constructor
+
+
+<HR>
+<HR>
+
+\subsection before_adapt Actions before adapt
+The mesh adaptation is driven by the error estimates for the bulk
+elements. The various \c FaceElements must therefore be removed from
+the global mesh before the adaptation takes place. We do this by 
+calling the helper function \c delete_face_elements(...) (discussed
+below) for the three face meshes, before rebuilding the Problem's global mesh.
+
+\dontinclude acoustic_fsi.cc
+\skipline start_of_actions_before_adapt
+\until }// end of actions_before_adapt
+
+
+<HR>
+<HR>
+
+\subsection after_adapt Actions after adapt
+After the (bulk-)mesh has been adapted, the various \c FaceElements must 
+be re-attached. We then (re-)setup the fluid-structure interaction
+and rebuild the global mesh.
+
+\dontinclude acoustic_fsi.cc
+\skipline start_of_actions_after_adapt
+\until }// end of actions_after_adapt
+
+
+<HR>
+<HR>
+
+\subsection delete Delete face elements
+The helper function \c delete_face_elements() is used
+to delete all \c FaceElements in a given surface mesh
+before the mesh adaptation.
+
+\dontinclude acoustic_fsi.cc
+\skipline start_of_delete
+\until } // end of delete_face_elements
+
+<HR>
+<HR>
+
+
+\subsection create_flux Creating the FSI traction elements (and the FSI flux and DtN elements) 
+The function \c create_fsi_traction_elements() creates the \c FaceElements
+required to apply the FSI traction boundary condition
+(@R[fsi_for_solid]@) on the outer boundary (boundary 2) of the solid
+mesh:
+
+\dontinclude acoustic_fsi.cc
+\skipline start_of_create_fsi_traction_elements
+\until add_element_pt
+
+To function properly, the elements need to know the number of the
+bulk mesh boundary they are attached to (this allows them to
+determine the boundary coordinate \f$ \zeta \f$ required to
+set up the fluid-structure interaction; see \ref impl ), and
+the FSI parameter \f$ Q \f$.
+
+\until } // end of create_traction_elements
+
+
+[\b Note: We omit the listings of the functions
+\c create_helmholtz_fsi_flux_elements() and 
+\c create_helmholtz_DtN_elements()
+which create the \c FaceElements
+required to apply the FSI flux boundary condition
+(@R[fsi_for_fluid]@) on the inner boundary (boundary 0),
+and the Sommerfeld radiation condition (@R[sommerfeld]@) 
+on the outer boundary (boundary 2) of the Helmholtz mesh because 
+they are very similar.  Feel free to inspect the  
+<A HREF="../../../../demo_drivers/interaction/acoustic_fsi/acoustic_fsi.cc">
+source code.</A>]
+
+
+<HR>
+<HR>
+
+\subsection fsi Setting up the fluid-structure interaction
+The setup of the fluid-structure interaction requires 
+the identification of the "bulk" Helmholtz elements that are 
+adjacent to (the Gauss points of) the \c FaceElements 
+that impose the FSI traction boundary condition (@R[fsi_for_solid]@),
+in terms of the displacement potential \f$ \phi \f$ computed by these
+"bulk" elements. This can be done using the helper function
+\c Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)
+which is templated by the type of the "bulk" element and its spatial
+dimension, and takes as arguments:
+- a pointer to the \c Problem, 
+- the boundary ID of the FSI boundary in the "bulk" mesh, 
+- a pointer to that mesh,
+- a pointer to the mesh of \c FaceElements.
+.
+Nearly a one-liner:
+
+\skipline start_of_setup_interaction
+\until FSI_traction_mesh_pt);
+
+Exactly the same method can be used for the identification 
+of the "bulk" elasticity elements that are 
+adjacent to (the Gauss points of) the \c FaceElements 
+that impose the FSI flux boundary condition (@R[fsi_for_fluid]@),
+using the displacement \f$ {\bf u} \f$ computed by these
+"bulk" elements:
+
+\until }
+
+<HR>
+<HR>
+
+\subsection doc Post-processing
+The post-processing function \c doc_solution(...) computes and outputs 
+the total radiated power, and plots the computed and exact solutions
+(real and imaginary parts) for all fields.
+
+\dontinclude acoustic_fsi.cc
+\skipline start_doc
+\until end doc
+
+<HR>
+<HR>
+
+\section comm_ex Comments and Exercises
+\subsection comm Comments
+
+- This tutorial emerged from an actual research project 
+  in which we investigated how efficiently the acoustic power radiated
+  from an oscillating cylinder is reduced when the cylinder
+  is coated with an elastic layer, exactly as in the model problem
+  considered here. The paper then went on to investigate the
+  effect of gaps in the coating and discovered some (rather nice)
+  quasi-resonances -- values of the FSI parameter \f$ Q \f$ at which
+  the radiated acoustic power increases significantly. Read all
+  about it in this paper:
+  \n\n
+  - Heil, M., Kharrat, T., Cotterill, P.A. & Abrahams, I.D. (2012) 
+    Quasi-resonances in sound-insulating coatings.
+    <EM>Journal of Sound and Vibration</EM>
+    <b>331</B> 4774-4784. DOI: 
+    <A HREF="http://dx.doi.org/10.1016/j.jsv.2012.05.029">
+    10.1016/j.sv.2012.05.029</a>
+  .
+.
+
+ 
+<HR>
+
+\subsection ex Exercises
+- Equation (@R[power]@) for the time-averaged radiated power 
+  shows that \f$ \overline{\cal P}\f$ depends 
+  on the derivatives of the displacement potential \f$ \phi \f$. This
+  implies that the value for \f$ \overline{\cal P}\f$ computed from the
+  finite-element solution for \f$ \phi \f$ is not
+  as accurate as the displacement potential itself. Computing
+  \f$ \overline{\cal P}\f$ to a certain tolerance (e.g. to 
+  "graphical accuracy" as in the plot shown above) therefore tends to
+  require meshes that are much finer than would be required
+  if we were only interested in \f$ \phi \f$ itself.
+  \n\n
+  Investigate the accuracy of the computational predictions for \f$
+  \overline{\cal P}\f$ by:
+  \n\n
+  - increasing the spatial resolution e.g. by using
+    the command line flag \c --el_multiplier (which controls the number
+    of elements in the mesh) and suppressing any automatic (un)refinement
+    by setting the maximum number of adaptations to zero
+    using the \c --max_adapt command line flag.
+    \n\n
+  - reducing the outer radius of the computational domain, using
+    the command line flag \c --outer_radius, say.
+    \n\n
+  - varying the element type, from the bi-linear 
+    \c RefineableQHelmholtzElement<2,2>
+    to the bi-cubic \c RefineableQHelmholtzElement<2,4>, say.
+  .
+  \n\n
+ Which of these approaches gives you the "most accuracy" for a given number of
+ degrees of freedom?
+.
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/interaction/acoustic_fsi">
+  demo_drivers/interaction/acoustic_fsi/
+  </A>
+  </CENTER>\n
+- The driver code is: \n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/interaction/acoustic_fsi/acoustic_fsi.cc">
+  demo_drivers/interaction/acoustic_fsi/acoustic_fsi.cc
+  </A>
+  </CENTER>
+.
+

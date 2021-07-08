@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Finite-Reynolds-number flow inside an oscillating ellipse</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Example problem: Finite-Reynolds-number flow inside an oscillating ellipse </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we consider our first moving-boundary Navier-Stokes problem: The flow of a viscous fluid contained in an elliptical ring whose walls perform periodic oscillations. <br  />
+</p>
+<p><code>oomph-lib's</code> Navier-Stokes elements are based on the Arbitrary Lagrangian Eulerian (ALE) form of the Navier-Stokes equations and can therefore be used in moving domain problems. In this example we illustrate their use in <code>Domain</code> - based meshes (first discussed in the example demonstrating the solution of the <a href="../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html">unsteady heat equation in a moving domain</a>) in which <code>MacroElements</code> are used to update the nodal positions in response to changes in the domain boundary. In subsequent examples, we will discuss alternative, sparse mesh update techniques that are useful in problems with free boundaries and in fluid-structure interaction problems.</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>Finite-Reynolds-number-flow driven by an oscillating ellipse</b> </center><p class="intertd">We consider the unsteady 2D flow of a Newtonian fluid that is contained in an oscillating elliptical ring whose wall shape is parametrised by the Lagrangian coordinate <img class="formulaInl" alt="$ \xi $" src="form_0.png"/> as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf R}_w(\xi) = \left( \begin{array}{l} a(t) \cos(\xi) \\ a^{-1}(t) \sin(\xi) \end{array} \right) \]" src="form_1.png"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ a(t) = A + \widehat{A} \cos\left(\frac{2\pi t}{T}\right). \]" src="form_2.png"/>
+</p>
+<p> <img class="formulaInl" alt="$ A $" src="form_3.png"/> represents the average half-axis of the elliptical ring in the <img class="formulaInl" alt="$ x_1 $" src="form_4.png"/>-direction, and <img class="formulaInl" alt="$ \widehat{A} $" src="form_5.png"/> is the amplitude of its periodic variation. The ring has constant cross-sectional area &ndash; consistent with the incompressibility of the fluid whose motion is governed by the ALE form of the Navier-Stokes equations, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ Re\left(St\frac{\partial u_i}{\partial t} + \left(u_j-u_j^M\right)\frac{\partial u_i}{\partial x_j}\right) = - \frac{\partial p}{\partial x_i} + \frac{\partial }{\partial x_j} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right), \ \ \ \ \ \ \ \ \ \ (1) \]" src="form_6.png"/>
+</p>
+<p> and the continuity equation </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u_i}{\partial x_i} = 0, \]" src="form_7.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ u_j^M $" src="form_8.png"/> is the mesh velocity. We exploit the symmetry of the problem and solve the equations in the quarter domain </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ D = \left\{(x_1,x_2) \, \bigg| \, x_1\geq0, \, x_2\geq0,\, \left(\frac{x_1}{a(t)}\right)^2 + \big(x_2 \, a(t)\big)^2 \leq 1\right\}, \]" src="form_9.png"/>
+</p>
+<p> shown in this sketch (for <img class="formulaInl" alt="$ A=1, \ \widehat{A}=1 $" src="form_10.png"/> and <img class="formulaInl" alt="$T=1$" src="form_11.png"/>), </p><div class="image">
+<img src="wall.gif" alt=""/>
+<div class="caption">
+Sketch of the computational domain. </div></div>
+ <p class="endtd">The fluid is subject to no-slip boundary conditions on the curved wall, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left. {\bf u} \right|_{\partial D_{ellipse}} = \frac{\partial {\bf R}_w(\xi, t)}{\partial t} \]" src="form_12.png"/>
+</p>
+<p> and symmetry conditions on the symmetry boundaries, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \left.u_1\right|_{x_2=0}=0, \qquad \left.u_2\right|_{x_1=0}=0. \]" src="form_13.png"/>
+</p>
+<p> The initial conditions for the velocity are given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf u}(x_1,x_2,t=0) = {\bf u}_{IC}(x_1,x_2), \]" src="form_14.png"/>
+</p>
+<p> where <img class="formulaInl" alt="$ {\bf u}_{IC}(x_1,x_2) $" src="form_15.png"/> is a given, divergence-free velocity field that satisfies the velocity boundary conditions at <img class="formulaInl" alt="$ t=0 $" src="form_16.png"/>. No initial conditions are required for the pressure.   </p>
+</td></tr>
+</table>
+<br  />
+ </center><hr  />
+<h1><a class="anchor" id="solution"></a>
+An exact solution</h1>
+<p>It is easy to show (by inspection) that the unsteady stagnation point flow </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ u_1(x_1,x_2,t) = \frac{1}{a}\frac{da}{dt}\, x_1 = -\frac{2\pi\widehat{A}\sin\left(\frac{2\pi t}{T}\right)} {T\left(A+\widehat{A}\cos\left(\frac{2\pi t}{T}\right)\right)} \, x_1 \mbox{\ \ \ \ and \ \ \ \ \ } u_2(x_1,x_2,t) = -\frac{1}{a}\frac{da}{dt} \, x_2 = -\frac{2\pi\widehat{A}\sin\left(\frac{2\pi t}{T}\right)} {T\left(A+\widehat{A}\cos\left(\frac{2\pi t}{T}\right)\right)} \, x_2, \]" src="form_17.png"/>
+</p>
+<p> is an exact solution of the above problem as it satisfies the Navier-Stokes equations and the velocity boundary conditions. The pressure is given by </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ p = \frac{2\pi\widehat{A}\, Re\, \left(x_1^2\, St\, \cos\left(\frac{2\pi t}{T}\right)A + x_1^2\, St\, \widehat{A} - x_1^2\widehat{A} + x_1^2\widehat{A}\cos^2\left(\frac{2\pi t}{T}\right) - x_2^2\, St\, \cos\left(\frac{2\pi t}{T}\right) - x_2^2\, St\, \widehat{A} - x_2^2\widehat{A} + x_2^2\widehat{A}\cos^2\left(\frac{2\pi t}{T}\right)\right)} {T^2\left(A^2 + 2A\widehat{A}\cos\left(\frac{2\pi t}{T}\right) + \widehat{A}^2\cos^2\left(\frac{2\pi t}{T}\right)\right)}. \]" src="form_18.png"/>
+</p>
+<hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The two figures below show two snapshots of the solution for <img class="formulaInl" alt="$ Re=Re \ St=100 $" src="form_19.png"/> , extracted from an animations of the results computed with <a href="../figures/TH.avi">Taylor-Hood</a> and <a href="../figures/CR.avi">Crouzeix-Raviart elements</a>. In both cases, the exact solution was used as the initial condition for the velocities. The figures show "carpet plots" of the two velocity components and the pressure, respectively, and a contour plot of the pressure, superimposed on the moving mesh. The carpet plot of the velocities clearly shows that the flow is of stagnation-point type as the horizontal velocity, <img class="formulaInl" alt="$u_1$" src="form_20.png"/> , is a linear function of <img class="formulaInl" alt="$x_1$" src="form_21.png"/> while the vertical velocity, <img class="formulaInl" alt="$u_2$" src="form_22.png"/> , is a linear function of <img class="formulaInl" alt="$ - x_2$" src="form_23.png"/>.</p>
+<div class="image">
+<img src="CR.gif" alt=""/>
+<div class="caption">
+Plot of the velocity and pressure fields computed with 2D Crouzeix-Raviart elements, with Re=100 and St=1. </div></div>
+ <div class="image">
+<img src="TH.gif" alt=""/>
+<div class="caption">
+Plot of the velocity and pressure fields computed with 2D Taylor-Hood elements, with Re=100 and St=1. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="wall"></a>
+The moving wall</h1>
+<p>As usual, we represent the moving wall as a <code>GeomObject</code> and define its shape by implementing the pure virtual function <code>GeomObject::position(...)</code>. The arguments to the constructor specify the mean half-axis of the ellipse, <img class="formulaInl" alt="$ A $" src="form_3.png"/>, the amplitude of its variations, <img class="formulaInl" alt="$ \widehat{A} $" src="form_5.png"/>, and the period of the oscillation, <img class="formulaInl" alt="$ T $" src="form_24.png"/> . We also pass the pointer to a <code>Time</code> object to the constructor and store it in a private data member, to allow the <code>position(...)</code> functions to access the current value of the continuous time.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_MyEllipse===========================================</span></div>
+<div class="line"><span class="comment">/// \short Oscillating ellipse</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ x = (A + \widehat{A} \cos(2\pi t/T)) \cos(\xi)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// \f[ y = \frac{\sin(\xi)}{A + \widehat{A} \cos(2\pi t/T)}   \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// Note that cross-sectional area is conserved.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classMyEllipse.html">MyEllipse</a> : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Constructor:  Pass initial x-half axis, amplitude of x-variation, </span></div>
+<div class="line"><span class="comment"> /// period of oscillation and pointer to time object.</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classMyEllipse.html#a6d780f1f450d99e175842e88a3079069">MyEllipse</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a_hat,</div>
+<div class="line">           <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; period, Time* time_pt) : </div>
+<div class="line">  GeomObject(1,2), <a class="code" href="classMyEllipse.html#aa2a0efd0a39f9d4fc307a6ff011682ed">A</a>(a), <a class="code" href="classMyEllipse.html#a653e71cf296cdc86cc595d16f18004dd">A_hat</a>(a_hat), <a class="code" href="classMyEllipse.html#ab098069ab23bbbd8f30b0da3523dc87f">T</a>(period), <a class="code" href="classMyEllipse.html#abc1c4c863a599ce87bdff1abb9971953">Time_pt</a>(time_pt) {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor: Empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> <a class="code" href="classMyEllipse.html#ac2f2d3fb269c57fb26b4db6d9a0c7c05">~MyEllipse</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Current position vector to material point at </span></div>
+<div class="line"><span class="comment"> /// Lagrangian coordinate xi </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classMyEllipse.html#a7b139a2f4564005773c83325f2414e3e">position</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Get current time:</span></div>
+<div class="line">   <span class="keywordtype">double</span> time=<a class="code" href="classMyEllipse.html#abc1c4c863a599ce87bdff1abb9971953">Time_pt</a>-&gt;time();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Position vector</span></div>
+<div class="line">   <span class="keywordtype">double</span> axis=<a class="code" href="classMyEllipse.html#aa2a0efd0a39f9d4fc307a6ff011682ed">A</a>+<a class="code" href="classMyEllipse.html#a653e71cf296cdc86cc595d16f18004dd">A_hat</a>*cos(2.0*MathematicalConstants::Pi*time/<a class="code" href="classMyEllipse.html#ab098069ab23bbbd8f30b0da3523dc87f">T</a>);</div>
+<div class="line">   r[0] = axis*cos(xi[0]);</div>
+<div class="line">   r[1] = (1.0/axis)*sin(xi[0]);</div>
+<div class="line">  } </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Parametrised position on object: r(xi). Evaluated at</span></div>
+<div class="line"><span class="comment"> /// previous time level. t=0: current time; t&gt;0: previous</span></div>
+<div class="line"><span class="comment"> /// time level.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classMyEllipse.html#a7b139a2f4564005773c83325f2414e3e">position</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>, <span class="keyword">const</span> Vector&lt;double&gt;&amp; xi,</div>
+<div class="line">               Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Get current time:</span></div>
+<div class="line">   <span class="keywordtype">double</span> time=<a class="code" href="classMyEllipse.html#abc1c4c863a599ce87bdff1abb9971953">Time_pt</a>-&gt;time(<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Position vector</span></div>
+<div class="line">   <span class="keywordtype">double</span> axis=<a class="code" href="classMyEllipse.html#aa2a0efd0a39f9d4fc307a6ff011682ed">A</a>+<a class="code" href="classMyEllipse.html#a653e71cf296cdc86cc595d16f18004dd">A_hat</a>*cos(2.0*MathematicalConstants::Pi*time/<a class="code" href="classMyEllipse.html#ab098069ab23bbbd8f30b0da3523dc87f">T</a>);</div>
+<div class="line">   r[0] = axis*cos(xi[0]);</div>
+<div class="line">   r[1] = (1.0/axis)*sin(xi[0]);</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// x-half axis</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classMyEllipse.html#aa2a0efd0a39f9d4fc307a6ff011682ed">A</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Amplitude of variation in x-half axis</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classMyEllipse.html#a653e71cf296cdc86cc595d16f18004dd">A_hat</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Period of oscillation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="classMyEllipse.html#ab098069ab23bbbd8f30b0da3523dc87f">T</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to time object</span></div>
+<div class="line"><span class="comment"></span> Time* <a class="code" href="classMyEllipse.html#abc1c4c863a599ce87bdff1abb9971953">Time_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of MyEllipse</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+The global parameters</h1>
+<p>As in most previous examples, we use a namespace to define and initialise global problem parameters such as the Reynolds and Strouhal numbers:</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_namespace=================================================</span></div>
+<div class="line"><span class="comment">/// Namepspace for global parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a>=100.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Womersley = Reynolds times Strouhal</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">ReSt</a>=100.0;</div>
+</div><!-- fragment --><p>We also define and initialise the parameters that specify the motion of the domain boundary and specify the exact solution.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// x-Half axis length</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a4894f9a3a9cbf84f00d0719f2841e624">A</a>=1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// x-Half axis amplitude</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a>=0.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Period of oscillations</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>=1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exact solution of the problem as a vector containing u,v,p</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="namespaceGlobal__Physical__Variables.html#af29d0fbf7264555610176a1fc931591a">get_exact_u</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>, <span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keyword">using namespace </span>MathematicalConstants;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Strouhal number</span></div>
+<div class="line">  <span class="keywordtype">double</span> St = <a class="code" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">ReSt</a>/<a class="code" href="osc__ellipse_8txt.html#a79beac6c46e99b17b2f5888955340d22">Re</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Half axis</span></div>
+<div class="line">  <span class="keywordtype">double</span> a=<a class="code" href="namespaceGlobal__Physical__Variables.html#a4894f9a3a9cbf84f00d0719f2841e624">A</a>+<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a>*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>);</div>
+<div class="line">  <span class="keywordtype">double</span> adot=-2.0*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a>*Pi*sin(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>)/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>; </div>
+<div class="line">  u.resize(3);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Velocity solution</span></div>
+<div class="line">  u[0]=adot*x[0]/a;</div>
+<div class="line">  u[1]=-adot*x[1]/a;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Pressure solution</span></div>
+<div class="line">  u[2]=(2.0*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a>*Pi*Pi*<a class="code" href="osc__ellipse_8txt.html#a79beac6c46e99b17b2f5888955340d22">Re</a>*(x[0]*x[0]*St*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>)*<a class="code" href="namespaceGlobal__Physical__Variables.html#a4894f9a3a9cbf84f00d0719f2841e624">A</a> + </div>
+<div class="line">                            x[0]*x[0]*St*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a> - x[0]*x[0]*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a> +</div>
+<div class="line">                            x[0]*x[0]*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a>*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>)*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>) -</div>
+<div class="line">                            x[1]*x[1]*St*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>)*<a class="code" href="namespaceGlobal__Physical__Variables.html#a4894f9a3a9cbf84f00d0719f2841e624">A</a> - </div>
+<div class="line">                            x[1]*x[1]*St*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a> - x[1]*x[1]*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a> +</div>
+<div class="line">                            x[1]*x[1]*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a>*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>)*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>) ))</div>
+<div class="line">   /(<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>*<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>*(<a class="code" href="namespaceGlobal__Physical__Variables.html#a4894f9a3a9cbf84f00d0719f2841e624">A</a>*<a class="code" href="namespaceGlobal__Physical__Variables.html#a4894f9a3a9cbf84f00d0719f2841e624">A</a> + 2.0*<a class="code" href="namespaceGlobal__Physical__Variables.html#a4894f9a3a9cbf84f00d0719f2841e624">A</a>*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a>*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>) + </div>
+<div class="line">          <a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a>*<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">A_hat</a>*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>)*cos(2.0*Pi*<a class="code" href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a>/<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">T</a>) ));</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>As in most previous unsteady demo codes, we allow the code to be run in a validation mode (in which we use a coarser mesh and execute fewer timesteps). This mode is selected by specifying an (arbitrary) command line argument that we store in the namespace <code>CommandLineArgs</code>.</p>
+<div class="fragment"><div class="line"><span class="comment">//======start_of_main=================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for unsteady Navier-Stokes flow, driven by</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// oscillating ellipse. If the code is executed with command line</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// arguments, a validation run is performed. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="osc__quarter__ellipse_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+</div><!-- fragment --><p>We create a <code>DocInfo</code> object to specify the output directory, build the problem with adaptive Crouzeix-Raviart elements and the <code>BDF&lt;2&gt;</code> timestepper and perform the unsteady simulation.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve with Crouzeix-Raviart elements</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Create DocInfo object with suitable directory name for output</span></div>
+<div class="line">  DocInfo doc_info;</div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_CR&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Set up problem</span></div>
+<div class="line">  <a class="code" href="classOscEllipseProblem.html">OscEllipseProblem&lt;RefineableQCrouzeixRaviartElement&lt;2&gt;</a>,BDF&lt;2&gt; &gt; <a class="code" href="osc__ellipse_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Run the unsteady simulation</span></div>
+<div class="line">  <a class="code" href="osc__ellipse_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.unsteady_run(doc_info);</div>
+<div class="line"> }</div>
+</div><!-- fragment --><p>Then we repeat this process for adaptive Taylor-Hood elements.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Solve with Taylor-Hood elements</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Create DocInfo object with suitable directory name for output</span></div>
+<div class="line">  DocInfo doc_info;</div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_TH&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Set up problem</span></div>
+<div class="line">  <a class="code" href="classOscEllipseProblem.html">OscEllipseProblem&lt;RefineableQTaylorHoodElement&lt;2&gt;</a>,BDF&lt;2&gt; &gt; <a class="code" href="osc__ellipse_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Run the unsteady simulation</span></div>
+<div class="line">  <a class="code" href="osc__ellipse_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a>.unsteady_run(doc_info);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>Most of the problem class is a straightforward combination of the problem classes employed in the simulation of <a href="../../driven_cavity/html/index.html">the adaptive driven cavity </a> and <a href="../../rayleigh_channel/html/index.html">Rayleigh channel </a> problems, in that the problem combines unsteadiness with spatial adaptivity (though in the present problem the adaptivity is only used to uniformly refine the very coarse base mesh; we refer to <em><b>another example</b></em> for the use of full spatial adaptivity in a moving-domain Navier-Stokes problem).</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====start_of_problem_class=========================================</span></div>
+<div class="line"><span class="comment">/// Navier-Stokes problem in an oscillating ellipse domain.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classOscEllipseProblem.html">OscEllipseProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classOscEllipseProblem.html#aaa836937ec963921243fcb990f6fe538">OscEllipseProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code" href="classOscEllipseProblem.html#a48a38acb7db1b394f7bfcd02e779b795">~OscEllipseProblem</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classOscEllipseProblem.html#a268e14b24e3ac922e7362bbb37ccde1f">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classOscEllipseProblem.html#a18bbd70aa8c140637637053a5f839c11">actions_before_newton_solve</a>() {} </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Actions before adapt (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classOscEllipseProblem.html#a97c1b0056acbb9a6ec6157b6e7ad258a">actions_before_adapt</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adaptation, pin relevant pressures</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code" href="classOscEllipseProblem.html#a6044661f75986848484df2c04bfe7aab">actions_after_adapt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Unpin all pressure dofs</span></div>
+<div class="line">   RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line">    unpin_all_pressure_dofs(mesh_pt()-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Pin redundant pressure dofs</span></div>
+<div class="line">   RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line">    pin_redundant_nodal_pressures(mesh_pt()-&gt;element_pt());</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Now set the first pressure dof in the first element to 0.0</span></div>
+<div class="line">   <a class="code" href="classOscEllipseProblem.html#a8b70831d1c25a40c814d5d92e77a1085">fix_pressure</a>(0,0,0.0);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of actions_after_adapt</span></div>
+</div><!-- fragment --><p>The key new feature in the current problem is the presence of the moving domain which requires updates of</p><ol type="1">
+<li>all nodal positions</li>
+<li>the prescribed velocities on the moving wall via the no-slip condition.</li>
+</ol>
+<p>before every timestep. Since the nodal positions of the <code>QuarterCircleSectorMesh</code> are determined via its <code>MacroElement</code> / <code>Domain</code> representation (which updates the nodal position in response to changes in the geometry of the <code>GeomObjects</code> that define its boundaries), the former task may be accomplished by executing the <code>Mesh::node_update()</code> function; the update of the no-slip condition may be performed by calling the function <code>FSI_functions::apply_no_slip_on_moving_wall(Node* node_pt)</code>, a helper function, defined in the namespace <code>FSI_functions</code>, which updates the velocity components <img class="formulaInl" alt="$ u_1, u_2 [, u_3] $" src="form_25.png"/> according to the no-slip boundary condition </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf u}_{Node} = \frac{\partial {\bf x}_{Node}}{\partial t} \]" src="form_26.png"/>
+</p>
+<p> where the time-derivative of the nodal positions is evaluated by the <code>Node's</code> positional timestepper. [<b>Note:</b> The function <code>FSI_functions::apply_no_slip_on_moving_wall(...)</code> assumes that the velocity components are stored in the <code>Node's</code> first 2 [3] values. This is consistent with the storage of the velocity component in all existing Navier-Stokes elements. If you develop your own Navier-Stokes elements and use a different storage scheme you use this function at your own risk.]</p>
+<p>Here is the implementation of these tasks:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Update the problem specs before next timestep</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_implicit_timestep()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Update the domain shape</span></div>
+<div class="line">   mesh_pt()-&gt;node_update();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Ring boundary: No slip; this implies that the velocity needs</span></div>
+<div class="line">   <span class="comment">// to be updated in response to wall motion</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> ibound=1;</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Which node are we dealing with?</span></div>
+<div class="line">     Node* node_pt=mesh_pt()-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Apply no slip</span></div>
+<div class="line">     FSI_functions::apply_no_slip_on_moving_wall(node_pt);</div>
+<div class="line">    }</div>
+<div class="line">  } </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after timestep (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_implicit_timestep(){}</div>
+</div><!-- fragment --><p>The remaining functions are similar to those used in our previous Navier-Stokes examples and require no further explanation.</p>
+<div class="fragment"><div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Timestepping loop</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> unsteady_run(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Set initial condition</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> set_initial_condition();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> ///Fix pressure in element e at pressure dof pdof and set to pvalue</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> fix_pressure(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;e, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;pdof, </div>
+<div class="line">                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;pvalue)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to proper element and fix pressure</span></div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e))-&gt;</div>
+<div class="line">    fix_pressure(pdof,pvalue);</div>
+<div class="line">  } <span class="comment">// end_of_fix_pressure</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to GeomObject that specifies the domain bondary</span></div>
+<div class="line"><span class="comment"></span> GeomObject* Wall_pt;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem_class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>We start by creating a timestepper of the type specified by the <code>Problem's</code> template parameter and add (a pointer to) it to the <code>Problem's</code> collection of <code>Timesteppers</code>. Recall that this function also creates the <code>Problem's</code> <code>Time</code> object.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========start_of_constructor============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor for Navier-Stokes problem on an oscillating ellipse domain.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a class="code" href="classOscEllipseProblem.html#aaa836937ec963921243fcb990f6fe538">OscEllipseProblem&lt;ELEMENT,TIMESTEPPER&gt;::OscEllipseProblem</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Create the timestepper and add it to the problem</span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> TIMESTEPPER);</div>
+</div><!-- fragment --><p>Next we create the <code>GeomObject</code> that defines the curvilinear domain boundary and pass it to the Mesh constructor. (Since we will only use adaptivity to refine the mesh uniformly, it is not necessary to define an error estimator.)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> <span class="comment">//-----------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build geometric object that forms the curvilinear domain boundary:</span></div>
+<div class="line"> <span class="comment">// an oscillating ellipse</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Half axes</span></div>
+<div class="line"> <span class="keywordtype">double</span> a=<a class="code" href="namespaceGlobal__Physical__Variables.html#a4894f9a3a9cbf84f00d0719f2841e624">Global_Physical_Variables::A</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Variations of half axes</span></div>
+<div class="line"> <span class="keywordtype">double</span> a_hat=<a class="code" href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">Global_Physical_Variables::A_hat</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Period of the oscillation</span></div>
+<div class="line"> <span class="keywordtype">double</span> period=<a class="code" href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">Global_Physical_Variables::T</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create GeomObject that specifies the domain bondary</span></div>
+<div class="line"> Wall_pt=<span class="keyword">new</span> <a class="code" href="classMyEllipse.html">MyEllipse</a>(a,a_hat,period,Problem::time_pt()); </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Start and end coordinates of curvilinear domain boundary on ellipse</span></div>
+<div class="line"> <span class="keywordtype">double</span> xi_lo=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> xi_hi=MathematicalConstants::Pi/2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now create the mesh. Separating line between the two </span></div>
+<div class="line"> <span class="comment">// elements next to the curvilinear boundary is located half-way</span></div>
+<div class="line"> <span class="comment">// along the boundary.</span></div>
+<div class="line"> <span class="keywordtype">double</span> fract_mid=0.5;</div>
+<div class="line"> Problem::mesh_pt() = <span class="keyword">new</span> RefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;(</div>
+<div class="line">  Wall_pt,xi_lo,fract_mid,xi_hi,time_stepper_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator NOT NEEDED IN CURRENT PROBLEM SINCE </span></div>
+<div class="line"> <span class="comment">// WE&#39;RE ONLY REFINING THE MESH UNIFORMLY</span></div>
+<div class="line"> <span class="comment">//Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;</span></div>
+<div class="line"> <span class="comment">//mesh_pt()-&gt;spatial_error_estimator_pt()=error_estimator_pt;</span></div>
+</div><!-- fragment --><p>Both velocity components on the curvilinear mesh boundary are determined by the no-slip condition and must therefore be pinned,</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fluid boundary conditions</span></div>
+<div class="line"> <span class="comment">//--------------------------</span></div>
+<div class="line"> <span class="comment">// Ring boundary: No slip; this also implies that the velocity needs</span></div>
+<div class="line"> <span class="comment">// to be updated in response to wall motion</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=1;</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">   {</div>
+<div class="line">     </div>
+<div class="line">    <span class="comment">// Pin both velocities</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">     {</div>
+<div class="line">      mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(i);</div>
+<div class="line">     }</div>
+<div class="line">   }</div>
+<div class="line"> } <span class="comment">// end boundary 1</span></div>
+</div><!-- fragment --><p>whereas on the symmetry boundaries only one of the two velocity components is set to zero:</p>
+<div class="fragment"><div class="line"> <span class="comment">// Bottom boundary: </span></div>
+<div class="line"> ibound=0;</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">// Pin vertical velocity</span></div>
+<div class="line">    {</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1);</div>
+<div class="line">    }</div>
+<div class="line">   }</div>
+<div class="line"> } <span class="comment">// end boundary 0</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Left boundary:</span></div>
+<div class="line"> ibound=2;</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">// Pin horizontal velocity</span></div>
+<div class="line">    {</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0);</div>
+<div class="line">    }</div>
+<div class="line">   }</div>
+<div class="line"> } <span class="comment">// end boundary 2</span></div>
+</div><!-- fragment --><p>Finally, we pass the pointers to <img class="formulaInl" alt="$ Re $" src="form_27.png"/>, <img class="formulaInl" alt="$ Re \ St $" src="form_28.png"/> and the global <code>Time</code> object (automatically created by the <code>Problem</code> when the timestepper was passed to it at the beginning of the constructor) to the elements, pin the redundant nodal pressure degrees of freedom (see the discussion of the <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">adaptive driven-cavity problem</a> for more details), pin one pressure degree of freedom, and set up the equation numbering scheme.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Find number of elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the Reynolds number, etc</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">   el_pt-&gt;re_st_pt() = &amp;<a class="code" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin redundant pressure dofs</span></div>
+<div class="line"> RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line">  pin_redundant_nodal_pressures(mesh_pt()-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now set the first pressure dof in the first element to 0.0</span></div>
+<div class="line"> fix_pressure(0,0,0.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do equation numbering</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="IC"></a>
+Assigning the initial conditions</h1>
+<p>This function assigns "history values" for the velocities and the nodal positions from the exact solution. It is implemented in exactly the same way as in the solution of the <a href="../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html#IC">unsteady heat equation in a moving domain</a>. Note that because the domain is moving, the nodal positions must be updated (according to the position of the domain boundary at the relevant previous timestep), before evaluating the exact solution at the nodal position.</p>
+<div class="fragment"><div class="line"><span class="comment">//======================start_of_set_initial_condition====================</span></div>
+<div class="line"><span class="comment">/// \short Set initial condition: Assign previous and current values</span></div>
+<div class="line"><span class="comment"></span><span class="comment">/// from exact solution.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classOscEllipseProblem.html#ae638f238a7b0e0acb5d6087b7363fe01">OscEllipseProblem&lt;ELEMENT,TIMESTEPPER&gt;::set_initial_condition</a>()</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">// Backup time in global timestepper</span></div>
+<div class="line"> <span class="keywordtype">double</span> backed_up_time=time_pt()-&gt;time();</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Past history for velocities must be established for t=time0-deltat, ...</span></div>
+<div class="line"> <span class="comment">// Then provide current values (at t=time0) which will also form</span></div>
+<div class="line"> <span class="comment">// the initial guess for first solve at t=time0+deltat</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Vector of exact solution value</span></div>
+<div class="line"> Vector&lt;double&gt; soln(3);</div>
+<div class="line"> Vector&lt;double&gt; x(2);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of nodes in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod = mesh_pt()-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get continuous times at previous timesteps</span></div>
+<div class="line"> <span class="keywordtype">int</span> nprev_steps=time_stepper_pt()-&gt;nprev_values();</div>
+<div class="line"> Vector&lt;double&gt; prev_time(nprev_steps+1);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">int</span> itime=nprev_steps;itime&gt;=0;itime--)</div>
+<div class="line">  {</div>
+<div class="line">   prev_time[itime]=time_pt()-&gt;time(<span class="keywordtype">unsigned</span>(itime));</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over current &amp; previous timesteps (in outer loop because</span></div>
+<div class="line"> <span class="comment">// the mesh also moves!)</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">int</span> itime=nprev_steps;itime&gt;=0;itime--)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">double</span> time=prev_time[itime];</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set global time (because this is how the geometric object refers </span></div>
+<div class="line">   <span class="comment">// to continous time )</span></div>
+<div class="line">   time_pt()-&gt;time()=time;</div>
+<div class="line">   </div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;setting IC at time =&quot;</span> &lt;&lt; time &lt;&lt; std::endl;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Update the mesh for this value of the continuous time</span></div>
+<div class="line">   <span class="comment">// (The wall object reads the continous time from the </span></div>
+<div class="line">   <span class="comment">// global time object)</span></div>
+<div class="line">   mesh_pt()-&gt;node_update(); </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the nodes to set initial guess everywhere</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> jnod=0;jnod&lt;num_nod;jnod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get nodal coordinates</span></div>
+<div class="line">     x[0]=mesh_pt()-&gt;node_pt(jnod)-&gt;x(0);</div>
+<div class="line">     x[1]=mesh_pt()-&gt;node_pt(jnod)-&gt;x(1);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Get exact solution (unsteady stagnation point flow)</span></div>
+<div class="line">     <a class="code" href="namespaceGlobal__Physical__Variables.html#af29d0fbf7264555610176a1fc931591a">Global_Physical_Variables::get_exact_u</a>(time,x,soln);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Assign solution</span></div>
+<div class="line">     mesh_pt()-&gt;node_pt(jnod)-&gt;set_value(itime,0,soln[0]);</div>
+<div class="line">     mesh_pt()-&gt;node_pt(jnod)-&gt;set_value(itime,1,soln[1]);</div>
+<div class="line">       </div>
+<div class="line">     <span class="comment">// Loop over coordinate directions</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;node_pt(jnod)-&gt;x(itime,i)=x[i];</div>
+<div class="line">      }</div>
+<div class="line">    } </div>
+<div class="line">  } <span class="comment">// end of loop over previous timesteps</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Reset backed up time for global timestepper</span></div>
+<div class="line"> time_pt()-&gt;time()=backed_up_time;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of set_initial_condition</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post processing</h1>
+<p>The function <code>doc_solution(...)</code> is similar to that in the <a href="../../../unsteady_heat/two_d_unsteady_heat/html/index.html#doc">unsteady heat examples </a> and the previous Navier-Stokes examples. We add dummy zones and tecplot geometries to facilitate the post-processing of the results with tecplot.</p>
+<div class="fragment"><div class="line"><span class="comment">//=======start_of_doc_solution============================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classOscEllipseProblem.html#afca2cc3e3e64ac764323f232cacc7e3b">OscEllipseProblem&lt;ELEMENT,TIMESTEPPER&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\&quot;time = &quot;</span> </div>
+<div class="line">           &lt;&lt; time_pt()-&gt;time() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;1&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;2&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot; 0 0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; time_pt()-&gt;time()*20.0 &lt;&lt; <span class="stringliteral">&quot; 0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write dummy zones that force tecplot to keep the axis limits constant</span></div>
+<div class="line"> <span class="comment">// while the domain is moving.</span></div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;ZONE I=2,J=2&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;0.0 0.0 -0.65 -0.65 -200.0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;1.15 0.0 -0.65 -0.65 -200.0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;0.0 1.15 -0.65 -0.65 -200.0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;1.15 1.15 -0.65 -0.65 -200.0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;ZONE I=2,J=2&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;0.0 0.0 0.65 0.65 300.0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;1.15 0.0 0.65 0.65 300.0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;0.0 1.15 0.65 0.65 300.0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;1.15 1.15 0.65 0.65 300.0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output_fct(some_file,npts,time_pt()-&gt;time(),</div>
+<div class="line">                       <a class="code" href="namespaceGlobal__Physical__Variables.html#af29d0fbf7264555610176a1fc931591a">Global_Physical_Variables::get_exact_u</a>); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error</span></div>
+<div class="line"> <span class="comment">//----------</span></div>
+<div class="line"> <span class="keywordtype">double</span> error,norm;</div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/error%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;compute_error(some_file,</div>
+<div class="line">                          <a class="code" href="namespaceGlobal__Physical__Variables.html#af29d0fbf7264555610176a1fc931591a">Global_Physical_Variables::get_exact_u</a>,</div>
+<div class="line">                          time_pt()-&gt;time(),</div>
+<div class="line">                          error,norm); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc solution and error</span></div>
+<div class="line"> <span class="comment">//-----------------------</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;error: &quot;</span> &lt;&lt; error &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;norm : &quot;</span> &lt;&lt; norm &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Plot wall posn</span></div>
+<div class="line"> <span class="comment">//---------------</span></div>
+<div class="line"> sprintf(filename,<span class="stringliteral">&quot;%s/Wall%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">unsigned</span> nplot=100;</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> iplot=0;iplot&lt;nplot;iplot++)</div>
+<div class="line">  {</div>
+<div class="line">   Vector&lt;double&gt; xi_wall(1), r_wall(2);</div>
+<div class="line">   xi_wall[0]=0.5*MathematicalConstants::Pi*double(iplot)/double(nplot-1);</div>
+<div class="line">   Wall_pt-&gt;position(xi_wall,r_wall);</div>
+<div class="line">   some_file &lt;&lt; r_wall[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; r_wall[1] &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increment number of doc</span></div>
+<div class="line"> doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc_solution</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="unsteady_run"></a>
+The timestepping loop</h1>
+<p>The timestepping loop is extremely straightforward: We choose a timestep and the overall length of the simulation, initialise the timestepper(s) by calling <code>Problem::initialise_dt(...)</code> and assign the initial condition.</p>
+<div class="fragment"><div class="line"><span class="comment">//=======start_of_unsteady_run============================================</span></div>
+<div class="line"><span class="comment">/// Unsteady run</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="classOscEllipseProblem.html#ad0d879edbbd8b09b61e802ab66ef98a3">OscEllipseProblem&lt;ELEMENT,TIMESTEPPER&gt;::unsteady_run</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify duration of the simulation</span></div>
+<div class="line"> <span class="keywordtype">double</span> t_max=3.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial timestep</span></div>
+<div class="line"> <span class="keywordtype">double</span> dt=0.025;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise timestep</span></div>
+<div class="line"> initialise_dt(dt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set initial conditions.</span></div>
+<div class="line"> set_initial_condition();</div>
+</div><!-- fragment --><p>Next we set the number of timesteps for a normal run.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Alternative initial conditions: impulsive start; see exercise.</span></div>
+<div class="line"> <span class="comment">//assign_initial_values_impulsive(); </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// find number of steps</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep = unsigned(t_max/dt);</div>
+</div><!-- fragment --><p>We over-write this number and perform a single uniform mesh refinement if the code is run in self-test mode (indicated by a non-zero number of command line arguments),</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// If validation: Reduce number of timesteps performed and </span></div>
+<div class="line"> <span class="comment">// use coarse-ish mesh</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc&gt;1)</div>
+<div class="line">  {</div>
+<div class="line">   nstep=2;</div>
+<div class="line">   refine_uniformly();</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;validation run&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p>otherwise we refine the mesh three times and output the initial conditions</p>
+<div class="fragment"><div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Refine the mesh three times, to resolve the pressure distribution</span></div>
+<div class="line">   <span class="comment">// (the velocities could be represented accurately on a much coarser mesh).</span></div>
+<div class="line">   refine_uniformly();</div>
+<div class="line">   refine_uniformly();</div>
+<div class="line">   refine_uniformly();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution initial </span></div>
+<div class="line"> doc_solution(doc_info);</div>
+</div><!-- fragment --><p>Finally we execute the proper timestepping loop and document the solution after every timestep</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Timestepping loop</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;TIMESTEP &quot;</span> &lt;&lt; istep &lt;&lt; std::endl;</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;Time is now &quot;</span> &lt;&lt; time_pt()-&gt;time() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Take timestep </span></div>
+<div class="line">   unsteady_newton_solve(dt);</div>
+<div class="line">     </div>
+<div class="line">   <span class="comment">//Output solution</span></div>
+<div class="line">   doc_solution(doc_info);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of unsteady_run</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<ol type="1">
+<li>Compare the results of the numerical simulation in which <img class="formulaInl" alt="$ {\bf u}_{IC} $" src="form_29.png"/> is given by the exact solution (an unsteady stagnation point flow) to that obtained from an "impulsive start" where <img class="formulaInl" alt="$ {\bf u}_{IC} = {\bf 0}. $" src="form_30.png"/> (This is most easily implemented by replacing the call to <code>set_initial_condition()</code> with a call to <code>Problem::assign_initial_values_impulsive()</code>. <br  />
+ <br  />
+ Why do we obtain the same velocity with both initial conditions and why does the pressure take a few timesteps (How many exactly? Compare simulations with <code>BDF&lt;4&gt;</code> and <code>BDF&lt;2&gt;</code> timesteppers.) to "catch up" with the exact solution? [Hint: The unsteady stagnation point flow is a potential flow, therefore the viscous terms in the Navier-Stokes equations disappear. See also chapter 3.19 in Volume 2 of Gresho &amp; Sani's wonderful book "Incompressible Flow and the Finite Element Method".]</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/navier_stokes/osc_ellipse/">demo_drivers/navier_stokes/osc_ellipse/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/navier_stokes/osc_ellipse/osc_quarter_ellipse.cc">demo_drivers/navier_stokes/osc_ellipse/osc_quarter_ellipse.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<div class="ttc" id="aclassOscEllipseProblem_html_a8b70831d1c25a40c814d5d92e77a1085"><div class="ttname"><a href="classOscEllipseProblem.html#a8b70831d1c25a40c814d5d92e77a1085">OscEllipseProblem::fix_pressure</a></div><div class="ttdeci">void fix_pressure(const unsigned &amp;e, const unsigned &amp;pdof, const double &amp;pvalue)</div><div class="ttdoc">Fix pressure in element e at pressure dof pdof and set to pvalue.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00250">osc_quarter_ellipse.cc:250</a></div></div>
+<div class="ttc" id="aosc__ellipse_8txt_html_a8d895bb93cd829890aa4c1a2d5682792"><div class="ttname"><a href="osc__ellipse_8txt.html#a8d895bb93cd829890aa4c1a2d5682792">problem</a></div><div class="ttdeci">mainpage Example problem</div><div class="ttdef"><b>Definition:</b> <a href="osc__ellipse_8txt_source.html#l00015">osc_ellipse.txt:15</a></div></div>
+<div class="ttc" id="aosc__ellipse_8txt_html_a79beac6c46e99b17b2f5888955340d22"><div class="ttname"><a href="osc__ellipse_8txt.html#a79beac6c46e99b17b2f5888955340d22">Re</a></div><div class="ttdeci">mainpage Example we will discuss sparse mesh update techniques that are useful in problems with free boundaries and in fluid structure interaction problems&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Finite Reynolds number flow driven by an oscillating ellipse&lt;/B &gt;&lt;/CENTER &gt; We consider the unsteady flow of a Newtonian fluid that is contained in an oscillating elliptical ring whose wall shape is parametrised by the Lagrangian coordinate f xi f as f[{\bf R}_w(\xi)=\left(\begin{array}{l}a(t) \cos(\xi) \\a^{-1}(t) \sin(\xi)\end{array}\right)\f] where f[a(t)=A+\widehat{A} \cos\left(\frac{2\pi t}{T}\right).\f] f A f represents the average half axis of the elliptical ring in the f x_1 f and f f[Re\left(St\frac{\partial u_i}{\partial t}+\left(u_j-u_j^M\right)\frac{\partial u_i}{\partial x_j}\right)=- \frac{\partial p}{\partial x_i}+\frac{\partial }{\partial x_j} \left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right), \ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes]@\f] and the continuity equation f[\frac{\partial u_i}{\partial x_i}=0,\f] where f u_j M f is the mesh velocity We exploit the symmetry of the problem and solve the equations in the quarter domain f[D=\left\{(x_1, x_2) \, \bigg|\, x_1\geq0, \, x_2\geq0,\, \left(\frac{x_1}{a(t)}\right)^2+\big(x_2 \, a(t)\big)^2 \leq 1\right\},\f] shown in this I w textwidth wall Sketch of the computational domain The fluid is subject to no slip boundary conditions on the curved f[\left. {\bf u} \right|_{\partial D_{ellipse}}=\frac{\partial {\bfR}_w(\xi, t)}{\partial t} \f] and symmetry conditions on the symmetry f[\left.u_1\right|_{x_2=0}=0, \qquad \left.u_2\right|_{x_1=0}=0.\f] The initial conditions for the velocity are given by f[{\bf u}(x_1, x_2, t=0)={\bf u}_{IC}(x_1, x_2),\f] where divergence free velocity field that satisfies the velocity boundary conditions at f extracted from an animations of the results computed with&lt; A HREF=&quot;../figures/TH.avi&quot;&gt; Taylor Hood&lt;/A &gt; and&lt; A HREF=&quot;../figures/CR.avi&quot;&gt; Crouzeix Raviart elements&lt;/A &gt; In both the exact solution was used as the initial condition for the velocities The figures show carpet plots of the two velocity components and the and a contour plot of the superimposed on the moving mesh The carpet plot of the velocities clearly shows that the flow is of stagnation point type as the horizontal f $u_1 is a linear function of f $x_1 f while the vertical f $u_2 is a linear function of f x_2 f I w textwidth CR Plot of the velocity and pressure fields computed with Crouzeix Raviart with Re</div><div class="ttdef"><b>Definition:</b> <a href="osc__ellipse_8txt_source.html#l00143">osc_ellipse.txt:143</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_ab098069ab23bbbd8f30b0da3523dc87f"><div class="ttname"><a href="classMyEllipse.html#ab098069ab23bbbd8f30b0da3523dc87f">MyEllipse::T</a></div><div class="ttdeci">double T</div><div class="ttdoc">Period of oscillation.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00098">osc_quarter_ellipse.cc:98</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_ac2f2d3fb269c57fb26b4db6d9a0c7c05"><div class="ttname"><a href="classMyEllipse.html#ac2f2d3fb269c57fb26b4db6d9a0c7c05">MyEllipse::~MyEllipse</a></div><div class="ttdeci">virtual ~MyEllipse()</div><div class="ttdoc">Destructor: Empty.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00059">osc_quarter_ellipse.cc:59</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html_a48a38acb7db1b394f7bfcd02e779b795"><div class="ttname"><a href="classOscEllipseProblem.html#a48a38acb7db1b394f7bfcd02e779b795">OscEllipseProblem::~OscEllipseProblem</a></div><div class="ttdeci">~OscEllipseProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00187">osc_quarter_ellipse.cc:187</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html_a268e14b24e3ac922e7362bbb37ccde1f"><div class="ttname"><a href="classOscEllipseProblem.html#a268e14b24e3ac922e7362bbb37ccde1f">OscEllipseProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00190">osc_quarter_ellipse.cc:190</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html_aaa836937ec963921243fcb990f6fe538"><div class="ttname"><a href="classOscEllipseProblem.html#aaa836937ec963921243fcb990f6fe538">OscEllipseProblem::OscEllipseProblem</a></div><div class="ttdeci">OscEllipseProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00269">osc_quarter_ellipse.cc:269</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_af29d0fbf7264555610176a1fc931591a"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#af29d0fbf7264555610176a1fc931591a">Global_Physical_Variables::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const double &amp;t, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution of the problem as a vector containing u,v,p.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00135">osc_quarter_ellipse.cc:135</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html_ae638f238a7b0e0acb5d6087b7363fe01"><div class="ttname"><a href="classOscEllipseProblem.html#ae638f238a7b0e0acb5d6087b7363fe01">OscEllipseProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set initial condition.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00392">osc_quarter_ellipse.cc:392</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html_afca2cc3e3e64ac764323f232cacc7e3b"><div class="ttname"><a href="classOscEllipseProblem.html#afca2cc3e3e64ac764323f232cacc7e3b">OscEllipseProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00466">osc_quarter_ellipse.cc:466</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html"><div class="ttname"><a href="classOscEllipseProblem.html">OscEllipseProblem</a></div><div class="ttdoc">Navier-Stokes problem in an oscillating ellipse domain.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00178">osc_quarter_ellipse.cc:178</a></div></div>
+<div class="ttc" id="aosc__quarter__ellipse_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="osc__quarter__ellipse_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00624">osc_quarter_ellipse.cc:624</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a4894f9a3a9cbf84f00d0719f2841e624"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a4894f9a3a9cbf84f00d0719f2841e624">Global_Physical_Variables::A</a></div><div class="ttdeci">double A</div><div class="ttdoc">x-Half axis length</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00126">osc_quarter_ellipse.cc:126</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html_a18bbd70aa8c140637637053a5f839c11"><div class="ttname"><a href="classOscEllipseProblem.html#a18bbd70aa8c140637637053a5f839c11">OscEllipseProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update problem specs before solve (empty)</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00193">osc_quarter_ellipse.cc:193</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a085ee4bf968ffdd01a41b8c41864f907"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a></div><div class="ttdeci">double ReSt</div><div class="ttdoc">Womersley = Reynolds times Strouhal.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00123">osc_quarter_ellipse.cc:123</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a1a806ee7c4d04d6afaba1d24d94dceea"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a1a806ee7c4d04d6afaba1d24d94dceea">Global_Physical_Variables::T</a></div><div class="ttdeci">double T</div><div class="ttdoc">Period of oscillations.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00132">osc_quarter_ellipse.cc:132</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html_a97c1b0056acbb9a6ec6157b6e7ad258a"><div class="ttname"><a href="classOscEllipseProblem.html#a97c1b0056acbb9a6ec6157b6e7ad258a">OscEllipseProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt (empty)</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00196">osc_quarter_ellipse.cc:196</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a11d1e77201d6b8c250c4c9396fc5ad06"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a11d1e77201d6b8c250c4c9396fc5ad06">Global_Physical_Variables::A_hat</a></div><div class="ttdeci">double A_hat</div><div class="ttdoc">x-Half axis amplitude</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00129">osc_quarter_ellipse.cc:129</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html"><div class="ttname"><a href="classMyEllipse.html">MyEllipse</a></div><div class="ttdoc">Oscillating ellipse.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00047">osc_quarter_ellipse.cc:47</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namepspace for global parameters.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00116">osc_quarter_ellipse.cc:116</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_a653e71cf296cdc86cc595d16f18004dd"><div class="ttname"><a href="classMyEllipse.html#a653e71cf296cdc86cc595d16f18004dd">MyEllipse::A_hat</a></div><div class="ttdeci">double A_hat</div><div class="ttdoc">Amplitude of variation in x-half axis.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00095">osc_quarter_ellipse.cc:95</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_a6d780f1f450d99e175842e88a3079069"><div class="ttname"><a href="classMyEllipse.html#a6d780f1f450d99e175842e88a3079069">MyEllipse::MyEllipse</a></div><div class="ttdeci">MyEllipse(const double &amp;a, const double &amp;a_hat, const double &amp;period, Time *time_pt)</div><div class="ttdoc">Constructor: Pass initial x-half axis, amplitude of x-variation, period of oscillation and pointer to...</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00054">osc_quarter_ellipse.cc:54</a></div></div>
+<div class="ttc" id="aosc__ellipse_8txt_html_a5fc28b29793f1ed1f3836062cfa4ff79"><div class="ttname"><a href="osc__ellipse_8txt.html#a5fc28b29793f1ed1f3836062cfa4ff79">t</a></div><div class="ttdeci">mainpage Example we will discuss sparse mesh update techniques that are useful in problems with free boundaries and in fluid structure interaction problems&lt; CENTER &gt;&lt; TABLE &gt;&lt; TR &gt;&lt; TD &gt;&lt; CENTER &gt;&lt; B &gt; Finite Reynolds number flow driven by an oscillating ellipse&lt;/B &gt;&lt;/CENTER &gt; We consider the unsteady flow of a Newtonian fluid that is contained in an oscillating elliptical ring whose wall shape is parametrised by the Lagrangian coordinate f xi f as f[{\bf R}_w(\xi)=\left(\begin{array}{l}a(t) \cos(\xi) \\a^{-1}(t) \sin(\xi)\end{array}\right)\f] where f[a(t)=A+\widehat{A} \cos\left(\frac{2\pi t}{T}\right).\f] f A f represents the average half axis of the elliptical ring in the f x_1 f and f f[Re\left(St\frac{\partial u_i}{\partial t}+\left(u_j-u_j^M\right)\frac{\partial u_i}{\partial x_j}\right)=- \frac{\partial p}{\partial x_i}+\frac{\partial }{\partial x_j} \left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right), \ \ \ \ \ \ \ \ \ \ @E t[2DNavierStokes]@\f] and the continuity equation f[\frac{\partial u_i}{\partial x_i}=0,\f] where f u_j M f is the mesh velocity We exploit the symmetry of the problem and solve the equations in the quarter domain f[D=\left\{(x_1, x_2) \, \bigg|\, x_1\geq0, \, x_2\geq0,\, \left(\frac{x_1}{a(t)}\right)^2+\big(x_2 \, a(t)\big)^2 \leq 1\right\},\f] shown in this I w textwidth wall Sketch of the computational domain The fluid is subject to no slip boundary conditions on the curved f[\left. {\bf u} \right|_{\partial D_{ellipse}}=\frac{\partial {\bfR}_w(\xi, t)}{\partial t} \f] and symmetry conditions on the symmetry f[\left.u_1\right|_{x_2=0}=0, \qquad \left.u_2\right|_{x_1=0}=0.\f] The initial conditions for the velocity are given by f[{\bf u}(x_1, x_2, t=0)={\bf u}_{IC}(x_1, x_2),\f] where divergence free velocity field that satisfies the velocity boundary conditions at f</div><div class="ttdef"><b>Definition:</b> <a href="osc__ellipse_8txt_source.html#l00087">osc_ellipse.txt:87</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_aa2a0efd0a39f9d4fc307a6ff011682ed"><div class="ttname"><a href="classMyEllipse.html#aa2a0efd0a39f9d4fc307a6ff011682ed">MyEllipse::A</a></div><div class="ttdeci">double A</div><div class="ttdoc">x-half axis</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00092">osc_quarter_ellipse.cc:92</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_abc1c4c863a599ce87bdff1abb9971953"><div class="ttname"><a href="classMyEllipse.html#abc1c4c863a599ce87bdff1abb9971953">MyEllipse::Time_pt</a></div><div class="ttdeci">Time * Time_pt</div><div class="ttdoc">Pointer to time object.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00101">osc_quarter_ellipse.cc:101</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html_ad0d879edbbd8b09b61e802ab66ef98a3"><div class="ttname"><a href="classOscEllipseProblem.html#ad0d879edbbd8b09b61e802ab66ef98a3">OscEllipseProblem::unsteady_run</a></div><div class="ttdeci">void unsteady_run(DocInfo &amp;doc_info)</div><div class="ttdoc">Timestepping loop.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00558">osc_quarter_ellipse.cc:558</a></div></div>
+<div class="ttc" id="aclassOscEllipseProblem_html_a6044661f75986848484df2c04bfe7aab"><div class="ttname"><a href="classOscEllipseProblem.html#a6044661f75986848484df2c04bfe7aab">OscEllipseProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adaptation, pin relevant pressures.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00199">osc_quarter_ellipse.cc:199</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00120">osc_quarter_ellipse.cc:120</a></div></div>
+<div class="ttc" id="aclassMyEllipse_html_a7b139a2f4564005773c83325f2414e3e"><div class="ttname"><a href="classMyEllipse.html#a7b139a2f4564005773c83325f2414e3e">MyEllipse::position</a></div><div class="ttdeci">void position(const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;r) const</div><div class="ttdoc">Current position vector to material point at Lagrangian coordinate xi</div><div class="ttdef"><b>Definition:</b> <a href="osc__quarter__ellipse_8cc_source.html#l00063">osc_quarter_ellipse.cc:63</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:08:14
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

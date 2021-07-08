@@ -1,0 +1,117 @@
+\hypertarget{classoomph_1_1StorableShapeElement}{}\doxysection{oomph\+::Storable\+Shape\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\label{classoomph_1_1StorableShapeElement}\index{oomph::StorableShapeElement$<$ ELEMENT $>$@{oomph::StorableShapeElement$<$ ELEMENT $>$}}
+
+
+{\ttfamily \#include $<$stored\+\_\+shape\+\_\+function\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Storable\+Shape\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.745098cm]{classoomph_1_1StorableShapeElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1StorableShapeElement_a80c9e4c6b6b908eeec3fa1f2460ed412}{Storable\+Shape\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, set most storage pointers to zero. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1StorableShapeElement_a86e2b5ec64139ef93c4f3397b4a60771}{$\sim$\+Storable\+Shape\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1StorableShapeElement_ac242bdf9fd1206f017038216fdce37eb}{Storable\+Shape\+Element}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeElement}{Storable\+Shape\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1StorableShapeElement_a3436eabded443d3746be5c50daabe603}{operator=}} (const \mbox{\hyperlink{classoomph_1_1StorableShapeElement}{Storable\+Shape\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
+class oomph\+::\+Storable\+Shape\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+
+Templated wrapper that attaches the ability to store the shape functions and their derivatives w.\+r.\+t. to the local and global (Eulerian) coordinates at the integration points to the element specified by the template parameter. 
+
+Definition at line 516 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElement_a80c9e4c6b6b908eeec3fa1f2460ed412}\label{classoomph_1_1StorableShapeElement_a80c9e4c6b6b908eeec3fa1f2460ed412}} 
+\index{oomph::StorableShapeElement$<$ ELEMENT $>$@{oomph::StorableShapeElement$<$ ELEMENT $>$}!StorableShapeElement@{StorableShapeElement}}
+\index{StorableShapeElement@{StorableShapeElement}!oomph::StorableShapeElement$<$ ELEMENT $>$@{oomph::StorableShapeElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{StorableShapeElement()}{StorableShapeElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1StorableShapeElement}{oomph\+::\+Storable\+Shape\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1StorableShapeElement}{Storable\+Shape\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, set most storage pointers to zero. 
+
+
+
+Definition at line 524 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), and oomph\+::\+Storable\+Shape\+Element\+Base\+::set\+\_\+integration\+\_\+scheme().
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElement_a86e2b5ec64139ef93c4f3397b4a60771}\label{classoomph_1_1StorableShapeElement_a86e2b5ec64139ef93c4f3397b4a60771}} 
+\index{oomph::StorableShapeElement$<$ ELEMENT $>$@{oomph::StorableShapeElement$<$ ELEMENT $>$}!````~StorableShapeElement@{$\sim$StorableShapeElement}}
+\index{````~StorableShapeElement@{$\sim$StorableShapeElement}!oomph::StorableShapeElement$<$ ELEMENT $>$@{oomph::StorableShapeElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$StorableShapeElement()}{~StorableShapeElement()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1StorableShapeElement}{oomph\+::\+Storable\+Shape\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1StorableShapeElement}{Storable\+Shape\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line 533 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElement_ac242bdf9fd1206f017038216fdce37eb}\label{classoomph_1_1StorableShapeElement_ac242bdf9fd1206f017038216fdce37eb}} 
+\index{oomph::StorableShapeElement$<$ ELEMENT $>$@{oomph::StorableShapeElement$<$ ELEMENT $>$}!StorableShapeElement@{StorableShapeElement}}
+\index{StorableShapeElement@{StorableShapeElement}!oomph::StorableShapeElement$<$ ELEMENT $>$@{oomph::StorableShapeElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{StorableShapeElement()}{StorableShapeElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+\mbox{\hyperlink{classoomph_1_1StorableShapeElement}{oomph\+::\+Storable\+Shape\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1StorableShapeElement}{Storable\+Shape\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1StorableShapeElement}{Storable\+Shape\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 536 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1StorableShapeElement_a3436eabded443d3746be5c50daabe603}\label{classoomph_1_1StorableShapeElement_a3436eabded443d3746be5c50daabe603}} 
+\index{oomph::StorableShapeElement$<$ ELEMENT $>$@{oomph::StorableShapeElement$<$ ELEMENT $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::StorableShapeElement$<$ ELEMENT $>$@{oomph::StorableShapeElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1StorableShapeElement}{oomph\+::\+Storable\+Shape\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1StorableShapeElement}{Storable\+Shape\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 542 of file stored\+\_\+shape\+\_\+function\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{stored__shape__function__elements_8h}{stored\+\_\+shape\+\_\+function\+\_\+elements.\+h}}\end{DoxyCompactItemize}

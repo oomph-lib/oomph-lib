@@ -1,0 +1,362 @@
+\mainpage Demo problem: 2D FSI on unstructured meshes with adaptivity
+
+This tutorial demonstrates the use of unstructured meshes
+in 2D fluid-structure interaction problems with adaptivity. The
+formulation is extremely similar to that used in 
+<a href="../../../interaction/unstructured_fsi/html/index.html">
+unstructured fsi without adaptivity, </a> but the geometry of the 
+problem is closely related to the 
+<a href="../../fsi_channel_with_leaflet/html/index.html"> flow in a
+channel with a leaflet using structured adaptivity. </a> 
+
+The solid mechanics problem is exactly the same as that described in
+the 
+<a href="../../../solid/unstructured_adaptive_solid/html/index.html">
+unstructured solid mechanics with adaptivity tutorial. </a> The fluid
+mechanics problem is new, but is a simple extension of the 
+previous problems. The key realisation is that the unstructured
+refinement can take place independently for the fluid and solid
+domains provided that the common boundary between them has a common
+parametrisation. Moreover, the common boundary <b>must</b> have the
+same parametrisation in order for the fluid-structure interaction to
+be set up in the first place. Thus, setting up unstructured adaptivity
+for fsi problems is no more difficult than setting up the original
+unstructured problem using \c oomph-lib's 
+<a href="../../../meshes/mesh_from_inline_triangle/html/index.html">
+inline unstructured mesh generation </a> procedures.
+
+<HR>
+<HR>
+
+\section the_problem The problem
+The figure below shows a sketch of the problem. A 2D channel
+is partly obstructed by an elastic bar and has an imposed parabolic
+inlet velocity profile.
+
+@I w 0.75\textwidth fsi_sketch "Sketch of the problem showing fluid and solid boundary ids."
+
+ The non-dimension formulation is the same as described in 
+<a href="../../unstructured_fsi/html/index.html"> the related
+ non-adaptive problem. </a> The fluid structure interaction parameter
+ \f$Q \f$ is the ratio of viscous fluid stress to the reference stress
+ (Young's modulus) of the solid.  
+
+<HR> 
+<HR>
+
+\section results Results
+
+ The figure below shows streamlines and pressure contours for the
+ steady solution when \f$Q = 3\times 10^{-4} \f$ and \f$ Re = 0 \f$
+
+@I w 0.75\textwidth res "The flow field (streamlines and pressure contours) and the deformation of the elastic obstacle. "
+
+<HR> 
+<HR>
+
+\section overview_implementation Overview of the implementation
+
+ The implementation is exactly the same as described in the
+<a href="../../unstructured_fsi/html/index.html">
+non-adaptive unstructured mesh fluid-structure interaction problem. </a>
+The only difference is that the meshes are constructed using \c
+oomph-lib's <a href="../../../meshes/mesh_from_inline_triangle/html/index.html">
+inline mesh generation procedures. </a>
+
+ For simplicity the common boundaries between the fluid and solid mesh
+ are assigned the same boundary ids, but this is not necessary. The
+ boundary ids for each domain are shown in the sketch above.
+
+<HR>
+<HR>
+
+\section namespace Problem Parameters
+The various problem parameters are defined in a 
+global namespace. We define the Reynolds number, \f$ Re \f$, and
+the FSI interaction parameter \f$ Q \f$.
+
+\dontinclude unstructured_adaptive_2d_fsi.cc
+\skipline start_namespace
+\until Q =
+
+We specify the Poisson ratio of the solid and 
+provide a pointer to the constitutive equation for the
+solid. 
+
+\until Constitutive_law_pt
+
+The Poisson's ratio and pointer to a constitutive law for the mesh
+deformation is specified separately.
+
+\until end namespace 
+
+<HR>
+<HR>
+
+
+\section main The driver code
+
+We set an output directory, trace file and instantiate the 
+constitutive laws for the real and mesh solid mechanics computations
+with the appropriate Poisson ratios:
+
+\dontinclude unstructured_adaptive_2d_fsi.cc
+\skipline DocInfo doc_info
+\until ::Mesh_Nu);
+
+We then create the \c Problem object and output the initial guess for
+the solution
+
+\until ()++
+
+Initially \f$ Q=0 \f$ and \f$ Re=0 \f$, so the solid should remain
+undeformed and the fluid problem is linear. We expect to obtain the
+solution in one Newton iteration and so we perform one steady solve with
+the default mesh and output the result. We also output the strain
+energy of the solid and dissipation of the fluid as global measures of
+the solution that can be used for validation. (The unstructured meshes 
+generated are not guaranteed to be exactly the same on different
+computers.)
+
+\until dissipation(trace);
+
+
+Finally, we perform a parameter study by increasing \f$ Q \f$,
+computing the result with one round of adaptivity and then writing the
+results to output files.
+
+\skipline Crank
+\until }
+
+<HR>
+<HR>
+
+\section class The Problem class
+The \c Problem class has a constructor, destructor and a post-processing
+member function. The class also includes the standard member
+functions \c actions_before_adapt() and \c
+actions_after_adapt(). There are private member 
+functions that create and destroy the
+required \c FSISolidTractionElements that apply the load from the
+fluid on the solid and the \c
+ImposeDisplacementByLagrangeMultiplierElements that are used to
+(weakly) align the boundary of the fluid mesh with the solid
+domain. There are also private member functions to compute the fluid
+dissipation, solid strain energy and a public member function that 
+outputs the computed strain and dissipation to a specified trace file.
+
+The class provided storage for pointers to the Solid Mesh, the Fluid
+Mesh and vectors of pointers to meshes of \c FaceElements on
+the boundaries over which the interaction takes place. There is also
+storage for the \c GeomObject incarnations of fsi boundaries of the
+solid mesh  and polygonal representations of the boundaries of the
+fluid and solid meshes.
+
+<HR>
+<HR>
+
+\section constructor The Problem constructor
+
+ We start by building the solid mesh, an associated error estimator
+ and then writing the boundaries and mesh to output files. These steps
+ are exactly the same as in the 
+<a href="../../../solid/unstructured_adaptive_solid/html/index.html"> 
+ unstructured adaptive solid mechanics tutorial. </a>
+
+ \dontinclude unstructured_adaptive_2d_fsi.cc
+ \skipline start_constructor
+ \until output("solid_mesh.dat")
+
+ We next apply the boundary conditions to the solid mesh, by pinning
+ the positions of the nodes on the lower boundary (boundary 3)
+ 
+ \until end_solid_boundary
+
+ and complete the build of the solid elements by passing the pointer
+ to the constitutive law to all elements in the solid mesh.
+ 
+ \until }
+
+ The next task is to build the fluid mesh, which uses three of the 
+boundary segments  already constructed for the solid mesh for the
+common boundaries
+ 
+\until }
+
+ before constructing the remaining boundaries, building the mesh, an
+ associated error estimator and writing the boundaries and mesh to
+ output files.
+
+\until output("fluid_mesh.dat") 
+
+ We then apply boundary conditions to the fluid mesh by pinning
+ velocity everywhere apart from at the outflow (boundary 4) and
+ pinning all nodal positions on all boundaries that are not in contact
+ with the solid.
+
+\until end loop over boundaries
+
+ We next complete the build of the fluid elements by passing the
+ Reynolds number and mesh constitutive law to all fluid elements
+
+\until end loop over elements
+
+ and then set the Dirichlet boundary conditions for the fluid velocity
+ on the inlet and channel walls.
+
+\until end Poiseuille
+
+ We then build three meshes of traction elements corresponding to the
+ solid boundaries 0,1 and 2 that bound the fluid
+
+\until create_fsi_traction
+
+ and three analogous meshes of Lagrange multiplier elements.
+ 
+\until create_lagrange_multiplier
+
+ The order matters because the Lagrange multiplier elements need
+ pointers to the \c GeomObject incarnation of the \c
+ FSITractionElements. Thus the traction elements must be created
+ first.
+
+ We then combine all the sub meshes into a global mesh.
+
+\until build_global_mesh()
+
+ Finally, we setup the fluid-structure interaction for all three
+ boundaries 0, 1 and 2 and then assign the equation numbers.
+
+ \until end constructor
+
+<HR>
+<HR>
+
+\section actions_before Actions before adaptation
+
+Before any adaptation takes place all surface meshes are deleted and
+the global mesh is rebuilt.
+
+\dontinclude unstructured_adaptive_2d_fsi.cc
+\skipline Actions before adapt
+\until }
+
+<HR>
+<HR>
+
+\section actions_after Actions after adaptation
+
+ The adaptation is performed separately on the fluid and solid meshes
+ and the order does not matter. In fact, the first mesh to be refined
+ will be the first that is added as a sub mesh (in this case the fluid
+ mesh). After adaptation of all meshes, we first reset the Lagrangian
+ coordinates of the Fluid mesh to ensure that the mesh deformation is
+ as robust as possible.
+
+ \until nodal_coordinates()
+
+ Note that we <b> must </b> not reset the Lagrangian coordinates of
+ the solid mesh because that would change the undeformed configuration
+ of the solid. 
+
+ We then reapply the solid boundary conditions and pass the
+ constitutive law to the solid elements.
+
+ \until complete solid build
+
+
+ Next, the fluid boundary conditions are reapplied and the Reynolds
+ number and mesh constitutive law are passed to all fluid elements., 
+
+ \until end Poiseuille
+
+ We then create the traction and Lagrange multiplier
+ elements and rebuild the global mesh. 
+ Again the traction elements must be created first because
+ they are used by the Lagrange multiplier elements. 
+
+\until rebuild_global_mesh()
+
+ Finally, we setup the FSI on the three boundaries that are in common
+ between the fluid and the solid.
+
+ \until }
+
+<HR>
+<HR>
+
+\section fsi_traction Creating and destroying the FSI traction and Lagrange multiplier elements
+
+ These functions are exactly the same (apart from the obvious changes
+ in boundary id) as those described in the 
+<a href="../../unstructured_fsi/html/index.html"> non-adaptive
+unstructured fsi tutorial. </a> and are not repeated here.
+
+<HR>
+<HR>
+
+\section doc_solution Post-processing
+The post-processing routine simply executes the output functions for 
+the fluid and solid meshes and writes the results into separate
+files. Again this is exactly the same as in the 
+<a href="../../unstructured_fsi/html/index.html">
+non-adaptive </a> case.
+
+<HR>
+<HR>
+
+\section comm_ex Comments and Exercises
+
+ The majority of comments in the 
+<a href="../../unstructured_fsi/html/index.html">
+ non-adaptive unstructured FSI tutorial </a> also apply here. As
+ mentioned above, the reason why the methodology works so
+ straightforwardly is because the
+ parametrisation of common boundaries must be the 
+ same in the fluid and solid meshes. If not, setting up the
+ fluid-structure interaction will not work even before any adaptation
+ takes place. Thus, provided that your unstructured FSI problem has been
+ correctly set up in the case without adaptivity, adding adaptivity is
+ completely straightforward. 
+
+\subsection ex Exercises
+
+-# Confirm that the order in which the sub-meshes are added does not
+   affect the results.  
+-# Investigate the behaviour of the system under increasing Reynolds
+   number.
+-# Compare the results of the present (two-d elastic) problem 
+to that of the 
+ <a href="../../fsi_channel_with_leaflet/html/index.html"> 
+  (one-d) beam immersed within a channel. </a> Do the results agree as
+   the thickness of the two-d elastic bar decreases?
+-# Modify your driver to perform unsteady runs and again compare your
+   results to the one-dimensional beam code.
+<HR> 
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/interaction/unstructured_adaptive_fsi">
+demo_drivers/interaction/unstructured_adaptive_fsi
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/interaction/unstructured_adaptive_fsi/unstructured_adaptive_2d_fsi.cc">
+demo_drivers/interaction/unstructured_adaptive_fsi/unstructured_adaptive_2d_fsi.cc
+</A>
+</CENTER>
+.
+
+
+
+
+
+
+
+
+
+

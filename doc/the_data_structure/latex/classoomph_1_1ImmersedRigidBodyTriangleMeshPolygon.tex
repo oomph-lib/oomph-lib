@@ -1,0 +1,216 @@
+\hypertarget{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon}{}\doxysection{oomph\+::Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon Class Reference}
+\label{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon}\index{oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}}
+
+
+{\ttfamily \#include $<$immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.522522cm]{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a3c64954c24a57c4f9c304bf3d76c3366}{Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&hole\+\_\+center, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \&boundary\+\_\+polyline\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a3c92023891dd4a0e818022f467eeb7f1}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ac1e912d596869720566ab2264aa60d6c}{centre\+\_\+displacement\+\_\+data\+\_\+pt}}=0)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify coordinates of a point inside the hole and a vector of pointers to Triangle\+Mesh\+Poly\+Lines that define the boundary segments of the polygon. Each \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} has its own boundary ID and can contain multiple (straight-\/line) segments. The optional final argument is a pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose three values represent the two displacements of and the rotation angle about the polygon\textquotesingle{}s centre of mass. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_aae9a79d69a367e1f552a91454c448289}{$\sim$\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon}} ()
+\begin{DoxyCompactList}\small\item\em Empty Destuctor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a29e3518f6fcdaeead14ae41f11e6fb5d}{position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Overload (again) the position to apply the rotation and translation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_ad1bd014b31d75703384be201ab65e80f}{position}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Overload (again) the position to apply the rotation and translation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a784cda6e03ad1a083de8b03d14102876}{reset\+\_\+reference\+\_\+configuration}} ()
+\begin{DoxyCompactList}\small\item\em Update the reference configuration by re-\/setting the original position of the vertices to their current ones, re-\/set the original position of the centre of mass, and the displacements and rotations relative to it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_aba89865d17e2c1b5fa118e848d09028e}{get\+\_\+initial\+\_\+position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Get the initial position of the polygon. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a04d8259e11cd9d3455e390d32b05fc62}{assign\+\_\+zeta}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a4e5febe00eb1c571d703361792825288}{Zeta\+\_\+vertex}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of intrisic coordinate values at the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class upgrading a \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon}} to a \char`\"{}hole\char`\"{} for use during triangle mesh generation. For mesh generation purposes, the main (and only) addition to the base class is the provision of the coordinates of a hole inside the polygon. To faciliate the movement of the \char`\"{}hole\char`\"{} through the domain we also provide a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose three values represent the x and y displacements of its centre of gravity and the polygon\textquotesingle{}s rotation about its centre of gravity. If added to a mesh in the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} (in its incarnation as a \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}}) the displacement/rotation of the polygon is computed in response to (i) user-\/specifiable applied forces and a torque and (ii) the net drag (and associated torque) from a mesh of elements that can exert a drag onto the polygon (typically Navier-\/\+Stokes Face\+Elements that apply a viscous drag to an immersed body, represented by the polygon.) 
+
+Definition at line 582 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a3c64954c24a57c4f9c304bf3d76c3366}\label{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a3c64954c24a57c4f9c304bf3d76c3366}} 
+\index{oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}!ImmersedRigidBodyTriangleMeshPolygon@{ImmersedRigidBodyTriangleMeshPolygon}}
+\index{ImmersedRigidBodyTriangleMeshPolygon@{ImmersedRigidBodyTriangleMeshPolygon}!oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{ImmersedRigidBodyTriangleMeshPolygon()}{ImmersedRigidBodyTriangleMeshPolygon()}}
+{\footnotesize\ttfamily oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{hole\+\_\+center,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} $\ast$ $>$ \&}]{boundary\+\_\+polyline\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{centre\+\_\+displacement\+\_\+data\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Specify coordinates of a point inside the hole and a vector of pointers to Triangle\+Mesh\+Poly\+Lines that define the boundary segments of the polygon. Each \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} has its own boundary ID and can contain multiple (straight-\/line) segments. The optional final argument is a pointer to a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object whose three values represent the two displacements of and the rotation angle about the polygon\textquotesingle{}s centre of mass. 
+
+
+
+Definition at line 382 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
+
+
+
+References assign\+\_\+zeta(), oomph\+::\+Triangle\+Mesh\+Polygon\+::\+Can\+\_\+update\+\_\+configuration, i, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Initial\+\_\+centre\+\_\+of\+\_\+mass, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Initial\+\_\+\+Phi, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Mass, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Moment\+\_\+of\+\_\+inertia, oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt(), and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
+
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_aae9a79d69a367e1f552a91454c448289}\label{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_aae9a79d69a367e1f552a91454c448289}} 
+\index{oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}!````~ImmersedRigidBodyTriangleMeshPolygon@{$\sim$ImmersedRigidBodyTriangleMeshPolygon}}
+\index{````~ImmersedRigidBodyTriangleMeshPolygon@{$\sim$ImmersedRigidBodyTriangleMeshPolygon}!oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{$\sim$ImmersedRigidBodyTriangleMeshPolygon()}{~ImmersedRigidBodyTriangleMeshPolygon()}}
+{\footnotesize\ttfamily oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::$\sim$\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Destuctor. 
+
+
+
+Definition at line 605 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a04d8259e11cd9d3455e390d32b05fc62}\label{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a04d8259e11cd9d3455e390d32b05fc62}} 
+\index{oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}!assign\_zeta@{assign\_zeta}}
+\index{assign\_zeta@{assign\_zeta}!oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{assign\_zeta()}{assign\_zeta()}}
+{\footnotesize\ttfamily void oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::assign\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Helper function to assign the values of the (scaled) arc-\/length to each node of each polyline. The direction will be the natural order of the vertices within the polyline. 
+
+Definition at line 736 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Triangle\+Mesh\+Polygon\+::npolyline(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate(), and Zeta\+\_\+vertex.
+
+
+
+Referenced by Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon().
+
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_aba89865d17e2c1b5fa118e848d09028e}\label{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_aba89865d17e2c1b5fa118e848d09028e}} 
+\index{oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}!get\_initial\_position@{get\_initial\_position}}
+\index{get\_initial\_position@{get\_initial\_position}!oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{get\_initial\_position()}{get\_initial\_position()}}
+{\footnotesize\ttfamily void oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::get\+\_\+initial\+\_\+position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Get the initial position of the polygon. 
+
+
+
+Definition at line 639 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+
+
+
+References i, oomph\+::\+Triangle\+Mesh\+Polygon\+::npolyline(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate(), and Zeta\+\_\+vertex.
+
+
+
+Referenced by position().
+
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_ad1bd014b31d75703384be201ab65e80f}\label{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_ad1bd014b31d75703384be201ab65e80f}} 
+\index{oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}!position@{position}}
+\index{position@{position}!oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload (again) the position to apply the rotation and translation. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_aca95759d96758c7a4fc81dece7768e9d}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}.
+
+
+
+Definition at line 620 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Immersed\+Rigid\+Body\+Element\+::apply\+\_\+rigid\+\_\+body\+\_\+motion(), and get\+\_\+initial\+\_\+position().
+
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a29e3518f6fcdaeead14ae41f11e6fb5d}\label{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a29e3518f6fcdaeead14ae41f11e6fb5d}} 
+\index{oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}!position@{position}}
+\index{position@{position}!oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload (again) the position to apply the rotation and translation. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a14f5acb186ecd1168dfa08dcf242c538}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}.
+
+
+
+Definition at line 611 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Immersed\+Rigid\+Body\+Element\+::apply\+\_\+rigid\+\_\+body\+\_\+motion(), and get\+\_\+initial\+\_\+position().
+
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a784cda6e03ad1a083de8b03d14102876}\label{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a784cda6e03ad1a083de8b03d14102876}} 
+\index{oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}!reset\_reference\_configuration@{reset\_reference\_configuration}}
+\index{reset\_reference\_configuration@{reset\_reference\_configuration}!oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{reset\_reference\_configuration()}{reset\_reference\_configuration()}}
+{\footnotesize\ttfamily void oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Update the reference configuration by re-\/setting the original position of the vertices to their current ones, re-\/set the original position of the centre of mass, and the displacements and rotations relative to it. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a9c569f8bf7798d423356538651292996}{oomph\+::\+Triangle\+Mesh\+Polygon}}.
+
+
+
+Definition at line 544 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
+
+
+
+References oomph\+::\+Immersed\+Rigid\+Body\+Element\+::apply\+\_\+rigid\+\_\+body\+\_\+motion(), oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Centre\+\_\+displacement\+\_\+data\+\_\+pt, i, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Initial\+\_\+centre\+\_\+of\+\_\+mass, oomph\+::\+Immersed\+Rigid\+Body\+Element\+::\+Initial\+\_\+\+Phi, oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::internal\+\_\+point(), oomph\+::\+Triangle\+Mesh\+Polygon\+::ncurve\+\_\+section(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::value(), and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a4e5febe00eb1c571d703361792825288}\label{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a4e5febe00eb1c571d703361792825288}} 
+\index{oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}!Zeta\_vertex@{Zeta\_vertex}}
+\index{Zeta\_vertex@{Zeta\_vertex}!oomph::ImmersedRigidBodyTriangleMeshPolygon@{oomph::ImmersedRigidBodyTriangleMeshPolygon}}
+\doxysubsubsection{\texorpdfstring{Zeta\_vertex}{Zeta\_vertex}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ $>$ oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Zeta\+\_\+vertex\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of intrisic coordinate values at the nodes. 
+
+
+
+Definition at line 789 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
+
+
+
+Referenced by assign\+\_\+zeta(), and get\+\_\+initial\+\_\+position().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{immersed__rigid__body__elements_8h}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{immersed__rigid__body__elements_8cc}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

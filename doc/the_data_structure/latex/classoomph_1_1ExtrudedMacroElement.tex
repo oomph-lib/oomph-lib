@@ -1,0 +1,167 @@
+\hypertarget{classoomph_1_1ExtrudedMacroElement}{}\doxysection{oomph\+::Extruded\+Macro\+Element Class Reference}
+\label{classoomph_1_1ExtrudedMacroElement}\index{oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}}
+
+
+{\ttfamily \#include $<$extruded\+\_\+macro\+\_\+element.\+h$>$}
+
+Inheritance diagram for oomph\+::Extruded\+Macro\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1ExtrudedMacroElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement_ae25b1b102a86424d4f494bf95eb8d665}{Extruded\+Macro\+Element}} (\mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} $\ast$\mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement_aa936df12cfb1b000a1d7269027dc33b3}{extruded\+\_\+domain\+\_\+pt}}, unsigned \mbox{\hyperlink{classoomph_1_1MacroElement_acc146caf3839d234c62cf9a4de2fbe91}{macro\+\_\+element\+\_\+number}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} and the ID number of the \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement}{Extruded\+Macro\+Element}} within that \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}}. N\+O\+TE\+: The base class \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} requires a pointer to a \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} object. However, the \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} class has not yet been defined which means the compiler cannot know yet that its derives from \mbox{\hyperlink{classoomph_1_1Domain}{Domain}}. To avoid a compiler error a null pointer is passed to the base class \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement_a0affb7bf0d7b1dbeef70bde7fecb1410}{Extruded\+Macro\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement_af78b189674ddd3f6afcdfb16c4c015fe}{Extruded\+Macro\+Element}} (const \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement}{Extruded\+Macro\+Element}} \&dummy)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement_a78694cf962ff7255e003409b6434c704}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement}{Extruded\+Macro\+Element}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement_a17813304e0e71e08ff4777f112d56ba8}{$\sim$\+Extruded\+Macro\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement_aa936df12cfb1b000a1d7269027dc33b3}{extruded\+\_\+domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement_a953e0b43da1ee646e9be3a329ceaf390}{Extruded\+\_\+domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the extruded domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+D\+R\+A\+IG\+: F\+I\+LL IN C\+O\+M\+P\+L\+E\+TE D\+E\+S\+C\+R\+I\+P\+T\+I\+ON O\+N\+CE F\+I\+N\+I\+S\+H\+ED... 
+
+Definition at line 58 of file extruded\+\_\+macro\+\_\+element.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1ExtrudedMacroElement_ae25b1b102a86424d4f494bf95eb8d665}\label{classoomph_1_1ExtrudedMacroElement_ae25b1b102a86424d4f494bf95eb8d665}} 
+\index{oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}!ExtrudedMacroElement@{ExtrudedMacroElement}}
+\index{ExtrudedMacroElement@{ExtrudedMacroElement}!oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}}
+\doxysubsubsection{\texorpdfstring{ExtrudedMacroElement()}{ExtrudedMacroElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Extruded\+Macro\+Element\+::\+Extruded\+Macro\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} $\ast$}]{extruded\+\_\+domain\+\_\+pt,  }\item[{unsigned}]{macro\+\_\+element\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} and the ID number of the \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement}{Extruded\+Macro\+Element}} within that \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}}. N\+O\+TE\+: The base class \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} requires a pointer to a \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} object. However, the \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} class has not yet been defined which means the compiler cannot know yet that its derives from \mbox{\hyperlink{classoomph_1_1Domain}{Domain}}. To avoid a compiler error a null pointer is passed to the base class \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}}. 
+
+
+
+Definition at line 69 of file extruded\+\_\+macro\+\_\+element.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedMacroElement_a0affb7bf0d7b1dbeef70bde7fecb1410}\label{classoomph_1_1ExtrudedMacroElement_a0affb7bf0d7b1dbeef70bde7fecb1410}} 
+\index{oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}!ExtrudedMacroElement@{ExtrudedMacroElement}}
+\index{ExtrudedMacroElement@{ExtrudedMacroElement}!oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}}
+\doxysubsubsection{\texorpdfstring{ExtrudedMacroElement()}{ExtrudedMacroElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Extruded\+Macro\+Element\+::\+Extruded\+Macro\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor (empty and broken) 
+
+
+
+Definition at line 81 of file extruded\+\_\+macro\+\_\+element.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedMacroElement_af78b189674ddd3f6afcdfb16c4c015fe}\label{classoomph_1_1ExtrudedMacroElement_af78b189674ddd3f6afcdfb16c4c015fe}} 
+\index{oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}!ExtrudedMacroElement@{ExtrudedMacroElement}}
+\index{ExtrudedMacroElement@{ExtrudedMacroElement}!oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}}
+\doxysubsubsection{\texorpdfstring{ExtrudedMacroElement()}{ExtrudedMacroElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Extruded\+Macro\+Element\+::\+Extruded\+Macro\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement}{Extruded\+Macro\+Element}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 91 of file extruded\+\_\+macro\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedMacroElement_a17813304e0e71e08ff4777f112d56ba8}\label{classoomph_1_1ExtrudedMacroElement_a17813304e0e71e08ff4777f112d56ba8}} 
+\index{oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}!````~ExtrudedMacroElement@{$\sim$ExtrudedMacroElement}}
+\index{````~ExtrudedMacroElement@{$\sim$ExtrudedMacroElement}!oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}}
+\doxysubsubsection{\texorpdfstring{$\sim$ExtrudedMacroElement()}{~ExtrudedMacroElement()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Extruded\+Macro\+Element\+::$\sim$\+Extruded\+Macro\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line 105 of file extruded\+\_\+macro\+\_\+element.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1ExtrudedMacroElement_aa936df12cfb1b000a1d7269027dc33b3}\label{classoomph_1_1ExtrudedMacroElement_aa936df12cfb1b000a1d7269027dc33b3}} 
+\index{oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}!extruded\_domain\_pt@{extruded\_domain\_pt}}
+\index{extruded\_domain\_pt@{extruded\_domain\_pt}!oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}}
+\doxysubsubsection{\texorpdfstring{extruded\_domain\_pt()}{extruded\_domain\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}}$\ast$\& oomph\+::\+Extruded\+Macro\+Element\+::extruded\+\_\+domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}}. 
+
+
+
+Definition at line 114 of file extruded\+\_\+macro\+\_\+element.\+h.
+
+
+
+References Extruded\+\_\+domain\+\_\+pt.
+
+\mbox{\Hypertarget{classoomph_1_1ExtrudedMacroElement_a78694cf962ff7255e003409b6434c704}\label{classoomph_1_1ExtrudedMacroElement_a78694cf962ff7255e003409b6434c704}} 
+\index{oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Extruded\+Macro\+Element\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement}{Extruded\+Macro\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 98 of file extruded\+\_\+macro\+\_\+element.\+h.
+
+
+
+References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1ExtrudedMacroElement_a953e0b43da1ee646e9be3a329ceaf390}\label{classoomph_1_1ExtrudedMacroElement_a953e0b43da1ee646e9be3a329ceaf390}} 
+\index{oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}!Extruded\_domain\_pt@{Extruded\_domain\_pt}}
+\index{Extruded\_domain\_pt@{Extruded\_domain\_pt}!oomph::ExtrudedMacroElement@{oomph::ExtrudedMacroElement}}
+\doxysubsubsection{\texorpdfstring{Extruded\_domain\_pt}{Extruded\_domain\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}}$\ast$ oomph\+::\+Extruded\+Macro\+Element\+::\+Extruded\+\_\+domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the extruded domain. 
+
+
+
+Definition at line 124 of file extruded\+\_\+macro\+\_\+element.\+h.
+
+
+
+Referenced by extruded\+\_\+domain\+\_\+pt(), oomph\+::\+Q\+Extruded\+Macro\+Element$<$ 3 $>$\+::macro\+\_\+map(), and oomph\+::\+Q\+Extruded\+Macro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{extruded__macro__element_8h}{extruded\+\_\+macro\+\_\+element.\+h}}\end{DoxyCompactItemize}

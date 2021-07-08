@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: generalised_newtonian_Taxisym_navier_stokes_elements.cc Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_68edda22068df78f6b160a6d4b836e24.html">generalised_newtonian_axisym_navier_stokes</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">generalised_newtonian_Taxisym_navier_stokes_elements.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="generalised__newtonian__Taxisym__navier__stokes__elements_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//LIC// </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//Non-inline functions for triangle/tet NS elements</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="generalised__newtonian__Taxisym__navier__stokes__elements_8h.html">generalised_newtonian_Taxisym_navier_stokes_elements.h</a>&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/// Unpin all internal pressure dofs.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#a220610a8dc1c6170888ebf3a684f3fea">GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::</a></div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#a220610a8dc1c6170888ebf3a684f3fea">   44</a></span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#a220610a8dc1c6170888ebf3a684f3fea"> unpin_all_internal_pressure_dofs</a>()</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">unsigned</span> n_pres = this-&gt;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#ad42bb6148e35bd44bde015d501fc2a43">npres_axi_nst</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">// loop over pressure dofs</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l=0;l&lt;n_pres;l++)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;   {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// unpin internal pressure</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    this-&gt;<a class="code" href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">internal_data_pt</a>(<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#aa6cb9966351b7d964fde3efec3932753">P_axi_nst_internal_index</a>)-&gt;<a class="code" href="classoomph_1_1Data.html#a4e5cb031bf8eceb8f97c2c4fbd74cb05">unpin</a>(l);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;   }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">///  Add to the set \c paired_load_data pairs containing</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/// - the pointer to a Data object</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/// and</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/// - the index of the value in that Data object</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/// .</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/// for all values (pressures, velocities) that affect the</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/// load computed in the \c get_load(...) function.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#aa8be933ba9c625f32b7b158ec91c7092">GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::</a></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#aa8be933ba9c625f32b7b158ec91c7092">   66</a></span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#aa8be933ba9c625f32b7b158ec91c7092">identify_load_data</a>(std::set&lt;std::pair&lt;Data*,unsigned&gt; &gt; &amp;paired_load_data)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; <span class="comment">//Find the index at which the velocity is stored</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; <span class="keywordtype">unsigned</span> u_index[3];</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;3;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++) {u_index[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = this-&gt;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations.html#a13fccddff4fd22e3c16b20a5a2227f6d">u_index_axi_nst</a>(<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);}</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; <span class="comment">//Loop over the nodes</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; <span class="keywordtype">unsigned</span> n_node = this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a>();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>=0;<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>&lt;n_node;<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>++)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;   <span class="comment">//Loop over the velocity components and add pointer to their data</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;   <span class="comment">//and indices to the vectors</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;3;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;     paired_load_data.insert(std::make_pair(this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>(<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>),u_index[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>]));</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; <span class="comment">// Identify the pressure data</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#a59c693fd6a19fd39627776cd68ba0382">identify_pressure_data</a>(paired_load_data);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">///  Add to the set \c paired_pressue_data pairs containing</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">/// - the pointer to a Data object</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">/// and</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">/// - the index of the value in that Data object</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">/// .</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">/// for all pressures values that affect the</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">/// load computed in the \c get_load(...) function.</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; <span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#a59c693fd6a19fd39627776cd68ba0382">GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::</a></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#a59c693fd6a19fd39627776cd68ba0382">   99</a></span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#a59c693fd6a19fd39627776cd68ba0382"> identify_pressure_data</a>(std::set&lt;std::pair&lt;Data*,unsigned&gt; &gt; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        &amp;paired_pressure_data)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="comment">//Loop over the internal data</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordtype">unsigned</span> n_internal = this-&gt;<a class="code" href="classoomph_1_1GeneralisedElement.html#a6b736de0af4c92831968636479b3480e">ninternal_data</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l=0;l&lt;n_internal;l++)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;   {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">unsigned</span> nval=this-&gt;<a class="code" href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">internal_data_pt</a>(l)-&gt;<a class="code" href="classoomph_1_1Data.html#a7e67fc78a2e8a2fd6eb75bd292d42ff8">nvalue</a>();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">//Add internal data</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;nval;j++)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;     {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      paired_pressure_data.insert(std::make_pair(this-&gt;<a class="code" href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">internal_data_pt</a>(l),j));</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;     }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;   }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; }      </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">///////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">//Set the data for the number of Variables at each node</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a23c42ed8e8f9cd1f33b906c854294223">GeneralisedNewtonianAxisymmetricTTaylorHoodElement::</a></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a23c42ed8e8f9cd1f33b906c854294223">Initial_Nvalue</a>[6]={4,4,4,3,3,3};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">//Set the data for the pressure conversion array</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#acd1d91d33a8a6b6a4f7ffee878512732">GeneralisedNewtonianAxisymmetricTTaylorHoodElement::</a></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#acd1d91d33a8a6b6a4f7ffee878512732">Pconv</a>[3]={0,1,2};</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">/// Unpin all pressure dofs, incl the mid-face/side ones where</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">/// they have been allocated (e.g. in the refineable version of this</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">/// element).</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a951b5516cd3374730d55a8369d49a4fa">GeneralisedNewtonianAxisymmetricTTaylorHoodElement::</a></div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a951b5516cd3374730d55a8369d49a4fa">  137</a></span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a951b5516cd3374730d55a8369d49a4fa">unpin_all_nodal_pressure_dofs</a>()</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;{</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; <span class="keywordtype">unsigned</span> n_node = this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a>();</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; <span class="comment">// loop over nodes</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l=0;l&lt;n_node;l++)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;   <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>(l)-&gt;nvalue()==3+1)</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;     <span class="comment">// unpin pressure dof</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;     this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>(l)-&gt;<a class="code" href="classoomph_1_1Data.html#a4e5cb031bf8eceb8f97c2c4fbd74cb05">unpin</a>(3);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">/// Pin all nodal pressure dofs, incl the mid-face/side ones where</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">/// they have been allocated (e.g. in the refineable version of this</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">/// element).</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#ad8861d17694cf61211abff428a80ef97">GeneralisedNewtonianAxisymmetricTTaylorHoodElement::</a></div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#ad8861d17694cf61211abff428a80ef97">  157</a></span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#ad8861d17694cf61211abff428a80ef97">pin_all_nodal_pressure_dofs</a>()</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;{</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; <span class="comment">// Loop over all nodes and pin pressure</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; <span class="keywordtype">unsigned</span> n_node = this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a>();</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>=0;<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>&lt;n_node;<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>++)</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>(<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)-&gt;nvalue()==3+1)</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    {</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;     this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>(<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>)-&gt;<a class="code" href="classoomph_1_1Data.html#a422231c58e423f0b43822827aa334d79">pin</a>(3);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    }</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">/// Unpin the proper nodal pressure dofs which are not hanging.</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a74cb6b4598adf749f1011ed88f7a7455">GeneralisedNewtonianAxisymmetricTTaylorHoodElement::</a></div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a74cb6b4598adf749f1011ed88f7a7455">  174</a></span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a74cb6b4598adf749f1011ed88f7a7455">unpin_proper_nodal_pressure_dofs</a>()</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;{</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; <span class="comment">// Loop over all pressure nodes and unpin if they&#39;re not hanging</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; <span class="keywordtype">unsigned</span> n_pres = <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#adb127de036210e35b09096c7df88b4d5">npres_axi_nst</a>();</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l=0;l&lt;n_pres;l++)</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;   <a class="code" href="classoomph_1_1Node.html">Node</a>* nod_pt = this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>(<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#acd1d91d33a8a6b6a4f7ffee878512732">Pconv</a>[l]);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;   <span class="keywordflow">if</span> (!nod_pt-&gt;<a class="code" href="classoomph_1_1Node.html#af0e6237dfafad62cf427ff5013ddcfef">is_hanging</a>(3)) {nod_pt-&gt;<a class="code" href="classoomph_1_1Data.html#a4e5cb031bf8eceb8f97c2c4fbd74cb05">unpin</a>(3);}</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  }</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">///  Add to the set \c paired_load_data pairs containing</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">/// - the pointer to a Data object</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">/// and</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">/// - the index of the value in that Data object</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">/// .</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">/// for all values (pressures, velocities) that affect the</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">/// load computed in the \c get_load(...) function.</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a2f7a2becd038eb8be0f69f1b3e2ce8c3">GeneralisedNewtonianAxisymmetricTTaylorHoodElement::</a></div>
+<div class="line"><a name="l00197"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a2f7a2becd038eb8be0f69f1b3e2ce8c3">  197</a></span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a2f7a2becd038eb8be0f69f1b3e2ce8c3">identify_load_data</a>(std::set&lt;std::pair&lt;Data*,unsigned&gt; &gt; &amp;paired_load_data)</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;{</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; <span class="comment">//Loop over the nodes</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; <span class="keywordtype">unsigned</span> n_node = this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a>();</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>=0;<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>&lt;n_node;<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>++)</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  {</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;   <span class="comment">//Loop over the velocity components and add pointer to their data</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;   <span class="comment">//and indices to the vectors</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>=0;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>&lt;3;<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    {</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;     paired_load_data.insert(std::make_pair(this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>(<a class="code" href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a>),<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>));</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; <span class="comment">//Add the pressure data</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#aa33e3b4641824ea7516c5e98beeb9e1f">identify_pressure_data</a>(paired_load_data);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">//=========================================================================</span><span class="comment"></span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">///  Add to the set \c paired_load_data pairs containing</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">/// - the pointer to a Data object</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">/// and</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">/// - the index of the value in that Data object</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">/// .</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">/// for all values (pressures, velocities) that affect the</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">/// load computed in the \c get_load(...) function.</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#aa33e3b4641824ea7516c5e98beeb9e1f">GeneralisedNewtonianAxisymmetricTTaylorHoodElement::</a></div>
+<div class="line"><a name="l00225"></a><span class="lineno"><a class="line" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#aa33e3b4641824ea7516c5e98beeb9e1f">  225</a></span>&#160;<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#aa33e3b4641824ea7516c5e98beeb9e1f">identify_pressure_data</a>(std::set&lt;std::pair&lt;Data*,unsigned&gt; &gt; &amp;paired_load_data)</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;{</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; <span class="comment">//Loop over the pressure data</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; <span class="keywordtype">unsigned</span> n_pres= <a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#adb127de036210e35b09096c7df88b4d5">npres_axi_nst</a>();</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> l=0;l&lt;n_pres;l++)</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;   <span class="comment">//The DIMth entry in each nodal data is the pressure, which</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;   <span class="comment">//affects the traction</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;   paired_load_data.insert(std::make_pair(this-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">node_pt</a>(<a class="code" href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#acd1d91d33a8a6b6a4f7ffee878512732">Pconv</a>[l]),3));</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  }</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;}</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_ace0e7fb72a805b5c2c600347bfae7a9b"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#ace0e7fb72a805b5c2c600347bfae7a9b">oomph::FiniteElement::node_pt</a></div><div class="ttdeci">Node *&amp; node_pt(const unsigned &amp;n)</div><div class="ttdoc">Return a pointer to the local node n.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02122">elements.h:2122</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_html_a13fccddff4fd22e3c16b20a5a2227f6d"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations.html#a13fccddff4fd22e3c16b20a5a2227f6d">oomph::GeneralisedNewtonianAxisymmetricNavierStokesEquations::u_index_axi_nst</a></div><div class="ttdeci">virtual unsigned u_index_axi_nst(const unsigned &amp;i) const</div><div class="ttdoc">Return the index at which the i-th unknown velocity component.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__axisym__navier__stokes__elements_8h_source.html#l00594">generalised_newtonian_axisym_navier_stokes_elements.h:594</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_html_a23c42ed8e8f9cd1f33b906c854294223"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a23c42ed8e8f9cd1f33b906c854294223">oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement::Initial_Nvalue</a></div><div class="ttdeci">static const unsigned Initial_Nvalue[]</div><div class="ttdoc">Static array of ints to hold number of variables at node.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8h_source.html#l00561">generalised_newtonian_Taxisym_navier_stokes_elements.h:561</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Data_html_a4e5cb031bf8eceb8f97c2c4fbd74cb05"><div class="ttname"><a href="classoomph_1_1Data.html#a4e5cb031bf8eceb8f97c2c4fbd74cb05">oomph::Data::unpin</a></div><div class="ttdeci">void unpin(const unsigned &amp;i)</div><div class="ttdoc">Unpin the i-th stored variable.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00382">nodes.h:382</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedElement_html_a45e32d895d4b3686e0f15fe455f4ed44"><div class="ttname"><a href="classoomph_1_1GeneralisedElement.html#a45e32d895d4b3686e0f15fe455f4ed44">oomph::GeneralisedElement::internal_data_pt</a></div><div class="ttdeci">Data *&amp; internal_data_pt(const unsigned &amp;i)</div><div class="ttdoc">Return a pointer to i-th internal data object.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l00619">elements.h:619</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement_html_aa6cb9966351b7d964fde3efec3932753"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#aa6cb9966351b7d964fde3efec3932753">oomph::GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::P_axi_nst_internal_index</a></div><div class="ttdeci">unsigned P_axi_nst_internal_index</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8h_source.html#l00073">generalised_newtonian_Taxisym_navier_stokes_elements.h:73</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedElement_html_a6b736de0af4c92831968636479b3480e"><div class="ttname"><a href="classoomph_1_1GeneralisedElement.html#a6b736de0af4c92831968636479b3480e">oomph::GeneralisedElement::ninternal_data</a></div><div class="ttdeci">unsigned ninternal_data() const</div><div class="ttdoc">Return the number of internal data objects.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l00824">elements.h:824</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_html_adb127de036210e35b09096c7df88b4d5"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#adb127de036210e35b09096c7df88b4d5">oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement::npres_axi_nst</a></div><div class="ttdeci">unsigned npres_axi_nst() const</div><div class="ttdoc">Return number of pressure values.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8h_source.html#l00678">generalised_newtonian_Taxisym_navier_stokes_elements.h:678</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_html_acd1d91d33a8a6b6a4f7ffee878512732"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#acd1d91d33a8a6b6a4f7ffee878512732">oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement::Pconv</a></div><div class="ttdeci">static const unsigned Pconv[]</div><div class="ttdoc">Static array of ints to hold conversion from pressure node numbers to actual node numbers.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8h_source.html#l00567">generalised_newtonian_Taxisym_navier_stokes_elements.h:567</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Data_html_a7e67fc78a2e8a2fd6eb75bd292d42ff8"><div class="ttname"><a href="classoomph_1_1Data.html#a7e67fc78a2e8a2fd6eb75bd292d42ff8">oomph::Data::nvalue</a></div><div class="ttdeci">unsigned nvalue() const</div><div class="ttdoc">Return number of values stored in data object (incl pinned ones).</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00444">nodes.h:444</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_html_a74cb6b4598adf749f1011ed88f7a7455"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a74cb6b4598adf749f1011ed88f7a7455">oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement::unpin_proper_nodal_pressure_dofs</a></div><div class="ttdeci">void unpin_proper_nodal_pressure_dofs()</div><div class="ttdoc">Unpin the proper nodal pressure dofs.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source.html#l00174">generalised_newtonian_Taxisym_navier_stokes_elements.cc:174</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_html_a2f7a2becd038eb8be0f69f1b3e2ce8c3"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a2f7a2becd038eb8be0f69f1b3e2ce8c3">oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement::identify_load_data</a></div><div class="ttdeci">void identify_load_data(std::set&lt; std::pair&lt; Data *, unsigned &gt; &gt; &amp;paired_load_data)</div><div class="ttdoc">Add to the set paired_load_data pairs containing.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source.html#l00197">generalised_newtonian_Taxisym_navier_stokes_elements.cc:197</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_html_a951b5516cd3374730d55a8369d49a4fa"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#a951b5516cd3374730d55a8369d49a4fa">oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement::unpin_all_nodal_pressure_dofs</a></div><div class="ttdeci">void unpin_all_nodal_pressure_dofs()</div><div class="ttdoc">Unpin all pressure dofs.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source.html#l00137">generalised_newtonian_Taxisym_navier_stokes_elements.cc:137</a></div></div>
+<div class="ttc" id="ageneralised__newtonian__Taxisym__navier__stokes__elements_8h_html"><div class="ttname"><a href="generalised__newtonian__Taxisym__navier__stokes__elements_8h.html">generalised_newtonian_Taxisym_navier_stokes_elements.h</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Data_html_a422231c58e423f0b43822827aa334d79"><div class="ttname"><a href="classoomph_1_1Data.html#a422231c58e423f0b43822827aa334d79">oomph::Data::pin</a></div><div class="ttdeci">void pin(const unsigned &amp;i)</div><div class="ttdoc">Pin the i-th stored variable.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00379">nodes.h:379</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement_html_ad42bb6148e35bd44bde015d501fc2a43"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#ad42bb6148e35bd44bde015d501fc2a43">oomph::GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::npres_axi_nst</a></div><div class="ttdeci">unsigned npres_axi_nst() const</div><div class="ttdoc">Return number of pressure values.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8h_source.html#l00173">generalised_newtonian_Taxisym_navier_stokes_elements.h:173</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html_af0e6237dfafad62cf427ff5013ddcfef"><div class="ttname"><a href="classoomph_1_1Node.html#af0e6237dfafad62cf427ff5013ddcfef">oomph::Node::is_hanging</a></div><div class="ttdeci">bool is_hanging() const</div><div class="ttdoc">Test whether the node is geometrically hanging.</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l01202">nodes.h:1202</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement_html_aa8be933ba9c625f32b7b158ec91c7092"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#aa8be933ba9c625f32b7b158ec91c7092">oomph::GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::identify_load_data</a></div><div class="ttdeci">void identify_load_data(std::set&lt; std::pair&lt; Data *, unsigned &gt; &gt; &amp;paired_load_data)</div><div class="ttdoc">Add to the set paired_load_data pairs of pointers to data objects and unsignedegers that index the va...</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source.html#l00066">generalised_newtonian_Taxisym_navier_stokes_elements.cc:66</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition:</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:29</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a6219ed269a6d89b5aa14659cce48905a"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">oomph::FiniteElement::nnode</a></div><div class="ttdeci">unsigned nnode() const</div><div class="ttdoc">Return the number of nodes.</div><div class="ttdef"><b>Definition:</b> <a href="elements_8h_source.html#l02159">elements.h:2159</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement_html_a220610a8dc1c6170888ebf3a684f3fea"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#a220610a8dc1c6170888ebf3a684f3fea">oomph::GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::unpin_all_internal_pressure_dofs</a></div><div class="ttdeci">void unpin_all_internal_pressure_dofs()</div><div class="ttdoc">Unpin all internal pressure dofs.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source.html#l00044">generalised_newtonian_Taxisym_navier_stokes_elements.cc:44</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Node_html"><div class="ttname"><a href="classoomph_1_1Node.html">oomph::Node</a></div><div class="ttdoc">Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...</div><div class="ttdef"><b>Definition:</b> <a href="nodes_8h_source.html#l00847">nodes.h:847</a></div></div>
+<div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_html_ad8861d17694cf61211abff428a80ef97"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#ad8861d17694cf61211abff428a80ef97">oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement::pin_all_nodal_pressure_dofs</a></div><div class="ttdeci">void pin_all_nodal_pressure_dofs()</div><div class="ttdoc">Pin all nodal pressure dofs.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source.html#l00157">generalised_newtonian_Taxisym_navier_stokes_elements.cc:157</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement_html_a59c693fd6a19fd39627776cd68ba0382"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement.html#a59c693fd6a19fd39627776cd68ba0382">oomph::GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::identify_pressure_data</a></div><div class="ttdeci">void identify_pressure_data(std::set&lt; std::pair&lt; Data *, unsigned &gt; &gt; &amp;paired_pressure_data)</div><div class="ttdoc">Add to the set paired_pressure_data pairs containing.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source.html#l00099">generalised_newtonian_Taxisym_navier_stokes_elements.cc:99</a></div></div>
+<div class="ttc" id="athe__data__structure_8txt_html_af88b2d950fae19ab641bd1690e08445c"><div class="ttname"><a href="the__data__structure_8txt.html#af88b2d950fae19ab641bd1690e08445c">n</a></div><div class="ttdeci">endcode We introduce wrapper functions to access function so that we can formulate The Maths in generic terms Rather than referring to the pressure at node c n</div><div class="ttdef"><b>Definition:</b> <a href="the__data__structure_8txt_source.html#l00582">the_data_structure.txt:582</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement_html_aa33e3b4641824ea7516c5e98beeb9e1f"><div class="ttname"><a href="classoomph_1_1GeneralisedNewtonianAxisymmetricTTaylorHoodElement.html#aa33e3b4641824ea7516c5e98beeb9e1f">oomph::GeneralisedNewtonianAxisymmetricTTaylorHoodElement::identify_pressure_data</a></div><div class="ttdeci">void identify_pressure_data(std::set&lt; std::pair&lt; Data *, unsigned &gt; &gt; &amp;paired_pressure_data)</div><div class="ttdoc">Add to the set paired_pressure_data pairs containing.</div><div class="ttdef"><b>Definition:</b> <a href="generalised__newtonian__Taxisym__navier__stokes__elements_8cc_source.html#l00225">generalised_newtonian_Taxisym_navier_stokes_elements.cc:225</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:57:52
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: bretherton.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">bretherton.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af87ab8869ba2c673aa2ffac6c60b2ad9"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt; A L&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#af87ab8869ba2c673aa2ffac6c60b2ad9">M</a> (2008) The influence of gravity on the steady propagation of a semi-infinite bubble into a flexible channel. Physics of Fluids 20</td></tr>
+<tr class="separator:af87ab8869ba2c673aa2ffac6c60b2ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9672a43542c5f0e98e5f16c73f9ec743"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt; A L&lt; a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other there is no detailed <a class="el" href="bretherton_8txt.html#a24aca60979e3f92814fb5348a5fcb901">discussion</a> of the driver code itself because the implementation is somewhat messy given that the driver code&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> (of course!) very well documented you should be able to figure out what 's going on once you 've read through the <a class="el" href="bretherton_8txt.html#a24aca60979e3f92814fb5348a5fcb901">discussion</a> of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> formulation and our brief comments on the \ref implement.&lt; a href</td></tr>
+<tr class="separator:a9672a43542c5f0e98e5f16c73f9ec743"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ae625e5e226f00a7e3b0634d0cb0bf795"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a></td></tr>
+<tr class="separator:ae625e5e226f00a7e3b0634d0cb0bf795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ecb31f241c387b3047984a187d06517"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a0ecb31f241c387b3047984a187d06517">Hazel</a></td></tr>
+<tr class="separator:a0ecb31f241c387b3047984a187d06517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49b54ea8088ac46f5cf2d822876c6c16"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt; A L &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a49b54ea8088ac46f5cf2d822876c6c16">Heil</a></td></tr>
+<tr class="separator:a49b54ea8088ac46f5cf2d822876c6c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f9a4d4a377ca385e96e3ee09e72ba33"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt; A L&lt; a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a2f9a4d4a377ca385e96e3ee09e72ba33">equivalent</a></td></tr>
+<tr class="separator:a2f9a4d4a377ca385e96e3ee09e72ba33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46e06899548c6c522acc4a38ff42565f"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt; A L&lt; a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a46e06899548c6c522acc4a38ff42565f">tutorials</a></td></tr>
+<tr class="separator:a46e06899548c6c522acc4a38ff42565f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86c33059b5943794eabd737b7499dd09"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt; A L&lt; a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other there <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> no detailed <a class="el" href="bretherton_8txt.html#a24aca60979e3f92814fb5348a5fcb901">discussion</a> of the driver code itself because the implementation <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> somewhat messy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a86c33059b5943794eabd737b7499dd09">However</a></td></tr>
+<tr class="separator:a86c33059b5943794eabd737b7499dd09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c79499ae4cd50c4f226610201de722e"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt; A L&lt; a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other there <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> no detailed <a class="el" href="bretherton_8txt.html#a24aca60979e3f92814fb5348a5fcb901">discussion</a> of the driver code itself because the implementation <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> somewhat messy given that the driver code for the sake of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a2c79499ae4cd50c4f226610201de722e">simplicity</a></td></tr>
+<tr class="separator:a2c79499ae4cd50c4f226610201de722e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24aca60979e3f92814fb5348a5fcb901"><td class="memItemLeft" align="right" valign="top">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt; A L&lt; a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other there <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> no detailed discussion of the driver code itself because the implementation <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> somewhat messy given that the driver code for the sake of we ignore the effect of transverse gravity in this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a24aca60979e3f92814fb5348a5fcb901">discussion</a></td></tr>
+<tr class="separator:a24aca60979e3f92814fb5348a5fcb901"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d297f6f3667b708957789609ee225ec"><td class="memItemLeft" align="right" valign="top">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on f U&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> {\bf n} \f$</td></tr>
+<tr class="separator:a7d297f6f3667b708957789609ee225ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeef71a9b73cae762c39ef9ce4aac52e2"><td class="memItemLeft" align="right" valign="top">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#aeef71a9b73cae762c39ef9ce4aac52e2">scale</a></td></tr>
+<tr class="separator:aeef71a9b73cae762c39ef9ce4aac52e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6899f5063d59c2febace358fc03ae7e0"><td class="memItemLeft" align="right" valign="top">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[Re \ u_j\frac{\partial u_i}{\partial x_j}=-\frac{\partial p}{\partial x_i}+\\frac{\partial }{\partial x_j }\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[\frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a6899f5063d59c2febace358fc03ae7e0">Re</a></td></tr>
+<tr class="separator:a6899f5063d59c2febace358fc03ae7e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fd34c4d6d3575528a9c68ae5828d0ad"><td class="memItemLeft" align="right" valign="top">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[<a class="el" href="bretherton_8txt.html#a6899f5063d59c2febace358fc03ae7e0">Re</a> \ u_j\frac{\partial u_i}{\partial x_j}=-\frac{\partial p}{\partial x_i}+\\frac{\partial }{\partial x_j }\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[\frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> whose outer unit normal we denote by the fluid normal velocity&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a9fd34c4d6d3575528a9c68ae5828d0ad">vanishes</a></td></tr>
+<tr class="separator:a9fd34c4d6d3575528a9c68ae5828d0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4165526e818831edc8f2890dbda10a50"><td class="memItemLeft" align="right" valign="top">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[<a class="el" href="bretherton_8txt.html#a6899f5063d59c2febace358fc03ae7e0">Re</a> \ u_j\frac{\partial u_i}{\partial x_j}=-\frac{\partial p}{\partial x_i}+\\frac{\partial }{\partial x_j }\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[\frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> whose outer unit normal we denote by the fluid normal velocity <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[{\bf u} \cdot {\bf n}=0 \mbox{\ \ \ on the air-liquid interface}.\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] We measure the fluid pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> relative to the bubble pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p_b <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> Then the dynamic boundary condition implies that <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[-p n_i+\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right) n_j+\frac{1}{Ca} \\kappa_f n_i=0\mbox{\ \ \ on the air-liquid interface,}\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a4165526e818831edc8f2890dbda10a50">kappa_f</a></td></tr>
+<tr class="separator:a4165526e818831edc8f2890dbda10a50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c6fa86b50d84017a568b14c8ac028ca"><td class="memItemLeft" align="right" valign="top">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[<a class="el" href="bretherton_8txt.html#a6899f5063d59c2febace358fc03ae7e0">Re</a> \ u_j\frac{\partial u_i}{\partial x_j}=-\frac{\partial p}{\partial x_i}+\\frac{\partial }{\partial x_j }\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[\frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> whose outer unit normal we denote by the fluid normal velocity <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[{\bf u} \cdot {\bf n}=0 \mbox{\ \ \ on the air-liquid interface}.\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] We measure the fluid pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> relative to the bubble pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p_b <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> Then the dynamic boundary condition implies that <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[-p n_i+\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right) n_j+\frac{1}{Ca} \\<a class="el" href="bretherton_8txt.html#a4165526e818831edc8f2890dbda10a50">kappa_f</a> n_i=0\mbox{\ \ \ on the air-liquid interface,}\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> the fluid remains stationary on the walls In the moving frame of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a3c6fa86b50d84017a568b14c8ac028ca">reference</a></td></tr>
+<tr class="separator:a3c6fa86b50d84017a568b14c8ac028ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d406cb837f131429d53439401c6ad1a"><td class="memItemLeft" align="right" valign="top">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0 *<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[<a class="el" href="bretherton_8txt.html#a6899f5063d59c2febace358fc03ae7e0">Re</a> \ u_j\frac{\partial u_i}{\partial x_j}=-\frac{\partial p}{\partial x_i}+\\frac{\partial }{\partial x_j }\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[\frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> whose outer unit normal we denote by the fluid normal velocity <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[{\bf u} \cdot {\bf n}=0 \mbox{\ \ \ on the air-liquid interface}.\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] We measure the fluid pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> relative to the bubble pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p_b <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> Then the dynamic boundary condition implies that <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[-p n_i+\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right) n_j+\frac{1}{Ca} \\<a class="el" href="bretherton_8txt.html#a4165526e818831edc8f2890dbda10a50">kappa_f</a> n_i=0\mbox{\ \ \ on the air-liquid interface,}\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> the fluid remains stationary on the walls In the moving frame of this corresponds to the plug flow profile <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>[{\bf u}=(-1+\frac{3}{2}(1-h_0)(1-x_2^2), 0) \mbox{\ \ \ as $ x_1\to \infty$,}\ \ \ \ \ \ \ \ @E[inflow]@\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then determined by overall continuity&lt; HR &gt;&lt; HR &gt; section results Some results Here are some pretty pictures of the computed flow&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bretherton_8txt.html#a3d406cb837f131429d53439401c6ad1a">field</a></td></tr>
+<tr class="separator:a3d406cb837f131429d53439401c6ad1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a9672a43542c5f0e98e5f16c73f9ec743"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9672a43542c5f0e98e5f16c73f9ec743">&#9670;&nbsp;</a></span>is()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt;CENTER&gt; A L&lt;a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other there is no detailed <a class="el" href="bretherton_8txt.html#a24aca60979e3f92814fb5348a5fcb901">discussion</a> of the driver code itself because the implementation is somewhat messy given that the driver code is </td>
+          <td>(</td>
+          <td class="paramtype">of course!&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af87ab8869ba2c673aa2ffac6c60b2ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af87ab8869ba2c673aa2ffac6c60b2ad9">&#9670;&nbsp;</a></span>M()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt;CENTER&gt; A L M </td>
+          <td>(</td>
+          <td class="paramtype">2008&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a24aca60979e3f92814fb5348a5fcb901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24aca60979e3f92814fb5348a5fcb901">&#9670;&nbsp;</a></span>discussion</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt;CENTER&gt; A L&lt;a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other there <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> no detailed discussion of the driver code itself because the implementation <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> somewhat messy given that the driver code for the sake of we ignore the effect of transverse gravity in this discussion</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00043">43</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2f9a4d4a377ca385e96e3ee09e72ba33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f9a4d4a377ca385e96e3ee09e72ba33">&#9670;&nbsp;</a></span>equivalent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt;CENTER&gt; A L&lt;a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled equivalent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00018">18</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7d297f6f3667b708957789609ee225ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d297f6f3667b708957789609ee225ec">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on f U the lengths on f H_0 *f and the pressure on the viscous f mu U H_0 *f and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations f {\bf n} \f$</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00051">51</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3d406cb837f131429d53439401c6ad1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d406cb837f131429d53439401c6ad1a">&#9670;&nbsp;</a></span>field</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [<a class="el" href="bretherton_8txt.html#a6899f5063d59c2febace358fc03ae7e0">Re</a> \ u_j\frac{\partial u_i}{\partial x_j} = -\frac{\partial p}{\partial x_i} + \\frac{\partial }{\partial x_j }\left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [ \frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> whose outer unit normal we denote by the fluid normal velocity <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [{\bf u} \cdot {\bf n} = 0 \mbox{\ \ \ on the air-liquid interface}.\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] We measure the fluid pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> relative to the bubble pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p_b <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> Then the dynamic boundary condition implies that <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [-p n_i + \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) n_j + \frac{1}{Ca} \\<a class="el" href="bretherton_8txt.html#a4165526e818831edc8f2890dbda10a50">kappa_f</a> n_i = 0\mbox{\ \ \ on the air-liquid interface,}\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> the fluid remains stationary on the walls In the moving frame of this corresponds to the plug flow profile <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [{\bf u}=(-1+\frac{3}{2}(1-h_0)(1-x_2^2),0) \mbox{\ \ \ as $ x_1\to \infty$,}\ \ \ \ \ \ \ \ @E[inflow]@\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then determined by overall continuity&lt;HR&gt;&lt;HR&gt; section results Some results Here are some pretty pictures of the computed flow field</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00105">105</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0ecb31f241c387b3047984a187d06517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ecb31f241c387b3047984a187d06517">&#9670;&nbsp;</a></span>Hazel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt;CENTER&gt; Hazel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00012">12</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a49b54ea8088ac46f5cf2d822876c6c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49b54ea8088ac46f5cf2d822876c6c16">&#9670;&nbsp;</a></span>Heil</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt;CENTER&gt; A L&amp; Heil</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00012">12</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a86c33059b5943794eabd737b7499dd09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86c33059b5943794eabd737b7499dd09">&#9670;&nbsp;</a></span>However</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt;CENTER&gt; A L&lt;a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other there <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> no detailed <a class="el" href="bretherton_8txt.html#a24aca60979e3f92814fb5348a5fcb901">discussion</a> of the driver code itself because the implementation <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> somewhat messy However</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00024">24</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4165526e818831edc8f2890dbda10a50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4165526e818831edc8f2890dbda10a50">&#9670;&nbsp;</a></span>kappa_f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [<a class="el" href="bretherton_8txt.html#a6899f5063d59c2febace358fc03ae7e0">Re</a> \ u_j\frac{\partial u_i}{\partial x_j} = -\frac{\partial p}{\partial x_i} + \\frac{\partial }{\partial x_j }\left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [ \frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> whose outer unit normal we denote by the fluid normal velocity <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [{\bf u} \cdot {\bf n} = 0 \mbox{\ \ \ on the air-liquid interface}.\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] We measure the fluid pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> relative to the bubble pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p_b <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> Then the dynamic boundary condition implies that <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [-p n_i + \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) n_j + \frac{1}{Ca} \\kappa_f n_i = 0\mbox{\ \ \ on the air-liquid interface,}\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> kappa_f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <a class="code" href="bretherton_8txt.html#a4165526e818831edc8f2890dbda10a50">\kappa_f</a>^* <a class="code" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">H_0 \f</a>$ <a class="code" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> the non-dimensional interface</div>
+<div class="line">curvature and the capillary <a class="code" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">number \f</a>$ <a class="code" href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Ca</a> = U\mu/\sigma^* <a class="code" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">\f</a>$ <a class="code" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> </div>
+<div class="line">a non-dimensional measure</div>
+<div class="line">of the bubble velocity.</div>
+<div class="line">The no-slip condition on the channel walls requires <a class="code" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">that \f</a>$ {\bf</div>
+<div class="line">u}=(-1,0) \<a class="code" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>$ at \<a class="code" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>$ x_2=\pm 1 \<a class="code" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>$. Far behind the bubble tip</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00080">80</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae625e5e226f00a7e3b0634d0cb0bf795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae625e5e226f00a7e3b0634d0cb0bf795">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00005">5</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton_8cc_source.html#l00916">main()</a>.</p>
+
+</div>
+</div>
+<a id="a6899f5063d59c2febace358fc03ae7e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6899f5063d59c2febace358fc03ae7e0">&#9670;&nbsp;</a></span>Re</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [Re \ u_j\frac{\partial u_i}{\partial x_j} = -\frac{\partial p}{\partial x_i} + \\frac{\partial }{\partial x_j }\left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [ \frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> Re</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=U H_0 \rho/<a class="code" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">\mu \f</a>$. </div>
+<div class="line">On the free fluid surface</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00064">64</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3c6fa86b50d84017a568b14c8ac028ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c6fa86b50d84017a568b14c8ac028ca">&#9670;&nbsp;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [<a class="el" href="bretherton_8txt.html#a6899f5063d59c2febace358fc03ae7e0">Re</a> \ u_j\frac{\partial u_i}{\partial x_j} = -\frac{\partial p}{\partial x_i} + \\frac{\partial }{\partial x_j }\left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [ \frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> whose outer unit normal we denote by the fluid normal velocity <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [{\bf u} \cdot {\bf n} = 0 \mbox{\ \ \ on the air-liquid interface}.\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] We measure the fluid pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> relative to the bubble pressure <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> p_b <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> Then the dynamic boundary condition implies that <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [-p n_i + \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) n_j + \frac{1}{Ca} \\<a class="el" href="bretherton_8txt.html#a4165526e818831edc8f2890dbda10a50">kappa_f</a> n_i = 0\mbox{\ \ \ on the air-liquid interface,}\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> the fluid remains stationary on the walls In the moving frame of reference</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00086">86</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="aeef71a9b73cae762c39ef9ce4aac52e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeef71a9b73cae762c39ef9ce4aac52e2">&#9670;&nbsp;</a></span>scale</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous scale</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00052">52</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2c79499ae4cd50c4f226610201de722e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c79499ae4cd50c4f226610201de722e">&#9670;&nbsp;</a></span>simplicity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt;CENTER&gt; A L&lt;a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other there <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> no detailed <a class="el" href="bretherton_8txt.html#a24aca60979e3f92814fb5348a5fcb901">discussion</a> of the driver code itself because the implementation <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> somewhat messy given that the driver code for the sake of simplicity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00042">42</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a46e06899548c6c522acc4a38ff42565f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46e06899548c6c522acc4a38ff42565f">&#9670;&nbsp;</a></span>tutorials</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt;CENTER&gt; A L&lt;a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> Compared to other tutorials</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00022">22</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9fd34c4d6d3575528a9c68ae5828d0ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fd34c4d6d3575528a9c68ae5828d0ad">&#9670;&nbsp;</a></span>vanishes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> setup We non dimensionalise the velocities on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> U the lengths on <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and the pressure on the viscous <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> mu U H_0* <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> and solve the <a class="el" href="bretherton_8txt.html#ae625e5e226f00a7e3b0634d0cb0bf795">problem</a> in a frame moving with the velocity of the finger The flow <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> then governed by the non dimensional Navier Stokes equations <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [<a class="el" href="bretherton_8txt.html#a6899f5063d59c2febace358fc03ae7e0">Re</a> \ u_j\frac{\partial u_i}{\partial x_j} = -\frac{\partial p}{\partial x_i} + \\frac{\partial }{\partial x_j }\left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right)\<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] and the continuity equation <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> [ \frac{\partial u_i}{\partial x_i}=0, \<a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a>] where the Reynolds number <a class="el" href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a> defined as <a class="el" href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a> whose outer unit normal we denote by the fluid normal velocity vanishes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bretherton_8txt_source.html#l00066">66</a> of file <a class="el" href="bretherton_8txt_source.html">bretherton.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="abretherton_8txt_html_a9672a43542c5f0e98e5f16c73f9ec743"><div class="ttname"><a href="bretherton_8txt.html#a9672a43542c5f0e98e5f16c73f9ec743">is</a></div><div class="ttdeci">mainpage The Bretherton rigid walled channel The driver code listed below was originally developed as a test bed for the paper&lt; CENTER &gt; A L&lt; a href=&quot;http: &lt;/CENTER&gt; in which we studied the elastic walled paying particular attention to the effect of transverse gravity which plays quite an important role in this problem Compared to other there is no detailed discussion of the driver code itself because the implementation is somewhat messy given that the driver code is(of course!) very well documented you should be able to figure out what 's going on once you 've read through the discussion of the problem formulation and our brief comments on the \ref implement.&lt; a href</div></div>
+<div class="ttc" id="abretherton_8txt_html_a4165526e818831edc8f2890dbda10a50"><div class="ttname"><a href="bretherton_8txt.html#a4165526e818831edc8f2890dbda10a50">kappa_f</a></div><div class="ttdeci">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the problem setup We non dimensionalise the velocities on f U the lengths on f H_0 *f and the pressure on the viscous f mu U H_0 *f and solve the problem in a frame moving with the velocity of the finger The flow is then governed by the non dimensional Navier Stokes equations f[Re \ u_j\frac{\partial u_i}{\partial x_j}=-\frac{\partial p}{\partial x_i}+\\frac{\partial }{\partial x_j }\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right)\f] and the continuity equation f[\frac{\partial u_i}{\partial x_i}=0, \f] where the Reynolds number is defined as f whose outer unit normal we denote by the fluid normal velocity f[{\bf u} \cdot {\bf n}=0 \mbox{\ \ \ on the air-liquid interface}.\f] We measure the fluid pressure f p f relative to the bubble pressure f p_b f Then the dynamic boundary condition implies that f[-p n_i+\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i} \right) n_j+\frac{1}{Ca} \\kappa_f n_i=0\mbox{\ \ \ on the air-liquid interface,}\f] where f kappa_f</div><div class="ttdef"><b>Definition:</b> <a href="bretherton_8txt_source.html#l00080">bretherton.txt:80</a></div></div>
+<div class="ttc" id="abretherton_8txt_html_a7d297f6f3667b708957789609ee225ec"><div class="ttname"><a href="bretherton_8txt.html#a7d297f6f3667b708957789609ee225ec">f</a></div><div class="ttdeci">the driver code listed below allows the specification of a gravitational body force which will break the up down symmetry of the solution I w textwidth bretherton_sketch Sketch of the problem setup We non dimensionalise the velocities on f U f</div><div class="ttdef"><b>Definition:</b> <a href="bretherton_8txt_source.html#l00051">bretherton.txt:51</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a8b32b93d2e546f9375ec418474107838"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Global_Physical_Variables::Ca</a></div><div class="ttdeci">double Ca</div><div class="ttdoc">Capillary number.</div><div class="ttdef"><b>Definition:</b> <a href="bretherton_8cc_source.html#l00057">bretherton.cc:57</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:08:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

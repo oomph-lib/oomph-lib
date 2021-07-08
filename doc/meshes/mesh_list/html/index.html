@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Existing (structured) meshes</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Existing (structured) meshes </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This document provides a brief description of the various structured meshes that are distributed with the library. Most of these meshes were developed for specific example codes but we expect them to be useful in other problems too. Many of the meshes exist in many different variants, usually constructed by multiple inheritance. When meshes are relatively trivial variations of each other, e.g. a basic mesh and its refineable equivalent, we only list the mesh once. The detailed documentation for the mesh (obtained by following the link) contains the full inheritance diagram, showing the mesh's own base classes and any meshes that are derived from it. For each mesh, we provide a link to a fully-documented example problem that illustrates its use.</p>
+<p>We stress that the <b>key feature of any given mesh</b> is <b>its topology</b>, rather than the specific shape for which it was originally developed. For instance, <code>oomph-lib</code> does not provide a mesh for the discretisation of an annular domain with quadrilateral elements. However, such a mesh is trivial to construct by deriving it from, e.g., the <code>SimpleRectangularQuadMesh</code> (a mesh that discretises a rectangular domain), and then adjusting its nodal positions. Consult the example in the <a href="../../../quick_guide/html/index.html#distorted_mesh">(Not-So-)Quick-Guide</a> for details.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="conventions"></a>
+Reminder: General conventions to facilitate the re-use of meshes</h1>
+<p>Since mesh generation tends to be most tedious part of any numerical simulation, <code>oomph-lib's</code> overall data structure, described in detail <a href="../../../the_data_structure/html/index.html">elsewhere, </a> aims to facilitate the re-use of meshes in many different applications. For this purpose most specific <code>FiniteElements</code> in <code>oomph-lib</code> are derived by multiple inheritance, combining a "geometric" <code>FiniteElement</code> (e.g. a line/quadrilateral/brick-shaped element from the <code>QElement&lt;DIM,NNODE_1D&gt;</code> family) with an equations class (such as <code>PoissonEquations&lt;DIM&gt;</code>) that implements the weak form of a specific PDE. For instance, <code>oomph-lib's</code> quadrilateral nine-node Poisson element, <code>QPoissonElement&lt;2,3&gt;</code>, is derived from the <code>PoissonEquations&lt;2&gt;</code> equations class and the <code>QElement&lt;2,3&gt;</code> geometric <code>FiniteElement</code>.</p>
+<p>The mesh generation process is mainly concerned with the geometric properties of the mesh's constituent <code>FiniteElements</code> (their topology, number of nodes, etc.) which are defined by the geometric <code>FiniteElement</code>. This makes it possible to use a mesh that was originally developed for the solution of a Poisson equation with a <code>QPoissonElement&lt;2,NNODE_1D&gt;</code>, say, for the solution of an advection-diffusion problem with a <code>QAdvctionDiffusionElement&lt;2,NNODE_1D&gt;</code> since both elements are derived from the same geometric <code>FiniteElement</code>. Only two aspects of the mesh generation process require information that is not provided by the geometric <code>FiniteElement:</code> </p><ul>
+<li><b>The number of values to be stored at the various nodes in the mesh:</b> For instance, if a mesh that is designed for quadrilateral elements from the <code>QElement&lt;2,NNODE_1D&gt;</code> family of geometric elements is used to solve a (scalar) Poisson equation with nine-noded elements, each <code>Node</code> has to store a single value. However, if the same mesh is used for the solution of the 2D Navier-Stokes equations with a nine-node quadrilateral elements of type <code>QTaylorHoodElement&lt;2&gt;</code>, nodes located at the elements' four vertices have to store three values (two velocity components and one pressure) whereas nodes located at the elements' interior and on their edges only have to store two values (the two velocity components). <br  />
+<br  />
+</li>
+<li><b>The number of "history values" required by the timestepping procedure (if any):</b> For instance, if the mesh is used for the solution of a Poisson problem, no "history" values are required. If the same mesh is used for the solution of an unsteady heat problem, the number of history values required is determined by the <code>TimeStepper</code> used to approximate the time-derivative of the nodal values.</li>
+</ul>
+<p>The meshes used in our example codes (and all the meshes listed below) have a common structure that allows the required information to be become available to the mesh constructor:</p><ol type="1">
+<li>All meshes are templated by the element type, <code>ELEMENT</code>.<br  />
+<br  />
+</li>
+<li>The final argument of all mesh constructors is a pointer to a <code>TimeStepper</code>. We provide a default for this argument &ndash; a pointer to the <code>Steady&lt;0&gt;</code> timestepper, defined (as static member data) in the <code>Mesh</code> base class.</li>
+</ol>
+<p>The availability of the template parameter allows the mesh generator to build elements of the required type. <code>Nodes</code> are generally built by the <code>FiniteElement::construct_node(...)</code> function whose arguments are the <code>Node's</code> local node number within the current element, and a pointer to the timestepper. These arguments provide all the information that is required to build <code>Nodes</code> with the right number of values (as required by the element) and history values (as required by the <code>TimeStepper</code>). When the function <code>FiniteElement::construct_node(...)</code> is called, it creates the new <code>Node</code>, stores a pointer to the newly created <code>Node</code> in the <code>FiniteElement's</code> own lookup scheme, and returns that pointer. This allows the pointer to the newly created <code>Node</code> to be stored in the <code>Mesh's</code> own lookup scheme for its constituent <code>Nodes</code>. The <a href="../../../quick_guide/html/index.html#mesh">(Not-So-)Quick-Guide</a> contains a section that explains how to write simple meshes. </p><hr  />
+ <hr  />
+<h1><a class="anchor" id="faq"></a>
+Mesh FAQ</h1>
+<p>When using a mesh that was originally developed for a different application, it is sometimes necessary establish the node/element/boundary numbering scheme employed by the mesh writer. While we generally assume that the mesh writer will have carefully documented his/her code, here is what to do if he/she hasn't: <br  />
+<br  />
+</p><ul>
+<li><b>How do I find out how the elements are numbered?</b> <br  />
+<br  />
+ The function <code>Mesh::output(...)</code> outputs the elements in the order in which they are stored internally. If you prefer a different element numbering scheme you can re-number the elements; see e.g. the member function <code><a class="el" href="mesh__list_8txt.html#ae29a37d88beb9197e55d98cd39170fdd">element_reorder()</a></code> in the <a href="classoomph_1_1RectangularQuadMesh.html"><b> RectangularQuadMesh</b></a> class. <br  />
+<br  />
+ <br  />
+</li>
+<li><b>How do I find out how the nodes are numbered?</b> <br  />
+<br  />
+ The function <code>Mesh::node_pt(j)</code> provides pointer-based access to the <code>j</code> - th <code>Node</code> in the mesh. To plot a node's position, you can determine its coordinates from the <code>Node::x(...)</code> function. <br  />
+<br  />
+</li>
+<li><b>How do I find out how the mesh boundaries are numbered?</b> <br  />
+<br  />
+ The function <code>Mesh::output_boundaries(...)</code> outputs the nodes located on the mesh boundaries in a <a href="http://www.tecplot.com">tecplot</a>-able format. Nodes that are located on separate mesh boundaries are contained in separate <a href="http://www.tecplot.com">tecplot</a> zones. <br  />
+<br  />
+</li>
+</ul>
+<p>With this information it should be straightforward to use any of the meshes listed below in one of your own problems. The example code listed next to each mesh illustrates its use in an actual driver code. If you develop a new mesh, let us know! If it is written according to <code>oomph-lib's</code> <a href="../../../coding_conventions/html/index.html">coding standards</a>, we'll be delighted to include it into the library.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="mesh_list"></a>
+Mesh list</h1>
+<center> <table class="doxtable">
+<tr>
+<td><b>Mesh</b>  </td><td><b>Representative Mesh plot</b>   </td></tr>
+<tr>
+<td><a href="classoomph_1_1OneDMesh.html"><b> OneDMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;1,NNODE_1D&gt;</code>.</li>
+<li>This mesh forms the basis for numerous derived meshes.</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>This mesh is used in the driver code for <a href="../../../poisson/one_d_poisson/html/index.html">the solution of the 1D Poisson equation. </a></li>
+</ul>
+</td><td><div class="image">
+<img src="one_d_mesh.gif" alt=""/>
+</div>
+    </td></tr>
+<tr>
+<td><a href="classoomph_1_1SimpleRectangularQuadMesh.html"><b> SimpleRectangularQuadMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;2,NNODE_1D&gt;</code>.</li>
+<li>This mesh forms the basis for numerous derived meshes.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>This mesh is used in the driver code for <a href="../../../poisson/two_d_poisson/html/index.html">the solution of the 2D Poisson equation. </a></li>
+</ul>
+</td><td><div class="image">
+<img src="simple_rectangular_quadmesh.gif" alt=""/>
+</div>
+    </td></tr>
+<tr>
+<td><a href="classoomph_1_1RectangularQuadMesh.html"><b> RectangularQuadMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This is a slightly more sophisticated version of the <code>SimpleRectangularQuadMesh</code> discussed above; it allows for non-uniform spacing of the nodes, and periodicity in the x and y-directions.</li>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;2,NNODE_1D&gt;</code>.</li>
+<li>This mesh forms the basis for numerous derived meshes.</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>The refineable variant of this mesh is used in the driver code for <a href="../../../advection_diffusion/two_d_adv_diff_adapt/html/index.html">the solution of the 2D Advection Diffusion equation. </a></li>
+</ul>
+</td><td><div class="image">
+<img src="simple_rectangular_quadmesh.gif" alt=""/>
+</div>
+    </td></tr>
+<tr>
+<td><a href="classoomph_1_1TwoDAnnularMesh.html"><b> TwoDAnnularMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This is a "wrapped around" version of <code>RectangularQuadMesh</code> discussed above. It can either be used as a complete annulus (in which case periodicity is enforced) or a gap can appear in the annulus.</li>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;2,NNODE_1D&gt;</code>.</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>This mesh is used in the driver code for <a href="../../../helmholtz/scattering/html/index.html">the 2D Helmholtz equation</a>and the <a href="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">time-harmonic linear elasticity equations</a>. </li>
+</ul>
+</td><td><div class="image">
+<img src="annular_meshes.gif" alt=""/>
+</div>
+    </td></tr>
+<tr>
+<td><a class="anchor" id="channel_with_leaflet"></a> <a href="classoomph_1_1ChannelWithLeafletMesh.html"><b> ChannelWithLeafletMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>Mesh for the simulation of flow in a 2D channel that is partially occluded by a moving leaflet.</li>
+<li>Leaflet must be represented by a <code>GeomObject</code> </li>
+<li>Nodes along the leaflet are duplicated to allow for a pressure jump across the leaflet even for discretisations that impose continuous pressure distributions across element boundaries.</li>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;2,NNODE_1D&gt;</code>.</li>
+<li>This mesh forms the basis for numerous derived meshes.</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>The refineable variant of this mesh with an algebraic node update is used in the driver code for <a href="../../../navier_stokes/channel_with_leaflet/html/index.html">the simulation of flow in a 2D channel that is partially occluded by a moving leaflet</a> and also in <a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">corresponding FSI problem. </a></li>
+</ul>
+</td><td><div class="image">
+<img src="channel_with_leaflet_mesh.gif" alt=""/>
+</div>
+    </td></tr>
+<tr>
+<td><a href="classoomph_1_1SimpleRectangularTriMesh.html"><b> SimpleRectangularTriMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This is a simple structured mesh made of triangular elements.</li>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>TElement&lt;2,NNODE_1D&gt;</code>.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>This mesh is used in the self-test code <a href="../../../../self_test/poisson/convergence_tests/t_convergence_2d.cc"><code>t_convergence_2d.cc</code> </a></li>
+</ul>
+</td><td><div class="image">
+<img src="simple_rectangular_trimesh.gif" alt=""/>
+</div>
+    </td></tr>
+<tr>
+<td><a href="classoomph_1_1FishMesh.html"><b> FishMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;2,NNODE_1D&gt;</code>.</li>
+<li>This mesh forms the basis for numerous derived meshes.</li>
+<li>The curvilinear boundaries are represented by a <code>GeomObject</code> and the mesh has a <code>Domain</code> representation, allowing a <code>MacroElement</code> - based node update.</li>
+<li>There is also a version of the mesh that performs the node update in response to changes in the domain boundary by an algebraic node update.</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>The refineable variant of this mesh is used in the driver code for <a href="../../../poisson/fish_poisson/html/index.html">the adaptive solution of the 2D Poisson equation in a fish-shaped domain. </a></li>
+</ul>
+</td><td><div class="image">
+<img src="fish_mesh.gif" alt=""/>
+</div>
+    </td></tr>
+<tr>
+</tr>
+</table>
+<br  />
+ </center><center> <a class="anchor" id="collapsible_channel"></a> <a href="classoomph_1_1CollapsibleChannelMesh.html"><b> CollapsibleChannelMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;2,NNODE_1D&gt;</code>.</li>
+<li>This mesh forms the basis for numerous derived meshes</li>
+<li>The curvilinear boundary is represented by a <code>GeomObject</code> and the mesh has a <code>Domain</code> representation, allowing a <code>MacroElement</code> - based node update.</li>
+<li>There is also a version of the mesh that performs the node update in response to changes in the domain boundary by an algebraic node update. <br  />
+</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>This mesh is used in the driver code for <a href="../../../navier_stokes/collapsible_channel/html/index.html">the solution of the 2D unsteady Navier-Stokes equations in 2D channel with an oscillating wall. </a></li>
+</ul>
+</center><center> <div class="image">
+<img src="collapsible_channel_mesh.gif" alt=""/>
+</div>
+    </center><center> </center><center> <a href="classoomph_1_1CylinderWithFlagMesh.html"><b> CylinderWithFlagMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This <code>Mesh</code> was mainly developed for the solution of Turek &amp; Hron's FSI benchmark problems. The curvilinear boundaries of the cylinder and the "flag" are represented by <code>GeomObjects</code>.</li>
+<li>A refineable version of the mesh exists.</li>
+<li>The node-update in response to changes in the shape of the "flag" can be performed by a version based on an <code>AlgebraicMesh</code> or using a <code>Domain/MacroElement</code> - based node update.</li>
+<li>The bulk elements have to be derived from the geometric finite element <code>QElement&lt;2,NNODE_1D&gt;</code>.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>This mesh is used in the driver code for <a href="../../../interaction/turek_flag/html/index.html">Turek &amp; Hron's FSI benchmark problems </a> and their <a href="../../../navier_stokes/turek_flag_non_fsi/html/index.html">non-FSI equivalents.</a></li>
+</ul>
+</center><center> <div class="image">
+<img src="cylinder_with_flag_mesh.gif" alt=""/>
+</div>
+    </center><center> </center><center> <a href="classoomph_1_1BrethertonSpineMesh.html"><b> BrethertonSpineMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This <code>SpineMesh</code> was mainly developed for the simulation of the Bretherton problem but it can, of course, also be used in other problems. The mesh topology would be suitable for the simulation of flows in a bifurcating channel, say.</li>
+<li>The bulk elements have to be derived from the geometric finite element <code>QElement&lt;2,NNODE_1D&gt;</code>.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>This mesh is used in the driver code for <a href="../../../navier_stokes/bretherton/html/index.html">the simulation of the Bretherton problem. </a></li>
+</ul>
+</center><center> <div class="image">
+<img src="bretherton_spine_mesh.gif" alt=""/>
+</div>
+    </center><center> <br  />
+ </center><center> <a href="classoomph_1_1QuarterCircleSectorMesh.html"><b> QuarterCircleSectorMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;2,NNODE_1D&gt;</code>.</li>
+<li>This mesh forms the basis for numerous derived meshes</li>
+<li>The curvilinear boundary is represented by a <code>GeomObject</code> and the mesh has a <code>Domain</code> representation, allowing a <code>MacroElement</code> - based node update.</li>
+<li>There is also a version of the mesh that performs the node update in response to changes in the domain boundary by an algebraic node update. <br  />
+</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>The refineable version of this mesh is used in the driver code for <a href="../../../navier_stokes/osc_ellipse/html/index.html">the simulation of flow inside a oscillating ellipse. </a></li>
+</ul>
+</center><center> <div class="image">
+<img src="quarter_circle_sector_mesh.gif" alt=""/>
+</div>
+    </center><center> <br  />
+ </center><center> <a href="classoomph_1_1SimpleCubicMesh.html"><b> SimpleCubicMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;3,NNODE_1D&gt;</code>.</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>This mesh is used in the self-test code <a href="../../../../self_test/poisson/convergence_tests/q_convergence_3d.cc"><code>q_convergence_3d.cc</code> </a></li>
+</ul>
+</center><center> <div class="image">
+<img src="simple_cubic_mesh.gif" alt=""/>
+</div>
+    </center><center> <br  />
+ </center><center> <a href="classoomph_1_1SimpleCubicTetMesh.html"><b> SimpleCubicTetMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This is a simple structured mesh for tet elements.</li>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>TElement&lt;3,NNODE_1D&gt;</code>.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>This mesh is used in the self-test code <a href="../../../../self_test/poisson/convergence_tests/t_convergence_3d.cc"><code>t_convergence_3d.cc</code> </a></li>
+</ul>
+</center><center> <div class="image">
+<img src="simple_cubic_tetmesh.gif" alt=""/>
+</div>
+    </center><center> <br  />
+ </center><center> <a href="classoomph_1_1QuarterTubeMesh.html"><b> QuarterTubeMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;3,NNODE_1D&gt;</code>.</li>
+<li>This mesh forms the basis for numerous derived meshes</li>
+<li>The curvilinear boundary is represented by a <code>GeomObject</code> and the mesh has a <code>Domain</code> representation, allowing a <code>MacroElement</code> - based node update.</li>
+<li>There is also a version of the mesh that performs the node update in response to changes in the domain boundary by an algebraic node update. <br  />
+</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>The refineable version of this mesh is used in the driver code for <a href="../../../navier_stokes/three_d_entry_flow/html/index.html">the simulation of 3D entry flow into a cylindrical tube. </a></li>
+</ul>
+</center><center> <div class="image">
+<img src="quarter_tube_mesh.gif" alt=""/>
+</div>
+    </center><center> <br  />
+ </center><center> <a href="classoomph_1_1TubeMesh.html"><b> TubeMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;3,NNODE_1D&gt;</code>.</li>
+<li>This mesh forms the basis for numerous derived meshes that describe topologically-tube-shaped domains.</li>
+<li>The entire domain is represented by a <code>GeomObject</code> and the mesh has a <code>Domain</code> representation, allowing a <code>MacroElement</code> - based node update.</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>The refineable version of this mesh is used in the driver code for <a href="../../../navier_stokes/curved_pipe/html/index.html">the simulation of 3D flow in a curved cylindrical pipe. </a></li>
+</ul>
+</center><center> <div class="image">
+<img src="tube_mesh.gif" alt=""/>
+</div>
+    </center><center> <br  />
+ </center><center> <a href="classoomph_1_1EighthSphereMesh.html"><b> EighthSphereMesh&lt;ELEMENT&gt; </b></a> <br  />
+<br  />
+<ul>
+<li>This mesh can be used with all <code>FiniteElements</code> that are derived from the geometric finite element <code>QElement&lt;3,NNODE_1D&gt;</code>.</li>
+<li>A refineable version of this mesh exists.</li>
+</ul>
+<b>Example driver code:</b> <br  />
+<ul>
+<li>The refineable version of this mesh is used in the driver code for <a href="../../../poisson/eighth_sphere_poisson/html/index.html">the adaptive solution of the 3D Poisson equation. </a></li>
+</ul>
+</center><center> <div class="image">
+<img src="eighth_sphere_mesh.gif" alt=""/>
+</div>
+    </center><center> </center><p> <br  />
+</p>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:54:13
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: compressed_square.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">compressed_square.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a5a6c39e643df898a41b2ff44e0453777"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a5a6c39e643df898a41b2ff44e0453777">nu</a> = 1/2 \f$.) \<a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> } Next we consider the pressure/displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> <a class="el" href="compressed__square_8txt.html#acb72f00e7477cc4da657d2d8a283d098">continuous</a> pressures(Taylor-Hood), using the \c QPVDElementWithContinuousPressure element. \<a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> } We suppress the listing of the remaining combinations(see the driver code&lt; A HREF=&quot;../../../../demo_drivers/solid/compressed_square/compressed_square.cc&quot;&gt; compressed_square.cc&lt;/A &gt;for details):- Pressure/displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> discontinuous pressures(Crouzeix-Raviart), using the \c QPVDElementWithPressure element. - Pressure/displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> <a class="el" href="compressed__square_8txt.html#acb72f00e7477cc4da657d2d8a283d098">continuous</a> pressures(Taylor-Hood), using the \c QPVDElementWithContinuousPressure element, <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> true <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> enforced via <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> III. - Pressure/displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> discontinuous pressures(Crouzeix-Raviart), using the \c QPVDElementWithPressure element, <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> true <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> enforced via <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> III. . Before the end of the loop over the different \f$ \<a class="el" href="compressed__square_8txt.html#a5a6c39e643df898a41b2ff44e0453777">nu</a> \f$ values we delete the constitutive <a class="el" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a>, allowing it to be re-built <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> a different Poisson ratio. \skipline Clean up \<a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> end generalised Hookean Next we build the strain-energy-based Mooney-Rivlin constitutive law \<a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> <a class="el" href="namespaceGlobal__Physical__Variables.html#a73135f793690b4386bf83bbefc7bf310">Global_Physical_Variables::Strain_energy_function_pt</a>)</td></tr>
+<tr class="separator:a5a6c39e643df898a41b2ff44e0453777"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a30df6d474e628edde0a5cf37da84baac"><td class="memItemLeft" align="right" valign="top">mainpage Demo problems in which the solid is truly incompressible require a solution based on the pressure displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> of the principle virtual of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> (<a class="el" href="compressed__square_8txt.html#ac643d878717b1b2577ba6ebef275a0e9">PVD</a>). Mathematically</td></tr>
+<tr class="separator:a30df6d474e628edde0a5cf37da84baac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb72f00e7477cc4da657d2d8a283d098"><td class="memItemLeft" align="right" valign="top">mainpage Demo problems in which the solid is truly incompressible require a solution based on the pressure displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> of the principle virtual of this is because the pressure acts as the Lagrange multiplier that enforces <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> The pressure displacement form of the <a class="el" href="compressed__square_8txt.html#ac643d878717b1b2577ba6ebef275a0e9">PVD</a> may be discretised <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> finite <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> that employ&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#acb72f00e7477cc4da657d2d8a283d098">continuous</a> (e.g. Taylor-Hood-type) or discontinuous(e.g. Crouzeix-Raviart-type) elements. Some const itutive equations allow for compressible and incompressible behaviour</td></tr>
+<tr class="separator:acb72f00e7477cc4da657d2d8a283d098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c577322e326e475e63e55d035ac4e33"><td class="memItemLeft" align="right" valign="top">mainpage Demo problems in which the solid is truly incompressible require a solution based on the pressure displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> of the principle virtual of this is because the pressure acts as the Lagrange multiplier that enforces <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> The pressure displacement form of the <a class="el" href="compressed__square_8txt.html#ac643d878717b1b2577ba6ebef275a0e9">PVD</a> may be discretised <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> finite <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> that employ depending on their parameters Problems involving such constitutive equations may be solved <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> large number of formulations As an consider c oomph lib s generalised Hookean constitutive&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a> (see the&lt; a href=&quot;#disclaimer&quot;&gt;disclaimer&lt;/a &gt; below).&lt; b &gt; I. The displacement form&lt;/b &gt; \c oomph-lib 's generalised Hookean const itutive law assumes that the 2nd Piola Kirchhoff stress \f$ \sigma^</td></tr>
+<tr class="separator:a4c577322e326e475e63e55d035ac4e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f52984ecc33dbdea53715ca84d7a738"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> (non-dimensionalised on Young 's modulus \f$ E \f$) is related to Green 's strain tensor \f$ \gamma_</td></tr>
+<tr class="separator:a3f52984ecc33dbdea53715ca84d7a738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1981a63013bd225a04faeae496ea3fe8"><td class="memItemLeft" align="right" valign="top">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a1981a63013bd225a04faeae496ea3fe8">enforce</a> (true) <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> if required. Note that</td></tr>
+<tr class="separator:a1981a63013bd225a04faeae496ea3fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27495107dc923df67a69731b3b9e83e9"><td class="memItemLeft" align="right" valign="top">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we by c oomph lib s pressure displacement based solid mechanics <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> do not assume i e the <a class="el" href="compressed__square_8txt.html#a4b2dd707efadb6e307ea8daff0e9348e">default</a> is to use <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> II <a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> end compressibility we pick a control node to document the solid s load displacement characteristics and apply the boundary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a27495107dc923df67a69731b3b9e83e9">conditions</a> (no <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> normal to the &quot;slippery&quot; walls) before setting up the <a class="el" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a> numbering scheme. \<a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> end of const ructor&lt; HR &gt;&lt; HR &gt; \section doc Post-processing The post-processing routine documents the load-displacement characteristics in a trace file and outputs the deformed domain shape. \<a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> endl</td></tr>
+<tr class="separator:a27495107dc923df67a69731b3b9e83e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4074baada03976c061d5672f4237cca5"><td class="memItemLeft" align="right" valign="top">mainpage Demo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></td></tr>
+<tr class="separator:a4074baada03976c061d5672f4237cca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d894cf3e57db89af9e46791cf4c237f"><td class="memItemLeft" align="right" valign="top">mainpage Demo problems in which the solid is truly incompressible require a solution based on the pressure displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> of the principle virtual of this is because the pressure acts as the Lagrange multiplier that enforces <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> The pressure displacement form of the <a class="el" href="compressed__square_8txt.html#ac643d878717b1b2577ba6ebef275a0e9">PVD</a> may be discretised <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> finite <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> that employ depending on their parameters Problems involving such constitutive equations may be solved <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> large number of formulations As an&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a4d894cf3e57db89af9e46791cf4c237f">example</a></td></tr>
+<tr class="separator:a4d894cf3e57db89af9e46791cf4c237f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac643d878717b1b2577ba6ebef275a0e9"><td class="memItemLeft" align="right" valign="top">the constitutive law can be used directly in the displacement based form of the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#ac643d878717b1b2577ba6ebef275a0e9">PVD</a></td></tr>
+<tr class="separator:ac643d878717b1b2577ba6ebef275a0e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6f456748bd8216ad2cf17aa0fca2f44"><td class="memItemLeft" align="right" valign="top">the constitutive law can be used directly in the displacement based form of the unless <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> the constitutive <a class="el" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a> may be rewritten in the form <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>[\sigma^{ij}=\overline{\sigma}^{ij} - p \ G^{ij} \, \<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] where the deviatoric stress is given by <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>[\overline{\sigma}^{ij}=\frac{1}{2(1+\<a class="el" href="compressed__square_8txt.html#a5a6c39e643df898a41b2ff44e0453777">nu</a>)}\bigg(G^{ik} G^{jl}+G^{il} G^{jk} \bigg) \gamma_{kl}.\<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] To remain consisten&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> )(@R[const_eqn]@)</td></tr>
+<tr class="separator:ab6f456748bd8216ad2cf17aa0fca2f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fbe239796de5b2be30860a17a038631"><td class="memItemLeft" align="right" valign="top">the constitutive law can be used directly in the displacement based form of the unless <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> the constitutive <a class="el" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a> may be rewritten in the form <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>[\sigma^{ij}=\overline{\sigma}^{ij} - p \ G^{ij} \, \<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] where the deviatoric stress is given by <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>[\overline{\sigma}^{ij}=\frac{1}{2(1+\<a class="el" href="compressed__square_8txt.html#a5a6c39e643df898a41b2ff44e0453777">nu</a>)}\bigg(G^{ik} G^{jl}+G^{il} G^{jk} \bigg) \gamma_{kl}.\<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] To remain consistent the pressure <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> p <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> must then be determined via the <a class="el" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a> <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a3fbe239796de5b2be30860a17a038631">dilatation</a> [p \ \frac{1}{\kappa}+d=0, \hspace{4cm} @E[constraint]@\<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] where <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>[d=G^{ij} \gamma_{ij}\<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] is the generalised(which reduces to the actual dilatation in the small-strain limit). The inverse bulk modulus is defined as \<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>[\frac</td></tr>
+<tr class="separator:a3fbe239796de5b2be30860a17a038631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0005745f18f3ed5d3e2f7943e5243c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#ac0005745f18f3ed5d3e2f7943e5243c4">First</a></td></tr>
+<tr class="separator:ac0005745f18f3ed5d3e2f7943e5243c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf70607b745b62a5533093819709225c"><td class="memItemLeft" align="right" valign="top">we solve the <a class="el" href="compressed__square_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> in the pure displacement&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a></td></tr>
+<tr class="separator:adf70607b745b62a5533093819709225c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1144550ad5a8714869a222e0f1d3ba5"><td class="memItemLeft" align="right" valign="top">and solve the <a class="el" href="compressed__square_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> c QPVDElementWithContinuousPressure and c QPVDElementWithPressure&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a></td></tr>
+<tr class="separator:aa1144550ad5a8714869a222e0f1d3ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c1f89fe739e087bc26c6898cae8de35"><td class="memItemLeft" align="right" valign="top">and solve the <a class="el" href="compressed__square_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> c QPVDElementWithContinuousPressure and c QPVDElementWithPressure enforcing true <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> enforced via <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> III by setting the c incompressible flag to true until end of <a class="el" href="compressed__square_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt; HR &gt;&lt; HR &gt; section class The Problem class The c Problem class has the usual member functions The c i_case label is used to distinguish different cases while the boolean c incompressible indicates if we wish to <a class="el" href="compressed__square_8txt.html#a1981a63013bd225a04faeae496ea3fe8">enforce</a> <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> via <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> III dontinclude compressed_square cc skipline begin_problem&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a></td></tr>
+<tr class="separator:a3c1f89fe739e087bc26c6898cae8de35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2dd707efadb6e307ea8daff0e9348e"><td class="memItemLeft" align="right" valign="top">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we by&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a4b2dd707efadb6e307ea8daff0e9348e">default</a></td></tr>
+<tr class="separator:a4b2dd707efadb6e307ea8daff0e9348e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e36efdd351f20413f2f042bf2ae8f26"><td class="memItemLeft" align="right" valign="top">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we by c oomph lib s pressure displacement based solid mechanics <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> do not assume&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a></td></tr>
+<tr class="separator:a1e36efdd351f20413f2f042bf2ae8f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a778c689bda5b9ddb395c7577b9dd872c"><td class="memItemLeft" align="right" valign="top">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we by c oomph lib s pressure displacement based solid mechanics <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> do not assume i e the <a class="el" href="compressed__square_8txt.html#a4b2dd707efadb6e307ea8daff0e9348e">default</a> is to use <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> II <a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> end compressibility&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compressed__square_8txt.html#a778c689bda5b9ddb395c7577b9dd872c">Finally</a></td></tr>
+<tr class="separator:a778c689bda5b9ddb395c7577b9dd872c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a5a6c39e643df898a41b2ff44e0453777"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a6c39e643df898a41b2ff44e0453777">&#9670;&nbsp;</a></span>nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the constitutive law can be used directly in the displacement based form of the unless <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> <a class="el" href="compressed__square_8txt.html#a5a6c39e643df898a41b2ff44e0453777">nu</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= 1/2 <a class="code" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">\f</a>$ -- the <span class="keywordflow">case</span> that corresponds to </div>
+<div class="line">incompressible behaviour in the small-displacement regime. </div>
+<div class="line">(While the above <a class="code" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> only breaks down completely</div>
+<div class="line"><a class="code" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">when \f</a>$ <a class="code" href="compressed__square_8txt.html#a5a6c39e643df898a41b2ff44e0453777">\nu</a> = 1/2, <a class="code" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">\f</a>$ numerical solutions based on the</div>
+<div class="line">above form of the constitutive <a class="code" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a> become badly-behaved</div>
+<div class="line"><a class="code" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">as \f</a>$ <a class="code" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">\nu \f</a>$ approaches that value.)</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">&lt;b&gt; II. The pressure-displacement form <span class="keywordflow">for</span> compressible and</div>
+<div class="line">incompressible behaviour&lt;/b&gt;</div>
+<div class="line"> </div>
+<div class="line">To avoid the problems that arise <a class="code" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">as \f</a>$ \nu \to 1/2</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00319">319</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a27495107dc923df67a69731b3b9e83e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27495107dc923df67a69731b3b9e83e9">&#9670;&nbsp;</a></span>conditions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we by c oomph lib s pressure displacement based solid mechanics <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> do not assume i e the <a class="el" href="compressed__square_8txt.html#a4b2dd707efadb6e307ea8daff0e9348e">default</a> is to use <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> II <a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> end compressibility we pick a control node to document the solid s load displacement characteristics and apply the boundary conditions </td>
+          <td>(</td>
+          <td class="paramtype">no <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> normal to the &quot;slippery&quot;&#160;</td>
+          <td class="paramname"><em>walls</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acb72f00e7477cc4da657d2d8a283d098"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb72f00e7477cc4da657d2d8a283d098">&#9670;&nbsp;</a></span>continuous()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problems in which the solid is truly incompressible require a solution based on the pressure displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> of the principle virtual of this is because the pressure acts as the Lagrange multiplier that enforces <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> The pressure displacement form of the <a class="el" href="compressed__square_8txt.html#ac643d878717b1b2577ba6ebef275a0e9">PVD</a> may be discretised <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> finite <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> that employ continuous </td>
+          <td>(</td>
+          <td class="paramtype">e.g. Taylor-Hood-&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30df6d474e628edde0a5cf37da84baac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30df6d474e628edde0a5cf37da84baac">&#9670;&nbsp;</a></span>displacements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problems in which the solid is truly incompressible require a solution based on the pressure displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> of the principle virtual of displacements </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="compressed__square_8txt.html#ac643d878717b1b2577ba6ebef275a0e9">PVD</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1981a63013bd225a04faeae496ea3fe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1981a63013bd225a04faeae496ea3fe8">&#9670;&nbsp;</a></span>enforce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we enforce </td>
+          <td>(</td>
+          <td class="paramtype">true&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c577322e326e475e63e55d035ac4e33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c577322e326e475e63e55d035ac4e33">&#9670;&nbsp;</a></span>equation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problems in which the solid is truly incompressible require a solution based on the pressure displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> of the principle virtual of this is because the pressure acts as the Lagrange multiplier that enforces <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> The pressure displacement form of the <a class="el" href="compressed__square_8txt.html#ac643d878717b1b2577ba6ebef275a0e9">PVD</a> may be discretised <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> finite <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> that employ depending on their parameters Problems involving such constitutive equations may be solved <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> large number of formulations As an consider c oomph lib s generalised Hookean constitutive equation </td>
+          <td>(</td>
+          <td class="paramtype">see the&lt; a href=&quot;#disclaimer&quot;&gt;disclaimer&lt;/a &gt;&#160;</td>
+          <td class="paramname"><em>below</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00022">22</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3f52984ecc33dbdea53715ca84d7a738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f52984ecc33dbdea53715ca84d7a738">&#9670;&nbsp;</a></span>f()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">f </td>
+          <td>(</td>
+          <td class="paramtype">non-dimensionalised on Young 's modulus \f$ E \&#160;</td>
+          <td class="paramname"><em>f$</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00028">28</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a4b2dd707efadb6e307ea8daff0e9348e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b2dd707efadb6e307ea8daff0e9348e">&#9670;&nbsp;</a></span>default</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we by default</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00357">357</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3fbe239796de5b2be30860a17a038631"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fbe239796de5b2be30860a17a038631">&#9670;&nbsp;</a></span>dilatation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the constitutive law can be used directly in the displacement based form of the unless <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> the constitutive <a class="el" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a> may be rewritten in the form <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> [\sigma^{ij} = \overline{\sigma}^{ij} - p \ G^{ij} \ , \<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] where the deviatoric stress is given by <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> [ \overline{\sigma}^{ij} = \frac{1}{2(1+\<a class="el" href="compressed__square_8txt.html#a5a6c39e643df898a41b2ff44e0453777">nu</a>)}\bigg( G^{ik} G^{jl} + G^{il} G^{jk} \bigg) \gamma_{kl}.\<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] To remain consistent the pressure <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> p <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> must then be determined via the <a class="el" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a> <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> dilatation[p \ \frac{1}{\kappa} + d = 0, \hspace{4cm} @E[constraint]@\<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] where <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> [d = G^{ij} \gamma_{ij}\<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] is the generalised(which reduces to the actual dilatation in the small-strain limit). The inverse bulk modulus is defined as \<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>[\frac</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00077">77</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa1144550ad5a8714869a222e0f1d3ba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1144550ad5a8714869a222e0f1d3ba5">&#9670;&nbsp;</a></span>elements</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and solve the <a class="el" href="compressed__square_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> c QPVDElementWithContinuousPressure and c QPVDElementWithPressure elements</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00322">322</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4d894cf3e57db89af9e46791cf4c237f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d894cf3e57db89af9e46791cf4c237f">&#9670;&nbsp;</a></span>example</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problems in which the solid is truly incompressible require a solution based on the pressure displacement <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> of the principle virtual of this is because the pressure acts as the Lagrange multiplier that enforces <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> The pressure displacement form of the <a class="el" href="compressed__square_8txt.html#ac643d878717b1b2577ba6ebef275a0e9">PVD</a> may be discretised <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> finite <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> that employ depending on their parameters Problems involving such constitutive equations may be solved <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> large number of formulations As an example</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00020">20</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="a778c689bda5b9ddb395c7577b9dd872c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a778c689bda5b9ddb395c7577b9dd872c">&#9670;&nbsp;</a></span>Finally</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we by c oomph lib s pressure displacement based solid mechanics <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> do not assume i e the <a class="el" href="compressed__square_8txt.html#a4b2dd707efadb6e307ea8daff0e9348e">default</a> is to use <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> II <a class="el" href="compressed__square_8txt.html#a3c1f89fe739e087bc26c6898cae8de35">until</a> end compressibility Finally</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00363">363</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac0005745f18f3ed5d3e2f7943e5243c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0005745f18f3ed5d3e2f7943e5243c4">&#9670;&nbsp;</a></span>First</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">First</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00080">80</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="adf70607b745b62a5533093819709225c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf70607b745b62a5533093819709225c">&#9670;&nbsp;</a></span>formulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">we solve the <a class="el" href="compressed__square_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> in the pure displacement formulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00281">281</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="a1e36efdd351f20413f2f042bf2ae8f26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e36efdd351f20413f2f042bf2ae8f26">&#9670;&nbsp;</a></span>incompressibility</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">If the element is based on the pressure displacement form of the principle virtual of <a class="el" href="compressed__square_8txt.html#a30df6d474e628edde0a5cf37da84baac">displacements</a> we by c oomph lib s pressure displacement based solid mechanics <a class="el" href="compressed__square_8txt.html#aa1144550ad5a8714869a222e0f1d3ba5">elements</a> do not assume incompressibility</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00359">359</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4074baada03976c061d5672f4237cca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4074baada03976c061d5672f4237cca5">&#9670;&nbsp;</a></span>problem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage Demo problem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00007">7</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="compressed__square_8cc_source.html#l00421">main()</a>.</p>
+
+</div>
+</div>
+<a id="ac643d878717b1b2577ba6ebef275a0e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac643d878717b1b2577ba6ebef275a0e9">&#9670;&nbsp;</a></span>PVD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the constitutive law can be used directly in the displacement based form of the PVD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00030">30</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3c1f89fe739e087bc26c6898cae8de35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c1f89fe739e087bc26c6898cae8de35">&#9670;&nbsp;</a></span>until</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and solve the <a class="el" href="compressed__square_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a> <a class="el" href="compressed__square_8txt.html#ab6f456748bd8216ad2cf17aa0fca2f44">with</a> c QPVDElementWithContinuousPressure and c QPVDElementWithPressure enforcing true <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> enforced via <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> III by setting the c incompressible flag to true until end of <a class="el" href="compressed__square_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>&lt;HR&gt;&lt;HR&gt; section class The Problem class The c Problem class has the usual member functions The c i_case label is used to distinguish different cases while the boolean c incompressible indicates if we wish to <a class="el" href="compressed__square_8txt.html#a1981a63013bd225a04faeae496ea3fe8">enforce</a> <a class="el" href="compressed__square_8txt.html#a1e36efdd351f20413f2f042bf2ae8f26">incompressibility</a> via <a class="el" href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a> III dontinclude compressed_square cc skipline begin_problem until</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="compressed__square_8txt_source.html#l00330">330</a> of file <a class="el" href="compressed__square_8txt_source.html">compressed_square.txt</a>.</p>
+
+</div>
+</div>
+<a id="ab6f456748bd8216ad2cf17aa0fca2f44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6f456748bd8216ad2cf17aa0fca2f44">&#9670;&nbsp;</a></span>with</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the constitutive law can be used directly in the displacement based form of the unless <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> the constitutive <a class="el" href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a> may be rewritten in the form <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> [\sigma^{ij} = \overline{\sigma}^{ij} - p \ G^{ij} \ , \<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] where the deviatoric stress is given by <a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a> [ \overline{\sigma}^{ij} = \frac{1}{2(1+\<a class="el" href="compressed__square_8txt.html#a5a6c39e643df898a41b2ff44e0453777">nu</a>)}\bigg( G^{ik} G^{jl} + G^{il} G^{jk} \bigg) \gamma_{kl}.\<a class="el" href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a>] To remain consisten with) ( @R[const_eqn]@)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="acompressed__square_8txt_html_a5a6c39e643df898a41b2ff44e0453777"><div class="ttname"><a href="compressed__square_8txt.html#a5a6c39e643df898a41b2ff44e0453777">nu</a></div><div class="ttdeci">1/2 \f$.) \until } Next we consider the pressure/displacement formulation with continuous pressures(Taylor-Hood), using the \c QPVDElementWithContinuousPressure element. \until } We suppress the listing of the remaining combinations(see the driver code&lt; A HREF=&quot;../../../../demo_drivers/solid/compressed_square/compressed_square.cc&quot;&gt; compressed_square.cc&lt;/A &gt;for details):- Pressure/displacement formulation with discontinuous pressures(Crouzeix-Raviart), using the \c QPVDElementWithPressure element. - Pressure/displacement formulation with continuous pressures(Taylor-Hood), using the \c QPVDElementWithContinuousPressure element, with true incompressibility enforced via formulation III. - Pressure/displacement formulation with discontinuous pressures(Crouzeix-Raviart), using the \c QPVDElementWithPressure element, with true incompressibility enforced via formulation III. . Before the end of the loop over the different \f$ \nu \f$ values we delete the constitutive equation, allowing it to be re-built with a different Poisson ratio. \skipline Clean up \until end generalised Hookean Next we build the strain-energy-based Mooney-Rivlin constitutive law \until Global_Physical_Variables::Strain_energy_function_pt) nu</div><div class="ttdef"><b>Definition:</b> <a href="compressed__square_8txt_source.html#l00319">compressed_square.txt:319</a></div></div>
+<div class="ttc" id="acompressed__square_8txt_html_adf70607b745b62a5533093819709225c"><div class="ttname"><a href="compressed__square_8txt.html#adf70607b745b62a5533093819709225c">formulation</a></div><div class="ttdeci">we solve the problem in the pure displacement formulation</div><div class="ttdef"><b>Definition:</b> <a href="compressed__square_8txt_source.html#l00281">compressed_square.txt:281</a></div></div>
+<div class="ttc" id="acompressed__square_8txt_html_a3f52984ecc33dbdea53715ca84d7a738"><div class="ttname"><a href="compressed__square_8txt.html#a3f52984ecc33dbdea53715ca84d7a738">f</a></div><div class="ttdeci">f(non-dimensionalised on Young 's modulus \f$ E \f$) is related to Green 's strain tensor \f$ \gamma_</div><div class="ttdef"><b>Definition:</b> <a href="compressed__square_8txt_source.html#l00028">compressed_square.txt:28</a></div></div>
+<div class="ttc" id="acompressed__square_8txt_html_a4c577322e326e475e63e55d035ac4e33"><div class="ttname"><a href="compressed__square_8txt.html#a4c577322e326e475e63e55d035ac4e33">equation</a></div><div class="ttdeci">mainpage Demo problems in which the solid is truly incompressible require a solution based on the pressure displacement formulation of the principle virtual of this is because the pressure acts as the Lagrange multiplier that enforces incompressibility The pressure displacement form of the PVD may be discretised with finite elements that employ depending on their parameters Problems involving such constitutive equations may be solved with large number of formulations As an consider c oomph lib s generalised Hookean constitutive equation(see the&lt; a href=&quot;#disclaimer&quot;&gt;disclaimer&lt;/a &gt; below).&lt; b &gt; I. The displacement form&lt;/b &gt; \c oomph-lib 's generalised Hookean const itutive law assumes that the 2nd Piola Kirchhoff stress \f$ \sigma^</div><div class="ttdef"><b>Definition:</b> <a href="compressed__square_8txt_source.html#l00022">compressed_square.txt:22</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:17:35
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

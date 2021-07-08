@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Frequently Asked Questions</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">Frequently Asked Questions </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Here are some frequently asked questions (with assorted frequently given answers...). Please check these before contacting us with any problems.</p>
+<ul>
+<li><a class="el" href="index.html#installation">Installation</a> <br  />
+<br  />
+<ul>
+<li><a class="el" href="index.html#comp_opt">How do I specify different levels of optimisation and/or non-standard compiler options?</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#other_compilers">The compilation fails when I use my xxx [non gcc] compiler</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#cygwin">The build process fails under cygwin</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#apple">The build process fails under Apple's Darwin (OSX) or other BSD Linux distributions</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#apple_link">The linking self-test fails under Apple's OSX</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#self_tests">Some of the self tests fail</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#run1">How do I compile/run the demo driver codes?</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#run2">Why doesn't make make anything? What are the targets called?</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#only_compile_dont_run">Running the self-tests takes a long time. Is it possible to suppress the execution of the built driver codes and only check if they compile? (Mainly useful for developers).</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#grep_run">I only want to run the self-tests for demo driver codes that contain a certain string (typically a class name; again mainly useful for developers)</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#link">The oomph-lib distribution includes some third-party libraries. How do I get the code to link against optimised local versions of these libraries that are already installed on my machine?</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#missing_this">Missing 'this-&gt;'</a> <br  />
+<br  />
+</li>
+</ul>
+</li>
+<li><a class="el" href="index.html#compilation_and_seg">Compilation problems and run-time errors</a> <br  />
+<br  />
+<ul>
+<li><a class="el" href="index.html#rodata">Warning about "discarded sections" during linking</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#seg_fault">My driver code compiles but dies with a segmentation fault</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#wrong_results">My driver code runs but it produces incorrect/non-sensical results</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#newton_divergence">The Newton solver diverges</a> <br  />
+<br  />
+</li>
+</ul>
+</li>
+<li><a class="el" href="index.html#cust_opt">Customisation and optimisation</a> <br  />
+<br  />
+<ul>
+<li><a class="el" href="index.html#tecplot">I don't have tecplot. How do I change oomph-lib's output so it can be displayed by my own plotting package?</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#element_too_general">oomph-lib's implementation of the Navier-Stokes equations (say) is too general (and therefore too expensive) for my application. How do I change this?</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#build_not_run_demos">How do I build the self tests without running them?</a> <br  />
+<br  />
+</li>
+</ul>
+</li>
+<li><a class="el" href="index.html#nav">Finding your way around the distribution</a> <br  />
+<br  />
+<ul>
+<li><a class="el" href="index.html#too_much">There is so much information &ndash; how do I get started?</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#includes">Where is this class/function/... defined?</a> <br  />
+<br  />
+</li>
+</ul>
+</li>
+<li><a class="el" href="index.html#all_else_fails">If all else fails...</a> <br  />
+<br  />
+<ul>
+<li><a class="el" href="index.html#reporting">How to report problems/bugs</a> <br  />
+<br  />
+</li>
+</ul>
+</li>
+</ul>
+<p><br  />
+<br  />
+</p><hr  />
+ <hr  />
+<h1><a class="anchor" id="installation"></a>
+Installation</h1>
+<h2><a class="anchor" id="comp_opt"></a>
+How do I specify different levels of optimisation and/or non-standard compiler options?</h2>
+<ol type="1">
+<li><b>Compiler flags/options for the compilation of the library</b> <br  />
+<br  />
+ By default, <code>oomph-lib's</code> installation is performed with the <a href="http://gcc.gnu.org/">gcc compiler suite</a>, using full optimisation and warning (<code>-O6</code> <code>-Wall</code> ). <br  />
+<br  />
+ If you install the library with the <code>autogen.sh</code> script you are given the option to overwrite the default compilation flags, either by specifying alternative flags on the command line, or by recycling any of the previously used combinations of flags, stored in the directory <a href="../../../config/configure_options/">config/configure_options</a>. The files in this directory also contain more details on available flags and options. <br  />
+<br  />
+ If you prefer the standard linux <code>configure/make/make</code> <code>install</code> installation procedure, you should already know how to specify flags at the configure stage... <br  />
+<br  />
+</li>
+<li><b>Compiler flags/options for the compilation of individual (driver) codes</b> <br  />
+<br  />
+ Within the <code>autotools</code> framework, additional flags for the compilation of individual (driver) codes may be specified by setting the appropriate automake variables in the <code>Makefile</code>.<code>am</code>. For instance, to use the compiler flag <code>-DUSE_TAYLOR_HOOD</code> during the compilation of the executable <code>test_code</code>, add <div class="fragment"><div class="line">test_code_CXXFLAGS = -DUSE_TAYLOR_HOOD</div>
+</div><!-- fragment --> to the appropriate <code>Makefile</code>.<code>am</code>. The C++ section of the <a href="http://www.gnu.org/software/automake/manual/automake.html">automake manual</a> provides more detail on other <code>automake</code> variables. <br  />
+<br  />
+ If you link against <code>oomph-lib</code> from outside the <code>autotools</code> framework, you can, of course, use whatever technique you prefer to customise the compilation of your driver code.</li>
+</ol>
+<hr  />
+<h2><a class="anchor" id="other_compilers"></a>
+The compilation fails when I use my xxx [non gcc] compiler</h2>
+<p><code>oomph-lib</code> is developed in a GNU Linux environment, using the <a href="http://gcc.gnu.org/">gcc compiler suite</a>. We believe (!) the source code complies with the <br  />
+ <a href="http://www.open-std.org/jtc1/sc22/wg21/">C++ standard</a> and it compiles cleanly under the <a href="http://gcc.gnu.org/">gcc compilers</a> that we have access to (version 3.2.3 and later). Some warning messages tend to be issued during the compilation of the third-party libraries distributed with <code>oomph-lib</code>, but these are not our responsibility!</p>
+<p>We occasionally compile (or get other people to compile) the library under other compilers and we generally try to rectify any problems that are flagged up in the process. If you encounter any problems (errors or warning messages) while compiling the library with your own (non-gcc) compiler we would <a href="../../contact/html/index.html">like to hear from you</a>, especially if you suggest concrete bug fixes.</p>
+<p>There are problems with version 7 of the intel compiler suite but the library compiles cleanly under version 9. We suggest you upgrade to that if you wish to use the intel compilers.</p>
+<hr  />
+<h2><a class="anchor" id="cygwin"></a>
+The build process fails under cygwin</h2>
+<p>Here are a few things to check:</p><ul>
+<li>Make sure the gcc compiler suite is sufficiently up-to-date (we recommend version 3.2.3 or later). <br  />
+<br  />
+</li>
+<li>The build process will fail if you have (foolishly!) chosen a windows username that contains spaces. The build script (executed under linux) makes frequent references to the (absolute!) path to the <code>oomph-lib</code> installation directory. Linux does not allow spaces in directory names!</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="apple"></a>
+The build process fails under Apple's Darwin (OSX) or other BSD Linux distributions</h2>
+<p>Here are some general guidelines for installing under OSX, contributed by <a href="http://hewitt.ddns.net/">Rich Hewitt</a>: <br  />
+<br  />
+</p><ol type="1">
+<li>Make sure you have installed the development tools from the OSX install DVDs. If your install media is fairly old, you may wish to look for an updated online version at: <br  />
+<br  />
+<center> <a href="http://developer.apple.com/tools/xcode/">http://developer.apple.com/tools/xcode/</a> </center> <br  />
+You do not need to use the Xcode IDE, but we do need the associated development kit tools (in particular GCC!) <br  />
+<br  />
+</li>
+<li>Install a FORTRAN compiler. Apple does not ship a FORTRAN version, so the easiest way to do this is to install the relevant pre-packaged GNU FORTRAN from here: <br  />
+<br  />
+<center> <a href="http://hpc.sourceforge.net/">http://hpc.sourceforge.net/ </a> </center> <br  />
+(I would recommend sticking with the version of GCC4 provided by Apple.) <br  />
+<br  />
+</li>
+<li>Make sure the FORTRAN compiler ('gfortran' in the packages pointed to above) is in the installing user's path. <br  />
+<br  />
+</li>
+<li>Follow the <a href="../../the_distribution/html/index.html">oomph-lib install procedure</a> as normal. <br  />
+<br  />
+</li>
+<li>For associated Unix-goodness (doxygen, gnuplot, subversion etc), I would recommend using a ports mechanism to install any additional unix tools painlessly: <br  />
+<br  />
+<center> <a href="https://www.macports.org/">https://www.macports.org/</a> </center> <br  />
+For example: "sudo port install gnuplot" etc.</li>
+</ol>
+<hr  />
+<h2><a class="anchor" id="apple_link"></a>
+The linking self-test fails under Apple's OSX</h2>
+<p>As discussed in the <a href="../../the_distribution/html/index.html#apple_linking">installation instructions,</a> Darwin (the BSD-derived UNIX core of Apple's OSX operating system) requires a slight change to the default procedure for linking against <code>oomph-lib</code> from outside its autotools framework. As a result, the linking self-test tends to fail on machines with this operating system. Instructions on how to fix this problem are provided in <a href="../../the_distribution/html/index.html#apple_linking">installation instructions</a>.</p>
+<hr  />
+<h2><a class="anchor" id="self_tests"></a>
+Some of the self tests fail</h2>
+<p><b>Tolerance of comparison between floating point numbers</b> <br  />
+<br  />
+ The full <code>oomph-lib</code> distribution contains a large number of demo codes in the sub-directory <code>demo_drivers</code>. Primarily, these codes serve as demo codes for the <code>oomph-lib</code> documentation (contained in the sub-directory <code>doc</code>) but they are also used during the library's self-test procedure which checks that <code>oomph-lib</code> was installed correctly. The self-tests can either be initiated at the end of the <code>autogen.sh</code> - based installation or by typing </p><div class="fragment"><div class="line">make check -k</div>
+</div><!-- fragment --><p> in <code>oomph-lib's</code> top-level directory. The self-test builds and runs all demo codes and compares their results against the reference data stored in the <code>validata</code> sub-directories. The comparison is performed with the python script <code> bin/fpdiff.py</code> which tolerates small (machine- and compiler-dependent) roundoff errors and suppresses the comparison of numbers whose absolute value falls below some threshold (to avoid the comparison of numerical zeroes).</p>
+<p>If any of the self-test fail, you should first check the output in the file <code>validation.log</code> to assess if the differences between the computed data and the reference data are significant. If the discrepancy appears to be due to larger-than-anticipated round-off errors (you'll have to judge this yourself!), modify the <code>validate.sh</code> script to specify a larger relative tolerance and/or a larger value for the threshold below which <code>fpdiff.py</code> regards numbers as numerical zeroes and excludes them from the comparison. [Type </p><div class="fragment"><div class="line">bin/fpdiff.py </div>
+</div><!-- fragment --><p> in <code>oomph-lib's</code> top-level directory for instructions on how to use the script].</p>
+<p><b>The self-test fails even though the output files produced by the code are correct</b> <br  />
+<br  />
+ This is an odd error that is usually caused by the use of wildcards in the validations scripts, or the comparison of data that is stored in certain STL containers. Typically, the self-test is performed by the <code>validate.sh</code> shell script, which runs the executable and concatenates selected output files to a single file whose contents are compared against the reference file in the <code>validata</code> directory.</p>
+<p>While it is tempting to write </p><div class="fragment"><div class="line">cat RESLT* /soln0.dat &gt; results_file.dat</div>
+</div><!-- fragment --><p> it is important to realise that the order in which the files are concatenated is machine- and/or operating-system dependent. If the above command is run in a directory with the following structure </p><div class="fragment"><div class="line">|-- RESLT</div>
+<div class="line">|   |-- soln0.dat</div>
+<div class="line">|   `-- trace.dat</div>
+<div class="line">|-- RESLT_elastic</div>
+<div class="line">|   |-- soln0.dat</div>
+<div class="line">|   `-- trace.dat</div>
+</div><!-- fragment --><p> some operating systems will expand the command to </p><div class="fragment"><div class="line">cat RESLT/soln0.dat RESLT_elastic/soln0.dat &gt; results_file.dat</div>
+</div><!-- fragment --><p> while others will execute </p><div class="fragment"><div class="line">cat RESLT_elastic/soln0.dat RESLT/soln0.dat &gt; results_file.dat</div>
+</div><!-- fragment --><p> In this case the self-test will report a failure, even though the solution files are correct. The <code>validate.sh</code> scripts should therefore not contain any wildcards.</p>
+<p>Similar problems can arise if the validation data includes data that is stored in certain STL containers such as sets. The order in which items are stored in such containers may vary from machine to machine and from compiler to compiler. If such data is to be included in a self-test the data should be sorted first, based on a user-controllable sorting criterion.</p>
+<hr  />
+<h2><a class="anchor" id="run1"></a>
+How do I compile/run the demo driver codes?</h2>
+<p>Assume you have followed our advice to explore <code>oomph-lib</code> by playing with representative demo driver codes, and have ended up in a directory that contains the following files: </p><div class="fragment"><div class="line">mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ ls -l</div>
+<div class="line">total 68</div>
+<div class="line">-rw-rw-r-- 1 mheil mheil 21604 2012-12-31 11:10 Makefile</div>
+<div class="line">-rw-rw-r-- 1 mheil mheil   409 2012-12-08 13:34 Makefile.am</div>
+<div class="line">-rw-rw-r-- 1 mheil mheil 19335 2012-12-31 11:09 Makefile.in</div>
+<div class="line">-rw-rw-r-- 1 mheil mheil  9638 2012-12-08 13:34 one_d_poisson.cc</div>
+<div class="line">drwxrwxr-x 3 mheil mheil  4096 2012-12-08 13:34 validata</div>
+<div class="line">-rwxrwxr-x 1 mheil mheil  2402 2012-12-08 13:34 validate.sh</div>
+</div><!-- fragment --><p> The temptation is to compile the driver code <code>one_d_poisson.cc</code> with your favourite C++ compiler, e.g. <code>g++</code>: </p><div class="fragment"><div class="line">g++  one_d_poisson.cc</div>
+</div><!-- fragment --><p> but this does <b>not</b> work: </p><div class="fragment"><div class="line">mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ g++ one_d_poisson.cc </div>
+<div class="line">one_d_poisson.cc:31:21: fatal error: <span class="keyword">generic</span>.h: No such file or directory</div>
+<div class="line">compilation terminated.</div>
+</div><!-- fragment --><p> Why? If you look into the code, you notice that it #includes <code>oomph-lib's</code> <code>generic.h</code> header file, and <code>g++</code> obviously doesn't know where to find this. You can, in principle, find out where it (and the associated library files themselves!) live but this is rather against the spirit of the <a href="http://www.gnu.org/software/automake/">automake</a> machinery. What you should do instead is to use <code>make:</code> </p><div class="fragment"><div class="line">make one_d_poisson</div>
+</div><!-- fragment --><p> Note the omitted postfix! The argument to <code>make</code> is the name of the target, i.e. the executable that you wish to build &ndash; which source code to compile, where to locate the required headers and which libraries to link against is all encoded in the <code>Makefile</code> (which has itself been created by <a href="http://www.gnu.org/software/automake/">automake</a> (during the installation of the <code>oomph-lib</code>) from the <code>Makefile.am</code> file in the directory). As you see from the on-screen output, there is a lot of information that needs to be passed to the compiler/linker: </p><div class="fragment"><div class="line">mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ make one_d_poisson</div>
+<div class="line">mpic++ -DHAVE_CONFIG_H -I. -I../../..  -I/home/mheil/local/hypre_default_installation_mpi/include -DOOMPH_HAS_HYPRE -I/home/mheil/local/trilinos_default_installation_mpi/include -DOOMPH_HAS_TRILINOS -I/home/mheil/local/mumps_and_scalapack_default_installation/include -DOOMPH_HAS_MUMPS -DOOMPH_HAS_STACKTRACE -DOOMPH_HAS_MPI -DOOMPH_HAS_TRIANGLE_LIB -DOOMPH_HAS_TETGEN_LIB -DUSING_OOMPH_SUPERLU -DUSING_OOMPH_SUPERLU_DIST -I/home/mheil/version339/build/include  -DgFortran -O3 -Wall -MT one_d_poisson.o -MD -MP -MF .deps/one_d_poisson.Tpo -c -o one_d_poisson.o one_d_poisson.cc</div>
+<div class="line">mv -f .deps/one_d_poisson.Tpo .deps/one_d_poisson.Po</div>
+<div class="line">/bin/bash ../../../libtool --tag=CXX   --mode=link mpic++ -DgFortran -O3 -Wall -L/home/mheil/local/hypre_default_installation_mpi/lib -L/home/mheil/local/trilinos_default_installation_mpi/lib -L/home/mheil/local/mumps_and_scalapack_default_installation/lib  -o one_d_poisson one_d_poisson.o -L/home/mheil/version339/build/lib -lpoisson -lgeneric -lHYPRE -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos -ldmumps -lmumps_common /home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacsF77.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a -loomph_hsl -loomph_arpack -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_parmetis_3.1.1 -loomph_superlu_dist_3.0 -loomph_metis_from_parmetis_3.1.1 /home/mheil/local/lib/lapack/lapack.a /home/mheil/local/lib/blas/blas.a -L/usr/lib/openmpi/lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1 -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../.. -lmpi_f77 -lmpi -lopen-rte -lopen-pal -ldl -lnsl -lutil -lgfortran -lm -lquadmath -lpthread </div>
+<div class="line">libtool: link: mpic++ -DgFortran -O3 -Wall -o one_d_poisson</div>
+<div class="line">one_d_poisson.o</div>
+<div class="line">-L/home/mheil/local/hypre_default_installation_mpi/lib</div>
+<div class="line">-L/home/mheil/local/trilinos_default_installation_mpi/lib</div>
+<div class="line">-L/home/mheil/local/mumps_and_scalapack_default_installation/lib</div>
+<div class="line">-L/home/mheil/version339/build/lib</div>
+<div class="line">/home/mheil/version339/build/lib/libpoisson.a</div>
+<div class="line">/home/mheil/version339/build/lib/libgeneric.a -lHYPRE -lml -lifpack</div>
+<div class="line">-lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos</div>
+<div class="line">-ldmumps -lmumps_common</div>
+<div class="line">/home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a</div>
+<div class="line">/home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs.a</div>
+<div class="line">/home/mheil/local/mumps_and_scalapack_default_installation/lib/blacsF77.a</div>
+<div class="line">/home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a</div>
+<div class="line">/home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a</div>
+<div class="line">/home/mheil/version339/build/lib/liboomph_hsl.a</div>
+<div class="line">/home/mheil/version339/build/lib/liboomph_arpack.a</div>
+<div class="line">/home/mheil/version339/build/lib/liboomph_triangle.a</div>
+<div class="line">/home/mheil/version339/build/lib/liboomph_tetgen.a</div>
+<div class="line">/usr/lib/openmpi/lib/libmpi_cxx.so</div>
+<div class="line">/home/mheil/version339/build/lib/liboomph_superlu_4.3.a</div>
+<div class="line">/home/mheil/version339/build/lib/liboomph_parmetis_3.1.1.a</div>
+<div class="line">/home/mheil/version339/build/lib/liboomph_superlu_dist_3.0.a</div>
+<div class="line">/home/mheil/version339/build/lib/liboomph_metis_from_parmetis_3.1.1.a</div>
+<div class="line">/home/mheil/local/lib/lapack/lapack.a</div>
+<div class="line">/home/mheil/local/lib/blas/blas.a -L/usr/lib/openmpi/lib</div>
+<div class="line">-L/usr/lib/gcc/x86_64-linux-gnu/4.6.1</div>
+<div class="line">-L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../x86_64-linux-gnu</div>
+<div class="line">-L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../../lib</div>
+<div class="line">-L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu</div>
+<div class="line">-L/usr/lib/../lib</div>
+<div class="line">-L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../.. /usr/lib/openmpi/lib/libmpi_f77.so</div>
+<div class="line">/usr/lib/openmpi/lib/libmpi.so /usr/lib/openmpi/lib/libopen-rte.so</div>
+<div class="line">/usr/lib/openmpi/lib/libopen-pal.so -ldl -lnsl -lutil -lgfortran -lm</div>
+<div class="line">-lquadmath -lpthread -pthread</div>
+</div><!-- fragment --><p> Looking at the content of the directory again shows that the required executable has now been generated: </p><div class="fragment"><div class="line">mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ ls -l</div>
+<div class="line">total 9988</div>
+<div class="line">-rw-rw-r-- 1 mheil mheil   21604 2012-12-31 11:10 Makefile</div>
+<div class="line">-rw-rw-r-- 1 mheil mheil     409 2012-12-08 13:34 Makefile.am</div>
+<div class="line">-rw-rw-r-- 1 mheil mheil   19335 2012-12-31 11:09 Makefile.in</div>
+<div class="line">-rwxrwxr-x 1 mheil mheil 9608851 2012-12-31 15:14 one_d_poisson</div>
+<div class="line">-rw-rw-r-- 1 mheil mheil    9638 2012-12-08 13:34 one_d_poisson.cc</div>
+<div class="line">-rw-rw-r-- 1 mheil mheil  548256 2012-12-31 15:14 one_d_poisson.o</div>
+<div class="line">drwxrwxr-x 3 mheil mheil    4096 2012-12-08 13:34 validata</div>
+<div class="line">-rwxrwxr-x 1 mheil mheil    2402 2012-12-08 13:34 validate.s</div>
+</div><!-- fragment --><p><br  />
+<br  />
+ </p><hr  />
+<h2><a class="anchor" id="run2"></a>
+Why doesn't make make anything? What are the targets called?</h2>
+<p>If you are familiar with makefiles, you are unlikely to have fallen into the trap discussed above. You will almost certainly have spotted the <code>Makefile</code> and tried to build the executable(s) with <code>make</code>, but oddly this doesn't work as you (probably) expected: </p><div class="fragment"><div class="line">mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ make</div>
+<div class="line">make: Nothing to be done <span class="keywordflow">for</span> `all<span class="stringliteral">&#39;.</span></div>
+</div><!-- fragment --><p> The reason for this is that</p><ol type="1">
+<li><a href="http://www.gnu.org/software/automake/">automake</a> distinguishes between several types of targets,</li>
+<li>the demo driver codes in the subdirectories of <code>demo_drivers</code> double up as self-tests to assert the correct installation of <code>oomph-lib</code> when <code>make</code> <code>check</code> is run from the top-level directory.</li>
+</ol>
+<p>The latter requires them to be declared (in the <code>Makefile.am</code>) in the <code>check_PROGRAMS</code> variable. You can either build (and automatically run) all executables in a <code>demo_driver</code> directory by issuing the command </p><div class="fragment"><div class="line">make check -k</div>
+</div><!-- fragment --><p> or you can inspect the <code>check_PROGRAMS</code> variable in the <code>Makefile.am</code> to find out which targets have been declared (and can therefore be built by <code>make</code>). For instance, in the <code>one_d_poisson</code> directory the first few lines of the <code>Makefile.am</code> are </p><div class="fragment"><div class="line">mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ more Makefile.am </div>
+<div class="line"> </div>
+<div class="line">[...]</div>
+<div class="line"> </div>
+<div class="line">check_PROGRAMS=one_d_poisson</div>
+<div class="line"> </div>
+<div class="line">one_d_poisson_SOURCES = one_d_poisson.cc </div>
+<div class="line"> </div>
+<div class="line">[...]</div>
+</div><!-- fragment --><p> This declares the target (the executable called <code>one_d_poisson</code>) and specifies the source code to be compiled (<code>one_d_poisson.cc</code>). The build target needs to specified explicitly: </p><div class="fragment"><div class="line">make one_d_poisson</div>
+</div><!-- fragment --><p> We note that the names of the executable and the source code do not have to be as closely related as in this example. While we usually create the name of the executable by dropping the postfix of the source file, this is not guaranteed! Inspect the <code>Makefile.am</code> if <code>make</code> doesn't give you what you want.</p>
+<hr  />
+<h2><a class="anchor" id="only_compile_dont_run"></a>
+Running the self-tests takes a long time. Is it possible to suppress the execution of the built driver codes and only check if they compile? (Mainly useful for developers).</h2>
+<p>Issuing <code>make</code> <code>check</code> from the top level <code>oomph-lib</code> directory descends into all oomph-lib directories that contain demo driver codes, builds these and then runs them using the script <code>validate.sh</code> which typically also compares the output against some reference data that is stored in the <code>validata</code> sub-directories. This process (which allows for some tolerances in floating point data) assesses that the installation is working properly, but the entire procedure obviously takes a long time. As a developer, you may want to check (more) quickly if the changes you've made to any source code (in <code>src</code>) still compile without running any of the self-tests. It is easy to suppress the execution of the self tests because the <code>validate.sh</code> script is, in fact, run through the wrapper script </p><div class="fragment"><div class="line">bin/wrapped_validate.sh</div>
+</div><!-- fragment --><p> which, by default, runs <code>validate.sh</code> through <code>time</code>, allowing us to report the run times. However, you can easily edit this file and make it do other things. For instance, if you put <code>exit</code> onto the first line it won't do anything at all. Success! If you then issue </p><div class="fragment"><div class="line">make check</div>
+</div><!-- fragment --><p> (without the "-k"!) from the top level, the build machinery will descend through all the demo driver directories, build the executables and stop when it encounters the first error. If you want to continue with the compilation after encountering failures do </p><div class="fragment"><div class="line">make -k check</div>
+</div><!-- fragment --><p> You can assess all the failures at the same time by searching backwards through the on-screen output.</p>
+<p><br  />
+<br  />
+</p>
+<hr  />
+<h2><a class="anchor" id="grep_run"></a>
+I only want to run the self-tests for demo driver codes that contain a certain string (typically a class name; again mainly useful for developers)</h2>
+<p>The script </p><div class="fragment"><div class="line">bin/run_selected_self_tests_based_on_string.bash</div>
+</div><!-- fragment --><p> will search through all demo driver directories and run the self tests in all directories where the source code of a demo driver contains a certain string. You can specify the string and the search directory in the script or via the command line. Run </p><div class="fragment"><div class="line">bin/run_selected_self_tests_based_on_string.bash --help</div>
+</div><!-- fragment --><p> for details.</p>
+<hr  />
+<h2><a class="anchor" id="link"></a>
+The oomph-lib distribution includes some third-party libraries. How do I get the code to link against optimised local versions of these libraries that are already installed on my machine?</h2>
+<p>To facilitate the installation, the oomph-lib distribution includes the relevant parts of certain third-party libraries, such as <a href="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</a> and <a href="http://www.netlib.org/blas/">BLAS</a>. These "external libraries" are built and installed along with <code>oomph-lib's</code> own sub-libraries. To distinguish them from any already existing local versions of these libraries, their names are pre-fixed with the string <code>oomph_</code>.</p>
+<p>All demo codes are automatically linked against these libraries. This is achieved by defining the variable <code>EXTERNAL_LIBS</code> in the <code>configure</code> script:</p>
+<div class="fragment"><div class="line"><span class="preprocessor"># Define &quot;external&quot; libraries</span></div>
+<div class="line"><span class="preprocessor">#----------------------------</span></div>
+<div class="line"><span class="preprocessor"># These are the third-party libraries distributed with oomph-lib.</span></div>
+<div class="line"><span class="preprocessor"># Note: If you want to link against another, already existing local</span></div>
+<div class="line"><span class="preprocessor"># installation of one of these libraries, edit the EXTERNAL_LIBS</span></div>
+<div class="line"><span class="preprocessor"># assignment below. As an example, if you want to use your own BLAS</span></div>
+<div class="line"><span class="preprocessor"># library, and you&#39;d usually link against this with</span></div>
+<div class="line"><span class="preprocessor">#</span></div>
+<div class="line"><span class="preprocessor">#    g++ -o my_code my_code.cc -lblas</span></div>
+<div class="line"><span class="preprocessor">#</span></div>
+<div class="line"><span class="preprocessor"># then replace &quot;-loomph_blas&quot; by &quot;-lblas&quot; below:</span></div>
+<div class="line"><span class="preprocessor">#</span></div>
+<div class="line"><span class="preprocessor">EXTERNAL_LIBS=&#39;-loomph_hsl -loomph_superlu_3.0 -loomph_metis_4.0 -loomph_arpack -loomph_lapack -loomph_flapack -loomph_blas&#39;</span></div>
+</div><!-- fragment --><p>If you wish to link against some other version of the library, edit the <code>EXTERNAL_LIBS</code> variable accordingly.</p>
+<p><b>WARNING:</b> If you work within the autotools framework, remember that the <code>configure</code> script is generated by <code>autoconf</code>, using the file <code> configure.ac</code>, which is itself (re-)generated whenever you run <code>autogen.sh</code>. If you use the autotools, you should edit the <code>EXTERNAL_LIBS</code> variable in the file <code>configure/configure.ac_scripts/start</code> which forms one of the building blocks from which <code> autogen.sh </code>assembles the <code>configure.ac </code> file. Once you have changed the <code>EXTERNAL_LIBS</code> variable in <code>configure/configure.ac_scripts/start</code> you should (re-)run <code>autogen.sh</code> in <code>oomph-lib's</code> top-level directory.</p>
+<center> <table border="1">
+<tr>
+<td bgcolor="cornsilk"><center> <b>NEW (version 0.85)</b> </center> You can now use the <code>&ndash;with-blas</code> and <code>&ndash;with-lapack</code> configure flags to specify the location of your own blas and lapack libraries; see <a href="../../the_distribution/html/index.html#external_src">the installation tutorial</a> for details. Equivalent flags will soon be added for the other libraries.   </td></tr>
+</table>
+</center><hr  />
+<h2><a class="anchor" id="missing_this"></a>
+Missing 'this-&gt;'</h2>
+<p>Recent versions of the <a href="http://gcc.gnu.org/">gcc compilers</a> enforce the <a href="http://www.open-std.org/jtc1/sc22/wg21/">C++ standard</a> much more rigorously than earlier versions. Unfortunately, the standard includes some rules that are so counter-intuitive that it is hard get into the habit of using them, especially if code is developed on a compiler that does not enforce the standard as rigorously.</p>
+<p>The most frequent problem arises in classes that are derived from a templated base class. <a href="http://www.open-std.org/jtc1/sc22/wg21/">The C++ standard</a> insists that all references to member functions (or member data) that is defined in the templated base class must be preceded by "this-&gt;" when the reference is made in the derived class. Allegedly, this is necessary to avoid ambiguities, though it is not entirely clear what this ambiguity is supposed to be... Here is a driver code that illustrates the problem. <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">//Demo code to document problem with missing &quot;this-&gt;&quot;</span></div>
+<div class="line"><span class="preprocessor">#include&lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==========Templated_base_class=======================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Some Non-templated base class</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> TEMPLATE_PARAMETER&gt;</div>
+<div class="line"><span class="keyword">class </span>TemplatedBaseClass</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Empty constructor</span></div>
+<div class="line"><span class="comment"></span> TemplatedBaseClass(){};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Empty virtual constructor</span></div>
+<div class="line"><span class="comment"></span> ~TemplatedBaseClass(){};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Some member function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> say_hello_world()</div>
+<div class="line">  {</div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;Hello world from base class &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======templated_derived_class=======================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Some templated derived class</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> TEMPLATE_PARAMETER&gt;</div>
+<div class="line"><span class="keyword">class </span>SomeDerivedClass : <span class="keyword">public</span> <span class="keyword">virtual</span> TemplatedBaseClass&lt;TEMPLATE_PARAMETER&gt;</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Empty constructor</span></div>
+<div class="line"> SomeDerivedClass(){};</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Virtual empty constructor</span></div>
+<div class="line"> <span class="keyword">virtual</span> ~SomeDerivedClass(){};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Some member function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> output_template_parameter()</div>
+<div class="line">  {</div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;My template parameter is: &quot;</span> </div>
+<div class="line">             &lt;&lt; TEMPLATE_PARAMETER &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Now call the function in the base class</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef USE_BROKEN_VERSION</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// This is illegal according to the C++ standard </span></div>
+<div class="line">   say_hello_world();</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else </span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// This is stupid but in line with the C++ standard</span></div>
+<div class="line">   this-&gt;say_hello_world();</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======start_of_main==================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the templated object:</span></div>
+<div class="line"> SomeDerivedClass&lt;2&gt; object;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get it to output its template parameter and say hello:</span></div>
+<div class="line"> <span class="keywordtype">object</span>.output_template_parameter();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+<div class="line"> </div>
+</div><!-- fragment --><p>If you compile this with sufficiently recent versions of the <a href="http://gcc.gnu.org/">gcc compilers</a>, using the flag <code>-DUSE_BROKEN_VERSION</code>, the compilation will fail with the following error: </p><div class="fragment"><div class="line">broken_this_demo.cc: In member <span class="keyword">function</span> <span class="stringliteral">&#39;void SomeDerivedClass&lt;TEMPLATE_PARAMETER&gt;::output_template_parameter()&#39;</span>:</div>
+<div class="line">broken_this_demo.cc:55: error: there are no arguments to <span class="stringliteral">&#39;say_hello_world&#39;</span> that depend on a <span class="keyword">template</span> parameter, so a declaration of <span class="stringliteral">&#39;say_hello_world&#39;</span> must be available</div>
+<div class="line">broken_this_demo.cc:55: error: (<span class="keywordflow">if</span> you use <span class="stringliteral">&#39;-fpermissive&#39;</span>, G++ will accept your code, but allowing the use of an undeclared name is deprecated)</div>
+</div><!-- fragment --><p>You may not only stumble across this problem in one of your own codes but it is also possible that some code in the library itself still violates this rule. This is because templated classes are only built when needed and it is conceivable that <code>oomph-lib's</code> suite of self-tests do not instantiate all templated classes that exist in the library. If you encounter any such problems, check if putting a "this-&gt;" in front of the function call fixes the problem. If it does, <a href="../../contact/html/index.html">let us know!</a></p>
+<p><br  />
+<br  />
+</p><hr  />
+ <hr  />
+<h1><a class="anchor" id="compilation_and_seg"></a>
+Compilation problems and run-time errors</h1>
+<h2><a class="anchor" id="rodata"></a>
+Warning about "discarded sections" during linking</h2>
+<p>When linking, some versions of the <a href="http://gcc.gnu.org/">gcc compiler</a> produce warnings about references to "discarded sections" being referenced. Here's an example:</p>
+<div class="fragment"><div class="line">/usr/bin/ld: `.gnu.linkonce.t._ZNK5oomph8QElementILj3ELj3EE14vertex_node_ptERKj<span class="stringliteral">&#39; referenced in section `.rodata&#39;</span> of /home/mheil/version185/oomph/build/lib/libgeneric.a(Qelements.o): defined in discarded section `.gnu.linkonce.t._ZNK5oomph8QElementILj3ELj3EE14vertex_node_ptERKj<span class="stringliteral">&#39; of /home/mheil/version185/oomph/build/lib/libgeneric.a(Qelements.o)</span></div>
+</div><!-- fragment --><p>We admit to being slightly baffled by this. Other libraries seem to suffer from the same problem (google for .<code>rodata</code> <code>discarded</code>, say), but as far as we can tell no solution has ever been suggested, nor does one seem to be required. The executable works fine. Upgrade to a newer version of <a href="http://gcc.gnu.org/">gcc?</a></p>
+<hr  />
+<h2><a class="anchor" id="seg_fault"></a>
+My driver code compiles but dies with a segmentation fault</h2>
+<p>Suggestions:</p><ul>
+<li>Run <code>Problem::self_test()</code> before solving the problem. This function performs a large number of sanity checks and reports any inconsistencies in the data structure. <br  />
+<br  />
+</li>
+<li>Recompile the relevant libraries with the PARANOID and RANGE_CHECKING flags set. Segmentation faults are often caused by out-of-bounds access to STL containers. Since &gt; 95% (?) of the containers used in <code>oomph-lib</code> are <code>Vectors</code> (<code>oomph-lib's</code> wrapper to the STL vector class, with optional range checking) they can easily be detected. Make sure to re-compile again with RANGE_CHECKING switched off before you start any production runs &ndash; the run-time overheads incurred by range-checking are significant! <br  />
+<br  />
+</li>
+<li>Recompile the relevant libraries and your driver code with the debugging flag ("-g" for the gnu compiler suite) switched on and all optimisation disabled. Re-run the code in a debugger (<code>gdb</code> or its GUI-based equivalent <a href="http://www.gnu.org/software/ddd/">ddd</a>) to (try to!) find out where the segmentation fault occurred. [<b>Careful:</b> If the segmentation fault is caused by a pointer problem, this naive inspection can be quite misleading &ndash; tell-tale signs are that the traceback displays a non-sensical call stack, e.g. a function being called "out of nowhere"; variables that have just been given values not existing; etc.] <br  />
+<br  />
+ <hr  />
+</li>
+</ul>
+<h2><a class="anchor" id="wrong_results"></a>
+My driver code runs but it produces incorrect/non-sensical results</h2>
+<p>Suggestions:</p><ul>
+<li>Have you applied the boundary conditions correctly? Check this by looping over all nodes in your mesh and documenting the pinned-status of their nodal values, using the function <code>Node::is_pinned(...)</code>. <br  />
+<br  />
+</li>
+<li>Have you passed the required (function) pointers to the elements? Most element constructors assign default values for any physical parameters, e.g. the Reynolds number in the Navier-Stokes elements. Similarly, most source functions etc. default to zero. For instance <code>oomph-lib's</code> Poisson elements solve the Laplace equation unless a function pointer to the source function is specified. <br  />
+<br  />
+</li>
+<li>In time-dependent problems, have you assigned suitable initial conditions? Note that, if you use elements that are based on the ALE formulation (and all time-dependent elements should be!) you must initialise the history values for the nodal positions, even if the mesh is stationary! See the discussion of <code>oomph-lib's</code> timestepping procedures in the context of <a href="../../unsteady_heat/two_d_unsteady_heat/html/index.html">the unsteady heat equation</a> for details. <br  />
+<br  />
+</li>
+<li>Have you implemented the relevant "action" functions, such as <code>Problem::actions_before_implicit_timestep()</code> to update any time-dependent boundary conditions?</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="newton_divergence"></a>
+The Newton solver diverges</h2>
+<p>Suggestions:</p><ul>
+<li><code>oomph-lib's</code> default solver <code>Problem::newton_solve(...)</code> will converge quadratically, provided <br  />
+<br  />
+<ul>
+<li>a "good" initial guess for the solution has been assigned,</li>
+</ul>
+<br  />
+ or <br  />
+<ul>
+<li>the problem is linear.</li>
+</ul>
+<br  />
+ If the Newton solver fails to converge for a nonlinear problem, try to identify a related linear problem and use continuation to generate a sequence of good initial guesses. For instance, to solve the Navier-Stokes equations at a Reynolds number of 500, say, start by solving the problem for zero Reynolds number (in which case the problem becomes linear so that the Newton method converges in one iteration); increase the Reynolds number by 50, say, and re-solve. Repeat this procedure until the desired value of the Reynolds number is reached. <br  />
+<br  />
+ <b>Note:</b> <code>oomph-lib</code> also provides automatic continuation methods, based on Keller's arclength continuation, but at the moment, no tutorials exist for these. <br  />
+<br  />
+</li>
+<li>If you have tried the above and the Newton method fails to converge <br  />
+ even for a linear version of your problem, the most likely reasons are that <br  />
+<br  />
+<ol type="1">
+<li>You have developed a new element and made a mistake in the implementation of the element's Jacobian matrix. To check if this is the case, comment out the function that computes the element's Jacobian matrix, i.e. the element member functions <code>get_jacobian(...)</code> or <code>fill_in_contribution_to_jacobian(...)</code>. <code>oomph-lib</code> will then use the default implementation of these functions in the <code>GeneralisedElement</code> base class to compute the Jacobian matrices by finite-differencing. The executable is likely to run more slowly since the finite-difference-based computation is unlikely to be as efficient as the customised implementation for your specific element, but if the Newton method then converges, you know where to look for your bug! You may also want to check for any un-initialised variables. They are the most likely culprits if your code behaves differently at different levels of optimisation as more aggressive optimisation may suppress any default initialisations of data &ndash; in fact, you should never rely on that anyway! <br  />
+<br  />
+</li>
+<li>Your problem contains "dependent" variables, such as the nodal positions in a free-boundary problem. If the node update in response to changes in the shape of the domain boundary is performed by an algebraic node update procedure (using <code>AlgebraicNodes</code>, <code>SpineNodes</code> or nodes whose position is updated by a <code>MacroElement/Domain</code> - based procedure), the position of the nodes in the "bulk" mesh must be updated whenever the Newton method updates the unknowns. This is most easily done by calling <code>Mesh::node_update()</code> in <code>Problem::actions_before_newton_convergence_check()</code>.</li>
+</ol>
+</li>
+</ul>
+<p><br  />
+<br  />
+</p><hr  />
+ <hr  />
+<h1><a class="anchor" id="cust_opt"></a>
+Customisation and optimisation</h1>
+<h2><a class="anchor" id="tecplot"></a>
+I don't have tecplot. How do I change oomph-lib's output so it can be displayed by my own plotting package?</h2>
+<p><code>oomph-lib's</code> high-level post-processing routines output the results of the computations in a form that is suitable for display with <a href="http://www.tecplot.com">tecplot</a>, a powerful commercial plotting package. Purists may find it odd that an open-source library should choose an output format that is customised for a commercial software package. We tend to agree... Our only excuse is that <a href="http://www.tecplot.com">tecplot</a> is very very good, and without it we would have found it extremely difficult to create many of the plots shown in the <a href="../../example_code_list/html/index.html">tutorials.</a> [If you know of any open-source plotting package whose capabilities are comparable to those of <a href="http://www.tecplot.com">tecplot</a>, <a href="../../contact/html/index.html">let us know!]</a></p>
+<p>Angelo Simone has written a python script that converts <code>oomph-lib's</code> output to the vtu format that can be read by <a href="http://www.paraview.org">paraview</a>, an open-source 3D plotting package. The conversion script can currently deal with output from meshes that are composed of 2D quad elements &ndash; the extension to 3D is work in progress. Use of the conversion script is documented <a href="../../paraview/html/index.html">in another tutorial.</a></p>
+<p>It is possible to display <code>oomph-lib's</code> default output (in more elementary form, obviously) with <a href="http://www.gnuplot.info">gnuplot</a>. The trick is to specify the <code>using</code> option in <a href="http://www.gnuplot.info">gnuplot</a>'s plot commands &ndash; in this mode <a href="http://www.gnuplot.info">gnuplot</a> ignores tecplot's "ZONE" commands. For instance, trying to plot the x-y data created by <a href="../../poisson/one_d_poisson/html/index.html">the demo code for the solution of the 1D Poisson equation</a> with </p><div class="fragment"><div class="line">plot <span class="stringliteral">&quot;RESLT/soln0.dat&quot;</span></div>
+</div><!-- fragment --><p> will fail because <a href="http://www.gnuplot.info">gnuplot</a> gets confused by the <code>ZONE</code> specifications required by <a href="http://www.tecplot.com">tecplot.</a> However, </p><div class="fragment"><div class="line">plot <span class="stringliteral">&quot;RESLT/soln0.dat&quot;</span> <span class="keyword">using</span> 1:2</div>
+</div><!-- fragment --><p> works.</p>
+<p>If the data is too complex to be displayed by <a href="http://www.gnuplot.info">gnuplot</a>, you may wish to customise the output for your preferred plotting package. This is easily done as <code>oomph-lib</code> creates its output element-by-element. The elements' various <code>output(...)</code> functions are virtual functions that can easily be overloaded in a user-defined wrapper class.</p>
+<p>Here is an example driver code that illustrates how to change the output from <code>oomph-lib's</code> <code>QPoissonElement</code> family of 1D-line/2D-quad/3D-brick Poisson elements so that they output the string "Hello world".</p>
+<p>We include <code>oomph-lib's</code> <code>generic</code> and <code>poisson</code> library headers:  </p><div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">//Demo code to document customisation of output</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// oomph-lib includes</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;poisson.h&quot;</span></div>
+</div><!-- fragment --><p>and then create a customised version of the Poisson elements in which we overload the tecplot-based <code>QPoissonElement&lt;DIM,NNODE_1D&gt;::output(...)</code> function, defined in the <code>poisson</code> library:</p>
+ <div class="fragment"><div class="line"><span class="comment">// The wrapper class for the element has to be included into </span></div>
+<div class="line"><span class="comment">// the oomph-lib namespace</span></div>
+<div class="line"><span class="keyword">namespace </span>oomph</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======customised_poisson=============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Customised Poisson element -- simply overloads the output function.</span></div>
+<div class="line"><span class="comment">/// All other functionality is retained.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM, <span class="keywordtype">unsigned</span> NNODE_1D&gt;</div>
+<div class="line"><span class="keyword">class </span>CustomisedQPoissonElement : <span class="keyword">public</span> <span class="keyword">virtual</span> QPoissonElement&lt;DIM,NNODE_1D&gt;</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Empty constructor</span></div>
+<div class="line"><span class="comment"></span> CustomisedQPoissonElement(){};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Empty virtual constructor</span></div>
+<div class="line"><span class="comment"></span> ~CustomisedQPoissonElement(){};</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Overload output function</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> output(std::ostream&amp; output_file)</div>
+<div class="line">  {</div>
+<div class="line">   output_file &lt;&lt; <span class="stringliteral">&quot;Hello world&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end extension of oomph-lib namespace</span></div>
+</div><!-- fragment --><p>If we now call the output function, the version defined in the customised element is used. The remaining implementation of the Poisson element remains unchanged.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======start_of_main==================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="keyword">using namespace </span>oomph;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the templated object:</span></div>
+<div class="line"> CustomisedQPoissonElement&lt;2,2&gt; element;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Call the element&#39;s (customised) output function and dump to screen</span></div>
+<div class="line"> element.output(std::cout);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+</div><!-- fragment --><p><br  />
+<br  />
+ </p><hr  />
+<p><br  />
+<br  />
+ </p>
+<h2><a class="anchor" id="element_too_general"></a>
+oomph-lib's implementation of the Navier-Stokes equations (say) is too general (and therefore too expensive) for my application. How do I change this?</h2>
+<p>Many of <code>oomph-lib's</code> equations classes (or elements) are implemented in great generality. For instance, our discretisation of the Navier-Stokes equations includes a source term in the continuity equation, and body force terms in the momentum equations; it allows switching between the stress-divergence and simplified forms of the viscous terms; it includes the mesh velocity into the ALE formulation of the time-derivatives; etc. This makes the elements very versatile and robust. However, the generality/robustness comes at a price: Even though we provide default values for most functions (e.g. the body force terms default to zero), their evaluation requires a finite amount of CPU time. If you wish to use the elements in a simple application in which the Navier-Stokes equations are solved in a fixed domain, without any body forces or other source terms, say, you may wish to disable the additional functionality.</p>
+<p>This is easily done: After all, <code>oomph-lib</code> is open-source software and you can therefore change anything you want! In principle, you could edit the source code in the <code>src/navier_stokes</code> directory and delete (or at least comment out) all the functionality that you do not require. However, this is probably a risky step as it will break all demo codes (used during <code>oomph-lib's</code> self-test procedure) that use some of the features that you are not interested in. We therefore recommend copying the content of the directory <code>src/navier_stokes</code> into a new directory, e.g. <code>user_src/my_navier_stokes</code> and to edit the copied sources. Follow the instructions on the <code>oomph-lib</code> <a href="../../the_distribution/html/index.html#add_src">installation page</a> to turn these sources into a separate library against which you can link.</p>
+<p><br  />
+<br  />
+ </p><hr  />
+<p><br  />
+<br  />
+ </p>
+<h2><a class="anchor" id="build_not_run_demos"></a>
+How do I build the self tests without running them?</h2>
+<p>The default behaviour when using <code>make</code> <code>check</code> is to compile and run the self tests one test at a time. This means that compilation failures may take a long time to appear which can be frustrating when making changes to the main library. The alternative is to first compile all self tests using</p>
+<div class="fragment"><div class="line">make check -k TESTS_ENVIRONMENT=<span class="keyword">true</span></div>
+</div><!-- fragment --><p>and then once you are sure everything compiles run the self tests as normal.</p>
+<p>Note: this "trick" relies on undocumented behaviour in automake and so it is possible (but unlikely) that it will not work in new versions (tested and working with GNU automake 1.11.3).</p>
+<p><br  />
+<br  />
+</p><hr  />
+ <hr  />
+<h1><a class="anchor" id="nav"></a>
+Finding your way around the distribution</h1>
+<hr  />
+<h2><a class="anchor" id="too_much"></a>
+There is so much information – how do I get started?</h2>
+<p>Yes, <code>oomph-lib</code> does contain a lot of code and a lot of documentation. How to get started obviously depends on your background: Are you familiar with the finite element method? How good is your knowledge of C++? Etc. <br  />
+<br  />
+Here are some possible "routemaps" around the library:</p>
+<ul>
+<li><b>You are familiar with the finite element method and have a fairly good knowledge of C++</b><br  />
+<br  />
+<ul>
+<li>Have a look through the <a href="../../example_code_list/html/index.html">list of example codes</a> to get a feeling for <code>oomph-lib's</code> capabilities. Pick a problem that interests you and study the associated tutorial. Copy the driver code into your own directory and play with it. <br  />
+<br  />
+</li>
+<li>Once you have played with a few example codes, you may wish to to learn more about <code>oomph-lib's</code> <a href="../../the_data_structure/html/index.html">overall data structure,</a> or find out <a href="../../optimisation/html/index.html">how to optimise the library</a> for your particular application. <br  />
+<br  />
+</li>
+</ul>
+</li>
+<li><b>You have never used finite element methods but have a fairly good knowledge of C++</b><br  />
+<br  />
+<ul>
+<li>Study the <a href="../../intro/html/index.html">"Top Down" introduction</a>. This document includes a "low tech" overview of the mathematical/theoretical background and contrasts procedural implementations of the finite element method with the object-oriented approach adopted in <code>oomph-lib</code>. <br  />
+<br  />
+</li>
+<li>Consult the <a href="../../quick_guide/html/index.html">(Not-So-)Quick-Guide</a> to learn how to construct basic <code>oomph-lib</code> objects for your problem: <code>Problems</code>, <code>Meshes</code>, <code>FiniteElements</code>, etc. <br  />
+<br  />
+</li>
+<li>Continue with the steps suggested above. <br  />
+<br  />
+</li>
+</ul>
+</li>
+<li><b>You have never used finite element methods and are a newcomer to C++</b><br  />
+<br  />
+<ul>
+<li>Buy <a href="http://www.math.wayne.edu/~yang/">Daoqi Yang</a> brilliant book <a href="http://www.springeronline.com/sgw/cda/frontpage/0,11855,4-40007-22-2105335-0,00.html?changeHeader=true">C++ and Object-Oriented Numeric Computing for Scientists and Engineers.</a> Read it! Pretty much everything in this book is relevant for some parts of <code>oomph-lib</code>. You should at least understand: <br  />
+<br  />
+<ul>
+<li>The procedural aspects of C++ (basic types, functions and control structures).</li>
+<li>Namespaces.</li>
+<li>Classes (private, protected and public members; inheritance and multiple inheritance; virtual and pure virtual functions; base classes and derived classes; static and dynamic casts).</li>
+<li>Templates and template instantiations.</li>
+<li>The standard template library (STL).</li>
+</ul>
+<br  />
+<br  />
+</li>
+<li>Continue with the steps suggested above. <br  />
+<br  />
+</li>
+</ul>
+</li>
+</ul>
+<p><br  />
+<br  />
+ </p><hr  />
+<p><br  />
+<br  />
+ </p>
+<h2><a class="anchor" id="includes"></a>
+Where is this class/function/... defined?</h2>
+<p>Assume you have studied one of the <a href="../../example_code_list/html/index.html">example codes</a> and wish to find out more about the implementation of a particular class or function that is used there. How do you find its source code and/or its full documentation?</p>
+<p>Generally, a class/function that is used in a demo code can only be defined in one of two places:</p><ol type="1">
+<li>In the demo driver code itself.</li>
+<li>In an included file and/or an associated library.</li>
+</ol>
+<p><code>oomph-lib's</code> <a href="../../example_code_list/html/index.html">tutorials</a> tend to provide a fairly complete annotated listing of the relevant driver codes; if the function you are interested in is not mentioned explicitly in the tutorial, it is most likely to be defined in an include file. You can inspect the driver code in its entirety by following the link at the end of the tutorials. If you cannot find the class/function there, it must be defined in one of the include files listed at the beginning of the source code.</p>
+<p>The included files themselves can either be located in the same directory as the demo driver (the directory also tends to be mentioned at the end of the tutorial) or in one of <code>oomph-lib's</code> sub-libraries. The source code for these is located in the sub-directories of the <code>src</code> directory. Often the class/function is defined in a source file with an "obvious" name; if not, use <code>grep</code> to find it. This can, of course, be done recursively. For instance, the command</p>
+<div class="fragment"><div class="line">find . \( -name <span class="stringliteral">&#39;*.h&#39;</span> -o -name <span class="stringliteral">&#39;*.cc&#39;</span> \) -exec grep -H FiniteElement {} \;  </div>
+</div><!-- fragment --><p>issued in <code>oomph-lib's</code> top-level directory will search through the entire distribution to locate files that contain the string "FiniteElement".</p>
+<p>You can also use the html-based representation of <code>oomph-lib's</code> data structure, created by <a href="http://www.doxygen.org">doxygen,</a> in the <a href="../../the_data_structure/html/index.html">"bottom-up" discussion of the data structure.</a> (Note that the search menu may not work on your browser.)</p>
+<p><br  />
+<br  />
+</p><hr  />
+ <hr  />
+<h1><a class="anchor" id="all_else_fails"></a>
+If all else fails...</h1>
+<h2><a class="anchor" id="reporting"></a>
+How to report problems/bugs</h2>
+<p>If all else fails and you think you have found a bug in the library, make sure you follow these steps:</p><ol type="1">
+<li>Isolate the problem: Try to identify the shortest driver code that still produces the problem.<br  />
+<br  />
+</li>
+<li>Double-check the <a href="../../the_data_structure/html/index.html">relevant documentation</a>, the <a href="../../the_distribution/html/index.html">installation instructions</a> and the other FAQs listed here.<br  />
+<br  />
+</li>
+<li>Does the problem persist when you compile the library and your test code without optimisation, and when the <code>RANGE_CHECKING</code> and <code>PARANOID</code> flags are set? <br  />
+<br  />
+</li>
+<li>Does the problem occur with a sufficiently recent version of the <a href="http://gcc.gnu.org/">gcc compiler suite</a> (version 3.2.3 and later)?<br  />
+<br  />
+</li>
+<li>If the above steps identify the problem, <a href="../../contact/html/index.html">let us know</a>, ideally with a bug fix! <br  />
+<br  />
+</li>
+<li>If you can't fix the problem yourself, get in touch <a href="../../contact/html/index.html">either directly</a>, or via our bugzilla-based bug-and-feature-tracking system, accessible online at <br  />
+<br  />
+ <center> <a href="http://oomph-lib.maths.man.ac.uk/bugzilla">http://oomph-lib.maths.man.ac.uk/bugzilla</a> </center> <br  />
+ and provide as much information as possible (clear description of the problem; the source code; the Makefile; details of the compiler and compilation flags used; any warning/error messages that are displayed during the compilation of the library or the driver code itself; etc.) <br  />
+<br  />
+</li>
+</ol>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 22:53:43
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

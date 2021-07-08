@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: cylinder.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">cylinder.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a0f1e4f0524d8e5f4e06b7e57d2f4f1ba"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#a0f1e4f0524d8e5f4e06b7e57d2f4f1ba">BORDER</a> = 1, WIDTH=500px &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt;Acknowledgement:&lt;/B &gt; This implementation of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> equations and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> documentation were developed jointly with Robert Harter(Thales Underwater Systems Ltd) with financial support from a KTA Secondment grant from University of Manchester 's EPSRC-funded Knowledge Transfer Account.&lt;/CENTER &gt;&lt;/TD &gt;&lt;/TR &gt;&lt;/TABLE &gt;&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; \section theory Theory Consider a three-dimensional, axisymmetric body(of density \f$ \rho \f$, Young 's modulus \f$ <a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a> \f$, and Poisson 's ratio \f$ \<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a> \f$), occupying <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> region \f$ D \f$ whose <a class="el" href="cylinder_8txt.html#a2619ddd69aa098df6ed9cbfb39cdc126">boundary</a> is \f$ \partial D \f$. Assuming <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body performs time-harmonic oscillations of frequency of \f$ \omega \f$, we use cylindrical <a class="el" href="cylinder_8txt.html#a61912e0bb49980407ffc81d063fc5fe0">coordinates</a> \f$(r^ *,\theta, z^ *) \f$. The equations of time-harmonic linear elasticity can then be written as&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ \nabla^ *\cdot\tau^ *$}+\rho \mbox{\boldmath$ F^ *$}=-\rho\omega^2\mbox{\boldmath$ u^ *$}, \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; where \f$\mbox{\boldmath$ \nabla^ *$}=(\frac{\partial}{\partial r^ *},\frac{1}{r^ *}\frac{\partial}{\partial\theta},\frac{\partial}{\partial z^ *}) \f$, and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> stresses, body force and displacements are given by \f$ {\rm Re}\{\mbox{\boldmath$\tau^ *$}(r^ *,\theta, z^ *){\rm e}^{-{\rm i}\omega t^ *}\} \f$, \f$ {\rm Re}\{\mbox{\boldmath $F^ *$}(r^ *,\theta, z^ *){\rm e}^{-{\rm i}\omega t^ *}\} \f$ and \f$ {\rm Re}\{\mbox{\boldmath $u^ *$}(r^ *,\theta, z^ *){\rm e}^{-{\rm i}\omega t^ *}\} \f$ respectively. Note <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> here and henceforth, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> superscript asterisk notation is used to distinguish dimensional quantities from their non-dimensional counterparts where required.(The coordinate \f$ \theta \f$ is by definition dimensionless, and so we do not use an asterisk when referencing this parameter). The body is subject to imposed time-harmonic displacements \f$ \mbox{\boldmath$ u^ *$} \f$ along \f$ \partial D_d \f$, and subject to an imposed traction \f$ \mbox{\boldmath$ \hat{\tau}^ *$} \f$ along \f$ \partial D_n \f$ where \f$ \partial D=\partial D_d\cup\partial D_n \f$ so <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a>&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ u^ *$}=\mbox{\boldmath$ \hat{u}^ *$}\,\,\textrm{on $ \partial D_d $ },\quad \mbox{\boldmath$ \tau^ *$} \cdot {\bf n}=\mbox{\boldmath$ \hat{\tau}^ *$}\,\,\textrm{on $ \partial D_n $ } \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; where \f$ {\bf n} \f$ is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> outer unit normal on <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> boundary. The stresses and displacements are related by <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> constitutive equations&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ \tau^ *$}=\frac{<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>}{1+\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}\left(\frac{\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}{1-2\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}(\mbox{\boldmath$\nabla^ *\cdot u^ *$})\textbf{I}+\frac{1}{2}(\mbox{\boldmath$ \nabla^ *u^ *$}+\mbox{\boldmath$ \nabla^ *u^ *$}^{{\rm T}})\right), \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; where \f$ \mbox{\boldmath$ \nabla^ *u^ *$}^{{\rm T}} \f$ represents <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> transpose of \f$ \mbox{\boldmath$ \nabla^ *u^ *$} \f$. Note <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> in cylindrical <a class="el" href="cylinder_8txt.html#a61912e0bb49980407ffc81d063fc5fe0">coordinates</a>, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> second-order tensor \f$ \mbox{\boldmath$ \nabla^ *u^ *$} \f$ is given by&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ \nabla^ *u^ *$}={ \left(\begin{array}{ccc} \frac{\partial u^ *_r}{\partial r^ *}&amp;\frac{1}{r^ *}\frac{\partial u^ *_r}{\partial\theta}-\frac{u^ *_\theta}{r^ *}&amp;\frac{\partial u^ *_r}{\partial z^ *}\\ \frac{\partial u^ *_\theta}{\partial r^ *}&amp;\frac{1}{r^ *}\frac{\partial u^ *_\theta}{\partial\theta}+\frac{u^ *_r}{r^ *}&amp;\frac{\partial u^ *_\theta}{\partial z^ *}\\ \frac{\partial u^ *_z}{\partial r^ *}&amp;\frac{1}{r^ *}\frac{\partial u^ *_z}{\partial\theta}&amp;\frac{\partial u^ *_z}{\partial z^ *}\end{array}\right) } \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; and \f$ \mbox{\boldmath$\nabla^ *\cdot u^ *$} \f$ is equal to <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> trace of this matrix. We non-dimensionalise <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> equations, using a problem specific reference length, \f$ {\cal L} \f$, and a timescale \f$ {\cal T}=1/\omega \f$, and use Young 's modulus to non-dimensionalise <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body force and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> stress tensor:&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ \tau^ *$}=<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a> \, \mbox{\boldmath$ \tau$}, \qquad r^ *={\cal L}\, r, \qquad z^ *={\cal L}\, z \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ u^ *$}={\cal L}\, \mbox{\boldmath$ u$}, \qquad \mbox{\boldmath$ F^ *$}=\frac{<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>}{\rho \cal L} \, \mbox{\boldmath$ F$}, \qquad t^ *={\cal T}\, t. \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; The non-dimensional form of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> linear elasticity equations is then given by&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ \nabla\cdot\tau$}+\mbox{\boldmath$ F$}=-\Omega^2\mbox{\boldmath$ u$}, \ \ \ \ \ \ \ \ \ \ @<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>[nondimeqn]@ \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; where \f$\mbox{\boldmath$ \nabla$}=(\frac{\partial}{\partial r},\frac{1}{r}\frac{\partial}{\partial\theta},\frac{\partial}{\partial z}) \f$,&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ \tau $}=\frac{1}{1+\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}\left(\frac{\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}{1-2\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}(\mbox{\boldmath$\nabla\cdot u$})\textbf{I}+\frac{1}{2}(\mbox{\boldmath$ \nabla u$}+\mbox{\boldmath$ \nabla u$}^{{\rm T}})\right), \ \ \ \ \ \ \ \ \ \ @<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>[nondimconstitutive]@ \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> non-dimensional parameter&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\Omega={\cal L}\omega \sqrt{\frac{\rho}{<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>}} \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> ratio of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> elastic body 's intrinsic timescale, \f${\cal L} \sqrt{\frac{\rho}{<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>}}\f$, to <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> problem-specific timescale, \f$ {\cal T}=1/\omega \f$, <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> we used to non-dimensionalise time. The <a class="el" href="cylinder_8txt.html#a2619ddd69aa098df6ed9cbfb39cdc126">boundary</a> conditions are&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ u$}=\mbox{\boldmath$ \hat{u}$}\,\,\textrm{on $ \partial D_d $},\quad \mbox{\boldmath$ \tau$}\cdot {\bf n}=\mbox{\boldmath$ \hat{\tau}$}\,\,\textrm{on $ \partial D_n $}.\<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; Given <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> assumed axisymmetry of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body we expand all quantities in a Fourier series in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> azimuthal coordinate \f$ \theta \f$ by writing,&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ u$}(r,\theta,z)=\sum_{n=-\infty}^{\infty}\mbox{\boldmath$ u$}^{(n)}(r, z){\rm e}^{{\rm i} n\theta},\quad \mbox{\boldmath$ F$}(r,\theta,z)=\sum_{n=-\infty}^{\infty}\mbox{\boldmath$ F$}^{(n)}(r, z){\rm e}^{{\rm i} n\theta},\quad \mbox{\boldmath$ \tau$}(r,\theta,z)=\sum_{n=-\infty}^{\infty}\mbox{\boldmath$ \tau$}^{(n)}(r, z){\rm e}^{{\rm i} n\theta},\<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; This decomposition allows us to remove <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ \theta \f$-dependence from <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> equations by writing \f$ \frac{\partial\zeta}{\partial\theta}={\rm i}n\zeta \f$, where \f$\zeta \f$ represents any physical parameter in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> problem. Furthermore, since <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> governing equations are linear, we can solve for each Fourier component separately and simply specify <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> Fourier wavenumber \f$ n \f$ as a parameter.&lt; HR &gt;&lt; HR &gt; \section element_types Implementation Within \c oomph-lib, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> non-dimensional version of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> two-dimensional Fourier-decomposed equations( @R[nondimeqn]@) with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> constitutive equations( @R[nondimconstitutive]@) are implemented in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \c TimeHarmonicFourierDecomposedLinearElasticityEquations equations class. Following our usual approach, discussed in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a>&lt; A HREF=&quot;../../../quick_guide/html/index.html&quot;&gt;(Not-So-) Quick Guide,&lt;/A &gt; this equation class is then combined with a geometric finite element to form a fully-functional finite element. For instance, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> combination of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \c TimeHarmonicFourierDecomposedLinearElasticityEquations class with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> geometric finite element \c QElement&lt; 2, 3 &gt; yields a nine-node quadrilateral element. As usual, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> mapping between local and global(Eulerian) <a class="el" href="cylinder_8txt.html#a61912e0bb49980407ffc81d063fc5fe0">coordinates</a> within an element is given by,&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[x_i=\sum_{j=1}^{N^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}} X^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}_{ij} \, \psi_j, \qquad i=1, 2, \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; where <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> <a class="el" href="cylinder_8txt.html#a61912e0bb49980407ffc81d063fc5fe0">coordinates</a> are enumerated as \f$ x_1=r, \ x_2=z\f$. \f$ N^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)} \f$ is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> number of nodes in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> element, \f$ X^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}_{ij} \f$ is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ i \f$-th global(Eulerian) coordinate(enumerated as <a class="el" href="cylinder_8txt.html#afcef70d6f1218d47a1c1de210c65f2ac">above</a>) of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ j \f$-th \c Node in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> element, and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ \psi_j \f$ are <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> element 's shape functions, defined in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> geometric finite element. We allow for <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> presence of damping by allowing <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> constitutive <a class="el" href="cylinder_8txt.html#a6f8a64f13e1888a15fc0e83924ff22ee">parameters</a> and forcing frequency to be complex-valued. The three components of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> displacement field therefore have real and imaginary parts and we store <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> six real-valued nodal <a class="el" href="cylinder_8txt.html#a0d5d8067a1b4a9ca4ad0e912ac0656ff">unknowns</a> in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> order \f$ Re\{u_r^{(n)}\}, Re\{u_z^{(n)}\}, Re\{u_\theta^{(n)}\}, Im\{u_r^{(n)}\}, Im\{u_z^{(n)}\}, Im\{u_\theta^{(n)}\} \f$ and use <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> shape functions to interpolate <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> displacements as&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[u_i^{(n)}=\sum_{j=1}^{N^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}} U^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}_{ij} \, \psi_j, \qquad i=1,...6, \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; where \f$ U^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}_{ij} \f$ is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ i \f$-th displacement component(enumerated as indicated <a class="el" href="cylinder_8txt.html#afcef70d6f1218d47a1c1de210c65f2ac">above</a>) at <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ j \f$-th \c Node in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> element.&lt; HR &gt;&lt; HR &gt; \section test The test problem The governing equations are fairly complicated and it is difficult to come up with non-trivial analytical solutions <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> could be used to validate <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> implementation. We therefore construct an analytical solution by postulating a displacement field and providing a body force <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> makes this a solution of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> equations. Specifically we consider <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> time-harmonic non-axisymmetric deformation of an annular elastic body <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> occupies <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> region \f$ r_{\rm min}\leq r\leq r_{\rm max}, z_{\rm min}\leq z\leq z_{\rm max}, 0\leq\theta\leq 2\pi \f$. The displacement field&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath $u$}^{(n)}=\left(\begin{array}{c}u_r^{(n)}\\u_\theta^{(n)}\\u_z^{(n)}\end{array}\right)=\left(\begin{array}{c}r^3\cos\, z\\r^3z^3\\r^3\sin\, z\end{array}\right) \ \ \ \ \ \ \ \ \ \ @<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>[Fourierdisp]@ \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; is an exact solution of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> governing equations if <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body is subject to a body force&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox{\boldmath$ F$}^{(n)}=\left(\begin{array}{c} -r(2{\rm i} nz^3\lambda+\cos\, z\{(8+3r)\lambda-(n^2-16+r(r-3))\mu+r^2 \Lambda^2\})\\ -r\{8z^3\mu-n^2z^3(\lambda+2\mu)+r^2(z^3\Lambda^2+6\mu z)+{\rm i} n\cos\, z((4+r)\lambda+(6+r)\mu)\}\\ r\sin\, z\{(n^2-9)\mu+4r(\lambda+\mu)+r^2(\lambda+2\mu-\Lambda^2)\}-3{\rm i} nr^2z^2(\lambda+\mu)\end{array}\right), \ \ \ \ \ \ \ \ \ \ @<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>[Fourierbodyforce]@ \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>]&lt;/CENTER &gt; where \f$ \lambda=\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>/((1+\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>)(1-2\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>))\f$ and \f$ \mu=1/(2(1+\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>))\f$ are <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> non-dimensional Lam &amp;eacute</td></tr>
+<tr class="separator:a0f1e4f0524d8e5f4e06b7e57d2f4f1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a6f8a64f13e1888a15fc0e83924ff22ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#a6f8a64f13e1888a15fc0e83924ff22ee">parameters</a> (non-dimensionalised on \f$ <a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a> \f$). The body is subject to a non-zero traction on all four boundaries</td></tr>
+<tr class="separator:a6f8a64f13e1888a15fc0e83924ff22ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2619ddd69aa098df6ed9cbfb39cdc126"><td class="memItemLeft" align="right" valign="top">for on <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> inner&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#a2619ddd69aa098df6ed9cbfb39cdc126">boundary</a> (where \f$ r=r_{\rm min} \f$) <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction is&lt; CENTER &gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[\mbox</td></tr>
+<tr class="separator:a2619ddd69aa098df6ed9cbfb39cdc126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0936a6cdf38e297dd5701f4ddcf461ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a> corresponding to a slightly dissipative&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#a0936a6cdf38e297dd5701f4ddcf461ea">material</a> (see \ref comments)</td></tr>
+<tr class="separator:a0936a6cdf38e297dd5701f4ddcf461ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5c96c8f7e54b3d146189360d4844be8"><td class="memItemLeft" align="right" valign="top">see ref exercises I w textwidth validate_ur&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#af5c96c8f7e54b3d146189360d4844be8">Computed</a> (red) and exact(green) solution for real part of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> radial displacement component. &quot; @I w 0.3\textwidth validate_uz &quot;Computed(red) and exact(green) solution for real part of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> axial displacement component. &quot; @I w 0.3\textwidth validate_utheta &quot;Computed(red) and exact(green) solution for real part of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> azimuthal displacement component. &quot; &lt;HR&gt; &lt;HR&gt; \section namespace Global <a class="el" href="cylinder_8txt.html#a6f8a64f13e1888a15fc0e83924ff22ee">parameters</a> and functions As usual</td></tr>
+<tr class="separator:af5c96c8f7e54b3d146189360d4844be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ca5599cd42d24092ff066d372203ea3"><td class="memItemLeft" align="right" valign="top">namespace ::In this namespace we also define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> (Fourier-decomposed) body force</td></tr>
+<tr class="separator:a8ca5599cd42d24092ff066d372203ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1d701241edc58ab5a8d8f75f6caa28f"><td class="memItemLeft" align="right" valign="top">namespace ::In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> exact solution Note consistent with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> enumeration of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> discussed <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> order of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> components in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> functions <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> specify <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body force and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> surface traction is&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a> (r, z,\theta) \f$. \dontinclude cylinder.cc \skipline start_of_namespace \until end_of_namespace&lt; HR &gt;&lt; HR &gt; \section <a class="el" href="unstructured__cylinder_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> The driver code We start by setting <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> number of elements in each of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> two coordinate directions before creating a \c DocInfo object to store <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> output directory. \skipline start_of_main \until doc_info.set_directory(&quot;RESLT&quot;) We build <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> problem using two-dimensional \c QTimeHarmonicFourierDecomposedLinearElasticityElements</td></tr>
+<tr class="separator:ab1d701241edc58ab5a8d8f75f6caa28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a61912e0bb49980407ffc81d063fc5fe0"><td class="memItemLeft" align="right" valign="top">mainpage The azimuthally Fourier decomposed equations of time harmonic linear elasticity The aim of this tutorial is to demonstrate <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> solution of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> time harmonic equations of linear elasticity in cylindrical polar&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#a61912e0bb49980407ffc81d063fc5fe0">coordinates</a></td></tr>
+<tr class="separator:a61912e0bb49980407ffc81d063fc5fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca01424dc3ecc9a0721056ea491de54a"><td class="memItemLeft" align="right" valign="top">for&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#aca01424dc3ecc9a0721056ea491de54a">example</a></td></tr>
+<tr class="separator:aca01424dc3ecc9a0721056ea491de54a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc153ea67f8ac42ff94c1f44ef293ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a></td></tr>
+<tr class="separator:aedc153ea67f8ac42ff94c1f44ef293ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94bcadd8cba91fb2166331ccc39d4649"><td class="memItemLeft" align="right" valign="top">and <a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a></td></tr>
+<tr class="separator:a94bcadd8cba91fb2166331ccc39d4649"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4d253f94930fff20f219d26d1b83e61"><td class="memItemLeft" align="right" valign="top">namespace ::In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#ae4d253f94930fff20f219d26d1b83e61">boundary</a></td></tr>
+<tr class="separator:ae4d253f94930fff20f219d26d1b83e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33bd60603e23da8748b6da936f8c4800"><td class="memItemLeft" align="right" valign="top">namespace ::In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> exact solution Note&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a></td></tr>
+<tr class="separator:a33bd60603e23da8748b6da936f8c4800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5d8067a1b4a9ca4ad0e912ac0656ff"><td class="memItemLeft" align="right" valign="top">namespace ::In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> exact solution Note consistent with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> enumeration of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#a0d5d8067a1b4a9ca4ad0e912ac0656ff">unknowns</a></td></tr>
+<tr class="separator:a0d5d8067a1b4a9ca4ad0e912ac0656ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcef70d6f1218d47a1c1de210c65f2ac"><td class="memItemLeft" align="right" valign="top">namespace ::In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> exact solution Note consistent with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> enumeration of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> discussed&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8txt.html#afcef70d6f1218d47a1c1de210c65f2ac">above</a></td></tr>
+<tr class="separator:afcef70d6f1218d47a1c1de210c65f2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a0f1e4f0524d8e5f4e06b7e57d2f4f1ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f1e4f0524d8e5f4e06b7e57d2f4f1ba">&#9670;&nbsp;</a></span>BORDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="cylinder_8txt.html#a0f1e4f0524d8e5f4e06b7e57d2f4f1ba">BORDER</a> =  1, WIDTH=500px&gt; &lt;TR&gt; &lt;TD bgcolor=&quot;cornsilk&quot;&gt; &lt;CENTER&gt; &lt;B&gt;Acknowledgement:&lt;/B&gt; This implementation of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> equations and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> documentation were developed jointly with Robert Harter (Thales Underwater Systems Ltd) with financial support from a KTA Secondment grant from University of Manchester's EPSRC-funded Knowledge Transfer Account. &lt;/CENTER&gt; &lt;/TD&gt; &lt;/TR&gt; &lt;/TABLE&gt; &lt;/CENTER&gt; &lt;HR&gt; &lt;HR&gt; \section theory Theory Consider a three-dimensional, axisymmetric body (of density \f$ \rho \f$, Young's modulus \f$ <a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a> \f$, and Poisson's ratio \f$ \<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a> \f$), occupying <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> region \f$ D \f$ whose <a class="el" href="cylinder_8txt.html#a2619ddd69aa098df6ed9cbfb39cdc126">boundary</a> is \f$ \partial D \f$. Assuming <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body performs time-harmonic oscillations of frequency of \f$ \omega \f$, we use cylindrical <a class="el" href="cylinder_8txt.html#a61912e0bb49980407ffc81d063fc5fe0">coordinates</a> \f$ (r^*,\theta,z^*) \f$. The equations of time-harmonic linear elasticity can then be written as &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ \nabla^*\cdot\tau^*$}+\rho \mbox{\boldmath$ F^*$}=-\rho\omega^2\mbox{\boldmath$ u^*$}, \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; where \f$\mbox{\boldmath$ \nabla^*$}=(\frac{\partial}{\partial r^*},\frac{1}{r^*}\frac{\partial}{\partial\theta},\frac{\partial}{\partial z^*}) \f$, and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> stresses, body force and displacements are given by \f$ {\rm Re}\{\mbox{\boldmath$\tau^*$}(r^*,\theta,z^*){\rm e}^{-{\rm i}\omega t^*}\} \f$, \f$ {\rm Re}\{\mbox{\boldmath$F^*$}(r^*,\theta,z^*){\rm e}^{-{\rm i}\omega t^*}\} \f$ and \f$ {\rm Re}\{\mbox{\boldmath$u^*$}(r^*,\theta,z^*){\rm e}^{-{\rm i}\omega t^*}\} \f$ respectively. Note <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> here and henceforth, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> superscript asterisk notation is used to distinguish dimensional quantities from their non-dimensional counterparts where required. (The coordinate \f$ \theta \f$ is by definition dimensionless, and so we do not use an asterisk when referencing this parameter). The body is subject to imposed time-harmonic displacements \f$ \mbox{\boldmath$ u^*$} \f$ along \f$ \partial D_d \f$, and subject to an imposed traction \f$ \mbox{\boldmath$ \hat{\tau}^*$} \f$ along \f$ \partial D_n \f$ where \f$ \partial D=\partial D_d\cup\partial D_n \f$ so <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ u^*$}=\mbox{\boldmath$ \hat{u}^*$}\,\,\textrm{on $ \partial D_d $ },\quad \mbox{\boldmath$ \tau^*$} \cdot {\bf n}=\mbox{\boldmath$ \hat{\tau}^*$}\,\,\textrm{on $ \partial D_n $ } \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; where \f$ {\bf n} \f$ is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> outer unit normal on <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> boundary. The stresses and displacements are related by <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> constitutive equations &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ \tau^*$}=\frac{<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>}{1+\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}\left( \frac{\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}{1-2\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}(\mbox{\boldmath$\nabla^*\cdot u^*$})\textbf{I}+ \frac{1}{2}(\mbox{\boldmath$ \nabla^* u^*$}+\mbox{\boldmath$ \nabla^* u^*$}^{{\rm T}})\right), \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; where \f$ \mbox{\boldmath$ \nabla^* u^*$}^{{\rm T}} \f$ represents <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> transpose of \f$ \mbox{\boldmath$ \nabla^* u^*$} \f$. Note <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> in cylindrical <a class="el" href="cylinder_8txt.html#a61912e0bb49980407ffc81d063fc5fe0">coordinates</a>, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> second-order tensor \f$ \mbox{\boldmath$ \nabla^* u^*$} \f$ is given by &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ \nabla^* u^*$}= { \left(\begin{array}{ccc} \frac{\partial u^*_r}{\partial r^*}&amp; \frac{1}{r^*}\frac{\partial u^*_r}{\partial\theta}-\frac{u^*_\theta}{r^*}&amp; \frac{\partial u^*_r}{\partial z^*}\\ \frac{\partial u^*_\theta}{\partial r^*}&amp; \frac{1}{r^*}\frac{\partial u^*_\theta}{\partial\theta}+\frac{u^*_r}{r^*}&amp; \frac{\partial u^*_\theta}{\partial z^*}\\ \frac{\partial u^*_z}{\partial r^*}&amp; \frac{1}{r^*}\frac{\partial u^*_z}{\partial\theta}&amp; \frac{\partial u^*_z}{\partial z^*}\end{array}\right) } \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; and \f$ \mbox{\boldmath$\nabla^*\cdot u^*$} \f$ is equal to <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> trace of this matrix. We non-dimensionalise <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> equations, using a problem specific reference length, \f$ {\cal L} \f$, and a timescale \f$ {\cal T}=1/\omega \f$, and use Young's modulus to non-dimensionalise <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body force and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> stress tensor: &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ \tau^*$} = <a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a> \, \mbox{\boldmath$ \tau$}, \qquad r^* = {\cal L}\, r, \qquad z^* = {\cal L}\, z \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ u^*$} = {\cal L}\, \mbox{\boldmath$ u$}, \qquad \mbox{\boldmath$ F^*$} = \frac{<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>}{\rho \cal L} \, \mbox{\boldmath$ F$}, \qquad t^* = {\cal T}\, t. \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; The non-dimensional form of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> linear elasticity equations is then given by &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ \nabla\cdot\tau$}+\mbox{\boldmath$ F$}=-\Omega^2\mbox{\boldmath$ u$}, \ \ \ \ \ \ \ \ \ \ @<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>[nondimeqn]@ \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; where \f$\mbox{\boldmath$ \nabla$}=(\frac{\partial}{\partial r},\frac{1}{r}\frac{\partial}{\partial\theta},\frac{\partial}{\partial z}) \f$, &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ \tau $}=\frac{1}{1+\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}\left( \frac{\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}{1-2\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>}(\mbox{\boldmath$\nabla\cdot u$})\textbf{I}+ \frac{1}{2}(\mbox{\boldmath$ \nabla u$}+\mbox{\boldmath$ \nabla u$}^{{\rm T}})\right), \ \ \ \ \ \ \ \ \ \ @<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>[nondimconstitutive]@ \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> non-dimensional parameter &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \Omega = {\cal L}\omega \sqrt{\frac{\rho}{<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>}} \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> ratio of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> elastic body's intrinsic timescale, \f${\cal L} \sqrt{\frac{\rho}{<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>}}\f$, to <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> problem-specific timescale, \f$ {\cal T}=1/\omega \f$, <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> we used to non-dimensionalise time. The <a class="el" href="cylinder_8txt.html#a2619ddd69aa098df6ed9cbfb39cdc126">boundary</a> conditions are &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ u$}=\mbox{\boldmath$ \hat{u}$}\,\,\textrm{on $ \partial D_d $},\quad \mbox{\boldmath$ \tau$}\cdot {\bf n} =\mbox{\boldmath$ \hat{\tau}$}\,\,\textrm{on $ \partial D_n $}.\<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; Given <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> assumed axisymmetry of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body we expand all quantities in a Fourier series in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> azimuthal coordinate \f$ \theta \f$ by writing, &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ u$}(r,\theta ,z)=\sum_{n=-\infty}^{\infty}\mbox{\boldmath$ u$}^{(n)}(r,z){\rm e}^{{\rm i} n\theta},\quad \mbox{\boldmath$ F$} (r,\theta ,z)=\sum_{n=-\infty}^{\infty}\mbox{\boldmath$ F$}^{(n)}(r,z){\rm e}^{{\rm i} n\theta},\quad \mbox{\boldmath$ \tau$} (r,\theta ,z)=\sum_{n=-\infty}^{\infty}\mbox{\boldmath$ \tau$}^{(n)}(r,z){\rm e}^{{\rm i} n\theta} ,\<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; This decomposition allows us to remove <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ \theta \f$-dependence from <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> equations by writing \f$ \frac{\partial\zeta}{\partial\theta}={\rm i}n\zeta \f$, where \f$\zeta \f$ represents any physical parameter in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> problem. Furthermore, since <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> governing equations are linear, we can solve for each Fourier component separately and simply specify <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> Fourier wavenumber \f$ n \f$ as a parameter. &lt;HR&gt; &lt;HR&gt; \section element_types Implementation Within \c oomph-lib, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> non-dimensional version of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> two-dimensional Fourier-decomposed equations (@R[nondimeqn]@) with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> constitutive equations (@R[nondimconstitutive]@) are implemented in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \c TimeHarmonicFourierDecomposedLinearElasticityEquations equations class. Following our usual approach, discussed in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> &lt;A HREF=&quot;../../../quick_guide/html/index.html&quot;&gt; (Not-So-)Quick Guide,&lt;/A&gt; this equation class is then combined with a geometric finite element to form a fully-functional finite element. For instance, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> combination of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \c TimeHarmonicFourierDecomposedLinearElasticityEquations class with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> geometric finite element \c QElement&lt;2,3&gt; yields a nine-node quadrilateral element. As usual, <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> mapping between local and global (Eulerian) <a class="el" href="cylinder_8txt.html#a61912e0bb49980407ffc81d063fc5fe0">coordinates</a> within an element is given by, &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ x_i = \sum_{j=1}^{N^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}} X^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}_{ij} \, \psi_j, \qquad i=1,2, \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; where <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> <a class="el" href="cylinder_8txt.html#a61912e0bb49980407ffc81d063fc5fe0">coordinates</a> are enumerated as \f$ x_1=r, \ x_2 = z\f$. \f$ N^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)} \f$ is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> number of nodes in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> element, \f$ X^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}_{ij} \f$ is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ i \f$-th global (Eulerian) coordinate (enumerated as <a class="el" href="cylinder_8txt.html#afcef70d6f1218d47a1c1de210c65f2ac">above</a>) of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ j \f$-th \c Node in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> element, and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ \psi_j \f$ are <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> element's shape functions, defined in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> geometric finite element. We allow for <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> presence of damping by allowing <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> constitutive <a class="el" href="cylinder_8txt.html#a6f8a64f13e1888a15fc0e83924ff22ee">parameters</a> and forcing frequency to be complex-valued. The three components of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> displacement field therefore have real and imaginary parts and we store <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> six real-valued nodal <a class="el" href="cylinder_8txt.html#a0d5d8067a1b4a9ca4ad0e912ac0656ff">unknowns</a> in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> order \f$ Re\{u_r^{(n)}\}, Re\{u_z^{(n)}\}, Re\{u_\theta^{(n)}\}, Im\{u_r^{(n)}\}, Im\{u_z^{(n)}\}, Im\{u_\theta^{(n)}\} \f$ and use <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> shape functions to interpolate <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> displacements as &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ u_i^{(n)} = \sum_{j=1}^{N^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}} U^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}_{ij} \, \psi_j, \qquad i=1,...6, \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; where \f$ U^{(<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>)}_{ij} \f$ is <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ i \f$-th displacement component (enumerated as indicated <a class="el" href="cylinder_8txt.html#afcef70d6f1218d47a1c1de210c65f2ac">above</a>) at <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> \f$ j \f$-th \c Node in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> element. &lt;HR&gt; &lt;HR&gt; \section test The test problem The governing equations are fairly complicated and it is difficult to come up with non-trivial analytical solutions <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> could be used to validate <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> implementation. We therefore construct an analytical solution by postulating a displacement field and providing a body force <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> makes this a solution of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> equations. Specifically we consider <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> time-harmonic non-axisymmetric deformation of an annular elastic body <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> occupies <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> region \f$ r_{\rm min}\leq r\leq r_{\rm max}, z_{\rm min}\leq z\leq z_{\rm max}, 0\leq\theta\leq 2\pi \f$. The displacement field &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$u$}^{(n)}= \left(\begin{array}{c}u_r^{(n)}\\u_\theta^{(n)}\\u_z^{(n)}\end{array}\right)= \left(\begin{array}{c}r^3\cos\, z\\r^3z^3\\r^3\sin\,z\end{array}\right) \ \ \ \ \ \ \ \ \ \ @<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>[Fourierdisp]@ \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; is an exact solution of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> governing equations if <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body is subject to a body force &lt;CENTER&gt; \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>[ \mbox{\boldmath$ F$}^{(n)}=\left(\begin{array}{c} -r(2{\rm i} nz^3\lambda+\cos\, z\{(8+3r)\lambda-(n^2-16+r(r-3))\mu+r^2 \Lambda^2\})\\ -r\{8z^3\mu-n^2z^3(\lambda+2\mu)+r^2(z^3\Lambda^2+6\mu z)+{\rm i} n\cos\, z((4+r)\lambda+(6+r)\mu)\}\\ r\sin\, z\{(n^2-9)\mu+4r(\lambda+\mu)+r^2(\lambda+2\mu-\Lambda^2)\}-3{\rm i} nr^2z^2(\lambda+\mu)\end{array}\right), \ \ \ \ \ \ \ \ \ \ @<a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a>[Fourierbodyforce]@ \<a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a>] &lt;/CENTER&gt; where \f$ \lambda = \<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>/((1+\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>)(1-2\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>))\f$ and \f$ \mu = 1/(2(1+\<a class="el" href="cylinder_8txt.html#a94bcadd8cba91fb2166331ccc39d4649">nu</a>))\f$ are <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> non-dimensional Lam&amp;eacute</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00279">279</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a2619ddd69aa098df6ed9cbfb39cdc126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2619ddd69aa098df6ed9cbfb39cdc126">&#9670;&nbsp;</a></span>boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">for on <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> inner boundary </td>
+          <td>(</td>
+          <td class="paramtype">where \f$&#160;</td>
+          <td class="paramname"><em>r</em> = <code>r_{\rm&#160;min}&#160;\f$</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00282">282</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+<a id="af5c96c8f7e54b3d146189360d4844be8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5c96c8f7e54b3d146189360d4844be8">&#9670;&nbsp;</a></span>Computed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref exercises I w textwidth validate_ur Computed </td>
+          <td>(</td>
+          <td class="paramtype">red&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1d701241edc58ab5a8d8f75f6caa28f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1d701241edc58ab5a8d8f75f6caa28f">&#9670;&nbsp;</a></span>f()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace :: In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> exact solution Note consistent with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> enumeration of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> discussed <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> order of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> components in <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> functions <a class="el" href="cylinder_8txt.html#a33bd60603e23da8748b6da936f8c4800">that</a> specify <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> body force and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> surface traction is f </td>
+          <td>(</td>
+          <td class="paramtype">r&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">z&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">\&#160;</td>
+          <td class="paramname"><em>theta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0936a6cdf38e297dd5701f4ddcf461ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0936a6cdf38e297dd5701f4ddcf461ea">&#9670;&nbsp;</a></span>material()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a> corresponding to a slightly dissipative material </td>
+          <td>(</td>
+          <td class="paramtype">see \ref&#160;</td>
+          <td class="paramname"><em>comments</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f8a64f13e1888a15fc0e83924ff22ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f8a64f13e1888a15fc0e83924ff22ee">&#9670;&nbsp;</a></span>parameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">parameters </td>
+          <td>(</td>
+          <td class="paramtype">non-dimensionalised on \f$ <a class="el" href="cylinder_8txt.html#aedc153ea67f8ac42ff94c1f44ef293ae">E</a> \&#160;</td>
+          <td class="paramname"><em>f$</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8ca5599cd42d24092ff066d372203ea3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ca5599cd42d24092ff066d372203ea3">&#9670;&nbsp;</a></span>the()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace :: In this namespace we also define the </td>
+          <td>(</td>
+          <td class="paramtype">Fourier-&#160;</td>
+          <td class="paramname"><em>decomposed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="afcef70d6f1218d47a1c1de210c65f2ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcef70d6f1218d47a1c1de210c65f2ac">&#9670;&nbsp;</a></span>above</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace :: In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> exact solution Note consistent with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> enumeration of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> discussed above</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00336">336</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+<a id="ae4d253f94930fff20f219d26d1b83e61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d253f94930fff20f219d26d1b83e61">&#9670;&nbsp;</a></span>boundary</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace :: In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on boundary</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00335">335</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+<a id="a61912e0bb49980407ffc81d063fc5fe0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61912e0bb49980407ffc81d063fc5fe0">&#9670;&nbsp;</a></span>coordinates</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The azimuthally Fourier decomposed equations of time harmonic linear elasticity The aim of this tutorial is to demonstrate <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> solution of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> time harmonic equations of linear elasticity in cylindrical polar coordinates</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00005">5</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+<a id="aedc153ea67f8ac42ff94c1f44ef293ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedc153ea67f8ac42ff94c1f44ef293ae">&#9670;&nbsp;</a></span>E</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a> E</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=1+0.01{\rm</div>
+<div class="line">i} <a class="code" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">\f</a>$</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00315">315</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+<a id="aca01424dc3ecc9a0721056ea491de54a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca01424dc3ecc9a0721056ea491de54a">&#9670;&nbsp;</a></span>example</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">for example</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00282">282</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+<a id="a94bcadd8cba91fb2166331ccc39d4649"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94bcadd8cba91fb2166331ccc39d4649">&#9670;&nbsp;</a></span>nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">and <a class="el" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a> nu</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=0.3+0.05{\rm i}<a class="code" href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">\f</a>$.  The imaginary part of <a class="code" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> </div>
+<div class="line">solution is small (though not identically equal to zero) but it converges to </div>
+<div class="line">zero under mesh refinement</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00317">317</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+<a id="a33bd60603e23da8748b6da936f8c4800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33bd60603e23da8748b6da936f8c4800">&#9670;&nbsp;</a></span>that</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace :: In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> exact solution Note that</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00335">335</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0d5d8067a1b4a9ca4ad0e912ac0656ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d5d8067a1b4a9ca4ad0e912ac0656ff">&#9670;&nbsp;</a></span>unknowns</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace :: In this namespace we also define <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> traction to be applied on and <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> exact solution Note consistent with <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> enumeration of <a class="el" href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a> unknowns</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cylinder_8txt_source.html#l00336">336</a> of file <a class="el" href="cylinder_8txt_source.html">cylinder.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="acylinder_8txt_html_ab1d701241edc58ab5a8d8f75f6caa28f"><div class="ttname"><a href="cylinder_8txt.html#ab1d701241edc58ab5a8d8f75f6caa28f">f</a></div><div class="ttdeci">namespace ::In this namespace we also define the traction to be applied on and the exact solution Note consistent with the enumeration of the discussed the order of the components in the functions that specify the body force and the surface traction is f(r, z,\theta) \f$. \dontinclude cylinder.cc \skipline start_of_namespace \until end_of_namespace&lt; HR &gt;&lt; HR &gt; \section main The driver code We start by setting the number of elements in each of the two coordinate directions before creating a \c DocInfo object to store the output directory. \skipline start_of_main \until doc_info.set_directory(&quot;RESLT&quot;) We build the problem using two-dimensional \c QTimeHarmonicFourierDecomposedLinearElasticityElements</div></div>
+<div class="ttc" id="acylinder_8txt_html_a8ca5599cd42d24092ff066d372203ea3"><div class="ttname"><a href="cylinder_8txt.html#a8ca5599cd42d24092ff066d372203ea3">the</a></div><div class="ttdeci">namespace ::In this namespace we also define the(Fourier-decomposed) body force</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:28:23
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

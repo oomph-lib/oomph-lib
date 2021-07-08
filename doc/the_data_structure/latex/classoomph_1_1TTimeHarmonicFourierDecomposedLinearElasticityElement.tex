@@ -1,0 +1,263 @@
+\hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{}\doxysection{oomph\+::T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+
+
+{\ttfamily \#include $<$time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.149897cm]{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ad94e8a6c8133172e65185a96cc53f68e}{T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ae14527add57636a4412ea584dd66cdbe}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a8f1141e19dcdd594824d1adc971b2832}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a81a75203b1c0d2f110259547e51c8cac}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a05e2f49a9bd2941f4bbabd5f0279d86a}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a57870ab2c9c506070441d8a428820d27}{nvertex\+\_\+node}} () const
+\begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ad02188b226cc083ee4712a2dd51739ba}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a6b8053ed436ccb21829f78b9df39ea23}{nrecovery\+\_\+order}} ()
+\begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ab2806da6c0c8f1f0e40d678ea1de528c}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
+\begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ad910e9982be82dee39ec30f0967e00cd}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
+class oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}
+
+An Element that solves the equations of Fourier decomposed (in cylindrical polars) time-\/harmonic linear elasticity, using T\+Elements for the geometry. 
+
+Definition at line 487 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ad94e8a6c8133172e65185a96cc53f68e}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ad94e8a6c8133172e65185a96cc53f68e}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!TTimeHarmonicFourierDecomposedLinearElasticityElement@{TTimeHarmonicFourierDecomposedLinearElasticityElement}}
+\index{TTimeHarmonicFourierDecomposedLinearElasticityElement@{TTimeHarmonicFourierDecomposedLinearElasticityElement}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{TTimeHarmonicFourierDecomposedLinearElasticityElement()}{TTimeHarmonicFourierDecomposedLinearElasticityElement()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line 495 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ad910e9982be82dee39ec30f0967e00cd}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ad910e9982be82dee39ec30f0967e00cd}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
+\index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 541 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::get\+\_\+strain(), and i.
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a6b8053ed436ccb21829f78b9df39ea23}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a6b8053ed436ccb21829f78b9df39ea23}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
+\index{nrecovery\_order@{nrecovery\_order}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835bd3e0f6b2f4f7a9a4044798}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 530 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ab2806da6c0c8f1f0e40d678ea1de528c}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ab2806da6c0c8f1f0e40d678ea1de528c}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
+\index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c5728902e13da31be19c390fc28e3}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 533 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a57870ab2c9c506070441d8a428820d27}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a57870ab2c9c506070441d8a428820d27}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
+\index{nvertex\_node@{nvertex\_node}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertex nodes in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e77ef4ff35f15fdf7913b4077}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 519 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a81a75203b1c0d2f110259547e51c8cac}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a81a75203b1c0d2f110259547e51c8cac}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_acf3bfd1c5a6462aa9555bc8451914e63}{oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Definition at line 509 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a05e2f49a9bd2941f4bbabd5f0279d86a}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a05e2f49a9bd2941f4bbabd5f0279d86a}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+C-\/style output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a9c5e3dba68906cb65e1f38eb0638080c}{oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Definition at line 513 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ae14527add57636a4412ea584dd66cdbe}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ae14527add57636a4412ea584dd66cdbe}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_ad66ccbcca9ee2a4eb3c24bdd21c096f9}{oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Definition at line 500 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a8f1141e19dcdd594824d1adc971b2832}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a8f1141e19dcdd594824d1adc971b2832}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4_a5e9bfd033563fd0da6e93b581991827f}{oomph\+::\+T\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+Definition at line 504 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+References oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output().
+
+\mbox{\Hypertarget{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ad02188b226cc083ee4712a2dd51739ba}\label{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ad02188b226cc083ee4712a2dd51739ba}} 
+\index{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
+\index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$@{oomph::TTimeHarmonicFourierDecomposedLinearElasticityElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
+{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pointer to the j-\/th vertex node in the element. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+
+
+
+Definition at line 523 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}\end{DoxyCompactItemize}

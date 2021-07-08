@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: File Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index__24"></a>- $ -</h3><ul>
+<li>$i_
+: <a class="el" href="leftovers_8txt.html#ae862e131c1b89273ef5ce086c4326406">leftovers.txt</a>
+</li>
+<li>$k
+: <a class="el" href="leftovers_8txt.html#a2b5ba385b4a9d12d05e1b0a819412cc7">leftovers.txt</a>
+</li>
+<li>$M
+: <a class="el" href="leftovers_8txt.html#a53bda24fa542ba47ce67782da65621cf">leftovers.txt</a>
+</li>
+<li>$m
+: <a class="el" href="leftovers_8txt.html#a418981c475349590914fd6671377bd1d">leftovers.txt</a>
+</li>
+<li>$T_
+: <a class="el" href="leftovers_8txt.html#a7cd669c8b2d88c46b7ec1f77889632de">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index__5F"></a>- _ -</h3><ul>
+<li>_
+: <a class="el" href="leftovers_8txt.html#a71750803086cc1cc2d53ccd458bdf448">leftovers.txt</a>
+</li>
+<li>__pad0__
+: <a class="el" href="leftovers_8txt.html#ab6f3c269fc46c9c1c0f81b3431240138">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>a
+: <a class="el" href="leftovers_8txt.html#aab56ef68dca3ae3eeea46c7516ce9ba1">leftovers.txt</a>
+</li>
+<li>A_
+: <a class="el" href="leftovers_8txt.html#a5e580c6637a37879ea4f1c879b3523d3">leftovers.txt</a>
+</li>
+<li>accelerations
+: <a class="el" href="leftovers_8txt.html#a812c833adca004348d37fd7c5f7fa6d0">leftovers.txt</a>
+</li>
+<li>addressed
+: <a class="el" href="leftovers_8txt.html#a0e914e0ebf6645e52b7da3820aac9c78">leftovers.txt</a>
+</li>
+<li>algorithms
+: <a class="el" href="leftovers_8txt.html#af9417924efb9c8a79ca6dde15701b23a">leftovers.txt</a>
+</li>
+<li>Also
+: <a class="el" href="leftovers_8txt.html#a55f76813b37f3a45691b9b503872e981">leftovers.txt</a>
+</li>
+<li>always
+: <a class="el" href="leftovers_8txt.html#a72e2566441ebc4943eb6dc1668ed5ed8">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_b"></a>- b -</h3><ul>
+<li>b
+: <a class="el" href="leftovers_8txt.html#ad5fcb2ad47a34683acc813606f5d35e3">leftovers.txt</a>
+</li>
+<li>below
+: <a class="el" href="leftovers_8txt.html#a0fbdbdd4d2686b57d61bd9bb223e08e2">leftovers.txt</a>
+</li>
+<li>Bodies
+: <a class="el" href="leftovers_8txt.html#a0c14e6a969eddba69c0313b5eea0325f">leftovers.txt</a>
+</li>
+<li>body
+: <a class="el" href="leftovers_8txt.html#a9c0959157dacfbabd8942ce07cf14c21">leftovers.txt</a>
+</li>
+<li>boundaries
+: <a class="el" href="leftovers_8txt.html#aea9f052dbb0dbb2d2c99ffd010f72c2f">leftovers.txt</a>
+</li>
+<li>boundary
+: <a class="el" href="leftovers_8txt.html#ae3870887bf6b22f0129cbd2d4d095bfd">leftovers.txt</a>
+</li>
+<li>boundary_node_pt
+: <a class="el" href="leftovers_8txt.html#a69f21f7ce2fa73ad66bbe78ef57cd205">leftovers.txt</a>
+</li>
+<li>built
+: <a class="el" href="leftovers_8txt.html#abb349d8a5d068fdde9d9ff6f8592aaf4">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>can
+: <a class="el" href="leftovers_8txt.html#a7ba30fe6dbbf4fa4ea1e6c87e45036b8">leftovers.txt</a>
+</li>
+<li>case
+: <a class="el" href="leftovers_8txt.html#aff1d236f78037396a21a664ffe2ff0f9">leftovers.txt</a>
+</li>
+<li>class
+: <a class="el" href="leftovers_8txt.html#a45169ff39db13923fcea34ebfba5251c">leftovers.txt</a>
+</li>
+<li>classes
+: <a class="el" href="leftovers_8txt.html#a4c22190f4d89c18b0c24f43d5dbc0c77">leftovers.txt</a>
+</li>
+<li>column
+: <a class="el" href="leftovers_8txt.html#a40a18dff8ed97e5e0306afe4201f1ed9">leftovers.txt</a>
+</li>
+<li>complete
+: <a class="el" href="leftovers_8txt.html#a07330a6506975a7ea69c14ecb9fe423b">leftovers.txt</a>
+</li>
+<li>condition
+: <a class="el" href="leftovers_8txt.html#a2fb8fecf1d9a701d195d2d20cd7b1190">leftovers.txt</a>
+</li>
+<li>conditions
+: <a class="el" href="leftovers_8txt.html#a8de671bc429326624a92f5604181c66f">leftovers.txt</a>
+</li>
+<li>configuration
+: <a class="el" href="leftovers_8txt.html#abe33c224ca3380ac4a45c05b463f19e1">leftovers.txt</a>
+</li>
+<li>Conversely
+: <a class="el" href="leftovers_8txt.html#a72eba69347b2e2c7d76462bb020269d3">leftovers.txt</a>
+</li>
+<li>coordinate
+: <a class="el" href="leftovers_8txt.html#ac9b1abad3a9dded2dec45bed3554421f">leftovers.txt</a>
+</li>
+<li>course
+: <a class="el" href="leftovers_8txt.html#a8a60f98c1d3fbde4badea3ac353ccdcc">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_d"></a>- d -</h3><ul>
+<li>D
+: <a class="el" href="leftovers_8txt.html#ae4c60b9ef86b45cc56c1c0840c1fc66c">leftovers.txt</a>
+</li>
+<li>D_
+: <a class="el" href="leftovers_8txt.html#a75682fbfff54ca838e87b4f0887b5c79">leftovers.txt</a>
+</li>
+<li>deforms
+: <a class="el" href="leftovers_8txt.html#a8d21899a516a3e6f59f63d5477495240">leftovers.txt</a>
+</li>
+<li>delta
+: <a class="el" href="leftovers_8txt.html#af0998f74a190c4f59f09d7459de4030c">leftovers.txt</a>
+</li>
+<li>density
+: <a class="el" href="leftovers_8txt.html#adf3d06829d61fa6d4dedacc4e0b32911">leftovers.txt</a>
+</li>
+<li>DIM
+: <a class="el" href="leftovers_8txt.html#a365d85280f72329d2fa6f5a67f9af930">leftovers.txt</a>
+</li>
+<li>dimensions
+: <a class="el" href="leftovers_8txt.html#ad83c894b3bf73c0a3d2f39f5fd24a2d0">leftovers.txt</a>
+</li>
+<li>direction
+: <a class="el" href="leftovers_8txt.html#a94c12ae5fa4d93a473779b0e931b5fae">leftovers.txt</a>
+</li>
+<li>discretisation
+: <a class="el" href="leftovers_8txt.html#af70631f8e309f5703bfc6e525f6fe35a">leftovers.txt</a>
+</li>
+<li>Dover
+: <a class="el" href="leftovers_8txt.html#a63eb060df21f6b237473d8450faceed5">leftovers.txt</a>
+</li>
+<li>dt
+: <a class="el" href="leftovers_8txt.html#a03e28be41881b703c836edbfe9b51b17">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_e"></a>- e -</h3><ul>
+<li>e
+: <a class="el" href="leftovers_8txt.html#acda987f000e88975d1f6937bceb61be2">leftovers.txt</a>
+</li>
+<li>el_jacobian
+: <a class="el" href="leftovers_8txt.html#a8adda51cf3ae3a89c7c145fab2ddcbc6">leftovers.txt</a>
+</li>
+<li>el_pt
+: <a class="el" href="leftovers_8txt.html#a37608ecddcef78443d588c25d30b3ea0">leftovers.txt</a>
+</li>
+<li>elasticity
+: <a class="el" href="leftovers_8txt.html#ae24d7a79475f8d940616bb036a2da48d">leftovers.txt</a>
+</li>
+<li>Elasticity
+: <a class="el" href="leftovers_8txt.html#a539845d026ab4fde4caf97cdbe97c0ea">leftovers.txt</a>
+</li>
+<li>element
+: <a class="el" href="leftovers_8txt.html#a546caa0eefe947d15f05b4c63816db56">leftovers.txt</a>
+</li>
+<li>element_pt
+: <a class="el" href="leftovers_8txt.html#a5dd0cebb65f10376d6315433a955eef3">leftovers.txt</a>
+</li>
+<li>Elements
+: <a class="el" href="leftovers_8txt.html#ac558fe532f879b3f0c36aa050ea0338c">leftovers.txt</a>
+</li>
+<li>equation
+: <a class="el" href="leftovers_8txt.html#ad8175023527ba609d5bd554051b1acee">leftovers.txt</a>
+</li>
+<li>equivalently
+: <a class="el" href="leftovers_8txt.html#a2f9d92c3cb9ddbcbc744132a544cc211">leftovers.txt</a>
+</li>
+<li>etc
+: <a class="el" href="leftovers_8txt.html#a5b712bffa44be36c3430c6f6814f8349">leftovers.txt</a>
+</li>
+<li>examples
+: <a class="el" href="leftovers_8txt.html#a09adde673d07160fd7cb57138d355dae">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_f"></a>- f -</h3><ul>
+<li>f
+: <a class="el" href="leftovers_8txt.html#a2bec647cf631a629f52806cd4b7f43bd">leftovers.txt</a>
+</li>
+<li>fact
+: <a class="el" href="leftovers_8txt.html#abfde43c2b53de96e3f2bbf8d4ac6131c">leftovers.txt</a>
+</li>
+<li>family
+: <a class="el" href="leftovers_8txt.html#a46a588b6de3a1c3f86854e5a4474ef18">leftovers.txt</a>
+</li>
+<li>figure
+: <a class="el" href="leftovers_8txt.html#ab636562bdaf8b165fea1b82cb02b6fe1">leftovers.txt</a>
+</li>
+<li>Finally
+: <a class="el" href="leftovers_8txt.html#ad241ac225845f23822dafee8cce67441">leftovers.txt</a>
+</li>
+<li>flag
+: <a class="el" href="leftovers_8txt.html#a41694793c09cc66f6a77604a872124af">leftovers.txt</a>
+</li>
+<li>formulated
+: <a class="el" href="leftovers_8txt.html#a9266ca1b74a24162b763d801be820315">leftovers.txt</a>
+</li>
+<li>frac
+: <a class="el" href="leftovers_8txt.html#a93a2dbce62e6ae8a5c20d80af765fe7e">leftovers.txt</a>
+</li>
+<li>furthermore
+: <a class="el" href="leftovers_8txt.html#af55941ce139a5a7a84147c85f1855b23">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>g
+: <a class="el" href="leftovers_8txt.html#aa7930af55df4b1fdb561f248564f30a9">leftovers.txt</a>
+</li>
+<li>G_
+: <a class="el" href="leftovers_8txt.html#a4168173c862098b79c99291829000b3a">leftovers.txt</a>
+</li>
+<li>gamma_
+: <a class="el" href="leftovers_8txt.html#ab9e73edfe8a5346cdf63c78b6200e0f3">leftovers.txt</a>
+</li>
+<li>geom_obj_pt
+: <a class="el" href="leftovers_8txt.html#a625237532640855bf8794c5e5e310ef8">leftovers.txt</a>
+</li>
+<li>Green
+: <a class="el" href="leftovers_8txt.html#af7067ae582c86aa6d6d3b8bdb29cdd69">leftovers.txt</a>
+</li>
+<li>growth
+: <a class="el" href="leftovers_8txt.html#a1560f7c49601aa19f4239fb53e37304c">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>hierher
+: <a class="el" href="leftovers_8txt.html#a43aaa5aaa85ae18dcdd26bafcf0eb0cb">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_i"></a>- i -</h3><ul>
+<li>i
+: <a class="el" href="leftovers_8txt.html#ac7b6b7fe6e41b80f29332142864e8223">leftovers.txt</a>
+</li>
+<li>i_
+: <a class="el" href="leftovers_8txt.html#a1f24291fb0ae67d4328d61c91eb6c57b">leftovers.txt</a>
+</li>
+<li>i_bound
+: <a class="el" href="leftovers_8txt.html#afc6798493901a1a05a7977754c1680f6">leftovers.txt</a>
+</li>
+<li>i_eqn
+: <a class="el" href="leftovers_8txt.html#a9671c6cab8aeb0eeb7559e3925a9096e">leftovers.txt</a>
+</li>
+<li>i_global
+: <a class="el" href="leftovers_8txt.html#a0ca71de52c9f65466ea6eefc4f332736">leftovers.txt</a>
+</li>
+<li>i_value
+: <a class="el" href="leftovers_8txt.html#aa4617dc9f40bd3be458d47d84552e2d1">leftovers.txt</a>
+</li>
+<li>ic_pt
+: <a class="el" href="leftovers_8txt.html#a51b06269f4e81c286e830558eec50130">leftovers.txt</a>
+</li>
+<li>Important
+: <a class="el" href="leftovers_8txt.html#ab98a367da1305b7bd34e5a7c45b59f46">leftovers.txt</a>
+</li>
+<li>in
+: <a class="el" href="leftovers_8txt.html#a7357798e4f99167124d483d0268f9270">leftovers.txt</a>
+</li>
+<li>instance
+: <a class="el" href="leftovers_8txt.html#a955d9c75070b93f69105f4cb32c0d801">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_j"></a>- j -</h3><ul>
+<li>j
+: <a class="el" href="leftovers_8txt.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">leftovers.txt</a>
+</li>
+<li>j_
+: <a class="el" href="leftovers_8txt.html#af2e92bcd8d271c4a6ec64910f460a467">leftovers.txt</a>
+</li>
+<li>J_
+: <a class="el" href="leftovers_8txt.html#ac8656069a6001e6bfa0c5aae4d5e651f">leftovers.txt</a>
+</li>
+<li>j_value
+: <a class="el" href="leftovers_8txt.html#a64dd011018545c44d804af0ccfca2000">leftovers.txt</a>
+</li>
+<li>jacobian
+: <a class="el" href="leftovers_8txt.html#a19a0fb864313447f8ae8c110a5865f30">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_k"></a>- k -</h3><ul>
+<li>k
+: <a class="el" href="leftovers_8txt.html#aee75be69af46869d5543c4f812a19865">leftovers.txt</a>
+</li>
+<li>k_
+: <a class="el" href="leftovers_8txt.html#a3db32abf0ddde1588bce2c427782d9cf">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_l"></a>- l -</h3><ul>
+<li>left
+: <a class="el" href="leftovers_8txt.html#a58c76f848f15df202254c1daec468567">leftovers.txt</a>
+</li>
+<li>lib
+: <a class="el" href="leftovers_8txt.html#acb573448a063cf8f8bfd90fe6e25936e">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>matrix
+: <a class="el" href="leftovers_8txt.html#a90d19f274174b1ab59199f812c441a8e">leftovers.txt</a>
+</li>
+<li>mesh
+: <a class="el" href="leftovers_8txt.html#af1e8e2fcbdd936e95039ad83030c1280">leftovers.txt</a>
+</li>
+<li>Mesh
+: <a class="el" href="leftovers_8txt.html#ac1f4a1c92ec8acdfdd7ac8bc3c13cfa8">leftovers.txt</a>
+</li>
+<li>mesh_pt
+: <a class="el" href="leftovers_8txt.html#a2a50b1b98a882621754a6d5514acf865">leftovers.txt</a>
+</li>
+<li>modulus
+: <a class="el" href="leftovers_8txt.html#a9cbe0281fee187cc4581c0e4ec98fc59">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_n"></a>- n -</h3><ul>
+<li>N
+: <a class="el" href="leftovers_8txt.html#af3030869177ab58a54a91250965cf470">leftovers.txt</a>
+</li>
+<li>n_
+: <a class="el" href="leftovers_8txt.html#acd9b7a1a04e1d8b8ccb4e9ecaaa4bf51">leftovers.txt</a>
+</li>
+<li>N_
+: <a class="el" href="leftovers_8txt.html#aed6b1e2113bff16e622acc5322398d41">leftovers.txt</a>
+</li>
+<li>n_bound
+: <a class="el" href="leftovers_8txt.html#ad6473663c2dcd26ea14c06e5b9ead9b3">leftovers.txt</a>
+</li>
+<li>n_elem
+: <a class="el" href="leftovers_8txt.html#a622cfa413453e84bc9659cc53d9e0981">leftovers.txt</a>
+</li>
+<li>n_element
+: <a class="el" href="leftovers_8txt.html#aa34e0d1dbc3b594b42ed453dd728fa24">leftovers.txt</a>
+</li>
+<li>n_node
+: <a class="el" href="leftovers_8txt.html#a8020b98944021a0e4d9477c7922249bc">leftovers.txt</a>
+</li>
+<li>n_nodes
+: <a class="el" href="leftovers_8txt.html#a3ea7177be87723e7c53184e26309f6a2">leftovers.txt</a>
+</li>
+<li>ndof
+: <a class="el" href="leftovers_8txt.html#a52aebcca929f4acf0403c61ec4d4c55b">leftovers.txt</a>
+</li>
+<li>new
+: <a class="el" href="leftovers_8txt.html#a15804345d9159131d8703e797275c546">leftovers.txt</a>
+</li>
+<li>NNODE_1D
+: <a class="el" href="leftovers_8txt.html#a65c52be8045c9055f395b8a4e1b5b20a">leftovers.txt</a>
+</li>
+<li>nodal_value
+: <a class="el" href="leftovers_8txt.html#a19d767159cfc97e58fa2df1942ead953">leftovers.txt</a>
+</li>
+<li>node_pt
+: <a class="el" href="leftovers_8txt.html#ac819a67b8aca3767de9129e61f552247">leftovers.txt</a>
+</li>
+<li>Nodes
+: <a class="el" href="leftovers_8txt.html#adee9bfb23ce452190c8b1c7032f65368">leftovers.txt</a>
+</li>
+<li>nodes
+: <a class="el" href="leftovers_8txt.html#a0ff9ceed96015f9853c21aa96c8ca39b">leftovers.txt</a>
+</li>
+<li>nvalues
+: <a class="el" href="leftovers_8txt.html#a76b9c109fa5d4ffd4cd5b46fdf41704f">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_o"></a>- o -</h3><ul>
+<li>observation
+: <a class="el" href="leftovers_8txt.html#ae29874cb375e47bef2c2ce51648c0406">leftovers.txt</a>
+</li>
+<li>on
+: <a class="el" href="leftovers_8txt.html#aac54612918954e74cb93739c536475cc">leftovers.txt</a>
+</li>
+<li>or
+: <a class="el" href="leftovers_8txt.html#ab5003aa7c2ebd48f81e4a84976ccfaea">leftovers.txt</a>
+</li>
+<li>others
+: <a class="el" href="leftovers_8txt.html#ade6eabadd09c2e15f6653bac2383a85f">leftovers.txt</a>
+</li>
+<li>overline
+: <a class="el" href="leftovers_8txt.html#ad9c28a0c1a274bcebf1c77e8dfe2dd86">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>P2
+: <a class="el" href="leftovers_8txt.html#a28f17d587fe36436ee2c8052c4bfcbe0">leftovers.txt</a>
+</li>
+<li>parallelepipeds
+: <a class="el" href="leftovers_8txt.html#a3c1b973ee24fc2c20a80f370304839fa">leftovers.txt</a>
+</li>
+<li>Phase
+: <a class="el" href="leftovers_8txt.html#a2908298c692cd849be99b25094dba9ef">leftovers.txt</a>
+</li>
+<li>phi
+: <a class="el" href="leftovers_8txt.html#aa8ae96a6d5fb2f72dc8072e58030f280">leftovers.txt</a>
+</li>
+<li>pinned
+: <a class="el" href="leftovers_8txt.html#ab1e75f1cd091e83e80e15f517115ca9d">leftovers.txt</a>
+</li>
+<li>positions
+: <a class="el" href="leftovers_8txt.html#a51d624f5e8090e68631d3c00aa03128e">leftovers.txt</a>
+</li>
+<li>problems
+: <a class="el" href="leftovers_8txt.html#a8a854a51f7380a05e9255f9773b685ec">leftovers.txt</a>
+</li>
+<li>provided
+: <a class="el" href="leftovers_8txt.html#a71c8381b08c2d8955ccce8e9afec5ea2">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_q"></a>- q -</h3><ul>
+<li>QPoissonElement&lt; 2, 3 &gt;
+: <a class="el" href="leftovers_8txt.html#a87f87af0757b6234fa17057b7e023f76">leftovers.txt</a>
+</li>
+<li>QPoissonElement&lt; 3, 2 &gt;
+: <a class="el" href="leftovers_8txt.html#a72cf4d118bb4bbfbabc0299f2379c586">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_r"></a>- r -</h3><ul>
+<li>R
+: <a class="el" href="leftovers_8txt.html#a36da6fe4796b37bd984f59807fca03e9">leftovers.txt</a>
+</li>
+<li>r_
+: <a class="el" href="leftovers_8txt.html#af5f83ae74ee998dd3290229158e30647">leftovers.txt</a>
+</li>
+<li>r_j
+: <a class="el" href="leftovers_8txt.html#ac9ee906e54ca5a03288a2c7bf4e65d3b">leftovers.txt</a>
+</li>
+<li>RA
+: <a class="el" href="leftovers_8txt.html#a07092dcdf140bd034be5676c7c997824">leftovers.txt</a>
+</li>
+<li>representation
+: <a class="el" href="leftovers_8txt.html#a363fac60b0633ba729185c6396796265">leftovers.txt</a>
+</li>
+<li>respectively
+: <a class="el" href="leftovers_8txt.html#a30a35bb5760aed82696fefcd81bc4853">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>scheme
+: <a class="el" href="leftovers_8txt.html#a193ecc453b1987fc9b3fa9f4f372f11c">leftovers.txt</a>
+</li>
+<li>setup
+: <a class="el" href="leftovers_8txt.html#ad2d3b92ffd5a7b7ef3df32b11d077de7">leftovers.txt</a>
+</li>
+<li>sigma
+: <a class="el" href="leftovers_8txt.html#aad82afd780ab77553798b794e4c80330">leftovers.txt</a>
+</li>
+<li>solid_mesh_pt
+: <a class="el" href="leftovers_8txt.html#a8e65ef94732a5baad8134c6cd75355db">leftovers.txt</a>
+</li>
+<li>stiffness
+: <a class="el" href="leftovers_8txt.html#ac64b93c94d99e4b2d869ced34cac18a1">leftovers.txt</a>
+</li>
+<li>stored
+: <a class="el" href="leftovers_8txt.html#aa2ddaaeb85505127671fffbf385568c2">leftovers.txt</a>
+</li>
+<li>studies
+: <a class="el" href="leftovers_8txt.html#a4e4238182420300113a99dfabc579190">leftovers.txt</a>
+</li>
+<li>Superficially
+: <a class="el" href="leftovers_8txt.html#ab93522b5c2dc610a71a37c8e5e3d186c">leftovers.txt</a>
+</li>
+<li>symmetric
+: <a class="el" href="leftovers_8txt.html#adbc11f88e01e841e49859407130c4363">leftovers.txt</a>
+</li>
+<li>system
+: <a class="el" href="leftovers_8txt.html#a965f515a68ac621a172f37b524900125">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_t"></a>- t -</h3><ul>
+<li>t
+: <a class="el" href="leftovers_8txt.html#a3a5e3a8d67519f249e8ffa65a70f19c4">leftovers.txt</a>
+</li>
+<li>tensor
+: <a class="el" href="leftovers_8txt.html#abd61831b7f81fab87ec22e99f86094b7">leftovers.txt</a>
+</li>
+<li>tensors
+: <a class="el" href="leftovers_8txt.html#a118b2b0731f249d74ec75fd1117fe474">leftovers.txt</a>
+</li>
+<li>this
+: <a class="el" href="leftovers_8txt.html#abdbbce36e492c885100ec0911b4e8264">leftovers.txt</a>
+</li>
+<li>time
+: <a class="el" href="leftovers_8txt.html#a865f8a2f04cdf4d078f20ced073f4329">leftovers.txt</a>
+</li>
+<li>time_stepper_pt
+: <a class="el" href="leftovers_8txt.html#ac40c03f2026d13999e464d77ad668828">leftovers.txt</a>
+</li>
+<li>timescale
+: <a class="el" href="leftovers_8txt.html#ab9f2e8dfaa279961dc04da5547b922d5">leftovers.txt</a>
+</li>
+<li>type
+: <a class="el" href="leftovers_8txt.html#ab9ec1d6d6b3075e4e4a29e254d3d65cd">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_u"></a>- u -</h3><ul>
+<li>u
+: <a class="el" href="leftovers_8txt.html#a5b3ea31070d95a854fb41909643e0cfe">leftovers.txt</a>
+</li>
+<li>U_j
+: <a class="el" href="leftovers_8txt.html#abe93c06d14be90c9f7abf98c5b552299">leftovers.txt</a>
+</li>
+<li>units
+: <a class="el" href="leftovers_8txt.html#a0ab20d524af27584fc04294e1618aa7d">leftovers.txt</a>
+</li>
+<li>unknown
+: <a class="el" href="leftovers_8txt.html#a3c1a7a1cdf5df9059758196a9d8b6b7a">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_v"></a>- v -</h3><ul>
+<li>values
+: <a class="el" href="leftovers_8txt.html#a25aaf0de4b7856e8cd05992d73eaabfa">leftovers.txt</a>
+</li>
+<li>vector
+: <a class="el" href="leftovers_8txt.html#a90bbc036fd8f571642c689ac6c94609b">leftovers.txt</a>
+</li>
+<li>velocities
+: <a class="el" href="leftovers_8txt.html#ae3d3821607ccb6f8eb4e3b257438b2ca">leftovers.txt</a>
+</li>
+<li>velocity
+: <a class="el" href="leftovers_8txt.html#a63c8abc3ac000324b8e881b9861bf144">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_w"></a>- w -</h3><ul>
+<li>we
+: <a class="el" href="leftovers_8txt.html#a96946bff6c0903dd0d81f44bc1f018c7">leftovers.txt</a>
+</li>
+<li>weak&lt;/SUB &gt;
+: <a class="el" href="leftovers_8txt.html#a379f4ef51cbe5b646bf21abcc096df1c">leftovers.txt</a>
+</li>
+<li>Wempner
+: <a class="el" href="leftovers_8txt.html#a7884225a184d5a2185debd46f4f9fb76">leftovers.txt</a>
+</li>
+<li>widehat
+: <a class="el" href="leftovers_8txt.html#a1de961663f62f28795b5977a47aae290">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_x"></a>- x -</h3><ul>
+<li>x
+: <a class="el" href="leftovers_8txt.html#af6a5fd2b63a8a500f494eb3ce722ba50">leftovers.txt</a>
+</li>
+<li>X_
+: <a class="el" href="leftovers_8txt.html#ad43f1dd96623b63d36f5fa506da533c1">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_y"></a>- y -</h3><ul>
+<li>y
+: <a class="el" href="leftovers_8txt.html#ab927965981178aa1fba979a37168db2a">leftovers.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_z"></a>- z -</h3><ul>
+<li>Zerna
+: <a class="el" href="leftovers_8txt.html#a0c1830fa92b7ac4fa0a4ef3a84e64256">leftovers.txt</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

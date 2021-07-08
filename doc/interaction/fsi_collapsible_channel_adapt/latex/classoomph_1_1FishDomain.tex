@@ -1,0 +1,749 @@
+\hypertarget{classoomph_1_1FishDomain}{}\doxysection{oomph\+::Fish\+Domain Class Reference}
+\label{classoomph_1_1FishDomain}\index{oomph::FishDomain@{oomph::FishDomain}}
+
+
+Fish shaped domain, represented by four Macro\+Elements. Shape is parametrised by Geom\+Object that represents the fish\textquotesingle{}s back.  
+
+
+
+
+{\ttfamily \#include $<$fish\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Fish\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1FishDomain}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FishDomain_a96f1e192900962ee55d063577822cd12}{Fish\+Domain}} (\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$back\+\_\+pt, const double \&\mbox{\hyperlink{classoomph_1_1FishDomain_a773b98977806c2b27531425ecf5e3f8e}{xi\+\_\+nose}}, const double \&\mbox{\hyperlink{classoomph_1_1FishDomain_ae2bcc0014506ba2225b928f319a27c9d}{xi\+\_\+tail}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to Geom\+Object that represents the (upper) curved boundary of the fish\textquotesingle{}s body, and the start and end values of the Lagrangian coordinates along the Geom\+Object. ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FishDomain_a9436a46493f270e194b1cff950c6670e}{Fish\+Domain}} (const \mbox{\hyperlink{classoomph_1_1FishDomain}{Fish\+Domain}} \&)
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a87fdf6ae5c6d51e2dcd1aecb494ddaee}{operator=}} (const \mbox{\hyperlink{classoomph_1_1FishDomain}{Fish\+Domain}} \&)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1FishDomain_ab51c01c611efba9f940409e5154c9cd0}{$\sim$\+Fish\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for \mbox{\hyperlink{classoomph_1_1FishDomain}{Fish\+Domain}}\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1FishDomain_ae5343cbda69a625a56a7949edd43cad4}{x\+\_\+fin}} ()
+\begin{DoxyCompactList}\small\item\em x-\/position of fin tip \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1FishDomain_ae1a869cee7946b178a09214725e27f29}{y\+\_\+fin}} ()
+\begin{DoxyCompactList}\small\item\em y-\/position of fin tip \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1FishDomain_adf87e9ae261cc914173bc18d7eb5bfd8}{x\+\_\+mouth}} ()
+\begin{DoxyCompactList}\small\item\em x-\/position of mouth \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1FishDomain_a773b98977806c2b27531425ecf5e3f8e}{xi\+\_\+nose}} ()
+\begin{DoxyCompactList}\small\item\em Start coordinate on wall (near nose) \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1FishDomain_ae2bcc0014506ba2225b928f319a27c9d}{xi\+\_\+tail}} ()
+\begin{DoxyCompactList}\small\item\em End coordinate on wall (near tail) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a383b0fb396d605932ba6fb0779dacbf9}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r)
+\begin{DoxyCompactList}\small\item\em Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at the discrete time level t (t=0\+: present; t$>$0\+: previous)\+: $ {\bf r}({\bf zeta}) $ Note that the local coordinate {\bfseries{zeta}} is a 1D Vector rather than a scalar -- this is unavoidable because this function implements the pure virtual function in the Domain base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a45f1d71d2cf6f4102486b04362ba8b0b}{r\+\_\+upper\+\_\+body\+\_\+N}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of upper body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_ac0fadb2212e194bfe9f2ff7f0c892c22}{r\+\_\+upper\+\_\+body\+\_\+W}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of upper body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_af30cc8b5bc73f1d2e71099c19b2a0d98}{r\+\_\+upper\+\_\+body\+\_\+S}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of upper body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a47bdf57eebfa025628e70da2a1ab9e19}{r\+\_\+upper\+\_\+body\+\_\+E}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of upper body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a6b0cc31071869ef0e4b4794fe5a46d2f}{r\+\_\+upper\+\_\+fin\+\_\+N}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of upper fin macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a750c0daa893d08038a52fbf20a4b23b8}{r\+\_\+upper\+\_\+fin\+\_\+W}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of upper fin macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_acd62f651648d85a79e04ced3193c3a2a}{r\+\_\+upper\+\_\+fin\+\_\+S}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of upper fin macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a063912bd40138bb84b3cdfc23133eff2}{r\+\_\+upper\+\_\+fin\+\_\+E}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of upper fin macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a75131ac72e23d5b1d701b588c0596b5d}{r\+\_\+lower\+\_\+body\+\_\+N}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of lower body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a4466e68eb38c1e931743db93af2e9ba9}{r\+\_\+lower\+\_\+body\+\_\+W}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of lower body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_aa33b19ceef5cd574ee0a6756bcfc6da7}{r\+\_\+lower\+\_\+body\+\_\+S}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Southern boundary of lower body macro element zeta $\in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_abb85a2acd9cf3cd8fae60fd9e487bd1c}{r\+\_\+lower\+\_\+body\+\_\+E}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of lower body macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a6d45dba13043b2b6df831848da665f21}{r\+\_\+lower\+\_\+fin\+\_\+N}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of lower fin macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_aaf5f3eb1842dc9d7e3f51d4b727632f9}{r\+\_\+lower\+\_\+fin\+\_\+W}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of lower fin macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a2110fb0b776654460d6a3477fbc4979d}{r\+\_\+lower\+\_\+fin\+\_\+S}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of lower fin macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FishDomain_a956dcbb87e9b37a0b965fcddb9911de3}{r\+\_\+lower\+\_\+fin\+\_\+E}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Boundary of lower fin macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1FishDomain_af85c4be86bb87528939778e3f63a40a5}{Xi\+\_\+nose}}
+\begin{DoxyCompactList}\small\item\em \char`\"{}\+Nose\char`\"{} limit for the (1D) coordinates along the wall \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1FishDomain_a38633d4f3e2777be9544b907d1de5870}{Xi\+\_\+tail}}
+\begin{DoxyCompactList}\small\item\em \char`\"{}\+Tail\char`\"{} limit for the (1D) coordinates along the wall \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1FishDomain_af27c51fe0272df3dec2ad93c5c231d59}{X\+\_\+fin}}
+\begin{DoxyCompactList}\small\item\em X coordinate of fin tip. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1FishDomain_a162b4a35d8d0e986d254651571844253}{Y\+\_\+fin}}
+\begin{DoxyCompactList}\small\item\em Y coordinate of fin tip. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1FishDomain_aa25f3280c2453dd725d59f23a478ee11}{X\+\_\+mouth}}
+\begin{DoxyCompactList}\small\item\em X coordinate of corner of mouth. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$ \mbox{\hyperlink{classoomph_1_1FishDomain_ae943e7fe48ce09dded2d5351ab980f93}{Back\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the fish\textquotesingle{}s back. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fish shaped domain, represented by four Macro\+Elements. Shape is parametrised by Geom\+Object that represents the fish\textquotesingle{}s back. 
+
+Definition at line 45 of file fish\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a96f1e192900962ee55d063577822cd12}\label{classoomph_1_1FishDomain_a96f1e192900962ee55d063577822cd12}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!FishDomain@{FishDomain}}
+\index{FishDomain@{FishDomain}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{FishDomain()}{FishDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Fish\+Domain\+::\+Fish\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$}]{back\+\_\+pt,  }\item[{const double \&}]{xi\+\_\+nose,  }\item[{const double \&}]{xi\+\_\+tail }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to Geom\+Object that represents the (upper) curved boundary of the fish\textquotesingle{}s body, and the start and end values of the Lagrangian coordinates along the Geom\+Object. ~\newline
+ 
+
+
+
+Definition at line 53 of file fish\+\_\+domain.\+h.
+
+
+
+References X\+\_\+fin, X\+\_\+mouth, and Y\+\_\+fin.
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a9436a46493f270e194b1cff950c6670e}\label{classoomph_1_1FishDomain_a9436a46493f270e194b1cff950c6670e}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!FishDomain@{FishDomain}}
+\index{FishDomain@{FishDomain}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{FishDomain()}{FishDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Fish\+Domain\+::\+Fish\+Domain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FishDomain}{Fish\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken copy constructor. 
+
+
+
+Definition at line 78 of file fish\+\_\+domain.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_ab51c01c611efba9f940409e5154c9cd0}\label{classoomph_1_1FishDomain_ab51c01c611efba9f940409e5154c9cd0}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!````~FishDomain@{$\sim$FishDomain}}
+\index{````~FishDomain@{$\sim$FishDomain}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{$\sim$FishDomain()}{~FishDomain()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Fish\+Domain\+::$\sim$\+Fish\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor for \mbox{\hyperlink{classoomph_1_1FishDomain}{Fish\+Domain}}\+: Empty; cleanup done in base class. 
+
+
+
+Definition at line 92 of file fish\+\_\+domain.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a383b0fb396d605932ba6fb0779dacbf9}\label{classoomph_1_1FishDomain_a383b0fb396d605932ba6fb0779dacbf9}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const unsigned \&}]{i\+\_\+macro,  }\item[{const unsigned \&}]{i\+\_\+direct,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at the discrete time level t (t=0\+: present; t$>$0\+: previous)\+: $ {\bf r}({\bf zeta}) $ Note that the local coordinate {\bfseries{zeta}} is a 1D Vector rather than a scalar -- this is unavoidable because this function implements the pure virtual function in the Domain base class. 
+
+Vector representation of the imacro-\/th macro element boundary idirect (N/\+S/\+W/E) at time level t (t=0\+: present; t$>$0\+: previous)\+: $ {\bf r}({\bf zeta}) $ Note that the local coordinate {\bfseries{zeta}} is a 1D Vector rather than a scalar -- this is unavoidable because this function implements the pure virtual function in the Domain base class. 
+
+Definition at line 295 of file fish\+\_\+domain.\+h.
+
+
+
+References r\+\_\+lower\+\_\+body\+\_\+\+E(), r\+\_\+lower\+\_\+body\+\_\+\+N(), r\+\_\+lower\+\_\+body\+\_\+\+S(), r\+\_\+lower\+\_\+body\+\_\+\+W(), r\+\_\+lower\+\_\+fin\+\_\+\+E(), r\+\_\+lower\+\_\+fin\+\_\+\+N(), r\+\_\+lower\+\_\+fin\+\_\+\+S(), r\+\_\+lower\+\_\+fin\+\_\+\+W(), r\+\_\+upper\+\_\+body\+\_\+\+E(), r\+\_\+upper\+\_\+body\+\_\+\+N(), r\+\_\+upper\+\_\+body\+\_\+\+S(), r\+\_\+upper\+\_\+body\+\_\+\+W(), r\+\_\+upper\+\_\+fin\+\_\+\+E(), r\+\_\+upper\+\_\+fin\+\_\+\+N(), r\+\_\+upper\+\_\+fin\+\_\+\+S(), and r\+\_\+upper\+\_\+fin\+\_\+\+W().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a87fdf6ae5c6d51e2dcd1aecb494ddaee}\label{classoomph_1_1FishDomain_a87fdf6ae5c6d51e2dcd1aecb494ddaee}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FishDomain}{Fish\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+
+
+Definition at line 85 of file fish\+\_\+domain.\+h.
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_abb85a2acd9cf3cd8fae60fd9e487bd1c}\label{classoomph_1_1FishDomain_abb85a2acd9cf3cd8fae60fd9e487bd1c}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_body\_E@{r\_lower\_body\_E}}
+\index{r\_lower\_body\_E@{r\_lower\_body\_E}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_lower\_body\_E()}{r\_lower\_body\_E()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+body\+\_\+E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Boundary of lower body macro element zeta $ \in [-1,1] $. 
+
+
+
+Definition at line 214 of file fish\+\_\+domain.\+h.
+
+
+
+References r\+\_\+upper\+\_\+body\+\_\+\+E().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a75131ac72e23d5b1d701b588c0596b5d}\label{classoomph_1_1FishDomain_a75131ac72e23d5b1d701b588c0596b5d}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_body\_N@{r\_lower\_body\_N}}
+\index{r\_lower\_body\_N@{r\_lower\_body\_N}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_lower\_body\_N()}{r\_lower\_body\_N()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+body\+\_\+N (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Boundary of lower body macro element zeta $ \in [-1,1] $. 
+
+
+
+Definition at line 178 of file fish\+\_\+domain.\+h.
+
+
+
+References r\+\_\+upper\+\_\+body\+\_\+\+S().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_aa33b19ceef5cd574ee0a6756bcfc6da7}\label{classoomph_1_1FishDomain_aa33b19ceef5cd574ee0a6756bcfc6da7}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_body\_S@{r\_lower\_body\_S}}
+\index{r\_lower\_body\_S@{r\_lower\_body\_S}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_lower\_body\_S()}{r\_lower\_body\_S()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+body\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Southern boundary of lower body macro element zeta $\in [-1,1] $. 
+
+
+
+Definition at line 203 of file fish\+\_\+domain.\+h.
+
+
+
+References r\+\_\+upper\+\_\+body\+\_\+\+N().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a4466e68eb38c1e931743db93af2e9ba9}\label{classoomph_1_1FishDomain_a4466e68eb38c1e931743db93af2e9ba9}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_body\_W@{r\_lower\_body\_W}}
+\index{r\_lower\_body\_W@{r\_lower\_body\_W}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_lower\_body\_W()}{r\_lower\_body\_W()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+body\+\_\+W (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Boundary of lower body macro element zeta $ \in [-1,1] $. 
+
+
+
+Definition at line 190 of file fish\+\_\+domain.\+h.
+
+
+
+References r\+\_\+upper\+\_\+body\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a956dcbb87e9b37a0b965fcddb9911de3}\label{classoomph_1_1FishDomain_a956dcbb87e9b37a0b965fcddb9911de3}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_fin\_E@{r\_lower\_fin\_E}}
+\index{r\_lower\_fin\_E@{r\_lower\_fin\_E}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_lower\_fin\_E()}{r\_lower\_fin\_E()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+fin\+\_\+E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Boundary of lower fin macro element zeta $ \in [-1,1] $. 
+
+
+
+Definition at line 264 of file fish\+\_\+domain.\+h.
+
+
+
+References r\+\_\+upper\+\_\+fin\+\_\+\+E().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a6d45dba13043b2b6df831848da665f21}\label{classoomph_1_1FishDomain_a6d45dba13043b2b6df831848da665f21}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_fin\_N@{r\_lower\_fin\_N}}
+\index{r\_lower\_fin\_N@{r\_lower\_fin\_N}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_lower\_fin\_N()}{r\_lower\_fin\_N()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+fin\+\_\+N (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Boundary of lower fin macro element zeta $ \in [-1,1] $. 
+
+
+
+Definition at line 228 of file fish\+\_\+domain.\+h.
+
+
+
+References r\+\_\+upper\+\_\+fin\+\_\+\+S().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a2110fb0b776654460d6a3477fbc4979d}\label{classoomph_1_1FishDomain_a2110fb0b776654460d6a3477fbc4979d}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_fin\_S@{r\_lower\_fin\_S}}
+\index{r\_lower\_fin\_S@{r\_lower\_fin\_S}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_lower\_fin\_S()}{r\_lower\_fin\_S()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+fin\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Boundary of lower fin macro element zeta $ \in [-1,1] $. 
+
+
+
+Definition at line 253 of file fish\+\_\+domain.\+h.
+
+
+
+References r\+\_\+upper\+\_\+fin\+\_\+\+N().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_aaf5f3eb1842dc9d7e3f51d4b727632f9}\label{classoomph_1_1FishDomain_aaf5f3eb1842dc9d7e3f51d4b727632f9}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_lower\_fin\_W@{r\_lower\_fin\_W}}
+\index{r\_lower\_fin\_W@{r\_lower\_fin\_W}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_lower\_fin\_W()}{r\_lower\_fin\_W()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+lower\+\_\+fin\+\_\+W (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Boundary of lower fin macro element zeta $ \in [-1,1] $. 
+
+
+
+Definition at line 240 of file fish\+\_\+domain.\+h.
+
+
+
+References r\+\_\+upper\+\_\+fin\+\_\+\+W().
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a47bdf57eebfa025628e70da2a1ab9e19}\label{classoomph_1_1FishDomain_a47bdf57eebfa025628e70da2a1ab9e19}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_body\_E@{r\_upper\_body\_E}}
+\index{r\_upper\_body\_E@{r\_upper\_body\_E}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_upper\_body\_E()}{r\_upper\_body\_E()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of upper body macro element zeta $ \in [-1,1] $. 
+
+Eastern edge of upper body macro element; $ \zeta \in [-1,1] $. 
+
+Definition at line 588 of file fish\+\_\+domain.\+h.
+
+
+
+References Back\+\_\+pt, and Xi\+\_\+tail.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+lower\+\_\+body\+\_\+\+E().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a45f1d71d2cf6f4102486b04362ba8b0b}\label{classoomph_1_1FishDomain_a45f1d71d2cf6f4102486b04362ba8b0b}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_body\_N@{r\_upper\_body\_N}}
+\index{r\_upper\_body\_N@{r\_upper\_body\_N}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_upper\_body\_N()}{r\_upper\_body\_N()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+N (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of upper body macro element zeta $ \in [-1,1] $. 
+
+Northern edge of upper body macro element; $ \zeta \in [-1,1] $. 
+
+Definition at line 568 of file fish\+\_\+domain.\+h.
+
+
+
+References Back\+\_\+pt, Xi\+\_\+nose, and Xi\+\_\+tail.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+lower\+\_\+body\+\_\+\+S().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_af30cc8b5bc73f1d2e71099c19b2a0d98}\label{classoomph_1_1FishDomain_af30cc8b5bc73f1d2e71099c19b2a0d98}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_body\_S@{r\_upper\_body\_S}}
+\index{r\_upper\_body\_S@{r\_upper\_body\_S}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_upper\_body\_S()}{r\_upper\_body\_S()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of upper body macro element zeta $ \in [-1,1] $. 
+
+Southern edge of upper body macro element; $ \zeta \in [-1,1] $. 
+
+Definition at line 616 of file fish\+\_\+domain.\+h.
+
+
+
+References Back\+\_\+pt, X\+\_\+mouth, and Xi\+\_\+tail.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+lower\+\_\+body\+\_\+\+N().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_ac0fadb2212e194bfe9f2ff7f0c892c22}\label{classoomph_1_1FishDomain_ac0fadb2212e194bfe9f2ff7f0c892c22}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_body\_W@{r\_upper\_body\_W}}
+\index{r\_upper\_body\_W@{r\_upper\_body\_W}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_upper\_body\_W()}{r\_upper\_body\_W()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+W (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of upper body macro element zeta $ \in [-1,1] $. 
+
+Western edge of upper body macro element; $ \zeta \in [-1,1] $. 
+
+Definition at line 638 of file fish\+\_\+domain.\+h.
+
+
+
+References Back\+\_\+pt, X\+\_\+mouth, and Xi\+\_\+nose.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+lower\+\_\+body\+\_\+\+W().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a063912bd40138bb84b3cdfc23133eff2}\label{classoomph_1_1FishDomain_a063912bd40138bb84b3cdfc23133eff2}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_fin\_E@{r\_upper\_fin\_E}}
+\index{r\_upper\_fin\_E@{r\_upper\_fin\_E}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_upper\_fin\_E()}{r\_upper\_fin\_E()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of upper fin macro element zeta $ \in [-1,1] $. 
+
+Eastern edge of upper fin macro element; $ \zeta \in [-1,1] $. 
+
+Definition at line 554 of file fish\+\_\+domain.\+h.
+
+
+
+References X\+\_\+fin, and Y\+\_\+fin.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+lower\+\_\+fin\+\_\+\+E().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a6b0cc31071869ef0e4b4794fe5a46d2f}\label{classoomph_1_1FishDomain_a6b0cc31071869ef0e4b4794fe5a46d2f}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_fin\_N@{r\_upper\_fin\_N}}
+\index{r\_upper\_fin\_N@{r\_upper\_fin\_N}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_upper\_fin\_N()}{r\_upper\_fin\_N()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+N (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of upper fin macro element zeta $ \in [-1,1] $. 
+
+Northern edge of upper fin macro element; $ \zeta \in [-1,1] $. 
+
+Definition at line 479 of file fish\+\_\+domain.\+h.
+
+
+
+References Back\+\_\+pt, X\+\_\+fin, Xi\+\_\+tail, and Y\+\_\+fin.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+lower\+\_\+fin\+\_\+\+S().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_acd62f651648d85a79e04ced3193c3a2a}\label{classoomph_1_1FishDomain_acd62f651648d85a79e04ced3193c3a2a}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_fin\_S@{r\_upper\_fin\_S}}
+\index{r\_upper\_fin\_S@{r\_upper\_fin\_S}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_upper\_fin\_S()}{r\_upper\_fin\_S()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+S (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of upper fin macro element zeta $ \in [-1,1] $. 
+
+Southern edge of upper fin macro element; $ \zeta \in [-1,1] $. 
+
+Definition at line 532 of file fish\+\_\+domain.\+h.
+
+
+
+References Back\+\_\+pt, and Xi\+\_\+tail.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+lower\+\_\+fin\+\_\+\+N().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a750c0daa893d08038a52fbf20a4b23b8}\label{classoomph_1_1FishDomain_a750c0daa893d08038a52fbf20a4b23b8}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!r\_upper\_fin\_W@{r\_upper\_fin\_W}}
+\index{r\_upper\_fin\_W@{r\_upper\_fin\_W}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{r\_upper\_fin\_W()}{r\_upper\_fin\_W()}}
+{\footnotesize\ttfamily void oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+W (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of upper fin macro element zeta $ \in [-1,1] $. 
+
+Western edge of upper fin macro element; $ \zeta \in [-1,1] $. 
+
+Definition at line 509 of file fish\+\_\+domain.\+h.
+
+
+
+References Back\+\_\+pt, and Xi\+\_\+tail.
+
+
+
+Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+lower\+\_\+fin\+\_\+\+W().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_ae5343cbda69a625a56a7949edd43cad4}\label{classoomph_1_1FishDomain_ae5343cbda69a625a56a7949edd43cad4}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!x\_fin@{x\_fin}}
+\index{x\_fin@{x\_fin}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{x\_fin()}{x\_fin()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Fish\+Domain\+::x\+\_\+fin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+x-\/position of fin tip 
+
+
+
+Definition at line 96 of file fish\+\_\+domain.\+h.
+
+
+
+References X\+\_\+fin.
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_adf87e9ae261cc914173bc18d7eb5bfd8}\label{classoomph_1_1FishDomain_adf87e9ae261cc914173bc18d7eb5bfd8}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!x\_mouth@{x\_mouth}}
+\index{x\_mouth@{x\_mouth}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{x\_mouth()}{x\_mouth()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Fish\+Domain\+::x\+\_\+mouth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+x-\/position of mouth 
+
+
+
+Definition at line 102 of file fish\+\_\+domain.\+h.
+
+
+
+References X\+\_\+mouth.
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a773b98977806c2b27531425ecf5e3f8e}\label{classoomph_1_1FishDomain_a773b98977806c2b27531425ecf5e3f8e}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!xi\_nose@{xi\_nose}}
+\index{xi\_nose@{xi\_nose}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{xi\_nose()}{xi\_nose()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Fish\+Domain\+::xi\+\_\+nose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Start coordinate on wall (near nose) 
+
+
+
+Definition at line 105 of file fish\+\_\+domain.\+h.
+
+
+
+References Xi\+\_\+nose.
+
+
+
+Referenced by oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_ae2bcc0014506ba2225b928f319a27c9d}\label{classoomph_1_1FishDomain_ae2bcc0014506ba2225b928f319a27c9d}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!xi\_tail@{xi\_tail}}
+\index{xi\_tail@{xi\_tail}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{xi\_tail()}{xi\_tail()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Fish\+Domain\+::xi\+\_\+tail (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+End coordinate on wall (near tail) 
+
+
+
+Definition at line 108 of file fish\+\_\+domain.\+h.
+
+
+
+References Xi\+\_\+tail.
+
+
+
+Referenced by oomph\+::\+Algebraic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::update\+\_\+node\+\_\+update().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_ae1a869cee7946b178a09214725e27f29}\label{classoomph_1_1FishDomain_ae1a869cee7946b178a09214725e27f29}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!y\_fin@{y\_fin}}
+\index{y\_fin@{y\_fin}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{y\_fin()}{y\_fin()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Fish\+Domain\+::y\+\_\+fin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+y-\/position of fin tip 
+
+
+
+Definition at line 99 of file fish\+\_\+domain.\+h.
+
+
+
+References Y\+\_\+fin.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1FishDomain_ae943e7fe48ce09dded2d5351ab980f93}\label{classoomph_1_1FishDomain_ae943e7fe48ce09dded2d5351ab980f93}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!Back\_pt@{Back\_pt}}
+\index{Back\_pt@{Back\_pt}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{Back\_pt}{Back\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}}$\ast$ oomph\+::\+Fish\+Domain\+::\+Back\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the fish\textquotesingle{}s back. 
+
+
+
+Definition at line 141 of file fish\+\_\+domain.\+h.
+
+
+
+Referenced by r\+\_\+upper\+\_\+body\+\_\+\+E(), r\+\_\+upper\+\_\+body\+\_\+\+N(), r\+\_\+upper\+\_\+body\+\_\+\+S(), r\+\_\+upper\+\_\+body\+\_\+\+W(), r\+\_\+upper\+\_\+fin\+\_\+\+N(), r\+\_\+upper\+\_\+fin\+\_\+\+S(), and r\+\_\+upper\+\_\+fin\+\_\+\+W().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_af27c51fe0272df3dec2ad93c5c231d59}\label{classoomph_1_1FishDomain_af27c51fe0272df3dec2ad93c5c231d59}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!X\_fin@{X\_fin}}
+\index{X\_fin@{X\_fin}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{X\_fin}{X\_fin}}
+{\footnotesize\ttfamily double oomph\+::\+Fish\+Domain\+::\+X\+\_\+fin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+X coordinate of fin tip. 
+
+
+
+Definition at line 132 of file fish\+\_\+domain.\+h.
+
+
+
+Referenced by Fish\+Domain(), r\+\_\+upper\+\_\+fin\+\_\+\+E(), r\+\_\+upper\+\_\+fin\+\_\+\+N(), and x\+\_\+fin().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_aa25f3280c2453dd725d59f23a478ee11}\label{classoomph_1_1FishDomain_aa25f3280c2453dd725d59f23a478ee11}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!X\_mouth@{X\_mouth}}
+\index{X\_mouth@{X\_mouth}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{X\_mouth}{X\_mouth}}
+{\footnotesize\ttfamily double oomph\+::\+Fish\+Domain\+::\+X\+\_\+mouth\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+X coordinate of corner of mouth. 
+
+
+
+Definition at line 138 of file fish\+\_\+domain.\+h.
+
+
+
+Referenced by Fish\+Domain(), r\+\_\+upper\+\_\+body\+\_\+\+S(), r\+\_\+upper\+\_\+body\+\_\+\+W(), and x\+\_\+mouth().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_af85c4be86bb87528939778e3f63a40a5}\label{classoomph_1_1FishDomain_af85c4be86bb87528939778e3f63a40a5}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!Xi\_nose@{Xi\_nose}}
+\index{Xi\_nose@{Xi\_nose}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{Xi\_nose}{Xi\_nose}}
+{\footnotesize\ttfamily double oomph\+::\+Fish\+Domain\+::\+Xi\+\_\+nose\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\char`\"{}\+Nose\char`\"{} limit for the (1D) coordinates along the wall 
+
+
+
+Definition at line 126 of file fish\+\_\+domain.\+h.
+
+
+
+Referenced by r\+\_\+upper\+\_\+body\+\_\+\+N(), r\+\_\+upper\+\_\+body\+\_\+\+W(), and xi\+\_\+nose().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a38633d4f3e2777be9544b907d1de5870}\label{classoomph_1_1FishDomain_a38633d4f3e2777be9544b907d1de5870}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!Xi\_tail@{Xi\_tail}}
+\index{Xi\_tail@{Xi\_tail}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{Xi\_tail}{Xi\_tail}}
+{\footnotesize\ttfamily double oomph\+::\+Fish\+Domain\+::\+Xi\+\_\+tail\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\char`\"{}\+Tail\char`\"{} limit for the (1D) coordinates along the wall 
+
+
+
+Definition at line 129 of file fish\+\_\+domain.\+h.
+
+
+
+Referenced by r\+\_\+upper\+\_\+body\+\_\+\+E(), r\+\_\+upper\+\_\+body\+\_\+\+N(), r\+\_\+upper\+\_\+body\+\_\+\+S(), r\+\_\+upper\+\_\+fin\+\_\+\+N(), r\+\_\+upper\+\_\+fin\+\_\+\+S(), r\+\_\+upper\+\_\+fin\+\_\+\+W(), and xi\+\_\+tail().
+
+\mbox{\Hypertarget{classoomph_1_1FishDomain_a162b4a35d8d0e986d254651571844253}\label{classoomph_1_1FishDomain_a162b4a35d8d0e986d254651571844253}} 
+\index{oomph::FishDomain@{oomph::FishDomain}!Y\_fin@{Y\_fin}}
+\index{Y\_fin@{Y\_fin}!oomph::FishDomain@{oomph::FishDomain}}
+\doxysubsubsection{\texorpdfstring{Y\_fin}{Y\_fin}}
+{\footnotesize\ttfamily double oomph\+::\+Fish\+Domain\+::\+Y\+\_\+fin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Y coordinate of fin tip. 
+
+
+
+Definition at line 135 of file fish\+\_\+domain.\+h.
+
+
+
+Referenced by Fish\+Domain(), r\+\_\+upper\+\_\+fin\+\_\+\+E(), r\+\_\+upper\+\_\+fin\+\_\+\+N(), and y\+\_\+fin().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fish__domain_8h}{fish\+\_\+domain.\+h}}\end{DoxyCompactItemize}

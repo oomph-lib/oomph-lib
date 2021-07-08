@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: unstructured_three_d_solid.txt_doxygenified.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">unstructured_three_d_solid.txt_doxygenified.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="unstructured__three__d__solid_8txt__doxygenified_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">\mainpage Demo problem: 3D Solid Mechanics on unstructured meshes</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">The purpose of this tutorial is to demonstrate the solution of</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">3D solid mechanics problems on unstructured meshes. </span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">The problem studied here also serves as a &quot;warm-up problem&quot; for the</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">&lt;a href=&quot;../../../interaction/unstructured_three_d_fsi/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">corresponding fluid-structure interaction problem &lt;/a&gt; in which the elastic,</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">bifurcating vessel whose deformation is studied here conveys (and is </span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">loaded by) a viscous fluid.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">\section problem The problem (and results)</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">Here is an animation of the problem: An elastic, bifurcating vessel</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">is loaded by an internal pressure and by gravity which acts in the</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">negative \f$x\f$-direction. The &quot;ends&quot; of the vessel are held in </span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">a fixed position. As the magnitude of the loading is</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">increased the vessel inflates and sags downwards. </span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">\image html deform.gif &quot;An elastic, bifurcating vessel, loaded by an internal pressure and transverse gravity. &quot; </span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">\image latex deform.eps &quot;An elastic, bifurcating vessel, loaded by an internal pressure and transverse gravity. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">The blue frame </span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">surrounding the vessel is drawn to clarify its spatial orientation. </span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">The yellow edges show the boundaries of the</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">internal faces via which the pressure loading is applied, and the</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">red arrows indicate the direction and magnitude of the pressure loading.</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">\section mesh 3D unstructured mesh generation</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">We use </span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">&lt;A HREF=&quot;http://www.wias-berlin.de/~si &quot;&gt;Hang Si&#39;s&lt;/A&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">open-source mesh generator </span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt; to generate the </span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">unstructured tetrahedral mesh &quot;offline&quot;. We then</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">process the output files produced by  </span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">to generate an unstructured \c oomph-lib mesh. </span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c Tetgen &lt;/A&gt;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">requires the specification of the domain boundaries</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">via so-called facets -- planar surface patches that are bounded</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">by closed polygonal line segments. For simplicity, we only</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">consider a very simplistic bifurcation, comprising three tube segments</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">of approximately rectangular cross-section that meet at a common junction.</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">Each of the three tube segments has four internal and four external</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">faces. The internal and external faces are connected by three further </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">faces at the &quot;in- and outflow&quot; cross-sections (using terminology </span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">that anticipates the mesh&#39;s use in the corresponding</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">&lt;a href=&quot;../../../interaction/unstructured_three_d_fsi/html/index.html&quot;&gt; </span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">fluid-structure interaction problem&lt;/a&gt;), resulting in a total of 27 </span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">facets. </span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">The 27 facets are defined in a &lt;code&gt;*.poly&lt;/code&gt; file that</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">specifies the position of the vertices, and identifies the </span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">facets via a &quot;face list&quot; that establishes their bounding vertices. </span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">Facets that have holes (e.g. the in- and outflow</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">facets) require the specification of the hole&#39;s position. Finally, </span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">if the mesh itself has a hole (as in the current example where the </span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">vessel&#39;s lumen forms a hole in the mesh) the position of the hole must be </span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">identified by specifying the position of a single point inside that </span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">hole. The well-annotated &lt;code&gt;*.poly&lt;/code&gt; file is located at:</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">&lt;center&gt;</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">&lt;a href=&quot;../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly&quot;&gt;demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly&lt;/a&gt;</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">&lt;/center&gt;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">We refer to the &lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen webpages &lt;/A&gt;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">and another &lt;a href=&quot;../../../meshes/mesh_from_tetgen/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">\c oomph-lib tutorial&lt;/a&gt; for further details on how to </span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">create &lt;code&gt;*.poly&lt;/code&gt; files.</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">Here is a plot of the domain specified by </span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">&lt;a href=&quot;../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly&quot;&gt;fsi_bifurcation_solid.poly&lt;/a&gt;.</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">The plot was created using \c tetview which is distributed with</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt;.</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">\image html tetgen_boundaries.gif &quot;The domain and its bounding facets. &quot; </span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">\image latex tetgen_boundaries.eps &quot;The domain and its bounding facets. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">Note that we have deliberately assigned a different boundary ID to </span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">each facet. This will make the assignment of the traction boundary</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">condition somewhat tedious as the inner surface of the vessel (where the</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">traction is to be applied) is represented by twelve separate</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">mesh boundaries. However, the assignment of distinct boundary</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">IDs for the different facets is essential for the automatic generation</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">of boundary coordinates in the</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">&lt;a href=&quot;../../../interaction/unstructured_three_d_fsi/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">corresponding fluid-structure interaction problem &lt;/a&gt; and is</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">therefore &lt;b&gt;strongly recommended&lt;/b&gt;.</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c Tetgen &lt;/A&gt; generates</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">an unstructured volumetric mesh from the information contained</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">in the &lt;code&gt;*.poly&lt;/code&gt; file and writes the mesh&#39;s nodes, </span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">elements and faces in the files</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">- &lt;a href=&quot;../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.node&quot;&gt;demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.node &lt;/a&gt;</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">- &lt;a href=&quot;../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.ele&quot;&gt;demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.ele &lt;/a&gt;</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">- &lt;a href=&quot;../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.face&quot;&gt;demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.face&lt;/a&gt;</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">These files can be used as input to \c oomph-lib&#39;s \c TetgenMesh</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">class, using the procedure discussed in </span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">&lt;a href=&quot;../../../meshes/mesh_from_tetgen/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">another tutorial.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">  The figure below shows a \c tetview plot of the mesh, created with a volume</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">constraint of 0.2 (i.e. the maximum volume of each tetrahedron is</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">guaranteed to be less than 0.2 units), using the command</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">\code</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">tetgen -a0.2 fsi_bifurcation_solid.poly </span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">\endcode</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">\image html mesh_boundaries.gif &quot;Plot of the mesh, generated by tetgen. &quot; </span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">\image latex mesh_boundaries.eps &quot;Plot of the mesh, generated by tetgen. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">Note how &lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt;</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">has subdivided each of the 27 original facets specified in the </span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">&lt;code&gt;*.poly&lt;/code&gt; file into a surface triangulation. The </span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">nodes and tetrahedral elements that are located on (or adjacent to) the</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">27 original facets inherit their boundary IDs. This will be important</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">when we assign the boundary conditions.</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">\section mesh_code Creating the mesh</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">We create the solid mesh by multiple inheritance from \c oomph-lib&#39;s </span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">\c TetgenMesh and the \c SolidMesh base class:</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">\dontinclude unstructured_three_d_solid.cc</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">\skipline start_mesh</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">\until {</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">The constructor calls the constructor of the underlying </span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">\c TetgenMesh (using the &lt;code&gt;*.node &lt;/code&gt;</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">&lt;code&gt;*.ele&lt;/code&gt; and &lt;code&gt;*.face&lt;/code&gt; files created</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">by &lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen. &lt;/A&gt;</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">As usual we set the nodes&#39; Lagrangian coordinates to their current </span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">Eulerian positions, making the current configuration</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">stress-free.</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">\until set_lagrangian_nodal_coordinates()</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">Finally, we identify the elements that are located next to the </span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">various mesh boundaries to facilitate the application of the</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">traction boundary conditions.</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">\until };</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">&lt;HR&gt; </span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">\section namespace Problem parameters</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">As usual, we define the various problem parameters in a </span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">global namespace. We use \c oomph-lib&#39;s generalised Hookean</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">constitutive law as the constitutive equation, using a Poisson&#39;s</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">ratio of 0.3. </span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">(&lt;a href=&quot;../../solid_theory/html/index.html#non-dim_solid&quot;&gt; Recall&lt;/a&gt;</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">that omitting the specification of Young&#39;s modulus, \f$ E \f$, </span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">implies that the stresses are non-dimensionalised on \f$ E \f$ .)</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">\skipline start_namespace</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">\until Constitutive_law_pt</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">Next we define the gravitational body force which acts in</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">the negative \f$x\f$-direction,</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">and the pressure load, \f$ {\bf t} = -P {\bf n} \f$, that acts on </span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">internal walls of the bifurcation (note that the outer unit</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">normal \f$ {\bf n} \f$ on the wall is passed to the</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">function). </span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">\until end namespace</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">\section main The driver code</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">The driver code is straightforward. We store the command line</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">arguments, specify an output directory and create the problem object,</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">using ten-noded tetrahedral solid mechanics elements to </span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">discretise the principle of virtual displacements. </span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">\dontinclude unstructured_three_d_solid.cc</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">\skipline start_main</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">\until TPVD</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">We output the initial configuration and then perform a parameter</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">study in which we increment the gravitational body force and the pressure</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">loads simultaneously, causing the vessel to expand and</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">sag, as shown in the animation at the beginning of this tutorial.</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">(As usual we perform a smaller number of steps if the</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">code is run in self-test mode; this is indicated by a non-zero number</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">of command line arguments.) </span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">\until end main</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">\section class The Problem class</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">The \c Problem class has the usual member functions, and provides</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">storage for the various sub-meshes -- the bulk mesh of 3D solid elements</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">and the meshes of 2D solid traction elements that apply the</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">pressure load to the internal boundaries of the vessel.</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">\dontinclude unstructured_three_d_solid.cc</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">\skipline start_problem</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">\until Solid_traction_mesh</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">The two vectors \c Pinned_solid_boundary_id and</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">\c Solid_traction_boundary_id are used to store the IDs of mesh boundaries</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">that make up the in- and outflow cross-sections (where the</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">bifurcation is pinned), and the internal boundaries (where</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">the pressure load has to be applied). Recall that \c tetgen requires the domain </span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">boundaries to be specified as a collection of planar facets. Boundary</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">of interest in the computation, such as the &quot;internal boundary of the</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">bifurcation&quot;, therefore tend to comprise multiple distinct mesh</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">boundaries.</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">\until };</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">\section constructor The Problem constructor</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">We start by building the bulk mesh, using the files created by</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">&lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; \c tetgen &lt;/A&gt;:</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">\skipline start_constructor</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">\until face_file_name);</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">Next we specify the IDs of the  &lt;A HREF=&quot;http://wias-berlin.de/software/tetgen//&quot;&gt; </span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">\c tetgen &lt;/A&gt; boundaries that form part of specific domain</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">boundaries in our problem. Boundaries 0, 1 and 2 are</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">the in- and outflow faces along which the solid is pinned.</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">(See the specification of the boundaries in </span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">&lt;a href=&quot;../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly&quot;&gt;fsi_bifurcation_solid.poly&lt;/a&gt;</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">and/or check the boundary enumeration using </span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">\c tetview as shown in the \c tetview plot of the domain</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">boundaries at the beginning of this tutorial.)</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">\until Pinned_solid_boundary_id[2]=2;</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">Similarly, boundaries 3 to 15 are the faces that define the internal</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">boundary of the bifurcation, i.e. the boundary along which we have</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">to apply the pressure load:</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">\until } </span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">We apply the boundary conditions by pinning the displacements</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">of all nodes that are located on the in- and outflow faces,</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">and document their positions.</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">\until bc_file.close();</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">We complete the build of the elements by setting the pointer to the</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">constitutive equation and the body force.</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">\until }</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">Next we create the traction elements, attaching them to the &quot;bulk&quot;</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">solid elements that are adjacent to the boundaries that constitute</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">the inside of the vessel. </span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">\until create_traction_elements();</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">Finally, we add the various meshes as sub-meshes to the \c Problem, build</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">the global mesh, and assign the equation numbers.</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">\until end constructor</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">\section traction Creating the traction elements</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">The helper function \c create_traction_elements() does exactly what it</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">says: It loops over the bulk elements that are adjacent</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">to the inner surface of the vessel, and attaches</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">\c SolidTractionElements to the appropriate faces. We store</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">the pointers to the newly-created traction elements in </span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">separate meshes and specify the function pointer to the load </span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">function.</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">\until end of create_traction_elements</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">\section doc Post-processing</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">The post-processing routine outputs the deformed domain shape</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">and the applied traction. </span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">\until end doc</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">\section comm_ex Comments and Exercises</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">\subsection bound Identification/assignment of mesh boundaries</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">This tutorial shows that the use of unstructured 3D meshes</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">for solid mechanics problems is extremely straightforward. </span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">The only aspect that requires some care (and not just for solid</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">mechanics applications) is the correct identification/assignment of</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">domain boundaries. The fact that we documented the position of the </span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">pinned nodes in the driver code suggests (correctly!) that we managed </span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">to  get both assignments (slightly) wrong when we first generated</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">the mesh and wrote the corresponding driver code. As usual, </span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">it pays off to &lt;B&gt;be  as a paranoid as possible&lt;/B&gt;! Ignore this </span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">advice at your own risk...</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">Here is a plot of the position of the pinned solid nodes</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">\image html pinned_solid_nodes.gif &quot;Plot of the pinned solid nodes. &quot; </span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">\image latex pinned_solid_nodes.eps &quot;Plot of the pinned solid nodes. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">and here&#39;s a plot showing the \c SolidTractionElements attached</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">to the inside of the vessel:</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">\image html traction_faces.gif &quot;Plot of the SolidTractionElements that apply the pressure load to the inner surface of the vessel. &quot; </span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">\image latex traction_faces.eps &quot;Plot of the SolidTractionElements that apply the pressure load to the inner surface of the vessel. &quot; width=0.75\textwidth</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">\subsection your_own Exercise: Try it yourself</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">Experiment with the \c tetgen -based mesh generation by</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">modifying the &lt;code&gt;*.poly&lt;/code&gt; file used in this example</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">to different vessel geometries.</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment">\section sources Source files for this tutorial</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">- The source files for this tutorial are located in the directory:\n\n</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/solid/unstructured_three_d_solid/&quot;&gt;</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">demo_drivers/solid/unstructured_three_d_solid/</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">&lt;/CENTER&gt;\n</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">- The driver codes are: \n\n</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment">and </span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">&lt;CENTER&gt;</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">&lt;A HREF=&quot;../../../../demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc&quot;&gt;</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">&lt;/A&gt;</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">&lt;/CENTER&gt;</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aunstructured__three__d__solid_8txt_html_a369f11bc5cf9fc0b3069a6f53624f7e2"><div class="ttname"><a href="unstructured__three__d__solid_8txt.html#a369f11bc5cf9fc0b3069a6f53624f7e2">Problem</a></div><div class="ttdeci">we add the various meshes as sub meshes to the c Problem</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8txt_source.html#l00286">unstructured_three_d_solid.txt:286</a></div></div>
+<div class="ttc" id="aunstructured__three__d__solid_8txt_html_a4074baada03976c061d5672f4237cca5"><div class="ttname"><a href="unstructured__three__d__solid_8txt.html#a4074baada03976c061d5672f4237cca5">problem</a></div><div class="ttdeci">mainpage Demo problem</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8txt_source.html#l00007">unstructured_three_d_solid.txt:7</a></div></div>
+<div class="ttc" id="aunstructured__three__d__solid_8txt_html_ad929b1cb755dfec91450fd4b3154900e"><div class="ttname"><a href="unstructured__three__d__solid_8txt.html#ad929b1cb755dfec91450fd4b3154900e">Finally</a></div><div class="ttdeci">Finally</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8txt_source.html#l00286">unstructured_three_d_solid.txt:286</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a200109847bf4cc26da4d00e8d68d569e"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a200109847bf4cc26da4d00e8d68d569e">Global_Parameters::gravity</a></div><div class="ttdeci">void gravity(const double &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;b)</div><div class="ttdoc">Non-dimensional gravity as body force.</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8cc_source.html#l00097">unstructured_three_d_solid.cc:97</a></div></div>
+<div class="ttc" id="aunstructured__three__d__solid_8txt_html_ac00bc018205ae73e219cf5e7ee0dd0e4"><div class="ttname"><a href="unstructured__three__d__solid_8txt.html#ac00bc018205ae73e219cf5e7ee0dd0e4">mesh</a></div><div class="ttdeci">we add the various meshes as sub meshes to the c build the global mesh</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8txt_source.html#l00287">unstructured_three_d_solid.txt:287</a></div></div>
+<div class="ttc" id="aunstructured__three__d__solid_8txt_html_aabbc090d2165fe48c3bc521e536de07d"><div class="ttname"><a href="unstructured__three__d__solid_8txt.html#aabbc090d2165fe48c3bc521e536de07d">elements</a></div><div class="ttdeci">mainpage Demo bifurcating vessel whose deformation is studied here conveys(and is loaded by) a viscous fluid.&lt; HR &gt;&lt; HR &gt; \section problem The problem(and results) Here is an animation of the problem We complete the build of the elements by setting the pointer to the constitutive equation and the body force until Next we create the traction elements</div><div class="ttdef"><b>Definition:</b> <a href="unstructured__three__d__solid_8txt_source.html#l00008">unstructured_three_d_solid.txt:8</a></div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:17:16
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classTwoMeshFluxAdvectionDiffusionProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classTwoMeshFluxAdvectionDiffusionProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7f3ec24317465521cb84212d1c2dc662"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#a7f3ec24317465521cb84212d1c2dc662">TwoMeshFluxAdvectionDiffusionProblem</a> (AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt source_fct_pt, AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt wind_fct_pt)</td></tr>
+<tr class="memdesc:a7f3ec24317465521cb84212d1c2dc662"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to source and wind functions.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#a7f3ec24317465521cb84212d1c2dc662">More...</a><br /></td></tr>
+<tr class="separator:a7f3ec24317465521cb84212d1c2dc662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65445b9eb9c01680d8137d1fdba05626"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#a65445b9eb9c01680d8137d1fdba05626">~TwoMeshFluxAdvectionDiffusionProblem</a> ()</td></tr>
+<tr class="memdesc:a65445b9eb9c01680d8137d1fdba05626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#a65445b9eb9c01680d8137d1fdba05626">More...</a><br /></td></tr>
+<tr class="separator:a65445b9eb9c01680d8137d1fdba05626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53cc08148cdf2f548939b5d09236f023"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#a53cc08148cdf2f548939b5d09236f023">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a53cc08148cdf2f548939b5d09236f023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution: doc_info contains labels/output directory etc.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#a53cc08148cdf2f548939b5d09236f023">More...</a><br /></td></tr>
+<tr class="separator:a53cc08148cdf2f548939b5d09236f023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a05c049ca4714c5f4866d70f8bbe0f134"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#a05c049ca4714c5f4866d70f8bbe0f134">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a05c049ca4714c5f4866d70f8bbe0f134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve: Reset boundary conditions to the values from the exact solution.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#a05c049ca4714c5f4866d70f8bbe0f134">More...</a><br /></td></tr>
+<tr class="separator:a05c049ca4714c5f4866d70f8bbe0f134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e1314c6772586f0fa0bc628adab7c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#ae5e1314c6772586f0fa0bc628adab7c0">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ae5e1314c6772586f0fa0bc628adab7c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs after solve (empty)  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#ae5e1314c6772586f0fa0bc628adab7c0">More...</a><br /></td></tr>
+<tr class="separator:ae5e1314c6772586f0fa0bc628adab7c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ea654224e481f37e8bde4edb38993cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#a3ea654224e481f37e8bde4edb38993cc">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:a3ea654224e481f37e8bde4edb38993cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the mesh of prescribed flux elements.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#a3ea654224e481f37e8bde4edb38993cc">More...</a><br /></td></tr>
+<tr class="separator:a3ea654224e481f37e8bde4edb38993cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02be21b629b8d9809be106b27afcb59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#aa02be21b629b8d9809be106b27afcb59">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:aa02be21b629b8d9809be106b27afcb59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions after adapt: Rebuild the mesh of prescribed flux elements.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#aa02be21b629b8d9809be106b27afcb59">More...</a><br /></td></tr>
+<tr class="separator:aa02be21b629b8d9809be106b27afcb59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af01824e72ea624e25854a62e0dbd4eb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#af01824e72ea624e25854a62e0dbd4eb9">create_flux_elements</a> (const unsigned &amp;b, Mesh *const &amp;bulk_mesh_pt, Mesh *const &amp;surface_mesh_pt)</td></tr>
+<tr class="memdesc:af01824e72ea624e25854a62e0dbd4eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create Advection Diffusion flux elements on boundary b of the Mesh pointed to by bulk_mesh_pt and add them to the Mesh object pointed to by surface_mesh_pt.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#af01824e72ea624e25854a62e0dbd4eb9">More...</a><br /></td></tr>
+<tr class="separator:af01824e72ea624e25854a62e0dbd4eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac478c7d0dc6e94cbe007287d5af69a28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#ac478c7d0dc6e94cbe007287d5af69a28">delete_flux_elements</a> (Mesh *const &amp;surface_mesh_pt)</td></tr>
+<tr class="memdesc:ac478c7d0dc6e94cbe007287d5af69a28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete Advection Diffusion flux elements and wipe the surface mesh.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#ac478c7d0dc6e94cbe007287d5af69a28">More...</a><br /></td></tr>
+<tr class="separator:ac478c7d0dc6e94cbe007287d5af69a28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad022fed8fda1294ac4e86b893f32d63c"><td class="memItemLeft" align="right" valign="top">RefineableRectangularQuadMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#ad022fed8fda1294ac4e86b893f32d63c">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:ad022fed8fda1294ac4e86b893f32d63c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "bulk" mesh.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#ad022fed8fda1294ac4e86b893f32d63c">More...</a><br /></td></tr>
+<tr class="separator:ad022fed8fda1294ac4e86b893f32d63c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b1a0dd20caad23315b6837bb773327e"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#a0b1a0dd20caad23315b6837bb773327e">Surface_mesh_pt</a></td></tr>
+<tr class="memdesc:a0b1a0dd20caad23315b6837bb773327e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "surface" mesh.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#a0b1a0dd20caad23315b6837bb773327e">More...</a><br /></td></tr>
+<tr class="separator:a0b1a0dd20caad23315b6837bb773327e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a3fdaa5eb9cfffc19ed0cd8fd8379c"><td class="memItemLeft" align="right" valign="top">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#a73a3fdaa5eb9cfffc19ed0cd8fd8379c">Source_fct_pt</a></td></tr>
+<tr class="memdesc:a73a3fdaa5eb9cfffc19ed0cd8fd8379c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to source function.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#a73a3fdaa5eb9cfffc19ed0cd8fd8379c">More...</a><br /></td></tr>
+<tr class="separator:a73a3fdaa5eb9cfffc19ed0cd8fd8379c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acec16e75f69f21f927dd6a4671cd64ea"><td class="memItemLeft" align="right" valign="top">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html#acec16e75f69f21f927dd6a4671cd64ea">Wind_fct_pt</a></td></tr>
+<tr class="memdesc:acec16e75f69f21f927dd6a4671cd64ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to wind function.  <a href="classTwoMeshFluxAdvectionDiffusionProblem.html#acec16e75f69f21f927dd6a4671cd64ea">More...</a><br /></td></tr>
+<tr class="separator:acec16e75f69f21f927dd6a4671cd64ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class ELEMENT&gt;<br />
+class TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;</h3>
+
+<p>2D AdvectionDiffusion problem on rectangular domain, discretised with 2D QAdvectionDiffusion elements. Flux boundary conditions are applied along boundary 1 (the boundary where x=L). The specific type of element is specified via the template parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00119">119</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7f3ec24317465521cb84212d1c2dc662"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f3ec24317465521cb84212d1c2dc662">&#9670;&nbsp;</a></span>TwoMeshFluxAdvectionDiffusionProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::<a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt&#160;</td>
+          <td class="paramname"><em>source_fct_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt&#160;</td>
+          <td class="paramname"><em>wind_fct_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to source and wind functions. </p>
+<p>Constructor for AdvectionDiffusion problem: Pass pointer to source and wind functions. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00184">184</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00162">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::Bulk_mesh_pt</a>, <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00395">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::create_flux_elements()</a>, <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00051">TanhSolnForAdvectionDiffusion::Peclet</a>, <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00088">TanhSolnForAdvectionDiffusion::prescribed_flux_on_fixed_x_boundary()</a>, <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00168">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::Source_fct_pt</a>, <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00165">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::Surface_mesh_pt</a>, and <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00171">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::Wind_fct_pt</a>.</p>
+
+</div>
+</div>
+<a id="a65445b9eb9c01680d8137d1fdba05626"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65445b9eb9c01680d8137d1fdba05626">&#9670;&nbsp;</a></span>~TwoMeshFluxAdvectionDiffusionProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00130">130</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa02be21b629b8d9809be106b27afcb59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa02be21b629b8d9809be106b27afcb59">&#9670;&nbsp;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::actions_after_adapt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions after adapt: Rebuild the mesh of prescribed flux elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00461">461</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00088">TanhSolnForAdvectionDiffusion::prescribed_flux_on_fixed_x_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ae5e1314c6772586f0fa0bc628adab7c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e1314c6772586f0fa0bc628adab7c0">&#9670;&nbsp;</a></span>actions_after_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00144">144</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3ea654224e481f37e8bde4edb38993cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea654224e481f37e8bde4edb38993cc">&#9670;&nbsp;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::actions_before_adapt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the mesh of prescribed flux elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00448">448</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+</div>
+</div>
+<a id="a05c049ca4714c5f4866d70f8bbe0f134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05c049ca4714c5f4866d70f8bbe0f134">&#9670;&nbsp;</a></span>actions_before_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve: Reset boundary conditions to the values from the exact solution. </p>
+<p>Update the problem specs before solve: Reset boundary conditions to the values from the exact solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00292">292</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00060">TanhSolnForAdvectionDiffusion::get_exact_u()</a>.</p>
+
+</div>
+</div>
+<a id="af01824e72ea624e25854a62e0dbd4eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af01824e72ea624e25854a62e0dbd4eb9">&#9670;&nbsp;</a></span>create_flux_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::create_flux_elements </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mesh *const &amp;&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mesh *const &amp;&#160;</td>
+          <td class="paramname"><em>surface_mesh_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create Advection Diffusion flux elements on boundary b of the Mesh pointed to by bulk_mesh_pt and add them to the Mesh object pointed to by surface_mesh_pt. </p>
+<p>Create AdvectionDiffusion Flux Elements on the b-th boundary of the Mesh object pointed to by bulk_mesh_pt and add the elements to the Mesh object pointeed to by surface_mesh_pt. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00395">395</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00184">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::TwoMeshFluxAdvectionDiffusionProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ac478c7d0dc6e94cbe007287d5af69a28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac478c7d0dc6e94cbe007287d5af69a28">&#9670;&nbsp;</a></span>delete_flux_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::delete_flux_elements </td>
+          <td>(</td>
+          <td class="paramtype">Mesh *const &amp;&#160;</td>
+          <td class="paramname"><em>surface_mesh_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete Advection Diffusion flux elements and wipe the surface mesh. </p>
+<p>Delete Advection Diffusion Flux Elements and wipe the surface mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00427">427</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+</div>
+</div>
+<a id="a53cc08148cdf2f548939b5d09236f023"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53cc08148cdf2f548939b5d09236f023">&#9670;&nbsp;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution: doc_info contains labels/output directory etc. </p>
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00335">335</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00060">TanhSolnForAdvectionDiffusion::get_exact_u()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad022fed8fda1294ac4e86b893f32d63c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad022fed8fda1294ac4e86b893f32d63c">&#9670;&nbsp;</a></span>Bulk_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableRectangularQuadMesh&lt;ELEMENT&gt;* <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00162">162</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00184">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::TwoMeshFluxAdvectionDiffusionProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a73a3fdaa5eb9cfffc19ed0cd8fd8379c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73a3fdaa5eb9cfffc19ed0cd8fd8379c">&#9670;&nbsp;</a></span>Source_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionSourceFctPt <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::Source_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to source function. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00168">168</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00184">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::TwoMeshFluxAdvectionDiffusionProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a0b1a0dd20caad23315b6837bb773327e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b1a0dd20caad23315b6837bb773327e">&#9670;&nbsp;</a></span>Surface_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::Surface_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "surface" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00165">165</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00184">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::TwoMeshFluxAdvectionDiffusionProblem()</a>.</p>
+
+</div>
+</div>
+<a id="acec16e75f69f21f927dd6a4671cd64ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acec16e75f69f21f927dd6a4671cd64ea">&#9670;&nbsp;</a></span>Wind_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AdvectionDiffusionEquations&lt;2&gt;::AdvectionDiffusionWindFctPt <a class="el" href="classTwoMeshFluxAdvectionDiffusionProblem.html">TwoMeshFluxAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::Wind_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to wind function. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00171">171</a> of file <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html#l00184">TwoMeshFluxAdvectionDiffusionProblem&lt; ELEMENT &gt;::TwoMeshFluxAdvectionDiffusionProblem()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="two__d__adv__diff__flux__bc_8cc_source.html">two_d_adv_diff_flux_bc.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:13:29
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

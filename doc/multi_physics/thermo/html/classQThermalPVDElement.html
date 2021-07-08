@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: QThermalPVDElement&lt; DIM &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="classQThermalPVDElement-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">QThermalPVDElement&lt; DIM &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for QThermalPVDElement&lt; DIM &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classQThermalPVDElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a24d60d6461b169603388f263cbdccd75"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a24d60d6461b169603388f263cbdccd75">QThermalPVDElement</a> ()</td></tr>
+<tr class="memdesc:a24d60d6461b169603388f263cbdccd75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: call the underlying constructors and initialise the pointer to Alpha to point to the default value of 1.0.  <a href="classQThermalPVDElement.html#a24d60d6461b169603388f263cbdccd75">More...</a><br /></td></tr>
+<tr class="separator:a24d60d6461b169603388f263cbdccd75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55025994fc3d2799fde6f9c1142340af"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a55025994fc3d2799fde6f9c1142340af">required_nvalue</a> (const unsigned &amp;n) const</td></tr>
+<tr class="memdesc:a55025994fc3d2799fde6f9c1142340af"><td class="mdescLeft">&#160;</td><td class="mdescRight">The required number of values stored at the nodes is the sum of the required values of the two single-physics elements. Note that this step is generic for any multi-physics element of this type.  <a href="classQThermalPVDElement.html#a55025994fc3d2799fde6f9c1142340af">More...</a><br /></td></tr>
+<tr class="separator:a55025994fc3d2799fde6f9c1142340af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59b86e75dc7b6f99a84ef17fef8d949d"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a59b86e75dc7b6f99a84ef17fef8d949d">alpha</a> () const</td></tr>
+<tr class="memdesc:a59b86e75dc7b6f99a84ef17fef8d949d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the thermal expansion coefficient (const version)  <a href="classQThermalPVDElement.html#a59b86e75dc7b6f99a84ef17fef8d949d">More...</a><br /></td></tr>
+<tr class="separator:a59b86e75dc7b6f99a84ef17fef8d949d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57fb80dd582c02c0e8c7dc17491bf76f"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a57fb80dd582c02c0e8c7dc17491bf76f">alpha_pt</a> ()</td></tr>
+<tr class="memdesc:a57fb80dd582c02c0e8c7dc17491bf76f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to the thermal expansion coefficientr.  <a href="classQThermalPVDElement.html#a57fb80dd582c02c0e8c7dc17491bf76f">More...</a><br /></td></tr>
+<tr class="separator:a57fb80dd582c02c0e8c7dc17491bf76f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99e482f47a98c1b5ec7ec069211de827"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a99e482f47a98c1b5ec7ec069211de827">output</a> (ostream &amp;outfile)</td></tr>
+<tr class="memdesc:a99e482f47a98c1b5ec7ec069211de827"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the standard output function with the broken default.  <a href="classQThermalPVDElement.html#a99e482f47a98c1b5ec7ec069211de827">More...</a><br /></td></tr>
+<tr class="separator:a99e482f47a98c1b5ec7ec069211de827"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d00cc21789124a37dffc9fdf2f011cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a9d00cc21789124a37dffc9fdf2f011cd">output</a> (ostream &amp;outfile, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:a9d00cc21789124a37dffc9fdf2f011cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function: <br  />
+ Output x, y, u, v, p, theta at Nplot^DIM plot points.  <a href="classQThermalPVDElement.html#a9d00cc21789124a37dffc9fdf2f011cd">More...</a><br /></td></tr>
+<tr class="separator:a9d00cc21789124a37dffc9fdf2f011cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af290922dfcefef30dc03fca2a2cb4fbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#af290922dfcefef30dc03fca2a2cb4fbf">output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:af290922dfcefef30dc03fca2a2cb4fbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function: Broken default.  <a href="classQThermalPVDElement.html#af290922dfcefef30dc03fca2a2cb4fbf">More...</a><br /></td></tr>
+<tr class="separator:af290922dfcefef30dc03fca2a2cb4fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a649062cd4f15d8f14a2755786dd466dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a649062cd4f15d8f14a2755786dd466dc">output</a> (FILE *file_pt, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a649062cd4f15d8f14a2755786dd466dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function: Broken default.  <a href="classQThermalPVDElement.html#a649062cd4f15d8f14a2755786dd466dc">More...</a><br /></td></tr>
+<tr class="separator:a649062cd4f15d8f14a2755786dd466dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accda081c3fb783b2c24715ec0c8e8e19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#accda081c3fb783b2c24715ec0c8e8e19">output_fct</a> (ostream &amp;outfile, const unsigned &amp;Nplot, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)</td></tr>
+<tr class="memdesc:accda081c3fb783b2c24715ec0c8e8e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function for an exact solution: Broken default.  <a href="classQThermalPVDElement.html#accda081c3fb783b2c24715ec0c8e8e19">More...</a><br /></td></tr>
+<tr class="separator:accda081c3fb783b2c24715ec0c8e8e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bb6609214fc7991950848806f9fb742"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a0bb6609214fc7991950848806f9fb742">output_fct</a> (ostream &amp;outfile, const unsigned &amp;Nplot, const double &amp;time, FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)</td></tr>
+<tr class="memdesc:a0bb6609214fc7991950848806f9fb742"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function for a time-dependent exact solution: Broken default.  <a href="classQThermalPVDElement.html#a0bb6609214fc7991950848806f9fb742">More...</a><br /></td></tr>
+<tr class="separator:a0bb6609214fc7991950848806f9fb742"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7824ab9fd50480c1eb8b20e57620afe5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a7824ab9fd50480c1eb8b20e57620afe5">compute_norm</a> (double &amp;el_norm)</td></tr>
+<tr class="memdesc:a7824ab9fd50480c1eb8b20e57620afe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute norm of solution: use the version in the unsteady heat class <br  />
+  <a href="classQThermalPVDElement.html#a7824ab9fd50480c1eb8b20e57620afe5">More...</a><br /></td></tr>
+<tr class="separator:a7824ab9fd50480c1eb8b20e57620afe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e5047e9a054544b61a6e8cf5534364"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a64e5047e9a054544b61a6e8cf5534364">compute_error</a> (ostream &amp;outfile, FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt, const double &amp;time, double &amp;error, double &amp;norm)</td></tr>
+<tr class="memdesc:a64e5047e9a054544b61a6e8cf5534364"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default.  <a href="classQThermalPVDElement.html#a64e5047e9a054544b61a6e8cf5534364">More...</a><br /></td></tr>
+<tr class="separator:a64e5047e9a054544b61a6e8cf5534364"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbfb260a0c8dbf1dbfa797f15d98e0af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#abbfb260a0c8dbf1dbfa797f15d98e0af">compute_error</a> (ostream &amp;outfile, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt, double &amp;error, double &amp;norm)</td></tr>
+<tr class="memdesc:abbfb260a0c8dbf1dbfa797f15d98e0af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default.  <a href="classQThermalPVDElement.html#abbfb260a0c8dbf1dbfa797f15d98e0af">More...</a><br /></td></tr>
+<tr class="separator:abbfb260a0c8dbf1dbfa797f15d98e0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25774a0b8d2a7ec688e91420527cc5c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a25774a0b8d2a7ec688e91420527cc5c4">get_isotropic_growth</a> (const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;s, const Vector&lt; double &gt; &amp;xi, double &amp;gamma) const</td></tr>
+<tr class="memdesc:a25774a0b8d2a7ec688e91420527cc5c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the growth function in the advection-diffusion equations. to be temperature-dependent.  <a href="classQThermalPVDElement.html#a25774a0b8d2a7ec688e91420527cc5c4">More...</a><br /></td></tr>
+<tr class="separator:a25774a0b8d2a7ec688e91420527cc5c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab26361e4164834860ec74603276b0207"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#ab26361e4164834860ec74603276b0207">fill_in_contribution_to_residuals</a> (Vector&lt; double &gt; &amp;residuals)</td></tr>
+<tr class="memdesc:ab26361e4164834860ec74603276b0207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contribution to the residual vector. We assume that the vector has been initialised to zero before this function is called.  <a href="classQThermalPVDElement.html#ab26361e4164834860ec74603276b0207">More...</a><br /></td></tr>
+<tr class="separator:ab26361e4164834860ec74603276b0207"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe89466bee5ebcf16a14a68550ff447"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a6fe89466bee5ebcf16a14a68550ff447">fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a6fe89466bee5ebcf16a14a68550ff447"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the element's residual Vector and the jacobian matrix We assume that the residuals vector and jacobian matrix have been initialised to zero before calling this function.  <a href="classQThermalPVDElement.html#a6fe89466bee5ebcf16a14a68550ff447">More...</a><br /></td></tr>
+<tr class="separator:a6fe89466bee5ebcf16a14a68550ff447"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a9a9cb4c621700b1b84d2200bd94d5511"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a9a9cb4c621700b1b84d2200bd94d5511">Default_Physical_Constant_Value</a></td></tr>
+<tr class="memdesc:a9a9cb4c621700b1b84d2200bd94d5511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the default physical value to be one.  <a href="classQThermalPVDElement.html#a9a9cb4c621700b1b84d2200bd94d5511">More...</a><br /></td></tr>
+<tr class="separator:a9a9cb4c621700b1b84d2200bd94d5511"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a97267a52ceec2a2153b23e18e2a2c631"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#a97267a52ceec2a2153b23e18e2a2c631">Alpha_pt</a></td></tr>
+<tr class="memdesc:a97267a52ceec2a2153b23e18e2a2c631"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a private data member, the thermal expansion coefficient.  <a href="classQThermalPVDElement.html#a97267a52ceec2a2153b23e18e2a2c631">More...</a><br /></td></tr>
+<tr class="separator:a97267a52ceec2a2153b23e18e2a2c631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:ad0722326e8c25746f63b35a46cac5886"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQThermalPVDElement.html#ad0722326e8c25746f63b35a46cac5886">Default_Physical_Constant_Value</a></td></tr>
+<tr class="memdesc:ad0722326e8c25746f63b35a46cac5886"><td class="mdescLeft">&#160;</td><td class="mdescRight">The static default value of Alpha.  <a href="classQThermalPVDElement.html#ad0722326e8c25746f63b35a46cac5886">More...</a><br /></td></tr>
+<tr class="separator:ad0722326e8c25746f63b35a46cac5886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;unsigned DIM&gt;<br />
+class QThermalPVDElement&lt; DIM &gt;</h3>
+
+<p>A class that solves the equations of steady thermoelasticity by combining the UnsteadyHeat and PVD equations into a single element. A temperature-dependent growth term is added to the PVD equations by overloading the member function get_istotropic_growth() </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00052">52</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a24d60d6461b169603388f263cbdccd75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24d60d6461b169603388f263cbdccd75">&#9670;&nbsp;</a></span>QThermalPVDElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::<a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: call the underlying constructors and initialise the pointer to Alpha to point to the default value of 1.0. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00067">67</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a59b86e75dc7b6f99a84ef17fef8d949d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59b86e75dc7b6f99a84ef17fef8d949d">&#9670;&nbsp;</a></span>alpha()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double&amp; <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::alpha </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the thermal expansion coefficient (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00081">81</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a57fb80dd582c02c0e8c7dc17491bf76f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57fb80dd582c02c0e8c7dc17491bf76f">&#9670;&nbsp;</a></span>alpha_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* &amp; <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::alpha_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the pointer to the thermal expansion coefficientr. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00084">84</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="abbfb260a0c8dbf1dbfa797f15d98e0af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbfb260a0c8dbf1dbfa797f15d98e0af">&#9670;&nbsp;</a></span>compute_error() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::compute_error </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::SteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>norm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00174">174</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a64e5047e9a054544b61a6e8cf5534364"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64e5047e9a054544b61a6e8cf5534364">&#9670;&nbsp;</a></span>compute_error() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::compute_error </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::UnsteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>norm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00162">162</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a7824ab9fd50480c1eb8b20e57620afe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7824ab9fd50480c1eb8b20e57620afe5">&#9670;&nbsp;</a></span>compute_norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::compute_norm </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>el_norm</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute norm of solution: use the version in the unsteady heat class <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00152">152</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a9a9cb4c621700b1b84d2200bd94d5511"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a9cb4c621700b1b84d2200bd94d5511">&#9670;&nbsp;</a></span>Default_Physical_Constant_Value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; 2 &gt;::Default_Physical_Constant_Value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the default physical value to be one. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00219">219</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a6fe89466bee5ebcf16a14a68550ff447"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fe89466bee5ebcf16a14a68550ff447">&#9670;&nbsp;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the element's residual Vector and the jacobian matrix We assume that the residuals vector and jacobian matrix have been initialised to zero before calling this function. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00205">205</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab26361e4164834860ec74603276b0207"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab26361e4164834860ec74603276b0207">&#9670;&nbsp;</a></span>fill_in_contribution_to_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::fill_in_contribution_to_residuals </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the contribution to the residual vector. We assume that the vector has been initialised to zero before this function is called. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00192">192</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a25774a0b8d2a7ec688e91420527cc5c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25774a0b8d2a7ec688e91420527cc5c4">&#9670;&nbsp;</a></span>get_isotropic_growth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::get_isotropic_growth </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>gamma</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the growth function in the advection-diffusion equations. to be temperature-dependent. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00181">181</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="af290922dfcefef30dc03fca2a2cb4fbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af290922dfcefef30dc03fca2a2cb4fbf">&#9670;&nbsp;</a></span>output() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00125">125</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a649062cd4f15d8f14a2755786dd466dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a649062cd4f15d8f14a2755786dd466dc">&#9670;&nbsp;</a></span>output() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00129">129</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a99e482f47a98c1b5ec7ec069211de827"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99e482f47a98c1b5ec7ec069211de827">&#9670;&nbsp;</a></span>output() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the standard output function with the broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00087">87</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a9d00cc21789124a37dffc9fdf2f011cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d00cc21789124a37dffc9fdf2f011cd">&#9670;&nbsp;</a></span>output() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nplot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function: <br  />
+ Output x, y, u, v, p, theta at Nplot^DIM plot points. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00092">92</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0bb6609214fc7991950848806f9fb742"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bb6609214fc7991950848806f9fb742">&#9670;&nbsp;</a></span>output_fct() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::output_fct </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>Nplot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::UnsteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function for a time-dependent exact solution: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00141">141</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="accda081c3fb783b2c24715ec0c8e8e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accda081c3fb783b2c24715ec0c8e8e19">&#9670;&nbsp;</a></span>output_fct() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::output_fct </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>Nplot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::SteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function for an exact solution: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00133">133</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="a55025994fc3d2799fde6f9c1142340af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55025994fc3d2799fde6f9c1142340af">&#9670;&nbsp;</a></span>required_nvalue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::required_nvalue </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The required number of values stored at the nodes is the sum of the required values of the two single-physics elements. Note that this step is generic for any multi-physics element of this type. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00076">76</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a97267a52ceec2a2153b23e18e2a2c631"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97267a52ceec2a2153b23e18e2a2c631">&#9670;&nbsp;</a></span>Alpha_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::Alpha_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to a private data member, the thermal expansion coefficient. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00058">58</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<a id="ad0722326e8c25746f63b35a46cac5886"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0722326e8c25746f63b35a46cac5886">&#9670;&nbsp;</a></span>Default_Physical_Constant_Value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classQThermalPVDElement.html">QThermalPVDElement</a>&lt; DIM &gt;::Default_Physical_Constant_Value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The static default value of Alpha. </p>
+
+<p class="definition">Definition at line <a class="el" href="thermo_8cc_source.html#l00061">61</a> of file <a class="el" href="thermo_8cc_source.html">thermo.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="thermo_8cc_source.html">thermo.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:22:22
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,95 @@
+\hypertarget{classoomph_1_1LineElementBase}{}\doxysection{oomph\+::Line\+Element\+Base Class Reference}
+\label{classoomph_1_1LineElementBase}\index{oomph::LineElementBase@{oomph::LineElementBase}}
+
+
+Base class for all line elements.  
+
+
+
+
+{\ttfamily \#include $<$Qelements.\+h$>$}
+
+Inheritance diagram for oomph\+::Line\+Element\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.649123cm]{classoomph_1_1LineElementBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LineElementBase_a39c0e003c2b1569e7f33fdfbc47c79e4}{Line\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. Empty. \end{DoxyCompactList}\item 
+virtual unsigned \mbox{\hyperlink{classoomph_1_1LineElementBase_ad80307523c850d58bca7b925df15e46d}{nvertex\+\_\+node}} () const =0
+\begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1LineElementBase_ab878e4c4276da4cefa4302cff8a7e6f8}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const =0
+\begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Base class for all line elements. 
+
+Definition at line 488 of file Qelements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1LineElementBase_a39c0e003c2b1569e7f33fdfbc47c79e4}\label{classoomph_1_1LineElementBase_a39c0e003c2b1569e7f33fdfbc47c79e4}} 
+\index{oomph::LineElementBase@{oomph::LineElementBase}!LineElementBase@{LineElementBase}}
+\index{LineElementBase@{LineElementBase}!oomph::LineElementBase@{oomph::LineElementBase}}
+\doxysubsubsection{\texorpdfstring{LineElementBase()}{LineElementBase()}}
+{\footnotesize\ttfamily oomph\+::\+Line\+Element\+Base\+::\+Line\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Empty. 
+
+
+
+Definition at line 493 of file Qelements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1LineElementBase_ad80307523c850d58bca7b925df15e46d}\label{classoomph_1_1LineElementBase_ad80307523c850d58bca7b925df15e46d}} 
+\index{oomph::LineElementBase@{oomph::LineElementBase}!nvertex\_node@{nvertex\_node}}
+\index{nvertex\_node@{nvertex\_node}!oomph::LineElementBase@{oomph::LineElementBase}}
+\doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+Line\+Element\+Base\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Number of vertex nodes in the element. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a45631a7aa50efc3123a921d114f84cba}{oomph\+::\+Finite\+Element}}.
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_a751317144972c615b0a7ef7b1340b692}{oomph\+::\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a3ec38d16dfb22d1e7090b230db3479d5}{oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_afbc5b62a126b6fcce8fffcd0a4b37b86}{oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+\mbox{\Hypertarget{classoomph_1_1LineElementBase_ab878e4c4276da4cefa4302cff8a7e6f8}\label{classoomph_1_1LineElementBase_ab878e4c4276da4cefa4302cff8a7e6f8}} 
+\index{oomph::LineElementBase@{oomph::LineElementBase}!vertex\_node\_pt@{vertex\_node\_pt}}
+\index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::LineElementBase@{oomph::LineElementBase}}
+\doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Line\+Element\+Base\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pointer to the j-\/th vertex node in the element. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a863c4382c879a77ad5607c6f9781c761}{oomph\+::\+Finite\+Element}}.
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4_ab6e699d62c9c1208b8e2726f5d236a20}{oomph\+::\+Q\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement_a1bcd63d9abbf001bf4beb903a18dfc2e}{oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QSpectralElement_3_011_00_01NNODE__1D_01_4_a6106b1fc74eeab6848f3b03dba512f09}{oomph\+::\+Q\+Spectral\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Qelements_8h}{Qelements.\+h}}\end{DoxyCompactItemize}

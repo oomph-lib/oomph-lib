@@ -1,0 +1,65 @@
+\hypertarget{classoomph_1_1AxisymmetricDerivatives}{}\doxysection{oomph\+::Axisymmetric\+Derivatives Class Reference}
+\label{classoomph_1_1AxisymmetricDerivatives}\index{oomph::AxisymmetricDerivatives@{oomph::AxisymmetricDerivatives}}
+
+
+{\ttfamily \#include $<$interface\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Axisymmetric\+Derivatives\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.794326cm]{classoomph_1_1AxisymmetricDerivatives}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AxisymmetricDerivatives_a91b259ef45c7563b05bf79de4b0fe4bf}{Axisymmetric\+Derivatives}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricDerivatives_a306ea6b57d09d57e87e8d74a13c2f828}{compute\+\_\+surface\+\_\+derivatives}} (const Shape \&psi, const D\+Shape \&dpsids, const Dense\+Matrix$<$ double $>$ \&interpolated\+\_\+t, const Vector$<$ double $>$ \&interpolated\+\_\+x, D\+Shape \&surface\+\_\+gradient, D\+Shape \&surface\+\_\+divergence)
+\begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that establishes the surface derivative functions for Axisymmetric\+Interface\+Elements. These are defined in a separate class so that they can be used by other interface equation-\/type classes. 
+
+Definition at line 665 of file interface\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoomph_1_1AxisymmetricDerivatives_a91b259ef45c7563b05bf79de4b0fe4bf}\label{classoomph_1_1AxisymmetricDerivatives_a91b259ef45c7563b05bf79de4b0fe4bf}} 
+\index{oomph::AxisymmetricDerivatives@{oomph::AxisymmetricDerivatives}!AxisymmetricDerivatives@{AxisymmetricDerivatives}}
+\index{AxisymmetricDerivatives@{AxisymmetricDerivatives}!oomph::AxisymmetricDerivatives@{oomph::AxisymmetricDerivatives}}
+\doxysubsubsection{\texorpdfstring{AxisymmetricDerivatives()}{AxisymmetricDerivatives()}}
+{\footnotesize\ttfamily oomph\+::\+Axisymmetric\+Derivatives\+::\+Axisymmetric\+Derivatives (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 669 of file interface\+\_\+elements.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1AxisymmetricDerivatives_a306ea6b57d09d57e87e8d74a13c2f828}\label{classoomph_1_1AxisymmetricDerivatives_a306ea6b57d09d57e87e8d74a13c2f828}} 
+\index{oomph::AxisymmetricDerivatives@{oomph::AxisymmetricDerivatives}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
+\index{compute\_surface\_derivatives@{compute\_surface\_derivatives}!oomph::AxisymmetricDerivatives@{oomph::AxisymmetricDerivatives}}
+\doxysubsubsection{\texorpdfstring{compute\_surface\_derivatives()}{compute\_surface\_derivatives()}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const Shape \&}]{psi,  }\item[{const D\+Shape \&}]{dpsids,  }\item[{const Dense\+Matrix$<$ double $>$ \&}]{interpolated\+\_\+t,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{D\+Shape \&}]{surface\+\_\+gradient,  }\item[{D\+Shape \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Fill in the specific surface derivative calculations. 
+
+Specialise the surface derivatives for the axisymmetric interface case. 
+
+Definition at line 799 of file interface\+\_\+elements.\+cc.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface__elements_8h}{interface\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{interface__elements_8cc}{interface\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

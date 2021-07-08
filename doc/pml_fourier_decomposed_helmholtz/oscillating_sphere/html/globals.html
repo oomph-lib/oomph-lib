@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: File Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all file members with links to the files they belong to:</div>
+
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>assign_eqn_numbers()
+: <a class="el" href="oscillating__sphere_8txt.html#a566114d60479b614e9f94d830e74689d">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_b"></a>- b -</h3><ul>
+<li>boundary
+: <a class="el" href="oscillating__sphere_8txt.html#ad548c9b95034eb12dc7809dbb2fb9a27">oscillating_sphere.txt</a>
+</li>
+<li>boundary_id
+: <a class="el" href="oscillating__sphere_8txt.html#a04b2b2fb16b8821e58a5b516e51d7ed3">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>close()
+: <a class="el" href="oscillating__sphere_8txt.html#a28c94e0de096081d389e8e2a238d6bba">oscillating_sphere.txt</a>
+</li>
+<li>Coeff()
+: <a class="el" href="oscillating__sphere_8txt.html#aab3ca09673101b3920b214f6d576851d">oscillating_sphere.txt</a>
+</li>
+<li>conditions()
+: <a class="el" href="oscillating__sphere_8txt.html#af10ef57b5a2f4bc9729c690c53cd91a4">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_d"></a>- d -</h3><ul>
+<li>default
+: <a class="el" href="oscillating__sphere_8txt.html#a73aeb342910308bf3baee52239210f17">oscillating_sphere.txt</a>
+</li>
+<li>domain
+: <a class="el" href="oscillating__sphere_8txt.html#af618b8baefd50928e83125b76c2d4f77">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_e"></a>- e -</h3><ul>
+<li>element_area
+: <a class="el" href="oscillating__sphere_8txt.html#aba13bf05d9ddc7d35aee69d61bcaa8ae">oscillating_sphere.txt</a>
+</li>
+<li>elements
+: <a class="el" href="oscillating__sphere_8txt.html#aa162f89ece3ec8ee343cb997f9facb2c">oscillating_sphere.txt</a>
+</li>
+<li>equation
+: <a class="el" href="oscillating__sphere_8txt.html#a22740c20e99352fbe54bcb96d67962cc">oscillating_sphere.txt</a>
+</li>
+<li>equator()
+: <a class="el" href="oscillating__sphere_8txt.html#afefe646f568feee47987198143fbb914">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_f"></a>- f -</h3><ul>
+<li>f
+: <a class="el" href="oscillating__sphere_8txt.html#aeebca83226489bb25c0f116bec0e6414">oscillating_sphere.txt</a>
+</li>
+<li>Finally
+: <a class="el" href="oscillating__sphere_8txt.html#ad929b1cb755dfec91450fd4b3154900e">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>get_exact_u()
+: <a class="el" href="oscillating__sphere_8txt.html#a130eaf1d2feef2136f6898ccc17bf86c">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>href
+: <a class="el" href="oscillating__sphere_8txt.html#aa05bea9df6009950e0aa53b0c9d0abee">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_i"></a>- i -</h3><ul>
+<li>in()
+: <a class="el" href="oscillating__sphere_8txt.html#acbd75d9c449695d4f3497ee25fe93f33">oscillating_sphere.txt</a>
+</li>
+<li>interest()
+: <a class="el" href="oscillating__sphere_8txt.html#aa9d9f6559fbca85135a48fb32eda1b88">oscillating_sphere.txt</a>
+</li>
+<li>introduction
+: <a class="el" href="oscillating__sphere_8txt.html#a8bb1e768639877331c6fd6ee89e1eb71">oscillating_sphere.txt</a>
+</li>
+<li>it
+: <a class="el" href="oscillating__sphere_8txt.html#ae3ffce5e745677b8f040caaf3440cd87">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>main()
+: <a class="el" href="oscillating__sphere_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">oscillating_sphere.cc</a>
+</li>
+<li>mesh
+: <a class="el" href="oscillating__sphere_8txt.html#ae6a65a4bc905ad6d7bdc2d682c446a4f">oscillating_sphere.txt</a>
+</li>
+<li>meshes
+: <a class="el" href="oscillating__sphere_8txt.html#a152f7b5af32e2751fa06dd6f0aa42f51">oscillating_sphere.txt</a>
+</li>
+<li>middle
+: <a class="el" href="oscillating__sphere_8txt.html#a14e8f683d4fb77d00b3fb8bb90761c23">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_n"></a>- n -</h3><ul>
+<li>newton_solve()
+: <a class="el" href="oscillating__sphere_8txt.html#a14576df8952318060b14848b23a6f9cb">oscillating_sphere.txt</a>
+</li>
+<li>Next
+: <a class="el" href="oscillating__sphere_8txt.html#a2f76e88828a6b8514d2fa31f12c5515c">oscillating_sphere.txt</a>
+</li>
+<li>npts
+: <a class="el" href="oscillating__sphere_8txt.html#ade33917a6234df7322b6cafdb0953278">oscillating_sphere.txt</a>
+</li>
+<li>numbers
+: <a class="el" href="oscillating__sphere_8txt.html#a2fb8037de86c92a80bdf9e1a3c761310">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>parameters
+: <a class="el" href="oscillating__sphere_8txt.html#a33650d25d57a83a28469b9defda6fedb">oscillating_sphere.txt</a>
+</li>
+<li>PMLs
+: <a class="el" href="oscillating__sphere_8txt.html#afd42351d885e00835f391d8eb03b5302">oscillating_sphere.txt</a>
+</li>
+<li>pole()
+: <a class="el" href="oscillating__sphere_8txt.html#a2f576549dc9ac2728d61f3ee163c330d">oscillating_sphere.txt</a>
+</li>
+<li>problem
+: <a class="el" href="oscillating__sphere_8txt.html#a9a18528a3a08b0985c8b197f4e12846b">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_r"></a>- r -</h3><ul>
+<li>r_max
+: <a class="el" href="oscillating__sphere_8txt.html#a74802b7295659bc9e37a44d70d613d79">oscillating_sphere.txt</a>
+</li>
+<li>real()
+: <a class="el" href="oscillating__sphere_8txt.html#a48949ff2f6e8b315391b69a7d7ee215a">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>set_directory()
+: <a class="el" href="oscillating__sphere_8txt.html#a9bc4cd80c8928687b39ebefb5ad315cc">oscillating_sphere.txt</a>
+</li>
+<li>sphere
+: <a class="el" href="oscillating__sphere_8txt.html#a3515bdc5abaf7202b32eefa88764f1ff">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_t"></a>- t -</h3><ul>
+<li>too
+: <a class="el" href="oscillating__sphere_8txt.html#a61fe0fc5636402ca3797cad489becf6a">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_u"></a>- u -</h3><ul>
+<li>unchanged
+: <a class="el" href="oscillating__sphere_8txt.html#ad83f065ef4522a53bbfe66955036485e">oscillating_sphere.txt</a>
+</li>
+<li>until
+: <a class="el" href="oscillating__sphere_8txt.html#ac6e0fc65935716384de6d75d1442e294">oscillating_sphere.txt</a>
+</li>
+</ul>
+
+
+<h3><a id="index_v"></a>- v -</h3><ul>
+<li>varphi
+: <a class="el" href="oscillating__sphere_8txt.html#ae4e2ee6949033743df56746ccec53b7a">oscillating_sphere.txt</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:30:57
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

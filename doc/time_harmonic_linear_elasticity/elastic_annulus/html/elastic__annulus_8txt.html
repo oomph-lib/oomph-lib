@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: elastic_annulus.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
+            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">elastic_annulus.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aa87c3d2301710f592492be497f0b6435"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#aa87c3d2301710f592492be497f0b6435">T</a> = \frac{1}{\omega} \f$, and use Young 's modulus to non-dimensionalise the body force and the stress tensor:&lt; CENTER &gt; \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\pmb{\tau}^ *=E \, \pmb{\tau}, \qquad <a class="el" href="elastic__annulus_8txt.html#aab4f2cc0ea9d1b6a02df4b168a1e1412">x_</a>{i}^ *={\cal L}\, <a class="el" href="elastic__annulus_8txt.html#aab4f2cc0ea9d1b6a02df4b168a1e1412">x_</a>{i} \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>] \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\mathbf{u}^ *={\cal L}\, \mathbf{u}, \qquad \mathbf{F}^ *=\frac{E}{\rho \cal L} \, \mathbf{F}, \qquad t^ *={\cal <a class="el" href="elastic__annulus_8txt.html#aa87c3d2301710f592492be497f0b6435">T</a>}\, t. \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; The non-dimensional form of the <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> is then given by&lt; CENTER &gt; \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\pmb{\nabla}\cdot\pmb{\tau}+\mathbf{F}=-\<a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a>^2\mathbf{u}, \ \ \ \ \ \ \ \ \ \ @E[nondimeqn]@ \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; with the non-dimensional constitutive relation,&lt; CENTER &gt; \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\pmb{\tau}=\frac{1}{1+\nu}\left(\frac{\nu}{1-2\nu}(\pmb{\nabla}\cdot\mathbf{u})\textbf{I}+\frac{1}{2}(\pmb{\nabla}\mathbf{u}+\pmb{\nabla}\mathbf{u}^{{\rm <a class="el" href="elastic__annulus_8txt.html#aa87c3d2301710f592492be497f0b6435">T</a>}})\right). \ \ \ \ \ \ \ \ \ \ @E[nondimconstitutive]@ \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; The non-dimensional parameter&lt; CENTER &gt; \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\<a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a>={\cal L}\omega \sqrt{\frac{\rho}{E}} \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; is the ratio of the elastic body 's intrinsic timescale, \f$\displaystyle {\cal L} \sqrt{\frac{\rho}{E}}\f$, to the <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a>-specific timescale,\f$ \displaystyle {\cal <a class="el" href="elastic__annulus_8txt.html#aa87c3d2301710f592492be497f0b6435">T</a>}=\frac{1}{\omega} \f$, that we used to non-dimensionalise time. \f$ \<a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> \f$ can be interpreted as a non-dimensional version of the excitation frequency</td></tr>
+<tr class="separator:aa87c3d2301710f592492be497f0b6435"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eca3b1248bd34ef80c98c872888a5e9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> = 10 \f$, \f$ \nu=0.3 \f$, \f$ P_0=0.3 \f$, \f$ r_{\rm min}=1\f$ and \f$ r_{\rm max}=1.5 \f$. @I w 0.8\textwidth re_ux &quot;Real part of the horizontal displacement. Green: exact</td></tr>
+<tr class="separator:a9eca3b1248bd34ef80c98c872888a5e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a6d33a37c23fb963215624261e58a7a23"><td class="memItemLeft" align="right" valign="top">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section element_types Implementation Within c oomph the non dimensional version of&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> (@R[nondimeqn]@) with the const itutive equations(@R[nondimconstitutive]@) are implemented in the \c TimeHarmonicLinearElasticityEquations&lt; DIM &gt; equations class</td></tr>
+<tr class="separator:a6d33a37c23fb963215624261e58a7a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75f4b81a29c205a2e2a6bbe71f7b9036"><td class="memItemLeft" align="right" valign="top">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a75f4b81a29c205a2e2a6bbe71f7b9036">the&lt; A HREF=&quot;../../../quick_guide/html/index.html&quot;&gt;</a> (Not-So-) Quick Guide</td></tr>
+<tr class="separator:a75f4b81a29c205a2e2a6bbe71f7b9036"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a650553f0617de7078d03126b2442a9a5"><td class="memItemLeft" align="right" valign="top">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in&lt;/A &gt; this equation class is then combined with a geometric finite element to form a fully functional finite element For instance the combination of the c TimeHarmonicLinearElasticityEquations&lt; 2 &gt; class with the geometric finite element c QElement&lt; 2, 3 &gt; yields a nine node quadrilateral element As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> the mapping between local and&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a650553f0617de7078d03126b2442a9a5">global</a> (Eulerian) coordinates within an element is given by</td></tr>
+<tr class="separator:a650553f0617de7078d03126b2442a9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ea5c33e71431077fa41f9d0f8695265"><td class="memItemLeft" align="right" valign="top">red here is a plot of the real part of the radial&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> (Re(u_1)^2+Re(u_2)^2)^</td></tr>
+<tr class="separator:a6ea5c33e71431077fa41f9d0f8695265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d14d265e44897eec22cff52a1fbd05b"><td class="memItemLeft" align="right" valign="top">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a1d14d265e44897eec22cff52a1fbd05b">traction</a> (pressure) to be applied on the outer boundary</td></tr>
+<tr class="separator:a1d14d265e44897eec22cff52a1fbd05b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58ea98d956dd7913220dbcd20abfdca7"><td class="memItemLeft" align="right" valign="top">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the and the exact&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> (which we don 't list here because it is very lengthy). \dontinclude time_harmonic_elastic_annulus.cc \skipline start_namespace \until end_of_pressure_load We also define the output directory and the number of elements in the mesh. \skipline Output \until Nr&lt; HR &gt;&lt; HR &gt; \section <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> The driver code We start by defining command line arguments which specify the number of elements in the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> and indicate the presence or absence of the &quot;gap&quot; in the coating. \dontinclude time_harmonic_elastic_annulus.cc \skipline start_of_main \until have_gap The code performs a parameter <a class="el" href="elastic__annulus_8txt.html#ac22a369d66433f23fe86ecb2a0a7d8d9">study</a> in which we compute the solution for a range of pressures. We specify the pressure increment and the number of steps to be performed</td></tr>
+<tr class="separator:a58ea98d956dd7913220dbcd20abfdca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ad07cc2c1f3b98d082504a54bfaba5"><td class="memItemLeft" align="right" valign="top">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the and the exact parse the command line arguments and document them skipline P increment until doc_specified we create the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> (discretising the domain with nine-noded quadrilateral elements)</td></tr>
+<tr class="separator:aa4ad07cc2c1f3b98d082504a54bfaba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abab50edf3fca9faf4edf2d43c95ad07f"><td class="memItemLeft" align="right" valign="top">skipline Doc <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> until end of <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>&lt; HR &gt;&lt; HR &gt; section <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> The <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> class The c Problem class is very simple As in other problems with Neumann boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> we provide separate meshes for the bulk elements and the face elements that apply the <a class="el" href="elastic__annulus_8txt.html#a1d14d265e44897eec22cff52a1fbd05b">traction</a> boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> The latter are attached to the relevant faces of the bulk elements by the function c&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#abab50edf3fca9faf4edf2d43c95ad07f">create_traction_elements</a> (). \dontinclude time_harmonic_elastic_annulus.cc \skipline begin_problem \until actions_before_newton_solve() \skipline Doc the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> \until delete_traction \skipline Pointer to solid <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> \until Solid_mesh_pt \skipline Pointer to <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> of <a class="el" href="elastic__annulus_8txt.html#a1d14d265e44897eec22cff52a1fbd05b">traction</a> \until }</td></tr>
+<tr class="separator:abab50edf3fca9faf4edf2d43c95ad07f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91a70d8a65261b59c41973d1b7ba1873"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> constructor We begin by building the bulk solid specifying the presence of the&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a91a70d8a65261b59c41973d1b7ba1873">gap</a> (and its width) if necessary. If there is no gap</td></tr>
+<tr class="separator:a91a70d8a65261b59c41973d1b7ba1873"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa51b7bec1371104523c0be5205a0baa5"><td class="memItemLeft" align="right" valign="top">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#aa51b7bec1371104523c0be5205a0baa5">forced</a></td></tr>
+<tr class="separator:aa51b7bec1371104523c0be5205a0baa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13e4ae2566e27f3d71febdb609f7408f"><td class="memItemLeft" align="right" valign="top">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe time harmonic oscillations of elastic bodies&lt; CENTER &gt;&lt; TABLE BORDER=1, WIDTH=500px &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a13e4ae2566e27f3d71febdb609f7408f">Acknowledgement</a></td></tr>
+<tr class="separator:a13e4ae2566e27f3d71febdb609f7408f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7093eb867eb78b5666f282f10db249d4"><td class="memItemLeft" align="right" valign="top">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe time harmonic oscillations of elastic bodies&lt; CENTER &gt;&lt; TABLE BORDER=1, WIDTH=500px &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt; Young s modulus f E f and Poisson s ratio f nu&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a7093eb867eb78b5666f282f10db249d4">f</a></td></tr>
+<tr class="separator:a7093eb867eb78b5666f282f10db249d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab4f2cc0ea9d1b6a02df4b168a1e1412"><td class="memItemLeft" align="right" valign="top">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe time harmonic oscillations of elastic bodies&lt; CENTER &gt;&lt; TABLE BORDER=1, WIDTH=500px &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt; Young s modulus <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> E <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and Poisson s ratio <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> nu occupying the region <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> whose boundary is <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> partial D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> Assuming that the body performs time harmonic oscillations of frequency of <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> omega <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> its motion is governed by the <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\pmb{\nabla}^ *\cdot\pmb{\tau}^ *+\rho \mathbf{F}^ *=-\rho\omega^2 \mathbf{u}^ *,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; where the <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#aab4f2cc0ea9d1b6a02df4b168a1e1412">x_</a> {i}^* \f$ are the cartesian coordinates</td></tr>
+<tr class="separator:aab4f2cc0ea9d1b6a02df4b168a1e1412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cfeaef418c70fdb0b565c40b0a7d982"><td class="memItemLeft" align="right" valign="top">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe time harmonic oscillations of elastic bodies&lt; CENTER &gt;&lt; TABLE BORDER=1, WIDTH=500px &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt; Young s modulus <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> E <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and Poisson s ratio <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> nu occupying the region <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> whose boundary is <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> partial D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> Assuming that the body performs time harmonic oscillations of frequency of <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> omega <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> its motion is governed by the <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\pmb{\nabla}^ *\cdot\pmb{\tau}^ *+\rho \mathbf{F}^ *=-\rho\omega^2 \mathbf{u}^ *,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; where the <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and the time <a class="el" href="elastic__annulus_8txt.html#a2a435bde04d6dc5025f08c4c97bbf582">periodic</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a3cfeaef418c70fdb0b565c40b0a7d982">stresses</a></td></tr>
+<tr class="separator:a3cfeaef418c70fdb0b565c40b0a7d982"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2341905d8d08d46b6df9f82ddcf0c328"><td class="memItemLeft" align="right" valign="top">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe time harmonic oscillations of elastic bodies&lt; CENTER &gt;&lt; TABLE BORDER=1, WIDTH=500px &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt; Young s modulus <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> E <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and Poisson s ratio <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> nu occupying the region <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> whose boundary is <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> partial D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> Assuming that the body performs time harmonic oscillations of frequency of <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> omega <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> its motion is governed by the <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\pmb{\nabla}^ *\cdot\pmb{\tau}^ *+\rho \mathbf{F}^ *=-\rho\omega^2 \mathbf{u}^ *,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; where the <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and the time <a class="el" href="elastic__annulus_8txt.html#a2a435bde04d6dc5025f08c4c97bbf582">periodic</a> body force and displacements are given by as&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a></td></tr>
+<tr class="separator:a2341905d8d08d46b6df9f82ddcf0c328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6e150794638f7727a4134822c4663be"><td class="memItemLeft" align="right" valign="top">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section element_types Implementation Within c oomph&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#ad6e150794638f7727a4134822c4663be">lib</a></td></tr>
+<tr class="separator:ad6e150794638f7727a4134822c4663be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35970ea7bcb8c93ff806c6209c7b1fdf"><td class="memItemLeft" align="right" valign="top">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a35970ea7bcb8c93ff806c6209c7b1fdf">approach</a></td></tr>
+<tr class="separator:a35970ea7bcb8c93ff806c6209c7b1fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208d4e22f08a327ea887ee87cfe3aac0"><td class="memItemLeft" align="right" valign="top">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in&lt;/A &gt; this equation class is then combined with a geometric finite element to form a fully functional finite element For instance the combination of the c TimeHarmonicLinearElasticityEquations&lt; 2 &gt; class with the geometric finite element c QElement&lt; 2, 3 &gt; yields a nine node quadrilateral element As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> the mapping between local and&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[x_i=\sum_{j=1}^{N^{(E)}} <a class="el" href="elastic__annulus_8txt.html#a08abb3caeb8847093619d1f1c4fc8884">X</a>^{(E)}_{ij} \, \psi_j, \qquadi=1, 2,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; where <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a208d4e22f08a327ea887ee87cfe3aac0">N</a> {(E)} \f$ is the number of nodes in the element</td></tr>
+<tr class="separator:a208d4e22f08a327ea887ee87cfe3aac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08abb3caeb8847093619d1f1c4fc8884"><td class="memItemLeft" align="right" valign="top">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in&lt;/A &gt; this equation class is then combined with a geometric finite element to form a fully functional finite element For instance the combination of the c TimeHarmonicLinearElasticityEquations&lt; 2 &gt; class with the geometric finite element c QElement&lt; 2, 3 &gt; yields a nine node quadrilateral element As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> the mapping between local and&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[x_i=\sum_{j=1}^{<a class="el" href="elastic__annulus_8txt.html#a208d4e22f08a327ea887ee87cfe3aac0">N</a>^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquadi=1, 2,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; where <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a08abb3caeb8847093619d1f1c4fc8884">X</a></td></tr>
+<tr class="separator:a08abb3caeb8847093619d1f1c4fc8884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9799dec73806d79ab3e4d501ee671ea0"><td class="memItemLeft" align="right" valign="top">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in&lt;/A &gt; this equation class is then combined with a geometric finite element to form a fully functional finite element For instance the combination of the c TimeHarmonicLinearElasticityEquations&lt; 2 &gt; class with the geometric finite element c QElement&lt; 2, 3 &gt; yields a nine node quadrilateral element As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> the mapping between local and&lt; CENTER &gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[x_i=\sum_{j=1}^{<a class="el" href="elastic__annulus_8txt.html#a208d4e22f08a327ea887ee87cfe3aac0">N</a>^{(E)}} <a class="el" href="elastic__annulus_8txt.html#a08abb3caeb8847093619d1f1c4fc8884">X</a>^{(E)}_{ij} \, \psi_j, \qquadi=1, 2,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER &gt; where <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and the <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> psi_j <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> are the element s shape&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a></td></tr>
+<tr class="separator:a9799dec73806d79ab3e4d501ee671ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd87e55ba6c1b5830f5afcab8d49bdea"><td class="memItemLeft" align="right" valign="top">red&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#abd87e55ba6c1b5830f5afcab8d49bdea">__pad0__</a></td></tr>
+<tr class="separator:abd87e55ba6c1b5830f5afcab8d49bdea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbdf32d955aa833222982f6377faab77"><td class="memItemLeft" align="right" valign="top">red&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#abbdf32d955aa833222982f6377faab77">__pad1__</a></td></tr>
+<tr class="separator:abbdf32d955aa833222982f6377faab77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ff90142326d825ac0b7acff8c286cb7"><td class="memItemLeft" align="right" valign="top">red here is a plot of the real part of the radial&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a></td></tr>
+<tr class="separator:a6ff90142326d825ac0b7acff8c286cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cf60f16e1657ee25730a3ba215c31a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> I w textwidth re_ur Real part of the radial <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a0cf60f16e1657ee25730a3ba215c31a4">Green</a></td></tr>
+<tr class="separator:a0cf60f16e1657ee25730a3ba215c31a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7cd8f5e59695fcbfb2bbf6a62b357cf"><td class="memItemLeft" align="right" valign="top">red&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#aa7cd8f5e59695fcbfb2bbf6a62b357cf">__pad2__</a></td></tr>
+<tr class="separator:aa7cd8f5e59695fcbfb2bbf6a62b357cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1cb67df02697a5cc6dcd1ac8e108163"><td class="memItemLeft" align="right" valign="top">red here is a plot of the real part of the horizontal <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> for the case when there is a <a class="el" href="elastic__annulus_8txt.html#a91a70d8a65261b59c41973d1b7ba1873">gap</a> in the annular region The presence of the <a class="el" href="elastic__annulus_8txt.html#a91a70d8a65261b59c41973d1b7ba1873">gap</a> clearly breaks the axisymmetry of the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> and creates waves that propagate in all&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#ac1cb67df02697a5cc6dcd1ac8e108163">directions</a></td></tr>
+<tr class="separator:ac1cb67df02697a5cc6dcd1ac8e108163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2409a036955630117af29def9aee77f9"><td class="memItemLeft" align="right" valign="top">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the and the exact parse the command line arguments and document them skipline P increment until doc_specified&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a2409a036955630117af29def9aee77f9">Next</a></td></tr>
+<tr class="separator:a2409a036955630117af29def9aee77f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac22a369d66433f23fe86ecb2a0a7d8d9"><td class="memItemLeft" align="right" valign="top">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the and the exact parse the command line arguments and document them skipline P increment until doc_specified we create the skipline Set up the <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> until AnnularDisk and perform the parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#ac22a369d66433f23fe86ecb2a0a7d8d9">study</a></td></tr>
+<tr class="separator:ac22a369d66433f23fe86ecb2a0a7d8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20e8d60aefcc60d0ab9d55efb3837c11"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> constructor We begin by building the bulk solid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a></td></tr>
+<tr class="separator:a20e8d60aefcc60d0ab9d55efb3837c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a435bde04d6dc5025f08c4c97bbf582"><td class="memItemLeft" align="right" valign="top">&lt; HR &gt;&lt; HR &gt; section constructor The <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> constructor We begin by building the bulk solid specifying the presence of the the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> is&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a2a435bde04d6dc5025f08c4c97bbf582">periodic</a></td></tr>
+<tr class="separator:a2a435bde04d6dc5025f08c4c97bbf582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74f834276810b9c44cb2b4a8d16801fa"><td class="memItemLeft" align="right" valign="top">see ref comments for a more detailed discussion of how the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> for this <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> is constructed dontinclude time_harmonic_elastic_annulus cc skipline start_of_constructor until skipline Build solid <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> until H_annulus It is always a good idea to have a look at the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> and its boundary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#a74f834276810b9c44cb2b4a8d16801fa">enumeration</a></td></tr>
+<tr class="separator:a74f834276810b9c44cb2b4a8d16801fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa020a3c7910d3f7bcbee363cbe7ec797"><td class="memItemLeft" align="right" valign="top">see ref comments for a more detailed discussion of how the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> for this <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> is constructed dontinclude time_harmonic_elastic_annulus cc skipline start_of_constructor until skipline Build solid <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> until H_annulus It is always a good idea to have a look at the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> and its boundary until <a class="el" href="elastic__annulus_8txt.html#a2409a036955630117af29def9aee77f9">Next</a> we create the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> that contains the FaceElements that apply the <a class="el" href="elastic__annulus_8txt.html#a1d14d265e44897eec22cff52a1fbd05b">traction</a> boundary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a></td></tr>
+<tr class="separator:aa020a3c7910d3f7bcbee363cbe7ec797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a9eca3b1248bd34ef80c98c872888a5e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eca3b1248bd34ef80c98c872888a5e9">&#9670;&nbsp;</a></span>Omega</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> =  10 \f$, \f$ \nu=0.3 \f$, \f$ P_0 = 0.3 \f$, \f$ r_{\rm min}=1\f$ and \f$ r_{\rm max}=1.5 \f$. @I w 0.8\textwidth re_ux &quot;Real part of the horizontal displacement. Green: exact</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00261">261</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa87c3d2301710f592492be497f0b6435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa87c3d2301710f592492be497f0b6435">&#9670;&nbsp;</a></span>T</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="elastic__annulus_8txt.html#aa87c3d2301710f592492be497f0b6435">T</a> =  \frac{1}{\omega} \f$, and use Young's modulus to non-dimensionalise the body force and the stress tensor: &lt;CENTER&gt; \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[ \pmb{\tau}^* = E \, \pmb{\tau}, \qquad <a class="el" href="elastic__annulus_8txt.html#aab4f2cc0ea9d1b6a02df4b168a1e1412">x_</a>{i}^* = {\cal L}\, <a class="el" href="elastic__annulus_8txt.html#aab4f2cc0ea9d1b6a02df4b168a1e1412">x_</a>{i} \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>] \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[ \mathbf{u}^* = {\cal L}\, \mathbf{u}, \qquad \mathbf{F}^* = \frac{E}{\rho \cal L} \, \mathbf{F}, \qquad t^* = {\cal <a class="el" href="elastic__annulus_8txt.html#aa87c3d2301710f592492be497f0b6435">T</a>}\, t. \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>] &lt;/CENTER&gt; The non-dimensional form of the <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> is then given by &lt;CENTER&gt; \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[ \pmb{\nabla}\cdot\pmb{\tau}+\mathbf{F}=-\<a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a>^2\mathbf{u}, \ \ \ \ \ \ \ \ \ \ @E[nondimeqn]@ \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>] &lt;/CENTER&gt; with the non-dimensional constitutive relation, &lt;CENTER&gt; \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[ \pmb{\tau}=\frac{1}{1+\nu}\left( \frac{\nu}{1-2\nu}(\pmb{\nabla}\cdot\mathbf{u})\textbf{I}+ \frac{1}{2}(\pmb{\nabla}\mathbf{u}+\pmb{\nabla}\mathbf{u}^{{\rm <a class="el" href="elastic__annulus_8txt.html#aa87c3d2301710f592492be497f0b6435">T</a>}})\right). \ \ \ \ \ \ \ \ \ \ @E[nondimconstitutive]@ \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>] &lt;/CENTER&gt; The non-dimensional parameter &lt;CENTER&gt; \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>[ \<a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> = {\cal L}\omega \sqrt{\frac{\rho}{E}} \<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>] &lt;/CENTER&gt; is the ratio of the elastic body's intrinsic timescale, \f$\displaystyle {\cal L} \sqrt{\frac{\rho}{E}}\f$, to the <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a>-specific timescale,\f$ \displaystyle {\cal <a class="el" href="elastic__annulus_8txt.html#aa87c3d2301710f592492be497f0b6435">T</a>}=\frac{1}{\omega} \f$, that we used to non-dimensionalise time. \f$ \<a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> \f$ can be interpreted as a non-dimensional version of the excitation frequency</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00124">124</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="abab50edf3fca9faf4edf2d43c95ad07f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abab50edf3fca9faf4edf2d43c95ad07f">&#9670;&nbsp;</a></span>create_traction_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">skipline Doc <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> until end of <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>&lt;HR&gt;&lt;HR&gt; section <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> The <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> class The c Problem class is very simple As in other problems with Neumann boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> we provide separate meshes for the bulk elements and the face elements that apply the <a class="el" href="elastic__annulus_8txt.html#a1d14d265e44897eec22cff52a1fbd05b">traction</a> boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> The latter are attached to the relevant faces of the bulk elements by the function c create_traction_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00664">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;::actions_after_adapt()</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00506">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::actions_after_adapt()</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00356">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::AnnularDiskProblem()</a>, and <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00223">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;::RingWithTRibProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a6d33a37c23fb963215624261e58a7a23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d33a37c23fb963215624261e58a7a23">&#9670;&nbsp;</a></span>equations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section element_types Implementation Within c oomph the non dimensional version of equations </td>
+          <td>(</td>
+          <td class="paramtype">@R@&#160;</td>
+          <td class="paramname">[nondimeqn]</td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ea5c33e71431077fa41f9d0f8695265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ea5c33e71431077fa41f9d0f8695265">&#9670;&nbsp;</a></span>f()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">red here is a plot of the real part of the radial f </td>
+          <td>(</td>
+          <td class="paramtype">Re(u_1)^2+Re(u_2)^&#160;</td>
+          <td class="paramname"><em>2</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00268">268</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a91a70d8a65261b59c41973d1b7ba1873"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91a70d8a65261b59c41973d1b7ba1873">&#9670;&nbsp;</a></span>gap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> constructor We begin by building the bulk solid specifying the presence of the gap </td>
+          <td>(</td>
+          <td class="paramtype">and its&#160;</td>
+          <td class="paramname"><em>width</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a650553f0617de7078d03126b2442a9a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a650553f0617de7078d03126b2442a9a5">&#9670;&nbsp;</a></span>global()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in&lt;/A&gt; this equation class is then combined with a geometric finite element to form a fully functional finite element For instance the combination of the c TimeHarmonicLinearElasticityEquations&lt;2&gt; class with the geometric finite element c QElement&lt;2,3&gt; yields a nine node quadrilateral element As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> the mapping between local and global </td>
+          <td>(</td>
+          <td class="paramtype">Eulerian&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4ad07cc2c1f3b98d082504a54bfaba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4ad07cc2c1f3b98d082504a54bfaba5">&#9670;&nbsp;</a></span>problem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the and the exact parse the command line arguments and document them skipline P increment until doc_specified we create the problem </td>
+          <td>(</td>
+          <td class="paramtype">discretising the domain with nine-noded quadrilateral&#160;</td>
+          <td class="paramname"><em>elements</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00646">main()</a>.</p>
+
+</div>
+</div>
+<a id="a58ea98d956dd7913220dbcd20abfdca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58ea98d956dd7913220dbcd20abfdca7">&#9670;&nbsp;</a></span>solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the and the exact solution </td>
+          <td>(</td>
+          <td class="paramtype">which we don 't list here because it is very&#160;</td>
+          <td class="paramname"><em>lengthy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a75f4b81a29c205a2e2a6bbe71f7b9036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75f4b81a29c205a2e2a6bbe71f7b9036">&#9670;&nbsp;</a></span>the&lt; A HREF=&quot;../../../quick_guide/html/index.html&quot;&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in the&lt; A HREF=&quot;../../../quick_guide/html/index.html&quot;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">Not-So-&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d14d265e44897eec22cff52a1fbd05b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d14d265e44897eec22cff52a1fbd05b">&#9670;&nbsp;</a></span>traction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the traction </td>
+          <td>(</td>
+          <td class="paramtype">pressure&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00084">Global_Parameters::constant_pressure()</a>, and <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00130">Global_Parameters::pressure_load()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="abd87e55ba6c1b5830f5afcab8d49bdea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd87e55ba6c1b5830f5afcab8d49bdea">&#9670;&nbsp;</a></span>__pad0__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">red __pad0__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00263">263</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="abbdf32d955aa833222982f6377faab77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbdf32d955aa833222982f6377faab77">&#9670;&nbsp;</a></span>__pad1__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">red __pad1__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00267">267</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa7cd8f5e59695fcbfb2bbf6a62b357cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7cd8f5e59695fcbfb2bbf6a62b357cf">&#9670;&nbsp;</a></span>__pad2__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">red __pad2__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00272">272</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a13e4ae2566e27f3d71febdb609f7408f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13e4ae2566e27f3d71febdb609f7408f">&#9670;&nbsp;</a></span>Acknowledgement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe time harmonic oscillations of elastic bodies&lt;CENTER&gt;&lt;TABLE BORDER=1, WIDTH=500px&gt;&lt;TR&gt;&lt;TD bgcolor=&quot;cornsilk&quot;&gt;&lt;CENTER&gt;&lt;B&gt; Acknowledgement</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00029">29</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a35970ea7bcb8c93ff806c6209c7b1fdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35970ea7bcb8c93ff806c6209c7b1fdf">&#9670;&nbsp;</a></span>approach</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> approach</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00149">149</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa020a3c7910d3f7bcbee363cbe7ec797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa020a3c7910d3f7bcbee363cbe7ec797">&#9670;&nbsp;</a></span>conditions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref comments for a more detailed discussion of how the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> for this <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> is constructed dontinclude time_harmonic_elastic_annulus cc skipline start_of_constructor until skipline Build solid <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> until H_annulus It is always a good idea to have a look at the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> and its boundary until <a class="el" href="elastic__annulus_8txt.html#a2409a036955630117af29def9aee77f9">Next</a> we create the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> that contains the FaceElements that apply the <a class="el" href="elastic__annulus_8txt.html#a1d14d265e44897eec22cff52a1fbd05b">traction</a> boundary conditions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00394">394</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac1cb67df02697a5cc6dcd1ac8e108163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1cb67df02697a5cc6dcd1ac8e108163">&#9670;&nbsp;</a></span>directions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">red here is a plot of the real part of the horizontal <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> for the case when there is a <a class="el" href="elastic__annulus_8txt.html#a91a70d8a65261b59c41973d1b7ba1873">gap</a> in the annular region The presence of the <a class="el" href="elastic__annulus_8txt.html#a91a70d8a65261b59c41973d1b7ba1873">gap</a> clearly breaks the axisymmetry of the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> and creates waves that propagate in all directions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00279">279</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a6ff90142326d825ac0b7acff8c286cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff90142326d825ac0b7acff8c286cb7">&#9670;&nbsp;</a></span>displacement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">red here is a plot of the real part of the radial displacement</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00268">268</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a74f834276810b9c44cb2b4a8d16801fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f834276810b9c44cb2b4a8d16801fa">&#9670;&nbsp;</a></span>enumeration</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref comments for a more detailed discussion of how the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> for this <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> is constructed dontinclude time_harmonic_elastic_annulus cc skipline start_of_constructor until skipline Build solid <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> until H_annulus It is always a good idea to have a look at the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> and its boundary enumeration</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00390">390</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a7093eb867eb78b5666f282f10db249d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7093eb867eb78b5666f282f10db249d4">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">alternatively equivalently f <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> f may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt; CENTER &gt; f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{\rm Re}\{\pmb{\tau^*}(<a class="code" href="elastic__annulus_8txt.html#aab4f2cc0ea9d1b6a02df4b168a1e1412">x_</a>{i}^*){\rm e}^{-{\rm i}\omega</div>
+<div class="line">t^*}\} <a class="code" href="elastic__annulus_8txt.html#a7093eb867eb78b5666f282f10db249d4">\f</a>$</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00030">30</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="aa51b7bec1371104523c0be5205a0baa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa51b7bec1371104523c0be5205a0baa5">&#9670;&nbsp;</a></span>forced</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe forced</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00005">5</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a9799dec73806d79ab3e4d501ee671ea0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9799dec73806d79ab3e4d501ee671ea0">&#9670;&nbsp;</a></span>functions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in&lt;/A&gt; this equation class is then combined with a geometric finite element to form a fully functional finite element For instance the combination of the c TimeHarmonicLinearElasticityEquations&lt;2&gt; class with the geometric finite element c QElement&lt;2,3&gt; yields a nine node quadrilateral element As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> the mapping between local and&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [x_i = \sum_{j=1}^{<a class="el" href="elastic__annulus_8txt.html#a208d4e22f08a327ea887ee87cfe3aac0">N</a>^{(E)}} <a class="el" href="elastic__annulus_8txt.html#a08abb3caeb8847093619d1f1c4fc8884">X</a>^{(E)}_{ij} \, \psi_j, \qquadi=1,2,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt; where <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and the <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> psi_j <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> are the element s shape functions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00168">168</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a0cf60f16e1657ee25730a3ba215c31a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cf60f16e1657ee25730a3ba215c31a4">&#9670;&nbsp;</a></span>Green</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> I w textwidth re_ur Real part of the radial <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> Green</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00270">270</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="ad6e150794638f7727a4134822c4663be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6e150794638f7727a4134822c4663be">&#9670;&nbsp;</a></span>lib</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section element_types Implementation Within c oomph lib</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00144">144</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a20e8d60aefcc60d0ab9d55efb3837c11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20e8d60aefcc60d0ab9d55efb3837c11">&#9670;&nbsp;</a></span>mesh</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">see ref comments for a more detailed discussion of how the mesh for this <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> is constructed dontinclude time_harmonic_elastic_annulus cc skipline start_of_constructor until skipline Build solid mesh until H_annulus It is always a good idea to have a look at the mesh and its boundary until <a class="el" href="elastic__annulus_8txt.html#a2409a036955630117af29def9aee77f9">Next</a> we create the mesh that contains the FaceElements that apply the <a class="el" href="elastic__annulus_8txt.html#a1d14d265e44897eec22cff52a1fbd05b">traction</a> boundary and combine all meshes into a <a class="el" href="elastic__annulus_8txt.html#a650553f0617de7078d03126b2442a9a5">global</a> mesh</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00370">370</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a208d4e22f08a327ea887ee87cfe3aac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a208d4e22f08a327ea887ee87cfe3aac0">&#9670;&nbsp;</a></span>N</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in&lt;/A&gt; this equation class is then combined with a geometric finite element to form a fully functional finite element For instance the combination of the c TimeHarmonicLinearElasticityEquations&lt;2&gt; class with the geometric finite element c QElement&lt;2,3&gt; yields a nine node quadrilateral element As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> the mapping between local and&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [x_i = \sum_{j=1}^{N^{(E)}} <a class="el" href="elastic__annulus_8txt.html#a08abb3caeb8847093619d1f1c4fc8884">X</a>^{(E)}_{ij} \, \psi_j, \qquadi=1,2,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt; where <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> N {(E)} \f$ is the number of nodes in the element</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00164">164</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2409a036955630117af29def9aee77f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2409a036955630117af29def9aee77f9">&#9670;&nbsp;</a></span>Next</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the and the exact parse the command line arguments and document them skipline P increment until doc_specified Next</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00325">325</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2a435bde04d6dc5025f08c4c97bbf582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a435bde04d6dc5025f08c4c97bbf582">&#9670;&nbsp;</a></span>periodic</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt;HR&gt;&lt;HR&gt; section constructor The <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> constructor We begin by building the bulk solid specifying the presence of the the <a class="el" href="elastic__annulus_8txt.html#a20e8d60aefcc60d0ab9d55efb3837c11">mesh</a> is periodic</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00372">372</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00356">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::AnnularDiskProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a3cfeaef418c70fdb0b565c40b0a7d982"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cfeaef418c70fdb0b565c40b0a7d982">&#9670;&nbsp;</a></span>stresses</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe time harmonic oscillations of elastic bodies&lt;CENTER&gt;&lt;TABLE BORDER=1, WIDTH=500px&gt;&lt;TR&gt;&lt;TD bgcolor=&quot;cornsilk&quot;&gt;&lt;CENTER&gt;&lt;B&gt; Young s modulus <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> E <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and Poisson s ratio <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> nu occupying the region <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> whose boundary is <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> partial D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> Assuming that the body performs time harmonic oscillations of frequency of <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> omega <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> its motion is governed by the <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\pmb{\nabla}^*\cdot\pmb{\tau}^*+\rho \mathbf{F}^*=-\rho\omega^2 \mathbf{u}^*,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt; where the <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and the time <a class="el" href="elastic__annulus_8txt.html#a2a435bde04d6dc5025f08c4c97bbf582">periodic</a> stresses</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00043">43</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="ac22a369d66433f23fe86ecb2a0a7d8d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac22a369d66433f23fe86ecb2a0a7d8d9">&#9670;&nbsp;</a></span>study</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">namespace Global parameters and <a class="el" href="elastic__annulus_8txt.html#a9799dec73806d79ab3e4d501ee671ea0">functions</a> As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> we define all non dimensional parameters in a namespace where we also define the <a class="el" href="elastic__annulus_8txt.html#a6ff90142326d825ac0b7acff8c286cb7">displacement</a> to be applied on the inner boundary the and the exact parse the command line arguments and document them skipline P increment until doc_specified we create the skipline Set up the <a class="el" href="elastic__annulus_8txt.html#aa4ad07cc2c1f3b98d082504a54bfaba5">problem</a> until AnnularDisk and perform the parameter study</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00336">336</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2341905d8d08d46b6df9f82ddcf0c328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2341905d8d08d46b6df9f82ddcf0c328">&#9670;&nbsp;</a></span>usual</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe time harmonic oscillations of elastic bodies&lt;CENTER&gt;&lt;TABLE BORDER=1, WIDTH=500px&gt;&lt;TR&gt;&lt;TD bgcolor=&quot;cornsilk&quot;&gt;&lt;CENTER&gt;&lt;B&gt; Young s modulus <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> E <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and Poisson s ratio <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> nu occupying the region <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> whose boundary is <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> partial D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> Assuming that the body performs time harmonic oscillations of frequency of <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> omega <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> its motion is governed by the <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\pmb{\nabla}^*\cdot\pmb{\tau}^*+\rho \mathbf{F}^*=-\rho\omega^2 \mathbf{u}^*,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt; where the <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and the time <a class="el" href="elastic__annulus_8txt.html#a2a435bde04d6dc5025f08c4c97bbf582">periodic</a> body force and displacements are given by as usual</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00048">48</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="a08abb3caeb8847093619d1f1c4fc8884"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08abb3caeb8847093619d1f1c4fc8884">&#9670;&nbsp;</a></span>X</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">alternatively equivalently <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a9eca3b1248bd34ef80c98c872888a5e9">Omega</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> may be interpreted as a non dimensional density The boundary <a class="el" href="elastic__annulus_8txt.html#aa020a3c7910d3f7bcbee363cbe7ec797">conditions</a> are&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt;&lt;HR&gt;&lt;HR&gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> discussed in&lt;/A&gt; this equation class is then combined with a geometric finite element to form a fully functional finite element For instance the combination of the c TimeHarmonicLinearElasticityEquations&lt;2&gt; class with the geometric finite element c QElement&lt;2,3&gt; yields a nine node quadrilateral element As <a class="el" href="elastic__annulus_8txt.html#a2341905d8d08d46b6df9f82ddcf0c328">usual</a> the mapping between local and&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [x_i = \sum_{j=1}^{<a class="el" href="elastic__annulus_8txt.html#a208d4e22f08a327ea887ee87cfe3aac0">N</a>^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquadi=1,2,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt; where <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> X</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{(<a class="code" href="namespaceGlobal__Parameters.html#aeeb26e11ef275bdfce14710e00290bb6">E</a>)}_{ij}</div>
+<div class="line"><a class="code" href="elastic__annulus_8txt.html#a7093eb867eb78b5666f282f10db249d4">\f</a>$ is <a class="code" href="elastic__annulus_8txt.html#a7093eb867eb78b5666f282f10db249d4">the \f</a>$ <a class="code" href="elastic__annulus_8txt.html#a7093eb867eb78b5666f282f10db249d4">i \f</a>$-th <a class="code" href="elastic__annulus_8txt.html#a650553f0617de7078d03126b2442a9a5">global</a> (Eulerian) coordinate of </div>
+<div class="line"><a class="code" href="elastic__annulus_8txt.html#a7093eb867eb78b5666f282f10db249d4">the \f</a>$ <a class="code" href="elastic__annulus_8txt.html#a7093eb867eb78b5666f282f10db249d4">j \f</a>$-th \c Node </div>
+<div class="line">in the element</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00164">164</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+<a id="aab4f2cc0ea9d1b6a02df4b168a1e1412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab4f2cc0ea9d1b6a02df4b168a1e1412">&#9670;&nbsp;</a></span>x_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mainpage The <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity The aim of this tutorial is to demonstrate the <a class="el" href="elastic__annulus_8txt.html#a58ea98d956dd7913220dbcd20abfdca7">solution</a> of the time harmonic <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of linear elasticity in cartesian coordinates These <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> are useful to describe time harmonic oscillations of elastic bodies&lt;CENTER&gt;&lt;TABLE BORDER=1, WIDTH=500px&gt;&lt;TR&gt;&lt;TD bgcolor=&quot;cornsilk&quot;&gt;&lt;CENTER&gt;&lt;B&gt; Young s modulus <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> E <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> and Poisson s ratio <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> nu occupying the region <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> whose boundary is <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> partial D <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> Assuming that the body performs time harmonic oscillations of frequency of <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> omega <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> its motion is governed by the <a class="el" href="elastic__annulus_8txt.html#a6d33a37c23fb963215624261e58a7a23">equations</a> of time harmonic linear elasticity&lt;CENTER&gt; <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> [\pmb{\nabla}^*\cdot\pmb{\tau}^*+\rho \mathbf{F}^*=-\rho\omega^2 \mathbf{u}^*,\<a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a>]&lt;/CENTER&gt; where the <a class="el" href="elastic__annulus_8txt.html#a6ea5c33e71431077fa41f9d0f8695265">f</a> x_ {i}^* \f$ are the cartesian coordinates</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__annulus_8txt_source.html#l00042">42</a> of file <a class="el" href="elastic__annulus_8txt_source.html">elastic_annulus.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="aelastic__annulus_8txt_html_aab4f2cc0ea9d1b6a02df4b168a1e1412"><div class="ttname"><a href="elastic__annulus_8txt.html#aab4f2cc0ea9d1b6a02df4b168a1e1412">x_</a></div><div class="ttdeci">mainpage The equations of time harmonic linear elasticity The aim of this tutorial is to demonstrate the solution of the time harmonic equations of linear elasticity in cartesian coordinates These equations are useful to describe time harmonic oscillations of elastic bodies&lt; CENTER &gt;&lt; TABLE BORDER=1, WIDTH=500px &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt; Young s modulus f E f and Poisson s ratio f nu occupying the region f D f whose boundary is f partial D f Assuming that the body performs time harmonic oscillations of frequency of f omega f its motion is governed by the equations of time harmonic linear elasticity&lt; CENTER &gt; f[\pmb{\nabla}^ *\cdot\pmb{\tau}^ *+\rho \mathbf{F}^ *=-\rho\omega^2 \mathbf{u}^ *,\f]&lt;/CENTER &gt; where the f x_</div><div class="ttdef"><b>Definition:</b> <a href="elastic__annulus_8txt_source.html#l00042">elastic_annulus.txt:42</a></div></div>
+<div class="ttc" id="aelastic__annulus_8txt_html_a7093eb867eb78b5666f282f10db249d4"><div class="ttname"><a href="elastic__annulus_8txt.html#a7093eb867eb78b5666f282f10db249d4">f</a></div><div class="ttdeci">mainpage The equations of time harmonic linear elasticity The aim of this tutorial is to demonstrate the solution of the time harmonic equations of linear elasticity in cartesian coordinates These equations are useful to describe time harmonic oscillations of elastic bodies&lt; CENTER &gt;&lt; TABLE BORDER=1, WIDTH=500px &gt;&lt; TR &gt;&lt; TD bgcolor=&quot;cornsilk&quot;&gt;&lt; CENTER &gt;&lt; B &gt; Young s modulus f E f and Poisson s ratio f nu f</div><div class="ttdef"><b>Definition:</b> <a href="elastic__annulus_8txt_source.html#l00030">elastic_annulus.txt:30</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aeeb26e11ef275bdfce14710e00290bb6"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aeeb26e11ef275bdfce14710e00290bb6">Global_Parameters::E</a></div><div class="ttdeci">TimeHarmonicIsotropicElasticityTensor E(Nu)</div><div class="ttdoc">The elasticity tensor.</div></div>
+<div class="ttc" id="aelastic__annulus_8txt_html_a650553f0617de7078d03126b2442a9a5"><div class="ttname"><a href="elastic__annulus_8txt.html#a650553f0617de7078d03126b2442a9a5">global</a></div><div class="ttdeci">alternatively equivalently f Omega f may be interpreted as a non dimensional density The boundary conditions are&lt; CENTER &gt; f[\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad\pmb{\tau} \cdot {\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.\f]&lt;/CENTER &gt;&lt; HR &gt;&lt; HR &gt; section element_types Implementation Within c oomph the non dimensional version of where the template parameter c DIM indicates the spatial dimension Following our usual discussed in&lt;/A &gt; this equation class is then combined with a geometric finite element to form a fully functional finite element For instance the combination of the c TimeHarmonicLinearElasticityEquations&lt; 2 &gt; class with the geometric finite element c QElement&lt; 2, 3 &gt; yields a nine node quadrilateral element As usual the mapping between local and global(Eulerian) coordinates within an element is given by</div></div>
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Jul 8 2021 23:29:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>
